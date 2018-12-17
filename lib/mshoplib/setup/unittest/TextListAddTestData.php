@@ -133,7 +133,6 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$parentIds['text/' . $item->getLabel()] = $item->getId();
 		}
 
-		$tListTypeIds = [];
 		$tListType = $textListTypeManager->createItem();
 
 		$textManager->begin();
@@ -147,7 +146,6 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$tListType->setStatus( $dataset['status'] );
 
 			$textListTypeManager->saveItem( $tListType );
-			$tListTypeIds[$key] = $tListType->getId();
 		}
 
 		$tList = $textListManager->createItem();
@@ -157,18 +155,14 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No text ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
-			if( !isset( $tListTypeIds[$dataset['typeid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No text list type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			if( !isset( $refIds[$dataset['domain']][$dataset['refid']] ) ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
 			$tList->setId( null );
 			$tList->setParentId( $parentIds[$dataset['parentid']] );
-			$tList->setTypeId( $tListTypeIds[$dataset['typeid']] );
 			$tList->setRefId( $refIds[$dataset['domain']] [$dataset['refid']] );
+			$tList->setType( $dataset['type'] );
 			$tList->setDomain( $dataset['domain'] );
 			$tList->setDateStart( $dataset['start'] );
 			$tList->setDateEnd( $dataset['end'] );

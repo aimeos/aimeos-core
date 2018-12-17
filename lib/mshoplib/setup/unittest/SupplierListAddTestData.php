@@ -201,7 +201,6 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$parentIds[ 'supplier/'.$item->getCode() ] = $item->getId();
 		}
 
-		$listItemTypeIds = [];
 		$listItemType = $supplierListTypeManager->createItem();
 
 		$supplierManager->begin();
@@ -215,7 +214,6 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$listItemType->setStatus( $dataset['status'] );
 
 			$supplierListTypeManager->saveItem( $listItemType );
-			$listItemTypeIds[ $key ] = $listItemType->getId();
 		}
 
 		$listItem = $supplierListManager->createItem();
@@ -229,14 +227,10 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No "%2$s" ref ID found for "%1$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
-			if( !isset( $listItemTypeIds[ $dataset['typeid'] ] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No supplier list type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			$listItem->setId( null );
 			$listItem->setParentId( $parentIds[ $dataset['parentid'] ] );
-			$listItem->setTypeId( $listItemTypeIds[ $dataset['typeid'] ] );
 			$listItem->setRefId( $refIds[ $dataset['domain'] ] [ $dataset['refid'] ] );
+			$listItem->setType( $dataset['type'] );
 			$listItem->setDomain( $dataset['domain'] );
 			$listItem->setDateStart( $dataset['start'] );
 			$listItem->setDateEnd( $dataset['end'] );

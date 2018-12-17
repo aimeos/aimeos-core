@@ -11,6 +11,6 @@ return array (
 	),
 
 	'customer/property' => array(
-		'customer/property/UTC001/newsletter' => array( 'parentid' => 'customer/UTC001', 'typeid' => 'customer/property/type/newsletter', 'langid' => null, 'value' => '1' ),
+		'customer/property/UTC001/newsletter' => array( 'parentid' => 'customer/UTC001', 'type' => 'newsletter', 'langid' => null, 'value' => '1' ),
 	),
 );

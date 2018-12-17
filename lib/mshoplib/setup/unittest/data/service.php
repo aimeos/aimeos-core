@@ -24,7 +24,7 @@ return array(
 	'service' => array(
 		'service/delivery/unitcode' => array(
 			'pos' => 0,
-			'typeid' => 'service/delivery',
+			'type' => 'delivery',
 			'code' => 'unitcode',
 			'label' => 'unitlabel',
 			'provider' => 'Standard',
@@ -33,7 +33,7 @@ return array(
 		),
 		'service/payment/unitcode' => array(
 			'pos' => 0,
-			'typeid' => 'service/payment',
+			'type' => 'payment',
 			'code' => 'unitpaymentcode',
 			'label' => 'unitpaymentlabel',
 			'provider' => 'PrePay',
@@ -44,7 +44,7 @@ return array(
 		),
 		'service/payment/directdebit' => array(
 			'pos' => 1,
-			'typeid' => 'service/payment',
+			'type' => 'payment',
 			'code' => 'directdebit-test',
 			'label' => 'direct debit label',
 			'provider' => 'DirectDebit',
@@ -53,7 +53,7 @@ return array(
 		),
 		'service/payment/paypalexpress' => array(
 			'pos' => 2,
-			'typeid' => 'service/payment',
+			'type' => 'payment',
 			'code' => 'paypalexpress',
 			'label' => 'PayPalExpress',
 			'provider' => 'PayPalExpress',

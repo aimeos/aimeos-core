@@ -70,7 +70,6 @@ class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for plugin domain', $path ) );
 		}
 
-		$plugTypeIds = [];
 		$type = $pluginTypeManager->createItem();
 
 		$pluginManager->begin();
@@ -84,18 +83,13 @@ class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$type->setStatus( $dataset['status'] );
 
 			$pluginTypeManager->saveItem( $type );
-			$plugTypeIds[$key] = $type->getId();
 		}
 
 		$plugin = $pluginManager->createItem();
 		foreach( $testdata['plugin'] as $dataset )
 		{
-			if( !isset( $plugTypeIds[$dataset['typeid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No plugin type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			$plugin->setId( null );
-			$plugin->setTypeId( $plugTypeIds[$dataset['typeid']] );
+			$plugin->setType( $dataset['type'] );
 			$plugin->setLabel( $dataset['label'] );
 			$plugin->setStatus( $dataset['status'] );
 			$plugin->setConfig( $dataset['config'] );

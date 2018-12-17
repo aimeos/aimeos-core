@@ -131,9 +131,8 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$priceManager->begin();
 
-		$typeids = $this->getPriceTypeIds( $domain, $code );
-		$parentIds = $this->getPriceIds( $value, $ship, $typeids );
-		$listItemTypeIds = $this->getPriceListTypeIds( $testdata['price/lists/type'] );
+		$this->addPriceListTypeItems( $testdata['price/lists/type'] );
+		$parentIds = $this->getPriceIds( $value, $ship, $code );
 
 		$listItem = $priceListManager->createItem();
 		foreach( $testdata['price/lists'] as $dataset )
@@ -142,18 +141,14 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No price ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
-			if( !isset( $listItemTypeIds[$dataset['typeid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No attribute list type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			if( !isset( $refIds[$dataset['domain']][$dataset['refid']] ) ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
 			$listItem->setId( null );
 			$listItem->setParentId( $parentIds[$dataset['parentid']] );
-			$listItem->setTypeId( $listItemTypeIds[$dataset['typeid']] );
 			$listItem->setRefId( $refIds[$dataset['domain']] [$dataset['refid']] );
+			$listItem->setType( $dataset['type'] );
 			$listItem->setDomain( $dataset['domain'] );
 			$listItem->setDateStart( $dataset['start'] );
 			$listItem->setDateEnd( $dataset['end'] );
@@ -173,10 +168,10 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @param array $value Price values
 	 * @param array $ship Price shipping costs
-	 * @param array $typeIds List of price type IDs
+	 * @param array $codes List of price type codes
 	 * @param array Associative list of identifiers as keys and price IDs as values
 	 */
-	protected function getPriceIds( array $value, array $ship, array $typeIds )
+	protected function getPriceIds( array $value, array $ship, array $codes )
 	{
 		$manager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 
@@ -184,7 +179,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$expr = array(
 			$search->compare( '==', 'price.value', $value ),
 			$search->compare( '==', 'price.costs', $ship ),
-			$search->compare( '==', 'price.typeid', $typeIds )
+			$search->compare( '==', 'price.type', $codes )
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -198,18 +193,16 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
-	 * Returns the price list type IDs for the given data sets
+	 * Adds the price list items
 	 *
 	 * @param array $data Associative list of identifiers as keys and data sets as values
-	 * @return array Associative list of identifiers as keys and list type IDs as values
 	 */
-	protected function getPriceListTypeIds( array $data )
+	protected function addPriceListTypeItems( array $data )
 	{
 		$manager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$listManager = $manager->getSubManager( 'lists', 'Standard' );
 		$listTypeManager = $listManager->getSubManager( 'type', 'Standard' );
 
-		$listItemTypeIds = [];
 		$listItemType = $listTypeManager->createItem();
 
 		foreach( $data as $key => $dataset )
@@ -221,37 +214,6 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$listItemType->setStatus( $dataset['status'] );
 
 			$listTypeManager->saveItem( $listItemType );
-			$listItemTypeIds[$key] = $listItemType->getId();
 		}
-
-		return $listItemTypeIds;
-	}
-
-
-	/**
-	 * Returns the price type IDs for the given domains and codes
-	 *
-	 * @param array $domain Domain the price type is for
-	 * @param array $code Code the price type is for
-	 * @return array List of price type IDs
-	 */
-	protected function getPriceTypeIds( array $domain, array $code )
-	{
-		$manager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
-		$typeManager = $manager->getSubManager( 'type', 'Standard' );
-
-		$search = $typeManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'price.type.domain', $domain ),
-			$search->compare( '==', 'price.type.code', $code ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$typeids = [];
-		foreach( $typeManager->searchItems( $search ) as $item ) {
-			$typeids[] = $item->getId();
-		}
-
-		return $typeids;
 	}
 }

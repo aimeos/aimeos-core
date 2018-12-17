@@ -13,8 +13,8 @@ return array (
 	),
 
 	'attribute/property' => array(
-		'attribute/product/download/testurl/size' => array( 'parentid' => 'attribute/product/download/testurl', 'typeid' => 'attribute/property/type/size', 'langid' => null, 'value' => '1024' ),
-		'attribute/product/download/testurl/mtime' => array( 'parentid' => 'attribute/product/download/testurl', 'typeid' => 'attribute/property/type/mtime', 'langid' => null, 'value' => '2000-01-01 00:00:00' ),
-		'attribute/product/color/black/htmlcolor' => array( 'parentid' => 'attribute/product/color/black', 'typeid' => 'attribute/property/type/htmlcolor', 'langid' => 'de', 'value' => '#000000' ),
+		'attribute/product/download/testurl/size' => array( 'parentid' => 'attribute/product/download/testurl', 'type' => 'size', 'langid' => null, 'value' => '1024' ),
+		'attribute/product/download/testurl/mtime' => array( 'parentid' => 'attribute/product/download/testurl', 'type' => 'mtime', 'langid' => null, 'value' => '2000-01-01 00:00:00' ),
+		'attribute/product/color/black/htmlcolor' => array( 'parentid' => 'attribute/product/color/black', 'type' => 'htmlcolor', 'langid' => 'de', 'value' => '#000000' ),
 	),
 );

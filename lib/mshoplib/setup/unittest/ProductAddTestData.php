@@ -74,25 +74,20 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$manager->begin();
 
 		$domains = ['attribute', 'media', 'price', 'product', 'tag', 'text'];
-		$typeIds = $this->getTypeIds( $testdata, ['product/type', 'product/lists/type', 'product/property/type'] );
 
+		$this->addTypeItems( $testdata, ['product/type', 'product/lists/type', 'product/property/type'] );
 		$refItems = $this->getRefItems( ['attribute', 'media', 'price', 'tag', 'text'] );
 		$items = [];
 
 		foreach( $testdata['product'] as $key => $entry )
 		{
-			if( !isset( $typeIds['product/type'][$entry['product.type']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No product type ID found for "%1$s"', $entry['product.type'] ) );
-			}
-
-			list( $domain, $code ) = explode( '/', $entry['product.type'] );
-			$item = $manager->createItem( $code, $domain );
+			$item = $manager->createItem( $entry['product.type'], 'product' );
 			$item->fromArray( $entry );
 
 			$refItems['product/' . $item->getCode()] = $item;
 
-			$item = $this->addPropertyData( $item, $entry, $typeIds );
-			$items[] = $this->addListData( $item, $entry, $typeIds, $refItems, $domains );
+			$item = $this->addPropertyData( $item, $entry );
+			$items[] = $this->addListData( $item, $entry, $refItems, $domains );
 		}
 
 		$manager->saveItems( $items );
@@ -102,17 +97,39 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
+	 * Creates the type test data
+	 *
+	 * @param array $testdata Associative list of key/list pairs
+	 * @param array $domains List of domain names
+	 */
+	protected function addTypeItems( array $testdata, array $domains )
+	{
+		foreach( $domains as $domain )
+		{
+			$manager = \Aimeos\MShop\Factory::createManager( $this->additional, $domain );
+
+			foreach( $testdata[$domain] as $key => $entry )
+			{
+				$item = $manager->createItem();
+				$item->fromArray( $entry );
+
+				$manager->saveItem( $item );
+			}
+		}
+	}
+
+
+	/**
 	 * Adds the list test data
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
 	 * @param array $entry Associative list of key/list pairs
-	 * @param array $typeIds Associative list of type/key/ID triple
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @param array $domains List of domain names
 	 * @return \Aimeos\MShop\Product\Item\Iface Modified product item
 	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
-	protected function addListData( \Aimeos\MShop\Product\Item\Iface $item, array $entry, array $typeIds, array $refItems, array $domains )
+	protected function addListData( \Aimeos\MShop\Product\Item\Iface $item, array $entry, array $refItems, array $domains )
 	{
 		foreach( $domains as $domain )
 		{
@@ -122,14 +139,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 				foreach( (array) $entry[$domain] as $data )
 				{
-					if( !isset( $typeIds['product/lists/type'][$data['product.lists.type']] ) )
-					{
-						$msg = sprintf( 'No product list type ID found for "%1$s"', $data['product.lists.type'] );
-						throw new \Aimeos\MW\Setup\Exception( $msg );
-					}
-
-					list( $domain, $code ) = explode( '/', $data['product.lists.type'] );
-					$listItem = $manager->createItem( $code, $domain );
+					$listItem = $manager->createItem( $data['product.lists.type'], $domain );
 					$listItem->fromArray( $data );
 
 					$refItem = ( isset( $refItems[$data['product.lists.refid']] ) ? $refItems[$data['product.lists.refid']] : null );
@@ -147,11 +157,10 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
 	 * @param array $entry Associative list of key/list pairs
-	 * @param array $typeIds Associative list of type/key/ID triples
 	 * @return \Aimeos\MShop\Product\Item\Iface Modified product item
 	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
-	protected function addPropertyData( \Aimeos\MShop\Product\Item\Iface $item, array $entry, array $typeIds )
+	protected function addPropertyData( \Aimeos\MShop\Product\Item\Iface $item, array $entry )
 	{
 		if( isset( $entry['product/property'] ) )
 		{
@@ -159,14 +168,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 			foreach( (array) $entry['product/property'] as $data )
 			{
-				if( !isset( $typeIds['product/property/type'][$data['product.property.type']] ) )
-				{
-					$msg = sprintf( 'No product property type ID found for "%1$s"', $data['product.property.type'] );
-					throw new \Aimeos\MW\Setup\Exception( $msg );
-				}
-
-				list( $domain, $code ) = explode( '/', $data['product.property.type'] );
-				$propItem = $manager->createItem( $code, $domain );
+				$propItem = $manager->createItem( $data['product.property.type'], 'product' );
 				$propItem->fromArray( $data );
 
 				$item->addPropertyItem( $propItem );
@@ -215,33 +217,5 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		return $list;
-	}
-
-
-	/**
-	 * Creates the type test data and returns their IDs
-	 *
-	 * @param array $testdata Associative list of key/list pairs
-	 * @param array $domains List of domain names
-	 * @return array Associative list of type/key/ID triples
-	 */
-	protected function getTypeIds( array $testdata, array $domains )
-	{
-		$typeIds = [];
-
-		foreach( $domains as $domain )
-		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->additional, $domain );
-
-			foreach( $testdata[$domain] as $key => $entry )
-			{
-				$item = $manager->createItem();
-				$item->fromArray( $entry );
-
-				$typeIds[$domain][$key] = $manager->saveItem( $item )->getId();
-			}
-		}
-
-		return $typeIds;
 	}
 }

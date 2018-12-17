@@ -103,15 +103,15 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$result = $attributeTypeManager->searchItems( $search );
 
-		$typeids = [];
+		$types = [];
 		foreach( $result as $item ) {
-			$typeids[] = $item->getId();
+			$types[] = $item->getCode();
 		}
 
 		$search = $attributeManager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'attribute.code', $codes ),
-			$search->compare( '==', 'attribute.typeid', $typeids ),
+			$search->compare( '==', 'attribute.type', $types ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -189,7 +189,6 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$parentIds['media/' . $item->getUrl()] = $item->getId();
 		}
 
-		$medListTypes = [];
 		$medListType = $mediaListTypeManager->createItem();
 
 		foreach( $testdata['media/lists/type'] as $key => $dataset )
@@ -201,7 +200,6 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$medListType->setStatus( $dataset['status'] );
 
 			$mediaListTypeManager->saveItem( $medListType );
-			$medListTypes[$key] = $medListType->getId();
 		}
 
 		$mediaManager->begin();
@@ -213,18 +211,14 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No media ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
-			if( !isset( $medListTypes[$dataset['typeid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No media list type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			if( !isset( $refIds[$dataset['domain']][$dataset['refid']] ) ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
 			$medList->setId( null );
 			$medList->setParentId( $parentIds[$dataset['parentid']] );
-			$medList->setTypeId( $medListTypes[$dataset['typeid']] );
 			$medList->setRefId( $refIds[$dataset['domain']] [$dataset['refid']] );
+			$medList->setType( $dataset['type'] );
 			$medList->setDomain( $dataset['domain'] );
 			$medList->setDateStart( $dataset['start'] );
 			$medList->setDateEnd( $dataset['end'] );

@@ -71,7 +71,6 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$mediaTypeManager = $mediaManager->getSubManager( 'type', 'Standard' );
 
-		$mtypeIds = [];
 		$mtype = $mediaTypeManager->createItem();
 
 		$mediaManager->begin();
@@ -85,19 +84,14 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$mtype->setStatus( $dataset['status'] );
 
 			$mediaTypeManager->saveItem( $mtype );
-			$mtypeIds[$key] = $mtype->getId();
 		}
 
 		$media = $mediaManager->createItem();
 		foreach( $testdata['media'] as $key => $dataset )
 		{
-			if( !isset( $mtypeIds[$dataset['typeid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No media type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			$media->setId( null );
 			$media->setLanguageId( $dataset['langid'] );
-			$media->setTypeId( $mtypeIds[$dataset['typeid']] );
+			$media->setType( $dataset['type'] );
 			$media->setDomain( $dataset['domain'] );
 			$media->setLabel( $dataset['label'] );
 			$media->setUrl( $dataset['link'] );

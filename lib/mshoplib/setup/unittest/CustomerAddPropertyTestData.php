@@ -72,7 +72,6 @@ class CustomerAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$customerPropertyManager = $customerManager->getSubManager( 'property', $type );
 		$customerPropertyTypeManager = $customerPropertyManager->getSubManager( 'type', $type );
 
-		$typeIds = [];
 		$type = $customerPropertyTypeManager->createItem();
 		$custIds = $this->getCustomerIds( $customerManager );
 
@@ -87,21 +86,16 @@ class CustomerAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 			$type->setStatus( $dataset['status'] );
 
 			$customerPropertyTypeManager->saveItem( $type );
-			$typeIds[ $key ] = $type->getId();
 		}
 
 		$custProperty = $customerPropertyManager->createItem();
 		foreach( $testdata['customer/property'] as $key => $dataset )
 		{
-			if( !isset( $typeIds[ $dataset['typeid'] ] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No customer property type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			$custProperty->setId( null );
 			$custProperty->setParentId( $custIds[ $dataset['parentid'] ] );
-			$custProperty->setTypeId( $typeIds[ $dataset['typeid'] ] );
 			$custProperty->setLanguageId( $dataset['langid'] );
 			$custProperty->setValue( $dataset['value'] );
+			$custProperty->setType( $dataset['type'] );
 
 			$customerPropertyManager->saveItem( $custProperty, false );
 		}

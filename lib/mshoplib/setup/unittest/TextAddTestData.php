@@ -71,7 +71,6 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$textTypeManager = $textManager->getSubManager( 'type', 'Standard' );
 
-		$ttypeIds = [];
 		$ttype = $textTypeManager->createItem();
 
 		$textManager->begin();
@@ -85,19 +84,14 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ttype->setStatus( $dataset['status'] );
 
 			$textTypeManager->saveItem( $ttype );
-			$ttypeIds[$key] = $ttype->getId();
 		}
 
 		$text = $textManager->createItem();
 		foreach( $testdata['text'] as $key => $dataset )
 		{
-			if( !isset( $ttypeIds[$dataset['typeid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No text type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			$text->setId( null );
 			$text->setLanguageId( $dataset['langid'] );
-			$text->setTypeId( $ttypeIds[$dataset['typeid']] );
+			$text->setType( $dataset['type'] );
 			$text->setDomain( $dataset['domain'] );
 			$text->setLabel( $dataset['label'] );
 			$text->setContent( $dataset['content'] );

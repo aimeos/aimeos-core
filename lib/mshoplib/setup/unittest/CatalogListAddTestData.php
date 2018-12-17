@@ -197,7 +197,6 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$parentIds['catalog/' . $item->getCode()] = $item->getId();
 		}
 
-		$listItemTypeIds = [];
 		$listItemType = $catalogListTypeManager->createItem();
 
 		foreach( $testdata['catalog/lists/type'] as $key => $dataset )
@@ -209,7 +208,6 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$listItemType->setStatus( $dataset['status'] );
 
 			$catalogListTypeManager->saveItem( $listItemType );
-			$listItemTypeIds[$key] = $listItemType->getId();
 		}
 
 		$catalogManager->begin();
@@ -225,14 +223,10 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
-			if( !isset( $listItemTypeIds[$dataset['typeid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No catalog list type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			$listItem->setId( null );
 			$listItem->setParentId( $parentIds[$dataset['parentid']] );
-			$listItem->setTypeId( $listItemTypeIds[$dataset['typeid']] );
 			$listItem->setRefId( $refIds[$dataset['domain']][$dataset['refid']] );
+			$listItem->setType( $dataset['type'] );
 			$listItem->setDomain( $dataset['domain'] );
 			$listItem->setDateStart( $dataset['start'] );
 			$listItem->setDateEnd( $dataset['end'] );

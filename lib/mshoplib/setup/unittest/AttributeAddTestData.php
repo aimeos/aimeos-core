@@ -71,7 +71,6 @@ class AttributeAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
 
-		$atypeIds = [];
 		$atype = $attributeTypeManager->createItem();
 
 		$attributeManager->begin();
@@ -85,19 +84,14 @@ class AttributeAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$atype->setStatus( $dataset['status'] );
 
 			$attributeTypeManager->saveItem( $atype );
-			$atypeIds[$key] = $atype->getId();
 		}
 
 		$attribute = $attributeManager->createItem();
 		foreach( $testdata['attribute'] as $key => $dataset )
 		{
-			if( !isset( $atypeIds[$dataset['typeid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No attribute type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			$attribute->setId( null );
 			$attribute->setDomain( $dataset['domain'] );
-			$attribute->setTypeId( $atypeIds[$dataset['typeid']] );
+			$attribute->setType( $dataset['type'] );
 			$attribute->setCode( $dataset['code'] );
 			$attribute->setLabel( $dataset['label'] );
 			$attribute->setStatus( $dataset['status'] );

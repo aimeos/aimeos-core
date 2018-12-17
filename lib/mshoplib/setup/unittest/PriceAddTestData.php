@@ -71,7 +71,6 @@ class PriceAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
 
-		$ptypeIds = [];
 		$ptype = $priceTypeManager->createItem();
 
 		$priceManager->begin();
@@ -85,19 +84,14 @@ class PriceAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ptype->setStatus( $dataset['status'] );
 
 			$priceTypeManager->saveItem( $ptype );
-			$ptypeIds[$key] = $ptype->getId();
 		}
 
 		$price = $priceManager->createItem();
 		foreach( $testdata['price'] as $key => $dataset )
 		{
-			if( !isset( $ptypeIds[$dataset['typeid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No price type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			$price->setId( null );
 			$price->setCurrencyId( $dataset['currencyid'] );
-			$price->setTypeId( $ptypeIds[$dataset['typeid']] );
+			$price->setType( $dataset['type'] );
 			$price->setDomain( $dataset['domain'] );
 			$price->setLabel( $dataset['label'] );
 			$price->setQuantity( $dataset['quantity'] );

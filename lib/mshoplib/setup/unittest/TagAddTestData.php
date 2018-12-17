@@ -71,7 +71,6 @@ class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$tagManager = \Aimeos\MShop\Tag\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$tagTypeManager = $tagManager->getSubManager( 'type', 'Standard' );
 
-		$typeIds = [];
 		$typeItem = $tagTypeManager->createItem();
 
 		$tagManager->begin();
@@ -85,21 +84,16 @@ class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$typeItem->setStatus( $dataset['status'] );
 
 			$tagTypeManager->saveItem( $typeItem );
-			$typeIds[$key] = $typeItem->getId();
 		}
 
 		$tagItem = $tagManager->createItem();
 		foreach( $testdata['tag'] as $key => $dataset )
 		{
-			if( !isset( $typeIds[$dataset['typeid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No tag type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			$tagItem->setId( null );
 			$tagItem->setDomain( $dataset['domain'] );
 			$tagItem->setLanguageId( $dataset['langid'] );
-			$tagItem->setTypeId( $typeIds[$dataset['typeid']] );
 			$tagItem->setLabel( $dataset['label'] );
+			$tagItem->setType( $dataset['type'] );
 
 			$tagManager->saveItem( $tagItem, false );
 		}

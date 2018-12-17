@@ -71,7 +71,6 @@ class ServiceAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$serviceTypeManager = $serviceManager->getSubManager( 'type', 'Standard' );
 
-		$typeIds = [];
 		$type = $serviceTypeManager->createItem();
 
 		$serviceManager->begin();
@@ -85,19 +84,14 @@ class ServiceAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$type->setStatus( $dataset['status'] );
 
 			$serviceTypeManager->saveItem( $type );
-			$typeIds[$key] = $type->getId();
 		}
 
 		$parent = $serviceManager->createItem();
 
 		foreach( $testdata['service'] as $key => $dataset )
 		{
-			if( !isset( $typeIds[$dataset['typeid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No service type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			$parent->setId( null );
-			$parent->setTypeId( $typeIds[$dataset['typeid']] );
+			$parent->setType( $dataset['type'] );
 			$parent->setPosition( $dataset['pos'] );
 			$parent->setCode( $dataset['code'] );
 			$parent->setLabel( $dataset['label'] );

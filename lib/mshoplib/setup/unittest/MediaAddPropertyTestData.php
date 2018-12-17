@@ -71,7 +71,6 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$mediaPropertyManager = $mediaManager->getSubManager( 'property', 'Standard' );
 		$mediaPropertyTypeManager = $mediaPropertyManager->getSubManager( 'type', 'Standard' );
 
-		$typeIds = [];
 		$type = $mediaPropertyTypeManager->createItem();
 		$prodIds = $this->getMediaIds( $mediaManager );
 
@@ -86,21 +85,16 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 			$type->setStatus( $dataset['status'] );
 
 			$mediaPropertyTypeManager->saveItem( $type );
-			$typeIds[ $key ] = $type->getId();
 		}
 
 		$prodProperty = $mediaPropertyManager->createItem();
 		foreach( $testdata['media/property'] as $key => $dataset )
 		{
-			if( !isset( $typeIds[ $dataset['typeid'] ] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No media property type ID found for "%1$s"', $dataset['typeid'] ) );
-			}
-
 			$prodProperty->setId( null );
 			$prodProperty->setParentId( $prodIds[ $dataset['parentid'] ] );
-			$prodProperty->setTypeId( $typeIds[ $dataset['typeid'] ] );
 			$prodProperty->setLanguageId( $dataset['langid'] );
 			$prodProperty->setValue( $dataset['value'] );
+			$prodProperty->setType( $dataset['type'] );
 
 			$mediaPropertyManager->saveItem( $prodProperty, false );
 		}
