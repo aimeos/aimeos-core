@@ -14,9 +14,6 @@ namespace Aimeos\MW\Setup\Task;
  */
 class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 {
-	private $typeIds = [];
-
-
 	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $additional );
@@ -54,8 +51,6 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Adding attribute performance data', 0 );
 
-
-		$this->init();
 
 		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 		$manager->begin();
@@ -97,8 +92,8 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		foreach( $characteristics as $type => $list )
 		{
 			$attrItem = $attrManager->createItem()
-				->setTypeId( $this->getTypeId( 'attribute/type', 'product', $type ) )
 				->setDomain( 'product' )
+				->setType( $type )
 				->setStatus( 1 );
 
 			foreach( $list as $pos => $value )
@@ -231,8 +226,8 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		foreach( $sizes as $type => $list )
 		{
 			$attrItem = $attrManager->createItem()
-				->setTypeId( $this->getTypeId( 'attribute/type', 'product', $type ) )
 				->setDomain( 'product' )
+				->setType( $type )
 				->setStatus( 1 );
 
 			foreach( $list as $pos => $value )
@@ -243,39 +238,6 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 					->setCode( $value );
 
 				$attrManager->saveItem( $item );
-			}
-		}
-	}
-
-
-	protected function getTypeId( $path, $domain, $code )
-	{
-		if( !isset( $this->typeIds[$path][$domain][$code] ) )
-		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->additional, $path );
-
-			$item = $manager->createItem();
-			$item->setDomain( $domain );
-			$item->setLabel( $code );
-			$item->setCode( $code );
-			$item->setStatus( 1 );
-
-			$this->typeIds[$path][$domain][$code] = $manager->saveItem( $item )->getId();
-		}
-
-		return $this->typeIds[$path][$domain][$code];
-	}
-
-
-	protected function init()
-	{
-		foreach( ['attribute/type', 'attribute/lists/type', 'media/type', 'price/type'] as $path )
-		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->additional, $path );
-			$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
-
-			foreach( $manager->searchItems( $search ) as $id => $item ) {
-				$this->typeIds[$path][$item->getDomain()][$item->getCode()] = $id;
 			}
 		}
 	}

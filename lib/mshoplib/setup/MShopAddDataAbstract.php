@@ -92,7 +92,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			if( ( $attrItem = $this->getAttributeItem( $domain, $entry['type'], $entry['code'] ) ) === null )
 			{
 				$item->setId( null );
-				$item->setTypeId( $this->getTypeId( 'attribute/type', $domain, $entry['type'] ) );
+				$item->setType( $entry['type'] );
 				$item->setCode( $entry['code'] );
 				$item->setLabel( $entry['label'] );
 				$item->setPosition( $entry['position'] );
@@ -107,7 +107,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'attribute', $entry['list-type'] ) );
+			$listItem->setType( $entry['list-type'] );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -162,7 +162,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		foreach( $data as $entry )
 		{
 			$item->setId( null );
-			$item->setTypeId( $this->getTypeId( 'media/type', $domain, $entry['type'] ) );
+			$item->setType( $entry['type'] );
 			$item->setLanguageId( $entry['languageid'] );
 			$item->setMimetype( $entry['mimetype'] );
 			$item->setPreview( $entry['preview'] );
@@ -173,7 +173,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$mediaManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'media', $entry['list-type'] ) );
+			$listItem->setType( $entry['list-type'] );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -229,7 +229,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		{
 			$item->setId( null );
 			$item->setLabel( $entry['label'] );
-			$item->setTypeId( $this->getTypeId( 'price/type', $domain, $entry['type'] ) );
+			$item->setType( $entry['type'] );
 			$item->setCurrencyId( $entry['currencyid'] );
 			$item->setQuantity( $entry['quantity'] );
 			$item->setValue( $entry['value'] );
@@ -241,7 +241,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$mediaManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'price', $entry['list-type'] ) );
+			$listItem->setType( $entry['list-type'] );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -296,7 +296,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		foreach( $data as $entry )
 		{
 			$item->setId( null );
-			$item->setTypeId( $this->getTypeId( 'text/type', $domain, $entry['type'] ) );
+			$item->setType( $entry['type'] );
 			$item->setLanguageId( $entry['languageid'] );
 			$item->setContent( $entry['content'] );
 			$item->setLabel( $entry['label'] );
@@ -305,7 +305,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$textManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'text', $entry['list-type'] ) );
+			$listItem->setType( $entry['list-type'] );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -376,7 +376,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'product', $entry['list-type'] ) );
+			$listItem->setType( $entry['list-type'] );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -414,7 +414,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$item->setId( null );
 			$item->setDateBack( $entry['dateback'] );
 			$item->setStockLevel( $entry['stocklevel'] );
-			$item->setTypeId( $types[$entry['typeid']] );
+			$item->setType( $entry['type'] );
 
 			$manager->saveItem( $item, false );
 		}
@@ -454,36 +454,6 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	protected function getContext()
 	{
 		return $this->additional;
-	}
-
-
-	/**
-	 * Returns the type ID for the given type and domain found by the manager
-	 *
-	 * @param string $name Manager name like 'catalog/lists/type'
-	 * @param string $domain Domain of the type item we are looking for, e.g. 'text'
-	 * @param string $type Type code of the item we are looking for, e.g. 'default'
-	 * @return string Type ID
-	 */
-	protected function getTypeId( $name, $domain, $type )
-	{
-		$key = str_replace( '/', '.', $name );
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $name );
-
-		$search = $manager->createSearch();
-		$expr = array(
-			$search->compare( '==', $key . '.domain', $domain ),
-			$search->compare( '==', $key . '.code', $type ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$result = $manager->searchItems( $search );
-
-		if( ( $item = reset( $result ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No type item found for "%1$s/%2$s" using "%3$s"', $domain, $type, $name ) );
-		}
-
-		return $item->getId();
 	}
 
 

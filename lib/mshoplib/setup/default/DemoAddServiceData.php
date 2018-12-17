@@ -82,7 +82,7 @@ class DemoAddServiceData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			foreach( $data as $entry )
 			{
 				$item = $manager->createItem();
-				$item->setTypeId( $this->getTypeId( 'service/type', 'service', $entry['type'] ) );
+				$item->setType( $entry['type'] );
 				$item->setCode( $entry['code'] );
 				$item->setLabel( $entry['label'] );
 				$item->setProvider( $entry['provider'] );

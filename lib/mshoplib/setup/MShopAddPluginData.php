@@ -97,12 +97,8 @@ class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$total++;
 
-			if( !isset( $types[$dataset['typeid']] ) ) {
-				throw new \RuntimeException( sprintf( 'No plugin type "%1$s" found', $dataset['typeid'] ) );
-			}
-
 			$item->setId( null );
-			$item->setTypeId( $types[$dataset['typeid']]->getId() );
+			$item->setType( $dataset['type'] );
 			$item->setProvider( $dataset['provider'] );
 			$item->setLabel( $dataset['label'] );
 			$item->setConfig( $dataset['config'] );

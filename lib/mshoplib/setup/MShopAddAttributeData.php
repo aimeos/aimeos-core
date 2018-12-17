@@ -64,7 +64,7 @@ class MShopAddAttributeData extends MShopAddDataAbstract
 			{
 				$total++;
 				$item->setId( null )->fromArray( $dataset );
-				$item->setTypeId( $this->getTypeId( 'attribute/type', $dataset['attribute.domain'], $dataset['attribute.type'] ) );
+				$item->setType( $dataset['attribute.type'] );
 
 				$manager->saveItem( $item );
 				$num++;
