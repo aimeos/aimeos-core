@@ -53,9 +53,9 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$plugin = $pluginManager->createItem();
-		$plugin->setTypeId( 2 );
 		$plugin->setProvider( 'BasketLimits' );
 		$plugin->setConfig( $config );
+		$plugin->setType( 'order' );
 		$plugin->setStatus( '1' );
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\BasketLimits( \TestHelperMShop::getContext(), $plugin );

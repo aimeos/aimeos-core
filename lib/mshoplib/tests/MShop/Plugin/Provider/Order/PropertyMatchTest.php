@@ -22,9 +22,9 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 	{
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$this->plugin = $pluginManager->createItem();
-		$this->plugin->setTypeId( 2 );
 		$this->plugin->setProvider( 'PropertyMatch' );
 		$this->plugin->setConfig( array( 'product.label' => 'Cafe Noire Cappuccino' ) );
+		$this->plugin->setType( 'order' );
 		$this->plugin->setStatus( '1' );
 
 
@@ -76,7 +76,7 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 		// single condition
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 
-		$this->plugin->setConfig( array( 'product.property.type.code' => 'package-height' ) );
+		$this->plugin->setConfig( array( 'product.property.type' => 'package-height' ) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
@@ -84,7 +84,7 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 
 		// two conditions
 		$this->plugin->setConfig( array(
-			'product.property.type.code' => 'package-height',
+			'product.property.type' => 'package-height',
 			'product.label' => 'Cafe Noire Cappuccino',
 		) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelperMShop::getContext(), $this->plugin );
@@ -106,7 +106,7 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateFailMultipleConditions()
 	{
 		$this->plugin->setConfig( array(
-			'product.property.type.code' => 'package-height',
+			'product.property.type' => 'package-height',
 			'product.label' => 'wrong label',
 		) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelperMShop::getContext(), $this->plugin );

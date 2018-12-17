@@ -155,7 +155,7 @@ class ProductStock
 		$search = $stockManager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'stock.productcode', $codes ),
-			$search->compare( '==', 'stock.type.code', $types ),
+			$search->compare( '==', 'stock.type', $types ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

@@ -173,7 +173,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		$search = $attrManager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'attribute.code', 'xs' ),
-			$search->compare( '==', 'attribute.type.code', 'size' ),
+			$search->compare( '==', 'attribute.type', 'size' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

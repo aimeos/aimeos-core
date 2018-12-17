@@ -624,7 +624,7 @@ abstract class Base
 			$listTypeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer/lists/type' );
 
 			$listItem = $listManager->createItem();
-			$listItem->setTypeId( $listTypeManager->findItem( 'default', [], 'service' )->getId() );
+			$listItem->setType( 'default' );
 			$listItem->setRefId( $serviceId );
 		}
 

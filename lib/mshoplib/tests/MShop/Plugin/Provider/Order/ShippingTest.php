@@ -23,7 +23,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $this->context );
 		$this->plugin = $pluginManager->createItem();
-		$this->plugin->setTypeId( 2 );
+		$this->plugin->setType( 'order' );
 		$this->plugin->setStatus( '1' );
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\Shipping( $this->context, $this->plugin );

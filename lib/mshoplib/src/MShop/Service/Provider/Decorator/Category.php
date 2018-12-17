@@ -192,7 +192,7 @@ class Category
 		$expr = array(
 			$search->compare( '==', 'catalog.lists.refid', $productIds ),
 			$search->compare( '==', 'catalog.lists.domain', 'product' ),
-			$search->compare( '==', 'catalog.lists.type.code', 'default' ),
+			$search->compare( '==', 'catalog.lists.type', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

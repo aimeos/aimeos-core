@@ -132,7 +132,7 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 		// Incorrect key:
 
 		$this->plugin->setConfig( array( 'product.myid' => array(
-			'product.property.typeid',
+			'product.property.type',
 		) ) );
 
 		$this->setExpectedException( \Aimeos\MShop\Plugin\Exception::class );

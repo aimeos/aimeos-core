@@ -223,7 +223,7 @@ class Autofill
 			$expr[] = $search->compare( '==', 'service.code', $code );
 		}
 
-		$expr[] = $search->compare( '==', 'service.type.code', $type );
+		$expr[] = $search->compare( '==', 'service.type', $type );
 		$expr[] = $search->getConditions();
 
 		$search->setConditions( $search->combine( '&&', $expr ) );

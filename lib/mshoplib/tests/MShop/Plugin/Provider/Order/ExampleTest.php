@@ -31,9 +31,9 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
 		$this->plugin = $pluginManager->createItem();
-		$this->plugin->setTypeId( 2 );
 		$this->plugin->setProvider( 'Example' );
 		$this->plugin->setConfig( array( 'key'=>1 ) );
+		$this->plugin->setType( 'order' );
 		$this->plugin->setStatus( '1' );
 
 		$priceItem = \Aimeos\MShop\Price\Manager\Factory::createManager( $context )->createItem();
