@@ -53,12 +53,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'product.lists.type.editor', $this->editor ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No attribute list type item found' );
+			throw new \RuntimeException( 'No product list type item found' );
 		}
 
 		$this->assertEquals( $expected, $this->object->getItem( $expected->getId() ) );

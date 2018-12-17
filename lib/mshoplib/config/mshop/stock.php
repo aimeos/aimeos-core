@@ -84,7 +84,7 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_stock" (
-						"productcode", "typeid", "stocklevel", "backdate",
+						"productcode", "type", "stocklevel", "backdate",
 						"mtime", "editor", "siteid", "ctime"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?
@@ -94,7 +94,7 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_stock"
-					SET "productcode" = ?, "typeid" = ?, "stocklevel" = ?,
+					SET "productcode" = ?, "type" = ?, "stocklevel" = ?,
 						"backdate" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
@@ -102,14 +102,14 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT msto."id" AS "stock.id", msto."productcode" AS "stock.productcode",
-						msto."siteid" AS "stock.siteid", msto."typeid" AS "stock.typeid",
+						msto."siteid" AS "stock.siteid", msto."type" AS "stock.type",
 						msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.backdate",
 						msto."mtime" AS "stock.mtime", msto."editor" AS "stock.editor",
 						msto."ctime" AS "stock.ctime"
 					FROM "mshop_stock" AS msto
 					:joins
 					WHERE :cond
-					GROUP BY msto."id", msto."productcode", msto."siteid", msto."typeid",
+					GROUP BY msto."id", msto."productcode", msto."siteid", msto."type",
 						msto."stocklevel", msto."backdate", msto."mtime", msto."editor",
 						msto."ctime" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
@@ -132,7 +132,7 @@ return array(
 				'ansi' => '
 					UPDATE "mshop_stock"
 					SET "stocklevel" = "stocklevel" - ?, "mtime" = ?, "editor" = ?
-					WHERE "productcode" = ? AND "typeid" = ? AND :cond
+					WHERE "productcode" = ? AND "type" = ? AND :cond
 				'
 			),
 			'newid' => array(

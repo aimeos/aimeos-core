@@ -101,14 +101,14 @@ return array(
 					'ansi' => '
 						SELECT MAX( "pos" ) AS pos
 						FROM "mshop_catalog_list"
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ?
 					'
 				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_catalog_list" (
-							"parentid", "typeid", "domain", "refid", "start", "end",
+							"parentid", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -118,7 +118,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_catalog_list"
-						SET "parentid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -134,14 +134,14 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_catalog_list"
 						SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ? AND "pos" >= ?
 					'
 				),
 				'search' => array(
 					'ansi' => '
 						SELECT mcatli."id" AS "catalog.lists.id", mcatli."parentid" AS "catalog.lists.parentid",
-							mcatli."siteid" AS "catalog.lists.siteid", mcatli."typeid" AS "catalog.lists.typeid",
+							mcatli."siteid" AS "catalog.lists.siteid", mcatli."type" AS "catalog.lists.type",
 							mcatli."domain" AS "catalog.lists.domain", mcatli."refid" AS "catalog.lists.refid",
 							mcatli."start" AS "catalog.lists.datestart", mcatli."end" AS "catalog.lists.dateend",
 							mcatli."config" AS "catalog.lists.config", mcatli."pos" AS "catalog.lists.position",
@@ -150,7 +150,7 @@ return array(
 						FROM "mshop_catalog_list" AS mcatli
 						:joins
 						WHERE :cond
-						GROUP BY mcatli."id", mcatli."parentid", mcatli."siteid", mcatli."typeid",
+						GROUP BY mcatli."id", mcatli."parentid", mcatli."siteid", mcatli."type",
 							mcatli."domain", mcatli."refid", mcatli."start", mcatli."end",
 							mcatli."config", mcatli."pos", mcatli."status", mcatli."mtime",
 							mcatli."editor", mcatli."ctime" /*-columns*/ , :columns /*columns-*/

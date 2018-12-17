@@ -46,8 +46,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCreateItemType()
 	{
 		$item = $this->object->createItem( 'default' );
-
-		$this->assertNotNull( $item->getTypeId() );
 		$this->assertEquals( 'default', $item->getType() );
 	}
 
@@ -64,11 +62,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->getResourceType();
 
 		$this->assertContains( 'product', $result );
-		$this->assertContains( 'product/type', $result );
 		$this->assertContains( 'product/lists', $result );
-		$this->assertContains( 'product/lists/type', $result );
 		$this->assertContains( 'product/property', $result );
-		$this->assertContains( 'product/property/type', $result );
 	}
 
 
@@ -112,7 +107,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$domains = array( 'text', 'product', 'price', 'media', 'attribute', 'product/property' );
 
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 				$search->compare( '==', 'product.code', 'CNC' ),
 				$search->compare( '==', 'product.editor', $this->editor )
@@ -127,7 +122,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $product, $this->object->getItem( $product->getId(), $domains ) );
 		$this->assertEquals( 6, count( $product->getRefItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 4, count( $product->getPropertyItems() ) );
-		$this->assertNotEquals( '', $product->getTypeName() );
 	}
 
 
@@ -176,7 +170,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $itemSaved->getType() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteid(), $itemSaved->getSiteId() );
-		$this->assertEquals( $item->getTypeId(), $itemSaved->getTypeId() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
@@ -192,7 +186,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $itemUpd->getType() !== null );
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteid(), $itemUpd->getSiteId() );
-		$this->assertEquals( $itemExp->getTypeId(), $itemUpd->getTypeId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
@@ -234,23 +228,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 
 		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
-		$typeManager = $manager->getSubManager( 'type' );
 
 		$item = $manager->createItem();
-		$item->setTypeId( $typeManager->findItem( 'default', [], 'product' )->getId() );
+		$item->setType( 'default' );
 		$item->setCode( 'unitreftest' );
 
 		$listManager = $manager->getSubManager( 'lists' );
-		$listTypeManager = $listManager->getSubManager( 'type' );
 
 		$listItem = $listManager->createItem();
-		$listItem->setTypeId( $listTypeManager->findItem( 'default', [], 'product' )->getId() );
+		$listItem->setType( 'default' );
 
 		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $context );
-		$textTypeManager = $textManager->getSubManager( 'type' );
 
 		$textItem = $textManager->createItem();
-		$textItem->setTypeId( $textTypeManager->findItem( 'name', [], 'product' )->getId() );
+		$textItem->setType( 'name' );
 
 
 		$item->addListItem( 'text', $listItem, $textItem );
@@ -304,8 +295,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $listManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'product.lists.type.domain', 'product' ),
-			$search->compare( '==', 'product.lists.type.code', 'suggestion' ),
+			$search->compare( '==', 'product.lists.domain', 'product' ),
+			$search->compare( '==', 'product.lists.type', 'suggestion' ),
 			$search->compare( '==', 'product.lists.datestart', null ),
 			$search->compare( '==', 'product.lists.dateend', null ),
 			$search->compare( '!=', 'product.lists.config', null ),
@@ -325,7 +316,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'product.id', null );
 		$expr[] = $search->compare( '!=', 'product.siteid', null );
-		$expr[] = $search->compare( '!=', 'product.typeid', null );
+		$expr[] = $search->compare( '==', 'product.type', 'default' );
 		$expr[] = $search->compare( '==', 'product.code', 'CNE' );
 		$expr[] = $search->compare( '==', 'product.label', 'Cafe Noire Expresso' );
 		$expr[] = $search->compare( '~=', 'product.config', 'css-class' );
@@ -343,18 +334,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = array( 'product','default', $listItem->getRefId() );
 		$expr[] = $search->compare( '==', $search->createFunction( 'product:has', $param ), null );
 
-		$expr[] = $search->compare( '!=', 'product.type.id', null );
-		$expr[] = $search->compare( '!=', 'product.type.siteid', null );
-		$expr[] = $search->compare( '==', 'product.type.domain', 'product' );
-		$expr[] = $search->compare( '==', 'product.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'product.type.label', 'Article' );
-		$expr[] = $search->compare( '==', 'product.type.status', 1 );
-		$expr[] = $search->compare( '==', 'product.type.editor', $this->editor );
-
 		$expr[] = $search->compare( '!=', 'product.lists.id', null );
 		$expr[] = $search->compare( '!=', 'product.lists.siteid', null );
 		$expr[] = $search->compare( '!=', 'product.lists.parentid', null );
-		$expr[] = $search->compare( '!=', 'product.lists.typeid', null );
+		$expr[] = $search->compare( '==', 'product.lists.type', 'suggestion' );
 		$expr[] = $search->compare( '==', 'product.lists.domain', 'product' );
 		$expr[] = $search->compare( '>', 'product.lists.refid', 0 );
 		$expr[] = $search->compare( '==', 'product.lists.datestart', null );
@@ -364,30 +347,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.lists.status', 1 );
 		$expr[] = $search->compare( '==', 'product.lists.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'product.lists.type.id', null );
-		$expr[] = $search->compare( '!=', 'product.lists.type.siteid', null );
-		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'product' );
-		$expr[] = $search->compare( '==', 'product.lists.type.code', 'suggestion' );
-		$expr[] = $search->compare( '==', 'product.lists.type.label', 'Suggestion' );
-		$expr[] = $search->compare( '==', 'product.lists.type.status', 1 );
-		$expr[] = $search->compare( '==', 'product.lists.type.editor', $this->editor );
-
 		$expr[] = $search->compare( '!=', 'product.property.id', null );
 		$expr[] = $search->compare( '!=', 'product.property.siteid', null );
-		$expr[] = $search->compare( '!=', 'product.property.typeid', null );
+		$expr[] = $search->compare( '==', 'product.property.type', 'package-weight' );
 		$expr[] = $search->compare( '==', 'product.property.languageid', null );
 		$expr[] = $search->compare( '==', 'product.property.value', '1' );
 		$expr[] = $search->compare( '==', 'product.property.editor', $this->editor );
-
-		$expr[] = $search->compare( '!=', 'product.property.type.id', null );
-		$expr[] = $search->compare( '!=', 'product.property.type.siteid', null );
-		$expr[] = $search->compare( '==', 'product.property.type.code', 'package-weight' );
-		$expr[] = $search->compare( '==', 'product.property.type.domain', 'product' );
-		$expr[] = $search->compare( '==', 'product.property.type.label', 'Package Weight' );
-		$expr[] = $search->compare( '==', 'product.property.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'product.property.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'product.property.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'product.property.type.editor', $this->editor );
 
 		$param = array( 'package-weight', null, '1' );
 		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );
@@ -406,15 +371,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+	}
 
+
+	public function testSearchItemsAll()
+	{
+		$total = 0;
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
 		$search->setSlice( 0, 10 );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 10, count( $results ) );
 		$this->assertEquals( 28, $total );
+	}
 
 
+	public function testSearchItemsBase()
+	{
+		$total = 0;
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ),

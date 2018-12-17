@@ -44,8 +44,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCreateItemType()
 	{
 		$item = $this->object->createItem( 'default' );
-
-		$this->assertNotNull( $item->getTypeId() );
 		$this->assertEquals( 'default', $item->getType() );
 	}
 
@@ -92,7 +90,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
-		$this->assertEquals( $item->getTypeId(), $itemSaved->getTypeId() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getProductCode(), $itemSaved->getProductCode() );
 		$this->assertEquals( $item->getStockLevel(), $itemSaved->getStockLevel() );
 		$this->assertEquals( $item->getDateBack(), $itemSaved->getDateBack() );
@@ -103,7 +101,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
-		$this->assertEquals( $itemExp->getTypeId(), $itemUpd->getTypeId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getProductCode(), $itemUpd->getProductCode() );
 		$this->assertEquals( $itemExp->getStockLevel(), $itemUpd->getStockLevel() );
 		$this->assertEquals( $itemExp->getDateBack(), $itemUpd->getDateBack() );
@@ -122,7 +120,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'stock.stocklevel', 2000 ),
 			$search->compare( '==', 'stock.editor', $this->editor )
@@ -144,7 +142,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->getResourceType();
 
 		$this->assertContains( 'stock', $result );
-		$this->assertContains( 'stock/type', $result );
 	}
 
 
@@ -164,7 +161,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'stock.id', null );
 		$expr[] = $search->compare( '!=', 'stock.siteid', null );
-		$expr[] = $search->compare( '!=', 'stock.typeid', null );
+		$expr[] = $search->compare( '!=', 'stock.type', null );
 		$expr[] = $search->compare( '!=', 'stock.productcode', null );
 		$expr[] = $search->compare( '==', 'stock.stocklevel', 1000 );
 		$expr[] = $search->compare( '==', 'stock.dateback', '2010-04-01 00:00:00' );
@@ -187,17 +184,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testDecrease()
 	{
-		$typeManager = $this->object->getSubManager( 'type' );
-		$typeItem = $typeManager->findItem( 'unit_type1', [], 'product' );
-
 		$stockItem = $this->object->createItem();
-		$stockItem->setTypeId( $typeItem->getId() );
+		$stockItem->setType( 'unit_type1' );
 		$stockItem->setProductCode( 'CNC' );
 		$stockItem->setStockLevel( 0 );
 
 		$this->object->saveItem( $stockItem );
 
-		$this->object->decrease( ['CNC' => 5], $typeItem->getCode() );
+		$this->object->decrease( ['CNC' => 5], 'unit_type1' );
 		$actual = $this->object->getItem( $stockItem->getId() );
 
 		$this->object->deleteItem( $stockItem->getId() );
@@ -208,17 +202,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testIncrease()
 	{
-		$typeManager = $this->object->getSubManager( 'type' );
-		$typeItem = $typeManager->findItem( 'unit_type1', [], 'product' );
-
 		$stockItem = $this->object->createItem();
-		$stockItem->setTypeId( $typeItem->getId() );
+		$stockItem->setType( 'unit_type1' );
 		$stockItem->setProductCode( 'CNC' );
 		$stockItem->setStockLevel( 0 );
 
 		$this->object->saveItem( $stockItem );
 
-		$this->object->increase( ['CNC' => 5], $typeItem->getCode() );
+		$this->object->increase( ['CNC' => 5], 'unit_type1' );
 		$actual = $this->object->getItem( $stockItem->getId() );
 
 		$this->object->deleteItem( $stockItem->getId() );

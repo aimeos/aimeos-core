@@ -41,12 +41,12 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'attribute.typeid' => array(
-			'code' => 'attribute.typeid',
-			'internalcode' => 'matt."typeid"',
+		'attribute.type' => array(
+			'code' => 'attribute.type',
+			'internalcode' => 'matt."type"',
 			'label' => 'Type',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.label' => array(
@@ -151,7 +151,7 @@ class Standard
 	public function getResourceType( $withsub = true )
 	{
 		$path = 'mshop/attribute/manager/submanagers';
-		$default = ['lists', 'property', 'type'];
+		$default = ['lists', 'property'];
 
 		return $this->getResourceTypeBase( 'attribute', $path, $default, $withsub );
 	}
@@ -183,7 +183,7 @@ class Standard
 		 * @category Developer
 		 */
 		$path = 'mshop/attribute/manager/submanagers';
-		$default = ['lists', 'property', 'type'];
+		$default = ['lists', 'property'];
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
 	}
@@ -201,9 +201,7 @@ class Standard
 	{
 		$values['attribute.siteid'] = $this->getContext()->getLocale()->getSiteId();
 
-		if( $type !== null )
-		{
-			$values['attribute.typeid'] = $this->getTypeId( $type, $domain );
+		if( $type !== null ) {
 			$values['attribute.type'] = $type;
 		}
 
@@ -226,8 +224,7 @@ class Standard
 		$find = array(
 			'attribute.code' => $code,
 			'attribute.domain' => $domain,
-			'attribute.type.code' => $type,
-			'attribute.type.domain' => $domain,
+			'attribute.type' => $type,
 		);
 		return $this->findItemBase( $find, $ref, $default );
 	}
@@ -355,7 +352,7 @@ class Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $item->getType() );
 			$stmt->bind( 2, $item->getDomain() );
 			$stmt->bind( 3, $item->getCode() );
 			$stmt->bind( 4, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -481,7 +478,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$map = $typeIds = [];
+		$map = $types = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -638,10 +635,8 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false )
-			{
+			while( ( $row = $results->fetch() ) !== false ) {
 				$map[$row['attribute.id']] = $row;
-				$typeIds[$row['attribute.typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -650,24 +645,6 @@ class Standard
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
-		}
-
-		if( !empty( $typeIds ) )
-		{
-			$typeManager = $this->getObject()->getSubManager( 'type' );
-			$typeSearch = $typeManager->createSearch();
-			$typeSearch->setConditions( $typeSearch->compare( '==', 'attribute.type.id', array_keys( $typeIds ) ) );
-			$typeSearch->setSlice( 0, $search->getSliceSize() );
-			$typeItems = $typeManager->searchItems( $typeSearch );
-
-			foreach( $map as $id => $row )
-			{
-				if( isset( $typeItems[$row['attribute.typeid']] ) )
-				{
-					$map[$id]['attribute.type'] = $typeItems[$row['attribute.typeid']]->getCode();
-					$map[$id]['attribute.typename'] = $typeItems[$row['attribute.typeid']]->getName();
-				}
-			}
 		}
 
 		$propItems = $this->getPropertyItems( array_keys( $map ), 'attribute' );

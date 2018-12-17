@@ -39,9 +39,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->getResourceType();
 
 		$this->assertContains( 'media', $result );
-		$this->assertContains( 'media/type', $result );
 		$this->assertContains( 'media/lists', $result );
-		$this->assertContains( 'media/lists/type', $result );
 	}
 
 
@@ -63,8 +61,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCreateItemType()
 	{
 		$item = $this->object->createItem( 'default', 'product' );
-
-		$this->assertNotNull( $item->getTypeId() );
 		$this->assertEquals( 'default', $item->getType() );
 	}
 
@@ -84,7 +80,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'media.id', null );
 		$expr[] = $search->compare( '!=', 'media.siteid', null );
 		$expr[] = $search->compare( '==', 'media.languageid', 'de' );
-		$expr[] = $search->compare( '>', 'media.typeid', 0 );
+		$expr[] = $search->compare( '==', 'media.type', 'prod_266x221' );
 		$expr[] = $search->compare( '==', 'media.domain', 'product' );
 		$expr[] = $search->compare( '==', 'media.label', 'prod_266x221/198_prod_266x221.jpg' );
 		$expr[] = $search->compare( '==', 'media.url', 'prod_266x221/198_prod_266x221.jpg' );
@@ -95,21 +91,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'media.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'media.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'media.type.id', null );
-		$expr[] = $search->compare( '!=', 'media.type.siteid', null );
-		$expr[] = $search->compare( '==', 'media.type.domain', 'product' );
-		$expr[] = $search->compare( '==', 'media.type.code', 'prod_266x221' );
-		$expr[] = $search->compare( '>', 'media.type.label', '' );
-		$expr[] = $search->compare( '==', 'media.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'media.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'media.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'media.type.editor', $this->editor );
-
 		$expr[] = $search->compare( '!=', 'media.lists.id', null );
 		$expr[] = $search->compare( '!=', 'media.lists.siteid', null );
 		$expr[] = $search->compare( '>', 'media.lists.parentid', 0 );
 		$expr[] = $search->compare( '==', 'media.lists.domain', 'attribute' );
-		$expr[] = $search->compare( '>', 'media.lists.typeid', 0 );
+		$expr[] = $search->compare( '==', 'media.lists.type', 'option' );
 		$expr[] = $search->compare( '>', 'media.lists.refid', 0 );
 		$expr[] = $search->compare( '==', 'media.lists.datestart', null );
 		$expr[] = $search->compare( '==', 'media.lists.dateend', null );
@@ -119,16 +105,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'media.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'media.lists.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'media.lists.editor', $this->editor );
-
-		$expr[] = $search->compare( '!=', 'media.lists.type.id', null );
-		$expr[] = $search->compare( '!=', 'media.lists.type.siteid', null );
-		$expr[] = $search->compare( '==', 'media.lists.type.code', 'option' );
-		$expr[] = $search->compare( '==', 'media.lists.type.domain', 'attribute' );
-		$expr[] = $search->compare( '>', 'media.lists.type.label', '' );
-		$expr[] = $search->compare( '==', 'media.lists.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'media.lists.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'media.lists.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'media.lists.type.editor', $this->editor );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -163,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'media.label', 'path/to/folder/example1.jpg' ),
 			$search->compare( '==', 'media.editor', $this->editor )
@@ -177,7 +153,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
 		$this->assertEquals( 2, count( $item->getPropertyItems() ) );
-		$this->assertNotEquals( '', $item->getTypeName() );
 	}
 
 
@@ -222,10 +197,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->assertTrue( $item->getId() !== null );
-		$this->assertTrue( $itemSaved->getType() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
-		$this->assertEquals( $item->getTypeId(), $itemSaved->getTypeId() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getLanguageId(), $itemSaved->getLanguageId() );
 		$this->assertEquals( $item->getDomain(), $itemSaved->getDomain() );
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
@@ -238,10 +212,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
-		$this->assertTrue( $itemUpd->getType() !== null );
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
-		$this->assertEquals( $itemExp->getTypeId(), $itemUpd->getTypeId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getLanguageId(), $itemUpd->getLanguageId() );
 		$this->assertEquals( $itemExp->getDomain(), $itemUpd->getDomain() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );

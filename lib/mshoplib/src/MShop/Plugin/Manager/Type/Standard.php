@@ -25,7 +25,6 @@ class Standard
 		'plugin.type.id' => array(
 			'code' => 'plugin.type.id',
 			'internalcode' => 'mpluty."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_plugin_type" AS mpluty ON ( mpluty."id" = mplu."typeid" )' ),
 			'label' => 'Type ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

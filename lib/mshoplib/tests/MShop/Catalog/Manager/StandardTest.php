@@ -64,7 +64,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertContains( 'catalog', $result );
 		$this->assertContains( 'catalog/lists', $result );
-		$this->assertContains( 'catalog/lists/type', $result );
 	}
 
 
@@ -93,8 +92,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $listManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'catalog.lists.type.domain', 'product' ),
-			$search->compare( '==', 'catalog.lists.type.code', 'promotion' ),
+			$search->compare( '==', 'catalog.lists.domain', 'product' ),
+			$search->compare( '==', 'catalog.lists.type', 'promotion' ),
 			$search->compare( '==', 'catalog.lists.datestart', '2010-01-01 00:00:00' ),
 			$search->compare( '==', 'catalog.lists.dateend', '2099-01-01 00:00:00' ),
 			$search->compare( '!=', 'catalog.lists.config', null ),
@@ -108,6 +107,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		if( ( $listItem = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No list item found' );
 		}
+
 
 		$search = $this->object->createSearch();
 
@@ -126,13 +126,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'catalog.editor', $this->editor );
 		$expr[] = $search->compare( '>=', 'catalog.target', '' );
 
-		$param = array( 'product', $listItem->getTypeId(), array( $listItem->getRefId() ) );
+		$param = array( 'product', 'promotion', array( $listItem->getRefId() ) );
 		$expr[] = $search->compare( '>', $search->createFunction( 'catalog.contains', $param ), 0 );
 
 		$expr[] = $search->compare( '!=', 'catalog.lists.id', null );
 		$expr[] = $search->compare( '!=', 'catalog.lists.siteid', null );
 		$expr[] = $search->compare( '!=', 'catalog.lists.parentid', null );
-		$expr[] = $search->compare( '!=', 'catalog.lists.typeid', null );
+		$expr[] = $search->compare( '>=', 'catalog.lists.type', '' );
 		$expr[] = $search->compare( '!=', 'catalog.lists.refid', null );
 		$expr[] = $search->compare( '>=', 'catalog.lists.datestart', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'catalog.lists.dateend', '1970-01-01 00:00:00' );
@@ -142,15 +142,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'catalog.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'catalog.lists.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'catalog.lists.editor', $this->editor );
-
-		$expr[] = $search->compare( '!=', 'catalog.lists.type.id', null );
-		$expr[] = $search->compare( '!=', 'catalog.lists.type.siteid', null );
-		$expr[] = $search->compare( '>=', 'catalog.lists.type.code', '' );
-		$expr[] = $search->compare( '==', 'catalog.lists.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'catalog.lists.type.label', '' );
-		$expr[] = $search->compare( '>=', 'catalog.lists.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'catalog.lists.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.lists.type.editor', $this->editor );
 
 
 		$total = 0;
@@ -166,6 +157,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $item );
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+	}
+
+
+	public function testSearchItemsTranslation()
+	{
+		$search = $this->object->createSearch();
 
 		$conditions = array(
 			$search->compare( '==', 'catalog.label', 'Misc' ),
@@ -192,7 +189,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'catalog.label', 'Root' ),
 			$search->compare( '==', 'catalog.editor', $this->editor )

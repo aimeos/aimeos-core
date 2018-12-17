@@ -41,7 +41,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = array(
 			$search->compare( '==', 'attribute.code', 'white' ),
 			$search->compare( '==', 'attribute.domain', 'product' ),
-			$search->compare( '==', 'attribute.type.code', 'color' ),
+			$search->compare( '==', 'attribute.type', 'color' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

@@ -47,13 +47,12 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'media.property.typeid' => array(
-			'code' => 'media.property.typeid',
-			'internalcode' => 'mmedpr."typeid"',
-			'label' => 'Property type ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
+		'media.property.type' => array(
+			'code' => 'media.property.type',
+			'internalcode' => 'mmedpr."type"',
+			'label' => 'Property type',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.property.value' => array(
 			'code' => 'media.property.value',
@@ -134,7 +133,7 @@ class Standard
 	{
 		$path = 'mshop/media/manager/property/submanagers';
 
-		return $this->getResourceTypeBase( 'media/property', $path, array( 'type' ), $withsub );
+		return $this->getResourceTypeBase( 'media/property', $path, [], $withsub );
 	}
 
 
@@ -165,7 +164,7 @@ class Standard
 		 */
 		$path = 'mshop/media/manager/property/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 

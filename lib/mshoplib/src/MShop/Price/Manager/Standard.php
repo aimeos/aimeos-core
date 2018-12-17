@@ -38,13 +38,12 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'price.typeid' => array(
+		'price.type' => array(
 			'label' => 'Price type ID',
-			'code' => 'price.typeid',
-			'internalcode' => 'mpri."typeid"',
+			'code' => 'price.type',
+			'internalcode' => 'mpri."type"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'price.currencyid' => array(
 			'code' => 'price.currencyid',
@@ -197,9 +196,7 @@ class Standard
 			$values['price.currencyid'] = $locale->getCurrencyId();
 		}
 
-		if( $type !== null )
-		{
-			$values['price.typeid'] = $this->getTypeId( $type, $domain );
+		if( $type !== null ) {
 			$values['price.type'] = $type;
 		}
 
@@ -415,7 +412,7 @@ class Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $item->getType() );
 			$stmt->bind( 2, $item->getCurrencyId() );
 			$stmt->bind( 3, $item->getDomain() );
 			$stmt->bind( 4, $item->getLabel() );
@@ -502,7 +499,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$map = $typeIds = [];
+		$map = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -659,10 +656,8 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false )
-			{
+			while( ( $row = $results->fetch() ) !== false ) {
 				$map[$row['price.id']] = $row;
-				$typeIds[$row['price.typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -671,24 +666,6 @@ class Standard
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
-		}
-
-		if( !empty( $typeIds ) )
-		{
-			$typeManager = $this->getObject()->getSubManager( 'type' );
-			$typeSearch = $typeManager->createSearch();
-			$typeSearch->setConditions( $typeSearch->compare( '==', 'price.type.id', array_keys( $typeIds ) ) );
-			$typeSearch->setSlice( 0, $search->getSliceSize() );
-			$typeItems = $typeManager->searchItems( $typeSearch );
-
-			foreach( $map as $id => $row )
-			{
-				if( isset( $typeItems[$row['price.typeid']] ) )
-				{
-					$map[$id]['price.type'] = $typeItems[$row['price.typeid']]->getCode();
-					$map[$id]['price.typename'] = $typeItems[$row['price.typeid']]->getName();
-				}
-			}
 		}
 
 		return $this->buildItems( $map, null, 'price' );

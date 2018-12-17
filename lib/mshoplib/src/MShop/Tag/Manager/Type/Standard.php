@@ -25,7 +25,6 @@ class Standard
 		'tag.type.id' => array(
 			'code' => 'tag.type.id',
 			'internalcode' => 'mtagty."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_tag_type" AS mtagty ON ( mtag."typeid" = mtagty."id" )' ),
 			'label' => 'Type ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

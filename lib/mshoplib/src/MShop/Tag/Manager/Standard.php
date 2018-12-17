@@ -38,13 +38,12 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'tag.typeid' => array(
-			'code' => 'tag.typeid',
-			'internalcode' => 'mtag."typeid"',
-			'label' => 'Type id',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
+		'tag.type' => array(
+			'code' => 'tag.type',
+			'internalcode' => 'mtag."type"',
+			'label' => 'Type',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'tag.label' => array(
 			'code' => 'tag.label',
@@ -118,7 +117,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/tag/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -138,9 +137,7 @@ class Standard
 	{
 		$values['tag.siteid'] = $this->getContext()->getLocale()->getSiteId();
 
-		if( $type !== null )
-		{
-			$values['tag.typeid'] = $this->getTypeId( $type, $domain );
+		if( $type !== null ) {
 			$values['tag.type'] = $type;
 		}
 
@@ -253,7 +250,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getLanguageId() );
-			$stmt->bind( 2, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getType() );
 			$stmt->bind( 3, $item->getDomain() );
 			$stmt->bind( 4, $item->getLabel() );
 			$stmt->bind( 5, $date ); //mtime
@@ -390,7 +387,7 @@ class Standard
 	{
 		$path = 'mshop/tag/manager/submanagers';
 
-		return $this->getResourceTypeBase( 'tag', $path, array( 'type' ), $withsub );
+		return $this->getResourceTypeBase( 'tag', $path, [], $withsub );
 	}
 
 
@@ -421,7 +418,7 @@ class Standard
 		 */
 		$path = 'mshop/tag/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 
@@ -435,7 +432,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = $map = $typeIds = [];
+		$items = $map = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -591,10 +588,8 @@ class Standard
 			$cfgPathCount = 'mshop/tag/manager/standard/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-			while( ( $row = $results->fetch() ) !== false )
-			{
-				$map[$row['tag.id']] = $row;
-				$typeIds[$row['tag.typeid']] = null;
+			while( ( $row = $results->fetch() ) !== false ) {
+				$items[$row['tag.id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -603,26 +598,6 @@ class Standard
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
-		}
-
-		if( !empty( $typeIds ) )
-		{
-			$typeManager = $this->getObject()->getSubManager( 'type' );
-			$typeSearch = $typeManager->createSearch();
-			$typeSearch->setConditions( $typeSearch->compare( '==', 'tag.type.id', array_keys( $typeIds ) ) );
-			$typeSearch->setSlice( 0, $search->getSliceSize() );
-			$typeItems = $typeManager->searchItems( $typeSearch );
-
-			foreach( $map as $id => $row )
-			{
-				if( isset( $typeItems[$row['tag.typeid']] ) )
-				{
-					$row['tag.type'] = $typeItems[$row['tag.typeid']]->getCode();
-					$row['tag.typename'] = $typeItems[$row['tag.typeid']]->getName();
-				}
-
-				$items[$id] = $this->createItemBase( $row );
-			}
 		}
 
 		return $items;
@@ -756,7 +731,7 @@ class Standard
 	 * Creates new tag item object.
 	 *
 	 * @see \Aimeos\MShop\Tag\Item\Standard Default tag item
-	 * @param array $values Possible optional array keys can be given: id, typeid, langid, type, label
+	 * @param array $values Possible optional array keys can be given: id, type, langid, type, label
 	 * @return \Aimeos\MShop\Tag\Item\Standard New tag item object
 	 */
 	protected function createItemBase( array $values = [] )

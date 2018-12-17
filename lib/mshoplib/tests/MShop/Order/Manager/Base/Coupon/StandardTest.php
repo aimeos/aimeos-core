@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$obj = $this->object;
-		$search = $obj->createSearch();
+		$search = $obj->createSearch()->setSlice( 0, 1 );
 
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', 'OPQR' ) );
 		$results = $obj->searchItems( $search );

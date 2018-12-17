@@ -101,14 +101,14 @@ return array(
 					'ansi' => '
 						SELECT MAX( "pos" ) AS pos
 						FROM "mshop_text_list"
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ?
 					'
 				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_text_list" (
-							"parentid", "typeid", "domain", "refid", "start", "end",
+							"parentid", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -118,7 +118,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_text_list"
-						SET "parentid"=?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid"=?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -134,14 +134,14 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_text_list"
 							SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ? AND "pos" >= ?
 					'
 				),
 				'search' => array(
 					'ansi' => '
 						SELECT mtexli."id" AS "text.lists.id", mtexli."parentid" AS "text.lists.parentid",
-							mtexli."siteid" AS "text.lists.siteid", mtexli."typeid" AS "text.lists.typeid",
+							mtexli."siteid" AS "text.lists.siteid", mtexli."type" AS "text.lists.type",
 							mtexli."domain" AS "text.lists.domain", mtexli."refid" AS "text.lists.refid",
 							mtexli."start" AS "text.lists.datestart", mtexli."end" AS "text.lists.dateend",
 							mtexli."config" AS "text.lists.config", mtexli."pos" AS "text.lists.position",
@@ -150,7 +150,7 @@ return array(
 						FROM "mshop_text_list" AS mtexli
 						:joins
 						WHERE :cond
-						GROUP BY mtexli."id", mtexli."parentid", mtexli."siteid", mtexli."typeid",
+						GROUP BY mtexli."id", mtexli."parentid", mtexli."siteid", mtexli."type",
 							mtexli."domain", mtexli."refid", mtexli."start", mtexli."end",
 							mtexli."config", mtexli."pos", mtexli."status", mtexli."mtime",
 							mtexli."editor", mtexli."ctime" /*-columns*/ , :columns /*columns-*/
@@ -257,7 +257,7 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_text" (
-						"langid", "typeid", "domain", "label", "content",
+						"langid", "type", "domain", "label", "content",
 						"status", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -267,7 +267,7 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_text"
-					SET "langid" = ?, "typeid" = ?, "domain" = ?, "label" = ?,
+					SET "langid" = ?, "type" = ?, "domain" = ?, "label" = ?,
 						"content" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
@@ -275,7 +275,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT mtex."id" AS "text.id", mtex."siteid" AS "text.siteid",
-						mtex."langid" AS "text.languageid",	mtex."typeid" AS "text.typeid",
+						mtex."langid" AS "text.languageid",	mtex."type" AS "text.type",
 						mtex."domain" AS "text.domain", mtex."label" AS "text.label",
 						mtex."content" AS "text.content", mtex."status" AS "text.status",
 						mtex."mtime" AS "text.mtime", mtex."editor" AS "text.editor",
@@ -283,7 +283,7 @@ return array(
 					FROM "mshop_text" AS mtex
 					:joins
 					WHERE :cond
-					GROUP BY mtex."id", mtex."siteid", mtex."langid",	mtex."typeid",
+					GROUP BY mtex."id", mtex."siteid", mtex."langid",	mtex."type",
 						mtex."domain", mtex."label", mtex."content", mtex."status",
 						mtex."mtime", mtex."editor", mtex."ctime" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/

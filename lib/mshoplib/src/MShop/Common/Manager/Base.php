@@ -27,7 +27,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	private $object;
 	private $resourceName;
 	private $stmts = [];
-	private $typeIds = [];
 
 
 	/**
@@ -429,23 +428,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$adapter = $config->get( 'resource/' . $this->getResourceName() . '/adapter' );
 
 		return $config->get( $path . '/' . $adapter, $config->get( $path . '/ansi', $path ) );
-	}
-
-
-	/**
-	 * Returns the type ID for the given type code and domain
-	 *
-	 * @param string $type Unique type code
-	 * @param string $domain Domain of the type item
-	 * @return string Unique type ID
-	 */
-	protected function getTypeId( $type, $domain )
-	{
-		if( !isset( $this->typeIds[$domain][$type] ) ) {
-			$this->typeIds[$domain][$type] = $this->getObject()->getSubManager( 'type' )->findItem( $type, [], $domain )->getId();
-		}
-
-		return $this->typeIds[$domain][$type];
 	}
 
 

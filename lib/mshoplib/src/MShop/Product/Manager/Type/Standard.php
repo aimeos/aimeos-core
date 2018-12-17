@@ -26,7 +26,6 @@ class Standard
 		'product.type.id' => array(
 			'code' => 'product.type.id',
 			'internalcode' => 'mproty."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_product_type" AS mproty ON ( mpro."typeid" = mproty."id" )' ),
 			'label' => 'Type ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

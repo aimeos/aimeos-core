@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY;
 
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.base.address.type', $type ),
 			$search->compare( '==', 'order.base.address.editor', $this->editor )

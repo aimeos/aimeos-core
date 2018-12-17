@@ -39,13 +39,12 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'service.typeid' => array(
-			'code' => 'service.typeid',
-			'internalcode' => 'mser."typeid"',
-			'label' => 'Type ID',
+		'service.type' => array(
+			'code' => 'service.type',
+			'internalcode' => 'mser."type"',
+			'label' => 'Type',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'service.label' => array(
 			'code' => 'service.label',
@@ -175,9 +174,7 @@ class Standard
 	{
 		$values['service.siteid'] = $this->getContext()->getLocale()->getSiteId();
 
-		if( $type !== null )
-		{
-			$values['service.typeid'] = $this->getTypeId( $type, 'service' );
+		if( $type !== null ) {
 			$values['service.type'] = $type;
 		}
 
@@ -408,7 +405,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getType() );
 			$stmt->bind( 3, $item->getCode() );
 			$stmt->bind( 4, $item->getLabel() );
 			$stmt->bind( 5, $item->getProvider() );
@@ -493,7 +490,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$map = $typeIds = [];
+		$map = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -661,7 +658,6 @@ class Standard
 				}
 
 				$map[$row['service.id']] = $row;
-				$typeIds[$row['service.typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -670,24 +666,6 @@ class Standard
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
-		}
-
-		if( !empty( $typeIds ) )
-		{
-			$typeManager = $this->getObject()->getSubManager( 'type' );
-			$typeSearch = $typeManager->createSearch();
-			$typeSearch->setConditions( $typeSearch->compare( '==', 'service.type.id', array_keys( $typeIds ) ) );
-			$typeSearch->setSlice( 0, $search->getSliceSize() );
-			$typeItems = $typeManager->searchItems( $typeSearch );
-
-			foreach( $map as $id => $row )
-			{
-				if( isset( $typeItems[$row['service.typeid']] ) )
-				{
-					$map[$id]['service.type'] = $typeItems[$row['service.typeid']]->getCode();
-					$map[$id]['service.typename'] = $typeItems[$row['service.typeid']]->getName();
-				}
-			}
 		}
 
 		return $this->buildItems( $map, $ref, 'service' );

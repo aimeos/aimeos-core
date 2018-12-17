@@ -41,10 +41,10 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'media.typeid' => array(
+		'media.type' => array(
 			'label' => 'Type ID',
-			'code' => 'media.typeid',
-			'internalcode' => 'mmed."typeid"',
+			'code' => 'media.type',
+			'internalcode' => 'mmed."type"',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -171,9 +171,7 @@ class Standard
 	{
 		$values['media.siteid'] = $this->getContext()->getLocale()->getSiteId();
 
-		if( $type !== null )
-		{
-			$values['media.typeid'] = $this->getTypeId( $type, $domain );
+		if( $type !== null ) {
 			$values['media.type'] = $type;
 		}
 
@@ -392,7 +390,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getLanguageId() );
-			$stmt->bind( 2, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getType() );
 			$stmt->bind( 3, $item->getLabel() );
 			$stmt->bind( 4, $item->getMimeType() );
 			$stmt->bind( 5, $item->getUrl() );
@@ -477,7 +475,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$map = $typeIds = [];
+		$map = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -634,10 +632,8 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false )
-			{
+			while( ( $row = $results->fetch() ) !== false ) {
 				$map[$row['media.id']] = $row;
-				$typeIds[$row['media.typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -646,24 +642,6 @@ class Standard
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
-		}
-
-		if( !empty( $typeIds ) )
-		{
-			$typeManager = $this->getObject()->getSubManager( 'type' );
-			$typeSearch = $typeManager->createSearch();
-			$typeSearch->setConditions( $typeSearch->compare( '==', 'media.type.id', array_keys( $typeIds ) ) );
-			$typeSearch->setSlice( 0, $search->getSliceSize() );
-			$typeItems = $typeManager->searchItems( $typeSearch );
-
-			foreach( $map as $id => $row )
-			{
-				if( isset( $typeItems[$row['media.typeid']] ) )
-				{
-					$map[$id]['media.type'] = $typeItems[$row['media.typeid']]->getCode();
-					$map[$id]['media.typename'] = $typeItems[$row['media.typeid']]->getName();
-				}
-			}
 		}
 
 		$propItems = $this->getPropertyItems( array_keys( $map ), 'media' );

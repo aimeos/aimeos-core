@@ -100,14 +100,14 @@ return array(
 					'ansi' => '
 						SELECT MAX( "pos" ) AS pos
 						FROM "mshop_product_list"
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ?
 					'
 				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_product_list" (
-							"parentid", "typeid", "domain", "refid", "start", "end",
+							"parentid", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -117,7 +117,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_product_list"
-						SET "parentid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -133,14 +133,14 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_product_list"
 						SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ? AND "pos" >= ?
 					'
 				),
 				'search' => array(
 					'ansi' => '
 						SELECT mproli."id" AS "product.lists.id", mproli."parentid" AS "product.lists.parentid",
-							mproli."siteid" AS "product.lists.siteid", mproli."typeid" AS "product.lists.typeid",
+							mproli."siteid" AS "product.lists.siteid", mproli."type" AS "product.lists.type",
 							mproli."domain" AS "product.lists.domain", mproli."refid" AS "product.lists.refid",
 							mproli."start" AS "product.lists.datestart", mproli."end" AS "product.lists.dateend",
 							mproli."config" AS "product.lists.config", mproli."pos" AS "product.lists.position",
@@ -149,7 +149,7 @@ return array(
 						FROM "mshop_product_list" AS mproli
 						:joins
 						WHERE :cond
-						GROUP BY mproli."id", mproli."parentid", mproli."siteid", mproli."typeid",
+						GROUP BY mproli."id", mproli."parentid", mproli."siteid", mproli."type",
 							mproli."domain", mproli."refid", mproli."start", mproli."end",
 							mproli."config", mproli."pos", mproli."status", mproli."mtime",
 							mproli."editor", mproli."ctime" /*-columns*/ , :columns /*columns-*/
@@ -257,7 +257,7 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_product_property" (
-							"parentid", "typeid", "langid", "value",
+							"parentid", "type", "langid", "value",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?
@@ -267,7 +267,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_product_property"
-						SET "parentid" = ?, "typeid" = ?, "langid" = ?,
+						SET "parentid" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -275,14 +275,14 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT mpropr."id" AS "product.property.id", mpropr."parentid" AS "product.property.parentid",
-							mpropr."siteid" AS "product.property.siteid", mpropr."typeid" AS "product.property.typeid",
+							mpropr."siteid" AS "product.property.siteid", mpropr."type" AS "product.property.type",
 							mpropr."langid" AS "product.property.languageid", mpropr."value" AS "product.property.value",
 							mpropr."mtime" AS "product.property.mtime", mpropr."editor" AS "product.property.editor",
 							mpropr."ctime" AS "product.property.ctime"
 						FROM "mshop_product_property" AS mpropr
 						:joins
 						WHERE :cond
-						GROUP BY mpropr."id", mpropr."parentid", mpropr."siteid", mpropr."typeid",
+						GROUP BY mpropr."id", mpropr."parentid", mpropr."siteid", mpropr."type",
 							mpropr."langid", mpropr."value", mpropr."mtime", mpropr."editor",
 							mpropr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
@@ -388,7 +388,7 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_product" (
-						"typeid", "code", "label", "status", "start", "end",
+						"type", "code", "label", "status", "start", "end",
 						"config", "target", "editor", "mtime", "ctime", "siteid"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -398,7 +398,7 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_product"
-					SET "typeid" = ?, "code" = ?, "label" = ?, "status" = ?, "start" = ?, "end" = ?,
+					SET "type" = ?, "code" = ?, "label" = ?, "status" = ?, "start" = ?, "end" = ?,
 					"config" = ?, "target" = ?, "editor" = ?, "mtime" = ?, "ctime" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
@@ -406,7 +406,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
-						mpro."typeid" AS "product.typeid", mpro."code" AS "product.code",
+						mpro."type" AS "product.type", mpro."code" AS "product.code",
 						mpro."label" AS "product.label", mpro."config" AS "product.config",
 						mpro."start" AS "product.datestart", mpro."end" AS "product.dateend",
 						mpro."status" AS "product.status", mpro."ctime" AS "product.ctime",
@@ -415,7 +415,7 @@ return array(
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
-					GROUP BY mpro."id", mpro."siteid", mpro."typeid", mpro."code",
+					GROUP BY mpro."id", mpro."siteid", mpro."type", mpro."code",
 						mpro."label", mpro."config", mpro."start", mpro."end",
 						mpro."status", mpro."ctime", mpro."mtime", mpro."editor",
 						mpro."target"

@@ -91,7 +91,7 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_plugin"(
-						"typeid", "label", "provider", "config", "pos",
+						"type", "label", "provider", "config", "pos",
 						"status", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -101,7 +101,7 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_plugin"
-					SET "typeid" = ?, "label" = ?, "provider" = ?, "config" = ?,
+					SET "type" = ?, "label" = ?, "provider" = ?, "config" = ?,
 						"pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
@@ -109,7 +109,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT mplu."id" AS "plugin.id", mplu."siteid" AS "plugin.siteid",
-						mplu."typeid" AS "plugin.typeid", mplu."label" AS "plugin.label",
+						mplu."type" AS "plugin.type", mplu."label" AS "plugin.label",
 						mplu."provider" AS "plugin.provider", mplu."config" AS "plugin.config",
 						mplu."pos" AS "plugin.position", mplu."status" AS "plugin.status",
 						mplu."mtime" AS "plugin.mtime", mplu."editor" AS "plugin.editor",
@@ -117,7 +117,7 @@ return array(
 					FROM "mshop_plugin" mplu
 					:joins
 					WHERE :cond
-					GROUP BY mplu."id", mplu."siteid", mplu."typeid", mplu."label",
+					GROUP BY mplu."id", mplu."siteid", mplu."type", mplu."label",
 						mplu."provider", mplu."config", mplu."pos", mplu."status",
 						mplu."mtime", mplu."editor", mplu."ctime" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/

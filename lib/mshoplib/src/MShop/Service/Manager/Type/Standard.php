@@ -25,7 +25,6 @@ class Standard
 		'service.type.id' => array(
 			'code' => 'service.type.id',
 			'internalcode' => 'mserty."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_service_type" AS mserty ON ( mser."typeid" = mserty."id" )' ),
 			'label' => 'Type ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

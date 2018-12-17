@@ -47,13 +47,12 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'product.lists.typeid' => array(
-			'code' => 'product.lists.typeid',
-			'internalcode' => 'mproli."typeid"',
-			'label' => 'List type ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
+		'product.lists.type' => array(
+			'code' => 'product.lists.type',
+			'internalcode' => 'mproli."type"',
+			'label' => 'List type',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'product.lists.refid' => array(
 			'code' => 'product.lists.refid',
@@ -152,7 +151,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/product/manager/lists/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -170,7 +169,7 @@ class Standard
 	{
 		$path = 'mshop/product/manager/lists/submanagers';
 
-		return $this->getResourceTypeBase( 'product/lists', $path, array( 'type' ), $withsub );
+		return $this->getResourceTypeBase( 'product/lists', $path, [], $withsub );
 	}
 
 
@@ -201,7 +200,7 @@ class Standard
 		 */
 		$path = 'mshop/product/manager/lists/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 

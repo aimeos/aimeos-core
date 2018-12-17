@@ -44,8 +44,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCreateItemType()
 	{
 		$item = $this->object->createItem( 'delivery' );
-
-		$this->assertNotNull( $item->getTypeId() );
 		$this->assertEquals( 'delivery', $item->getType() );
 	}
 
@@ -93,7 +91,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $itemSaved->getType() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
-		$this->assertEquals( $item->getTypeId(), $itemSaved->getTypeId() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getProvider(), $itemSaved->getProvider() );
@@ -110,7 +108,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $itemUpd->getType() !== null );
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
-		$this->assertEquals( $itemExp->getTypeId(), $itemUpd->getTypeId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getProvider(), $itemUpd->getProvider() );
@@ -142,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'service.code', 'unitcode' ),
 			$search->compare( '==', 'service.editor', $this->editor )
@@ -156,7 +154,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId(), array( 'text' ) ) );
 		$this->assertEquals( 5, count( $item->getRefItems( 'text' ) ) );
-		$this->assertNotEquals( '', $item->getTypeName() );
 	}
 
 
@@ -168,7 +165,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'service.id', null );
 		$expr[] = $search->compare( '!=', 'service.siteid', null );
-		$expr[] = $search->compare( '>', 'service.typeid', 0 );
+		$expr[] = $search->compare( '==', 'service.type', 'delivery' );
 		$expr[] = $search->compare( '>=', 'service.position', 0 );
 		$expr[] = $search->compare( '==', 'service.code', 'unitcode' );
 		$expr[] = $search->compare( '==', 'service.label', 'unitlabel' );
@@ -181,22 +178,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'service.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'service.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'service.type.id', null );
-		$expr[] = $search->compare( '!=', 'service.type.siteid', null );
-		$expr[] = $search->compare( '==', 'service.type.code', 'delivery' );
-		$expr[] = $search->compare( '==', 'service.type.domain', 'service' );
-		$expr[] = $search->compare( '==', 'service.type.label', 'Delivery' );
-		$expr[] = $search->compare( '==', 'service.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'service.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'service.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'service.type.editor', $this->editor );
-
 		$expr[] = $search->compare( '!=', 'service.lists.id', null );
 		$expr[] = $search->compare( '!=', 'service.lists.siteid', null );
 		$expr[] = $search->compare( '>', 'service.lists.parentid', 0 );
 		$expr[] = $search->compare( '==', 'service.lists.domain', 'text' );
-		$expr[] = $search->compare( '>', 'service.lists.typeid', 0 );
-		$expr[] = $search->compare( '>', 'service.lists.refid', 0 );
+		$expr[] = $search->compare( '==', 'service.lists.type', 'unittype1' );
+		$expr[] = $search->compare( '>', 'service.lists.refid', '' );
 		$expr[] = $search->compare( '==', 'service.lists.datestart', null );
 		$expr[] = $search->compare( '==', 'service.lists.dateend', null );
 		$expr[] = $search->compare( '!=', 'service.lists.config', null );
@@ -206,16 +193,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'service.lists.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'service.lists.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'service.lists.type.id', null );
-		$expr[] = $search->compare( '!=', 'service.lists.type.siteid', null );
-		$expr[] = $search->compare( '==', 'service.lists.type.code', 'unittype1' );
-		$expr[] = $search->compare( '==', 'service.lists.type.domain', 'text' );
-		$expr[] = $search->compare( '>', 'service.lists.type.label', '' );
-		$expr[] = $search->compare( '==', 'service.lists.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'service.lists.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'service.lists.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'service.lists.type.editor', $this->editor );
-
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
@@ -224,8 +201,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+	}
 
-		//search with base criteria
+
+	public function testSearchItemBase()
+	{
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'service.provider', 'unitprovider' ),
@@ -241,7 +221,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'service.type.code', 'delivery' ),
+			$search->compare( '==', 'service.type', 'delivery' ),
 			$search->compare( '==', 'service.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -289,9 +269,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->getResourceType();
 
 		$this->assertContains( 'service', $result );
-		$this->assertContains( 'service/type', $result );
 		$this->assertContains( 'service/lists', $result );
-		$this->assertContains( 'service/lists/type', $result );
 	}
 
 

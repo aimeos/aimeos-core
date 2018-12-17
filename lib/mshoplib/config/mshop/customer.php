@@ -250,14 +250,14 @@ return array(
 					'ansi' => '
 						SELECT MAX( "pos" ) AS pos
 						FROM "mshop_customer_list"
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ?
 					'
 				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_customer_list" (
-							"parentid", "typeid", "domain", "refid", "start", "end",
+							"parentid", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -267,7 +267,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_customer_list"
-						SET "parentid"=?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid"=?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -283,14 +283,14 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_customer_list"
 							SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ? AND "pos" >= ?
 					'
 				),
 				'search' => array(
 					'ansi' => '
 						SELECT mcusli."id" AS "customer.lists.id", mcusli."parentid" AS "customer.lists.parentid",
-							mcusli."siteid" AS "customer.lists.siteid", mcusli."typeid" AS "customer.lists.typeid",
+							mcusli."siteid" AS "customer.lists.siteid", mcusli."type" AS "customer.lists.type",
 							mcusli."domain" AS "customer.lists.domain", mcusli."refid" AS "customer.lists.refid",
 							mcusli."start" AS "customer.lists.datestart", mcusli."end" AS "customer.lists.dateend",
 							mcusli."config" AS "customer.lists.config", mcusli."pos" AS "customer.lists.position",
@@ -299,7 +299,7 @@ return array(
 						FROM "mshop_customer_list" AS mcusli
 						:joins
 						WHERE :cond
-						GROUP BY mcusli."id", mcusli."parentid", mcusli."siteid", mcusli."typeid",
+						GROUP BY mcusli."id", mcusli."parentid", mcusli."siteid", mcusli."type",
 							mcusli."domain", mcusli."refid", mcusli."start", mcusli."end",
 							mcusli."config", mcusli."pos", mcusli."status", mcusli."mtime",
 							mcusli."editor", mcusli."ctime" /*-columns*/ , :columns /*columns-*/
@@ -407,7 +407,7 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_customer_property" (
-							"parentid", "typeid", "langid", "value",
+							"parentid", "type", "langid", "value",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?
@@ -417,7 +417,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_customer_property"
-						SET "parentid" = ?, "typeid" = ?, "langid" = ?,
+						SET "parentid" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -425,14 +425,14 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT mcuspr."id" AS "customer.property.id", mcuspr."parentid" AS "customer.property.parentid",
-							mcuspr."siteid" AS "customer.property.siteid", mcuspr."typeid" AS "customer.property.typeid",
+							mcuspr."siteid" AS "customer.property.siteid", mcuspr."type" AS "customer.property.type",
 							mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
 							mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
 							mcuspr."ctime" AS "customer.property.ctime"
 						FROM "mshop_customer_property" AS mcuspr
 						:joins
 						WHERE :cond
-						GROUP BY mcuspr."id", mcuspr."parentid", mcuspr."siteid", mcuspr."typeid",
+						GROUP BY mcuspr."id", mcuspr."parentid", mcuspr."siteid", mcuspr."type",
 							mcuspr."langid", mcuspr."value", mcuspr."mtime", mcuspr."editor",
 							mcuspr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/

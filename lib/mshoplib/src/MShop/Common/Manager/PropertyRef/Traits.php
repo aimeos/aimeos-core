@@ -37,7 +37,6 @@ trait Traits
 
 			$propSearch = $propManager->createSearch()->setSlice( 0, 0x7fffffff );
 			$propSearch->setConditions( $propSearch->compare( '==', $domain . '.property.parentid', $parentIds ) );
-			$propSearch->setSortations( [$propSearch->sort( '+', $domain . '.property.type.position' )] );
 
 			foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {
 				$list[$propItem->getParentId()][$id] = $propItem;

@@ -64,7 +64,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -72,7 +72,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
-		$this->assertNotEquals( '', $item->getTypeName() );
 	}
 
 
@@ -81,7 +80,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->getResourceType();
 
 		$this->assertContains( 'catalog/lists', $result );
-		$this->assertContains( 'catalog/lists/type', $result );
 	}
 
 
@@ -130,7 +128,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getParentId(), $itemSaved->getParentId() );
-		$this->assertEquals( $item->getTypeId(), $itemSaved->getTypeId() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getRefId(), $itemSaved->getRefId() );
 		$this->assertEquals( $item->getDomain(), $itemSaved->getDomain() );
 		$this->assertEquals( $item->getDateStart(), $itemSaved->getDateStart() );
@@ -145,7 +143,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getParentId(), $itemUpd->getParentId() );
-		$this->assertEquals( $itemExp->getTypeId(), $itemUpd->getTypeId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getRefId(), $itemUpd->getRefId() );
 		$this->assertEquals( $itemExp->getDomain(), $itemUpd->getDomain() );
 		$this->assertEquals( $itemExp->getDateStart(), $itemUpd->getDateStart() );
@@ -256,7 +254,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'catalog.lists.siteid', null );
 		$expr[] = $search->compare( '!=', 'catalog.lists.parentid', null );
 		$expr[] = $search->compare( '==', 'catalog.lists.domain', 'product' );
-		$expr[] = $search->compare( '!=', 'catalog.lists.typeid', null );
+		$expr[] = $search->compare( '==', 'catalog.lists.type', 'new' );
 		$expr[] = $search->compare( '>', 'catalog.lists.refid', 0 );
 		$expr[] = $search->compare( '==', 'catalog.lists.datestart', '2010-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'catalog.lists.dateend', '2099-01-01 00:00:00' );
@@ -267,16 +265,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'catalog.lists.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'catalog.lists.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'catalog.lists.type.id', null );
-		$expr[] = $search->compare( '!=', 'catalog.lists.type.siteid', null );
-		$expr[] = $search->compare( '==', 'catalog.lists.type.code', 'new' );
-		$expr[] = $search->compare( '==', 'catalog.lists.type.domain', 'product' );
-		$expr[] = $search->compare( '>', 'catalog.lists.type.label', '' );
-		$expr[] = $search->compare( '==', 'catalog.lists.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'catalog.lists.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'catalog.lists.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.lists.type.editor', $this->editor );
-
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );
@@ -284,8 +272,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );
+	}
 
-		//search with base criteria
+
+	public function testSearchItemsBase()
+	{
+		$total = 0;
 		$search = $this->object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'catalog.lists.editor', $this->editor ),
@@ -320,7 +312,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.lists.parentid', $item->getId() ),
 			$search->compare( '==', 'catalog.lists.domain', 'text' ),
 			$search->compare( '==', 'catalog.lists.editor', $this->editor ),
-			$search->compare( '==', 'catalog.lists.type.code', 'unittype1' ),
+			$search->compare( '==', 'catalog.lists.type', 'unittype1' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'catalog.lists.position' ) ) );

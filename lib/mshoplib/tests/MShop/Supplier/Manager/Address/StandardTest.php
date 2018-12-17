@@ -62,7 +62,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '~=', 'supplier.address.company', 'Example company' ),
 			$search->compare( '==', 'supplier.address.editor', $this->editor ),

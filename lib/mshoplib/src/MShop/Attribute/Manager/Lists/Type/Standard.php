@@ -25,7 +25,6 @@ class Standard
 		'attribute.lists.type.id' => array(
 			'code' => 'attribute.lists.type.id',
 			'internalcode' => 'mattlity."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_attribute_list_type" AS mattlity ON ( mattli."typeid" = mattlity."id" )' ),
 			'label' => 'List type Id',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

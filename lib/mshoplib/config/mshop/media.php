@@ -101,14 +101,14 @@ return array(
 					'ansi' => '
 						SELECT MAX( "pos" ) AS pos
 						FROM "mshop_media_list"
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ?
 					'
 				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_media_list"(
-							"parentid", "typeid", "domain", "refid", "start", "end",
+							"parentid", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -118,7 +118,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_media_list"
-						SET "parentid"=?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid"=?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -134,14 +134,14 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_media_list"
 							SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ? AND "pos" >= ?
 					'
 				),
 				'search' => array(
 					'ansi' => '
 						SELECT mmedli."id" AS "media.lists.id", mmedli."parentid" AS "media.lists.parentid",
-							mmedli."siteid" AS "media.lists.siteid", mmedli."typeid" AS "media.lists.typeid",
+							mmedli."siteid" AS "media.lists.siteid", mmedli."type" AS "media.lists.type",
 							mmedli."domain" AS "media.lists.domain", mmedli."refid" AS "media.lists.refid",
 							mmedli."start" AS "media.lists.datestart", mmedli."end" AS "media.lists.dateend",
 							mmedli."config" AS "media.lists.config", mmedli."pos" AS "media.lists.position",
@@ -150,7 +150,7 @@ return array(
 						FROM "mshop_media_list" AS mmedli
 						:joins
 						WHERE :cond
-						GROUP BY mmedli."id", mmedli."parentid", mmedli."siteid", mmedli."typeid",
+						GROUP BY mmedli."id", mmedli."parentid", mmedli."siteid", mmedli."type",
 							mmedli."domain", mmedli."refid", mmedli."start", mmedli."end",
 							mmedli."config", mmedli."pos", mmedli."status", mmedli."mtime",
 							mmedli."editor", mmedli."ctime" /*-columns*/ , :columns /*columns-*/
@@ -258,7 +258,7 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_media_property" (
-							"parentid", "typeid", "langid", "value",
+							"parentid", "type", "langid", "value",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?
@@ -268,7 +268,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_media_property"
-						SET "parentid" = ?, "typeid" = ?, "langid" = ?,
+						SET "parentid" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -276,14 +276,14 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT mmedpr."id" AS "media.property.id", mmedpr."parentid" AS "media.property.parentid",
-							mmedpr."siteid" AS "media.property.siteid", mmedpr."typeid" AS "media.property.typeid",
+							mmedpr."siteid" AS "media.property.siteid", mmedpr."type" AS "media.property.type",
 							mmedpr."langid" AS "media.property.languageid", mmedpr."value" AS "media.property.value",
 							mmedpr."mtime" AS "media.property.mtime", mmedpr."editor" AS "media.property.editor",
 							mmedpr."ctime" AS "media.property.ctime"
 						FROM "mshop_media_property" AS mmedpr
 						:joins
 						WHERE :cond
-						GROUP BY mmedpr."id", mmedpr."parentid", mmedpr."siteid", mmedpr."typeid",
+						GROUP BY mmedpr."id", mmedpr."parentid", mmedpr."siteid", mmedpr."type",
 							mmedpr."langid", mmedpr."value", mmedpr."mtime", mmedpr."editor",
 							mmedpr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
@@ -389,7 +389,7 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_media" (
-						"langid", "typeid", "label", "mimetype", "link", "status",
+						"langid", "type", "label", "mimetype", "link", "status",
 						"domain", "preview", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -399,7 +399,7 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_media"
-					SET "langid" = ?, "typeid" = ?, "label" = ?, "mimetype" = ?, "link" = ?,
+					SET "langid" = ?, "type" = ?, "label" = ?, "mimetype" = ?, "link" = ?,
 						"status" = ?, "domain" = ?, "preview" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
@@ -407,7 +407,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT mmed."id" AS "media.id", mmed."siteid" AS "media.siteid",
-						mmed."langid" AS "media.languageid", mmed."typeid" AS "media.typeid",
+						mmed."langid" AS "media.languageid", mmed."type" AS "media.type",
 						mmed."link" AS "media.url", mmed."label" AS "media.label",
 						mmed."status" AS "media.status", mmed."mimetype" AS "media.mimetype",
 						mmed."domain" AS "media.domain", mmed."preview" AS "media.preview",
@@ -416,7 +416,7 @@ return array(
 					FROM "mshop_media" AS mmed
 					:joins
 					WHERE :cond
-					GROUP BY mmed."id", mmed."siteid", mmed."langid", mmed."typeid",
+					GROUP BY mmed."id", mmed."siteid", mmed."langid", mmed."type",
 						mmed."link", mmed."label", mmed."status", mmed."mimetype",
 						mmed."domain", mmed."preview", mmed."mtime", mmed."editor",
 						mmed."ctime" /*-columns*/ , :columns /*columns-*/

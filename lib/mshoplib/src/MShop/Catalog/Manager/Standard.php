@@ -135,10 +135,10 @@ class Standard extends Base
 			'internalcode' => '( SELECT COUNT(mcatli_cs."parentid")
 				FROM "mshop_catalog_list" AS mcatli_cs
 				WHERE mcat."id" = mcatli_cs."parentid" AND :site
-					AND mcatli_cs."domain" = $1 AND mcatli_cs."refid" IN ( $3 ) AND mcatli_cs."typeid" = $2
+					AND mcatli_cs."domain" = $1 AND mcatli_cs."refid" IN ( $3 ) AND mcatli_cs."type" = $2
 					AND ( mcatli_cs."start" IS NULL OR mcatli_cs."start" <= \':date\' )
 					AND ( mcatli_cs."end" IS NULL OR mcatli_cs."end" >= \':date\' ) )',
-			'label' => 'Number of catalog list items, parameter(<domain>,<list type ID>,<reference IDs>)',
+			'label' => 'Number of catalog list items, parameter(<domain>,<list type>,<reference IDs>)',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,

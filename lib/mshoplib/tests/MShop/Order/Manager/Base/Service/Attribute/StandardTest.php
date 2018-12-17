@@ -127,7 +127,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.base.service.attribute.code', 'REFID' ),
 			$search->compare( '==', 'order.base.service.attribute.editor', $this->editor )

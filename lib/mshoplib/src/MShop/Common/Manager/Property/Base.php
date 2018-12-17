@@ -63,9 +63,7 @@ abstract class Base
 	{
 		$values[$this->prefix . 'siteid'] = $this->getContext()->getLocale()->getSiteId();
 
-		if( $type !== null )
-		{
-			$values[$this->prefix . 'typeid'] = $this->getTypeId( $type, $domain );
+		if( $type !== null ) {
 			$values[$this->prefix . 'type'] = $type;
 		}
 
@@ -133,7 +131,7 @@ abstract class Base
 			$stmt = $conn->create( $this->getSqlConfig( $this->getConfigPath() . $type ) );
 
 			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getType() );
 			$stmt->bind( 3, $item->getLanguageId() );
 			$stmt->bind( 4, $item->getValue() );
 			$stmt->bind( 5, $date ); //mtime
@@ -206,7 +204,7 @@ abstract class Base
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = $map = $typeIds = [];
+		$items = $map = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -227,10 +225,9 @@ abstract class Base
 			$required = array( trim( $this->prefix, '.' ) );
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-			while( ( $row = $results->fetch() ) !== false )
-			{
-				$map[ $row[$this->prefix . 'id'] ] = $row;
-				$typeIds[ $row[$this->prefix . 'typeid'] ] = null;
+
+			while( ( $row = $results->fetch() ) !== false ) {
+				$items[$row[$this->prefix . 'id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -239,26 +236,6 @@ abstract class Base
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
-		}
-
-		if( !empty( $typeIds ) )
-		{
-			$typeManager = $this->getObject()->getSubManager( 'type' );
-			$typeSearch = $typeManager->createSearch();
-			$typeSearch->setConditions( $typeSearch->compare( '==', $this->prefix . 'type.id', array_keys( $typeIds ) ) );
-			$typeSearch->setSlice( 0, $search->getSliceSize() );
-			$typeItems = $typeManager->searchItems( $typeSearch );
-
-			foreach( $map as $id => $row )
-			{
-				if( isset( $typeItems[ $row[$this->prefix . 'typeid'] ] ) )
-				{
-					$row[$this->prefix . 'type'] = $typeItems[ $row[$this->prefix . 'typeid'] ]->getCode();
-					$row[$this->prefix . 'typename'] = $typeItems[ $row[$this->prefix . 'typeid'] ]->getName();
-				}
-
-				$items[$id] = $this->createItemBase( $row );
-			}
 		}
 
 		return $items;

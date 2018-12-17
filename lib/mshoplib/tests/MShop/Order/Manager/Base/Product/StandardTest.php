@@ -173,7 +173,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.base.product.prodcode', 'CNE' ),
 			$search->compare( '==', 'order.base.product.editor', $this->editor )

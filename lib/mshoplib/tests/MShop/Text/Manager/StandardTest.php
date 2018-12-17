@@ -44,8 +44,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCreateItemType()
 	{
 		$item = $this->object->createItem( 'name', 'product' );
-
-		$this->assertNotNull( $item->getTypeId() );
 		$this->assertEquals( 'name', $item->getType() );
 	}
 
@@ -55,9 +53,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->getResourceType();
 
 		$this->assertContains( 'text', $result );
-		$this->assertContains( 'text/type', $result );
 		$this->assertContains( 'text/lists', $result );
-		$this->assertContains( 'text/lists/type', $result );
 	}
 
 
@@ -78,7 +74,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'text.id', null );
 		$expr[] = $search->compare( '!=', 'text.siteid', null );
 		$expr[] = $search->compare( '==', 'text.languageid', 'de' );
-		$expr[] = $search->compare( '>', 'text.typeid', 0 );
+		$expr[] = $search->compare( '==', 'text.type', 'long' );
 		$expr[] = $search->compare( '>=', 'text.label', '' );
 		$expr[] = $search->compare( '==', 'text.domain', 'catalog' );
 		$expr[] = $search->compare( '~=', 'text.content', 'Lange Beschreibung' );
@@ -87,22 +83,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'text.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'text.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'text.type.id', null );
-		$expr[] = $search->compare( '!=', 'text.type.siteid', null );
-		$expr[] = $search->compare( '==', 'text.type.code', 'long' );
-		$expr[] = $search->compare( '==', 'text.type.domain', 'catalog' );
-		$expr[] = $search->compare( '==', 'text.type.label', 'Long description' );
-		$expr[] = $search->compare( '==', 'text.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'text.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'text.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'text.type.editor', $this->editor );
-
 		$expr[] = $search->compare( '!=', 'text.lists.id', null );
 		$expr[] = $search->compare( '!=', 'text.lists.siteid', null );
 		$expr[] = $search->compare( '>', 'text.lists.parentid', 0 );
 		$expr[] = $search->compare( '==', 'text.lists.domain', 'media' );
-		$expr[] = $search->compare( '>', 'text.lists.typeid', 0 );
-		$expr[] = $search->compare( '>', 'text.lists.refid', 0 );
+		$expr[] = $search->compare( '==', 'text.lists.type', 'align-top' );
+		$expr[] = $search->compare( '>', 'text.lists.refid', '' );
 		$expr[] = $search->compare( '==', 'text.lists.datestart', '2010-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'text.lists.dateend', '2022-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'text.lists.config', null );
@@ -112,27 +98,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'text.lists.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'text.lists.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'text.lists.type.id', null );
-		$expr[] = $search->compare( '!=', 'text.lists.type.siteid', null );
-		$expr[] = $search->compare( '==', 'text.lists.type.code', 'align-top' );
-		$expr[] = $search->compare( '==', 'text.lists.type.domain', 'media' );
-		$expr[] = $search->compare( '>', 'text.lists.type.label', '' );
-		$expr[] = $search->compare( '==', 'text.lists.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'text.lists.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'text.lists.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'text.lists.type.editor', $this->editor );
-
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$result = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
+	}
 
-		//search without base criteria
+
+	public function testSearchItemsAll()
+	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.editor', $this->editor ) );
 		$this->assertEquals( 88, count( $this->object->searchItems( $search ) ) );
+	}
 
-		//search with base criteria
+
+	public function testSearchItemsBase()
+	{
+		$total = 0;
 		$search = $this->object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'text.editor', $this->editor ),
@@ -152,7 +135,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '~=', 'text.content', 'Monetary' ),
 			$search->compare( '==', 'text.editor', $this->editor ),
@@ -167,7 +150,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$actual = $this->object->getItem( $expected->getId() );
-		$this->assertNotEquals( '', $actual->getTypeName() );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -212,7 +194,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getLanguageId(), $itemSaved->getLanguageId() );
-		$this->assertEquals( $item->getTypeId(), $itemSaved->getTypeId() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getDomain(), $itemSaved->getDomain() );
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getContent(), $itemSaved->getContent() );
@@ -226,7 +208,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getLanguageId(), $itemUpd->getLanguageId() );
-		$this->assertEquals( $itemExp->getTypeId(), $itemUpd->getTypeId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getDomain(), $itemUpd->getDomain() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getContent(), $itemUpd->getContent() );

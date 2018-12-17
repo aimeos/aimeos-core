@@ -101,14 +101,14 @@ return array(
 					'ansi' => '
 						SELECT MAX( "pos" ) AS pos
 						FROM "mshop_attribute_list"
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ?
 					'
 				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_attribute_list"(
-							"parentid", "typeid", "domain", "refid", "start", "end",
+							"parentid", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -118,7 +118,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_attribute_list"
-						SET "parentid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -134,14 +134,14 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_attribute_list"
 						SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ? AND "pos" >= ?
 					'
 				),
 				'search' => array(
 					'ansi' => '
 						SELECT mattli."id" AS "attribute.lists.id", mattli."siteid" AS "attribute.lists.siteid",
-							mattli."parentid" AS "attribute.lists.parentid", mattli."typeid" AS "attribute.lists.typeid",
+							mattli."parentid" AS "attribute.lists.parentid", mattli."type" AS "attribute.lists.type",
 							mattli."domain" AS "attribute.lists.domain", mattli."refid" AS "attribute.lists.refid",
 							mattli."start" AS "attribute.lists.datestart", mattli."end" AS "attribute.lists.dateend",
 							mattli."config" AS "attribute.lists.config", mattli."pos" AS "attribute.lists.position",
@@ -150,7 +150,7 @@ return array(
 						FROM "mshop_attribute_list" AS mattli
 						:joins
 						WHERE :cond
-						GROUP BY mattli."id", mattli."siteid", mattli."parentid", mattli."typeid",
+						GROUP BY mattli."id", mattli."siteid", mattli."parentid", mattli."type",
 							mattli."domain", mattli."refid", mattli."start", mattli."end",
 							mattli."config", mattli."pos", mattli."status", mattli."mtime",
 							mattli."ctime", mattli."editor" /*-columns*/ , :columns /*columns-*/
@@ -258,7 +258,7 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_attribute_property" (
-							"parentid", "typeid", "langid", "value",
+							"parentid", "type", "langid", "value",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?
@@ -268,7 +268,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_attribute_property"
-						SET "parentid" = ?, "typeid" = ?, "langid" = ?,
+						SET "parentid" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -276,14 +276,14 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT mattpr."id" AS "attribute.property.id", mattpr."parentid" AS "attribute.property.parentid",
-							mattpr."siteid" AS "attribute.property.siteid", mattpr."typeid" AS "attribute.property.typeid",
+							mattpr."siteid" AS "attribute.property.siteid", mattpr."type" AS "attribute.property.type",
 							mattpr."langid" AS "attribute.property.languageid", mattpr."value" AS "attribute.property.value",
 							mattpr."mtime" AS "attribute.property.mtime", mattpr."editor" AS "attribute.property.editor",
 							mattpr."ctime" AS "attribute.property.ctime"
 						FROM "mshop_attribute_property" AS mattpr
 						:joins
 						WHERE :cond
-						GROUP BY mattpr."id", mattpr."parentid", mattpr."siteid", mattpr."typeid",
+						GROUP BY mattpr."id", mattpr."parentid", mattpr."siteid", mattpr."type",
 							mattpr."langid", mattpr."value", mattpr."mtime", mattpr."editor",
 							mattpr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
@@ -389,7 +389,7 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_attribute" (
-						"typeid", "domain", "code", "status", "pos",
+						"type", "domain", "code", "status", "pos",
 						"label", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -399,7 +399,7 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_attribute"
-					SET "typeid" = ?, "domain" = ?, "code" = ?, "status" = ?,
+					SET "type" = ?, "domain" = ?, "code" = ?, "status" = ?,
 						"pos" = ?, "label" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
@@ -407,7 +407,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT matt."id" AS "attribute.id", matt."siteid" AS "attribute.siteid",
-						matt."typeid" AS "attribute.typeid", matt."domain" AS "attribute.domain",
+						matt."type" AS "attribute.type", matt."domain" AS "attribute.domain",
 						matt."code" AS "attribute.code", matt."status" AS "attribute.status",
 						matt."pos" AS "attribute.position", matt."label" AS "attribute.label",
 						matt."mtime" AS "attribute.mtime", matt."ctime" AS "attribute.ctime",
@@ -415,7 +415,7 @@ return array(
 					FROM "mshop_attribute" AS matt
 					:joins
 					WHERE :cond
-					GROUP BY matt."id", matt."siteid", matt."typeid", matt."domain",
+					GROUP BY matt."id", matt."siteid", matt."type", matt."domain",
 						matt."code", matt."status", matt."pos", matt."label",
 						matt."mtime", matt."ctime", matt."editor" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/

@@ -39,10 +39,10 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'plugin.typeid' => array(
+		'plugin.type' => array(
 			'label' => 'Type ID',
-			'code' => 'plugin.typeid',
-			'internalcode' => 'mplu."typeid"',
+			'code' => 'plugin.type',
+			'internalcode' => 'mplu."type"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
@@ -130,7 +130,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/plugin/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -150,9 +150,7 @@ class Standard
 	{
 		$values['plugin.siteid'] = $this->getContext()->getLocale()->getSiteId();
 
-		if( $type !== null )
-		{
-			$values['plugin.typeid'] = $this->getTypeId( $type, 'plugin' );
+		if( $type !== null ) {
 			$values['plugin.type'] = $type;
 		}
 
@@ -228,7 +226,7 @@ class Standard
 	{
 		$path = 'mshop/plugin/manager/submanagers';
 
-		return $this->getResourceTypeBase( 'plugin', $path, array( 'type'), $withsub );
+		return $this->getResourceTypeBase( 'plugin', $path, [], $withsub );
 	}
 
 
@@ -259,7 +257,7 @@ class Standard
 		 */
 		$path = 'mshop/plugin/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 
@@ -395,7 +393,7 @@ class Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $item->getType() );
 			$stmt->bind( 2, $item->getLabel() );
 			$stmt->bind( 3, $item->getProvider() );
 			$stmt->bind( 4, json_encode( $item->getConfig() ) );
@@ -478,7 +476,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = $map = $typeIds = [];
+		$items = $map = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -645,8 +643,7 @@ class Standard
 					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
-				$map[$row['plugin.id']] = $row;
-				$typeIds[$row['plugin.typeid']] = null;
+				$items[$row['plugin.id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -655,26 +652,6 @@ class Standard
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
-		}
-
-		if( !empty( $typeIds ) )
-		{
-			$typeManager = $this->getObject()->getSubManager( 'type' );
-			$typeSearch = $typeManager->createSearch();
-			$typeSearch->setConditions( $typeSearch->compare( '==', 'plugin.type.id', array_keys( $typeIds ) ) );
-			$typeSearch->setSlice( 0, $search->getSliceSize() );
-			$typeItems = $typeManager->searchItems( $typeSearch );
-
-			foreach( $map as $id => $row )
-			{
-				if( isset( $typeItems[$row['plugin.typeid']] ) )
-				{
-					$row['plugin.type'] = $typeItems[$row['plugin.typeid']]->getCode();
-					$row['plugin.typename'] = $typeItems[$row['plugin.typeid']]->getName();
-				}
-
-				$items[$id] = $this->createItemBase( $row );
-			}
 		}
 
 		return $items;

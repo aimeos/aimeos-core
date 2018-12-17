@@ -45,8 +45,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCreateItemType()
 	{
 		$item = $this->object->createItem( 'taste', 'product' );
-
-		$this->assertNotNull( $item->getTypeId() );
 		$this->assertEquals( 'taste', $item->getType() );
 	}
 
@@ -86,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $itemSaved->getType() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
-		$this->assertEquals( $item->getTypeId(), $itemSaved->getTypeId() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getLanguageId(), $itemSaved->getLanguageId() );
 		$this->assertEquals( $item->getDomain(), $itemSaved->getDomain() );
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
@@ -98,7 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $itemUpd->getType() !== null );
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
-		$this->assertEquals( $itemExp->getTypeId(), $itemUpd->getTypeId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getLanguageId(), $itemUpd->getLanguageId() );
 		$this->assertEquals( $itemExp->getDomain(), $itemUpd->getDomain() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
@@ -117,7 +115,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '~=', 'tag.label', 'herb' ),
 			$search->compare( '==', 'tag.editor', $this->editor )
@@ -130,7 +128,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
-		$this->assertNotEquals( '', $actual->getTypeName() );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -140,7 +137,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->getResourceType();
 
 		$this->assertContains( 'tag', $result );
-		$this->assertContains( 'tag/type', $result );
 	}
 
 
@@ -160,42 +156,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'tag.id', null );
 		$expr[] = $search->compare( '!=', 'tag.siteid', null );
-		$expr[] = $search->compare( '!=', 'tag.typeid', null );
+		$expr[] = $search->compare( '==', 'tag.type', 'sort' );
 		$expr[] = $search->compare( '==', 'tag.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'tag.domain', 'product' );
 		$expr[] = $search->compare( '==', 'tag.label', 'Kaffee' );
 		$expr[] = $search->compare( '==', 'tag.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'tag.type.id', null );
-		$expr[] = $search->compare( '!=', 'tag.type.siteid', null );
-		$expr[] = $search->compare( '==', 'tag.type.domain', 'product' );
-		$expr[] = $search->compare( '==', 'tag.type.code', 'sort' );
-		$expr[] = $search->compare( '>', 'tag.type.label', '' );
-		$expr[] = $search->compare( '==', 'tag.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'tag.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'tag.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'tag.type.editor', $this->editor );
-
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
-
-
-		$search = $this->object->createSearch();
-		$conditions = array(
-			$search->compare( '~=', 'tag.type.code', 'taste' ),
-			$search->compare( '~=', 'tag.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice( 0, 1 );
-		$items = $this->object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $items ) );
-		$this->assertEquals( 3, $total );
-
-		foreach( $items as $itemId => $item ) {
-			$this->assertEquals( $itemId, $item->getId() );
-		}
 	}
 
 

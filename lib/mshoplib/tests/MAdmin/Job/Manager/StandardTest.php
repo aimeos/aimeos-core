@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$criteria = $this->object->createSearch();
+		$criteria = $this->object->createSearch()->setSlice( 0, 1 );
 		$criteria->setConditions( $criteria->compare( '==', 'job.method', 'controller.method' ) );
 		$result = $this->object->searchItems( $criteria );
 

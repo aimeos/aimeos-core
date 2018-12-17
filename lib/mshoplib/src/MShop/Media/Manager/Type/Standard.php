@@ -26,7 +26,6 @@ class Standard
 			'label' => 'Type ID',
 			'code' => 'media.type.id',
 			'internalcode' => 'mmedty."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_media_type" AS mmedty ON ( mmed."typeid" = mmedty."id" )' ),
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,

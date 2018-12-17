@@ -39,13 +39,12 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'text.typeid' => array(
-			'code' => 'text.typeid',
-			'internalcode' => 'mtex."typeid"',
-			'label' => 'Type ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
+		'text.type' => array(
+			'code' => 'text.type',
+			'internalcode' => 'mtex."type"',
+			'label' => 'Type',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'text.label' => array(
 			'code' => 'text.label',
@@ -153,9 +152,7 @@ class Standard
 	{
 		$values['text.siteid'] = $this->getContext()->getLocale()->getSiteId();
 
-		if( $type !== null )
-		{
-			$values['text.typeid'] = $this->getTypeId( $type, $domain );
+		if( $type !== null ) {
 			$values['text.type'] = $type;
 		}
 
@@ -269,7 +266,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getLanguageId() );
-			$stmt->bind( 2, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getType() );
 			$stmt->bind( 3, $item->getDomain() );
 			$stmt->bind( 4, $item->getLabel() );
 			$stmt->bind( 5, $item->getContent() );
@@ -453,7 +450,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$map = $typeIds = [];
+		$map = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -610,10 +607,8 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false )
-			{
+			while( ( $row = $results->fetch() ) !== false ) {
 				$map[$row['text.id']] = $row;
-				$typeIds[$row['text.typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -622,24 +617,6 @@ class Standard
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
-		}
-
-		if( !empty( $typeIds ) )
-		{
-			$typeManager = $this->getObject()->getSubManager( 'type' );
-			$typeSearch = $typeManager->createSearch();
-			$typeSearch->setConditions( $typeSearch->compare( '==', 'text.type.id', array_keys( $typeIds ) ) );
-			$typeSearch->setSlice( 0, $search->getSliceSize() );
-			$typeItems = $typeManager->searchItems( $typeSearch );
-
-			foreach( $map as $id => $row )
-			{
-				if( isset( $typeItems[$row['text.typeid']] ) )
-				{
-					$map[$id]['text.type'] = $typeItems[$row['text.typeid']]->getCode();
-					$map[$id]['text.typename'] = $typeItems[$row['text.typeid']]->getName();
-				}
-			}
 		}
 
 		return $this->buildItems( $map, null, 'text' );

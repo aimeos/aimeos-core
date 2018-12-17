@@ -84,7 +84,7 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_tag" (
-						"langid", "typeid", "domain", "label",
+						"langid", "type", "domain", "label",
 						"mtime", "editor", "siteid", "ctime"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?
@@ -94,7 +94,7 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_tag"
-					SET "langid" = ?, "typeid" = ?, "domain" = ?,
+					SET "langid" = ?, "type" = ?, "domain" = ?,
 						"label" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
@@ -102,14 +102,14 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT mtag."id" AS "tag.id", mtag."siteid" AS "tag.siteid",
-						mtag."typeid" AS "tag.typeid", mtag."langid" AS "tag.languageid",
+						mtag."type" AS "tag.type", mtag."langid" AS "tag.languageid",
 						mtag."domain" AS "tag.domain", mtag."label" AS "tag.label",
 						mtag."mtime" AS "tag.mtime", mtag."editor" AS "tag.editor",
 						mtag."ctime" AS "tag.ctime"
 					FROM "mshop_tag" AS mtag
 					:joins
 					WHERE :cond
-					GROUP BY mtag."id", mtag."siteid", mtag."typeid", mtag."langid",
+					GROUP BY mtag."id", mtag."siteid", mtag."type", mtag."langid",
 						mtag."domain", mtag."label", mtag."mtime", mtag."editor", mtag."ctime"
 						/*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/

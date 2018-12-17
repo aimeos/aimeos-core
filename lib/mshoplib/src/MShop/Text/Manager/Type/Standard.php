@@ -25,7 +25,6 @@ class Standard
 		'text.type.id' => array(
 			'code' => 'text.type.id',
 			'internalcode' => 'mtexty."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_text_type" AS mtexty ON ( mtex."typeid" = mtexty."id" )' ),
 			'label' => 'Type ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

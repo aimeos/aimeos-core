@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$status = \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED;
 
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.statuspayment', $status ),
 			$search->compare( '==', 'order.editor', $this->editor )

@@ -22,8 +22,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Stock\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	private $typeIds = [];
-
 	private $searchConfig = array(
 		'stock.id' => array(
 			'code' => 'stock.id',
@@ -41,13 +39,12 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'stock.typeid' => array(
-			'code' => 'stock.typeid',
-			'internalcode' => 'msto."typeid"',
-			'label' => 'Type ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
+		'stock.type' => array(
+			'code' => 'stock.type',
+			'internalcode' => 'msto."type"',
+			'label' => 'Type',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'stock.productcode' => array(
 			'code' => 'stock.productcode',
@@ -117,7 +114,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/stock/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -137,9 +134,7 @@ class Standard
 	{
 		$values['stock.siteid'] = $this->getContext()->getLocale()->getSiteId();
 
-		if( $type !== null )
-		{
-			$values['stock.typeid'] = $this->getTypeId( $type, 'product' );
+		if( $type !== null ) {
 			$values['stock.type'] = $type;
 		}
 
@@ -159,7 +154,7 @@ class Standard
 	 */
 	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
 	{
-		$list = array( 'stock.productcode' => $code, 'stock.type.domain' => $domain, 'stock.type.code' => $type );
+		$list = array( 'stock.productcode' => $code, 'stock.type' => $type );
 		return $this->findItemBase( $list, $ref, $default );
 	}
 
@@ -271,7 +266,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getProductCode() );
-			$stmt->bind( 2, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getType() );
 			$stmt->bind( 3, $item->getStocklevel(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getDateBack() );
 			$stmt->bind( 5, $date ); //mtime
@@ -410,7 +405,7 @@ class Standard
 	{
 		$path = 'mshop/stock/manager/submanagers';
 
-		return $this->getResourceTypeBase( 'stock', $path, array( 'type' ), $withsub );
+		return $this->getResourceTypeBase( 'stock', $path, [], $withsub );
 	}
 
 
@@ -441,7 +436,7 @@ class Standard
 		 */
 		$path = 'mshop/stock/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 
@@ -455,7 +450,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = $map = $typeIds = [];
+		$items = $map = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -614,10 +609,8 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false )
-			{
-				$map[ $row['stock.id'] ] = $row;
-				$typeIds[ $row['stock.typeid'] ] = null;
+			while( ( $row = $results->fetch() ) !== false ) {
+				$items[$row['stock.id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -626,28 +619,6 @@ class Standard
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
-		}
-
-		if( !empty( $typeIds ) )
-		{
-			$typeManager = $this->getObject()->getSubManager( 'type' );
-
-			$typeSearch = $typeManager->createSearch();
-			$typeSearch->setConditions( $typeSearch->compare( '==', 'stock.type.id', array_keys( $typeIds ) ) );
-			$typeSearch->setSlice( 0, $search->getSliceSize() );
-
-			$typeItems = $typeManager->searchItems( $typeSearch );
-
-			foreach( $map as $id => $row )
-			{
-				if( isset( $typeItems[ $row['stock.typeid'] ] ) )
-				{
-					$row['stock.type'] = $typeItems[ $row['stock.typeid'] ]->getCode();
-					$row['stock.typename'] = $typeItems[$row['stock.typeid']]->getName();
-				}
-
-				$items[$id] = $this->createItemBase( $row );
-			}
 		}
 
 		return $items;
@@ -785,7 +756,6 @@ class Standard
 	public function decrease( array $codeqty, $type = 'default' )
 	{
 		$context = $this->getContext();
-		$typeId = $this->getStockTypeId( $type );
 		$translations = ['stock.siteid' => '"siteid"'];
 		$types = ['stock.siteid' => $this->searchConfig['stock.siteid']['internaltype']];
 
@@ -843,7 +813,7 @@ class Standard
 				$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); //mtime
 				$stmt->bind( 3, $context->getEditor() );
 				$stmt->bind( 4, $code );
-				$stmt->bind( 5, $typeId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 5, $type );
 
 				$stmt->execute()->finish();
 			}
@@ -877,31 +847,11 @@ class Standard
 	/**
 	 * Creates new stock item object.
 	 *
-	 * @param array $values Possible optional array keys can be given:
-	 * id, parentid, siteid, typeid, stocklevel, backdate
+	 * @param array $values Possible optional array keys can be given: id, parentid, siteid, type, stocklevel, backdate
 	 * @return \Aimeos\MShop\Stock\Item\Standard New stock item object
 	 */
 	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Stock\Item\Standard( $values );
-	}
-
-
-	/**
-	 * Returns the type IDs for the given stock type
-	 *
-	 * @param string $typeCode Unique stock type code
-	 * @return string Stock type ID
-	 * @throws \Aimeos\MShop\Exception If stock type isn't found
-	 */
-	protected function getStockTypeId( $typeCode )
-	{
-		if( !isset( $this->typeIds[$typeCode] ) )
-		{
-			$typeId = $this->getObject()->getSubManager( 'type' )->findItem( $typeCode )->getId();
-			$this->typeIds[$typeCode] = $typeId;
-		}
-
-		return $this->typeIds[$typeCode];
 	}
 }

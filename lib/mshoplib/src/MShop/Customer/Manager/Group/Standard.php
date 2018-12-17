@@ -423,7 +423,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$map = [];
+		$items = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -550,7 +550,7 @@ class Standard
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[$row['customer.group.id']] = $this->createItemBase( $row );
+				$items[$row['customer.group.id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -561,7 +561,7 @@ class Standard
 			throw $e;
 		}
 
-		return $map;
+		return $items;
 	}
 
 

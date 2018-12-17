@@ -115,8 +115,7 @@ abstract class Base
 		$expr = array(
 			$search->compare( '==', 'customer.lists.parentid', $item->getId() ),
 			$search->compare( '==', 'customer.lists.domain', 'customer/group' ),
-			$search->compare( '==', 'customer.lists.type.domain', 'customer/group' ),
-			$search->compare( '==', 'customer.lists.type.code', 'default' ),
+			$search->compare( '==', 'customer.lists.type', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -127,13 +126,10 @@ abstract class Base
 
 		if( $item->getGroups() !== [] )
 		{
-			$typeManager = $manager->getSubManager( 'type' );
-			$typeId = $typeManager->findItem( 'default', [], 'customer/group', 'default' )->getId();
-
 			$listItem = $manager->createItem();
 			$listItem->setParentId( $item->getId() );
 			$listItem->setDomain( 'customer/group' );
-			$listItem->setTypeId( $typeId );
+			$listItem->setType( 'default' );
 			$listItem->setStatus( 1 );
 
 			$pos = count( $listMap ) ;

@@ -25,7 +25,6 @@ class Standard
 		'price.type.id' => array(
 			'code' => 'price.type.id',
 			'internalcode' => 'mprity."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_price_type" AS mprity ON mpri.typeid = mprity.id' ),
 			'label' => 'Type ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

@@ -104,7 +104,7 @@ abstract class Base
 			$search = $this->getObject()->createSearch( true );
 
 			$expr = array(
-				$search->compare( '==', 'plugin.type.code', $type ),
+				$search->compare( '==', 'plugin.type', $type ),
 				$search->getConditions(),
 			);
 

@@ -80,9 +80,7 @@ abstract class Base
 	{
 		$values[$this->prefix . 'siteid'] = $this->getContext()->getLocale()->getSiteId();
 
-		if( $type !== null )
-		{
-			$values[$this->prefix . 'typeid'] = $this->getTypeId( $type, $domain );
+		if( $type !== null ) {
 			$values[$this->prefix . 'type'] = $type;
 		}
 
@@ -125,7 +123,7 @@ abstract class Base
 			$stmt = $this->getCachedStatement( $conn, $this->getConfigPath() . $type );
 
 			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getType() );
 			$stmt->bind( 3, $item->getDomain(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 			$stmt->bind( 4, $item->getRefId(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 			$stmt->bind( 5, $item->getDateStart(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
@@ -230,7 +228,7 @@ abstract class Base
 		$newpos = $pos = 0;
 		$oldpos = $listItem->getPosition();
 		$parentid = $listItem->getParentId();
-		$typeid = $listItem->getTypeId();
+		$type = $listItem->getType();
 		$domain = $listItem->getDomain();
 
 		if( $ref !== null ) {
@@ -255,7 +253,7 @@ abstract class Base
 				$stmt->bind( 3, $this->getContext()->getEditor() );
 				$stmt->bind( 4, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 5, $parentid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 6, $typeid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 6, $type );
 				$stmt->bind( 7, $domain );
 				$stmt->bind( 8, $pos, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
@@ -269,7 +267,7 @@ abstract class Base
 
 				$stmt->bind( 1, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 2, $parentid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 3, $typeid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 3, $type );
 				$stmt->bind( 4, $domain );
 
 				$result = $stmt->execute();
@@ -306,7 +304,7 @@ abstract class Base
 				$stmt->bind( 3, $this->getContext()->getEditor() );
 				$stmt->bind( 4, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 5, $parentid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 6, $typeid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 6, $type );
 				$stmt->bind( 7, $domain );
 				$stmt->bind( 8, $oldpos, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
@@ -333,7 +331,7 @@ abstract class Base
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = $map = $typeIds = [];
+		$items = $map = [];
 
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -362,8 +360,7 @@ abstract class Base
 					$row[$this->prefix . 'config'] = [];
 				}
 
-				$map[$row[$this->prefix . 'id']] = $row;
-				$typeIds[$row[$this->prefix . 'typeid']] = null;
+				$items[$row[$this->prefix . 'id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -372,26 +369,6 @@ abstract class Base
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
-		}
-
-		if( !empty( $typeIds ) )
-		{
-			$typeManager = $this->getObject()->getSubManager( 'type' );
-			$typeSearch = $typeManager->createSearch();
-			$typeSearch->setConditions( $typeSearch->compare( '==', $name . '.type.id', array_keys( $typeIds ) ) );
-			$typeSearch->setSlice( 0, $search->getSliceSize() );
-			$typeItems = $typeManager->searchItems( $typeSearch );
-
-			foreach( $map as $id => $row )
-			{
-				if( isset( $typeItems[$row[$this->prefix . 'typeid']] ) )
-				{
-					$row[$this->prefix . 'type'] = $typeItems[$row[$this->prefix . 'typeid']]->getCode();
-					$row[$this->prefix . 'typename'] = $typeItems[$row[$this->prefix . 'typeid']]->getName();
-				}
-
-				$items[$row[$this->prefix . 'id']] = $this->createItemBase( $row );
-			}
 		}
 
 		return $items;

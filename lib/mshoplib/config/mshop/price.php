@@ -101,14 +101,14 @@ return array(
 					'ansi' => '
 						SELECT MAX( "pos" ) AS pos
 						FROM "mshop_price_list"
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ?
 					'
 				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_price_list" (
-							"parentid", "typeid", "domain", "refid", "start", "end",
+							"parentid", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -118,7 +118,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_price_list"
-						SET "parentid"=?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid"=?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -134,14 +134,14 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_price_list"
 							SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ? AND "pos" >= ?
 					'
 				),
 				'search' => array(
 					'ansi' => '
 						SELECT mprili."id" AS "price.lists.id", mprili."parentid" AS "price.lists.parentid",
-							mprili."siteid" AS "price.lists.siteid", mprili."typeid" AS "price.lists.typeid",
+							mprili."siteid" AS "price.lists.siteid", mprili."type" AS "price.lists.type",
 							mprili."domain" AS "price.lists.domain", mprili."refid" AS "price.lists.refid",
 							mprili."start" AS "price.lists.datestart", mprili."end" AS "price.lists.dateend",
 							mprili."config" AS "price.lists.config", mprili."pos" AS "price.lists.position",
@@ -150,7 +150,7 @@ return array(
 						FROM "mshop_price_list" AS mprili
 						:joins
 						WHERE :cond
-						GROUP BY mprili."id", mprili."parentid", mprili."siteid", mprili."typeid",
+						GROUP BY mprili."id", mprili."parentid", mprili."siteid", mprili."type",
 							mprili."domain", mprili."refid", mprili."start", mprili."end",
 							mprili."config", mprili."pos", mprili."status", mprili."mtime",
 							mprili."editor", mprili."ctime" /*-columns*/ , :columns /*columns-*/
@@ -257,7 +257,7 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_price" (
-						"typeid", "currencyid", "domain", "label",
+						"type", "currencyid", "domain", "label",
 						"quantity", "value", "costs", "rebate", "taxrate",
 						"status", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
@@ -268,7 +268,7 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_price"
-					SET "typeid" = ?, "currencyid" = ?, "domain" = ?, "label" = ?,
+					SET "type" = ?, "currencyid" = ?, "domain" = ?, "label" = ?,
 						"quantity" = ?, "value" = ?, "costs" = ?, "rebate" = ?,
 						"taxrate" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
@@ -277,7 +277,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT mpri."id" AS "price.id", mpri."siteid" AS "price.siteid",
-						mpri."typeid" AS "price.typeid", mpri."currencyid" AS "price.currencyid",
+						mpri."type" AS "price.type", mpri."currencyid" AS "price.currencyid",
 						mpri."domain" AS "price.domain", mpri."label" AS "price.label",
 						mpri."quantity" AS "price.quantity", mpri."value" AS "price.value",
 						mpri."costs" AS "price.costs", mpri."rebate" AS "price.rebate",
@@ -287,7 +287,7 @@ return array(
 					FROM "mshop_price" AS mpri
 					:joins
 					WHERE :cond
-					GROUP BY mpri."id", mpri."siteid", mpri."typeid", mpri."currencyid",
+					GROUP BY mpri."id", mpri."siteid", mpri."type", mpri."currencyid",
 						mpri."domain", mpri."label", mpri."quantity", mpri."value",
 						mpri."costs", mpri."rebate", mpri."taxrate", mpri."status",
 						mpri."mtime", mpri."editor", mpri."ctime" /*-columns*/ , :columns /*columns-*/

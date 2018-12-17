@@ -100,7 +100,7 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_service_list" (
-							"parentid", "typeid", "domain", "refid", "start", "end",
+							"parentid", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -110,7 +110,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_service_list"
-						SET "parentid"=?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid"=?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -126,7 +126,7 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_service_list"
 							SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ? AND "pos" >= ?
 					'
 				),
@@ -134,14 +134,14 @@ return array(
 					'ansi' => '
 						SELECT MAX( "pos" ) AS pos
 						FROM "mshop_service_list"
-						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
+						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
 							AND "domain" = ?
 					'
 				),
 				'search' => array(
 					'ansi' => '
 						SELECT mserli."id" AS "service.lists.id", mserli."parentid" AS "service.lists.parentid",
-							mserli."siteid" AS "service.lists.siteid", mserli."typeid" AS "service.lists.typeid",
+							mserli."siteid" AS "service.lists.siteid", mserli."type" AS "service.lists.type",
 							mserli."domain" AS "service.lists.domain", mserli."refid" AS "service.lists.refid",
 							mserli."start" AS "service.lists.datestart", mserli."end" AS "service.lists.dateend",
 							mserli."config" AS "service.lists.config", mserli."pos" AS "service.lists.position",
@@ -150,7 +150,7 @@ return array(
 						FROM "mshop_service_list" AS mserli
 						:joins
 						WHERE :cond
-						GROUP BY mserli."id", mserli."parentid", mserli."siteid", mserli."typeid",
+						GROUP BY mserli."id", mserli."parentid", mserli."siteid", mserli."type",
 							mserli."domain", mserli."refid", mserli."start", mserli."end",
 							mserli."config", mserli."pos", mserli."status", mserli."mtime",
 							mserli."editor", mserli."ctime" /*-columns*/ , :columns /*columns-*/
@@ -257,7 +257,7 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_service" (
-						"pos", "typeid", "code", "label", "provider", "start", "end",
+						"pos", "type", "code", "label", "provider", "start", "end",
 						"config", "status", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -267,7 +267,7 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_service"
-					SET "pos" = ?, "typeid" = ?, "code" = ?, "label" = ?, "provider" = ?,
+					SET "pos" = ?, "type" = ?, "code" = ?, "label" = ?, "provider" = ?,
 						"start" = ?, "end" = ?, "config" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
@@ -275,7 +275,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT mser."id" AS "service.id", mser."siteid" AS "service.siteid",
-						mser."pos" AS "service.position", mser."typeid" AS "service.typeid",
+						mser."pos" AS "service.position", mser."type" AS "service.type",
 						mser."code" AS "service.code", mser."label" AS "service.label",
 						mser."provider" AS "service.provider", mser."config" AS "service.config",
 						mser."start" AS "service.datestart", mser."end" AS "service.dateend",
@@ -284,7 +284,7 @@ return array(
 					FROM "mshop_service" AS mser
 					:joins
 					WHERE :cond
-					GROUP BY mser."id", mser."siteid", mser."pos", mser."typeid",
+					GROUP BY mser."id", mser."siteid", mser."pos", mser."type",
 						mser."code", mser."label", mser."provider", mser."config",
 						mser."start", mser."end", mser."status",
 						mser."mtime", mser."ctime", mser."editor"

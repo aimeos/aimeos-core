@@ -51,7 +51,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertContains( 'customer/address', $result );
 		$this->assertContains( 'customer/group', $result );
 		$this->assertContains( 'customer/lists', $result );
-		$this->assertContains( 'customer/lists/type', $result );
 	}
 
 
@@ -81,7 +80,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'customer.code', 'UTC001' ),
 			$search->compare( '==', 'customer.editor', $this->editor )

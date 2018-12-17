@@ -25,7 +25,6 @@ class Standard
 		'customer.property.type.id' => array(
 			'code' => 'customer.property.type.id',
 			'internalcode' => 'mcusprty."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_customer_property_type" AS mcusprty ON ( mcuspr."typeid" = mcusprty."id" )' ),
 			'label' => 'Property type ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

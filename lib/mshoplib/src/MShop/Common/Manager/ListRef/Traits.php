@@ -98,8 +98,7 @@ trait Traits
 				{
 					$list[] = $search->combine( '&&', [
 						$search->compare( '==', $prefix . '.lists.domain', $key ),
-						$search->compare( '==', $prefix . '.lists.type.domain', $key ),
-						$search->compare( '==', $prefix . '.lists.type.code', $domain ),
+						$search->compare( '==', $prefix . '.lists.type', $domain ),
 					] );
 				}
 				else

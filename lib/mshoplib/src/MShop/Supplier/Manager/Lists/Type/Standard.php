@@ -24,7 +24,6 @@ class Standard
 		'supplier.lists.type.id' => array(
 			'code' => 'supplier.lists.type.id',
 			'internalcode' => 'msuplity."id"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_supplier_list_type" AS msuplity ON ( msupli."typeid" = msuplity."id" )' ),
 			'label' => 'List type ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
