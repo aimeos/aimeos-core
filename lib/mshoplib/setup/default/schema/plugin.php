@@ -38,7 +38,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'typeid', 'integer', [] );
+			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'provider', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
@@ -49,15 +49,11 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msplu_id' );
-			$table->addUniqueIndex( array( 'siteid', 'typeid', 'provider' ), 'unq_msplu_sid_tid_prov' );
+			$table->addUniqueIndex( array( 'siteid', 'type', 'provider' ), 'unq_msplu_sid_ty_prov' );
 			$table->addIndex( array( 'siteid', 'provider' ), 'idx_msplu_sid_prov' );
 			$table->addIndex( array( 'siteid', 'status' ), 'idx_msplu_sid_status' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_msplu_sid_label' );
 			$table->addIndex( array( 'siteid', 'pos' ), 'idx_msplu_sid_pos' );
-			$table->addIndex( array( 'typeid' ), 'fk_msplu_typeid' );
-
-			$table->addForeignKeyConstraint( 'mshop_plugin_type', array( 'typeid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msplu_typeid' );
 
 			return $schema;
 		},

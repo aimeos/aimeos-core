@@ -16,7 +16,7 @@ namespace Aimeos\MW\Setup\Task;
 class PluginAddLabel extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
-		'ALTER TABLE "mshop_plugin" ADD "label" VARCHAR(255) NOT NULL AFTER "typeid"',
+		'ALTER TABLE "mshop_plugin" ADD "label" VARCHAR(255) NOT NULL AFTER "siteid"',
 		'UPDATE "mshop_plugin" SET "label" = "provider" WHERE "label" = \'\'',
 	);
 
@@ -27,7 +27,7 @@ class PluginAddLabel extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'PluginRenameDomainToTypeid', 'TablesCreateMShop' );
+		return array( 'TablesCreateMShop' );
 	}
 
 

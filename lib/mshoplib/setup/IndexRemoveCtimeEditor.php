@@ -10,7 +10,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Adds typeid column to list tables and migrates data in type column.
+ * Remove ctime and editor columns from index tables
  */
 class IndexRemoveCtimeEditor extends \Aimeos\MW\Setup\Task\Base
 {

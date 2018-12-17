@@ -38,7 +38,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'typeid', 'integer', [] );
+			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'productcode', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'stocklevel', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'backdate', 'datetime', array( 'notnull' => false ) );
@@ -47,13 +47,9 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mssto_id' );
-			$table->addUniqueIndex( array( 'siteid', 'productcode', 'typeid' ), 'unq_mssto_sid_pcode_tid' );
+			$table->addUniqueIndex( array( 'siteid', 'productcode', 'type' ), 'unq_mssto_sid_pcode_ty' );
 			$table->addIndex( array( 'siteid', 'stocklevel' ), 'idx_mssto_sid_stocklevel' );
 			$table->addIndex( array( 'siteid', 'backdate' ), 'idx_mssto_sid_backdate' );
-			$table->addIndex( array( 'typeid' ), 'fk_mssto_typeid' );
-
-			$table->addForeignKeyConstraint( 'mshop_stock_type', array( 'typeid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mssto_typeid' );
 
 			return $schema;
 		},

@@ -39,7 +39,7 @@ class TagMoveProductTag extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'ProductTagLangidNull', 'ProductTagTypeidAddConstraint' );
+		return [];
 	}
 
 

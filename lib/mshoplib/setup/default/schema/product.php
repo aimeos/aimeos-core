@@ -38,7 +38,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'typeid', 'integer', [] );
+			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
@@ -57,10 +57,6 @@ return array(
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_mspro_sid_label' );
 			$table->addIndex( array( 'siteid', 'start' ), 'idx_mspro_sid_start' );
 			$table->addIndex( array( 'siteid', 'end' ), 'idx_mspro_sid_end' );
-			$table->addIndex( array( 'typeid' ), 'fk_mspro_typeid' );
-
-			$table->addForeignKeyConstraint( 'mshop_product_type', array( 'typeid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mspro_typeid' );
 
 			return $schema;
 		},
@@ -96,7 +92,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', [] );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'typeid', 'integer', [] );
+			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'refid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
@@ -109,17 +105,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msproli_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'refid', 'typeid', 'parentid' ), 'unq_msproli_sid_dm_rid_tid_pid' );
-			$table->addIndex( array( 'siteid', 'status', 'start', 'end' ), 'idx_msproli_sid_stat_start_end' );
-			$table->addIndex( array( 'parentid', 'siteid', 'domain', 'refid', 'typeid' ), 'idx_msproli_pid_sid_dm_rid_tid' );
-			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_msproli_pid_sid_start' );
-			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_msproli_pid_sid_end' );
-			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_msproli_pid_sid_pos' );
-			$table->addIndex( array( 'typeid' ), 'fk_msproli_typeid' );
+			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_msproli_pid_sid_dm_ty_rid' );
 			$table->addIndex( array( 'parentid' ), 'fk_msproli_pid' );
-
-			$table->addForeignKeyConstraint( 'mshop_product_list_type', array( 'typeid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msproli_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product', array( 'parentid' ), array( 'id' ),
 					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msproli_pid' );
@@ -158,7 +145,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'parentid', 'integer', [] );
-			$table->addColumn( 'typeid', 'integer', [] );
+			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'value', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
@@ -166,17 +153,11 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mspropr_id' );
-			$table->addUniqueIndex( array( 'parentid', 'siteid', 'typeid', 'langid', 'value' ), 'unq_mspropr_sid_tid_lid_value' );
-			$table->addIndex( array( 'siteid', 'langid' ), 'idx_mspropr_sid_langid' );
-			$table->addIndex( array( 'siteid', 'value' ), 'idx_mspropr_sid_value' );
-			$table->addIndex( array( 'typeid' ), 'fk_mspropr_typeid' );
+			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_mspropr_sid_ty_lid_value' );
 			$table->addIndex( array( 'parentid' ), 'fk_mspropr_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mspropr_pid' );
-
-			$table->addForeignKeyConstraint( 'mshop_product_property_type', array( 'typeid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mspropr_typeid' );
 
 			return $schema;
 		},

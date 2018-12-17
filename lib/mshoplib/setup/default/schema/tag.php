@@ -38,7 +38,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'typeid', 'integer', [] );
+			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
@@ -47,13 +47,9 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mstag_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'typeid', 'langid', 'label' ), 'unq_mstag_sid_dom_tid_lid_lab' );
+			$table->addUniqueIndex( array( 'siteid', 'domain', 'type', 'langid', 'label' ), 'unq_mstag_sid_dom_ty_lid_lab' );
 			$table->addIndex( array( 'siteid', 'domain', 'langid' ), 'idx_mstag_sid_dom_langid' );
 			$table->addIndex( array( 'siteid', 'domain', 'label' ), 'idx_mstag_sid_dom_label' );
-			$table->addIndex( array( 'typeid' ), 'fk_mstag_typeid' );
-
-			$table->addForeignKeyConstraint( 'mshop_tag_type', array( 'typeid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mstag_typeid' );
 
 			return $schema;
 		},

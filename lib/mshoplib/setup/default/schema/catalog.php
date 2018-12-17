@@ -67,7 +67,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', [] );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'typeid', 'integer', [] );
+			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'refid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
@@ -80,17 +80,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscatli_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'refid', 'typeid', 'parentid' ), 'unq_mscatli_sid_dm_rid_tid_pid' );
-			$table->addIndex( array( 'siteid', 'status', 'start', 'end' ), 'idx_mscatli_sid_stat_start_end' );
-			$table->addIndex( array( 'parentid', 'siteid', 'domain', 'refid', 'typeid' ), 'idx_mscatli_pid_sid_dm_rid_tid' );
-			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_mscatli_pid_sid_start' );
-			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_mscatli_pid_sid_end' );
-			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_mscatli_pid_sid_pos' );
-			$table->addIndex( array( 'typeid' ), 'fk_mscatli_typeid' );
+			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_mscatli_pid_sid_dm_ty_rid' );
 			$table->addIndex( array( 'parentid' ), 'fk_mscatli_pid' );
-
-			$table->addForeignKeyConstraint( 'mshop_catalog_list_type', array( 'typeid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscatli_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_catalog', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscatli_pid' );

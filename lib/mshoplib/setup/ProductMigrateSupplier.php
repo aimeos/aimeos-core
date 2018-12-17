@@ -15,8 +15,8 @@ namespace Aimeos\MW\Setup\Task;
 class ProductMigrateSupplier extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
-		'INSERT INTO "mshop_product_list" ("parentid", "siteid", "typeid", "domain", "refid", "config", "status", "ctime", "mtime", "editor")
-		 SELECT p."id", p."siteid", (SELECT t."id" FROM "mshop_product_list_type" t WHERE t."siteid" = p."siteid" AND t."domain" = \'supplier\' AND t."code" = \'default\'), \'supplier\', s."id", \'[]\', 1, NOW(), NOW(), \'setup:ProductMigrateSupplier\'
+		'INSERT INTO "mshop_product_list" ("parentid", "siteid", "type", "domain", "refid", "config", "status", "ctime", "mtime", "editor")
+		 SELECT p."id", p."siteid", \'default\', \'supplier\', s."id", \'[]\', 1, NOW(), NOW(), \'setup:ProductMigrateSupplier\'
 		 FROM "mshop_supplier" s JOIN "mshop_product" p ON p."suppliercode" = s."code"',
 		'ALTER TABLE "mshop_product" DROP INDEX "idx_mspro_sid_supplier"',
 		'ALTER TABLE "mshop_product" DROP COLUMN "suppliercode"'
