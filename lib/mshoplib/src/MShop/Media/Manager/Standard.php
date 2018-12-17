@@ -42,12 +42,11 @@ class Standard
 			'public' => false,
 		),
 		'media.type' => array(
-			'label' => 'Type ID',
+			'label' => 'Type',
 			'code' => 'media.type',
 			'internalcode' => 'mmed."type"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.label' => array(
 			'label' => 'Label',
