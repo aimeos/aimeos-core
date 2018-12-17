@@ -118,42 +118,16 @@ class Standard
 
 
 	/**
-	 * Returns the localized name of the type
-	 *
-	 * @return string|null Localized name of the type
-	 */
-	public function getTypeName()
-	{
-		if( isset( $this->values[$this->prefix . 'typename'] ) ) {
-			return (string) $this->values[$this->prefix . 'typename'];
-		}
-	}
-
-
-	/**
-	 * Returns the type id of the property item
-	 *
-	 * @return string|null Type of the property item
-	 */
-	public function getTypeId()
-	{
-		if( isset( $this->values[$this->prefix . 'typeid'] ) ) {
-			return (string) $this->values[$this->prefix . 'typeid'];
-		}
-	}
-
-
-	/**
 	 * Sets the new type of the property item
 	 *
-	 * @param string $id Type of the property item
+	 * @param string $type Type of the property item
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface Common property item for chaining method calls
 	 */
-	public function setTypeId( $id )
+	public function setType( $type )
 	{
-		if( (string) $id !== $this->getTypeId() )
+		if( (string) $type !== $this->getType() )
 		{
-			$this->values[$this->prefix . 'typeid'] = (string) $id;
+			$this->values[$this->prefix . 'type'] = (string) $type;
 			$this->setModified();
 		}
 
@@ -228,16 +202,15 @@ class Standard
 	{
 		$unknown = [];
 		$list = parent::fromArray( $list );
-		unset( $list[$this->prefix . 'type'], $list[$this->prefix . 'typename'] );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
 				case $this->prefix . 'parentid': $this->setParentId( $value ); break;
-				case $this->prefix . 'typeid': $this->setTypeId( $value ); break;
 				case $this->prefix . 'languageid': $this->setLanguageId( $value ); break;
 				case $this->prefix . 'value': $this->setValue( $value ); break;
+				case $this->prefix . 'type': $this->setType( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -256,15 +229,12 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list[$this->prefix . 'typename'] = $this->getTypeName();
 		$list[$this->prefix . 'languageid'] = $this->getLanguageId();
 		$list[$this->prefix . 'value'] = $this->getValue();
 		$list[$this->prefix . 'type'] = $this->getType();
 
-		if( $private === true )
-		{
+		if( $private === true ) {
 			$list[$this->prefix . 'parentid'] = $this->getParentId();
-			$list[$this->prefix . 'typeid'] = $this->getTypeId();
 		}
 
 		return $list;

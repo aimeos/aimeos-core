@@ -20,9 +20,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->values = array(
 			'price.id' => 199,
 			'price.siteid' => 99,
-			'price.typeid' => 2,
 			'price.type' => 'default',
-			'price.typename' => 'Default',
 			'price.currencyid' => 'EUR',
 			'price.domain' => 'product',
 			'price.label' => 'Price label',
@@ -138,20 +136,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'default', $this->object->getType() );
 	}
 
-	public function testGetTypeName()
+	public function testSetType()
 	{
-		$this->assertEquals( 'Default', $this->object->getTypeName() );
-	}
-
-	public function testGetTypeId()
-	{
-		$this->assertEquals( 2, $this->object->getTypeId() );
-	}
-
-	public function testSetTypeId()
-	{
-		$this->object->setTypeId( 99 );
-		$this->assertEquals( 99, $this->object->getTypeId() );
+		$this->object->setType( 'test' );
+		$this->assertEquals( 'test', $this->object->getType() );
 
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -375,9 +363,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = array(
 			'price.id' => 1,
-			'price.typeid' => 2,
 			'price.type' => 'test',
-			'price.typename' => 'Test',
 			'price.label' => 'test item',
 			'price.currencyid' => 'EUR',
 			'price.quantity' => 3,
@@ -395,7 +381,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['price.id'], $item->getId() );
-		$this->assertEquals( $list['price.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['price.type'], $item->getType() );
 		$this->assertEquals( $list['price.label'], $item->getLabel() );
 		$this->assertEquals( $list['price.currencyid'], $item->getCurrencyId() );
 		$this->assertEquals( $list['price.quantity'], $item->getQuantity() );
@@ -407,8 +393,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['price.taxflag'], $item->getTaxFlag() );
 		$this->assertEquals( $list['price.status'], $item->getStatus() );
 		$this->assertNull( $item->getSiteId() );
-		$this->assertNull( $item->getTypeName() );
-		$this->assertNull( $item->getType() );
 	}
 
 
@@ -420,8 +404,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['price.id'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['price.type'] );
-		$this->assertEquals( $this->object->getTypeId(), $arrayObject['price.typeid'] );
-		$this->assertEquals( $this->object->getTypeName(), $arrayObject['price.typename'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['price.siteid'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['price.label'] );
 		$this->assertEquals( $this->object->getDomain(), $arrayObject['price.domain'] );

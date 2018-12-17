@@ -21,9 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->values = array(
 			'product.id' => 1,
 			'product.siteid' => 99,
-			'product.typeid' => 2,
 			'product.type' => 'test',
-			'product.typename' => 'Test',
 			'product.status' => 0,
 			'product.code' => 'TEST',
 			'product.label' => 'testproduct',
@@ -130,33 +128,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetTypeId()
-	{
-		$this->assertEquals( 2, $this->object->getTypeId() );
-	}
-
-
-	public function testSetTypeId()
-	{
-		$this->assertFalse( $this->object->isModified() );
-
-		$return = $this->object->setTypeId( 1 );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
-		$this->assertEquals( 1, $this->object->getTypeId() );
-		$this->assertTrue( $this->object->isModified() );
-	}
-
-
 	public function testGetType()
 	{
 		$this->assertEquals( 'test', $this->object->getType() );
 	}
 
 
-	public function testGetTypeName()
+	public function testSetType()
 	{
-		$this->assertEquals( 'Test', $this->object->getTypeName() );
+		$this->assertFalse( $this->object->isModified() );
+
+		$return = $this->object->setType( 'default' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
+		$this->assertEquals( 'default', $this->object->getType() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -343,9 +329,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = array(
 			'product.id' => 1,
-			'product.typeid' => 2,
 			'product.type' => 'test',
-			'product.typename' => 'Test',
 			'product.label' => 'test item',
 			'product.code' => 'test',
 			'product.datestart' => '2000-01-01 00:00:00',
@@ -362,15 +346,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['product.id'], $item->getId() );
 		$this->assertEquals( $list['product.code'], $item->getCode() );
 		$this->assertEquals( $list['product.label'], $item->getLabel() );
-		$this->assertEquals( $list['product.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['product.type'], $item->getType() );
 		$this->assertEquals( $list['product.datestart'], $item->getDateStart() );
 		$this->assertEquals( $list['product.dateend'], $item->getDateEnd() );
 		$this->assertEquals( $list['product.config'], $item->getConfig() );
 		$this->assertEquals( $list['product.status'], $item->getStatus() );
 		$this->assertEquals( $list['product.target'], $item->getTarget() );
 		$this->assertNull( $item->getSiteId() );
-		$this->assertNull( $item->getTypeName() );
-		$this->assertNull( $item->getType() );
 	}
 
 
@@ -382,8 +364,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getId(), $arrayObject['product.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['product.siteid'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['product.code'] );
-		$this->assertEquals( $this->object->getTypeName(), $arrayObject['product.typename'] );
-		$this->assertEquals( $this->object->getTypeId(), $arrayObject['product.typeid'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['product.type'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['product.label'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['product.status'] );

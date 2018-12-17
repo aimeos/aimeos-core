@@ -52,42 +52,16 @@ class Standard
 
 
 	/**
-	 * Returns the localized name of the type
-	 *
-	 * @return string|null Localized name of the type
-	 */
-	public function getTypeName()
-	{
-		if( isset( $this->values['stock.typename'] ) ) {
-			return (string) $this->values['stock.typename'];
-		}
-	}
-
-
-	/**
-	 * Returns the type id of the product stock item
-	 *
-	 * @return string|null Type of the product stock item
-	 */
-	public function getTypeId()
-	{
-		if( isset( $this->values['stock.typeid'] ) ) {
-			return (string) $this->values['stock.typeid'];
-		}
-	}
-
-
-	/**
 	 * Sets the new type of the product stock item
 	 *
-	 * @param string $id Type of the product stock item
+	 * @param string $type Type of the product stock item
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
-	public function setTypeId( $id )
+	public function setType( $type )
 	{
-		if( (string) $id !== $this->getTypeId() )
+		if( (string) $type !== $this->getType() )
 		{
-			$this->values['stock.typeid'] = (string) $id;
+			$this->values['stock.type'] = (string) $type;
 			$this->setModified();
 		}
 
@@ -223,7 +197,7 @@ class Standard
 				case 'stock.productcode': $this->setProductCode( $value ); break;
 				case 'stock.stocklevel': $this->setStocklevel( $value ); break;
 				case 'stock.dateback': $this->setDateBack( $value ); break;
-				case 'stock.typeid': $this->setTypeId( $value ); break;
+				case 'stock.type': $this->setType( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -245,12 +219,7 @@ class Standard
 		$list['stock.productcode'] = $this->getProductCode();
 		$list['stock.stocklevel'] = $this->getStocklevel();
 		$list['stock.dateback'] = $this->getDateBack();
-		$list['stock.typename'] = $this->getTypeName();
 		$list['stock.type'] = $this->getType();
-
-		if( $private === true ) {
-			$list['stock.typeid'] = $this->getTypeId();
-		}
 
 		return $list;
 	}

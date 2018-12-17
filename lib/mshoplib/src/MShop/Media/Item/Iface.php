@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Media\Item;
 interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Domain\Iface,
 		\Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\PropertyRef\Iface,
-		\Aimeos\MShop\Common\Item\Status\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
+		\Aimeos\MShop\Common\Item\Status\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
 	 * Returns the ISO language code.

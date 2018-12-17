@@ -31,7 +31,7 @@ class Standard
 	/**
 	 * Initializes the plugin object
 	 *
-	 * @param array $values Associative array of id, typeid, name, config and status
+	 * @param array $values Associative array of id, type, name, config and status
 	 */
 	public function __construct( array $values = [] )
 	{
@@ -55,42 +55,16 @@ class Standard
 
 
 	/**
-	 * Returns the localized name of the type
+	 * Sets the new type of the plugin item.
 	 *
-	 * @return string|null Localized name of the type
-	 */
-	public function getTypeName()
-	{
-		if( isset( $this->values['plugin.typename'] ) ) {
-			return (string) $this->values['plugin.typename'];
-		}
-	}
-
-
-	/**
-	 * Returns the type ID of the plugin.
-	 *
-	 * @return string|null Plugin type ID
-	 */
-	public function getTypeId()
-	{
-		if( isset( $this->values['plugin.typeid'] ) ) {
-			return (string) $this->values['plugin.typeid'];
-		}
-	}
-
-
-	/**
-	 * Sets the new type ID of the plugin item.
-	 *
-	 * @param string $typeid New plugin type ID
+	 * @param string $type New plugin type
 	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
-	public function setTypeId( $typeid )
+	public function setType( $type )
 	{
-		if( (string) $typeid !== $this->getTypeId() )
+		if( (string) $type !== $this->getType() )
 		{
-			$this->values['plugin.typeid'] = (string) $typeid;
+			$this->values['plugin.type'] = (string) $type;
 			$this->setModified();
 		}
 
@@ -297,13 +271,12 @@ class Standard
 	{
 		$unknown = [];
 		$list = parent::fromArray( $list );
-		unset( $list['plugin.type'], $list['plugin.typename'] );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'plugin.typeid': $this->setTypeId( $value ); break;
+				case 'plugin.type': $this->setType( $value ); break;
 				case 'plugin.label': $this->setLabel( $value ); break;
 				case 'plugin.provider': $this->setProvider( $value ); break;
 				case 'plugin.config': $this->setConfig( $value ); break;
@@ -328,16 +301,11 @@ class Standard
 		$list = parent::toArray( $private );
 
 		$list['plugin.type'] = $this->getType();
-		$list['plugin.typename'] = $this->getTypeName();
 		$list['plugin.label'] = $this->getLabel();
 		$list['plugin.provider'] = $this->getProvider();
 		$list['plugin.config'] = $this->getConfig();
 		$list['plugin.status'] = $this->getStatus();
 		$list['plugin.position'] = $this->getPosition();
-
-		if( $private === true ) {
-			$list['plugin.typeid'] = $this->getTypeId();
-		}
 
 		return $list;
 	}

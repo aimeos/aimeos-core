@@ -21,7 +21,7 @@ interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Config\Iface,
 		\Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Position\Iface,
 		\Aimeos\MShop\Common\Item\Status\Iface, \Aimeos\MShop\Common\Item\Time\Iface,
-		\Aimeos\MShop\Common\Item\Typeid\Iface
+		\Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
 	 * Returns the code of the service item.

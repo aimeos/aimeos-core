@@ -21,10 +21,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->values = array(
 			'plugin.id' => 123,
 			'plugin.siteid' => 99,
-			'plugin.typeid' => 2,
 			'plugin.label' => 'unitTestPlugin',
 			'plugin.type' => 'order',
-			'plugin.typename' => 'Order',
 			'plugin.provider' => 'provider',
 			'plugin.config' => array( 'limit' => '40' ),
 			'plugin.position' => 0,
@@ -72,24 +70,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetTypeName()
+	public function testSetType()
 	{
-		$this->assertEquals( 'Order', $this->object->getTypeName() );
-	}
-
-
-	public function testGetTypeId()
-	{
-		$this->assertEquals( 2, $this->object->getTypeId() );
-	}
-
-
-	public function testSetTypeId()
-	{
-		$return = $this->object->setTypeId( 99 );
+		$return = $this->object->setType( 'test' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Item\Iface::class, $return );
-		$this->assertEquals( 99, $this->object->getTypeId() );
+		$this->assertEquals( 'test', $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -217,9 +203,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = array(
 			'plugin.id' => 1,
-			'plugin.typeid' => 2,
 			'plugin.type' => 'test',
-			'plugin.typename' => 'Test',
 			'plugin.label' => 'test item',
 			'plugin.provider' => 'FreeShipping',
 			'plugin.config' => array( 'test' ),
@@ -231,14 +215,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['plugin.id'], $item->getId() );
-		$this->assertEquals( $list['plugin.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['plugin.type'], $item->getType() );
 		$this->assertEquals( $list['plugin.label'], $item->getLabel() );
 		$this->assertEquals( $list['plugin.provider'], $item->getProvider() );
 		$this->assertEquals( $list['plugin.config'], $item->getConfig() );
 		$this->assertEquals( $list['plugin.status'], $item->getStatus() );
 		$this->assertNull( $item->getSiteId() );
-		$this->assertNull( $item->getTypeName() );
-		$this->assertNull( $item->getType() );
 	}
 
 
@@ -251,8 +233,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getId(), $arrayObject['plugin.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['plugin.siteid'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['plugin.type'] );
-		$this->assertEquals( $this->object->getTypeId(), $arrayObject['plugin.typeid'] );
-		$this->assertEquals( $this->object->getTypeName(), $arrayObject['plugin.typename'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['plugin.label'] );
 		$this->assertEquals( $this->object->getProvider(), $arrayObject['plugin.provider'] );
 		$this->assertEquals( $this->object->getConfig(), $arrayObject['plugin.config'] );

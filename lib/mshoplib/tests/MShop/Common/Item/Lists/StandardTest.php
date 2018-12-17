@@ -28,9 +28,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.config' => array( 'cnt' => '40' ),
 			'common.lists.position' => 7,
 			'common.lists.status' => 1,
-			'common.lists.typeid' => 8,
 			'common.lists.type' => 'test',
-			'common.lists.typename' => 'test name',
 			'common.lists.mtime' => '2011-01-01 00:00:02',
 			'common.lists.ctime' => '2011-01-01 00:00:01',
 			'common.lists.editor' => 'unitTestUser',
@@ -165,17 +163,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
-	public function testGetTypeId()
+	public function testGetType()
 	{
-		$this->assertEquals( 8, $this->object->getTypeId() );
+		$this->assertEquals( 'test', $this->object->getType() );
 	}
 
-	public function testSetTypeId()
+	public function testSetType()
 	{
-		$return = $this->object->setTypeId( 18 );
+		$return = $this->object->setType( 'test2' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Lists\Iface::class, $return );
-		$this->assertEquals( 18, $this->object->getTypeId() );
+		$this->assertEquals( 'test2', $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -264,7 +262,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$list = array(
 			'common.lists.id' => 8,
 			'common.lists.parentid' => 2,
-			'common.lists.typeid' => 8,
+			'common.lists.type' => 'default',
 			'common.lists.domain' => 'testDomain',
 			'common.lists.refid' => 'unitId',
 			'common.lists.config' => array( 'cnt' => '40' ),
@@ -278,7 +276,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $list['common.lists.id'], $item->getId() );
 		$this->assertEquals( $list['common.lists.parentid'], $item->getParentId() );
-		$this->assertEquals( $list['common.lists.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['common.lists.type'], $item->getType() );
 		$this->assertEquals( $list['common.lists.domain'], $item->getDomain() );
 		$this->assertEquals( $list['common.lists.refid'], $item->getRefId() );
 		$this->assertEquals( $list['common.lists.config'], $item->getConfig() );
@@ -293,7 +291,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.id' => '8',
 			'common.lists.siteid' => 99,
 			'common.lists.parentid' => 2,
-			'common.lists.typeid' => 8,
 			'common.lists.domain' => 'testDomain',
 			'common.lists.refid' => 'unitId',
 			'common.lists.datestart' => '2005-01-01 00:00:00',
@@ -304,7 +301,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.ctime' => '2011-01-01 00:00:01',
 			'common.lists.mtime' => '2011-01-01 00:00:02',
 			'common.lists.editor' => 'unitTestUser',
-			'common.lists.typename' => 'test name',
 			'common.lists.type' => 'test',
 		);
 

@@ -21,10 +21,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.property.id' => 987,
 			'common.property.parentid' => 11,
 			'common.property.siteid' => 99,
-			'common.property.typeid' => 44,
 			'common.property.languageid' => 'en',
 			'common.property.type' => 'width',
-			'common.property.typename' => 'Width',
 			'common.property.value' => '30.0',
 			'common.property.mtime' => '2011-01-01 00:00:02',
 			'common.property.ctime' => '2011-01-01 00:00:01',
@@ -89,28 +87,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
-	public function testGetTypeId()
-	{
-		$this->assertEquals( 44, $this->object->getTypeId() );
-	}
-
-	public function testSetTypeId()
-	{
-		$return = $this->object->setTypeId(33);
-
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $return );
-		$this->assertEquals( 33, $this->object->getTypeId() );
-		$this->assertTrue( $this->object->isModified() );
-	}
-
 	public function testGetType()
 	{
 		$this->assertEquals( 'width', $this->object->getType() );
 	}
 
-	public function testGetTypeName()
+	public function testSetType()
 	{
-		$this->assertEquals( 'Width', $this->object->getTypeName() );
+		$return = $this->object->setType( 'height' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $return );
+		$this->assertEquals( 'height', $this->object->getType() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetValue()
@@ -155,9 +143,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = array(
 			'common.property.parentid' => 1,
-			'common.property.typeid' => 2,
+			'common.property.type' => 'default',
 			'common.property.type' => 'test',
-			'common.property.typename' => 'Test',
 			'common.property.languageid' => 'de',
 			'common.property.value' => 'value',
 		);
@@ -167,12 +154,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals([], $unknown);
 
 		$this->assertEquals($list['common.property.parentid'], $item->getParentId());
-		$this->assertEquals($list['common.property.typeid'], $item->getTypeId());
 		$this->assertEquals($list['common.property.languageid'], $item->getLanguageId());
 		$this->assertEquals($list['common.property.value'], $item->getValue());
+		$this->assertEquals($list['common.property.type'], $item->getType());
 		$this->assertNull( $item->getSiteId() );
-		$this->assertNull( $item->getTypeName() );
-		$this->assertNull( $item->getType() );
 	}
 
 
@@ -184,8 +169,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getId(), $arrayObject['common.property.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['common.property.siteid'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['common.property.type'] );
-		$this->assertEquals( $this->object->getTypeId(), $arrayObject['common.property.typeid'] );
-		$this->assertEquals( $this->object->getTypeName(), $arrayObject['common.property.typename'] );
+		$this->assertEquals( $this->object->getType(), $arrayObject['common.property.type'] );
 		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['common.property.languageid'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['common.property.type'] );
 		$this->assertEquals( $this->object->getValue(), $arrayObject['common.property.value'] );

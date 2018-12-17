@@ -92,42 +92,16 @@ class Standard
 
 
 	/**
-	 * Returns the localized name of the type
+	 * Sets the type of the service item.
 	 *
-	 * @return string|null Localized name of the type
-	 */
-	public function getTypeName()
-	{
-		if( isset( $this->values['service.typename'] ) ) {
-			return (string) $this->values['service.typename'];
-		}
-	}
-
-
-	/**
-	 * Returns the type ID of the service item if available.
-	 *
-	 * @return string|null Service item type ID
-	 */
-	public function getTypeId()
-	{
-		if( isset( $this->values['service.typeid'] ) ) {
-			return (string) $this->values['service.typeid'];
-		}
-	}
-
-
-	/**
-	 * Sets the type ID of the service item.
-	 *
-	 * @param string Type ID of the service item
+	 * @param string $type Type of the service item
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function setTypeId( $typeId )
+	public function setType( $type )
 	{
-		if( (string) $typeId !== $this->getTypeId() )
+		if( (string) $type !== $this->getType() )
 		{
-			$this->values['service.typeid'] = (string) $typeId;
+			$this->values['service.type'] = (string) $type;
 			$this->setModified();
 		}
 
@@ -397,13 +371,12 @@ class Standard
 	{
 		$unknown = [];
 		$list = parent::fromArray( $list );
-		unset( $list['service.type'], $list['service.typename'] );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'service.typeid': $this->setTypeId( $value ); break;
+				case 'service.type': $this->setType( $value ); break;
 				case 'service.code': $this->setCode( $value ); break;
 				case 'service.label': $this->setLabel( $value ); break;
 				case 'service.provider': $this->setProvider( $value ); break;
@@ -430,7 +403,6 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['service.typename'] = $this->getTypeName();
 		$list['service.type'] = $this->getType();
 		$list['service.code'] = $this->getCode();
 		$list['service.label'] = $this->getLabel();
@@ -440,10 +412,6 @@ class Standard
 		$list['service.dateend'] = $this->getDateEnd();
 		$list['service.config'] = $this->getConfig();
 		$list['service.status'] = $this->getStatus();
-
-		if( $private === true ) {
-			$list['service.typeid'] = $this->getTypeId();
-		}
 
 		return $list;
 	}

@@ -65,37 +65,6 @@ class Standard
 
 
 	/**
-	 * Returns the type ID of the product item.
-	 *
-	 * @return string|null Type ID of the product item
-	 */
-	public function getTypeId()
-	{
-		if( isset( $this->values['product.typeid'] ) ) {
-			return (string) $this->values['product.typeid'];
-		}
-	}
-
-
-	/**
-	 * Sets the new type ID of the product item.
-	 *
-	 * @param string $typeid New type ID of the product item
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
-	 */
-	public function setTypeId( $typeid )
-	{
-		if( (string) $typeid !== $this->getTypeId() )
-		{
-			$this->values['product.typeid'] = (string) $typeid;
-			$this->setModified();
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the type of the product item.
 	 *
 	 * @return string|null Type of the product item
@@ -109,15 +78,20 @@ class Standard
 
 
 	/**
-	 * Returns the localized name of the type
+	 * Sets the new type of the product item.
 	 *
-	 * @return string|null Localized name of the type
+	 * @param string $type New type of the product item
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function getTypeName()
+	public function setType( $type )
 	{
-		if( isset( $this->values['product.typename'] ) ) {
-			return (string) $this->values['product.typename'];
+		if( (string) $type !== $this->getType() )
+		{
+			$this->values['product.type'] = (string) $type;
+			$this->setModified();
 		}
+
+		return $this;
 	}
 
 
@@ -416,13 +390,12 @@ class Standard
 
 		$unknown = [];
 		$list = parent::fromArray( $list );
-		unset( $list['product.type'], $list['product.typename'] );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'product.typeid': $this->setTypeId( $value ); break;
+				case 'product.type': $this->setType( $value ); break;
 				case 'product.code': $this->setCode( $value ); break;
 				case 'product.label': $this->setLabel( $value ); break;
 				case 'product.status': $this->setStatus( $value ); break;
@@ -448,7 +421,6 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['product.typename'] = $this->getTypeName();
 		$list['product.type'] = $this->getType();
 		$list['product.code'] = $this->getCode();
 		$list['product.label'] = $this->getLabel();
@@ -459,7 +431,6 @@ class Standard
 
 		if( $private === true )
 		{
-			$list['product.typeid'] = $this->getTypeId();
 			$list['product.target'] = $this->getTarget();
 			$list['product.ctime'] = $this->getTimeCreated();
 		}

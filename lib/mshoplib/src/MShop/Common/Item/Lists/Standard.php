@@ -226,52 +226,21 @@ class Standard
 		if( isset( $this->values[$this->prefix . 'type'] ) ) {
 			return (string) $this->values[$this->prefix . 'type'];
 		}
-
-		return null;
 	}
 
 
-	/**
-	 * Returns the localized name of the type
-	 *
-	 * @return string|null Localized name of the type
-	 */
-	public function getTypeName()
-	{
-		if( isset( $this->values[$this->prefix . 'typename'] ) ) {
-			return (string) $this->values[$this->prefix . 'typename'];
-		}
-
-		return null;
-	}
-
 
 	/**
-	 * Returns the type id of the list item.
+	 * Sets the new type of the list item.
 	 *
-	 * @return integer|null Type id of the list item
-	 */
-	public function getTypeId()
-	{
-		if( isset( $this->values[$this->prefix . 'typeid'] ) ) {
-			return (int) $this->values[$this->prefix . 'typeid'];
-		}
-
-		return null;
-	}
-
-
-	/**
-	 * Sets the new type id of the list item.
-	 *
-	 * @param string $typeid type id of the list item
+	 * @param string $type type of the list item
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setTypeId( $typeid )
+	public function setType( $type )
 	{
-		if( (string) $typeid != $this->getTypeId() )
+		if( (string) $type != $this->getType() )
 		{
-			$this->values[$this->prefix . 'typeid'] = (string) $typeid;
+			$this->values[$this->prefix . 'type'] = (string) $type;
 			$this->setModified();
 		}
 
@@ -440,7 +409,7 @@ class Standard
 			switch( $key )
 			{
 				case $this->prefix . 'parentid': $this->setParentId( $value ); break;
-				case $this->prefix . 'typeid': $this->setTypeId( $value ); break;
+				case $this->prefix . 'type': $this->setType( $value ); break;
 				case $this->prefix . 'domain': $this->setDomain( $value ); break;
 				case $this->prefix . 'refid': $this->setRefId( $value ); break;
 				case $this->prefix . 'datestart': $this->setDateStart( $value ); break;
@@ -473,13 +442,10 @@ class Standard
 		$list[$this->prefix . 'config'] = $this->getConfig();
 		$list[$this->prefix . 'position'] = $this->getPosition();
 		$list[$this->prefix . 'status'] = $this->getStatus();
-		$list[$this->prefix . 'typename'] = $this->getTypeName();
 		$list[$this->prefix . 'type'] = $this->getType();
 
-		if( $private === true )
-		{
+		if( $private === true ) {
 			$list[$this->prefix . 'parentid'] = $this->getParentId();
-			$list[$this->prefix . 'typeid'] = $this->getTypeId();
 		}
 
 		return $list;

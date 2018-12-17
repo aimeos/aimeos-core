@@ -116,42 +116,16 @@ class Standard
 
 
 	/**
-	 * Returns the localized name of the type
-	 *
-	 * @return string|null Localized name of the type
-	 */
-	public function getTypeName()
-	{
-		if( isset( $this->values['tag.typename'] ) ) {
-			return (string) $this->values['tag.typename'];
-		}
-	}
-
-
-	/**
-	 * Returns the type id of the product tag item
-	 *
-	 * @return string|null Type of the product tag item
-	 */
-	public function getTypeId()
-	{
-		if( isset( $this->values['tag.typeid'] ) ) {
-			return (string) $this->values['tag.typeid'];
-		}
-	}
-
-
-	/**
 	 * Sets the new type of the product tag item
 	 *
-	 * @param string|null $id Type of the product tag item
+	 * @param string $type Type of the product tag item
 	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
-	public function setTypeId( $id )
+	public function setType( $type )
 	{
-		if( (string) $id !== $this->getTypeId() )
+		if( (string) $type !== $this->getType() )
 		{
-			$this->values['tag.typeid'] = (string) $id;
+			$this->values['tag.type'] = (string) $type;
 			$this->setModified();
 		}
 
@@ -224,16 +198,15 @@ class Standard
 	{
 		$unknown = [];
 		$list = parent::fromArray( $list );
-		unset( $list['tag.type'], $list['tag.typename'] );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'tag.domain': $this->setDomain( $value ); break;
-				case 'tag.typeid': $this->setTypeId( $value ); break;
 				case 'tag.languageid': $this->setLanguageId( $value ); break;
+				case 'tag.domain': $this->setDomain( $value ); break;
 				case 'tag.label': $this->setLabel( $value ); break;
+				case 'tag.type': $this->setType( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -252,15 +225,10 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['tag.domain'] = $this->getDomain();
 		$list['tag.languageid'] = $this->getLanguageId();
+		$list['tag.domain'] = $this->getDomain();
 		$list['tag.label'] = $this->getLabel();
 		$list['tag.type'] = $this->getType();
-		$list['tag.typename'] = $this->getTypeName();
-
-		if( $private === true ) {
-			$list['tag.typeid'] = $this->getTypeId();
-		}
 
 		return $list;
 	}

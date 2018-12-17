@@ -77,37 +77,6 @@ class Standard
 
 
 	/**
-	 * Returns the type ID of the text item.
-	 *
-	 * @return string|null Type ID of the text item
-	 */
-	public function getTypeId()
-	{
-		if( isset( $this->values['text.typeid'] ) ) {
-			return (string) $this->values['text.typeid'];
-		}
-	}
-
-
-	/**
-	 *  Sets the type ID of the text item.
-	 *
-	 * @param string $typeid Type ID of the text type
-	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
-	 */
-	public function setTypeId( $typeid )
-	{
-		if( (string) $typeid !== $this->getTypeId() )
-		{
-			$this->values['text.typeid'] = (string) $typeid;
-			$this->setModified();
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the type of the text item.
 	 *
 	 * @return string|null Type of the text item
@@ -121,15 +90,20 @@ class Standard
 
 
 	/**
-	 * Returns the localized name of the type
+	 *  Sets the type of the text item.
 	 *
-	 * @return string|null Localized name of the type
+	 * @param string $type Type of the text type
+	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
-	public function getTypeName()
+	public function setType( $type )
 	{
-		if( isset( $this->values['text.typename'] ) ) {
-			return (string) $this->values['text.typename'];
+		if( (string) $type !== $this->getType() )
+		{
+			$this->values['text.type'] = (string) $type;
+			$this->setModified();
 		}
+
+		return $this;
 	}
 
 
@@ -301,14 +275,13 @@ class Standard
 	{
 		$unknown = [];
 		$list = parent::fromArray( $list );
-		unset( $list['text.type'], $list['text.typename'] );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
 				case 'text.languageid': $this->setLanguageId( $value ); break;
-				case 'text.typeid': $this->setTypeId( $value ); break;
+				case 'text.type': $this->setType( $value ); break;
 				case 'text.label': $this->setLabel( $value ); break;
 				case 'text.domain': $this->setDomain( $value ); break;
 				case 'text.content': $this->setContent( $value ); break;
@@ -332,16 +305,11 @@ class Standard
 		$list = parent::toArray( $private );
 
 		$list['text.languageid'] = $this->getLanguageId();
-		$list['text.typename'] = $this->getTypeName();
 		$list['text.type'] = $this->getType();
 		$list['text.label'] = $this->getLabel();
 		$list['text.domain'] = $this->getDomain();
 		$list['text.content'] = $this->getContent();
 		$list['text.status'] = $this->getStatus();
-
-		if( $private === true ) {
-			$list['text.typeid'] = $this->getTypeId();
-		}
 
 		return $list;
 	}

@@ -98,39 +98,6 @@ class Standard
 
 
 	/**
-	 * Returns the type id of the attribute.
-	 *
-	 * @return string|null Type of the attribute
-	 */
-	public function getTypeId()
-	{
-		if( isset( $this->values['attribute.typeid'] ) ) {
-			return (string) $this->values['attribute.typeid'];
-		}
-
-		return null;
-	}
-
-
-	/**
-	 * Sets the new type of the attribute.
-	 *
-	 * @param string $typeid Type of the attribute
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
-	 */
-	public function setTypeId( $typeid )
-	{
-		if( (string) $typeid !== $this->getTypeId() )
-		{
-			$this->values['attribute.typeid'] = (string) $typeid;
-			$this->setModified();
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the type code of the attribute item.
 	 *
 	 * @return string|null Type code of the attribute item
@@ -140,23 +107,24 @@ class Standard
 		if( isset( $this->values['attribute.type'] ) ) {
 			return (string) $this->values['attribute.type'];
 		}
-
-		return null;
 	}
 
 
 	/**
-	 * Returns the localized name of the type
+	 * Sets the new type of the attribute.
 	 *
-	 * @return string|null Localized name of the type
+	 * @param string $type Type of the attribute
+	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
-	public function getTypeName()
+	public function setType( $type )
 	{
-		if( isset( $this->values['attribute.typename'] ) ) {
-			return (string) $this->values['attribute.typename'];
+		if( (string) $type !== $this->getType() )
+		{
+			$this->values['attribute.type'] = (string) $type;
+			$this->setModified();
 		}
 
-		return null;
+		return $this;
 	}
 
 
@@ -328,7 +296,6 @@ class Standard
 	{
 		$unknown = [];
 		$list = parent::fromArray( $list );
-		unset( $list['attribute.type'], $list['attribute.typename'] );
 
 		foreach( $list as $key => $value )
 		{
@@ -337,7 +304,7 @@ class Standard
 				case 'attribute.domain': $this->setDomain( $value ); break;
 				case 'attribute.code': $this->setCode( $value ); break;
 				case 'attribute.status': $this->setStatus( $value ); break;
-				case 'attribute.typeid': $this->setTypeId( $value ); break;
+				case 'attribute.type': $this->setType( $value ); break;
 				case 'attribute.position': $this->setPosition( $value ); break;
 				case 'attribute.label': $this->setLabel( $value ); break;
 				default: $unknown[$key] = $value;
@@ -362,13 +329,8 @@ class Standard
 		$list['attribute.code'] = $this->getCode();
 		$list['attribute.status'] = $this->getStatus();
 		$list['attribute.type'] = $this->getType();
-		$list['attribute.typename'] = $this->getTypeName();
 		$list['attribute.position'] = $this->getPosition();
 		$list['attribute.label'] = $this->getLabel();
-
-		if( $private === true ) {
-			$list['attribute.typeid'] = $this->getTypeId();
-		}
 
 		return $list;
 	}

@@ -22,9 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'stock.id' => 66,
 			'stock.siteid' => 99,
 			'stock.productcode' => 'CNC',
-			'stock.typeid' => 44,
 			'stock.type' => 'default',
-			'stock.typename' => 'Standard',
 			'stock.stocklevel' => 1000,
 			'stock.backdate' => '2010-01-01 11:55:00',
 			'stock.mtime' => '2011-01-01 00:00:02',
@@ -73,17 +71,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
-	public function testGetTypeId()
+	public function testGetType()
 	{
-		$this->assertEquals( 44, $this->object->getTypeId() );
+		$this->assertEquals( 'default', $this->object->getType() );
 	}
 
-	public function testSetTypeId()
+	public function testSetType()
 	{
-		$return = $this->object->setTypeId( 30000 );
+		$return = $this->object->setType( 'test' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Stock\Item\Iface::class, $return );
-		$this->assertEquals( 30000, $this->object->getTypeId() );
+		$this->assertEquals( 'test', $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -152,7 +150,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = array(
 			'stock.id' => 1,
-			'stock.typeid' => 3,
+			'stock.type' => 'default',
 			'stock.stocklevel' => 10,
 			'stock.productcode' => 'CNC',
 			'stock.dateback' => '2000-01-01 00:00:00',
@@ -163,8 +161,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['stock.id'], $item->getId() );
+		$this->assertEquals( $list['stock.type'], $item->getType() );
 		$this->assertEquals( $list['stock.productcode'], $item->getProductCode() );
-		$this->assertEquals( $list['stock.typeid'], $item->getTypeId() );
 		$this->assertEquals( $list['stock.stocklevel'], $item->getStocklevel() );
 		$this->assertEquals( $list['stock.dateback'], $item->getDateBack() );
 	}
@@ -179,7 +177,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getId(), $arrayObject['stock.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['stock.siteid'] );
 		$this->assertEquals( $this->object->getProductCode(), $arrayObject['stock.productcode'] );
-		$this->assertEquals( $this->object->getTypeId(), $arrayObject['stock.typeid'] );
+		$this->assertEquals( $this->object->getType(), $arrayObject['stock.type'] );
 		$this->assertEquals( $this->object->getStocklevel(), $arrayObject['stock.stocklevel'] );
 		$this->assertEquals( $this->object->getDateBack(), $arrayObject['stock.dateback'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['stock.ctime'] );

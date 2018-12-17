@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Common\Item\Property;
  * @subpackage Common
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface,
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface,
 	\Aimeos\MShop\Common\Item\Parentid\Iface
 {
 	/**

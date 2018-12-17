@@ -21,9 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'service.id' => 541,
 			'service.siteid' => 99,
 			'service.position' => '0',
-			'service.typeid' => 1,
 			'service.type' => 'delivery',
-			'service.typename' => 'Delivery',
 			'service.code' => 'wa34Hg',
 			'service.label' => 'deliveryObject',
 			'service.provider' => 'Standard',
@@ -207,28 +205,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
-	public function testGetTypeId()
-	{
-		$this->assertEquals( 1, $this->object->getTypeId() );
-	}
-
-	public function testSetTypeId()
-	{
-		$return = $this->object->setTypeId( 2 );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $return );
-		$this->assertEquals( 2, $this->object->getTypeId() );
-		$this->assertTrue( $this->object->isModified() );
-	}
-
 	public function testGetType()
 	{
 		$this->assertEquals( 'delivery', $this->object->getType() );
 	}
 
-	public function testGetTypeName()
+	public function testSetType()
 	{
-		$this->assertEquals( 'Delivery', $this->object->getTypeName() );
+		$return = $this->object->setType( 'test' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $return );
+		$this->assertEquals( 'test', $this->object->getType() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetTimeModified()
@@ -259,9 +247,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = array(
 			'service.id' => 1,
-			'service.typeid' => 2,
 			'service.type' => 'test',
-			'service.typename' => 'Test',
 			'service.code' => 'test',
 			'service.label' => 'test item',
 			'service.provider' => 'PayPal',
@@ -279,7 +265,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['service.id'], $item->getId() );
 		$this->assertEquals( $list['service.code'], $item->getCode() );
 		$this->assertEquals( $list['service.label'], $item->getLabel() );
-		$this->assertEquals( $list['service.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['service.type'], $item->getType() );
 		$this->assertEquals( $list['service.provider'], $item->getProvider() );
 		$this->assertEquals( $list['service.position'], $item->getPosition() );
 		$this->assertEquals( $list['service.datestart'], $item->getDateStart() );
@@ -287,8 +273,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['service.config'], $item->getConfig() );
 		$this->assertEquals( $list['service.status'], $item->getStatus() );
 		$this->assertNull( $item->getSiteId() );
-		$this->assertNull( $item->getTypeName() );
-		$this->assertNull( $item->getType() );
 	}
 
 
@@ -300,8 +284,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['service.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['service.siteid'] );
-		$this->assertEquals( $this->object->getTypename(), $arrayObject['service.typename'] );
-		$this->assertEquals( $this->object->getTypeId(), $arrayObject['service.typeid'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['service.type'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['service.code'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['service.label'] );

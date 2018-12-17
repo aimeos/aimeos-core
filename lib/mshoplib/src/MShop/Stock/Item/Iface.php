@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Stock\Item;
  * @subpackage Stock
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
 	 * Returns the code of the stock item.

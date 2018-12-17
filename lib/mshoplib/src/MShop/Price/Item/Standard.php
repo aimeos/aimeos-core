@@ -52,42 +52,16 @@ class Standard extends Base
 
 
 	/**
-	 * Returns the localized name of the type
+	 * Sets the new type of the price.
 	 *
-	 * @return string|null Localized name of the type
-	 */
-	public function getTypeName()
-	{
-		if( isset( $this->values['price.typename'] ) ) {
-			return (string) $this->values['price.typename'];
-		}
-	}
-
-
-	/**
-	 * Returns the type ID of the price.
-	 *
-	 * @return string|null Type ID of the price
-	 */
-	public function getTypeId()
-	{
-		if( isset( $this->values['price.typeid'] ) ) {
-			return (string) $this->values['price.typeid'];
-		}
-	}
-
-
-	/**
-	 * Sets the new type ID of the price.
-	 *
-	 * @param string $typeid Type ID of the price
+	 * @param string $type Type of the price
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setTypeId( $typeid )
+	public function setType( $type )
 	{
-		if( (string) $typeid !== $this->getTypeId() )
+		if( (string) $type !== $this->getType() )
 		{
-			$this->values['price.typeid'] = (string) $typeid;
+			$this->values['price.type'] = (string) $type;
 			$this->setModified();
 		}
 
@@ -548,13 +522,12 @@ class Standard extends Base
 	{
 		$unknown = [];
 		$list = parent::fromArray( $list );
-		unset( $list['price.type'], $list['price.typename'] );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'price.typeid': $this->setTypeId( $value ); break;
+				case 'price.type': $this->setType( $value ); break;
 				case 'price.currencyid': $this->setCurrencyId( $value ); break;
 				case 'price.domain': $this->setDomain( $value ); break;
 				case 'price.quantity': $this->setQuantity( $value ); break;
@@ -585,7 +558,6 @@ class Standard extends Base
 		$list = parent::toArray( $private );
 
 		$list['price.type'] = $this->getType();
-		$list['price.typename'] = $this->getTypeName();
 		$list['price.currencyid'] = $this->getCurrencyId();
 		$list['price.domain'] = $this->getDomain();
 		$list['price.quantity'] = $this->getQuantity();
@@ -597,10 +569,6 @@ class Standard extends Base
 		$list['price.taxflag'] = $this->getTaxFlag();
 		$list['price.status'] = $this->getStatus();
 		$list['price.label'] = $this->getLabel();
-
-		if( $private === true ) {
-			$list['price.typeid'] = $this->getTypeId();
-		}
 
 		return $list;
 	}

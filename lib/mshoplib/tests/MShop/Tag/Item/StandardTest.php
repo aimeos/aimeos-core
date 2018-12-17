@@ -21,11 +21,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->values = array(
 			'tag.id' => 987,
 			'tag.siteid' => 99,
-			'tag.typeid' => 44,
 			'tag.domain' => 'product',
 			'tag.languageid' => 'en',
 			'tag.type' => 'taste',
-			'tag.typename' => 'Taste',
 			'tag.label' => 'salty',
 			'tag.mtime' => '2011-01-01 00:00:02',
 			'tag.ctime' => '2011-01-01 00:00:01',
@@ -90,28 +88,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
-	public function testGetTypeId()
-	{
-		$this->assertEquals( 44, $this->object->getTypeId() );
-	}
-
-	public function testSetTypeId()
-	{
-		$return = $this->object->setTypeId( 33 );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Tag\Item\Iface::class, $return );
-		$this->assertEquals( 33, $this->object->getTypeId() );
-		$this->assertTrue( $this->object->isModified() );
-	}
-
 	public function testGetType()
 	{
 		$this->assertEquals( 'taste', $this->object->getType() );
 	}
 
-	public function testGetTypeName()
+	public function testSetType()
 	{
-		$this->assertEquals( 'Taste', $this->object->getTypeName() );
+		$return = $this->object->setType( 'test' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Tag\Item\Iface::class, $return );
+		$this->assertEquals( 'test', $this->object->getType() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetLabel()
@@ -157,9 +145,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = array(
 			'tag.id' => 1,
-			'tag.typeid' => 2,
 			'tag.type' => 'test',
-			'tag.typename' => 'Test',
 			'tag.domain' => 'product',
 			'tag.label' => 'test item',
 			'tag.languageid' => 'de',
@@ -170,13 +156,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['tag.id'], $item->getId() );
-		$this->assertEquals( $list['tag.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['tag.type'], $item->getType() );
 		$this->assertEquals( $list['tag.domain'], $item->getDomain() );
 		$this->assertEquals( $list['tag.label'], $item->getLabel() );
 		$this->assertEquals( $list['tag.languageid'], $item->getLanguageId() );
 		$this->assertNull( $item->getSiteId() );
-		$this->assertNull( $item->getTypeName() );
-		$this->assertNull( $item->getType() );
 	}
 
 
@@ -189,8 +173,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getId(), $arrayObject['tag.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['tag.siteid'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['tag.type'] );
-		$this->assertEquals( $this->object->getTypeId(), $arrayObject['tag.typeid'] );
-		$this->assertEquals( $this->object->getTypeName(), $arrayObject['tag.typename'] );
 		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['tag.languageid'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['tag.label'] );
 		$this->assertEquals( $this->object->getDomain(), $arrayObject['tag.domain'] );
