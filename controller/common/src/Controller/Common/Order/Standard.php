@@ -153,7 +153,7 @@ class Standard
 		$search = $productManager->createSearch();
 		$func = $search->createFunction( 'product:has', ['product', 'default', $prodId] );
 		$expr = array(
-			$search->compare( '==', 'product.type.code', 'bundle' ),
+			$search->compare( '==', 'product.type', 'bundle' ),
 			$search->compare( '!=', $func, null ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -225,7 +225,7 @@ class Standard
 		$search = $stockManager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'stock.productcode', $prodCodes ),
-			$search->compare( '==', 'stock.type.code', $stockType ),
+			$search->compare( '==', 'stock.type', $stockType ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, count( $prodCodes ) );
@@ -445,12 +445,9 @@ class Standard
 
 		if( $selStockItem === null )
 		{
-			$typeManager = \Aimeos\MShop\Factory::createManager( $this->context, 'stock/type' );
-			$typeId = $typeManager->findItem( $stocktype )->getId();
-
 			$selStockItem = $stockManager->createItem();
 			$selStockItem->setProductCode( $productItem->getCode() );
-			$selStockItem->setTypeId( $typeId );
+			$selStockItem->setType( $stocktype );
 		}
 
 		$selStockItem->setStockLevel( $sum );
