@@ -187,7 +187,7 @@ class Standard
 	public function getResourceType( $withsub = true )
 	{
 		$path = 'mshop/media/manager/submanagers';
-		$default = ['lists', 'property', 'type'];
+		$default = ['lists', 'property'];
 
 		return $this->getResourceTypeBase( 'media', $path, $default, $withsub );
 	}
@@ -219,7 +219,7 @@ class Standard
 		 * @category Developer
 		 */
 		$path = 'mshop/media/manager/submanagers';
-		$default = ['lists', 'property', 'type'];
+		$default = ['lists', 'property'];
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
 	}

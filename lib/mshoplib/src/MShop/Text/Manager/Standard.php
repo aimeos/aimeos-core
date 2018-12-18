@@ -405,7 +405,7 @@ class Standard
 	{
 		$path = 'mshop/text/manager/submanagers';
 
-		return $this->getResourceTypeBase( 'text', $path, array( 'type', 'lists' ), $withsub );
+		return $this->getResourceTypeBase( 'text', $path, ['lists'], $withsub );
 	}
 
 
@@ -436,7 +436,7 @@ class Standard
 		 */
 		$path = 'mshop/text/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'lists' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['lists'], $withsub );
 	}
 
 

@@ -154,7 +154,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/service/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, ['lists', 'type'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -192,7 +192,7 @@ class Standard
 	{
 		$path = 'mshop/service/manager/submanagers';
 
-		return $this->getResourceTypeBase( 'service', $path, array( 'type', 'lists' ), $withsub );
+		return $this->getResourceTypeBase( 'service', $path, ['lists'], $withsub );
 	}
 
 
@@ -223,7 +223,7 @@ class Standard
 		 */
 		$path = 'mshop/service/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'lists' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['lists'], $withsub );
 	}
 
 
