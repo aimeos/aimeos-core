@@ -46,45 +46,45 @@ class TypesMigrateColumns extends \Aimeos\MW\Setup\Task\Base
 
 	private $migrations = [
 		'db-attribute' => [
-			'mshop_attribute' => 'UPDATE "mshop_attribute" SET "type" = ( SELECT "code" FROM "mshop_attribute_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
-			'mshop_attribute_list' => 'UPDATE "mshop_attribute_list" SET "type" = ( SELECT "code" FROM "mshop_attribute_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
-			'mshop_attribute_property' => 'UPDATE "mshop_attribute_property" SET "type" = ( SELECT "code" FROM "mshop_attribute_property_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'mshop_attribute' => 'UPDATE "mshop_attribute" SET "type" = ( SELECT "code" FROM "mshop_attribute_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
+			'mshop_attribute_list' => 'UPDATE "mshop_attribute_list" SET "type" = ( SELECT "code" FROM "mshop_attribute_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
+			'mshop_attribute_property' => 'UPDATE "mshop_attribute_property" SET "type" = ( SELECT "code" FROM "mshop_attribute_property_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
 		],
 		'db-catalog' => [
-			'mshop_catalog_list' => 'UPDATE "mshop_catalog_list" SET "type" = ( SELECT "code" FROM "mshop_catalog_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'mshop_catalog_list' => 'UPDATE "mshop_catalog_list" SET "type" = ( SELECT "code" FROM "mshop_catalog_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
 		],
 		'db-customer' => [
-			'mshop_customer_list' => 'UPDATE "mshop_customer_list" SET "type" = ( SELECT "code" FROM "mshop_customer_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
-			'mshop_customer_property' => 'UPDATE "mshop_customer_property" SET "type" = ( SELECT "code" FROM "mshop_customer_property_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'mshop_customer_list' => 'UPDATE "mshop_customer_list" SET "type" = ( SELECT "code" FROM "mshop_customer_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
+			'mshop_customer_property' => 'UPDATE "mshop_customer_property" SET "type" = ( SELECT "code" FROM "mshop_customer_property_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
 		],
 		'db-media' => [
-			'mshop_media_list' => 'UPDATE "mshop_media_list" SET "type" = ( SELECT "code" FROM "mshop_media_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
-			'mshop_media_property' => 'UPDATE "mshop_media_property" SET "type" = ( SELECT "code" FROM "mshop_media_property_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'mshop_media_list' => 'UPDATE "mshop_media_list" SET "type" = ( SELECT "code" FROM "mshop_media_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
+			'mshop_media_property' => 'UPDATE "mshop_media_property" SET "type" = ( SELECT "code" FROM "mshop_media_property_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
 		],
 		'db-plugin' => [
-			'mshop_plugin' => 'UPDATE "mshop_plugin" SET "type" = ( SELECT "code" FROM "mshop_plugin_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'mshop_plugin' => 'UPDATE "mshop_plugin" SET "type" = ( SELECT "code" FROM "mshop_plugin_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
 		],
 		'db-price' => [
-			'mshop_price_list' => 'UPDATE "mshop_price_list" SET "type" = ( SELECT "code" FROM "mshop_price_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'mshop_price_list' => 'UPDATE "mshop_price_list" SET "type" = ( SELECT "code" FROM "mshop_price_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
 		],
 		'db-product' => [
-			'mshop_product_list' => 'UPDATE "mshop_product_list" SET "type" = ( SELECT "code" FROM "mshop_product_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
-			'mshop_product_property' => 'UPDATE "mshop_product_property" SET "type" = ( SELECT "code" FROM "mshop_product_property_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'mshop_product_list' => 'UPDATE "mshop_product_list" SET "type" = ( SELECT "code" FROM "mshop_product_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
+			'mshop_product_property' => 'UPDATE "mshop_product_property" SET "type" = ( SELECT "code" FROM "mshop_product_property_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
 		],
 		'db-service' => [
-			'mshop_service_list' => 'UPDATE "mshop_service_list" SET "type" = ( SELECT "code" FROM "mshop_service_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'mshop_service_list' => 'UPDATE "mshop_service_list" SET "type" = ( SELECT "code" FROM "mshop_service_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
 		],
 		'db-stock' => [
-			'mshop_stock' => 'UPDATE "mshop_stock" SET "type" = ( SELECT "code" FROM "mshop_stock_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'mshop_stock' => 'UPDATE "mshop_stock" SET "type" = ( SELECT "code" FROM "mshop_stock_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
 		],
 		'db-supplier' => [
-			'mshop_supplier_list' => 'UPDATE "mshop_supplier_list" SET "type" = ( SELECT "code" FROM "mshop_supplier_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'mshop_supplier_list' => 'UPDATE "mshop_supplier_list" SET "type" = ( SELECT "code" FROM "mshop_supplier_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
 		],
 		'db-tag' => [
-			'mshop_tag' => 'UPDATE "mshop_tag" SET "type" = ( SELECT "code" FROM "mshop_tag_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'mshop_tag' => 'UPDATE "mshop_tag" SET "type" = ( SELECT "code" FROM "mshop_tag_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
 		],
 		'db-text' => [
-			'mshop_text_list' => 'UPDATE "mshop_text_list" SET "type" = ( SELECT "code" FROM "mshop_text_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'mshop_text_list' => 'UPDATE "mshop_text_list" SET "type" = ( SELECT "code" FROM "mshop_text_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" IS NULL',
 		],
 	];
 
