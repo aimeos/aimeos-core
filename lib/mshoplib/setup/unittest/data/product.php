@@ -295,10 +295,10 @@ return [
 				['product.property.type' => 'package-weight', 'product.property.languageid' => null, 'product.property.value' => '1.25'],
 			],
 			'tag' => [
-				['product.lists.type' => 'tag/default', 'product.lists.refid' => 'tag/Kaffee', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 0, 'product.lists.status' => 1],
-				['product.lists.type' => 'tag/default', 'product.lists.refid' => 'tag/Cappuccino', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 1, 'product.lists.status' => 1],
-				['product.lists.type' => 'tag/default', 'product.lists.refid' => 'tag/mild', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 2, 'product.lists.status' => 1],
-				['product.lists.type' => 'tag/default', 'product.lists.refid' => 'tag/cremig', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 3, 'product.lists.status' => 1],
+				['product.lists.type' => 'default', 'product.lists.refid' => 'tag/Kaffee', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 0, 'product.lists.status' => 1],
+				['product.lists.type' => 'default', 'product.lists.refid' => 'tag/Cappuccino', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 1, 'product.lists.status' => 1],
+				['product.lists.type' => 'default', 'product.lists.refid' => 'tag/mild', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 2, 'product.lists.status' => 1],
+				['product.lists.type' => 'default', 'product.lists.refid' => 'tag/cremig', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 3, 'product.lists.status' => 1],
 			],
 			'text' => [
 				['product.lists.type' => 'default', 'product.lists.refid' => 'text/cnc', 'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00', 'product.lists.config' => [], 'product.lists.position' => 0, 'product.lists.status' => 1],
@@ -343,9 +343,9 @@ return [
 				['product.property.type' => 'package-weight', 'product.property.languageid' => null, 'product.property.value' => '1'],
 			],
 			'tag' => [
-				['product.lists.type' => 'tag/default', 'product.lists.refid' => 'tag/Expresso', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 0, 'product.lists.status' => 1],
-				['product.lists.type' => 'tag/default', 'product.lists.refid' => 'tag/Kaffee', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 1, 'product.lists.status' => 1],
-				['product.lists.type' => 'tag/default', 'product.lists.refid' => 'tag/herb', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 2, 'product.lists.status' => 1],
+				['product.lists.type' => 'default', 'product.lists.refid' => 'tag/Expresso', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 0, 'product.lists.status' => 1],
+				['product.lists.type' => 'default', 'product.lists.refid' => 'tag/Kaffee', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 1, 'product.lists.status' => 1],
+				['product.lists.type' => 'default', 'product.lists.refid' => 'tag/herb', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 2, 'product.lists.status' => 1],
 			],
 			'text' => [
 				['product.lists.type' => 'default', 'product.lists.refid' => 'text/cne_basket', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 0, 'product.lists.status' => 1],
