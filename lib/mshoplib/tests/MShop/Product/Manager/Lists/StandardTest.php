@@ -322,28 +322,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchRefItems()
-	{
-		$total = 0;
-
-		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.lists.domain', array( 'attribute', 'media' ) ) );
-
-		$result = $this->object->searchRefItems( $search, array( 'text' ), $total );
-
-		$this->assertArrayHasKey( 'attribute', $result );
-		$this->assertArrayHasKey( 'media', $result );
-		$this->assertArrayNotHasKey( 'price', $result );
-
-		$this->assertEquals( 15, count( $result['attribute'] ) );
-		$this->assertEquals( 5, count( $result['media'] ) );
-
-		// this is the total of list items, not the total of referenced items
-		// whose number might be lower due to duplicates
-		$this->assertEquals( 34, $total );
-	}
-
-
 	protected function getListItems()
 	{
 		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context, 'Standard' );

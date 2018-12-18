@@ -218,25 +218,6 @@ abstract class Base
 
 
 	/**
-	 * Search for all referenced items from the list based on the given critera.
-	 *
-	 * Only criteria from the list and list type can be used for searching and
-	 * sorting, but no criteria from the referenced items.
-	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
-	 * @return array Associative list of domains as keys and lists with pairs of IDs and items implementing \Aimeos\MShop\Common\Item\Iface
-	 * @throws \Aimeos\MShop\Exception if creating items failed
-	 * @see \Aimeos\MW\Criteria\SQL
-	 */
-	public function searchRefItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
-	{
-		return $this->manager->searchRefItems( $search, $ref, $total );
-	}
-
-
-	/**
 	 * Injects the reference of the outmost object
 	 *
 	 * @param \Aimeos\MShop\Common\Manager\Iface $object Reference to the outmost manager or decorator

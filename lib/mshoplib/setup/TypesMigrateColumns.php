@@ -88,6 +88,7 @@ class TypesMigrateColumns extends \Aimeos\MW\Setup\Task\Base
 		],
 	];
 
+
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
