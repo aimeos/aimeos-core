@@ -232,6 +232,174 @@ class Standard
 
 
 	/**
+	 * Creates a search object and optionally sets base criteria.
+	 *
+	 * @param boolean $default Add default criteria
+	 * @return \Aimeos\MW\Criteria\Iface Criteria object
+	 */
+	public function createSearch( $default = false )
+	{
+		if( $default === true )
+		{
+			$object = $this->createSearchBase( 'product' );
+
+			$expr = array( $object->getConditions() );
+
+			$temp = array(
+				$object->compare( '==', 'product.datestart', null ),
+				$object->compare( '<=', 'product.datestart', $this->date ),
+			);
+			$expr[] = $object->combine( '||', $temp );
+
+			$temp = array(
+				$object->compare( '==', 'product.dateend', null ),
+				$object->compare( '>=', 'product.dateend', $this->date ),
+			);
+			$expr[] = $object->combine( '||', $temp );
+
+			$object->setConditions( $object->combine( '&&', $expr ) );
+
+			return $object;
+		}
+
+		return parent::createSearch();
+	}
+
+
+	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids )
+	{
+		/** mshop/product/manager/standard/delete/mysql
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * @see mshop/product/manager/standard/delete/ansi
+		 */
+
+		/** mshop/product/manager/standard/delete/ansi
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * Removes the records specified by the given IDs from the product database.
+		 * The records must be from the site that is configured via the
+		 * context item.
+		 *
+		 * The ":cond" placeholder is replaced by the name of the ID column and
+		 * the given ID or list of IDs while the site ID is bound to the question
+		 * mark.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for deleting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/product/manager/standard/insert/ansi
+		 * @see mshop/product/manager/standard/update/ansi
+		 * @see mshop/product/manager/standard/newid/ansi
+		 * @see mshop/product/manager/standard/search/ansi
+		 * @see mshop/product/manager/standard/count/ansi
+		 */
+		$path = 'mshop/product/manager/standard/delete';
+		$this->deleteItemsBase( $ids, $path );
+	}
+
+
+	/**
+	 * Returns the item specified by its code and domain/type if necessary
+	 *
+	 * @param string $code Code of the item
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
+	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
+	 * @param boolean $default True to add default criteria
+	 * @return \Aimeos\MShop\Common\Item\Iface Item object
+	 */
+	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
+	{
+		return $this->findItemBase( array( 'product.code' => $code ), $ref, $default );
+	}
+
+
+	/**
+	 * Returns the product item for the given product ID.
+	 *
+	 * @param integer $id Unique ID of the product item
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
+	 * @return \Aimeos\MShop\Product\Item\Iface Returns the product item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
+	 */
+	public function getItem( $id, array $ref = [], $default = false )
+	{
+		return $this->getItemBase( 'product.id', $id, $ref, $default );
+	}
+
+
+	/**
+	 * Returns the available manager types
+	 *
+	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 */
+	public function getResourceType( $withsub = true )
+	{
+		$path = 'mshop/product/manager/submanagers';
+		$default = ['lists', 'property'];
+
+		return $this->getResourceTypeBase( 'product', $path, $default, $withsub );
+	}
+
+
+	/**
+	 * Returns the attributes that can be used for searching.
+	 *
+	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 */
+	public function getSearchAttributes( $withsub = true )
+	{
+		/** mshop/product/manager/submanagers
+		 * List of manager names that can be instantiated by the product manager
+		 *
+		 * Managers provide a generic interface to the underlying storage.
+		 * Each manager has or can have sub-managers caring about particular
+		 * aspects. Each of these sub-managers can be instantiated by its
+		 * parent manager using the getSubManager() method.
+		 *
+		 * The search keys from sub-managers can be normally used in the
+		 * manager as well. It allows you to search for items of the manager
+		 * using the search keys of the sub-managers to further limit the
+		 * retrieved list of items.
+		 *
+		 * @param array List of sub-manager names
+		 * @since 2014.03
+		 * @category Developer
+		 */
+		$path = 'mshop/product/manager/submanagers';
+		$default = ['lists', 'property'];
+
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
+	}
+
+
+	/**
+	 * Returns a new manager for product extensions.
+	 *
+	 * @param string $manager Name of the sub manager type in lower case
+	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
+	 * @return \Aimeos\MShop\Common\Manager\Iface Submanager, e.g. type, property, etc.
+	 */
+	public function getSubManager( $manager, $name = null )
+	{
+		return $this->getSubManagerBase( 'product', $manager, $name );
+	}
+
+
+	/**
 	 * Adds a new product to the storage.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Product item that should be saved to the storage
@@ -409,79 +577,6 @@ class Standard
 
 		$item = $this->savePropertyItems( $item, 'product', $fetch );
 		return $this->saveListItems( $item, 'product', $fetch );
-	}
-
-
-	/**
-	 * Removes multiple items specified by ids in the array.
-	 *
-	 * @param array $ids List of IDs
-	 */
-	public function deleteItems( array $ids )
-	{
-		/** mshop/product/manager/standard/delete/mysql
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * @see mshop/product/manager/standard/delete/ansi
-		 */
-
-		/** mshop/product/manager/standard/delete/ansi
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * Removes the records specified by the given IDs from the product database.
-		 * The records must be from the site that is configured via the
-		 * context item.
-		 *
-		 * The ":cond" placeholder is replaced by the name of the ID column and
-		 * the given ID or list of IDs while the site ID is bound to the question
-		 * mark.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for deleting items
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/product/manager/standard/insert/ansi
-		 * @see mshop/product/manager/standard/update/ansi
-		 * @see mshop/product/manager/standard/newid/ansi
-		 * @see mshop/product/manager/standard/search/ansi
-		 * @see mshop/product/manager/standard/count/ansi
-		 */
-		$path = 'mshop/product/manager/standard/delete';
-		$this->deleteItemsBase( $ids, $path );
-	}
-
-
-	/**
-	 * Returns the item specified by its code and domain/type if necessary
-	 *
-	 * @param string $code Code of the item
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
-	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param boolean $default True to add default criteria
-	 * @return \Aimeos\MShop\Common\Item\Iface Item object
-	 */
-	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
-	{
-		return $this->findItemBase( array( 'product.code' => $code ), $ref, $default );
-	}
-
-
-	/**
-	 * Returns the product item for the given product ID.
-	 *
-	 * @param integer $id Unique ID of the product item
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MShop\Product\Item\Iface Returns the product item of the given id
-	 * @throws \Aimeos\MShop\Exception If item couldn't be found
-	 */
-	public function getItem( $id, array $ref = [], $default = false )
-	{
-		return $this->getItemBase( 'product.id', $id, $ref, $default );
 	}
 
 
@@ -680,101 +775,6 @@ class Standard
 		}
 
 		return $this->buildItems( $map, $ref, 'product', $propItems );
-	}
-
-
-	/**
-	 * Returns the available manager types
-	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	public function getResourceType( $withsub = true )
-	{
-		$path = 'mshop/product/manager/submanagers';
-		$default = ['lists', 'property', 'type'];
-
-		return $this->getResourceTypeBase( 'product', $path, $default, $withsub );
-	}
-
-
-	/**
-	 * Returns the attributes that can be used for searching.
-	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Criteria\Attribute\Iface
-	 */
-	public function getSearchAttributes( $withsub = true )
-	{
-		/** mshop/product/manager/submanagers
-		 * List of manager names that can be instantiated by the product manager
-		 *
-		 * Managers provide a generic interface to the underlying storage.
-		 * Each manager has or can have sub-managers caring about particular
-		 * aspects. Each of these sub-managers can be instantiated by its
-		 * parent manager using the getSubManager() method.
-		 *
-		 * The search keys from sub-managers can be normally used in the
-		 * manager as well. It allows you to search for items of the manager
-		 * using the search keys of the sub-managers to further limit the
-		 * retrieved list of items.
-		 *
-		 * @param array List of sub-manager names
-		 * @since 2014.03
-		 * @category Developer
-		 */
-		$path = 'mshop/product/manager/submanagers';
-		$default = ['lists', 'property', 'type'];
-
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
-	}
-
-
-	/**
-	 * Returns a new manager for product extensions.
-	 *
-	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return \Aimeos\MShop\Common\Manager\Iface Submanager, e.g. type, property, etc.
-	 */
-	public function getSubManager( $manager, $name = null )
-	{
-		return $this->getSubManagerBase( 'product', $manager, $name );
-	}
-
-
-	/**
-	 * Creates a search object and optionally sets base criteria.
-	 *
-	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Criteria object
-	 */
-	public function createSearch( $default = false )
-	{
-		if( $default === true )
-		{
-			$object = $this->createSearchBase( 'product' );
-
-			$expr = array( $object->getConditions() );
-
-			$temp = array(
-				$object->compare( '==', 'product.datestart', null ),
-				$object->compare( '<=', 'product.datestart', $this->date ),
-			);
-			$expr[] = $object->combine( '||', $temp );
-
-			$temp = array(
-				$object->compare( '==', 'product.dateend', null ),
-				$object->compare( '>=', 'product.dateend', $this->date ),
-			);
-			$expr[] = $object->combine( '||', $temp );
-
-			$object->setConditions( $object->combine( '&&', $expr ) );
-
-			return $object;
-		}
-
-		return parent::createSearch();
 	}
 
 
