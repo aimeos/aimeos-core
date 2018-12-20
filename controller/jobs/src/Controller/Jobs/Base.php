@@ -73,33 +73,15 @@ abstract class Base
 
 
 	/**
-	 * Returns the attribute type item specified by the code.
+	 * Returns the value from the list or the default value
 	 *
-	 * @param string $prefix Domain prefix for the manager, e.g. "media/type"
-	 * @param string $domain Domain of the type item
-	 * @param string $code Code of the type item
-	 * @return \Aimeos\MShop\Common\Item\Type\Iface Type item
-	 * @throws \Aimeos\Controller\Jobs\Exception If no item is found
+	 * @param array $list Associative list of key/value pairs
+	 * @param string $key Key for the value to retrieve
+	 * @param mixed $default Default value if key isn't found
+	 * @param mixed Value for the key in the list of the default value
 	 */
-	protected function getTypeItem( $prefix, $domain, $code )
+	protected function getValue( array $list, $key, $default )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $prefix );
-		$prefix = str_replace( '/', '.', $prefix );
-
-		$search = $manager->createSearch();
-		$expr = array(
-			$search->compare( '==', $prefix . '.domain', $domain ),
-			$search->compare( '==', $prefix . '.code', $code ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $manager->searchItems( $search );
-
-		if( ( $item = reset( $result ) ) === false )
-		{
-			$msg = sprintf( 'No type item for "%1$s/%2$s" in "%3$s" found', $domain, $code, $prefix );
-			throw new \Aimeos\Controller\Jobs\Exception( $msg );
-		}
-
-		return $item;
+		return isset( $list[$key] ) ? trim( $list[$key] ) : $default;
 	}
 }
