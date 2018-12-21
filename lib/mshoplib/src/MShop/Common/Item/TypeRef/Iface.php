@@ -29,7 +29,7 @@ interface Iface
 	/**
 	 * Sets the new type of the item.
 	 *
-	 * @param integer $type Type of the item
+	 * @param string $type Type of the item
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
 	public function setType( $type );
