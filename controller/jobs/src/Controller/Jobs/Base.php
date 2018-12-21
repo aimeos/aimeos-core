@@ -78,10 +78,10 @@ abstract class Base
 	 * @param array $list Associative list of key/value pairs
 	 * @param string $key Key for the value to retrieve
 	 * @param mixed $default Default value if key isn't found
-	 * @param mixed Value for the key in the list of the default value
+	 * @return mixed Value for the key in the list or the default value
 	 */
 	protected function getValue( array $list, $key, $default )
 	{
-		return isset( $list[$key] ) ? trim( $list[$key] ) : $default;
+		return isset( $list[$key] ) && ( $value = trim( $list[$key] ) ) !== '' ? $value : $default;
 	}
 }

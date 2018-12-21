@@ -1,32 +1,35 @@
 <?php
 
-namespace Aimeos\Controller\Jobs;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
+
+
+namespace Aimeos\Controller\Jobs;
+
+
 class BaseTest extends \PHPUnit\Framework\TestCase
 {
-	public function testGetTypeItemNotFound()
+	public function testGetValue()
 	{
 		$context = \TestHelperJobs::getContext();
 		$aimeos = \TestHelperJobs::getAimeos();
 
-		$object = new TestAbstract( $context, $aimeos );
+		$object = new TestBase( $context, $aimeos );
 
-		$this->setExpectedException( \Aimeos\Controller\Jobs\Exception::class );
-		$object->getTypeItemPublic( 'product/type', 'product', 'test' );
+		$this->assertEquals( 'value', $object->getValuePublic( ['key' => ' value '], 'key', 'def' ) );
+		$this->assertEquals( 'def', $object->getValuePublic( ['key' => ' '], 'key', 'def' ) );
+		$this->assertEquals( 'def', $object->getValuePublic( [], 'key', 'def' ) );
 	}
 }
 
 
 
-class TestAbstract extends \Aimeos\Controller\Jobs\Base
+class TestBase extends \Aimeos\Controller\Jobs\Base
 {
-	public function getTypeItemPublic( $prefix, $domain, $code )
+	public function getValuePublic( $list, $key, $default )
 	{
-		$this->getTypeItem( $prefix, $domain, $code );
+		return $this->getValue( $list, $key, $default );
 	}
 }
