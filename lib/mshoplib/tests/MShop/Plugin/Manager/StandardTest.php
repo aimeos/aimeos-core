@@ -68,7 +68,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItemType()
 	{
-		$item = $this->object->createItem( 'order' );
+		$item = $this->object->createItem( ['plugin.type' => 'order'] );
 		$this->assertEquals( 'order', $item->getType() );
 	}
 

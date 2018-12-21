@@ -143,15 +143,17 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 		$listManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute/lists' );
 
-		$attrItem = $attrManager->createItem( 'color', 'product' )
+		$attrItem = $attrManager->createItem()
 			->setDomain( 'product' )
+			->setType( 'color' )
 			->setStatus( 1 );
 
-		$mediaItem = $mediaManager->createItem( 'icon', 'attribute')
+		$mediaItem = $mediaManager->createItem()
 			->setMimeType( 'image/svg+xml' )
+			->setType( 'icon' )
 			->setStatus( 1 );
 
-		$listItem = $listManager->createItem( 'default', 'media' );
+		$listItem = $listManager->createItem()->setType( 'default' );
 		$pos = 0;
 
 		foreach( $colors as $code => $name )
@@ -179,15 +181,17 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 		$listManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute/lists' );
 
-		$priceItem = $priceManager->createItem( 'default', 'attribute' )
+		$priceItem = $priceManager->createItem()
 			->setTaxRate( '20.00' )
+			->setType( 'default' )
 			->setStatus( 1 );
 
-		$attrItem = $attrManager->createItem( 'sticker', 'product' )
+		$attrItem = $attrManager->createItem()
 			->setDomain( 'product' )
+			->setType( 'sticker' )
 			->setStatus( 1 );
 
-		$listItem = $listManager->createItem( 'default', 'price' );
+		$listItem = $listManager->createItem()->setType( 'sticker' );
 		$pos = 0;
 
 		foreach( ['small sticker' => '+2.50', 'large sticker' => '+7.50'] as $option => $price )

@@ -100,7 +100,7 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 		$items = [];
 
 		foreach( $testdata['stock'] as $key => $entry ) {
-			$items[] = $manager->createItem( $entry['stock.type'], 'product', $entry )->setId( null );
+			$items[] = $manager->createItem( $entry )->setId( null );
 		}
 
 		$manager->begin();

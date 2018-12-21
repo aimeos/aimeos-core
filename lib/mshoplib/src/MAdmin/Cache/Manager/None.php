@@ -47,14 +47,12 @@ class None
 	/**
 	 * Creates a new empty item instance
 	 *
-	 * @param string|null Type the item should be created with
-	 * @param string|null Domain of the type the item should be created with
+	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface New cache item object
 	 */
-	public function createItem( $type = null, $domain = null )
+	public function createItem( array $values = [] )
 	{
-		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
-
+		$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return new \Aimeos\MAdmin\Cache\Item\Standard( $values );
 	}
 

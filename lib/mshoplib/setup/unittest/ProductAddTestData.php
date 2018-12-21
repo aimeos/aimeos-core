@@ -81,7 +81,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $testdata['product'] as $key => $entry )
 		{
-			$item = $manager->createItem( $entry['product.type'], 'product' );
+			$item = $manager->createItem();
 			$item->fromArray( $entry );
 
 			$refItems['product/' . $item->getCode()] = $item;
@@ -139,7 +139,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 				foreach( (array) $entry[$domain] as $data )
 				{
-					$listItem = $manager->createItem( $data['product.lists.type'], $domain );
+					$listItem = $manager->createItem();
 					$listItem->fromArray( $data );
 
 					$refItem = ( isset( $refItems[$data['product.lists.refid']] ) ? $refItems[$data['product.lists.refid']] : null );
@@ -168,7 +168,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 			foreach( (array) $entry['product/property'] as $data )
 			{
-				$propItem = $manager->createItem( $data['product.property.type'], 'product' );
+				$propItem = $manager->createItem( $data );
 				$propItem->fromArray( $data );
 
 				$item->addPropertyItem( $propItem );

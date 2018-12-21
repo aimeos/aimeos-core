@@ -182,22 +182,16 @@ class Standard
 	/**
 	 * Creates a new empty item instance
 	 *
-	 * @param string|null Type the item should be created with
-	 * @param string|null Domain of the type the item should be created with
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Price\Item\Iface New price item object
 	 */
-	public function createItem( $type = null, $domain = null, array $values = [] )
+	public function createItem( array $values = [] )
 	{
 		$locale = $this->getContext()->getLocale();
 		$values['price.siteid'] = $locale->getSiteId();
 
 		if( $locale->getCurrencyId() !== null ) {
 			$values['price.currencyid'] = $locale->getCurrencyId();
-		}
-
-		if( $type !== null ) {
-			$values['price.type'] = $type;
 		}
 
 		return $this->createItemBase( $values );

@@ -109,7 +109,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		foreach( $data as $entry )
 		{
-			$item = $manager->createItem( $entry['product.type'], 'product' );
+			$item = $manager->createItem();
 			$item->fromArray( $entry );
 
 			$this->addRefItems( $item, $entry );
@@ -139,7 +139,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 			foreach( (array) $entry['property'] as $values )
 			{
-				$propItem = $manager->createItem( $values['product.property.type'], 'product' );
+				$propItem = $manager->createItem();
 				$propItem->fromArray( $values );
 
 				$item->addPropertyItem( $propItem );
@@ -169,14 +169,13 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 			foreach( $entry['attribute'] as $data )
 			{
-				$listItem = $listManager->createItem( $data[$domain . '.lists.type'], 'attribute' );
+				$listItem = $listManager->createItem();
 				$listItem->fromArray( $data );
 
-				$refItem = $manager->createItem( $data['attribute.type'], $domain );
+				$refItem = $manager->createItem();
 				$refItem->fromArray( $data );
 
 				$refItem = $this->addRefItems( $refItem, $data );
-
 				$item->addListItem( 'attribute', $listItem, $refItem );
 			}
 		}
@@ -189,10 +188,10 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 				foreach( $entry[$refDomain] as $data )
 				{
-					$listItem = $listManager->createItem( $data[$domain . '.lists.type'], $refDomain );
+					$listItem = $listManager->createItem();
 					$listItem->fromArray( $data );
 
-					$refItem = $manager->createItem( $data[$refDomain . '.type'], $domain );
+					$refItem = $manager->createItem();
 					$refItem->fromArray( $data );
 
 					$item->addListItem( $refDomain, $listItem, $refItem );
@@ -206,7 +205,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 			foreach( $entry['product'] as $data )
 			{
-				$listItem = $listManager->createItem( $data['product.lists.type'], 'product' );
+				$listItem = $listManager->createItem();
 				$listItem->fromArray( $data );
 				$listItem->setRefId( $manager->findItem( $data['product.code'] )->getId() );
 
@@ -237,8 +236,8 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		foreach( $data as $entry )
 		{
-			$item = $manager->createItem( $entry['stock.type'], 'product' );
-			$item->setProductCode( $productcode )->fromArray( $entry );
+			$item = $manager->createItem()->setProductCode( $productcode );
+			$item->fromArray( $entry );
 
 			$manager->saveItem( $item, false );
 		}

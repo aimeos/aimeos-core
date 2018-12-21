@@ -43,7 +43,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItemType()
 	{
-		$item = $this->object->createItem( 'name', 'product' );
+		$item = $this->object->createItem( ['text.type' => 'name'] );
 		$this->assertEquals( 'name', $item->getType() );
 	}
 

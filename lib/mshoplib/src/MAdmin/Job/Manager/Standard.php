@@ -128,13 +128,12 @@ class Standard
 	/**
 	 * Creates a new empty item instance
 	 *
-	 * @param string|null Type the item should be created with
-	 * @param string|null Domain of the type the item should be created with
+	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MAdmin\Job\Item\Iface New job item object
 	 */
-	public function createItem( $type = null, $domain = null )
+	public function createItem( array $values = [] )
 	{
-		$values = array( 'job.siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values['job.siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 

@@ -161,19 +161,12 @@ class Standard
 	/**
 	 * Creates a new empty item instance
 	 *
-	 * @param string|null Type the item should be created with
-	 * @param string|null Domain of the type the item should be created with
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Media\Item\Iface New media item object
 	 */
-	public function createItem( $type = null, $domain = null, array $values = [] )
+	public function createItem( array $values = [] )
 	{
 		$values['media.siteid'] = $this->getContext()->getLocale()->getSiteId();
-
-		if( $type !== null ) {
-			$values['media.type'] = $type;
-		}
-
 		return $this->createItemBase( $values );
 	}
 

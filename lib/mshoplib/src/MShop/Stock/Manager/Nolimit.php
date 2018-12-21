@@ -43,7 +43,8 @@ class Nolimit
 	 */
 	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
 	{
-		return $this->getObject()->createItem( $type, $domain, ['stock.productcode' => $code] );
+		$values = ['stock.productcode' => $code, 'stock.type' => $type];
+		return $this->getObject()->createItem( $values );
 	}
 
 
@@ -81,7 +82,8 @@ class Nolimit
 	 */
 	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return $this->getObject()->createItem( 'default', 'product', ['stock.id' => $id] );
+		$values = ['stock.id' => $id, 'stock.type' => 'default'];
+		return $this->getObject()->createItem( $values );
 	}
 
 
@@ -96,7 +98,7 @@ class Nolimit
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		$items = [];
-		$item = $this->getObject()->createItem( 'default', 'product' );
+		$item = $this->getObject()->createItem( ['stock.type' => 'default'] );
 
 		foreach( $this->getProductCodes( $search->getConditions() ) as $idx => $code )
 		{

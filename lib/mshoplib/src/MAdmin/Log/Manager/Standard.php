@@ -150,19 +150,18 @@ class Standard
 	/**
 	 * Creates a new empty item instance
 	 *
-	 * @param string|null Type the item should be created with
-	 * @param string|null Domain of the type the item should be created with
+	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MAdmin\Log\Item\Iface New log item object
 	 */
-	public function createItem( $type = null, $domain = null )
+	public function createItem( array $values = [] )
 	{
 		try {
-			$siteid = $this->getContext()->getLocale()->getSiteId();
+			$values['log.siteid'] = $this->getContext()->getLocale()->getSiteId();
 		} catch( \Exception $e ) {
-			$siteid = null;
+			$values['log.siteid'] = null;
 		}
 
-		return $this->createItemBase( ['log.siteid' => $siteid] );
+		return $this->createItemBase( $values );
 	}
 
 

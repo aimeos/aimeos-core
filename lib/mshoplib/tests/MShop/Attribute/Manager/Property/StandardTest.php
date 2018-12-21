@@ -43,7 +43,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItemType()
 	{
-		$item = $this->object->createItem( 'htmlcolor', 'attribute' );
+		$item = $this->object->createItem( ['attribute.property.type' => 'htmlcolor'] );
 		$this->assertEquals( 'htmlcolor', $item->getType() );
 	}
 

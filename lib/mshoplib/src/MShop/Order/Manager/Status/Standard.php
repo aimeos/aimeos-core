@@ -182,12 +182,10 @@ class Standard
 	/**
 	 * Creates a new empty item instance
 	 *
-	 * @param string|null Type the item should be created with
-	 * @param string|null Domain of the type the item should be created with
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface New order status item object
 	 */
-	public function createItem( $type = null, $domain = null, array $values = [] )
+	public function createItem( array $values = [] )
 	{
 		$values['order.status.siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );

@@ -123,13 +123,13 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$priceManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'price' );
 		$textManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'text' );
 
-		$mListItem = $listManager->createItem( 'default', 'media' )->setStatus( 1 );
-		$pListItem = $listManager->createItem( 'default', 'price' )->setStatus( 1 );
-		$tListItem = $listManager->createItem( 'default', 'text' )->setStatus( 1 );
+		$mListItem = $listManager->createItem()->setType( 'default' );
+		$pListItem = $listManager->createItem()->setType( 'default' );
+		$tListItem = $listManager->createItem()->setType( 'default' );
 
-		$mediaItem = $mediaManager->createItem( 'icon', 'service' )->setStatus( 1 )->setMimeType( 'image/png' );
-		$priceItem = $priceManager->createItem( 'default', 'service' )->setStatus( 1 );
-		$textItem = $textManager->createItem( 'short', 'service' )->setStatus( 1 );
+		$mediaItem = $mediaManager->createItem()->setType( 'icon' )->setMimeType( 'image/png' );
+		$priceItem = $priceManager->createItem()->setType( 'default' );
+		$textItem = $textManager->createItem()->setType( 'short' );
 
 
 		$manager->begin();
@@ -137,7 +137,7 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		foreach( $services as $type => $list )
 		{
 			$pos = 0;
-			$serviceItem = $manager->createItem( $type, 'service' )->setStatus( 1 );
+			$serviceItem = $manager->createItem()->setType( $type );
 
 			for( $i = 0; $i < $numServices / 4; $i++ )
 			{
