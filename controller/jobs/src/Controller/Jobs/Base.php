@@ -80,7 +80,7 @@ abstract class Base
 	 * @param mixed $default Default value if key isn't found
 	 * @return mixed Value for the key in the list or the default value
 	 */
-	protected function getValue( array $list, $key, $default )
+	protected function getValue( array $list, $key, $default = null )
 	{
 		return isset( $list[$key] ) && ( $value = trim( $list[$key] ) ) !== '' ? $value : $default;
 	}
