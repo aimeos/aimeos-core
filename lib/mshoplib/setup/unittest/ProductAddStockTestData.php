@@ -79,9 +79,7 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 
 			foreach( $testdata[$domain] as $key => $entry )
 			{
-				$item = $manager->createItem();
-				$item->fromArray( $entry );
-
+				$item = $manager->createItem()->fromArray( $entry );
 				$manager->saveItem( $item );
 			}
 		}
