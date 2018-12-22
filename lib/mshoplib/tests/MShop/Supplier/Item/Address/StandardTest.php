@@ -476,7 +476,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$list = array(
+		$list = $entries = array(
 			'supplier.address.id' => 1,
 			'supplier.address.parentid' => 2,
 			'supplier.address.salutation' => 'mr',
@@ -503,10 +503,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$object = new \Aimeos\MShop\Common\Item\Address\Standard( 'supplier.address.' );
-		$unknown = $object->fromArray( $list );
+		$object = $object->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['supplier.address.id'], $object->getId() );
 		$this->assertEquals( $list['supplier.address.parentid'], $object->getParentId() );
 		$this->assertEquals( $list['supplier.address.salutation'], $object->getSalutation() );

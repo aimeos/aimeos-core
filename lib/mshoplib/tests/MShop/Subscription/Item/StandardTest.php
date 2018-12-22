@@ -213,7 +213,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Subscription\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'subscription.id' => 1,
 			'subscription.ordbaseid' => 2,
 			'subscription.ordprodid' => 3,
@@ -224,10 +224,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'subscription.status' => 1,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['subscription.id'], $item->getId() );
 		$this->assertEquals( $list['subscription.ordbaseid'], $item->getOrderBaseId() );
 		$this->assertEquals( $list['subscription.ordprodid'], $item->getOrderProductId() );

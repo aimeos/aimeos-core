@@ -114,28 +114,29 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Customer\Item\Group\Iface Group item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'customer.group.code': $this->setCode( $value ); break;
-				case 'customer.group.label': $this->setLabel( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'customer.group.code': $item = $item->setCode( $value ); break;
+				case 'customer.group.label': $item = $item->setLabel( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

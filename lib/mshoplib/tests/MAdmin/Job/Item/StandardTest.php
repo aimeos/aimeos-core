@@ -170,9 +170,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MAdmin\Job\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'job.id' => 1,
-			'job.siteid' => 2,
 			'job.label' => 'unittest job',
 			'job.method' => 'Product_Import_Text.importFile',
 			'job.parameter' => array( 'items' => 'testfile.ext' ),
@@ -180,10 +179,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'job.status' => 1,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['job.id'], $item->getId() );
 		$this->assertEquals( $list['job.label'], $item->getLabel() );
 		$this->assertEquals( $list['job.method'], $item->getMethod() );

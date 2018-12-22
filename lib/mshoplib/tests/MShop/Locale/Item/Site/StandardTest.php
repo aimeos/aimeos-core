@@ -178,7 +178,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Locale\Item\Site\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'locale.site.id' => 2,
 			'locale.site.code' => 'test',
 			'locale.site.label' => 'test item',
@@ -186,10 +186,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'locale.site.config' => array( 'test' ),
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['locale.site.id'], $item->getId() );
 		$this->assertEquals( $list['locale.site.code'], $item->getCode() );
 		$this->assertEquals( $list['locale.site.label'], $item->getLabel() );

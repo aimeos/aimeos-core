@@ -270,33 +270,34 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'subscription.ordbaseid': $this->setOrderBaseId( $value ); break;
-				case 'subscription.ordprodid': $this->setOrderProductId( $value ); break;
-				case 'subscription.datenext': $this->setDateNext( $value ); break;
-				case 'subscription.dateend': $this->setDateEnd( $value ); break;
-				case 'subscription.interval': $this->setInterval( $value ); break;
-				case 'subscription.reason': $this->setReason( $value ); break;
-				case 'subscription.status': $this->setStatus( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'subscription.ordbaseid': $item = $item->setOrderBaseId( $value ); break;
+				case 'subscription.ordprodid': $item = $item->setOrderProductId( $value ); break;
+				case 'subscription.datenext': $item = $item->setDateNext( $value ); break;
+				case 'subscription.dateend': $item = $item->setDateEnd( $value ); break;
+				case 'subscription.interval': $item = $item->setInterval( $value ); break;
+				case 'subscription.reason': $item = $item->setReason( $value ); break;
+				case 'subscription.status': $item = $item->setStatus( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

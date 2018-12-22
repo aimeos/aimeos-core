@@ -265,32 +265,33 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'text.languageid': $this->setLanguageId( $value ); break;
-				case 'text.type': $this->setType( $value ); break;
-				case 'text.label': $this->setLabel( $value ); break;
-				case 'text.domain': $this->setDomain( $value ); break;
-				case 'text.content': $this->setContent( $value ); break;
-				case 'text.status': $this->setStatus( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'text.languageid': $item = $item->setLanguageId( $value ); break;
+				case 'text.type': $item = $item->setType( $value ); break;
+				case 'text.label': $item = $item->setLabel( $value ); break;
+				case 'text.domain': $item = $item->setDomain( $value ); break;
+				case 'text.content': $item = $item->setContent( $value ); break;
+				case 'text.status': $item = $item->setStatus( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

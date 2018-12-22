@@ -119,18 +119,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MAdmin\Cache\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'cache.id' => 'product/id/1:detail-body',
-			'cache.siteid' => 2,
 			'cache.value' => 'test',
 			'cache.expire' => '2000-01-01 00:00:00',
 			'cache.tags' => array( 'tag1', 'tag2' ),
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['cache.id'], $item->getId() );
 		$this->assertEquals( $list['cache.value'], $item->getValue() );
 		$this->assertEquals( $list['cache.expire'], $item->getTimeExpire() );

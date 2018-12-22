@@ -220,7 +220,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Order\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'order.id' => 1,
 			'order.type' => \Aimeos\MShop\Order\Item\Base::TYPE_WEB,
 			'order.baseid' => 2,
@@ -231,10 +231,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.datedelivery' => '2001-01-01 00:00:00',
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['order.id'], $item->getId() );
 		$this->assertEquals( $list['order.type'], $item->getType() );
 		$this->assertEquals( $list['order.baseid'], $item->getBaseId() );

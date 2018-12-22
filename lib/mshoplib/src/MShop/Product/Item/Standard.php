@@ -376,38 +376,36 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		if( isset( $list['product.ctime'] ) ) {
-			$this->setTimeCreated( $list['product.ctime'] );
-		}
-
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'product.type': $this->setType( $value ); break;
-				case 'product.code': $this->setCode( $value ); break;
-				case 'product.label': $this->setLabel( $value ); break;
-				case 'product.status': $this->setStatus( $value ); break;
-				case 'product.datestart': $this->setDateStart( $value ); break;
-				case 'product.dateend': $this->setDateEnd( $value ); break;
-				case 'product.config': $this->setConfig( $value ); break;
-				case 'product.target': $this->setTarget( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'product.type': $item = $item->setType( $value ); break;
+				case 'product.code': $item = $item->setCode( $value ); break;
+				case 'product.label': $item = $item->setLabel( $value ); break;
+				case 'product.status': $item = $item->setStatus( $value ); break;
+				case 'product.datestart': $item = $item->setDateStart( $value ); break;
+				case 'product.dateend': $item = $item->setDateEnd( $value ); break;
+				case 'product.config': $item = $item->setConfig( $value ); break;
+				case 'product.target': $item = $item->setTarget( $value ); break;
+				case 'product.ctime': $item = $item->setTimeCreated( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

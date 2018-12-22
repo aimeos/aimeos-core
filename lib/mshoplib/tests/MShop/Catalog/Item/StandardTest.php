@@ -217,7 +217,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Catalog\Item\Standard( new \Aimeos\MW\Tree\Node\Standard() );
 
-		$list = array(
+		$list = $entries = array(
 			'catalog.id' => 1,
 			'catalog.code' => 'test',
 			'catalog.config' => array( 'test' ),
@@ -226,9 +226,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'catalog.target' => 'ttarget',
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
+		$this->assertEquals( [], $entries );
 
 		$this->assertEquals( $list['catalog.id'], $item->getId() );
 		$this->assertEquals( $list['catalog.code'], $item->getCode() );

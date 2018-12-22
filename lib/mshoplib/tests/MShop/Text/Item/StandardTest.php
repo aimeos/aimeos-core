@@ -196,7 +196,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Text\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'text.id' => 1,
 			'text.type' => 'test',
 			'text.languageid' => 'de',
@@ -206,10 +206,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'text.status' => 0,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['text.id'], $item->getId() );
 		$this->assertEquals( $list['text.type'], $item->getType() );
 		$this->assertEquals( $list['text.languageid'], $item->getLanguageId() );

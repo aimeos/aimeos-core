@@ -329,33 +329,35 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order service attribute item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'order.base.service.attribute.attrid': $this->setAttributeId( $value ); break;
-				case 'order.base.service.attribute.parentid': $this->setParentId( $value ); break;
-				case 'order.base.service.attribute.type': $this->setType( $value ); break;
-				case 'order.base.service.attribute.name': $this->setName( $value ); break;
-				case 'order.base.service.attribute.code': $this->setCode( $value ); break;
-				case 'order.base.service.attribute.value': $this->setValue( $value ); break;
-				case 'order.base.service.attribute.quantity': $this->setQuantity( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'order.base.service.attribute.siteid': $item = $item->setSiteId( $value ); break;
+				case 'order.base.service.attribute.attrid': $item = $item->setAttributeId( $value ); break;
+				case 'order.base.service.attribute.parentid': $item = $item->setParentId( $value ); break;
+				case 'order.base.service.attribute.type': $item = $item->setType( $value ); break;
+				case 'order.base.service.attribute.name': $item = $item->setName( $value ); break;
+				case 'order.base.service.attribute.code': $item = $item->setCode( $value ); break;
+				case 'order.base.service.attribute.value': $item = $item->setValue( $value ); break;
+				case 'order.base.service.attribute.quantity': $item = $item->setQuantity( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

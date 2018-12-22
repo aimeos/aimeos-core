@@ -188,29 +188,30 @@ class Standard
 
 
 	/**
-	 * Sets the item values from the given array.
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'cache.id': $this->setId( $value ); break;
-				case 'cache.value': $this->setValue( $value ); break;
-				case 'cache.expire': $this->setTimeExpire( $value ); break;
-				case 'cache.tags': $this->setTags( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'cache.id': $item = $item->setId( $value ); break;
+				case 'cache.value': $item = $item->setValue( $value ); break;
+				case 'cache.expire': $item = $item->setTimeExpire( $value ); break;
+				case 'cache.tags': $item = $item->setTags( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

@@ -245,7 +245,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Service\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'service.id' => 1,
 			'service.type' => 'test',
 			'service.code' => 'test',
@@ -258,10 +258,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'service.status' => 0,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['service.id'], $item->getId() );
 		$this->assertEquals( $list['service.code'], $item->getCode() );
 		$this->assertEquals( $list['service.label'], $item->getLabel() );

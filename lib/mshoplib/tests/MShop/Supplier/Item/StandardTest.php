@@ -169,17 +169,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Supplier\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'supplier.id' => 1,
 			'supplier.code' => 'test',
 			'supplier.label' => 'test item',
 			'supplier.status' => 0,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['supplier.id'], $item->getId() );
 		$this->assertEquals( $list['supplier.code'], $item->getCode() );
 		$this->assertEquals( $list['supplier.label'], $item->getLabel() );

@@ -148,7 +148,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Stock\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'stock.id' => 1,
 			'stock.type' => 'default',
 			'stock.stocklevel' => 10,
@@ -156,10 +156,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'stock.dateback' => '2000-01-01 00:00:00',
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['stock.id'], $item->getId() );
 		$this->assertEquals( $list['stock.type'], $item->getType() );
 		$this->assertEquals( $list['stock.productcode'], $item->getProductCode() );

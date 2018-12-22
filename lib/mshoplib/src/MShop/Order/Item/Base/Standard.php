@@ -359,35 +359,38 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-
-		foreach( $list as $key => $value )
-		{
-			switch( $key )
-			{
-				case 'order.base.id': $this->setId( $value ); break;
-				case 'order.base.comment': $this->setComment( $value ); break;
-				case 'order.base.customerid': $this->setCustomerId( $value ); break;
-				case 'order.base.status': $this->setStatus( $value ); break;
-				case 'order.base.languageid': $this->locale->setLanguageId( $value ); break;
-				default: $unknown[$key] = $value;
-			}
-		}
+		$item = $this;
+		$locale = $item->getLocale();
 
 		unset( $list['order.base.siteid'] );
 		unset( $list['order.base.ctime'] );
 		unset( $list['order.base.mtime'] );
 		unset( $list['order.base.editor'] );
 
-		return $unknown;
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'order.base.id': $item = $item->setId( $value ); break;
+				case 'order.base.comment': $item = $item->setComment( $value ); break;
+				case 'order.base.customerid': $item = $item->setCustomerId( $value ); break;
+				case 'order.base.status': $item = $item->setStatus( $value ); break;
+				case 'order.base.languageid': $locale = $locale->setLanguageId( $value ); break;
+				default: continue 2;
+			}
+
+			unset( $list[$key] );
+		}
+
+		return $item->setLocale( $locale );
 	}
 
 

@@ -242,32 +242,32 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Type item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
-		unset( $list[$this->prefix . 'name'] );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case $this->prefix . 'code': $this->setCode( $value ); break;
-				case $this->prefix . 'domain': $this->setDomain( $value ); break;
-				case $this->prefix . 'label': $this->setLabel( $value ); break;
-				case $this->prefix . 'position': $this->setPosition( $value ); break;
-				case $this->prefix . 'status': $this->setStatus( $value ); break;
-				default: $unknown[$key] = $value;
+				case $this->prefix . 'code': $item = $item->setCode( $value ); break;
+				case $this->prefix . 'domain': $item = $item->setDomain( $value ); break;
+				case $this->prefix . 'label': $item = $item->setLabel( $value ); break;
+				case $this->prefix . 'position': $item = $item->setPosition( $value ); break;
+				case $this->prefix . 'status': $item = $item->setStatus( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

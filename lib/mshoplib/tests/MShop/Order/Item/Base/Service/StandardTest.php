@@ -444,7 +444,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Order\Item\Base\Service\Standard( new \Aimeos\MShop\Price\Item\Standard() );
 
-		$list = array(
+		$list = $entries = array(
 			'order.base.service.id' => 1,
 			'order.base.service.baseid' => 2,
 			'order.base.service.serviceid' => 3,
@@ -453,10 +453,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.service.type' => 'delivery',
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['order.base.service.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.service.baseid'], $item->getBaseId() );
 		$this->assertEquals( $list['order.base.service.serviceid'], $item->getServiceId() );

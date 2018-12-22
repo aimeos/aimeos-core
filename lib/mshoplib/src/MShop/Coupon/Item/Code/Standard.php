@@ -256,32 +256,33 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon code item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'coupon.code.count': $this->setCount( $value ); break;
-				case 'coupon.code.code': $this->setCode( $value ); break;
-				case 'coupon.code.parentid': $this->setParentId( $value ); break;
-				case 'coupon.code.datestart': $this->setDateStart( $value ); break;
-				case 'coupon.code.dateend': $this->setDateEnd( $value ); break;
-				case 'coupon.code.ref': $this->setRef( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'coupon.code.count': $item = $item->setCount( $value ); break;
+				case 'coupon.code.code': $item = $item->setCode( $value ); break;
+				case 'coupon.code.parentid': $item = $item->setParentId( $value ); break;
+				case 'coupon.code.datestart': $item = $item->setDateStart( $value ); break;
+				case 'coupon.code.dateend': $item = $item->setDateEnd( $value ); break;
+				case 'coupon.code.ref': $item = $item->setRef( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

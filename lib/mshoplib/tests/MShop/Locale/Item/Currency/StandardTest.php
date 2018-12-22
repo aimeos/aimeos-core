@@ -160,17 +160,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Locale\Item\Currency\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'locale.currency.id' => 'EUR',
 			'locale.currency.code' => 'EUR',
 			'locale.currency.label' => 'test item',
 			'locale.currency.status' => 1,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['locale.currency.id'], $item->getId() );
 		$this->assertEquals( $list['locale.currency.code'], $item->getCode() );
 		$this->assertEquals( $list['locale.currency.label'], $item->getLabel() );

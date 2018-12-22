@@ -154,17 +154,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Order\Item\Base\Coupon\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'order.base.coupon.id' => 1,
 			'order.base.coupon.baseid' => 2,
 			'order.base.coupon.productid' => 3,
 			'order.base.coupon.code' => 'test',
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['order.base.coupon.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.coupon.baseid'], $item->getBaseId() );
 		$this->assertEquals( $list['order.base.coupon.productid'], $item->getProductId() );

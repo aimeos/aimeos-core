@@ -192,7 +192,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Coupon\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'coupon.id' => 1,
 			'coupon.config' => array( 'test' ),
 			'coupon.label' => 'test item',
@@ -200,9 +200,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'coupon.status' => 0,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
+		$this->assertEquals( [], $entries );
 
 		$this->assertEquals( $list['coupon.id'], $item->getId() );
 		$this->assertEquals( $list['coupon.config'], $item->getConfig() );

@@ -613,49 +613,47 @@ class Standard extends Base implements Iface
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-
-		if( isset( $list['order.base.product.siteid'] ) ) { // set siteid in this class too
-			$this->setSiteId( $list['order.base.product.siteid'] );
-		}
-
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
+		$price = $item->getPrice();
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'order.base.product.baseid': $this->setBaseId( $value ); break;
-				case 'order.base.product.ordprodid': $this->setOrderProductId( $value ); break;
-				case 'order.base.product.type': $this->setType( $value ); break;
-				case 'order.base.product.stocktype': $this->setStockType( $value ); break;
-				case 'order.base.product.suppliercode': $this->setSupplierCode( $value ); break;
-				case 'order.base.product.productid': $this->setProductId( $value ); break;
-				case 'order.base.product.prodcode': $this->setProductCode( $value ); break;
-				case 'order.base.product.name': $this->setName( $value ); break;
-				case 'order.base.product.mediaurl': $this->setMediaUrl( $value ); break;
-				case 'order.base.product.target': $this->setTarget( $value ); break;
-				case 'order.base.product.position': $this->setPosition( $value ); break;
-				case 'order.base.product.quantity': $this->setQuantity( $value ); break;
-				case 'order.base.product.status': $this->setStatus( $value ); break;
-				case 'order.base.product.flags': $this->setFlags( $value ); break;
-				case 'order.base.product.price': $this->price->setValue( $value ); break;
-				case 'order.base.product.costs': $this->price->setCosts( $value ); break;
-				case 'order.base.product.rebate': $this->price->setRebate( $value ); break;
-				case 'order.base.product.taxrate': $this->price->setTaxRate( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'order.base.product.siteid': $item = $item->setSiteId( $value ); break;
+				case 'order.base.product.baseid': $item = $item->setBaseId( $value ); break;
+				case 'order.base.product.ordprodid': $item = $item->setOrderProductId( $value ); break;
+				case 'order.base.product.type': $item = $item->setType( $value ); break;
+				case 'order.base.product.stocktype': $item = $item->setStockType( $value ); break;
+				case 'order.base.product.suppliercode': $item = $item->setSupplierCode( $value ); break;
+				case 'order.base.product.productid': $item = $item->setProductId( $value ); break;
+				case 'order.base.product.prodcode': $item = $item->setProductCode( $value ); break;
+				case 'order.base.product.name': $item = $item->setName( $value ); break;
+				case 'order.base.product.mediaurl': $item = $item->setMediaUrl( $value ); break;
+				case 'order.base.product.target': $item = $item->setTarget( $value ); break;
+				case 'order.base.product.position': $item = $item->setPosition( $value ); break;
+				case 'order.base.product.quantity': $item = $item->setQuantity( $value ); break;
+				case 'order.base.product.status': $item = $item->setStatus( $value ); break;
+				case 'order.base.product.flags': $item = $item->setFlags( $value ); break;
+				case 'order.base.product.price': $price = $price->setValue( $value ); break;
+				case 'order.base.product.costs': $price = $price->setCosts( $value ); break;
+				case 'order.base.product.rebate': $price = $price->setRebate( $value ); break;
+				case 'order.base.product.taxrate': $price = $price->setTaxRate( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item->setPrice( $price );
 	}
 
 

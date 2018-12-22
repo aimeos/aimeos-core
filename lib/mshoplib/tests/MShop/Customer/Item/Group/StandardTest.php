@@ -105,15 +105,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Customer\Item\Group\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'customer.group.id' => 12,
 			'customer.group.code' => 'unitgroup',
 			'customer.group.label' => 'unittest12',
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['customer.group.id'], $item->getId() );
 		$this->assertEquals( $list['customer.group.code'], $item->getCode() );
 		$this->assertEquals( $list['customer.group.label'], $item->getLabel() );

@@ -260,32 +260,33 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'catalog.id': $this->setId( $value ); break;
-				case 'catalog.code': $this->setCode( $value ); break;
-				case 'catalog.label': $this->setLabel( $value ); break;
-				case 'catalog.status': $this->setStatus( $value ); break;
-				case 'catalog.config': $this->setConfig( $value ); break;
-				case 'catalog.target': $this->setTarget( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'catalog.id': $item = $item->setId( $value ); break;
+				case 'catalog.code': $item = $item->setCode( $value ); break;
+				case 'catalog.label': $item = $item->setLabel( $value ); break;
+				case 'catalog.status': $item = $item->setStatus( $value ); break;
+				case 'catalog.config': $item = $item->setConfig( $value ); break;
+				case 'catalog.target': $item = $item->setTarget( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

@@ -361,35 +361,36 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'service.type': $this->setType( $value ); break;
-				case 'service.code': $this->setCode( $value ); break;
-				case 'service.label': $this->setLabel( $value ); break;
-				case 'service.provider': $this->setProvider( $value ); break;
-				case 'service.position': $this->setPosition( $value ); break;
-				case 'service.datestart': $this->setDateStart( $value ); break;
-				case 'service.dateend': $this->setDateEnd( $value ); break;
-				case 'service.config': $this->setConfig( $value ); break;
-				case 'service.status': $this->setStatus( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'service.type': $item = $item->setType( $value ); break;
+				case 'service.code': $item = $item->setCode( $value ); break;
+				case 'service.label': $item = $item->setLabel( $value ); break;
+				case 'service.provider': $item = $item->setProvider( $value ); break;
+				case 'service.position': $item = $item->setPosition( $value ); break;
+				case 'service.datestart': $item = $item->setDateStart( $value ); break;
+				case 'service.dateend': $item = $item->setDateEnd( $value ); break;
+				case 'service.config': $item = $item->setConfig( $value ); break;
+				case 'service.status': $item = $item->setStatus( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

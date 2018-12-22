@@ -141,7 +141,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Common\Item\Property\Standard( 'common.property.' );
 
-		$list = array(
+		$list = $entries = array(
 			'common.property.parentid' => 1,
 			'common.property.type' => 'default',
 			'common.property.type' => 'test',
@@ -149,10 +149,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.property.value' => 'value',
 		);
 
-		$unknown = $item->fromArray($list);
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals([], $unknown);
-
+		$this->assertEquals([], $entries);
 		$this->assertEquals($list['common.property.parentid'], $item->getParentId());
 		$this->assertEquals($list['common.property.languageid'], $item->getLanguageId());
 		$this->assertEquals($list['common.property.value'], $item->getValue());

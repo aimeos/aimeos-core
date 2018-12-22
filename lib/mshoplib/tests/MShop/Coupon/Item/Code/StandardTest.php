@@ -203,7 +203,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Coupon\Item\Code\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'coupon.code.id' => 1,
 			'coupon.code.parentid' => 2,
 			'coupon.code.code' => 'test',
@@ -211,9 +211,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'coupon.code.ref' => 'def',
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
+		$this->assertEquals( [], $entries );
 
 		$this->assertEquals( $list['coupon.code.id'], $item->getId() );
 		$this->assertEquals( $list['coupon.code.parentid'], $item->getParentId() );

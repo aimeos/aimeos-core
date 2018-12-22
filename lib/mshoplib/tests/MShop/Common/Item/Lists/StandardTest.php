@@ -259,7 +259,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.' );
 
-		$list = array(
+		$list = $entries = array(
 			'common.lists.id' => 8,
 			'common.lists.parentid' => 2,
 			'common.lists.type' => 'default',
@@ -270,9 +270,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.status' => 1,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
+		$this->assertEquals( [], $entries );
 
 		$this->assertEquals( $list['common.lists.id'], $item->getId() );
 		$this->assertEquals( $list['common.lists.parentid'], $item->getParentId() );

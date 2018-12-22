@@ -255,32 +255,33 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'coupon.config': $this->setConfig( $value ); break;
-				case 'coupon.label': $this->setLabel( $value ); break;
-				case 'coupon.datestart': $this->setDateStart( $value ); break;
-				case 'coupon.dateend': $this->setDateEnd( $value ); break;
-				case 'coupon.provider': $this->setProvider( $value ); break;
-				case 'coupon.status': $this->setStatus( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'coupon.config': $item = $item->setConfig( $value ); break;
+				case 'coupon.label': $item = $item->setLabel( $value ); break;
+				case 'coupon.datestart': $item = $item->setDateStart( $value ); break;
+				case 'coupon.dateend': $item = $item->setDateEnd( $value ); break;
+				case 'coupon.provider': $item = $item->setProvider( $value ); break;
+				case 'coupon.status': $item = $item->setStatus( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

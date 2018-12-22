@@ -286,35 +286,32 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-
-		if( isset( $list['locale.siteid'] ) ) {
-			$this->setSiteId( $list['locale.siteid'] );
-		}
-
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'locale.languageid': $this->setLanguageId( $value ); break;
-				case 'locale.currencyid': $this->setCurrencyId( $value ); break;
-				case 'locale.position': $this->setPosition( $value ); break;
-				case 'locale.status': $this->setStatus( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'locale.siteid': $item = $item->setSiteId( $value ); break;
+				case 'locale.languageid': $item = $item->setLanguageId( $value ); break;
+				case 'locale.currencyid': $item = $item->setCurrencyId( $value ); break;
+				case 'locale.position': $item = $item->setPosition( $value ); break;
+				case 'locale.status': $item = $item->setStatus( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

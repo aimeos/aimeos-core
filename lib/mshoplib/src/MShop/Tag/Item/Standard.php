@@ -188,30 +188,31 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'tag.languageid': $this->setLanguageId( $value ); break;
-				case 'tag.domain': $this->setDomain( $value ); break;
-				case 'tag.label': $this->setLabel( $value ); break;
-				case 'tag.type': $this->setType( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'tag.languageid': $item = $item->setLanguageId( $value ); break;
+				case 'tag.domain': $item = $item->setDomain( $value ); break;
+				case 'tag.label': $item = $item->setLabel( $value ); break;
+				case 'tag.type': $item = $item->setType( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

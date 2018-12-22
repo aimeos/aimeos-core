@@ -176,7 +176,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Order\Item\Base\Standard( new \Aimeos\MShop\Price\Item\Standard(), new \Aimeos\MShop\Locale\Item\Standard() );
 
-		$list = array(
+		$list = $entries = array(
 			'order.base.id' => 1,
 			'order.base.comment' => 'test comment',
 			'order.base.languageid' => 'de',
@@ -184,10 +184,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.status' => 4,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['order.base.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.customerid'], $item->getCustomerId() );
 		$this->assertEquals( $list['order.base.languageid'], $item->getLocale()->getLanguageId() );

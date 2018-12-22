@@ -512,38 +512,39 @@ class Standard extends Base
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'price.type': $this->setType( $value ); break;
-				case 'price.currencyid': $this->setCurrencyId( $value ); break;
-				case 'price.domain': $this->setDomain( $value ); break;
-				case 'price.quantity': $this->setQuantity( $value ); break;
-				case 'price.value': $this->setValue( $value ); break;
-				case 'price.costs': $this->setCosts( $value ); break;
-				case 'price.rebate': $this->setRebate( $value ); break;
-				case 'price.taxvalue': $this->setTaxValue( $value ); break;
-				case 'price.taxrate': $this->setTaxRate( $value ); break;
-				case 'price.taxflag': $this->setTaxFlag( $value ); break;
-				case 'price.status': $this->setStatus( $value ); break;
-				case 'price.label': $this->setLabel( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'price.type': $item = $item->setType( $value ); break;
+				case 'price.currencyid': $item = $item->setCurrencyId( $value ); break;
+				case 'price.domain': $item = $item->setDomain( $value ); break;
+				case 'price.quantity': $item = $item->setQuantity( $value ); break;
+				case 'price.value': $item = $item->setValue( $value ); break;
+				case 'price.costs': $item = $item->setCosts( $value ); break;
+				case 'price.rebate': $item = $item->setRebate( $value ); break;
+				case 'price.taxvalue': $item = $item->setTaxValue( $value ); break;
+				case 'price.taxrate': $item = $item->setTaxRate( $value ); break;
+				case 'price.taxflag': $item = $item->setTaxFlag( $value ); break;
+				case 'price.status': $item = $item->setStatus( $value ); break;
+				case 'price.label': $item = $item->setLabel( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

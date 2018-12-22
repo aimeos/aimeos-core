@@ -243,7 +243,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Order\Item\Base\Service\Attribute\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'order.base.service.attribute.id' => 1,
 			'order.base.service.attribute.attrid' => 2,
 			'order.base.service.attribute.parentid' => 3,
@@ -254,10 +254,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.service.attribute.quantity' => 4,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['order.base.service.attribute.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.service.attribute.attrid'], $item->getAttributeId() );
 		$this->assertEquals( $list['order.base.service.attribute.parentid'], $item->getParentId() );

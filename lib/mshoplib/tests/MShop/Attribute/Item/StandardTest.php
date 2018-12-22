@@ -193,9 +193,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Attribute\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'attribute.id' => 1,
-			'attribute.siteid' => 2,
 			'attribute.code' => 'test',
 			'attribute.domain' => 'product',
 			'attribute.status' => '0',
@@ -203,15 +202,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'attribute.type' => 'testtype',
 			'attribute.label' => 'test attribute',
 			'attribute.position' => 10,
-			'attribute.ctime' => '2000-01-01 00:00:00',
-			'attribute.mtime' => '2001-01-01 00:00:00',
-			'attribute.editor' => 'test',
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['attribute.id'], $item->getId() );
 		$this->assertEquals( $list['attribute.code'], $item->getCode() );
 		$this->assertEquals( $list['attribute.domain'], $item->getDomain() );

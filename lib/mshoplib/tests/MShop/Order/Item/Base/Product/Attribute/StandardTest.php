@@ -242,7 +242,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Order\Item\Base\Product\Attribute\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'order.base.product.attribute.id' => 1,
 			'order.base.product.attribute.siteid' => 123,
 			'order.base.product.attribute.attrid' => 2,
@@ -254,10 +254,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.attribute.quantity' => 4,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['order.base.product.attribute.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.product.attribute.siteid'], $item->getSiteId() );
 		$this->assertEquals( $list['order.base.product.attribute.attrid'], $item->getAttributeId() );

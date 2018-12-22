@@ -305,36 +305,38 @@ class Standard extends Base implements Iface
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'order.base.service.baseid': $this->setBaseId( $value ); break;
-				case 'order.base.service.code': $this->setCode( $value ); break;
-				case 'order.base.service.serviceid': $this->setServiceId( $value ); break;
-				case 'order.base.service.name': $this->setName( $value ); break;
-				case 'order.base.service.mediaurl': $this->setMediaUrl( $value ); break;
-				case 'order.base.service.type': $this->setType( $value ); break;
-				case 'order.base.service.price': $this->price->setValue( $value ); break;
-				case 'order.base.service.costs': $this->price->setCosts( $value ); break;
-				case 'order.base.service.rebate': $this->price->setRebate( $value ); break;
-				case 'order.base.service.taxrate': $this->price->setTaxRate( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'order.base.service.siteid': $item = $item->setSiteId( $value ); break;
+				case 'order.base.service.baseid': $item = $item->setBaseId( $value ); break;
+				case 'order.base.service.code': $item = $item->setCode( $value ); break;
+				case 'order.base.service.serviceid': $item = $item->setServiceId( $value ); break;
+				case 'order.base.service.name': $item = $item->setName( $value ); break;
+				case 'order.base.service.mediaurl': $item = $item->setMediaUrl( $value ); break;
+				case 'order.base.service.type': $item = $item->setType( $value ); break;
+				case 'order.base.service.price': $item = $item->price->setValue( $value ); break;
+				case 'order.base.service.costs': $item = $item->price->setCosts( $value ); break;
+				case 'order.base.service.rebate': $item = $item->price->setRebate( $value ); break;
+				case 'order.base.service.taxrate': $item = $item->price->setTaxRate( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

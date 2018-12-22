@@ -161,19 +161,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Common\Item\Type\Standard( 'common.type.' );
 
-		$list = array(
+		$list = $entries = array(
 			'common.type.id' => 8,
 			'common.type.code' => 'test',
 			'common.type.domain' => 'testDomain',
 			'common.type.label' => 'test item',
-			'common.type.name' => 'Testeintrag',
 			'common.type.position' => 2,
 			'common.type.status' => 1,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
+		$this->assertEquals( [], $entries );
 
 		$this->assertEquals( $list['common.type.id'], $item->getId() );
 		$this->assertEquals( $list['common.type.code'], $item->getCode() );

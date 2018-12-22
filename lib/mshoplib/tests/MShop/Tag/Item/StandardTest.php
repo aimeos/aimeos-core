@@ -143,7 +143,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Tag\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'tag.id' => 1,
 			'tag.type' => 'test',
 			'tag.domain' => 'product',
@@ -151,10 +151,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'tag.languageid' => 'de',
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['tag.id'], $item->getId() );
 		$this->assertEquals( $list['tag.type'], $item->getType() );
 		$this->assertEquals( $list['tag.domain'], $item->getDomain() );

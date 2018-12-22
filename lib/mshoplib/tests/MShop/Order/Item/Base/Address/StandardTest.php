@@ -510,7 +510,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$list = array(
+		$list = $entries = array(
 			'order.base.address.id' => 1,
 			'order.base.address.baseid' => 2,
 			'order.base.address.addressid' => 3,
@@ -518,7 +518,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$object = new \Aimeos\MShop\Order\Item\Base\Address\Standard();
-		$object->fromArray( $list );
+		$object = $object->fromArray( $entries );
 
 		$this->assertEquals( $list['order.base.address.id'], $object->getId() );
 		$this->assertEquals( $list['order.base.address.baseid'], $object->getBaseId() );

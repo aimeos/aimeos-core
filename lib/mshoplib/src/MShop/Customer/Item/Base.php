@@ -128,47 +128,48 @@ abstract class Base
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
-		$addr = $this->getPaymentAddress();
+		$item = parent::fromArray( $list );
+		$addr = $item->getPaymentAddress();
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'customer.salutation': $addr->setSalutation( $value ); break;
-				case 'customer.company': $addr->setCompany( $value ); break;
-				case 'customer.vatid': $addr->setVatID( $value ); break;
-				case 'customer.title': $addr->setTitle( $value ); break;
-				case 'customer.firstname': $addr->setFirstname( $value ); break;
-				case 'customer.lastname': $addr->setLastname( $value ); break;
-				case 'customer.address1': $addr->setAddress1( $value ); break;
-				case 'customer.address2': $addr->setAddress2( $value ); break;
-				case 'customer.address3': $addr->setAddress3( $value ); break;
-				case 'customer.postal': $addr->setPostal( $value ); break;
-				case 'customer.city': $addr->setCity( $value ); break;
-				case 'customer.state': $addr->setState( $value ); break;
-				case 'customer.languageid': $addr->setLanguageId( $value ); break;
-				case 'customer.countryid': $addr->setCountryId( $value ); break;
-				case 'customer.telephone': $addr->setTelephone( $value ); break;
-				case 'customer.email': $addr->setEmail( $value ); break;
-				case 'customer.telefax': $addr->setTelefax( $value ); break;
-				case 'customer.website': $addr->setWebsite( $value ); break;
-				case 'customer.longitude': $addr->setLongitude( $value ); break;
-				case 'customer.latitude': $addr->setLatitude( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'customer.salutation': $addr = $addr->setSalutation( $value ); break;
+				case 'customer.company': $addr = $addr->setCompany( $value ); break;
+				case 'customer.vatid': $addr = $addr->setVatID( $value ); break;
+				case 'customer.title': $addr = $addr->setTitle( $value ); break;
+				case 'customer.firstname': $addr = $addr->setFirstname( $value ); break;
+				case 'customer.lastname': $addr = $addr->setLastname( $value ); break;
+				case 'customer.address1': $addr = $addr->setAddress1( $value ); break;
+				case 'customer.address2': $addr = $addr->setAddress2( $value ); break;
+				case 'customer.address3': $addr = $addr->setAddress3( $value ); break;
+				case 'customer.postal': $addr = $addr->setPostal( $value ); break;
+				case 'customer.city': $addr = $addr->setCity( $value ); break;
+				case 'customer.state': $addr = $addr->setState( $value ); break;
+				case 'customer.languageid': $addr = $addr->setLanguageId( $value ); break;
+				case 'customer.countryid': $addr = $addr->setCountryId( $value ); break;
+				case 'customer.telephone': $addr = $addr->setTelephone( $value ); break;
+				case 'customer.email': $addr = $addr->setEmail( $value ); break;
+				case 'customer.telefax': $addr = $addr->setTelefax( $value ); break;
+				case 'customer.website': $addr = $addr->setWebsite( $value ); break;
+				case 'customer.longitude': $addr = $addr->setLongitude( $value ); break;
+				case 'customer.latitude': $addr = $addr->setLatitude( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item->setPaymentAddress( $addr );
 	}
 
 

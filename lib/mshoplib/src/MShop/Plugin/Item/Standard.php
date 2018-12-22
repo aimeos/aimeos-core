@@ -261,32 +261,33 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'plugin.type': $this->setType( $value ); break;
-				case 'plugin.label': $this->setLabel( $value ); break;
-				case 'plugin.provider': $this->setProvider( $value ); break;
-				case 'plugin.config': $this->setConfig( $value ); break;
-				case 'plugin.status': $this->setStatus( $value ); break;
-				case 'plugin.position': $this->setPosition( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'plugin.type': $item = $item->setType( $value ); break;
+				case 'plugin.label': $item = $item->setLabel( $value ); break;
+				case 'plugin.provider': $item = $item->setProvider( $value ); break;
+				case 'plugin.config': $item = $item->setConfig( $value ); break;
+				case 'plugin.status': $item = $item->setStatus( $value ); break;
+				case 'plugin.position': $item = $item->setPosition( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

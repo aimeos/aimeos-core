@@ -361,7 +361,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Price\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'price.id' => 1,
 			'price.type' => 'test',
 			'price.label' => 'test item',
@@ -376,10 +376,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'price.status' => 0,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['price.id'], $item->getId() );
 		$this->assertEquals( $list['price.type'], $item->getType() );
 		$this->assertEquals( $list['price.label'], $item->getLabel() );

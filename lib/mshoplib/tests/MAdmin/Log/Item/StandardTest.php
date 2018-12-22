@@ -148,7 +148,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MAdmin\Log\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'log.id' => 1,
 			'log.siteid' => 2,
 			'log.priority' => 1,
@@ -158,10 +158,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'log.request' => 'UT request',
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( array( 'log.timestamp' => '2010-01-01 00:00:00' ), $unknown );
-
+		$this->assertEquals( ['log.siteid' => 2, 'log.timestamp' => '2010-01-01 00:00:00'], $entries );
 		$this->assertEquals( $list['log.id'], $item->getId() );
 		$this->assertEquals( $list['log.priority'], $item->getPriority() );
 		$this->assertEquals( $list['log.facility'], $item->getFacility() );

@@ -299,7 +299,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.' );
 		$item = new \Aimeos\MShop\Customer\Item\Standard( $address );
 
-		$list = array(
+		$list = $entries = array(
 			'customer.id' => 1,
 			'customer.code' => '12345ABCDEF',
 			'customer.label' => 'unitObject',
@@ -330,10 +330,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.groups' => [1, 2],
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['customer.id'], $item->getId() );
 		$this->assertEquals( $list['customer.code'], $item->getCode() );
 		$this->assertEquals( $list['customer.label'], $item->getLabel() );

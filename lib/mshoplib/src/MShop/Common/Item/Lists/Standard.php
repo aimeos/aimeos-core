@@ -393,35 +393,36 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface List item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case $this->prefix . 'parentid': $this->setParentId( $value ); break;
-				case $this->prefix . 'type': $this->setType( $value ); break;
-				case $this->prefix . 'domain': $this->setDomain( $value ); break;
-				case $this->prefix . 'refid': $this->setRefId( $value ); break;
-				case $this->prefix . 'datestart': $this->setDateStart( $value ); break;
-				case $this->prefix . 'dateend': $this->setDateEnd( $value ); break;
-				case $this->prefix . 'config': $this->setConfig( $value ); break;
-				case $this->prefix . 'position': $this->setPosition( $value ); break;
-				case $this->prefix . 'status': $this->setStatus( $value ); break;
-				default: $unknown[$key] = $value;
+				case $this->prefix . 'parentid': $item = $item->setParentId( $value ); break;
+				case $this->prefix . 'type': $item = $item->setType( $value ); break;
+				case $this->prefix . 'domain': $item = $item->setDomain( $value ); break;
+				case $this->prefix . 'refid': $item = $item->setRefId( $value ); break;
+				case $this->prefix . 'datestart': $item = $item->setDateStart( $value ); break;
+				case $this->prefix . 'dateend': $item = $item->setDateEnd( $value ); break;
+				case $this->prefix . 'config': $item = $item->setConfig( $value ); break;
+				case $this->prefix . 'position': $item = $item->setPosition( $value ); break;
+				case $this->prefix . 'status': $item = $item->setStatus( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 

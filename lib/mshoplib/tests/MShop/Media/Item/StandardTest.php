@@ -254,7 +254,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Media\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'media.id' => 1,
 			'media.domain' => 'product',
 			'media.label' => 'test item',
@@ -267,10 +267,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'media.status' => 0,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['media.id'], $item->getId() );
 		$this->assertEquals( $list['media.domain'], $item->getDomain() );
 		$this->assertEquals( $list['media.label'], $item->getLabel() );

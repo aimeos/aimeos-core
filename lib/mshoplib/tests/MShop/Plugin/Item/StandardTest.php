@@ -201,7 +201,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Plugin\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'plugin.id' => 1,
 			'plugin.type' => 'test',
 			'plugin.label' => 'test item',
@@ -210,10 +210,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'plugin.status' => 0,
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['plugin.id'], $item->getId() );
 		$this->assertEquals( $list['plugin.type'], $item->getType() );
 		$this->assertEquals( $list['plugin.label'], $item->getLabel() );

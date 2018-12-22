@@ -630,7 +630,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Order\Item\Base\Product\Standard( new \Aimeos\MShop\Price\Item\Standard() );
 
-		$list = array(
+		$list = $entries = array(
 			'order.base.product.id' => 1,
 			'order.base.product.baseid' => 2,
 			'order.base.product.siteid' => 123,
@@ -652,10 +652,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.taxrate' => '20.00',
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['order.base.product.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.product.baseid'], $item->getBaseId() );
 		$this->assertEquals( $list['order.base.product.siteid'], $item->getSiteId() );

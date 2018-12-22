@@ -108,12 +108,12 @@ interface Iface
 	public function isModified();
 
 	/**
-	 * Sets the item values from the given array.
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array $list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function fromArray( array $list );
+	public function fromArray( array &$list );
 
 	/**
 	 * Returns an associative list of item properties.

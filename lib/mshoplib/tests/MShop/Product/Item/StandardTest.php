@@ -327,7 +327,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = new \Aimeos\MShop\Product\Item\Standard();
 
-		$list = array(
+		$list = $entries = array(
 			'product.id' => 1,
 			'product.type' => 'test',
 			'product.label' => 'test item',
@@ -339,10 +339,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.target' => 'ttarget',
 		);
 
-		$unknown = $item->fromArray( $list );
+		$item = $item->fromArray( $entries );
 
-		$this->assertEquals( [], $unknown );
-
+		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['product.id'], $item->getId() );
 		$this->assertEquals( $list['product.code'], $item->getCode() );
 		$this->assertEquals( $list['product.label'], $item->getLabel() );

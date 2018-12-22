@@ -374,34 +374,35 @@ class Standard
 	}
 
 
-	/**
-	 * Sets the item values from the given array.
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array $list Associative list of item keys and their values
-	 * @return array Associative list of keys and their values that are unknown
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function fromArray( array $list )
+	public function fromArray( array &$list )
 	{
-		$unknown = [];
-		$list = parent::fromArray( $list );
+		$item = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'media.domain': $this->setDomain( $value ); break;
-				case 'media.label': $this->setLabel( $value ); break;
-				case 'media.languageid': $this->setLanguageId( $value ); break;
-				case 'media.mimetype': $this->setMimeType( $value ); break;
-				case 'media.type': $this->setType( $value ); break;
-				case 'media.url': $this->setUrl( $value ); break;
-				case 'media.preview': $this->setPreview( $value ); break;
-				case 'media.status': $this->setStatus( $value ); break;
-				default: $unknown[$key] = $value;
+				case 'media.domain': $item = $item->setDomain( $value ); break;
+				case 'media.label': $item = $item->setLabel( $value ); break;
+				case 'media.languageid': $item = $item->setLanguageId( $value ); break;
+				case 'media.mimetype': $item = $item->setMimeType( $value ); break;
+				case 'media.type': $item = $item->setType( $value ); break;
+				case 'media.url': $item = $item->setUrl( $value ); break;
+				case 'media.preview': $item = $item->setPreview( $value ); break;
+				case 'media.status': $item = $item->setStatus( $value ); break;
+				default: continue 2;
 			}
+
+			unset( $list[$key] );
 		}
 
-		return $unknown;
+		return $item;
 	}
 
 
