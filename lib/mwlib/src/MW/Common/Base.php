@@ -25,6 +25,7 @@ abstract class Base
 	 *
 	 * @param string $name Class or interface name
 	 * @param mixed $object Class instance to test
+	 * @return mixed Tested class instance
 	 * @throws \Aimeos\MW\Common\Exception if the object doesn't extend the class or implements the interface
 	 */
 	public static function checkClass( $name, $object )
@@ -32,6 +33,8 @@ abstract class Base
 		if( ($object instanceof $name) === false ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Object doesn\'t implement "%1$s"', $name ) );
 		}
+
+		return $object;
 	}
 
 
@@ -40,6 +43,7 @@ abstract class Base
 	 *
 	 * @param string $name Name of the class or interface
 	 * @param array $list List of objects to test
+	 * @return mixed Tested list of class instances
 	 * @throws \Aimeos\MW\Common\Exception if an object of the list doesn't match the type
 	 */
 	public static function checkClassList( $name, array $list )
@@ -50,5 +54,7 @@ abstract class Base
 				throw new \Aimeos\MW\Common\Exception( sprintf( 'Object doesn\'t implement "%1$s"', $name ) );
 			}
 		}
+
+		return $list;
 	}
 }
