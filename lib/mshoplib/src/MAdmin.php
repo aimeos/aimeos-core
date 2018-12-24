@@ -18,7 +18,7 @@ namespace Aimeos;
 class MAdmin
 {
 	static private $cache = true;
-	static private $managers = [];
+	static private $objects = [];
 
 
 	/**
@@ -41,7 +41,7 @@ class MAdmin
 	 */
 	static public function clear()
 	{
-		self::$managers = [];
+		self::$objects = [];
 	}
 
 
@@ -69,7 +69,7 @@ class MAdmin
 
 		$id = (string) $context;
 
-		if( !isset( self::$managers[$id][$path] ) )
+		if( !isset( self::$objects[$id][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -97,10 +97,10 @@ class MAdmin
 				throw new \Aimeos\MAdmin\Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 			}
 
-			self::$managers[$id][$name] = $manager;
+			self::$objects[$id][$name] = $manager;
 		}
 
-		return self::$managers[$id][$path];
+		return self::$objects[$id][$path];
 	}
 
 
@@ -116,6 +116,6 @@ class MAdmin
 	 */
 	static public function inject( \Aimeos\MShop\Context\Item\Iface $context, $path, \Aimeos\MShop\Common\Manager\Iface $object )
 	{
-		self::$managers[(string) $context][$path] = $object;
+		self::$objects[(string) $context][$path] = $object;
 	}
 }
