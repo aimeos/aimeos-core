@@ -18,7 +18,7 @@ namespace Aimeos;
 class MShop
 {
 	static private $cache = true;
-	static private $managers = [];
+	static private $objects = [];
 
 
 	/**
@@ -38,26 +38,10 @@ class MShop
 
 	/**
 	 * Removes all manager objects from the cache
-	 *
-	 * If neither a context ID nor a path is given, the complete cache will be pruned.
-	 *
-	 * @param integer|null $id Context ID the objects have been created with (string of \Aimeos\MShop\Context\Item\Iface)
-	 * @param string|null $path Path describing the manager to clear, e.g. "product/lists/type"
 	 */
-	static public function clear( $id = null, $path = null )
+	static public function clear()
 	{
-		if( $id !== null )
-		{
-			if( $path !== null ) {
-				self::$managers[$id][$path] = null;
-			} else {
-				self::$managers[$id] = [];
-			}
-
-			return;
-		}
-
-		self::$managers = [];
+		self::$objects = [];
 	}
 
 
@@ -86,7 +70,7 @@ class MShop
 
 		$id = (string) $context;
 
-		if( self::$cache === false || !isset( self::$managers[$id][$path] ) )
+		if( self::$cache === false || !isset( self::$objects[$id][$path] ) )
 		{
 			$subpath = '';
 			$parts = explode( '/', $path );
@@ -103,7 +87,7 @@ class MShop
 			}
 
 
-			if( self::$cache === false || !isset( self::$managers[$id][$domain] ) )
+			if( self::$cache === false || !isset( self::$objects[$id][$domain] ) )
 			{
 				$factory = '\Aimeos\MShop\\' . ucwords( $domain ) . '\Manager\Factory';
 
@@ -117,7 +101,7 @@ class MShop
 					throw new \Aimeos\MShop\Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 				}
 
-				self::$managers[$id][$domain] = $manager;
+				self::$objects[$id][$domain] = $manager;
 			}
 
 
@@ -128,22 +112,22 @@ class MShop
 				$subpath .= $part . '/';
 				$classname = $context->getConfig()->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name' );
 
-				if( self::$cache === false || !isset( self::$managers[$id][$tmppath . '/' . $part] ) ) {
-					self::$managers[$id][$tmppath . '/' . $part] = self::$managers[$id][$tmppath]->getSubManager( $part, $classname );
+				if( self::$cache === false || !isset( self::$objects[$id][$tmppath . '/' . $part] ) ) {
+					self::$objects[$id][$tmppath . '/' . $part] = self::$objects[$id][$tmppath]->getSubManager( $part, $classname );
 				}
 
 				$tmppath .= '/' . $part;
 			}
 		}
 
-		return self::$managers[$id][$path];
+		return self::$objects[$id][$path];
 	}
 
 
 	/**
 	 * Injects a manager object for the given path of manager names
 	 *
-	 * This method is for testing only and you must call \Aimeos\MShop\Factory::clear()
+	 * This method is for testing only and you must call \Aimeos\MShop::clear()
 	 * afterwards!
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by managers
@@ -152,7 +136,6 @@ class MShop
 	 */
 	static public function inject( \Aimeos\MShop\Context\Item\Iface $context, $path, \Aimeos\MShop\Common\Manager\Iface $object )
 	{
-		$id = (string) $context;
-		self::$managers[$id][$path] = $object;
+		self::$objects[(string) $context][$path] = $object;
 	}
 }

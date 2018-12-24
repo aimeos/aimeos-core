@@ -71,45 +71,4 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertNotSame( $controller1, $controller2 );
 	}
-
-
-	public function testClearSite()
-	{
-		$cache = \Aimeos\MShop\Factory::setCache( true );
-
-		$context = \TestHelperMShop::getContext();
-
-		$managerA1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
-		$managerB1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute/lists/type' );
-		\Aimeos\MShop\Factory::clear( (string) $context );
-
-		$managerA2 = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
-		$managerB2 = \Aimeos\MShop\Factory::createManager( $context, 'attribute/lists/type' );
-
-		\Aimeos\MShop\Factory::setCache( $cache );
-
-		$this->assertNotSame( $managerA1, $managerA2 );
-		$this->assertNotSame( $managerB1, $managerB2 );
-	}
-
-
-	public function testClearSpecific()
-	{
-		$cache = \Aimeos\MShop\Factory::setCache( true );
-
-		$context = \TestHelperMShop::getContext();
-
-		$managerA1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
-		$managerB1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute/lists/type' );
-		\Aimeos\MShop\Factory::clear( (string) $context, 'attribute' );
-
-		$managerA2 = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
-		$managerB2 = \Aimeos\MShop\Factory::createManager( $context, 'attribute/lists/type' );
-
-		\Aimeos\MShop\Factory::setCache( $cache );
-
-		$this->assertNotSame( $managerA1, $managerA2 );
-		$this->assertSame( $managerB1, $managerB2 );
-	}
-
 }

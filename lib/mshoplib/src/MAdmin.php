@@ -38,25 +38,9 @@ class MAdmin
 
 	/**
 	 * Removes all manager objects from the cache
-	 *
-	 * If neither a context ID nor a path is given, the complete cache will be pruned.
-	 *
-	 * @param integer|null $id Context ID the objects have been created with (string of \Aimeos\MShop\Context\Item\Iface)
-	 * @param string|null $path Path describing the manager to clear, e.g. "product/lists/type"
 	 */
-	static public function clear( $id = null, $path = null )
+	static public function clear()
 	{
-		if( $id !== null )
-		{
-			if( $path !== null ) {
-				self::$managers[$id][$path] = null;
-			} else {
-				self::$managers[$id] = [];
-			}
-
-			return;
-		}
-
 		self::$managers = [];
 	}
 
@@ -101,36 +85,37 @@ class MAdmin
 			}
 
 
-			if( !isset( self::$managers[$id][$name] ) )
-			{
-				$factory = '\Aimeos\MAdmin\\' . ucwords( $name ) . '\Manager\Factory';
+			$factory = '\Aimeos\MAdmin\\' . ucwords( $name ) . '\Manager\Factory';
 
-				if( class_exists( $factory ) === false ) {
-					throw new \Aimeos\MAdmin\Exception( sprintf( 'Class "%1$s" not available', $factory ) );
-				}
-
-				$manager = @call_user_func_array( array( $factory, 'createManager' ), array( $context ) );
-
-				if( $manager === false ) {
-					throw new \Aimeos\MAdmin\Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
-				}
-
-				self::$managers[$id][$name] = $manager;
+			if( class_exists( $factory ) === false ) {
+				throw new \Aimeos\MAdmin\Exception( sprintf( 'Class "%1$s" not available', $factory ) );
 			}
 
+			$manager = @call_user_func_array( array( $factory, 'createManager' ), array( $context ) );
 
-			foreach( $parts as $part )
-			{
-				$tmpname = $name . '/' . $part;
-
-				if( !isset( self::$managers[$id][$tmpname] ) ) {
-					self::$managers[$id][$tmpname] = self::$managers[$id][$name]->getSubManager( $part );
-				}
-
-				$name = $tmpname;
+			if( $manager === false ) {
+				throw new \Aimeos\MAdmin\Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 			}
+
+			self::$managers[$id][$name] = $manager;
 		}
 
 		return self::$managers[$id][$path];
+	}
+
+
+	/**
+	 * Injects a manager object for the given path of manager names
+	 *
+	 * This method is for testing only and you must call \Aimeos\MAdmin::clear()
+	 * afterwards!
+	 *
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by managers
+	 * @param string $path Name of the domain (and sub-managers) separated by slashes, e.g "product/list"
+	 * @param \Aimeos\MShop\Common\Manager\Iface $object Manager object for the given manager path
+	 */
+	static public function inject( \Aimeos\MShop\Context\Item\Iface $context, $path, \Aimeos\MShop\Common\Manager\Iface $object )
+	{
+		self::$managers[(string) $context][$path] = $object;
 	}
 }

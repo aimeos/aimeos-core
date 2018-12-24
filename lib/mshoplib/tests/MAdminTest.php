@@ -39,13 +39,6 @@ class MAdminTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateSubManagerNotExisting()
-	{
-		$this->setExpectedException( \Aimeos\MAdmin\Exception::class );
-		\Aimeos\MAdmin::create( \TestHelperMShop::getContext(), 'job/unknown' );
-	}
-
-
 	public function testClear()
 	{
 		$cache = \Aimeos\MAdmin::cache( true );
@@ -60,42 +53,4 @@ class MAdminTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertNotSame( $controller1, $controller2 );
 	}
-
-
-	public function testClearSite()
-	{
-		$cache = \Aimeos\MAdmin::cache( true );
-
-		$context = \TestHelperMShop::getContext();
-
-		$managerA1 = \Aimeos\MAdmin::create( $context, 'log' );
-		\Aimeos\MAdmin::clear( (string) $context );
-		$managerA2 = \Aimeos\MAdmin::create( $context, 'log' );
-
-		\Aimeos\MAdmin::cache( $cache );
-
-		$this->assertNotSame( $managerA1, $managerA2 );
-	}
-
-
-	public function testClearSpecific()
-	{
-		$cache = \Aimeos\MAdmin::cache( true );
-
-		$context = \TestHelperMShop::getContext();
-
-		$managerA1 = \Aimeos\MAdmin::create( $context, 'log' );
-		$managerB1 = \Aimeos\MAdmin::create( $context, 'job' );
-
-		\Aimeos\MAdmin::clear( (string) $context, 'log' );
-
-		$managerA2 = \Aimeos\MAdmin::create( $context, 'log' );
-		$managerB2 = \Aimeos\MAdmin::create( $context, 'job' );
-
-		\Aimeos\MAdmin::cache( $cache );
-
-		$this->assertNotSame( $managerA1, $managerA2 );
-		$this->assertSame( $managerB1, $managerB2 );
-	}
-
 }

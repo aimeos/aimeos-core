@@ -19,9 +19,6 @@ namespace Aimeos\Controller;
  */
 class Jobs
 {
-	static private $prefix = '\Aimeos\Controller\Jobs';
-
-
 	/**
 	 * Creates the required controller specified by the given path of controller names.
 	 *
@@ -38,8 +35,6 @@ class Jobs
 	 */
 	static public function create( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, $path )
 	{
-		$path = strtolower( trim( $path, "/ \n\t\r\0\x0B" ) );
-
 		if( empty( $path ) ) {
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Controller path is empty' ) );
 		}
@@ -83,17 +78,13 @@ class Jobs
 	static public function get( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, array $cntlPaths )
 	{
 		$cntlList = [];
-		$subFolder = trim( str_replace( '\\', '/', self::$prefix ), '/' );
-
-		if( strncmp( $subFolder, 'Aimeos' . '/', 7 ) === 0 ) {
-			$subFolder = substr( $subFolder, 7 );
-		}
+		$ds = DIRECTORY_SEPARATOR;
 
 		foreach( $cntlPaths as $path => $list )
 		{
 			foreach( $list as $relpath )
 			{
-				$path .= DIRECTORY_SEPARATOR . str_replace( '/', DIRECTORY_SEPARATOR, $relpath . '/' . $subFolder );
+				$path .= $ds . str_replace( '/', $ds, $relpath . '/Controller/Jobs' );
 
 				if( is_dir( $path ) )
 				{
@@ -139,7 +130,7 @@ class Jobs
 			else if( $prefix !== '' && $entry->getType() === 'file'
 				&& ( $name = $entry->getBaseName( '.php' ) ) === 'Factory' )
 			{
-				$list[$prefix] = self::createController( $context, $aimeos, $prefix );
+				$list[$prefix] = self::create( $context, $aimeos, $prefix );
 			}
 		}
 
