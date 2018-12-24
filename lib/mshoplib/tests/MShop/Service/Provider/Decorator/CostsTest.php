@@ -26,7 +26,7 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 
-		$servManager = \Aimeos\MShop\Factory::createManager( $this->context, 'service' );
+		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$this->servItem = $servManager->createItem();
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Costs::class )
@@ -87,7 +87,7 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->basket->addProduct( $this->getOrderProduct() );
 		$this->servItem->setConfig( array( 'costs.percent' => 1.5 ) );
-		$priceItem = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
+		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
@@ -106,9 +106,9 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function getOrderProduct()
 	{
-		$priceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
-		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
-		$orderProductManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product' );
+		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
+		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
+		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 
 		$price = $priceManager->createItem();
 		$price->setValue( '20.00' );

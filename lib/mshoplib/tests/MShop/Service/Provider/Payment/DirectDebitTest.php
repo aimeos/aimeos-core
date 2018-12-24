@@ -20,8 +20,8 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$this->ordServItem = \Aimeos\MShop\Factory::createManager( $context, 'order/base/service' )->createItem();
-		$serviceItem = \Aimeos\MShop\Factory::createManager( $context, 'service' )->createItem();
+		$this->ordServItem = \Aimeos\MShop::create( $context, 'order/base/service' )->createItem();
+		$serviceItem = \Aimeos\MShop::create( $context, 'service' )->createItem();
 		$serviceItem->setCode( 'test' );
 
 		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\DirectDebit::class )

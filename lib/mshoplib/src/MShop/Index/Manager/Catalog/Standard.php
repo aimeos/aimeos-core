@@ -622,7 +622,7 @@ class Standard
 	protected function getListItems( array $items )
 	{
 		$listItems = [];
-		$listManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/lists' );
+		$listManager = \Aimeos\MShop::create( $this->getContext(), 'catalog/lists' );
 
 		$search = $listManager->createSearch( true )->setSlice( 0, 0x7fffffff );
 		$expr = array(

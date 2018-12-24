@@ -64,7 +64,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$order = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' )->createItem();
+		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem();
 
 		$this->object->register( $order );
 	}
@@ -77,8 +77,8 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setProvider( 'Shipping' );
 		$this->plugin->setConfig( array( 'threshold' => array( 'EUR' => '34.00' ) ) );
 
-		$orderBaseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
-		$orderBaseProductManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
+		$orderBaseManager = \Aimeos\MShop::create( $context, 'order/base' );
+		$orderBaseProductManager = \Aimeos\MShop::create( $context, 'order/base/product' );
 
 		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 		$search = $manager->createSearch();

@@ -116,7 +116,7 @@ class FreeProduct
 		$count = $this->getConfigValue( 'freeproduct.count' );
 		$status = \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED;
 
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
 
 		$search = $manager->createSearch();
 		$expr = [

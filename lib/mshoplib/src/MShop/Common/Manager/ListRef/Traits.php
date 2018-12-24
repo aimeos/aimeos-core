@@ -132,7 +132,7 @@ trait Traits
 
 		foreach( $refIdMap as $domain => $list )
 		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $domain );
+			$manager = \Aimeos\MShop::create( $this->getContext(), $domain );
 
 			$search = $manager->createSearch()->setSlice( 0, count( $list ) );
 			$search->setConditions( $search->compare( '==', str_replace( '/', '.', $domain ) . '.id', array_keys( $list ) ) );
@@ -161,7 +161,7 @@ trait Traits
 	{
 		$context = $this->getContext();
 		$rmListIds = $rmIds = $refManager = [];
-		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
+		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
 
 		foreach( $item->getListItemsDeleted() as $listItem )
@@ -178,7 +178,7 @@ trait Traits
 		{
 			foreach( $rmIds as $refDomain => $ids )
 			{
-				$refManager[$refDomain] = \Aimeos\MShop\Factory::createManager( $context, $refDomain );
+				$refManager[$refDomain] = \Aimeos\MShop::create( $context, $refDomain );
 				$refManager[$refDomain]->begin();
 
 				$refManager[$refDomain]->deleteItems( $ids );
@@ -195,7 +195,7 @@ trait Traits
 
 					if( !isset( $refManager[$refDomain] ) )
 					{
-						$refManager[$refDomain] = \Aimeos\MShop\Factory::createManager( $context, $refDomain );
+						$refManager[$refDomain] = \Aimeos\MShop::create( $context, $refDomain );
 						$refManager[$refDomain]->begin();
 					}
 

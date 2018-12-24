@@ -369,7 +369,7 @@ class Standard
 	public function createItem( array $values = [] )
 	{
 		$context = $this->getContext();
-		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 
 		$values['order.base.product.siteid'] = $context->getLocale()->getSiteId();
 
@@ -809,7 +809,7 @@ class Standard
 	{
 		$items = [];
 		$context = $this->getContext();
-		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();

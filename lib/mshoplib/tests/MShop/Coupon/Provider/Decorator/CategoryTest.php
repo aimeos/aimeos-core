@@ -27,11 +27,11 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Category( $provider, $this->context, $this->couponItem, 'abcd');
 		$this->object->setObject( $this->object );
 
-		$priceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
-		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
+		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
+		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$product = $productManager->findItem( 'CNC' );
 
-		$orderProductManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product' );
+		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 		$orderProduct = $orderProductManager->createItem();
 		$orderProduct->copyFrom( $product );
 

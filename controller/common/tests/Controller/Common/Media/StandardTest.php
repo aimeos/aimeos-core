@@ -42,7 +42,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$file->expects( $this->once() )->method( 'getStream' )
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.gif' ) ) );
 
-		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'media' )->createItem();
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
 
 		$object->add( $item, $file );
 	}
@@ -62,7 +62,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$file->expects( $this->once() )->method( 'getStream' )
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.pdf' ) ) );
 
-		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'media' )->createItem();
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
 
 		$object->add( $item, $file );
 	}
@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->context->setFilesystemManager( $fsm );
 
-		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'media' )->createItem();
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
 		$item->setPreview( 'test' );
 		$item->setUrl( 'test' );
 
@@ -113,7 +113,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->exactly( 2 ) )->method( 'storeFile' );
 
 
-		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'media' )->createItem();
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
 		$item->setPreview( 'preview.jpg' );
 		$item->setUrl( 'test.jpg' );
 

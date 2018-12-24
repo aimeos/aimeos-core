@@ -27,7 +27,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setProvider( 'ServicesAvailable' );
 		$this->plugin->setStatus( 1 );
 
-		$orderBaseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
+		$orderBaseManager = \Aimeos\MShop::create( $context, 'order/base' );
 		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service' );
 
 		$this->service = $orderBaseServiceManager->createItem();

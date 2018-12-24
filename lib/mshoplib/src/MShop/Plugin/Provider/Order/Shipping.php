@@ -134,7 +134,7 @@ class Shipping
 			return;
 		}
 
-		$sum = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' )->createItem();
+		$sum = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
 
 		foreach( $order->getProducts() as $product ) {
 			$sum->addItem( $product->getPrice(), $product->getQuantity() );

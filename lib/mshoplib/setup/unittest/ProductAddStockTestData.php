@@ -52,14 +52,14 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 		$config = $this->additional->getConfig();
 		$name = $config->get( 'mshop/stock/manager/name' );
 
-		\Aimeos\MShop\Factory::clear();
+		\Aimeos\MShop::clear();
 		$config->set( 'mshop/stock/manager/name', 'Standard' );
 
 		$this->addTypeItems( $testdata, ['stock/type'] );
 		$this->createData( $testdata );
 
 		$config->set( 'mshop/stock/manager/name', $name );
-		\Aimeos\MShop\Factory::clear();
+		\Aimeos\MShop::clear();
 
 		$this->status( 'done' );
 	}
@@ -75,7 +75,7 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		foreach( $domains as $domain )
 		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->additional, $domain );
+			$manager = \Aimeos\MShop::create( $this->additional, $domain );
 
 			foreach( $testdata[$domain] as $key => $entry )
 			{
@@ -94,7 +94,7 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function createData( array $testdata )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'stock' );
+		$manager = \Aimeos\MShop::create( $this->additional, 'stock' );
 		$items = [];
 
 		foreach( $testdata['stock'] as $key => $entry ) {

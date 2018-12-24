@@ -179,7 +179,7 @@ class Autofill
 			&& (bool) $this->getConfigValue( 'autofill.useorder', false ) === true
 			&& ( empty( $addresses ) || empty( $services ) )
 		) {
-			$orderManager = \Aimeos\MShop\Factory::createManager( $context, 'order' );
+			$orderManager = \Aimeos\MShop::create( $context, 'order' );
 
 			$search = $orderManager->createSearch();
 			$search->setConditions( $search->compare( '==', 'order.base.customerid', $userid ) );
@@ -213,7 +213,7 @@ class Autofill
 	protected function getServiceItem( \Aimeos\MShop\Order\Item\Base\Iface $order, $type, $code = null )
 	{
 		$context = $this->getContext();
-		$serviceManager = \Aimeos\MShop\Factory::createManager( $context, 'service' );
+		$serviceManager = \Aimeos\MShop::create( $context, 'service' );
 
 		$search = $serviceManager->createSearch( true );
 
@@ -237,7 +237,7 @@ class Autofill
 
 			if( $provider->isAvailable( $order ) === true )
 			{
-				$orderServiceManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/service' );
+				$orderServiceManager = \Aimeos\MShop::create( $context, 'order/base/service' );
 				$orderServiceItem = $orderServiceManager->createItem();
 				$orderServiceItem->copyFrom( $item );
 				$orderServiceItem->setPrice( $provider->calcPrice( $order ) );
@@ -260,7 +260,7 @@ class Autofill
 
 		if( empty( $addresses ) && (bool) $this->getConfigValue( 'autofill.orderaddress', true ) === true )
 		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/base/address' );
+			$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base/address' );
 			$search = $manager->createSearch();
 			$search->setConditions( $search->compare( '==', 'order.base.address.baseid', $item->getBaseId() ) );
 			$addresses = $manager->searchItems( $search );
@@ -284,7 +284,7 @@ class Autofill
 
 		if( empty( $services ) && $this->getConfigValue( 'autofill.orderservice', true ) == true )
 		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/base/service' );
+			$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base/service' );
 			$search = $manager->createSearch();
 			$search->setConditions( $search->compare( '==', 'order.base.service.baseid', $item->getBaseId() ) );
 			$services = $manager->searchItems( $search );
@@ -315,8 +315,8 @@ class Autofill
 		if( $context->getUserId() !== null && !isset( $addresses[$type] )
 			&& (bool) $this->getConfigValue( 'autofill.address', false ) === true
 		) {
-			$customerManager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
-			$orderAddressManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/address' );
+			$customerManager = \Aimeos\MShop::create( $context, 'customer' );
+			$orderAddressManager = \Aimeos\MShop::create( $context, 'order/base/address' );
 
 			$address = $customerManager->getItem( $context->getUserId() )->getPaymentAddress();
 

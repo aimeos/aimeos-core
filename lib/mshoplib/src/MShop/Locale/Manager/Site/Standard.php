@@ -155,7 +155,7 @@ class Standard
 		);
 
 		foreach( $config->get( $path, $default ) as $domain ) {
-			\Aimeos\MShop\Factory::createManager( $context, $domain )->cleanup( $siteids );
+			\Aimeos\MShop::create( $context, $domain )->cleanup( $siteids );
 		}
 
 		/** mshop/locale/manager/site/cleanup/admin/domains
@@ -181,7 +181,7 @@ class Standard
 		$default = array( 'job', 'log', 'cache' );
 
 		foreach( $config->get( $path, $default ) as $domain ) {
-			\Aimeos\MAdmin\Factory::createManager( $context, $domain )->cleanup( $siteids );
+			\Aimeos\MAdmin::create( $context, $domain )->cleanup( $siteids );
 		}
 	}
 

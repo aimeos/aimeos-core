@@ -26,7 +26,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 
-		$servManager = \Aimeos\MShop\Factory::createManager( $this->context, 'service' );
+		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$this->servItem = $servManager->createItem();
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Reduction::class )
@@ -123,7 +123,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 	public function testCalcPrice()
 	{
 		$this->servItem->setConfig( array( 'reduction.percent' => 50 ) );
-		$priceItem = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
+		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
 		$this->mockProvider->expects( $this->once() )
@@ -141,7 +141,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-min' => array( 'EUR' => '20.00' ) );
 		$this->servItem->setConfig( $config );
 		$this->basket->addProduct( $this->getOrderProduct() );
-		$priceItem = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
+		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
 		$this->mockProvider->expects( $this->once() )
@@ -159,7 +159,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-min' => array( 'EUR' => '20.01' ) );
 		$this->servItem->setConfig( $config );
 		$this->basket->addProduct( $this->getOrderProduct() );
-		$priceItem = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
+		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
 		$this->mockProvider->expects( $this->once() )
@@ -177,7 +177,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-max' => array( 'EUR' => '20.00' ) );
 		$this->servItem->setConfig( $config );
 		$this->basket->addProduct( $this->getOrderProduct() );
-		$priceItem = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
+		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
 		$this->mockProvider->expects( $this->once() )
@@ -195,7 +195,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$config = array( 'reduction.percent' => 50, 'reduction.basket-value-max' => array( 'EUR' => '19.99' ) );
 		$this->servItem->setConfig( $config );
 		$this->basket->addProduct( $this->getOrderProduct() );
-		$priceItem = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
+		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
 		$priceItem->setCosts( '10.00' );
 
 		$this->mockProvider->expects( $this->once() )
@@ -215,9 +215,9 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function getOrderProduct()
 	{
-		$priceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
-		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
-		$orderProductManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product' );
+		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
+		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
+		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 
 		$price = $priceManager->createItem();
 		$price->setValue( '20.00' );

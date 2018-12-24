@@ -62,7 +62,7 @@ abstract class Base
 	 */
 	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$priceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
+		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$prices = $this->serviceItem->getRefItems( 'price', 'default', 'default' );
 
 		if( count( $prices ) > 0 ) {
@@ -496,7 +496,7 @@ abstract class Base
 	 */
 	protected function getOrder( $id )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'order' );
+		$manager = \Aimeos\MShop::create( $this->context, 'order' );
 
 		$search = $manager->createSearch( true );
 		$expr = [
@@ -525,7 +525,7 @@ abstract class Base
 	 */
 	protected function getOrderBase( $baseId, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' )->load( $baseId, $parts );
+		return \Aimeos\MShop::create( $this->context, 'order/base' )->load( $baseId, $parts );
 	}
 
 
@@ -537,7 +537,7 @@ abstract class Base
 	 */
 	protected function saveOrder( \Aimeos\MShop\Order\Item\Iface $item )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->context, 'order' )->saveItem( $item );
+		return \Aimeos\MShop::create( $this->context, 'order' )->saveItem( $item );
 	}
 
 
@@ -554,7 +554,7 @@ abstract class Base
 			return;
 		}
 
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'customer' );
 		$item = $manager->getItem( $customerId, ['service'] );
 		$serviceId = $this->getServiceItem()->getId();
 
@@ -574,7 +574,7 @@ abstract class Base
 	 */
 	protected function saveOrderBase( \Aimeos\MShop\Order\Item\Base\Iface $base, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE )
 	{
-		\Aimeos\MShop\Factory::createManager( $this->context, 'order/base' )->store( $base, $parts );
+		\Aimeos\MShop::create( $this->context, 'order/base' )->store( $base, $parts );
 	}
 
 
@@ -587,7 +587,7 @@ abstract class Base
 	 */
 	protected function setAttributes( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes, $type )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/service/attribute' );
+		$manager = \Aimeos\MShop::create( $this->context, 'order/base/service/attribute' );
 
 		foreach( $attributes as $key => $value )
 		{
@@ -614,14 +614,14 @@ abstract class Base
 			return;
 		}
 
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'customer' );
 		$item = $manager->getItem( $customerId, ['service'] );
 		$serviceId = $this->getServiceItem()->getId();
 
 		if( ( $listItem = $item->getListItem( 'service', 'default', $serviceId, false ) ) === null )
 		{
-			$listManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer/lists' );
-			$listTypeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer/lists/type' );
+			$listManager = \Aimeos\MShop::create( $this->getContext(), 'customer/lists' );
+			$listTypeManager = \Aimeos\MShop::create( $this->getContext(), 'customer/lists/type' );
 
 			$listItem = $listManager->createItem();
 			$listItem->setType( 'default' );

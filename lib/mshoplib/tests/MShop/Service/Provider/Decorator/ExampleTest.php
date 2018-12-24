@@ -80,7 +80,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailable()
 	{
-		$orderBaseManager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base' );
+		$orderBaseManager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base' );
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 
 		$localeItem = $localeManager->createItem();

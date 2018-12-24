@@ -58,8 +58,8 @@ class Supplier
 	{
 		parent::__construct( $provider, $context, $serviceItem );
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'supplier' );
-		$addrManager = \Aimeos\MShop\Factory::createManager( $context, 'supplier/address' );
+		$manager = \Aimeos\MShop::create( $context, 'supplier' );
+		$addrManager = \Aimeos\MShop::create( $context, 'supplier/address' );
 
 		$search = $manager->createSearch( true );
 		$search->setSortations( [$search->sort( '+', 'supplier.label' )] );

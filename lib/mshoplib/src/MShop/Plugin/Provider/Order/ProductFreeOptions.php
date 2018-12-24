@@ -47,7 +47,7 @@ class ProductFreeOptions
 		$attrQtys = $attrTypes = [];
 		$context = $this->getContext();
 
-		$prodManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$prodManager = \Aimeos\MShop::create( $context, 'product' );
 		$prodItem = $prodManager->getItem( $value->getProductId(), ['price'] );
 		$prodConf = $prodItem->getConfig();
 
@@ -63,7 +63,7 @@ class ProductFreeOptions
 		}
 
 
-		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 
 		$prices = $prodItem->getRefItems( 'price', 'default', 'default' );
 		$priceItem = $priceManager->getLowestPrice( $prices, $value->getQuantity() );
@@ -98,7 +98,7 @@ class ProductFreeOptions
 	 */
 	protected function addPrices( \Aimeos\MShop\Price\Item\Iface $price, array $attrItems, array $quantities, $free )
 	{
-		$priceManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' );
+		$priceManager = \Aimeos\MShop::create( $this->getContext(), 'price' );
 
 		foreach( $attrItems as $attrId => $attrItem )
 		{
@@ -130,7 +130,7 @@ class ProductFreeOptions
 	protected function getAttributeMap( array $ids )
 	{
 		$attrMap = [];
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
+		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
 
 		$search = $attrManager->createSearch()->setSlice( 0, count( $ids ) );
 		$search->setConditions( $search->compare( '==', 'attribute.id', $ids ) );
@@ -152,7 +152,7 @@ class ProductFreeOptions
 	 */
 	protected function sortByPrice( array $attrItems, array $attrQtys )
 	{
-		$priceManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' );
+		$priceManager = \Aimeos\MShop::create( $this->getContext(), 'price' );
 
 		$sortFcn = function( $a, $b ) use( $priceManager, $attrQtys )
 		{

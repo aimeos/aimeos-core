@@ -50,13 +50,13 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$config = $this->additional->getConfig();
 		$name = $config->get( 'mshop/product/manager/name' );
 
-		\Aimeos\MShop\Factory::clear();
+		\Aimeos\MShop::clear();
 		$config->set( 'mshop/product/manager/name', 'Standard' );
 
 		$this->createData( $this->getData() );
 
 		$config->set( 'mshop/product/manager/name', $name );
-		\Aimeos\MShop\Factory::clear();
+		\Aimeos\MShop::clear();
 
 		$this->status( 'done' );
 	}
@@ -70,7 +70,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function createData( array $testdata )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product' );
+		$manager = \Aimeos\MShop::create( $this->additional, 'product' );
 		$manager->begin();
 
 		$domains = ['attribute', 'media', 'price', 'product', 'tag', 'text'];
@@ -104,7 +104,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		foreach( $domains as $domain )
 		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->additional, $domain );
+			$manager = \Aimeos\MShop::create( $this->additional, $domain );
 
 			foreach( $testdata[$domain] as $key => $entry )
 			{
@@ -131,7 +131,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 		{
 			if( isset( $entry[$domain] ) )
 			{
-				$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
+				$manager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
 
 				foreach( (array) $entry[$domain] as $data )
 				{
@@ -159,7 +159,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		if( isset( $entry['product/property'] ) )
 		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/property' );
+			$manager = \Aimeos\MShop::create( $this->additional, 'product/property' );
 
 			foreach( (array) $entry['product/property'] as $data )
 			{
@@ -201,7 +201,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $domains as $domain )
 		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->additional, $domain );
+			$manager = \Aimeos\MShop::create( $this->additional, $domain );
 			$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 
 			foreach( $manager->searchItems( $search ) as $item ) {

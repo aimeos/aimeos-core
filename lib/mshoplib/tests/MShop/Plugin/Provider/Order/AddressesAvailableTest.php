@@ -27,7 +27,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setProvider( 'AddressesAvailable' );
 		$this->plugin->setStatus( 1 );
 
-		$orderBaseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
+		$orderBaseManager = \Aimeos\MShop::create( $context, 'order/base' );
 		$orderBaseAddressManager = $orderBaseManager->getSubManager( 'address' );
 
 		$this->order = $orderBaseManager->createItem();

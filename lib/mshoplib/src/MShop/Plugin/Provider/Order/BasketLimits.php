@@ -153,7 +153,7 @@ class BasketLimits
 
 
 		$count = 0;
-		$sum = \Aimeos\MShop\Factory::createManager( $context, 'price' )->createItem();
+		$sum = \Aimeos\MShop::create( $context, 'price' )->createItem();
 
 		foreach( $order->getProducts() as $product )
 		{

@@ -54,7 +54,7 @@ class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		}
 
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'coupon' );
+		$manager = \Aimeos\MShop::create( $context, 'coupon' );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'coupon.label', 'demo-' ) );
 		$services = $manager->searchItems( $search );
@@ -103,7 +103,7 @@ class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 */
 	protected function addCodes( $couponId, array $data )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon/code' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'coupon/code' );
 
 		foreach( $data as $entry )
 		{

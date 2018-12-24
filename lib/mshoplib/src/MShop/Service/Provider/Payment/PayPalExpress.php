@@ -539,7 +539,7 @@ class PayPalExpress
 	 */
 	protected function checkIPN( $basket, $params )
 	{
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/base/service/attribute' );
+		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'order/base/service/attribute' );
 
 		if( $this->getConfigValue( array( 'paypalexpress.AccountEmail' ) ) !== $params['receiver_email'] )
 		{
@@ -791,7 +791,7 @@ class PayPalExpress
 
 		if( !isset( $prices[$taxrate] ) )
 		{
-			$prices[$taxrate] = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' )->createItem();
+			$prices[$taxrate] = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
 			$prices[$taxrate]->setTaxRate( $taxrate );
 		}
 

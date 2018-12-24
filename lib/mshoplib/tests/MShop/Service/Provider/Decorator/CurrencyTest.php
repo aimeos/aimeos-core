@@ -22,7 +22,7 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 
-		$servManager = \Aimeos\MShop\Factory::createManager( $this->context, 'service' );
+		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$this->servItem = $servManager->createItem();
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Currency::class )

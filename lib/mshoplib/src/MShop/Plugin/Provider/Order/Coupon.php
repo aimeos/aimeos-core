@@ -62,7 +62,7 @@ class Coupon
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
 		$notAvailable = [];
-		$couponManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon' );
+		$couponManager = \Aimeos\MShop::create( $this->getContext(), 'coupon' );
 
 		foreach( $order->getCoupons() as $code => $products )
 		{

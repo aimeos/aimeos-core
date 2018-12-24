@@ -222,7 +222,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveStatusUpdatePayment()
 	{
-		$statusManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/status' );
+		$statusManager = \Aimeos\MShop::create( $this->context, 'order/status' );
 
 		$search = $this->object->createSearch();
 		$conditions = array(
@@ -271,7 +271,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveStatusUpdateDelivery()
 	{
-		$statusManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/status' );
+		$statusManager = \Aimeos\MShop::create( $this->context, 'order/status' );
 
 		$search = $this->object->createSearch();
 		$conditions = array(

@@ -119,7 +119,7 @@ class WeightTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function getOrderBaseItem()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'order' );
+		$manager = \Aimeos\MShop::create( $this->context, 'order' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ) );
@@ -129,7 +129,7 @@ class WeightTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No order item found' );
 		}
 
-		$baseManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' );
+		$baseManager = \Aimeos\MShop::create( $this->context, 'order/base' );
 		return $baseManager->load( $item->getBaseId() );
 	}
 }

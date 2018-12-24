@@ -119,7 +119,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getDomainManager( $domain )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->additional, $domain );
+		return \Aimeos\MShop::create( $this->additional, $domain );
 	}
 
 

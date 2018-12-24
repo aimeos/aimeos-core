@@ -26,7 +26,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 
-		$servManager = \Aimeos\MShop\Factory::createManager( $this->context, 'service' );
+		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$this->servItem = $servManager->createItem();
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Country::class )
@@ -138,7 +138,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableNoConfig()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
@@ -155,7 +155,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableNoIncludeBilling()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
@@ -171,7 +171,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableNoIncludeDelivery()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
@@ -187,7 +187,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableNoIncludeDeliveryFallback()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
@@ -203,7 +203,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableNoExcludeBilling()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
@@ -219,7 +219,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableNoExcludeDelivery()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
@@ -235,7 +235,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableNoExcludeDeliveryFallback()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
@@ -251,7 +251,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableExcludeBilling()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
@@ -265,7 +265,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableExcludeDelivery()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
@@ -279,7 +279,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableExcludeDeliveryFallback()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
@@ -293,7 +293,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableIncludeBilling()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
@@ -309,7 +309,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableIncludeDelivery()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
@@ -325,7 +325,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableIncludeDeliveryFallback()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
@@ -341,7 +341,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableIncludeBillingFailure()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
@@ -355,7 +355,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableIncludeDeliveryFailure()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
@@ -369,7 +369,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableIncludeDeliveryFailureFallback()
 	{
-		$address = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/address' )->createItem();
+		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );

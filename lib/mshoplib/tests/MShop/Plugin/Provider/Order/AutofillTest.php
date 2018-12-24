@@ -25,7 +25,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setProvider( 'Autofill' );
 		$this->plugin->setStatus( 1 );
 
-		$orderBaseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
+		$orderBaseManager = \Aimeos\MShop::create( $context, 'order/base' );
 		$this->order = $orderBaseManager->createItem();
 		$this->order->__sleep(); // remove event listeners
 
@@ -118,7 +118,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
+		$manager = \Aimeos\MShop::create( $context, 'customer' );
 		$context->setUserId( $manager->findItem( 'UTC001' )->getId() );
 
 		$this->plugin->setConfig( array(
@@ -137,7 +137,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
+		$manager = \Aimeos\MShop::create( $context, 'customer' );
 		$context->setUserId( $manager->findItem( 'UTC001' )->getId() );
 
 
@@ -180,7 +180,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
+		$manager = \Aimeos\MShop::create( $context, 'customer' );
 		$context->setUserId( $manager->findItem( 'UTC001' )->getId() );
 
 

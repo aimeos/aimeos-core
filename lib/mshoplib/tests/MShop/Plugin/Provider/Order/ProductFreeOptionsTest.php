@@ -36,7 +36,7 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$basket = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' )->createItem();
+		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem();
 
 		$this->object->register( $basket );
 	}
@@ -44,12 +44,12 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdate()
 	{
-		$prodManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->context, 'attribute' );
+		$prodManager = \Aimeos\MShop::create( $this->context, 'product' );
+		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 
-		$basket = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' )->createItem();
-		$product = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product' )->createItem();
-		$attribute = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product/attribute' )->createItem();
+		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem();
+		$product = \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem();
+		$attribute = \Aimeos\MShop::create( $this->context, 'order/base/product/attribute' )->createItem();
 
 		$attribute->setQuantity( 2 );
 		$attribute->setCode( 'size' );
@@ -67,10 +67,10 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddPrices()
 	{
-		$price = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
+		$price = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
 		$price->setValue( '10.00' );
 
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->context, 'attribute' );
+		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 		$attrItem = $attrManager->findItem( 'xs', ['price'], 'product', 'size' );
 		$attrItem2 = $attrManager->findItem( 'xl', ['price'], 'product', 'size' );
 
@@ -85,9 +85,9 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	public function testSortByPrice()
 	{
-		$price = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
+		$price = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
 
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->context, 'attribute' );
+		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 		$attrItem = $attrManager->findItem( 'xs', ['price'], 'product', 'size' );
 
 		$quantities = [1 => 2];
@@ -101,9 +101,9 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	public function testSortByPriceFirstNoPrice()
 	{
-		$price = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
+		$price = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
 
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->context, 'attribute' );
+		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 		$attrItem1 = $attrManager->findItem( 'xs', ['price'], 'product', 'size' );
 		$attrItem2 = $attrManager->findItem( 's', [], 'product', 'size' );
 
@@ -118,9 +118,9 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	public function testSortByPriceSecondNoPrice()
 	{
-		$price = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem();
+		$price = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
 
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->context, 'attribute' );
+		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 		$attrItem1 = $attrManager->findItem( 'xs', ['price'], 'product', 'size' );
 		$attrItem2 = $attrManager->findItem( 's', [], 'product', 'size' );
 

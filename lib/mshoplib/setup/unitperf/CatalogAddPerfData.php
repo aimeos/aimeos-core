@@ -127,7 +127,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function addCatalogItem( $parentId, $catLabel, $catIdx )
 	{
-		$catalogManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog' );
+		$catalogManager = \Aimeos\MShop::create( $this->additional, 'catalog' );
 
 		$item = $catalogManager->createItem()
 			->setLabel( 'category-' . $catLabel )
@@ -150,7 +150,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function addCatalogProducts( array $catItems, array $items, $num )
 	{
-		$catalogListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog/lists' );
+		$catalogListManager = \Aimeos\MShop::create( $this->additional, 'catalog/lists' );
 		$defListItem = $catalogListManager->createItem()->setType( 'default' );
 		$start = 0;
 
@@ -176,8 +176,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function addCatalogTexts( \Aimeos\MShop\Catalog\Item\Iface $catItem, $catLabel )
 	{
-		$textManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'text' );
-		$catalogListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog/lists' );
+		$textManager = \Aimeos\MShop::create( $this->additional, 'text' );
+		$catalogListManager = \Aimeos\MShop::create( $this->additional, 'catalog/lists' );
 
 		$textItem = $textManager->createItem()
 			->setContent( 'Category ' . $catLabel )
@@ -194,7 +194,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function addProductAttributes( \Aimeos\MShop\Product\Item\Iface $prodItem, array $attrIds )
 	{
-		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
+		$productListManager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
 
 		$listItem = $productListManager->createItem()->setType( 'default' );
 
@@ -227,7 +227,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			'shoes', 'sandals', 'flip-flops', 'ballerinas', 'slingbacks', 'clogs', 'moccasins', 'sneakers', 'boots', 'slippers',
 		] );
 
-		$productManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product' );
+		$productManager = \Aimeos\MShop::create( $this->additional, 'product' );
 		$productManager->begin();
 
 		$newItem = $productManager->createItem()->setType( $this->numProdVariants > 0 ? 'select' : 'default' );
@@ -300,8 +300,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$prefix = 'https://demo.aimeos.org/media/';
 
-		$mediaManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'media' );
-		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
+		$mediaManager = \Aimeos\MShop::create( $this->additional, 'media' );
+		$productListManager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
 
 		$litem = $productListManager->createItem()->setType( 'default' );
 		$newItem = $mediaManager->createItem()->setType( 'default' );
@@ -334,8 +334,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function addProductPrices( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx )
 	{
-		$priceManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'price' );
-		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
+		$priceManager = \Aimeos\MShop::create( $this->additional, 'price' );
+		$productListManager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
 
 		$litem = $productListManager->createItem()->setType( 'default' );
 		$newItem = $priceManager->createItem()->setType( 'default' );
@@ -362,7 +362,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	{
 		if( ( $catItem = reset( $catItems ) ) !== false )
 		{
-			$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
+			$productListManager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
 
 			$listItem = $productListManager->createItem()->setType( 'suggestion' );
 			$listItems = $catItem->getListItems( 'product' );
@@ -385,8 +385,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function addProductTexts( \Aimeos\MShop\Product\Item\Iface $prodItem, $label, $catLabel )
 	{
-		$textManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'text' );
-		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
+		$textManager = \Aimeos\MShop::create( $this->additional, 'text' );
+		$productListManager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
 
 		$listItem = $productListManager->createItem()->setType( 'default' );
 
@@ -432,8 +432,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function addProductVariants( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx )
 	{
-		$productManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product' );
-		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
+		$productManager = \Aimeos\MShop::create( $this->additional, 'product' );
+		$productListManager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
 
 		$defListItem = $productListManager->createItem()->setType( 'default' );
 		$varListItem = $productListManager->createItem()->setType( 'variant' );
@@ -480,7 +480,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	public function addStock( array $items )
 	{
-		$stockManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'stock' );
+		$stockManager = \Aimeos\MShop::create( $this->additional, 'stock' );
 
 		$stockItem = $stockManager->createItem()->setType( 'default' );
 		$stocklevels = $this->shuffle( [null, 100, 80, 60, 40, 20, 10, 5, 2, 0] );
@@ -513,7 +513,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function init()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
+		$manager = \Aimeos\MShop::create( $this->additional, 'attribute' );
 
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setSortations( [$search->sort( '+', 'attribute.position' )] );
@@ -526,7 +526,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function save( $domain, $item )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, $domain );
+		$manager = \Aimeos\MShop::create( $this->additional, $domain );
 
 		$manager->begin();
 		$item = $manager->saveItem( $item );

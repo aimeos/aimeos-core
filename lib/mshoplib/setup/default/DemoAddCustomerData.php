@@ -54,7 +54,7 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		}
 
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
+		$manager = \Aimeos\MShop::create( $context, 'customer' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'customer.code', 'demo-' ) );
@@ -90,7 +90,7 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 */
 	protected function saveCustomerItems( array $data )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'customer' );
 
 		foreach( $data as $entry )
 		{
@@ -139,7 +139,7 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 */
 	protected function saveAddressItems( array $data, $id )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer/address' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'customer/address' );
 
 		foreach( $data as $entry )
 		{

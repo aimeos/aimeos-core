@@ -291,7 +291,7 @@ class Standard
 		 */
 		$domains = $config->get( 'mshop/index/manager/standard/domains', [] );
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$manager = \Aimeos\MShop::create( $context, 'product' );
 		$search = $manager->createSearch( true );
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
@@ -318,7 +318,7 @@ class Standard
 
 
 		// index categorized product items only
-		$catalogListManager = \Aimeos\MShop\Factory::createManager( $context, 'catalog/lists' );
+		$catalogListManager = \Aimeos\MShop::create( $context, 'catalog/lists' );
 		$catalogSearch = $catalogListManager->createSearch( true );
 
 		$expr = array(
@@ -525,7 +525,7 @@ class Standard
 	 */
 	protected function writeIndex( \Aimeos\MW\Criteria\Iface $search, array $domains, $size )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 		$submanagers = $this->getSubManagers();
 		$start = 0;
 

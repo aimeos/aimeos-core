@@ -55,7 +55,7 @@ class MShopAddCodeData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$this->msg( sprintf( 'Checking "%1$s" codes', $domain ), 1 );
 
-			$domainManager = \Aimeos\MShop\Factory::createManager( $this->additional, $domain );
+			$domainManager = \Aimeos\MShop::create( $this->additional, $domain );
 			$type = $domainManager->createItem();
 			$num = $total = 0;
 

@@ -117,11 +117,11 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$numServices = $this->additional->getConfig()->get( 'setup/unitperf/max-services', 100 );
 
-		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'service' );
-		$listManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'service/lists' );
-		$mediaManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'media' );
-		$priceManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'price' );
-		$textManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'text' );
+		$manager = \Aimeos\MShop::create( $this->additional, 'service' );
+		$listManager = \Aimeos\MShop::create( $this->additional, 'service/lists' );
+		$mediaManager = \Aimeos\MShop::create( $this->additional, 'media' );
+		$priceManager = \Aimeos\MShop::create( $this->additional, 'price' );
+		$textManager = \Aimeos\MShop::create( $this->additional, 'text' );
 
 		$mListItem = $listManager->createItem()->setType( 'default' );
 		$pListItem = $listManager->createItem()->setType( 'default' );

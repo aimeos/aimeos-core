@@ -57,7 +57,7 @@ class PropertyAdd
 	{
 		parent::__construct( $context, $item );
 
-		$this->orderAttrManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product/attribute' );
+		$this->orderAttrManager = \Aimeos\MShop::create( $context, 'order/base/product/attribute' );
 		$this->type = $context->getConfig()->get( 'plugin/provider/order/propertyadd/type', 'property' );
 	}
 
@@ -114,7 +114,7 @@ class PropertyAdd
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
 
-		$productManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
+		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 		$config = $this->getItemBase()->getConfig();
 
 		foreach( $config as $key => $properties )

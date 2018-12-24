@@ -21,22 +21,22 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'plugin' );
+		$manager = \Aimeos\MShop::create( $context, 'plugin' );
 		$this->plugin = $manager->createItem();
 		$this->plugin->setProvider( 'FreeProduct' );
 		$this->plugin->setConfig( ['freeproduct.productcode' => 'ABCD', 'freeproduct.count' => 2] );
 		$this->plugin->setStatus( 1 );
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/address' );
+		$manager = \Aimeos\MShop::create( $context, 'order/base/address' );
 		$this->orderAddress = $manager->createItem();
 		$this->orderAddress->setEmail( 'test@example.com' );
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
+		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
 		$this->orderProduct = $manager->createItem();
 		$this->orderProduct->setProductCode( 'ABCD' );
 		$this->orderProduct->getPrice()->setValue( '100.00' );
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
+		$manager = \Aimeos\MShop::create( $context, 'order/base' );
 		$this->order = $manager->createItem();
 		$this->order->__sleep(); // remove event listeners
 		$this->order->setAddress( $this->orderAddress, 'payment' );

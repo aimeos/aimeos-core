@@ -126,7 +126,7 @@ class Category
 	 */
 	protected function getCatalogIds( array $catalogCodes )
 	{
-		$catalogManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog' );
+		$catalogManager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
 
 		$search = $catalogManager->createSearch( true );
 		$expr = array(
@@ -186,7 +186,7 @@ class Category
 	 */
 	protected function getRefCatalogIds( array $productIds )
 	{
-		$catalogListsManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/lists' );
+		$catalogListsManager = \Aimeos\MShop::create( $this->getContext(), 'catalog/lists' );
 
 		$search = $catalogListsManager->createSearch();
 		$expr = array(
@@ -209,7 +209,7 @@ class Category
 	protected function getTreeCatalogIds( array $catalogIds )
 	{
 		$ids = [];
-		$catalogManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog' );
+		$catalogManager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
 
 		foreach( $catalogIds as $catId )
 		{

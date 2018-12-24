@@ -27,17 +27,17 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Supplier( $provider, $this->context, $this->couponItem, 'abcd');
 		$this->object->setObject( $this->object );
 
-		$priceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
-		$serviceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'service' );
+		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
+		$serviceManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$service = $serviceManager->findItem( 'unitcode' );
 
-		$orderServiceAttrManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/service/attribute' );
+		$orderServiceAttrManager = \Aimeos\MShop::create( $this->context, 'order/base/service/attribute' );
 		$orderServiceAttr = $orderServiceAttrManager->createItem();
 		$orderServiceAttr->setCode( 'supplier.code' );
 		$orderServiceAttr->setType( 'delivery' );
 		$orderServiceAttr->setValue( 'berlin' );
 
-		$orderServiceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/service' );
+		$orderServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
 		$orderService = $orderServiceManager->createItem();
 		$orderService->copyFrom( $service );
 		$orderService->setAttributeItems( [$orderServiceAttr] );

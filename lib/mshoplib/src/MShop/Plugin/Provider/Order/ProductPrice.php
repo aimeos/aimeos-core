@@ -128,7 +128,7 @@ class ProductPrice
 			return [];
 		}
 
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
+		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
 
 		$search = $attrManager->createSearch( true );
 		$expr = array(
@@ -152,8 +152,8 @@ class ProductPrice
 			return [];
 		}
 
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
-		$productManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
+		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
+		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 
 		$attrId = $attrManager->findItem( 'custom', [], 'product', 'price' )->getId();
 
@@ -194,7 +194,7 @@ class ProductPrice
 		// fetch prices of selection/parent products
 		if( empty( $refPrices ) )
 		{
-			$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+			$productManager = \Aimeos\MShop::create( $context, 'product' );
 			$product = $productManager->getItem( $orderProduct->getProductId(), array( 'price' ) );
 			$refPrices = $product->getRefItems( 'price', 'default', 'default' );
 		}
@@ -209,7 +209,7 @@ class ProductPrice
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $pid, $pcode ), -1, null, $codes );
 		}
 
-		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 		$price = clone $priceManager->getLowestPrice( $refPrices, $orderProduct->getQuantity() );
 
 		// add prices of product attributes to compute the end price for comparison

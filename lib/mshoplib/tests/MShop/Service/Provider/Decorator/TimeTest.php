@@ -22,7 +22,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 
-		$servManager = \Aimeos\MShop\Factory::createManager( $this->context, 'service' );
+		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$this->servItem = $servManager->createItem()->setCode( '73' );
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Time::class )

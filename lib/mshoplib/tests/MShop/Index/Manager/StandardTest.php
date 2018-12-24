@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'attribute' );
+		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'attribute' );
 
 		$search = $manager->createSearch();
 		$expr = array(

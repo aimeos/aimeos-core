@@ -26,13 +26,13 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			->setMethods( null )
 			->getMock();
 
-		\Aimeos\MShop\Factory::setCache( true );
+		\Aimeos\MShop::cache( true );
 	}
 
 
 	protected function tearDown()
 	{
-		\Aimeos\MShop\Factory::setCache( false );
+		\Aimeos\MShop::cache( false );
 
 		unset( $this->object );
 	}
@@ -285,7 +285,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetCustomerData()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'customer' );
+		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
 		$customerId = $manager->findItem( 'UTC001' )->getId();
 
 		$this->assertNull( $this->access( 'getCustomerData' )->invokeArgs( $this->object, [$customerId, 'token'] ) );
@@ -299,11 +299,11 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			->setMethods( ['saveItem'] )
 			->getMock();
 
-		\Aimeos\MShop\Factory::injectManager( $this->context, 'customer/lists', $stub );
+		\Aimeos\MShop::inject( $this->context, 'customer/lists', $stub );
 
 		$stub->expects( $this->once() )->method( 'saveItem' );
 
-		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'customer' );
+		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
 		$customerId = $manager->findItem( 'UTC001' )->getId();
 
 		$this->access( 'setCustomerData' )->invokeArgs( $this->object, [$customerId, 'token', 'abcd'] );

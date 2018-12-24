@@ -60,7 +60,7 @@ class IndexRebuildPerf extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Rebuilding index for performance data', 0 );
 
-		\Aimeos\MShop\Factory::createManager( $this->additional, 'index' )->rebuildIndex();
+		\Aimeos\MShop::create( $this->additional, 'index' )->rebuildIndex();
 
 		$this->status( 'done' );
 	}

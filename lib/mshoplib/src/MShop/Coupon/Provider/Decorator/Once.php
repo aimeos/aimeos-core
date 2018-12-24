@@ -35,7 +35,7 @@ class Once
 		if( isset( $addresses[$type] ) )
 		{
 			$address = $addresses[$type];
-			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order' );
+			$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
 
 			$search = $manager->createSearch();
 			$expr = [

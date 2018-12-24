@@ -65,7 +65,7 @@ class PropertyMatch
 			return true;
 		}
 
-		$productManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
+		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 
 		$criteria = $productManager->createSearch( true );
 		$expr = [

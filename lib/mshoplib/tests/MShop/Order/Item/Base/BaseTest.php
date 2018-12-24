@@ -325,7 +325,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddService()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base/service' );
+		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base/service' );
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
 		$service = $manager->createItem()->setServiceId( -1 );
 

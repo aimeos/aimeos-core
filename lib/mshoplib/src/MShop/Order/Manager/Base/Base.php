@@ -70,7 +70,7 @@ abstract class Base
 			return $this->getObject()->createItem();
 		}
 
-		\Aimeos\MShop\Factory::createManager( $context, 'plugin' )->register( $order, 'order' );
+		\Aimeos\MShop::create( $context, 'plugin' )->register( $order, 'order' );
 
 		return $order;
 	}

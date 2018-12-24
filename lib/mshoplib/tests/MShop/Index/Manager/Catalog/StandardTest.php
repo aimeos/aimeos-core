@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'catalog' );
+		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'catalog' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );

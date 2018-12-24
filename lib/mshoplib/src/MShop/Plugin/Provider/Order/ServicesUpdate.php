@@ -68,7 +68,7 @@ class ServicesUpdate
 
 		if( count( $order->getProducts() ) === 0 )
 		{
-			$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
+			$priceManager = \Aimeos\MShop::create( $context, 'price' );
 
 			foreach( $services as $type => $list )
 			{
@@ -88,7 +88,7 @@ class ServicesUpdate
 			}
 		}
 
-		$serviceManager = \Aimeos\MShop\Factory::createManager( $context, 'service' );
+		$serviceManager = \Aimeos\MShop::create( $context, 'service' );
 
 		$search = $serviceManager->createSearch( true );
 		$expr = array(

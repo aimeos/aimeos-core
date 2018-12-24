@@ -301,10 +301,10 @@ abstract class Base implements Iface
 	 */
 	protected function createProduct( $productCode, $quantity = 1, $stockType = 'default' )
 	{
-		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
+		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$product = $productManager->findItem( $productCode, ['text', 'media', 'price'] );
 
-		$priceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
+		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$prices = $product->getRefItems( 'price', 'default', 'default' );
 
 		if( empty( $prices ) ) {
@@ -313,7 +313,7 @@ abstract class Base implements Iface
 			$price = $priceManager->getLowestPrice( $prices, $quantity );
 		}
 
-		$orderBaseProductManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product' );
+		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 		$orderProduct = $orderBaseProductManager->createItem();
 
 		$orderProduct->copyFrom( $product );
@@ -346,7 +346,7 @@ abstract class Base implements Iface
 
 		if( empty( $prices ) )
 		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' );
+			$manager = \Aimeos\MShop::create( $this->getContext(), 'price' );
 			$prices = array( '0.00' => $manager->createItem() );
 		}
 
@@ -391,7 +391,7 @@ abstract class Base implements Iface
 	protected function getPriceByTaxRate( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		$taxrates = [];
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'price' );
 
 		foreach( $basket->getProducts() as $product )
 		{

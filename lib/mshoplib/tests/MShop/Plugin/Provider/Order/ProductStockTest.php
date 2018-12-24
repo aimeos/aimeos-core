@@ -21,12 +21,12 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 
-		$pluginManager = \Aimeos\MShop\Factory::createManager( $this->context, 'plugin' );
+		$pluginManager = \Aimeos\MShop::create( $this->context, 'plugin' );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'ProductCode' );
 		$this->plugin->setStatus( 1 );
 
-		$orderBaseManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' );
+		$orderBaseManager = \Aimeos\MShop::create( $this->context, 'order/base' );
 		$this->order = $orderBaseManager->createItem();
 		$this->order->__sleep(); // remove plugins
 	}
@@ -120,7 +120,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function getOrderProduct( $code )
 	{
-		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
+		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
@@ -130,7 +130,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No product item found' );
 		}
 
-		$orderProductManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product' );
+		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 		$orderProductItem = $orderProductManager->createItem();
 		$orderProductItem->copyFrom( $productItem );
 

@@ -19,9 +19,9 @@ class OnceTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$this->couponItem = \Aimeos\MShop\Factory::createManager( $this->context, 'coupon' )->createItem();
+		$this->couponItem = \Aimeos\MShop::create( $this->context, 'coupon' )->createItem();
 
-		$orderBaseManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' );
+		$orderBaseManager = \Aimeos\MShop::create( $this->context, 'order/base' );
 		$search = $orderBaseManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.price', '4800.00' ) );
 		$baskets = $orderBaseManager->searchItems( $search );

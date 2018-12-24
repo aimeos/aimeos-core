@@ -76,7 +76,7 @@ class Category
 				$prodIds[] = $product->getProductId();
 			}
 
-			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog' );
+			$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
 
 			$search = $manager->createSearch( true );
 			$expr = [

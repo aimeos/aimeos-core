@@ -78,7 +78,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 
 	public function testCalcPrice()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
+		$manager = \Aimeos\MShop::create( $this->context, 'price' );
 		$price = $manager->createItem();
 
 		$this->mockProvider->expects( $this->once() )
@@ -93,7 +93,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 
 	public function testCalcPriceBundle()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
+		$manager = \Aimeos\MShop::create( $this->context, 'price' );
 		$price = $manager->createItem();
 
 		$this->mockProvider->expects( $this->once() )
@@ -108,7 +108,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 
 	public function testCalcPricePackageHalf()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
+		$manager = \Aimeos\MShop::create( $this->context, 'price' );
 		$price = $manager->createItem();
 
 		$this->mockProvider->expects( $this->once() )
@@ -123,7 +123,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 
 	public function testCalcPricePackageFull()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
+		$manager = \Aimeos\MShop::create( $this->context, 'price' );
 		$price = $manager->createItem();
 
 		$this->mockProvider->expects( $this->once() )
@@ -141,7 +141,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function getOrderBaseItem( $paydate )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'order' );
+		$manager = \Aimeos\MShop::create( $this->context, 'order' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', $paydate ) );
@@ -151,7 +151,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No order item found' );
 		}
 
-		$baseManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' );
+		$baseManager = \Aimeos\MShop::create( $this->context, 'order/base' );
 		return $baseManager->load( $item->getBaseId() );
 	}
 }

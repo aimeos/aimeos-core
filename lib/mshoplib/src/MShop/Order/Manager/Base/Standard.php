@@ -289,11 +289,11 @@ class Standard extends Base
 		$locale = $context->getLocale();
 
 		$values['order.base.siteid'] = $locale->getSiteId();
-		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 
 		$base = $this->createItemBase( $priceManager->createItem(), clone $locale, $values );
 
-		\Aimeos\MShop\Factory::createManager( $context, 'plugin' )->register( $base, 'order' );
+		\Aimeos\MShop::create( $context, 'plugin' )->register( $base, 'order' );
 
 		return $base;
 	}
@@ -750,8 +750,8 @@ class Standard extends Base
 		$map = [];
 
 		$context = $this->getContext();
-		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
-		$localeManager = \Aimeos\MShop\Factory::createManager( $context, 'locale' );
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
+		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -958,8 +958,8 @@ class Standard extends Base
 			throw $e;
 		}
 
-		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
-		$localeManager = \Aimeos\MShop\Factory::createManager( $context, 'locale' );
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
+		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
 
 		$price = $priceManager->createItem();
 		$price->setCurrencyId( $row['order.base.currencyid'] );
@@ -981,7 +981,7 @@ class Standard extends Base
 			$basket = $this->loadFresh( $id, $price, $localeItem, $row, $parts );
 		}
 
-		$pluginManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'plugin' );
+		$pluginManager = \Aimeos\MShop::create( $this->getContext(), 'plugin' );
 		$pluginManager->register( $basket, 'order' );
 
 		return $basket;

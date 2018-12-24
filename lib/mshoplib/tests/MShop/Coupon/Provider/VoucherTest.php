@@ -41,7 +41,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->orderBase->addProduct( $this->getOrderProduct() );
 
-		$orderProduct = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product' )->createItem();
+		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem();
 		$orderProduct->getPrice()->setCurrencyId( 'EUR' );
 		$orderProduct->getPrice()->setValue( '100.00' );
 
@@ -87,7 +87,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 	public function testFilterOrderBaseIds()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'order' );
+		$manager = \Aimeos\MShop::create( $this->context, 'order' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
@@ -139,7 +139,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	protected function getOrderProduct()
 	{
 		$products = [];
-		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product' );
+		$manager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->combine( '&&', array(

@@ -21,12 +21,12 @@ class ServicesUpdateTest
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$pluginManager = \Aimeos\MShop\Factory::createManager( $context, 'plugin' );
+		$pluginManager = \Aimeos\MShop::create( $context, 'plugin' );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'ServicesUpdate' );
 		$this->plugin->setStatus( 1 );
 
-		$orderBaseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
+		$orderBaseManager = \Aimeos\MShop::create( $context, 'order/base' );
 		$this->order = $orderBaseManager->createItem();
 		$this->order->__sleep(); // remove event listeners
 	}
@@ -51,10 +51,10 @@ class ServicesUpdateTest
 		$context = \TestHelperMShop::getContext();
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesUpdate( $context, $this->plugin );
 
-		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
-		$localeManager = \Aimeos\MShop\Factory::createManager( $context, 'locale' );
-		$orderBaseProductManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
-		$orderBaseServiceManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/service' );
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
+		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
+		$orderBaseProductManager = \Aimeos\MShop::create( $context, 'order/base/product' );
+		$orderBaseServiceManager = \Aimeos\MShop::create( $context, 'order/base/service' );
 
 		$priceItem = $priceManager->createItem();
 		$localeItem = $localeManager->createItem();
@@ -111,10 +111,10 @@ class ServicesUpdateTest
 		$context = \TestHelperMShop::getContext();
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesUpdate( $context, $this->plugin );
 
-		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
-		$localeManager = \Aimeos\MShop\Factory::createManager( $context, 'locale' );
-		$orderBaseProductManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
-		$orderBaseServiceManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/service' );
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
+		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
+		$orderBaseProductManager = \Aimeos\MShop::create( $context, 'order/base/product' );
+		$orderBaseServiceManager = \Aimeos\MShop::create( $context, 'order/base/service' );
 
 		$priceItem = $priceManager->createItem();
 		$localeItem = $localeManager->createItem();
@@ -170,10 +170,10 @@ class ServicesUpdateTest
 		$context = \TestHelperMShop::getContext();
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesUpdate( $context, $this->plugin );
 
-		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
-		$localeManager = \Aimeos\MShop\Factory::createManager( $context, 'locale' );
-		$orderBaseProductManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
-		$orderBaseServiceManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/service' );
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
+		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
+		$orderBaseProductManager = \Aimeos\MShop::create( $context, 'order/base/product' );
+		$orderBaseServiceManager = \Aimeos\MShop::create( $context, 'order/base/service' );
 
 		$priceItem = $priceManager->createItem();
 		$localeItem = $localeManager->createItem();
@@ -208,8 +208,8 @@ class ServicesUpdateTest
 		$context = \TestHelperMShop::getContext();
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesUpdate( $context, $this->plugin );
 
-		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
-		$orderBaseServiceManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/service' );
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
+		$orderBaseServiceManager = \Aimeos\MShop::create( $context, 'order/base/service' );
 
 		$priceItem = $priceManager->createItem();
 		$priceItem->setCosts( '5.00' );

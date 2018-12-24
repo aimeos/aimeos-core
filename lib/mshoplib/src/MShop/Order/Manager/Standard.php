@@ -829,7 +829,7 @@ class Standard
 	 */
 	protected function addStatus( \Aimeos\MShop\Order\Item\Iface $item )
 	{
-		$statusManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/status' );
+		$statusManager = \Aimeos\MShop::create( $this->getContext(), 'order/status' );
 
 		$statusItem = $statusManager->createItem();
 		$statusItem->setParentId( $item->getId() );

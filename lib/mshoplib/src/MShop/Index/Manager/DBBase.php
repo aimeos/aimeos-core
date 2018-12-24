@@ -54,7 +54,7 @@ abstract class DBBase
 	 */
 	public function createItem( array $values = [] )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->createItem( $values );
+		return \Aimeos\MShop::create( $this->getContext(), 'product' )->createItem( $values );
 	}
 
 
@@ -66,7 +66,7 @@ abstract class DBBase
 	 */
 	public function createSearch( $default = false )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->createSearch( $default );
+		return \Aimeos\MShop::create( $this->getContext(), 'product' )->createSearch( $default );
 	}
 
 
@@ -80,7 +80,7 @@ abstract class DBBase
 	 */
 	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->getItem( $id, $ref, $default );
+		return \Aimeos\MShop::create( $this->getContext(), 'product' )->getItem( $id, $ref, $default );
 	}
 
 
@@ -92,7 +92,7 @@ abstract class DBBase
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->getSearchAttributes( $withsub );
+		return \Aimeos\MShop::create( $this->getContext(), 'product' )->getSearchAttributes( $withsub );
 	}
 
 
@@ -351,7 +351,7 @@ abstract class DBBase
 			throw $e;
 		}
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$manager = \Aimeos\MShop::create( $context, 'product' );
 		$prodSearch = $manager->createSearch();
 		$prodSearch->setConditions( $prodSearch->compare( '==', 'product.id', $ids ) );
 		$prodSearch->setSlice( 0, $search->getSliceSize() );

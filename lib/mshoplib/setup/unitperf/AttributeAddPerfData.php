@@ -52,7 +52,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding attribute performance data', 0 );
 
 
-		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
+		$manager = \Aimeos\MShop::create( $this->additional, 'attribute' );
 		$manager->begin();
 
 		$this->addCharacteristics();
@@ -87,7 +87,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		];
 
 
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
+		$attrManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
 
 		foreach( $characteristics as $type => $list )
 		{
@@ -139,9 +139,9 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		);
 
 
-		$mediaManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'media' );
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
-		$listManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute/lists' );
+		$mediaManager = \Aimeos\MShop::create( $this->additional, 'media' );
+		$attrManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
+		$listManager = \Aimeos\MShop::create( $this->additional, 'attribute/lists' );
 
 		$attrItem = $attrManager->createItem()
 			->setDomain( 'product' )
@@ -177,9 +177,9 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function addOptions()
 	{
-		$priceManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'price' );
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
-		$listManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute/lists' );
+		$priceManager = \Aimeos\MShop::create( $this->additional, 'price' );
+		$attrManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
+		$listManager = \Aimeos\MShop::create( $this->additional, 'attribute/lists' );
 
 		$priceItem = $priceManager->createItem()
 			->setTaxRate( '20.00' )
@@ -225,7 +225,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		];
 
 
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
+		$attrManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
 
 		foreach( $sizes as $type => $list )
 		{

@@ -226,7 +226,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	protected function getOrderProducts()
 	{
 		$products = [];
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base/product' );
+		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base/product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->combine( '&&', array(

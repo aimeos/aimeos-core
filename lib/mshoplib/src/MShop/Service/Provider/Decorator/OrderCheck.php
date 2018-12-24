@@ -93,7 +93,7 @@ class OrderCheck
 			return false;
 		}
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'order' );
+		$manager = \Aimeos\MShop::create( $context, 'order' );
 
 		if( isset( $config['ordercheck.total-number-min'] ) )
 		{

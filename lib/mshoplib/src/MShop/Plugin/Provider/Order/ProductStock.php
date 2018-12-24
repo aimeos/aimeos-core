@@ -150,7 +150,7 @@ class ProductStock
 	 */
 	protected function getStockItems( $codes, $types )
 	{
-		$stockManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'stock' );
+		$stockManager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
 
 		$search = $stockManager->createSearch();
 		$expr = array(

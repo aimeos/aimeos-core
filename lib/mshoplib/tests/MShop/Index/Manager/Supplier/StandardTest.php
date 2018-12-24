@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'supplier' );
+		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'supplier' );
 		$item = $manager->findItem( 'unitCode001' );
 
 

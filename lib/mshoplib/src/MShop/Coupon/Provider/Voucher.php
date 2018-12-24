@@ -50,7 +50,7 @@ class Voucher
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon/code' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'coupon/code' );
 		$orderProductId = $manager->findItem( $this->getCode() )->getRef();
 
 
@@ -111,7 +111,7 @@ class Voucher
 	protected function checkVoucher( $orderProductId, array $status )
 	{
 		$context = $this->getContext();
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'order' );
+		$manager = \Aimeos\MShop::create( $context, 'order' );
 
 		$search = $manager->createSearch();
 		$expr = [
@@ -136,7 +136,7 @@ class Voucher
 	 */
 	protected function filterOrderBaseIds( array $baseIds )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
 
 		$search = $manager->createSearch();
 		$expr = [
@@ -165,7 +165,7 @@ class Voucher
 	protected function getOrderProductItem( $orderProductId, $currencyId )
 	{
 		$context = $this->getContext();
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
+		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
 
 		$orderProduct = $manager->getItem( $orderProductId );
 		$currency = $orderProduct->getPrice()->getCurrencyId();
@@ -189,7 +189,7 @@ class Voucher
 	protected function getUsedRebate( $code )
 	{
 		$context = $this->getContext();
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/coupon' );
+		$manager = \Aimeos\MShop::create( $context, 'order/base/coupon' );
 
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', $code ) );
@@ -204,7 +204,7 @@ class Voucher
 
 
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
+		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
 
 		$search = $manager->createSearch();
 		$expr = [
@@ -231,7 +231,7 @@ class Voucher
 	 */
 	protected function setOrderAttributeRebate( array $orderProducts, $remaining )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/base/product/attribute' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base/product/attribute' );
 
 		$orderAttrItem = $manager->createItem();
 		$orderAttrItem->setValue( number_format( $remaining, 2, '.', '' ) );

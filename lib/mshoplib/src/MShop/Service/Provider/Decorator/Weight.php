@@ -145,7 +145,7 @@ class Weight
 	{
 		$weight = 0;
 
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 		$search = $manager->createSearch( true )->setSlice( 0, count( $prodMap ) );
 		$expr = array(
 			$search->compare( '==', 'product.code', array_keys( $prodMap ) ),

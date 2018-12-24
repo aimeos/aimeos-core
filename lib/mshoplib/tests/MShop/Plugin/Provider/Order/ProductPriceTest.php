@@ -26,10 +26,10 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setProvider( 'ProductPrice' );
 		$this->plugin->setStatus( 1 );
 
-		$this->order = \Aimeos\MShop\Factory::createManager( $context, 'order/base' )->createItem();
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem();
 		$this->order->__sleep(); // remove event listeners
 
-		$orderBaseProductManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
+		$orderBaseProductManager = \Aimeos\MShop::create( $context, 'order/base/product' );
 		$search = $orderBaseProductManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.product.prodcode', 'CNC' ) );
 		$productItems = $orderBaseProductManager->searchItems( $search );
@@ -76,7 +76,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSelectionPriceCorrect()
 	{
-		$productManager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'product' );
+		$productManager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'product' );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
 		$result = $productManager->searchItems( $search, array( 'price' ) );
@@ -127,7 +127,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSelectionPriceUpdated()
 	{
-		$productManager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'product' );
+		$productManager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'product' );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
 		$result = $productManager->searchItems( $search, array( 'price' ) );
@@ -183,7 +183,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No attribute found' );
 		}
 
-		$orderProdAttrManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product/attribute' );
+		$orderProdAttrManager = \Aimeos\MShop::create( $context, 'order/base/product/attribute' );
 		$ordAttr = $orderProdAttrManager->createItem();
 		$ordAttr->copyFrom( $attribute );
 		$ordAttr->setQuantity( 2 );
