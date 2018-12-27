@@ -22,7 +22,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $context );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'AddressesAvailable' );
 		$this->plugin->setStatus( 1 );

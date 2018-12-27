@@ -61,7 +61,7 @@ class MShopAddLocaleDataDefault extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No data file "%1$s" found', $filename ) );
 			}
 
-			$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $this->additional, 'Standard' );
+			$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->additional, 'Standard' );
 			$siteIds = [];
 
 			if( isset( $data['locale/site'] ) ) {

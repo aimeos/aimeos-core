@@ -21,7 +21,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $this->context );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $this->context );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setType( 'order' );
 		$this->plugin->setStatus( '1' );
@@ -80,7 +80,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 		$orderBaseManager = \Aimeos\MShop::create( $context, 'order/base' );
 		$orderBaseProductManager = \Aimeos\MShop::create( $context, 'order/base/product' );
 
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC', 'IJKL' ) ) );
 		$pResults = $manager->searchItems( $search, array( 'price' ) );

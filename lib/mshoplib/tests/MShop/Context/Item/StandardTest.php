@@ -144,7 +144,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
+		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
 		$locale->setLanguageId( 'en' );
 		$this->object->setLocale( $locale );
 
@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLocale()
 	{
-		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
+		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
 		$return = $this->object->setLocale( $locale );
 
 		$this->assertSame( $locale, $this->object->getLocale() );

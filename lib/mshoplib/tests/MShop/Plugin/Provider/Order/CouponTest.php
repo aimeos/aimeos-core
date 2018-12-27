@@ -29,12 +29,12 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $context );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'Coupon' );
 		$this->plugin->setStatus( 1 );
 
-		$priceItem = \Aimeos\MShop\Price\Manager\Factory::createManager( $context )->createItem();
+		$priceItem = \Aimeos\MShop\Price\Manager\Factory::create( $context )->createItem();
 		$this->order = new \Aimeos\MShop\Order\Item\Base\Standard( $priceItem, $context->getLocale() );
 	}
 

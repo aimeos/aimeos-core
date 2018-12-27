@@ -79,7 +79,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 
@@ -128,7 +128,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsIdWidth()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$attrWidthItem = $attributeManager->findItem( '29', [], 'product', 'width' );
 
 		$search = $this->object->createSearch();
@@ -141,7 +141,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsIdLength()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$attrLengthItem = $attributeManager->findItem( '30', [], 'product', 'length' );
 
 
@@ -155,7 +155,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsNoId()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( \TestHelperMShop::getContext() );
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '!=', 'index.attribute.id', null ) );
@@ -167,7 +167,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsAll()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$attrLengthItem = $attributeManager->findItem( '30', [], 'product', 'length' );
 		$attrWidthItem = $attributeManager->findItem( '29', [], 'product', 'width' );
 

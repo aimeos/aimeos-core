@@ -67,7 +67,7 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addMediaPropertyData( array $testdata )
 	{
-		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::create( $this->additional, 'Standard' );
 		$mediaPropertyManager = $mediaManager->getSubManager( 'property', 'Standard' );
 		$mediaPropertyTypeManager = $mediaPropertyManager->getSubManager( 'type', 'Standard' );
 

@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
 		$this->context = \TestHelperMShop::getContext();
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
 		$this->object = $orderManager->getSubManager( 'base' )->getSubManager( 'address' );
 	}
 

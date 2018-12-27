@@ -68,7 +68,7 @@ class CatalogAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addCatalogData( array $testdata )
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$parentIds = array( 'init' => null );
 		$catalog = $catalogManager->createItem();

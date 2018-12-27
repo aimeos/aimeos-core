@@ -81,7 +81,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getMediaData( array $keys )
 	{
-		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$urls = [];
 		foreach( $keys as $dataset )
@@ -113,7 +113,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getProductData( array $keys )
 	{
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$codes = [];
 		foreach( $keys as $dataset )
@@ -145,7 +145,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getTextData( array $keys )
 	{
-		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$labels = [];
 		foreach( $keys as $dataset )
@@ -179,7 +179,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addSupplierListData( array $testdata, array $refIds, $type = 'Standard' )
 	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::createManager( $this->additional, $type );
+		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->additional, $type );
 		$supplierListManager = $supplierManager->getSubManager( 'lists', $type );
 		$supplierListTypeManager = $supplierListManager->getSubmanager( 'type', $type );
 

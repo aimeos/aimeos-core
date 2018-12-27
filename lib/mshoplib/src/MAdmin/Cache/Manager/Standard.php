@@ -218,9 +218,9 @@ class Standard
 			$dbm = $context->getDatabaseManager();
 
 			try {
-				$this->object = \Aimeos\MW\Cache\Factory::createManager( $name, $config, $dbm );
+				$this->object = \Aimeos\MW\Cache\Factory::create( $name, $config, $dbm );
 			} catch( \Exception $e ) {
-				$this->object = \Aimeos\MW\Cache\Factory::createManager( 'DB', $config, $dbm );
+				$this->object = \Aimeos\MW\Cache\Factory::create( 'DB', $config, $dbm );
 			}
 		}
 

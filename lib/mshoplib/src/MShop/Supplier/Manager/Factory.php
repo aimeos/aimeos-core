@@ -31,7 +31,7 @@ class Factory
 	 * @throws \Aimeos\MShop\Supplier\Exception|\Aimeos\MShop\Exception If requested manager
 	 * implementation couldn't be found or initialisation fails
 	 */
-	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** mshop/supplier/manager/name
 		 * Class name of the used supplier manager implementation

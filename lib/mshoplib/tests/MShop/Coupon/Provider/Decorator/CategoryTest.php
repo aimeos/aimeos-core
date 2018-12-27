@@ -21,7 +21,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$orderProducts = [];
 		$this->context = \TestHelperMShop::getContext();
-		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $this->context )->createItem();
+		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )->createItem();
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $this->context, $this->couponItem, 'abcd' );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Category( $provider, $this->context, $this->couponItem, 'abcd');

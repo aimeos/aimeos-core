@@ -27,5 +27,5 @@ interface Iface
 	 * @param string|null $name Manager name (from configuration or "Standard" if null)
 	 * @return \Aimeos\MShop\Common\Manager\Iface New manager object
 	 */
-	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null );
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null );
 }

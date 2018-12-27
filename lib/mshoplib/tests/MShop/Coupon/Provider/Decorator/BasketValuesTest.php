@@ -22,23 +22,23 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 		$orderProducts = [];
 		$context = \TestHelperMShop::getContext();
 
-		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context );
+		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::create( $context );
 		$this->couponItem = $couponManager->createItem();
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $context, $this->couponItem, 'abcd' );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\BasketValues( $provider, $context, $this->couponItem, 'abcd' );
 		$this->object->setObject( $this->object );
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderProductManager = $orderBaseManager->getSubManager( 'product' );
 
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC' ) ) );
 		$products = $productManager->searchItems( $search );
 
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $context );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
 		$price = $priceManager->createItem();
 		$price->setValue( 321 );
 

@@ -19,7 +19,7 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'PropertyAdd' );
 		$this->plugin->setStatus( '1' );
@@ -32,11 +32,11 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 			),
 		) );
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 
@@ -96,7 +96,7 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateAttributeExists()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$attributeManager = $orderManager->getSubmanager( 'base' )->getSubmanager( 'product' )->getSubmanager( 'attribute' );
 
 		$attribute = $attributeManager->createItem();

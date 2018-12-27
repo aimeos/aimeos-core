@@ -171,7 +171,7 @@ class Standard
 	protected function getObject()
 	{
 		if( !isset( $this->object ) ) {
-			$this->object = \Aimeos\MAdmin\Cache\Manager\Factory::createManager( $this->context )->getCache();
+			$this->object = \Aimeos\MAdmin::create( $this->context, 'cache' )->getCache();
 		}
 
 		return $this->object;

@@ -77,7 +77,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function getMediaData( array $keys )
 	{
-		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$urls = [];
 		foreach( $keys as $dataset )
@@ -111,7 +111,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addTextData( array $testdata, array $refIds )
 	{
-		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::create( $this->additional, 'Standard' );
 		$textListManager = $textManager->getSubManager( 'lists', 'Standard' );
 		$textListTypeManager = $textListManager->getSubmanager( 'type', 'Standard' );
 

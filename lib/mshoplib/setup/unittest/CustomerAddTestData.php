@@ -68,7 +68,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 		}
 
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Standard' );
 		$customerAddressManager = $customerManager->getSubManager( 'address', 'Standard' );
 		$customerGroupManager = $customerManager->getSubManager( 'group', 'Standard' );
 

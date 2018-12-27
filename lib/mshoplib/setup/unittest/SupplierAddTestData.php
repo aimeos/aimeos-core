@@ -60,7 +60,7 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addSupplierData()
 	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->additional, 'Standard' );
 		$supplierAddressManager = $supplierManager->getSubManager( 'address', 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;

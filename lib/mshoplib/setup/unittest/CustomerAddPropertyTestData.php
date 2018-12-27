@@ -68,7 +68,7 @@ class CustomerAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addCustomerPropertyData( array $testdata, $type = 'Standard' )
 	{
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, $type );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, $type );
 		$customerPropertyManager = $customerManager->getSubManager( 'property', $type );
 		$customerPropertyTypeManager = $customerPropertyManager->getSubManager( 'type', $type );
 

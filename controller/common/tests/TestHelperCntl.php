@@ -95,7 +95,7 @@ class TestHelperCntl
 		$ctx->setSession( $session );
 
 
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $ctx );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $ctx );
 		$locale = $localeManager->bootstrap( $site, '', '', false );
 		$ctx->setLocale( $locale );
 

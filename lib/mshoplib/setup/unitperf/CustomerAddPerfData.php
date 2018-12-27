@@ -51,7 +51,7 @@ class CustomerAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Adding customer performance data', 0 );
 
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional );
 
 		$customerItem = $customerManager->createItem();
 		$customerItem->setCode( 'unitperf@example.com' );

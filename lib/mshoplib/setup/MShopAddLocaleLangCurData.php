@@ -48,7 +48,7 @@ class MShopAddLocaleLangCurData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 
 
 		$ds = DIRECTORY_SEPARATOR;
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->additional, 'Standard' );
 
 
 		$filename = __DIR__ . $ds . 'default'.  $ds . 'data'. $ds . 'language.php';

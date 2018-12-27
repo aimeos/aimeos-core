@@ -43,10 +43,10 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testInjectManager()
 	{
-		$manager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context, 'Standard' );
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context, 'Standard' );
 		\Aimeos\MShop\Attribute\Manager\Factory::injectManager( '\Aimeos\MShop\Attribute\Manager\StandardMock', $manager );
 
-		$injectedManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context, 'StandardMock' );
+		$injectedManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context, 'StandardMock' );
 
 		$this->assertSame( $manager, $injectedManager );
 	}
@@ -54,12 +54,12 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testInjectManagerReset()
 	{
-		$manager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context, 'Standard' );
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context, 'Standard' );
 		\Aimeos\MShop\Attribute\Manager\Factory::injectManager( '\Aimeos\MShop\Attribute\Manager\StandardMock', $manager );
 		\Aimeos\MShop\Attribute\Manager\Factory::injectManager( '\Aimeos\MShop\Attribute\Manager\StandardMock', null );
 
 		$this->setExpectedException( \Aimeos\MShop\Exception::class );
-		\Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context, 'StandardMock' );
+		\Aimeos\MShop\Attribute\Manager\Factory::create( $this->context, 'StandardMock' );
 	}
 
 }

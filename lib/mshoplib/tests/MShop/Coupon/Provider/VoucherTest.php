@@ -19,9 +19,9 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->context );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $this->context );
 
-		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $this->context )->createItem();
+		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )->createItem();
 		$this->couponItem->setConfig( array( 'voucher.productcode' => 'U:MD' ) );
 
 		// Don't create order base item by createItem() as this would already register the plugins

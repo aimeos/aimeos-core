@@ -22,12 +22,12 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $context );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'ProductGone' );
 		$this->plugin->setStatus( 1 );
 
-		$this->orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context );
+		$this->orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $context );
 		$orderBaseManager = $this->orderManager->getSubManager( 'base' );
 
 		$search = $orderBaseManager->createSearch();
@@ -41,7 +41,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$this->order = $baseItem;
 
 		// create a product to mess with in the tests
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
 		$search->setSlice( 0, 1 );
@@ -61,7 +61,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'WTF' ) );
 		$items = $productManager->searchItems( $search );
@@ -117,7 +117,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateProductEnded()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
 
 		$orderBaseManager = $this->orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
@@ -139,7 +139,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateProductNotStarted()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
 
 		$orderBaseManager = $this->orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
@@ -161,7 +161,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateProductDeactivated()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
 
 		$orderBaseManager = $this->orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );

@@ -68,7 +68,7 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addMediaData( array $testdata )
 	{
-		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::create( $this->additional, 'Standard' );
 		$mediaTypeManager = $mediaManager->getSubManager( 'type', 'Standard' );
 
 		$mtype = $mediaTypeManager->createItem();

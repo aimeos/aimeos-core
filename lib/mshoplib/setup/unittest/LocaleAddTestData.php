@@ -61,7 +61,7 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No data file "%1$s" found', $filename ) );
 			}
 
-			$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $this->additional );
+			$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->additional );
 
 			$this->cleanupSites( $localeManager );
 

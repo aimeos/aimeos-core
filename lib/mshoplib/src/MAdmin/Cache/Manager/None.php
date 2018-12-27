@@ -40,7 +40,7 @@ class None
 	 */
 	public function getCache()
 	{
-		return \Aimeos\MW\Cache\Factory::createManager( 'None', [], null );
+		return \Aimeos\MW\Cache\Factory::create( 'None', [], null );
 	}
 
 

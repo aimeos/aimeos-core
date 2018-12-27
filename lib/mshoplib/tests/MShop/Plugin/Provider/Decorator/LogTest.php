@@ -19,12 +19,12 @@ class LogTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $context );
 		$item = $pluginManager->createItem();
 
 		$provider = new \Aimeos\MShop\Plugin\Provider\Order\Example( $context, $item );
 
-		$priceItem = \Aimeos\MShop\Price\Manager\Factory::createManager( $context )->createItem();
+		$priceItem = \Aimeos\MShop\Price\Manager\Factory::create( $context )->createItem();
 		$this->order = new \Aimeos\MShop\Order\Item\Base\Standard( $priceItem, $context->getLocale() );
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Decorator\Log( $context, $item, $provider );

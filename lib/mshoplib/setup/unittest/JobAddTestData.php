@@ -61,7 +61,7 @@ class JobAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addJobTestData()
 	{
-		$adminJobManager = \Aimeos\MAdmin\Job\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$adminJobManager = \Aimeos\MAdmin\Job\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'job.php';

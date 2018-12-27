@@ -23,13 +23,13 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $context );
-		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( $context )->createItem();
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
+		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( $context )->createItem();
 
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $locale, [] );
 
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $context );
 
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderAddressManager = $orderBaseManager->getSubManager( 'address' );
@@ -260,7 +260,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			$this->object->setAddress( $address, $type );
 		}
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$orderAddressManager = $orderManager->getSubManager( 'base' )->getSubManager( 'address' );
 		$address = $orderAddressManager->createItem();
 
@@ -428,11 +428,11 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function createProduct( $code )
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$orderProductManager = $orderManager->getSubManager( 'base' )->getSubManager( 'product' );
 		$product = $orderProductManager->createItem();
 
-		$price = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
+		$price = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
 		$price->setValue( '2.99' );
 
 		$product->setPrice( $price );

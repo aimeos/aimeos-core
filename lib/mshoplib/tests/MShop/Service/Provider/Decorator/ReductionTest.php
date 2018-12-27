@@ -32,7 +32,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Reduction::class )
 			->disableOriginalConstructor()->getMock();
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
 		$this->basket = $orderManager->getSubManager( 'base' )->createItem();
 		$this->basket->__sleep(); // remove plugins
 

@@ -589,7 +589,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\ListRef\Base
 				),
 			);
 
-			$this->treeManagers[$siteid] = \Aimeos\MW\Tree\Factory::createManager( 'DBNestedSet', $treeConfig, $dbm );
+			$this->treeManagers[$siteid] = \Aimeos\MW\Tree\Factory::create( 'DBNestedSet', $treeConfig, $dbm );
 		}
 
 		return $this->treeManagers[$siteid];

@@ -67,7 +67,7 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addData( array $testdata )
 	{
-		$subscriptionManager = \Aimeos\MShop\Subscription\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$subscriptionManager = \Aimeos\MShop\Subscription\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$subscriptionManager->begin();
 
@@ -99,7 +99,7 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getOrderProductItem( $key )
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->additional, 'Standard' )
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->additional, 'Standard' )
 			->getSubManager( 'base', 'Standard' )->getSubManager( 'product', 'Standard' );
 
 		$parts = explode( '/', $key );

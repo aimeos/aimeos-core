@@ -58,7 +58,7 @@ class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
 
 
 		$ds = DIRECTORY_SEPARATOR;
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $this->additional, 'Standard' );
 
 
 		$filename = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'plugin.php';

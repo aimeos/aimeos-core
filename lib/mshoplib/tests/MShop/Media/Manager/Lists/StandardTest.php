@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->editor = $this->context->getEditor();
-		$manager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->context, 'Standard' );
+		$manager = \Aimeos\MShop\Media\Manager\Factory::create( $this->context, 'Standard' );
 		$this->object = $manager->getSubManager( 'lists', 'Standard' );
 	}
 
@@ -297,7 +297,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function getListItems()
 	{
-		$manager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->context, 'Standard' );
+		$manager = \Aimeos\MShop\Media\Manager\Factory::create( $this->context, 'Standard' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'media.url', 'prod_266x221/198_prod_266x221.jpg' ) );

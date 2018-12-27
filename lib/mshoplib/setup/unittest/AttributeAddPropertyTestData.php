@@ -67,7 +67,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addAttributePropertyData( array $testdata )
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->additional, 'Standard' );
 		$attributePropertyManager = $attributeManager->getSubManager( 'property', 'Standard' );
 		$attributePropertyTypeManager = $attributePropertyManager->getSubManager( 'type', 'Standard' );
 

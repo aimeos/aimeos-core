@@ -77,7 +77,7 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getAttributeData( array $keys )
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->additional, 'Standard' );
 		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
 
 		$codes = $typeCodes = $domains = [];
@@ -132,7 +132,7 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getTextData( array $keys )
 	{
-		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$labels = [];
 		foreach( $keys as $dataset )
@@ -165,7 +165,7 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addMediaListData( array $testdata, array $refIds )
 	{
-		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::create( $this->additional, 'Standard' );
 		$mediaListManager = $mediaManager->getSubmanager( 'lists', 'Standard' );
 		$mediaListTypeManager = $mediaListManager->getSubManager( 'type', 'Standard' );
 

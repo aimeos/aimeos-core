@@ -53,7 +53,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 
 		$code = $this->additional->getConfig()->get( 'setup/site', 'default' );
 
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->additional, 'Standard' );
 		$siteManager = $localeManager->getSubManager( 'site' );
 
 		try

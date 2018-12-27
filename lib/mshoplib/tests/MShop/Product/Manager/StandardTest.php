@@ -227,7 +227,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
 
 		$item = $manager->createItem();
 		$item->setType( 'default' );
@@ -238,7 +238,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$listItem = $listManager->createItem();
 		$listItem->setType( 'default' );
 
-		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $context );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::create( $context );
 
 		$textItem = $textManager->createItem();
 		$textItem->setType( 'name' );
@@ -265,7 +265,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveItemSitecheck()
 	{
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );

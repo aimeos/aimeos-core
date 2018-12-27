@@ -20,7 +20,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $context );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'Autofill' );
 		$this->plugin->setStatus( 1 );
@@ -226,7 +226,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $context );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $context );
 		$context->setUserId( $customerManager->findItem( 'UTC001' )->getId() );
 
 		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;

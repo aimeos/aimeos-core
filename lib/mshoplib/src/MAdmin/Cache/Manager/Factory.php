@@ -29,7 +29,7 @@ class Factory
 	 * @param string|null $name Manager name
 	 * @return \Aimeos\MAdmin\Cache\Manager\Iface Cache manager object
 	 */
-	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** madmin/cache/manager/name
 		 * Class name of the used cache manager implementation

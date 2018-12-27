@@ -77,7 +77,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function getCustomerData( array $keys )
 	{
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$codes = [];
 		foreach( $keys as $dataset )
@@ -110,7 +110,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addPriceListData( array $testdata, array $refIds )
 	{
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
 		$priceListManager = $priceManager->getSubManager( 'lists', 'Standard' );
 
 		$value = $ship = $domain = $code = [];
@@ -173,7 +173,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getPriceIds( array $value, array $ship, array $codes )
 	{
-		$manager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$manager = \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -199,7 +199,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addPriceListTypeItems( array $data )
 	{
-		$manager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$manager = \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
 		$listManager = $manager->getSubManager( 'lists', 'Standard' );
 		$listTypeManager = $listManager->getSubManager( 'type', 'Standard' );
 

@@ -60,7 +60,7 @@ class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addPluginData()
 	{
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $this->additional, 'Standard' );
 		$pluginTypeManager = $pluginManager->getSubManager( 'type', 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;

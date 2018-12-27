@@ -95,7 +95,7 @@ class MShop
 					throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $factory ) );
 				}
 
-				$manager = @call_user_func_array( array( $factory, 'createManager' ), array( $context ) );
+				$manager = @call_user_func_array( array( $factory, 'create' ), array( $context ) );
 
 				if( $manager === false ) {
 					throw new \Aimeos\MShop\Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );

@@ -20,8 +20,8 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $context );
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->createItem();
 		$couponItem->setConfig( array( 'fixedrebate.productcode' => 'U:MD', 'fixedrebate.rebate' => '2.50' ) );
 
 		// Don't create order base item by createItem() as this would already register the plugins
@@ -76,7 +76,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 		$products = $this->getOrderProducts();
 		$this->orderBase->addProduct( $products['CNE'] );
 
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->createItem();
 		$couponItem->setConfig( $config );
 
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );
@@ -118,7 +118,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 			),
 		);
 
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->createItem();
 		$couponItem->setConfig( $config );
 
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );
@@ -160,7 +160,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 	public function testAddCouponInvalidConfig()
 	{
 		$context = \TestHelperMShop::getContext();
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
 		$couponItem->setConfig( array( 'fixedrebate.rebate' => '2.50' ) );
 
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );

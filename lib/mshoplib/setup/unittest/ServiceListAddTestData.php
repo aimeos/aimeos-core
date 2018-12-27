@@ -78,7 +78,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getPriceData( array $keys )
 	{
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
 		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
 
 		$value = $ship = $domain = $code = [];
@@ -138,7 +138,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getTextData( array $keys )
 	{
-		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$labels = [];
 		foreach( $keys as $dataset )
@@ -171,7 +171,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getMediaData( array $keys )
 	{
-		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$labels = [];
 		foreach( $keys as $dataset )
@@ -204,7 +204,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addServiceListData( array $testdata, array $refIds )
 	{
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->additional, 'Standard' );
 		$serviceListManager = $serviceManager->getSubManager( 'lists', 'Standard' );
 
 		$typeDomain = $typeCode = $itemCode = [];
@@ -263,7 +263,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addServiceListTypeItems( array $data )
 	{
-		$manager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$manager = \Aimeos\MShop\Service\Manager\Factory::create( $this->additional, 'Standard' );
 		$listManager = $manager->getSubManager( 'lists', 'Standard' );
 		$listTypeManager = $listManager->getSubManager( 'type', 'Standard' );
 
@@ -291,7 +291,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getServiceIds( array $codes, array $typeCodes )
 	{
-		$manager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$manager = \Aimeos\MShop\Service\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$search = $manager->createSearch();
 		$expr = array(

@@ -68,7 +68,7 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addTextData( array $testdata )
 	{
-		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::create( $this->additional, 'Standard' );
 		$textTypeManager = $textManager->getSubManager( 'type', 'Standard' );
 
 		$ttype = $textTypeManager->createItem();

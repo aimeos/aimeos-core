@@ -19,7 +19,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 
-		$servManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
+		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
 		$search = $servManager->createSearch();
 		$search->setConditions($search->compare('==', 'service.provider', 'Standard'));
 		$result = $servManager->searchItems($search, array('price'));
@@ -57,7 +57,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCancel()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
 
 		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->cancel( $item );
@@ -66,7 +66,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCapture()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
 
 		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->capture( $item );
@@ -74,7 +74,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testProcess()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
 
 		$result = $this->object->process( $item, [] );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Helper\Form\Iface::class, $result );
@@ -83,7 +83,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testRefund()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
 
 		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->refund( $item );
@@ -92,7 +92,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testRepay()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
 
 		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->repay( $item );
@@ -101,7 +101,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetConfigFE()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )
+		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
 			->getSubManager( 'base' )->getSubManager( 'service' )->createItem();
 
 		$this->object->setConfigFE( $item, [] );

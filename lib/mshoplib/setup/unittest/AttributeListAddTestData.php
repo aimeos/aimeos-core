@@ -78,7 +78,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function getMediaData( array $keys )
 	{
-		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$urls = [];
 		foreach( $keys as $dataset )
@@ -110,7 +110,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function getTextData( array $keys )
 	{
-		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$labels = [];
 		foreach( $keys as $dataset )
@@ -171,7 +171,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addAttributeListData( array $testdata, array $refIds )
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->additional, 'Standard' );
 		$attributeListManager = $attributeManager->getSubManager( 'lists', 'Standard' );
 
 		$codes = $typeCodes = [];
@@ -231,7 +231,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getAttributeIds( array $codes, array $typeCodes )
 	{
-		$manager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -256,7 +256,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addAttributeListTypeItems( array $data )
 	{
-		$manager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->additional, 'Standard' );
 		$listManager = $manager->getSubManager( 'lists', 'Standard' );
 		$listTypeManager = $listManager->getSubManager( 'type', 'Standard' );
 
@@ -284,7 +284,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getPriceIds( array $value, array $ship )
 	{
-		$manager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$manager = \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$search = $manager->createSearch();
 		$expr = array(

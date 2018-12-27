@@ -18,7 +18,7 @@ class PrePayTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $context );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $context );
 
 		$serviceItem = $serviceManager->createItem();
 		$serviceItem->setCode( 'test' );
@@ -52,7 +52,7 @@ class PrePayTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSync()
 	{
-		$orderItem = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
+		$orderItem = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
 		$result = $this->object->updateSync( $request, $orderItem );
@@ -71,7 +71,7 @@ class PrePayTest extends \PHPUnit\Framework\TestCase
 
 	public function testCancel()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$orderItem = $manager->createItem();
 		$this->object->cancel( $orderItem );
 

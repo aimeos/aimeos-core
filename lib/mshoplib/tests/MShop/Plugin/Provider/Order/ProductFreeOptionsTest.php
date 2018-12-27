@@ -20,7 +20,7 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $this->context );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $this->context );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'ProductFreeOption' );
 

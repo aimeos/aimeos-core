@@ -20,7 +20,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext( 'unitperf' );
 
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 
 		$search = $catalogManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'home' ) );
@@ -33,7 +33,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		// parser warm up so files are already parsed (same as APC is used)
 
-		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, 10 );
 
@@ -49,7 +49,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$start = microtime( true );
 
-		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -80,7 +80,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$start = microtime( true );
 
-		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -111,7 +111,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$start = microtime( true );
 
-		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -137,7 +137,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchByCategories()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 
 		$search = $catalogManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.label', 'cat-1' ) );
@@ -152,7 +152,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$start = microtime( true );
 
-		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -180,7 +180,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 	{
 		$start = microtime( true );
 
-		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -208,7 +208,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 	{
 		$start = microtime( true );
 
-		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -235,7 +235,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 	{
 		$start = microtime( true );
 
-		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -265,7 +265,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$start = microtime( true );
 
-		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -292,7 +292,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchByCategoriesPriceText()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 
 		$search = $catalogManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.label', 'cat-1' ) );
@@ -307,7 +307,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$start = microtime( true );
 
-		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 

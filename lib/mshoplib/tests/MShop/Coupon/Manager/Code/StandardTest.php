@@ -18,7 +18,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
-		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() );
 
 		$search = $couponManager->createSearch();
 		$search->setConditions( $search->compare( '~=', 'coupon.code.code', 'OPQR' ) );

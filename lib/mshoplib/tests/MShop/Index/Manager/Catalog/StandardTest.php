@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 
@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No product item with code CNE found!' );
 		}
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$listManager = $catalogManager->getSubManager( 'lists' );
 		$search = $listManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.lists.domain', 'product' ) );
@@ -137,7 +137,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsId()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$catItem = $catalogManager->findItem( 'cafe' );
 		$catNewItem = $catalogManager->findItem( 'new' );
 
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsNoId()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( \TestHelperMShop::getContext() );
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '!=', 'index.catalog.id', null ) ); // catalog ID
@@ -163,7 +163,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsPosition()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$catItem = $catalogManager->findItem( 'cafe' );
 
 		$search = $this->object->createSearch();

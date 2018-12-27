@@ -68,7 +68,7 @@ class PriceAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addPriceData( array $testdata )
 	{
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
 		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
 
 		$ptype = $priceTypeManager->createItem();

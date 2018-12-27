@@ -21,7 +21,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $context );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'ProductPrice' );
 		$this->plugin->setStatus( 1 );
@@ -168,7 +168,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $context );
+		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $context );
 
 		$search = $attrManager->createSearch();
 		$expr = array(

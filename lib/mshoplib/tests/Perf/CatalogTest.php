@@ -20,7 +20,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
 
 		// parser warm up so files are already parsed (same as APC is used)
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 		$this->root = $catalogManager->getTree( null, array( 'text', 'media' ), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 	}
 
@@ -29,7 +29,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
 	{
 		$start = microtime( true );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 		$catalogManager->getTree( null, array( 'text', 'media' ) );
 
 		$stop = microtime( true );
@@ -41,7 +41,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
 	{
 		$start = microtime( true );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 		$catalogManager->getTree( $this->root->getId(), array( 'text', 'media' ) );
 
 		$stop = microtime( true );

@@ -68,7 +68,7 @@ class ServiceAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addServiceData( array $testdata )
 	{
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->additional, 'Standard' );
 		$serviceTypeManager = $serviceManager->getSubManager( 'type', 'Standard' );
 
 		$type = $serviceTypeManager->createItem();

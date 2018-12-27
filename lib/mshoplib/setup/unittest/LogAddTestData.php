@@ -60,7 +60,7 @@ class LogAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addLogTestData()
 	{
-		$adminLogManager = \Aimeos\MAdmin\Log\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$adminLogManager = \Aimeos\MAdmin\Log\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'log.php';

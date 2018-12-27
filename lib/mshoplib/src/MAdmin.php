@@ -69,7 +69,7 @@ class MAdmin
 
 		$id = (string) $context;
 
-		if( !isset( self::$objects[$id][$path] ) )
+		if( self::$cache === false || !isset( self::$objects[$id][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -91,13 +91,13 @@ class MAdmin
 				throw new \Aimeos\MAdmin\Exception( sprintf( 'Class "%1$s" not available', $factory ) );
 			}
 
-			$manager = @call_user_func_array( array( $factory, 'createManager' ), array( $context ) );
+			$manager = @call_user_func_array( array( $factory, 'create' ), array( $context ) );
 
 			if( $manager === false ) {
 				throw new \Aimeos\MAdmin\Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 			}
 
-			self::$objects[$id][$name] = $manager;
+			self::$objects[$id][$path] = $manager;
 		}
 
 		return self::$objects[$id][$path];

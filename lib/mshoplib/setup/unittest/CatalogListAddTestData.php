@@ -78,7 +78,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function getTextData( array $keys )
 	{
-		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$labels = [];
 		foreach( $keys as $dataset )
@@ -110,7 +110,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function getMediaData( array $keys )
 	{
-		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$urls = [];
 		foreach( $keys as $dataset )
@@ -142,7 +142,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function getProductData( array $keys )
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$codes = [];
 		foreach( $keys as $dataset )
@@ -175,7 +175,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addCatalogListData( array $testdata, array $refIds )
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->additional, 'Standard' );
 		$catalogListManager = $catalogManager->getSubManager( 'lists', 'Standard' );
 		$catalogListTypeManager = $catalogListManager->getSubManager( 'type', 'Standard' );
 

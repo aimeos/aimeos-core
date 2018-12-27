@@ -18,7 +18,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext( 'unitperf' );
 
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$search = $productManager->createSearch();
 		$search->setSlice( 0, 1 );
 		$result = $productManager->searchItems( $search, array( 'text', 'media', 'price', 'product', 'attribute' ) );
@@ -33,7 +33,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 	{
 		$start = microtime( true );
 
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$product = $productManager->getItem( $this->item->getId(), array( 'text', 'media', 'price', 'product', 'attribute' ) );
 
 		$ids = [];

@@ -25,7 +25,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 		{
 			$context->getConfig()->set( 'mshop/index/manager/text/name', 'PgSQL' );
 			$manager = new \Aimeos\MShop\Index\Manager\MySQL( $context );
-			$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
+			$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
 
 			$search = $productManager->createSearch();
 			$conditions = array(

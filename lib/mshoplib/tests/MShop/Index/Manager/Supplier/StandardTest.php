@@ -65,10 +65,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$product = $productManager->findItem( 'CNC' );
 
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$listManager = $supplierManager->getSubManager( 'lists' );
 
 		$search = $listManager->createSearch( true );
@@ -122,7 +122,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsId()
 	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$supItem = $supplierManager->findItem( 'unitCode001' );
 
 		$search = $this->object->createSearch();
@@ -135,7 +135,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsIdNull()
 	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( \TestHelperMShop::getContext() );
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '!=', 'index.supplier.id', null ) ); // supplier ID
@@ -147,7 +147,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsPosition()
 	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$supItem = $supplierManager->findItem( 'unitCode001' );
 
 		$search = $this->object->createSearch();

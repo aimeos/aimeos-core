@@ -221,7 +221,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCopyFrom()
 	{
-		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::create( \TestHelperMShop::getContext() );
 
 		$items = $attrManager->searchItems( $attrManager->createSearch() );
 		if( ( $item = reset( $items ) ) === false ) {

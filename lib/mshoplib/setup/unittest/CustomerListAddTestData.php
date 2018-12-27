@@ -77,7 +77,7 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getCustomerGroupData( array $keys )
 	{
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Standard' );
 		$groupManager = $manager->getSubManager( 'group' );
 
 		$codes = [];
@@ -110,7 +110,7 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getProductData( array $keys )
 	{
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$codes = [];
 		foreach( $keys as $dataset )
@@ -142,7 +142,7 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getTextData( array $keys )
 	{
-		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$labels = [];
 		foreach( $keys as $dataset )
@@ -176,7 +176,7 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addCustomerListData( array $testdata, array $refIds, $type = 'Standard' )
 	{
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, $type );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, $type );
 		$customerListManager = $customerManager->getSubManager( 'lists', $type );
 		$customerListTypeManager = $customerListManager->getSubmanager( 'type', $type );
 

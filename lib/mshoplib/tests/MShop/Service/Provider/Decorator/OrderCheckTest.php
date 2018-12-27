@@ -27,13 +27,13 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 		$this->context->setUserId( null );
 
-		$servManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
+		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
 		$this->servItem = $servManager->createItem();
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\OrderCheck::class )
 			->disableOriginalConstructor()->getMock();
 
-		$this->basket = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )
+		$this->basket = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
 			->getSubManager( 'base' )->createItem();
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\OrderCheck( $this->mockProvider, $this->context, $this->servItem );

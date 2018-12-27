@@ -23,7 +23,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 
 		$manager = new \Aimeos\MShop\Index\Manager\Standard( $context );
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
 
 		$search = $productManager->createSearch();
 		$conditions = array(
@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$product = $productManager->findItem( 'CNE' );
 
 		$item = $this->object->getItem( $product->getId() );
@@ -222,7 +222,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsAttributeId()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
 		$attrWidthItem = $attributeManager->findItem( '29', [], 'product', 'width' );
 
 		$total = 0;
@@ -263,7 +263,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsCatalog()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 		$catItem = $catalogManager->findItem( 'cafe' );
 
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
@@ -278,7 +278,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsCatalogId()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 		$catItem = $catalogManager->findItem( 'cafe' );
 
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
@@ -315,7 +315,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsCatalogPosition()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 		$catItem = $catalogManager->findItem( 'cafe' );
 
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
@@ -399,7 +399,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$config = $this->context->getConfig();
 
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$search = $manager->createSearch( true );
 		$search->setSlice( 0, 0x7fffffff );
 
@@ -424,7 +424,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testRebuildIndexWithList()
 	{
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$search = $manager->createSearch();
 		$search->setSlice( 0, 0x7fffffff );
 
@@ -467,7 +467,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = $this->context;
 		$config = $context->getConfig();
 
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
 
 		//delete whole catalog
 		$search = $manager->createSearch();

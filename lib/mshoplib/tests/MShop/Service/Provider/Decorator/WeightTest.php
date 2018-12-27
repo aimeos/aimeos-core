@@ -21,7 +21,7 @@ class WeightTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 
-		$servManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
+		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
 		$this->servItem = $servManager->createItem();
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Example::class )

@@ -19,7 +19,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
 		$serviceItem = $serviceManager->createItem();
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Delivery\Standard( $this->context, $serviceItem );
@@ -40,7 +40,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigFE()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$this->assertEquals( [], $this->object->getConfigFE( $basket ) );
@@ -49,7 +49,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testProcess()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
 		$order = $manager->createItem();
 
 		$this->object->process( $order );
@@ -60,7 +60,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testProcessBatch()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
 		$order = $manager->createItem();
 
 		$this->object->processBatch( [$order] );

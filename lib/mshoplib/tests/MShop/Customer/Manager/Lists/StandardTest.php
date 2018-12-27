@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->editor = $this->context->getEditor();
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context, 'Standard' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context, 'Standard' );
 		$this->object = $manager->getSubManager( 'lists', 'Standard' );
 	}
 
@@ -306,7 +306,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function getListItems()
 	{
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context, 'Standard' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context, 'Standard' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC003' ) );

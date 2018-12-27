@@ -60,7 +60,7 @@ class CacheAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addCacheTestData()
 	{
-		$manager = \Aimeos\MAdmin\Cache\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$manager = \Aimeos\MAdmin\Cache\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'cache.php';
