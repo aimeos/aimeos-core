@@ -14,16 +14,16 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 {
 	public function testFactory()
 	{
-		$dbm = \Aimeos\MW\DB\Factory::createManager( \TestHelperMw::getConfig() );
+		$dbm = \Aimeos\MW\DB\Factory::create( \TestHelperMw::getConfig() );
 
 		$this->setExpectedException( \Aimeos\MW\Tree\Exception::class );
-		\Aimeos\MW\Tree\Factory::createManager( 'DBNestedSet', [], $dbm );
+		\Aimeos\MW\Tree\Factory::create( 'DBNestedSet', [], $dbm );
 	}
 
 
 	public function testFactoryFail()
 	{
 		$this->setExpectedException( \Aimeos\MW\Tree\Exception::class );
-		\Aimeos\MW\Tree\Factory::createManager( 'invalid', [], null );
+		\Aimeos\MW\Tree\Factory::create( 'invalid', [], null );
 	}
 }

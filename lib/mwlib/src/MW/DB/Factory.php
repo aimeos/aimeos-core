@@ -28,7 +28,7 @@ class Factory
 	 * @return \Aimeos\MW\DB\Manager\Iface Instance of a database manager
 	 * @throws \Aimeos\MW\DB\Exception if database manager class isn't found
 	 */
-	static public function createManager( \Aimeos\MW\Config\Iface $config, $type = 'PDO' )
+	static public function create( \Aimeos\MW\Config\Iface $config, $type = 'PDO' )
 	{
 		$classname = '\Aimeos\MW\DB\Manager\\' . $type;
 		$filename = 'MW/DB/Manager/' . $type . '.php';

@@ -29,7 +29,7 @@ class Factory
 	 * @return \Aimeos\MW\Cache\Iface Cache object of the requested type
 	 * @throws \Aimeos\MW\Cache\Exception if class isn't found
 	 */
-	static public function createManager( $name, array $config, $resource )
+	static public function create( $name, array $config = [], $resource = null )
 	{
 		if( ctype_alnum( $name ) === false )
 		{
@@ -44,12 +44,12 @@ class Factory
 			throw new \Aimeos\MW\Cache\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$manager =  new $classname( $config, $resource );
+		$object =  new $classname( $config, $resource );
 
-		if( !( $manager instanceof $iface ) ) {
+		if( !( $object instanceof $iface ) ) {
 			throw new \Aimeos\MW\Cache\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 		}
 
-		return $manager;
+		return $object;
 	}
 }

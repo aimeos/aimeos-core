@@ -62,7 +62,7 @@ class TestHelperMw
 	 */
 	public static function getDBManager()
 	{
-		return \Aimeos\MW\DB\Factory::createManager( self::getConfig(), 'DBAL' );
+		return \Aimeos\MW\DB\Factory::create( self::getConfig(), 'DBAL' );
 	}
 
 
