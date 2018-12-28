@@ -911,18 +911,18 @@ return array(
 		),
 		'attribute' => array(
 			array(
-				'attribute.code' => 'custom', 'attribute.label' => 'Demo: Custom price',
+				'attribute.code' => 'custom', 'attribute.label' => 'Custom price',
 				'attribute.type' => 'price', 'attribute.position' => 0, 'attribute.status' => 1,
 				'product.lists.type' => 'custom', 'product.lists.position' => 1,
 				'text' => array(
 					array(
-						'text.label' => 'Demo name/de: Gutscheinwert',
+						'text.label' => 'name/de: Gutscheinwert',
 						'text.content' => 'Gutscheinwert',
 						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'text.label' => 'Demo name/en: Voucher value',
+						'text.label' => 'name/en: Voucher value',
 						'text.content' => 'Voucher value',
 						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
