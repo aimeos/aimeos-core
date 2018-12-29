@@ -79,7 +79,7 @@ class Factory
 		$iface = \Aimeos\MShop\Text\Manager\Iface::class;
 		$classname = '\Aimeos\MShop\Text\Manager\\' . $name;
 
-		$manager = self::createManagerBase( $context, $classname, $iface );
+		$manager = self::createManager( $context, $classname, $iface );
 
 		/** mshop/text/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the text manager

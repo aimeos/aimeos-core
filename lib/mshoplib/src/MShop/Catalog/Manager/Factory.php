@@ -78,7 +78,7 @@ class Factory
 		$iface = \Aimeos\MShop\Catalog\Manager\Iface::class;
 		$classname = '\Aimeos\MShop\Catalog\Manager\\' . $name;
 
-		$manager = self::createManagerBase( $context, $classname, $iface );
+		$manager = self::createManager( $context, $classname, $iface );
 
 		/** mshop/catalog/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the catalog manager

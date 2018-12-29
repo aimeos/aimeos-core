@@ -78,7 +78,7 @@ class Factory
 		$iface = \Aimeos\MShop\Subscription\Manager\Iface::class;
 		$classname = '\Aimeos\MShop\Subscription\Manager\\' . $name;
 
-		$manager = self::createManagerBase( $context, $classname, $iface );
+		$manager = self::createManager( $context, $classname, $iface );
 
 		/** mshop/subscription/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the subscription manager

@@ -77,7 +77,7 @@ class Factory
 		$iface = \Aimeos\MAdmin\Log\Manager\Iface::class;
 		$classname = '\Aimeos\MAdmin\Log\Manager\\' . $name;
 
-		$manager = self::createManagerBase( $context, $classname, $iface );
+		$manager = self::createManager( $context, $classname, $iface );
 
 		/** madmin/log/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the log manager

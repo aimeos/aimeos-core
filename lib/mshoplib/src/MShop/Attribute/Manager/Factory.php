@@ -79,7 +79,7 @@ class Factory
 		$iface = \Aimeos\MShop\Attribute\Manager\Iface::class;
 		$classname = '\Aimeos\MShop\Attribute\Manager\\' . $name;
 
-		$manager = self::createManagerBase( $context, $classname, $iface );
+		$manager = self::createManager( $context, $classname, $iface );
 
 		/** mshop/attribute/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the attribute manager

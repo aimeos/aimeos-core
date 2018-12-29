@@ -138,7 +138,7 @@ abstract class Base
 	 * @param string $interface Name of the manager interface
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected static function createManagerBase( \Aimeos\MShop\Context\Item\Iface $context, $classname, $interface )
+	protected static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $classname, $interface )
 	{
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];

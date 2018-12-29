@@ -79,7 +79,7 @@ class Factory
 		$iface = \Aimeos\MShop\Media\Manager\Iface::class;
 		$classname = '\Aimeos\MShop\Media\Manager\\' . $name;
 
-		$manager = self::createManagerBase( $context, $classname, $iface );
+		$manager = self::createManager( $context, $classname, $iface );
 
 		/** mshop/media/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the media manager
