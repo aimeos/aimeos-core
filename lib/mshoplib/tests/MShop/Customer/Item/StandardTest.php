@@ -62,7 +62,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			-2 => new \Aimeos\MShop\Customer\Item\Address\Standard( 'customer.address.', ['customer.address.position' => 0] ),
 		);
 
-		$this->object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, $this->values, [], [], 'mshop', null, $addresses );
+		$this->object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, $this->values, [], [], $addresses, [], null, 'mshop' );
 	}
 
 

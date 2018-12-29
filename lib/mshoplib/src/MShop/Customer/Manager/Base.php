@@ -160,19 +160,18 @@ abstract class Base
 	 * @param array $values List of attributes for customer item
 	 * @param array $listItems List items associated to the customer item
 	 * @param array $refItems Items referenced by the customer item via the list items
-	 * @param array $addresses List of address items of the customer item
+	 * @param array $addrItems List of address items of the customer item
 	 * @param array $propItems List of property items of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [],
-		array $addresses = [], array $propItems = [] )
+		array $addrItems = [], array $propItems = [] )
 	{
 		$helper = $this->getPasswordHelper();
 		$address = new \Aimeos\MShop\Common\Item\Address\Simple( 'customer.', $values );
 
 		return new \Aimeos\MShop\Customer\Item\Standard(
-			$address, $values, $listItems, $refItems,
-			$this->salt, $helper, $addresses, $propItems
+			$address, $values, $listItems, $refItems, $addrItems, $propItems, $helper, $this->salt
 		);
 	}
 
