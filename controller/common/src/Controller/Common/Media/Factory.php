@@ -45,7 +45,7 @@ class Factory
 	 * @return \Aimeos\Controller\Common\Media\Iface New media controller object
 	 * @throws \Aimeos\Controller\Common\Exception
 	 */
-	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** controller/common/media/name
 		 * Class name of the used media common controller implementation

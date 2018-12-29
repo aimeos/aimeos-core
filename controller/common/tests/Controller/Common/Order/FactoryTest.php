@@ -14,10 +14,10 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$target = \Aimeos\Controller\Common\Order\Iface::class;
 
-		$controller = \Aimeos\Controller\Common\Order\Factory::createController( \TestHelperCntl::getContext() );
+		$controller = \Aimeos\Controller\Common\Order\Factory::create( \TestHelperCntl::getContext() );
 		$this->assertInstanceOf( $target, $controller );
 
-		$controller = \Aimeos\Controller\Common\Order\Factory::createController( \TestHelperCntl::getContext(), 'Standard' );
+		$controller = \Aimeos\Controller\Common\Order\Factory::create( \TestHelperCntl::getContext(), 'Standard' );
 		$this->assertInstanceOf( $target, $controller );
 	}
 
@@ -25,20 +25,20 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 	public function testCreateControllerInvalidImplementation()
 	{
 		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
-		\Aimeos\Controller\Common\Order\Factory::createController( \TestHelperCntl::getContext(), 'Invalid' );
+		\Aimeos\Controller\Common\Order\Factory::create( \TestHelperCntl::getContext(), 'Invalid' );
 	}
 
 
 	public function testCreateControllerInvalidName()
 	{
 		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
-		\Aimeos\Controller\Common\Order\Factory::createController( \TestHelperCntl::getContext(), '%^' );
+		\Aimeos\Controller\Common\Order\Factory::create( \TestHelperCntl::getContext(), '%^' );
 	}
 
 
 	public function testCreateControllerNotExisting()
 	{
 		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
-		\Aimeos\Controller\Common\Order\Factory::createController( \TestHelperCntl::getContext(), 'notexist' );
+		\Aimeos\Controller\Common\Order\Factory::create( \TestHelperCntl::getContext(), 'notexist' );
 	}
 }

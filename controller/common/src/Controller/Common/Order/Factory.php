@@ -46,7 +46,7 @@ class Factory
 	 * @return \Aimeos\Controller\Common\Order\Iface New order controller object
 	 * @throws \Aimeos\Controller\Common\Exception
 	 */
-	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** controller/common/order/name
 		 * Class name of the used order common controller implementation
