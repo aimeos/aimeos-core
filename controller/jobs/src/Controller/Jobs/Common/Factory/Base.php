@@ -150,7 +150,7 @@ abstract class Base
 	 * @param string $interface Name of the controller interface
 	 * @return \Aimeos\Controller\Jobs\Iface Controller object
 	 */
-	protected static function createControllerBase( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
+	protected static function createController( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
 		$classname, $interface )
 	{
 		if( isset( self::$objects[$classname] ) ) {
