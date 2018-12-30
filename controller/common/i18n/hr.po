@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-27 08:30+0200\n"
-"PO-Revision-Date: 2018-06-09 18:27+0000\n"
+"PO-Revision-Date: 2018-12-19 12:06+0000\n"
 "Last-Translator: Miro Sertić <miro.sertic0606@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/aimeos/aimeos-core/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr "Klasa \"%1$s\" nije pronađjena"
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "Preuzimanje datoteke \"%1$s\" nije uspjelo"
 
 #, php-format
 msgid "File \"%1$s\" not found"
@@ -44,11 +44,11 @@ msgstr "Nedozvoljen simbol u imenu klase \"%1$s\""
 
 #, php-format
 msgid "No allowed image types configured for \"%1$s\""
-msgstr ""
+msgstr "Dopuštene vrste slika nisu konfigurirane \"%1$s\""
 
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr ""
+msgstr "Nijedna stavka vrste \"%1$s/%2$s\" nije pronađena u \"%3$s\""
 
 #, php-format
 msgid "Unable to create directory \"%1$s\""
@@ -56,4 +56,4 @@ msgstr "Nemože se stvoriti slijedeći direktorij \"%1$s\""
 
 #, php-format
 msgid "Unable to create file in \"%1$s\""
-msgstr ""
+msgstr "Nije moguće stvoriti datoteku \"%1$s\""
