@@ -56,7 +56,7 @@ class Jobs
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Class "%1$s" not found', $factory ) );
 		}
 
-		$controller = call_user_func_array( array( $factory, 'createController' ), array( $context, $aimeos ) );
+		$controller = call_user_func_array( array( $factory, 'create' ), array( $context, $aimeos ) );
 
 		if( $controller === false ) {
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
