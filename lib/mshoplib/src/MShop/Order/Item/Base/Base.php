@@ -540,20 +540,15 @@ abstract class Base
 	 *
 	 * @param string $code Coupon code
 	 * @param boolean $removecode If the coupon code should also be removed
-	 * @return array List of affected product items implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
-	 *  or an empty list if no products are affected by a coupon
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function deleteCoupon( $code, $removecode = false )
 	{
-		$products = [];
-
 		if( isset( $this->coupons[$code] ) )
 		{
 			$this->notifyListeners( 'deleteCoupon.before', $code );
 
-			$products = $this->coupons[$code];
-
-			foreach( $products as $product )
+			foreach( $this->coupons[$code] as $product )
 			{
 				if( ( $key = array_search( $product, $this->products, true ) ) !== false ) {
 					unset( $this->products[$key] );
@@ -571,7 +566,7 @@ abstract class Base
 			$this->notifyListeners( 'deleteCoupon.after', $code );
 		}
 
-		return $products;
+		return $this;
 	}
 
 
