@@ -78,7 +78,7 @@ class Coupon
 
 			if( ( $couponItem = reset( $results ) ) !== false )
 			{
-				$couponProvider = $couponManager->getProvider( $couponItem, strtolower( $code ) );
+				$couponProvider = $couponManager->getProvider( $couponItem, $code );
 				$couponProvider->updateCoupon( $order );
 			}
 			else
