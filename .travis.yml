@@ -21,10 +21,8 @@ env:
 matrix:
   fast_finish: true
   include:
-    - php: 7.2
-      env: DB=pgsql
-  allow_failures:
     - php: 7.3
+      env: DB=pgsql
 
 before_script:
   - composer self-update
