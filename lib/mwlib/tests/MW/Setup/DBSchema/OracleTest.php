@@ -143,6 +143,8 @@ class OracleTest extends \PHPUnit\Framework\TestCase
 			'CHAR_COL_DECL_LENGTH' => 16,
 			'DATA_DEFAULT' => 'default',
 			'NULLABLE' => 'N',
+			'CHARACTER_SET_NAME' => null,
+			'COLLATION_NAME' => null,
 		);
 
 		$stmt = $this->getMockBuilder( \Aimeos\MW\DB\Statement\PDO\Simple::class )

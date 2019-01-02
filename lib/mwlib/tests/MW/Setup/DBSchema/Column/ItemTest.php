@@ -52,7 +52,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetCharset()
 	{
-		$this->assertEquals( 'utf8_bin', $this->object->getCharset() );
+		$this->assertEquals( 'utf8', $this->object->getCharset() );
 	}
 
 	public function testGetCollationType()
@@ -68,6 +68,6 @@ class ItemTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( $item->isNullable() );
 
 		$this->setExpectedException( \Aimeos\MW\Setup\Exception::class );
-		new \Aimeos\MW\Setup\DBSchema\Column\Item( '', '', '', 0, '', '', '' );
+		new \Aimeos\MW\Setup\DBSchema\Column\Item( '', '', '', 0, '', '', '', '' );
 	}
 }

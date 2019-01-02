@@ -139,6 +139,8 @@ class SqlservTest extends \PHPUnit\Framework\TestCase
 			'CHARACTER_MAXIMUM_LENGTH' => 16,
 			'COLUMN_DEFAULT' => 'default',
 			'IS_NULLABLE' => 'NO',
+			'CHARACTER_SET_NAME' => null,
+			'COLLATION_NAME' => null,
 		);
 
 		$stmt = $this->getMockBuilder( \Aimeos\MW\DB\Statement\PDO\Simple::class )
