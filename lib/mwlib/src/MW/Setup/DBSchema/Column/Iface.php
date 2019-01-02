@@ -29,15 +29,22 @@ interface Iface
 	 * @param integer $length Length of the column if the column type is of variable length
 	 * @param string $default Default value if not specified
 	 * @param string $nullable "YES" if null values are allowed, "NO" if not
-	 * @param string $collation collation type of the column
-	 * @return null
+	 * @param string|null $charset Charset of the column
+	 * @param string|null $collation Collation type of the column
 	 */
-	public function __construct( $tablename, $name, $type, $length, $default, $nullable, $collation );
+	public function __construct( $tablename, $name, $type, $length, $default, $nullable, $charset, $collation );
+
+	/**
+	 * Returns the charset of the column.
+	 *
+	 * @return string|null Charset of the column
+	 */
+	public function getCharset();
 
 	/**
 	 * Returns the collation type of the column.
 	 *
-	 * @return string collation type of the column
+	 * @return string|null Collation type of the column
 	 */
 	public function getCollationType();
 

@@ -26,7 +26,8 @@ class Item implements \Aimeos\MW\Setup\DBSchema\Column\Iface
 	private $length = 0;
 	private $default;
 	private $nullable = false;
-	private $collation = '';
+	private $charset;
+	private $collation;
 
 
 	/**
@@ -38,16 +39,18 @@ class Item implements \Aimeos\MW\Setup\DBSchema\Column\Iface
 	 * @param integer $length Length of the column if the column type is of variable length
 	 * @param string $default Default value if not specified
 	 * @param string $nullable "YES" if null values are allowed, "NO" if not
-	 * @param string $collation Used collation for text type columns
+	 * @param string|null $charset Charset of the column
+	 * @param string|null $collation Collation type of the column
 	 */
-	public function __construct( $tablename, $name, $type, $length, $default, $nullable, $collation )
+	public function __construct( $tablename, $name, $type, $length, $default, $nullable, $charset, $collation )
 	{
 		$this->tablename = (string) $tablename;
 		$this->name = (string) $name;
 		$this->type = (string) $type;
 		$this->length = (int) $length;
 		$this->default = $default;
-		$this->collation = (string) $collation;
+		$this->charset = $charset;
+		$this->collation = $collation;
 
 		switch( strtoupper( $nullable ) )
 		{
@@ -66,11 +69,21 @@ class Item implements \Aimeos\MW\Setup\DBSchema\Column\Iface
 		}
 	}
 
+	/**
+	 * Returns the charset of the column.
+	 *
+	 * @return string|null Charset of the column
+	 */
+	public function getCharset()
+	{
+		return $this->charset;
+	}
+
 
 	/**
 	 * Returns the collation type of the column.
 	 *
-	 * @return string collation type of the column
+	 * @return string|null Collation type of the column
 	 */
 	public function getCollationType()
 	{

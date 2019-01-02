@@ -84,7 +84,6 @@ interface Iface
 	 */
 	public function getColumnDetails( $tablename, $columnname );
 
-
 	/**
 	 * Returns the name of the database adapter
 	 *

@@ -232,6 +232,6 @@ class Pgsql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 		$default = ( preg_match( '/^\'(.*)\'::.+$/', $record['column_default'], $match ) === 1 ? $match[1] : $record['column_default'] );
 
 		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['table_name'], $record['column_name'],
-			$type, $length, $default, $record['is_nullable'], $record['collation_name'] );
+			$type, $length, $default, $record['is_nullable'], $record['character_set_name'], $record['collation_name'] );
 	}
 }

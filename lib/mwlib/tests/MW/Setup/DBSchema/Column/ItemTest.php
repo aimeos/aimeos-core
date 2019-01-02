@@ -1,37 +1,25 @@
 <?php
 
-namespace Aimeos\MW\Setup\DBSchema\Column;
-
-
 /**
- * Test class for \Aimeos\MW\Tree\Node\Standard.
- *
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
+
+
+namespace Aimeos\MW\Setup\DBSchema\Column;
+
+
 class ItemTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\MW\Setup\DBSchema\Column\Item( 'testtable', 'testcol', 'varchar', '255', 'default', 'YES', 'utf8_bin' );
+		$this->object = new \Aimeos\MW\Setup\DBSchema\Column\Item( 'testtable', 'testcol', 'varchar', '255', 'default', 'YES', 'utf8', 'utf8_general_ci' );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -62,9 +50,14 @@ class ItemTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'testtable', $this->object->getTableName() );
 	}
 
+	public function testGetCharset()
+	{
+		$this->assertEquals( 'utf8_bin', $this->object->getCharset() );
+	}
+
 	public function testGetCollationType()
 	{
-		$this->assertEquals( 'utf8_bin', $this->object->getCollationType() );
+		$this->assertEquals( 'utf8_general_ci', $this->object->getCollationType() );
 	}
 
 	public function testIsNullable()

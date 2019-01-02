@@ -201,7 +201,7 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	{
 		$length = ( isset( $record['CHAR_COL_DECL_LENGTH'] ) ? $record['CHAR_COL_DECL_LENGTH'] : $record['DATA_PRECISION'] );
 
-		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['TABLE_NAME'], $record['COLUMN_NAME'],
-			$record['DATA_TYPE'], $length, $record['DATA_DEFAULT'], $record['NULLABLE'], null );
+		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['TABLE_NAME'], $record['COLUMN_NAME'], $record['DATA_TYPE'],
+			$length, $record['DATA_DEFAULT'], $record['NULLABLE'], $record['CHARACTER_SET_NAME'], $record['COLLATION_NAME'] );
 	}
 }
