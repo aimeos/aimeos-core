@@ -825,7 +825,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 0, count( $basket->getCoupons() ) );
 
 		$basket->addCoupon( 'CDEF' );
-		$basket->addCoupon( '5678', $basket->getProducts() );
+		$basket->addCoupon( '90AB', $basket->getProducts() );
 		$this->assertEquals( 2, count( $basket->getCoupons() ) );
 
 		$this->object->store( $basket );

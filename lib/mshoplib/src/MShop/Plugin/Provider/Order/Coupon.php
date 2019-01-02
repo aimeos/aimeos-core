@@ -62,13 +62,17 @@ class Coupon
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
 		$notAvailable = [];
-		$couponManager = \Aimeos\MShop::create( $this->getContext(), 'coupon' );
+		$context = $this->getContext();
+
+		$couponManager = \Aimeos\MShop::create( $context, 'coupon' );
+		$codeManager = \Aimeos\MShop::create( $context, 'coupon/code' );
 
 		foreach( $order->getCoupons() as $code => $products )
 		{
 			$search = $couponManager->createSearch( true );
 			$expr = array(
 				$search->compare( '==', 'coupon.code.code', $code ),
+				$codeManager->createSearch( true )->getConditions(),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
