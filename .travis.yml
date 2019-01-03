@@ -28,7 +28,7 @@ before_script:
   - composer self-update
   - composer install || sleep 60 && composer install
   - if [[ $DB = 'mysql' ]]; then mysql -e "CREATE DATABASE aimeos;"; fi
-  - if [[ $DB = 'mysql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
+  - if [[ $DB = 'mysql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ), 'defaultTableOptions' => ['charset' => 'utf8mb4', 'collate' => 'utf8mb4_bin'] ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
   - if [[ $DB = 'pgsql' ]]; then psql -c "CREATE DATABASE aimeos;" -U postgres; fi
   - if [[ $DB = 'pgsql' ]]; then psql -c "CREATE USER aimeos PASSWORD 'aimeos';" -U postgres; fi
   - if [[ $DB = 'pgsql' ]]; then psql -c "GRANT ALL PRIVILEGES ON DATABASE aimeos TO aimeos;" -U postgres; fi
