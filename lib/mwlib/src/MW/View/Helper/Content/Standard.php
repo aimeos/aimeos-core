@@ -37,7 +37,7 @@ class Standard
 		parent::__construct( $view );
 
 		if( $baseurl === null ) {
-			$baseurl = $view->config( 'client/html/common/content/baseurl' );
+			$baseurl = $view->config( 'resource/fs/baseurl' );
 		}
 
 		$this->baseurl = rtrim( $baseurl, '/' );
