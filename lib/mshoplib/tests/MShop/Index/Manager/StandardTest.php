@@ -99,6 +99,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testFindItem()
+	{
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
+		$product = $productManager->findItem( 'CNE' );
+
+		$this->assertEquals( $product, $this->object->findItem( 'CNE' ) );
+	}
+
+
 	public function testGetItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
