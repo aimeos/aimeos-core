@@ -52,14 +52,12 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 		$config = $this->additional->getConfig();
 		$name = $config->get( 'mshop/stock/manager/name' );
 
-		\Aimeos\MShop::clear();
 		$config->set( 'mshop/stock/manager/name', 'Standard' );
 
 		$this->addTypeItems( $testdata, ['stock/type'] );
 		$this->createData( $testdata );
 
 		$config->set( 'mshop/stock/manager/name', $name );
-		\Aimeos\MShop::clear();
 
 		$this->status( 'done' );
 	}

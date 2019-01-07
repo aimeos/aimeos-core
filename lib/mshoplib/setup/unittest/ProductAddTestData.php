@@ -50,13 +50,11 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$config = $this->additional->getConfig();
 		$name = $config->get( 'mshop/product/manager/name' );
 
-		\Aimeos\MShop::clear();
 		$config->set( 'mshop/product/manager/name', 'Standard' );
 
 		$this->createData( $this->getData() );
 
 		$config->set( 'mshop/product/manager/name', $name );
-		\Aimeos\MShop::clear();
 
 		$this->status( 'done' );
 	}

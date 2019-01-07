@@ -202,6 +202,9 @@ try
 	$ctx = getContext( $conf );
 	$dbm = $ctx->getDatabaseManager();
 
+	\Aimeos\MShop::cache( false );
+	\Aimeos\MAdmin::cache( false );
+
 	$manager = new \Aimeos\MW\Setup\Manager\Multiple( $dbm, $dbconfig, $taskPaths, $ctx );
 
 	$action = ( isset( $options['action'] ) ? $options['action'] : 'migrate' );

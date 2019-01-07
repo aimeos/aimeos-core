@@ -53,18 +53,16 @@ class MShopTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testClear()
+	public function testCache()
 	{
-		$cache = \Aimeos\MShop::cache( true );
+		\Aimeos\MShop::cache( true );
 
 		$context = \TestHelperMShop::getContext();
 
-		$manager1 = \Aimeos\MShop::create( $context, 'attribute' );
-		\Aimeos\MShop::clear();
-		$manager2 = \Aimeos\MShop::create( $context, 'attribute' );
+		$obj1 = \Aimeos\MShop::create( $context, 'attribute' );
+		$obj2 = \Aimeos\MShop::create( $context, 'attribute' );
 
-		\Aimeos\MShop::cache( $cache );
-
-		$this->assertNotSame( $manager1, $manager2 );
+		\Aimeos\MShop::cache( false );
+		$this->assertSame( $obj1, $obj2 );
 	}
 }

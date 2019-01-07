@@ -299,7 +299,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			->setMethods( ['saveItem'] )
 			->getMock();
 
-		\Aimeos\MShop::inject( $this->context, 'customer/lists', $stub );
+		\Aimeos\MShop::inject( 'customer/lists', $stub );
 
 		$stub->expects( $this->once() )->method( 'saveItem' );
 

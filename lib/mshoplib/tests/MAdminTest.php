@@ -41,16 +41,14 @@ class MAdminTest extends \PHPUnit\Framework\TestCase
 
 	public function testClear()
 	{
-		$cache = \Aimeos\MAdmin::cache( true );
+		\Aimeos\MAdmin::cache( true );
 
 		$context = \TestHelperMShop::getContext();
 
-		$controller1 = \Aimeos\MAdmin::create( $context, 'log' );
-		\Aimeos\MAdmin::clear();
-		$controller2 = \Aimeos\MAdmin::create( $context, 'log' );
+		$obj1 = \Aimeos\MAdmin::create( $context, 'log' );
+		$obj2 = \Aimeos\MAdmin::create( $context, 'log' );
 
-		\Aimeos\MAdmin::cache( $cache );
-
-		$this->assertNotSame( $controller1, $controller2 );
+		\Aimeos\MAdmin::cache( false );
+		$this->assertSame( $obj1, $obj2 );
 	}
 }

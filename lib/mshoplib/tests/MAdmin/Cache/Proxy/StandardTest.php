@@ -19,6 +19,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
+		\Aimeos\MAdmin::cache( true );
 		$this->context = \TestHelperMShop::getContext();
 
 		$this->mock = $this->getMockBuilder( \Aimeos\MW\Cache\DB::class )
@@ -30,10 +31,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$manager->expects( $this->once() )->method( 'getCache' )
 			->will( $this->returnValue( $this->mock ) );
 
-		$name = 'MAdminCacheProxyDefaultTest';
-		$this->context->getConfig()->set( 'madmin/cache/manager/name', $name );
-
-		\Aimeos\MAdmin\Cache\Manager\Factory::injectManager( '\Aimeos\MAdmin\Cache\Manager\\' . $name, $manager );
+		\Aimeos\MAdmin::inject( 'cache', $manager );
 
 		$this->object = new \Aimeos\MAdmin\Cache\Proxy\Standard( $this->context );
 	}
@@ -41,6 +39,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
+		\Aimeos\MAdmin::cache( false );
 		unset( $this->object, $this->mock, $this->context );
 	}
 
