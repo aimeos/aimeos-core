@@ -260,90 +260,6 @@ class Standard
 	}
 
 
-	/*
-	 * Sets the item values from the given array and removes that entries from the list
-	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
-	 */
-	public function fromArray( array &$list )
-	{
-		$item = parent::fromArray( $list );
-
-		foreach( $list as $key => $value )
-		{
-			switch( $key )
-			{
-				case 'catalog.id': $item = $item->setId( $value ); break;
-				case 'catalog.code': $item = $item->setCode( $value ); break;
-				case 'catalog.label': $item = $item->setLabel( $value ); break;
-				case 'catalog.status': $item = $item->setStatus( $value ); break;
-				case 'catalog.config': $item = $item->setConfig( $value ); break;
-				case 'catalog.target': $item = $item->setTarget( $value ); break;
-				default: continue 2;
-			}
-
-			unset( $list[$key] );
-		}
-
-		return $item;
-	}
-
-
-	/**
-	 * Returns the public values of the node as array.
-	 *
-	 * @param boolean True to return private properties, false for public only
-	 * @return array Assciative list of key/value pairs
-	 */
-	public function toArray( $private = false )
-	{
-		$list = [
-			'catalog.code' => $this->getCode(),
-			'catalog.label' => $this->getLabel(),
-			'catalog.config' => $this->getConfig(),
-			'catalog.status' => $this->getStatus(),
-			'catalog.hasChildren' => $this->hasChildren(),
-		];
-
-		if( $private === true )
-		{
-			$list['catalog.id'] = $this->getId();
-			$list['catalog.siteid'] = $this->getSiteId();
-			$list['catalog.target'] = $this->getTarget();
-			$list['catalog.level'] = $this->getLevel();
-			$list['catalog.parentid'] = $this->getParentId();
-			$list['catalog.ctime'] = $this->getTimeCreated();
-			$list['catalog.mtime'] = $this->getTimeModified();
-			$list['catalog.editor'] = $this->getEditor();
-		}
-
-		return $list;
-	}
-
-
-	/**
-	 * Tests if the item is available based on status, time, language and currency
-	 *
-	 * @return boolean True if available, false if not
-	 */
-	public function isAvailable()
-	{
-		return (bool) $this->getStatus();
-	}
-
-
-	/**
-	 * Checks, whether this node was modified.
-	 *
-	 * @return boolean True if the content of the node is modified, false if not
-	 */
-	public function isModified()
-	{
-		return $this->node->isModified();
-	}
-
-
 	/**
 	 * Adds a child node to this node.
 	 *
@@ -469,5 +385,106 @@ class Standard
 	public function getParentId()
 	{
 		return ( $this->node->__isset( 'parentid' ) ? $this->node->__get( 'parentid' ) : null );
+	}
+
+
+	/**
+	 * Tests if the item is available based on status, time, language and currency
+	 *
+	 * @return boolean True if available, false if not
+	 */
+	public function isAvailable()
+	{
+		return (bool) $this->getStatus();
+	}
+
+
+	/**
+	 * Checks, whether this node was modified.
+	 *
+	 * @return boolean True if the content of the node is modified, false if not
+	 */
+	public function isModified()
+	{
+		return $this->node->isModified();
+	}
+
+
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
+	 *
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 */
+	public function fromArray( array &$list )
+	{
+		$item = parent::fromArray( $list );
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'catalog.id': $item = $item->setId( $value ); break;
+				case 'catalog.code': $item = $item->setCode( $value ); break;
+				case 'catalog.label': $item = $item->setLabel( $value ); break;
+				case 'catalog.status': $item = $item->setStatus( $value ); break;
+				case 'catalog.config': $item = $item->setConfig( $value ); break;
+				case 'catalog.target': $item = $item->setTarget( $value ); break;
+				default: continue 2;
+			}
+
+			unset( $list[$key] );
+		}
+
+		return $item;
+	}
+
+
+	/**
+	 * Returns the public values of the node as array.
+	 *
+	 * @param boolean True to return private properties, false for public only
+	 * @return array Assciative list of key/value pairs
+	 */
+	public function toArray( $private = false )
+	{
+		$list = [
+			'catalog.code' => $this->getCode(),
+			'catalog.label' => $this->getLabel(),
+			'catalog.config' => $this->getConfig(),
+			'catalog.status' => $this->getStatus(),
+			'catalog.hasChildren' => $this->hasChildren(),
+		];
+
+		if( $private === true )
+		{
+			$list['catalog.id'] = $this->getId();
+			$list['catalog.siteid'] = $this->getSiteId();
+			$list['catalog.target'] = $this->getTarget();
+			$list['catalog.level'] = $this->getLevel();
+			$list['catalog.parentid'] = $this->getParentId();
+			$list['catalog.ctime'] = $this->getTimeCreated();
+			$list['catalog.mtime'] = $this->getTimeModified();
+			$list['catalog.editor'] = $this->getEditor();
+		}
+
+		return $list;
+	}
+
+
+	/**
+	 * Returns the node and its children as list
+	 *
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Associative list of IDs as keys and nodes as values
+	 */
+	public function toList()
+	{
+		$list = [$this->getId() => $this];
+
+		foreach( $this->getChildren() as $child ) {
+			$list = array_merge( $list, $child->toList() );
+		}
+
+		return $list;
 	}
 }

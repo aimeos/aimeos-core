@@ -80,4 +80,11 @@ interface Iface
 	 * @return boolean True if node has children, false if not
 	 */
 	public function hasChildren();
+
+	/**
+	 * Returns the node and its children as list
+	 *
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Associative list of IDs as keys and nodes as values
+	 */
+	public function toList();
 }

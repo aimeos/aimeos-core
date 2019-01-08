@@ -322,4 +322,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertInstanceOf( \Aimeos\MW\Tree\Node\Iface::class, $this->object->getNode() );
 	}
+
+
+	public function testToList()
+	{
+		$this->assertEquals( 2, count( $this->object->toList() ) );
+	}
 }
