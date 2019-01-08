@@ -123,11 +123,12 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 		}
 
 		$level = error_reporting(); // Workaround for PDO warnings
+		$conn = $this->getConnection();
 
 		try
 		{
 			error_reporting( $level & ~E_WARNING );
-			$result = $this->getConnection()->getRawObject()->query( $this->sql );
+			$result = $conn->getRawObject()->query( $this->sql );
 		}
 		catch( \PDOException $e )
 		{
