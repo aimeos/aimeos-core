@@ -49,9 +49,12 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msatt_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code', 'type' ), 'unq_msatt_sid_dom_cod_ty' );
-			$table->addIndex( array( 'siteid', 'domain', 'label' ), 'idx_msatt_sid_dom_label' );
-			$table->addIndex( array( 'siteid', 'domain', 'pos' ), 'idx_msatt_sid_dom_pos' );
+			$table->addUniqueIndex( array( 'siteid', 'domain', 'type', 'code' ), 'unq_msatt_sid_dom_type_code' );
+			$table->addIndex( array( 'siteid', 'domain', 'status', 'type', 'pos' ), 'idx_msatt_sid_dom_stat_typ_pos' );
+			$table->addIndex( array( 'siteid', 'status' ), 'idx_msatt_sid_status' );
+			$table->addIndex( array( 'siteid', 'label' ), 'idx_msatt_sid_label' );
+			$table->addIndex( array( 'siteid', 'code' ), 'idx_msatt_sid_code' );
+			$table->addIndex( array( 'siteid', 'type' ), 'idx_msatt_sid_type' );
 
 			return $schema;
 		},
