@@ -112,7 +112,7 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return ['TablesCreateMShop'];
+		return ['TablesCreateMShop', 'TablesCreateMAdmin'];
 	}
 
 
