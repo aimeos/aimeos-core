@@ -482,7 +482,7 @@ class Standard
 		$list = [$this->getId() => $this];
 
 		foreach( $this->getChildren() as $child ) {
-			$list = array_merge( $list, $child->toList() );
+			$list += $child->toList();
 		}
 
 		return $list;

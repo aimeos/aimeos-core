@@ -39,8 +39,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$this->node = new \Aimeos\MW\Tree\Node\Standard( $this->values );
-		$child = new \Aimeos\MShop\Catalog\Item\Standard( $this->node );
+		$childnode = new \Aimeos\MW\Tree\Node\Standard( array_merge( $this->values, ['id' => 3] ) );
 
+		$child = new \Aimeos\MShop\Catalog\Item\Standard( $childnode );
 		$this->object = new \Aimeos\MShop\Catalog\Item\Standard( $this->node, array( $child ), $this->listItems );
 	}
 
@@ -326,6 +327,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testToList()
 	{
-		$this->assertEquals( 2, count( $this->object->toList() ) );
+		$list = $this->object->toList();
+
+		$this->assertEquals( 2, count( $list ) );
+		$this->assertArrayHasKey( '2', $list );
+		$this->assertArrayHasKey( '3', $list );
 	}
 }
