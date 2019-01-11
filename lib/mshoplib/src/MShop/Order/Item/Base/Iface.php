@@ -74,21 +74,6 @@ interface Iface
 	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale );
 
 	/**
-	 * Returns the product items that are or should be part of an (future) order.
-	 *
-	 * @return array Array of order product items implementing \Aimeos\MShop\Order\Product\Iface
-	 */
-	public function getProducts();
-
-	/**
-	 * Returns the product item of an (future) order specified by its key.
-	 *
-	 * @param integer $key Key returned by getProducts() identifying the requested product
-	 * @return \Aimeos\MShop\Order\Product\Iface Product item of an order
-	 */
-	public function getProduct( $key );
-
-	/**
 	 * Adds an order product item to the (future) order.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
@@ -96,15 +81,6 @@ interface Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function addProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position = null );
-
-	/**
-	 * Sets a modified order product item to the (future) order.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
-	 * @param integer $position Position id of the order product item
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
-	 */
-	public function editProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position );
 
 	/**
 	 * Deletes an order product item from the (future) order.
@@ -115,11 +91,35 @@ interface Iface
 	public function deleteProduct( $position );
 
 	/**
-	 * Returns all set addresses of the (future) order.
+	 * Returns the product item of an (future) order specified by its key.
 	 *
-	 * @return array Array of \Aimeos\MShop\Order\Item\Base\Address\Iface order address items
+	 * @param integer $key Key returned by getProducts() identifying the requested product
+	 * @return \Aimeos\MShop\Order\Product\Iface Product item of an order
 	 */
-	public function getAddresses();
+	public function getProduct( $key );
+
+	/**
+	 * Returns the product items that are or should be part of an (future) order.
+	 *
+	 * @return array Array of order product items implementing \Aimeos\MShop\Order\Product\Iface
+	 */
+	public function getProducts();
+
+	/**
+	 * Replaces all products in the current basket with the new ones
+	 *
+	 * @param array $map Associative list of ordered products as returned by getProducts()
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 */
+	public function setProducts( array $map );
+
+	/**
+	 * Deleted a customer address for billing or delivery of an order.
+	 *
+	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 */
+	public function deleteAddress( $type );
 
 	/**
 	 * Returns the billing or delivery address depending on the given type.
@@ -128,6 +128,13 @@ interface Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order address item for the requested type
 	 */
 	public function getAddress( $type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+
+	/**
+	 * Returns all addresses of the (future) order.
+	 *
+	 * @return array Array of \Aimeos\MShop\Order\Item\Base\Address\Iface order address items
+	 */
+	public function getAddresses();
 
 	/**
 	 * Sets a customer address as billing or delivery address for an order.
@@ -139,29 +146,12 @@ interface Iface
 	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type );
 
 	/**
-	 * Deleted a customer address for billing or delivery of an order.
+	 * Replaces all addresses in the current basket with the new ones
 	 *
-	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
+	 * @param array $map Associative list of order addresses as returned by getAddresses()
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function deleteAddress( $type );
-
-	/**
-	 * Returns all services (delivery, payment, etc.) attached to the shopping basket.
-	 *
-	 * @return array Array of \Aimeos\MShop\Order\Item\Base\Service\Iface Order service items
-	 */
-	public function getServices();
-
-	/**
-	 * Returns the delivery or payment service depending on the given type.
-	 *
-	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @param string|null $code Code of the service item that should be returned
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface|\Aimeos\MShop\Order\Item\Base\Service\Iface[]
-	 * 	Order service item or list of items for the requested type
-	 */
-	public function getService( $type, $code = null );
+	public function setAddresses( array $map );
 
 	/**
 	 * Adds an order service item as delivery or payment service to the basket
@@ -181,11 +171,29 @@ interface Iface
 	public function deleteService( $type );
 
 	/**
-	 * Returns the available coupon codes and the lists of affected product items.
+	 * Returns the delivery or payment service depending on the given type.
 	 *
-	 * @return array Associative array of codes and lists of product items implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
+	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
+	 * @param string|null $code Code of the service item that should be returned
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface|\Aimeos\MShop\Order\Item\Base\Service\Iface[]
+	 * 	Order service item or list of items for the requested type
 	 */
-	public function getCoupons();
+	public function getService( $type, $code = null );
+
+	/**
+	 * Returns all services (delivery, payment, etc.) attached to the shopping basket.
+	 *
+	 * @return array Array of \Aimeos\MShop\Order\Item\Base\Service\Iface Order service items
+	 */
+	public function getServices();
+
+	/**
+	 * Replaces all services in the current basket with the new ones
+	 *
+	 * @param array $map Associative list of order services as returned by getServices()
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 */
+	public function setServices( array $map );
 
 	/**
 	 * Adds a coupon code entered by the customer and the given product item to the basket.
@@ -205,6 +213,21 @@ interface Iface
 	 *  or an empty list if no products are affected by a coupon
 	 */
 	public function deleteCoupon( $code, $removecode = false );
+
+	/**
+	 * Returns all coupon codes and the lists of affected product items.
+	 *
+	 * @return array Associative array of codes and lists of product items implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
+	 */
+	public function getCoupons();
+
+	/**
+	 * Replaces all coupons in the current basket with the new ones
+	 *
+	 * @param array $map Associative list of order coupons as returned by getCoupons()
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 */
+	public function setCoupons( array $map );
 
 	/**
 	 * Returns a price item with amounts calculated for the products, shipping costs and rebate.

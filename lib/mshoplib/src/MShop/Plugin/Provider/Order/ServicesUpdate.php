@@ -38,13 +38,15 @@ class ServicesUpdate
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
-		$p->addListener( $this->getObject(), 'setAddress.after' );
 		$p->addListener( $this->getObject(), 'deleteAddress.after' );
+		$p->addListener( $this->getObject(), 'setAddress.after' );
+		$p->addListener( $this->getObject(), 'setAddresses.after' );
 		$p->addListener( $this->getObject(), 'addProduct.after' );
-		$p->addListener( $this->getObject(), 'editProduct.after' );
 		$p->addListener( $this->getObject(), 'deleteProduct.after' );
+		$p->addListener( $this->getObject(), 'setProducts.after' );
 		$p->addListener( $this->getObject(), 'addCoupon.after' );
 		$p->addListener( $this->getObject(), 'deleteCoupon.after' );
+		$p->addListener( $this->getObject(), 'setCoupons.after' );
 	}
 
 

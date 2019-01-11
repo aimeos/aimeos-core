@@ -300,10 +300,8 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$priceItem->setTaxRate( $dataset['taxrate'] );
 			$ordProdItem->setPrice( $priceItem );
 
-			$orderBaseProductManager->saveItem( $ordProdItem );
-
 			$bases['items'][$dataset['baseid']]->addProduct( $ordProdItem, $dataset['pos'] ); //adds Products to orderbase
-			$ordProds[$key] = $ordProdItem->getId();
+			$ordProds[$key] = $orderBaseProductManager->saveItem( $ordProdItem )->getId();
 		}
 
 		$this->addOrderBaseProductAttributeData( $orderBaseProductAttrManager, $testdata, $ordProds, $products );

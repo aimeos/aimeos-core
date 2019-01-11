@@ -29,7 +29,7 @@ class ProductFreeOptions
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this->getObject(), 'addProduct.after' );
-		$p->addListener( $this->getObject(), 'editProduct.after' );
+		$p->addListener( $this->getObject(), 'setProducts.after' );
 	}
 
 
