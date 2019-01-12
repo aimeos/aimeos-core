@@ -72,14 +72,14 @@ class ProductPrice
 			foreach( $item->getAttributeItems() as $ordAttrItem )
 			{
 				if( ( $id = $ordAttrItem->getAttributeId() ) != '' ) {
-					$attrIds[$id] = null;
+					$attrIds[] = $id;
 				}
 			}
 		}
 
 
-		$attributes = $this->getAttributes( array_keys( $attrIds ) );
-		$prodMap = $this->getProducts( $prodCodes );
+		$attributes = $this->getAttributeItems( array_unique( $attrIds ) );
+		$prodMap = $this->getProductItems( $prodCodes );
 
 
 		foreach( $orderProducts as $pos => $orderProduct )
@@ -96,11 +96,7 @@ class ProductPrice
 
 			if( $orderPosPrice->getTaxFlag() === $price->getTaxFlag() && $orderPosPrice->compare( $price ) === false )
 			{
-				$orderProduct->setPrice( $price );
-
-				$order->deleteProduct( $pos );
-				$order->addProduct( $orderProduct, $pos );
-
+				$order->addProduct( $orderProduct->setPrice( $price ), $pos );
 				$changedProducts[$pos] = 'price.changed';
 			}
 		}
@@ -119,25 +115,23 @@ class ProductPrice
 	/**
 	 * Returns the attribute items for the given IDs.
 	 *
-	 * @param array $ids List of attribute IDs
+	 * @param array $list List of attribute IDs
 	 * @return \Aimeos\MShop\Attribute\Item\Iface[] List of attribute items
 	 */
-	protected function getAttributes( array $ids )
+	protected function getAttributeItems( array $list )
 	{
-		if( empty( $ids ) ) {
-			return [];
+		if( $list !== [] )
+		{
+			$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
+
+			$search = $attrManager->createSearch( true );
+			$expr = [$search->compare( '==', 'attribute.id', $list ), $search->getConditions()];
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$list = $attrManager->searchItems( $search, ['price'] );
 		}
 
-		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
-
-		$search = $attrManager->createSearch( true );
-		$expr = array(
-			$search->compare( '==', 'attribute.id', $ids ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		return $attrManager->searchItems( $search, array( 'price' ) );
+		return $list;
 	}
 
 
@@ -145,8 +139,9 @@ class ProductPrice
 	 * Returns the product items for the given product codes.
 	 *
 	 * @param string[] $prodCodes Product codes
+	 * @return \Aimeos\MShop\Product\Item\Iface[] Associative list of codes as keys and product items as values
 	 */
-	protected function getProducts( array $prodCodes )
+	protected function getProductItems( array $prodCodes )
 	{
 		if( empty( $prodCodes ) ) {
 			return [];
@@ -166,15 +161,13 @@ class ProductPrice
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$products = $productManager->searchItems( $search, array( 'price' ) );
+		$map = [];
 
-		$prodMap = [];
-
-		foreach( $products as $item ) {
-			$prodMap[$item->getCode()] = $item;
+		foreach( $productManager->searchItems( $search, ['price'] ) as $item ) {
+			$map[$item->getCode()] = $item;
 		}
 
-		return $prodMap;
+		return $map;
 	}
 
 

@@ -363,7 +363,9 @@ abstract class Base
 	 */
 	public function setAddresses( array $map )
 	{
-		$this->checkAddresses( $map );
+		foreach( $map as $type => $item ) {
+			$this->checkAddresses( [$item], $type );
+		}
 
 		$this->notifyListeners( 'setAddresses.before', $map );
 
@@ -476,8 +478,8 @@ abstract class Base
 	 */
 	public function setServices( array $map )
 	{
-		foreach( $map as $services ) {
-			$this->checkServices( $services );
+		foreach( $map as $type => $services ) {
+			$map[$type] = $this->checkServices( $services, $type );
 		}
 
 		$this->notifyListeners( 'setServices.before', $map );
@@ -579,8 +581,8 @@ abstract class Base
 	 */
 	public function setCoupons( array $map )
 	{
-		foreach( $map as $products ) {
-			$this->checkProducts( $products );
+		foreach( $map as $code => $products ) {
+			$map[$code] = $this->checkProducts( $products );
 		}
 
 		$this->notifyListeners( 'setCoupons.before', $map );
@@ -687,16 +689,16 @@ abstract class Base
 	 * Checks if all order addresses are valid
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface[] $items Order address items
+	 * @param string $type Address type constant from \Aimeos\MShop\Order\Item\Base\Address\Base
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface[] List of checked items
 	 * @throws \Aimeos\MShop\Exception If one of the order addresses is invalid
 	 */
-	protected function checkAddresses( array $items )
+	protected function checkAddresses( array $items, $type )
 	{
-		foreach( $items as $type => $item )
+		foreach( $items as $key => $item )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $item );
-			$item->setType( $type ); // enforce that the type is the same as the given one
-			$item->setId( null ); // enforce saving as new item
+			$items[$key] = $item->setType( $type )->setId( null ); // enforce that the type and saving as new item
 		}
 
 		return $items;
@@ -712,7 +714,7 @@ abstract class Base
 	 */
 	protected function checkProducts( array $items )
 	{
-		foreach( $items as $item )
+		foreach( $items as $key => $item )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $item );
 
@@ -721,7 +723,7 @@ abstract class Base
 			}
 
 			$this->checkPrice( $item->getPrice() );
-			$item->setId( null ); // enforce saving as new item
+			$items[$key] = $item->setId( null ); // enforce saving as new item
 		}
 
 		return $items;
@@ -732,21 +734,24 @@ abstract class Base
 	 * Checks if all order services are valid
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface[] $items Order service items
+	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Base\Service\Base
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface[] List of checked items
 	 * @throws \Aimeos\MShop\Exception If one of the order services is invalid
 	 */
-	protected function checkServices( array $items )
+	protected function checkServices( array $items, $type )
 	{
-		foreach( $items as $type => $item )
+		$list = [];
+
+		foreach( $items as $key => $item )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
-
 			$this->checkPrice( $item->getPrice() );
-			$item->setType( $type ); // enforce that the type is the same as the given one
-			$item->setId( null ); // enforce saving as new item
+
+			// enforce the type and saving as new item
+			$list[$item->getServiceId()] = $item->setType( $type )->setId( null );
 		}
 
-		return $items;
+		return $list;
 	}
 
 

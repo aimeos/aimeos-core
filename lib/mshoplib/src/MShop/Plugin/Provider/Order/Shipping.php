@@ -85,10 +85,13 @@ class Shipping
 	{
 		$p->addListener( $this->getObject(), 'addProduct.after' );
 		$p->addListener( $this->getObject(), 'deleteProduct.after' );
+		$p->addListener( $this->getObject(), 'setProducts.after' );
 		$p->addListener( $this->getObject(), 'addService.after' );
 		$p->addListener( $this->getObject(), 'deleteService.after' );
+		$p->addListener( $this->getObject(), 'setServices.after' );
 		$p->addListener( $this->getObject(), 'addCoupon.after' );
 		$p->addListener( $this->getObject(), 'deleteCoupon.after' );
+		$p->addListener( $this->getObject(), 'setCoupons.after' );
 	}
 
 
@@ -140,15 +143,10 @@ class Shipping
 			$sum->addItem( $product->getPrice(), $product->getQuantity() );
 		}
 
-		if( $sum->getValue() + $sum->getRebate() >= $threshold[$currency] && $price->getCosts() > '0.00' )
-		{
-			$price->setRebate( $price->getCosts() );
-			$price->setCosts( '0.00' );
-		}
-		else if( $sum->getValue() + $sum->getRebate() < $threshold[$currency] && $price->getRebate() > '0.00' )
-		{
-			$price->setCosts( $price->getRebate() );
-			$price->setRebate( '0.00' );
+		if( $sum->getValue() + $sum->getRebate() >= $threshold[$currency] && $price->getCosts() > '0.00' ) {
+			$price->setRebate( $price->getCosts() )->setCosts( '0.00' );
+		} elseif( $sum->getValue() + $sum->getRebate() < $threshold[$currency] && $price->getRebate() > '0.00' ) {
+			$price->setCosts( $price->getRebate() )->setRebate( '0.00' );
 		}
 	}
 }

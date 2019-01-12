@@ -42,46 +42,16 @@ class ProductFreeOptions
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
-
-		$attrQtys = $attrTypes = [];
-		$context = $this->getContext();
-
-		$prodManager = \Aimeos\MShop::create( $context, 'product' );
-		$prodItem = $prodManager->getItem( $value->getProductId(), ['price'] );
-		$prodConf = $prodItem->getConfig();
-
-
-		foreach( $value->getAttributeItems( 'config' ) as $attr )
+		if( is_array( $value ) )
 		{
-			$attrQtys[$attr->getAttributeId()] = $attr->getQuantity();
-			$attrTypes[] = $attr->getCode();
-		}
-
-		if( array_intersect( $attrTypes, array_keys( $prodConf ) ) === [] ) {
-			return true;
-		}
-
-
-		$priceManager = \Aimeos\MShop::create( $context, 'price' );
-
-		$prices = $prodItem->getRefItems( 'price', 'default', 'default' );
-		$priceItem = $priceManager->getLowestPrice( $prices, $value->getQuantity() );
-
-		foreach( $this->getAttributeMap( array_keys( $attrQtys ) ) as $type => $list )
-		{
-			if( isset( $prodConf[$type] ) )
-			{
-				$list = $this->sortByPrice( $list, $attrQtys );
-				$priceItem = $this->addPrices( $priceItem, $list, $attrQtys, (int) $prodConf[$type] );
-			}
-			else
-			{
-				$priceItem = $this->addPrices( $priceItem, $list, $attrQtys, 0 );
+			foreach( $value as $product ) {
+				$this->updatePrice( $product );
 			}
 		}
-
-		$value->setPrice( $priceItem );
+		else
+		{
+			$this->updatePrice( $value );
+		}
 
 		return true;
 	}
@@ -182,5 +152,48 @@ class ProductFreeOptions
 		uasort( $attrItems, $sortFcn );
 
 		return $attrItems;
+	}
+
+
+	protected function updatePrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $product )
+	{
+		$attrQtys = $attrTypes = [];
+		$context = $this->getContext();
+
+		$prodManager = \Aimeos\MShop::create( $context, 'product' );
+		$prodItem = $prodManager->getItem( $product->getProductId(), ['price'] );
+		$prodConf = $prodItem->getConfig();
+
+
+		foreach( $product->getAttributeItems( 'config' ) as $attr )
+		{
+			$attrQtys[$attr->getAttributeId()] = $attr->getQuantity();
+			$attrTypes[] = $attr->getCode();
+		}
+
+		if( array_intersect( $attrTypes, array_keys( $prodConf ) ) === [] ) {
+			return;
+		}
+
+
+		$priceManager = \Aimeos\MShop::create( $context, 'price' );
+
+		$prices = $prodItem->getRefItems( 'price', 'default', 'default' );
+		$priceItem = $priceManager->getLowestPrice( $prices, $product->getQuantity() );
+
+		foreach( $this->getAttributeMap( array_keys( $attrQtys ) ) as $type => $list )
+		{
+			if( isset( $prodConf[$type] ) )
+			{
+				$list = $this->sortByPrice( $list, $attrQtys );
+				$priceItem = $this->addPrices( $priceItem, $list, $attrQtys, (int) $prodConf[$type] );
+			}
+			else
+			{
+				$priceItem = $this->addPrices( $priceItem, $list, $attrQtys, 0 );
+			}
+		}
+
+		$product->setPrice( $priceItem );
 	}
 }

@@ -60,6 +60,7 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 		$product->setProductId( $prodManager->findItem( 'CNE' )->getId() );
 
 		$this->object->update( $basket, 'addProduct.after', $product );
+		$this->object->update( $basket, 'addProduct.after', [$product] );
 
 		$this->assertEquals( '30.95', $product->getPrice()->getValue() );
 	}

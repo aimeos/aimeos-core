@@ -263,11 +263,12 @@ class Autofill
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base/address' );
 			$search = $manager->createSearch();
 			$search->setConditions( $search->compare( '==', 'order.base.address.baseid', $item->getBaseId() ) );
-			$addresses = $manager->searchItems( $search );
 
-			foreach( $addresses as $address ) {
-				$order->setAddress( $address, $address->getType() );
+			foreach( $manager->searchItems( $search ) as $address ) {
+				$addresses[$address->getType()] = $address;
 			}
+
+			$order->setAddresses( $addresses );
 		}
 	}
 
@@ -287,16 +288,17 @@ class Autofill
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base/service' );
 			$search = $manager->createSearch();
 			$search->setConditions( $search->compare( '==', 'order.base.service.baseid', $item->getBaseId() ) );
-			$services = $manager->searchItems( $search );
 
-			foreach( $services as $service )
+			foreach( $manager->searchItems( $search ) as $service )
 			{
 				$type = $service->getType();
 
 				if( ( $item = $this->getServiceItem( $order, $type, $service->getCode() ) ) !== null ) {
-					$order->addService( $item, $type );
+					$services[$type][] = $item;
 				}
 			}
+
+			$order->setServices( $services );
 		}
 	}
 
@@ -335,11 +337,9 @@ class Autofill
 	 */
 	protected function setServicesDefault( \Aimeos\MShop\Order\Item\Base\Iface $order )
 	{
-		$services = $order->getServices();
-
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
 
-		if( !isset( $services[$type] ) && (bool) $this->getConfigValue( 'autofill.delivery', false ) === true
+		if( $order->getService( $type ) === [] && (bool) $this->getConfigValue( 'autofill.delivery', false ) === true
 			&& ( ( $item = $this->getServiceItem( $order, $type, $this->getConfigValue( 'autofill.deliverycode' ) ) ) !== null
 			|| ( $item = $this->getServiceItem( $order, $type ) ) !== null )
 		) {
@@ -349,7 +349,7 @@ class Autofill
 
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
 
-		if( !isset( $services[$type] ) && (bool) $this->getConfigValue( 'autofill.payment', false ) === true
+		if( $order->getService( $type ) === [] && (bool) $this->getConfigValue( 'autofill.payment', false ) === true
 			&& ( ( $item = $this->getServiceItem( $order, $type, $this->getConfigValue( 'autofill.paymentcode' ) ) ) !== null
 			|| ( $item = $this->getServiceItem( $order, $type ) ) !== null )
 		) {

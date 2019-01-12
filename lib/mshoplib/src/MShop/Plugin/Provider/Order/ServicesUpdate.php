@@ -63,66 +63,85 @@ class ServicesUpdate
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
-		$ids = [];
-		$context = $this->getContext();
 		$services = $order->getServices();
 
 
 		if( count( $order->getProducts() ) === 0 )
 		{
-			$priceManager = \Aimeos\MShop::create( $context, 'price' );
+			$priceManager = \Aimeos\MShop::create( $this->getContext(), 'price' );
 
 			foreach( $services as $type => $list )
 			{
-				foreach( $list as $item ) {
-					$item->setPrice( $priceManager->createItem() );
+				foreach( $list as $key => $item ) {
+					$list[$key] = $item->setPrice( $priceManager->createItem() );
 				}
 			}
 
+			$order->setServices( $services );
 			return true;
 		}
 
 
-		foreach( $services as $type => $list )
-		{
-			foreach( $list as $service ) {
-				$ids[] = $service->getServiceId();
-			}
-		}
-
-		$serviceManager = \Aimeos\MShop::create( $context, 'service' );
-
-		$search = $serviceManager->createSearch( true );
-		$expr = array(
-			$search->compare( '==', 'service.id', $ids ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$result = $serviceManager->searchItems( $search, array( 'price' ) );
-
+		$serviceManager = \Aimeos\MShop::create( $this->getContext(), 'service' );
+		$serviceItems = $this->getServiceItems( $services );
 
 		foreach( $services as $type => $list )
 		{
-			$order->deleteService( $type );
-
-			foreach( $list as $item )
+			foreach( $list as $key => $item )
 			{
-				if( isset( $result[$item->getServiceId()] ) )
+				if( isset( $serviceItems[$item->getServiceId()] ) )
 				{
-					$serviceItem = $result[$item->getServiceId()];
-
+					$serviceItem = $serviceItems[$item->getServiceId()];
 					$provider = $serviceManager->getProvider( $serviceItem, $serviceItem->getType() );
 
-					if( $provider->isAvailable( $order ) )
-					{
-						$item->setPrice( $provider->calcPrice( $order ) );
-						$order->addService( $item, $type );
+					if( $provider->isAvailable( $order ) ) {
+						$services[$type][$key] = $item->setPrice( $provider->calcPrice( $order ) );
+					} else {
+						unset( $services[$type][$key] );
 					}
+				}
+				else
+				{
+					unset( $services[$type][$key] );
 				}
 			}
 		}
 
+		$order->setServices( $services );
+
 		return true;
+	}
+
+
+	/**
+	 * Returns the service items for the given order services
+	 *
+	 * @param array $services Associative list of service types as key and list
+	 * 	of items implementing \Aimeos\MShop\Order\Item\Base\Service\Iface as values
+	 * @return \Aimeos\MShop\Service\Item\Iface[] List of service items with IDs as keys and items as values
+	 */
+	protected function getServiceItems( array $services )
+	{
+		$list = [];
+
+		foreach( $services as $type => $items )
+		{
+			foreach( $items as $service ) {
+				$list[] = $service->getServiceId();
+			}
+		}
+
+		if( $list !== [] )
+		{
+			$serviceManager = \Aimeos\MShop::create( $this->getContext(), 'service' );
+
+			$search = $serviceManager->createSearch( true );
+			$expr = [$search->compare( '==', 'service.id', $list ), $search->getConditions()];
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$list = $serviceManager->searchItems( $search, ['media', 'price', 'text'] );
+		}
+
+		return $list;
 	}
 }

@@ -114,16 +114,16 @@ class ServicesAvailable
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
 		$problems = [];
-		$availableServices = $order->getServices();
+		$services = $order->getServices();
 
 		foreach( $this->getItemBase()->getConfig() as $type => $value )
 		{
-			if( $value == true && ( !isset( $availableServices[$type] ) || empty( $availableServices[$type] ) ) ) {
+			if( $value == true && ( !isset( $services[$type] ) || empty( $services[$type] ) ) ) {
 				$problems[$type] = 'available.none';
 			}
 
 			if( $value !== null && $value !== '' && $value == false
-				&& isset( $availableServices[$type] ) && !empty( $availableServices[$type] )
+				&& isset( $services[$type] ) && !empty( $services[$type] )
 			) {
 				$problems[$type] = 'available.notallowed';
 			}
