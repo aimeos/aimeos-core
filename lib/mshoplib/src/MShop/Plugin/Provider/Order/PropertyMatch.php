@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * product properties.
  *
  * Example:
- * - product.property.code: ["size", "color"]
+ * - propertymatch.values: ["mytype" => "myvalue"]
  *
  * This configuration enforces products to have a size and color property.
  * Otherwise, they can't be added to the basket by the customers.
@@ -34,6 +34,46 @@ class PropertyMatch
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
+	private $beConfig = array(
+		'propertymatch.values' => array(
+			'code' => 'propertymatch.values',
+			'internalcode' => 'propertymatch.values',
+			'label' => 'Property type/value map',
+			'type' => 'map',
+			'internaltype' => 'array',
+			'default' => [],
+			'required' => true,
+		),
+	);
+
+
+	/**
+	 * Checks the backend configuration attributes for validity.
+	 *
+	 * @param array $attributes Attributes added by the shop owner in the administraton interface
+	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
+	 * 	known by the provider but aren't valid
+	 */
+	public function checkConfigBE( array $attributes )
+	{
+		$errors = parent::checkConfigBE( $attributes );
+
+		return array_merge( $errors, $this->checkConfig( $this->beConfig, $attributes ) );
+	}
+
+
+	/**
+	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
+	 * rules for the value of each field in the administration interface.
+	 *
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
+	 */
+	public function getConfigBE()
+	{
+		return $this->getConfigItems( $this->beConfig );
+	}
+
+
 	/**
 	 * Subscribes itself to a publisher
 	 *
@@ -42,6 +82,7 @@ class PropertyMatch
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this->getObject(), 'addProduct.before' );
+		$p->addListener( $this->getObject(), 'setProducts.before' );
 	}
 
 
@@ -56,38 +97,66 @@ class PropertyMatch
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
-
-		$config = $this->getItemBase()->getConfig();
-
-		if( $config === [] ) {
+		if( ( $map = (array) $this->getItemBase()->getConfigValue( 'propertymatch.values', [] ) ) === [] ) {
 			return true;
 		}
 
-		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
+		$list = [];
 
-		$criteria = $productManager->createSearch( true );
-		$expr = [
-			$criteria->compare( '==', 'product.id', $value->getProductId() ),
-			$criteria->getConditions(),
-		];
-
-		foreach( $config as $property => $value ) {
-			$expr[] = $criteria->compare( '==', $property, $value );
+		if( is_array( $value ) )
+		{
+			foreach( $value as $orderProduct )
+			{
+				\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $orderProduct );
+				$list[] = $orderProduct->getProductId();
+			}
+		}
+		else
+		{
+			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
+			$list[] = $value->getProductId();
 		}
 
-		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
+		$result = $this->getProductItems( array_unique( $list ), $map );
 
-		$result = $productManager->searchItems( $criteria );
-
-		if( reset( $result ) === false )
+		if( count( $result ) !== count( $list ) )
 		{
-			$code = array( 'product' => array_keys( $config ) );
+			$code = array( 'product' => $map );
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Product matching given properties not found' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Returns the product items for the given product IDs limited by the map of properties
+	 *
+	 * @param string[] List of product IDs
+	 * @param array $map Assoicative list of property types as keys and property values
+	 * @param \Aimeos\MShop\Product\Item\Iface[] Found product items
+	 */
+	protected function getProductItems( array $productIds, array $map )
+	{
+		$context = $this->getContext();
+		$langId = $context->getLocale()->getLanguageId();
+
+		$manager = \Aimeos\MShop::create( $context, 'product' );
+		$search = $manager->createSearch( true );
+		$expr = [
+			$search->compare( '==', 'product.id', $productIds ),
+			$search->getConditions(),
+		];
+
+		foreach( $map as $type => $value )
+		{
+			$func = $search->createFunction( 'product:prop', [$type, $langId, $value] );
+			$expr[] = $search->compare( '!=', $func, null );
+		}
+
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		return $manager->searchItems( $search );
 	}
 }
