@@ -149,13 +149,10 @@ class Standard
 					JOIN "mshop_product_property_type" AS mproprty_prop ON mpropr_prop."typeid" = mproprty_prop."id"
 					WHERE mpro."id" = mpropr_prop."parentid" AND :site
 						AND mproprty_prop."code" = $1 AND mpropr_prop."value" = $3
-						AND (
-							NOT ( mpropr_prop."langid" <> $2 OR mpropr_prop."langid" IS NULL OR $2 IS NULL )
-							OR ( mpropr_prop."langid" IS NULL AND $2 IS NULL )
-						)
+						AND ( mpropr_prop."langid" = $2 OR mpropr_prop."langid" IS NULL )
 				) = 1
 			)',
-			'label' => 'Property has property item, parameter(<property type>,<language code>,<property value>)',
+			'label' => 'Product has property item, parameter(<property type>,<language code>,<property value>)',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
