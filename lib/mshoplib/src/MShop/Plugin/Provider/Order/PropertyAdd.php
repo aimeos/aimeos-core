@@ -16,7 +16,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * Adds product properties to an order product as attributes
  *
  * Example configuration:
- * - product.property.parentid: ["length", "width", "height", "weight"]
+ * - propertyadd.types: ["package-length", "package-width", "package-height", "package-weight"]
  *
  * The product properties listed in the array are added to the order product as
  * order product attributes with key/value pairs like code: "length", value: "1.0".
@@ -32,9 +32,9 @@ class PropertyAdd
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	private $beConfig = array(
-		'product.property.parentid' => array(
-			'code' => 'product.property.parentid',
-			'internalcode' => 'product.property.parentid',
+		'propertyadd.types' => array(
+			'code' => 'propertyadd.types',
+			'internalcode' => 'propertyadd.types',
 			'label' => 'Property type codes',
 			'type' => 'list',
 			'internaltype' => 'array',
@@ -44,7 +44,6 @@ class PropertyAdd
 	);
 
 	private $orderAttrManager;
-	private $type;
 
 
 	/**
@@ -58,7 +57,6 @@ class PropertyAdd
 		parent::__construct( $context, $item );
 
 		$this->orderAttrManager = \Aimeos\MShop::create( $context, 'order/base/product/attribute' );
-		$this->type = $context->getConfig()->get( 'plugin/provider/order/propertyadd/type', 'property' );
 	}
 
 
@@ -97,6 +95,7 @@ class PropertyAdd
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this->getObject(), 'addProduct.before' );
+		$p->addListener( $this->getObject(), 'setProducts.before' );
 	}
 
 
@@ -111,38 +110,29 @@ class PropertyAdd
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
+		if( ( $types = (array) $this->getItemBase()->getConfigValue( 'propertyadd.types', [] ) ) === [] ) {
+			return true;
+		}
 
-		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
-		$config = $this->getItemBase()->getConfig();
-
-		foreach( $config as $key => $properties )
+		if( !is_array( $value ) )
 		{
-			$keyElements = explode( '.', $key );
+			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
+			$value = $this->addAttributes( $value, $this->getProductItems( [$value->getProductId()] ), $types );
+			return true;
+		}
 
-			if( $keyElements[0] !== 'product' || count( $keyElements ) < 3 )
-			{
-				$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Configuration invalid' );
-				throw new \Aimeos\MShop\Plugin\Exception( $msg );
-			}
+		$list = [];
 
-			$productSubManager = $productManager->getSubManager( $keyElements[1] );
+		foreach( $value as $orderProduct )
+		{
+			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $orderProduct );
+			$list[] = $orderProduct->getProductId();
+		}
 
-			$search = $productSubManager->createSearch( true );
-			$cond = [
-				$search->compare( '==', $key, $value->getProductId() ),
-				$search->getConditions(),
-			];
-			$search->setConditions( $search->combine( '&&', $cond ) );
+		$products = $this->getProductItems( $list );
 
-			$result = $productSubManager->searchItems( $search );
-
-			foreach( $result as $item )
-			{
-				$attributes = $this->addAttributes( $item, $value, $properties );
-				$value->setAttributeItems( $attributes );
-			}
+		foreach( $value as $key => $orderProduct ) {
+			$value[$key] = $this->addAttributes( $orderProduct, $products, $types );
 		}
 
 		return true;
@@ -150,32 +140,62 @@ class PropertyAdd
 
 
 	/**
-	 * Adds attribute items to an array.
+	 * Adds the product properties as attribute items to the order product item
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item containing the properties to be added as attributes
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $product Product containing attributes
-	 * @param Array $properties List of item properties to be converted
-	 * @return Array List of attributes
+	 * @param \Aimeos\MShop\Product\Item\Iface[] $products Product items with properties
+	 * @param string[] $types List of property types to add
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Modified order product item
 	 */
-	protected function addAttributes( \Aimeos\MShop\Common\Item\Iface $item, \Aimeos\MShop\Order\Item\Base\Product\Iface $product, array $properties )
+	protected function addAttributes( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct, array $products, array $types )
 	{
-		$attributeList = $product->getAttributeItems();
-		$itemProperties = $item->toArray( true );
+		if( !isset( $products[$orderProduct->getProductId()] ) ) {
+			return;
+		}
 
-		foreach( $properties as $code )
+		$product = $products[$orderProduct->getProductId()];
+
+		foreach( $types as $type )
 		{
-			if( array_key_exists( $code, $itemProperties )
-				&& $product->getAttribute( $code, $this->type ) === null
-			) {
-				$new = $this->orderAttrManager->createItem();
-				$new->setCode( $code );
-				$new->setType( $this->type );
-				$new->setValue( $itemProperties[$code] );
+			$list = [];
 
-				$attributeList[] = $new;
+			foreach( $product->getPropertyItems( $type ) as $property ) {
+				$list[] = $property->getValue();
+			}
+
+			if( !empty( $list ) )
+			{
+				if( ( $attrItem = $orderProduct->getAttributeItem( $type, 'product/property' ) ) === null ) {
+					$attrItem = $this->orderAttrManager->createItem();
+				}
+
+				$attrItem->setType( 'product/property' )->setCode( $type );
+				$attrItem->setValue( count( $list ) > 1 ? $list : reset( $list ) );
+
+				$orderProduct->setAttributeItem( $attrItem );
 			}
 		}
 
-		return $attributeList;
+		return $orderProduct;
+	}
+
+
+	/**
+	 * Returns the product items for the given product IDs limited by the map of properties
+	 *
+	 * @param string[] List of product IDs
+	 * @param \Aimeos\MShop\Product\Item\Iface[] Found product items
+	 */
+	protected function getProductItems( array $productIds )
+	{
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
+		$search = $manager->createSearch( true );
+		$expr = [
+			$search->compare( '==', 'product.id', array_unique( $productIds ) ),
+			$search->getConditions(),
+		];
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		return $manager->searchItems( $search, ['product/property'] );
 	}
 }

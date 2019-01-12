@@ -14,58 +14,30 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 	private $object;
 	private $plugin;
 	private $order;
-	private $products;
+	private $product;
 
 
 	protected function setUp()
 	{
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$this->plugin = $pluginManager->createItem();
-		$this->plugin->setProvider( 'PropertyAdd' );
-		$this->plugin->setStatus( '1' );
+		$context = \TestHelperMShop::getContext();
+		$this->plugin = \Aimeos\MShop\Plugin\Manager\Factory::create( $context )->createItem();
 
-		$this->plugin->setConfig( array(
-			'product.property.parentid' => array(
-				'product.property.languageid',
-				'product.property.value',
-				'product.property.editor',
-			),
-		) );
-
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::create( $context )->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 
-		$manager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
-
-		$products = $manager->searchItems( $search );
-
-		if( count( $products ) !== 2 ) {
-			throw new \RuntimeException( 'Wrong number of products' );
-		}
-
-		$this->products = [];
-
-		foreach( $products as $product )
-		{
-			$item = $orderBaseProductManager->createItem();
-			$item->copyFrom( $product );
-
-			$this->products[$product->getCode()] = $item;
-		}
+		$product = \Aimeos\MShop\Product\Manager\Factory::create( $context )->findItem( 'CNC' );
+		$this->product = $orderBaseProductManager->createItem()->copyFrom( $product );
 
 		$this->order = $orderBaseManager->createItem();
 		$this->order->__sleep(); // remove event listeners
 
-		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyAdd( \TestHelperMShop::getContext(), $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyAdd( $context, $this->plugin );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->object, $this->order, $this->plugin, $this->products );
+		unset( $this->object, $this->order, $this->plugin, $this->product );
 	}
 
 
@@ -75,67 +47,26 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testUpdateOk()
+	public function testUpdate()
 	{
-		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
-		$this->assertEquals( 3, count( $this->products['CNC']->getAttributeItems() ) );
+		$this->plugin->setConfig( ['propertyadd.types' => ['package-width']] );
 
-		$this->products['CNE']->setAttributeItems( [] );
-		$this->plugin->setConfig( array(
-			'product.lists.parentid' => array(
-				'product.lists.domain',
-				'product.lists.refid',
-			),
-		) );
+		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->product ) );
+		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', [$this->product] ) );
 
-		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
-
-		$this->assertEquals( 2, count( $this->products['CNE']->getAttributeItems() ) );
+		$attributes = $this->product->getAttributeItems();
+		$this->assertEquals( 1, count( $attributes ) );
+		$this->assertEquals( 'product/property', reset( $attributes )->getType() );
+		$this->assertEquals( 'package-width', reset( $attributes )->getCode() );
+		$this->assertEquals( '15.0', reset( $attributes )->getValue() );
 	}
 
 
-	public function testUpdateAttributeExists()
+	public function testUpdateNone()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$attributeManager = $orderManager->getSubmanager( 'base' )->getSubmanager( 'product' )->getSubmanager( 'attribute' );
+		$this->plugin->setConfig( ['propertyadd.types' => ['unknown']] );
 
-		$attribute = $attributeManager->createItem();
-
-		$attribute->setCode( 'product.property.value' );
-		$attribute->setName( 'product.property.value' );
-		$attribute->setValue( '1000' );
-		$attribute->setType( 'property' );
-
-		$this->products['CNC']->setAttributeItems( array( $attribute ) );
-		$this->assertEquals( 1, count( $this->products['CNC']->getAttributeItems() ) );
-
-		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
-		$this->assertEquals( 3, count( $this->products['CNC']->getAttributeItems() ) );
-	}
-
-
-	public function testUpdateConfigError()
-	{
-		// Non-existent property:
-
-		$this->plugin->setConfig( array(
-			'product.property.parentid' => array(
-				'product.property.quatsch',
-				'product.property.editor',
-			),
-		) );
-
-		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
-		$this->assertEquals( 1, count( $this->products['CNC']->getAttributeItems() ) );
-
-
-		// Incorrect key:
-
-		$this->plugin->setConfig( array( 'product.myid' => array(
-			'product.property.type',
-		) ) );
-
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Exception::class );
-		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
+		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->product ) );
+		$this->assertEquals( 0, count( $this->product->getAttributeItems() ) );
 	}
 }
