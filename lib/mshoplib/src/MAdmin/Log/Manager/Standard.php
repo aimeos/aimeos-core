@@ -134,7 +134,8 @@ class Standard
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MAdmin\Log\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -143,7 +144,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'madmin/log/manager/standard/delete' );
+		return $this->cleanupBase( $siteids, 'madmin/log/manager/standard/delete' );
 	}
 
 
@@ -170,7 +171,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MAdmin\Log\Item\Iface $item Log item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\MAdmin\Log\Item\Iface Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -345,7 +346,8 @@ class Standard
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return \Aimeos\MAdmin\Log\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -380,15 +382,16 @@ class Standard
 		 * @see madmin/log/manager/standard/count/ansi
 		 */
 		$path = 'madmin/log/manager/standard/delete';
-		$this->deleteItemsBase( $ids, $path );
+
+		return $this->deleteItemsBase( $ids, $path );
 	}
 
 
 	/**
 	 * Creates the log object for the given log id.
 	 *
-	 * @param integer $id Log ID to fetch log object for
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string $id Log ID to fetch log object for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Returns the log item of the given id
 	 * @throws \Aimeos\MAdmin\Log\Exception If item couldn't be found
@@ -415,9 +418,9 @@ class Standard
 	 * Search for log entries based on the given criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of jobs implementing \Aimeos\MAdmin\Job\Item\Iface
+	 * @return \Aimeos\MAdmin\Log\Item\Iface[] List of log items
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
@@ -567,12 +570,11 @@ class Standard
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( $withsub = true )
 	{
 		$path = 'madmin/log/manager/submanagers';
-
 		return $this->getResourceTypeBase( 'log', $path, [], $withsub );
 	}
 
@@ -581,7 +583,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] Returns a list of search attributes
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -625,7 +627,7 @@ class Standard
 	 * Create new admin log item object initialized with given parameters.
 	 *
 	 * @param array $values Associative list of key/value pairs of a job
-	 * @return \Aimeos\MAdmin\Log\Item\Iface
+	 * @return \Aimeos\MAdmin\Log\Item\Iface New log item
 	 */
 	protected function createItemBase( array $values = [] )
 	{

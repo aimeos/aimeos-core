@@ -76,10 +76,9 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = $this->object->createItem();
-		$result = $this->object->saveItem( $item );
+		$item = $this->object->saveItem( $this->object->createItem() );
 		$this->object->deleteItem( $item->getId() );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $result );
+		$this->assertInstanceOf( \Aimeos\MAdmin\Cache\Item\Iface::class, $item );
 	}
 }

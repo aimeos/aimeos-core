@@ -116,10 +116,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			throw new \Aimeos\MAdmin\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$subManager = new $classname( $this->getContext() );
-
-		self::checkClass( $interface, $subManager );
-
-		return $subManager;
+		return self::checkClass( $interface, new $classname( $this->getContext() ) );
 	}
 }
