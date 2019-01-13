@@ -57,17 +57,19 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * Removes old entries from the storage.
 	 *
 	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
+		return $this;
 	}
 
 
 	/**
-	 * Creates a search object.
+	 * Creates a search critera object
 	 *
-	 * @param boolean $default Add default criteria; Optional
-	 * @return \Aimeos\MW\Criteria\Iface
+	 * @param boolean $default Add default criteria (optional)
+	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -98,38 +100,45 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Deletes an item from storage.
 	 *
-	 * @param integer $itemId Unique ID of the item in the storage
+	 * @param string $itemId Unique ID of the item in the storage
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItem( $itemId )
 	{
-		$this->getObject()->deleteItems( array( $itemId ) );
+		return $this->getObject()->deleteItems( [$itemId] );
 	}
 
 
 	/**
-	 * Starts a database transaction on the connection identified by the given name.
+	 * Starts a database transaction on the connection identified by the given name
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function begin()
 	{
-		$this->beginTransation( $this->getResourceName() );
+		return $this->beginTransation( $this->getResourceName() );
 	}
 
 
 	/**
-	 * Commits the running database transaction on the connection identified by the given name.
+	 * Commits the running database transaction on the connection identified by the given name
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function commit()
 	{
-		$this->commitTransaction( $this->getResourceName() );
+		return $this->commitTransaction( $this->getResourceName() );
 	}
 
 
 	/**
-	 * Rolls back the running database transaction on the connection identified by the given name.
+	 * Rolls back the running database transaction on the connection identified by the given name
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function rollback()
 	{
-		$this->rollbackTransaction( $this->getResourceName() );
+		return $this->rollbackTransaction( $this->getResourceName() );
 	}
 
 
@@ -259,6 +268,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @param array $siteids List of IDs for sites whose entries should be deleted
 	 * @param string $cfgpath Configuration key to the cleanup statement
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function cleanupBase( array $siteids, $cfgpath )
 	{
@@ -286,6 +296,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
+
+		return $this;
 	}
 
 
@@ -582,6 +594,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * Sets the name of the database resource that should be used.
 	 *
 	 * @param string $name Name of the resource
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function setResourceName( $name )
 	{
@@ -592,6 +605,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		} else {
 			$this->resourceName = $name;
 		}
+
+		return $this;
 	}
 
 
@@ -602,6 +617,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $column Name (including alias) of the column containing the site ID in the storage
 	 * @param integer|array $value Site ID or list of site IDs
 	 * @param string $marker Marker to replace
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function replaceSiteMarker( &$searchAttr, $column, $value, $marker = ':site' )
 	{
@@ -615,6 +631,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$string = $expr->toSource( $types, $translations );
 
 		$searchAttr['internalcode'] = str_replace( $marker, $string, $searchAttr['internalcode'] );
+
+		return $this;
 	}
 
 
@@ -782,6 +800,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $cfgpath Configuration path to the SQL statement
 	 * @param boolean $siteidcheck If siteid should be used in the statement
 	 * @param string $name Name of the ID column
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function deleteItemsBase( array $ids, $cfgpath, $siteidcheck = true, $name = 'id' )
 	{
@@ -819,6 +838,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
+
+		return $this;
 	}
 
 
@@ -826,6 +847,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * Starts a database transaction on the connection identified by the given name.
 	 *
 	 * @param string $dbname Name of the database settings in the resource configuration
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function beginTransation( $dbname = 'db' )
 	{
@@ -834,6 +856,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$conn = $dbm->acquire( $dbname );
 		$conn->begin();
 		$dbm->release( $conn, $dbname );
+
+		return $this;
 	}
 
 
@@ -841,6 +865,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * Commits the running database transaction on the connection identified by the given name.
 	 *
 	 * @param string $dbname Name of the database settings in the resource configuration
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function commitTransaction( $dbname = 'db' )
 	{
@@ -849,6 +874,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$conn = $dbm->acquire( $dbname );
 		$conn->commit();
 		$dbm->release( $conn, $dbname );
+
+		return $this;
 	}
 
 
@@ -856,6 +883,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * Rolls back the running database transaction on the connection identified by the given name.
 	 *
 	 * @param string $dbname Name of the database settings in the resource configuration
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function rollbackTransaction( $dbname = 'db' )
 	{
@@ -864,5 +892,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$conn = $dbm->acquire( $dbname );
 		$conn->rollback();
 		$dbm->release( $conn, $dbname );
+
+		return $this;
 	}
 }
