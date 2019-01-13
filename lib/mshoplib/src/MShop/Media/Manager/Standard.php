@@ -19,9 +19,10 @@ namespace Aimeos\MShop\Media\Manager;
  * @subpackage Media
  */
 class Standard
-	extends \Aimeos\MShop\Common\Manager\ListRef\Base
+	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Media\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
+	use \Aimeos\MShop\Common\Manager\ListRef\Traits;
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 
 
@@ -143,7 +144,8 @@ class Standard
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Media\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -154,7 +156,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/media/manager/standard/delete' );
+		return $this->cleanupBase( $siteids, 'mshop/media/manager/standard/delete' );
 	}
 
 
@@ -175,7 +177,7 @@ class Standard
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( $withsub = true )
 	{
@@ -190,7 +192,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -221,7 +223,8 @@ class Standard
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return \Aimeos\MShop\Media\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -256,14 +259,15 @@ class Standard
 		 * @see mshop/media/manager/standard/count/ansi
 		 */
 		$path = 'mshop/media/manager/standard/delete';
-		$this->deleteItemsBase( $ids, $path );
+
+		return $this->deleteItemsBase( $ids, $path );
 	}
 
 
 	/**
 	 * Returns an item for the given ID.
 	 *
-	 * @param integer $id ID of the item that should be retrieved
+	 * @param string $id ID of the item that should be retrieved
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Media\Item\Iface Returns the media item of the given id
@@ -280,7 +284,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item New item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\MShop\Media\Item\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -463,7 +467,7 @@ class Standard
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param integer|null &$total Number of items that are available in total
-	 * @return array List of items implementing \Aimeos\MShop\Media\Item\Iface
+	 * @return \Aimeos\MShop\Media\Item\Iface[] List of media items
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
@@ -643,10 +647,10 @@ class Standard
 
 
 	/**
-	 * creates a search object and sets base criteria
+	 * Creates a search critera object
 	 *
-	 * @param boolean $default
-	 * @return \Aimeos\MW\Criteria\Iface
+	 * @param boolean $default Add default criteria (optional)
+	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -678,7 +682,7 @@ class Standard
 
 
 	/**
-	 * Returns a new manager for product extensions
+	 * Returns a new manager for media extensions
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
@@ -697,7 +701,7 @@ class Standard
 	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 * @param array $refItems List of items reference to this item
 	 * @param array $propItems List of media property items implementing \Aimeos\MShop\Common\Item\Property\Iface
-	 * @return \Aimeos\MShop\Media\Item\Iface New product item
+	 * @return \Aimeos\MShop\Media\Item\Iface New media item
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [], array $propItems = [] )
 	{

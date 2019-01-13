@@ -19,8 +19,11 @@ namespace Aimeos\MShop\Price\Manager;
  * @subpackage Price
  */
 abstract class Base
-	extends \Aimeos\MShop\Common\Manager\ListRef\Base
+	extends \Aimeos\MShop\Common\Manager\Base
 {
+	use \Aimeos\MShop\Common\Manager\ListRef\Traits;
+
+
 	/**
 	 * Returns the price item with the lowest price for the given quantity.
 	 *

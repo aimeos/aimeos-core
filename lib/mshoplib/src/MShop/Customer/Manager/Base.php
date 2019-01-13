@@ -19,8 +19,11 @@ namespace Aimeos\MShop\Customer\Manager;
  * @subpackage Customer
  */
 abstract class Base
-	extends \Aimeos\MShop\Common\Manager\ListRef\Base
+	extends \Aimeos\MShop\Common\Manager\Base
 {
+	use \Aimeos\MShop\Common\Manager\ListRef\Traits;
+
+
 	private $salt;
 	private $helper;
 
@@ -89,7 +92,7 @@ abstract class Base
 	/**
 	 * Returns the customer item object specificed by its ID.
 	 *
-	 * @param integer $id Unique customer ID referencing an existing customer
+	 * @param string $id Unique customer ID referencing an existing customer
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Customer\Item\Iface Returns the customer item of the given id

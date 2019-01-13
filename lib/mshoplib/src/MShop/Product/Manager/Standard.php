@@ -19,9 +19,10 @@ namespace Aimeos\MShop\Product\Manager;
  * @subpackage Product
  */
 class Standard
-	extends \Aimeos\MShop\Common\Manager\ListRef\Base
+	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Product\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
+	use \Aimeos\MShop\Common\Manager\ListRef\Traits;
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 
 

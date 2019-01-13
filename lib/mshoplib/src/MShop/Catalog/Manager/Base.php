@@ -18,8 +18,11 @@ namespace Aimeos\MShop\Catalog\Manager;
  * @package MShop
  * @subpackage Catalog
  */
-abstract class Base extends \Aimeos\MShop\Common\Manager\ListRef\Base
+abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 {
+	use \Aimeos\MShop\Common\Manager\ListRef\Traits;
+
+
 	private $searchConfig;
 	private $filter = [];
 	private $treeManagers = [];

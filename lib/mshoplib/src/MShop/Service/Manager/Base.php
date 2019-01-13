@@ -19,8 +19,11 @@ namespace Aimeos\MShop\Service\Manager;
  * @subpackage Service
  */
 abstract class Base
-	extends \Aimeos\MShop\Common\Manager\ListRef\Base
+	extends \Aimeos\MShop\Common\Manager\Base
 {
+	use \Aimeos\MShop\Common\Manager\ListRef\Traits;
+
+
 	/**
 	 * Returns the service provider which is responsible for the service item.
 	 *

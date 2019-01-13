@@ -18,9 +18,10 @@ namespace Aimeos\MShop\Attribute\Manager;
  * @subpackage Attribute
  */
 class Standard
-	extends \Aimeos\MShop\Common\Manager\ListRef\Base
+	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Attribute\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
+	use \Aimeos\MShop\Common\Manager\ListRef\Traits;
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 
 
@@ -127,7 +128,8 @@ class Standard
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Attribute\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -138,7 +140,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/attribute/manager/standard/delete' );
+		return $this->cleanupBase( $siteids, 'mshop/attribute/manager/standard/delete' );
 	}
 
 
@@ -146,7 +148,7 @@ class Standard
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( $withsub = true )
 	{
@@ -161,7 +163,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -210,7 +212,7 @@ class Standard
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @param boolean $default True to add default criteria
-	 * @return \Aimeos\MShop\Common\Item\Iface Item object
+	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item object
 	 */
 	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
 	{
@@ -226,7 +228,7 @@ class Standard
 	/**
 	 * Returns the attributes item specified by its ID.
 	 *
-	 * @param integer $id Unique ID of the attribute item in the storage
+	 * @param string $id Unique ID of the attribute item in the storage
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Returns the attribute item of the given id
@@ -241,10 +243,9 @@ class Standard
 	/**
 	 * Saves an attribute item to the storage.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Attribute item
+	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
-	 * @throws \Aimeos\MShop\Attribute\Exception If Attribute couldn't be saved
+	 * @return \Aimeos\MShop\Attribute\Item\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -422,7 +423,8 @@ class Standard
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return \Aimeos\MShop\Attribute\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -457,7 +459,8 @@ class Standard
 		 * @see mshop/attribute/manager/standard/count/ansi
 		 */
 		$path = 'mshop/attribute/manager/standard/delete';
-		$this->deleteItemsBase( $ids, $path );
+
+		return $this->deleteItemsBase( $ids, $path );
 	}
 
 
@@ -467,7 +470,7 @@ class Standard
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param integer|null &$total Number of items that are available in total
-	 * @return array List of attribute items implementing \Aimeos\MShop\Attribute\Item\Iface
+	 * @return \Aimeos\MShop\Attribute\Item\Iface[] List of attribute items
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
@@ -647,10 +650,10 @@ class Standard
 
 
 	/**
-	 * creates a search object and sets base criteria
+	 * Creates a search object
 	 *
-	 * @param boolean $default
-	 * @return \Aimeos\MW\Criteria\Iface
+	 * @param boolean $default Add default criteria (optional)
+	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
 	public function createSearch( $default = false )
 	{

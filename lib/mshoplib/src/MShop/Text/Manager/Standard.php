@@ -19,9 +19,12 @@ namespace Aimeos\MShop\Text\Manager;
  * @subpackage Text
  */
 class Standard
-	extends \Aimeos\MShop\Common\Manager\ListRef\Base
+	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Text\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
+	use \Aimeos\MShop\Common\Manager\ListRef\Traits;
+
+
 	private $searchConfig = array(
 		'text.id' => array(
 			'code' => 'text.id',
