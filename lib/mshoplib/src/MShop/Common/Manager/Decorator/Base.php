@@ -55,11 +55,13 @@ abstract class Base
 	/**
 	 * Removes old entries from the storage
 	 *
-	 * @param array $siteids List of IDs for sites Whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites Whose entries should be deleted
+	 * @return Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
 		$this->manager->cleanup( $siteids );
+		return $this;
 	}
 
 
@@ -90,22 +92,26 @@ abstract class Base
 	/**
 	 * Deletes the item specified by its ID.
 	 *
-	 * @param integer $id ID of the item object
+	 * @param string $id ID of the item object
+	 * @return Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItem( $id )
 	{
 		$this->manager->deleteItem( $id );
+		return $this;
 	}
 
 
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
 		$this->manager->deleteItems( $ids );
+		return $this;
 	}
 
 
@@ -128,7 +134,7 @@ abstract class Base
 	/**
 	 * Returns the item specified by its ID
 	 *
-	 * @param integer $id Unique ID of the item
+	 * @param string $id Unique ID of the item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
@@ -142,7 +148,7 @@ abstract class Base
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( $withsub = true )
 	{
@@ -154,7 +160,7 @@ abstract class Base
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -232,35 +238,44 @@ abstract class Base
 
 
 	/**
-	 * Starts a database transaction on the connection identified by the given name.
+	 * Starts a database transaction on the connection identified by the given name
+	 *
+	 * @return Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function begin()
 	{
 		$this->manager->begin();
+		return $this;
 	}
 
 
 	/**
-	 * Commits the running database transaction on the connection identified by the given name.
+	 * Commits the running database transaction on the connection identified by the given name
+	 *
+	 * @return Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function commit()
 	{
 		$this->manager->commit();
+		return $this;
 	}
 
 
 	/**
-	 * Rolls back the running database transaction on the connection identified by the given name.
+	 * Rolls back the running database transaction on the connection identified by the given name
+	 *
+	 * @return Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function rollback()
 	{
 		$this->manager->rollback();
+		return $this;
 	}
 
 
 
 	/**
-	 * Returns the manager object.
+	 * Returns the manager object
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */

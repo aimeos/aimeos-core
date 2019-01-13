@@ -27,9 +27,9 @@ class Depth
 	 * Searches for all items matching the given critera.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Criteria object with conditions, sortations, etc.
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @return \Aimeos\MShop\Common\Item\Iface[] List of items
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
