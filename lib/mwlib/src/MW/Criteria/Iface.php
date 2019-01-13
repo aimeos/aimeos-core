@@ -56,6 +56,15 @@ interface Iface
 
 
 	/**
+	 * Creates a function signature for expressions.
+	 *
+	 * @param string $name Function name
+	 * @param array $params Single- or multi-dimensional list of parameters of type boolean, integer, float and string
+	 */
+	public function createFunction( $name, array $params );
+
+
+	/**
 	 * Creates a new sort expression.
 	 *
 	 * Available sorting operators are:
