@@ -133,9 +133,9 @@ class PropertyMatch
 	/**
 	 * Returns the product items for the given product IDs limited by the map of properties
 	 *
-	 * @param string[] List of product IDs
+	 * @param string[] $productIds List of product IDs
 	 * @param array $map Assoicative list of property types as keys and property values
-	 * @param \Aimeos\MShop\Product\Item\Iface[] Found product items
+	 * @return \Aimeos\MShop\Product\Item\Iface[] Found product items
 	 */
 	protected function getProductItems( array $productIds, array $map )
 	{

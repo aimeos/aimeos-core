@@ -117,7 +117,7 @@ class PropertyAdd
 		if( !is_array( $value ) )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
-			$value = $this->addAttributes( $value, $this->getProductItems( [$value->getProductId()] ), $types );
+			$this->addAttributes( $value, $this->getProductItems( [$value->getProductId()] ), $types );
 			return true;
 		}
 
@@ -142,7 +142,7 @@ class PropertyAdd
 	/**
 	 * Adds the product properties as attribute items to the order product item
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $product Product containing attributes
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct Order product containing attributes
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $products Product items with properties
 	 * @param string[] $types List of property types to add
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Modified order product item
@@ -183,8 +183,8 @@ class PropertyAdd
 	/**
 	 * Returns the product items for the given product IDs limited by the map of properties
 	 *
-	 * @param string[] List of product IDs
-	 * @param \Aimeos\MShop\Product\Item\Iface[] Found product items
+	 * @param string[] $productIds List of product IDs
+	 * @return \Aimeos\MShop\Product\Item\Iface[] Found product items
 	 */
 	protected function getProductItems( array $productIds )
 	{
