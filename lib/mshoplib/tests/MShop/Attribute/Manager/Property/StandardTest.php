@@ -30,14 +30,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCleanup()
 	{
-		$this->object->cleanup( array( -1 ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->cleanup( [-1] ) );
 	}
 
 
 	public function testCreateItem()
 	{
-		$item = $this->object->createItem();
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $item );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $this->object->createItem() );
 	}
 
 

@@ -121,7 +121,8 @@ class Standard
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Locale\Manager\Site\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -183,6 +184,8 @@ class Standard
 		foreach( $config->get( $path, $default ) as $domain ) {
 			\Aimeos\MAdmin::create( $context, $domain )->cleanup( $siteids );
 		}
+
+		return $this;
 	}
 
 
@@ -201,10 +204,9 @@ class Standard
 	/**
 	 * Adds a new site to the storage or updates an existing one.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item New site item for saving to the storage
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item New site item for saving to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
-	 * @throws \Aimeos\MShop\Locale\Exception
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -287,7 +289,8 @@ class Standard
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return \Aimeos\MShop\Locale\Manager\Site\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -327,7 +330,8 @@ class Standard
 		 * @see mshop/locale/manager/site/standard/newid/ansi
 		 */
 		$path = 'mshop/locale/manager/site/standard/delete';
-		$this->deleteItemsBase( $ids, $path, false );
+
+		return $this->deleteItemsBase( $ids, $path, false );
 	}
 
 
@@ -366,7 +370,7 @@ class Standard
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( $withsub = true )
 	{
@@ -380,7 +384,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -665,10 +669,10 @@ class Standard
 
 
 	/**
-	 * Creates a search object and sets base criteria.
+	 * Creates a search critera object
 	 *
-	 * @param boolean $default
-	 * @return \Aimeos\MW\Criteria\Iface
+	 * @param boolean $default Add default criteria (optional)
+	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -692,9 +696,9 @@ class Standard
 	/**
 	 * Returns a list of item IDs, that are in the path of given item ID.
 	 *
-	 * @param integer $id ID of item to get the path for
-	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface[] Associative list of items implementing \Aimeos\MShop\Locale\Item\Site\Iface with IDs as keys
+	 * @param string $id ID of item to get the path for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface[] Associative list of IDs as keys and items as values
 	 */
 	public function getPath( $id, array $ref = [] )
 	{
@@ -706,10 +710,10 @@ class Standard
 	/**
 	 * Returns a node and its descendants depending on the given resource.
 	 *
-	 * @param integer|null $id Retrieve nodes starting from the given ID
-	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
+	 * @param string|null $id Retrieve nodes starting from the given ID
+	 * @param string[] List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item, maybe with subnodes
 	 */
 	public function getTree( $id = null, array $ref = [], $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE )
 	{
@@ -748,7 +752,7 @@ class Standard
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Item which should be inserted
 	 * @param integer|null $parentId ID of the parent item where the item should be inserted into
 	 * @param integer|null $refId ID of the item where the item should be inserted before (null to append)
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface $item Updated item including the generated ID
 	 */
 	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, $parentId = null, $refId = null )
 	{
@@ -861,10 +865,11 @@ class Standard
 	/**
 	 * Moves an existing item to the new parent in the storage.
 	 *
-	 * @param integer $id ID of the item that should be moved
-	 * @param integer $oldParentId ID of the old parent item which currently contains the item that should be removed
-	 * @param integer $newParentId ID of the new parent item where the item should be moved to
-	 * @param integer|null $refId ID of the item where the item should be inserted before (null to append)
+	 * @param string $id ID of the item that should be moved
+	 * @param string $oldParentId ID of the old parent item which currently contains the item that should be removed
+	 * @param string $newParentId ID of the new parent item where the item should be moved to
+	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
+	 * @return \Aimeos\MShop\Locale\Manager\Site\Iface Manager object for chaining method calls
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{

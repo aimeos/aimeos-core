@@ -197,7 +197,8 @@ class Standard
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Order\Manager\Base\Product\Attribute\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -206,7 +207,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/order/manager/base/product/attribute/standard/delete' );
+		return $this->cleanupBase( $siteids, 'mshop/order/manager/base/product/attribute/standard/delete' );
 	}
 
 
@@ -226,7 +227,7 @@ class Standard
 	/**
 	 * Returns an item for the given ID.
 	 *
-	 * @param integer $id ID of the item that should be retrieved
+	 * @param string $id ID of the item that should be retrieved
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Returns order base product attribute item of the given id
@@ -241,7 +242,8 @@ class Standard
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return \Aimeos\MShop\Order\Manager\Base\Product\Attribute\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -276,7 +278,8 @@ class Standard
 		 * @see mshop/order/manager/base/product/attribute/standard/count/ansi
 		 */
 		$path = 'mshop/order/manager/base/product/attribute/standard/delete';
-		$this->deleteItemsBase( $ids, $path );
+
+		return $this->deleteItemsBase( $ids, $path );
 	}
 
 
@@ -284,12 +287,11 @@ class Standard
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( $withsub = true )
 	{
 		$path = 'mshop/order/manager/base/product/attribute/submanagers';
-
 		return $this->getResourceTypeBase( 'order/base/product/attribute', $path, [], $withsub );
 	}
 
@@ -298,7 +300,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attributes implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -453,10 +455,9 @@ class Standard
 	/**
 	 * Adds a new item to the storage or updates an existing one.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item New item that should
-	 * be saved to the storage
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item Item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -635,7 +636,7 @@ class Standard
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param integer|null &$total Number of items that are available in total
-	 * @return array List of products implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] List of order product attribute items
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
@@ -801,7 +802,7 @@ class Standard
 	 * Creates new order base product attribute item object initialized with given parameters.
 	 *
 	 * @param array $values Associative array of order product attribute values
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface New order product attriubte item
 	 */
 	protected function createItemBase( array $values = [] )
 	{

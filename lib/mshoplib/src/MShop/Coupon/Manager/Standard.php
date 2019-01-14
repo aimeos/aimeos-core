@@ -128,7 +128,8 @@ class Standard
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return Aimeos\MShop\Coupon\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -137,7 +138,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/coupon/manager/standard/delete' );
+		return $this->cleanupBase( $siteids, 'mshop/coupon/manager/standard/delete' );
 	}
 
 
@@ -158,7 +159,7 @@ class Standard
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( $withsub = true )
 	{
@@ -172,7 +173,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -219,8 +220,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon implementing the coupon interface
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
-	 * @throws \Aimeos\MShop\Coupon\Exception If coupon couldn't be saved
+	 * @return \Aimeos\MShop\Coupon\Item\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -395,7 +395,8 @@ class Standard
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return Aimeos\MShop\Coupon\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -430,7 +431,8 @@ class Standard
 		 * @see mshop/coupon/manager/standard/count/ansi
 		 */
 		$path = 'mshop/coupon/manager/standard/delete';
-		$this->deleteItemsBase( $ids, $path );
+
+		return $this->deleteItemsBase( $ids, $path );
 	}
 
 
@@ -647,10 +649,10 @@ class Standard
 
 
 	/**
-	 * Creates a search object and sets base criteria
+	 * Creates a search critera object
 	 *
-	 * @param boolean $default
-	 * @return \Aimeos\MW\Criteria\Iface
+	 * @param boolean $default Add default criteria (optional)
+	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -684,7 +686,7 @@ class Standard
 	 * Creates a new coupon item instance
 	 *
 	 * @param array $values Values of the coupon item from the storage
-	 * @return \Aimeos\MShop\Coupon\Item\Standard Returns a new created coupon item instance
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Returns a new created coupon item instance
 	 */
 	protected function createItemBase( array $values = [] )
 	{

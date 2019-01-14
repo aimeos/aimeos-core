@@ -26,7 +26,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon item
 	 * @param string $code Coupon code
-	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon model
+	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon provider model
 	 * @throws \Aimeos\MShop\Coupon\Exception If coupon model couldn't be found
 	 */
 	public function getProvider( \Aimeos\MShop\Coupon\Item\Iface $item, $code );

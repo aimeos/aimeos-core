@@ -29,7 +29,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Service\Item\Iface $item Delivery or payment service item object
 	 * @param string $type Service type code
-	 * @return \Aimeos\MShop\Service\Provider\Iface Returns a service provider implementing \Aimeos\MShop\Service\Provider\Iface
+	 * @return \Aimeos\MShop\Service\Provider\Iface Service provider object
 	 * @throws \Aimeos\MShop\Service\Exception If provider couldn't be found
 	 */
 	public function getProvider( \Aimeos\MShop\Service\Item\Iface $item, $type )

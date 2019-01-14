@@ -23,8 +23,8 @@ interface Iface
 	/**
 	 * Removes old entries from the storage
 	 *
-	 * @param array $siteids List of IDs for sites Whose entries should be deleted
-	 * @return null
+	 * @param string[] $siteids List of IDs for sites Whose entries should be deleted
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids );
 
@@ -47,23 +47,23 @@ interface Iface
 	/**
 	 * Deletes the item specified by its ID.
 	 *
-	 * @param mixed $id ID of the item object
-	 * @return null
+	 * @param string $id ID of the item object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItem( $id );
 
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
-	 * @return null
+	 * @param string[] $ids List of IDs
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids );
 
 	/**
 	 * Returns the item specified by its ID
 	 *
-	 * @param integer $id Id of item
+	 * @param string $id Id of item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
@@ -74,7 +74,7 @@ interface Iface
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( $withsub = true );
 
@@ -82,7 +82,7 @@ interface Iface
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of attribute items
 	 */
 	public function getSearchAttributes( $withsub = true );
 
@@ -117,9 +117,9 @@ interface Iface
 	 * Searches for all items matching the given critera.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Criteria object with conditions, sortations, etc.
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @return \Aimeos\MShop\Common\Item\Iface[] List of items
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null );
 
@@ -132,17 +132,23 @@ interface Iface
 	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object );
 
 	/**
-	 * Starts a database transaction on the connection identified by the given name.
+	 * Starts a database transaction on the connection identified by the given name
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function begin();
 
 	/**
-	 * Commits the running database transaction on the connection identified by the given name.
+	 * Commits the running database transaction on the connection identified by the given name
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function commit();
 
 	/**
-	 * Rolls back the running database transaction on the connection identified by the given name.
+	 * Rolls back the running database transaction on the connection identified by the given name
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function rollback();
 }

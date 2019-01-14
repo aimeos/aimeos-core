@@ -194,18 +194,17 @@ class Standard
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Product\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/product/manager/submanagers';
-		$default = ['lists', 'property', 'type'];
-
-		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, ['lists', 'property', 'type'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/product/manager/standard/delete' );
+		return $this->cleanupBase( $siteids, 'mshop/product/manager/standard/delete' );
 	}
 
 
@@ -260,7 +259,8 @@ class Standard
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return \Aimeos\MShop\Product\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -295,7 +295,8 @@ class Standard
 		 * @see mshop/product/manager/standard/count/ansi
 		 */
 		$path = 'mshop/product/manager/standard/delete';
-		$this->deleteItemsBase( $ids, $path );
+
+		return $this->deleteItemsBase( $ids, $path );
 	}
 
 
@@ -318,7 +319,7 @@ class Standard
 	/**
 	 * Returns the product item for the given product ID.
 	 *
-	 * @param integer $id Unique ID of the product item
+	 * @param string $id Unique ID of the product item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Product\Item\Iface Returns the product item of the given id
@@ -334,14 +335,12 @@ class Standard
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( $withsub = true )
 	{
 		$path = 'mshop/product/manager/submanagers';
-		$default = ['lists', 'property'];
-
-		return $this->getResourceTypeBase( 'product', $path, $default, $withsub );
+		return $this->getResourceTypeBase( 'product', $path, ['lists', 'property'], $withsub );
 	}
 
 
@@ -349,7 +348,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -393,9 +392,9 @@ class Standard
 	/**
 	 * Adds a new product to the storage.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Product item that should be saved to the storage
+	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\MShop\Product\Item\Iface Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{

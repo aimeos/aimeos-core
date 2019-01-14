@@ -105,6 +105,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Shopping basket
 	 * @param string $type Order type if a customer can have more than one order at once
+	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
 	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, $type = 'default' )
 	{
@@ -117,6 +118,8 @@ abstract class Base
 		$key = 'aimeos/basket/content-' . $sitecode . '-' . $language . '-' . $currency . '-' . strval( $type );
 
 		$session->set( $key, serialize( clone $order ) );
+
+		return $this;
 	}
 
 
@@ -126,7 +129,7 @@ abstract class Base
 	 *
 	 * @param integer $lock Lock value (@see \Aimeos\MShop\Order\Manager\Base\Base)
 	 * @param string $type Order type if a customer can have more than one order at once
-	 * @throws \Aimeos\MShop\Order\Exception if the lock value is invalid
+	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
 	public function setSessionLock( $lock, $type = 'default' )
 	{
@@ -141,6 +144,8 @@ abstract class Base
 		$key = 'aimeos/basket/lock-' . $sitecode . '-' . $language . '-' . $currency . '-' . strval( $type );
 
 		$session->set( $key, strval( $lock ) );
+
+		return $this;
 	}
 
 
@@ -583,6 +588,7 @@ abstract class Base
 	 * Saves the ordered products to the storage.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing ordered products or bundles
+	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
 	protected function storeProducts( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
@@ -632,6 +638,8 @@ abstract class Base
 				}
 			}
 		}
+
+		return $this;
 	}
 
 
@@ -639,6 +647,7 @@ abstract class Base
 	 * Saves the addresses of the order to the storage.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing address items
+	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
 	protected function storeAddresses( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
@@ -650,6 +659,8 @@ abstract class Base
 			$item->setType( $type );
 			$manager->saveItem( $item );
 		}
+
+		return $this;
 	}
 
 
@@ -657,6 +668,7 @@ abstract class Base
 	 * Saves the coupons of the order to the storage.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing coupon items
+	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
 	protected function storeCoupons( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
@@ -683,6 +695,8 @@ abstract class Base
 				$manager->saveItem( $item );
 			}
 		}
+
+		return $this;
 	}
 
 
@@ -690,6 +704,7 @@ abstract class Base
 	 * Saves the services of the order to the storage.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing service items
+	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
 	protected function storeServices( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
@@ -714,5 +729,7 @@ abstract class Base
 				}
 			}
 		}
+
+		return $this;
 	}
 }

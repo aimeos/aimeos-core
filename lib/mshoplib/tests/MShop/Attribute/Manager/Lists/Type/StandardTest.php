@@ -34,22 +34,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCleanup()
 	{
-		$this->object->cleanup( array( -1 ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->cleanup( [-1] ) );
 	}
 
 
 	public function testGetResourceType()
 	{
-		$result = $this->object->getResourceType();
-
-		$this->assertContains( 'attribute/lists/type', $result );
+		$this->assertContains( 'attribute/lists/type', $this->object->getResourceType() );
 	}
 
 
 	public function testCreateItem()
 	{
-		$item = $this->object->createItem();
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $this->object->createItem() );
 	}
 
 

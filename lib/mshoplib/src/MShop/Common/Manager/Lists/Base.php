@@ -162,18 +162,19 @@ abstract class Base
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return Aimeos\MShop\Common\Manager\Lists\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->deleteItemsBase( $ids, $this->getConfigPath() . 'delete' );
+		return $this->deleteItemsBase( $ids, $this->getConfigPath() . 'delete' );
 	}
 
 
 	/**
 	 * Creates common list item object for the given common list item id.
 	 *
-	 * @param integer $id Id of common list item object
+	 * @param string $id Id of common list item object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Returns common list item object of the given id
@@ -207,8 +208,9 @@ abstract class Base
 	 * Moves the common list item object with Id in the list of Id's before the
 	 * common list item object with reference Id of the given node.
 	 *
-	 * @param integer $id Id of the item which should be moved
-	 * @param integer|null $ref Id where the given Id should be inserted before (null for appending)
+	 * @param string $id Id of the item which should be moved
+	 * @param string|null $ref Id where the given Id should be inserted before (null for appending)
+	 * @return Aimeos\MShop\Common\Manager\Lists\Iface Manager object for chaining method calls
 	 */
 	public function moveItem( $id, $ref = null )
 	{
@@ -311,6 +313,8 @@ abstract class Base
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
+
+		return $this;
 	}
 
 
@@ -369,10 +373,10 @@ abstract class Base
 
 
 	/**
-	 * Creates a search object including the base criteria (optionally).
+	 * Creates a search object including the base criteria (optional)
 	 *
 	 * @param boolean $default Include default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Critera object
+	 * @return \Aimeos\MW\Criteria\Iface Search critera object
 	 */
 	public function createSearch( $default = false )
 	{

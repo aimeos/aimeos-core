@@ -262,7 +262,8 @@ class Standard extends Base
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -273,7 +274,7 @@ class Standard extends Base
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/order/manager/base/standard/delete' );
+		return $this->cleanupBase( $siteids, 'mshop/order/manager/base/standard/delete' );
 	}
 
 
@@ -300,10 +301,10 @@ class Standard extends Base
 
 
 	/**
-	 * Creates a search object
+	 * Creates a search critera object
 	 *
-	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Criteria\Iface
+	 * @param boolean $default Add default criteria (optional)
+	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -326,7 +327,8 @@ class Standard extends Base
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -361,14 +363,15 @@ class Standard extends Base
 		 * @see mshop/order/manager/base/standard/count/ansi
 		 */
 		$path = 'mshop/order/manager/base/standard/delete';
-		$this->deleteItemsBase( $ids, $path );
+
+		return $this->deleteItemsBase( $ids, $path );
 	}
 
 
 	/**
 	 * Returns the order base item specified by the given ID.
 	 *
-	 * @param integer $id Unique id of the order base
+	 * @param string $id Unique id of the order base
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Returns Order base item of the given id
@@ -384,13 +387,12 @@ class Standard extends Base
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( $withsub = true )
 	{
 		$path = 'mshop/order/manager/base/submanagers';
-
-		return $this->getResourceTypeBase( 'order/base', $path, array( 'address', 'coupon', 'product', 'service' ), $withsub );
+		return $this->getResourceTypeBase( 'order/base', $path, ['address', 'coupon', 'product', 'service'], $withsub );
 	}
 
 
@@ -398,7 +400,7 @@ class Standard extends Base
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -554,9 +556,9 @@ class Standard extends Base
 	/**
 	 * Adds or updates an order base item in the storage.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Order base object (sub-items are not saved)
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $item Order base object (sub-items are not saved)
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -915,7 +917,7 @@ class Standard extends Base
 	 * If the last parameter is ture, the items will be marked as new and
 	 * modified so an additional order is stored when the basket is saved.
 	 *
-	 * @param integer $id Base ID of the order to load
+	 * @param string $id Base ID of the order to load
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @param boolean $fresh Create a new basket by copying the existing one and remove IDs
 	 * @param boolean $default True to use default criteria, false for no limitation

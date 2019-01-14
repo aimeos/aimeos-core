@@ -69,7 +69,7 @@ abstract class Base
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Criteria object
+	 * @return \Aimeos\MW\Criteria\Iface Search criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -155,7 +155,8 @@ abstract class Base
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return Aimeos\MShop\Common\Manager\Type\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -186,7 +187,7 @@ abstract class Base
 	/**
 	 * Returns the type item specified by its ID
 	 *
-	 * @param integer $id ID of type item object
+	 * @param string $id ID of type item object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Returns the type item of the given ID
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found

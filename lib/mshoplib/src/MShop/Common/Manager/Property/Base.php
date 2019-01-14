@@ -164,7 +164,8 @@ abstract class Base
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return Aimeos\MShop\Common\Manager\Property\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -175,7 +176,7 @@ abstract class Base
 	/**
 	 * Returns product property item with given Id.
 	 *
-	 * @param integer $id Id of the product property item
+	 * @param string $id Id of the product property item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface Returns the product property item of the given id
@@ -274,7 +275,6 @@ abstract class Base
 	protected function createItemBase( array $values = [] )
 	{
 		$values['languageid'] = $this->languageId;
-
 		return new \Aimeos\MShop\Common\Item\Property\Standard( $this->prefix, $values );
 	}
 

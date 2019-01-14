@@ -87,7 +87,8 @@ class Standard
 	/**
 	 * Removes multiple items from the index.
 	 *
-	 * @param array $ids list of product IDs
+	 * @param string[] $ids list of product IDs
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -96,6 +97,8 @@ class Standard
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->deleteItems( $ids );
 		}
+
+		return $this;
 	}
 
 
@@ -115,7 +118,7 @@ class Standard
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -128,9 +131,7 @@ class Standard
 		 */
 		$path = 'mshop/index/manager/submanagers';
 
-		$list += $this->getSearchAttributesBase( [], $path, [], $withsub );
-
-		return $list;
+		return $list + $this->getSearchAttributesBase( [], $path, [], $withsub );
 	}
 
 
@@ -151,6 +152,8 @@ class Standard
 	 * Optimizes the index if necessary.
 	 * Execution of this operation can take a very long time and shouldn't be
 	 * called through a web server enviroment.
+	 *
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function optimize()
 	{
@@ -179,20 +182,23 @@ class Standard
 		 * @see mshop/index/manager/standard/search/ansi
 		 * @see mshop/index/manager/standard/aggregate/ansi
 		 */
-		$this->optimizeBase( 'mshop/index/manager/standard/optimize' );
+		return $this->optimizeBase( 'mshop/index/manager/standard/optimize' );
 	}
 
 
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	* @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->cleanup( $siteids );
 		}
+
+		return $this;
 	}
 
 
@@ -201,12 +207,15 @@ class Standard
 	 * This can be a long lasting operation.
 	 *
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanupIndex( $timestamp )
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->cleanupIndex( $timestamp );
 		}
+
+		return $this;
 	}
 
 
@@ -215,6 +224,7 @@ class Standard
 	 * This can be a long lasting operation.
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function rebuildIndex( array $items = [] )
 	{
@@ -353,15 +363,17 @@ class Standard
 			$start += $size;
 		}
 		while( count( $result ) > 0 );
+
+		return $this;
 	}
 
 
 	/**
 	 * Stores a new item in the index.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Product item
+	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\MShop\Product\Item\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{

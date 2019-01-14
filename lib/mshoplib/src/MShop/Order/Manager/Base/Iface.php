@@ -42,7 +42,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Shopping basket
 	 * @param string $type Order type if a customer can have more than one order at once
-	 * @return null
+	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
 	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, $type = 'default' );
 
@@ -52,8 +52,7 @@ interface Iface
 	 *
 	 * @param integer $lock Lock value (@see \Aimeos\MShop\Order\Manager\Base\Base)
 	 * @param string $type Order type if a customer can have more than one order at once
-	 * @return null
-	 * @throws \Aimeos\MShop\Order\Exception if the lock value is invalid
+	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
 	public function setSessionLock( $lock, $type = 'default' );
 
@@ -62,7 +61,7 @@ interface Iface
 	 * If the last parameter is ture, the items will be marked as new and
 	 * modified so an additional order is stored when the basket is saved.
 	 *
-	 * @param integer $baseId Base ID of the order to load
+	 * @param string $baseId Base ID of the order to load
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @param boolean $fresh Create a new basket by copying the existing one and remove IDs
 	 * @param boolean $default True to use default criteria, false for no limitation

@@ -68,7 +68,8 @@ abstract class Base
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @param Aimeos\MShop\Common\Manager\Address\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{

@@ -311,7 +311,8 @@ class Standard
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Order\Manager\Base\Address\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -320,7 +321,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/order/manager/base/address/standard/delete' );
+		return $this->cleanupBase( $siteids, 'mshop/order/manager/base/address/standard/delete' );
 	}
 
 
@@ -340,7 +341,8 @@ class Standard
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return \Aimeos\MShop\Order\Manager\Base\Address\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -375,14 +377,15 @@ class Standard
 		 * @see mshop/order/manager/base/address/standard/count/ansi
 		 */
 		$path = 'mshop/order/manager/base/address/standard/delete';
-		$this->deleteItemsBase( $ids, $path );
+
+		return $this->deleteItemsBase( $ids, $path );
 	}
 
 
 	/**
 	 * Creates a order base address item object for the given item id.
 	 *
-	 * @param integer $id Id of the order base address item
+	 * @param string $id Id of the order base address item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Returns order base address item of the given id
@@ -398,12 +401,11 @@ class Standard
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( $withsub = true )
 	{
 		$path = 'mshop/order/manager/base/address/submanagers';
-
 		return $this->getResourceTypeBase( 'order/base/address', $path, [], $withsub );
 	}
 
@@ -412,7 +414,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -571,7 +573,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $item order address item which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -927,9 +929,8 @@ class Standard
 	/**
 	 * Creates new order base address item object.
 	 *
-	 * @see \Aimeos\MShop\Order\Item\Base\Address\Standard Default order base address item
 	 * @param array $values Possible optional array keys can be given: id, type, firstname, lastname
-	 * @return \Aimeos\MShop\Order\Item\Base\Address\Standard New order base address item object
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface New order base address item object
 	 */
 	protected function createItemBase( array $values = [] )
 	{

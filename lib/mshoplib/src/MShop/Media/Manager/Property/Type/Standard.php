@@ -114,7 +114,8 @@ class Standard
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Media\Manager\Property\Type\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -123,7 +124,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/media/manager/property/type/standard/delete' );
+		return $this->cleanupBase( $siteids, 'mshop/media/manager/property/type/standard/delete' );
 	}
 
 
@@ -131,12 +132,11 @@ class Standard
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( $withsub = true )
 	{
 		$path = 'mshop/media/manager/property/type/submanagers';
-
 		return $this->getResourceTypeBase( 'media/property/type', $path, [], $withsub );
 	}
 
@@ -145,7 +145,7 @@ class Standard
 	 * Returns the medias that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also medias of sub-managers if true
-	 * @return array List of media items implementing \Aimeos\MW\Criteria\Media\Iface
+	 * @return \Aimeos\MW\Criteria\Attriubte\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{

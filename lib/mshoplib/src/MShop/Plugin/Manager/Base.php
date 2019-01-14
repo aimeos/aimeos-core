@@ -96,6 +96,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $publisher Publisher object
 	 * @param string $type Unique plugin type code
+	 * @return \Aimeos\MShop\Plugin\Manager\Iface Manager object for chaining method calls
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $publisher, $type )
 	{
@@ -121,6 +122,8 @@ abstract class Base
 		foreach( $this->plugins[$type] as $plugin ) {
 			$plugin->register( $publisher );
 		}
+
+		return $this;
 	}
 
 

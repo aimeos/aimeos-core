@@ -36,13 +36,16 @@ abstract class DBBase
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->cleanup( $siteids );
 		}
+
+		return $this;
 	}
 
 
@@ -89,7 +92,7 @@ abstract class DBBase
 	/**
 	 * Returns the product item for the given ID
 	 *
-	 * @param integer $id Id of item
+	 * @param string $id Id of item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item object
@@ -115,22 +118,25 @@ abstract class DBBase
 	/**
 	 * Rebuilds the customer index
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $items Associative list of product IDs and items implementing \Aimeos\MShop\Product\Item\Iface
+	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs and items values
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function rebuildIndex( array $items = [] )
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuildIndex( $items );
 		}
+
+		return $this;
 	}
 
 
 	/**
 	 * Stores a new item into the index
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Product item
+	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
 	 * @param boolean $fetch True if the new ID should be set in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Saved item
+	 * @return \Aimeos\MShop\Product\Item\Iface Saved item
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -141,9 +147,9 @@ abstract class DBBase
 	/**
 	 * Adds or updates a list of items
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $items List of items whose data should be saved
+	 * @param \Aimeos\MShop\Product\Item\Iface[] $items List of items whose data should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface[] Saved items
+	 * @return \Aimeos\MShop\Product\Item\Iface[] Saved items
 	 */
 	public function saveItems( array $items, $fetch = true )
 	{
@@ -156,6 +162,7 @@ abstract class DBBase
 	 *
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
 	 * @param string $path Configuration path to the SQL statement to execute
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function cleanupIndexBase( $timestamp, $path )
 	{
@@ -192,6 +199,8 @@ abstract class DBBase
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->cleanupIndex( $timestamp );
 		}
+
+		return $this;
 	}
 
 
@@ -202,6 +211,7 @@ abstract class DBBase
 	 * @param string $path Configuration path to the SQL statement to execute
 	 * @param boolean $siteidcheck If siteid should be used in the statement
 	 * @param string $name Name of the ID column
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function deleteItemsBase( array $ids, $path, $siteidcheck = true, $name = 'prodid' )
 	{
@@ -211,7 +221,7 @@ abstract class DBBase
 			$submanager->deleteItems( $ids );
 		}
 
-		parent::deleteItemsBase( $ids, $path, $siteidcheck, $name );
+		return parent::deleteItemsBase( $ids, $path, $siteidcheck, $name );
 	}
 
 
@@ -268,6 +278,7 @@ abstract class DBBase
 	 * Optimizes the catalog customer index if necessary
 	 *
 	 * @param string $path Configuration path to the SQL statements to execute
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	protected function optimizeBase( $path )
 	{
@@ -294,6 +305,8 @@ abstract class DBBase
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->optimize();
 		}
+
+		return $this;
 	}
 
 

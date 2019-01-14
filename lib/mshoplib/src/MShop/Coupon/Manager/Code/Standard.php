@@ -129,7 +129,8 @@ class Standard
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -138,7 +139,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/coupon/manager/code/standard/delete' );
+		return $this->cleanupBase( $siteids, 'mshop/coupon/manager/code/standard/delete' );
 	}
 
 
@@ -283,12 +284,11 @@ class Standard
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	public function getResourceType( $withsub = true )
 	{
 		$path = 'mshop/coupon/manager/code/submanagers';
-
 		return $this->getResourceTypeBase( 'coupon/code', $path, [], $withsub );
 	}
 
@@ -343,7 +343,7 @@ class Standard
 	/**
 	 * Returns the coupon code object specified by its ID.
 	 *
-	 * @param integer $id Unique ID of the coupon code in the storage
+	 * @param string $id Unique ID of the coupon code in the storage
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code object
@@ -360,8 +360,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Coupon\Item\Code\Iface $item Coupon code object
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
-	 * @throws \Aimeos\MShop\Coupon\Exception If coupon couldn't be saved
+	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -539,7 +538,8 @@ class Standard
 	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
+	 * @return Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -575,7 +575,8 @@ class Standard
 		 * @see mshop/coupon/manager/code/standard/counter/ansi
 		 */
 		$path = 'mshop/coupon/manager/code/standard/delete';
-		$this->deleteItemsBase( $ids, $path );
+
+		return $this->deleteItemsBase( $ids, $path );
 	}
 
 
@@ -744,10 +745,11 @@ class Standard
 	 *
 	 * @param string $code Unique code of a coupon
 	 * @param integer $amount Amount the coupon count should be decreased
+	 * @return Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
 	public function decrease( $code, $amount )
 	{
-		$this->increase( $code, -$amount );
+		return $this->increase( $code, -$amount );
 	}
 
 
@@ -757,6 +759,7 @@ class Standard
 	 *
 	 * @param string $code Unique code of a coupon
 	 * @param integer $amount Amount the coupon count should be increased
+	 * @return Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
 	public function increase( $code, $amount )
 	{
@@ -819,6 +822,8 @@ class Standard
 			$stmt->bind( 4, $code );
 
 			$stmt->execute()->finish();
+
+			$dbm->release( $conn, $dbname );
 		}
 		catch( \Exception $e )
 		{
@@ -826,7 +831,7 @@ class Standard
 			throw $e;
 		}
 
-		$dbm->release( $conn, $dbname );
+		return $this;
 	}
 
 
@@ -845,10 +850,10 @@ class Standard
 
 
 	/**
-	 * creates a search object and sets base criteria
+	 * Creates a search critera object
 	 *
-	 * @param boolean $default
-	 * @return \Aimeos\MW\Criteria\Iface
+	 * @param boolean $default Add default criteria (optional)
+	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
 	public function createSearch( $default = false )
 	{

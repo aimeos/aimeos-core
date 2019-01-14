@@ -25,7 +25,7 @@ interface Iface
 	 *
 	 * @param array $codeqty Associative list of product codes as keys and quantities as values
 	 * @param string $type Unique code of the stock type
-	 * @return void
+	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
 	public function decrease( array $codeqty, $type = 'default' );
 
@@ -34,6 +34,7 @@ interface Iface
 	 *
 	 * @param array $codeqty Associative list of product codes as keys and quantities as values
 	 * @param string $type Unique code of the type
+	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
 	public function increase( array $codeqty, $type = 'default' );
 }

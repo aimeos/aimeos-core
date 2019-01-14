@@ -33,6 +33,7 @@ interface Iface extends \Aimeos\MShop\Common\Manager\Iface
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $publisher Publisher object
 	 * @param string $type Plugin type code
+	 * @return \Aimeos\MShop\Plugin\Manager\Iface Manager object for chaining method calls
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $publisher, $type );
 }

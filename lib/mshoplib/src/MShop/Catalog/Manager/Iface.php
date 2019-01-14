@@ -60,7 +60,7 @@ interface Iface
 	 * @param string $oldParentId ID of the old parent item which currently contains the item that should be removed
 	 * @param string $newParentId ID of the new parent item where the item should be moved to
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
-	 * @return void
+	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null );
 }
