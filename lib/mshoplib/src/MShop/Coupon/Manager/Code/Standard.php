@@ -130,7 +130,7 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
-	 * @return Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -539,7 +539,7 @@ class Standard
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param string[] $ids List of IDs
-	 * @return Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -745,7 +745,7 @@ class Standard
 	 *
 	 * @param string $code Unique code of a coupon
 	 * @param integer $amount Amount the coupon count should be decreased
-	 * @return Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
 	public function decrease( $code, $amount )
 	{
@@ -759,7 +759,7 @@ class Standard
 	 *
 	 * @param string $code Unique code of a coupon
 	 * @param integer $amount Amount the coupon count should be increased
-	 * @return Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
 	public function increase( $code, $amount )
 	{

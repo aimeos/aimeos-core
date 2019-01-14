@@ -26,7 +26,7 @@ interface Iface
 	 *
 	 * @param string $couponCode Unique code of a coupon
 	 * @param integer $amount Amount the coupon count should be decreased
-	 * @return Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
 	public function decrease( $couponCode, $amount );
 
@@ -36,7 +36,7 @@ interface Iface
 	 *
 	 * @param string $couponCode Unique code of a coupon
 	 * @param integer $amount Amount the coupon count should be increased
-	 * @return Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
 	public function increase( $couponCode, $amount );
 }

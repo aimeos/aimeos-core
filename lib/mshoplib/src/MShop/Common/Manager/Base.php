@@ -56,7 +56,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
@@ -266,7 +266,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param array $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @param string $cfgpath Configuration key to the cleanup statement
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
@@ -506,7 +506,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * Returns the item for the given search key and ID.
 	 *
 	 * @param string $key Search key for the requested ID
-	 * @param integer $id Unique ID to search for
+	 * @param string $id Unique ID to search for
 	 * @param string[] $ref List of domains whose items should be fetched too
 	 * @param boolean $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
@@ -796,7 +796,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Deletes items specified by its IDs.
 	 *
-	 * @param array $ids List of IDs
+	 * @param string[] $ids List of IDs
 	 * @param string $cfgpath Configuration path to the SQL statement
 	 * @param boolean $siteidcheck If siteid should be used in the statement
 	 * @param string $name Name of the ID column

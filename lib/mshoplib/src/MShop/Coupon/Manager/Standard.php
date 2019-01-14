@@ -129,7 +129,7 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
-	 * @return Aimeos\MShop\Coupon\Manager\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Coupon\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -396,7 +396,7 @@ class Standard
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param string[] $ids List of IDs
-	 * @return Aimeos\MShop\Coupon\Manager\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Coupon\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{

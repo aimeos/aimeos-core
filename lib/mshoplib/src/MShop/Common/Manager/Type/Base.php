@@ -156,7 +156,7 @@ abstract class Base
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param string[] $ids List of IDs
-	 * @return Aimeos\MShop\Common\Manager\Type\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Common\Manager\Type\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{

@@ -163,7 +163,7 @@ abstract class Base
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param string[] $ids List of IDs
-	 * @return Aimeos\MShop\Common\Manager\Lists\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Common\Manager\Lists\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -210,7 +210,7 @@ abstract class Base
 	 *
 	 * @param string $id Id of the item which should be moved
 	 * @param string|null $ref Id where the given Id should be inserted before (null for appending)
-	 * @return Aimeos\MShop\Common\Manager\Lists\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Common\Manager\Lists\Iface Manager object for chaining method calls
 	 */
 	public function moveItem( $id, $ref = null )
 	{

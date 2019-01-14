@@ -56,7 +56,7 @@ abstract class Base
 	 * Removes old entries from the storage
 	 *
 	 * @param string[] $siteids List of IDs for sites Whose entries should be deleted
-	 * @return Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -93,7 +93,7 @@ abstract class Base
 	 * Deletes the item specified by its ID.
 	 *
 	 * @param string $id ID of the item object
-	 * @return Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItem( $id )
 	{
@@ -106,7 +106,7 @@ abstract class Base
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param string[] $ids List of IDs
-	 * @return Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -240,7 +240,7 @@ abstract class Base
 	/**
 	 * Starts a database transaction on the connection identified by the given name
 	 *
-	 * @return Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function begin()
 	{
@@ -252,7 +252,7 @@ abstract class Base
 	/**
 	 * Commits the running database transaction on the connection identified by the given name
 	 *
-	 * @return Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function commit()
 	{
@@ -264,7 +264,7 @@ abstract class Base
 	/**
 	 * Rolls back the running database transaction on the connection identified by the given name
 	 *
-	 * @return Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function rollback()
 	{
