@@ -48,6 +48,7 @@ class PgSQL extends \Aimeos\MW\Criteria\Expression\Compare\SQL
 				if( $operator === '=~' ) {
 					$value = '\'' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->getConnection()->escape( $value ) ) . '%\''; break;
 				}
+				// all other operators: escape in default case
 			default:
 				$value = '\'' . $this->getConnection()->escape( $value ) . '\'';
 		}

@@ -173,7 +173,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 					$manager = \Aimeos\MShop::create( $context, 'attribute' );
 					$refItem = $manager->findItem( $refItem->getCode(), [], $domain, $refItem->getType() );
 				}
-				catch( \Aimeos\MShop\Exception $e ) {}
+				catch( \Aimeos\MShop\Exception $e ) { ; } // attribute doesn't exist yet
 
 				$refItem = $this->addRefItems( $refItem, $data );
 				$item->addListItem( 'attribute', $listItem, $refItem );

@@ -232,10 +232,10 @@ abstract class Base
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Default price of the basket (usually 0.00)
 	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Locale item containing the site, language and currency
 	 * @param array $values Associative list of key/value pairs containing, e.g. the order or user ID
-	 * @param array $products List of ordered products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
-	 * @param array $addresses List of order addresses implementing \Aimeos\MShop\Order\Item\Base\Address\Iface
-	 * @param array $services List of order services implementing \Aimeos\MShop\Order\Item\Base\Service\Iface
-	 * @param array $coupons Associative list of coupon codes as keys and ordered products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface as values
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of ordered product items
+	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface[] $addresses List of order address items
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface[] $services List of order serviceitems
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $coupons Associative list of coupon codes as keys and items as values
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base object
 	 */
 	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
@@ -299,7 +299,7 @@ abstract class Base
 
 		foreach( $manager->searchItems( $criteria ) as $item )
 		{
-			if( !isset( $items[$item->getCode()] ) ) {
+			if( !isset( $map[$item->getBaseId()][$item->getCode()] ) ) {
 				$map[$item->getBaseId()][$item->getCode()] = [];
 			}
 
@@ -315,7 +315,7 @@ abstract class Base
 	/**
 	 * Retrieves the ordered products from the storage.
 	 *
-	 * @param array $baseIds List of order base IDs
+	 * @param string[] $baseIds List of order base IDs
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return array Multi-dimensional associative list of order base IDs as keys and order product
 	 *	IDs/items pairs in reversed order as values
@@ -385,7 +385,7 @@ abstract class Base
 	/**
 	 * Retrieves the order services from the storage.
 	 *
-	 * @param array $baseIds List of order base IDs
+	 * @param string[] $baseIds List of order base IDs
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return array Multi-dimensional associative list of order base IDs as keys and service type/items pairs as values
 	 */
@@ -423,7 +423,7 @@ abstract class Base
 	/**
 	 * Load the basket item for the given ID.
 	 *
-	 * @param integer $id Unique order base ID
+	 * @param string $id Unique order base ID
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object with total order value
 	 * @param \Aimeos\MShop\Locale\Item\Iface $localeItem Locale object of the order
 	 * @param array $row Array of values with all relevant order information
@@ -462,7 +462,7 @@ abstract class Base
 	/**
 	 * Create a new basket item as a clone from an existing order ID.
 	 *
-	 * @param integer $id Unique order base ID
+	 * @param string $id Unique order base ID
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object with total order value
 	 * @param \Aimeos\MShop\Locale\Item\Iface $localeItem Locale object of the order
 	 * @param array $row Array of values with all relevant order information
@@ -509,9 +509,9 @@ abstract class Base
 	/**
 	 * Retrieves the addresses of the order from the storage.
 	 *
-	 * @param integer $id Order base ID
+	 * @param string $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Address\Iface
+	 * @return \Aimeos\MShop\Order\Item\Address\Iface[] List of order address items
 	 */
 	protected function loadAddresses( $id, $fresh )
 	{
@@ -528,11 +528,11 @@ abstract class Base
 	/**
 	 * Retrieves the coupons of the order from the storage.
 	 *
-	 * @param integer $id Order base ID
+	 * @param string $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @param array Multi-dimensional associative list of order base IDs as keys and order product
+	 * @param array $products Multi-dimensional associative list of order base IDs as keys and order product
 	 *	IDs/items pairs in reversed order as values
-	 * @return array Associative list of coupon codes as keys and items implementing \Aimeos\MShop\Order\Item\Product\Iface
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface[] Associative list of coupon codes as keys and items as values
 	 */
 	protected function loadCoupons( $id, $fresh, array $products )
 	{
@@ -549,7 +549,7 @@ abstract class Base
 	/**
 	 * Retrieves the ordered products from the storage.
 	 *
-	 * @param integer $id Order base ID
+	 * @param string $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return \Aimeos\MShop\Order\Item\Product\Iface[] List of product items
 	 */
@@ -568,9 +568,9 @@ abstract class Base
 	/**
 	 * Retrieves the services of the order from the storage.
 	 *
-	 * @param integer $id Order base ID
+	 * @param string $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Service\Iface
+	 * @return \Aimeos\MShop\Order\Item\Service\Iface[] List of order service items
 	 */
 	protected function loadServices( $id, $fresh )
 	{

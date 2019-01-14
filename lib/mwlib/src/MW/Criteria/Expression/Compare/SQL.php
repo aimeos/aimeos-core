@@ -177,6 +177,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 				if( $operator === '=~' ) {
 					$value = '\'' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->conn->escape( $value ) ) . '%\''; break;
 				}
+				// all other operators: escape in default case
 			default:
 				$value = '\'' . $this->conn->escape( $value ) . '\'';
 		}

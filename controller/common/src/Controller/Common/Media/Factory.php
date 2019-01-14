@@ -84,7 +84,8 @@ class Factory
 			$name = $context->getConfig()->get( 'controller/common/media/name', 'Standard' );
 		}
 
-		if( ctype_alnum( $name ) === false ) {
+		if( ctype_alnum( $name ) === false )
+		{
 			$classname = is_string( $name ) ? '\Aimeos\Controller\Common\Media\\' . $name : '<not a string>';
 			throw new \Aimeos\Controller\Common\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
@@ -103,7 +104,7 @@ class Factory
 		$controller = new $classname( $context );
 
 		if( !( $controller instanceof $iface ) ) {
-			throw new \Aimeos\Controller\Common\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
+			throw new \Aimeos\Controller\Common\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 		}
 
 		return $controller;

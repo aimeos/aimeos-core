@@ -131,6 +131,7 @@ class SQL
 				if( $operator == '~=' ) {
 					$value = '\'%' . $this->conn->escape( $value ) . '%\''; break;
 				}
+				// all other operators: escape in default case
 			default:
 				$value = '\'' . $this->conn->escape( $value ) . '\'';
 		}

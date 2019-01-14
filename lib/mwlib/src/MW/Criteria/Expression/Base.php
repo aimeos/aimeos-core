@@ -130,7 +130,7 @@ abstract class Base
 	 * @param array $list Multi-dimensional associative array of values including positional parameter, e.g. "$1"
 	 * @param array $find List of strings to search for, e.g. ['$1', '$2']
 	 * @param array $replace List of strings to replace by, e.g. ['val1', 'val2']
-	 * @return Multi-dimensional associative array with parameters replaced
+	 * @return array Multi-dimensional associative array with parameters replaced
 	 */
 	protected function replaceParameter( array $list, array $find, array $replace )
 	{

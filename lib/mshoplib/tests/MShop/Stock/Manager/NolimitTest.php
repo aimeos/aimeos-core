@@ -65,7 +65,7 @@ class NolimitTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$expr[] = $search->compare( '==', 'stock.productcode', ['abc', 'def', 'ghi'] );
+		$expr = [$search->compare( '==', 'stock.productcode', ['abc', 'def', 'ghi'] )];
 
 		$search->setConditions( $search->compare( '==', 'stock.productcode', ['abc', 'def', 'ghi'] ) );
 		$search->setSlice( 0, 2 );

@@ -97,6 +97,7 @@ class CSV
 	 */
 	public function add( $data )
 	{
+		$list = [];
 		$data = (array) $data;
 		$max = max( array_keys( $data ) );
 		$enclosure = $this->enclosure;
