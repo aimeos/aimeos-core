@@ -155,8 +155,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsNoId()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( \TestHelperMShop::getContext() );
-
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '!=', 'index.attribute.id', null ) );
 		$result = $this->object->searchItems( $search, [] );

@@ -54,7 +54,6 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		}
 
 
-		$item = null;
 		$manager = \Aimeos\MShop::create( $context, 'catalog' );
 
 		try

@@ -621,11 +621,7 @@ abstract class Base
 		if( ( $listItem = $item->getListItem( 'service', 'default', $serviceId, false ) ) === null )
 		{
 			$listManager = \Aimeos\MShop::create( $this->getContext(), 'customer/lists' );
-			$listTypeManager = \Aimeos\MShop::create( $this->getContext(), 'customer/lists/type' );
-
-			$listItem = $listManager->createItem();
-			$listItem->setType( 'default' );
-			$listItem->setRefId( $serviceId );
+			$listItem = $listManager->createItem()->setType( 'default' )->setRefId( $serviceId );
 		}
 
 		$listItem->setConfig( array_merge( $listItem->getConfig(), [$type => $data] ) );

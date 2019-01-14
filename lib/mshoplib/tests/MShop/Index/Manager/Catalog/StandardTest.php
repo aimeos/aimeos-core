@@ -139,7 +139,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$catItem = $catalogManager->findItem( 'cafe' );
-		$catNewItem = $catalogManager->findItem( 'new' );
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catItem->getId() ) ); // catalog ID
@@ -151,8 +150,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsNoId()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( \TestHelperMShop::getContext() );
-
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '!=', 'index.catalog.id', null ) ); // catalog ID
 		$result = $this->object->searchItems( $search, [] );

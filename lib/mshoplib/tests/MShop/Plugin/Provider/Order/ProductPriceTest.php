@@ -128,20 +128,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateSelectionPriceUpdated()
 	{
 		$productManager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'product' );
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
-		$result = $productManager->searchItems( $search, array( 'price' ) );
-
-		if( ( $productItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No product found' );
-		}
-
-		$refPrices = $productItem->getRefItems( 'price', 'default', 'default' );
-
-		if( ( $productPrice = reset( $refPrices ) ) === false ) {
-			throw new \RuntimeException( 'No product price available' );
-		}
-
+		$productItem = $productManager->findItem( 'U:TEST' );
 
 		$orderProduct = $this->order->getProduct( 0 );
 		$orderProduct->setProductId( $productItem->getId() );

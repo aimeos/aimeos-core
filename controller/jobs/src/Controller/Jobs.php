@@ -126,7 +126,7 @@ class Jobs
 				$list = array_merge( $list, $subList );
 			}
 			else if( $prefix !== '' && $entry->getType() === 'file'
-				&& ( $name = $entry->getBaseName( '.php' ) ) === 'Factory' )
+				&& $entry->getBaseName( '.php' ) === 'Factory' )
 			{
 				$list[$prefix] = self::create( $context, $aimeos, $prefix );
 			}

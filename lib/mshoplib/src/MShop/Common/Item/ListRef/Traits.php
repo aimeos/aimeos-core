@@ -207,7 +207,6 @@ trait Traits
 			foreach( $list as $id => $item )
 			{
 				$refItem = $item->getRefItem();
-				$iface = \Aimeos\MShop\Common\Item\TypeRef\Iface::class;
 
 				if( $type && ( !$refItem || !($refItem instanceof $iface) || !in_array( $refItem->getType(), $types ) ) ) {
 					continue;

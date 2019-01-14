@@ -71,8 +71,6 @@ class CheckTest extends \PHPUnit\Framework\TestCase
 
 	public function testWait()
 	{
-		$fcn = function() {};
-
 		$this->stub->expects( $this->once() )->method( 'isAvailable' )
 			->will( $this->returnValue( true ) );
 
@@ -84,8 +82,6 @@ class CheckTest extends \PHPUnit\Framework\TestCase
 
 	public function testWaitNotAvailable()
 	{
-		$fcn = function() {};
-
 		$this->stub->expects( $this->once() )->method( 'isAvailable' )
 			->will( $this->returnValue( false ) );
 

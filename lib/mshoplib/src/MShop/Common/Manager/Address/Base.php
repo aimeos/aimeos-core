@@ -200,13 +200,7 @@ abstract class Base
 
 		try
 		{
-			$domain = explode( '.', $this->prefix );
-
-			if( ( $topdomain = array_shift( $domain ) ) === null ) {
-				throw new \Aimeos\MShop\Exception( 'No configuration available.' );
-			}
-
-			$required = array( trim( $this->prefix, '.' ) );
+			$required = [trim( $this->prefix, '.' )];
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$cfgPathSearch = $this->getConfigPath() . 'search';
 			$cfgPathCount = $this->getConfigPath() . 'count';

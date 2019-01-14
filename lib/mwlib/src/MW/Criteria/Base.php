@@ -142,9 +142,8 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 		foreach( $list as $entry )
 		{
 			$entry = (array) $entry;
-			$op = key( $entry );
 
-			if( ( $value = reset( $entry ) ) === false ) {
+			if( ( $op = key( $entry ) ) === null ) {
 				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid combine condition array "%1$s"', json_encode( $entry ) ) );
 			}
 

@@ -275,7 +275,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsBase()
 	{
-		$total = 0;
 		$search = $this->object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'catalog.lists.editor', $this->editor ),

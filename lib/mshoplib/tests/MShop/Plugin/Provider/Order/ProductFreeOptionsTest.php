@@ -86,8 +86,6 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	public function testSortByPrice()
 	{
-		$price = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
-
 		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 		$attrItem = $attrManager->findItem( 'xs', ['price'], 'product', 'size' );
 
@@ -102,8 +100,6 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	public function testSortByPriceFirstNoPrice()
 	{
-		$price = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
-
 		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 		$attrItem1 = $attrManager->findItem( 'xs', ['price'], 'product', 'size' );
 		$attrItem2 = $attrManager->findItem( 's', [], 'product', 'size' );
@@ -119,8 +115,6 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	public function testSortByPriceSecondNoPrice()
 	{
-		$price = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
-
 		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 		$attrItem1 = $attrManager->findItem( 'xs', ['price'], 'product', 'size' );
 		$attrItem2 = $attrManager->findItem( 's', [], 'product', 'size' );

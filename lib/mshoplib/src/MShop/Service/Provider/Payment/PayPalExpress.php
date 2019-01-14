@@ -564,7 +564,7 @@ class PayPalExpress
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $attrManager->searchItems( $search );
 
-		if( ( $attr = reset( $results ) ) !== false )
+		if( reset( $results ) !== false )
 		{
 			$msg = sprintf( 'PayPal Express: Duplicate transaction with ID "%1$s" and status "%2$s" ', $params['txn_id'], $params['txn_status'] );
 			throw new \Aimeos\MShop\Service\Exception( $msg );
@@ -811,8 +811,6 @@ class PayPalExpress
 	 */
 	public function send( $target, $method, $payload )
 	{
-		$response = '';
-
 		if( ( $curl = curl_init() )=== false ) {
 			throw new \Aimeos\MShop\Service\Exception( 'Could not initialize curl' );
 		}

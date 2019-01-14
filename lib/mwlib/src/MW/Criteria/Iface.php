@@ -118,11 +118,12 @@ interface Iface
 	/**
 	 * Returns the string for sorting the result
 	 *
-	 * @param array $names List of item names
+	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of item names that should be translated
+	 * @param array $funcs Associative list of item names and functions modifying the conditions
 	 * @return mixed Data for sorting the items
 	 */
-	public function getSortationSource( array $names, array $translations = [] );
+	public function getSortationSource( array $types, array $translations = [], array $funcs = [] );
 
 
 	/**

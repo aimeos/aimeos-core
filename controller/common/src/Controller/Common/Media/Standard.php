@@ -124,7 +124,6 @@ class Standard
 	public function scale( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' )
 	{
 		$path = $item->getUrl();
-		$config = $this->context->getConfig();
 		$media = $this->getMediaFile( $this->getFileContent( $path, $fsname ) );
 
 		if( !( $media instanceof \Aimeos\MW\Media\Image\Iface ) ) {

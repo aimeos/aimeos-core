@@ -19,7 +19,6 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
-		$orderProducts = [];
 		$this->context = \TestHelperMShop::getContext();
 		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )->createItem();
 

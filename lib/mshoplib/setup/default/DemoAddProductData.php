@@ -54,7 +54,6 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		}
 
 
-		$productCodes = [];
 		$domains = ['media', 'price', 'text'];
 		$manager = \Aimeos\MShop::create( $context, 'product' );
 

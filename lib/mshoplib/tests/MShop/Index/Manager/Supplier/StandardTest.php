@@ -135,8 +135,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsIdNull()
 	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( \TestHelperMShop::getContext() );
-
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '!=', 'index.supplier.id', null ) ); // supplier ID
 		$result = $this->object->searchItems( $search, [] );

@@ -394,7 +394,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsBase()
 	{
-		$total = 0;
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ),

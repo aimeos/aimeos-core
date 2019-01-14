@@ -294,9 +294,6 @@ class Standard
 	 */
 	public function deleteItems( array $ids )
 	{
-		$context = $this->getContext();
-		$config = $context->getConfig();
-
 		$this->getObject()->cleanup( $ids );
 
 		/** mshop/locale/manager/site/standard/delete/mysql

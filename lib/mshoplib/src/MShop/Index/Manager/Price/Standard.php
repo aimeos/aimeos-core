@@ -650,7 +650,6 @@ class Standard
 	{
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
-		$editor = $context->getEditor();
 		$date = date( 'Y-m-d H:i:s' );
 
 		foreach( $item->getListItems( 'price', 'default', 'default' ) as $listItem )

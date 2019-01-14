@@ -41,7 +41,7 @@ class PgsqlTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		if( ( $adapter = \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) ) === 'pgsql' )
+		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === 'pgsql' )
 		{
 			$this->dbm = \TestHelperMw::getDBManager();
 

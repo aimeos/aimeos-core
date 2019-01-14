@@ -138,7 +138,6 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 	protected function getOrderProduct()
 	{
-		$products = [];
 		$manager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 
 		$search = $manager->createSearch();

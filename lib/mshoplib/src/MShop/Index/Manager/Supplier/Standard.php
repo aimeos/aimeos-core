@@ -414,7 +414,6 @@ class Standard
 
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->getContext();
-		$editor = $context->getEditor();
 		$siteid = $context->getLocale()->getSiteId();
 		$listItems = $this->getListItems( $items );
 

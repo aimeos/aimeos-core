@@ -145,10 +145,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$product = $this->createProduct( 'prodid3' )->setQuantity( 5 );
 
-		$result = $this->object->addProduct( $product );
-		$result = $this->object->addProduct( $product );
+		$this->object->addProduct( $product );
+		$this->object->addProduct( $product );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
 		$this->assertEquals( 10, $this->object->getProduct( 0 )->getQuantity() );
 		$this->assertEquals( [0 => $product], $this->object->getProducts() );
 		$this->assertTrue( $this->object->isModified() );
