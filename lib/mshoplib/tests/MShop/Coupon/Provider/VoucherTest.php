@@ -14,6 +14,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	private $context;
 	private $couponItem;
 	private $orderBase;
+	private $object;
 
 
 	protected function setUp()
@@ -33,7 +34,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		unset( $this->context, $this->couponItem, $this->orderBase );
+		unset( $this->object, $this->context, $this->couponItem, $this->orderBase );
 	}
 
 

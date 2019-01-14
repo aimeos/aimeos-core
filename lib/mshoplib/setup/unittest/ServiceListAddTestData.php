@@ -287,7 +287,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @param array $codes Service codes
 	 * @param array $typeCodes List of price type codes
-	 * @param array Associative list of identifiers as keys and service IDs as values
+	 * @return array Associative list of identifiers as keys and service IDs as values
 	 */
 	protected function getServiceIds( array $codes, array $typeCodes )
 	{

@@ -40,7 +40,7 @@ class Standard
 	 * {inheritDoc}
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item to add the file references to
-	 * @param \Psr\Http\Message\UploadedFileInterface Uploaded file
+	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file
 	 * @param string $fsname Name of the file system to store the files at
 	 */
 	public function add( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, $fsname = 'fs-media' )
@@ -389,7 +389,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
 	 * @param string $type Type of the image like "preview" or "files"
-	 * @param \Aimeos\MW\Media\Image\Iface Scaled media object
+	 * @return \Aimeos\MW\Media\Image\Iface Scaled media object
 	 */
 	protected function scaleImage( \Aimeos\MW\Media\Image\Iface $media, $type )
 	{

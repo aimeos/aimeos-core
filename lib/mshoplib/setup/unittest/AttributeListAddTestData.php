@@ -227,7 +227,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @param array $codes Attribute codes
 	 * @param array $typeCodes List of attribute type codes
-	 * @param array Associative list of identifiers as keys and attribute IDs as values
+	 * @return array Associative list of identifiers as keys and attribute IDs as values
 	 */
 	protected function getAttributeIds( array $codes, array $typeCodes )
 	{

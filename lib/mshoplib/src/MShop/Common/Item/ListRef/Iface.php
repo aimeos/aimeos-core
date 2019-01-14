@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Common\Item\ListRef;
  * @package MShop
  * @subpackage Common
  */
-interface Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Adds a new or overwrite an existing list item which references the given domain item (created if it doesn't exist)

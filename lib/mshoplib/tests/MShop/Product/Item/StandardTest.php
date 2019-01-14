@@ -57,7 +57,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		unset( $this->object, $this->textListItems );
+		unset( $this->object, $this->values );
 	}
 
 

@@ -164,7 +164,7 @@ class Standard
 	/**
 	 * Sets the new tags associated to the item.
 	 *
-	 * @param array Tags associated to the item
+	 * @param array $tags Tags associated to the item
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
 	 */
 	public function setTags( array $tags )

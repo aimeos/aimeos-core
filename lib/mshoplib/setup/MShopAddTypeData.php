@@ -15,10 +15,6 @@ namespace Aimeos\MW\Setup\Task;
  */
 class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 {
-	private $editor = '';
-	private $domainManagers = [];
-
-
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
@@ -75,10 +71,6 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function processFile( array $testdata )
 	{
-		$editor = $this->additional->getEditor();
-		$this->additional->setEditor( $this->editor );
-
-
 		foreach( $testdata as $domain => $datasets )
 		{
 			$this->msg( sprintf( 'Checking "%1$s" type data', $domain ), 1 );
@@ -105,8 +97,6 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 
 			$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
 		}
-
-		$this->additional->setEditor( $editor );
 	}
 
 

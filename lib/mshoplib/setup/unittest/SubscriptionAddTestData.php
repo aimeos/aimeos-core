@@ -95,7 +95,7 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 * Returns the order product ID for the given test data key
 	 *
 	 * @param string $key Test data key
-	 * @return \MShop\Order\Item\Base\Product\Iface Order product item
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item
 	 */
 	protected function getOrderProductItem( $key )
 	{

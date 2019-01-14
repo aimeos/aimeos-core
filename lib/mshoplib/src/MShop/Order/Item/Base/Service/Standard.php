@@ -326,10 +326,10 @@ class Standard extends Base implements Iface
 				case 'order.base.service.name': $item = $item->setName( $value ); break;
 				case 'order.base.service.mediaurl': $item = $item->setMediaUrl( $value ); break;
 				case 'order.base.service.type': $item = $item->setType( $value ); break;
-				case 'order.base.service.price': $item = $item->price->setValue( $value ); break;
-				case 'order.base.service.costs': $item = $item->price->setCosts( $value ); break;
-				case 'order.base.service.rebate': $item = $item->price->setRebate( $value ); break;
-				case 'order.base.service.taxrate': $item = $item->price->setTaxRate( $value ); break;
+				case 'order.base.service.price': $this->price = $this->price->setValue( $value ); break;
+				case 'order.base.service.costs': $this->price = $this->price->setCosts( $value ); break;
+				case 'order.base.service.rebate': $this->price = $this->price->setRebate( $value ); break;
+				case 'order.base.service.taxrate': $this->price = $this->price->setTaxRate( $value ); break;
 				default: continue 2;
 			}
 
@@ -350,16 +350,14 @@ class Standard extends Base implements Iface
 	{
 		$list = parent::toArray( $private );
 
-		$price = $this->price;
-
 		$list['order.base.service.type'] = $this->getType();
 		$list['order.base.service.code'] = $this->getCode();
 		$list['order.base.service.name'] = $this->getName();
 		$list['order.base.service.mediaurl'] = $this->getMediaUrl();
-		$list['order.base.service.price'] = $price->getValue();
-		$list['order.base.service.costs'] = $price->getCosts();
-		$list['order.base.service.rebate'] = $price->getRebate();
-		$list['order.base.service.taxrate'] = $price->getTaxRate();
+		$list['order.base.service.price'] = $this->price->getValue();
+		$list['order.base.service.costs'] = $this->price->getCosts();
+		$list['order.base.service.rebate'] = $this->price->getRebate();
+		$list['order.base.service.taxrate'] = $this->price->getTaxRate();
 
 		if( $private === true )
 		{

@@ -102,19 +102,18 @@ abstract class Base
 	public function __clone()
 	{
 		foreach( $this->products as $key => $value ) {
-			$this->products[$key] = $value;
+			$this->products[$key] = clone $value;
 		}
 
 		foreach( $this->addresses as $key => $value ) {
-			$this->addresses[$key] = $value;
+			$this->addresses[$key] = clone $value;
 		}
 
-		foreach( $this->services as $key => $value ) {
-			$this->services[$key] = $value;
-		}
-
-		foreach( $this->coupons as $key => $value ) {
-			$this->coupons[$key] = $value;
+		foreach( $this->services as $key => $list )
+		{
+			foreach( $list as $pos => $value ) {
+				$this->services[$key][$pos] = clone $value;
+			}
 		}
 	}
 

@@ -24,7 +24,7 @@ interface Iface
 	 * Returns the item property for the given name
 	 *
 	 * @param string $name Name of the property
-	 * @return mixed|null Property value or null if property is unknown
+	 * @return mixed Property value or null if property is unknown
 	 */
 	public function __get( $name );
 
@@ -39,14 +39,14 @@ interface Iface
 	/**
 	 * Returns the unique ID of the item.
 	 *
-	 * @return string ID of the item
+	 * @return string|null ID of the item
 	 */
 	public function getId();
 
 	/**
 	 * Sets the unique ID of the item.
 	 *
-	 * @param string $id Unique ID of the item
+	 * @param string|null $id Unique ID of the item
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
 	public function setId( $id );
@@ -61,14 +61,14 @@ interface Iface
 	/**
 	 * Returns the create date of the item.
 	 *
-	 * @return string|null|null ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
 	public function getTimeCreated();
 
 	/**
 	 * Returns the time of last modification.
 	 *
-	 * @return string|null|null ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
 	public function getTimeModified();
 
@@ -119,7 +119,7 @@ interface Iface
 	 * Returns an associative list of item properties.
 	 *
 	 * @param boolean True to return private properties, false for public only
-	 * @return array List of item properties.
+	 * @return array List of item properties
 	 */
 	public function toArray( $private = false );
 }

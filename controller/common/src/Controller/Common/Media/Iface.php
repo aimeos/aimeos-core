@@ -37,7 +37,7 @@ interface Iface
 	 * image.
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item to add the file references to
-	 * @param \Psr\Http\Message\UploadedFileInterface Uploaded file
+	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file
 	 * @param string $fsname Name of the file system to store the files at
 	 * @return void
 	 */
