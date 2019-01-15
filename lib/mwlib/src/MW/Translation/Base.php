@@ -54,9 +54,9 @@ abstract class Base
 	 * If the requested file does exists (eg: de_DE) the implementation
 	 * will check for "de" and will return that location as fallback.
 	 *
-	 * @param array $paths Paths of the translation files.
+	 * @param string[] $paths Paths of the translation files
 	 * @param string $locale Locale to be used
-	 * @return array List of locations to the translation files
+	 * @return string[] List of locations to the translation files
 	 * @throws \Aimeos\MW\Translation\Exception If translation file doesn't exist
 	 */
 	protected function getTranslationFileLocations( array $paths, $locale )

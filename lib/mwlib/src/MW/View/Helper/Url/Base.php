@@ -23,7 +23,7 @@ abstract class Base extends \Aimeos\MW\View\Helper\Base
 	 * Replaces dangerous characteris in the parameters
 	 *
 	 * @param array $params Associative list of key/value pairs
-	 * @param array $names Replace characters in the parameters of the given names, empty for all
+	 * @param string[] $names Replace characters in the parameters of the given names, empty for all
 	 * @return array Associative list with encoded values
 	 */
 	protected function sanitize( array $params, $names = array( 'f_name', 'd_name' ) )

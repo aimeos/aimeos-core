@@ -288,7 +288,7 @@ interface Iface
 	 * @param mixed $value Value string that should be stored for the given key
 	 * @param integer|string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
 	 * 	format or as TTL value when the cache entry expires
-	 * @param array $tags List of tag strings that should be assoicated to the given value in the cache
+	 * @param string[] $tags List of tag strings that should be assoicated to the given value in the cache
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 * @return null
 	 */

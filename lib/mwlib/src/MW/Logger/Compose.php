@@ -25,7 +25,7 @@ class Compose extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 	/**
 	 * Initializes the logger object.
 	 *
-	 * @param array $loggers Instances of logger classes
+	 * @param \Aimeos\MW\Logger\Iface[] $loggers Instances of logger classes
 	 */
 	public function __construct( array $loggers )
 	{

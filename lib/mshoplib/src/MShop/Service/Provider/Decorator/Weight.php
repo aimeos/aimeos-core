@@ -90,13 +90,13 @@ class Weight
 
 		// basket can contain a product several times in different basket items
 		// product IDs are only those of articles, selections and bundles, not of the variants and bundled products
-		foreach( $basket->getProducts() as $basketItem )
+		foreach( $basket->getProducts() as $orderProduct )
 		{
-			$qty = $basketItem->getQuantity();
-			$code = $basketItem->getProductCode();
+			$qty = $orderProduct->getQuantity();
+			$code = $orderProduct->getProductCode();
 			$prodMap[$code] = ( isset( $prodMap[$code] ) ? $prodMap[$code] + $qty : $qty );
 
-			foreach( $basketItem->getProducts() as $prodItem ) // calculate bundled products
+			foreach( $orderProduct->getProducts() as $prodItem ) // calculate bundled products
 			{
 				$qty = $prodItem->getQuantity();
 				$code = $prodItem->getProductCode();

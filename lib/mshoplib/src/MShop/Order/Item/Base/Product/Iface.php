@@ -121,6 +121,21 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function setProductCode( $code );
 
 	/**
+	 * Returns all of sub-product items
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of product items
+	 */
+	public function getProducts();
+
+	/**
+	 * Sets all sub-product items
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of product items
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setProducts( array $products );
+
+	/**
 	 * Returns the code of the stock type the product should be retrieved from.
 	 *
 	 * @return string Stock type

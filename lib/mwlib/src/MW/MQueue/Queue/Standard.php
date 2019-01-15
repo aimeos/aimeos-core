@@ -31,7 +31,7 @@ class Standard implements Iface
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param string $queue Message queue name
-	 * @param array $sql Associative list of SQL statements as key/value pairs for insert/reserve/get/delete
+	 * @param string[] $sql Associative list of SQL statements as key/value pairs for insert/reserve/get/delete
 	 * @param integer $rtime Time before the job is released again in seconds
 	 */
 	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $queue, $sql, $rtime )

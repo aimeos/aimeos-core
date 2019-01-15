@@ -136,8 +136,8 @@ abstract class Base
 	 * Replaces the parameters in nested arrays
 	 *
 	 * @param array $list Multi-dimensional associative array of values including positional parameter, e.g. "$1"
-	 * @param array $find List of strings to search for, e.g. ['$1', '$2']
-	 * @param array $replace List of strings to replace by, e.g. ['val1', 'val2']
+	 * @param string[] $find List of strings to search for, e.g. ['$1', '$2']
+	 * @param string[] $replace List of strings to replace by, e.g. ['val1', 'val2']
 	 * @return array Multi-dimensional associative array with parameters replaced
 	 */
 	protected function replaceParameter( array $list, array $find, array $replace )
@@ -220,7 +220,7 @@ abstract class Base
 	/**
 	 * Sets the new plugins for translating values.
 	 *
-	 * @param array $plugins Associative list of names and the plugin implementing \Aimeos\MW\Criteria\Plugin\Iface
+	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of names as keys and plugin items as values
 	 */
 	protected function setPlugins( array $plugins )
 	{

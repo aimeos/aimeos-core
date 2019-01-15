@@ -56,9 +56,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	/**
 	 * Returns the attribute helper functions for searching defined by the manager.
 	 *
-	 * @param array $attributes List of search attribute objects implementing
-	 * 	\Aimeos\MW\Criteria\Attribute\Iface or associative arrays with 'code'
-	 * 	and 'internalcode' keys
+	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes List of search attribute items
 	 * @return array Associative array of attribute code and helper function
 	 */
 	protected function getSearchFunctions( array $attributes )
@@ -84,9 +82,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	/**
 	 * Returns the attribute translations for searching defined by the manager.
 	 *
-	 * @param array $attributes List of search attribute objects implementing
-	 * 	\Aimeos\MW\Criteria\Attribute\Iface or associative arrays with 'code'
-	 * 	and 'internalcode' keys
+	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes List of search attribute items
 	 * @return array Associative array of attribute code and internal attribute code
 	 */
 	protected function getSearchTranslations( array $attributes )
@@ -112,9 +108,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	/**
 	 * Returns the attribute types for searching defined by the manager.
 	 *
-	 * @param array $attributes List of search attribute objects implementing
-	 * 	\Aimeos\MW\Criteria\Attribute\Iface or associative arrays with 'code'
-	 * 	and 'internaltype' keys
+	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes List of search attribute items
 	 * @return array Associative array of attribute code and internal attribute type
 	 */
 	protected function getSearchTypes( array $attributes )

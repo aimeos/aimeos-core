@@ -29,7 +29,7 @@ interface Iface
 	 * "!": NOT term
 	 *
 	 * @param string $operator One of the known operators
-	 * @param array $list List of expression objects that should be combined
+	 * @param \Aimeos\MW\Criteria\Expression\Compare\Iface[] $list List of expression objects
 	 * @return \Aimeos\MW\Criteria\Expression\Combine\Iface Combine expression object
 	 */
 	public function combine( $operator, array $list );
@@ -91,7 +91,7 @@ interface Iface
 	 *
 	 * @param array $types Associative list of item names and their types
 	 * @param array $translations Associative list of item names that should be translated
-	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
+	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of item names as keys and plugin objects as values
 	 * @param array $funcs Associative list of item names and functions modifying the conditions
 	 * @return mixed Data for searching
 	 */
@@ -206,7 +206,7 @@ interface Iface
 	 * 		'name2' => '-',
 	 * 	);
 	 *
-	 * @param array $array Single-dimensional array of name and operator pairs
+	 * @param string[] $array Single-dimensional array of name and operator pairs
 	 * @return array List of sort expressions implementing \Aimeos\MW\Criteria\Expression\Sort\Iface
 	 */
 	public function toSortations( array $array );

@@ -89,11 +89,11 @@ class Quantity
 		$sum = 0;
 		$price = $this->getProvider()->calcPrice( $basket );
 
-		foreach( $basket->getProducts() as $basketItem )
+		foreach( $basket->getProducts() as $orderProduct )
 		{
-			$qty = $basketItem->getQuantity();
+			$qty = $orderProduct->getQuantity();
 
-			if( ( $products = $basketItem->getProducts() ) !== [] )
+			if( ( $products = $orderProduct->getProducts() ) !== [] )
 			{
 				foreach( $products as $prodItem ) { // calculate bundled products
 					$sum += $qty * $prodItem->getQuantity();

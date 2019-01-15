@@ -28,7 +28,7 @@ class Protect
 	 * Initializes the decorator
 	 *
 	 * @param \Aimeos\MW\Config\Iface $object Config object or decorator
-	 * @param array $prefixes Allowed prefixes for getting and setting values
+	 * @param string[] $prefixes Allowed prefixes for getting and setting values
 	 */
 	public function __construct( \Aimeos\MW\Config\Iface $object, array $prefixes = [] )
 	{

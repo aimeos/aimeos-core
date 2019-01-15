@@ -67,7 +67,7 @@ class Standard
 	/**
 	 * Sets the ID of the basic order item which contains the order details.
 	 *
-	 * @param $value $id ID of the basic order item
+	 * @param string $id ID of the basic order item
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setBaseId( $id )

@@ -90,8 +90,8 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 * 		'name2' => '-',
 	 * 	);
 	 *
-	 * @param array $array Single-dimensional array of name and operator pairs
-	 * @return array List of sort expressions implementing \Aimeos\MW\Criteria\Expression\Sort\Iface
+	 * @param string[] $array Single-dimensional array of name and operator pairs
+	 * @return \Aimeos\MW\Criteria\Expression\Sort\Iface[] List of sort expressions
 	 */
 	public function toSortations( array $array )
 	{

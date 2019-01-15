@@ -28,7 +28,7 @@ class Errorlog extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 	 * Initializes the logger object.
 	 *
 	 * @param integer Log level from \Aimeos\MW\Logger\Base
-	 * @param array|null $facilities Facilities for which messages should be logged
+	 * @param string[]|null $facilities Facilities for which messages should be logged
 	 */
 	public function __construct( $loglevel = \Aimeos\MW\Logger\Base::ERR, array $facilities = null )
 	{

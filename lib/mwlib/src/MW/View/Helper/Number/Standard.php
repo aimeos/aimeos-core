@@ -47,7 +47,7 @@ class Standard
 	/**
 	 * Returns the formatted number.
 	 *
-	 * @param integer|float|string $number Number to format
+	 * @param integer|double|string $number Number to format
 	 * @param integer|null $decimals Number of decimals behind the decimal point or null for default value
 	 * @return string Formatted number
 	 */
@@ -57,6 +57,6 @@ class Standard
 			$decimals = $this->decimals;
 		}
 
-		return number_format( $number, $decimals, $this->dsep, $this->tsep );
+		return number_format( (double) $number, $decimals, $this->dsep, $this->tsep );
 	}
 }

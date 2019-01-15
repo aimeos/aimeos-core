@@ -25,11 +25,11 @@ class Compose implements \Aimeos\MW\Convert\Iface
 	/**
 	 * Initializes the compose object.
 	 *
-	 * @param array $converter Instances of converter classes
+	 * @param \Aimeos\MW\Convert\Iface[] $converter Instances of converter classes
 	 */
 	public function __construct( array $converter )
 	{
-		$this->converter = $converter;
+		$this->converter = \Aimeos\MW\Common\Base::checkClassList( \Aimeos\MW\Convert\Iface::class, $converter );
 	}
 
 

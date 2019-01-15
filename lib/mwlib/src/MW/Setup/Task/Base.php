@@ -38,7 +38,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * @param \Aimeos\MW\Setup\DBSchema\Iface $schema Database schema object
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param mixed $additional Additionally provided information for the setup tasks if required
-	 * @param array $paths List of paths of the setup tasks ordered by dependencies
+	 * @param string[] $paths List of paths of the setup tasks ordered by dependencies
 	 */
 	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn,
 		$additional = null, array $paths = [] )
@@ -144,7 +144,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	/**
 	 * Executes a list of given SQL statements.
 	 *
-	 * @param array $list List of SQL statement to execute
+	 * @param string[] $list List of SQL statement to execute
 	 * @param string $name Name from the resource configuration
 	 */
 	protected function executeList( array $list, $name = 'db' )
@@ -196,7 +196,8 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 */
 	protected function getValue( $sql, $column, $name = 'db' )
 	{
-		$result = $this->getConnection( $name )->create( $sql )->execute();
+		$conn = $this->acquire( $name );
+		$result = $conn->create( $sql )->execute();
 
 		if( ( $row = $result->fetch() ) === false ) {
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No rows found: %1$s', $sql ) );
@@ -207,6 +208,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 		}
 
 		$result->finish();
+		$this->release( $conn, $name );
 
 		return $row[$column];
 	}

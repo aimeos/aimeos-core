@@ -29,7 +29,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 * Initializes the instance with the given values.
 	 *
 	 * @param array $values Node values for internal use
-	 * @param array $children Children of the node implementing \Aimeos\MW\Tree\Node\Iface
+	 * @param \Aimeos\MW\Tree\Node\Iface[] $children Children of the node
 	 * @throws \Aimeos\MW\Common\Exception if the children doesn't implement the interface
 	 */
 	public function __construct( array $values = [], $children = [] )

@@ -43,7 +43,7 @@ class Standard implements \Aimeos\MW\View\Iface
 	 * Initializes the view object
 	 *
 	 * @param array $paths Associative list of base paths as keys and list of relative paths as value
-	 * @param array $engines Associative list of file extensions as keys and \Aimeos\MW\View\Engine\Iface as value
+	 * @param \Aimeos\MW\View\Engine\Iface[] $engines Associative list of file extensions as keys and engine objects as values
 	 */
 	public function __construct( array $paths = [], array $engines = [] )
 	{

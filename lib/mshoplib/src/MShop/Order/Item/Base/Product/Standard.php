@@ -182,7 +182,7 @@ class Standard extends Base implements Iface
 
 
 	/**
-	 * Returns all of order base product items
+	 * Returns all of sub-product items
 	 *
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of product items
 	 */
@@ -191,8 +191,9 @@ class Standard extends Base implements Iface
 		return $this->products;
 	}
 
+
 	/**
-	 * Sets a all order base product items
+	 * Sets all sub-product items
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of product items
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls

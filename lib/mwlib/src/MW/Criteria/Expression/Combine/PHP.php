@@ -29,7 +29,7 @@ class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 * Initializes the object.
 	 *
 	 * @param string $operator Operator used for the expressions
-	 * @param array $list List of expression objects
+	 * @param \Aimeos\MW\Criteria\Expression\Iface[] $list List of expression objects
 	 */
 	public function __construct( $operator, array $list )
 	{
@@ -82,7 +82,7 @@ class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 *
 	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of variable or column names that should be translated
-	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
+	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of item names as keys and plugin objects as values
 	 * @return mixed Expression that evaluates to a boolean result
 	 */
 	public function toSource( array $types, array $translations = [], array $plugins = [], array $funcs = [] )

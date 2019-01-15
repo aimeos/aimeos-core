@@ -29,7 +29,7 @@ class Memory
 	 * Initializes the decorator.
 	 *
 	 * @param \Aimeos\MW\Translation\Iface $object Translation object or decorator
-	 * @param array $translations Associative list of domains and singular
+	 * @param string[] $translations Associative list of domains and singular
 	 * 	strings as key and list of translation number and translations as value:
 	 * 	array( <domain> => array( <singular> => array( <index> => <translations> ) ) )
 	 */

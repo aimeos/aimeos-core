@@ -83,7 +83,7 @@ class PHPArray
 	 * Returns a configuration value from an array.
 	 *
 	 * @param array $config The array to search in
-	 * @param array $parts Configuration path parts to look for inside the array
+	 * @param string[] $parts Configuration path parts to look for inside the array
 	 * @return mixed Found value or null if no value is available
 	 */
 	protected function getPart( $config,  $parts )
@@ -105,8 +105,8 @@ class PHPArray
 	 * Sets a configuration value in the array.
 	 *
 	 * @param array $config Configuration sub-part
-	 * @param array $path Configuration path parts
-	 * @param array $value The new value
+	 * @param string[] $path Configuration path parts
+	 * @param mixed $value The new value
 	 */
 	protected function setPart( $config, $path, $value )
 	{
@@ -130,7 +130,7 @@ class PHPArray
 	 *
 	 * @param array $config Configuration array which should contain the loaded configuration
 	 * @param string $path Path to the configuration directory
-	 * @param array $parts List of config name parts to look for
+	 * @param string[] $parts List of config name parts to look for
 	 * @return array Merged configuration
 	 */
 	protected function load( array $config, $path, array $parts )

@@ -366,7 +366,7 @@ class Standard
 	/**
 	 * Retrieve normalized file upload data.
 	 *
-	 * @return array An array tree of UploadedFileInterface instances; an empty
+	 * @return array An array tree of \Psr\Http\Message\UploadedFileInterface instances; an empty
 	 *	 array MUST be returned if no data is present.
 	 */
 	public function getUploadedFiles()
@@ -378,7 +378,7 @@ class Standard
 	/**
 	 * Create a new instance with the specified uploaded files.
 	 *
-	 * @param array $uploadedFiles An array tree of UploadedFileInterface instances.
+	 * @param array $uploadedFiles An array tree of \Psr\Http\Message\UploadedFileInterface instances
 	 * @return self
 	 */
 	public function withUploadedFiles( array $uploadedFiles )

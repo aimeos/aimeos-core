@@ -22,7 +22,7 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	/**
 	 * Returns the formatted number.
 	 *
-	 * @param integer|float|string $number Number to format
+	 * @param integer|double|string $number Number to format
 	 * @param integer|null $decimals Number of decimals behind the decimal point or null for default value
 	 * @return string Formatted number
 	 */

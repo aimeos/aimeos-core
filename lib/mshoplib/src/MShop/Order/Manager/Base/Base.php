@@ -284,7 +284,7 @@ abstract class Base
 	 *
 	 * @param string[] List of order base IDs
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @param array Associative list of base IDs and order product ID/item pairs as values
+	 * @param array $products Associative list of base IDs and order product ID/item pairs as values
 	 * @return array Multi-dimensional associative list of order base IDs as keys and coupons with product items as values
 	 */
 	protected function getCoupons( array $baseIds, $fresh = false, array $products = [] )

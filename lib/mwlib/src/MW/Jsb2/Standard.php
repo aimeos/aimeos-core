@@ -31,7 +31,7 @@ class Standard
 	 *
 	 * @param string $filename Path to manifest file
 	 * @param string $baseURL Base URL for HTML output
-	 * @param array $filter Which packages  schould NOT be returned
+	 * @param string[] $filter Which packages should NOT be returned
 	 */
 	public function __construct( $filename, $baseURL = "", $filter = [] )
 	{
@@ -48,7 +48,7 @@ class Standard
 	 * Returns the list of URLs for packages files with given filter.
 	 *
 	 * @param string $type Specific filetypes to create output
-	 * @return array List of URLs for the package files
+	 * @return string[] List of URLs for the package files
 	 */
 	public function getFiles( $type )
 	{
@@ -76,7 +76,7 @@ class Standard
 	 *
 	 * @param string $type Specific filetypes to create output
 	 * @param string $version URL version string with %s placeholder for the file time
-	 * @return array List of URLs for the package files
+	 * @return string[] List of URLs for the package files
 	 */
 	public function getUrls( $type, $version = '?v=%s' )
 	{
@@ -134,7 +134,7 @@ class Standard
 	 * @param \stdClass $package Object with "fileIncludes" property containing a
 	 * 	list of file objects with "path" and "text" properties
 	 * @param string $version Version string that should be added to the URLs suitable for sprintf()
-	 * @return array List of URLs to the files from the package
+	 * @return string[] List of URLs to the files from the package
 	 * @throws \Aimeos\MW\Jsb2\Exception If the file modification timestamp couldn't be determined
 	 */
 	protected function getFileUrls( \stdClass $package, $version = '?v=%s' )
@@ -160,7 +160,7 @@ class Standard
 	 * Get the packages from a JSON decoded manifest and validates them.
 	 *
 	 * @param object JSON decoded manifest
-	 * @param array $filter What packages should NOT be returned
+	 * @param string[] $filter What packages should NOT be returned
 	 */
 	protected function getPackages( $manifest, $filter = [] )
 	{

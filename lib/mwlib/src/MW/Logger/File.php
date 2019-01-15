@@ -30,7 +30,7 @@ class File extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 	 *
 	 * @param string $filename Log file name
 	 * @param integer $priority Minimum priority for logging
-	 * @param array|null $facilities Facilities for which messages should be logged
+	 * @param string[]|null $facilities Facilities for which messages should be logged
 	 */
 	public function __construct( $filename, $priority = \Aimeos\MW\Logger\Base::ERR, array $facilities = null )
 	{

@@ -53,7 +53,7 @@ trait Traits
 		if( ( $current = array_shift( $parts ) ) !== null && isset( $config[$current] ) )
 		{
 			if( count( $parts ) > 0 ) {
-				return $this->getArrayValue( $config[$current], $parts );
+				return $this->getArrayValue( $config[$current], $parts, $default );
 			}
 
 			return $config[$current];

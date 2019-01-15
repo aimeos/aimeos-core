@@ -71,7 +71,7 @@ interface Iface
 	/**
 	 * Substitutes the marker by given text.
 	 *
-	 * @param array $substitute Array of marker names (keys) and text to substitute (values)
+	 * @param string[] $substitute Array of marker names (keys) and text to substitute (values)
 	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
 	public function substitute( array $substitute );

@@ -44,7 +44,7 @@ class PHP extends \Aimeos\MW\Criteria\Base
 	 * "!": NOT term
 	 *
 	 * @param string $operator One of the known operators
-	 * @param array $list List of expression objects that should be combined
+	 * @param \Aimeos\MW\Criteria\Expression\Compare\Iface[] $list List of expression objects
 	 * @return \Aimeos\MW\Criteria\Expression\Combine\Iface Combine expression object
 	 */
 	public function combine( $operator, array $list )
@@ -113,7 +113,7 @@ class PHP extends \Aimeos\MW\Criteria\Base
 	 *
 	 * @param array $types Associative list of item names and their types
 	 * @param array $translations Associative list of item names that should be translated
-	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
+	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of item names as keys and plugin objects as values
 	 * @param array $funcs Associative list of item names and functions modifying the conditions
 	 * @return mixed Data for searching
 	 */

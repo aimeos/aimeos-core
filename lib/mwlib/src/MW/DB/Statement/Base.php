@@ -68,8 +68,8 @@ abstract class Base
 	/**
 	 * Creates the SQL string with bound parameters.
 	 *
-	 * @param array $parts List of SQL statement parts
-	 * @param array $binds List of values for the markers
+	 * @param string[] $parts List of SQL statement parts
+	 * @param string[] $binds List of values for the markers
 	 * @return string SQL statement
 	 */
 	protected function buildSQL( array $parts, array $binds )
