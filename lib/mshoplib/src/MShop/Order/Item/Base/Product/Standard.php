@@ -29,8 +29,8 @@ class Standard extends Base implements Iface
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
 	 * @param array $values Associative list of order product values
-	 * @param array $attributes List of order attributes implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
-	 * @param array $products List of ordered subproducts implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] $attributes List of order product attribute items
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of ordered subproduct items
 	 */
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [], array $products = [] )
 	{
@@ -166,7 +166,7 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the type of the ordered product.
 	 *
-	 * @param string Type of the order product
+	 * @param string $type Type of the order product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setType( $type )
@@ -182,9 +182,9 @@ class Standard extends Base implements Iface
 
 
 	/**
-	 * Returns a array of order base product items
+	 * Returns all of order base product items
 	 *
-	 * @return array Associative list of product items that implements \Aimeos\MShop\Order\Item\Base\Product\Iface
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of product items
 	 */
 	public function getProducts()
 	{
@@ -192,9 +192,9 @@ class Standard extends Base implements Iface
 	}
 
 	/**
-	 * Sets a array of order base product items
+	 * Sets a all order base product items
 	 *
-	 * @param array Associative list of product items which must implement the \Aimeos\MShop\Order\Item\Base\Product\Iface
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of product items
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setProducts( array $products )
@@ -259,7 +259,7 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the ID of a product the customer has selected.
 	 *
-	 * @param string Product Code ID
+	 * @param string $id Product Code ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setProductId( $id )

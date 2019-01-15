@@ -23,7 +23,7 @@ interface Iface
 	/**
 	 * Returns a list of attributes which can be used in the search method.
 	 *
-	 * @return array List of search attribute objects implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
 	public function getSearchAttributes();
 
@@ -44,7 +44,7 @@ interface Iface
 	/**
 	 * Deletes a node and its descendants from the storage.
 	 *
-	 * @param mixed $id Delete the node with the ID and all nodes below
+	 * @param string $id Delete the node with the ID and all nodes below
 	 * @return null
 	 */
 	public function deleteNode( $id = null );
@@ -52,8 +52,8 @@ interface Iface
 	/**
 	 * Returns a node and its descendants depending on the given resource.
 	 *
-	 * @param integer|null $id Retrieve nodes starting from the given ID
-	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
+	 * @param string|null $id Retrieve nodes starting from the given ID
+	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
 	 * @param \Aimeos\MW\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
 	 */
@@ -63,8 +63,8 @@ interface Iface
 	 * Inserts a new node before the given reference node to the parent in the storage.
 	 *
 	 * @param \Aimeos\MW\Tree\Node\Iface $node New node that should be inserted
-	 * @param integer|null $parentId ID of the parent node where the new node should be inserted below (null for root node)
-	 * @param integer|null $refId ID of the node where the node node should be inserted before (null to append)
+	 * @param string|null $parentId ID of the parent node where the new node should be inserted below (null for root node)
+	 * @param string|null $refId ID of the node where the node node should be inserted before (null to append)
 	 * @return null
 	 */
 	public function insertNode( \Aimeos\MW\Tree\Node\Iface $node, $parentId = null, $refId = null );
@@ -72,10 +72,10 @@ interface Iface
 	/**
 	 * Moves an existing node to the new parent in the storage.
 	 *
-	 * @param mixed $id ID of the node that should be moved
-	 * @param mixed $oldParentId ID of the old parent node which currently contains the node that should be removed
-	 * @param mixed $newParentId ID of the new parent node where the node should be moved to
-	 * @param mixed $newRefId ID of the node where the node node should be inserted before (null to append)
+	 * @param string $id ID of the node that should be moved
+	 * @param string $oldParentId ID of the old parent node which currently contains the node that should be removed
+	 * @param string $newParentId ID of the new parent node where the node should be moved to
+	 * @param string $newRefId ID of the node where the node node should be inserted before (null to append)
 	 * @return null
 	 */
 	public function moveNode( $id, $oldParentId, $newParentId, $newRefId = null );
@@ -95,7 +95,7 @@ interface Iface
 	 * Retrieves a list of nodes from the storage matching the given search criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
-	 * @return array List of nodes implementing \Aimeos\MW\Tree\Node\Iface
+	 * @return \Aimeos\MW\Tree\Node\Iface[] List of tree nodes
 	 */
 	public function searchNodes( \Aimeos\MW\Criteria\Iface $search );
 
@@ -107,10 +107,10 @@ interface Iface
 	public function isReadOnly();
 
 	/**
-	 * Returns a list if node ids, that are in the path of given node id
+	 * Returns a list of node IDs that are in the path of given node ID
 	 *
-	 * @param integer $id Id of node to get path
-	 * @return array List of \Aimeos\MW\Tree\Node\Iface in Path with node id as key
+	 * @param string $id Id of node to get path
+	 * @return \Aimeos\MW\Tree\Node\Iface[] List of tree nodes
 	 */
 	public function getPath( $id );
 }

@@ -47,7 +47,7 @@ interface Iface
 	 * Sets the stock level.
 	 *
 	 * @param integer|null $stocklevel New stock level
-	 * @return \Aimeos\MShop\Stock\Item\Stock\Iface Stock stock item for chaining method calls
+	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
 	 */
 	public function setStocklevel( $stocklevel );
 
@@ -62,7 +62,7 @@ interface Iface
 	 * Sets the stock back in stock date.
 	 *
 	 * @param string|null $backdate New back in stock date of the stock
-	 * @return \Aimeos\MShop\Stock\Item\Stock\Iface Stock stock item for chaining method calls
+	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
 	 */
 	public function setDateBack( $backdate );
 }

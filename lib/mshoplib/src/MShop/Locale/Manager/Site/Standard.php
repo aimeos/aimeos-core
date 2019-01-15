@@ -708,7 +708,7 @@ class Standard
 	 * Returns a node and its descendants depending on the given resource.
 	 *
 	 * @param string|null $id Retrieve nodes starting from the given ID
-	 * @param string[] List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
+	 * @param string[] $ref List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item, maybe with subnodes
 	 */
@@ -747,8 +747,8 @@ class Standard
 	 * Adds a new item object.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Item which should be inserted
-	 * @param integer|null $parentId ID of the parent item where the item should be inserted into
-	 * @param integer|null $refId ID of the item where the item should be inserted before (null to append)
+	 * @param string|null $parentId ID of the parent item where the item should be inserted into
+	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface $item Updated item including the generated ID
 	 */
 	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, $parentId = null, $refId = null )
@@ -939,8 +939,8 @@ class Standard
 	 * Returns the total number of items found for the conditions
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
-	 * @param array $find List of markers that should be replaced in the SQL statement
-	 * @param array $replace List of replacements for the markers in the SQL statement
+	 * @param string[] $find List of markers that should be replaced in the SQL statement
+	 * @param string[] $replace List of replacements for the markers in the SQL statement
 	 * @throws \Aimeos\MShop\Locale\Exception If no total value was found
 	 * @return integer Total number of found items
 	 */

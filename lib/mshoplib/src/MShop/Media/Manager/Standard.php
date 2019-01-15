@@ -698,9 +698,9 @@ class Standard
 	 * Creates a new media item instance.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
-	 * @param array $refItems List of items reference to this item
-	 * @param array $propItems List of media property items implementing \Aimeos\MShop\Common\Item\Property\Iface
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of items referenced
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
 	 * @return \Aimeos\MShop\Media\Item\Iface New media item
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [], array $propItems = [] )

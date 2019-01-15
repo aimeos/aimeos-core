@@ -135,7 +135,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
-	 * @return array List of the search keys as key and the number of counted items as value
+	 * @return integer[] List of the search keys as key and the number of counted items as value
 	 * @todo 2018.01 Add optional parameters to interface
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, $value = null, $type = null )
@@ -198,7 +198,7 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Order\Manager\Base\Product\Service\Attribute\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Order\Manager\Base\Service\Attribute\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -243,7 +243,7 @@ class Standard
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param string[] $ids List of IDs
-	 * @return \Aimeos\MShop\Order\Manager\Base\Product\Service\Attribute\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Order\Manager\Base\Service\Attribute\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{

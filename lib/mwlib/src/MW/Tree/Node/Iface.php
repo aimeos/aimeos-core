@@ -64,7 +64,7 @@ interface Iface
 	/**
 	 * Sets the unique ID of the node.
 	 *
-	 * @param mixed|null Unique ID of the node
+	 * @param mixed|null $id Unique ID of the node
 	 * @return void
 	 */
 	public function setId( $id );
@@ -126,7 +126,7 @@ interface Iface
 	/**
 	 * Returns all children of this node.
 	 *
-	 * @return array Numerically indexed list of nodes
+	 * @return \Aimeos\MW\Tree\Node\Iface[] Numerically indexed list of nodes
 	 */
 	public function getChildren();
 

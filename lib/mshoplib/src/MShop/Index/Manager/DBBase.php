@@ -207,7 +207,7 @@ abstract class DBBase
 	/**
 	 * Removes several items from the index
 	 *
-	 * @param array $ids List of product IDs
+	 * @param string[] $ids List of product IDs
 	 * @param string $path Configuration path to the SQL statement to execute
 	 * @param boolean $siteidcheck If siteid should be used in the statement
 	 * @param string $name Name of the ID column
@@ -229,10 +229,10 @@ abstract class DBBase
 	 * Returns the string replacements for the SQL statements
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search critera object
-	 * @param array $attributes Associative list of search keys and objects implementing the \Aimeos\MW\Criteria\Attribute\Iface
-	 * @param array $plugins Associative list of item keys and plugin objects implementing \Aimeos\MW\Criteria\Plugin\Iface
-	 * @param array $joins Associative list of SQL joins
-	 * @param array Array of keys, find and replace arrays
+	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items
+	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of item keys and criteria plugin objects
+	 * @param string[] $joins Associative list of SQL joins
+	 * @param string[] Array of keys, find and replace arrays
 	 */
 	protected function getSQLReplacements( \Aimeos\MW\Criteria\Iface $search, array $attributes, array $plugins, array $joins )
 	{
@@ -314,11 +314,11 @@ abstract class DBBase
 	 * Searches for items matching the given criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Total number of items matched by the given criteria
 	 * @param string $cfgPathSearch Configuration path to the search SQL statement
 	 * @param string $cfgPathCount Configuration path to the count SQL statement
-	 * @return array List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
+	 * @return \Aimeos\MShop\Product\Item\Iface[] List of product items
 	 */
 	protected function searchItemsIndexBase( \Aimeos\MW\Criteria\Iface $search,
 		array $ref, &$total, $cfgPathSearch, $cfgPathCount )

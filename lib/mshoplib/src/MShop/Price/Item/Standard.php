@@ -218,7 +218,7 @@ class Standard extends Base
 	/**
 	 * Sets the new amount of money.
 	 *
-	 * @param integer|double $price Amount with two digits precision
+	 * @param string|integer|double $price Amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setValue( $price )
@@ -251,7 +251,7 @@ class Standard extends Base
 	/**
 	 * Sets the new costs.
 	 *
-	 * @param integer|double $price Amount with two digits precision
+	 * @param string|integer|double $price Amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setCosts( $price )
@@ -284,7 +284,7 @@ class Standard extends Base
 	/**
 	 * Sets the new rebate amount.
 	 *
-	 * @param string $price Rebate amount with two digits precision
+	 * @param string|integer|double $price Rebate amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setRebate( $price )
@@ -317,7 +317,7 @@ class Standard extends Base
 	/**
 	 * Sets the new tax rate.
 	 *
-	 * @param string $taxrate Tax rate with two digits precision
+	 * @param string|integer|double $taxrate Tax rate with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setTaxRate( $taxrate )
@@ -395,7 +395,7 @@ class Standard extends Base
 	/**
 	 * Sets the tax amount
 	 *
-	 * @param integer|double $value Tax value with up to four digits precision
+	 * @param string|integer|double $value Tax value with up to four digits precision
 	 */
 	public function setTaxValue( $value )
 	{
@@ -494,7 +494,6 @@ class Standard extends Base
 
 	/**
 	 * Resets the values of the price item.
-	 *
 	 * The currency ID, domain, type and status stays the same.
 	 *
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls

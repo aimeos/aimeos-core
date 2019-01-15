@@ -178,7 +178,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
-	 * @return array List of the search keys as key and the number of counted items as value
+	 * @return integer[] List of the search keys as key and the number of counted items as value
 	 * @todo 2018.01 Add optional parameters to interface
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, $value = null, $type = null )
@@ -280,7 +280,7 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Order\Manager\Base\Product\Service\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Order\Manager\Base\Service\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{
@@ -314,7 +314,7 @@ class Standard
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param string[] $ids List of IDs
-	 * @return \Aimeos\MShop\Order\Manager\Base\Product\Service\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Order\Manager\Base\Service\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -914,7 +914,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object
 	 * @param array $values Associative list of values from the database
-	 * @param array $attributes List of order service attribute items
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface[] $attributes List of order service attribute items
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item
 	 */
 	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price,
@@ -928,7 +928,8 @@ class Standard
 	 * Searches for attribute items connected with order service item.
 	 *
 	 * @param string[] $ids List of order service item IDs
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface[] List of order service items
+	 * @return array Associative list of order service IDs as keys and order service attribute items
+	 *  implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface as values
 	 */
 	protected function getAttributeItems( $ids )
 	{

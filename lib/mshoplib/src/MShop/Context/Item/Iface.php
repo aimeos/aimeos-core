@@ -107,8 +107,7 @@ interface Iface
 	/**
 	 * Sets the translation/internationalization objects.
 	 *
-	 * @param array $translations Associative list of internationalization objects implementing
-	 * 	\Aimeos\MW\Translation\Iface with locale as key
+	 * @param \Aimeos\MW\Translation\Iface[] $translations Associative list locale as key as items as values
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setI18n( array $translations );

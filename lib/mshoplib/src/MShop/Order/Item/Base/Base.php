@@ -235,7 +235,7 @@ abstract class Base
 	/**
 	 * Returns the product items that are or should be part of a basket
 	 *
-	 * @return array Array of order product items implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of order product items
 	 */
 	public function getProducts()
 	{

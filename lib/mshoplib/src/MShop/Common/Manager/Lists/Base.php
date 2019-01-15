@@ -59,7 +59,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
-	 * @return array List of the search keys as key and the number of counted items as value
+	 * @return integer[] List of the search keys as key and the number of counted items as value
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
 	{

@@ -47,7 +47,7 @@ class Standard
 	/**
 	 * Returns the formatted number.
 	 *
-	 * @param int|float|decimal $number Number to format
+	 * @param integer|float|string $number Number to format
 	 * @param integer|null $decimals Number of decimals behind the decimal point or null for default value
 	 * @return string Formatted number
 	 */

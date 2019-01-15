@@ -265,7 +265,8 @@ abstract class Base
 	/**
 	 * Updates the order status sent by payment gateway notifications
 	 *
-	 * @param \Psr\Http\Message\ServerRequestInterface Request object
+	 * @param \Psr\Http\Message\ServerRequestInterface $request Request object
+	 * @param \Psr\Http\Message\ResponseInterface $response Response object
 	 * @return \Psr\Http\Message\ResponseInterface Response object
 	 */
 	public function updatePush( \Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response )
@@ -277,7 +278,7 @@ abstract class Base
 	/**
 	 * Updates the orders for whose status updates have been received by the confirmation page
 	 *
-	 * @param ServerRequestInterface $request Request object with parameters and request body
+	 * @param \Psr\Http\Message\ServerRequestInterface $request Request object with parameters and request body
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item that should be updated
 	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
 	 * @throws \Aimeos\MShop\Service\Exception If updating the orders failed

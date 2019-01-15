@@ -20,6 +20,14 @@ namespace Aimeos\MShop\Common\Item\Config;
 trait Traits
 {
 	/**
+	 * Returns the configuration values of the item
+	 *
+	 * @return array Configuration values
+	 */
+	abstract public function getConfig();
+
+
+	/**
 	 * Returns the configuration value for the specified path
 	 *
 	 * @param string $key Key of the associative array or path to value like "path/to/value"
@@ -45,7 +53,7 @@ trait Traits
 		if( ( $current = array_shift( $parts ) ) !== null && isset( $config[$current] ) )
 		{
 			if( count( $parts ) > 0 ) {
-				return $this->getPart( $config[$current], $parts );
+				return $this->getArrayValue( $config[$current], $parts );
 			}
 
 			return $config[$current];

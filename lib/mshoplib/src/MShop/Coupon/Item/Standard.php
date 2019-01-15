@@ -88,7 +88,7 @@ class Standard
 	/**
 	 * Sets a new starting point of time, in which the coupon is available.
 	 *
-	 * @param string New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
 	public function setDateStart( $date )
@@ -120,7 +120,7 @@ class Standard
 	/**
 	 * Sets a new ending point of time, in which the coupon is available.
 	 *
-	 * @param string New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
 	public function setDateEnd( $date )

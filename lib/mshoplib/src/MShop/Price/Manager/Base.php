@@ -27,7 +27,7 @@ abstract class Base
 	/**
 	 * Returns the price item with the lowest price for the given quantity.
 	 *
-	 * @param array $priceItems List of price items implementing \Aimeos\MShop\Price\Item\Iface
+	 * @param \Aimeos\MShop\Price\Item\Iface[] $priceItems List of price items
 	 * @param integer $quantity Number of products
 	 * @param string|null $currencyId Three letter ISO currency code or null for all
 	 * @return \Aimeos\MShop\Price\Iface Price item with the lowest price
@@ -62,7 +62,7 @@ abstract class Base
 	/**
 	 * Returns the price items sorted by quantity
 	 *
-	 * @param array $priceItems List of price items implementing \Aimeos\MShop\Price\Item\Iface
+	 * @param \Aimeos\MShop\Price\Item\Iface[] $priceItems List of price items
 	 * @param string|null $currencyId Three letter ISO currency code or null for all
 	 * @return array Associative list of quantity as keys and price item as value
 	 * @throws \Aimeos\MShop\Price\Exception If an object is no price item

@@ -64,4 +64,18 @@ interface Iface
 	 * @return void
 	 */
 	public function clean();
+
+	/**
+	 * Sets the database manager object
+	 *
+	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database manager
+	 */
+	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $dbm );
+
+	/**
+	 * Sets the associative list of schemas with the resource name as key.
+	 *
+	 * @param \Aimeos\MW\Setup\DBSchema\Iface[] $schemas Associative list of schemas
+	 */
+	public function setSchemas( array $schemas );
 }

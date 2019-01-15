@@ -95,7 +95,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	/**
 	 * Sets the associative list of schemas with the resource name as key.
 	 *
-	 * @param array $schemas Associative list of schemas
+	 * @param \Aimeos\MW\Setup\DBSchema\Iface[] $schemas Associative list of schemas
 	 */
 	public function setSchemas( array $schemas )
 	{
@@ -106,6 +106,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	/**
 	 * Returns the database connection
 	 *
+	 * @param string $name Name from the resource configuration
 	 * @return \Aimeos\MW\DB\Connection\Iface Database connection
 	 */
 	protected function acquire( $name = 'db')
@@ -117,7 +118,8 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	/**
 	 * Releases the database connection
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface Database connection
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param string $name Name from the resource configuration
 	 */
 	protected function release( \Aimeos\MW\DB\Connection\Iface $conn, $name = 'db' )
 	{
@@ -193,7 +195,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	/**
 	 * Returns the setup task paths ordered by their dependencies
 	 *
-	 * @return array List of file system paths
+	 * @return string[] List of file system paths
 	 */
 	protected function getSetupPaths()
 	{
@@ -232,7 +234,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 *
 	 * @param string $msg Current message
 	 * @param integer $level Indent level of the message (default: 0 )
-	 * @param string $status|null Current status
+	 * @param string|null $status Current status
 	 */
 	protected function msg( $msg, $level = 0, $status = null )
 	{
@@ -260,7 +262,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * Extracts the table definitions from the given content.
 	 *
 	 * @param string $content Content of the file to parse
-	 * @return array Associative list of table names with table create statements ordered like in the file
+	 * @return string[] Associative list of table names with table create statements ordered like in the file
 	 */
 	protected function getTableDefinitions( $content )
 	{
@@ -284,7 +286,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * Extracts the index definitions from the given content.
 	 *
 	 * @param string $content Content of the file to parse
-	 * @return array Associative list of index names with index create statements ordered like in the file
+	 * @return string[] Associative list of index names with index create statements ordered like in the file
 	 */
 	protected function getIndexDefinitions( $content )
 	{
@@ -308,7 +310,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * Extracts the trigger definitions from the given content.
 	 *
 	 * @param string $content Content of the file to parse
-	 * @return array Associative list of trigger names with trigger create statements ordered like in the file
+	 * @return string[] Associative list of trigger names with trigger create statements ordered like in the file
 	 */
 	protected function getTriggerDefinitions( $content )
 	{

@@ -61,6 +61,21 @@ interface Iface
 	public function compare( \Aimeos\MShop\Price\Item\Iface $price );
 
 	/**
+	 * Returns the label of the item
+	 *
+	 * @return string Label of the item
+	 */
+	public function getLabel();
+
+	/**
+	 * Sets the label of the item
+	 *
+	 * @param string $label Label of the item
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 */
+	public function setLabel( $label );
+
+	/**
 	 * Returns the quantity.
 	 *
 	 * @return integer Quantity
@@ -70,7 +85,7 @@ interface Iface
 	/**
 	 * Sets the quantity.
 	 *
-	 * @param integer Quantity
+	 * @param integer $quantity Quantity
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setQuantity( $quantity );
@@ -85,7 +100,7 @@ interface Iface
 	/**
 	 * Sets the new amount of money.
 	 *
-	 * @param integer|double $price Amount with two digits precision
+	 * @param string|integer|double $price Amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setValue( $price );
@@ -100,7 +115,7 @@ interface Iface
 	/**
 	 * Sets the new costs.
 	 *
-	 * @param integer|double $price Amount with two digits precision
+	 * @param string|integer|double $price Amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setCosts( $price );
@@ -115,7 +130,7 @@ interface Iface
 	/**
 	 * Sets the new rebate amount.
 	 *
-	 * @param integer|double $price Rebate amount with two digits precision
+	 * @param string|integer|double $price Rebate amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setRebate( $price );
@@ -130,7 +145,7 @@ interface Iface
 	/**
 	 * Sets the new tax rate in percent.
 	 *
-	 * @param integer|double $taxrate Tax rate with two digits precision
+	 * @param string|integer|double $taxrate Tax rate with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setTaxRate( $taxrate );
@@ -166,7 +181,7 @@ interface Iface
 	/**
 	 * Sets the tax amount
 	 *
-	 * @param integer|double $value Tax value with up to four digits precision
+	 * @param string|integer|double $value Tax value with up to four digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setTaxValue( $value );

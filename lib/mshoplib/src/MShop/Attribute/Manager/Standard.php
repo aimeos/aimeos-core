@@ -682,9 +682,9 @@ class Standard
 	 * Creates a new attribute item instance.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
-	 * @param array $refItems List of items implementing \Aimeos\MShop\Text\Item\Iface
-	 * @param array $propertyItems List of items implementing \Aimeos\MShop\Common\Item\Property\Iface
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propertyItems List of property items
 	 * @return \Aimeos\MShop\Attribute\Item\Iface New attribute item
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [],

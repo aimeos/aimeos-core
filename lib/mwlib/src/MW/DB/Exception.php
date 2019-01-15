@@ -33,7 +33,7 @@ class Exception extends \Aimeos\MW\Exception
 	 */
 	public function __construct( $message, $state = '', $info = '' )
 	{
-		parent::__construct( $message, is_numeric( $state ) ? $state : 0 );
+		parent::__construct( $message, is_numeric( $state ) ? (int) $state : 0 );
 
 		$this->state = $state;
 		$this->info = $info;

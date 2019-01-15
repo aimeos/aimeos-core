@@ -117,7 +117,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	/**
 	 * Sets the unique ID of the node.
 	 *
-	 * @param mixed|null Unique ID of the node
+	 * @param mixed|null $id Unique ID of the node
 	 */
 	public function setId( $id )
 	{
@@ -193,7 +193,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	/**
 	 * Sets the new status of the node.
 	 *
-	 * @param integer Greater than zero if enabled, zero or less than if not
+	 * @param integer $status Greater than zero if enabled, zero or less than if not
 	 */
 	public function setStatus( $status )
 	{
@@ -226,7 +226,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	/**
 	 * Returns all children of this node.
 	 *
-	 * @return array Numerically indexed list of nodes
+	 * @return \Aimeos\MW\Tree\Node\Iface[] Numerically indexed list of nodes
 	 */
 	public function getChildren()
 	{

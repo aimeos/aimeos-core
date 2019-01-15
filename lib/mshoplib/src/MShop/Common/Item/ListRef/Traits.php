@@ -295,6 +295,14 @@ trait Traits
 
 
 	/**
+	 * Returns the item type
+	 *
+	 * @return string Item type, subtypes are separated by slashes
+	 */
+	abstract public function getResourceType();
+
+
+	/**
 	 * Compares the positions of two items for sorting.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Position\Iface $a First item

@@ -94,14 +94,14 @@ interface Iface
 	 * Returns the product item of an (future) order specified by its key.
 	 *
 	 * @param integer $key Key returned by getProducts() identifying the requested product
-	 * @return \Aimeos\MShop\Order\Product\Iface Product item of an order
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Product item of an order
 	 */
 	public function getProduct( $key );
 
 	/**
 	 * Returns the product items that are or should be part of an (future) order.
 	 *
-	 * @return array Array of order product items implementing \Aimeos\MShop\Order\Product\Iface
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of order product items
 	 */
 	public function getProducts();
 

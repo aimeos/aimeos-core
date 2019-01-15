@@ -43,7 +43,7 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
 	 * @param array $values Associative list of order product values
-	 * @param array $attributes List of order attributes implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] $attributes List of order attribute items
 	 */
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [] )
 	{
@@ -161,7 +161,7 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 	/**
 	 * Sets the new list of attribute items for the product.
 	 *
-	 * @param array $attributes List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] $attributes List of order product attribute items
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setAttributeItems( array $attributes )

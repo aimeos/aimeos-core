@@ -67,7 +67,7 @@ class Standard
 	/**
 	 * Sets the ID of the basic order item which contains the order details.
 	 *
-	 * @param integer $id ID of the basic order item
+	 * @param $value $id ID of the basic order item
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setBaseId( $id )
@@ -249,7 +249,7 @@ class Standard
 	/**
 	 * Returns the related invoice ID.
 	 *
-	 * @param string|null Related invoice ID
+	 * @return string|null Related invoice ID
 	 */
 	public function getRelatedId()
 	{

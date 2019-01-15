@@ -94,7 +94,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * Creates a term from a list of values.
 	 *
 	 * @param string $name Translated name of the variable
-	 * @param string $type Type constant
+	 * @param integer $type Type constant
 	 * @return string Created term string
 	 */
 	protected function createListTerm( $name, $type )

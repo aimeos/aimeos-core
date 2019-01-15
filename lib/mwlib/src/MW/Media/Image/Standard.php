@@ -182,7 +182,7 @@ class Standard
 	/**
 	 * Resamples the image to the given width and height.
 	 *
-	 * @param resource GDlib image object
+	 * @param resource $image GDlib image object
 	 * @param integer $srcWidth Width of the existing image
 	 * @param integer $srcHeight Height of the existing image
 	 * @param integer $destWidth Width of the new image

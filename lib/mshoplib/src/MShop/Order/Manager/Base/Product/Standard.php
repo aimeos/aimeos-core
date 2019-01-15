@@ -246,7 +246,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
-	 * @return array List of the search keys as key and the number of counted items as value
+	 * @return integer[] List of the search keys as key and the number of counted items as value
 	 * @todo 2018.01 Add optional parameters to interface
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, $value = null, $type = null )
@@ -986,8 +986,8 @@ class Standard
 	 * Creates new order base product item object initialized with given parameters.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item object with product price
-	 * @param array $values Associative list of ordered product properties
-	 * @param array $attributes List of order product attributes that belong to the ordered product
+	 * @param array $values Associative list of order product properties
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] $attributes List of order product attributes
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item
 	 */
 	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [] )
@@ -1000,7 +1000,8 @@ class Standard
 	 * Searches for attribute items connected with order product item.
 	 *
 	 * @param string[] $ids List of order product item IDs
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] List of order product attribute items
+	 * @return array Associative list of order product IDs as keys and order product attribute items
+	 *  implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface as values
 	 */
 	protected function getAttributeItems( $ids )
 	{

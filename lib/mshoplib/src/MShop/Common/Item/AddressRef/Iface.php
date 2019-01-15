@@ -17,7 +17,7 @@ namespace Aimeos\MShop\Common\Item\AddressRef;
  * @package MShop
  * @subpackage Common
  */
-interface Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Adds a new address item or overwrite an existing one

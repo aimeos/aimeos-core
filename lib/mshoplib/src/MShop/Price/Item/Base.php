@@ -88,7 +88,7 @@ abstract class Base
 	/**
 	 * Tests if the price is within the requirements.
 	 *
-	 * @param integer|double $value Monetary value
+	 * @param string|integer|double $value Monetary value
 	 * @param integer $precision Number of decimal places
 	 * @return string Sanitized monetary value
 	 */
@@ -105,7 +105,7 @@ abstract class Base
 	/**
 	 * Formats the money value.
 	 *
-	 * @param string|double $number Money value
+	 * @param string|integer|double $number Money value
 	 * @param integer $precision Number of decimal places
 	 * @return string Formatted money value
 	 */

@@ -46,6 +46,14 @@ abstract class Base
 
 
 	/**
+	 * Returns the underlying connection object
+	 *
+	 * @return mixed Underlying connection object
+	 */
+	abstract public function getRawObject();
+
+
+	/**
 	 * Escapes the value if necessary for direct inclusion in SQL statement.
 	 *
 	 * @param string $data Value to escape

@@ -35,7 +35,7 @@ class None
 	/**
 	 * Removes the cache entries identified by the given keys.
 	 *
-	 * @param \Traversable|array $keys List of key strings that identify the cache entries
+	 * @param string[] $keys List of key strings that identify the cache entries
 	 * 	that should be removed
 	 */
 	public function deleteMultiple( $keys )
@@ -46,8 +46,7 @@ class None
 	/**
 	 * Removes the cache entries identified by the given tags.
 	 *
-	 * @param array $tags List of tag strings that are associated to one or more
-	 * 	cache entries that should be removed
+	 * @param string[] $tags List of tag strings that are associated to one or more cache entries that should be removed
 	 */
 	public function deleteByTags( array $tags )
 	{
@@ -85,9 +84,9 @@ class None
 	/**
 	 * Returns the cached values for the given cache keys.
 	 *
-	 * @param \Traversable|array $keys List of key strings for the requested cache entries
+	 * @param string[] $keys List of key strings for the requested cache entries
 	 * @param mixed $default Default value to return for keys that do not exist
-	 * @return array Associative list of key/value pairs for the requested cache
+	 * @return string[] Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
 	 * 	will be in the result list
 	 */
@@ -108,9 +107,9 @@ class None
 	 *
 	 * @param string $key Key string for the given value like product/id/123
 	 * @param mixed $value Value string that should be stored for the given key
-	 * @param int|string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
+	 * @param integer|string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
 	 * 	format or as TTL value when the cache entry expires
-	 * @param array $tags List of tag strings that should be assoicated to the
+	 * @param string[] $tags List of tag strings that should be assoicated to the
 	 * 	given value in the cache
 	 */
 	public function set( $key, $value, $expires = null, array $tags = [] )
@@ -121,11 +120,9 @@ class None
 	/**
 	 * Adds the given key/value pairs to the cache.
 	 *
-	 * @param \Traversable|array $pairs Associative list of key/value pairs. Both must be
-	 * 	a string
-	 * @param array|int|string|null $expires Associative list of keys and datetime
-	 *  string or integer TTL pairs.
-	 * @param array $tags Associative list of key/tag or key/tags pairs that
+	 * @param string[] $pairs Associative list of key/value pairs. Both must be a string
+	 * @param array|integer|string|null $expires Associative list of keys and datetime string or integer TTL pairs.
+	 * @param string[] $tags Associative list of key/tag or key/tags pairs that
 	 *  should be associated to the values identified by their key. The value
 	 *  associated to the key can either be a tag string or an array of tag strings
 	 * @return null

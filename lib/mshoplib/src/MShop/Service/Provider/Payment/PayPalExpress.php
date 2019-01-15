@@ -382,7 +382,8 @@ class PayPalExpress
 	/**
 	 * Updates the order status sent by payment gateway notifications
 	 *
-	 * @param \Psr\Http\Message\ServerRequestInterface Request object
+	 * @param \Psr\Http\Message\ServerRequestInterface $request Request object
+	 * @param \Psr\Http\Message\ResponseInterface $response Response object
 	 * @return \Psr\Http\Message\ResponseInterface Response object
 	 */
 	public function updatePush( \Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response )
@@ -534,8 +535,8 @@ class PayPalExpress
 	/**
 	 * Checks if IPN message from paypal is valid.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket
-	 * @param array $params
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Order base item
+	 * @param array $params List of parameters
 	 */
 	protected function checkIPN( $basket, $params )
 	{
@@ -765,7 +766,7 @@ class PayPalExpress
 	/**
 	 * Returns order service item for specified base ID.
 	 *
-	 * @param integer $baseid Base ID of the order
+	 * @param string $baseid Base ID of the order
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item
 	 */
 	protected function getOrderServiceItem( $baseid )

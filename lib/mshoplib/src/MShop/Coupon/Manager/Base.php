@@ -90,7 +90,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon item object
 	 * @param string $code Coupon code
 	 * @param \Aimeos\MShop\Coupon\Provider\Iface $provider Coupon provider object
-	 * @param array $names List of decorator names
+	 * @param string[] $names List of decorator names
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon provider wrapped by one or more coupon decorators
 	 * @throws \Aimeos\MShop\Coupon\Exception If a coupon decorator couldn't be instantiated
 	 */

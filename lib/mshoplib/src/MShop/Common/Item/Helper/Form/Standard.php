@@ -32,7 +32,7 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 *
 	 * @param string $url Initial url
 	 * @param string $method Initial method (e.g. post or get)
-	 * @param array $values Form parameters implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $values Form parameter items
 	 * @param boolean $external True if URL points to an external site, false if it stays on the same site
 	 * @param string $html Custom HTML for rendering form (e.g. Including JS or custom html)
 	 */

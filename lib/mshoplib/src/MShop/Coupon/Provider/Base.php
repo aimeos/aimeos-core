@@ -329,7 +329,7 @@ abstract class Base implements Iface
 	/**
 	 * Creates the order products for monetary rebates.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface Basket object
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basket object
 	 * @param string $productCode Unique product code
 	 * @param float $rebate Rebate amount that should be granted, will contain the remaining rebate if not fully used
 	 * @param integer $quantity Number of products in basket

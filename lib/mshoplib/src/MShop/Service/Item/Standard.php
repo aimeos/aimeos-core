@@ -46,7 +46,7 @@ class Standard
 
 
 	/**
-	 * Returns the code of the service item payment if available.
+	 * Returns the code of the service item if available
 	 *
 	 * @return string Service item code
 	 */
@@ -61,9 +61,9 @@ class Standard
 
 
 	/**
-	 * Sets the code of the service item payment.
+	 * Sets the code of the service item
 	 *
-	 * @param string code of the service item payment
+	 * @param string $code Code of the service item
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setCode( $code )
@@ -147,7 +147,7 @@ class Standard
 
 
 	/**
-	 * Returns the label of the service item payment if available.
+	 * Returns the label of the service item if available.
 	 *
 	 * @return string Service item label
 	 */
@@ -162,9 +162,9 @@ class Standard
 
 
 	/**
-	 * Sets the label of the service item payment.
+	 * Sets the label of the service item
 	 *
-	 * @param string label of the service item payment
+	 * @param string $label Label of the service item
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setLabel( $label )
@@ -195,7 +195,7 @@ class Standard
 	/**
 	 * Sets a new starting point of time, in which the service is available.
 	 *
-	 * @param string|null New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setDateStart( $date )
@@ -226,7 +226,7 @@ class Standard
 	/**
 	 * Sets a new ending point of time, in which the service is available.
 	 *
-	 * @param string|null New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setDateEnd( $date )

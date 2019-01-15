@@ -17,7 +17,7 @@ namespace Aimeos\MShop\Common\Item\PropertyRef;
  * @package MShop
  * @subpackage Common
  */
-interface Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Adds a new property item or overwrite an existing one

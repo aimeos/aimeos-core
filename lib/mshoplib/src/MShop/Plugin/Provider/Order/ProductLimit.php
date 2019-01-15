@@ -124,8 +124,23 @@ class ProductLimit
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
-		$this->checkWithoutCurrency( $order, $value );
-		$this->checkWithCurrency( $order, $value );
+		if( is_array( $value ) )
+		{
+			foreach( $value as $entry )
+			{
+				\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $entry );
+
+				$this->checkWithoutCurrency( $order, $entry );
+				$this->checkWithCurrency( $order, $entry );
+			}
+		}
+		else
+		{
+			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
+
+			$this->checkWithoutCurrency( $order, $value );
+			$this->checkWithCurrency( $order, $value );
+		}
 
 		return true;
 	}

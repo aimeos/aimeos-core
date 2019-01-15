@@ -102,8 +102,7 @@ interface Iface
 	 * This is much faster than deleting them one by one as they are combined
 	 * into a single request.
 	 *
-	 * @param \Traversable|array $keys List of key strings that identify the cache entries
-	 * 	that should be removed
+	 * @param string[] $keys List of key strings that identify the cache entries that should be removed
 	 * @return null
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
@@ -132,8 +131,7 @@ interface Iface
 	 * extremely handy if e.g. all cached entries that relates to one product
 	 * should be deleted because the product has changed.
 	 *
-	 * @param string[] $tags List of tag strings that are associated to one or more
-	 * 	cache entries that should be removed
+	 * @param string[] $tags List of tag strings that are associated to one or more cache entries that should be removed
 	 * @return null
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
@@ -182,7 +180,7 @@ interface Iface
 	 * @param string $key Path to the requested value like product/id/123
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key. If no value for the
-	 * key is found in the cache, the given default value is returned
+	 *	key is found in the cache, the given default value is returned
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function get( $key, $default = null );
@@ -214,9 +212,9 @@ interface Iface
 	 * array. No error or warning is returned in this case. If none of the keys
 	 * is found in the cache, an empty array is returned.
 	 *
-	 * @param \Traversable|array $keys List of key strings for the requested cache entries
+	 * @param string[] $keys List of key strings for the requested cache entries
 	 * @param mixed $default Default value to return for keys that do not exist
-	 * @return array Associative list of key/value pairs for the requested cache
+	 * @return string[] Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
 	 * 	will be in the result list
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
@@ -288,10 +286,9 @@ interface Iface
 	 *
 	 * @param string $key Key string for the given value like product/id/123
 	 * @param mixed $value Value string that should be stored for the given key
-	 * @param int|string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
+	 * @param integer|string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
 	 * 	format or as TTL value when the cache entry expires
-	 * @param array $tags List of tag strings that should be assoicated to the
-	 * 	given value in the cache
+	 * @param array $tags List of tag strings that should be assoicated to the given value in the cache
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 * @return null
 	 */
@@ -378,11 +375,9 @@ interface Iface
 	 * $pairs, then it is ignored. The maximum allowed length for tags is 255
 	 * bytes.
 	 *
-	 * @param \Traversable|array $pairs Associative list of key/value pairs. Both must be
-	 * 	a string
-	 * @param array|int|string|null $expires Associative list of keys and datetime
-	 *  string or integer TTL pairs.
-	 * @param array $tags Associative list of key/tag or key/tags pairs that
+	 * @param string[] $pairs Associative list of key/value pairs. Both must be a string
+	 * @param array|integer|string|null $expires Associative list of keys and datetime string or integer TTL pairs.
+	 * @param string[] $tags Associative list of key/tag or key/tags pairs that
 	 *  should be associated to the values identified by their key. The value
 	 *  associated to the key can either be a tag string or an array of tag strings
 	 * @return null

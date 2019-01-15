@@ -89,11 +89,14 @@ class ConfigFile
 	 */
 	public function __destruct()
 	{
-		if( fwrite( $this->file, serialize( $this->config ) ) === false ) {
-			echo 'Unable to write collected configuration to file' . PHP_EOL;
-		}
+		if( is_resource( $this->file ) )
+		{
+			if( fwrite( $this->file, serialize( $this->config ) ) === false ) {
+				echo 'Unable to write collected configuration to file' . PHP_EOL;
+			}
 
-		fclose( $this->file );
+			fclose( $this->file );
+		}
 	}
 
 

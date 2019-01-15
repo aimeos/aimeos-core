@@ -96,7 +96,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 	 * @param \Aimeos\MShop\Common\Manager\Iface $localeManager Locale manager
 	 * @param array $data Associative list of locale site data
 	 * @param string $manager Manager implementation name
-	 * @param integer|null $parentId Parent id of the locale item
+	 * @param string|null $parentId Parent id of the locale item
 	 * @return array Associative list of keys from the data and generated site ID
 	 */
 	protected function addLocaleSiteData( \Aimeos\MShop\Common\Manager\Iface $localeManager, array $data, $manager = 'Standard', $parentId = null )

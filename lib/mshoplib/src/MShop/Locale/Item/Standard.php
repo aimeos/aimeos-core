@@ -33,8 +33,8 @@ class Standard
 	 *
 	 * @param array $values Values to be set on initialisation
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface|null $site Site object
-	 * @param array $sitePath List of site IDs up to the root site item
-	 * @param array $siteSubTree List of site IDs from all sites below the current site
+	 * @param string[] $sitePath List of site IDs up to the root site item
+	 * @param string[] $siteSubTree List of site IDs from all sites below the current site
 	 */
 	public function __construct( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $site = null,
 		array $sitePath = [], array $siteSubTree = [] )
@@ -111,7 +111,7 @@ class Standard
 	/**
 	 * Sets the identifier of the shop instance.
 	 *
-	 * @param string ID of the shop instance
+	 * @param string $id ID of the shop instance
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
 	public function setSiteId( $id )

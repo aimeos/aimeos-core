@@ -84,7 +84,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
-	 * @return array List of ID values as key and the number of counted products as value
+	 * @return integer[] List of ID values as key and the number of counted products as value
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
 	{
@@ -622,7 +622,7 @@ class Standard
 	/**
 	 * Returns the list items referencing the given products
 	 *
-	 * @param array $items List of product items implementing \Aimeos\MShop\Product\Item\Iface
+	 * @param \Aimeos\MShop\Product\Item\Iface[] $items List of product items
 	 * @return array Associative list of product IDs as keys and lists of list items as values
 	 */
 	protected function getListItems( array $items )

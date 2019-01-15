@@ -152,7 +152,7 @@ abstract class Base
 	/**
 	 * Creates the order base item objects from the map and adds the referenced items
 	 *
-	 * @param array Associative list of order base IDs as keys and list of price/locale/row as values
+	 * @param array $map Associative list of order base IDs as keys and list of price/locale/row as values
 	 * @param string[] $ref Domain items that should be added as well, e.g.
 	 *	"order/base/address", "order/base/coupon", "order/base/product", "order/base/service"
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface[] Associative list of order base IDs as keys and items as values
@@ -250,7 +250,7 @@ abstract class Base
 	/**
 	 * Returns the address item map for the given order base IDs
 	 *
-	 * @param string[] List of order base IDs
+	 * @param string[] $baseIds List of order base IDs
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return array Multi-dimensional associative list of order base IDs as keys and order address type/item pairs as values
 	 */

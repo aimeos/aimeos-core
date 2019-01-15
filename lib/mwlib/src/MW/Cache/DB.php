@@ -126,8 +126,7 @@ class DB
 	/**
 	 * Removes the cache entries identified by the given keys.
 	 *
-	 * @param \Traversable|array $keys List of key strings that identify the cache entries
-	 * 	that should be removed
+	 * @param string[] $keys List of key strings that identify the cache entries that should be removed
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function deleteMultiple( $keys )
@@ -160,8 +159,7 @@ class DB
 	/**
 	 * Removes the cache entries identified by the given tags.
 	 *
-	 * @param string[] $tags List of tag strings that are associated to one or more
-	 * 	cache entries that should be removed
+	 * @param string[] $tags List of tag strings that are associated to one or more cache entries that should be removed
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function deleteByTags( array $tags )
@@ -220,7 +218,7 @@ class DB
 	/**
 	 * Returns the cached values for the given cache keys if available.
 	 *
-	 * @param \Traversable|array $keys List of key strings for the requested cache entries
+	 * @param string[] $keys List of key strings for the requested cache entries
 	 * @param mixed $default Default value to return for keys that do not exist
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
@@ -280,11 +278,9 @@ class DB
 	 * Adds or overwrites the given key/value pairs in the cache, which is much
 	 * more efficient than setting them one by one using the set() method.
 	 *
-	 * @param \Traversable|array $pairs Associative list of key/value pairs. Both must be
-	 * 	a string
-	 * @param array|int|string|null $expires Associative list of keys and datetime
-	 *  string or integer TTL pairs.
-	 * @param array $tags Associative list of key/tag or key/tags pairs that
+	 * @param string[] $pairs Associative list of key/value pairs. Both must be a string
+	 * @param array|int|string|null $expires Associative list of keys and datetime string or integer TTL pairs.
+	 * @param string[] $tags Associative list of key/tag or key/tags pairs that
 	 *  should be associated to the values identified by their key. The value
 	 *  associated to the key can either be a tag string or an array of tag strings
 	 * @return null

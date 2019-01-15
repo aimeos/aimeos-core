@@ -179,8 +179,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $key Search key for aggregating the key column
 	 * @param string $cfgPath Configuration key for the SQL statement
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
-	 * @param string $value Search key for aggregating the value column
-	 * @return array List of ID values as key and the number of counted products as value
+	 * @param string|null $value Search key for aggregating the value column
+	 * @return integer[] List of ID values as key and the number of counted products as value
 	 * @todo 2018.01 Reorder Parameter list
 	 */
 	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, $key, $cfgPath, $required = [], $value = null )
@@ -348,9 +348,9 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @param array $list Associative list of search keys and the lists of search definitions
 	 * @param string $path Configuration path to the sub-domains for fetching the search definitions
-	 * @param array $default List of sub-domains if no others are configured
+	 * @param string[] $default List of sub-domains if no others are configured
 	 * @param boolean $withsub True to include search definitions of sub-domains, false if not
-	 * @return array Associative list of search keys and objects implementing the \Aimeos\MW\Criteria\Attribute\Iface
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] Associative list of search keys and criteria attribute items as values
 	 * @since 2014.09
 	 */
 	protected function getSearchAttributesBase( array $list, $path, array $default, $withsub )
@@ -533,7 +533,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Returns the SQL strings for joining dependent tables.
 	 *
-	 * @param array $attributes List of search attributes
+	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes List of criteria attribute items
 	 * @param string $prefix Search key prefix
 	 * @return array List of JOIN SQL strings
 	 */
@@ -557,11 +557,11 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param string Main manager type
+	 * @param string $type Main manager type
 	 * @param string $path Configuration path to the sub-domains
-	 * @param array $default List of sub-domains if no others are configured
+	 * @param string[] $default List of sub-domains if no others are configured
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
 	protected function getResourceTypeBase( $type, $path, array $default, $withsub )
 	{
@@ -615,7 +615,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @param array &$searchAttr Single search config definition including the "internalcode" key
 	 * @param string $column Name (including alias) of the column containing the site ID in the storage
-	 * @param integer|array $value Site ID or list of site IDs
+	 * @param string|string[] $value Site ID or list of site IDs
 	 * @param string $marker Marker to replace
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
@@ -641,9 +641,9 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $keys Sorted list of criteria keys
-	 * @param array $attributes Associative list of search keys and objects implementing the \Aimeos\MW\Criteria\Attribute\Iface
+	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
 	 * @param string[] $siteIds List of site IDs that should be used for searching
-	 * @return array List of search conditions implementing \Aimeos\MW\Criteria\Expression\Iface
+	 * @return \Aimeos\MW\Criteria\Expression\Iface[] List of search conditions
 	 * @since 2015.01
 	 */
 	protected function getSearchSiteConditions( \Aimeos\MW\Criteria\Iface $search, array $keys, array $attributes, array $siteIds )
@@ -690,10 +690,10 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * Returns the string replacements for the SQL statements
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search critera object
-	 * @param array $attributes Associative list of search keys and objects implementing the \Aimeos\MW\Criteria\Attribute\Iface
-	 * @param array $plugins Associative list of item keys and plugin objects implementing \Aimeos\MW\Criteria\Plugin\Iface
-	 * @param array $joins Associative list of SQL joins
-	 * @param array Array of keys, find and replace arrays
+	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
+	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
+	 * @param string[] $joins Associative list of SQL joins
+	 * @return array Array of keys, find and replace arrays
 	 */
 	protected function getSQLReplacements( \Aimeos\MW\Criteria\Iface $search, array $attributes, array $plugins, array $joins )
 	{
@@ -735,7 +735,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string[] $required Additional search keys to add conditions for even if no conditions are available
 	 * @param integer|null $total Contains the number of all records matching the criteria if not null
 	 * @param integer $sitelevel Constant from \Aimeos\MShop\Locale\Manager\Base for defining which site IDs should be used for searching
-	 * @param array $plugins Associative list of item keys and plugin objects implementing \Aimeos\MW\Criteria\Plugin\Iface
+	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
 	 * @return \Aimeos\MW\DB\Result\Iface SQL result object for accessing the found records
 	 * @throws \Aimeos\MShop\Exception if no number of all matching records is available
 	 */

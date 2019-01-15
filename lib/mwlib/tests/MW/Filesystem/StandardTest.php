@@ -259,7 +259,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testWrites()
 	{
-		$handle = fopen( $this->basedir . 'file10tmp', 'w+' );
+		if( ( $handle = fopen( $this->basedir . 'file10tmp', 'w+' ) ) === false ) {
+			throw new \RuntimeException( sprintf( 'Failed opening file "%1$s"', $this->basedir . 'file10tmp' ) );
+		}
+
 		fwrite( $handle, 'test' );
 		rewind( $handle );
 

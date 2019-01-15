@@ -656,7 +656,7 @@ class Standard
 	/**
 	 * Creates a new plugin object.
 	 *
-	 * @param array Associative list of item key/value pairs
+	 * @param array $values Associative list of item key/value pairs
 	 * @return \Aimeos\MShop\Plugin\Item\Iface New plugin object
 	 */
 	protected function createItemBase( array $values = [] )

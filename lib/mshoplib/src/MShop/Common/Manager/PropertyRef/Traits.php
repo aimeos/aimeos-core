@@ -20,9 +20,17 @@ namespace Aimeos\MShop\Common\Manager\PropertyRef;
 trait Traits
 {
 	/**
+	 * Returns the outmost decorator of the decorator stack
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
+	 */
+	abstract protected function getObject();
+
+
+	/**
 	 * Returns the property items for the given parent IDs
 	 *
-	 * @param array $parentIds List of parent IDs
+	 * @param string[] $parentIds List of parent IDs
 	 * @param string $domain Domain of the calling manager
 	 * @return array Associative list of parent IDs / property IDs as keys and items implementing
 	 * 	\Aimeos\MShop\Common\Item\Property\Iface as values

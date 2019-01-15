@@ -19,6 +19,10 @@ namespace Aimeos\MW\View\Helper\Encoder;
  */
 interface Iface extends \Aimeos\MW\View\Helper\Iface
 {
+	const TAINT = 0;
+	const TRUST = 1;
+
+
 	/**
 	 * Returns the encoder.
 	 *

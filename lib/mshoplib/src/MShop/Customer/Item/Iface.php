@@ -124,7 +124,7 @@ interface Iface
 	/**
 	 * Sets the group IDs the customer belongs to
 	 *
-	 * @param array $ids List of group IDs
+	 * @param string[] $ids List of group IDs
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setGroups( array $ids );

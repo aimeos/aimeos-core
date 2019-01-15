@@ -122,8 +122,8 @@ class PercentRebate
 	/**
 	 * Rounds the number to the configured precision
 	 *
-	 * @param float $number Number to round
-	 * @return Rounded number
+	 * @param double $number Number to round
+	 * @return double Rounded number
 	 */
 	protected function round( $number )
 	{

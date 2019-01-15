@@ -25,7 +25,10 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 	public function testGetImageAsResource()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$resource = fopen( __DIR__ . $ds .'_testfiles' . $ds . 'image.png', 'rw' );
+		if( ( $resource = fopen( __DIR__ . $ds .'_testfiles' . $ds . 'image.png', 'rw' ) ) === false ) {
+			throw new \RuntimeException( 'Failed to open ' . __DIR__ . $ds .'_testfiles' . $ds . 'image.png' );
+		}
+
 		$object = \Aimeos\MW\Media\Factory::get( $resource );
 
 		$this->assertInstanceOf( \Aimeos\MW\Media\Iface::class, $object );

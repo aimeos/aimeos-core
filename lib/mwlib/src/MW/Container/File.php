@@ -54,7 +54,7 @@ class File
 	public function create( $name )
 	{
 		if( $this->content ) {
-			throw new \Aimeos\MW\Container\Exception( sprint( 'Only one content object is possible within a file container' ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Only one content object is possible within a file container' ) );
 		}
 
 		return new $this->classname( $this->getName(), $name, $this->getOptions() );
@@ -69,7 +69,7 @@ class File
 	public function add( \Aimeos\MW\Container\Content\Iface $content )
 	{
 		if( $this->content ) {
-			throw new \Aimeos\MW\Container\Exception( sprint( 'Only one content object is possible within a file container' ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Only one content object is possible within a file container' ) );
 		}
 
 		$this->content = $content;

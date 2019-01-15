@@ -38,7 +38,7 @@ abstract class Base
 	 * Returns a node and its descendants depending on the given resource.
 	 *
 	 * @param string|null $id Retrieve nodes starting from the given ID
-	 * @param string[] List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
+	 * @param string[] $ref List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
 	 * @param \Aimeos\MW\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes

@@ -69,7 +69,7 @@ abstract class Base
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param string[] $ids List of IDs
-	 * @param Aimeos\MShop\Common\Manager\Address\Iface Manager object for chaining method calls
+	 * @return Aimeos\MShop\Common\Manager\Address\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{
@@ -80,7 +80,7 @@ abstract class Base
 	/**
 	 * Returns the common address item object specificed by its ID.
 	 *
-	 * @param integer $id Unique common address ID referencing an existing address
+	 * @param string $id Unique common address ID referencing an existing address
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Returns the address item of the given id

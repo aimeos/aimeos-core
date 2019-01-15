@@ -83,11 +83,9 @@ class Mysql
 	 * Adds or overwrites the given key/value pairs in the cache, which is much
 	 * more efficient than setting them one by one using the set() method.
 	 *
-	 * @param \Traversable|array $pairs Associative list of key/value pairs. Both must be
-	 * 	a string
-	 * @param array|int|string|null $expires Associative list of keys and datetime
-	 *  string or integer TTL pairs.
-	 * @param array $tags Associative list of key/tag or key/tags pairs that
+	 * @param string[] $pairs Associative list of key/value pairs. Both must be a string
+	 * @param array|integer|string|null $expires Associative list of keys and datetime string or integer TTL pairs
+	 * @param string[] $tags Associative list of key/tag or key/tags pairs that
 	 *  should be associated to the values identified by their key. The value
 	 *  associated to the key can either be a tag string or an array of tag strings
 	 * @return null

@@ -186,7 +186,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	/**
 	 * Creates an object for managing the nested set.
 	 *
-	 * @param integer $siteid Site ID for the specific tree
+	 * @param string $siteid Site ID for the specific tree
 	 * @return \Aimeos\MW\Tree\Manager\Iface Tree manager
 	 */
 	protected function createTreeManager( $siteid )

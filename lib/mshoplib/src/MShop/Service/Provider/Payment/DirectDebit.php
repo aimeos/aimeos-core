@@ -114,13 +114,16 @@ class DirectDebit
 		{
 			$attrList = array( $attrItem->getCode() => $attrItem->getValue() );
 			$this->setAttributes( $orderServiceItem, $attrList, 'payment/hidden' );
-
 			$value = $attrItem->getValue();
-			$len = strlen( $value );
-			$xstr = ( $len > 3 ? str_repeat( 'X', $len - 3 ) : '' );
 
-			$attrItem->setValue( $xstr . substr( $value, -3 ) );
-			$orderServiceItem->setAttributeItem( $attrItem );
+			if( is_string( $value ) )
+			{
+				$len = strlen( $value );
+				$xstr = ( $len > 3 ? str_repeat( 'X', $len - 3 ) : '' );
+
+				$attrItem->setValue( $xstr . substr( $value, -3 ) );
+				$orderServiceItem->setAttributeItem( $attrItem );
+			}
 		}
 	}
 

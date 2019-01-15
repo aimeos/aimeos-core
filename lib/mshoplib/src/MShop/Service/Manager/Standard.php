@@ -719,14 +719,14 @@ class Standard
 	 * Creates a new service item initialized with the given values.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listitems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
-	 * @param array $textItems List of items implementing \Aimeos\MShop\Text\Item\Iface
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listitems List of list items
+	 * @param \Aimeos\MShop\Text\Item\Iface[] $refItems List of referenced items
 	 * @return \Aimeos\MShop\Service\Item\Iface New service item
 	 */
-	protected function createItemBase( array $values = [], array $listitems = [], array $textItems = [] )
+	protected function createItemBase( array $values = [], array $listitems = [], array $refItems = [] )
 	{
 		$values['date'] = $this->date;
 
-		return new \Aimeos\MShop\Service\Item\Standard( $values, $listitems, $textItems );
+		return new \Aimeos\MShop\Service\Item\Standard( $values, $listitems, $refItems );
 	}
 }

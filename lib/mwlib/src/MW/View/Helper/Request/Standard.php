@@ -378,7 +378,7 @@ class Standard
 	/**
 	 * Create a new instance with the specified uploaded files.
 	 *
-	 * @param array An array tree of UploadedFileInterface instances.
+	 * @param array $uploadedFiles An array tree of UploadedFileInterface instances.
 	 * @return self
 	 */
 	public function withUploadedFiles( array $uploadedFiles )

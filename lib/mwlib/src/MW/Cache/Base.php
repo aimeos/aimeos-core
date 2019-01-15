@@ -50,7 +50,7 @@ abstract class Base
 	 * @param string $key Path to the requested value like product/id/123
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key. If no value for the
-	 * key is found in the cache, the given default value is returned
+	 *	key is found in the cache, the given default value is returned
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function get( $key, $default = null )
@@ -70,9 +70,9 @@ abstract class Base
 	 *
 	 * @param string $key Key string for the given value like product/id/123
 	 * @param mixed $value Value string that should be stored for the given key
-	 * @param int|string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
+	 * @param integer|string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
 	 * 	format or as TTL value when the cache entry expires
-	 * @param array $tags List of tag strings that should be assoicated to the
+	 * @param string[] $tags List of tag strings that should be assoicated to the
 	 * 	given value in the cache
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */

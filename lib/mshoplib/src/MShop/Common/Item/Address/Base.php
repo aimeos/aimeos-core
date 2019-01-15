@@ -872,7 +872,7 @@ abstract class Base
 	/**
 	 * Checks the given address salutation is valid
 	 *
-	 * @param integer $value Address salutation defined in \Aimeos\MShop\Common\Item\Address\Base
+	 * @param string $value Address salutation defined in \Aimeos\MShop\Common\Item\Address\Base
 	 * @throws \Aimeos\MShop\Common\Exception If salutation is invalid
 	 */
 	protected function checkSalutation( $value )
@@ -887,6 +887,6 @@ abstract class Base
 				return $value;
 		}
 
-		throw new \Aimeos\MShop\Common\Exception( sprintf( 'Address salutation "%1$s" not within allowed range', $value ) );
+		throw new \Aimeos\MShop\Exception( sprintf( 'Address salutation "%1$s" not within allowed range', $value ) );
 	}
 }

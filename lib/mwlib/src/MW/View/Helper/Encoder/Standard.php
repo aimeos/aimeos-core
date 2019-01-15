@@ -22,10 +22,6 @@ class Standard
 	extends \Aimeos\MW\View\Helper\Base
 	implements \Aimeos\MW\View\Helper\Encoder\Iface
 {
-	const TAINT = 0;
-	const TRUST = 1;
-
-
 	/**
 	 * Returns the encoder.
 	 *

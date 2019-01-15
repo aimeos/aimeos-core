@@ -498,8 +498,8 @@ class Standard
 	 * @param string $currency Currency code
 	 * @param boolean $active Flag to get only active items
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface Site item
-	 * @param array $sitePath List of site IDs up to the root site
-	 * @param array $siteSubTree List of site IDs below and including the current site
+	 * @param string[] $sitePath List of site IDs up to the root site
+	 * @param string[] $siteSubTree List of site IDs below and including the current site
 	 * @param boolean $bare Allow locale items with sites only
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for the given parameters
 	 * @throws \Aimeos\MShop\Locale\Exception If no locale item is found
@@ -541,8 +541,8 @@ class Standard
 	 * @param string $currency Currency code
 	 * @param boolean $active Flag to get only active items
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface Site item
-	 * @param array $sitePath List of site IDs up to the root site
-	 * @param array $siteSubTree List of site IDs below and including the current site
+	 * @param string[] $sitePath List of site IDs up to the root site
+	 * @param string[] $siteSubTree List of site IDs below and including the current site
 	 * @return \Aimeos\MShop\Locale\Item\Iface|boolean Locale item for the given parameters or false if no item was found
 	 */
 	private function bootstrapMatch( $siteId, $lang, $currency, $active,
@@ -604,8 +604,8 @@ class Standard
 	 * @param string $lang Language code
 	 * @param boolean $active Flag to get only active items
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface Site item
-	 * @param array $sitePath List of site IDs up to the root site
-	 * @param array $siteSubTree List of site IDs below and including the current site
+	 * @param string[] $sitePath List of site IDs up to the root site
+	 * @param string[] $siteSubTree List of site IDs below and including the current site
 	 * @return \Aimeos\MShop\Locale\Item\Iface|boolean Locale item for the given parameters or false if no item was found
 	 */
 	private function bootstrapClosest( $siteId, $lang, $active,
@@ -672,8 +672,8 @@ class Standard
 	 *
 	 * @param array $values Parameter to initialise the item
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface|null $site Site item
-	 * @param array $sitePath List of site IDs up to the root site
-	 * @param array $siteSubTree List of site IDs below and including the current site
+	 * @param string[] $sitePath List of site IDs up to the root site
+	 * @param string[] $siteSubTree List of site IDs below and including the current site
 	 * @return \Aimeos\MShop\Locale\Item\Standard Locale item
 	 */
 	protected function createItemBase( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $site = null,
@@ -714,17 +714,16 @@ class Standard
 	 * @param \Aimeos\MW\Criteria\Iface $search Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
-	 * @return \Aimeos\MShop\Locale\Item\Iface[] List of locale items
+	 * @return array Associative list of key/value pairs
 	 */
 	protected function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
+		$map = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
-
-		$items = [];
 
 		try
 		{
@@ -799,7 +798,7 @@ class Standard
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[$row['locale.id']] = $row;
+					$map[$row['locale.id']] = $row;
 				}
 			}
 			catch( \Exception $e )
@@ -876,6 +875,6 @@ class Standard
 			throw $e;
 		}
 
-		return $items;
+		return $map;
 	}
 }

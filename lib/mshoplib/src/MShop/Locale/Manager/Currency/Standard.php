@@ -665,8 +665,8 @@ class Standard
 	 * Returns the total number of items found for the conditions
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
-	 * @param array $find List of markers that should be replaced in the SQL statement
-	 * @param array $replace List of replacements for the markers in the SQL statement
+	 * @param string[] $find List of markers that should be replaced in the SQL statement
+	 * @param string[] $replace List of replacements for the markers in the SQL statement
 	 * @throws \Aimeos\MShop\Locale\Exception If no total value was found
 	 * @return integer Total number of found items
 	 */

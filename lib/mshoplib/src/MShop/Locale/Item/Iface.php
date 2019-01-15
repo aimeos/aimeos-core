@@ -46,7 +46,7 @@ interface Iface
 	/**
 	 * Sets the identifier of the shop instance.
 	 *
-	 * @param string ID of the shop instance
+	 * @param string $id ID of the shop instance
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
 	public function setSiteId( $id );

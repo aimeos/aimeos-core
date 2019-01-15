@@ -84,8 +84,8 @@ class None
 	/**
 	 * Creates the cache object for the given cache id.
 	 *
-	 * @param integer $id Cache ID to fetch cache object for
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string $id Cache ID to fetch cache object for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface Returns the cache item of the given id
 	 * @throws \Aimeos\MAdmin\Cache\Exception If item couldn't be found

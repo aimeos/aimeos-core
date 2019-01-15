@@ -234,11 +234,11 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	/**
 	 * Releases the database connection
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface Database connection
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 */
 	protected function release( \Aimeos\MW\DB\Connection\Iface $conn )
 	{
-		return $this->dbm->release( $conn, $this->rname );
+		$this->dbm->release( $conn, $this->rname );
 	}
 
 

@@ -501,8 +501,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database Manager for connection
 	 * @param string $sql Specified db query to find only one value
 	 * @param string $column Column where to search
-	 * @param integer $siteId Siteid of the db entry
-	 * @param integer $productId Product id
+	 * @param string $siteId Siteid of the db entry
+	 * @param string $productId Product id
 	 * @return string $value Value returned for specified sql statement
 	 * @throws \Exception If column not available or error during a connection to db
 	 */

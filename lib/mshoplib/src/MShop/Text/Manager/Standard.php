@@ -673,9 +673,9 @@ class Standard
 	 * Creates a new text item instance.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
-	 * @param array $refItems List of items implementing \Aimeos\MShop\Text\Item\Iface
-	 * @return \Aimeos\MShop\Text\Item\Iface New product item
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface $refItems List of referenced items
+	 * @return \Aimeos\MShop\Text\Item\Iface New text item
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [] )
 	{

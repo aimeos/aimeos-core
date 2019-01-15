@@ -38,7 +38,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Sets the order service base ID of the order service item.
 	 *
-	 * @param string Order service base ID
+	 * @param string $id Order service base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setBaseId( $id );
@@ -170,7 +170,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Sets the new list of attribute items for the service.
 	 *
-	 * @param array $attributes List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface[] $attributes List of order service attribute items
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setAttributeItems( array $attributes );

@@ -25,4 +25,11 @@ interface Iface
 	 * @return string Message body
 	 */
 	public function getBody();
+
+	/**
+	 * Returns the message ID
+	 *
+	 * @return integer|null Message ID
+	 */
+	public function getId();
 }

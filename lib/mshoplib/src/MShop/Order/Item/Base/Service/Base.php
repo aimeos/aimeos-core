@@ -39,7 +39,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price
 	 * @param array $values Values to be set on initialisation
-	 * @param array $attributes Attributes to be set on initialisation
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface[] $attributes List of order service attribute items
 	 */
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [] )
 	{
@@ -168,7 +168,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	/**
 	 * Sets the new list of attribute items for the service.
 	 *
-	 * @param array $attributes List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface[] $attributes List of order service attribute items
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setAttributeItems( array $attributes )

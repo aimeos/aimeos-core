@@ -30,7 +30,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
-	 * @return array List of ID values as key and the number of counted products as value
+	 * @return integer[] List of ID values as key and the number of counted products as value
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
 	{
@@ -514,7 +514,7 @@ class Standard
 	/**
 	 * Deletes the cache entries using the given product IDs.
 	 *
-	 * @param array $productIds List of product IDs
+	 * @param string[] $productIds List of product IDs
 	 */
 	protected function clearCache( array $productIds )
 	{
@@ -532,7 +532,7 @@ class Standard
 	 * Re-writes the index entries for all products that are search result of given criteria
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
-	 * @param array $domains List of domains to be
+	 * @param string[] $domains List of domains to be
 	 * @param integer $size Size of a chunk of products to handle at a time
 	 */
 	protected function writeIndex( \Aimeos\MW\Criteria\Iface $search, array $domains, $size )

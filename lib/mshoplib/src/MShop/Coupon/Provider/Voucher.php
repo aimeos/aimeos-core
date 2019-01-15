@@ -105,7 +105,7 @@ class Voucher
 	 * Checks if the voucher for the given order product ID is still available
 	 *
 	 * @param string $orderProductId Order product ID of the bought voucher
-	 * @param array $status List of allowed payment status values
+	 * @param integer[] $status List of allowed payment status values
 	 * @throws \Aimeos\MShop\Coupon\Exception If voucher isn't available any more
 	 */
 	protected function checkVoucher( $orderProductId, array $status )
@@ -131,8 +131,8 @@ class Voucher
 	/**
 	 * Filters the order base IDs and removes those order which aren't payed
 	 *
-	 * @param array $baseIds List of order base IDs to check
-	 * @return array List of filtered order Base IDs
+	 * @param string[] $baseIds List of order base IDs to check
+	 * @return string[] List of filtered order base IDs
 	 */
 	protected function filterOrderBaseIds( array $baseIds )
 	{
@@ -226,8 +226,8 @@ class Voucher
 	 * Adds an attribute with the remaining rebate to the order products
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $orderProducts Order product items
-	 * @param float $remaining Remaining rebate
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] Modified order product items
+	 * @param double $remaining Remaining rebate
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] Modified order product items
 	 */
 	protected function setOrderAttributeRebate( array $orderProducts, $remaining )
 	{

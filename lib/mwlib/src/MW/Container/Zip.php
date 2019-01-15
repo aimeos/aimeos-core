@@ -121,7 +121,7 @@ class Zip
 			if( $this->container->addFile( $content->getResource(), $content->getName() ) === false )
 			{
 				$msg = 'Unable to add content in "%1$s" to file "%2$s"';
-				throw new \Aimeos\MW\Content\Exception( sprinf( $msg, $content->getResource(), $this->container->filename ) );
+				throw new \Aimeos\MW\Container\Exception( sprintf( $msg, $content->getResource(), $this->container->filename ) );
 			}
 		}
 

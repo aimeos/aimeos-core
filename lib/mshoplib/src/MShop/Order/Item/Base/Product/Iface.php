@@ -55,7 +55,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the parent ID of the ordered product.
 	 * This ID relates to another product of the same order and provides a relation for e.g. sub-products in bundles.
 	 *
-	 * @param string|null Order product ID
+	 * @param string|null $orderProductId Order product ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setOrderProductId( $orderProductId );
@@ -235,7 +235,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Sets the position of the product within the list of ordered products.
 	 *
-	 * @param integer Product position in the order from 1-n
+	 * @param integer $value Product position in the order from 1-n
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setPosition( $value );
@@ -298,7 +298,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Sets the new list of attribute items for the product.
 	 *
-	 * @param array $attributes List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] $attributes List of order product attribute items
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setAttributeItems( array $attributes );

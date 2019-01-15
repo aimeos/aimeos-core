@@ -33,7 +33,7 @@ class Standard
 	 * Initializes the site object.
 	 *
 	 * @param array $values Associative list of item key/value pairs
-	 * @param array $children List of nodes implementing \Aimeos\MW\Tree\Node\Iface
+	 * @param \Aimeos\MW\Tree\Node\Iface[] $children List of tree nodes
 	 */
 	public function __construct( array $values = [], array $children = [] )
 	{

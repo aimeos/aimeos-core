@@ -151,8 +151,8 @@ interface Iface
 	 * $result = $listManager->searchItems( $search );
 	 * </code>
 	 *
-	 * @param integer $id Id of the item which should be moved
-	 * @param integer|null $ref Id where the given Id should be inserted before (null for appending)
+	 * @param string $id Id of the item which should be moved
+	 * @param string|null $ref Id where the given Id should be inserted before (null for appending)
 	 * @return \Aimeos\MShop\Common\Manager\Lists\Iface Manager object for chaining method calls
 	 */
 	public function moveItem( $id, $ref = null );

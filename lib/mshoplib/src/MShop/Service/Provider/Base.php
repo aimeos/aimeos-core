@@ -220,7 +220,8 @@ abstract class Base
 	/**
 	 * Updates the order status sent by payment gateway notifications
 	 *
-	 * @param \Psr\Http\Message\ServerRequestInterface Request object
+	 * @param \Psr\Http\Message\ServerRequestInterface $request Request object
+	 * @param \Psr\Http\Message\ResponseInterface $response Response object
 	 * @return \Psr\Http\Message\ResponseInterface Response object
 	 */
 	public function updatePush( \Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response )
@@ -476,7 +477,7 @@ abstract class Base
 	/**
 	 * Returns the first object of the decorator stack
 	 *
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface First object of the decorator stack
+	 * @return \Aimeos\MShop\Service\Provider\Iface First object of the decorator stack
 	 */
 	protected function getObject()
 	{

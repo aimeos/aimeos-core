@@ -120,7 +120,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Sets the related invoice ID.
 	 *
-	 * @param string|null Related invoice ID
+	 * @param string|null $id Related invoice ID
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setRelatedId( $id );

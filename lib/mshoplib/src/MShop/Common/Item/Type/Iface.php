@@ -32,7 +32,7 @@ interface Iface
 	/**
 	 * Sets the code of the common list type item
 	 *
-	 * @param integer $code New code of the common list type item
+	 * @param string $code New code of the common list type item
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setCode( $code );

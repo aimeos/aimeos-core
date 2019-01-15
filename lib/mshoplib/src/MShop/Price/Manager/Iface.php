@@ -23,9 +23,9 @@ interface Iface
 	/**
 	 * Returns the price item with the lowest price for the given quantity.
 	 *
-	 * @param array $priceItems List of price items implementing \Aimeos\MShop\Price\Item\Iface
+	 * @param \Aimeos\MShop\Price\Item\Iface[] $priceItems List of price items
 	 * @param integer $quantity Number of products
-	 * @return \Aimeos\MShop\Price\Iface Price item with the lowest price
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item with the lowest price
 	 * @throws \Aimeos\MShop\Price\Exception if no price item is available
 	 */
 	public function getLowestPrice( array $priceItems, $quantity );

@@ -650,9 +650,9 @@ class Standard
 	 * Creates a new supplier item.
 	 *
 	 * @param array $values List of attributes for supplier item
-	 * @param array $listitems Associative list of list item IDs as keys and \Aimeos\MShop\Common\Item\List\Iface as values
-	 * @param array $refItems Associative list of item IDs as keys and \Aimeos\MShop\Common\Item\Iface as values
-	 * @param array $addresses List of address items of the supplier item
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listitems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $addresses List of address items
 	 * @return \Aimeos\MShop\Supplier\Item\Iface New supplier item
 	 */
 	protected function createItemBase( array $values = [], array $listitems = [], array $refItems = [], array $addresses = [] )

@@ -163,7 +163,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Returns the configuration object.
 	 *
-	 * @return \Aimeos\MShop\Config\Iface Configuration object
+	 * @return \Aimeos\MW\Config\Iface Configuration object
 	 */
 	public function getConfig()
 	{
@@ -449,8 +449,8 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Returns the message queue object.
 	 *
 	 * @param string $resource Resource name, e.g. "mq-email"
-	 * @apram string $queue Message queue name, e.g. "order/email/payment"
-	 * @return \Aimeos\MW\Queue\Manager\Iface Message queue object
+	 * @param string $queue Message queue name, e.g. "order/email/payment"
+	 * @return \Aimeos\MW\MQueue\Manager\Iface Message queue object
 	*/
 	public function getMessageQueue( $resource, $queue )
 	{

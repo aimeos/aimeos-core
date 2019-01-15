@@ -715,8 +715,8 @@ class Standard
 	 * Creates a new price item
 	 *
 	 * @param array $values List of attributes for price item
-	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
-	 * @param array $refItems List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @return \Aimeos\MShop\Price\Item\Iface New price item
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [] )

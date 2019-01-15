@@ -23,8 +23,8 @@ trait Traits
 	 * Creates a new item for the specific manager.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
-	 * @param array $refItems List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @return \Aimeos\MShop\Common\Item\Iface New item
 	 */
 	abstract protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [] );
@@ -34,11 +34,11 @@ trait Traits
 	 * Creates the items with address item, list items and referenced items.
 	 *
 	 * @param array $map Associative list of IDs as keys and the associative array of values
-	 * @param array|null $domains List of domains to fetch list items and referenced items for or null for all
+	 * @param string[]|null $domains List of domains to fetch list items and referenced items for or null for all
 	 * @param string $prefix Domain prefix
 	 * @param array $local Associative list of IDs as keys and the associative array of items as values
 	 * @param array $local2 Associative list of IDs as keys and the associative array of items as values
-	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @return \Aimeos\MShop\Common\Item\Iface[] List of items
 	 */
 	protected function buildItems( array $map, $domains, $prefix, array $local = [], array $local2 = [] )
 	{
@@ -75,12 +75,20 @@ trait Traits
 
 
 	/**
+	 * Returns the context object.
+	 *
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
+	 */
+	abstract protected function getContext();
+
+
+	/**
 	 * Returns the list items that belong to the given IDs.
 	 *
-	 * @param array $ids List of IDs
-	 * @param array|null $domains List of domain names whose referenced items should be attached or null for all
+	 * @param string[] $ids List of IDs
+	 * @param string[]|null $domains List of domain names whose referenced items should be attached or null for all
 	 * @param string $prefix Domain prefix
-	 * @return array List of items implementing \Aimeos\MShop\Common\Lists\Item\Iface
+	 * @return \Aimeos\MShop\Common\Lists\Item\Iface[] List of list items
 	 */
 	protected function getListItems( array $ids, $domains, $prefix )
 	{
@@ -120,10 +128,18 @@ trait Traits
 
 
 	/**
+	 * Returns the outmost decorator of the decorator stack
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
+	 */
+	abstract protected function getObject();
+
+
+	/**
 	 * Returns the referenced items for the given IDs.
 	 *
 	 * @param array $refIdMap Associative list of domain/ref-ID/parent-item-ID key/value pairs
-	 * @param array|null $domains List of domain names whose referenced items should be attached or null for all
+	 * @param string[]|null $domains List of domain names whose referenced items should be attached or null for all
 	 * @return array Associative list of parent-item-ID/domain/items key/value pairs
 	 */
 	protected function getRefItems( array $refIdMap, $domains = [] )

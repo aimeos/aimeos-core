@@ -116,8 +116,8 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	/**
 	 * Runs the clean method of the given tasks and their dependencies
 	 *
-	 * @param array $tasknames List of task names
-	 * @param array $stack List of task names that are scheduled after this task
+	 * @param string[] $tasknames List of task names
+	 * @param string[] $stack List of task names that are scheduled after this task
 	 */
 	protected function cleanTasks( array $tasknames, array $stack = [] )
 	{
@@ -147,8 +147,8 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	/**
 	 * Runs the given tasks depending on their dependencies.
 	 *
-	 * @param array $tasknames List of task names
-	 * @param array $stack List of task names that are sheduled after this task
+	 * @param string[] $tasknames List of task names
+	 * @param string[] $stack List of task names that are sheduled after this task
 	 */
 	protected function migrateTasks( array $tasknames, array $stack = [] )
 	{
@@ -182,8 +182,8 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	/**
 	 * Runs the rollback method of the given tasks and their dependencies
 	 *
-	 * @param array $tasknames List of task names
-	 * @param array $stack List of task names that are sheduled after this task
+	 * @param string[] $tasknames List of task names
+	 * @param string[] $stack List of task names that are sheduled after this task
 	 */
 	protected function rollbackTasks( array $tasknames, array $stack = [] )
 	{
@@ -217,8 +217,8 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	/**
 	 * Sets up the tasks and their dependencies.
 	 *
-	 * @param array $paths List of paths containing setup task classes
-	 * @param array $schemas Associative list of db schemas with the resource name as key
+	 * @param string[] $paths List of paths containing setup task classes
+	 * @param \Aimeos\MW\Setup\DBSchema\Iface[] $schemas Associative list of db schemas with the resource name as key
 	 */
 	protected function setupTasks( array $paths, array $schemas, \Aimeos\MW\DB\Manager\Iface $dbm )
 	{

@@ -86,7 +86,7 @@ class Standard
 	/**
 	 * Sets the unique ID of the node.
 	 *
-	 * @param string|null Unique ID of the node
+	 * @param string|null $id Unique ID of the node
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
 	public function setId( $id )
@@ -99,11 +99,11 @@ class Standard
 	/**
 	 * Returns the site ID of the item.
 	 *
-	 * @return integer|null Site ID of the item
+	 * @return string|null Site ID of the item
 	 */
 	public function getSiteId()
 	{
-		return ( $this->node->__isset( 'siteid' ) ? $this->node->__get( 'siteid' ) : null );
+		return ( $this->node->__isset( 'siteid' ) ? (string) $this->node->__get( 'siteid' ) : null );
 	}
 
 

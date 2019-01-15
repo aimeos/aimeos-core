@@ -335,7 +335,7 @@ class Standard extends Base
 	/**
 	 * Returns the item specified by its ID.
 	 *
-	 * @param integer $id Unique ID of the catalog item
+	 * @param string $id Unique ID of the catalog item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item of the given ID
@@ -700,7 +700,7 @@ class Standard extends Base
 	/**
 	 * Returns a list of items starting with the given category that are in the path to the root node
 	 *
-	 * @param integer $id ID of item to get the path for
+	 * @param string $id ID of item to get the path for
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Catalog\Item\Iface[] Associative list of catalog items with IDs as keys
 	 */
