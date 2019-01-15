@@ -97,28 +97,6 @@ abstract class Base
 
 
 	/**
-	 * Clones internal objects of the order base item.
-	 */
-	public function __clone()
-	{
-		foreach( $this->products as $key => $value ) {
-			$this->products[$key] = clone $value;
-		}
-
-		foreach( $this->addresses as $key => $value ) {
-			$this->addresses[$key] = clone $value;
-		}
-
-		foreach( $this->services as $key => $list )
-		{
-			foreach( $list as $pos => $value ) {
-				$this->services[$key][$pos] = clone $value;
-			}
-		}
-	}
-
-
-	/**
 	 * Returns the item property for the given name
 	 *
 	 * @param string $name Name of the property
