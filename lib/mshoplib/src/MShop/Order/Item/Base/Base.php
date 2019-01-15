@@ -97,6 +97,14 @@ abstract class Base
 
 
 	/**
+	 * Clones internal objects of the order base item.
+	 */
+	public function __clone()
+	{
+	}
+
+
+	/**
 	 * Returns the item property for the given name
 	 *
 	 * @param string $name Name of the property
