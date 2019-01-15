@@ -143,8 +143,9 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * Deletes a node and its descendants from the storage.
 	 *
 	 * @param string|null $id Delete the node with the ID and all nodes below
+	 * @return \Aimeos\MW\Tree\Manager\Iface Manager object for method chaining
 	 */
-	public function deleteNode( $id = null )
+	public function deleteNode( $id )
 	{
 		$node = $this->getNode( $id, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
@@ -179,6 +180,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
+
+		return $this;
 	}
 
 
@@ -263,8 +266,9 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * Inserts a new node before the given reference node to the parent in the storage.
 	 *
 	 * @param \Aimeos\MW\Tree\Node\Iface $node New node that should be inserted
-	 * @param string $parentId ID of the parent node where the new node should be inserted below (null for root node)
-	 * @param string $refId ID of the node where the node should be inserted before (null to append)
+	 * @param string|null $parentId ID of the parent node where the new node should be inserted below (null for root node)
+	 * @param string|null $refId ID of the node where the node should be inserted before (null to append)
+	 * @return \Aimeos\MW\Tree\Node\Iface Updated node item
 	 */
 	public function insertNode( \Aimeos\MW\Tree\Node\Iface $node, $parentId = null, $refId = null )
 	{
@@ -343,6 +347,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
+
+		return $node;
 	}
 
 
@@ -353,6 +359,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * @param string|null $oldParentId ID of the old parent node which currently contains the node that should be removed
 	 * @param string|null $newParentId ID of the new parent node where the node should be moved to
 	 * @param string|null $newRefId ID of the node where the node should be inserted before (null to append)
+	 * @return \Aimeos\MW\Tree\Manager\Iface Manager object for method chaining
 	 */
 	public function moveNode( $id, $oldParentId, $newParentId, $newRefId = null )
 	{
@@ -487,6 +494,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
+
+		return $this;
 	}
 
 
@@ -497,6 +506,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * the tree layout by adding, moving or deleting nodes.
 	 *
 	 * @param \Aimeos\MW\Tree\Node\Iface $node Tree node object
+	 * @return \Aimeos\MW\Tree\Node\Iface Updated node item
 	 */
 	public function saveNode( \Aimeos\MW\Tree\Node\Iface $node )
 	{
@@ -526,6 +536,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
 		}
+
+		return $node;
 	}
 
 
@@ -602,7 +614,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * Returns a list if node IDs, that are in the path of given node ID.
 	 *
 	 * @param string $id ID of node to get the path for
-	 * @return \Aimeos\MW\Tree\Node\Iface List of tree nodes
+	 * @return \Aimeos\MW\Tree\Node\Iface[] List of tree nodes
 	 */
 	public function getPath( $id )
 	{

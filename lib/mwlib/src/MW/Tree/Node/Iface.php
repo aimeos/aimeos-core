@@ -65,7 +65,7 @@ interface Iface
 	 * Sets the unique ID of the node.
 	 *
 	 * @param mixed|null $id Unique ID of the node
-	 * @return void
+	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
 	public function setId( $id );
 
@@ -80,7 +80,7 @@ interface Iface
 	 * Sets the new name of the node.
 	 *
 	 * @param string $name New default name of the node
-	 * @return void
+	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
 	public function setLabel( $name );
 
@@ -95,7 +95,7 @@ interface Iface
 	 * Sets the new code of the node.
 	 *
 	 * @param string $name New code of the node
-	 * @return void
+	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
 	public function setCode( $name );
 
@@ -111,7 +111,7 @@ interface Iface
 	 * Sets the new status of the node.
 	 *
 	 * @param integer $status Greater than zero if enabled, zero or less than if not
-	 * @return void
+	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
 	public function setStatus( $status );
 
@@ -141,7 +141,7 @@ interface Iface
 	 * Adds a child node to this node.
 	 *
 	 * @param \Aimeos\MW\Tree\Node\Iface $node Child node to add
-	 * @return void
+	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
 	public function addChild( \Aimeos\MW\Tree\Node\Iface $node );
 

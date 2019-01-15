@@ -208,7 +208,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testConstructorMissingSsearchConfig()
+	public function testConstructorMissingSearchConfig()
 	{
 		unset( $this->config['search']['id'] );
 
@@ -298,17 +298,11 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$nodes = $manager->searchNodes( $search );
 		$this->assertEquals( 1, count( $nodes ) );
 
-		$manager->deleteNode( reset( $nodes )->getId() );
+		$this->assertInstanceOf( \Aimeos\MW\Tree\Manager\Iface::class, $manager->deleteNode( reset( $nodes )->getId() ) );
 
 		$search = $manager->createSearch();
 		$nodes = $manager->searchNodes( $search );
 		$this->assertEquals( 7, count( $nodes ) );
-
-		$manager->deleteNode();
-
-		$search = $manager->createSearch();
-		$nodes = $manager->searchNodes( $search );
-		$this->assertEquals( 1, count( $nodes ) );
 	}
 
 
@@ -419,9 +413,10 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, count( $nodes ) );
 
 		$newNode->setLabel( 'new l1n3' );
-		$manager->insertNode( $newNode, $root->getId(), reset( $nodes )->getId() );
+		$newNode = $manager->insertNode( $newNode, $root->getId(), reset( $nodes )->getId() );
 
 		$root = $manager->getNode( $root->getId(), \Aimeos\MW\Tree\Manager\Base::LEVEL_LIST );
+		$this->assertInstanceOf( \Aimeos\MW\Tree\Node\Iface::class, $newNode );
 		$this->assertEquals( 5, count( $root->getChildren() ) );
 		$this->assertEquals( 'l1n2', $root->getChild( 1 )->getLabel() );
 		$this->assertEquals( 'new l1n3', $root->getChild( 2 )->getLabel() );
@@ -448,7 +443,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$newNode->setCode( 'root3' );
 		$newNode->setLabel( 'Root 3' );
 
-		$manager->insertNode( $newNode );
+		$this->assertInstanceOf( \Aimeos\MW\Tree\Node\Iface::class, $manager->insertNode( $newNode ) );
 
 		$root = $manager->getNode( $newNode->getId() );
 		$this->assertEquals( 'Root 3', $root->getLabel() );
@@ -465,7 +460,8 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$nodeid = $root->getChild( 0 )->getChild( 0 )->getChild( 0 )->getId();
 		$oldparentid = $root->getChild( 0 )->getChild( 0 )->getId();
 
-		$manager->moveNode( $nodeid, $oldparentid, null );
+		$result = $manager->moveNode( $nodeid, $oldparentid, null );
+		$this->assertInstanceOf( \Aimeos\MW\Tree\Manager\Iface::class, $result );
 
 		$testroot = $manager->getNode( $nodeid, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 
@@ -1042,9 +1038,10 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$root = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
 		$root->setLabel( 'rooot' );
-		$manager->saveNode( $root );
+		$result = $manager->saveNode( $root );
 
 		$root = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
+		$this->assertInstanceOf( \Aimeos\MW\Tree\Node\Iface::class, $result );
 		$this->assertEquals( 'rooot', $root->getLabel() );
 	}
 
