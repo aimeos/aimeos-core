@@ -469,7 +469,11 @@ class Standard
 		 */
 		$maxheight = $config->get( 'controller/common/media/standard/' . $type . '/maxheight', null );
 
-		return $media->scale( $maxwidth, $maxheight );
+		if( $maxheight || $maxwidth ) {
+			return $media->scale( $maxwidth, $maxheight );
+		}
+
+		return $media;
 	}
 
 
