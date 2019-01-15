@@ -160,23 +160,6 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 
 
 	/**
-	 * Returns the connection specified by the given resource name.
-	 *
-	 * @param string $name Name from resource configuration
-	 * @return \Aimeos\MW\DB\Connection\Iface
-	 * @deprecated Use acquire() and release() instead
-	 */
-	protected function getConnection( $name )
-	{
-		if( !isset( $this->connections[$name] ) ) {
-			return $this->connections[$name] = $this->dbm->acquire( $name );
-		}
-
-		return $this->connections[$name]->connect();
-	}
-
-
-	/**
 	 * Returns the schemas specified by the given resource name.
 	 *
 	 * @param string $name Name from resource configuration

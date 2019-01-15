@@ -68,18 +68,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetConnection()
-	{
-		$class = new \ReflectionClass( \Aimeos\MW\Setup\Task\Base::class );
-		$method = $class->getMethod( 'getConnection' );
-		$method->setAccessible( true );
-
-		$result = $method->invokeArgs( $this->object, array( 'db' ) );
-
-		$this->assertInstanceOf( \Aimeos\MW\DB\Connection\Iface::class, $result );
-	}
-
-
 	public function testGetSchema()
 	{
 		$class = new \ReflectionClass( \Aimeos\MW\Setup\Task\Base::class );
@@ -145,17 +133,5 @@ class BaseImpl extends \Aimeos\MW\Setup\Task\Base
 	public function getPostDependencies()
 	{
 		return [];
-	}
-
-	protected function mysql()
-	{
-		$this->execute( 'SELECT 1+1' );
-
-		$list = array(
-				'SELECT 1+2',
-				'SELECT 1+3',
-		);
-
-		$this->executeList( $list );
 	}
 }
