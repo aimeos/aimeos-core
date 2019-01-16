@@ -709,7 +709,6 @@ class Standard extends Base implements Iface
 			&& $this->getStockType() === $item->getStockType()
 			&& $this->getProductCode() === $item->getProductCode()
 			&& $this->getSupplierCode() === $item->getSupplierCode()
-			&& $this->getPrice()->compare( $item->getPrice() ) === true
 		) {
 			return true;
 		}
