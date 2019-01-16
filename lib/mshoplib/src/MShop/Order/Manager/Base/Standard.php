@@ -1021,4 +1021,83 @@ class Standard extends Base
 
 		return $basket;
 	}
+
+
+	/**
+	 * Creates the order base item objects from the map and adds the referenced items
+	 *
+	 * @param array $map Associative list of order base IDs as keys and list of price/locale/row as values
+	 * @param string[] $ref Domain items that should be added as well, e.g.
+	 *	"order/base/address", "order/base/coupon", "order/base/product", "order/base/service"
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface[] Associative list of order base IDs as keys and items as values
+	 */
+	protected function buildItems( array $map, array $ref )
+	{
+		$items = [];
+		$baseIds = array_keys( $map );
+		$addressMap = $couponMap = $productMap = $serviceMap = [];
+
+		if( in_array( 'order/base/address', $ref ) ) {
+			$addressMap = $this->getAddresses( $baseIds );
+		}
+
+		if( in_array( 'order/base/product', $ref ) ) {
+			$productMap = $this->getProducts( $baseIds );
+		}
+
+		if( in_array( 'order/base/coupon', $ref ) ) {
+			$couponMap = $this->getCoupons( $baseIds, false, $productMap );
+		}
+
+		if( in_array( 'order/base/service', $ref ) ) {
+			$serviceMap = $this->getServices( $baseIds );
+		}
+
+		foreach( $map as $id => $list )
+		{
+			list( $price, $locale, $row ) = $list;
+			$addresses = $coupons = $products = $services = [];
+
+			if( isset( $addressMap[$id] ) ) {
+				$addresses = $addressMap[$id];
+			}
+
+			if( isset( $couponMap[$id] ) ) {
+				$coupons = $couponMap[$id];
+			}
+
+			if( isset( $productMap[$id] ) ) {
+				$products = $productMap[$id];
+			}
+
+			if( isset( $serviceMap[$id] ) ) {
+				$services = $serviceMap[$id];
+			}
+
+			$items[$id] = $this->createItemBase( $price, $locale, $row, $products, $addresses, $services, $coupons );
+		}
+
+		return $items;
+	}
+
+
+	/**
+	 * Returns a new and empty order base item (shopping basket).
+	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Default price of the basket (usually 0.00)
+	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Locale item containing the site, language and currency
+	 * @param array $values Associative list of key/value pairs containing, e.g. the order or user ID
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of ordered product items
+	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface[] $addresses List of order address items
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface[] $services List of order serviceitems
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $coupons Associative list of coupon codes as keys and items as values
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base object
+	 */
+	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
+		array $values = [], array $products = [], array $addresses = [],
+		array $services = [], array $coupons = [] )
+	{
+		return new \Aimeos\MShop\Order\Item\Base\Standard( $price, $locale,
+			$values, $products, $addresses, $services, $coupons );
+	}
 }

@@ -600,29 +600,6 @@ abstract class Base
 
 
 	/**
-	 * Tests if all necessary items are available to create the order.
-	 *
-	 * @param integer $what Test for the specific type of completeness
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
-	 * @throws \Aimeos\MShop\Order\Exception if there are no products in the basket
-	 */
-	public function check( $what = self::PARTS_ALL )
-	{
-		$this->checkParts( $what );
-
-		$this->notifyListeners( 'check.before', $what );
-
-		if( ( $what & self::PARTS_PRODUCT ) && ( count( $this->products ) < 1 ) ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Basket empty' ) );
-		}
-
-		$this->notifyListeners( 'check.after', $what );
-
-		return $this;
-	}
-
-
-	/**
 	 * Tests if the order object was modified.
 	 *
 	 * @return bool True if modified, false if not
@@ -642,22 +619,6 @@ abstract class Base
 	{
 		$this->modified = true;
 		return $this;
-	}
-
-
-	/**
-	 * Checks the constants for the different parts of the basket.
-	 *
-	 * @param integer $value Part constant
-	 * @throws \Aimeos\MShop\Order\Exception If parts constant is invalid
-	 */
-	protected function checkParts( $value )
-	{
-		$value = (int) $value;
-
-		if( $value < self::PARTS_NONE || $value > self::PARTS_ALL ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Flags not within allowed range' ) );
-		}
 	}
 
 

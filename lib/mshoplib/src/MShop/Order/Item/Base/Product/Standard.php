@@ -19,8 +19,6 @@ namespace Aimeos\MShop\Order\Item\Base\Product;
  */
 class Standard extends Base implements Iface
 {
-	private $price;
-	private $products;
 	private $values;
 
 
@@ -34,22 +32,9 @@ class Standard extends Base implements Iface
 	 */
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [], array $products = [] )
 	{
-		parent::__construct( $price, $values, $attributes );
+		parent::__construct( $price, $values, $attributes, $products );
 
-		$this->price = $price;
 		$this->values = $values;
-
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $products );
-		$this->products = $products;
-	}
-
-
-	/**
-	 * Clones internal objects of the order base product item.
-	 */
-	public function __clone()
-	{
-		$this->price = clone $this->price;
 	}
 
 
@@ -176,34 +161,6 @@ class Standard extends Base implements Iface
 			$this->values['order.base.product.type'] = (string) $type;
 			$this->setModified();
 		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Returns all of sub-product items
-	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of product items
-	 */
-	public function getProducts()
-	{
-		return $this->products;
-	}
-
-
-	/**
-	 * Sets all sub-product items
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of product items
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
-	 */
-	public function setProducts( array $products )
-	{
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $products );
-
-		$this->products = $products;
-		$this->setModified();
 
 		return $this;
 	}
@@ -478,35 +435,6 @@ class Standard extends Base implements Iface
 
 
 	/**
-	 * Returns the price item for the product.
-	 *
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate
-	 */
-	public function getPrice()
-	{
-		return $this->price;
-	}
-
-
-	/**
-	 * Sets the price item for the product.
-	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item containing price and additional costs
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
-	 */
-	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price )
-	{
-		if( $price !== $this->price )
-		{
-			$this->price = $price;
-			$this->setModified();
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * 	Returns the flags for the product item.
 	 *
 	 * @return integer Flags, e.g. for immutable products
@@ -623,7 +551,6 @@ class Standard extends Base implements Iface
 	public function fromArray( array &$list )
 	{
 		$item = parent::fromArray( $list );
-		$price = $item->getPrice();
 
 		foreach( $list as $key => $value )
 		{
@@ -644,17 +571,13 @@ class Standard extends Base implements Iface
 				case 'order.base.product.quantity': $item = $item->setQuantity( $value ); break;
 				case 'order.base.product.status': $item = $item->setStatus( $value ); break;
 				case 'order.base.product.flags': $item = $item->setFlags( $value ); break;
-				case 'order.base.product.price': $price = $price->setValue( $value ); break;
-				case 'order.base.product.costs': $price = $price->setCosts( $value ); break;
-				case 'order.base.product.rebate': $price = $price->setRebate( $value ); break;
-				case 'order.base.product.taxrate': $price = $price->setTaxRate( $value ); break;
 				default: continue 2;
 			}
 
 			unset( $list[$key] );
 		}
 
-		return $item->setPrice( $price );
+		return $item;
 	}
 
 
@@ -676,10 +599,6 @@ class Standard extends Base implements Iface
 		$list['order.base.product.quantity'] = $this->getQuantity();
 		$list['order.base.product.name'] = $this->getName();
 		$list['order.base.product.mediaurl'] = $this->getMediaUrl();
-		$list['order.base.product.price'] = $this->price->getValue();
-		$list['order.base.product.costs'] = $this->price->getCosts();
-		$list['order.base.product.rebate'] = $this->price->getRebate();
-		$list['order.base.product.taxrate'] = $this->price->getTaxRate();
 		$list['order.base.product.status'] = $this->getStatus();
 		$list['order.base.product.position'] = $this->getPosition();
 
@@ -728,8 +647,8 @@ class Standard extends Base implements Iface
 		$this->setProductCode( $product->getCode() );
 		$this->setProductId( $product->getId() );
 		$this->setType( $product->getType() );
-		$this->setName( $product->getName() );
 		$this->setTarget( $product->getTarget() );
+		$this->setName( $product->getName() );
 
 		$items = $product->getRefItems( 'text', 'basket', 'default' );
 		if( ( $item = reset( $items ) ) !== false ) {

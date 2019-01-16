@@ -328,29 +328,20 @@ abstract class Base implements Iface
 			$taxrates[$taxrate]->addItem( $price, $product->getQuantity() );
 		}
 
-		foreach( $basket->getService( 'delivery' ) as $service )
+		foreach( $basket->getServices() as $services )
 		{
-			$price = clone $service->getPrice();
-			$taxrate = $price->getTaxRate();
+			foreach( $services as $service )
+			{
+				$price = clone $service->getPrice();
+				$taxrate = $price->getTaxRate();
 
-			if( !isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate] = $manager->createItem();
+				if( !isset( $taxrates[$taxrate] ) ) {
+					$taxrates[$taxrate] = $manager->createItem();
+				}
+
+				$taxrates[$taxrate]->addItem( $price );
+
 			}
-
-			$taxrates[$taxrate]->addItem( $price );
-
-		}
-
-		foreach( $basket->getService( 'payment' ) as $service )
-		{
-			$price = clone $service->getPrice();
-			$taxrate = $price->getTaxRate();
-
-			if( !isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate] = $manager->createItem();
-			}
-
-			$taxrates[$taxrate]->addItem( $price );
 		}
 
 		return $taxrates;

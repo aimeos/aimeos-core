@@ -36,6 +36,8 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 
 	private $attributes;
 	private $attributesMap;
+	private $products;
+	private $price;
 
 
 	/**
@@ -44,13 +46,28 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
 	 * @param array $values Associative list of order product values
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] $attributes List of order attribute items
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of ordered subproduct items
 	 */
-	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [] )
+	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [], array $products = [] )
 	{
 		parent::__construct( 'order.base.product.', $values );
 
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $attributes );
 		$this->attributes = $attributes;
+
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $products );
+		$this->products = $products;
+
+		$this->price = $price;
+	}
+
+
+	/**
+	 * Clones internal objects of the order base product item.
+	 */
+	public function __clone()
+	{
+		$this->price = clone $this->price;
 	}
 
 
@@ -177,6 +194,63 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 
 
 	/**
+	 * Returns the price item for the product.
+	 *
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate
+	 */
+	public function getPrice()
+	{
+		return $this->price;
+	}
+
+
+	/**
+	 * Sets the price item for the product.
+	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item containing price and additional costs
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price )
+	{
+		if( $price !== $this->price )
+		{
+			$this->price = $price;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns all of sub-product items
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of product items
+	 */
+	public function getProducts()
+	{
+		return $this->products;
+	}
+
+
+	/**
+	 * Sets all sub-product items
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of product items
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setProducts( array $products )
+	{
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $products );
+
+		$this->products = $products;
+		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the item type
 	 *
 	 * @return string Item type, subtypes are separated by slashes
@@ -184,6 +258,54 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 	public function getResourceType()
 	{
 		return 'order/base/product';
+	}
+
+
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
+	 *
+	 * @param array &$list Associative list of item keys and their values
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item for chaining method calls
+	 */
+	public function fromArray( array &$list )
+	{
+		$item = parent::fromArray( $list );
+		$price = $item->getPrice();
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'order.base.product.price': $price = $price->setValue( $value ); break;
+				case 'order.base.product.costs': $price = $price->setCosts( $value ); break;
+				case 'order.base.product.rebate': $price = $price->setRebate( $value ); break;
+				case 'order.base.product.taxrate': $price = $price->setTaxRate( $value ); break;
+				default: continue 2;
+			}
+
+			unset( $list[$key] );
+		}
+
+		return $item->setPrice( $price );
+	}
+
+
+	/**
+	 * Returns the item values as associative list.
+	 *
+	 * @param boolean True to return private properties, false for public only
+	 * @return array Associative list of item properties and their values
+	 */
+	public function toArray( $private = false )
+	{
+		$list = parent::toArray( $private );
+
+		$list['order.base.product.price'] = $this->price->getValue();
+		$list['order.base.product.costs'] = $this->price->getCosts();
+		$list['order.base.product.rebate'] = $this->price->getRebate();
+		$list['order.base.product.taxrate'] = $this->price->getTaxRate();
+
+		return $list;
 	}
 
 
