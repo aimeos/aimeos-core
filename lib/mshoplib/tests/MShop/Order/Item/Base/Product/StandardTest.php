@@ -82,10 +82,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCompareFail()
 	{
-		$price = clone $this->price;
-		$price->setValue( '1.00' );
+		$this->values['order.base.product.stocktype'] = 'default';
 
-		$product = new \Aimeos\MShop\Order\Item\Base\Product\Standard( $price, $this->values, $this->attribute, $this->subProducts );
+		$product = new \Aimeos\MShop\Order\Item\Base\Product\Standard( $this->price, $this->values, $this->attribute, $this->subProducts );
 		$this->assertFalse( $this->object->compare( $product ) );
 	}
 
