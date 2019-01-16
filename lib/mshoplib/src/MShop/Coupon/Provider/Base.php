@@ -173,13 +173,7 @@ abstract class Base implements Iface
 	 */
 	protected function getConfigValue( $key, $default = null )
 	{
-		$config = $this->item->getConfig();
-
-		if( isset( $config[$key] ) ) {
-			return $config[$key];
-		}
-
-		return $default;
+		return $this->item->getConfigValue( $key, $default );
 	}
 
 
