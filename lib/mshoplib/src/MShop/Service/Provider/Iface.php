@@ -90,6 +90,7 @@ interface Iface
 	 * - payment.url-update
 	 *
 	 * @param array $config Associative list of config keys and their value
+	 * @param \Aimeos\MShop\Service\Provider\Iface Provider object for chaining method calls
 	 */
 	public function injectGlobalConfigBE( array $config );
 

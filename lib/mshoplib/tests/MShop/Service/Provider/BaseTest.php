@@ -38,26 +38,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCalcDateLimit()
-	{
-		$this->assertEquals( '2013-10-15', $this->access( 'calcDateLimit' )->invokeArgs( $this->object, [1382100000, 3] ) );
-	}
-
-
-	public function testCalcDateLimitWeekdays()
-	{
-		$this->assertEquals( '2013-10-18', $this->access( 'calcDateLimit' )->invokeArgs( $this->object, [1382186400, 0, true] ) );
-		$this->assertEquals( '2013-10-18', $this->access( 'calcDateLimit' )->invokeArgs( $this->object, [1382272800, 0, true] ) );
-	}
-
-
-	public function testCalcDateLimitHolidays()
-	{
-		$result = $this->access( 'calcDateLimit' )->invokeArgs( $this->object, [1382100000, 0, false, '2013-10-17, 2013-10-18'] );
-		$this->assertEquals( '2013-10-16', $result );
-	}
-
-
 	public function testCheckConfigBE()
 	{
 		$this->assertEquals( [], $this->object->checkConfigBE( [] ) );
