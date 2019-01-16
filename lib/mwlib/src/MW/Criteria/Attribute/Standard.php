@@ -60,7 +60,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	private $label = '';
 
 	/**
-	 * @var string Default value
+	 * @var mixed Default value
 	 */
 	private $default = null;
 
@@ -80,9 +80,9 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 *
 	 * @param array $params Parameter to be set on initialisation
 	 *		[code] string
-	 *		[default] string (optional)
-	 *		[internalcode] string
-	 *		[internaltype] string
+	 *		[default] mixed (optional)
+	 *		[internalcode] string (optional)
+	 *		[internaltype] string (optional)
 	 *		[internaldeps] array (optional)
 	 *		[function] Closure (optional)
 	 *		[label] string
@@ -92,9 +92,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function  __construct( array $params = [] )
 	{
-		$required = array( 'type', 'internaltype', 'code', 'internalcode', 'label' );
-
-		foreach( $required as $entry )
+		foreach( ['type', 'code'] as $entry )
 		{
 			if ( !isset($params[$entry]) ) {
 				throw new \Aimeos\MW\Common\Exception( sprintf('Required parameter "%1$s" is missing', $entry) );
@@ -102,21 +100,30 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 		}
 
 		$this->code = (string) $params['code'];
-		$this->internalType = (string) $params['internaltype'];
-		$this->internalCode = $params['internalcode'];
-		$this->label = (string) $params['label'];
 		$this->type = (string) $params['type'];
 
 		if( isset( $params['default'] ) ) {
 			$this->default = $params['default'];
 		}
 
+		if( isset( $params['internalcode'] ) ) {
+			$this->internalCode = $params['internalcode'];
+		}
+
 		if( isset( $params['internaldeps'] ) ) {
-			$this->internalDeps = $params['internaldeps'];
+			$this->internalDeps = (array) $params['internaldeps'];
+		}
+
+		if( isset( $params['internaltype'] ) ) {
+			$this->internalType = $params['internaltype'];
 		}
 
 		if( isset( $params['function'] ) ) {
 			$this->func = $params['function'];
+		}
+
+		if( isset( $params['label'] ) ) {
+			$this->label = (string) $params['label'];
 		}
 
 		if( isset( $params['public'] ) ) {
@@ -211,7 +218,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	/**
 	 * Returns the default value of the search attribute.
 	 *
-	 * @return string Default value of the search attribute
+	 * @return mixed Default value of the search attribute
 	 */
 	public function getDefault()
 	{

@@ -74,7 +74,7 @@ interface Iface
 	/**
 	 * Returns the default value of the search attribute.
 	 *
-	 * @return string Default value of the search attribute
+	 * @return mixed Default value of the search attribute
 	 */
 	public function getDefault();
 
