@@ -16,7 +16,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * Adds product properties to an order product as attributes
  *
  * Example configuration:
- * - propertyadd.types: ["package-length", "package-width", "package-height", "package-weight"]
+ * - types: ["package-length", "package-width", "package-height", "package-weight"]
  *
  * The product properties listed in the array are added to the order product as
  * order product attributes with key/value pairs like code: "length", value: "1.0".
@@ -32,9 +32,9 @@ class PropertyAdd
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	private $beConfig = array(
-		'propertyadd.types' => array(
-			'code' => 'propertyadd.types',
-			'internalcode' => 'propertyadd.types',
+		'types' => array(
+			'code' => 'types',
+			'internalcode' => 'types',
 			'label' => 'Property type codes',
 			'type' => 'list',
 			'internaltype' => 'array',
@@ -110,7 +110,7 @@ class PropertyAdd
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		if( ( $types = (array) $this->getItemBase()->getConfigValue( 'propertyadd.types', [] ) ) === [] ) {
+		if( ( $types = (array) $this->getItemBase()->getConfigValue( 'types', [] ) ) === [] ) {
 			return true;
 		}
 

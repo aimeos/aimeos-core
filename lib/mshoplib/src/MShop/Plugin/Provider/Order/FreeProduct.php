@@ -17,8 +17,8 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * the configured number of times. This is bound to the e-mail address of the customer.
  *
  * The following options are available:
- * - freeproduct.productcode: '...' (SKU code of the product that should be available for free)
- * - freeproduct.count: ... (how often the product can be bought for free)
+ * - productcode: '...' (SKU code of the product that should be available for free)
+ * - count: ... (how often the product can be bought for free)
  *
  * @package MShop
  * @subpackage Plugin
@@ -28,18 +28,18 @@ class FreeProduct
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	private $beConfig = array(
-		'freeproduct.productcode' => array(
-			'code' => 'freeproduct.productcode',
-			'internalcode' => 'freeproduct.productcode',
+		'productcode' => array(
+			'code' => 'productcode',
+			'internalcode' => 'productcode',
 			'label' => 'SKU of the free product',
 			'type' => 'string',
 			'internaltype' => 'string',
 			'default' => '',
 			'required' => true,
 		),
-		'freeproduct.count' => array(
-			'code' => 'freeproduct.count',
-			'internalcode' => 'freeproduct.count',
+		'count' => array(
+			'code' => 'count',
+			'internalcode' => 'count',
 			'label' => 'Number of times the product is available for free',
 			'type' => 'integer',
 			'internaltype' => 'integer',
@@ -101,7 +101,7 @@ class FreeProduct
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
 
-		$code = $this->getConfigValue( 'freeproduct.productcode' );
+		$code = $this->getConfigValue( 'productcode' );
 
 		if( $value->getProductCode() !== $code ) {
 			return true;
@@ -113,7 +113,7 @@ class FreeProduct
 		}
 
 		$email = $addresses['payment']->getEmail();
-		$count = $this->getConfigValue( 'freeproduct.count' );
+		$count = $this->getConfigValue( 'count' );
 		$status = \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED;
 
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );

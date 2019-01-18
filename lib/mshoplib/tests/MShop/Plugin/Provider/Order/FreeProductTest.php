@@ -24,7 +24,7 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop::create( $context, 'plugin' );
 		$this->plugin = $manager->createItem();
 		$this->plugin->setProvider( 'FreeProduct' );
-		$this->plugin->setConfig( ['freeproduct.productcode' => 'ABCD', 'freeproduct.count' => 2] );
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 2] );
 		$this->plugin->setStatus( 1 );
 
 		$manager = \Aimeos\MShop::create( $context, 'order/base/address' );
@@ -55,15 +55,15 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 	public function testCheckConfigBE()
 	{
 		$attributes = array(
-			'freeproduct.productcode' => 'ABCD',
-			'freeproduct.count' => 1,
+			'productcode' => 'ABCD',
+			'count' => 1,
 		);
 
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertEquals( null, $result['freeproduct.productcode'] );
-		$this->assertEquals( null, $result['freeproduct.count'] );
+		$this->assertEquals( null, $result['productcode'] );
+		$this->assertEquals( null, $result['count'] );
 	}
 
 
@@ -72,8 +72,8 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 		$list = $this->object->getConfigBE();
 
 		$this->assertEquals( 2, count( $list ) );
-		$this->assertArrayHasKey( 'freeproduct.productcode', $list );
-		$this->assertArrayHasKey( 'freeproduct.count', $list );
+		$this->assertArrayHasKey( 'productcode', $list );
+		$this->assertArrayHasKey( 'count', $list );
 
 		foreach( $list as $entry ) {
 			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
@@ -121,7 +121,7 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdate()
 	{
-		$this->plugin->setConfig( ['freeproduct.productcode' => 'ABCD', 'freeproduct.count' => 5] );
+		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 5] );
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.after', $this->orderProduct ) );
 		$this->assertEquals( '0.00', $this->orderProduct->getPrice()->getValue() );

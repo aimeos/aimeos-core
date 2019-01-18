@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * product properties.
  *
  * Example:
- * - propertymatch.values: ["mytype" => "myvalue"]
+ * - values: ["mytype" => "myvalue"]
  *
  * This configuration enforces products to have a size and color property.
  * Otherwise, they can't be added to the basket by the customers.
@@ -35,9 +35,9 @@ class PropertyMatch
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	private $beConfig = array(
-		'propertymatch.values' => array(
-			'code' => 'propertymatch.values',
-			'internalcode' => 'propertymatch.values',
+		'values' => array(
+			'code' => 'values',
+			'internalcode' => 'values',
 			'label' => 'Property type/value map',
 			'type' => 'map',
 			'internaltype' => 'array',
@@ -97,7 +97,7 @@ class PropertyMatch
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		if( ( $map = (array) $this->getItemBase()->getConfigValue( 'propertymatch.values', [] ) ) === [] ) {
+		if( ( $map = (array) $this->getItemBase()->getConfigValue( 'values', [] ) ) === [] ) {
 			return true;
 		}
 

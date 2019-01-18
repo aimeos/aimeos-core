@@ -49,7 +49,7 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdate()
 	{
-		$this->plugin->setConfig( ['propertyadd.types' => ['package-width']] );
+		$this->plugin->setConfig( ['types' => ['package-width']] );
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->product ) );
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', [$this->product] ) );
@@ -64,7 +64,7 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateNone()
 	{
-		$this->plugin->setConfig( ['propertyadd.types' => ['unknown']] );
+		$this->plugin->setConfig( ['types' => ['unknown']] );
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->product ) );
 		$this->assertEquals( 0, count( $this->product->getAttributeItems() ) );

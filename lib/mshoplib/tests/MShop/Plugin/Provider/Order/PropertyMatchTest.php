@@ -50,21 +50,21 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdate()
 	{
-		$this->plugin->setConfig( ['propertymatch.values' => ['package-height' => '10.0']] );
+		$this->plugin->setConfig( ['values' => ['package-height' => '10.0']] );
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->product ) );
 	}
 
 
 	public function testUpdateTwoConditions()
 	{
-		$this->plugin->setConfig( ['propertymatch.values' => ['package-height' => '10.0', 'package-length' => '20.0']] );
+		$this->plugin->setConfig( ['values' => ['package-height' => '10.0', 'package-length' => '20.0']] );
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->product ) );
 	}
 
 
 	public function testUpdateFail()
 	{
-		$this->plugin->setConfig( ['propertymatch.values' => ['package-height' => 0]] );
+		$this->plugin->setConfig( ['values' => ['package-height' => 0]] );
 
 		$this->setExpectedException( \Aimeos\MShop\Plugin\Exception::class );
 		$this->object->update( $this->order, 'addProduct.before', $this->product );
