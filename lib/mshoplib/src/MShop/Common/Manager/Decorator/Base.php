@@ -125,7 +125,7 @@ abstract class Base
 	 * @param boolean $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = [], $domain = 'product', $type = null, $default = false )
+	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
 	{
 		return $this->manager->findItem( $code, $ref, $domain, $type, $default );
 	}
