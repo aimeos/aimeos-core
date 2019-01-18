@@ -131,7 +131,7 @@ abstract class Base implements Iface
 	 */
 	protected function checkConfig( array $criteria, array $map )
 	{
-		$helper = new \Aimeos\MShop\Common\Item\Helper\Config\Standard( $this->getConfigItems( $criteria ) );
+		$helper = new \Aimeos\MShop\Common\Helper\Config\Standard( $this->getConfigItems( $criteria ) );
 		return $helper->check( $map );
 	}
 

@@ -8,16 +8,16 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\Helper\Password;
+namespace Aimeos\MShop\Common\Helper\Password;
 
 
 /**
- * Generic hash implementation of the password helper item.
+ * Generic hash implementation of the password helper
  *
  * @package MShop
  * @subpackage Common
  */
-class Hash implements \Aimeos\MShop\Common\Item\Helper\Password\Iface
+class Hash implements \Aimeos\MShop\Common\Helper\Password\Iface
 {
 	private $options = [];
 

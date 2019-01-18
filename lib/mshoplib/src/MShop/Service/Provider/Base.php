@@ -148,7 +148,7 @@ abstract class Base
 	 * - payment.url-update
 	 *
 	 * @param array $config Associative list of config keys and their value
-	 * @param \Aimeos\MShop\Service\Provider\Iface Provider object for chaining method calls
+	 * @return \Aimeos\MShop\Service\Provider\Iface Provider object for chaining method calls
 	 */
 	public function injectGlobalConfigBE( array $config )
 	{
@@ -256,7 +256,7 @@ abstract class Base
 	 */
 	protected function checkConfig( array $criteria, array $map )
 	{
-		$helper = new \Aimeos\MShop\Common\Item\Helper\Config\Standard( $this->getConfigItems( $criteria ) );
+		$helper = new \Aimeos\MShop\Common\Helper\Config\Standard( $this->getConfigItems( $criteria ) );
 		return $helper->check( $map );
 	}
 

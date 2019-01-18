@@ -6,17 +6,11 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\Helper\Password;
+namespace Aimeos\MShop\Common\Helper\Password;
 
 
-/**
- * Test class for \Aimeos\MShop\Common\Item\Helper\Password\Hash
- */
 class BcryptTest extends \PHPUnit\Framework\TestCase
 {
-	/**
-	 * Sets up the fixture. This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
 		if( !function_exists( 'password_hash' ) ) {
@@ -27,7 +21,7 @@ class BcryptTest extends \PHPUnit\Framework\TestCase
 
 	public function testEncode()
 	{
-		$object = new \Aimeos\MShop\Common\Item\Helper\Password\Bcrypt( [] );
+		$object = new \Aimeos\MShop\Common\Helper\Password\Bcrypt( [] );
 
 		$this->assertStringStartsWith( '$2y$10$', $object->encode( 'unittest' ) );
 	}
@@ -35,7 +29,7 @@ class BcryptTest extends \PHPUnit\Framework\TestCase
 
 	public function testEncodeCosts()
 	{
-		$object = new \Aimeos\MShop\Common\Item\Helper\Password\Bcrypt( array( 'cost' => 5 ) );
+		$object = new \Aimeos\MShop\Common\Helper\Password\Bcrypt( array( 'cost' => 5 ) );
 
 		$this->assertStringStartsWith( '$2y$05$', $object->encode( 'unittest' ) );
 	}
@@ -43,7 +37,7 @@ class BcryptTest extends \PHPUnit\Framework\TestCase
 
 	public function testEncodeNoSalt()
 	{
-		$object = new \Aimeos\MShop\Common\Item\Helper\Password\Bcrypt( [] );
+		$object = new \Aimeos\MShop\Common\Helper\Password\Bcrypt( [] );
 
 		$this->assertStringStartsWith( '$2y$10$', $object->encode( 'unittest', null ) );
 	}

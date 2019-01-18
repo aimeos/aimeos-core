@@ -212,7 +212,7 @@ class PayPalExpress
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
 	 * @param array $params Request parameter if available
-	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Standard Form object with URL, action and parameters to redirect to
+	 * @return \Aimeos\MShop\Common\Helper\Form\Standard Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] )
@@ -239,7 +239,7 @@ class PayPalExpress
 		$this->setAttributes( $serviceItem, ['TOKEN' => $rvals['TOKEN']], 'payment/paypal' );
 		$this->saveOrderBase( $orderBaseItem );
 
-		return new \Aimeos\MShop\Common\Item\Helper\Form\Standard( $paypalUrl, 'POST', [] );
+		return new \Aimeos\MShop\Common\Helper\Form\Standard( $paypalUrl, 'POST', [] );
 	}
 
 

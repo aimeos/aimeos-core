@@ -77,7 +77,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
 
 		$result = $this->object->process( $item, [] );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Helper\Form\Iface::class, $result );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Helper\Form\Iface::class, $result );
 	}
 
 

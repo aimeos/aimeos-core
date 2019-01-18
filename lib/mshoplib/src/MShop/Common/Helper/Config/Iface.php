@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\Helper\Config;
+namespace Aimeos\MShop\Common\Helper\Config;
 
 
 /**

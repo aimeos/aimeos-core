@@ -8,16 +8,16 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\Helper\Password;
+namespace Aimeos\MShop\Common\Helper\Password;
 
 
 /**
- * Bcrypt implementation of the password helper item.
+ * Bcrypt implementation of the password helper
  *
  * @package MShop
  * @subpackage Common
  */
-class Bcrypt implements \Aimeos\MShop\Common\Item\Helper\Password\Iface
+class Bcrypt implements \Aimeos\MShop\Common\Helper\Password\Iface
 {
 	private $options = [];
 

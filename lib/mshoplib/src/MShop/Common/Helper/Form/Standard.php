@@ -9,16 +9,16 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\Helper\Form;
+namespace Aimeos\MShop\Common\Helper\Form;
 
 
 /**
- * Default implementation of the helper form item.
+ * Default implementation of the form helper
  *
  * @package MShop
  * @subpackage Common
  */
-class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
+class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 {
 	private $url;
 	private $method;
@@ -63,7 +63,7 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 * Sets if the URL points to an external site.
 	 *
 	 * @param boolean $value True if URL points to an external site, false if it stays on the same site
-	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
+	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
 	public function setExternal( $value )
 	{
@@ -88,7 +88,7 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 * Sets the url.
 	 *
 	 * @param string $url Url
-	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
+	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
 	public function setUrl( $url )
 	{
@@ -113,7 +113,7 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 * Sets the method.
 	 *
 	 * @param string $method Method
-	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
+	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
 	public function setMethod( $method )
 	{
@@ -144,7 +144,7 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 *
 	 * @param string $key Unique key
 	 * @param \Aimeos\MW\Criteria\Attribute\Iface $value Attribute item for the given key
-	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
+	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
 	public function setValue( $key, \Aimeos\MW\Criteria\Attribute\Iface $value )
 	{
@@ -180,7 +180,7 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 * Sets the custom HTML string.
 	 *
 	 * @param string $html HTML string
-	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
+	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
 	public function setHtml( $html )
 	{

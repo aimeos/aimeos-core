@@ -181,7 +181,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object to process
 	 * @param array $params Request parameter if available
-	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Standard|null Form object or null
+	 * @return \Aimeos\MShop\Common\Helper\Form\Standard|null Form object or null
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] )
 	{

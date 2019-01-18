@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\Helper\Config;
+namespace Aimeos\MShop\Common\Helper\Config;
 
 
 /**
@@ -17,7 +17,7 @@ namespace Aimeos\MShop\Common\Item\Helper\Config;
  * @package MShop
  * @subpackage Common
  */
-class Standard implements \Aimeos\MShop\Common\Item\Helper\Config\Iface
+class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 {
 	private $criteria;
 

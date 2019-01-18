@@ -135,7 +135,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			$attributeList[$attribute->getCode()] = $attribute;
 		}
 
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Helper\Form\Iface::class, $helperForm );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Helper\Form\Iface::class, $helperForm );
 		$this->assertEquals( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=UT-99999999', $helperForm->getUrl() );
 		$this->assertEquals( 'POST', $helperForm->getMethod() );
 		$this->assertEquals( [], $helperForm->getValues() );

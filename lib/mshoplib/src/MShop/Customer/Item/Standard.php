@@ -34,12 +34,12 @@ class Standard extends Base implements Iface
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $addrItems List of delivery addresses
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
-	 * @param \Aimeos\MShop\Common\Item\Helper\Password\Iface|null $helper Password encryption helper object
+	 * @param \Aimeos\MShop\Common\Helper\Password\Iface|null $helper Password encryption helper object
 	 * @param string|null $salt Password salt
 	 */
 	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [],
 		array $listItems = [], array $refItems = [], array $addrItems = [], array $propItems = [],
-		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null, $salt = null )
+		\Aimeos\MShop\Common\Helper\Password\Iface $helper = null, $salt = null )
 	{
 		parent::__construct( $address, $values, $listItems, $refItems, $addrItems, $propItems );
 

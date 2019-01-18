@@ -9,11 +9,11 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\Helper\Form;
+namespace Aimeos\MShop\Common\Helper\Form;
 
 
 /**
- * Generic interface for the helper form item.
+ * Generic interface for the form helper
  *
  * @package MShop
  * @subpackage Common
@@ -32,7 +32,7 @@ interface Iface
 	 * Sets the url.
 	 *
 	 * @param string $url Url
-	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
+	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
 	public function setUrl( $url );
 
@@ -49,7 +49,7 @@ interface Iface
 	 * Sets the method.
 	 *
 	 * @param string $method Method
-	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
+	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
 	public function setMethod( $method );
 
@@ -68,7 +68,7 @@ interface Iface
 	 *
 	 * @param string $key Unique key
 	 * @param \Aimeos\MW\Criteria\Attribute\Iface $value Attribute item for the given key
-	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
+	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
 	public function setValue( $key, \Aimeos\MW\Criteria\Attribute\Iface $value );
 
@@ -93,7 +93,7 @@ interface Iface
 	 * Sets the custom HTML string.
 	 *
 	 * @param string $html HTML string
-	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
+	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
 	public function setHtml( $html );
 }

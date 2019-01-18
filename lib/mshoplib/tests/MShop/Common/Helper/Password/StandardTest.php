@@ -6,29 +6,20 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\Helper\Password;
+namespace Aimeos\MShop\Common\Helper\Password;
 
 
-/**
- * Test class for \Aimeos\MShop\Common\Item\Helper\Password\Standard
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 
 
-	/**
-	 * Sets up the fixture. This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\MShop\Common\Item\Helper\Password\Standard( array( 'format' => '{%2$s}%1$s' ) );
+		$this->object = new \Aimeos\MShop\Common\Helper\Password\Standard( array( 'format' => '{%2$s}%1$s' ) );
 	}
 
 
-	/**
-	 * Tears down the fixture. This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );

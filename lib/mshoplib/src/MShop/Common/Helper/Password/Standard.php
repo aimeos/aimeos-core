@@ -8,23 +8,30 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\Helper\Password;
+namespace Aimeos\MShop\Common\Helper\Password;
 
 
 /**
- * Generic interface for the passwort helper item.
+ * Default implementation of the password helper
  *
  * @package MShop
  * @subpackage Common
  */
-interface Iface
+class Standard implements \Aimeos\MShop\Common\Helper\Password\Iface
 {
+	private $options = [];
+
+
 	/**
 	 * Initializes the password helper.
 	 *
 	 * @param array $options Associative list of key/value pairs of options specific for the hashing method
 	 */
-	public function __construct( array $options );
+	public function __construct( array $options )
+	{
+		$this->options = $options;
+	}
+
 
 	/**
 	 * Returns the hashed password.
@@ -33,5 +40,10 @@ interface Iface
 	 * @param string|null $salt Password salt
 	 * @return string Hashed password
 	 */
-	public function encode( $password, $salt = null );
+	public function encode( $password, $salt = null )
+	{
+		$format = ( isset( $this->options['format'] ) ? $this->options['format'] : '%1$s%2$s' );
+
+		return sha1( sprintf( $format, $password, $salt ) );
+	}
 }

@@ -7,21 +7,15 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\Helper\Form;
+namespace Aimeos\MShop\Common\Helper\Form;
 
 
-/**
- * Test class for \Aimeos\MShop\Common\Item\Helper\Form\Standard
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture. This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -59,66 +53,72 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			) ),
 		);
 
-		$this->object = new \Aimeos\MShop\Common\Item\Helper\Form\Standard( 'http://www.example.com', 'post', $this->values );
+		$this->object = new \Aimeos\MShop\Common\Helper\Form\Standard( 'http://www.example.com', 'post', $this->values );
 	}
 
 
-	/**
-	 * Tears down the fixture. This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object, $this->values );
 	}
+
 
 	public function testGetExternal()
 	{
 		$this->assertEquals( true, $this->object->getExternal() );
 	}
 
+
 	public function testSetExternal()
 	{
 		$return = $this->object->setExternal( false );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Helper\Form\Iface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Helper\Form\Iface::class, $return );
 		$this->assertEquals( false, $this->object->getExternal() );
 	}
+
 
 	public function testGetUrl()
 	{
 		$this->assertEquals( 'http://www.example.com', $this->object->getUrl() );
 	}
 
+
 	public function testSetUrl()
 	{
 		$return = $this->object->setUrl( 'http://www.example.de' );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Helper\Form\Iface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Helper\Form\Iface::class, $return );
 		$this->assertEquals( 'http://www.example.de', $this->object->getUrl() );
 	}
+
 
 	public function testGetMethod()
 	{
 		$this->assertEquals( 'post', $this->object->getMethod() );
 	}
 
+
 	public function testSetMethod()
 	{
 		$return = $this->object->setMethod( 'get' );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Helper\Form\Iface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Helper\Form\Iface::class, $return );
 		$this->assertEquals( 'get', $this->object->getMethod() );
 	}
+
 
 	public function testGetValues()
 	{
 		$this->assertEquals( $this->values, $this->object->getValues() );
 	}
 
+
 	public function testGetValue()
 	{
 		$this->assertEquals( 'unittest', $this->object->getValue( 'name' )->getDefault() );
 	}
+
 
 	public function testSetValue()
 	{
@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$return = $this->object->setValue( 'name', $item );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Helper\Form\Iface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Helper\Form\Iface::class, $return );
 		$this->assertEquals( 'test', $this->object->getValue( 'name' )->getDefault() );
 	}
 }
