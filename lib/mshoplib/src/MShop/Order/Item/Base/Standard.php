@@ -24,6 +24,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	protected $price;
 	protected $locale;
 	protected $values;
+	protected $recalc = false;
 	protected $available = true;
 
 
@@ -75,7 +76,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 		$this->notifyListeners( 'check.before', $what );
 
-		if( ( $what & self::PARTS_PRODUCT ) && ( count( $this->products ) < 1 ) ) {
+		if( ( $what & self::PARTS_PRODUCT ) && ( count( $this->getProducts() ) < 1 ) ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Basket empty' ) );
 		}
 
@@ -329,21 +330,23 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getPrice()
 	{
-		if( $this->price->getValue() === '0.00' )
+		if( $this->recalc )
 		{
-			$this->price->clear();
-			$currencyId = $this->price->getCurrencyId();
+			$price = $this->price->clear();
 
 			foreach( $this->getServices() as $list )
 			{
 				foreach( $list as $service ) {
-					$this->price->addItem( $service->getPrice()->setCurrencyId( $currencyId ) );
+					$price = $price->addItem( $service->getPrice() );
 				}
 			}
 
 			foreach( $this->getProducts() as $product ) {
-				$this->price->addItem( $product->getPrice()->setCurrencyId( $currencyId ), $product->getQuantity() );
+				$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
 			}
+
+			$this->price = $price;
+			$this->recalc = false;
 		}
 
 		return $this->price;
@@ -377,8 +380,8 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function setModified()
 	{
-		$this->modified = true;
-		$this->price->clear();
+		parent::setModified();
+		$this->recalc = true;
 	}
 
 
