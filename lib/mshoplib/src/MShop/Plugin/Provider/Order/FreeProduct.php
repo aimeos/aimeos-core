@@ -129,7 +129,7 @@ class FreeProduct
 		$result = $manager->aggregate( $search, 'order.base.address.email', 'order.base.product.quantity', 'sum' );
 
 		if( isset( $result[$email] ) && $result[$email] < $count ) {
-			$value->getPrice()->setRebate( $value->getPrice()->getValue() )->setValue( '0.00' );
+			$value->setPrice( $value->getPrice()->setRebate( $value->getPrice()->getValue() )->setValue( '0.00' ) );
 		}
 
 		return true;

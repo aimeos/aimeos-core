@@ -215,14 +215,14 @@ class ProductPrice
 				$attrPrices = $attributes[$attrId]->getRefItems( 'price', 'default', 'default' );
 			}
 
-			if( !empty( $attrPrices ) ) {
-				$price->addItem( $priceManager->getLowestPrice( $attrPrices, $orderAttribute->getQuantity() ), $orderAttribute->getQuantity() );
+			if( !empty( $attrPrices ) )
+			{
+				$lowPrice = $priceManager->getLowestPrice( $attrPrices, $orderAttribute->getQuantity() );
+				$price = $price->addItem( $lowPrice, $orderAttribute->getQuantity() );
 			}
 		}
 
 		// reset product rebates like in the basket controller
-		$price->setRebate( '0.00' );
-
-		return $price;
+		return $price->setRebate( '0.00' );
 	}
 }

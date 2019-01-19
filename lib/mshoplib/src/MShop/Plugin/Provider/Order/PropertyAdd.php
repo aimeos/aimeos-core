@@ -117,7 +117,7 @@ class PropertyAdd
 		if( !is_array( $value ) )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
-			$this->addAttributes( $value, $this->getProductItems( [$value->getProductId()] ), $types );
+			$value = $this->addAttributes( $value, $this->getProductItems( [$value->getProductId()] ), $types );
 			return true;
 		}
 
@@ -169,10 +169,10 @@ class PropertyAdd
 					$attrItem = $this->orderAttrManager->createItem();
 				}
 
-				$attrItem->setType( 'product/property' )->setCode( $type );
-				$attrItem->setValue( count( $list ) > 1 ? $list : reset( $list ) );
+				$attrItem = $attrItem->setType( 'product/property' )->setCode( $type )
+					->setValue( count( $list ) > 1 ? $list : reset( $list ) );
 
-				$orderProduct->setAttributeItem( $attrItem );
+				$orderProduct = $orderProduct->setAttributeItem( $attrItem );
 			}
 		}
 

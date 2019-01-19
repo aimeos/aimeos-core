@@ -47,9 +47,6 @@ class Coupon
 		$p->addListener( $this->getObject(), 'setServices.after' );
 		$p->addListener( $this->getObject(), 'addCoupon.after' );
 		$p->addListener( $this->getObject(), 'deleteCoupon.after' );
-		$p->addListener( $this->getObject(), 'setCoupons.after' );
-		$p->addListener( $this->getObject(), 'setOrder.before' );
-		$p->addListener( $this->getObject(), 'check.after' );
 	}
 
 
@@ -67,29 +64,23 @@ class Coupon
 		$notAvailable = [];
 		$context = $this->getContext();
 
-		$couponManager = \Aimeos\MShop::create( $context, 'coupon' );
+		$manager = \Aimeos\MShop::create( $context, 'coupon' );
 		$codeManager = \Aimeos\MShop::create( $context, 'coupon/code' );
 
 		foreach( $order->getCoupons() as $code => $products )
 		{
-			$search = $couponManager->createSearch( true );
+			$search = $manager->createSearch( true )->setSlice( 0, 1 );
 			$expr = array(
 				$search->compare( '==', 'coupon.code.code', $code ),
 				$codeManager->createSearch( true )->getConditions(),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSlice( 0, 1 );
+			$items = $manager->searchItems( $search );
 
-			$results = $couponManager->searchItems( $search );
-
-			if( ( $couponItem = reset( $results ) ) !== false )
-			{
-				$couponProvider = $couponManager->getProvider( $couponItem, $code );
-				$couponProvider->updateCoupon( $order );
-			}
-			else
-			{
+			if( ( $item = reset( $items ) ) !== false ) {
+				$manager->getProvider( $item, $code )->updateCoupon( $order );
+			} else {
 				$notAvailable[$code] = 'coupon.gone';
 			}
 		}

@@ -73,7 +73,7 @@ class ServicesUpdate
 			foreach( $services as $type => $list )
 			{
 				foreach( $list as $key => $item ) {
-					$list[$key] = $item->setPrice( $priceManager->createItem() );
+					$services[$type][$key] = $item->setPrice( $priceManager->createItem() );
 				}
 			}
 

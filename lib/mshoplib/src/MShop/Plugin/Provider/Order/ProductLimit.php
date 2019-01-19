@@ -108,7 +108,6 @@ class ProductLimit
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this->getObject(), 'addProduct.after' );
-		$p->addListener( $this->getObject(), 'deleteProduct.after' );
 		$p->addListener( $this->getObject(), 'setProducts.after' );
 	}
 

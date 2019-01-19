@@ -106,16 +106,28 @@ class Shipping
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
-		$config = $this->getItemBase()->getConfig();
-		if( !isset( $config['threshold'] ) ) { return true; }
+		$services = $order->getServices();
+		$currency = $order->getPrice()->getCurrencyId();
+		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
+		$threshold = $this->getItemBase()->getConfigValue( 'threshold/' . $currency );
 
-		try
+		if( $threshold && isset( $services[$type] ) )
 		{
-			foreach( $order->getService( 'delivery' ) as $delivery ) {
-				$this->checkThreshold( $order, $delivery->getPrice(), $config['threshold'] );
+			foreach( $services[$type] as $key => $service )
+			{
+				$price = $service->getPrice();
+
+				if( $this->checkThreshold( $order->getProducts(), $threshold ) ) {
+					$price = $price->setRebate( $price->getCosts() )->setCosts( '0.00' );
+				} else {
+					$price = $price->setCosts( $price->getRebate() )->setRebate( '0.00' );
+				}
+
+				$services[$type][$key] = $service->setPrice( $price );
 			}
+
+			$order->setServices( $services );
 		}
-		catch( \Aimeos\MShop\Order\Exception $oe ) {} // no delivery item available yet
 
 		return true;
 	}
@@ -124,29 +136,22 @@ class Shipping
 	/**
 	 * Tests if the shipping threshold is reached and updates the price accordingly
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Basket object
-	 * @param \Aimeos\MShop\Price\Item\Iface $price Delivery price item
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $orderProducts List of ordered products
 	 * @param array $threshold Associative list of currency/threshold pairs
+	 * @return boolean True if threshold is reached, false if not
 	 */
-	protected function checkThreshold( \Aimeos\MShop\Order\Item\Base\Iface $order,
-		\Aimeos\MShop\Price\Item\Iface $price, array $threshold )
+	protected function checkThreshold( array $orderProducts, $threshold )
 	{
-		$currency = $price->getCurrencyId();
-
-		if( !isset( $threshold[$currency] ) ) {
-			return;
-		}
-
 		$sum = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
 
-		foreach( $order->getProducts() as $product ) {
-			$sum->addItem( $product->getPrice(), $product->getQuantity() );
+		foreach( $orderProducts as $product ) {
+			$sum = $sum->addItem( $product->getPrice(), $product->getQuantity() );
 		}
 
-		if( $sum->getValue() + $sum->getRebate() >= $threshold[$currency] && $price->getCosts() > '0.00' ) {
-			$price->setRebate( $price->getCosts() )->setCosts( '0.00' );
-		} elseif( $sum->getValue() + $sum->getRebate() < $threshold[$currency] && $price->getRebate() > '0.00' ) {
-			$price->setCosts( $price->getRebate() )->setRebate( '0.00' );
+		if( $sum->getValue() + $sum->getRebate() >= $threshold ) {
+			return true;
 		}
+
+		return false;
 	}
 }

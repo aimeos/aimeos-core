@@ -44,13 +44,15 @@ class ProductFreeOptions
 	{
 		if( is_array( $value ) )
 		{
-			foreach( $value as $product ) {
-				$this->updatePrice( $product );
+			foreach( $value as $key => $product )
+			{
+				$product = $this->updatePrice( $product );
+				$value[$key] = $product;
 			}
 		}
 		else
 		{
-			$this->updatePrice( $value );
+			$value = $this->updatePrice( $value );
 		}
 
 		return true;
@@ -82,7 +84,7 @@ class ProductFreeOptions
 				if( $quantity > 0 )
 				{
 					$priceItem = $priceManager->getLowestPrice( $prices, $quantity );
-					$price->addItem( $priceItem, $quantity );
+					$price = $price->addItem( $priceItem, $quantity );
 				}
 			}
 		}
@@ -155,13 +157,16 @@ class ProductFreeOptions
 	}
 
 
+	/** Updates the price of the product
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $product Ordered product for updating the price
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Ordered product with updated price
+	 */
 	protected function updatePrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $product )
 	{
 		$attrQtys = $attrTypes = [];
 		$context = $this->getContext();
-
-		$prodManager = \Aimeos\MShop::create( $context, 'product' );
-		$prodItem = $prodManager->getItem( $product->getProductId(), ['price'] );
+		$prodItem = \Aimeos\MShop::create( $context, 'product' )->getItem( $product->getProductId(), ['price'] );
 		$prodConf = $prodItem->getConfig();
 
 
@@ -176,10 +181,8 @@ class ProductFreeOptions
 		}
 
 
-		$priceManager = \Aimeos\MShop::create( $context, 'price' );
-
 		$prices = $prodItem->getRefItems( 'price', 'default', 'default' );
-		$priceItem = $priceManager->getLowestPrice( $prices, $product->getQuantity() );
+		$priceItem = \Aimeos\MShop::create( $context, 'price' )->getLowestPrice( $prices, $product->getQuantity() );
 
 		foreach( $this->getAttributeMap( array_keys( $attrQtys ) ) as $type => $list )
 		{
@@ -194,6 +197,6 @@ class ProductFreeOptions
 			}
 		}
 
-		$product->setPrice( $priceItem );
+		return $product->setPrice( $priceItem );
 	}
 }

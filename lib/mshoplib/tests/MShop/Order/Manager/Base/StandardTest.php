@@ -831,16 +831,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 0, count( $basket->getCoupons() ) );
 
 		$basket->addCoupon( 'CDEF' );
-		$basket->addCoupon( '90AB', $basket->getProducts() );
+		$basket->addCoupon( '90AB' );
 		$this->assertEquals( 2, count( $basket->getCoupons() ) );
 
 		$this->object->store( $basket );
 		$newBasket = $this->object->load( $basket->getId() );
 		$this->object->deleteItem( $newBasket->getId() );
 
-		$this->assertEquals( '1344.00', $newBasket->getPrice()->getValue() );
-		$this->assertEquals( '64.00', $newBasket->getPrice()->getCosts() );
-		$this->assertEquals( '5.00', $newBasket->getPrice()->getRebate() );
+		$this->assertEquals( '672.00', $newBasket->getPrice()->getValue() );
+		$this->assertEquals( '32.00', $newBasket->getPrice()->getCosts() );
+		$this->assertEquals( '0.00', $newBasket->getPrice()->getRebate() );
 		$this->assertEquals( 2, count( $newBasket->getCoupons() ) );
 	}
 

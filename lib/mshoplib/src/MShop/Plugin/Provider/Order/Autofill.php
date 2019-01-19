@@ -237,12 +237,8 @@ class Autofill
 
 			if( $provider->isAvailable( $order ) === true )
 			{
-				$orderServiceManager = \Aimeos\MShop::create( $context, 'order/base/service' );
-				$orderServiceItem = $orderServiceManager->createItem();
-				$orderServiceItem->copyFrom( $item );
-				$orderServiceItem->setPrice( $provider->calcPrice( $order ) );
-
-				return $orderServiceItem;
+				return \Aimeos\MShop::create( $context, 'order/base/service' )->createItem()
+					->copyFrom( $item )->setPrice( $provider->calcPrice( $order ) );
 			}
 		}
 	}
@@ -317,15 +313,11 @@ class Autofill
 		if( $context->getUserId() !== null && !isset( $addresses[$type] )
 			&& (bool) $this->getConfigValue( 'address', false ) === true
 		) {
-			$customerManager = \Aimeos\MShop::create( $context, 'customer' );
-			$orderAddressManager = \Aimeos\MShop::create( $context, 'order/base/address' );
+			$address = \Aimeos\MShop::create( $context, 'customer' )
+				->getItem( $context->getUserId() )->getPaymentAddress();
 
-			$address = $customerManager->getItem( $context->getUserId() )->getPaymentAddress();
-
-			$orderAddressItem = $orderAddressManager->createItem();
-			$orderAddressItem->copyFrom( $address );
-
-			$order->setAddress( $orderAddressItem, $type );
+			$addrItem = \Aimeos\MShop::create( $context, 'order/base/address' )->createItem()->copyFrom( $address );
+			$order->setAddress( $addrItem, $type );
 		}
 	}
 

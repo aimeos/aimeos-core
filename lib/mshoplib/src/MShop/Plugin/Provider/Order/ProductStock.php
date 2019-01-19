@@ -82,10 +82,10 @@ class ProductStock
 	{
 		$productCodes = $stockTypes = $stockMap = [];
 
-		foreach( $order->getProducts() as $orderProductItem )
+		foreach( $order->getProducts() as $orderProduct )
 		{
-			$productCodes[] = $orderProductItem->getProductCode();
-			$stockTypes[] = $orderProductItem->getStockType();
+			$productCodes[] = $orderProduct->getProductCode();
+			$stockTypes[] = $orderProduct->getStockType();
 		}
 
 		foreach( $this->getStockItems( $productCodes, $stockTypes ) as $stockItem ) {
@@ -109,32 +109,35 @@ class ProductStock
 	protected function checkStockLevels( \Aimeos\MShop\Order\Item\Base\Iface $order, array $stockMap )
 	{
 		$outOfStock = [];
+		$products = $order->getProducts();
 
-		foreach( $order->getProducts() as $position => $orderProductItem )
+		foreach( $products as $pos => $orderProduct )
 		{
 			$stocklevel = 0;
+			$type = $orderProduct->getStockType();
+			$code = $orderProduct->getProductCode();
 
-			if( isset( $stockMap[ $orderProductItem->getProductCode() ] )
-				&& array_key_exists( $orderProductItem->getStockType(), $stockMap[ $orderProductItem->getProductCode() ] )
+			if( isset( $stockMap[ $code ] )
+				&& array_key_exists( $type, $stockMap[$code] )
 			) {
-				if( ( $stocklevel = $stockMap[ $orderProductItem->getProductCode() ][ $orderProductItem->getStockType() ] ) === null ) {
+				if( ( $stocklevel = $stockMap[$code][$type] ) === null ) {
 					continue;
 				}
 
-				if( $stocklevel >= $orderProductItem->getQuantity() )
+				if( $stocklevel >= $orderProduct->getQuantity() )
 				{
-					$stockMap[ $orderProductItem->getProductCode() ][ $orderProductItem->getStockType() ] -= $orderProductItem->getQuantity();
+					$stockMap[$code][$type] -= $orderProduct->getQuantity();
 					continue;
 				}
 			}
 
-			if( $stocklevel > 0 ) {
-				$orderProductItem->setQuantity( $stocklevel ); // update quantity to actual stock level
+			if( $stocklevel > 0 ) { // update quantity to actual stock level
+				$order->addProduct( $orderProduct->setQuantity( $stocklevel ), $pos );
 			} else {
-				$order->deleteProduct( $position );
+				$order->deleteProduct( $pos );
 			}
 
-			$outOfStock[$position] = 'stock.notenough';
+			$outOfStock[$pos] = 'stock.notenough';
 		}
 
 		return $outOfStock;
