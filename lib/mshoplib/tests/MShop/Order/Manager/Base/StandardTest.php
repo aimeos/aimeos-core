@@ -838,9 +838,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$newBasket = $this->object->load( $basket->getId() );
 		$this->object->deleteItem( $newBasket->getId() );
 
-		$this->assertEquals( '672.00', $newBasket->getPrice()->getValue() );
+		$this->assertEquals( '601.60', $newBasket->getPrice()->getValue() );
 		$this->assertEquals( '32.00', $newBasket->getPrice()->getCosts() );
-		$this->assertEquals( '0.00', $newBasket->getPrice()->getRebate() );
+		$this->assertEquals( '70.40', $newBasket->getPrice()->getRebate() );
 		$this->assertEquals( 2, count( $newBasket->getCoupons() ) );
 	}
 

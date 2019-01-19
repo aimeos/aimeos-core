@@ -483,27 +483,19 @@ abstract class Base
 	 * Adds a coupon code and the given product item to the basket
 	 *
 	 * @param string $code Coupon code
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of coupon products
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function addCoupon( $code, array $products = [] )
+	public function addCoupon( $code )
 	{
-		if( isset( $this->coupons[$code] ) ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Duplicate coupon code' ) );
+		if( !isset( $this->coupons[$code] ) )
+		{
+			$this->notifyListeners( 'addCoupon.before', $products );
+
+			$this->coupons[$code] = [];
+			$this->setModified();
+
+			$this->notifyListeners( 'addCoupon.after', $code );
 		}
-
-		$this->checkProducts( $products );
-
-		$this->notifyListeners( 'addCoupon.before', $products );
-
-		foreach( $products as $product ) {
-			$this->products[] = $product;
-		}
-
-		$this->coupons[$code] = $products;
-		$this->setModified();
-
-		$this->notifyListeners( 'addCoupon.after', $code );
 
 		return $this;
 	}
@@ -513,10 +505,9 @@ abstract class Base
 	 * Removes a coupon and the related product items from the basket
 	 *
 	 * @param string $code Coupon code
-	 * @param boolean $removecode If the coupon code should also be removed
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function deleteCoupon( $code, $removecode = false )
+	public function deleteCoupon( $code )
 	{
 		if( isset( $this->coupons[$code] ) )
 		{
@@ -530,13 +521,7 @@ abstract class Base
 			}
 
 			$old = [$code => $this->coupons[$code]];
-
-			if( $removecode === true ) {
-				unset( $this->coupons[$code] );
-			} else {
-				$this->coupons[$code] = [];
-			}
-
+			unset( $this->coupons[$code] );
 			$this->setModified();
 
 			$this->notifyListeners( 'deleteCoupon.after', $old );
@@ -555,6 +540,43 @@ abstract class Base
 	public function getCoupons()
 	{
 		return $this->coupons;
+	}
+
+
+	/**
+	 * Sets a coupon code and the given product items in the basket.
+	 *
+	 * @param string $code Coupon code
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of coupon products
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 */
+	public function setCoupon( $code, array $products = [] )
+	{
+		$products = $this->checkProducts( $products );
+
+		$this->notifyListeners( 'setCoupon.before', [$code => $products] );
+
+		if( isset( $this->coupons[$code] ) )
+		{
+			foreach( $this->coupons[$code] as $product )
+			{
+				if( ( $key = array_search( $product, $this->products, true ) ) !== false ) {
+					unset( $this->products[$key] );
+				}
+			}
+		}
+
+		foreach( $products as $product ) {
+			$this->products[] = $product;
+		}
+
+		$old = isset( $this->coupons[$code] ) ? [$code => $this->coupons[$code]] : [];
+		$this->coupons[$code] = $products;
+		$this->setModified();
+
+		$this->notifyListeners( 'setCoupon.after', $old );
+
+		return $this;
 	}
 
 

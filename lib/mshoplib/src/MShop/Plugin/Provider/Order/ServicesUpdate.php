@@ -47,6 +47,7 @@ class ServicesUpdate
 		$p->addListener( $this->getObject(), 'addCoupon.after' );
 		$p->addListener( $this->getObject(), 'deleteCoupon.after' );
 		$p->addListener( $this->getObject(), 'setCoupons.after' );
+		$p->addListener( $this->getObject(), 'setCoupon.after' );
 	}
 
 

@@ -660,8 +660,6 @@ class Standard extends Base implements Iface
 			$this->setMediaUrl( $item->getPreview() );
 		}
 
-		$this->setModified();
-
-		return $this;
+		return $this->setModified();
 	}
 }

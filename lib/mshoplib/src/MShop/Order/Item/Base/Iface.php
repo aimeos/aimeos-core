@@ -199,20 +199,17 @@ interface Iface
 	 * Adds a coupon code entered by the customer and the given product item to the basket.
 	 *
 	 * @param string $code Coupon code
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of coupon products
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function addCoupon( $code, array $products = [] );
+	public function addCoupon( $code );
 
 	/**
 	 * Removes a coupon from the order.
 	 *
 	 * @param string $code Coupon code
-	 * @param boolean $removecode If the coupon code should also be removed
-	 * @return array List of affected product items implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
-	 *  or an empty list if no products are affected by a coupon
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function deleteCoupon( $code, $removecode = false );
+	public function deleteCoupon( $code );
 
 	/**
 	 * Returns all coupon codes and the lists of affected product items.
@@ -220,6 +217,15 @@ interface Iface
 	 * @return array Associative array of codes and lists of product items implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
 	public function getCoupons();
+
+	/**
+	 * Sets a coupon code and the given product items in the basket.
+	 *
+	 * @param string $code Coupon code
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of coupon products
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 */
+	public function setCoupon( $code, array $products = [] );
 
 	/**
 	 * Replaces all coupons in the current basket with the new ones
