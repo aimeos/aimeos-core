@@ -78,7 +78,7 @@ class Category
 
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
 
-			$search = $manager->createSearch( true );
+			$search = $manager->createSearch( true )->setSlice( 0, 1 );
 			$expr = [
 				$search->compare( '==', 'catalog.code', $catCodes ),
 				$search->compare( '==', 'catalog.lists.domain', 'product' ),
@@ -86,7 +86,6 @@ class Category
 				$search->getConditions(),
 			];
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSlice( 0, 1 );
 
 			if( count( $manager->searchItems( $search ) ) === 0 ) {
 				return false;

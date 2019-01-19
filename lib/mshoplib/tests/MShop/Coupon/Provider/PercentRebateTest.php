@@ -38,14 +38,14 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAddCoupon()
+	public function testUpdate()
 	{
 		$orderProducts = $this->getOrderProducts();
 
 		$this->orderBase->addProduct( $orderProducts['CNE'] );
 		$this->orderBase->addProduct( $orderProducts['CNC'] );
 
-		$this->object->addCoupon( $this->orderBase );
+		$this->object->update( $this->orderBase );
 
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();
@@ -66,7 +66,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAddCouponRoundUp()
+	public function testUpdateRoundUp()
 	{
 		$this->coupon->setConfig( [
 			'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '5.325',
@@ -76,7 +76,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$orderProducts = $this->getOrderProducts();
 		$this->orderBase->addProduct( $orderProducts['CNE'] );
 
-		$this->object->addCoupon( $this->orderBase );
+		$this->object->update( $this->orderBase );
 
 		$coupons = $this->orderBase->getCoupons();
 
@@ -90,7 +90,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAddCouponRoundDown()
+	public function testUpdateRoundDown()
 	{
 		$this->coupon->setConfig( [
 			'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '5.3',
@@ -100,7 +100,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$orderProducts = $this->getOrderProducts();
 		$this->orderBase->addProduct( $orderProducts['CNE'] );
 
-		$this->object->addCoupon( $this->orderBase );
+		$this->object->update( $this->orderBase );
 
 		$coupons = $this->orderBase->getCoupons();
 
@@ -114,7 +114,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAddCouponMultipleTaxRates()
+	public function testUpdateMultipleTaxRates()
 	{
 		$products = $this->getOrderProducts();
 
@@ -127,7 +127,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$this->orderBase->addProduct( $products['CNE'] );
 		$this->orderBase->addProduct( $products['CNC'] );
 
-		$this->object->addCoupon( $this->orderBase );
+		$this->object->update( $this->orderBase );
 
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();
@@ -148,23 +148,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testDeleteCoupon()
-	{
-		$orderProducts = $this->getOrderProducts();
-		$this->orderBase->addProduct( $orderProducts['CNE'] );
-
-		$this->object->addCoupon( $this->orderBase );
-		$this->object->deleteCoupon( $this->orderBase );
-
-		$products = $this->orderBase->getProducts();
-		$coupons = $this->orderBase->getCoupons();
-
-		$this->assertEquals( 1, count( $products ) );
-		$this->assertArrayNotHasKey( '90AB', $coupons );
-	}
-
-
-	public function testAddCouponInvalidConfig()
+	public function testUpdateInvalidConfig()
 	{
 		$context = \TestHelperMShop::getContext();
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
@@ -172,7 +156,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $couponItem, '90AB' );
 
 		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
-		$object->addCoupon( $this->orderBase );
+		$object->update( $this->orderBase );
 	}
 
 

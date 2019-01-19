@@ -37,14 +37,13 @@ class Once
 			$address = $addresses[$type];
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
 
-			$search = $manager->createSearch();
+			$search = $manager->createSearch()->setSlice( 0, 1 );
 			$expr = [
 				$search->compare( '==', 'order.base.address.email', $address->getEmail() ),
 				$search->compare( '==', 'order.base.coupon.code', $this->getCode() ),
 				$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
 			];
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSlice( 0, 1 );
 
 			if( count( $manager->searchItems( $search ) ) > 0 ) {
 				return false;

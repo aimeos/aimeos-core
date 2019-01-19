@@ -21,30 +21,6 @@ namespace Aimeos\MShop\Coupon\Provider;
 interface Iface
 {
 	/**
-	 * Adds the result of a coupon to the order base instance.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @return void
-	 */
-	public function addCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base );
-
-	/**
-	 * Updates the result of a coupon to the order base instance.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @return void
-	 */
-	public function updateCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base );
-
-	/**
-	 * Removes the result of a coupon from the order base instance.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @return void
-	 */
-	public function deleteCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base );
-
-	/**
 	 * Checks the backend configuration attributes for validity.
 	 *
 	 * @param array $attributes Attributes added by the shop owner in the administraton interface
@@ -79,4 +55,12 @@ interface Iface
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon object for chaining method calls
 	 */
 	public function setObject( \Aimeos\MShop\Coupon\Provider\Iface $object );
+
+	/**
+	 * Updates the result of a coupon to the order base instance.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
+	 */
+	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base );
 }

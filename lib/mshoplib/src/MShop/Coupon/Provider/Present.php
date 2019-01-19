@@ -45,29 +45,6 @@ class Present
 
 
 	/**
-	 * Adds the result of a coupon to the order base instance.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 */
-	public function addCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
-	{
-		$quantity = (int) $this->getConfigValue( 'present.quantity', 0 );
-		$productCode = $this->getConfigValue( 'present.productcode' );
-
-		if( $quantity === 0 || $productCode === null )
-		{
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
-			$msg = sprintf( $msg, $this->getItemBase()->getProvider(), 'present.productcode, present.quantity' );
-			throw new \Aimeos\MShop\Coupon\Exception( $msg );
-		}
-
-		$orderProduct = $this->createProduct( $productCode, $quantity );
-
-		$base->addCoupon( $this->getCode(), [$orderProduct] );
-	}
-
-
-	/**
 	 * Checks the backend configuration attributes for validity.
 	 *
 	 * @param array $attributes Attributes added by the shop owner in the administraton interface
@@ -89,5 +66,28 @@ class Present
 	public function getConfigBE()
 	{
 		return $this->getConfigItems( $this->beConfig );
+	}
+
+
+	/**
+	 * Updates the result of a coupon to the order base instance.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
+	 */
+	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	{
+		$quantity = (int) $this->getConfigValue( 'present.quantity', 0 );
+		$prodcode = $this->getConfigValue( 'present.productcode' );
+
+		if( $quantity === 0 || $prodcode === null )
+		{
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
+			$msg = sprintf( $msg, $this->getItem()->getProvider(), 'present.productcode, present.quantity' );
+			throw new \Aimeos\MShop\Coupon\Exception( $msg );
+		}
+
+		$base->setCoupon( $this->getCode(), [$this->createProduct( $prodcode, $quantity )] );
+		return $this;
 	}
 }

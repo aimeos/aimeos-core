@@ -23,43 +23,13 @@ class Example
 	implements \Aimeos\MShop\Coupon\Provider\Iface, \Aimeos\MShop\Coupon\Provider\Factory\Iface
 {
 	/**
-	 * Adds the result of a coupon to the order base instance.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 */
-	public function addCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
-	{
-	}
-
-
-	/**
-	 * Removes the result of a coupon from the order base instance.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 */
-	public function deleteCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
-	{
-	}
-
-
-	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
 	 */
-	public function updateCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
-	}
-
-
-	/**
-	 * Tests if a coupon should be granted.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @return boolean True of coupon can be granted, false if not
-	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
-	{
-		return true;
+		return $this;
 	}
 }

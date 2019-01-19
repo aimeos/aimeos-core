@@ -38,7 +38,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAddCoupon()
+	public function testUpdate()
 	{
 		$this->orderBase->addProduct( $this->getOrderProduct() );
 
@@ -57,7 +57,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'getUsedRebate' )
 			->will( $this->returnValue( 20.0 ) );
 
-		$object->addCoupon( $this->orderBase );
+		$object->update( $this->orderBase );
 
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();

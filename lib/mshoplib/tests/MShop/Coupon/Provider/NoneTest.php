@@ -34,8 +34,8 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAddCoupon()
+	public function testUpdate()
 	{
-		$this->object->addCoupon( $this->orderBase );
+		$this->object->update( $this->orderBase );
 	}
 }

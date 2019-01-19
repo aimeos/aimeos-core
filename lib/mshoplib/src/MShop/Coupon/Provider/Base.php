@@ -23,7 +23,7 @@ abstract class Base implements Iface
 	private $context;
 	private $object;
 	private $item;
-	private $code = '';
+	private $code;
 
 	/**
 	 * Initializes the coupon model.
@@ -39,34 +39,6 @@ abstract class Base implements Iface
 		$this->code = $code;
 	}
 
-
-	/**
-	 * Updates the result of a coupon to the order base instance.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 */
-	public function updateCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
-	{
-		if( $this->getObject()->isAvailable( $base ) !== true )
-		{
-			$base->deleteCoupon( $this->code );
-			return;
-		}
-
-		$this->deleteCoupon( $base );
-		$this->addCoupon( $base );
-	}
-
-
-	/**
-	 * Removes the result of a coupon from the order base instance.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 */
-	public function deleteCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
-	{
-		$base->deleteCoupon( $this->code, true );
-	}
 
 	/**
 	 * Checks the backend configuration attributes for validity.
@@ -193,7 +165,7 @@ abstract class Base implements Iface
 	 *
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item
 	 */
-	protected function getItemBase()
+	protected function getItem()
 	{
 		return $this->item;
 	}
@@ -215,37 +187,30 @@ abstract class Base implements Iface
 
 
 	/**
-	 * Creates an order product from the product item.
+	 * Creates an order product for the given product code
 	 *
-	 * @param string $productCode Unique product code
-	 * @param integer $quantity Number of products in basket
-	 * @param string $stockType Unique code of the stock type the product is from
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Ordered product
+	 * @param string $prodcode Unique product code
+	 * @param integer $quantity Number of products
+	 * @param string $stocktype Unique stock type code for the order product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product
 	 */
-	protected function createProduct( $productCode, $quantity = 1, $stockType = 'default' )
+	protected function createProduct( $prodcode, $quantity = 1, $stocktype = 'default' )
 	{
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
-		$product = $productManager->findItem( $productCode, ['text', 'media', 'price'] );
+		$product = $productManager->findItem( $prodcode, ['text', 'media', 'price'] );
 
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$prices = $product->getRefItems( 'price', 'default', 'default' );
 
-		if( empty( $prices ) ) {
-			$price = $priceManager->createItem();
-		} else {
+		if( !empty( $prices ) ) {
 			$price = $priceManager->getLowestPrice( $prices, $quantity );
+		} else {
+			$price = $priceManager->createItem();
 		}
 
-		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
-		$orderProduct = $orderBaseProductManager->createItem();
-
-		$orderProduct->copyFrom( $product );
-		$orderProduct->setQuantity( $quantity );
-		$orderProduct->setStockType( $stockType );
-		$orderProduct->setPrice( $price );
-		$orderProduct->setFlags( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE );
-
-		return $orderProduct;
+		return \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem()
+			->copyFrom( $product )->setQuantity( $quantity )->setStockType( $stocktype )->setPrice( $price )
+			->setFlags( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE );
 	}
 
 
@@ -253,29 +218,26 @@ abstract class Base implements Iface
 	 * Creates the order products for monetary rebates.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basket object
-	 * @param string $productCode Unique product code
+	 * @param string $prodcode Unique product code
 	 * @param float $rebate Rebate amount that should be granted, will contain the remaining rebate if not fully used
 	 * @param integer $quantity Number of products in basket
 	 * @param string $stockType Unique code of the stock type the product is from
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] Order products with monetary rebates
 	 */
-	protected function createMonetaryRebateProducts( \Aimeos\MShop\Order\Item\Base\Iface $base,
-		$productCode, &$rebate, $quantity = 1, $stockType = 'default' )
+	protected function createRebateProducts( \Aimeos\MShop\Order\Item\Base\Iface $base,
+		$prodcode, &$rebate, $quantity = 1, $stockType = 'default' )
 	{
-		$orderProducts = [];
 		$prices = $this->getPriceByTaxRate( $base );
-
+		$orderProducts = [];
 		krsort( $prices );
 
-		if( empty( $prices ) )
-		{
-			$manager = \Aimeos\MShop::create( $this->getContext(), 'price' );
-			$prices = array( '0.00' => $manager->createItem() );
+		if( empty( $prices ) ) {
+			$prices = ['0.00' => \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem()];
 		}
 
 		foreach( $prices as $taxrate => $price )
 		{
-			if( abs( $rebate ) < 0.01 ) {
+			if( $rebate < 0.01 ) {
 				break;
 			}
 
@@ -289,16 +251,11 @@ abstract class Base implements Iface
 				$value = $rebate; $rebate = 0;
 			}
 
-			$orderProduct = $this->createProduct( $productCode, $quantity, $stockType );
+			$orderProduct = $this->createProduct( $prodcode, $quantity, $stockType );
+			$price = $orderProduct->getPrice()->setTaxRate( $taxrate )
+				->setValue( -$value )->setRebate( $value );
 
-			$price = $orderProduct->getPrice();
-			$price->setValue( -$value );
-			$price->setRebate( $value );
-			$price->setTaxRate( $taxrate );
-
-			$orderProduct->setPrice( $price );
-
-			$orderProducts[] = $orderProduct;
+			$orderProducts[] = $orderProduct->setPrice( $price );
 		}
 
 		return $orderProducts;
@@ -309,7 +266,7 @@ abstract class Base implements Iface
 	 * Returns a list of tax rates and their price items for the given basket.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing the products, services, etc.
-	 * @return array Associative list of tax rates as key and corresponding price items as value
+	 * @return \Aimeos\MShop\Price\Item\Iface[] Associative list of tax rates as key and price items as values
 	 */
 	protected function getPriceByTaxRate( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
@@ -320,27 +277,20 @@ abstract class Base implements Iface
 		{
 			$price = $product->getPrice();
 			$taxrate = $price->getTaxRate();
+			$newPrice = isset( $taxrates[$taxrate] ) ? $taxrates[$taxrate] : $manager->createItem();
 
-			if( !isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate] = $manager->createItem();
-			}
-
-			$taxrates[$taxrate]->addItem( $price, $product->getQuantity() );
+			$taxrates[$taxrate] = $newPrice->addItem( $price, $product->getQuantity() );
 		}
 
 		foreach( $basket->getServices() as $services )
 		{
 			foreach( $services as $service )
 			{
-				$price = clone $service->getPrice();
+				$price = $service->getPrice();
 				$taxrate = $price->getTaxRate();
+				$newPrice = isset( $taxrates[$taxrate] ) ? $taxrates[$taxrate] : $manager->createItem();
 
-				if( !isset( $taxrates[$taxrate] ) ) {
-					$taxrates[$taxrate] = $manager->createItem();
-				}
-
-				$taxrates[$taxrate]->addItem( $price );
-
+				$taxrates[$taxrate] = $newPrice->addItem( $price );
 			}
 		}
 

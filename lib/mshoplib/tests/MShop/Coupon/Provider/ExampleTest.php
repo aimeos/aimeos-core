@@ -33,22 +33,6 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 		unset( $this->object, $this->orderBase );
 	}
 
-
-	public function testAddCoupon()
-	{
-		$this->object->addCoupon( $this->orderBase );
-	}
-
-	public function testDeleteCoupon()
-	{
-		$this->object->deleteCoupon( $this->orderBase );
-	}
-
-	public function testUpdateCoupon()
-	{
-		$this->object->updateCoupon( $this->orderBase );
-	}
-
 	public function testIsAvailable()
 	{
 		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
@@ -57,5 +41,10 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 	public function testSetObject()
 	{
 		$this->object->setObject( $this->object );
+	}
+
+	public function testUpdate()
+	{
+		$this->object->update( $this->orderBase );
 	}
 }

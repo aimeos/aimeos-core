@@ -45,39 +45,6 @@ class FixedRebate
 
 
 	/**
-	 * Adds the result of a coupon to the order base instance.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 */
-	public function addCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
-	{
-		$currency = $base->getPrice()->getCurrencyId();
-		$rebate = $this->getConfigValue( 'fixedrebate.rebate', 0 );
-		$productCode = $this->getConfigValue( 'fixedrebate.productcode' );
-
-		if( $rebate == 0 || $productCode === null )
-		{
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
-			$msg = sprintf( $msg, $this->getItemBase()->getProvider(), 'fixedrebate.productcode, fixedrebate.rebate' );
-			throw new \Aimeos\MShop\Coupon\Exception( $msg );
-		}
-
-		if( is_array( $rebate ) )
-		{
-			if( !isset( $rebate[$currency] ) ) {
-				throw new \Aimeos\MShop\Coupon\Exception( sprintf( 'No rebate for currency "%1$s" available', $currency ) );
-			}
-
-			$rebate = $rebate[$currency];
-		}
-
-		$orderProducts = $this->createMonetaryRebateProducts( $base, $productCode, $rebate );
-
-		$base->addCoupon( $this->getCode(), $orderProducts );
-	}
-
-
-	/**
 	 * Checks the backend configuration attributes for validity.
 	 *
 	 * @param array $attributes Attributes added by the shop owner in the administraton interface
@@ -99,5 +66,32 @@ class FixedRebate
 	public function getConfigBE()
 	{
 		return $this->getConfigItems( $this->beConfig );
+	}
+
+
+	/**
+	 * Updates the result of a coupon to the order base instance.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
+	 */
+	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	{
+		$currency = $base->getPrice()->getCurrencyId();
+		$rebate = $this->getConfigValue( 'fixedrebate.rebate', [] );
+		$prodcode = $this->getConfigValue( 'fixedrebate.productcode' );
+
+		if( $rebate == 0 || $prodcode === null || !is_array( $rebate ) )
+		{
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
+			$msg = sprintf( $msg, $this->getItem()->getProvider(), 'fixedrebate.productcode, fixedrebate.rebate' );
+			throw new \Aimeos\MShop\Coupon\Exception( $msg );
+		}
+
+		if( isset( $rebate[$currency] ) ) {
+			$base->setCoupon( $this->getCode(), $this->createRebateProducts( $base, $prodcode, $rebate[$currency] ) );
+		}
+
+		return $this;
 	}
 }

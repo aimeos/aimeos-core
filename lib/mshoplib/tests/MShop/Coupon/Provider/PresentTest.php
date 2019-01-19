@@ -37,9 +37,9 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAddCoupon()
+	public function testUpdate()
 	{
-		$this->object->addCoupon( $this->orderBase );
+		$this->object->update( $this->orderBase );
 
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();
@@ -59,20 +59,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testDeleteCoupon()
-	{
-		$this->object->addCoupon( $this->orderBase );
-		$this->object->deleteCoupon( $this->orderBase );
-
-		$coupons = $this->orderBase->getCoupons();
-		$products = $this->orderBase->getProducts();
-
-		$this->assertEquals( 0, count( $products ) );
-		$this->assertArrayNotHasKey( '90AB', $coupons );
-	}
-
-
-	public function testAddCouponInvalidConfig()
+	public function testUpdateInvalidConfig()
 	{
 		$context = \TestHelperMShop::getContext();
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
@@ -80,7 +67,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MShop\Coupon\Provider\Present( $context, $couponItem, '90AB' );
 
 		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
-		$object->addCoupon( $this->orderBase );
+		$object->update( $this->orderBase );
 	}
 
 

@@ -36,35 +36,6 @@ class FreeShipping
 
 
 	/**
-	 * Adds the result of a coupon to the order base instance.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 */
-	public function addCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
-	{
-		if( ( $productCode = $this->getConfigValue( 'freeshipping.productcode' ) ) === null )
-		{
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
-			$msg = sprintf( $msg, $this->getItemBase()->getProvider(), 'freeshipping.productcode' );
-			throw new \Aimeos\MShop\Coupon\Exception( $msg );
-		}
-
-		$orderProduct = $this->createProduct( $productCode, 1 );
-		$price = $orderProduct->getPrice();
-
-		foreach( $base->getService( 'delivery' ) as $service )
-		{
-			$price->setRebate( $price->getRebate() + $service->getPrice()->getCosts() );
-			$price->setCosts( $price->getCosts() - $service->getPrice()->getCosts() );
-		}
-
-		$orderProduct->setPrice( $price );
-
-		$base->addCoupon( $this->getCode(), array( $orderProduct ) );
-	}
-
-
-	/**
 	 * Checks the backend configuration attributes for validity.
 	 *
 	 * @param array $attributes Attributes added by the shop owner in the administraton interface
@@ -86,5 +57,34 @@ class FreeShipping
 	public function getConfigBE()
 	{
 		return $this->getConfigItems( $this->beConfig );
+	}
+
+
+	/**
+	 * Updates the result of a coupon to the order base instance.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
+	 */
+	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	{
+		if( ( $prodcode = $this->getConfigValue( 'freeshipping.productcode' ) ) === null )
+		{
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
+			$msg = sprintf( $msg, $this->getItem()->getProvider(), 'freeshipping.productcode' );
+			throw new \Aimeos\MShop\Coupon\Exception( $msg );
+		}
+
+		$orderProduct = $this->createProduct( $prodcode );
+		$price = $orderProduct->getPrice()->clear();
+
+		foreach( $base->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY ) as $service )
+		{
+			$price = $price->setRebate( $price->getRebate() + $service->getPrice()->getCosts() )
+				->setCosts( $price->getCosts() - $service->getPrice()->getCosts() );
+		}
+
+		$base->setCoupon( $this->getCode(), [$orderProduct->setPrice( $price )] );
+		return $this;
 	}
 }

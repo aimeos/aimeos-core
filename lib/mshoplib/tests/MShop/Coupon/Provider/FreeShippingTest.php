@@ -52,9 +52,9 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAddCoupon()
+	public function testUpdate()
 	{
-		$this->object->addCoupon( $this->orderBase );
+		$this->object->update( $this->orderBase );
 		$coupons = $this->orderBase->getCoupons();
 
 		if( ( $product = reset( $coupons['90AB'] ) ) === false ) {
@@ -75,20 +75,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testDeleteCoupon()
-	{
-		$this->object->addCoupon( $this->orderBase );
-		$this->object->deleteCoupon( $this->orderBase );
-
-		$products = $this->orderBase->getProducts();
-		$coupons = $this->orderBase->getCoupons();
-
-		$this->assertEquals( 0, count( $products ) );
-		$this->assertArrayNotHasKey( '90AB', $coupons );
-	}
-
-
-	public function testAddCouponInvalidConfig()
+	public function testUpdateInvalidConfig()
 	{
 		$context = \TestHelperMShop::getContext();
 
@@ -96,7 +83,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MShop\Coupon\Provider\FreeShipping( $context, $couponItem, '90AB' );
 
 		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
-		$object->addCoupon( $this->orderBase );
+		$object->update( $this->orderBase );
 	}
 
 
