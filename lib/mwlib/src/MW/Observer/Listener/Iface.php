@@ -24,7 +24,7 @@ interface Iface
 	 * Subscribes itself to a publisher.
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
-	 * @return void
+	 * @return \Aimeos\MW\Observer\Listener\Iface Listener object for method chaining
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p );
 
@@ -34,7 +34,7 @@ interface Iface
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
-	 * @return boolean Status of the operation (true=OK, false=not OK)
+	 * @return mixed Modified value parameter
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $p, $action, $value = null );
 }
