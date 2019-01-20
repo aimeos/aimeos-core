@@ -30,17 +30,18 @@ class Singleton
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
+	 * @return mixed Modified value parameter
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
 		if( $this->singleton === true ) {
-			return true;
+			return $value;
 		}
 
 		$this->singleton = true;
-		$result = $this->getProvider()->update( $order, $action, $value );
+		$value = $this->getProvider()->update( $order, $action, $value );
 		$this->singleton = false;
 
-		return $result;
+		return $value;
 	}
 }

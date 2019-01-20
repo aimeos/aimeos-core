@@ -13,34 +13,23 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 	private $object;
 	private $plugin;
 	private $order;
-	private $orderAddress;
 	private $orderProduct;
 
 
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
-
-		$manager = \Aimeos\MShop::create( $context, 'plugin' );
-		$this->plugin = $manager->createItem();
-		$this->plugin->setProvider( 'FreeProduct' );
-		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 2] );
-		$this->plugin->setStatus( 1 );
-
-		$manager = \Aimeos\MShop::create( $context, 'order/base/address' );
-		$this->orderAddress = $manager->createItem();
-		$this->orderAddress->setEmail( 'test@example.com' );
+		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
+		$address = \Aimeos\MShop::create( $context, 'order/base/address' )->createItem()->setEmail( 'test@example.com' );
 
 		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
-		$this->orderProduct = $manager->createItem();
-		$this->orderProduct->setProductCode( 'ABCD' );
-		$this->orderProduct->getPrice()->setValue( '100.00' );
+		$this->orderProduct = $manager->createItem()->setProductCode( 'ABCD' );
+		$this->orderProduct = $this->orderProduct->setPrice( $this->orderProduct->getPrice()->setValue( '100.00' ) );
 
 		$manager = \Aimeos\MShop::create( $context, 'order/base' );
 		$this->order = $manager->createItem();
 		$this->order->__sleep(); // remove event listeners
-		$this->order->setAddress( $this->orderAddress, 'payment' );
-		$this->order->addProduct( $this->orderProduct );
+		$this->order->setAddress( $address, 'payment' )->addProduct( $this->orderProduct );
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\FreeProduct( $context, $this->plugin );
 	}
@@ -48,7 +37,7 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		unset( $this->plugin, $this->orderProduct, $this->orderAddress, $this->order, $this->object );
+		unset( $this->plugin, $this->orderProduct, $this->order, $this->object );
 	}
 
 
@@ -98,7 +87,7 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->orderProduct->setProductCode( 'xyz' );
 
-		$this->assertTrue( $this->object->update( $this->order, 'addProduct.after', $this->orderProduct ) );
+		$this->assertEquals( $this->orderProduct, $this->object->update( $this->order, 'addProduct.after', $this->orderProduct ) );
 		$this->assertEquals( '100.00', $this->orderProduct->getPrice()->getValue() );
 	}
 
@@ -107,14 +96,14 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->order->deleteAddress( 'payment' );
 
-		$this->assertTrue( $this->object->update( $this->order, 'addProduct.after', $this->orderProduct ) );
+		$this->assertEquals( $this->orderProduct, $this->object->update( $this->order, 'addProduct.after', $this->orderProduct ) );
 		$this->assertEquals( '100.00', $this->orderProduct->getPrice()->getValue() );
 	}
 
 
 	public function testUpdateCountExceeded()
 	{
-		$this->assertTrue( $this->object->update( $this->order, 'addProduct.after', $this->orderProduct ) );
+		$this->assertEquals( $this->orderProduct, $this->object->update( $this->order, 'addProduct.after', $this->orderProduct ) );
 		$this->assertEquals( '100.00', $this->orderProduct->getPrice()->getValue() );
 	}
 
@@ -123,7 +112,7 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->plugin->setConfig( ['productcode' => 'ABCD', 'count' => 5] );
 
-		$this->assertTrue( $this->object->update( $this->order, 'addProduct.after', $this->orderProduct ) );
+		$this->assertEquals( $this->orderProduct, $this->object->update( $this->order, 'addProduct.after', $this->orderProduct ) );
 		$this->assertEquals( '0.00', $this->orderProduct->getPrice()->getValue() );
 		$this->assertEquals( '100.00', $this->orderProduct->getPrice()->getRebate() );
 	}

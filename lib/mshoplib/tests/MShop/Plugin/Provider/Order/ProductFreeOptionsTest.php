@@ -13,32 +13,26 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
 	private $object;
-	private $plugin;
 
 
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
+		$plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $this->context );
-		$this->plugin = $pluginManager->createItem();
-		$this->plugin->setProvider( 'ProductFreeOption' );
-
-		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductFreeOptions( $this->context, $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductFreeOptions( $this->context, $plugin );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->context, $this->object, $this->plugin );
+		unset( $this->object, $this->context );
 	}
 
 
 	public function testRegister()
 	{
-		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem();
-
-		$this->object->register( $basket );
+		$this->object->register( \Aimeos\MShop::create( $this->context, 'order/base' )->createItem() );
 	}
 
 
@@ -51,16 +45,13 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 		$product = \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem();
 		$attribute = \Aimeos\MShop::create( $this->context, 'order/base/product/attribute' )->createItem();
 
-		$attribute->setQuantity( 2 );
-		$attribute->setCode( 'size' );
-		$attribute->setType( 'config' );
-		$attribute->setAttributeId( $attrManager->findItem( 'xs', [], 'product', 'size')->getId() );
+		$attribute = $attribute->setQuantity( 2 )->setCode( 'size' )->setType( 'config' )
+			->setAttributeId( $attrManager->findItem( 'xs', [], 'product', 'size')->getId() );
 
-		$product->setAttributeItem( $attribute );
-		$product->setProductId( $prodManager->findItem( 'CNE' )->getId() );
+		$product = $product->setAttributeItem( $attribute )->setProductId( $prodManager->findItem( 'CNE' )->getId() );
 
-		$this->object->update( $basket, 'addProduct.after', $product );
-		$this->object->update( $basket, 'addProduct.after', [$product] );
+		$this->assertEquals( $product, $this->object->update( $basket, 'addProduct.after', $product ) );
+		$this->assertEquals( [$product], $this->object->update( $basket, 'addProduct.after', [$product] ) );
 
 		$this->assertEquals( '30.95', $product->getPrice()->getValue() );
 	}
@@ -68,8 +59,7 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddPrices()
 	{
-		$price = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
-		$price->setValue( '10.00' );
+		$price = \Aimeos\MShop::create( $this->context, 'price' )->createItem()->setValue( '10.00' );
 
 		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 		$attrItem = $attrManager->findItem( 'xs', ['price'], 'product', 'size' );

@@ -10,70 +10,47 @@
 namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
-/**
- * Test class for \Aimeos\MShop\Plugin\Provider\Order\Complete.
- */
 class CouponTest extends \PHPUnit\Framework\TestCase
 {
+	private $object;
 	private $order;
-	private $plugin;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
+		$plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $context );
-		$this->plugin = $pluginManager->createItem();
-		$this->plugin->setProvider( 'Coupon' );
-		$this->plugin->setStatus( 1 );
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem();
+		$this->order->__sleep(); // remove event listeners
 
-		$priceItem = \Aimeos\MShop\Price\Manager\Factory::create( $context )->createItem();
-		$this->order = new \Aimeos\MShop\Order\Item\Base\Standard( $priceItem, $context->getLocale() );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( $context, $plugin );
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
-		unset( $this->plugin );
-		unset( $this->order );
+		unset( $this->order, $this->object );
 	}
 
 
 	public function testRegister()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelperMShop::getContext(), $this->plugin );
-		$object->register( $this->order );
+		$this->object->register( $this->order );
 	}
 
 
 	public function testUpdate()
 	{
-		$this->order->addCoupon( 'OPQR', [] );
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelperMShop::getContext(), $this->plugin );
-
-		$this->assertTrue( $object->update( $this->order, 'test' ) );
+		$this->order->addCoupon( 'OPQR' );
+		$this->assertEquals( null, $this->object->update( $this->order, 'test' ) );
 	}
 
 
 	public function testUpdateInvalidObject()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelperMShop::getContext(), $this->plugin );
-
 		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
-		$object->update( new TestPublisher(), 'test' );
+		$this->object->update( new TestPublisher(), 'test' );
 	}
 }
 

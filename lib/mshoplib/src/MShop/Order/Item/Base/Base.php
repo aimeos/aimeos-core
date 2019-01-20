@@ -172,9 +172,9 @@ abstract class Base
 	 */
 	public function addProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position = null )
 	{
-		$this->checkProducts( [$item] );
+		$item = $this->notifyListeners( 'addProduct.before', $item );
 
-		$this->notifyListeners( 'addProduct.before', $item );
+		$this->checkProducts( [$item] );
 
 		if( $position !== null ) {
 			$this->products[$position] = $item;
@@ -203,7 +203,7 @@ abstract class Base
 	{
 		if( isset( $this->products[$position] ) )
 		{
-			$this->notifyListeners( 'deleteProduct.before', $position );
+			$position = $this->notifyListeners( 'deleteProduct.before', $position );
 
 			$old = $this->products[$position];
 			unset( $this->products[$position] );
@@ -251,9 +251,9 @@ abstract class Base
 	 */
 	public function setProducts( array $map )
 	{
-		$this->checkProducts( $map );
+		$map = $this->notifyListeners( 'setProducts.before', $map );
 
-		$this->notifyListeners( 'setProducts.before', $map );
+		$this->checkProducts( $map );
 
 		$old = $this->products;
 		$this->products = $map;
@@ -275,9 +275,9 @@ abstract class Base
 	{
 		if( isset( $this->addresses[$type] ) )
 		{
-			$this->notifyListeners( 'deleteAddress.before', $type );
+			$type = $this->notifyListeners( 'deleteAddress.before', $type );
 
-			$old = $this->addresses[$type];
+			$old = [$type => $this->addresses[$type]];
 			unset( $this->addresses[$type] );
 			$this->setModified();
 
@@ -325,7 +325,7 @@ abstract class Base
 	 */
 	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type )
 	{
-		$this->notifyListeners( 'setAddress.before', $address );
+		$address = $this->notifyListeners( 'setAddress.before', $address );
 
 		$address = clone $address;
 		$address->setType( $type ); // enforce that the type is the same as the given one
@@ -348,11 +348,11 @@ abstract class Base
 	 */
 	public function setAddresses( array $map )
 	{
+		$map = $this->notifyListeners( 'setAddresses.before', $map );
+
 		foreach( $map as $type => $item ) {
 			$this->checkAddresses( [$item], $type );
 		}
-
-		$this->notifyListeners( 'setAddresses.before', $map );
 
 		$old = $this->addresses;
 		$this->addresses = $map;
@@ -373,9 +373,9 @@ abstract class Base
 	 */
 	public function addService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type )
 	{
-		$this->checkPrice( $service->getPrice() );
+		$service = $this->notifyListeners( 'addService.before', $service );
 
-		$this->notifyListeners( 'addService.before', $service );
+		$this->checkPrice( $service->getPrice() );
 
 		$service = clone $service;
 		$service->setType( $type ); // enforce that the type is the same as the given one
@@ -400,9 +400,9 @@ abstract class Base
 	{
 		if( isset( $this->services[$type] ) )
 		{
-			$this->notifyListeners( 'deleteService.before', $type );
+			$type = $this->notifyListeners( 'deleteService.before', $type );
 
-			$old = $this->services[$type];
+			$old = [$type => $this->services[$type]];
 			unset( $this->services[$type] );
 			$this->setModified();
 
@@ -463,11 +463,11 @@ abstract class Base
 	 */
 	public function setServices( array $map )
 	{
+		$map = $this->notifyListeners( 'setServices.before', $map );
+
 		foreach( $map as $type => $services ) {
 			$map[$type] = $this->checkServices( $services, $type );
 		}
-
-		$this->notifyListeners( 'setServices.before', $map );
 
 		$old = $this->services;
 		$this->services = $map;
@@ -489,7 +489,7 @@ abstract class Base
 	{
 		if( !isset( $this->coupons[$code] ) )
 		{
-			$this->notifyListeners( 'addCoupon.before', $products );
+			$code = $this->notifyListeners( 'addCoupon.before', $code );
 
 			$this->coupons[$code] = [];
 			$this->setModified();
@@ -511,7 +511,7 @@ abstract class Base
 	{
 		if( isset( $this->coupons[$code] ) )
 		{
-			$this->notifyListeners( 'deleteCoupon.before', $code );
+			$code = $this->notifyListeners( 'deleteCoupon.before', $code );
 
 			foreach( $this->coupons[$code] as $product )
 			{
@@ -552,9 +552,10 @@ abstract class Base
 	 */
 	public function setCoupon( $code, array $products = [] )
 	{
-		$products = $this->checkProducts( $products );
+		$new = $this->notifyListeners( 'setCoupon.before', [$code => $products] );
 
-		$this->notifyListeners( 'setCoupon.before', [$code => $products] );
+		$products = $this->checkProducts( current( $new ) );
+		$code = key( $new );
 
 		if( isset( $this->coupons[$code] ) )
 		{
@@ -588,11 +589,11 @@ abstract class Base
 	 */
 	public function setCoupons( array $map )
 	{
+		$map = $this->notifyListeners( 'setCoupons.before', $map );
+
 		foreach( $map as $code => $products ) {
 			$map[$code] = $this->checkProducts( $products );
 		}
-
-		$this->notifyListeners( 'setCoupons.before', $map );
 
 		foreach( $this->coupons as $code => $products )
 		{

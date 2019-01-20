@@ -39,6 +39,7 @@ class Example
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
+	 * @return mixed Modified value parameter
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{

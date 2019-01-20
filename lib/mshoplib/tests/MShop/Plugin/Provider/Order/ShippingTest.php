@@ -20,11 +20,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
-
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $this->context );
-		$this->plugin = $pluginManager->createItem();
-		$this->plugin->setType( 'order' );
-		$this->plugin->setStatus( '1' );
+		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\Shipping( $this->context, $this->plugin );
 	}
@@ -64,55 +60,39 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem();
-
-		$this->object->register( $order );
+		$this->object->register( \Aimeos\MShop::create( $this->context, 'order/base' )->createItem() );
 	}
 
 
 	public function testUpdate()
 	{
-		$context = \TestHelperMShop::getContext();
+		$this->plugin = $this->plugin->setProvider( 'Shipping' )
+			->setConfig( ['threshold' => ['EUR' => '34.00']] );
 
-		$this->plugin->setProvider( 'Shipping' );
-		$this->plugin->setConfig( array( 'threshold' => array( 'EUR' => '34.00' ) ) );
-
-		$orderBaseManager = \Aimeos\MShop::create( $context, 'order/base' );
-		$orderBaseProductManager = \Aimeos\MShop::create( $context, 'order/base/product' );
-
-		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
+		$manager = \Aimeos\MShop::create( $this->context, 'product' );
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC', 'IJKL' ) ) );
-		$pResults = $manager->searchItems( $search, array( 'price' ) );
-
-		if( count( $pResults ) !== 3 ) {
-			throw new \RuntimeException( 'Wrong number of products' );
-		}
+		$search->setConditions( $search->compare( '==', 'product.code', ['CNE', 'CNC', 'IJKL'] ) );
 
 		$products = [];
-		foreach( $pResults as $prod ) {
+		foreach( $manager->searchItems( $search, ['price'] ) as $prod ) {
 			$products[$prod->getCode()] = $prod;
+		}
+
+		if( count( $products ) !== 3 ) {
+			throw new \RuntimeException( 'Wrong number of products' );
 		}
 
 		if( ( $price = current( $products['IJKL']->getRefItems( 'price' ) ) ) === false ) {
 			throw new \RuntimeException( 'No price item found' );
 		}
-		$price->setValue( 10.00 );
+		$price = $price->setValue( 10.00 );
 
-		$product = $orderBaseProductManager->createItem();
-		$product->copyFrom( $products['CNE'] );
-		$product->setPrice( $price );
+		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
+		$product = $orderBaseProductManager->createItem()->copyFrom( $products['CNE'] )->setPrice( $price );
+		$product2 = $orderBaseProductManager->createItem()->copyFrom( $products['CNC'] )->setPrice( $price );
+		$product3 = $orderBaseProductManager->createItem()->copyFrom( $products['IJKL'] )->setPrice( $price );
 
-		$product2 = $orderBaseProductManager->createItem();
-		$product2->copyFrom( $products['CNC'] );
-		$product2->setPrice( $price );
-
-		$product3 = $orderBaseProductManager->createItem();
-		$product3->copyFrom( $products['IJKL'] );
-		$product3->setPrice( $price );
-
-		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service' );
-
+		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
 		$serviceSearch = $orderBaseServiceManager->createSearch();
 		$exp = array(
 			$serviceSearch->compare( '==', 'order.base.service.type', 'delivery' ),
@@ -122,10 +102,10 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 		$results = $orderBaseServiceManager->searchItems( $serviceSearch );
 
 		if( ( $delivery = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No order base item found' );
+			throw new \RuntimeException( 'No order service item found' );
 		}
 
-		$order = $orderBaseManager->createItem();
+		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem();
 		$order->__sleep(); // remove event listeners
 
 		$order->addService( $delivery, 'delivery' );
@@ -135,10 +115,10 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->assertEquals( 5.00, $order->getPrice()->getCosts() );
-		$this->object->update( $order, 'addProduct' );
+		$this->assertEquals( null, $this->object->update( $order, 'addProduct' ) );
 
 		$order->addProduct( $product );
-		$this->object->update( $order, 'addProduct' );
+		$this->assertEquals( null, $this->object->update( $order, 'addProduct' ) );
 
 		$this->assertEquals( 0.00, $order->getPrice()->getCosts() );
 	}

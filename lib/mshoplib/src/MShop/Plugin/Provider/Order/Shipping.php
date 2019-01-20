@@ -80,19 +80,24 @@ class Shipping
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
-		$p->addListener( $this->getObject(), 'addProduct.after' );
-		$p->addListener( $this->getObject(), 'deleteProduct.after' );
-		$p->addListener( $this->getObject(), 'setProducts.after' );
-		$p->addListener( $this->getObject(), 'addService.after' );
-		$p->addListener( $this->getObject(), 'deleteService.after' );
-		$p->addListener( $this->getObject(), 'setServices.after' );
-		$p->addListener( $this->getObject(), 'addCoupon.after' );
-		$p->addListener( $this->getObject(), 'deleteCoupon.after' );
-		$p->addListener( $this->getObject(), 'setCoupons.after' );
-		$p->addListener( $this->getObject(), 'setCoupon.after' );
+		$plugin = $this->getObject();
+
+		$p->addListener( $plugin, 'addProduct.after' );
+		$p->addListener( $plugin, 'deleteProduct.after' );
+		$p->addListener( $plugin, 'setProducts.after' );
+		$p->addListener( $plugin, 'addService.after' );
+		$p->addListener( $plugin, 'deleteService.after' );
+		$p->addListener( $plugin, 'setServices.after' );
+		$p->addListener( $plugin, 'addCoupon.after' );
+		$p->addListener( $plugin, 'deleteCoupon.after' );
+		$p->addListener( $plugin, 'setCoupons.after' );
+		$p->addListener( $plugin, 'setCoupon.after' );
+
+		return $this;
 	}
 
 
@@ -102,6 +107,7 @@ class Shipping
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
+	 * @return mixed Modified value parameter
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
@@ -130,7 +136,7 @@ class Shipping
 			$order->setServices( $services );
 		}
 
-		return true;
+		return $value;
 	}
 
 

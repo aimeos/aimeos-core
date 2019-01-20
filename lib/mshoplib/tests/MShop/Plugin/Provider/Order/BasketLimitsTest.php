@@ -18,15 +18,14 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$context = \TestHelperMShop::getContext();
+		$orderBaseManager = \Aimeos\MShop::create( $context, 'order/base' );
+		$orderBaseProductManager = \Aimeos\MShop::create( $context, 'order/base/product' );
 
 		$this->order = $orderBaseManager->createItem();
 		$this->order->__sleep(); // remove event listeners
 
-		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 		$search = $orderBaseProductManager->createSearch();
-
 		$search->setConditions( $search->combine( '&&', array(
 			$search->compare( '==', 'order.base.product.prodcode', array( 'CNE', 'CNC' ) ),
 			$search->compare( '==', 'order.base.product.price', array( '600.00', '36.00' ) )
@@ -51,21 +50,14 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 			'max-products' => 5
 		);
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$plugin = $pluginManager->createItem();
-		$plugin->setProvider( 'BasketLimits' );
-		$plugin->setConfig( $config );
-		$plugin->setType( 'order' );
-		$plugin->setStatus( '1' );
-
-		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\BasketLimits( \TestHelperMShop::getContext(), $plugin );
+		$plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem()->setConfig( $config );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\BasketLimits( $context, $plugin );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->object );
-		unset( $this->order );
+		unset( $this->object, $this->order );
 	}
 
 
@@ -114,17 +106,19 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->products['CNE']->setQuantity( 4 );
 		$this->order->addProduct( $this->products['CNE'] );
+		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
-		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) );
+		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 	}
 
 
 	public function testUpdateMinProductsFails()
 	{
 		$this->order->addProduct( $this->products['CNC'] );
+		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
+		$this->object->update( $this->order, 'check.after', $value );
 	}
 
 
@@ -132,18 +126,20 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->products['CNE']->setQuantity( 6 );
 		$this->order->addProduct( $this->products['CNE'] );
+		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
+		$this->object->update( $this->order, 'check.after', $value );
 	}
 
 
 	public function testUpdateMinValueFails()
 	{
 		$this->order->addProduct( $this->products['CNE'] );
+		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
+		$this->object->update( $this->order, 'check.after', $value );
 	}
 
 
@@ -151,8 +147,9 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->products['CNC']->setQuantity( 2 );
 		$this->order->addProduct( $this->products['CNC'] );
+		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
+		$this->object->update( $this->order, 'check.after', $value );
 	}
 }

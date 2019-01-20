@@ -64,8 +64,9 @@ class SingletonTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdate()
 	{
-		$this->mock->expects( $this->once() )->method( 'update' )->will( $this->returnValue( true ) );
+		$value = 'value';
+		$this->mock->expects( $this->once() )->method( 'update' )->will( $this->returnValue( $value ) );
 
-		$this->assertTrue( $this->object->update( $this->order, 'test', 'value' ) );
+		$this->assertEquals( $value, $this->object->update( $this->order, 'test', $value ) );
 	}
 }

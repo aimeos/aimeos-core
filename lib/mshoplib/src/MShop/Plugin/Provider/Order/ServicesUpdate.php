@@ -35,19 +35,24 @@ class ServicesUpdate
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
-		$p->addListener( $this->getObject(), 'deleteAddress.after' );
-		$p->addListener( $this->getObject(), 'setAddress.after' );
-		$p->addListener( $this->getObject(), 'setAddresses.after' );
-		$p->addListener( $this->getObject(), 'addProduct.after' );
-		$p->addListener( $this->getObject(), 'deleteProduct.after' );
-		$p->addListener( $this->getObject(), 'setProducts.after' );
-		$p->addListener( $this->getObject(), 'addCoupon.after' );
-		$p->addListener( $this->getObject(), 'deleteCoupon.after' );
-		$p->addListener( $this->getObject(), 'setCoupons.after' );
-		$p->addListener( $this->getObject(), 'setCoupon.after' );
+		$plugin = $this->getObject();
+
+		$p->addListener( $plugin, 'deleteAddress.after' );
+		$p->addListener( $plugin, 'setAddress.after' );
+		$p->addListener( $plugin, 'setAddresses.after' );
+		$p->addListener( $plugin, 'addProduct.after' );
+		$p->addListener( $plugin, 'deleteProduct.after' );
+		$p->addListener( $plugin, 'setProducts.after' );
+		$p->addListener( $plugin, 'addCoupon.after' );
+		$p->addListener( $plugin, 'deleteCoupon.after' );
+		$p->addListener( $plugin, 'setCoupons.after' );
+		$p->addListener( $plugin, 'setCoupon.after' );
+
+		return $this;
 	}
 
 
@@ -57,15 +62,13 @@ class ServicesUpdate
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
-	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if checks fail
-	 * @return bool true if checks succeed
+	 * @return mixed Modified value parameter
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
 		$services = $order->getServices();
-
 
 		if( count( $order->getProducts() ) === 0 )
 		{
@@ -79,12 +82,11 @@ class ServicesUpdate
 			}
 
 			$order->setServices( $services );
-			return true;
+			return $value;
 		}
 
-
-		$serviceManager = \Aimeos\MShop::create( $this->getContext(), 'service' );
 		$serviceItems = $this->getServiceItems( $services );
+		$serviceManager = \Aimeos\MShop::create( $this->getContext(), 'service' );
 
 		foreach( $services as $type => $list )
 		{
@@ -109,8 +111,7 @@ class ServicesUpdate
 		}
 
 		$order->setServices( $services );
-
-		return true;
+		return $value;
 	}
 
 

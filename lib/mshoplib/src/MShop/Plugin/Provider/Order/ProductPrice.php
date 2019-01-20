@@ -34,10 +34,12 @@ class ProductPrice
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this->getObject(), 'check.after' );
+		return $this;
 	}
 
 
@@ -47,13 +49,13 @@ class ProductPrice
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
+	 * @return mixed Modified value parameter
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if checks fail
-	 * @return bool true if checks succeed
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
 		if( ( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) === 0 ) {
-			return true;
+			return $value;
 		}
 
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
@@ -108,7 +110,7 @@ class ProductPrice
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 
-		return true;
+		return $value;
 	}
 
 

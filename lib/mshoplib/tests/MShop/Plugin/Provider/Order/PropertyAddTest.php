@@ -20,15 +20,12 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
-		$this->plugin = \Aimeos\MShop\Plugin\Manager\Factory::create( $context )->createItem();
+		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
 
-		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::create( $context )->getSubManager( 'base' );
-		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
+		$product = \Aimeos\MShop::create( $context, 'product' )->findItem( 'CNC' );
+		$this->product = \Aimeos\MShop::create( $context, 'order/base/product' )->createItem()->copyFrom( $product );
 
-		$product = \Aimeos\MShop\Product\Manager\Factory::create( $context )->findItem( 'CNC' );
-		$this->product = $orderBaseProductManager->createItem()->copyFrom( $product );
-
-		$this->order = $orderBaseManager->createItem();
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem();
 		$this->order->__sleep(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyAdd( $context, $this->plugin );
@@ -49,10 +46,11 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdate()
 	{
+		$product = $this->product;
 		$this->plugin->setConfig( ['types' => ['package-width']] );
 
-		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->product ) );
-		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', [$this->product] ) );
+		$this->assertEquals( $product, $this->object->update( $this->order, 'addProduct.before', $product ) );
+		$this->assertEquals( [$product], $this->object->update( $this->order, 'addProduct.before', [$product] ) );
 
 		$attributes = $this->product->getAttributeItems();
 		$this->assertEquals( 1, count( $attributes ) );
@@ -66,7 +64,7 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->plugin->setConfig( ['types' => ['unknown']] );
 
-		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->product ) );
+		$this->assertEquals( $this->product, $this->object->update( $this->order, 'addProduct.before', $this->product ) );
 		$this->assertEquals( 0, count( $this->product->getAttributeItems() ) );
 	}
 }

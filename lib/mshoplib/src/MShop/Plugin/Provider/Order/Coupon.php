@@ -33,20 +33,25 @@ class Coupon
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
-		$p->addListener( $this->getObject(), 'addProduct.after' );
-		$p->addListener( $this->getObject(), 'deleteProduct.after' );
-		$p->addListener( $this->getObject(), 'setProducts.after' );
-		$p->addListener( $this->getObject(), 'deleteAddress.after' );
-		$p->addListener( $this->getObject(), 'setAddress.after' );
-		$p->addListener( $this->getObject(), 'setAddresses.after' );
-		$p->addListener( $this->getObject(), 'addService.after' );
-		$p->addListener( $this->getObject(), 'deleteService.after' );
-		$p->addListener( $this->getObject(), 'setServices.after' );
-		$p->addListener( $this->getObject(), 'addCoupon.after' );
-		$p->addListener( $this->getObject(), 'deleteCoupon.after' );
+		$plugin = $this->getObject();
+
+		$p->addListener( $plugin, 'addProduct.after' );
+		$p->addListener( $plugin, 'deleteProduct.after' );
+		$p->addListener( $plugin, 'setProducts.after' );
+		$p->addListener( $plugin, 'deleteAddress.after' );
+		$p->addListener( $plugin, 'setAddress.after' );
+		$p->addListener( $plugin, 'setAddresses.after' );
+		$p->addListener( $plugin, 'addService.after' );
+		$p->addListener( $plugin, 'deleteService.after' );
+		$p->addListener( $plugin, 'setServices.after' );
+		$p->addListener( $plugin, 'addCoupon.after' );
+		$p->addListener( $plugin, 'deleteCoupon.after' );
+
+		return $this;
 	}
 
 
@@ -56,6 +61,8 @@ class Coupon
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
+	 * @return mixed Modified value parameter
+	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if checks fail
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
@@ -92,7 +99,7 @@ class Coupon
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $codes );
 		}
 
-		return true;
+		return $value;
 	}
 
 }

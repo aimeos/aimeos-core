@@ -89,10 +89,12 @@ class AddressesAvailable
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this->getObject(), 'check.after' );
+		return $this;
 	}
 
 
@@ -102,27 +104,27 @@ class AddressesAvailable
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
+	 * @return mixed Modified value parameter
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if checks fail
-	 * @return bool true if checks succeed
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
 		if( ( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) === 0 ) {
-			return true;
+			return $value;
 		}
 
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
 		$problems = [];
-		$availableAddresses = $order->getAddresses();
+		$addresses = $order->getAddresses();
 
-		foreach( $this->getItemBase()->getConfig() as $type => $value )
+		foreach( $this->getItemBase()->getConfig() as $type => $val )
 		{
-			if( $value == true && !isset( $availableAddresses[$type] ) ) {
+			if( $val == true && !isset( $addresses[$type] ) ) {
 				$problems[$type] = 'available.none';
 			}
 
-			if( $value !== null && $value !== '' && $value == false && isset( $availableAddresses[$type] ) ) {
+			if( $val !== null && $val !== '' && $val == false && isset( $addresses[$type] ) ) {
 				$problems[$type] = 'available.notallowed';
 			}
 		}
@@ -134,6 +136,6 @@ class AddressesAvailable
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 
-		return true;
+		return $value;
 	}
 }

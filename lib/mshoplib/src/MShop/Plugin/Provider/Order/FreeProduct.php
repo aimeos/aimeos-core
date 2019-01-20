@@ -80,10 +80,12 @@ class FreeProduct
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this->getObject(), 'addProduct.after' );
+		return $this;
 	}
 
 
@@ -93,8 +95,7 @@ class FreeProduct
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
-	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if an error occurs
-	 * @return bool true if subsequent plugins should be processed
+	 * @return mixed Modified value parameter
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
@@ -102,14 +103,10 @@ class FreeProduct
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
 
 		$code = $this->getConfigValue( 'productcode' );
-
-		if( $value->getProductCode() !== $code ) {
-			return true;
-		}
-
 		$addresses = $order->getAddresses();
-		if( !isset( $addresses['payment'] ) ) {
-			return true;
+
+		if( $value->getProductCode() !== $code || !isset( $addresses['payment'] ) ) {
+			return $value;
 		}
 
 		$email = $addresses['payment']->getEmail();
@@ -132,6 +129,6 @@ class FreeProduct
 			$value->setPrice( $value->getPrice()->setRebate( $value->getPrice()->getValue() )->setValue( '0.00' ) );
 		}
 
-		return true;
+		return $value;
 	}
 }

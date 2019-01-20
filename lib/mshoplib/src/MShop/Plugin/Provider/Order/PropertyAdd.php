@@ -91,11 +91,16 @@ class PropertyAdd
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
-		$p->addListener( $this->getObject(), 'addProduct.before' );
-		$p->addListener( $this->getObject(), 'setProducts.before' );
+		$plugin = $this->getObject();
+
+		$p->addListener( $plugin, 'addProduct.before' );
+		$p->addListener( $plugin, 'setProducts.before' );
+
+		return $this;
 	}
 
 
@@ -105,20 +110,18 @@ class PropertyAdd
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
-	 * @throws \Aimeos\MShop\Plugin\Exception in case of faulty configuration or parameters
-	 * @return bool true if attributes have been added successfully
+	 * @return mixed Modified value parameter
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
 		if( ( $types = (array) $this->getItemBase()->getConfigValue( 'types', [] ) ) === [] ) {
-			return true;
+			return $value;
 		}
 
 		if( !is_array( $value ) )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
-			$value = $this->addAttributes( $value, $this->getProductItems( [$value->getProductId()] ), $types );
-			return true;
+			return $this->addAttributes( $value, $this->getProductItems( [$value->getProductId()] ), $types );
 		}
 
 		$list = [];
@@ -135,7 +138,7 @@ class PropertyAdd
 			$value[$key] = $this->addAttributes( $orderProduct, $products, $types );
 		}
 
-		return true;
+		return $value;
 	}
 
 

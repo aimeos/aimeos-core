@@ -21,17 +21,10 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
+		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $context );
-		$this->plugin = $pluginManager->createItem();
-		$this->plugin->setProvider( 'ServicesAvailable' );
-		$this->plugin->setStatus( 1 );
-
-		$orderBaseManager = \Aimeos\MShop::create( $context, 'order/base' );
-		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service' );
-
-		$this->service = $orderBaseServiceManager->createItem();
-		$this->order = $orderBaseManager->createItem();
+		$this->service = \Aimeos\MShop::create( $context, 'order/base/service' )->createItem();
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem();
 		$this->order->__sleep(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( $context, $this->plugin );
@@ -40,7 +33,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		unset( $this->plugin, $this->service, $this->order, $this->object );
+		unset( $this->object, $this->plugin, $this->service, $this->order );
 	}
 
 
@@ -81,38 +74,40 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateNone()
 	{
-		// \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE not set, so update shall not be executed
-		$this->assertTrue( $this->object->update( $this->order, 'check.after' ) );
+		$this->assertEquals( null, $this->object->update( $this->order, 'check.after' ) );
 	}
 
 
 	public function testUpdateEmptyConfig()
 	{
-		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE;
+
+		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 
 		$this->order->addService( $this->service, 'payment' );
 		$this->order->addService( $this->service, 'delivery' );
 
-		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
-
+		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 	}
 
 
 	public function testUpdateNoServices()
 	{
+		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE;
+
 		$this->plugin->setConfig( array(
 				'delivery' => false,
 				'payment' => false
 		) );
 
-		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => null,
 				'payment' => null
 		) );
 
-		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => true,
@@ -120,12 +115,14 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 		) );
 
 		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
+		$this->object->update( $this->order, 'check.after', $part );
 	}
 
 
 	public function testUpdateEmptyServices()
 	{
+		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE;
+
 		$this->order->addService( $this->service, 'payment' );
 		$this->order->addService( $this->service, 'delivery' );
 
@@ -137,14 +134,14 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 			'payment' => false
 		) );
 
-		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => null,
 				'payment' => null
 		) );
 
-		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => true,
@@ -152,12 +149,14 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 		) );
 
 		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
+		$this->object->update( $this->order, 'check.after', $part );
 	}
 
 
 	public function testUpdateWithServices()
 	{
+		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE;
+
 		$this->order->addService( $this->service, 'payment' );
 		$this->order->addService( $this->service, 'delivery' );
 
@@ -166,14 +165,14 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 				'payment' => null
 		) );
 
-		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => true,
 				'payment' => true
 		) );
 
-		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => false,
@@ -181,6 +180,6 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 		) );
 
 		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
+		$this->object->update( $this->order, 'check.after', $part );
 	}
 }

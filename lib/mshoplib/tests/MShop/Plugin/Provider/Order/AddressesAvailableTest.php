@@ -21,22 +21,15 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
+		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $context );
-		$this->plugin = $pluginManager->createItem();
-		$this->plugin->setProvider( 'AddressesAvailable' );
-		$this->plugin->setStatus( 1 );
-
-		$orderBaseManager = \Aimeos\MShop::create( $context, 'order/base' );
-		$orderBaseAddressManager = $orderBaseManager->getSubManager( 'address' );
-
-		$this->order = $orderBaseManager->createItem();
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem();
 		$this->order->__sleep(); // remove event listeners
 
-		$this->address = $orderBaseAddressManager->createItem();
-		$this->address->setLastName( 'Available' );
+		$this->address = \Aimeos\MShop::create( $context, 'order/base/address' )
+			->createItem()->setLastName( 'Available' );
 
-		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( $context, $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( $context, $this->plugin );
 	}
 
 
@@ -48,12 +41,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckConfigBE()
 	{
-		$attributes = array(
-			'payment' => '1',
-			'delivery' => '0',
-		);
-
-		$result = $this->object->checkConfigBE( $attributes );
+		$result = $this->object->checkConfigBE( ['payment' => '1', 'delivery' => '0'] );
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( null, $result['payment'] );
@@ -83,39 +71,40 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateNone()
 	{
-		// \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS not set, so update shall not be executed
-		$this->assertTrue( $this->object->setObject( $this->object )->update( $this->order, 'check.after' ) );
+		$this->assertEquals( null, $this->object->setObject( $this->object )->update( $this->order, 'check.after' ) );
 	}
 
 
 	public function testEmptyConfig()
 	{
-		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) );
+		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS;
+
+		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 
 		$this->order->setAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->order->setAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 
-		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) );
+		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 	}
 
 
 	public function testUpdateAddressesNotAvailable()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelperMShop::getContext(), $this->plugin );
+		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS;
 
 		$this->plugin->setConfig( array(
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => false,
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => false
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) );
+		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 
 		$this->plugin->setConfig( array(
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => null,
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => null
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) );
+		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 
 		$this->plugin->setConfig( array(
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => true,
@@ -123,13 +112,13 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 		) );
 
 		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
+		$this->object->update( $this->order, 'check.after', $value );
 	}
 
 
 	public function testUpdateAddressesAvailable()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelperMShop::getContext(), $this->plugin );
+		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS;
 
 		$this->order->setAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->order->setAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
@@ -139,14 +128,14 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => null
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) );
+		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 
 		$this->plugin->setConfig( array(
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => true,
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => true
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) );
+		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 
 		$this->plugin->setConfig( array(
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => false,
@@ -154,6 +143,6 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 		) );
 
 		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
+		$this->object->update( $this->order, 'check.after', $value );
 	}
 }

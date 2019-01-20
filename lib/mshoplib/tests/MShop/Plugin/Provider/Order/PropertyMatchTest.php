@@ -21,15 +21,12 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
-		$this->plugin = \Aimeos\MShop\Plugin\Manager\Factory::create( $context )->createItem();
+		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
 
-		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::create( $context )->getSubManager( 'base' );
-		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
+		$product = \Aimeos\MShop::create( $context, 'product' )->findItem( 'CNC' );
+		$this->product = \Aimeos\MShop::create( $context, 'order/base/product' )->createItem()->copyFrom( $product );
 
-		$product = \Aimeos\MShop\Product\Manager\Factory::create( $context )->findItem( 'CNC' );
-		$this->product = $orderBaseProductManager->createItem()->copyFrom( $product );
-
-		$this->order = $orderBaseManager->createItem();
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem();
 		$this->order->__sleep(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( $context, $this->plugin );
@@ -51,14 +48,14 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 	public function testUpdate()
 	{
 		$this->plugin->setConfig( ['values' => ['package-height' => '10.0']] );
-		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->product ) );
+		$this->assertEquals( $this->product, $this->object->update( $this->order, 'addProduct.before', $this->product ) );
 	}
 
 
 	public function testUpdateTwoConditions()
 	{
 		$this->plugin->setConfig( ['values' => ['package-height' => '10.0', 'package-length' => '20.0']] );
-		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->product ) );
+		$this->assertEquals( $this->product, $this->object->update( $this->order, 'addProduct.before', $this->product ) );
 	}
 
 

@@ -46,24 +46,27 @@ class LogTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdate()
 	{
-		$this->assertTrue( $this->object->update( $this->order, 'test', 'value' ) );
+		$value = 'value';
+		$this->assertEquals( $value, $this->object->update( $this->order, 'test', $value ) );
 	}
 
 
 	public function testUpdateNull()
 	{
-		$this->assertTrue( $this->object->update( $this->order, 'test' ) );
+		$this->assertEquals( null, $this->object->update( $this->order, 'test' ) );
 	}
 
 
 	public function testUpdateArray()
 	{
-		$this->assertTrue( $this->object->update( $this->order, 'test', [] ) );
+		$value = [];
+		$this->assertEquals( $value, $this->object->update( $this->order, 'test', $value ) );
 	}
 
 
 	public function testUpdateObject()
 	{
-		$this->assertTrue( $this->object->update( $this->order, 'test', new \stdClass() ) );
+		$value = new \stdClass();
+		$this->assertEquals( $value, $this->object->update( $this->order, 'test', $value ) );
 	}
 }

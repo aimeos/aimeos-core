@@ -150,11 +150,16 @@ class Autofill
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
-		$p->addListener( $this->getObject(), 'addProduct.after' );
-		$p->addListener( $this->getObject(), 'deleteService.after' );
+		$plugin = $this->getObject();
+
+		$p->addListener( $plugin, 'addProduct.after' );
+		$p->addListener( $plugin, 'deleteService.after' );
+
+		return $this;
 	}
 
 
@@ -164,8 +169,8 @@ class Autofill
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
+	 * @return mixed Modified value parameter
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if an error occurs
-	 * @return bool true if subsequent plugins should be processed
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
@@ -198,7 +203,7 @@ class Autofill
 		$this->setAddressDefault( $order );
 		$this->setServicesDefault( $order );
 
-		return true;
+		return $value;
 	}
 
 
