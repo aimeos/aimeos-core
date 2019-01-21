@@ -103,13 +103,13 @@ class FreeProduct
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
 
 		$code = $this->getConfigValue( 'productcode' );
-		$addresses = $order->getAddresses();
+		$addresses = $order->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
-		if( $value->getProductCode() !== $code || !isset( $addresses['payment'] ) ) {
+		if( $value->getProductCode() !== $code || ( $address = current( $addresses ) ) === false ) {
 			return $value;
 		}
 
-		$email = $addresses['payment']->getEmail();
+		$email = $address->getEmail();
 		$count = $this->getConfigValue( 'count' );
 		$status = \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED;
 

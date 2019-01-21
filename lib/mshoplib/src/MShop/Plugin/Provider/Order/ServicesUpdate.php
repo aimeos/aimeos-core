@@ -41,8 +41,8 @@ class ServicesUpdate
 	{
 		$plugin = $this->getObject();
 
+		$p->addListener( $plugin, 'addAddress.after' );
 		$p->addListener( $plugin, 'deleteAddress.after' );
-		$p->addListener( $plugin, 'setAddress.after' );
 		$p->addListener( $plugin, 'setAddresses.after' );
 		$p->addListener( $plugin, 'addProduct.after' );
 		$p->addListener( $plugin, 'deleteProduct.after' );

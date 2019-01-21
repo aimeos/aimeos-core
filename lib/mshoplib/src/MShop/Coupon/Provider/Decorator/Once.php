@@ -29,12 +29,10 @@ class Once
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
-		$addresses = $base->getAddresses();
-		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
+		$addresses = $base->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
-		if( isset( $addresses[$type] ) )
+		if( ( $address = current( $addresses ) ) !== false )
 		{
-			$address = $addresses[$type];
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
 
 			$search = $manager->createSearch()->setSlice( 0, 1 );

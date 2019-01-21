@@ -12,6 +12,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 class ExampleTest extends \PHPUnit\Framework\TestCase
 {
+	private $object;
 	private $order;
 
 

@@ -103,36 +103,40 @@ class Postal
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$addresses = $basket->getAddresses();
-
 		$paymentType = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
 		$deliveryType = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY;
 
 
-		if( isset( $addresses[$deliveryType] ) )
+		if( ( $addresses = $basket->getAddress( $deliveryType ) ) !== [] )
 		{
-			$code = $addresses[$deliveryType]->getPostal();
+			foreach( $addresses as $address )
+			{
+				$code = $address->getPostal();
 
-			if( $this->checkPostalCode( $code, 'postal.delivery-include' ) === false
-				|| $this->checkPostalCode( $code, 'postal.delivery-exclude' ) === true
-			) {
-				return false;
+				if( $this->checkPostalCode( $code, 'postal.delivery-include' ) === false
+					|| $this->checkPostalCode( $code, 'postal.delivery-exclude' ) === true
+				) {
+					return false;
+				}
 			}
 		}
-		else if( isset( $addresses[$paymentType] ) ) // use billing address if no delivery address is available
+		elseif( ( $addresses = $basket->getAddress( $paymentType ) ) !== [] ) // use billing address if no delivery address is available
 		{
-			$code = $addresses[$paymentType]->getPostal();
+			foreach( $addresses as $address )
+			{
+				$code = $address->getPostal();
 
-			if( $this->checkPostalCode( $code, 'postal.delivery-include' ) === false
-				|| $this->checkPostalCode( $code, 'postal.delivery-exclude' ) === true
-			) {
-				return false;
-			}
+				if( $this->checkPostalCode( $code, 'postal.delivery-include' ) === false
+					|| $this->checkPostalCode( $code, 'postal.delivery-exclude' ) === true
+				) {
+					return false;
+				}
 
-			if( $this->checkPostalCode( $code, 'postal.billing-include' ) === false
-				|| $this->checkPostalCode( $code, 'postal.billing-exclude' ) === true
-			) {
-				return false;
+				if( $this->checkPostalCode( $code, 'postal.billing-include' ) === false
+					|| $this->checkPostalCode( $code, 'postal.billing-exclude' ) === true
+				) {
+					return false;
+				}
 			}
 		}
 

@@ -266,7 +266,7 @@ class Autofill
 			$search->setConditions( $search->compare( '==', 'order.base.address.baseid', $item->getBaseId() ) );
 
 			foreach( $manager->searchItems( $search ) as $address ) {
-				$addresses[$address->getType()] = $address;
+				$addresses[$address->getType()][] = $address;
 			}
 
 			$order->setAddresses( $addresses );
@@ -321,8 +321,10 @@ class Autofill
 			$address = \Aimeos\MShop::create( $context, 'customer' )
 				->getItem( $context->getUserId() )->getPaymentAddress();
 
-			$addrItem = \Aimeos\MShop::create( $context, 'order/base/address' )->createItem()->copyFrom( $address );
-			$order->setAddress( $addrItem, $type );
+			$addrItem = \Aimeos\MShop::create( $context, 'order/base/address' )
+				->createItem()->copyFrom( $address );
+
+			$order->addAddress( $addrItem, $type );
 		}
 	}
 

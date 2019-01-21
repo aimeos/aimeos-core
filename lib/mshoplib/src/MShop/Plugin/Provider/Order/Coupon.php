@@ -42,8 +42,8 @@ class Coupon
 		$p->addListener( $plugin, 'addProduct.after' );
 		$p->addListener( $plugin, 'deleteProduct.after' );
 		$p->addListener( $plugin, 'setProducts.after' );
+		$p->addListener( $plugin, 'addAddress.after' );
 		$p->addListener( $plugin, 'deleteAddress.after' );
-		$p->addListener( $plugin, 'setAddress.after' );
 		$p->addListener( $plugin, 'setAddresses.after' );
 		$p->addListener( $plugin, 'addService.after' );
 		$p->addListener( $plugin, 'deleteService.after' );

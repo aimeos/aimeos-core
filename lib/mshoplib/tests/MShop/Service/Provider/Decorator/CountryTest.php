@@ -141,8 +141,8 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 		$this->servItem->setConfig( [] );
 
 		$this->mockProvider->expects( $this->once() )
@@ -158,7 +158,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.billing-include' => '' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -174,7 +174,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 		$this->servItem->setConfig( array( 'country.delivery-include' => '' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -190,7 +190,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.delivery-include' => '' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -206,7 +206,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.billing-exclude' => '' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -222,7 +222,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 		$this->servItem->setConfig( array( 'country.delivery-exclude' => '' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -238,7 +238,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.delivery-exclude' => '' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -254,7 +254,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.billing-exclude' => 'de' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
@@ -268,7 +268,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 		$this->servItem->setConfig( array( 'country.delivery-exclude' => 'de' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
@@ -282,7 +282,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.delivery-exclude' => 'de' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
@@ -296,7 +296,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.billing-include' => 'de' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -312,7 +312,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 		$this->servItem->setConfig( array( 'country.delivery-include' => 'de' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -328,7 +328,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.delivery-include' => 'de' ) );
 
 		$this->mockProvider->expects( $this->once() )
@@ -344,7 +344,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.billing-include' => 'ch' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
@@ -358,7 +358,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 		$this->servItem->setConfig( array( 'country.delivery-include' => 'ch' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
@@ -372,7 +372,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem();
 		$address->setCountryId( 'DE' );
 
-		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->basket->addAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'country.delivery-include' => 'ch' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );

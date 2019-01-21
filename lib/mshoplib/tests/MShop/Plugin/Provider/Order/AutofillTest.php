@@ -215,7 +215,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( [], $this->order->getServices() );
 		$this->assertEquals( 1, count( $this->order->getAddresses() ) );
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $this->order->getAddress( $type ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $this->order->getAddress( $type, 0 ) );
 	}
 
 

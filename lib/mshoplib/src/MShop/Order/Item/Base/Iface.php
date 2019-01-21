@@ -114,6 +114,16 @@ interface Iface
 	public function setProducts( array $map );
 
 	/**
+	 * Adds a customer address as billing or delivery address for an order.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given type
+	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
+	 * @param integer|null $position Position of the address in the list to overwrite
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 */
+	public function addAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type, $position = null );
+
+	/**
 	 * Deleted a customer address for billing or delivery of an order.
 	 *
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
@@ -125,9 +135,10 @@ interface Iface
 	 * Returns the billing or delivery address depending on the given type.
 	 *
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
+	 * @param integer|null $pos Address position in list of addresses
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order address item for the requested type
 	 */
-	public function getAddress( $type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+	public function getAddress( $type, $pos = null );
 
 	/**
 	 * Returns all addresses of the (future) order.
@@ -135,15 +146,6 @@ interface Iface
 	 * @return array Array of \Aimeos\MShop\Order\Item\Base\Address\Iface order address items
 	 */
 	public function getAddresses();
-
-	/**
-	 * Sets a customer address as billing or delivery address for an order.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given type
-	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
-	 */
-	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type );
 
 	/**
 	 * Replaces all addresses in the current basket with the new ones

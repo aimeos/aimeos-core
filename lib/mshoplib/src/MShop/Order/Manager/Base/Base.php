@@ -199,8 +199,6 @@ abstract class Base
 
 		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.address.baseid', $baseIds ) );
-		$sort = [$criteria->sort( '+', 'order.base.address.baseid' ), $criteria->sort( '+', 'order.base.address.type' )];
-		$criteria->setSortations( $sort );
 
 		foreach( $manager->searchItems( $criteria ) as $item )
 		{
@@ -210,7 +208,7 @@ abstract class Base
 				$item->setId( null );
 			}
 
-			$items[$item->getBaseId()][$item->getType()] = $item;
+			$items[$item->getBaseId()][] = $item;
 		}
 
 		return $items;
@@ -433,7 +431,7 @@ abstract class Base
 		}
 
 		foreach( $addresses as $item ) {
-			$basket->setAddress( $item, $item->getType() );
+			$basket->addAddress( $item, $item->getType() );
 		}
 
 		foreach( $services as $item ) {
@@ -591,11 +589,11 @@ abstract class Base
 	{
 		$manager = $this->getObject()->getSubManager( 'address' );
 
-		foreach( $basket->getAddresses() as $type => $item )
+		foreach( $basket->getAddresses() as $type => $list )
 		{
-			$item->setBaseId( $basket->getId() );
-			$item->setType( $type );
-			$manager->saveItem( $item );
+			foreach( $list as $item ) {
+				$manager->saveItem( $item->setBaseId( $basket->getId() ) );
+			}
 		}
 
 		return $this;
@@ -653,8 +651,7 @@ abstract class Base
 		{
 			foreach( $list as $item )
 			{
-				$item->setBaseId( $basket->getId() );
-				$item->setType( $type );
+				$item->setBaseId( $basket->getId() )->setType( $type );
 				$item = $manager->saveItem( $item );
 
 				foreach( $item->getAttributeItems() as $attribute )

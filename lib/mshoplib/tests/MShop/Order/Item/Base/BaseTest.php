@@ -64,17 +64,13 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->coupons = ['OPQR' => [$prod1]];
 
 		$this->addresses = array(
-			'payment' => $orderAddressManager->createItem()->setType( 'payment' )->setId( null ),
-			'delivery' => $orderAddressManager->createItem()->setType( 'delivery' )->setId( null ),
+			'payment' => [$orderAddressManager->createItem()->setType( 'payment' )->setId( null )],
+			'delivery' => [$orderAddressManager->createItem()->setType( 'delivery' )->setId( null )],
 		);
 
 		$this->services = array(
-			'payment' => [
-				1 => $orderServiceManager->createItem()->setCode( 'testpay' )->setServiceId( 1 )
-			],
-			'delivery' => [
-				2 => $orderServiceManager->createItem()->setCode( 'testship' )->setServiceId( 2 )
-			],
+			'payment' => [1 => $orderServiceManager->createItem()->setCode( 'testpay' )->setServiceId( 1 )],
+			'delivery' => [2 => $orderServiceManager->createItem()->setCode( 'testship' )->setServiceId( 2 )],
 		);
 	}
 
@@ -201,38 +197,75 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetAddress()
+	public function testAddAddress()
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
-		$this->object->setAddress( $this->addresses[$type], $type );
+		$result = $this->object->addAddress( $this->addresses[$type][0], $type );
 
-		$address = $this->object->getAddress( $type );
-		$this->assertEquals( $this->addresses[$type], $address );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
+		$this->assertEquals( $this->addresses[$type], $this->object->getAddress( $type ) );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testAddAddressMultiple()
+	{
+		$this->object->addAddress( $this->addresses['payment'][0], 'payment' );
+		$result = $this->object->addAddress( $this->addresses['payment'][0], 'payment' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
+		$this->assertEquals( 2, count( $this->object->getAddress( 'payment' ) ) );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testAddAddressPosition()
+	{
+		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
+
+		$this->object->addAddress( $this->addresses[$type][0], $type );
+		$result = $this->object->addAddress( $this->addresses[$type][0], $type, 0 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
+		$this->assertEquals( $this->addresses[$type], $this->object->getAddress( $type ) );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
 	public function testDeleteAddress()
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
-		$this->object->setAddress( $this->addresses[$type], $type );
+		$this->object->setAddresses( $this->addresses );
 		$result = $this->object->deleteAddress( $type );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
+		$this->assertEquals( [], $this->object->getAddress( $type ) );
 		$this->assertTrue( $this->object->isModified() );
-
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
-		$this->object->getAddress( $type );
 	}
 
 
-	public function testSetAddress()
+	public function testGetAddress()
 	{
+		$this->object->setAddresses( $this->addresses );
 		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
-		$result = $this->object->setAddress( $this->addresses[$type], $type );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
 		$this->assertEquals( $this->addresses[$type], $this->object->getAddress( $type ) );
-		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetAddressSingle()
+	{
+		$this->object->setAddresses( $this->addresses );
+		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
+
+		$this->assertEquals( $this->addresses[$type][0], $this->object->getAddress( $type, 0 ) );
+	}
+
+
+	public function testGetAddressException()
+	{
+		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
+		$this->object->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT, 0 );
 	}
 
 
@@ -292,7 +325,11 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 		$service = $this->object->getService( 'payment', 'testpay' );
 		$this->assertEquals( 'testpay', $service->getCode() );
+	}
 
+
+	public function testGetServiceException()
+	{
 		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
 		$this->object->getService( 'payment', 'invalid' );
 	}
@@ -362,8 +399,11 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			$this->object->addProduct( $product );
 		}
 
-		foreach( $this->addresses as $type => $address ) {
-			$this->object->setAddress( $address, $type );
+		foreach( $this->addresses as $type => $addresses )
+		{
+			foreach( $addresses as $address ) {
+				$this->object->addAddress( $address, $type );
+			}
 		}
 
 		foreach( $this->services as $type => $services )
