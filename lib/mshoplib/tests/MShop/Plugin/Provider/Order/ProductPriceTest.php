@@ -22,9 +22,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
-
-		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem();
-		$this->order->__sleep(); // remove event listeners
+		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
 
 		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 		$search = $orderBaseProductManager->createSearch();

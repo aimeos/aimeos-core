@@ -22,9 +22,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
-
-		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem();
-		$this->order->__sleep(); // remove event listeners
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem()->off(); // remove event listeners
 
 		$this->address = \Aimeos\MShop::create( $context, 'order/base/address' )
 			->createItem()->setLastName( 'Available' );

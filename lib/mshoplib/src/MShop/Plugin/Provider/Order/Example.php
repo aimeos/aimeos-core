@@ -33,7 +33,7 @@ class Example
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
-		$p->addListener( $this->getObject(), 'addProduct.before' );
+		$p->attach( $this->getObject(), 'addProduct.before' );
 		return $this;
 	}
 

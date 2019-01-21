@@ -22,8 +22,8 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem()
-			->setConfig( ['single-number-max' => 10] );
+		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem()->setConfig( ['single-number-max' => 10] );
+		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
 
 		$this->products = [];
 		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
@@ -35,9 +35,6 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 		foreach( $manager->searchItems( $search ) as $product ) {
 			$this->products[$product->getCode()] = $orderBaseProductManager->createItem()->copyFrom( $product );
 		}
-
-		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem();
-		$this->order->__sleep(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductLimit( $this->context, $this->plugin );
 	}

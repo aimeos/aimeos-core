@@ -27,36 +27,36 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testaddListener()
+	public function testAttach()
 	{
-		$this->object->addListener( new TestListener(), 'test' );
+		$this->object->attach( new TestListener(), 'test' );
 	}
 
-	public function testRemoveListener()
+	public function testDetach()
 	{
 		$l = new TestListener();
 
-		$this->object->addListener( $l, 'test' );
-		$this->object->removeListener( $l, 'test' );
+		$this->object->attach( $l, 'test' );
+		$this->object->detach( $l, 'test' );
 	}
 
 
-	public function testclearListeners()
+	public function testOff()
 	{
-		$this->object->clearListenersPublic();
+		$this->object->off();
 	}
 
 
-	public function testnotifyListeners()
+	public function testNotify()
 	{
 		$value = 'something';
 		$l = new TestListener();
 
-		$this->object->addListener( $l, 'test' );
-		$this->object->addListener( $l, 'testagain' );
+		$this->object->attach( $l, 'test' );
+		$this->object->attach( $l, 'testagain' );
 
-		$this->object->notifyListenersPublic( 'test', $value );
-		$this->object->notifyListenersPublic( 'testagain', $value );
+		$this->object->notifyPublic( 'test', $value );
+		$this->object->notifyPublic( 'testagain', $value );
 	}
 }
 
@@ -68,14 +68,9 @@ class TestPublisher extends \Aimeos\MW\Observer\Publisher\Base
 	 * @param string|null $value
 	 * @return mixed Modified value parameter
 	 */
-	public function notifyListenersPublic( $action, $value = null )
+	public function notifyPublic( $action, $value = null )
 	{
-		return $this->notifyListeners( $action, $value );
-	}
-
-	public function clearListenersPublic()
-	{
-		$this->clearListeners();
+		return $this->notify( $action, $value );
 	}
 }
 

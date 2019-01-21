@@ -86,16 +86,16 @@ class Shipping
 	{
 		$plugin = $this->getObject();
 
-		$p->addListener( $plugin, 'addProduct.after' );
-		$p->addListener( $plugin, 'deleteProduct.after' );
-		$p->addListener( $plugin, 'setProducts.after' );
-		$p->addListener( $plugin, 'addService.after' );
-		$p->addListener( $plugin, 'deleteService.after' );
-		$p->addListener( $plugin, 'setServices.after' );
-		$p->addListener( $plugin, 'addCoupon.after' );
-		$p->addListener( $plugin, 'deleteCoupon.after' );
-		$p->addListener( $plugin, 'setCoupons.after' );
-		$p->addListener( $plugin, 'setCoupon.after' );
+		$p->attach( $plugin, 'addCoupon.after' );
+		$p->attach( $plugin, 'deleteCoupon.after' );
+		$p->attach( $plugin, 'setCoupons.after' );
+		$p->attach( $plugin, 'setCoupon.after' );
+		$p->attach( $plugin, 'addProduct.after' );
+		$p->attach( $plugin, 'deleteProduct.after' );
+		$p->attach( $plugin, 'setProducts.after' );
+		$p->attach( $plugin, 'addService.after' );
+		$p->attach( $plugin, 'deleteService.after' );
+		$p->attach( $plugin, 'setServices.after' );
 
 		return $this;
 	}

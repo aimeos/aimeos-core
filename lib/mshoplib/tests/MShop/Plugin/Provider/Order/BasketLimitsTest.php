@@ -19,12 +19,9 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
-		$orderBaseManager = \Aimeos\MShop::create( $context, 'order/base' );
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem()->off(); // remove event listeners
+
 		$orderBaseProductManager = \Aimeos\MShop::create( $context, 'order/base/product' );
-
-		$this->order = $orderBaseManager->createItem();
-		$this->order->__sleep(); // remove event listeners
-
 		$search = $orderBaseProductManager->createSearch();
 		$search->setConditions( $search->combine( '&&', array(
 			$search->compare( '==', 'order.base.product.prodcode', array( 'CNE', 'CNC' ) ),

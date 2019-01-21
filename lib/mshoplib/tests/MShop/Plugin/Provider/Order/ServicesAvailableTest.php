@@ -22,10 +22,8 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
-
 		$this->service = \Aimeos\MShop::create( $context, 'order/base/service' )->createItem();
-		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem();
-		$this->order->__sleep(); // remove event listeners
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem()->off(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( $context, $this->plugin );
 	}

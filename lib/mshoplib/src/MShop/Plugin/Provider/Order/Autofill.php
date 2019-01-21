@@ -156,8 +156,8 @@ class Autofill
 	{
 		$plugin = $this->getObject();
 
-		$p->addListener( $plugin, 'addProduct.after' );
-		$p->addListener( $plugin, 'deleteService.after' );
+		$p->attach( $plugin, 'addProduct.after' );
+		$p->attach( $plugin, 'deleteService.after' );
 
 		return $this;
 	}

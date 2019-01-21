@@ -74,13 +74,13 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	{
 		$this->checkParts( $what );
 
-		$this->notifyListeners( 'check.before', $what );
+		$this->notify( 'check.before', $what );
 
 		if( ( $what & self::PARTS_PRODUCT ) && ( count( $this->getProducts() ) < 1 ) ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Basket empty' ) );
 		}
 
-		$this->notifyListeners( 'check.after', $what );
+		$this->notify( 'check.after', $what );
 
 		return $this;
 	}
@@ -279,12 +279,12 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	{
 		if( (string) $customerid !== $this->getCustomerId() )
 		{
-			$this->notifyListeners( 'setCustomerId.before', $customerid );
+			$this->notify( 'setCustomerId.before', $customerid );
 
 			$this->values['order.base.customerid'] = (string) $customerid;
 			$this->modified = true;
 
-			$this->notifyListeners( 'setCustomerId.after', $customerid );
+			$this->notify( 'setCustomerId.after', $customerid );
 		}
 
 		return $this;
@@ -312,12 +312,12 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale )
 	{
-		$this->notifyListeners( 'setLocale.before', $locale );
+		$this->notify( 'setLocale.before', $locale );
 
 		$this->locale = clone $locale;
 		$this->modified = true;
 
-		$this->notifyListeners( 'setLocale.after', $locale );
+		$this->notify( 'setLocale.after', $locale );
 
 		return $this;
 	}
@@ -465,7 +465,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function finish()
 	{
-		$this->notifyListeners( 'setOrder.before' );
+		$this->notify( 'setOrder.before' );
 		return $this;
 	}
 

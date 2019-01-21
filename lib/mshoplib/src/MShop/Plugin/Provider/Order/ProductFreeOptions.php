@@ -31,8 +31,8 @@ class ProductFreeOptions
 	{
 		$plugin = $this->getObject();
 
-		$p->addListener( $plugin, 'addProduct.after' );
-		$p->addListener( $plugin, 'setProducts.after' );
+		$p->attach( $plugin, 'addProduct.after' );
+		$p->attach( $plugin, 'setProducts.after' );
 
 		return $this;
 	}
@@ -50,10 +50,8 @@ class ProductFreeOptions
 	{
 		if( is_array( $value ) )
 		{
-			foreach( $value as $key => $product )
-			{
-				$product = $this->updatePrice( $product );
-				$value[$key] = $product;
+			foreach( $value as $key => $product ) {
+				$value[$key] = $this->updatePrice( $product );
 			}
 		}
 		else

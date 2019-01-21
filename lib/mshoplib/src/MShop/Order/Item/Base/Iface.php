@@ -136,7 +136,7 @@ interface Iface
 	 *
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
 	 * @param integer|null $pos Address position in list of addresses
-	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order address item for the requested type
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface[]|\Aimeos\MShop\Order\Item\Base\Address\Iface Order address item or list of
 	 */
 	public function getAddress( $type, $pos = null );
 

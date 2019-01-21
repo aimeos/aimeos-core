@@ -22,12 +22,10 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem()->off(); // remove event listeners
 
 		$product = \Aimeos\MShop::create( $context, 'product' )->findItem( 'CNC' );
 		$this->product = \Aimeos\MShop::create( $context, 'order/base/product' )->createItem()->copyFrom( $product );
-
-		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem();
-		$this->order->__sleep(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( $context, $this->plugin );
 	}

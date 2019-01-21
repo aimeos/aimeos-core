@@ -21,10 +21,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
-
-		$orderBaseManager = \Aimeos\MShop::create( $this->context, 'order/base' );
-		$this->order = $orderBaseManager->createItem();
-		$this->order->__sleep(); // remove event listeners
+		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesUpdate( $this->context, $this->plugin );
 	}

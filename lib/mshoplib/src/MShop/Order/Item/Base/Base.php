@@ -148,7 +148,7 @@ abstract class Base
 		 * Workaround because database connections can't be serialized
 		 * Listeners will be reattached on wakeup by the order base manager
 		 */
-		$this->clearListeners();
+		$this->off();
 
 		return array_keys( get_object_vars( $this ) );
 	}
@@ -175,7 +175,7 @@ abstract class Base
 	 */
 	public function addProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position = null )
 	{
-		$item = $this->notifyListeners( 'addProduct.before', $item );
+		$item = $this->notify( 'addProduct.before', $item );
 
 		$this->checkProducts( [$item] );
 
@@ -190,7 +190,7 @@ abstract class Base
 		ksort( $this->products );
 		$this->setModified();
 
-		$this->notifyListeners( 'addProduct.after', $item );
+		$this->notify( 'addProduct.after', $item );
 
 		return $this;
 	}
@@ -206,13 +206,13 @@ abstract class Base
 	{
 		if( isset( $this->products[$position] ) )
 		{
-			$position = $this->notifyListeners( 'deleteProduct.before', $position );
+			$position = $this->notify( 'deleteProduct.before', $position );
 
 			$old = $this->products[$position];
 			unset( $this->products[$position] );
 			$this->setModified();
 
-			$this->notifyListeners( 'deleteProduct.after', $old );
+			$this->notify( 'deleteProduct.after', $old );
 		}
 
 		return $this;
@@ -254,7 +254,7 @@ abstract class Base
 	 */
 	public function setProducts( array $map )
 	{
-		$map = $this->notifyListeners( 'setProducts.before', $map );
+		$map = $this->notify( 'setProducts.before', $map );
 
 		$this->checkProducts( $map );
 
@@ -262,7 +262,7 @@ abstract class Base
 		$this->products = $map;
 		$this->setModified();
 
-		$this->notifyListeners( 'setProducts.after', $old );
+		$this->notify( 'setProducts.after', $old );
 
 		return $this;
 	}
@@ -278,7 +278,7 @@ abstract class Base
 	 */
 	public function addAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type, $position = null )
 	{
-		$address = $this->notifyListeners( 'addAddress.before', $address );
+		$address = $this->notify( 'addAddress.before', $address );
 
 		$address = clone $address;
 		$address->setType( $type ); // enforce that the type is the same as the given one
@@ -292,7 +292,7 @@ abstract class Base
 
 		$this->setModified();
 
-		$this->notifyListeners( 'addAddress.after', $address );
+		$this->notify( 'addAddress.after', $address );
 
 		return $this;
 	}
@@ -308,13 +308,13 @@ abstract class Base
 	{
 		if( isset( $this->addresses[$type] ) )
 		{
-			$type = $this->notifyListeners( 'deleteAddress.before', $type );
+			$type = $this->notify( 'deleteAddress.before', $type );
 
 			$old = [$type => $this->addresses[$type]];
 			unset( $this->addresses[$type] );
 			$this->setModified();
 
-			$this->notifyListeners( 'deleteAddress.after', $old );
+			$this->notify( 'deleteAddress.after', $old );
 		}
 
 		return $this;
@@ -326,7 +326,7 @@ abstract class Base
 	 *
 	 * @param string $type Address type, usually "billing" or "delivery"
 	 * @param integer|null $position Address position in list of addresses
-	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order address item for the requested type
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface[]|\Aimeos\MShop\Order\Item\Base\Address\Iface Order address item or list of
 	 */
 	public function getAddress( $type, $position = null )
 	{
@@ -363,7 +363,7 @@ abstract class Base
 	 */
 	public function setAddresses( array $map )
 	{
-		$map = $this->notifyListeners( 'setAddresses.before', $map );
+		$map = $this->notify( 'setAddresses.before', $map );
 
 		foreach( $map as $type => $items ) {
 			$this->checkAddresses( $items, $type );
@@ -373,7 +373,7 @@ abstract class Base
 		$this->addresses = $map;
 		$this->setModified();
 
-		$this->notifyListeners( 'setAddresses.after', $old );
+		$this->notify( 'setAddresses.after', $old );
 
 		return $this;
 	}
@@ -388,7 +388,7 @@ abstract class Base
 	 */
 	public function addService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type )
 	{
-		$service = $this->notifyListeners( 'addService.before', $service );
+		$service = $this->notify( 'addService.before', $service );
 
 		$this->checkPrice( $service->getPrice() );
 
@@ -399,7 +399,7 @@ abstract class Base
 		$this->services[$type][$service->getServiceId()] = $service;
 		$this->setModified();
 
-		$this->notifyListeners( 'addService.after', $service );
+		$this->notify( 'addService.after', $service );
 
 		return $this;
 	}
@@ -415,13 +415,13 @@ abstract class Base
 	{
 		if( isset( $this->services[$type] ) )
 		{
-			$type = $this->notifyListeners( 'deleteService.before', $type );
+			$type = $this->notify( 'deleteService.before', $type );
 
 			$old = [$type => $this->services[$type]];
 			unset( $this->services[$type] );
 			$this->setModified();
 
-			$this->notifyListeners( 'deleteService.after', $old );
+			$this->notify( 'deleteService.after', $old );
 		}
 
 		return $this;
@@ -478,7 +478,7 @@ abstract class Base
 	 */
 	public function setServices( array $map )
 	{
-		$map = $this->notifyListeners( 'setServices.before', $map );
+		$map = $this->notify( 'setServices.before', $map );
 
 		foreach( $map as $type => $services ) {
 			$map[$type] = $this->checkServices( $services, $type );
@@ -488,7 +488,7 @@ abstract class Base
 		$this->services = $map;
 		$this->setModified();
 
-		$this->notifyListeners( 'setServices.after', $old );
+		$this->notify( 'setServices.after', $old );
 
 		return $this;
 	}
@@ -504,12 +504,12 @@ abstract class Base
 	{
 		if( !isset( $this->coupons[$code] ) )
 		{
-			$code = $this->notifyListeners( 'addCoupon.before', $code );
+			$code = $this->notify( 'addCoupon.before', $code );
 
 			$this->coupons[$code] = [];
 			$this->setModified();
 
-			$this->notifyListeners( 'addCoupon.after', $code );
+			$this->notify( 'addCoupon.after', $code );
 		}
 
 		return $this;
@@ -526,7 +526,7 @@ abstract class Base
 	{
 		if( isset( $this->coupons[$code] ) )
 		{
-			$code = $this->notifyListeners( 'deleteCoupon.before', $code );
+			$code = $this->notify( 'deleteCoupon.before', $code );
 
 			foreach( $this->coupons[$code] as $product )
 			{
@@ -539,7 +539,7 @@ abstract class Base
 			unset( $this->coupons[$code] );
 			$this->setModified();
 
-			$this->notifyListeners( 'deleteCoupon.after', $old );
+			$this->notify( 'deleteCoupon.after', $old );
 		}
 
 		return $this;
@@ -567,7 +567,7 @@ abstract class Base
 	 */
 	public function setCoupon( $code, array $products = [] )
 	{
-		$new = $this->notifyListeners( 'setCoupon.before', [$code => $products] );
+		$new = $this->notify( 'setCoupon.before', [$code => $products] );
 
 		$products = $this->checkProducts( current( $new ) );
 		$code = key( $new );
@@ -590,7 +590,7 @@ abstract class Base
 		$this->coupons[$code] = $products;
 		$this->setModified();
 
-		$this->notifyListeners( 'setCoupon.after', $old );
+		$this->notify( 'setCoupon.after', $old );
 
 		return $this;
 	}
@@ -604,7 +604,7 @@ abstract class Base
 	 */
 	public function setCoupons( array $map )
 	{
-		$map = $this->notifyListeners( 'setCoupons.before', $map );
+		$map = $this->notify( 'setCoupons.before', $map );
 
 		foreach( $map as $code => $products ) {
 			$map[$code] = $this->checkProducts( $products );
@@ -631,7 +631,7 @@ abstract class Base
 		$this->coupons = $map;
 		$this->setModified();
 
-		$this->notifyListeners( 'setCoupons.after', $old );
+		$this->notify( 'setCoupons.after', $old );
 
 		return $this;
 	}

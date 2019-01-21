@@ -105,13 +105,10 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No order service item found' );
 		}
 
-		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem();
-		$order->__sleep(); // remove event listeners
+		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
 
-		$order->addService( $delivery, 'delivery' );
-		$order->addProduct( $product );
-		$order->addProduct( $product2 );
-		$order->addProduct( $product3 );
+		$order = $order->addService( $delivery, 'delivery' )
+			->addProduct( $product )->addProduct( $product2 )->addProduct( $product3 );
 
 
 		$this->assertEquals( 5.00, $order->getPrice()->getCosts() );

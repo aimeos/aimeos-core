@@ -41,7 +41,7 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 		$prodManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 
-		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem();
+		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off();
 		$product = \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem();
 		$attribute = \Aimeos\MShop::create( $this->context, 'order/base/product/attribute' )->createItem();
 

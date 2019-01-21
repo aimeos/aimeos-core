@@ -84,7 +84,7 @@ class FreeProduct
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
-		$p->addListener( $this->getObject(), 'addProduct.after' );
+		$p->attach( $this->getObject(), 'addProduct.after' );
 		return $this;
 	}
 

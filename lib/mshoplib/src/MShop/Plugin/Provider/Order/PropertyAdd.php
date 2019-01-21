@@ -97,8 +97,8 @@ class PropertyAdd
 	{
 		$plugin = $this->getObject();
 
-		$p->addListener( $plugin, 'addProduct.before' );
-		$p->addListener( $plugin, 'setProducts.before' );
+		$p->attach( $plugin, 'addProduct.before' );
+		$p->attach( $plugin, 'setProducts.before' );
 
 		return $this;
 	}

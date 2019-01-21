@@ -110,8 +110,8 @@ class ProductLimit
 	{
 		$plugin = $this->getObject();
 
-		$p->addListener( $plugin, 'addProduct.after' );
-		$p->addListener( $plugin, 'setProducts.after' );
+		$p->attach( $plugin, 'addProduct.after' );
+		$p->attach( $plugin, 'setProducts.after' );
 
 		return $this;
 	}

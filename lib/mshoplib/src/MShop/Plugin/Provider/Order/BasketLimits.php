@@ -109,7 +109,7 @@ class BasketLimits
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
-		$p->addListener( $this->getObject(), 'check.after' );
+		$p->attach( $this->getObject(), 'check.after' );
 		return $this;
 	}
 

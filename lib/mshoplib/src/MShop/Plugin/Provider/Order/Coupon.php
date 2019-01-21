@@ -39,17 +39,17 @@ class Coupon
 	{
 		$plugin = $this->getObject();
 
-		$p->addListener( $plugin, 'addProduct.after' );
-		$p->addListener( $plugin, 'deleteProduct.after' );
-		$p->addListener( $plugin, 'setProducts.after' );
-		$p->addListener( $plugin, 'addAddress.after' );
-		$p->addListener( $plugin, 'deleteAddress.after' );
-		$p->addListener( $plugin, 'setAddresses.after' );
-		$p->addListener( $plugin, 'addService.after' );
-		$p->addListener( $plugin, 'deleteService.after' );
-		$p->addListener( $plugin, 'setServices.after' );
-		$p->addListener( $plugin, 'addCoupon.after' );
-		$p->addListener( $plugin, 'deleteCoupon.after' );
+		$p->attach( $plugin, 'addProduct.after' );
+		$p->attach( $plugin, 'deleteProduct.after' );
+		$p->attach( $plugin, 'setProducts.after' );
+		$p->attach( $plugin, 'addAddress.after' );
+		$p->attach( $plugin, 'deleteAddress.after' );
+		$p->attach( $plugin, 'setAddresses.after' );
+		$p->attach( $plugin, 'addService.after' );
+		$p->attach( $plugin, 'deleteService.after' );
+		$p->attach( $plugin, 'setServices.after' );
+		$p->attach( $plugin, 'addCoupon.after' );
+		$p->attach( $plugin, 'deleteCoupon.after' );
 
 		return $this;
 	}
