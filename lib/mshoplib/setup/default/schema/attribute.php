@@ -155,7 +155,7 @@ return array(
 			$table->addIndex( array( 'parentid' ), 'fk_msattpr_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_attribute', array( 'parentid' ), array( 'id' ),
-					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msattpr_pid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msattpr_pid' );
 
 			return $schema;
 		},
