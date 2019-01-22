@@ -98,7 +98,7 @@ return array(
 			$table->addIndex( array( 'siteid', 'email' ), 'idx_mscusad_sid_email' );
 
 			$table->addForeignKeyConstraint( 'mshop_customer', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscusad_parentid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscusad_pid' );
 
 			return $schema;
 		},
