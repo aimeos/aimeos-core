@@ -109,7 +109,7 @@ class Standard extends Base implements Iface
 			return (int) $this->values['customer.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 
