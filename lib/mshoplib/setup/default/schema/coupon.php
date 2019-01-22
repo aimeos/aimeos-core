@@ -59,7 +59,7 @@ return array(
 			$table->addIndex( array( 'parentid' ), 'fk_mscouco_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_coupon', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscouco_parentid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscouco_pid' );
 
 			return $schema;
 		},

@@ -25,7 +25,7 @@ return array(
 			$table->addColumn( 'customerid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'sitecode', 'string', array( 'length' => 32, 'notnull' => false ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5 ) );
-			$table->addColumn( 'currencyid', 'string', array( 'length' => 3, 'fixed' => true ) );
+			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
@@ -67,7 +67,7 @@ return array(
 			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
+			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'telefax', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
@@ -111,7 +111,7 @@ return array(
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'target', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'quantity', 'integer', [] );
-			$table->addColumn( 'currencyid', 'string', array( 'length' => 3, 'fixed' => true ) );
+			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
@@ -176,7 +176,7 @@ return array(
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'currencyid', 'string', array( 'length' => 3, 'fixed' => true ) );
+			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
@@ -265,11 +265,11 @@ return array(
 			$table->addColumn( 'statuspayment', 'smallint', array( 'default' => -1 ) );
 			$table->addColumn( 'statusdelivery', 'smallint', array( 'default' => -1 ) );
 			$table->addColumn( 'relatedid', 'bigint', array( 'notnull' => false ) );
-			$table->addColumn( 'cdate', 'string', array( 'length' => 10, 'fixed' => true ) );
-			$table->addColumn( 'cmonth', 'string', array( 'length' => 7, 'fixed' => true ) );
-			$table->addColumn( 'cweek', 'string', array( 'length' => 7, 'fixed' => true ) );
-			$table->addColumn( 'cwday', 'string', array( 'length' => 1, 'fixed' => true ) );
-			$table->addColumn( 'chour', 'string', array( 'length' => 2, 'fixed' => true ) );
+			$table->addColumn( 'cdate', 'string', array( 'length' => 10 ) );
+			$table->addColumn( 'cmonth', 'string', array( 'length' => 7 ) );
+			$table->addColumn( 'cweek', 'string', array( 'length' => 7 ) );
+			$table->addColumn( 'cwday', 'string', array( 'length' => 1 ) );
+			$table->addColumn( 'chour', 'string', array( 'length' => 2 ) );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );

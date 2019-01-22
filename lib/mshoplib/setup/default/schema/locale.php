@@ -61,7 +61,7 @@ return array(
 
 			$table = $schema->createTable( 'mshop_locale_currency' );
 
-			$table->addColumn( 'id', 'string', array( 'length' => 3, 'fixed' => true ) );
+			$table->addColumn( 'id', 'string', array( 'length' => 3 ) );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'status', 'smallint', [] );
@@ -87,7 +87,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5 ) );
-			$table->addColumn( 'currencyid', 'string', array( 'length' => 3, 'fixed' => true ) );
+			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
 			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
@@ -99,9 +99,9 @@ return array(
 			$table->addIndex( array( 'siteid', 'currencyid' ), 'idx_msloc_sid_curid' );
 			$table->addIndex( array( 'siteid', 'status' ), 'idx_msloc_sid_status' );
 			$table->addIndex( array( 'siteid', 'pos' ), 'idx_msloc_sid_pos' );
-			$table->addIndex( array( 'siteid' ), 'fk_mslocsi_id' );
-			$table->addIndex( array( 'siteid' ), 'fk_mslocla_id' );
-			$table->addIndex( array( 'siteid' ), 'fk_msloccu_id' );
+			$table->addIndex( array( 'siteid' ), 'fk_msloc_siteid' );
+			$table->addIndex( array( 'langid' ), 'fk_msloc_langid' );
+			$table->addIndex( array( 'currencyid' ), 'fk_msloc_currid' );
 
 			$table->addForeignKeyConstraint( 'mshop_locale_site', array( 'siteid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msloc_siteid' );

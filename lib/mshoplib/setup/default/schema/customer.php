@@ -29,7 +29,7 @@ return array(
 			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
+			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'telefax', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
@@ -76,7 +76,7 @@ return array(
 			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
+			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'telefax', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
@@ -98,7 +98,7 @@ return array(
 			$table->addIndex( array( 'siteid', 'email' ), 'idx_mscusad_sid_email' );
 
 			$table->addForeignKeyConstraint( 'mshop_customer', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscusad_parentid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscusad_pid' );
 
 			return $schema;
 		},
