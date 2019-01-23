@@ -48,6 +48,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'order.base.product.orderaddressid' => array(
+			'code' => 'order.base.product.orderaddressid',
+			'internalcode' => 'mordbapr."ordaddrid"',
+			'label' => 'Address ID for the product',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
 		'order.base.product.orderproductid' => array(
 			'code' => 'order.base.product.orderproductid',
 			'internalcode' => 'mordbapr."ordprodid"',
@@ -713,34 +721,35 @@ class Standard
 
 			$stmt->bind( 1, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getOrderProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $item->getType() );
-			$stmt->bind( 4, $item->getProductId() );
-			$stmt->bind( 5, $item->getProductCode() );
-			$stmt->bind( 6, $item->getSupplierCode() );
-			$stmt->bind( 7, $item->getStockType() );
-			$stmt->bind( 8, $item->getName() );
-			$stmt->bind( 9, $item->getMediaUrl() );
-			$stmt->bind( 10, $item->getQuantity() );
-			$stmt->bind( 11, $price->getCurrencyId() );
-			$stmt->bind( 12, $price->getValue() );
-			$stmt->bind( 13, $price->getCosts() );
-			$stmt->bind( 14, $price->getRebate() );
-			$stmt->bind( 15, $price->getTaxValue() );
-			$stmt->bind( 16, $price->getTaxRate() );
-			$stmt->bind( 17, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 18, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 19, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 20, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 21, $date ); // mtime
-			$stmt->bind( 22, $context->getEditor() );
-			$stmt->bind( 23, $item->getTarget() );
-			$stmt->bind( 24, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getOrderAddressId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 4, $item->getType() );
+			$stmt->bind( 5, $item->getProductId() );
+			$stmt->bind( 6, $item->getProductCode() );
+			$stmt->bind( 7, $item->getSupplierCode() );
+			$stmt->bind( 8, $item->getStockType() );
+			$stmt->bind( 9, $item->getName() );
+			$stmt->bind( 10, $item->getMediaUrl() );
+			$stmt->bind( 11, $item->getQuantity() );
+			$stmt->bind( 12, $price->getCurrencyId() );
+			$stmt->bind( 13, $price->getValue() );
+			$stmt->bind( 14, $price->getCosts() );
+			$stmt->bind( 15, $price->getRebate() );
+			$stmt->bind( 16, $price->getTaxValue() );
+			$stmt->bind( 17, $price->getTaxRate() );
+			$stmt->bind( 18, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 19, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 20, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 21, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 22, $date ); // mtime
+			$stmt->bind( 23, $context->getEditor() );
+			$stmt->bind( 24, $item->getTarget() );
+			$stmt->bind( 25, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 25, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 26, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 25, $date ); // ctime
+				$stmt->bind( 26, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

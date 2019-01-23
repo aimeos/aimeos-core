@@ -44,6 +44,21 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function setBaseId( $baseid );
 
 	/**
+	 * Returns the order address ID the product should be shipped to
+	 *
+	 * @return string|null Order address ID
+	 */
+	public function getOrderAddressId();
+
+	/**
+	 * Sets the order address ID the product should be shipped to
+	 *
+	 * @param string|null $value Order address ID
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setOrderAddressId( $value );
+
+	/**
 	 * Returns the parent ID of the ordered product if there is one.
 	 * This ID relates to another product of the same order and provides a relation for e.g. sub-products in bundles.
 	 *
@@ -55,10 +70,10 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the parent ID of the ordered product.
 	 * This ID relates to another product of the same order and provides a relation for e.g. sub-products in bundles.
 	 *
-	 * @param string|null $orderProductId Order product ID
+	 * @param string|null $value Order product ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setOrderProductId( $orderProductId );
+	public function setOrderProductId( $value );
 
 	/**
 	 * Returns the type of the ordered product.

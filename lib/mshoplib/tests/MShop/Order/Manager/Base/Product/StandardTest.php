@@ -120,6 +120,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.product.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.product.baseid', null );
 		$expr[] = $search->compare( '==', 'order.base.product.orderproductid', null );
+		$expr[] = $search->compare( '==', 'order.base.product.orderaddressid', null );
 		$expr[] = $search->compare( '>=', 'order.base.product.type', '' );
 		$expr[] = $search->compare( '!=', 'order.base.product.productid', null );
 		$expr[] = $search->compare( '==', 'order.base.product.prodcode', 'CNE' );
@@ -235,6 +236,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getBaseId(), $itemSaved->getBaseId() );
 		$this->assertEquals( $item->getOrderProductId(), $itemSaved->getOrderProductId() );
+		$this->assertEquals( $item->getOrderAddressId(), $itemSaved->getOrderAddressId() );
 		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getProductId(), $itemSaved->getProductId() );
 		$this->assertEquals( $item->getProductCode(), $itemSaved->getProductCode() );
@@ -258,6 +260,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getBaseId(), $itemUpd->getBaseId() );
 		$this->assertEquals( $itemExp->getOrderProductId(), $itemUpd->getOrderProductId() );
+		$this->assertEquals( $itemExp->getOrderAddressId(), $itemUpd->getOrderAddressId() );
 		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getProductId(), $itemUpd->getProductId() );
 		$this->assertEquals( $itemExp->getProductCode(), $itemUpd->getProductCode() );

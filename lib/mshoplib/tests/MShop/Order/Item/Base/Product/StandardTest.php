@@ -43,7 +43,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->values = array(
 			'order.base.product.id' => 1,
 			'order.base.product.siteid' => 99,
-			'order.base.product.ordprodid' => 10,
+			'order.base.product.orderproductid' => 10,
+			'order.base.product.orderaddressid' => 11,
 			'order.base.product.type' => 'bundle',
 			'order.base.product.productid' => 100,
 			'order.base.product.baseid' => 42,
@@ -141,6 +142,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getOrderProductId() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+	public function testGetOrderAddressId()
+	{
+		$this->assertEquals( 11, $this->object->getOrderAddressId() );
+	}
+
+
+	public function testSetOrderAddressId()
+	{
+		$return = $this->object->setOrderAddressId( 1011 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( 1011, $this->object->getOrderAddressId() );
+		$this->assertTrue( $this->object->isModified() );
+
+		$return = $this->object->setOrderAddressId( null );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( null, $this->object->getOrderAddressId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -633,6 +655,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.id' => 1,
 			'order.base.product.baseid' => 2,
 			'order.base.product.siteid' => 123,
+			'order.base.product.orderproductid' => 10,
+			'order.base.product.orderaddressid' => 11,
 			'order.base.product.productid' => 3,
 			'order.base.product.prodcode' => 'test',
 			'order.base.product.name' => 'test item',
@@ -657,6 +681,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.product.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.product.baseid'], $item->getBaseId() );
 		$this->assertEquals( $list['order.base.product.siteid'], $item->getSiteId() );
+		$this->assertEquals( $list['order.base.product.orderproductid'], $item->getOrderProductId() );
+		$this->assertEquals( $list['order.base.product.orderaddressid'], $item->getOrderAddressId() );
 		$this->assertEquals( $list['order.base.product.productid'], $item->getProductId() );
 		$this->assertEquals( $list['order.base.product.prodcode'], $item->getProductCode() );
 		$this->assertEquals( $list['order.base.product.name'], $item->getName() );
@@ -683,6 +709,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getId(), $arrayObject['order.base.product.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['order.base.product.siteid'] );
 		$this->assertEquals( $this->object->getBaseId(), $arrayObject['order.base.product.baseid'] );
+		$this->assertEquals( $this->object->getOrderProductId(), $arrayObject['order.base.product.orderproductid'] );
+		$this->assertEquals( $this->object->getOrderAddressId(), $arrayObject['order.base.product.orderaddressid'] );
 		$this->assertEquals( $this->object->getStockType(), $arrayObject['order.base.product.stocktype'] );
 		$this->assertEquals( $this->object->getSupplierCode(), $arrayObject['order.base.product.suppliercode'] );
 		$this->assertEquals( $this->object->getProductId(), $arrayObject['order.base.product.productid'] );

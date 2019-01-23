@@ -64,13 +64,13 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->coupons = ['OPQR' => [$prod1]];
 
 		$this->addresses = array(
-			'payment' => [$orderAddressManager->createItem()->setType( 'payment' )->setId( null )],
-			'delivery' => [$orderAddressManager->createItem()->setType( 'delivery' )->setId( null )],
+			'payment' => [0 => $orderAddressManager->createItem()->setType( 'payment' )->setId( null )],
+			'delivery' => [0 => $orderAddressManager->createItem()->setType( 'delivery' )->setId( null )],
 		);
 
 		$this->services = array(
-			'payment' => [1 => $orderServiceManager->createItem()->setCode( 'testpay' )->setServiceId( 1 )],
-			'delivery' => [2 => $orderServiceManager->createItem()->setCode( 'testship' )->setServiceId( 2 )],
+			'payment' => [0 => $orderServiceManager->createItem()->setType( 'payment' )->setCode( 'testpay' )->setId( null )],
+			'delivery' => [1 => $orderServiceManager->createItem()->setType( 'delivery' )->setCode( 'testship' )->setId( null )],
 		);
 	}
 
@@ -244,6 +244,31 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testDeleteAddressPosition()
+	{
+		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
+		$this->object->setAddresses( $this->addresses );
+
+		$result = $this->object->deleteAddress( $type, 0 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
+		$this->assertEquals( [], $this->object->getAddress( $type ) );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testDeleteAddressPositionInvalid()
+	{
+		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
+		$this->object->setAddresses( $this->addresses );
+
+		$result = $this->object->deleteAddress( $type, 1 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
+		$this->assertEquals( $this->addresses[$type], $this->object->getAddress( $type ) );
+	}
+
+
 	public function testGetAddress()
 	{
 		$this->object->setAddresses( $this->addresses );
@@ -282,7 +307,20 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testAddService()
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
-		$result = $this->object->addService( $this->services['payment'][1], $type );
+		$result = $this->object->addService( $this->services[$type][0], $type );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
+		$this->assertEquals( 1, count( $this->object->getService( $type ) ) );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testAddServicePosition()
+	{
+		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
+
+		$this->object->addService( $this->services[$type][0], $type );
+		$result = $this->object->addService( $this->services[$type][0], $type, 0 );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
 		$this->assertEquals( 1, count( $this->object->getService( $type ) ) );
@@ -300,6 +338,31 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
 		$this->assertEquals( [], $this->object->getService( $type ) );
 		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testDeleteServicePosition()
+	{
+		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
+		$this->object->setServices( $this->services );
+
+		$result = $this->object->deleteService( $type, 0 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
+		$this->assertEquals( [], $this->object->getService( $type ) );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testDeleteServicePositionInvalid()
+	{
+		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
+		$this->object->setServices( $this->services );
+
+		$result = $this->object->deleteService( $type, 1 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
+		$this->assertEquals( $this->services[$type], $this->object->getService( $type ) );
 	}
 
 

@@ -166,104 +166,24 @@ abstract class Base
 
 
 	/**
-	 * Adds an order product item to the basket
-	 * If a similar item is found, only the quantity is increased.
+	 * Tests if the order object was modified.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
-	 * @param integer|null $position position of the new order product item
+	 * @return bool True if modified, false if not
+	 */
+	public function isModified()
+	{
+		return $this->modified;
+	}
+
+
+	/**
+	 * Sets the modified flag of the object.
+	 *
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function addProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position = null )
+	public function setModified()
 	{
-		$item = $this->notify( 'addProduct.before', $item );
-
-		$this->checkProducts( [$item] );
-
-		if( $position !== null ) {
-			$this->products[$position] = $item;
-		} elseif( ( $pos = $this->getSameProduct( $item, $this->products ) ) !== false ) {
-			$this->products[$pos]->setQuantity( $this->products[$pos]->getQuantity() + $item->getQuantity() );
-		} else {
-			$this->products[] = $item;
-		}
-
-		ksort( $this->products );
-		$this->setModified();
-
-		$this->notify( 'addProduct.after', $item );
-
-		return $this;
-	}
-
-
-	/**
-	 * Deletes an order product item from the basket
-	 *
-	 * @param integer $position Position of the order product item
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
-	 */
-	public function deleteProduct( $position )
-	{
-		if( isset( $this->products[$position] ) )
-		{
-			$position = $this->notify( 'deleteProduct.before', $position );
-
-			$old = $this->products[$position];
-			unset( $this->products[$position] );
-			$this->setModified();
-
-			$this->notify( 'deleteProduct.after', $old );
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Returns the product item of an basket specified by its key
-	 *
-	 * @param integer $key Key returned by getProducts() identifying the requested product
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Product item of an order
-	 */
-	public function getProduct( $key )
-	{
-		if( !isset( $this->products[$key] ) ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Product not available' ) );
-		}
-
-		return $this->products[$key];
-	}
-
-
-	/**
-	 * Returns the product items that are or should be part of a basket
-	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of order product items
-	 */
-	public function getProducts()
-	{
-		return $this->products;
-	}
-
-
-	/**
-	 * Replaces all products in the current basket with the new ones
-	 *
-	 * @param array $map Associative list of ordered products as returned by getProducts()
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
-	 */
-	public function setProducts( array $map )
-	{
-		$map = $this->notify( 'setProducts.before', $map );
-
-		$this->checkProducts( $map );
-
-		$old = $this->products;
-		$this->products = $map;
-		$this->setModified();
-
-		$this->notify( 'setProducts.after', $old );
-
+		$this->modified = true;
 		return $this;
 	}
 
@@ -273,7 +193,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given type
 	 * @param string $type Address type, usually "billing" or "delivery"
-	 * @param integer|null $position Position of the address in the list to overwrite
+	 * @param integer|null $position Position of the address in the list
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function addAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type, $position = null )
@@ -281,8 +201,7 @@ abstract class Base
 		$address = $this->notify( 'addAddress.before', $address );
 
 		$address = clone $address;
-		$address->setType( $type ); // enforce that the type is the same as the given one
-		$address->setId( null ); // enforce saving as new item
+		$address = $address->setType( $type )->setId( null ); // enforce saving as new item
 
 		if( $position !== null ) {
 			$this->addresses[$type][$position] = $address;
@@ -302,16 +221,22 @@ abstract class Base
 	 * Deletes an order address from the basket
 	 *
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
+	 * @param integer|null $position Position of the address in the list
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function deleteAddress( $type )
+	public function deleteAddress( $type, $position = null )
 	{
-		if( isset( $this->addresses[$type] ) )
+		if( $position === null && isset( $this->addresses[$type] ) || isset( $this->addresses[$type][$position] ) )
 		{
-			$type = $this->notify( 'deleteAddress.before', $type );
+			$old = ( isset( $this->addresses[$type][$position] ) ? $this->addresses[$type][$position] : $this->addresses[$type] );
+			$old = $this->notify( 'deleteAddress.before', $old );
 
-			$old = [$type => $this->addresses[$type]];
-			unset( $this->addresses[$type] );
+			if( $position !== null ) {
+				unset( $this->addresses[$type][$position] );
+			} else {
+				unset( $this->addresses[$type] );
+			}
+
 			$this->setModified();
 
 			$this->notify( 'deleteAddress.after', $old );
@@ -380,121 +305,6 @@ abstract class Base
 
 
 	/**
-	 * Adds an order service to the basket
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given domain
-	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
-	 */
-	public function addService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type )
-	{
-		$service = $this->notify( 'addService.before', $service );
-
-		$this->checkPrice( $service->getPrice() );
-
-		$service = clone $service;
-		$service->setType( $type ); // enforce that the type is the same as the given one
-		$service->setId( null ); // enforce saving as new item
-
-		$this->services[$type][$service->getServiceId()] = $service;
-		$this->setModified();
-
-		$this->notify( 'addService.after', $service );
-
-		return $this;
-	}
-
-
-	/**
-	 * Deletes an order service from the basket
-	 *
-	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
-	 */
-	public function deleteService( $type )
-	{
-		if( isset( $this->services[$type] ) )
-		{
-			$type = $this->notify( 'deleteService.before', $type );
-
-			$old = [$type => $this->services[$type]];
-			unset( $this->services[$type] );
-			$this->setModified();
-
-			$this->notify( 'deleteService.after', $old );
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Returns the order services depending on the given type
-	 *
-	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @param string|null $code Code of the service item that should be returned
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface|\Aimeos\MShop\Order\Item\Base\Service\Iface[]
-	 * 	Order service item or list of items for the requested type
-	 * @throws \Aimeos\MShop\Order\Exception If no service for the given type and code is found
-	 */
-	public function getService( $type, $code = null )
-	{
-		if( $code !== null )
-		{
-			if( isset( $this->services[$type] ) )
-			{
-				foreach( $this->services[$type] as $service )
-				{
-					if( $service->getCode() === $code ) {
-						return $service;
-					}
-				}
-			}
-
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Service not available' ) );
-		}
-
-		return ( isset( $this->services[$type] ) ? $this->services[$type] : [] );
-	}
-
-
-	/**
-	 * Returns all services that are part of the basket
-	 *
-	 * @return array Associative list of service types ("delivery" or "payment") as keys and list of
-	 *	service items implementing \Aimeos\MShop\Order\Service\Iface as values
-	 */
-	public function getServices()
-	{
-		return $this->services;
-	}
-
-
-	/**
-	 * Replaces all services in the current basket with the new ones
-	 *
-	 * @param array $map Associative list of order services as returned by getServices()
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
-	 */
-	public function setServices( array $map )
-	{
-		$map = $this->notify( 'setServices.before', $map );
-
-		foreach( $map as $type => $services ) {
-			$map[$type] = $this->checkServices( $services, $type );
-		}
-
-		$old = $this->services;
-		$this->services = $map;
-		$this->setModified();
-
-		$this->notify( 'setServices.after', $old );
-
-		return $this;
-	}
-
-
-	/**
 	 * Adds a coupon code and the given product item to the basket
 	 *
 	 * @param string $code Coupon code
@@ -526,7 +336,8 @@ abstract class Base
 	{
 		if( isset( $this->coupons[$code] ) )
 		{
-			$code = $this->notify( 'deleteCoupon.before', $code );
+			$old = [$code => $this->coupons[$code]];
+			$old = $this->notify( 'deleteCoupon.before', $old );
 
 			foreach( $this->coupons[$code] as $product )
 			{
@@ -535,7 +346,6 @@ abstract class Base
 				}
 			}
 
-			$old = [$code => $this->coupons[$code]];
 			unset( $this->coupons[$code] );
 			$this->setModified();
 
@@ -638,24 +448,230 @@ abstract class Base
 
 
 	/**
-	 * Tests if the order object was modified.
+	 * Adds an order product item to the basket
+	 * If a similar item is found, only the quantity is increased.
 	 *
-	 * @return bool True if modified, false if not
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
+	 * @param integer|null $position position of the new order product item
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function isModified()
+	public function addProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position = null )
 	{
-		return $this->modified;
+		$item = $this->notify( 'addProduct.before', $item );
+
+		$this->checkProducts( [$item] );
+
+		if( $position !== null ) {
+			$this->products[$position] = $item;
+		} elseif( ( $pos = $this->getSameProduct( $item, $this->products ) ) !== false ) {
+			$this->products[$pos]->setQuantity( $this->products[$pos]->getQuantity() + $item->getQuantity() );
+		} else {
+			$this->products[] = $item;
+		}
+
+		ksort( $this->products );
+		$this->setModified();
+
+		$this->notify( 'addProduct.after', $item );
+
+		return $this;
 	}
 
 
 	/**
-	 * Sets the modified flag of the object.
+	 * Deletes an order product item from the basket
 	 *
+	 * @param integer $position Position of the order product item
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setModified()
+	public function deleteProduct( $position )
 	{
-		$this->modified = true;
+		if( isset( $this->products[$position] ) )
+		{
+			$old = $this->products[$position];
+			$old = $this->notify( 'deleteProduct.before', $old );
+
+			unset( $this->products[$position] );
+			$this->setModified();
+
+			$this->notify( 'deleteProduct.after', $old );
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the product item of an basket specified by its key
+	 *
+	 * @param integer $key Key returned by getProducts() identifying the requested product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Product item of an order
+	 */
+	public function getProduct( $key )
+	{
+		if( !isset( $this->products[$key] ) ) {
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Product not available' ) );
+		}
+
+		return $this->products[$key];
+	}
+
+
+	/**
+	 * Returns the product items that are or should be part of a basket
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of order product items
+	 */
+	public function getProducts()
+	{
+		return $this->products;
+	}
+
+
+	/**
+	 * Replaces all products in the current basket with the new ones
+	 *
+	 * @param array $map Associative list of ordered products as returned by getProducts()
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 */
+	public function setProducts( array $map )
+	{
+		$map = $this->notify( 'setProducts.before', $map );
+
+		$this->checkProducts( $map );
+
+		$old = $this->products;
+		$this->products = $map;
+		$this->setModified();
+
+		$this->notify( 'setProducts.after', $old );
+
+		return $this;
+	}
+
+
+	/**
+	 * Adds an order service to the basket
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given domain
+	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
+	 * @param integer|null $position Position of the address in the list to overwrite
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 */
+	public function addService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type, $position = null )
+	{
+		$service = $this->notify( 'addService.before', $service );
+
+		$this->checkPrice( $service->getPrice() );
+
+		$service = clone $service;
+		$service = $service->setType( $type )->setId( null ); // enforce saving as new item
+
+		if( $position !== null ) {
+			$this->services[$type][$position] = $service;
+		} else {
+			$this->services[$type][] = $service;
+		}
+
+		$this->setModified();
+
+		$this->notify( 'addService.after', $service );
+
+		return $this;
+	}
+
+
+	/**
+	 * Deletes an order service from the basket
+	 *
+	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
+	 * @param integer|null $position Position of the address in the list to overwrite
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 */
+	public function deleteService( $type, $position = null )
+	{
+		if( $position === null && isset( $this->services[$type] ) || isset( $this->services[$type][$position] ) )
+		{
+			$old = ( isset( $this->services[$type][$position] ) ? $this->services[$type][$position] : $this->services[$type] );
+			$old = $this->notify( 'deleteService.before', $old );
+
+			if( $position !== null ) {
+				unset( $this->services[$type][$position] );
+			} else {
+				unset( $this->services[$type] );
+			}
+
+			$this->setModified();
+
+			$this->notify( 'deleteService.after', $old );
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the order services depending on the given type
+	 *
+	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
+	 * @param string|null $code Code of the service item that should be returned
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface[]|\Aimeos\MShop\Order\Item\Base\Service\Iface
+	 * 	Order service item or list of items for the requested type
+	 * @throws \Aimeos\MShop\Order\Exception If no service for the given type and code is found
+	 */
+	public function getService( $type, $code = null )
+	{
+		if( $code !== null )
+		{
+			if( isset( $this->services[$type] ) )
+			{
+				foreach( $this->services[$type] as $service )
+				{
+					if( $service->getCode() === $code ) {
+						return $service;
+					}
+				}
+			}
+
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Service not available' ) );
+		}
+
+		return ( isset( $this->services[$type] ) ? $this->services[$type] : [] );
+	}
+
+
+	/**
+	 * Returns all services that are part of the basket
+	 *
+	 * @return array Associative list of service types ("delivery" or "payment") as keys and list of
+	 *	service items implementing \Aimeos\MShop\Order\Service\Iface as values
+	 */
+	public function getServices()
+	{
+		return $this->services;
+	}
+
+
+	/**
+	 * Replaces all services in the current basket with the new ones
+	 *
+	 * @param array $map Associative list of order services as returned by getServices()
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 */
+	public function setServices( array $map )
+	{
+		$map = $this->notify( 'setServices.before', $map );
+
+		foreach( $map as $type => $services ) {
+			$map[$type] = $this->checkServices( $services, $type );
+		}
+
+		$old = $this->services;
+		$this->services = $map;
+		$this->setModified();
+
+		$this->notify( 'setServices.after', $old );
+
 		return $this;
 	}
 
@@ -729,10 +745,9 @@ abstract class Base
 		foreach( $items as $key => $item )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
-			$this->checkPrice( $item->getPrice() );
 
-			// enforce the type and saving as new item
-			$list[$item->getServiceId()] = $item->setType( $type )->setId( null );
+			$this->checkPrice( $item->getPrice() );
+			$list[$key] = $item->setType( $type )->setId( null ); // enforce the type and saving as new item
 		}
 
 		return $list;

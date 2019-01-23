@@ -102,6 +102,7 @@ return array(
 			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'ordprodid', 'bigint', array( 'notnull' => false ) );
+			$table->addColumn( 'ordaddrid', 'bigint', array( 'notnull' => false ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'prodid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'prodcode', 'string', array( 'length' => 32  ) );

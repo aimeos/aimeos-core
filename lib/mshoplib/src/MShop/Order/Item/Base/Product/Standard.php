@@ -99,6 +99,36 @@ class Standard extends Base implements Iface
 		return $this;
 	}
 
+	/**
+	 * Returns the order address ID the product should be shipped to
+	 *
+	 * @return string|null Order address ID
+	 */
+	public function getOrderAddressId()
+	{
+		if( isset( $this->values['order.base.product.orderaddressid'] ) ) {
+			return (string) $this->values['order.base.product.orderaddressid'];
+		}
+	}
+
+
+	/**
+	 * Sets the order address ID the product should be shipped to
+	 *
+	 * @param string|null $value Order address ID
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setOrderAddressId( $value )
+	{
+		if( $value !== $this->getOrderAddressId() )
+		{
+			$this->values['order.base.product.orderaddressid'] = ( $value !== null ? (string) $value : null );
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
 
 	/**
 	 * Returns the parent ID of the ordered product if there is one.
@@ -108,8 +138,8 @@ class Standard extends Base implements Iface
 	 */
 	public function getOrderProductId()
 	{
-		if( isset( $this->values['order.base.product.ordprodid'] ) ) {
-			return (string) $this->values['order.base.product.ordprodid'];
+		if( isset( $this->values['order.base.product.orderproductid'] ) ) {
+			return (string) $this->values['order.base.product.orderproductid'];
 		}
 	}
 
@@ -125,7 +155,7 @@ class Standard extends Base implements Iface
 	{
 		if( $value !== $this->getOrderProductId() )
 		{
-			$this->values['order.base.product.ordprodid'] = ( $value !== null ? (string) $value : null );
+			$this->values['order.base.product.orderproductid'] = ( $value !== null ? (string) $value : null );
 			$this->setModified();
 		}
 
@@ -558,7 +588,8 @@ class Standard extends Base implements Iface
 			{
 				case 'order.base.product.siteid': $item = $item->setSiteId( $value ); break;
 				case 'order.base.product.baseid': $item = $item->setBaseId( $value ); break;
-				case 'order.base.product.ordprodid': $item = $item->setOrderProductId( $value ); break;
+				case 'order.base.product.orderproductid': $item = $item->setOrderProductId( $value ); break;
+				case 'order.base.product.orderaddressid': $item = $item->setOrderAddressId( $value ); break;
 				case 'order.base.product.type': $item = $item->setType( $value ); break;
 				case 'order.base.product.stocktype': $item = $item->setStockType( $value ); break;
 				case 'order.base.product.suppliercode': $item = $item->setSupplierCode( $value ); break;
@@ -605,7 +636,8 @@ class Standard extends Base implements Iface
 		if( $private === true )
 		{
 			$list['order.base.product.baseid'] = $this->getBaseId();
-			$list['order.base.product.ordprodid'] = $this->getOrderProductId();
+			$list['order.base.product.orderproductid'] = $this->getOrderProductId();
+			$list['order.base.product.orderaddressid'] = $this->getOrderAddressId();
 			$list['order.base.product.target'] = $this->getTarget();
 			$list['order.base.product.flags'] = $this->getFlags();
 		}
