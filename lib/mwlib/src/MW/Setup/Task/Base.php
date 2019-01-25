@@ -197,18 +197,28 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	protected function getValue( $sql, $column, $name = 'db' )
 	{
 		$conn = $this->acquire( $name );
-		$result = $conn->create( $sql )->execute();
 
-		if( ( $row = $result->fetch() ) === false ) {
-			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No rows found: %1$s', $sql ) );
+		try
+		{
+			$result = $conn->create( $sql )->execute();
+
+			if( ( $row = $result->fetch() ) === false ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No rows found: %1$s', $sql ) );
+			}
+
+			$result->finish();
+
+			if( array_key_exists( $column, $row ) === false ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No column "%1$s" found: %2$s', $column, $sql ) );
+			}
+
+			$this->release( $conn, $name );
 		}
-
-		if( array_key_exists( $column, $row ) === false ) {
-			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No column "%1$s" found: %2$s', $column, $sql ) );
+		catch( \Exception $e )
+		{
+			$this->release( $conn, $name );
+			throw $e;
 		}
-
-		$result->finish();
-		$this->release( $conn, $name );
 
 		return $row[$column];
 	}
