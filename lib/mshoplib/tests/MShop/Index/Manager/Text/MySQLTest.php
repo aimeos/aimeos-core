@@ -43,4 +43,20 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $attribute );
 		}
 	}
+
+
+	public function testSearchItemsRelevance()
+	{
+		$search = $this->object->createSearch();
+
+		$func = $search->createFunction( 'index.text:relevance', array( 'de', 'T-DISC' ) );
+		$search->setConditions( $search->compare( '>', $func, 0 ) );
+
+		$sortfunc = $search->createFunction( 'sort:index.text:relevance', array( 'de', 'T-DISC' ) );
+		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
+
+		$result = $this->object->searchItems( $search, [] );
+
+		$this->assertEquals( 2, count( $result ) );
+	}
 }
