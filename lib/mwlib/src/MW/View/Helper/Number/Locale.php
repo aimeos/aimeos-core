@@ -22,7 +22,7 @@ class Locale
 	extends \Aimeos\MW\View\Helper\Base
 	implements \Aimeos\MW\View\Helper\Number\Iface
 {
-	private $locale;
+	private $formatter;
 
 
 	/**
@@ -52,7 +52,7 @@ class Locale
 	 */
 	public function transform( $number, $decimals = null )
 	{
-		$this->formatter->setAttribute( \NumberFormatter::FRACTION_DIGITS, $decimals ?: 2 );
-		return $this->formatter->format( $number );
+		$this->formatter->setAttribute( \NumberFormatter::FRACTION_DIGITS, (int) $decimals ?: 2 );
+		return $this->formatter->format( (double) $number );
 	}
 }
