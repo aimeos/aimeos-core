@@ -142,9 +142,11 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 
 				if( $this->checkColumns( $schema, $table, $column ) === true )
 				{
-					if( $table === 'mshop_locale' )
-					{
+					if( $table === 'mshop_locale' && $schema->constraintExists( 'mshop_locale', 'fk_msloc_currid' ) ) {
 						$this->execute( 'ALTER TABLE "mshop_locale" DROP FOREIGN KEY "fk_msloc_currid"' );
+					}
+
+					if( $table === 'mshop_locale' && $schema->constraintExists( 'mshop_locale', 'fk_msloc_langid' ) ) {
 						$this->execute( 'ALTER TABLE "mshop_locale" DROP FOREIGN KEY "fk_msloc_langid"' );
 					}
 
