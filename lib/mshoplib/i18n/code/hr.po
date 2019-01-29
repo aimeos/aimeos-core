@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2018-08-14 11:51+0000\n"
+"PO-Revision-Date: 2018-12-19 12:04+0000\n"
 "Last-Translator: Miro Sertić <miro.sertic0606@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/aimeos/aimeos-core/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -68,11 +68,11 @@ msgstr "telefon"
 
 #. Subscription reason code
 msgid "reason:-1"
-msgstr ""
+msgstr "plaćanje"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr ""
+msgstr "isteklo"
 
 #. Subscription reason code
 msgid "reason:1"
