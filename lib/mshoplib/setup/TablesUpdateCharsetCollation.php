@@ -134,7 +134,7 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 	{
 		$schema = $this->getSchema( $rname );
 
-		if( checkMySqlCompatibility($schema) )
+		if( $this->checkMySqlCompatibility( $schema ) )
 		{
 			foreach( $tables as $table => $column )
 			{
