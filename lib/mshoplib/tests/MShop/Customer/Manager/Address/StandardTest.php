@@ -7,7 +7,7 @@
  */
 
 
-namespace Aimeos\MShop\Common\Manager\Address;
+namespace Aimeos\MShop\Customer\Manager\Address;
 
 
 class StandardTest extends \PHPUnit\Framework\TestCase
@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No address item with company "Metaways" found' );
+			throw new \RuntimeException( 'No address item found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -216,7 +216,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '!=', 'customer.address.parentid', null ),
 			$search->compare( '==', 'customer.address.company', 'Example company' ),
 			$search->compare( '==', 'customer.address.vatid', 'DE999999999' ),
-			$search->compare( '==', 'customer.address.salutation', \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR ),
+			$search->compare( '==', 'customer.address.salutation', 'mr' ),
 			$search->compare( '==', 'customer.address.title', 'Dr' ),
 			$search->compare( '==', 'customer.address.firstname', 'Our' ),
 			$search->compare( '==', 'customer.address.lastname', 'Unittest' ),
@@ -240,21 +240,29 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
+	}
 
+
+	public function testSearchItemTotal()
+	{
 		$total = 0;
+		$search = $this->object->createSearch();
+
 		$conditions = array(
 			$search->compare( '~=', 'customer.address.company', 'Example company' ),
 			$search->compare( '==', 'customer.address.editor', $this->editor )
 		);
+
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 2 );
+
 		$results = $this->object->searchItems( $search, [], $total );
+
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
 
-		foreach( $results as $itemId => $item ) {
-			$this->assertEquals( $itemId, $item->getId() );
+		foreach( $results as $id => $item ) {
+			$this->assertEquals( $id, $item->getId() );
 		}
 	}
-
 }

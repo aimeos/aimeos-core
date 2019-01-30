@@ -88,26 +88,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$listManager = $this->object->getSubManager( 'lists' );
+		$item = $this->object->findItem( 'cafe', ['product'] );
 
-		$search = $listManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'catalog.lists.domain', 'product' ),
-			$search->compare( '==', 'catalog.lists.type', 'promotion' ),
-			$search->compare( '==', 'catalog.lists.datestart', '2010-01-01 00:00:00' ),
-			$search->compare( '==', 'catalog.lists.dateend', '2099-01-01 00:00:00' ),
-			$search->compare( '!=', 'catalog.lists.config', null ),
-			$search->compare( '==', 'catalog.lists.position', 0 ),
-			$search->compare( '==', 'catalog.lists.status', 1 ),
-			$search->compare( '==', 'catalog.lists.editor', $this->editor ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$results = $listManager->searchItems( $search );
-		if( ( $listItem = reset( $results ) ) === false ) {
+		if( ( $listItem = current( $item->getListItems( 'product', 'promotion' ) ) ) === false ) {
 			throw new \RuntimeException( 'No list item found' );
 		}
-
 
 		$search = $this->object->createSearch();
 
@@ -126,8 +111,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'catalog.editor', $this->editor );
 		$expr[] = $search->compare( '>=', 'catalog.target', '' );
 
-		$param = array( 'product', 'promotion', array( $listItem->getRefId() ) );
-		$expr[] = $search->compare( '>', $search->createFunction( 'catalog.contains', $param ), 0 );
+		$param = ['product', 'promotion', $listItem->getRefId()];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'catalog:has', $param ), null );
+
+		$param = ['product', 'promotion', 0];
+		$expr[] = $search->compare( '==', $search->createFunction( 'catalog:has', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'catalog.lists.id', null );
 		$expr[] = $search->compare( '!=', 'catalog.lists.siteid', null );

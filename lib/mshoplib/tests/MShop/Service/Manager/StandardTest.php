@@ -165,6 +165,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItem()
 	{
+		$item = $this->object->findItem( 'unitcode', ['text'] );
+
+		if( ( $listItem = current( $item->getListItems( 'text', 'unittype1' ) ) ) === false ) {
+			throw new \RuntimeException( 'No list item found' );
+		}
+
 		$total = 0;
 		$search = $this->object->createSearch();
 
@@ -183,6 +189,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'service.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'service.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'service.editor', $this->editor );
+
+		$param = ['text','unittype1', $listItem->getRefId()];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'service:has', $param ), null );
+
+		$param = ['text','unittype1', 0];
+		$expr[] = $search->compare( '==', $search->createFunction( 'service:has', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'service.lists.id', null );
 		$expr[] = $search->compare( '!=', 'service.lists.siteid', null );

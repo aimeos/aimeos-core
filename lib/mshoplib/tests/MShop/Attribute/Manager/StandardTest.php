@@ -232,6 +232,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
+		$item = $this->object->findItem( 'black', ['text'], 'product', 'color' );
+
+		if( ( $listItem = current( $item->getListItems( 'text', 'default', null, false ) ) ) === false ) {
+			throw new \RuntimeException( 'No list item found' );
+		}
+
 		$search = $this->object->createSearch();
 
 		$expr = [];
@@ -246,6 +252,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'attribute.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'attribute.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'attribute.editor', $this->editor );
+
+		$param = array( 'text', 'default', $listItem->getRefId() );
+		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:has', $param ), null );
+
+		$param = array( 'text', 'default', '0' );
+		$expr[] = $search->compare( '==', $search->createFunction( 'attribute:has', $param ), null );
+
+		$param = array( 'htmlcolor', 'de', '#000000' );
+		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:prop', $param ), null );
+
+		$param = array( 'htmlcolor', null, '0' );
+		$expr[] = $search->compare( '==', $search->createFunction( 'attribute:prop', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'attribute.lists.id', null );
 		$expr[] = $search->compare( '!=', 'attribute.lists.siteid', null );

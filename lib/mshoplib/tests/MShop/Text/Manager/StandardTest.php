@@ -73,6 +73,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '~=', 'text.content', 'Lange Beschreibung' ) );
+		$item = current( $this->object->searchItems( $search, ['media'] ) );
+
+		if( $item && ( $listItem = current( $item->getListItems( 'media', 'align-top' ) ) ) === false ) {
+			throw new \RuntimeException( 'No list item found' );
+		}
+
 		$total = 0;
 		$search = $this->object->createSearch();
 
@@ -88,6 +96,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'text.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'text.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'text.editor', $this->editor );
+
+		$param = ['media','align-top', $listItem->getRefId()];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'text:has', $param ), null );
+
+		$param = ['media','align-top', 0];
+		$expr[] = $search->compare( '==', $search->createFunction( 'text:has', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'text.lists.id', null );
 		$expr[] = $search->compare( '!=', 'text.lists.siteid', null );

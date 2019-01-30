@@ -79,7 +79,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItem()
 	{
-		//search without base criteria
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'media.url', 'prod_266x221/198_prod_266x221.jpg' ) );
+		$item = current( $this->object->searchItems( $search, ['attribute'] ) );
+
+		if( $item && ( $listItem = current( $item->getListItems( 'attribute', 'option' ) ) ) === false ) {
+			throw new \RuntimeException( 'No list item found' );
+		}
+
 		$search = $this->object->createSearch();
 
 		$expr = [];
@@ -97,6 +104,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'media.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'media.editor', $this->editor );
 
+		$param = ['attribute','option', $listItem->getRefId()];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'media:has', $param ), null );
+
+		$param = ['attribute','option', 0];
+		$expr[] = $search->compare( '==', $search->createFunction( 'media:has', $param ), null );
+
+		$param = ['copyright', 'de', 'ich, 2019'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'media:prop', $param ), null );
+
+		$param = ['copyright', null, 'me'];
+		$expr[] = $search->compare( '==', $search->createFunction( 'media:prop', $param ), null );
+
 		$expr[] = $search->compare( '!=', 'media.lists.id', null );
 		$expr[] = $search->compare( '!=', 'media.lists.siteid', null );
 		$expr[] = $search->compare( '>', 'media.lists.parentid', 0 );
@@ -111,6 +130,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'media.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'media.lists.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'media.lists.editor', $this->editor );
+
+		$expr[] = $search->compare( '!=', 'media.property.id', null );
+		$expr[] = $search->compare( '!=', 'media.property.siteid', null );
+		$expr[] = $search->compare( '==', 'media.property.type', 'copyright' );
+		$expr[] = $search->compare( '==', 'media.property.languageid', 'de' );
+		$expr[] = $search->compare( '==', 'media.property.value', 'ich, 2019' );
+		$expr[] = $search->compare( '==', 'media.property.editor', $this->editor );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );

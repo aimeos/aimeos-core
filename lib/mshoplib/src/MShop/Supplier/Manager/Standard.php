@@ -88,6 +88,18 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'supplier:has' => array(
+			'code' => 'supplier:has()',
+			'internalcode' => '(
+				SELECT msupli_has."id" FROM mshop_supplier_list AS msupli_has
+				WHERE msup."id" = msupli_has."parentid" AND :site
+					AND msupli_has."domain" = $1 AND msupli_has."type" = $2 AND msupli_has."refid" = $3
+			)',
+			'label' => 'Supplier has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
 	);
 
 
@@ -100,6 +112,23 @@ class Standard
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-supplier' );
+
+		$locale = $context->getLocale();
+
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/supplier/manager/sitemode', $level );
+
+		$siteIds = [$locale->getSiteId()];
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
+		}
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$this->replaceSiteMarker( $this->searchConfig['supplier:has'], 'msupli_has."siteid"', $siteIds, ':site' );
 	}
 
 

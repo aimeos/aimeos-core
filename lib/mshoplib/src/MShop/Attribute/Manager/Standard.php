@@ -110,6 +110,31 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'attribute:has' => array(
+			'code' => 'attribute:has()',
+			'internalcode' => '(
+				SELECT mattli_has."id" FROM mshop_attribute_list AS mattli_has
+				WHERE matt."id" = mattli_has."parentid" AND :site
+					AND mattli_has."domain" = $1 AND mattli_has."type" = $2 AND mattli_has."refid" = $3
+			)',
+			'label' => 'Attribute has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
+		'attribute:prop' => array(
+			'code' => 'attribute:prop()',
+			'internalcode' => '(
+				SELECT mattpr_prop."id" FROM mshop_attribute_property AS mattpr_prop
+				WHERE matt."id" = mattpr_prop."parentid" AND :site
+					AND mattpr_prop."type" = $1 AND mattpr_prop."value" = $3
+					AND ( mattpr_prop."langid" = $2 OR mattpr_prop."langid" IS NULL )
+			)',
+			'label' => 'Attribute has property item, parameter(<property type>,<language code>,<property value>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
 	);
 
 
@@ -122,6 +147,23 @@ class Standard
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-attribute' );
+
+		$locale = $context->getLocale();
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/attribute/manager/sitemode', $level );
+
+		$siteIds = [$locale->getSiteId()];
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
+		}
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$this->replaceSiteMarker( $this->searchConfig['attribute:has'], 'mattli_has."siteid"', $siteIds, ':site' );
+		$this->replaceSiteMarker( $this->searchConfig['attribute:prop'], 'mattpr_prop."siteid"', $siteIds, ':site' );
 	}
 
 

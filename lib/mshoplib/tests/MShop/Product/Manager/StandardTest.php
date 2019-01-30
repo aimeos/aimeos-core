@@ -296,27 +296,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$total = 0;
-		$listManager = $this->object->getSubManager( 'lists' );
+		$item = $this->object->findItem( 'CNE', ['product'] );
 
-		$search = $listManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'product.lists.domain', 'product' ),
-			$search->compare( '==', 'product.lists.type', 'suggestion' ),
-			$search->compare( '==', 'product.lists.datestart', null ),
-			$search->compare( '==', 'product.lists.dateend', null ),
-			$search->compare( '!=', 'product.lists.config', null ),
-			$search->compare( '==', 'product.lists.position', 0 ),
-			$search->compare( '==', 'product.lists.status', 1 ),
-			$search->compare( '==', 'product.lists.editor', $this->editor ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$results = $listManager->searchItems( $search );
-		if( ( $listItem = reset( $results ) ) === false ) {
+		if( ( $listItem = current( $item->getListItems( 'product', 'suggestion' ) ) ) === false ) {
 			throw new \RuntimeException( 'No list item found' );
 		}
 
+		$total = 0;
 		$search = $this->object->createSearch();
 
 		$expr = [];
@@ -334,11 +320,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.editor', $this->editor );
 		$expr[] = $search->compare( '>=', 'product.target', '' );
 
-		$param = array( 'product','suggestion', $listItem->getRefId() );
+		$param = ['product','suggestion', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
 
-		$param = array( 'product','default', $listItem->getRefId() );
+		$param = ['product','suggestion', 0];
 		$expr[] = $search->compare( '==', $search->createFunction( 'product:has', $param ), null );
+
+		$param = ['package-weight', null, '1'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );
+
+		$param = ['package-height', null, '0'];
+		$expr[] = $search->compare( '==', $search->createFunction( 'product:prop', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'product.lists.id', null );
 		$expr[] = $search->compare( '!=', 'product.lists.siteid', null );
@@ -359,12 +351,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.property.languageid', null );
 		$expr[] = $search->compare( '==', 'product.property.value', '1' );
 		$expr[] = $search->compare( '==', 'product.property.editor', $this->editor );
-
-		$param = array( 'package-weight', null, '1' );
-		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );
-
-		$param = array( 'package-height', null, '0' );
-		$expr[] = $search->compare( '==', $search->createFunction( 'product:prop', $param ), null );
 
 
 		$search->setConditions( $search->combine( '&&', $expr ) );

@@ -127,6 +127,18 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'service:has' => array(
+			'code' => 'service:has()',
+			'internalcode' => '(
+				SELECT mserli_has."id" FROM mshop_service_list AS mserli_has
+				WHERE mser."id" = mserli_has."parentid" AND :site
+					AND mserli_has."domain" = $1 AND mserli_has."type" = $2 AND mserli_has."refid" = $3
+			)',
+			'label' => 'Service has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
 	);
 
 	private $date;
@@ -142,7 +154,23 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-service' );
 
+		$locale = $context->getLocale();
 		$this->date = $context->getDateTime();
+
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/service/manager/sitemode', $level );
+
+		$siteIds = [$locale->getSiteId()];
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
+		}
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$this->replaceSiteMarker( $this->searchConfig['service:has'], 'mserli_has."siteid"', $siteIds, ':site' );
 	}
 
 

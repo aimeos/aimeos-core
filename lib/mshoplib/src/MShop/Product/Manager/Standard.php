@@ -126,13 +126,10 @@ class Standard
 		),
 		'product:has' => array(
 			'code' => 'product:has()',
-			'internalcode' => '( SELECT mpro_has."id" FROM mshop_product AS mpro_has
-				WHERE mpro."id" = mpro_has."id" AND (
-					SELECT COUNT(DISTINCT mproli_has."parentid")
-					FROM "mshop_product_list" AS mproli_has
-					WHERE mpro."id" = mproli_has."parentid" AND :site
-						AND mproli_has."domain" = $1 AND mproli_has."type" = $2 AND mproli_has."refid" = $3
-				) = 1
+			'internalcode' => '(
+				SELECT mproli_has."id" FROM mshop_product_list AS mproli_has
+				WHERE mpro."id" = mproli_has."parentid" AND :site
+					AND mproli_has."domain" = $1 AND mproli_has."type" = $2 AND mproli_has."refid" = $3
 			)',
 			'label' => 'Product has list item, parameter(<domain>,<list type>,<reference ID>)',
 			'type' => 'null',
@@ -141,14 +138,11 @@ class Standard
 		),
 		'product:prop' => array(
 			'code' => 'product:prop()',
-			'internalcode' => '( SELECT mpro_has."id" FROM mshop_product AS mpro_has
-				WHERE mpro."id" = mpro_has."id" AND (
-					SELECT COUNT(DISTINCT mpropr_prop."parentid")
-					FROM "mshop_product_property" AS mpropr_prop
-					WHERE mpro."id" = mpropr_prop."parentid" AND :site
-						AND mpropr_prop."type" = $1 AND mpropr_prop."value" = $3
-						AND ( mpropr_prop."langid" = $2 OR mpropr_prop."langid" IS NULL )
-				) = 1
+			'internalcode' => '(
+				SELECT mpropr_prop."id" FROM mshop_product_property AS mpropr_prop
+				WHERE mpro."id" = mpropr_prop."parentid" AND :site
+					AND mpropr_prop."type" = $1 AND mpropr_prop."value" = $3
+					AND ( mpropr_prop."langid" = $2 OR mpropr_prop."langid" IS NULL )
 			)',
 			'label' => 'Product has property item, parameter(<property type>,<language code>,<property value>)',
 			'type' => 'null',

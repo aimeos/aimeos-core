@@ -129,6 +129,18 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'price:has' => array(
+			'code' => 'price:has()',
+			'internalcode' => '(
+				SELECT mprili_has."id" FROM mshop_price_list AS mprili_has
+				WHERE mpri."id" = mprili_has."parentid" AND :site
+					AND mprili_has."domain" = $1 AND mprili_has."type" = $2 AND mprili_has."refid" = $3
+			)',
+			'label' => 'Price has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
 	);
 
 	private $currencyId;
@@ -158,8 +170,24 @@ class Standard
 		 * @since 2016.02
 		 */
 		$this->taxflag = $context->getConfig()->get( 'mshop/price/taxflag', true );
-
 		$this->currencyId = $context->getLocale()->getCurrencyId();
+
+		$locale = $context->getLocale();
+
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/price/manager/sitemode', $level );
+
+		$siteIds = [$locale->getSiteId()];
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
+		}
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$this->replaceSiteMarker( $this->searchConfig['price:has'], 'mprili_has."siteid"', $siteIds, ':site' );
 	}
 
 

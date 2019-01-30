@@ -108,6 +108,18 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'text:has' => array(
+			'code' => 'text:has()',
+			'internalcode' => '(
+				SELECT mtexli_has."id" FROM mshop_text_list AS mtexli_has
+				WHERE mtex."id" = mtexli_has."parentid" AND :site
+					AND mtexli_has."domain" = $1 AND mtexli_has."type" = $2 AND mtexli_has."refid" = $3
+			)',
+			'label' => 'Text has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
 	);
 
 	private $languageId;
@@ -123,7 +135,23 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-text' );
 
-		$this->languageId = $context->getLocale()->getLanguageId();
+		$locale = $context->getLocale();
+		$this->languageId = $locale->getLanguageId();
+
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/text/manager/sitemode', $level );
+
+		$siteIds = [$locale->getSiteId()];
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
+		}
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$this->replaceSiteMarker( $this->searchConfig['text:has'], 'mtexli_has."siteid"', $siteIds, ':site' );
 	}
 
 

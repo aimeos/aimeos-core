@@ -246,7 +246,60 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'customer:has' => array(
+			'code' => 'customer:has()',
+			'internalcode' => '(
+				SELECT mcusli_has."id" FROM mshop_customer_list AS mcusli_has
+				WHERE mcus."id" = mcusli_has."parentid" AND :site
+					AND mcusli_has."domain" = $1 AND mcusli_has."type" = $2 AND mcusli_has."refid" = $3
+			)',
+			'label' => 'Customer has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
+		'customer:prop' => array(
+			'code' => 'customer:prop()',
+			'internalcode' => '(
+				SELECT mcuspr_prop."id" FROM mshop_customer_property AS mcuspr_prop
+				WHERE mcus."id" = mcuspr_prop."parentid" AND :site
+					AND mcuspr_prop."type" = $1 AND mcuspr_prop."value" = $3
+					AND ( mcuspr_prop."langid" = $2 OR mcuspr_prop."langid" IS NULL )
+			)',
+			'label' => 'Customer has property item, parameter(<property type>,<language code>,<property value>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
 	);
+
+
+	/**
+	 * Initializes the object.
+	 *
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 */
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
+	{
+		parent::__construct( $context );
+
+		$locale = $context->getLocale();
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/customer/manager/sitemode', $level );
+
+		$siteIds = [$locale->getSiteId()];
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
+		}
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$this->replaceSiteMarker( $this->searchConfig['customer:has'], 'mcusli_has."siteid"', $siteIds, ':site' );
+		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 'mcuspr_prop."siteid"', $siteIds, ':site' );
+	}
 
 
 	/**

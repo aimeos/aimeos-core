@@ -122,6 +122,31 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'media:has' => array(
+			'code' => 'media:has()',
+			'internalcode' => '(
+				SELECT mmedli_has."id" FROM mshop_media_list AS mmedli_has
+				WHERE mmed."id" = mmedli_has."parentid" AND :site
+					AND mmedli_has."domain" = $1 AND mmedli_has."type" = $2 AND mmedli_has."refid" = $3
+			)',
+			'label' => 'Media has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
+		'media:prop' => array(
+			'code' => 'media:prop()',
+			'internalcode' => '(
+				SELECT mmedpr_prop."id" FROM mshop_media_property AS mmedpr_prop
+				WHERE mmed."id" = mmedpr_prop."parentid" AND :site
+					AND mmedpr_prop."type" = $1 AND mmedpr_prop."value" = $3
+					AND ( mmedpr_prop."langid" = $2 OR mmedpr_prop."langid" IS NULL )
+			)',
+			'label' => 'Media has property item, parameter(<property type>,<language code>,<property value>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
 	);
 
 	private $languageId;
@@ -137,7 +162,24 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-media' );
 
-		$this->languageId = $context->getLocale()->getLanguageId();
+		$locale = $context->getLocale();
+		$this->languageId = $locale->getLanguageId();
+
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/media/manager/sitemode', $level );
+
+		$siteIds = [$locale->getSiteId()];
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
+		}
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$this->replaceSiteMarker( $this->searchConfig['media:has'], 'mmedli_has."siteid"', $siteIds, ':site' );
+		$this->replaceSiteMarker( $this->searchConfig['media:prop'], 'mmedpr_prop."siteid"', $siteIds, ':site' );
 	}
 
 

@@ -130,17 +130,16 @@ class Standard extends Base
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'catalog.contains' => array(
-			'code' => 'catalog.contains()',
-			'internalcode' => '( SELECT COUNT(mcatli_cs."parentid")
-				FROM "mshop_catalog_list" AS mcatli_cs
-				WHERE mcat."id" = mcatli_cs."parentid" AND :site
-					AND mcatli_cs."domain" = $1 AND mcatli_cs."refid" IN ( $3 ) AND mcatli_cs."type" = $2
-					AND ( mcatli_cs."start" IS NULL OR mcatli_cs."start" <= \':date\' )
-					AND ( mcatli_cs."end" IS NULL OR mcatli_cs."end" >= \':date\' ) )',
-			'label' => 'Number of catalog list items, parameter(<domain>,<list type>,<reference IDs>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'catalog:has' => array(
+			'code' => 'catalog:has()',
+			'internalcode' => '(
+				SELECT mcatli_has."id" FROM mshop_catalog_list AS mcatli_has
+				WHERE mcat."id" = mcatli_has."parentid" AND :site
+					AND mcatli_has."domain" = $1 AND mcatli_has."type" = $2 AND mcatli_has."refid" = $3
+			)',
+			'label' => 'Catalog has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'type' => 'null',
+			'internaltype' => 'null',
 			'public' => false,
 		),
 	);
@@ -156,11 +155,22 @@ class Standard extends Base
 		parent::__construct( $context, $this->searchConfig );
 		$this->setResourceName( 'db-catalog' );
 
-		$date = date( 'Y-m-d H:i:00' );
-		$sites = $context->getLocale()->getSitePath();
+		$locale = $context->getLocale();
 
-		$this->replaceSiteMarker( $this->searchConfig['catalog.contains'], 'mcatli_cs."siteid"', $sites, ':site' );
-		$this->searchConfig['catalog.contains'] = str_replace( ':date', $date, $this->searchConfig['catalog.contains'] );
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/catalog/manager/sitemode', $level );
+
+		$siteIds = [$locale->getSiteId()];
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
+		}
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$this->replaceSiteMarker( $this->searchConfig['catalog:has'], 'mcatli_has."siteid"', $siteIds, ':site' );
 	}
 
 

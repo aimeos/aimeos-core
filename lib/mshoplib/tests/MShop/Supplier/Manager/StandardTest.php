@@ -163,6 +163,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItem()
 	{
+		$item = $this->object->findItem( 'unitCode001', ['text'] );
+
+		if( ( $listItem = current( $item->getListItems( 'text', 'default' ) ) ) === false ) {
+			throw new \RuntimeException( 'No list item found' );
+		}
+
 		$search = $this->object->createSearch();
 
 		$expr = [];
@@ -174,6 +180,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'supplier.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'supplier.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'supplier.editor', $this->editor );
+
+		$param = ['text','default', $listItem->getRefId()];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'supplier:has', $param ), null );
+
+		$param = ['text','default', 0];
+		$expr[] = $search->compare( '==', $search->createFunction( 'supplier:has', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'supplier.address.id', null );
 		$expr[] = $search->compare( '!=', 'supplier.address.siteid', null );
