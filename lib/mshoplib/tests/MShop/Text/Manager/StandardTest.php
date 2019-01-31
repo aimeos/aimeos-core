@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItems()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '~=', 'text.content', 'Lange Beschreibung' ) );
+		$search->setConditions( $search->compare( '==', 'text.label', 'misc_long_desc' ) );
 		$item = current( $this->object->searchItems( $search, ['media'] ) );
 
 		if( $item && ( $listItem = current( $item->getListItems( 'media', 'align-top' ) ) ) === false ) {
