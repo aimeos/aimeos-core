@@ -182,7 +182,7 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function checkMySqlCompatibility( \Aimeos\MW\Setup\DBSchema\Iface $schema )
 	{
-		if (!$schema instanceof \Aimeos\MW\Setup\DBSchema\Mysql)
+		if ( !$schema instanceof \Aimeos\MW\Setup\DBSchema\Mysql )
 		{
 			return true;
 		}
@@ -195,6 +195,7 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 		$result = $conn->create( 'SELECT version()' )->execute();
 		// Something like '10.1.29-MariaDB' or '5.6.33-0ubuntu0...'
 		$version = $result->fetch();
+		$version = $version['version()'];
 		$result->finish();
 		$this->release($conn);
 
