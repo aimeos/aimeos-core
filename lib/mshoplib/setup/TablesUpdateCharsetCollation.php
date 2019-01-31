@@ -191,13 +191,7 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 		// A MariaDB gets identified as a MySql 5.5.5 by doctrine.
 		// We can not rely on it to tell us the actual version and ask
 		// the server directly.
-		$conn = $this->acquire();
-		$result = $conn->create( 'SELECT version()' )->execute();
-		// Something like '10.1.29-MariaDB' or '5.6.33-0ubuntu0...'
-		$version = $result->fetch();
-		$version = $version['version()'];
-		$result->finish();
-		$this->release($conn);
+		$version = $this->getValue( 'SELECT version() AS "version"', 'version', 'db-customer' );
 
 		if( ( strpos( $version, 'MariaDB' ) !== false && version_compare( $version, '10.2', '>=' ) ) ||
 			version_compare( $version, '5.7', '>=' )
