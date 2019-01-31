@@ -203,7 +203,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = ['customer','default', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
 
-		$param = ['customer','default', 0];
+		$param = ['customer','default', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'price:has', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'price.lists.id', null );

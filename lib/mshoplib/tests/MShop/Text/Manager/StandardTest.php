@@ -100,7 +100,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = ['media','align-top', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'text:has', $param ), null );
 
-		$param = ['media','align-top', 0];
+		$param = ['media','align-top', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'text:has', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'text.lists.id', null );

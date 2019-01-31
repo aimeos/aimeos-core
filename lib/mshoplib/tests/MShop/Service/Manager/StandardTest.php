@@ -193,7 +193,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = ['text','unittype1', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'service:has', $param ), null );
 
-		$param = ['text','unittype1', 0];
+		$param = ['text','unittype1', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'service:has', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'service.lists.id', null );

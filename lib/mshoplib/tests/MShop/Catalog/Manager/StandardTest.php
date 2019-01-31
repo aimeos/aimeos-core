@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = ['product', 'promotion', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'catalog:has', $param ), null );
 
-		$param = ['product', 'promotion', 0];
+		$param = ['product', 'promotion', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'catalog:has', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'catalog.lists.id', null );

@@ -107,7 +107,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = ['attribute','option', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'media:has', $param ), null );
 
-		$param = ['attribute','option', 0];
+		$param = ['attribute','option', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'media:has', $param ), null );
 
 		$param = ['copyright', 'de', 'ich, 2019'];

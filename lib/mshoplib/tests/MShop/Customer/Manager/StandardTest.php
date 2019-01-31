@@ -276,7 +276,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = ['text','default', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:has', $param ), null );
 
-		$param = ['text','default', 0];
+		$param = ['text','default', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'customer:has', $param ), null );
 
 		$param = ['newsletter', null, '1'];

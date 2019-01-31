@@ -323,7 +323,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = ['product','suggestion', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
 
-		$param = ['product','suggestion', 0];
+		$param = ['product','suggestion', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'product:has', $param ), null );
 
 		$param = ['package-weight', null, '1'];
