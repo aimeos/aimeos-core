@@ -134,7 +134,7 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 	{
 		$schema = $this->getSchema( $rname );
 
-		if( $schema instanceof \Aimeos\MW\Setup\DBSchema\Mysql )
+		if( $this->checkMySqlCompatibility( $schema ) )
 		{
 			foreach( $tables as $table => $column )
 			{
@@ -167,6 +167,34 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 		if( $schema->tableExists( $table ) && $schema->columnExists( $table, $column )
 			&& ( $item = $schema->getColumnDetails( $table, $column ) )
 			&& ( $item->getCharset() !== 'utf8mb4' || $item->getCollationType() !== 'utf8mb4_bin' )
+		) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Checking the MySql compatibility.
+	 *
+	 * @param \Aimeos\MW\Setup\DBSchema\Iface $schema
+	 * @return bool
+	 */
+	protected function checkMySqlCompatibility( \Aimeos\MW\Setup\DBSchema\Iface $schema )
+	{
+		if ( !$schema instanceof \Aimeos\MW\Setup\DBSchema\Mysql )
+		{
+			return true;
+		}
+
+		// Ask the database for it's type and version.
+		// A MariaDB gets identified as a MySql 5.5.5 by doctrine.
+		// We can not rely on it to tell us the actual version and ask
+		// the server directly.
+		$version = $this->getValue( 'SELECT version() AS "version"', 'version', 'db-customer' );
+
+		if( ( strpos( $version, 'MariaDB' ) !== false && version_compare( $version, '10.2', '>=' ) ) ||
+			version_compare( $version, '5.7', '>=' )
 		) {
 			return true;
 		}
