@@ -174,7 +174,7 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 		return false;
 	}
 
-    /**
+	/**
 	 * Checking the MySql compatibility.
 	 *
 	 * @param \Aimeos\MW\Setup\DBSchema\Iface $schema
