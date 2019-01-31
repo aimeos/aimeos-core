@@ -130,11 +130,17 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function checkTables( $tables, $rname )
+	/**
+	 * Migrates all columns of the given tables
+	 *
+	 * @param array $tables Associative list of table names as keys and columns as values
+	 * @param string $rname Resource name like "db-customer"
+	 */
+	protected function checkTables( array $tables, $rname )
 	{
 		$schema = $this->getSchema( $rname );
 
-		if( $this->checkMySqlCompatibility( $schema ) )
+		if( $this->checkMySqlCompatibility( $schema, $rname ) )
 		{
 			foreach( $tables as $table => $column )
 			{
@@ -162,6 +168,14 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
+	/**
+	 * Check if columns need to be migrated
+	 *
+	 * @param \Aimeos\MW\Setup\DBSchema\Iface $schema Schema representation object
+	 * @param string $table Table name
+	 * @param string $column Colum name
+	 * @return bool True if column needs to be migrated, false if not
+	 */
 	protected function checkColumns( \Aimeos\MW\Setup\DBSchema\Iface $schema, $table, $column )
 	{
 		if( $schema->tableExists( $table ) && $schema->columnExists( $table, $column )
@@ -174,27 +188,25 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 		return false;
 	}
 
+
 	/**
-	 * Checking the MySql compatibility.
+	 * Checking the MySql compatibility
 	 *
-	 * @param \Aimeos\MW\Setup\DBSchema\Iface $schema
-	 * @return bool
+	 * @param \Aimeos\MW\Setup\DBSchema\Iface $schema Schema representation object
+	 * @param string $rname Resource name like "db-customer"
+	 * @return bool True if columns can be migrated, false if not
 	 */
-	protected function checkMySqlCompatibility( \Aimeos\MW\Setup\DBSchema\Iface $schema )
+	protected function checkMySqlCompatibility( \Aimeos\MW\Setup\DBSchema\Iface $schema, $rname )
 	{
-		if ( !$schema instanceof \Aimeos\MW\Setup\DBSchema\Mysql )
-		{
+		if ( !$schema instanceof \Aimeos\MW\Setup\DBSchema\Mysql ) {
 			return true;
 		}
 
-		// Ask the database for it's type and version.
-		// A MariaDB gets identified as a MySql 5.5.5 by doctrine.
-		// We can not rely on it to tell us the actual version and ask
-		// the server directly.
-		$version = $this->getValue( 'SELECT version() AS "version"', 'version', 'db-customer' );
+		// MariaDB gets identified as a MySql 5.5.5 by doctrine so ask the server directly
+		$version = $this->getValue( 'SELECT version() AS "version"', 'version', $rname );
 
-		if( ( strpos( $version, 'MariaDB' ) !== false && version_compare( $version, '10.2', '>=' ) ) ||
-			version_compare( $version, '5.7', '>=' )
+		if( ( strpos( $version, 'MariaDB' ) !== false && version_compare( $version, '10.2.7', '>=' ) )
+			|| version_compare( $version, '5.7.7', '>=' )
 		) {
 			return true;
 		}
