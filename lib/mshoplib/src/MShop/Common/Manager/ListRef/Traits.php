@@ -177,7 +177,7 @@ trait Traits
 	{
 		$context = $this->getContext();
 		$rmListIds = $rmIds = $refManager = [];
-		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
+		$listManager = $this->getObject()->getSubManager( 'lists' );
 
 
 		foreach( $item->getListItemsDeleted() as $listItem )
