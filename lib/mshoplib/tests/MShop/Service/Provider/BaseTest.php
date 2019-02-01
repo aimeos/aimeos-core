@@ -112,12 +112,12 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetCustomerData()
 	{
-		$stub = $this->getMockBuilder( \Aimeos\MShop\Customer\Manager\Lists\Standard::class )
+		$stub = $this->getMockBuilder( \Aimeos\MShop\Customer\Manager\Standard::class )
 			->setConstructorArgs( [$this->context] )
 			->setMethods( ['saveItem'] )
 			->getMock();
 
-		\Aimeos\MShop::inject( 'customer/lists', $stub );
+		\Aimeos\MShop::inject( 'customer', $stub );
 
 		$stub->expects( $this->once() )->method( 'saveItem' );
 

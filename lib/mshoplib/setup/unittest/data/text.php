@@ -50,9 +50,6 @@ return array (
 
 	'text' => array (
 
-		'text/customer/information' => array( 'langid' => null, 'type' => 'information', 'domain' => 'customer', 'label' => 'customer/information', 'content' => 'Customer information', 'status' => 1),
-		'text/customer/notify' => array( 'langid' => null, 'type' => 'notify', 'domain' => 'customer', 'label' => 'customer/notify', 'content' => 'Customer notify', 'status' => 1),
-		'text/customer/newsletter' => array( 'langid' => null, 'type' => 'newsletter', 'domain' => 'customer', 'label' => 'customer/newsletter', 'content' => 'Customer newsletter', 'status' => 1),
 //supplier
 		'text/supplier/description' => array( 'langid' => null, 'type' => 'description', 'domain' => 'supplier', 'label' => 'supplier/description', 'content' => 'Supplier description', 'status' => 1),
 //ATTR

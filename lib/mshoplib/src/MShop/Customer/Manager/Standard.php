@@ -436,6 +436,8 @@ class Standard
 	{
 		self::checkClass( \Aimeos\MShop\Customer\Item\Iface::class, $item );
 
+		$item = $this->addGroups( $item );
+
 		if( !$item->isModified() )
 		{
 			$item = $this->savePropertyItems( $item, 'customer', $fetch );
@@ -622,8 +624,6 @@ class Standard
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
-
-		$this->addGroups( $item );
 
 		$item = $this->savePropertyItems( $item, 'customer', $fetch );
 		$item = $this->saveAddressItems( $item, 'customer', $fetch );

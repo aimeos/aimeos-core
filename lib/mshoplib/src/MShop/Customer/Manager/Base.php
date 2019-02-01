@@ -108,52 +108,29 @@ abstract class Base
 	 * Adds the customer to the groups listed in the customer item
 	 *
 	 * @param \Aimeos\MShop\Customer\Item\Iface $item Customer item
+	 * @return \Aimeos\MShop\Customer\Item\Iface $item Modified customer item
 	 */
 	protected function addGroups( \Aimeos\MShop\Customer\Item\Iface $item )
 	{
-		$listMap = [];
+		$pos = 0;
+		$groupIds = [];
+
 		$manager = $this->getObject()->getSubManager( 'lists' );
+		$listItem = $manager->createItem()->setType( 'default' );
+		$listItems = $item->getListItems( 'customer/group', 'default', null, false );
 
-		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
-		$expr = array(
-			$search->compare( '==', 'customer.lists.parentid', $item->getId() ),
-			$search->compare( '==', 'customer.lists.domain', 'customer/group' ),
-			$search->compare( '==', 'customer.lists.type', 'default' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		foreach( $manager->searchItems( $search ) as $listid => $listItem ) {
-			$listMap[ $listItem->getRefId() ] = $listid;
-		}
-
-
-		if( $item->getGroups() !== [] )
+		foreach( $item->getGroups() as $refId )
 		{
-			$listItem = $manager->createItem();
-			$listItem->setParentId( $item->getId() );
-			$listItem->setDomain( 'customer/group' );
-			$listItem->setType( 'default' );
-			$listItem->setStatus( 1 );
-
-			$pos = count( $listMap ) ;
-
-			foreach( $item->getGroups() as $gid )
-			{
-				if( isset( $listMap[$gid] ) )
-				{
-					unset( $listMap[$gid] );
-					continue;
-				}
-
-				$listItem->setId( null );
-				$listItem->setRefId( $gid );
-				$listItem->setPosition( $pos++ );
-
-				$manager->saveItem( $listItem, false );
+			if( ( $litem = $item->getListItem( 'customer/group', 'default', $refId, false ) ) !== null ) {
+				unset( $listItems[$litem->getId()] );
+			} else {
+				$litem = clone $listItem;
 			}
+
+			$item->addListItem( 'customer/group', $litem->setRefId( $refId )->setPosition( $pos++ ) );
 		}
 
-		$manager->deleteItems( $listMap );
+		return $item->deleteListItems( $listItems );
 	}
 
 

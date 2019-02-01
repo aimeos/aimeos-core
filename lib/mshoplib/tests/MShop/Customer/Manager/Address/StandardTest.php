@@ -90,11 +90,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 	}
 
+
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Address\Iface::class, $item );
 	}
+
 
 	public function testGetItem()
 	{
