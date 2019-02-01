@@ -136,10 +136,19 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		foreach( $domains as $domain )
 		{
-			$manager = \Aimeos\MShop::create( $this->additional, $domain );
+			if( isset( $testdata[$domain] ) )
+			{
+				$manager = $this->getManager();
+				$subnames = explode( '/', $domain );
+				array_shift( $subnames );
 
-			foreach( $testdata[$domain] as $entry ) {
-				$manager->saveItem( $manager->createItem()->fromArray( $entry ), false );
+				foreach( $subnames as $subname ) {
+					$manager = $manager->getSubManager( $subname );
+				}
+
+				foreach( $testdata[$domain] as $entry ) {
+					$manager->saveItem( $manager->createItem()->fromArray( $entry ), false );
+				}
 			}
 		}
 	}
