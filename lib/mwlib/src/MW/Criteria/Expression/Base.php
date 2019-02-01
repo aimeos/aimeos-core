@@ -192,7 +192,7 @@ abstract class Base
 			return str_replace( $find, $params, $source );
 		}
 
-		if( isset( $translations[$name] ) ) {
+		if( array_key_exists( $name, $translations ) ) {
 			return $translations[$name];
 		}
 

@@ -89,17 +89,22 @@ abstract class Base
 		$this->setPlugins( $plugins );
 
 		$name = $this->name;
-		$transname = $this->translateName( $name, $translations, $funcs );
+
+		if( ( $transname = $this->translateName( $name, $translations, $funcs ) ) === null ) {
+			return;
+		}
 
 		if( $transname === '' ) {
 			$transname = $name;
 		}
 
+		$transvalue = $this->translateValue( $name, $this->value );
+
 		if( !isset( $types[$name] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
-		if( $this->value === null && ( $this->operator === '==' || $this->operator === '!=' ) ) {
+		if( $transvalue === null && ( $this->operator === '==' || $this->operator === '!=' ) ) {
 			return $this->createNullTerm( $transname );
 		}
 
@@ -107,7 +112,7 @@ abstract class Base
 			return $transname;
 		}
 
-		if( is_array( $this->value ) ) {
+		if( is_array( $transvalue ) ) {
 			return $this->createListTerm( $transname, $types[$name] );
 		}
 

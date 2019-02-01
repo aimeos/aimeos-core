@@ -94,15 +94,17 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 
 		$string = $item->toSource( $types, $translations, $plugins, $funcs );
 
-		if( $this->operator == '!' && $string !== '' ) {
+		if( $this->operator == '!' && $string !== '' && $string !== null ) {
 			return ' ' . self::$operators[$this->operator] . ' ' . $string;
 		}
 
 		while( ( $item = next( $this->expressions ) ) !== false )
 		{
-			if( ( $itemstr = $item->toSource( $types, $translations, $plugins, $funcs ) ) !== '' )
+			$itemstr = $item->toSource( $types, $translations, $plugins, $funcs );
+
+			if( $itemstr !== '' && $itemstr !== null )
 			{
-				if( $string !== '' ) {
+				if( $string !== '' && $string !== null ) {
 					$string .= ' ' . self::$operators[$this->operator] . ' ' . $itemstr;
 				} else {
 					$string = $itemstr;
@@ -110,7 +112,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 			}
 		}
 
-		return '( ' . $string . ' )';
+		return $string ? '( ' . $string . ' )' : '';
 	}
 
 
