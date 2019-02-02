@@ -14,7 +14,6 @@ namespace Aimeos\MW\Setup\Task;
  */
 class ProductAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 {
-
 	/**
 	 * Returns the list of task names which this task depends on
 	 *
@@ -47,9 +46,26 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 		$this->msg( 'Adding product test data', 0 );
 
 		$this->additional->setEditor( 'core:unittest' );
-		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'product.php' );
+		$this->process( $this->getData() );
 
 		$this->status( 'done' );
+	}
+
+
+	/**
+	 * Returns the test data array
+	 *
+	 * @return array Multi-dimensional array of test data
+	 */
+	protected function getData()
+	{
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'product.php';
+
+		if( ( $testdata = include( $path ) ) == false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
+		}
+
+		return $testdata;
 	}
 
 
@@ -65,19 +81,15 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 
 
 	/**
-	 * Adds the product data for the given file
+	 * Adds the product data from the given array
 	 *
-	 * @param string $path Path to data file
+	 * @param array Multi-dimensional array of test data
 	 */
-	protected function process( $path )
+	protected function process( array $testdata )
 	{
-		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
-		}
-
 		$manager = $this->getManager();
-		$listManager = $this->getManager()->getSubManager( 'lists' );
-		$propManager = $this->getManager()->getSubManager( 'property' );
+		$listManager = $manager->getSubManager( 'lists' );
+		$propManager = $manager->getSubManager( 'property' );
 
 		$manager->begin();
 
