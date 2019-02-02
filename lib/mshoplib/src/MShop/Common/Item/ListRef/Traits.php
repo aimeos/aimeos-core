@@ -75,7 +75,7 @@ trait Traits
 			$this->listRefItems[$domain][$id] = $refItem;
 		}
 
-		$id = $listItem->getId() ?: '_' . $listItem->getType() . $listItem->getRefId();
+		$id = $listItem->getId() ?: '_' . $domain . '_' . $listItem->getType() . '_' . $listItem->getRefId();
 		$this->listItems[$domain][$id] = $listItem->setDomain( $domain )->setRefItem( $refItem );
 
 		return $this;
