@@ -48,18 +48,17 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds the property test data
 	 *
+	 * @param \Aimeos\MShop\Common\Manager\Iface $addrManager Address manager object
 	 * @param \Aimeos\MShop\Common\Item\AddressRef\Iface $item Item object
 	 * @param array $data Associative list of key/list pairs
 	 * @return \Aimeos\MShop\Common\Item\AddressRef\Iface Modified item object
 	 */
-	protected function addAddressData( \Aimeos\MShop\Common\Item\AddressRef\Iface $item, array $data )
+	protected function addAddressData( \Aimeos\MShop\Common\Manager\Iface $addrManager, \Aimeos\MShop\Common\Item\AddressRef\Iface $item, array $data )
 	{
 		if( isset( $data['address'] ) )
 		{
-			$manager = $this->getManager()->getSubManager( 'address' );
-
 			foreach( $data['address'] as $entry ) {
-				$item->addAddressItem( $manager->createItem( $entry )->fromArray( $entry ) );
+				$item->addAddressItem( $addrManager->createItem( $entry )->fromArray( $entry ) );
 			}
 		}
 
@@ -70,20 +69,19 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds the list test data
 	 *
+	 * @param \Aimeos\MShop\Common\Manager\Iface $listManager List manager object
 	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item object
 	 * @param array $data List of key/list pairs lists
 	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Modified item object
 	 */
-	protected function addListData( \Aimeos\MShop\Common\Item\Iface $item, array $data )
+	protected function addListData( \Aimeos\MShop\Common\Manager\Iface $listManager, \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $data )
 	{
 		if( isset( $data['lists'] ) )
 		{
-			$listManager = $this->getManager()->getSubManager( 'lists' );
-
 			foreach( $data['lists'] as $domain => $entries )
 			{
-				$manager = \Aimeos\MShop::create( $this->additional, $domain );
 				$refItems = $this->getRefItems( $domain );
+				$manager = \Aimeos\MShop::create( $this->additional, $domain );
 
 				foreach( $entries as $entry )
 				{
@@ -93,6 +91,14 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 						$refItem = $refItems[$entry['ref']];
 					} else {
 						$refItem = $manager->createItem()->fromArray( $entry );
+					}
+
+					if( $refItem instanceof \Aimeos\MShop\Common\Item\ListRef\Iface ) {
+						$refItem = $this->addListData( $manager->getSubManager( 'lists' ), $refItem, $entry );
+					}
+
+					if( $refItem instanceof \Aimeos\MShop\Common\Item\PropertyRef\Iface ) {
+						$refItem = $this->addPropertyData( $manager->getSubManager( 'property' ), $refItem, $entry );
 					}
 
 					$item->addListItem( $domain, $listItem, $refItem );
@@ -107,50 +113,21 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds the property test data
 	 *
+	 * @param \Aimeos\MShop\Common\Manager\Iface $propManager Property manager object
 	 * @param \Aimeos\MShop\Common\Item\PropertyRef\Iface $item Item object
 	 * @param array $data List of key/list pairs lists
 	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Modified item object
 	 */
-	protected function addPropertyData( \Aimeos\MShop\Common\Item\PropertyRef\Iface $item, array $data )
+	protected function addPropertyData( \Aimeos\MShop\Common\Manager\Iface $propManager, \Aimeos\MShop\Common\Item\PropertyRef\Iface $item, array $data )
 	{
 		if( isset( $data['property'] ) )
 		{
-			$manager = $this->getManager()->getSubManager( 'property' );
-
 			foreach( $data['property'] as $entry ) {
-				$item->addPropertyItem( $manager->createItem()->fromArray( $entry ) );
+				$item->addPropertyItem( $propManager->createItem()->fromArray( $entry ) );
 			}
 		}
 
 		return $item;
-	}
-
-
-	/**
-	 * Creates the type test data
-	 *
-	 * @param array $data List of key/list pairs lists
-	 * @param array $domains List of domain names
-	 */
-	protected function addTypeItems( array $testdata, array $domains )
-	{
-		foreach( $domains as $domain )
-		{
-			if( isset( $testdata[$domain] ) )
-			{
-				$manager = $this->getManager();
-				$subnames = explode( '/', $domain );
-				array_shift( $subnames );
-
-				foreach( $subnames as $subname ) {
-					$manager = $manager->getSubManager( $subname );
-				}
-
-				foreach( $testdata[$domain] as $entry ) {
-					$manager->saveItem( $manager->createItem()->fromArray( $entry ), false );
-				}
-			}
-		}
 	}
 
 
@@ -183,5 +160,33 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		return $list;
+	}
+
+
+	/**
+	 * Creates the type test data
+	 *
+	 * @param array $data List of key/list pairs lists
+	 * @param array $domains List of domain names
+	 */
+	protected function storeTypes( array $testdata, array $domains )
+	{
+		foreach( $domains as $domain )
+		{
+			if( isset( $testdata[$domain] ) )
+			{
+				$manager = $this->getManager();
+				$subnames = explode( '/', $domain );
+				array_shift( $subnames );
+
+				foreach( $subnames as $subname ) {
+					$manager = $manager->getSubManager( $subname );
+				}
+
+				foreach( $testdata[$domain] as $entry ) {
+					$manager->saveItem( $manager->createItem()->fromArray( $entry ), false );
+				}
+			}
+		}
 	}
 }

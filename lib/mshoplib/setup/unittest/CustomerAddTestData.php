@@ -50,7 +50,6 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
 
 		$this->status( 'done' );
-
 	}
 
 
@@ -67,23 +66,29 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 		}
 
 		$manager = $this->getManager();
+		$listManager = $this->getManager()->getSubManager( 'lists' );
+		$groupManager = $this->getManager()->getSubManager( 'group' );
+		$addrManager = $this->getManager()->getSubManager( 'address' );
+		$propManager = $this->getManager()->getSubManager( 'property' );
+
 		$manager->begin();
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'customer.code', 'UTC00' ) );
 		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 
-		$this->addTypeItems( $testdata, ['customer/lists/type', 'customer/property/type'] );
-		$this->addGroupItems( $testdata );
+		$this->storeTypes( $testdata, ['customer/lists/type', 'customer/property/type'] );
+		$this->addGroupItems( $groupManager, $testdata );
 
 		$items = [];
 		foreach( $testdata['customer'] as $entry )
 		{
 			$item = $manager->createItem()->fromArray( $entry );
-			$item = $this->addAddressData( $item, $entry );
-			$item = $this->addPropertyData( $item, $entry );
-			$item = $this->addListData( $item, $entry );
-			$items[] = $this->addGroupData( $item, $entry );
+			$item = $this->addGroupData( $groupManager, $item, $entry );
+			$item = $this->addPropertyData( $propManager, $item, $entry );
+			$item = $this->addAddressData( $addrManager, $item, $entry );
+			$items[] = $this->addListData( $listManager, $item, $entry );
+
 		}
 
 		$manager->saveItems( $items );
@@ -94,22 +99,26 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	/**
 	 * Adds the group test data
 	 *
-	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item object
+	 * @param \Aimeos\MShop\Common\Manager\Iface $groupManager Customer group manager
+	 * @param \Aimeos\MShop\Customer\Item\Iface $item Item object
 	 * @param array $data List of key/list pairs lists
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Modified item object
+	 * @return \Aimeos\MShop\Customer\Item\Iface Modified item object
 	 */
-	protected function addGroupData( \Aimeos\MShop\Common\Item\PropertyRef\Iface $item, array $data )
+	protected function addGroupData( \Aimeos\MShop\Common\Manager\Iface $groupManager, \Aimeos\MShop\Customer\Item\Iface $item, array $data )
 	{
 		if( isset( $data['group'] ) )
 		{
-			$manager = $this->getManager()->getSubManager( 'group' );
-			$grpItems = $this->getGroupItems();
-			$grpIds = [];
+			$grpIds = $list = [];
+			$search = $groupManager->createSearch()->setSlice( 0, 10000 );
+
+			foreach( $groupManager->searchItems( $search ) as $id => $groupItem ) {
+				$list[$groupItem->getCode()] = $id;
+			}
 
 			foreach( $data['group'] as $code )
 			{
-				if( isset( $grpItems[$code] ) ) {
-					$grpIds[] = $grpItems[$code]->getId();
+				if( isset( $list[$code] ) ) {
+					$grpIds[] = $list[$code];
 				}
 			}
 
@@ -123,43 +132,21 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	/**
 	 * Adds the customer group items
 	 *
+	 * @param \Aimeos\MShop\Common\Manager\Iface $groupManager Customer group manager
 	 * @param array $data Associative list of key/list pairs
-	 * @param \Aimeos\MShop\Common\Manager\Iface $customerGroupManager Customer group manager
 	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
-	protected function addGroupItems( array $data )
+	protected function addGroupItems( \Aimeos\MShop\Common\Manager\Iface $groupManager, array $data )
 	{
 		if( isset( $data['customer/group'] ) )
 		{
-			$manager = $this->getManager()->getSubManager( 'group' );
-
 			foreach( $data['customer/group'] as $entry )
 			{
 				try {
-					$manager->saveItem( $manager->createItem()->fromArray( $entry ), false );
-				} catch( \Exception $e ) {} // ignore duplicates
+					$groupManager->saveItem( $groupManager->createItem()->fromArray( $entry ), false );
+				} catch( \Exception $e ) { echo $e->getMessage(); } // ignore duplicates
 			}
 		}
-	}
-
-
-	/**
-	 * Returns the available group items
-	 *
-	 * @return array Associative list of code/item pairs
-	 */
-	protected function getGroupItems()
-	{
-		$list = [];
-
-		$manager = $this->getManager()->getSubManager( 'group' );
-		$search = $manager->createSearch()->setSlice( 0, 10000 );
-
-		foreach( $manager->searchItems( $search ) as $item ) {
-			$list[$item->getCode()] = $item;
-		}
-
-		return $list;
 	}
 
 
