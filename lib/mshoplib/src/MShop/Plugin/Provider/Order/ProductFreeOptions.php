@@ -181,7 +181,7 @@ class ProductFreeOptions
 		}
 
 		if( array_intersect( $attrTypes, array_keys( $prodConf ) ) === [] ) {
-			return;
+			return $product;
 		}
 
 
