@@ -162,7 +162,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 4, count( $results ) );
-		$this->assertEquals( 13, $total );
+		$this->assertEquals( 17, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

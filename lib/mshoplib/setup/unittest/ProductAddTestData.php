@@ -12,7 +12,7 @@ namespace Aimeos\MW\Setup\Task;
 /**
  * Adds product test data
  */
-class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
+class ProductAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 {
 
 	/**
@@ -22,7 +22,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return ['MShopSetLocale', 'AttributeAddTestData', 'MediaAddTestData', 'PriceAddTestData', 'TagAddTestData', 'TextAddTestData'];
+		return ['MShopSetLocale', 'AttributeAddTestData', 'TagAddTestData'];
 	}
 
 
@@ -45,168 +45,53 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
 		$this->msg( 'Adding product test data', 0 );
+
 		$this->additional->setEditor( 'core:unittest' );
-
-		$config = $this->additional->getConfig();
-		$name = $config->get( 'mshop/product/manager/name' );
-
-		$config->set( 'mshop/product/manager/name', 'Standard' );
-
-		$this->createData( $this->getData() );
-
-		$config->set( 'mshop/product/manager/name', $name );
+		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'product.php' );
 
 		$this->status( 'done' );
 	}
 
 
 	/**
-	 * Creates the test data
+	 * Returns the manager for the current setup task
 	 *
-	 * @param array $testdata Associative list of key/list pairs
-	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function createData( array $testdata )
+	protected function getManager()
 	{
-		$manager = \Aimeos\MShop::create( $this->additional, 'product' );
-		$manager->begin();
-
-		$domains = ['attribute', 'media', 'price', 'product', 'tag', 'text'];
-
-		$this->addTypeItems( $testdata, ['product/type', 'product/lists/type', 'product/property/type'] );
-		$refItems = $this->getRefItems( ['attribute', 'media', 'price', 'tag', 'text'] );
-		$items = [];
-
-		foreach( $testdata['product'] as $key => $entry )
-		{
-			$item = $manager->createItem()->fromArray( $entry );
-			$refItems['product/' . $item->getCode()] = $item;
-
-			$item = $this->addPropertyData( $item, $entry );
-			$items[] = $this->addListData( $item, $entry, $refItems, $domains );
-		}
-
-		$manager->saveItems( $items );
-
-		$manager->commit();
+		return \Aimeos\MShop\Product\Manager\Factory::create( $this->additional, 'Standard' );
 	}
 
 
 	/**
-	 * Creates the type test data
+	 * Adds the product data for the given file
 	 *
-	 * @param array $testdata Associative list of key/list pairs
-	 * @param array $domains List of domain names
+	 * @param string $path Path to data file
 	 */
-	protected function addTypeItems( array $testdata, array $domains )
+	protected function process( $path )
 	{
-		foreach( $domains as $domain )
-		{
-			$manager = \Aimeos\MShop::create( $this->additional, $domain );
-
-			foreach( $testdata[$domain] as $key => $entry )
-			{
-				$item = $manager->createItem()->fromArray( $entry );
-				$manager->saveItem( $item );
-			}
-		}
-	}
-
-
-	/**
-	 * Adds the list test data
-	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
-	 * @param array $entry Associative list of key/list pairs
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
-	 * @param array $domains List of domain names
-	 * @return \Aimeos\MShop\Product\Item\Iface Modified product item
-	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
-	 */
-	protected function addListData( \Aimeos\MShop\Product\Item\Iface $item, array $entry, array $refItems, array $domains )
-	{
-		foreach( $domains as $domain )
-		{
-			if( isset( $entry[$domain] ) )
-			{
-				$manager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
-
-				foreach( (array) $entry[$domain] as $data )
-				{
-					$refItem = ( isset( $refItems[$data['product.lists.refid']] ) ? $refItems[$data['product.lists.refid']] : null );
-					$listItem = $manager->createItem()->fromArray( $data );
-
-					$item->addListItem( $domain, $listItem, $refItem );
-				}
-			}
-		}
-
-		return $item;
-	}
-
-
-	/**
-	 * Adds the property test data
-	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
-	 * @param array $entry Associative list of key/list pairs
-	 * @return \Aimeos\MShop\Product\Item\Iface Modified product item
-	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
-	 */
-	protected function addPropertyData( \Aimeos\MShop\Product\Item\Iface $item, array $entry )
-	{
-		if( isset( $entry['product/property'] ) )
-		{
-			$manager = \Aimeos\MShop::create( $this->additional, 'product/property' );
-
-			foreach( (array) $entry['product/property'] as $data )
-			{
-				$propItem = $manager->createItem( $data )->fromArray( $data );
-				$item->addPropertyItem( $propItem );
-			}
-		}
-
-		return $item;
-	}
-
-
-	/**
-	 * Returns the test data
-	 *
-	 * @return array Multi-dimensional associative array
-	 */
-	protected function getData()
-	{
-		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'product.php';
-
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
 		}
 
-		return $testdata;
-	}
+		$manager = $this->getManager();
+		$listManager = $this->getManager()->getSubManager( 'lists' );
+		$propManager = $this->getManager()->getSubManager( 'property' );
 
+		$manager->begin();
 
-	/**
-	 * Returns the items from the given domains
-	 *
-	 * @param array $domains List of domain names
-	 * @return array Associative list of key/ID pairs
-	 */
-	protected function getRefItems( array $domains )
-	{
-		$list = [];
+		$this->storeTypes( $testdata, ['product/type', 'product/lists/type', 'product/property/type'] );
 
-		foreach( $domains as $domain )
+		foreach( $testdata['product'] as $entry )
 		{
-			$manager = \Aimeos\MShop::create( $this->additional, $domain );
-			$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+			$item = $manager->createItem()->fromArray( $entry );
+			$item = $this->addListData( $listManager, $item, $entry );
+			$item = $this->addPropertyData( $propManager, $item, $entry );
 
-			foreach( $manager->searchItems( $search ) as $item ) {
-				$list[$domain . '/' . $item->getLabel()] = $item;
-			}
+			$manager->saveItem( $item );
 		}
 
-		return $list;
+		$manager->commit();
 	}
 }

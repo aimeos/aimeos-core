@@ -295,7 +295,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );
-		$this->assertEquals( 2, count( $results ) );
+		$this->assertEquals( 1, count( $results ) );
 	}
 
 

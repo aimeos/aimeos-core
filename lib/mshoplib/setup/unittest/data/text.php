@@ -115,40 +115,11 @@ return array (
 		'text/online_metakey' => array( 'langid' => 'de', 'type' => 'meta-keyword', 'domain' => 'catalog', 'label' => 'online_metakey', 'content' => 'internet', 'status' => 1 ),
 		'text/online_metadesc' => array( 'langid' => 'de', 'type' => 'meta-description', 'domain' => 'catalog', 'label' => 'online_metadesc', 'content' => 'Nur online erhältlich', 'status' => 1 ),
 //MEDIA
-		'text/img_desc' => array( 'langid' => 'de', 'type' => 'img-description', 'domain' => 'media', 'label' => 'img_desc', 'content' => 'Bildbeschreibung', 'status' => 1 ),
 		'text/media' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'media', 'label' => 'media', 'content' => 'Media Name', 'status' => 1 ),
 // service text
 		'text/service' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'service', 'label' => 'service', 'content' => 'Service Name', 'status' => 1 ),
 //dummy default
 		'text/text' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'text', 'label' => 'text', 'content' => 'Text Name', 'status' => 1 ),
-
-//PRODUCTS
-		'text/subproduct1' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'product', 'label' => 'subproduct1', 'content' => 'Unterproduct 1', 'status' => 1 ),
-		'text/subproduct2' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'product', 'label' => 'subproduct2', 'content' => 'Unterproduct 2', 'status' => 1 ),
-		'text/subproduct3' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'product', 'label' => 'subproduct3', 'content' => 'Unterproduct 3', 'status' => 1 ),
-		'text/productUT' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'product', 'label' => 'productUT', 'content' => 'Produkt fuer UT:Cheapest free', 'status' => 1 ),
-//shop texts
-		'text/cne' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'product', 'label' => 'cne', 'content' => 'Cafe Noire Expresso', 'status' => 1 ),
-		'text/cne_basket' => array( 'langid' => 'de', 'type' => 'basket', 'domain' => 'product', 'label' => 'cne_basket', 'content' => 'Cafe Noire Expresso for basket', 'status' => 1 ),
-		'text/cne_short_desc' => array( 'langid' => 'de', 'type' => 'short', 'domain' => 'product', 'label' => 'cne_short_desc', 'content' => 'Ein vollaromatischer Espresso mit herrlich feinem Schaum', 'status' => 1 ),
-		'text/cne_long_desc' => array( 'langid' => 'de', 'type' => 'long', 'domain' => 'product', 'label' => 'cne_long_desc', 'content' => 'Dieser kurze Kaffee mit seinem reichen Geschmack, delikaten Aroma und feinen Schaum ist das ultimative Getränk für jede Tageszeit.<br> Erhältlich in Packungen mit 16 T-DISCs (Hypermärkte) oder 8 T-DISCs (Supermärkte).', 'status' => 1 ),
-		'text/cne_metatitle' => array( 'langid' => 'de', 'type' => 'url', 'domain' => 'product', 'label' => 'cne_metatitle', 'content' => 'Cafe_Noire_Expresso', 'status' => 1 ),
-		'text/cne_metakey' => array( 'langid' => 'de', 'type' => 'meta-keyword', 'domain' => 'product', 'label' => 'cne_metakey', 'content' => 'Kaffee', 'status' => 1 ),
-		'text/cne_metadesc' => array( 'langid' => 'de', 'type' => 'meta-description', 'domain' => 'product', 'label' => 'cne_metadesc', 'content' => 'Expresso', 'status' => 1 ),
-
-		'text/cnc' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'product', 'label' => 'cnc', 'content' => 'Cafe Noire Cappuccino', 'status' => 1 ),
-		'text/cnc_short_desc' => array( 'langid' => 'de', 'type' => 'short', 'domain' => 'product', 'label' => 'cnc_short_desc', 'content' => 'Der köstliche Cappuccino mit Espresso und feinem Milchschaum.', 'status' => 1 ),
-		'text/cnc_long_desc' => array( 'langid' => 'de', 'type' => 'long', 'domain' => 'product', 'label' => 'cnc_long_desc', 'content' => 'Cafe Noire gehört zu den beliebtesten Kaffeemarken in Frankreich.', 'status' => 1 ),
-		'text/cnc_metatitle' => array( 'langid' => 'de', 'type' => 'url', 'domain' => 'product', 'label' => 'cnc_metatitle', 'content' => 'Cafe_Noire_Cappuccino', 'status' => 1 ),
-		'text/cnc_metakey' => array( 'langid' => 'de', 'type' => 'meta-keyword', 'domain' => 'product', 'label' => 'cnc_metakey', 'content' => 'Cappuccino', 'status' => 1 ),
-		'text/cnc_metadesc' => array( 'langid' => 'de', 'type' => 'meta-description', 'domain' => 'product', 'label' => 'cnc_metadesc', 'content' => 'Cafe Noire Cappuccino online kaufen', 'status' => 1 ),
-//payment
-		'text/rebate' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'product', 'label' => 'rebate', 'content' => 'Geldwerter Nachlass', 'status' => 1 ),
-		'text/money_rebate' => array( 'langid' => 'de', 'type' => 'short', 'domain' => 'product', 'label' => 'money_rebate', 'content' => 'Unittest: Monetary rebate.', 'status' => 1 ),
-		'text/delivery_rebate' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'product', 'label' => 'delivery_rebate', 'content' => 'Versandkosten Nachlass', 'status' => 1 ),
-		'text/shipping_rebate' => array( 'langid' => 'de', 'type' => 'short', 'domain' => 'product', 'label' => 'shipping_rebate', 'content' => 'Unittest: Shipping rebate.', 'status' => 1 ),
-		'text/gift_rebate' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'product', 'label' => 'gift_rebate', 'content' => 'Geschenk Nachlass', 'status' => 1 ),
-		'text/present_rebate' => array( 'langid' => 'de', 'type' => 'short', 'domain' => 'product', 'label' => 'present_rebate', 'content' => 'Unittest: Present rebate.', 'status' => 1 ),
 
 //SERVICE
 		'text/service_text1' => array( 'langid' => 'de', 'type' => 'serviceinformation', 'domain' => 'service', 'label' => 'service_text1', 'content' => 'Unittest: Service text 1 de', 'status' => 1 ),

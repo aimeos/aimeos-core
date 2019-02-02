@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'attribute', $result );
-		$this->assertEquals( 6, $result['attribute'] );
+		$this->assertEquals( 11, $result['attribute'] );
 	}
 
 
@@ -236,7 +236,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'media.lists.id', null );
@@ -248,7 +248,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'media.lists.datestart', null );
 		$expr[] = $search->compare( '==', 'media.lists.dateend', null );
 		$expr[] = $search->compare( '!=', 'media.lists.config', null );
-		$expr[] = $search->compare( '==', 'media.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'media.lists.position', 1 );
 		$expr[] = $search->compare( '==', 'media.lists.status', 1 );
 		$expr[] = $search->compare( '>=', 'media.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'media.lists.ctime', '1970-01-01 00:00:00' );
@@ -258,7 +258,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( 1, $total );
+		$this->assertEquals( 4, $total );
 	}
 
 
@@ -277,7 +277,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 5, count( $results ) );
-		$this->assertEquals( 7, $total );
+		$this->assertEquals( 13, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
