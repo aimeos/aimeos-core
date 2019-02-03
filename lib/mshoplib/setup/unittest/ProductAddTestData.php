@@ -72,11 +72,16 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	/**
 	 * Returns the manager for the current setup task
 	 *
+	 * @param string $domain Domain name of the manager
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager()
+	protected function getManager( $domain )
 	{
-		return \Aimeos\MShop\Product\Manager\Factory::create( $this->additional, 'Standard' );
+		if( $domain === 'product' ) {
+			return \Aimeos\MShop\Product\Manager\Factory::create( $this->additional, 'Standard' );
+		}
+
+		return parent::getManager( $domain );
 	}
 
 
@@ -87,13 +92,13 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	 */
 	protected function process( array $testdata )
 	{
-		$manager = $this->getManager();
+		$manager = $this->getManager( 'product' );
 		$listManager = $manager->getSubManager( 'lists' );
 		$propManager = $manager->getSubManager( 'property' );
 
 		$manager->begin();
-
 		$this->storeTypes( $testdata, ['product/type', 'product/lists/type', 'product/property/type'] );
+		$manager->commit();
 
 		foreach( $testdata['product'] as $entry )
 		{
@@ -103,7 +108,5 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 
 			$manager->saveItem( $item );
 		}
-
-		$manager->commit();
 	}
 }

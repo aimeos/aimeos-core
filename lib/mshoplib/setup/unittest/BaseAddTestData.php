@@ -80,8 +80,8 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 		{
 			foreach( $data['lists'] as $domain => $entries )
 			{
+				$manager = $this->getManager( $domain );
 				$refItems = $this->getRefItems( $domain );
-				$manager = \Aimeos\MShop::create( $this->additional, $domain );
 
 				foreach( $entries as $entry )
 				{
@@ -134,11 +134,12 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Returns the manager for the current setup task
 	 *
+	 * @param string $domain Domain name of the manager
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager()
+	protected function getManager( $domain )
 	{
-		throw new \RuntimeException( 'You haven\'t implemented getManager() method in ' . get_class( $this ) );
+		return \Aimeos\MShop::create( $this->additional, $domain );
 	}
 
 
@@ -152,7 +153,7 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$list = [];
 
-		$manager = \Aimeos\MShop::create( $this->additional, $domain );
+		$manager = $this->getManager( $domain );
 		$search = $manager->createSearch()->setSlice( 0, 10000 );
 
 		foreach( $manager->searchItems( $search ) as $item ) {
@@ -175,9 +176,8 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 		{
 			if( isset( $testdata[$domain] ) )
 			{
-				$manager = $this->getManager();
 				$subnames = explode( '/', $domain );
-				array_shift( $subnames );
+				$manager = $this->getManager( array_shift( $subnames ) );
 
 				foreach( $subnames as $subname ) {
 					$manager = $manager->getSubManager( $subname );

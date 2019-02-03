@@ -65,11 +65,11 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 		}
 
-		$manager = $this->getManager();
-		$listManager = $this->getManager()->getSubManager( 'lists' );
-		$groupManager = $this->getManager()->getSubManager( 'group' );
-		$addrManager = $this->getManager()->getSubManager( 'address' );
-		$propManager = $this->getManager()->getSubManager( 'property' );
+		$manager = $this->getManager( 'customer' );
+		$listManager = $manager->getSubManager( 'lists' );
+		$groupManager = $manager->getSubManager( 'group' );
+		$addrManager = $manager->getSubManager( 'address' );
+		$propManager = $manager->getSubManager( 'property' );
 
 		$manager->begin();
 
@@ -147,16 +147,5 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 				} catch( \Exception $e ) { echo $e->getMessage(); } // ignore duplicates
 			}
 		}
-	}
-
-
-	/**
-	 * Returns the manager for the current setup task
-	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
-	 */
-	protected function getManager()
-	{
-		return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Standard' );
 	}
 }
