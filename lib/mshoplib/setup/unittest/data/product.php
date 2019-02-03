@@ -620,11 +620,11 @@ return [
 				], [
 					'product.lists.type' => 'suggestion', 'product.lists.position' => 0, 'ref' => 'Cafe Noire Cappuccino',
 				], [
-					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'ABCD/16 discs',
+					'product.lists.type' => 'default', 'product.lists.position' => 1, 'ref' => 'ABCD/16 discs',
 				], [
-					'product.lists.type' => 'default', 'product.lists.position' => 1, 'ref' => 'EFGH/16 discs',
+					'product.lists.type' => 'default', 'product.lists.position' => 2, 'ref' => 'EFGH/16 discs',
 				], [
-					'product.lists.type' => 'default', 'product.lists.position' => 2, 'ref' => 'IJKL/16 discs',
+					'product.lists.type' => 'default', 'product.lists.position' => 3, 'ref' => 'IJKL/16 discs',
 				]],
 				'tag' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'Expresso'
