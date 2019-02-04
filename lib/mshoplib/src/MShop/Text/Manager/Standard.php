@@ -112,10 +112,10 @@ class Standard
 			'code' => 'text:has()',
 			'internalcode' => '(
 				SELECT mtexli_has."id" FROM mshop_text_list AS mtexli_has
-				WHERE mtex."id" = mtexli_has."parentid" AND :site
-					AND mtexli_has."domain" = $1 AND mtexli_has."type" = $2 AND mtexli_has."refid" = $3
+				WHERE mtex."id" = mtexli_has."parentid" AND :site AND mtexli_has."domain" = $1 :type :refid
+				LIMIT 1
 			)',
-			'label' => 'Text has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'label' => 'Text has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -152,6 +152,15 @@ class Standard
 		}
 
 		$this->replaceSiteMarker( $this->searchConfig['text:has'], 'mtexli_has."siteid"', $siteIds, ':site' );
+
+
+		$this->searchConfig['text:has']['function'] = function( &$source, array $params ) {
+
+			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mtexli_has."type" = $2' : '', $source );
+			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mtexli_has."refid" = $3' : '', $source );
+
+			return $params;
+		};
 	}
 
 

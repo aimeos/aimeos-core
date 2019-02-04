@@ -126,10 +126,10 @@ class Standard
 			'code' => 'media:has()',
 			'internalcode' => '(
 				SELECT mmedli_has."id" FROM mshop_media_list AS mmedli_has
-				WHERE mmed."id" = mmedli_has."parentid" AND :site
-					AND mmedli_has."domain" = $1 AND mmedli_has."type" = $2 AND mmedli_has."refid" = $3
+				WHERE mmed."id" = mmedli_has."parentid" AND :site AND mmedli_has."domain" = $1 :type :refid
+				LIMIT 1
 			)',
-			'label' => 'Media has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'label' => 'Media has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -138,11 +138,10 @@ class Standard
 			'code' => 'media:prop()',
 			'internalcode' => '(
 				SELECT mmedpr_prop."id" FROM mshop_media_property AS mmedpr_prop
-				WHERE mmed."id" = mmedpr_prop."parentid" AND :site
-					AND mmedpr_prop."type" = $1 AND mmedpr_prop."value" = $3
-					AND ( mmedpr_prop."langid" = $2 OR mmedpr_prop."langid" IS NULL )
+				WHERE mmed."id" = mmedpr_prop."parentid" AND :site AND mmedpr_prop."type" = $1 :langid :value
+				LIMIT 1
 			)',
-			'label' => 'Media has property item, parameter(<property type>,<language code>,<property value>)',
+			'label' => 'Media has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -180,6 +179,27 @@ class Standard
 
 		$this->replaceSiteMarker( $this->searchConfig['media:has'], 'mmedli_has."siteid"', $siteIds, ':site' );
 		$this->replaceSiteMarker( $this->searchConfig['media:prop'], 'mmedpr_prop."siteid"', $siteIds, ':site' );
+
+
+		$this->searchConfig['media:has']['function'] = function( &$source, array $params ) {
+
+			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mmedli_has."type" = $2' : '', $source );
+			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mmedli_has."refid" = $3' : '', $source );
+
+			return $params;
+		};
+
+
+		$this->searchConfig['media:prop']['function'] = function( &$source, array $params ) {
+
+			$lang = 'AND mmedpr_prop."langid"';
+			$lang = isset( $params[1] ) ? ( $params[1] !== 'null' ? $lang . ' = $2' : $lang . ' IS NULL' ) : '';
+
+			$source = str_replace( ':langid', $lang, $source );
+			$source = str_replace( ':value', isset( $params[2] ) ? 'AND mmedpr_prop."value" = $3' : '', $source );
+
+			return $params;
+		};
 	}
 
 

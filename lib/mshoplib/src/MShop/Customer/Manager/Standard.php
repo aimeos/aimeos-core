@@ -250,10 +250,10 @@ class Standard
 			'code' => 'customer:has()',
 			'internalcode' => '(
 				SELECT mcusli_has."id" FROM mshop_customer_list AS mcusli_has
-				WHERE mcus."id" = mcusli_has."parentid" AND :site
-					AND mcusli_has."domain" = $1 AND mcusli_has."type" = $2 AND mcusli_has."refid" = $3
+				WHERE mcus."id" = mcusli_has."parentid" AND :site AND mcusli_has."domain" = $1 :type :refid
+				LIMIT 1
 			)',
-			'label' => 'Customer has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -262,11 +262,10 @@ class Standard
 			'code' => 'customer:prop()',
 			'internalcode' => '(
 				SELECT mcuspr_prop."id" FROM mshop_customer_property AS mcuspr_prop
-				WHERE mcus."id" = mcuspr_prop."parentid" AND :site
-					AND mcuspr_prop."type" = $1 AND mcuspr_prop."value" = $3
-					AND ( mcuspr_prop."langid" = $2 OR mcuspr_prop."langid" IS NULL )
+				WHERE mcus."id" = mcuspr_prop."parentid" AND :site AND mcuspr_prop."type" = $1 :langid :value
+				LIMIT 1
 			)',
-			'label' => 'Customer has property item, parameter(<property type>,<language code>,<property value>)',
+			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -299,6 +298,27 @@ class Standard
 
 		$this->replaceSiteMarker( $this->searchConfig['customer:has'], 'mcusli_has."siteid"', $siteIds, ':site' );
 		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 'mcuspr_prop."siteid"', $siteIds, ':site' );
+
+
+		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) {
+
+			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mcusli_has."type" = $2' : '', $source );
+			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mcusli_has."refid" = $3' : '', $source );
+
+			return $params;
+		};
+
+
+		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) {
+
+			$lang = 'AND mcuspr_prop."langid"';
+			$lang = isset( $params[1] ) ? ( $params[1] !== 'null' ? $lang . ' = $2' : $lang . ' IS NULL' ) : '';
+
+			$source = str_replace( ':langid', $lang, $source );
+			$source = str_replace( ':value', isset( $params[2] ) ? 'AND mcuspr_prop."value" = $3' : '', $source );
+
+			return $params;
+		};
 	}
 
 

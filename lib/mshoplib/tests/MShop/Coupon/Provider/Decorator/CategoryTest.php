@@ -28,7 +28,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
-		$product = $productManager->findItem( 'CNC' );
+		$product = $productManager->findItem( 'CNE' );
 
 		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 		$orderProduct = $orderProductManager->createItem();

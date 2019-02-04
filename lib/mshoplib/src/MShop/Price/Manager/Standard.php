@@ -133,10 +133,10 @@ class Standard
 			'code' => 'price:has()',
 			'internalcode' => '(
 				SELECT mprili_has."id" FROM mshop_price_list AS mprili_has
-				WHERE mpri."id" = mprili_has."parentid" AND :site
-					AND mprili_has."domain" = $1 AND mprili_has."type" = $2 AND mprili_has."refid" = $3
+				WHERE mpri."id" = mprili_has."parentid" AND :site AND mprili_has."domain" = $1 :type :refid
+				LIMIT 1
 			)',
-			'label' => 'Price has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'label' => 'Price has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -188,6 +188,15 @@ class Standard
 		}
 
 		$this->replaceSiteMarker( $this->searchConfig['price:has'], 'mprili_has."siteid"', $siteIds, ':site' );
+
+
+		$this->searchConfig['price:has']['function'] = function( &$source, array $params ) {
+
+			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mprili_has."type" = $2' : '', $source );
+			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mprili_has."refid" = $3' : '', $source );
+
+			return $params;
+		};
 	}
 
 

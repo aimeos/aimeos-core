@@ -69,23 +69,21 @@ class Category
 	{
 		if( ( $value = $this->getConfigValue( 'category.code' ) ) !== null )
 		{
-			$prodIds = [];
-			$catCodes = explode( ',', $value );
+			$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
+			$search = $manager->createSearch( true )->setSlice( 0, 1 );
+			$expr = [];
 
-			foreach( $base->getProducts() as $product ) {
-				$prodIds[] = $product->getProductId();
+			foreach( $base->getProducts() as $product )
+			{
+				$func = $search->createFunction( 'catalog:has', ['product', 'default', $product->getProductId()] );
+				$expr[] = $search->compare( '!=', $func, null );
 			}
 
-			$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
-
-			$search = $manager->createSearch( true )->setSlice( 0, 1 );
-			$expr = [
-				$search->compare( '==', 'catalog.code', $catCodes ),
-				$search->compare( '==', 'catalog.lists.domain', 'product' ),
-				$search->compare( '==', 'catalog.lists.refid', $prodIds ),
+			$search->setConditions( $search->combine( '&&', [
+				$search->compare( '==', 'catalog.code', explode( ',', $value ) ),
+				$search->combine( '||', $expr ),
 				$search->getConditions(),
-			];
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			] ) );
 
 			if( count( $manager->searchItems( $search ) ) === 0 ) {
 				return false;

@@ -134,10 +134,10 @@ class Standard extends Base
 			'code' => 'catalog:has()',
 			'internalcode' => '(
 				SELECT mcatli_has."id" FROM mshop_catalog_list AS mcatli_has
-				WHERE mcat."id" = mcatli_has."parentid" AND :site
-					AND mcatli_has."domain" = $1 AND mcatli_has."type" = $2 AND mcatli_has."refid" = $3
+				WHERE mcat."id" = mcatli_has."parentid" AND :site AND mcatli_has."domain" = $1 :type :refid
+				LIMIT 1
 			)',
-			'label' => 'Catalog has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'label' => 'Catalog has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -171,6 +171,15 @@ class Standard extends Base
 		}
 
 		$this->replaceSiteMarker( $this->searchConfig['catalog:has'], 'mcatli_has."siteid"', $siteIds, ':site' );
+
+
+		$this->searchConfig['catalog:has']['function'] = function( &$source, array $params ) {
+
+			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mcatli_has."type" = $2' : '', $source );
+			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mcatli_has."refid" = $3' : '', $source );
+
+			return $params;
+		};
 	}
 
 

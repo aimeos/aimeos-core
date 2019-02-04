@@ -128,10 +128,10 @@ class Standard
 			'code' => 'product:has()',
 			'internalcode' => '(
 				SELECT mproli_has."id" FROM mshop_product_list AS mproli_has
-				WHERE mpro."id" = mproli_has."parentid" AND :site
-					AND mproli_has."domain" = $1 AND mproli_has."type" = $2 AND mproli_has."refid" = $3
+				WHERE mpro."id" = mproli_has."parentid" AND :site AND mproli_has."domain" = $1 :type :refid
+				LIMIT 1
 			)',
-			'label' => 'Product has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'label' => 'Product has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -140,11 +140,10 @@ class Standard
 			'code' => 'product:prop()',
 			'internalcode' => '(
 				SELECT mpropr_prop."id" FROM mshop_product_property AS mpropr_prop
-				WHERE mpro."id" = mpropr_prop."parentid" AND :site
-					AND mpropr_prop."type" = $1 AND mpropr_prop."value" = $3
-					AND ( mpropr_prop."langid" = $2 OR mpropr_prop."langid" IS NULL )
+				WHERE mpro."id" = mpropr_prop."parentid" AND :site AND mpropr_prop."type" = $1 :langid :value
+				LIMIT 1
 			)',
-			'label' => 'Product has property item, parameter(<property type>,<language code>,<property value>)',
+			'label' => 'Product has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -182,6 +181,27 @@ class Standard
 
 		$this->replaceSiteMarker( $this->searchConfig['product:has'], 'mproli_has."siteid"', $siteIds, ':site' );
 		$this->replaceSiteMarker( $this->searchConfig['product:prop'], 'mpropr_prop."siteid"', $siteIds, ':site' );
+
+
+		$this->searchConfig['product:has']['function'] = function( &$source, array $params ) {
+
+			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mproli_has."type" = $2' : '', $source );
+			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mproli_has."refid" = $3' : '', $source );
+
+			return $params;
+		};
+
+
+		$this->searchConfig['product:prop']['function'] = function( &$source, array $params ) {
+
+			$lang = 'AND mpropr_prop."langid"';
+			$lang = isset( $params[1] ) ? ( $params[1] !== 'null' ? $lang . ' = $2' : $lang . ' IS NULL' ) : '';
+
+			$source = str_replace( ':langid', $lang, $source );
+			$source = str_replace( ':value', isset( $params[2] ) ? 'AND mpropr_prop."value" = $3' : '', $source );
+
+			return $params;
+		};
 	}
 
 

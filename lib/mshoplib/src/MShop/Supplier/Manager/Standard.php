@@ -92,10 +92,10 @@ class Standard
 			'code' => 'supplier:has()',
 			'internalcode' => '(
 				SELECT msupli_has."id" FROM mshop_supplier_list AS msupli_has
-				WHERE msup."id" = msupli_has."parentid" AND :site
-					AND msupli_has."domain" = $1 AND msupli_has."type" = $2 AND msupli_has."refid" = $3
+				WHERE msup."id" = msupli_has."parentid" AND :site AND msupli_has."domain" = $1 :type :refid
+				LIMIT 1
 			)',
-			'label' => 'Supplier has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'label' => 'Supplier has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -129,6 +129,15 @@ class Standard
 		}
 
 		$this->replaceSiteMarker( $this->searchConfig['supplier:has'], 'msupli_has."siteid"', $siteIds, ':site' );
+
+
+		$this->searchConfig['supplier:has']['function'] = function( &$source, array $params ) {
+
+			$source = str_replace( ':type', isset( $params[1] ) ? 'AND msupli_has."type" = $2' : '', $source );
+			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND msupli_has."refid" = $3' : '', $source );
+
+			return $params;
+		};
 	}
 
 

@@ -114,10 +114,10 @@ class Standard
 			'code' => 'attribute:has()',
 			'internalcode' => '(
 				SELECT mattli_has."id" FROM mshop_attribute_list AS mattli_has
-				WHERE matt."id" = mattli_has."parentid" AND :site
-					AND mattli_has."domain" = $1 AND mattli_has."type" = $2 AND mattli_has."refid" = $3
+				WHERE matt."id" = mattli_has."parentid" AND :site AND mattli_has."domain" = $1 :type :refid
+				LIMIT 1
 			)',
-			'label' => 'Attribute has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'label' => 'Attribute has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -126,11 +126,10 @@ class Standard
 			'code' => 'attribute:prop()',
 			'internalcode' => '(
 				SELECT mattpr_prop."id" FROM mshop_attribute_property AS mattpr_prop
-				WHERE matt."id" = mattpr_prop."parentid" AND :site
-					AND mattpr_prop."type" = $1 AND mattpr_prop."value" = $3
-					AND ( mattpr_prop."langid" = $2 OR mattpr_prop."langid" IS NULL )
+				WHERE matt."id" = mattpr_prop."parentid" AND :site AND mattpr_prop."type" = $1  :langid :value
+				LIMIT 1
 			)',
-			'label' => 'Attribute has property item, parameter(<property type>,<language code>,<property value>)',
+			'label' => 'Attribute has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -164,6 +163,27 @@ class Standard
 
 		$this->replaceSiteMarker( $this->searchConfig['attribute:has'], 'mattli_has."siteid"', $siteIds, ':site' );
 		$this->replaceSiteMarker( $this->searchConfig['attribute:prop'], 'mattpr_prop."siteid"', $siteIds, ':site' );
+
+
+		$this->searchConfig['attribute:has']['function'] = function( &$source, array $params ) {
+
+			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mattli_has."type" = $2' : '', $source );
+			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mattli_has."refid" = $3' : '', $source );
+
+			return $params;
+		};
+
+
+		$this->searchConfig['attribute:prop']['function'] = function( &$source, array $params ) {
+
+			$lang = 'AND mattpr_prop."langid"';
+			$lang = isset( $params[1] ) ? ( $params[1] !== 'null' ? $lang . ' = $2' : $lang . ' IS NULL' ) : '';
+
+			$source = str_replace( ':langid', $lang, $source );
+			$source = str_replace( ':value', isset( $params[2] ) ? 'AND mattpr_prop."value" = $3' : '', $source );
+
+			return $params;
+		};
 	}
 
 
