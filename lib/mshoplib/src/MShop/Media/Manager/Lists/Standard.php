@@ -25,7 +25,6 @@ class Standard
 		'media.lists.id' => array(
 			'code' => 'media.lists.id',
 			'internalcode' => 'mmedli."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_media_list" AS mmedli ON ( mmed."id" = mmedli."parentid" )' ),
 			'label' => 'List ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

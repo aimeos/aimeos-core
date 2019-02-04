@@ -273,17 +273,29 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.longitude', '10.0' );
 		$expr[] = $search->compare( '==', 'customer.latitude', '50.0' );
 
+		$param = ['text','default', '0'];
+		$expr[] = $search->compare( '==', $search->createFunction( 'customer:has', $param ), null );
+
 		$param = ['text','default', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:has', $param ), null );
 
-		$param = ['text','default', '0'];
-		$expr[] = $search->compare( '==', $search->createFunction( 'customer:has', $param ), null );
+		$param = ['text','default'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:has', $param ), null );
+
+		$param = ['text'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:has', $param ), null );
+
+		$param = ['newsletter', null, '0'];
+		$expr[] = $search->compare( '==', $search->createFunction( 'customer:prop', $param ), null );
 
 		$param = ['newsletter', null, '1'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:prop', $param ), null );
 
-		$param = ['newsletter', null, '0'];
-		$expr[] = $search->compare( '==', $search->createFunction( 'customer:prop', $param ), null );
+		$param = ['newsletter', null];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:prop', $param ), null );
+
+		$param = ['newsletter'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:prop', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
 		$expr[] = $search->compare( '!=', 'customer.address.parentid', null );
@@ -311,28 +323,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'customer.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
-
-		$expr[] = $search->compare( '!=', 'customer.lists.id', null );
-		$expr[] = $search->compare( '!=', 'customer.lists.siteid', null );
-		$expr[] = $search->compare( '!=', 'customer.lists.parentid', null );
-		$expr[] = $search->compare( '==', 'customer.lists.domain', 'text' );
-		$expr[] = $search->compare( '==', 'customer.lists.type', 'default' );
-		$expr[] = $search->compare( '>', 'customer.lists.refid', '' );
-		$expr[] = $search->compare( '==', 'customer.lists.datestart', '2010-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.lists.dateend', '2022-01-01 00:00:00' );
-		$expr[] = $search->compare( '!=', 'customer.lists.config', null );
-		$expr[] = $search->compare( '==', 'customer.lists.position', 0 );
-		$expr[] = $search->compare( '==', 'customer.lists.status', 1 );
-		$expr[] = $search->compare( '>=', 'customer.lists.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'customer.lists.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.lists.editor', $this->editor );
-
-		$expr[] = $search->compare( '!=', 'customer.property.id', null );
-		$expr[] = $search->compare( '!=', 'customer.property.siteid', null );
-		$expr[] = $search->compare( '==', 'customer.property.type', 'newsletter' );
-		$expr[] = $search->compare( '==', 'customer.property.languageid', null );
-		$expr[] = $search->compare( '==', 'customer.property.value', '1' );
-		$expr[] = $search->compare( '==', 'customer.property.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$result = $this->object->searchItems( $search );

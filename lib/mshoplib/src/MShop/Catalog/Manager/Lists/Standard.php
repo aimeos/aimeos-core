@@ -25,7 +25,6 @@ class Standard
 		'catalog.lists.id' => array(
 			'code' => 'catalog.lists.id',
 			'internalcode' => 'mcatli."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_catalog_list" AS mcatli ON ( mcat."id" = mcatli."parentid" )' ),
 			'label' => 'List ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

@@ -25,7 +25,6 @@ class Standard
 		'product.lists.id' => array(
 			'code' => 'product.lists.id',
 			'internalcode' => 'mproli."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_product_list" AS mproli ON ( mpro."id" = mproli."parentid" )' ),
 			'label' => 'List ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

@@ -25,7 +25,6 @@ class Standard
 		'attribute.property.id' => array(
 			'code' => 'attribute.property.id',
 			'internalcode' => 'mattpr."id"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_attribute_property" AS mattpr ON ( mattpr."parentid" = matt."id" )' ),
 			'label' => 'Property ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

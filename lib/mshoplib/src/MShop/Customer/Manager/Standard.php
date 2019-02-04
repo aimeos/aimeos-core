@@ -395,9 +395,8 @@ class Standard
 		 * @category Developer
 		 */
 		$path = 'mshop/customer/manager/submanagers';
-		$default = ['address', 'group', 'lists', 'property'];
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['address'], $withsub );
 	}
 
 

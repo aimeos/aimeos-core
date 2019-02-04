@@ -471,7 +471,7 @@ class Standard
 		 */
 		$path = 'mshop/text/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['lists'], $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 

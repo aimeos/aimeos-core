@@ -97,26 +97,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'text.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'text.editor', $this->editor );
 
-		$param = ['media','align-top', $listItem->getRefId()];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'text:has', $param ), null );
-
 		$param = ['media','align-top', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'text:has', $param ), null );
 
-		$expr[] = $search->compare( '!=', 'text.lists.id', null );
-		$expr[] = $search->compare( '!=', 'text.lists.siteid', null );
-		$expr[] = $search->compare( '>', 'text.lists.parentid', 0 );
-		$expr[] = $search->compare( '==', 'text.lists.domain', 'media' );
-		$expr[] = $search->compare( '==', 'text.lists.type', 'align-top' );
-		$expr[] = $search->compare( '>', 'text.lists.refid', '' );
-		$expr[] = $search->compare( '==', 'text.lists.datestart', '2010-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'text.lists.dateend', '2022-01-01 00:00:00' );
-		$expr[] = $search->compare( '!=', 'text.lists.config', null );
-		$expr[] = $search->compare( '==', 'text.lists.position', 0 );
-		$expr[] = $search->compare( '==', 'text.lists.status', 1 );
-		$expr[] = $search->compare( '>=', 'text.lists.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'text.lists.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'text.lists.editor', $this->editor );
+		$param = ['media','align-top', $listItem->getRefId()];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'text:has', $param ), null );
+
+		$param = ['media','align-top'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'text:has', $param ), null );
+
+		$param = ['media'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'text:has', $param ), null );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$result = $this->object->searchItems( $search, [], $total );

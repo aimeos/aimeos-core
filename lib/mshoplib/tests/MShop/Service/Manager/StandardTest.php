@@ -190,26 +190,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'service.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'service.editor', $this->editor );
 
-		$param = ['text','unittype1', $listItem->getRefId()];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'service:has', $param ), null );
-
 		$param = ['text','unittype1', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'service:has', $param ), null );
 
-		$expr[] = $search->compare( '!=', 'service.lists.id', null );
-		$expr[] = $search->compare( '!=', 'service.lists.siteid', null );
-		$expr[] = $search->compare( '>', 'service.lists.parentid', 0 );
-		$expr[] = $search->compare( '==', 'service.lists.domain', 'text' );
-		$expr[] = $search->compare( '==', 'service.lists.type', 'unittype1' );
-		$expr[] = $search->compare( '>', 'service.lists.refid', '' );
-		$expr[] = $search->compare( '==', 'service.lists.datestart', null );
-		$expr[] = $search->compare( '==', 'service.lists.dateend', null );
-		$expr[] = $search->compare( '!=', 'service.lists.config', null );
-		$expr[] = $search->compare( '==', 'service.lists.position', 0 );
-		$expr[] = $search->compare( '==', 'service.lists.status', 1 );
-		$expr[] = $search->compare( '>=', 'service.lists.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'service.lists.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'service.lists.editor', $this->editor );
+		$param = ['text','unittype1', $listItem->getRefId()];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'service:has', $param ), null );
+
+		$param = ['text','unittype1'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'service:has', $param ), null );
+
+		$param = ['text'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'service:has', $param ), null );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );

@@ -25,7 +25,6 @@ class Standard
 		'text.lists.id' => array(
 			'code' => 'text.lists.id',
 			'internalcode' => 'mtexli."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_text_list" AS mtexli ON mtexli."parentid" = mtex."id"' ),
 			'label' => 'List ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

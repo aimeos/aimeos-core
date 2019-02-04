@@ -104,39 +104,29 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'media.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'media.editor', $this->editor );
 
-		$param = ['attribute','option', $listItem->getRefId()];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'media:has', $param ), null );
-
 		$param = ['attribute','option', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'media:has', $param ), null );
 
-		$param = ['copyright', 'de', 'ich, 2019'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'media:prop', $param ), null );
+		$param = ['attribute','option', $listItem->getRefId()];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'media:has', $param ), null );
+
+		$param = ['attribute','option'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'media:has', $param ), null );
+
+		$param = ['attribute'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'media:has', $param ), null );
 
 		$param = ['copyright', null, 'me'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'media:prop', $param ), null );
 
-		$expr[] = $search->compare( '!=', 'media.lists.id', null );
-		$expr[] = $search->compare( '!=', 'media.lists.siteid', null );
-		$expr[] = $search->compare( '>', 'media.lists.parentid', 0 );
-		$expr[] = $search->compare( '==', 'media.lists.domain', 'attribute' );
-		$expr[] = $search->compare( '==', 'media.lists.type', 'option' );
-		$expr[] = $search->compare( '>', 'media.lists.refid', 0 );
-		$expr[] = $search->compare( '==', 'media.lists.datestart', null );
-		$expr[] = $search->compare( '==', 'media.lists.dateend', null );
-		$expr[] = $search->compare( '!=', 'media.lists.config', null );
-		$expr[] = $search->compare( '>=', 'media.lists.position', 0 );
-		$expr[] = $search->compare( '==', 'media.lists.status', 1 );
-		$expr[] = $search->compare( '>=', 'media.lists.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'media.lists.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'media.lists.editor', $this->editor );
+		$param = ['copyright', 'de', 'ich, 2019'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'media:prop', $param ), null );
 
-		$expr[] = $search->compare( '!=', 'media.property.id', null );
-		$expr[] = $search->compare( '!=', 'media.property.siteid', null );
-		$expr[] = $search->compare( '==', 'media.property.type', 'copyright' );
-		$expr[] = $search->compare( '==', 'media.property.languageid', 'de' );
-		$expr[] = $search->compare( '==', 'media.property.value', 'ich, 2019' );
-		$expr[] = $search->compare( '==', 'media.property.editor', $this->editor );
+		$param = ['copyright', 'de'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'media:prop', $param ), null );
+
+		$param = ['copyright'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'media:prop', $param ), null );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );

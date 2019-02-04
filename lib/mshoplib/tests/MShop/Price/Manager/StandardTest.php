@@ -200,24 +200,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'price.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'price.editor', $this->editor );
 
-		$param = ['customer','default', $listItem->getRefId()];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
-
 		$param = ['customer','default', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'price:has', $param ), null );
 
-		$expr[] = $search->compare( '!=', 'price.lists.id', null );
-		$expr[] = $search->compare( '!=', 'price.lists.siteid', null );
-		$expr[] = $search->compare( '!=', 'price.lists.parentid', null );
-		$expr[] = $search->compare( '==', 'price.lists.type', 'default' );
-		$expr[] = $search->compare( '==', 'price.lists.domain', 'customer' );
-		$expr[] = $search->compare( '>=', 'price.lists.refid', 0 );
-		$expr[] = $search->compare( '==', 'price.lists.datestart', null );
-		$expr[] = $search->compare( '==', 'price.lists.dateend', null );
-		$expr[] = $search->compare( '!=', 'price.lists.config', null );
-		$expr[] = $search->compare( '==', 'price.lists.position', 1 );
-		$expr[] = $search->compare( '==', 'price.lists.status', 1 );
-		$expr[] = $search->compare( '==', 'price.lists.editor', $this->editor );
+		$param = ['customer','default', $listItem->getRefId()];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
+
+		$param = ['customer','default'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
+
+		$param = ['customer'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );

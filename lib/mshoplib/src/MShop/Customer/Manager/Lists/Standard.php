@@ -25,7 +25,6 @@ class Standard
 		'customer.lists.id' => array(
 			'code' => 'customer.lists.id',
 			'internalcode' => 'mcusli."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_customer_list" AS mcusli ON ( mcus."id" = mcusli."parentid" )' ),
 			'label' => 'List ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

@@ -25,7 +25,6 @@ class Standard
 		'attribute.lists.id' => array(
 			'code' => 'attribute.lists.id',
 			'internalcode' => 'mattli."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_attribute_list" AS mattli ON ( matt."id" = mattli."parentid" )' ),
 			'label' => 'List ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

@@ -181,11 +181,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'supplier.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'supplier.editor', $this->editor );
 
+		$param = ['text','default', '0'];
+		$expr[] = $search->compare( '==', $search->createFunction( 'supplier:has', $param ), null );
+
 		$param = ['text','default', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'supplier:has', $param ), null );
 
-		$param = ['text','default', '0'];
-		$expr[] = $search->compare( '==', $search->createFunction( 'supplier:has', $param ), null );
+		$param = ['text','default'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'supplier:has', $param ), null );
+
+		$param = ['text'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'supplier:has', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'supplier.address.id', null );
 		$expr[] = $search->compare( '!=', 'supplier.address.siteid', null );
@@ -211,21 +217,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'supplier.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'supplier.address.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'supplier.address.editor', $this->editor );
-
-		$expr[] = $search->compare( '!=', 'supplier.lists.id', null );
-		$expr[] = $search->compare( '!=', 'supplier.lists.siteid', null );
-		$expr[] = $search->compare( '>', 'supplier.lists.parentid', 0 );
-		$expr[] = $search->compare( '==', 'supplier.lists.domain', 'text' );
-		$expr[] = $search->compare( '==', 'supplier.lists.type', 'default' );
-		$expr[] = $search->compare( '>', 'supplier.lists.refid', 0 );
-		$expr[] = $search->compare( '>=', 'supplier.lists.datestart', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'supplier.lists.dateend', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '!=', 'supplier.lists.config', null );
-		$expr[] = $search->compare( '>', 'supplier.lists.position', 0 );
-		$expr[] = $search->compare( '==', 'supplier.lists.status', 1 );
-		$expr[] = $search->compare( '>=', 'supplier.lists.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'supplier.lists.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'supplier.lists.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$result = $this->object->searchItems( $search );

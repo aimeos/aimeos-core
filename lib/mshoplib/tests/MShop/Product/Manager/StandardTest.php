@@ -320,37 +320,29 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.editor', $this->editor );
 		$expr[] = $search->compare( '>=', 'product.target', '' );
 
-		$param = ['product','suggestion', $listItem->getRefId()];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
-
 		$param = ['product','suggestion', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'product:has', $param ), null );
 
-		$param = ['package-weight', null, '1'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );
+		$param = ['product','suggestion', $listItem->getRefId()];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
+
+		$param = ['product','suggestion'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
+
+		$param = ['product'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
 
 		$param = ['package-height', null, '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'product:prop', $param ), null );
 
-		$expr[] = $search->compare( '!=', 'product.lists.id', null );
-		$expr[] = $search->compare( '!=', 'product.lists.siteid', null );
-		$expr[] = $search->compare( '!=', 'product.lists.parentid', null );
-		$expr[] = $search->compare( '==', 'product.lists.type', 'suggestion' );
-		$expr[] = $search->compare( '==', 'product.lists.domain', 'product' );
-		$expr[] = $search->compare( '>', 'product.lists.refid', 0 );
-		$expr[] = $search->compare( '==', 'product.lists.datestart', null );
-		$expr[] = $search->compare( '==', 'product.lists.dateend', null );
-		$expr[] = $search->compare( '!=', 'product.lists.config', null );
-		$expr[] = $search->compare( '==', 'product.lists.position', 0 );
-		$expr[] = $search->compare( '==', 'product.lists.status', 1 );
-		$expr[] = $search->compare( '==', 'product.lists.editor', $this->editor );
+		$param = ['package-weight', null, '1'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );
 
-		$expr[] = $search->compare( '!=', 'product.property.id', null );
-		$expr[] = $search->compare( '!=', 'product.property.siteid', null );
-		$expr[] = $search->compare( '==', 'product.property.type', 'package-weight' );
-		$expr[] = $search->compare( '==', 'product.property.languageid', null );
-		$expr[] = $search->compare( '==', 'product.property.value', '1' );
-		$expr[] = $search->compare( '==', 'product.property.editor', $this->editor );
+		$param = ['package-weight', null];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );
+
+		$param = ['package-weight'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );
 
 
 		$search->setConditions( $search->combine( '&&', $expr ) );

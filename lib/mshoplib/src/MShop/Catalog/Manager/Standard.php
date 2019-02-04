@@ -195,8 +195,7 @@ class Standard extends Base
 		$config = $context->getConfig();
 		$search = $this->getObject()->createSearch();
 
-		$path = 'mshop/catalog/manager/submanagers';
-		foreach( $config->get( $path, array( 'lists' ) ) as $domain ) {
+		foreach( $config->get( 'mshop/catalog/manager/submanagers', ['lists'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -406,7 +405,7 @@ class Standard extends Base
 		 */
 		$path = 'mshop/catalog/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'lists' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 

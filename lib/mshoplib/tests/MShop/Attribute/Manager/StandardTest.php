@@ -253,39 +253,29 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'attribute.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'attribute.editor', $this->editor );
 
-		$param = array( 'text', 'default', $listItem->getRefId() );
-		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:has', $param ), null );
-
 		$param = array( 'text', 'default', '0' );
 		$expr[] = $search->compare( '==', $search->createFunction( 'attribute:has', $param ), null );
 
-		$param = array( 'htmlcolor', 'de', '#000000' );
-		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:prop', $param ), null );
+		$param = array( 'text', 'default', $listItem->getRefId() );
+		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:has', $param ), null );
+
+		$param = array( 'text', 'default' );
+		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:has', $param ), null );
+
+		$param = array( 'text' );
+		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:has', $param ), null );
 
 		$param = array( 'htmlcolor', null, '0' );
 		$expr[] = $search->compare( '==', $search->createFunction( 'attribute:prop', $param ), null );
 
-		$expr[] = $search->compare( '!=', 'attribute.lists.id', null );
-		$expr[] = $search->compare( '!=', 'attribute.lists.siteid', null );
-		$expr[] = $search->compare( '!=', 'attribute.lists.parentid', null );
-		$expr[] = $search->compare( '==', 'attribute.lists.domain', 'text' );
-		$expr[] = $search->compare( '==', 'attribute.lists.type', 'default' );
-		$expr[] = $search->compare( '>', 'attribute.lists.refid', '' );
-		$expr[] = $search->compare( '==', 'attribute.lists.datestart', '2000-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'attribute.lists.dateend', '2001-01-01 00:00:00' );
-		$expr[] = $search->compare( '!=', 'attribute.lists.config', null );
-		$expr[] = $search->compare( '==', 'attribute.lists.position', 0 );
-		$expr[] = $search->compare( '==', 'attribute.lists.status', 1 );
-		$expr[] = $search->compare( '>=', 'attribute.lists.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'attribute.lists.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'attribute.lists.editor', $this->editor );
+		$param = array( 'htmlcolor', 'de', '#000000' );
+		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:prop', $param ), null );
 
-		$expr[] = $search->compare( '!=', 'attribute.property.id', null );
-		$expr[] = $search->compare( '!=', 'attribute.property.siteid', null );
-		$expr[] = $search->compare( '==', 'attribute.property.type', 'htmlcolor' );
-		$expr[] = $search->compare( '==', 'attribute.property.languageid', 'de' );
-		$expr[] = $search->compare( '==', 'attribute.property.value', '#000000' );
-		$expr[] = $search->compare( '==', 'attribute.property.editor', $this->editor );
+		$param = array( 'htmlcolor', 'de' );
+		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:prop', $param ), null );
+
+		$param = array( 'htmlcolor' );
+		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:prop', $param ), null );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );

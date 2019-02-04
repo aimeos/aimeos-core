@@ -111,25 +111,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'catalog.editor', $this->editor );
 		$expr[] = $search->compare( '>=', 'catalog.target', '' );
 
-		$param = ['product', 'promotion', $listItem->getRefId()];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'catalog:has', $param ), null );
-
 		$param = ['product', 'promotion', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'catalog:has', $param ), null );
 
-		$expr[] = $search->compare( '!=', 'catalog.lists.id', null );
-		$expr[] = $search->compare( '!=', 'catalog.lists.siteid', null );
-		$expr[] = $search->compare( '!=', 'catalog.lists.parentid', null );
-		$expr[] = $search->compare( '>=', 'catalog.lists.type', '' );
-		$expr[] = $search->compare( '!=', 'catalog.lists.refid', null );
-		$expr[] = $search->compare( '>=', 'catalog.lists.datestart', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'catalog.lists.dateend', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.lists.status', 1 );
-		$expr[] = $search->compare( '!=', 'catalog.lists.config', null );
-		$expr[] = $search->compare( '>=', 'catalog.lists.position', 0 );
-		$expr[] = $search->compare( '>=', 'catalog.lists.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'catalog.lists.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.lists.editor', $this->editor );
+		$param = ['product', 'promotion', $listItem->getRefId()];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'catalog:has', $param ), null );
+
+		$param = ['product', 'promotion'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'catalog:has', $param ), null );
+
+		$param = ['product'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'catalog:has', $param ), null );
 
 
 		$total = 0;

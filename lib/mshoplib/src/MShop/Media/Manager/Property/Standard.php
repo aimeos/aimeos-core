@@ -25,7 +25,6 @@ class Standard
 		'media.property.id' => array(
 			'code' => 'media.property.id',
 			'internalcode' => 'mmedpr."id"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_media_property" AS mmedpr ON ( mmedpr."parentid" = mmed."id" )' ),
 			'label' => 'Property ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
