@@ -12,11 +12,6 @@ namespace Aimeos\MShop\Common\Item\PropertyRef;
 class TraitsClass
 {
 	use \Aimeos\MShop\Common\Item\PropertyRef\Traits;
-
-	public function setPropertyItems( $list )
-	{
-		$this->propItems = $list;
-	}
 }
 
 
@@ -33,7 +28,8 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		$this->propItem2 = new \Aimeos\MShop\Common\Item\Property\Standard( 'c.', ['languageid' => 'de', 'c.languageid' => 'en', 'c.type' => 'test2']);
 
 		$this->object = new TraitsClass();
-		$this->object->setPropertyItems( [$this->propItem, $this->propItem2] );
+		$this->object->addPropertyItem( $this->propItem );
+		$this->object->addPropertyItem( $this->propItem2 );
 	}
 
 
@@ -45,33 +41,33 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetProperties()
 	{
-		$this->assertEquals( ['value'], $this->object->getProperties( 'test' ) );
+		$this->assertEquals( ['value'], array_values( $this->object->getProperties( 'test' ) ) );
 	}
 
 
 	public function testGetPropertyItems()
 	{
 		$expected = [$this->propItem, $this->propItem2];
-		$this->assertEquals( $expected, $this->object->getPropertyItems( null, false ) );
+		$this->assertEquals( $expected, array_values( $this->object->getPropertyItems( null, false ) ) );
 	}
 
 
 	public function testGetPropertyItemsActive()
 	{
-		$this->assertEquals( [$this->propItem], $this->object->getPropertyItems() );
+		$this->assertEquals( [$this->propItem], array_values( $this->object->getPropertyItems() ) );
 	}
 
 
 	public function testGetPropertyItemsWithType()
 	{
-		$this->assertEquals( [1 => $this->propItem2], $this->object->getPropertyItems( 'test2', false ) );
+		$this->assertEquals( [$this->propItem2], array_values( $this->object->getPropertyItems( 'test2', false ) ) );
 	}
 
 
 	public function testGetPropertyItemsWithTypes()
 	{
 		$expected = [$this->propItem, $this->propItem2];
-		$this->assertEquals( $expected, $this->object->getPropertyItems( ['test', 'test2'], false ) );
+		$this->assertEquals( $expected, array_values( $this->object->getPropertyItems( ['test', 'test2'], false ) ) );
 	}
 
 
@@ -86,7 +82,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		$object = new TraitsClass();
 		$object->addPropertyItem( $this->propItem );
 
-		$this->assertEquals( ['id-0' => $this->propItem], $object->getPropertyItems() );
+		$this->assertEquals( ['_test__value' => $this->propItem], $object->getPropertyItems() );
 	}
 
 
@@ -94,8 +90,8 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->deletePropertyItem( $this->propItem->setId( 123 ) );
 
-		$this->assertEquals( [1 => $this->propItem2], $this->object->getPropertyItems( null, false ) );
-		$this->assertEquals( [123 => $this->propItem], $this->object->getPropertyItemsDeleted() );
+		$this->assertEquals( [$this->propItem2], array_values( $this->object->getPropertyItems( null, false ) ) );
+		$this->assertEquals( [$this->propItem], array_values( $this->object->getPropertyItemsDeleted() ) );
 	}
 
 

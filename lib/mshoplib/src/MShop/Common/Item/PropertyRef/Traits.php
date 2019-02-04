@@ -49,7 +49,7 @@ trait Traits
 	 */
 	public function addPropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item )
 	{
-		$id = $item->getId() ?: 'id-' . $this->propMax++;
+		$id = $item->getId() ?: '_' . $item->getType() . '_' . $item->getLanguageId() . '_' . $item->getValue();
 		$this->propItems[$id] = $item;
 
 		return $this;
@@ -65,18 +65,16 @@ trait Traits
 	 */
 	public function deletePropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item )
 	{
-		foreach( $this->propItems as $key => $pitem )
-		{
-			if( $pitem === $item )
-			{
-				$this->propRmItems[$item->getId()] = $item;
-				unset( $this->propItems[$key] );
+		$id = '_' . $item->getType() . '_' . $item->getLanguageId() . '_' . $item->getValue();
 
-				return $this;
-			}
+		if( !isset( $this->propItems[$id] ) && !isset( $this->propItems[$item->getId()] ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Property item for removal not found' ) );
 		}
 
-		throw new \Aimeos\MShop\Exception( sprintf( 'Property item for removal not found' ) );
+		unset( $this->propItems[$id], $this->propItems[$item->getId()] );
+		$this->propRmItems[$id] = $item;
+
+		return $this;
 	}
 
 
@@ -118,8 +116,8 @@ trait Traits
 	{
 		$list = [];
 
-		foreach( $this->getPropertyItems( $type ) as $item ) {
-			$list[] = $item->getValue();
+		foreach( $this->getPropertyItems( $type ) as $id => $item ) {
+			$list[$id] = $item->getValue();
 		}
 
 		return $list;
