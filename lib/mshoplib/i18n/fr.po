@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-27 08:30+0200\n"
-"PO-Revision-Date: 2019-01-26 10:46+0000\n"
+"PO-Revision-Date: 2019-02-03 10:16+0000\n"
 "Last-Translator: Doryan R <doryan16238@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -176,7 +176,7 @@ msgstr "Un chèque-cadeau avec le code \"1%1$s\" existe déjà"
 
 #, php-format
 msgid "File system manager object not available"
-msgstr "Objet système de gestion de fichier (file system manager) indisponible"
+msgstr "Objet de gestionnaire de système de fichiers non disponible"
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
