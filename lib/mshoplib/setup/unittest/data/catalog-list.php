@@ -62,7 +62,7 @@ return array(
 		array( 'parentid' => 'catalog/cafe', 'typeid' => 'text/unittype1', 'domain' => 'text', 'refid' => 'text/cafe_long_desc', 'start' => '2008-01-01 00:00:00', 'end' => '2010-01-01 00:00:00', 'config' => [], 'pos' => 3, 'status' => 1 ),
 		array( 'parentid' => 'catalog/cafe', 'typeid' => 'text/unittype2', 'domain' => 'text', 'refid' => 'text/cafe_delivery_desc', 'start' => '2008-01-01 00:00:00', 'end' => '2010-01-01 00:00:00', 'config' => [], 'pos' => 3, 'status' => 1 ),
 		array( 'parentid' => 'catalog/cafe', 'typeid' => 'text/unittype2', 'domain' => 'text', 'refid' => 'text/cafe_payment_desc', 'start' => '2008-01-01 00:00:00', 'end' => '2010-01-01 00:00:00', 'config' => [], 'pos' => 4, 'status' => 1 ),
-		array( 'parentid' => 'catalog/cafe', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/cafe_quote', 'start' => '2008-01-01 00:00:00', 'end' => '2019-01-01 00:00:00', 'config' => [], 'pos' => 5, 'status' => 1 ),
+		array( 'parentid' => 'catalog/cafe', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/cafe_quote', 'start' => '2008-01-01 00:00:00', 'end' => '2100-01-01 00:00:00', 'config' => [], 'pos' => 5, 'status' => 1 ),
 
 		array( 'parentid' => 'catalog/tea', 'typeid' => 'text/unittype6', 'domain' => 'text', 'refid' => 'text/tea', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => [], 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'catalog/tea', 'typeid' => 'text/unittype7', 'domain' => 'text', 'refid' => 'text/tea_short_desc', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => [], 'pos' => 1, 'status' => 1 ),
