@@ -66,9 +66,13 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager()
+	protected function getManager( $domain )
 	{
-		return \Aimeos\MShop\Media\Manager\Factory::create( $this->additional, 'Standard' );
+		if( $domain === 'media' ) {
+			return \Aimeos\MShop\Media\Manager\Factory::create( $this->additional, 'Standard' );
+		}
+
+		return parent::getManager( $domain );
 	}
 
 
