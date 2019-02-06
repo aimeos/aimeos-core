@@ -33,8 +33,7 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()->getMock();
 
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
-		$this->basket = $orderManager->getSubManager( 'base' )->createItem();
-		$this->basket->__sleep(); // remove plugins
+		$this->basket = $orderManager->getSubManager( 'base' )->createItem()->off(); // remove plugins
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Costs( $this->mockProvider, $this->context, $this->servItem );
 	}

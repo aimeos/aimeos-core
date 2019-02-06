@@ -10,9 +10,6 @@
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
 
-/**
- * Test class for \Aimeos\MShop\Service\Provider\Decorator\Reduction.
- */
 class ReductionTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -33,8 +30,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()->getMock();
 
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
-		$this->basket = $orderManager->getSubManager( 'base' )->createItem();
-		$this->basket->__sleep(); // remove plugins
+		$this->basket = $orderManager->getSubManager( 'base' )->createItem()->off(); // remove plugins
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Reduction( $this->mockProvider, $this->context, $this->servItem );
 	}
