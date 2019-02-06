@@ -45,6 +45,20 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_NULL,
 			'public' => false,
 		),
+		'index.attribute:oneof' => array(
+			'code' => 'index.attribute:oneof()',
+			'internalcode' => '( SELECT mpro_oneof."id" FROM mshop_product AS mpro_oneof
+				WHERE mpro."id" = mpro_oneof."id" AND (
+					SELECT COUNT(DISTINCT mindat_oneof."attrid")
+					FROM "mshop_index_attribute" AS mindat_oneof
+					WHERE mpro."id" = mindat_oneof."prodid" AND :site
+					AND mindat_oneof."attrid" IN ( $1 ) ) > 0
+				)',
+			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
+			'type' => 'null',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_NULL,
+			'public' => false,
+		),
 	);
 
 	private $subManagers;
@@ -78,6 +92,7 @@ class Standard
 		};
 
 		$this->replaceSiteMarker( $this->searchConfig['index.attribute:all'], 'mindat_all."siteid"', $siteIds );
+		$this->replaceSiteMarker( $this->searchConfig['index.attribute:oneof'], 'mindat_oneof."siteid"', $siteIds );
 	}
 
 
