@@ -238,7 +238,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 			$pre .= ' ';
 		}
 
-		echo str_pad( $pre . $msg, 70 ) . ( $status ? $status . PHP_EOL : '' );
+		echo str_pad( $pre . $msg, 70 ) . ( $status !== null ? $status . PHP_EOL : '' );
 	}
 
 
