@@ -12,12 +12,14 @@ namespace Aimeos\MShop\Index\Manager\Attribute;
 
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $object;
 
 
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\MShop\Index\Manager\Attribute\Standard( \TestHelperMShop::getContext() );
+		$this->context = \TestHelperMShop::getContext();
+		$this->object = new \Aimeos\MShop\Index\Manager\Attribute\Standard( $this->context );
 	}
 
 
@@ -35,7 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'attribute' );
+		$manager = \Aimeos\MShop::create( $this->context, 'attribute' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -79,7 +81,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 
@@ -128,7 +130,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsIdWidth()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
 		$attrWidthItem = $attributeManager->findItem( '29', [], 'product', 'width' );
 
 		$search = $this->object->createSearch();
@@ -141,7 +143,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsIdLength()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
 		$attrLengthItem = $attributeManager->findItem( '30', [], 'product', 'length' );
 
 
@@ -165,18 +167,42 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsAll()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$attrLengthItem = $attributeManager->findItem( '30', [], 'product', 'length' );
-		$attrWidthItem = $attributeManager->findItem( '29', [], 'product', 'width' );
+		$attrIds = [];
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
+
+		$attrIds[] = $manager->findItem( '30', [], 'product', 'length' )->getId();
+		$attrIds[] = $manager->findItem( '29', [], 'product', 'width' )->getId();
 
 		$search = $this->object->createSearch();
-		$attrIds = [(int) $attrLengthItem->getId(), (int) $attrWidthItem->getId()];
+
 		$func = $search->createFunction( 'index.attribute:all', [$attrIds] );
 		$search->setConditions( $search->compare( '!=', $func, null ) );
 		$search->setSortations( array( $search->sort( '+', 'product.code' ) ) );
-		$result = $this->object->searchItems( $search );
+
+		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 'CNE', reset( $result )->getCode() );
+	}
+
+
+	public function testSearchItemsOneof()
+	{
+		$attrIds = [];
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
+
+		$attrIds[] = $manager->findItem( '30', [], 'product', 'length' )->getId();
+		$attrIds[] = $manager->findItem( '30', [], 'product', 'width' )->getId();
+
+		$search = $this->object->createSearch();
+
+		$func = $search->createFunction( 'index.attribute:oneof', [$attrIds] );
+		$search->setConditions( $search->compare( '!=', $func, null ) );
+		$search->setSortations( array( $search->sort( '+', 'product.code' ) ) );
+
+		$result = $this->object->searchItems( $search, [] );
+
+		$this->assertEquals( 3, count( $result ) );
 		$this->assertEquals( 'CNE', reset( $result )->getCode() );
 	}
 
