@@ -96,6 +96,7 @@ class Reduction
 		$price = $this->getProvider()->calcPrice( $basket );
 		$total = $basket->getPrice()->getValue() + $basket->getPrice()->getRebate();
 		$currency = $price->getCurrencyId();
+		$costs = 0;
 
 		if( isset( $config['reduction.basket-value-min'][$currency] )
 			&& $total < $config['reduction.basket-value-min'][$currency]
@@ -109,9 +110,21 @@ class Reduction
 			return $price;
 		}
 
+		if( isset( $config['reduction.product-costs'] ) && $config['reduction.product-costs'] == true )
+		{
+			foreach( $basket->getProducts() as $orderProduct )
+			{
+				$costs += $orderProduct->getPrice()->getCosts();
+
+				foreach( $orderProduct->getProducts() as $subProduct ) {
+					$costs += $subProduct->getPrice()->getCosts();
+				}
+			}
+		}
+
 		if( isset( $config['reduction.percent'] ) )
 		{
-			$reduction = $price->getCosts() * $config['reduction.percent'] / 100;
+			$reduction = ( $price->getCosts() + $costs ) * $config['reduction.percent'] / 100;
 			$price->setRebate( $price->getRebate() + $reduction );
 			$price->setCosts( $price->getCosts() - $reduction );
 		}

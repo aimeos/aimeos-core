@@ -208,6 +208,26 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCalcPriceProductCosts()
+	{
+		$priceItem = \Aimeos\MShop\Factory::createManager( $this->context, 'price' )->createItem()->setCosts( '10.00' );
+		$orderProduct = $this->getOrderProduct();
+		$orderProduct->setPrice( $orderProduct->getPrice()->setCosts( '10.00' ) );
+		$subProduct = $this->getOrderProduct();
+		$subProduct->setPrice( $subProduct->getPrice()->setCosts( '5.00' ) );
+
+		$this->servItem->setConfig( ['reduction.percent' => 60, 'reduction.product-costs' => 1] );
+		$this->basket->addProduct( $orderProduct->setProducts( [$subProduct]) );
+
+		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )
+			->will( $this->returnValue( $priceItem ) );
+
+		$price = $this->object->calcPrice( $this->basket );
+		$this->assertEquals( '-5.00', $price->getCosts() );
+		$this->assertEquals( '15.00', $price->getRebate() );
+	}
+
+
 	/**
 	 * Returns an order product item
 	 *
