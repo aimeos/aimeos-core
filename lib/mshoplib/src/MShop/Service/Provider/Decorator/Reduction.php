@@ -32,6 +32,15 @@ class Reduction
 			'default' => '',
 			'required' => true,
 		),
+		'reduction.product-costs' => array(
+			'code' => 'reduction.product-costs',
+			'internalcode' => 'reduction.product-costs',
+			'label' => 'Include product costs in reduction calculation',
+			'type' => 'boolean',
+			'internaltype' => 'boolean',
+			'default' => '0',
+			'required' => false,
+		),
 		'reduction.basket-value-min' => array(
 			'code' => 'reduction.basket-value-min',
 			'internalcode' => 'reduction.basket-value-min',
@@ -48,15 +57,6 @@ class Reduction
 			'type' => 'map',
 			'internaltype' => 'array',
 			'default' => [],
-			'required' => false,
-		),
-		'reduction.product-costs' => array(
-			'code' => 'reduction.product-costs',
-			'internalcode' => 'reduction.product-costs',
-			'label' => 'Include product shipping costs in reduction',
-			'type' => 'boolean',
-			'internaltype' => 'boolean',
-			'default' => 0,
 			'required' => false,
 		),
 	);
@@ -124,7 +124,6 @@ class Reduction
 			foreach( $basket->getProducts() as $orderProduct )
 			{
 				$costs += $orderProduct->getPrice()->getCosts() * $orderProduct->getQuantity();
-
 				foreach( $orderProduct->getProducts() as $subProduct ) {
 					$costs += $subProduct->getPrice()->getCosts() * $subProduct->getQuantity();
 				}
