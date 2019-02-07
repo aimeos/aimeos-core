@@ -75,11 +75,11 @@ return array(
 		array( 'parentid' => 'catalog/misc', 'type' => 'unittype15', 'domain' => 'text', 'refid' => 'text/misc_payment_desc', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => [], 'pos' => 4, 'status' => 1 ),
 
 		array( 'parentid' => 'catalog/cafe', 'type' => 'default', 'domain' => 'media', 'refid' => 'media/prod_123x103/195_prod_123x103.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => [], 'pos' => 0, 'status' => 1 ),
-		array( 'parentid' => 'catalog/misc', 'type' => 'default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example1.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => [], 'pos' => 0, 'status' => 1 ),
-		array( 'parentid' => 'catalog/new', 'type' => 'default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example2.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => [], 'pos' => 1, 'status' => 1 ),
-		array( 'parentid' => 'catalog/internet', 'type' => 'default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example3.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => [], 'pos' => 2, 'status' => 1 ),
-		array( 'parentid' => 'catalog/group', 'type' => 'default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example4.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => [], 'pos' => 3, 'status' => 1 ),
-		array( 'parentid' => 'catalog/cafe', 'type' => 'default', 'domain' => 'media', 'refid' => 'media/path/to/folder/cafe/stage.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => [], 'pos' => 4, 'status' => 1 ),
+		array( 'parentid' => 'catalog/misc', 'type' => 'default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example1.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2098-01-01 00:00:00', 'config' => [], 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'catalog/new', 'type' => 'default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example2.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2098-01-01 00:00:00', 'config' => [], 'pos' => 1, 'status' => 1 ),
+		array( 'parentid' => 'catalog/internet', 'type' => 'default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example3.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2098-01-01 00:00:00', 'config' => [], 'pos' => 2, 'status' => 1 ),
+		array( 'parentid' => 'catalog/group', 'type' => 'default', 'domain' => 'media', 'refid' => 'media/path/to/folder/example4.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2098-01-01 00:00:00', 'config' => [], 'pos' => 3, 'status' => 1 ),
+		array( 'parentid' => 'catalog/cafe', 'type' => 'default', 'domain' => 'media', 'refid' => 'media/path/to/folder/cafe/stage.jpg', 'start' => '2010-01-01 00:00:00', 'end' => '2098-01-01 00:00:00', 'config' => [], 'pos' => 4, 'status' => 1 ),
 
 		array( 'parentid' => 'catalog/new', 'type' => 'unittype18', 'domain' => 'text', 'refid' => 'text/new', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => [], 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'catalog/new', 'type' => 'unittype19', 'domain' => 'text', 'refid' => 'text/new_long_desc', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => [], 'pos' => 1, 'status' => 1 ),

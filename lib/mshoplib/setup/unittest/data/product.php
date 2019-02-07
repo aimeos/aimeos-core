@@ -174,12 +174,12 @@ return [
 				]],
 				'text' => [[
 					'product.lists.type' => 'unittype25', 'product.lists.position' => 0,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'name', 'text.domain' => 'product',
 					'text.label' => 'rebate', 'text.content' => 'Geldwerter Nachlass'
 				], [
 					'product.lists.type' => 'unittype26', 'product.lists.position' => 1,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'short', 'text.domain' => 'product',
 					'text.label' => 'money_rebate', 'text.content' => 'Unittest: Monetary rebate.'
 				]],
@@ -199,12 +199,12 @@ return [
 				]],
 				'text' => [[
 					'product.lists.type' => 'unittype27', 'product.lists.position' => 0,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'name', 'text.domain' => 'product',
 					'text.label' => 'delivery_rebate', 'text.content' => 'Versandkosten Nachlass'
 				], [
 					'product.lists.type' => 'unittype28', 'product.lists.position' => 1,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'short', 'text.domain' => 'product',
 					'text.label' => 'costs_rebate', 'text.content' => 'Unittest: Shipping rebate.'
 				]],
@@ -224,12 +224,12 @@ return [
 				]],
 				'text' => [[
 					'product.lists.type' => 'unittype29', 'product.lists.position' => 0,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'name', 'text.domain' => 'product',
 					'text.label' => 'gift_rebate', 'text.content' => 'Geschenk Nachlass'
 				], [
 					'product.lists.type' => 'unittype30', 'product.lists.position' => 1,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'short', 'text.domain' => 'product',
 					'text.label' => 'present_rebate', 'text.content' => 'Unittest: Present rebate.'
 				]],
@@ -493,32 +493,32 @@ return [
 				]],
 				'text' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'name', 'text.domain' => 'product',
 					'text.label' => 'cnc', 'text.content' => 'Cafe Noire Cappuccino'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 1,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'short', 'text.domain' => 'product',
 					'text.label' => 'cnc_short_desc', 'text.content' => 'Der köstliche Cappuccino mit Espresso und feinem Milchschaum.'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 2,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'long', 'text.domain' => 'product',
 					'text.label' => 'cnc_long_desc', 'text.content' => 'Cafe Noire gehört zu den beliebtesten Kaffeemarken in Frankreich.'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 3,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'url', 'text.domain' => 'product',
 					'text.label' => 'cnc_metatitle', 'text.content' => 'Cafe_Noire_Cappuccino'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 4,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'meta-keyword', 'text.domain' => 'product',
 					'text.label' => 'cnc_metakey', 'text.content' => 'Cappuccino'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 5,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'meta-description', 'text.domain' => 'product',
 					'text.label' => 'cnc_metadesc', 'text.content' => 'Cafe Noire Cappuccino online kaufen'
 				]],
@@ -639,34 +639,34 @@ return [
 					'text.label' => 'cne_basket', 'text.content' => 'Cafe Noire Expresso for basket'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'name', 'text.domain' => 'product',
 					'text.label' => 'cne', 'text.content' => 'Cafe Noire Expresso'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 1,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'short', 'text.domain' => 'product',
 					'text.label' => 'cne_short_desc', 'text.content' => 'Ein vollaromatischer Espresso mit herrlich feinem Schaum'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 2,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'long', 'text.domain' => 'product',
 					'text.label' => 'cne_long_desc', 'text.content' => 'Dieser kurze Kaffee mit seinem reichen Geschmack,
 						delikaten Aroma und feinen Schaum ist das ultimative Getränk für jede Tageszeit.<br>
 						Erhältlich in Packungen mit 16 T-DISCs (Hypermärkte) oder 8 T-DISCs (Supermärkte).'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 3,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'url', 'text.domain' => 'product',
 					'text.label' => 'cne_metatitle', 'text.content' => 'Cafe_Noire_Expresso'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 4,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'meta-keyword', 'text.domain' => 'product',
 					'text.label' => 'cne_metakey', 'text.content' => 'Kaffee'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 5,
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2022-01-01 00:00:00',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => 'de', 'text.type' => 'meta-description', 'text.domain' => 'product',
 					'text.label' => 'cne_metadesc', 'text.content' => 'Expresso'
 				]],

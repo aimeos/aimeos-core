@@ -54,7 +54,7 @@ return [
 			'lists' => [
 				'text' => [[
 					'customer.lists.type' => 'default', 'customer.lists.position' => 0,
-					'customer.lists.datestart' => '2010-01-01 00:00:00', 'customer.lists.dateend' => '2022-01-01 00:00:00',
+					'customer.lists.datestart' => '2010-01-01 00:00:00', 'customer.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => null, 'text.type' => 'information', 'text.domain' => 'customer', 'text.status' => 1,
 					'text.label' => 'customer/information', 'text.content' => 'Customer information',
 				]],
@@ -113,17 +113,17 @@ return [
 			'lists' => [
 				'text' => [[
 					'customer.lists.type' => 'default', 'customer.lists.position' => 1,
-					'customer.lists.datestart' => '2010-01-01 00:00:00', 'customer.lists.dateend' => '2022-01-01 00:00:00',
+					'customer.lists.datestart' => '2010-01-01 00:00:00', 'customer.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => null, 'text.type' => 'information', 'text.domain' => 'customer', 'text.status' => 1,
 					'text.label' => 'customer/information', 'text.content' => 'Customer information',
 				], [
 					'customer.lists.type' => 'default', 'customer.lists.position' => 2,
-					'customer.lists.datestart' => '2010-01-01 00:00:00', 'customer.lists.dateend' => '2022-01-01 00:00:00',
+					'customer.lists.datestart' => '2010-01-01 00:00:00', 'customer.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => null, 'text.type' => 'notify', 'text.domain' => 'customer', 'text.status' => 1,
 					'text.label' => 'customer/notify', 'text.content' => 'Customer notify',
 				], [
 					'customer.lists.type' => 'default', 'customer.lists.position' => 3,
-					'customer.lists.datestart' => '2010-01-01 00:00:00', 'customer.lists.dateend' => '2022-01-01 00:00:00',
+					'customer.lists.datestart' => '2010-01-01 00:00:00', 'customer.lists.dateend' => '2098-01-01 00:00:00',
 					'text.languageid' => null, 'text.type' => 'newsletter', 'text.status' => 1,
 					'text.label' => 'customer/newsletter', 'text.content' => 'Customer newsletter',
 				]],

@@ -249,7 +249,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'text.lists.type', 'align-top' );
 		$expr[] = $search->compare( '>', 'text.lists.refid', 0 );
 		$expr[] = $search->compare( '==', 'text.lists.datestart', '2010-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'text.lists.dateend', '2022-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'text.lists.dateend', '2098-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'text.lists.config', null );
 		$expr[] = $search->compare( '==', 'text.lists.position', 0 );
 		$expr[] = $search->compare( '==', 'text.lists.status', 1 );
