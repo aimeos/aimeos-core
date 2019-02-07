@@ -48,8 +48,9 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->getConfigBE();
 
-		$this->assertEquals( 3, count( $result ) );
+		$this->assertEquals( 4, count( $result ) );
 		$this->assertArrayHasKey( 'reduction.percent', $result );
+		$this->assertArrayHasKey( 'reduction.product-costs', $result );
 		$this->assertArrayHasKey( 'reduction.basket-value-min', $result );
 		$this->assertArrayHasKey( 'reduction.basket-value-max', $result );
 	}
@@ -63,13 +64,15 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 
 		$attributes = array(
 			'reduction.percent' => '1.5',
+			'reduction.product-costs' => '1',
 			'reduction.basket-value-min' => array( 'EUR' => '10.00' ),
 			'reduction.basket-value-max' => array( 'EUR' => '100.00' ),
 		);
 		$result = $this->object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 3, count( $result ) );
+		$this->assertEquals( 4, count( $result ) );
 		$this->assertInternalType( 'null', $result['reduction.percent'] );
+		$this->assertInternalType( 'null', $result['reduction.product-costs'] );
 		$this->assertInternalType( 'null', $result['reduction.basket-value-min'] );
 		$this->assertInternalType( 'null', $result['reduction.basket-value-max'] );
 	}
@@ -83,8 +86,9 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->checkConfigBE( [] );
 
-		$this->assertEquals( 3, count( $result ) );
+		$this->assertEquals( 4, count( $result ) );
 		$this->assertInternalType( 'string', $result['reduction.percent'] );
+		$this->assertInternalType( 'null', $result['reduction.product-costs'] );
 		$this->assertInternalType( 'null', $result['reduction.basket-value-min'] );
 		$this->assertInternalType( 'null', $result['reduction.basket-value-max'] );
 	}
@@ -98,7 +102,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->checkConfigBE( array( 'reduction.basket-value-min' => '10.00' ) );
 
-		$this->assertEquals( 3, count( $result ) );
+		$this->assertEquals( 4, count( $result ) );
 		$this->assertInternalType( 'string', $result['reduction.basket-value-min'] );
 	}
 
@@ -111,7 +115,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->checkConfigBE( array( 'reduction.basket-value-max' => '100.00' ) );
 
-		$this->assertEquals( 3, count( $result ) );
+		$this->assertEquals( 4, count( $result ) );
 		$this->assertInternalType( 'string', $result['reduction.basket-value-max'] );
 	}
 
@@ -201,6 +205,26 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$price = $this->object->calcPrice( $this->basket );
 		$this->assertEquals( '10.00', $price->getCosts() );
 		$this->assertEquals( '0.00', $price->getRebate() );
+	}
+
+
+	public function testCalcPriceProductCosts()
+	{
+		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->createItem()->setCosts( '10.00' );
+		$orderProduct = $this->getOrderProduct();
+		$orderProduct->setPrice( $orderProduct->getPrice()->setCosts( '10.00' ) );
+		$subProduct = $this->getOrderProduct();
+		$subProduct->setPrice( $subProduct->getPrice()->setCosts( '5.00' ) );
+
+		$this->servItem->setConfig( ['reduction.percent' => 60, 'reduction.product-costs' => 1] );
+		$this->basket->addProduct( $orderProduct->setProducts( [$subProduct]) );
+
+		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )
+			->will( $this->returnValue( $priceItem ) );
+
+		$price = $this->object->calcPrice( $this->basket );
+		$this->assertEquals( '-5.00', $price->getCosts() );
+		$this->assertEquals( '15.00', $price->getRebate() );
 	}
 
 

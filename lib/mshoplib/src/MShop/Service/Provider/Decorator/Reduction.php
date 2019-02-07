@@ -32,6 +32,15 @@ class Reduction
 			'default' => '',
 			'required' => true,
 		),
+		'reduction.product-costs' => array(
+			'code' => 'reduction.product-costs',
+			'internalcode' => 'reduction.product-costs',
+			'label' => 'Include product costs in reduction calculation',
+			'type' => 'boolean',
+			'internaltype' => 'boolean',
+			'default' => '0',
+			'required' => false,
+		),
 		'reduction.basket-value-min' => array(
 			'code' => 'reduction.basket-value-min',
 			'internalcode' => 'reduction.basket-value-min',
@@ -91,31 +100,33 @@ class Reduction
 	 */
 	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$config = $this->getServiceItem()->getConfig();
-
 		$price = $this->getProvider()->calcPrice( $basket );
 		$total = $basket->getPrice()->getValue() + $basket->getPrice()->getRebate();
 		$currency = $price->getCurrencyId();
+		$item = $this->getServiceItem();
+		$costs = 0;
 
-		if( isset( $config['reduction.basket-value-min'][$currency] )
-			&& $total < $config['reduction.basket-value-min'][$currency]
-		) {
+		if( ( $val = $item->getConfigValue( 'reduction.basket-value-min/' . $currency ) ) !== null && $val > $total ) {
 			return $price;
 		}
 
-		if( isset( $config['reduction.basket-value-max'][$currency] )
-			&& $total > $config['reduction.basket-value-max'][$currency]
-		) {
+		if( ( $val = $item->getConfigValue( 'reduction.basket-value-max/' . $currency ) ) !== null && $val < $total ) {
 			return $price;
 		}
 
-		if( isset( $config['reduction.percent'] ) )
+		if( $item->getConfigValue( 'reduction.product-costs' ) )
 		{
-			$reduction = $price->getCosts() * $config['reduction.percent'] / 100;
-			$price->setRebate( $price->getRebate() + $reduction );
-			$price->setCosts( $price->getCosts() - $reduction );
+			foreach( $basket->getProducts() as $orderProduct )
+			{
+				$costs += $orderProduct->getPrice()->getCosts();
+
+				foreach( $orderProduct->getProducts() as $subProduct ) {
+					$costs += $subProduct->getPrice()->getCosts();
+				}
+			}
 		}
 
-		return $price;
+		$sub = ( $price->getCosts() + $costs ) * $item->getConfigValue( 'reduction.percent' ) / 100;
+		return $price->setRebate( $price->getRebate() + $sub )->setCosts( $price->getCosts() - $sub );
 	}
 }
