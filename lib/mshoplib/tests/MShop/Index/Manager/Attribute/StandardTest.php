@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'index.attribute:all', [$attrIds] );
+		$func = $search->createFunction( 'index.attribute:allof', [$attrIds] );
 		$search->setConditions( $search->compare( '!=', $func, null ) );
 		$search->setSortations( array( $search->sort( '+', 'product.code' ) ) );
 

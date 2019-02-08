@@ -31,14 +31,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'index.attribute:all' => array(
-			'code' => 'index.attribute:all()',
-			'internalcode' => '( SELECT mpro_all."id" FROM mshop_product AS mpro_all
-				WHERE mpro."id" = mpro_all."id" AND (
-					SELECT COUNT(DISTINCT mindat_all."attrid")
-					FROM "mshop_index_attribute" AS mindat_all
-					WHERE mpro."id" = mindat_all."prodid" AND :site
-					AND mindat_all."attrid" IN ( $1 ) ) = $2
+		'index.attribute:allof' => array(
+			'code' => 'index.attribute:allof()',
+			'internalcode' => '( SELECT mpro_allof."id" FROM mshop_product AS mpro_allof
+				WHERE mpro."id" = mpro_allof."id" AND (
+					SELECT COUNT(DISTINCT mindat_allof."attrid")
+					FROM "mshop_index_attribute" AS mindat_allof
+					WHERE mpro."id" = mindat_allof."prodid" AND :site
+					AND mindat_allof."attrid" IN ( $1 ) ) = $2
 				)',
 			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
 			'type' => 'null',
@@ -87,11 +87,11 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->searchConfig['index.attribute:all']['function'] = function( $source, array $params ) {
+		$this->searchConfig['index.attribute:allof']['function'] = function( $source, array $params ) {
 			return [$params[0], count( explode( ',', $params[0] ) )];
 		};
 
-		$this->replaceSiteMarker( $this->searchConfig['index.attribute:all'], 'mindat_all."siteid"', $siteIds );
+		$this->replaceSiteMarker( $this->searchConfig['index.attribute:allof'], 'mindat_allof."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.attribute:oneof'], 'mindat_oneof."siteid"', $siteIds );
 	}
 
