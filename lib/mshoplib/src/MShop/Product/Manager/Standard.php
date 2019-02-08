@@ -250,12 +250,14 @@ class Standard
 			$expr = array( $object->getConditions() );
 
 			$temp = array(
+				$object->compare( '==', 'product.type', 'event' ),
 				$object->compare( '==', 'product.datestart', null ),
 				$object->compare( '<=', 'product.datestart', $this->date ),
 			);
 			$expr[] = $object->combine( '||', $temp );
 
 			$temp = array(
+				$object->compare( '==', 'product.type', 'event' ),
 				$object->compare( '==', 'product.dateend', null ),
 				$object->compare( '>=', 'product.dateend', $this->date ),
 			);
