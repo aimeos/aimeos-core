@@ -462,19 +462,22 @@ class PayPalExpress
 		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->checkResponse( $orderItem->getId(), $response, __METHOD__ );
 
-		$attributes = array( 'PAYERID' => $params['PayerID'] );
-
-		if( isset( $rvals['TRANSACTIONID'] ) )
+		if( isset( $rvals['PAYMENTINFO_0_TRANSACTIONID'] ) && $rvals['PAYMENTINFO_0_TRANSACTIONID'] == $order->getId() )
 		{
-			$attributes['TRANSACTIONID'] = $rvals['TRANSACTIONID'];
-			$this->setAttributes( $serviceItem, array( $rvals['TRANSACTIONID'] => $rvals['PAYMENTSTATUS'] ), 'payment/paypal/txn' );
+			$attributes = ['PAYERID' => $params['PayerID']];
+
+			if( isset( $rvals['TRANSACTIONID'] ) )
+			{
+				$attributes['TRANSACTIONID'] = $rvals['TRANSACTIONID'];
+				$this->setAttributes( $serviceItem, [$rvals['TRANSACTIONID'] => $rvals['PAYMENTSTATUS']], 'payment/paypal/txn' );
+			}
+
+			$this->setAttributes( $serviceItem, $attributes, 'payment/paypal' );
+			$this->saveOrderBase( $baseItem );
+
+			$this->setPaymentStatus( $orderItem, $rvals );
+			$this->saveOrder( $orderItem );
 		}
-
-		$this->setAttributes( $serviceItem, $attributes, 'payment/paypal' );
-		$this->saveOrderBase( $baseItem );
-
-		$this->setPaymentStatus( $orderItem, $rvals );
-		$this->saveOrder( $orderItem );
 
 		return $orderItem;
 	}

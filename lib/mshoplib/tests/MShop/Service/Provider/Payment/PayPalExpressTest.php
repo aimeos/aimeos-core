@@ -197,7 +197,6 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		);
 		$testData = array(
 			'TRANSACTIONID' => '111111111',
-			'111111110' => 'Pending',
 			'111111111' => 'Completed'
 		);
 
