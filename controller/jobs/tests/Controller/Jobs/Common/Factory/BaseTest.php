@@ -25,7 +25,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$config->set( 'controller/jobs/common/decorators/default', [] );
 		$config->set( 'controller/jobs/admin/decorators/global', [] );
 		$config->set( 'controller/jobs/admin/decorators/local', [] );
-
 	}
 
 

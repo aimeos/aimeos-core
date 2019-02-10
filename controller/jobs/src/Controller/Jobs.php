@@ -33,7 +33,7 @@ class Jobs
 	 * @param string $path Name of the domain
 	 * @throws \Aimeos\Controller\Jobs\Exception If the given path is invalid or the controllers wasn't found
 	 */
-	static public function create( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, $path )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, $path )
 	{
 		if( empty( $path ) ) {
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Controller path is empty' ) );
@@ -73,7 +73,7 @@ class Jobs
 	 * 	relative job controller paths (core and extensions)
 	 * @return array Associative list of controller names as key and the class instance as value
 	 */
-	static public function get( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, array $cntlPaths )
+	public static function get( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, array $cntlPaths )
 	{
 		$cntlList = [];
 		$ds = DIRECTORY_SEPARATOR;
@@ -109,7 +109,7 @@ class Jobs
 	 * @param string $prefix Part of the class name between "\Aimeos\Controller\Jobs" and "Factory"
 	 * @throws \Aimeos\Controller\Jobs\Exception If factory name is invalid or if the controller couldn't be instantiated
 	 */
-	static protected function createControllers( \DirectoryIterator $dir, \Aimeos\MShop\Context\Item\Iface $context,
+	protected static function createControllers( \DirectoryIterator $dir, \Aimeos\MShop\Context\Item\Iface $context,
 		\Aimeos\Bootstrap $aimeos, $prefix = '' )
 	{
 		$list = [];

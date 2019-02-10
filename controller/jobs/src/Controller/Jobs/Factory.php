@@ -30,7 +30,7 @@ class Factory extends \Aimeos\Controller\Jobs
 	 * @throws \Aimeos\Controller\Jobs\Exception If the given path is invalid or the controllers wasn't found
 	 * @deprecated Use create() instead
 	 */
-	static public function createController( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, $path )
+	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, $path )
 	{
 		return self::create( $context, $aimeos, $path );
 	}
@@ -46,7 +46,7 @@ class Factory extends \Aimeos\Controller\Jobs
 	 * @return array Associative list of controller names as key and the class instance as value
 	 * @deprecated Use get() instead
 	 */
-	static public function getControllers( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, array $cntlPaths )
+	public static function getControllers( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, array $cntlPaths )
 	{
 		return self::get( $context, $aimeos, $cntlPaths );
 	}
