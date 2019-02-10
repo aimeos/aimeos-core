@@ -19,9 +19,6 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		}
 	}
 
-	protected function tearDown()
-	{
-	}
 
 	public function testGetOperators()
 	{
@@ -30,17 +27,20 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $expected, $actual );
 	}
 
+
 	public function testGetOperator()
 	{
 		$expr = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '||', [] );
 		$this->assertEquals( '||', $expr->getOperator() );
 	}
 
+
 	public function testGetExpressions()
 	{
 		$expr = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '||', [] );
 		$this->assertEquals( [], $expr->getExpressions() );
 	}
+
 
 	public function testToString()
 	{
@@ -80,6 +80,5 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		new \Aimeos\MW\Criteria\Expression\Combine\SQL('', []);
-
 	}
 }

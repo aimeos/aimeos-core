@@ -74,7 +74,6 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $price );
 		$this->assertEquals( $price->getValue(), '12.95' );
-
 	}
 
 

@@ -676,7 +676,7 @@ class Standard
 	 */
 	public function createSearch( $default = false )
 	{
-		if ($default) {
+		if ( $default ) {
 			return $this->createSearchBase('supplier');
 		}
 

@@ -109,7 +109,6 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 			}
 
 			return array_pop( $this->connections[$name] );
-
 		}
 		catch( \PDOException $e ) {
 			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );

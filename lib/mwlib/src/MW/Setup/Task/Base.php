@@ -109,7 +109,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * @param string $name Name from the resource configuration
 	 * @return \Aimeos\MW\DB\Connection\Iface Database connection
 	 */
-	protected function acquire( $name = 'db')
+	protected function acquire( $name = 'db' )
 	{
 		return $this->dbm->acquire( $name );
 	}

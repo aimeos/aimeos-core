@@ -26,7 +26,7 @@ class Factory
 	 * @return \Aimeos\MW\MQueue\Iface Message queue object
 	 * @throws \Aimeos\MW\MQueue\Exception if message queue class isn't found
 	 */
-	static public function create( array $config )
+	public static function create( array $config )
 	{
 		if( !isset( $config['adapter'] ) ) {
 			throw new \Aimeos\MW\MQueue\Exception( 'Message queue not configured' );

@@ -208,7 +208,6 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			$attrManager->saveItem( $item );
 		}
-
 	}
 
 

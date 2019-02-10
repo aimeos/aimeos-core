@@ -1,38 +1,26 @@
 <?php
 
-namespace Aimeos\MW\Translation;
-
-
 /**
- * Test class for \Aimeos\MW\Translation\NoneTest.
- *
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
+
+
+namespace Aimeos\MW\Translation;
+
+
 class NoneTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->object = new \Aimeos\MW\Translation\None( 'ru_XX' );
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		$this->object = null;
@@ -98,8 +86,6 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 'File', $this->object->dn( 'testDomain', 'File', 'Files', -1 ) );
 		$this->assertEquals( 'Files', $this->object->dn( 'testDomain', 'File', 'Files', -22 ) );
-
-
 	}
 
 

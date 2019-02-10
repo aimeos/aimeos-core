@@ -112,7 +112,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
 
 		$this->assertEquals( true, $this->object->isAvailable( $item ) );
-
 	}
 
 	public function testIsImplemented()

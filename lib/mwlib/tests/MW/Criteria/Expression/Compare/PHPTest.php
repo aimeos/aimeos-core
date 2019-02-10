@@ -1,37 +1,17 @@
 <?php
 
-namespace Aimeos\MW\Criteria\Expression\Compare;
-
-
 /**
- * Test class for \Aimeos\MW\Criteria\Expression\Compare\SQL.
- *
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
+
+
+namespace Aimeos\MW\Criteria\Expression\Compare;
+
+
 class PHPTest extends \PHPUnit\Framework\TestCase
 {
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
-	protected function setUp()
-	{
-	}
-
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
-	protected function tearDown()
-	{
-	}
-
 	public function testGetOperators()
 	{
 		$expected = array( '>', '>=', '<', '<=', '==', '!=' );
@@ -39,11 +19,13 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $expected, $actual );
 	}
 
+
 	public function testGetOperator()
 	{
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'name', 'value' );
 		$this->assertEquals( '==', $expr->getOperator() );
 	}
+
 
 	public function testGetName()
 	{
@@ -51,11 +33,13 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'name', $expr->getName() );
 	}
 
+
 	public function testGetValue()
 	{
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'name', 'value' );
 		$this->assertEquals( 'value', $expr->getValue() );
 	}
+
 
 	public function testToSource()
 	{
@@ -100,9 +84,8 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 		$expr= new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'undefined', null );
 		$this->assertEquals( '$undefined === null', $expr->toSource( $types, $translations ) );
-
-
 	}
+
 
 	public function testToSourceExcept1()
 	{
@@ -129,11 +112,13 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$expr->toSource( $types, $translations );
 	}
 
+
 	public function testToSourceExcept2()
 	{
 		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		new \Aimeos\MW\Criteria\Expression\Compare\PHP('=', 'undefined', null);
 	}
+
 
 	public function testToSourceFunction()
 	{
@@ -158,6 +143,4 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'substring("hello world", 0, 5)', 'hello' );
 		$this->assertEquals( "substr('hello world',0,5) == 'hello'", $expr->toSource( $types, $translations ) );
 	}
-
 }
-

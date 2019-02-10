@@ -128,11 +128,12 @@ class SQL
 			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
 				$value = (float) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
-				if( $operator == '~=' ) {
-					$value = '\'%' . $this->conn->escape( $value ) . '%\''; break;
+				if( $operator == '~=' )
+				{
+					$value = '\'%' . $this->conn->escape( $value ) . '%\'';
+					break;
 				}
-				// all other operators: escape in default case
-			default:
+			default: // all other operators: escape in default case
 				$value = '\'' . $this->conn->escape( $value ) . '\'';
 		}
 

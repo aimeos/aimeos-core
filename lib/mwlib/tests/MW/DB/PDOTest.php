@@ -501,7 +501,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		{
 			$conn->create( $sql, 123 );
 		}
-		catch (\Aimeos\MW\DB\Exception $e)
+		catch ( \Aimeos\MW\DB\Exception $e )
 		{
 			$this->object->release( $conn );
 			throw $e;

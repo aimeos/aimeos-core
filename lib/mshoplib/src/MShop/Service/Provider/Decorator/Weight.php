@@ -104,7 +104,7 @@ class Weight
 			}
 		}
 
-		if ($this->checkWeightScale( $this->getWeight( $prodMap ) ) === false) {
+		if ( $this->checkWeightScale( $this->getWeight( $prodMap ) ) === false ) {
 			return false;
 		}
 

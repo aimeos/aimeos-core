@@ -58,7 +58,7 @@ class Hash implements \Aimeos\MShop\Common\Helper\Password\Iface
 		$digest = hash( $this->options['algorithm'], $salted, true);
 
 		// "stretch" hash
-		for ($i = 1; $i < $iterations; $i++ ) {
+		for ( $i = 1; $i < $iterations; $i++ ) {
 			$digest = hash( $this->options['algorithm'], $digest . $salted, true);
 		}
 

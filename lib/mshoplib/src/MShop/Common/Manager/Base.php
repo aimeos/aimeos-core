@@ -452,7 +452,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
 	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	protected function findItemBase( array $pairs, array $ref, $default  )
+	protected function findItemBase( array $pairs, array $ref, $default )
 	{
 		$expr = [];
 		$criteria = $this->getObject()->createSearch( $default )->setSlice( 0, 1 );

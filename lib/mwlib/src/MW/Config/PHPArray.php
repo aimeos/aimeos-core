@@ -86,7 +86,7 @@ class PHPArray
 	 * @param string[] $parts Configuration path parts to look for inside the array
 	 * @return mixed Found value or null if no value is available
 	 */
-	protected function getPart( $config,  $parts )
+	protected function getPart( $config, $parts )
 	{
 		if( ( $current = array_shift( $parts ) ) !== null && isset( $config[$current] ) )
 		{

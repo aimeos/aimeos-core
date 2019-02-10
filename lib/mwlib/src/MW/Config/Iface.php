@@ -27,7 +27,7 @@ interface Iface
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key
 	 */
-	public function get($name, $default = null);
+	public function get( $name, $default = null );
 
 	/**
 	 * Sets the value for the specified key.
@@ -36,5 +36,5 @@ interface Iface
 	 * @param mixed $value Value that should be associated with the given path
 	 * @return null
 	 */
-	public function set($name, $value);
+	public function set( $name, $value );
 }

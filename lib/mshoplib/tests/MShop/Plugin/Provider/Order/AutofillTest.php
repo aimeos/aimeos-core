@@ -91,7 +91,6 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( [], $this->order->getAddresses() );
 		$this->assertEquals( [], $this->order->getServices() );
-
 	}
 
 

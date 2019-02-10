@@ -288,7 +288,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		foreach( $attribs as $obj ) {
 			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $obj );
 		}
-
 	}
 
 

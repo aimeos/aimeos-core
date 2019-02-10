@@ -80,7 +80,7 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 * @return \Aimeos\MW\DB\Statement\Iface \PDO statement object
 	 * @throws \Aimeos\MW\DB\Exception if type is invalid or the DBAL object throws an exception
 	 */
-	public function create( $sql, $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE  )
+	public function create( $sql, $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE )
 	{
 		try
 		{
@@ -94,7 +94,7 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 					throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid value "%1$d" for statement type', $type ) );
 			}
 		}
-		catch( \Exception $e)
+		catch( \Exception $e )
 		{
 			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
 		}

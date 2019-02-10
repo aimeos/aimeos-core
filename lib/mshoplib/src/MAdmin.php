@@ -17,8 +17,8 @@ namespace Aimeos;
  */
 class MAdmin
 {
-	static private $cache = true;
-	static private $objects = [];
+	private static $cache = true;
+	private static $objects = [];
 
 
 	/**
@@ -26,7 +26,7 @@ class MAdmin
 	 *
 	 * @param boolean $value True to enable caching, false to disable it
 	 */
-	static public function cache( $value )
+	public static function cache( $value )
 	{
 		self::$cache = (boolean) $value;
 		self::$objects = [];
@@ -49,7 +49,7 @@ class MAdmin
 	 * @return \Aimeos\MShop\Common\Manager\Iface MAdmin manager object
 	 * @throws \Aimeos\MAdmin\Exception If the given path is invalid or the manager wasn't found
 	 */
-	static public function create( \Aimeos\MShop\Context\Item\Iface $context, $path )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $path )
 	{
 		if( empty( $path ) ) {
 			throw new \Aimeos\MAdmin\Exception( sprintf( 'Manager path is empty' ) );
@@ -97,7 +97,7 @@ class MAdmin
 	 * @param string $path Name of the domain (and sub-managers) separated by slashes, e.g "product/list"
 	 * @param \Aimeos\MShop\Common\Manager\Iface $object Manager object for the given manager path
 	 */
-	static public function inject( $path, \Aimeos\MShop\Common\Manager\Iface $object )
+	public static function inject( $path, \Aimeos\MShop\Common\Manager\Iface $object )
 	{
 		self::$objects[$path] = $object;
 	}

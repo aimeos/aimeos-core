@@ -29,7 +29,7 @@ class Factory
 	 * @return \Aimeos\MW\Tree\Manager\Iface Tree manager object of the requested type
 	 * @throws \Aimeos\MW\Tree\Exception if class isn't found
 	 */
-	static public function create( $name, array $config, $resource )
+	public static function create( $name, array $config, $resource )
 	{
 		if( ctype_alnum( $name ) === false )
 		{

@@ -28,7 +28,7 @@ interface Iface
 	 * @param integer $type Type of given value defined in \Aimeos\MW\DB\Stmt\Base as constant
 	 * @return void
 	 */
-	public function bind( $position, $value, $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR);
+	public function bind( $position, $value, $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 
 	/**
 	 * Executes the statement.

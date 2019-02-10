@@ -102,7 +102,9 @@ abstract class Base
 	protected function isFunction( &$name, array &$params )
 	{
 		$len = strlen( $name );
-		if( $len === 0 || $name[$len-1] !== ')' ) { return false; }
+		if( $len === 0 || $name[$len-1] !== ')' ) {
+			return false;
+		}
 
 		if( ( $pos = strpos( $name, '(' ) ) === false ) {
 			throw new \Aimeos\MW\Common\Exception( 'Missing opening bracket for function syntax' );

@@ -90,7 +90,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 *		[required] booblean (optional)
 	 *		[type] string
 	 */
-	public function  __construct( array $params = [] )
+	public function __construct( array $params = [] )
 	{
 		foreach( ['type', 'code'] as $entry )
 		{

@@ -120,6 +120,5 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		return $entry;
-
 	}
 }

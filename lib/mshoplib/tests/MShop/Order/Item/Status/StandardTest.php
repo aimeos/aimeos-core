@@ -37,7 +37,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$this->object = new \Aimeos\MShop\Order\Item\Status\Standard( $this->values );
-
 	}
 
 

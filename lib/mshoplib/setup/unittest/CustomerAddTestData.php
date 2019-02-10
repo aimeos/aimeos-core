@@ -88,7 +88,6 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 			$item = $this->addPropertyData( $propManager, $item, $entry );
 			$item = $this->addAddressData( $addrManager, $item, $entry );
 			$items[] = $this->addListData( $listManager, $item, $entry );
-
 		}
 
 		$manager->saveItems( $items );

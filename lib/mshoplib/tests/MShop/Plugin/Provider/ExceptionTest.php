@@ -22,7 +22,6 @@ class ExceptionTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$this->codes = array( 'something' => array( 'went', 'terribly', 'wrong' ) );
-
 	}
 
 	public function test()
@@ -35,7 +34,6 @@ class ExceptionTest extends \PHPUnit\Framework\TestCase
 			$this->assertEquals( 13, $mppe->getCode() );
 			$this->assertEquals( 'msg', $mppe->getMessage() );
 			$this->assertEquals( $this->codes, $mppe->getErrorCodes() );
-
 		}
 
 		try {

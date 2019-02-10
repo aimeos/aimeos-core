@@ -86,4 +86,3 @@ return array(
 		),
 	),
 );
-

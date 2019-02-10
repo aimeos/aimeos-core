@@ -73,7 +73,7 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 	 * @param string $dbname Name of the database that will be used
 	 * @return \Aimeos\MW\Setup\DBSchema\Iface Database schema object
 	 */
-	protected  function createSchema( \Aimeos\MW\DB\Manager\Iface $dbm, $rname, $adapter, $dbname )
+	protected function createSchema( \Aimeos\MW\DB\Manager\Iface $dbm, $rname, $adapter, $dbname )
 	{
 		if( empty( $adapter ) || ctype_alnum( $adapter ) === false ) {
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Invalid database adapter "%1$s"', $adapter ) );

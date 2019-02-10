@@ -59,7 +59,7 @@ abstract class Base
 	 * @param string $data Value to escape
 	 * @return string Escaped string
 	 */
-	public function escape($data)
+	public function escape( $data )
 	{
 		$quoted = $this->getRawObject()->quote( $data );
 

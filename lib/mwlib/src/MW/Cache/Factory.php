@@ -29,7 +29,7 @@ class Factory
 	 * @return \Aimeos\MW\Cache\Iface Cache object of the requested type
 	 * @throws \Aimeos\MW\Cache\Exception if class isn't found
 	 */
-	static public function create( $name, array $config = [], $resource = null )
+	public static function create( $name, array $config = [], $resource = null )
 	{
 		if( ctype_alnum( $name ) === false )
 		{

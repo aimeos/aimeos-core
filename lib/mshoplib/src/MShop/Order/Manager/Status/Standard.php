@@ -740,7 +740,6 @@ class Standard
 			}
 
 			$dbm->release( $conn, $dbname );
-
 		}
 		catch( \Exception $e )
 		{

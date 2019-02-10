@@ -174,7 +174,7 @@ class Standard
 	 * @return self
 	 * @throws \InvalidArgumentException for invalid header names or values.
 	 */
-	public function withHeader($name, $value )
+	public function withHeader( $name, $value )
 	{
 		$this->response = $this->response->withHeader( $name, $value );
 		return $this;

@@ -1,26 +1,20 @@
 <?php
 
-namespace Aimeos\MW\Criteria\Expression\Sort;
-
-
 /**
- * Test class for \Aimeos\MW\Criteria\Expression\Sort\SQL.
- *
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
+
+
+namespace Aimeos\MW\Criteria\Expression\Sort;
+
+
 class SQLTest extends \PHPUnit\Framework\TestCase
 {
 	private $conn = null;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === false ) {
@@ -32,17 +26,13 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->conn = $dbm->acquire();
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
 		$dbm = \TestHelperMw::getDBManager();
 		$dbm->release( $this->conn );
 	}
+
 
 	public function testGetOperators()
 	{
@@ -51,17 +41,20 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $expected, $actual );
 	}
 
+
 	public function testGetOperator()
 	{
 		$expr = new \Aimeos\MW\Criteria\Expression\Sort\SQL( $this->conn, '+', 'test' );
 		$this->assertEquals( '+', $expr->getOperator() );
 	}
 
+
 	public function testGetName()
 	{
 		$expr = new \Aimeos\MW\Criteria\Expression\Sort\SQL( $this->conn, '-', 'test' );
 		$this->assertEquals( 'test', $expr->getName() );
 	}
+
 
 	public function testToString()
 	{

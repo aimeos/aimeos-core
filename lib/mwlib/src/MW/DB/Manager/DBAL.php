@@ -108,7 +108,6 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 			}
 
 			return array_pop( $this->connections[$name] );
-
 		}
 		catch( \Exception $e ) {
 			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );

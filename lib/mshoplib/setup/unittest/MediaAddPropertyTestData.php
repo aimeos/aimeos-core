@@ -119,6 +119,5 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		return $entry;
-
 	}
 }

@@ -26,6 +26,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->conn = $dbm->acquire();
 	}
 
+
 	protected function tearDown()
 	{
 		$dbm = \TestHelperMw::getDBManager();
@@ -47,11 +48,13 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $expected, $actual );
 	}
 
+
 	public function testGetOperator()
 	{
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'name', 'value' );
 		$this->assertEquals( '==', $expr->getOperator() );
 	}
+
 
 	public function testGetName()
 	{
@@ -59,11 +62,13 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'name', $expr->getName() );
 	}
 
+
 	public function testGetValue()
 	{
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'name', 'value' );
 		$this->assertEquals( 'value', $expr->getValue() );
 	}
+
 
 	public function testToSource()
 	{
@@ -106,6 +111,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$expr= new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'bool', true );
 		$this->assertEquals( "t.bool = 1", $expr->toSource( $types, $translations ) );
 	}
+
 
 	public function testToSourceFunction()
 	{

@@ -33,7 +33,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->code->setCode( 'abcd' );
 		$this->code->setCount( '1' );
 		$this->code->setParentId( $item->getId() );
-
 	}
 
 

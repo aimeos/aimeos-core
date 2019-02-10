@@ -26,7 +26,7 @@ class Factory
 	 * @return \Aimeos\MW\Filesystem\Iface File system object
 	 * @throws \Aimeos\MW\Filesystem\Exception if file system class isn't found
 	 */
-	static public function create( array $config )
+	public static function create( array $config )
 	{
 		if( !isset( $config['adapter'] ) ) {
 			throw new \Aimeos\MW\Filesystem\Exception( 'File system not configured' );

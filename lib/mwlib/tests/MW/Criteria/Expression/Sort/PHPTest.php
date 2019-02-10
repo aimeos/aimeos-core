@@ -1,37 +1,17 @@
 <?php
 
-namespace Aimeos\MW\Criteria\Expression\Sort;
-
-
 /**
- * Test class for \Aimeos\MW\Criteria\Expression\Sort\PHP.
- *
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
+
+
+namespace Aimeos\MW\Criteria\Expression\Sort;
+
+
 class PHPTest extends \PHPUnit\Framework\TestCase
 {
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
-	protected function setUp()
-	{
-	}
-
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
-	protected function tearDown()
-	{
-	}
-
 	public function testGetOperators()
 	{
 		$expected = array( '+', '-' );
@@ -39,17 +19,20 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $expected, $actual );
 	}
 
+
 	public function testGetOperator()
 	{
 		$expr = new \Aimeos\MW\Criteria\Expression\Sort\PHP( '+', 'test' );
 		$this->assertEquals( '+', $expr->getOperator() );
 	}
 
+
 	public function testGetName()
 	{
 		$expr = new \Aimeos\MW\Criteria\Expression\Sort\PHP( '-', 'test' );
 		$this->assertEquals( 'test', $expr->getName() );
 	}
+
 
 	public function testToString()
 	{
@@ -75,15 +58,15 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MW\Criteria\Expression\Sort\PHP( '+', 'test("1","2")' );
 		$this->assertEquals( 'asort(testfunc(1,2));', $object->toSource( $types, $translations ) );
-
-
 	}
+
 
 	public function testException1()
 	{
 		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		new \Aimeos\MW\Criteria\Expression\Sort\PHP( '/', 'test(1,2)' );
 	}
+
 
 	public function testException2()
 	{
@@ -101,5 +84,4 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$object->toSource( $types, $translations );
 	}
-
 }

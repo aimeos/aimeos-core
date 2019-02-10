@@ -18,7 +18,6 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$manager = \Aimeos\MAdmin\Cache\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $manager );
-
 	}
 
 
