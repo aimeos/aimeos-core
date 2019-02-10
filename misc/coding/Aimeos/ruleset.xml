@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="PSR12" xsi:noNamespaceSchemaLocation="../../../phpcs.xsd">
+    <description>The PSR-12 coding standard.</description>
+    <arg name="tab-width" value="4"/>
+
+    <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+    <rule ref="Generic.PHP.DisallowShortOpenTag.EchoFound">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="Generic.Files.ByteOrderMark"/>
+    <rule ref="Squiz.Classes.ValidClassName"/>
+    <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+
+    <rule ref="Generic.Files.LineEndings">
+        <properties>
+            <property name="eolChar" value="\n"/>
+        </properties>
+    </rule>
+    <rule ref="PSR2.Files.EndFileNewline"/>
+    <rule ref="PSR2.Files.ClosingTag"/>
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="0"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
+        <properties>
+            <property name="ignoreBlankLines" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.StartFile">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EndFile">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines">
+        <severity>0</severity>
+    </rule>
+
+    <!-- rule ref="Generic.WhiteSpace.ScopeIndent">
+        <properties>
+            <property name="ignoreIndentationTokens" type="array">
+                <element value="T_COMMENT"/>
+                <element value="T_DOC_COMMENT_OPEN_TAG"/>
+            </property>
+            <property name="tabIndent" value="1"/>
+        </properties>
+    </rule -->
+    <rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+
+    <rule ref="Generic.PHP.LowerCaseKeyword"/>
+    <rule ref="Generic.PHP.LowerCaseConstant"/>
+    <rule ref="Generic.PHP.LowerCaseType"/>
+
+    <rule ref="PEAR.Classes.ClassDeclaration"/>
+    <rule ref="PSR2.Classes.PropertyDeclaration"/>
+
+    <rule ref="Squiz.Scope.MethodScope"/>
+    <rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing"/>
+    <rule ref="PSR2.Methods.MethodDeclaration"/>
+    <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
+        <type>error</type>
+        <message>Method name "%s" must not be prefixed with an underscore to indicate visibility</message>
+    </rule>
+    <rule ref="PSR2.Methods.FunctionClosingBrace"/>
+    <rule ref="Squiz.Functions.FunctionDeclaration"/>
+    <rule ref="Squiz.Functions.LowercaseFunctionKeywords"/>
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+        <properties>
+            <property name="equalsSpacing" value="1"/>
+            <property name="requiredSpacesAfterOpen" value="1"/>
+            <property name="requiredSpacesBeforeClose" value="1"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterHint">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="PEAR.Functions.ValidDefaultValue"/>
+
+    <!-- Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one argument per line. When the argument list is split across multiple lines, the closing parenthesis and opening brace MUST be placed together on their own line with one space between them. -->
+    <rule ref="Squiz.Functions.FunctionDeclaration"/>
+
+    <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+    <rule ref="PSR2.Methods.FunctionCallSignature.SpaceAfterCloseBracket">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PSR2.Methods.FunctionCallSignature.OpeningIndent">
+        <severity>0</severity>
+    </rule>
+
+    <rule ref="Squiz.WhiteSpace.ControlStructureSpacing.SpacingAfterOpen"/>
+    <rule ref="Squiz.WhiteSpace.ControlStructureSpacing.SpacingBeforeClose"/>
+    <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration">
+        <properties>
+            <property name="requiredSpacesAfterOpen" value="1"/>
+            <property name="requiredSpacesBeforeClose" value="1"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.ControlStructures.ForLoopDeclaration">
+        <properties>
+            <property name="requiredSpacesAfterOpen" value="1"/>
+            <property name="requiredSpacesBeforeClose" value="1"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.ControlStructures.LowercaseDeclaration"/>
+    <rule ref="PSR2.ControlStructures.ControlStructureSpacing">
+        <properties>
+            <property name="requiredSpacesAfterOpen" value="1"/>
+            <property name="requiredSpacesBeforeClose" value="1"/>
+        </properties>
+    </rule>
+    <rule ref="Generic.ControlStructures.InlineControlStructure"/>
+
+    <!-- exclude this message as it is already checked in Generic.PHP.LowerCaseKeyword -->
+    <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration.AsNotLower">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
+
+</ruleset>

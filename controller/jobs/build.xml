@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="Aimeos jobs controller" default="all">
-	
+
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />
 		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
@@ -20,10 +20,10 @@
 		<exec command="${bindir}phpunit --configuration=phpunit-coverage.xml"
 			  dir="tests" checkreturn="true" logoutput="true" passthru="true" />
 	</target>
-	
+
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="${bindir}phpcs -n --standard=${codestddir}/Metaways src tests/Controller"
+		<exec command="${bindir}phpcs -n --standard=${codestddir}/Aimeos src tests/Controller"
 			  checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 
@@ -48,11 +48,11 @@
 			</fileset>
 		</foreach>
 	</target>
-	
+
 	<target name="i18n-update" description="Updates translation message files">
 		<fail unless="po-filename" message="Missing file name" />
 		<echo msg="File: ${po-filename}" />
-		<exec command="msgmerge --no-wrap -s -U --backup=none ${po-filename} i18n/core-controller-jobs.pot" checkreturn="true" logoutput="true" /> 
+		<exec command="msgmerge --no-wrap -s -U --backup=none ${po-filename} i18n/core-controller-jobs.pot" checkreturn="true" logoutput="true" />
   </target>
 
 	<target name="build" description="Builds package for deployment">
@@ -66,7 +66,7 @@
 	<target name="build-mo" description="Generates binary translation files">
 		<fail unless="po-filename" message="Missing file name" />
 		<echo msg="File: ${po-filename}" />
-		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" /> 
+		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" />
     </target>
 
 	<target name="all" depends="coverage" description="Builds all parts of the package">

@@ -27,7 +27,7 @@
 
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="${bindir}phpcs -n --standard=${codestddir}/Metaways --ignore=setup/default/schema config setup src tests/MAdmin tests/MShop tests/Perf tests/bootstrap.php tests/TestHelperMShop.php"
+		<exec command="${bindir}phpcs -n --standard=${codestddir}/Aimeos config setup src tests"
 			  checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 
