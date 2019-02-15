@@ -126,7 +126,7 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$this->loglevel = $config->get( 'madmin/log/manager/standard/loglevel', \Aimeos\MW\Logger\Base::WARN );
+		$this->loglevel = $config->get( 'madmin/log/manager/standard/loglevel', \Aimeos\MW\Logger\Base::NOTICE );
 		$this->requestid = md5( php_uname( 'n' ) . getmypid() . date( 'Y-m-d H:i:s' ) );
 	}
 

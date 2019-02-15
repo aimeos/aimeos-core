@@ -45,7 +45,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @param string $name Name of the method
 	 * @param array $param List of method parameter
-	 * @throws \Aimeos\MShop\Common\Manager\Exception If method call failed
+	 * @throws \Aimeos\MShop\Manager\Exception If method call failed
 	 */
 	public function __call( $name, array $param )
 	{
@@ -388,12 +388,25 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$stmt = $conn->create( $sql );
 		$result = $stmt->execute();
 
+		$time = ( microtime( true ) - $time ) * 1000;
 		$msg = [
-			'time' => ( microtime( true ) - $time ) * 1000,
+			'time' => $time,
 			'class' => get_class( $this ),
 			'stmt' => (string) $stmt,
 		];
-		$this->context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
+
+		if( $time > 1000.0 )
+		{
+			$e = new \Exception();
+			$msg['trace'] = $e->getTraceAsString();
+			$level = \Aimeos\MW\Logger\Base::NOTICE;
+		}
+		else
+		{
+			$level = \Aimeos\MW\Logger\Base::DEBUG;
+		}
+
+		$this->context->getLogger()->log( $msg, $level, 'core/sql' );
 
 		return $result;
 	}

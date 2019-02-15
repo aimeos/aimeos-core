@@ -44,7 +44,7 @@ abstract class Base
 	 *
 	 * @param string $name Name of the method
 	 * @param array $param List of method parameter
-	 * @throws \Aimeos\MShop\Common\Manager\Exception If method call failed
+	 * @throws \Aimeos\MShop\Service\Manager\Exception If method call failed
 	 */
 	public function __call( $name, array $param )
 	{
