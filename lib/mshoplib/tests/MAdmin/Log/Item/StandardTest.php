@@ -158,7 +158,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'log.request' => 'UT request',
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( ['log.siteid' => 2, 'log.timestamp' => '2010-01-01 00:00:00'], $entries );
 		$this->assertEquals( $list['log.id'], $item->getId() );

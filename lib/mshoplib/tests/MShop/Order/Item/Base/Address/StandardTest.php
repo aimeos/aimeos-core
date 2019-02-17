@@ -518,7 +518,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$object = new \Aimeos\MShop\Order\Item\Base\Address\Standard();
-		$object = $object->fromArray( $entries );
+		$object = $object->fromArray( $entries, true );
 
 		$this->assertEquals( $list['order.base.address.id'], $object->getId() );
 		$this->assertEquals( $list['order.base.address.baseid'], $object->getBaseId() );

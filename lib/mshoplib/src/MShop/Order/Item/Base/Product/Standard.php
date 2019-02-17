@@ -576,20 +576,22 @@ class Standard extends Base implements Iface
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
+	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item for chaining method calls
 	 */
-	public function fromArray( array &$list )
+	public function fromArray( array &$list, $private = false )
 	{
-		$item = parent::fromArray( $list );
+		$item = parent::fromArray( $list, $private );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'order.base.product.siteid': $item = $item->setSiteId( $value ); break;
-				case 'order.base.product.baseid': $item = $item->setBaseId( $value ); break;
-				case 'order.base.product.orderproductid': $item = $item->setOrderProductId( $value ); break;
-				case 'order.base.product.orderaddressid': $item = $item->setOrderAddressId( $value ); break;
+				case 'order.base.product.siteid': !$private ?: $item = $item->setSiteId( $value ); break;
+				case 'order.base.product.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
+				case 'order.base.product.orderproductid': !$private ?: $item = $item->setOrderProductId( $value ); break;
+				case 'order.base.product.orderaddressid': !$private ?: $item = $item->setOrderAddressId( $value ); break;
+				case 'order.base.product.flags': !$private ?: $item = $item->setFlags( $value ); break;
 				case 'order.base.product.type': $item = $item->setType( $value ); break;
 				case 'order.base.product.stocktype': $item = $item->setStockType( $value ); break;
 				case 'order.base.product.suppliercode': $item = $item->setSupplierCode( $value ); break;
@@ -601,7 +603,6 @@ class Standard extends Base implements Iface
 				case 'order.base.product.position': $item = $item->setPosition( $value ); break;
 				case 'order.base.product.quantity': $item = $item->setQuantity( $value ); break;
 				case 'order.base.product.status': $item = $item->setStatus( $value ); break;
-				case 'order.base.product.flags': $item = $item->setFlags( $value ); break;
 				default: continue 2;
 			}
 
@@ -632,14 +633,14 @@ class Standard extends Base implements Iface
 		$list['order.base.product.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.product.status'] = $this->getStatus();
 		$list['order.base.product.position'] = $this->getPosition();
+		$list['order.base.product.target'] = $this->getTarget();
+		$list['order.base.product.flags'] = $this->getFlags();
 
 		if( $private === true )
 		{
 			$list['order.base.product.baseid'] = $this->getBaseId();
 			$list['order.base.product.orderproductid'] = $this->getOrderProductId();
 			$list['order.base.product.orderaddressid'] = $this->getOrderAddressId();
-			$list['order.base.product.target'] = $this->getTarget();
-			$list['order.base.product.flags'] = $this->getFlags();
 		}
 
 		return $list;

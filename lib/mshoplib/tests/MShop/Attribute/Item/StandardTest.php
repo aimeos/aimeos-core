@@ -204,7 +204,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'attribute.position' => 10,
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['attribute.id'], $item->getId() );

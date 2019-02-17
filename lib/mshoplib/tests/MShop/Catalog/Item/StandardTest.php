@@ -227,7 +227,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'catalog.target' => 'ttarget',
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 

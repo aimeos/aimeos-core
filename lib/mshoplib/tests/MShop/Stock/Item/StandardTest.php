@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'stock.dateback' => '2000-01-01 00:00:00',
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['stock.id'], $item->getId() );

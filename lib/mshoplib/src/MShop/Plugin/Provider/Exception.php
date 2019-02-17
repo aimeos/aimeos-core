@@ -20,7 +20,6 @@ namespace Aimeos\MShop\Plugin\Provider;
  */
 class Exception extends \Aimeos\MShop\Plugin\Exception
 {
-
 	private $errorCodes;
 
 

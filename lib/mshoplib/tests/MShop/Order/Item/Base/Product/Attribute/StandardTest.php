@@ -254,7 +254,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.attribute.quantity' => 4,
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['order.base.product.attribute.id'], $item->getId() );

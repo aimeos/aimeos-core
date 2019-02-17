@@ -231,7 +231,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.datedelivery' => '2001-01-01 00:00:00',
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['order.id'], $item->getId() );

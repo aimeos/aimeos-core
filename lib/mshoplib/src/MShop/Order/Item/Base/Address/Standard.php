@@ -159,18 +159,19 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
+	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order address item for chaining method calls
 	 */
-	public function fromArray( array &$list )
+	public function fromArray( array &$list, $private = false )
 	{
-		$item = parent::fromArray( $list );
+		$item = parent::fromArray( $list, $private );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'order.base.address.baseid': $item = $item->setBaseId( $value ); break;
-				case 'order.base.address.addressid': $item = $item->setAddressId( $value ); break;
+				case 'order.base.address.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
+				case 'order.base.address.addressid': !$private ?: $item = $item->setAddressId( $value ); break;
 				case 'order.base.address.type': $item = $item->setType( $value ); break;
 				default: continue 2;
 			}

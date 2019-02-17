@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.group.label' => 'unittest12',
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['customer.group.id'], $item->getId() );

@@ -316,11 +316,12 @@ class Standard extends Base implements Iface
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
+	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function fromArray( array &$list )
+	public function fromArray( array &$list, $private = false )
 	{
-		$item = parent::fromArray( $list );
+		$item = parent::fromArray( $list, $private );
 
 		foreach( $list as $key => $value )
 		{
@@ -331,8 +332,8 @@ class Standard extends Base implements Iface
 				case 'customer.birthday': $item = $item->setBirthday( $value ); break;
 				case 'customer.status': $item = $item->setStatus( $value ); break;
 				case 'customer.groups': $item = $item->setGroups( $value ); break;
-				case 'customer.password': $item = $item->setPassword( $value ); break;
-				case 'customer.dateverified': $item = $item->setDateVerified( $value ); break;
+				case 'customer.password': !$private ?: $item = $item->setPassword( $value ); break;
+				case 'customer.dateverified': !$private ?: $item = $item->setDateVerified( $value ); break;
 				default: continue 2;
 			}
 
@@ -357,10 +358,10 @@ class Standard extends Base implements Iface
 		$list['customer.code'] = $this->getCode();
 		$list['customer.birthday'] = $this->getBirthday();
 		$list['customer.status'] = $this->getStatus();
+		$list['customer.groups'] = $this->getGroups();
 
 		if( $private === true )
 		{
-			$list['customer.groups'] = $this->getGroups();
 			$list['customer.password'] = $this->getPassword();
 			$list['customer.dateverified'] = $this->getDateVerified();
 		}

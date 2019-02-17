@@ -333,19 +333,20 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
+	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order product attribute item for chaining method calls
 	 */
-	public function fromArray( array &$list )
+	public function fromArray( array &$list, $private = false )
 	{
-		$item = parent::fromArray( $list );
+		$item = parent::fromArray( $list, $private );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'order.base.product.attribute.siteid': $item = $item->setSiteId( $value ); break;
-				case 'order.base.product.attribute.attrid': $item = $item->setAttributeId( $value ); break;
-				case 'order.base.product.attribute.parentid': $item = $item->setParentId( $value ); break;
+				case 'order.base.product.attribute.siteid': !$private ?: $item = $item->setSiteId( $value ); break;
+				case 'order.base.product.attribute.attrid': !$private ?: $item = $item->setAttributeId( $value ); break;
+				case 'order.base.product.attribute.parentid': !$private ?: $item = $item->setParentId( $value ); break;
 				case 'order.base.product.attribute.type': $item = $item->setType( $value ); break;
 				case 'order.base.product.attribute.code': $item = $item->setCode( $value ); break;
 				case 'order.base.product.attribute.value': $item = $item->setValue( $value ); break;

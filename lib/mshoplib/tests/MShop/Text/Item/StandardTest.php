@@ -206,7 +206,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'text.status' => 0,
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['text.id'], $item->getId() );

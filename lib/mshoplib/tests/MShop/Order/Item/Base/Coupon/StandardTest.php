@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.coupon.code' => 'test',
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['order.base.coupon.id'], $item->getId() );

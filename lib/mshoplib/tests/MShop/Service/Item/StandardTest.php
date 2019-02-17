@@ -258,7 +258,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'service.status' => 0,
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['service.id'], $item->getId() );

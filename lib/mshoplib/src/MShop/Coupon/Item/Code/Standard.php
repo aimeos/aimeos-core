@@ -259,21 +259,22 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
+	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
-	public function fromArray( array &$list )
+	public function fromArray( array &$list, $private = false )
 	{
-		$item = parent::fromArray( $list );
+		$item = parent::fromArray( $list, $private );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'coupon.code.count': $item = $item->setCount( $value ); break;
-				case 'coupon.code.code': $item = $item->setCode( $value ); break;
-				case 'coupon.code.parentid': $item = $item->setParentId( $value ); break;
+				case 'coupon.code.parentid': !$private ?: $item = $item->setParentId( $value ); break;
 				case 'coupon.code.datestart': $item = $item->setDateStart( $value ); break;
 				case 'coupon.code.dateend': $item = $item->setDateEnd( $value ); break;
+				case 'coupon.code.count': $item = $item->setCount( $value ); break;
+				case 'coupon.code.code': $item = $item->setCode( $value ); break;
 				case 'coupon.code.ref': $item = $item->setRef( $value ); break;
 				default: continue 2;
 			}
@@ -295,10 +296,10 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['coupon.code.code'] = $this->getCode();
-		$list['coupon.code.count'] = $this->getCount();
 		$list['coupon.code.datestart'] = $this->getDateStart();
 		$list['coupon.code.dateend'] = $this->getDateEnd();
+		$list['coupon.code.count'] = $this->getCount();
+		$list['coupon.code.code'] = $this->getCode();
 		$list['coupon.code.ref'] = $this->getRef();
 
 		if( $private === true ) {

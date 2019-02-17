@@ -211,7 +211,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'coupon.code.ref' => 'def',
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 

@@ -453,7 +453,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.service.type' => 'delivery',
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['order.base.service.id'], $item->getId() );

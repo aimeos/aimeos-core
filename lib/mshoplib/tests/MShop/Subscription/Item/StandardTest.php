@@ -224,7 +224,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'subscription.status' => 1,
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['subscription.id'], $item->getId() );

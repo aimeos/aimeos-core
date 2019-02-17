@@ -187,7 +187,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 				'locale.language.status' => 1,
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['locale.language.id'], $item->getId() );

@@ -167,7 +167,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'locale.currency.status' => 1,
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['locale.currency.id'], $item->getId() );

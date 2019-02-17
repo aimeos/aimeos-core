@@ -126,7 +126,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'cache.tags' => array( 'tag1', 'tag2' ),
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['cache.id'], $item->getId() );

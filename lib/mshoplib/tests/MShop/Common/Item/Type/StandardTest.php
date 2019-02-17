@@ -170,7 +170,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.type.status' => 1,
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 

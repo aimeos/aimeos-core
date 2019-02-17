@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'tag.languageid' => 'de',
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['tag.id'], $item->getId() );

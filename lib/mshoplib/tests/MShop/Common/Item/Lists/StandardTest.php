@@ -270,7 +270,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.status' => 1,
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 

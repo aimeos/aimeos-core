@@ -503,7 +503,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$object = new \Aimeos\MShop\Common\Item\Address\Standard( 'supplier.address.' );
-		$object = $object->fromArray( $entries );
+		$object = $object->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['supplier.address.id'], $object->getId() );

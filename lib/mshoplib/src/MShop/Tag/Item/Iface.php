@@ -51,5 +51,4 @@ interface Iface
 	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
 	public function setLabel( $label );
-
 }

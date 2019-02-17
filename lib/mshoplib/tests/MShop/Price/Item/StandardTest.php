@@ -376,7 +376,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'price.status' => 0,
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['price.id'], $item->getId() );

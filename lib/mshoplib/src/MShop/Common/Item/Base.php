@@ -246,13 +246,14 @@ abstract class Base
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array $list Associative list of item keys and their values
+	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function fromArray( array &$list )
+	public function fromArray( array &$list, $private = false )
 	{
 		$item = $this;
 
-		if( array_key_exists( $this->prefix . 'id', $list ) )
+		if( $private && array_key_exists( $this->prefix . 'id', $list ) )
 		{
 			$item = $item->setId( $list[$this->prefix . 'id'] );
 			unset( $list[$this->prefix . 'id'] );

@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'locale.site.config' => array( 'test' ),
 		);
 
-		$item = $item->fromArray( $entries );
+		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( $list['locale.site.id'], $item->getId() );

@@ -414,22 +414,23 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
+	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function fromArray( array &$list )
+	public function fromArray( array &$list, $private = false )
 	{
-		$item = parent::fromArray( $list );
+		$item = parent::fromArray( $list, $private );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
-				case 'catalog.id': $item = $item->setId( $value ); break;
 				case 'catalog.code': $item = $item->setCode( $value ); break;
 				case 'catalog.label': $item = $item->setLabel( $value ); break;
 				case 'catalog.status': $item = $item->setStatus( $value ); break;
 				case 'catalog.config': $item = $item->setConfig( $value ); break;
 				case 'catalog.target': $item = $item->setTarget( $value ); break;
+				case 'catalog.id': !$private ?: $item = $item->setId( $value ); break;
 				default: continue 2;
 			}
 
@@ -453,15 +454,15 @@ class Standard
 			'catalog.label' => $this->getLabel(),
 			'catalog.config' => $this->getConfig(),
 			'catalog.status' => $this->getStatus(),
+			'catalog.target' => $this->getTarget(),
 			'catalog.hasChildren' => $this->hasChildren(),
 		];
 
 		if( $private === true )
 		{
 			$list['catalog.id'] = $this->getId();
-			$list['catalog.siteid'] = $this->getSiteId();
-			$list['catalog.target'] = $this->getTarget();
 			$list['catalog.level'] = $this->getLevel();
+			$list['catalog.siteid'] = $this->getSiteId();
 			$list['catalog.parentid'] = $this->getParentId();
 			$list['catalog.ctime'] = $this->getTimeCreated();
 			$list['catalog.mtime'] = $this->getTimeModified();
