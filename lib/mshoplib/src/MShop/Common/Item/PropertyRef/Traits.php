@@ -125,6 +125,28 @@ trait Traits
 
 
 	/**
+	 * Returns the property item for the given type, language and value
+	 *
+	 * @param string $type Name of the property type
+	 * @param string $langId ISO language code (e.g. "en" or "en_US") or null if not language specific
+	 * @param string $value Value of the property
+	 * @param boolean $active True to return only active items, false to return all
+	 * @return \Aimeos\MShop\Common\Item\Property\Iface|null Matching property item or null if none
+	 */
+	public function getPropertyItem( $type, $langId, $value, $active = true )
+	{
+		foreach( $this->propItems as $propItem )
+		{
+			if( $propItem->getType() === $type && $propItem->getLanguageId() === $langId
+				&& $propItem->getValue() === $value && ( $active === false || $propItem->isAvailable() )
+			) {
+				return $propItem;
+			}
+		}
+	}
+
+
+	/**
 	 * Returns the property items of the product
 	 *
 	 * @param array|string|null $type Name of the property item type or null for all

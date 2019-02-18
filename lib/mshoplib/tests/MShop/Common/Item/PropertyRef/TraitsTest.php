@@ -45,6 +45,12 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetPropertyItem()
+	{
+		$this->assertEquals( $this->propItem, $this->object->getPropertyItem( 'test', null, 'value', false ) );
+	}
+
+
 	public function testGetPropertyItems()
 	{
 		$expected = [$this->propItem, $this->propItem2];
