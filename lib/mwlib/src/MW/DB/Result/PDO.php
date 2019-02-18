@@ -20,11 +20,7 @@ namespace Aimeos\MW\DB\Result;
  */
 class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Iface
 {
-	private $statement = null;
-	private $style = array(
-		\Aimeos\MW\DB\Result\Base::FETCH_ASSOC => \PDO::FETCH_ASSOC,
-		\Aimeos\MW\DB\Result\Base::FETCH_NUM => \PDO::FETCH_NUM,
-	);
+	private $statement;
 
 
 	/**
@@ -64,7 +60,7 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 	public function fetch( $style = \Aimeos\MW\DB\Result\Base::FETCH_ASSOC )
 	{
 		try {
-			return $this->statement->fetch( $this->style[$style] );
+			return $this->statement->fetch( $style ? \PDO::FETCH_ASSOC : \PDO::FETCH_NUM );
 		} catch ( \PDOException $e ) {
 			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
