@@ -803,6 +803,8 @@ abstract class Base
 
 		foreach( $list as $key => $value )
 		{
+			$key = str_replace( 'order.base.address.', $this->prefix, $key );
+
 			switch( $key )
 			{
 				case $this->prefix . 'salutation': $item = $item->setSalutation( $value ); break;
