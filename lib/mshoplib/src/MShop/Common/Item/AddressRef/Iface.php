@@ -23,9 +23,10 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Adds a new address item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item New or existing address item
+	 * @param integer|null $pos Position (key) in the list of address items or null to add the item at the end
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 */
-	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item );
+	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, $pos = null );
 
 	/**
 	 * Removes an existing address item
@@ -51,6 +52,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface[] Address items
 	 */
 	public function getAddressItemsDeleted();
+
+	/**
+	 * Returns the address items
+	 *
+	 * @param integer $pos Position (key) in the list of address items
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface|null Address item or null if not found
+	 */
+	public function getAddressItem( $pos );
 
 	/**
 	 * Returns the address items

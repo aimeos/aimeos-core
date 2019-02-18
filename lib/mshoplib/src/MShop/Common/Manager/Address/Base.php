@@ -121,12 +121,7 @@ abstract class Base
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
-
-			if( $id === null ) {
-				$type = 'insert';
-			} else {
-				$type = 'update';
-			}
+			$type = ( $id === null ? 'insert' : 'update' );
 
 			$stmt = $this->getCachedStatement( $conn, $this->getConfigPath() . $type );
 

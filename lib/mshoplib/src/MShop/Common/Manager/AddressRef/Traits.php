@@ -37,9 +37,10 @@ trait Traits
 
 			$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 			$search->setConditions( $search->compare( '==', $domain . '.address.parentid', $parentIds ) );
+			$search->setSortations( [$search->sort( '+', $domain . '.address.position')] );
 
-			foreach( $manager->searchItems( $search ) as $id => $addrItem ) {
-				$list[$addrItem->getParentId()][$id] = $addrItem;
+			foreach( $manager->searchItems( $search ) as $addrItem ) {
+				$list[$addrItem->getParentId()][] = $addrItem;
 			}
 		}
 
@@ -68,14 +69,13 @@ trait Traits
 		$manager = $this->getObject()->getSubManager( 'address' );
 		$manager->deleteItems( array_keys( $item->getAddressItemsDeleted() ) );
 
-		foreach( $item->getAddressItems() as $addrItem )
+		foreach( $item->getAddressItems() as $pos => $addrItem )
 		{
 			if( $addrItem->getParentId() != $item->getId() ) {
-				$addrItem->setId( null ); //create new address item if copied
+				$addrItem = $addrItem->setId( null ); //create new address item if copied
 			}
 
-			$addrItem->setParentId( $item->getId() );
-			$manager->saveItem( $addrItem, $fetch );
+			$manager->saveItem( $addrItem->setParentId( $item->getId() )->setPosition( $pos ), $fetch );
 		}
 
 		return $item;
