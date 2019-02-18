@@ -30,8 +30,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$addresses = array(
-			-1 => new \Aimeos\MShop\Supplier\Item\Address\Standard( 'supplier.address.', ['supplier.address.position' => 1] ),
-			-2 => new \Aimeos\MShop\Supplier\Item\Address\Standard( 'supplier.address.', ['supplier.address.position' => 0] ),
+			new \Aimeos\MShop\Supplier\Item\Address\Standard( 'supplier.address.', ['supplier.address.position' => 0] ),
+			new \Aimeos\MShop\Supplier\Item\Address\Standard( 'supplier.address.', ['supplier.address.position' => 1] ),
 		);
 
 		$this->object = new \Aimeos\MShop\Supplier\Item\Standard( $this->values, [], [], $addresses );
