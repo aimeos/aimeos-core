@@ -127,10 +127,10 @@ class Reduction
 		{
 			foreach( $basket->getProducts() as $orderProduct )
 			{
-				$costs += $orderProduct->getPrice()->getCosts();
+				$costs += $orderProduct->getPrice()->getCosts() * $orderProduct->getQuantity();
 
 				foreach( $orderProduct->getProducts() as $subProduct ) {
-					$costs += $subProduct->getPrice()->getCosts();
+					$costs += $subProduct->getPrice()->getCosts() * $subProduct->getQuantity();
 				}
 			}
 		}
