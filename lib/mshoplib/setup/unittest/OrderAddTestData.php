@@ -176,7 +176,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$servIds = $this->getServiceIds( $testdata );
 		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service', 'Standard' );
 		$orderBaseServiceAttrManager = $orderBaseServiceManager->getSubManager( 'attribute', 'Standard' );
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
+		$priceManager = \Aimeos\MShop::create( $this->additional, 'price' );
 		$ordServ = $orderBaseServiceManager->createItem();
 
 		$orderBaseManager->begin();
@@ -240,7 +240,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$products = $this->getProductItems( $testdata );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product', 'Standard' );
 		$orderBaseProductAttrManager = $orderBaseProductManager->getSubManager( 'attribute', 'Standard' );
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
+		$priceManager = \Aimeos\MShop::create( $this->additional, 'price' );
 
 		$orderBaseManager->begin();
 
@@ -314,7 +314,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		array $testdata, array $ordProds, array $products )
 	{
 		$attrCodes = [];
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->additional, 'Standard' );
+		$attributeManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
 		$attributes = $attributeManager->searchItems( $attributeManager->createSearch() );
 
 		foreach( $attributes as $attrItem ) {
@@ -460,7 +460,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$customercodes[] = $dataset['customerid'];
 		}
 
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Standard' );
+		$customerManager = \Aimeos\MShop::create( $this->additional, 'customer' );
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', $customercodes ) );
 
@@ -481,7 +481,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function getProductItems( array $testdata )
 	{
 		$codes = $items = [];
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->additional, 'Standard' );
+		$productManager = \Aimeos\MShop::create( $this->additional, 'product' );
 
 		foreach( $testdata['order/base/product'] as $key => $dataset )
 		{
@@ -511,7 +511,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function getServiceIds( array $testdata )
 	{
 		$services = $servIds = [];
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->additional, 'Standard' );
+		$serviceManager = \Aimeos\MShop::create( $this->additional, 'service' );
 
 		foreach( $testdata['order/base/service'] as $key => $dataset )
 		{

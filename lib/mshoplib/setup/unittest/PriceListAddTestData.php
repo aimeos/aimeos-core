@@ -66,7 +66,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function getCustomerData( array $keys )
 	{
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Standard' );
+		$customerManager = \Aimeos\MShop::create( $this->additional, 'customer' );
 
 		$codes = [];
 		foreach( $keys as $dataset )
