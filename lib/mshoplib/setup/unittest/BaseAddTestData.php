@@ -171,8 +171,11 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 					$manager = $manager->getSubManager( $subname );
 				}
 
-				foreach( $testdata[$domain] as $entry ) {
-					$manager->saveItem( $manager->createItem()->fromArray( $entry ), false );
+				foreach( $testdata[$domain] as $entry )
+				{
+					try {
+						$manager->saveItem( $manager->createItem()->fromArray( $entry ), false );
+					} catch( \Exception $e ) {} // Duplicate entry
 				}
 			}
 		}
