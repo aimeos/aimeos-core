@@ -22,18 +22,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	 */
 	public function getPreDependencies()
 	{
-		return ['MShopSetLocale', 'ProductAddTestData'];
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return array List of task names
-	 */
-	public function getPostDependencies()
-	{
-		return ['CatalogRebuildTestIndex'];
+		return ['ProductAddTestData', 'TextAddTestData'];
 	}
 
 

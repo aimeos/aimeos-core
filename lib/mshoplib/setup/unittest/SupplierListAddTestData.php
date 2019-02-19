@@ -21,18 +21,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopSetLocale', 'MediaAddTestData', 'ProductAddTestData', 'SupplierAddTestData', 'TextAddTestData' );
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies()
-	{
-		return ['CatalogRebuildTestIndex'];
+		return ['SupplierAddTestData', 'MediaAddTestData', 'ProductAddTestData', 'TextAddTestData', 'CustomerAddTestData'];
 	}
 
 

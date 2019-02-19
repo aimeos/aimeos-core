@@ -22,18 +22,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopSetLocale', 'CustomerAddTestData', 'PriceAddTestData' );
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies()
-	{
-		return ['CatalogRebuildTestIndex'];
+		return ['CustomerAddTestData', 'PriceAddTestData'];
 	}
 
 
@@ -207,13 +196,17 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $data as $key => $dataset )
 		{
-			$listItemType->setId( null );
-			$listItemType->setCode( $dataset['code'] );
-			$listItemType->setDomain( $dataset['domain'] );
-			$listItemType->setLabel( $dataset['label'] );
-			$listItemType->setStatus( $dataset['status'] );
+			try
+			{
+				$listItemType->setId( null );
+				$listItemType->setCode( $dataset['code'] );
+				$listItemType->setDomain( $dataset['domain'] );
+				$listItemType->setLabel( $dataset['label'] );
+				$listItemType->setStatus( $dataset['status'] );
 
-			$listTypeManager->saveItem( $listItemType );
+				$listTypeManager->saveItem( $listItemType );
+			}
+			catch( \Exception $e ) {} // Duplicate entry
 		}
 	}
 }

@@ -14,7 +14,6 @@ namespace Aimeos\MW\Setup\Task;
  */
 class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 {
-
 	/**
 	 * Returns the list of task names which this task depends on
 	 *
@@ -23,17 +22,6 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 	public function getPreDependencies()
 	{
 		return ['MShopSetLocale'];
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies()
-	{
-		return ['CatalogRebuildTestIndex'];
 	}
 
 

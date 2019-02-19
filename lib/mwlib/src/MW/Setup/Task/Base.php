@@ -52,6 +52,28 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 
 
 	/**
+	 * Returns the list of task names which this task depends on
+	 *
+	 * @return string[] List of task names
+	 */
+	public function getPreDependencies()
+	{
+		return [];
+	}
+
+
+	/**
+	 * Returns the list of task names which depends on this task.
+	 *
+	 * @return string[] List of task names
+	 */
+	public function getPostDependencies()
+	{
+		return [];
+	}
+
+
+	/**
 	 * Updates the schema and migrates the data
 	 *
 	 * @return void

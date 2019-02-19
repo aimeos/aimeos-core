@@ -43,7 +43,6 @@ return array(
 	),
 
 	'customer/lists/type' => array(
-		array( 'domain' => 'customer', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'customer/group', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'favorite', 'label' => 'Favorite', 'status' => 1 ),
@@ -95,11 +94,6 @@ return array(
 		array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'service', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
-	),
-
-	'price/lists/type' => array(
-		array( 'domain' => 'customer', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
-		array( 'domain' => 'customer/group', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
 	'product/type' => array(
