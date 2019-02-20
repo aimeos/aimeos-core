@@ -55,6 +55,8 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for order domain', $path ) );
 		}
 
+		$this->additional->setLocale( $this->additional->getLocale()->setCurrencyId( 'EUR' ) );
+
 		$bases = $this->addOrderBaseData( $localeManager, $orderBaseManager, $testdata );
 		$bases['items'] = $this->addOrderBaseProductData( $orderBaseManager, $bases, $testdata );
 		$bases['items'] = $this->addOrderBaseServiceData( $orderBaseManager, $bases, $testdata );
@@ -63,6 +65,8 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		foreach( $bases['items'] as $baseItem ) {
 			$orderBaseManager->saveItem( $baseItem, false );
 		}
+
+		$this->additional->setLocale( $this->additional->getLocale()->setCurrencyId( null ) );
 
 		$this->addOrderData( $orderManager, $bases['ids'], $testdata );
 
