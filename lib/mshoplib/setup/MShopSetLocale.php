@@ -51,7 +51,8 @@ class MShopSetLocale extends \Aimeos\MW\Setup\Task\Base
 
 		// Set locale for further tasks
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->additional, 'Standard' );
-		$this->additional->setLocale( $localeManager->bootstrap( $site, '', '', false ) );
+		$locale = $localeManager->bootstrap( $site, '', '', false )->setLanguageId( null )->setCurrencyId( null );
+		$this->additional->setLocale( $locale );
 
 		$this->status( 'OK' );
 	}
