@@ -176,7 +176,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'price.value', '99.99' ) );
 		$item = current( $this->object->searchItems( $search, ['customer'] ) );
 
-		if( $item && ( $listItem = current( $item->getListItems( 'customer', 'default' ) ) ) === false ) {
+		if( $item && ( $listItem = current( $item->getListItems( 'customer', 'test' ) ) ) === false ) {
 			throw new \RuntimeException( 'No list item found' );
 		}
 
@@ -200,13 +200,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'price.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'price.editor', $this->editor );
 
-		$param = ['customer','default', '0'];
+		$param = ['customer','test', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'price:has', $param ), null );
 
-		$param = ['customer','default', $listItem->getRefId()];
+		$param = ['customer','test', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
 
-		$param = ['customer','default'];
+		$param = ['customer','test'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
 
 		$param = ['customer'];

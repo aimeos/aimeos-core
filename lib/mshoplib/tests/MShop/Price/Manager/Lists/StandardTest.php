@@ -245,7 +245,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'price.lists.siteid', null );
 		$expr[] = $search->compare( '>', 'price.lists.parentid', 0 );
 		$expr[] = $search->compare( '==', 'price.lists.domain', 'customer' );
-		$expr[] = $search->compare( '==', 'price.lists.type', 'default' );
+		$expr[] = $search->compare( '==', 'price.lists.type', 'test' );
 		$expr[] = $search->compare( '>', 'price.lists.refid', 0 );
 		$expr[] = $search->compare( '==', 'price.lists.datestart', null );
 		$expr[] = $search->compare( '==', 'price.lists.dateend', null );
@@ -318,7 +318,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'price.lists.parentid', $item->getId() ),
 			$search->compare( '==', 'price.lists.domain', 'customer' ),
 			$search->compare( '==', 'price.lists.editor', $this->editor ),
-			$search->compare( '==', 'price.lists.type', 'default' ),
+			$search->compare( '==', 'price.lists.type', 'test' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'price.lists.position' ) ) );
