@@ -85,7 +85,7 @@ class TestHelperCntl
 		$ctx->setLocale( $locale );
 
 
-		$ctx->setEditor( '<extname>:unittest' );
+		$ctx->setEditor( '<extname>:cntl/common' );
 
 		return $ctx;
 	}

@@ -139,7 +139,7 @@ class TestHelperJqadm
 		$ctx->setLocale( $locale );
 
 
-		$ctx->setEditor( '<extname>:unittest' );
+		$ctx->setEditor( '<extname>:admin/jqadm' );
 
 		return $ctx;
 	}

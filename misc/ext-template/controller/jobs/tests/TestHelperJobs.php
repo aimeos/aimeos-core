@@ -96,7 +96,7 @@ class TestHelperJobs
 		$ctx->setView( $view );
 
 
-		$ctx->setEditor( 'core:controller/jobs' );
+		$ctx->setEditor( '<extname>:cntl/jobs' );
 
 		return $ctx;
 	}

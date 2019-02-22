@@ -114,7 +114,7 @@ class TestHelperHtml
 		$ctx->setLocale( $locale );
 
 
-		$ctx->setEditor( '<extname>:unittest' );
+		$ctx->setEditor( '<extname>:client/html' );
 
 		return $ctx;
 	}

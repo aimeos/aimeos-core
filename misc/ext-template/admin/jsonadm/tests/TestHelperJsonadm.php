@@ -100,7 +100,7 @@ class TestHelperJsonadm
 		$ctx->setView( $view );
 
 
-		$ctx->setEditor( 'core:admin/jsonadm' );
+		$ctx->setEditor( '<extname>:admin/jsonadm' );
 
 		return $ctx;
 	}

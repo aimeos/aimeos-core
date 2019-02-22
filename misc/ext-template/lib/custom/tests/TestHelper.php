@@ -87,7 +87,7 @@ class TestHelper
 
 		$ctx->setLocale( $localeItem );
 
-		$ctx->setEditor( '<extname>:unittest' );
+		$ctx->setEditor( '<extname>:lib/custom' );
 
 		return $ctx;
 	}
