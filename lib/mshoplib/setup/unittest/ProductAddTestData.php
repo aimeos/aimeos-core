@@ -34,7 +34,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 
 		$this->msg( 'Adding product test data', 0 );
 
-		$this->additional->setEditor( 'core:unittest' );
+		$this->additional->setEditor( 'core:lib/mshoplib' );
 		$this->process( $this->getData() );
 
 		$this->status( 'done' );

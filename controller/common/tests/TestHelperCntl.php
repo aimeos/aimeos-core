@@ -100,7 +100,7 @@ class TestHelperCntl
 		$ctx->setLocale( $locale );
 
 
-		$ctx->setEditor( 'core:controller/common' );
+		$ctx->setEditor( 'core:cntl/common' );
 
 		return $ctx;
 	}

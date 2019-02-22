@@ -49,7 +49,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'customer.lists.editor', 'core:unittest' ),
+			$search->compare( '==', 'customer.lists.editor', 'core:lib/mshoplib' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -275,7 +275,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.lists.editor', $this->editor ) );
 		$result = $this->object->searchItems( $search );
-		$this->assertEquals( 6, count( $result ) );
+		$this->assertEquals( 7, count( $result ) );
 	}
 
 
@@ -288,7 +288,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 6, count( $this->object->searchItems( $search ) ) );
+		$this->assertEquals( 7, count( $this->object->searchItems( $search ) ) );
 	}
 
 

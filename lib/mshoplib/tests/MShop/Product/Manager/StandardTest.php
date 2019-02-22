@@ -415,7 +415,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$numproducts = 0;
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.editor', 'core:unittest' ) );
+		$search->setConditions( $search->compare( '==', 'product.editor', 'core:lib/mshoplib' ) );
 		$search->setSlice( $start, 5 );
 
 		do

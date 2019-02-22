@@ -62,6 +62,10 @@ return [
 					'customer.lists.type' => 'watch', 'customer.lists.position' => 1, 'customer.lists.config' => ['stock' => 1],
 					'customer.lists.datestart' => null, 'customer.lists.dateend' => '2100-01-01 00:00:00',
 					'ref' => 'Cafe Noire Expresso',
+				], [
+					'customer.lists.type' => 'favorite', 'customer.lists.position' => 1, 'customer.lists.config' => [],
+					'customer.lists.datestart' => null, 'customer.lists.dateend' => '2100-01-01 00:00:00',
+					'ref' => 'Cafe Noire Expresso',
 				]],
 			],
 		],

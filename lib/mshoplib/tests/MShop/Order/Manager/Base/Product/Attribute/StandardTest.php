@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregate()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.editor', 'core:unittest' ) );
+		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.base.product.attribute.code' );
 
 		$this->assertEquals( 5, count( $result ) );

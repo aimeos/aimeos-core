@@ -120,7 +120,7 @@ class TestHelperMShop
 		$ctx->setLocale( $locale );
 
 
-		$ctx->setEditor( 'core:unittest' );
+		$ctx->setEditor( 'core:lib/mshoplib' );
 
 		return $ctx;
 	}

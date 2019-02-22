@@ -123,7 +123,7 @@ class TestHelperJobs
 		$ctx->setView( $view );
 
 
-		$ctx->setEditor( 'core:controller/jobs' );
+		$ctx->setEditor( 'core:cntl/jobs' );
 
 		return $ctx;
 	}

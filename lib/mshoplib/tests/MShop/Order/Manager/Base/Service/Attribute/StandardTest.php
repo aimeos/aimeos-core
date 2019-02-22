@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$expr = array(
 			$search->compare( '==', 'order.base.service.attribute.type', 'payment' ),
-			$search->compare( '==', 'order.base.service.attribute.editor', 'core:unittest' ),
+			$search->compare( '==', 'order.base.service.attribute.editor', 'core:lib/mshoplib' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

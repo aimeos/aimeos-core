@@ -91,7 +91,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop::create( $this->context, 'order' );
 
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
+		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 
 		$list = [];
 		foreach( $manager->searchItems( $search ) as $item ) {

@@ -204,7 +204,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setSlice( 0, 1 );
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'coupon.code.editor', 'core:unittest' ),
+			$search->compare( '==', 'coupon.code.editor', 'core:lib/mshoplib' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$result = $this->object->searchItems( $search, [], $total );

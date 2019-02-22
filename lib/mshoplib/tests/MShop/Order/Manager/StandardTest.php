@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregate()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
+		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.type' );
 
 		$this->assertEquals( 2, count( $result ) );
@@ -46,7 +46,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateAvg()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
+		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'avg' );
 
 		$this->assertEquals( 1, count( $result ) );
@@ -57,7 +57,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateSum()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
+		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'sum' );
 
 		$this->assertEquals( 1, count( $result ) );
@@ -68,7 +68,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateTimes()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
+		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 		$search->setSortations( array( $search->sort( '-', 'order.cdate' ) ) );
 		$result = $this->object->aggregate( $search, 'order.cmonth' );
 
@@ -80,7 +80,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateAddress()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
+		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.base.address.countryid' );
 
 		$this->assertEquals( 1, count( $result ) );
@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateMonth()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
+		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.type' );
 
 		$this->assertEquals( 2, count( $result ) );

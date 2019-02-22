@@ -49,7 +49,7 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 
 
 		// Set editor for further tasks
-		$this->additional->setEditor( 'core:unittest' );
+		$this->additional->setEditor( 'core:lib/mshoplib' );
 
 
 		if( $this->additional->getConfig()->get( 'setup/site' ) === 'unittest' )
