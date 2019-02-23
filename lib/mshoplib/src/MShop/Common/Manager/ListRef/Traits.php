@@ -205,10 +205,10 @@ trait Traits
 
 			foreach( $item->getListItems( null, null, null, false ) as $listItem )
 			{
+				$refDomain = $listItem->getDomain();
+
 				if( ( $refItem = $listItem->getRefItem() ) !== null )
 				{
-					$refDomain = $listItem->getDomain();
-
 					if( !isset( $refManager[$refDomain] ) )
 					{
 						$refManager[$refDomain] = \Aimeos\MShop::create( $context, $refDomain );
@@ -220,11 +220,11 @@ trait Traits
 				}
 
 				if( $listItem->getParentId() != $item->getId() ) {
-					$listItem->setId( null ); //create new list item if copied
+					$listItem->setId( null ); // create new list item if copied
 				}
 
-				$listItem->setParentId( $item->getId() );
-				$listManager->saveItem( $listItem, $fetch );
+				$listManager->saveItem( $listItem->setParentId( $item->getId() ), $fetch );
+				// @todo update list item in $item
 			}
 
 
