@@ -39,8 +39,8 @@ trait Traits
 			$search->setConditions( $search->compare( '==', $domain . '.address.parentid', $parentIds ) );
 			$search->setSortations( [$search->sort( '+', $domain . '.address.position')] );
 
-			foreach( $manager->searchItems( $search ) as $addrItem ) {
-				$list[$addrItem->getParentId()][] = $addrItem;
+			foreach( $manager->searchItems( $search ) as $id => $addrItem ) {
+				$list[$addrItem->getParentId()][$id] = $addrItem;
 			}
 		}
 
@@ -66,16 +66,19 @@ trait Traits
 	 */
 	protected function saveAddressItems( \Aimeos\MShop\Common\Item\AddressRef\Iface $item, $domain, $fetch = true )
 	{
+		$pos = 0;
 		$manager = $this->getObject()->getSubManager( 'address' );
 		$manager->deleteItems( array_keys( $item->getAddressItemsDeleted() ) );
 
-		foreach( $item->getAddressItems() as $pos => $addrItem )
+		foreach( $item->getAddressItems() as $idx => $addrItem )
 		{
 			if( $addrItem->getParentId() != $item->getId() ) {
 				$addrItem = $addrItem->setId( null ); //create new address item if copied
 			}
 
-			$manager->saveItem( $addrItem->setParentId( $item->getId() )->setPosition( $pos ), $fetch );
+			$addrItem = $addrItem->setParentId( $item->getId() )->setPosition( $pos++ );
+			$addrItem = $manager->saveItem( $addrItem, $fetch );
+			$item = $item->addAddressItem( $addrItem, $idx );
 		}
 
 		return $item;
