@@ -95,9 +95,9 @@ class MAdmin
 	 * afterwards!
 	 *
 	 * @param string $path Name of the domain (and sub-managers) separated by slashes, e.g "product/list"
-	 * @param \Aimeos\MShop\Common\Manager\Iface $object Manager object for the given manager path
+	 * @param \Aimeos\MShop\Common\Manager\Iface|null $object Manager object for the given manager path or null to clear
 	 */
-	public static function inject( $path, \Aimeos\MShop\Common\Manager\Iface $object )
+	public static function inject( $path, \Aimeos\MShop\Common\Manager\Iface $object = null )
 	{
 		self::$objects[$path] = $object;
 	}
