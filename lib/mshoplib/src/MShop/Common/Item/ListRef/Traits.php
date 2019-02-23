@@ -198,7 +198,7 @@ trait Traits
 
 		foreach( $this->listItems as $dname => $list )
 		{
-			if( is_array( $domain ) && !in_array( $dname, $domain ) || $domain !== null && $dname !== $domain ) {
+			if( is_array( $domain ) && !in_array( $dname, $domain ) || is_string( $domain ) && $dname !== $domain ) {
 				continue;
 			}
 
