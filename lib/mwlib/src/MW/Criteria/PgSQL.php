@@ -35,7 +35,7 @@ class PgSQL extends \Aimeos\MW\Criteria\SQL
 	 *
 	 * @param string $operator One of the known operators
 	 * @param string $name Name of the variable or column that should be used for comparison
-	 * @param mixed $value Value the variable or column should be compared to
+	 * @param mixed $value Value of the variable or column should be compared to
 	 * @return \Aimeos\MW\Criteria\Expression\Compare\Iface Compare expression object
 	 */
 	public function compare( $operator, $name, $value )

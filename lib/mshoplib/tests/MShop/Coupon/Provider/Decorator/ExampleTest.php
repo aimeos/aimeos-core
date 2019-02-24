@@ -18,16 +18,16 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
 		$item = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->createItem();
 
-		// Don't create order base item by createItem() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
+		$this->orderBase = \Aimeos\MShop\Order\Manager\Factory::create( $context )
+			->getSubmanager( 'base' )->createItem()->off();
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $context, $item, 'abcd' );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Example( $provider, $context, $item, 'abcd');
 		$this->object->setObject( $this->object );
 	}
+
 
 	protected function tearDown()
 	{
@@ -36,28 +36,20 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAddCoupon()
-	{
-		$this->object->addCoupon( $this->orderBase );
-	}
-
-	public function testDeleteCoupon()
-	{
-		$this->object->deleteCoupon( $this->orderBase );
-	}
-
-	public function testUpdateCoupon()
-	{
-		$this->object->updateCoupon( $this->orderBase );
-	}
-
 	public function testIsAvailable()
 	{
 		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
 	}
 
+
 	public function testSetObject()
 	{
 		$this->object->setObject( $this->object );
+	}
+
+
+	public function testUpdate()
+	{
+		$this->object->update( $this->orderBase );
 	}
 }
