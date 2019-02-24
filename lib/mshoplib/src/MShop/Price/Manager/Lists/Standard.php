@@ -371,9 +371,6 @@ class Standard
 		 * @see mshop/price/manager/lists/standard/search/ansi
 		 * @see mshop/price/manager/lists/standard/count/ansi
 		 * @see mshop/price/manager/lists/standard/aggregate/ansi
-		 * @see mshop/price/manager/lists/standard/getposmax/ansi
-		 * @see mshop/price/manager/lists/standard/move/ansi
-		 * @see mshop/price/manager/lists/standard/updatepos/ansi
 		 */
 
 		/** mshop/price/manager/lists/standard/update/mysql
@@ -408,9 +405,6 @@ class Standard
 		 * @see mshop/price/manager/lists/standard/search/ansi
 		 * @see mshop/price/manager/lists/standard/count/ansi
 		 * @see mshop/price/manager/lists/standard/aggregate/ansi
-		 * @see mshop/price/manager/lists/standard/getposmax/ansi
-		 * @see mshop/price/manager/lists/standard/move/ansi
-		 * @see mshop/price/manager/lists/standard/updatepos/ansi
 		 */
 
 		/** mshop/price/manager/lists/standard/newid/mysql
@@ -449,9 +443,6 @@ class Standard
 		 * @see mshop/price/manager/lists/standard/search/ansi
 		 * @see mshop/price/manager/lists/standard/count/ansi
 		 * @see mshop/price/manager/lists/standard/aggregate/ansi
-		 * @see mshop/price/manager/lists/standard/getposmax/ansi
-		 * @see mshop/price/manager/lists/standard/move/ansi
-		 * @see mshop/price/manager/lists/standard/updatepos/ansi
 		 */
 
 		/** mshop/price/manager/lists/standard/delete/mysql
@@ -484,9 +475,6 @@ class Standard
 		 * @see mshop/price/manager/lists/standard/search/ansi
 		 * @see mshop/price/manager/lists/standard/count/ansi
 		 * @see mshop/price/manager/lists/standard/aggregate/ansi
-		 * @see mshop/price/manager/lists/standard/getposmax/ansi
-		 * @see mshop/price/manager/lists/standard/move/ansi
-		 * @see mshop/price/manager/lists/standard/updatepos/ansi
 		 */
 
 		/** mshop/price/manager/lists/standard/search/mysql
@@ -546,9 +534,6 @@ class Standard
 		 * @see mshop/price/manager/lists/standard/delete/ansi
 		 * @see mshop/price/manager/lists/standard/count/ansi
 		 * @see mshop/price/manager/lists/standard/aggregate/ansi
-		 * @see mshop/price/manager/lists/standard/getposmax/ansi
-		 * @see mshop/price/manager/lists/standard/move/ansi
-		 * @see mshop/price/manager/lists/standard/updatepos/ansi
 		 */
 
 		/** mshop/price/manager/lists/standard/count/mysql
@@ -602,9 +587,6 @@ class Standard
 		 * @see mshop/price/manager/lists/standard/delete/ansi
 		 * @see mshop/price/manager/lists/standard/search/ansi
 		 * @see mshop/price/manager/lists/standard/aggregate/ansi
-		 * @see mshop/price/manager/lists/standard/getposmax/ansi
-		 * @see mshop/price/manager/lists/standard/move/ansi
-		 * @see mshop/price/manager/lists/standard/updatepos/ansi
 		 */
 
 		/** mshop/price/manager/lists/standard/aggregate/mysql
@@ -655,123 +637,6 @@ class Standard
 		 * @see mshop/price/manager/lists/standard/delete/ansi
 		 * @see mshop/price/manager/lists/standard/search/ansi
 		 * @see mshop/price/manager/lists/standard/count/ansi
-		 * @see mshop/price/manager/lists/standard/getposmax/ansi
-		 * @see mshop/price/manager/lists/standard/move/ansi
-		 * @see mshop/price/manager/lists/standard/updatepos/ansi
-		 */
-
-		/** mshop/price/manager/lists/standard/getposmax/mysql
-		 * Retrieves the position of the list record with the highest number
-		 *
-		 * @see mshop/price/manager/lists/standard/getposmax/ansi
-		 */
-
-		/** mshop/price/manager/lists/standard/getposmax/ansi
-		 * Retrieves the position of the list record with the highest number
-		 *
-		 * When moving or inserting records into the list, the highest position
-		 * number must be known to append records at the end. Only records from
-		 * the same site that is configured via the conprice item are considered.
-		 *
-		 * The SQL statement must be a string suitable for being used as
-		 * prepared statement. It must include question marks for binding the
-		 * required values to the statement before they are sent to the
-		 * database server. The number of question marks must be the same as
-		 * used in the moveItem() method and their order must correspond to the
-		 * order in the same method.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * with most relational database systems. This also includes using
-		 * double quotes for table and column names.
-		 *
-		 * @param string SQL statement for determining the position with the highest number
-		 * @since 2014.07
-		 * @category Developer
-		 * @see mshop/price/manager/lists/standard/insert/ansi
-		 * @see mshop/price/manager/lists/standard/update/ansi
-		 * @see mshop/price/manager/lists/standard/newid/ansi
-		 * @see mshop/price/manager/lists/standard/delete/ansi
-		 * @see mshop/price/manager/lists/standard/search/ansi
-		 * @see mshop/price/manager/lists/standard/count/ansi
-		 * @see mshop/price/manager/lists/standard/aggregate/ansi
-		 * @see mshop/price/manager/lists/standard/move/ansi
-		 * @see mshop/price/manager/lists/standard/updatepos/ansi
-		 */
-
-		/** mshop/price/manager/lists/standard/move/mysql
-		 * Moves a list item to another position and updates the other items accordingly
-		 *
-		 * @see mshop/price/manager/lists/standard/move/ansi
-		 */
-
-		/** mshop/price/manager/lists/standard/move/ansi
-		 * Moves a list item to another position and updates the other items accordingly
-		 *
-		 * Reorders the records in the list table by updating their position
-		 * field. The records must be from the site that is configured via the
-		 * conprice item.
-		 *
-		 * The SQL statement must be a string suitable for being used as
-		 * prepared statement. It must include question marks for binding the
-		 * required values to the statement before they are sent to the
-		 * database server. The number of question marks must be the same as
-		 * used in the moveItem() method and their order must correspond to the
-		 * order in the same method.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * with most relational database systems. This also includes using
-		 * double quotes for table and column names.
-		 *
-		 * @param string SQL statement for moving items
-		 * @since 2014.07
-		 * @category Developer
-		 * @see mshop/price/manager/lists/standard/insert/ansi
-		 * @see mshop/price/manager/lists/standard/update/ansi
-		 * @see mshop/price/manager/lists/standard/newid/ansi
-		 * @see mshop/price/manager/lists/standard/delete/ansi
-		 * @see mshop/price/manager/lists/standard/search/ansi
-		 * @see mshop/price/manager/lists/standard/count/ansi
-		 * @see mshop/price/manager/lists/standard/aggregate/ansi
-		 * @see mshop/price/manager/lists/standard/getposmax/ansi
-		 * @see mshop/price/manager/lists/standard/updatepos/ansi
-		 */
-
-		/** mshop/price/manager/lists/standard/updatepos/mysql
-		 * Updates the position value of a single list record
-		 *
-		 * @see mshop/price/manager/lists/standard/updatepos/ansi
-		 */
-
-		/** mshop/price/manager/lists/standard/updatepos/ansi
-		 * Updates the position value of a single list record
-		 *
-		 * The moveItem() method needs to set the position value of a sinlge
-		 * record in some cases. The records must be from the site that is
-		 * configured via the conprice item.
-		 *
-		 * The SQL statement must be a string suitable for being used as
-		 * prepared statement. It must include question marks for binding the
-		 * required values to the statement before they are sent to the
-		 * database server. The number of question marks must be the same as
-		 * used in the moveItem() method and their order must correspond to the
-		 * order in the same method.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * with most relational database systems. This also includes using
-		 * double quotes for table and column names.
-		 *
-		 * @param string SQL statement for moving items
-		 * @since 2014.07
-		 * @category Developer
-		 * @see mshop/price/manager/lists/standard/insert/ansi
-		 * @see mshop/price/manager/lists/standard/update/ansi
-		 * @see mshop/price/manager/lists/standard/newid/ansi
-		 * @see mshop/price/manager/lists/standard/delete/ansi
-		 * @see mshop/price/manager/lists/standard/search/ansi
-		 * @see mshop/price/manager/lists/standard/count/ansi
-		 * @see mshop/price/manager/lists/standard/aggregate/ansi
-		 * @see mshop/price/manager/lists/standard/getposmax/ansi
-		 * @see mshop/price/manager/lists/standard/move/ansi
 		 */
 
 		return 'mshop/price/manager/lists/standard/';

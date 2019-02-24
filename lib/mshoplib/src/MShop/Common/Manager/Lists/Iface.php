@@ -122,38 +122,4 @@ interface Iface
 	 * @see \Aimeos\MW\Criteria\Iface
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key );
-
-
-	/**
-	 * Moves an existing list item to a new position.
-	 *
-	 * The position is in front of the item with the ID given in $ref or at the
-	 * end of the list if $ref is null.
-	 *
-	 * <code>
-	 * // item ID list in database: 1, 2, 3, 4
-	 * $listManager->moveItem( 2, 4 );
-	 * // result: 1, 3, 2, 4
-	 *
-	 * // item ID list in database: 1, 2, 3, 4
-	 * $listManager->moveItem( 2, null );
-	 * // result: 1, 3, 4, 2
-	 * </code>
-	 *
-	 * The method updates the position of the record with the given ID in $id
-	 * and of all records afterwards. The gap left behind by the moved record
-	 * is closed automatically. To retrive the items according to the new
-	 * positions, you have to sort them by the '<domain>.lists.position' key:
-	 *
-	 * <code>
-	 * $search = $listManager->createSearch();
-	 * $search->setSortations( array( $search->sort( '+', 'product.lists.position' ) ) );
-	 * $result = $listManager->searchItems( $search );
-	 * </code>
-	 *
-	 * @param string $id Id of the item which should be moved
-	 * @param string|null $ref Id where the given Id should be inserted before (null for appending)
-	 * @return \Aimeos\MShop\Common\Manager\Lists\Iface Manager object for chaining method calls
-	 */
-	public function moveItem( $id, $ref = null );
 }

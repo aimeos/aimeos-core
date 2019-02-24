@@ -115,29 +115,6 @@ return array(
 						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
-				'updatepos' => array(
-					'ansi' => '
-						UPDATE "mshop_service_list"
-							SET "pos" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
-					'
-				),
-				'move' => array(
-					'ansi' => '
-						UPDATE "mshop_service_list"
-							SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
-							AND "domain" = ? AND "pos" >= ?
-					'
-				),
-				'getposmax' => array(
-					'ansi' => '
-						SELECT MAX( "pos" ) AS pos
-						FROM "mshop_service_list"
-						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
-							AND "domain" = ?
-					'
-				),
 				'search' => array(
 					'ansi' => '
 						SELECT mserli."id" AS "service.lists.id", mserli."parentid" AS "service.lists.parentid",

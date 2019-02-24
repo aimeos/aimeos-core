@@ -97,14 +97,6 @@ return array(
 						WHERE :cond AND siteid = ?
 					'
 				),
-				'getposmax' => array(
-					'ansi' => '
-						SELECT MAX( "pos" ) AS pos
-						FROM "mshop_price_list"
-						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
-							AND "domain" = ?
-					'
-				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_price_list" (
@@ -121,21 +113,6 @@ return array(
 						SET "parentid"=?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
-					'
-				),
-				'updatepos' => array(
-					'ansi' => '
-						UPDATE "mshop_price_list"
-							SET "pos" = ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "id" = ?
-					'
-				),
-				'move' => array(
-					'ansi' => '
-						UPDATE "mshop_price_list"
-							SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
-						WHERE "siteid" = ? AND "parentid" = ? AND "type" = ?
-							AND "domain" = ? AND "pos" >= ?
 					'
 				),
 				'search' => array(
