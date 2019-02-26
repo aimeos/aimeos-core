@@ -72,7 +72,7 @@ class Standard
 			$item->setUrl( $filepath );
 		}
 
-		$item->setLabel( basename( $file->getClientFilename() ) );
+		$item->getLabel() ?: $item->setLabel( basename( $file->getClientFilename() ) );
 		$item->setMimeType( $mimetype );
 	}
 
