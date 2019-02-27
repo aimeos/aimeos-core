@@ -55,12 +55,9 @@ class MySQL
 		),
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => '(
-				SELECT "prodid" FROM mshop_index_text AS mindte_rel
-				WHERE mindte."prodid" = mindte_rel.prodid AND :site AND mindte_rel."listtype" IN ($1)
-					AND ( mindte_rel."langid" = $2 OR mindte_rel."langid" IS NULL )
-					AND MATCH( mindte_rel."value" ) AGAINST( $3 IN BOOLEAN MODE )
-			)',
+			'internalcode' => ':site AND mindte."listtype" IN ($1)
+				AND ( mindte."langid" = $2 OR mindte."langid" IS NULL )
+				AND MATCH( mindte."value" ) AGAINST( $3 IN BOOLEAN MODE )',
 			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
