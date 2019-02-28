@@ -65,16 +65,18 @@ trait Traits
 	 */
 	public function deletePropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item )
 	{
-		$id = '_' . $item->getType() . '_' . $item->getLanguageId() . '_' . $item->getValue();
+		foreach( $this->propItems as $key => $propItem )
+		{
+			if( $propItem === $item )
+			{
+				$this->propRmItems[$propItem->getId()] = $propItem;
+				unset( $this->propItems[$key] );
 
-		if( !isset( $this->propItems[$id] ) && !isset( $this->propItems[$item->getId()] ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Property item for removal not found' ) );
+				return $this;
+			}
 		}
 
-		unset( $this->propItems[$id], $this->propItems[$item->getId()] );
-		$this->propRmItems[$id] = $item;
-
-		return $this;
+		throw new \Aimeos\MShop\Exception( sprintf( 'Property item for removal not found' ) );
 	}
 
 
