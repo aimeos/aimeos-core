@@ -59,8 +59,8 @@ class MySQL
 			if( isset( $params[1] ) )
 			{
 				$str = '';
-				$list = ['-', '+', '>', '<', '(', ')', '~', '*', ':', '"', '&', '|', '!', '/', '§', '$', '%', '{', '}', '[', ']', '=', '?', '\\', '\'', '#', ';', '.', ',', '@'];
-				$search = str_replace( $list, ' ', $params[1] );
+				$regex = '/(\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\@|\\| )+/';
+				$search = trim( preg_replace( $regex, ' ', $params[1] ), "' \t\n\r\0\x0B" );
 
 				foreach( explode( ' ', $search ) as $part )
 				{
@@ -71,7 +71,7 @@ class MySQL
 					}
 				}
 
-				$params[1] = '\'' . $str . '\'';
+				$params[1] = '\'' . str_replace( '\'', '\'\'', $str ) . '\'';
 			}
 
 			return $params;

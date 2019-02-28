@@ -57,10 +57,11 @@ class PgSQL
 
 			if( isset( $params[1] ) )
 			{
-				$regex = '/(\s|\&|\%|\?|\#|\=|\{|\}|\||\\\\|\~|\[|\]|\`|\^|\/|\-|\+|\>|\<|\(|\)|\*|\:|\"|\!|\§|\$|\'|\;|\.|\,|\@)+/';
-				$search = trim( preg_replace( $regex, ' ', $params[1] ) );
+				$regex = '/(\:|\*|\&|\||\\|\>|\<|\(|\)|\!|\@| )+/';
+				$search = trim( preg_replace( $regex, ' ', $params[1] ), "' \t\n\r\0\x0B" );
 
-				$params[1] = '\'' . implode( ':* & ', explode( ' ', strtolower( $search ) ) ) . ':*\'';
+				$str = implode( ':* & ', explode( ' ', strtolower( $search ) ) );
+				$params[1] = '\'' . str_replace( '\'', '\'\'', $str ) . ':*\'';
 			}
 
 			return $params;
