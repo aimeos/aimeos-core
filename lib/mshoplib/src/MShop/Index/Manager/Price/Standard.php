@@ -648,27 +648,31 @@ class Standard
 	 */
 	protected function savePrices( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item )
 	{
+		$prices = [];
+		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
-		$date = date( 'Y-m-d H:i:s' );
 
 		foreach( $item->getListItems( 'price', 'default', 'default' ) as $listItem )
 		{
-			if( ( $refItem = $listItem->getRefItem() ) === null ) {
-				continue;
+			if( ( $refItem = $listItem->getRefItem() ) !== null ) {
+				$prices[$refItem->getCurrencyId()][$refItem->getQuantity()] = $refItem->getValue();
 			}
+		}
+
+		foreach( $prices as $currencyId => $list )
+		{
+			ksort( $list );
 
 			$stmt->bind( 1, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $refItem->getCurrencyId() );
-			$stmt->bind( 3, $refItem->getValue() );
+			$stmt->bind( 2, $currencyId );
+			$stmt->bind( 3, reset( $list ) );
 			$stmt->bind( 4, $date ); // mtime
 			$stmt->bind( 5, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			try {
 				$stmt->execute()->finish();
 			} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
-
-			break; // only first price
 		}
 	}
 }
