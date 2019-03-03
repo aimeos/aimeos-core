@@ -42,6 +42,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'attribute.key' => array(
+			'code' => 'attribute.key',
+			'internalcode' => 'matt."key"',
+			'label' => 'Unique key',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'attribute.type' => array(
 			'code' => 'attribute.type',
 			'internalcode' => 'matt."type"',
@@ -136,6 +144,8 @@ class Standard
 		),
 	);
 
+	private $plugins = [];
+
 
 	/**
 	 * Initializes the object.
@@ -146,6 +156,8 @@ class Standard
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-attribute' );
+
+		$this->plugins['attribute.key'] = new \Aimeos\MW\Criteria\Plugin\Cut();
 
 		$locale = $context->getLocale();
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
@@ -407,21 +419,22 @@ class Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $item->getType() );
-			$stmt->bind( 2, $item->getDomain() );
-			$stmt->bind( 3, $item->getCode() );
-			$stmt->bind( 4, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 5, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 6, $item->getLabel() );
-			$stmt->bind( 7, $date ); // mtime
-			$stmt->bind( 8, $context->getEditor() );
-			$stmt->bind( 9, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $this->plugins['attribute.key']->translate( $item->getKey() ) );
+			$stmt->bind( 2, $item->getType() );
+			$stmt->bind( 3, $item->getDomain() );
+			$stmt->bind( 4, $item->getCode() );
+			$stmt->bind( 5, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 6, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 7, $item->getLabel() );
+			$stmt->bind( 8, $date ); // mtime
+			$stmt->bind( 9, $context->getEditor() );
+			$stmt->bind( 10, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 10, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 11, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 10, $date ); // ctime
+				$stmt->bind( 11, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();
@@ -690,7 +703,7 @@ class Standard
 			 */
 			$cfgPathCount = 'mshop/attribute/manager/standard/count';
 
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level, $this->plugins );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$map[$row['attribute.id']] = $row;

@@ -25,14 +25,21 @@ interface Iface
 		\Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
-	 * Returns a unique code of the attribute item.
+	 * Returns the unique key of the attribute item
+	 *
+	 * @return string Unique key consisting of domain/type/code
+	 */
+	public function getKey();
+
+	/**
+	 * Returns the code of the attribute item.
 	 *
 	 * @return string Returns the code of the attribute item
 	 */
 	public function getCode();
 
 	/**
-	 * Sets a unique code for the attribute item.
+	 * Sets the code for the attribute item.
 	 *
 	 * @param string $code Code of the attribute item
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls

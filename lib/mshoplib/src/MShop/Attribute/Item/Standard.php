@@ -65,6 +65,17 @@ class Standard
 
 
 	/**
+	 * Returns the unique key of the attribute item
+	 *
+	 * @return string Unique key consisting of domain/type/code
+	 */
+	public function getKey()
+	{
+		return $this->getDomain() . '|' . $this->getType() . '|' . $this->getCode();
+	}
+
+
+	/**
 	 * Returns the domain of the attribute item.
 	 *
 	 * @return string Returns the domain for this item e.g. text, media, price...
@@ -328,11 +339,15 @@ class Standard
 		$list = parent::toArray( $private );
 
 		$list['attribute.domain'] = $this->getDomain();
-		$list['attribute.code'] = $this->getCode();
-		$list['attribute.status'] = $this->getStatus();
 		$list['attribute.type'] = $this->getType();
-		$list['attribute.position'] = $this->getPosition();
+		$list['attribute.code'] = $this->getCode();
 		$list['attribute.label'] = $this->getLabel();
+		$list['attribute.status'] = $this->getStatus();
+		$list['attribute.position'] = $this->getPosition();
+
+		if( $private === true ) {
+			$list['attribute.key'] = $this->getKey();
+		}
 
 		return $list;
 	}

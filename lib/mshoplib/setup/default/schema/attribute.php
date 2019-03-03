@@ -38,6 +38,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'key', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
@@ -55,6 +56,7 @@ return array(
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_msatt_sid_label' );
 			$table->addIndex( array( 'siteid', 'code' ), 'idx_msatt_sid_code' );
 			$table->addIndex( array( 'siteid', 'type' ), 'idx_msatt_sid_type' );
+			$table->addIndex( array( 'siteid', 'key' ), 'idx_msatt_sid_key' );
 
 			return $schema;
 		},

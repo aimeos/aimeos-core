@@ -366,17 +366,17 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_attribute" (
-						"type", "domain", "code", "status", "pos",
+						"key", "type", "domain", "code", "status", "pos",
 						"label", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
-						?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
 			),
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_attribute"
-					SET "type" = ?, "domain" = ?, "code" = ?, "status" = ?,
+					SET "key" = ?, "type" = ?, "domain" = ?, "code" = ?, "status" = ?,
 						"pos" = ?, "label" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'

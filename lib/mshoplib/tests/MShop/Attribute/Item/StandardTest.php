@@ -63,6 +63,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetKey()
+	{
+		$this->assertEquals( 'text|unittest|X12345', $this->object->getKey() );
+	}
+
+
 	public function testGetType()
 	{
 		$this->assertEquals( 'unittest', $this->object->getType() );
@@ -222,9 +228,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) + 1, count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['attribute.id'] );
+		$this->assertEquals( $this->object->getKey(), $arrayObject['attribute.key'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['attribute.code'] );
 		$this->assertEquals( $this->object->getDomain(), $arrayObject['attribute.domain'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['attribute.status'] );
