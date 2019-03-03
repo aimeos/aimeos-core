@@ -27,6 +27,15 @@ class Cut implements \Aimeos\MW\Criteria\Plugin\Iface
 	 */
 	public function translate( $value )
 	{
+		if( is_array( $value ) )
+		{
+			foreach( $value as $key => $str ) {
+				$value[$key] = substr( $str, 0, 255 );
+			}
+
+			return $value;
+		}
+
 		return substr( $value, 0, 255 );
 	}
 

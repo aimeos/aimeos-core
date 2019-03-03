@@ -18,6 +18,13 @@ class CutTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testTranslateValue()
+	{
+		$object = new \Aimeos\MW\Criteria\Plugin\Cut();
+		$this->assertEquals( [str_pad( '0', 255 )], $object->translate( [str_pad( '0', 256 )] ) );
+	}
+
+
 	public function testReverse()
 	{
 		$object = new \Aimeos\MW\Criteria\Plugin\Cut();
