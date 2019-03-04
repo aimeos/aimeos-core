@@ -655,7 +655,7 @@ class Standard
 
 		foreach( $item->getListItems( 'price', 'default', 'default' ) as $listItem )
 		{
-			if( ( $refItem = $listItem->getRefItem() ) !== null ) {
+			if( ( $refItem = $listItem->getRefItem() ) !== null && $refItem->isAvailable() ) {
 				$prices[$refItem->getCurrencyId()][$refItem->getQuantity()] = $refItem->getValue();
 			}
 		}
