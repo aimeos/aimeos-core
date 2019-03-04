@@ -77,12 +77,13 @@ abstract class Base
 			{
 				case 'boolean':
 				case 'integer':
+					$list[] = (int) $param; break;
 				case 'double':
-					$list[] = $param; break;
+					$list[] = (double) $param; break;
 				case 'array':
 					$list[] = '[' . self::createSignature( $param ) . ']'; break;
 				default:
-					$list[] = '"' . $param . '"';
+					$list[] = '"' . str_replace( ['"', '[', ']'], ' ', $param ) . '"';
 			}
 		}
 
@@ -266,7 +267,7 @@ abstract class Base
 			if( isset( $string[0] ) && $string[0] == '[' )
 			{
 				$items = [];
-				$pattern = '/("[^"]*"|[0-9]+\.[0-9]+|[0-9]+),?/';
+				$pattern = '/("[^"]*"|[0-9]+\.[0-9]+|[0-9]+|null),?/';
 
 				if( preg_match_all( $pattern, $string, $items ) === false ) {
 					throw new \Aimeos\MW\Common\Exception( 'Unable to extract function parameters' );
