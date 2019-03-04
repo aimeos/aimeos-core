@@ -116,23 +116,24 @@ abstract class Base
 			$stmt = $this->getCachedStatement( $conn, $this->getConfigPath() . $type );
 
 			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getType() );
-			$stmt->bind( 3, $item->getDomain(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 4, $item->getRefId(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 5, $item->getDateStart(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 6, $item->getDateEnd(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 7, json_encode( $item->getConfig() ), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 8, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 9, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 10, $time ); //mtime
-			$stmt->bind( 11, $this->getContext()->getEditor() );
-			$stmt->bind( 12, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getKey() );
+			$stmt->bind( 3, $item->getType() );
+			$stmt->bind( 4, $item->getDomain() );
+			$stmt->bind( 5, $item->getRefId() );
+			$stmt->bind( 6, $item->getDateStart() );
+			$stmt->bind( 7, $item->getDateEnd() );
+			$stmt->bind( 8, json_encode( $item->getConfig() ) );
+			$stmt->bind( 9, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 10, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 11, $time ); //mtime
+			$stmt->bind( 12, $this->getContext()->getEditor() );
+			$stmt->bind( 13, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 
 			if( $id !== null ) {
-				$stmt->bind( 13, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 14, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			} else {
-				$stmt->bind( 13, $time ); //ctime
+				$stmt->bind( 14, $time ); //ctime
 			}
 
 			$stmt->execute()->finish();

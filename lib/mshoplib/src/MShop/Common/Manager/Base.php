@@ -624,6 +624,25 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
+	 * Replaces the given marker with an expression
+	 *
+	 * @param string $column Name (including alias) of the column
+	 * @param mixed $value Value used in the expression
+	 * @param string $op Operator used in the expression
+	 * @param integer $type Type constant from \Aimeos\MW\DB\Statement\Base class
+	 * @return string Created expression
+	 */
+	protected function toExpression( $column, $value, $op = '==', $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR )
+	{
+		$types = ['marker' => $type];
+		$translations = ['marker' => $column];
+		$value = ( is_array( $value ) ? array_unique( $value ) : $value );
+
+		return $this->createSearch()->compare( $op, 'marker', $value )->toSource( $types, $translations );
+	}
+
+
+	/**
 	 * Replaces ":site" marker in a search config item array.
 	 *
 	 * @param array &$searchAttr Single search config definition including the "internalcode" key
@@ -631,6 +650,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string|string[] $value Site ID or list of site IDs
 	 * @param string $marker Marker to replace
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @deprecated 2020.01 Use toExpression() instead
 	 */
 	protected function replaceSiteMarker( &$searchAttr, $column, $value, $marker = ':site' )
 	{

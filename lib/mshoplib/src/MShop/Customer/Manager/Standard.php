@@ -250,8 +250,7 @@ class Standard
 			'code' => 'customer:has()',
 			'internalcode' => '(
 				SELECT mcusli_has."id" FROM mshop_customer_list AS mcusli_has
-				WHERE mcus."id" = mcusli_has."parentid" AND :site AND mcusli_has."domain" = $1 :type :refid
-				LIMIT 1
+				WHERE mcus."id" = mcusli_has."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -282,7 +281,9 @@ class Standard
 	{
 		parent::__construct( $context );
 
+		$self = $this;
 		$locale = $context->getLocale();
+
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/customer/manager/sitemode', $level );
 
@@ -296,18 +297,22 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['customer:has'], 'mcusli_has."siteid"', $siteIds, ':site' );
-		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 'mcuspr_prop."siteid"', $siteIds, ':site' );
 
+		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) {
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mcusli_has."type" = $2' : '', $source );
-			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mcusli_has."refid" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 'mcusli_has."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'mcusli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};
 
+
+		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 'mcuspr_prop."siteid"', $siteIds, ':site' );
 
 		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) {
 

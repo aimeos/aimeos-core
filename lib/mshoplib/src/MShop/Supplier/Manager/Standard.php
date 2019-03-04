@@ -92,8 +92,7 @@ class Standard
 			'code' => 'supplier:has()',
 			'internalcode' => '(
 				SELECT msupli_has."id" FROM mshop_supplier_list AS msupli_has
-				WHERE msup."id" = msupli_has."parentid" AND :site AND msupli_has."domain" = $1 :type :refid
-				LIMIT 1
+				WHERE msup."id" = msupli_has."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Supplier has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -113,6 +112,7 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-supplier' );
 
+		$self = $this;
 		$locale = $context->getLocale();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
@@ -128,13 +128,16 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['supplier:has'], 'msupli_has."siteid"', $siteIds, ':site' );
 
+		$this->searchConfig['supplier:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-		$this->searchConfig['supplier:has']['function'] = function( &$source, array $params ) {
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$source = str_replace( ':type', isset( $params[1] ) ? 'AND msupli_has."type" = $2' : '', $source );
-			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND msupli_has."refid" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 'msupli_has."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'msupli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};

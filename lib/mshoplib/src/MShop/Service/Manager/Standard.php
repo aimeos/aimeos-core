@@ -131,8 +131,7 @@ class Standard
 			'code' => 'service:has()',
 			'internalcode' => '(
 				SELECT mserli_has."id" FROM mshop_service_list AS mserli_has
-				WHERE mser."id" = mserli_has."parentid" AND :site AND mserli_has."domain" = $1 :type :refid
-				LIMIT 1
+				WHERE mser."id" = mserli_has."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Service has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -154,6 +153,7 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-service' );
 
+		$self = $this;
 		$locale = $context->getLocale();
 		$this->date = $context->getDateTime();
 
@@ -170,13 +170,16 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['service:has'], 'mserli_has."siteid"', $siteIds, ':site' );
 
+		$this->searchConfig['service:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-		$this->searchConfig['service:has']['function'] = function( &$source, array $params ) {
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mserli_has."type" = $2' : '', $source );
-			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mserli_has."refid" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 'mserli_has."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'mserli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};

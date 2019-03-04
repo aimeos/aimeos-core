@@ -126,8 +126,7 @@ class Standard
 			'code' => 'media:has()',
 			'internalcode' => '(
 				SELECT mmedli_has."id" FROM mshop_media_list AS mmedli_has
-				WHERE mmed."id" = mmedli_has."parentid" AND :site AND mmedli_has."domain" = $1 :type :refid
-				LIMIT 1
+				WHERE mmed."id" = mmedli_has."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Media has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -161,6 +160,7 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-media' );
 
+		$self = $this;
 		$locale = $context->getLocale();
 		$this->languageId = $locale->getLanguageId();
 
@@ -177,18 +177,22 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['media:has'], 'mmedli_has."siteid"', $siteIds, ':site' );
-		$this->replaceSiteMarker( $this->searchConfig['media:prop'], 'mmedpr_prop."siteid"', $siteIds, ':site' );
 
+		$this->searchConfig['media:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-		$this->searchConfig['media:has']['function'] = function( &$source, array $params ) {
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mmedli_has."type" = $2' : '', $source );
-			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mmedli_has."refid" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 'mmedli_has."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'mmedli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};
 
+
+		$this->replaceSiteMarker( $this->searchConfig['media:prop'], 'mmedpr_prop."siteid"', $siteIds, ':site' );
 
 		$this->searchConfig['media:prop']['function'] = function( &$source, array $params ) {
 

@@ -112,8 +112,7 @@ class Standard
 			'code' => 'text:has()',
 			'internalcode' => '(
 				SELECT mtexli_has."id" FROM mshop_text_list AS mtexli_has
-				WHERE mtex."id" = mtexli_has."parentid" AND :site AND mtexli_has."domain" = $1 :type :refid
-				LIMIT 1
+				WHERE mtex."id" = mtexli_has."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Text has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -135,6 +134,7 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-text' );
 
+		$self = $this;
 		$locale = $context->getLocale();
 		$this->languageId = $locale->getLanguageId();
 
@@ -151,13 +151,16 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['text:has'], 'mtexli_has."siteid"', $siteIds, ':site' );
 
+		$this->searchConfig['text:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-		$this->searchConfig['text:has']['function'] = function( &$source, array $params ) {
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mtexli_has."type" = $2' : '', $source );
-			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mtexli_has."refid" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 'mtexli_has."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'mtexli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};

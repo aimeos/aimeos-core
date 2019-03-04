@@ -90,6 +90,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', [] );
 			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'key', 'string', array( 'length' => 98 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'refid', 'string', array( 'length' => 32 ) );
@@ -104,6 +105,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msmedli_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_msmedli_pid_sid_dm_ty_rid' );
+			$table->addIndex( array( 'siteid', 'key' ), 'idx_msmedli_sid_key' );
 			$table->addIndex( array( 'parentid' ), 'fk_msmedli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_media', array( 'parentid' ), array( 'id' ),

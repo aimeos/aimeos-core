@@ -134,8 +134,7 @@ class Standard extends Base
 			'code' => 'catalog:has()',
 			'internalcode' => '(
 				SELECT mcatli_has."id" FROM mshop_catalog_list AS mcatli_has
-				WHERE mcat."id" = mcatli_has."parentid" AND :site AND mcatli_has."domain" = $1 :type :refid
-				LIMIT 1
+				WHERE mcat."id" = mcatli_has."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Catalog has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -155,6 +154,7 @@ class Standard extends Base
 		parent::__construct( $context, $this->searchConfig );
 		$this->setResourceName( 'db-catalog' );
 
+		$self = $this;
 		$locale = $context->getLocale();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
@@ -170,13 +170,16 @@ class Standard extends Base
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['catalog:has'], 'mcatli_has."siteid"', $siteIds, ':site' );
 
+		$this->searchConfig['catalog:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-		$this->searchConfig['catalog:has']['function'] = function( &$source, array $params ) {
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mcatli_has."type" = $2' : '', $source );
-			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mcatli_has."refid" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 'mcatli_has."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'mcatli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};

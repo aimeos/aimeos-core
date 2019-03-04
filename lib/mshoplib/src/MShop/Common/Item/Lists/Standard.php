@@ -83,6 +83,17 @@ class Standard
 
 
 	/**
+	 * Returns the unique key of the list item
+	 *
+	 * @return string Unique key consisting of domain/type/refid
+	 */
+	public function getKey()
+	{
+		return $this->getDomain() . '|' . $this->getType() . '|' . $this->getRefId();
+	}
+
+
+	/**
 	 * Returns the domain of the common list item, e.g. text or media.
 	 *
 	 * @return string Domain of the common list item
@@ -446,7 +457,9 @@ class Standard
 		$list[$this->prefix . 'status'] = $this->getStatus();
 		$list[$this->prefix . 'type'] = $this->getType();
 
-		if( $private === true ) {
+		if( $private === true )
+		{
+			$list[$this->prefix . 'key'] = $this->getKey();
 			$list[$this->prefix . 'parentid'] = $this->getParentId();
 		}
 

@@ -122,8 +122,7 @@ class Standard
 			'code' => 'attribute:has()',
 			'internalcode' => '(
 				SELECT mattli_has."id" FROM mshop_attribute_list AS mattli_has
-				WHERE matt."id" = mattli_has."parentid" AND :site AND mattli_has."domain" = $1 :type :refid
-				LIMIT 1
+				WHERE matt."id" = mattli_has."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Attribute has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -159,7 +158,9 @@ class Standard
 
 		$this->plugins['attribute.key'] = new \Aimeos\MW\Criteria\Plugin\Cut();
 
+		$self = $this;
 		$locale = $context->getLocale();
+
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/attribute/manager/sitemode', $level );
 
@@ -173,14 +174,18 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['attribute:has'], 'mattli_has."siteid"', $siteIds, ':site' );
 		$this->replaceSiteMarker( $this->searchConfig['attribute:prop'], 'mattpr_prop."siteid"', $siteIds, ':site' );
 
 
-		$this->searchConfig['attribute:has']['function'] = function( &$source, array $params ) {
+		$this->searchConfig['attribute:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mattli_has."type" = $2' : '', $source );
-			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mattli_has."refid" = $3' : '', $source );
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
+
+			$source = str_replace( ':site', $self->toExpression( 'mattli_has."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'mattli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};

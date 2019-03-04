@@ -50,6 +50,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 8, $this->object->getId() );
 	}
 
+
 	public function testSetId()
 	{
 		$return = $this->object->setId( null );
@@ -59,10 +60,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertNull( $this->object->getId() );
 	}
 
+
 	public function testGetParentId()
 	{
 		$this->assertEquals( 2, $this->object->getParentId() );
 	}
+
 
 	public function testSetParentId()
 	{
@@ -73,10 +76,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
+	public function testGetKey()
+	{
+		$this->assertEquals( 'testDomain|test|unitId', $this->object->getKey() );
+	}
+
+
 	public function testGetDomain()
 	{
 		$this->assertEquals( 'testDomain', $this->object->getDomain() );
 	}
+
 
 	public function testSetDomain()
 	{
@@ -87,10 +98,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetRefId()
 	{
 		$this->assertEquals( 'unitId', $this->object->getRefId() );
 	}
+
 
 	public function testSetRefId()
 	{
@@ -101,10 +114,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetDateStart()
 	{
 		$this->assertEquals( '2005-01-01 00:00:00', $this->object->getDateStart() );
 	}
+
 
 	public function testSetDateStart()
 	{
@@ -118,10 +133,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setDateStart( '2008-34-12' );
 	}
 
+
 	public function testGetDateEnd()
 	{
 		$this->assertEquals( '2010-12-31 00:00:00', $this->object->getDateEnd() );
 	}
+
 
 	public function testSetDateEnd()
 	{
@@ -135,6 +152,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setDateEnd( '2008-34-12' );
 	}
 
+
 	public function testSetPosition()
 	{
 		$return = $this->object->setPosition( 1234 );
@@ -144,10 +162,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetPosition()
 	{
 		$this->assertEquals( 7, $this->object->getPosition() );
 	}
+
 
 	public function testSetStatus()
 	{
@@ -158,15 +178,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetStatus()
 	{
 		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
+
 	public function testGetType()
 	{
 		$this->assertEquals( 'test', $this->object->getType() );
 	}
+
 
 	public function testSetType()
 	{
@@ -177,25 +200,30 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
+
 
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
+
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
+
 	public function testGetEditor()
 	{
 		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
+
 
 	public function testGetConfig()
 	{
@@ -291,6 +319,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.id' => '8',
 			'common.lists.siteid' => 99,
 			'common.lists.parentid' => 2,
+			'common.lists.key' => 'testDomain|test|unitId',
 			'common.lists.domain' => 'testDomain',
 			'common.lists.refid' => 'unitId',
 			'common.lists.datestart' => '2005-01-01 00:00:00',

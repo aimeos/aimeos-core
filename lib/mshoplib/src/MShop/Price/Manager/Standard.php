@@ -133,8 +133,7 @@ class Standard
 			'code' => 'price:has()',
 			'internalcode' => '(
 				SELECT mprili_has."id" FROM mshop_price_list AS mprili_has
-				WHERE mpri."id" = mprili_has."parentid" AND :site AND mprili_has."domain" = $1 :type :refid
-				LIMIT 1
+				WHERE mpri."id" = mprili_has."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Price has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -172,6 +171,7 @@ class Standard
 		$this->taxflag = $context->getConfig()->get( 'mshop/price/taxflag', true );
 		$this->currencyId = $context->getLocale()->getCurrencyId();
 
+		$self = $this;
 		$locale = $context->getLocale();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
@@ -187,13 +187,16 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['price:has'], 'mprili_has."siteid"', $siteIds, ':site' );
 
+		$this->searchConfig['price:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-		$this->searchConfig['price:has']['function'] = function( &$source, array $params ) {
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$source = str_replace( ':type', isset( $params[1] ) ? 'AND mprili_has."type" = $2' : '', $source );
-			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND mprili_has."refid" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 'mprili_has."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'mprili_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};
