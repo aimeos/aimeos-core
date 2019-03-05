@@ -24,21 +24,6 @@ class Factory
 
 
 	/**
-	 * Injects a controller object.
-	 *
-	 * The object is returned via createController() if an instance of the class
-	 * with the name name is requested.
-	 *
-	 * @param string $classname Full name of the class for which the object should be returned
-	 * @param null|\Aimeos\Controller\Common\Order\Iface $controller Frontend controller object
-	 */
-	public static function injectController( $classname, \Aimeos\Controller\Common\Order\Iface $controller = null )
-	{
-		self::$objects[$classname] = $controller;
-	}
-
-
-	/**
 	 * Creates a new controller specified by the given name.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by controllers
@@ -92,7 +77,7 @@ class Factory
 		}
 
 		$iface = \Aimeos\Controller\Common\Order\Iface::class;
-		$classname = '\Aimeos\Controller\Common\Order\\' . $name;
+		$classname = 'Aimeos\Controller\Common\Order\\' . $name;
 
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];
@@ -109,5 +94,20 @@ class Factory
 		}
 
 		return $controller;
+	}
+
+
+	/**
+	 * Injects a controller object.
+	 *
+	 * The object is returned via create() if an instance of the class
+	 * with the name name is requested.
+	 *
+	 * @param string $classname Full name of the class for which the object should be returned
+	 * @param null|\Aimeos\Controller\Common\Order\Iface $controller Frontend controller object
+	 */
+	public static function inject( $classname, \Aimeos\Controller\Common\Order\Iface $controller = null )
+	{
+		self::$objects[trim( $classname, '\\' )] = $controller;
 	}
 }
