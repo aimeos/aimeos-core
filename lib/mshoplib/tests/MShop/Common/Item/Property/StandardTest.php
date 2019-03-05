@@ -45,6 +45,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 987, $this->object->getId() );
 	}
 
+
 	public function testSetId()
 	{
 		$return = $this->object->setId( null );
@@ -54,15 +55,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
+
 	public function testGetLanguageId()
 	{
 		$this->assertEquals( 'en', $this->object->getLanguageId() );
 	}
+
 
 	public function testSetLanguageId()
 	{
@@ -73,10 +77,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetParentId()
 	{
 		$this->assertEquals( 11, $this->object->getParentId() );
 	}
+
 
 	public function testSetParentId()
 	{
@@ -87,10 +93,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
+	public function testGetKey()
+	{
+		$this->assertEquals( 'width|en|30.0', $this->object->getKey() );
+	}
+
+
 	public function testGetType()
 	{
 		$this->assertEquals( 'width', $this->object->getType() );
 	}
+
 
 	public function testSetType()
 	{
@@ -101,10 +115,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetValue()
 	{
 		$this->assertEquals( '30.0', $this->object->getValue() );
 	}
+
 
 	public function testSetValue()
 	{
@@ -115,15 +131,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
+
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
+
 
 	public function testGetEditor()
 	{
@@ -163,14 +182,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testToArray()
 	{
 		$arrayObject = $this->object->toArray( true );
-		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['common.property.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['common.property.siteid'] );
-		$this->assertEquals( $this->object->getType(), $arrayObject['common.property.type'] );
+		$this->assertEquals( $this->object->getKey(), $arrayObject['common.property.key'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['common.property.type'] );
 		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['common.property.languageid'] );
-		$this->assertEquals( $this->object->getType(), $arrayObject['common.property.type'] );
 		$this->assertEquals( $this->object->getValue(), $arrayObject['common.property.value'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['common.property.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['common.property.mtime'] );

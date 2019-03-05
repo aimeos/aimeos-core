@@ -48,6 +48,8 @@ abstract class Base
 		if( ( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
+
+		$this->plugins[$this->prefix . 'key'] = new \Aimeos\MW\Criteria\Plugin\Cut();
 	}
 
 
@@ -124,18 +126,19 @@ abstract class Base
 			$stmt = $conn->create( $this->getSqlConfig( $this->getConfigPath() . $type ) );
 
 			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getType() );
-			$stmt->bind( 3, $item->getLanguageId() );
-			$stmt->bind( 4, $item->getValue() );
-			$stmt->bind( 5, $date ); //mtime
-			$stmt->bind( 6, $context->getEditor() );
-			$stmt->bind( 7, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $this->plugins[$this->prefix . 'key']->translate( $item->getKey() ) );
+			$stmt->bind( 3, $item->getType() );
+			$stmt->bind( 4, $item->getLanguageId() );
+			$stmt->bind( 5, $item->getValue() );
+			$stmt->bind( 6, $date ); //mtime
+			$stmt->bind( 7, $context->getEditor() );
+			$stmt->bind( 8, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 8, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 9, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
-				$stmt->bind( 8, $date ); //ctime
+				$stmt->bind( 9, $date ); //ctime
 			}
 
 			$stmt->execute()->finish();

@@ -133,8 +133,7 @@ class Standard
 			'code' => 'attribute:prop()',
 			'internalcode' => '(
 				SELECT mattpr_prop."id" FROM mshop_attribute_property AS mattpr_prop
-				WHERE matt."id" = mattpr_prop."parentid" AND :site AND mattpr_prop."type" = $1  :langid :value
-				LIMIT 1
+				WHERE matt."id" = mattpr_prop."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Attribute has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
@@ -174,8 +173,6 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['attribute:prop'], 'mattpr_prop."siteid"', $siteIds, ':site' );
-
 
 		$this->searchConfig['attribute:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
@@ -191,13 +188,15 @@ class Standard
 		};
 
 
-		$this->searchConfig['attribute:prop']['function'] = function( &$source, array $params ) {
+		$this->searchConfig['attribute:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-			$lang = 'AND mattpr_prop."langid"';
-			$lang = isset( $params[1] ) ? ( $params[1] !== 'null' ? $lang . ' = $2' : $lang . ' IS NULL' ) : '';
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$source = str_replace( ':langid', $lang, $source );
-			$source = str_replace( ':value', isset( $params[2] ) ? 'AND mattpr_prop."value" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 'mattpr_prop."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'mattpr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};

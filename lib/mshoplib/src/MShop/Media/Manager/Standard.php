@@ -137,8 +137,7 @@ class Standard
 			'code' => 'media:prop()',
 			'internalcode' => '(
 				SELECT mmedpr_prop."id" FROM mshop_media_property AS mmedpr_prop
-				WHERE mmed."id" = mmedpr_prop."parentid" AND :site AND mmedpr_prop."type" = $1 :langid :value
-				LIMIT 1
+				WHERE mmed."id" = mmedpr_prop."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Media has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
@@ -192,15 +191,15 @@ class Standard
 		};
 
 
-		$this->replaceSiteMarker( $this->searchConfig['media:prop'], 'mmedpr_prop."siteid"', $siteIds, ':site' );
+		$this->searchConfig['media:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-		$this->searchConfig['media:prop']['function'] = function( &$source, array $params ) {
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$lang = 'AND mmedpr_prop."langid"';
-			$lang = isset( $params[1] ) ? ( $params[1] !== 'null' ? $lang . ' = $2' : $lang . ' IS NULL' ) : '';
-
-			$source = str_replace( ':langid', $lang, $source );
-			$source = str_replace( ':value', isset( $params[2] ) ? 'AND mmedpr_prop."value" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 'mmedpr_prop."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'mmedpr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};

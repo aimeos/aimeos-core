@@ -234,17 +234,17 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_product_property" (
-							"parentid", "type", "langid", "value",
+							"parentid", "key", "type", "langid", "value",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_product_property"
-						SET "parentid" = ?, "type" = ?, "langid" = ?,
+						SET "parentid" = ?, "key" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'

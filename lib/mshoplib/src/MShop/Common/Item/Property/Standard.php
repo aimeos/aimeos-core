@@ -41,6 +41,17 @@ class Standard
 
 
 	/**
+	 * Returns the unique key of the property item
+	 *
+	 * @return string Unique key consisting of type/language/value
+	 */
+	public function getKey()
+	{
+		return $this->getType() . '|' . ( $this->getLanguageId() ?: 'null' ) . '|' . $this->getValue();
+	}
+
+
+	/**
 	 * Returns the language ID of the property item.
 	 *
 	 * @return string|null Language ID of the property item
@@ -235,7 +246,9 @@ class Standard
 		$list[$this->prefix . 'value'] = $this->getValue();
 		$list[$this->prefix . 'type'] = $this->getType();
 
-		if( $private === true ) {
+		if( $private === true )
+		{
+			$list[$this->prefix . 'key'] = $this->getKey();
 			$list[$this->prefix . 'parentid'] = $this->getParentId();
 		}
 

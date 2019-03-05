@@ -22,6 +22,13 @@ interface Iface
 	\Aimeos\MShop\Common\Item\Parentid\Iface
 {
 	/**
+	 * Returns the unique key of the property item
+	 *
+	 * @return string Unique key consisting of type/language/value
+	 */
+	public function getKey();
+
+	/**
 	 * Returns the language id of the property item
 	 *
 	 * @return string Language ID of the property item

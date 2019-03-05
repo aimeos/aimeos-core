@@ -147,6 +147,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'key', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'value', 'string', array( 'length' => 255 ) );
@@ -156,6 +157,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mspropr_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_mspropr_sid_ty_lid_value' );
+			$table->addIndex( array( 'siteid', 'key' ), 'fk_mspropr_sid_key' );
 			$table->addIndex( array( 'parentid' ), 'fk_mspropr_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product', array( 'parentid' ), array( 'id' ),
