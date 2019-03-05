@@ -46,7 +46,7 @@ interface Iface
 	 * meantime. This can lead to an oversell of products!
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item object
 	 */
 	public function block( \Aimeos\MShop\Order\Item\Iface $orderItem );
 
@@ -68,7 +68,7 @@ interface Iface
 	 * meantime. This can lead to an oversell of products!
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item object
 	 */
 	public function unblock( \Aimeos\MShop\Order\Item\Iface $orderItem );
 
@@ -86,7 +86,7 @@ interface Iface
 	 * nothing as long as the payment status hasn't changed in the meantime.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item object
 	 */
 	public function update( \Aimeos\MShop\Order\Item\Iface $orderItem );
 }

@@ -52,11 +52,14 @@ class Standard
 	 * meantime. This can lead to an oversell of products!
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item object
 	 */
 	public function block( \Aimeos\MShop\Order\Item\Iface $orderItem )
 	{
 		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, 1, -1 );
 		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE, 1, -1 );
+
+		return $orderItem;
 	}
 
 
@@ -77,11 +80,14 @@ class Standard
 	 * meantime. This can lead to an oversell of products!
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item object
 	 */
 	public function unblock( \Aimeos\MShop\Order\Item\Iface $orderItem )
 	{
 		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, 0, +1 );
 		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE, 0, +1 );
+
+		return $orderItem;
 	}
 
 
@@ -98,6 +104,7 @@ class Standard
 	 * nothing as long as the payment status hasn't changed in the meantime.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item object
 	 */
 	public function update( \Aimeos\MShop\Order\Item\Iface $orderItem )
 	{
@@ -116,6 +123,8 @@ class Standard
 				$this->block( $orderItem );
 				break;
 		}
+
+		return $orderItem;
 	}
 
 
