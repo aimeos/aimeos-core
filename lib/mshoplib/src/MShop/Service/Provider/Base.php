@@ -377,9 +377,8 @@ abstract class Base
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'order' );
 
-		$search = $manager->createSearch( true );
+		$search = $manager->createSearch();
 		$expr = [
-			$search->getConditions(),
 			$search->compare( '==', 'order.id', $id ),
 			$search->compare( '==', 'order.base.service.code', $this->serviceItem->getCode() ),
 		];

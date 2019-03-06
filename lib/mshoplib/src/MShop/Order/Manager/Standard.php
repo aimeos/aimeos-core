@@ -325,6 +325,28 @@ class Standard
 
 
 	/**
+	 * Creates a search critera object
+	 *
+	 * @param boolean $default Add default criteria (optional)
+	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
+	 */
+	public function createSearch( $default = false )
+	{
+		$search = parent::createSearch();
+
+		if( $default === true )
+		{
+			$search->setConditions( $search->combine( '&&', [
+				$search->compare( '==', 'order.base.customerid', $this->getContext()->getUserId() ),
+				$search->getConditions()
+			] ) );
+		}
+
+		return $search;
+	}
+
+
+	/**
 	 * Creates a one-time order in the storage from the given invoice object.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Order item with necessary values
