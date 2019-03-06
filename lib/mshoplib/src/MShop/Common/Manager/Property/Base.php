@@ -20,9 +20,10 @@ namespace Aimeos\MShop\Common\Manager\Property;
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
-	private $prefix;
-	private $searchConfig;
 	private $languageId;
+	private $searchConfig;
+	private $plugins = [];
+	private $prefix;
 
 
 	/**
