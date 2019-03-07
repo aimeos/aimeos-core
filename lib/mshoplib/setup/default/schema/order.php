@@ -32,7 +32,6 @@ return array(
 			$table->addColumn( 'tax', 'decimal', array( 'precision' => 14, 'scale' => 4 ) );
 			$table->addColumn( 'taxflag', 'smallint', [] );
 			$table->addColumn( 'comment', 'text', array( 'length' => 0xfff ) );
-			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );

@@ -169,7 +169,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getCoupons(), $itemSaved->getCoupons() );
 		$this->assertEquals( $item->getServices(), $itemSaved->getServices() );
 		$this->assertEquals( $item->getComment(), $itemSaved->getComment() );
-		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 		$this->assertEquals( $item->getSiteCode(), $itemSaved->getSiteCode() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
@@ -190,7 +189,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getCoupons(), $itemUpd->getCoupons() );
 		$this->assertEquals( $itemExp->getServices(), $itemUpd->getServices() );
 		$this->assertEquals( $itemExp->getComment(), $itemUpd->getComment() );
-		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 		$this->assertEquals( $itemExp->getSiteCode(), $itemUpd->getSiteCode() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );

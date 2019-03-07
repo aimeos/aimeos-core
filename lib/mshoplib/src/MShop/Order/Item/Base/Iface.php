@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Order\Item\Base;
  * @subpackage Order
  */
 interface Iface
-	extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Status\Iface
+	extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Tests if all necessary items are available to create the order.

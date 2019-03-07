@@ -181,39 +181,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 
 	/**
-	 * Returns the current status of the order base item.
-	 *
-	 * @return integer Status of the item
-	 */
-	public function getStatus()
-	{
-		if( isset( $this->values['order.base.status'] ) ) {
-			return (int) $this->values['order.base.status'];
-		}
-
-		return 1;
-	}
-
-
-	/**
-	 * Sets the new status of the order base item.
-	 *
-	 * @param integer $value Status of the item
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
-	 */
-	public function setStatus( $value )
-	{
-		if( (int) $value !== $this->getStatus() )
-		{
-			$this->values['order.base.status'] = (int) $value;
-			$this->modified = true;
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns modify date/time of the order item base product.
 	 *
 	 * @return string|null Returns modify date/time of the order base item
@@ -407,10 +374,9 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 			switch( $key )
 			{
 				case 'order.base.id': !$private ?: $item = $item->setId( $value ); break;
+				case 'order.base.customerid': !$private ?: $item = $item->setCustomerId( $value ); break;
+				case 'order.base.languageid': !$private ?: $locale = $locale->setLanguageId( $value ); break;
 				case 'order.base.comment': $item = $item->setComment( $value ); break;
-				case 'order.base.customerid': $item = $item->setCustomerId( $value ); break;
-				case 'order.base.status': $item = $item->setStatus( $value ); break;
-				case 'order.base.languageid': $locale = $locale->setLanguageId( $value ); break;
 				default: continue 2;
 			}
 
@@ -442,7 +408,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 			'order.base.rebate' => $price->getRebate(),
 			'order.base.taxvalue' => $price->getTaxValue(),
 			'order.base.taxflag' => $price->getTaxFlag(),
-			'order.base.status' => $this->getStatus(),
 			'order.base.comment' => $this->getComment(),
 		);
 

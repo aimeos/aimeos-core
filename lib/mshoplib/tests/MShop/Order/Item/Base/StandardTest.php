@@ -26,7 +26,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.siteid' => 99,
 			'order.base.customerid' => 'testuser',
 			'order.base.comment' => 'this is a comment from unittest',
-			'order.base.status' => 0,
 			'order.base.mtime' => '2011-01-01 00:00:02',
 			'order.base.ctime' => '2011-01-01 00:00:01',
 			'order.base.editor' => 'unitTestUser'
@@ -142,29 +141,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
-	public function testGetStatus()
-	{
-		$this->assertEquals( 0, $this->object->getStatus() );
-	}
-
-	public function testSetStatus()
-	{
-		$return = $this->object->setStatus( 1 );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $return );
-		$this->assertEquals( 1, $this->object->getStatus() );
-		$this->assertTrue( $this->object->isModified() );
-	}
 
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
+
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
+
 
 	public function testGetEditor()
 	{
@@ -181,7 +169,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.comment' => 'test comment',
 			'order.base.languageid' => 'de',
 			'order.base.customerid' => 3,
-			'order.base.status' => 4,
 		);
 
 		$item = $item->fromArray( $entries, true );
@@ -191,7 +178,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.customerid'], $item->getCustomerId() );
 		$this->assertEquals( $list['order.base.languageid'], $item->getLocale()->getLanguageId() );
 		$this->assertEquals( $list['order.base.comment'], $item->getComment() );
-		$this->assertEquals( $list['order.base.status'], $item->getStatus() );
 	}
 
 
@@ -205,7 +191,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getCustomerId(), $list['order.base.customerid'] );
 		$this->assertEquals( $this->object->getLocale()->getLanguageId(), $list['order.base.languageid'] );
 		$this->assertEquals( $this->object->getComment(), $list['order.base.comment'] );
-		$this->assertEquals( $this->object->getStatus(), $list['order.base.status'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $list['order.base.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $list['order.base.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $list['order.base.editor'] );

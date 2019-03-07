@@ -624,9 +624,9 @@ return array(
 						INSERT INTO "mshop_order_base" (
 							"customerid", "sitecode", "langid", "currencyid",
 							"price", "costs", "rebate", "tax", "taxflag", "comment",
-							"status", "mtime", "editor", "siteid", "ctime"
+							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
@@ -635,7 +635,7 @@ return array(
 						UPDATE "mshop_order_base"
 						SET "customerid" = ?, "sitecode" = ?, "langid" = ?, "currencyid" = ?,
 							"price" = ?, "costs" = ?, "rebate" = ?, "tax" = ?, "taxflag" = ?,
-							"comment" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+							"comment" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
@@ -647,14 +647,14 @@ return array(
 							mordba."price" AS "order.base.price", mordba."costs" AS "order.base.costs",
 							mordba."rebate" AS "order.base.rebate", mordba."tax" AS "order.base.taxvalue",
 							mordba."taxflag" AS "order.base.taxflag", mordba."comment" AS "order.base.comment",
-							mordba."status" AS "order.base.status", mordba."mtime" AS "order.base.mtime",
-							mordba."editor" AS "order.base.editor", mordba."ctime" AS "order.base.ctime"
+							mordba."mtime" AS "order.base.mtime", mordba."ctime" AS "order.base.ctime",
+							mordba."editor" AS "order.base.editor"
 						FROM "mshop_order_base" AS mordba
 						:joins
 						WHERE :cond
 						GROUP BY mordba."id", mordba."siteid", mordba."sitecode", mordba."customerid",
 							mordba."langid", mordba."currencyid", mordba."price", mordba."costs",
-							mordba."rebate", mordba."tax", mordba."taxflag", mordba."comment", mordba."status",
+							mordba."rebate", mordba."tax", mordba."taxflag", mordba."comment",
 							mordba."mtime", mordba."editor", mordba."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
