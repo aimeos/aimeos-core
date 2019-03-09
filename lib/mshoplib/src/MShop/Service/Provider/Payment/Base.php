@@ -143,6 +143,6 @@ abstract class Base
 	 */
 	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes )
 	{
-		$this->setAttributes( $orderServiceItem, $attributes, 'payment' );
+		return $this->setAttributes( $orderServiceItem, $attributes, 'payment' );
 	}
 }

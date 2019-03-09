@@ -45,9 +45,10 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem Order service item that will be added to the basket
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item with attributes added
 	 */
 	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes )
 	{
-		$this->setAttributes( $orderServiceItem, $attributes, 'delivery' );
+		return $this->setAttributes( $orderServiceItem, $attributes, 'delivery' );
 	}
 }
