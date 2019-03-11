@@ -803,7 +803,11 @@ abstract class Base
 
 		foreach( $list as $key => $value )
 		{
-			$key = str_replace( 'order.base.address.', $this->prefix, $key );
+			if( strncmp( 'customer.address.', $key, 17 ) !== 0 ) {
+				$key = str_replace( ['order.base.address.', 'customer.'], $this->prefix, $key );
+			} else {
+				$key = str_replace( 'customer.address.', $this->prefix, $key );
+			}
 
 			switch( $key )
 			{
