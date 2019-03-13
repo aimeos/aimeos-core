@@ -7,193 +7,192 @@
 # Translators:
 # Translators:
 # Translators:
-# Doryan R, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2019-01-26 10:45+0000\n"
-"Last-Translator: Doryan R\n"
-"Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
+"PO-Revision-Date: 2019-02-12 08:30+0000\n"
+"Last-Translator: Robert Patan <robert@bytepath.ro>\n"
+"Language-Team: Romanian (http://www.transifex.com/aimeos/aimeos-core/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
 #. Item status
 msgid "status:-2"
-msgstr "archivé"
+msgstr ""
 
 #. Item status
 msgid "status:-1"
-msgstr "à l'étude"
+msgstr ""
 
 #. Item status
 msgid "status:0"
-msgstr "désactivé"
+msgstr ""
 
 #. Item status
 msgid "status:1"
-msgstr "activé"
+msgstr ""
 
 #. Address salutation
 msgid "company"
-msgstr "Nom de la compagnie"
+msgstr "Companie"
 
 #. Address salutation
 msgid "mr"
-msgstr "Mr"
+msgstr ""
 
 #. Address salutation
 msgid "mrs"
-msgstr "Mme"
+msgstr ""
 
 #. Address salutation
 msgid "miss"
-msgstr "Mademoiselle"
+msgstr ""
 
 #. Order type value
 msgid "order:repeat"
-msgstr "renouvelée"
+msgstr ""
 
 #. Order type value
 msgid "order:web"
-msgstr "par internet"
+msgstr ""
 
 #. Order type value
 msgid "order:phone"
-msgstr "numéro de téléphone"
+msgstr ""
 
 #. Subscription reason code
 msgid "reason:-1"
-msgstr "paiement"
+msgstr "plata"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr "expiré"
+msgstr ""
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr "annulé"
+msgstr ""
 
 #. Payment status value
 msgid "pay:-1"
-msgstr "en cours"
+msgstr ""
 
 #. Payment status value
 msgid "pay:0"
-msgstr "annulée"
+msgstr ""
 
 #. Payment status value
 msgid "pay:1"
-msgstr "annulé"
+msgstr ""
 
 #. Payment status value
 msgid "pay:2"
-msgstr "refusée"
+msgstr ""
 
 #. Payment status value
 msgid "pay:3"
-msgstr "remboursé"
+msgstr ""
 
 #. Payment status value
 msgid "pay:4"
-msgstr "en attente"
+msgstr ""
 
 #. Payment status value
 msgid "pay:5"
-msgstr "autorisé"
+msgstr ""
 
 #. Payment status value
 msgid "pay:6"
-msgstr "reçu"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:-1"
-msgstr "en cours"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:0"
-msgstr "annulée"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:1"
-msgstr "en attente"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:2"
-msgstr "en cours"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:3"
-msgstr "expédiée"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:4"
-msgstr "livrée"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:5"
-msgstr "perdue"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:6"
-msgstr "refusée"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:7"
-msgstr "renvoyée"
+msgstr ""
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr "L'adresse de facturation est manquante."
+msgstr ""
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr "L'adresse de livraison est manquante."
+msgstr ""
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr "Une adresse de facturation n'est pas autorisée."
+msgstr ""
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr "Une adresse de livraison n'est pas autorisée."
+msgstr ""
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr "Le mode de paiement est manquant."
+msgstr ""
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr "Le mode de livraison est manquant."
+msgstr ""
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr "Un mode de paiement n'est pas autorisé."
+msgstr ""
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr "Un mode de livraison n'est pas autorisé. "
+msgstr ""
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr "Désolé, mais l'un (ou plusieurs) des articles n'existe plus. Veuillez l'enlever de votre panier avant de continuer."
+msgstr ""
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr "Désolé, mais l'un (ou plusieurs) des articles a été retiré de la vente. Veuillez l'enlever de votre panier avant de continuer."
+msgstr ""
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr "Désolé, mais l'un (ou plusieurs) des articles n'est plus disponible. Veuillez l'enlever de votre panier avant de continuer."
+msgstr ""
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr "Le prix de l'un (ou plusieurs) des articles a changé entre temps, et a été automatiquement mis à jour."
+msgstr ""
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr "Désolé, mais l'un (ou plusieurs) des articles est épuisé. Veuillez l'enlever de votre panier avant de continuer."
+msgstr ""

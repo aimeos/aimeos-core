@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-27 08:31+0200\n"
-"PO-Revision-Date: 2018-09-27 06:36+0000\n"
+"POT-Creation-Date: 2019-03-13 10:02+0100\n"
+"PO-Revision-Date: 2019-03-13 09:09+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Croatian (http://www.transifex.com/aimeos/aimeos-core/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -33,6 +33,9 @@ msgid "Capture authorized payments"
 msgstr ""
 
 msgid "Catalog import CSV"
+msgstr ""
+
+msgid "Catalog import XML"
 msgstr ""
 
 msgid "Catalog index optimization"
@@ -69,6 +72,10 @@ msgstr ""
 msgid "Executes payment or delivery service providers that uses batch updates"
 msgstr ""
 
+#, php-format
+msgid "Expanding \"%1$s\" node failed"
+msgstr ""
+
 msgid "Exports all available products"
 msgstr ""
 
@@ -78,7 +85,14 @@ msgstr ""
 msgid "Exports subscriptions to CSV file"
 msgstr ""
 
+#, php-format
+msgid "File or directory \"%1$s\" doesn't exist"
+msgstr ""
+
 msgid "Imports new and updates existing categories from CSV files"
+msgstr ""
+
+msgid "Imports new and updates existing categories from XML files"
 msgstr ""
 
 msgid "Imports new and updates existing coupon code from CSV files"
@@ -122,6 +136,10 @@ msgstr ""
 
 #, php-format
 msgid "No \"product.code\" column in CSV mapping found"
+msgstr ""
+
+#, php-format
+msgid "No XML file \"%1$s\" found"
 msgstr ""
 
 msgid "Optimizes the catalog index for searching products"
@@ -243,6 +261,10 @@ msgstr ""
 
 #, php-format
 msgid "Unable to move imported file"
+msgstr ""
+
+#, php-format
+msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
 msgstr ""
 
 #, php-format

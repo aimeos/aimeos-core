@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Doryan R <doryan16238@gmail.com>, 2019
+# Doryan R, 2019
 # Guillaume STEIN <guillaume.stein@gmail.com>, 2016
 # Six byNine <wwinx@hotmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-27 08:31+0200\n"
-"PO-Revision-Date: 2019-01-26 12:58+0000\n"
-"Last-Translator: Doryan R <doryan16238@gmail.com>\n"
+"POT-Creation-Date: 2019-03-13 10:02+0100\n"
+"PO-Revision-Date: 2019-03-13 09:09+0000\n"
+"Last-Translator: Doryan R\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,6 +36,9 @@ msgstr "Capturer les paiements autorisés"
 
 msgid "Catalog import CSV"
 msgstr "Importation de catalogue CSV"
+
+msgid "Catalog import XML"
+msgstr ""
 
 msgid "Catalog index optimization"
 msgstr "Optimisation des index de catalogue"
@@ -71,6 +74,10 @@ msgstr "Supprime les commandes impayées pour maintenir la base de données prop
 msgid "Executes payment or delivery service providers that uses batch updates"
 msgstr "Exécute les fournisseurs de services de paiement ou de livraison utilisant des mises à jour par lot"
 
+#, php-format
+msgid "Expanding \"%1$s\" node failed"
+msgstr ""
+
 msgid "Exports all available products"
 msgstr "Exporte tous les produits disponibles"
 
@@ -80,8 +87,15 @@ msgstr "Exporte les commandes dans un fichier CSV"
 msgid "Exports subscriptions to CSV file"
 msgstr "Exporte les abonnements au fichier CSV"
 
+#, php-format
+msgid "File or directory \"%1$s\" doesn't exist"
+msgstr ""
+
 msgid "Imports new and updates existing categories from CSV files"
 msgstr "Importe de nouvelles catégories et met à jour des catégories existantes à partir de fichiers CSV"
+
+msgid "Imports new and updates existing categories from XML files"
+msgstr ""
 
 msgid "Imports new and updates existing coupon code from CSV files"
 msgstr "Importe le nouveau code et met à jour le code de coupon existant à partir de fichiers CSV"
@@ -125,6 +139,10 @@ msgstr "Aucune colonne \"coupon.code.code\" dans le mappage CSV n'a été trouv�
 #, php-format
 msgid "No \"product.code\" column in CSV mapping found"
 msgstr "Aucune colonne \"product.code\" dans le mappage CSV n'a été trouvée"
+
+#, php-format
+msgid "No XML file \"%1$s\" found"
+msgstr ""
 
 msgid "Optimizes the catalog index for searching products"
 msgstr "Optimise l'index du catalogue pour la recherche de produits"
@@ -246,6 +264,10 @@ msgstr "Impossible d'importer le produit avec le code \"%1$s\":%2$s"
 #, php-format
 msgid "Unable to move imported file"
 msgstr "Impossible de déplacer le fichier importé"
+
+#, php-format
+msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
+msgstr ""
 
 #, php-format
 msgid "aimeos-products-%d.xml"
