@@ -653,7 +653,7 @@ class Standard
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
-		/** mshop/index/manager/price/price-types
+		/** mshop/index/manager/price/types
 		 * Use different product prices types for sorting by price
 		 *
 		 * In some cases, prices are stored with different types, eg. price per kg.
@@ -661,18 +661,16 @@ class Standard
 		 * the product list by price.
 		 *
 		 * @param array List of price types codes
-		 * @since 2019.1
+		 * @since 2019.04
 		 * @category Developer
 		 */
-		$types = $context->getConfig()->get( 'mshop/index/manager/price/price-types', ['default'] );
+		$types = $context->getConfig()->get( 'mshop/index/manager/price/types', 'default' );
+
 		foreach( $item->getListItems( 'price', 'default', $types ) as $listItem )
 		{
-			if( ( $refItem = $listItem->getRefItem() ) !== null 
-				&& ( !isset ( $prices[$refItem->getCurrencyId()][$refItem->getQuantity()] ) 
-				|| $prices[$refItem->getCurrencyId()][$refItem->getQuantity()] > $refItem->getValue() ) )
-				{
-					$prices[$refItem->getCurrencyId()][$refItem->getQuantity()] = $refItem->getValue();
-				}
+			if( ( $refItem = $listItem->getRefItem() ) !== null && $refItem->isAvailable() ) {
+				$prices[$refItem->getCurrencyId()][$refItem->getQuantity()] = $refItem->getValue();
+			}
 		}
 
 		foreach( $prices as $currencyId => $list )
