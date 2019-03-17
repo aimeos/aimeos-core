@@ -67,10 +67,8 @@ class Standard implements Iface
 	 */
 	public function get( $name )
 	{
-		$conf = (array) $this->getConfig( $name );
-
 		if( !isset( $this->objects[$name] ) ) {
-			$this->objects[$name] = \Aimeos\MW\Filesystem\Factory::create( $conf );
+			$this->objects[$name] = \Aimeos\MW\Filesystem\Factory::create( (array) $this->getConfig( $name ) );
 		}
 
 		return $this->objects[$name];
