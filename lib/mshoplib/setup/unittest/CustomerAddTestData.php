@@ -72,7 +72,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 		$items = [];
 		foreach( $testdata['customer'] as $entry )
 		{
-			$item = $manager->createItem()->fromArray( $entry );
+			$item = $manager->createItem()->fromArray( $entry, true );
 			$item = $this->addGroupData( $groupManager, $item, $entry );
 			$item = $this->addPropertyData( $propManager, $item, $entry );
 			$item = $this->addAddressData( $addrManager, $item, $entry );
