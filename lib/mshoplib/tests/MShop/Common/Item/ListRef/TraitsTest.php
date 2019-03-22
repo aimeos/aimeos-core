@@ -148,6 +148,12 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function getDomains()
+	{
+		$this->assertEquals( ['text'], $this->object->getDomains() );
+	}
+
+
 	public function testGetListItemsDeleted()
 	{
 		$this->assertEquals( [], $this->object->getListItemsDeleted() );

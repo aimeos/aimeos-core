@@ -134,6 +134,17 @@ trait Traits
 
 
 	/**
+	 * Returns the domains for which items are available
+	 *
+	 * @return string[] List of domain names
+	 */
+	public function getDomains()
+	{
+		return array_keys( $this->listItems );
+	}
+
+
+	/**
 	 * Returns the deleted list items which include the domain items if available
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface[] List items with referenced items attached (optional)

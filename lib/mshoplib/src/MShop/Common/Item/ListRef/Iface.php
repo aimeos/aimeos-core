@@ -51,6 +51,13 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function deleteListItems( array $items, $all = false );
 
 	/**
+	 * Returns the domains for which items are available
+	 *
+	 * @return string[] List of domain names
+	 */
+	public function getDomains();
+
+	/**
 	 * Returns the deleted list items which include the domain items if available
 	 *
 	 * @return array Associative list of domains as keys and lists of list items containing the referenced items as values
