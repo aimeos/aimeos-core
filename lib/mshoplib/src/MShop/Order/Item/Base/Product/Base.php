@@ -33,6 +33,12 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	const FLAG_IMMUTABLE = 1;
 
+	/**
+	 * Price was set manually.
+	 * Used e.g. when a price was set by a basket plugin and can not be
+	 * compared against the original product price.
+	 */
+	const FLAG_FIXEDPRICE = 2;
 
 	private $attributes;
 	private $attributesMap;
