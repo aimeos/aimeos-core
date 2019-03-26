@@ -32,6 +32,13 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 	 * was e.g. added by a coupon provider.
 	 */
 	const FLAG_IMMUTABLE = 1;
+	
+	/**
+	 * Price was set manually.
+	 * Used e.g. when a price was set by a basket plugin and can not be
+	 * compared against the original product price.
+	 */
+	const FLAG_FIXEDPRICE = 2;
 
 
 	private $attributes;

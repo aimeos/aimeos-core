@@ -63,7 +63,7 @@ class ProductPrice
 
 		foreach( $orderProducts as $pos => $item )
 		{
-			if( $item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) {
+			if( ( $item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) || ( $item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_FIXEDPRICE ) ) {
 				unset( $orderProducts[$pos] );
 			}
 
