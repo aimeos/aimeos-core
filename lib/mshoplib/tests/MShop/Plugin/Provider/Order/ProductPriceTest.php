@@ -47,6 +47,8 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 		$this->price = clone $productItem->getPrice();
 		$this->price->setValue( 13.13 );
+		
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( $context, $this->plugin );
 	}
 
 
@@ -86,8 +88,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelperMShop::getContext(), $this->plugin );
-		$object->register( $this->order );
+		$this->object->register( $this->order );
 	}
 
 
