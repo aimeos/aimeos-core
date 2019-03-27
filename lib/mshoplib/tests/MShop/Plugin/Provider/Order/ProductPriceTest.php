@@ -49,6 +49,31 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCheckConfigBE()
+	{
+		$attributes = array(
+			'ignore-modified' => '0',
+		);
+
+		$result = $this->object->checkConfigBE( $attributes );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( null, $result['ignore-modified'] );
+	}
+
+
+	public function testGetConfigBE()
+	{
+		$list = $this->object->getConfigBE();
+
+		$this->assertEquals( 1, count( $list ) );
+		$this->assertArrayHasKey( 'ignore-modified', $list );
+
+		foreach( $list as $entry ) {
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
+		}
+	}
+
 	public function testRegister()
 	{
 		$this->object->register( $this->order );
@@ -190,6 +215,21 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		$orderProduct = $this->order->getProduct( 0 );
 		$orderProduct = $orderProduct->setPrice( $orderProduct->getPrice()->setValue( 13.13 ) )
 			->setFlags( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE );
+
+		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
+		$oldPrice = clone $this->order->getProduct( 0 )->getPrice();
+
+		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
+		$this->assertEquals( $oldPrice, $orderProduct->getPrice() );
+	}
+
+
+	public function testIgnoreModified()
+	{
+		$this->plugin->setConfig( array( 'ignore-modified' => true ) );
+
+		$orderProduct = $this->order->getProduct( 0 );
+		$orderProduct->setPrice( $orderProduct->getPrice()->setValue( 13.13 ) );
 
 		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 		$oldPrice = clone $this->order->getProduct( 0 )->getPrice();

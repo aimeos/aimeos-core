@@ -20,6 +20,11 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * backwards if prices are recalculated for B2B or B2C customers. In these cases
  * the customer won't be notified.
  *
+ * The following option is available:
+ * - ignore-modified: Set to true if all basket items with modified prices (e.g. by
+ *   another plugin) should be excluded from the check. Uses the isModified() method
+ *   of the item's price object.
+ *
  * To trace the execution and interaction of the plugins, set the log level to DEBUG:
  *	madmin/log/manager/standard/loglevel = 7
  *
@@ -30,6 +35,46 @@ class ProductPrice
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
+	private $beConfig = array(
+		'ignore-modified' => array(
+			'code' => 'ignore-modified',
+			'internalcode' => 'ignore-modified',
+			'label' => 'Ignore order items with a modified price (e.g. by another plugin)',
+			'type' => 'boolean',
+			'internaltype' => 'boolean',
+			'default' => '0',
+			'required' => false,
+		),
+	);
+
+
+	/**
+	 * Checks the backend configuration attributes for validity.
+	 *
+	 * @param array $attributes Attributes added by the shop owner in the administraton interface
+	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
+	 * 	known by the provider but aren't valid
+	 */
+	public function checkConfigBE( array $attributes )
+	{
+		$errors = parent::checkConfigBE( $attributes );
+
+		return array_merge( $errors, $this->checkConfig( $this->beConfig, $attributes ) );
+	}
+
+
+	/**
+	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
+	 * rules for the value of each field in the administration interface.
+	 *
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
+	 */
+	public function getConfigBE()
+	{
+		return $this->getConfigItems( $this->beConfig );
+	}
+
+
 	/**
 	 * Subscribes itself to a publisher
 	 *
@@ -66,6 +111,10 @@ class ProductPrice
 		foreach( $orderProducts as $pos => $item )
 		{
 			if( $item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) {
+				unset( $orderProducts[$pos] );
+			}
+			
+			if( $this->getConfigValue( 'ignore-modified' ) == true && $item->getPrice()->isModified() ) {
 				unset( $orderProducts[$pos] );
 			}
 
