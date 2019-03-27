@@ -47,8 +47,8 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	{
 		unset( $this->object, $this->plugin, $this->order, $this->context );
 	}
-	
-	
+
+
 	public function testCheckConfigBE()
 	{
 		$attributes = array(
@@ -222,8 +222,8 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 		$this->assertEquals( $oldPrice, $orderProduct->getPrice() );
 	}
-	
-	
+
+
 	public function testIgnoreModified()
 	{
 		$this->plugin->setConfig( array( 'ignore-modified' => true ) );
