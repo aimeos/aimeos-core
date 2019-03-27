@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * the customer won't be notified.
  *
  * The following option is available:
- * - ignore-modified: Set to true if all basket items with modified prices (e.g. by 
+ * - ignore-modified: Set to true if all basket items with modified prices (e.g. by
  *   another plugin) should be excluded from the check. Uses the isModified() method
  *   of the item's price object.
  *
