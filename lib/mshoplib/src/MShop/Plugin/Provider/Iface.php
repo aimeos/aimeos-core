@@ -29,7 +29,6 @@ interface Iface extends \Aimeos\MW\Observer\Listener\Iface
 	 */
 	public function checkConfigBE( array $attributes );
 
-
 	/**
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
@@ -37,7 +36,6 @@ interface Iface extends \Aimeos\MW\Observer\Listener\Iface
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
 	public function getConfigBE();
-
 
 	/**
 	 * Injects the outer object into the decorator stack

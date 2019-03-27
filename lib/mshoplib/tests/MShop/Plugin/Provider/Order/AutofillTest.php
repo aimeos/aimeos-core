@@ -179,11 +179,12 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$item1 = $orderBaseServiceStub->createItem()->setCode( 'unitcode' )
 			->setType( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY );
 		$item2 = $orderBaseServiceStub->createItem()->setCode( 'unitpaymentcode' )
-			->setType( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
+			->setType( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT )
+			->setAttributeItems( [new \Aimeos\MShop\Order\Item\Base\Service\Attribute\Standard()] );
 
 		$orderStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseStub ) );
 		$orderBaseStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseServiceStub ) );
-		$orderBaseServiceStub->expects( $this->once() )->method( 'searchItems' )->will( $this->returnValue( array( $item1, $item2 ) ) );
+		$orderBaseServiceStub->expects( $this->once() )->method( 'searchItems' )->will( $this->returnValue( [$item1, $item2] ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\PluginAutofill', $orderStub );
 		$this->context->getConfig()->set( 'mshop/order/manager/name', 'PluginAutofill' );
@@ -198,6 +199,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( 2, count( $this->order->getServices() ) );
 		$this->assertEquals( [], $this->order->getAddresses() );
+
+		foreach( $this->order->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT ) as $service ) {
+			$this->assertEquals( 1, count( $service->getAttributeItems() ) );
+		}
 	}
 
 
