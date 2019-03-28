@@ -44,7 +44,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		$this->object = null;
+		unset( $this->object );
 	}
 
 
@@ -61,6 +61,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, $this->object->getQuantity() );
 	}
 
+
 	public function testAddItemSelf()
 	{
 		$return = $this->object->addItem( $this->object );
@@ -73,6 +74,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, $this->object->getQuantity() );
 	}
 
+
 	public function testAddItemWrongCurrency()
 	{
 		$values = $this->values;
@@ -83,6 +85,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->setExpectedException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->addItem( $price );
 	}
+
 
 	public function testClear()
 	{
@@ -97,11 +100,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, $this->object->getQuantity() );
 	}
 
+
 	public function testCompare()
 	{
 		$price = new \Aimeos\MShop\Price\Item\Standard( $this->values );
 		$this->assertTrue( $this->object->compare( $price ) );
 	}
+
 
 	public function testCompareFail()
 	{
@@ -112,10 +117,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( $this->object->compare( $price ) );
 	}
 
+
+	public function testGetPrecision()
+	{
+		$this->assertEquals( 2, $this->object->getPrecision() );
+	}
+
+
 	public function testGetId()
 	{
 		$this->assertEquals( 199, $this->object->getId() );
 	}
+
 
 	public function testSetId()
 	{
@@ -126,15 +139,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
+
 	public function testGetType()
 	{
 		$this->assertEquals( 'default', $this->object->getType() );
 	}
+
 
 	public function testSetType()
 	{
@@ -144,10 +160,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetCurrencyId()
 	{
 		$this->assertEquals( 'EUR', $this->object->getCurrencyId() );
 	}
+
 
 	public function testSetCurrencyId()
 	{
@@ -158,11 +176,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testSetCurrencyIdNull()
 	{
 		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setCurrencyId( null );
 	}
+
 
 	public function testSetCurrencyIdInvalid()
 	{
@@ -170,10 +190,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setCurrencyId( 'usd' );
 	}
 
+
 	public function testGetDomain()
 	{
 		$this->assertEquals( 'product', $this->object->getDomain() );
 	}
+
 
 	public function testSetDomain()
 	{
@@ -184,10 +206,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetLabel()
 	{
 		$this->assertEquals( 'Price label', $this->object->getLabel() );
 	}
+
 
 	public function testSetLabel()
 	{
@@ -198,10 +222,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetQuantity()
 	{
 		$this->assertEquals( 15, $this->object->getQuantity() );
 	}
+
 
 	public function testSetQuantity()
 	{
@@ -212,10 +238,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetPrice()
 	{
 		$this->assertEquals( '195.50', $this->object->getValue() );
 	}
+
 
 	public function testSetPrice()
 	{
@@ -229,10 +257,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setValue( '190,90' );
 	}
 
+
 	public function testGetCosts()
 	{
 		$this->assertEquals( '19.95', $this->object->getCosts() );
 	}
+
 
 	public function testSetCosts()
 	{
@@ -246,10 +276,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setValue( '19,90' );
 	}
 
+
 	public function testGetRebate()
 	{
 		$this->assertEquals( '10.00', $this->object->getRebate() );
 	}
+
 
 	public function testSetRebate()
 	{
@@ -263,10 +295,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setValue( '19,90' );
 	}
 
+
 	public function testGetTaxRate()
 	{
 		$this->assertEquals( '19.00', $this->object->getTaxRate() );
 	}
+
 
 	public function testSetTaxRate()
 	{
@@ -277,10 +311,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTaxFlag()
 	{
 		$this->assertEquals( true, $this->object->getTaxFlag() );
 	}
+
 
 	public function testSetTaxFlag()
 	{
@@ -291,10 +327,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTaxValue()
 	{
 		$this->assertEquals( '34.3995', $this->object->getTaxValue() );
 	}
+
 
 	public function testGetTaxValueFromNetprice()
 	{
@@ -310,6 +348,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '40.9355', $object->getTaxValue() );
 	}
 
+
 	public function testSetTaxValue()
 	{
 		$return = $this->object->setTaxValue( '100.00' );
@@ -319,10 +358,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetStatus()
 	{
 		$this->assertEquals( 1, $this->object->getStatus() );
 	}
+
 
 	public function testSetStatus()
 	{
@@ -332,6 +373,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
+
 
 	public function testGetTimeModified()
 	{
@@ -425,6 +467,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertTrue( $this->object->isAvailable() );
 	}
+
 
 	public function testIsModified()
 	{

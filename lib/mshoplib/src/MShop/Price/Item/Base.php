@@ -24,6 +24,9 @@ abstract class Base
 	use \Aimeos\MShop\Common\Item\ListRef\Traits;
 
 
+	private $precision;
+
+
 	/**
 	 * Initalizes the object with the given values
 	 *
@@ -31,11 +34,14 @@ abstract class Base
 	 * @param array $values Associative array of key/value pairs for price, costs, rebate and currencyid
 	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
+	 * @param integer $precision Number of decimal digits
 	 */
-	public function __construct( $prefix, array $values = [], array $listItems = [], array $refItems = [] )
+	public function __construct( $prefix, array $values = [], array $listItems = [], array $refItems = [], $precision = 2 )
 	{
 		parent::__construct( $prefix, $values );
+
 		$this->initListItems( $listItems, $refItems );
+		$this->precision = $precision;
 	}
 
 
@@ -75,6 +81,17 @@ abstract class Base
 
 
 	/**
+	 * Returns the decimal precision of the price
+	 *
+	 * @return integer Number of decimal digits
+	 */
+	public function getPrecision()
+	{
+		return $this->precision;
+	}
+
+
+	/**
 	 * Returns the item type
 	 *
 	 * @return string Item type, subtypes are separated by slashes
@@ -89,10 +106,10 @@ abstract class Base
 	 * Tests if the price is within the requirements.
 	 *
 	 * @param string|integer|double $value Monetary value
-	 * @param integer $precision Number of decimal places
+	 * @param integer|null $precision Number of decimal digits, null for default value
 	 * @return string Sanitized monetary value
 	 */
-	protected function checkPrice( $value, $precision = 2 )
+	protected function checkPrice( $value, $precision = null )
 	{
 		if( $value != '' && !is_numeric( $value ) ) {
 			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Invalid characters in price "%1$s"', $value ) );
@@ -106,11 +123,11 @@ abstract class Base
 	 * Formats the money value.
 	 *
 	 * @param string|integer|double $number Money value
-	 * @param integer $precision Number of decimal places
+	 * @param integer|null $precision Number of decimal digits, null for default value
 	 * @return string Formatted money value
 	 */
-	protected function formatNumber( $number, $precision = 2 )
+	protected function formatNumber( $number, $precision = null )
 	{
-		return number_format( (double) $number, $precision, '.', '' );
+		return number_format( (double) $number, $precision ?: $this->precision, '.', '' );
 	}
 }

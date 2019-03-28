@@ -143,6 +143,7 @@ class Standard
 	);
 
 	private $currencyId;
+	private $precision;
 	private $taxflag;
 
 
@@ -154,7 +155,9 @@ class Standard
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
+
 		$this->setResourceName( 'db-price' );
+		$this->currencyId = $context->getLocale()->getCurrencyId();
 
 		/** mshop/price/taxflag
 		 * Configuration setting if prices are inclusive or exclusive tax
@@ -169,7 +172,19 @@ class Standard
 		 * @since 2016.02
 		 */
 		$this->taxflag = $context->getConfig()->get( 'mshop/price/taxflag', true );
-		$this->currencyId = $context->getLocale()->getCurrencyId();
+
+		/** mshop/price/precision
+		 * Number of decimal digits prices contain
+		 *
+		 * Sets the number of decimal digits price values will contain. Internally,
+		 * prices are calculated as double values with high precision but these
+		 * values will be rounded after calculation to the configured number of digits.
+		 *
+		 * @param integer Positive number of digits
+		 * @category Developer
+		 * @since 2019.04
+		 */
+		$this->precision = $context->getConfig()->get( 'mshop/price/precision', 2 );
 
 		$self = $this;
 		$locale = $context->getLocale();
@@ -767,6 +782,6 @@ class Standard
 			$values['price.taxflag'] = $this->taxflag;
 		}
 
-		return new \Aimeos\MShop\Price\Item\Standard( $values, $listItems, $refItems );
+		return new \Aimeos\MShop\Price\Item\Standard( $values, $listItems, $refItems, $this->precision );
 	}
 }

@@ -21,6 +21,7 @@ namespace Aimeos\MShop\Price\Item;
 class Standard extends Base
 {
 	private $values;
+	private $precision;
 
 
 	/**
@@ -29,11 +30,13 @@ class Standard extends Base
 	 * @param array $values Associative array of key/value pairs for price, costs, rebate and currencyid
 	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
+	 * @param integer $precision Number of decimal digits
 	 */
-	public function __construct( array $values = [], array $listItems = [], array $refItems = [] )
+	public function __construct( array $values = [], array $listItems = [], array $refItems = [], $precision = 2 )
 	{
-		parent::__construct( 'price.', $values, $listItems, $refItems );
+		parent::__construct( 'price.', $values, $listItems, $refItems, $precision );
 
+		$this->precision = $precision;
 		$this->values = $values;
 	}
 
@@ -385,7 +388,7 @@ class Standard extends Base
 				$tax = ( $this->getValue() + $this->getCosts() ) * $taxrate / 100;
 			}
 
-			$this->values['price.tax'] = $this->formatNumber( $tax, 4 );
+			$this->values['price.tax'] = $this->formatNumber( $tax, $this->precision + 2 );
 		}
 
 		return (string) $this->values['price.tax'];
@@ -401,7 +404,7 @@ class Standard extends Base
 	{
 		if( (string) $value !== $this->getTaxValue() )
 		{
-			$this->values['price.tax'] = (string) $this->checkPrice( $value, 4 );
+			$this->values['price.tax'] = (string) $this->checkPrice( $value, $this->precision + 2 );
 			parent::setModified(); // don't unset tax immediately again
 		}
 

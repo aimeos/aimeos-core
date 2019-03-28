@@ -61,6 +61,13 @@ interface Iface
 	public function compare( \Aimeos\MShop\Price\Item\Iface $price );
 
 	/**
+	 * Returns the decimal precision of the price
+	 *
+	 * @return integer Number of decimal digits
+	 */
+	public function getPrecision();
+
+	/**
 	 * Returns the label of the item
 	 *
 	 * @return string Label of the item
