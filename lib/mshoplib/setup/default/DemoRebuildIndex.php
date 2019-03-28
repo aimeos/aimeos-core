@@ -52,6 +52,14 @@ class DemoRebuildIndex extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Rebuilding index for demo data', 0 );
 
+		$value = $this->additional->getConfig()->get( 'setup/default/demo', '' );
+
+		if( $value === '' )
+		{
+			$this->status( 'OK' );
+			return;
+		}
+
 		\Aimeos\MShop::create( $this->additional, 'index' )->rebuildIndex();
 
 		$this->status( 'done' );
