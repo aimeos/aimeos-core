@@ -83,7 +83,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'index.text:name', ['de'] );
-		$search->setConditions( $search->compare( '=~', $func, 'cafe' ) );
+		$search->setConditions( $search->compare( '=~', $func, 'Cafe' ) );
 
 		$sortfunc = $search->createFunction( 'sort:index.text:name', ['de'] );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
@@ -91,6 +91,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
+	}
+
+
+	public function testSearchItemsUrl()
+	{
+		$search = $this->object->createSearch();
+
+		$func = $search->createFunction( 'index.text:url', ['de'] );
+		$search->setConditions( $search->compare( '==', $func, 'Cafe_Noire_Cappuccino' ) );
+
+		$result = $this->object->searchItems( $search, [] );
+
+		$this->assertEquals( 1, count( $result ) );
 	}
 
 
@@ -105,7 +118,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'index.text:name', ['de'] );
-		$search->setConditions( $search->compare( '==', $func, 'cafe noire expresso' ) );
+		$search->setConditions( $search->compare( '==', $func, 'Cafe Noire Expresso' ) );
 
 		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
 	}
@@ -122,7 +135,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'index.text:name', ['de'] );
-		$search->setConditions( $search->compare( '==', $func, 'unterproduct 3' ) );
+		$search->setConditions( $search->compare( '==', $func, 'Unterproduct 3' ) );
 
 		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
 	}

@@ -106,7 +106,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 
 		$func = $search->createFunction( 'index.text:name', array( 'de' ) );
 		$conditions = array(
-			$search->compare( '~=', $func, 'noir' ), // text value
+			$search->compare( '~=', $func, 'Noir' ), // text value
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );

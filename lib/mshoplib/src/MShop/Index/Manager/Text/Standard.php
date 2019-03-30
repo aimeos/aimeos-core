@@ -32,9 +32,17 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'index.text:url' => array(
+			'code' => 'index.text:url()',
+			'internalcode' => ':site AND mindte."langid" = $1 AND mindte."url"',
+			'label' => 'Product URL by language, parameter(<language ID>)',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'index.text:name' => array(
 			'code' => 'index.text:name()',
-			'internalcode' => ':site AND ( mindte."langid" = $1 OR mindte."langid" IS NULL ) AND mindte."name"',
+			'internalcode' => ':site AND mindte."langid" = $1 AND mindte."name"',
 			'label' => 'Product name, parameter(<language ID>)',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -50,9 +58,7 @@ class Standard
 		),
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => ':site
-				AND ( mindte."langid" = $1 OR mindte."langid" IS NULL )
-				AND POSITION( $2 IN mindte."content" )',
+			'internalcode' => ':site AND mindte."langid" = $1 AND POSITION( $2 IN mindte."content" )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
@@ -104,6 +110,7 @@ class Standard
 			return $params;
 		};
 
+		$this->replaceSiteMarker( $this->searchConfig['index.text:url'], 'mindte."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.text:name'], 'mindte."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.text:relevance'], 'mindte."siteid"', $siteIds );
 	}
@@ -710,8 +717,8 @@ class Standard
 	{
 		$stmt->bind( 1, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, $lang );
-		$stmt->bind( 3, strtolower( $url ) ); // for case insensitive searches
-		$stmt->bind( 4, strtolower( $name ) ); // for case insensitive searches
+		$stmt->bind( 3, $url );
+		$stmt->bind( 4, $name );
 		$stmt->bind( 5, strtolower( $content ) ); // for case insensitive searches
 		$stmt->bind( 6, $date ); //mtime
 		$stmt->bind( 7, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
