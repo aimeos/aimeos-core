@@ -102,7 +102,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 
 		$func = $search->createFunction( 'index.text:name', array( 'de' ) );
 		$conditions = array(
-			$search->compare( '~=', $func, 'noir' ), // text name
+			$search->compare( '~=', $func, 'Noir' ), // text name
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
