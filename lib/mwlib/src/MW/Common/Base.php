@@ -57,4 +57,17 @@ abstract class Base
 
 		return $list;
 	}
+
+
+	/**
+	 * Replaces dangerous characteris
+	 *
+	 * @param string $string String to sanitize
+	 * @return string Sanitized string
+	 */
+	public static function sanitize( $string )
+	{
+		$regex = '/(\s|\&|\%|\?|\#|\=|\{|\}|\||\\\\|\~|\[|\]|\`|\^|\_|\/)+/';
+		return trim( preg_replace( $regex, '_', $string ), '_' );
+	}
 }

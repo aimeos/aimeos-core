@@ -692,7 +692,7 @@ class Standard
 
 		foreach( $texts as $langId => $content )
 		{
-			$url = ( isset( $urls[$langId] ) ? $urls[$langId] : $item->getLabel() );
+			$url = \Aimeos\MW\Common\Base::sanitize( isset( $urls[$langId] ) ? $urls[$langId] : $item->getLabel() );
 			$name = ( isset( $names[$langId] ) ? $names[$langId] : $item->getLabel() );
 
 			$this->saveText( $stmt, $item->getId(), $siteid, $langId, $url, $name, $content, $date );

@@ -28,14 +28,12 @@ abstract class Base extends \Aimeos\MW\View\Helper\Base
 	 */
 	protected function sanitize( array $params, $names = array( 'f_name', 'd_name' ) )
 	{
-		$regex = '/(\s|\&|\%|\?|\#|\=|\{|\}|\||\\\\|\~|\[|\]|\`|\^|\_|\/)+/';
-
 		foreach( $params as $key => $value )
 		{
 			if( is_array( $value ) ) {
 				$params[$key] = $this->sanitize( $value, $names );
 			} elseif( empty( $names ) || in_array( (string) $key, $names ) ) {
-				$params[$key] = trim( preg_replace( $regex, '_', $value ), '_' );
+				$params[$key] = \Aimeos\MW\Common\Base::sanitize( $value );
 			}
 		}
 
