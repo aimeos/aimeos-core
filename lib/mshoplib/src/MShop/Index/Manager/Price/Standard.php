@@ -668,7 +668,11 @@ class Standard
 
 		foreach( $item->getListItems( 'price', 'default', $types ) as $listItem )
 		{
-			if( ( $refItem = $listItem->getRefItem() ) !== null && $refItem->isAvailable() ) {
+ 			if( ( $refItem = $listItem->getRefItem() ) !== null 
+				&& $refItem->isAvailable() 
+				&& ( !isset ( $prices[$refItem->getCurrencyId()][$refItem->getQuantity()] ) 
+				|| $prices[$refItem->getCurrencyId()][$refItem->getQuantity()] > $refItem->getValue() )
+			) {
 				$prices[$refItem->getCurrencyId()][$refItem->getQuantity()] = $refItem->getValue();
 			}
 		}
