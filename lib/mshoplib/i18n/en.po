@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aimeos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-27 08:30+0200\n"
+"POT-Creation-Date: 2019-04-02 15:36+0200\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/aimeos/language/en/)\n"
@@ -181,6 +181,10 @@ msgstr ""
 # error type: failure in communication with delivery provider
 #, php-format
 msgid "Curl could not be initialized"
+msgstr ""
+
+#, php-format
+msgid "Curl error: \"%1$s\" - \"%2$s\""
 msgstr ""
 
 # error domain: context
@@ -711,6 +715,10 @@ msgstr ""
 msgid "Product does not contain all required values. Product code for item not available."
 msgstr ""
 
+#, php-format
+msgid "Product does not contain the SKU code"
+msgstr ""
+
 # error domain: search
 # empty search result
 #, php-format
@@ -773,6 +781,10 @@ msgstr ""
 # error type: value, parameter, object etc. not available
 #, php-format
 msgid "Search configuration not available"
+msgstr ""
+
+#, php-format
+msgid "Sending order failed: \"%1$s\""
 msgstr ""
 
 # error domain: service

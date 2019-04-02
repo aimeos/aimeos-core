@@ -8,6 +8,7 @@
 # Translators:
 # Translators:
 # Aimeos, 2018
+# Aimeos, 2018
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 msgid ""
 msgstr ""

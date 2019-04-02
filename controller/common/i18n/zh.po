@@ -5,11 +5,12 @@
 # Translators:
 # Bruce Liu <zcon.bruce@gmail.com>, 2016
 # stevechen <steve.stevechen@gmail.com>, 2018
+# stevechen <steve.stevechen@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-27 08:30+0200\n"
+"POT-Creation-Date: 2019-04-02 15:36+0200\n"
 "PO-Revision-Date: 2018-10-02 07:49+0000\n"
 "Last-Translator: stevechen <steve.stevechen@gmail.com>\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"

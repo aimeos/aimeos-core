@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Aimeos, 2015-2018
+# Aimeos, 2015-2019
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 # nsendetzky, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-27 08:30+0200\n"
-"PO-Revision-Date: 2018-09-27 06:51+0000\n"
+"POT-Creation-Date: 2019-04-02 15:36+0200\n"
+"PO-Revision-Date: 2019-04-02 13:51+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -157,6 +157,10 @@ msgstr "Der sich im Warenkorb befindliche Kouponcode ist nicht länger verfügba
 #, php-format
 msgid "Curl could not be initialized"
 msgstr "Curl konnte nicht aufgerufen werden"
+
+#, php-format
+msgid "Curl error: \"%1$s\" - \"%2$s\""
+msgstr "Curl-Fehler: \"%1$s\" - \"%2$s\""
 
 #, php-format
 msgid "Database manager object not available"
@@ -604,6 +608,10 @@ msgid ""
 msgstr "Das Produkt enthält nicht alle geforderten Parameter. Produkt-Code für Item nicht verfügbar."
 
 #, php-format
+msgid "Product does not contain the SKU code"
+msgstr "Produkt enthält keinen Artikelcode"
+
+#, php-format
 msgid "Product matching given properties not found"
 msgstr "Produkt mit entsprechenden vorgegebenen Eigenschaften nicht gefunden"
 
@@ -650,6 +658,10 @@ msgstr "Suchkonfiguration für \"%1$s\" ist nicht verfügbar"
 #, php-format
 msgid "Search configuration not available"
 msgstr "Suchkonfiguration nicht verfügbar"
+
+#, php-format
+msgid "Sending order failed: \"%1$s\""
+msgstr "Versenden der Bestellung schlug fehl: \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""

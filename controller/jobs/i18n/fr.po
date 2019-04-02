@@ -3,22 +3,25 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Doryan R <doryan16238@gmail.com>, 2019
+# Doryan R, 2019
 # Guillaume STEIN <guillaume.stein@gmail.com>, 2016
 # Six byNine <wwinx@hotmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-27 08:31+0200\n"
-"PO-Revision-Date: 2019-01-26 12:58+0000\n"
-"Last-Translator: Doryan R <doryan16238@gmail.com>\n"
+"POT-Creation-Date: 2019-04-02 15:36+0200\n"
+"PO-Revision-Date: 2019-04-02 13:42+0000\n"
+"Last-Translator: Doryan R\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Attribute import XML"
+msgstr ""
 
 msgid ""
 "Authorized payments of orders will be captured after dispatching or after a "
@@ -37,11 +40,17 @@ msgstr "Capturer les paiements autorisés"
 msgid "Catalog import CSV"
 msgstr "Importation de catalogue CSV"
 
+msgid "Catalog import XML"
+msgstr ""
+
 msgid "Catalog index optimization"
 msgstr "Optimisation des index de catalogue"
 
 msgid "Catalog index rebuild"
 msgstr "Reconstruction d'index de catalogue"
+
+msgid "Catalog site map"
+msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
@@ -54,11 +63,17 @@ msgstr "Classe \"%1$s\" non trouvée"
 msgid "Coupon code import CSV"
 msgstr "Importation de code promo CSV"
 
+msgid "Creates a catalog site map for search engines"
+msgstr ""
+
 msgid "Creates a product site map for search engines"
 msgstr "Crée un plan de site de produit pour les moteurs de recherche"
 
 msgid "Creates bought together product suggestions"
 msgstr "Crée des suggestions de produits achetés ensemble"
+
+msgid "Customer import XML"
+msgstr ""
 
 msgid ""
 "Deletes unfinished orders an makes their products and coupon codes available"
@@ -71,6 +86,10 @@ msgstr "Supprime les commandes impayées pour maintenir la base de données prop
 msgid "Executes payment or delivery service providers that uses batch updates"
 msgstr "Exécute les fournisseurs de services de paiement ou de livraison utilisant des mises à jour par lot"
 
+#, php-format
+msgid "Expanding \"%1$s\" node failed"
+msgstr ""
+
 msgid "Exports all available products"
 msgstr "Exporte tous les produits disponibles"
 
@@ -80,14 +99,76 @@ msgstr "Exporte les commandes dans un fichier CSV"
 msgid "Exports subscriptions to CSV file"
 msgstr "Exporte les abonnements au fichier CSV"
 
+#, php-format
+msgid "File or directory \"%1$s\" doesn't exist"
+msgstr ""
+
+#, php-format
+msgid "Finished attribute import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished attribute import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished catalog import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished catalog import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished customer import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished customer import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished product import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished product import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished stock import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished stock import from file \"%1$s\""
+msgstr ""
+
+msgid "Imports new and updates existing attributes from XML files"
+msgstr ""
+
 msgid "Imports new and updates existing categories from CSV files"
 msgstr "Importe de nouvelles catégories et met à jour des catégories existantes à partir de fichiers CSV"
+
+msgid "Imports new and updates existing categories from XML files"
+msgstr ""
 
 msgid "Imports new and updates existing coupon code from CSV files"
 msgstr "Importe le nouveau code et met à jour le code de coupon existant à partir de fichiers CSV"
 
+msgid "Imports new and updates existing customers from XML files"
+msgstr ""
+
 msgid "Imports new and updates existing products from CSV files"
 msgstr "Importe les nouveaux produits et met à jour les produits existants à partir de fichiers CSV"
+
+msgid "Imports new and updates existing products from XML files"
+msgstr ""
+
+msgid "Imports new and updates existing stocks from CSV files"
+msgstr ""
+
+msgid "Imports new and updates existing suppliers from XML files"
+msgstr ""
 
 msgid "Index optimization"
 msgstr "Optimisation d'index"
@@ -111,6 +192,10 @@ msgstr "Message invalide: %1$s"
 msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
 msgstr "Lignes de produits non valides dans \"%1$s\": %2$d /%3$d"
 
+#, php-format
+msgid "Invalid product type \"%1$s\""
+msgstr ""
+
 msgid "Log cleanup"
 msgstr "Nettoyage du journal"
 
@@ -125,6 +210,10 @@ msgstr "Aucune colonne \"coupon.code.code\" dans le mappage CSV n'a été trouv�
 #, php-format
 msgid "No \"product.code\" column in CSV mapping found"
 msgstr "Aucune colonne \"product.code\" dans le mappage CSV n'a été trouvée"
+
+#, php-format
+msgid "No XML file \"%1$s\" found"
+msgstr ""
 
 msgid "Optimizes the catalog index for searching products"
 msgstr "Optimise l'index du catalogue pour la recherche de produits"
@@ -150,6 +239,9 @@ msgstr "Exportation de produit"
 
 msgid "Product import CSV"
 msgstr "Importation de produit CSV"
+
+msgid "Product import XML"
+msgstr ""
 
 msgid "Product site map"
 msgstr "Plan du site du produit"
@@ -205,16 +297,63 @@ msgid "Sends paid orders to the ERP system or logistic partner"
 msgstr "Envoie les commandes payées au système ERP ou au partenaire logistique"
 
 #, php-format
+msgid "Started attribute import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Started attribute import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Started catalog import from \"%1$s\""
+msgstr ""
+
+#, php-format
 msgid "Started catalog import from \"%1$s\" (%2$s)"
 msgstr "Lancement de l'importation du catalogue depuis \"%1$s\" (%2$s)"
+
+#, php-format
+msgid "Started catalog import from file \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Started coupon import from \"%1$s\" (%2$s)"
 msgstr "Importation du coupon commencé à partir de \"%1$s\" (%2$s)"
 
 #, php-format
+msgid "Started customer import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Started customer import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Started product import from \"%1$s\""
+msgstr ""
+
+#, php-format
 msgid "Started product import from \"%1$s\" (%2$s)"
 msgstr "A commencé l'importation de produits depuis \"%1$s\" (%2$s)"
+
+#, php-format
+msgid "Started product import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Started stock import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Started stock import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Started supplier import from \"%1$s\" (%2$s)"
+msgstr ""
+
+msgid "Stock import CSV"
+msgstr ""
 
 msgid "Subscription export CSV"
 msgstr "CSV d'exportation d'abonnement"
@@ -227,6 +366,9 @@ msgstr "Processus d'abonnement renouveler"
 
 msgid "Subscription process start"
 msgstr "Début du processus d'abonnement"
+
+msgid "Supplier import XML"
+msgstr ""
 
 msgid "Terminates expired subscriptions"
 msgstr "Termine les abonnements expirés"
@@ -246,6 +388,14 @@ msgstr "Impossible d'importer le produit avec le code \"%1$s\":%2$s"
 #, php-format
 msgid "Unable to move imported file"
 msgstr "Impossible de déplacer le fichier importé"
+
+#, php-format
+msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "aimeos-catalog-sitemap-%d.xml"
+msgstr ""
 
 #, php-format
 msgid "aimeos-products-%d.xml"

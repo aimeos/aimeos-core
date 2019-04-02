@@ -8,6 +8,7 @@
 # Translators:
 # Translators:
 # Aimeos, 2016
+# Aimeos, 2016
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 # nsendetzky, 2013
 msgid ""

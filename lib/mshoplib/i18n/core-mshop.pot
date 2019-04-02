@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-27 08:30+0200\n"
+"POT-Creation-Date: 2019-04-02 15:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -150,6 +150,10 @@ msgstr "Coupon in basket is not available any more"
 #, php-format
 msgid "Curl could not be initialized"
 msgstr "Curl could not be initialized"
+
+#, php-format
+msgid "Curl error: \"%1$s\" - \"%2$s\""
+msgstr ""
 
 #, php-format
 msgid "Database manager object not available"
@@ -584,6 +588,10 @@ msgid "Product does not contain all required values. Product code for item not a
 msgstr "Product does not contain all required values. Product code for item not available."
 
 #, php-format
+msgid "Product does not contain the SKU code"
+msgstr ""
+
+#, php-format
 msgid "Product matching given properties not found"
 msgstr "Product matching given properties not found"
 
@@ -630,6 +638,10 @@ msgstr "Search configuration for \"%1$s\" not available"
 #, php-format
 msgid "Search configuration not available"
 msgstr "Search configuration not available"
+
+#, php-format
+msgid "Sending order failed: \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""

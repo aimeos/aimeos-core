@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-27 08:30+0200\n"
-"PO-Revision-Date: 2018-09-27 06:33+0000\n"
+"POT-Creation-Date: 2019-04-02 15:36+0200\n"
+"PO-Revision-Date: 2019-04-02 13:51+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -155,6 +155,10 @@ msgstr "A kosárban lévő kupon többé nem elérhető"
 
 #, php-format
 msgid "Curl could not be initialized"
+msgstr ""
+
+#, php-format
+msgid "Curl error: \"%1$s\" - \"%2$s\""
 msgstr ""
 
 #, php-format
@@ -603,6 +607,10 @@ msgid ""
 msgstr ""
 
 #, php-format
+msgid "Product does not contain the SKU code"
+msgstr ""
+
+#, php-format
 msgid "Product matching given properties not found"
 msgstr ""
 
@@ -649,6 +657,10 @@ msgstr ""
 #, php-format
 msgid "Search configuration not available"
 msgstr "A keresett konfiguráció nem elérhető"
+
+#, php-format
+msgid "Sending order failed: \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""

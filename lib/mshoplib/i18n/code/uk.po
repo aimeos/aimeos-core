@@ -1,8 +1,9 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
-#
+# 
+# 
+# Translators:
 # Translators:
 # Translators:
 # Translators:
@@ -11,38 +12,34 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2019-04-02 13:24+0000\n"
+"Last-Translator: Aimeos\n"
 "Language-Team: Ukrainian (http://www.transifex.com/aimeos/aimeos-core/language/uk/)\n"
-"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#. Address plugin error: Delivery address not available
-msgid "address.delivery.available.none"
-msgstr ""
+#. Item status
+msgid "status:-2"
+msgstr "Archived"
 
-#. Address plugin error: Delivery address not allowed
-msgid "address.delivery.available.notallowed"
-msgstr ""
+#. Item status
+msgid "status:-1"
+msgstr "Review"
 
-#. Address plugin error: Payment address not available
-msgid "address.payment.available.none"
-msgstr ""
+#. Item status
+msgid "status:0"
+msgstr "Disabled"
 
-#. Address plugin error: Payment address not allowed
-msgid "address.payment.available.notallowed"
-msgstr ""
+#. Item status
+msgid "status:1"
+msgstr "Enabled"
 
 #. Address salutation
 msgid "company"
 msgstr "Company"
-
-#. Address salutation
-msgid "miss"
-msgstr "Miss"
 
 #. Address salutation
 msgid "mr"
@@ -52,9 +49,9 @@ msgstr "Mr"
 msgid "mrs"
 msgstr "Mrs"
 
-#. Order type value
-msgid "order:phone"
-msgstr "telephone"
+#. Address salutation
+msgid "miss"
+msgstr "Miss"
 
 #. Order type value
 msgid "order:repeat"
@@ -63,6 +60,22 @@ msgstr "repeated"
 #. Order type value
 msgid "order:web"
 msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telephone"
+
+#. Subscription reason code
+msgid "reason:-1"
+msgstr "payment"
+
+#. Subscription reason code
+msgid "reason:0"
+msgstr "expired"
+
+#. Subscription reason code
+msgid "reason:1"
+msgstr "cancelled"
 
 #. Payment status value
 msgid "pay:-1"
@@ -95,54 +108,6 @@ msgstr "authorized"
 #. Payment status value
 msgid "pay:6"
 msgstr "received"
-
-#. ProductGone plugin error: Product doesn't exists
-msgid "product.gone.notexist"
-msgstr ""
-
-#. ProductGone plugin error: Product status disabled
-msgid "product.gone.status"
-msgstr ""
-
-#. ProductGone plugin error: Product out of timeframe
-msgid "product.gone.timeframe"
-msgstr ""
-
-#. ProductPrice plugin error: Product price changed
-msgid "product.price.changed"
-msgstr ""
-
-#. ProductStock plugin error: Product out of stock
-msgid "product.stock.notenough"
-msgstr ""
-
-#. Subscription reason code
-msgid "reason:-1"
-msgstr "payment"
-
-#. Subscription reason code
-msgid "reason:0"
-msgstr "expired"
-
-#. Subscription reason code
-msgid "reason:1"
-msgstr "cancelled"
-
-#. Service plugin error: Delivery service not available
-msgid "service.delivery.available.none"
-msgstr ""
-
-#. Service plugin error: Delivery service not allowed
-msgid "service.delivery.available.notallowed"
-msgstr ""
-
-#. Service plugin error: Payment service not available
-msgid "service.payment.available.none"
-msgstr ""
-
-#. Service plugin error: Payment service not allowed
-msgid "service.payment.available.notallowed"
-msgstr ""
 
 #. Delivery status value
 msgid "stat:-1"
@@ -180,18 +145,54 @@ msgstr "refused"
 msgid "stat:7"
 msgstr "returned"
 
-#. Item status
-msgid "status:-1"
-msgstr "Review"
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr ""
 
-#. Item status
-msgid "status:-2"
-msgstr "Archived"
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr ""
 
-#. Item status
-msgid "status:0"
-msgstr "Disabled"
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr ""
 
-#. Item status
-msgid "status:1"
-msgstr "Enabled"
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr ""
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr ""
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr ""
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr ""
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr ""
+
+#. ProductGone plugin error: Product doesn't exists
+msgid "product.gone.notexist"
+msgstr ""
+
+#. ProductGone plugin error: Product status disabled
+msgid "product.gone.status"
+msgstr ""
+
+#. ProductGone plugin error: Product out of timeframe
+msgid "product.gone.timeframe"
+msgstr ""
+
+#. ProductPrice plugin error: Product price changed
+msgid "product.price.changed"
+msgstr ""
+
+#. ProductStock plugin error: Product out of stock
+msgid "product.stock.notenough"
+msgstr ""

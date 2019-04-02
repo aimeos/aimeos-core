@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-27 08:30+0200\n"
-"PO-Revision-Date: 2018-09-27 06:33+0000\n"
+"POT-Creation-Date: 2019-04-02 15:36+0200\n"
+"PO-Revision-Date: 2019-04-02 13:51+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/aimeos/aimeos-core/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -156,6 +156,10 @@ msgstr "Cupom no carrinho não está mais disponível"
 #, php-format
 msgid "Curl could not be initialized"
 msgstr "O Curl não pode ser inicializado"
+
+#, php-format
+msgid "Curl error: \"%1$s\" - \"%2$s\""
+msgstr ""
 
 #, php-format
 msgid "Database manager object not available"
@@ -603,6 +607,10 @@ msgid ""
 msgstr "Produto não contém todos os valores obrigatórios. Código do produto para o item não disponível."
 
 #, php-format
+msgid "Product does not contain the SKU code"
+msgstr ""
+
+#, php-format
 msgid "Product matching given properties not found"
 msgstr "Produto com as propriedades não encontrad"
 
@@ -649,6 +657,10 @@ msgstr "Configuração de busca para \"%1$s\" não disponível"
 #, php-format
 msgid "Search configuration not available"
 msgstr "Configuração de busca não disponível"
+
+#, php-format
+msgid "Sending order failed: \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""

@@ -5,13 +5,14 @@
 # Translators:
 # Bruce Liu <zcon.bruce@gmail.com>, 2016
 # stevechen <steve.stevechen@gmail.com>, 2018
+# stevechen <steve.stevechen@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-27 08:30+0200\n"
-"PO-Revision-Date: 2018-10-02 07:44+0000\n"
-"Last-Translator: stevechen <steve.stevechen@gmail.com>\n"
+"POT-Creation-Date: 2019-04-02 15:36+0200\n"
+"PO-Revision-Date: 2019-04-02 13:51+0000\n"
+"Last-Translator: Aimeos\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,6 +157,10 @@ msgstr "購物車中的優惠券已無法使用"
 #, php-format
 msgid "Curl could not be initialized"
 msgstr "crul無法初始化"
+
+#, php-format
+msgid "Curl error: \"%1$s\" - \"%2$s\""
+msgstr ""
 
 #, php-format
 msgid "Database manager object not available"
@@ -603,6 +608,10 @@ msgid ""
 msgstr "商品沒有包含全部所需資料。 商品代碼無法使用。"
 
 #, php-format
+msgid "Product does not contain the SKU code"
+msgstr ""
+
+#, php-format
 msgid "Product matching given properties not found"
 msgstr "給定的屬性找不到對應的商品"
 
@@ -649,6 +658,10 @@ msgstr "搜索 \"%1$s\" 的配置無法使用"
 #, php-format
 msgid "Search configuration not available"
 msgstr "搜索配置無法使用"
+
+#, php-format
+msgid "Sending order failed: \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""

@@ -827,7 +827,7 @@ class PayPalExpress
 			}
 
 			if ( curl_errno($curl) ) {
-				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Error with nr."%1$s" - "%2$s"', curl_errno($curl), curl_error($curl) ) );
+				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Curl error: "%1$s" - "%2$s"', curl_errno($curl), curl_error($curl) ) );
 			}
 
 			curl_close( $curl );
