@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Metal <meteoramic@yahoo.com>, 2015-2018
+# Metal <meteoramic@yahoo.com>, 2015-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-02 15:36+0200\n"
-"PO-Revision-Date: 2019-04-02 13:51+0000\n"
-"Last-Translator: Aimeos\n"
+"PO-Revision-Date: 2019-04-02 17:39+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -158,7 +158,7 @@ msgstr "Curl başlatılamadı"
 
 #, php-format
 msgid "Curl error: \"%1$s\" - \"%2$s\""
-msgstr ""
+msgstr "Curl hatası: \"%1$s\" - \"%2$s\""
 
 #, php-format
 msgid "Database manager object not available"
@@ -607,7 +607,7 @@ msgstr "Ürün gerekli tüm değerleri içermiyor. Öğe için ürün kodu mevcu
 
 #, php-format
 msgid "Product does not contain the SKU code"
-msgstr ""
+msgstr "Ürünün SKU kodu girilmemiş"
 
 #, php-format
 msgid "Product matching given properties not found"
@@ -659,7 +659,7 @@ msgstr "Arama yapılandırması mevcut değil"
 
 #, php-format
 msgid "Sending order failed: \"%1$s\""
-msgstr ""
+msgstr "Sipariş gönderimi başarısız: \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""

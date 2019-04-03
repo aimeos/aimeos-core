@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Metal <meteoramic@yahoo.com>, 2015-2018
+# Metal <meteoramic@yahoo.com>, 2015-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-02 15:36+0200\n"
-"PO-Revision-Date: 2019-04-02 13:42+0000\n"
+"PO-Revision-Date: 2019-04-02 18:52+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Attribute import XML"
-msgstr ""
+msgstr "Nitelik içe aktarma XML"
 
 msgid ""
 "Authorized payments of orders will be captured after dispatching or after a "
@@ -39,7 +39,7 @@ msgid "Catalog import CSV"
 msgstr "Katalog içe aktarma CSV"
 
 msgid "Catalog import XML"
-msgstr ""
+msgstr "Katalog içe aktarma XML"
 
 msgid "Catalog index optimization"
 msgstr "Katalog dizin optimizasyonu"
@@ -48,7 +48,7 @@ msgid "Catalog index rebuild"
 msgstr "Katalog dizin yeniden oluşturma"
 
 msgid "Catalog site map"
-msgstr ""
+msgstr "Katalog site haritası"
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
@@ -62,7 +62,7 @@ msgid "Coupon code import CSV"
 msgstr "Kupon kodu içe aktarma CSV"
 
 msgid "Creates a catalog site map for search engines"
-msgstr ""
+msgstr "Arama motorları için bir katalog site haritası oluşturur"
 
 msgid "Creates a product site map for search engines"
 msgstr "Arama motorları için bir ürün site haritası oluşturur"
@@ -71,7 +71,7 @@ msgid "Creates bought together product suggestions"
 msgstr "Beraber satın alınan ürün önerileri oluşturur"
 
 msgid "Customer import XML"
-msgstr ""
+msgstr "Müşteri içe aktarma XML"
 
 msgid ""
 "Deletes unfinished orders an makes their products and coupon codes available"
@@ -86,7 +86,7 @@ msgstr "Toplu güncelleştirmeleri kullanan ödeme veya teslimat servisi sağlay
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
-msgstr ""
+msgstr "\"%1$s\" düğümünün genişletilmesi başarısız oldu "
 
 msgid "Exports all available products"
 msgstr "Mevcut tüm ürünleri dışa aktarır"
@@ -99,74 +99,74 @@ msgstr "Abonelikleri CSV dosyasına dışa aktarır"
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
-msgstr ""
+msgstr "Dosya veya dizin \"%1$s\" mevcut değil"
 
 #, php-format
 msgid "Finished attribute import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dan nitelik içe aktarma tamamlandı"
 
 #, php-format
 msgid "Finished attribute import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dosyasından nitelik içe aktarma tamamlandı"
 
 #, php-format
 msgid "Finished catalog import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dan katalog içe aktarma tamamlandı"
 
 #, php-format
 msgid "Finished catalog import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dosyasından katalog içe aktarma tamamlandı"
 
 #, php-format
 msgid "Finished customer import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dan müşteri içe aktarma tamamlandı"
 
 #, php-format
 msgid "Finished customer import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dosyasından müşteri içe aktarma tamamlandı"
 
 #, php-format
 msgid "Finished product import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dan ürün içe aktarma tamamlandı"
 
 #, php-format
 msgid "Finished product import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dosyasından ürün içe aktarma tamamlandı"
 
 #, php-format
 msgid "Finished stock import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dan stok içe aktarma tamamlandı"
 
 #, php-format
 msgid "Finished stock import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dosyasından stok içe aktarma tamamlandı"
 
 msgid "Imports new and updates existing attributes from XML files"
-msgstr ""
+msgstr "XML dosyalarından yeni nitelikleri içe aktarır veya mevcut nitelikleri günceller"
 
 msgid "Imports new and updates existing categories from CSV files"
 msgstr "CSV dosyasından yeni kategori içe aktarır veya mevcut kategorileri günceller"
 
 msgid "Imports new and updates existing categories from XML files"
-msgstr ""
+msgstr "XML dosyalarından yeni kategoriler içe aktarır veya mevcut kategorileri günceller"
 
 msgid "Imports new and updates existing coupon code from CSV files"
 msgstr "CSV dosyasından yeni kupon kodu içe aktarır veya mevcut kupon kodlarını günceller"
 
 msgid "Imports new and updates existing customers from XML files"
-msgstr ""
+msgstr "XML dosyalarından yeni müşteriler içe aktarır veya mevcut müşterileri günceller"
 
 msgid "Imports new and updates existing products from CSV files"
 msgstr "CSV dosyasından yeni ürün içe aktarır veya mevcut ürünleri günceller"
 
 msgid "Imports new and updates existing products from XML files"
-msgstr ""
+msgstr "XML dosyalarından yeni ürünler içe aktarır veya mevcut ürünleri günceller"
 
 msgid "Imports new and updates existing stocks from CSV files"
-msgstr ""
+msgstr "CSV dosyalarından yeni stoklar içe aktarır veya mevcut stokları günceller"
 
 msgid "Imports new and updates existing suppliers from XML files"
-msgstr ""
+msgstr "XML dosyalarından yeni tedarikçiler içe aktarır veya mevcut tedarikçileri günceller"
 
 msgid "Index optimization"
 msgstr "Dizin optimizasyonu"
@@ -176,7 +176,7 @@ msgstr "Dizin yeniden oluşturma"
 
 #, php-format
 msgid "Invalid catalog lines in \"%1$s\": %2$d/%3$d"
-msgstr "\"%1$s\" içinde geçersiz katalog hatları: %2$d/%3$d"
+msgstr "\"%1$s\" içinde geçersiz katalog satırları: %2$d/%3$d"
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
@@ -188,11 +188,11 @@ msgstr "Geçersiz mesaj: %1$s"
 
 #, php-format
 msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
-msgstr "\"%1$s\" içinde geçersiz ürün hatları: %2$d/%3$d"
+msgstr "\"%1$s\" içinde geçersiz ürün satırları: %2$d/%3$d"
 
 #, php-format
 msgid "Invalid product type \"%1$s\""
-msgstr ""
+msgstr "Geçersiz ürün türü \"%1$s\""
 
 msgid "Log cleanup"
 msgstr "Günlük temizleme"
@@ -207,17 +207,17 @@ msgstr "CSV eşlemede \"coupon.code.code\" sütunu bulunamadı"
 
 #, php-format
 msgid "No \"product.code\" column in CSV mapping found"
-msgstr "CSV mapping'de \"product.code\" sütunu bulunamadı"
+msgstr "CSV eşlemede \"product.code\" sütunu bulunamadı"
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
-msgstr ""
+msgstr "\"%1$s\" XML dosyası bulunamadı"
 
 msgid "Optimizes the catalog index for searching products"
 msgstr "Arama ürünleri için katalog dizinini optimize eder"
 
 msgid "Optimizes the index for searching products faster"
-msgstr "Ürünleri daha hızlı aramak için dizini optimize eder"
+msgstr "Arama ürünlerini için dizinlemeyi daha hızlı optimize eder"
 
 msgid "Order export CSV"
 msgstr "Sipariş dışa aktarma CSV"
@@ -239,7 +239,7 @@ msgid "Product import CSV"
 msgstr "Ürün içe aktarma CSV"
 
 msgid "Product import XML"
-msgstr ""
+msgstr "Ürün içe aktarma XML"
 
 msgid "Product site map"
 msgstr "Ürün site haritası"
@@ -251,7 +251,7 @@ msgid "Rebuilds the catalog index for searching products"
 msgstr "Arama ürünleri için katalog dizinini yeniden oluşturur"
 
 msgid "Rebuilds the index for searching products"
-msgstr "Ürünleri aramak için dizini yeniden oluşturur"
+msgstr "Arama ürünleri için dizini yeniden oluşturur"
 
 msgid "Removes the expired entries from the cache"
 msgstr "Süresi dolan girişleri önbellekten kaldırır"
@@ -279,7 +279,7 @@ msgstr "\"%1$s\" için gerekli yapılandırma eksik"
 
 #, php-format
 msgid "Required mapping key \"%1$s\" is missing or contains no array"
-msgstr "Gerekli haritalama anahtarı \"%1$s\" eksik veya hiçbir dizi içermiyor"
+msgstr "Gerekli eşleştirme anahtarı \"%1$s\" eksik veya hiçbir dizi içermiyor"
 
 msgid "Rescale product images"
 msgstr "Ürün görsellerini yeniden boyutlandır"
@@ -296,15 +296,15 @@ msgstr "Ödemesi yapılmış siparişleri ERP sistemine veya lojistik ortağa g�
 
 #, php-format
 msgid "Started attribute import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dan nitelik içe aktarma başladı"
 
 #, php-format
 msgid "Started attribute import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dosyasından nitelik içe aktarma başladı"
 
 #, php-format
 msgid "Started catalog import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dan katalog içe aktarma başladı"
 
 #, php-format
 msgid "Started catalog import from \"%1$s\" (%2$s)"
@@ -312,23 +312,23 @@ msgstr "\"%1$s\" dan katalog içe aktarma başladı (%2$s)"
 
 #, php-format
 msgid "Started catalog import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dosyasından katalog içe aktarma başladı"
 
 #, php-format
 msgid "Started coupon import from \"%1$s\" (%2$s)"
-msgstr "\"%1$s\" dan kupon içe aktarma başadı (%2$s)"
+msgstr "\"%1$s\" dan kupon içe aktarma başladı (%2$s)"
 
 #, php-format
 msgid "Started customer import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dan müşteri içe aktarma başladı"
 
 #, php-format
 msgid "Started customer import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dan müşteri içe aktarma başladı"
 
 #, php-format
 msgid "Started product import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dan ürün içe aktarma başladı"
 
 #, php-format
 msgid "Started product import from \"%1$s\" (%2$s)"
@@ -336,22 +336,22 @@ msgstr "\"%1$s\" (%2$s)'dan ürün içe aktarma başladı"
 
 #, php-format
 msgid "Started product import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dosyasından ürün içe aktarma başladı"
 
 #, php-format
 msgid "Started stock import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dan stok içe aktarma başladı"
 
 #, php-format
 msgid "Started stock import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dosyasından stok içe aktarma başladı"
 
 #, php-format
 msgid "Started supplier import from \"%1$s\" (%2$s)"
-msgstr ""
+msgstr "\"%1$s\" (%2$s) dan tedarikçi içe aktarma başladı"
 
 msgid "Stock import CSV"
-msgstr ""
+msgstr "Stok içe aktarma CSV"
 
 msgid "Subscription export CSV"
 msgstr "Abonelik dışa aktarma CSV"
@@ -366,7 +366,7 @@ msgid "Subscription process start"
 msgstr "Abonelik sürecini başlat"
 
 msgid "Supplier import XML"
-msgstr ""
+msgstr "Tedarikçi içe aktarma XML"
 
 msgid "Terminates expired subscriptions"
 msgstr "Süresi dolan abonelikleri sonlandırır"
@@ -389,16 +389,16 @@ msgstr "İçe aktarılan dosya taşınamıyor"
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
-msgstr ""
+msgstr "İçe aktarılan \"%1$s\" dosyası \"%2$s\" ya taşınamadı"
 
 #, php-format
 msgid "aimeos-catalog-sitemap-%d.xml"
-msgstr ""
+msgstr "aimeos-katalog-siteharitasi-%d.xml"
 
 #, php-format
 msgid "aimeos-products-%d.xml"
-msgstr "aimeos-products-%d.xml"
+msgstr "aimeos-urun-%d.xml"
 
 #, php-format
 msgid "aimeos-sitemap-%d.xml"
-msgstr "aimeos-sitemap-%d.xml"
+msgstr "aimeos-siteharitasi-%d.xml"
