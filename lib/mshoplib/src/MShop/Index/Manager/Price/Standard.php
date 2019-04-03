@@ -654,22 +654,30 @@ class Standard
 		$siteid = $context->getLocale()->getSiteId();
 
 		/** mshop/index/manager/price/types
-		 * Use different product prices types for sorting by price
+		 * Use different product prices types for indexing
 		 *
 		 * In some cases, prices are stored with different types, eg. price per kg.
-		 * This configuration option defines which types are incorporated when sorting
-		 * the product list by price.
+		 * This configuration option defines which types are incorporated in which
+		 * order. If a price of the defined type with the lowest index is available,
+		 * it will be indexed, otherwise the next lowest index price type. It is
+		 * highly recommended to add the price type 'default' with the highest index.
 		 *
 		 * @param array List of price types codes
 		 * @since 2019.04
 		 * @category Developer
 		 */
-		$types = $context->getConfig()->get( 'mshop/index/manager/price/types', 'default' );
+		$types = $context->getConfig()->get( 'mshop/index/manager/price/types', ['default'] );
 
-		foreach( $item->getListItems( 'price', 'default', $types ) as $listItem )
+		foreach( $types as $priceType )
 		{
-			if( ( $refItem = $listItem->getRefItem() ) !== null && $refItem->isAvailable() ) {
-				$prices[$refItem->getCurrencyId()][$refItem->getQuantity()] = $refItem->getValue();
+			foreach( $item->getListItems( 'price', 'default', $priceType ) as $listItem )
+			{
+				if( ( $refItem = $listItem->getRefItem() ) !== null
+					&& $refItem->isAvailable()
+					&& !isset ( $prices[$refItem->getCurrencyId()][$refItem->getQuantity()] )
+				) {
+					$prices[$refItem->getCurrencyId()][$refItem->getQuantity()] = $refItem->getValue();
+				}
 			}
 		}
 
