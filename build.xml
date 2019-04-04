@@ -158,21 +158,23 @@
 		<confdoc keyprefix="controller/jobs" wikiprefix="Configuration/Core" keyparts="0"
 			optfile="${extdir}/ai-client-html/controller/jobs/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/ext-html-controller-jobs.wiki">
-			<fileset dir="${extdir}/ai-client-html/controller/jobs/src" expandsymboliclinks="true" >
-				<include name="**/*.php" />
+			<fileset dir="${extdir}/ai-client-html/controller/jobs" expandsymboliclinks="true" >
+				<include name="templates/**/*.php" />
+				<include name="src/**/*.php" />
+			</fileset>
+		</confdoc>
+		<confdoc keyprefix="controller/jobs" wikiprefix="Configuration/Core" keyparts="0"
+			optfile="${extdir}/ai-controller-jobs/controller/jobs/tests/confdoc.ser"
+			outfile="${coredir}/misc/confdoc/ext-jobs-controller-jobs.wiki">
+			<fileset dir="${extdir}/ai-controller-jobs/controller/jobs" expandsymboliclinks="true" >
+				<include name="templates/**/*.php" />
+				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
 		<confdoc keyprefix="controller/frontend" wikiprefix="Configuration/Core" keyparts="0"
 			optfile="${extdir}/ai-controller-frontend/controller/frontend/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/ext-frontend-controller-frontend.wiki">
 			<fileset dir="${extdir}/ai-controller-frontend/controller/frontend/src" expandsymboliclinks="true" >
-				<include name="**/*.php" />
-			</fileset>
-		</confdoc>
-		<confdoc keyprefix="controller/jobs" wikiprefix="Configuration/Core" keyparts="0"
-			optfile="${extdir}/ai-controller-jobs/controller/jobs/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/ext-jobs-controller-jobs.wiki">
-			<fileset dir="${extdir}/ai-controller-jobs/controller/jobs/src" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
