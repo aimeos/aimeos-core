@@ -37,6 +37,22 @@ class Depth
 
 		try
 		{
+			/** mshop/common/manager/maxdepth
+			 * Maximum level of recursion for retrieving referenced items
+			 *
+			 * Searching for items also fetches the associated items referenced in the
+			 * list tables if the domain names are passed to the second parameter of e.g. the
+			 * searchItems() method. To avoid infinite recursion because two items reference
+			 * each other, the maximum level must be limited.
+			 *
+			 * The default setting (two levels) means that retrieving a product item with
+			 * sub-products will retrieve the directly associated products but not the
+			 * products referenced by the associated product for example.
+			 *
+			 * @param integer Number of levels
+			 * @since 2019.04
+			 * @category Developer
+			 */
 			$max = $this->getContext()->getConfig()->get( 'mshop/common/manager/maxdepth', 2 );
 
 			if( $this->level++ < $max ) {

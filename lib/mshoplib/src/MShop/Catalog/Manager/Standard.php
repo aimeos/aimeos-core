@@ -868,6 +868,23 @@ class Standard extends Base
 	 */
 	protected function lock()
 	{
+		/** mshop/catalog/manager/standard/lock/mysql
+		 * SQL statement for locking the catalog table
+		 *
+		 * @see mshop/catalog/manager/standard/lock/ansi
+		 */
+
+		/** mshop/catalog/manager/standard/lock/ansi
+		 * SQL statement for locking the catalog table
+		 *
+		 * Updating the nested set of categories in the catalog table requires locking
+		 * the whole table to avoid data corruption. This statement will be followed by
+		 * insert or update statements and closed by an unlock statement.
+		 *
+		 * @param string Lock SQL statement
+		 * @since 2019.04
+		 * @category Developer
+		 */
 		$path = 'mshop/catalog/manager/standard/lock';
 
 		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
@@ -891,7 +908,25 @@ class Standard extends Base
 	 */
 	protected function unlock()
 	{
-		$path = 'mshop/catalog/manager/standard/unlock';
+		/** mshop/catalog/manager/standard/unlock/mysql
+		 * SQL statement for unlocking the catalog table
+		 *
+		 * @see mshop/catalog/manager/standard/unlock/ansi
+		 */
+
+		/** mshop/catalog/manager/standard/unlock/ansi
+		 * SQL statement for unlocking the catalog table
+		 *
+		 * Updating the nested set of categories in the catalog table requires locking
+		 * the whole table to avoid data corruption. This statement will be executed
+		 * after the table is locked and insert or update statements have been sent to
+		 * the database.
+		 *
+		 * @param string Lock SQL statement
+		 * @since 2019.04
+		 * @category Developer
+		 */
+		 $path = 'mshop/catalog/manager/standard/unlock';
 
 		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
 		{
