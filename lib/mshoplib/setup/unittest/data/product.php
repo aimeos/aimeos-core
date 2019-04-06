@@ -447,6 +447,9 @@ return [
 							'text.label' => 'img_desc', 'text.content' => 'Bildbeschreibung',
 						]],
 					],
+					'property' => [[
+						'media.property.type' => 'copyright', 'media.property.languageid' => 'de', 'media.property.value' => 'ich, 2019',
+					]],
 				], [
 					'product.lists.type' => 'unittype9', 'product.lists.position' => 2,
 					'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2100-01-01 00:00:00',
