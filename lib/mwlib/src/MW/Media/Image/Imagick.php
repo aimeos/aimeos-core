@@ -75,7 +75,7 @@ class Imagick
 		try
 		{
 			$this->image->setImageFormat( $mime[1] );
-			$this->image->setImageCompressionQuality( 100 - $quality ); // inverse quality scheme
+			$this->image->setImageCompressionQuality( $quality );
 
 			if( $filename === null ) {
 				return $this->image->getImageBlob();
