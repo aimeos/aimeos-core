@@ -22,6 +22,7 @@ return [
 
 	'customer/group' => [
 		['customer.group.code' => 'unitgroup', 'customer.group.label' => 'Unitgroup'],
+		['customer.group.code' => 'unitgroup2', 'customer.group.label' => 'Unitgroup 2'],
 	],
 
 	'customer' => [
