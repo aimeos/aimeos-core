@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( 1, $total );
+		$this->assertEquals( 2, $total );
 	}
 
 }
