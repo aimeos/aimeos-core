@@ -15,7 +15,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', [] );
-			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'config', 'text', array( 'default' => '', 'length' => 0xffff ) );
 			$table->addColumn( 'level', 'smallint', [] );
