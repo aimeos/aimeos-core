@@ -101,17 +101,16 @@ class Time
 	 */
 	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
+		$minute = date( 'i' );
 		$feconfig = $this->feConfig;
+		$feconfig['time.hourminute']['default'] = date( 'H:i', time() + ($minute + 15 - ($minute % 15)) * 60 );
 
 		try
 		{
-			$minute = date( 'i' );
 			$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
 			$service = $basket->getService( $type, $this->getServiceItem()->getCode() );
 
-			if( ( $value = $service->getAttribute( 'time.hourminute', 'delivery' ) ) == '' ) {
-				$feconfig['time.hourminute']['default'] = date( 'H:i', time() + ($minute + 15 - ($minute % 15)) * 60 );
-			} else {
+			if( ( $value = $service->getAttribute( 'time.hourminute', 'delivery' ) ) != '' ) {
 				$feconfig['time.hourminute']['default'] = $value;
 			}
 		}
