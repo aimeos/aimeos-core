@@ -201,7 +201,7 @@ abstract class Base
 		$address = $this->notify( 'addAddress.before', $address );
 
 		$address = clone $address;
-		$address = $address->setType( $type )->setId( null ); // enforce saving as new item
+		$address = $address->setType( $type );
 
 		if( $position !== null ) {
 			$this->addresses[$type][$position] = $address;
@@ -565,7 +565,7 @@ abstract class Base
 		$this->checkPrice( $service->getPrice() );
 
 		$service = clone $service;
-		$service = $service->setType( $type )->setId( null ); // enforce saving as new item
+		$service = $service->setType( $type );
 
 		if( $position !== null ) {
 			$this->services[$type][$position] = $service;
