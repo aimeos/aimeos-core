@@ -180,7 +180,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.lists.domain', 'media' ),
 			$search->compare( '==', 'product.lists.datestart', '2000-01-01 00:00:00' ),
 			$search->compare( '==', 'product.lists.dateend', '2100-01-01 00:00:00' ),
-			$search->compare( '==', 'product.lists.position', 2 ),
+			$search->compare( '==', 'product.lists.position', 1 ),
 			$search->compare( '==', 'product.lists.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -198,13 +198,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'product.lists.id', null );
 		$expr[] = $search->compare( '!=', 'product.lists.siteid', null );
 		$expr[] = $search->compare( '!=', 'product.lists.parentid', null );
-		$expr[] = $search->compare( '!=', 'product.lists.type', null );
+		$expr[] = $search->compare( '!=', 'product.lists.key', null );
 		$expr[] = $search->compare( '==', 'product.lists.domain', 'media' );
+		$expr[] = $search->compare( '==', 'product.lists.type', 'default' );
 		$expr[] = $search->compare( '==', 'product.lists.refid', $listItem->getRefId() );
 		$expr[] = $search->compare( '==', 'product.lists.datestart', '2000-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.lists.dateend', '2100-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'product.lists.config', null );
-		$expr[] = $search->compare( '==', 'product.lists.position', 2 );
+		$expr[] = $search->compare( '==', 'product.lists.position', 1 );
 		$expr[] = $search->compare( '==', 'product.lists.status', 1 );
 		$expr[] = $search->compare( '>=', 'product.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'product.lists.ctime', '1970-01-01 00:00:00' );

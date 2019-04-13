@@ -183,8 +183,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'supplier.lists.id', null );
 		$expr[] = $search->compare( '!=', 'supplier.lists.siteid', null );
 		$expr[] = $search->compare( '!=', 'supplier.lists.parentid', null );
-		$expr[] = $search->compare( '!=', 'supplier.lists.type', null );
+		$expr[] = $search->compare( '!=', 'supplier.lists.key', null );
 		$expr[] = $search->compare( '==', 'supplier.lists.domain', 'text' );
+		$expr[] = $search->compare( '==', 'supplier.lists.type', 'default' );
 		$expr[] = $search->compare( '>', 'supplier.lists.refid', '' );
 		$expr[] = $search->compare( '==', 'supplier.lists.datestart', '2010-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'supplier.lists.dateend', '2100-01-01 00:00:00' );

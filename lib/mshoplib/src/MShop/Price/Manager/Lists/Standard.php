@@ -46,6 +46,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'price.lists.key' => array(
+			'code' => 'price.lists.key',
+			'internalcode' => 'mprili."key"',
+			'label' => 'Unique key',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'price.lists.type' => array(
 			'code' => 'price.lists.type',
 			'internalcode' => 'mprili."type"',
