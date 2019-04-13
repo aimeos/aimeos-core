@@ -89,7 +89,6 @@ trait Traits
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the domain item
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Existing item removed from the given domain or null if item shouldn't be removed
 	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
-	 * @throws \Aimeos\MShop\Exception If given list item isn't found
 	 */
 	public function deleteListItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null )
 	{
@@ -107,7 +106,7 @@ trait Traits
 			}
 		}
 
-		throw new \Aimeos\MShop\Exception( sprintf( 'List item for removal from domain "%1$s" not found', $domain ) );
+		return $this;
 	}
 
 

@@ -61,7 +61,6 @@ trait Traits
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item Existing property item
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
-	 * @throws \Aimeos\MShop\Exception If given property item isn't found
 	 */
 	public function deletePropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item )
 	{
@@ -76,7 +75,7 @@ trait Traits
 			}
 		}
 
-		throw new \Aimeos\MShop\Exception( sprintf( 'Property item for removal not found' ) );
+		return $this;
 	}
 
 

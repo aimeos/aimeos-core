@@ -32,7 +32,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item Existing property item
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
-	 * @throws \Aimeos\MShop\Exception If given property item isn't found
 	 */
 	public function deletePropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item );
 
@@ -41,7 +40,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items Existing property items
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
-	 * @throws \Aimeos\MShop\Exception If a property item isn't found
 	 */
 	public function deletePropertyItems( array $items );
 

@@ -61,7 +61,6 @@ trait Traits
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item Existing address item
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
-	 * @throws \Aimeos\MShop\Exception If given address item isn't found
 	 */
 	public function deleteAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item )
 	{
@@ -76,7 +75,7 @@ trait Traits
 			}
 		}
 
-		throw new \Aimeos\MShop\Exception( sprintf( 'Address item for removal not found' ) );
+		return $this;
 	}
 
 
