@@ -141,13 +141,6 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testDeleteListItemException()
-	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
-		$this->object->deleteListItem( 'test', $this->listItem1 );
-	}
-
-
 	public function getDomains()
 	{
 		$this->assertEquals( ['text'], $this->object->getDomains() );

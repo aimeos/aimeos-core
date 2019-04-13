@@ -46,7 +46,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $items Existing list items
 	 * @param boolean $all True to delete referenced items as well, false for list items only
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
-	 * @throws \Aimeos\MShop\Exception If an item isn't a list item or isn't found
 	 */
 	public function deleteListItems( array $items, $all = false );
 

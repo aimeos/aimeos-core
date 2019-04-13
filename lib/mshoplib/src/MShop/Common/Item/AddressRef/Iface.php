@@ -33,7 +33,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item Existing address item
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
-	 * @throws \Aimeos\MShop\Exception If given address item isn't found
 	 */
 	public function deleteAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item );
 
@@ -42,7 +41,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $items Existing address items
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
-	 * @throws \Aimeos\MShop\Exception If a address item isn't found
 	 */
 	public function deleteAddressItems( array $items );
 

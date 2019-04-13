@@ -99,13 +99,4 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [$this->propItem2], array_values( $this->object->getPropertyItems( null, false ) ) );
 		$this->assertEquals( [$this->propItem], array_values( $this->object->getPropertyItemsDeleted() ) );
 	}
-
-
-	public function testDeletePropertyItemException()
-	{
-		$object = new TraitsClass();
-
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
-		$object->deletePropertyItem( $this->propItem );
-	}
 }
