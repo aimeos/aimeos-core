@@ -46,6 +46,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'service.lists.key' => array(
+			'code' => 'service.lists.key',
+			'internalcode' => 'mserli."key"',
+			'label' => 'Unique key',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'service.lists.type' => array(
 			'code' => 'service.lists.type',
 			'internalcode' => 'mserli."type"',
