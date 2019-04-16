@@ -149,14 +149,14 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 				if( $this->checkColumns( $schema, $table, $column ) === true )
 				{
 					if( $table === 'mshop_locale' && $schema->constraintExists( 'mshop_locale', 'fk_msloc_currid' ) ) {
-						$this->execute( 'ALTER TABLE "mshop_locale" DROP FOREIGN KEY "fk_msloc_currid"' );
+						$this->execute( 'ALTER TABLE "mshop_locale" DROP FOREIGN KEY "fk_msloc_currid"', $rname );
 					}
 
 					if( $table === 'mshop_locale' && $schema->constraintExists( 'mshop_locale', 'fk_msloc_langid' ) ) {
-						$this->execute( 'ALTER TABLE "mshop_locale" DROP FOREIGN KEY "fk_msloc_langid"' );
+						$this->execute( 'ALTER TABLE "mshop_locale" DROP FOREIGN KEY "fk_msloc_langid"', $rname );
 					}
 
-					$this->execute( sprintf( 'ALTER TABLE "%1$s" CONVERT TO CHARACTER SET \'utf8mb4\' COLLATE \'utf8mb4_bin\'', $table ) );
+					$this->execute( sprintf( 'ALTER TABLE "%1$s" CONVERT TO CHARACTER SET \'utf8mb4\' COLLATE \'utf8mb4_bin\'', $table ), $rname );
 					$this->status( 'done' );
 				}
 				else
