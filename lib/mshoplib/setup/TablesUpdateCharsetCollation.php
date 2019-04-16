@@ -205,7 +205,7 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 		// MariaDB gets identified as a MySql 5.5.5 by doctrine so ask the server directly
 		$version = $this->getValue( 'SELECT version() AS "version"', 'version', $rname );
 
-		if ( strpos( $version, 'MariaDB' ) !== false) {
+		if ( strpos( $version, 'MariaDB' ) !== false ) {
 			return version_compare( $version, '10.2.7', '>=' );
 		}
 
