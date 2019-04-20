@@ -19,7 +19,11 @@ namespace Aimeos\MShop\Index\Manager;
  */
 abstract class DBBase
 	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Product\Manager\Iface
 {
+	private $manager;
+
+
 	/**
 	 * Initializes the manager object
 	 *
@@ -30,6 +34,8 @@ abstract class DBBase
 		parent::__construct( $context );
 
 		$this->setResourceName( 'db-product' );
+		$this->manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
+
 	}
 
 
@@ -57,7 +63,7 @@ abstract class DBBase
 	 */
 	public function createItem( array $values = [] )
 	{
-		return \Aimeos\MShop::create( $this->getContext(), 'product' )->createItem( $values );
+		return $this->manager->createItem( $values );
 	}
 
 
@@ -69,7 +75,25 @@ abstract class DBBase
 	 */
 	public function createSearch( $default = false )
 	{
-		return \Aimeos\MShop::create( $this->getContext(), 'product' )->createSearch( $default );
+		return $this->manager->createSearch( $default );
+	}
+
+
+	/**
+	 * Removes multiple items from the index.
+	 *
+	 * @param string[] $ids list of product IDs
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 */
+	public function deleteItems( array $ids )
+	{
+		if( empty( $ids ) ) { return; }
+
+		foreach( $this->getSubManagers() as $submanager ) {
+			$submanager->deleteItems( $ids );
+		}
+
+		return $this;
 	}
 
 
@@ -85,7 +109,7 @@ abstract class DBBase
 	 */
 	public function findItem( $code, array $ref = [], $domain = 'product', $type = null, $default = false )
 	{
-		return \Aimeos\MShop::create( $this->getContext(), 'product' )->findItem( $code, $ref, $domain, $type, $default );
+		return $this->manager->findItem( $code, $ref, $domain, $type, $default );
 	}
 
 
@@ -99,7 +123,7 @@ abstract class DBBase
 	 */
 	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return \Aimeos\MShop::create( $this->getContext(), 'product' )->getItem( $id, $ref, $default );
+		return $this->manager->getItem( $id, $ref, $default );
 	}
 
 
@@ -111,7 +135,7 @@ abstract class DBBase
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		return \Aimeos\MShop::create( $this->getContext(), 'product' )->getSearchAttributes( $withsub );
+		return $this->manager->getSearchAttributes( $withsub );
 	}
 
 
@@ -140,7 +164,10 @@ abstract class DBBase
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		return $this->rebuildIndex( array( $item->getId() => $item ) );
+		$item = $this->manager->saveItem( $item, true );
+		$this->rebuildIndex( [$item->getId() => $item] );
+
+		return $item;
 	}
 
 
@@ -153,7 +180,14 @@ abstract class DBBase
 	 */
 	public function saveItems( array $items, $fetch = true )
 	{
-		return $this->rebuildIndex( $items );
+		$list = [];
+
+		foreach( $this->manager->saveItems( $items, true ) as $item ) {
+			$list[$item->getId()] = $item;
+		}
+
+		$this->rebuildIndex( $list );
+		return $list;
 	}
 
 
@@ -222,6 +256,17 @@ abstract class DBBase
 		}
 
 		return parent::deleteItemsBase( $ids, $path, $siteidcheck, $name );
+	}
+
+
+	/**
+	 * Returns the product manager instance
+	 *
+	 * @return \Aimeos\MShop\Product\Manager\Iface Product manager object
+	 */
+	protected function getManager()
+	{
+		return $this->manager;
 	}
 
 

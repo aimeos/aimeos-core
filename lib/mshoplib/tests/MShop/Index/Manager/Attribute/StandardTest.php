@@ -96,10 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'Product doesnt have any attribute item' );
 		}
 
-		$product->setId( null );
-		$product->setCode( 'ModifiedCNC' );
-		$productManager->saveItem( $product );
-		$this->object->saveItem( $product );
+		$product = $this->object->saveItem( $product->setId( null )->setCode( 'ModifiedCNC' ) );
 
 
 		$search = $this->object->createSearch();

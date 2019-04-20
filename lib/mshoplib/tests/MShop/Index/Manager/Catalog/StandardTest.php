@@ -95,15 +95,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 
-		//new product item
-		$product->setId( null );
-		$product->setCode( 'ModifiedCNC' );
-		$productManager->saveItem( $product );
-
-		//new catalog list item
-		$catListItem->setId( null );
-		$catListItem->setRefId( $product->getId() );
-		$listManager->saveItem( $catListItem );
+		$product = $productManager->saveItem( $product->setId( null )->setCode( 'ModifiedCNC' ) );
+		$catListItem = $listManager->saveItem( $catListItem->setId( null )->setRefId( $product->getId() ) );
 
 		$this->object->saveItem( $product );
 
@@ -114,8 +107,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->object->deleteItem( $product->getId() );
-		$listManager->deleteItem( $catListItem->getId() );
 		$productManager->deleteItem( $product->getId() );
+		$listManager->deleteItem( $catListItem->getId() );
 
 
 		$search = $this->object->createSearch();

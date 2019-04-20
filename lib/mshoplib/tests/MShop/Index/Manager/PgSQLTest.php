@@ -35,9 +35,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 			$search->setConditions( $search->combine( '&&', $conditions ) );
 			$result = $productManager->searchItems( $search, array( 'attribute', 'price', 'text', 'product' ) );
 
-			foreach( $result as $item )
-			{
-				$manager->deleteItem( $item->getId() );
+			foreach( $result as $item ) {
 				$manager->saveItem( $item );
 			}
 		}

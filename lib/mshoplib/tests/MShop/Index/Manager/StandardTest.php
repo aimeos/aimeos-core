@@ -99,6 +99,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testDeleteItems()
+	{
+		$this->assertEquals( $this->object, $this->object->deleteItems( [-1] ) );
+	}
+
+
 	public function testFindItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
@@ -145,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveDeleteItem()
+	public function testSaveItem()
 	{
 		$item = self::$products['CNE'];
 
@@ -160,34 +166,26 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->saveItem( $item );
 
-		$cntAttributeA = $this->getValue( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
-		$cntCatalogA = $this->getValue( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
-		$cntPriceA = $this->getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
-		$cntTextA = $this->getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
+		$cntAttribute = $this->getValue( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
+		$cntCatalog = $this->getValue( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
+		$cntPrice = $this->getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
+		$cntText = $this->getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
+
+		$this->assertEquals( 8, $cntAttribute );
+		$this->assertEquals( 5, $cntCatalog );
+		$this->assertEquals( 1, $cntPrice );
+		$this->assertEquals( 1, $cntText );
+	}
 
 
-		$this->object->deleteItem( $item->getId() );
-
-		$cntAttributeB = $this->getValue( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
-		$cntCatalogB = $this->getValue( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
-		$cntPriceB = $this->getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
-		$cntTextB = $this->getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
-
-
-		// recreate index for CNE
-		$result = $this->object->saveItem( $item );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $result );
-
-		$this->assertEquals( 8, $cntAttributeA );
-		$this->assertEquals( 5, $cntCatalogA );
-		$this->assertEquals( 1, $cntPriceA );
-		$this->assertEquals( 1, $cntTextA );
-
-		$this->assertEquals( 0, $cntAttributeB );
-		$this->assertEquals( 0, $cntCatalogB );
-		$this->assertEquals( 0, $cntPriceB );
-		$this->assertEquals( 0, $cntTextB );
+	public function testSaveItems()
+	{
+		$result = $this->object->saveItems( self::$products );
+		$expected = [
+			self::$products['CNC']->getId() => self::$products['CNC'],
+			self::$products['CNE']->getId() => self::$products['CNE']
+		];
+		$this->assertEquals( $expected, $result );
 	}
 
 
@@ -410,21 +408,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$search = $manager->createSearch( true );
-		$search->setSlice( 0, 0x7fffffff );
-
-		//delete whole catalog
-		$this->object->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 
 		//build catalog with all products
 		$config->set( 'mshop/index/manager/standard/index', 'all' );
-		$this->object->rebuildIndex();
+		$this->object->cleanupIndex( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuildIndex();
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//restore index with categorized products only
 		$config->set( 'mshop/index/manager/standard/index', 'categorized' );
-		$this->object->rebuildIndex();
+		$this->object->cleanupIndex( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuildIndex();
 
 		$this->assertEquals( 13, count( $afterInsertAttr ) );
 		$this->assertEquals( 8, count( $afterInsertCat ) );
@@ -435,37 +429,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$search = $manager->createSearch();
-		$search->setSlice( 0, 0x7fffffff );
 
-		//delete whole catalog
-		$this->object->deleteItems( array_keys( $manager->searchItems( $search ) ) );
-
-		$afterDeleteAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
-		$afterDeleteCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
-
-		//insert cne, cnc
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 		$items = $manager->searchItems( $search );
 
-		$this->object->rebuildIndex( $items );
+		$this->object->cleanupIndex( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuildIndex( $items );
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
-		//delete cne, cnc
-		foreach( $items as $item ) {
-			$this->object->deleteItem( $item->getId() );
-		}
-
-		//restores catalog
-		$this->object->rebuildIndex();
-
-		//check delete
-		$this->assertEquals( [], $afterDeleteAttr );
-		$this->assertEquals( [], $afterDeleteCat );
-
-		//check inserted items
 		$this->assertEquals( 2, count( $afterInsertAttr ) );
 		$this->assertEquals( 2, count( $afterInsertCat ) );
 	}
@@ -476,20 +449,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = $this->context;
 		$config = $context->getConfig();
 
-		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
-
-		//delete whole catalog
-		$search = $manager->createSearch();
-		$search->setSlice( 0, 0x7fffffff );
-		$this->object->deleteItems( array_keys( $manager->searchItems( $search ) ) );
-
 		$config->set( 'mshop/index/manager/standard/index', 'categorized' );
-		$this->object->rebuildIndex();
+		$this->object->cleanupIndex( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuildIndex();
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
-		//check inserted items
 		$this->assertEquals( 7, count( $afterInsertAttr ) );
 		$this->assertEquals( 8, count( $afterInsertCat ) );
 	}

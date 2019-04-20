@@ -92,12 +92,7 @@ class Standard
 	 */
 	public function deleteItems( array $ids )
 	{
-		if( empty( $ids ) ) { return; }
-
-		foreach( $this->getSubManagers() as $submanager ) {
-			$submanager->deleteItems( $ids );
-		}
-
+		$this->getManager()->deleteItems( $ids );
 		return $this;
 	}
 
@@ -339,7 +334,7 @@ class Standard
 		if( !empty( $prodIds ) )
 		{
 			$expr[] = $catalogSearch->compare( '==', 'catalog.lists.refid', $prodIds );
-			$this->getObject()->deleteItems( $prodIds );
+			$this->clearItems( $prodIds );
 		}
 
 		$catalogSearch->setConditions( $catalogSearch->combine( '&&', $expr ) );
@@ -365,27 +360,6 @@ class Standard
 		while( count( $result ) > 0 );
 
 		return $this;
-	}
-
-
-	/**
-	 * Stores a new item in the index.
-	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
-	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Product\Item\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
-	{
-		self::checkClass( \Aimeos\MShop\Product\Item\Iface::class, $item );
-
-		if( $item->getId() === null ) {
-			throw new \Aimeos\MShop\Index\Exception( sprintf( 'Item could not be saved using method saveItem(). Item ID not available.' ) );
-		}
-
-		$this->rebuildIndex( array( $item->getId() => $item ) );
-
-		return $item;
 	}
 
 
@@ -512,6 +486,24 @@ class Standard
 
 
 	/**
+	 * Removes multiple items from the index.
+	 *
+	 * @param string[] $ids list of product IDs
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 */
+	protected function clearItems( array $ids )
+	{
+		if( empty( $ids ) ) { return; }
+
+		foreach( $this->getSubManagers() as $submanager ) {
+			$submanager->deleteItems( $ids );
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Deletes the cache entries using the given product IDs.
 	 *
 	 * @param string[] $productIds List of product IDs
@@ -551,7 +543,7 @@ class Standard
 			{
 				$this->begin();
 
-				$this->getObject()->deleteItems( $prodIds );
+				$this->clearItems( $prodIds );
 
 				foreach( $submanagers as $submanager ) {
 					$submanager->rebuildIndex( $products );
