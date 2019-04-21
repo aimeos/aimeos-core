@@ -35,7 +35,6 @@ abstract class DBBase
 
 		$this->setResourceName( 'db-product' );
 		$this->manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
-
 	}
 
 
