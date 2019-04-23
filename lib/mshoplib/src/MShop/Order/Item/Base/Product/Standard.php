@@ -599,8 +599,8 @@ class Standard extends Base implements Iface
 				case 'order.base.product.prodcode': $item = $item->setProductCode( $value ); break;
 				case 'order.base.product.name': $item = $item->setName( $value ); break;
 				case 'order.base.product.mediaurl': $item = $item->setMediaUrl( $value ); break;
-				case 'order.base.product.target': $item = $item->setTarget( $value ); break;
-				case 'order.base.product.position': $item = $item->setPosition( $value ); break;
+				case 'order.base.product.target': !$private ?: $item = $item->setTarget( $value ); break;
+				case 'order.base.product.position': !$private ?: $item = $item->setPosition( $value ); break;
 				case 'order.base.product.quantity': $item = $item->setQuantity( $value ); break;
 				case 'order.base.product.status': $item = $item->setStatus( $value ); break;
 				default: continue 2;
@@ -633,14 +633,14 @@ class Standard extends Base implements Iface
 		$list['order.base.product.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.product.status'] = $this->getStatus();
 		$list['order.base.product.position'] = $this->getPosition();
-		$list['order.base.product.target'] = $this->getTarget();
-		$list['order.base.product.flags'] = $this->getFlags();
 
 		if( $private === true )
 		{
 			$list['order.base.product.baseid'] = $this->getBaseId();
 			$list['order.base.product.orderproductid'] = $this->getOrderProductId();
 			$list['order.base.product.orderaddressid'] = $this->getOrderAddressId();
+			$list['order.base.product.target'] = $this->getTarget();
+			$list['order.base.product.flags'] = $this->getFlags();
 		}
 
 		return $list;

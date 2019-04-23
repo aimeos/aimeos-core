@@ -293,7 +293,7 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.baseid': $item = $item->setBaseId( $value ); break;
+				case 'order.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
 				case 'order.type': $item = $item->setType( $value ); break;
 				case 'order.statusdelivery': $item = $item->setDeliveryStatus( $value ); break;
 				case 'order.statuspayment': $item = $item->setPaymentStatus( $value ); break;
@@ -320,13 +320,16 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['order.baseid'] = $this->getBaseId();
 		$list['order.type'] = $this->getType();
 		$list['order.statusdelivery'] = $this->getDeliveryStatus();
 		$list['order.statuspayment'] = $this->getPaymentStatus();
 		$list['order.datepayment'] = $this->getDatePayment();
 		$list['order.datedelivery'] = $this->getDateDelivery();
 		$list['order.relatedid'] = $this->getRelatedId();
+
+		if( $private === true ) {
+			$list['order.baseid'] = $this->getBaseId();
+		}
 
 		return $list;
 	}
