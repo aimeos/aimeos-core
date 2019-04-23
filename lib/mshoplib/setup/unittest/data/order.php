@@ -8,10 +8,10 @@
 
 return array(
 	'order/base' => array(
-		'19.95' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '19.95', 'shipping' => '6.50', 'rebate' => '0.00', 'comment' => 'This is a comment if an order. It can be added by the user.' ),
-		'636.00' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '636.00', 'shipping' => '31.00', 'rebate' => '0.00', 'comment' => 'This is another comment.' ),
-		'18.00' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '18.00', 'shipping' => '1.00', 'rebate' => '0.00', 'comment' => 'This is a bundle basket.' ),
-		'10.00' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '10.00', 'shipping' => '4.50', 'rebate' => '2.00', 'comment' => 'This is a comment if an order. It can be added by the user.' ),
+		'19.95' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '19.95', 'shipping' => '6.50', 'rebate' => '0.00', 'customerref' => 'ABC-1234', 'comment' => 'This is a comment if an order. It can be added by the user.' ),
+		'636.00' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '636.00', 'shipping' => '31.00', 'rebate' => '0.00', 'customerref' => 'ABC-9876', 'comment' => 'This is another comment.' ),
+		'18.00' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '18.00', 'shipping' => '1.00', 'rebate' => '0.00', 'customerref' => 'XYZ-1234', 'comment' => 'This is a bundle basket.' ),
+		'10.00' => array( 'customerid' => 'UTC001', 'sitecode' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'price' => '10.00', 'shipping' => '4.50', 'rebate' => '2.00', 'customerref' => 'XYZ-9876', 'comment' => 'This is a comment if an order. It can be added by the user.' ),
 	),
 
 	'order/base/address' => array(

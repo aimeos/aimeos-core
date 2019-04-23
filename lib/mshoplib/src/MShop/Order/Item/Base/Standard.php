@@ -259,6 +259,39 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 
 	/**
+	 * Returns the customer reference field of the order item
+	 *
+	 * @return string Customer reference for the order
+	 */
+	public function getCustomerReference()
+	{
+		if( isset( $this->values['order.base.customerref'] ) ) {
+			return (string) $this->values['order.base.customerref'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets the customer reference field of the order item
+	 *
+	 * @param string $value Customer reference for the order
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
+	 */
+	public function setCustomerReference( $value )
+	{
+		if( (string) $value !== $this->getCustomerReference() )
+		{
+			$this->values['order.base.customerref'] = (string) $value;
+			$this->modified = true;
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the locales for the basic order item.
 	 *
 	 * @return \Aimeos\MShop\Locale\Item\Iface Object containing information
@@ -376,6 +409,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 				case 'order.base.id': !$private ?: $item = $item->setId( $value ); break;
 				case 'order.base.customerid': !$private ?: $item = $item->setCustomerId( $value ); break;
 				case 'order.base.languageid': !$private ?: $locale = $locale->setLanguageId( $value ); break;
+				case 'order.base.customerref': $item = $item->setCustomerReference( $value ); break;
 				case 'order.base.comment': $item = $item->setComment( $value ); break;
 				default: continue 2;
 			}
@@ -408,6 +442,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 			'order.base.rebate' => $price->getRebate(),
 			'order.base.taxvalue' => $price->getTaxValue(),
 			'order.base.taxflag' => $price->getTaxFlag(),
+			'order.base.customerref' => $this->getCustomerReference(),
 			'order.base.comment' => $this->getComment(),
 		);
 

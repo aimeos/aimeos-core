@@ -54,6 +54,13 @@ class Standard extends Base
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'order.base.customerref' => array(
+			'code' => 'order.base.customerref',
+			'internalcode' => 'mordba."customerref"',
+			'label' => 'Order customer reference',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'order.base.languageid' => array(
 			'code' => 'order.base.languageid',
 			'internalcode' => 'mordba."langid"',
@@ -662,16 +669,17 @@ class Standard extends Base
 			$stmt->bind( 7, $priceItem->getRebate() );
 			$stmt->bind( 8, $priceItem->getTaxValue() );
 			$stmt->bind( 9, $priceItem->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 10, $item->getComment() );
-			$stmt->bind( 11, $date ); // mtime
-			$stmt->bind( 12, $context->getEditor() );
-			$stmt->bind( 13, $localeItem->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 10, $item->getCustomerReference() );
+			$stmt->bind( 11, $item->getComment() );
+			$stmt->bind( 12, $date ); // mtime
+			$stmt->bind( 13, $context->getEditor() );
+			$stmt->bind( 14, $localeItem->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 14, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 15, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 14, $date ); // ctime
+				$stmt->bind( 15, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

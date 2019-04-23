@@ -97,6 +97,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$bases['items'][$key] = $orderBaseManager->createItem();
 			$bases['items'][$key]->setId( null );
 			$bases['items'][$key]->setComment( $dataset['comment'] );
+			$bases['items'][$key]->setCustomerReference( $dataset['customerref'] );
 			$bases['items'][$key]->setCustomerId( $customerIds[$dataset['customerid']] );
 
 			$locale->setId( null );

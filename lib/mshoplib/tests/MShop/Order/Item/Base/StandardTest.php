@@ -25,6 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.id' => 1,
 			'order.base.siteid' => 99,
 			'order.base.customerid' => 'testuser',
+			'order.base.customerref' => 'ABC-1234',
 			'order.base.comment' => 'this is a comment from unittest',
 			'order.base.mtime' => '2011-01-01 00:00:02',
 			'order.base.ctime' => '2011-01-01 00:00:01',
@@ -93,6 +94,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $return );
 		$this->assertEquals( '44', $this->object->getCustomerId() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetCustomerReference()
+	{
+		$this->assertEquals( 'ABC-1234', $this->object->getCustomerReference() );
+	}
+
+
+	public function testSetCustomerReference()
+	{
+		$return = $this->object->setCustomerReference( 'XYZ-9876' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $return );
+		$this->assertEquals( 'XYZ-9876', $this->object->getCustomerReference() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -166,6 +183,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = $entries = array(
 			'order.base.id' => 1,
+			'order.base.customerref' => 'testref',
 			'order.base.comment' => 'test comment',
 			'order.base.languageid' => 'de',
 			'order.base.customerid' => 3,
@@ -177,6 +195,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.customerid'], $item->getCustomerId() );
 		$this->assertEquals( $list['order.base.languageid'], $item->getLocale()->getLanguageId() );
+		$this->assertEquals( $list['order.base.customerref'], $item->getCustomerReference() );
 		$this->assertEquals( $list['order.base.comment'], $item->getComment() );
 	}
 
@@ -190,6 +209,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getSiteId(), $list['order.base.siteid'] );
 		$this->assertEquals( $this->object->getCustomerId(), $list['order.base.customerid'] );
 		$this->assertEquals( $this->object->getLocale()->getLanguageId(), $list['order.base.languageid'] );
+		$this->assertEquals( $this->object->getCustomerReference(), $list['order.base.customerref'] );
 		$this->assertEquals( $this->object->getComment(), $list['order.base.comment'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $list['order.base.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $list['order.base.mtime'] );

@@ -67,6 +67,21 @@ interface Iface
 	public function setCustomerId( $customerid );
 
 	/**
+	 * Returns the customer reference field of the order item
+	 *
+	 * @return string Customer reference for the order
+	 */
+	public function getCustomerReference();
+
+	/**
+	 * Sets the customer reference field of the order item
+	 *
+	 * @param string $value Customer reference for the order
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
+	 */
+	public function setCustomerReference( $value );
+
+	/**
 	 * Returns the locales for the basic order item.
 	 *
 	 * @return \Aimeos\MShop\Locale\Item\Iface Object containing information about site, language, country and currency

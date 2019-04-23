@@ -31,6 +31,7 @@ return array(
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'tax', 'decimal', array( 'precision' => 14, 'scale' => 4 ) );
 			$table->addColumn( 'taxflag', 'smallint', [] );
+			$table->addColumn( 'customerref', 'string', array( 'length' => 255, 'notnull' => false ) );
 			$table->addColumn( 'comment', 'text', array( 'length' => 0xfff ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );

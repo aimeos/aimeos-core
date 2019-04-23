@@ -159,6 +159,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getCustomerId(), $itemSaved->getCustomerId() );
 		$this->assertEquals( $item->getLocale()->getLanguageId(), $itemSaved->getLocale()->getLanguageId() );
+		$this->assertEquals( $item->getCustomerReference(), $itemSaved->getCustomerReference() );
+		$this->assertEquals( $item->getComment(), $itemSaved->getComment() );
 		$this->assertEquals( $item->getSiteCode(), $itemSaved->getSiteCode() );
 		$this->assertEquals( $itemPrice->getValue(), $itemSavedPrice->getValue() );
 		$this->assertEquals( $itemPrice->getCosts(), $itemSavedPrice->getCosts() );
@@ -168,8 +170,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getAddresses(), $itemSaved->getAddresses() );
 		$this->assertEquals( $item->getCoupons(), $itemSaved->getCoupons() );
 		$this->assertEquals( $item->getServices(), $itemSaved->getServices() );
-		$this->assertEquals( $item->getComment(), $itemSaved->getComment() );
-		$this->assertEquals( $item->getSiteCode(), $itemSaved->getSiteCode() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -179,6 +179,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getCustomerId(), $itemUpd->getCustomerId() );
 		$this->assertEquals( $itemExp->getLocale()->getLanguageId(), $itemUpd->getLocale()->getLanguageId() );
+		$this->assertEquals( $itemExp->getCustomerReference(), $itemUpd->getCustomerReference() );
+		$this->assertEquals( $itemExp->getComment(), $itemUpd->getComment() );
 		$this->assertEquals( $itemExp->getSiteCode(), $itemUpd->getSiteCode() );
 		$this->assertEquals( $itemExpPrice->getValue(), $itemUpdPrice->getValue() );
 		$this->assertEquals( $itemExpPrice->getCosts(), $itemUpdPrice->getCosts() );
@@ -188,8 +190,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getAddresses(), $itemUpd->getAddresses() );
 		$this->assertEquals( $itemExp->getCoupons(), $itemUpd->getCoupons() );
 		$this->assertEquals( $itemExp->getServices(), $itemUpd->getServices() );
-		$this->assertEquals( $itemExp->getComment(), $itemUpd->getComment() );
-		$this->assertEquals( $itemExp->getSiteCode(), $itemUpd->getSiteCode() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
@@ -240,6 +240,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.price', '53.50' );
 		$expr[] = $search->compare( '==', 'order.base.costs', '1.50' );
 		$expr[] = $search->compare( '==', 'order.base.rebate', '14.50' );
+		$expr[] = $search->compare( '~=', 'order.base.customerref', 'ABC-1234' );
 		$expr[] = $search->compare( '~=', 'order.base.comment', 'This is a comment' );
 		$expr[] = $search->compare( '>=', 'order.base.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.base.ctime', '1970-01-01 00:00:00' );
