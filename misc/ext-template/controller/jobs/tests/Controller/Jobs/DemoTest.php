@@ -10,6 +10,8 @@ class DemoTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
+		\Aimeos\MShop::cache( true );
+
 		$aimeos = \TestHelperJobs::getAimeos();
 		$context = \TestHelperJobs::getContext();
 
@@ -19,8 +21,9 @@ class DemoTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
+		\Aimeos\MShop::cache( false );
+
 		unset( $this->object );
-		\Aimeos\MShop\Factory::clear();
 	}
 
 

@@ -19,7 +19,7 @@
 
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="${bindir}phpcs -n --standard=${codestddir}/Metaways src tests/Controller"
+		<exec command="${bindir}phpcs -n --standard=${codestddir}/Aimeos src tests/Controller"
 			  checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 

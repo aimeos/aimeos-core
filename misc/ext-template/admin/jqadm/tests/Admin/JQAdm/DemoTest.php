@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- */
-
 
 namespace Aimeos\Admin\JQAdm;
 
@@ -16,6 +12,8 @@ class DemoTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
+		\Aimeos\MShop::cache( true );
+
 		$this->context = \TestHelperJqadm::getContext();
 		$paths = \TestHelperJqadm::getTemplatePaths();
 
@@ -25,9 +23,9 @@ class DemoTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		unset( $this->object );
+		\Aimeos\MShop::cache( false );
 
-		\Aimeos\MShop\Factory::clear();
+		unset( $this->object );
 	}
 
 
