@@ -296,7 +296,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFromArray()
 	{
-		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.' );
+		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.' );
 		$item = new \Aimeos\MShop\Customer\Item\Standard( $address );
 
 		$list = $entries = array(
