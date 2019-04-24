@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2017
- */
-
 
 namespace Aimeos\Client\Jsonapi;
 
@@ -17,6 +12,8 @@ class DemoTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
+		\Aimeos\MShop::cache( true );
+
 		$this->context = \TestHelperJapi::getContext();
 		$paths = \TestHelperJapi::getTemplatePaths();
 
@@ -27,9 +24,9 @@ class DemoTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		unset( $this->object );
+		\Aimeos\MShop::cache( false );
 
-		\Aimeos\MShop\Factory::clear();
+		unset( $this->object );
 	}
 
 
