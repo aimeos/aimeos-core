@@ -138,37 +138,7 @@ abstract class Base
 	public function fromArray( array &$list, $private = false )
 	{
 		$item = parent::fromArray( $list, $private );
-		$addr = $item->getPaymentAddress();
-
-		foreach( $list as $key => $value )
-		{
-			switch( $key )
-			{
-				case 'customer.salutation': $addr = $addr->setSalutation( $value ); break;
-				case 'customer.company': $addr = $addr->setCompany( $value ); break;
-				case 'customer.vatid': $addr = $addr->setVatID( $value ); break;
-				case 'customer.title': $addr = $addr->setTitle( $value ); break;
-				case 'customer.firstname': $addr = $addr->setFirstname( $value ); break;
-				case 'customer.lastname': $addr = $addr->setLastname( $value ); break;
-				case 'customer.address1': $addr = $addr->setAddress1( $value ); break;
-				case 'customer.address2': $addr = $addr->setAddress2( $value ); break;
-				case 'customer.address3': $addr = $addr->setAddress3( $value ); break;
-				case 'customer.postal': $addr = $addr->setPostal( $value ); break;
-				case 'customer.city': $addr = $addr->setCity( $value ); break;
-				case 'customer.state': $addr = $addr->setState( $value ); break;
-				case 'customer.languageid': $addr = $addr->setLanguageId( $value ); break;
-				case 'customer.countryid': $addr = $addr->setCountryId( $value ); break;
-				case 'customer.telephone': $addr = $addr->setTelephone( $value ); break;
-				case 'customer.email': $addr = $addr->setEmail( $value ); break;
-				case 'customer.telefax': $addr = $addr->setTelefax( $value ); break;
-				case 'customer.website': $addr = $addr->setWebsite( $value ); break;
-				case 'customer.longitude': $addr = $addr->setLongitude( $value ); break;
-				case 'customer.latitude': $addr = $addr->setLatitude( $value ); break;
-				default: continue 2;
-			}
-
-			unset( $list[$key] );
-		}
+		$addr = $item->getPaymentAddress()->fromArray( $list, $private );
 
 		return $item->setPaymentAddress( $addr );
 	}
