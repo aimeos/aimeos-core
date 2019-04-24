@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.id' => 1,
 			'product.siteid' => 99,
 			'product.type' => 'test',
-			'product.status' => 0,
+			'product.status' => 1,
 			'product.code' => 'TEST',
 			'product.label' => 'testproduct',
 			'product.config' => array( 'css-class' => 'test' ),
@@ -172,7 +172,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( 0, $this->object->getStatus() );
+		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
 
@@ -300,6 +300,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailable()
 	{
+		$this->assertTrue( $this->object->isAvailable() );
+		$this->object->setAvailable( false );
+		$this->assertFalse( $this->object->isAvailable() );
+	}
+
+
+	public function testIsAvailableOnStatus()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
+		$this->object->setStatus( 0 );
+		$this->assertFalse( $this->object->isAvailable() );
+		$this->object->setStatus( -1 );
 		$this->assertFalse( $this->object->isAvailable() );
 	}
 

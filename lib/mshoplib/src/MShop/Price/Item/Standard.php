@@ -462,7 +462,7 @@ class Standard extends Base
 	 */
 	public function isAvailable()
 	{
-		return parent::isAvailable() && (bool) $this->getStatus()
+		return parent::isAvailable() && $this->getStatus() > 0
 			&& ( $this->values['currencyid'] === null || $this->getCurrencyId() === $this->values['currencyid'] );
 	}
 

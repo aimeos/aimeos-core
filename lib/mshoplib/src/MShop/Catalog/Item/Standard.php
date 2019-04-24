@@ -395,7 +395,7 @@ class Standard
 	 */
 	public function isAvailable()
 	{
-		return (bool) $this->getStatus();
+		return $this->getStatus() > 0;
 	}
 
 

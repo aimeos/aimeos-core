@@ -28,7 +28,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'service.datestart' => '2000-01-01 00:00:00',
 			'service.dateend' => '2100-01-01 00:00:00',
 			'service.config' => array( 'url' => 'https://localhost/' ),
-			'service.status' => 0,
+			'service.status' => 1,
 			'service.mtime' => '2011-01-01 00:00:02',
 			'service.ctime' => '2011-01-01 00:00:01',
 			'service.editor' => 'unitTestUser'
@@ -171,7 +171,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( 0, $this->object->getStatus() );
+		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
 
@@ -300,6 +300,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailable()
 	{
+		$this->assertTrue( $this->object->isAvailable() );
+		$this->object->setAvailable( false );
+		$this->assertFalse( $this->object->isAvailable() );
+	}
+
+
+	public function testIsAvailableOnStatus()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
+		$this->object->setStatus( 0 );
+		$this->assertFalse( $this->object->isAvailable() );
+		$this->object->setStatus( -1 );
 		$this->assertFalse( $this->object->isAvailable() );
 	}
 }
