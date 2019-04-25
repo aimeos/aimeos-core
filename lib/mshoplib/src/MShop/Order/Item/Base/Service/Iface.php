@@ -18,7 +18,8 @@ namespace Aimeos\MShop\Order\Item\Base\Service;
  * @package MShop
  * @subpackage Order
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Position\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
 	 * Sets the site ID of the item.
@@ -102,21 +103,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setName( $name );
-
-	/**
-	 * Returns the type of the service item.
-	 *
-	 * @return string Service item type
-	 */
-	public function getType();
-
-	/**
-	 * Sets a new type for the service item.
-	 *
-	 * @param string $type type of the service item
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
-	 */
-	public function setType( $type );
 
 	/**
 	 * Returns the price object which belongs to the service item.

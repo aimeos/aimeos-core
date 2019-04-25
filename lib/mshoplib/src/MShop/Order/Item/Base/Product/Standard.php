@@ -500,7 +500,7 @@ class Standard extends Base implements Iface
 	/**
 	 * Returns the position of the product in the order.
 	 *
-	 * @return integer|null Product position in the order from 1-n
+	 * @return integer|null Product position in the order from 0-n
 	 */
 	public function getPosition()
 	{
@@ -513,13 +513,13 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the position of the product within the list of ordered products.
 	 *
-	 * @param integer|null $value Product position in the order from 1-n or null for resetting the position
+	 * @param integer|null $value Product position in the order from 0-n or null for resetting the position
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
-	 * @throws \Aimeos\MShop\Order\Exception If there's already a position set
+	 * @throws \Aimeos\MShop\Order\Exception If the position is invalid
 	 */
 	public function setPosition( $value )
 	{
-		if( $value !== null && $value < 1 ) {
+		if( $value !== null && $value < 0 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order product position "%1$s" must be greater than 0', $value ) );
 		}
 

@@ -134,6 +134,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'order.base.service.position' => array(
+			'code' => 'order.base.service.position',
+			'internalcode' => 'mordbase."pos"',
+			'label' => 'Service position',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
 		'order.base.service.ctime' => array(
 			'code' => 'order.base.service.ctime',
 			'internalcode' => 'mordbase."ctime"',
@@ -656,15 +664,16 @@ class Standard
 			$stmt->bind( 11, $price->getTaxValue() );
 			$stmt->bind( 12, $price->getTaxRate() );
 			$stmt->bind( 13, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 14, $date ); // mtime
-			$stmt->bind( 15, $context->getEditor() );
-			$stmt->bind( 16, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 14, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 15, $date ); // mtime
+			$stmt->bind( 16, $context->getEditor() );
+			$stmt->bind( 17, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 17, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 18, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
-				$stmt->bind( 17, $date ); // ctime
+				$stmt->bind( 18, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

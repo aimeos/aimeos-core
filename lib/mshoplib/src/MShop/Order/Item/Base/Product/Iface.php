@@ -18,7 +18,9 @@ namespace Aimeos\MShop\Order\Item\Base\Product;
  * @package MShop
  * @subpackage Order
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Position\Iface,
+		\Aimeos\MShop\Common\Item\Status\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
 	 * Sets the site ID of the item.
@@ -74,21 +76,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setOrderProductId( $value );
-
-	/**
-	 * Returns the type of the ordered product.
-	 *
-	 * @return string order product type
-	 */
-	public function getType();
-
-	/**
-	 * Sets the type of the ordered product.
-	 *
-	 * @param string $type order product type
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
-	 */
-	public function setType( $type );
 
 	/**
 	 * Returns the supplier code.
@@ -254,42 +241,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setFlags( $value );
-
-	/**
-	 * Returns the position of the product in the order.
-	 *
-	 * @return integer Product position in the order from 1-n
-	 */
-	public function getPosition();
-
-	/**
-	 * Sets the position of the product within the list of ordered products.
-	 *
-	 * @param integer $value Product position in the order from 1-n
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
-	 */
-	public function setPosition( $value );
-
-	/**
-	 * Returns the current delivery status of the order product item.
-	 *
-	 * The returned status values are the STAT_* constants from the
-	 * \Aimeos\MShop\Order\Item\Base class
-	 *
-	 * @return integer Delivery status of the product
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the new delivery status of the order product item.
-	 *
-	 * Possible status values are the STAT_* constants from the
-	 * \Aimeos\MShop\Order\Item\Base class
-	 *
-	 * @param integer $value New delivery status of the product
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
-	 */
-	public function setStatus( $value );
 
 	/**
 	 * Returns the value of the attribute item for the ordered product with the given code.

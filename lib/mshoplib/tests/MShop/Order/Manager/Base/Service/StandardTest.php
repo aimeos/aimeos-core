@@ -133,6 +133,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.service.taxrate', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.taxflag', 1 );
 		$expr[] = $search->compare( '==', 'order.base.service.taxvalue', '0.00' );
+		$expr[] = $search->compare( '==', 'order.base.service.position', 0 );
 		$expr[] = $search->compare( '>=', 'order.base.service.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.base.service.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.service.editor', $this->editor );

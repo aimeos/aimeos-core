@@ -739,7 +739,7 @@ class Standard
 			$stmt->bind( 18, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 19, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 20, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 21, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 21, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 22, $date ); // mtime
 			$stmt->bind( 23, $context->getEditor() );
 			$stmt->bind( 24, $item->getTarget() );

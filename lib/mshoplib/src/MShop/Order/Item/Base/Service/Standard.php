@@ -305,6 +305,42 @@ class Standard extends Base implements Iface
 	}
 
 
+	/**
+	 * Returns the position of the service in the order.
+	 *
+	 * @return integer|null Service position in the order from 0-n
+	 */
+	public function getPosition()
+	{
+		if( isset( $this->values['order.base.service.position'] ) ) {
+			return (int) $this->values['order.base.service.position'];
+		}
+	}
+
+
+	/**
+	 * Sets the position of the service within the list of ordered servicees
+	 *
+	 * @param integer|null $value Service position in the order from 0-n or null for resetting the position
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
+	 * @throws \Aimeos\MShop\Order\Exception If the position is invalid
+	 */
+	public function setPosition( $value )
+	{
+		if( $value !== null && $value < 0 ) {
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order service position "%1$s" must be greater than 0', $value ) );
+		}
+
+		if( $value !== $this->getPosition() )
+		{
+			$this->values['order.base.service.position'] = ( $value !== null ? (int) $value : null );
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
@@ -326,6 +362,7 @@ class Standard extends Base implements Iface
 				case 'order.base.service.type': $item = $item->setType( $value ); break;
 				case 'order.base.service.code': $item = $item->setCode( $value ); break;
 				case 'order.base.service.name': $item = $item->setName( $value ); break;
+				case 'order.base.service.position': $item = $item->setPosition( $value ); break;
 				case 'order.base.service.mediaurl': $item = $item->setMediaUrl( $value ); break;
 				case 'order.base.service.price': $this->price = $this->price->setValue( $value ); break;
 				case 'order.base.service.costs': $this->price = $this->price->setCosts( $value ); break;
@@ -354,6 +391,7 @@ class Standard extends Base implements Iface
 		$list['order.base.service.type'] = $this->getType();
 		$list['order.base.service.code'] = $this->getCode();
 		$list['order.base.service.name'] = $this->getName();
+		$list['order.base.service.position'] = $this->getPosition();
 		$list['order.base.service.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.service.price'] = $this->price->getValue();
 		$list['order.base.service.costs'] = $this->price->getCosts();

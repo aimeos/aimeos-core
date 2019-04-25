@@ -630,7 +630,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 6.50, $basket->getPrice()->getCosts() );
 
-		$pos = 1;
+		$pos = 0;
 		$products = $basket->getProducts();
 		$this->assertEquals( 4, count( $products ) );
 
@@ -687,11 +687,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		foreach( $basket->getProducts() as $key => $product )
 		{
-			// key+1 is because of the array_splice() in \Aimeos\MShop\Order\Item\Base\Standard::addProduct()
-			// so it doesn't make sense to hand over the key as second parameter to addProduct() in
-			// \Aimeos\MShop\Order\Manager\Base\Standard::loadFresh() to try to enforce a 1-based numbering
-			$this->assertEquals( $product->getId(), $newProducts[$key + 1]->getId() );
-			$this->assertEquals( $product->getPosition(), $newProducts[$key + 1]->getPosition() );
+			$this->assertEquals( $product->getId(), $newProducts[$key]->getId() );
+			$this->assertEquals( $product->getPosition(), $newProducts[$key]->getPosition() );
 		}
 
 		$newServices = $newBasket->getServices();
@@ -730,7 +727,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getCustomerId(), $basket->getCustomerId() );
 		$this->assertEquals( $basket->getLocale()->getSiteId(), $basket->getSiteId() );
 
-		$pos = 1;
+		$pos = 0;
 		$products = $basket->getProducts();
 
 		$this->assertEquals( 2, count( $products ) );

@@ -18,7 +18,8 @@ namespace Aimeos\MShop\Order\Item\Base\Address;
  * @package MShop
  * @subpackage Order
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Address\Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Address\Iface, \Aimeos\MShop\Common\Item\Position\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
 	 * Returns the original customer address ID.
@@ -49,21 +50,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Address\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
 	public function setBaseId( $value );
-
-	/**
-	 * Returns the type of the address which can be billing or delivery.
-	 *
-	 * @return string Type of the address
-	 */
-	public function getType();
-
-	/**
-	 * Sets the new type of the address which can be billing or delivery.
-	 *
-	 * @param string $type New type of the address
-	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
-	 */
-	public function setType( $type );
 
 	/**
 	 * Copys all data from a given address.

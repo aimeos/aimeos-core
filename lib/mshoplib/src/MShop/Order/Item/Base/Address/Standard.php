@@ -104,6 +104,42 @@ class Standard
 
 
 	/**
+	 * Returns the position of the address in the order.
+	 *
+	 * @return integer|null Address position in the order from 0-n
+	 */
+	public function getPosition()
+	{
+		if( isset( $this->values['order.base.address.position'] ) ) {
+			return (int) $this->values['order.base.address.position'];
+		}
+	}
+
+
+	/**
+	 * Sets the position of the address within the list of ordered addresses
+	 *
+	 * @param integer|null $value Address position in the order from 0-n or null for resetting the position
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
+	 * @throws \Aimeos\MShop\Order\Exception If the position is invalid
+	 */
+	public function setPosition( $value )
+	{
+		if( $value !== null && $value < 0 ) {
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order address position "%1$s" must be greater than 0', $value ) );
+		}
+
+		if( $value !== $this->getPosition() )
+		{
+			$this->values['order.base.address.position'] = ( $value !== null ? (int) $value : null );
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the address type which can be billing or delivery.
 	 *
 	 * @return string Address type
@@ -172,6 +208,7 @@ class Standard
 			{
 				case 'order.base.address.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
 				case 'order.base.address.addressid': !$private ?: $item = $item->setAddressId( $value ); break;
+				case 'order.base.address.position': $item = $item->setPosition( $value ); break;
 				case 'order.base.address.type': $item = $item->setType( $value ); break;
 				default: continue 2;
 			}
@@ -194,6 +231,7 @@ class Standard
 		$list = parent::toArray( $private );
 
 		$list['order.base.address.type'] = $this->getType();
+		$list['order.base.address.position'] = $this->getPosition();
 
 		if( $private === true )
 		{

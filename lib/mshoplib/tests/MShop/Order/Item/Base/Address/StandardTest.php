@@ -44,6 +44,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.address.longitude' => '10.0',
 			'order.base.address.latitude' => '50.0',
 			'order.base.address.languageid' => 'de',
+			'order.base.address.position' => 1,
 			'order.base.address.mtime' => '2011-01-01 00:00:02',
 			'order.base.address.ctime' => '2011-01-01 00:00:01',
 			'order.base.address.editor' => 'unitTestUser'
@@ -475,6 +476,39 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetPosition()
+	{
+		$this->assertEquals( 1, $this->object->getPosition() );
+	}
+
+
+	public function testSetPosition()
+	{
+		$return = $this->object->setPosition( 2 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
+		$this->assertEquals( 2, $this->object->getPosition() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetPositionReset()
+	{
+		$return = $this->object->setPosition( null );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
+		$this->assertEquals( null, $this->object->getPosition() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetPositionInvalid()
+	{
+		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
+		$this->object->setPosition( -1 );
+	}
+
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
@@ -514,6 +548,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.address.id' => 1,
 			'order.base.address.baseid' => 2,
 			'order.base.address.addressid' => 3,
+			'order.base.address.position' => 4,
 			'order.base.address.type' => 'payment',
 		);
 
@@ -523,6 +558,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.address.id'], $object->getId() );
 		$this->assertEquals( $list['order.base.address.baseid'], $object->getBaseId() );
 		$this->assertEquals( $list['order.base.address.addressid'], $object->getAddressId() );
+		$this->assertEquals( $list['order.base.address.position'], $object->getPosition() );
 		$this->assertEquals( $list['order.base.address.type'], $object->getType() );
 	}
 
@@ -556,6 +592,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getWebsite(), $arrayObject['order.base.address.website'] );
 		$this->assertEquals( $this->object->getLongitude(), $arrayObject['order.base.address.longitude'] );
 		$this->assertEquals( $this->object->getLatitude(), $arrayObject['order.base.address.latitude'] );
+		$this->assertEquals( $this->object->getPosition(), $arrayObject['order.base.address.position'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['order.base.address.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['order.base.address.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['order.base.address.editor'] );

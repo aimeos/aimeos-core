@@ -38,9 +38,9 @@ return array(
 								"title", "firstname", "lastname", "address1", "address2",
 								"address3", "postal", "city", "state", "countryid", "langid",
 								"telephone", "email", "telefax", "website", "longitude", "latitude",
-								"mtime", "editor", "siteid", "ctime"
+								"pos", "mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+								?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 							)
 						'
 					),
@@ -52,7 +52,7 @@ return array(
 								"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 								"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 								"telephone" = ?, "email" = ?, "telefax" = ?, "website" = ?,
-								"longitude" = ?, "latitude" = ?, "mtime" = ?, "editor" = ?
+								"longitude" = ?, "latitude" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
@@ -70,8 +70,9 @@ return array(
 								mordbaad."langid" AS "order.base.address.languageid", mordbaad."telephone" AS "order.base.address.telephone",
 								mordbaad."email" AS "order.base.address.email", mordbaad."telefax" AS "order.base.address.telefax",
 								mordbaad."website" AS "order.base.address.website", mordbaad."longitude" AS "order.base.address.longitude",
-								mordbaad."latitude" AS "order.base.address.latitude", mordbaad."mtime" AS "order.base.address.mtime",
-								mordbaad."editor" AS "order.base.address.editor", mordbaad."ctime" AS "order.base.address.ctime"
+								mordbaad."latitude" AS "order.base.address.latitude", mordbaad."pos" AS "order.base.address.position",
+								mordbaad."mtime" AS "order.base.address.mtime", mordbaad."editor" AS "order.base.address.editor",
+								mordbaad."ctime" AS "order.base.address.ctime"
 							FROM "mshop_order_base_address" AS mordbaad
 							:joins
 							WHERE :cond
@@ -80,7 +81,7 @@ return array(
 								mordbaad."firstname", mordbaad."lastname", mordbaad."address1", mordbaad."address2",
 								mordbaad."address3", mordbaad."postal", mordbaad."city", mordbaad."state", mordbaad."countryid",
 								mordbaad."langid", mordbaad."telephone", mordbaad."email", mordbaad."telefax", mordbaad."website",
-								mordbaad."longitude", mordbaad."latitude", mordbaad."mtime", mordbaad."editor", mordbaad."ctime"
+								mordbaad."longitude", mordbaad."latitude", mordbaad."pos", mordbaad."mtime", mordbaad."editor", mordbaad."ctime"
 								/*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
@@ -512,9 +513,9 @@ return array(
 							INSERT INTO "mshop_order_base_service" (
 								"baseid", "servid", "type", "code", "name", "mediaurl",
 								"currencyid", "price", "costs", "rebate", "tax", "taxrate",
-								"taxflag", "mtime", "editor", "siteid", "ctime"
+								"taxflag", "pos", "mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
@@ -524,7 +525,7 @@ return array(
 							SET "baseid" = ?, "servid" = ?, "type" = ?, "code" = ?,
 								"name" = ?, "mediaurl" = ?, "currencyid" = ?, "price" = ?,
 								"costs" = ?, "rebate" = ?, "tax" = ?, "taxrate" = ?,
-								"taxflag" = ?, "mtime" = ?, "editor" = ?
+								"taxflag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
@@ -537,16 +538,17 @@ return array(
 								mordbase."currencyid" AS "order.base.service.currencyid", mordbase."price" AS "order.base.service.price",
 								mordbase."costs" AS "order.base.service.costs", mordbase."rebate" AS "order.base.service.rebate",
 								mordbase."tax" AS "order.base.service.taxvalue", mordbase."taxrate" AS "order.base.service.taxrate",
-								mordbase."taxflag" AS "order.base.service.taxflag", mordbase."mtime" AS "order.base.service.mtime",
-								mordbase."editor" AS "order.base.service.editor", mordbase."ctime" AS "order.base.service.ctime"
+								mordbase."taxflag" AS "order.base.service.taxflag", mordbase."pos" AS "order.base.service.position",
+								mordbase."mtime" AS "order.base.service.mtime", mordbase."editor" AS "order.base.service.editor",
+								mordbase."ctime" AS "order.base.service.ctime"
 							FROM "mshop_order_base_service" AS mordbase
 							:joins
 							WHERE :cond
 							GROUP BY mordbase."id", mordbase."baseid", mordbase."siteid", mordbase."servid",
 								mordbase."type", mordbase."code", mordbase."name", mordbase."mediaurl",
 								mordbase."currencyid", mordbase."price", mordbase."costs", mordbase."rebate",
-								mordbase."tax", mordbase."taxrate", mordbase."taxflag", mordbase."mtime",
-								mordbase."editor", mordbase."ctime" /*-columns*/ , :columns /*columns-*/
+								mordbase."tax", mordbase."taxrate", mordbase."taxflag", mordbase."pos",
+								mordbase."mtime", mordbase."editor", mordbase."ctime" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'

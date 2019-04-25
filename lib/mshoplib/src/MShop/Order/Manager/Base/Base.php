@@ -528,7 +528,7 @@ abstract class Base
 	 */
 	protected function storeProducts( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$position = 1;
+		$position = 0;
 		$manager = $this->getObject()->getSubManager( 'product' );
 		$attrManager = $manager->getSubManager( 'attribute' );
 
@@ -538,7 +538,7 @@ abstract class Base
 			$item->setBaseId( $baseId );
 
 			if( ( $pos = $item->getPosition() ) === null ) {
-				$item->setPosition( $position++ );
+				$item = $item->setPosition( $position++ );
 			} else {
 				$position = ++$pos;
 			}
@@ -559,7 +559,7 @@ abstract class Base
 				$subProduct->setOrderProductId( $productId );
 
 				if( ( $pos = $subProduct->getPosition() ) === null ) {
-					$subProduct->setPosition( $position++ );
+					$subProduct = $subProduct->setPosition( $position++ );
 				} else {
 					$position = ++$pos;
 				}
@@ -587,11 +587,19 @@ abstract class Base
 	 */
 	protected function storeAddresses( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
+		$position = 0;
 		$manager = $this->getObject()->getSubManager( 'address' );
 
 		foreach( $basket->getAddresses() as $type => $list )
 		{
-			foreach( $list as $item ) {
+			foreach( $list as $item )
+			{
+				if( ( $pos = $item->getPosition() ) === null ) {
+					$item = $item->setPosition( $position++ );
+				} else {
+					$position = ++$pos;
+				}
+
 				$manager->saveItem( $item->setBaseId( $basket->getId() ) );
 			}
 		}
@@ -646,12 +654,19 @@ abstract class Base
 	{
 		$manager = $this->getObject()->getSubManager( 'service' );
 		$attrManager = $manager->getSubManager( 'attribute' );
+		$position = 0;
 
 		foreach( $basket->getServices() as $type => $list )
 		{
 			foreach( $list as $item )
 			{
-				$item->setBaseId( $basket->getId() )->setType( $type );
+				if( ( $pos = $item->getPosition() ) === null ) {
+					$item = $item->setPosition( $position++ );
+				} else {
+					$position = ++$pos;
+				}
+
+				$item = $item->setBaseId( $basket->getId() )->setType( $type );
 				$item = $manager->saveItem( $item );
 
 				foreach( $item->getAttributeItems() as $attribute )
