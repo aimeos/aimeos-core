@@ -280,7 +280,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['service.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['service.siteid'] );
