@@ -24,7 +24,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.domain' => 'testDomain',
 			'common.lists.refid' => 'unitId',
 			'common.lists.datestart' => '2005-01-01 00:00:00',
-			'common.lists.dateend' => '2010-12-31 00:00:00',
+			'common.lists.dateend' => '2100-01-01 00:00:00',
 			'common.lists.config' => array( 'cnt' => '40' ),
 			'common.lists.position' => 7,
 			'common.lists.status' => 1,
@@ -136,7 +136,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetDateEnd()
 	{
-		$this->assertEquals( '2010-12-31 00:00:00', $this->object->getDateEnd() );
+		$this->assertEquals( '2100-01-01 00:00:00', $this->object->getDateEnd() );
 	}
 
 
@@ -249,6 +249,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailable()
 	{
+		$this->assertTrue( $this->object->isAvailable() );
+		$this->object->setAvailable( false );
+		$this->assertFalse( $this->object->isAvailable() );
+	}
+
+
+	public function testIsAvailableOnStatus()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
+		$this->object->setStatus( 0 );
+		$this->assertFalse( $this->object->isAvailable() );
+		$this->object->setStatus( -1 );
 		$this->assertFalse( $this->object->isAvailable() );
 	}
 
@@ -323,7 +335,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.domain' => 'testDomain',
 			'common.lists.refid' => 'unitId',
 			'common.lists.datestart' => '2005-01-01 00:00:00',
-			'common.lists.dateend' => '2010-12-31 00:00:00',
+			'common.lists.dateend' => '2100-01-01 00:00:00',
 			'common.lists.config' => array( 'cnt' => '40' ),
 			'common.lists.position' => 7,
 			'common.lists.status' => 1,
