@@ -18,6 +18,7 @@
 		"ext-dom": "*",
 		"ext-fileinfo": "*",
 		"ext-gd": "*",
+		"ext-intl": "*",
 		"ext-json": "*",
 		"ext-mbstring": "*",
 		"ext-pcre": "*",
