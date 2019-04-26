@@ -98,19 +98,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$ds = DIRECTORY_SEPARATOR;
 		$filenames = array( 'notexisting', __DIR__ . $ds . '_testfiles'. $ds . 'template1' );
 
+		$output = $this->object->assign( array( 'quantity' => 1 ) )->render( $filenames );
+		$this->assertEquals( "Number of files: 1 File", $output );
 
-		$this->object->assign( array( 'quantity' => 1 ) );
-		$output = $this->object->render( $filenames );
-
-		$expected = "Number of files: 1 File";
-		$this->assertEquals( $expected, $output );
-
-
-		$this->object->assign( array( 'quantity' => 0 ) );
-		$output = $this->object->render( $filenames );
-
-		$expected = "Number of files: 0 Files";
-		$this->assertEquals( $expected, $output );
+		$output = $this->object->assign( array( 'quantity' => 0 ) )->render( $filenames );
+		$this->assertEquals( "Number of files: 0 Files", $output );
 	}
 
 
@@ -118,18 +110,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->addHelper( 'translate', $this->translate );
 
+		$output = $this->object->assign( ['quantity' => 1] )->render( ['notexisting', 'template1'] );
+		$this->assertEquals( "Number of files: 1 File", $output );
 
-		$this->object->assign( array( 'quantity' => 1 ) );
-		$output = $this->object->render( array( 'notexisting', 'template1' ) );
-
-		$expected = "Number of files: 1 File";
-		$this->assertEquals( $expected, $output );
-
-
-		$this->object->assign( array( 'quantity' => 2 ) );
-		$output = $this->object->render( array( 'notexisting', 'template2' ) );
-
-		$expected = "Number of directories: 2";
-		$this->assertEquals( $expected, $output );
+		$output = $this->object->assign( ['quantity' => 2] )->render( ['notexisting', 'template2'] );
+		$this->assertEquals( "Number of directories: 2", $output );
 	}
 }

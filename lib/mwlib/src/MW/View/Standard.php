@@ -177,10 +177,12 @@ class Standard implements \Aimeos\MW\View\Iface
 	 * This method overwrites already existing key/value pairs set by the magic method.
 	 *
 	 * @param array $values Associative list of key/value pairs
+	 * @return \Aimeos\MW\View\Iface View object for method chaining
 	 */
 	public function assign( array $values )
 	{
 		$this->values = $values;
+		return $this;
 	}
 
 

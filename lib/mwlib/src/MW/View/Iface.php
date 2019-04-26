@@ -87,7 +87,7 @@ interface Iface
 	 *
 	 * @param string $name Name of the view helper as called in the template
 	 * @param \Aimeos\MW\View\Helper\Iface $helper View helper instance
-	 * @return void
+	 * @return \Aimeos\MW\View\Iface View object for method chaining
 	 */
 	public function addHelper( $name, \Aimeos\MW\View\Helper\Iface $helper );
 
@@ -96,7 +96,7 @@ interface Iface
 	 * This method overwrites already existing key/value pairs set by the magic method.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @return void
+	 * @return \Aimeos\MW\View\Iface View object for method chaining
 	 */
 	public function assign( array $values );
 
