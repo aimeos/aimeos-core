@@ -347,6 +347,21 @@ class Standard
 
 
 	/**
+	 * Creates a search critera object
+	 *
+	 * @param boolean $default Add default criteria (optional)
+	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
+	 */
+	public function createSearch( $default = false )
+	{
+		$search = parent::createSearch( $default );
+		$search->setSortations( [$search->sort( '+', 'order.base.address.id' )] );
+
+		return $search;
+	}
+
+
+	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param string[] $ids List of IDs

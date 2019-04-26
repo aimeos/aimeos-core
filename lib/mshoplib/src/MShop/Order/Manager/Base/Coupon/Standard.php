@@ -197,6 +197,21 @@ class Standard
 
 
 	/**
+	 * Creates a search critera object
+	 *
+	 * @param boolean $default Add default criteria (optional)
+	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
+	 */
+	public function createSearch( $default = false )
+	{
+		$search = parent::createSearch( $default );
+		$search->setSortations( [$search->sort( '+', 'order.base.coupon.id' )] );
+
+		return $search;
+	}
+
+
+	/**
 	 * Returns the order coupon item for the given ID.
 	 *
 	 * @param string $id ID of the item that should be retrieved

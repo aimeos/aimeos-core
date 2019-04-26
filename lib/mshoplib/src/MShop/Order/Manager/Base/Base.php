@@ -230,8 +230,6 @@ abstract class Base
 
 		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.coupon.baseid', $baseIds ) );
-		$sort = [$criteria->sort( '+', 'order.base.coupon.baseid' ), $criteria->sort( '+', 'order.base.coupon.code' )];
-		$criteria->setSortations( $sort );
 
 		foreach( $manager->searchItems( $criteria ) as $item )
 		{
@@ -264,11 +262,7 @@ abstract class Base
 
 		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.product.baseid', $baseIds ) );
-		$sort = [$criteria->sort( '-', 'order.base.product.baseid' ), $criteria->sort( '-', 'order.base.product.position' )];
-		$criteria->setSortations( $sort );
-
-		$items = $manager->searchItems( $criteria );
-
+		$items = array_reverse( $manager->searchItems( $criteria ), true );
 
 		$search = $attrManager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.parentid', array_keys( $items ) ) );
@@ -314,6 +308,10 @@ abstract class Base
 			}
 		}
 
+		foreach( $map as $key => $list ) {
+			ksort( $map[$key] );
+		}
+
 		return $map;
 	}
 
@@ -332,8 +330,6 @@ abstract class Base
 
 		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.service.baseid', $baseIds ) );
-		$sort = [$criteria->sort( '+', 'order.base.service.baseid' ), $criteria->sort( '+', 'order.base.service.type' )];
-		$criteria->setSortations( $sort );
 
 		foreach( $manager->searchItems( $criteria ) as $item )
 		{
@@ -491,13 +487,8 @@ abstract class Base
 	 */
 	protected function loadProducts( $id, $fresh )
 	{
-		$map = $this->getProducts( [$id], $fresh );
-
-		if( ( $items = reset( $map ) ) !== false ) {
-			return array_reverse( $items, true );
-		}
-
-		return [];
+		$items = current( $this->getProducts( [$id], $fresh ) );
+		return $items ?: [];
 	}
 
 

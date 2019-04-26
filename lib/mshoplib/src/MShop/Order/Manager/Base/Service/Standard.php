@@ -319,6 +319,21 @@ class Standard
 
 
 	/**
+	 * Creates a search critera object
+	 *
+	 * @param boolean $default Add default criteria (optional)
+	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
+	 */
+	public function createSearch( $default = false )
+	{
+		$search = parent::createSearch( $default );
+		$search->setSortations( [$search->sort( '+', 'order.base.service.id' )] );
+
+		return $search;
+	}
+
+
+	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param string[] $ids List of IDs
@@ -945,7 +960,6 @@ class Standard
 		$manager = $this->getObject()->getSubManager( 'attribute' );
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.service.attribute.parentid', $ids ) );
-		$search->setSortations( array( $search->sort( '+', 'order.base.service.attribute.code' ) ) );
 
 		$result = [];
 		foreach( $manager->searchItems( $search ) as $item ) {

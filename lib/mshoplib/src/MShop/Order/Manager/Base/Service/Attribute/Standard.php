@@ -225,6 +225,21 @@ class Standard
 
 
 	/**
+	 * Creates a search critera object
+	 *
+	 * @param boolean $default Add default criteria (optional)
+	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
+	 */
+	public function createSearch( $default = false )
+	{
+		$search = parent::createSearch( $default );
+		$search->setSortations( [$search->sort( '+', 'order.base.service.attribute.id' )] );
+
+		return $search;
+	}
+
+
+	/**
 	 * Returns the attribute object for the given ID.
 	 *
 	 * @param string $id Order service attribute ID

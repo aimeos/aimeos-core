@@ -387,6 +387,21 @@ class Standard
 
 
 	/**
+	 * Creates a search critera object
+	 *
+	 * @param boolean $default Add default criteria (optional)
+	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
+	 */
+	public function createSearch( $default = false )
+	{
+		$search = parent::createSearch( $default );
+		$search->setSortations( [$search->sort( '+', 'order.base.product.id' )] );
+
+		return $search;
+	}
+
+
+	/**
 	 * Returns order base product for the given product ID.
 	 *
 	 * @param string $id Product ids to create product object for
@@ -1017,7 +1032,6 @@ class Standard
 		$manager = $this->getSubmanager( 'attribute' );
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.parentid', $ids ) );
-		$search->setSortations( array( $search->sort( '+', 'order.base.product.attribute.code' ) ) );
 
 		$result = [];
 		foreach( $manager->searchItems( $search ) as $item ) {
