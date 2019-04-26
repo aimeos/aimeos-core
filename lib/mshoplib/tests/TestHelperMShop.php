@@ -135,6 +135,7 @@ class TestHelperMShop
 	protected static function createView( \Aimeos\MW\Config\Iface $config )
 	{
 		$tmplpaths = array_merge_recursive(
+			self::getAimeos()->getCustomPaths( 'lib/custom/templates' ),
 			self::getAimeos()->getCustomPaths( 'client/html/templates' ),
 			self::getAimeos()->getCustomPaths( 'controller/jobs/templates' )
 		);
@@ -154,7 +155,6 @@ class TestHelperMShop
 		$helper = new \Aimeos\MW\View\Helper\Date\Standard( $view, 'Y-m-d' );
 		$view->addHelper( 'date', $helper );
 
-		$config = new \Aimeos\MW\Config\Decorator\Protect( $config, array( 'controller/jobs', 'client/html' ) );
 		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
 

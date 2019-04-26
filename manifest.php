@@ -33,4 +33,9 @@ return array(
 	'setup' => array(
 		'lib/mshoplib/setup',
 	),
+	'custom' => array(
+		'lib/custom/templates' => array(
+			'lib/mshoplib/templates',
+		),
+	),
 );
