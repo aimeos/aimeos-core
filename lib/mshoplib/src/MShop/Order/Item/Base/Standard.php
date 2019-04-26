@@ -406,9 +406,9 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		{
 			switch( $key )
 			{
-				case 'order.base.id': !$private ?: $item = $item->setId( $value ); break;
-				case 'order.base.customerid': !$private ?: $item = $item->setCustomerId( $value ); break;
-				case 'order.base.languageid': !$private ?: $locale = $locale->setLanguageId( $value ); break;
+				case 'order.base.id': $item = $item->setId( $value ); break;
+				case 'order.base.customerid': $item = $item->setCustomerId( $value ); break;
+				case 'order.base.languageid': $locale = $locale->setLanguageId( $value ); break;
 				case 'order.base.customerref': $item = $item->setCustomerReference( $value ); break;
 				case 'order.base.comment': $item = $item->setComment( $value ); break;
 				default: continue 2;
@@ -433,8 +433,9 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$locale = $this->getLocale();
 
 		$list = array(
-			'order.base.customerid' => $this->getCustomerId(),
+			'order.base.id' => $this->getId(),
 			'order.base.sitecode' => $this->getSiteCode(),
+			'order.base.customerid' => $this->getCustomerId(),
 			'order.base.languageid' => $locale->getLanguageId(),
 			'order.base.currencyid' => $price->getCurrencyId(),
 			'order.base.price' => $price->getValue(),
@@ -448,7 +449,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 		if( $private === true )
 		{
-			$list['order.base.id'] = $this->getId();
 			$list['order.base.siteid'] = $this->getSiteId();
 			$list['order.base.mtime'] = $this->getTimeModified();
 			$list['order.base.ctime'] = $this->getTimeCreated();
