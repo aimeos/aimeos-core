@@ -52,9 +52,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
 		$order = $manager->createItem();
 
-		$this->object->process( $order );
+		$result = $this->object->process( $order );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getDeliveryStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $result->getDeliveryStatus() );
 	}
 
 
@@ -63,9 +63,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
 		$order = $manager->createItem();
 
-		$this->object->processBatch( [$order] );
+		$result = $this->object->processBatch( [$order] );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getDeliveryStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, current( $result )->getDeliveryStatus() );
 	}
 
 

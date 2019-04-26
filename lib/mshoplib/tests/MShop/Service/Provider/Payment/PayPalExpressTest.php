@@ -104,6 +104,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $result['paypalexpress.ApiSignature'] );
 	}
 
+
 	public function testIsImplemented()
 	{
 		$this->assertTrue( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CANCEL ) );
