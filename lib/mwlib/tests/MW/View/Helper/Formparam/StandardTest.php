@@ -10,9 +10,6 @@
 namespace Aimeos\MW\View\Helper\Formparam;
 
 
-/**
- * Test class for \Aimeos\MW\View\Helper\Formparam\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	public function testTransform()

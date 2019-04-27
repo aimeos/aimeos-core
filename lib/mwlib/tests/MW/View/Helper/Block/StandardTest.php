@@ -9,9 +9,6 @@
 namespace Aimeos\MW\View\Helper\Block;
 
 
-/**
- * Test class for \Aimeos\MW\View\Helper\Block\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;

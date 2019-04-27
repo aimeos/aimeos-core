@@ -1,12 +1,14 @@
 <?php
 
-namespace Aimeos\MW\View\Helper\Request;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
+
+
+namespace Aimeos\MW\View\Helper\Request;
+
+
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
