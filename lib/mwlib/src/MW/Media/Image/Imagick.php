@@ -120,4 +120,22 @@ class Imagick
 
 		return $this;
 	}
+	
+	/**
+	 * Crop-scales the image to the given width and height.
+	 *
+	 * @param integer $width New width of the image
+	 * @param integer $height New height of the image
+	 * @return \Aimeos\MW\Media\Iface Self object for method chaining
+	 */
+	public function cropscale( $width, $height )
+	{
+		try {
+			$this->image->cropThumbnailImage( $width, $height );
+		} catch( \Exception $e ) {
+			throw new \Aimeos\MW\Media\Exception( $e->getMessage() );
+		}
+
+		return $this;
+	}
 }

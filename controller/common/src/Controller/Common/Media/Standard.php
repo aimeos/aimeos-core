@@ -469,7 +469,31 @@ class Standard
 		 * @category User
 		 */
 		$maxheight = $config->get( 'controller/common/media/standard/' . $type . '/maxheight', null );
+		
+		/** controller/common/media/standard/preview/scalemode
+		 * Scale mode of the preview images
+		 *
+		 * The preview image files can either be scaled or cropped. If scaled,
+		 * the width/height ratio will be maintained in the thumbnail image.
+		 * If cropped, the image will be scaled so that max width and max height
+		 * are matched and cropped to the desired (max) width/height afterwards.
+		 * This is useful e.g. for square thumbnail pictures with maximum quality
+		 * and minimum file size.
+		 *
+		 * Only available with Imagick algorithm implementation. Needs values for
+		 * max height and width.
+		 *
+		 * @param string Scale mode, either "scale" or "crop"
+		 * @since 2018.10
+		 * @category Developer
+		 * @category User
+		 */
+		$scalemode = $config->get( 'controller/common/media/standard/' . $type . '/scalemode', null );
 
+		if( $scalemode && $scalemode == 'crop' && method_exists( $media, 'cropscale' ) && $maxheight && $maxwidth ) {
+			return $media->cropscale( $maxwidth, $maxheight );
+		}
+		
 		if( $maxheight || $maxwidth ) {
 			return $media->scale( $maxwidth, $maxheight );
 		}
