@@ -658,6 +658,12 @@ class Standard
 		$texts = $names = $urls = [];
 		$date = date( 'Y-m-d H:i:s' );
 		$siteid = $this->getContext()->getLocale()->getSiteId();
+		
+		$path = 'mshop/index/manager/text/content/list';
+		
+		if ( $this->getContext()->getConfig()->get( $path ) !== null ) {
+		    $includeList = array_values( $this->getContext()->getConfig()->get( $path ) );
+		}
 
 		foreach( $item->getRefItems( 'text' ) as $refItem )
 		{
@@ -665,8 +671,11 @@ class Standard
 			$langId = $refItem->getLanguageId();
 
 			isset( $texts[$langId] ) ?: $texts[$langId] = $item->getCode();
-			$texts[$langId] .= ' ' . $content;
-
+			
+			if ( !isset($includeList) || in_array( $refItem->getType(), $includeList) ) {
+			    $texts[$langId] .= ' ' . $content;
+			}
+			
 			switch( $refItem->getType() ) {
 				case 'url':
 					$urls[$langId] = $content; break;
