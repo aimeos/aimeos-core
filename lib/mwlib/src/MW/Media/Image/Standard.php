@@ -156,11 +156,27 @@ class Standard
 		}
 		elseif( $width && $height )
 		{
-			$ratio = ( $w < $h ? $w / $width : $h / $height );
-			$newHeigth = $height * $ratio;
-			$newWidth = $width * $ratio;
+			$ratio = ( $w < $h ? $width / $w : $height / $h );
+			$newHeigth = $h * $ratio;
+			$newWidth = $w * $ratio;
 		}
 
+		$this->resize( $newWidth, $newHeigth, $width, $height, $fit );
+		return $this;
+	}
+
+
+	/**
+	 * Resizes and crops the image if necessary
+	 *
+	 * @param integer $newWidth Width of the image before cropping
+	 * @param integer $newHeigth Height of the image before cropping
+	 * @param integer $width New width of the image
+	 * @param integer $height New height of the image
+	 * @param boolean $fit True to keep the width/height ratio of the image
+	 */
+	protected function resize( $newWidth, $newHeigth, $width, $height, $fit )
+	{
 		if( ( $result = imagescale( $this->image, $newWidth, $newHeigth, IMG_BICUBIC ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Unable to scale image' );
 		}
@@ -173,16 +189,16 @@ class Standard
 
 		if( $fit == false && ( $x0 || $y0 ) )
 		{
-			$rect = ['x' => $x0, 'y' => $y0, 'width' => $width, 'height' => $height];
+			if( ( $newImage = imagecreatetruecolor( $width, $height ) ) === false ) {
+				throw new \Aimeos\MW\Media\Exception( 'Unable to create new image' );
+			}
 
-			if( ( $result = imagecrop( $this->image, $rect ) ) === false ) {
+			if( imagecopy( $newImage, $this->image, 0, 0, $x0, $y0, $width, $height ) === false ) {
 				throw new \Aimeos\MW\Media\Exception( 'Unable to crop image' );
 			}
 
 			imagedestroy( $this->image );
-			$this->image = $result;
+			$this->image = $newImage;
 		}
-
-		return $this;
 	}
 }
