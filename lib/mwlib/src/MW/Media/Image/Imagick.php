@@ -100,23 +100,31 @@ class Imagick
 	 */
 	public function scale( $width, $height, $fit = true )
 	{
-		try {
-			if( $fit === false && $width && $height ) {
-				$this->image->cropThumbnailImage( $width, $height );
-				$this->image->setImagePage(0, 0, 0, 0); // see https://www.php.net/manual/en/imagick.cropthumbnailimage.php#106710
-			} else {
+		try
+		{
+			if( $fit == true )
+			{
 				$w = $this->image->getImageWidth();
 				$h = $this->image->getImageHeight();
-
 				list( $width, $height ) = $this->getSizeFitted( $w, $h, $width, $height );
 
 				if( $w <= $width && $h <= $height ) {
 					return $this;
 				}
-
-				$this->image->resizeImage( $width, $height, \Imagick::FILTER_CUBIC, 0.8 );
 			}
-		} catch( \Exception $e ) {
+			elseif( $width && $height )
+			{
+				$this->image->cropThumbnailImage( $width, $height );
+				// see https://www.php.net/manual/en/imagick.cropthumbnailimage.php#106710
+				$this->image->setImagePage( 0, 0, 0, 0 );
+
+				return $this;
+			}
+
+			$this->image->resizeImage( $width, $height, \Imagick::FILTER_CUBIC, 0.8 );
+		}
+		catch( \Exception $e )
+		{
 			throw new \Aimeos\MW\Media\Exception( $e->getMessage() );
 		}
 
