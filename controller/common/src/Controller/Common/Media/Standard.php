@@ -470,32 +470,41 @@ class Standard
 		 */
 		$maxheight = $config->get( 'controller/common/media/standard/' . $type . '/maxheight', null );
 		
-		/** controller/common/media/standard/preview/scalemode
-		 * Scale mode of the preview images
+		/** controller/common/media/standard/files/force-size
+		 * Force exact image size for the uploaded images
 		 *
-		 * The preview image files can either be scaled or cropped. If scaled,
-		 * the width/height ratio will be maintained in the thumbnail image.
-		 * If cropped, the image will be scaled so that max width and max height
-		 * are matched and cropped to the desired (max) width/height afterwards.
-		 * This is useful e.g. for square thumbnail pictures with maximum quality
-		 * and minimum file size.
+		 * This configuration forces the output image to have exact the width
+		 * and height specified in maxwidth / maxheight configuration options.
 		 *
-		 * Only available with Imagick algorithm implementation. Needs values for
-		 * max height and width.
+		 * With Imagick algorithm implementation, the image will be cropped with
+		 * center gravity, in the default implementation the image will be
+		 * stretched.
 		 *
-		 * @param string Scale mode, either "scale" or "crop"
+		 * @param integer Zero to disable the feature, one to enable it
 		 * @since 2018.10
 		 * @category Developer
 		 * @category User
 		 */
-		$scalemode = $config->get( 'controller/common/media/standard/' . $type . '/scalemode', null );
-
-		if( $scalemode && $scalemode == 'crop' && method_exists( $media, 'cropscale' ) && $maxheight && $maxwidth ) {
-			return $media->cropscale( $maxwidth, $maxheight );
-		}
 		
+		/** controller/common/media/standard/preview/force-size
+		 * Force exact image size for the preview images
+		 *
+		 * This configuration forces the output image to have exact the width
+		 * and height specified in maxwidth / maxheight configuration options.
+		 *
+		 * With Imagick algorithm implementation, the image will be cropped with
+		 * center gravity, in the default implementation the image will be
+		 * stretched.
+		 *
+		 * @param integer Zero to disable the feature, one to enable it
+		 * @since 2018.10
+		 * @category Developer
+		 * @category User
+		 */
+		$fit = $config->get( 'controller/common/media/standard/' . $type . '/force-size', null ) ? false : true;
+
 		if( $maxheight || $maxwidth ) {
-			return $media->scale( $maxwidth, $maxheight );
+			return $media->scale( $maxwidth, $maxheight, $fit );
 		}
 
 		return $media;
