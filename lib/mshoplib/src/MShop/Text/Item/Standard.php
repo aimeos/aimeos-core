@@ -32,7 +32,7 @@ class Standard
 	 * Initializes the text item object with the given values.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = [], array $listItems = [], array $refItems = [] )

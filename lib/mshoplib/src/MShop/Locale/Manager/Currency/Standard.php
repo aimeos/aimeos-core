@@ -350,7 +350,7 @@ class Standard
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param integer|null &$total Number of items that are available in total
-	 * @return \Aimeos\MShop\Locale\Currency\Item\Iface[] List of locale currency items
+	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface[] List of locale currency items
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{

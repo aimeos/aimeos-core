@@ -88,7 +88,7 @@ trait Traits
 	 * @param string[] $ids List of IDs
 	 * @param string[]|null $domains List of domain names whose referenced items should be attached or null for all
 	 * @param string $prefix Domain prefix
-	 * @return \Aimeos\MShop\Common\Lists\Item\Iface[] List of list items
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface[] List of list items
 	 */
 	protected function getListItems( array $ids, $domains, $prefix )
 	{

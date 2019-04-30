@@ -33,7 +33,7 @@ class Standard
 	 * Initializes the item object.
 	 *
 	 * @param array $values Parameter for initializing the basic properties
-	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = [], array $listItems = [], array $refItems = [] )
