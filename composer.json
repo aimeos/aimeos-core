@@ -13,7 +13,7 @@
 	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"require": {
-		"php": "^5.4.0||^7.0.4",
+		"php": "^5.6.12||^7.0.4",
 		"ext-curl": "*",
 		"ext-dom": "*",
 		"ext-fileinfo": "*",

@@ -22,9 +22,7 @@ class Standard
 	extends \Aimeos\MW\Media\Image\Base
 	implements \Aimeos\MW\Media\Image\Iface
 {
-	private $info;
 	private $image;
-	private $origimage;
 	private $options;
 
 
@@ -44,10 +42,6 @@ class Standard
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'The image type isn\'t supported by GDlib.') );
 		}
 
-		if( ( $this->info = getimagesizefromstring( $content ) ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to retrieve image size' ) );
-		}
-
 		if( imagealphablending( $this->image, false ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagealphablending)') );
 		}
@@ -61,10 +55,6 @@ class Standard
 	 */
 	public function __destruct()
 	{
-		if( $this->origimage ) {
-			imagedestroy( $this->origimage );
-		}
-
 		if( $this->image ) {
 			imagedestroy( $this->image );
 		}
@@ -150,22 +140,48 @@ class Standard
 	 */
 	public function scale( $width, $height, $fit = true )
 	{
+		$w = imagesx( $this->image );
+		$h = imagesy( $this->image );
+
+		$newWidth = $width;
+		$newHeigth = $height;
+
 		if( $fit === true )
 		{
-			list( $width, $height ) = $this->getSizeFitted( $this->info[0], $this->info[1], $width, $height );
+			list( $newWidth, $newHeigth ) = $this->getSizeFitted( $w, $h, $width, $height );
 
-			if( $this->info[0] <= $width && $this->info[1] <= $height ) {
+			if( $w <= $newWidth && $h <= $newHeigth ) {
 				return $this;
 			}
 		}
+		elseif( $width && $height )
+		{
+			$ratio = ( $w < $h ? $w / $width : $h / $height );
+			$newHeigth = $height * $ratio;
+			$newWidth = $width * $ratio;
+		}
 
-		if( ( $result = imagescale( $this->image, $width, $height, IMG_BICUBIC ) ) === false ) {
+		if( ( $result = imagescale( $this->image, $newWidth, $newHeigth, IMG_BICUBIC ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Unable to scale image' );
 		}
 
+		imagedestroy( $this->image );
 		$this->image = $result;
-		$this->info[0] = $width;
-		$this->info[1] = $height;
+
+		$x0 = $newWidth / 2 - $width / 2;
+		$y0 = $newHeigth / 2 - $height / 2;
+
+		if( $fit == false && ( $x0 || $y0 ) )
+		{
+			$rect = ['x' => $x0, 'y' => $y0, 'width' => $width, 'height' => $height];
+
+			if( ( $result = imagecrop( $this->image, $rect ) ) === false ) {
+				throw new \Aimeos\MW\Media\Exception( 'Unable to crop image' );
+			}
+
+			imagedestroy( $this->image );
+			$this->image = $result;
+		}
 
 		return $this;
 	}
