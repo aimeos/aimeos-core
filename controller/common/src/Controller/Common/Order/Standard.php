@@ -225,7 +225,7 @@ class Standard
 	 *
 	 * @param array $prodCodes List of product codes
 	 * @param string $stockType Stock type code the stock items must belong to
-	 * @return \Aimeos\MShop\Product\Item\Stock\Iface[] Associative list of stock IDs as keys and stock items as values
+	 * @return \Aimeos\MShop\Stock\Item\Iface[] Associative list of stock IDs as keys and stock items as values
 	 */
 	protected function getStockItems( array $prodCodes, $stockType )
 	{

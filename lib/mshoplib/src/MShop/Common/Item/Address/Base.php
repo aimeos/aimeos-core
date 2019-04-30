@@ -880,7 +880,7 @@ abstract class Base
 	 * Checks the given address salutation is valid
 	 *
 	 * @param string $value Address salutation defined in \Aimeos\MShop\Common\Item\Address\Base
-	 * @throws \Aimeos\MShop\Common\Exception If salutation is invalid
+	 * @throws \Aimeos\MShop\Exception If salutation is invalid
 	 */
 	protected function checkSalutation( $value )
 	{

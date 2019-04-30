@@ -38,7 +38,7 @@ class Standard
 	 * Initializes the media item object.
 	 *
 	 * @param array $values Initial values of the media item
-	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
 	 */

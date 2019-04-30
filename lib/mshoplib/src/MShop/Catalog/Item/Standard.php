@@ -36,7 +36,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Tree\Node\Iface $node Tree node
 	 * @param \Aimeos\MShop\Catalog\Item\Iface[] $children List of children of the item
-	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
 	public function __construct( \Aimeos\MW\Tree\Node\Iface $node, array $children = [],

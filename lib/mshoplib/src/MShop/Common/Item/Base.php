@@ -291,7 +291,7 @@ abstract class Base
 	 * @param string $old Current ID of the item
 	 * @param string $new New ID which should be set in the item
 	 * @return string Value of the new ID
-	 * @throws \Aimeos\MShop\Common\Exception if the ID is not null or not the same as the old one
+	 * @throws \Aimeos\MShop\Exception if the ID is not null or not the same as the old one
 	 */
 	public static function checkId( $old, $new )
 	{

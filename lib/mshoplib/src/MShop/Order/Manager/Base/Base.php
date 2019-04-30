@@ -443,7 +443,7 @@ abstract class Base
 	 *
 	 * @param string $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return \Aimeos\MShop\Order\Item\Address\Iface[] List of order address items
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface[] List of order address items
 	 */
 	protected function loadAddresses( $id, $fresh )
 	{
@@ -464,7 +464,7 @@ abstract class Base
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
 	 * @param array $products Multi-dimensional associative list of order base IDs as keys and order product
 	 *	IDs/items pairs in reversed order as values
-	 * @return \Aimeos\MShop\Order\Item\Product\Iface[] Associative list of coupon codes as keys and items as values
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] Associative list of coupon codes as keys and items as values
 	 */
 	protected function loadCoupons( $id, $fresh, array $products )
 	{
@@ -483,7 +483,7 @@ abstract class Base
 	 *
 	 * @param string $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return \Aimeos\MShop\Order\Item\Product\Iface[] List of product items
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of product items
 	 */
 	protected function loadProducts( $id, $fresh )
 	{
@@ -497,7 +497,7 @@ abstract class Base
 	 *
 	 * @param string $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface[] List of order service items
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface[] List of order service items
 	 */
 	protected function loadServices( $id, $fresh )
 	{

@@ -45,7 +45,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @param string $name Name of the method
 	 * @param array $param List of method parameter
-	 * @throws \Aimeos\MShop\Manager\Exception If method call failed
+	 * @throws \Aimeos\MShop\Exception If method call failed
 	 */
 	public function __call( $name, array $param )
 	{
@@ -248,7 +248,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection used to insert the new record
 	 * @param string $cfgpath Configuration path to the SQL statement for retrieving the new ID of the last inserted record
 	 * @return string ID of the last record that was inserted by using the given connection
-	 * @throws \Aimeos\MShop\Common\Exception if there's no ID of the last record available
+	 * @throws \Aimeos\MShop\Exception if there's no ID of the last record available
 	 */
 	protected function newId( \Aimeos\MW\DB\Connection\Iface $conn, $cfgpath )
 	{

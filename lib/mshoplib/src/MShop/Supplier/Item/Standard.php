@@ -37,7 +37,7 @@ class Standard
 	 * Initializes the supplier item object
 	 *
 	 * @param array $values List of attributes that belong to the supplier item
-	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
 	public function __construct( array $values = [], array $listItems = [], array $refItems = [], $addresses = [] )
