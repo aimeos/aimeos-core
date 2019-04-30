@@ -468,42 +468,38 @@ class Standard
 		 * @category User
 		 */
 		$maxheight = $config->get( 'controller/common/media/standard/' . $type . '/maxheight', null );
-		
+
 		/** controller/common/media/standard/files/force-size
 		 * Force exact image size for the uploaded images
 		 *
 		 * This configuration forces the output image to have exact the width
-		 * and height specified in maxwidth / maxheight configuration options.
+		 * and height specified in maxwidth / maxheight configuration options
+		 * by scaling and cropping the original image.
 		 *
-		 * With Imagick algorithm implementation, the image will be cropped with
-		 * center gravity, in the default implementation the image will be
-		 * stretched.
-		 *
-		 * @param integer Zero to disable the feature, one to enable it
+		 * @param integer True to enable the feature, false to disable it
 		 * @since 2018.10
 		 * @category Developer
 		 * @category User
+		 * @see controller/common/media/standard/preview/force-size
 		 */
-		
+
 		/** controller/common/media/standard/preview/force-size
 		 * Force exact image size for the preview images
 		 *
 		 * This configuration forces the output image to have exact the width
-		 * and height specified in maxwidth / maxheight configuration options.
+		 * and height specified in maxwidth / maxheight configuration options
+		 * by scaling and cropping the original image.
 		 *
-		 * With Imagick algorithm implementation, the image will be cropped with
-		 * center gravity, in the default implementation the image will be
-		 * stretched.
-		 *
-		 * @param integer Zero to disable the feature, one to enable it
+		 * @param integer True to enable the feature, false to disable it
 		 * @since 2018.10
 		 * @category Developer
 		 * @category User
+		 * @see controller/common/media/standard/files/force-size
 		 */
-		$fit = $config->get( 'controller/common/media/standard/' . $type . '/force-size', null ) ? false : true;
+		$fit = (bool) $config->get( 'controller/common/media/standard/' . $type . '/force-size', false );
 
 		if( $maxheight || $maxwidth ) {
-			return $media->scale( $maxwidth, $maxheight, $fit );
+			return $media->scale( $maxwidth, $maxheight, !$fit );
 		}
 
 		return $media;
