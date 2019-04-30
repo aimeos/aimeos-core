@@ -90,11 +90,11 @@ abstract class Base
 		$this->products = $products;
 
 		foreach( $addresses as $address ) {
-			$this->addresses[$address->getType()][] = $address;
+			$this->addresses[$address->getType()][$address->getPosition()] = $address;
 		}
 
 		foreach( $services as $service ) {
-			$this->services[$service->getType()][$service->getServiceId()] = $service;
+			$this->services[$service->getType()][$service->getPosition()] = $service;
 		}
 	}
 
@@ -555,7 +555,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given domain
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @param integer|null $position Position of the address in the list to overwrite
+	 * @param integer|null $position Position of the service in the list to overwrite
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function addService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type, $position = null )
@@ -585,7 +585,7 @@ abstract class Base
 	 * Deletes an order service from the basket
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @param integer|null $position Position of the address in the list to overwrite
+	 * @param integer|null $position Position of the service in the list to delete
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function deleteService( $type, $position = null )
@@ -614,23 +614,17 @@ abstract class Base
 	 * Returns the order services depending on the given type
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @param string|null $code Code of the service item that should be returned
+	 * @param integer|null $position Position of the service in the list to retrieve
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface[]|\Aimeos\MShop\Order\Item\Base\Service\Iface
 	 * 	Order service item or list of items for the requested type
-	 * @throws \Aimeos\MShop\Order\Exception If no service for the given type and code is found
+	 * @throws \Aimeos\MShop\Order\Exception If no service for the given type and position is found
 	 */
-	public function getService( $type, $code = null )
+	public function getService( $type, $position = null )
 	{
-		if( $code !== null )
+		if( $position !== null )
 		{
-			if( isset( $this->services[$type] ) )
-			{
-				foreach( $this->services[$type] as $service )
-				{
-					if( $service->getCode() === $code ) {
-						return $service;
-					}
-				}
+			if( isset( $this->services[$type][$position] ) ) {
+				return $this->services[$type][$position];
 			}
 
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Service not available' ) );

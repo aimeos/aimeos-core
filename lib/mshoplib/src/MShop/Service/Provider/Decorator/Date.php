@@ -89,7 +89,7 @@ class Date
 		{
 			$days = $this->getConfigValue( 'date.minimumdays', 0 );
 			$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
-			$service = $basket->getService( $type, $this->getServiceItem()->getCode() );
+			$service = $this->getBasketService( $basket, $type, $this->getServiceItem()->getCode() );
 
 			if( ( $value = $service->getAttribute( 'date.value', 'delivery' ) ) == '' ) {
 				$feconfig['date.value']['default'] = date( 'Y-m-d', time() + 86400 * $days );
@@ -97,7 +97,7 @@ class Date
 				$feconfig['date.value']['default'] = $value;
 			}
 		}
-		catch( \Aimeos\MShop\Order\Exception $e ) {} // If service isn't available
+		catch( \Aimeos\MShop\Service\Exception $e ) {} // If service isn't available
 
 		return array_merge( $this->getProvider()->getConfigFE( $basket ), $this->getConfigItems( $feconfig ) );
 	}

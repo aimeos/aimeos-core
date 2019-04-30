@@ -353,6 +353,28 @@ abstract class Base
 
 
 	/**
+	 * Returns the order service matching the given code from the basket
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
+	 * @param string $code Code of the service item that should be returned
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item
+	 * @throws \Aimeos\MShop\Order\Exception If no service for the given type and code is found
+	 */
+	protected function getBasketService( \Aimeos\MShop\Order\Item\Base\Iface $basket, $type, $code )
+	{
+		foreach( $basket->getService( $type ) as $service )
+		{
+			if( $service->getCode() === $code ) {
+				return $service;
+			}
+		}
+
+		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Service not available' ) );
+	}
+
+
+	/**
 	 * Returns the first object of the decorator stack
 	 *
 	 * @return \Aimeos\MShop\Service\Provider\Iface First object of the decorator stack

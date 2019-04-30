@@ -386,7 +386,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->setServices( $this->services );
 
-		$service = $this->object->getService( 'payment', 'testpay' );
+		$service = $this->object->getService( 'payment', 0 );
 		$this->assertEquals( 'testpay', $service->getCode() );
 	}
 
@@ -394,7 +394,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testGetServiceException()
 	{
 		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
-		$this->object->getService( 'payment', 'invalid' );
+		$this->object->getService( 'payment', 100 );
 	}
 
 

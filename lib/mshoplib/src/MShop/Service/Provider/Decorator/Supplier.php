@@ -161,7 +161,7 @@ class Supplier
 		try
 		{
 			$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
-			$service = $basket->getService( $type, $this->getServiceItem()->getCode() );
+			$service = $this->getBasketService( $basket, $type, $this->getServiceItem()->getCode() );
 
 			if( ( $value = $service->getAttribute( 'supplier.code', 'delivery' ) ) != ''
 				&& isset( $feconfig['supplier.code']['default'][$value] )
@@ -172,7 +172,7 @@ class Supplier
 				$feconfig['supplier.code']['default'] = [$value => $address] + $feconfig['supplier.code']['default'];
 			}
 		}
-		catch( \Aimeos\MShop\Order\Exception $e ) {} // If service isn't available
+		catch( \Aimeos\MShop\Service\Exception $e ) {} // If service isn't available
 
 		return array_merge( $this->getProvider()->getConfigFE( $basket ), $this->getConfigItems( $feconfig ) );
 	}

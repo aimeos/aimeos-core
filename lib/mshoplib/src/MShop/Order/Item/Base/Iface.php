@@ -148,7 +148,8 @@ interface Iface
 	 *
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
 	 * @param integer|null $position Address position in list of addresses
-	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface[]|\Aimeos\MShop\Order\Item\Base\Address\Iface Order address item or list of
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface[]|\Aimeos\MShop\Order\Item\Base\Address\Iface
+	 * 	Order address item or list of address items for the requested type
 	 */
 	public function getAddress( $type, $position = null );
 
@@ -267,14 +268,15 @@ interface Iface
 	public function deleteService( $type, $position = null );
 
 	/**
-	 * Returns the delivery or payment service depending on the given type.
+	 * Returns the order services depending on the given type
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @param string|null $code Code of the service item that should be returned
+	 * @param integer|null $position Position of the service in the list to retrieve
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface[]|\Aimeos\MShop\Order\Item\Base\Service\Iface
 	 * 	Order service item or list of items for the requested type
+	 * @throws \Aimeos\MShop\Order\Exception If no service for the given type and position is found
 	 */
-	public function getService( $type, $code = null );
+	public function getService( $type, $position = null );
 
 	/**
 	 * Returns all services (delivery, payment, etc.) attached to the shopping basket.

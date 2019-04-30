@@ -345,7 +345,7 @@ abstract class Base
 				$item->setId( null );
 			}
 
-			$map[$item->getBaseId()][$item->getServiceId()] = $item;
+			$map[$item->getBaseId()][] = $item;
 		}
 
 		return $map;

@@ -108,13 +108,13 @@ class Time
 		try
 		{
 			$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
-			$service = $basket->getService( $type, $this->getServiceItem()->getCode() );
+			$service = $this->getBasketService( $basket, $type, $this->getServiceItem()->getCode() );
 
 			if( ( $value = $service->getAttribute( 'time.hourminute', 'delivery' ) ) != '' ) {
 				$feconfig['time.hourminute']['default'] = $value;
 			}
 		}
-		catch( \Aimeos\MShop\Order\Exception $e ) {} // If service isn't available
+		catch( \Aimeos\MShop\Service\Exception $e ) {} // If service isn't available
 
 		return array_merge( $this->getProvider()->getConfigFE( $basket ), $this->getConfigItems( $feconfig ) );
 	}

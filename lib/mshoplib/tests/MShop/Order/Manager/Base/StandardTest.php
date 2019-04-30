@@ -695,8 +695,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		foreach( $basket->getServices() as $key => $list )
 		{
-			foreach( $list as $service ) {
-				$this->assertEquals( $service->getId(), $newServices[$key][$service->getServiceId()]->getId() );
+			foreach( $list as $pos => $service ) {
+				$this->assertEquals( $service->getId(), $newServices[$key][$pos]->getId() );
 			}
 		}
 	}
