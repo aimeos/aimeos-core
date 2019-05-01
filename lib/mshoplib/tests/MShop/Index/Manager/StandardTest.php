@@ -165,29 +165,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$cntPriceA = $this->getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
 		$cntTextA = $this->getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
 
-
-		$this->object->deleteItem( $item->getId() );
-
-		$cntAttributeB = $this->getValue( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
-		$cntCatalogB = $this->getValue( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
-		$cntPriceB = $this->getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
-		$cntTextB = $this->getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
-
-
-		// recreate index for CNE
-		$result = $this->object->saveItem( $item );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $result );
-
-		$this->assertEquals( 8, $cntAttributeA );
-		$this->assertEquals( 5, $cntCatalogA );
-		$this->assertEquals( 1, $cntPriceA );
-		$this->assertEquals( 1, $cntTextA );
-
-		$this->assertEquals( 0, $cntAttributeB );
-		$this->assertEquals( 0, $cntCatalogB );
-		$this->assertEquals( 0, $cntPriceB );
-		$this->assertEquals( 0, $cntTextB );
+		$this->assertEquals( 8, $cntAttribute );
+		$this->assertEquals( 5, $cntCatalog );
+		$this->assertEquals( 1, $cntPrice );
+		$this->assertEquals( 2, $cntText );
 	}
 
 
