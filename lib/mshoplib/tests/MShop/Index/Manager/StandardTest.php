@@ -160,10 +160,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->saveItem( $item );
 
-		$cntAttributeA = $this->getValue( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
-		$cntCatalogA = $this->getValue( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
-		$cntPriceA = $this->getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
-		$cntTextA = $this->getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
+		$cntAttribute = $this->getValue( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
+		$cntCatalog = $this->getValue( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
+		$cntPrice = $this->getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
+		$cntText = $this->getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
 
 		$this->assertEquals( 8, $cntAttribute );
 		$this->assertEquals( 5, $cntCatalog );
