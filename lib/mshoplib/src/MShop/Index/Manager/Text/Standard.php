@@ -74,6 +74,7 @@ class Standard
 		),
 	);
 
+	private $languageIds;
 	private $subManagers;
 
 
@@ -648,6 +649,30 @@ class Standard
 
 
 	/**
+	 * Returns the language IDs available for the current site
+	 *
+	 * @return string[] List of ISO language codes
+	 */
+	protected function getLanguageIds()
+	{
+		if( !isset( $this->languageIds ) )
+		{
+			$list = [];
+			$manager = \Aimeos\MShop::create( $this->getContext(), 'locale' );
+			$items = $manager->searchItems( $manager->createSearch()->setSlice( 0, 10000 ) );
+
+			foreach( $items as $item ) {
+				$list[$item->getLanguageId()] = null;
+			}
+
+			$this->languageIds = array_keys( $list );
+		}
+
+		return $this->languageIds;
+	}
+
+
+	/**
 	 * Saves the text items referenced indirectly by products
 	 *
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
@@ -655,47 +680,44 @@ class Standard
 	 */
 	protected function saveTexts( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
 	{
-		$texts = $names = $urls = [];
+		$texts = [];
 		$date = date( 'Y-m-d H:i:s' );
 		$siteid = $this->getContext()->getLocale()->getSiteId();
 
-		foreach( $item->getRefItems( 'text' ) as $refItem )
+		foreach( $this->getLanguageIds() as $langId ) {
+			$texts[$langId]['content'][] = $item->getCode();
+		}
+
+		foreach( $item->getRefItems( 'text', 'url', 'default' ) as $text ) {
+			$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Common\Base::sanitize( $text->getContent() );
+		}
+
+		foreach( $item->getRefItems( 'text', 'name', 'default' ) as $text ) {
+			$texts[$text->getLanguageId()]['name'] = $text->getContent();
+		}
+
+		$products = $item->getRefItems( 'product', null, 'default' );
+		$products[] = $item;
+
+		foreach( $products as $product )
 		{
-			$content = $refItem->getContent();
-			$langId = $refItem->getLanguageId();
-
-			isset( $texts[$langId] ) ?: $texts[$langId] = $item->getCode();
-			$texts[$langId] .= ' ' . $content;
-
-			switch( $refItem->getType() ) {
-				case 'url':
-					$urls[$langId] = $content; break;
-				case 'name':
-					$names[$langId] = $content; break;
+			foreach( $product->getRefItems( 'text' ) as $text ) {
+				$texts[$text->getLanguageId()]['content'][] = $text->getContent();
 			}
 		}
 
-		foreach( $item->getRefItems( 'product' ) as $product )
+		foreach( $texts as $langId => $map )
 		{
-			foreach( $product->getRefItems( 'text' ) as $refItem )
-			{
-				$langId = $refItem->getLanguageId();
-				isset( $texts[$langId] ) ?: $texts[$langId] = '';
-
-				$texts[$langId] .= ' ' . $refItem->getContent();
+			if( !isset( $map['url'] ) ) {
+				$map['url'] = \Aimeos\MW\Common\Base::sanitize( $item->getLabel() );
 			}
 
-			foreach( $texts as $langId => $content ) {
-				$texts[$langId] .= ' ' . $product->getCode();
+			if( !isset( $map['name'] ) ) {
+				$map['content'][] = $map['name'] = $item->getLabel();
 			}
-		}
 
-		foreach( $texts as $langId => $content )
-		{
-			$url = \Aimeos\MW\Common\Base::sanitize( isset( $urls[$langId] ) ? $urls[$langId] : $item->getLabel() );
-			$name = ( isset( $names[$langId] ) ? $names[$langId] : $item->getLabel() );
-
-			$this->saveText( $stmt, $item->getId(), $siteid, $langId, $url, $name, $content, $date );
+			$content = join( ' ', $map['content'] );
+			$this->saveText( $stmt, $item->getId(), $siteid, $langId, $map['url'], $map['name'], $content, $date );
 		}
 	}
 
