@@ -692,6 +692,20 @@ class Standard
 			$texts[$text->getLanguageId()]['name'] = $text->getContent();
 		}
 
+		/** mshop/index/manager/text/types
+		 * List of text types that should be added to the product index
+		 *
+		 * By default, all available texts of a product are indexed. This setting
+		 * allows you to name only those text types that should be added. All
+		 * others will be left out so products won't be found if users search
+		 * for words that are part of those skipped texts. This is most useful
+		 * for avoiding product matches due to texts that should be internal only.
+		 *
+		 * @param array|string|null Type name or list of type names, null for all
+		 * @category Developer
+		 * @since 2019.04
+		 */
+		$types = $this->getContext()->getConfig()->get( 'mshop/index/manager/text/types' );
 		$products = $item->getRefItems( 'product', null, 'default' );
 		$products[] = $item;
 
@@ -701,7 +715,7 @@ class Standard
 				$texts[$langId]['content'][] = $product->getCode();
 			}
 
-			foreach( $product->getRefItems( 'text' ) as $text ) {
+			foreach( $product->getRefItems( 'text', $types ) as $text ) {
 				$texts[$text->getLanguageId()]['content'][] = $text->getContent();
 			}
 		}
