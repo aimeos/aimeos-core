@@ -222,7 +222,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $item, '5678' );
 
-		$this->setExpectedException( '\\Aimeos\\Plugin\\Provider\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$object->updateCoupon( $this->orderBase );
 	}
 
