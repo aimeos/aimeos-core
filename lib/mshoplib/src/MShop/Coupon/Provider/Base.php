@@ -51,7 +51,7 @@ abstract class Base implements Iface
 		{
 			$base->deleteCoupon( $this->code, true );
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Coupon in basket is not available any more' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
 		}
 		$this->deleteCoupon( $base );
 		$this->addCoupon( $base );

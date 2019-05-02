@@ -85,7 +85,7 @@ class Coupon
 				}
 				catch( \Exception $e )
 				{
-					$notAvailable[$code] = 'coupon.gone';
+					$notAvailable[$code] = 'gone';
 				}
 			}
 			else
