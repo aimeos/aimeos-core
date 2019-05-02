@@ -684,10 +684,6 @@ class Standard
 		$date = date( 'Y-m-d H:i:s' );
 		$siteid = $this->getContext()->getLocale()->getSiteId();
 
-		foreach( $this->getLanguageIds() as $langId ) {
-			$texts[$langId]['content'][] = $item->getCode();
-		}
-
 		foreach( $item->getRefItems( 'text', 'url', 'default' ) as $text ) {
 			$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Common\Base::sanitize( $text->getContent() );
 		}
@@ -701,6 +697,10 @@ class Standard
 
 		foreach( $products as $product )
 		{
+			foreach( $this->getLanguageIds() as $langId ) {
+				$texts[$langId]['content'][] = $product->getCode();
+			}
+
 			foreach( $product->getRefItems( 'text' ) as $text ) {
 				$texts[$text->getLanguageId()]['content'][] = $text->getContent();
 			}
