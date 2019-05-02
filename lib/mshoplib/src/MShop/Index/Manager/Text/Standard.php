@@ -691,6 +691,7 @@ class Standard
 		$path = 'mshop/index/manager/text/types';
 		
 		$types = $this->getContext()->getConfig()->get( $path );
+		var_dump( $types );
 				
 		foreach( $item->getRefItems( 'text', 'url', 'default' ) as $text ) {
 			$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Common\Base::sanitize( $text->getContent() );
