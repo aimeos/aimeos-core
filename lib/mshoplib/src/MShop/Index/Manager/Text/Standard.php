@@ -688,12 +688,10 @@ class Standard
 		 * A list of text tyles used for indexing.
 		 * If the list is not set, then all text types are included in the index.
 		 */
-		 $path = 'mshop/index/manager/text/types';
+		$path = 'mshop/index/manager/text/types';
 		
-		if ( $this->getContext()->getConfig()->get( $path ) !== null ) {
-		    $includeList = array_values( $this->getContext()->getConfig()->get( $path ) );
-		}
-		
+		$types = $this->getContext()->getConfig()->get( $path );
+				
 		foreach( $item->getRefItems( 'text', 'url', 'default' ) as $text ) {
 			$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Common\Base::sanitize( $text->getContent() );
 			$texts[$text->getLanguageId()]['name'] = $text->getContent();
@@ -708,10 +706,8 @@ class Standard
 				$texts[$langId]['content'][] = $product->getCode();
 			}
 
-			foreach( $product->getRefItems( 'text' ) as $text ) {
-			    if ( empty($includeList) || in_array( $text->getType(), $includeList) ) {
-			        $texts[$text->getLanguageId()]['content'][] = $text->getContent();
-			    }
+			foreach( $product->getRefItems( 'text' , $types) as $text ) {
+			    $texts[$text->getLanguageId()]['content'][] = $text->getContent();
 			}
 		}
 
