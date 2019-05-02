@@ -90,7 +90,7 @@ class Coupon
 			}
 			else
 			{
-				$notAvailable[$code] = 'coupon.gone';
+				$notAvailable[$code] = 'gone';
 			}
 		}
 
