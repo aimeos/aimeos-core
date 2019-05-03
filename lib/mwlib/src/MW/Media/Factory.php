@@ -54,7 +54,7 @@ class Factory
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? '\Aimeos\MW\Media\\' . $name : '<not a string>';
+			$classname = is_string( $name ) ? '\Aimeos\MW\Media\\' . $type . '\\' . $name : '<not a string>';
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
