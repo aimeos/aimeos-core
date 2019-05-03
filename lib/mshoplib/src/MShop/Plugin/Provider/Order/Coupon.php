@@ -88,7 +88,7 @@ class Coupon
 			if( ( $item = reset( $items ) ) !== false ) {
 				$manager->getProvider( $item, $code )->update( $order );
 			} else {
-				$notAvailable[$code] = 'coupon.gone';
+				$notAvailable[$code] = 'gone';
 			}
 		}
 
