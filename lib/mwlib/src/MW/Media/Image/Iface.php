@@ -22,6 +22,20 @@ interface Iface
 	extends \Aimeos\MW\Media\Iface
 {
 	/**
+	 * Returns the height of the image
+	 *
+	 * @return integer Height in pixel
+	 */
+	public function getHeight();
+
+	/**
+	 * Returns the width of the image
+	 *
+	 * @return integer Width in pixel
+	 */
+	public function getWidth();
+
+	/**
 	 * Scales the image to the given width and height.
 	 *
 	 * @param integer $width New width of the image

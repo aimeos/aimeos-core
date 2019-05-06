@@ -62,6 +62,28 @@ class Standard
 
 
 	/**
+	 * Returns the height of the image
+	 *
+	 * @return integer Height in pixel
+	 */
+	public function getHeight()
+	{
+		return imagesy( $this->image );
+	}
+
+
+	/**
+	 * Returns the width of the image
+	 *
+	 * @return integer Width in pixel
+	 */
+	public function getWidth()
+	{
+		return imagesx( $this->image );
+	}
+
+
+	/**
 	 * Stores the media data at the given file name.
 	 *
 	 * @param string|null $filename File name to save the data into or null to return the data

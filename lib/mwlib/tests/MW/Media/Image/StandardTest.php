@@ -66,6 +66,28 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetHeight()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.jpg' );
+
+		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/jpeg', [] );
+
+		$this->assertEquals( 10, $media->getHeight() );
+	}
+
+
+	public function testGetWidth()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.jpg' );
+
+		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/jpeg', [] );
+
+		$this->assertEquals( 10, $media->getWidth() );
+	}
+
+
 	public function testSaveGif()
 	{
 		$ds = DIRECTORY_SEPARATOR;
