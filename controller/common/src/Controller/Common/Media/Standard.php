@@ -131,15 +131,15 @@ class Standard
 		}
 
 		$this->scaleImage( $media, 'files' );
-		$mimetype = $this->getMimeType( $media, 'files' );
-		$filepath = $this->getFilePath( $path, 'files', $mimetype );
-		$this->storeFile( $media->save( null, $mimetype ), $fsname, $filepath, $path );
+		$mime = $this->getMimeType( $media, 'files' );
+		$filepath = ( substr( $path, 0, 6 ) !== 'files/' ? $this->getFilePath( $path, 'files', $mime ) : $path );
+		$this->storeFile( $media->save( null, $mime ), $fsname, $filepath, $path );
 		$item->setUrl( $filepath );
 
 		$this->scaleImage( $media, 'preview' );
-		$mimetype = $this->getMimeType( $media, 'preview' );
-		$filepath = $this->getFilePath( $path, 'preview', $mimetype );
-		$this->storeFile( $media->save( null, $mimetype ), $fsname, $filepath, $item->getPreview() );
+		$mime = $this->getMimeType( $media, 'preview' );
+		$filepath = ( substr( $path, 0, 8 ) !== 'preview/' ? $this->getFilePath( $path, 'preview', $mime ) : $path );
+		$this->storeFile( $media->save( null, $mime ), $fsname, $filepath, $item->getPreview() );
 		$item->setPreview( $filepath );
 	}
 
