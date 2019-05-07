@@ -48,6 +48,8 @@ class CSV
 	 */
 	public function __construct( $resource, $name, array $options = [] )
 	{
+		ini_set( 'auto_detect_line_endings', true );
+
 		if( !is_file( $resource ) && substr( $resource, -4 ) !== '.csv' ) {
 			$resource .= '.csv';
 		}
