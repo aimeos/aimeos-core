@@ -42,6 +42,7 @@ class Standard
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item to add the file references to
 	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file
 	 * @param string $fsname Name of the file system to store the files at
+	 * @return \Aimeos\MShop\Media\Item\Iface Added media item
 	 */
 	public function add( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, $fsname = 'fs-media' )
 	{
@@ -50,30 +51,18 @@ class Standard
 
 		if( $media instanceof \Aimeos\MW\Media\Image\Iface )
 		{
-			$this->scaleImage( $media, 'files' );
-			$mimetype = $this->getMimeType( $media, 'files' );
-			$filepath = $this->getFilePath( $file->getClientFilename(), 'files', $mimetype );
-			$this->storeFile( $media->save( null, $mimetype ), $fsname, $filepath, $item->getUrl() );
-			$item->setUrl( $filepath );
-
-			$this->scaleImage( $media, 'preview' );
-			$mimeprev = $this->getMimeType( $media, 'preview' );
-			$filepath = $this->getFilePath( $file->getClientFilename(), 'preview', $mimeprev );
-			$this->storeFile( $media->save( null, $mimetype ), $fsname, $filepath, $item->getPreview() );
-			$item->setPreview( $filepath );
+			$item = $this->addImages( $item, $media, md5( $file->getClientFilename() ), $fsname );
 		}
 		else
 		{
 			$mimetype = $media->getMimeType();
-			$item->setPreview( $this->getMimeIcon( $mimetype ) );
-
 			$filepath = $this->getFilePath( $file->getClientFilename(), 'files', $mimetype );
+
 			$this->storeFile( $media->save(), $fsname, $filepath, $item->getPreview() );
-			$item->setUrl( $filepath );
+			$item->setUrl( $filepath )->setPreview( $this->getMimeIcon( $mimetype ) )->setMimeType( $mimetype );
 		}
 
-		$item->getLabel() ?: $item->setLabel( basename( $file->getClientFilename() ) );
-		$item->setMimeType( $mimetype );
+		return $item->setLabel( $item->getLabel() ?: basename( $file->getClientFilename() ) );
 	}
 
 
@@ -105,7 +94,7 @@ class Standard
 		}
 		catch( \Exception $e ) { ; } // Can be a mime icon with relative path
 
-		$item->setPreview( '' );
+		return $item->setPreview( '' );
 	}
 
 
@@ -119,7 +108,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be scaled
 	 * @param string $fsname Name of the file system to rescale the files from
-	 * @return void
+	 * @return \Aimeos\MShop\Media\Item\Iface Rescaled media item
 	 */
 	public function scale( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' )
 	{
@@ -127,20 +116,42 @@ class Standard
 		$media = $this->getMediaFile( $this->getFileContent( $path, $fsname ) );
 
 		if( !( $media instanceof \Aimeos\MW\Media\Image\Iface ) ) {
-			return;
+			return $item;
 		}
 
-		$this->scaleImage( $media, 'files' );
-		$mime = $this->getMimeType( $media, 'files' );
-		$filepath = ( substr( $path, 0, 6 ) !== 'files/' ? $this->getFilePath( $path, 'files', $mime ) : $path );
-		$this->storeFile( $media->save( null, $mime ), $fsname, $filepath, $path );
-		$item->setUrl( $filepath );
+		return $this->addImages( $item, $media, $path, $fsname );
+	}
 
-		$this->scaleImage( $media, 'preview' );
+
+	/**
+	 * Adds original image and preview images to the media item
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item which will contains the image URLs afterwards
+	 * @param \Aimeos\MW\Media\Image\Iface $media Image object to scale
+	 * @param string $path Path to the file or URL, empty or random for uploaded files
+	 * @param string $fsname File system name the file is located at
+	 * @return \Aimeos\MShop\Media\Item\Iface Updated media item with URLs
+	 */
+	protected function addImages( \Aimeos\MShop\Media\Item\Iface $item, \Aimeos\MW\Media\Image\Iface $media, $path, $fsname )
+	{
+		$mime = $this->getMimeType( $media, 'files' );
+		$mediaFile = $this->scaleImage( $media, 'files' );
+		$filepath = ( strncmp( $path, 'files', 5 ) !== 0 ? $this->getFilePath( $path, 'files', $mime ) : $path );
+
+		$this->storeFile( $mediaFile->save( null, $mime ), $fsname, $filepath, $path );
+		$item->setUrl( $filepath )->setMimeType( $mime );
+		unset( $mediaFile );
+
+
 		$mime = $this->getMimeType( $media, 'preview' );
-		$filepath = ( substr( $path, 0, 8 ) !== 'preview/' ? $this->getFilePath( $path, 'preview', $mime ) : $path );
-		$this->storeFile( $media->save( null, $mime ), $fsname, $filepath, $item->getPreview() );
+		$mediaFile = $this->scaleImage( $media, 'preview' );
+		$filepath = $this->getFilePath( $path, 'preview', $mime );
+
+		$this->storeFile( $mediaFile->save( null, $mime ), $fsname, $filepath, $path );
 		$item->setPreview( $filepath );
+		unset( $mediaFile );
+
+		return $item;
 	}
 
 

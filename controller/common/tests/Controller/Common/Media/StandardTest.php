@@ -44,7 +44,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
 
-		$object->add( $item, $file );
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $object->add( $item, $file ) );
 	}
 
 
@@ -64,7 +64,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
 
-		$object->add( $item, $file );
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $object->add( $item, $file ) );
 	}
 
 
@@ -91,10 +91,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->context->setFilesystemManager( $fsm );
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
-		$item->setPreview( 'test' );
-		$item->setUrl( 'test' );
+		$item->setPreview( 'test' )->setUrl( 'test' );
 
-		$this->object->delete( $item );
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->delete( $item ) );
 	}
 
 
@@ -117,8 +116,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setPreview( 'preview.jpg' );
 		$item->setUrl( 'test.jpg' );
 
-		$object->scale( $item );
+		$result = $object->scale( $item );
 
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
 		$this->assertNotEquals( 'test.jpg', $item->getUrl() );
 		$this->assertNotEquals( 'preview.jpg', $item->getPreview() );
 	}

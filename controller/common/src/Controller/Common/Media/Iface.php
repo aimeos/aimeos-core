@@ -39,7 +39,7 @@ interface Iface
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item to add the file references to
 	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file
 	 * @param string $fsname Name of the file system to store the files at
-	 * @return void
+	 * @return \Aimeos\MShop\Media\Item\Iface Added media item
 	 */
 	public function add( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, $fsname = 'fs-media' );
 
@@ -52,7 +52,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be deleted
 	 * @param string $fsname Name of the file system to delete the files from
-	 * @return void
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item with deleted files
 	 */
 	public function delete( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' );
 
@@ -62,7 +62,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be scaled
 	 * @param string $fsname Name of the file system to rescale the files from
-	 * @return void
+	 * @return \Aimeos\MShop\Media\Item\Iface Rescaled media item
 	 */
 	public function scale( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' );
 }
