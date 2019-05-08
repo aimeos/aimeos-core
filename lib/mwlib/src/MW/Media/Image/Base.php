@@ -26,8 +26,8 @@ class Base
 	 *
 	 * @param integer $srcWidth Width of the image
 	 * @param integer $srcHeight Height of the image
-	 * @param integer $destWidth New width of the image
-	 * @param integer $destHeight New height of the image
+	 * @param integer|null $destWidth New width of the image
+	 * @param integer|null $destHeight New height of the image
 	 * @return array Array containing the new width at position 0 and the new height as position 1
 	 */
 	protected function getSizeFitted( $srcWidth, $srcHeight, $destWidth, $destHeight )
@@ -39,11 +39,11 @@ class Base
 		$hRatio = $srcHeight / $destHeight;
 
 		if( $wRatio > $hRatio ) {
-			$destHeight = round( $srcHeight / $wRatio );
+			$destHeight = (int) round( $srcHeight / $wRatio );
 		} else {
-			$destWidth = round( $srcWidth / $hRatio );
+			$destWidth = (int) round( $srcWidth / $hRatio );
 		}
 
-		return array( $destWidth, $destHeight );
+		return [$destWidth, $destHeight];
 	}
 }

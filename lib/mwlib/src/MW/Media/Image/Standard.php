@@ -155,8 +155,8 @@ class Standard
 	/**
 	 * Scales the image to the given width and height.
 	 *
-	 * @param integer $width New width of the image
-	 * @param integer $height New height of the image
+	 * @param integer|null $width New width of the image or null for automatic calculation
+	 * @param integer|null $height New height of the image or null for automatic calculation
 	 * @param boolean $fit True to keep the width/height ratio of the image
 	 * @return \Aimeos\MW\Media\Iface Self object for method chaining
 	 */
@@ -164,6 +164,7 @@ class Standard
 	{
 		$w = imagesx( $this->image );
 		$h = imagesy( $this->image );
+		$fit = (bool) $fit;
 
 		$newWidth = $width;
 		$newHeigth = $height;
@@ -179,8 +180,8 @@ class Standard
 		elseif( $width && $height )
 		{
 			$ratio = ( $w < $h ? $width / $w : $height / $h );
-			$newHeigth = $h * $ratio;
-			$newWidth = $w * $ratio;
+			$newHeigth = (int) $h * $ratio;
+			$newWidth = (int) $w * $ratio;
 		}
 
 		return $this->resize( $newWidth, $newHeigth, $width, $height, $fit );
@@ -205,10 +206,13 @@ class Standard
 
 		$newMedia = clone $this;
 
-		$x0 = $newWidth / 2 - $width / 2;
-		$y0 = $newHeigth / 2 - $height / 2;
+		$width = ( $width ?: $newWidth );
+		$height = ( $height ?: $newHeigth );
 
-		if( $fit == false && ( $x0 || $y0 ) )
+		$x0 = (int) ( $newWidth / 2 - $width / 2 );
+		$y0 = (int) ( $newHeigth / 2 - $height / 2 );
+
+		if( $fit === false && ( $x0 || $y0 ) )
 		{
 			if( ( $newImage = imagecreatetruecolor( $width, $height ) ) === false ) {
 				throw new \Aimeos\MW\Media\Exception( 'Unable to create new image' );

@@ -135,16 +135,18 @@ class Imagick
 	/**
 	 * Scales the image to the given width and height.
 	 *
-	 * @param integer $width New width of the image
-	 * @param integer $height New height of the image
+	 * @param integer|null $width New width of the image or null for automatic calculation
+	 * @param integer|null $height New height of the image or null for automatic calculation
 	 * @param boolean $fit True to keep the width/height ratio of the image
 	 * @return \Aimeos\MW\Media\Iface Self object for method chaining
 	 */
 	public function scale( $width, $height, $fit = true )
 	{
+		$fit = (bool) $fit;
+
 		try
 		{
-			if( $fit == true )
+			if( $fit === true )
 			{
 				$w = $this->image->getImageWidth();
 				$h = $this->image->getImageHeight();
@@ -157,9 +159,9 @@ class Imagick
 
 			$newMedia = clone $this;
 
-			if( $fit == false && $width && $height )
+			if( $fit === false && $width && $height )
 			{
-				$newMedia->image->cropThumbnailImage( $width, $height );
+				$newMedia->image->cropThumbnailImage( (int) $width, (int) $height );
 				// see https://www.php.net/manual/en/imagick.cropthumbnailimage.php#106710
 				$newMedia->image->setImagePage( 0, 0, 0, 0 );
 			}

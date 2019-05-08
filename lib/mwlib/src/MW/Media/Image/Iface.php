@@ -38,8 +38,8 @@ interface Iface
 	/**
 	 * Scales the image to the given width and height.
 	 *
-	 * @param integer $width New width of the image
-	 * @param integer $height New height of the image
+	 * @param integer|null $width New width of the image or null for automatic calculation
+	 * @param integer|null $height New height of the image or null for automatic calculation
 	 * @param boolean $fit True to keep the width/height ratio of the image
 	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
 	 */
