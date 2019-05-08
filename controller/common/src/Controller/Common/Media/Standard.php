@@ -138,7 +138,7 @@ class Standard
 		$item->setUrl( $filepath );
 
 		$this->scaleImage( $media, 'preview' );
- 		$mime = $this->getMimeType( $media, 'preview' );
+		$mime = $this->getMimeType( $media, 'preview' );
 		$filepath = ( substr( $path, 0, 8 ) !== 'preview/' ? $this->getFilePath( $path, 'preview', $mime ) : $path );
 		$this->storeFile( $media->save( null, $mime ), $fsname, $filepath, $item->getPreview() );		$item->setPreview( $filepath );
 	}
