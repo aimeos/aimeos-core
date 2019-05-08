@@ -79,12 +79,10 @@ class Coupon
 			if( ( $couponItem = reset( $results ) ) !== false )
 			{
 				$couponProvider = $couponManager->getProvider( $couponItem, strtolower( $code ) );
-				try 
-				{
+
+				try  {
 					$couponProvider->updateCoupon( $order );
-				}
-				catch( \Exception $e )
-				{
+				} catch( \Exception $e ) {
 					$notAvailable[$code] = 'gone';
 				}
 			}
