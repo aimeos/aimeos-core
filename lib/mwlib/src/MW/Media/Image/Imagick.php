@@ -52,6 +52,26 @@ class Imagick
 
 
 	/**
+	 * Cleans up
+	 */
+	public function __destruct()
+	{
+		if( $this->image ) {
+			$this->image->clear();
+		}
+	}
+
+
+	/**
+	 * Clone resources
+	 */
+	public function __clone()
+	{
+		$this->image = clone $this->image;
+	}
+
+
+	/**
 	 * Returns the height of the image
 	 *
 	 * @return integer Height in pixel
@@ -134,22 +154,25 @@ class Imagick
 					return $this;
 				}
 			}
-			elseif( $width && $height )
-			{
-				$this->image->cropThumbnailImage( $width, $height );
-				// see https://www.php.net/manual/en/imagick.cropthumbnailimage.php#106710
-				$this->image->setImagePage( 0, 0, 0, 0 );
 
-				return $this;
+			$newMedia = clone $this;
+
+			if( $fit == false && $width && $height )
+			{
+				$newMedia->image->cropThumbnailImage( $width, $height );
+				// see https://www.php.net/manual/en/imagick.cropthumbnailimage.php#106710
+				$newMedia->image->setImagePage( 0, 0, 0, 0 );
+			}
+			else
+			{
+				$newMedia->image->resizeImage( $width, $height, \Imagick::FILTER_CUBIC, 0.8 );
 			}
 
-			$this->image->resizeImage( $width, $height, \Imagick::FILTER_CUBIC, 0.8 );
+			return $newMedia;
 		}
 		catch( \Exception $e )
 		{
 			throw new \Aimeos\MW\Media\Exception( $e->getMessage() );
 		}
-
-		return $this;
 	}
 }

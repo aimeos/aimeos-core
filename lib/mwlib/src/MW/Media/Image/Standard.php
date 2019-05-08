@@ -183,8 +183,7 @@ class Standard
 			$newWidth = $w * $ratio;
 		}
 
-		$this->resize( $newWidth, $newHeigth, $width, $height, $fit );
-		return $this;
+		return $this->resize( $newWidth, $newHeigth, $width, $height, $fit );
 	}
 
 
@@ -196,6 +195,7 @@ class Standard
 	 * @param integer $width New width of the image
 	 * @param integer $height New height of the image
 	 * @param boolean $fit True to keep the width/height ratio of the image
+	 * @return \Aimeos\MW\Media\Image\Standard Resized media object
 	 */
 	protected function resize( $newWidth, $newHeigth, $width, $height, $fit )
 	{
@@ -203,8 +203,7 @@ class Standard
 			throw new \Aimeos\MW\Media\Exception( 'Unable to scale image' );
 		}
 
-		imagedestroy( $this->image );
-		$this->image = $result;
+		$newMedia = clone $this;
 
 		$x0 = $newWidth / 2 - $width / 2;
 		$y0 = $newHeigth / 2 - $height / 2;
@@ -215,12 +214,18 @@ class Standard
 				throw new \Aimeos\MW\Media\Exception( 'Unable to create new image' );
 			}
 
-			if( imagecopy( $newImage, $this->image, 0, 0, $x0, $y0, $width, $height ) === false ) {
+			if( imagecopy( $newImage, $result, 0, 0, $x0, $y0, $width, $height ) === false ) {
 				throw new \Aimeos\MW\Media\Exception( 'Unable to crop image' );
 			}
 
-			imagedestroy( $this->image );
-			$this->image = $newImage;
+			imagedestroy( $result );
+			$newMedia->image = $newImage;
 		}
+		else
+		{
+			$newMedia->image = $result;
+		}
+
+		return $newMedia;
 	}
 }
