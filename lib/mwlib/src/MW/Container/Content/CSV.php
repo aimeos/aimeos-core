@@ -26,7 +26,6 @@ class CSV
 	private $enclosure;
 	private $escape;
 	private $lineend;
-	private $endsubst;
 	private $fh;
 	private $data;
 	private $position = 0;
@@ -40,7 +39,6 @@ class CSV
 	 * - csv-enclosure (default: '"')
 	 * - csv-escape (default: '"')
 	 * - csv-lineend (default: LF)
-	 * - csv-lineend-subst (default: ' ')
 	 *
 	 * @param string $resource Path to the actual file
 	 * @param string $name Name of the CSV file
@@ -69,8 +67,7 @@ class CSV
 		$this->separator = $this->getOption( 'csv-separator', ',' );
 		$this->enclosure = $this->getOption( 'csv-enclosure', '"' );
 		$this->escape = $this->getOption( 'csv-escape', '"' );
-		$this->lineend = $this->getOption( 'csv-lineend', chr( 10 ) );
-		$this->endsubst = $this->getOption( 'csv-lineend-subst', ' ' );
+		$this->lineend = $this->getOption( 'csv-lineend', "\n" );
 		$this->data = $this->getData();
 	}
 
@@ -108,9 +105,7 @@ class CSV
 			$list = array_fill( 0, $max, '' );
 		}
 
-		foreach( $data as $pos => $entry )
-		{
-			$entry = str_replace( $this->lineend, $this->endsubst, $entry );
+		foreach( $data as $pos => $entry ) {
 			$list[$pos] = $enclosure . str_replace( $enclosure, $this->escape . $enclosure, $entry ) . $enclosure;
 		}
 

@@ -47,7 +47,6 @@ class CSVTest extends \PHPUnit\Framework\TestCase
 			'csv-enclosure' => ':',
 			'csv-escape' => '\\',
 			'csv-lineend' => "\r\n",
-			'csv-lineend-subst' => " ",
 		);
 
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'tempfile';
@@ -64,7 +63,7 @@ class CSVTest extends \PHPUnit\Framework\TestCase
 		}
 		$csv->close();
 
-		$expected = ":test:;:file:;:data:\r\n:\\: :;:\0:;:\\:\r\n";
+		$expected = ":test:;:file:;:data:\r\n:\\:\r\n:;:\0:;:\\:\r\n";
 
 		if( ( $actual = file_get_contents( $csv->getResource() ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'Unable to get content of file "%1$s"', $csv->getResource() ) );
