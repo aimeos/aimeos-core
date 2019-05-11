@@ -76,6 +76,14 @@ class Standard
 	 */
 	public function delete( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' )
 	{
+		$manager = \Aimeos\MShop::create( $this->context, 'media' );
+		$search = $manager->createSearch()->setSlice( 0, 2 );
+		$search->setConditions( $search->compare( '==', 'media.url', $item->getUrl() ) );
+
+		if( count( $manager->searchItems( $search ) ) > 1 ) {
+			return $this;
+		}
+
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
 
 		$path = $item->getUrl();
