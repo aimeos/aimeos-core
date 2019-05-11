@@ -87,6 +87,14 @@ class Standard
 	 */
 	public function delete( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' )
 	{
+		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'media' );
+		$search = $manager->createSearch()->setSlice( 0, 2 );
+		$search->setConditions( $search->compare( '==', 'media.url', $item->getUrl() ) );
+
+		if( count( $manager->searchItems( $search ) ) > 1 ) {
+			return $this;
+		}
+
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
 
 		$path = $item->getUrl();
@@ -468,7 +476,7 @@ class Standard
 		 * @category User
 		 */
 		$maxheight = $config->get( 'controller/common/media/standard/' . $type . '/maxheight', null );
-		
+
 		/** controller/common/media/standard/files/force-size
 		 * Force exact image size for the uploaded images
 		 *
@@ -484,7 +492,7 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		
+
 		/** controller/common/media/standard/preview/force-size
 		 * Force exact image size for the preview images
 		 *
