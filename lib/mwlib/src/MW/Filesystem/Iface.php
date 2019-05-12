@@ -39,7 +39,7 @@ interface Iface
 	 * Deletes the file for the given path
 	 *
 	 * @param string $path Path to the file
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function rm( $path );
@@ -116,7 +116,7 @@ interface Iface
 	 *
 	 * @param string $path Path to the remote file
 	 * @param string $content New file content
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function write( $path, $content );
@@ -128,7 +128,7 @@ interface Iface
 	 *
 	 * @param string $path Path to the remote file
 	 * @param string $file Path to the local file
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function writef( $path, $file );
@@ -156,7 +156,7 @@ interface Iface
 	 *
 	 * @param string $path Path to the remote file
 	 * @param resource $stream File stream descriptor
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function writes( $path, $stream );
@@ -166,7 +166,7 @@ interface Iface
 	 *
 	 * @param string $from Path to the original file
 	 * @param string $to Path to the new file
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function move( $from, $to );
@@ -176,7 +176,7 @@ interface Iface
 	 *
 	 * @param string $from Path to the original file
 	 * @param string $to Path to the new file
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function copy( $from, $to );

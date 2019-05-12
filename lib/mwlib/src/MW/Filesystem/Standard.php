@@ -69,7 +69,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * Creates a new directory for the given path
 	 *
 	 * @param string $path Path to the directory
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function mkdir( $path )
@@ -77,6 +77,8 @@ class Standard implements Iface, DirIface, MetaIface
 		if( @mkdir( $this->resolve( $path ), 0775, true ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t create directory "%1$s"', $path ) );
 		}
+
+		return $this;
 	}
 
 
@@ -84,7 +86,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * Deletes the directory for the given path
 	 *
 	 * @param string $path Path to the directory
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function rmdir( $path )
@@ -92,6 +94,8 @@ class Standard implements Iface, DirIface, MetaIface
 		if( @rmdir( $this->resolve( $path ) ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t remove directory "%1$s"', $path ) );
 		}
+
+		return $this;
 	}
 
 
@@ -150,7 +154,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * Deletes the file for the given path
 	 *
 	 * @param string $path Path to the file
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function rm( $path )
@@ -158,6 +162,8 @@ class Standard implements Iface, DirIface, MetaIface
 		if( @unlink( $this->resolve( $path ) ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t delete file "%1$s"', $path ) );
 		}
+
+		return $this;
 	}
 
 
@@ -233,7 +239,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the file
 	 * @param string $content New file content
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function write( $path, $content )
@@ -245,6 +251,8 @@ class Standard implements Iface, DirIface, MetaIface
 		if( @file_put_contents( $this->resolve( $path ), $content ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t write file "%1$s"', $path ) );
 		}
+
+		return $this;
 	}
 
 
@@ -253,7 +261,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the remote file
 	 * @param string $local Path to the local file
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function writef( $path, $local )
@@ -265,6 +273,7 @@ class Standard implements Iface, DirIface, MetaIface
 		$this->writes( $path, $handle );
 
 		fclose( $handle );
+		return $this;
 	}
 
 
@@ -273,7 +282,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the file
 	 * @param resource $stream File stream descriptor
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function writes( $path, $stream )
@@ -291,6 +300,7 @@ class Standard implements Iface, DirIface, MetaIface
 		}
 
 		fclose( $handle );
+		return $this;
 	}
 
 
@@ -299,7 +309,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $from Path to the original file
 	 * @param string $to Path to the new file
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function move( $from, $to )
@@ -311,6 +321,8 @@ class Standard implements Iface, DirIface, MetaIface
 		if( @rename( $this->resolve( $from ), $this->resolve( $to ) ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t move file from "%1$s" to "%2$s"', $from, $to ) );
 		}
+
+		return $this;
 	}
 
 
@@ -319,7 +331,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $from Path to the original file
 	 * @param string $to Path to the new file
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function copy( $from, $to )
@@ -331,6 +343,8 @@ class Standard implements Iface, DirIface, MetaIface
 		if( @copy( $this->resolve( $from ), $this->resolve( $to ) ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t copy file from "%1$s" to "%2$s"', $from, $to ) );
 		}
+
+		return $this;
 	}
 
 

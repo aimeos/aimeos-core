@@ -30,10 +30,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testMkdir()
 	{
-		$this->object->mkdir( 'fstest' );
+		$object = $this->object->mkdir( 'fstest' );
 		$result = is_dir( $this->basedir . 'fstest' );
 		rmdir( $this->basedir . 'fstest' );
 
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\DirIface::class, $object );
 		$this->assertTrue( $result );
 	}
 
@@ -49,9 +50,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		mkdir( $this->basedir . 'fstest2' );
 
-		$this->object->rmdir( 'fstest2' );
+		$object = $this->object->rmdir( 'fstest2' );
 		$result = is_dir( $this->basedir . 'fstest2' );
 
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\DirIface::class, $object );
 		$this->assertFalse( $result );
 	}
 
@@ -130,10 +132,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		touch( $this->basedir . 'file5' );
 
-		$this->object->rm( 'file5' );
+		$object = $this->object->rm( 'file5' );
 
 		$result = file_exists( $this->basedir . 'file5' );
 
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\Iface::class, $object );
 		$this->assertFalse( $result );
 	}
 
@@ -219,11 +222,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testWrite()
 	{
-		$this->object->write( 'file9', 'test' );
+		$object = $this->object->write( 'file9', 'test' );
 
 		$result = file_get_contents( $this->basedir . 'file9' );
 		unlink( $this->basedir . 'file9' );
 
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\Iface::class, $object );
 		$this->assertEquals( 'test', $result );
 	}
 
@@ -240,12 +244,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'file99';
 		file_put_contents( $file, 'test' );
 
-		$this->object->writef( 'file99', $file );
+		$object = $this->object->writef( 'file99', $file );
 
 		$result = file_get_contents( $this->basedir . 'file99' );
 		unlink( $this->basedir . 'file99' );
 		unlink( $file );
 
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\Iface::class, $object );
 		$this->assertEquals( 'test', $result );
 	}
 
@@ -266,13 +271,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		fwrite( $handle, 'test' );
 		rewind( $handle );
 
-		$this->object->writes( 'file10', $handle );
+		$object = $this->object->writes( 'file10', $handle );
 
 		fclose( $handle );
 		$result = file_get_contents( $this->basedir . 'file10' );
 		unlink( $this->basedir . 'file10tmp' );
 		unlink( $this->basedir . 'file10' );
 
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\Iface::class, $object );
 		$this->assertEquals( 'test', $result );
 	}
 
@@ -288,13 +294,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		touch( $this->basedir . 'file11' );
 
-		$this->object->move( 'file11', 'file11move' );
+		$object = $this->object->move( 'file11', 'file11move' );
 
 		$result = file_exists( $this->basedir . 'file11move' );
 		$result2 = file_exists( $this->basedir . 'file11' );
 
 		unlink( $this->basedir . 'file11move' );
 
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\Iface::class, $object );
 		$this->assertTrue( $result );
 		$this->assertFalse( $result2 );
 	}
@@ -311,7 +318,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		touch( $this->basedir . 'file12' );
 
-		$this->object->copy( 'file12', 'file12copy' );
+		$object = $this->object->copy( 'file12', 'file12copy' );
 
 		$result = file_exists( $this->basedir . 'file12copy' );
 		$result2 = file_exists( $this->basedir . 'file12' );
@@ -319,6 +326,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		unlink( $this->basedir . 'file12copy' );
 		unlink( $this->basedir . 'file12' );
 
+		$this->assertInstanceOf( \Aimeos\MW\Filesystem\Iface::class, $object );
 		$this->assertTrue( $result );
 		$this->assertTrue( $result2 );
 	}
