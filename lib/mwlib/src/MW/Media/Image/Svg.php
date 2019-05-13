@@ -22,8 +22,6 @@ class Svg
 	implements \Aimeos\MW\Media\Image\Iface
 {
 	private $svg;
-	private $width;
-	private $height;
 
 
 	/**
