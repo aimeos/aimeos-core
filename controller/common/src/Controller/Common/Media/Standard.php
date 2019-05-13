@@ -58,7 +58,7 @@ class Standard
 			$mimetype = $media->getMimeType();
 			$filepath = $this->getFilePath( $file->getClientFilename(), 'files', $mimetype );
 
-			$this->storeFile( $media->save(), $fsname, $filepath, $item->getPreview() );
+			$this->context->getFilesystemManager()->get( $fsname )->write( $filepath, $media->save() );
 			$item->setUrl( $filepath )->setPreview( $this->getMimeIcon( $mimetype ) )->setMimeType( $mimetype );
 		}
 
@@ -97,9 +97,13 @@ class Standard
 
 		if( $fs->has( $preview ) )
 		{
-			$newPath = $this->getFilePath( $preview, 'preview', pathinfo( $preview, PATHINFO_EXTENSION ) );
-			$fs->copy( $preview, $newPath );
-			$item->setPreview( $newPath );
+			try
+			{
+				$newPath = $this->getFilePath( $preview, 'preview', pathinfo( $preview, PATHINFO_EXTENSION ) );
+				$fs->copy( $preview, $newPath );
+				$item->setPreview( $newPath );
+			}
+			catch( \Aimeos\MW\Filesystem\Exception $e ) {} // mime icons can't be copied
 		}
 
 		return $item;
@@ -125,17 +129,17 @@ class Standard
 		}
 
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
-
+		$preview = $item->getPreview();
 		$path = $item->getUrl();
+
 		if( $path !== '' && $fs->has( $path ) ) {
 			$fs->rm( $path );
 		}
 
 		try
 		{
-			$path = $item->getPreview();
-			if( $path !== '' && $fs->has( $path ) ) {
-				$fs->rm( $path );
+			if( $preview !== '' && $fs->has( $preview ) ) {
+				$fs->rm( $preview );
 			}
 		}
 		catch( \Exception $e ) { ; } // Can be a mime icon with relative path
@@ -182,10 +186,13 @@ class Standard
 	{
 		$mime = $this->getMimeType( $media, 'files' );
 		$mediaFile = $this->scaleImage( $media, 'files' );
+		$fs = $this->context->getFilesystemManager()->get( $fsname );
+
+		// Don't overwrite original files that are stored in linked directories
 		$filepath = ( strncmp( $path, 'files', 5 ) !== 0 ? $this->getFilePath( $path, 'files', $mime ) : $path );
 
-		$this->storeFile( $mediaFile->save( null, $mime ), $fsname, $filepath, $path );
-		$item->setUrl( $filepath )->setMimeType( $mime );
+		$fs->write( $filepath, $mediaFile->save( null, $mime ) );
+		$item = $item->setUrl( $filepath )->setMimeType( $mime );
 		unset( $mediaFile );
 
 
@@ -193,8 +200,8 @@ class Standard
 		$mediaFile = $this->scaleImage( $media, 'preview' );
 		$filepath = $this->getFilePath( $path, 'preview', $mime );
 
-		$this->storeFile( $mediaFile->save( null, $mime ), $fsname, $filepath, $path );
-		$item->setPreview( $filepath );
+		$fs->write( $filepath, $mediaFile->save( null, $mime ) );
+		$item = $item->setPreview( $filepath );
 		unset( $mediaFile );
 
 		return $item;
@@ -230,6 +237,17 @@ class Standard
 					throw new \Aimeos\Controller\Common\Exception( 'Unknown upload error' );
 			}
 		}
+	}
+
+
+	/**
+	 * Returns the context item
+	 *
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item
+	 */
+	protected function getContext()
+	{
+		return $this->context;
 	}
 
 
@@ -569,6 +587,7 @@ class Standard
 	 * @param string $fsname Name of the file system to store the files at
 	 * @param string $filepath Path of the new file
 	 * @param string $oldpath Path of the old file
+	 * @deprecated 2020.01
 	 */
 	protected function storeFile( $content, $fsname, $filepath, $oldpath )
 	{
