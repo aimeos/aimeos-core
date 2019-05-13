@@ -31,12 +31,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAdd()
 	{
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
-			->setMethods( array( 'checkFileUpload', 'storeFile' ) )
+			->setMethods( array( 'checkFileUpload', 'store' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'checkFileUpload' );
-		$object->expects( $this->exactly( 2 ) )->method( 'storeFile' );
+		$object->expects( $this->exactly( 2 ) )->method( 'store' );
 
 		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 		$file->expects( $this->once() )->method( 'getStream' )
@@ -51,12 +51,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAddBinary()
 	{
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
-			->setMethods( array( 'checkFileUpload', 'storeFile' ) )
+			->setMethods( array( 'checkFileUpload', 'store' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'checkFileUpload' );
-		$object->expects( $this->once() )->method( 'storeFile' );
+		$object->expects( $this->once() )->method( 'store' );
 
 		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 		$file->expects( $this->once() )->method( 'getStream' )
@@ -131,25 +131,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->context->getConfig()->set( 'controller/common/media/standard/files/scale', true );
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
-			->setMethods( array( 'getFileContent', 'storeFile' ) )
+			->setMethods( array( 'getFileContent', 'store' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'getFileContent' )
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.png' ) ) );
 
-		$object->expects( $this->exactly( 2 ) )->method( 'storeFile' );
+		$object->expects( $this->exactly( 2 ) )->method( 'store' );
 
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
-		$item->setPreview( 'preview.jpg' );
-		$item->setUrl( 'test.jpg' );
+		$item->setPreview( 'preview.jpg' )->setUrl( 'test.jpg' );
 
 		$result = $object->scale( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
-		$this->assertNotEquals( 'test.jpg', $item->getUrl() );
-		$this->assertNotEquals( 'preview.jpg', $item->getPreview() );
+		$this->assertNotEquals( 'test.jpg', $result->getUrl() );
+		$this->assertNotEquals( 'preview.jpg', $result->getPreview() );
 	}
 
 

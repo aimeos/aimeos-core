@@ -58,7 +58,7 @@ class Standard
 			$mimetype = $media->getMimeType();
 			$filepath = $this->getFilePath( $file->getClientFilename(), 'files', $mimetype );
 
-			$this->context->getFilesystemManager()->get( $fsname )->write( $filepath, $media->save() );
+			$this->store( $filepath, $media->save(), $fsname );
 			$item->setUrl( $filepath )->setPreview( $this->getMimeIcon( $mimetype ) )->setMimeType( $mimetype );
 		}
 
@@ -186,21 +186,23 @@ class Standard
 	{
 		$mime = $this->getMimeType( $media, 'files' );
 		$mediaFile = $this->scaleImage( $media, 'files' );
-		$fs = $this->context->getFilesystemManager()->get( $fsname );
 
 		// Don't overwrite original files that are stored in linked directories
-		$filepath = ( strncmp( $path, 'files', 5 ) !== 0 ? $this->getFilePath( $path, 'files', $mime ) : $path );
+		$filepath = ( strncmp( $path, 'files/', 6 ) !== 0 ? $this->getFilePath( $path, 'files', $mime ) : $path );
 
-		$fs->write( $filepath, $mediaFile->save( null, $mime ) );
+		$this->store( $filepath, $mediaFile->save( null, $mime ), $fsname );
 		$item = $item->setUrl( $filepath )->setMimeType( $mime );
 		unset( $mediaFile );
 
 
+		$path = $item->getPreview();
 		$mime = $this->getMimeType( $media, 'preview' );
 		$mediaFile = $this->scaleImage( $media, 'preview' );
-		$filepath = $this->getFilePath( $path, 'preview', $mime );
 
-		$fs->write( $filepath, $mediaFile->save( null, $mime ) );
+		// Don't try to overwrite mime icons that are stored in another directory
+		$filepath = ( strncmp( $path, 'preview/', 8 ) !== 0 ? $this->getFilePath( $path, 'preview', $mime ) : $path );
+
+		$this->store( $filepath, $mediaFile->save( null, $mime ), $fsname );
 		$item = $item->setPreview( $filepath );
 		unset( $mediaFile );
 
@@ -577,6 +579,21 @@ class Standard
 		}
 
 		return $media;
+	}
+
+
+	/**
+	 * Stores the file content
+	 *
+	 * @param string $filepath Path of the new file
+	 * @param string $content File content
+	 * @param string $fsname Name of the file system to store the files at
+	 * @return \Aimeos\Controller\Common\Media\Iface Self object for fluent interface
+	 */
+	protected function store( $filepath, $content, $fsname )
+	{
+		$this->context->getFilesystemManager()->get( $fsname )->write( $filepath, $content );
+		return $this;
 	}
 
 
