@@ -313,13 +313,10 @@ class Standard
 		 */
 		$list = $this->context->getConfig()->get( 'controller/common/media/standard/extensions', [] );
 
-		if( isset( $list[$mimeext] ) ) {
-			$mimeext = '.' . $list[$mimeext];
-		}
-
 		$filename = md5( $filename . getmypid() . microtime( true ) );
+		$ext = isset( $list[$mimeext] ) ? '.' . $list[$mimeext] : ( ctype_alpha( $mimeext ) ? '.' . $mimeext : '' );
 
-		return "${type}/${filename[0]}/${filename[1]}/${filename}${mimeext}";
+		return "${type}/${filename[0]}/${filename[1]}/${filename}${ext}";
 	}
 
 
