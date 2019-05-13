@@ -167,50 +167,50 @@ class Standard
 		$fit = (bool) $fit;
 
 		$newWidth = $width;
-		$newHeigth = $height;
+		$newHeight = $height;
 
 		if( $fit === true )
 		{
-			list( $newWidth, $newHeigth ) = $this->getSizeFitted( $w, $h, $width, $height );
+			list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
 
-			if( $w <= $newWidth && $h <= $newHeigth ) {
+			if( $w <= $newWidth && $h <= $newHeight ) {
 				return $this;
 			}
 		}
 		elseif( $width && $height )
 		{
 			$ratio = ( $w < $h ? $width / $w : $height / $h );
-			$newHeigth = (int) $h * $ratio;
+			$newHeight = (int) $h * $ratio;
 			$newWidth = (int) $w * $ratio;
 		}
 
-		return $this->resize( $newWidth, $newHeigth, $width, $height, $fit );
+		return $this->resize( $newWidth, $newHeight, $width, $height, $fit );
 	}
 
 
 	/**
 	 * Resizes and crops the image if necessary
 	 *
-	 * @param integer $newWidth Width of the image before cropping
-	 * @param integer $newHeigth Height of the image before cropping
+	 * @param integer $scaleWidth Width of the image before cropping
+	 * @param integer $scaleHeight Height of the image before cropping
 	 * @param integer $width New width of the image
 	 * @param integer $height New height of the image
 	 * @param boolean $fit True to keep the width/height ratio of the image
 	 * @return \Aimeos\MW\Media\Image\Standard Resized media object
 	 */
-	protected function resize( $newWidth, $newHeigth, $width, $height, $fit )
+	protected function resize( $scaleWidth, $scaleHeight, $width, $height, $fit )
 	{
-		if( ( $result = imagescale( $this->image, $newWidth, $newHeigth, IMG_BICUBIC ) ) === false ) {
+		if( ( $result = imagescale( $this->image, $scaleWidth, $scaleHeight, IMG_BICUBIC ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Unable to scale image' );
 		}
 
 		$newMedia = clone $this;
 
-		$width = ( $width ?: $newWidth );
-		$height = ( $height ?: $newHeigth );
+		$width = ( $width ?: $scaleWidth );
+		$height = ( $height ?: $scaleHeight );
 
-		$x0 = (int) ( $newWidth / 2 - $width / 2 );
-		$y0 = (int) ( $newHeigth / 2 - $height / 2 );
+		$x0 = (int) ( $scaleWidth / 2 - $width / 2 );
+		$y0 = (int) ( $scaleHeight / 2 - $height / 2 );
 
 		if( $fit === false && ( $x0 || $y0 ) )
 		{
