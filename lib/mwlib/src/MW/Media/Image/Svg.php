@@ -1,0 +1,140 @@
+<?php
+
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2019
+ * @package MW
+ * @subpackage Media
+ */
+
+
+namespace Aimeos\MW\Media\Image;
+
+
+/**
+ * Image class for SVG files
+ *
+ * @package MW
+ * @subpackage Media
+ */
+class Svg
+	extends \Aimeos\MW\Media\Image\Base
+	implements \Aimeos\MW\Media\Image\Iface
+{
+	private $svg;
+	private $width;
+	private $height;
+
+
+	/**
+	 * Initializes the new image object.
+	 *
+	 * @param string $content File content
+	 * @param string $mimetype Mime type of the media data
+	 * @param array $options Associative list of configuration options
+	 * @throws \Aimeos\MW\Media\Exception If image couldn't be retrieved from the given file name
+	 */
+	public function __construct( $content, $mimetype, array $options )
+	{
+		parent::__construct( $mimetype );
+
+		if( ( $string = @gzuncompress( $content ) ) !== false ) {
+			$content = $string;
+		}
+
+		if( ( $this->svg = @simplexml_load_string( $content ) ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( 'Invalid SVG file' );
+		}
+	}
+
+
+	/**
+	 * Clone resources
+	 */
+	public function __clone()
+	{
+		$this->svg = clone $this->svg;
+	}
+
+
+	/**
+	 * Returns the height of the image
+	 *
+	 * @return integer Height in pixel
+	 */
+	public function getHeight()
+	{
+		return ( isset( $this->svg['height'] ) ? (int) preg_replace( '/[^0-9.]/', '', $this->svg['height'] ) : null );
+	}
+
+
+	/**
+	 * Returns the width of the image
+	 *
+	 * @return integer Width in pixel
+	 */
+	public function getWidth()
+	{
+		return ( isset( $this->svg['width'] ) ? (int) preg_replace( '/[^0-9.]/', '', $this->svg['width'] ) : null );
+	}
+
+
+	/**
+	 * Stores the media data at the given file name.
+	 *
+	 * @param string|null $filename File name to save the data into or null to return the data
+	 * @param string|null $mimetype Mime type to save the content as or null to leave the mime type unchanged
+	 * @return string|null File content if file name is null or null if data is saved to the given file name
+	 * @throws \Aimeos\MW\Media\Exception If image couldn't be saved to the given file name
+	 */
+	public function save( $filename = null, $mimetype = null )
+	{
+		if( $filename === null ) {
+			return $this->svg->asXml();
+		}
+
+		if( file_put_contents( $filename, $this->svg->asXml() ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( 'Could not save SVG file' );
+		}
+	}
+
+
+	/**
+	 * Scales the image to the given width and height.
+	 *
+	 * @param integer|null $width New width of the image or null for automatic calculation
+	 * @param integer|null $height New height of the image or null for automatic calculation
+	 * @param boolean $fit True to keep the width/height ratio of the image
+	 * @return \Aimeos\MW\Media\Iface Self object for method chaining
+	 */
+	public function scale( $width, $height, $fit = true )
+	{
+		if( $width == null && $height == null ) {
+			return $this;
+		}
+
+		$fit = (bool) $fit;
+		$w = $this->getWidth();
+		$h = $this->getHeight();
+
+		if( $fit === true )
+		{
+			list( $width, $height ) = $this->getSizeFitted( $w, $h, $width, $height );
+
+			if( $w <= $width && $h <= $height ) {
+				return $this;
+			}
+		}
+
+		$newMedia = clone $this;
+
+		if( $fit === false ) {
+			$newMedia->svg['preserveAspectRatio'] = 'xMinYMin slice';
+		}
+
+		$newMedia->svg['width'] = ((int) $width ?: $w / $h * $height) . 'px';
+		$newMedia->svg['height'] = ((int) $height ?: $h / $w * $width) . 'px';
+
+		return $newMedia;
+	}
+}

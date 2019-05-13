@@ -51,6 +51,10 @@ class Factory
 		$type = ( $mime[0] === 'image' ? 'Image' : 'Application' );
 		$name = ( isset( $options[ $mime[0] ]['name'] ) ? ucfirst( $options[ $mime[0] ]['name'] ) : 'Standard' );
 
+		if( $mime[1] === 'svg+xml' ) {
+			$name = 'Svg';
+		}
+
 
 		if( ctype_alnum( $name ) === false )
 		{
