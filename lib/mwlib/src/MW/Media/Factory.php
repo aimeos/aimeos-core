@@ -51,7 +51,12 @@ class Factory
 		$type = ( $mime[0] === 'image' ? 'Image' : 'Application' );
 		$name = ( isset( $options[ $mime[0] ]['name'] ) ? ucfirst( $options[ $mime[0] ]['name'] ) : 'Standard' );
 
-		if( $mime[1] === 'svg+xml' ) {
+		if( $mimetype === 'image/svg+xml'
+			|| in_array( $mimetype, ['application/gzip', 'application/x-gzip'] )
+			&& is_string( $file ) && in_array( pathinfo( $file, PATHINFO_EXTENSION ), ['svg', 'svgz'] )
+		) {
+			$mimetype = 'image/svg+xml';
+			$type = 'Image';
 			$name = 'Svg';
 		}
 

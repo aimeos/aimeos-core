@@ -22,6 +22,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'image/png', $object->getMimetype() );
 	}
 
+
 	public function testGetImageAsResource()
 	{
 		$ds = DIRECTORY_SEPARATOR;
@@ -35,6 +36,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MW\Media\Image\Iface::class, $object );
 		$this->assertEquals( 'image/png', $object->getMimetype() );
 	}
+
 
 	public function testGetImageAsString()
 	{
@@ -56,5 +58,16 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MW\Media\Iface::class, $object );
 		$this->assertInstanceOf( \Aimeos\MW\Media\Application\Iface::class, $object );
 		$this->assertEquals( 'text/plain', $object->getMimetype() );
+	}
+
+
+	public function testGetSvg()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$object = \Aimeos\MW\Media\Factory::get( __DIR__ . $ds .'_testfiles' . $ds . 'image.svgz' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Media\Iface::class, $object );
+		$this->assertInstanceOf( \Aimeos\MW\Media\Image\Iface::class, $object );
+		$this->assertEquals( 'image/svg+xml', $object->getMimetype() );
 	}
 }

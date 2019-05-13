@@ -17,13 +17,13 @@ class SvgTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$this->content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.svg' );
+		$this->content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.svgz' );
 	}
 
 
 	public function testConstruct()
 	{
-		$media = new \Aimeos\MW\Media\Image\Svg( gzcompress( $this->content ), 'image/svg+xml', [] );
+		$media = new \Aimeos\MW\Media\Image\Svg( $this->content, 'image/svg+xml', [] );
 
 		$this->assertEquals( 'image/svg+xml', $media->getMimetype() );
 	}

@@ -36,7 +36,7 @@ class Svg
 	{
 		parent::__construct( $mimetype );
 
-		if( ( $string = @gzuncompress( $content ) ) !== false ) {
+		if( ( $string = @gzdecode( $content ) ) !== false ) {
 			$content = $string;
 		}
 
@@ -87,11 +87,15 @@ class Svg
 	 */
 	public function save( $filename = null, $mimetype = null )
 	{
-		if( $filename === null ) {
-			return $this->svg->asXml();
+		if( ( $content = $this->svg->asXml() ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( 'Could not create SVG file' );
 		}
 
-		if( file_put_contents( $filename, $this->svg->asXml() ) === false ) {
+		if( $filename === null ) {
+			return $content;
+		}
+
+		if( file_put_contents( $filename, $content ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Could not save SVG file' );
 		}
 	}
@@ -124,14 +128,28 @@ class Svg
 			}
 		}
 
+		$newWidth = $width;
+		$newHeight = $height;
 		$newMedia = clone $this;
 
-		if( $fit === false ) {
+		if( $fit === false )
+		{
+			$ratio = ( $w < $h ? $width / $w : $height / $h );
+			$newHeight = (int) $h * $ratio;
+			$newWidth = (int) $w * $ratio;
+
+			$width = ( $width ?: $newWidth );
+			$height = ( $height ?: $newHeight );
+
+			$x = (int) ( $newWidth / 2 - $width / 2 );
+			$y = (int) ( $newHeight / 2 - $height / 2 );
+
 			$newMedia->svg['preserveAspectRatio'] = 'xMinYMin slice';
+			$newMedia->svg['viewBox'] = $x . ' ' . $y . ' ' . $w . ' ' . $h;
 		}
 
-		$newMedia->svg['width'] = ((int) $width ?: $w / $h * $height) . 'px';
-		$newMedia->svg['height'] = ((int) $height ?: $h / $w * $width) . 'px';
+		$newMedia->svg['width'] = $width . 'px';
+		$newMedia->svg['height'] = $height . 'px';
 
 		return $newMedia;
 	}
