@@ -67,6 +67,46 @@ class Standard
 
 
 	/**
+	 * Copies the media item and the referenced files
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be copied
+	 * @param string $fsname Name of the file system to delete the files from
+	 * @return \Aimeos\MShop\Media\Item\Iface Copied media item with new files
+	 */
+	public function copy( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' )
+	{
+		$manager = \Aimeos\MShop::create( $this->context, 'media' );
+
+		$search = $manager->createSearch()->setSlice( 0, 1 );
+		$search->setConditions( $search->compare( '==', 'media.url', $item->getUrl() ) );
+
+		if( count( $manager->searchItems( $search ) ) > 0 ) {
+			return $item;
+		}
+
+		$fs = $this->context->getFilesystemManager()->get( $fsname );
+		$preview = $item->getPreview();
+		$path = $item->getUrl();
+
+		if( $fs->has( $path ) )
+		{
+			$newPath = $this->getFilePath( $path, 'files', $item->getMimeType() );
+			$fs->copy( $path, $newPath );
+			$item->setUrl( $newPath );
+		}
+
+		if( $fs->has( $preview ) )
+		{
+			$newPath = $this->getFilePath( $preview, 'preview', pathinfo( $preview, PATHINFO_EXTENSION ) );
+			$fs->copy( $preview, $newPath );
+			$item->setPreview( $newPath );
+		}
+
+		return $item;
+	}
+
+
+	/**
 	 * Deletes the files of the media item
 	 *
 	 * {inheritDoc}
@@ -81,7 +121,7 @@ class Standard
 		$search->setConditions( $search->compare( '==', 'media.url', $item->getUrl() ) );
 
 		if( count( $manager->searchItems( $search ) ) > 1 ) {
-			return $this;
+			return $item->setUrl( '' )->setPreview( '' );
 		}
 
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
@@ -90,8 +130,6 @@ class Standard
 		if( $path !== '' && $fs->has( $path ) ) {
 			$fs->rm( $path );
 		}
-
-		$item->setUrl( '' );
 
 		try
 		{
@@ -102,7 +140,7 @@ class Standard
 		}
 		catch( \Exception $e ) { ; } // Can be a mime icon with relative path
 
-		return $item->setPreview( '' );
+		return $item->setUrl( '' )->setPreview( '' );
 	}
 
 
@@ -234,10 +272,10 @@ class Standard
 	 *
 	 * @param string $filename Original file name, can contain the path as well
 	 * @param string $type File type, i.e. "files" or "preview"
-	 * @param string $mimetype Mime type of the file
+	 * @param string $mimeext Mime type or extension of the file
 	 * @return string New file name including the file path
 	 */
-	protected function getFilePath( $filename, $type, $mimetype )
+	protected function getFilePath( $filename, $type, $mimeext )
 	{
 		/** controller/common/media/standard/extensions
 		 * Available files extensions for mime types of uploaded files
@@ -254,15 +292,14 @@ class Standard
 		 * @category Developer
 		 */
 		$list = $this->context->getConfig()->get( 'controller/common/media/standard/extensions', [] );
-		$ext = '';
 
-		if( isset( $list[$mimetype] ) ) {
-			$ext = '.' . $list[$mimetype];
+		if( isset( $list[$mimeext] ) ) {
+			$mimeext = '.' . $list[$mimeext];
 		}
 
 		$filename = md5( $filename . getmypid() . microtime( true ) );
 
-		return "${type}/${filename[0]}/${filename[1]}/${filename}${ext}";
+		return "${type}/${filename[0]}/${filename[1]}/${filename}${mimeext}";
 	}
 
 

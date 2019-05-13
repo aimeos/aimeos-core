@@ -27,7 +27,6 @@ interface Iface
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context );
 
-
 	/**
 	 * Stores the uploaded file and adds the references to the media item
 	 *
@@ -43,6 +42,14 @@ interface Iface
 	 */
 	public function add( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, $fsname = 'fs-media' );
 
+	/**
+	 * Copies the media item and the referenced files
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be copied
+	 * @param string $fsname Name of the file system to delete the files from
+	 * @return \Aimeos\MShop\Media\Item\Iface Copied media item with new files
+	 */
+	public function copy( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' );
 
 	/**
 	 * Deletes the files referenced by the media item
@@ -55,7 +62,6 @@ interface Iface
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item with deleted files
 	 */
 	public function delete( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' );
-
 
 	/**
 	 * Rescales the files (original and preview) referenced by the media item

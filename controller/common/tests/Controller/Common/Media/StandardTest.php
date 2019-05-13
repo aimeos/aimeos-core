@@ -68,6 +68,35 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCopy()
+	{
+		$fsm = $this->getMockBuilder( \Aimeos\MW\Filesystem\Manager\Standard::class )
+			->setMethods( array( 'get' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fs = $this->getMockBuilder( \Aimeos\MW\Filesystem\Standard::class )
+			->setMethods( array( 'has', 'copy' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fsm->expects( $this->once() )->method( 'get' )
+			->will( $this->returnValue( $fs ) );
+
+		$fs->expects( $this->exactly( 2 ) )->method( 'has' )
+			->will( $this->returnValue( true ) );
+
+		$fs->expects( $this->exactly( 2 ) )->method( 'copy' );
+
+		$this->context->setFilesystemManager( $fsm );
+
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
+		$item->setPreview( 'test' )->setUrl( 'test' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->copy( $item ) );
+	}
+
+
 	public function testDelete()
 	{
 		$fsm = $this->getMockBuilder( \Aimeos\MW\Filesystem\Manager\Standard::class )
