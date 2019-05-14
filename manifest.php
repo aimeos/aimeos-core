@@ -19,7 +19,6 @@ return array(
 	'config' => array(
 		'config',
 		'lib/mshoplib/config',
-		'controller/common/config',
 	),
 	'i18n' => array(
 		'controller/common' => 'controller/common/i18n',
