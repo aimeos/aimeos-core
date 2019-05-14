@@ -19,6 +19,7 @@ namespace Aimeos\MShop\Media\Manager;
  * @subpackage Media
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\ListRef\Iface,
+		\Aimeos\MShop\Common\Manager\PropertyRef\Iface
 {
 }

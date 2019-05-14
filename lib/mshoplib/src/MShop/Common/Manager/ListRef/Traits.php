@@ -16,9 +16,22 @@ namespace Aimeos\MShop\Common\Manager\ListRef;
  *
  * @package MShop
  * @subpackage Common
+ * @todo 2020.01 Rename to "ListsRef"
  */
 trait Traits
 {
+	/**
+	 * Creates a new lists item object
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface New list items object
+	 */
+	public function createListsItem( array $values = [] )
+	{
+		return $this->getObject()->getSubManager( 'lists' )->createItem( $values );
+	}
+
+
 	/**
 	 * Creates a new item for the specific manager.
 	 *
@@ -80,6 +93,16 @@ trait Traits
 	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
 	abstract protected function getContext();
+
+
+	/**
+	 * Creates a new extension manager in the domain.
+	 *
+	 * @param string $domain Name of the domain (product, text, media, etc.)
+	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
+	 */
+	abstract public function getSubManager( $domain, $name = null );
 
 
 	/**

@@ -6,7 +6,6 @@
  * @copyright Aimeos (aimeos.org), 2015-2018
  * @package MShop
  * @subpackage Common
- * @version $Id $
  */
 
 
@@ -14,7 +13,8 @@ namespace Aimeos\MShop\Common\Manager\Lists;
 
 
 /**
- * Default list manager implementation
+ * Interface for all list manager implementations
+ *
  * @package MShop
  * @subpackage Common
  */

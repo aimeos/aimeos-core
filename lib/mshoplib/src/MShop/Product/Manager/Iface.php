@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Product\Manager;
 
 
 /**
- * Generic interface for managing products.
+ * Generic interface for managing products
  *
  * @package MShop
  * @subpackage Product

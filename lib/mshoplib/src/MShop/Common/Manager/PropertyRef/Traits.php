@@ -20,11 +20,33 @@ namespace Aimeos\MShop\Common\Manager\PropertyRef;
 trait Traits
 {
 	/**
+	 * Creates a new property item object
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Common\Item\Property\Iface New property item object
+	 */
+	public function createPropertyItem( array $values = [] )
+	{
+		return $this->getObject()->getSubManager( 'property' )->createItem( $values );
+	}
+
+
+	/**
 	 * Returns the outmost decorator of the decorator stack
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
 	 */
 	abstract protected function getObject();
+
+
+	/**
+	 * Creates a new extension manager in the domain.
+	 *
+	 * @param string $domain Name of the domain (product, text, media, etc.)
+	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
+	 */
+	abstract public function getSubManager( $domain, $name = null );
 
 
 	/**

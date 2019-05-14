@@ -19,6 +19,8 @@ namespace Aimeos\MShop\Customer\Manager;
  * @subpackage Customer
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface,
+		\Aimeos\MShop\Common\Manager\AddressRef\Iface, \Aimeos\MShop\Common\Manager\ListRef\Iface,
+		\Aimeos\MShop\Common\Manager\PropertyRef\Iface
 {
 }

@@ -19,6 +19,7 @@ namespace Aimeos\MShop\Attribute\Manager;
  * @subpackage Attribute
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface,
+		\Aimeos\MShop\Common\Manager\ListRef\Iface, \Aimeos\MShop\Common\Manager\PropertyRef\Iface
 {
 }

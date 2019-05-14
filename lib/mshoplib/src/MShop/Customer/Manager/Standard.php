@@ -22,10 +22,6 @@ class Standard
 	extends \Aimeos\MShop\Customer\Manager\Base
 	implements \Aimeos\MShop\Customer\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	use \Aimeos\MShop\Common\Manager\AddressRef\Traits;
-	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
-
-
 	private $searchConfig = array(
 		// no siteid
 		'customer.id' => array(

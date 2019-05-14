@@ -70,6 +70,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateAddressItem()
+	{
+		$item = $this->object->createAddressItem();
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Address\Iface::class, $item );
+	}
+
+
+	public function testCreateListsItem()
+	{
+		$item = $this->object->createListsItem();
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Lists\Iface::class, $item );
+	}
+
+
+	public function testCreatePropertyItem()
+	{
+		$item = $this->object->createPropertyItem();
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $item );
+	}
+
+
 	public function testFindItem()
 	{
 		$item = $this->object->findItem( 'UTC003' );

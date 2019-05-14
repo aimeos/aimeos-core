@@ -20,7 +20,8 @@ namespace Aimeos\MShop\Product\Manager;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Product\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
+	implements \Aimeos\MShop\Product\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface,
+		\Aimeos\MShop\Common\Manager\ListRef\Iface, \Aimeos\MShop\Common\Manager\PropertyRef\Iface // workaround for PHP problem, should be in Iface
 {
 	use \Aimeos\MShop\Common\Manager\ListRef\Traits;
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
