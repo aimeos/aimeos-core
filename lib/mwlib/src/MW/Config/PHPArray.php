@@ -23,7 +23,6 @@ class PHPArray
 	implements \Aimeos\MW\Config\Iface
 {
 	private $config;
-	private $paths;
 
 
 	/**
@@ -35,7 +34,10 @@ class PHPArray
 	public function __construct( $config = [], $paths = [] )
 	{
 		$this->config = $config;
-		$this->paths = (array) $paths;
+
+		foreach( (array) $paths as $fspath ) {
+			$this->config = $this->load( $this->config, $fspath );
+		}
 	}
 
 
@@ -49,14 +51,6 @@ class PHPArray
 	public function get( $name, $default = null )
 	{
 		$parts = explode( '/', trim( $name, '/' ) );
-
-		if( ( $value = $this->getPart( $this->config, $parts ) ) !== null ) {
-			return $value;
-		}
-
-		foreach( $this->paths as $fspath ) {
-			$this->config = $this->load( $this->config, $fspath, $parts );
-		}
 
 		if( ( $value = $this->getPart( $this->config, $parts ) ) !== null ) {
 			return $value;
@@ -133,28 +127,28 @@ class PHPArray
 	 * @param string[] $parts List of config name parts to look for
 	 * @return array Merged configuration
 	 */
-	protected function load( array $config, $path, array $parts )
+	protected function load( array $config, $path )
 	{
-		if( ( $key = array_shift( $parts ) ) !== null )
+		if( is_dir( $path ) )
 		{
-			$newPath = $path . DIRECTORY_SEPARATOR . $key;
-
-			if( is_dir( $newPath ) )
+			foreach( new \DirectoryIterator( $path ) as $entry )
 			{
+				if( $entry->isDot() ) {
+					continue;
+				}
+
+				$key = $entry->getBasename( '.php' );
+				$filepath = $entry->getPathname();
+
 				if( !isset( $config[$key] ) ) {
 					$config[$key] = [];
 				}
 
-				$config[$key] = $this->load( $config[$key], $newPath, $parts );
-			}
-
-			if( file_exists( $newPath . '.php' ) )
-			{
-				if( !isset( $config[$key] ) ) {
-					$config[$key] = [];
+				if( $entry->isDir() ) {
+					$config[$key] = $this->load( $config[$key], $filepath );
+				} elseif( $entry->isFile() ) {
+					$config[$key] = array_replace_recursive( $config[$key], $this->includeFile( $filepath ) );
 				}
-
-				$config[$key] = array_replace_recursive( $config[$key], $this->includeFile( $newPath . '.php' ) );
 			}
 		}
 
