@@ -22,6 +22,18 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Decorator\Base
 {
 	/**
+	 * Creates a new lists item object
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface New lists item object
+	 */
+	public function createListsItem( array $values = [] )
+	{
+		return $this->getManager()->createListsItem( $values );
+	}
+
+
+	/**
 	 * Returns a list of items starting with the given category that are in the path to the root node
 	 *
 	 * @param string $id ID of item to get the path for
