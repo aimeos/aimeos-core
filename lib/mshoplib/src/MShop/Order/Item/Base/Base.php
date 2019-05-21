@@ -763,7 +763,7 @@ abstract class Base
 		$attributeMap = [];
 		$attributeCount = 0;
 
-		foreach( $item->getAttributes() as $attributeItem )
+		foreach( $item->getAttributeItems() as $attributeItem )
 		{
 			$attributeMap[$attributeItem->getCode()][$attributeItem->getValue()] = $attributeItem;
 			$attributeCount++;
