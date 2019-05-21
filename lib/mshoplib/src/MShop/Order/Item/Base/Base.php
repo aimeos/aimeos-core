@@ -277,9 +277,9 @@ abstract class Base
 
 		$this->notifyListeners( 'editProduct.before', $item );
 
-		if( ( $origpos = $this->getSameProduct( $item, $this->products ) ) !== false )
+		if( ( $pos = $this->getSameProduct( $item, $this->products ) ) !== false )
 		{
-			$this->products[$origpos] = $item;
+			$this->products[$pos] = $item;
 			$this->setModified();
 		}
 		else
