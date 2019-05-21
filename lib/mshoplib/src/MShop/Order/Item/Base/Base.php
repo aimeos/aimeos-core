@@ -673,9 +673,11 @@ abstract class Base
 	protected function getSameProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, array $products )
 	{
 		$attributeMap = [];
+		$attributeCount = 0;
 
 		foreach( $item->getAttributes() as $attributeItem ) {
-			$attributeMap[$attributeItem->getCode()] = $attributeItem;
+			$attributeMap[$attributeItem->getCode()][$attributeItem->getValue()] = $attributeItem;
+			$attributeCount++;
 		}
 
 		foreach( $products as $position => $product )
@@ -686,15 +688,14 @@ abstract class Base
 
 			$prodAttributes = $product->getAttributes();
 
-			if( count( $prodAttributes ) !== count( $attributeMap ) ) {
+			if( count( $prodAttributes ) !== $attributeCount ) {
 				continue;
 			}
 
 			foreach( $prodAttributes as $attribute )
 			{
-				if( array_key_exists( $attribute->getCode(), $attributeMap ) === false
-					|| $attributeMap[$attribute->getCode()]->getValue() != $attribute->getValue()
-					|| $attributeMap[$attribute->getCode()]->getQuantity() != $attribute->getQuantity()
+				if( isset( $attributeMap[$attribute->getCode()][$attribute->getValue()] ) === false
+					|| $attributeMap[$attribute->getCode()][$attribute->getValue()]->getQuantity() != $attribute->getQuantity()
 				) {
 					continue 2; // jump to outer loop
 				}
