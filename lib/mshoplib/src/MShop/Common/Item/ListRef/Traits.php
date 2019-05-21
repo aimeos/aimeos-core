@@ -23,6 +23,7 @@ trait Traits
 	private $listRefItems = [];
 	private $listRmItems = [];
 	private $listPrepared = false;
+	private $listMap = [];
 	private $listMax = 0;
 
 
@@ -78,6 +79,10 @@ trait Traits
 		$id = $listItem->getId() ?: '_' . $domain . '_' . $listItem->getType() . '_' . $listItem->getRefId();
 		$this->listItems[$domain][$id] = $listItem->setDomain( $domain )->setRefItem( $refItem );
 
+		if( isset( $this->listMap[$domain] ) ) {
+			$this->listMap[$domain][$listItem->getType()][$listItem->getRefId()] = $listItem;
+		}
+
 		return $this;
 	}
 
@@ -92,18 +97,13 @@ trait Traits
 	 */
 	public function deleteListItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null )
 	{
-		if( isset( $this->listItems[$domain] ) )
-		{
-			foreach( $this->listItems[$domain] as $key => $litem )
-			{
-				if( $litem === $listItem )
-				{
-					$this->listRmItems[] = $listItem->setRefItem( $refItem );
-					unset( $this->listItems[$domain][$key] );
+		if( isset( $this->listItems[$domain] )
+			&& ( $key = array_search( $listItem, $this->listItems[$domain], true ) ) !== false
+		) {
+			$this->listRmItems[] = $listItem->setRefItem( $refItem );
 
-					return $this;
-				}
-			}
+			unset( $this->listMap[$domain][$listItem->getType()][$listItem->getRefId()] );
+			unset( $this->listItems[$domain][$key] );
 		}
 
 		return $this;
@@ -165,20 +165,30 @@ trait Traits
 	 */
 	public function getListItem( $domain, $listtype, $refId, $active = true )
 	{
-		if( isset( $this->listItems[$domain] ) )
+		if( !isset( $this->listMap[$domain] ) && isset( $this->listItems[$domain] ) )
 		{
-			foreach( $this->listItems[$domain] as $listItem )
-			{
-				if( $listItem->getRefId() == $refId && $listItem->getType() === $listtype
-					&& ( $active === false || $listItem->isAvailable() )
-				) {
-					if( isset( $this->listRefItems[$domain][$refId] ) ) {
-						$listItem->setRefItem( $this->listRefItems[$domain][$refId] );
-					}
+			$map = [];
 
-					return $listItem;
-				}
+			foreach( $this->listItems[$domain] as $listItem ) {
+				$map[$listItem->getType()][$listItem->getRefId()] = $listItem;
 			}
+
+			$this->listMap[$domain] = $map;
+		}
+
+		if( isset( $this->listMap[$domain][$listtype][$refId] ) )
+		{
+			$listItem = $this->listMap[$domain][$listtype][$refId];
+
+			if( $active === true && $listItem->isAvailable() === false ) {
+				return;
+			}
+
+			if( isset( $this->listRefItems[$domain][$refId] ) ) {
+				$listItem->setRefItem( $this->listRefItems[$domain][$refId] );
+			}
+
+			return $listItem;
 		}
 	}
 
