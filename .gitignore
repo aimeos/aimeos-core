@@ -1,6 +1,7 @@
 composer.lock
 /config/resource.php
 
+Packages/
 vendor/
 
 misc/apidoc/
