@@ -212,7 +212,7 @@ class Standard
 
 			$path = (string) $propItem->getValue();
 			// Don't try to overwrite mime icons that are stored in another directory
-			$filepath = ( strncmp( $path, 'preview/', 8 ) ? $this->getFilePath( $path, '', $mime ) : $path );
+			$filepath = ( strncmp( $path, 'preview/', 8 ) ? $this->getFilePath( $path, 'preview', $mime ) : $path );
 
 			$this->store( $filepath, $mediaFile->save( null, $mime ), $fsname );
 			$item->addPropertyItem( $propItem->setValue( $filepath ) );
@@ -374,7 +374,6 @@ class Standard
 	 * @param string $type File type, i.e. "files" or "preview"
 	 * @param string $mimeext Mime type or extension of the file
 	 * @return string New file name including the file path
-	 * @deprecated 2020.01 $type will be removed
 	 */
 	protected function getFilePath( $filename, $type, $mimeext )
 	{
