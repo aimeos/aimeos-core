@@ -79,11 +79,7 @@ return array(
 	),
 
 	'media/property/type' => array(
-		array( 'domain' => 'attribute', 'code' => 'name', 'label' => 'Media title', 'status' => 1 ),
-		array( 'domain' => 'catalog', 'code' => 'name', 'label' => 'Media title', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'name', 'label' => 'Media title', 'status' => 1 ),
-		array( 'domain' => 'service', 'code' => 'name', 'label' => 'Media title', 'status' => 1 ),
-		array( 'domain' => 'supplier', 'code' => 'name', 'label' => 'Media title', 'status' => 1 ),
+		array( 'domain' => 'media', 'code' => 'name', 'label' => 'Media title', 'status' => 1 ),
 	),
 
 	'plugin/type' => array(
