@@ -226,7 +226,7 @@ class Standard
 	/**
 	 * Adds the used property types if necessary
 	 *
-	 * @param integer[] List of image widths
+	 * @param integer[] $types List of image widths
 	 */
 	protected function addPropertyTypes( $types )
 	{
@@ -315,7 +315,6 @@ class Standard
 				$image = $media->scale( $maxwidth, $maxheight, !$fit );
 				$list[$image->getWidth()] = $image;
 			}
-
 		}
 
 		$this->addPropertyTypes( array_keys( $list ) );
