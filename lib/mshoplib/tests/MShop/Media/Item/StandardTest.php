@@ -197,7 +197,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MShop\Media\Item\Standard( $this->values );
 
-		$this->assertEquals( [0 => '/directory/test.jpg'], $object->getPreviews() );
+		$this->assertEquals( [1 => '/directory/test.jpg'], $object->getPreviews() );
 	}
 
 

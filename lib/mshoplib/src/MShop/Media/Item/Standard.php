@@ -331,7 +331,9 @@ class Standard
 			}
 		}
 
-		return !empty( $list ) ? $list : [$this->getPreview()];
+		ksort( $list );
+
+		return !empty( $list ) ? $list : [1 => $this->getPreview()];
 	}
 
 
