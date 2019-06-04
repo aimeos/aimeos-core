@@ -17,6 +17,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
+		\Aimeos\MShop::cache( true );
+
 		$this->context = \TestHelperCntl::getContext();
 		$this->object = new \Aimeos\Controller\Common\Media\Standard( $this->context );
 	}
@@ -24,7 +26,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		$this->object = null;
+		\Aimeos\MShop::cache( false );
+		unset( $this->object );
 	}
 
 
@@ -36,11 +39,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'checkFileUpload' );
-		$object->expects( $this->exactly( 2 ) )->method( 'store' );
+		$object->expects( $this->exactly( 3 ) )->method( 'store' );
 
 		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 		$file->expects( $this->once() )->method( 'getStream' )
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.gif' ) ) );
+
+
+		$propManager = $this->getMockBuilder( \Aimeos\MShop\Media\Manager\Property\Type\Standard::class )
+			->setConstructorArgs( array( $this->context ) )
+			->setMethods( array( 'saveItem' ) )
+			->getMock();
+
+		$propManager->expects( $this->exactly( 2 ) )->method( 'saveItem' )->will( $this->returnArgument( 0 ) );
+
+		\Aimeos\MShop::inject( 'media/property/type', $propManager );
+
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
 
@@ -138,7 +152,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'getFileContent' )
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.png' ) ) );
 
-		$object->expects( $this->exactly( 2 ) )->method( 'store' );
+		$object->expects( $this->exactly( 3 ) )->method( 'store' );
+
+
+		$propManager = $this->getMockBuilder( \Aimeos\MShop\Media\Manager\Property\Type\Standard::class )
+			->setConstructorArgs( array( $this->context ) )
+			->setMethods( array( 'saveItem' ) )
+			->getMock();
+
+		$propManager->expects( $this->exactly( 2 ) )->method( 'saveItem' )->will( $this->returnArgument( 0 ) );
+
+		\Aimeos\MShop::inject( 'media/property/type', $propManager );
 
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();

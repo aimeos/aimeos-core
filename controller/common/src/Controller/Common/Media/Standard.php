@@ -21,6 +21,7 @@ class Standard
 	implements \Aimeos\Controller\Common\Media\Iface
 {
 	private $context;
+	private $types = [];
 
 
 	/**
@@ -85,7 +86,6 @@ class Standard
 		}
 
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
-		$preview = $item->getPreview();
 		$path = $item->getUrl();
 
 		if( $fs->has( $path ) )
@@ -95,15 +95,18 @@ class Standard
 			$item->setUrl( $newPath );
 		}
 
-		if( $fs->has( $preview ) )
+		foreach( $item->getPreviews() as $preview )
 		{
-			try
+			if( $fs->has( $preview ) )
 			{
-				$newPath = $this->getFilePath( $preview, 'preview', pathinfo( $preview, PATHINFO_EXTENSION ) );
-				$fs->copy( $preview, $newPath );
-				$item->setPreview( $newPath );
+				try
+				{
+					$newPath = $this->getFilePath( $preview, 'preview', pathinfo( $preview, PATHINFO_EXTENSION ) );
+					$fs->copy( $preview, $newPath );
+					$item->setPreview( $newPath );
+				}
+				catch( \Aimeos\MW\Filesystem\Exception $e ) {} // mime icons can't be copied
 			}
-			catch( \Aimeos\MW\Filesystem\Exception $e ) {} // mime icons can't be copied
 		}
 
 		return $item;
@@ -129,22 +132,24 @@ class Standard
 		}
 
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
-		$preview = $item->getPreview();
 		$path = $item->getUrl();
 
 		if( $path !== '' && $fs->has( $path ) ) {
 			$fs->rm( $path );
 		}
 
-		try
+		foreach( $item->getPreviews() as $preview )
 		{
-			if( $preview !== '' && $fs->has( $preview ) ) {
-				$fs->rm( $preview );
+			try
+			{
+				if( $preview !== '' && $fs->has( $preview ) ) {
+					$fs->rm( $preview );
+				}
 			}
+			catch( \Exception $e ) { ; } // Can be a mime icon with relative path
 		}
-		catch( \Exception $e ) { ; } // Can be a mime icon with relative path
 
-		return $item->setUrl( '' )->setPreview( '' );
+		return $item->setUrl( '' )->setPreview( '' )->deletePropertyItems( $item->getPropertyItems() );
 	}
 
 
@@ -188,25 +193,58 @@ class Standard
 		$mediaFile = $this->scaleImage( $media, 'files' );
 
 		// Don't overwrite original files that are stored in linked directories
-		$filepath = ( strncmp( $path, 'files/', 6 ) !== 0 ? $this->getFilePath( $path, 'files', $mime ) : $path );
+		$filepath = ( strncmp( $path, 'files/', 6 ) ? $this->getFilePath( $path, 'files', $mime ) : $path );
 
 		$this->store( $filepath, $mediaFile->save( null, $mime ), $fsname );
 		$item = $item->setUrl( $filepath )->setMimeType( $mime );
 		unset( $mediaFile );
 
 
-		$path = $item->getPreview();
+		$mediaFiles = $this->createPreviews( $media );
 		$mime = $this->getMimeType( $media, 'preview' );
-		$mediaFile = $this->scaleImage( $media, 'preview' );
+		$manager = \Aimeos\MShop::create( $this->context, 'media' );
 
-		// Don't try to overwrite mime icons that are stored in another directory
-		$filepath = ( strncmp( $path, 'preview/', 8 ) !== 0 ? $this->getFilePath( $path, 'preview', $mime ) : $path );
+		foreach( $mediaFiles as $type => $mediaFile )
+		{
+			if( ( $propItem = current( $item->getPropertyItems( $type ) ) ) === false ) {
+				$propItem = $manager->createPropertyItem()->setType( $type );
+			}
 
-		$this->store( $filepath, $mediaFile->save( null, $mime ), $fsname );
-		$item = $item->setPreview( $filepath );
-		unset( $mediaFile );
+			$path = (string) $propItem->getValue();
+			// Don't try to overwrite mime icons that are stored in another directory
+			$filepath = ( strncmp( $path, 'preview/', 8 ) ? $this->getFilePath( $path, '', $mime ) : $path );
 
-		return $item;
+			$this->store( $filepath, $mediaFile->save( null, $mime ), $fsname );
+			$item->addPropertyItem( $propItem->setValue( $filepath ) );
+			unset( $mediaFile );
+		}
+
+		return $item->setPreview( current( $item->getPreviews() ) ?: '' );
+	}
+
+
+	/**
+	 * Adds the used property types if necessary
+	 *
+	 * @param integer[] List of image widths
+	 */
+	protected function addPropertyTypes( $types )
+	{
+		foreach( $types as $type )
+		{
+			if( !isset( $this->types[$type] ) )
+			{
+				$manager = \Aimeos\MShop::create( $this->context, 'media/property/type' );
+
+				try {
+					$item = $manager->findItem( $type, [], 'media' );
+				} catch( \Aimeos\MShop\Exception $e ) {
+					$item = $manager->createItem()->setDomain( 'media' )->setCode( $type )->setLabel( $type . 'px width' );
+				}
+
+				$this->types[$type] = $manager->saveItem( $item )->getCode();
+			}
+		}
 	}
 
 
@@ -239,6 +277,49 @@ class Standard
 					throw new \Aimeos\Controller\Common\Exception( 'Unknown upload error' );
 			}
 		}
+	}
+
+
+	/**
+	 * Creates scaled images according to the configuration settings
+	 *
+	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
+	 * @return \Aimeos\MW\Media\Image\Iface[] Associative list of image width as keys and scaled media object as values
+	 */
+	protected function createPreviews( \Aimeos\MW\Media\Image\Iface $media )
+	{
+		$list = [];
+		$config = $this->context->getConfig();
+
+		foreach( $config->get( 'controller/common/media/standard/previews', [] ) as $entry )
+		{
+			$maxwidth = ( isset( $entry['maxwidth'] ) ? (int) $entry['maxwidth'] : null );
+			$maxheight = ( isset( $entry['maxheight'] ) ? (int) $entry['maxheight'] : null );
+			$fit = ( isset( $entry['force-size'] ) ? (bool) $entry['force-size'] : false );
+
+			if( $maxheight || $maxwidth )
+			{
+				$image = $media->scale( $maxwidth, $maxheight, !$fit );
+				$list[$image->getWidth()] = $image;
+			}
+		}
+
+		if( empty( $list ) )
+		{
+			$maxwidth = $config->get( 'controller/common/media/standard/preview/maxwidth', null );
+			$maxheight = $config->get( 'controller/common/media/standard/preview/maxheight', null );
+			$fit = (bool) $config->get( 'controller/common/media/standard/preview/force-size', false );
+
+			if( $maxheight || $maxwidth )
+			{
+				$image = $media->scale( $maxwidth, $maxheight, !$fit );
+				$list[$image->getWidth()] = $image;
+			}
+
+		}
+
+		$this->addPropertyTypes( array_keys( $list ) );
+		return $list;
 	}
 
 
@@ -294,6 +375,7 @@ class Standard
 	 * @param string $type File type, i.e. "files" or "preview"
 	 * @param string $mimeext Mime type or extension of the file
 	 * @return string New file name including the file path
+	 * @deprecated 2020.01 $type will be removed
 	 */
 	protected function getFilePath( $filename, $type, $mimeext )
 	{
@@ -463,6 +545,7 @@ class Standard
 	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
 	 * @param string $type Type of the image like "preview" or "files"
 	 * @return \Aimeos\MW\Media\Image\Iface Scaled media object
+	 * @deprecated 2020.01 Will scale main file only
 	 */
 	protected function scaleImage( \Aimeos\MW\Media\Image\Iface $media, $type )
 	{
