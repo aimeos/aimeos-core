@@ -449,6 +449,8 @@ return [
 					],
 					'property' => [[
 						'media.property.type' => 'copyright', 'media.property.languageid' => 'de', 'media.property.value' => 'ich, 2019',
+					], [
+						'media.property.type' => '200', 'media.property.value' => 'prod_266x221/199_prod_200x180.jpg',
 					]],
 				], [
 					'product.lists.type' => 'unittype9', 'product.lists.position' => 2,

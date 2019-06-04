@@ -69,6 +69,28 @@ interface Iface
 	public function setMimeType( $mimetype );
 
 	/**
+	 * Returns the preview url of the media item.
+	 *
+	 * @return string Preview URL of the media file
+	 */
+	public function getPreview();
+
+	/**
+	 * Returns all preview urls of the media item
+	 *
+	 * @return array Associative list of widths in pixels as keys and urls as values
+	 */
+	public function getPreviews();
+
+	/**
+	 * Sets the new preview url of the media item.
+	 *
+	 * @param string $url Preview URL of the media file
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 */
+	public function setPreview( $url );
+
+	/**
 	 * Returns the url of the media item.
 	 *
 	 * @return string URL of the media file
@@ -82,19 +104,4 @@ interface Iface
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setUrl( $url );
-
-	/**
-	 * Returns the preview url of the media item.
-	 *
-	 * @return string Preview URL of the media file
-	 */
-	public function getPreview();
-
-	/**
-	 * Sets the new preview url of the media item.
-	 *
-	 * @param string $url Preview URL of the media file
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
-	 */
-	public function setPreview( $url );
 }

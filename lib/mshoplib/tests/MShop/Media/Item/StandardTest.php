@@ -35,7 +35,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'languageid' => 'de',
 		);
 
-		$this->object = new \Aimeos\MShop\Media\Item\Standard( $this->values );
+		$propValues = ['media.property.type' => '500', 'media.property.value' => 'image-500w.jpg', 'languageid' => null];
+		$propItems = [new \Aimeos\MShop\Common\Item\Property\Standard( 'media.property.', $propValues )];
+
+		$this->object = new \Aimeos\MShop\Media\Item\Standard( $this->values, [], [], $propItems );
 	}
 
 
@@ -184,6 +187,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetPreviews()
+	{
+		$this->assertEquals( [500 => 'image-500w.jpg'], $this->object->getPreviews() );
+	}
+
+
+	public function testGetPreviewNone()
+	{
+		$object = new \Aimeos\MShop\Media\Item\Standard( $this->values );
+
+		$this->assertEquals( [0 => '/directory/test.jpg'], $object->getPreviews() );
+	}
+
+
 	public function testSetPreview()
 	{
 		$return = $this->object->setPreview( '/pictures/category.jpg' );
@@ -259,7 +276,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'media.domain' => 'product',
 			'media.label' => 'test item',
 			'media.languageid' => 'de',
-			'media.type' => 'default',
 			'media.type' => 'test',
 			'media.mimetype' => 'image/jpeg',
 			'media.preview' => 'preview.jpg',

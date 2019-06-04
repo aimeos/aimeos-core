@@ -314,6 +314,28 @@ class Standard
 
 
 	/**
+	 * Returns all preview urls of the media item
+	 *
+	 * @return array Associative list of widths in pixels as keys and urls as values
+	 */
+	public function getPreviews()
+	{
+		$list = [];
+
+		foreach( $this->getPropertyItems() as $propItem )
+		{
+			$type = $propItem->getType();
+
+			if( ctype_digit( $type ) ) {
+				$list[$type] = $propItem->getValue();
+			}
+		}
+
+		return !empty( $list ) ? $list : [$this->getPreview()];
+	}
+
+
+	/**
 	 * Sets the new preview url of the media item.
 	 *
 	 * @param string $url Preview URL of the media file
