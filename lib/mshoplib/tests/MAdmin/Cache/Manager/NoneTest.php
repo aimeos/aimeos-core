@@ -6,6 +6,7 @@
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
 
+
 namespace Aimeos\MAdmin\Cache\Manager;
 
 

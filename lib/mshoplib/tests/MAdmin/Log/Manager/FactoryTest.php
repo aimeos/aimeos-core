@@ -9,9 +9,6 @@
 namespace Aimeos\MAdmin\Log\Manager;
 
 
-/**
- * Test class for \Aimeos\MAdmin\Log\Manager\Factory.
- */
 class FactoryTest extends \PHPUnit\Framework\TestCase
 {
 	public function testCreateManager()
