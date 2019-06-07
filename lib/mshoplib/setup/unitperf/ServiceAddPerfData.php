@@ -128,7 +128,7 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$tListItem = $listManager->createItem()->setType( 'default' );
 
 		$mediaItem = $mediaManager->createItem()->setType( 'icon' )->setMimeType( 'image/png' );
-		$priceItem = $priceManager->createItem()->setType( 'default' );
+		$priceItem = $priceManager->createItem()->setType( 'default' )->setCurrencyId( 'EUR' );
 		$textItem = $textManager->createItem()->setType( 'short' );
 
 

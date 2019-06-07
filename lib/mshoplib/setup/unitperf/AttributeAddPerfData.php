@@ -182,6 +182,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$listManager = \Aimeos\MShop::create( $this->additional, 'attribute/lists' );
 
 		$priceItem = $priceManager->createItem()
+			->setCurrencyId( 'EUR' )
 			->setTaxRate( '20.00' )
 			->setType( 'default' )
 			->setStatus( 1 );
