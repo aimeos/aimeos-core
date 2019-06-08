@@ -23,14 +23,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-
-		$search = $catalogManager->createSearch( true );
-		$search->setConditions( $search->compare( '==', 'catalog.code', 'home' ) );
-		$result = $catalogManager->searchItems( $search );
-
-		if( ( $this->catItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No catalog item found' );
-		}
+		$this->catItem = $catalogManager->getTree( null, [], \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
 
 		// parser warm up so files are already parsed (same as APC is used)
@@ -57,12 +50,12 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '>=', $search->createFunction( 'index.catalog.position', array( 'default', $catId ) ), 0 ),
+			$search->compare( '>=', $search->createFunction( 'index.catalog:position', array( 'default', $catId ) ), 0 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '+', $search->createFunction( 'sort:index.catalog.position', array( 'default', $catId ) ) ),
+			$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', array( 'default', $catId ) ) ),
 		);
 		$search->setSortations( $sort );
 		$search->setSlice( 0, 1 );
@@ -89,12 +82,12 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'index.catalog.id', $catId ),
-			$search->compare( '>=', $search->createFunction( 'index.text.value', array( 'default', 'en', 'name', 'product' ) ), '' ),
+			$search->compare( '!=', $search->createFunction( 'index.text:name', array( 'en', '' ) ), null ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '+', $search->createFunction( 'sort:index.text.value', array( 'default', 'en', 'name', 'product' ) ) ),
+			$search->sort( '+', $search->createFunction( 'sort:index.text:name', array( 'en', '' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -120,12 +113,12 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'index.catalog.id', $catId ),
-			$search->compare( '>=', $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
+			$search->compare( '>=', $search->createFunction( 'index.price:value', array( 'EUR' ) ), 0 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '+', $search->createFunction( 'sort:index.price.value', array( 'default', 'EUR', 'default' ) ) ),
+			$search->sort( '+', $search->createFunction( 'sort:index.price:value', array( 'EUR' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -139,16 +132,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchByCategories()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-
-		$search = $catalogManager->createSearch( true );
-		$search->setConditions( $search->compare( '==', 'catalog.label', 'cat-1' ) );
-		$result = $catalogManager->searchItems( $search );
-
-		if( ( $catItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No catalog item found' );
-		}
-
+		$catItem = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context )->findItem( 'cat-1' );
 		$catIds = array( (int) $this->catItem->getId(), (int) $catItem->getId() );
 
 
@@ -159,14 +143,13 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$search->setSlice( 0, $this->slizeSize );
 
 		$expr = array(
-			$search->getConditions(),
 			$search->compare( '==', 'index.catalog.id', (int) $this->catItem->getId() ),
-			$search->compare( '==', $search->createFunction( 'index.catalogcount', array( 'default', $catIds ) ), 2 ),
+			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '+', $search->createFunction( 'sort:index.catalog.position', array( 'default', $catIds ) ) ),
+			$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', array( 'default', $catIds ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -188,13 +171,13 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '>=', $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
-			$search->compare( '<=', $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) ), 1000 ),
+			$search->compare( '>=', $search->createFunction( 'index.price:value', array( 'EUR' ) ), 0 ),
+			$search->compare( '<=', $search->createFunction( 'index.price:value', array( 'EUR' ) ), 1000 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '+', $search->createFunction( 'sort:index.price.value', array( 'default', 'EUR', 'default' ) ) ),
+			$search->sort( '+', $search->createFunction( 'sort:index.price:value', array( 'EUR' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -216,12 +199,12 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'default', 'en', 'pink' ) ), 0 ),
+			$search->compare( '!=', $search->createFunction( 'index.text:relevance', array( 'en', 'pink' ) ), null ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '-', $search->createFunction( 'sort:index.text.relevance', array( 'default', 'en', 'pink' ) ) ),
+			$search->sort( '-', $search->createFunction( 'sort:index.text:relevance', array( 'en', 'pink' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -243,12 +226,12 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'default', 'en', 'blue' ) ), 0 ),
+			$search->compare( '!=', $search->createFunction( 'index.text:relevance', array( 'en', 'blue' ) ), null ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '-', $search->createFunction( 'sort:index.text.value', array( 'default', 'en', 'name', 'product' ) ) ),
+			$search->sort( '-', $search->createFunction( 'sort:index.text:name', array( 'en' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -274,13 +257,13 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'index.catalog.id', $catId ),
-			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'default', 'en', 'plain' ) ), 0 ),
-			$search->compare( '>=', $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
+			$search->compare( '!=', $search->createFunction( 'index.text:relevance', array( 'en', 'plain' ) ), null ),
+			$search->compare( '>=', $search->createFunction( 'index.price:value', array( 'EUR' ) ), 0 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '-', $search->createFunction( 'sort:index.text.relevance', array( 'default', 'en', 'plain' ) ) ),
+			$search->sort( '-', $search->createFunction( 'sort:index.text:relevance', array( 'en', 'plain' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -294,16 +277,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchByCategoriesPriceText()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-
-		$search = $catalogManager->createSearch( true );
-		$search->setConditions( $search->compare( '==', 'catalog.label', 'cat-1' ) );
-		$result = $catalogManager->searchItems( $search );
-
-		if( ( $catItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No catalog item found' );
-		}
-
+		$catItem = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context )->findItem( 'cat-1' );
 		$catIds = array( (int) $this->catItem->getId(), (int) $catItem->getId() );
 
 
@@ -316,14 +290,13 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'index.catalog.id', (int) $this->catItem->getId() ),
-			$search->compare( '>=', $search->createFunction( 'index.catalogcount', array( 'default', $catIds ) ), 2 ),
-			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'default', 'en', 'plain' ) ), 0 ),
-			$search->compare( '>=', $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
+			$search->compare( '!=', $search->createFunction( 'index.text:relevance', array( 'en', 'plain' ) ), null ),
+			$search->compare( '>=', $search->createFunction( 'index.price:value', array( 'EUR' ) ), 0 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '-', $search->createFunction( 'sort:index.text.relevance', array( 'default', 'en', 'plain' ) ) ),
+			$search->sort( '-', $search->createFunction( 'sort:index.text:relevance', array( 'en', 'plain' ) ) ),
 		);
 		$search->setSortations( $sort );
 
