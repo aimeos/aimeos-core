@@ -278,8 +278,6 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 	public function testSearchByCategoriesPriceText()
 	{
 		$catItem = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context )->findItem( 'cat-1' );
-		$catIds = array( (int) $this->catItem->getId(), (int) $catItem->getId() );
-
 
 		$start = microtime( true );
 
