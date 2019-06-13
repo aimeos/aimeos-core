@@ -80,6 +80,9 @@ return array(
 
 	'media/property/type' => array(
 		array( 'domain' => 'media', 'code' => 'name', 'label' => 'Media title', 'status' => 1 ),
+		array( 'domain' => 'media', 'code' => '240', 'label' => '240 width', 'status' => 1 ),
+		array( 'domain' => 'media', 'code' => '720', 'label' => '720 width', 'status' => 1 ),
+		array( 'domain' => 'media', 'code' => '2160', 'label' => '2160 width', 'status' => 1 ),
 	),
 
 	'plugin/type' => array(
