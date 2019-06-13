@@ -191,6 +191,15 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 					$listItem = $listManager->createItem()->fromArray( $data );
 					$refItem = $manager->createItem()->fromArray( $data );
 
+					if( isset( $data['property'] ) )
+					{
+						foreach( (array) $data['property'] as $property )
+						{
+							$propItem = $manager->createPropertyItem()->fromArray( $property );
+							$refItem->addPropertyItem( $propItem );
+						}
+					}
+
 					$item->addListItem( $refDomain, $listItem, $refItem );
 				}
 			}
