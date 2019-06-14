@@ -39,14 +39,15 @@ abstract class Base
 	 * @param array $values Associative array of key/value pairs for price, costs, rebate and currencyid
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
-	 * @param integer $precision Number of decimal digits
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
 	 */
-	public function __construct( $prefix, array $values = [], array $listItems = [], array $refItems = [], $precision = 2 )
+	public function __construct( $prefix, array $values = [], array $listItems = [], array $refItems = [], array $propItems = [] )
 	{
 		parent::__construct( $prefix, $values );
 
+		$this->precision = ( isset( $this->values['precision'] ) ? $this->values['precision'] : 2 );
 		$this->initListItems( $listItems, $refItems );
-		$this->precision = $precision;
+		$this->initPropertyItems( $propItems );
 	}
 
 

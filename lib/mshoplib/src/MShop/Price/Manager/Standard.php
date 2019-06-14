@@ -802,16 +802,18 @@ class Standard
 	 * @param array $values List of attributes for price item
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
 	 * @return \Aimeos\MShop\Price\Item\Iface New price item
 	 */
-	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [] )
+	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [], array $propItems = [] )
 	{
 		$values['currencyid'] = $this->currencyId;
+		$values['precision'] = $this->precision;
 
 		if( !isset( $values['price.taxflag'] ) ) {
 			$values['price.taxflag'] = $this->taxflag;
 		}
 
-		return new \Aimeos\MShop\Price\Item\Standard( $values, $listItems, $refItems, $this->precision );
+		return new \Aimeos\MShop\Price\Item\Standard( $values, $listItems, $refItems, $propItems );
 	}
 }

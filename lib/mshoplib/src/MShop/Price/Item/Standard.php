@@ -30,13 +30,13 @@ class Standard extends Base
 	 * @param array $values Associative array of key/value pairs for price, costs, rebate and currencyid
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
-	 * @param integer $precision Number of decimal digits
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
 	 */
-	public function __construct( array $values = [], array $listItems = [], array $refItems = [], $precision = 2 )
+	public function __construct( array $values = [], array $listItems = [], array $refItems = [], array $propItems = [] )
 	{
-		parent::__construct( 'price.', $values, $listItems, $refItems, $precision );
+		parent::__construct( 'price.', $values, $listItems, $refItems, $propItems );
 
-		$this->precision = $precision;
+		$this->precision = ( isset( $this->values['precision'] ) ? $this->values['precision'] : 2 );
 		$this->values = $values;
 	}
 
