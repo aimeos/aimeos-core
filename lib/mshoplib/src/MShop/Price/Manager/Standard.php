@@ -747,7 +747,9 @@ class Standard
 			throw $e;
 		}
 
-		return $this->buildItems( $map, null, 'price' );
+		$propItems = $this->getPropertyItems( array_keys( $map ), 'price' );
+
+		return $this->buildItems( $map, null, 'price', $propItems );
 	}
 
 
