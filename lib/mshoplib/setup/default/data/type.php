@@ -95,6 +95,10 @@ return array(
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
+	'price/property/type' => array(
+		array( 'domain' => 'price', 'code' => 'taxrate-local', 'label' => 'Local tax', 'status' => 1 ),
+	),
+
 	'product/type' => array(
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Article', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'bundle', 'label' => 'Bundle', 'status' => 1 ),

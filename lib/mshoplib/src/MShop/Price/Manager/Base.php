@@ -22,6 +22,7 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
 	use \Aimeos\MShop\Common\Manager\ListRef\Traits;
+	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 
 
 	/**

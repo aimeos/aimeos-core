@@ -158,6 +158,138 @@ return array(
 				),
 			),
 		),
+		'property' => array(
+			'type' => array(
+				'standard' => array(
+					'delete' => array(
+						'ansi' => '
+							DELETE FROM "mshop_price_property_type"
+							WHERE :cond AND siteid = ?
+						'
+					),
+					'insert' => array(
+						'ansi' => '
+							INSERT INTO "mshop_price_property_type" (
+								"code", "domain", "label", "pos", "status",
+								"mtime", "editor", "siteid", "ctime"
+							) VALUES (
+								?, ?, ?, ?, ?, ?, ?, ?, ?
+							)
+						'
+					),
+					'update' => array(
+						'ansi' => '
+							UPDATE "mshop_price_property_type"
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
+								"status" = ?, "mtime" = ?, "editor" = ?
+							WHERE "siteid" = ? AND "id" = ?
+						'
+					),
+					'search' => array(
+						'ansi' => '
+							SELECT mpriprty."id" AS "price.property.type.id", mpriprty."siteid" AS "price.property.type.siteid",
+								mpriprty."code" AS "price.property.type.code", mpriprty."domain" AS "price.property.type.domain",
+								mpriprty."label" AS "price.property.type.label", mpriprty."status" AS "price.property.type.status",
+								mpriprty."mtime" AS "price.property.type.mtime", mpriprty."editor" AS "price.property.type.editor",
+								mpriprty."ctime" AS "price.property.type.ctime", mpriprty."pos" AS "price.property.type.position"
+							FROM "mshop_price_property_type" mpriprty
+							:joins
+							WHERE :cond
+							GROUP BY mpriprty."id", mpriprty."siteid", mpriprty."code", mpriprty."domain",
+								mpriprty."label", mpriprty."status", mpriprty."mtime", mpriprty."editor",
+								mpriprty."ctime", mpriprty."pos" /*-columns*/ , :columns /*columns-*/
+							/*-orderby*/ ORDER BY :order /*orderby-*/
+							LIMIT :size OFFSET :start
+						'
+					),
+					'count' => array(
+						'ansi' => '
+							SELECT COUNT(*) AS "count"
+							FROM (
+								SELECT DISTINCT mpriprty."id"
+								FROM "mshop_price_property_type" mpriprty
+								:joins
+								WHERE :cond
+								LIMIT 10000 OFFSET 0
+							) AS list
+						'
+					),
+					'newid' => array(
+						'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+						'mysql' => 'SELECT LAST_INSERT_ID()',
+						'oracle' => 'SELECT mshop_price_property_type_seq.CURRVAL FROM DUAL',
+						'pgsql' => 'SELECT lastval()',
+						'sqlite' => 'SELECT last_insert_rowid()',
+						'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+						'sqlanywhere' => 'SELECT @@IDENTITY',
+					),
+				),
+			),
+			'standard' => array(
+				'delete' => array(
+					'ansi' => '
+						DELETE FROM "mshop_price_property"
+						WHERE :cond AND siteid = ?
+					'
+				),
+				'insert' => array(
+					'ansi' => '
+						INSERT INTO "mshop_price_property" (
+							"parentid", "key", "type", "langid", "value",
+							"mtime", "editor", "siteid", "ctime"
+						) VALUES (
+							?, ?, ?, ?, ?, ?, ?, ?, ?
+						)
+					'
+				),
+				'update' => array(
+					'ansi' => '
+						UPDATE "mshop_price_property"
+						SET "parentid" = ?, "key" = ?, "type" = ?, "langid" = ?,
+							"value" = ?, "mtime" = ?, "editor" = ?
+						WHERE "siteid" = ? AND "id" = ?
+					'
+				),
+				'search' => array(
+					'ansi' => '
+						SELECT mpripr."id" AS "price.property.id", mpripr."parentid" AS "price.property.parentid",
+							mpripr."siteid" AS "price.property.siteid", mpripr."type" AS "price.property.type",
+							mpripr."langid" AS "price.property.languageid", mpripr."value" AS "price.property.value",
+							mpripr."mtime" AS "price.property.mtime", mpripr."editor" AS "price.property.editor",
+							mpripr."ctime" AS "price.property.ctime"
+						FROM "mshop_price_property" AS mpripr
+						:joins
+						WHERE :cond
+						GROUP BY mpripr."id", mpripr."parentid", mpripr."siteid", mpripr."type",
+							mpripr."langid", mpripr."value", mpripr."mtime", mpripr."editor",
+							mpripr."ctime" /*-columns*/ , :columns /*columns-*/
+						/*-orderby*/ ORDER BY :order /*orderby-*/
+						LIMIT :size OFFSET :start
+					'
+				),
+				'count' => array(
+					'ansi' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mpripr."id"
+							FROM "mshop_price_property" AS mpripr
+							:joins
+							WHERE :cond
+							LIMIT 10000 OFFSET 0
+						) AS list
+					'
+				),
+				'newid' => array(
+					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+					'mysql' => 'SELECT LAST_INSERT_ID()',
+					'oracle' => 'SELECT mshop_price_property_seq.CURRVAL FROM DUAL',
+					'pgsql' => 'SELECT lastval()',
+					'sqlite' => 'SELECT last_insert_rowid()',
+					'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+					'sqlanywhere' => 'SELECT @@IDENTITY',
+				),
+			),
+		),
 		'type' => array(
 			'standard' => array(
 				'delete' => array(

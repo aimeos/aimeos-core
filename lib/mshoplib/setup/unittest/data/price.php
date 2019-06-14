@@ -13,6 +13,10 @@ return array(
 		'service/default' => array( 'domain' => 'service', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
+	'price/property/type' => array(
+		'price/taxrate-local' => array( 'domain' => 'price', 'code' => 'taxrate-local', 'label' => 'Local tax', 'status' => 1 ),
+	),
+
 	'price' => array(
 		'price/attribute/default/99.99/9.99' => array( 'type' => 'default', 'currencyid' => 'EUR', 'domain' => 'attribute', 'label'=>'attribute/default/99.99/9.99', 'quantity' => 1, 'value' => '99.99', 'shipping' => '9.99', 'rebate' => '0.00', 'taxrate' => '19.00', 'status' => 1 ),
 		//service prices

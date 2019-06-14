@@ -480,12 +480,18 @@ return [
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
 					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'product',
 					'price.label'=>'product/default/600.00/30.00', 'price.quantity' => 1, 'price.value' => '600.00',
-					'price.costs' => '30.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00'
+					'price.costs' => '30.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00',
+					'property' => [[
+						'price.property.type' => 'taxrate-local', 'price.property.languageid' => null, 'price.property.value' => '5.0'
+					]],
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 1,
 					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'product',
 					'price.label'=>'product/default/580.00/20.00', 'price.quantity' => 100, 'price.value' => '580.00',
-					'price.costs' => '20.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00'
+					'price.costs' => '20.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00',
+					'property' => [[
+						'price.property.type' => 'taxrate-local', 'price.property.languageid' => null, 'price.property.value' => '5.0'
+					]],
 				]],
 				'tag' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'Kaffee',
@@ -613,12 +619,18 @@ return [
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
 					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'product',
 					'price.label'=>'product/default/18.00/1.00', 'price.quantity' => 1, 'price.value' => '18.00',
-					'price.costs' => '1.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00'
+					'price.costs' => '1.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00',
+					'property' => [[
+						'price.property.type' => 'taxrate-local', 'price.property.languageid' => null, 'price.property.value' => '5.0'
+					]],
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 1,
 					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'product',
 					'price.label' => 'product/default/15.00/1.50', 'price.quantity' => 1000, 'price.value' => '15.00',
-					'price.costs' => '1.50', 'price.rebate' => '0.00', 'price.taxrate' => '19.00'
+					'price.costs' => '1.50', 'price.rebate' => '0.00', 'price.taxrate' => '19.00',
+					'property' => [[
+						'price.property.type' => 'taxrate-local', 'price.property.languageid' => null, 'price.property.value' => '5.0'
+					]],
 				]],
 				'product' => [[
 					'product.lists.type' => 'bought-together', 'product.lists.position' => 0, 'ref' => 'Cafe Noire Cappuccino',

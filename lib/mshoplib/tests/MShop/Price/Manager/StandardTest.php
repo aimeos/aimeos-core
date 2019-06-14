@@ -219,6 +219,47 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSearchItemsProperty()
+	{
+		$total = 0;
+		$search = $this->object->createSearch();
+
+		$expr = [];
+		$expr[] = $search->compare( '!=', 'price.id', null );
+		$expr[] = $search->compare( '!=', 'price.siteid', null );
+		$expr[] = $search->compare( '==', 'price.type', 'default' );
+		$expr[] = $search->compare( '==', 'price.domain', 'product' );
+		$expr[] = $search->compare( '>=', 'price.label', '' );
+		$expr[] = $search->compare( '==', 'price.currencyid', 'EUR' );
+		$expr[] = $search->compare( '==', 'price.quantity', 1 );
+		$expr[] = $search->compare( '==', 'price.value', '600.00' );
+		$expr[] = $search->compare( '==', 'price.costs', '30.00' );
+		$expr[] = $search->compare( '==', 'price.rebate', '0.00' );
+		$expr[] = $search->compare( '==', 'price.taxrate', '19.00' );
+		$expr[] = $search->compare( '==', 'price.status', 1 );
+		$expr[] = $search->compare( '>=', 'price.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'price.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'price.editor', $this->editor );
+
+		$param = ['taxrate-local', null, '0.0'];
+		$expr[] = $search->compare( '==', $search->createFunction( 'price:prop', $param ), null );
+
+		$param = ['taxrate-local', null, '5.0'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'price:prop', $param ), null );
+
+		$param = ['taxrate-local', null];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'price:prop', $param ), null );
+
+		$param = ['taxrate-local'];
+		$expr[] = $search->compare( '!=', $search->createFunction( 'price:prop', $param ), null );
+
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$results = $this->object->searchItems( $search, [], $total );
+
+		$this->assertEquals( 1, count( $results ) );
+	}
+
+
 	public function testSearchItemsTotal()
 	{
 		$total = 0;

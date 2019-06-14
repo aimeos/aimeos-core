@@ -140,6 +140,17 @@ class Standard
 			'internaltype' => 'null',
 			'public' => false,
 		),
+		'price:prop' => array(
+			'code' => 'price:prop()',
+			'internalcode' => '(
+				SELECT mpripr_prop."id" FROM mshop_price_property AS mpripr_prop
+				WHERE mpri."id" = mpripr_prop."parentid" AND :site AND :key LIMIT 1
+			)',
+			'label' => 'Price has property item, parameter(<property type>[,<language code>[,<property value>]])',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
 	);
 
 	private $currencyId;
@@ -215,6 +226,20 @@ class Standard
 
 			return $params;
 		};
+
+
+		$this->searchConfig['price:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
+
+			$source = str_replace( ':site', $self->toExpression( 'mpripr_prop."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'mpripr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
+
+			return $params;
+		};
 	}
 
 
@@ -227,7 +252,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/price/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, ['type', 'property', 'lists'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -264,7 +289,7 @@ class Standard
 	public function getResourceType( $withsub = true )
 	{
 		$path = 'mshop/price/manager/submanagers';
-		return $this->getResourceTypeBase( 'price', $path, ['lists'], $withsub );
+		return $this->getResourceTypeBase( 'price', $path, ['property', 'lists'], $withsub );
 	}
 
 
@@ -370,7 +395,9 @@ class Standard
 	{
 		self::checkClass( \Aimeos\MShop\Price\Item\Iface::class, $item );
 
-		if( !$item->isModified() ) {
+		if( !$item->isModified() )
+		{
+			$item = $this->savePropertyItems( $item, 'price', $fetch );
 			return $this->saveListItems( $item, 'price', $fetch );
 		}
 
@@ -536,6 +563,7 @@ class Standard
 			throw $e;
 		}
 
+		$item = $this->savePropertyItems( $item, 'price', $fetch );
 		return $this->saveListItems( $item, 'price', $fetch );
 	}
 

@@ -59,11 +59,11 @@ class PriceAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
 		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
-
-		$ptype = $priceTypeManager->createItem();
+		$propTypeManager = $priceManager->getSubManager( 'property', 'Standard' )->getSubManager( 'type', 'Standard' );
 
 		$priceManager->begin();
 
+		$ptype = $priceTypeManager->createItem();
 		foreach( $testdata['price/type'] as $key => $dataset )
 		{
 			$ptype->setId( null );
@@ -73,6 +73,18 @@ class PriceAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ptype->setStatus( $dataset['status'] );
 
 			$priceTypeManager->saveItem( $ptype );
+		}
+
+		$propTypeItem = $propTypeManager->createItem();
+		foreach( $testdata['price/property/type'] as $key => $dataset )
+		{
+			$propTypeItem->setId( null );
+			$propTypeItem->setCode( $dataset['code'] );
+			$propTypeItem->setDomain( $dataset['domain'] );
+			$propTypeItem->setLabel( $dataset['label'] );
+			$propTypeItem->setStatus( $dataset['status'] );
+
+			$propTypeManager->saveItem( $propTypeItem );
 		}
 
 		$price = $priceManager->createItem();
