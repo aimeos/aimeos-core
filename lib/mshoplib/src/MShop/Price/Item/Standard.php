@@ -36,7 +36,7 @@ class Standard extends Base
 	{
 		parent::__construct( 'price.', $values, $listItems, $refItems, $propItems );
 
-		$this->precision = ( isset( $this->values['precision'] ) ? $this->values['precision'] : 2 );
+		$this->precision = ( isset( $values['precision'] ) ? $values['precision'] : 2 );
 		$this->values = $values;
 	}
 
