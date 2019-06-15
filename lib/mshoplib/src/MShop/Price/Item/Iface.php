@@ -150,6 +150,13 @@ interface Iface
 	public function getTaxRate();
 
 	/**
+	 * Returns all tax rates in percent.
+	 *
+	 * @return string[] Tax rates for the price
+	 */
+	 public function getTaxRates();
+
+	/**
 	 * Sets the new tax rate in percent.
 	 *
 	 * @param string|integer|double $taxrate Tax rate with two digits precision

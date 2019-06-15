@@ -318,6 +318,26 @@ class Standard extends Base
 
 
 	/**
+	 * Returns all tax rates in percent.
+	 *
+	 * @return string[] Tax rates for the price
+	 */
+	 public function getTaxRates()
+	 {
+		 $list = ['taxrate' => $this->getTaxRate()];
+
+		 foreach( $this->getPropertyItems() as $propItem )
+		 {
+			if( !strncmp( 'taxrate', $propItem->getType(), 7 ) ) {
+				$list[$propItem->getType()] = $propItem->getValue();
+			}
+		 }
+
+		 return $list;
+	 }
+
+
+	/**
 	 * Sets the new tax rate.
 	 *
 	 * @param string|integer|double $taxrate Tax rate with two digits precision

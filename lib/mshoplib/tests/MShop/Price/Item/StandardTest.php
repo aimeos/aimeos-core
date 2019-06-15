@@ -38,7 +38,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'currencyid' => 'EUR',
 		);
 
-		$this->object = new \Aimeos\MShop\Price\Item\Standard( $this->values );
+		$propValues = ['price.property.type' => 'taxrate-local', 'price.property.value' => '5.0', 'languageid' => null];
+		$propItems = [new \Aimeos\MShop\Common\Item\Property\Standard( 'price.property.', $propValues )];
+
+		$this->object = new \Aimeos\MShop\Price\Item\Standard( $this->values, [], [], $propItems );
 	}
 
 
@@ -299,6 +302,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetTaxRate()
 	{
 		$this->assertEquals( '19.00', $this->object->getTaxRate() );
+	}
+
+
+	public function testGetTaxRates()
+	{
+		$this->assertEquals( ['taxrate' => '19.00', 'taxrate-local' => '5.0'], $this->object->getTaxRates() );
 	}
 
 
