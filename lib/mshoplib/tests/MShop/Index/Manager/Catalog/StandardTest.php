@@ -131,10 +131,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsId()
 	{
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$catItem = $catalogManager->findItem( 'cafe' );
+		$id = $catalogManager->findItem( 'cafe' )->getId();
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catItem->getId() ) ); // catalog ID
+		$search->setConditions( $search->compare( '==', 'index.catalog.id', $id ) );
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
@@ -144,7 +144,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsNoId()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '!=', 'index.catalog.id', null ) ); // catalog ID
+		$search->setConditions( $search->compare( '!=', 'index.catalog.id', null ) );
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 8, count( $result ) );
@@ -154,14 +154,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsPosition()
 	{
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$catItem = $catalogManager->findItem( 'cafe' );
+		$id = $catalogManager->findItem( 'cafe' )->getId();
 
 		$search = $this->object->createSearch();
-		$func = $search->createFunction( 'index.catalog:position', array( 'promotion', [$catItem->getId()] ) );
-		$search->setConditions( $search->compare( '>=', $func, 0 ) ); // position
 
-		$sortfunc = $search->createFunction( 'sort:index.catalog:position', array( 'promotion', [$catItem->getId()] ) );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
+		$search->setConditions( $search->combine( '&&', [
+			$search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', $id] ), 0 ),
+			$search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', [$id]] ), 0 ),
+		] ) );
+
+		$search->setSortations( [
+			$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion', [$id]] ) ),
+			$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion', $id] ) ),
+		] );
 
 		$result = $this->object->searchItems( $search, [] );
 

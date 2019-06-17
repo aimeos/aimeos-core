@@ -123,10 +123,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsId()
 	{
 		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$supItem = $supplierManager->findItem( 'unitCode001' );
+		$id = $supplierManager->findItem( 'unitCode001' )->getId();
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'index.supplier.id', $supItem->getId() ) ); // supplier ID
+		$search->setConditions( $search->compare( '==', 'index.supplier.id', $id ) );
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
@@ -136,7 +136,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsIdNull()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '!=', 'index.supplier.id', null ) ); // supplier ID
+		$search->setConditions( $search->compare( '!=', 'index.supplier.id', null ) );
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
@@ -146,14 +146,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsPosition()
 	{
 		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$supItem = $supplierManager->findItem( 'unitCode001' );
+		$id = $supplierManager->findItem( 'unitCode001' )->getId();
 
 		$search = $this->object->createSearch();
-		$func = $search->createFunction( 'index.supplier:position', array( 'default', [$supItem->getId()] ) );
-		$search->setConditions( $search->compare( '>=', $func, 0 ) ); // position
 
-		$sortfunc = $search->createFunction( 'sort:index.supplier:position', array( 'default', [$supItem->getId()] ) );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
+		$expr = [
+			$search->compare( '>=', $search->createFunction( 'index.supplier:position', ['default', $id] ), 0 ),
+			$search->compare( '>=', $search->createFunction( 'index.supplier:position', ['default', [$id]] ), 0 ),
+		];
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$search->setSortations( [
+			$search->sort( '+', $search->createFunction( 'sort:index.supplier:position', ['default', [$id]] ) ),
+			$search->sort( '+', $search->createFunction( 'sort:index.supplier:position', ['default', $id] ) ),
+		] );
 
 		$result = $this->object->searchItems( $search, [] );
 

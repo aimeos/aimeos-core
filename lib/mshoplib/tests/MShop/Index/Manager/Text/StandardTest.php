@@ -66,10 +66,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'index.text:relevance', array( 'de', 'Expr' ) );
-		$search->setConditions( $search->compare( '>', $func, 0 ) );
+		$search->setConditions( $search->combine( '&&', [
+			$search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 'T-DISC'] ), 0 ),
+			$search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 't-disc'] ), 0 ),
+		] ) );
 
-		$sortfunc = $search->createFunction( 'sort:index.text:relevance', array( 'de', 'Expr' ) );
+		$sortfunc = $search->createFunction( 'sort:index.text:relevance', ['de', 'T-DISC'] );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [] );

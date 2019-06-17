@@ -125,27 +125,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsIdWidth()
+	public function testSearchItems()
 	{
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
-		$attrWidthItem = $attributeManager->findItem( '29', [], 'product', 'width' );
+		$id = $attributeManager->findItem( '30', [], 'product', 'length' )->getId();
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrWidthItem->getId() ) );
-		$result = $this->object->searchItems( $search, [] );
-
-		$this->assertGreaterThanOrEqual( 1, count( $result ) );
-	}
-
-
-	public function testSearchItemsIdLength()
-	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
-		$attrLengthItem = $attributeManager->findItem( '30', [], 'product', 'length' );
-
-
-		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrLengthItem->getId() ) );
+		$search->setConditions( $search->compare( '==', 'index.attribute.id', $id ) );
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 3, count( $result ) );
@@ -162,13 +148,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsAll()
+	public function testSearchItemsAllof()
 	{
-		$attrIds = [];
 		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
 
-		$attrIds[] = $manager->findItem( '30', [], 'product', 'length' )->getId();
-		$attrIds[] = $manager->findItem( '29', [], 'product', 'width' )->getId();
+		$attrIds = [
+			$manager->findItem( '30', [], 'product', 'length' )->getId(),
+			$manager->findItem( '29', [], 'product', 'width' )->getId()
+		];
 
 		$search = $this->object->createSearch();
 
@@ -185,11 +172,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsOneof()
 	{
-		$attrIds = [];
 		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
 
-		$attrIds[] = $manager->findItem( '30', [], 'product', 'length' )->getId();
-		$attrIds[] = $manager->findItem( '30', [], 'product', 'width' )->getId();
+		$attrIds = [
+			$manager->findItem( '30', [], 'product', 'length' )->getId(),
+			$manager->findItem( '30', [], 'product', 'width' )->getId()
+		];
 
 		$search = $this->object->createSearch();
 
