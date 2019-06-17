@@ -27,7 +27,7 @@ class Standard
 			'internalcode' => 'mindat."attrid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_attribute" AS mindat ON mindat."prodid" = mpro."id"' ),
 			'label' => 'Product index attribute ID',
-			'type' => 'integer',
+			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
