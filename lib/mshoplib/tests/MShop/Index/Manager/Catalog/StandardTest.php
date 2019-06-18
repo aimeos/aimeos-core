@@ -147,7 +147,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '!=', 'index.catalog.id', null ) );
 		$result = $this->object->searchItems( $search, [] );
 
-		$this->assertEquals( 8, count( $result ) );
+		$this->assertEquals( 9, count( $result ) );
 	}
 
 

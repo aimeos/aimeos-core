@@ -270,6 +270,7 @@ class Standard
 		 * @see mshop/index/manager/standard/domains
 		 * @see mshop/index/manager/standard/subdomains
 		 * @see mshop/index/manager/submanagers
+		 * @deprecated 2020.01
 		 */
 		$mode = $config->get( 'mshop/index/manager/standard/index', 'categorized' );
 
@@ -297,18 +298,18 @@ class Standard
 		$domains = $config->get( 'mshop/index/manager/standard/domains', [] );
 
 		$manager = \Aimeos\MShop::create( $context, 'product' );
-		$search = $manager->createSearch( true );
+		$search = $manager->createSearch();
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
 
+		// @deprecated 2020.01
 		$prodIds = [];
-
 		foreach( $items as $item ) {
 			$prodIds[] = $item->getId(); // don't rely on array keys
 		}
 
 
-		// index all product items
+		// @deprecated 2020.01
 		if( $mode === 'all' )
 		{
 			if( !empty( $prodIds ) )

@@ -264,7 +264,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 7, $total );
+		$this->assertEquals( 8, $total );
 	}
 
 
@@ -316,7 +316,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 8, $total );
+		$this->assertEquals( 9, $total );
 	}
 
 
@@ -364,7 +364,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 5, $total );
+		$this->assertEquals( 6, $total );
 	}
 
 
@@ -420,8 +420,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$config->set( 'mshop/index/manager/standard/index', 'categorized' );
 		$this->object->cleanupIndex( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuildIndex();
 
-		$this->assertEquals( 13, count( $afterInsertAttr ) );
-		$this->assertEquals( 8, count( $afterInsertCat ) );
+		$this->assertEquals( 15, count( $afterInsertAttr ) );
+		$this->assertEquals( 9, count( $afterInsertCat ) );
 	}
 
 
@@ -455,8 +455,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
-		$this->assertEquals( 7, count( $afterInsertAttr ) );
-		$this->assertEquals( 8, count( $afterInsertCat ) );
+		$this->assertEquals( 8, count( $afterInsertAttr ) );
+		$this->assertEquals( 9, count( $afterInsertCat ) );
 	}
 
 
