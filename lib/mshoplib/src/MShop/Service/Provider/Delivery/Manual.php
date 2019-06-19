@@ -29,7 +29,18 @@ class Manual
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order )
 	{
-		$order->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
+		/** mshop/service/provider/delivery/auto-status
+		 * Set delivery status to STAT_PROGRESS automatically when the
+		 * payment is confirmed (authorized or recieved status).
+		 *
+		 * @param bool Set delivery status automatically
+		 * @since 2018.10
+		 * @category Developer
+		 */
+		if( $this->getContext()->getConfig()->get( 'mshop/service/provider/delivery/auto-status', 1 ) )
+		{
+			$order->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
+		}
 	}
 
 }
