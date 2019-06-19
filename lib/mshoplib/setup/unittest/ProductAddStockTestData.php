@@ -12,6 +12,8 @@ namespace Aimeos\MW\Setup\Task;
 
 /**
  * Adds stock test data.
+ *
+ * @todo 2020.01 Rename to StockAddTestData
  */
 class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 {
