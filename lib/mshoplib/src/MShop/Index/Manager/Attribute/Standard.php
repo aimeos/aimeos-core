@@ -669,7 +669,10 @@ class Standard
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
 
-		foreach( $item->getRefItems( 'product', null, 'default' ) + [$item] as $product )
+		$products = ( $item->getType() === 'select' ? $item->getRefItems( 'product', null, 'default' ) : [] );
+		$products[] = $item;
+
+		foreach( $products as $product )
 		{
 			foreach( $product->getListItems( 'attribute' ) as $listItem )
 			{

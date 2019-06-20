@@ -93,9 +93,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch( true );
 		$result = $this->object->aggregate( $search, 'index.attribute.id' );
 
-		$this->assertEquals( 15, count( $result ) );
+		$this->assertEquals( 14, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 4, $result[$item->getId()] );
+		$this->assertEquals( 3, $result[$item->getId()] );
 	}
 
 
@@ -171,7 +171,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$cntPrice = $this->getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
 		$cntText = $this->getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
 
-		$this->assertEquals( 8, $cntAttribute );
+		$this->assertEquals( 6, $cntAttribute );
 		$this->assertEquals( 5, $cntCatalog );
 		$this->assertEquals( 1, $cntPrice );
 		$this->assertEquals( 2, $cntText );
@@ -420,7 +420,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$config->set( 'mshop/index/manager/standard/index', 'categorized' );
 		$this->object->cleanupIndex( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuildIndex();
 
-		$this->assertEquals( 15, count( $afterInsertAttr ) );
+		$this->assertEquals( 13, count( $afterInsertAttr ) );
 		$this->assertEquals( 9, count( $afterInsertCat ) );
 	}
 
@@ -455,7 +455,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
-		$this->assertEquals( 8, count( $afterInsertAttr ) );
+		$this->assertEquals( 7, count( $afterInsertAttr ) );
 		$this->assertEquals( 9, count( $afterInsertCat ) );
 	}
 

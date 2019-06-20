@@ -57,9 +57,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch( true );
 		$result = $this->object->aggregate( $search, 'index.attribute.id' );
 
-		$this->assertEquals( 15, count( $result ) );
+		$this->assertEquals( 14, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 4, $result[$item->getId()] );
+		$this->assertEquals( 3, $result[$item->getId()] );
 	}
 
 
@@ -134,7 +134,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $id ) );
 		$result = $this->object->searchItems( $search, [] );
 
-		$this->assertEquals( 3, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 	}
 
 
@@ -165,7 +165,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->searchItems( $search, [] );
 
-		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 'CNE', reset( $result )->getCode() );
 	}
 
@@ -187,7 +187,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->searchItems( $search, [] );
 
-		$this->assertEquals( 3, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( 'CNE', reset( $result )->getCode() );
 	}
 
