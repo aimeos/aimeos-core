@@ -306,7 +306,7 @@ class Standard
 	public function getPreview()
 	{
 		if( isset( $this->values['media.preview'] ) ) {
-			return (string) $this->values['media.preview'];
+			return (string) current( $this->values['media.preview'] );
 		}
 
 		return '';
@@ -320,34 +320,38 @@ class Standard
 	 */
 	public function getPreviews()
 	{
-		$list = [];
-
-		foreach( $this->getPropertyItems() as $propItem )
-		{
-			$type = $propItem->getType();
-
-			if( ctype_digit( $type ) ) {
-				$list[$type] = $propItem->getValue();
-			}
+		if( isset( $this->values['media.preview'] ) ) {
+			return (array) $this->values['media.preview'];
 		}
 
-		ksort( $list );
-
-		return !empty( $list ) ? $list : [1 => $this->getPreview()];
+		return [];
 	}
 
 
 	/**
 	 * Sets the new preview url of the media item.
 	 *
-	 * @param string $url Preview URL of the media file
+	 * @param string|array $url Preview URL of the media file
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @deprecated 2020.01
 	 */
 	public function setPreview( $url )
 	{
-		if( (string) $url !== $this->getPreview() )
+		return $this->setPreviews( [1 => $url] );
+	}
+
+
+	/**
+	 * Sets the new preview url of the media item.
+	 *
+	 * @param array $url Preview URL or list of URLs with widths of the media file in pixels as keys
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 */
+	public function setPreviews( array $urls )
+	{
+		if( $urls !== $this->getPreviews() )
 		{
-			$this->values['media.preview'] = (string) $url;
+			$this->values['media.preview'] = $urls;
 			$this->setModified();
 		}
 
@@ -419,7 +423,7 @@ class Standard
 				case 'media.mimetype': $item = $item->setMimeType( $value ); break;
 				case 'media.type': $item = $item->setType( $value ); break;
 				case 'media.url': $item = $item->setUrl( $value ); break;
-				case 'media.preview': $item = $item->setPreview( $value ); break;
+				case 'media.preview': $item = $item->setPreviews( $value ); break;
 				case 'media.status': $item = $item->setStatus( $value ); break;
 				default: continue 2;
 			}
@@ -446,7 +450,7 @@ class Standard
 		$list['media.languageid'] = $this->getLanguageId();
 		$list['media.mimetype'] = $this->getMimeType();
 		$list['media.type'] = $this->getType();
-		$list['media.preview'] = $this->getPreview();
+		$list['media.preview'] = $this->getPreviews();
 		$list['media.url'] = $this->getUrl();
 		$list['media.status'] = $this->getStatus();
 

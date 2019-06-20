@@ -165,7 +165,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$item->setType( $entry['type'] );
 			$item->setLanguageId( $entry['languageid'] );
 			$item->setMimetype( $entry['mimetype'] );
-			$item->setPreview( $entry['preview'] );
+			$item->setPreviews( (array) $entry['preview'] );
 			$item->setUrl( $entry['url'] );
 			$item->setLabel( $entry['label'] );
 			$item->setStatus( $entry['status'] );

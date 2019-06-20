@@ -60,7 +60,7 @@ class Standard
 			$filepath = $this->getFilePath( $file->getClientFilename(), 'files', $mimetype );
 
 			$this->store( $filepath, $media->save(), $fsname );
-			$item->setUrl( $filepath )->setPreview( $this->getMimeIcon( $mimetype ) )->setMimeType( $mimetype );
+			$item->setUrl( $filepath )->setPreviews( [1 => $this->getMimeIcon( $mimetype )] )->setMimeType( $mimetype );
 		}
 
 		return $item->setLabel( $item->getLabel() ?: basename( $file->getClientFilename() ) );
@@ -86,6 +86,7 @@ class Standard
 		}
 
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
+		$previews = $item->getPreviews();
 		$path = $item->getUrl();
 
 		if( $fs->has( $path ) )
@@ -95,7 +96,7 @@ class Standard
 			$item->setUrl( $newPath );
 		}
 
-		foreach( $item->getPreviews() as $preview )
+		foreach( $previews as $size => $preview )
 		{
 			if( $fs->has( $preview ) )
 			{
@@ -103,13 +104,13 @@ class Standard
 				{
 					$newPath = $this->getFilePath( $preview, 'preview', pathinfo( $preview, PATHINFO_EXTENSION ) );
 					$fs->copy( $preview, $newPath );
-					$item->setPreview( $newPath );
+					$previews[$size] = $newPath;
 				}
 				catch( \Aimeos\MW\Filesystem\Exception $e ) {} // mime icons can't be copied
 			}
 		}
 
-		return $item;
+		return $item->setPreviews( $previews );
 	}
 
 
@@ -149,7 +150,7 @@ class Standard
 			catch( \Exception $e ) { ; } // Can be a mime icon with relative path
 		}
 
-		return $item->setUrl( '' )->setPreview( '' )->deletePropertyItems( $item->getPropertyItems() );
+		return $item->setUrl( '' )->setPreviews( [] )->deletePropertyItems( $item->getPropertyItems() );
 	}
 
 
@@ -200,51 +201,22 @@ class Standard
 		unset( $mediaFile );
 
 
+		$previews = [];
 		$mediaFiles = $this->createPreviews( $media );
 		$mime = $this->getMimeType( $media, 'preview' );
 		$manager = \Aimeos\MShop::create( $this->context, 'media' );
 
 		foreach( $mediaFiles as $type => $mediaFile )
 		{
-			if( ( $propItem = current( $item->getPropertyItems( $type ) ) ) === false ) {
-				$propItem = $manager->createPropertyItem()->setType( $type );
-			}
-
-			$path = (string) $propItem->getValue();
 			// Don't try to overwrite mime icons that are stored in another directory
 			$filepath = ( strncmp( $path, 'preview/', 8 ) ? $this->getFilePath( $path, 'preview', $mime ) : $path );
 
 			$this->store( $filepath, $mediaFile->save( null, $mime ), $fsname );
-			$item->addPropertyItem( $propItem->setValue( $filepath ) );
+			$previews[$mediaFile->getWidth()] = $filepath;
 			unset( $mediaFile );
 		}
 
-		return $item->setPreview( current( $item->getPreviews() ) ?: '' );
-	}
-
-
-	/**
-	 * Adds the used property types if necessary
-	 *
-	 * @param integer[] $types List of image widths
-	 */
-	protected function addPropertyTypes( $types )
-	{
-		foreach( $types as $type )
-		{
-			if( !isset( $this->types[$type] ) )
-			{
-				$manager = \Aimeos\MShop::create( $this->context, 'media/property/type' );
-
-				try {
-					$item = $manager->findItem( $type, [], 'media' );
-				} catch( \Aimeos\MShop\Exception $e ) {
-					$item = $manager->createItem()->setDomain( 'media' )->setCode( $type )->setLabel( $type . 'px width' );
-				}
-
-				$this->types[$type] = $manager->saveItem( $item )->getCode();
-			}
-		}
+		return $item->setPreviews( $previews );
 	}
 
 
@@ -317,7 +289,6 @@ class Standard
 			}
 		}
 
-		$this->addPropertyTypes( array_keys( $list ) );
 		return $list;
 	}
 

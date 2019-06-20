@@ -153,7 +153,7 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 						->setStatus( 1 );
 
 					$media = clone $mediaItem;
-					$media->setLabel( $entry['name'] )->setPreview( $entry['image'] )->setUrl( $entry['image'] );
+					$media->setLabel( $entry['name'] )->setPreview( [1 => $entry['image']] )->setUrl( $entry['image'] );
 					$item->addListItem( 'media', clone $mListItem, $media );
 
 					$price = clone $priceItem;

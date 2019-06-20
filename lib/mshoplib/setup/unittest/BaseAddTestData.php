@@ -144,7 +144,7 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$manager = $this->getManager( $domain );
 		$search = $manager->createSearch()->setSlice( 0, 10000 );
 
-		foreach( $manager->searchItems( $search ) as $item ) {
+		foreach( $manager->searchItems( $search, [] ) as $item ) {
 			$list[$item->getLabel()] = $item;
 		}
 

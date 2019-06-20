@@ -323,7 +323,7 @@ return [
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
 					'media.languageid' => 'de', 'media.type' => 'download', 'media.domain' => 'product',
 					'media.label' => 'path/to/folder/example5.jpg', 'media.url' => 'path/to/folder/example5.jpg',
-					'media.preview' => 'path/to/folder/example5.jpg', 'media.mimetype' => 'image/jpeg',
+					'media.preview' => [1 => 'path/to/folder/example5.jpg'], 'media.mimetype' => 'image/jpeg',
 					'lists' => [
 						'attribute' => [[
 							'media.lists.type' => 'default', 'media.lists.position' => 0, 'ref' => 'media/color/white'
@@ -333,7 +333,7 @@ return [
 					'product.lists.type' => 'default', 'product.lists.position' => 1,
 					'media.languageid' => 'de', 'media.type' => 'download', 'media.domain' => 'product',
 					'media.label' => 'path/to/folder/example6.jpg', 'media.url' => 'path/to/folder/example6.jpg',
-					'media.preview' => 'path/to/folder/example6.jpg', 'media.mimetype' => 'image/jpeg',
+					'media.preview' => [1 => 'path/to/folder/example6.jpg'], 'media.mimetype' => 'image/jpeg',
 					'lists' => [
 						'attribute' => [[
 							'media.lists.type' => 'default', 'media.lists.position' => 0, 'ref' => 'media/color/blue'
@@ -432,7 +432,7 @@ return [
 					'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2100-01-01 00:00:00',
 					'media.languageid' => 'de', 'media.type' => 'prod_266x221', 'media.domain' => 'product',
 					'media.label' => 'prod_266x221/198_prod_266x221.jpg', 'media.url' => 'prod_266x221/198_prod_266x221.jpg',
-					'media.preview' => 'prod_266x221/198_prod_266x221.jpg', 'media.mimetype' => 'image/jpeg',
+					'media.preview' => [1 => 'prod_266x221/198_prod_266x221.jpg'], 'media.mimetype' => 'image/jpeg',
 					'lists' => [
 						'attribute' => [[
 							'media.lists.type' => 'option', 'media.lists.position' => 1, 'ref' => 'media/color/olive',
@@ -457,7 +457,7 @@ return [
 					'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2100-01-01 00:00:00',
 					'media.languageid' => 'de', 'media.type' => 'prod_114x95', 'media.domain' => 'product',
 					'media.label' => 'prod_114x95/194_prod_114x95.jpg', 'media.url' => 'prod_114x95/194_prod_114x95.jpg',
-					'media.preview' => 'prod_114x95/194_prod_114x95.jpg', 'media.mimetype' => 'image/jpeg',
+					'media.preview' => [1 => 'prod_114x95/194_prod_114x95.jpg'], 'media.mimetype' => 'image/jpeg',
 					'lists' => [
 						'attribute' => [[
 							'media.lists.type' => 'option', 'media.lists.position' => 1, 'ref' => 'media/color/blue',
@@ -468,7 +468,7 @@ return [
 					'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2010-01-01 00:00:00',
 					'media.languageid' => 'de', 'media.type' => 'prod_179x178', 'media.domain' => 'product',
 					'media.label' => 'prod_179x178/196_prod_179x178.jpg', 'media.url' => 'prod_179x178/196_prod_179x178.jpg',
-					'media.preview' => 'prod_179x178/196_prod_179x178.jpg', 'media.mimetype' => 'image/jpeg',
+					'media.preview' => [1 => 'prod_179x178/196_prod_179x178.jpg'], 'media.mimetype' => 'image/jpeg',
 					'lists' => [
 						'attribute' => [[
 							'media.lists.type' => 'option', 'media.lists.position' => 1, 'ref' => 'media/color/red',
@@ -565,7 +565,7 @@ return [
 					'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2100-01-01 00:00:00',
 					'media.languageid' => 'de', 'media.type' => 'prod_266x221', 'media.domain' => 'product',
 					'media.label' => 'prod_266x221/198_prod_266x221.jpg', 'media.url' => 'prod_266x221/198_prod_266x221.jpg',
-					'media.preview' => 'prod_266x221/198_prod_266x221.jpg', 'media.mimetype' => 'image/jpeg',
+					'media.preview' => [1 => 'prod_266x221/198_prod_266x221.jpg'], 'media.mimetype' => 'image/jpeg',
 					'lists' => [
 						'attribute' => [[
 							'media.lists.type' => 'option', 'media.lists.position' => 1, 'ref' => 'media/color/olive',
@@ -585,7 +585,7 @@ return [
 					'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2100-01-01 00:00:00',
 					'media.languageid' => 'de', 'media.type' => 'prod_114x95', 'media.domain' => 'product',
 					'media.label' => 'prod_114x95/194_prod_114x95.jpg', 'media.url' => 'prod_114x95/194_prod_114x95.jpg',
-					'media.preview' => 'prod_114x95/194_prod_114x95.jpg', 'media.mimetype' => 'image/jpeg',
+					'media.preview' => [1 => 'prod_114x95/194_prod_114x95.jpg'], 'media.mimetype' => 'image/jpeg',
 					'lists' => [
 						'attribute' => [[
 							'media.lists.type' => 'option', 'media.lists.position' => 1, 'ref' => 'media/color/blue',
@@ -596,7 +596,7 @@ return [
 					'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2010-01-01 00:00:00',
 					'media.languageid' => 'de', 'media.type' => 'prod_179x178', 'media.domain' => 'product',
 					'media.label' => 'prod_179x178/196_prod_179x178.jpg', 'media.url' => 'prod_179x178/196_prod_179x178.jpg',
-					'media.preview' => 'prod_179x178/196_prod_179x178.jpg', 'media.mimetype' => 'image/jpeg',
+					'media.preview' => [1 => 'prod_179x178/196_prod_179x178.jpg'], 'media.mimetype' => 'image/jpeg',
 					'lists' => [
 						'attribute' => [[
 							'media.lists.type' => 'option', 'media.lists.position' => 1, 'ref' => 'media/color/red',
@@ -608,7 +608,7 @@ return [
 					'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => null,
 					'media.languageid' => 'de', 'media.type' => 'download', 'media.domain' => 'product',
 					'media.label' => 'path/to/folder/example5.jpg', 'media.url' => 'path/to/folder/example5.jpg',
-					'media.preview' => 'path/to/folder/example5.jpg', 'media.mimetype' => 'image/jpeg',
+					'media.preview' => [1 => 'path/to/folder/example5.jpg'], 'media.mimetype' => 'image/jpeg',
 					'lists' => [
 						'attribute' => [[
 							'media.lists.type' => 'default', 'media.lists.position' => 0, 'ref' => 'media/color/white'

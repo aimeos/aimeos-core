@@ -43,7 +43,7 @@ return array(
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'link', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'preview', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'preview', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'mimetype', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );

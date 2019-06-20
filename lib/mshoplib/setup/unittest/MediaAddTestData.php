@@ -88,7 +88,7 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 			$media->setMimeType( $dataset['mimetype'] );
 
 			if( isset( $dataset['preview'] ) ) {
-				$media->setPreview( $dataset['preview'] );
+				$media->setPreviews( (array) $dataset['preview'] );
 			}
 
 			$mediaManager->saveItem( $media, false );

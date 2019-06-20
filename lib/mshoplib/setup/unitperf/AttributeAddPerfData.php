@@ -166,7 +166,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 				->setCode( $code );
 
 			$refItem = clone $mediaItem;
-			$refItem->setPreview( $uri )->setUrl( $uri );
+			$refItem->setPreviews( [1 => $uri] )->setUrl( $uri );
 
 			$item->addListItem( 'media', clone $listItem, $refItem );
 

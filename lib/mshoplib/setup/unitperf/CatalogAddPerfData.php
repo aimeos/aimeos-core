@@ -311,7 +311,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			$num = (($idx + $i) % 4) + 1;
 			$mediaItem = (clone $newItem)
 				->setLabel( ($pos+1) . '. picture for ' . $prodItem->getLabel() )
-				->setPreview( $prefix . 'unitperf/' . $num . '.jpg' )
+				->setPreviews( [1 => $prefix . 'unitperf/' . $num . '.jpg'] )
 				->setUrl( $prefix . 'unitperf/' . $num . '-big.jpg' )
 				->setMimeType( 'image/jpeg' )
 				->setStatus( 1 );
@@ -320,7 +320,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$mediaItem = (clone $newItem)
-			->setPreview( $prefix . 'unitperf/download-preview.jpg' )
+			->setPreviews( [1 => $prefix . 'unitperf/download-preview.jpg'] )
 			->setUrl( $prefix . 'unitperf/download.pdf' )
 			->setMimeType( 'application/pdf' )
 			->setLabel( 'PDF download' )

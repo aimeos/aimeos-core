@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'media.label' => 'testPicture',
 			'media.mimetype' => 'image/jpeg',
 			'media.url' => 'http://www.url.com/test.jpg',
-			'media.preview' => '/directory/test.jpg',
+			'media.preview' => [1 => '/directory/test.jpg'],
 			'media.status' => 6,
 			'media.languageid' => 'de',
 			'media.mtime' => '2011-01-01 00:00:02',
@@ -35,10 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'languageid' => 'de',
 		);
 
-		$propValues = ['media.property.type' => '500', 'media.property.value' => 'image-500w.jpg', 'languageid' => null];
-		$propItems = [new \Aimeos\MShop\Common\Item\Property\Standard( 'media.property.', $propValues )];
-
-		$this->object = new \Aimeos\MShop\Media\Item\Standard( $this->values, [], [], $propItems );
+		$this->object = new \Aimeos\MShop\Media\Item\Standard( $this->values );
 	}
 
 
@@ -189,15 +186,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetPreviews()
 	{
-		$this->assertEquals( [500 => 'image-500w.jpg'], $this->object->getPreviews() );
-	}
-
-
-	public function testGetPreviewNone()
-	{
-		$object = new \Aimeos\MShop\Media\Item\Standard( $this->values );
-
-		$this->assertEquals( [1 => '/directory/test.jpg'], $object->getPreviews() );
+		$this->assertEquals( [1 => '/directory/test.jpg'], $this->object->getPreviews() );
 	}
 
 
@@ -206,7 +195,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setPreview( '/pictures/category.jpg' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
+		$this->assertEquals( [1 => '/pictures/category.jpg'], $this->object->getPreviews() );
 		$this->assertEquals( '/pictures/category.jpg', $this->object->getPreview() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetPreviews()
+	{
+		$return = $this->object->setPreviews( [1 => '/pictures/category.jpg'] );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
+		$this->assertEquals( [1 => '/pictures/category.jpg'], $this->object->getPreviews() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -278,7 +278,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'media.languageid' => 'de',
 			'media.type' => 'test',
 			'media.mimetype' => 'image/jpeg',
-			'media.preview' => 'preview.jpg',
+			'media.preview' => [1 => 'preview.jpg'],
 			'media.url' => 'image.jpg',
 			'media.status' => 0,
 		);
@@ -292,7 +292,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['media.languageid'], $item->getLanguageId() );
 		$this->assertEquals( $list['media.type'], $item->getType() );
 		$this->assertEquals( $list['media.mimetype'], $item->getMimetype() );
-		$this->assertEquals( $list['media.preview'], $item->getPreview() );
+		$this->assertEquals( $list['media.preview'], $item->getPreviews() );
 		$this->assertEquals( $list['media.url'], $item->getUrl() );
 		$this->assertEquals( $list['media.status'], $item->getStatus() );
 		$this->assertNull( $item->getSiteId() );
@@ -313,7 +313,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getMimeType(), $arrayObject['media.mimetype'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['media.type'] );
 		$this->assertEquals( $this->object->getUrl(), $arrayObject['media.url'] );
-		$this->assertEquals( $this->object->getPreview(), $arrayObject['media.preview'] );
+		$this->assertEquals( $this->object->getPreviews(), $arrayObject['media.preview'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['media.status'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['media.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['media.mtime'] );

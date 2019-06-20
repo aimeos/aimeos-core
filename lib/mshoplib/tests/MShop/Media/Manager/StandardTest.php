@@ -97,7 +97,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'media.domain', 'product' );
 		$expr[] = $search->compare( '==', 'media.label', 'prod_266x221/198_prod_266x221.jpg' );
 		$expr[] = $search->compare( '==', 'media.url', 'prod_266x221/198_prod_266x221.jpg' );
-		$expr[] = $search->compare( '==', 'media.preview', 'prod_266x221/198_prod_266x221.jpg' );
+		$expr[] = $search->compare( '=~', 'media.preview', '{' );
 		$expr[] = $search->compare( '==', 'media.mimetype', 'image/jpeg' );
 		$expr[] = $search->compare( '==', 'media.status', 1 );
 		$expr[] = $search->compare( '>=', 'media.mtime', '1970-01-01 00:00:00' );

@@ -62,7 +62,7 @@ return array(
 			array(
 				'label' => 'Demo: dhl.png', 'mimetype' => 'image/png',
 				'url' => 'http://demo.aimeos.org/media/service/pickup.png',
-				'preview' => 'http://demo.aimeos.org/media/service/pickup.png',
+				'preview' => [1 => 'http://demo.aimeos.org/media/service/pickup.png'],
 				'type' => 'icon', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1

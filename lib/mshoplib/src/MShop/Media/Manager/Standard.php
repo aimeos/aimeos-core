@@ -456,7 +456,7 @@ class Standard
 			$stmt->bind( 5, $item->getUrl() );
 			$stmt->bind( 6, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 7, $item->getDomain() );
-			$stmt->bind( 8, $item->getPreview() );
+			$stmt->bind( 8, json_encode( $item->getPreviews(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( 9, $date ); // mtime
 			$stmt->bind( 10, $context->getEditor() );
 			$stmt->bind( 11, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -692,7 +692,11 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false ) {
+			while( ( $row = $results->fetch() ) !== false )
+			{
+				if( ( $value = json_decode( $row['media.preview'], true ) ) !== null ) {
+					$row['media.preview'] = $value;
+				}
 				$map[$row['media.id']] = $row;
 			}
 
