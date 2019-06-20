@@ -227,28 +227,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsAttributeId()
-	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
-		$attrWidthItem = $attributeManager->findItem( '29', [], 'product', 'width' );
-
-		$total = 0;
-		$search = $this->object->createSearch();
-		$search->setSlice( 0, 1 );
-
-		$conditions = array(
-			$search->compare( '==', 'index.attribute.id', $attrWidthItem->getId() ),
-			$search->compare( '==', 'product.editor', $this->editor ),
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $this->object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 3, $total );
-	}
-
-
-	public function testSearchItemsAttributeIdNotNull()
+	public function testSearchItemsSub()
 	{
 		$total = 0;
 		$search = $this->object->createSearch();
@@ -257,6 +236,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = array(
 			$search->compare( '!=', 'index.attribute.id', null ),
 			$search->compare( '!=', 'index.catalog.id', null ),
+			$search->compare( '!=', 'index.supplier.id', null ),
+			$search->compare( '>=', $search->createFunction( 'index.price:value', ['EUR'] ), 0 ),
+			$search->compare( '>=', $search->createFunction( 'index.text:name', ['de'] ), '' ),
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 
@@ -264,129 +246,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 8, $total );
-	}
-
-
-	public function testSearchItemsCatalog()
-	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-		$catItem = $catalogManager->findItem( 'cafe' );
-
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
-
-		$sortfunc = $search->createFunction( 'sort:index.catalog:position', array( 'promotion', [$catItem->getId()] ) );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-
-		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
-	}
-
-
-	public function testSearchItemsCatalogId()
-	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-		$catItem = $catalogManager->findItem( 'cafe' );
-
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
-		$total = 0;
-
-		$conditions = array(
-			$search->compare( '==', 'index.catalog.id', $catItem->getId() ), // catalog ID
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $this->object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
-	}
-
-
-	public function testSearchItemsCatalogIdNotNull()
-	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
-		$total = 0;
-
-		$conditions = array(
-			$search->compare( '!=', 'index.catalog.id', null ), // catalog ID
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $this->object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 9, $total );
-	}
-
-
-	public function testSearchItemsCatalogPosition()
-	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-		$catItem = $catalogManager->findItem( 'cafe' );
-
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
-		$total = 0;
-
-		$func = $search->createFunction( 'index.catalog:position', array( 'promotion', [$catItem->getId()] ) );
-		$conditions = array(
-			$search->compare( '!=', $func, null ), // position
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-
-		$sortfunc = $search->createFunction( 'sort:index.catalog:position', array( 'promotion', [$catItem->getId()] ) );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-
-		$result = $this->object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 2, $total );
-	}
-
-
-	public function testSearchItemsPrice()
-	{
-		$total = 0;
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
-
-		$func = $search->createFunction( 'index.price:value', ['EUR'] );
-		$expr = array(
-			$search->compare( '>=', $func, '18.00' ),
-			$search->compare( '!=', 'index.catalog.id', null ),
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$sortfunc = $search->createFunction( 'sort:index.price:value', ['EUR'] );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-
-		$result = $this->object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 6, $total );
-	}
-
-
-	public function testSearchItemsText()
-	{
-		$this->context->getConfig()->set( 'mshop/index/manager/text/name', 'Standard' );
-		$object = new \Aimeos\MShop\Index\Manager\Standard( $this->context );
-
-		$total = 0;
-		$search = $object->createSearch()->setSlice( 0, 1 );
-
-		$func = $search->createFunction( 'index.text:relevance', array( 'de', 'Cafe' ) );
-		$conditions = array(
-			$search->compare( '>', $func, 0 ), // text relevance
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-
-		$result = $object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 3, $total );
 	}
 
 
