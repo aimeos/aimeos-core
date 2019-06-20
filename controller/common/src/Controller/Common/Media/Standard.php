@@ -21,7 +21,6 @@ class Standard
 	implements \Aimeos\Controller\Common\Media\Iface
 {
 	private $context;
-	private $types = [];
 
 
 	/**
@@ -204,7 +203,6 @@ class Standard
 		$previews = [];
 		$mediaFiles = $this->createPreviews( $media );
 		$mime = $this->getMimeType( $media, 'preview' );
-		$manager = \Aimeos\MShop::create( $this->context, 'media' );
 
 		foreach( $mediaFiles as $type => $mediaFile )
 		{

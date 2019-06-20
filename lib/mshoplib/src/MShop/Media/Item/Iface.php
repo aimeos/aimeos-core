@@ -87,8 +87,17 @@ interface Iface
 	 *
 	 * @param string $url Preview URL of the media file
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @deprecated 2020.01
 	 */
 	public function setPreview( $url );
+
+	/**
+	 * Sets the new preview url of the media item.
+	 *
+	 * @param array $url Preview URL or list of URLs with widths of the media file in pixels as keys
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 */
+	public function setPreviews( array $urls );
 
 	/**
 	 * Returns the url of the media item.
