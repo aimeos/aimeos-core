@@ -10,9 +10,6 @@
 namespace Aimeos\MShop\Index\Manager;
 
 
-/**
- * Test class for \Aimeos\MShop\Index\Manager\MySQL.
- */
 class MySQLTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -93,7 +90,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 3, $total );
+		$this->assertEquals( 2, $total );
 	}
 
 

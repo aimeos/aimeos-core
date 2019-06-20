@@ -706,7 +706,7 @@ class Standard
 		 * @since 2019.04
 		 */
 		$types = $this->getContext()->getConfig()->get( 'mshop/index/manager/text/types' );
-		$products = $item->getRefItems( 'product', null, 'default' );
+		$products = ( $item->getType() === 'select' ? $item->getRefItems( 'product', null, 'default' ) : [] );
 		$products[] = $item;
 
 		foreach( $products as $product )

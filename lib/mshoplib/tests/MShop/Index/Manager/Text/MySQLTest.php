@@ -49,14 +49,18 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'index.text:relevance', array( 'de', 'T-DISC' ) );
-		$search->setConditions( $search->compare( '>', $func, 0 ) );
+		$search->setConditions( $search->combine( '&&', [
+			$search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 'T-DISC'] ), 0 ),
+			$search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 't-disc'] ), 0 ),
+		] ) );
 
-		$sortfunc = $search->createFunction( 'sort:index.text:relevance', array( 'de', 'T-DISC' ) );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
+		$search->setSortations( [
+			$search->sort( '+', $search->createFunction( 'sort:index.text:relevance', ['de', 'T-DISC'] ) ),
+			$search->sort( '+', $search->createFunction( 'sort:index.text:relevance', ['de', 't-disc'] ) ),
+		] );
 
 		$result = $this->object->searchItems( $search, [] );
 
-		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 1, count( $result ) );
 	}
 }
