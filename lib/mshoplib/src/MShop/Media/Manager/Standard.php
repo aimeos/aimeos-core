@@ -85,7 +85,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.preview' => array(
-			'label' => 'Preview URL',
+			'label' => 'Preview URLs as JSON encoded string',
 			'code' => 'media.preview',
 			'internalcode' => 'mmed."preview"',
 			'type' => 'string',

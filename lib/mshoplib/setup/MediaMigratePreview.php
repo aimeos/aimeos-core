@@ -41,8 +41,8 @@ class MediaMigratePreview extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$dbdomain = 'db-order';
-		$this->msg( 'Migrating preview columns in media table', 0 );
+		$dbdomain = 'db-media';
+		$this->msg( 'Migrating preview column in media table', 0 );
 
 		if( $this->getSchema( $dbdomain )->tableExists( 'mshop_media' ) === false )
 		{
@@ -72,7 +72,7 @@ class MediaMigratePreview extends \Aimeos\MW\Setup\Task\Base
 
 			foreach( $map as $id => $preview )
 			{
-				$stmt->bind( 1, json_encode( ['1' => $preview] ) );
+				$stmt->bind( 1, json_encode( ['1' => $preview], JSON_FORCE_OBJECT ) );
 				$stmt->bind( 2, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 				$stmt->execute()->finish();
