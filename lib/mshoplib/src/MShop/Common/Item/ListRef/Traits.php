@@ -76,7 +76,7 @@ trait Traits
 			$this->listRefItems[$domain][$id] = $refItem;
 		}
 
-		$id = $listItem->getId() ?: '_' . $domain . '_' . $listItem->getType() . '_' . $listItem->getRefId();
+		$id = $listItem->getId() ?: '_' . $this->getId() . '_' . $domain . '_' . $listItem->getType() . '_' . $listItem->getRefId();
 		$this->listItems[$domain][$id] = $listItem->setDomain( $domain )->setRefItem( $refItem );
 
 		if( isset( $this->listMap[$domain] ) ) {
@@ -310,6 +310,14 @@ trait Traits
 
 		return $this->getLabel();
 	}
+
+
+	/**
+	 * Returns the unique ID of the item.
+	 *
+	 * @return string|null ID of the item
+	 */
+	abstract public function getId();
 
 
 	/**

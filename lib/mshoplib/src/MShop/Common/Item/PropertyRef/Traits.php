@@ -49,7 +49,7 @@ trait Traits
 	 */
 	public function addPropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item )
 	{
-		$id = $item->getId() ?: '_' . $item->getType() . '_' . $item->getLanguageId() . '_' . $item->getValue();
+		$id = $item->getId() ?: '_' . $this->getId() . '_' . $item->getType() . '_' . $item->getLanguageId() . '_' . $item->getValue();
 		$this->propItems[$id] = $item;
 
 		return $this;
@@ -169,6 +169,14 @@ trait Traits
 
 		return $list;
 	}
+
+
+	/**
+	 * Returns the unique ID of the item.
+	 *
+	 * @return string|null ID of the item
+	 */
+	abstract public function getId();
 
 
 	/**

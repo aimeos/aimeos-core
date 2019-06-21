@@ -19,6 +19,11 @@ class Test
 		$this->initListItems( $listItems, $refItems );
 	}
 
+	public function getId()
+	{
+		return 'id';
+	}
+
 	public function getLabel()
 	{
 		return 'test label';
@@ -26,7 +31,7 @@ class Test
 
 	public function getResourceType()
 	{
-		return '';
+		return 'test';
 	}
 }
 
@@ -102,7 +107,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->addListItem( 'test', $this->listItem1->setId( null ), $this->textItem1->setId( null ) );
 
-		$this->assertEquals( ['_test_test_#2' => $this->listItem1], $this->object->getListItems( 'test' ) );
+		$this->assertEquals( ['_id_test_test_#2' => $this->listItem1], $this->object->getListItems( 'test' ) );
 		$this->assertEquals( ['#2' => $this->textItem1], $this->object->getRefItems( 'test' ) );
 	}
 

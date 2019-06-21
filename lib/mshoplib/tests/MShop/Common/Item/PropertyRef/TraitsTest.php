@@ -12,6 +12,11 @@ namespace Aimeos\MShop\Common\Item\PropertyRef;
 class TraitsClass
 {
 	use \Aimeos\MShop\Common\Item\PropertyRef\Traits;
+
+	public function getId()
+	{
+		return 'id';
+	}
 }
 
 
@@ -88,7 +93,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		$object = new TraitsClass();
 		$object->addPropertyItem( $this->propItem );
 
-		$this->assertEquals( ['_test__value' => $this->propItem], $object->getPropertyItems() );
+		$this->assertEquals( ['_id_test__value' => $this->propItem], $object->getPropertyItems() );
 	}
 
 
