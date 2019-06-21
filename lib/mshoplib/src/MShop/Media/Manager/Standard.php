@@ -694,8 +694,8 @@ class Standard
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				if( ( $value = json_decode( $row['media.preview'], true ) ) !== null ) {
-					$row['media.preview'] = $value;
+				if( ( $value = json_decode( $row['media.previews'], true ) ) !== null ) {
+					$row['media.previews'] = $value;
 				}
 				$map[$row['media.id']] = $row;
 			}

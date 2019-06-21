@@ -305,8 +305,8 @@ class Standard
 	 */
 	public function getPreview()
 	{
-		if( isset( $this->values['media.preview'] ) ) {
-			return (string) current( $this->values['media.preview'] );
+		if( isset( $this->values['media.previews'] ) ) {
+			return (string) current( $this->values['media.previews'] );
 		}
 
 		return '';
@@ -320,8 +320,8 @@ class Standard
 	 */
 	public function getPreviews()
 	{
-		if( isset( $this->values['media.preview'] ) ) {
-			return (array) $this->values['media.preview'];
+		if( isset( $this->values['media.previews'] ) ) {
+			return (array) $this->values['media.previews'];
 		}
 
 		return [];
@@ -337,7 +337,7 @@ class Standard
 	 */
 	public function setPreview( $url )
 	{
-		return $this->setPreviews( [1 => $url] );
+		return $this->setPreviews( ['1' => $url] );
 	}
 
 
@@ -351,7 +351,7 @@ class Standard
 	{
 		if( $urls !== $this->getPreviews() )
 		{
-			$this->values['media.preview'] = $urls;
+			$this->values['media.previews'] = $urls;
 			$this->setModified();
 		}
 
@@ -423,7 +423,8 @@ class Standard
 				case 'media.mimetype': $item = $item->setMimeType( $value ); break;
 				case 'media.type': $item = $item->setType( $value ); break;
 				case 'media.url': $item = $item->setUrl( $value ); break;
-				case 'media.preview': $item = $item->setPreviews( $value ); break;
+				case 'media.preview': $item = $item->setPreview( $value ); break;
+				case 'media.previews': $item = $item->setPreviews( (array) $value ); break;
 				case 'media.status': $item = $item->setStatus( $value ); break;
 				default: continue 2;
 			}
@@ -450,7 +451,8 @@ class Standard
 		$list['media.languageid'] = $this->getLanguageId();
 		$list['media.mimetype'] = $this->getMimeType();
 		$list['media.type'] = $this->getType();
-		$list['media.preview'] = $this->getPreviews();
+		$list['media.preview'] = $this->getPreview();
+		$list['media.previews'] = $this->getPreviews();
 		$list['media.url'] = $this->getUrl();
 		$list['media.status'] = $this->getStatus();
 

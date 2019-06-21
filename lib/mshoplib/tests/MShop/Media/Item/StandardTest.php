@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'media.label' => 'testPicture',
 			'media.mimetype' => 'image/jpeg',
 			'media.url' => 'http://www.url.com/test.jpg',
-			'media.preview' => [1 => '/directory/test.jpg'],
+			'media.previews' => [1 => '/directory/test.jpg'],
 			'media.status' => 6,
 			'media.languageid' => 'de',
 			'media.mtime' => '2011-01-01 00:00:02',
@@ -278,7 +278,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'media.languageid' => 'de',
 			'media.type' => 'test',
 			'media.mimetype' => 'image/jpeg',
-			'media.preview' => [1 => 'preview.jpg'],
+			'media.previews' => [1 => 'preview.jpg'],
+			'media.preview' => 'preview.jpg',
 			'media.url' => 'image.jpg',
 			'media.status' => 0,
 		);
@@ -292,7 +293,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['media.languageid'], $item->getLanguageId() );
 		$this->assertEquals( $list['media.type'], $item->getType() );
 		$this->assertEquals( $list['media.mimetype'], $item->getMimetype() );
-		$this->assertEquals( $list['media.preview'], $item->getPreviews() );
+		$this->assertEquals( $list['media.previews'], $item->getPreviews() );
+		$this->assertEquals( $list['media.preview'], $item->getPreview() );
 		$this->assertEquals( $list['media.url'], $item->getUrl() );
 		$this->assertEquals( $list['media.status'], $item->getStatus() );
 		$this->assertNull( $item->getSiteId() );
@@ -303,7 +305,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['media.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['media.siteid'] );
@@ -313,7 +315,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getMimeType(), $arrayObject['media.mimetype'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['media.type'] );
 		$this->assertEquals( $this->object->getUrl(), $arrayObject['media.url'] );
-		$this->assertEquals( $this->object->getPreviews(), $arrayObject['media.preview'] );
+		$this->assertEquals( $this->object->getPreview(), $arrayObject['media.preview'] );
+		$this->assertEquals( $this->object->getPreviews(), $arrayObject['media.previews'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['media.status'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['media.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['media.mtime'] );

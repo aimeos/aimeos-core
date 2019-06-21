@@ -387,7 +387,7 @@ return array(
 						mmed."langid" AS "media.languageid", mmed."type" AS "media.type",
 						mmed."link" AS "media.url", mmed."label" AS "media.label",
 						mmed."status" AS "media.status", mmed."mimetype" AS "media.mimetype",
-						mmed."domain" AS "media.domain", mmed."preview" AS "media.preview",
+						mmed."domain" AS "media.domain", mmed."preview" AS "media.previews",
 						mmed."mtime" AS "media.mtime", mmed."editor" AS "media.editor",
 						mmed."ctime" AS "media.ctime"
 					FROM "mshop_media" AS mmed
