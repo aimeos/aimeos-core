@@ -212,7 +212,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$priceItem->setValue( $dataset['price'] );
 			$priceItem->setCosts( $dataset['shipping'] );
 			$priceItem->setRebate( $dataset['rebate'] );
-			$priceItem->setTaxRate( $dataset['taxrate'] );
+			$priceItem->setTaxRates( $dataset['taxrates'] );
 			$ordServ->setPrice( $priceItem );
 
 			$orderBaseServiceManager->saveItem( $ordServ );
@@ -291,7 +291,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$priceItem->setValue( $dataset['price'] );
 			$priceItem->setCosts( $dataset['shipping'] );
 			$priceItem->setRebate( $dataset['rebate'] );
-			$priceItem->setTaxRate( $dataset['taxrate'] );
+			$priceItem->setTaxRates( $dataset['taxrates'] );
 			$ordProdItem->setPrice( $priceItem );
 
 			$bases['items'][$dataset['baseid']]->addProduct( $ordProdItem, $dataset['pos'] ); //adds Products to orderbase

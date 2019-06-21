@@ -118,7 +118,7 @@ return array(
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'tax', 'decimal', array( 'precision' => 14, 'scale' => 4 ) );
-			$table->addColumn( 'taxrate', 'decimal', array( 'precision' => 5, 'scale' => 2 ) );
+			$table->addColumn( 'taxrate', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'taxflag', 'smallint', [] );
 			$table->addColumn( 'flags', 'integer', [] );
 			$table->addColumn( 'pos', 'integer', [] );
@@ -183,7 +183,7 @@ return array(
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'tax', 'decimal', array( 'precision' => 14, 'scale' => 4 ) );
-			$table->addColumn( 'taxrate', 'decimal', array( 'precision' => 5, 'scale' => 2 ) );
+			$table->addColumn( 'taxrate', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'taxflag', 'smallint', [] );
 			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );

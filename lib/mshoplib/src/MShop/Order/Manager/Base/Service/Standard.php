@@ -105,10 +105,10 @@ class Standard
 			'type' => 'decimal',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'order.base.service.taxrate' => array(
-			'code' => 'order.base.service.taxrate',
+		'order.base.service.taxrates' => array(
+			'code' => 'order.base.service.taxrates',
 			'internalcode' => 'mordbase."taxrate"',
-			'label' => 'Service taxrate',
+			'label' => 'Service taxrates',
 			'type' => 'decimal',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -677,7 +677,7 @@ class Standard
 			$stmt->bind( 9, $price->getCosts() );
 			$stmt->bind( 10, $price->getRebate() );
 			$stmt->bind( 11, $price->getTaxValue() );
-			$stmt->bind( 12, $price->getTaxRate() );
+			$stmt->bind( 12, json_encode( $price->getTaxRates(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( 13, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 14, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 15, $date ); // mtime
@@ -895,10 +895,10 @@ class Standard
 					$price->setValue( $row['order.base.service.price'] );
 					$price->setRebate( $row['order.base.service.rebate'] );
 					$price->setCosts( $row['order.base.service.costs'] );
-					$price->setTaxRate( $row['order.base.service.taxrate'] );
 					$price->setTaxFlag( $row['order.base.service.taxflag'] );
-					$price->setTaxValue( $row['order.base.service.taxvalue'] );
 					$price->setCurrencyId( $row['order.base.service.currencyid'] );
+					$price->setTaxRates( json_decode( $row['order.base.service.taxrates'], true ) );
+					$price->setTaxValue( $row['order.base.service.taxvalue'] );
 
 					$items[$row['order.base.service.id']] = array( 'price' => $price, 'item' => $row );
 				}

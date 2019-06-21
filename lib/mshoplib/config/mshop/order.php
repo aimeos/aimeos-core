@@ -342,7 +342,7 @@ return array(
 								mordbapr."mediaurl" AS "order.base.product.mediaurl", mordbapr."quantity" AS "order.base.product.quantity",
 								mordbapr."currencyid" AS "order.base.product.currencyid", mordbapr."price" AS "order.base.product.price",
 								mordbapr."costs" AS "order.base.product.costs", mordbapr."rebate" AS "order.base.product.rebate",
-								mordbapr."tax" AS "order.base.product.taxvalue", mordbapr."taxrate" AS "order.base.product.taxrate",
+								mordbapr."tax" AS "order.base.product.taxvalue", mordbapr."taxrate" AS "order.base.product.taxrates",
 								mordbapr."taxflag" AS "order.base.product.taxflag", mordbapr."flags" AS "order.base.product.flags",
 								mordbapr."status" AS "order.base.product.status", mordbapr."pos" AS "order.base.product.position",
 								mordbapr."mtime" AS "order.base.product.mtime", mordbapr."editor" AS "order.base.product.editor",
@@ -537,7 +537,7 @@ return array(
 								mordbase."name" AS "order.base.service.name", mordbase."mediaurl" AS "order.base.service.mediaurl",
 								mordbase."currencyid" AS "order.base.service.currencyid", mordbase."price" AS "order.base.service.price",
 								mordbase."costs" AS "order.base.service.costs", mordbase."rebate" AS "order.base.service.rebate",
-								mordbase."tax" AS "order.base.service.taxvalue", mordbase."taxrate" AS "order.base.service.taxrate",
+								mordbase."tax" AS "order.base.service.taxvalue", mordbase."taxrate" AS "order.base.service.taxrates",
 								mordbase."taxflag" AS "order.base.service.taxflag", mordbase."pos" AS "order.base.service.position",
 								mordbase."mtime" AS "order.base.service.mtime", mordbase."editor" AS "order.base.service.editor",
 								mordbase."ctime" AS "order.base.service.ctime"

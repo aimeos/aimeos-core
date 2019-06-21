@@ -295,7 +295,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.product.price', '4.50' );
 		$expr[] = $search->compare( '==', 'order.base.product.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.rebate', '0.00' );
-		$expr[] = $search->compare( '==', 'order.base.product.taxrate', '0.00' );
+		$expr[] = $search->compare( '=~', 'order.base.product.taxrates', '{' );
 		$expr[] = $search->compare( '==', 'order.base.product.flags', 0 );
 		$expr[] = $search->compare( '==', 'order.base.product.position', 1 );
 		$expr[] = $search->compare( '==', 'order.base.product.status', 1 );
@@ -324,7 +324,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.service.price', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.rebate', '0.00' );
-		$expr[] = $search->compare( '==', 'order.base.service.taxrate', '0.00' );
+		$expr[] = $search->compare( '=~', 'order.base.service.taxrates', '{' );
 		$expr[] = $search->compare( '>=', 'order.base.service.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.base.service.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.service.editor', $this->editor );
