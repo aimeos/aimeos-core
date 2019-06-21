@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->process( $order );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $result->getDeliveryStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PENDING, $result->getDeliveryStatus() );
 	}
 
 
@@ -65,7 +65,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->processBatch( [$order] );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, current( $result )->getDeliveryStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PENDING, current( $result )->getDeliveryStatus() );
 	}
 
 
