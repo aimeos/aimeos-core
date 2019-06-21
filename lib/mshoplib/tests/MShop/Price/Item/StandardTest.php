@@ -29,7 +29,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'price.costs' => '19.95',
 			'price.rebate' => '10.00',
 			'price.tax' => '34.3995',
-			'price.taxrate' => 19.00,
+			'price.taxrates' => ['' => '19.00', 'local' => '5.00'],
 			'price.taxflag' => true,
 			'price.status' => true,
 			'price.mtime' => '2011-01-01 00:00:02',
@@ -38,10 +38,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'currencyid' => 'EUR',
 		);
 
-		$propValues = ['price.property.type' => 'taxrate-local', 'price.property.value' => '5.0', 'languageid' => null];
-		$propItems = [new \Aimeos\MShop\Common\Item\Property\Standard( 'price.property.', $propValues )];
-
-		$this->object = new \Aimeos\MShop\Price\Item\Standard( $this->values, [], [], $propItems );
+		$this->object = new \Aimeos\MShop\Price\Item\Standard( $this->values );
 	}
 
 
@@ -307,7 +304,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetTaxRates()
 	{
-		$this->assertEquals( ['taxrate' => '19.00', 'taxrate-local' => '5.0'], $this->object->getTaxRates() );
+		$this->assertEquals( ['' => '19.00', 'local' => '5.0'], $this->object->getTaxRates() );
 	}
 
 
@@ -316,7 +313,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setTaxRate( '22.00' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
-		$this->assertEquals( 22.00, $this->object->getTaxRate() );
+		$this->assertEquals( '22.00', $this->object->getTaxRate() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetTaxRates()
+	{
+		$value = ['' => '22.00', 'local' => '10.00'];
+		$return = $this->object->setTaxRates( $value );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
+		$this->assertEquals( ['' => '22.00', 'local' => '10.00'], $this->object->getTaxRates() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -349,12 +357,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'price.quantity' => 10,
 			'price.value' => 195.50,
 			'price.costs' => 19.95,
-			'price.taxrate' => 19.00,
+			'price.taxrates' => ['' => '19.00', 'local' => '5.00'],
 			'price.taxflag' => false,
 		);
 
 		$object = new \Aimeos\MShop\Price\Item\Standard( $values );
-		$this->assertEquals( '40.9355', $object->getTaxValue() );
+		$this->assertEquals( '51.7080', $object->getTaxValue() );
+
+
+		$values['price.taxflag'] = true;
+
+		$object = new \Aimeos\MShop\Price\Item\Standard( $values );
+		$this->assertEquals( '41.7000', $object->getTaxValue() );
 	}
 
 
@@ -422,6 +436,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'price.costs' => '5.00',
 			'price.rebate' => '2.00',
 			'price.taxvalue' => '3.00',
+			'price.taxrates' => ['' => '20.00'],
 			'price.taxrate' => '20.00',
 			'price.taxflag' => false,
 			'price.status' => 0,
@@ -439,6 +454,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['price.costs'], $item->getCosts() );
 		$this->assertEquals( $list['price.rebate'], $item->getRebate() );
 		$this->assertEquals( $list['price.taxvalue'], $item->getTaxValue() );
+		$this->assertEquals( $list['price.taxrates'], $item->getTaxRates() );
 		$this->assertEquals( $list['price.taxrate'], $item->getTaxRate() );
 		$this->assertEquals( $list['price.taxflag'], $item->getTaxFlag() );
 		$this->assertEquals( $list['price.status'], $item->getStatus() );
@@ -450,7 +466,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['price.id'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['price.type'] );
@@ -463,6 +479,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getCosts(), $arrayObject['price.costs'] );
 		$this->assertEquals( $this->object->getRebate(), $arrayObject['price.rebate'] );
 		$this->assertEquals( $this->object->getTaxValue(), $arrayObject['price.taxvalue'] );
+		$this->assertEquals( $this->object->getTaxRates(), $arrayObject['price.taxrates'] );
 		$this->assertEquals( $this->object->getTaxRate(), $arrayObject['price.taxrate'] );
 		$this->assertEquals( $this->object->getTaxFlag(), $arrayObject['price.taxflag'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['price.status'] );

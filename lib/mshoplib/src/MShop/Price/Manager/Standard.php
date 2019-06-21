@@ -97,8 +97,8 @@ class Standard
 		'price.taxrate' => array(
 			'code' => 'price.taxrate',
 			'internalcode' => 'mpri."taxrate"',
-			'label' => 'Price tax in percent',
-			'type' => 'decimal',
+			'label' => 'Price tax rates as JSON encoded string',
+			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'price.status' => array(
@@ -498,7 +498,7 @@ class Standard
 			$stmt->bind( 6, $item->getValue() );
 			$stmt->bind( 7, $item->getCosts() );
 			$stmt->bind( 8, $item->getRebate() );
-			$stmt->bind( 9, $item->getTaxRate() );
+			$stmt->bind( 9, json_encode( $item->getTaxrates(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( 10, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 11, $date ); //mtime
 			$stmt->bind( 12, $context->getEditor() );
@@ -735,7 +735,11 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false ) {
+			while( ( $row = $results->fetch() ) !== false )
+			{
+				if( ( $value = json_decode( $row['price.taxrates'], true ) ) !== null ) {
+					$row['price.taxrates'] = $value;
+				}
 				$map[$row['price.id']] = $row;
 			}
 

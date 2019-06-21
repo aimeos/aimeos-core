@@ -165,6 +165,14 @@ interface Iface
 	public function setTaxRate( $taxrate );
 
 	/**
+	 * Sets the new tax rates in percent
+	 *
+	 * @param array $taxrates Tax rates with name as key and values with two digits precision
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 */
+	public function setTaxRates( array $taxrates );
+
+	/**
 	 * Returns the tax rate flag.
 	 *
 	 * True if tax is included in the price value, costs and rebate, false if not

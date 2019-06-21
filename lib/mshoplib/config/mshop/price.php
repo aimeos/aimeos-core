@@ -390,7 +390,7 @@ return array(
 						mpri."domain" AS "price.domain", mpri."label" AS "price.label",
 						mpri."quantity" AS "price.quantity", mpri."value" AS "price.value",
 						mpri."costs" AS "price.costs", mpri."rebate" AS "price.rebate",
-						mpri."taxrate" AS "price.taxrate", mpri."status" AS "price.status",
+						mpri."taxrate" AS "price.taxrates", mpri."status" AS "price.status",
 						mpri."mtime" AS "price.mtime", mpri."editor" AS "price.editor",
 						mpri."ctime" AS "price.ctime"
 					FROM "mshop_price" AS mpri

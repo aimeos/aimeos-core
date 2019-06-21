@@ -309,8 +309,8 @@ class Standard extends Base
 	 */
 	public function getTaxRate()
 	{
-		if( isset( $this->values['price.taxrate'] ) ) {
-			return (string) $this->values['price.taxrate'];
+		if( isset( $this->values['price.taxrates'][''] ) ) {
+			return (string) $this->values['price.taxrates'][''];
 		}
 
 		return '0.00';
@@ -324,16 +324,11 @@ class Standard extends Base
 	 */
 	 public function getTaxRates()
 	 {
-		 $list = ['taxrate' => $this->getTaxRate()];
+		if( isset( $this->values['price.taxrates'] ) ) {
+			return (array) $this->values['price.taxrates'];
+		}
 
-		 foreach( $this->getPropertyItems() as $propItem )
-		 {
-			if( !strncmp( 'taxrate', $propItem->getType(), 7 ) ) {
-				$list[$propItem->getType()] = $propItem->getValue();
-			}
-		 }
-
-		 return $list;
+		 return [];
 	 }
 
 
@@ -347,7 +342,39 @@ class Standard extends Base
 	{
 		if( (string) $taxrate !== $this->getTaxRate() )
 		{
-			$this->values['price.taxrate'] = (string) $this->checkPrice( $taxrate );
+			if( !isset( $this->values['price.taxrates'] ) ) {
+				$this->values['price.taxrates'] = [];
+			}
+
+			if( !is_array( $this->values['price.taxrates'] ) ) {
+				$this->values['price.taxrates'] = ['' => $this->values['price.taxrates']];
+			}
+
+			$this->values['price.taxrates'][''] = (string) $this->checkPrice( $taxrate );
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Sets the new tax rates in percent
+	 *
+	 * @param array $taxrates Tax rates with name as key and values with two digits precision
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 */
+	public function setTaxRates( array $taxrates )
+	{
+		if( $taxrates !== $this->getTaxRates() )
+		{
+			foreach( $taxrates as $name => $taxrate )
+			{
+				unset( $taxrates[$name] ); // change index 0 to ''
+				$taxrates[$name ?: ''] = (string) $this->checkPrice( $taxrate );
+			}
+
+			$this->values['price.taxrates'] = $taxrates;
 			$this->setModified();
 		}
 
@@ -400,7 +427,7 @@ class Standard extends Base
 	{
 		if( !isset( $this->values['price.tax'] ) )
 		{
-			$taxrate = $this->getTaxRate();
+			$taxrate = array_sum( $this->getTaxRates() );
 
 			if( $this->getTaxFlag() !== false ) {
 				$tax = ( $this->getValue() + $this->getCosts() ) / ( 100 + $taxrate ) * $taxrate;
@@ -557,6 +584,7 @@ class Standard extends Base
 				case 'price.costs': $item = $item->setCosts( $value ); break;
 				case 'price.rebate': $item = $item->setRebate( $value ); break;
 				case 'price.taxvalue': $item = $item->setTaxValue( $value ); break;
+				case 'price.taxrates': $item = $item->setTaxRates( (array) $value ); break;
 				case 'price.taxrate': $item = $item->setTaxRate( $value ); break;
 				case 'price.taxflag': $item = $item->setTaxFlag( $value ); break;
 				case 'price.status': $item = $item->setStatus( $value ); break;
@@ -589,6 +617,7 @@ class Standard extends Base
 		$list['price.costs'] = $this->getCosts();
 		$list['price.rebate'] = $this->getRebate();
 		$list['price.taxvalue'] = $this->getTaxValue();
+		$list['price.taxrates'] = $this->getTaxRates();
 		$list['price.taxrate'] = $this->getTaxRate();
 		$list['price.taxflag'] = $this->getTaxFlag();
 		$list['price.status'] = $this->getStatus();

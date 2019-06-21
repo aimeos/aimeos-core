@@ -132,6 +132,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getCosts(), $itemSaved->getCosts() );
 		$this->assertEquals( $item->getRebate(), $itemSaved->getRebate() );
 		$this->assertEquals( $item->getTaxRate(), $itemSaved->getTaxRate() );
+		$this->assertEquals( $item->getTaxRates(), $itemSaved->getTaxRates() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
@@ -150,6 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getCosts(), $itemUpd->getCosts() );
 		$this->assertEquals( $itemExp->getRebate(), $itemUpd->getRebate() );
 		$this->assertEquals( $itemExp->getTaxRate(), $itemUpd->getTaxRate() );
+		$this->assertEquals( $itemExp->getTaxRates(), $itemUpd->getTaxRates() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
@@ -194,7 +196,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'price.value', '99.99' );
 		$expr[] = $search->compare( '==', 'price.costs', '9.99' );
 		$expr[] = $search->compare( '==', 'price.rebate', '0.00' );
-		$expr[] = $search->compare( '==', 'price.taxrate', '19.00' );
+		$expr[] = $search->compare( '=~', 'price.taxrate', '{' );
 		$expr[] = $search->compare( '==', 'price.status', 1 );
 		$expr[] = $search->compare( '>=', 'price.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'price.ctime', '1970-01-01 00:00:00' );
@@ -235,22 +237,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'price.value', '600.00' );
 		$expr[] = $search->compare( '==', 'price.costs', '30.00' );
 		$expr[] = $search->compare( '==', 'price.rebate', '0.00' );
-		$expr[] = $search->compare( '==', 'price.taxrate', '19.00' );
+		$expr[] = $search->compare( '=~', 'price.taxrate', '{' );
 		$expr[] = $search->compare( '==', 'price.status', 1 );
 		$expr[] = $search->compare( '>=', 'price.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'price.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'price.editor', $this->editor );
 
-		$param = ['taxrate-local', null, '0.0'];
+		$param = ['zone', null, 'xx'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'price:prop', $param ), null );
 
-		$param = ['taxrate-local', null, '5.0'];
+		$param = ['zone', null, 'NY'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'price:prop', $param ), null );
 
-		$param = ['taxrate-local', null];
+		$param = ['zone', null];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'price:prop', $param ), null );
 
-		$param = ['taxrate-local'];
+		$param = ['zone'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'price:prop', $param ), null );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );

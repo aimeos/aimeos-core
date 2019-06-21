@@ -238,7 +238,7 @@ abstract class Base
 					$row[$this->prefix . 'config'] = [];
 				}
 
-				$items[$row[$this->prefix . 'id']] = $this->createItemBase( $row );
+				$items[(string) $row[$this->prefix . 'id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

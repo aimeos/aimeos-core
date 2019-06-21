@@ -109,14 +109,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
-			$search->compare( '~=', 'price.property.value', '5.0'),
+			$search->compare( '~=', 'price.property.value', 'NY'),
 			$search->compare( '==', 'price.property.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ($expected = reset($results)) === false ) {
-			throw new \RuntimeException( sprintf( 'No price property item found for value "%1$s".', '1024' ) );
+			throw new \RuntimeException( sprintf( 'No price property item found for value "%1$s".', 'NY' ) );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
@@ -149,14 +149,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'price.property.id', null );
 		$expr[] = $search->compare( '!=', 'price.property.parentid', null );
 		$expr[] = $search->compare( '!=', 'price.property.siteid', null );
-		$expr[] = $search->compare( '==', 'price.property.type', 'taxrate-local' );
+		$expr[] = $search->compare( '==', 'price.property.type', 'zone' );
 		$expr[] = $search->compare( '==', 'price.property.languageid', null );
-		$expr[] = $search->compare( '==', 'price.property.value', '5.0' );
+		$expr[] = $search->compare( '==', 'price.property.value', 'NY' );
 		$expr[] = $search->compare( '==', 'price.property.editor', $this->editor );
 
 		$search->setConditions( $search->combine('&&', $expr) );
 		$results = $this->object->searchItems( $search, [], $total );
-		$this->assertEquals( 4, count( $results ) );
+		$this->assertEquals( 2, count( $results ) );
 	}
 
 

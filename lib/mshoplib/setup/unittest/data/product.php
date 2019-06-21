@@ -482,7 +482,7 @@ return [
 					'price.label'=>'product/default/600.00/30.00', 'price.quantity' => 1, 'price.value' => '600.00',
 					'price.costs' => '30.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00',
 					'property' => [[
-						'price.property.type' => 'taxrate-local', 'price.property.languageid' => null, 'price.property.value' => '5.0'
+						'price.property.type' => 'zone', 'price.property.languageid' => null, 'price.property.value' => 'NY'
 					]],
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 1,
@@ -490,7 +490,7 @@ return [
 					'price.label'=>'product/default/580.00/20.00', 'price.quantity' => 100, 'price.value' => '580.00',
 					'price.costs' => '20.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00',
 					'property' => [[
-						'price.property.type' => 'taxrate-local', 'price.property.languageid' => null, 'price.property.value' => '5.0'
+						'price.property.type' => 'zone', 'price.property.languageid' => null, 'price.property.value' => 'NY'
 					]],
 				]],
 				'tag' => [[
@@ -621,7 +621,7 @@ return [
 					'price.label'=>'product/default/18.00/1.00', 'price.quantity' => 1, 'price.value' => '18.00',
 					'price.costs' => '1.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00',
 					'property' => [[
-						'price.property.type' => 'taxrate-local', 'price.property.languageid' => null, 'price.property.value' => '5.0'
+						'price.property.type' => 'zone', 'price.property.languageid' => null, 'price.property.value' => 'CA'
 					]],
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 1,
@@ -629,7 +629,7 @@ return [
 					'price.label' => 'product/default/15.00/1.50', 'price.quantity' => 1000, 'price.value' => '15.00',
 					'price.costs' => '1.50', 'price.rebate' => '0.00', 'price.taxrate' => '19.00',
 					'property' => [[
-						'price.property.type' => 'taxrate-local', 'price.property.languageid' => null, 'price.property.value' => '5.0'
+						'price.property.type' => 'zone', 'price.property.languageid' => null, 'price.property.value' => 'CA'
 					]],
 				]],
 				'product' => [[

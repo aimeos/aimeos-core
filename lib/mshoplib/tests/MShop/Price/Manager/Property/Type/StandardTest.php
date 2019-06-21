@@ -61,7 +61,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
-			$search->compare( '==', 'price.property.type.code', 'taxrate-local' ),
+			$search->compare( '==', 'price.property.type.code', 'zone' ),
 			$search->compare( '==', 'price.property.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -149,8 +149,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'price.property.type.id', null );
 		$expr[] = $search->compare( '!=', 'price.property.type.siteid', null );
 		$expr[] = $search->compare( '==', 'price.property.type.domain', 'price' );
-		$expr[] = $search->compare( '==', 'price.property.type.code', 'taxrate-local' );
-		$expr[] = $search->compare( '==', 'price.property.type.label', 'Local tax' );
+		$expr[] = $search->compare( '==', 'price.property.type.code', 'zone' );
+		$expr[] = $search->compare( '==', 'price.property.type.label', 'Tax zone' );
 		$expr[] = $search->compare( '>=', 'price.property.type.position', 0 );
 		$expr[] = $search->compare( '==', 'price.property.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'price.property.type.mtime', '1970-01-01 00:00:00' );

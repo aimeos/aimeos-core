@@ -14,7 +14,7 @@ return array(
 	),
 
 	'price/property/type' => array(
-		'price/taxrate-local' => array( 'domain' => 'price', 'code' => 'taxrate-local', 'label' => 'Local tax', 'status' => 1 ),
+		'price/zone' => array( 'domain' => 'price', 'code' => 'Zone', 'label' => 'Tax zone', 'status' => 1 ),
 	),
 
 	'price' => array(
