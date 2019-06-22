@@ -740,7 +740,7 @@ class Standard
 				if( ( $value = json_decode( $row['price.taxrates'], true ) ) !== null ) {
 					$row['price.taxrates'] = $value;
 				}
-				$map[$row['price.id']] = $row;
+				$map[(string) $row['price.id']] = $row;
 			}
 
 			$dbm->release( $conn, $dbname );

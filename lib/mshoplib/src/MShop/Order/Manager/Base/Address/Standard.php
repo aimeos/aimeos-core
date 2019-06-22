@@ -929,7 +929,7 @@ class Standard
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[$row['order.base.address.id']] = $this->createItemBase( $row );
+					$items[(string) $row['order.base.address.id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( \Exception $e )

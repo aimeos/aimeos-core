@@ -710,7 +710,7 @@ class Standard
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level, $this->plugins );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[$row['attribute.id']] = $row;
+				$map[(string) $row['attribute.id']] = $row;
 			}
 
 			$dbm->release( $conn, $dbname );

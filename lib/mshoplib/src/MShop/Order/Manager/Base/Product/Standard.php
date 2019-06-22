@@ -976,7 +976,7 @@ class Standard
 					$price->setTaxRates( json_decode( $row['order.base.product.taxrates'], true ) );
 					$price->setTaxValue( $row['order.base.product.taxvalue'] );
 
-					$items[$row['order.base.product.id']] = array( 'price' => $price, 'item' => $row );
+					$items[(string) $row['order.base.product.id']] = array( 'price' => $price, 'item' => $row );
 				}
 			}
 			catch( \Exception $e )

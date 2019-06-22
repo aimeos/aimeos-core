@@ -900,7 +900,7 @@ class Standard
 					$price->setTaxRates( json_decode( $row['order.base.service.taxrates'], true ) );
 					$price->setTaxValue( $row['order.base.service.taxvalue'] );
 
-					$items[$row['order.base.service.id']] = array( 'price' => $price, 'item' => $row );
+					$items[(string) $row['order.base.service.id']] = array( 'price' => $price, 'item' => $row );
 				}
 			}
 			catch( \Exception $e )

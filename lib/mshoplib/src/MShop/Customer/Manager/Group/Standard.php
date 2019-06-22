@@ -550,7 +550,7 @@ class Standard
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['customer.group.id']] = $this->createItemBase( $row );
+				$items[(string) $row['customer.group.id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

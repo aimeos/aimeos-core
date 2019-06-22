@@ -614,7 +614,7 @@ class Standard
 						$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
 
-					$items[$row['coupon.id']] = $this->createItemBase( $row );
+					$items[(string) $row['coupon.id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( \Exception $e )

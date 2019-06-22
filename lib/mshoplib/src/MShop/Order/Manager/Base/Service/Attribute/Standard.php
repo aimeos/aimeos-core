@@ -792,7 +792,7 @@ class Standard
 					if( ( $value = json_decode( $row['order.base.service.attribute.value'], true ) ) !== null ) {
 						$row['order.base.service.attribute.value'] = $value;
 					}
-					$items[$row['order.base.service.attribute.id']] = $this->createItemBase( $row );
+					$items[(string) $row['order.base.service.attribute.id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( \Exception $e )

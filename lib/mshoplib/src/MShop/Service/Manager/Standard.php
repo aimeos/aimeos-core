@@ -692,7 +692,7 @@ class Standard
 					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
-				$map[$row['service.id']] = $row;
+				$map[(string) $row['service.id']] = $row;
 			}
 
 			$dbm->release( $conn, $dbname );

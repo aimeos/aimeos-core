@@ -897,7 +897,7 @@ class Standard extends Base
 				$localeItem->setCurrencyId( $row['order.base.currencyid'] );
 				$localeItem->setSiteId( $row['order.base.siteid'] );
 
-				$map[$row['order.base.id']] = [$price, $localeItem, $row];
+				$map[(string) $row['order.base.id']] = [$price, $localeItem, $row];
 			}
 
 			$dbm->release( $conn, $dbname );

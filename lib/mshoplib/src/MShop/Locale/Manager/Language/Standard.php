@@ -582,7 +582,7 @@ class Standard
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[$row['locale.language.id']] = $this->createItemBase( $row );
+					$items[(string) $row['locale.language.id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( \Exception $e )

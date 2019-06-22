@@ -812,7 +812,7 @@ class Standard
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[$row['order.id']] = $this->createItemBase( $row );
+					$items[(string) $row['order.id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( \Exception $e )

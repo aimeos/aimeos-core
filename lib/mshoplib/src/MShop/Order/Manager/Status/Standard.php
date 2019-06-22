@@ -736,7 +736,7 @@ class Standard
 				$required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['order.status.id']] = $this->createItemBase( $row );
+				$items[(string) $row['order.status.id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

@@ -695,7 +695,7 @@ class Standard
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[$row['subscription.id']] = $this->createItemBase( $row );
+					$items[(string) $row['subscription.id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( \Exception $e )

@@ -719,7 +719,7 @@ class Standard
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[$row['coupon.code.id']] = $this->createItemBase( $row );
+					$items[(string) $row['coupon.code.id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( \Exception $e )

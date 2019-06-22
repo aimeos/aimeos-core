@@ -554,7 +554,7 @@ class Standard
 					$logger->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
-				$items[$row['job.id']] = $this->createItemBase( $row );
+				$items[(string) $row['job.id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

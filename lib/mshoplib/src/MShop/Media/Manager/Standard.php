@@ -697,7 +697,7 @@ class Standard
 				if( ( $value = json_decode( $row['media.previews'], true ) ) !== null ) {
 					$row['media.previews'] = $value;
 				}
-				$map[$row['media.id']] = $row;
+				$map[(string) $row['media.id']] = $row;
 			}
 
 			$dbm->release( $conn, $dbname );

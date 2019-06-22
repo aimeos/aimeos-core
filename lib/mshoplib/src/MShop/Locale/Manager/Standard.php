@@ -202,7 +202,7 @@ class Standard
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		foreach( $this->search( $search, $ref, $total ) as $row ) {
-			$items[$row['locale.id']] = $this->createItemBase( $row );
+			$items[(string) $row['locale.id']] = $this->createItemBase( $row );
 		}
 
 		return $items;

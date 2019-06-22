@@ -640,7 +640,7 @@ class Standard
 						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
 
-					$items[$row['locale.site.id']] = $this->createItemBase( $row );
+					$items[(string) $row['locale.site.id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( \Exception $e )
