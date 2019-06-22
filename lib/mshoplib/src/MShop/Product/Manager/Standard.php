@@ -758,9 +758,7 @@ class Standard
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				$config = $row['product.config'];
-
-				if( $config && ( $row['product.config'] = json_decode( $config, true ) ) === null )
+				if( ( $row['product.config'] = json_decode( $config = $row['product.config'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_product.config', $row['product.id'], $config );
 					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );

@@ -789,8 +789,10 @@ class Standard
 			{
 				while( ( $row = $results->fetch() ) !== false )
 				{
-					if( ( $value = json_decode( $row['order.base.product.attribute.value'], true ) ) !== null ) {
-						$row['order.base.product.attribute.value'] = $value;
+					if( ( $row['order.base.product.attribute.value'] = json_decode( $config = $row['order.base.product.attribute.value'], true ) ) === null )
+					{
+						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_base_product_attribute.value', $row['order.base.product.attribute.id'], $config );
+						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
 					$items[(string) $row['order.base.product.attribute.id']] = $this->createItemBase( $row );
 				}

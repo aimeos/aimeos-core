@@ -968,12 +968,19 @@ class Standard
 				while( ( $row = $results->fetch() ) !== false )
 				{
 					$price = $priceManager->createItem();
+
+					if( ( $row['order.base.product.taxrates'] = json_decode( $config = $row['order.base.product.taxrates'], true ) ) === null )
+					{
+						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_base_product.taxrates', $row['order.base.product.id'], $config );
+						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
+					}
+
+					$price->setTaxRates( $row['order.base.product.taxrates'] );
 					$price->setValue( $row['order.base.product.price'] );
 					$price->setRebate( $row['order.base.product.rebate'] );
 					$price->setCosts( $row['order.base.product.costs'] );
 					$price->setTaxFlag( $row['order.base.product.taxflag'] );
 					$price->setCurrencyId( $row['order.base.product.currencyid'] );
-					$price->setTaxRates( json_decode( $row['order.base.product.taxrates'], true ) );
 					$price->setTaxValue( $row['order.base.product.taxvalue'] );
 
 					$items[(string) $row['order.base.product.id']] = array( 'price' => $price, 'item' => $row );

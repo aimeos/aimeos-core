@@ -606,11 +606,9 @@ class Standard
 			{
 				while( ( $row = $results->fetch() ) !== false )
 				{
-					$config = $row['coupon.config'];
-
-					if( ( $row['coupon.config'] = json_decode( $row['coupon.config'], true ) ) === null )
+					if( ( $row['coupon.config'] = json_decode( $config = $row['coupon.config'], true ) ) === null )
 					{
-						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
+						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_coupon.config', $row['id'], $config );
 						$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
 

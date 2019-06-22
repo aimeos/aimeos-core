@@ -136,8 +136,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			$node->siteid = $values['siteid'];
 		}
 
-		if( isset( $node->config ) && ( $result = json_decode( $node->config, true ) ) !== null ) {
-			$node->config = $result;
+		if( isset( $node->config ) && ( $node->config = json_decode( $config = $node->config, true ) ) === null )
+		{
+			$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_catalog.config', $values['id'], $config );
+			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 		}
 
 		return new \Aimeos\MShop\Catalog\Item\Standard( $node, $children, $listItems, $refItems );

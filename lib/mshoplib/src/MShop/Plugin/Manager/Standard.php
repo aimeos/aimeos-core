@@ -630,9 +630,7 @@ class Standard
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				$config = $row['plugin.config'];
-
-				if( ( $row['plugin.config'] = json_decode( $row['plugin.config'], true ) ) === null )
+				if( ( $row['plugin.config'] = json_decode( $config = $row['plugin.config'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'plugin.config', $row['plugin.id'], $config );
 					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );

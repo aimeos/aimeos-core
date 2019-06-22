@@ -234,8 +234,10 @@ abstract class Base
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				if( ( $row[$this->prefix . 'config'] = json_decode( $row[$this->prefix . 'config'], true ) ) === null ) {
-					$row[$this->prefix . 'config'] = [];
+				if( ( $row[$this->prefix . 'config'] = json_decode( $config = $row[$this->prefix . 'config'], true ) ) === null )
+				{
+					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', $this->prefix . 'list.config', $row['id'], $config );
+					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
 				$items[(string) $row[$this->prefix . 'id']] = $this->createItemBase( $row );
