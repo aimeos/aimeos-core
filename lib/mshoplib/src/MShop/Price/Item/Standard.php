@@ -340,21 +340,7 @@ class Standard extends Base
 	 */
 	public function setTaxRate( $taxrate )
 	{
-		if( (string) $taxrate !== $this->getTaxRate() )
-		{
-			if( !isset( $this->values['price.taxrates'] ) ) {
-				$this->values['price.taxrates'] = [];
-			}
-
-			if( !is_array( $this->values['price.taxrates'] ) ) {
-				$this->values['price.taxrates'] = ['' => $this->values['price.taxrates']];
-			}
-
-			$this->values['price.taxrates'][''] = (string) $this->checkPrice( $taxrate );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->setTaxRates( ['' => $taxrate] );
 	}
 
 

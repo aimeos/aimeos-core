@@ -333,7 +333,6 @@ class Standard
 	 *
 	 * @param string|array $url Preview URL of the media file
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
-	 * @deprecated 2020.01
 	 */
 	public function setPreview( $url )
 	{
