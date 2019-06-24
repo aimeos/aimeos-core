@@ -12,12 +12,14 @@ namespace Aimeos\MShop\Index\Manager\Text;
 
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $object;
 
 
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\MShop\Index\Manager\Text\Standard( \TestHelperMShop::getContext() );
+		$this->context = \TestHelperMShop::getContext();
+		$this->object = new \Aimeos\MShop\Index\Manager\Text\Standard( $this->context );
 	}
 
 
@@ -33,9 +35,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAggregate()
+	public function testCleanupIndex()
 	{
-		$this->object->aggregate( $this->object->createSearch(), 'index.text.id' );
+		$this->object->cleanupIndex( '1970-01-01 00:00:00' );
 	}
 
 
@@ -113,7 +115,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$product = $productManager->findItem( 'CNC', ['text'] );
 
 		$this->object->deleteItem( $product->getId() );
@@ -130,7 +132,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItemNoName()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$product = $productManager->findItem( 'IJKL', ['text'] );
 
 		$this->object->deleteItem( $product->getId() );
@@ -143,11 +145,4 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
 	}
-
-
-	public function testCleanupIndex()
-	{
-		$this->object->cleanupIndex( '1970-01-01 00:00:00' );
-	}
-
 }

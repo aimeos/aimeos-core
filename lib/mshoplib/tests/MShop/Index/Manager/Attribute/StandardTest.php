@@ -37,22 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$manager = \Aimeos\MShop::create( $this->context, 'attribute' );
-
-		$search = $manager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'attribute.code', 'white' ),
-			$search->compare( '==', 'attribute.domain', 'product' ),
-			$search->compare( '==', 'attribute.type', 'color' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$items = $manager->searchItems( $search );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No attribute item found' );
-		}
-
+		$item = \Aimeos\MShop::create( $this->context, 'attribute')->findItem( 'white', [], 'product', 'color' );
 
 		$search = $this->object->createSearch( true );
 		$result = $this->object->aggregate( $search, 'index.attribute.id' );
@@ -82,14 +67,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveDeleteItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
-
-		$result = $productManager->searchItems( $search, array( 'attribute' ) );
-
-		if( ( $product = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No product item with code CNE found!' );
-		}
+		$product = $productManager->findItem( 'CNC', ['attribute'] );
 
 		$attributes = $product->getRefItems( 'attribute' );
 		if( ( $attrItem = reset( $attributes ) ) === false ) {

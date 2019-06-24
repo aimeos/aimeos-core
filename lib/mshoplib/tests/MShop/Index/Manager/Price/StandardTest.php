@@ -12,30 +12,26 @@ namespace Aimeos\MShop\Index\Manager\Price;
 
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $object;
 
 
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\MShop\Index\Manager\Price\Standard( \TestHelperMShop::getContext() );
+		$this->context = \TestHelperMShop::getContext();
+		$this->object = new \Aimeos\MShop\Index\Manager\Price\Standard( $this->context );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->object );
+		unset( $this->object, $this->context );
 	}
 
 
 	public function testCleanup()
 	{
 		$this->object->cleanup( array( -1 ) );
-	}
-
-
-	public function testAggregate()
-	{
-		$this->object->aggregate( $this->object->createSearch(), 'index.price.id' );
 	}
 
 
@@ -57,7 +53,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$product = $productManager->findItem( 'CNC', ['price'] );
 
 		$this->object->deleteItem( $product->getId() );

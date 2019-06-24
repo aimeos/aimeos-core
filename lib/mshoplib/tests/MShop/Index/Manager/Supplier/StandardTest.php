@@ -11,18 +11,20 @@ namespace Aimeos\MShop\Index\Manager\Supplier;
 
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $object;
 
 
 	protected function setUp()
 	{
+		$this->context = \TestHelperMShop::getContext();
 		$this->object = new \Aimeos\MShop\Index\Manager\Supplier\Standard( \TestHelperMShop::getContext() );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->object );
+		unset( $this->object, $this->context );
 	}
 
 
@@ -34,9 +36,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'supplier' );
-		$item = $manager->findItem( 'unitCode001' );
-
+		$item = \Aimeos\MShop::create( $this->context, 'supplier' )->findItem( 'unitCode001' );
 
 		$search = $this->object->createSearch( true );
 		$result = $this->object->aggregate( $search, 'index.supplier.id' );
@@ -44,6 +44,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
 		$this->assertEquals( 2, $result[$item->getId()] );
+	}
+
+
+	public function testCleanupIndex()
+	{
+		$this->object->cleanupIndex( '1970-01-01 00:00:00' );
 	}
 
 
@@ -65,10 +71,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$product = $productManager->findItem( 'CNC' );
 
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context );
 		$listManager = $supplierManager->getSubManager( 'lists' );
 
 		$search = $listManager->createSearch( true );
@@ -122,7 +128,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsId()
 	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context );
 		$id = $supplierManager->findItem( 'unitCode001' )->getId();
 
 		$search = $this->object->createSearch();
@@ -145,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsPosition()
 	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context );
 		$id = $supplierManager->findItem( 'unitCode001' )->getId();
 
 		$search = $this->object->createSearch();
@@ -165,11 +171,4 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 2, count( $result ) );
 	}
-
-
-	public function testCleanupIndex()
-	{
-		$this->object->cleanupIndex( '1970-01-01 00:00:00' );
-	}
-
 }
