@@ -91,7 +91,7 @@ class ProductStock
 		}
 
 		foreach( $this->getStockItems( $productCodes, $stockTypes ) as $stockItem ) {
-			$stockMap[ $stockItem->getProductCode() ][ $stockItem->getType() ] = $stockItem->getStockLevel();
+			$stockMap[ $stockItem->getProductCode() ][ $stockItem->getType() ] = $stockItem;
 		}
 
 		return $this->checkStockLevels( $order, $stockMap );
@@ -119,16 +119,18 @@ class ProductStock
 			$type = $orderProduct->getStockType();
 			$code = $orderProduct->getProductCode();
 
-			if( isset( $stockMap[ $code ] )
-				&& array_key_exists( $type, $stockMap[$code] )
-			) {
-				if( ( $stocklevel = $stockMap[$code][$type] ) === null ) {
+			if( isset( $stockMap[$code] ) && array_key_exists( $type, $stockMap[$code] ) )
+			{
+				$orderProduct->setTimeFrame( $stockMap[$code][$type]->getTimeFrame() );
+
+				if( ( $stocklevel = $stockMap[$code][$type]->getStockLevel() ) === null ) {
 					continue;
 				}
 
 				if( $stocklevel >= $orderProduct->getQuantity() )
 				{
-					$stockMap[$code][$type] -= $orderProduct->getQuantity();
+					$stock = $stockMap[$code][$type]->getStockLevel() - $orderProduct->getQuantity();
+					$stockMap[$code][$type]->setStockLevel( $stock );
 					continue;
 				}
 			}
