@@ -521,7 +521,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$stockStub->expects( $this->once() )->method( 'saveItem' )->with( $this->callback( function( $item ) {
-			return $item->getStocklevel() === 10;
+			return $item->getStockLevel() === 10;
 		} ) );
 
 		\Aimeos\MShop::inject( 'stock', $stockStub );
@@ -531,15 +531,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockItem1 = clone $stockItem;
 		$stockItem1->setProductCode( 'X2' );
-		$stockItem1->setStocklevel( 10 );
+		$stockItem1->setStockLevel( 10 );
 
 		$stockItem2 = clone $stockItem;
 		$stockItem2->setProductCode( 'X3' );
-		$stockItem2->setStocklevel( 20 );
+		$stockItem2->setStockLevel( 20 );
 
 		$stockItem3 = clone $stockItem;
 		$stockItem3->setProductCode( 'X1' );
-		$stockItem3->setStocklevel( 30 );
+		$stockItem3->setStockLevel( 30 );
 
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
@@ -573,7 +573,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$stockStub->expects( $this->once() )->method( 'saveItem' )->with( $this->callback( function( $item ) {
-			return $item->getStocklevel() === 300;
+			return $item->getStockLevel() === 300;
 		} ) );
 
 		\Aimeos\MShop::inject( 'stock', $stockStub );

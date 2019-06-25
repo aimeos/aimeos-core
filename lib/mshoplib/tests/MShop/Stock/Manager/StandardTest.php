@@ -204,7 +204,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->deleteItem( $stockItem->getId() );
 
-		$this->assertEquals( -5, $actual->getStocklevel() );
+		$this->assertEquals( -5, $actual->getStockLevel() );
 	}
 
 
@@ -222,7 +222,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->deleteItem( $stockItem->getId() );
 
-		$this->assertEquals( 5, $actual->getStocklevel() );
+		$this->assertEquals( 5, $actual->getStockLevel() );
 	}
 
 

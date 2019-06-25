@@ -261,7 +261,7 @@ class Standard
 
 			$stmt->bind( 1, $item->getProductCode() );
 			$stmt->bind( 2, $item->getType() );
-			$stmt->bind( 3, $item->getStocklevel(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getStockLevel(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getDateBack() );
 			$stmt->bind( 5, $item->getTimeFrame() );
 			$stmt->bind( 6, $date ); //mtime
