@@ -60,31 +60,14 @@ class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$tagManager = \Aimeos\MShop\Tag\Manager\Factory::create( $this->additional, 'Standard' );
 		$tagTypeManager = $tagManager->getSubManager( 'type', 'Standard' );
 
-		$typeItem = $tagTypeManager->createItem();
-
 		$tagManager->begin();
 
-		foreach( $testdata['tag/type'] as $key => $dataset )
-		{
-			$typeItem->setId( null );
-			$typeItem->setCode( $dataset['code'] );
-			$typeItem->setDomain( $dataset['domain'] );
-			$typeItem->setLabel( $dataset['label'] );
-			$typeItem->setStatus( $dataset['status'] );
-
-			$tagTypeManager->saveItem( $typeItem );
+		foreach( $testdata['tag/type'] as $dataset ) {
+			$tagTypeManager->saveItem( $tagTypeManager->createItem()->fromArray( $dataset ), false );
 		}
 
-		$tagItem = $tagManager->createItem();
-		foreach( $testdata['tag'] as $key => $dataset )
-		{
-			$tagItem->setId( null );
-			$tagItem->setDomain( $dataset['domain'] );
-			$tagItem->setLanguageId( $dataset['langid'] );
-			$tagItem->setLabel( $dataset['label'] );
-			$tagItem->setType( $dataset['type'] );
-
-			$tagManager->saveItem( $tagItem, false );
+		foreach( $testdata['tag'] as $dataset ) {
+			$tagManager->saveItem( $tagManager->createItem()->fromArray( $dataset ), false );
 		}
 
 		$tagManager->commit();

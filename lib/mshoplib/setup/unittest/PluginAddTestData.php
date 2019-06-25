@@ -59,31 +59,14 @@ class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for plugin domain', $path ) );
 		}
 
-		$type = $pluginTypeManager->createItem();
-
 		$pluginManager->begin();
 
-		foreach( $testdata['plugin/type'] as $key => $dataset )
-		{
-			$type->setId( null );
-			$type->setCode( $dataset['code'] );
-			$type->setLabel( $dataset['label'] );
-			$type->setDomain( $dataset['domain'] );
-			$type->setStatus( $dataset['status'] );
-
-			$pluginTypeManager->saveItem( $type );
+		foreach( $testdata['plugin/type'] as $dataset ) {
+			$pluginTypeManager->saveItem( $pluginTypeManager->createItem()->fromArray( $dataset ), false );
 		}
 
-		$plugin = $pluginManager->createItem();
-		foreach( $testdata['plugin'] as $dataset )
-		{
-			$plugin->setId( null );
-			$plugin->setType( $dataset['type'] );
-			$plugin->setLabel( $dataset['label'] );
-			$plugin->setStatus( $dataset['status'] );
-			$plugin->setConfig( $dataset['config'] );
-			$plugin->setProvider( $dataset['provider'] );
-			$pluginManager->saveItem( $plugin, false );
+		foreach( $testdata['plugin'] as $dataset ) {
+			$pluginManager->saveItem( $pluginManager->createItem()->fromArray( $dataset ), false );
 		}
 
 		$pluginManager->commit();
