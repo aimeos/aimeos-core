@@ -67,6 +67,13 @@ class Standard
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'stock.timeframe' => array(
+			'code' => 'stock.timeframe',
+			'internalcode' => 'msto."timeframe"',
+			'label' => 'Delivery time frame',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'stock.ctime' => array(
 			'code' => 'stock.ctime',
 			'internalcode' => 'msto."ctime"',
