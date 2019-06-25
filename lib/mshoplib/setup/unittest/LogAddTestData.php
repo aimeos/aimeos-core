@@ -49,7 +49,7 @@ class LogAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addLogTestData()
 	{
-		$adminLogManager = \Aimeos\MAdmin\Log\Manager\Factory::create( $this->additional, 'Standard' );
+		$manager = \Aimeos\MAdmin\Log\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'log.php';
@@ -58,22 +58,8 @@ class LogAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for log domain', $path ) );
 		}
 
-		$log = $adminLogManager->createItem();
-
-		$adminLogManager->begin();
-
-		foreach( $testdata['log'] as $dataset )
-		{
-			$log->setId( null );
-			$log->setFacility( $dataset['facility'] );
-			$log->setPriority( $dataset['priority'] );
-			$log->setMessage( $dataset['message'] );
-			$log->setRequest( $dataset['request'] );
-
-			$adminLogManager->saveItem( $log, false );
+		foreach( $testdata['log'] as $dataset ) {
+			$manager->saveItem( $manager->createItem()->fromArray( $dataset ), false );
 		}
-
-		$adminLogManager->commit();
 	}
-
 }

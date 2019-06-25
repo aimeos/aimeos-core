@@ -6,8 +6,11 @@
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
 
-return array(
-	'cache' => array(
-		'unittest' => array( 'id' => 'unittest', 'expire' => '2100-01-01 00:00:00', 'value' => 'unit test value', 'tags' => array( 'tag:1', 'tag:2' ) ),
-	)
-);
+return [
+	'cache' => [
+		'unittest' => [
+			'cache.id' => 'unittest', 'cache.expire' => '2100-01-01 00:00:00',
+			'cache.value' => 'unit test value', 'cache.tags' => ['tag:1', 'tag:2']
+		],
+	]
+];

@@ -50,7 +50,7 @@ class JobAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addJobTestData()
 	{
-		$adminJobManager = \Aimeos\MAdmin\Job\Manager\Factory::create( $this->additional, 'Standard' );
+		$manager = \Aimeos\MAdmin\Job\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'job.php';
@@ -59,22 +59,8 @@ class JobAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for job domain', $path ) );
 		}
 
-		$job = $adminJobManager->createItem();
-
-		$adminJobManager->begin();
-
-		foreach( $testdata['job'] as $dataset )
-		{
-			$job->setId( null );
-			$job->setLabel( $dataset['label'] );
-			$job->setMethod( $dataset['method'] );
-			$job->setParameter( $dataset['parameter'] );
-			$job->setResult( $dataset['result'] );
-			$job->setStatus( $dataset['status'] );
-
-			$adminJobManager->saveItem( $job, false );
+		foreach( $testdata['job'] as $dataset ) {
+			$manager->saveItem( $manager->createItem()->fromArray( $dataset ), false );
 		}
-
-		$adminJobManager->commit();
 	}
 }

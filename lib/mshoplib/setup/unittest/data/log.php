@@ -6,8 +6,11 @@
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
 
-return array(
-	'log' => array(
-		'log/unittest facility' => array( 'facility' => 'unittest facility', 'timestamp' => '2010-01-01 00:00:00', 'priority' => 1, 'message' => 'unittest message', 'request' => 'unittest request' ),
-	)
-);
+return [
+	'log' => [
+		'log/unittest facility' => [
+			'log.facility' => 'unittest facility', 'log.timestamp' => '2010-01-01 00:00:00',
+			'log.priority' => 1, 'log.message' => 'unittest message', 'log.request' => 'unittest request'
+		],
+	],
+];

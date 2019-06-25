@@ -58,16 +58,8 @@ class CacheAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for cache domain', $path ) );
 		}
 
-		$item = $manager->createItem();
-
-		foreach( $testdata['cache'] as $dataset )
-		{
-			$item->setId( $dataset['id'] );
-			$item->setValue( $dataset['value'] );
-			$item->setTimeExpire( $dataset['expire'] );
-			$item->setTags( $dataset['tags'] );
-
-			$manager->saveItem( $item, false );
+		foreach( $testdata['cache'] as $dataset ) {
+			$manager->saveItem( $manager->createItem()->fromArray( $dataset ), false );
 		}
 	}
 
