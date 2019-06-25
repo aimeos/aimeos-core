@@ -28,6 +28,19 @@ return [
 					'image/tiff' => 'tif',
 					'text/csv' => 'csv',
 				],
+				'previews' => [[
+					'maxwidth' => 240,
+					'maxheight' => 320,
+					'force-size' => false,
+				], [
+					'maxwidth' => 720,
+					'maxheight' => 960,
+					'force-size' => false,
+				], [
+					'maxwidth' => 2160,
+					'maxheight' => 2880,
+					'force-size' => false,
+				]],
 			],
 		],
 	],
