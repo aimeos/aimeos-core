@@ -107,6 +107,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'order.base.product.timeframe' => array(
+			'code' => 'order.base.product.timeframe',
+			'internalcode' => 'mordbapr."timeframe"',
+			'label' => 'Delivery time frame',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'order.base.product.quantity' => array(
 			'code' => 'order.base.product.quantity',
 			'internalcode' => 'mordbapr."quantity"',
@@ -744,27 +751,28 @@ class Standard
 			$stmt->bind( 8, $item->getStockType() );
 			$stmt->bind( 9, $item->getName() );
 			$stmt->bind( 10, $item->getMediaUrl() );
-			$stmt->bind( 11, $item->getQuantity() );
-			$stmt->bind( 12, $price->getCurrencyId() );
-			$stmt->bind( 13, $price->getValue() );
-			$stmt->bind( 14, $price->getCosts() );
-			$stmt->bind( 15, $price->getRebate() );
-			$stmt->bind( 16, $price->getTaxValue() );
-			$stmt->bind( 17, json_encode( $price->getTaxRates(), JSON_FORCE_OBJECT ) );
-			$stmt->bind( 18, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 19, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 20, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 21, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 22, $date ); // mtime
-			$stmt->bind( 23, $context->getEditor() );
-			$stmt->bind( 24, $item->getTarget() );
-			$stmt->bind( 25, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 11, $item->getTimeFrame() );
+			$stmt->bind( 12, $item->getQuantity() );
+			$stmt->bind( 13, $price->getCurrencyId() );
+			$stmt->bind( 14, $price->getValue() );
+			$stmt->bind( 15, $price->getCosts() );
+			$stmt->bind( 16, $price->getRebate() );
+			$stmt->bind( 17, $price->getTaxValue() );
+			$stmt->bind( 18, json_encode( $price->getTaxRates(), JSON_FORCE_OBJECT ) );
+			$stmt->bind( 19, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 20, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 21, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 22, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 23, $date ); // mtime
+			$stmt->bind( 24, $context->getEditor() );
+			$stmt->bind( 25, $item->getTarget() );
+			$stmt->bind( 26, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 26, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 27, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 26, $date ); // ctime
+				$stmt->bind( 27, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

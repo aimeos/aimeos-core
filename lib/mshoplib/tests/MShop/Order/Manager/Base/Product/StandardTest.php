@@ -128,6 +128,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.product.stocktype', 'unit_type1' );
 		$expr[] = $search->compare( '==', 'order.base.product.name', 'Cafe Noire Expresso' );
 		$expr[] = $search->compare( '==', 'order.base.product.mediaurl', 'somewhere/thump1.jpg' );
+		$expr[] = $search->compare( '>=', 'order.base.product.timeframe', '4-5d' );
 		$expr[] = $search->compare( '>=', 'order.base.product.target', '' );
 		$expr[] = $search->compare( '==', 'order.base.product.quantity', 9 );
 		$expr[] = $search->compare( '==', 'order.base.product.price', '4.50' );

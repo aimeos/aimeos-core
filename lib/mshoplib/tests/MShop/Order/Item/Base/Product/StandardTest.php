@@ -48,6 +48,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.suppliercode' => 'UnitSupplier',
 			'order.base.product.prodcode' => 'UnitProd',
 			'order.base.product.stocktype' => 'unittype',
+			'order.base.product.timeframe' => '1-2w',
 			'order.base.product.name' => 'UnitProduct',
 			'order.base.product.mediaurl' => 'testurl',
 			'order.base.product.target' => 'testtarget',
@@ -297,6 +298,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
 		$this->assertEquals( 'ttarget', $this->object->getTarget() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetTimeFrame()
+	{
+		$this->assertEquals( '1-2w', $this->object->getTimeFrame() );
+	}
+
+
+	public function testSetTimeFrame()
+	{
+		$return = $this->object->setTimeFrame( '3-4d' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( '3-4d', $this->object->getTimeFrame() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -718,6 +735,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.prodcode' => 'test',
 			'order.base.product.mediaurl' => '/path/to/image.jpg',
 			'order.base.product.target' => 'ttarget',
+			'order.base.product.timeframe' => '1-2d',
 			'order.base.product.position' => 4,
 			'order.base.product.quantity' => 5,
 			'order.base.product.status' => 0,
@@ -743,6 +761,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.product.suppliercode'], $item->getSupplierCode() );
 		$this->assertEquals( $list['order.base.product.prodcode'], $item->getProductCode() );
 		$this->assertEquals( $list['order.base.product.mediaurl'], $item->getMediaUrl() );
+		$this->assertEquals( $list['order.base.product.timeframe'], $item->getTimeFrame() );
 		$this->assertEquals( $list['order.base.product.target'], $item->getTarget() );
 		$this->assertEquals( $list['order.base.product.position'], $item->getPosition() );
 		$this->assertEquals( $list['order.base.product.quantity'], $item->getQuantity() );
@@ -770,6 +789,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getProductCode(), $arrayObject['order.base.product.prodcode'] );
 		$this->assertEquals( $this->object->getName(), $arrayObject['order.base.product.name'] );
 		$this->assertEquals( $this->object->getMediaUrl(), $arrayObject['order.base.product.mediaurl'] );
+		$this->assertEquals( $this->object->getTimeFrame(), $arrayObject['order.base.product.timeframe'] );
 		$this->assertEquals( $this->object->getTarget(), $arrayObject['order.base.product.target'] );
 		$this->assertEquals( $this->object->getPosition(), $arrayObject['order.base.product.position'] );
 		$this->assertEquals( $this->object->getPrice()->getValue(), $arrayObject['order.base.product.price'] );

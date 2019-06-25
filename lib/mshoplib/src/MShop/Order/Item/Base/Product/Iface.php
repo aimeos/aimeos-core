@@ -145,6 +145,21 @@ interface Iface
 	public function getStockType();
 
 	/**
+	 * Returns the expected delivery time frame
+	 *
+	 * @return string Expected delivery time frame
+	 */
+	public function getTimeframe();
+
+	/**
+	 * Sets the expected delivery time frame
+	 *
+	 * @param string $timeframe Expected delivery time frame
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setTimeframe( $timeframe );
+
+	/**
 	 * Sets the code of the stock type the product should be retrieved from.
 	 *
 	 * @param string $code Stock type

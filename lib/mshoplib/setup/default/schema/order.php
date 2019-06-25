@@ -112,6 +112,7 @@ return array(
 			$table->addColumn( 'name', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'target', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'timeframe', 'string', array( 'length' => 16 ) );
 			$table->addColumn( 'quantity', 'integer', [] );
 			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );

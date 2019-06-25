@@ -277,6 +277,10 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 				$ordProdItem->setStockType( $dataset['stocktype'] );
 			}
 
+			if( isset( $dataset['timeframe'] ) ) {
+				$ordProdItem->setTimeFrame( $dataset['timeframe'] );
+			}
+
 			if( isset( $dataset['prodid'] ) ) {
 				$ordProdItem->setProductId( $products[$dataset['prodid']]->getId() );
 			}

@@ -428,6 +428,39 @@ class Standard extends Base implements Iface
 
 
 	/**
+	 * Returns the expected delivery time frame
+	 *
+	 * @return string Expected delivery time frame
+	 */
+	public function getTimeframe()
+	{
+		if( isset( $this->values['order.base.product.timeframe'] ) ) {
+			return (string) $this->values['order.base.product.timeframe'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets the expected delivery time frame
+	 *
+	 * @param string $timeframe Expected delivery time frame
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setTimeframe( $timeframe )
+	{
+		if( (string) $timeframe !== $this->getTimeframe() )
+		{
+			$this->values['order.base.product.timeframe'] = (string) $timeframe;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the amount of products the customer has added.
 	 *
 	 * @return integer Amount of products
@@ -599,6 +632,7 @@ class Standard extends Base implements Iface
 				case 'order.base.product.prodcode': $item = $item->setProductCode( $value ); break;
 				case 'order.base.product.name': $item = $item->setName( $value ); break;
 				case 'order.base.product.mediaurl': $item = $item->setMediaUrl( $value ); break;
+				case 'order.base.product.timeframe': $item = $item->setTimeFrame( $value ); break;
 				case 'order.base.product.target': !$private ?: $item = $item->setTarget( $value ); break;
 				case 'order.base.product.position': !$private ?: $item = $item->setPosition( $value ); break;
 				case 'order.base.product.quantity': $item = $item->setQuantity( $value ); break;
@@ -631,8 +665,9 @@ class Standard extends Base implements Iface
 		$list['order.base.product.quantity'] = $this->getQuantity();
 		$list['order.base.product.name'] = $this->getName();
 		$list['order.base.product.mediaurl'] = $this->getMediaUrl();
-		$list['order.base.product.status'] = $this->getStatus();
+		$list['order.base.product.timeframe'] = $this->getTimeFrame();
 		$list['order.base.product.position'] = $this->getPosition();
+		$list['order.base.product.status'] = $this->getStatus();
 
 		if( $private === true )
 		{

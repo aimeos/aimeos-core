@@ -312,11 +312,11 @@ return array(
 						'ansi' => '
 							INSERT INTO "mshop_order_base_product" (
 								"baseid", "ordprodid", "ordaddrid", "type", "prodid", "prodcode",
-								"suppliercode", "stocktype", "name", "mediaurl", "quantity",
+								"suppliercode", "stocktype", "name", "mediaurl", "timeframe", "quantity",
 								"currencyid", "price", "costs", "rebate", "tax", "taxrate", "taxflag",
 								"flags", "status", "pos", "mtime", "editor", "target", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
@@ -325,7 +325,7 @@ return array(
 							UPDATE "mshop_order_base_product"
 							SET "baseid" = ?, "ordprodid" = ?, "ordaddrid" = ?, "type" = ?,
 								"prodid" = ?, "prodcode" = ?, "suppliercode" = ?,
-								"stocktype" = ?, "name" = ?, "mediaurl" = ?,
+								"stocktype" = ?, "name" = ?, "mediaurl" = ?, "timeframe" = ?,
 								"quantity" = ?, "currencyid" = ?, "price" = ?, "costs" = ?,
 								"rebate" = ?, "tax" = ?, "taxrate" = ?, "taxflag" = ?, "flags" = ?,
 								"status" = ?, "pos" = ?, "mtime" = ?, "editor" = ?, "target" = ?
@@ -339,24 +339,24 @@ return array(
 								mordbapr."prodid" AS "order.base.product.productid", mordbapr."prodcode" AS "order.base.product.prodcode",
 								mordbapr."suppliercode" AS "order.base.product.suppliercode", mordbapr."stocktype" AS "order.base.product.stocktype",
 								mordbapr."type" AS "order.base.product.type", mordbapr."name" AS "order.base.product.name",
-								mordbapr."mediaurl" AS "order.base.product.mediaurl", mordbapr."quantity" AS "order.base.product.quantity",
-								mordbapr."currencyid" AS "order.base.product.currencyid", mordbapr."price" AS "order.base.product.price",
-								mordbapr."costs" AS "order.base.product.costs", mordbapr."rebate" AS "order.base.product.rebate",
-								mordbapr."tax" AS "order.base.product.taxvalue", mordbapr."taxrate" AS "order.base.product.taxrates",
-								mordbapr."taxflag" AS "order.base.product.taxflag", mordbapr."flags" AS "order.base.product.flags",
-								mordbapr."status" AS "order.base.product.status", mordbapr."pos" AS "order.base.product.position",
-								mordbapr."mtime" AS "order.base.product.mtime", mordbapr."editor" AS "order.base.product.editor",
-								mordbapr."ctime" AS "order.base.product.ctime", mordbapr."target" AS "order.base.product.target",
-								mordbapr."ordaddrid" AS "order.base.product.orderaddressid"
+								mordbapr."mediaurl" AS "order.base.product.mediaurl", mordbapr."timeframe" AS "order.base.product.timeframe",
+								mordbapr."quantity" AS "order.base.product.quantity", mordbapr."currencyid" AS "order.base.product.currencyid",
+								mordbapr."price" AS "order.base.product.price", mordbapr."costs" AS "order.base.product.costs",
+								mordbapr."rebate" AS "order.base.product.rebate", mordbapr."tax" AS "order.base.product.taxvalue",
+								mordbapr."taxrate" AS "order.base.product.taxrates", mordbapr."taxflag" AS "order.base.product.taxflag",
+								mordbapr."flags" AS "order.base.product.flags", mordbapr."status" AS "order.base.product.status",
+								mordbapr."pos" AS "order.base.product.position", mordbapr."mtime" AS "order.base.product.mtime",
+								mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime",
+								mordbapr."target" AS "order.base.product.target", mordbapr."ordaddrid" AS "order.base.product.orderaddressid"
 							FROM "mshop_order_base_product" AS mordbapr
 							:joins
 							WHERE :cond
 							GROUP BY mordbapr."id", mordbapr."baseid", mordbapr."siteid", mordbapr."ordprodid",
 								mordbapr."prodid", mordbapr."prodcode", mordbapr."suppliercode", mordbapr."stocktype",
-								mordbapr."type", mordbapr."name", mordbapr."mediaurl", mordbapr."quantity", mordbapr."currencyid",
-								mordbapr."price", mordbapr."costs", mordbapr."rebate", mordbapr."tax", mordbapr."taxrate",
-								mordbapr."taxflag", mordbapr."flags", mordbapr."status", mordbapr."pos", mordbapr."mtime",
-								mordbapr."editor", mordbapr."target", mordbapr."ctime", mordbapr."ordaddrid"
+								mordbapr."type", mordbapr."name", mordbapr."mediaurl", mordbapr."timeframe", mordbapr."quantity",
+								mordbapr."currencyid", mordbapr."price", mordbapr."costs", mordbapr."rebate", mordbapr."tax",
+								mordbapr."taxrate", mordbapr."taxflag", mordbapr."flags", mordbapr."status", mordbapr."pos",
+								mordbapr."mtime", mordbapr."editor", mordbapr."target", mordbapr."ctime", mordbapr."ordaddrid"
 								/*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
