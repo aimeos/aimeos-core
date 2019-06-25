@@ -42,6 +42,7 @@ return array(
 			$table->addColumn( 'productcode', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'stocklevel', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'backdate', 'datetime', array( 'notnull' => false ) );
+			$table->addColumn( 'timeframe', 'string', array( 'notnull' => false, 'length' => 16 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );

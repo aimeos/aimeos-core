@@ -99,6 +99,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getProductCode(), $itemSaved->getProductCode() );
 		$this->assertEquals( $item->getStockLevel(), $itemSaved->getStockLevel() );
+		$this->assertEquals( $item->getTimeFrame(), $itemSaved->getTimeFrame() );
 		$this->assertEquals( $item->getDateBack(), $itemSaved->getDateBack() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
@@ -110,6 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getProductCode(), $itemUpd->getProductCode() );
 		$this->assertEquals( $itemExp->getStockLevel(), $itemUpd->getStockLevel() );
+		$this->assertEquals( $itemExp->getTimeFrame(), $itemUpd->getTimeFrame() );
 		$this->assertEquals( $itemExp->getDateBack(), $itemUpd->getDateBack() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );

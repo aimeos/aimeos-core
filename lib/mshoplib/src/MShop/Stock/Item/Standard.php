@@ -107,7 +107,7 @@ class Standard
 	 *
 	 * @return integer|null Stock level
 	 */
-	public function getStocklevel()
+	public function getStockLevel()
 	{
 		if( isset( $this->values['stock.stocklevel'] ) ) {
 			return (int) $this->values['stock.stocklevel'];
@@ -121,11 +121,11 @@ class Standard
 	 * @param integer|null $stocklevel New stock level
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
-	public function setStocklevel( $stocklevel )
+	public function setStockLevel( $stocklevel )
 	{
 		$stocklevel = ( is_numeric( $stocklevel ) ? (int) $stocklevel : null );
 
-		if( $stocklevel !== $this->getStocklevel() )
+		if( $stocklevel !== $this->getStockLevel() )
 		{
 			$this->values['stock.stocklevel'] = $stocklevel;
 			$this->setModified();
@@ -163,7 +163,6 @@ class Standard
 			$this->setModified();
 		}
 
-
 		return $this;
 	}
 
@@ -176,6 +175,35 @@ class Standard
 	public function getResourceType()
 	{
 		return 'stock';
+	}
+
+	/**
+	 * Returns the expected delivery time frame
+	 *
+	 * @return string|null Expected delivery time frame
+	 */
+	public function getTimeframe()
+	{
+		if( isset( $this->values['stock.timeframe'] ) ) {
+			return (string) $this->values['stock.timeframe'];
+		}
+	}
+
+	/**
+	 * Sets the expected delivery time frame
+	 *
+	 * @param string|null $timeframe Expected delivery time frame
+	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
+	 */
+	public function setTimeframe( $timeframe )
+	{
+		if( $timeframe !== $this->getTimeframe() )
+		{
+			$this->values['stock.timeframe'] = (string) $timeframe;
+			$this->setModified();
+		}
+
+		return $this;
 	}
 
 
@@ -195,7 +223,8 @@ class Standard
 			switch( $key )
 			{
 				case 'stock.productcode': $item = $item->setProductCode( $value ); break;
-				case 'stock.stocklevel': $item = $item->setStocklevel( $value ); break;
+				case 'stock.stocklevel': $item = $item->setStockLevel( $value ); break;
+				case 'stock.timeframe': $item = $item->setTimeFrame( $value ); break;
 				case 'stock.dateback': $item = $item->setDateBack( $value ); break;
 				case 'stock.type': $item = $item->setType( $value ); break;
 				default: continue 2;
@@ -219,7 +248,8 @@ class Standard
 		$list = parent::toArray( $private );
 
 		$list['stock.productcode'] = $this->getProductCode();
-		$list['stock.stocklevel'] = $this->getStocklevel();
+		$list['stock.stocklevel'] = $this->getStockLevel();
+		$list['stock.timeframe'] = $this->getTimeFrame();
 		$list['stock.dateback'] = $this->getDateBack();
 		$list['stock.type'] = $this->getType();
 

@@ -263,15 +263,16 @@ class Standard
 			$stmt->bind( 2, $item->getType() );
 			$stmt->bind( 3, $item->getStocklevel(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getDateBack() );
-			$stmt->bind( 5, $date ); //mtime
-			$stmt->bind( 6, $context->getEditor() );
-			$stmt->bind( 7, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 5, $item->getTimeFrame() );
+			$stmt->bind( 6, $date ); //mtime
+			$stmt->bind( 7, $context->getEditor() );
+			$stmt->bind( 8, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 8, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 9, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); // modified false
 			} else {
-				$stmt->bind( 8, $date ); //ctime
+				$stmt->bind( 9, $date ); //ctime
 			}
 
 			$stmt->execute()->finish();

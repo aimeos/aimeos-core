@@ -85,17 +85,17 @@ return array(
 				'ansi' => '
 					INSERT INTO "mshop_stock" (
 						"productcode", "type", "stocklevel", "backdate",
-						"mtime", "editor", "siteid", "ctime"
+						"timeframe", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
-						?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
 			),
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_stock"
-					SET "productcode" = ?, "type" = ?, "stocklevel" = ?,
-						"backdate" = ?, "mtime" = ?, "editor" = ?
+					SET "productcode" = ?, "type" = ?, "stocklevel" = ?, "backdate" = ?,
+						"timeframe" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
@@ -104,14 +104,14 @@ return array(
 					SELECT msto."id" AS "stock.id", msto."productcode" AS "stock.productcode",
 						msto."siteid" AS "stock.siteid", msto."type" AS "stock.type",
 						msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.backdate",
-						msto."mtime" AS "stock.mtime", msto."editor" AS "stock.editor",
-						msto."ctime" AS "stock.ctime"
+						msto."timeframe" AS "stock.timeframe", msto."mtime" AS "stock.mtime",
+						msto."ctime" AS "stock.ctime", msto."editor" AS "stock.editor"
 					FROM "mshop_stock" AS msto
 					:joins
 					WHERE :cond
 					GROUP BY msto."id", msto."productcode", msto."siteid", msto."type",
-						msto."stocklevel", msto."backdate", msto."mtime", msto."editor",
-						msto."ctime" /*-columns*/ , :columns /*columns-*/
+						msto."stocklevel", msto."backdate", msto."timeframe", msto."mtime",
+						msto."editor", msto."ctime" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'
