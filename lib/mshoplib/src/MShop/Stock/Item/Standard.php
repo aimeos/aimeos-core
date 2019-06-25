@@ -180,19 +180,21 @@ class Standard
 	/**
 	 * Returns the expected delivery time frame
 	 *
-	 * @return string|null Expected delivery time frame
+	 * @return string Expected delivery time frame
 	 */
 	public function getTimeframe()
 	{
 		if( isset( $this->values['stock.timeframe'] ) ) {
 			return (string) $this->values['stock.timeframe'];
 		}
+
+		return '';
 	}
 
 	/**
 	 * Sets the expected delivery time frame
 	 *
-	 * @param string|null $timeframe Expected delivery time frame
+	 * @param string $timeframe Expected delivery time frame
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
 	 */
 	public function setTimeframe( $timeframe )
