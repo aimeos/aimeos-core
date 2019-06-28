@@ -316,11 +316,8 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 	{
 		if( $clean !== true )
 		{
-			foreach( $schemaDiff->changedTables as $tableDiff )
-			{
+			foreach( $schemaDiff->changedTables as $tableDiff ) {
 				$tableDiff->removedColumns = [];
-				$tableDiff->removedIndexes = [];
-				$tableDiff->renamedIndexes = [];
 			}
 
 			$schemaDiff->removedSequences = [];
