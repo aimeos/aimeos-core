@@ -97,7 +97,7 @@ return array(
 			$table->addColumn( 'content', 'text', ['length' => 0xffffff] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 
-			$table->addUniqueIndex( ['url', 'siteid', 'langid'], 'unq_msindte_url_sid_lid' );
+			$table->addUniqueIndex( ['prodid', 'siteid', 'langid', 'url'], 'unq_msindte_pid_sid_lid_url' );
 			$table->addIndex( ['prodid', 'siteid', 'langid', 'name'], 'idx_msindte_pid_sid_lid_name' );
 
 			return $schema;
