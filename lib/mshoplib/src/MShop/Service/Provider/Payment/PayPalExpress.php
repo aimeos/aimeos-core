@@ -440,8 +440,15 @@ class PayPalExpress
 	{
 		$params = (array) $request->getAttributes() + (array) $request->getParsedBody() + (array) $request->getQueryParams();
 
-		if( !isset( $params['token'] ) || !isset( $params['PayerID'] ) ) {
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Parameter "token" or "PayerID" missing' );
+		if( !isset( $params['token'] ) )
+		{
+			$msg = sprintf( $this->getContext()->getI18n()->dt( 'mshop', 'Required parameter "%1$s" is missing' ), 'token' );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
+		}
+
+		if( !isset( $params['PayerID'] ) )
+		{
+			$msg = sprintf( $this->getContext()->getI18n()->dt( 'mshop', 'Required parameter "%1$s" is missing' ), 'PayerID' );
 			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
