@@ -1,7 +1,6 @@
 [main]
 host = https://www.transifex.com
 minimum-perc = 1
-minimum_perc = 1
 
 [aimeos-core.core-country]
 file_filter = i18n/country/<lang>.po
