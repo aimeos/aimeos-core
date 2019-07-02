@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-02 15:36+0200\n"
-"PO-Revision-Date: 2019-04-02 13:51+0000\n"
+"POT-Creation-Date: 2019-07-01 19:28+0200\n"
+"PO-Revision-Date: 2019-07-01 17:29+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Polish (http://www.transifex.com/aimeos/aimeos-core/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -514,6 +514,10 @@ msgid ""
 msgstr "ID zamówienia \"%1$s\" w odpowiedzi XML usługodawcy dostawy różni się od zapisanego ID zamówienia \"%2$s\""
 
 #, php-format
+msgid "Order address position \"%1$s\" must be greater than 0"
+msgstr ""
+
+#, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "Nie znaleziono podstawowej pozycji zamówienia z ID \"%1$s\""
 
@@ -536,6 +540,10 @@ msgid "Order product position \"%1$s\" must be greater than 0"
 msgstr "Pozycja produktu w zamówieniu \"%1$s\" musi być większa niż 0"
 
 #, php-format
+msgid "Order service position \"%1$s\" must be greater than 0"
+msgstr ""
+
+#, php-format
 msgid "Order type \"%1$s\" not within allowed range"
 msgstr "Typ zamówienia \"%1$s\" nie jest w dozwolonym zakresie"
 
@@ -546,6 +554,10 @@ msgstr "Zamówienie z ID \"%1$s\" zostało odrzucone z kodem \"%2$s\": %3$s"
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
 msgstr "Nie dostępny parametr konfiguracyjny \"%1$s\""
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
+msgstr ""
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
@@ -645,6 +657,10 @@ msgstr "Dostawca w \"%1$s\" nie dostępny"
 #, php-format
 msgid "Quantity must be a positive integer and must not exceed %1$d"
 msgstr "Ilość musi być liczbą dodatnią i nie może być większa niż %1$d"
+
+#, php-format
+msgid "Required parameter \"%1$s\" is missing"
+msgstr ""
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
@@ -761,6 +777,10 @@ msgstr "Nie znaleziono pozycji z ID \"%1$s\" w \"%2$s\""
 #, php-format
 msgid "Unable to call method \"%1$s\""
 msgstr "Nie można wywołać metody \"%1$s\""
+
+#, php-format
+msgid "Unable to create order XML file \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""

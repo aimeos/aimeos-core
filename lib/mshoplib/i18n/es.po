@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-02 15:36+0200\n"
-"PO-Revision-Date: 2019-04-02 13:51+0000\n"
+"POT-Creation-Date: 2019-07-01 19:28+0200\n"
+"PO-Revision-Date: 2019-07-01 17:29+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -515,6 +515,10 @@ msgid ""
 msgstr "La ID del pedido \"%1$s\" en la respuesta XML del proveedor de entrega difiere de la ID de factura almacenada \"%2$s\" del pedido"
 
 #, php-format
+msgid "Order address position \"%1$s\" must be greater than 0"
+msgstr ""
+
+#, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "No se ha encontrado el elemento de la base de pedido con la ID de pedido \"%1$s\""
 
@@ -537,6 +541,10 @@ msgid "Order product position \"%1$s\" must be greater than 0"
 msgstr "La posición \"%1$s\" en el orden del producto debe ser mayor que 0"
 
 #, php-format
+msgid "Order service position \"%1$s\" must be greater than 0"
+msgstr ""
+
+#, php-format
 msgid "Order type \"%1$s\" not within allowed range"
 msgstr "El tipo de pedido \"%1$s\" está fuera del rango permitido"
 
@@ -547,6 +555,10 @@ msgstr "El pedido con ID \"%1$s\" fue rechazado con código \"%2$s\": %3$s"
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
 msgstr "El parámetro \"%1$s\" de configuración no está disponible"
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
+msgstr ""
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
@@ -646,6 +658,10 @@ msgstr "El proveedor de \"%1$s\" no está disponible"
 #, php-format
 msgid "Quantity must be a positive integer and must not exceed %1$d"
 msgstr "La cantidad debe ser un número entero positivo y no puede exceder %1$d"
+
+#, php-format
+msgid "Required parameter \"%1$s\" is missing"
+msgstr ""
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
@@ -762,6 +778,10 @@ msgstr "No se ha encontrado el tipo de elemento con la ID \"%1$s\" en \"%2$s\""
 #, php-format
 msgid "Unable to call method \"%1$s\""
 msgstr "No se ha podido invocar el método \"%1$s\""
+
+#, php-format
+msgid "Unable to create order XML file \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""

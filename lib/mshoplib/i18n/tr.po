@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-02 15:36+0200\n"
-"PO-Revision-Date: 2019-04-02 17:39+0000\n"
+"POT-Creation-Date: 2019-07-01 19:28+0200\n"
+"PO-Revision-Date: 2019-07-01 23:55+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -513,6 +513,10 @@ msgid ""
 msgstr "Teslimat sağlayıcının XML yanıtındaki sipariş ID'si olan \"%1$s\", siparişin kayıtlı fatura ID'si olan \"%2$s\" ile farklılık gösteriyor"
 
 #, php-format
+msgid "Order address position \"%1$s\" must be greater than 0"
+msgstr "Sipariş adresi konumu \"%1$s \" 0'dan büyük olmalıdır"
+
+#, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "\"%1$s\" sipariş ID'li sipariş temel öğesi bulunamadı"
 
@@ -535,6 +539,10 @@ msgid "Order product position \"%1$s\" must be greater than 0"
 msgstr "Sipariş ürün konumu  \"%1$s\" 0'dan büyük olmalıdır"
 
 #, php-format
+msgid "Order service position \"%1$s\" must be greater than 0"
+msgstr "Sipariş servis konumu \"%1$s\" 0'dan büyük olmalıdır"
+
+#, php-format
 msgid "Order type \"%1$s\" not within allowed range"
 msgstr "Sipariş türü \"%1$s\" izin verilen aralıkta değil"
 
@@ -545,6 +553,10 @@ msgstr "\"%1$s\" ID'li sipariş  \"%2$s\" koduyla reddedildi: %3$s"
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
 msgstr "Yapılandırma için parametre \"%1$s\" mevcut değil"
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
+msgstr "PayPal Express: \"%1$s\" ID ve \"%2$s\" durum için yinelenen işlem"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
@@ -644,6 +656,10 @@ msgstr "\"%1$s\" içinde tedarikçi mevcut değil"
 #, php-format
 msgid "Quantity must be a positive integer and must not exceed %1$d"
 msgstr "Miktar pozitif bir tam sayı olmalı ve %1$d aşmamalıdır"
+
+#, php-format
+msgid "Required parameter \"%1$s\" is missing"
+msgstr "Gerekli parametre \"%1$s\" eksik"
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
@@ -760,6 +776,10 @@ msgstr "\"%2$s\" içinde \"%1$s\" ID'li tür öğesi bulunamadı"
 #, php-format
 msgid "Unable to call method \"%1$s\""
 msgstr "Metot \"%1$s\" çağrılamıyor"
+
+#, php-format
+msgid "Unable to create order XML file \"%1$s\""
+msgstr "Sipariş XML dosyası \"%1$s\" oluşturulamıyor"
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""

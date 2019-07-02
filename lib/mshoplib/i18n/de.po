@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-02 15:36+0200\n"
-"PO-Revision-Date: 2019-04-02 13:51+0000\n"
+"POT-Creation-Date: 2019-07-01 19:28+0200\n"
+"PO-Revision-Date: 2019-07-01 17:29+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -515,6 +515,10 @@ msgid ""
 msgstr "ID \"%1$s\" der Bestelldaten in XML-Antwort des Logistikdienstleisters stimmt nicht mit hinterlegter Rechnungs-ID \"%2$s\" der Bestellung überein"
 
 #, php-format
+msgid "Order address position \"%1$s\" must be greater than 0"
+msgstr "Adressposition \"%1$s\" in der Bestellung muss grösser \"0\" sein"
+
+#, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "Bestellung (Order-Base-Item) mit ID \"%1$s\" nicht gefunden"
 
@@ -537,6 +541,10 @@ msgid "Order product position \"%1$s\" must be greater than 0"
 msgstr "Produktposition \"%1$s\" in der Bestellung muss grösser \"0\" sein"
 
 #, php-format
+msgid "Order service position \"%1$s\" must be greater than 0"
+msgstr "Dienstposition \"%1$s\" in der Bestellung muss grösser \"0\" sein"
+
+#, php-format
 msgid "Order type \"%1$s\" not within allowed range"
 msgstr "Typ \"%1$s\" für Bestellart liegt nicht innerhalb des vorgegebenen Wertebereichs"
 
@@ -547,6 +555,10 @@ msgstr "Bestellung mit ID \"%1$s\" wurde mit Code \"%2$s\" abgelehnt: %3$s"
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
 msgstr "Parameter \"%1$s\" für Konfiguration nicht verfügbar"
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
+msgstr "PayPal Express: Transaktion mit ID \"%1$s\" und Status \"%2$s\" schon vorhanden"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
@@ -646,6 +658,10 @@ msgstr "Provider in \"%1$s\" nicht verfügbar"
 #, php-format
 msgid "Quantity must be a positive integer and must not exceed %1$d"
 msgstr "Produktanzahl muss eine ganze Zahl zwischen 1 und %1$d sein"
+
+#, php-format
+msgid "Required parameter \"%1$s\" is missing"
+msgstr "Notwendiger Parameter \"%1$s\" fehlt"
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
@@ -762,6 +778,10 @@ msgstr "\"type item\" mit ID \"%1$s\" in \"%2$s\" nicht gefunden"
 #, php-format
 msgid "Unable to call method \"%1$s\""
 msgstr "Methode \"%1$s\" kann nicht aufgerufen werden"
+
+#, php-format
+msgid "Unable to create order XML file \"%1$s\""
+msgstr "Die XML-Datei \"%1$s\" für Bestellungen konnte nicht erstellt werden"
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""

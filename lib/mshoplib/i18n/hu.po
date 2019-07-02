@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-02 15:36+0200\n"
-"PO-Revision-Date: 2019-04-02 13:51+0000\n"
+"POT-Creation-Date: 2019-07-01 19:28+0200\n"
+"PO-Revision-Date: 2019-07-01 17:29+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -514,6 +514,10 @@ msgid ""
 msgstr ""
 
 #, php-format
+msgid "Order address position \"%1$s\" must be greater than 0"
+msgstr ""
+
+#, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
 msgstr ""
 
@@ -536,6 +540,10 @@ msgid "Order product position \"%1$s\" must be greater than 0"
 msgstr ""
 
 #, php-format
+msgid "Order service position \"%1$s\" must be greater than 0"
+msgstr ""
+
+#, php-format
 msgid "Order type \"%1$s\" not within allowed range"
 msgstr ""
 
@@ -545,6 +553,10 @@ msgstr ""
 
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
+msgstr ""
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
 msgstr ""
 
 #, php-format
@@ -644,6 +656,10 @@ msgstr ""
 
 #, php-format
 msgid "Quantity must be a positive integer and must not exceed %1$d"
+msgstr ""
+
+#, php-format
+msgid "Required parameter \"%1$s\" is missing"
 msgstr ""
 
 #, php-format
@@ -761,6 +777,10 @@ msgstr ""
 #, php-format
 msgid "Unable to call method \"%1$s\""
 msgstr "Nem lehet, meghívni a \"%1$s\" eljárást"
+
+#, php-format
+msgid "Unable to create order XML file \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
