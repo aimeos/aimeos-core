@@ -134,6 +134,10 @@ abstract class Base
 		$sitecode = $locale->getSite()->getCode();
 		$key = 'aimeos/basket/content-' . $sitecode . '-' . $language . '-' . $currency . '-' . strval( $type );
 
+		$list = $session->get( 'aimeos/basket/list', [] );
+		$list[$key] = $key;
+
+		$session->set( 'aimeos/basket/list', $list );
 		$session->set( $key, serialize( clone $order ) );
 
 		return $this;
