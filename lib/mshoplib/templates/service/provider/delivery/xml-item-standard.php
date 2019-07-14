@@ -18,14 +18,14 @@ $baseItems = $this->baseItems;
 	<?php foreach( $this->orderItems as $id => $item ) : ?>
 		<invoice>
 			<?php foreach( $item->toArray() as $key => $value ) : ?>
-				<<?= $key ?>><![CDATA[<?= $value ?>]]></<?= $key ?>>
+				<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
 			<?php endforeach ?>
 		</invoice>
 		<?php if( isset( $baseItems[$item->getBaseId()] ) ) : $baseItem = $baseItems[$item->getBaseId()] ?>
 
 			<base>
 				<?php foreach( $baseItem->toArray() as $key => $value ) : ?>
-					<<?= $key ?>><![CDATA[<?= $value ?>]]></<?= $key ?>>
+					<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
 				<?php endforeach ?>
 			</base>
 
@@ -34,7 +34,7 @@ $baseItems = $this->baseItems;
 					<?php foreach( $list as $addressItem ) : ?>
 						<addressitem type="<?= $enc->attr( $addressItem->getType() ) ?>" position="<?= $enc->attr( $addressItem->getPosition() ) ?>">
 							<?php foreach( $addressItem->toArray() as $key => $value ) : ?>
-								<<?= $key ?>><![CDATA[<?= $value ?>]]></<?= $key ?>>
+								<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
 							<?php endforeach ?>
 						</addressitem>
 					<?php endforeach ?>
@@ -45,13 +45,13 @@ $baseItems = $this->baseItems;
 				<?php foreach( $baseItem->getProducts() as $productItem ) : ?>
 					<productitem position="<?= $enc->attr( $productItem->getPosition() ) ?>">
 						<?php foreach( $productItem->toArray() as $key => $value ) : ?>
-							<<?= $key ?>><![CDATA[<?= $value ?>]]></<?= $key ?>>
+							<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
 						<?php endforeach ?>
 						<attribute>
 							<?php foreach( $productItem->getAttributeItems() as $attributeItem ) : ?>
 								<attributeitem>
 									<?php foreach( $attributeItem->toArray() as $key => $value ) : ?>
-										<<?= $key ?>><![CDATA[<?= $value ?>]]></<?= $key ?>>
+										<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
 									<?php endforeach ?>
 								</attributeitem>
 							<?php endforeach ?>
@@ -60,13 +60,13 @@ $baseItems = $this->baseItems;
 							<?php foreach( $productItem->getProducts() as $subprodItem ) : ?>
 								<productitem position="<?= $enc->attr( $subprodItem->getPosition() ) ?>">
 									<?php foreach( $subprodItem->toArray() as $key => $value ) : ?>
-										<<?= $key ?>><![CDATA[<?= $value ?>]]></<?= $key ?>>
+										<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
 									<?php endforeach ?>
 									<attribute>
 										<?php foreach( $subprodItem->getAttributeItems() as $attributeItem ) : ?>
 											<attributeitem>
 												<?php foreach( $attributeItem->toArray() as $key => $value ) : ?>
-													<<?= $key ?>><![CDATA[<?= $value ?>]]></<?= $key ?>>
+													<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
 												<?php endforeach ?>
 											</attributeitem>
 										<?php endforeach ?>
@@ -85,13 +85,13 @@ $baseItems = $this->baseItems;
 					<?php foreach( $list as $serviceItem ) : ?>
 						<serviceitem type="<?= $enc->attr( $serviceItem->getType() ) ?>" position="<?= $enc->attr( $serviceItem->getPosition() ) ?>">
 							<?php foreach( $serviceItem->toArray() as $key => $value ) : ?>
-								<<?= $key ?>><![CDATA[<?= $value ?>]]></<?= $key ?>>
+								<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
 							<?php endforeach ?>
 							<attribute>
 								<?php foreach( $serviceItem->getAttributeItems() as $attributeItem ) : ?>
 									<attributeitem>
 										<?php foreach( $attributeItem->toArray() as $key => $value ) : ?>
-											<<?= $key ?>><![CDATA[<?= $value ?>]]></<?= $key ?>>
+											<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
 										<?php endforeach ?>
 									</attributeitem>
 								<?php endforeach ?>

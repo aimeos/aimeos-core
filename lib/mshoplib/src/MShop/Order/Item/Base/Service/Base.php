@@ -32,6 +32,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 
 	private $attributes;
 	private $attributesMap;
+	private $price;
 
 
 	/**
@@ -47,6 +48,17 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, $attributes );
 		$this->attributes = $attributes;
+
+		$this->price = $price;
+	}
+
+
+	/**
+	 * Clones internal objects of the order base product item.
+	 */
+	public function __clone()
+	{
+		$this->price = clone $this->price;
 	}
 
 
@@ -180,6 +192,86 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 		$this->setModified();
 
 		return $this;
+	}
+
+
+	/**
+	 * Returns the price item for the product.
+	 *
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate
+	 */
+	public function getPrice()
+	{
+		return $this->price;
+	}
+
+
+	/**
+	 * Sets the price item for the product.
+	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item containing price and additional costs
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price )
+	{
+		if( $price !== $this->price )
+		{
+			$this->price = $price;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/*
+	 * Sets the item values from the given array and removes that entries from the list
+	 *
+	 * @param array &$list Associative list of item keys and their values
+	 * @param boolean True to set private properties too, false for public only
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order service item for chaining method calls
+	 */
+	public function fromArray( array &$list, $private = false )
+	{
+		$item = parent::fromArray( $list, $private );
+		$price = $item->getPrice();
+
+		foreach( $list as $key => $value )
+		{
+			switch( $key )
+			{
+				case 'order.base.service.price': $price = $price->setValue( $value ); break;
+				case 'order.base.service.costs': $price = $price->setCosts( $value ); break;
+				case 'order.base.service.rebate': $price = $price->setRebate( $value ); break;
+				case 'order.base.service.taxrate': $price = $price->setTaxRate( $value ); break;
+				case 'order.base.service.taxrates': $price = $price->setTaxRates( (array) $value ); break;
+				default: continue 2;
+			}
+
+			unset( $list[$key] );
+		}
+
+		return $item->setPrice( $price );
+	}
+
+
+	/**
+	 * Returns the item values as associative list.
+	 *
+	 * @param boolean True to return private properties, false for public only
+	 * @return array Associative list of item properties and their values
+	 */
+	public function toArray( $private = false )
+	{
+		$list = parent::toArray( $private );
+
+		$list['order.base.service.price'] = $this->price->getValue();
+		$list['order.base.service.costs'] = $this->price->getCosts();
+		$list['order.base.service.rebate'] = $this->price->getRebate();
+		$list['order.base.service.taxrate'] = $this->price->getTaxRate();
+		$list['order.base.service.taxrates'] = $this->price->getTaxRates();
+
+		return $list;
 	}
 
 

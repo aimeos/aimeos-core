@@ -20,7 +20,6 @@ namespace Aimeos\MShop\Order\Item\Base\Service;
  */
 class Standard extends Base implements Iface
 {
-	private $price;
 	private $values;
 
 
@@ -36,16 +35,6 @@ class Standard extends Base implements Iface
 		parent::__construct( $price, $values, $attributes );
 
 		$this->values = $values;
-		$this->price = $price;
-	}
-
-
-	/**
-	 * Clones internal objects of the order base service item.
-	 */
-	public function __clone()
-	{
-		$this->price = clone $this->price;
 	}
 
 
@@ -277,35 +266,6 @@ class Standard extends Base implements Iface
 
 
 	/**
-	 * Returns the price object which belongs to the service item.
-	 *
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item
-	 */
-	public function getPrice()
-	{
-		return $this->price;
-	}
-
-
-	/**
-	 * Sets a new price object for the service item.
-	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
-	 */
-	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price )
-	{
-		if( $price !== $this->price )
-		{
-			$this->price = $price;
-			$this->setModified();
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the position of the service in the order.
 	 *
 	 * @return integer|null Service position in the order from 0-n
@@ -364,10 +324,6 @@ class Standard extends Base implements Iface
 				case 'order.base.service.name': $item = $item->setName( $value ); break;
 				case 'order.base.service.position': $item = $item->setPosition( $value ); break;
 				case 'order.base.service.mediaurl': $item = $item->setMediaUrl( $value ); break;
-				case 'order.base.service.price': $this->price = $this->price->setValue( $value ); break;
-				case 'order.base.service.costs': $this->price = $this->price->setCosts( $value ); break;
-				case 'order.base.service.rebate': $this->price = $this->price->setRebate( $value ); break;
-				case 'order.base.service.taxrate': $this->price = $this->price->setTaxRate( $value ); break;
 				default: continue 2;
 			}
 
@@ -393,10 +349,6 @@ class Standard extends Base implements Iface
 		$list['order.base.service.name'] = $this->getName();
 		$list['order.base.service.position'] = $this->getPosition();
 		$list['order.base.service.mediaurl'] = $this->getMediaUrl();
-		$list['order.base.service.price'] = $this->price->getValue();
-		$list['order.base.service.costs'] = $this->price->getCosts();
-		$list['order.base.service.rebate'] = $this->price->getRebate();
-		$list['order.base.service.taxrate'] = $this->price->getTaxRate();
 
 		if( $private === true )
 		{

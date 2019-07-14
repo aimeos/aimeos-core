@@ -502,7 +502,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ) + 4, count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) + 5, count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['order.base.service.id'] );
 		$this->assertEquals( $this->object->getBaseId(), $arrayObject['order.base.service.baseid'] );
@@ -521,6 +521,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $price->getCosts(), $arrayObject['order.base.service.costs'] );
 		$this->assertEquals( $price->getRebate(), $arrayObject['order.base.service.rebate'] );
 		$this->assertEquals( $price->getTaxRate(), $arrayObject['order.base.service.taxrate'] );
+		$this->assertEquals( $price->getTaxRates(), $arrayObject['order.base.service.taxrates'] );
 	}
 
 	public function testIsModified()
