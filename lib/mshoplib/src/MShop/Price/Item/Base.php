@@ -85,8 +85,9 @@ abstract class Base
 		if( $this->getValue() === $price->getValue()
 			&& $this->getCosts() === $price->getCosts()
 			&& $this->getRebate() === $price->getRebate()
-			&& $this->getTaxRate() === $price->getTaxRate()
 			&& $this->getTaxFlag() === $price->getTaxFlag()
+			&& $this->getTaxRate() === $price->getTaxRate()
+			&& $this->getTaxRates() === $price->getTaxRates()
 			&& $this->getQuantity() === $price->getQuantity()
 			&& $this->getCurrencyId() === $price->getCurrencyId()
 		) {
