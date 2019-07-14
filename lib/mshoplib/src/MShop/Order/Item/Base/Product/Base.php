@@ -281,6 +281,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 				case 'order.base.product.costs': $price = $price->setCosts( $value ); break;
 				case 'order.base.product.rebate': $price = $price->setRebate( $value ); break;
 				case 'order.base.product.taxrate': $price = $price->setTaxRate( $value ); break;
+				case 'order.base.product.taxrates': $price = $price->setTaxRates( (array) $value ); break;
 				default: continue 2;
 			}
 
@@ -305,6 +306,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		$list['order.base.product.costs'] = $this->price->getCosts();
 		$list['order.base.product.rebate'] = $this->price->getRebate();
 		$list['order.base.product.taxrate'] = $this->price->getTaxRate();
+		$list['order.base.product.taxrates'] = $this->price->getTaxRates();
 
 		return $list;
 	}
