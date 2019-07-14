@@ -734,17 +734,15 @@ abstract class Base
 	 */
 	protected function checkServices( array $items, $type )
 	{
-		$list = [];
-
 		foreach( $items as $key => $item )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
 
 			$this->checkPrice( $item->getPrice() );
-			$list[$key] = $item->setType( $type )->setId( null ); // enforce the type and saving as new item
+			$items[$key] = $item->setType( $type )->setId( null ); // enforce the type and saving as new item
 		}
 
-		return $list;
+		return $items;
 	}
 
 
