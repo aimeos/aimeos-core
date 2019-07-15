@@ -79,7 +79,7 @@ class TypesMigrateColumns extends \Aimeos\MW\Setup\Task\Base
 			'mshop_service_list' => 'UPDATE "mshop_service_list" SET "type" = ( SELECT "code" FROM "mshop_service_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
 		],
 		'db-stock' => [
-			'mshop_stock' => 'UPDATE "mshop_stock" SET "type" = ( SELECT "code" FROM "mshop_stock_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
+			'mshop_stock' => 'UPDATE "mshop_stock" SET "type" = ( SELECT "code" FROM "mshop_stock_type" AS t WHERE t."id" = "typeid" LIMIT 1 ) WHERE "type" = \'\'',
 		],
 		'db-supplier' => [
 			'mshop_supplier_list' => 'UPDATE "mshop_supplier_list" SET "type" = ( SELECT "code" FROM "mshop_supplier_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" LIMIT 1 ) WHERE "type" = \'\'',
