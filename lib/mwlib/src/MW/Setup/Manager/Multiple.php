@@ -75,6 +75,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 */
 	public function clean( $task = null )
 	{
+		$this->tasksDone = [];
 		$tasks = ( $task !== null && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
 
 		foreach( $tasks as $taskname => $task ) {
@@ -90,6 +91,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 */
 	public function migrate( $task = null )
 	{
+		$this->tasksDone = [];
 		$tasks = ( $task !== null && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
 
 		foreach( $tasks as $taskname => $task ) {
@@ -105,6 +107,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 */
 	public function rollback( $task = null )
 	{
+		$this->tasksDone = [];
 		$tasks = ( $task !== null && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
 
 		foreach( array_reverse( $tasks, true ) as $taskname => $task ) {
