@@ -678,7 +678,7 @@ class PayPalExpress
 			foreach( $orderBase->getProducts() as $product )
 			{
 				$price = $product->getPrice();
-				$lastPos = $product->getPosition() - 1;
+				$lastPos = $product->getPosition();
 
 				$deliveryPrice = clone $price;
 				$deliveryPrices = $this->addPrice( $deliveryPrices, $deliveryPrice->setValue( '0.00' ), $product->getQuantity() );
@@ -708,6 +708,7 @@ class PayPalExpress
 
 			try
 			{
+				$lastPos = 0;
 				foreach( $orderBase->getService( 'delivery' ) as $service )
 				{
 					$deliveryPrices = $this->addPrice( $deliveryPrices, $service->getPrice() );
@@ -716,10 +717,12 @@ class PayPalExpress
 						$deliveryCosts += $this->getAmount( $priceItem );
 					}
 
-					$values['L_SHIPPINGOPTIONAMOUNT0'] = number_format( $deliveryCosts, 2, '.', '' );
-					$values['L_SHIPPINGOPTIONLABEL0'] = $service->getCode();
-					$values['L_SHIPPINGOPTIONNAME0'] = $service->getName();
-					$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
+					$values['L_SHIPPINGOPTIONAMOUNT' . $lastPos] = number_format( $deliveryCosts, 2, '.', '' );
+					$values['L_SHIPPINGOPTIONLABEL' . $lastPos] = $service->getCode();
+					$values['L_SHIPPINGOPTIONNAME' . $lastPos] = $service->getName();
+					$values['L_SHIPPINGOPTIONISDEFAULT' . $lastPos] = 'true';
+
+					$lastPos++;
 				}
 			}
 			catch( \Exception $e ) { ; } // If no delivery service is available
