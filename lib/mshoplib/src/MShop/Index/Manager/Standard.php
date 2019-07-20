@@ -358,7 +358,7 @@ class Standard
 
 			$start += $size;
 		}
-		while( count( $result ) > 0 );
+		while( count( $result ) === $size );
 
 		return $this;
 	}
