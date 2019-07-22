@@ -110,6 +110,7 @@ return array(
 			$table->addColumn( 'suppliercode', 'string', array( 'length' => 32  ) );
 			$table->addColumn( 'stocktype', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'name', 'text', array( 'length' => 0xffff ) );
+			$table->addColumn( 'description', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'target', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'timeframe', 'string', array( 'length' => 16 ) );

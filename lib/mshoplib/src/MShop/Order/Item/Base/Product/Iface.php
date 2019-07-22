@@ -183,6 +183,21 @@ interface Iface
 	public function setName( $value );
 
 	/**
+	 * Returns the localized description of the product
+	 *
+	 * @return string Returns the localized description of the product
+	 */
+	public function getDescription();
+
+	/**
+	 * Sets the localized description of the product.
+	 *
+	 * @param string $value Value of the localized description of the product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setDescription( $value );
+
+	/**
 	 * Returns the location of the media.
 	 *
 	 * @return string Location of the media

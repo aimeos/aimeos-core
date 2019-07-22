@@ -362,6 +362,39 @@ class Standard extends Base implements Iface
 
 
 	/**
+	 * Returns the localized description of the product.
+	 *
+	 * @return string Returns the localized description of the product
+	 */
+	public function getDescription()
+	{
+		if( isset( $this->values['order.base.product.description'] ) ) {
+			return (string) $this->values['order.base.product.description'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets the localized description of the product.
+	 *
+	 * @param string $value Localized description of the product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setDescription( $value )
+	{
+		if( (string) $value !== $this->getDescription() )
+		{
+			$this->values['order.base.product.description'] = (string) $value;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the location of the media.
 	 *
 	 * @return string Location of the media
@@ -631,6 +664,7 @@ class Standard extends Base implements Iface
 				case 'order.base.product.productid': $item = $item->setProductId( $value ); break;
 				case 'order.base.product.prodcode': $item = $item->setProductCode( $value ); break;
 				case 'order.base.product.name': $item = $item->setName( $value ); break;
+				case 'order.base.product.description': $item = $item->setDescription( $value ); break;
 				case 'order.base.product.mediaurl': $item = $item->setMediaUrl( $value ); break;
 				case 'order.base.product.timeframe': $item = $item->setTimeFrame( $value ); break;
 				case 'order.base.product.target': !$private ?: $item = $item->setTarget( $value ); break;
@@ -664,6 +698,7 @@ class Standard extends Base implements Iface
 		$list['order.base.product.productid'] = $this->getProductId();
 		$list['order.base.product.quantity'] = $this->getQuantity();
 		$list['order.base.product.name'] = $this->getName();
+		$list['order.base.product.description'] = $this->getDescription();
 		$list['order.base.product.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.product.timeframe'] = $this->getTimeFrame();
 		$list['order.base.product.position'] = $this->getPosition();
@@ -696,6 +731,7 @@ class Standard extends Base implements Iface
 			&& $this->getStockType() === $item->getStockType()
 			&& $this->getProductCode() === $item->getProductCode()
 			&& $this->getSupplierCode() === $item->getSupplierCode()
+			&& $this->getOrderAddressId() === $item->getOrderAddressId()
 		) {
 			return true;
 		}
@@ -720,7 +756,7 @@ class Standard extends Base implements Iface
 
 		$items = $product->getRefItems( 'text', 'basket', 'default' );
 		if( ( $item = reset( $items ) ) !== false ) {
-			$this->setName( $item->getContent() );
+			$this->setDescription( $item->getContent() );
 		}
 
 		$items = $product->getRefItems( 'media', 'default', 'default' );

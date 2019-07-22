@@ -127,6 +127,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.product.suppliercode', 'unitsupplier' );
 		$expr[] = $search->compare( '==', 'order.base.product.stocktype', 'unit_type1' );
 		$expr[] = $search->compare( '==', 'order.base.product.name', 'Cafe Noire Expresso' );
+		$expr[] = $search->compare( '==', 'order.base.product.description', '' );
 		$expr[] = $search->compare( '==', 'order.base.product.mediaurl', 'somewhere/thump1.jpg' );
 		$expr[] = $search->compare( '>=', 'order.base.product.timeframe', '4-5d' );
 		$expr[] = $search->compare( '>=', 'order.base.product.target', '' );
@@ -244,6 +245,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getSupplierCode(), $itemSaved->getSupplierCode() );
 		$this->assertEquals( $item->getStockType(), $itemSaved->getStockType() );
 		$this->assertEquals( $item->getName(), $itemSaved->getName() );
+		$this->assertEquals( $item->getDescription(), $itemSaved->getDescription() );
 		$this->assertEquals( $item->getMediaUrl(), $itemSaved->getMediaUrl() );
 		$this->assertEquals( $item->getTarget(), $itemSaved->getTarget() );
 		$this->assertEquals( $item->getPrice(), $itemSaved->getPrice() );
@@ -268,6 +270,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getSupplierCode(), $itemUpd->getSupplierCode() );
 		$this->assertEquals( $itemExp->getStockType(), $itemUpd->getStockType() );
 		$this->assertEquals( $itemExp->getName(), $itemUpd->getName() );
+		$this->assertEquals( $itemExp->getDescription(), $itemUpd->getDescription() );
 		$this->assertEquals( $itemExp->getMediaUrl(), $itemUpd->getMediaUrl() );
 		$this->assertEquals( $itemExp->getTarget(), $itemUpd->getTarget() );
 		$this->assertEquals( $itemExp->getPrice(), $itemUpd->getPrice() );

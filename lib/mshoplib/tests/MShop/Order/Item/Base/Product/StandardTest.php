@@ -50,6 +50,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.stocktype' => 'unittype',
 			'order.base.product.timeframe' => '1-2w',
 			'order.base.product.name' => 'UnitProduct',
+			'order.base.product.description' => 'Unit product description',
 			'order.base.product.mediaurl' => 'testurl',
 			'order.base.product.target' => 'testtarget',
 			'order.base.product.quantity' => 11,
@@ -266,6 +267,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
 		$this->assertEquals( 'Testname2', $this->object->getName() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetDescription()
+	{
+		$this->assertEquals( 'Unit product description', $this->object->getDescription() );
+	}
+
+
+	public function testSetDescription()
+	{
+		$return = $this->object->setDescription( 'Test description' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( 'Test description', $this->object->getDescription() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -730,6 +747,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.productid' => 3,
 			'order.base.product.prodcode' => 'test',
 			'order.base.product.name' => 'test item',
+			'order.base.product.description' => 'test description',
 			'order.base.product.stocktype' => 'stocktype',
 			'order.base.product.suppliercode' => 'testsup',
 			'order.base.product.prodcode' => 'test',
@@ -757,6 +775,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.product.productid'], $item->getProductId() );
 		$this->assertEquals( $list['order.base.product.prodcode'], $item->getProductCode() );
 		$this->assertEquals( $list['order.base.product.name'], $item->getName() );
+		$this->assertEquals( $list['order.base.product.description'], $item->getDescription() );
 		$this->assertEquals( $list['order.base.product.stocktype'], $item->getStockType() );
 		$this->assertEquals( $list['order.base.product.suppliercode'], $item->getSupplierCode() );
 		$this->assertEquals( $list['order.base.product.prodcode'], $item->getProductCode() );
@@ -788,6 +807,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getProductId(), $arrayObject['order.base.product.productid'] );
 		$this->assertEquals( $this->object->getProductCode(), $arrayObject['order.base.product.prodcode'] );
 		$this->assertEquals( $this->object->getName(), $arrayObject['order.base.product.name'] );
+		$this->assertEquals( $this->object->getDescription(), $arrayObject['order.base.product.description'] );
 		$this->assertEquals( $this->object->getMediaUrl(), $arrayObject['order.base.product.mediaurl'] );
 		$this->assertEquals( $this->object->getTimeFrame(), $arrayObject['order.base.product.timeframe'] );
 		$this->assertEquals( $this->object->getTarget(), $arrayObject['order.base.product.target'] );
@@ -830,7 +850,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
 		$this->assertEquals( 'default', $productCopy->getType() );
 		$this->assertEquals( 'CNE', $productCopy->getProductCode() );
-		$this->assertEquals( 'Cafe Noire Expresso for basket', $productCopy->getName() );
+		$this->assertEquals( 'Cafe Noire Expresso', $productCopy->getName() );
+		$this->assertEquals( 'Cafe Noire Expresso for basket', $productCopy->getDescription() );
 		$this->assertEquals( $product->getId(), $productCopy->getProductId() );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED, $productCopy->getStatus() );
 		$this->assertEquals( '', $productCopy->getSupplierCode() );

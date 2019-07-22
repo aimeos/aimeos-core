@@ -79,6 +79,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'order.base.product.description' => array(
+			'code' => 'order.base.product.description',
+			'internalcode' => 'mordbapr."description"',
+			'label' => 'Product description',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'order.base.product.prodcode' => array(
 			'code' => 'order.base.product.prodcode',
 			'internalcode' => 'mordbapr."prodcode"',
@@ -750,29 +757,30 @@ class Standard
 			$stmt->bind( 7, $item->getSupplierCode() );
 			$stmt->bind( 8, $item->getStockType() );
 			$stmt->bind( 9, $item->getName() );
-			$stmt->bind( 10, $item->getMediaUrl() );
-			$stmt->bind( 11, $item->getTimeFrame() );
-			$stmt->bind( 12, $item->getQuantity() );
-			$stmt->bind( 13, $price->getCurrencyId() );
-			$stmt->bind( 14, $price->getValue() );
-			$stmt->bind( 15, $price->getCosts() );
-			$stmt->bind( 16, $price->getRebate() );
-			$stmt->bind( 17, $price->getTaxValue() );
-			$stmt->bind( 18, json_encode( $price->getTaxRates(), JSON_FORCE_OBJECT ) );
-			$stmt->bind( 19, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 20, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 21, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 22, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 23, $date ); // mtime
-			$stmt->bind( 24, $context->getEditor() );
-			$stmt->bind( 25, $item->getTarget() );
-			$stmt->bind( 26, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 10, $item->getDescription() );
+			$stmt->bind( 11, $item->getMediaUrl() );
+			$stmt->bind( 12, $item->getTimeFrame() );
+			$stmt->bind( 13, $item->getQuantity() );
+			$stmt->bind( 14, $price->getCurrencyId() );
+			$stmt->bind( 15, $price->getValue() );
+			$stmt->bind( 16, $price->getCosts() );
+			$stmt->bind( 17, $price->getRebate() );
+			$stmt->bind( 18, $price->getTaxValue() );
+			$stmt->bind( 19, json_encode( $price->getTaxRates(), JSON_FORCE_OBJECT ) );
+			$stmt->bind( 20, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 21, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 22, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 23, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 24, $date ); // mtime
+			$stmt->bind( 25, $context->getEditor() );
+			$stmt->bind( 26, $item->getTarget() );
+			$stmt->bind( 27, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 27, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 28, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 27, $date ); // ctime
+				$stmt->bind( 28, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();
