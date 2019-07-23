@@ -41,7 +41,8 @@ return array(
 								mattlity."code" AS "attribute.lists.type.code", mattlity."domain" AS "attribute.lists.type.domain",
 								mattlity."label" AS "attribute.lists.type.label", mattlity."status" AS "attribute.lists.type.status",
 								mattlity."mtime" AS "attribute.lists.type.mtime", mattlity."ctime" AS "attribute.lists.type.ctime",
-								mattlity."editor" AS "attribute.lists.type.editor", mattlity."pos" AS "attribute.lists.type.position"
+								mattlity."editor" AS "attribute.lists.type.editor", mattlity."pos" AS "attribute.lists.type.position",
+								mattlity.*
 							FROM "mshop_attribute_list_type" AS mattlity
 							:joins
 							WHERE :cond
@@ -123,7 +124,8 @@ return array(
 							mattli."start" AS "attribute.lists.datestart", mattli."end" AS "attribute.lists.dateend",
 							mattli."config" AS "attribute.lists.config", mattli."pos" AS "attribute.lists.position",
 							mattli."status" AS "attribute.lists.status", mattli."mtime" AS "attribute.lists.mtime",
-							mattli."ctime" AS "attribute.lists.ctime", mattli."editor" AS "attribute.lists.editor"
+							mattli."ctime" AS "attribute.lists.ctime", mattli."editor" AS "attribute.lists.editor",
+							mattli.*
 						FROM "mshop_attribute_list" AS mattli
 						:joins
 						WHERE :cond
@@ -191,7 +193,8 @@ return array(
 								mattprty."code" AS "attribute.property.type.code", mattprty."domain" AS "attribute.property.type.domain",
 								mattprty."label" AS "attribute.property.type.label", mattprty."status" AS "attribute.property.type.status",
 								mattprty."mtime" AS "attribute.property.type.mtime", mattprty."editor" AS "attribute.property.type.editor",
-								mattprty."ctime" AS "attribute.property.type.ctime", mattprty."pos" AS "attribute.property.type.position"
+								mattprty."ctime" AS "attribute.property.type.ctime", mattprty."pos" AS "attribute.property.type.position",
+								mattprty.*
 							FROM "mshop_attribute_property_type" mattprty
 							:joins
 							WHERE :cond
@@ -256,7 +259,7 @@ return array(
 							mattpr."siteid" AS "attribute.property.siteid", mattpr."type" AS "attribute.property.type",
 							mattpr."langid" AS "attribute.property.languageid", mattpr."value" AS "attribute.property.value",
 							mattpr."mtime" AS "attribute.property.mtime", mattpr."editor" AS "attribute.property.editor",
-							mattpr."ctime" AS "attribute.property.ctime"
+							mattpr."ctime" AS "attribute.property.ctime", mattpr.*
 						FROM "mshop_attribute_property" AS mattpr
 						:joins
 						WHERE :cond
@@ -322,7 +325,8 @@ return array(
 							mattty."code" AS "attribute.type.code", mattty."domain" AS "attribute.type.domain",
 							mattty."label" AS "attribute.type.label", mattty."status" AS "attribute.type.status",
 							mattty."mtime" AS "attribute.type.mtime", mattty."ctime" AS "attribute.type.ctime",
-							mattty."editor" AS "attribute.type.editor", mattty."pos" AS "attribute.type.position"
+							mattty."editor" AS "attribute.type.editor", mattty."pos" AS "attribute.type.position",
+							mattty.*
 						FROM "mshop_attribute_type" AS mattty
 						:joins
 						WHERE :cond
@@ -388,7 +392,7 @@ return array(
 						matt."code" AS "attribute.code", matt."status" AS "attribute.status",
 						matt."pos" AS "attribute.position", matt."label" AS "attribute.label",
 						matt."mtime" AS "attribute.mtime", matt."ctime" AS "attribute.ctime",
-						matt."editor" AS "attribute.editor"
+						matt."editor" AS "attribute.editor", matt.*
 					FROM "mshop_attribute" AS matt
 					:joins
 					WHERE :cond

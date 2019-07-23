@@ -54,7 +54,8 @@ return array(
 						mord."next" AS "subscription.datenext", mord."end" AS "subscription.dateend",
 						mord."interval" AS "subscription.interval", mord."reason" AS "subscription.reason",
 						mord."status" AS "subscription.status", mord."ctime" AS "subscription.ctime",
-						mord."mtime" AS "subscription.mtime", mord."editor" AS "subscription.editor"
+						mord."mtime" AS "subscription.mtime", mord."editor" AS "subscription.editor",
+						mord.*
 					FROM "mshop_subscription" AS mord
 					:joins
 					WHERE :cond

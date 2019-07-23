@@ -41,7 +41,7 @@ return array(
 							mcouco."start" AS "coupon.code.datestart", mcouco."end" AS "coupon.code.dateend",
 							mcouco."count" AS "coupon.code.count", mcouco."ref" AS "coupon.code.ref",
 							mcouco."mtime" AS "coupon.code.mtime", mcouco."ctime" AS "coupon.code.ctime",
-							mcouco."editor" AS "coupon.code.editor"
+							mcouco."editor" AS "coupon.code.editor", mcouco.*
 						FROM "mshop_coupon_code" AS mcouco
 						:joins
 						WHERE :cond
@@ -114,7 +114,7 @@ return array(
 						mcou."start" AS "coupon.datestart", mcou."end" AS "coupon.dateend",
 						mcou."config" AS "coupon.config", mcou."status" AS "coupon.status",
 						mcou."mtime" AS "coupon.mtime", mcou."editor" AS "coupon.editor",
-						mcou."ctime" AS "coupon.ctime"
+						mcou."ctime" AS "coupon.ctime", mcou.*
 					FROM "mshop_coupon" AS mcou
 					:joins
 					WHERE :cond

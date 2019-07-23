@@ -41,7 +41,8 @@ return array(
 								mcatlity."code" AS "catalog.lists.type.code", mcatlity."domain" AS "catalog.lists.type.domain",
 								mcatlity."label" AS "catalog.lists.type.label", mcatlity."mtime" AS "catalog.lists.type.mtime",
 								mcatlity."editor" AS "catalog.lists.type.editor", mcatlity."ctime" AS "catalog.lists.type.ctime",
-								mcatlity."status" AS "catalog.lists.type.status", mcatlity."pos" AS "catalog.lists.type.position"
+								mcatlity."status" AS "catalog.lists.type.status", mcatlity."pos" AS "catalog.lists.type.position",
+								mcatlity.*
 							FROM "mshop_catalog_list_type" AS mcatlity
 							:joins
 							WHERE :cond
@@ -123,7 +124,8 @@ return array(
 							mcatli."start" AS "catalog.lists.datestart", mcatli."end" AS "catalog.lists.dateend",
 							mcatli."config" AS "catalog.lists.config", mcatli."pos" AS "catalog.lists.position",
 							mcatli."status" AS "catalog.lists.status", mcatli."mtime" AS "catalog.lists.mtime",
-							mcatli."editor" AS "catalog.lists.editor", mcatli."ctime" AS "catalog.lists.ctime"
+							mcatli."editor" AS "catalog.lists.editor", mcatli."ctime" AS "catalog.lists.ctime",
+							mcatli.*
 						FROM "mshop_catalog_list" AS mcatli
 						:joins
 						WHERE :cond
@@ -246,7 +248,8 @@ return array(
 					SELECT mcat."id", mcat."code", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
-						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
+						mcat."mtime", mcat."editor", mcat."ctime", mcat."target",
+						mcat.*
 					FROM "mshop_catalog" AS mcat
 					WHERE mcat."siteid" = :siteid AND mcat."nleft" >= ?
 						AND mcat."nright" <= ? AND :cond
@@ -262,7 +265,8 @@ return array(
 					SELECT mcat."id", mcat."code", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
-						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
+						mcat."mtime", mcat."editor", mcat."ctime", mcat."target",
+						mcat.*
 					FROM "mshop_catalog" AS mcat
 					:joins
 					WHERE :cond
