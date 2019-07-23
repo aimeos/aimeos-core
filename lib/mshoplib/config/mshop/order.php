@@ -350,7 +350,7 @@ return array(
 								mordbapr."pos" AS "order.base.product.position", mordbapr."mtime" AS "order.base.product.mtime",
 								mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime",
 								mordbapr."target" AS "order.base.product.target", mordbapr."ordaddrid" AS "order.base.product.orderaddressid",
-								mordbapr."description" AS "order.base.product.description", mordbapr.*
+								mordbapr.*
 							FROM "mshop_order_base_product" AS mordbapr
 							:joins
 							WHERE :cond
