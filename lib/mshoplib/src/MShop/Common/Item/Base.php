@@ -83,7 +83,7 @@ abstract class Base
 	 * Sets the new item property for the given name
 	 *
 	 * @param string $name Name of the property
-	 * @param mixed New property value
+	 * @param mixed $value New property value
 	 */
 	public function __set( $name, $value )
 	{
