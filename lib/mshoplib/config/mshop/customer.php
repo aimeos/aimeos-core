@@ -56,7 +56,7 @@ return array(
 							mcusad."telefax" AS "customer.address.telefax", mcusad."website" AS "customer.address.website",
 							mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
 							mcusad."mtime" AS "customer.address.mtime", mcusad."editor" AS "customer.address.editor",
-							mcusad."ctime" AS "customer.address.ctime"
+							mcusad."ctime" AS "customer.address.ctime", mcusad.*
 						FROM "mshop_customer_address" AS mcusad
 						:joins
 						WHERE :cond
@@ -124,7 +124,7 @@ return array(
 						SELECT mcusgr."id" AS "customer.group.id", mcusgr."siteid" AS "customer.group.siteid",
 							mcusgr."code" AS "customer.group.code", mcusgr."label" AS "customer.group.label",
 							mcusgr."mtime" AS "customer.group.mtime", mcusgr."editor" AS "customer.group.editor",
-							mcusgr."ctime" AS "customer.group.ctime"
+							mcusgr."ctime" AS "customer.group.ctime", mcusgr.*
 						FROM "mshop_customer_group" AS mcusgr
 						:joins
 						WHERE :cond
@@ -190,7 +190,8 @@ return array(
 								mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
 								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
 								mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
-								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position"
+								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position",
+								mcuslity.*
 							FROM "mshop_customer_list_type" AS mcuslity
 							:joins
 							WHERE :cond
@@ -272,7 +273,8 @@ return array(
 							mcusli."start" AS "customer.lists.datestart", mcusli."end" AS "customer.lists.dateend",
 							mcusli."config" AS "customer.lists.config", mcusli."pos" AS "customer.lists.position",
 							mcusli."status" AS "customer.lists.status", mcusli."mtime" AS "customer.lists.mtime",
-							mcusli."editor" AS "customer.lists.editor", mcusli."ctime" AS "customer.lists.ctime"
+							mcusli."editor" AS "customer.lists.editor", mcusli."ctime" AS "customer.lists.ctime",
+							mcusli.*
 						FROM "mshop_customer_list" AS mcusli
 						:joins
 						WHERE :cond
@@ -340,7 +342,8 @@ return array(
 								mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
 								mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
 								mcusprty."mtime" AS "customer.property.type.mtime", mcusprty."editor" AS "customer.property.type.editor",
-								mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position"
+								mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position",
+								mcusprty.*
 							FROM "mshop_customer_property_type" mcusprty
 							:joins
 							WHERE :cond
@@ -405,7 +408,7 @@ return array(
 							mcuspr."siteid" AS "customer.property.siteid", mcuspr."type" AS "customer.property.type",
 							mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
 							mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
-							mcuspr."ctime" AS "customer.property.ctime"
+							mcuspr."ctime" AS "customer.property.ctime", mcuspr.*
 						FROM "mshop_customer_property" AS mcuspr
 						:joins
 						WHERE :cond
@@ -489,7 +492,7 @@ return array(
 						mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
 						mcus."vdate" AS "customer.dateverified", mcus."password" AS "customer.password",
 						mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
-						mcus."editor" AS "customer.editor"
+						mcus."editor" AS "customer.editor", mcus.*
 					FROM "mshop_customer" AS mcus
 					:joins
 					WHERE :cond

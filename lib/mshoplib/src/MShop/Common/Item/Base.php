@@ -80,6 +80,22 @@ abstract class Base
 
 
 	/**
+	 * Sets the new item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @param mixed New property value
+	 */
+	public function __set( $name, $value )
+	{
+		if( !isset( $this->bdata[$name] ) || $this->bdata[$name] !== $value ) {
+			$this->setModified();
+		}
+
+		$this->bdata[$name] = $value;
+	}
+
+
+	/**
 	 * Returns the ID of the item if available.
 	 *
 	 * @return string|null ID of the item

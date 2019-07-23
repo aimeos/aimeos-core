@@ -72,7 +72,7 @@ return array(
 								mordbaad."website" AS "order.base.address.website", mordbaad."longitude" AS "order.base.address.longitude",
 								mordbaad."latitude" AS "order.base.address.latitude", mordbaad."pos" AS "order.base.address.position",
 								mordbaad."mtime" AS "order.base.address.mtime", mordbaad."editor" AS "order.base.address.editor",
-								mordbaad."ctime" AS "order.base.address.ctime"
+								mordbaad."ctime" AS "order.base.address.ctime", mordbaad.*
 							FROM "mshop_order_base_address" AS mordbaad
 							:joins
 							WHERE :cond
@@ -151,7 +151,8 @@ return array(
 							SELECT mordbaco."id" AS "order.base.coupon.id", mordbaco."baseid" AS "order.base.coupon.baseid",
 								mordbaco."siteid" AS "order.base.coupon.siteid", mordbaco."ordprodid" AS "order.base.coupon.ordprodid",
 								mordbaco."code" AS "order.base.coupon.code", mordbaco."mtime" AS "order.base.coupon.mtime",
-								mordbaco."editor" AS "order.base.coupon.editor", mordbaco."ctime" AS "order.base.coupon.ctime"
+								mordbaco."editor" AS "order.base.coupon.editor", mordbaco."ctime" AS "order.base.coupon.ctime",
+								mordbaco.*
 							FROM "mshop_order_base_coupon" AS mordbaco
 							:joins
 							WHERE :cond
@@ -229,7 +230,8 @@ return array(
 									mordbaprat."type" AS "order.base.product.attribute.type", mordbaprat."code" AS "order.base.product.attribute.code",
 									mordbaprat."value" AS "order.base.product.attribute.value", mordbaprat."quantity" AS "order.base.product.attribute.quantity",
 									mordbaprat."name" AS "order.base.product.attribute.name", mordbaprat."mtime" AS "order.base.product.attribute.mtime",
-									mordbaprat."editor" AS "order.base.product.attribute.editor", mordbaprat."ctime" AS "order.base.product.attribute.ctime"
+									mordbaprat."editor" AS "order.base.product.attribute.editor", mordbaprat."ctime" AS "order.base.product.attribute.ctime",
+									mordbaprat.*
 								FROM "mshop_order_base_product_attr" AS mordbaprat
 								:joins
 								WHERE :cond
@@ -348,7 +350,7 @@ return array(
 								mordbapr."pos" AS "order.base.product.position", mordbapr."mtime" AS "order.base.product.mtime",
 								mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime",
 								mordbapr."target" AS "order.base.product.target", mordbapr."ordaddrid" AS "order.base.product.orderaddressid",
-								mordbapr."description" AS "order.base.product.description"
+								mordbapr."description" AS "order.base.product.description", mordbapr.*
 							FROM "mshop_order_base_product" AS mordbapr
 							:joins
 							WHERE :cond
@@ -430,7 +432,8 @@ return array(
 									mordbaseat."type" AS "order.base.service.attribute.type", mordbaseat."code" AS "order.base.service.attribute.code",
 									mordbaseat."value" AS "order.base.service.attribute.value", mordbaseat."quantity" AS "order.base.service.attribute.quantity",
 									mordbaseat."name" AS "order.base.service.attribute.name", mordbaseat."mtime" AS "order.base.service.attribute.mtime",
-									mordbaseat."ctime" AS "order.base.service.attribute.ctime", mordbaseat."editor" AS "order.base.service.attribute.editor"
+									mordbaseat."ctime" AS "order.base.service.attribute.ctime", mordbaseat."editor" AS "order.base.service.attribute.editor",
+									mordbaseat.*
 								FROM "mshop_order_base_service_attr" AS mordbaseat
 								:joins
 								WHERE :cond
@@ -541,7 +544,7 @@ return array(
 								mordbase."tax" AS "order.base.service.taxvalue", mordbase."taxrate" AS "order.base.service.taxrates",
 								mordbase."taxflag" AS "order.base.service.taxflag", mordbase."pos" AS "order.base.service.position",
 								mordbase."mtime" AS "order.base.service.mtime", mordbase."editor" AS "order.base.service.editor",
-								mordbase."ctime" AS "order.base.service.ctime"
+								mordbase."ctime" AS "order.base.service.ctime", mordbase.*
 							FROM "mshop_order_base_service" AS mordbase
 							:joins
 							WHERE :cond
@@ -651,7 +654,8 @@ return array(
 							mordba."rebate" AS "order.base.rebate", mordba."tax" AS "order.base.taxvalue",
 							mordba."taxflag" AS "order.base.taxflag", mordba."customerref" AS "order.base.customerref",
 							mordba."comment" AS "order.base.comment", mordba."mtime" AS "order.base.mtime",
-							mordba."ctime" AS "order.base.ctime", mordba."editor" AS "order.base.editor"
+							mordba."ctime" AS "order.base.ctime", mordba."editor" AS "order.base.editor",
+							mordba.*
 						FROM "mshop_order_base" AS mordba
 						:joins
 						WHERE :cond
@@ -727,7 +731,8 @@ return array(
 						SELECT mordst."id" AS "order.status.id", mordst."siteid" AS "order.status.siteid",
 							mordst."parentid" AS "order.status.parentid", mordst."type" AS "order.status.type",
 							mordst."value" AS "order.status.value", mordst."mtime" AS "order.status.mtime",
-							mordst."ctime" AS "order.status.ctime", mordst."editor" AS "order.status.editor"
+							mordst."ctime" AS "order.status.ctime", mordst."editor" AS "order.status.editor",
+							mordst.*
 						FROM "mshop_order_status" AS mordst
 						:joins
 						WHERE :cond
@@ -833,7 +838,8 @@ return array(
 						mord."datepayment" AS "order.datepayment", mord."datedelivery" AS "order.datedelivery",
 						mord."statuspayment" AS "order.statuspayment", mord."statusdelivery" AS "order.statusdelivery",
 						mord."relatedid" AS "order.relatedid", mord."ctime" AS "order.ctime",
-						mord."mtime" AS "order.mtime", mord."editor" AS "order.editor"
+						mord."mtime" AS "order.mtime", mord."editor" AS "order.editor",
+						mord.*
 					FROM "mshop_order" AS mord
 					:joins
 					WHERE :cond

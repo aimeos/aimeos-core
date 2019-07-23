@@ -41,7 +41,8 @@ return array(
 								mmedlity."code" AS "media.lists.type.code", mmedlity."domain" AS "media.lists.type.domain",
 								mmedlity."label" AS "media.lists.type.label", mmedlity."status" AS "media.lists.type.status",
 								mmedlity."mtime" AS "media.lists.type.mtime", mmedlity."editor" AS "media.lists.type.editor",
-								mmedlity."ctime" AS "media.lists.type.ctime", mmedlity."pos" AS "media.lists.type.position"
+								mmedlity."ctime" AS "media.lists.type.ctime", mmedlity."pos" AS "media.lists.type.position",
+								mmedlity.*
 							FROM "mshop_media_list_type" AS mmedlity
 							:joins
 							WHERE :cond
@@ -123,7 +124,8 @@ return array(
 							mmedli."start" AS "media.lists.datestart", mmedli."end" AS "media.lists.dateend",
 							mmedli."config" AS "media.lists.config", mmedli."pos" AS "media.lists.position",
 							mmedli."status" AS "media.lists.status", mmedli."mtime" AS "media.lists.mtime",
-							mmedli."editor" AS "media.lists.editor", mmedli."ctime" AS "media.lists.ctime"
+							mmedli."editor" AS "media.lists.editor", mmedli."ctime" AS "media.lists.ctime",
+							mmedli.*
 						FROM "mshop_media_list" AS mmedli
 						:joins
 						WHERE :cond
@@ -191,7 +193,8 @@ return array(
 								mmedprty."code" AS "media.property.type.code", mmedprty."domain" AS "media.property.type.domain",
 								mmedprty."label" AS "media.property.type.label", mmedprty."status" AS "media.property.type.status",
 								mmedprty."mtime" AS "media.property.type.mtime", mmedprty."editor" AS "media.property.type.editor",
-								mmedprty."ctime" AS "media.property.type.ctime", mmedprty."pos" AS "media.property.type.position"
+								mmedprty."ctime" AS "media.property.type.ctime", mmedprty."pos" AS "media.property.type.position",
+								mmedprty.*
 							FROM "mshop_media_property_type" mmedprty
 							:joins
 							WHERE :cond
@@ -256,7 +259,7 @@ return array(
 							mmedpr."siteid" AS "media.property.siteid", mmedpr."type" AS "media.property.type",
 							mmedpr."langid" AS "media.property.languageid", mmedpr."value" AS "media.property.value",
 							mmedpr."mtime" AS "media.property.mtime", mmedpr."editor" AS "media.property.editor",
-							mmedpr."ctime" AS "media.property.ctime"
+							mmedpr."ctime" AS "media.property.ctime", mmedpr.*
 						FROM "mshop_media_property" AS mmedpr
 						:joins
 						WHERE :cond
@@ -322,7 +325,8 @@ return array(
 							mmedty."code" AS "media.type.code", mmedty."domain" AS "media.type.domain",
 							mmedty."label" AS "media.type.label", mmedty."status" AS "media.type.status",
 							mmedty."mtime" AS "media.type.mtime", mmedty."editor" AS "media.type.editor",
-							mmedty."ctime" AS "media.type.ctime", mmedty."pos" AS "media.type.position"
+							mmedty."ctime" AS "media.type.ctime", mmedty."pos" AS "media.type.position",
+							mmedty.*
 						FROM "mshop_media_type" mmedty
 						:joins
 						WHERE :cond
@@ -389,7 +393,7 @@ return array(
 						mmed."status" AS "media.status", mmed."mimetype" AS "media.mimetype",
 						mmed."domain" AS "media.domain", mmed."preview" AS "media.previews",
 						mmed."mtime" AS "media.mtime", mmed."editor" AS "media.editor",
-						mmed."ctime" AS "media.ctime"
+						mmed."ctime" AS "media.ctime", mmed.*
 					FROM "mshop_media" AS mmed
 					:joins
 					WHERE :cond

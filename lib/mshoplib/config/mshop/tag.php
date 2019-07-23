@@ -40,7 +40,8 @@ return array(
 							mtagty."code" AS "tag.type.code", mtagty."domain" AS "tag.type.domain",
 							mtagty."label" AS "tag.type.label", mtagty."status" AS "tag.type.status",
 							mtagty."mtime" AS "tag.type.mtime", mtagty."editor" AS "tag.type.editor",
-							mtagty."ctime" AS "tag.type.ctime", mtagty."pos" AS "tag.type.position"
+							mtagty."ctime" AS "tag.type.ctime", mtagty."pos" AS "tag.type.position",
+							mtagty.*
 						FROM "mshop_tag_type" mtagty
 						:joins
 						WHERE :cond
@@ -105,7 +106,7 @@ return array(
 						mtag."type" AS "tag.type", mtag."langid" AS "tag.languageid",
 						mtag."domain" AS "tag.domain", mtag."label" AS "tag.label",
 						mtag."mtime" AS "tag.mtime", mtag."editor" AS "tag.editor",
-						mtag."ctime" AS "tag.ctime"
+						mtag."ctime" AS "tag.ctime", mtag.*
 					FROM "mshop_tag" AS mtag
 					:joins
 					WHERE :cond

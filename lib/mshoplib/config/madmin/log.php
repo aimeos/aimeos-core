@@ -37,7 +37,7 @@ return array(
 					SELECT malog."id" AS "log.id", malog."siteid" AS "log.siteid",
 						malog."facility" AS "log.facility", malog."timestamp" AS "log.timestamp",
 						malog."priority" AS "log.priority", malog."message" AS "log.message",
-						malog."request" AS "log.request"
+						malog."request" AS "log.request", malog.*
 					FROM "madmin_log" AS malog
 					:joins
 					WHERE :cond
