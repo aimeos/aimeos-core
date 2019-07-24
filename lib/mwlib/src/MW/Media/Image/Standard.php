@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015-2018
+ * @copyright Metaways Infosystems GmbH, 2014
+ * @copyright Aimeos (aimeos.org), 2015-2019
  * @package MW
  * @subpackage Media
  */
@@ -22,8 +22,10 @@ class Standard
 	extends \Aimeos\MW\Media\Image\Base
 	implements \Aimeos\MW\Media\Image\Iface
 {
-	private $image;
+	private static $watermark = null;
+
 	private $options;
+	private $image;
 
 
 	/**
@@ -38,11 +40,26 @@ class Standard
 	{
 		parent::__construct( $mimetype );
 
-		if( ( $this->image = @imagecreatefromstring( $content ) ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'The image type isn\'t supported by GDlib.') );
+		if( !self::$watermark && isset( $options['image']['watermark'] ) )
+		{
+			if( ( $watermark = @file_get_contents( $options['image']['watermark'] ) ) === false )
+			{
+				$msg = sprintf( 'Watermark image "%1$s" not found', $options['image']['watermark'] );
+				throw new \Aimeos\MW\Media\Exception( $msg );
+			}
+
+			if( ( $image = @imagecreatefromstring( $watermark ) ) === false ) {
+				throw new \Aimeos\MW\Media\Exception( sprintf( 'The watermark image isn\'t supported by GDlib') );
+			}
+
+			self::$watermark = $image;
 		}
 
-		if( imagealphablending( $this->image, false ) === false ) {
+		if( ( $this->image = @imagecreatefromstring( $content ) ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'The image type isn\'t supported by GDlib') );
+		}
+
+		if( imagealphablending( $this->image, true ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagealphablending)') );
 		}
 
@@ -95,6 +112,10 @@ class Standard
 	{
 		if( $mimetype === null ) {
 			$mimetype = $this->getMimeType();
+		}
+
+		if( self::$watermark !== null ) {
+			$this->watermark();
 		}
 
 		$quality = 90;
@@ -231,5 +252,32 @@ class Standard
 		}
 
 		return $newMedia;
+	}
+
+
+	/**
+	 * Adds the configured water mark to the image
+	 */
+	protected function watermark()
+	{
+		$ww = imagesx( self::$watermark );
+		$wh = imagesy( self::$watermark );
+
+		$ratio = min( $this->getWidth() / $ww, $this->getHeight() / $wh );
+		$newHeight = (int) ($wh * $ratio);
+		$newWidth = (int) ($ww * $ratio);
+
+		if( ( $wimage = imagescale( self::$watermark, $newWidth, $newHeight, IMG_BICUBIC ) ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( 'Unable to scale image' );
+		}
+
+		$dx = (int) ( $this->getWidth() - $newWidth ) / 2;
+		$dy = (int) ( $this->getHeight() - $newHeight ) / 2;
+
+		if( imagecopy( $this->image, $wimage, $dx, $dy, 0, 0, $newWidth, $newHeight ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'Failed to apply watermark immage to file "%1$s"', $filename ) );
+		}
+
+		imagedestroy( $wimage );
 	}
 }

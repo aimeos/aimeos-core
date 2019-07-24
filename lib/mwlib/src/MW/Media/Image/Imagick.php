@@ -21,8 +21,10 @@ class Imagick
 	extends \Aimeos\MW\Media\Image\Base
 	implements \Aimeos\MW\Media\Image\Iface
 {
-	private $image;
+	private static $watermark = null;
+
 	private $options;
+	private $image;
 
 
 	/**
@@ -37,10 +39,16 @@ class Imagick
 	{
 		parent::__construct( $mimetype );
 
-		$this->options = $options;
-
 		try
 		{
+			if( !self::$watermark && isset( $options['image']['watermark'] ) )
+			{
+				$image = new \Imagick( [] );
+				$image->readImage( $options['image']['watermark'] );
+
+				self::$watermark = $image;
+			}
+
 			$this->image = new \Imagick( [] );
 			$this->image->readImageBlob( $content );
 		}
@@ -48,6 +56,8 @@ class Imagick
 		{
 			throw new \Aimeos\MW\Media\Exception( $e->getMessage() );
 		}
+
+		$this->options = $options;
 	}
 
 
@@ -116,6 +126,10 @@ class Imagick
 
 		try
 		{
+			if( self::$watermark !== null ) {
+				$this->watermark();
+			}
+
 			$this->image->setImageFormat( $mime[1] );
 			$this->image->setImageCompressionQuality( $quality );
 
@@ -176,5 +190,30 @@ class Imagick
 		{
 			throw new \Aimeos\MW\Media\Exception( $e->getMessage() );
 		}
+	}
+
+
+	/**
+	 * Adds the configured water mark to the image
+	 */
+	protected function watermark()
+	{
+		$ww = self::$watermark->getImageHeight();
+		$wh = self::$watermark->getImageWidth();
+
+		$ratio = min( $this->getWidth() / $ww, $this->getHeight() / $wh );
+		$newHeight = (int) ($wh * $ratio);
+		$newWidth = (int) ($ww * $ratio);
+
+		$dx = (int) ( $this->getWidth() - $newWidth ) / 2;
+		$dy = (int) ( $this->getHeight() - $newHeight ) / 2;
+
+		$image = clone self::$watermark;
+		$image->setImageColorspace( $this->image->getImageColorspace() );
+		$image->resizeImage( $newWidth, $newHeight, \Imagick::FILTER_CUBIC, 0.8 );
+
+		$this->image->compositeImage( $image, \Imagick::COMPOSITE_OVER, $dx, $dy );
+
+		$image->clear();
 	}
 }

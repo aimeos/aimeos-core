@@ -165,6 +165,49 @@ class ImagickTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSaveWatermarkNotfound()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$basedir = dirname( __DIR__ );
+
+		$content = file_get_contents( $basedir . $ds . '_testfiles' . $ds . 'image.jpg' );
+		$options = ['image' => ['watermark' => $basedir . $ds . 'notexisting' . $ds . 'image.png']];
+
+		$this->setExpectedException( \Aimeos\MW\Media\Exception::class );
+		$media = new \Aimeos\MW\Media\Image\Imagick( $content, 'image/png', $options );
+	}
+
+
+	public function testSaveWatermarkInvalid()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$basedir = dirname( __DIR__ );
+
+		$content = file_get_contents( $basedir . $ds . '_testfiles' . $ds . 'image.jpg' );
+		$options = ['image' => ['watermark' => $basedir . $ds . '_testfiles' . $ds . 'application.txt']];
+
+		$this->setExpectedException( \Aimeos\MW\Media\Exception::class );
+		$media = new \Aimeos\MW\Media\Image\Imagick( $content, 'image/png', $options );
+	}
+
+
+	public function testSaveWatermark()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$basedir = dirname( __DIR__ );
+
+		$content = file_get_contents( $basedir . $ds . '_testfiles' . $ds . 'image.jpg' );
+		$options = ['image' => ['watermark' => $basedir . $ds . '_testfiles' . $ds . 'image.png']];
+		$dest = dirname( dirname( $basedir ) ) . $ds . 'tmp' . $ds . 'media.jpg';
+
+		$media = new \Aimeos\MW\Media\Image\Imagick( $content, 'image/png', $options );
+		$media->save( $dest, 'image/jpeg' );
+
+		$this->assertEquals( true, file_exists( $dest ) );
+		unlink( $dest );
+	}
+
+
 	public function testScale()
 	{
 		$ds = DIRECTORY_SEPARATOR;
