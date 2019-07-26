@@ -56,25 +56,30 @@ class MShopAddCodeData extends \Aimeos\MW\Setup\Task\Base
 			$this->msg( sprintf( 'Checking "%1$s" codes', $domain ), 1 );
 
 			$domainManager = \Aimeos\MShop::create( $this->additional, $domain );
-			$type = $domainManager->createItem();
 			$num = $total = 0;
 
 			foreach( $datasets as $dataset )
 			{
 				$total++;
 
-				$type->setId( null );
-				$type->setCode( $dataset['code'] );
-				$type->setLabel( $dataset['label'] );
+				try
+				{
+					$item = $domainManager->findItem( $dataset['code'] );
+				}
+				catch( \Exception $e )
+				{
+					$item = $domainManager->createItem();
+					$item->setCode( $dataset['code'] );
+					$item->setLabel( $dataset['label'] );
 
-				if( isset( $dataset['status'] ) ) {
-					$type->setStatus( $dataset['status'] );
+					if( isset( $dataset['status'] ) ) {
+						$item->setStatus( $dataset['status'] );
+					}
+
+					$num++;
 				}
 
-				try {
-					$domainManager->saveItem( $type );
-					$num++;
-				} catch( \Exception $e ) {; } // if type was already available
+				$domainManager->saveItem( $item );
 			}
 
 			$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
