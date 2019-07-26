@@ -67,50 +67,34 @@ return array(
 			array(
 				'media.label' => 'Demo: Article 1.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/1-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/1.jpg'],
+				'media.previews' => [1 => 'https://demo.aimeos.org/media/1.jpg', 250 => 'https://demo.aimeos.org/media/1-big.jpg'],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
 				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-				'property' => array(
-					array( 'media.property.type' => '240', 'media.property.value' => 'https://demo.aimeos.org/media/1.jpg' ),
-					array( 'media.property.type' => '720', 'media.property.value' => 'https://demo.aimeos.org/media/1-big.jpg' ),
-				),
 			),
 			array(
 				'media.label' => 'Demo: Article 2.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/2-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/2.jpg'],
+				'media.previews' => [1 => 'https://demo.aimeos.org/media/2.jpg', 250 => 'https://demo.aimeos.org/media/2-big.jpg'],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
 				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-				'property' => array(
-					array( 'media.property.type' => '240', 'media.property.value' => 'https://demo.aimeos.org/media/2.jpg' ),
-					array( 'media.property.type' => '720', 'media.property.value' => 'https://demo.aimeos.org/media/2-big.jpg' ),
-				),
 			),
 			array(
 				'media.label' => 'Demo: Article 3.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/3-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/3.jpg'],
+				'media.previews' => [1 => 'https://demo.aimeos.org/media/3.jpg', 250 => 'https://demo.aimeos.org/media/3-big.jpg'],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2, 'product.lists.config' => [],
 				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-				'property' => array(
-					array( 'media.property.type' => '240', 'media.property.value' => 'https://demo.aimeos.org/media/3.jpg' ),
-					array( 'media.property.type' => '720', 'media.property.value' => 'https://demo.aimeos.org/media/3-big.jpg' ),
-				),
 			),
 			array(
 				'media.label' => 'Demo: Article 4.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/4-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/4.jpg'],
+				'media.previews' => [1 => 'https://demo.aimeos.org/media/4.jpg', 250 => 'https://demo.aimeos.org/media/4-big.jpg'],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3, 'product.lists.config' => [],
 				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-				'property' => array(
-					array( 'media.property.type' => '240', 'media.property.value' => 'https://demo.aimeos.org/media/4.jpg' ),
-					array( 'media.property.type' => '720', 'media.property.value' => 'https://demo.aimeos.org/media/4-big.jpg' ),
-				),
 			),
 		),
 		'attribute' => array(
@@ -599,46 +583,30 @@ return array(
 			array(
 				'media.label' => 'Demo: Selection article 1.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/1-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/1.jpg'],
+				'media.previews' => [1 => 'https://demo.aimeos.org/media/1.jpg', 250 => 'https://demo.aimeos.org/media/1-big.jpg'],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3,
-				'property' => array(
-					array( 'media.property.type' => '240', 'media.property.value' => 'https://demo.aimeos.org/media/1.jpg' ),
-					array( 'media.property.type' => '720', 'media.property.value' => 'https://demo.aimeos.org/media/1-big.jpg' ),
-				),
 			),
 			array(
 				'media.label' => 'Demo: Selection article 2.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/2-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/2.jpg'],
+				'media.previews' => [1 => 'https://demo.aimeos.org/media/2.jpg', 250 => 'https://demo.aimeos.org/media/2-big.jpg'],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0,
-				'property' => array(
-					array( 'media.property.type' => '240', 'media.property.value' => 'https://demo.aimeos.org/media/2.jpg' ),
-					array( 'media.property.type' => '720', 'media.property.value' => 'https://demo.aimeos.org/media/2-big.jpg' ),
-				),
 			),
 			array(
 				'media.label' => 'Demo: Selection article 3.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/3-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/3.jpg'],
+				'media.previews' => [1 => 'https://demo.aimeos.org/media/3.jpg', 250 => 'https://demo.aimeos.org/media/3-big.jpg'],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1,
-				'property' => array(
-					array( 'media.property.type' => '240', 'media.property.value' => 'https://demo.aimeos.org/media/3.jpg' ),
-					array( 'media.property.type' => '720', 'media.property.value' => 'https://demo.aimeos.org/media/3-big.jpg' ),
-				),
 			),
 			array(
 				'media.label' => 'Demo: Selection article 4.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/4-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/4.jpg'],
+				'media.previews' => [1 => 'https://demo.aimeos.org/media/4.jpg', 250 => 'https://demo.aimeos.org/media/4-big.jpg'],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2,
-				'property' => array(
-					array( 'media.property.type' => '240', 'media.property.value' => 'https://demo.aimeos.org/media/4.jpg' ),
-					array( 'media.property.type' => '720', 'media.property.value' => 'https://demo.aimeos.org/media/4-big.jpg' ),
-				),
 			),
 		),
 		'product' => array(
@@ -754,46 +722,30 @@ return array(
 			array(
 				'media.label' => 'Demo: Bundle article 1.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/1-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/1.jpg'],
+				'media.previews' => [1 => 'https://demo.aimeos.org/media/1.jpg', 250 => 'https://demo.aimeos.org/media/1-big.jpg'],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2,
-				'property' => array(
-					array( 'media.property.type' => '240', 'media.property.value' => 'https://demo.aimeos.org/media/1.jpg' ),
-					array( 'media.property.type' => '720', 'media.property.value' => 'https://demo.aimeos.org/media/1-big.jpg' ),
-				),
 			),
 			array(
 				'media.label' => 'Demo: Bundle article 2.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/2-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/2.jpg'],
+				'media.previews' => [1 => 'https://demo.aimeos.org/media/2.jpg', 250 => 'https://demo.aimeos.org/media/2-big.jpg'],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3,
-				'property' => array(
-					array( 'media.property.type' => '240', 'media.property.value' => 'https://demo.aimeos.org/media/2.jpg' ),
-					array( 'media.property.type' => '720', 'media.property.value' => 'https://demo.aimeos.org/media/2-big.jpg' ),
-				),
 			),
 			array(
 				'media.label' => 'Demo: Bundle article 3.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/3-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/3.jpg'],
+				'media.previews' => [1 => 'https://demo.aimeos.org/media/3.jpg', 250 => 'https://demo.aimeos.org/media/3-big.jpg'],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0,
-				'property' => array(
-					array( 'media.property.type' => '240', 'media.property.value' => 'https://demo.aimeos.org/media/3.jpg' ),
-					array( 'media.property.type' => '720', 'media.property.value' => 'https://demo.aimeos.org/media/3-big.jpg' ),
-				),
 			),
 			array(
 				'media.label' => 'Demo: Bundle article 4.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/4-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/4.jpg'],
+				'media.previews' => [1 => 'https://demo.aimeos.org/media/4.jpg', 250 => 'https://demo.aimeos.org/media/4-big.jpg'],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1,
-				'property' => array(
-					array( 'media.property.type' => '240', 'media.property.value' => 'https://demo.aimeos.org/media/4.jpg' ),
-					array( 'media.property.type' => '720', 'media.property.value' => 'https://demo.aimeos.org/media/4-big.jpg' ),
-				),
 			),
 		),
 		'attribute' => array(
@@ -1001,13 +953,9 @@ return array(
 			array(
 				'media.label' => 'Demo: Voucher 0.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/0-voucher-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/0-voucher.jpg'],
+				'media.previews' => [1 => 'https://demo.aimeos.org/media/0-voucher.jpg', 250 => 'https://demo.aimeos.org/media/0-voucher-big.jpg'],
 				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2,
-				'property' => array(
-					array( 'media.property.type' => '240', 'media.property.value' => 'https://demo.aimeos.org/media/0-voucher.jpg' ),
-					array( 'media.property.type' => '720', 'media.property.value' => 'https://demo.aimeos.org/media/0-voucher-big.jpg' ),
-				),
+				'product.lists.type' => 'default', 'product.lists.position' => 0,
 			),
 		),
 		'stock' => array(
