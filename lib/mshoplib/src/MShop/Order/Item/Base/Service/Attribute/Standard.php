@@ -158,7 +158,7 @@ class Standard
 	{
 		if( (string) $type !== $this->getType() )
 		{
-			$this->values['order.base.service.attribute.type'] = (string) $type;
+			$this->values['order.base.service.attribute.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 
@@ -191,7 +191,7 @@ class Standard
 	{
 		if( (string) $code !== $this->getCode() )
 		{
-			$this->values['order.base.service.attribute.code'] = (string) $this->checkCode( $code );
+			$this->values['order.base.service.attribute.code'] = $this->checkCode( $code );
 			$this->setModified();
 		}
 

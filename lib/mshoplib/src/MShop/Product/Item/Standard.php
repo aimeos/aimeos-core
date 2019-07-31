@@ -87,7 +87,7 @@ class Standard
 	{
 		if( (string) $type !== $this->getType() )
 		{
-			$this->values['product.type'] = (string) $type;
+			$this->values['product.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 
@@ -153,7 +153,7 @@ class Standard
 	{
 		if( (string) $code !== $this->getCode() )
 		{
-			$this->values['product.code'] = (string) $this->checkCode( $code );
+			$this->values['product.code'] = $this->checkCode( $code );
 			$this->setModified();
 		}
 

@@ -122,7 +122,7 @@ class Standard
 	{
 		if( (string) $code !== $this->getCode() )
 		{
-			$this->values['order.base.coupon.code'] = (string) $this->checkCode( $code );;
+			$this->values['order.base.coupon.code'] = $this->checkCode( $code );
 			$this->setModified();
 		}
 

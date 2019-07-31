@@ -99,7 +99,7 @@ class Standard
 	{
 		if( (string) $type !== $this->getType() )
 		{
-			$this->values['text.type'] = (string) $type;
+			$this->values['text.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 

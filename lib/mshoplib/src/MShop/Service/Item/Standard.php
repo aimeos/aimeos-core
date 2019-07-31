@@ -70,7 +70,7 @@ class Standard
 	{
 		if( (string) $code !== $this->getCode() )
 		{
-			$this->values['service.code'] = (string) $this->checkCode( $code );
+			$this->values['service.code'] = $this->checkCode( $code );
 			$this->setModified();
 		}
 
@@ -101,7 +101,7 @@ class Standard
 	{
 		if( (string) $type !== $this->getType() )
 		{
-			$this->values['service.type'] = (string) $type;
+			$this->values['service.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 

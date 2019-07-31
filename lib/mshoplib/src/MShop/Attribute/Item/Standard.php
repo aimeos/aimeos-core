@@ -131,7 +131,7 @@ class Standard
 	{
 		if( (string) $type !== $this->getType() )
 		{
-			$this->values['attribute.type'] = (string) $type;
+			$this->values['attribute.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 

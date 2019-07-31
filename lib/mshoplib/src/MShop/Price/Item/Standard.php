@@ -64,7 +64,7 @@ class Standard extends Base
 	{
 		if( (string) $type !== $this->getType() )
 		{
-			$this->values['price.type'] = (string) $type;
+			$this->values['price.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 

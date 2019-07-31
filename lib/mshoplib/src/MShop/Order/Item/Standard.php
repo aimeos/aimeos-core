@@ -107,7 +107,7 @@ class Standard
 	{
 		if( (string) $type !== $this->getType() )
 		{
-			$this->values['order.type'] = (string) $type;
+			$this->values['order.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 

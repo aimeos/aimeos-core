@@ -121,7 +121,7 @@ class Standard
 	{
 		if( $type !== $this->getType() )
 		{
-			$this->values['media.type'] = (string) $type;
+			$this->values['media.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 

@@ -42,7 +42,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', [] );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'count', 'integer', ['notnull' => false, 'default' => 0] );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );

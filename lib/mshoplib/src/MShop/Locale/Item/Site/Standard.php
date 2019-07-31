@@ -92,7 +92,8 @@ class Standard
 	{
 		if( (string) $code !== $this->getCode() )
 		{
-			$this->values['locale.site.code'] = $this->checkCode( $code );
+			// don't use checkCode() because maximum length is 255 chars
+			$this->values['locale.site.code'] = (string) $code;
 			$this->setModified();
 		}
 

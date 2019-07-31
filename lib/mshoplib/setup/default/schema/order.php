@@ -23,7 +23,7 @@ return array(
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'customerid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'sitecode', 'string', array( 'length' => 32, 'notnull' => false ) );
+			$table->addColumn( 'sitecode', 'string', array( 'length' => 255, 'notnull' => false ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5 ) );
 			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
@@ -53,7 +53,7 @@ return array(
 			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'addrid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 8 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
 			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
@@ -104,11 +104,11 @@ return array(
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'ordprodid', 'bigint', array( 'notnull' => false ) );
 			$table->addColumn( 'ordaddrid', 'bigint', array( 'notnull' => false ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'prodid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'prodcode', 'string', array( 'length' => 32  ) );
-			$table->addColumn( 'suppliercode', 'string', array( 'length' => 32  ) );
-			$table->addColumn( 'stocktype', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'prodcode', 'string', array( 'length' => 64  ) );
+			$table->addColumn( 'suppliercode', 'string', array( 'length' => 64  ) );
+			$table->addColumn( 'stocktype', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'name', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'description', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
@@ -149,8 +149,8 @@ return array(
 			$table->addColumn( 'ordprodid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'attrid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'quantity', 'integer', [] );
@@ -176,8 +176,8 @@ return array(
 			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'servid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 8 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
@@ -211,8 +211,8 @@ return array(
 			$table->addColumn( 'ordservid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'attrid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'quantity', 'integer', [] );
@@ -238,7 +238,7 @@ return array(
 			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'ordprodid', 'bigint', array( 'notnull' => false ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
@@ -264,7 +264,7 @@ return array(
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 16 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'datepayment', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'datedelivery', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'statuspayment', 'smallint', array( 'default' => -1 ) );
@@ -308,8 +308,8 @@ return array(
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'value', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'value', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );

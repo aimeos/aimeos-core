@@ -251,7 +251,7 @@ class Standard
 	{
 		if( (string) $type != $this->getType() )
 		{
-			$this->values[$this->prefix . 'type'] = (string) $type;
+			$this->values[$this->prefix . 'type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 

@@ -125,7 +125,7 @@ class Standard
 	{
 		if( (string) $type !== $this->getType() )
 		{
-			$this->values['tag.type'] = (string) $type;
+			$this->values['tag.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 

@@ -64,7 +64,7 @@ class Standard
 	{
 		if( (string) $type !== $this->getType() )
 		{
-			$this->values['plugin.type'] = (string) $type;
+			$this->values['plugin.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 

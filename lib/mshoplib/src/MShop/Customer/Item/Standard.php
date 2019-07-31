@@ -154,10 +154,9 @@ class Standard extends Base implements Iface
 	 */
 	public function setCode( $value )
 	{
-		// don't use checkCode() because maximum length is 255 chars
-
 		if( (string) $value !== $this->getCode() )
 		{
+			// don't use checkCode() because maximum length is 255 chars
 			$this->values['customer.code'] = (string) $value;
 			$this->setModified();
 		}

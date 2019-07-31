@@ -350,8 +350,8 @@ abstract class Base
 	 */
 	protected function checkCode( $code )
 	{
-		if( strlen( $code ) > 32 ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Code "%1$s" must not be longer than 32 characters', $code ) );
+		if( strlen( $code ) > 64 ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Code "%1$s" must not be longer than 64 characters', $code ) );
 		}
 
 		return (string) $code;

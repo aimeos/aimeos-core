@@ -188,7 +188,7 @@ class Standard extends Base implements Iface
 	{
 		if( (string) $type !== $this->getType() )
 		{
-			$this->values['order.base.product.type'] = (string) $type;
+			$this->values['order.base.product.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 
@@ -221,7 +221,7 @@ class Standard extends Base implements Iface
 	{
 		if( (string) $suppliercode !== $this->getSupplierCode() )
 		{
-			$this->values['order.base.product.suppliercode'] = (string) $this->checkCode( $suppliercode );
+			$this->values['order.base.product.suppliercode'] = $this->checkCode( $suppliercode );
 			$this->setModified();
 		}
 
@@ -287,7 +287,7 @@ class Standard extends Base implements Iface
 	{
 		if( (string) $code !== $this->getProductCode() )
 		{
-			$this->values['order.base.product.prodcode'] = (string) $this->checkCode( $code );
+			$this->values['order.base.product.prodcode'] = $this->checkCode( $code );
 			$this->setModified();
 		}
 
@@ -320,7 +320,7 @@ class Standard extends Base implements Iface
 	{
 		if( (string) $code !== $this->getStockType() )
 		{
-			$this->values['order.base.product.stocktype'] = (string) $this->checkCode( $code );
+			$this->values['order.base.product.stocktype'] = $this->checkCode( $code );
 			$this->setModified();
 		}
 

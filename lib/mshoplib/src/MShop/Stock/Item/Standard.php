@@ -61,7 +61,7 @@ class Standard
 	{
 		if( (string) $type !== $this->getType() )
 		{
-			$this->values['stock.type'] = (string) $type;
+			$this->values['stock.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 

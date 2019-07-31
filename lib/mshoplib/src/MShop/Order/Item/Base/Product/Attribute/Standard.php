@@ -158,7 +158,7 @@ class Standard
 	{
 		if( (string) $type !== $this->getType() )
 		{
-			$this->values['order.base.product.attribute.type'] = (string) $type;
+			$this->values['order.base.product.attribute.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 
@@ -191,7 +191,8 @@ class Standard
 	{
 		if( (string) $code !== $this->getCode() )
 		{
-			$this->values['order.base.product.attribute.code'] = (string) $this->checkCode( $code );
+			// don't use checkCode() because maximum length is 255 chars
+			$this->values['order.base.product.attribute.code'] = (string) $code;
 			$this->setModified();
 		}
 

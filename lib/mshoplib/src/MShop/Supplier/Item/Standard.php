@@ -119,7 +119,7 @@ class Standard
 	{
 		if( (string) $value !== $this->getCode() )
 		{
-			$this->values['supplier.code'] = (string) $this->checkCode( $value );
+			$this->values['supplier.code'] = $this->checkCode( $value );
 			$this->setModified();
 		}
 

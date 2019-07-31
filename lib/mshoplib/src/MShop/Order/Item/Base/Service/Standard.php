@@ -158,7 +158,7 @@ class Standard extends Base implements Iface
 	{
 		if( (string) $code !== $this->getCode() )
 		{
-			$this->values['order.base.service.code'] = (string) $this->checkCode( $code );
+			$this->values['order.base.service.code'] = $this->checkCode( $code );
 			$this->setModified();
 		}
 
@@ -224,7 +224,7 @@ class Standard extends Base implements Iface
 	{
 		if( (string) $type !== $this->getType() )
 		{
-			$this->values['order.base.service.type'] = (string) $type;
+			$this->values['order.base.service.type'] = $this->checkCode( $type );
 			$this->setModified();
 		}
 
