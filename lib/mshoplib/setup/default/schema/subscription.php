@@ -23,7 +23,7 @@ return array(
 			$table->addColumn( 'prodcode', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'interval', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'reason', 'smallint', array( 'notnull' => false ) );
-			$table->addColumn( 'period', 'smallint', array( 'default' => 1 ) );
+			$table->addColumn( 'period', 'smallint', array( 'default' => 0 ) );
 			$table->addColumn( 'status', 'smallint', array( 'default' => 0 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );

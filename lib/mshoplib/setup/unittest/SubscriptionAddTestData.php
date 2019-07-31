@@ -21,7 +21,7 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return ['OrderAddTestData'];
+		return ['OrderAddTestData', 'SubscriptionMigratePeriod', 'SubscriptionMigrateProdcode'];
 	}
 
 
