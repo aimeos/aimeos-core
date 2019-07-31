@@ -71,11 +71,12 @@ class SubscriptionMigratePeriod extends \Aimeos\MW\Setup\Task\Base
 			foreach( $map as $id => $entry )
 			{
 				$period = 0;
+				$interval = new \DateInterval( $entry['interval'] );
 
 				do
 				{
 					$period++;
-					$entry['ctime'] = date_create( $entry['ctime'] )->add( $entry['interval'] )->format( 'Y-m-d' );
+					$entry['ctime'] = date_create( $entry['ctime'] )->add( $interval )->format( 'Y-m-d' );
 				}
 				while( $entry['ctime'] < $today );
 
