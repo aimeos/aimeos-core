@@ -81,6 +81,20 @@ class Standard
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
+		'subscription.period' => array(
+			'code' => 'subscription.period',
+			'internalcode' => 'mord."period"',
+			'label' => 'Subscription period count',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
+		'subscription.prodcode' => array(
+			'code' => 'subscription.prodcode',
+			'internalcode' => 'mord."prodcode"',
+			'label' => 'Subscription product code',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'subscription.status' => array(
 			'code' => 'subscription.status',
 			'internalcode' => 'mord."status"',
@@ -351,17 +365,19 @@ class Standard
 			$stmt->bind( 3, $item->getDateNext() );
 			$stmt->bind( 4, $item->getDateEnd() );
 			$stmt->bind( 5, $item->getInterval() );
-			$stmt->bind( 6, $item->getReason(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 7, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 8, $date ); // mtime
-			$stmt->bind( 9, $context->getEditor() );
-			$stmt->bind( 10, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 6, $item->getProductCode() );
+			$stmt->bind( 7, $item->getPeriod(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 8, $item->getReason(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 9, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 10, $date ); // mtime
+			$stmt->bind( 11, $context->getEditor() );
+			$stmt->bind( 12, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 11, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 13, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); // is not modified anymore
 			} else {
-				$stmt->bind( 11, $date ); // ctime
+				$stmt->bind( 13, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

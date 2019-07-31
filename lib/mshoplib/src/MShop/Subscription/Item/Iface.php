@@ -111,6 +111,36 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function setInterval( $value );
 
 	/**
+	 * Returns the current renewal period of the subscription product
+	 *
+	 * @return integer Current renewal period
+	 */
+	public function getPeriod();
+
+	/**
+	 * Sets the current renewal period of the subscription product
+	 *
+	 * @param integer $value Current renewal period
+	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 */
+	public function setPeriod( $value );
+
+	/**
+	 * Returns the product code of the subscription product
+	 *
+	 * @return string Product code
+	 */
+	public function getProductCode();
+
+	/**
+	 * Sets the product code of the subscription product
+	 *
+	 * @param string $value Product code
+	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 */
+	public function setProductCode( $value );
+
+	/**
 	 * Returns the reason for the end of the subscriptions
 	 *
 	 * @return integer|null Reason code or NULL for no reason

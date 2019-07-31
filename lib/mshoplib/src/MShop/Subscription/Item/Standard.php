@@ -197,6 +197,72 @@ class Standard
 
 
 	/**
+	 * Returns the current renewal period of the subscription product
+	 *
+	 * @return integer Current renewal period
+	 */
+	public function getPeriod()
+	{
+		if( isset( $this->values['subscription.period'] ) ) {
+			return (int) $this->values['subscription.period'];
+		}
+
+		return 1;
+	}
+
+
+	/**
+	 * Sets the current renewal period of the subscription product
+	 *
+	 * @param integer $value Current renewal period
+	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 */
+	public function setPeriod( $value )
+	{
+		if( (string) $value !== $this->getPeriod() )
+		{
+			$this->values['subscription.period'] = (int) $value;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the product code of the subscription product
+	 *
+	 * @return string Product code
+	 */
+	public function getProductCode()
+	{
+		if( isset( $this->values['subscription.prodcode'] ) ) {
+			return (string) $this->values['subscription.prodcode'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets the product code of the subscription product
+	 *
+	 * @param string $value Product code
+	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 */
+	public function setProductCode( $value )
+	{
+		if( (string) $value !== $this->getProductCode() )
+		{
+			$this->values['subscription.prodcode'] = $this->checkCode( $value );
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the reason for the end of the subscriptions
 	 *
 	 * @return integer|null Reason code or NULL for no reason
@@ -287,9 +353,11 @@ class Standard
 			{
 				case 'subscription.ordbaseid': $item = $item->setOrderBaseId( $value ); break;
 				case 'subscription.ordprodid': $item = $item->setOrderProductId( $value ); break;
+				case 'subscription.prodcode': $item = $item->setProductCode( $value ); break;
 				case 'subscription.datenext': $item = $item->setDateNext( $value ); break;
 				case 'subscription.dateend': $item = $item->setDateEnd( $value ); break;
 				case 'subscription.interval': $item = $item->setInterval( $value ); break;
+				case 'subscription.period': $item = $item->setPeriod( $value ); break;
 				case 'subscription.reason': $item = $item->setReason( $value ); break;
 				case 'subscription.status': $item = $item->setStatus( $value ); break;
 				default: continue 2;
@@ -314,9 +382,11 @@ class Standard
 
 		$list['subscription.ordbaseid'] = $this->getOrderBaseId();
 		$list['subscription.ordprodid'] = $this->getOrderProductId();
+		$list['subscription.prodcode'] = $this->getProductCode();
 		$list['subscription.datenext'] = $this->getDateNext();
 		$list['subscription.dateend'] = $this->getDateEnd();
 		$list['subscription.interval'] = $this->getInterval();
+		$list['subscription.period'] = $this->getPeriod();
 		$list['subscription.reason'] = $this->getReason();
 		$list['subscription.status'] = $this->getStatus();
 

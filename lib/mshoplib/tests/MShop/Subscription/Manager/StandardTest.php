@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2018
+ * @copyright Aimeos (aimeos.org), 2018-2019
  */
 
 
@@ -127,9 +127,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getOrderProductId(), $itemSaved->getOrderProductId() );
+		$this->assertEquals( $item->getProductCode(), $itemSaved->getProductCode() );
 		$this->assertEquals( $item->getDateNext(), $itemSaved->getDateNext() );
 		$this->assertEquals( $item->getDateEnd(), $itemSaved->getDateEnd() );
 		$this->assertEquals( $item->getInterval(), $itemSaved->getInterval() );
+		$this->assertEquals( $item->getPeriod(), $itemSaved->getPeriod() );
 		$this->assertEquals( $item->getReason(), $itemSaved->getReason() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
@@ -140,9 +142,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getOrderProductId(), $itemUpd->getOrderProductId() );
+		$this->assertEquals( $itemExp->getProductCode(), $itemUpd->getProductCode() );
 		$this->assertEquals( $itemExp->getDateNext(), $itemUpd->getDateNext() );
 		$this->assertEquals( $itemExp->getDateEnd(), $itemUpd->getDateEnd() );
 		$this->assertEquals( $itemExp->getInterval(), $itemUpd->getInterval() );
+		$this->assertEquals( $itemExp->getPeriod(), $itemUpd->getPeriod() );
 		$this->assertEquals( $itemExp->getReason(), $itemUpd->getReason() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
@@ -179,6 +183,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'subscription.datenext', '2000-01-01' );
 		$expr[] = $search->compare( '==', 'subscription.dateend', '2010-01-01' );
 		$expr[] = $search->compare( '==', 'subscription.interval', 'P0Y1M0W0D' );
+		$expr[] = $search->compare( '==', 'subscription.prodcode', 'CNE' );
+		$expr[] = $search->compare( '==', 'subscription.period', 5 );
 		$expr[] = $search->compare( '==', 'subscription.reason', 1 );
 		$expr[] = $search->compare( '==', 'subscription.status', 1 );
 		$expr[] = $search->compare( '>=', 'subscription.mtime', '1970-01-01 00:00:00' );
