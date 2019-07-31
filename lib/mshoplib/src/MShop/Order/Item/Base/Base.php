@@ -74,8 +74,8 @@ abstract class Base
 	 * @param array $coupons Associative list of coupon codes as keys and ordered products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface as values
 	 */
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
-			array $values = [], array $products = [], array $addresses = [],
-			array $services = [], array $coupons = [] )
+		array $values = [], array $products = [], array $addresses = [],
+		array $services = [], array $coupons = [] )
 	{
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $addresses );
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $products );
@@ -118,6 +118,22 @@ abstract class Base
 		if( isset( $this->bdata[$name] ) ) {
 			return $this->bdata[$name];
 		}
+	}
+
+
+	/**
+	 * Sets the new item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @param mixed $value New property value
+	 */
+	public function __set( $name, $value )
+	{
+		if( !isset( $this->bdata[$name] ) || $this->bdata[$name] !== $value ) {
+			$this->setModified();
+		}
+
+		$this->bdata[$name] = $value;
 	}
 
 
