@@ -230,14 +230,14 @@ class Standard
 
 
 	/**
-	 * Returns the product code of the subscription product
+	 * Returns the product ID of the subscription product
 	 *
-	 * @return string Product code
+	 * @return string Product ID
 	 */
-	public function getProductCode()
+	public function getProductId()
 	{
-		if( isset( $this->values['subscription.prodcode'] ) ) {
-			return (string) $this->values['subscription.prodcode'];
+		if( isset( $this->values['subscription.productid'] ) ) {
+			return (string) $this->values['subscription.productid'];
 		}
 
 		return '';
@@ -245,16 +245,16 @@ class Standard
 
 
 	/**
-	 * Sets the product code of the subscription product
+	 * Sets the product ID of the subscription product
 	 *
-	 * @param string $value Product code
+	 * @param string $value Product ID
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setProductCode( $value )
+	public function setProductId( $value )
 	{
-		if( (string) $value !== $this->getProductCode() )
+		if( (string) $value !== $this->getProductId() )
 		{
-			$this->values['subscription.prodcode'] = $this->checkCode( $value );
+			$this->values['subscription.productid'] = $this->checkCode( $value );
 			$this->setModified();
 		}
 
@@ -353,7 +353,7 @@ class Standard
 			{
 				case 'subscription.ordbaseid': $item = $item->setOrderBaseId( $value ); break;
 				case 'subscription.ordprodid': $item = $item->setOrderProductId( $value ); break;
-				case 'subscription.prodcode': $item = $item->setProductCode( $value ); break;
+				case 'subscription.productid': $item = $item->setProductId( $value ); break;
 				case 'subscription.datenext': $item = $item->setDateNext( $value ); break;
 				case 'subscription.dateend': $item = $item->setDateEnd( $value ); break;
 				case 'subscription.interval': $item = $item->setInterval( $value ); break;
@@ -382,7 +382,7 @@ class Standard
 
 		$list['subscription.ordbaseid'] = $this->getOrderBaseId();
 		$list['subscription.ordprodid'] = $this->getOrderProductId();
-		$list['subscription.prodcode'] = $this->getProductCode();
+		$list['subscription.productid'] = $this->getProductId();
 		$list['subscription.datenext'] = $this->getDateNext();
 		$list['subscription.dateend'] = $this->getDateEnd();
 		$list['subscription.interval'] = $this->getInterval();

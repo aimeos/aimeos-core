@@ -26,7 +26,7 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_subscription" (
-						"baseid", "ordprodid", "next", "end", "interval", "prodcode", "period",
+						"baseid", "ordprodid", "next", "end", "interval", "productid", "period",
 						"reason", "status", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -37,7 +37,7 @@ return array(
 				'ansi' => '
 					UPDATE "mshop_subscription"
 					SET "baseid" = ?, "ordprodid" = ?, "next" = ?, "end" = ?, "interval" = ?,
-						"prodcode" = ?, "period" = ?, "reason" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+						"productid" = ?, "period" = ?, "reason" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
@@ -53,7 +53,7 @@ return array(
 						mord."ordprodid" AS "subscription.ordprodid", mord."siteid" AS "subscription.siteid",
 						mord."next" AS "subscription.datenext", mord."end" AS "subscription.dateend",
 						mord."interval" AS "subscription.interval", mord."reason" AS "subscription.reason",
-						mord."prodcode" AS "subscription.prodcode", mord."period" AS "subscription.period",
+						mord."productid" AS "subscription.productid", mord."period" AS "subscription.period",
 						mord."status" AS "subscription.status", mord."ctime" AS "subscription.ctime",
 						mord."mtime" AS "subscription.mtime", mord."editor" AS "subscription.editor",
 						mord.*
@@ -61,7 +61,7 @@ return array(
 					:joins
 					WHERE :cond
 					GROUP BY mord."id", mord."baseid", mord."ordprodid", mord."siteid", mord."next", mord."end",
-						mord."interval", mord."reason", mord."prodcode", mord."period", mord."status", mord."ctime",
+						mord."interval", mord."reason", mord."productid", mord."period", mord."status", mord."ctime",
 						mord."mtime", mord."editor" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start

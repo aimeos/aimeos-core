@@ -127,7 +127,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getOrderProductId(), $itemSaved->getOrderProductId() );
-		$this->assertEquals( $item->getProductCode(), $itemSaved->getProductCode() );
+		$this->assertEquals( $item->getProductId(), $itemSaved->getProductId() );
 		$this->assertEquals( $item->getDateNext(), $itemSaved->getDateNext() );
 		$this->assertEquals( $item->getDateEnd(), $itemSaved->getDateEnd() );
 		$this->assertEquals( $item->getInterval(), $itemSaved->getInterval() );
@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getOrderProductId(), $itemUpd->getOrderProductId() );
-		$this->assertEquals( $itemExp->getProductCode(), $itemUpd->getProductCode() );
+		$this->assertEquals( $itemExp->getProductId(), $itemUpd->getProductId() );
 		$this->assertEquals( $itemExp->getDateNext(), $itemUpd->getDateNext() );
 		$this->assertEquals( $itemExp->getDateEnd(), $itemUpd->getDateEnd() );
 		$this->assertEquals( $itemExp->getInterval(), $itemUpd->getInterval() );
@@ -183,7 +183,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'subscription.datenext', '2000-01-01' );
 		$expr[] = $search->compare( '==', 'subscription.dateend', '2010-01-01' );
 		$expr[] = $search->compare( '==', 'subscription.interval', 'P0Y1M0W0D' );
-		$expr[] = $search->compare( '==', 'subscription.prodcode', 'CNE' );
+		$expr[] = $search->compare( '>=', 'subscription.productid', '' );
 		$expr[] = $search->compare( '==', 'subscription.period', 5 );
 		$expr[] = $search->compare( '==', 'subscription.reason', 1 );
 		$expr[] = $search->compare( '==', 'subscription.status', 1 );

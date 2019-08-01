@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'subscription.siteid' => 99,
 			'subscription.ordbaseid' => 12,
 			'subscription.ordprodid' => 123,
-			'subscription.prodcode' => 'CNC',
+			'subscription.productid' => '456',
 			'subscription.datenext' => '2000-01-01',
 			'subscription.dateend' => '2100-01-01',
 			'subscription.interval' => 'P1Y0M0W0D',
@@ -174,18 +174,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetProductCode()
+	public function testGetProductId()
 	{
-		$this->assertEquals( $this->values['subscription.prodcode'], $this->object->getProductCode() );
+		$this->assertEquals( $this->values['subscription.productid'], $this->object->getProductId() );
 	}
 
 
-	public function testSetProductCode()
+	public function testSetProductId()
 	{
-		$return = $this->object->setProductCode( 'CNE' );
+		$return = $this->object->setProductId( '567' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
-		$this->assertEquals( 'CNE', $this->object->getProductCode() );
+		$this->assertEquals( '567', $this->object->getProductId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -280,7 +280,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'subscription.id' => 1,
 			'subscription.ordbaseid' => 2,
 			'subscription.ordprodid' => 3,
-			'subscription.prodcode' => 'ABC',
+			'subscription.productid' => '456',
 			'subscription.datenext' => '2019-01-01',
 			'subscription.dateend' => '2020-01-01',
 			'subscription.interval' => 'P1Y0M0W0D',
@@ -295,7 +295,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['subscription.id'], $item->getId() );
 		$this->assertEquals( $list['subscription.ordbaseid'], $item->getOrderBaseId() );
 		$this->assertEquals( $list['subscription.ordprodid'], $item->getOrderProductId() );
-		$this->assertEquals( $list['subscription.prodcode'], $item->getProductCode() );
+		$this->assertEquals( $list['subscription.productid'], $item->getProductId() );
 		$this->assertEquals( $list['subscription.datenext'], $item->getDateNext() );
 		$this->assertEquals( $list['subscription.dateend'], $item->getDateEnd() );
 		$this->assertEquals( $list['subscription.interval'], $item->getInterval() );
@@ -314,7 +314,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getSiteId(), $list['subscription.siteid'] );
 		$this->assertEquals( $this->object->getOrderBaseId(), $list['subscription.ordbaseid'] );
 		$this->assertEquals( $this->object->getOrderProductId(), $list['subscription.ordprodid'] );
-		$this->assertEquals( $this->object->getProductCode(), $list['subscription.prodcode'] );
+		$this->assertEquals( $this->object->getProductId(), $list['subscription.productid'] );
 		$this->assertEquals( $this->object->getDateNext(), $list['subscription.datenext'] );
 		$this->assertEquals( $this->object->getDateEnd(), $list['subscription.dateend'] );
 		$this->assertEquals( $this->object->getInterval(), $list['subscription.interval'] );

@@ -126,19 +126,19 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function setPeriod( $value );
 
 	/**
-	 * Returns the product code of the subscription product
+	 * Returns the product ID of the subscription product
 	 *
-	 * @return string Product code
+	 * @return string Product ID
 	 */
-	public function getProductCode();
+	public function getProductId();
 
 	/**
-	 * Sets the product code of the subscription product
+	 * Sets the product ID of the subscription product
 	 *
-	 * @param string $value Product code
+	 * @param string $value Product ID
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setProductCode( $value );
+	public function setProductId( $value );
 
 	/**
 	 * Returns the reason for the end of the subscriptions

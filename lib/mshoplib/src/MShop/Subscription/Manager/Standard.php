@@ -88,10 +88,10 @@ class Standard
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'subscription.prodcode' => array(
-			'code' => 'subscription.prodcode',
-			'internalcode' => 'mord."prodcode"',
-			'label' => 'Subscription product code',
+		'subscription.productid' => array(
+			'code' => 'subscription.productid',
+			'internalcode' => 'mord."productid"',
+			'label' => 'Subscription product ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -365,7 +365,7 @@ class Standard
 			$stmt->bind( 3, $item->getDateNext() );
 			$stmt->bind( 4, $item->getDateEnd() );
 			$stmt->bind( 5, $item->getInterval() );
-			$stmt->bind( 6, $item->getProductCode() );
+			$stmt->bind( 6, $item->getProductId() );
 			$stmt->bind( 7, $item->getPeriod(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 8, $item->getReason(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 9, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
