@@ -9,9 +9,6 @@
 namespace Aimeos\MShop\Locale\Item\Currency;
 
 
-/**
- * Test class for \Aimeos\MShop\Locale\Item\Currency\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -53,30 +50,30 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetId()
 	{
-		$return = $this->object->setId( 'XXX' );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Currency\Iface::class, $return );
-		$this->assertEquals( 'XXX', $this->object->getId() );
-		$this->assertFalse( $this->object->isModified() );
-
 		$return = $this->object->setId( null );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Currency\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
+
+		$return = $this->object->setId( 'XXX' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Currency\Iface::class, $return );
+		$this->assertEquals( 'XXX', $this->object->getId() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 
 
 	public function testSetIdLength()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Locale\Exception::class );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setId( 'EU' );
 	}
 
 
 	public function testSetIdNumeric()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Locale\Exception::class );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setId( 123 );
 	}
 
@@ -94,6 +91,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Currency\Iface::class, $return );
 		$this->assertEquals( 'USD', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetCodeInvalid()
+	{
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->object->setCode( 'XXXX' );
 	}
 
 

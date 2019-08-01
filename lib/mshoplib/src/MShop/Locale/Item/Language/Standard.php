@@ -22,8 +22,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Locale\Item\Language\Iface
 {
-
-	private $modified = false;
 	private $values;
 
 
@@ -37,25 +35,6 @@ class Standard
 		parent::__construct( 'locale.language.', $values );
 
 		$this->values = $values;
-
-		if( isset( $values['locale.language.id'] ) ) {
-			$this->setId( $values['locale.language.id'] );
-		}
-	}
-
-
-	/**
-	 * Returns the id of the language.
-	 *
-	 * @return string|null Id of the language
-	 */
-	public function getId()
-	{
-		if( isset( $this->values['locale.language.id'] ) ) {
-			return (string) $this->values['locale.language.id'];
-		}
-
-		return null;
 	}
 
 
@@ -67,19 +46,7 @@ class Standard
 	 */
 	public function setId( $key )
 	{
-		if( $key !== null && $key !== '' )
-		{
-			$this->setCode( $key );
-			$this->values['locale.language.id'] = $this->values['locale.language.code'];
-			$this->modified = false;
-		}
-		else
-		{
-			$this->values['locale.language.id'] = null;
-			$this->modified = true;
-		}
-
-		return $this;
+		return parent::setId( $this->checkLanguageId( $key ) );
 	}
 
 
@@ -90,8 +57,8 @@ class Standard
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values['locale.language.code'] ) ) {
-			return (string) $this->values['locale.language.code'];
+		if( isset( $this->values['locale.language.id'] ) ) {
+			return (string) $this->values['locale.language.id'];
 		}
 
 		return '';
@@ -101,23 +68,15 @@ class Standard
 	/**
 	 * Sets the two letter ISO language code.
 	 *
-	 * @param string $key two letter ISO language code
+	 * @param string $code two letter ISO language code
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
-	public function setCode( $key )
+	public function setCode( $code )
 	{
-		$matches = [];
-		$len = strlen( $key );
-
-		if( $len < 2 || $len > 5 || preg_match( '/^([a-zA-Z]{2,3})((-|_)([a-zA-Z]{2}))?$/', $key, $matches ) !== 1 ) {
-			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Invalid characters in ISO language code "%1$s"', $key ) );
-		}
-
-		if( (string) $key !== $this->getCode() )
+		if( $code !== $this->getCode() )
 		{
-			$code = strtolower( $matches[1] ) . ( isset( $matches[4] ) ? $matches[3] . $matches[4] : '' );
-			$this->values['locale.language.code'] = $code;
-			$this->modified = true;
+			$this->values['locale.language.id'] = $this->checkLanguageId( $code, false );
+			$this->setModified();
 		}
 
 		return $this;
@@ -227,7 +186,6 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'locale.language.id': $item = $item->setId( $value ); break;
 				case 'locale.language.code': $item = $item->setCode( $value ); break;
 				case 'locale.language.label': $item = $item->setLabel( $value ); break;
 				case 'locale.language.status': $item = $item->setStatus( $value ); break;
@@ -251,23 +209,10 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['locale.language.id'] = $this->getId();
 		$list['locale.language.code'] = $this->getCode();
 		$list['locale.language.label'] = $this->getLabel();
 		$list['locale.language.status'] = $this->getStatus();
 
 		return $list;
 	}
-
-
-	/**
-	 * Tests if the needed object properties are modified.
-	 *
-	 * @return boolean True if modiefied flag was set otherwise false
-	 */
-	public function isModified()
-	{
-		return $this->modified || parent::isModified();
-	}
-
 }
