@@ -444,6 +444,7 @@ abstract class Base
 	 * Returns the raw value list.
 	 *
 	 * @return array Associative list of key/value pairs
+	 * @deprecated 2020.01
 	 */
 	protected function getRawValues()
 	{

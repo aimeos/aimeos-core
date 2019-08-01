@@ -18,10 +18,11 @@ namespace Aimeos\MShop\Order\Item\Base;
  * @package MShop
  * @subpackage Order
  */
-abstract class Base
-	extends \Aimeos\MW\Observer\Publisher\Base
-	implements \Aimeos\MShop\Order\Item\Base\Iface
+abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 {
+	use \Aimeos\MW\Observer\Publisher\Traits;
+
+
 	/**
 	 * Check and load/store only basic basket content
 	 */
