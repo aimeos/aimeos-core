@@ -61,6 +61,28 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testMagicMethods()
+	{
+		$this->assertFalse( isset( $this->object->test ) );
+		$this->assertEquals( null, $this->object->test );
+
+		$this->object->test = 'value';
+
+		$this->assertTrue( isset( $this->object->test ) );
+		$this->assertEquals( 'value', $this->object->test );
+	}
+
+
+	public function testGetSet()
+	{
+		$this->assertEquals( false, $this->object->get( 'test', false ) );
+
+		$this->object->set( 'test', 'value' );
+
+		$this->assertEquals( 'value', $this->object->get( 'test', false ) );
+	}
+
+
 	public function testGetId()
 	{
 		$this->assertEquals( '1', $this->object->getId() );

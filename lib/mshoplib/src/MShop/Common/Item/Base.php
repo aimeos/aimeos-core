@@ -96,6 +96,41 @@ abstract class Base
 
 
 	/**
+	 * Returns the item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @param mixed $default Default value if property is unknown
+	 * @return mixed|null Property value or default value if property is unknown
+	 */
+	public function get( $name, $default = null )
+	{
+		if( isset( $this->bdata[$name] ) ) {
+			return $this->bdata[$name];
+		}
+
+		return $default;
+	}
+
+
+	/**
+	 * Sets the new item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @param mixed $value New property value
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 */
+	public function set( $name, $value )
+	{
+		if( !isset( $this->bdata[$name] ) || $this->bdata[$name] !== $value ) {
+			$this->setModified();
+		}
+
+		$this->bdata[$name] = $value;
+		return $this;
+	}
+
+
+	/**
 	 * Returns the ID of the item if available.
 	 *
 	 * @return string|null ID of the item
