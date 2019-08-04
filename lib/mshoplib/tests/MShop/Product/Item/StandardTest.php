@@ -32,6 +32,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.mtime' => '2011-01-19 18:04:32',
 			'product.editor' => 'unitTestUser',
 			'product.target' => 'testtarget',
+			'additional' => 'value',
 		);
 
 		$propItems = array(
@@ -371,11 +372,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.config' => array( 'key' => 'value' ),
 			'product.status' => 0,
 			'product.target' => 'ttarget',
+			'additional' => 'value',
 		);
 
 		$item = $item->fromArray( $entries, true );
 
-		$this->assertEquals( [], $entries );
+		$this->assertEquals( ['additional' => 'value'], $entries );
 		$this->assertEquals( $list['product.id'], $item->getId() );
 		$this->assertEquals( $list['product.code'], $item->getCode() );
 		$this->assertEquals( $list['product.label'], $item->getLabel() );
@@ -385,6 +387,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['product.config'], $item->getConfig() );
 		$this->assertEquals( $list['product.status'], $item->getStatus() );
 		$this->assertEquals( $list['product.target'], $item->getTarget() );
+		$this->assertEquals( $list['additional'], $item->additional );
 		$this->assertNull( $item->getSiteId() );
 	}
 

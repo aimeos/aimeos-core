@@ -302,15 +302,20 @@ abstract class Base
 	 */
 	public function fromArray( array &$list, $private = false )
 	{
-		$item = $this;
-
 		if( $private && array_key_exists( $this->prefix . 'id', $list ) )
 		{
-			$item = $item->setId( $list[$this->prefix . 'id'] );
+			$this->setId( $list[$this->prefix . 'id'] );
 			unset( $list[$this->prefix . 'id'] );
 		}
 
-		return $item;
+		foreach( $list as $key => $value )
+		{
+			if( is_string( $value ) && strpos( $key, '.' ) === false ) {
+				$this->bdata[$key] = $value;
+			}
+		}
+
+		return $this;
 	}
 
 
@@ -330,6 +335,13 @@ abstract class Base
 			$list[$this->prefix . 'ctime'] = $this->getTimeCreated();
 			$list[$this->prefix . 'mtime'] = $this->getTimeModified();
 			$list[$this->prefix . 'editor'] = $this->getEditor();
+		}
+
+		foreach( $this->bdata as $key => $value )
+		{
+			if( strpos( $key, '.' ) === false ) {
+				$list[$key] = $value;
+			}
 		}
 
 		return $list;

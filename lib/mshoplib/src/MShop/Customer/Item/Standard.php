@@ -273,16 +273,16 @@ class Standard extends Base implements Iface
 	 */
 	public function getGroups()
 	{
-		if( !isset( $this->values['groups'] ) )
+		if( !isset( $this->values['customer.groups'] ) )
 		{
-			$this->values['groups'] = [];
+			$this->values['customer.groups'] = [];
 
 			foreach( $this->getListItems( 'customer/group', 'default' ) as $listItem ) {
-				$this->values['groups'][] = $listItem->getRefId();
+				$this->values['customer.groups'][] = $listItem->getRefId();
 			}
 		}
 
-		return (array) $this->values['groups'];
+		return (array) $this->values['customer.groups'];
 	}
 
 	/**
@@ -293,7 +293,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setGroups( array $ids )
 	{
-		$this->values['groups'] = $ids;
+		$this->values['customer.groups'] = $ids;
 		$this->setModified();
 
 		return $this;
