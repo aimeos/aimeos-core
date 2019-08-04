@@ -27,7 +27,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.property.mtime' => '2011-01-01 00:00:02',
 			'common.property.ctime' => '2011-01-01 00:00:01',
 			'common.property.editor' => 'unitTestUser',
-			'languageid' => 'de',
+			'.languageid' => 'de',
 		);
 
 		$this->object = new \Aimeos\MShop\Common\Item\Property\Standard( 'common.property.', $this->values );

@@ -32,7 +32,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.mtime' => '2011-01-01 00:00:02',
 			'common.lists.ctime' => '2011-01-01 00:00:01',
 			'common.lists.editor' => 'unitTestUser',
-			'date' => date( 'Y-m-d H:i:s' ),
+			'.date' => date( 'Y-m-d H:i:s' ),
 		);
 
 		$this->object = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.', $values );

@@ -254,8 +254,8 @@ class Standard
 	public function isAvailable()
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
-			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->values['date'] )
-			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->values['date'] );
+			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->values['.date'] )
+			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->values['.date'] );
 	}
 
 

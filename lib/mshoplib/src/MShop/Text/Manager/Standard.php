@@ -719,7 +719,7 @@ class Standard
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [] )
 	{
-		$values['languageid'] = $this->languageId;
+		$values['.languageid'] = $this->languageId;
 
 		return new \Aimeos\MShop\Text\Item\Standard( $values, $listItems, $refItems );
 	}

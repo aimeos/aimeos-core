@@ -775,7 +775,7 @@ class Standard
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [], array $propItems = [] )
 	{
-		$values['languageid'] = $this->languageId;
+		$values['.languageid'] = $this->languageId;
 
 		return new \Aimeos\MShop\Media\Item\Standard( $values, $listItems, $refItems, $propItems );
 	}

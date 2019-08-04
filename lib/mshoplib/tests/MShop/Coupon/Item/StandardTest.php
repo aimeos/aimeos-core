@@ -29,7 +29,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'coupon.mtime' => '2011-01-01 00:00:02',
 			'coupon.ctime' => '2011-01-01 00:00:01',
 			'coupon.editor' => 'unitTestUser',
-			'date' => date( 'Y-m-d H:i:s' ),
+			'.date' => date( 'Y-m-d H:i:s' ),
 		);
 
 		$this->object = new \Aimeos\MShop\Coupon\Item\Standard( $this->values );

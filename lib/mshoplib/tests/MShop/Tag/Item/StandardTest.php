@@ -28,7 +28,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'tag.mtime' => '2011-01-01 00:00:02',
 			'tag.ctime' => '2011-01-01 00:00:01',
 			'tag.editor' => 'unitTestUser',
-			'languageid' => 'de',
+			'.languageid' => 'de',
 		);
 
 		$this->object = new \Aimeos\MShop\Tag\Item\Standard( $this->values );

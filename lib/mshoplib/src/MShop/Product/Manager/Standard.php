@@ -797,7 +797,7 @@ class Standard
 	protected function createItemBase( array $values = [], array $listItems = [],
 		array $refItems = [], array $propertyItems = [] )
 	{
-		$values['date'] = $this->date;
+		$values['.date'] = $this->date;
 
 		return new \Aimeos\MShop\Product\Item\Standard( $values, $listItems, $refItems, $propertyItems );
 	}

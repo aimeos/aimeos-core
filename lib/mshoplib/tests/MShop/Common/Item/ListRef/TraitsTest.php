@@ -48,7 +48,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
-		$values = ['languageid' => null, 'text.status' => 1];
+		$values = ['.languageid' => null, 'text.status' => 1];
 
 		$this->textItem1 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'name' ) + $values );
 		$this->textItem1->setContent( 'test name' );

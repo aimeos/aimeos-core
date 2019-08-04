@@ -36,7 +36,7 @@ class Standard extends Base
 	{
 		parent::__construct( 'price.', $values, $listItems, $refItems, $propItems );
 
-		$this->precision = ( isset( $values['precision'] ) ? $values['precision'] : 2 );
+		$this->precision = ( isset( $values['.precision'] ) ? $values['.precision'] : 2 );
 		$this->values = $values;
 	}
 
@@ -496,7 +496,7 @@ class Standard extends Base
 	public function isAvailable()
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
-			&& ( $this->values['currencyid'] === null || $this->getCurrencyId() === $this->values['currencyid'] );
+			&& ( $this->values['.currencyid'] === null || $this->getCurrencyId() === $this->values['.currencyid'] );
 	}
 
 

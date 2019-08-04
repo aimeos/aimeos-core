@@ -30,7 +30,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'text.mtime' => '2011-01-01 00:00:02',
 			'text.ctime' => '2011-01-01 00:00:01',
 			'text.editor' => 'unitTestUser',
-			'languageid' => 'de',
+			'.languageid' => 'de',
 		);
 
 		$this->object = new \Aimeos\MShop\Text\Item\Standard( $this->values );

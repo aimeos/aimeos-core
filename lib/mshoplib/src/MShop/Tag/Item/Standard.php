@@ -184,7 +184,7 @@ class Standard
 	 */
 	public function isAvailable()
 	{
-		return parent::isAvailable() && $this->getLanguageId() === $this->values['languageid'];
+		return parent::isAvailable() && $this->getLanguageId() === $this->values['.languageid'];
 	}
 
 

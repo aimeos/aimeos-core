@@ -688,7 +688,7 @@ class Standard
 	 */
 	protected function createItemBase( array $values = [] )
 	{
-		$values['date'] = $this->date;
+		$values['.date'] = $this->date;
 
 		return new \Aimeos\MShop\Coupon\Item\Standard( $values );
 	}

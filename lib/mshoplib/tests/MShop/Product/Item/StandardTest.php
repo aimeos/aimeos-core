@@ -40,14 +40,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 				'product.property.parentid' => 1,
 				'product.property.type' => 'proptest',
 				'product.property.languageid' => 'de',
-				'languageid' => 'de',
+				'.languageid' => 'de',
 			) ),
 			3 => new \Aimeos\MShop\Common\Item\Property\Standard( 'product.property.', array(
 				'product.property.id' => 3,
 				'product.property.parentid' => 1,
 				'product.property.type' => 'proptype',
 				'product.property.languageid' => 'de',
-				'languageid' => 'fr',
+				'.languageid' => 'fr',
 			) ),
 		);
 

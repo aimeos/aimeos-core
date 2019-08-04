@@ -259,9 +259,8 @@ class Standard
 	public function isAvailable()
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
-			&& ( $this->values['languageid'] === null
-			|| $this->getLanguageId() === null
-			|| $this->getLanguageId() === $this->values['languageid'] );
+			&& ( $this->values['.languageid'] === null || $this->getLanguageId() === null
+			|| $this->getLanguageId() === $this->values['.languageid'] );
 	}
 
 

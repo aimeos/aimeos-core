@@ -272,7 +272,7 @@ abstract class Base
 	 */
 	protected function createItemBase( array $values = [] )
 	{
-		$values['languageid'] = $this->languageId;
+		$values['.languageid'] = $this->languageId;
 		return new \Aimeos\MShop\Common\Item\Property\Standard( $this->prefix, $values );
 	}
 

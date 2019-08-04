@@ -813,8 +813,8 @@ class Standard
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [], array $propItems = [] )
 	{
-		$values['currencyid'] = $this->currencyId;
-		$values['precision'] = $this->precision;
+		$values['.currencyid'] = $this->currencyId;
+		$values['.precision'] = $this->precision;
 
 		if( !isset( $values['price.taxflag'] ) ) {
 			$values['price.taxflag'] = $this->taxflag;

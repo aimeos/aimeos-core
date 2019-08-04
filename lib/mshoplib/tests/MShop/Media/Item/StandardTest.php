@@ -32,7 +32,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'media.mtime' => '2011-01-01 00:00:02',
 			'media.ctime' => '2011-01-01 00:00:01',
 			'media.editor' => 'unitTestUser',
-			'languageid' => 'de',
+			'.languageid' => 'de',
 		);
 
 		$this->object = new \Aimeos\MShop\Media\Item\Standard( $this->values );
@@ -253,7 +253,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetNameProperties()
 	{
-		$values = ['media.value' => 'title', 'media.type' => 'name', 'languageid' => null];
+		$values = ['media.value' => 'title', 'media.type' => 'name', '.languageid' => null];
 		$propItems = [new \Aimeos\MShop\Common\Item\Property\Standard( 'media.', $values )];
 		$object = new \Aimeos\MShop\Media\Item\Standard( $this->values, [], [], $propItems );
 

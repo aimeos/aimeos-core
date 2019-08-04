@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'price.mtime' => '2011-01-01 00:00:02',
 			'price.ctime' => '2011-01-01 00:00:01',
 			'price.editor' => 'unitTestUser',
-			'currencyid' => 'EUR',
+			'.currencyid' => 'EUR',
 		);
 
 		$this->object = new \Aimeos\MShop\Price\Item\Standard( $this->values );

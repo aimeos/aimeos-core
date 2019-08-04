@@ -730,7 +730,7 @@ class Standard
 	 */
 	protected function createItemBase( array $values = [] )
 	{
-		$values['languageid'] = $this->languageId;
+		$values['.languageid'] = $this->languageId;
 		return new \Aimeos\MShop\Tag\Item\Standard( $values );
 	}
 }
