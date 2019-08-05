@@ -36,7 +36,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mtagty."id" AS "tag.type.id", mtagty."siteid" AS "tag.type.siteid",
+						SELECT DISTINCT mtagty."id" AS "tag.type.id", mtagty."siteid" AS "tag.type.siteid",
 							mtagty."code" AS "tag.type.code", mtagty."domain" AS "tag.type.domain",
 							mtagty."label" AS "tag.type.label", mtagty."status" AS "tag.type.status",
 							mtagty."mtime" AS "tag.type.mtime", mtagty."editor" AS "tag.type.editor",
@@ -45,9 +45,6 @@ return array(
 						FROM "mshop_tag_type" mtagty
 						:joins
 						WHERE :cond
-						GROUP BY mtagty."id", mtagty."siteid", mtagty."code", mtagty."domain",
-							mtagty."label", mtagty."status", mtagty."mtime", mtagty."editor",
-							mtagty."ctime", mtagty."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -102,7 +99,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mtag."id" AS "tag.id", mtag."siteid" AS "tag.siteid",
+					SELECT DISTINCT mtag."id" AS "tag.id", mtag."siteid" AS "tag.siteid",
 						mtag."type" AS "tag.type", mtag."langid" AS "tag.languageid",
 						mtag."domain" AS "tag.domain", mtag."label" AS "tag.label",
 						mtag."mtime" AS "tag.mtime", mtag."editor" AS "tag.editor",
@@ -110,9 +107,6 @@ return array(
 					FROM "mshop_tag" AS mtag
 					:joins
 					WHERE :cond
-					GROUP BY mtag."id", mtag."siteid", mtag."type", mtag."langid",
-						mtag."domain", mtag."label", mtag."mtime", mtag."editor", mtag."ctime"
-						/*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

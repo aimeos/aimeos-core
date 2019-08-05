@@ -37,7 +37,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT mprolity."id" AS "product.lists.type.id", mprolity."siteid" AS "product.lists.type.siteid",
+							SELECT DISTINCT mprolity."id" AS "product.lists.type.id", mprolity."siteid" AS "product.lists.type.siteid",
 								mprolity."code" AS "product.lists.type.code", mprolity."domain" AS "product.lists.type.domain",
 								mprolity."label" AS "product.lists.type.label", mprolity."status" AS "product.lists.type.status",
 								mprolity."mtime" AS "product.lists.type.mtime", mprolity."editor" AS "product.lists.type.editor",
@@ -46,9 +46,6 @@ return array(
 							FROM "mshop_product_list_type" AS mprolity
 							:joins
 							WHERE :cond
-							GROUP BY mprolity."id", mprolity."siteid", mprolity."code", mprolity."domain",
-								mprolity."label", mprolity."status", mprolity."mtime", mprolity."editor",
-								mprolity."ctime", mprolity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -188,7 +185,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT mproprty."id" AS "product.property.type.id", mproprty."siteid" AS "product.property.type.siteid",
+							SELECT DISTINCT mproprty."id" AS "product.property.type.id", mproprty."siteid" AS "product.property.type.siteid",
 								mproprty."code" AS "product.property.type.code", mproprty."domain" AS "product.property.type.domain",
 								mproprty."label" AS "product.property.type.label", mproprty."status" AS "product.property.type.status",
 								mproprty."mtime" AS "product.property.type.mtime", mproprty."editor" AS "product.property.type.editor",
@@ -197,9 +194,6 @@ return array(
 							FROM "mshop_product_property_type" mproprty
 							:joins
 							WHERE :cond
-							GROUP BY mproprty."id", mproprty."siteid", mproprty."code", mproprty."domain",
-								mproprty."label", mproprty."status", mproprty."mtime", mproprty."editor",
-								mproprty."ctime", mproprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -254,7 +248,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mpropr."id" AS "product.property.id", mpropr."parentid" AS "product.property.parentid",
+						SELECT DISTINCT mpropr."id" AS "product.property.id", mpropr."parentid" AS "product.property.parentid",
 							mpropr."siteid" AS "product.property.siteid", mpropr."type" AS "product.property.type",
 							mpropr."langid" AS "product.property.languageid", mpropr."value" AS "product.property.value",
 							mpropr."mtime" AS "product.property.mtime", mpropr."editor" AS "product.property.editor",
@@ -262,9 +256,6 @@ return array(
 						FROM "mshop_product_property" AS mpropr
 						:joins
 						WHERE :cond
-						GROUP BY mpropr."id", mpropr."parentid", mpropr."siteid", mpropr."type",
-							mpropr."langid", mpropr."value", mpropr."mtime", mpropr."editor",
-							mpropr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -320,7 +311,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mproty."id" AS "product.type.id", mproty."siteid" AS "product.type.siteid",
+						SELECT DISTINCT mproty."id" AS "product.type.id", mproty."siteid" AS "product.type.siteid",
 							mproty."code" AS "product.type.code", mproty."domain" AS "product.type.domain",
 							mproty."label" AS "product.type.label", mproty."status" AS "product.type.status",
 							mproty."mtime" AS "product.type.mtime", mproty."editor" AS "product.type.editor",
@@ -329,9 +320,6 @@ return array(
 						FROM "mshop_product_type" AS mproty
 						:joins
 						WHERE :cond
-						GROUP BY mproty."id", mproty."siteid", mproty."code", mproty."domain",
-							mproty."label", mproty."status", mproty."mtime", mproty."editor",
-							mproty."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -386,7 +374,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
+					SELECT DISTINCT mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
 						mpro."type" AS "product.type", mpro."code" AS "product.code",
 						mpro."label" AS "product.label", mpro."config" AS "product.config",
 						mpro."start" AS "product.datestart", mpro."end" AS "product.dateend",
@@ -396,11 +384,6 @@ return array(
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
-					GROUP BY mpro."id", mpro."siteid", mpro."type", mpro."code",
-						mpro."label", mpro."config", mpro."start", mpro."end",
-						mpro."status", mpro."ctime", mpro."mtime", mpro."editor",
-						mpro."target"
-						/*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

@@ -36,7 +36,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT majob."id" AS "job.id", majob."siteid" AS "job.siteid",
+					SELECT DISTINCT majob."id" AS "job.id", majob."siteid" AS "job.siteid",
 						majob."label" AS "job.label", majob."method" AS "job.method",
 						majob."parameter" AS "job.parameter", majob."result" AS "job.result",
 						majob."status" AS "job.status", majob."editor" AS "job.editor",
@@ -45,9 +45,6 @@ return array(
 					FROM "madmin_job" AS majob
 					:joins
 					WHERE :cond
-					GROUP BY majob."id", majob."siteid", majob."label",
-						majob."method", majob."parameter", majob."result", majob."status",
-						majob."editor", majob."mtime", majob."ctime" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				',

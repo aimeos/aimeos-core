@@ -43,7 +43,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT msupad."id" AS "supplier.address.id", msupad."siteid" AS "supplier.address.siteid",
+						SELECT DISTINCT msupad."id" AS "supplier.address.id", msupad."siteid" AS "supplier.address.siteid",
 							msupad."parentid" AS "supplier.address.parentid", msupad."pos" AS "supplier.address.position",
 							msupad."company" AS "supplier.address.company", msupad."vatid" AS "supplier.address.vatid",
 							msupad."salutation" AS "supplier.address.salutation", msupad."title" AS "supplier.address.title",
@@ -60,14 +60,6 @@ return array(
 						FROM "mshop_supplier_address" AS msupad
 						:joins
 						WHERE :cond
-						GROUP BY msupad."id", msupad."siteid", msupad."parentid", msupad."pos",
-							msupad."company", msupad."vatid", msupad."salutation", msupad."title",
-							msupad."firstname", msupad."lastname", msupad."address1", msupad."address2",
-							msupad."address3", msupad."postal", msupad."city", msupad."state",
-							msupad."countryid", msupad."langid", msupad."telephone", msupad."email",
-							msupad."telefax", msupad."website", msupad."longitude", msupad."latitude",
-							msupad."mtime", msupad."ctime", msupad."editor"
-							/*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -205,7 +197,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT msupli."id" AS "supplier.lists.id", msupli."parentid" AS "supplier.lists.parentid",
+						SELECT DISTINCT msupli."id" AS "supplier.lists.id", msupli."parentid" AS "supplier.lists.parentid",
 							msupli."siteid" AS "supplier.lists.siteid", msupli."type" AS "supplier.lists.type",
 							msupli."domain" AS "supplier.lists.domain", msupli."refid" AS "supplier.lists.refid",
 							msupli."start" AS "supplier.lists.datestart", msupli."end" AS "supplier.lists.dateend",
@@ -216,10 +208,6 @@ return array(
 						FROM "mshop_supplier_list" AS msupli
 						:joins
 						WHERE :cond
-						GROUP BY msupli."id", msupli."parentid", msupli."siteid", msupli."type",
-							msupli."domain", msupli."refid", msupli."start", msupli."end",
-							msupli."config", msupli."pos", msupli."status", msupli."mtime",
-							msupli."editor", msupli."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -273,7 +261,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT msup."id" AS "supplier.id", msup."siteid" AS "supplier.siteid",
+					SELECT DISTINCT msup."id" AS "supplier.id", msup."siteid" AS "supplier.siteid",
 						msup."code" AS "supplier.code", msup."label" AS "supplier.label",
 						msup."status" AS "supplier.status", msup."mtime" AS "supplier.mtime",
 						msup."editor" AS "supplier.editor", msup."ctime" AS "supplier.ctime",
@@ -281,9 +269,6 @@ return array(
 					FROM "mshop_supplier" AS msup
 					:joins
 					WHERE :cond
-					GROUP BY msup."id", msup."siteid", msup."code", msup."label",
-						msup."status", msup."mtime", msup."editor", msup."ctime"
-						/*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

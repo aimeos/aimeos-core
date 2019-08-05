@@ -37,7 +37,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT mmedlity."id" AS "media.lists.type.id", mmedlity."siteid" AS "media.lists.type.siteid",
+							SELECT DISTINCT mmedlity."id" AS "media.lists.type.id", mmedlity."siteid" AS "media.lists.type.siteid",
 								mmedlity."code" AS "media.lists.type.code", mmedlity."domain" AS "media.lists.type.domain",
 								mmedlity."label" AS "media.lists.type.label", mmedlity."status" AS "media.lists.type.status",
 								mmedlity."mtime" AS "media.lists.type.mtime", mmedlity."editor" AS "media.lists.type.editor",
@@ -46,9 +46,6 @@ return array(
 							FROM "mshop_media_list_type" AS mmedlity
 							:joins
 							WHERE :cond
-							GROUP BY mmedlity."id", mmedlity."siteid", mmedlity."code", mmedlity."domain",
-								mmedlity."label", mmedlity."status", mmedlity."mtime", mmedlity."editor",
-								mmedlity."ctime", mmedlity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -189,7 +186,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT mmedprty."id" AS "media.property.type.id", mmedprty."siteid" AS "media.property.type.siteid",
+							SELECT DISTINCT mmedprty."id" AS "media.property.type.id", mmedprty."siteid" AS "media.property.type.siteid",
 								mmedprty."code" AS "media.property.type.code", mmedprty."domain" AS "media.property.type.domain",
 								mmedprty."label" AS "media.property.type.label", mmedprty."status" AS "media.property.type.status",
 								mmedprty."mtime" AS "media.property.type.mtime", mmedprty."editor" AS "media.property.type.editor",
@@ -198,9 +195,6 @@ return array(
 							FROM "mshop_media_property_type" mmedprty
 							:joins
 							WHERE :cond
-							GROUP BY mmedprty."id", mmedprty."siteid", mmedprty."code", mmedprty."domain",
-								mmedprty."label", mmedprty."status", mmedprty."mtime", mmedprty."editor",
-								mmedprty."ctime", mmedprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -255,7 +249,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mmedpr."id" AS "media.property.id", mmedpr."parentid" AS "media.property.parentid",
+						SELECT DISTINCT mmedpr."id" AS "media.property.id", mmedpr."parentid" AS "media.property.parentid",
 							mmedpr."siteid" AS "media.property.siteid", mmedpr."type" AS "media.property.type",
 							mmedpr."langid" AS "media.property.languageid", mmedpr."value" AS "media.property.value",
 							mmedpr."mtime" AS "media.property.mtime", mmedpr."editor" AS "media.property.editor",
@@ -263,9 +257,6 @@ return array(
 						FROM "mshop_media_property" AS mmedpr
 						:joins
 						WHERE :cond
-						GROUP BY mmedpr."id", mmedpr."parentid", mmedpr."siteid", mmedpr."type",
-							mmedpr."langid", mmedpr."value", mmedpr."mtime", mmedpr."editor",
-							mmedpr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -321,7 +312,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mmedty."id" AS "media.type.id", mmedty."siteid" AS "media.type.siteid",
+						SELECT DISTINCT mmedty."id" AS "media.type.id", mmedty."siteid" AS "media.type.siteid",
 							mmedty."code" AS "media.type.code", mmedty."domain" AS "media.type.domain",
 							mmedty."label" AS "media.type.label", mmedty."status" AS "media.type.status",
 							mmedty."mtime" AS "media.type.mtime", mmedty."editor" AS "media.type.editor",
@@ -330,9 +321,6 @@ return array(
 						FROM "mshop_media_type" mmedty
 						:joins
 						WHERE :cond
-						GROUP BY mmedty."id", mmedty."siteid", mmedty."code", mmedty."domain",
-							mmedty."label", mmedty."status", mmedty."mtime", mmedty."editor",
-							mmedty."ctime", mmedty."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -387,7 +375,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mmed."id" AS "media.id", mmed."siteid" AS "media.siteid",
+					SELECT DISTINCT mmed."id" AS "media.id", mmed."siteid" AS "media.siteid",
 						mmed."langid" AS "media.languageid", mmed."type" AS "media.type",
 						mmed."link" AS "media.url", mmed."label" AS "media.label",
 						mmed."status" AS "media.status", mmed."mimetype" AS "media.mimetype",
@@ -397,10 +385,6 @@ return array(
 					FROM "mshop_media" AS mmed
 					:joins
 					WHERE :cond
-					GROUP BY mmed."id", mmed."siteid", mmed."langid", mmed."type",
-						mmed."link", mmed."label", mmed."status", mmed."mimetype",
-						mmed."domain", mmed."preview", mmed."mtime", mmed."editor",
-						mmed."ctime" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

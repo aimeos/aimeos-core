@@ -34,16 +34,13 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT malog."id" AS "log.id", malog."siteid" AS "log.siteid",
+					SELECT DISTINCT malog."id" AS "log.id", malog."siteid" AS "log.siteid",
 						malog."facility" AS "log.facility", malog."timestamp" AS "log.timestamp",
 						malog."priority" AS "log.priority", malog."message" AS "log.message",
 						malog."request" AS "log.request", malog.*
 					FROM "madmin_log" AS malog
 					:joins
 					WHERE :cond
-					GROUP BY malog."id", malog."siteid", malog."facility",
-						malog."timestamp", malog."priority", malog."message",
-						malog."request" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 			',

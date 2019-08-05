@@ -43,7 +43,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mpluty."id" AS "plugin.type.id", mpluty."siteid" AS "plugin.type.siteid",
+						SELECT DISTINCT mpluty."id" AS "plugin.type.id", mpluty."siteid" AS "plugin.type.siteid",
 							mpluty."code" AS "plugin.type.code", mpluty."domain" AS "plugin.type.domain",
 							mpluty."label" AS "plugin.type.label", mpluty."status" AS "plugin.type.status",
 							mpluty."mtime" AS "plugin.type.mtime", mpluty."editor" AS "plugin.type.editor",
@@ -52,9 +52,6 @@ return array(
 						FROM "mshop_plugin_type" mpluty
 						:joins
 						WHERE :cond
-						GROUP BY mpluty."id", mpluty."siteid", mpluty."code", mpluty."domain",
-							mpluty."label", mpluty."status", mpluty."mtime", mpluty."editor",
-							mpluty."ctime", mpluty."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -109,7 +106,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mplu."id" AS "plugin.id", mplu."siteid" AS "plugin.siteid",
+					SELECT DISTINCT mplu."id" AS "plugin.id", mplu."siteid" AS "plugin.siteid",
 						mplu."type" AS "plugin.type", mplu."label" AS "plugin.label",
 						mplu."provider" AS "plugin.provider", mplu."config" AS "plugin.config",
 						mplu."pos" AS "plugin.position", mplu."status" AS "plugin.status",
@@ -118,9 +115,6 @@ return array(
 					FROM "mshop_plugin" mplu
 					:joins
 					WHERE :cond
-					GROUP BY mplu."id", mplu."siteid", mplu."type", mplu."label",
-						mplu."provider", mplu."config", mplu."pos", mplu."status",
-						mplu."mtime", mplu."editor", mplu."ctime" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

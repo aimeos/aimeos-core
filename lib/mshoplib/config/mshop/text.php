@@ -37,7 +37,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT mtexlity."id" AS "text.lists.type.id", mtexlity."siteid" AS "text.lists.type.siteid",
+							SELECT DISTINCT mtexlity."id" AS "text.lists.type.id", mtexlity."siteid" AS "text.lists.type.siteid",
 								mtexlity."code" AS "text.lists.type.code", mtexlity."domain" AS "text.lists.type.domain",
 								mtexlity."label" AS "text.lists.type.label", mtexlity."status" AS "text.lists.type.status",
 								mtexlity."mtime" AS "text.lists.type.mtime", mtexlity."editor" AS "text.lists.type.editor",
@@ -46,9 +46,6 @@ return array(
 							FROM "mshop_text_list_type" AS mtexlity
 							:joins
 							WHERE :cond
-							GROUP BY mtexlity."id", mtexlity."siteid", mtexlity."code", mtexlity."domain",
-								mtexlity."label", mtexlity."status", mtexlity."mtime", mtexlity."editor",
-								mtexlity."ctime", mtexlity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -118,7 +115,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mtexli."id" AS "text.lists.id", mtexli."parentid" AS "text.lists.parentid",
+						SELECT DISTINCT mtexli."id" AS "text.lists.id", mtexli."parentid" AS "text.lists.parentid",
 							mtexli."siteid" AS "text.lists.siteid", mtexli."type" AS "text.lists.type",
 							mtexli."domain" AS "text.lists.domain", mtexli."refid" AS "text.lists.refid",
 							mtexli."start" AS "text.lists.datestart", mtexli."end" AS "text.lists.dateend",
@@ -129,10 +126,6 @@ return array(
 						FROM "mshop_text_list" AS mtexli
 						:joins
 						WHERE :cond
-						GROUP BY mtexli."id", mtexli."parentid", mtexli."siteid", mtexli."type",
-							mtexli."domain", mtexli."refid", mtexli."start", mtexli."end",
-							mtexli."config", mtexli."pos", mtexli."status", mtexli."mtime",
-							mtexli."editor", mtexli."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -188,7 +181,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mtexty."id" AS "text.type.id", mtexty."siteid" AS "text.type.siteid",
+						SELECT DISTINCT mtexty."id" AS "text.type.id", mtexty."siteid" AS "text.type.siteid",
 							mtexty."code" AS "text.type.code", mtexty."domain" AS "text.type.domain",
 							mtexty."label" AS "text.type.label", mtexty."status" AS "text.type.status",
 							mtexty."mtime" AS "text.type.mtime", mtexty."editor" AS "text.type.editor",
@@ -197,9 +190,6 @@ return array(
 						FROM "mshop_text_type" mtexty
 						:joins
 						WHERE :cond
-						GROUP BY mtexty."id", mtexty."siteid", mtexty."code", mtexty."domain",
-							mtexty."label", mtexty."status", mtexty."mtime", mtexty."editor",
-							mtexty."ctime", mtexty."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -254,7 +244,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mtex."id" AS "text.id", mtex."siteid" AS "text.siteid",
+					SELECT DISTINCT mtex."id" AS "text.id", mtex."siteid" AS "text.siteid",
 						mtex."langid" AS "text.languageid",	mtex."type" AS "text.type",
 						mtex."domain" AS "text.domain", mtex."label" AS "text.label",
 						mtex."content" AS "text.content", mtex."status" AS "text.status",
@@ -263,9 +253,6 @@ return array(
 					FROM "mshop_text" AS mtex
 					:joins
 					WHERE :cond
-					GROUP BY mtex."id", mtex."siteid", mtex."langid",	mtex."type",
-						mtex."domain", mtex."label", mtex."content", mtex."status",
-						mtex."mtime", mtex."editor", mtex."ctime" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

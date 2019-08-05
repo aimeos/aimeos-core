@@ -43,7 +43,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mcusad."id" AS "customer.address.id", mcusad."siteid" AS "customer.address.siteid",
+						SELECT DISTINCT mcusad."id" AS "customer.address.id", mcusad."siteid" AS "customer.address.siteid",
 							mcusad."parentid" AS "customer.address.parentid", mcusad."pos" AS "customer.address.position",
 							mcusad."company" AS "customer.address.company", mcusad."vatid" AS "customer.address.vatid",
 							mcusad."salutation" AS "customer.address.salutation", mcusad."title" AS "customer.address.title",
@@ -60,14 +60,6 @@ return array(
 						FROM "mshop_customer_address" AS mcusad
 						:joins
 						WHERE :cond
-						GROUP BY mcusad."id", mcusad."siteid", mcusad."parentid", mcusad."pos",
-							mcusad."company", mcusad."vatid", mcusad."salutation", mcusad."title",
-							mcusad."firstname", mcusad."lastname", mcusad."address1", mcusad."address2",
-							mcusad."address3", mcusad."postal", mcusad."city", mcusad."state",
-							mcusad."countryid", mcusad."langid", mcusad."telephone", mcusad."email",
-							mcusad."telefax", mcusad."website", mcusad."longitude", mcusad."latitude",
-							mcusad."mtime", mcusad."editor", mcusad."ctime"
-							/*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -121,15 +113,13 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mcusgr."id" AS "customer.group.id", mcusgr."siteid" AS "customer.group.siteid",
+						SELECT DISTINCT mcusgr."id" AS "customer.group.id", mcusgr."siteid" AS "customer.group.siteid",
 							mcusgr."code" AS "customer.group.code", mcusgr."label" AS "customer.group.label",
 							mcusgr."mtime" AS "customer.group.mtime", mcusgr."editor" AS "customer.group.editor",
 							mcusgr."ctime" AS "customer.group.ctime", mcusgr.*
 						FROM "mshop_customer_group" AS mcusgr
 						:joins
 						WHERE :cond
-						GROUP BY mcusgr."id", mcusgr."siteid", mcusgr."code", mcusgr."label",
-							mcusgr."mtime", mcusgr."editor", mcusgr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -186,7 +176,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT mcuslity."id" AS "customer.lists.type.id", mcuslity."siteid" AS "customer.lists.type.siteid",
+							SELECT DISTINCT mcuslity."id" AS "customer.lists.type.id", mcuslity."siteid" AS "customer.lists.type.siteid",
 								mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
 								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
 								mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
@@ -195,9 +185,6 @@ return array(
 							FROM "mshop_customer_list_type" AS mcuslity
 							:joins
 							WHERE :cond
-							GROUP BY mcuslity."id", mcuslity."siteid", mcuslity."code", mcuslity."domain",
-								mcuslity."label", mcuslity."status", mcuslity."mtime", mcuslity."editor",
-								mcuslity."ctime", mcuslity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -338,7 +325,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT mcusprty."id" AS "customer.property.type.id", mcusprty."siteid" AS "customer.property.type.siteid",
+							SELECT DISTINCT mcusprty."id" AS "customer.property.type.id", mcusprty."siteid" AS "customer.property.type.siteid",
 								mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
 								mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
 								mcusprty."mtime" AS "customer.property.type.mtime", mcusprty."editor" AS "customer.property.type.editor",
@@ -347,9 +334,6 @@ return array(
 							FROM "mshop_customer_property_type" mcusprty
 							:joins
 							WHERE :cond
-							GROUP BY mcusprty."id", mcusprty."siteid", mcusprty."code", mcusprty."domain",
-								mcusprty."label", mcusprty."status", mcusprty."mtime", mcusprty."editor",
-								mcusprty."ctime", mcusprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -404,7 +388,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mcuspr."id" AS "customer.property.id", mcuspr."parentid" AS "customer.property.parentid",
+						SELECT DISTINCT mcuspr."id" AS "customer.property.id", mcuspr."parentid" AS "customer.property.parentid",
 							mcuspr."siteid" AS "customer.property.siteid", mcuspr."type" AS "customer.property.type",
 							mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
 							mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
@@ -412,9 +396,6 @@ return array(
 						FROM "mshop_customer_property" AS mcuspr
 						:joins
 						WHERE :cond
-						GROUP BY mcuspr."id", mcuspr."parentid", mcuspr."siteid", mcuspr."type",
-							mcuspr."langid", mcuspr."value", mcuspr."mtime", mcuspr."editor",
-							mcuspr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -477,7 +458,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
+					SELECT DISTINCT mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
 						mcus."label" AS "customer.label", mcus."code" AS "customer.code",
 						mcus."company" AS "customer.company", mcus."vatid" AS "customer.vatid",
 						mcus."salutation" AS "customer.salutation", mcus."title" AS "customer.title",
@@ -496,15 +477,6 @@ return array(
 					FROM "mshop_customer" AS mcus
 					:joins
 					WHERE :cond
-					GROUP BY mcus."id", mcus."siteid", mcus."label", mcus."code",
-						mcus."company", mcus."vatid", mcus."salutation", mcus."title",
-						mcus."firstname", mcus."lastname", mcus."address1", mcus."address2",
-						mcus."address3", mcus."postal", mcus."city", mcus."state",
-						mcus."countryid", mcus."langid", mcus."telephone", mcus."email",
-						mcus."telefax", mcus."website", mcus."longitude", mcus."latitude",
-						mcus."birthday", mcus."status", mcus."vdate", mcus."password",
-						mcus."ctime", mcus."mtime", mcus."editor"
-						/*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

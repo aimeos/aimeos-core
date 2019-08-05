@@ -37,7 +37,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT mserlity."id" AS "service.lists.type.id", mserlity."siteid" AS "service.lists.type.siteid",
+							SELECT DISTINCT mserlity."id" AS "service.lists.type.id", mserlity."siteid" AS "service.lists.type.siteid",
 								mserlity."code" AS "service.lists.type.code", mserlity."domain" AS "service.lists.type.domain",
 								mserlity."label" AS "service.lists.type.label", mserlity."status" AS "service.lists.type.status",
 								mserlity."mtime" AS "service.lists.type.mtime", mserlity."editor" AS "service.lists.type.editor",
@@ -46,9 +46,6 @@ return array(
 							FROM "mshop_service_list_type" AS mserlity
 							:joins
 							WHERE :cond
-							GROUP BY mserlity."id", mserlity."siteid", mserlity."code", mserlity."domain",
-								mserlity."label", mserlity."status", mserlity."mtime", mserlity."editor",
-								mserlity."ctime", mserlity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -188,7 +185,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mserty."id" AS "service.type.id", mserty."siteid" AS "service.type.siteid",
+						SELECT DISTINCT mserty."id" AS "service.type.id", mserty."siteid" AS "service.type.siteid",
 							mserty."domain" AS "service.type.domain", mserty."code" AS "service.type.code",
 							mserty."label" AS "service.type.label", mserty."status" AS "service.type.status",
 							mserty."mtime" AS "service.type.mtime", mserty."editor" AS "service.type.editor",
@@ -197,9 +194,6 @@ return array(
 						FROM "mshop_service_type" AS mserty
 						:joins
 						WHERE :cond
-						GROUP BY mserty."id", mserty."siteid", mserty."domain", mserty."code",
-							mserty."label", mserty."status", mserty."mtime", mserty."editor",
-							mserty."ctime", mserty."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -254,7 +248,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mser."id" AS "service.id", mser."siteid" AS "service.siteid",
+					SELECT DISTINCT mser."id" AS "service.id", mser."siteid" AS "service.siteid",
 						mser."pos" AS "service.position", mser."type" AS "service.type",
 						mser."code" AS "service.code", mser."label" AS "service.label",
 						mser."provider" AS "service.provider", mser."config" AS "service.config",
@@ -265,11 +259,6 @@ return array(
 					FROM "mshop_service" AS mser
 					:joins
 					WHERE :cond
-					GROUP BY mser."id", mser."siteid", mser."pos", mser."type",
-						mser."code", mser."label", mser."provider", mser."config",
-						mser."start", mser."end", mser."status",
-						mser."mtime", mser."ctime", mser."editor"
-						/*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

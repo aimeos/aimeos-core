@@ -36,7 +36,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mcouco."id" AS "coupon.code.id", mcouco."parentid" AS "coupon.code.parentid",
+						SELECT DISTINCT mcouco."id" AS "coupon.code.id", mcouco."parentid" AS "coupon.code.parentid",
 							mcouco."siteid" AS "coupon.code.siteid", mcouco."code" AS "coupon.code.code",
 							mcouco."start" AS "coupon.code.datestart", mcouco."end" AS "coupon.code.dateend",
 							mcouco."count" AS "coupon.code.count", mcouco."ref" AS "coupon.code.ref",
@@ -45,9 +45,6 @@ return array(
 						FROM "mshop_coupon_code" AS mcouco
 						:joins
 						WHERE :cond
-						GROUP BY mcouco."id", mcouco."parentid", mcouco."siteid", mcouco."code",
-							mcouco."start", mcouco."end", mcouco."count", mcouco."ref", mcouco."mtime",
-							mcouco."editor", mcouco."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -109,7 +106,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mcou."id" AS "coupon.id", mcou."siteid" AS "coupon.siteid",
+					SELECT DISTINCT mcou."id" AS "coupon.id", mcou."siteid" AS "coupon.siteid",
 						mcou."label" AS "coupon.label", mcou."provider" AS "coupon.provider",
 						mcou."start" AS "coupon.datestart", mcou."end" AS "coupon.dateend",
 						mcou."config" AS "coupon.config", mcou."status" AS "coupon.status",
@@ -118,9 +115,6 @@ return array(
 					FROM "mshop_coupon" AS mcou
 					:joins
 					WHERE :cond
-					GROUP BY mcou."id", mcou."siteid", mcou."label", mcou."provider",
-						mcou."start", mcou."end", mcou."config", mcou."status",
-						mcou."mtime", mcou."editor", mcou."ctime" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

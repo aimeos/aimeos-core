@@ -37,7 +37,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT mprility."id" AS "price.lists.type.id", mprility."siteid" AS "price.lists.type.siteid",
+							SELECT DISTINCT mprility."id" AS "price.lists.type.id", mprility."siteid" AS "price.lists.type.siteid",
 								mprility."code" AS "price.lists.type.code", mprility."domain" AS "price.lists.type.domain",
 								mprility."label" AS "price.lists.type.label", mprility."status" AS "price.lists.type.status",
 								mprility."mtime" AS "price.lists.type.mtime", mprility."editor" AS "price.lists.type.editor",
@@ -46,9 +46,6 @@ return array(
 							FROM "mshop_price_list_type" AS mprility
 							:joins
 							WHERE :cond
-							GROUP BY mprility."id", mprility."siteid", mprility."code", mprility."domain",
-								mprility."label", mprility."status", mprility."mtime", mprility."editor",
-								mprility."ctime", mprility."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -189,7 +186,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT mpriprty."id" AS "price.property.type.id", mpriprty."siteid" AS "price.property.type.siteid",
+							SELECT DISTINCT mpriprty."id" AS "price.property.type.id", mpriprty."siteid" AS "price.property.type.siteid",
 								mpriprty."code" AS "price.property.type.code", mpriprty."domain" AS "price.property.type.domain",
 								mpriprty."label" AS "price.property.type.label", mpriprty."status" AS "price.property.type.status",
 								mpriprty."mtime" AS "price.property.type.mtime", mpriprty."editor" AS "price.property.type.editor",
@@ -198,9 +195,6 @@ return array(
 							FROM "mshop_price_property_type" mpriprty
 							:joins
 							WHERE :cond
-							GROUP BY mpriprty."id", mpriprty."siteid", mpriprty."code", mpriprty."domain",
-								mpriprty."label", mpriprty."status", mpriprty."mtime", mpriprty."editor",
-								mpriprty."ctime", mpriprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -255,7 +249,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mpripr."id" AS "price.property.id", mpripr."parentid" AS "price.property.parentid",
+						SELECT DISTINCT mpripr."id" AS "price.property.id", mpripr."parentid" AS "price.property.parentid",
 							mpripr."siteid" AS "price.property.siteid", mpripr."type" AS "price.property.type",
 							mpripr."langid" AS "price.property.languageid", mpripr."value" AS "price.property.value",
 							mpripr."mtime" AS "price.property.mtime", mpripr."editor" AS "price.property.editor",
@@ -263,9 +257,6 @@ return array(
 						FROM "mshop_price_property" AS mpripr
 						:joins
 						WHERE :cond
-						GROUP BY mpripr."id", mpripr."parentid", mpripr."siteid", mpripr."type",
-							mpripr."langid", mpripr."value", mpripr."mtime", mpripr."editor",
-							mpripr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -321,7 +312,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mprity."id" AS "price.type.id", mprity."siteid" AS "price.type.siteid",
+						SELECT DISTINCT mprity."id" AS "price.type.id", mprity."siteid" AS "price.type.siteid",
 							mprity."code" AS "price.type.code", mprity."domain" AS "price.type.domain",
 							mprity."label" AS "price.type.label", mprity."status" AS "price.type.status",
 							mprity."mtime" AS "price.type.mtime", mprity."editor" AS "price.type.editor",
@@ -330,9 +321,6 @@ return array(
 						FROM "mshop_price_type" AS mprity
 						:joins
 						WHERE :cond
-						GROUP BY mprity."id", mprity."siteid", mprity."code", mprity."domain",
-							mprity."label", mprity."status", mprity."mtime", mprity."editor",
-							mprity."ctime", mprity."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -389,7 +377,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mpri."id" AS "price.id", mpri."siteid" AS "price.siteid",
+					SELECT DISTINCT mpri."id" AS "price.id", mpri."siteid" AS "price.siteid",
 						mpri."type" AS "price.type", mpri."currencyid" AS "price.currencyid",
 						mpri."domain" AS "price.domain", mpri."label" AS "price.label",
 						mpri."quantity" AS "price.quantity", mpri."value" AS "price.value",
@@ -400,10 +388,6 @@ return array(
 					FROM "mshop_price" AS mpri
 					:joins
 					WHERE :cond
-					GROUP BY mpri."id", mpri."siteid", mpri."type", mpri."currencyid",
-						mpri."domain", mpri."label", mpri."quantity", mpri."value",
-						mpri."costs", mpri."rebate", mpri."taxrate", mpri."status",
-						mpri."mtime", mpri."editor", mpri."ctime" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

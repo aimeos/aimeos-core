@@ -37,7 +37,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT mcatlity."id" AS "catalog.lists.type.id", mcatlity."siteid" AS "catalog.lists.type.siteid",
+							SELECT DISTINCT mcatlity."id" AS "catalog.lists.type.id", mcatlity."siteid" AS "catalog.lists.type.siteid",
 								mcatlity."code" AS "catalog.lists.type.code", mcatlity."domain" AS "catalog.lists.type.domain",
 								mcatlity."label" AS "catalog.lists.type.label", mcatlity."mtime" AS "catalog.lists.type.mtime",
 								mcatlity."editor" AS "catalog.lists.type.editor", mcatlity."ctime" AS "catalog.lists.type.ctime",
@@ -46,9 +46,6 @@ return array(
 							FROM "mshop_catalog_list_type" AS mcatlity
 							:joins
 							WHERE :cond
-							GROUP BY mcatlity."id", mcatlity."siteid", mcatlity."code", mcatlity."domain",
-								mcatlity."label", mcatlity."mtime", mcatlity."editor", mcatlity."ctime",
-								mcatlity."status", mcatlity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -245,7 +242,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mcat."id", mcat."code", mcat."label", mcat."config",
+					SELECT DISTINCT mcat."id", mcat."code", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
 						mcat."mtime", mcat."editor", mcat."ctime", mcat."target",
@@ -253,16 +250,12 @@ return array(
 					FROM "mshop_catalog" AS mcat
 					WHERE mcat."siteid" = :siteid AND mcat."nleft" >= ?
 						AND mcat."nright" <= ? AND :cond
-					GROUP BY mcat."id", mcat."code", mcat."label", mcat."config",
-						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
-						mcat."nleft", mcat."nright", mcat."mtime", mcat."editor",
-						mcat."ctime", mcat."target"
 					ORDER BY :order
 				'
 			),
 			'search-item' => array(
 				'ansi' => '
-					SELECT mcat."id", mcat."code", mcat."label", mcat."config",
+					SELECT DISTINCT mcat."id", mcat."code", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
 						mcat."mtime", mcat."editor", mcat."ctime", mcat."target",
@@ -270,11 +263,6 @@ return array(
 					FROM "mshop_catalog" AS mcat
 					:joins
 					WHERE :cond
-					GROUP BY mcat."id", mcat."code", mcat."label", mcat."config",
-						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
-						mcat."nleft", mcat."nright", mcat."mtime", mcat."editor",
-						mcat."ctime", mcat."target"
-						/*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

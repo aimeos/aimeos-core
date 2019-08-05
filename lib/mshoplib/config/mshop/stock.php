@@ -36,7 +36,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mstoty."id" AS "stock.type.id", mstoty."siteid" AS "stock.type.siteid",
+						SELECT DISTINCT mstoty."id" AS "stock.type.id", mstoty."siteid" AS "stock.type.siteid",
 							mstoty."code" AS "stock.type.code", mstoty."domain" AS "stock.type.domain",
 							mstoty."label" AS "stock.type.label", mstoty."status" AS "stock.type.status",
 							mstoty."mtime" AS "stock.type.mtime", mstoty."editor" AS "stock.type.editor",
@@ -45,9 +45,6 @@ return array(
 						FROM "mshop_stock_type" mstoty
 						:joins
 						WHERE :cond
-						GROUP BY mstoty."id", mstoty."siteid", mstoty."code", mstoty."domain",
-							mstoty."label", mstoty."status", mstoty."mtime", mstoty."editor",
-							mstoty."ctime", mstoty."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -102,7 +99,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT msto."id" AS "stock.id", msto."productcode" AS "stock.productcode",
+					SELECT DISTINCT msto."id" AS "stock.id", msto."productcode" AS "stock.productcode",
 						msto."siteid" AS "stock.siteid", msto."type" AS "stock.type",
 						msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.backdate",
 						msto."timeframe" AS "stock.timeframe", msto."mtime" AS "stock.mtime",
@@ -111,9 +108,6 @@ return array(
 					FROM "mshop_stock" AS msto
 					:joins
 					WHERE :cond
-					GROUP BY msto."id", msto."productcode", msto."siteid", msto."type",
-						msto."stocklevel", msto."backdate", msto."timeframe", msto."mtime",
-						msto."editor", msto."ctime" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

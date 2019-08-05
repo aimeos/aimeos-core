@@ -37,7 +37,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT mattlity."id" AS "attribute.lists.type.id", mattlity."siteid" AS "attribute.lists.type.siteid",
+							SELECT DISTINCT mattlity."id" AS "attribute.lists.type.id", mattlity."siteid" AS "attribute.lists.type.siteid",
 								mattlity."code" AS "attribute.lists.type.code", mattlity."domain" AS "attribute.lists.type.domain",
 								mattlity."label" AS "attribute.lists.type.label", mattlity."status" AS "attribute.lists.type.status",
 								mattlity."mtime" AS "attribute.lists.type.mtime", mattlity."ctime" AS "attribute.lists.type.ctime",
@@ -46,9 +46,6 @@ return array(
 							FROM "mshop_attribute_list_type" AS mattlity
 							:joins
 							WHERE :cond
-							GROUP BY mattlity."id", mattlity."siteid", mattlity."code", mattlity."domain",
-								mattlity."label", mattlity."status", mattlity."mtime", mattlity."ctime",
-								mattlity."editor", mattlity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -189,7 +186,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT mattprty."id" AS "attribute.property.type.id", mattprty."siteid" AS "attribute.property.type.siteid",
+							SELECT DISTINCT mattprty."id" AS "attribute.property.type.id", mattprty."siteid" AS "attribute.property.type.siteid",
 								mattprty."code" AS "attribute.property.type.code", mattprty."domain" AS "attribute.property.type.domain",
 								mattprty."label" AS "attribute.property.type.label", mattprty."status" AS "attribute.property.type.status",
 								mattprty."mtime" AS "attribute.property.type.mtime", mattprty."editor" AS "attribute.property.type.editor",
@@ -198,9 +195,6 @@ return array(
 							FROM "mshop_attribute_property_type" mattprty
 							:joins
 							WHERE :cond
-							GROUP BY mattprty."id", mattprty."siteid", mattprty."code", mattprty."domain",
-								mattprty."label", mattprty."status", mattprty."mtime", mattprty."editor",
-								mattprty."ctime", mattprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -255,7 +249,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mattpr."id" AS "attribute.property.id", mattpr."parentid" AS "attribute.property.parentid",
+						SELECT DISTINCT mattpr."id" AS "attribute.property.id", mattpr."parentid" AS "attribute.property.parentid",
 							mattpr."siteid" AS "attribute.property.siteid", mattpr."type" AS "attribute.property.type",
 							mattpr."langid" AS "attribute.property.languageid", mattpr."value" AS "attribute.property.value",
 							mattpr."mtime" AS "attribute.property.mtime", mattpr."editor" AS "attribute.property.editor",
@@ -263,9 +257,6 @@ return array(
 						FROM "mshop_attribute_property" AS mattpr
 						:joins
 						WHERE :cond
-						GROUP BY mattpr."id", mattpr."parentid", mattpr."siteid", mattpr."type",
-							mattpr."langid", mattpr."value", mattpr."mtime", mattpr."editor",
-							mattpr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -321,7 +312,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mattty."id" AS "attribute.type.id", mattty."siteid" AS "attribute.type.siteid",
+						SELECT DISTINCT mattty."id" AS "attribute.type.id", mattty."siteid" AS "attribute.type.siteid",
 							mattty."code" AS "attribute.type.code", mattty."domain" AS "attribute.type.domain",
 							mattty."label" AS "attribute.type.label", mattty."status" AS "attribute.type.status",
 							mattty."mtime" AS "attribute.type.mtime", mattty."ctime" AS "attribute.type.ctime",
@@ -330,9 +321,6 @@ return array(
 						FROM "mshop_attribute_type" AS mattty
 						:joins
 						WHERE :cond
-						GROUP BY mattty."id", mattty."siteid", mattty."code", mattty."domain",
-							mattty."label", mattty."status", mattty."mtime", mattty."ctime",
-							mattty."editor", mattty."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -387,7 +375,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT matt."id" AS "attribute.id", matt."siteid" AS "attribute.siteid",
+					SELECT DISTINCT matt."id" AS "attribute.id", matt."siteid" AS "attribute.siteid",
 						matt."type" AS "attribute.type", matt."domain" AS "attribute.domain",
 						matt."code" AS "attribute.code", matt."status" AS "attribute.status",
 						matt."pos" AS "attribute.position", matt."label" AS "attribute.label",
@@ -396,9 +384,6 @@ return array(
 					FROM "mshop_attribute" AS matt
 					:joins
 					WHERE :cond
-					GROUP BY matt."id", matt."siteid", matt."type", matt."domain",
-						matt."code", matt."status", matt."pos", matt."label",
-						matt."mtime", matt."ctime", matt."editor" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

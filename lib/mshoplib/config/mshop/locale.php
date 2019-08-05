@@ -35,14 +35,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mloccu."id" AS "locale.currency.id", mloccu."label" AS "locale.currency.label",
+						SELECT DISTINCT mloccu."id" AS "locale.currency.id", mloccu."label" AS "locale.currency.label",
 							mloccu."siteid" AS "locale.currency.siteid", mloccu."status" AS "locale.currency.status",
 							mloccu."mtime" AS "locale.currency.mtime", mloccu."editor" AS "locale.currency.editor",
 							mloccu."ctime" AS "locale.currency.ctime", mloccu.*
 						FROM "mshop_locale_currency" AS mloccu
 						WHERE :cond
-						GROUP BY mloccu."id", mloccu."label", mloccu."siteid", mloccu."status",
-							mloccu."mtime", mloccu."editor", mloccu."ctime" :columns
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
@@ -96,14 +94,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mlocla."id" AS "locale.language.id", mlocla."label" AS "locale.language.label",
+						SELECT DISTINCT mlocla."id" AS "locale.language.id", mlocla."label" AS "locale.language.label",
 							mlocla."siteid" AS "locale.language.siteid", mlocla."status" AS "locale.language.status",
 							mlocla."mtime" AS "locale.language.mtime", mlocla."editor" AS "locale.language.editor",
 							mlocla."ctime" AS "locale.language.ctime", mlocla.*
 						FROM "mshop_locale_language" AS mlocla
 						WHERE :cond
-						GROUP BY mlocla."id", mlocla."label", mlocla."siteid", mlocla."status",
-							mlocla."mtime", mlocla."editor", mlocla."ctime" :columns
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
@@ -159,16 +155,13 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mlocsi."id" AS "locale.site.id", mlocsi."code" AS "locale.site.code",
+						SELECT DISTINCT mlocsi."id" AS "locale.site.id", mlocsi."code" AS "locale.site.code",
 							mlocsi."label" AS "locale.site.label", mlocsi."config" AS "locale.site.config",
 							mlocsi."status" AS "locale.site.status", mlocsi."editor" AS "locale.site.editor",
 							mlocsi."mtime" AS "locale.site.mtime", mlocsi."ctime" AS "locale.site.ctime",
 							mlocsi.*
 						FROM "mshop_locale_site" AS mlocsi
 						WHERE mlocsi."level" = 0 AND :cond
-						GROUP BY mlocsi."id", mlocsi."code", mlocsi."label", mlocsi."config",
-							mlocsi."status", mlocsi."editor", mlocsi."mtime", mlocsi."ctime"
-							:columns
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
@@ -222,7 +215,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mloc."id" AS "locale.id", mloc."siteid" AS "locale.siteid",
+					SELECT DISTINCT mloc."id" AS "locale.id", mloc."siteid" AS "locale.siteid",
 						mloc."langid" AS "locale.languageid", mloc."currencyid" AS "locale.currencyid",
 						mloc."pos" AS "locale.position", mloc."status" AS "locale.status",
 						mloc."mtime" AS "locale.mtime", mloc."editor" AS "locale.editor",
@@ -232,9 +225,6 @@ return array(
 					LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
 					LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
 					WHERE :cond
-					GROUP BY mloc."id", mloc."siteid", mloc."langid", mloc."currencyid",
-						mloc."pos", mloc."status", mloc."mtime", mloc."editor",
-						mloc."ctime" :columns
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
