@@ -186,17 +186,22 @@ class Category
 	 */
 	protected function getRefCatalogIds( array $productIds )
 	{
-		$catalogListsManager = \Aimeos\MShop::create( $this->getContext(), 'catalog/lists' );
+		if( empty( $productIds ) ) {
+			return [];
+		}
 
-		$search = $catalogListsManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'catalog.lists.refid', $productIds ),
-			$search->compare( '==', 'catalog.lists.domain', 'product' ),
-			$search->compare( '==', 'catalog.lists.type', 'default' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
+		$search = $manager->createSearch();
+		$expr = [];
 
-		return array_keys( $catalogListsManager->aggregate( $search, 'catalog.lists.parentid' ) );
+		foreach( $productIds as $id )
+		{
+			$func = $search->createFunction( 'catalog:has', ['product', 'default', $id] );
+			$expr[] = $search->compare( '!=', $func, null );
+		}
+
+		$search->setConditions( $search->combine( '||', $expr ) );
+		return array_keys( $manager->searchItems( $search ) );
 	}
 
 
