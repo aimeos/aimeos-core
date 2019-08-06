@@ -52,7 +52,7 @@ class TablesMigratePropertyKey extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Update property "key" columns', 0 ); $this->status( '' );
 
-		foreach( $this->tables as $rname => $tables )
+		foreach( $this->tables as $rname => $table )
 		{
 			$schema = $this->getSchema( $rname );
 
