@@ -22,7 +22,6 @@ abstract class Base
 {
 	private $languageId;
 	private $searchConfig;
-	private $plugins = [];
 	private $prefix;
 
 
@@ -49,8 +48,6 @@ abstract class Base
 		if( ( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
 		}
-
-		$this->plugins[$this->prefix . 'key'] = new \Aimeos\MW\Criteria\Plugin\Cut();
 	}
 
 
@@ -127,7 +124,7 @@ abstract class Base
 			$stmt = $conn->create( $this->getSqlConfig( $this->getConfigPath() . $type ) );
 
 			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $this->plugins[$this->prefix . 'key']->translate( $item->getKey() ) );
+			$stmt->bind( 2, $item->getKey() );
 			$stmt->bind( 3, $item->getType() );
 			$stmt->bind( 4, $item->getLanguageId() );
 			$stmt->bind( 5, $item->getValue() );

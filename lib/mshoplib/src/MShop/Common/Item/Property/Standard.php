@@ -47,7 +47,7 @@ class Standard
 	 */
 	public function getKey()
 	{
-		return $this->getType() . '|' . ( $this->getLanguageId() ?: 'null' ) . '|' . $this->getValue();
+		return $this->getType() . '|' . ( $this->getLanguageId() ?: 'null' ) . '|' . md5( $this->getValue() );
 	}
 
 

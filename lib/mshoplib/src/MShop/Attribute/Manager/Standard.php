@@ -142,7 +142,6 @@ class Standard
 		),
 	);
 
-	private $plugins = [];
 
 
 	/**
@@ -154,8 +153,6 @@ class Standard
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-attribute' );
-
-		$this->plugins['attribute.key'] = new \Aimeos\MW\Criteria\Plugin\Cut();
 
 		$self = $this;
 		$locale = $context->getLocale();
@@ -194,6 +191,7 @@ class Standard
 				$params[$key] = trim( $param, '\'' );
 			}
 
+			$params[2] = ( isset( $params[2] ) ? md5( $params[2] ) : null );
 			$source = str_replace( ':site', $self->toExpression( 'mattpr_prop."siteid"', $siteIds ), $source );
 			$str = $self->toExpression( 'mattpr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
 			$source = str_replace( ':key', $str, $source );
@@ -423,7 +421,7 @@ class Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $this->plugins['attribute.key']->translate( $item->getKey() ) );
+			$stmt->bind( 1, $item->getKey() );
 			$stmt->bind( 2, $item->getType() );
 			$stmt->bind( 3, $item->getDomain() );
 			$stmt->bind( 4, $item->getCode() );
@@ -707,7 +705,8 @@ class Standard
 			 */
 			$cfgPathCount = 'mshop/attribute/manager/standard/count';
 
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level, $this->plugins );
+			$plugins = ['attribute.key' => new \Aimeos\MW\Criteria\Plugin\Md5()];
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level, $plugins );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$map[(string) $row['attribute.id']] = $row;

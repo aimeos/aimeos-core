@@ -71,7 +71,7 @@ class Standard
 	 */
 	public function getKey()
 	{
-		return $this->getDomain() . '|' . $this->getType() . '|' . $this->getCode();
+		return md5( $this->getDomain() . '|' . $this->getType() . '|' . $this->getCode() );
 	}
 
 

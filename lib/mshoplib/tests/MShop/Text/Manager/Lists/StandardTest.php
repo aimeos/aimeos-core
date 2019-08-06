@@ -162,7 +162,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'text.lists.id', null );
 		$expr[] = $search->compare( '!=', 'text.lists.siteid', null );
 		$expr[] = $search->compare( '!=', 'text.lists.parentid', null );
-		$expr[] = $search->compare( '!=', 'text.lists.key', null );
 		$expr[] = $search->compare( '==', 'text.lists.domain', 'media' );
 		$expr[] = $search->compare( '==', 'text.lists.type', 'align-top' );
 		$expr[] = $search->compare( '>', 'text.lists.refid', 0 );

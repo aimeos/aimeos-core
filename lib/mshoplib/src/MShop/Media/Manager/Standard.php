@@ -197,6 +197,7 @@ class Standard
 				$params[$key] = trim( $param, '\'' );
 			}
 
+			$params[2] = ( isset( $params[2] ) ? md5( $params[2] ) : null );
 			$source = str_replace( ':site', $self->toExpression( 'mmedpr_prop."siteid"', $siteIds ), $source );
 			$str = $self->toExpression( 'mmedpr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
 			$source = str_replace( ':key', $str, $source );

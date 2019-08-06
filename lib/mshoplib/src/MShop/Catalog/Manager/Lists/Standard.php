@@ -46,14 +46,6 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'catalog.lists.key' => array(
-			'code' => 'catalog.lists.key',
-			'internalcode' => 'mcatli."key"',
-			'label' => 'Unique key',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
-		),
 		'catalog.lists.type' => array(
 			'code' => 'catalog.lists.type',
 			'internalcode' => 'mcatli."type"',

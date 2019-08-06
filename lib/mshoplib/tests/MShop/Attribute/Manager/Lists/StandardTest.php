@@ -164,7 +164,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'attribute.lists.id', null );
 		$expr[] = $search->compare( '!=', 'attribute.lists.siteid', null );
 		$expr[] = $search->compare( '!=', 'attribute.lists.parentid', null );
-		$expr[] = $search->compare( '!=', 'attribute.lists.key', null );
 		$expr[] = $search->compare( '==', 'attribute.lists.domain', 'text' );
 		$expr[] = $search->compare( '==', 'attribute.lists.type', 'default' );
 		$expr[] = $search->compare( '>', 'attribute.lists.refid', 0 );

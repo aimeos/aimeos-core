@@ -46,14 +46,6 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'media.lists.key' => array(
-			'code' => 'media.lists.key',
-			'internalcode' => 'mmedli."key"',
-			'label' => 'Unique key',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
-		),
 		'media.lists.type' => array(
 			'code' => 'media.lists.type',
 			'internalcode' => 'mmedli."type"',

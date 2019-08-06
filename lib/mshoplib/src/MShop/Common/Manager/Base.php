@@ -500,8 +500,9 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 */
 	protected function getCachedStatement( \Aimeos\MW\DB\Connection\Iface $conn, $cfgkey, $sql = null )
 	{
-		if( !isset( $this->stmts['stmt'][$cfgkey] ) || !isset( $this->stmts['conn'][$cfgkey] )
-				|| $conn !== $this->stmts['conn'][$cfgkey]
+		if( !isset( $this->stmts['stmt'][$cfgkey] )
+			|| !isset( $this->stmts['conn'][$cfgkey] )
+			|| $conn !== $this->stmts['conn'][$cfgkey]
 		) {
 			if( $sql === null ) {
 				$sql = $this->getSqlConfig( $cfgkey );
