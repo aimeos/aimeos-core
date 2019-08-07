@@ -21,7 +21,7 @@ return array(
 
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'attrid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'attrid', 'string', ['length' => 36, 'notnull' => false] );
 			$table->addColumn( 'listtype', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
@@ -40,7 +40,7 @@ return array(
 
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'catid', 'integer', [] );
+			$table->addColumn( 'catid', 'string', ['length' => 36] );
 			$table->addColumn( 'listtype', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
@@ -73,7 +73,7 @@ return array(
 
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'supid', 'integer', [] );
+			$table->addColumn( 'supid', 'string', ['length' => 36] );
 			$table->addColumn( 'listtype', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
