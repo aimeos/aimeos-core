@@ -62,7 +62,7 @@ class Svg
 	 */
 	public function getHeight()
 	{
-		return ( isset( $this->svg['height'] ) ? (int) preg_replace( '/[^0-9.]/', '', $this->svg['height'] ) : null );
+		return ( isset( $this->svg['height'] ) ? (int) preg_replace( '/[^0-9.]/', '', $this->svg['height'] ) : 1 );
 	}
 
 
@@ -73,7 +73,7 @@ class Svg
 	 */
 	public function getWidth()
 	{
-		return ( isset( $this->svg['width'] ) ? (int) preg_replace( '/[^0-9.]/', '', $this->svg['width'] ) : null );
+		return ( isset( $this->svg['width'] ) ? (int) preg_replace( '/[^0-9.]/', '', $this->svg['width'] ) : 1 );
 	}
 
 
