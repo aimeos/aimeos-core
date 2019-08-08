@@ -80,6 +80,7 @@ class Memory
 	 *
 	 * @param string $name Path to the requested value like tree/node/classname
 	 * @param string $value Value that should be associated with the given path
+	 * @return \Aimeos\MW\Config\Iface Config instance for method chaining
 	 */
 	public function set( $name, $value )
 	{
@@ -99,6 +100,7 @@ class Memory
 		}
 
 		// don't store local configuration
+		return $this;
 	}
 
 

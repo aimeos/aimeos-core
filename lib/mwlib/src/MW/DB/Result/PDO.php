@@ -70,6 +70,7 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 	/**
 	 * Cleans up pending database result sets.
 	 *
+	 * @return \Aimeos\MW\DB\Result\Iface Result instance for method chaining
 	 * @throws \Aimeos\MW\DB\Exception if an error occured in the unterlying driver
 	 */
 	public function finish()
@@ -79,6 +80,8 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 		} catch ( \PDOException $e ) {
 			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
+
+		return $this;
 	}
 
 

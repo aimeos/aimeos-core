@@ -33,7 +33,7 @@ interface Iface
 	 * Sends the e-mail message to the mail server.
 	 *
 	 * @param \Aimeos\MW\Mail\Message\Iface $message E-mail message object
-	 * @return void
+	 * @return \Aimeos\MW\Mail\Iface Mail instance for method chaining
 	 */
 	public function send( \Aimeos\MW\Mail\Message\Iface $message );
 }

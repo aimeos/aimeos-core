@@ -24,13 +24,13 @@ interface Iface extends \Iterator
 	 * Adds data to the content object.
 	 *
 	 * @param mixed $data Content data
-	 * @return void
+	 * @return \Aimeos\MW\Container\Content\Iface Container content instance for method chaining
 	 */
 	public function add( $data );
 
 	/**
 	 * Cleans up and saves the content.
-	 * @return void
+	 * @return \Aimeos\MW\Container\Content\Iface Container content instance for method chaining
 	 */
 	public function close();
 

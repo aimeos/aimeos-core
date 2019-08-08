@@ -83,10 +83,12 @@ class Zip
 	 * Adds content data to the container.
 	 *
 	 * @param \Aimeos\MW\Container\Content\Iface $content Content object
+	 * @return \Aimeos\MW\Container\Iface Container instance for method chaining
 	 */
 	public function add( \Aimeos\MW\Container\Content\Iface $content )
 	{
 		$this->content[] = $content;
+		return $this;
 	}
 
 
@@ -111,6 +113,8 @@ class Zip
 
 	/**
 	 * Cleans up and saves the container.
+	 *
+	 * @return \Aimeos\MW\Container\Iface Container instance for method chaining
 	 */
 	public function close()
 	{
@@ -132,6 +136,8 @@ class Zip
 		foreach( $this->content as $content ) {
 			unlink( $content->getResource() );
 		}
+
+		return $this;
 	}
 
 

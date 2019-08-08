@@ -48,10 +48,11 @@ class PHP implements \Aimeos\MW\Session\Iface
 	 *
 	 * @param string $name Key to the value which should be stored in the session
 	 * @param mixed $value Value that should be associated with the given key
-	 * @return void
+	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
 	 */
 	public function set( $name, $value )
 	{
 		$_SESSION[$name] = $value;
+		return $this;
 	}
 }

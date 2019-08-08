@@ -65,23 +65,27 @@ interface Iface
 
 	/**
 	 * Starts a transaction for this connection.
+	 *
 	 * Transactions can't be nested and a new transaction can only be started
 	 * if the previous transaction was committed or rolled back before.
-	 * @return void
+	 *
+	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function begin();
 
 
 	/**
 	 * Commits the changes done inside of the transaction to the storage.
-	 * @return void
+	 *
+	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function commit();
 
 
 	/**
 	 * Discards the changes done inside of the transaction.
-	 * @return void
+	 *
+	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function rollback();
 }

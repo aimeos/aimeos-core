@@ -93,6 +93,7 @@ class APC
 	 *
 	 * @param string $path Path to the requested value like tree/node/classname
 	 * @param string $value Value that should be associated with the given path
+	 * @return \Aimeos\MW\Config\Iface Config instance for method chaining
 	 */
 	public function set( $path, $value )
 	{
@@ -105,5 +106,6 @@ class APC
 		parent::set( $path, $value );
 
 		apcu_store( $this->prefix . $path, $value );
+		return $this;
 	}
 }

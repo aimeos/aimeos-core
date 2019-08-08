@@ -34,13 +34,14 @@ interface Iface extends \Iterator
 	 * Adds content data to the container.
 	 *
 	 * @param \Aimeos\MW\Container\Content\Iface $content Content object
-	 * @return void
+	 * @return \Aimeos\MW\Container\Iface Container instance for method chaining
 	 */
 	public function add( \Aimeos\MW\Container\Content\Iface $content );
 
 	/**
 	 * Cleans up and saves the container.
-	 * @return void
+	 *
+	 * @return \Aimeos\MW\Container\Iface Container instance for method chaining
 	 */
 	public function close();
 

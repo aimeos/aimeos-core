@@ -119,8 +119,11 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 
 	/**
 	 * Starts a transaction for this connection.
+	 *
 	 * Transactions can't be nested and a new transaction can only be started
 	 * if the previous transaction was committed or rolled back before.
+	 *
+	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function begin()
 	{
@@ -132,11 +135,14 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 		}
 
 		$this->txnumber++;
+		return $this;
 	}
 
 
 	/**
 	 * Commits the changes done inside of the transaction to the storage.
+	 *
+	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function commit()
 	{
@@ -148,11 +154,14 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 		}
 
 		$this->txnumber--;
+		return $this;
 	}
 
 
 	/**
 	 * Discards the changes done inside of the transaction.
+	 *
+	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function rollback()
 	{
@@ -164,5 +173,6 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 		}
 
 		$this->txnumber--;
+		return $this;
 	}
 }

@@ -65,6 +65,7 @@ class File
 	 * Adds a content object to the container.
 	 *
 	 * @param \Aimeos\MW\Container\Content\Iface $content Content object
+	 * @return \Aimeos\MW\Container\Iface Container instance for method chaining
 	 */
 	public function add( \Aimeos\MW\Container\Content\Iface $content )
 	{
@@ -73,6 +74,7 @@ class File
 		}
 
 		$this->content = $content;
+		return $this;
 	}
 
 
@@ -94,10 +96,13 @@ class File
 
 	/**
 	 * Cleans up and saves the container.
+	 *
+	 * @return \Aimeos\MW\Container\Iface Container instance for method chaining
 	 */
 	public function close()
 	{
 		$this->content->close();
+		return $this;
 	}
 
 

@@ -26,7 +26,7 @@ interface Iface
 	 * @param integer $position Position index of the placeholder
 	 * @param mixed $value Value which should be bound to the placeholder
 	 * @param integer $type Type of given value defined in \Aimeos\MW\DB\Stmt\Base as constant
-	 * @return void
+	 * @return \Aimeos\MW\DB\Statement\Iface Statement instance for method chaining
 	 */
 	public function bind( $position, $value, $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 

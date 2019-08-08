@@ -23,7 +23,7 @@ interface Iface
 	 * Adds a new message to the message queue
 	 *
 	 * @param string $msg Message, e.g. JSON encoded data
-	 * @return null
+	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
 	 */
 	public function add( $msg );
 
@@ -48,7 +48,7 @@ interface Iface
 	 *  $queue->del( $msg );
 	 *
 	 * @param \Aimeos\MW\MQueue\Message\Iface $msg Message object
-	 * @return null
+	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
 	 */
 	public function del( \Aimeos\MW\MQueue\Message\Iface $msg );
 }

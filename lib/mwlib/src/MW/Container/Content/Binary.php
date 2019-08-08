@@ -55,6 +55,7 @@ class Binary
 	/**
 	 * Closes the text file so it's written to disk.
 	 *
+	 * @return \Aimeos\MW\Container\Content\Iface Container content instance for method chaining
 	 * @throws \Aimeos\MW\Container\Exception If the file handle couldn't be flushed or closed
 	 */
 	public function close()
@@ -66,6 +67,8 @@ class Binary
 		if( fclose( $this->fh ) === false ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
 		}
+
+		return $this;
 	}
 
 
@@ -73,12 +76,15 @@ class Binary
 	 * Adds row to the content object.
 	 *
 	 * @param string $data Data to add
+	 * @return \Aimeos\MW\Container\Content\Iface Container content instance for method chaining
 	 */
 	public function add( $data )
 	{
 		if( fwrite( $this->fh, $data ) === false ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
 		}
+
+		return $this;
 	}
 
 

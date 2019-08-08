@@ -39,7 +39,8 @@ interface Iface
 
 	/**
 	 * Cleans up pending database result sets.
-	 * @return void
+	 *
+	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function finish();
 

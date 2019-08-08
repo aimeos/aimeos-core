@@ -65,11 +65,12 @@ class PHPArray
 	 *
 	 * @param string $name Path to the requested value like tree/node/classname
 	 * @param mixed $value Value that should be associated with the given path
+	 * @return \Aimeos\MW\Config\Iface Config instance for method chaining
 	 */
 	public function set( $name, $value )
 	{
-		$parts = explode( '/', trim( $name, '/' ) );
-		$this->config = $this->setPart( $this->config, $parts, $value );
+		$this->config = $this->setPart( $this->config, explode( '/', trim( $name, '/' ) ), $value );
+		return $this;
 	}
 
 

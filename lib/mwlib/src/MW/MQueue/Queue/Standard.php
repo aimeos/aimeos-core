@@ -48,6 +48,7 @@ class Standard implements Iface
 	 * Adds a new message to the message queue
 	 *
 	 * @param string $msg Message, e.g. JSON encoded data
+	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
 	 */
 	public function add( $msg )
 	{
@@ -66,6 +67,8 @@ class Standard implements Iface
 		{
 			throw new \Aimeos\MW\MQueue\Exception( $e->getMessage() );
 		}
+
+		return $this;
 	}
 
 
@@ -73,6 +76,7 @@ class Standard implements Iface
 	 * Removes the message from the queue
 	 *
 	 * @param \Aimeos\MW\MQueue\Message\Iface $msg Message object
+	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
 	 */
 	public function del( \Aimeos\MW\MQueue\Message\Iface $msg )
 	{
@@ -89,6 +93,8 @@ class Standard implements Iface
 		{
 			throw new \Aimeos\MW\MQueue\Exception( $e->getMessage() );
 		}
+
+		return $this;
 	}
 
 

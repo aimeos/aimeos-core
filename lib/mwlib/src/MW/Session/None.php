@@ -45,9 +45,11 @@ class None implements \Aimeos\MW\Session\Iface
 	 *
 	 * @param string $name Key to the value which should be stored in the session
 	 * @param string $value Value that should be associated with the given key
+	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
 	 */
 	public function set( $name, $value )
 	{
 		$this->data[$name] = $value;
+		return $this;
 	}
 }

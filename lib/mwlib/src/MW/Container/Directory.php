@@ -73,10 +73,12 @@ class Directory
 	 * Adds a content object to the container.
 	 *
 	 * @param \Aimeos\MW\Container\Content\Iface $content Content object
+	 * @return \Aimeos\MW\Container\Iface Container instance for method chaining
 	 */
 	public function add( \Aimeos\MW\Container\Content\Iface $content )
 	{
 		$this->content[] = $content;
+		return $this;
 	}
 
 
@@ -94,12 +96,16 @@ class Directory
 
 	/**
 	 * Cleans up and saves the container.
+	 *
+	 * @return \Aimeos\MW\Container\Iface Container instance for method chaining
 	 */
 	public function close()
 	{
 		foreach( $this->content as $content ) {
 			$content->close();
 		}
+
+		return $this;
 	}
 
 

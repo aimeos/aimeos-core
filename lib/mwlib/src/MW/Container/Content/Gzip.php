@@ -63,6 +63,7 @@ class Gzip
 	/**
 	 * Closes the gzip file so it's written to disk.
 	 *
+	 * @return \Aimeos\MW\Container\Content\Iface Container content instance for method chaining
 	 * @throws \Aimeos\MW\Container\Exception If the file handle couldn't be flushed or closed
 	 */
 	public function close()
@@ -70,6 +71,8 @@ class Gzip
 		if( gzclose( $this->fh ) === false ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
 		}
+
+		return $this;
 	}
 
 
@@ -77,12 +80,15 @@ class Gzip
 	 * Adds content to the gzip file.
 	 *
 	 * @param string $data Data to add
+	 * @return \Aimeos\MW\Container\Content\Iface Container content instance for method chaining
 	 */
 	public function add( $data )
 	{
 		if( gzwrite( $this->fh, $data ) === false ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
 		}
+
+		return $this;
 	}
 
 

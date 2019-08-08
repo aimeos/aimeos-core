@@ -65,13 +65,16 @@ class Protect
 	 *
 	 * @param string $name Path to the requested value like tree/node/classname
 	 * @param mixed $value Value that should be associated with the given path
+	 * @return \Aimeos\MW\Config\Iface Config instance for method chaining
 	 */
 	public function set( $name, $value )
 	{
 		foreach( $this->prefixes as $prefix => $len )
 		{
-			if( strncmp( $name, $prefix, $len ) === 0 ) {
-				return parent::set( $name, $value );
+			if( strncmp( $name, $prefix, $len ) === 0 )
+			{
+				parent::set( $name, $value );
+				return $this;
 			}
 		}
 
