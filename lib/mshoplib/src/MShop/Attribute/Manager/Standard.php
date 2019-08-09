@@ -421,7 +421,7 @@ class Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $item->getKey() );
+			$stmt->bind( 1, md5( $item->getKey() ) );
 			$stmt->bind( 2, $item->getType() );
 			$stmt->bind( 3, $item->getDomain() );
 			$stmt->bind( 4, $item->getCode() );
