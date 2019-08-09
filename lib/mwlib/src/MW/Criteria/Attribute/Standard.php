@@ -24,55 +24,7 @@ namespace Aimeos\MW\Criteria\Attribute;
  */
 class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 {
-	/**
-	 * @var string Public code which maps to the internal code
-	 */
-	private $code;
-
-	/**
-	 * @var mixed Default value
-	 */
-	private $default;
-
-	/**
-	 * @var string Name of the attribute in the storage system
-	 */
-	private $internalCode;
-
-	/**
-	 * @var array List of internal dependencies
-	 */
-	private $internalDeps;
-
-	/**
-	 * @var mixed Internal data type, depends on the manager
-	 */
-	private $internalType;
-
-	/**
-	 * @var \Closure Helper function for search parameters
-	 */
-	private $func;
-
-	/**
-	 * @var string Human readable name of the attribute
-	 */
-	private $label;
-
-	/**
-	 * @var boolean Is attribute publically available
-	 */
-	private $public;
-
-	/**
-	 * @var boolean Is required attribute
-	 */
-	private $required;
-
-	/**
-	 * @var string Public data type used in the frontend
-	 */
-	private $type;
+	private $values;
 
 
 	/**
@@ -99,17 +51,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 			}
 		}
 
-		$this->code = (string) $params['code'];
-		$this->type = (string) $params['type'];
-
-		$this->default = $this->check( $params, 'default' );
-		$this->internalCode = $this->check( $params, 'internalcode' );
-		$this->internalDeps = (array) $this->check( $params, 'internaldeps', [] );
-		$this->internalType = $this->check( $params, 'internaltype' );
-		$this->func = $this->check( $params, 'function' );
-		$this->label = (string) $this->check( $params, 'label', '' );
-		$this->public = (bool) $this->check( $params, 'public', true );
-		$this->required = (bool) $this->check( $params, 'required', true );
+		$this->values = $params;
 	}
 
 
@@ -122,18 +64,18 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getType()
 	{
-		return $this->type;
+		return $this->values['type'];
 	}
 
 
 	/**
 	 * Returns the type internally used by the manager.
 	 *
-	 * @return mixed Type used by the manager
+	 * @re  turn mixed Type used by the manager
 	 */
 	public function getInternalType()
 	{
-		return $this->internalType;
+		return isset( $this->values['internaltype'] ) ? $this->values['internaltype'] : $this->getType();
 	}
 
 
@@ -144,7 +86,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getCode()
 	{
-		return $this->code;
+		return $this->values['code'];
 	}
 
 
@@ -155,7 +97,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getInternalCode()
 	{
-		return $this->internalCode;
+		return isset( $this->values['internalcode'] ) ? $this->values['internalcode'] : $this->getCode();
 	}
 
 
@@ -166,8 +108,8 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getInternalDeps()
 	{
-		return $this->internalDeps;
-	}
+		return isset( $this->values['internaldeps'] ) ? $this->values['internaldeps'] : [];
+  	}
 
 
 	/**
@@ -177,7 +119,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getFunction()
 	{
-		return $this->func;
+		return isset( $this->values['function'] ) ? $this->values['function'] : null;
 	}
 
 
@@ -188,7 +130,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getLabel()
 	{
-		return $this->label;
+		return isset( $this->values['label'] ) ? $this->values['label'] : '';
 	}
 
 
@@ -199,7 +141,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getDefault()
 	{
-		return $this->default;
+		return isset( $this->values['default'] ) ? $this->values['default'] : null;
 	}
 
 
@@ -210,7 +152,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function isPublic()
 	{
-		return $this->public;
+		return isset( $this->values['public'] ) ? (bool) $this->values['public'] : true;
 	}
 
 
@@ -221,7 +163,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function isRequired()
 	{
-		return $this->required;
+		return isset( $this->values['required'] ) ? (bool) $this->values['required'] : true;
 	}
 
 
@@ -233,26 +175,12 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	public function toArray()
 	{
 		return array(
-			'code' => $this->code,
-			'type' => $this->type,
-			'label' => $this->label,
-			'public' => $this->public,
-			'default' => $this->default,
-			'required' => $this->required,
+			'code' => $this->getCode(),
+			'type' => $this->getType(),
+			'label' => $this->getLabel(),
+			'public' => $this->isPublic(),
+			'default' => $this->getDefault(),
+			'required' => $this->isRequired(),
 		);
-	}
-
-
-	/**
-	 * Tests and returns the value from the array
-	 *
-	 * @param array $params Associative list of parameters
-	 * @param string $name Name of the parameter to test
-	 * @param mixed $default Default value if parameter doesn't exist
-	 * @return mixed Value from parameter list or default value
-	 */
-	protected function check( array $params, $name, $default = null )
-	{
-		return isset( $params[$name] ) ? $params[$name] : $default;
 	}
 }
