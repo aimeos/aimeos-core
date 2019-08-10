@@ -75,7 +75,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getInternalType()
 	{
-		return isset( $this->values['internaltype'] ) ? $this->values['internaltype'] : $this->getType();
+		return array_key_exists( 'internaltype', $this->values ) ? $this->values['internaltype'] : $this->getType();
 	}
 
 
@@ -97,7 +97,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getInternalCode()
 	{
-		return isset( $this->values['internalcode'] ) ? $this->values['internalcode'] : $this->getCode();
+		return array_key_exists( 'internalcode', $this->values ) ? $this->values['internalcode'] : $this->getCode();
 	}
 
 
@@ -108,7 +108,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getInternalDeps()
 	{
-		return isset( $this->values['internaldeps'] ) ? $this->values['internaldeps'] : [];
+		return isset( $this->values['internaldeps'] ) ? (array) $this->values['internaldeps'] : [];
   	}
 
 
