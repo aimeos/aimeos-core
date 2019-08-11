@@ -79,6 +79,13 @@ interface Iface
 	public function getResourceType( $withsub = true );
 
 	/**
+	 * Returns the attributes used for saving column values.
+	 *
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of attribute items
+	 */
+	public function getSaveAttributes();
+
+	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
