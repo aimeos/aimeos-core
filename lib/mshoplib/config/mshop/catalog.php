@@ -19,10 +19,10 @@ return array(
 					),
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "mshop_catalog_list_type" (
+							INSERT INTO "mshop_catalog_list_type" ( :names
 								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
-							) VALUES (
+							) VALUES ( :values
 								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
@@ -30,7 +30,8 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_catalog_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
+							SET :names
+								"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -97,10 +98,10 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_catalog_list" (
+						INSERT INTO "mshop_catalog_list" ( :names
 							"parentid", "key", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -108,8 +109,9 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_catalog_list"
-						SET "parentid" = ?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
-							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+						SET :names
+							 "parentid" = ?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?,
+							 "end" = ?, "config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
@@ -201,7 +203,7 @@ return array(
 			'insert-usage' => array(
 				'ansi' => '
 					UPDATE "mshop_catalog"
-					SET "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?, "ctime" = ?
+					SET :names "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?, "ctime" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),

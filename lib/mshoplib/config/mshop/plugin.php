@@ -25,10 +25,10 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_plugin_type" (
+						INSERT INTO "mshop_plugin_type" ( :names
 							"code", "domain", "label", "pos", "status",
 							"mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -36,7 +36,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_plugin_type"
-						SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
+						SET :names
+							"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -88,10 +89,10 @@ return array(
 			),
 			'insert' => array(
 				'ansi' => '
-					INSERT INTO "mshop_plugin"(
+					INSERT INTO "mshop_plugin" ( :names
 						"type", "label", "provider", "config", "pos",
 						"status", "mtime", "editor", "siteid", "ctime"
-					) VALUES (
+					) VALUES ( :values
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
@@ -99,7 +100,8 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_plugin"
-					SET "type" = ?, "label" = ?, "provider" = ?, "config" = ?,
+					SET :names
+						"type" = ?, "label" = ?, "provider" = ?, "config" = ?,
 						"pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'

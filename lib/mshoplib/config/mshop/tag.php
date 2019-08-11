@@ -18,10 +18,10 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_tag_type" (
+						INSERT INTO "mshop_tag_type" ( :names
 							"code", "domain", "label", "pos", "status",
 							"mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -29,7 +29,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_tag_type"
-						SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
+						SET :names
+							"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -81,10 +82,10 @@ return array(
 			),
 			'insert' => array(
 				'ansi' => '
-					INSERT INTO "mshop_tag" (
+					INSERT INTO "mshop_tag" ( :names
 						"langid", "type", "domain", "label",
 						"mtime", "editor", "siteid", "ctime"
-					) VALUES (
+					) VALUES ( :values
 						?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
@@ -92,8 +93,8 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_tag"
-					SET "langid" = ?, "type" = ?, "domain" = ?,
-						"label" = ?, "mtime" = ?, "editor" = ?
+					SET :names
+						"langid" = ?, "type" = ?, "domain" = ?, "label" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),

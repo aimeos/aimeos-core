@@ -18,13 +18,13 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_supplier_address" (
+						INSERT INTO "mshop_supplier_address" ( :names
 							"parentid", "company", "vatid", "salutation", "title",
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
 							"email", "telefax", "website", "longitude", "latitude",
 							"pos", "mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -32,7 +32,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_supplier_address"
-						SET "parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
+						SET :names
+							"parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
 							"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
@@ -98,10 +99,10 @@ return array(
 					),
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "mshop_supplier_list_type" (
+							INSERT INTO "mshop_supplier_list_type" ( :names
 								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
-							) VALUES (
+							) VALUES ( :values
 								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
@@ -109,7 +110,8 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_supplier_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
+							SET :names
+								"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -179,10 +181,10 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_supplier_list" (
+						INSERT INTO "mshop_supplier_list" ( :names
 							"parentid", "key", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -190,8 +192,9 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_supplier_list"
-						SET "parentid" = ?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
-							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+						SET :names
+							"parentid" = ?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?,
+							"end" = ?, "config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
@@ -244,9 +247,9 @@ return array(
 			),
 			'insert' => array(
 				'ansi' => '
-					INSERT INTO "mshop_supplier" (
+					INSERT INTO "mshop_supplier" ( :names
 						"code", "label", "status", "mtime", "editor", "siteid", "ctime"
-					) VALUES (
+					) VALUES ( :values
 						?, ?, ?, ?, ?, ?, ?
 					)
 				'
@@ -254,8 +257,8 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_supplier"
-					SET "code" = ?, "label" = ?, "status" = ?,
-						"mtime" = ?, "editor" = ?
+					SET :names
+						"code" = ?, "label" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),

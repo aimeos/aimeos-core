@@ -616,6 +616,7 @@ class Standard
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
+			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -655,6 +656,7 @@ class Standard
 				 * @see mshop/order/manager/base/address/standard/count/ansi
 				 */
 				$path = 'mshop/order/manager/base/address/standard/insert';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
@@ -691,43 +693,49 @@ class Standard
 				 * @see mshop/order/manager/base/address/standard/count/ansi
 				 */
 				$path = 'mshop/order/manager/base/address/standard/update';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
-			$stmt = $this->getCachedStatement( $conn, $path );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			$stmt->bind( 1, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getAddressId() );
-			$stmt->bind( 3, $item->getType() );
-			$stmt->bind( 4, $item->getCompany() );
-			$stmt->bind( 5, $item->getVatID() );
-			$stmt->bind( 6, $item->getSalutation() );
-			$stmt->bind( 7, $item->getTitle() );
-			$stmt->bind( 8, $item->getFirstname() );
-			$stmt->bind( 9, $item->getLastname() );
-			$stmt->bind( 10, $item->getAddress1() );
-			$stmt->bind( 11, $item->getAddress2() );
-			$stmt->bind( 12, $item->getAddress3() );
-			$stmt->bind( 13, $item->getPostal() );
-			$stmt->bind( 14, $item->getCity() );
-			$stmt->bind( 15, $item->getState() );
-			$stmt->bind( 16, $item->getCountryId() );
-			$stmt->bind( 17, $item->getLanguageId() );
-			$stmt->bind( 18, $item->getTelephone() );
-			$stmt->bind( 19, $item->getEmail() );
-			$stmt->bind( 20, $item->getTelefax() );
-			$stmt->bind( 21, $item->getWebsite() );
-			$stmt->bind( 22, $item->getLongitude() );
-			$stmt->bind( 23, $item->getLatitude() );
-			$stmt->bind( 24, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 25, $date );
-			$stmt->bind( 26, $context->getEditor() );
-			$stmt->bind( 27, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getAddressId() );
+			$stmt->bind( $idx++, $item->getType() );
+			$stmt->bind( $idx++, $item->getCompany() );
+			$stmt->bind( $idx++, $item->getVatID() );
+			$stmt->bind( $idx++, $item->getSalutation() );
+			$stmt->bind( $idx++, $item->getTitle() );
+			$stmt->bind( $idx++, $item->getFirstname() );
+			$stmt->bind( $idx++, $item->getLastname() );
+			$stmt->bind( $idx++, $item->getAddress1() );
+			$stmt->bind( $idx++, $item->getAddress2() );
+			$stmt->bind( $idx++, $item->getAddress3() );
+			$stmt->bind( $idx++, $item->getPostal() );
+			$stmt->bind( $idx++, $item->getCity() );
+			$stmt->bind( $idx++, $item->getState() );
+			$stmt->bind( $idx++, $item->getCountryId() );
+			$stmt->bind( $idx++, $item->getLanguageId() );
+			$stmt->bind( $idx++, $item->getTelephone() );
+			$stmt->bind( $idx++, $item->getEmail() );
+			$stmt->bind( $idx++, $item->getTelefax() );
+			$stmt->bind( $idx++, $item->getWebsite() );
+			$stmt->bind( $idx++, $item->getLongitude() );
+			$stmt->bind( $idx++, $item->getLatitude() );
+			$stmt->bind( $idx++, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $date );
+			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 28, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 28, $date ); // ctime
+				$stmt->bind( $idx++, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

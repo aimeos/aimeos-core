@@ -180,6 +180,7 @@ class Standard
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
+			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -219,6 +220,7 @@ class Standard
 				 * @see madmin/job/manager/standard/count/ansi
 				 */
 				$path = 'madmin/job/manager/standard/insert';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
@@ -255,23 +257,30 @@ class Standard
 				 * @see madmin/job/manager/standard/count/ansi
 				 */
 				$path = 'madmin/job/manager/standard/update';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
-			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $item->getLabel() );
-			$stmt->bind( 2, $item->getMethod() );
-			$stmt->bind( 3, json_encode( $item->getParameter() ) );
-			$stmt->bind( 4, json_encode( $item->getResult() ) );
-			$stmt->bind( 5, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 6, $context->getEditor() );
-			$stmt->bind( 7, $date );
-			$stmt->bind( 8, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
+
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $item->getLabel() );
+			$stmt->bind( $idx++, $item->getMethod() );
+			$stmt->bind( $idx++, json_encode( $item->getParameter() ) );
+			$stmt->bind( $idx++, json_encode( $item->getResult() ) );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $date );
+			$stmt->bind( $idx++, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 9, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); // so item is no longer modified
 			} else {
-				$stmt->bind( 9, $date );
+				$stmt->bind( $idx++, $date );
 			}
 
 			$stmt->execute()->finish();
@@ -314,8 +323,7 @@ class Standard
 				 * @see madmin/job/manager/standard/search/ansi
 				 * @see madmin/job/manager/standard/count/ansi
 				 */
-				$path = 'madmin/job/manager/standard/newid';
-				$item->setId( $this->newId( $conn, $path ) );
+				$item->setId( $this->newId( $conn, 'madmin/job/manager/standard/newid' ) );
 			}
 
 			$dbm->release( $conn, $dbname );

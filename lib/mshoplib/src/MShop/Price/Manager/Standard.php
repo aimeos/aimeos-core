@@ -412,6 +412,7 @@ class Standard
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
+			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -451,6 +452,7 @@ class Standard
 				 * @see mshop/price/manager/standard/count/ansi
 				 */
 				$path = 'mshop/price/manager/standard/insert';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
@@ -487,29 +489,35 @@ class Standard
 				 * @see mshop/price/manager/standard/count/ansi
 				 */
 				$path = 'mshop/price/manager/standard/update';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
-			$stmt = $this->getCachedStatement( $conn, $path );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			$stmt->bind( 1, $item->getType() );
-			$stmt->bind( 2, $item->getCurrencyId() );
-			$stmt->bind( 3, $item->getDomain() );
-			$stmt->bind( 4, $item->getLabel() );
-			$stmt->bind( 5, $item->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 6, $item->getValue() );
-			$stmt->bind( 7, $item->getCosts() );
-			$stmt->bind( 8, $item->getRebate() );
-			$stmt->bind( 9, json_encode( $item->getTaxrates(), JSON_FORCE_OBJECT ) );
-			$stmt->bind( 10, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 11, $date ); //mtime
-			$stmt->bind( 12, $context->getEditor() );
-			$stmt->bind( 13, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $item->getType() );
+			$stmt->bind( $idx++, $item->getCurrencyId() );
+			$stmt->bind( $idx++, $item->getDomain() );
+			$stmt->bind( $idx++, $item->getLabel() );
+			$stmt->bind( $idx++, $item->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getValue() );
+			$stmt->bind( $idx++, $item->getCosts() );
+			$stmt->bind( $idx++, $item->getRebate() );
+			$stmt->bind( $idx++, json_encode( $item->getTaxrates(), JSON_FORCE_OBJECT ) );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $date ); //mtime
+			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 14, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 14, $date ); //ctime
+				$stmt->bind( $idx++, $date ); //ctime
 			}
 
 			$stmt->execute()->finish();

@@ -19,10 +19,10 @@ return array(
 					),
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "mshop_attribute_list_type"(
+							INSERT INTO "mshop_attribute_list_type"( :names
 								"code", "domain", "label", "pos", "status",
 								"mtime","editor", "siteid", "ctime"
-							) VALUES (
+							) VALUES ( :values
 								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
@@ -30,7 +30,8 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_attribute_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
+							SET :names
+								"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -97,10 +98,10 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_attribute_list"(
+						INSERT INTO "mshop_attribute_list" ( :names
 							"parentid", "key", "type", "domain", "refid", "start", "end",
 							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -108,8 +109,9 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_attribute_list"
-						SET "parentid" = ?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
-							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+						SET :names
+							"parentid" = ?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?,
+							"end" = ?, "config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
@@ -168,10 +170,10 @@ return array(
 					),
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "mshop_attribute_property_type" (
+							INSERT INTO "mshop_attribute_property_type" ( :names
 								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
-							) VALUES (
+							) VALUES ( :values
 								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
@@ -179,7 +181,8 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_attribute_property_type"
-							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
+							SET :names
+								"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -231,10 +234,10 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_attribute_property" (
+						INSERT INTO "mshop_attribute_property" ( :names
 							"parentid", "key", "type", "langid", "value",
 							"mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -242,7 +245,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_attribute_property"
-						SET "parentid" = ?, "key" = ?, "type" = ?, "langid" = ?,
+						SET :names
+							"parentid" = ?, "key" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -294,10 +298,10 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_attribute_type" (
+						INSERT INTO "mshop_attribute_type" ( :names
 							"code", "domain", "label", "pos", "status",
 							"mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -305,7 +309,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_attribute_type"
-						SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
+						SET :names
+							"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -357,10 +362,10 @@ return array(
 			),
 			'insert' => array(
 				'ansi' => '
-					INSERT INTO "mshop_attribute" (
+					INSERT INTO "mshop_attribute" ( :names
 						"key", "type", "domain", "code", "status", "pos",
 						"label", "mtime", "editor", "siteid", "ctime"
-					) VALUES (
+					) VALUES ( :values
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
@@ -368,7 +373,8 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_attribute"
-					SET "key" = ?, "type" = ?, "domain" = ?, "code" = ?, "status" = ?,
+					SET :names
+						"key" = ?, "type" = ?, "domain" = ?, "code" = ?, "status" = ?,
 						"pos" = ?, "label" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'

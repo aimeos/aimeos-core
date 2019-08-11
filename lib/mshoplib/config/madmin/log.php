@@ -17,9 +17,9 @@ return array(
 			),
 			'insert' => array(
 				'ansi' => '
-					INSERT INTO "madmin_log" (
+					INSERT INTO "madmin_log" ( :names
 						"facility", "timestamp", "priority", "message", "request", "siteid"
-					) VALUES (
+					) VALUES ( :values
 						?, ?, ?, ?, ?, ?
 					)
 				',
@@ -27,8 +27,8 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "madmin_log"
-					SET "facility" = ?, "timestamp" = ?, "priority" = ?,
-						"message" = ?, "request" = ?
+					SET :names
+						"facility" = ?, "timestamp" = ?, "priority" = ?, "message" = ?, "request" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				',
 			),

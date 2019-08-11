@@ -578,6 +578,7 @@ class Standard extends Base
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
+			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -617,6 +618,7 @@ class Standard extends Base
 				 * @see mshop/order/manager/base/standard/count/ansi
 				 */
 				$path = 'mshop/order/manager/base/standard/insert';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
@@ -653,33 +655,39 @@ class Standard extends Base
 				 * @see mshop/order/manager/base/standard/count/ansi
 				 */
 				$path = 'mshop/order/manager/base/standard/update';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
 			$priceItem = $item->getPrice();
 			$localeItem = $context->getLocale();
 
-			$stmt = $this->getCachedStatement( $conn, $path );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			$stmt->bind( 1, $item->getCustomerId() );
-			$stmt->bind( 2, $localeItem->getSite()->getCode() );
-			$stmt->bind( 3, $item->getLocale()->getLanguageId() );
-			$stmt->bind( 4, $priceItem->getCurrencyId() );
-			$stmt->bind( 5, $priceItem->getValue() );
-			$stmt->bind( 6, $priceItem->getCosts() );
-			$stmt->bind( 7, $priceItem->getRebate() );
-			$stmt->bind( 8, $priceItem->getTaxValue() );
-			$stmt->bind( 9, $priceItem->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 10, $item->getCustomerReference() );
-			$stmt->bind( 11, $item->getComment() );
-			$stmt->bind( 12, $date ); // mtime
-			$stmt->bind( 13, $context->getEditor() );
-			$stmt->bind( 14, $localeItem->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $item->getCustomerId() );
+			$stmt->bind( $idx++, $localeItem->getSite()->getCode() );
+			$stmt->bind( $idx++, $item->getLocale()->getLanguageId() );
+			$stmt->bind( $idx++, $priceItem->getCurrencyId() );
+			$stmt->bind( $idx++, $priceItem->getValue() );
+			$stmt->bind( $idx++, $priceItem->getCosts() );
+			$stmt->bind( $idx++, $priceItem->getRebate() );
+			$stmt->bind( $idx++, $priceItem->getTaxValue() );
+			$stmt->bind( $idx++, $priceItem->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getCustomerReference() );
+			$stmt->bind( $idx++, $item->getComment() );
+			$stmt->bind( $idx++, $date ); // mtime
+			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $localeItem->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 15, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 15, $date ); // ctime
+				$stmt->bind( $idx++, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

@@ -18,10 +18,10 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_coupon_code" (
+						INSERT INTO "mshop_coupon_code" ( :names
 							"parentid", "code", "start", "end", "count", "ref",
 							"mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -29,7 +29,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_coupon_code"
-						SET "parentid" = ?, "code" = ?, "start" = ?, "end" = ?,
+						SET :names
+							"parentid" = ?, "code" = ?, "start" = ?, "end" = ?,
 							"count" = ?, "ref" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -88,10 +89,10 @@ return array(
 			),
 			'insert' => array(
 				'ansi' => '
-					INSERT INTO "mshop_coupon" (
+					INSERT INTO "mshop_coupon" ( :names
 						"label", "provider", "config", "start", "end",
 						"status", "mtime", "editor", "siteid", "ctime"
-					) VALUES (
+					) VALUES ( :values
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
@@ -99,8 +100,9 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_coupon"
-					SET "label" = ?, "provider" = ?, "config" = ?, "start" = ?, "end" = ?,
-						"status" = ?, "mtime" = ?, "editor" = ?
+					SET :names
+						"label" = ?, "provider" = ?, "config" = ?, "start" = ?,
+						"end" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),

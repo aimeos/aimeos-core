@@ -18,10 +18,10 @@ return array(
 			),
 			'insert' => array(
 				'ansi' => '
-					INSERT INTO "madmin_job" (
+					INSERT INTO "madmin_job" ( :names
 						"label", "method", "parameter", "result", "status",
 						"editor", "mtime", "siteid", "ctime"
-					) VALUES (
+					) VALUES ( :values
 						?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				',
@@ -29,7 +29,8 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "madmin_job"
-					SET "label" = ?, "method" = ?, "parameter" = ?,
+					SET :names
+						"label" = ?, "method" = ?, "parameter" = ?,
 						"result" = ?, "status" = ?, "editor" = ?, "mtime" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				',

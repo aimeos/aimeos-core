@@ -155,6 +155,16 @@ abstract class Base
 		return $this->manager->getResourceType( $withsub );
 	}
 
+	/**
+	 * Returns the additional column/search definitions
+	 *
+	 * @return array Associative list of column names as keys and items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 */
+	public function getSaveAttributes()
+	{
+		return $this->manager->getSaveAttributes();
+	}
+
 
 	/**
 	 * Returns the attributes that can be used for searching.

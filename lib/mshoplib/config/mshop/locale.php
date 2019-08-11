@@ -18,9 +18,9 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_locale_currency" (
+						INSERT INTO "mshop_locale_currency" ( :names
 							"label", "status", "siteid", "mtime", "editor", "id", "ctime"
-						) VALUES(
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -28,8 +28,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_locale_currency"
-						SET "label" = ?, "status" = ?, "siteid"=?, "mtime" = ?,
-							"editor" = ?
+						SET :names
+							"label" = ?, "status" = ?, "siteid"=?, "mtime" = ?, "editor" = ?
 						WHERE "id" = ?
 					'
 				),
@@ -77,9 +77,9 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_locale_language" (
+						INSERT INTO "mshop_locale_language" ( :names
 							"label", "status", "siteid", "mtime", "editor", "id", "ctime"
-						) VALUES(
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -87,8 +87,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_locale_language"
-						SET "label" = ?, "status" = ?, "siteid"=?, "mtime" = ?,
-							"editor" = ?
+						SET :names
+							"label" = ?, "status" = ?, "siteid"=?, "mtime" = ?, "editor" = ?
 						WHERE "id" = ?
 					'
 				),
@@ -136,20 +136,21 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_locale_site" (
+						INSERT INTO "mshop_locale_site" ( :names
 							"code", "label", "config", "status", "editor",
 							"mtime", "ctime", "parentid", "level", "nleft", "nright"
 						)
-						SELECT ?, ?, ?, ?, ?, ?, ?, 0, 0, COALESCE( MAX("nright"), 0 ) + 1,
-							COALESCE( MAX("nright"), 0 ) + 2
+						SELECT :values
+							?, ?, ?, ?, ?, ?, ?, 0, 0,
+							COALESCE( MAX("nright"), 0 ) + 1, COALESCE( MAX("nright"), 0 ) + 2
 						FROM "mshop_locale_site"
 					'
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_locale_site"
-						SET "code" = ?, "label" = ?, "config" = ?, "status" = ?,
-							"editor" = ?, "mtime" = ?
+						SET :names
+							"code" = ?, "label" = ?, "config" = ?, "status" = ?, "editor" = ?, "mtime" = ?
 						WHERE id = ?
 					'
 				),
@@ -197,10 +198,10 @@ return array(
 			),
 			'insert' => array(
 				'ansi' => '
-					INSERT INTO "mshop_locale" (
+					INSERT INTO "mshop_locale" ( :names
 						"langid", "currencyid", "pos", "status",
 						"mtime", "editor", "siteid", "ctime"
-					) VALUES (
+					) VALUES ( :values
 						?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
@@ -208,7 +209,8 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_locale"
-					SET "langid" = ?, "currencyid" = ?, "pos" = ?,
+					SET :names
+						"langid" = ?, "currencyid" = ?, "pos" = ?,
 						"status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'

@@ -669,6 +669,7 @@ class Standard
 			$id = $item->getId();
 			$price = $item->getPrice();
 			$date = date( 'Y-m-d H:i:s' );
+			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -708,6 +709,7 @@ class Standard
 				 * @see mshop/order/manager/base/product/standard/count/ansi
 				 */
 				$path = 'mshop/order/manager/base/product/standard/insert';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
@@ -744,43 +746,49 @@ class Standard
 				 * @see mshop/order/manager/base/product/standard/count/ansi
 				 */
 				$path = 'mshop/order/manager/base/product/standard/update';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
-			$stmt = $this->getCachedStatement( $conn, $path );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			$stmt->bind( 1, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getOrderProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $item->getOrderAddressId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 4, $item->getType() );
-			$stmt->bind( 5, $item->getProductId() );
-			$stmt->bind( 6, $item->getProductCode() );
-			$stmt->bind( 7, $item->getSupplierCode() );
-			$stmt->bind( 8, $item->getStockType() );
-			$stmt->bind( 9, $item->getName() );
-			$stmt->bind( 10, $item->getDescription() );
-			$stmt->bind( 11, $item->getMediaUrl() );
-			$stmt->bind( 12, $item->getTimeFrame() );
-			$stmt->bind( 13, $item->getQuantity() );
-			$stmt->bind( 14, $price->getCurrencyId() );
-			$stmt->bind( 15, $price->getValue() );
-			$stmt->bind( 16, $price->getCosts() );
-			$stmt->bind( 17, $price->getRebate() );
-			$stmt->bind( 18, $price->getTaxValue() );
-			$stmt->bind( 19, json_encode( $price->getTaxRates(), JSON_FORCE_OBJECT ) );
-			$stmt->bind( 20, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 21, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 22, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 23, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 24, $date ); // mtime
-			$stmt->bind( 25, $context->getEditor() );
-			$stmt->bind( 26, $item->getTarget() );
-			$stmt->bind( 27, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getOrderProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getOrderAddressId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getType() );
+			$stmt->bind( $idx++, $item->getProductId() );
+			$stmt->bind( $idx++, $item->getProductCode() );
+			$stmt->bind( $idx++, $item->getSupplierCode() );
+			$stmt->bind( $idx++, $item->getStockType() );
+			$stmt->bind( $idx++, $item->getName() );
+			$stmt->bind( $idx++, $item->getDescription() );
+			$stmt->bind( $idx++, $item->getMediaUrl() );
+			$stmt->bind( $idx++, $item->getTimeFrame() );
+			$stmt->bind( $idx++, $item->getQuantity() );
+			$stmt->bind( $idx++, $price->getCurrencyId() );
+			$stmt->bind( $idx++, $price->getValue() );
+			$stmt->bind( $idx++, $price->getCosts() );
+			$stmt->bind( $idx++, $price->getRebate() );
+			$stmt->bind( $idx++, $price->getTaxValue() );
+			$stmt->bind( $idx++, json_encode( $price->getTaxRates(), JSON_FORCE_OBJECT ) );
+			$stmt->bind( $idx++, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $date ); // mtime
+			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $item->getTarget() );
+			$stmt->bind( $idx++, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 28, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 28, $date ); // ctime
+				$stmt->bind( $idx++, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

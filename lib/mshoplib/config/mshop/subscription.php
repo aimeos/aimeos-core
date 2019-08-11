@@ -25,10 +25,10 @@ return array(
 			),
 			'insert' => array(
 				'ansi' => '
-					INSERT INTO "mshop_subscription" (
+					INSERT INTO "mshop_subscription" ( :names
 						"baseid", "ordprodid", "next", "end", "interval", "productid", "period",
 						"reason", "status", "mtime", "editor", "siteid", "ctime"
-					) VALUES (
+					) VALUES ( :values
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
@@ -36,7 +36,8 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_subscription"
-					SET "baseid" = ?, "ordprodid" = ?, "next" = ?, "end" = ?, "interval" = ?,
+					SET :names
+						"baseid" = ?, "ordprodid" = ?, "next" = ?, "end" = ?, "interval" = ?,
 						"productid" = ?, "period" = ?, "reason" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'

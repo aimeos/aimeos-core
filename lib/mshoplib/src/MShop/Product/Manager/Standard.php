@@ -435,6 +435,7 @@ class Standard
 		try
 		{
 			$id = $item->getId();
+			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -474,6 +475,7 @@ class Standard
 				 * @see mshop/product/manager/standard/count/ansi
 				 */
 				$path = 'mshop/product/manager/standard/insert';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
@@ -510,26 +512,32 @@ class Standard
 				 * @see mshop/product/manager/standard/count/ansi
 				 */
 				$path = 'mshop/product/manager/standard/update';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
-			$stmt = $this->getCachedStatement( $conn, $path );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			$stmt->bind( 1, $item->getType() );
-			$stmt->bind( 2, $item->getCode() );
-			$stmt->bind( 3, $item->getLabel() );
-			$stmt->bind( 4, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 5, $item->getDateStart() );
-			$stmt->bind( 6, $item->getDateEnd() );
-			$stmt->bind( 7, json_encode( $item->getConfig() ) );
-			$stmt->bind( 8, $item->getTarget() );
-			$stmt->bind( 9, $context->getEditor() );
-			$stmt->bind( 10, date( 'Y-m-d H:i:s' ) ); // mtime
-			$stmt->bind( 11, $item->getTimeCreated() );
-			$stmt->bind( 12, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $item->getType() );
+			$stmt->bind( $idx++, $item->getCode() );
+			$stmt->bind( $idx++, $item->getLabel() );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getDateStart() );
+			$stmt->bind( $idx++, $item->getDateEnd() );
+			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+			$stmt->bind( $idx++, $item->getTarget() );
+			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, date( 'Y-m-d H:i:s' ) ); // mtime
+			$stmt->bind( $idx++, $item->getTimeCreated() );
+			$stmt->bind( $idx++, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null )
 			{
-				$stmt->bind( 13, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //so item is no longer modified
 			}
 

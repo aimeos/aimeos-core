@@ -229,6 +229,7 @@ class Standard
 		try
 		{
 			$id = $item->getId();
+			$columns = $this->getObject()->getSaveAttributes();
 
 			/** mshop/locale/manager/site/standard/update/mysql
 			 * Updates an existing site record in the database
@@ -260,16 +261,22 @@ class Standard
 			 * @see mshop/locale/manager/site/standard/newid/ansi
 			 */
 			$path = 'mshop/locale/manager/site/standard/update';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 
-			$stmt = $this->getCachedStatement( $conn, $path );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			$stmt->bind( 1, $item->getCode() );
-			$stmt->bind( 2, $item->getLabel() );
-			$stmt->bind( 3, json_encode( $item->getConfig() ) );
-			$stmt->bind( 4, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 5, $context->getEditor() );
-			$stmt->bind( 6, date( 'Y-m-d H:i:s' ) ); // mtime
-			$stmt->bind( 7, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $item->getCode() );
+			$stmt->bind( $idx++, $item->getLabel() );
+			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, date( 'Y-m-d H:i:s' ) ); // mtime
+			$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 			$item->setId( $id ); // set Modified false
@@ -762,6 +769,7 @@ class Standard
 		try
 		{
 			$date = date( 'Y-m-d H:i:s' );
+			$columns = $this->getObject()->getSaveAttributes();
 
 			/** mshop/locale/manager/site/standard/insert/mysql
 			 * Inserts a new currency record into the database table
@@ -795,16 +803,22 @@ class Standard
 			 * @see mshop/locale/manager/site/standard/newid/ansi
 			 */
 			$path = 'mshop/locale/manager/site/standard/insert';
+			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 
-			$stmt = $this->getCachedStatement( $conn, $path );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			$stmt->bind( 1, $item->getCode() );
-			$stmt->bind( 2, $item->getLabel() );
-			$stmt->bind( 3, json_encode( $item->getConfig() ) );
-			$stmt->bind( 4, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 5, $context->getEditor() );
-			$stmt->bind( 6, $date ); // mtime
-			$stmt->bind( 7, $date ); // ctime
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $item->getCode() );
+			$stmt->bind( $idx++, $item->getLabel() );
+			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $date ); // mtime
+			$stmt->bind( $idx++, $date ); // ctime
 
 			$stmt->execute()->finish();
 

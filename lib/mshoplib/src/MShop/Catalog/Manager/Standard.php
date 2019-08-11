@@ -962,6 +962,7 @@ class Standard extends Base
 		try
 		{
 			$siteid = $context->getLocale()->getSiteId();
+			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $case !== true )
 			{
@@ -1007,6 +1008,7 @@ class Standard extends Base
 				 * @see mshop/catalog/manager/standard/insert-usage/ansi
 				 */
 				$path = 'mshop/catalog/manager/standard/update-usage';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 			else
 			{
@@ -1052,24 +1054,31 @@ class Standard extends Base
 				 * @see mshop/catalog/manager/standard/update-usage/ansi
 				 */
 				$path = 'mshop/catalog/manager/standard/insert-usage';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 
-			$stmt = $conn->create( $this->getSqlConfig( $path ) );
-			$stmt->bind( 1, json_encode( $item->getConfig() ) );
-			$stmt->bind( 2, $date ); // mtime
-			$stmt->bind( 3, $context->getEditor() );
-			$stmt->bind( 4, $item->getTarget() );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
+
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+			$stmt->bind( $idx++, $date ); // mtime
+			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $item->getTarget() );
 
 			if( $case !== true )
 			{
-				$stmt->bind( 5, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 6, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			}
 			else
 			{
-				$stmt->bind( 5, $date ); // ctime
-				$stmt->bind( 6, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 7, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $date ); // ctime
+				$stmt->bind( $idx++, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			}
 
 			$stmt->execute()->finish();

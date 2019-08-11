@@ -33,13 +33,13 @@ return array(
 					),
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "mshop_order_base_address" (
+							INSERT INTO "mshop_order_base_address" ( :names
 								"baseid", "addrid", "type", "company", "vatid", "salutation",
 								"title", "firstname", "lastname", "address1", "address2",
 								"address3", "postal", "city", "state", "countryid", "langid",
 								"telephone", "email", "telefax", "website", "longitude", "latitude",
 								"pos", "mtime", "editor", "siteid", "ctime"
-							) VALUES (
+							) VALUES ( :values
 								?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 							)
 						'
@@ -47,7 +47,8 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_order_base_address"
-							SET "baseid" = ?, "addrid" = ?, "type" = ?, "company" = ?, "vatid" = ?,
+							SET :names
+								"baseid" = ?, "addrid" = ?, "type" = ?, "company" = ?, "vatid" = ?,
 								"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
 								"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 								"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
@@ -130,10 +131,9 @@ return array(
 					),
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "mshop_order_base_coupon" (
-								"baseid", "ordprodid", "code",
-								"mtime", "editor", "siteid", "ctime"
-							) VALUES (
+							INSERT INTO "mshop_order_base_coupon" ( :names
+								"baseid", "ordprodid", "code", "mtime", "editor", "siteid", "ctime"
+							) VALUES ( :values
 								?, ?, ?, ?, ?, ?, ?
 							)
 						'
@@ -141,8 +141,8 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_order_base_coupon"
-							SET "baseid" = ?, "ordprodid" = ?, "code" = ?,
-								"mtime" = ?, "editor" = ?
+							SET :names
+								"baseid" = ?, "ordprodid" = ?, "code" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
@@ -207,10 +207,10 @@ return array(
 						),
 						'insert' => array(
 							'ansi' => '
-								INSERT INTO "mshop_order_base_product_attr" (
+								INSERT INTO "mshop_order_base_product_attr" ( :names
 									"attrid", "ordprodid", "type", "code", "value",
 									"quantity", "name", "mtime", "editor", "siteid", "ctime"
-								) VALUES (
+								) VALUES ( :values
 									?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 								)
 							'
@@ -218,7 +218,8 @@ return array(
 						'update' => array(
 							'ansi' => '
 								UPDATE "mshop_order_base_product_attr"
-								SET "attrid" = ?, "ordprodid" = ?, "type" = ?, "code" = ?,
+								SET :names
+									"attrid" = ?, "ordprodid" = ?, "type" = ?, "code" = ?,
 									"value" = ?, "quantity" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 								WHERE "siteid" = ? AND "id" = ?
 							'
@@ -312,12 +313,12 @@ return array(
 					),
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "mshop_order_base_product" (
+							INSERT INTO "mshop_order_base_product" ( :names
 								"baseid", "ordprodid", "ordaddrid", "type", "prodid", "prodcode", "suppliercode",
 								"stocktype", "name", "description", "mediaurl", "timeframe", "quantity",
 								"currencyid", "price", "costs", "rebate", "tax", "taxrate", "taxflag",
 								"flags", "status", "pos", "mtime", "editor", "target", "siteid", "ctime"
-							) VALUES (
+							) VALUES ( :values
 								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
@@ -325,7 +326,8 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_order_base_product"
-							SET "baseid" = ?, "ordprodid" = ?, "ordaddrid" = ?, "type" = ?,
+							SET :names
+								"baseid" = ?, "ordprodid" = ?, "ordaddrid" = ?, "type" = ?,
 								"prodid" = ?, "prodcode" = ?, "suppliercode" = ?, "stocktype" = ?,
 								"name" = ?, "description" = ?, "mediaurl" = ?, "timeframe" = ?,
 								"quantity" = ?, "currencyid" = ?, "price" = ?, "costs" = ?,
@@ -409,10 +411,10 @@ return array(
 						),
 						'insert' => array(
 							'ansi' => '
-								INSERT INTO "mshop_order_base_service_attr" (
+								INSERT INTO "mshop_order_base_service_attr" ( :names
 									"attrid", "ordservid", "type", "code", "value",
 									"quantity", "name", "mtime", "editor", "siteid", "ctime"
-								) VALUES (
+								) VALUES ( :values
 									?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 								)
 							'
@@ -420,7 +422,8 @@ return array(
 						'update' => array(
 							'ansi' => '
 								UPDATE "mshop_order_base_service_attr"
-								SET "attrid" = ?, "ordservid" = ?, "type" = ?, "code" = ?,
+								SET :names
+									"attrid" = ?, "ordservid" = ?, "type" = ?, "code" = ?,
 									"value" = ?, "quantity" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 								WHERE "siteid" = ? AND "id" = ?
 							'
@@ -514,11 +517,11 @@ return array(
 					),
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "mshop_order_base_service" (
+							INSERT INTO "mshop_order_base_service" ( :names
 								"baseid", "servid", "type", "code", "name", "mediaurl",
 								"currencyid", "price", "costs", "rebate", "tax", "taxrate",
 								"taxflag", "pos", "mtime", "editor", "siteid", "ctime"
-							) VALUES (
+							) VALUES ( :values
 								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
@@ -526,7 +529,8 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_order_base_service"
-							SET "baseid" = ?, "servid" = ?, "type" = ?, "code" = ?,
+							SET :names
+								"baseid" = ?, "servid" = ?, "type" = ?, "code" = ?,
 								"name" = ?, "mediaurl" = ?, "currencyid" = ?, "price" = ?,
 								"costs" = ?, "rebate" = ?, "tax" = ?, "taxrate" = ?,
 								"taxflag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
@@ -627,11 +631,11 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_order_base" (
+						INSERT INTO "mshop_order_base" ( :names
 							"customerid", "sitecode", "langid", "currencyid",
 							"price", "costs", "rebate", "tax", "taxflag", "customerref",
 							"comment", "mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -639,7 +643,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_order_base"
-						SET "customerid" = ?, "sitecode" = ?, "langid" = ?, "currencyid" = ?,
+						SET :names
+							"customerid" = ?, "sitecode" = ?, "langid" = ?, "currencyid" = ?,
 							"price" = ?, "costs" = ?, "rebate" = ?, "tax" = ?, "taxflag" = ?,
 							"customerref" = ?, "comment" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
@@ -710,10 +715,9 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "mshop_order_status" (
-							"parentid", "type", "value",
-							"mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						INSERT INTO "mshop_order_status" ( :names
+							"parentid", "type", "value", "mtime", "editor", "siteid", "ctime"
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -721,8 +725,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_order_status"
-						SET "parentid" = ?, "type" = ?, "value" = ?,
-							"mtime" = ?, "editor" = ?
+						SET :names
+							"parentid" = ?, "type" = ?, "value" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
@@ -807,11 +811,11 @@ return array(
 			),
 			'insert' => array(
 				'ansi' => '
-					INSERT INTO "mshop_order" (
+					INSERT INTO "mshop_order" ( :names
 						"baseid", "type", "datepayment", "datedelivery",
 						"statusdelivery", "statuspayment", "relatedid", "mtime",
 						"editor", "siteid", "ctime", "cdate", "cmonth", "cweek", "cwday", "chour"
-					) VALUES (
+					) VALUES ( :values
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
@@ -819,9 +823,9 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_order"
-					SET "baseid" = ?, "type" = ?, "datepayment" = ?, "datedelivery" = ?,
-						"statusdelivery" = ?, "statuspayment" = ?, "relatedid" = ?,
-						"mtime" = ?, "editor" = ?
+					SET :names
+						"baseid" = ?, "type" = ?, "datepayment" = ?, "datedelivery" = ?, "statusdelivery" = ?,
+						"statuspayment" = ?, "relatedid" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),

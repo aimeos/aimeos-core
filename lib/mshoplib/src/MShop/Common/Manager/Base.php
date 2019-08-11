@@ -143,6 +143,17 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
+	 * Returns the additional column/search definitions
+	 *
+	 * @return array Associative list of column names as keys and items implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 */
+	public function getSaveAttributes()
+	{
+		return [];
+	}
+
+
+	/**
 	 * Adds or updates a list of item objects.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $items List of item object whose data should be saved
@@ -169,6 +180,35 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	{
 		$this->object = $object;
 		return $this;
+	}
+
+
+	/**
+	 * Adds additional column names to SQL statement
+	 *
+	 * @param string[] $columns List of column names
+	 * @param string $sql Insert or update SQL statement
+	 * @param boolean $mode True for insert, false for update statement
+	 * @return string Modified insert or update SQL statement
+	 */
+	protected function addSqlColumns( array $columns, $sql, $mode = true )
+	{
+		$names = $values = '';
+
+		if( $mode )
+		{
+			foreach( $columns as $name ) {
+				$names .= '"' . $name . '", '; $values .= '?, ';
+			}
+		}
+		else
+		{
+			foreach( $columns as $name ) {
+				$names .= '"' . $name . '" = ?, ';
+			}
+		}
+
+		return str_replace( [':names', ':values'], [$names, $values], $sql );
 	}
 
 

@@ -375,6 +375,7 @@ class Standard
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
+			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -414,6 +415,7 @@ class Standard
 				 * @see mshop/order/manager/standard/count/ansi
 				 */
 				$path = 'mshop/order/manager/standard/insert';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
@@ -450,31 +452,37 @@ class Standard
 				 * @see mshop/order/manager/standard/count/ansi
 				 */
 				$path = 'mshop/order/manager/standard/update';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
-			$stmt = $this->getCachedStatement( $conn, $path );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			$stmt->bind( 1, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getType() );
-			$stmt->bind( 3, $item->getDatePayment() );
-			$stmt->bind( 4, $item->getDateDelivery() );
-			$stmt->bind( 5, $item->getDeliveryStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 6, $item->getPaymentStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 7, $item->getRelatedId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 8, $date ); // mtime
-			$stmt->bind( 9, $context->getEditor() );
-			$stmt->bind( 10, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getType() );
+			$stmt->bind( $idx++, $item->getDatePayment() );
+			$stmt->bind( $idx++, $item->getDateDelivery() );
+			$stmt->bind( $idx++, $item->getDeliveryStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getPaymentStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getRelatedId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $date ); // mtime
+			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 11, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); // is not modified anymore
 			} else {
-				$stmt->bind( 11, $date ); // ctime
-				$stmt->bind( 12, date( 'Y-m-d' ) ); // cdate
-				$stmt->bind( 13, date( 'Y-m' ) ); // cmonth
-				$stmt->bind( 14, date( 'Y-W' ) ); // cweek
-				$stmt->bind( 15, date( 'w' ) ); // cwday
-				$stmt->bind( 16, date( 'H' ) ); // chour
+				$stmt->bind( $idx++, $date ); // ctime
+				$stmt->bind( $idx++, date( 'Y-m-d' ) ); // cdate
+				$stmt->bind( $idx++, date( 'Y-m' ) ); // cmonth
+				$stmt->bind( $idx++, date( 'Y-W' ) ); // cweek
+				$stmt->bind( $idx++, date( 'w' ) ); // cwday
+				$stmt->bind( $idx++, date( 'H' ) ); // chour
 			}
 
 			$stmt->execute()->finish();

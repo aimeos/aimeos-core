@@ -105,35 +105,42 @@ abstract class Base
 		try
 		{
 			$id = $item->getId();
+			$date = date( 'Y-m-d H:i:s' );
+			$path = $this->getConfigPath();
+			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $id === null ) {
-				$type = 'insert';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );
 			} else {
-				$type = 'update';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'update' ), false );
 			}
 
-			$time = date( 'Y-m-d H:i:s' );
-			$stmt = $this->getCachedStatement( $conn, $this->getConfigPath() . $type );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getKey() );
-			$stmt->bind( 3, $item->getType() );
-			$stmt->bind( 4, $item->getDomain() );
-			$stmt->bind( 5, $item->getRefId() );
-			$stmt->bind( 6, $item->getDateStart() );
-			$stmt->bind( 7, $item->getDateEnd() );
-			$stmt->bind( 8, json_encode( $item->getConfig() ) );
-			$stmt->bind( 9, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 10, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 11, $time ); //mtime
-			$stmt->bind( 12, $this->getContext()->getEditor() );
-			$stmt->bind( 13, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getKey() );
+			$stmt->bind( $idx++, $item->getType() );
+			$stmt->bind( $idx++, $item->getDomain() );
+			$stmt->bind( $idx++, $item->getRefId() );
+			$stmt->bind( $idx++, $item->getDateStart() );
+			$stmt->bind( $idx++, $item->getDateEnd() );
+			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $date ); //mtime
+			$stmt->bind( $idx++, $this->getContext()->getEditor() );
+			$stmt->bind( $idx++, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 
 			if( $id !== null ) {
 				$stmt->bind( 14, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			} else {
-				$stmt->bind( 14, $time ); //ctime
+				$stmt->bind( 14, $date ); //ctime
 			}
 
 			$stmt->execute()->finish();
@@ -141,8 +148,7 @@ abstract class Base
 			if( $fetch === true )
 			{
 				if( $id === null ) {
-					$path = $this->getConfigPath() . 'newid';
-					$item->setId( $this->newId( $conn, $path ) );
+					$item->setId( $this->newId( $conn, $this->getConfigPath() . 'newid' ) );
 				} else {
 					$item->setId( $id ); // modified false
 				}

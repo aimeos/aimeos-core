@@ -121,49 +121,59 @@ abstract class Base
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
-			$type = ( $id === null ? 'insert' : 'update' );
+			$path = $this->getConfigPath();
+			$columns = $this->getObject()->getSaveAttributes();
 
-			$stmt = $this->getCachedStatement( $conn, $this->getConfigPath() . $type );
+			if( $id === null ) {
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );
+			} else {
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'update' ), false );
+			}
 
-			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getCompany() );
-			$stmt->bind( 3, $item->getVatId() );
-			$stmt->bind( 4, $item->getSalutation() );
-			$stmt->bind( 5, $item->getTitle() );
-			$stmt->bind( 6, $item->getFirstname() );
-			$stmt->bind( 7, $item->getLastname() );
-			$stmt->bind( 8, $item->getAddress1() );
-			$stmt->bind( 9, $item->getAddress2());
-			$stmt->bind( 10, $item->getAddress3() );
-			$stmt->bind( 11, $item->getPostal() );
-			$stmt->bind( 12, $item->getCity() );
-			$stmt->bind( 13, $item->getState() );
-			$stmt->bind( 14, $item->getCountryId() );
-			$stmt->bind( 15, $item->getLanguageId() );
-			$stmt->bind( 16, $item->getTelephone() );
-			$stmt->bind( 17, $item->getEmail() );
-			$stmt->bind( 18, $item->getTelefax() );
-			$stmt->bind( 19, $item->getWebsite() );
-			$stmt->bind( 20, $item->getLongitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
-			$stmt->bind( 21, $item->getLatitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
-			$stmt->bind( 22, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 23, $date ); //mtime
-			$stmt->bind( 24, $context->getEditor() );
-			$stmt->bind( 25, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
+
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getCompany() );
+			$stmt->bind( $idx++, $item->getVatId() );
+			$stmt->bind( $idx++, $item->getSalutation() );
+			$stmt->bind( $idx++, $item->getTitle() );
+			$stmt->bind( $idx++, $item->getFirstname() );
+			$stmt->bind( $idx++, $item->getLastname() );
+			$stmt->bind( $idx++, $item->getAddress1() );
+			$stmt->bind( $idx++, $item->getAddress2());
+			$stmt->bind( $idx++, $item->getAddress3() );
+			$stmt->bind( $idx++, $item->getPostal() );
+			$stmt->bind( $idx++, $item->getCity() );
+			$stmt->bind( $idx++, $item->getState() );
+			$stmt->bind( $idx++, $item->getCountryId() );
+			$stmt->bind( $idx++, $item->getLanguageId() );
+			$stmt->bind( $idx++, $item->getTelephone() );
+			$stmt->bind( $idx++, $item->getEmail() );
+			$stmt->bind( $idx++, $item->getTelefax() );
+			$stmt->bind( $idx++, $item->getWebsite() );
+			$stmt->bind( $idx++, $item->getLongitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+			$stmt->bind( $idx++, $item->getLatitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $date ); //mtime
+			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 26, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
-				$stmt->bind( 26, $date ); // ctime
+				$stmt->bind( $idx++, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();
 
-			if( $id === null && $fetch === true )
-			{
-				$path = $this->getConfigPath() . 'newid';
-				$item->setId( $this->newId( $conn, $path ) );
+			if( $id === null && $fetch === true ) {
+				$item->setId( $this->newId( $conn, $this->getConfigPath() . 'newid' ) );
 			}
 
 			$dbm->release( $conn, $dbname );

@@ -196,6 +196,7 @@ class Standard
 		try
 		{
 			$id = $item->getId();
+			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -235,6 +236,7 @@ class Standard
 				 * @see madmin/log/manager/standard/count/ansi
 				 */
 				$path = 'madmin/log/manager/standard/insert';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
@@ -271,19 +273,26 @@ class Standard
 				 * @see madmin/log/manager/standard/count/ansi
 				 */
 				$path = 'madmin/log/manager/standard/update';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
-			$stmt = $this->getCachedStatement( $conn, $path );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			$stmt->bind( 1, $item->getFacility() );
-			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) );
-			$stmt->bind( 3, $item->getPriority(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 4, $item->getMessage() );
-			$stmt->bind( 5, $item->getRequest() );
-			$stmt->bind( 6, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+
+			$stmt->bind( $idx++, $item->getFacility() );
+			$stmt->bind( $idx++, date( 'Y-m-d H:i:s' ) );
+			$stmt->bind( $idx++, $item->getPriority(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getMessage() );
+			$stmt->bind( $idx++, $item->getRequest() );
+			$stmt->bind( $idx++, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $item->getId() !== null ) {
-				$stmt->bind( 7, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			}
 
@@ -327,8 +336,7 @@ class Standard
 				 * @see madmin/log/manager/standard/search/ansi
 				 * @see madmin/log/manager/standard/count/ansi
 				 */
-				$path = 'madmin/log/manager/standard/newid';
-				$item->setId( $this->newId( $conn, $path ) );
+				$item->setId( $this->newId( $conn, 'madmin/log/manager/standard/newid' ) );
 			}
 
 			$dbm->release( $conn, $dbname );

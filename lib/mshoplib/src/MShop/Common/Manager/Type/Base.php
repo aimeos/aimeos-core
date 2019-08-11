@@ -105,28 +105,35 @@ abstract class Base
 		{
 			$id = $item->getId();
 			$time = date( 'Y-m-d H:i:s' );
+			$path = $this->getConfigPath();
+			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $id === null ) {
-				$type = 'insert';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );
 			} else {
-				$type = 'update';
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'update' ), false );
 			}
 
-			$stmt = $conn->create( $this->getSqlConfig( $this->getConfigPath() . $type ) );
+			$idx = 1;
+			$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-			$stmt->bind( 1, $item->getCode(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 2, $item->getDomain(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 3, $item->getLabel(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 4, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 5, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 6, $time ); //mtime
-			$stmt->bind( 7, $context->getEditor() );
-			$stmt->bind( 8, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			foreach( $columns as $name => $entry ) {
+				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			}
+
+			$stmt->bind( $idx++, $item->getCode(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( $idx++, $item->getDomain(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( $idx++, $item->getLabel(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $time ); //mtime
+			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 9, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			} else {
-				$stmt->bind( 9, $time ); //ctime
+				$stmt->bind( $idx++, $time ); //ctime
 			}
 
 			$stmt->execute()->finish();
