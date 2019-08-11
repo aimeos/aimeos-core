@@ -109,7 +109,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	public function getInternalDeps()
 	{
 		return isset( $this->values['internaldeps'] ) ? (array) $this->values['internaldeps'] : [];
-  	}
+	}
 
 
 	/**
