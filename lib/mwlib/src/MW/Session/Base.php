@@ -17,7 +17,7 @@ namespace Aimeos\MW\Session;
  * @package MW
  * @subpackage Session
  */
-abstract class Base
+abstract class Base implements \Aimeos\MW\Session\Iface
 {
 	/**
 	 * Sets a list of key/value pairs.
