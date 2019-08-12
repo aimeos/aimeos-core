@@ -36,6 +36,33 @@ interface Iface
 	 */
 	public function __isset( $name );
 
+
+	/**
+	 * Sets the new item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @param mixed $value New property value
+	 */
+	public function __set( $name, $value );
+
+	/**
+	 * Returns the item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @param mixed $default Default value if property is unknown
+	 * @return mixed|null Property value or default value if property is unknown
+	 */
+	public function get( $name, $default = null );
+
+	/**
+	 * Sets the new item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @param mixed $value New property value
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 */
+	public function set( $name, $value );
+
 	/**
 	 * Returns the unique ID of the item.
 	 *
