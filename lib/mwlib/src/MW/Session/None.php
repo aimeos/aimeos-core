@@ -18,7 +18,7 @@ namespace Aimeos\MW\Session;
  * @package MW
  * @subpackage Session
  */
-class None implements \Aimeos\MW\Session\Iface
+class None extends Base implements \Aimeos\MW\Session\Iface
 {
 	private $data = [];
 

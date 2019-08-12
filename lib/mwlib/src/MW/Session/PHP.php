@@ -18,7 +18,7 @@ namespace Aimeos\MW\Session;
  * @package MW
  * @subpackage Session
  */
-class PHP implements \Aimeos\MW\Session\Iface
+class PHP extends Base implements \Aimeos\MW\Session\Iface
 {
 	/**
 	 * Returns the value of the requested session key.

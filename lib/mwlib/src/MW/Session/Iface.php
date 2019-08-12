@@ -21,6 +21,14 @@ namespace Aimeos\MW\Session;
 interface Iface
 {
 	/**
+	 * Sets a list of key/value pairs.
+	 *
+	 * @param array $values Associative list of key/value pairs
+	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
+	 */
+	public function apply( array $values );
+
+	/**
 	 * Returns the value of the requested session key.
 	 *
 	 * If the returned value wasn't a string, it's decoded from its serialized
