@@ -17,6 +17,7 @@ namespace Aimeos;
  */
 class MAdmin
 {
+	private static $context;
 	private static $cache = true;
 	private static $objects = [];
 
@@ -29,6 +30,7 @@ class MAdmin
 	public static function cache( $value )
 	{
 		self::$cache = (boolean) $value;
+		self::$context = null;
 		self::$objects = [];
 	}
 
@@ -54,6 +56,11 @@ class MAdmin
 		if( empty( $path ) ) {
 			throw new \Aimeos\MAdmin\Exception( sprintf( 'Manager path is empty' ) );
 		}
+
+		if( self::$context !== null && self::$context !== $context ) {
+			self::$objects = []; // clear cached objects on context change
+		}
+		self::$context = $context;
 
 		if( self::$cache === false || !isset( self::$objects[$path] ) )
 		{
