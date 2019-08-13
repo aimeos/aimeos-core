@@ -332,10 +332,8 @@ class Standard
 			$catalogSearch->getConditions(),
 		);
 
-		if( !empty( $prodIds ) )
-		{
+		if( !empty( $prodIds ) ) {
 			$expr[] = $catalogSearch->compare( '==', 'catalog.lists.refid', $prodIds );
-			$this->clearItems( $prodIds );
 		}
 
 		$catalogSearch->setConditions( $catalogSearch->combine( '&&', $expr ) );
