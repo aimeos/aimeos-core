@@ -41,7 +41,8 @@ return array(
 								mserlity."code" AS "service.lists.type.code", mserlity."domain" AS "service.lists.type.domain",
 								mserlity."label" AS "service.lists.type.label", mserlity."status" AS "service.lists.type.status",
 								mserlity."mtime" AS "service.lists.type.mtime", mserlity."editor" AS "service.lists.type.editor",
-								mserlity."ctime" AS "service.lists.type.ctime", mserlity."pos" AS "service.lists.type.position"
+								mserlity."ctime" AS "service.lists.type.ctime", mserlity."pos" AS "service.lists.type.position",
+								mserlity.*
 							FROM "mshop_service_list_type" AS mserlity
 							:joins
 							WHERE :cond
@@ -123,7 +124,8 @@ return array(
 							mserli."start" AS "service.lists.datestart", mserli."end" AS "service.lists.dateend",
 							mserli."config" AS "service.lists.config", mserli."pos" AS "service.lists.position",
 							mserli."status" AS "service.lists.status", mserli."mtime" AS "service.lists.mtime",
-							mserli."editor" AS "service.lists.editor", mserli."ctime" AS "service.lists.ctime"
+							mserli."editor" AS "service.lists.editor", mserli."ctime" AS "service.lists.ctime",
+							mserli.*
 						FROM "mshop_service_list" AS mserli
 						:joins
 						WHERE :cond
@@ -190,7 +192,8 @@ return array(
 							mserty."domain" AS "service.type.domain", mserty."code" AS "service.type.code",
 							mserty."label" AS "service.type.label", mserty."status" AS "service.type.status",
 							mserty."mtime" AS "service.type.mtime", mserty."editor" AS "service.type.editor",
-							mserty."ctime" AS "service.type.ctime", mserty."pos" AS "service.type.position"
+							mserty."ctime" AS "service.type.ctime", mserty."pos" AS "service.type.position",
+							mserty.*
 						FROM "mshop_service_type" AS mserty
 						:joins
 						WHERE :cond
@@ -257,7 +260,8 @@ return array(
 						mser."provider" AS "service.provider", mser."config" AS "service.config",
 						mser."start" AS "service.datestart", mser."end" AS "service.dateend",
 						mser."status" AS "service.status", mser."mtime" AS "service.mtime",
-						mser."editor" AS "service.editor",	mser."ctime" AS "service.ctime"
+						mser."editor" AS "service.editor",	mser."ctime" AS "service.ctime",
+						mser.*
 					FROM "mshop_service" AS mser
 					:joins
 					WHERE :cond

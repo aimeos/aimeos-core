@@ -41,7 +41,8 @@ return array(
 								mtexlity."code" AS "text.lists.type.code", mtexlity."domain" AS "text.lists.type.domain",
 								mtexlity."label" AS "text.lists.type.label", mtexlity."status" AS "text.lists.type.status",
 								mtexlity."mtime" AS "text.lists.type.mtime", mtexlity."editor" AS "text.lists.type.editor",
-								mtexlity."ctime" AS "text.lists.type.ctime", mtexlity."pos" AS "text.lists.type.position"
+								mtexlity."ctime" AS "text.lists.type.ctime", mtexlity."pos" AS "text.lists.type.position",
+								mtexlity.*
 							FROM "mshop_text_list_type" AS mtexlity
 							:joins
 							WHERE :cond
@@ -123,7 +124,8 @@ return array(
 							mtexli."start" AS "text.lists.datestart", mtexli."end" AS "text.lists.dateend",
 							mtexli."config" AS "text.lists.config", mtexli."pos" AS "text.lists.position",
 							mtexli."status" AS "text.lists.status", mtexli."mtime" AS "text.lists.mtime",
-							mtexli."editor" AS "text.lists.editor", mtexli."ctime" AS "text.lists.ctime"
+							mtexli."editor" AS "text.lists.editor", mtexli."ctime" AS "text.lists.ctime",
+							mtexli.*
 						FROM "mshop_text_list" AS mtexli
 						:joins
 						WHERE :cond
@@ -190,7 +192,8 @@ return array(
 							mtexty."code" AS "text.type.code", mtexty."domain" AS "text.type.domain",
 							mtexty."label" AS "text.type.label", mtexty."status" AS "text.type.status",
 							mtexty."mtime" AS "text.type.mtime", mtexty."editor" AS "text.type.editor",
-							mtexty."ctime" AS "text.type.ctime", mtexty."pos" AS "text.type.position"
+							mtexty."ctime" AS "text.type.ctime", mtexty."pos" AS "text.type.position",
+							mtexty.*
 						FROM "mshop_text_type" mtexty
 						:joins
 						WHERE :cond
@@ -256,7 +259,7 @@ return array(
 						mtex."domain" AS "text.domain", mtex."label" AS "text.label",
 						mtex."content" AS "text.content", mtex."status" AS "text.status",
 						mtex."mtime" AS "text.mtime", mtex."editor" AS "text.editor",
-						mtex."ctime" AS "text.ctime"
+						mtex."ctime" AS "text.ctime", mtex.*
 					FROM "mshop_text" AS mtex
 					:joins
 					WHERE :cond
