@@ -43,12 +43,14 @@ class AttributeMigrateKey extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Update attribute "key" columns', 0 ); $this->status( '' );
 
-		$schema = $this->getSchema( 'db-attribute' );
+		$rname = 'db-attribute';
+		$table = 'mshop_attribute';
+		$schema = $this->getSchema( $rname );
 
 		$this->msg( 'Checking table mshop_attribute', 1 );
 
-		if( $schema->tableExists( 'mshop_attribute' ) && $schema->columnExists( 'mshop_attribute', 'key' )
-			&& ( $item = $schema->getColumnDetails( 'mshop_attribute', 'key' ) ) && ( $item->getMaxLength() !== 32 )
+		if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'key' )
+			&& ( $item = $schema->getColumnDetails( $table, 'key' ) ) && ( $item->getMaxLength() !== 32 )
 		) {
 			$dbm = $this->additional->getDatabaseManager();
 			$conn = $dbm->acquire( $rname );
