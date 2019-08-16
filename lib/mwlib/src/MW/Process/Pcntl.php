@@ -74,7 +74,7 @@ class Pcntl implements Iface
 	 */
 	public function isAvailable()
 	{
-		if( php_sapi_name() === 'cli'
+		if( php_sapi_name() === 'cli' && $this->max > 0
 			&& function_exists( 'pcntl_fork' ) && function_exists( 'pcntl_wait' )
 			&& function_exists( 'pcntl_signal' ) && function_exists( 'pcntl_waitpid' )
 			&& function_exists( 'pcntl_setpriority' ) && function_exists( 'posix_kill' )
