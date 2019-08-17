@@ -75,27 +75,25 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * Returns the value or list of values of the attribute item for the ordered product with the given code.
 	 *
 	 * @param string $code Code of the product attribute item
-	 * @param string $type Type of the product attribute item
+	 * @param array|string $type Type or list of types of the product attribute items
 	 * @return array|string|null Value or list of values of the attribute item for the ordered product and the given code
 	 */
 	public function getAttribute( $code, $type = '' )
 	{
+		$list = [];
 		$map = $this->getAttributeMap();
 
-		if( !isset( $map[$type][$code] ) ) {
-			return null;
+		foreach( (array) $type as $key )
+		{
+			if( isset( $map[$key][$code] ) )
+			{
+				foreach( $map[$key][$code] as $item ) {
+					$list[] = $item->getValue();
+				}
+			}
 		}
 
-		if( count( $map[$type][$code] ) === 1 ) {
-			return reset( $map[$type][$code] )->getValue();
-		}
-
-		$list = [];
-		foreach( $map[$type][$code] as $item ) {
-			$list[] = $item->getValue();
-		}
-
-		return $list;
+		return count( $list ) > 1 ? $list : ( reset( $list ) ?: null );
 	}
 
 
@@ -109,17 +107,20 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getAttributeItem( $code, $type = '' )
 	{
+		$list = [];
 		$map = $this->getAttributeMap();
 
-		if( !isset( $map[$type][$code] ) ) {
-			return null;
+		foreach( (array) $type as $key )
+		{
+			if( isset( $map[$key][$code] ) )
+			{
+				foreach( $map[$key][$code] as $item ) {
+					$list[] = $item;
+				}
+			}
 		}
 
-		if( count( $map[$type][$code] ) === 1 ) {
-			return reset( $map[$type][$code] );
-		}
-
-		return $map[$type][$code];
+		return count( $list ) > 1 ? $list : ( reset( $list ) ?: null );
 	}
 
 

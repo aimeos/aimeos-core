@@ -538,6 +538,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->getAttribute( 'code_001' );
 		$this->assertEquals( 'value_001', $result );
 
+		$result = $this->object->getAttribute( 'code_002', ['test_002'] );
+		$this->assertEquals( 'value_002', $result );
+
 		$result = $this->object->getAttribute( 'code_002', 'test_002' );
 		$this->assertEquals( 'value_002', $result );
 

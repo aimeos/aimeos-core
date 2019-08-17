@@ -276,7 +276,7 @@ interface Iface
 	 * Returns the value of the attribute item for the ordered product with the given code.
 	 *
 	 * @param string $code Code of the product attribute item
-	 * @param string $type Type of the product attribute item
+	 * @param array|string $type Type or list of types of the product attribute items
 	 * @return string|null Value of the attribute item for the ordered product and the given code
 	 */
 	public function getAttribute( $code, $type = '' );
@@ -285,7 +285,7 @@ interface Iface
 	 * Returns the attribute item for the ordered product with the given code.
 	 *
 	 * @param string $code Code of the product attribute item
-	 * @param string $type Type of the product attribute item
+	 * @param array|string $type Type or list of types of the product attribute items
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface|null Attribute item for the ordered product and the given code
 	 */
 	public function getAttributeItem( $code, $type = '' );

@@ -120,20 +120,20 @@ interface Iface
 	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price );
 
 	/**
-	 * Returns the value of the attribute item for the service with the given code.
+	 * Returns the value of the attribute item for the ordered product with the given code.
 	 *
-	 * @param string $code Code of the service attribute item
-	 * @param string $type Type of the service attribute item
-	 * @return string|null value of the attribute item for the service and the given code
+	 * @param string $code Code of the product attribute item
+	 * @param array|string $type Type or list of types of the product attribute items
+	 * @return string|null Value of the attribute item for the ordered product and the given code
 	 */
 	public function getAttribute( $code, $type = '' );
 
 	/**
-	 * Returns the attribute item for the service with the given code.
+	 * Returns the attribute item for the ordered product with the given code.
 	 *
-	 * @param string $code Code of the service attribute item
-	 * @param string $type Type of the service attribute item
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface|null Attribute item for the service and the given code
+	 * @param string $code Code of the product attribute item
+	 * @param array|string $type Type or list of types of the product attribute items
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface|null Attribute item for the ordered product and the given code
 	 */
 	public function getAttributeItem( $code, $type = '' );
 

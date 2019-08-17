@@ -77,27 +77,25 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * Returns the value or list of values of the attribute item for the ordered service with the given code.
 	 *
 	 * @param string $code Code of the service attribute item
-	 * @param string $type Type of the service attribute item
+	 * @param array|string $type Type or list of types of the service attribute items
 	 * @return array|string|null Value or list of values of the attribute item for the ordered service and the given code
 	 */
 	public function getAttribute( $code, $type = '' )
 	{
+		$list = [];
 		$map = $this->getAttributeMap();
 
-		if( !isset( $map[$type][$code] ) ) {
-			return null;
+		foreach( (array) $type as $key )
+		{
+			if( isset( $map[$key][$code] ) )
+			{
+				foreach( $map[$key][$code] as $item ) {
+					$list[] = $item->getValue();
+				}
+			}
 		}
 
-		if( count( $map[$type][$code] ) === 1 ) {
-			return reset( $map[$type][$code] )->getValue();
-		}
-
-		$list = [];
-		foreach( $map[$type][$code] as $item ) {
-			$list[] = $item->getValue();
-		}
-
-		return $list;
+		return count( $list ) > 1 ? $list : ( reset( $list ) ?: null );
 	}
 
 
@@ -106,22 +104,25 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 *
 	 * @param string $code Code of the service attribute item
 	 * @param string $type Type of the service attribute item
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface|array|null
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface|array|null
 	 * 	Attribute item or list of items for the ordered service and the given code
 	 */
 	public function getAttributeItem( $code, $type = '' )
 	{
+		$list = [];
 		$map = $this->getAttributeMap();
 
-		if( !isset( $map[$type][$code] ) ) {
-			return null;
+		foreach( (array) $type as $key )
+		{
+			if( isset( $map[$key][$code] ) )
+			{
+				foreach( $map[$key][$code] as $item ) {
+					$list[] = $item;
+				}
+			}
 		}
 
-		if( count( $map[$type][$code] ) === 1 ) {
-			return reset( $map[$type][$code] );
-		}
-
-		return $map[$type][$code];
+		return count( $list ) > 1 ? $list : ( reset( $list ) ?: null );
 	}
 
 
