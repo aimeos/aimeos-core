@@ -38,12 +38,12 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT mprility."id" AS "price.lists.type.id", mprility."siteid" AS "price.lists.type.siteid",
+							SELECT DISTINCT :columns
+								mprility."id" AS "price.lists.type.id", mprility."siteid" AS "price.lists.type.siteid",
 								mprility."code" AS "price.lists.type.code", mprility."domain" AS "price.lists.type.domain",
 								mprility."label" AS "price.lists.type.label", mprility."status" AS "price.lists.type.status",
 								mprility."mtime" AS "price.lists.type.mtime", mprility."editor" AS "price.lists.type.editor",
-								mprility."ctime" AS "price.lists.type.ctime", mprility."pos" AS "price.lists.type.position",
-								mprility.*
+								mprility."ctime" AS "price.lists.type.ctime", mprility."pos" AS "price.lists.type.position"
 							FROM "mshop_price_list_type" AS mprility
 							:joins
 							WHERE :cond
@@ -117,18 +117,19 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mprili."id" AS "price.lists.id", mprili."parentid" AS "price.lists.parentid",
+						SELECT :columns
+							mprili."id" AS "price.lists.id", mprili."parentid" AS "price.lists.parentid",
 							mprili."siteid" AS "price.lists.siteid", mprili."type" AS "price.lists.type",
 							mprili."domain" AS "price.lists.domain", mprili."refid" AS "price.lists.refid",
 							mprili."start" AS "price.lists.datestart", mprili."end" AS "price.lists.dateend",
 							mprili."config" AS "price.lists.config", mprili."pos" AS "price.lists.position",
 							mprili."status" AS "price.lists.status", mprili."mtime" AS "price.lists.mtime",
-							mprili."editor" AS "price.lists.editor", mprili."ctime" AS "price.lists.ctime",
-							mprili.*
+							mprili."editor" AS "price.lists.editor", mprili."ctime" AS "price.lists.ctime"
 						FROM "mshop_price_list" AS mprili
 						:joins
 						WHERE :cond
-						GROUP BY mprili."id", mprili."parentid", mprili."siteid", mprili."type",
+						GROUP BY :columns
+							mprili."id", mprili."parentid", mprili."siteid", mprili."type",
 							mprili."domain", mprili."refid", mprili."start", mprili."end",
 							mprili."config", mprili."pos", mprili."status", mprili."mtime",
 							mprili."editor", mprili."ctime" /*-columns*/ , :columns /*columns-*/
@@ -189,12 +190,12 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT mpriprty."id" AS "price.property.type.id", mpriprty."siteid" AS "price.property.type.siteid",
+							SELECT DISTINCT :columns
+								mpriprty."id" AS "price.property.type.id", mpriprty."siteid" AS "price.property.type.siteid",
 								mpriprty."code" AS "price.property.type.code", mpriprty."domain" AS "price.property.type.domain",
 								mpriprty."label" AS "price.property.type.label", mpriprty."status" AS "price.property.type.status",
 								mpriprty."mtime" AS "price.property.type.mtime", mpriprty."editor" AS "price.property.type.editor",
-								mpriprty."ctime" AS "price.property.type.ctime", mpriprty."pos" AS "price.property.type.position",
-								mpriprty.*
+								mpriprty."ctime" AS "price.property.type.ctime", mpriprty."pos" AS "price.property.type.position"
 							FROM "mshop_price_property_type" mpriprty
 							:joins
 							WHERE :cond
@@ -253,11 +254,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT mpripr."id" AS "price.property.id", mpripr."parentid" AS "price.property.parentid",
+						SELECT DISTINCT :columns
+							mpripr."id" AS "price.property.id", mpripr."parentid" AS "price.property.parentid",
 							mpripr."siteid" AS "price.property.siteid", mpripr."type" AS "price.property.type",
 							mpripr."langid" AS "price.property.languageid", mpripr."value" AS "price.property.value",
 							mpripr."mtime" AS "price.property.mtime", mpripr."editor" AS "price.property.editor",
-							mpripr."ctime" AS "price.property.ctime", mpripr.*
+							mpripr."ctime" AS "price.property.ctime"
 						FROM "mshop_price_property" AS mpripr
 						:joins
 						WHERE :cond
@@ -317,12 +319,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT mprity."id" AS "price.type.id", mprity."siteid" AS "price.type.siteid",
+						SELECT DISTINCT :columns
+							mprity."id" AS "price.type.id", mprity."siteid" AS "price.type.siteid",
 							mprity."code" AS "price.type.code", mprity."domain" AS "price.type.domain",
 							mprity."label" AS "price.type.label", mprity."status" AS "price.type.status",
 							mprity."mtime" AS "price.type.mtime", mprity."editor" AS "price.type.editor",
-							mprity."ctime" AS "price.type.ctime", mprity."pos" AS "price.type.position",
-							mprity.*
+							mprity."ctime" AS "price.type.ctime", mprity."pos" AS "price.type.position"
 						FROM "mshop_price_type" AS mprity
 						:joins
 						WHERE :cond
@@ -383,14 +385,15 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT mpri."id" AS "price.id", mpri."siteid" AS "price.siteid",
+					SELECT DISTINCT :columns
+						mpri."id" AS "price.id", mpri."siteid" AS "price.siteid",
 						mpri."type" AS "price.type", mpri."currencyid" AS "price.currencyid",
 						mpri."domain" AS "price.domain", mpri."label" AS "price.label",
 						mpri."quantity" AS "price.quantity", mpri."value" AS "price.value",
 						mpri."costs" AS "price.costs", mpri."rebate" AS "price.rebate",
 						mpri."taxrate" AS "price.taxrates", mpri."status" AS "price.status",
 						mpri."mtime" AS "price.mtime", mpri."editor" AS "price.editor",
-						mpri."ctime" AS "price.ctime", mpri.*
+						mpri."ctime" AS "price.ctime"
 					FROM "mshop_price" AS mpri
 					:joins
 					WHERE :cond

@@ -37,12 +37,13 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT mcouco."id" AS "coupon.code.id", mcouco."parentid" AS "coupon.code.parentid",
+						SELECT DISTINCT :columns
+							mcouco."id" AS "coupon.code.id", mcouco."parentid" AS "coupon.code.parentid",
 							mcouco."siteid" AS "coupon.code.siteid", mcouco."code" AS "coupon.code.code",
 							mcouco."start" AS "coupon.code.datestart", mcouco."end" AS "coupon.code.dateend",
 							mcouco."count" AS "coupon.code.count", mcouco."ref" AS "coupon.code.ref",
 							mcouco."mtime" AS "coupon.code.mtime", mcouco."ctime" AS "coupon.code.ctime",
-							mcouco."editor" AS "coupon.code.editor", mcouco.*
+							mcouco."editor" AS "coupon.code.editor"
 						FROM "mshop_coupon_code" AS mcouco
 						:joins
 						WHERE :cond
@@ -108,12 +109,13 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT mcou."id" AS "coupon.id", mcou."siteid" AS "coupon.siteid",
+					SELECT DISTINCT :columns
+						mcou."id" AS "coupon.id", mcou."siteid" AS "coupon.siteid",
 						mcou."label" AS "coupon.label", mcou."provider" AS "coupon.provider",
 						mcou."start" AS "coupon.datestart", mcou."end" AS "coupon.dateend",
 						mcou."config" AS "coupon.config", mcou."status" AS "coupon.status",
 						mcou."mtime" AS "coupon.mtime", mcou."editor" AS "coupon.editor",
-						mcou."ctime" AS "coupon.ctime", mcou.*
+						mcou."ctime" AS "coupon.ctime"
 					FROM "mshop_coupon" AS mcou
 					:joins
 					WHERE :cond

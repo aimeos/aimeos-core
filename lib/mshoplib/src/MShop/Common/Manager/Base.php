@@ -767,17 +767,24 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
 	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
 	 * @param string[] $joins Associative list of SQL joins
+	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $columns Additional columns to retrieve values from
 	 * @return array Array of keys, find and replace arrays
 	 */
-	protected function getSQLReplacements( \Aimeos\MW\Criteria\Iface $search, array $attributes, array $plugins, array $joins )
+	protected function getSQLReplacements( \Aimeos\MW\Criteria\Iface $search, array $attributes, array $plugins, array $joins, array $columns = [] )
 	{
 		$types = $this->getSearchTypes( $attributes );
 		$funcs = $this->getSearchFunctions( $attributes );
 		$translations = $this->getSearchTranslations( $attributes );
 
+		$colstring = '';
+		foreach( $columns as $name => $entry ) {
+			$colstring .= $entry->getInternalCode() . ', ';
+		}
+
 		$keys = [];
-		$find = array( ':joins', ':cond', ':start', ':size' );
+		$find = array( ':columns', ':joins', ':cond', ':start', ':size' );
 		$replace = array(
+			$colstring,
 			implode( "\n", array_unique( $joins ) ),
 			$search->getConditionSource( $types, $translations, $plugins, $funcs ),
 			$search->getSliceStart(),
@@ -820,6 +827,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$joins = [];
 		$conditions = $search->getConditions();
 		$siteIds = $this->getSiteIds( $sitelevel );
+		$columns = $this->getObject()->getSaveAttributes();
 		$attributes = $this->getObject()->getSearchAttributes();
 		$keys = $this->getCriteriaKeyList( $search, $required );
 
@@ -841,7 +849,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$search = clone $search;
 		$search->setConditions( $search->combine( '&&', $cond ) );
 
-		list( $keys, $find, $replace ) = $this->getSQLReplacements( $search, $attributes, $plugins, $joins );
+		list( $keys, $find, $replace ) = $this->getSQLReplacements( $search, $attributes, $plugins, $joins, $columns );
 
 		if( $total !== null )
 		{

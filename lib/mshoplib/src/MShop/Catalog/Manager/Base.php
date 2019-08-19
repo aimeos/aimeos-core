@@ -199,6 +199,11 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			$dbm = $context->getDatabaseManager();
 
 
+			$colstring = '';
+			foreach( $this->getObject()->getSaveAttributes() as $name => $entry ) {
+				$colstring .= $entry->getInternalCode() . ', ';
+			}
+
 			$treeConfig = array(
 				'search' => $this->searchConfig,
 				'dbname' => $this->getResourceName(),
@@ -287,7 +292,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/standard/insert-usage/ansi
 					 * @see mshop/catalog/manager/standard/update-usage/ansi
 					 */
-					'get' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/get' ) ),
+					'get' => str_replace( [':columns', ':siteid'], [$colstring, $siteid], $this->getSqlConfig( 'mshop/catalog/manager/standard/get' ) ),
 
 					/** mshop/catalog/manager/standard/insert/mysql
 					 * Inserts a new catalog node into the database table
@@ -463,7 +468,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/standard/insert-usage/ansi
 					 * @see mshop/catalog/manager/standard/update-usage/ansi
 					 */
-					'search' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/search' ) ),
+					'search' => str_replace( [':columns', ':siteid'], [$colstring, $siteid], $this->getSqlConfig( 'mshop/catalog/manager/standard/search' ) ),
 
 					/** mshop/catalog/manager/standard/update/mysql
 					 * Updates an existing catalog node in the database

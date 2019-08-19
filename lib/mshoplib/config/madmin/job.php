@@ -37,12 +37,12 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT majob."id" AS "job.id", majob."siteid" AS "job.siteid",
+					SELECT DISTINCT :columns
+						majob."id" AS "job.id", majob."siteid" AS "job.siteid",
 						majob."label" AS "job.label", majob."method" AS "job.method",
 						majob."parameter" AS "job.parameter", majob."result" AS "job.result",
 						majob."status" AS "job.status", majob."editor" AS "job.editor",
-						majob."mtime" AS "job.mtime", majob."ctime" AS "job.ctime",
-						majob.*
+						majob."mtime" AS "job.mtime", majob."ctime" AS "job.ctime"
 					FROM "madmin_job" AS majob
 					:joins
 					WHERE :cond

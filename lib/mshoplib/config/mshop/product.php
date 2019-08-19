@@ -38,12 +38,12 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT mprolity."id" AS "product.lists.type.id", mprolity."siteid" AS "product.lists.type.siteid",
+							SELECT DISTINCT :columns
+								mprolity."id" AS "product.lists.type.id", mprolity."siteid" AS "product.lists.type.siteid",
 								mprolity."code" AS "product.lists.type.code", mprolity."domain" AS "product.lists.type.domain",
 								mprolity."label" AS "product.lists.type.label", mprolity."status" AS "product.lists.type.status",
 								mprolity."mtime" AS "product.lists.type.mtime", mprolity."editor" AS "product.lists.type.editor",
-								mprolity."ctime" AS "product.lists.type.ctime", mprolity."pos" AS "product.lists.type.position",
-								mprolity.*
+								mprolity."ctime" AS "product.lists.type.ctime", mprolity."pos" AS "product.lists.type.position"
 							FROM "mshop_product_list_type" AS mprolity
 							:joins
 							WHERE :cond
@@ -116,21 +116,22 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mproli."id" AS "product.lists.id", mproli."parentid" AS "product.lists.parentid",
+						SELECT :columns
+							mproli."id" AS "product.lists.id", mproli."parentid" AS "product.lists.parentid",
 							mproli."siteid" AS "product.lists.siteid", mproli."type" AS "product.lists.type",
 							mproli."domain" AS "product.lists.domain", mproli."refid" AS "product.lists.refid",
 							mproli."start" AS "product.lists.datestart", mproli."end" AS "product.lists.dateend",
 							mproli."config" AS "product.lists.config", mproli."pos" AS "product.lists.position",
 							mproli."status" AS "product.lists.status", mproli."mtime" AS "product.lists.mtime",
-							mproli."editor" AS "product.lists.editor", mproli."ctime" AS "product.lists.ctime",
-							mproli.*
+							mproli."editor" AS "product.lists.editor", mproli."ctime" AS "product.lists.ctime"
 						FROM "mshop_product_list" AS mproli
 						:joins
 						WHERE :cond
-						GROUP BY mproli."id", mproli."parentid", mproli."siteid", mproli."type",
+						GROUP BY :columns
+							mproli."id", mproli."parentid", mproli."siteid", mproli."type",
 							mproli."domain", mproli."refid", mproli."start", mproli."end",
 							mproli."config", mproli."pos", mproli."status", mproli."mtime",
-							mproli."editor", mproli."ctime" /*-columns*/ , :columns /*columns-*/
+							mproli."editor", mproli."ctime"
 						 /*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -188,12 +189,12 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT mproprty."id" AS "product.property.type.id", mproprty."siteid" AS "product.property.type.siteid",
+							SELECT DISTINCT :columns
+								mproprty."id" AS "product.property.type.id", mproprty."siteid" AS "product.property.type.siteid",
 								mproprty."code" AS "product.property.type.code", mproprty."domain" AS "product.property.type.domain",
 								mproprty."label" AS "product.property.type.label", mproprty."status" AS "product.property.type.status",
 								mproprty."mtime" AS "product.property.type.mtime", mproprty."editor" AS "product.property.type.editor",
-								mproprty."ctime" AS "product.property.type.ctime", mproprty."pos" AS "product.property.type.position",
-								mproprty.*
+								mproprty."ctime" AS "product.property.type.ctime", mproprty."pos" AS "product.property.type.position"
 							FROM "mshop_product_property_type" mproprty
 							:joins
 							WHERE :cond
@@ -252,11 +253,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT mpropr."id" AS "product.property.id", mpropr."parentid" AS "product.property.parentid",
+						SELECT DISTINCT :columns
+							mpropr."id" AS "product.property.id", mpropr."parentid" AS "product.property.parentid",
 							mpropr."siteid" AS "product.property.siteid", mpropr."type" AS "product.property.type",
 							mpropr."langid" AS "product.property.languageid", mpropr."value" AS "product.property.value",
 							mpropr."mtime" AS "product.property.mtime", mpropr."editor" AS "product.property.editor",
-							mpropr."ctime" AS "product.property.ctime", mpropr.*
+							mpropr."ctime" AS "product.property.ctime"
 						FROM "mshop_product_property" AS mpropr
 						:joins
 						WHERE :cond
@@ -316,12 +318,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT mproty."id" AS "product.type.id", mproty."siteid" AS "product.type.siteid",
+						SELECT DISTINCT :columns
+							mproty."id" AS "product.type.id", mproty."siteid" AS "product.type.siteid",
 							mproty."code" AS "product.type.code", mproty."domain" AS "product.type.domain",
 							mproty."label" AS "product.type.label", mproty."status" AS "product.type.status",
 							mproty."mtime" AS "product.type.mtime", mproty."editor" AS "product.type.editor",
-							mproty."ctime" AS "product.type.ctime", mproty."pos" AS "product.type.position",
-							mproty.*
+							mproty."ctime" AS "product.type.ctime", mproty."pos" AS "product.type.position"
 						FROM "mshop_product_type" AS mproty
 						:joins
 						WHERE :cond
@@ -380,13 +382,14 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
+					SELECT DISTINCT :columns
+						mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
 						mpro."type" AS "product.type", mpro."code" AS "product.code",
 						mpro."label" AS "product.label", mpro."config" AS "product.config",
 						mpro."start" AS "product.datestart", mpro."end" AS "product.dateend",
 						mpro."status" AS "product.status", mpro."ctime" AS "product.ctime",
 						mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor",
-						mpro."target" AS "product.target", mpro.*
+						mpro."target" AS "product.target"
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond

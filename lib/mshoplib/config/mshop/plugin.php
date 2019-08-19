@@ -44,12 +44,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT mpluty."id" AS "plugin.type.id", mpluty."siteid" AS "plugin.type.siteid",
+						SELECT DISTINCT :columns
+							mpluty."id" AS "plugin.type.id", mpluty."siteid" AS "plugin.type.siteid",
 							mpluty."code" AS "plugin.type.code", mpluty."domain" AS "plugin.type.domain",
 							mpluty."label" AS "plugin.type.label", mpluty."status" AS "plugin.type.status",
 							mpluty."mtime" AS "plugin.type.mtime", mpluty."editor" AS "plugin.type.editor",
-							mpluty."ctime" AS "plugin.type.ctime", mpluty."pos" AS "plugin.type.position",
-							mpluty.*
+							mpluty."ctime" AS "plugin.type.ctime", mpluty."pos" AS "plugin.type.position"
 						FROM "mshop_plugin_type" mpluty
 						:joins
 						WHERE :cond
@@ -108,12 +108,13 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT mplu."id" AS "plugin.id", mplu."siteid" AS "plugin.siteid",
+					SELECT DISTINCT :columns
+						mplu."id" AS "plugin.id", mplu."siteid" AS "plugin.siteid",
 						mplu."type" AS "plugin.type", mplu."label" AS "plugin.label",
 						mplu."provider" AS "plugin.provider", mplu."config" AS "plugin.config",
 						mplu."pos" AS "plugin.position", mplu."status" AS "plugin.status",
 						mplu."mtime" AS "plugin.mtime", mplu."editor" AS "plugin.editor",
-						mplu."ctime" AS "plugin.ctime", mplu.*
+						mplu."ctime" AS "plugin.ctime"
 					FROM "mshop_plugin" mplu
 					:joins
 					WHERE :cond

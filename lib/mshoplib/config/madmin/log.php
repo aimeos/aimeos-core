@@ -34,10 +34,11 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT malog."id" AS "log.id", malog."siteid" AS "log.siteid",
+					SELECT DISTINCT :columns
+						malog."id" AS "log.id", malog."siteid" AS "log.siteid",
 						malog."facility" AS "log.facility", malog."timestamp" AS "log.timestamp",
 						malog."priority" AS "log.priority", malog."message" AS "log.message",
-						malog."request" AS "log.request", malog.*
+						malog."request" AS "log.request"
 					FROM "madmin_log" AS malog
 					:joins
 					WHERE :cond

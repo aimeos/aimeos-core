@@ -38,12 +38,12 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT mmedlity."id" AS "media.lists.type.id", mmedlity."siteid" AS "media.lists.type.siteid",
+							SELECT DISTINCT :columns
+								mmedlity."id" AS "media.lists.type.id", mmedlity."siteid" AS "media.lists.type.siteid",
 								mmedlity."code" AS "media.lists.type.code", mmedlity."domain" AS "media.lists.type.domain",
 								mmedlity."label" AS "media.lists.type.label", mmedlity."status" AS "media.lists.type.status",
 								mmedlity."mtime" AS "media.lists.type.mtime", mmedlity."editor" AS "media.lists.type.editor",
-								mmedlity."ctime" AS "media.lists.type.ctime", mmedlity."pos" AS "media.lists.type.position",
-								mmedlity.*
+								mmedlity."ctime" AS "media.lists.type.ctime", mmedlity."pos" AS "media.lists.type.position"
 							FROM "mshop_media_list_type" AS mmedlity
 							:joins
 							WHERE :cond
@@ -117,14 +117,14 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mmedli."id" AS "media.lists.id", mmedli."parentid" AS "media.lists.parentid",
+						SELECT :columns
+							mmedli."id" AS "media.lists.id", mmedli."parentid" AS "media.lists.parentid",
 							mmedli."siteid" AS "media.lists.siteid", mmedli."type" AS "media.lists.type",
 							mmedli."domain" AS "media.lists.domain", mmedli."refid" AS "media.lists.refid",
 							mmedli."start" AS "media.lists.datestart", mmedli."end" AS "media.lists.dateend",
 							mmedli."config" AS "media.lists.config", mmedli."pos" AS "media.lists.position",
 							mmedli."status" AS "media.lists.status", mmedli."mtime" AS "media.lists.mtime",
-							mmedli."editor" AS "media.lists.editor", mmedli."ctime" AS "media.lists.ctime",
-							mmedli.*
+							mmedli."editor" AS "media.lists.editor", mmedli."ctime" AS "media.lists.ctime"
 						FROM "mshop_media_list" AS mmedli
 						:joins
 						WHERE :cond
@@ -189,12 +189,12 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT mmedprty."id" AS "media.property.type.id", mmedprty."siteid" AS "media.property.type.siteid",
+							SELECT DISTINCT :columns
+								mmedprty."id" AS "media.property.type.id", mmedprty."siteid" AS "media.property.type.siteid",
 								mmedprty."code" AS "media.property.type.code", mmedprty."domain" AS "media.property.type.domain",
 								mmedprty."label" AS "media.property.type.label", mmedprty."status" AS "media.property.type.status",
 								mmedprty."mtime" AS "media.property.type.mtime", mmedprty."editor" AS "media.property.type.editor",
-								mmedprty."ctime" AS "media.property.type.ctime", mmedprty."pos" AS "media.property.type.position",
-								mmedprty.*
+								mmedprty."ctime" AS "media.property.type.ctime", mmedprty."pos" AS "media.property.type.position"
 							FROM "mshop_media_property_type" mmedprty
 							:joins
 							WHERE :cond
@@ -253,11 +253,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT mmedpr."id" AS "media.property.id", mmedpr."parentid" AS "media.property.parentid",
+						SELECT DISTINCT :columns
+							mmedpr."id" AS "media.property.id", mmedpr."parentid" AS "media.property.parentid",
 							mmedpr."siteid" AS "media.property.siteid", mmedpr."type" AS "media.property.type",
 							mmedpr."langid" AS "media.property.languageid", mmedpr."value" AS "media.property.value",
 							mmedpr."mtime" AS "media.property.mtime", mmedpr."editor" AS "media.property.editor",
-							mmedpr."ctime" AS "media.property.ctime", mmedpr.*
+							mmedpr."ctime" AS "media.property.ctime"
 						FROM "mshop_media_property" AS mmedpr
 						:joins
 						WHERE :cond
@@ -317,12 +318,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT mmedty."id" AS "media.type.id", mmedty."siteid" AS "media.type.siteid",
+						SELECT DISTINCT :columns
+							mmedty."id" AS "media.type.id", mmedty."siteid" AS "media.type.siteid",
 							mmedty."code" AS "media.type.code", mmedty."domain" AS "media.type.domain",
 							mmedty."label" AS "media.type.label", mmedty."status" AS "media.type.status",
 							mmedty."mtime" AS "media.type.mtime", mmedty."editor" AS "media.type.editor",
-							mmedty."ctime" AS "media.type.ctime", mmedty."pos" AS "media.type.position",
-							mmedty.*
+							mmedty."ctime" AS "media.type.ctime", mmedty."pos" AS "media.type.position"
 						FROM "mshop_media_type" mmedty
 						:joins
 						WHERE :cond
@@ -381,13 +382,14 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT mmed."id" AS "media.id", mmed."siteid" AS "media.siteid",
+					SELECT DISTINCT :columns
+						mmed."id" AS "media.id", mmed."siteid" AS "media.siteid",
 						mmed."langid" AS "media.languageid", mmed."type" AS "media.type",
 						mmed."link" AS "media.url", mmed."label" AS "media.label",
 						mmed."status" AS "media.status", mmed."mimetype" AS "media.mimetype",
 						mmed."domain" AS "media.domain", mmed."preview" AS "media.previews",
 						mmed."mtime" AS "media.mtime", mmed."editor" AS "media.editor",
-						mmed."ctime" AS "media.ctime", mmed.*
+						mmed."ctime" AS "media.ctime"
 					FROM "mshop_media" AS mmed
 					:joins
 					WHERE :cond

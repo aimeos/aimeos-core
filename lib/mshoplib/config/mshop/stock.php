@@ -37,12 +37,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT mstoty."id" AS "stock.type.id", mstoty."siteid" AS "stock.type.siteid",
+						SELECT DISTINCT :columns
+							mstoty."id" AS "stock.type.id", mstoty."siteid" AS "stock.type.siteid",
 							mstoty."code" AS "stock.type.code", mstoty."domain" AS "stock.type.domain",
 							mstoty."label" AS "stock.type.label", mstoty."status" AS "stock.type.status",
 							mstoty."mtime" AS "stock.type.mtime", mstoty."editor" AS "stock.type.editor",
-							mstoty."ctime" AS "stock.type.ctime", mstoty."pos" AS "stock.type.position",
-							mstoty.*
+							mstoty."ctime" AS "stock.type.ctime", mstoty."pos" AS "stock.type.position"
 						FROM "mshop_stock_type" mstoty
 						:joins
 						WHERE :cond
@@ -101,12 +101,12 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT msto."id" AS "stock.id", msto."productcode" AS "stock.productcode",
+					SELECT DISTINCT :columns
+						msto."id" AS "stock.id", msto."productcode" AS "stock.productcode",
 						msto."siteid" AS "stock.siteid", msto."type" AS "stock.type",
 						msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.backdate",
 						msto."timeframe" AS "stock.timeframe", msto."mtime" AS "stock.mtime",
-						msto."ctime" AS "stock.ctime", msto."editor" AS "stock.editor",
-						msto.*
+						msto."ctime" AS "stock.ctime", msto."editor" AS "stock.editor"
 					FROM "mshop_stock" AS msto
 					:joins
 					WHERE :cond

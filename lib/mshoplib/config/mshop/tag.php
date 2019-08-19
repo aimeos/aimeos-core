@@ -37,12 +37,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT mtagty."id" AS "tag.type.id", mtagty."siteid" AS "tag.type.siteid",
+						SELECT DISTINCT :columns
+							mtagty."id" AS "tag.type.id", mtagty."siteid" AS "tag.type.siteid",
 							mtagty."code" AS "tag.type.code", mtagty."domain" AS "tag.type.domain",
 							mtagty."label" AS "tag.type.label", mtagty."status" AS "tag.type.status",
 							mtagty."mtime" AS "tag.type.mtime", mtagty."editor" AS "tag.type.editor",
-							mtagty."ctime" AS "tag.type.ctime", mtagty."pos" AS "tag.type.position",
-							mtagty.*
+							mtagty."ctime" AS "tag.type.ctime", mtagty."pos" AS "tag.type.position"
 						FROM "mshop_tag_type" mtagty
 						:joins
 						WHERE :cond
@@ -100,11 +100,12 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT mtag."id" AS "tag.id", mtag."siteid" AS "tag.siteid",
+					SELECT DISTINCT :columns
+						mtag."id" AS "tag.id", mtag."siteid" AS "tag.siteid",
 						mtag."type" AS "tag.type", mtag."langid" AS "tag.languageid",
 						mtag."domain" AS "tag.domain", mtag."label" AS "tag.label",
 						mtag."mtime" AS "tag.mtime", mtag."editor" AS "tag.editor",
-						mtag."ctime" AS "tag.ctime", mtag.*
+						mtag."ctime" AS "tag.ctime"
 					FROM "mshop_tag" AS mtag
 					:joins
 					WHERE :cond

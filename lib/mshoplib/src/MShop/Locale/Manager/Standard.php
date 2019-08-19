@@ -736,17 +736,23 @@ class Standard
 		try
 		{
 			$attributes = $this->getObject()->getSearchAttributes();
-			$types = $this->getSearchTypes( $attributes );
 			$translations = $this->getSearchTranslations( $attributes );
-			$columns = $search->translate( $search->getSortations(), $translations );
+			$types = $this->getSearchTypes( $attributes );
+			$columns = $this->getObject()->getSaveAttributes();
+			$sortcols = $search->translate( $search->getSortations(), $translations );
 
-			$find = array( ':cond', ':order', ':columns', ':start', ':size' );
+			$colstring = '';
+			foreach( $columns as $name => $entry ) {
+				$colstring .= $entry->getInternalCode() . ', ';
+			}
+
+			$find = array( ':columns', ':cond', ':order', ':start', ':size' );
 			$replace = array(
-					$search->getConditionSource( $types, $translations ),
-					$search->getSortationSource( $types, $translations ),
-					( $columns ? ', ' . implode( ',', $columns ) : '' ),
-					$search->getSliceStart(),
-					$search->getSliceSize(),
+				$colstring . ( $sortcols ? join( ', ', $sortcols ) . ', ' : '' ),
+				$search->getConditionSource( $types, $translations ),
+				$search->getSortationSource( $types, $translations ),
+				$search->getSliceStart(),
+				$search->getSliceSize(),
 			);
 
 			/** mshop/locale/manager/standard/search/mysql

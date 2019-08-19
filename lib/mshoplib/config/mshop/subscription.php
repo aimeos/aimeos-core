@@ -50,20 +50,21 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mord."id" AS "subscription.id", mord."baseid" AS "subscription.ordbaseid",
+					SELECT :columns
+						mord."id" AS "subscription.id", mord."baseid" AS "subscription.ordbaseid",
 						mord."ordprodid" AS "subscription.ordprodid", mord."siteid" AS "subscription.siteid",
 						mord."next" AS "subscription.datenext", mord."end" AS "subscription.dateend",
 						mord."interval" AS "subscription.interval", mord."reason" AS "subscription.reason",
 						mord."productid" AS "subscription.productid", mord."period" AS "subscription.period",
 						mord."status" AS "subscription.status", mord."ctime" AS "subscription.ctime",
-						mord."mtime" AS "subscription.mtime", mord."editor" AS "subscription.editor",
-						mord.*
+						mord."mtime" AS "subscription.mtime", mord."editor" AS "subscription.editor"
 					FROM "mshop_subscription" AS mord
 					:joins
 					WHERE :cond
-					GROUP BY mord."id", mord."baseid", mord."ordprodid", mord."siteid", mord."next", mord."end",
-						mord."interval", mord."reason", mord."productid", mord."period", mord."status", mord."ctime",
-						mord."mtime", mord."editor" /*-columns*/ , :columns /*columns-*/
+					GROUP BY :columns
+						mord."id", mord."baseid", mord."ordprodid", mord."siteid", mord."next", mord."end",
+						mord."interval", mord."reason", mord."productid", mord."period", mord."status",
+						mord."ctime", mord."mtime", mord."editor"
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'

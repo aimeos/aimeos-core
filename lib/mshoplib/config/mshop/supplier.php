@@ -44,7 +44,8 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT msupad."id" AS "supplier.address.id", msupad."siteid" AS "supplier.address.siteid",
+						SELECT DISTINCT :columns
+							msupad."id" AS "supplier.address.id", msupad."siteid" AS "supplier.address.siteid",
 							msupad."parentid" AS "supplier.address.parentid", msupad."pos" AS "supplier.address.position",
 							msupad."company" AS "supplier.address.company", msupad."vatid" AS "supplier.address.vatid",
 							msupad."salutation" AS "supplier.address.salutation", msupad."title" AS "supplier.address.title",
@@ -57,7 +58,7 @@ return array(
 							msupad."telefax" AS "supplier.address.telefax", msupad."website" AS "supplier.address.website",
 							msupad."longitude" AS "supplier.address.longitude", msupad."latitude" AS "supplier.address.latitude",
 							msupad."mtime" AS "supplier.address.mtime", msupad."ctime" AS "supplier.address.ctime",
-							msupad."editor" AS "supplier.address.editor", msupad.*
+							msupad."editor" AS "supplier.address.editor"
 						FROM "mshop_supplier_address" AS msupad
 						:joins
 						WHERE :cond
@@ -118,18 +119,19 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT msuplity."id" AS "supplier.lists.type.id", msuplity."siteid" AS "supplier.lists.type.siteid",
+							SELECT :columns
+								msuplity."id" AS "supplier.lists.type.id", msuplity."siteid" AS "supplier.lists.type.siteid",
 								msuplity."code" AS "supplier.lists.type.code", msuplity."domain" AS "supplier.lists.type.domain",
 								msuplity."label" AS "supplier.lists.type.label", msuplity."status" AS "supplier.lists.type.status",
 								msuplity."mtime" AS "supplier.lists.type.mtime", msuplity."editor" AS "supplier.lists.type.editor",
-								msuplity."ctime" AS "supplier.lists.type.ctime", msuplity."pos" AS "supplier.lists.type.position",
-								msuplity.*
+								msuplity."ctime" AS "supplier.lists.type.ctime", msuplity."pos" AS "supplier.lists.type.position"
 							FROM "mshop_supplier_list_type" AS msuplity
 							:joins
 							WHERE :cond
-							GROUP BY msuplity."id", msuplity."siteid", msuplity."code", msuplity."domain",
+							GROUP BY :columns
+								msuplity."id", msuplity."siteid", msuplity."code", msuplity."domain",
 								msuplity."label", msuplity."status", msuplity."mtime", msuplity."editor",
-								msuplity."ctime", msuplity."pos" /*-columns*/ , :columns /*columns-*/
+								msuplity."ctime", msuplity."pos"
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -200,14 +202,14 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT msupli."id" AS "supplier.lists.id", msupli."parentid" AS "supplier.lists.parentid",
+						SELECT DISTINCT :columns
+							msupli."id" AS "supplier.lists.id", msupli."parentid" AS "supplier.lists.parentid",
 							msupli."siteid" AS "supplier.lists.siteid", msupli."type" AS "supplier.lists.type",
 							msupli."domain" AS "supplier.lists.domain", msupli."refid" AS "supplier.lists.refid",
 							msupli."start" AS "supplier.lists.datestart", msupli."end" AS "supplier.lists.dateend",
 							msupli."config" AS "supplier.lists.config", msupli."pos" AS "supplier.lists.position",
 							msupli."status" AS "supplier.lists.status", msupli."mtime" AS "supplier.lists.mtime",
-							msupli."editor" AS "supplier.lists.editor", msupli."ctime" AS "supplier.lists.ctime",
-							msupli.*
+							msupli."editor" AS "supplier.lists.editor", msupli."ctime" AS "supplier.lists.ctime"
 						FROM "mshop_supplier_list" AS msupli
 						:joins
 						WHERE :cond
@@ -264,11 +266,11 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT msup."id" AS "supplier.id", msup."siteid" AS "supplier.siteid",
+					SELECT DISTINCT :columns
+						msup."id" AS "supplier.id", msup."siteid" AS "supplier.siteid",
 						msup."code" AS "supplier.code", msup."label" AS "supplier.label",
 						msup."status" AS "supplier.status", msup."mtime" AS "supplier.mtime",
-						msup."editor" AS "supplier.editor", msup."ctime" AS "supplier.ctime",
-						msup.*
+						msup."editor" AS "supplier.editor", msup."ctime" AS "supplier.ctime"
 					FROM "mshop_supplier" AS msup
 					:joins
 					WHERE :cond
