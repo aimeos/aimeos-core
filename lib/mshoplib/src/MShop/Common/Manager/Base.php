@@ -342,6 +342,24 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
+	 * Creates the criteria attribute items from the list of entries
+	 *
+	 * @param array $list Associative array of code as key and array with properties as values
+	 * @return \Aimeos\MW\Criteria\Attribute\Standard[] List of criteria attribute items
+	 */
+	protected function createAttributes( array $list )
+	{
+		$attr = [];
+
+		foreach( $list as $key => $fields ) {
+			$attr[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $fields );
+		}
+
+		return $attr;
+	}
+
+
+	/**
 	 * Sets the base criteria "status".
 	 * (setConditions overwrites the base criteria)
 	 *
@@ -395,11 +413,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 */
 	protected function getSearchAttributesBase( array $list, $path, array $default, $withsub )
 	{
-		$attr = [];
-
-		foreach( $list as $key => $fields ) {
-			$attr[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $fields );
-		}
+		$attr = $this->createAttributes( $list );
 
 		if( $withsub === true )
 		{
