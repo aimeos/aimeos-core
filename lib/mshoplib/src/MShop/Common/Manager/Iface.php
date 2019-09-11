@@ -32,7 +32,7 @@ interface Iface
 	 * Creates a new empty item instance
 	 *
 	 * @param array $values Values the item should be initialized with
-	 * @return \Aimeos\MShop\Attribute\Item\Iface New attribute item object
+	 * @return \Aimeos\MShop\Common\Item\Iface New item object
 	 */
 	public function createItem( array $values = [] );
 
