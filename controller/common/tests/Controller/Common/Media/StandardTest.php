@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'getFileContent' )
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.png' ) ) );
 
-		$object->expects( $this->exactly( 4 ) )->method( 'store' );
+		$object->expects( $this->exactly( 3 ) )->method( 'store' );
 
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $object->scale( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
-		$this->assertNotEquals( 'test.jpg', $result->getUrl() );
+		$this->assertEquals( 'test.jpg', $result->getUrl() );
 		$this->assertNotEquals( 'preview.jpg', $result->getPreview() );
 	}
 
