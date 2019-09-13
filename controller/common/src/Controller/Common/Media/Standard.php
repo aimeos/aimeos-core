@@ -47,15 +47,16 @@ class Standard
 	public function add( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, $fsname = 'fs-media' )
 	{
 		$this->checkFileUpload( $file );
+
 		$media = $this->getMediaFile( $file->getStream() );
+		$mimetype = $media->getMimeType();
 
 		if( $media instanceof \Aimeos\MW\Media\Image\Iface )
 		{
-			$item = $this->addImages( $item, $media, md5( $file->getClientFilename() ), $fsname );
+			$item = $this->addImages( $item, $media, null, $fsname );
 		}
 		else
 		{
-			$mimetype = $media->getMimeType();
 			$filepath = $this->getFilePath( $file->getClientFilename(), 'files', $mimetype );
 
 			$this->store( $filepath, $media->save(), $fsname );
@@ -189,32 +190,24 @@ class Standard
 	 */
 	protected function addImages( \Aimeos\MShop\Media\Item\Iface $item, \Aimeos\MW\Media\Image\Iface $media, $path, $fsname )
 	{
-		$mime = $this->getMimeType( $media, 'files' );
-		$mediaFile = $this->scaleImage( $media, 'files' );
-
-		// Don't overwrite original files that are stored in linked directories
-		$filepath = ( strncmp( $path, 'files/', 6 ) ? $this->getFilePath( $path, 'files', $mime ) : $path );
-
-		$this->store( $filepath, $mediaFile->save( null, $mime ), $fsname );
-		$item = $item->setUrl( $filepath )->setMimeType( $mime );
-		unset( $mediaFile );
-
+		if( $path == null )
+		{
+			$path = $this->getFilePath( rand(), 'files', $item->getMimeType() );
+			$this->store( $path, $media->save(), $fsname );
+		}
 
 		$previews = [];
-		$mediaFiles = $this->createPreviews( $media );
 		$mime = $this->getMimeType( $media, 'preview' );
 
-		foreach( $mediaFiles as $type => $mediaFile )
+		foreach( $this->createPreviews( $media ) as $type => $mediaFile )
 		{
-			// Don't try to overwrite mime icons that are stored in another directory
-			$filepath = ( strncmp( $path, 'preview/', 8 ) ? $this->getFilePath( $path, 'preview', $mime ) : $path );
-
+			$filepath = $this->getFilePath( rand(), 'preview', $item->getMimeType() );
 			$this->store( $filepath, $mediaFile->save( null, $mime ), $fsname );
 			$previews[$mediaFile->getWidth()] = $filepath;
 			unset( $mediaFile );
 		}
 
-		return $item->setPreviews( $previews );
+		return $item->setUrl( $path )->setPreviews( $previews )->setMimeType( $media->getMimeType() );
 	}
 
 
