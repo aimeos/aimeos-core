@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Doryan R, 2019
+# a270031086f2a0d3514bc0cb507b48f6, 2019
 # Guillaume STEIN <guillaume.stein@gmail.com>, 2016
 # Medzo Zeng <medzozeng@hotmail.fr>, 2019
 # Six byNine <wwinx@hotmail.com>, 2018
