@@ -653,7 +653,6 @@ class PayPalExpress
 	protected function getOrderDetails( \Aimeos\MShop\Order\Item\Base\Iface $orderBase )
 	{
 		$lastPos = 0;
-		$deliveryCosts = 0;
 		$deliveryPrices = [];
 		$values = $this->getAuthParameter();
 		$addresses = $orderBase->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
@@ -679,9 +678,7 @@ class PayPalExpress
 			{
 				$price = $product->getPrice();
 				$lastPos = $product->getPosition();
-
-				$deliveryPrice = clone $price;
-				$deliveryPrices = $this->addPrice( $deliveryPrices, $deliveryPrice->setValue( '0.00' ), $product->getQuantity() );
+				$deliveryPrices = $this->addPrice( $deliveryPrices, (clone $price)->setValue( '0.00' ), $product->getQuantity() );
 
 				$values['L_PAYMENTREQUEST_0_NUMBER' . $lastPos] = $product->getId();
 				$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $product->getName();
@@ -713,10 +710,6 @@ class PayPalExpress
 				{
 					$deliveryPrices = $this->addPrice( $deliveryPrices, $service->getPrice() );
 
-					foreach( $deliveryPrices as $priceItem ) {
-						$deliveryCosts += $this->getAmount( $priceItem );
-					}
-
 					$values['L_SHIPPINGOPTIONAMOUNT' . $lastPos] = number_format( $deliveryCosts, 2, '.', '' );
 					$values['L_SHIPPINGOPTIONLABEL' . $lastPos] = $service->getCode();
 					$values['L_SHIPPINGOPTIONNAME' . $lastPos] = $service->getName();
@@ -729,20 +722,18 @@ class PayPalExpress
 		}
 
 
+		$deliveryCosts = 0;
 		$price = $orderBase->getPrice();
 		$amount = $this->getAmount( $price );
 
-		if( $deliveryCosts === 0 )
-		{
-			foreach( $deliveryPrices as $priceItem ) {
-				$deliveryCosts += $this->getAmount( $priceItem );
-			}
+		foreach( $deliveryPrices as $priceItem ) {
+			$deliveryCosts += $this->getAmount( $priceItem, true, true, $price->getPrecision() + 2 );
 		}
 
-		$values['MAXAMT'] = $amount + 0.01; // possible rounding error
+		$values['MAXAMT'] = $amount + 1 / pow( 10, $price->getPrecision() ); // possible rounding error
 		$values['PAYMENTREQUEST_0_AMT'] = $amount;
-		$values['PAYMENTREQUEST_0_ITEMAMT'] = number_format( $amount - $deliveryCosts, 2, '.', '' );
-		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format( $deliveryCosts, 2, '.', '' );
+		$values['PAYMENTREQUEST_0_ITEMAMT'] = number_format( $amount - $deliveryCosts, $price->getPrecision(), '.', '' );
+		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format( $deliveryCosts, $price->getPrecision(), '.', '' );
 		$values['PAYMENTREQUEST_0_INSURANCEAMT'] = '0.00';
 		$values['PAYMENTREQUEST_0_INSURANCEOPTIONOFFERED'] = 'false';
 		$values['PAYMENTREQUEST_0_SHIPDISCAMT'] = '0.00';
