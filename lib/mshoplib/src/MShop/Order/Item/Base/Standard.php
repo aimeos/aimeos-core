@@ -377,11 +377,13 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 	/**
 	 * Sets the modified flag of the object.
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function setModified()
 	{
-		parent::setModified();
 		$this->recalc = true;
+		return parent::setModified();
 	}
 
 
