@@ -325,7 +325,7 @@ abstract class Base
 	 * @param boolean $tax Include tax
 	 * @return string Formatted money amount
 	 */
-	protected function getAmount( \Aimeos\MShop\Price\Item\Iface $price, $costs = true, $tax = true )
+	protected function getAmount( \Aimeos\MShop\Price\Item\Iface $price, $costs = true, $tax = true, $precision = null )
 	{
 		$amount = $price->getValue();
 
@@ -348,7 +348,7 @@ abstract class Base
 			$amount += $tmp->getTaxValue();
 		}
 
-		return number_format( $amount, 2, '.', '' );
+		return number_format( $amount, $precision !== null ? $precision : $price->getPrecision(), '.', '' );
 	}
 
 
