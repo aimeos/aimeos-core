@@ -364,10 +364,10 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_product" ( :names
-						"type", "code", "label", "status", "start", "end",
+						"type", "code", "dataset", "label", "status", "start", "end",
 						"config", "target", "editor", "mtime", "ctime", "siteid"
 					) VALUES ( :values
-						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
 			),
@@ -375,8 +375,8 @@ return array(
 				'ansi' => '
 					UPDATE "mshop_product"
 					SET :names
-						"type" = ?, "code" = ?, "label" = ?, "status" = ?, "start" = ?, "end" = ?,
-						"config" = ?, "target" = ?, "editor" = ?, "mtime" = ?, "ctime" = ?
+						"type" = ?, "code" = ?, "dataset" = ?, "label" = ?, "status" = ?, "start" = ?,
+						"end" = ?, "config" = ?, "target" = ?, "editor" = ?, "mtime" = ?, "ctime" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
@@ -389,7 +389,7 @@ return array(
 						mpro."start" AS "product.datestart", mpro."end" AS "product.dateend",
 						mpro."status" AS "product.status", mpro."ctime" AS "product.ctime",
 						mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor",
-						mpro."target" AS "product.target"
+						mpro."target" AS "product.target", mpro."dataset" AS "product.dataset"
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond

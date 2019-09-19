@@ -422,7 +422,8 @@ return [
 			'product.type' => 'bundle', 'product.code' => 'bdl:HKL', 'product.label' => 'Unittest: Bundle bdl:HKL',
 		],
 		'product/CNC' => [
-			'product.type' => 'default', 'product.code' => 'CNC', 'product.label' => 'Cafe Noire Cappuccino', 'product.config' => ['css-class' => 'sale'],
+			'product.type' => 'default', 'product.code' => 'CNC', 'product.label' => 'Cafe Noire Cappuccino',
+			'product.config' => ['css-class' => 'sale'], 'product.dataset' => 'Coffee',
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/xs',
@@ -545,7 +546,8 @@ return [
 			]],
 		],
 		'product/CNE' => [
-			'product.type' => 'default', 'product.code' => 'CNE', 'product.label' => 'Cafe Noire Expresso', 'product.config' => ['css-class' => 'top', 'size' => 1],
+			'product.type' => 'default', 'product.code' => 'CNE', 'product.label' => 'Cafe Noire Expresso',
+			'product.config' => ['css-class' => 'top', 'size' => 1], 'product.dataset' => 'Coffee',
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/xs',

@@ -178,6 +178,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getSiteid(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
+		$this->assertEquals( $item->getDataset(), $itemSaved->getDataset() );
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 		$this->assertEquals( $item->getDateStart(), $itemSaved->getDateStart() );
@@ -194,6 +195,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getSiteid(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
+		$this->assertEquals( $itemExp->getDataset(), $itemUpd->getDataset() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 		$this->assertEquals( $itemExp->getDateStart(), $itemUpd->getDateStart() );
@@ -310,6 +312,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'product.siteid', null );
 		$expr[] = $search->compare( '==', 'product.type', 'default' );
 		$expr[] = $search->compare( '==', 'product.code', 'CNE' );
+		$expr[] = $search->compare( '==', 'product.dataset', 'Coffee' );
 		$expr[] = $search->compare( '==', 'product.label', 'Cafe Noire Expresso' );
 		$expr[] = $search->compare( '~=', 'product.config', 'css-class' );
 		$expr[] = $search->compare( '==', 'product.datestart', null );

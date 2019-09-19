@@ -228,6 +228,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetModified()
+	{
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $this->object->setModified() );
+		$this->assertEquals( true, $this->object->isModified() );
+	}
+
+
 	public function testFinish()
 	{
 		$return = $this->object->finish();

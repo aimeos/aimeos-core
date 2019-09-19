@@ -40,6 +40,21 @@ interface Iface
 	public function setCode( $code );
 
 	/**
+	 * Returns the data set name assigned to the product item.
+	 *
+	 * @return string Data set name
+	 */
+	public function getDataset();
+
+	/**
+	 * Sets a new data set name assignd to the product item.
+	 *
+	 * @param string $name New data set name
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setDataset( $name );
+
+	/**
 	 * Returns the label of the product item.
 	 *
 	 * @return string Label of the product item

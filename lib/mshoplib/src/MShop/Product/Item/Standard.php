@@ -162,6 +162,39 @@ class Standard
 
 
 	/**
+	 * Returns the data set name assigned to the product item.
+	 *
+	 * @return string Data set name
+	 */
+	public function getDataset()
+	{
+		if( isset( $this->values['product.dataset'] ) ) {
+			return (string) $this->values['product.dataset'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets a new data set name assignd to the product item.
+	 *
+	 * @param string $name New data set name
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setDataset( $name )
+	{
+		if( (string) $name !== $this->getDataset() )
+		{
+			$this->values['product.dataset'] = $name;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the label of the product item.
 	 *
 	 * @return string Label of the product item
@@ -395,6 +428,7 @@ class Standard
 				case 'product.code': $item = $item->setCode( $value ); break;
 				case 'product.label': $item = $item->setLabel( $value ); break;
 				case 'product.status': $item = $item->setStatus( $value ); break;
+				case 'product.dataset': $item = $item->setDataset( $value ); break;
 				case 'product.datestart': $item = $item->setDateStart( $value ); break;
 				case 'product.dateend': $item = $item->setDateEnd( $value ); break;
 				case 'product.config': $item = $item->setConfig( $value ); break;
@@ -424,6 +458,7 @@ class Standard
 		$list['product.code'] = $this->getCode();
 		$list['product.label'] = $this->getLabel();
 		$list['product.status'] = $this->getStatus();
+		$list['product.dataset'] = $this->getDataset();
 		$list['product.datestart'] = $this->getDateStart();
 		$list['product.dateend'] = $this->getDateEnd();
 		$list['product.config'] = $this->getConfig();

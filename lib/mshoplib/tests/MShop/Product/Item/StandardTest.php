@@ -24,6 +24,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.type' => 'test',
 			'product.status' => 1,
 			'product.code' => 'TEST',
+			'product.dataset' => 'Shirts',
 			'product.label' => 'testproduct',
 			'product.config' => array( 'css-class' => 'test' ),
 			'product.datestart' => null,
@@ -183,6 +184,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
 		$this->assertEquals( 'NEU', $this->object->getCode() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetDataset()
+	{
+		$this->assertEquals( 'Shirts', $this->object->getDataset() );
+	}
+
+
+	public function testSetDataset()
+	{
+		$this->assertFalse( $this->object->isModified() );
+
+		$return = $this->object->setDataset( 'Skirts' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
+		$this->assertEquals( 'Skirts', $this->object->getDataset() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -367,6 +386,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.type' => 'test',
 			'product.label' => 'test item',
 			'product.code' => 'test',
+			'product.dataset' => 'Shirts',
 			'product.datestart' => '2000-01-01 00:00:00',
 			'product.dateend' => '2001-01-01 00:00:00',
 			'product.config' => array( 'key' => 'value' ),
@@ -379,9 +399,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( ['additional' => 'value'], $entries );
 		$this->assertEquals( $list['product.id'], $item->getId() );
+		$this->assertEquals( $list['product.type'], $item->getType() );
 		$this->assertEquals( $list['product.code'], $item->getCode() );
 		$this->assertEquals( $list['product.label'], $item->getLabel() );
-		$this->assertEquals( $list['product.type'], $item->getType() );
+		$this->assertEquals( $list['product.dataset'], $item->getDataset() );
 		$this->assertEquals( $list['product.datestart'], $item->getDateStart() );
 		$this->assertEquals( $list['product.dateend'], $item->getDateEnd() );
 		$this->assertEquals( $list['product.config'], $item->getConfig() );
@@ -401,6 +422,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['product.siteid'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['product.code'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['product.type'] );
+		$this->assertEquals( $this->object->getDataset(), $arrayObject['product.dataset'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['product.label'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['product.status'] );
 		$this->assertEquals( $this->object->getDateStart(), $arrayObject['product.datestart'] );

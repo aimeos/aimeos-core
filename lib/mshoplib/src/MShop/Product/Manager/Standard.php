@@ -64,6 +64,13 @@ class Standard
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
+		'product.dataset' => array(
+			'code' => 'product.dataset',
+			'internalcode' => 'mpro."dataset"',
+			'label' => 'Data set',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'product.datestart' => array(
 			'code' => 'product.datestart',
 			'internalcode' => 'mpro."start"',
@@ -524,6 +531,7 @@ class Standard
 
 			$stmt->bind( $idx++, $item->getType() );
 			$stmt->bind( $idx++, $item->getCode() );
+			$stmt->bind( $idx++, $item->getDataset() );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getDateStart() );
