@@ -498,7 +498,7 @@ abstract class Base
 	 */
 	public function getLongitude()
 	{
-		return (string) $this->get( $this->prefix . 'longitude' );
+		return $this->get( $this->prefix . 'longitude' );
 	}
 
 
@@ -521,7 +521,7 @@ abstract class Base
 	 */
 	public function getLatitude()
 	{
-		return (string) $this->get( $this->prefix . 'latitude' );
+		return $this->get( $this->prefix . 'latitude' );
 	}
 
 
