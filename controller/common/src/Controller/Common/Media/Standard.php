@@ -192,7 +192,7 @@ class Standard
 	{
 		if( $path == null )
 		{
-			$path = $this->getFilePath( rand(), 'files', $item->getMimeType() );
+			$path = $this->getFilePath( rand(), 'files', $media->getMimeType() );
 			$this->store( $path, $media->save(), $fsname );
 		}
 
@@ -201,7 +201,7 @@ class Standard
 
 		foreach( $this->createPreviews( $media ) as $type => $mediaFile )
 		{
-			$filepath = $this->getFilePath( rand(), 'preview', $item->getMimeType() );
+			$filepath = $this->getFilePath( rand(), 'preview', $media->getMimeType() );
 			$this->store( $filepath, $mediaFile->save( null, $mime ), $fsname );
 			$previews[$mediaFile->getWidth()] = $filepath;
 			unset( $mediaFile );
