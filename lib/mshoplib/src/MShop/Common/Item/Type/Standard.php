@@ -23,7 +23,6 @@ class Standard
 	implements \Aimeos\MShop\Common\Item\Type\Iface
 {
 	private $prefix;
-	private $values;
 
 
 	/**
@@ -37,7 +36,6 @@ class Standard
 		parent::__construct( $prefix, $values );
 
 		$this->prefix = $prefix;
-		$this->values = $values;
 	}
 
 
@@ -48,11 +46,7 @@ class Standard
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values[$this->prefix . 'code'] ) ) {
-			return (string) $this->values[$this->prefix . 'code'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'code', '' );
 	}
 
 
@@ -64,13 +58,7 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( (string) $code !== $this->getCode() )
-		{
-			$this->values[$this->prefix . 'code'] = $this->checkCode( $code );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'code', $this->checkCode( $code ) );
 	}
 
 
@@ -81,11 +69,7 @@ class Standard
 	 */
 	public function getDomain()
 	{
-		if( isset( $this->values[$this->prefix . 'domain'] ) ) {
-			return (string) $this->values[$this->prefix . 'domain'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'domain', '' );
 	}
 
 
@@ -97,13 +81,7 @@ class Standard
 	 */
 	public function setDomain( $domain )
 	{
-		if( (string) $domain !== $this->getDomain() )
-		{
-			$this->values[$this->prefix . 'domain'] = (string) $domain;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'domain', (string) $domain );
 	}
 
 
@@ -114,11 +92,7 @@ class Standard
 	 */
 	public function getName()
 	{
-		if( isset( $this->values[$this->prefix . 'name'] ) ) {
-			return (string) $this->values[$this->prefix . 'name'];
-		}
-
-		return $this->getLabel();
+		return (string) $this->get( $this->prefix . 'name', $this->getLabel() );
 	}
 
 
@@ -129,11 +103,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values[$this->prefix . 'label'] ) ) {
-			return (string) $this->values[$this->prefix . 'label'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'label', '' );
 	}
 
 
@@ -145,14 +115,9 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( (string) $label !== $this->getLabel() )
-		{
-			$this->values[$this->prefix . 'label'] = (string) $label;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'label', (string) $label );
 	}
+
 
 	/**
 	 * Returns the position of the item in the list.
@@ -161,11 +126,7 @@ class Standard
 	 */
 	public function getPosition()
 	{
-		if( isset( $this->values[$this->prefix . 'position'] ) ) {
-			return (int) $this->values[$this->prefix . 'position'];
-		}
-
-		return 0;
+		return (int) $this->get( $this->prefix . 'position', 0 );
 	}
 
 
@@ -177,13 +138,7 @@ class Standard
 	 */
 	public function setPosition( $pos )
 	{
-		if( (int) $pos !== $this->getPosition() )
-		{
-			$this->values[$this->prefix . 'position'] = (int) $pos;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'position', (int) $pos );
 	}
 
 
@@ -194,11 +149,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values[$this->prefix . 'status'] ) ) {
-			return (int) $this->values[$this->prefix . 'status'];
-		}
-
-		return 1;
+		return (int) $this->get( $this->prefix . 'status', 1 );
 	}
 
 
@@ -210,13 +161,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values[$this->prefix . 'status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'status', (int) $status );
 	}
 
 

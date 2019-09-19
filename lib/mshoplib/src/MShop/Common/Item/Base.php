@@ -121,11 +121,12 @@ abstract class Base
 	 */
 	public function set( $name, $value )
 	{
-		if( !isset( $this->bdata[$name] ) || $this->bdata[$name] !== $value ) {
+		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] !== $value )
+		{
+			$this->bdata[$name] = $value;
 			$this->setModified();
 		}
 
-		$this->bdata[$name] = $value;
 		return $this;
 	}
 

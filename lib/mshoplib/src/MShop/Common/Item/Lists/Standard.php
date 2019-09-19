@@ -25,8 +25,8 @@ class Standard
 	use \Aimeos\MShop\Common\Item\Config\Traits;
 
 
+	private $date;
 	private $prefix;
-	private $values;
 	private $refItem;
 
 
@@ -40,8 +40,8 @@ class Standard
 	{
 		parent::__construct( $prefix, $values );
 
+		$this->date = isset( $values['.date'] ) ? $values['.date'] : date( 'Y-m-d H:i:s' );
 		$this->prefix = (string) $prefix;
-		$this->values = $values;
 	}
 
 
@@ -55,11 +55,7 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		if( isset( $this->values[$this->prefix . 'parentid'] ) ) {
-			return (string) $this->values[$this->prefix . 'parentid'];
-		}
-
-		return null;
+		return $this->get( $this->prefix . 'parentid' );
 	}
 
 
@@ -72,13 +68,7 @@ class Standard
 	 */
 	public function setParentId( $parentid )
 	{
-		if( (string) $parentid !== $this->getParentId() )
-		{
-			$this->values[$this->prefix . 'parentid'] = (int) $parentid;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'parentid', (string) $parentid );
 	}
 
 
@@ -100,11 +90,7 @@ class Standard
 	 */
 	public function getDomain()
 	{
-		if( isset( $this->values[$this->prefix . 'domain'] ) ) {
-			return (string) $this->values[$this->prefix . 'domain'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'domain', '' );
 	}
 
 
@@ -116,13 +102,7 @@ class Standard
 	 */
 	public function setDomain( $domain )
 	{
-		if( (string) $domain !== $this->getDomain() )
-		{
-			$this->values[$this->prefix . 'domain'] = (string) $domain;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'domain', (string) $domain );
 	}
 
 
@@ -134,11 +114,7 @@ class Standard
 	 */
 	public function getRefId()
 	{
-		if( isset( $this->values[$this->prefix . 'refid'] ) ) {
-			return (string) $this->values[$this->prefix . 'refid'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'refid', '' );
 	}
 
 
@@ -151,13 +127,7 @@ class Standard
 	 */
 	public function setRefId( $refid )
 	{
-		if( (string) $refid !== $this->getRefId() )
-		{
-			$this->values[$this->prefix . 'refid'] = (string) $refid;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'refid', (string) $refid );
 	}
 
 
@@ -168,11 +138,7 @@ class Standard
 	 */
 	public function getDateStart()
 	{
-		if( isset( $this->values[$this->prefix . 'datestart'] ) ) {
-			return (string) $this->values[$this->prefix . 'datestart'];
-		}
-
-		return null;
+		return $this->get( $this->prefix . 'datestart' );
 	}
 
 
@@ -184,13 +150,7 @@ class Standard
 	 */
 	public function setDateStart( $date )
 	{
-		if( (string) $date !== $this->getDateStart() )
-		{
-			$this->values[$this->prefix . 'datestart'] = $this->checkDateFormat( $date );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'datestart', $this->checkDateFormat( $date ) );
 	}
 
 
@@ -201,11 +161,7 @@ class Standard
 	 */
 	public function getDateEnd()
 	{
-		if( isset( $this->values[$this->prefix . 'dateend'] ) ) {
-			return (string) $this->values[$this->prefix . 'dateend'];
-		}
-
-		return null;
+		return $this->get( $this->prefix . 'dateend' );
 	}
 
 
@@ -217,13 +173,7 @@ class Standard
 	 */
 	public function setDateEnd( $date )
 	{
-		if( (string) $date !== $this->getDateEnd() )
-		{
-			$this->values[$this->prefix . 'dateend'] = $this->checkDateFormat( $date );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'dateend', $this->checkDateFormat( $date ) );
 	}
 
 
@@ -234,9 +184,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values[$this->prefix . 'type'] ) ) {
-			return (string) $this->values[$this->prefix . 'type'];
-		}
+		return $this->get( $this->prefix . 'type' );
 	}
 
 
@@ -249,13 +197,7 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type != $this->getType() )
-		{
-			$this->values[$this->prefix . 'type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'type', $this->checkCode( $type ) );
 	}
 
 
@@ -266,11 +208,7 @@ class Standard
 	 */
 	public function getPosition()
 	{
-		if( isset( $this->values[$this->prefix . 'position'] ) ) {
-			return (int) $this->values[$this->prefix . 'position'];
-		}
-
-		return 0;
+		return (int) $this->get( $this->prefix . 'position', 0 );
 	}
 
 
@@ -282,13 +220,7 @@ class Standard
 	 */
 	public function setPosition( $pos )
 	{
-		if( (int) $pos !== $this->getPosition() )
-		{
-			$this->values[$this->prefix . 'position'] = (int) $pos;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'position', (int) $pos );
 	}
 
 
@@ -299,11 +231,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values[$this->prefix . 'status'] ) ) {
-			return (int) $this->values[$this->prefix . 'status'];
-		}
-
-		return 1;
+		return (int) $this->get( $this->prefix . 'status', 1 );
 	}
 
 
@@ -315,13 +243,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values[$this->prefix . 'status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'status', (int) $status );
 	}
 
 
@@ -332,11 +254,7 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		if( isset( $this->values[$this->prefix . 'config'] ) ) {
-			return (array) $this->values[$this->prefix . 'config'];
-		}
-
-		return [];
+		return (array) $this->get( $this->prefix . 'config', [] );
 	}
 
 
@@ -348,10 +266,7 @@ class Standard
 	 */
 	public function setConfig( array $config )
 	{
-		$this->values[$this->prefix . 'config'] = $config;
-		$this->setModified();
-
-		return $this;
+		return $this->set( $this->prefix . 'config', $config );
 	}
 
 
@@ -399,8 +314,8 @@ class Standard
 	public function isAvailable()
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
-			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->values['.date'] )
-			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->values['.date'] );
+			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->date )
+			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->date );
 	}
 
 

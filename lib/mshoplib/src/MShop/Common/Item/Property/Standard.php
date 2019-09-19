@@ -21,8 +21,8 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Common\Item\Property\Iface
 {
+	private $langid;
 	private $prefix;
-	private $values;
 
 
 	/**
@@ -35,8 +35,8 @@ class Standard
 	{
 		parent::__construct( $prefix, $values );
 
+		$this->langid = isset( $values['.languageid'] ) ? $values['.languageid'] : null;
 		$this->prefix = $prefix;
-		$this->values = $values;
 	}
 
 
@@ -58,11 +58,7 @@ class Standard
 	 */
 	public function getLanguageId()
 	{
-		if( isset( $this->values[$this->prefix . 'languageid'] ) ) {
-			return (string) $this->values[$this->prefix . 'languageid'];
-		}
-
-		return null;
+		return $this->get( $this->prefix . 'languageid' );
 	}
 
 
@@ -74,13 +70,7 @@ class Standard
 	 */
 	public function setLanguageId( $id )
 	{
-		if( $id !== $this->getLanguageId() )
-		{
-			$this->values[$this->prefix . 'languageid'] = $this->checkLanguageId( $id );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'languageid', $this->checkLanguageId( $id ) );
 	}
 
 
@@ -91,9 +81,7 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		if( isset( $this->values[$this->prefix . 'parentid'] ) ) {
-			return (string) $this->values[$this->prefix . 'parentid'];
-		}
+		return $this->get( $this->prefix . 'parentid' );
 	}
 
 
@@ -105,13 +93,7 @@ class Standard
 	 */
 	public function setParentId( $id )
 	{
-		if( (string) $id !== $this->getParentId() )
-		{
-			$this->values[$this->prefix . 'parentid'] = (string) $id;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'parentid', (string) $id );
 	}
 
 
@@ -122,9 +104,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values[$this->prefix . 'type'] ) ) {
-			return (string) $this->values[$this->prefix . 'type'];
-		}
+		return $this->get( $this->prefix . 'type' );
 	}
 
 
@@ -136,13 +116,7 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values[$this->prefix . 'type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'type', $this->checkCode( $type ) );
 	}
 
 
@@ -153,11 +127,7 @@ class Standard
 	 */
 	public function getValue()
 	{
-		if( isset( $this->values[$this->prefix . 'value'] ) ) {
-			return (string) $this->values[$this->prefix . 'value'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'value', '' );
 	}
 
 
@@ -169,13 +139,7 @@ class Standard
 	 */
 	public function setValue( $value )
 	{
-		if( (string) $value !== $this->getValue() )
-		{
-			$this->values[$this->prefix . 'value'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'value', (string) $value );
 	}
 
 
@@ -197,8 +161,8 @@ class Standard
 	 */
 	public function isAvailable()
 	{
-		return parent::isAvailable() && ( $this->values['.languageid'] === null
-			|| $this->getLanguageId() === $this->values['.languageid']
+		return parent::isAvailable() && ( $this->langid === null
+			|| $this->getLanguageId() === $this->langid
 			|| $this->getLanguageId() === null );
 	}
 

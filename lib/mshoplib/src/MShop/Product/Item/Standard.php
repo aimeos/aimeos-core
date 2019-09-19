@@ -31,7 +31,7 @@ class Standard
 	}
 
 
-	private $values;
+	private $date;
 
 
 	/**
@@ -47,9 +47,9 @@ class Standard
 	{
 		parent::__construct( 'product.', $values );
 
+		$this->date = isset( $values['.date'] ) ? $values['.date'] : date( 'Y-m-d H:i:s' );
 		$this->initListItems( $listItems, $refItems );
 		$this->initPropertyItems( $propItems );
-		$this->values = $values;
 	}
 
 
@@ -71,9 +71,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['product.type'] ) ) {
-			return (string) $this->values['product.type'];
-		}
+		return $this->get( 'product.type' );
 	}
 
 
@@ -85,13 +83,7 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['product.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'product.type', $this->checkCode( $type ) );
 	}
 
 
@@ -102,11 +94,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['product.status'] ) ) {
-			return (int) $this->values['product.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'product.status', 1 );
 	}
 
 
@@ -118,13 +106,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values['product.status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'product.status', (int) $status );
 	}
 
 
@@ -135,11 +117,7 @@ class Standard
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values['product.code'] ) ) {
-			return (string) $this->values['product.code'];
-		}
-
-		return '';
+		return (string) $this->get( 'product.code', '' );
 	}
 
 
@@ -151,13 +129,7 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( (string) $code !== $this->getCode() )
-		{
-			$this->values['product.code'] = $this->checkCode( $code );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'product.code', $this->checkCode( $code ) );
 	}
 
 
@@ -168,11 +140,7 @@ class Standard
 	 */
 	public function getDataset()
 	{
-		if( isset( $this->values['product.dataset'] ) ) {
-			return (string) $this->values['product.dataset'];
-		}
-
-		return '';
+		return (string) $this->get( 'product.dataset', '' );
 	}
 
 
@@ -184,13 +152,7 @@ class Standard
 	 */
 	public function setDataset( $name )
 	{
-		if( (string) $name !== $this->getDataset() )
-		{
-			$this->values['product.dataset'] = $name;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'product.dataset', $this->checkCode( $name ) );
 	}
 
 
@@ -201,11 +163,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['product.label'] ) ) {
-			return (string) $this->values['product.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'product.label', '' );
 	}
 
 
@@ -217,13 +175,7 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( (string) $label !== $this->getLabel() )
-		{
-			$this->values['product.label'] = (string) $label;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'product.label', (string) $label );
 	}
 
 
@@ -234,9 +186,7 @@ class Standard
 	 */
 	public function getDateStart()
 	{
-		if( isset( $this->values['product.datestart'] ) ) {
-			return (string) $this->values['product.datestart'];
-		}
+		return $this->get( 'product.datestart' );
 	}
 
 
@@ -248,13 +198,7 @@ class Standard
 	 */
 	public function setDateStart( $date )
 	{
-		if( $date !== $this->getDateStart() )
-		{
-			$this->values['product.datestart'] = $this->checkDateFormat( $date );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'product.datestart', $this->checkDateFormat( $date ) );
 	}
 
 
@@ -265,9 +209,7 @@ class Standard
 	 */
 	public function getDateEnd()
 	{
-		if( isset( $this->values['product.dateend'] ) ) {
-			return (string) $this->values['product.dateend'];
-		}
+		return $this->get( 'product.dateend' );
 	}
 
 
@@ -279,13 +221,7 @@ class Standard
 	 */
 	public function setDateEnd( $date )
 	{
-		if( $date !== $this->getDateEnd() )
-		{
-			$this->values['product.dateend'] = $this->checkDateFormat( $date );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'product.dateend', $this->checkDateFormat( $date ) );
 	}
 
 
@@ -296,11 +232,7 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		if( isset( $this->values['product.config'] ) ) {
-			return (array) $this->values['product.config'];
-		}
-
-		return [];
+		return (array) $this->get( 'product.config', [] );
 	}
 
 
@@ -312,10 +244,7 @@ class Standard
 	 */
 	public function setConfig( array $config )
 	{
-		$this->values['product.config'] = $config;
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'product.config', $config );
 	}
 
 
@@ -326,11 +255,7 @@ class Standard
 	 */
 	public function getTarget()
 	{
-		if( isset( $this->values['product.target'] ) ) {
-			return (string) $this->values['product.target'];
-		}
-
-		return '';
+		return (string) $this->get( 'product.target', '' );
 	}
 
 
@@ -342,13 +267,7 @@ class Standard
 	 */
 	public function setTarget( $value )
 	{
-		if( (string) $value !== $this->getTarget() )
-		{
-			$this->values['product.target'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'product.target', (string) $value );
 	}
 
 
@@ -359,11 +278,7 @@ class Standard
 	 */
 	public function getTimeCreated()
 	{
-		if( isset( $this->values['product.ctime'] ) ) {
-			return (string) $this->values['product.ctime'];
-		}
-
-		return date( 'Y-m-d H:i:s' );
+		return (string) $this->get( 'product.ctime', date( 'Y-m-d H:i:s' ) );
 	}
 
 
@@ -375,13 +290,7 @@ class Standard
 	 */
 	public function setTimeCreated( $value )
 	{
-		if( (string) $value !== $this->getTimeCreated() )
-		{
-			$this->values['product.ctime'] = $this->checkDateFormat( $value );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'product.ctime', $this->checkDateFormat( $value ) );
 	}
 
 
@@ -404,8 +313,8 @@ class Standard
 	public function isAvailable()
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
-			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->values['.date'] )
-			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->values['.date'] );
+			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->date )
+			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->date );
 	}
 
 

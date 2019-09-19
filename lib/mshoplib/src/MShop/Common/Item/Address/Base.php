@@ -49,7 +49,6 @@ abstract class Base
 	const SALUTATION_MR = 'mr';
 
 	private $prefix;
-	private $data;
 
 
 	/**
@@ -62,7 +61,6 @@ abstract class Base
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->data = $values;
 		$this->prefix = $prefix;
 	}
 
@@ -76,11 +74,7 @@ abstract class Base
 	 */
 	public function getCompany()
 	{
-		if( isset( $this->data[$this->prefix . 'company'] ) ) {
-			return (string) $this->data[$this->prefix . 'company'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'company', '' );
 	}
 
 
@@ -92,14 +86,9 @@ abstract class Base
 	 */
 	public function setCompany( $company )
 	{
-		if( (string) $company !== $this->getCompany() )
-		{
-			$this->data[$this->prefix . 'company'] = (string) $company;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'company', (string) $company );
 	}
+
 
 	/**
 	 * Returns the vatid.
@@ -108,11 +97,7 @@ abstract class Base
 	 */
 	public function getVatID()
 	{
-		if( isset( $this->data[$this->prefix . 'vatid'] ) ) {
-			return (string) $this->data[$this->prefix . 'vatid'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'vatid', '' );
 	}
 
 
@@ -124,13 +109,7 @@ abstract class Base
 	 */
 	public function setVatID( $vatid )
 	{
-		if( (string) $vatid !== $this->getVatID() )
-		{
-			$this->data[$this->prefix . 'vatid'] = (string) $vatid;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'vatid', (string) $vatid );
 	}
 
 
@@ -141,11 +120,7 @@ abstract class Base
 	 */
 	public function getSalutation()
 	{
-		if( isset( $this->data[$this->prefix . 'salutation'] ) ) {
-			return (string) $this->data[$this->prefix . 'salutation'];
-		}
-
-		return \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_UNKNOWN;
+		return (string) $this->get( $this->prefix . 'salutation', \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_UNKNOWN );
 	}
 
 
@@ -157,15 +132,7 @@ abstract class Base
 	 */
 	public function setSalutation( $salutation )
 	{
-		$this->checkSalutation( $salutation );
-
-		if( (string) $salutation !== $this->getSalutation() )
-		{
-			$this->data[$this->prefix . 'salutation'] = (string) $salutation;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'salutation', (string) $this->checkSalutation( $salutation ) );
 	}
 
 
@@ -176,11 +143,7 @@ abstract class Base
 	 */
 	public function getTitle()
 	{
-		if( isset( $this->data[$this->prefix . 'title'] ) ) {
-			return (string) $this->data[$this->prefix . 'title'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'title', '' );
 	}
 
 
@@ -192,13 +155,7 @@ abstract class Base
 	 */
 	public function setTitle( $title )
 	{
-		if( (string) $title !== $this->getTitle() )
-		{
-			$this->data[$this->prefix . 'title'] = (string) $title;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'title', (string) $title );
 	}
 
 
@@ -209,11 +166,7 @@ abstract class Base
 	 */
 	public function getFirstname()
 	{
-		if( isset( $this->data[$this->prefix . 'firstname'] ) ) {
-			return (string) $this->data[$this->prefix . 'firstname'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'firstname', '' );
 	}
 
 
@@ -225,13 +178,7 @@ abstract class Base
 	 */
 	public function setFirstname( $firstname )
 	{
-		if( (string) $firstname !== $this->getFirstname() )
-		{
-			$this->data[$this->prefix . 'firstname'] = (string) $firstname;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'firstname', (string) $firstname );
 	}
 
 
@@ -242,11 +189,7 @@ abstract class Base
 	 */
 	public function getLastname()
 	{
-		if( isset( $this->data[$this->prefix . 'lastname'] ) ) {
-			return (string) $this->data[$this->prefix . 'lastname'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'lastname', '' );
 	}
 
 
@@ -258,13 +201,7 @@ abstract class Base
 	 */
 	public function setLastname( $lastname )
 	{
-		if( (string) $lastname !== $this->getLastname() )
-		{
-			$this->data[$this->prefix . 'lastname'] = (string) $lastname;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'lastname', (string) $lastname );
 	}
 
 
@@ -275,11 +212,7 @@ abstract class Base
 	 */
 	public function getAddress1()
 	{
-		if( isset( $this->data[$this->prefix . 'address1'] ) ) {
-			return (string) $this->data[$this->prefix . 'address1'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'address1', '' );
 	}
 
 
@@ -291,13 +224,7 @@ abstract class Base
 	 */
 	public function setAddress1( $address1 )
 	{
-		if( (string) $address1 !== $this->getAddress1() )
-		{
-			$this->data[$this->prefix . 'address1'] = (string) $address1;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'address1', (string) $address1 );
 	}
 
 
@@ -308,11 +235,7 @@ abstract class Base
 	 */
 	public function getAddress2()
 	{
-		if( isset( $this->data[$this->prefix . 'address2'] ) ) {
-			return (string) $this->data[$this->prefix . 'address2'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'address2', '' );
 	}
 
 
@@ -324,13 +247,7 @@ abstract class Base
 	 */
 	public function setAddress2( $address2 )
 	{
-		if( (string) $address2 !== $this->getAddress2() )
-		{
-			$this->data[$this->prefix . 'address2'] = (string) $address2;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'address2', (string) $address2 );
 	}
 
 
@@ -341,11 +258,7 @@ abstract class Base
 	 */
 	public function getAddress3()
 	{
-		if( isset( $this->data[$this->prefix . 'address3'] ) ) {
-			return (string) $this->data[$this->prefix . 'address3'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'address3', '' );
 	}
 
 
@@ -357,13 +270,7 @@ abstract class Base
 	 */
 	public function setAddress3( $address3 )
 	{
-		if( (string) $address3 !== $this->getAddress3() )
-		{
-			$this->data[$this->prefix . 'address3'] = (string) $address3;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'address3', (string) $address3 );
 	}
 
 
@@ -374,11 +281,7 @@ abstract class Base
 	 */
 	public function getPostal()
 	{
-		if( isset( $this->data[$this->prefix . 'postal'] ) ) {
-			return (string) $this->data[$this->prefix . 'postal'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'postal', '' );
 	}
 
 
@@ -390,13 +293,7 @@ abstract class Base
 	 */
 	public function setPostal( $postal )
 	{
-		if( (string) $postal !== $this->getPostal() )
-		{
-			$this->data[$this->prefix . 'postal'] = (string) $postal;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'postal', (string) $postal );
 	}
 
 
@@ -407,11 +304,7 @@ abstract class Base
 	 */
 	public function getCity()
 	{
-		if( isset( $this->data[$this->prefix . 'city'] ) ) {
-			return (string) $this->data[$this->prefix . 'city'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'city', '' );
 	}
 
 
@@ -423,13 +316,7 @@ abstract class Base
 	 */
 	public function setCity( $city )
 	{
-		if( (string) $city !== $this->getCity() )
-		{
-			$this->data[$this->prefix . 'city'] = (string) $city;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'city', (string) $city );
 	}
 
 
@@ -440,11 +327,7 @@ abstract class Base
 	 */
 	public function getState()
 	{
-		if( isset( $this->data[$this->prefix . 'state'] ) ) {
-			return (string) $this->data[$this->prefix . 'state'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'state', '' );
 	}
 
 
@@ -456,13 +339,7 @@ abstract class Base
 	 */
 	public function setState( $state )
 	{
-		if( (string) $state !== $this->getState() )
-		{
-			$this->data[$this->prefix . 'state'] = (string) $state;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'state', (string) $state );
 	}
 
 
@@ -473,11 +350,7 @@ abstract class Base
 	 */
 	public function getCountryId()
 	{
-		if( isset( $this->data[$this->prefix . 'countryid'] ) ) {
-			return (string) $this->data[$this->prefix . 'countryid'];
-		}
-
-		return null;
+		return (string) $this->get( $this->prefix . 'countryid' );
 	}
 
 
@@ -489,13 +362,7 @@ abstract class Base
 	 */
 	public function setCountryId( $countryid )
 	{
-		if( $countryid !== $this->getCountryId() )
-		{
-			$this->data[$this->prefix . 'countryid'] = $this->checkCountryId( $countryid );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'countryid', $this->checkCountryId( $countryid ) );
 	}
 
 
@@ -506,11 +373,7 @@ abstract class Base
 	 */
 	public function getLanguageId()
 	{
-		if( isset( $this->data[$this->prefix . 'languageid'] ) ) {
-			return (string) $this->data[$this->prefix . 'languageid'];
-		}
-
-		return null;
+		return (string) $this->get( $this->prefix . 'languageid' );
 	}
 
 
@@ -522,13 +385,7 @@ abstract class Base
 	 */
 	public function setLanguageId( $langid )
 	{
-		if( $langid !== $this->getLanguageId() )
-		{
-			$this->data[$this->prefix . 'languageid'] = $this->checkLanguageId( $langid );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'languageid', $this->checkLanguageId( $langid ) );
 	}
 
 
@@ -539,11 +396,7 @@ abstract class Base
 	 */
 	public function getTelephone()
 	{
-		if( isset( $this->data[$this->prefix . 'telephone'] ) ) {
-			return (string) $this->data[$this->prefix . 'telephone'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'telephone', '' );
 	}
 
 
@@ -555,13 +408,7 @@ abstract class Base
 	 */
 	public function setTelephone( $telephone )
 	{
-		if( (string) $telephone !== $this->getTelephone() )
-		{
-			$this->data[$this->prefix . 'telephone'] = (string) $telephone;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'telephone', (string) $telephone );
 	}
 
 
@@ -572,11 +419,7 @@ abstract class Base
 	 */
 	public function getEmail()
 	{
-		if( isset( $this->data[$this->prefix . 'email'] ) ) {
-			return (string) $this->data[$this->prefix . 'email'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'email', '' );
 	}
 
 
@@ -592,13 +435,7 @@ abstract class Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in email address: "%1$s"', $email ) );
 		}
 
-		if( (string) $email !== $this->getEmail() )
-		{
-			$this->data[$this->prefix . 'email'] = (string) $email;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'email', (string) $email );
 	}
 
 
@@ -609,11 +446,7 @@ abstract class Base
 	 */
 	public function getTelefax()
 	{
-		if( isset( $this->data[$this->prefix . 'telefax'] ) ) {
-			return (string) $this->data[$this->prefix . 'telefax'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'telefax', '' );
 	}
 
 
@@ -625,13 +458,7 @@ abstract class Base
 	 */
 	public function setTelefax( $telefax )
 	{
-		if( (string) $telefax !== $this->getTelefax() )
-		{
-			$this->data[$this->prefix . 'telefax'] = (string) $telefax;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'telefax', (string) $telefax );
 	}
 
 
@@ -642,11 +469,7 @@ abstract class Base
 	 */
 	public function getWebsite()
 	{
-		if( isset( $this->data[$this->prefix . 'website'] ) ) {
-			return (string) $this->data[$this->prefix . 'website'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'website', '' );
 	}
 
 
@@ -664,13 +487,7 @@ abstract class Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid web site URL "%1$s"', $website ) );
 		}
 
-		if( (string) $website !== $this->getWebsite() )
-		{
-			$this->data[$this->prefix . 'website'] = (string) $website;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'website', (string) $website );
 	}
 
 
@@ -681,11 +498,7 @@ abstract class Base
 	 */
 	public function getLongitude()
 	{
-		if( isset( $this->data[$this->prefix . 'longitude'] ) ) {
-			return (float) $this->data[$this->prefix . 'longitude'];
-		}
-
-		return null;
+		return (string) $this->get( $this->prefix . 'longitude' );
 	}
 
 
@@ -697,15 +510,7 @@ abstract class Base
 	 */
 	public function setLongitude( $value )
 	{
-		if( $value === '' ) { $value = null; }
-
-		if( $value !== $this->getLongitude() )
-		{
-			$this->data[$this->prefix . 'longitude'] = (float) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'longitude', $value !== '' && $value !== null ? (float) $value : null );
 	}
 
 
@@ -716,11 +521,7 @@ abstract class Base
 	 */
 	public function getLatitude()
 	{
-		if( isset( $this->data[$this->prefix . 'latitude'] ) ) {
-			return (float) $this->data[$this->prefix . 'latitude'];
-		}
-
-		return null;
+		return (string) $this->get( $this->prefix . 'latitude' );
 	}
 
 
@@ -732,15 +533,7 @@ abstract class Base
 	 */
 	public function setLatitude( $value )
 	{
-		if( $value === '' ) { $value = null; }
-
-		if( $value !== $this->getLatitude() )
-		{
-			$this->data[$this->prefix . 'latitude'] = (float) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'latitude', $value !== '' && $value !== null ? (float) $value : null );
 	}
 
 
