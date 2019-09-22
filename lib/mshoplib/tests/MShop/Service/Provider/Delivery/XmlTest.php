@@ -21,7 +21,10 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 
 		$this->context = \TestHelperMShop::getContext();
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
-		$serviceItem = $serviceManager->createItem()->setConfig( ['filepath' => 'tmp/order-export_%%d.xml'] );
+		$serviceItem = $serviceManager->createItem()->setConfig( [
+			'xml.filepath' => 'tmp/order-export_%%d.xml',
+			'xml.updatedir' => __DIR__ . '/_tests',
+		] );
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Delivery\Xml( $this->context, $serviceItem );
 	}
@@ -29,6 +32,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
+		\Aimeos\MShop::cache( false );
 		unset( $this->object );
 	}
 
@@ -37,7 +41,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->object->getConfigBE();
 
-		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 4, count( $result ) );
 
 		foreach( $result as $key => $item ) {
 			$this->assertInstanceOf( 'Aimeos\MW\Criteria\Attribute\Iface', $item );
@@ -48,15 +52,19 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 	public function testCheckConfigBE()
 	{
 		$attributes = [
+			'xml.backupdir' => '/backup',
 			'xml.filepath' => 'order-%T.xml',
 			'xml.template' => 'body.xml',
+			'xml.updatedir' => '/',
 		];
 
 		$result = $this->object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 4, count( $result ) );
+		$this->assertEquals( null, $result['xml.backupdir'] );
 		$this->assertEquals( null, $result['xml.filepath'] );
 		$this->assertEquals( null, $result['xml.template'] );
+		$this->assertEquals( null, $result['xml.updatedir'] );
 	}
 
 
@@ -67,8 +75,8 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		unlink( 'tmp/order-export_0.xml' );
 
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getDeliveryStatus() );
-		$this->assertEquals( '2008-02-15 12:34:56', $xml->orderitem[0]->invoice->{'order.datepayment'} );
-		$this->assertEquals( 'unittest', $xml->orderitem[0]->base->{'order.base.sitecode'} );
+		$this->assertEquals( '2008-02-15 12:34:56', $xml->orderitem[0]->{'order.datepayment'} );
+		$this->assertEquals( 'unittest', $xml->orderitem[0]->{'order.base.sitecode'} );
 		$this->assertEquals( 'payment', $xml->orderitem[0]->address->addressitem[0]['type'] );
 		$this->assertEquals( 0, (string) $xml->orderitem[0]->address->addressitem[0]['position'] );
 		$this->assertEquals( 1, (string) $xml->orderitem[0]->product->productitem[0]['position'] );
@@ -88,8 +96,8 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $orders ) );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, current( $orders )->getDeliveryStatus() );
-		$this->assertEquals( '2008-02-15 12:34:56', $xml->orderitem[0]->invoice->{'order.datepayment'} );
-		$this->assertEquals( 'unittest', $xml->orderitem[0]->base->{'order.base.sitecode'} );
+		$this->assertEquals( '2008-02-15 12:34:56', $xml->orderitem[0]->{'order.datepayment'} );
+		$this->assertEquals( 'unittest', $xml->orderitem[0]->{'order.base.sitecode'} );
 		$this->assertEquals( 'payment', $xml->orderitem[0]->address->addressitem[0]['type'] );
 		$this->assertEquals( 0, (string) $xml->orderitem[0]->address->addressitem[0]['position'] );
 		$this->assertEquals( 1, (string) $xml->orderitem[0]->product->productitem[0]['position'] );
@@ -98,6 +106,35 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 0, (string) $xml->orderitem[0]->service->serviceitem[0]['position'] );
 		$this->assertEquals( 9, $xml->orderitem[0]->service->serviceitem[0]->attribute->attributeitem->count() );
 		$this->assertEquals( 2, $xml->orderitem[0]->coupon->couponitem->count() );
+	}
+
+
+	public function testUpdateAsync()
+	{
+		\Aimeos\MShop::cache( true );
+
+		$itemMock = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
+			->setMethods( ['setDeliveryStatus', 'setPaymentStatus', 'setDateDelivery', 'setDatePayment'] )
+			->getMock();
+
+		$itemMock->expects( $this->once() )->method( 'setDeliveryStatus' )->will( $this->returnSelf() );
+		$itemMock->expects( $this->once() )->method( 'setPaymentStatus' )->will( $this->returnSelf() );
+		$itemMock->expects( $this->once() )->method( 'setDateDelivery' )->will( $this->returnSelf() );
+		$itemMock->expects( $this->once() )->method( 'setDatePayment' )->will( $this->returnSelf() );
+
+		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
+			->setMethods( ['saveItems', 'searchItems'] )
+			->setConstructorArgs( [$this->context] )
+			->getMock();
+
+		$mock->expects( $this->once() )->method( 'searchItems' )
+			->will( $this->returnValue( ['123' => $itemMock] ) );
+
+		$mock->expects( $this->once() )->method( 'saveItems' );
+
+		\Aimeos\MShop::inject( 'order', $mock );
+
+		$this->object->updateAsync();
 	}
 
 

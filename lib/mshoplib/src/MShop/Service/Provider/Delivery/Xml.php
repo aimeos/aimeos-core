@@ -24,10 +24,19 @@ class Xml
 	private $num = 0;
 
 	private $beConfig = [
+		'xml.backupdir' => [
+			'code' => 'xml.backupdir',
+			'internalcode' => 'xml.backupdir',
+			'label' => 'Relative or absolute path of the backup directory (with strftime() placeholders)',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => false,
+		],
 		'xml.filepath' => [
 			'code' => 'xml.filepath',
 			'internalcode' => 'xml.filepath',
-			'label' => 'Relative or absolute path and name of the XML files with strftime() placeholders',
+			'label' => 'Relative or absolute path and name of the XML files (with strftime() placeholders)',
 			'type' => 'string',
 			'internaltype' => 'string',
 			'default' => './order_%Y-%m-%d_%T_%%d.xml',
@@ -40,6 +49,15 @@ class Xml
 			'type' => 'string',
 			'internaltype' => 'string',
 			'default' => 'service/provider/delivery/xml-body-standard',
+			'required' => false,
+		],
+		'xml.updatedir' => [
+			'code' => 'xml.updatedir',
+			'internalcode' => 'xml.updatedir',
+			'label' => 'Relative or absolute path and name of the order update XML files',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
 			'required' => false,
 		],
 	];
@@ -107,13 +125,62 @@ class Xml
 
 
 	/**
+	 * Looks for new update files and updates the orders for which status updates were received.
+	 * If batch processing of files isn't supported, this method can be empty.
+	 *
+	 * @return boolean True if the update was successful, false if async updates are not supported
+	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
+	 */
+	public function updateAsync()
+	{
+		$context = $this->getContext();
+		$logger = $context->getLogger();
+		$location = $this->getConfigValue( 'xml.updatedir' );
+
+		if( $location === '' || !file_exists( $location ) )
+		{
+			$msg = sprintf( 'File or directory "%1$s" doesn\'t exist', $location );
+			throw new \Aimeos\Controller\Jobs\Exception( $msg );
+		}
+
+		$logger->log( sprintf( 'Started order status import from "%1$s"', $location ), \Aimeos\MW\Logger\Base::INFO );
+
+		$files = [];
+
+		if( is_dir( $location ) )
+		{
+			foreach( new \DirectoryIterator( $location ) as $entry )
+			{
+				if( strncmp( $entry->getFilename(), 'order', 5 ) === 0 && $entry->getExtension() === 'xml' ) {
+					$files[] = $entry->getPathname();
+				}
+			}
+		}
+		else
+		{
+			$files[] = $location;
+		}
+
+		sort( $files );
+
+		foreach( $files as $filepath ) {
+			$this->importFile( $filepath );
+		}
+
+		$logger->log( sprintf( 'Finished order status import from "%1$s"', $location ), \Aimeos\MW\Logger\Base::INFO );
+
+		return true;
+	}
+
+
+	/**
 	 * Stores the content into the file
 	 *
 	 * @param string $content XML content
 	 */
 	protected function createFile( $content )
 	{
-		$filepath = $this->getConfigValue( 'filepath', './order_%Y-%m-%d_%T_%%d.xml' );
+		$filepath = $this->getConfigValue( 'xml.filepath', './order_%Y-%m-%d_%T_%%d.xml' );
 		$filepath = sprintf( strftime( $filepath ), $this->num++ );
 
 		if( file_put_contents( $filepath, $content ) === false )
@@ -160,5 +227,82 @@ class Xml
 		$search->setConditions( $search->compare( '==', 'order.base.id', array_keys( $ids ) ) );
 
 		return $manager->searchItems( $search, $ref );
+	}
+
+
+	/**
+	 * Imports all orders from the given XML file name
+	 *
+	 * @param string $filename Relative or absolute path to the XML file
+	 */
+	protected function importFile( $filename )
+	{
+		$nodes = [];
+		$xml = new \XMLReader();
+		$logger = $this->getContext()->getLogger();
+
+		if( $xml->open( $filename, LIBXML_COMPACT | LIBXML_PARSEHUGE ) === false ) {
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'No XML file "%1$s" found', $filename ) );
+		}
+
+		$logger->log( sprintf( 'Started order status import from file "%1$s"', $filename ), \Aimeos\MW\Logger\Base::INFO );
+
+		while( $xml->read() === true )
+		{
+			if( $xml->depth === 1 && $xml->nodeType === \XMLReader::ELEMENT && $xml->name === 'orderitem' )
+			{
+				if( ( $dom = $xml->expand() ) === false )
+				{
+					$msg = sprintf( 'Expanding "%1$s" node failed', 'orderitem' );
+					throw new \Aimeos\Controller\Jobs\Exception( $msg );
+				}
+
+				if( ( $attr = $dom->attributes->getNamedItem( 'ref' ) ) !== null ) {
+					$nodes[$attr->nodeValue] = $dom;
+				}
+			}
+		}
+
+		$this->importNodes( $nodes );
+		unset( $nodes );
+
+		$logger->log( sprintf( 'Finished order status import from file "%1$s"', $filename ), \Aimeos\MW\Logger\Base::INFO );
+
+		$backup = $this->getConfigValue( 'xml.backupdir' );
+
+		if( !empty( $backup ) && @rename( $filename, strftime( $backup ) ) === false )
+		{
+			$msg = sprintf( 'Unable to move imported file "%1$s" to "%2$s"', $filename, strftime( $backup ) );
+			throw new \Aimeos\Controller\Jobs\Exception( $msg );
+		}
+	}
+
+
+	/**
+	 * Imports the orders from the given XML nodes
+	 *
+	 * @param \DomElement[] List of order DOM nodes
+	 */
+	protected function importNodes( array $nodes )
+	{
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
+		$search = $manager->createSearch()->setSlice( 0, count( $nodes ) );
+		$search->setConditions( $search->compare( '==', 'order.id', array_keys( $nodes ) ) );
+		$items = $manager->searchItems( $search );
+
+		foreach( $nodes as $node )
+		{
+			$list = [];
+
+			foreach( $node->childNodes as $childNode ) {
+				$list[$childNode->nodeName] = $childNode->nodeValue;
+			}
+
+			if( ( $attr = $node->attributes->getNamedItem( 'ref' ) ) !== null && isset( $items[$attr->nodeValue] ) ) {
+				$items[$attr->nodeValue]->fromArray( $list );
+			}
+		}
+
+		$manager->saveItems( $items );
 	}
 }

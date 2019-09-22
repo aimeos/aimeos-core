@@ -14,20 +14,19 @@ $enc = $this->encoder();
 $baseItems = $this->baseItems;
 
 ?>
-<orderitem>
-	<?php foreach( $this->orderItems as $id => $item ) : ?>
-		<invoice>
-			<?php foreach( $item->toArray() as $key => $value ) : ?>
-				<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
-			<?php endforeach ?>
-		</invoice>
+<?php foreach( $this->orderItems as $id => $item ) : ?>
+
+	<orderitem ref="<?= $enc->attr( $id ) ?>">
+
+		<?php foreach( $item->toArray() as $key => $value ) : ?>
+			<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
+		<?php endforeach ?>
+
 		<?php if( isset( $baseItems[$item->getBaseId()] ) ) : $baseItem = $baseItems[$item->getBaseId()] ?>
 
-			<base>
-				<?php foreach( $baseItem->toArray() as $key => $value ) : ?>
-					<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
-				<?php endforeach ?>
-			</base>
+			<?php foreach( $baseItem->toArray() as $key => $value ) : ?>
+				<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>
+			<?php endforeach ?>
 
 			<address>
 				<?php foreach( $baseItem->getAddresses() as $type => $list ) : ?>
@@ -110,5 +109,7 @@ $baseItems = $this->baseItems;
 			</coupon>
 
 		<?php endif ?>
-	<?php endforeach ?>
-</orderitem>
+
+	</orderitem>
+
+<?php endforeach ?>

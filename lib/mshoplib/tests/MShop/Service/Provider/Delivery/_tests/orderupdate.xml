@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<orders>
+	<orderitem ref="123">
+		<order.statuspayment><![CDATA[6]]></order.statuspayment>
+		<order.statusdelivery><![CDATA[4]]></order.statusdelivery>
+		<order.datepayment><![CDATA[2000-01-01 00:00:00]]></order.datepayment>
+		<order.datedelivery><![CDATA[2000-01-01 12:00:00]]></order.datedelivery>
+	</orderitem>
+</orders>
