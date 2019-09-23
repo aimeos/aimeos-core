@@ -33,9 +33,9 @@ class Xml
 			'default' => '',
 			'required' => false,
 		],
-		'xml.filepath' => [
-			'code' => 'xml.filepath',
-			'internalcode' => 'xml.filepath',
+		'xml.exportpath' => [
+			'code' => 'xml.exportpath',
+			'internalcode' => 'xml.exportpath',
 			'label' => 'Relative or absolute path and name of the XML files (with strftime() placeholders)',
 			'type' => 'string',
 			'internaltype' => 'string',
@@ -180,7 +180,7 @@ class Xml
 	 */
 	protected function createFile( $content )
 	{
-		$filepath = $this->getConfigValue( 'xml.filepath', './order_%Y-%m-%d_%T_%%d.xml' );
+		$filepath = $this->getConfigValue( 'xml.exportpath', './order_%Y-%m-%d_%T_%%d.xml' );
 		$filepath = sprintf( strftime( $filepath ), $this->num++ );
 
 		if( file_put_contents( $filepath, $content ) === false )

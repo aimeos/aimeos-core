@@ -22,7 +22,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
 		$serviceItem = $serviceManager->createItem()->setConfig( [
-			'xml.filepath' => 'tmp/order-export_%%d.xml',
+			'xml.exportpath' => 'tmp/order-export_%%d.xml',
 			'xml.updatedir' => __DIR__ . '/_tests',
 		] );
 
@@ -53,7 +53,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 	{
 		$attributes = [
 			'xml.backupdir' => '/backup',
-			'xml.filepath' => 'order-%T.xml',
+			'xml.exportpath' => 'order-%T.xml',
 			'xml.template' => 'body.xml',
 			'xml.updatedir' => '/',
 		];
@@ -62,7 +62,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 4, count( $result ) );
 		$this->assertEquals( null, $result['xml.backupdir'] );
-		$this->assertEquals( null, $result['xml.filepath'] );
+		$this->assertEquals( null, $result['xml.exportpath'] );
 		$this->assertEquals( null, $result['xml.template'] );
 		$this->assertEquals( null, $result['xml.updatedir'] );
 	}
