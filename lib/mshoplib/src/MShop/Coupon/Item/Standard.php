@@ -25,9 +25,6 @@ class Standard
 	use \Aimeos\MShop\Common\Item\Config\Traits;
 
 
-	private $values;
-
-
 	/**
 	 * Initializes the coupon item.
 	 *
@@ -37,8 +34,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'coupon.', $values );
-
-		$this->values = $values;
 	}
 
 
@@ -49,11 +44,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['coupon.label'] ) ) {
-			return (string) $this->values['coupon.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'coupon.label', '' );
 	}
 
 
@@ -65,12 +56,7 @@ class Standard
 	 */
 	public function setLabel( $name )
 	{
-		if( $name == $this->getLabel() ) { return $this; }
-
-		$this->values['coupon.label'] = (string) $name;
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'coupon.label', (string) $name );
 	}
 
 
@@ -81,11 +67,7 @@ class Standard
 	 */
 	public function getDateStart()
 	{
-		if( isset( $this->values['coupon.datestart'] ) ) {
-			return (string) $this->values['coupon.datestart'];
-		}
-
-		return null;
+		return $this->get( 'coupon.datestart' );
 	}
 
 
@@ -97,12 +79,7 @@ class Standard
 	 */
 	public function setDateStart( $date )
 	{
-		if( $date == $this->getDateStart() ) { return $this; }
-
-		$this->values['coupon.datestart'] = $this->checkDateFormat( $date );
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'coupon.datestart', $this->checkDateFormat( $date ) );
 	}
 
 
@@ -113,11 +90,7 @@ class Standard
 	 */
 	public function getDateEnd()
 	{
-		if( isset( $this->values['coupon.dateend'] ) ) {
-			return (string) $this->values['coupon.dateend'];
-		}
-
-		return null;
+		return $this->get( 'coupon.dateend' );
 	}
 
 
@@ -129,13 +102,7 @@ class Standard
 	 */
 	public function setDateEnd( $date )
 	{
-		if( $date == $this->getDateEnd() ) { return $this; }
-
-		$this->values['coupon.dateend'] = $this->checkDateFormat( $date );
-
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'coupon.dateend', $this->checkDateFormat( $date ) );
 	}
 
 
@@ -146,11 +113,7 @@ class Standard
 	 */
 	public function getProvider()
 	{
-		if( isset( $this->values['coupon.provider'] ) ) {
-			return (string) $this->values['coupon.provider'];
-		}
-
-		return '';
+		return (string) $this->get( 'coupon.provider', '' );
 	}
 
 
@@ -162,12 +125,7 @@ class Standard
 	 */
 	public function setProvider( $provider )
 	{
-		if( $provider == $this->getProvider() ) { return $this; }
-
-		$this->values['coupon.provider'] = (string) $provider;
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'coupon.provider', (string) $provider );
 	}
 
 
@@ -178,11 +136,7 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		if( isset( $this->values['coupon.config'] ) && is_array( $this->values['coupon.config'] ) ) {
-			return (array) $this->values['coupon.config'];
-		}
-
-		return [];
+		return (array) $this->get( 'coupon.config', [] );
 	}
 
 
@@ -194,12 +148,7 @@ class Standard
 	 */
 	public function setConfig( array $config )
 	{
-		if( $config == $this->getConfig() ) { return $this; }
-
-		$this->values['coupon.config'] = $config;
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'coupon.config', $config );
 	}
 
 
@@ -210,11 +159,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['coupon.status'] ) ) {
-			return (int) $this->values['coupon.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'coupon.status', 1 );
 	}
 
 
@@ -226,12 +171,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return $this; }
-
-		$this->values['coupon.status'] = (int) $status;
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'coupon.status', (int) $status );
 	}
 
 

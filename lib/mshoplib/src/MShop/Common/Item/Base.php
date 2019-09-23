@@ -104,7 +104,7 @@ abstract class Base
 	 */
 	public function get( $name, $default = null )
 	{
-		if( isset( $this->bdata[$name] ) ) {
+		if( array_key_exists( $name, $this->bdata ) ) {
 			return $this->bdata[$name];
 		}
 
