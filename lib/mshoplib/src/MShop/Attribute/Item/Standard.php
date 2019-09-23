@@ -30,9 +30,6 @@ class Standard
 	}
 
 
-	private $values;
-
-
 	/**
 	 * Initializes the attribute item.
 	 *
@@ -48,8 +45,6 @@ class Standard
 
 		$this->initListItems( $listItems, $refItems );
 		$this->initPropertyItems( $propItems );
-
-		$this->values = $values;
 	}
 
 
@@ -82,11 +77,7 @@ class Standard
 	 */
 	public function getDomain()
 	{
-		if( isset( $this->values['attribute.domain'] ) ) {
-			return (string) $this->values['attribute.domain'];
-		}
-
-		return '';
+		return (string) $this->get( 'attribute.domain', '' );
 	}
 
 
@@ -98,13 +89,7 @@ class Standard
 	 */
 	public function setDomain( $domain )
 	{
-		if( (string) $domain !== $this->getDomain() )
-		{
-			$this->values['attribute.domain'] = (string) $domain;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'attribute.domain', (string) $domain );
 	}
 
 
@@ -115,9 +100,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['attribute.type'] ) ) {
-			return (string) $this->values['attribute.type'];
-		}
+		return $this->get( 'attribute.type' );
 	}
 
 
@@ -129,13 +112,7 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['attribute.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'attribute.type', $this->checkCode( $type ) );
 	}
 
 
@@ -146,11 +123,7 @@ class Standard
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values['attribute.code'] ) ) {
-			return (string) $this->values['attribute.code'];
-		}
-
-		return '';
+		return (string) $this->get( 'attribute.code', '' );
 	}
 
 
@@ -166,13 +139,7 @@ class Standard
 			throw new \Aimeos\MShop\Attribute\Exception( sprintf( 'Code must not be longer than 255 characters' ) );
 		}
 
-		if( (string) $code !== $this->getCode() )
-		{
-			$this->values['attribute.code'] = (string) $code;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'attribute.code', (string) $code );
 	}
 
 
@@ -183,11 +150,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['attribute.label'] ) ) {
-			return (string) $this->values['attribute.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'attribute.label', '' );
 	}
 
 
@@ -199,13 +162,7 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( (string) $label !== $this->getLabel() )
-		{
-			$this->values['attribute.label'] = (string) $label;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'attribute.label', (string) $label );
 	}
 
 
@@ -216,11 +173,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['attribute.status'] ) ) {
-			return (int) $this->values['attribute.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'attribute.status', 1 );
 	}
 
 
@@ -232,13 +185,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values['attribute.status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'attribute.status', (int) $status );
 	}
 
 
@@ -249,11 +196,7 @@ class Standard
 	 */
 	public function getPosition()
 	{
-		if( isset( $this->values['attribute.position'] ) ) {
-			return (int) $this->values['attribute.position'];
-		}
-
-		return 0;
+		return (int) $this->get( 'attribute.position', 0 );
 	}
 
 
@@ -265,13 +208,7 @@ class Standard
 	 */
 	public function setPosition( $pos )
 	{
-		if( (int) $pos !== $this->getPosition() )
-		{
-			$this->values['attribute.position'] = (int) $pos;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'attribute.position', (int) $pos );
 	}
 
 
