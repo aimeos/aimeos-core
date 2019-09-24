@@ -25,6 +25,9 @@ class Standard
 	use \Aimeos\MShop\Common\Item\Config\Traits;
 
 
+	private $date;
+
+
 	/**
 	 * Initializes the coupon item.
 	 *
@@ -34,6 +37,8 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'coupon.', $values );
+
+		$this->date = isset( $values['.date'] ) ? $values['.date'] : date( 'Y-m-d H:i:s' );
 	}
 
 
@@ -194,8 +199,8 @@ class Standard
 	public function isAvailable()
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
-			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->values['.date'] )
-			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->values['.date'] );
+			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->date )
+			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->date );
 	}
 
 

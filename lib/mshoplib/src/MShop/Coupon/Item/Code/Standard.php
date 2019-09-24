@@ -22,7 +22,8 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Coupon\Item\Code\Iface
 {
-	private $values;
+	private $date;
+
 
 	/**
 	 * Initializes the coupon code instance
@@ -33,7 +34,7 @@ class Standard
 	{
 		parent::__construct( 'coupon.code.', $values );
 
-		$this->values = $values;
+		$this->date = isset( $values['.date'] ) ? $values['.date'] : date( 'Y-m-d H:i:s' );
 	}
 
 
@@ -197,8 +198,8 @@ class Standard
 	public function isAvailable()
 	{
 		return parent::isAvailable()
-			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->values['.date'] )
-			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->values['.date'] );
+			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->date )
+			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->date );
 	}
 
 
