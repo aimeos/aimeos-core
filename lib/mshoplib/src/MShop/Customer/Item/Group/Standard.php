@@ -21,9 +21,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Customer\Item\Group\Iface
 {
-	private $values;
-
-
 	/**
 	 * Initializes the customer group item
 	 *
@@ -32,8 +29,6 @@ class Standard
 	public function __construct( $values = [] )
 	{
 		parent::__construct( 'customer.group.', $values );
-
-		$this->values = $values;
 	}
 
 
@@ -44,11 +39,7 @@ class Standard
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values['customer.group.code'] ) ) {
-			return (string) $this->values['customer.group.code'];
-		}
-
-		return '';
+		return (string) $this->get( 'customer.group.code', '' );
 	}
 
 
@@ -60,13 +51,7 @@ class Standard
 	 */
 	public function setCode( $value )
 	{
-		if( (string) $value !== $this->getCode() )
-		{
-			$this->values['customer.group.code'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'customer.group.code', (string) $value );
 	}
 
 
@@ -77,11 +62,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['customer.group.label'] ) ) {
-			return (string) $this->values['customer.group.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'customer.group.label', '' );
 	}
 
 
@@ -93,13 +74,7 @@ class Standard
 	 */
 	public function setLabel( $value )
 	{
-		if( (string) $value !== $this->getLabel() )
-		{
-			$this->values['customer.group.label'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'customer.group.label', (string) $value );
 	}
 
 

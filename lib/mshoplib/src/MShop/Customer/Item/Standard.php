@@ -72,11 +72,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['customer.label'] ) ) {
-			return (string) $this->values['customer.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'customer.label', '' );
 	}
 
 
@@ -88,13 +84,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setLabel( $value )
 	{
-		if( (string) $value !== $this->getLabel() )
-		{
-			$this->values['customer.label'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'customer.label', (string) $value );
 	}
 
 
@@ -105,11 +95,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['customer.status'] ) ) {
-			return (int) $this->values['customer.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'customer.status', 1 );
 	}
 
 
@@ -121,13 +107,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setStatus( $value )
 	{
-		if( (int) $value !== $this->getStatus() )
-		{
-			$this->values['customer.status'] = (int) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'customer.status', (int) $value );
 	}
 
 
@@ -138,11 +118,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values['customer.code'] ) ) {
-			return (string) $this->values['customer.code'];
-		}
-
-		return '';
+		return (string) $this->get( 'customer.code', '' );
 	}
 
 
@@ -154,14 +130,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setCode( $value )
 	{
-		if( (string) $value !== $this->getCode() )
-		{
-			// don't use checkCode() because maximum length is 255 chars
-			$this->values['customer.code'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'customer.code', $this->checkCode( $value, 255 ) );
 	}
 
 
@@ -172,11 +141,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getBirthday()
 	{
-		if( isset( $this->values['customer.birthday'] ) ) {
-			return (string) $this->values['customer.birthday'];
-		}
-
-		return null;
+		return $this->get( 'customer.birthday' );
 	}
 
 
@@ -188,13 +153,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setBirthday( $value )
 	{
-		if( $value !== $this->getBirthday() )
-		{
-			$this->values['customer.birthday'] = $this->checkDateOnlyFormat( $value );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'customer.birthday', $this->checkDateOnlyFormat( $value ) );
 	}
 
 
@@ -205,11 +164,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getPassword()
 	{
-		if( isset( $this->values['customer.password'] ) ) {
-			return (string) $this->values['customer.password'];
-		}
-
-		return '';
+		return (string) $this->get( 'customer.password', '' );
 	}
 
 
@@ -221,17 +176,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setPassword( $value )
 	{
-		if( (string) $value !== $this->getPassword() )
-		{
-			if( $this->helper !== null ) {
-				$value = $this->helper->encode( $value, $this->salt );
-			}
-
-			$this->values['customer.password'] = (string) $value;
-			$this->setModified();
+		if( (string) $value !== $this->getPassword() && $this->helper !== null ) {
+			$value = $this->helper->encode( $value, $this->salt );
 		}
 
-		return $this;
+		return $this->set( 'customer.password', (string) $value );
 	}
 
 
@@ -242,9 +191,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getDateVerified()
 	{
-		if( isset( $this->values['customer.dateverified'] ) ) {
-			return (string) $this->values['customer.dateverified'];
-		}
+		return $this->get( 'customer.dateverified' );
 	}
 
 
@@ -256,13 +203,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setDateVerified( $value )
 	{
-		if( $value !== $this->getDateVerified() )
-		{
-			$this->values['customer.dateverified'] = $this->checkDateOnlyFormat( $value );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'customer.dateverified', $this->checkDateOnlyFormat( $value ) );
 	}
 
 
@@ -273,17 +214,16 @@ class Standard extends Base implements Iface
 	 */
 	public function getGroups()
 	{
-		if( !isset( $this->values['customer.groups'] ) )
+		if( ( $list = (array) $this->get( 'customer.groups', [] ) ) === [] )
 		{
-			$this->values['customer.groups'] = [];
-
 			foreach( $this->getListItems( 'customer/group', 'default' ) as $listItem ) {
-				$this->values['customer.groups'][] = $listItem->getRefId();
+				$list[] = $listItem->getRefId();
 			}
 		}
 
-		return (array) $this->values['customer.groups'];
+		return $list;
 	}
+
 
 	/**
 	 * Sets the group IDs the customer belongs to
@@ -293,10 +233,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setGroups( array $ids )
 	{
-		$this->values['customer.groups'] = $ids;
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'customer.groups', $ids );
 	}
 
 
