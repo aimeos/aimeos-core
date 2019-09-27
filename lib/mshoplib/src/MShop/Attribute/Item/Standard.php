@@ -135,11 +135,7 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( strlen( $code ) > 255 ) {
-			throw new \Aimeos\MShop\Attribute\Exception( sprintf( 'Code must not be longer than 255 characters' ) );
-		}
-
-		return $this->set( 'attribute.code', (string) $code );
+		return $this->set( 'attribute.code', $this->checkCode( $code, 255 ) );
 	}
 
 

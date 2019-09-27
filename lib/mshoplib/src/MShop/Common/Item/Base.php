@@ -380,8 +380,10 @@ abstract class Base
 
 		if( $date != null )
 		{
-			if( preg_match( $regex, (string) $date ) !== 1 ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
+			if( preg_match( $regex, (string) $date ) !== 1 )
+			{
+				$msg = sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date );
+				throw new \Aimeos\MShop\Exception( $msg );
 			}
 
 			return str_replace( 'T', ' ', (string) $date );
@@ -393,13 +395,16 @@ abstract class Base
 	 * Tests if the code is valid.
 	 *
 	 * @param string $code New code for an item
+	 * @param int $length Number of allowed characters
 	 * @return string Item code
 	 * @throws \Aimeos\MShop\Exception If the code is invalid
 	 */
-	protected function checkCode( $code )
+	protected function checkCode( $code, $length = 64 )
 	{
-		if( strlen( $code ) > 64 ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Code "%1$s" must not be longer than 64 characters', $code ) );
+		if( strlen( $code ) > $length )
+		{
+			$msg = sprintf( 'Code "%1$s" must not be longer than %2$d characters', $code, $length );
+			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
 		return (string) $code;
