@@ -160,7 +160,7 @@ abstract class Base
 	{
 		$key = $this->prefix . 'id';
 
-		if( ( $this->bdata[$key] = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id ) ) === null ) {
+		if( ( $this->bdata[$key] = $this->checkId( $this->getId(), $id ) ) === null ) {
 			$this->modified = true;
 		} else {
 			$this->modified = false;
@@ -178,15 +178,7 @@ abstract class Base
 	 */
 	public function getSiteId()
 	{
-		$key = $this->prefix . 'siteid';
-
-		if( isset( $this->bdata[$key] ) ) {
-			return (string) $this->bdata[$key];
-		}
-
-		if( isset( $this->bdata['siteid'] ) ) {
-			return (string) $this->bdata['siteid'];
-		}
+		return $this->get( $this->prefix . 'siteid', $this->get( 'siteid' ) );
 	}
 
 
@@ -197,15 +189,7 @@ abstract class Base
 	 */
 	public function getTimeModified()
 	{
-		$key = $this->prefix . 'mtime';
-
-		if( isset( $this->bdata[$key] ) ) {
-			return (string) $this->bdata[$key];
-		}
-
-		if( isset( $this->bdata['mtime'] ) ) {
-			return (string) $this->bdata['mtime'];
-		}
+		return $this->get( $this->prefix . 'mtime', $this->get( 'mtime' ) );
 	}
 
 
@@ -216,15 +200,7 @@ abstract class Base
 	 */
 	public function getTimeCreated()
 	{
-		$key = $this->prefix . 'ctime';
-
-		if( isset( $this->bdata[$key] ) ) {
-			return (string) $this->bdata[$key];
-		}
-
-		if( isset( $this->bdata['ctime'] ) ) {
-			return (string) $this->bdata['ctime'];
-		}
+		return $this->get( $this->prefix . 'ctime', $this->get( 'ctime' ) );
 	}
 
 
@@ -235,17 +211,7 @@ abstract class Base
 	 */
 	public function getEditor()
 	{
-		$key = $this->prefix . 'editor';
-
-		if( isset( $this->bdata[$key] ) ) {
-			return (string) $this->bdata[$key];
-		}
-
-		if( isset( $this->bdata['editor'] ) ) {
-			return (string) $this->bdata['editor'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'editor', $this->get( 'editor', '' ) );
 	}
 
 
@@ -264,10 +230,12 @@ abstract class Base
 	 * Sets the general availability of the item
 	 *
 	 * @return boolean $value True if available, false if not
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
 	public function setAvailable( $value )
 	{
 		$this->available = (bool) $value;
+		return $this;
 	}
 
 

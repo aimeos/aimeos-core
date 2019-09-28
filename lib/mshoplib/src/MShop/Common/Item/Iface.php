@@ -124,6 +124,7 @@ interface Iface
 	 * Sets the general availability of the item
 	 *
 	 * @return boolean $value True if available, false if not
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
 	public function setAvailable( $value );
 
