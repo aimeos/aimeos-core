@@ -22,9 +22,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Locale\Item\Currency\Iface
 {
-	private $values;
-
-
 	/**
 	 * Initializes the currency object object.
 	 *
@@ -33,8 +30,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'locale.currency.', $values );
-
-		$this->values = $values;
 	}
 
 
@@ -57,11 +52,7 @@ class Standard
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values['locale.currency.id'] ) ) {
-			return (string) $this->values['locale.currency.id'];
-		}
-
-		return '';
+		return (string) $this->get( 'locale.currency.code', $this->get( 'locale.currency.id', '' ) );
 	}
 
 
@@ -73,13 +64,7 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( $code !== $this->getCode() )
-		{
-			$this->values['locale.currency.id'] = $this->checkCurrencyId( $code, false );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'locale.currency.code', $this->checkCurrencyId( $code, false ) );
 	}
 
 
@@ -90,11 +75,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['locale.currency.label'] ) ) {
-			return (string) $this->values['locale.currency.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'locale.currency.label', '' );
 	}
 
 
@@ -106,13 +87,7 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( (string) $label !== $this->getLabel() )
-		{
-			$this->values['locale.currency.label'] = (string) $label;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'locale.currency.label', (string) $label );
 	}
 
 
@@ -123,11 +98,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['locale.currency.status'] ) ) {
-			return (int) $this->values['locale.currency.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'locale.currency.status', 1 );
 	}
 
 
@@ -139,13 +110,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values['locale.currency.status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'locale.currency.status', (int) $status );
 	}
 
 

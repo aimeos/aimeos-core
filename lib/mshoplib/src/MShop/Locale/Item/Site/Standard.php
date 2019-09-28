@@ -26,7 +26,6 @@ class Standard
 
 
 	private $children;
-	private $values;
 
 
 	/**
@@ -38,9 +37,8 @@ class Standard
 	public function __construct( array $values = [], array $children = [] )
 	{
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Locale\Item\Site\Iface::class, $children );
-		parent::__construct( 'locale.site.', $values );
 
-		$this->values = $values;
+		parent::__construct( 'locale.site.', $values );
 		$this->children = $children;
 	}
 
@@ -59,11 +57,11 @@ class Standard
 	/**
 	 * Returns the id of the site.
 	 *
-	 * @return integer|null Id of the site
+	 * @return string|null Id of the site
 	 */
 	public function getSiteId()
 	{
-		return (int) $this->getId();
+		return (string) $this->getId();
 	}
 
 
@@ -74,11 +72,7 @@ class Standard
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values['locale.site.code'] ) ) {
-			return (string) $this->values['locale.site.code'];
-		}
-
-		return '';
+		return (string) $this->get( 'locale.site.code', '' );
 	}
 
 
@@ -90,14 +84,7 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( (string) $code !== $this->getCode() )
-		{
-			// don't use checkCode() because maximum length is 255 chars
-			$this->values['locale.site.code'] = (string) $code;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'locale.site.code', $this->checkCode( $code, 255 ) );
 	}
 
 
@@ -108,11 +95,7 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		if( isset( $this->values['locale.site.config'] ) ) {
-			return (array) $this->values['locale.site.config'];
-		}
-
-		return [];
+		return (array) $this->get( 'locale.site.config', [] );
 	}
 
 
@@ -124,10 +107,7 @@ class Standard
 	 */
 	public function setConfig( array $options )
 	{
-		$this->values['locale.site.config'] = $options;
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'locale.site.config', $options );
 	}
 
 
@@ -138,11 +118,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['locale.site.label'] ) ) {
-			return (string) $this->values['locale.site.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'locale.site.label', '' );
 	}
 
 
@@ -154,13 +130,7 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( (string) $label !== $this->getLabel() )
-		{
-			$this->values['locale.site.label'] = (string) $label;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'locale.site.label', (string) $label );
 	}
 
 
@@ -182,7 +152,7 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		return 0;
+		return '0';
 	}
 
 
@@ -193,11 +163,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['locale.site.status'] ) ) {
-			return (int) $this->values['locale.site.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'locale.site.status', 1 );
 	}
 
 
@@ -209,13 +175,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values['locale.site.status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'locale.site.status', (int) $status );
 	}
 
 

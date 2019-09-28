@@ -22,9 +22,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Locale\Item\Language\Iface
 {
-	private $values;
-
-
 	/**
 	 * Initialize the language object.
 	 *
@@ -33,8 +30,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'locale.language.', $values );
-
-		$this->values = $values;
 	}
 
 
@@ -57,11 +52,7 @@ class Standard
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values['locale.language.id'] ) ) {
-			return (string) $this->values['locale.language.id'];
-		}
-
-		return '';
+		return (string) $this->get( 'locale.language.code', $this->get( 'locale.language.id', '' ) );
 	}
 
 
@@ -73,13 +64,7 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( $code !== $this->getCode() )
-		{
-			$this->values['locale.language.id'] = $this->checkLanguageId( $code, false );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'locale.language.code', $this->checkLanguageId( $code, false ) );
 	}
 
 
@@ -90,11 +75,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['locale.language.label'] ) ) {
-			return (string) $this->values['locale.language.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'locale.language.label', '' );
 	}
 
 
@@ -106,13 +87,7 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( (string) $label !== $this->getLabel() )
-		{
-			$this->values['locale.language.label'] = (string) $label;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'locale.language.label', (string) $label );
 	}
 
 
@@ -123,11 +98,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['locale.language.status'] ) ) {
-			return (int) $this->values['locale.language.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'locale.language.status', 1 );
 	}
 
 
@@ -139,13 +110,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values['locale.language.status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'locale.language.status', (int) $status );
 	}
 
 

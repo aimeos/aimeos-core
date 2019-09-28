@@ -25,7 +25,6 @@ class Standard
 	private $site;
 	private $sitePath;
 	private $siteSubTree;
-	private $values;
 
 
 	/**
@@ -41,7 +40,6 @@ class Standard
 	{
 		parent::__construct( 'locale.', $values );
 
-		$this->values = $values;
 		$this->site = $site;
 		$this->sitePath = $sitePath;
 		$this->siteSubTree = $siteSubTree;
@@ -102,9 +100,7 @@ class Standard
 	 */
 	public function getSiteId()
 	{
-		if( isset( $this->values['locale.siteid'] ) ) {
-			return (string) $this->values['locale.siteid'];
-		}
+		return $this->get( 'locale.siteid' );
 	}
 
 
@@ -116,17 +112,14 @@ class Standard
 	 */
 	public function setSiteId( $id )
 	{
-		if( $id === $this->getSiteId() ) { return $this; }
+		if( $id !== $this->getSiteId() )
+		{
+			/** @todo: Wrong site item shouldn't be available any more but causes problems in controller */
+			$this->sitePath = array( (string) $id );
+			$this->siteSubTree = array( (string) $id );
+		}
 
-		$this->values['locale.siteid'] = (string) $id;
-		$this->sitePath = array( (string) $id );
-		$this->siteSubTree = array( (string) $id );
-
-		/** @todo: Wrong site item shouldn't be available any more but causes problems in controller */
-
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'locale.siteid', (string) $id );
 	}
 
 
@@ -137,11 +130,7 @@ class Standard
 	 */
 	public function getLanguageId()
 	{
-		if( isset( $this->values['locale.languageid'] ) ) {
-			return (string) $this->values['locale.languageid'];
-		}
-
-		return null;
+		return $this->get( 'locale.languageid' );
 	}
 
 
@@ -154,13 +143,7 @@ class Standard
 	 */
 	public function setLanguageId( $id )
 	{
-		if( (string) $id !== $this->getLanguageId() )
-		{
-			$this->values['locale.languageid'] = $this->checkLanguageId( $id );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'locale.languageid', $this->checkLanguageId( $id ) );
 	}
 
 
@@ -171,11 +154,7 @@ class Standard
 	 */
 	public function getCurrencyId()
 	{
-		if( isset( $this->values['locale.currencyid'] ) ) {
-			return (string) $this->values['locale.currencyid'];
-		}
-
-		return null;
+		return $this->get( 'locale.currencyid' );
 	}
 
 
@@ -188,13 +167,7 @@ class Standard
 	 */
 	public function setCurrencyId( $currencyid )
 	{
-		if( (string) $currencyid !== $this->getCurrencyId() )
-		{
-			$this->values['locale.currencyid'] = $this->checkCurrencyId( $currencyid );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'locale.currencyid', $this->checkCurrencyId( $currencyid ) );
 	}
 
 
@@ -205,11 +178,7 @@ class Standard
 	 */
 	public function getPosition()
 	{
-		if( isset( $this->values['locale.position'] ) ) {
-			return (int) $this->values['locale.position'];
-		}
-
-		return 0;
+		return (int) $this->get( 'locale.position', 0 );
 	}
 
 
@@ -221,13 +190,7 @@ class Standard
 	 */
 	public function setPosition( $pos )
 	{
-		if( (int) $pos !== $this->getPosition() )
-		{
-			$this->values['locale.position'] = (int) $pos;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'locale.position', (int) $pos );
 	}
 
 
@@ -238,11 +201,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['locale.status'] ) ) {
-			return (int) $this->values['locale.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'locale.status', 1 );
 	}
 
 
@@ -254,13 +213,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values['locale.status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'locale.status', (int) $status );
 	}
 
 
