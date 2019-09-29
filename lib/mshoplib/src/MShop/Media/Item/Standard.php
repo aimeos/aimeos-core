@@ -31,6 +31,9 @@ class Standard
 	}
 
 
+	private $langid;
+
+
 	/**
 	 * Initializes the media item object.
 	 *
@@ -44,6 +47,7 @@ class Standard
 	{
 		parent::__construct( 'media.', $values );
 
+		$this->langid = ( isset( $values['.languageid'] ) ? $values['.languageid'] : null );
 		$this->initListItems( $listItems, $refItems );
 		$this->initPropertyItems( $propItems );
 	}
@@ -313,8 +317,8 @@ class Standard
 	public function isAvailable()
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
-			&& ( $this->values['.languageid'] === null || $this->getLanguageId() === null
-			|| $this->getLanguageId() === $this->values['.languageid'] );
+			&& ( $this->langid === null || $this->getLanguageId() === null
+			|| $this->getLanguageId() === $this->langid );
 	}
 
 
