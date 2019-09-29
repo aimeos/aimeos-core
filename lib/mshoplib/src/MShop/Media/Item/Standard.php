@@ -31,9 +31,6 @@ class Standard
 	}
 
 
-	private $values;
-
-
 	/**
 	 * Initializes the media item object.
 	 *
@@ -49,7 +46,6 @@ class Standard
 
 		$this->initListItems( $listItems, $refItems );
 		$this->initPropertyItems( $propItems );
-		$this->values = $values;
 	}
 
 
@@ -71,11 +67,7 @@ class Standard
 	 */
 	public function getLanguageId()
 	{
-		if( isset( $this->values['media.languageid'] ) ) {
-			return (string) $this->values['media.languageid'];
-		}
-
-		return null;
+		return $this->get( 'media.languageid' );
 	}
 
 
@@ -88,13 +80,7 @@ class Standard
 	 */
 	public function setLanguageId( $id )
 	{
-		if( (string) $id !== $this->getLanguageId() )
-		{
-			$this->values['media.languageid'] = $this->checkLanguageId( $id );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'media.languageid', $this->checkLanguageId( $id ) );
 	}
 
 
@@ -105,9 +91,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['media.type'] ) ) {
-			return (string) $this->values['media.type'];
-		}
+		return $this->get( 'media.type' );
 	}
 
 
@@ -119,13 +103,7 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( $type !== $this->getType() )
-		{
-			$this->values['media.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'media.type', $this->checkCode( $type ) );
 	}
 
 
@@ -136,11 +114,7 @@ class Standard
 	 */
 	public function getDomain()
 	{
-		if( isset( $this->values['media.domain'] ) ) {
-			return (string) $this->values['media.domain'];
-		}
-
-		return '';
+		return (string) $this->get( 'media.domain', '' );
 	}
 
 
@@ -152,13 +126,7 @@ class Standard
 	 */
 	public function setDomain( $domain )
 	{
-		if( (string) $domain !== $this->getDomain() )
-		{
-			$this->values['media.domain'] = (string) $domain;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'media.domain', (string) $domain );
 	}
 
 
@@ -169,11 +137,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['media.label'] ) ) {
-			return (string) $this->values['media.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'media.label', '' );
 	}
 
 
@@ -185,13 +149,7 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( (string) $label !== $this->getLabel() )
-		{
-			$this->values['media.label'] = (string) $label;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'media.label', (string) $label );
 	}
 
 
@@ -202,11 +160,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['media.status'] ) ) {
-			return (int) $this->values['media.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'media.status', 1 );
 	}
 
 
@@ -218,13 +172,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values['media.status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'media.status', (int) $status );
 	}
 
 
@@ -235,11 +183,7 @@ class Standard
 	 */
 	public function getMimeType()
 	{
-		if( isset( $this->values['media.mimetype'] ) ) {
-			return (string) $this->values['media.mimetype'];
-		}
-
-		return '';
+		return (string) $this->get( 'media.mimetype', '' );
 	}
 
 
@@ -255,13 +199,7 @@ class Standard
 			throw new \Aimeos\MShop\Media\Exception( sprintf( 'Invalid mime type "%1$s"', $mimetype ) );
 		}
 
-		if( (string) $mimetype !== $this->getMimeType() )
-		{
-			$this->values['media.mimetype'] = (string) $mimetype;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'media.mimetype', (string) $mimetype );
 	}
 
 
@@ -272,11 +210,7 @@ class Standard
 	 */
 	public function getUrl()
 	{
-		if( isset( $this->values['media.url'] ) ) {
-			return (string) $this->values['media.url'];
-		}
-
-		return '';
+		return (string) $this->get( 'media.url', '' );
 	}
 
 
@@ -288,13 +222,7 @@ class Standard
 	 */
 	public function setUrl( $url )
 	{
-		if( (string) $url !== $this->getUrl() )
-		{
-			$this->values['media.url'] = (string) $url;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'media.url', (string) $url );
 	}
 
 
@@ -305,8 +233,8 @@ class Standard
 	 */
 	public function getPreview()
 	{
-		if( isset( $this->values['media.previews'] ) ) {
-			return (string) current( $this->values['media.previews'] );
+		if( ( $list = (array) $this->get( 'media.previews', [] ) ) !== [] ) {
+			return (string) current( $list );
 		}
 
 		return '';
@@ -320,11 +248,7 @@ class Standard
 	 */
 	public function getPreviews()
 	{
-		if( isset( $this->values['media.previews'] ) ) {
-			return (array) $this->values['media.previews'];
-		}
-
-		return [];
+		return (array) $this->get( 'media.previews', [] );
 	}
 
 
@@ -348,13 +272,7 @@ class Standard
 	 */
 	public function setPreviews( array $urls )
 	{
-		if( $urls !== $this->getPreviews() )
-		{
-			$this->values['media.previews'] = $urls;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'media.previews', $urls );
 	}
 
 
