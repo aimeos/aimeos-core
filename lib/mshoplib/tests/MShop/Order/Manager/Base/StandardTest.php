@@ -420,9 +420,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		{
 			foreach( $addresses as $address )
 			{
-				$this->assertInternalType( 'string', $address->getId() );
 				$this->assertNotEquals( '', $address->getId() );
-				$this->assertInternalType( 'string', $address->getBaseId() );
+				$this->assertNotEquals( '', $address->getId() );
+				$this->assertNotEquals( '', $address->getBaseId() );
 			}
 		}
 
@@ -439,9 +439,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		foreach( $order->getProducts() as $product )
 		{
-			$this->assertInternalType( 'string', $product->getId() );
 			$this->assertNotEquals( '', $product->getId() );
-			$this->assertInternalType( 'string', $product->getBaseId() );
+			$this->assertNotEquals( '', $product->getId() );
+			$this->assertNotEquals( '', $product->getBaseId() );
 			$this->assertGreaterThan( 0, $product->getPosition() );
 		}
 
@@ -449,9 +449,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		{
 			foreach( $list as $service )
 			{
-				$this->assertInternalType( 'string', $service->getId() );
 				$this->assertNotEquals( '', $service->getId() );
-				$this->assertInternalType( 'string', $service->getBaseId() );
+				$this->assertNotEquals( '', $service->getId() );
+				$this->assertNotEquals( '', $service->getBaseId() );
 			}
 		}
 	}
