@@ -28,7 +28,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.service.attribute.name' => 'UnitName',
 			'order.base.service.attribute.code' => 'UnitCode',
 			'order.base.service.attribute.value' => 'UnitValue',
-			'order.base.service.attribute.quantity' => null,
+			'order.base.service.attribute.quantity' => 1,
 			'order.base.service.attribute.mtime' => '2020-12-31 23:59:59',
 			'order.base.service.attribute.ctime' => '2011-01-01 00:00:01',
 			'order.base.service.attribute.editor' => 'unitTestUser'

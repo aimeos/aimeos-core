@@ -19,9 +19,6 @@ namespace Aimeos\MShop\Order\Item\Base\Product;
  */
 class Standard extends Base implements Iface
 {
-	private $values;
-
-
 	/**
 	 * Initializes the order product instance.
 	 *
@@ -33,8 +30,6 @@ class Standard extends Base implements Iface
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [], array $products = [] )
 	{
 		parent::__construct( $price, $values, $attributes, $products );
-
-		$this->values = $values;
 	}
 
 
@@ -45,9 +40,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getSiteId()
 	{
-		if( isset( $this->values['order.base.product.siteid'] ) ) {
-			return (string) $this->values['order.base.product.siteid'];
-		}
+		return $this->get( 'order.base.product.siteid' );
 	}
 
 
@@ -59,13 +52,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setSiteId( $value )
 	{
-		if( (string) $value !== $this->getSiteId() )
-		{
-			$this->values['order.base.product.siteid'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.siteid', (string) $value );
 	}
 
 
@@ -76,9 +63,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getBaseId()
 	{
-		if( isset( $this->values['order.base.product.baseid'] ) ) {
-			return (string) $this->values['order.base.product.baseid'];
-		}
+		return $this->get( 'order.base.product.baseid' );
 	}
 
 
@@ -90,14 +75,9 @@ class Standard extends Base implements Iface
 	 */
 	public function setBaseId( $value )
 	{
-		if( (string) $value !== $this->getBaseId() )
-		{
-			$this->values['order.base.product.baseid'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.baseid', (string) $value );
 	}
+
 
 	/**
 	 * Returns the order address ID the product should be shipped to
@@ -106,9 +86,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getOrderAddressId()
 	{
-		if( isset( $this->values['order.base.product.orderaddressid'] ) ) {
-			return (string) $this->values['order.base.product.orderaddressid'];
-		}
+		return $this->get( 'order.base.product.orderaddressid' );
 	}
 
 
@@ -120,13 +98,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setOrderAddressId( $value )
 	{
-		if( $value !== $this->getOrderAddressId() )
-		{
-			$this->values['order.base.product.orderaddressid'] = ( $value !== null ? (string) $value : null );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.orderaddressid', ( $value !== null ? (string) $value : null ) );
 	}
 
 
@@ -138,9 +110,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getOrderProductId()
 	{
-		if( isset( $this->values['order.base.product.orderproductid'] ) ) {
-			return (string) $this->values['order.base.product.orderproductid'];
-		}
+		return $this->get( 'order.base.product.orderproductid' );
 	}
 
 
@@ -153,13 +123,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setOrderProductId( $value )
 	{
-		if( $value !== $this->getOrderProductId() )
-		{
-			$this->values['order.base.product.orderproductid'] = ( $value !== null ? (string) $value : null );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.orderproductid', ( $value !== null ? (string) $value : null ) );
 	}
 
 
@@ -170,11 +134,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['order.base.product.type'] ) ) {
-			return (string) $this->values['order.base.product.type'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.product.type', '' );
 	}
 
 
@@ -186,13 +146,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['order.base.product.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.type', $this->checkCode( $type ) );
 	}
 
 
@@ -203,11 +157,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getSupplierCode()
 	{
-		if( isset( $this->values['order.base.product.suppliercode'] ) ) {
-			return (string) $this->values['order.base.product.suppliercode'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.product.suppliercode', '' );
 	}
 
 
@@ -219,13 +169,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setSupplierCode( $suppliercode )
 	{
-		if( (string) $suppliercode !== $this->getSupplierCode() )
-		{
-			$this->values['order.base.product.suppliercode'] = $this->checkCode( $suppliercode );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.suppliercode', $this->checkCode( $suppliercode ) );
 	}
 
 
@@ -236,11 +180,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getProductId()
 	{
-		if( isset( $this->values['order.base.product.productid'] ) ) {
-			return (string) $this->values['order.base.product.productid'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.product.productid', '' );
 	}
 
 
@@ -252,13 +192,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setProductId( $id )
 	{
-		if( (string) $id !== $this->getProductId() )
-		{
-			$this->values['order.base.product.productid'] = (string) $id;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.productid', (string) $id );
 	}
 
 
@@ -269,11 +203,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getProductCode()
 	{
-		if( isset( $this->values['order.base.product.prodcode'] ) ) {
-			return (string) $this->values['order.base.product.prodcode'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.product.prodcode', '' );
 	}
 
 
@@ -285,13 +215,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setProductCode( $code )
 	{
-		if( (string) $code !== $this->getProductCode() )
-		{
-			$this->values['order.base.product.prodcode'] = $this->checkCode( $code );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.prodcode', $this->checkCode( $code ) );
 	}
 
 
@@ -302,11 +226,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getStockType()
 	{
-		if( isset( $this->values['order.base.product.stocktype'] ) ) {
-			return (string) $this->values['order.base.product.stocktype'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.product.stocktype', '' );
 	}
 
 
@@ -318,13 +238,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setStockType( $code )
 	{
-		if( (string) $code !== $this->getStockType() )
-		{
-			$this->values['order.base.product.stocktype'] = $this->checkCode( $code );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.stocktype', $this->checkCode( $code ) );
 	}
 
 
@@ -335,11 +249,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getName()
 	{
-		if( isset( $this->values['order.base.product.name'] ) ) {
-			return (string) $this->values['order.base.product.name'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.product.name', '' );
 	}
 
 
@@ -351,13 +261,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setName( $value )
 	{
-		if( (string) $value !== $this->getName() )
-		{
-			$this->values['order.base.product.name'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.name', (string) $value );
 	}
 
 
@@ -368,11 +272,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getDescription()
 	{
-		if( isset( $this->values['order.base.product.description'] ) ) {
-			return (string) $this->values['order.base.product.description'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.product.description', '' );
 	}
 
 
@@ -384,13 +284,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setDescription( $value )
 	{
-		if( (string) $value !== $this->getDescription() )
-		{
-			$this->values['order.base.product.description'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.description', (string) $value );
 	}
 
 
@@ -401,11 +295,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getMediaUrl()
 	{
-		if( isset( $this->values['order.base.product.mediaurl'] ) ) {
-			return (string) $this->values['order.base.product.mediaurl'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.product.mediaurl', '' );
 	}
 
 
@@ -417,13 +307,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setMediaUrl( $value )
 	{
-		if( (string) $value !== $this->getMediaUrl() )
-		{
-			$this->values['order.base.product.mediaurl'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.mediaurl', (string) $value );
 	}
 
 
@@ -434,11 +318,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getTarget()
 	{
-		if( isset( $this->values['order.base.product.target'] ) ) {
-			return (string) $this->values['order.base.product.target'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.product.target', '' );
 	}
 
 
@@ -450,13 +330,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setTarget( $value )
 	{
-		if( (string) $value !== $this->getTarget() )
-		{
-			$this->values['order.base.product.target'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.target', (string) $value );
 	}
 
 
@@ -467,11 +341,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getTimeframe()
 	{
-		if( isset( $this->values['order.base.product.timeframe'] ) ) {
-			return (string) $this->values['order.base.product.timeframe'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.product.timeframe', '' );
 	}
 
 
@@ -483,13 +353,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setTimeframe( $timeframe )
 	{
-		if( (string) $timeframe !== $this->getTimeframe() )
-		{
-			$this->values['order.base.product.timeframe'] = (string) $timeframe;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.timeframe', (string) $timeframe );
 	}
 
 
@@ -500,11 +364,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getQuantity()
 	{
-		if( isset( $this->values['order.base.product.quantity'] ) ) {
-			return (int) $this->values['order.base.product.quantity'];
-		}
-
-		return 1;
+		return (int) $this->get( 'order.base.product.quantity', 1 );
 	}
 
 
@@ -520,13 +380,7 @@ class Standard extends Base implements Iface
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Quantity must be a positive integer and must not exceed %1$d', 2147483647 ) );
 		}
 
-		if( (int) $quantity !== $this->getQuantity() )
-		{
-			$this->values['order.base.product.quantity'] = (int) $quantity;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.quantity', (int) $quantity );
 	}
 
 
@@ -537,11 +391,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getFlags()
 	{
-		if( isset( $this->values['order.base.product.flags'] ) ) {
-			return (int) $this->values['order.base.product.flags'];
-		}
-
-		return \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE;
+		return (int) $this->get( 'order.base.product.flags', \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE );
 	}
 
 
@@ -553,13 +403,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setFlags( $value )
 	{
-		if( (int) $value !== $this->getFlags() )
-		{
-			$this->values['order.base.product.flags'] = (int) $this->checkFlags( $value );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.flags', (int) $this->checkFlags( $value ) );
 	}
 
 
@@ -570,9 +414,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getPosition()
 	{
-		if( isset( $this->values['order.base.product.position'] ) ) {
-			return (int) $this->values['order.base.product.position'];
-		}
+		return $this->get( 'order.base.product.position' );
 	}
 
 
@@ -585,17 +427,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setPosition( $value )
 	{
-		if( $value !== null && $value < 0 ) {
+		if( $value < 0 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order product position "%1$s" must be greater than 0', $value ) );
 		}
 
-		if( $value !== $this->getPosition() )
-		{
-			$this->values['order.base.product.position'] = ( $value !== null ? (int) $value : null );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.position', ( $value !== null ? (int) $value : null ) );
 	}
 
 
@@ -609,11 +445,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['order.base.product.status'] ) ) {
-			return (int) $this->values['order.base.product.status'];
-		}
-
-		return \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED;
+		return (int) $this->get( 'order.base.product.status', \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
 	}
 
 
@@ -628,13 +460,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setStatus( $value )
 	{
-		if( (int) $value !== $this->getStatus() )
-		{
-			$this->values['order.base.product.status'] = (int) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.product.status', (int) $value );
 	}
 
 

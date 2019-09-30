@@ -25,11 +25,6 @@ class Standard
 	extends \Aimeos\MShop\Order\Item\Base
 	implements \Aimeos\MShop\Order\Item\Iface
 {
-	private $values;
-	private $oldPaymentStatus = \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED;
-	private $oldDeliveryStatus = \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED;
-
-
 	/**
 	 * Initializes the object with the given values.
 	 *
@@ -38,16 +33,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'order.', $values );
-
-		$this->values = $values;
-
-		if( isset( $values['order.statuspayment'] ) ) {
-			$this->oldPaymentStatus = (int) $values['order.statuspayment'];
-		}
-
-		if( isset( $values['order.statusdelivery'] ) ) {
-			$this->oldDeliveryStatus = (int) $values['order.statusdelivery'];
-		}
 	}
 
 
@@ -58,9 +43,7 @@ class Standard
 	 */
 	public function getBaseId()
 	{
-		if( isset( $this->values['order.baseid'] ) ) {
-			return (string) $this->values['order.baseid'];
-		}
+		return $this->get( 'order.baseid' );
 	}
 
 
@@ -72,13 +55,7 @@ class Standard
 	 */
 	public function setBaseId( $id )
 	{
-		if( (string) $id !== $this->getBaseId() )
-		{
-			$this->values['order.baseid'] = (string) $id;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.baseid', (string) $id );
 	}
 
 
@@ -89,11 +66,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['order.type'] ) ) {
-			return (string) $this->values['order.type'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.type', '' );
 	}
 
 
@@ -105,13 +78,7 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['order.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.type', $this->checkCode( $type ) );
 	}
 
 
@@ -122,9 +89,7 @@ class Standard
 	 */
 	public function getDateDelivery()
 	{
-		if( isset( $this->values['order.datedelivery'] ) ) {
-			return (string) $this->values['order.datedelivery'];
-		}
+		return $this->get( 'order.datedelivery' );
 	}
 
 
@@ -136,13 +101,7 @@ class Standard
 	 */
 	public function setDateDelivery( $date )
 	{
-		if( $date !== $this->getDateDelivery() )
-		{
-			$this->values['order.datedelivery'] = $this->checkDateFormat( $date );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.datedelivery', $this->checkDateFormat( $date ) );
 	}
 
 
@@ -153,11 +112,7 @@ class Standard
 	 */
 	public function getDatePayment()
 	{
-		if( isset( $this->values['order.datepayment'] ) ) {
-			return (string) $this->values['order.datepayment'];
-		}
-
-		return null;
+		return $this->get( 'order.datepayment' );
 	}
 
 
@@ -169,13 +124,7 @@ class Standard
 	 */
 	public function setDatePayment( $date )
 	{
-		if( $date !== $this->getDatePayment() )
-		{
-			$this->values['order.datepayment'] = $this->checkDateFormat( $date );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.datepayment', $this->checkDateFormat( $date ) );
 	}
 
 
@@ -186,11 +135,7 @@ class Standard
 	 */
 	public function getDeliveryStatus()
 	{
-		if( isset( $this->values['order.statusdelivery'] ) ) {
-			return (int) $this->values['order.statusdelivery'];
-		}
-
-		return \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED;
+		return (int) $this->get( 'order.statusdelivery', \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
 	}
 
 
@@ -202,13 +147,8 @@ class Standard
 	 */
 	public function setDeliveryStatus( $status )
 	{
-		if( (int) $status !== $this->getDeliveryStatus() )
-		{
-			$this->values['order.statusdelivery'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		$this->set( '.statusdelivery', $this->get( 'order.statusdelivery' ) );
+		return $this->set( 'order.statusdelivery', (int) $status );
 	}
 
 
@@ -219,11 +159,7 @@ class Standard
 	 */
 	public function getPaymentStatus()
 	{
-		if( isset( $this->values['order.statuspayment'] ) ) {
-			return (int) $this->values['order.statuspayment'];
-		}
-
-		return \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED;
+		return (int) $this->get( 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
 	}
 
 
@@ -235,14 +171,12 @@ class Standard
 	 */
 	public function setPaymentStatus( $status )
 	{
-		if( (int) $status !== $this->getPaymentStatus() )
-		{
-			$this->values['order.datepayment'] = date( 'Y-m-d H:i:s' );
-			$this->values['order.statuspayment'] = (int) $status;
-			$this->setModified();
+		if( (int) $status !== $this->getPaymentStatus() ) {
+			$this->set( 'order.datepayment', date( 'Y-m-d H:i:s' ) );
 		}
 
-		return $this;
+		$this->set( '.statuspayment', $this->get( 'order.statuspayment' ) );
+		return $this->set( 'order.statuspayment', (int) $status );
 	}
 
 
@@ -253,9 +187,7 @@ class Standard
 	 */
 	public function getRelatedId()
 	{
-		if( isset( $this->values['order.relatedid'] ) ) {
-			return (string) $this->values['order.relatedid'];
-		}
+		return $this->get( 'order.relatedid' );
 	}
 
 
@@ -268,13 +200,7 @@ class Standard
 	 */
 	public function setRelatedId( $id )
 	{
-		if( $id !== $this->getRelatedId() )
-		{
-			$this->values['order.relatedid'] = $id;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.relatedid', $id );
 	}
 
 
@@ -332,29 +258,5 @@ class Standard
 		}
 
 		return $list;
-	}
-
-
-	/**
-	 * Returns the value for the given property name
-	 * Currently supported are "oldPaymentStatus" and "oldDeliveryStatus"
-	 *
-	 * @param string $name Property name
-	 * @return mixed Property value
-	 * @throws \Aimeos\MShop\Order\Exception If the property name is unknown
-	 * @property integer oldDeliveryStatus Former delivery status constant
-	 * @property integer oldPaymentStatus Former payment status constant
-	 */
-	public function __get( $name )
-	{
-		switch( $name )
-		{
-			case 'oldPaymentStatus':
-				return $this->oldPaymentStatus;
-			case 'oldDeliveryStatus':
-				return $this->oldDeliveryStatus;
-			default:
-				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Property name "%1$s" not within allowed range', $name ) );
-		}
 	}
 }

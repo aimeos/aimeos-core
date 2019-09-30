@@ -22,8 +22,6 @@ class Standard
 	extends \Aimeos\MShop\Order\Item\Base\Address\Base
 	implements \Aimeos\MShop\Order\Item\Base\Address\Iface
 {
-	private $values;
-
 	/**
 	 * Initializes the objects with the given array of values.
 	 *
@@ -32,8 +30,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'order.base.address.', $values );
-
-		$this->values = $values;
 	}
 
 
@@ -44,11 +40,7 @@ class Standard
 	 */
 	public function getBaseId()
 	{
-		if( isset( $this->values['order.base.address.baseid'] ) ) {
-			return (string) $this->values['order.base.address.baseid'];
-		}
-
-		return null;
+		return $this->get( 'order.base.address.baseid' );
 	}
 
 
@@ -60,13 +52,7 @@ class Standard
 	 */
 	public function setBaseId( $value )
 	{
-		if( (string) $value !== $this->getBaseId() )
-		{
-			$this->values['order.base.address.baseid'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.address.baseid', (string) $value );
 	}
 
 
@@ -77,11 +63,7 @@ class Standard
 	 */
 	public function getAddressId()
 	{
-		if( isset( $this->values['order.base.address.addressid'] ) ) {
-			return (string) $this->values['order.base.address.addressid'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.address.addressid', '' );
 	}
 
 
@@ -93,13 +75,7 @@ class Standard
 	 */
 	public function setAddressId( $addrid )
 	{
-		if( (string) $addrid !== $this->getAddressId() )
-		{
-			$this->values['order.base.address.addressid'] = (string) $addrid;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.address.addressid', (string) $addrid );
 	}
 
 
@@ -110,9 +86,7 @@ class Standard
 	 */
 	public function getPosition()
 	{
-		if( isset( $this->values['order.base.address.position'] ) ) {
-			return (int) $this->values['order.base.address.position'];
-		}
+		return $this->get( 'order.base.address.position' );
 	}
 
 
@@ -125,17 +99,11 @@ class Standard
 	 */
 	public function setPosition( $value )
 	{
-		if( $value !== null && $value < 0 ) {
+		if( $value < 0 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order address position "%1$s" must be greater than 0', $value ) );
 		}
 
-		if( $value !== $this->getPosition() )
-		{
-			$this->values['order.base.address.position'] = ( $value !== null ? (int) $value : null );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.address.position', ( $value !== null ? (int) $value : null ) );
 	}
 
 
@@ -146,11 +114,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['order.base.address.type'] ) ) {
-			return (string) $this->values['order.base.address.type'];
-		}
-
-		return \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY;
+		return (string) $this->get( 'order.base.address.type', \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 	}
 
 
@@ -162,15 +126,7 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		$this->checkType( $type );
-
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['order.base.address.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.address.type', $this->checkType( $type ) );
 	}
 
 

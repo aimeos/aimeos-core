@@ -180,7 +180,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 */
 	public function get( $name, $default = null )
 	{
-		if( isset( $this->bdata[$name] ) ) {
+		if( array_key_exists( $name, $this->bdata ) ) {
 			return $this->bdata[$name];
 		}
 
@@ -197,11 +197,12 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 */
 	public function set( $name, $value )
 	{
-		if( !isset( $this->bdata[$name] ) || $this->bdata[$name] !== $value ) {
+		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] !== $value )
+		{
+			$this->bdata[$name] = $value;
 			$this->setModified();
 		}
 
-		$this->bdata[$name] = $value;
 		return $this;
 	}
 

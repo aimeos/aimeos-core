@@ -22,9 +22,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 {
-	private $values;
-
-
 	/**
 	 * Initializes the order item base service attribute item.
 	 *
@@ -33,8 +30,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'order.base.service.attribute.', $values );
-
-		$this->values = $values;
 	}
 
 
@@ -45,9 +40,7 @@ class Standard
 	 */
 	public function getSiteId()
 	{
-		if( isset( $this->values['order.base.service.attribute.siteid'] ) ) {
-			return (string) $this->values['order.base.service.attribute.siteid'];
-		}
+		return $this->get( 'order.base.service.attribute.siteid' );
 	}
 
 
@@ -59,13 +52,7 @@ class Standard
 	 */
 	public function setSiteId( $value )
 	{
-		if( (string) $value !== $this->getSiteId() )
-		{
-			$this->values['order.base.service.attribute.siteid'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.attribute.siteid', (string) $value );
 	}
 
 
@@ -76,11 +63,7 @@ class Standard
 	 */
 	public function getAttributeId()
 	{
-		if( isset( $this->values['order.base.service.attribute.attributeid'] ) ) {
-			return (string) $this->values['order.base.service.attribute.attributeid'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.service.attribute.attributeid', '' );
 	}
 
 
@@ -92,13 +75,7 @@ class Standard
 	 */
 	public function setAttributeId( $id )
 	{
-		if( (string) $id !== $this->getAttributeId() )
-		{
-			$this->values['order.base.service.attribute.attributeid'] = (string) $id;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.attribute.attributeid', (string) $id );
 	}
 
 
@@ -109,9 +86,7 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		if( isset( $this->values['order.base.service.attribute.parentid'] ) ) {
-			return (string) $this->values['order.base.service.attribute.parentid'];
-		}
+		return $this->get( 'order.base.service.attribute.parentid' );
 	}
 
 
@@ -123,13 +98,7 @@ class Standard
 	 */
 	public function setParentId( $id )
 	{
-		if( (string) $id !== $this->getParentId() )
-		{
-			$this->values['order.base.service.attribute.parentid'] = (string) $id;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.attribute.parentid', (string) $id );
 	}
 
 
@@ -140,11 +109,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['order.base.service.attribute.type'] ) ) {
-			return (string) $this->values['order.base.service.attribute.type'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.service.attribute.type', '' );
 	}
 
 
@@ -156,13 +121,7 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['order.base.service.attribute.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.attribute.type', $this->checkCode( $type ) );
 	}
 
 
@@ -173,11 +132,7 @@ class Standard
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values['order.base.service.attribute.code'] ) ) {
-			return (string) $this->values['order.base.service.attribute.code'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.service.attribute.code', '' );
 	}
 
 
@@ -189,13 +144,7 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( (string) $code !== $this->getCode() )
-		{
-			$this->values['order.base.service.attribute.code'] = $this->checkCode( $code );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.attribute.code', $this->checkCode( $code, 255 ) );
 	}
 
 
@@ -206,11 +155,7 @@ class Standard
 	 */
 	public function getName()
 	{
-		if( isset( $this->values['order.base.service.attribute.name'] ) ) {
-			return (string) $this->values['order.base.service.attribute.name'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.service.attribute.name', '' );
 	}
 
 
@@ -222,13 +167,7 @@ class Standard
 	 */
 	public function setName( $name )
 	{
-		if( (string) $name !== $this->getName() )
-		{
-			$this->values['order.base.service.attribute.name'] = (string) $name;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.attribute.name', (string) $name );
 	}
 
 
@@ -239,11 +178,7 @@ class Standard
 	 */
 	public function getValue()
 	{
-		if( isset( $this->values['order.base.service.attribute.value'] ) ) {
-			return $this->values['order.base.service.attribute.value'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.service.attribute.value', '' );
 	}
 
 
@@ -255,13 +190,7 @@ class Standard
 	 */
 	public function setValue( $value )
 	{
-		if( $value !== $this->getValue() )
-		{
-			$this->values['order.base.service.attribute.value'] = $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.attribute.value', $value );
 	}
 
 
@@ -272,11 +201,7 @@ class Standard
 	 */
 	public function getQuantity()
 	{
-		if( isset( $this->values['order.base.service.attribute.quantity'] ) ) {
-			return (int) $this->values['order.base.service.attribute.quantity'];
-		}
-
-		return 1;
+		return (int) $this->get( 'order.base.service.attribute.quantity', 1 );
 	}
 
 
@@ -288,13 +213,7 @@ class Standard
 	 */
 	public function setQuantity( $value )
 	{
-		if( (int) $value !== $this->getQuantity() )
-		{
-			$this->values['order.base.service.attribute.quantity'] = (int) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.attribute.quantity', (int) $value );
 	}
 
 

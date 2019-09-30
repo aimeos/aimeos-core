@@ -22,8 +22,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Order\Item\Base\Coupon\Iface
 {
-	private $values;
-
 	/**
 	 * Initializes the order base coupon item.
 	 *
@@ -32,8 +30,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'order.base.coupon.', $values );
-
-		$this->values = $values;
 	}
 
 
@@ -44,9 +40,7 @@ class Standard
 	 */
 	public function getBaseId()
 	{
-		if( isset( $this->values['order.base.coupon.baseid'] ) ) {
-			return (string) $this->values['order.base.coupon.baseid'];
-		}
+		return $this->get( 'order.base.coupon.baseid' );
 	}
 
 
@@ -58,13 +52,7 @@ class Standard
 	 */
 	public function setBaseId( $baseid )
 	{
-		if( (string) $baseid !== $this->getBaseId() )
-		{
-			$this->values['order.base.coupon.baseid'] = (string) $baseid;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.coupon.baseid', (string) $baseid );
 	}
 
 
@@ -75,9 +63,7 @@ class Standard
 	 */
 	public function getProductId()
 	{
-		if( isset( $this->values['order.base.coupon.ordprodid'] ) ) {
-			return (string) $this->values['order.base.coupon.ordprodid'];
-		}
+		return $this->get( 'order.base.coupon.ordprodid' );
 	}
 
 
@@ -89,13 +75,7 @@ class Standard
 	 */
 	public function setProductId( $productid )
 	{
-		if( (string) $productid !== $this->getProductId() )
-		{
-			$this->values['order.base.coupon.ordprodid'] = (string) $productid;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.coupon.ordprodid', (string) $productid );
 	}
 
 
@@ -106,9 +86,7 @@ class Standard
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values['order.base.coupon.code'] ) ) {
-			return (string) $this->values['order.base.coupon.code'];
-		}
+		return $this->get( 'order.base.coupon.code' );
 	}
 
 
@@ -120,13 +98,7 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( (string) $code !== $this->getCode() )
-		{
-			$this->values['order.base.coupon.code'] = $this->checkCode( $code );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.coupon.code', $this->checkCode( $code ) );
 	}
 
 

@@ -21,9 +21,6 @@ class Standard
 	extends \Aimeos\MShop\Order\Item\Status\Base
 	implements \Aimeos\MShop\Order\Item\Status\Iface
 {
-	private $values;
-
-
 	/**
 	 * Initializes the object
 	 *
@@ -32,8 +29,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'order.status.', $values );
-
-		$this->values = $values;
 	}
 
 
@@ -44,10 +39,9 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		if( isset( $this->values['order.status.parentid'] ) ) {
-			return (string) $this->values['order.status.parentid'];
-		}
+		return $this->get( 'order.status.parentid' );
 	}
+
 
 	/**
 	 * Sets the parentid of the order status.
@@ -57,13 +51,7 @@ class Standard
 	 */
 	public function setParentId( $parentid )
 	{
-		if( (string) $parentid !== $this->getParentId() )
-		{
-			$this->values['order.status.parentid'] = (string) $parentid;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.status.parentid', (string) $parentid );
 	}
 
 
@@ -74,12 +62,9 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['order.status.type'] ) ) {
-			return (string) $this->values['order.status.type'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.status.type', '' );
 	}
+
 
 	/**
 	 * Sets the type of the order status.
@@ -89,14 +74,9 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['order.status.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.status.type', $this->checkCode( $type ) );
 	}
+
 
 	/**
 	 * Returns the value of the order status.
@@ -105,12 +85,9 @@ class Standard
 	 */
 	public function getValue()
 	{
-		if( isset( $this->values['order.status.value'] ) ) {
-			return (string) $this->values['order.status.value'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.status.value', '' );
 	}
+
 
 	/**
 	 * Sets the value of the order status.
@@ -120,13 +97,7 @@ class Standard
 	 */
 	public function setValue( $value )
 	{
-		if( (string) $value !== $this->getValue() )
-		{
-			$this->values['order.status.value'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.status.value', (string) $value );
 	}
 
 

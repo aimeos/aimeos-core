@@ -10,21 +10,12 @@
 namespace Aimeos\MShop\Order\Item;
 
 
-/**
- * Test class for \Aimeos\MShop\Order\Item\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -45,21 +36,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Order\Item\Standard( $this->values );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
 		unset( $this->object );
 	}
 
+
 	public function testGetId()
 	{
 		$this->assertEquals( $this->values['order.id'], $this->object->getId() );
 	}
+
 
 	public function testSetId()
 	{
@@ -79,21 +67,25 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setId( 6 );
 	}
 
+
 	public function testSetId2()
 	{
 		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setId( 'test' );
 	}
 
+
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
+
 	public function testGetBaseId()
 	{
 		$this->assertEquals( $this->values['order.baseid'], $this->object->getBaseId() );
 	}
+
 
 	public function testSetBaseId()
 	{
@@ -104,10 +96,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetType()
 	{
 		$this->assertEquals( $this->values['order.type'], $this->object->getType() );
 	}
+
 
 	public function testSetType()
 	{
@@ -118,10 +112,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetDateDelivery()
 	{
 		$this->assertEquals( $this->values['order.datedelivery'], $this->object->getDateDelivery() );
 	}
+
 
 	public function testSetDateDelivery()
 	{
@@ -135,10 +131,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setDateDelivery( '2008-34-12' );
 	}
 
+
 	public function testGetDatePayment()
 	{
 		$this->assertEquals( $this->values['order.datepayment'], $this->object->getDatePayment() );
 	}
+
 
 	public function testSetDatePayment()
 	{
@@ -152,10 +150,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setDatePayment( '2008-34-12' );
 	}
 
+
 	public function testGetDeliveryStatus()
 	{
 		$this->assertEquals( $this->values['order.statusdelivery'], $this->object->getDeliveryStatus() );
 	}
+
 
 	public function testSetDeliveryStatus()
 	{
@@ -166,10 +166,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetPaymentStatus()
 	{
 		$this->assertEquals( $this->values['order.statuspayment'], $this->object->getPaymentStatus() );
 	}
+
 
 	public function testSetPaymentStatus()
 	{
@@ -180,10 +182,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetRelatedId()
 	{
 		$this->assertEquals( $this->values['order.relatedid'], $this->object->getRelatedId() );
 	}
+
 
 	public function testSetRelatedId()
 	{
@@ -194,15 +198,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
+
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
+
 
 	public function testGetEditor()
 	{
@@ -264,24 +271,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getEditor(), $list['order.editor'] );
 	}
 
+
 	public function testIsModified()
 	{
 		$this->assertFalse( $this->object->isModified() );
-	}
-
-	public function testMagicGetOldPaymentStatus()
-	{
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $this->object->oldPaymentStatus );
-	}
-
-	public function testMagicGetOldDeliveryStatus()
-	{
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PENDING, $this->object->oldDeliveryStatus );
-	}
-
-	public function testMagicGetException()
-	{
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
-		$this->object->notExisting;
 	}
 }

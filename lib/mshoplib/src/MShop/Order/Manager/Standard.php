@@ -866,20 +866,18 @@ class Standard
 		$statusItem = $statusManager->createItem();
 		$statusItem->setParentId( $item->getId() );
 
-		if( $item->getPaymentStatus() != $item->oldPaymentStatus )
+		if( ( $status = $item->get( '.statuspayment' ) ) !== null && $status != $item->getPaymentStatus() )
 		{
-			$statusItem->setId( null );
-			$statusItem->setType( \Aimeos\MShop\Order\Item\Status\Base::STATUS_PAYMENT );
-			$statusItem->setValue( $item->getPaymentStatus() );
+			$statusItem->setId( null )->setValue( $item->getPaymentStatus() )
+				->setType( \Aimeos\MShop\Order\Item\Status\Base::STATUS_PAYMENT );
 
 			$statusManager->saveItem( $statusItem, false );
 		}
 
-		if( $item->getDeliveryStatus() != $item->oldDeliveryStatus )
+		if( ( $status = $item->get( '.statusdelivery' ) ) !== null && $status != $item->getDeliveryStatus() )
 		{
-			$statusItem->setId( null );
-			$statusItem->setType( \Aimeos\MShop\Order\Item\Status\Base::STATUS_DELIVERY );
-			$statusItem->setValue( $item->getDeliveryStatus() );
+			$statusItem->setId( null )->setValue( $item->getDeliveryStatus() )
+				->setType( \Aimeos\MShop\Order\Item\Status\Base::STATUS_DELIVERY );
 
 			$statusManager->saveItem( $statusItem, false );
 		}

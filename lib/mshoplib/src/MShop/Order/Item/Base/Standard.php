@@ -23,7 +23,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	// protected is a workaround for serialize problem
 	protected $price;
 	protected $locale;
-	protected $values;
 	protected $recalc = false;
 	protected $available = true;
 
@@ -47,7 +46,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 		$this->price = $price;
 		$this->locale = $locale;
-		$this->values = $values;
 	}
 
 
@@ -93,11 +91,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getId()
 	{
-		if( isset( $this->values['order.base.id'] ) ) {
-			return (string) $this->values['order.base.id'];
-		}
-
-		return null;
+		return $this->get( 'order.base.id' );
 	}
 
 
@@ -109,9 +103,10 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function setId( $id )
 	{
-		if( ( $this->values['order.base.id'] = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id ) ) === null ) {
-			$this->modified = true;
-		} else {
+		$id = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id );
+		$this->set( 'order.base.id', $id );
+
+		if( $id !== null ) {
 			$this->modified = false;
 		}
 
@@ -126,9 +121,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getSiteId()
 	{
-		if( isset( $this->values['order.base.siteid'] ) ) {
-			return (string) $this->values['order.base.siteid'];
-		}
+		return $this->get( 'order.base.siteid' );
 	}
 
 
@@ -139,11 +132,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getSiteCode()
 	{
-		if( isset( $this->values['order.base.sitecode'] ) ) {
-			return (string) $this->values['order.base.sitecode'];
-		}
-
-		return '';
+		return $this->get( 'order.base.sitecode', '' );
 	}
 
 
@@ -154,11 +143,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getComment()
 	{
-		if( isset( $this->values['order.base.comment'] ) ) {
-			return (string) $this->values['order.base.comment'];
-		}
-
-		return '';
+		return $this->get( 'order.base.comment', '' );
 	}
 
 
@@ -170,13 +155,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function setComment( $comment )
 	{
-		if( (string) $comment !== $this->getComment() )
-		{
-			$this->values['order.base.comment'] = (string) $comment;
-			$this->modified = true;
-		}
-
-		return $this;
+		return $this->set( 'order.base.comment', (string) $comment );
 	}
 
 
@@ -187,9 +166,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getTimeModified()
 	{
-		if( isset( $this->values['order.base.mtime'] ) ) {
-			return (string) $this->values['order.base.mtime'];
-		}
+		return $this->get( 'order.base.mtime' );
 	}
 
 
@@ -200,9 +177,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getTimeCreated()
 	{
-		if( isset( $this->values['order.base.ctime'] ) ) {
-			return (string) $this->values['order.base.ctime'];
-		}
+		return $this->get( 'order.base.ctime' );
 	}
 
 
@@ -213,11 +188,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getEditor()
 	{
-		if( isset( $this->values['order.base.editor'] ) ) {
-			return (string) $this->values['order.base.editor'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.editor' );
 	}
 
 
@@ -228,11 +199,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getCustomerId()
 	{
-		if( isset( $this->values['order.base.customerid'] ) ) {
-			return (string) $this->values['order.base.customerid'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.customerid' );
 	}
 
 
@@ -247,10 +214,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		if( (string) $customerid !== $this->getCustomerId() )
 		{
 			$this->notify( 'setCustomerId.before', $customerid );
-
-			$this->values['order.base.customerid'] = (string) $customerid;
-			$this->modified = true;
-
+			$this->set( 'order.base.customerid', (string) $customerid );
 			$this->notify( 'setCustomerId.after', $customerid );
 		}
 
@@ -265,11 +229,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getCustomerReference()
 	{
-		if( isset( $this->values['order.base.customerref'] ) ) {
-			return (string) $this->values['order.base.customerref'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.customerref' );
 	}
 
 
@@ -281,13 +241,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function setCustomerReference( $value )
 	{
-		if( (string) $value !== $this->getCustomerReference() )
-		{
-			$this->values['order.base.customerref'] = (string) $value;
-			$this->modified = true;
-		}
-
-		return $this;
+		return $this->set( 'order.base.customerref', (string) $value );
 	}
 
 

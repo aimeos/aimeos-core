@@ -20,9 +20,6 @@ namespace Aimeos\MShop\Order\Item\Base\Service;
  */
 class Standard extends Base implements Iface
 {
-	private $values;
-
-
 	/**
 	 * Initializes the order base service item
 	 *
@@ -33,8 +30,6 @@ class Standard extends Base implements Iface
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [] )
 	{
 		parent::__construct( $price, $values, $attributes );
-
-		$this->values = $values;
 	}
 
 
@@ -45,9 +40,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getSiteId()
 	{
-		if( isset( $this->values['order.base.service.siteid'] ) ) {
-			return (string) $this->values['order.base.service.siteid'];
-		}
+		return $this->get( 'order.base.service.siteid' );
 	}
 
 
@@ -59,13 +52,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setSiteId( $value )
 	{
-		if( (string) $value !== $this->getSiteId() )
-		{
-			$this->values['order.base.service.siteid'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.siteid', (string) $value );
 	}
 
 
@@ -76,9 +63,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getBaseId()
 	{
-		if( isset( $this->values['order.base.service.baseid'] ) ) {
-			return (string) $this->values['order.base.service.baseid'];
-		}
+		return $this->get( 'order.base.service.baseid' );
 	}
 
 
@@ -90,13 +75,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setBaseId( $value )
 	{
-		if( (string) $value !== $this->getBaseId() )
-		{
-			$this->values['order.base.service.baseid'] = ( $value !== null ? (int) $value : null );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.baseid', (string) $value );
 	}
 
 
@@ -107,11 +86,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getServiceId()
 	{
-		if( isset( $this->values['order.base.service.serviceid'] ) ) {
-			return (string) $this->values['order.base.service.serviceid'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.service.serviceid', '' );
 	}
 
 
@@ -123,13 +98,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setServiceId( $servid )
 	{
-		if( (string) $servid !== $this->getServiceId() )
-		{
-			$this->values['order.base.service.serviceid'] = (string) $servid;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.serviceid', (string) $servid );
 	}
 
 
@@ -140,11 +109,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values['order.base.service.code'] ) ) {
-			return (string) $this->values['order.base.service.code'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.service.code', '' );
 	}
 
 
@@ -156,13 +121,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setCode( $code )
 	{
-		if( (string) $code !== $this->getCode() )
-		{
-			$this->values['order.base.service.code'] = $this->checkCode( $code );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.code', $this->checkCode( $code ) );
 	}
 
 
@@ -173,11 +132,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getName()
 	{
-		if( isset( $this->values['order.base.service.name'] ) ) {
-			return (string) $this->values['order.base.service.name'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.service.name', '' );
 	}
 
 
@@ -189,13 +144,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setName( $name )
 	{
-		if( (string) $name !== $this->getName() )
-		{
-			$this->values['order.base.service.name'] = (string) $name;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.name', (string) $name );
 	}
 
 
@@ -206,11 +155,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['order.base.service.type'] ) ) {
-			return (string) $this->values['order.base.service.type'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.service.type', '' );
 	}
 
 
@@ -222,13 +167,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['order.base.service.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.type', $this->checkCode( $type ) );
 	}
 
 
@@ -239,11 +178,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getMediaUrl()
 	{
-		if( isset( $this->values['order.base.service.mediaurl'] ) ) {
-			return (string) $this->values['order.base.service.mediaurl'];
-		}
-
-		return '';
+		return (string) $this->get( 'order.base.service.mediaurl', '' );
 	}
 
 
@@ -255,13 +190,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setMediaUrl( $value )
 	{
-		if( (string) $value !== $this->getMediaUrl() )
-		{
-			$this->values['order.base.service.mediaurl'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.mediaurl', (string) $value );
 	}
 
 
@@ -272,9 +201,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getPosition()
 	{
-		if( isset( $this->values['order.base.service.position'] ) ) {
-			return (int) $this->values['order.base.service.position'];
-		}
+		return $this->get( 'order.base.service.position' );
 	}
 
 
@@ -287,17 +214,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setPosition( $value )
 	{
-		if( $value !== null && $value < 0 ) {
+		if( $value < 0 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order service position "%1$s" must be greater than 0', $value ) );
 		}
 
-		if( $value !== $this->getPosition() )
-		{
-			$this->values['order.base.service.position'] = ( $value !== null ? (int) $value : null );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'order.base.service.position', ( $value !== null ? (int) $value : null ) );
 	}
 
 
