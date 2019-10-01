@@ -26,7 +26,7 @@ class Standard
 		'index.text.id' => array(
 			'code' => 'index.text.id',
 			'internalcode' => 'mindte."prodid"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_index_text" AS mindte ON mindte."prodid" = mpro."id"' ),
+			'internaldeps' => array( 'LEFT JOIN "mshop_index_text" AS mindte ON mindte."prodid" = mpro."id"' ),
 			'label' => 'Product index text ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -34,7 +34,7 @@ class Standard
 		),
 		'index.text:url' => array(
 			'code' => 'index.text:url()',
-			'internalcode' => ':site AND mindte."langid" IN ($1, \'\') AND mindte."url"',
+			'internalcode' => ':site AND ( mindte."langid" = $1 OR mindte."langid" IS NULL ) AND mindte."url"',
 			'label' => 'Product URL by language, parameter(<language ID>)',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -42,7 +42,7 @@ class Standard
 		),
 		'index.text:name' => array(
 			'code' => 'index.text:name()',
-			'internalcode' => ':site AND mindte."langid" IN ($1, \'\') AND mindte."name"',
+			'internalcode' => ':site AND ( mindte."langid" = $1 OR mindte."langid" IS NULL ) AND mindte."name"',
 			'label' => 'Product name, parameter(<language ID>)',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -58,7 +58,7 @@ class Standard
 		),
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => ':site AND mindte."langid" = IN ($1, \'\') AND POSITION( $2 IN mindte."content" )',
+			'internalcode' => ':site AND ( mindte."langid" = $1 OR mindte."langid" IS NULL ) AND POSITION( $2 IN mindte."content" )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
