@@ -58,7 +58,7 @@ class Standard
 		),
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => ':site AND mindte."langid" = $1 AND POSITION( $2 IN mindte."content" )',
+			'internalcode' => ':site AND mindte."langid" = IN ($1, \'\') AND POSITION( $2 IN mindte."content" )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
@@ -684,18 +684,12 @@ class Standard
 		$date = date( 'Y-m-d H:i:s' );
 		$siteid = $this->getContext()->getLocale()->getSiteId();
 
-		foreach( $item->getRefItems( 'text', 'url', 'default', false ) as $text )
-		{
-			if( $text->getStatus() > 0 ) {
-				$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Common\Base::sanitize( $text->getContent() );
-			}
+		foreach( $item->getRefItems( 'text', 'url', 'default' ) as $text ) {
+			$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Common\Base::sanitize( $text->getContent() );
 		}
 
-		foreach( $item->getRefItems( 'text', 'name', 'default', false ) as $text )
-		{
-			if( $text->getStatus() > 0 ) {
-				$texts[$text->getLanguageId()]['name'] = $text->getContent();
-			}
+		foreach( $item->getRefItems( 'text', 'name', 'default' ) as $text ) {
+			$texts[$text->getLanguageId()]['name'] = $text->getContent();
 		}
 
 		/** mshop/index/manager/text/types
@@ -721,11 +715,8 @@ class Standard
 				$texts[$langId]['content'][] = $product->getCode();
 			}
 
-			foreach( $product->getRefItems( 'text', $types, null, false ) as $text )
-			{
-				if( $text->getStatus() > 0 ) {
-					$texts[$text->getLanguageId()]['content'][] = $text->getContent();
-				}
+			foreach( $product->getRefItems( 'text', $types ) as $text ) {
+				$texts[$text->getLanguageId()]['content'][] = $text->getContent();
 			}
 		}
 
