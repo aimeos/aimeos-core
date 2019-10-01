@@ -731,7 +731,7 @@ class Standard
 			}
 
 			$content = join( ' ', $map['content'] );
-			$this->saveText( $stmt, $item->getId(), $siteid, $langId, $map['url'], $map['name'], $content, $date );
+			$this->saveText( $stmt, $item->getId(), $siteid, $langId ?: null, $map['url'], $map['name'], $content, $date );
 		}
 	}
 
