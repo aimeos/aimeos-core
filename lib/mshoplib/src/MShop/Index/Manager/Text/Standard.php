@@ -34,7 +34,7 @@ class Standard
 		),
 		'index.text:url' => array(
 			'code' => 'index.text:url()',
-			'internalcode' => ':site AND mindte."langid" = $1 AND mindte."url"',
+			'internalcode' => ':site AND mindte."langid" IN ($1, \'\') AND mindte."url"',
 			'label' => 'Product URL by language, parameter(<language ID>)',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -42,7 +42,7 @@ class Standard
 		),
 		'index.text:name' => array(
 			'code' => 'index.text:name()',
-			'internalcode' => ':site AND mindte."langid" = $1 AND mindte."name"',
+			'internalcode' => ':site AND mindte."langid" IN ($1, \'\') AND mindte."name"',
 			'label' => 'Product name, parameter(<language ID>)',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -684,12 +684,18 @@ class Standard
 		$date = date( 'Y-m-d H:i:s' );
 		$siteid = $this->getContext()->getLocale()->getSiteId();
 
-		foreach( $item->getRefItems( 'text', 'url', 'default' ) as $text ) {
-			$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Common\Base::sanitize( $text->getContent() );
+		foreach( $item->getRefItems( 'text', 'url', 'default', false ) as $text )
+		{
+			if( $text->getStatus() > 0 ) {
+				$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Common\Base::sanitize( $text->getContent() );
+			}
 		}
 
-		foreach( $item->getRefItems( 'text', 'name', 'default' ) as $text ) {
-			$texts[$text->getLanguageId()]['name'] = $text->getContent();
+		foreach( $item->getRefItems( 'text', 'name', 'default', false ) as $text )
+		{
+			if( $text->getStatus() > 0 ) {
+				$texts[$text->getLanguageId()]['name'] = $text->getContent();
+			}
 		}
 
 		/** mshop/index/manager/text/types
@@ -715,8 +721,11 @@ class Standard
 				$texts[$langId]['content'][] = $product->getCode();
 			}
 
-			foreach( $product->getRefItems( 'text', $types ) as $text ) {
-				$texts[$text->getLanguageId()]['content'][] = $text->getContent();
+			foreach( $product->getRefItems( 'text', $types, null, false ) as $text )
+			{
+				if( $text->getStatus() > 0 ) {
+					$texts[$text->getLanguageId()]['content'][] = $text->getContent();
+				}
 			}
 		}
 
