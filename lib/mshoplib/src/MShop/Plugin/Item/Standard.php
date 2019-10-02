@@ -25,9 +25,6 @@ class Standard
 	use \Aimeos\MShop\Common\Item\Config\Traits;
 
 
-	private $values;
-
-
 	/**
 	 * Initializes the plugin object
 	 *
@@ -36,8 +33,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'plugin.', $values );
-
-		$this->values = $values;
 	}
 
 
@@ -48,9 +43,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['plugin.type'] ) ) {
-			return (string) $this->values['plugin.type'];
-		}
+		return $this->get( 'plugin.type' );
 	}
 
 
@@ -62,13 +55,7 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['plugin.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'plugin.type', $this->checkCode( $type ) );
 	}
 
 
@@ -79,11 +66,7 @@ class Standard
 	 */
 	public function getProvider()
 	{
-		if( isset( $this->values['plugin.provider'] ) ) {
-			return (string) $this->values['plugin.provider'];
-		}
-
-		return '';
+		return (string) $this->get( 'plugin.provider', '' );
 	}
 
 
@@ -96,17 +79,11 @@ class Standard
 	 */
 	public function setProvider( $provider )
 	{
-		if( (string) $provider !== $this->getProvider() )
-		{
-			if( preg_match( '/^[A-Za-z0-9]+(,[A-Za-z0-9]+)*$/', $provider ) !== 1 ) {
-				throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Invalid provider name "%1$s"', $provider ) );
-			}
-
-			$this->values['plugin.provider'] = (string) $provider;
-			$this->setModified();
+		if( preg_match( '/^[A-Za-z0-9]+(,[A-Za-z0-9]+)*$/', $provider ) !== 1 ) {
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Invalid provider name "%1$s"', $provider ) );
 		}
 
-		return $this;
+		return $this->set( 'plugin.provider', (string) $provider );
 	}
 
 
@@ -117,11 +94,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['plugin.label'] ) ) {
-			return (string) $this->values['plugin.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'plugin.label', '' );
 	}
 
 
@@ -133,13 +106,7 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( (string) $label !== $this->getLabel() )
-		{
-			$this->values['plugin.label'] = (string) $label;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'plugin.label', (string) $label );
 	}
 
 
@@ -150,11 +117,7 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		if( isset( $this->values['plugin.config'] ) ) {
-			return (array) $this->values['plugin.config'];
-		}
-
-		return [];
+		return (array) $this->get( 'plugin.config', [] );
 	}
 
 
@@ -166,10 +129,7 @@ class Standard
 	 */
 	public function setConfig( array $config )
 	{
-		$this->values['plugin.config'] = $config;
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'plugin.config', $config );
 	}
 
 
@@ -180,11 +140,7 @@ class Standard
 	 */
 	public function getPosition()
 	{
-		if( isset( $this->values['plugin.position'] ) ) {
-			return (int) $this->values['plugin.position'];
-		}
-
-		return 0;
+		return (int) $this->get( 'plugin.position', 0 );
 	}
 
 
@@ -196,13 +152,7 @@ class Standard
 	 */
 	public function setPosition( $position )
 	{
-		if( (int) $position !== $this->getPosition() )
-		{
-			$this->values['plugin.position'] = (int) $position;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'plugin.position', (int) $position );
 	}
 
 
@@ -213,11 +163,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['plugin.status'] ) ) {
-			return (int) $this->values['plugin.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'plugin.status', 1 );
 	}
 
 
@@ -229,13 +175,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values['plugin.status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'plugin.status', (int) $status );
 	}
 
 

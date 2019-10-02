@@ -21,9 +21,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Subscription\Item\Iface
 {
-	private $values;
-
-
 	/**
 	 * Initializes the object with the given values.
 	 *
@@ -32,8 +29,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'subscription.', $values );
-
-		$this->values = $values;
 	}
 
 
@@ -44,9 +39,7 @@ class Standard
 	 */
 	public function getOrderBaseId()
 	{
-		if( isset( $this->values['subscription.ordbaseid'] ) ) {
-			return (string) $this->values['subscription.ordbaseid'];
-		}
+		return $this->get( 'subscription.ordbaseid' );
 	}
 
 
@@ -58,13 +51,7 @@ class Standard
 	 */
 	public function setOrderBaseId( $id )
 	{
-		if( (string) $id !== $this->getOrderBaseId() )
-		{
-			$this->values['subscription.ordbaseid'] = (string) $id;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'subscription.ordbaseid', (string) $id );
 	}
 
 
@@ -75,9 +62,7 @@ class Standard
 	 */
 	public function getOrderProductId()
 	{
-		if( isset( $this->values['subscription.ordprodid'] ) ) {
-			return (string) $this->values['subscription.ordprodid'];
-		}
+		return $this->get( 'subscription.ordprodid' );
 	}
 
 
@@ -89,13 +74,7 @@ class Standard
 	 */
 	public function setOrderProductId( $id )
 	{
-		if( (string) $id !== $this->getOrderProductId() )
-		{
-			$this->values['subscription.ordprodid'] = (string) $id;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'subscription.ordprodid', (string) $id );
 	}
 
 
@@ -106,9 +85,7 @@ class Standard
 	 */
 	public function getDateNext()
 	{
-		if( isset( $this->values['subscription.datenext'] ) ) {
-			return (string) $this->values['subscription.datenext'];
-		}
+		return $this->get( 'subscription.datenext' );
 	}
 
 
@@ -120,13 +97,7 @@ class Standard
 	 */
 	public function setDateNext( $date )
 	{
-		if( (string) $date !== $this->getDateNext() )
-		{
-			$this->values['subscription.datenext'] = $this->checkDateFormat( $date );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'subscription.datenext', $this->checkDateFormat( $date ) );
 	}
 
 
@@ -137,9 +108,7 @@ class Standard
 	 */
 	public function getDateEnd()
 	{
-		if( isset( $this->values['subscription.dateend'] ) ) {
-			return (string) $this->values['subscription.dateend'];
-		}
+		return $this->get( 'subscription.dateend' );
 	}
 
 
@@ -151,13 +120,7 @@ class Standard
 	 */
 	public function setDateEnd( $date )
 	{
-		if( (string) $date !== $this->getDateEnd() )
-		{
-			$this->values['subscription.dateend'] = $this->checkDateFormat( $date );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'subscription.dateend', $this->checkDateFormat( $date ) );
 	}
 
 
@@ -168,9 +131,7 @@ class Standard
 	 */
 	public function getInterval()
 	{
-		if( isset( $this->values['subscription.interval'] ) ) {
-			return (string) $this->values['subscription.interval'];
-		}
+		return $this->get( 'subscription.interval' );
 	}
 
 
@@ -186,13 +147,7 @@ class Standard
 			throw new \Aimeos\MShop\Subscription\Exception( sprintf( 'Invalid time interval format "%1$s"', $value ) );
 		}
 
-		if( (string) $value !== $this->getInterval() )
-		{
-			$this->values['subscription.interval'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'subscription.interval', (string) $value );
 	}
 
 
@@ -203,11 +158,7 @@ class Standard
 	 */
 	public function getPeriod()
 	{
-		if( isset( $this->values['subscription.period'] ) ) {
-			return (int) $this->values['subscription.period'];
-		}
-
-		return 1;
+		return (int) $this->get( 'subscription.period', 1 );
 	}
 
 
@@ -219,13 +170,7 @@ class Standard
 	 */
 	public function setPeriod( $value )
 	{
-		if( (string) $value !== $this->getPeriod() )
-		{
-			$this->values['subscription.period'] = (int) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'subscription.period', (int) $value );
 	}
 
 
@@ -236,11 +181,7 @@ class Standard
 	 */
 	public function getProductId()
 	{
-		if( isset( $this->values['subscription.productid'] ) ) {
-			return (string) $this->values['subscription.productid'];
-		}
-
-		return '';
+		return (string) $this->get( 'subscription.productid', '' );
 	}
 
 
@@ -252,13 +193,7 @@ class Standard
 	 */
 	public function setProductId( $value )
 	{
-		if( (string) $value !== $this->getProductId() )
-		{
-			$this->values['subscription.productid'] = $this->checkCode( $value );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'subscription.productid', (string) $value );
 	}
 
 
@@ -269,10 +204,9 @@ class Standard
 	 */
 	public function getReason()
 	{
-		if( isset( $this->values['subscription.reason'] ) ) {
-			return (int) $this->values['subscription.reason'];
-		}
+		return $this->get( 'subscription.reason' );
 	}
+
 
 	/**
 	 * Sets the reason for the end of the subscriptions
@@ -282,13 +216,7 @@ class Standard
 	 */
 	public function setReason( $value )
 	{
-		if( $value !== $this->getReason() )
-		{
-			$this->values['subscription.reason'] = ( is_numeric( $value ) ? (int) $value : null );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'subscription.reason', ( is_numeric( $value ) ? (int) $value : null ) );
 	}
 
 
@@ -299,11 +227,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['subscription.status'] ) ) {
-			return (int) $this->values['subscription.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'subscription.status', 1 );
 	}
 
 
@@ -315,13 +239,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (string) $status !== $this->getStatus() )
-		{
-			$this->values['subscription.status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'subscription.status', (int) $status );
 	}
 
 

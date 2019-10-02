@@ -26,7 +26,7 @@ class Standard
 	use \Aimeos\MShop\Common\Item\ListRef\Traits;
 
 
-	private $values;
+	private $date;
 
 
 	/**
@@ -40,8 +40,8 @@ class Standard
 	{
 		parent::__construct( 'service.', $values );
 
+		$this->date = ( isset( $values['.date'] ) ? $values['.date'] : null );
 		$this->initListItems( $listItems, $refItems );
-		$this->values = $values;
 	}
 
 
@@ -52,11 +52,7 @@ class Standard
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values['service.code'] ) ) {
-			return (string) $this->values['service.code'];
-		}
-
-		return '';
+		return (string) $this->get( 'service.code', '' );
 	}
 
 
@@ -68,13 +64,7 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( (string) $code !== $this->getCode() )
-		{
-			$this->values['service.code'] = $this->checkCode( $code );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'service.code', $this->checkCode( $code ) );
 	}
 
 
@@ -85,9 +75,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['service.type'] ) ) {
-			return (string) $this->values['service.type'];
-		}
+		return $this->get( 'service.type' );
 	}
 
 
@@ -99,13 +87,7 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['service.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'service.type', $this->checkCode( $type ) );
 	}
 
 
@@ -116,11 +98,7 @@ class Standard
 	 */
 	public function getProvider()
 	{
-		if( isset( $this->values['service.provider'] ) ) {
-			return (string) $this->values['service.provider'];
-		}
-
-		return '';
+		return (string) $this->get( 'service.provider', '' );
 	}
 
 
@@ -132,17 +110,11 @@ class Standard
 	 */
 	public function setProvider( $provider )
 	{
-		if( (string) $provider !== $this->getProvider() )
-		{
-			if( preg_match( '/^[A-Za-z0-9]+(,[A-Za-z0-9]+)*$/', $provider ) !== 1 ) {
-				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid provider name "%1$s"', $provider ) );
-			}
-
-			$this->values['service.provider'] = (string) $provider;
-			$this->setModified();
+		if( preg_match( '/^[A-Za-z0-9]+(,[A-Za-z0-9]+)*$/', $provider ) !== 1 ) {
+			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid provider name "%1$s"', $provider ) );
 		}
 
-		return $this;
+		return $this->set( 'service.provider', (string) $provider );
 	}
 
 
@@ -153,11 +125,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['service.label'] ) ) {
-			return (string) $this->values['service.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'service.label', '' );
 	}
 
 
@@ -169,13 +137,7 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( (string) $label !== $this->getLabel() )
-		{
-			$this->values['service.label'] = (string) $label;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'service.label', (string) $label );
 	}
 
 
@@ -186,9 +148,7 @@ class Standard
 	 */
 	public function getDateStart()
 	{
-		if( isset( $this->values['service.datestart'] ) ) {
-			return (string) $this->values['service.datestart'];
-		}
+		return $this->get( 'service.datestart' );
 	}
 
 
@@ -200,13 +160,7 @@ class Standard
 	 */
 	public function setDateStart( $date )
 	{
-		if( $date !== $this->getDateStart() )
-		{
-			$this->values['service.datestart'] = $this->checkDateFormat( $date );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'service.datestart', $this->checkDateFormat( $date ) );
 	}
 
 
@@ -217,9 +171,7 @@ class Standard
 	 */
 	public function getDateEnd()
 	{
-		if( isset( $this->values['service.dateend'] ) ) {
-			return (string) $this->values['service.dateend'];
-		}
+		return $this->get( 'service.dateend' );
 	}
 
 
@@ -231,13 +183,7 @@ class Standard
 	 */
 	public function setDateEnd( $date )
 	{
-		if( $date !== $this->getDateEnd() )
-		{
-			$this->values['service.dateend'] = $this->checkDateFormat( $date );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'service.dateend', $this->checkDateFormat( $date ) );
 	}
 
 
@@ -248,11 +194,7 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		if( isset( $this->values['service.config'] ) ) {
-			return (array) $this->values['service.config'];
-		}
-
-		return [];
+		return (array) $this->get( 'service.config', [] );
 	}
 
 
@@ -264,10 +206,7 @@ class Standard
 	 */
 	public function setConfig( array $config )
 	{
-		$this->values['service.config'] = $config;
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'service.config', $config );
 	}
 
 
@@ -278,11 +217,7 @@ class Standard
 	 */
 	public function getPosition()
 	{
-		if( isset( $this->values['service.position'] ) ) {
-			return (int) $this->values['service.position'];
-		}
-
-		return 0;
+		return (int) $this->get( 'service.position', 0 );
 	}
 
 
@@ -294,13 +229,7 @@ class Standard
 	 */
 	public function setPosition( $pos )
 	{
-		if( (int) $pos !== $this->getPosition() )
-		{
-			$this->values['service.position'] = (int) $pos;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'service.position', (int) $pos );
 	}
 
 
@@ -311,11 +240,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['service.status'] ) ) {
-			return (int) $this->values['service.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'service.status', 1 );
 	}
 
 
@@ -327,13 +252,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values['service.status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'service.status', (int) $status );
 	}
 
 
@@ -356,8 +275,8 @@ class Standard
 	public function isAvailable()
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
-			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->values['.date'] )
-			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->values['.date'] );
+			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->date )
+			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->date );
 	}
 
 
