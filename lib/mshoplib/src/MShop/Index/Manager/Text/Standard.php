@@ -34,7 +34,7 @@ class Standard
 		),
 		'index.text:url' => array(
 			'code' => 'index.text:url()',
-			'internalcode' => ':site AND ( mindte."langid" = $1 OR mindte."langid" IS NULL ) AND mindte."url"',
+			'internalcode' => ':site AND mindte."langid" = $1 AND mindte."url"',
 			'label' => 'Product URL by language, parameter(<language ID>)',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -42,7 +42,7 @@ class Standard
 		),
 		'index.text:name' => array(
 			'code' => 'index.text:name()',
-			'internalcode' => ':site AND ( mindte."langid" = $1 OR mindte."langid" IS NULL ) AND mindte."name"',
+			'internalcode' => ':site AND mindte."langid" = $1 AND mindte."name"',
 			'label' => 'Product name, parameter(<language ID>)',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -58,7 +58,7 @@ class Standard
 		),
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => ':site AND ( mindte."langid" = $1 OR mindte."langid" IS NULL ) AND POSITION( $2 IN mindte."content" )',
+			'internalcode' => ':site AND mindte."langid" = $1 AND POSITION( $2 IN mindte."content" )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
@@ -681,8 +681,6 @@ class Standard
 	protected function saveTexts( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
 	{
 		$texts = [];
-		$date = date( 'Y-m-d H:i:s' );
-		$siteid = $this->getContext()->getLocale()->getSiteId();
 
 		foreach( $item->getRefItems( 'text', 'url', 'default' ) as $text ) {
 			$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Common\Base::sanitize( $text->getContent() );
@@ -720,18 +718,49 @@ class Standard
 			}
 		}
 
+		$this->saveTextMap( $stmt, $item, $texts );
+	}
+
+
+	/**
+	 * Saves the mapped texts for the given item
+	 *
+	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
+	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item containing associated text items
+	 * @param array $map Associative list of text types as keys and content as value
+	 */
+	protected function saveTextMap( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item, array $texts )
+	{
+		$date = date( 'Y-m-d H:i:s' );
+		$siteid = $this->getContext()->getLocale()->getSiteId();
+
 		foreach( $texts as $langId => $map )
 		{
-			if( !isset( $map['url'] ) ) {
-				$map['url'] = \Aimeos\MW\Common\Base::sanitize( $item->getLabel() );
+			if( $langId == '' ) {
+				continue;
 			}
 
-			if( !isset( $map['name'] ) ) {
-				$map['content'][] = $map['name'] = $item->getLabel();
+			if( isset( $texts[''] ) ) {
+				$map['content'] = array_merge( $map['content'], $texts['']['content'] );
+			}
+
+			if( !isset( $map['url'] ) )
+			{
+				$url = ( isset( $texts['']['url'] ) ? $texts['']['url'] : $item->getLabel() );
+				$map['url'] = \Aimeos\MW\Common\Base::sanitize( $url );
+			}
+
+			if( !isset( $map['name'] ) )
+			{
+				if( isset( $texts['']['name'] ) ) {
+					$map['name'] = $texts['']['name'];
+				} else {
+					$map['content'][] = $map['name'] = $item->getLabel();
+				}
 			}
 
 			$content = join( ' ', $map['content'] );
-			$this->saveText( $stmt, $item->getId(), $siteid, $langId ?: null, $map['url'], $map['name'], $content, $date );
+			$this->saveText( $stmt, $item->getId(), $siteid, $langId, $map['url'], $map['name'], $content, $date );
 		}
 	}
 
