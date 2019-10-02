@@ -25,6 +25,9 @@ class Standard
 	use \Aimeos\MShop\Common\Item\ListRef\Traits;
 
 
+	private $langid;
+
+
 	/**
 	 * Initializes the text item object with the given values.
 	 *
@@ -36,6 +39,7 @@ class Standard
 	{
 		parent::__construct( 'text.', $values );
 
+		$this->langid = ( isset( $values['.languageid'] ) ? $values['.languageid'] : null );
 		$this->initListItems( $listItems, $refItems );
 	}
 
@@ -199,8 +203,8 @@ class Standard
 	public function isAvailable()
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
-			&& ( $this->values['.languageid'] === null || $this->getLanguageId() === null
-			|| $this->getLanguageId() === $this->values['.languageid'] );
+			&& ( $this->langid === null || $this->getLanguageId() === null
+			|| $this->getLanguageId() === $this->langid );
 	}
 
 
