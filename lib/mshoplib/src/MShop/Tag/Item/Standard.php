@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Tag\Item\Iface
 {
-	private $values;
+	private $langid;
 
 
 	/**
@@ -34,7 +34,7 @@ class Standard
 	{
 		parent::__construct( 'tag.', $values );
 
-		$this->values = $values;
+		$this->langid = ( isset( $values['.languageid'] ) ? $values['.languageid'] : null );
 	}
 
 
@@ -45,11 +45,7 @@ class Standard
 	 */
 	public function getDomain()
 	{
-		if( isset( $this->values['tag.domain'] ) ) {
-			return (string) $this->values['tag.domain'];
-		}
-
-		return '';
+		return (string) $this->get( 'tag.domain', '' );
 	}
 
 
@@ -61,13 +57,7 @@ class Standard
 	 */
 	public function setDomain( $domain )
 	{
-		if( (string) $domain !== $this->getDomain() )
-		{
-			$this->values['tag.domain'] = (string) $domain;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'tag.domain', (string) $domain );
 	}
 
 
@@ -78,9 +68,7 @@ class Standard
 	 */
 	public function getLanguageId()
 	{
-		if( isset( $this->values['tag.languageid'] ) ) {
-			return (string) $this->values['tag.languageid'];
-		}
+		return $this->get( 'tag.languageid' );
 	}
 
 
@@ -92,13 +80,7 @@ class Standard
 	 */
 	public function setLanguageId( $id )
 	{
-		if( $id !== $this->getLanguageId() )
-		{
-			$this->values['tag.languageid'] = $this->checkLanguageId( $id );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'tag.languageid', $this->checkLanguageId( $id ) );
 	}
 
 
@@ -109,9 +91,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['tag.type'] ) ) {
-			return (string) $this->values['tag.type'];
-		}
+		return $this->get( 'tag.type' );
 	}
 
 
@@ -123,13 +103,7 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['tag.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'tag.type', $this->checkCode( $type ) );
 	}
 
 
@@ -140,11 +114,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['tag.label'] ) ) {
-			return (string) $this->values['tag.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'tag.label', '' );
 	}
 
 
@@ -156,13 +126,7 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( (string) $label !== $this->getLabel() )
-		{
-			$this->values['tag.label'] = (string) $label;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'tag.label', (string) $label );
 	}
 
 
@@ -184,7 +148,7 @@ class Standard
 	 */
 	public function isAvailable()
 	{
-		return parent::isAvailable() && $this->getLanguageId() === $this->values['.languageid'];
+		return parent::isAvailable() && $this->getLanguageId() === $this->langid;
 	}
 
 

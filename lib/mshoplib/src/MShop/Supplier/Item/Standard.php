@@ -30,9 +30,6 @@ class Standard
 	}
 
 
-	private $values;
-
-
 	/**
 	 * Initializes the supplier item object
 	 *
@@ -46,7 +43,6 @@ class Standard
 
 		$this->initListItems( $listItems, $refItems );
 		$this->initAddressItems( $addresses );
-		$this->values = $values;
 	}
 
 
@@ -68,11 +64,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['supplier.label'] ) ) {
-			return (string) $this->values['supplier.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'supplier.label', '' );
 	}
 
 
@@ -84,13 +76,7 @@ class Standard
 	 */
 	public function setLabel( $value )
 	{
-		if( (string) $value !== $this->getLabel() )
-		{
-			$this->values['supplier.label'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'supplier.label', (string) $value );
 	}
 
 
@@ -101,11 +87,7 @@ class Standard
 	 */
 	public function getCode()
 	{
-		if( isset( $this->values['supplier.code'] ) ) {
-			return (string) $this->values['supplier.code'];
-		}
-
-		return '';
+		return (string) $this->get( 'supplier.code', '' );
 	}
 
 
@@ -117,13 +99,7 @@ class Standard
 	 */
 	public function setCode( $value )
 	{
-		if( (string) $value !== $this->getCode() )
-		{
-			$this->values['supplier.code'] = $this->checkCode( $value );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'supplier.code', $this->checkCode( $value ) );
 	}
 
 
@@ -135,11 +111,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['supplier.status'] ) ) {
-			return (int) $this->values['supplier.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'supplier.status', 1 );
 	}
 
 
@@ -151,13 +123,7 @@ class Standard
 	 */
 	public function setStatus( $value )
 	{
-		if( (int) $value !== $this->getStatus() )
-		{
-			$this->values['supplier.status'] = (int) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'supplier.status', (int) $value );
 	}
 
 

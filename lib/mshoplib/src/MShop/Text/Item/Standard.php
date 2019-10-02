@@ -25,9 +25,6 @@ class Standard
 	use \Aimeos\MShop\Common\Item\ListRef\Traits;
 
 
-	private $values;
-
-
 	/**
 	 * Initializes the text item object with the given values.
 	 *
@@ -40,7 +37,6 @@ class Standard
 		parent::__construct( 'text.', $values );
 
 		$this->initListItems( $listItems, $refItems );
-		$this->values = $values;
 	}
 
 
@@ -51,9 +47,7 @@ class Standard
 	 */
 	public function getLanguageId()
 	{
-		if( isset( $this->values['text.languageid'] ) ) {
-			return (string) $this->values['text.languageid'];
-		}
+		return $this->get( 'text.languageid' );
 	}
 
 
@@ -66,13 +60,7 @@ class Standard
 	 */
 	public function setLanguageId( $id )
 	{
-		if( $id !== $this->getLanguageId() )
-		{
-			$this->values['text.languageid'] = $this->checkLanguageId( $id );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'text.languageid', $this->checkLanguageId( $id ) );
 	}
 
 
@@ -83,9 +71,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['text.type'] ) ) {
-			return (string) $this->values['text.type'];
-		}
+		return $this->get( 'text.type' );
 	}
 
 
@@ -97,13 +83,7 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['text.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'text.type', $this->checkCode( $type ) );
 	}
 
 
@@ -114,11 +94,7 @@ class Standard
 	 */
 	public function getDomain()
 	{
-		if( isset( $this->values['text.domain'] ) ) {
-			return (string) $this->values['text.domain'];
-		}
-
-		return '';
+		return (string) $this->get( 'text.domain', '' );
 	}
 
 
@@ -130,13 +106,7 @@ class Standard
 	 */
 	public function setDomain( $domain )
 	{
-		if( (string) $domain !== $this->getDomain() )
-		{
-			$this->values['text.domain'] = (string) $domain;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'text.domain', (string) $domain );
 	}
 
 
@@ -147,11 +117,7 @@ class Standard
 	 */
 	public function getContent()
 	{
-		if( isset( $this->values['text.content'] ) ) {
-			return (string) $this->values['text.content'];
-		}
-
-		return '';
+		return (string) $this->get( 'text.content', '' );
 	}
 
 
@@ -163,14 +129,8 @@ class Standard
 	 */
 	public function setContent( $text )
 	{
-		if( (string) $text !== $this->getContent() )
-		{
-			ini_set( 'mbstring.substitute_character', 'none' );
-			$this->values['text.content'] = @mb_convert_encoding( (string) $text, 'UTF-8', 'UTF-8' );
-			$this->setModified();
-		}
-
-		return $this;
+		ini_set( 'mbstring.substitute_character', 'none' );
+		return $this->set( 'text.content', @mb_convert_encoding( (string) $text, 'UTF-8', 'UTF-8' ) );
 	}
 
 
@@ -181,11 +141,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['text.label'] ) ) {
-			return (string) $this->values['text.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'text.label', '' );
 	}
 
 
@@ -197,13 +153,7 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( (string) $label !== $this->getLabel() )
-		{
-			$this->values['text.label'] = (string) $label;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'text.label', (string) $label );
 	}
 
 
@@ -214,11 +164,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['text.status'] ) ) {
-			return (int) $this->values['text.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'text.status', 1 );
 	}
 
 
@@ -230,13 +176,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values['text.status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'text.status', (int) $status );
 	}
 
 
