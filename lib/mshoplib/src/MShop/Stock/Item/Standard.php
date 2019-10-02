@@ -22,9 +22,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Stock\Item\Iface
 {
-	private $values;
-
-
 	/**
 	 * Initializes the stock item object with the given values
 	 *
@@ -33,106 +30,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'stock.', $values );
-
-		$this->values = $values;
-	}
-
-
-	/**
-	 * Returns the type code of the product stock item.
-	 *
-	 * @return string|null Type code of the product stock item
-	 */
-	public function getType()
-	{
-		if( isset( $this->values['stock.type'] ) ) {
-			return (string) $this->values['stock.type'];
-		}
-	}
-
-
-	/**
-	 * Sets the new type of the product stock item
-	 *
-	 * @param string $type Type of the product stock item
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
-	 */
-	public function setType( $type )
-	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['stock.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Returns the code of the stock item.
-	 *
-	 * @return string Product code (SKU)
-	 */
-	public function getProductCode()
-	{
-		if( isset( $this->values['stock.productcode'] ) ) {
-			return (string) $this->values['stock.productcode'];
-		}
-
-		return '';
-	}
-
-
-	/**
-	 * Sets a new code of the stock item.
-	 *
-	 * @param string $code New product code (SKU)
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
-	 */
-	public function setProductCode( $code )
-	{
-		if( (string) $code !== $this->getProductCode() )
-		{
-			$this->values['stock.productcode'] = (string) $code;
-			$this->setModified();
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Returns the stock level.
-	 *
-	 * @return integer|null Stock level
-	 */
-	public function getStockLevel()
-	{
-		if( isset( $this->values['stock.stocklevel'] ) ) {
-			return (int) $this->values['stock.stocklevel'];
-		}
-	}
-
-
-	/**
-	 * Sets the stock level.
-	 *
-	 * @param integer|null $stocklevel New stock level
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
-	 */
-	public function setStockLevel( $stocklevel )
-	{
-		$stocklevel = ( is_numeric( $stocklevel ) ? (int) $stocklevel : null );
-
-		if( $stocklevel !== $this->getStockLevel() )
-		{
-			$this->values['stock.stocklevel'] = $stocklevel;
-			$this->setModified();
-		}
-
-
-		return $this;
 	}
 
 
@@ -143,9 +40,7 @@ class Standard
 	 */
 	public function getDateBack()
 	{
-		if( isset( $this->values['stock.backdate'] ) ) {
-			return (string) $this->values['stock.backdate'];
-		}
+		return $this->get( 'stock.backdate' );
 	}
 
 
@@ -157,13 +52,99 @@ class Standard
 	 */
 	public function setDateBack( $backdate )
 	{
-		if( $backdate !== $this->getDateBack() )
-		{
-			$this->values['stock.backdate'] = $this->checkDateFormat( $backdate );
-			$this->setModified();
-		}
+		return $this->set( 'stock.backdate', $this->checkDateFormat( $backdate ) );
+	}
 
-		return $this;
+
+	/**
+	 * Returns the type code of the product stock item.
+	 *
+	 * @return string|null Type code of the product stock item
+	 */
+	public function getType()
+	{
+		return $this->get( 'stock.type' );
+	}
+
+
+	/**
+	 * Sets the new type of the product stock item
+	 *
+	 * @param string $type Type of the product stock item
+	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
+	 */
+	public function setType( $type )
+	{
+		return $this->set( 'stock.type', $this->checkCode( $type ) );
+	}
+
+
+	/**
+	 * Returns the code of the stock item.
+	 *
+	 * @return string Product code (SKU)
+	 */
+	public function getProductCode()
+	{
+		return (string) $this->get( 'stock.productcode', '' );
+	}
+
+
+	/**
+	 * Sets a new code of the stock item.
+	 *
+	 * @param string $code New product code (SKU)
+	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
+	 */
+	public function setProductCode( $code )
+	{
+		return $this->set( 'stock.productcode', (string) $code );
+	}
+
+
+	/**
+	 * Returns the stock level.
+	 *
+	 * @return integer|null Stock level
+	 */
+	public function getStockLevel()
+	{
+		return $this->get( 'stock.stocklevel' );
+	}
+
+
+	/**
+	 * Sets the stock level.
+	 *
+	 * @param integer|null $stocklevel New stock level
+	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
+	 */
+	public function setStockLevel( $stocklevel )
+	{
+		return $this->set( 'stock.stocklevel', is_numeric( $stocklevel ) ? (int) $stocklevel : null );
+	}
+
+
+	/**
+	 * Returns the expected delivery time frame
+	 *
+	 * @return string Expected delivery time frame
+	 */
+	public function getTimeframe()
+	{
+		return (string) $this->get( 'stock.timeframe', '' );
+	}
+
+
+	/**
+	 * Sets the expected delivery time frame
+	 *
+	 * @param string $timeframe Expected delivery time frame
+	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
+	 */
+	public function setTimeframe( $timeframe )
+	{
+		return $this->set( 'stock.timeframe', (string) $timeframe );
 	}
 
 
@@ -175,37 +156,6 @@ class Standard
 	public function getResourceType()
 	{
 		return 'stock';
-	}
-
-	/**
-	 * Returns the expected delivery time frame
-	 *
-	 * @return string Expected delivery time frame
-	 */
-	public function getTimeframe()
-	{
-		if( isset( $this->values['stock.timeframe'] ) ) {
-			return (string) $this->values['stock.timeframe'];
-		}
-
-		return '';
-	}
-
-	/**
-	 * Sets the expected delivery time frame
-	 *
-	 * @param string $timeframe Expected delivery time frame
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
-	 */
-	public function setTimeframe( $timeframe )
-	{
-		if( $timeframe !== $this->getTimeframe() )
-		{
-			$this->values['stock.timeframe'] = (string) $timeframe;
-			$this->setModified();
-		}
-
-		return $this;
 	}
 
 
