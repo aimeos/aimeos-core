@@ -20,8 +20,9 @@ namespace Aimeos\MShop\Price\Item;
  */
 class Standard extends Base
 {
-	private $values;
+	private $currencyid;
 	private $precision;
+	private $tax;
 
 
 	/**
@@ -36,8 +37,9 @@ class Standard extends Base
 	{
 		parent::__construct( 'price.', $values, $listItems, $refItems, $propItems );
 
+		$this->currencyid = ( isset( $values['.currencyid'] ) ? $values['.currencyid'] : null );
 		$this->precision = ( isset( $values['.precision'] ) ? $values['.precision'] : 2 );
-		$this->values = $values;
+		$this->tax = $this->get( 'price.tax' );
 	}
 
 
@@ -48,9 +50,7 @@ class Standard extends Base
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['price.type'] ) ) {
-			return (string) $this->values['price.type'];
-		}
+		return $this->get( 'price.type' );
 	}
 
 
@@ -62,13 +62,7 @@ class Standard extends Base
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type !== $this->getType() )
-		{
-			$this->values['price.type'] = $this->checkCode( $type );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'price.type', $this->checkCode( $type ) );
 	}
 
 
@@ -79,9 +73,7 @@ class Standard extends Base
 	 */
 	public function getCurrencyId()
 	{
-		if( isset( $this->values['price.currencyid'] ) ) {
-			return (string) $this->values['price.currencyid'];
-		}
+		return $this->get( 'price.currencyid' );
 	}
 
 
@@ -94,13 +86,7 @@ class Standard extends Base
 	 */
 	public function setCurrencyId( $currencyid )
 	{
-		if( (string) $currencyid !== $this->getCurrencyId() )
-		{
-			$this->values['price.currencyid'] = (string) $this->checkCurrencyId( $currencyid, false );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'price.currencyid', $this->checkCurrencyId( $currencyid, false ) );
 	}
 
 
@@ -111,11 +97,7 @@ class Standard extends Base
 	 */
 	public function getDomain()
 	{
-		if( isset( $this->values['price.domain'] ) ) {
-			return (string) $this->values['price.domain'];
-		}
-
-		return '';
+		return (string) $this->get( 'price.domain', '' );
 	}
 
 
@@ -127,13 +109,7 @@ class Standard extends Base
 	 */
 	public function setDomain( $domain )
 	{
-		if( (string) $domain !== $this->getDomain() )
-		{
-			$this->values['price.domain'] = (string) $domain;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'price.domain', (string) $domain );
 	}
 
 
@@ -144,11 +120,7 @@ class Standard extends Base
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['price.label'] ) ) {
-			return (string) $this->values['price.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'price.label', '' );
 	}
 
 
@@ -160,13 +132,7 @@ class Standard extends Base
 	 */
 	public function setLabel( $label )
 	{
-		if( (string) $label !== $this->getLabel() )
-		{
-			$this->values['price.label'] = (string) $label;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'price.label', (string) $label );
 	}
 
 
@@ -177,11 +143,7 @@ class Standard extends Base
 	 */
 	public function getQuantity()
 	{
-		if( isset( $this->values['price.quantity'] ) ) {
-			return (int) $this->values['price.quantity'];
-		}
-
-		return 1;
+		return (int) $this->get( 'price.quantity', 1 );
 	}
 
 
@@ -193,13 +155,7 @@ class Standard extends Base
 	 */
 	public function setQuantity( $quantity )
 	{
-		if( (int) $quantity !== $this->getQuantity() )
-		{
-			$this->values['price.quantity'] = (int) $quantity;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'price.quantity', (int) $quantity );
 	}
 
 
@@ -210,11 +166,7 @@ class Standard extends Base
 	 */
 	public function getValue()
 	{
-		if( isset( $this->values['price.value'] ) ) {
-			return (string) $this->values['price.value'];
-		}
-
-		return '0.00';
+		return (string) $this->get( 'price.value', '0.00' );
 	}
 
 
@@ -226,13 +178,7 @@ class Standard extends Base
 	 */
 	public function setValue( $price )
 	{
-		if( (string) $price !== $this->getValue() )
-		{
-			$this->values['price.value'] = (string) $this->checkPrice( $price );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'price.value', $this->checkPrice( $price ) );
 	}
 
 
@@ -243,11 +189,7 @@ class Standard extends Base
 	 */
 	public function getCosts()
 	{
-		if( isset( $this->values['price.costs'] ) ) {
-			return (string) $this->values['price.costs'];
-		}
-
-		return '0.00';
+		return (string) $this->get( 'price.costs', '0.00' );
 	}
 
 
@@ -259,13 +201,7 @@ class Standard extends Base
 	 */
 	public function setCosts( $price )
 	{
-		if( (string) $price !== $this->getCosts() )
-		{
-			$this->values['price.costs'] = (string) $this->checkPrice( $price );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'price.costs', $this->checkPrice( $price ) );
 	}
 
 
@@ -276,11 +212,7 @@ class Standard extends Base
 	 */
 	public function getRebate()
 	{
-		if( isset( $this->values['price.rebate'] ) ) {
-			return (string) $this->values['price.rebate'];
-		}
-
-		return '0.00';
+		return (string) $this->get( 'price.rebate', '0.00' );
 	}
 
 
@@ -292,13 +224,7 @@ class Standard extends Base
 	 */
 	public function setRebate( $price )
 	{
-		if( (string) $price !== $this->getRebate() )
-		{
-			$this->values['price.rebate'] = (string) $this->checkPrice( $price );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'price.rebate', $this->checkPrice( $price ) );
 	}
 
 
@@ -309,11 +235,8 @@ class Standard extends Base
 	 */
 	public function getTaxRate()
 	{
-		if( isset( $this->values['price.taxrates'][''] ) ) {
-			return (string) $this->values['price.taxrates'][''];
-		}
-
-		return '0.00';
+		$list = (array) $this->get( 'price.taxrates', [] );
+		return ( isset( $list[''] ) ? (string) $list[''] : '0.00' );
 	}
 
 
@@ -324,11 +247,7 @@ class Standard extends Base
 	 */
 	 public function getTaxRates()
 	 {
-		if( isset( $this->values['price.taxrates'] ) ) {
-			return (array) $this->values['price.taxrates'];
-		}
-
-		 return [];
+		return (array) $this->get( 'price.taxrates', [] );
 	 }
 
 
@@ -352,19 +271,13 @@ class Standard extends Base
 	 */
 	public function setTaxRates( array $taxrates )
 	{
-		if( $taxrates !== $this->getTaxRates() )
+		foreach( $taxrates as $name => $taxrate )
 		{
-			foreach( $taxrates as $name => $taxrate )
-			{
-				unset( $taxrates[$name] ); // change index 0 to ''
-				$taxrates[$name ?: ''] = (string) $this->checkPrice( $taxrate );
-			}
-
-			$this->values['price.taxrates'] = $taxrates;
-			$this->setModified();
+			unset( $taxrates[$name] ); // change index 0 to ''
+			$taxrates[$name ?: ''] = $this->checkPrice( $taxrate );
 		}
 
-		return $this;
+		return $this->set( 'price.taxrates', $taxrates );
 	}
 
 
@@ -377,11 +290,7 @@ class Standard extends Base
 	 */
 	public function getTaxFlag()
 	{
-		if( isset( $this->values['price.taxflag'] ) ) {
-			return (bool) $this->values['price.taxflag'];
-		}
-
-		return true;
+		return (bool) $this->get( 'price.taxflag', true );
 	}
 
 
@@ -393,13 +302,7 @@ class Standard extends Base
 	*/
 	public function setTaxFlag( $flag )
 	{
-		if( (bool) $flag !== $this->getTaxFlag() )
-		{
-			$this->values['price.taxflag'] = (bool) $flag;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'price.taxflag', (bool) $flag );
 	}
 
 
@@ -411,7 +314,7 @@ class Standard extends Base
 	 */
 	public function getTaxValue()
 	{
-		if( !isset( $this->values['price.tax'] ) )
+		if( $this->tax === null )
 		{
 			$taxrate = array_sum( $this->getTaxRates() );
 
@@ -421,10 +324,11 @@ class Standard extends Base
 				$tax = ( $this->getValue() + $this->getCosts() ) * $taxrate / 100;
 			}
 
-			$this->values['price.tax'] = $this->formatNumber( $tax, $this->precision + 2 );
+			$this->tax = $this->formatNumber( $tax, $this->precision + 2 );
+			parent::setModified();
 		}
 
-		return (string) $this->values['price.tax'];
+		return $this->tax;
 	}
 
 
@@ -435,12 +339,8 @@ class Standard extends Base
 	 */
 	public function setTaxValue( $value )
 	{
-		if( (string) $value !== $this->getTaxValue() )
-		{
-			$this->values['price.tax'] = (string) $this->checkPrice( $value, $this->precision + 2 );
-			parent::setModified(); // don't unset tax immediately again
-		}
-
+		$this->tax = $this->checkPrice( $value, $this->precision + 2 );
+		parent::setModified();
 		return $this;
 	}
 
@@ -452,11 +352,7 @@ class Standard extends Base
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['price.status'] ) ) {
-			return (int) $this->values['price.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'price.status', 1 );
 	}
 
 
@@ -468,23 +364,19 @@ class Standard extends Base
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values['price.status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'price.status', (int) $status );
 	}
 
 
 	/**
 	 * Sets the modified flag of the object.
+	 *
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setModified()
 	{
-		parent::setModified();
-		unset( $this->values['price.tax'] );
+		$this->tax = null;
+		return parent::setModified();
 	}
 
 
@@ -496,7 +388,7 @@ class Standard extends Base
 	public function isAvailable()
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
-			&& ( $this->values['.currencyid'] === null || $this->getCurrencyId() === $this->values['.currencyid'] );
+			&& ( $this->currencyid === null || $this->getCurrencyId() === $this->currencyid );
 	}
 
 
@@ -516,7 +408,7 @@ class Standard extends Base
 		}
 
 		if( $this === $item ) { $item = clone $item; }
-		$taxValue = $this->getTaxValue();
+		$taxValue = $this->getTaxValue(); // use initial value before it gets reset
 
 		$this->setQuantity( 1 );
 		$this->setValue( $this->getValue() + $item->getValue() * $quantity );
@@ -541,7 +433,7 @@ class Standard extends Base
 		$this->setCosts( '0.00' );
 		$this->setRebate( '0.00' );
 		$this->setTaxRate( '0.00' );
-		unset( $this->values['price.tax'] );
+		$this->tax = null;
 
 		return $this;
 	}
