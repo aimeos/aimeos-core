@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-02 10:32+0200\n"
-"PO-Revision-Date: 2019-07-13 09:29+0000\n"
+"POT-Creation-Date: 2019-10-03 10:00+0200\n"
+"PO-Revision-Date: 2019-10-03 08:06+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -397,6 +397,10 @@ msgstr "\"%1$s\" kodlu sipariş içe aktarılamadı: %2$s"
 #, php-format
 msgid "Unable to import product with code \"%1$s\": %2$s"
 msgstr "\"%1$s\" kodlu ürün içe aktarılamıyor: %2$s"
+
+#, php-format
+msgid "Unable to move imported file"
+msgstr "İçe aktarılan dosya taşınamıyor"
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""

@@ -3,21 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Dimitri <doleiynyk@metaways.de>, 2013
-# Андрей Аксёнов <aksenovaa@bk.ru>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-03 10:00+0200\n"
 "PO-Revision-Date: 2019-10-03 08:06+0000\n"
-"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
-"Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
+"Last-Translator: Aimeos\n"
+"Language-Team: Ukrainian (http://www.transifex.com/aimeos/aimeos-core/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
 msgid "Attribute import XML"
 msgstr ""
@@ -25,16 +23,16 @@ msgstr ""
 msgid ""
 "Authorized payments of orders will be captured after dispatching or after a "
 "configurable amount of time"
-msgstr "Авторизация платежей по заказам будет получена после отправки, либо после определённого промежутка времени"
+msgstr ""
 
 msgid "Batch update of payment/delivery status"
-msgstr "Пакетное обновление статуса платежа/доставки"
+msgstr ""
 
 msgid "Cache cleanup"
-msgstr "Очистка кеша"
+msgstr ""
 
 msgid "Capture authorized payments"
-msgstr "Загрузка разрешённых платежей"
+msgstr ""
 
 msgid "Catalog import CSV"
 msgstr ""
@@ -43,21 +41,21 @@ msgid "Catalog import XML"
 msgstr ""
 
 msgid "Catalog index optimization"
-msgstr "Оптимизация индекса каталога"
+msgstr ""
 
 msgid "Catalog index rebuild"
-msgstr "Перестроение индекса каталога"
+msgstr ""
 
 msgid "Catalog site map"
 msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr "Класс \"%1$s\" не реализует интерфейс \"%2$s\""
+msgstr "Клас \"%1$s\" не реализуе інтерфейс \"%2$s\""
 
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr "Не найден класс \"%1$s\""
+msgstr "Клас \"%1$s\" не знайдено"
 
 msgid "Coupon code import CSV"
 msgstr ""
@@ -66,10 +64,10 @@ msgid "Creates a catalog site map for search engines"
 msgstr ""
 
 msgid "Creates a product site map for search engines"
-msgstr "Создание карты сайта с товарами для поисковых механизмов"
+msgstr ""
 
 msgid "Creates bought together product suggestions"
-msgstr "Создание подсказок по сопутствующим товарам"
+msgstr ""
 
 msgid "Customer import XML"
 msgstr ""
@@ -77,20 +75,20 @@ msgstr ""
 msgid ""
 "Deletes unfinished orders an makes their products and coupon codes available"
 " again"
-msgstr "Удаление незавершённых заказов делает снова доступными товары и коды купонов из них"
+msgstr ""
 
 msgid "Deletes unpaid orders to keep the database clean"
-msgstr "Удаление неоплаченных заказов для очистки базы данных"
+msgstr ""
 
 msgid "Executes payment or delivery service providers that uses batch updates"
-msgstr "Запускает службы поставщики услуг платежей или доставки, использующих пакетные обновления"
+msgstr ""
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
 msgstr ""
 
 msgid "Exports all available products"
-msgstr "Экспорт всех доступных товаров"
+msgstr ""
 
 msgid "Exports orders to CSV file"
 msgstr ""
@@ -158,7 +156,7 @@ msgid "Imports new and updates existing customers from XML files"
 msgstr ""
 
 msgid "Imports new and updates existing products from CSV files"
-msgstr "Импорт новых и обновление существующих товаров из файлов CSV"
+msgstr ""
 
 msgid "Imports new and updates existing products from XML files"
 msgstr ""
@@ -181,7 +179,7 @@ msgstr ""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr "Недопустимые символы в названии класса \"%1$s\""
+msgstr "Недопустимі символы в назві класу \"%1$s\""
 
 #, php-format
 msgid "Invalid message: %1$s"
@@ -193,14 +191,14 @@ msgstr ""
 
 #, php-format
 msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
-msgstr "Неверные строки товара в \"%1$s\": %2$d/%3$d"
+msgstr ""
 
 #, php-format
 msgid "Invalid product type \"%1$s\""
 msgstr ""
 
 msgid "Log cleanup"
-msgstr "Очистка журнала"
+msgstr ""
 
 #, php-format
 msgid "No \"catalog.code\" column in CSV mapping found"
@@ -219,7 +217,7 @@ msgid "No XML file \"%1$s\" found"
 msgstr ""
 
 msgid "Optimizes the catalog index for searching products"
-msgstr "Оптимизация индекса каталога для поиска товаров"
+msgstr ""
 
 msgid "Optimizes the index for searching products faster"
 msgstr ""
@@ -235,44 +233,44 @@ msgid "Parent node for code \"%1$s\" not found"
 msgstr ""
 
 msgid "Process order delivery services"
-msgstr "Обработка служб доставки заказов"
+msgstr ""
 
 msgid "Process subscriptions initially"
 msgstr ""
 
 msgid "Product export"
-msgstr "Экспорт товаров"
+msgstr ""
 
 msgid "Product import CSV"
-msgstr "Импорт товаров CSV"
+msgstr ""
 
 msgid "Product import XML"
 msgstr ""
 
 msgid "Product site map"
-msgstr "Карта товаров сайта"
+msgstr ""
 
 msgid "Products bought together"
-msgstr "Сопутствующие друг другу товары"
+msgstr ""
 
 msgid "Rebuilds the catalog index for searching products"
-msgstr "Перестроение индекса каталога для поиска товаров"
+msgstr ""
 
 msgid "Rebuilds the index for searching products"
 msgstr ""
 
 msgid "Removes the expired entries from the cache"
-msgstr "Удаление устаревших записей из кеша"
+msgstr ""
 
 msgid ""
 "Removes the old log entries from the database and archives them (optional)"
-msgstr "Удаление старых записей журнала из базы данных и их архивирование (по выбору)"
+msgstr ""
 
 msgid "Removes unfinished orders"
-msgstr "Удаление незавершённых заказов"
+msgstr ""
 
 msgid "Removes unpaid orders"
-msgstr "Удаление неоплаченных заказов"
+msgstr ""
 
 msgid "Renews subscriptions at next date"
 msgstr ""
@@ -287,7 +285,7 @@ msgstr ""
 
 #, php-format
 msgid "Required mapping key \"%1$s\" is missing or contains no array"
-msgstr "Обязателный ключ разметки \"%1$s\" невернен или не содержит массива"
+msgstr ""
 
 msgid "Rescale product images"
 msgstr ""
@@ -300,7 +298,7 @@ msgid "Scaling media item \"%1$s\" failed: %2$s"
 msgstr ""
 
 msgid "Sends paid orders to the ERP system or logistic partner"
-msgstr "Отправка оплаченных заказов в систему ERP или партнёру по логистике"
+msgstr ""
 
 #, php-format
 msgid "Started attribute import from \"%1$s\""
@@ -344,7 +342,7 @@ msgstr ""
 
 #, php-format
 msgid "Started product import from \"%1$s\" (%2$s)"
-msgstr "Начат импорт товаров из \"%1$s\" (%2$s)"
+msgstr ""
 
 #, php-format
 msgid "Started product import from file \"%1$s\""
@@ -397,11 +395,11 @@ msgstr ""
 
 #, php-format
 msgid "Unable to import product with code \"%1$s\": %2$s"
-msgstr "Невозможно импортировать товар с кодом \"%1$s\": %2$s"
+msgstr ""
 
 #, php-format
 msgid "Unable to move imported file"
-msgstr "Невозможно переместить импортированный файл"
+msgstr ""
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
@@ -416,8 +414,8 @@ msgstr ""
 
 #, php-format
 msgid "aimeos-products-%d.xml"
-msgstr "aimeos-products-%d.xml"
+msgstr ""
 
 #, php-format
 msgid "aimeos-sitemap-%d.xml"
-msgstr "aimeos-sitemap-%d.xml"
+msgstr ""

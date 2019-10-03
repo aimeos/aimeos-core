@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-02 10:32+0200\n"
-"PO-Revision-Date: 2019-07-02 08:32+0000\n"
+"POT-Creation-Date: 2019-10-03 10:00+0200\n"
+"PO-Revision-Date: 2019-10-03 08:06+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -395,6 +395,10 @@ msgstr ""
 
 #, php-format
 msgid "Unable to import product with code \"%1$s\": %2$s"
+msgstr ""
+
+#, php-format
+msgid "Unable to move imported file"
 msgstr ""
 
 #, php-format

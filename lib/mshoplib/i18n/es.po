@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-01 19:28+0200\n"
-"PO-Revision-Date: 2019-07-01 17:29+0000\n"
+"POT-Creation-Date: 2019-10-03 10:00+0200\n"
+"PO-Revision-Date: 2019-10-03 08:03+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -119,6 +119,10 @@ msgid "Class \"%1$s\" not available"
 msgstr "La clase \"%1$s\" no está disponible"
 
 #, php-format
+msgid "Code \"%1$s\" must not be longer than %2$d characters"
+msgstr ""
+
+#, php-format
 msgid "Code \"%1$s\" must not be longer than 32 characters"
 msgstr ""
 
@@ -179,8 +183,24 @@ msgid "Duplicate coupon code \"%1$s\""
 msgstr "Código de cupón \"%1$s\" duplicado"
 
 #, php-format
+msgid "Expanding \"%1$s\" node failed"
+msgstr ""
+
+#, php-format
+msgid "File or directory \"%1$s\" doesn't exist"
+msgstr ""
+
+#, php-format
 msgid "File system manager object not available"
 msgstr "Objeto del administrador del sistema de archivos no disponible"
+
+#, php-format
+msgid "Finished order status import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished order status import from file \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
@@ -272,6 +292,9 @@ msgstr "Caracteres no válidos en el tipo de nombre \"%1$s\""
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
 msgstr "Configuración de proveedor de cupón \"%1$s\" no válida, necesita \"%2$s\""
+
+msgid "Invalid delivery type"
+msgstr ""
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
@@ -407,6 +430,10 @@ msgid ""
 "Newly created site can not be saved using method \"saveItem()\". Try using "
 "method \"insertItem()\" instead."
 msgstr "El sitio recién creado no puede guardarse usando el método \"saveItem()\". Inténtelo mejor con el método \"insertItem()\". "
+
+#, php-format
+msgid "No XML file \"%1$s\" found"
+msgstr ""
 
 #, php-format
 msgid "No bought voucher for code \"%1$s\" available"
@@ -716,6 +743,14 @@ msgid "Site for code \"%1$s\" not found"
 msgstr "No se ha encontrado el sitio para el código \"%1$s\""
 
 #, php-format
+msgid "Started order status import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Started order status import from file \"%1$s\""
+msgstr ""
+
+#, php-format
 msgid "The algorithm \"%1$s\" is not supported"
 msgstr "El algoritmo \"%1$s\" no está soportado"
 
@@ -781,6 +816,10 @@ msgstr "No se ha podido invocar el método \"%1$s\""
 
 #, php-format
 msgid "Unable to create order XML file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
 msgstr ""
 
 #, php-format
