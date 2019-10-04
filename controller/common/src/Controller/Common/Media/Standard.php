@@ -254,6 +254,46 @@ class Standard
 		$list = [];
 		$config = $this->context->getConfig();
 
+		/** controller/common/media/standard/previews
+		 * Scaling options for preview images
+		 *
+		 * For responsive images, several preview images of different sizes are
+		 * generated. This setting controls how many preview images are generated,
+		 * what's their maximum width and height and if the given width/height is
+		 * enforced by cropping images that doesn't fit.
+		 *
+		 * The setting must consist of a list image size definitions like:
+		 *
+		 *  [
+		 *    ['maxwidth' => 240, 'maxheight' => 320, 'force-size' => true],
+		 *    ['maxwidth' => 720, 'maxheight' => 960, 'force-size' => false],
+		 *    ['maxwidth' => 2160, 'maxheight' => 2880, 'force-size' => false],
+		 *  ]
+		 *
+		 * "maxwidth" sets the maximum allowed width of the image whereas
+		 * "maxheight" does the same for the maximum allowed height. If both
+		 * values are given, the image is scaled proportionally so it fits into
+		 * the box defined by both values. In case the image has different
+		 * proportions than the specified ones and "force-size" is false, the
+		 * image is resized to fit entirely into the specified box. One side of
+		 * the image will be shorter than it would be possible by the specified
+		 * box.
+		 *
+		 * If "force-size" is true, scaled images that doesn't fit into the
+		 * given maximum width/height are centered and then cropped. By default,
+		 * images aren't cropped.
+		 *
+		 * The values for "maxwidth" and "maxheight" can also be null or not
+		 * used. In that case, the width or height or both is unbound. If none
+		 * of the values are given, the image won't be scaled at all. If only
+		 * one value is set, the image will be scaled exactly to the given width
+		 * or height and the other side is scaled proportionally.
+		 *
+		 * @param array List of image size definitions
+		 * @category Developer
+		 * @category User
+		 * @since 2019.07
+		 */
 		foreach( $config->get( 'controller/common/media/standard/previews', [] ) as $entry )
 		{
 			$maxwidth = ( isset( $entry['maxwidth'] ) ? (int) $entry['maxwidth'] : null );
