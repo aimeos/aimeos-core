@@ -124,27 +124,28 @@
 		<confdoc keyprefix="admin/jqadm" wikiprefix="Configuration/Core" keyparts="1"
 			optfile="${extdir}/ai-admin-jqadm/admin/jqadm/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/ext-jqadm-admin-jqadm.wiki">
-			<fileset dir="${extdir}/ai-admin-jqadm/admin/jqadm" expandsymboliclinks="true" >
-				<include name="templates/**/*.php" />
+			<fileset dir="${extdir}/ai-admin-jqadm" expandsymboliclinks="true" >
+				<include name="admin/jqadm/templates/**/*.php" />
+				<include name="admin/jqadm/src/**/*.php" />
 				<include name="config/**/*.php" />
-				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
 		<confdoc keyprefix="admin/jsonadm" wikiprefix="Configuration/Core" keyparts="0"
 			optfile="${extdir}/ai-admin-jsonadm/admin/jsonadm/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/ext-jsonadm-admin-jsonadm.wiki">
-			<fileset dir="${extdir}/ai-admin-jsonadm/admin/jsonadm" expandsymboliclinks="true" >
-				<include name="templates/**/*.php" />
+			<fileset dir="${extdir}/ai-admin-jsonadm" expandsymboliclinks="true" >
+				<include name="admin/jsonadm/templates/**/*.php" />
+				<include name="admin/jsonadm/src/**/*.php" />
 				<include name="config/**/*.php" />
-				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
 		<confdoc keyprefix="client/html" wikiprefix="Configuration/Core" keyparts="1"
 			optfile="${extdir}/ai-client-html/client/html/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/ext-html-client-html.wiki">
-			<fileset dir="${extdir}/ai-client-html/client/html" expandsymboliclinks="true" >
-				<include name="templates/**/*.php" />
-				<include name="src/**/*.php" />
+			<fileset dir="${extdir}/ai-client-html" expandsymboliclinks="true" >
+				<include name="client/html/templates/**/*.php" />
+				<include name="client/html/src/**/*.php" />
+				<include name="config/**/*.php" />
 			</fileset>
 		</confdoc>
 		<confdoc keyprefix="client/jsonapi" wikiprefix="Configuration/Core" keyparts="1"
@@ -166,16 +167,18 @@
 		<confdoc keyprefix="controller/jobs" wikiprefix="Configuration/Core" keyparts="0"
 			optfile="${extdir}/ai-controller-jobs/controller/jobs/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/ext-jobs-controller-jobs.wiki">
-			<fileset dir="${extdir}/ai-controller-jobs/controller/jobs" expandsymboliclinks="true" >
-				<include name="templates/**/*.php" />
-				<include name="src/**/*.php" />
+			<fileset dir="${extdir}/ai-controller-jobs" expandsymboliclinks="true" >
+				<include name="controller/jobs/templates/**/*.php" />
+				<include name="controller/jobs/src/**/*.php" />
+				<include name="config/**/*.php" />
 			</fileset>
 		</confdoc>
 		<confdoc keyprefix="controller/frontend" wikiprefix="Configuration/Core" keyparts="0"
 			optfile="${extdir}/ai-controller-frontend/controller/frontend/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/ext-frontend-controller-frontend.wiki">
-			<fileset dir="${extdir}/ai-controller-frontend/controller/frontend/src" expandsymboliclinks="true" >
-				<include name="**/*.php" />
+			<fileset dir="${extdir}/ai-controller-frontend" expandsymboliclinks="true" >
+				<include name="controller/frontend/src/**/*.php" />
+				<include name="config/**/*.php" />
 			</fileset>
 		</confdoc>
 	</target>
