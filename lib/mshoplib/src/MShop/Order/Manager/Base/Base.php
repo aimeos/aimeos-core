@@ -291,6 +291,18 @@ abstract class Base
 		$map = [];
 		$manager = $this->getObject()->getSubManager( 'coupon' );
 
+		$productMap = [];
+		foreach( $products as $baseId => $arr )
+		{
+			if( !isset( $productMap[$baseId] ) ) {
+				$productMap[$baseId] = [];
+			}
+			foreach( $arr as $order => $product )
+			{
+				$productMap[$baseId][$product->getId()] = $product;
+			}
+		}
+
 		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.coupon.baseid', $baseIds ) );
 		$sort = [$criteria->sort( '+', 'order.base.coupon.baseid' ), $criteria->sort( '+', 'order.base.coupon.code' )];
@@ -302,8 +314,8 @@ abstract class Base
 				$map[$item->getBaseId()][$item->getCode()] = [];
 			}
 
-			if( $item->getProductId() !== null && isset( $products[$item->getBaseId()][$item->getProductId()] ) ) {
-				$map[$item->getBaseId()][$item->getCode()][] = $products[$item->getBaseId()][$item->getProductId()];
+			if( $item->getProductId() !== null && isset( $productMap[$item->getBaseId()][$item->getProductId()] ) ) {
+				$map[$item->getBaseId()][$item->getCode()][] = $productMap[$item->getBaseId()][$item->getProductId()];
 			}
 		}
 
@@ -471,10 +483,52 @@ abstract class Base
 	protected function loadFresh( $id, \Aimeos\MShop\Price\Item\Iface $price,
 		\Aimeos\MShop\Locale\Item\Iface $localeItem, $row, $parts )
 	{
-		$products = $addresses = $services = [];
+		$products = $coupons = $addresses = $services = [];
 
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) {
-			$products = $this->loadProducts( $id, true );
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT
+			|| $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON
+		) {
+			if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON ) {
+				// do not remove ids yet, because we need them later
+				$products = $this->loadProducts( $id, false );
+			} else {
+				$products = $this->loadProducts( $id, true );
+			}
+		}
+
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON ) {
+			$coupons = $this->loadCoupons( $id, false, $products );
+			
+			// add coupon products later
+			$couponProductIds = [];
+			foreach( $coupons as $code => $couponProducts ) {
+				foreach( $couponProducts as $cp ) {
+					$couponProductIds[] = $cp->getId();
+				}
+			}
+
+			foreach( $products as $pos => $p ) {
+				if( in_array( $p->getId(), $couponProductIds ) ) {
+					unset( $products[$pos] );
+				}
+			}
+
+			// fresh products
+			foreach( $products as $item ) {
+				// remove attribute ids
+				$attributes = [];
+				foreach( $item->getAttributes() as $attribute ) {
+					$attributes[] = $attribute;
+					$attribute->setParentId( null );
+					$attribute->setId( null );
+				}
+				$item->setAttributes( $attributes );
+
+				// remove item ids
+				$item->setPosition( null );
+				$item->setBaseId( null );
+				$item->setId( null );
+			}
 		}
 
 		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) {
@@ -491,6 +545,11 @@ abstract class Base
 
 		foreach( $products as $item ) {
 			$basket->addProduct( $item );
+		}
+		
+		foreach( $coupons as $code => $item ) {
+			//$basket->deleteCoupon( $code );
+			$basket->addCoupon( $code, $item );
 		}
 
 		foreach( $addresses as $item ) {
