@@ -485,14 +485,14 @@ abstract class Base
 	{
 		$products = $coupons = $addresses = $services = [];
 
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT
-			|| $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON
-		) {
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) {
 			$products = $this->loadProducts( $id, true );
 		}
 
 		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON ) {
 			// load coupons with product array containing product ids for coupon/product matching
+			// not very efficient, a better solution might be considered for 2020.01 release
+			// see https://github.com/aimeos/aimeos-core/pull/175 for discussion
 			$coupons = $this->loadCoupons( $id, true, $this->loadProducts( $id, false ) );
 		}
 
