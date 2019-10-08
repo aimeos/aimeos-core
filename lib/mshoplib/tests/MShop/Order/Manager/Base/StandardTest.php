@@ -515,7 +515,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
 
 
-		$this->assertEquals( 0, count( $order->getCoupons() ) );
+		$this->assertEquals( 2, count( $order->getCoupons() ) );
 
 		foreach( $order->getAddresses() as $address )
 		{
@@ -583,8 +583,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON, true );
 
 		$this->assertEquals( [], $order->getAddresses() );
-		$this->assertEquals( [], $order->getCoupons() );
-		$this->assertEquals( [], $order->getProducts() );
+		$this->assertGreaterThan( 0, count( $order->getCoupons() ) );
+		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
 		$this->assertEquals( [], $order->getServices() );
 	}
 
@@ -818,22 +818,25 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No order found' );
 		}
 
-		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
+		$parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL ^  \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON;
+		$basket = $this->object->load( $item->getId(), $parts, true );
 
-		$this->assertEquals( '672.00', $basket->getPrice()->getValue() );
-		$this->assertEquals( '37.00', $basket->getPrice()->getCosts() );
+		$this->assertEquals( '0.00', $basket->getPrice()->getValue() );
+		$this->assertEquals( '5.00', $basket->getPrice()->getCosts() );
 		$this->assertEquals( 0, count( $basket->getCoupons() ) );
 
+		$productBasket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
+
 		$basket->addCoupon( 'CDEF' );
-		$basket->addCoupon( '5678', $basket->getProducts() );
+		$basket->addCoupon( '5678', $productBasket->getProducts() );
 		$this->assertEquals( 2, count( $basket->getCoupons() ) );
 
 		$this->object->store( $basket );
 		$newBasket = $this->object->load( $basket->getId() );
 		$this->object->deleteItem( $newBasket->getId() );
 
-		$this->assertEquals( '1344.00', $newBasket->getPrice()->getValue() );
-		$this->assertEquals( '64.00', $newBasket->getPrice()->getCosts() );
+		$this->assertEquals( '672.00', $newBasket->getPrice()->getValue() );
+		$this->assertEquals( '32.00', $newBasket->getPrice()->getCosts() );
 		$this->assertEquals( '5.00', $newBasket->getPrice()->getRebate() );
 		$this->assertEquals( 2, count( $newBasket->getCoupons() ) );
 	}
