@@ -300,6 +300,12 @@ abstract class Base
 			foreach( $arr as $order => $product )
 			{
 				$productMap[$baseId][$product->getId()] = $product;
+				if( $fresh === true )
+				{
+					$product->setPosition( null );
+					$product->setBaseId( null );
+					$product->setId( null );
+				}
 			}
 		}
 
