@@ -488,47 +488,12 @@ abstract class Base
 		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT
 			|| $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON
 		) {
-			if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON ) {
-				// do not remove ids yet, because we need them later
-				$products = $this->loadProducts( $id, false );
-			} else {
-				$products = $this->loadProducts( $id, true );
-			}
+			$products = $this->loadProducts( $id, true );
 		}
 
 		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON ) {
-			$coupons = $this->loadCoupons( $id, false, $products );
-			
-			// add coupon products later
-			$couponProductIds = [];
-			foreach( $coupons as $code => $couponProducts ) {
-				foreach( $couponProducts as $cp ) {
-					$couponProductIds[] = $cp->getId();
-				}
-			}
-
-			foreach( $products as $pos => $p ) {
-				if( in_array( $p->getId(), $couponProductIds ) ) {
-					unset( $products[$pos] );
-				}
-			}
-
-			// fresh products
-			foreach( $products as $item ) {
-				// remove attribute ids
-				$attributes = [];
-				foreach( $item->getAttributes() as $attribute ) {
-					$attributes[] = $attribute;
-					$attribute->setParentId( null );
-					$attribute->setId( null );
-				}
-				$item->setAttributes( $attributes );
-
-				// remove item ids
-				$item->setPosition( null );
-				$item->setBaseId( null );
-				$item->setId( null );
-			}
+			// load coupons with product array containing product ids for coupon/product matching
+			$coupons = $this->loadCoupons( $id, true, $this->loadProducts( $id, false ) );
 		}
 
 		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) {
@@ -539,16 +504,16 @@ abstract class Base
 			$services = $this->loadServices( $id, true );
 		}
 
-
 		$basket = $this->createItemBase( $price, $localeItem, $row );
 		$basket->setId( null );
 
 		foreach( $products as $item ) {
-			$basket->addProduct( $item );
+			if( !($item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) ) {
+				$basket->addProduct( $item );
+			}
 		}
-		
+
 		foreach( $coupons as $code => $item ) {
-			//$basket->deleteCoupon( $code );
 			$basket->addCoupon( $code, $item );
 		}
 
