@@ -523,7 +523,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
 
 
-		$this->assertEquals( 0, count( $order->getCoupons() ) );
+		$this->assertEquals( 2, count( $order->getCoupons() ) );
 
 		foreach( $order->getAddresses() as $list )
 		{
@@ -594,7 +594,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON, true );
 
 		$this->assertEquals( [], $order->getAddresses() );
-		$this->assertEquals( [], $order->getCoupons() );
+		$this->assertEquals( 2, count( $order->getCoupons() ) );
 		$this->assertEquals( [], $order->getProducts() );
 		$this->assertEquals( [], $order->getServices() );
 	}
@@ -632,7 +632,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$pos = 0;
 		$products = $basket->getProducts();
-		$this->assertEquals( 4, count( $products ) );
+		$this->assertEquals( 2, count( $products ) );
 
 		foreach( $products as $product )
 		{
@@ -822,18 +822,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testLoadStoreCoupons()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
+		$search->setConditions( $search->compare( '==', 'order.base.price', '53.50' ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No order found' );
 		}
 
-		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
+		$parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL ^  \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON;
+		$basket = $this->object->load( $item->getId(), $parts, true );
 
-		$this->assertEquals( '672.00', $basket->getPrice()->getValue() );
-		$this->assertEquals( '37.00', $basket->getPrice()->getCosts() );
+		$this->assertEquals( '58.50', $basket->getPrice()->getValue() );
+		$this->assertEquals( '6.50', $basket->getPrice()->getCosts() );
 		$this->assertEquals( 0, count( $basket->getCoupons() ) );
+
+		$productBasket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
 
 		$basket->addCoupon( 'CDEF' );
 		$basket->addCoupon( '90AB' );
@@ -843,9 +846,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$newBasket = $this->object->load( $basket->getId() );
 		$this->object->deleteItem( $newBasket->getId() );
 
-		$this->assertEquals( '601.60', $newBasket->getPrice()->getValue() );
-		$this->assertEquals( '32.00', $newBasket->getPrice()->getCosts() );
-		$this->assertEquals( '70.40', $newBasket->getPrice()->getRebate() );
+		$this->assertEquals( '52.50', $newBasket->getPrice()->getValue() );
+		$this->assertEquals( '1.50', $newBasket->getPrice()->getCosts() );
+		$this->assertEquals( '6.00', $newBasket->getPrice()->getRebate() );
 		$this->assertEquals( 2, count( $newBasket->getCoupons() ) );
 	}
 
