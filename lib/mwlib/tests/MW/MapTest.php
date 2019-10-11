@@ -12,6 +12,20 @@ namespace Aimeos\MW;
 
 class MapTest extends \PHPUnit\Framework\TestCase
 {
+	public function testClear()
+	{
+		$c = new Map(['foo', 'bar']);
+		$this->assertCount(0, $c->clear());
+	}
+
+	public function testCopy()
+	{
+		$c = new Map(['foo', 'bar']);
+		$cp = $c->copy();
+		$c->clear();
+		$this->assertCount(2, $cp);
+	}
+
 	public function testFirstReturnsFirstItemInMap()
 	{
 		$c = new Map(['foo', 'bar']);

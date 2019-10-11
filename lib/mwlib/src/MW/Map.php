@@ -103,7 +103,7 @@ class Map implements MapIface
 	public function clear()
 	{
 		$this->items = [];
-		return this;
+		return $this;
 	}
 
 
@@ -155,7 +155,7 @@ class Map implements MapIface
 	public function diff( iterable $items, callable $callback = null ) : MapIface
 	{
 		if( $callback ) {
-			return new static( array_diff( $this->items, $this->getArray( $items ), $callback ) );
+			return new static( array_udiff( $this->items, $this->getArray( $items ), $callback ) );
 		}
 
 		return new static( array_diff( $this->items, $this->getArray( $items ) ) );
@@ -391,7 +391,7 @@ class Map implements MapIface
 		$keys = array_keys( $this->items );
 		$items = array_map( $callback, $this->items, $keys );
 
-		return new static( array_combine( $keys, $items ) );
+		return new static( array_combine( $keys, $items ) ?: [] );
 	}
 
 
@@ -741,7 +741,7 @@ class Map implements MapIface
 			return $items;
 		} elseif( $items instanceof self ) {
 			return $items->toArray();
-		} elseif( $items instanceof iterable ) {
+		} elseif( $items instanceof \Traversable ) {
 			return iterator_to_array( $items );
 		}
 
