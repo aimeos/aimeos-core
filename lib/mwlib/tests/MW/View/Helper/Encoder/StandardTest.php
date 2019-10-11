@@ -59,6 +59,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testTransformAttrArray()
+	{
+		$enc = $this->object->transform();
+
+		$this->assertEquals( '[&quot;\u0026quot;&quot;]', $enc->attr( ['&quot;'] ) );
+	}
+
+
+	public function testTransformAttrObject()
+	{
+		$enc = $this->object->transform();
+
+		$this->assertEquals( '{&quot;key&quot;:&quot;\u0026quot;&quot;}', $enc->attr( (object) ['key' => '&quot;'] ) );
+	}
+
+
 	public function testTransformHtmlTrusted()
 	{
 		$enc = $this->object->transform();
@@ -83,6 +99,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testTransformHtmlArray()
+	{
+		$enc = $this->object->transform();
+
+		$this->assertEquals( '[&quot;\u0026quot;&quot;]', $enc->html( ['&quot;'] ) );
+	}
+
+
+	public function testTransformHtmlObject()
+	{
+		$enc = $this->object->transform();
+
+		$this->assertEquals( '{&quot;key&quot;:&quot;\u0026quot;&quot;}', $enc->html( (object) ['key' => '&quot;'] ) );
+	}
+
+
 	public function testTransformXmlTrusted()
 	{
 		$enc = $this->object->transform();
@@ -104,6 +136,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$enc = $this->object->transform();
 
 		$this->assertEquals( 'a ]]&gt;&lt;b&gt;text&lt;/b&gt;', $enc->xml( 'a ]]><b>text</b>' ) );
+	}
+
+
+	public function testTransformXmlArray()
+	{
+		$enc = $this->object->transform();
+
+		$this->assertEquals( '[&quot;\u0026quot;&quot;]', $enc->html( ['&quot;'] ) );
+	}
+
+
+	public function testTransformXmlObject()
+	{
+		$enc = $this->object->transform();
+
+		$this->assertEquals( '{&quot;key&quot;:&quot;\u0026quot;&quot;}', $enc->html( (object) ['key' => '&quot;'] ) );
 	}
 
 

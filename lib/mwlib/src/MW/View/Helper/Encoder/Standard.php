@@ -44,7 +44,9 @@ class Standard
 	 */
 	public function attr( $value, $trust = self::TAINT, $replace = '' )
 	{
-		if( $replace != '' ) {
+		if( !is_scalar( $value ) ) {
+			$value = json_encode( $value, JSON_HEX_AMP );
+		} elseif( $replace != '' ) {
 			$value = str_replace( [" ", "\v", "\t", "\r", "\n", "\f"], $replace, $value );
 		}
 
@@ -65,6 +67,10 @@ class Standard
 	 */
 	public function html( $value, $trust = self::TAINT )
 	{
+		if( !is_scalar( $value ) ) {
+			$value = json_encode( $value, JSON_HEX_AMP );
+		}
+
 		if( $trust === self::TRUST ) {
 			return $value;
 		}
@@ -83,6 +89,10 @@ class Standard
 	 */
 	public function xml( $value, $trust = self::TAINT )
 	{
+		if( !is_scalar( $value ) ) {
+			$value = json_encode( $value, JSON_HEX_AMP );
+		}
+
 		if( $trust === self::TRUST ) {
 			return $value;
 		}
