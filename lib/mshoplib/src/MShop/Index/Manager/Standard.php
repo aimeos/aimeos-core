@@ -363,36 +363,6 @@ class Standard
 
 
 	/**
-	 * Adds a new product to the storage or updates an existing one.
-	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item that should be saved to the storage
-	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Product\Item\Iface Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
-	{
-		$item = parent::saveItem( $item, $fetch );
-		$this->rebuildIndex( [$item->getId() => $item] );
-		return $item;
-	}
-
-
-	/**
-	 * Adds or updates a list of product items.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $items List of item object whose data should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface[] Saved item objects
-	 */
-	public function saveItems( array $items, $fetch = true )
-	{
-		$items = parent::saveItems( $items, $fetch );
-		$this->rebuildIndex( $items );
-		return $items;
-	}
-
-
-	/**
 	 * Searches for items matching the given criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
