@@ -35,4 +35,13 @@ interface Iface
 	 * @throws \Aimeos\MShop\Locale\Exception If no locale item is found
 	 */
 	public function bootstrap( $site, $lang = '', $currency = '', $active = true, $level = null, $bare = false );
+
+	/**
+	 * Adds or updates an item object.
+	 *
+	 * @param \Aimeos\MShop\Locale\Item\Iface $item Item object whose data should be saved
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Locale\Item\Iface $item Updated item including the generated ID
+	 */
+	public function saveItem( \Aimeos\MShop\Locale\Item\Iface $item, $fetch = true );
 }

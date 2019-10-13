@@ -103,16 +103,6 @@ interface Iface
 	public function getSubManager( $domain, $name = null );
 
 	/**
-	 * Adds or updates an item object.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object whose data should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Saved item object
-	 * @todo 2020.01 Move to concrete manager interfaces
-	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true );
-
-	/**
 	 * Adds or updates a list of item objects.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $items List of item object whose data should be saved

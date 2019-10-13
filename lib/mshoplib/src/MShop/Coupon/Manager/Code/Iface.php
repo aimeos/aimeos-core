@@ -30,7 +30,6 @@ interface Iface
 	 */
 	public function decrease( $couponCode, $amount );
 
-
 	/**
 	 * Increases the counter of the coupon code.
 	 *
@@ -39,4 +38,13 @@ interface Iface
 	 * @return \Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
 	public function increase( $couponCode, $amount );
+
+	/**
+	 * Saves a modified code object to the storage.
+	 *
+	 * @param \Aimeos\MShop\Coupon\Item\Code\Iface $item Coupon code object
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface $item Updated item including the generated ID
+	 */
+	public function saveItem( \Aimeos\MShop\Coupon\Item\Code\Iface $item, $fetch = true );
 }

@@ -20,4 +20,12 @@ namespace Aimeos\MShop\Subscription\Manager;
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface
 {
+	/**
+	 * Creates a one-time subscription in the storage from the given invoice object.
+	 *
+	 * @param \Aimeos\MShop\Subscription\Item\Iface $item Subscription item with necessary values
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Subscription\Item\Iface Updated item including the generated ID
+	 */
+	public function saveItem( \Aimeos\MShop\Subscription\Item\Iface $item, $fetch = true );
 }

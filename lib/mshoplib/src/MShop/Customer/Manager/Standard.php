@@ -452,10 +452,8 @@ class Standard
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Customer\Item\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Customer\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( \Aimeos\MShop\Customer\Item\Iface::class, $item );
-
 		$item = $this->addGroups( $item );
 
 		if( !$item->isModified() )

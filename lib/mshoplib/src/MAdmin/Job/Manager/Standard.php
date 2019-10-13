@@ -162,10 +162,8 @@ class Standard
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MAdmin\Job\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( \Aimeos\MAdmin\Job\Item\Iface::class, $item );
-
 		if( !$item->isModified() ) {
 			return $item;
 		}

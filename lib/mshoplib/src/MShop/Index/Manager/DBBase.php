@@ -161,7 +161,7 @@ abstract class DBBase
 	 * @param boolean $fetch True if the new ID should be set in the item
 	 * @return \Aimeos\MShop\Product\Item\Iface Saved item
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Product\Item\Iface $item, $fetch = true )
 	{
 		$item = $this->manager->saveItem( $item, true );
 		$this->rebuildIndex( [$item->getId() => $item] );

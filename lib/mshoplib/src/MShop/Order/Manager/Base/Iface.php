@@ -70,6 +70,15 @@ interface Iface
 	public function load( $baseId, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, $fresh = false, $default = false );
 
 	/**
+	 * Adds or updates an order base item in the storage.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $item Order base object (sub-items are not saved)
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface $item Updated item including the generated ID
+	 */
+	public function saveItem( \Aimeos\MShop\Order\Item\Base\Iface $item, $fetch = true );
+
+	/**
 	 * Saves the complete basket to the storage including the items attached.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object containing all information

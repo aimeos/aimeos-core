@@ -95,12 +95,10 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item Property item which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\MShop\Common\Item\Property\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Property\Iface $item, $fetch = true )
 	{
-		self::checkClass( \Aimeos\MShop\Common\Item\Property\Iface::class, $item );
-
 		if( !$item->isModified() ) {
 			return $item;
 		}

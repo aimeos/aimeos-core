@@ -392,10 +392,8 @@ class Standard
 	 * @return \Aimeos\MShop\Price\Item\Iface Updated item including the generated ID
 	 * @throws \Aimeos\MShop\Price\Exception If price couldn't be saved
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Price\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( \Aimeos\MShop\Price\Item\Iface::class, $item );
-
 		if( !$item->isModified() )
 		{
 			$item = $this->savePropertyItems( $item, 'price', $fetch );

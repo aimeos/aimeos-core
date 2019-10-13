@@ -21,4 +21,12 @@ namespace Aimeos\MShop\Common\Manager\Type;
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface
 {
+	/**
+	 * Adds or updates a type item object.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Type\Iface $item Type item object which should be saved
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface $item Updated item including the generated ID
+	 */
+	public function saveItem( \Aimeos\MShop\Common\Item\Type\Iface $item, $fetch = true );
 }

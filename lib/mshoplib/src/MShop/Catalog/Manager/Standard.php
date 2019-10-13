@@ -489,10 +489,8 @@ class Standard extends Base
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Catalog\Item\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Catalog\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( \Aimeos\MShop\Catalog\Item\Iface::class, $item );
-
 		if( !$item->isModified() )
 		{
 			$item = $this->saveListItems( $item, 'catalog', $fetch );

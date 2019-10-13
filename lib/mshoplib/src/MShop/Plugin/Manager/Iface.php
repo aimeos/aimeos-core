@@ -36,4 +36,13 @@ interface Iface extends \Aimeos\MShop\Common\Manager\Iface
 	 * @return \Aimeos\MShop\Plugin\Manager\Iface Manager object for chaining method calls
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $publisher, $type );
+
+	/**
+	 * Saves a new or modified plugin to the storage.
+	 *
+	 * @param \Aimeos\MShop\Plugin\Item\Iface $item Plugin item
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Plugin\Item\Iface $item Updated item including the generated ID
+	 */
+	public function saveItem( \Aimeos\MShop\Plugin\Item\Iface $item, $fetch = true );
 }

@@ -22,4 +22,12 @@ interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface,
 		\Aimeos\MShop\Common\Manager\ListRef\Iface, \Aimeos\MShop\Common\Manager\PropertyRef\Iface
 {
+	/**
+	 * Saves an attribute item to the storage.
+	 *
+	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Attribute\Item\Iface $item Updated item including the generated ID
+	 */
+	public function saveItem( \Aimeos\MShop\Attribute\Item\Iface $item, $fetch = true );
 }

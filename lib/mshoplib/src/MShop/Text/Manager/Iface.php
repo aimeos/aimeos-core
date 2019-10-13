@@ -21,4 +21,13 @@ namespace Aimeos\MShop\Text\Manager;
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\ListRef\Iface
 {
+	/**
+	 * Updates or adds a text item object.
+	 * This method doesn't update the type string that belongs to the type ID
+	 *
+	 * @param \Aimeos\MShop\Text\Item\Iface $item Text item which should be saved
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Text\Item\Iface Updated item including the generated ID
+	 */
+	public function saveItem( \Aimeos\MShop\Text\Item\Iface $item, $fetch = true );
 }

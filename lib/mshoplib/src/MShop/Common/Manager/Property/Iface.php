@@ -20,4 +20,12 @@ namespace Aimeos\MShop\Common\Manager\Property;
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface
 {
+	/**
+	 * Inserts the new property items for product item
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item Property item which should be saved
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Property\Iface $item Updated item including the generated ID
+	 */
+	public function saveItem( \Aimeos\MShop\Common\Item\Property\Iface $item, $fetch = true );
 }

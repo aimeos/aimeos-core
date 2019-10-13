@@ -30,7 +30,6 @@ interface Iface
 	 */
 	public function getPath( $id, array $ref = [] );
 
-
 	/**
 	 * Returns a node and its descendants depending on the given resource.
 	 *
@@ -40,7 +39,6 @@ interface Iface
 	 * @return \Aimeos\MW\Tree\Node\Iface Site node, maybe with subnodes
 	 */
 	public function getTree( $id = null, array $ref = [], $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
-
 
 	/**
 	 * Adds a new item object.
@@ -52,7 +50,6 @@ interface Iface
 	 */
 	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, $parentId = null, $refId = null );
 
-
 	/**
 	 * Moves an existing item to the new parent in the storage.
 	 *
@@ -63,4 +60,13 @@ interface Iface
 	 * @return \Aimeos\MShop\Locale\Manager\Site\Iface Manager object for chaining method calls
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null );
+
+	/**
+	 * Adds a new site to the storage or updates an existing one.
+	 *
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item New site item for saving to the storage
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface $item Updated item including the generated ID
+	 */
+	public function saveItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, $fetch = true );
 }

@@ -208,10 +208,8 @@ class Standard
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, $fetch = true )
 	{
-		self::checkClass( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item );
-
 		if( $item->getId() === null ) {
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Newly created site can not be saved using method "saveItem()". Try using method "insertItem()" instead.' ) );
 		}

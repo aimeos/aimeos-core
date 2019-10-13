@@ -63,4 +63,13 @@ interface Iface
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null );
+
+	/**
+	 * Updates an item object.
+	 *
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Item object whose data should be saved
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Catalog\Item\Iface $item Updated item including the generated ID
+	 */
+	public function saveItem( \Aimeos\MShop\Catalog\Item\Iface $item, $fetch = true );
 }

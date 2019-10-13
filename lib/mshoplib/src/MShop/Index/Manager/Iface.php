@@ -59,4 +59,13 @@ interface Iface
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function rebuildIndex( array $items = [] );
+
+	/**
+	 * Stores a new item into the index
+	 *
+	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
+	 * @param boolean $fetch True if the new ID should be set in the item
+	 * @return \Aimeos\MShop\Product\Item\Iface Saved item
+	 */
+	public function saveItem( \Aimeos\MShop\Product\Item\Iface $item, $fetch = true );
 }

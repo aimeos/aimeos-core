@@ -29,4 +29,14 @@ interface Iface
 	 * @throws \Aimeos\MShop\Price\Exception if no price item is available
 	 */
 	public function getLowestPrice( array $priceItems, $quantity );
+
+	/**
+	 * Saves a price item object.
+	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item object
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Price\Item\Iface Updated item including the generated ID
+	 * @throws \Aimeos\MShop\Price\Exception If price couldn't be saved
+	 */
+	public function saveItem( \Aimeos\MShop\Price\Item\Iface $item, $fetch = true );
 }

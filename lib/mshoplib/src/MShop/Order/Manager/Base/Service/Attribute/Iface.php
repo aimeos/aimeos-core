@@ -21,4 +21,12 @@ namespace Aimeos\MShop\Order\Manager\Base\Service\Attribute;
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface
 {
+	/**
+	 * Adds or updates an order service attribute item to the storage.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface $item Order service attribute object
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface $item Updated item including the generated ID
+	 */
+	public function saveItem( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface $item, $fetch = true );
 }

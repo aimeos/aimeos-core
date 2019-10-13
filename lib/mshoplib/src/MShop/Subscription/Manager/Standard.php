@@ -259,10 +259,8 @@ class Standard
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Subscription\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( \Aimeos\MShop\Subscription\Item\Iface::class, $item );
-
 		if( $item->getOrderProductId() === null ) {
 			throw new \Aimeos\MShop\Subscription\Exception( 'Required order product ID is missing' );
 		}

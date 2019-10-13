@@ -30,4 +30,13 @@ interface Iface
 	 * @throws \Aimeos\MShop\Coupon\Exception If coupon model couldn't be found
 	 */
 	public function getProvider( \Aimeos\MShop\Coupon\Item\Iface $item, $code );
+
+	/**
+	 * Saves a coupon item to the storage.
+	 *
+	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon implementing the coupon interface
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Coupon\Item\Iface $item Updated item including the generated ID
+	 */
+	public function saveItem( \Aimeos\MShop\Coupon\Item\Iface $item, $fetch = true );
 }

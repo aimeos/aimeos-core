@@ -353,10 +353,8 @@ class Standard
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Order\Item\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Order\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( \Aimeos\MShop\Order\Item\Iface::class, $item );
-
 		if( $item->getBaseId() === null ) {
 			throw new \Aimeos\MShop\Order\Exception( 'Required order base ID is missing' );
 		}
