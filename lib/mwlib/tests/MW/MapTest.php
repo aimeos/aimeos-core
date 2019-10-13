@@ -316,7 +316,7 @@ class MapTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(['name' => 'Hello', 'id' => 1], $c->union(new Map(['name' => 'World', 'id' => 1]))->toArray());
 	}
 
-	public function testDiffMap()
+	public function testDiff()
 	{
 		$c = new Map(['id' => 1, 'first_word' => 'Hello']);
 		$this->assertEquals(['id' => 1], $c->diff(new Map(['first_word' => 'Hello', 'last_word' => 'World']))->toArray());
@@ -383,16 +383,46 @@ class MapTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals([1, 2, 'foo' => 'bar'], $result);
 	}
 
-	public function testIntersectMap()
+	public function testIntersec()
 	{
 		$c = new Map(['id' => 1, 'first_word' => 'Hello']);
-		$this->assertEquals(['first_word' => 'Hello'], $c->intersect(new Map(['first_world' => 'Hello', 'last_word' => 'World']))->toArray());
+		$i = new Map(['first_world' => 'Hello', 'last_word' => 'World']);
+		$this->assertEquals(['first_word' => 'Hello'], $c->intersect($i)->toArray());
+	}
+
+	public function testIntersecFunction()
+	{
+		$c = new Map(['id' => 1, 'first_word' => 'Hello', 'last_word' => 'World']);
+		$i = new Map(['first_world' => 'Hello', 'last_world' => 'world']);
+		$this->assertEquals(['first_word' => 'Hello', 'last_word' => 'World'], $c->intersect($i, 'strcasecmp')->toArray());
+	}
+
+	public function testIntersectAssoc()
+	{
+		$c = new Map(['id' => 1, 'name' => 'Mateus', 'age' => 18]);
+		$i = new Map(['name' => 'Mateus', 'firstname' => 'Mateus']);
+		$this->assertEquals(['name' => 'Mateus'], $c->intersectAssoc($i)->toArray());
+	}
+
+	public function testIntersecAssocFunction()
+	{
+		$c = new Map(['id' => 1, 'first_word' => 'Hello', 'last_word' => 'World']);
+		$i = new Map(['first_word' => 'hello', 'Last_word' => 'world']);
+		$this->assertEquals(['first_word' => 'Hello'], $c->intersectAssoc($i, 'strcasecmp')->toArray());
 	}
 
 	public function testIntersectKeys()
 	{
-		$c = new Map(['name' => 'Mateus', 'age' => 18]);
-		$this->assertEquals(['name' => 'Mateus'], $c->intersectKeys(new Map(['name' => 'Mateus', 'surname' => 'Guimaraes']))->toArray());
+		$c = new Map(['id' => 1, 'name' => 'Mateus', 'age' => 18]);
+		$i = new Map(['name' => 'Mateus', 'surname' => 'Guimaraes']);
+		$this->assertEquals(['name' => 'Mateus'], $c->intersectKeys($i)->toArray());
+	}
+
+	public function testIntersecKeysFunction()
+	{
+		$c = new Map(['id' => 1, 'first_word' => 'Hello', 'last_word' => 'World']);
+		$i = new Map(['First_word' => 'Hello', 'last_word' => 'world']);
+		$this->assertEquals(['first_word' => 'Hello', 'last_word' => 'World'], $c->intersectKeys($i, 'strcasecmp')->toArray());
 	}
 
 	public function testUnique()

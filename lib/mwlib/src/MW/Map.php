@@ -247,13 +247,11 @@ class Map implements MapIface
 					return $value;
 				}
 			}
-		}
-		elseif( ( $result = reset( $this->items ) ) !== false )
-		{
-			return $result;
+
+			return $default;
 		}
 
-		return $default;
+		return reset( $this->items ) ?: $default;
 	}
 
 
@@ -297,10 +295,15 @@ class Map implements MapIface
 	 * Intersect the map with the given items.
 	 *
 	 * @param iterable $items List of items
+	 * @param  callable|null $callback Function with (keyA, keyB) parameters and returns -1 (<), 0 (=) and 1 (>)
 	 * @return MapIface New map
 	 */
-	public function intersect( iterable $items ) : MapIface
+	public function intersect( iterable $items, callable $callback = null ) : MapIface
 	{
+		if( $callback ) {
+			return new static( array_uintersect( $this->items, $this->getArray( $items ), $callback ) );
+		}
+
 		return new static( array_intersect( $this->items, $this->getArray( $items ) ) );
 	}
 
@@ -309,10 +312,32 @@ class Map implements MapIface
 	 * Intersect the map with the given items by key.
 	 *
 	 * @param iterable $items List of items
+	 * @param  callable|null $callback Function with (keyA, keyB) parameters and returns -1 (<), 0 (=) and 1 (>)
 	 * @return MapIface New map
 	 */
-	public function intersectKeys( iterable $items ) : MapIface
+	public function intersectAssoc( iterable $items, callable $callback = null ) : MapIface
 	{
+		if( $callback ) {
+			return new static( array_uintersect_assoc( $this->items, $this->getArray( $items ), $callback ) );
+		}
+
+		return new static( array_intersect_assoc( $this->items, $this->getArray( $items ) ) );
+	}
+
+
+	/**
+	 * Intersect the map with the given items by key.
+	 *
+	 * @param iterable $items List of items
+	 * @param  callable|null $callback Function with (keyA, keyB) parameters and returns -1 (<), 0 (=) and 1 (>)
+	 * @return MapIface New map
+	 */
+	public function intersectKeys( iterable $items, callable $callback = null ) : MapIface
+	{
+		if( $callback ) {
+			return new static( array_intersect_ukey( $this->items, $this->getArray( $items ), $callback ) );
+		}
+
 		return new static( array_intersect_key( $this->items, $this->getArray( $items ) ) );
 	}
 
@@ -370,13 +395,11 @@ class Map implements MapIface
 					return $value;
 				}
 			}
-		}
-		elseif( ( $result = end( $this->items ) ) !== false )
-		{
-			return $result;
+
+			return $default;
 		}
 
-		return $default;
+		return end( $this->items ) ?: $default;
 	}
 
 
@@ -534,7 +557,7 @@ class Map implements MapIface
 	public function remove( $keys ) : MapIface
 	{
 		foreach( (array) $keys as $key ) {
-			$this->offsetUnset( $key );
+			unset( $this->items[$key] );
 		}
 
 		return $this;
