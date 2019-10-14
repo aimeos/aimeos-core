@@ -19,13 +19,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
 		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$this->object = $manager->getSubManager( 'property' )->getSubManager('type');
+		$this->object = $manager->getSubManager( 'property' )->getSubManager( 'type' );
 	}
 
 
 	protected function tearDown()
 	{
-		unset($this->object);
+		unset( $this->object );
 	}
 
 
@@ -66,7 +66,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$results = $this->object->searchItems( $search );
 
-		if( ($expected = reset($results) ) === false )
+		if( ( $expected = reset( $results ) ) === false )
 		{
 			throw new \RuntimeException( 'No property type item found.' );
 		}
@@ -81,13 +81,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.property.type.editor', $this->editor ) );
-		$results = $this->object->searchItems($search);
+		$results = $this->object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$resultSaved = $this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
@@ -148,20 +148,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'customer.property.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.property.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 
 
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '=~', 'customer.property.type.code', 'newsletter'),
+			$search->compare( '=~', 'customer.property.type.code', 'newsletter' ),
 			$search->compare( '==', 'customer.property.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine('&&', $conditions ) );
+		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'customer.property.type.position' )] );
-		$search->setSlice(0, 1);
-		$items = $this->object->searchItems( $search, [], $total);
+		$search->setSlice( 0, 1 );
+		$items = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 1, $total );
@@ -175,6 +175,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( \Aimeos\MShop\Exception::class );
-		$this->object->getSubManager('unknown');
+		$this->object->getSubManager( 'unknown' );
 	}
 }

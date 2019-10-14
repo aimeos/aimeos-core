@@ -49,7 +49,7 @@ class Factory
 		$mime = explode( '/', $mimetype );
 
 		$type = ( $mime[0] === 'image' ? 'Image' : 'Application' );
-		$name = ( isset( $options[ $mime[0] ]['name'] ) ? ucfirst( $options[ $mime[0] ]['name'] ) : 'Standard' );
+		$name = ( isset( $options[$mime[0]]['name'] ) ? ucfirst( $options[$mime[0]]['name'] ) : 'Standard' );
 
 		if( in_array( $mimetype, ['image/svg', 'image/svg+xml'] )
 			|| in_array( $mimetype, ['application/gzip', 'application/x-gzip'] )

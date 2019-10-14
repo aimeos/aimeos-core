@@ -256,7 +256,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	protected function msg( $msg, $level = 0, $status = null )
 	{
 		$pre = '';
-		for( $i = 0; $i < 2*$level; $i++ ) {
+		for( $i = 0; $i < 2 * $level; $i++ ) {
 			$pre .= ' ';
 		}
 
@@ -287,11 +287,11 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 		$matches = [];
 
 		$regex = '/CREATE TABLE \"?([a-zA-Z0-9_]+)\"? .*(\n\n|$)/sU';
-		if ( preg_match_all($regex, $content, $matches, PREG_SET_ORDER) === false ) {
-			throw new \Aimeos\MW\Setup\Exception('Unable to get table definitions');
+		if( preg_match_all( $regex, $content, $matches, PREG_SET_ORDER ) === false ) {
+			throw new \Aimeos\MW\Setup\Exception( 'Unable to get table definitions' );
 		}
 
-		foreach ( $matches as $match ) {
+		foreach( $matches as $match ) {
 			$defs[$match[1]] = $match[0];
 		}
 
@@ -310,11 +310,11 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 		$defs = [];
 		$matches = [];
 
-		if ( preg_match_all('/CREATE [a-zA-Z]* ?INDEX \"?([a-zA-Z0-9_]+)\"? ON \"?([a-zA-Z0-9_]+)\"? .+(\n\n|$)/sU', $content, $matches, PREG_SET_ORDER) === false ) {
-			throw new \Aimeos\MW\Setup\Exception('Unable to get index definitions');
+		if( preg_match_all( '/CREATE [a-zA-Z]* ?INDEX \"?([a-zA-Z0-9_]+)\"? ON \"?([a-zA-Z0-9_]+)\"? .+(\n\n|$)/sU', $content, $matches, PREG_SET_ORDER ) === false ) {
+			throw new \Aimeos\MW\Setup\Exception( 'Unable to get index definitions' );
 		}
 
-		foreach ( $matches as $match ) {
+		foreach( $matches as $match ) {
 			$name = $match[2] . '.' . $match[1];
 			$defs[$name] = $match[0];
 		}
@@ -335,11 +335,11 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 		$matches = [];
 
 		$regex = '/CREATE TRIGGER \"?([a-zA-Z0-9_]+)\"? .*(\n\n|$)/sU';
-		if ( preg_match_all($regex, $content, $matches, PREG_SET_ORDER) === false ) {
-			throw new \Aimeos\MW\Setup\Exception('Unable to get trigger definitions');
+		if( preg_match_all( $regex, $content, $matches, PREG_SET_ORDER ) === false ) {
+			throw new \Aimeos\MW\Setup\Exception( 'Unable to get trigger definitions' );
 		}
 
-		foreach ( $matches as $match ) {
+		foreach( $matches as $match ) {
 			$defs[$match[1]] = $match[0];
 		}
 

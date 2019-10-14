@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'mshop_attribute_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_attribute_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_attribute_type' );
 
@@ -32,7 +32,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_attribute' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_attribute' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_attribute' );
 
@@ -47,7 +47,7 @@ return array(
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msatt_id' );
 			$table->addUniqueIndex( array( 'siteid', 'domain', 'type', 'code' ), 'unq_msatt_sid_dom_type_code' );
@@ -61,7 +61,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_attribute_list_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_attribute_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_attribute_list_type' );
 
@@ -85,7 +85,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_attribute_list' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_attribute_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_attribute_list' );
 
@@ -116,7 +116,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_attribute_property_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_attribute_property_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_attribute_property_type' );
 
@@ -140,7 +140,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_attribute_property' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_attribute_property' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_attribute_property' );
 

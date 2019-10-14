@@ -44,34 +44,34 @@ class PHPArrayTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertEquals( '127.0.0.1', $this->object->get( 'resource/db/host' ) );
 
-		$x = $this->object->get( 'config/manager/default/select', 'defvalue1');
+		$x = $this->object->get( 'config/manager/default/select', 'defvalue1' );
 		$this->assertEquals( 'select11', $x );
 
-		$x = $this->object->get( 'config/provider/delivery/sh/select', 'defvalue2');
+		$x = $this->object->get( 'config/provider/delivery/sh/select', 'defvalue2' );
 		$this->assertEquals( 'select2', $x );
 
-		$x = $this->object->get( 'subconfig/default/subitem/a/aa', 'defvalue3');
+		$x = $this->object->get( 'subconfig/default/subitem/a/aa', 'defvalue3' );
 		$this->assertEquals( '111', $x );
 
-		$x = $this->object->get( 'subconfig/subsubconfig/default/subsubitem/aa/aaa', 'defvalue4');
+		$x = $this->object->get( 'subconfig/subsubconfig/default/subsubitem/aa/aaa', 'defvalue4' );
 		$this->assertEquals( '111', $x );
 
-		$x = $this->object->get( 'config/manager/default/select', 'defvalue5');
+		$x = $this->object->get( 'config/manager/default/select', 'defvalue5' );
 		$this->assertEquals( 'select11', $x );
 
-		$x = $this->object->get( 'subconfig/subsubconfig/default/subsubitem/aa/aaa', 'defvalue6');
+		$x = $this->object->get( 'subconfig/subsubconfig/default/subsubitem/aa/aaa', 'defvalue6' );
 		$this->assertEquals( '111', $x );
 
-		$x = $this->object->get( 'subconfig/default/subitem/a/aa', 'defvalue7');
+		$x = $this->object->get( 'subconfig/default/subitem/a/aa', 'defvalue7' );
 		$this->assertEquals( '111', $x );
 
-		$x = $this->object->get( 'subconfig/default/subitem/a/bb', 'defvalue8');
+		$x = $this->object->get( 'subconfig/default/subitem/a/bb', 'defvalue8' );
 		$this->assertEquals( 'defvalue8', $x );
 
-		$x = $this->object->get( 'nonsubconfig', 'defvalue9');
+		$x = $this->object->get( 'nonsubconfig', 'defvalue9' );
 		$this->assertEquals( 'defvalue9', $x );
 
-		$x = $this->object->get( 'subconfig', 'defvalue10');
+		$x = $this->object->get( 'subconfig', 'defvalue10' );
 		$this->assertInternalType( 'array', $x );
 	}
 
@@ -81,13 +81,13 @@ class PHPArrayTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals(
 			array(
-				'subitem' => array (
+				'subitem' => array(
 					'a' => array(
 						'aa' => '111',
 					),
 				),
 				'subbla' => array(
-					'b' => array (
+					'b' => array(
 						'bb' => '22',
 					),
 				),

@@ -10,7 +10,7 @@ return array(
 
 	'table' => array(
 
-		'mshop_subscription' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_subscription' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_subscription' );
 
@@ -27,7 +27,7 @@ return array(
 			$table->addColumn( 'status', 'smallint', array( 'default' => 0 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mssub_id' );
 			$table->addIndex( array( 'siteid', 'next', 'status' ), 'idx_mssub_sid_next_stat' );

@@ -43,7 +43,7 @@ class OnceTest extends \PHPUnit\Framework\TestCase
 	public function testIsAvailable()
 	{
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $this->context, $this->couponItem, 'ABCD' );
-		$object = new \Aimeos\MShop\Coupon\Provider\Decorator\Once( $provider, $this->context, $this->couponItem, 'ABCD');
+		$object = new \Aimeos\MShop\Coupon\Provider\Decorator\Once( $provider, $this->context, $this->couponItem, 'ABCD' );
 		$object->setObject( $object );
 
 		$this->assertTrue( $object->isAvailable( $this->orderBase ) );
@@ -53,7 +53,7 @@ class OnceTest extends \PHPUnit\Framework\TestCase
 	public function testIsAvailableExisting()
 	{
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $this->context, $this->couponItem, 'OPQR' );
-		$object = new \Aimeos\MShop\Coupon\Provider\Decorator\Once( $provider, $this->context, $this->couponItem, 'OPQR');
+		$object = new \Aimeos\MShop\Coupon\Provider\Decorator\Once( $provider, $this->context, $this->couponItem, 'OPQR' );
 		$object->setObject( $object );
 
 		$this->assertFalse( $object->isAvailable( $this->orderBase ) );

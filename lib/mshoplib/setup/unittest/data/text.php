@@ -6,8 +6,8 @@
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
 
-return array (
-	'text/type' => array (
+return array(
+	'text/type' => array(
 		'attribute/name' => array( 'domain' => 'attribute', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
 		'attribute/short' => array( 'domain' => 'attribute', 'code' => 'short', 'label' => 'Short description', 'status' => 1 ),
 		'attribute/long' => array( 'domain' => 'attribute', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
@@ -48,10 +48,10 @@ return array (
 		'supplier/long' => array( 'domain' => 'supplier', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
 	),
 
-	'text' => array (
+	'text' => array(
 
 //supplier
-		'text/supplier/description' => array( 'langid' => null, 'type' => 'description', 'domain' => 'supplier', 'label' => 'supplier/description', 'content' => 'Supplier description', 'status' => 1),
+		'text/supplier/description' => array( 'langid' => null, 'type' => 'description', 'domain' => 'supplier', 'label' => 'supplier/description', 'content' => 'Supplier description', 'status' => 1 ),
 //ATTR
 //size
 		'text/size/XS' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'size/XS', 'content' => 'XS', 'status' => 1 ),

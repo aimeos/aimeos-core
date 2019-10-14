@@ -44,7 +44,7 @@ class Factory
 			throw new \Aimeos\MW\Tree\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$manager =  new $classname( $config, $resource );
+		$manager = new $classname( $config, $resource );
 
 		if( !( $manager instanceof $iface ) ) {
 			throw new \Aimeos\MW\Tree\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );

@@ -90,7 +90,7 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 					throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid value "%1$d" for statement type', $type ) );
 			}
 		} catch( \PDOException $e ) {
-			throw new \Aimeos\MW\DB\Exception($e->getMessage(), $e->getCode(), $e->errorInfo );
+			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
 	}
 

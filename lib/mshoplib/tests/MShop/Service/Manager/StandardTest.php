@@ -183,13 +183,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'service.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'service.editor', $this->editor );
 
-		$param = ['text','unittype1', '0'];
+		$param = ['text', 'unittype1', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'service:has', $param ), null );
 
-		$param = ['text','unittype1', $listItem->getRefId()];
+		$param = ['text', 'unittype1', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'service:has', $param ), null );
 
-		$param = ['text','unittype1'];
+		$param = ['text', 'unittype1'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'service:has', $param ), null );
 
 		$param = ['text'];

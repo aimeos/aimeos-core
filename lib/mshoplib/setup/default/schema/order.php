@@ -16,7 +16,7 @@ return array(
 
 	'table' => array(
 
-		'mshop_order_base' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_order_base' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_order_base' );
 
@@ -35,7 +35,7 @@ return array(
 			$table->addColumn( 'comment', 'text', array( 'length' => 0xfff ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordba_id' );
 			$table->addIndex( array( 'sitecode', 'customerid' ), 'idx_msordba_scode_custid' );
@@ -45,7 +45,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_order_base_address' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_order_base_address' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_order_base_address' );
 
@@ -77,7 +77,7 @@ return array(
 			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaad_id' );
 			$table->addUniqueIndex( array( 'baseid', 'type' ), 'unq_msordbaad_bid_type' );
@@ -95,7 +95,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_order_base_product' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_order_base_product' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_order_base_product' );
 
@@ -106,8 +106,8 @@ return array(
 			$table->addColumn( 'ordaddrid', 'bigint', array( 'notnull' => false ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'prodid', 'string', array( 'length' => 36 ) );
-			$table->addColumn( 'prodcode', 'string', array( 'length' => 64  ) );
-			$table->addColumn( 'suppliercode', 'string', array( 'length' => 64  ) );
+			$table->addColumn( 'prodcode', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'suppliercode', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'stocktype', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'name', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'description', 'text', array( 'length' => 0xffff ) );
@@ -127,7 +127,7 @@ return array(
 			$table->addColumn( 'status', 'smallint', array( 'default' => -1 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbapr_id' );
 			$table->addUniqueIndex( array( 'baseid', 'pos' ), 'unq_msordbapr_bid_pos' );
@@ -141,7 +141,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_order_base_product_attr' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_order_base_product_attr' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_order_base_product_attr' );
 
@@ -156,7 +156,7 @@ return array(
 			$table->addColumn( 'quantity', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaprat_id' );
 			$table->addUniqueIndex( array( 'ordprodid', 'attrid', 'type', 'code' ), 'unq_msordbaprat_oid_aid_ty_cd' );
@@ -168,7 +168,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_order_base_service' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_order_base_service' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_order_base_service' );
 
@@ -190,7 +190,7 @@ return array(
 			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbase_id' );
 			$table->addUniqueIndex( array( 'siteid', 'baseid', 'code', 'type' ), 'unq_msordbase_sid_bid_cd_typ' );
@@ -203,7 +203,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_order_base_service_attr' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_order_base_service_attr' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_order_base_service_attr' );
 
@@ -218,7 +218,7 @@ return array(
 			$table->addColumn( 'quantity', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaseat_id' );
 			$table->addUniqueIndex( array( 'ordservid', 'attrid', 'type', 'code' ), 'unq_msordbaseat_oid_aid_ty_cd' );
@@ -230,7 +230,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_order_base_coupon' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_order_base_coupon' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_order_base_coupon' );
 
@@ -241,7 +241,7 @@ return array(
 			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaco_id' );
 			$table->addIndex( array( 'siteid', 'baseid', 'code' ), 'idx_msordbaco_sid_bid_code' );
@@ -257,7 +257,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_order' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_order' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_order' );
 
@@ -277,7 +277,7 @@ return array(
 			$table->addColumn( 'chour', 'string', array( 'length' => 2 ) );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msord_id' );
 			$table->addIndex( array( 'siteid', 'type' ), 'idx_msord_sid_type' );
@@ -301,7 +301,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_order_status' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_order_status' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_order_status' );
 
@@ -312,7 +312,7 @@ return array(
 			$table->addColumn( 'value', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordst_id' );
 			$table->addIndex( array( 'siteid', 'parentid', 'type', 'value' ), 'idx_msordstatus_val_sid' );

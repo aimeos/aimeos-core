@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'mshop_service_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_service_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_service_type' );
 
@@ -32,7 +32,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_service' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_service' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_service' );
 
@@ -49,7 +49,7 @@ return array(
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msser_id' );
 			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_msser_siteid_code' );
@@ -62,7 +62,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_service_list_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_service_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_service_list_type' );
 
@@ -86,7 +86,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_service_list' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_service_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_service_list' );
 

@@ -80,7 +80,7 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		foreach( $testdata['media/property'] as $key => $dataset )
 		{
 			$prodProperty->setId( null );
-			$prodProperty->setParentId( $prodIds[ $dataset['parentid'] ] );
+			$prodProperty->setParentId( $prodIds[$dataset['parentid']] );
 			$prodProperty->setLanguageId( $dataset['langid'] );
 			$prodProperty->setValue( $dataset['value'] );
 			$prodProperty->setType( $dataset['type'] );
@@ -104,7 +104,7 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $mediaManager->createSearch();
 
 		foreach( $mediaManager->searchItems( $search ) as $id => $item ) {
-			$entry[ 'media/' . $item->getUrl() ] = $id;
+			$entry['media/' . $item->getUrl()] = $id;
 		}
 
 		return $entry;

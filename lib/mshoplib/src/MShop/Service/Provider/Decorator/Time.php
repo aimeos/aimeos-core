@@ -103,7 +103,7 @@ class Time
 	{
 		$minute = date( 'i' );
 		$feconfig = $this->feConfig;
-		$feconfig['time.hourminute']['default'] = date( 'H:i', time() + ($minute + 15 - ($minute % 15)) * 60 );
+		$feconfig['time.hourminute']['default'] = date( 'H:i', time() + ( $minute + 15 - ( $minute % 15 ) ) * 60 );
 
 		try
 		{

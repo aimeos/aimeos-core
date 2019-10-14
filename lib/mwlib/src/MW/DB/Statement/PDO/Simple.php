@@ -59,7 +59,7 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 			case \Aimeos\MW\DB\Statement\Base::PARAM_NULL:
 				$this->binds[$position] = 'NULL'; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
-				$this->binds[$position] = ((bool) $value ? 'TRUE' : 'FALSE'); break;
+				$this->binds[$position] = ( (bool) $value ? 'TRUE' : 'FALSE' ); break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
 				$this->binds[$position] = (int) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:

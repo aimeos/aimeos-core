@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'mshop_media_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_media_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_media_type' );
 
@@ -32,7 +32,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_media' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_media' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_media' );
 
@@ -48,7 +48,7 @@ return array(
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msmed_id' );
 			$table->addIndex( array( 'siteid', 'domain', 'langid' ), 'idx_msmed_sid_dom_langid' );
@@ -59,7 +59,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_media_list_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_media_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_media_list_type' );
 
@@ -83,7 +83,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_media_list' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_media_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_media_list' );
 
@@ -114,7 +114,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_media_property_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_media_property_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_media_property_type' );
 
@@ -138,7 +138,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_media_property' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_media_property' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_media_property' );
 

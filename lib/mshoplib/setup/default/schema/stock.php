@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'mshop_stock_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_stock_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_stock_type' );
 
@@ -32,7 +32,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_stock' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_stock' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_stock' );
 

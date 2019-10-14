@@ -32,7 +32,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'function' => $func,
 		);
 
-		$this->object = new \Aimeos\MW\Criteria\Attribute\Standard($values);
+		$this->object = new \Aimeos\MW\Criteria\Attribute\Standard( $values );
 	}
 
 
@@ -68,7 +68,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetInternalDeps()
 	{
-		$this->assertEquals(array( 'test' ), $this->object->getInternalDeps());
+		$this->assertEquals( array( 'test' ), $this->object->getInternalDeps() );
 	}
 
 

@@ -195,13 +195,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'price.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'price.editor', $this->editor );
 
-		$param = ['customer','test', '0'];
+		$param = ['customer', 'test', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'price:has', $param ), null );
 
-		$param = ['customer','test', $listItem->getRefId()];
+		$param = ['customer', 'test', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
 
-		$param = ['customer','test'];
+		$param = ['customer', 'test'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
 
 		$param = ['customer'];

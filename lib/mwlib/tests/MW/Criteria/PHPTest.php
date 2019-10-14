@@ -196,7 +196,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$translations = array( 'asc_array' => '$ascIntList', 'desc_array' => '$descStrList' );
 
 		$result = $this->object->getSortationSource( $types, $translations );
-		$this->assertEquals('asort($ascIntList);', $result);
+		$this->assertEquals( 'asort($ascIntList);', $result );
 		$this->assertEquals( array( 0 => 1, 2 => 5, 1 => 9 ), $ascIntList );
 	}
 

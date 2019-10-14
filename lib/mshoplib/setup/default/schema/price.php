@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'mshop_price_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_price_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_price_type' );
 
@@ -32,7 +32,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_price' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_price' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_price' );
 
@@ -50,7 +50,7 @@ return array(
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mspri_id' );
 			$table->addIndex( array( 'siteid', 'domain', 'currencyid' ), 'idx_mspri_sid_dom_currid' );
@@ -62,7 +62,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_price_list_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_price_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_price_list_type' );
 
@@ -86,7 +86,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_price_list' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_price_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_price_list' );
 
@@ -117,7 +117,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_price_property_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_price_property_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_price_property_type' );
 
@@ -141,7 +141,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_price_property' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_price_property' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_price_property' );
 

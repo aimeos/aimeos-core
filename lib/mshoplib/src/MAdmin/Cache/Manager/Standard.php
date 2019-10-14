@@ -402,7 +402,7 @@ class Standard
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param string[] $ids List of IDs
-	* @return \Aimeos\MAdmin\Cache\Manager\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MAdmin\Cache\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $ids )
 	{

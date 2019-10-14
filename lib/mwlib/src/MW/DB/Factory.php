@@ -38,7 +38,7 @@ class Factory
 		foreach( $paths as $path )
 		{
 			$file = $path . DIRECTORY_SEPARATOR . $filename;
-			if( file_exists( $file ) === true  && ( include_once $file ) !== false && class_exists($classname) ) {
+			if( file_exists( $file ) === true && ( include_once $file ) !== false && class_exists( $classname ) ) {
 				return new $classname( $config );
 			}
 		}

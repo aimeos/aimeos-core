@@ -38,13 +38,13 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'supplier-list.php';
 
-		if( ( $testdata = include( $path ) ) == false ){
+		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for supplier list domain', $path ) );
 		}
 
 		$refKeys = [];
 		foreach( $testdata['supplier/lists'] as $dataset ) {
-			$refKeys[ $dataset['domain'] ][] = $dataset['refid'];
+			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
 		$refIds = [];
@@ -107,7 +107,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$codes = [];
 		foreach( $keys as $dataset )
 		{
-			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ref products are set wrong "%1$s"', $dataset ) );
 			}
 
@@ -119,7 +119,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$refIds = [];
 		foreach( $manager->searchItems( $search ) as $item ) {
-			$refIds[ 'product/' . $item->getCode() ] = $item->getId();
+			$refIds['product/' . $item->getCode()] = $item->getId();
 		}
 
 		return $refIds;
@@ -139,7 +139,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$labels = [];
 		foreach( $keys as $dataset )
 		{
-			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ref text are set wrong "%1$s"', $dataset ) );
 			}
 
@@ -150,8 +150,8 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
 		$refIds = [];
-		foreach( $textManager->searchItems( $search ) as $item )	{
-			$refIds[ 'text/'.$item->getLabel() ] = $item->getId();
+		foreach( $textManager->searchItems( $search ) as $item ) {
+			$refIds['text/' . $item->getLabel()] = $item->getId();
 		}
 
 		return $refIds;
@@ -175,7 +175,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$itemCode = [];
 		foreach( $testdata['supplier/lists'] as $dataset )
 		{
-			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos+1 ) ) === false ) {
+			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
 			}
 
@@ -183,11 +183,11 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$search = $supplierManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'supplier.code', $itemCode) );
+		$search->setConditions( $search->compare( '==', 'supplier.code', $itemCode ) );
 
 		$parentIds = [];
-		foreach( $supplierManager->searchItems( $search ) as $item )	{
-			$parentIds[ 'supplier/'.$item->getCode() ] = $item->getId();
+		foreach( $supplierManager->searchItems( $search ) as $item ) {
+			$parentIds['supplier/' . $item->getCode()] = $item->getId();
 		}
 
 		$listItemType = $supplierListTypeManager->createItem();
@@ -208,17 +208,17 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$listItem = $supplierListManager->createItem();
 		foreach( $testdata['supplier/lists'] as $dataset )
 		{
-			if( !isset( $parentIds[ $dataset['parentid'] ] ) ) {
+			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No supplier ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
-			if( !isset( $refIds[ $dataset['domain'] ][ $dataset['refid'] ] ) ) {
+			if( !isset( $refIds[$dataset['domain']][$dataset['refid']] ) ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No "%2$s" ref ID found for "%1$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
 			$listItem->setId( null );
-			$listItem->setParentId( $parentIds[ $dataset['parentid'] ] );
-			$listItem->setRefId( $refIds[ $dataset['domain'] ] [ $dataset['refid'] ] );
+			$listItem->setParentId( $parentIds[$dataset['parentid']] );
+			$listItem->setRefId( $refIds[$dataset['domain']] [$dataset['refid']] );
 			$listItem->setType( $dataset['type'] );
 			$listItem->setDomain( $dataset['domain'] );
 			$listItem->setDateStart( $dataset['start'] );

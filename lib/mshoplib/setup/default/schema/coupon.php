@@ -9,7 +9,7 @@
 return array(
 	'table' => array(
 
-		'mshop_coupon' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_coupon' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_coupon' );
 
@@ -35,7 +35,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_coupon_code' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_coupon_code' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_coupon_code' );
 

@@ -161,7 +161,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			$diff = $node->right - $node->left + 1;
 
 			$stmt = $conn->create( $this->config['move-left'] );
-			$stmt->bind( 1, -$diff, $this->searchConfig['left']['internaltype']);
+			$stmt->bind( 1, -$diff, $this->searchConfig['left']['internaltype'] );
 			$stmt->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
 			$stmt->bind( 3, $node->right + 1, $this->searchConfig['left']['internaltype'] );
 			$stmt->bind( 4, 0x7FFFFFFF, $this->searchConfig['left']['internaltype'] );
@@ -226,7 +226,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 				$search->getConditions(),
 				$condition->getConditions()
 			);
-			$search->setConditions( $search->combine('&&', $expr) );
+			$search->setConditions( $search->combine( '&&', $expr ) );
 		}
 
 		$types = $this->getSearchTypes( $this->searchConfig );
@@ -550,14 +550,14 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 */
 	public function searchNodes( \Aimeos\MW\Criteria\Iface $search, $id = null )
 	{
-		$left =  1;
+		$left = 1;
 		$right = 0x7FFFFFFF;
 
 		if( $id !== null )
 		{
 			$node = $this->getNodeById( $id );
 
-			$left =  $node->left;
+			$left = $node->left;
 			$right = $node->right;
 		}
 
@@ -633,7 +633,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 
 		$results = $this->searchNodes( $search );
 
-		foreach ( $results as $item ) {
+		foreach( $results as $item ) {
 			$result[$item->getId()] = $item;
 		}
 
@@ -745,7 +745,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 */
 	protected function isChild( \Aimeos\MW\Tree\Node\Iface $node, \Aimeos\MW\Tree\Node\Iface $parent )
 	{
-		return $node->__get('left') > $parent->__get('left') && $node->__get('right') < $parent->__get('right');
+		return $node->__get( 'left' ) > $parent->__get( 'left' ) && $node->__get( 'right' ) < $parent->__get( 'right' );
 	}
 
 

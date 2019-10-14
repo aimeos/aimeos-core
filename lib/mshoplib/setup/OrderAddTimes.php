@@ -76,7 +76,7 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 
 				$stmt->bind( 1, $date );
 				$stmt->bind( 2, substr( $date, 0, 7 ) );
-				$stmt->bind( 3, date_create_from_format( 'Y-m-d', $date )->format( 'Y-W' )  );
+				$stmt->bind( 3, date_create_from_format( 'Y-m-d', $date )->format( 'Y-W' ) );
 				$stmt->bind( 4, substr( $time, 0, 2 ) );
 				$stmt->bind( 5, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 

@@ -352,7 +352,7 @@ return [
 					'product.lists.type' => 'default', 'product.lists.position' => 2, 'ref' => 'Unittest: Test Sub 2',
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 3, 'ref' => 'Unittest: Test Sub 3',
-				],[
+				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 4, 'ref' => 'Unittest: Test Sub 4',
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 5, 'ref' => 'Unittest: Test Sub 5',

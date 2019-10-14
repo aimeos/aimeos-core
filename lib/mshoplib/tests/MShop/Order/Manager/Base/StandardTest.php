@@ -370,7 +370,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsDefault()
 	{
-		$search = $this->object->createSearch(  true );
+		$search = $this->object->createSearch( true );
 		$items = $this->object->searchItems( $search );
 
 		$this->assertEquals( 0, count( $items ) );
@@ -822,7 +822,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No order found' );
 		}
 
-		$parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL ^  \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON;
+		$parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL ^ \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON;
 		$basket = $this->object->load( $item->getId(), $parts, true );
 
 		$this->assertEquals( '58.50', $basket->getPrice()->getValue() );

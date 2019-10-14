@@ -91,7 +91,7 @@ class ProductStock
 		}
 
 		foreach( $this->getStockItems( $productCodes, $stockTypes ) as $stockItem ) {
-			$stockMap[ $stockItem->getProductCode() ][ $stockItem->getType() ] = $stockItem;
+			$stockMap[$stockItem->getProductCode()][$stockItem->getType()] = $stockItem;
 		}
 
 		return $this->checkStockLevels( $order, $stockMap );

@@ -81,7 +81,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No list item found' );
 		}
 
@@ -91,11 +91,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager('type') );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager('type', 'Standard') );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'type', 'Standard' ) );
 
 		$this->setExpectedException( \Aimeos\MShop\Exception::class );
-		$this->object->getSubManager('unknown');
+		$this->object->getSubManager( 'unknown' );
 	}
 
 
@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setDomain( 'unittest' );
 		$resultSaved = $this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
@@ -188,7 +188,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'supplier.lists.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'supplier.lists.editor', $this->editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 	}
@@ -197,15 +197,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsBase()
 	{
 		$total = 0;
-		$search = $this->object->createSearch(true);
+		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'supplier.lists.domain', 'text' ),
 			$search->compare( '==', 'supplier.lists.editor', $this->editor ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice(0, 1);
-		$results = $this->object->searchItems($search, [], $total);
+		$search->setSlice( 0, 1 );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 3, $total );
 

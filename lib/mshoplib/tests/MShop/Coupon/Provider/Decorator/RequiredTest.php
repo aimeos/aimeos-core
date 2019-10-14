@@ -24,7 +24,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->createItem();
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $context, $this->couponItem, 'abcd' );
-		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Required( $provider, $context, $this->couponItem, 'abcd');
+		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Required( $provider, $context, $this->couponItem, 'abcd' );
 		$this->object->setObject( $this->object );
 
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $context );

@@ -9,7 +9,7 @@
 return array(
 	'table' => array(
 
-		'mshop_supplier' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_supplier' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_supplier' );
 
@@ -20,7 +20,7 @@ return array(
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mssup_id' );
 			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_mssup_sid_code' );
@@ -30,7 +30,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_supplier_address' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_supplier_address' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_supplier_address' );
 
@@ -60,7 +60,7 @@ return array(
 			$table->addColumn( 'pos', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mssupad_id' );
 			$table->addIndex( array( 'siteid', 'parentid' ), 'idx_mssupad_sid_rid' );
@@ -72,7 +72,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_supplier_list_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_supplier_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_supplier_list_type' );
 
@@ -96,7 +96,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_supplier_list' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_supplier_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_supplier_list' );
 

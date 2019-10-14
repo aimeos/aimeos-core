@@ -103,7 +103,7 @@ class Standard
 	 *
 	 * @param string $version HTTP protocol version
 	 * @return self
-	*/
+	 */
 	public function withProtocolVersion( $version )
 	{
 		$this->response = $this->response->withProtocolVersion( $version );
@@ -117,7 +117,7 @@ class Standard
 	 * @return string[][] Returns an associative array of the message's headers.
 	 *	 Each key MUST be a header name, and each value MUST be an array of
 	 *	 strings for that header.
-	*/
+	 */
 	public function getHeaders()
 	{
 		return $this->response->getHeaders();

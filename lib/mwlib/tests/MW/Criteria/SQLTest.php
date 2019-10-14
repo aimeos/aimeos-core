@@ -120,7 +120,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
 		$this->assertEquals( "( int_col = 1 AND ( str_col = 'test' ) )", $this->object->getConditionSource( $types, $translations ) );
 
-		$types = array( 'column' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL);
+		$types = array( 'column' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );
 		$this->object->setConditions( $this->object->compare( '==', 'column', 1 ) );
 		$this->assertEquals( "column = 1", $this->object->getConditionSource( $types ) );
 	}
@@ -188,10 +188,10 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	{
 		$types = array( 'asc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT, 'desc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 
-		$this->assertEquals('asc_column ASC', $this->object->getSortationSource( $types ) );
+		$this->assertEquals( 'asc_column ASC', $this->object->getSortationSource( $types ) );
 
 		$translations = array( 'asc_column' => 'asc_int_col', 'desc_column' => 'desc_str_col' );
-		$this->assertEquals('asc_int_col ASC', $this->object->getSortationSource( $types, $translations ));
+		$this->assertEquals( 'asc_int_col ASC', $this->object->getSortationSource( $types, $translations ) );
 	}
 
 

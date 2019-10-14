@@ -1,13 +1,13 @@
 <?php
 
 return array(
-	'subsubitem' => array (
+	'subsubitem' => array(
 		'aa' => array(
 			'aaa' => '111',
 		),
 	),
 	'subsubblablub' => array(
-		'bb' => array (
+		'bb' => array(
 			'bbb' => '222',
 		),
 	),

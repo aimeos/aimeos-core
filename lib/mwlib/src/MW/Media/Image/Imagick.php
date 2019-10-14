@@ -202,8 +202,8 @@ class Imagick
 		$wh = self::$watermark->getImageWidth();
 
 		$ratio = min( $this->getWidth() / $ww, $this->getHeight() / $wh );
-		$newHeight = (int) ($wh * $ratio);
-		$newWidth = (int) ($ww * $ratio);
+		$newHeight = (int) ( $wh * $ratio );
+		$newWidth = (int) ( $ww * $ratio );
 
 		$dx = (int) ( $this->getWidth() - $newWidth ) / 2;
 		$dy = (int) ( $this->getHeight() - $newHeight ) / 2;

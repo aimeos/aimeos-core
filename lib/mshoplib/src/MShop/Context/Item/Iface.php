@@ -177,7 +177,7 @@ interface Iface
 	 * Returns the message queue manager object.
 	 *
 	 * @return \Aimeos\MW\MQueue\Manager\Iface Message queue manager object
-	*/
+	 */
 	public function getMessageQueueManager();
 
 	/**
@@ -201,7 +201,7 @@ interface Iface
 	 * Returns the process object.
 	 *
 	 * @return \Aimeos\MW\Process\Iface Process object
-	*/
+	 */
 	public function getProcess();
 
 	/**
@@ -216,7 +216,7 @@ interface Iface
 	 * Returns the session object.
 	 *
 	 * @return \Aimeos\MW\Session\Iface Session object
-	*/
+	 */
 	public function getSession();
 
 	/**

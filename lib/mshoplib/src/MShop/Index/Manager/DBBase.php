@@ -303,7 +303,7 @@ abstract class DBBase
 			foreach( $cols as $idx => $col )
 			{
 				$list[] = 'MIN(' . $col . ') AS "s' . $idx . '"';
-				$aliases[ $names[$idx] ] = '"s' . $idx . '"';
+				$aliases[$names[$idx]] = '"s' . $idx . '"';
 			}
 
 			$keys[] = 'orderby';

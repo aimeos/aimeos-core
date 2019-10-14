@@ -67,9 +67,9 @@ abstract class Base extends \Aimeos\MW\Common\Base
 		foreach( $attributes as $key => $item )
 		{
 			if( $item instanceof $iface ) {
-				$list[ $item->getCode() ] = $item->getFunction();
+				$list[$item->getCode()] = $item->getFunction();
 			} else if( isset( $item['code'] ) ) {
-				$list[ $item['code'] ] = $item['function'];
+				$list[$item['code']] = $item['function'];
 			} else {
 				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
 			}
@@ -93,9 +93,9 @@ abstract class Base extends \Aimeos\MW\Common\Base
 		foreach( $attributes as $key => $item )
 		{
 			if( $item instanceof $iface ) {
-				$translations[ $item->getCode() ] = $item->getInternalCode();
+				$translations[$item->getCode()] = $item->getInternalCode();
 			} else if( isset( $item['code'] ) ) {
-				$translations[ $item['code'] ] = $item['internalcode'];
+				$translations[$item['code']] = $item['internalcode'];
 			} else {
 				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
 			}
@@ -119,9 +119,9 @@ abstract class Base extends \Aimeos\MW\Common\Base
 		foreach( $attributes as $key => $item )
 		{
 			if( $item instanceof $iface ) {
-				$types[ $item->getCode() ] = $item->getInternalType();
+				$types[$item->getCode()] = $item->getInternalType();
 			} else if( isset( $item['code'] ) ) {
-				$types[ $item['code'] ] = $item['internaltype'];
+				$types[$item['code']] = $item['internaltype'];
 			} else {
 				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
 			}

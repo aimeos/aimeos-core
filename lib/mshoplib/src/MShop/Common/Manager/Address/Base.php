@@ -143,7 +143,7 @@ abstract class Base
 			$stmt->bind( $idx++, $item->getFirstname() );
 			$stmt->bind( $idx++, $item->getLastname() );
 			$stmt->bind( $idx++, $item->getAddress1() );
-			$stmt->bind( $idx++, $item->getAddress2());
+			$stmt->bind( $idx++, $item->getAddress2() );
 			$stmt->bind( $idx++, $item->getAddress3() );
 			$stmt->bind( $idx++, $item->getPostal() );
 			$stmt->bind( $idx++, $item->getCity() );

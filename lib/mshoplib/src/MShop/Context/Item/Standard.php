@@ -434,7 +434,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Returns the message queue manager object.
 	 *
 	 * @return \Aimeos\MW\MQueue\Manager\Iface Message queue manager object
-	*/
+	 */
 	public function getMessageQueueManager()
 	{
 		if( !isset( $this->mqueue ) ) {
@@ -451,7 +451,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param string $resource Resource name, e.g. "mq-email"
 	 * @param string $queue Message queue name, e.g. "order/email/payment"
 	 * @return \Aimeos\MW\MQueue\Manager\Iface Message queue object
-	*/
+	 */
 	public function getMessageQueue( $resource, $queue )
 	{
 		if( !isset( $this->mqueue ) ) {
@@ -480,7 +480,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Returns the process object.
 	 *
 	 * @return \Aimeos\MW\Process\Iface Process object
-	*/
+	 */
 	public function getProcess()
 	{
 		if( !isset( $this->process ) ) {

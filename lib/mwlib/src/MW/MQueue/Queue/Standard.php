@@ -36,7 +36,7 @@ class Standard implements Iface
 	 */
 	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $queue, $sql, $rtime )
 	{
-		$this->cname = md5( microtime(true) . getmypid() );
+		$this->cname = md5( microtime( true ) . getmypid() );
 		$this->conn = $conn;
 		$this->queue = $queue;
 		$this->sql = $sql;

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'manager' => array (
+	'manager' => array(
 		'default' => array(
 			'select' => 'select11',
 		),

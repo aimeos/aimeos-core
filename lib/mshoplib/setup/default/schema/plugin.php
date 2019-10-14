@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'mshop_plugin_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_plugin_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_plugin_type' );
 
@@ -32,7 +32,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_plugin' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_plugin' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_plugin' );
 
@@ -46,7 +46,7 @@ return array(
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msplu_id' );
 			$table->addUniqueIndex( array( 'siteid', 'type', 'provider' ), 'unq_msplu_sid_ty_prov' );

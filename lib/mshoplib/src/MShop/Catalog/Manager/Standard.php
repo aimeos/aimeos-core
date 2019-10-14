@@ -684,7 +684,7 @@ class Standard extends Base
 			$cfgPathCount = 'mshop/catalog/manager/standard/count';
 
 			if( $search->getSortations() === [] ) {
-				$search->setSortations( [$search->sort( '+', 'catalog.left')] );
+				$search->setSortations( [$search->sort( '+', 'catalog.left' )] );
 			}
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );

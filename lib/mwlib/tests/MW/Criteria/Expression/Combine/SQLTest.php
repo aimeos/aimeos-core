@@ -58,7 +58,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$expr1 = [];
-		$expr1[] = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $conn, '==', 'list', array('a', 'b', 'c') );
+		$expr1[] = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $conn, '==', 'list', array( 'a', 'b', 'c' ) );
 		$expr1[] = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $conn, '~=', 'string', 'value' );
 
 		$expr2 = [];

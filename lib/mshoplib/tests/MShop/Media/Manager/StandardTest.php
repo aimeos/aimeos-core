@@ -104,13 +104,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'media.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'media.editor', $this->editor );
 
-		$param = ['attribute','option', '0'];
+		$param = ['attribute', 'option', '0'];
 		$expr[] = $search->compare( '==', $search->createFunction( 'media:has', $param ), null );
 
-		$param = ['attribute','option', $listItem->getRefId()];
+		$param = ['attribute', 'option', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'media:has', $param ), null );
 
-		$param = ['attribute','option'];
+		$param = ['attribute', 'option'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'media:has', $param ), null );
 
 		$param = ['attribute'];

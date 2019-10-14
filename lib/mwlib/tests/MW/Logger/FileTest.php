@@ -54,13 +54,13 @@ class FileTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->setExpectedException( \Aimeos\MW\Logger\Exception::class );
-		$this->object->log( 'wrong log level', -1);
+		$this->object->log( 'wrong log level', -1 );
 	}
 
 
 	public function testScalarLog()
 	{
-		$this->object->log( array ( 'scalar', 'errortest' ) );
+		$this->object->log( array( 'scalar', 'errortest' ) );
 
 		if( !file_exists( $this->filename ) ) {
 			throw new \RuntimeException( 'No test file found' );

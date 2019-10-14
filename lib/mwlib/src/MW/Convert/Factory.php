@@ -38,7 +38,7 @@ class Factory
 			return new \Aimeos\MW\Convert\Compose( $list );
 		}
 
-		return self::createObject( $keys );;
+		return self::createObject( $keys ); ;
 	}
 
 
@@ -68,7 +68,7 @@ class Factory
 			throw new \Aimeos\MW\Convert\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$object =  new $classname();
+		$object = new $classname();
 
 		if( !( $object instanceof $iface ) ) {
 			throw new \Aimeos\MW\Convert\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );

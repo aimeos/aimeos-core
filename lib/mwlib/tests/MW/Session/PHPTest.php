@@ -23,25 +23,25 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		unset($this->object);
+		unset( $this->object );
 	}
 
 
 	public function testGet()
 	{
-		$this->assertEquals(null, $this->object->get('test'));
+		$this->assertEquals( null, $this->object->get( 'test' ) );
 
-		$this->object->set('test', '123456789');
-		$this->assertEquals('123456789', $this->object->get('test'));
+		$this->object->set( 'test', '123456789' );
+		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
 	}
 
 
 	public function testSet()
 	{
-		$this->object->set('test', null);
+		$this->object->set( 'test', null );
 		$this->assertEquals( null, $this->object->get( 'test' ) );
 
-		$this->object->set('test', '234');
+		$this->object->set( 'test', '234' );
 		$this->assertEquals( '234', $this->object->get( 'test' ) );
 	}
 }

@@ -23,7 +23,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		unset($this->object);
+		unset( $this->object );
 	}
 
 
@@ -38,7 +38,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$this->assertEquals( null, $this->object->get( 'test') );
+		$this->assertEquals( null, $this->object->get( 'test' ) );
 
 		$this->object->set( 'test', '123456789' );
 		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
