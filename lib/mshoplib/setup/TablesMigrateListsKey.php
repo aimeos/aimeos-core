@@ -15,15 +15,15 @@ namespace Aimeos\MW\Setup\Task;
 class TablesMigrateListsKey extends \Aimeos\MW\Setup\Task\Base
 {
 	private $tables = [
-		'db-attribute' => 'mshop_attribute_lists',
-		'db-catalog' => 'mshop_catalog_lists',
-		'db-customer' => 'mshop_customer_lists',
-		'db-media' => 'mshop_media_lists',
-		'db-price' => 'mshop_price_lists',
-		'db-product' => 'mshop_product_lists',
-		'db-service' => 'mshop_service_lists',
-		'db-supplier' => 'mshop_supplier_lists',
-		'db-text' => 'mshop_text_lists',
+		'db-attribute' => 'mshop_attribute_list',
+		'db-catalog' => 'mshop_catalog_list',
+		'db-customer' => 'mshop_customer_list',
+		'db-media' => 'mshop_media_list',
+		'db-price' => 'mshop_price_list',
+		'db-product' => 'mshop_product_list',
+		'db-service' => 'mshop_service_list',
+		'db-supplier' => 'mshop_supplier_list',
+		'db-text' => 'mshop_text_list',
 	];
 
 
@@ -67,7 +67,7 @@ class TablesMigrateListsKey extends \Aimeos\MW\Setup\Task\Base
 				$dbm = $this->additional->getDatabaseManager();
 				$conn = $dbm->acquire( $rname );
 
-				$select = sprintf( 'SELECT "id", "domain", "type", "refid" FROM "%1$s"', $table );
+				$select = sprintf( 'SELECT "id", "domain", "type", "refid" FROM "%1$s" WHERE "key"=\'\'', $table );
 				$update = sprintf( 'UPDATE "%1$s" SET "key" = ? WHERE "id" = ?', $table );
 
 				$stmt = $conn->create( $update, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
