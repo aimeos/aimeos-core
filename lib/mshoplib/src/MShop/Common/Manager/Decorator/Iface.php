@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Common\Manager\Decorator;
  * @subpackage Common
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 	/**
 	 * Initializes a new manager decorator object.
