@@ -253,7 +253,7 @@ class Bootstrap
 			{
 				$name = $file->getFilename();
 
-				if( $file->isFile() && preg_match('/^[a-z]{2,3}(_[A-Z]{2})?$/', $name ) ) {
+				if( $file->isFile() && preg_match( '/^[a-z]{2,3}(_[A-Z]{2})?$/', $name ) ) {
 					$list[$name] = null;
 				}
 			}

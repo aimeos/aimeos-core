@@ -15,7 +15,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 	public function testGetImage()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$object = \Aimeos\MW\Media\Factory::get( __DIR__ . $ds .'_testfiles' . $ds . 'image.png' );
+		$object = \Aimeos\MW\Media\Factory::get( __DIR__ . $ds . '_testfiles' . $ds . 'image.png' );
 
 		$this->assertInstanceOf( \Aimeos\MW\Media\Iface::class, $object );
 		$this->assertInstanceOf( \Aimeos\MW\Media\Image\Iface::class, $object );
@@ -26,8 +26,8 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 	public function testGetImageAsResource()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		if( ( $resource = fopen( __DIR__ . $ds .'_testfiles' . $ds . 'image.png', 'rw' ) ) === false ) {
-			throw new \RuntimeException( 'Failed to open ' . __DIR__ . $ds .'_testfiles' . $ds . 'image.png' );
+		if( ( $resource = fopen( __DIR__ . $ds . '_testfiles' . $ds . 'image.png', 'rw' ) ) === false ) {
+			throw new \RuntimeException( 'Failed to open ' . __DIR__ . $ds . '_testfiles' . $ds . 'image.png' );
 		}
 
 		$object = \Aimeos\MW\Media\Factory::get( $resource );
@@ -41,7 +41,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 	public function testGetImageAsString()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$content = file_get_contents( __DIR__ . $ds .'_testfiles' . $ds . 'image.png' );
+		$content = file_get_contents( __DIR__ . $ds . '_testfiles' . $ds . 'image.png' );
 		$object = \Aimeos\MW\Media\Factory::get( $content );
 
 		$this->assertInstanceOf( \Aimeos\MW\Media\Iface::class, $object );
@@ -64,7 +64,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 	public function testGetSvg()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$object = \Aimeos\MW\Media\Factory::get( __DIR__ . $ds .'_testfiles' . $ds . 'image.svgz' );
+		$object = \Aimeos\MW\Media\Factory::get( __DIR__ . $ds . '_testfiles' . $ds . 'image.svgz' );
 
 		$this->assertInstanceOf( \Aimeos\MW\Media\Iface::class, $object );
 		$this->assertInstanceOf( \Aimeos\MW\Media\Image\Iface::class, $object );

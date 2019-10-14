@@ -44,7 +44,7 @@ class Factory
 			throw new \Aimeos\MW\Cache\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
-		$object =  new $classname( $config, $resource );
+		$object = new $classname( $config, $resource );
 
 		if( !( $object instanceof $iface ) ) {
 			throw new \Aimeos\MW\Cache\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );

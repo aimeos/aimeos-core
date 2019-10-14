@@ -811,7 +811,7 @@ class PayPalExpress
 	 */
 	public function send( $target, $method, $payload )
 	{
-		if( ( $curl = curl_init() )=== false ) {
+		if( ( $curl = curl_init() ) === false ) {
 			throw new \Aimeos\MShop\Service\Exception( 'Could not initialize curl' );
 		}
 
@@ -822,16 +822,16 @@ class PayPalExpress
 			curl_setopt( $curl, CURLOPT_CUSTOMREQUEST, strtoupper( $method ) );
 			curl_setopt( $curl, CURLOPT_POSTFIELDS, $payload );
 			curl_setopt( $curl, CURLOPT_CONNECTTIMEOUT, 25 );
-			curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );   // return data as string
+			curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true ); // return data as string
 
 			curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, true );
 
-			if ( ( $response = curl_exec( $curl ) ) === false ) {
+			if( ( $response = curl_exec( $curl ) ) === false ) {
 				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Sending order failed: "%1$s"', curl_error( $curl ) ) );
 			}
 
-			if ( curl_errno($curl) ) {
-				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Curl error: "%1$s" - "%2$s"', curl_errno($curl), curl_error($curl) ) );
+			if( curl_errno( $curl ) ) {
+				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Curl error: "%1$s" - "%2$s"', curl_errno( $curl ), curl_error( $curl ) ) );
 			}
 
 			curl_close( $curl );

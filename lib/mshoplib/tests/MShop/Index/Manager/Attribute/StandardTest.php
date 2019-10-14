@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$item = \Aimeos\MShop::create( $this->context, 'attribute')->findItem( 'white', [], 'product', 'color' );
+		$item = \Aimeos\MShop::create( $this->context, 'attribute' )->findItem( 'white', [], 'product', 'color' );
 
 		$search = $this->object->createSearch( true );
 		$result = $this->object->aggregate( $search, 'index.attribute.id' );

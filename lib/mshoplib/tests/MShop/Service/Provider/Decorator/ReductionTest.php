@@ -217,7 +217,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$subProduct->setPrice( $subProduct->getPrice()->setCosts( '5.00' ) );
 
 		$this->servItem->setConfig( ['reduction.percent' => 60, 'reduction.product-costs' => 1] );
-		$this->basket->addProduct( $orderProduct->setProducts( [$subProduct]) );
+		$this->basket->addProduct( $orderProduct->setProducts( [$subProduct] ) );
 
 		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )
 			->will( $this->returnValue( $priceItem ) );

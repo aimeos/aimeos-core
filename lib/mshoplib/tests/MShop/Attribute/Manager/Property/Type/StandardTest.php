@@ -19,13 +19,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
 		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$this->object = $manager->getSubManager( 'property' )->getSubManager('type');
+		$this->object = $manager->getSubManager( 'property' )->getSubManager( 'type' );
 	}
 
 
 	protected function tearDown()
 	{
-		unset($this->object);
+		unset( $this->object );
 	}
 
 
@@ -66,7 +66,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$results = $this->object->searchItems( $search );
 
-		if( ($expected = reset($results) ) === false )
+		if( ( $expected = reset( $results ) ) === false )
 		{
 			throw new \RuntimeException( 'No property type item found.' );
 		}
@@ -81,13 +81,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'attribute.property.type.editor', $this->editor ) );
-		$results = $this->object->searchItems($search);
+		$results = $this->object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$resultSaved = $this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
@@ -164,7 +164,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'attribute.property.type.position' )] );
 		$search->setSlice( 0, 2 );
-		$items = $this->object->searchItems( $search, [], $total);
+		$items = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 2, count( $items ) );
 		$this->assertEquals( 3, $total );
@@ -181,6 +181,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( \Aimeos\MShop\Exception::class );
-		$this->object->getSubManager('unknown');
+		$this->object->getSubManager( 'unknown' );
 	}
 }

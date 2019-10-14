@@ -21,7 +21,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		unset($this->object);
+		unset( $this->object );
 	}
 
 

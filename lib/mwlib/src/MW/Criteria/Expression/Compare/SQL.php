@@ -144,7 +144,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 			$values[$key] = $this->escape( $operator, $type, $value );
 		}
 
-		return '(' . implode(',', $values) . ')';
+		return '(' . implode( ',', $values ) . ')';
 	}
 
 

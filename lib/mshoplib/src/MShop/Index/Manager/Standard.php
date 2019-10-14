@@ -185,7 +185,7 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
-	* @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanup( array $siteids )
 	{

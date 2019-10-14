@@ -256,15 +256,15 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 	public function testStmtSimpleInvalidBindParamType()
 	{
-		$sqlinsert2 =  'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
+		$sqlinsert2 = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
 		$conn = $this->object->acquire();
 
 		try
 		{
 			$stmt2 = $conn->create( $sqlinsert2 );
-			$stmt2->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT);
-			$stmt2->bind( 2, 0.15, 123);
+			$stmt2->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt2->bind( 2, 0.15, 123 );
 			$stmt2->execute();
 		}
 		catch( \Aimeos\MW\DB\Exception $de )
@@ -274,7 +274,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->object->release( $conn );
-		$this->fail('An expected exception has not been raised');
+		$this->fail( 'An expected exception has not been raised' );
 	}
 
 
@@ -287,13 +287,13 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		try {
 			$stmt = $conn->create( $sqlinsert );
 			$stmt->execute();
-		} catch ( \Aimeos\MW\DB\Exception $de ) {
+		} catch( \Aimeos\MW\DB\Exception $de ) {
 			$this->object->release( $conn );
 			return;
 		}
 
 		$this->object->release( $conn );
-		$this->fail('An expected exception has not been raised');
+		$this->fail( 'An expected exception has not been raised' );
 	}
 
 
@@ -352,7 +352,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 			$stmt->bind( 2, 'test', 123 );
 			$stmt->execute();
 		}
-		catch ( \Aimeos\MW\DB\Exception $e )
+		catch( \Aimeos\MW\DB\Exception $e )
 		{
 			$this->object->release( $conn );
 			throw $e;
@@ -382,7 +382,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		{
 			$conn->create( $sql )->execute()->finish();
 		}
-		catch ( \Aimeos\MW\DB\Exception $e )
+		catch( \Aimeos\MW\DB\Exception $e )
 		{
 			$this->object->release( $conn );
 			throw $e;
@@ -400,7 +400,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		{
 			$conn->create( 'SELECT *' )->execute()->finish();
 		}
-		catch ( \Aimeos\MW\DB\Exception $e )
+		catch( \Aimeos\MW\DB\Exception $e )
 		{
 			$this->object->release( $conn );
 			throw $e;
@@ -420,7 +420,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		{
 			$conn->create( $sql, 123 );
 		}
-		catch ( \Aimeos\MW\DB\Exception $e )
+		catch( \Aimeos\MW\DB\Exception $e )
 		{
 			$this->object->release( $conn );
 			throw $e;
@@ -439,7 +439,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 	public function testDBFactory()
 	{
-		$this->assertInstanceOf(\Aimeos\MW\DB\Manager\Iface::class, $this->object);
+		$this->assertInstanceOf( \Aimeos\MW\DB\Manager\Iface::class, $this->object );
 	}
 
 

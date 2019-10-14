@@ -32,7 +32,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $couponItem Coupon item with configuration for the provider
 	 * @param string $code Coupon code entered by the customer
 	 */
-	public function __construct(  \Aimeos\MShop\Coupon\Provider\Iface $provider,
+	public function __construct( \Aimeos\MShop\Coupon\Provider\Iface $provider,
 		\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $couponItem, $code )
 	{
 		$this->provider = $provider;

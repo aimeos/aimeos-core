@@ -30,7 +30,7 @@ abstract class Base
 	 */
 	public static function checkClass( $name, $object )
 	{
-		if( ($object instanceof $name) === false ) {
+		if( ( $object instanceof $name ) === false ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Object doesn\'t implement "%1$s"', $name ) );
 		}
 
@@ -50,7 +50,7 @@ abstract class Base
 	{
 		foreach( $list as $object )
 		{
-			if( ($object instanceof $name) === false ) {
+			if( ( $object instanceof $name ) === false ) {
 				throw new \Aimeos\MW\Common\Exception( sprintf( 'Object doesn\'t implement "%1$s"', $name ) );
 			}
 		}

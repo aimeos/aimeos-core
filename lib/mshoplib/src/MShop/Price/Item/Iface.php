@@ -186,7 +186,7 @@ interface Iface
 	 *
 	 * @param boolean $flag True if tax is included in the price value, costs and rebate, false if not
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
-	*/
+	 */
 	public function setTaxFlag( $flag );
 
 	/**

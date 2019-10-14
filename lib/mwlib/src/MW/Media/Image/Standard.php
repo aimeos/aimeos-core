@@ -49,18 +49,18 @@ class Standard
 			}
 
 			if( ( $image = @imagecreatefromstring( $watermark ) ) === false ) {
-				throw new \Aimeos\MW\Media\Exception( sprintf( 'The watermark image isn\'t supported by GDlib') );
+				throw new \Aimeos\MW\Media\Exception( sprintf( 'The watermark image isn\'t supported by GDlib' ) );
 			}
 
 			self::$watermark = $image;
 		}
 
 		if( ( $this->image = @imagecreatefromstring( $content ) ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'The image type isn\'t supported by GDlib') );
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'The image type isn\'t supported by GDlib' ) );
 		}
 
 		if( imagealphablending( $this->image, true ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagealphablending)') );
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagealphablending)' ) );
 		}
 
 		$this->options = $options;
@@ -148,7 +148,7 @@ class Standard
 				case 'image/png':
 
 					if( imagesavealpha( $this->image, true ) === false ) {
-						throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagesavealpha)') );
+						throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagesavealpha)' ) );
 					}
 
 					if( @imagepng( $this->image, $filename, (int) 10 - $quality / 10 ) === false ) {
@@ -264,8 +264,8 @@ class Standard
 		$wh = imagesy( self::$watermark );
 
 		$ratio = min( $this->getWidth() / $ww, $this->getHeight() / $wh );
-		$newHeight = (int) ($wh * $ratio);
-		$newWidth = (int) ($ww * $ratio);
+		$newHeight = (int) ( $wh * $ratio );
+		$newWidth = (int) ( $ww * $ratio );
 
 		if( ( $wimage = imagescale( self::$watermark, $newWidth, $newHeight, IMG_BICUBIC ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Unable to scale image' );

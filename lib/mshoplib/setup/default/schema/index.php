@@ -15,7 +15,7 @@ return array(
 
 	'table' => array(
 
-		'mshop_index_attribute' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_index_attribute' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_index_attribute' );
 
@@ -34,7 +34,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_index_catalog' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_index_catalog' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_index_catalog' );
 
@@ -51,7 +51,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_index_price' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_index_price' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_index_price' );
 
@@ -67,7 +67,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_index_supplier' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_index_supplier' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_index_supplier' );
 
@@ -84,7 +84,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_index_text' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_index_text' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_index_text' );
 			$table->addOption( 'engine', 'MyISAM' );

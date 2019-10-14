@@ -44,7 +44,7 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 	{
 		try {
 			return $this->statement->rowCount();
-		} catch ( \PDOException $e ) {
+		} catch( \PDOException $e ) {
 			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
 	}
@@ -61,7 +61,7 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 	{
 		try {
 			return $this->statement->fetch( $style ? \PDO::FETCH_ASSOC : \PDO::FETCH_NUM );
-		} catch ( \PDOException $e ) {
+		} catch( \PDOException $e ) {
 			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
 	}
@@ -77,7 +77,7 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 	{
 		try {
 			$this->statement->closeCursor();
-		} catch ( \PDOException $e ) {
+		} catch( \PDOException $e ) {
 			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
 
@@ -94,7 +94,7 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 	{
 		try {
 			return $this->statement->nextRowset();
-		} catch ( \PDOException $e ) {
+		} catch( \PDOException $e ) {
 			return false;
 		}
 	}

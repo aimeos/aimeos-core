@@ -24,7 +24,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 			->getSubmanager( 'base' )->createItem()->off();
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $context, $item, 'abcd' );
-		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Example( $provider, $context, $item, 'abcd');
+		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Example( $provider, $context, $item, 'abcd' );
 		$this->object->setObject( $this->object );
 	}
 

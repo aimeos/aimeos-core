@@ -85,7 +85,7 @@ return [
 				'customer.address.telefax' => '055544332212', 'customer.address.website' => 'www.example.com',
 				'customer.address.longitude' => '10.5', 'customer.address.latitude' => '51.0',
 				'customer.address.position' => '0',
-			],[
+			], [
 				'customer.address.company' => 'Example company LLC', 'customer.address.vatid' => 'DE999999999',
 				'customer.address.salutation' => 'mr', 'customer.address.title' => 'Dr.',
 				'customer.address.firstname' => 'Good', 'customer.address.lastname' => 'Unittest',

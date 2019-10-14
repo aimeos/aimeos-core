@@ -639,7 +639,7 @@ class Standard
 			 * @see mshop/supplier/manager/standard/delete/ansi
 			 * @see mshop/supplier/manager/standard/search/ansi
 			 */
-			$cfgPathCount =  'mshop/supplier/manager/standard/count';
+			$cfgPathCount = 'mshop/supplier/manager/standard/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
@@ -685,8 +685,8 @@ class Standard
 	 */
 	public function createSearch( $default = false )
 	{
-		if ( $default ) {
-			return $this->createSearchBase('supplier');
+		if( $default ) {
+			return $this->createSearchBase( 'supplier' );
 		}
 
 		return parent::createSearch();

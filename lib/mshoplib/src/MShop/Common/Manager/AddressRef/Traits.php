@@ -49,7 +49,7 @@ trait Traits
 
 			$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 			$search->setConditions( $search->compare( '==', $domain . '.address.parentid', $parentIds ) );
-			$search->setSortations( [$search->sort( '+', $domain . '.address.position')] );
+			$search->setSortations( [$search->sort( '+', $domain . '.address.position' )] );
 
 			foreach( $manager->searchItems( $search ) as $id => $addrItem ) {
 				$list[$addrItem->getParentId()][$id] = $addrItem;

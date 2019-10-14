@@ -35,7 +35,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testToString()
 	{
-		$template = $this->object->get('FROM');
+		$template = $this->object->get( 'FROM' );
 		$this->assertInstanceOf( \Aimeos\MW\Template\Iface::class, $template );
 
 		$this->assertEquals( 'table', $template->str() );

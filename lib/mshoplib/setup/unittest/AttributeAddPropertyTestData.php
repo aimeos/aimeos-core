@@ -92,7 +92,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		foreach( $testdata['attribute/property'] as $key => $dataset )
 		{
 			$prodProperty->setId( null );
-			$prodProperty->setParentId( $prodIds[ $dataset['parentid'] ] );
+			$prodProperty->setParentId( $prodIds[$dataset['parentid']] );
 			$prodProperty->setLanguageId( $dataset['langid'] );
 			$prodProperty->setValue( $dataset['value'] );
 			$prodProperty->setType( $dataset['type'] );
@@ -116,7 +116,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $attributeManager->createSearch();
 
 		foreach( $attributeManager->searchItems( $search ) as $id => $item ) {
-			$entry[ 'attribute/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getCode() ] = $id;
+			$entry['attribute/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getCode()] = $id;
 		}
 
 		return $entry;

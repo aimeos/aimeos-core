@@ -64,7 +64,7 @@ class ErrorlogTest extends \PHPUnit\Framework\TestCase
 
 		ini_set( "error_log", "error.log" );
 
-		$this->object = new \Aimeos\MW\Logger\Errorlog( \Aimeos\MW\Logger\Base::DEBUG, array('test') );
+		$this->object = new \Aimeos\MW\Logger\Errorlog( \Aimeos\MW\Logger\Base::DEBUG, array( 'test' ) );
 		$this->object->log( 'info test', \Aimeos\MW\Logger\Base::INFO, 'info' );
 
 		ini_restore( "error_log" );

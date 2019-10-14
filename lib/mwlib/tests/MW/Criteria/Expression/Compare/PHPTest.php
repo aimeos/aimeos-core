@@ -61,10 +61,10 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 			'undefined' => '$undefined',
 		);
 
-		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'listitem', array('a', 'b', 'c') );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'listitem', array( 'a', 'b', 'c' ) );
 		$this->assertEquals( "( \$listitem == 'a' || \$listitem == 'b' || \$listitem == 'c' )", $expr->toSource( $types, $translations ) );
 
-		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '!=', 'listitem', array('a', 'b') );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '!=', 'listitem', array( 'a', 'b' ) );
 		$this->assertEquals( "( \$listitem != 'a' && \$listitem != 'b' )", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'stringvar', 'value' );
@@ -73,16 +73,16 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '<', 'floatvar', 0.1 );
 		$this->assertEquals( '$floatvar < 0.1', $expr->toSource( $types, $translations ) );
 
-		$expr= new \Aimeos\MW\Criteria\Expression\Compare\PHP( '>', 'intvar', 10 );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '>', 'intvar', 10 );
 		$this->assertEquals( '$intvar > 10', $expr->toSource( $types, $translations ) );
 
-		$expr= new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'boolvar', true );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'boolvar', true );
 		$this->assertEquals( '$boolvar == 1', $expr->toSource( $types, $translations ) );
 
-		$expr= new \Aimeos\MW\Criteria\Expression\Compare\PHP( '!=', 'undefined', null );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '!=', 'undefined', null );
 		$this->assertEquals( '$undefined !== null', $expr->toSource( $types, $translations ) );
 
-		$expr= new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'undefined', null );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'undefined', null );
 		$this->assertEquals( '$undefined === null', $expr->toSource( $types, $translations ) );
 	}
 
@@ -107,7 +107,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 			'undefined' => '$undefined',
 		);
 
-		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '>=', 'listitem', array('a', 'b') );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '>=', 'listitem', array( 'a', 'b' ) );
 		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$expr->toSource( $types, $translations );
 	}
@@ -116,7 +116,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 	public function testToSourceExcept2()
 	{
 		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
-		new \Aimeos\MW\Criteria\Expression\Compare\PHP('=', 'undefined', null);
+		new \Aimeos\MW\Criteria\Expression\Compare\PHP( '=', 'undefined', null );
 	}
 
 

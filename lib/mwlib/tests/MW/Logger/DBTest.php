@@ -101,7 +101,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->setExpectedException( \Aimeos\MW\Logger\Exception::class );
-		$this->object->log( 'wrong log level', -1);
+		$this->object->log( 'wrong log level', -1 );
 	}
 
 
@@ -110,7 +110,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$conn = self::$dbm->acquire();
 		$conn->create( 'DELETE FROM "mw_log_test"' )->execute()->finish();
 
-		$this->object->log( array ( 'scalar', 'errortest' ) );
+		$this->object->log( array( 'scalar', 'errortest' ) );
 
 		$result = $conn->create( 'SELECT * FROM "mw_log_test"' )->execute();
 

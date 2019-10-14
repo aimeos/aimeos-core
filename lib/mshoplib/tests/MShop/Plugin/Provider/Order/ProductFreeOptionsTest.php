@@ -46,7 +46,7 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 		$attribute = \Aimeos\MShop::create( $this->context, 'order/base/product/attribute' )->createItem();
 
 		$attribute = $attribute->setQuantity( 2 )->setCode( 'size' )->setType( 'config' )
-			->setAttributeId( $attrManager->findItem( 'xs', [], 'product', 'size')->getId() );
+			->setAttributeId( $attrManager->findItem( 'xs', [], 'product', 'size' )->getId() );
 
 		$product = $product->setAttributeItem( $attribute )->setProductId( $prodManager->findItem( 'CNE' )->getId() );
 

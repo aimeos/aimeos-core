@@ -104,7 +104,7 @@ class Weight
 			}
 		}
 
-		if ( $this->checkWeightScale( $this->getWeight( $prodMap ) ) === false ) {
+		if( $this->checkWeightScale( $this->getWeight( $prodMap ) ) === false ) {
 			return false;
 		}
 
@@ -123,11 +123,11 @@ class Weight
 		$min = $this->getConfigValue( array( 'weight.min' ) );
 		$max = $this->getConfigValue( array( 'weight.max' ) );
 
-		if( $min !== null && ( (float) $min) > $basketWeight ) {
+		if( $min !== null && ( (float) $min ) > $basketWeight ) {
 			return false;
 		}
 
-		if( $max !== null && ( (float) $max) < $basketWeight ) {
+		if( $max !== null && ( (float) $max ) < $basketWeight ) {
 			return false;
 		}
 
@@ -156,7 +156,7 @@ class Weight
 		foreach( $manager->searchItems( $search, ['product/property'] ) as $product )
 		{
 			foreach( $product->getPropertyItems( 'package-weight' ) as $property ) {
-				$weight += ((float) $property->getValue()) * $prodMap[$product->getCode()];
+				$weight += ( (float) $property->getValue() ) * $prodMap[$product->getCode()];
 			}
 		}
 

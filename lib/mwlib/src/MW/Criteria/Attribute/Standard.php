@@ -46,8 +46,8 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	{
 		foreach( ['type', 'code'] as $entry )
 		{
-			if ( !isset($params[$entry]) ) {
-				throw new \Aimeos\MW\Common\Exception( sprintf('Required parameter "%1$s" is missing', $entry) );
+			if( !isset( $params[$entry] ) ) {
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'Required parameter "%1$s" is missing', $entry ) );
 			}
 		}
 

@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'madmin_cache' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'madmin_cache' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'madmin_cache' );
 
@@ -23,7 +23,7 @@ return array(
 			return $schema;
 		},
 
-		'madmin_cache_tag' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'madmin_cache_tag' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'madmin_cache_tag' );
 

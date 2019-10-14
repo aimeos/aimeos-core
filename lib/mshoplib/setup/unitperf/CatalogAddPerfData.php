@@ -76,8 +76,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			if( $level > 0 )
 			{
-				for( $i = 0; $i < $numCatPerLevel; $i++ ){
-					$treeFcn( $parents, $catItem->getId(), $numCatPerLevel, $level - 1, $catLabel . '-' . ($i+1), $i );
+				for( $i = 0; $i < $numCatPerLevel; $i++ ) {
+					$treeFcn( $parents, $catItem->getId(), $numCatPerLevel, $level - 1, $catLabel . '-' . ( $i + 1 ), $i );
 				}
 			}
 			else
@@ -117,7 +117,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		for( $i = $begin; $i < $end; $i++ ) {
-			$treeFcn( [$catRootItem], $catRootItem->getId(), $numCatPerLevel, $this->numCatLevels - 1, $i+1, $i );
+			$treeFcn( [$catRootItem], $catRootItem->getId(), $numCatPerLevel, $this->numCatLevels - 1, $i + 1, $i );
 		}
 
 		$this->additional->getProcess()->wait();
@@ -163,7 +163,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			{
 				if( $item->pos % $fraction === 0 )
 				{
-					$litem = (clone $defListItem)->setRefId( $item->getId() )->setPosition( $start + round( $item->pos / $fraction ) );
+					$litem = ( clone $defListItem )->setRefId( $item->getId() )->setPosition( $start + round( $item->pos / $fraction ) );
 					$catItem->addListItem( 'product', $litem );
 				}
 			}
@@ -199,13 +199,13 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$listItem = $productListManager->createItem()->setType( 'default' );
 
 		foreach( $attrIds as $attrId ) {
-			$prodItem->addListItem( 'attribute', (clone $listItem)->setRefId( $attrId ) );
+			$prodItem->addListItem( 'attribute', ( clone $listItem )->setRefId( $attrId ) );
 		}
 
 		$listItem = $productListManager->createItem()->setType( 'config' );
 
 		foreach( $this->attributes['sticker'] as $attrId => $label ) {
-			$prodItem->addListItem( 'attribute', (clone $listItem)->setRefId( $attrId ) );
+			$prodItem->addListItem( 'attribute', ( clone $listItem )->setRefId( $attrId ) );
 		}
 
 		return $prodItem;
@@ -244,7 +244,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$text = current( $color ) . ' ' . current( $property ) . ' ' . current( $material ) . ' ' . current( $articles );
 
-			$item = (clone $newItem)
+			$item = ( clone $newItem )
 				->setLabel( $text . ' (' . $catLabel . ')' )
 				->setCode( 'p-' . $i . ':' . $catLabel )
 				->setStatus( 1 );
@@ -308,18 +308,18 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( array_values( $this->shuffle( range( 0, 3 ) ) ) as $pos => $i )
 		{
-			$num = (($idx + $i) % 4) + 1;
-			$mediaItem = (clone $newItem)
-				->setLabel( ($pos+1) . '. picture for ' . $prodItem->getLabel() )
+			$num = ( ( $idx + $i ) % 4 ) + 1;
+			$mediaItem = ( clone $newItem )
+				->setLabel( ( $pos + 1 ) . '. picture for ' . $prodItem->getLabel() )
 				->setPreviews( [1 => $prefix . 'unitperf/' . $num . '.jpg'] )
 				->setUrl( $prefix . 'unitperf/' . $num . '-big.jpg' )
 				->setMimeType( 'image/jpeg' )
 				->setStatus( 1 );
 
-			$prodItem->addListItem( 'media', (clone $litem)->setPosition( $pos ), $mediaItem );
+			$prodItem->addListItem( 'media', ( clone $litem )->setPosition( $pos ), $mediaItem );
 		}
 
-		$mediaItem = (clone $newItem)
+		$mediaItem = ( clone $newItem )
 			->setPreviews( [1 => $prefix . 'unitperf/download-preview.jpg'] )
 			->setUrl( $prefix . 'unitperf/download.pdf' )
 			->setMimeType( 'application/pdf' )
@@ -328,7 +328,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$litem = $productListManager->createItem()->setType( 'download' );
 
-		return $prodItem->addListItem( 'media', (clone $litem), $mediaItem );
+		return $prodItem->addListItem( 'media', ( clone $litem ), $mediaItem );
 	}
 
 
@@ -343,15 +343,15 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		for( $i = 0; $i < 3; $i++ )
 		{
-			$priceItem = (clone $newItem)
+			$priceItem = ( clone $newItem )
 				->setLabel( $prodItem->getLabel() . ': from ' . ( 1 + $i * 5 ) )
-				->setValue( 100 + (( $base + $idx ) % 900) - $i * 10 )
+				->setValue( 100 + ( ( $base + $idx ) % 900 ) - $i * 10 )
 				->setQuantity( 1 + $i * 10 )
 				->setCurrencyId( 'EUR' )
 				->setRebate( $i * 10 )
 				->setStatus( 1 );
 
-			$prodItem->addListItem( 'price', (clone $litem)->setPosition( $i ), $priceItem );
+			$prodItem->addListItem( 'price', ( clone $litem )->setPosition( $i ), $priceItem );
 		}
 
 		return $prodItem;
@@ -372,7 +372,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			{
 				if( !in_array( $litem->getRefId(), $ids ) )
 				{
-					$prodItem->addListItem( 'product', (clone $listItem)->setRefId( $litem->getRefId() ) );
+					$prodItem->addListItem( 'product', ( clone $listItem )->setRefId( $litem->getRefId() ) );
 					$ids[] = $litem->getRefId();
 					$num--;
 				}
@@ -397,7 +397,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			->setType( 'url' )
 			->setStatus( 1 );
 
-		$prodItem->addListItem( 'text', (clone $listItem), $textItem );
+		$prodItem->addListItem( 'text', ( clone $listItem ), $textItem );
 
 		$textItem = $textManager->createItem()
 			->setLanguageId( 'en' )
@@ -406,7 +406,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			->setType( 'name' )
 			->setStatus( 1 );
 
-		$prodItem->addListItem( 'text', (clone $listItem)->setPosition( 0 ), $textItem );
+		$prodItem->addListItem( 'text', ( clone $listItem )->setPosition( 0 ), $textItem );
 
 		$textItem = $textManager->createItem()
 			->setContent( 'Short description for ' . $label )
@@ -415,7 +415,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			->setType( 'short' )
 			->setStatus( 1 );
 
-		$prodItem->addListItem( 'text', (clone $listItem)->setPosition( 1 ), $textItem );
+		$prodItem->addListItem( 'text', ( clone $listItem )->setPosition( 1 ), $textItem );
 
 		$textItem = $textManager->createItem()
 			->setContent( 'Long description for ' . $label . '. This may include some "lorem ipsum" text' )
@@ -424,7 +424,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			->setType( 'long' )
 			->setStatus( 1 );
 
-		$prodItem->addListItem( 'text', (clone $listItem)->setPosition( 2 ), $textItem );
+		$prodItem->addListItem( 'text', ( clone $listItem )->setPosition( 2 ), $textItem );
 
 		return $prodItem;
 	}
@@ -447,14 +447,14 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$text = current( $length ) . ', ' . current( $width ) . ', ' . $prodItem->getLabel() . ' (' . current( $size ) . ')';
 
-			$item = (clone $newItem)
+			$item = ( clone $newItem )
 				->setCode( 'v-' . $idx . '/' . $i . ':' . $prodItem->getCode() )
 				->setLabel( $text )
 				->setStatus( 1 );
 
-			$item->addListItem( 'attribute', (clone $varListItem)->setRefId( key( $length ) ) );
-			$item->addListItem( 'attribute', (clone $varListItem)->setRefId( key( $width ) ) );
-			$item->addListItem( 'attribute', (clone $varListItem)->setRefId( key( $size ) ) );
+			$item->addListItem( 'attribute', ( clone $varListItem )->setRefId( key( $length ) ) );
+			$item->addListItem( 'attribute', ( clone $varListItem )->setRefId( key( $width ) ) );
+			$item->addListItem( 'attribute', ( clone $varListItem )->setRefId( key( $size ) ) );
 
 			$prodItem->addListItem( 'product', clone $defListItem, $item );
 

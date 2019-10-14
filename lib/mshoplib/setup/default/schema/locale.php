@@ -9,7 +9,7 @@
 return array(
 	'table' => array(
 
-		'mshop_locale_site' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_locale_site' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_locale_site' );
 
@@ -34,7 +34,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_locale_language' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_locale_language' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_locale_language' );
 
@@ -57,7 +57,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_locale_currency' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_locale_currency' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_locale_currency' );
 
@@ -80,7 +80,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_locale' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_locale' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_locale' );
 

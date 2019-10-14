@@ -13,7 +13,7 @@ class OneTask extends Base
 
 	public function getPostDependencies()
 	{
-		return array( 'TwoTask');
+		return array( 'TwoTask' );
 	}
 
 

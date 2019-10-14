@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLanguageId()
 	{
-		$return = $this->object->setLanguageId('fr');
+		$return = $this->object->setLanguageId( 'fr' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $return );
 		$this->assertEquals( 'fr', $this->object->getLanguageId() );
@@ -170,11 +170,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item = $item->fromArray( $entries, true );
 
-		$this->assertEquals([], $entries);
-		$this->assertEquals($list['common.property.parentid'], $item->getParentId());
-		$this->assertEquals($list['common.property.languageid'], $item->getLanguageId());
-		$this->assertEquals($list['common.property.value'], $item->getValue());
-		$this->assertEquals($list['common.property.type'], $item->getType());
+		$this->assertEquals( [], $entries );
+		$this->assertEquals( $list['common.property.parentid'], $item->getParentId() );
+		$this->assertEquals( $list['common.property.languageid'], $item->getLanguageId() );
+		$this->assertEquals( $list['common.property.value'], $item->getValue() );
+		$this->assertEquals( $list['common.property.type'], $item->getType() );
 		$this->assertNull( $item->getSiteId() );
 	}
 

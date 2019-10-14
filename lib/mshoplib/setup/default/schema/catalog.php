@@ -9,7 +9,7 @@
 return array(
 	'table' => array(
 
-		'mshop_catalog' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_catalog' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_catalog' );
 
@@ -36,7 +36,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_catalog_list_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_catalog_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_catalog_list_type' );
 
@@ -60,7 +60,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_catalog_list' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_catalog_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_catalog_list' );
 

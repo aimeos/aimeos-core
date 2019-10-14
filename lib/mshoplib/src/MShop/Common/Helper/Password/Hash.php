@@ -55,11 +55,11 @@ class Hash implements \Aimeos\MShop\Common\Helper\Password\Iface
 		$iterations = ( isset( $this->options['iterations'] ) ? (int) $this->options['iterations'] : 1 );
 
 		$salted = sprintf( $format, $password, $salt );
-		$digest = hash( $this->options['algorithm'], $salted, true);
+		$digest = hash( $this->options['algorithm'], $salted, true );
 
 		// "stretch" hash
-		for ( $i = 1; $i < $iterations; $i++ ) {
-			$digest = hash( $this->options['algorithm'], $digest . $salted, true);
+		for( $i = 1; $i < $iterations; $i++ ) {
+			$digest = hash( $this->options['algorithm'], $digest . $salted, true );
 		}
 
 		return ( $encode ? base64_encode( $digest ) : bin2hex( $digest ) );

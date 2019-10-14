@@ -5,7 +5,7 @@
  * @copyright Aimeos (aimeos.org), 2017-2018
  */
 
-return array (
+return array(
 	'attribute/property/type' => array(
 		'attribute/property/type/size' => array( 'domain' => 'attribute', 'code' => 'size', 'label' => 'Size', 'position' => 0, 'status' => 1 ),
 		'attribute/property/type/mtime' => array( 'domain' => 'attribute', 'code' => 'mtime', 'label' => 'Modification time', 'position' => 1, 'status' => 1 ),

@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'mshop_tag_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_tag_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_tag_type' );
 
@@ -32,7 +32,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_tag' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_tag' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_tag' );
 
@@ -44,7 +44,7 @@ return array(
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mstag_id' );
 			$table->addUniqueIndex( array( 'siteid', 'domain', 'type', 'langid', 'label' ), 'unq_mstag_sid_dom_ty_lid_lab' );

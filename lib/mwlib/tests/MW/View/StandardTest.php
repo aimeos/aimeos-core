@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->addHelper( 'translate', $this->translate );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$filenames = array( 'notexisting', __DIR__ . $ds . '_testfiles'. $ds . 'template1' );
+		$filenames = array( 'notexisting', __DIR__ . $ds . '_testfiles' . $ds . 'template1' );
 
 		$output = $this->object->assign( array( 'quantity' => 1 ) )->render( $filenames );
 		$this->assertEquals( "Number of files: 1 File", $output );

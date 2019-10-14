@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'madmin_log' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'madmin_log' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'madmin_log' );
 

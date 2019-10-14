@@ -226,7 +226,7 @@ trait Traits
 			{
 				$refItem = $item->getRefItem();
 
-				if( $type && ( !$refItem || !($refItem instanceof $iface) || !in_array( $refItem->getType(), $types ) ) ) {
+				if( $type && ( !$refItem || !( $refItem instanceof $iface ) || !in_array( $refItem->getType(), $types ) ) ) {
 					continue;
 				}
 

@@ -173,7 +173,7 @@ class Standard
 		foreach( $bundleItems as $bundleItem )
 		{
 			foreach( $bundleItem->getRefItems( 'product', null, 'default' ) as $item ) {
-				$bundleMap[ $item->getCode() ][] = $bundleItem->getCode();
+				$bundleMap[$item->getCode()][] = $bundleItem->getCode();
 			}
 		}
 

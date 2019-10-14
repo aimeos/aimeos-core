@@ -53,10 +53,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'supplier.lists.type.editor', $this->editor) );
-		$results = $this->object->searchItems($search);
+		$search->setConditions( $search->compare( '==', 'supplier.lists.type.editor', $this->editor ) );
+		$results = $this->object->searchItems( $search );
 
-		if( ( $expected = reset($results) ) === false ) {
+		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No attribute list type item found' );
 		}
 
@@ -67,14 +67,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'supplier.lists.type.editor', $this->editor) );
-		$results = $this->object->searchItems($search);
+		$search->setConditions( $search->compare( '==', 'supplier.lists.type.editor', $this->editor ) );
+		$results = $this->object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
 		$resultSaved = $this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
@@ -134,9 +134,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'supplier.lists.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'supplier.lists.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( [$search->sort( '-', 'supplier.lists.type.position' )] );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -150,6 +150,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( \Aimeos\MShop\Exception::class );
-		$this->object->getSubManager('unknown');
+		$this->object->getSubManager( 'unknown' );
 	}
 }

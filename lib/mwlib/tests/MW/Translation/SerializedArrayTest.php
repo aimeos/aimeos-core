@@ -110,7 +110,7 @@ class SerializedArrayTest extends \PHPUnit\Framework\TestCase
 
 		$lcList = array(
 			0 => array(
-				'am', 'ar','bh', 'fil', 'fr', 'gun', 'hi', 'ln', 'lv','mg', 'nso', 'xbr', 'ti', 'wa', 'pt_BR'
+				'am', 'ar', 'bh', 'fil', 'fr', 'gun', 'hi', 'ln', 'lv', 'mg', 'nso', 'xbr', 'ti', 'wa', 'pt_BR'
 			),
 			1 => array(
 				'af', 'az', 'bn', 'bg', 'ca', 'da', 'de', 'el', 'en', 'eo', 'es',
