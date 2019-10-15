@@ -154,7 +154,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 			$this->modified = true;
 		}
 
-		return $this;;
+		return $this;
 	}
 
 

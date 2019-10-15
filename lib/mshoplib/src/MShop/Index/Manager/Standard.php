@@ -356,7 +356,7 @@ class Standard
 
 			$start += $size;
 		}
-		while( count( $result ) === $size );
+		while( !emtpy( $result ) );
 
 		return $this;
 	}
