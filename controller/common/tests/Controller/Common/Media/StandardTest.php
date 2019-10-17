@@ -116,10 +116,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$fsm->expects( $this->once() )->method( 'get' )
 			->will( $this->returnValue( $fs ) );
 
-		$fs->expects( $this->exactly( 2 ) )->method( 'has' )
+		$fs->expects( $this->exactly( 1 ) )->method( 'has' )
 			->will( $this->returnValue( true ) );
 
-		$fs->expects( $this->exactly( 2 ) )->method( 'rm' );
+		$fs->expects( $this->exactly( 1 ) )->method( 'rm' );
 
 		$this->context->setFilesystemManager( $fsm );
 
