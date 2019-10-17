@@ -132,6 +132,7 @@ class Standard
 			return $item->setUrl( '' )->setPreview( '' );
 		}
 
+		$mimedir = (string) $this->context->getConfig()->get( 'controller/common/media/standard/mimeicon/directory' );
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
 		$path = $item->getUrl();
 
@@ -143,11 +144,11 @@ class Standard
 		{
 			try
 			{
-				if( $preview !== '' && $fs->has( $preview ) ) {
+				if( $preview !== '' && !strcmp( $preview, $mimedir ) && $fs->has( $preview ) ) {
 					$fs->rm( $preview );
 				}
 			}
-			catch( \Exception $e ) { ; } // Can be a mime icon with relative path
+			catch( \Exception $e ) { ; } // continue if removing file fails
 		}
 
 		return $item->setUrl( '' )->setPreviews( [] )->deletePropertyItems( $item->getPropertyItems() );
