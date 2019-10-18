@@ -44,17 +44,17 @@ class Standard
 	 */
 	public function attr( $value, $trust = self::TAINT, $replace = '' )
 	{
-		if( !is_scalar( $value ) ) {
+		if( $value !== null && !is_scalar( $value ) ) {
 			$value = json_encode( $value, JSON_HEX_AMP );
 		} elseif( $replace != '' ) {
 			$value = str_replace( [" ", "\v", "\t", "\r", "\n", "\f"], $replace, $value );
 		}
 
 		if( $trust === self::TRUST ) {
-			return $value;
+			return (string) $value;
 		}
 
-		return str_replace( '"', '&quot;', $value );
+		return str_replace( '"', '&quot;', (string) $value );
 	}
 
 
@@ -67,15 +67,15 @@ class Standard
 	 */
 	public function html( $value, $trust = self::TAINT )
 	{
-		if( !is_scalar( $value ) ) {
+		if( $value !== null && !is_scalar( $value ) ) {
 			$value = json_encode( $value, JSON_HEX_AMP );
 		}
 
 		if( $trust === self::TRUST ) {
-			return $value;
+			return (string) $value;
 		}
 
-		return htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
+		return htmlspecialchars( (string) $value, ENT_QUOTES, 'UTF-8' );
 	}
 
 
@@ -89,15 +89,15 @@ class Standard
 	 */
 	public function xml( $value, $trust = self::TAINT )
 	{
-		if( !is_scalar( $value ) ) {
+		if( $value !== null && !is_scalar( $value ) ) {
 			$value = json_encode( $value, JSON_HEX_AMP );
 		}
 
 		if( $trust === self::TRUST ) {
-			return $value;
+			return (string) $value;
 		}
 
-		return htmlspecialchars( $value, ENT_NOQUOTES, 'UTF-8' );
+		return htmlspecialchars( (string) $value, ENT_NOQUOTES, 'UTF-8' );
 	}
 
 
