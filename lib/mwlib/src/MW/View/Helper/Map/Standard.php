@@ -17,7 +17,9 @@ namespace Aimeos\MW\View\Helper\Map;
  * @package MW
  * @subpackage View
  */
-class Standard implements Iface
+class Standard
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Map\Iface
 {
 	/**
 	 * Returns the mapped array
