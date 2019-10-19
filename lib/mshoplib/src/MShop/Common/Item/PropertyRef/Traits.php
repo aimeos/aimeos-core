@@ -50,6 +50,8 @@ trait Traits
 	public function addPropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item )
 	{
 		$id = $item->getId() ?: '_' . $this->getId() . '_' . $item->getType() . '_' . $item->getLanguageId() . '_' . $item->getValue();
+
+		unset( $this->propItems[$id] ); // append at the end
 		$this->propItems[$id] = $item;
 
 		return $this;

@@ -77,9 +77,13 @@ trait Traits
 		}
 
 		$id = $listItem->getId() ?: '_' . $this->getId() . '_' . $domain . '_' . $listItem->getType() . '_' . $listItem->getRefId();
+
+		unset( $this->listItems[$domain][$id] ); // append at the end
 		$this->listItems[$domain][$id] = $listItem->setDomain( $domain )->setRefItem( $refItem );
 
-		if( isset( $this->listMap[$domain] ) ) {
+		if( isset( $this->listMap[$domain] ) )
+		{
+			unset( $this->listMap[$domain][$listItem->getType()][$listItem->getRefId()] ); // append at the end
 			$this->listMap[$domain][$listItem->getType()][$listItem->getRefId()] = $listItem;
 		}
 
