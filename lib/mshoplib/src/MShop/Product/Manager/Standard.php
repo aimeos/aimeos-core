@@ -440,6 +440,7 @@ class Standard
 		try
 		{
 			$id = $item->getId();
+			$date = date( 'Y-m-d H:i:s' );
 			$columns = $this->getObject()->getSaveAttributes();
 
 			if( $id === null )
@@ -537,8 +538,8 @@ class Standard
 			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
 			$stmt->bind( $idx++, $item->getTarget() );
 			$stmt->bind( $idx++, $context->getEditor() );
-			$stmt->bind( $idx++, date( 'Y-m-d H:i:s' ) ); // mtime
-			$stmt->bind( $idx++, $item->getTimeCreated() );
+			$stmt->bind( $idx++, $date ); // mtime
+			$stmt->bind( $idx++, $item->getTimeCreated() ?: $date );
 			$stmt->bind( $idx++, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null )
