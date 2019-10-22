@@ -307,10 +307,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetDateEnd()
 	{
-		$return = $this->object->setDateEnd( '2010-05-22 06:22:22' );
+		$return = $this->object->setDateEnd( '2010-05-22 06:22' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
-		$this->assertEquals( '2010-05-22 06:22:22', $this->object->getDateEnd() );
+		$this->assertEquals( '2010-05-22 06:22:00', $this->object->getDateEnd() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 

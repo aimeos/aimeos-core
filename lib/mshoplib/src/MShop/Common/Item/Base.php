@@ -349,6 +349,10 @@ abstract class Base
 				throw new \Aimeos\MShop\Exception( $msg );
 			}
 
+			if( strlen( $date ) === 16 ) {
+				$date .= ':00';
+			}
+
 			return str_replace( 'T', ' ', (string) $date );
 		}
 	}
