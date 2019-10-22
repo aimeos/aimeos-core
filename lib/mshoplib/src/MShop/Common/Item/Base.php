@@ -322,16 +322,11 @@ abstract class Base
 	 *
 	 * @param string $old Current ID of the item
 	 * @param string $new New ID which should be set in the item
-	 * @return string Value of the new ID
-	 * @throws \Aimeos\MShop\Exception if the ID is not null or not the same as the old one
+	 * @return string|null Value of the new ID
 	 */
 	public static function checkId( $old, $new )
 	{
-		if( $new != null && $old != null && $old != $new ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'New ID "%1$s" for item differs from old ID "%2$s"', $new, $old ) );
-		}
-
-		return $new;
+		return ( $new !== null ? (string) $new : $new );
 	}
 
 
