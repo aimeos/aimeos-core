@@ -69,9 +69,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Status\Iface::class, $return );
 		$this->assertEquals( 15, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
-
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
-		$this->object->setId( 6 );
 	}
 
 	public function testGetSiteId()
