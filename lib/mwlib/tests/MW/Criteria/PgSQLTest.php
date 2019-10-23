@@ -43,11 +43,11 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConditionSource()
 	{
-		$types = array( 'column' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL);
+		$types = array( 'column' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );
 		$this->object->setConditions( $this->object->compare( '==', 'column', 0 ) );
 		$this->assertEquals( "column = 'f'", $this->object->getConditionSource( $types ) );
 
-		$types = array( 'column' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL);
+		$types = array( 'column' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );
 		$this->object->setConditions( $this->object->compare( '==', 'column', 1 ) );
 		$this->assertEquals( "column = 't'", $this->object->getConditionSource( $types ) );
 	}

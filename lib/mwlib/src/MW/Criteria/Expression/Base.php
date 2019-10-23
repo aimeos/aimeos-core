@@ -103,7 +103,7 @@ abstract class Base
 	protected function isFunction( &$name, array &$params )
 	{
 		$len = strlen( $name );
-		if( $len === 0 || $name[$len-1] !== ')' ) {
+		if( $len === 0 || $name[$len - 1] !== ')' ) {
 			return false;
 		}
 

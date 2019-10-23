@@ -75,10 +75,10 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$expected = " NOT ( ( list IN ('a','b','c') AND string LIKE '%value%' ESCAPE '#' ) OR ( float < 0.1 AND int > 10 ) )";
 		$this->assertEquals( $expected, $test->toSource( $types ) );
 
-		$obj = new \Aimeos\MW\Criteria\Expression\Combine\SQL('&&', []);
-		$this->assertEquals('', $obj->toSource($types));
+		$obj = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '&&', [] );
+		$this->assertEquals( '', $obj->toSource( $types ) );
 
 		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
-		new \Aimeos\MW\Criteria\Expression\Combine\SQL('', []);
+		new \Aimeos\MW\Criteria\Expression\Combine\SQL( '', [] );
 	}
 }

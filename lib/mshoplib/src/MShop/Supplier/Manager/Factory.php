@@ -66,14 +66,14 @@ class Factory
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		if ( $name === null ) {
-			$name = $context->getConfig()->get('mshop/supplier/manager/name', 'Standard');
+		if( $name === null ) {
+			$name = $context->getConfig()->get( 'mshop/supplier/manager/name', 'Standard' );
 		}
 
-		if ( ctype_alnum($name) === false )
+		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string($name) ? '\Aimeos\MShop\Supplier\Manager\\' . $name : '<not a string>';
-			throw new \Aimeos\MShop\Supplier\Exception(sprintf('Invalid characters in class name "%1$s"', $classname));
+			$classname = is_string( $name ) ? '\Aimeos\MShop\Supplier\Manager\\' . $name : '<not a string>';
+			throw new \Aimeos\MShop\Supplier\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
 		$iface = \Aimeos\MShop\Supplier\Manager\Iface::class;

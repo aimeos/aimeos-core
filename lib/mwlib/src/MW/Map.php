@@ -34,14 +34,14 @@ class Map implements MapIface
 
 
    /**
-	 * Dynamically handle calls to the class.
-	 *
-	 * @param string $name Method name
-	 * @param array $params List of parameters
-	 * @return mixed Result from called function
-	 *
-	 * @throws \BadMethodCallException
-	 */
+    * Dynamically handle calls to the class.
+    *
+    * @param string $name Method name
+    * @param array $params List of parameters
+    * @return mixed Result from called function
+    *
+    * @throws \BadMethodCallException
+    */
 	public static function __callStatic( string $name, array $params )
 	{
 		if( !isset( static::$methods[$name] ) ) {

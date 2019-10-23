@@ -179,14 +179,14 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	public function testConstructorNoDatabaseManager()
 	{
 		$this->setExpectedException( \Aimeos\MW\Tree\Exception::class );
-		new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, null);
+		new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, null );
 	}
 
 
 	public function testConstructorNoConfig()
 	{
 		$this->setExpectedException( \Aimeos\MW\Tree\Exception::class );
-		new \Aimeos\MW\Tree\Manager\DBNestedSet([], self::$dbm);
+		new \Aimeos\MW\Tree\Manager\DBNestedSet( [], self::$dbm );
 	}
 
 
@@ -195,7 +195,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		unset( $this->config['sql'] );
 
 		$this->setExpectedException( \Aimeos\MW\Tree\Exception::class );
-		new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
+		new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 	}
 
 
@@ -204,7 +204,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		unset( $this->config['sql']['newid'] );
 
 		$this->setExpectedException( \Aimeos\MW\Tree\Exception::class );
-		new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
+		new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 	}
 
 
@@ -213,7 +213,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		unset( $this->config['search']['id'] );
 
 		$this->setExpectedException( \Aimeos\MW\Tree\Exception::class );
-		new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
+		new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 	}
 
 
@@ -260,7 +260,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 
 		if( ( $node = reset( $nodes ) ) === false ) {
-			throw new \RuntimeException('No node found');
+			throw new \RuntimeException( 'No node found' );
 		}
 
 		$search->setConditions( $search->compare( '==', 'tree.level', 3 ) );
@@ -284,7 +284,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
 
-		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
+		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 		$manager->searchNodes( $manager->createSearch() );
 	}
 
@@ -315,8 +315,8 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
 
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
-		$root = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE  );
-		$manager->deleteNode($root->getId());
+		$root = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
+		$manager->deleteNode( $root->getId() );
 	}
 
 
@@ -386,10 +386,10 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetLevelFromConstantException()
 	{
-		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
+		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 
 		$this->setExpectedException( \Aimeos\MW\Tree\Exception::class );
-		$manager->getNode( null, 0);
+		$manager->getNode( null, 0 );
 	}
 
 
@@ -427,7 +427,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 	public function testInsertNodeException()
 	{
-		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
+		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 		$newNode = $manager->createNode();
 
 		$this->setExpectedException( \Aimeos\MW\Tree\Exception::class );
@@ -1019,7 +1019,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		';
 
 
-		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
+		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 
 		$root = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 
@@ -1052,7 +1052,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$node = $manager->createNode();
 
 		$this->setExpectedException( \Aimeos\MW\Tree\Exception::class );
-		$manager->saveNode($node);
+		$manager->saveNode( $node );
 	}
 
 
@@ -1062,7 +1062,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 			UPDATE "mw_tree_test" SET label123 = ?, status = ? WHERE id = ?
 		';
 
-		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
+		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 		$root = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
 		$root->setLabel( 'rooot' );
@@ -1078,7 +1078,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$method = $class->getMethod( 'setReadOnly' );
 		$method->setAccessible( true );
 
-		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
+		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 
 		$method->invokeArgs( $manager, [] );
 

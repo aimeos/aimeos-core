@@ -52,12 +52,12 @@ class Memory
 	{
 		$name = trim( $name, '/' );
 
-		if( isset( $this->negCache[ $name ] ) ) {
+		if( isset( $this->negCache[$name] ) ) {
 			return $default;
 		}
 
 		if( array_key_exists( $name, $this->cache ) ) {
-			return $this->cache[ $name ];
+			return $this->cache[$name];
 		}
 
 		if( ( $value = $this->getValueFromArray( $this->config, explode( '/', $name ) ) ) === null ) {
@@ -66,11 +66,11 @@ class Memory
 
 		if( $value === null )
 		{
-			$this->negCache[ $name ] = true;
+			$this->negCache[$name] = true;
 			return $default;
 		}
 
-		$this->cache[ $name ] = $value;
+		$this->cache[$name] = $value;
 		return $value;
 	}
 
@@ -88,15 +88,15 @@ class Memory
 
 		if( $value !== null )
 		{
-			$this->cache[ $name ] = $value;
+			$this->cache[$name] = $value;
 
-			if( isset( $this->negCache[ $name ] ) ) {
-				unset( $this->negCache[ $name ] );
+			if( isset( $this->negCache[$name] ) ) {
+				unset( $this->negCache[$name] );
 			}
 		}
 		else
 		{
-			$this->negCache[ $name ] = true;
+			$this->negCache[$name] = true;
 		}
 
 		// don't store local configuration

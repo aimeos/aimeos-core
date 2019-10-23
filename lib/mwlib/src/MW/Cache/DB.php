@@ -252,7 +252,7 @@ class DB
 			$result = $stmt->execute();
 
 			while( ( $row = $result->fetch() ) !== false ) {
-				$list[ $row['id'] ] = (string) $row['value'];
+				$list[$row['id']] = (string) $row['value'];
 			}
 
 			$this->dbm->release( $conn, $this->dbname );

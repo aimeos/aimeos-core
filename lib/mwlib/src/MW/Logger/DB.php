@@ -14,7 +14,7 @@ namespace Aimeos\MW\Logger;
 
 /**
  * Log messages to a database table.
-  *
+ *
  * @package MW
  * @subpackage Logger
  */
@@ -45,7 +45,7 @@ class DB extends Base implements Iface
 		$this->facilities = $facilities;
 
 		if( $requestid === null ) {
-			$requestid = md5( php_uname('n') . getmypid() . date( 'Y-m-d H:i:s' ) );
+			$requestid = md5( php_uname( 'n' ) . getmypid() . date( 'Y-m-d H:i:s' ) );
 		}
 		$this->requestid = $requestid;
 	}
