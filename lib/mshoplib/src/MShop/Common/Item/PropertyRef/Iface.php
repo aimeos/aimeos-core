@@ -77,4 +77,12 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
 	 */
 	public function getPropertyItems( $type = null, $active = true );
+
+	/**
+	 * Adds a new property item or overwrite an existing one
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items New list of property items
+	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 */
+	public function setPropertyItems( array $items );
 }

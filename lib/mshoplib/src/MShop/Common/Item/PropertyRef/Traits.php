@@ -174,6 +174,26 @@ trait Traits
 
 
 	/**
+	 * Adds a new property item or overwrite an existing one
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items New list of property items
+	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 */
+	public function setPropertyItems( array $items )
+	{
+		$this->propItems = [];
+
+		foreach( $items as $item )
+		{
+			$id = $item->getId() ?: '_' . $this->getId() . '_' . $item->getType() . '_' . $item->getLanguageId() . '_' . $item->getValue();
+			$this->propItems[$id] = $item;
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the unique ID of the item.
 	 *
 	 * @return string|null ID of the item
