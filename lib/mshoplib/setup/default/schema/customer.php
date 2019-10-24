@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'mshop_customer' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_customer' );
 
@@ -42,7 +42,7 @@ return array(
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscus_id' );
 			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_mscus_sid_code' );
@@ -56,7 +56,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_customer_address' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer_address' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_customer_address' );
 
@@ -86,7 +86,7 @@ return array(
 			$table->addColumn( 'pos', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscusad_id' );
 			$table->addIndex( array( 'parentid' ), 'fk_mscusad_pid' );
@@ -103,7 +103,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_customer_list_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_customer_list_type' );
 
@@ -127,7 +127,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_customer_list' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_customer_list' );
 
@@ -158,7 +158,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_customer_group' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer_group' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_customer_group' );
 
@@ -177,7 +177,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_customer_property_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer_property_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_customer_property_type' );
 
@@ -201,7 +201,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_customer_property' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer_property' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_customer_property' );
 

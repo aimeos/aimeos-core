@@ -82,7 +82,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	public function testCheckVoucher()
 	{
 		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
-		$this->access( 'checkVoucher' )->invokeArgs( $this->object, [-1, [5,6]] );
+		$this->access( 'checkVoucher' )->invokeArgs( $this->object, [-1, [5, 6]] );
 	}
 
 

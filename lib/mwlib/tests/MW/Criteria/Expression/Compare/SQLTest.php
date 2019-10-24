@@ -90,10 +90,10 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 			'bool' => 't.bool',
 		);
 
-		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'list', array('a', 'b', 'c') );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'list', array( 'a', 'b', 'c' ) );
 		$this->assertEquals( "t.list IN ('a','b','c')", $expr->toSource( $types, $translations ) );
 
-		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '!=', 'list', array('a', 'b', 'c') );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '!=', 'list', array( 'a', 'b', 'c' ) );
 		$this->assertEquals( "t.list NOT IN ('a','b','c')", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '~=', 'string', 'value' );
@@ -102,13 +102,13 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '<', 'float', 0.1 );
 		$this->assertEquals( "t.float < 0.1", $expr->toSource( $types, $translations ) );
 
-		$expr= new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '>', 'int', 10 );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '>', 'int', 10 );
 		$this->assertEquals( "t.int > 10", $expr->toSource( $types, $translations ) );
 
-		$expr= new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '!=', 'undefined', null );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '!=', 'undefined', null );
 		$this->assertEquals( "t.undefined IS NOT NULL", $expr->toSource( $types, $translations ) );
 
-		$expr= new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'bool', true );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'bool', true );
 		$this->assertEquals( "t.bool = 1", $expr->toSource( $types, $translations ) );
 	}
 

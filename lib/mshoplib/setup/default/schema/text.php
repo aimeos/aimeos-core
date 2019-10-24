@@ -14,7 +14,7 @@ return array(
 
 
 	'table' => array(
-		'mshop_text_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_text_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_text_type' );
 
@@ -38,7 +38,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_text' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_text' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_text' );
 
@@ -52,7 +52,7 @@ return array(
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mstex_id' );
 			$table->addIndex( array( 'siteid', 'domain', 'status' ), 'idx_mstex_sid_domain_status' );
@@ -62,7 +62,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_text_list_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_text_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_text_list_type' );
 
@@ -86,7 +86,7 @@ return array(
 			return $schema;
 		},
 
-		'mshop_text_list' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_text_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_text_list' );
 

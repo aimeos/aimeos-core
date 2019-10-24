@@ -52,10 +52,10 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 			'bool' => 't.bool',
 		);
 
-		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '==', 'list', array('a', 'b', 'c') );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '==', 'list', array( 'a', 'b', 'c' ) );
 		$this->assertEquals( "t.list IN ('a','b','c')", $expr->toSource( $types, $translations ) );
 
-		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '!=', 'list', array('a', 'b', 'c') );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '!=', 'list', array( 'a', 'b', 'c' ) );
 		$this->assertEquals( "t.list NOT IN ('a','b','c')", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '~=', 'string', 'value' );
@@ -64,16 +64,16 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '<', 'float', 0.1 );
 		$this->assertEquals( "t.float < 0.1", $expr->toSource( $types, $translations ) );
 
-		$expr= new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '>', 'int', 10 );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '>', 'int', 10 );
 		$this->assertEquals( "t.int > 10", $expr->toSource( $types, $translations ) );
 
-		$expr= new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '!=', 'undefined', null );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '!=', 'undefined', null );
 		$this->assertEquals( "t.undefined IS NOT NULL", $expr->toSource( $types, $translations ) );
 
-		$expr= new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '==', 'bool', true );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '==', 'bool', true );
 		$this->assertEquals( "t.bool = 't'", $expr->toSource( $types, $translations ) );
 
-		$expr= new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '==', 'bool', false );
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->conn, '==', 'bool', false );
 		$this->assertEquals( "t.bool = 'f'", $expr->toSource( $types, $translations ) );
 	}
 }

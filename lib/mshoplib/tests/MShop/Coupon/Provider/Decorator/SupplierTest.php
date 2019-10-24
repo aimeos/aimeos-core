@@ -23,7 +23,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )->createItem();
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $this->context, $this->couponItem, 'abcd' );
-		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Supplier( $provider, $this->context, $this->couponItem, 'abcd');
+		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Supplier( $provider, $this->context, $this->couponItem, 'abcd' );
 		$this->object->setObject( $this->object );
 
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );

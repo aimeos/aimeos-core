@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'madmin_queue' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'madmin_queue' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'madmin_queue' );
 

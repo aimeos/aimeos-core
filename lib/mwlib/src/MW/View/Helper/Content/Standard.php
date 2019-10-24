@@ -53,7 +53,7 @@ class Standard
 	 */
 	public function transform( $url )
 	{
-		if( strncmp( $url, 'http', 4 ) !== 0 && strncmp( $url, 'data:', 5 ) !== 0  && strncmp( $url, '/', 1 ) !== 0 ) {
+		if( strncmp( $url, 'http', 4 ) !== 0 && strncmp( $url, 'data:', 5 ) !== 0 && strncmp( $url, '/', 1 ) !== 0 ) {
 			$url = $this->baseurl . '/' . $url;
 		}
 
