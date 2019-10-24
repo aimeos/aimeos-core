@@ -61,6 +61,6 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->searchItems( $search, [] );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertGreaterThanOrEqual( 3, count( $result ) );
 	}
 }

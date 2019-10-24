@@ -57,7 +57,7 @@ class MySQL
 			if( isset( $params[1] ) )
 			{
 				$str = '';
-				$regex = '/(\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
+				$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
 				$search = trim( preg_replace( $regex, ' ', $params[1] ), "' \t\n\r\0\x0B" );
 
 				foreach( explode( ' ', $search ) as $part )
@@ -65,7 +65,7 @@ class MySQL
 					$len = strlen( $part );
 
 					if( $len > 0 ) {
-						$str .= ' +' . strtolower( $part ) . '*';
+						$str .= ' ' . strtolower( $part ) . '*';
 					}
 				}
 
