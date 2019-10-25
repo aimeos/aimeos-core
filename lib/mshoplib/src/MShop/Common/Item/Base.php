@@ -87,7 +87,7 @@ abstract class Base
 	 */
 	public function __set( $name, $value )
 	{
-		if( !isset( $this->bdata[$name] ) || $this->bdata[$name] !== $value ) {
+		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] !== $value ) {
 			$this->setModified();
 		}
 
@@ -104,7 +104,7 @@ abstract class Base
 	 */
 	public function get( $name, $default = null )
 	{
-		if( array_key_exists( $name, $this->bdata ) ) {
+		if( isset( $this->bdata[$name] ) ) {
 			return $this->bdata[$name];
 		}
 
