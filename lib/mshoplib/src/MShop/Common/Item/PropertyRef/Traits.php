@@ -174,6 +174,34 @@ trait Traits
 
 
 	/**
+	 * Adds new list items, updates existing ones and deletes old ones
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @param array $entries List of arrays with key/value pairs for lists data and referenced data
+	 * @param array|string|null $types Name of the types to updata the entries with (null for all)
+	 */
+	public function setProperties( array $entries, $types = null )
+	{
+		$items = $this->getPropertyItems( $types, false );
+
+		foreach( $entries as $entry )
+		{
+			$p = new \Aimeos\MShop\Common\Item\Property\Standard( $this->getResourceType() . '.property.' );
+			$p = $p->fromArray( $entry );
+
+			if( ( $prop = $this->getPropertyItem( $p->getType(), $p->getLanguageId(), $p->getValue(), false ) ) === null ) {
+				$this->addPropertyItem( $p );
+			} else {
+				unset( $items[$prop->getId()] );
+			}
+		}
+
+		return $this->deletePropertyItems( $items );
+	}
+
+
+	/**
 	 * Adds a new property item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items New list of property items
@@ -191,6 +219,14 @@ trait Traits
 
 		return $this;
 	}
+
+
+	/**
+	 * Returns the resource type of the item.
+	 *
+	 * @return string Resource type of the item
+	 */
+	abstract public function getResourceType();
 
 
 	/**

@@ -112,6 +112,48 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetProperties()
+	{
+		$entries = [[
+			'product.property.type' => 'package-weight',
+			'product.property.value' => '10.0'
+		]];
+		$result = $this->object->setProperties( $entries );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
+		$this->assertEquals( 1, count( $this->object->getPropertyItems( null, false ) ) );
+		$this->assertEquals( ['_id_package-weight__10.0' => '10.0'], $this->object->getProperties( 'package-weight' ) );
+	}
+
+
+	public function testSetPropertiesType()
+	{
+		$entries = [[
+			'product.property.type' => 'package-weight',
+			'product.property.value' => '10.0'
+		]];
+		$result = $this->object->setProperties( $entries, 'package-weight' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
+		$this->assertEquals( 3, count( $this->object->getPropertyItems( null, false ) ) );
+		$this->assertEquals( ['_id_package-weight__10.0' => '10.0'], $this->object->getProperties( 'package-weight' ) );
+	}
+
+
+	public function testSetPropertiesTypeArray()
+	{
+		$entries = [[
+			'product.property.type' => 'package-weight',
+			'product.property.value' => '10.0'
+		]];
+		$result = $this->object->setProperties( $entries, ['package-weight', 'test'] );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
+		$this->assertEquals( 2, count( $this->object->getPropertyItems( null, false ) ) );
+		$this->assertEquals( ['_id_package-weight__10.0' => '10.0'], $this->object->getProperties( 'package-weight' ) );
+	}
+
+
 	public function testSetPropertyItems()
 	{
 		$expected = ['_id_test2_en_' => $this->propItem2, '_id_test__value' => $this->propItem];
