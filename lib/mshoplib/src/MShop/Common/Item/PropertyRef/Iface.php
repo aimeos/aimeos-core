@@ -79,30 +79,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function getPropertyItems( $type = null, $active = true );
 
 	/**
-	 * Adds new list items, updates existing ones and deletes old ones
-	 *
-	 * For example:
-	 *  $entries = [[
-	 *  	'product.property.type' => 'package-weight',
-	 *  	'product.property.value' => '10.0',
-	 *  ],[
-	 *  	'product.property.type' => 'prop-name',
-	 *  	'product.property.languageid' => 'en',
-	 *  	'product.property.value' => 'My prop',
-	 *  ]];
-	 *
-	 *  There will be only items for those two entries afterwards:
-	 *  $item->setProperties( $entries );
-	 *
-	 *  Only items for those two entries but items with another types will be left untouched:
-	 *  $item->setProperties( $entries, ['package-weight', 'prop-name'] );
-	 *
-	 * @param array $entries List of arrays with key/value pairs for lists data and referenced data
-	 * @param array|string|null $types Type codes of those entries that will be updated (null for all)
-	 */
-	public function setProperties( array $entries, $types = null );
-
-	/**
 	 * Adds a new property item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items New list of property items

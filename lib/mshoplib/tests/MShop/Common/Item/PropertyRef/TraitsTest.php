@@ -43,6 +43,12 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	protected function tearDown()
+	{
+		unset( $this->object, $this->propItem, $this->propItem2 );
+	}
+
+
 	public function testAddPropertyItem()
 	{
 		$object = new TraitsClass( 'product.', [] );
@@ -53,18 +59,32 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAddPropertyItems()
+	{
+		$object = new TraitsClass( 'product.', [] );
+		$result = $object->addPropertyItems( [$this->propItem, $this->propItem2] );
+		$expected = ['_id_test__value' => $this->propItem,'_id_test2_en_' => $this->propItem2];
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
+		$this->assertEquals( $expected, $object->getPropertyItems( null, false ) );
+	}
+
+
 	public function testDeletePropertyItem()
 	{
 		$this->object->deletePropertyItem( $this->propItem->setId( 123 ) );
 
-		$this->assertEquals( [$this->propItem2], array_values( $this->object->getPropertyItems( null, false ) ) );
-		$this->assertEquals( [$this->propItem], array_values( $this->object->getPropertyItemsDeleted() ) );
+		$this->assertEquals( ['_id_test2_en_' => $this->propItem2], $this->object->getPropertyItems( null, false ) );
+		$this->assertEquals( ['_id_test__value' => $this->propItem], $this->object->getPropertyItemsDeleted() );
 	}
 
 
-	protected function tearDown()
+	public function testDeletePropertyItems()
 	{
-		unset( $this->object, $this->propItem, $this->propItem2 );
+		$this->object->deletePropertyItems( [$this->propItem] );
+
+		$this->assertEquals( ['_id_test2_en_' => $this->propItem2], $this->object->getPropertyItems( null, false ) );
+		$this->assertEquals( ['_id_test__value' => $this->propItem], $this->object->getPropertyItemsDeleted() );
 	}
 
 
@@ -112,48 +132,6 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSetProperties()
-	{
-		$entries = [[
-			'product.property.type' => 'package-weight',
-			'product.property.value' => '10.0'
-		]];
-		$result = $this->object->setProperties( $entries );
-
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
-		$this->assertEquals( 1, count( $this->object->getPropertyItems( null, false ) ) );
-		$this->assertEquals( ['_id_package-weight__10.0' => '10.0'], $this->object->getProperties( 'package-weight' ) );
-	}
-
-
-	public function testSetPropertiesType()
-	{
-		$entries = [[
-			'product.property.type' => 'package-weight',
-			'product.property.value' => '10.0'
-		]];
-		$result = $this->object->setProperties( $entries, 'package-weight' );
-
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
-		$this->assertEquals( 3, count( $this->object->getPropertyItems( null, false ) ) );
-		$this->assertEquals( ['_id_package-weight__10.0' => '10.0'], $this->object->getProperties( 'package-weight' ) );
-	}
-
-
-	public function testSetPropertiesTypeArray()
-	{
-		$entries = [[
-			'product.property.type' => 'package-weight',
-			'product.property.value' => '10.0'
-		]];
-		$result = $this->object->setProperties( $entries, ['package-weight', 'test'] );
-
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
-		$this->assertEquals( 2, count( $this->object->getPropertyItems( null, false ) ) );
-		$this->assertEquals( ['_id_package-weight__10.0' => '10.0'], $this->object->getProperties( 'package-weight' ) );
-	}
-
-
 	public function testSetPropertyItems()
 	{
 		$expected = ['_id_test2_en_' => $this->propItem2, '_id_test__value' => $this->propItem];
@@ -161,5 +139,16 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
 		$this->assertEquals( $expected, $this->object->getPropertyItems( null, false ) );
+	}
+
+
+	public function testSetPropertyItemsRemove()
+	{
+		$expected = ['_id_test2_en_' => $this->propItem2];
+		$result = $this->object->setPropertyItems( $expected );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
+		$this->assertEquals( $expected, $this->object->getPropertyItems( null, false ) );
+		$this->assertEquals( ['_id_test__value' => $this->propItem], $this->object->getPropertyItemsDeleted() );
 	}
 }

@@ -59,6 +59,22 @@ trait Traits
 
 
 	/**
+	 * Adds new property items or overwrite existing ones
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item New or existing property item
+	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 */
+	public function addPropertyItems( array $items )
+	{
+		foreach( $items as $item ) {
+			$this->addPropertyItem( $item );
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Removes an existing property item
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item Existing property item
@@ -66,15 +82,21 @@ trait Traits
 	 */
 	public function deletePropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item )
 	{
-		foreach( $this->propItems as $key => $propItem )
-		{
-			if( $propItem === $item )
-			{
-				$this->propRmItems[$propItem->getId()] = $propItem;
-				unset( $this->propItems[$key] );
+		$id = $item->getId();
 
-				return $this;
-			}
+		if( isset( $this->propItems[$id] ) )
+		{
+			$this->propRmItems[$id] = $item;
+			unset( $this->propItems[$id] );
+			return $this;
+		}
+
+		$id = '_' . $this->getId() . '_' . $item->getType() . '_' . $item->getLanguageId() . '_' . $item->getValue();
+
+		if( isset( $this->propItems[$id] ) )
+		{
+			$this->propRmItems[$id] = $item;
+			unset( $this->propItems[$id] );
 		}
 
 		return $this;
@@ -174,34 +196,6 @@ trait Traits
 
 
 	/**
-	 * Adds new list items, updates existing ones and deletes old ones
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @param array $entries List of arrays with key/value pairs for lists data and referenced data
-	 * @param array|string|null $types Name of the types to updata the entries with (null for all)
-	 */
-	public function setProperties( array $entries, $types = null )
-	{
-		$items = $this->getPropertyItems( $types, false );
-
-		foreach( $entries as $entry )
-		{
-			$p = new \Aimeos\MShop\Common\Item\Property\Standard( $this->getResourceType() . '.property.' );
-			$p = $p->fromArray( $entry );
-
-			if( ( $prop = $this->getPropertyItem( $p->getType(), $p->getLanguageId(), $p->getValue(), false ) ) === null ) {
-				$this->addPropertyItem( $p );
-			} else {
-				unset( $items[$prop->getId()] );
-			}
-		}
-
-		return $this->deletePropertyItems( $items );
-	}
-
-
-	/**
 	 * Adds a new property item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items New list of property items
@@ -209,24 +203,20 @@ trait Traits
 	 */
 	public function setPropertyItems( array $items )
 	{
-		$this->propItems = [];
+		$list = [];
 
-		foreach( $items as $item )
+		foreach( $items as $p )
 		{
-			$id = $item->getId() ?: '_' . $this->getId() . '_' . $item->getType() . '_' . $item->getLanguageId() . '_' . $item->getValue();
-			$this->propItems[$id] = $item;
+			$id = $p->getId() ?: '_' . $this->getId() . '_' . $p->getType() . '_' . $p->getLanguageId() . '_' . $p->getValue();
+			unset( $this->propItems[$id] );
+			$list[$id] = $p;
 		}
+
+		$this->deletePropertyItems( $this->propItems );
+		$this->propItems = $list;
 
 		return $this;
 	}
-
-
-	/**
-	 * Returns the resource type of the item.
-	 *
-	 * @return string Resource type of the item
-	 */
-	abstract public function getResourceType();
 
 
 	/**
