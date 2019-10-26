@@ -125,7 +125,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->cleanupBase( $siteids, 'mshop/product/manager/lists/type/standard/delete' );
+		return $this->clearBase( $siteids, 'mshop/product/manager/lists/type/standard/delete' );
 	}
 
 

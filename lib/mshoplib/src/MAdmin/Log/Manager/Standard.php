@@ -144,7 +144,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->cleanupBase( $siteids, 'madmin/log/manager/standard/delete' );
+		return $this->clearBase( $siteids, 'madmin/log/manager/standard/delete' );
 	}
 
 

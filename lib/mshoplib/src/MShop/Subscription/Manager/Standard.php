@@ -219,7 +219,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->cleanupBase( $siteids, 'mshop/subscription/manager/standard/delete' );
+		return $this->clearBase( $siteids, 'mshop/subscription/manager/standard/delete' );
 	}
 
 

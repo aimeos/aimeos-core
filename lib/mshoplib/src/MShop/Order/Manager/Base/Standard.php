@@ -274,7 +274,7 @@ class Standard extends Base
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->cleanupBase( $siteids, 'mshop/order/manager/base/standard/delete' );
+		return $this->clearBase( $siteids, 'mshop/order/manager/base/standard/delete' );
 	}
 
 

@@ -140,7 +140,7 @@ class Standard
 	{
 		parent::clear( $siteids );
 
-		return $this->cleanupBase( $siteids, 'mshop/index/manager/text/standard/delete' );
+		return $this->clearBase( $siteids, 'mshop/index/manager/text/standard/delete' );
 	}
 
 

@@ -379,7 +379,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->cleanupBase( $siteids, 'mshop/order/manager/base/product/standard/delete' );
+		return $this->clearBase( $siteids, 'mshop/order/manager/base/product/standard/delete' );
 	}
 
 

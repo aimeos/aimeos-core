@@ -310,7 +310,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $cfgpath Configuration key to the cleanup statement
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function cleanupBase( array $siteids, $cfgpath )
+	protected function clearBase( array $siteids, $cfgpath )
 	{
 		$dbm = $this->context->getDatabaseManager();
 		$dbname = $this->getResourceName();

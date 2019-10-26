@@ -139,7 +139,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->cleanupBase( $siteids, 'mshop/coupon/manager/code/standard/delete' );
+		return $this->clearBase( $siteids, 'mshop/coupon/manager/code/standard/delete' );
 	}
 
 

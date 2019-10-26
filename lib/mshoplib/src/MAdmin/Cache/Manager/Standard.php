@@ -277,7 +277,7 @@ class Standard
 		 * @see madmin/cache/manager/standard/count/ansi
 		 */
 
-		return $this->cleanupBase( $siteids, 'madmin/cache/manager/standard/delete' );
+		return $this->clearBase( $siteids, 'madmin/cache/manager/standard/delete' );
 	}
 
 
