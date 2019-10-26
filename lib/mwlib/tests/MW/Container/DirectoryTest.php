@@ -81,7 +81,7 @@ class DirectoryTest extends \PHPUnit\Framework\TestCase
 				$rows[] = $row;
 			}
 
-			$actual[ $entry->getName() ] = count( $rows );
+			$actual[$entry->getName()] = count( $rows );
 		}
 
 		$this->assertEquals( $expected, $actual );

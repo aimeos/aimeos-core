@@ -63,7 +63,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new TraitsClass( 'product.', [] );
 		$result = $object->addPropertyItems( [$this->propItem, $this->propItem2] );
-		$expected = ['_id_test__value' => $this->propItem,'_id_test2_en_' => $this->propItem2];
+		$expected = ['_id_test__value' => $this->propItem, '_id_test2_en_' => $this->propItem2];
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
 		$this->assertEquals( $expected, $object->getPropertyItems( null, false ) );

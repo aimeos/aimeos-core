@@ -87,7 +87,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * Undo all schema changes and migrate data back
 	 *
 	 * @return void
-	*/
+	 */
 	public function rollback()
 	{
 	}
@@ -97,7 +97,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * Cleans up old data required for roll back
 	 *
 	 * @return void
-	*/
+	 */
 	public function clean()
 	{
 	}
