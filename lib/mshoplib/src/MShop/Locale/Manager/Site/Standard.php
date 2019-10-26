@@ -124,7 +124,7 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Locale\Manager\Site\Iface Manager object for chaining method calls
 	 */
-	public function cleanup( array $siteids )
+	public function clear( array $siteids )
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
@@ -156,7 +156,7 @@ class Standard
 		);
 
 		foreach( $config->get( $path, $default ) as $domain ) {
-			\Aimeos\MShop::create( $context, $domain )->cleanup( $siteids );
+			\Aimeos\MShop::create( $context, $domain )->clear( $siteids );
 		}
 
 		/** mshop/locale/manager/site/cleanup/admin/domains
@@ -182,7 +182,7 @@ class Standard
 		$default = array( 'job', 'log', 'cache' );
 
 		foreach( $config->get( $path, $default ) as $domain ) {
-			\Aimeos\MAdmin::create( $context, $domain )->cleanup( $siteids );
+			\Aimeos\MAdmin::create( $context, $domain )->clear( $siteids );
 		}
 
 		return $this;
@@ -299,7 +299,7 @@ class Standard
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->getObject()->cleanup( $ids );
+		$this->getObject()->clear( $ids );
 
 		/** mshop/locale/manager/site/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database

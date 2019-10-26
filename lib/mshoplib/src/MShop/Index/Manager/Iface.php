@@ -30,7 +30,6 @@ interface Iface
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key );
 
-
 	/**
 	 * Optimizes the index if necessary.
 	 * This operation can last very long and it shouldn't be called by a script
@@ -40,7 +39,6 @@ interface Iface
 	 */
 	public function optimize();
 
-
 	/**
 	 * Removes all entries not touched after the given timestamp in the index.
 	 * This can be a long lasting operation.
@@ -49,7 +47,6 @@ interface Iface
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function cleanupIndex( $timestamp );
-
 
 	/**
 	 * Rebuilds the index for searching products or specified list of products.

@@ -234,14 +234,14 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MAdmin\Cache\Manager\Iface Manager object for chaining method calls
 	 */
-	public function cleanup( array $siteids )
+	public function clear( array $siteids )
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
 
 		$path = 'madmin/cache/manager/submanagers';
 		foreach( $config->get( $path, [] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		/** madmin/cache/manager/standard/delete/mysql

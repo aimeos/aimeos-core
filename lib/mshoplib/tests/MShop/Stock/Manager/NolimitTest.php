@@ -28,7 +28,7 @@ class NolimitTest extends \PHPUnit\Framework\TestCase
 
 	public function testCleanup()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->cleanup( [-1] ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->clear( [-1] ) );
 	}
 
 

@@ -148,11 +148,11 @@ class Standard
 	 * @param array $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Price\Manager\Lists\Iface Manager object for chaining method calls
 	 */
-	public function cleanup( array $siteids )
+	public function clear( array $siteids )
 	{
 		$path = 'mshop/price/manager/lists/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->cleanupBase( $siteids, 'mshop/price/manager/lists/standard/delete' );

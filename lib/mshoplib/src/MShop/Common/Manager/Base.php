@@ -59,7 +59,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function cleanup( array $siteids )
+	public function clear( array $siteids )
 	{
 		return $this;
 	}

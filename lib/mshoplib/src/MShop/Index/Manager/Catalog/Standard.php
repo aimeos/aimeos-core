@@ -98,9 +98,9 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function cleanup( array $siteids )
+	public function clear( array $siteids )
 	{
-		parent::cleanup( $siteids );
+		parent::clear( $siteids );
 
 		return $this->cleanupBase( $siteids, 'mshop/index/manager/catalog/standard/delete' );
 	}

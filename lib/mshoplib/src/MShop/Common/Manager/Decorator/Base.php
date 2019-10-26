@@ -58,9 +58,9 @@ abstract class Base
 	 * @param string[] $siteids List of IDs for sites Whose entries should be deleted
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function cleanup( array $siteids )
+	public function clear( array $siteids )
 	{
-		$this->manager->cleanup( $siteids );
+		$this->manager->clear( $siteids );
 		return $this;
 	}
 

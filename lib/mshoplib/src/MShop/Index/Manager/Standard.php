@@ -187,10 +187,10 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function cleanup( array $siteids )
+	public function clear( array $siteids )
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
-			$submanager->cleanup( $siteids );
+			$submanager->clear( $siteids );
 		}
 
 		return $this;
