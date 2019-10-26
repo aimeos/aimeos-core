@@ -55,7 +55,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$expr1 = [];
-		$expr1[] = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'listitem', array('a', 'b', 'c') );
+		$expr1[] = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'listitem', array( 'a', 'b', 'c' ) );
 		$expr1[] = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'stringvar', 'value' );
 
 
