@@ -130,7 +130,7 @@ class Standard
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function cleanupIndex( $timestamp )
+	public function cleanup( $timestamp )
 	{
 		/** mshop/index/manager/attribute/standard/cleanup/mysql
 		 * Deletes the index attribute records that haven't been touched
@@ -162,7 +162,7 @@ class Standard
 		 * @see mshop/index/manager/attribute/standard/insert/ansi
 		 * @see mshop/index/manager/attribute/standard/search/ansi
 		 */
-		return $this->cleanupIndexBase( $timestamp, 'mshop/index/manager/attribute/standard/cleanup' );
+		return $this->cleanupBase( $timestamp, 'mshop/index/manager/attribute/standard/cleanup' );
 	}
 
 
@@ -424,7 +424,7 @@ class Standard
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function rebuildIndex( array $items = [] )
+	public function rebuild( array $items = [] )
 	{
 		if( empty( $items ) ) { return $this; }
 
@@ -456,7 +456,7 @@ class Standard
 			 * sent to the database server. The number of question marks must
 			 * be the same as the number of columns listed in the INSERT
 			 * statement. The order of the columns must correspond to the
-			 * order in the rebuildIndex() method, so the correct values are
+			 * order in the rebuild() method, so the correct values are
 			 * bound to the columns.
 			 *
 			 * The SQL statement should conform to the ANSI standard to be
@@ -486,7 +486,7 @@ class Standard
 		}
 
 		foreach( $this->getSubManagers() as $submanager ) {
-			$submanager->rebuildIndex( $items );
+			$submanager->rebuild( $items );
 		}
 
 		return $this;

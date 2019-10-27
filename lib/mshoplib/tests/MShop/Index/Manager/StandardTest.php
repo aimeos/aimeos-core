@@ -258,7 +258,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCleanupIndex()
 	{
-		$this->object->cleanupIndex( '1970-01-01 00:00:00' );
+		$this->object->cleanup( '1970-01-01 00:00:00' );
 	}
 
 
@@ -271,14 +271,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		//build catalog with all products
 		$config->set( 'mshop/index/manager/standard/index', 'all' );
-		$this->object->cleanupIndex( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuildIndex();
+		$this->object->cleanup( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuild();
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//restore index with categorized products only
 		$config->set( 'mshop/index/manager/standard/index', 'categorized' );
-		$this->object->cleanupIndex( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuildIndex();
+		$this->object->cleanup( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuild();
 
 		$this->assertEquals( 13, count( $afterInsertAttr ) );
 		$this->assertEquals( 9, count( $afterInsertCat ) );
@@ -294,7 +294,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 		$items = $manager->searchItems( $search );
 
-		$this->object->cleanupIndex( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuildIndex( $items );
+		$this->object->cleanup( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuild( $items );
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
@@ -310,7 +310,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$config = $context->getConfig();
 
 		$config->set( 'mshop/index/manager/standard/index', 'categorized' );
-		$this->object->cleanupIndex( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuildIndex();
+		$this->object->cleanup( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuild();
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );

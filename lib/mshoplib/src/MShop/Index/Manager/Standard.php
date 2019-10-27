@@ -204,10 +204,10 @@ class Standard
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function cleanupIndex( $timestamp )
+	public function cleanup( $timestamp )
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
-			$submanager->cleanupIndex( $timestamp );
+			$submanager->cleanup( $timestamp );
 		}
 
 		return $this;
@@ -221,7 +221,7 @@ class Standard
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function rebuildIndex( array $items = [] )
+	public function rebuild( array $items = [] )
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
@@ -545,7 +545,7 @@ class Standard
 				$this->clearItems( $prodIds );
 
 				foreach( $submanagers as $submanager ) {
-					$submanager->rebuildIndex( $products );
+					$submanager->rebuild( $products );
 				}
 
 				$this->commit();

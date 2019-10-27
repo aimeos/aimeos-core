@@ -59,7 +59,7 @@ class DemoRebuildIndex extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$timestamp = date( 'Y-m-d H:i:s' );
-		\Aimeos\MShop::create( $this->additional, 'index' )->rebuildIndex()->cleanupIndex( $timestamp );
+		\Aimeos\MShop::create( $this->additional, 'index' )->rebuild()->cleanup( $timestamp );
 
 		$this->status( 'done' );
 	}

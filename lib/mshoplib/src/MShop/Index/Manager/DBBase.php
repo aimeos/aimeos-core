@@ -144,10 +144,10 @@ abstract class DBBase
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs and items values
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function rebuildIndex( array $items = [] )
+	public function rebuild( array $items = [] )
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
-			$submanager->rebuildIndex( $items );
+			$submanager->rebuild( $items );
 		}
 
 		return $this;
@@ -164,7 +164,7 @@ abstract class DBBase
 	public function saveItem( \Aimeos\MShop\Product\Item\Iface $item, $fetch = true )
 	{
 		$item = $this->manager->saveItem( $item, true );
-		$this->rebuildIndex( [$item->getId() => $item] );
+		$this->rebuild( [$item->getId() => $item] );
 
 		return $item;
 	}
@@ -185,7 +185,7 @@ abstract class DBBase
 			$list[$item->getId()] = $item;
 		}
 
-		$this->rebuildIndex( $list );
+		$this->rebuild( $list );
 		return $list;
 	}
 
@@ -197,7 +197,7 @@ abstract class DBBase
 	 * @param string $path Configuration path to the SQL statement to execute
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function cleanupIndexBase( $timestamp, $path )
+	protected function cleanupBase( $timestamp, $path )
 	{
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
@@ -230,7 +230,7 @@ abstract class DBBase
 		$this->commit();
 
 		foreach( $this->getSubManagers() as $submanager ) {
-			$submanager->cleanupIndex( $timestamp );
+			$submanager->cleanup( $timestamp );
 		}
 
 		return $this;

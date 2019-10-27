@@ -37,7 +37,7 @@ class CatalogRebuildTestIndex extends \Aimeos\MW\Setup\Task\Base
 
 		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->additional );
 
-		$indexManager->rebuildIndex();
+		$indexManager->rebuild();
 		$indexManager->optimize();
 
 		$this->status( 'done' );

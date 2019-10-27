@@ -46,7 +46,7 @@ interface Iface
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function cleanupIndex( $timestamp );
+	public function cleanup( $timestamp );
 
 	/**
 	 * Rebuilds the index for searching products or specified list of products.
@@ -55,7 +55,7 @@ interface Iface
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function rebuildIndex( array $items = [] );
+	public function rebuild( array $items = [] );
 
 	/**
 	 * Stores a new item into the index
