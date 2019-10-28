@@ -63,7 +63,6 @@ class Standard
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
-		$siteIds = $this->getSiteIds( $level );
 
 		$name = 'index.catalog:position';
 		$expr = $this->toExpression( 'mindca."siteid"', $this->getSiteIds( $level ) );
