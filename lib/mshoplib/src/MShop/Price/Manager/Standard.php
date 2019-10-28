@@ -197,21 +197,11 @@ class Standard
 		 */
 		$this->precision = $context->getConfig()->get( 'mshop/price/precision', 2 );
 
-		$self = $this;
-		$locale = $context->getLocale();
-
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/price/manager/sitemode', $level );
 
-		$siteIds = [$locale->getSiteId()];
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
-			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
-		}
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
-			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
-		}
+		$siteIds = $this->getSiteIds( $level );
+		$self = $this;
 
 
 		$this->searchConfig['price:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {

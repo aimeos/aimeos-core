@@ -472,7 +472,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param integer $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
 	 * @return string[] List of site IDs
 	 */
-	private function getSiteIds( $sitelevel )
+	protected function getSiteIds( $sitelevel )
 	{
 		$locale = $this->context->getLocale();
 		$siteIds = array( $locale->getSiteId() );

@@ -153,22 +153,13 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-service' );
 
-		$self = $this;
-		$locale = $context->getLocale();
-		$this->date = $context->getDateTime();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/service/manager/sitemode', $level );
 
-		$siteIds = [$locale->getSiteId()];
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
-			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
-		}
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
-			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
-		}
+		$siteIds = $this->getSiteIds( $level );
+		$this->date = $context->getDateTime();
+		$self = $this;
 
 
 		$this->searchConfig['service:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {

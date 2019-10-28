@@ -73,19 +73,9 @@ class Standard
 	{
 		parent::__construct( $context );
 
-		$locale = $context->getLocale();
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
-
-		$siteIds = [$locale->getSiteId()];
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
-			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
-		}
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
-			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
-		}
+		$siteIds = $this->getSiteIds( $level );
 
 		$this->searchConfig['index.attribute:allof']['function'] = function( $source, array $params ) {
 			return [$params[0], count( explode( ',', $params[0] ) )];

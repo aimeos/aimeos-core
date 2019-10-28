@@ -134,23 +134,13 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-text' );
 
-		$self = $this;
-		$locale = $context->getLocale();
-		$this->languageId = $locale->getLanguageId();
-
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/text/manager/sitemode', $level );
 
-		$siteIds = [$locale->getSiteId()];
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
-			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
-		}
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
-			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
-		}
-
+		$locale = $context->getLocale();
+		$this->languageId = $locale->getLanguageId();
+		$siteIds = $this->getSiteIds( $level );
+		$self = $this;
 
 		$this->searchConfig['text:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 

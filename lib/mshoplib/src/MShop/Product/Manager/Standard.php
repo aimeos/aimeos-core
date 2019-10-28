@@ -170,21 +170,11 @@ class Standard
 		$this->setResourceName( 'db-product' );
 
 		$self = $this;
-		$locale = $context->getLocale();
 		$this->date = $context->getDateTime();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/product/manager/sitemode', $level );
-
-		$siteIds = [$locale->getSiteId()];
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
-			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
-		}
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
-			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
-		}
+		$siteIds = $this->getSiteIds( $level );
 
 
 		$this->searchConfig['product:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {

@@ -154,21 +154,11 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-attribute' );
 
-		$self = $this;
-		$locale = $context->getLocale();
-
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/attribute/manager/sitemode', $level );
 
-		$siteIds = [$locale->getSiteId()];
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
-			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
-		}
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
-			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
-		}
+		$siteIds = $this->getSiteIds( $level );
+		$self = $this;
 
 
 		$this->searchConfig['attribute:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {

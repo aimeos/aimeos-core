@@ -50,19 +50,8 @@ class MySQL
 	{
 		parent::__construct( $context );
 
-		$locale = $context->getLocale();
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
-
-		$siteIds = [$locale->getSiteId()];
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
-			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
-		}
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
-			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
-		}
 
 		$func = function( $source, array $params ) {
 
@@ -88,7 +77,7 @@ class MySQL
 		};
 
 		$name = 'index.text:relevance';
-		$expr = $this->toExpression( 'mindte."siteid"', $siteIds );
+		$expr = $this->toExpression( 'mindte."siteid"', $this->getSiteIds( $level ) );
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 		$this->searchConfig['index.text:relevance']['function'] = $func;
 	}
