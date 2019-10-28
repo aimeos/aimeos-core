@@ -91,8 +91,13 @@ class Standard
 			return [$params[0], count( explode( ',', $params[0] ) )];
 		};
 
-		$this->replaceSiteMarker( $this->searchConfig['index.attribute:allof'], 'mindat_allof."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.attribute:oneof'], 'mindat_oneof."siteid"', $siteIds );
+		$name = 'index.attribute:allof';
+		$expr = $this->toExpression( 'mindat_allof."siteid"', $siteIds );
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
+
+		$name = 'index.attribute:oneof';
+		$expr = $this->toExpression( 'mindat_oneof."siteid"', $siteIds );
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 	}
 
 

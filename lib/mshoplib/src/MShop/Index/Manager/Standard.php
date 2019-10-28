@@ -249,31 +249,6 @@ class Standard
 		 */
 		$size = $config->get( 'mshop/index/manager/standard/chunksize', 1000 );
 
-		/** mshop/index/manager/standard/index
-		 * Index mode for products which determines what products are added to the index
-		 *
-		 * By default, only products that have been added to a category are
-		 * part of the index. Thus, it's possible to have special products like
-		 * rebate products that are necessary if you use coupon codes in your
-		 * shop but won't be found by e.g. when searching for products.
-		 *
-		 * Alternatively, you can add all products to the index, even those
-		 * which are not listed in any category. This mode should only be
-		 * used in special cases when you have no rebate or similar products
-		 * that shouldn't be found by users.
-		 *
-		 * @param integer Number of products
-		 * @since 2014.09
-		 * @category User
-		 * @category Developer
-		 * @see mshop/index/manager/standard/chunksize
-		 * @see mshop/index/manager/standard/domains
-		 * @see mshop/index/manager/standard/subdomains
-		 * @see mshop/index/manager/submanagers
-		 * @deprecated 2020.01
-		 */
-		$mode = $config->get( 'mshop/index/manager/standard/index', 'categorized' );
-
 		/** mshop/index/manager/standard/domains
 		 * A list of domain names whose items should be retrieved together with the product
 		 *
@@ -302,28 +277,11 @@ class Standard
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
 
-		// @deprecated 2020.01
 		$prodIds = [];
 		foreach( $items as $item ) {
 			$prodIds[] = $item->getId(); // don't rely on array keys
 		}
 
-
-		// @deprecated 2020.01
-		if( $mode === 'all' )
-		{
-			if( !empty( $prodIds ) )
-			{
-				$expr = array( $search->compare( '==', 'product.id', $prodIds ), $defaultConditions );
-				$search->setConditions( $search->combine( '&&', $expr ) );
-			}
-
-			$this->writeIndex( $search, $domains, $size );
-			return;
-		}
-
-
-		// index categorized product items only
 		$catalogListManager = \Aimeos\MShop::create( $context, 'catalog/lists' );
 		$catalogSearch = $catalogListManager->createSearch( true );
 

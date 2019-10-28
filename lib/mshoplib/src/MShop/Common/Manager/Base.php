@@ -698,33 +698,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
-	 * Replaces ":site" marker in a search config item array.
-	 *
-	 * @param array &$searchAttr Single search config definition including the "internalcode" key
-	 * @param string $column Name (including alias) of the column containing the site ID in the storage
-	 * @param string|string[] $value Site ID or list of site IDs
-	 * @param string $marker Marker to replace
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 * @deprecated 2020.01 Use toExpression() instead
-	 */
-	protected function replaceSiteMarker( &$searchAttr, $column, $value, $marker = ':site' )
-	{
-		$types = array( 'siteid' => \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-		$translations = array( 'siteid' => $column );
-		$conn = new \Aimeos\MW\DB\Connection\None();
-
-		$search = new \Aimeos\MW\Criteria\SQL( $conn );
-
-		$expr = $search->compare( '==', 'siteid', ( is_array( $value ) ? array_unique( $value ) : $value ) );
-		$string = $expr->toSource( $types, $translations );
-
-		$searchAttr['internalcode'] = str_replace( $marker, $string, $searchAttr['internalcode'] );
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the site coditions for the search request
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object

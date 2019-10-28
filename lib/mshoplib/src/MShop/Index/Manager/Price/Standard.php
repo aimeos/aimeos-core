@@ -76,7 +76,9 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['index.price:value'], 'mindpr."siteid"', $siteIds );
+		$name = 'index.price:value';
+		$expr = $this->toExpression( 'mindpr."siteid"', $siteIds );
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 	}
 
 

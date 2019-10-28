@@ -1,16 +1,10 @@
 <?php
 
-namespace Aimeos\MShop\Plugin\Manager\StandardTest;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
-class Publisher extends \Aimeos\MW\Observer\Publisher\Base
-{
-}
 
 
 namespace Aimeos\MShop\Plugin\Manager;
@@ -81,7 +75,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$publisher = new \Aimeos\MShop\Plugin\Manager\StandardTest\Publisher();
+		$publisher = new TestPublisher();
 		$this->object->register( $publisher, 'order' );
 	}
 
@@ -246,4 +240,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getSubManager( 'type', 'unknown' );
 	}
+}
+
+
+class TestPublisher implements \Aimeos\MW\Observer\Publisher\Iface
+{
+	use \Aimeos\MW\Observer\Publisher\Traits;
 }

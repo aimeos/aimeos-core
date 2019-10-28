@@ -53,6 +53,7 @@ class TestListener implements \Aimeos\MW\Observer\Listener\Iface
 }
 
 
-class TestPublisher extends \Aimeos\MW\Observer\Publisher\Base
+class TestPublisher implements \Aimeos\MW\Observer\Publisher\Iface
 {
+	use \Aimeos\MW\Observer\Publisher\Traits;
 }

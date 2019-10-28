@@ -185,9 +185,15 @@ class Standard
 		$this->setResourceName( 'db-order' );
 
 
-		$sites = $context->getLocale()->getSiteSubTree();
-		$this->replaceSiteMarker( $this->searchConfig['order:status'], 'mordst."siteid"', $sites, ':site' );
-		$this->replaceSiteMarker( $this->searchConfig['order.containsStatus'], 'mordst_cs."siteid"', $sites, ':site' );
+		$siteIds = $context->getLocale()->getSiteSubTree();
+
+		$name = 'order:status';
+		$expr = $this->toExpression( 'mordst."siteid"', $siteIds );
+		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
+
+		$name = 'order.containsStatus';
+		$expr = $this->toExpression( 'mordst_cs."siteid"', $siteIds );
+		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
 	}
 
 

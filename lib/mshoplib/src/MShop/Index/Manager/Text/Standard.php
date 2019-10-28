@@ -111,9 +111,11 @@ class Standard
 			return $params;
 		};
 
-		$this->replaceSiteMarker( $this->searchConfig['index.text:url'], 'mindte."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.text:name'], 'mindte."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.text:relevance'], 'mindte."siteid"', $siteIds );
+		foreach( ['index.text:name', 'index.text:url', 'index.text:relevance'] as $key )
+		{
+			$expr = $this->toExpression( 'mindte."siteid"', $siteIds );
+			$this->searchConfig[$key]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$key]['internalcode'] );
+		}
 	}
 
 

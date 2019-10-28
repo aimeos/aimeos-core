@@ -355,31 +355,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testScaleImage()
-	{
-		$file = \Aimeos\MW\Media\Factory::get( __DIR__ . '/testfiles/test.gif' );
-
-		$this->access( 'scaleImage' )->invokeArgs( $this->object, array( $file, 'files' ) );
-	}
-
-
-	public function testStoreFile()
-	{
-		$content = file_get_contents( __DIR__ . '/testfiles/test.gif' );
-
-		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . '/tmp/';
-		if( !is_dir( $dest ) ) { mkdir( $dest, 0755, true ); }
-		copy( __DIR__ . '/testfiles/test.gif', $dest . 'test2.gif' );
-
-		$this->access( 'storeFile' )->invokeArgs( $this->object, array( $content, 'fs-media', 'test.gif', 'test2.gif' ) );
-
-		$this->assertFalse( file_exists( $dest . 'test2.gif' ) );
-		$this->assertTrue( file_exists( $dest . 'test.gif' ) );
-
-		unlink( $dest . 'test.gif' );
-	}
-
-
 	protected function access( $name )
 	{
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Media\Standard::class );

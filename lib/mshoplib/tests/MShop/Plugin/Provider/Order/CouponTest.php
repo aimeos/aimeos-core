@@ -53,6 +53,7 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 }
 
 
-class TestPublisher extends \Aimeos\MW\Observer\Publisher\Base
+class TestPublisher implements \Aimeos\MW\Observer\Publisher\Iface
 {
+	use \Aimeos\MW\Observer\Publisher\Traits;
 }

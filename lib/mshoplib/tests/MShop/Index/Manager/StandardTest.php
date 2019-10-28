@@ -262,29 +262,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testRebuildIndexAll()
-	{
-		$config = $this->context->getConfig();
-
-		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$search = $manager->createSearch( true );
-
-		//build catalog with all products
-		$config->set( 'mshop/index/manager/standard/index', 'all' );
-		$this->object->cleanup( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuild();
-
-		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
-		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
-
-		//restore index with categorized products only
-		$config->set( 'mshop/index/manager/standard/index', 'categorized' );
-		$this->object->cleanup( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuild();
-
-		$this->assertEquals( 13, count( $afterInsertAttr ) );
-		$this->assertEquals( 9, count( $afterInsertCat ) );
-	}
-
-
 	public function testRebuildIndexWithList()
 	{
 		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
