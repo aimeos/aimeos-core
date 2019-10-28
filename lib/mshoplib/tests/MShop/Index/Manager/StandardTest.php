@@ -256,7 +256,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCleanupIndex()
+	public function testCleanup()
 	{
 		$this->object->cleanup( '1970-01-01 00:00:00' );
 	}

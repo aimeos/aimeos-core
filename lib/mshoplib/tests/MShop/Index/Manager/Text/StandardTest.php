@@ -29,13 +29,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCleanup()
+	public function testClear()
 	{
 		$this->object->clear( array( -1 ) );
 	}
 
 
-	public function testCleanupIndex()
+	public function testCleanup()
 	{
 		$this->object->cleanup( '1970-01-01 00:00:00' );
 	}

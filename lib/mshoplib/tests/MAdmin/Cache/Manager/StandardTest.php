@@ -29,7 +29,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCleanup()
+	public function testClear()
 	{
 		$this->assertInstanceOf( \Aimeos\MAdmin\Cache\Manager\Iface::class, $this->object->clear( [-1] ) );
 	}
