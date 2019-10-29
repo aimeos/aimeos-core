@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$domains = array( 'text', 'product', 'price', 'media', 'attribute', 'product/property' );
+		$domains = ['text', 'product', 'price', 'media' => ['unittype10'], 'attribute', 'product/property' => ['package-weight']];
 
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
@@ -127,7 +127,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $product, $this->object->getItem( $product->getId(), $domains ) );
 		$this->assertEquals( 6, count( $product->getRefItems( 'text', null, null, false ) ) );
-		$this->assertEquals( 4, count( $product->getPropertyItems() ) );
+		$this->assertEquals( 1, count( $product->getRefItems( 'media', null, null, false ) ) );
+		$this->assertEquals( 1, count( $product->getPropertyItems() ) );
 	}
 
 

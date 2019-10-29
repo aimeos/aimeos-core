@@ -716,7 +716,9 @@ class Standard
 			throw $e;
 		}
 
-		$propItems = $this->getPropertyItems( array_keys( $map ), 'attribute' );
+		$name = 'attribute/property';
+		$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
+		$propItems = $this->getPropertyItems( array_keys( $map ), 'attribute', $propTypes );
 
 		return $this->buildItems( $map, null, 'attribute', $propItems );
 	}

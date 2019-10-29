@@ -54,21 +54,30 @@ trait Traits
 	 *
 	 * @param string[] $parentIds List of parent IDs
 	 * @param string $domain Domain of the calling manager
+	 * @param array|null $types Types names of the properties that should be fetched
 	 * @return array Associative list of parent IDs / property IDs as keys and items implementing
 	 * 	\Aimeos\MShop\Common\Item\Property\Iface as values
 	 */
-	protected function getPropertyItems( array $parentIds, $domain )
+	protected function getPropertyItems( array $parentIds, $domain, $types = null )
 	{
 		$list = [];
 
 		if( !empty( $parentIds ) )
 		{
-			$propManager = $this->getObject()->getSubManager( 'property' );
+			$manager = $this->getObject()->getSubManager( 'property' );
 
-			$propSearch = $propManager->createSearch()->setSlice( 0, 0x7fffffff );
-			$propSearch->setConditions( $propSearch->compare( '==', $domain . '.property.parentid', $parentIds ) );
+			$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+			$search->setConditions( $search->compare( '==', $domain . '.property.parentid', $parentIds ) );
 
-			foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {
+			if( $types !== null )
+			{
+				$search->setConditions( $search->combine( '&&', [
+					$search->compare( '==', $domain . '.property.type', $types ),
+					$search->getConditions()
+				] ) );
+			}
+
+			foreach( $manager->searchItems( $search ) as $id => $propItem ) {
 				$list[$propItem->getParentId()][$id] = $propItem;
 			}
 		}

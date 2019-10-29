@@ -750,7 +750,9 @@ class Standard
 			throw $e;
 		}
 
-		$propItems = $this->getPropertyItems( array_keys( $map ), 'price' );
+		$name = 'price/property';
+		$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
+		$propItems = $this->getPropertyItems( array_keys( $map ), 'price', $propTypes );
 
 		return $this->buildItems( $map, null, 'price', $propItems );
 	}

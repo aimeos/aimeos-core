@@ -782,9 +782,11 @@ class Standard
 		}
 
 
-		$propItems = [];
-		if( in_array( 'product/property', $ref, true ) ) {
-			$propItems = $this->getPropertyItems( array_keys( $map ), 'product' );
+		$propItems = []; $name = 'product/property';
+		if( isset( $ref[$name] ) || in_array( $name, $ref, true ) )
+		{
+			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
+			$propItems = $this->getPropertyItems( array_keys( $map ), 'product', $propTypes );
 		}
 
 		return $this->buildItems( $map, $ref, 'product', $propItems );

@@ -101,19 +101,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
+		$domains = ['text', 'customer/property' => ['newsletter']];
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'customer.code', 'UTC001' ),
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search, array( 'text' ) );
+		$items = $this->object->searchItems( $search, $domains );
 
 		if( ( $expected = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No customer item with code "UTC001" found' );
 		}
 
-		$actual = $this->object->getItem( $expected->getId(), array( 'text' ) );
+		$actual = $this->object->getItem( $expected->getId(), $domains );
 		$payAddr = $actual->getPaymentAddress();
 
 		$this->assertEquals( 'unitCustomer001', $actual->getLabel() );
@@ -143,6 +144,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $expected, $actual );
 		$this->assertEquals( 1, count( $actual->getListItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 1, count( $actual->getRefItems( 'text', null, null, false ) ) );
+		$this->assertEquals( 1, count( $actual->getPropertyItems() ) );
 	}
 
 

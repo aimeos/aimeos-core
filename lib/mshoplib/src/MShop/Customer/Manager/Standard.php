@@ -830,9 +830,11 @@ class Standard
 			$addrItems = $this->getAddressItems( array_keys( $map ), 'customer' );
 		}
 
-		$propItems = [];
-		if( in_array( 'customer/property', $ref, true ) ) {
-			$propItems = $this->getPropertyItems( array_keys( $map ), 'customer' );
+		$propItems = []; $name = 'customer/property';
+		if( isset( $ref[$name] ) || in_array( $name, $ref, true ) )
+		{
+			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
+			$propItems = $this->getPropertyItems( array_keys( $map ), 'customer', $propTypes );
 		}
 
 		return $this->buildItems( $map, $ref, 'customer', $addrItems, $propItems );
