@@ -127,6 +127,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'catalog.lists.key' => array(
+			'code' => 'catalog.lists.key',
+			'internalcode' => 'mcatli."key"',
+			'label' => 'List key',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 	);
 
 

@@ -109,6 +109,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testFindItemForeignDomains()
+	{
+		$item = $this->object->findItem( 'CNE', ['catalog', 'supplier'] );
+
+		$this->assertEquals( 1, count( $item->getSupplierItems() ) );
+		$this->assertEquals( 2, count( $item->getCatalogItems() ) );
+	}
+
+
 	public function testGetItem()
 	{
 		$domains = ['text', 'product', 'price', 'media' => ['unittype10'], 'attribute', 'product/property' => ['package-weight']];

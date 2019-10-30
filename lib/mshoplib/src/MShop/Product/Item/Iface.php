@@ -25,6 +25,20 @@ interface Iface
 		\Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
+	 * Returns the catalog items referencing the product
+	 *
+	 * @return \Aimeos\MShop\Catalog\Item\Iface[] Catalog items
+	 */
+	public function getCatalogItems();
+
+	/**
+	 * Returns the supplier items referencing the product
+	 *
+	 * @return \Aimeos\MShop\Supplier\Item\Iface[] Supplier items
+	 */
+	public function getSupplierItems();
+
+	/**
 	 * Returns the code of the product item.
 	 *
 	 * @return string Code of the product

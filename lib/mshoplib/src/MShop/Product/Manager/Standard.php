@@ -789,6 +789,24 @@ class Standard
 			$propItems = $this->getPropertyItems( array_keys( $map ), 'product', $propTypes );
 		}
 
+		if( isset( $ref['catalog'] ) || in_array( 'catalog', $ref, true ) )
+		{
+			$domains = isset( $ref['catalog'] ) && is_array( $ref['catalog'] ) ?  $ref['catalog'] : [];
+
+			foreach( $this->getDomainRefItems( array_keys( $map ), 'catalog', $domains ) as $prodId => $list ) {
+				$map[$prodId]['catalog'] = $list;
+			}
+		}
+
+		if( isset( $ref['supplier'] ) || in_array( 'supplier', $ref, true ) )
+		{
+			$domains = isset( $ref['supplier'] ) && is_array( $ref['supplier'] ) ?  $ref['supplier'] : [];
+
+			foreach( $this->getDomainRefItems( array_keys( $map ), 'supplier', $domains ) as $prodId => $list ) {
+				$map[$prodId]['supplier'] = $list;
+			}
+		}
+
 		return $this->buildItems( $map, $ref, 'product', $propItems );
 	}
 
@@ -808,5 +826,60 @@ class Standard
 		$values['.date'] = $this->date;
 
 		return new \Aimeos\MShop\Product\Item\Standard( $values, $listItems, $refItems, $propertyItems );
+	}
+
+
+	/**
+	 * Returns the associative list of domain items referencing the product
+	 *
+	 * @param array $ids List of product IDs
+	 * @param string $domain Domain name, e.g. "catalog" or "supplier"
+	 * @param array $ref List of referenced items that should be fetched too
+	 * @return array Associative list of product IDs as keys and list of domain items as values
+	 */
+	protected function getDomainRefItems( array $ids, string $domain, array $ref )
+	{
+		$keys = $map = $result = [];
+		$context = $this->getContext();
+
+		foreach( $ids as $id ) {
+			$keys[] = 'product|default|' . $id;
+		}
+
+
+		$manager = \Aimeos\MShop::create( $context, $domain . '/lists' );
+
+		$search = $manager->createSearch( true )->setSlice( 0, 0x7fffffff );
+		$search->setConditions( $search->combine( '&&', [
+			$search->compare( '==', $domain . '.lists.key', $keys ),
+			$search->getConditions(),
+		] ) );
+
+		foreach( $manager->searchItems( $search ) as $listItem ) {
+			$map[$listItem->getParentId()][] = $listItem->getRefId();
+		}
+
+		$manager = \Aimeos\MShop::create( $context, $domain );
+
+		$search = $manager->createSearch( true )->setSlice( 0, 0x7fffffff );
+		$search->setConditions( $search->combine( '&&', [
+			$search->compare( '==', $domain . '.id', array_keys( $map ) ),
+			$search->getConditions(),
+		] ) );
+
+		$items = $manager->searchItems( $search, $ref );
+
+
+		foreach( $map as $parentId => $list )
+		{
+			if( isset( $items[$parentId] ) )
+			{
+				foreach( $list as $prodId ) {
+					$result[$prodId][$parentId] = $items[$parentId];
+				}
+			}
+		}
+
+		return $result;
 	}
 }
