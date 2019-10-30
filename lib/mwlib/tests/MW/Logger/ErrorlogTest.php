@@ -51,17 +51,13 @@ class ErrorlogTest extends \PHPUnit\Framework\TestCase
 		ini_restore( "error_log" );
 
 		foreach( $content as $line ) {
-			$this->assertRegExp( '/\[[^\]]+\] <message> \[[^\]]+\] .+test/', $line, $line );
+			$this->assertRegExp( '/\[[^\]]+\] <message> \[[^\]]+\] \[[^\]]+\] .+test/', $line, $line );
 		}
 	}
 
 
 	public function testLogFacility()
 	{
-		if( defined( 'HHVM_VERSION' ) ) {
-			$this->markTestSkipped( 'Hiphop VM does not support ini settings yet' );
-		}
-
 		ini_set( "error_log", "error.log" );
 
 		$this->object = new \Aimeos\MW\Logger\Errorlog( \Aimeos\MW\Logger\Base::DEBUG, array( 'test' ) );

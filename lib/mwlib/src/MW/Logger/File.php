@@ -31,12 +31,18 @@ class File extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 	 * @param string $filename Log file name
 	 * @param integer $priority Minimum priority for logging
 	 * @param string[]|null $facilities Facilities for which messages should be logged
+	 * @param string|null $requestid Unique identifier to identify multiple log entries for the same request faster
 	 */
-	public function __construct( $filename, $priority = \Aimeos\MW\Logger\Base::ERR, array $facilities = null )
+	public function __construct( $filename, $priority = \Aimeos\MW\Logger\Base::ERR, array $facilities = null, $requestid = null )
 	{
 		$this->filename = $filename;
 		$this->loglevel = $priority;
 		$this->facilities = $facilities;
+
+		if( $requestid === null ) {
+			$requestid = substr( md5( php_uname( 'n' ) . getmypid() . date( 'Y-m-d H:i:s' ) ), 24 );
+		}
+		$this->requestid = $requestid;
 	}
 
 
@@ -44,27 +50,30 @@ class File extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 	 * Writes a message to the configured log facility.
 	 *
 	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param integer $priority Priority of the message for filtering
+	 * @param integer $prio Priority of the message for filtering
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
+	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 * @throws \Aimeos\MW\Logger\Exception If an error occurs in Zend_Log
 	 * @see \Aimeos\MW\Logger\Base for available log level constants
 	 */
-	public function log( $message, $priority = \Aimeos\MW\Logger\Base::ERR, $facility = 'message' )
+	public function log( $message, $prio = \Aimeos\MW\Logger\Base::ERR, $facility = 'message' )
 	{
-		if( $priority <= $this->loglevel
-			&& ( $this->facilities === null || in_array( $facility, $this->facilities ) ) )
+		if( $prio <= $this->loglevel && ( $this->facilities === null || in_array( $facility, $this->facilities ) ) )
 		{
-			$this->checkLogLevel( $priority );
+			$level = $this->getLogLevel( $prio );
 
 			if( !is_scalar( $message ) ) {
 				$message = json_encode( $message );
 			}
 
-			$message = '<' . $facility . '> ' . date( 'Y-m-d H:i:s' ) . ' ' . $priority . ' ' . $message . PHP_EOL;
+			$date = date( 'Y-m-d H:i:s' );
+			$msg = '[' . $date . '] <' . $facility . '> [' . $level . '] [' . $this->requestid . '] ' . $message . PHP_EOL;
 
-			if( file_put_contents( $this->filename, $message, FILE_APPEND ) === false ) {
+			if( file_put_contents( $this->filename, $msg, FILE_APPEND ) === false ) {
 				throw new \Aimeos\MW\Logger\Exception( sprintf( 'Unable to write to file "%1$s', $this->filename ) );
 			}
 		}
+
+		return $this;
 	}
 }

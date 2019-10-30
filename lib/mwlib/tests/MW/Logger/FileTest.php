@@ -46,11 +46,12 @@ class FileTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No log record found' );
 		}
 
-		$this->assertEquals( '<message>', $msg[0] );
-		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $msg[1] ) );
-		$this->assertEquals( 1, preg_match( '/[0-9]{2}:[0-9]{2}:[0-9]{2}/', $msg[2] ) );
-		$this->assertEquals( \Aimeos\MW\Logger\Base::ERR, $msg[3] );
-		$this->assertEquals( 'error', $msg[4] );
+		$this->assertEquals( 1, preg_match( '/\[[0-9]{4}-[0-9]{2}-[0-9]{2}/', $msg[0] ) );
+		$this->assertEquals( 1, preg_match( '/[0-9]{2}:[0-9]{2}:[0-9]{2}\]/', $msg[1] ) );
+		$this->assertEquals( '<message>', $msg[2] );
+		$this->assertEquals( '[error]', $msg[3] );
+		$this->assertEquals( 1, preg_match( '/\[[a-z0-9]{8}\]/', $msg[4] ) );
+		$this->assertEquals( 'error', $msg[5] );
 
 
 		$this->setExpectedException( \Aimeos\MW\Logger\Exception::class );
@@ -73,11 +74,12 @@ class FileTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No log record found' );
 		}
 
-		$this->assertEquals( '<message>', $msg[0] );
-		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $msg[1] ) );
-		$this->assertEquals( 1, preg_match( '/[0-9]{2}:[0-9]{2}:[0-9]{2}/', $msg[2] ) );
-		$this->assertEquals( \Aimeos\MW\Logger\Base::ERR, $msg[3] );
-		$this->assertEquals( '["scalar","errortest"]', $msg[4] );
+		$this->assertEquals( 1, preg_match( '/\[[0-9]{4}-[0-9]{2}-[0-9]{2}/', $msg[0] ) );
+		$this->assertEquals( 1, preg_match( '/[0-9]{2}:[0-9]{2}:[0-9]{2}\]/', $msg[1] ) );
+		$this->assertEquals( '<message>', $msg[2] );
+		$this->assertEquals( '[error]', $msg[3] );
+		$this->assertEquals( 1, preg_match( '/\[[a-z0-9]{8}\]/', $msg[4] ) );
+		$this->assertEquals( '["scalar","errortest"]', $msg[5] );
 	}
 
 
@@ -96,11 +98,12 @@ class FileTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No log record found' );
 		}
 
-		$this->assertEquals( '<message>', $msg[0] );
-		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2}/', $msg[1] ) );
-		$this->assertEquals( 1, preg_match( '/[0-9]{2}:[0-9]{2}:[0-9]{2}/', $msg[2] ) );
-		$this->assertEquals( \Aimeos\MW\Logger\Base::CRIT, $msg[3] );
-		$this->assertEquals( 'critical', $msg[4] );
+		$this->assertEquals( 1, preg_match( '/\[[0-9]{4}-[0-9]{2}-[0-9]{2}/', $msg[0] ) );
+		$this->assertEquals( 1, preg_match( '/[0-9]{2}:[0-9]{2}:[0-9]{2}\]/', $msg[1] ) );
+		$this->assertEquals( '<message>', $msg[2] );
+		$this->assertEquals( '[critical]', $msg[3] );
+		$this->assertEquals( 1, preg_match( '/\[[a-z0-9]{8}\]/', $msg[4] ) );
+		$this->assertEquals( 'critical', $msg[5] );
 	}
 
 
@@ -127,7 +130,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No log record found' );
 		}
 
-		$this->assertEquals( '<auth>', $msg[0] );
+		$this->assertEquals( '<auth>', $msg[2] );
 	}
 
 

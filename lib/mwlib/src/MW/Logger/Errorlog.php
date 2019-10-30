@@ -29,11 +29,17 @@ class Errorlog extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 	 *
 	 * @param integer Log level from \Aimeos\MW\Logger\Base
 	 * @param string[]|null $facilities Facilities for which messages should be logged
+	 * @param string|null $requestid Unique identifier to identify multiple log entries for the same request faster
 	 */
-	public function __construct( $loglevel = \Aimeos\MW\Logger\Base::ERR, array $facilities = null )
+	public function __construct( $loglevel = \Aimeos\MW\Logger\Base::ERR, array $facilities = null, $requestid = null )
 	{
 		$this->loglevel = $loglevel;
 		$this->facilities = $facilities;
+
+		if( $requestid === null ) {
+			$requestid = substr( md5( php_uname( 'n' ) . getmypid() . date( 'Y-m-d H:i:s' ) ), 24 );
+		}
+		$this->requestid = $requestid;
 	}
 
 
@@ -41,40 +47,29 @@ class Errorlog extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 	 * Writes a message to the configured log facility.
 	 *
 	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param integer $priority Priority of the message for filtering
+	 * @param integer $prio Priority of the message for filtering
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
+	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 * @throws \Aimeos\MW\Logger\Exception If the priority is invalid
 	 * @see \Aimeos\MW\Logger\Base for available log level constants
 	 */
-	public function log( $message, $priority = \Aimeos\MW\Logger\Base::ERR, $facility = 'message' )
+	public function log( $message, $prio = \Aimeos\MW\Logger\Base::ERR, $facility = 'message' )
 	{
-		if( $priority <= $this->loglevel
-			&& ( $this->facilities === null || in_array( $facility, $this->facilities ) ) )
+		if( $prio <= $this->loglevel && ( $this->facilities === null || in_array( $facility, $this->facilities ) ) )
 		{
-			switch( $priority )
-			{
-				// @codingStandardsIgnoreStart
-				case \Aimeos\MW\Logger\Base::EMERG: $level = '[emergency]'; break;
-				case \Aimeos\MW\Logger\Base::ALERT: $level = '[alert]'; break;
-				case \Aimeos\MW\Logger\Base::CRIT: $level = '[critical]'; break;
-				case \Aimeos\MW\Logger\Base::ERR: $level = '[error]'; break;
-				case \Aimeos\MW\Logger\Base::WARN: $level = '[warning]'; break;
-				case \Aimeos\MW\Logger\Base::NOTICE: $level = '[notice]'; break;
-				case \Aimeos\MW\Logger\Base::INFO: $level = '[info]'; break;
-				case \Aimeos\MW\Logger\Base::DEBUG: $level = '[debug]'; break;
-				// @codingStandardsIgnoreEnd
-				default:
-					throw new \Aimeos\MW\Logger\Exception( sprintf( 'Invalid log priority %1$s', $priority ) );
-			}
+			$level = $this->getLogLevel( $prio );
 
 			if( !is_scalar( $message ) ) {
 				$message = json_encode( $message );
 			}
 
-			if( error_log( '<' . $facility . '> ' . $level . ' ' . $message ) === false ) {
-				throw new \Aimeos\MW\Logger\Exception( sprintf(
-					'Unable to log message with priority "%1$d": %2$s', $priority, $message ) );
+			if( error_log( '<' . $facility . '> [' . $level . '] [' . $this->requestid . '] ' . $message ) === false )
+			{
+				$msg = sprintf( 'Unable to log message with priority "%1$d": %2$s', $priority, $message );
+				throw new \Aimeos\MW\Logger\Exception( $msg );
 			}
 		}
+
+		return $this;
 	}
 }

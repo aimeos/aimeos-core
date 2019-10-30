@@ -67,21 +67,20 @@ abstract class Base
 	 * @param integer $level Log constant
 	 * @throws \Aimeos\MW\Logger\Exception If log constant is unknown
 	 */
-	protected function checkLogLevel( $level )
+	protected function getLogLevel( $level )
 	{
 		switch( $level )
 		{
-			case \Aimeos\MW\Logger\Base::EMERG:
-			case \Aimeos\MW\Logger\Base::ALERT:
-			case \Aimeos\MW\Logger\Base::CRIT:
-			case \Aimeos\MW\Logger\Base::ERR:
-			case \Aimeos\MW\Logger\Base::WARN:
-			case \Aimeos\MW\Logger\Base::NOTICE:
-			case \Aimeos\MW\Logger\Base::INFO:
-			case \Aimeos\MW\Logger\Base::DEBUG:
-				break;
-			default:
-				throw new \Aimeos\MW\Logger\Exception( sprintf( 'Invalid log level constant "%1$d"', $level ) );
+			case \Aimeos\MW\Logger\Base::EMERG: return 'emergency';
+			case \Aimeos\MW\Logger\Base::ALERT: return 'alert';
+			case \Aimeos\MW\Logger\Base::CRIT: return 'critical';
+			case \Aimeos\MW\Logger\Base::ERR: return 'error';
+			case \Aimeos\MW\Logger\Base::WARN: return 'warning';
+			case \Aimeos\MW\Logger\Base::NOTICE: return 'notice';
+			case \Aimeos\MW\Logger\Base::INFO: return 'info';
+			case \Aimeos\MW\Logger\Base::DEBUG: return 'debug';
 		}
+
+		throw new \Aimeos\MW\Logger\Exception( sprintf( 'Invalid log level constant "%1$d"', $level ) );
 	}
 }
