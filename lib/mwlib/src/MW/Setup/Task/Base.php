@@ -184,6 +184,39 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	/**
 	 * Returns the schemas specified by the given resource name.
 	 *
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Connection with insert statement executed at last
+	 * @param string $adapter Name of the database adapter
+	 * @param string|null Name of the sequence generating the last ID (only Oracle)
+	 * @return string|null Last inserted ID or null if not available
+	 */
+	protected function getLastId( \Aimeos\MW\DB\Connection\Iface $conn, string $adapter, string $sequence = null )
+	{
+		$id = null;
+		$map = [
+			'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+			'mysql' => 'SELECT LAST_INSERT_ID()',
+			'oracle' => 'SELECT mshop_attribute_seq.CURRVAL FROM DUAL',
+			'pgsql' => 'SELECT lastval()',
+			'sqlite' => 'SELECT last_insert_rowid()',
+			'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+			'sqlanywhere' => 'SELECT @@IDENTITY',
+		];
+
+		if( !isset( $map[$adapter] ) ) {
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unsupported adapter: %1$s', $adapter ) );
+		}
+
+		$result = $conn->create( str_replace( ':seq:', $sequence, $map[$adapter] ) )->execute();
+		$row = $result->fetch( \Aimeos\MW\DB\Result\Base::FETCH_NUM );
+		$result->finish();
+
+		return $row && isset( $row[0] ) ? $row[0] : null;
+	}
+
+
+	/**
+	 * Returns the schemas specified by the given resource name.
+	 *
 	 * @param string $name Name from resource configuration
 	 * @return \Aimeos\MW\Setup\DBSchema\Iface
 	 */
