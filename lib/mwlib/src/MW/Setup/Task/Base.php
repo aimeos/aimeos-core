@@ -186,16 +186,15 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Connection with insert statement executed at last
 	 * @param string $adapter Name of the database adapter
-	 * @param string|null Name of the sequence generating the last ID (only Oracle)
+	 * @param string|null $sequence Name of the sequence which generated the last ID (only Oracle)
 	 * @return string|null Last inserted ID or null if not available
 	 */
 	protected function getLastId( \Aimeos\MW\DB\Connection\Iface $conn, string $adapter, string $sequence = null )
 	{
-		$id = null;
 		$map = [
 			'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 			'mysql' => 'SELECT LAST_INSERT_ID()',
-			'oracle' => 'SELECT mshop_attribute_seq.CURRVAL FROM DUAL',
+			'oracle' => 'SELECT ' . $sequence . '.CURRVAL FROM DUAL',
 			'pgsql' => 'SELECT lastval()',
 			'sqlite' => 'SELECT last_insert_rowid()',
 			'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
