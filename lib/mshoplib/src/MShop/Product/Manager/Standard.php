@@ -791,7 +791,7 @@ class Standard
 
 		if( isset( $ref['catalog'] ) || in_array( 'catalog', $ref, true ) )
 		{
-			$domains = isset( $ref['catalog'] ) && is_array( $ref['catalog'] ) ?  $ref['catalog'] : [];
+			$domains = isset( $ref['catalog'] ) && is_array( $ref['catalog'] ) ? $ref['catalog'] : [];
 
 			foreach( $this->getDomainRefItems( array_keys( $map ), 'catalog', $domains ) as $prodId => $list ) {
 				$map[$prodId]['catalog'] = $list;
@@ -800,7 +800,7 @@ class Standard
 
 		if( isset( $ref['supplier'] ) || in_array( 'supplier', $ref, true ) )
 		{
-			$domains = isset( $ref['supplier'] ) && is_array( $ref['supplier'] ) ?  $ref['supplier'] : [];
+			$domains = isset( $ref['supplier'] ) && is_array( $ref['supplier'] ) ? $ref['supplier'] : [];
 
 			foreach( $this->getDomainRefItems( array_keys( $map ), 'supplier', $domains ) as $prodId => $list ) {
 				$map[$prodId]['supplier'] = $list;
