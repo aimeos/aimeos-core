@@ -22,6 +22,7 @@ class Errorlog extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 {
 	private $loglevel;
 	private $facilities;
+	private $requestid;
 
 
 	/**
@@ -63,10 +64,8 @@ class Errorlog extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 				$message = json_encode( $message );
 			}
 
-			if( error_log( '<' . $facility . '> [' . $level . '] [' . $this->requestid . '] ' . $message ) === false )
-			{
-				$msg = sprintf( 'Unable to log message with priority "%1$d": %2$s', $priority, $message );
-				throw new \Aimeos\MW\Logger\Exception( $msg );
+			if( error_log( '<' . $facility . '> [' . $level . '] [' . $this->requestid . '] ' . $message ) === false ) {
+				throw new \Aimeos\MW\Logger\Exception( 'Unable to log message to error log' );
 			}
 		}
 

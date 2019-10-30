@@ -23,6 +23,7 @@ class File extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 	private $loglevel;
 	private $filename;
 	private $facilities;
+	private $requestid;
 
 
 	/**

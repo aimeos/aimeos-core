@@ -71,14 +71,14 @@ abstract class Base
 	{
 		switch( $level )
 		{
-			case \Aimeos\MW\Logger\Base::EMERG: return 'emergency';
-			case \Aimeos\MW\Logger\Base::ALERT: return 'alert';
-			case \Aimeos\MW\Logger\Base::CRIT: return 'critical';
-			case \Aimeos\MW\Logger\Base::ERR: return 'error';
-			case \Aimeos\MW\Logger\Base::WARN: return 'warning';
-			case \Aimeos\MW\Logger\Base::NOTICE: return 'notice';
-			case \Aimeos\MW\Logger\Base::INFO: return 'info';
-			case \Aimeos\MW\Logger\Base::DEBUG: return 'debug';
+			case self::EMERG: return 'emergency';
+			case self::ALERT: return 'alert';
+			case self::CRIT: return 'critical';
+			case self::ERR: return 'error';
+			case self::WARN: return 'warning';
+			case self::NOTICE: return 'notice';
+			case self::INFO: return 'info';
+			case self::DEBUG: return 'debug';
 		}
 
 		throw new \Aimeos\MW\Logger\Exception( sprintf( 'Invalid log level constant "%1$d"', $level ) );
