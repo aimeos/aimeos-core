@@ -65,6 +65,28 @@ class Standard
 
 
 	/**
+	 * Returns the catalog items referencing the product
+	 *
+	 * @return \Aimeos\MShop\Catalog\Item\Iface[] Catalog items
+	 */
+	public function getCatalogItems()
+	{
+		return (array) $this->get( 'catalog', [] );
+	}
+
+
+	/**
+	 * Returns the supplier items referencing the product
+	 *
+	 * @return \Aimeos\MShop\Supplier\Item\Iface[] Supplier items
+	 */
+	public function getSupplierItems()
+	{
+		return (array) $this->get( 'supplier', [] );
+	}
+
+
+	/**
 	 * Returns the type of the product item.
 	 *
 	 * @return string|null Type of the product item
