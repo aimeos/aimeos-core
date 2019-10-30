@@ -72,7 +72,7 @@ class TablesMigratePropertyKey extends \Aimeos\MW\Setup\Task\Base
 
 				while( ( $row = $result->fetch() ) !== false )
 				{
-					$stmt->bind( 1, $row['type'] . '|' . $row['langid'] ?: 'null' . '|' . md5( $value ) );
+					$stmt->bind( 1, $row['type'] . '|' . ( $row['langid'] ?: 'null' ) . '|' . md5( $row['value'] ) );
 					$stmt->bind( 2, $row['id'] );
 					$stmt->execute()->finish();
 				}
