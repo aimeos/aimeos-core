@@ -24,7 +24,7 @@ class TypesMigrateColumns extends \Aimeos\MW\Setup\Task\Base
 		'db-product' => ['mshop_product', 'mshop_product_list', 'mshop_product_property'],
 		'db-service' => ['mshop_service', 'mshop_service_list'],
 		'db-stock' => ['mshop_stock'],
-		'db-supplier' => ['mshop_supplier', 'mshop_supplier_list'],
+		'db-supplier' => ['mshop_supplier_list'],
 		'db-tag' => ['mshop_tag'],
 		'db-text' => ['mshop_text', 'mshop_text_list'],
 	];
