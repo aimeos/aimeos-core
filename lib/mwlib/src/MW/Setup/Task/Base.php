@@ -185,12 +185,13 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * Returns the schemas specified by the given resource name.
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Connection with insert statement executed at last
-	 * @param string $adapter Name of the database adapter
+	 * @param string $rname Resource name of the connection the table belongs to
 	 * @param string|null $sequence Name of the sequence which generated the last ID (only Oracle)
 	 * @return string|null Last inserted ID or null if not available
 	 */
-	protected function getLastId( \Aimeos\MW\DB\Connection\Iface $conn, string $adapter, string $sequence = null )
+	protected function getLastId( \Aimeos\MW\DB\Connection\Iface $conn, string $rname, string $sequence = null ) : ?string
 	{
+		$adapter = $this->getSchema( $rname )->getName();
 		$map = [
 			'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 			'mysql' => 'SELECT LAST_INSERT_ID()',
