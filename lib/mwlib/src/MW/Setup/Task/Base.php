@@ -231,6 +231,26 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 
 
 	/**
+	 * Returns the DBAL schema manager for the given resource name
+	 *
+	 * @param string $name Name from resource configuration
+	 * @return \Doctrine\DBAL\Schema\AbstractSchemaManager DBAL schema manager
+	 */
+	protected function getSchemaManager( string $rname ) : \Doctrine\DBAL\Schema\AbstractSchemaManager
+	{
+		$conn = $this->acquire( $rname );
+		$dbal = $conn->getRawObject();
+		$this->release( $conn, $rname );
+
+		if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
+			throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
+		}
+
+		return $dbal->getSchemaManager();
+	}
+
+
+	/**
 	 * Returns the setup task paths ordered by their dependencies
 	 *
 	 * @return string[] List of file system paths
@@ -377,5 +397,40 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 		}
 
 		return $defs;
+	}
+
+
+	/**
+	 * Updates the database to get from the source schema to the destination schema
+	 *
+	 * @param \Doctrine\DBAL\Schema\Schema $src Source schema object
+	 * @param \Doctrine\DBAL\Schema\Schema $dest Destination schema object
+	 * @param string $rname Resource name of the connection the table belongs to
+	 */
+	protected function update( \Doctrine\DBAL\Schema\Schema $src, \Doctrine\DBAL\Schema\Schema $dest, string $rname )
+	{
+		$conn = $this->acquire( $rname );
+
+		try
+		{
+			$dbal = $conn->getRawObject();
+
+			if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
+				throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
+			}
+
+			$platform = $dbal->getDatabasePlatform();
+
+			foreach( $src->getMigrateToSql( $dest, $platform ) as $sql ) {
+				$conn->create( $sql )->execute()->finish();
+			}
+		}
+		catch( \Exception $e )
+		{
+			$this->release( $conn, $name );
+			throw $e;
+		}
+
+		$this->release( $conn, $name );
 	}
 }
