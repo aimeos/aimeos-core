@@ -427,10 +427,10 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 		}
 		catch( \Exception $e )
 		{
-			$this->release( $conn, $name );
+			$this->release( $conn, $rname );
 			throw $e;
 		}
 
-		$this->release( $conn, $name );
+		$this->release( $conn, $rname );
 	}
 }
