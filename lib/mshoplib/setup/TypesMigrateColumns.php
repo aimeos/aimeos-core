@@ -162,9 +162,8 @@ class TypesMigrateColumns extends \Aimeos\MW\Setup\Task\Base
 			$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 1 );
 
 			if( $dbalManager->tablesExist( [$name] )
-				&& ( $table = $dbalManager->listTableDetails( $name ) )->hasColumn( 'type' ) === false
+				&& ( $tableDef = $dbalManager->listTableDetails( $name ) )->hasColumn( 'type' ) === false
 			) {
-				$tableDef = $dbalManager->listTableDetails( $name );
 				$beforeSchema = new \Doctrine\DBAL\Schema\Schema( [clone $tableDef], [], $config );
 				$tableDef->addColumn( 'type', 'string', ['length' => 64, 'notnull' => false] );
 				$afterSchema = new \Doctrine\DBAL\Schema\Schema( [$tableDef], [], $config );
