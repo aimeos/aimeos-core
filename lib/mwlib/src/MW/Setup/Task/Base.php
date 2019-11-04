@@ -286,7 +286,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 		$defs = [];
 		$matches = [];
 
-		$regex = '/CREATE TABLE \"?([a-zA-Z0-9_]+)\"? .*(\n\n|$)/sU';
+		$regex = '/CREATE TABLE \"?([a-zA-Z0-9_]+)\"? .*([\r\n]{2,4}|$)/sU';
 		if ( preg_match_all($regex, $content, $matches, PREG_SET_ORDER) === false ) {
 			throw new \Aimeos\MW\Setup\Exception('Unable to get table definitions');
 		}
@@ -310,8 +310,8 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 		$defs = [];
 		$matches = [];
 
-		if ( preg_match_all('/CREATE [a-zA-Z]* ?INDEX \"?([a-zA-Z0-9_]+)\"? ON \"?([a-zA-Z0-9_]+)\"? .+(\n\n|$)/sU', $content, $matches, PREG_SET_ORDER) === false ) {
-			throw new \Aimeos\MW\Setup\Exception('Unable to get index definitions');
+		if( preg_match_all( '/CREATE [a-zA-Z]* ?INDEX \"?([a-zA-Z0-9_]+)\"? ON \"?([a-zA-Z0-9_]+)\"? .+([\r\n]{2,4}|$)/sU', $content, $matches, PREG_SET_ORDER ) === false ) {
+			throw new \Aimeos\MW\Setup\Exception( 'Unable to get index definitions' );
 		}
 
 		foreach ( $matches as $match ) {
@@ -334,7 +334,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 		$defs = [];
 		$matches = [];
 
-		$regex = '/CREATE TRIGGER \"?([a-zA-Z0-9_]+)\"? .*(\n\n|$)/sU';
+		$regex = '/CREATE TRIGGER \"?([a-zA-Z0-9_]+)\"? .*([\r\n]{2,4}|$)/sU';
 		if ( preg_match_all($regex, $content, $matches, PREG_SET_ORDER) === false ) {
 			throw new \Aimeos\MW\Setup\Exception('Unable to get trigger definitions');
 		}
