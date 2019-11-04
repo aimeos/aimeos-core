@@ -153,18 +153,17 @@ class TypesMigrateColumns extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
 		}
 
-		$dbalManager = $dbal->getSchemaManager();
+		$dbal = $dbal->getSchemaManager();
 		$platform = $dbal->getDatabasePlatform();
-		$config = $dbalManager->createSchemaConfig();
+		$config = $dbal->createSchemaConfig();
 
 		foreach( $tables as $name )
 		{
 			$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 1 );
 
-			if( $dbalManager->tablesExist( [$name] )
-				&& ( $table = $dbalManager->listTableDetails( $name ) )->hasColumn( 'type' ) === false
-			) {
-				$tableDef = $dbalManager->listTableDetails( $name );
+			if( $dbal->tablesExist( [$name] ) && $dbal->listTableDetails( $name )->hasColumn( 'type' ) === false )
+			{
+				$tableDef = $dbal->listTableDetails( $name );
 				$beforeSchema = new \Doctrine\DBAL\Schema\Schema( [clone $tableDef], [], $config );
 				$tableDef->addColumn( 'type', 'string', ['length' => 64, 'notnull' => false] );
 				$afterSchema = new \Doctrine\DBAL\Schema\Schema( [$tableDef], [], $config );
@@ -193,17 +192,17 @@ class TypesMigrateColumns extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
 		}
 
-		$dbalManager = $dbal->getSchemaManager();
+		$dbal = $dbal->getSchemaManager();
 		$platform = $dbal->getDatabasePlatform();
-		$config = $dbalManager->createSchemaConfig();
+		$config = $dbal->createSchemaConfig();
 
 		foreach( $indexes as $table => $name )
 		{
 			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $dbalManager->tablesExist( [$name] )
-				&& ( $tableDef = $dbalManager->listTableDetails( $table ) )->hasIndex( $name ) === true
-			) {
+			if( $dbal->tablesExist( [$name] ) && $dbal->listTableDetails( $table )->hasIndex( $name ) === true )
+			{
+				$tableDef = $tableDef = $dbal->listTableDetails( $table );
 				$beforeSchema = new \Doctrine\DBAL\Schema\Schema( [clone $tableDef], [], $config );
 				$tableDef->dropIndex( $name );
 				$afterSchema = new \Doctrine\DBAL\Schema\Schema( [$tableDef], [], $config );
