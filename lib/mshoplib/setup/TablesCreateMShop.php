@@ -187,9 +187,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 			{
 				$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
 
-				$table = $dbalManager->listTableDetails( $name );
-				$tables = ( $table->getColumns() !== [] ? array( $table ) : [] );
-
+				$tables = ( $dbalManager->tablesExist( [$name] ) ? [$dbalManager->listTableDetails( $name )] : [] );
 				$tableSchema = new \Doctrine\DBAL\Schema\Schema( $tables, [], $config );
 				$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $tableSchema, $dbalschema );
 				$stmts = $this->remove( $this->exclude( $schemaDiff, $relpath ), $clean )->toSaveSql( $platform );
