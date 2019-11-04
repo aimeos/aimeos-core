@@ -198,8 +198,8 @@ class TablesUpdateCharsetCollation extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function checkMySqlCompatibility( \Aimeos\MW\Setup\DBSchema\Iface $schema, $rname )
 	{
-		if ( !$schema instanceof \Aimeos\MW\Setup\DBSchema\Mysql ) {
-			return true;
+		if( !$schema instanceof \Aimeos\MW\Setup\DBSchema\Mysql ) {
+			return false;
 		}
 
 		// MariaDB gets identified as a MySql 5.5.5 by doctrine so ask the server directly
