@@ -63,7 +63,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		return $this->get( 'stock.type' );
+		return $this->get( 'stock.type', 'default' );
 	}
 
 

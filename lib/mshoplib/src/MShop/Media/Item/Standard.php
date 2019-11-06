@@ -95,7 +95,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		return $this->get( 'media.type' );
+		return $this->get( 'media.type', 'default' );
 	}
 
 

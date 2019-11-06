@@ -50,7 +50,7 @@ class Standard extends Base
 	 */
 	public function getType()
 	{
-		return $this->get( 'price.type' );
+		return $this->get( 'price.type', 'default' );
 	}
 
 

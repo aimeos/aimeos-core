@@ -43,7 +43,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		return $this->get( 'plugin.type' );
+		return $this->get( 'plugin.type', 'order' );
 	}
 
 

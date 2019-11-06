@@ -184,7 +184,7 @@ class Standard
 	 */
 	public function getType()
 	{
-		return $this->get( $this->prefix . 'type' );
+		return $this->get( $this->prefix . 'type', 'default' );
 	}
 
 
