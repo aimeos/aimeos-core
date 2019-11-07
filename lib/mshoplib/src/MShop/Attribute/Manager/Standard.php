@@ -716,11 +716,14 @@ class Standard
 			throw $e;
 		}
 
-		$name = 'attribute/property';
-		$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
-		$propItems = $this->getPropertyItems( array_keys( $map ), 'attribute', $propTypes );
+		$propItems = []; $name = 'attribute/property';
+		if( isset( $ref[$name] ) || in_array( $name, $ref, true ) )
+		{
+			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
+			$propItems = $this->getPropertyItems( array_keys( $map ), 'attribute', $propTypes );
+		}
 
-		return $this->buildItems( $map, null, 'attribute', $propItems );
+		return $this->buildItems( $map, $ref, 'attribute', $propItems );
 	}
 
 

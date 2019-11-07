@@ -89,6 +89,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetSavePropertyItems()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'price.label', 'product/default/600.00/30.00' ) );
+		$items = $this->object->searchItems( $search, ['price/property'] );
+		$item = reset( $items );
+
+		$item->setId( null )->setLabel( 'core:property-test' );
+		$this->object->saveItem( $item );
+
+		$search->setConditions( $search->compare( '==', 'price.label', 'core:property-test' ) );
+		$items = $this->object->searchItems( $search, ['price/property'] );
+		$item2 = reset( $items );
+
+		$this->object->deleteItem( $item->getId() );
+
+		$this->assertEquals( 1, count( $item->getPropertyItems() ) );
+		$this->assertEquals( 1, count( $item2->getPropertyItems() ) );
+	}
+
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();

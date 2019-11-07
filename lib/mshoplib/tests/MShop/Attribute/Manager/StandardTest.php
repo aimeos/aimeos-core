@@ -202,12 +202,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSavePropertyItems()
 	{
-		$item = $this->object->findItem( 'black', [], 'product', 'color' );
+		$item = $this->object->findItem( 'black', ['attribute/property'], 'product', 'color' );
 
 		$item->setId( null )->setCode( 'xyz' );
 		$this->object->saveItem( $item );
 
-		$item2 = $this->object->findItem( 'xyz', [], 'product', 'color' );
+		$item2 = $this->object->findItem( 'xyz', ['attribute/property'], 'product', 'color' );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -273,7 +273,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, ['attribute/property'], $total );
 
 		$this->assertEquals( 1, $total );
 		$this->assertEquals( 1, count( $results ) );

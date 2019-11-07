@@ -708,11 +708,14 @@ class Standard
 			throw $e;
 		}
 
-		$name = 'media/property';
-		$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
-		$propItems = $this->getPropertyItems( array_keys( $map ), 'media', $propTypes );
+		$propItems = []; $name = 'media/property';
+		if( isset( $ref[$name] ) || in_array( $name, $ref, true ) )
+		{
+			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
+			$propItems = $this->getPropertyItems( array_keys( $map ), 'media', $propTypes );
+		}
 
-		return $this->buildItems( $map, null, 'media', $propItems );
+		return $this->buildItems( $map, $ref, 'media', $propItems );
 	}
 
 

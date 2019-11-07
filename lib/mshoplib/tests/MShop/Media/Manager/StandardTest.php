@@ -167,13 +167,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'media.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search );
+		$items = $this->object->searchItems( $search, ['media/property'] );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No media item with label "path/to/folder/example1.jpg" found' );
 		}
 
-		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
+		$this->assertEquals( $item, $this->object->getItem( $item->getId(), ['media/property'] ) );
 		$this->assertEquals( 2, count( $item->getPropertyItems() ) );
 	}
 
@@ -254,14 +254,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'media.label', 'path/to/folder/example1.jpg' ) );
-		$items = $this->object->searchItems( $search );
+		$items = $this->object->searchItems( $search, ['media/property'] );
 		$item = reset( $items );
 
 		$item->setId( null )->setLabel( 'path/to/folder/example1-1.jpg' );
 		$this->object->saveItem( $item );
 
 		$search->setConditions( $search->compare( '==', 'media.label', 'path/to/folder/example1-1.jpg' ) );
-		$items = $this->object->searchItems( $search );
+		$items = $this->object->searchItems( $search, ['media/property'] );
 		$item2 = reset( $items );
 
 		$this->object->deleteItem( $item->getId() );
