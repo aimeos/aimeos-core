@@ -96,6 +96,17 @@ abstract class Base
 
 
 	/**
+	 * Returns the ID of the items
+	 *
+	 * @return string|null ID of the item or null
+	 */
+	public function __toString()
+	{
+		return $this->getId();
+	}
+
+
+	/**
 	 * Returns the item property for the given name
 	 *
 	 * @param string $name Name of the property

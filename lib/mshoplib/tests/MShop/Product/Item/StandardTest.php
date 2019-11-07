@@ -72,6 +72,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( isset( $this->object->test ) );
 		$this->assertEquals( 'value', $this->object->test );
+
+		$this->assertEquals( '1', (string) $this->object );
 	}
 
 
