@@ -79,17 +79,17 @@ abstract class DBBase
 
 
 	/**
-	 * Removes multiple items from the index.
+	 * Removes multiple items.
 	 *
-	 * @param string[] $ids list of product IDs
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $ids )
+	public function deleteItems( array $itemIds )
 	{
-		if( empty( $ids ) ) { return; }
+		if( empty( $itemIds ) ) { return; }
 
 		foreach( $this->getSubManagers() as $submanager ) {
-			$submanager->deleteItems( $ids );
+			$submanager->deleteItems( $itemIds );
 		}
 
 		return $this;

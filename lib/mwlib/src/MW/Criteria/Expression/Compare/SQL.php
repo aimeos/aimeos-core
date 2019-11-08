@@ -167,9 +167,9 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
 				$value = (int) (bool) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
-				$value = (int) $value; break;
+				$value = (int) (string) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
-				$value = (double) $value; break;
+				$value = (double) (string) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
 				if( $operator === '~=' ) {
 					$value = '\'%' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->conn->escape( $value ) ) . '%\''; break;

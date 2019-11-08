@@ -100,7 +100,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Deletes an item from storage.
 	 *
-	 * @param string $itemId Unique ID of the item in the storage
+	 * @param \Aimeos\MShop\Common\Item\Iface|string $itemId Item object or ID of the item object
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItem( $itemId )
@@ -863,23 +863,23 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
-	 * Deletes items specified by its IDs.
+	 * Deletes items.
 	 *
-	 * @param string[] $ids List of IDs
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @param string $cfgpath Configuration path to the SQL statement
 	 * @param boolean $siteidcheck If siteid should be used in the statement
 	 * @param string $name Name of the ID column
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function deleteItemsBase( array $ids, $cfgpath, $siteidcheck = true, $name = 'id' )
+	protected function deleteItemsBase( array $itemIds, $cfgpath, $siteidcheck = true, $name = 'id' )
 	{
-		if( empty( $ids ) ) { return; }
+		if( empty( $itemIds ) ) { return; }
 
 		$context = $this->getContext();
 		$dbname = $this->getResourceName();
 
 		$search = $this->getObject()->createSearch();
-		$search->setConditions( $search->compare( '==', $name, $ids ) );
+		$search->setConditions( $search->compare( '==', $name, $itemIds ) );
 
 		$types = array( $name => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 		$translations = array( $name => '"' . $name . '"' );

@@ -179,12 +179,12 @@ class Standard
 
 
 	/**
-	 * Removes multiple items from the index.
+	 * Removes multiple items.
 	 *
-	 * @param string[] $ids List of Product IDs
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $ids )
+	public function deleteItems( array $itemIds )
 	{
 		/** mshop/index/manager/text/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -216,7 +216,7 @@ class Standard
 		 * @see mshop/index/manager/text/standard/search/ansi
 		 * @see mshop/index/manager/text/standard/text/ansi
 		 */
-		return $this->deleteItemsBase( $ids, 'mshop/index/manager/text/standard/delete', true, 'prodid' );
+		return $this->deleteItemsBase( $itemIds, 'mshop/index/manager/text/standard/delete', true, 'prodid' );
 	}
 
 

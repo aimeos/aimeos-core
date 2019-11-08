@@ -85,15 +85,15 @@ class Standard
 
 
 	/**
-	 * Removes multiple items from the index.
+	 * Removes multiple items.
 	 *
-	 * @param string[] $ids list of product IDs
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $ids )
+	public function deleteItems( array $itemIds )
 	{
-		$this->getManager()->deleteItems( $ids );
-		return $this->clearItems( $ids )->clearCache( $ids );
+		$this->getManager()->deleteItems( $itemIds );
+		return $this->clearItems( $itemIds )->clearCache( $itemIds );
 	}
 
 

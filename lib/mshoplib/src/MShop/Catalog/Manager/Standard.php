@@ -283,9 +283,9 @@ class Standard extends Base
 
 
 	/**
-	 * Deletes the item specified by its ID.
+	 * Deletes the item.
 	 *
-	 * @param string $id ID of the item object
+	 * @param \Aimeos\MShop\Common\Item\Iface|string $itemId Item object or ID of the item object
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItem( $id )
@@ -312,15 +312,15 @@ class Standard extends Base
 
 
 	/**
-	 * Removes multiple items specified by ids in the array.
+	 * Removes multiple items.
 	 *
-	 * @param string[] $ids List of IDs
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $ids )
+	public function deleteItems( array $itemIds )
 	{
-		foreach( $ids as $id ) {
-			$this->getObject()->deleteItem( $id );
+		foreach( $itemIds as $itemId ) {
+			$this->getObject()->deleteItem( $itemId );
 		}
 
 		return $this;

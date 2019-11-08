@@ -39,7 +39,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testDeleteItems()
 	{
+		$item = (new \Aimeos\MShop\Product\Item\Standard())->setId( -1 );
+
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->deleteItems( [-1] ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->deleteItems( [$item] ) );
 	}
 
 

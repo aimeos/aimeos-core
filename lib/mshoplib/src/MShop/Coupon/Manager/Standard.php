@@ -399,12 +399,12 @@ class Standard
 
 
 	/**
-	 * Removes multiple items specified by ids in the array.
+	 * Removes multiple items.
 	 *
-	 * @param string[] $ids List of IDs
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Coupon\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $ids )
+	public function deleteItems( array $itemIds )
 	{
 		/** mshop/coupon/manager/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -438,7 +438,7 @@ class Standard
 		 */
 		$path = 'mshop/coupon/manager/standard/delete';
 
-		return $this->deleteItemsBase( $ids, $path );
+		return $this->deleteItemsBase( $itemIds, $path );
 	}
 
 
