@@ -323,7 +323,7 @@ class Standard extends Base
 			$this->getObject()->deleteItem( $itemId );
 		}
 
-		return $this;
+		return $this->deleteRefItems( $itemIds );
 	}
 
 

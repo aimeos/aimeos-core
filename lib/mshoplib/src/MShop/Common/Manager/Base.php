@@ -873,7 +873,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 */
 	protected function deleteItemsBase( array $itemIds, $cfgpath, $siteidcheck = true, $name = 'id' )
 	{
-		if( empty( $itemIds ) ) { return; }
+		if( empty( $itemIds ) ) { return $this; }
 
 		$context = $this->getContext();
 		$dbname = $this->getResourceName();

@@ -532,7 +532,7 @@ class Standard
 		 */
 		$path = 'mshop/attribute/manager/standard/delete';
 
-		return $this->deleteItemsBase( $itemIds, $path );
+		return $this->deleteItemsBase( $itemIds, $path )->deleteRefItems( $itemIds );
 	}
 
 

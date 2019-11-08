@@ -314,7 +314,7 @@ class Standard
 		 */
 		$path = 'mshop/product/manager/standard/delete';
 
-		return $this->deleteItemsBase( $itemIds, $path );
+		return $this->deleteItemsBase( $itemIds, $path )->deleteRefItems( $itemIds );
 	}
 
 

@@ -160,6 +160,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
+		$listItem = $this->object->createListsItem();
+		$refItem = \Aimeos\MShop\Text\Manager\Factory::create( $this->context )->createItem()->setType( 'name' );
+
 		$search = $this->object->createSearch();
 		$conditions = array(
 				$search->compare( '==', 'product.code', 'CNC' ),
@@ -178,11 +181,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setCode( 'unit save test' );
+		$itemExp->setCode( 'unit save test' )->addListItem( 'text', $listItem, $refItem );
 		$resultUpd = $this->object->saveItem( $itemExp );
-		$itemUpd = $this->object->getItem( $itemExp->getId() );
+		$itemUpd = $this->object->getItem( $itemExp->getId(), ['text'] );
 
-		$this->object->deleteItem( $itemSaved->getId() );
+		$this->object->deleteItem( $itemUpd->deleteListItems( $itemUpd->getListItems( 'text' ), true ) );
 
 
 		$this->assertTrue( $item->getId() !== null );

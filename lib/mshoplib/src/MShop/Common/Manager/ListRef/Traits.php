@@ -44,6 +44,24 @@ trait Traits
 
 
 	/**
+	 * Returns the context object.
+	 *
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
+	 */
+	abstract protected function getContext();
+
+
+	/**
+	 * Creates a new extension manager in the domain.
+	 *
+	 * @param string $domain Name of the domain (product, text, media, etc.)
+	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
+	 */
+	abstract public function getSubManager( $domain, $name = null );
+
+
+	/**
 	 * Creates the items with address item, list items and referenced items.
 	 *
 	 * @param array $map Associative list of IDs as keys and the associative array of values
@@ -88,21 +106,38 @@ trait Traits
 
 
 	/**
-	 * Returns the context object.
+	 * Removes the items referenced by the given list items.
 	 *
-	 * @return \Aimeos\MShop\Context\Item\Iface Context object
+	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface[] $items List of items with deleted list items
+	 * @return \Aimeos\MShop\Common\Manager\ListRef\Iface Manager object for method chaining
 	 */
-	abstract protected function getContext();
+	protected function deleteRefItems( array $items )
+	{
+		if( empty( $items ) ) {
+			return $this;
+		}
 
+		$map = [];
 
-	/**
-	 * Creates a new extension manager in the domain.
-	 *
-	 * @param string $domain Name of the domain (product, text, media, etc.)
-	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
-	 */
-	abstract public function getSubManager( $domain, $name = null );
+		foreach( $items as $item )
+		{
+			if( $item instanceof \Aimeos\MShop\Common\Item\ListRef\Iface )
+			{
+				foreach( $item->getListItemsDeleted() as $listItem )
+				{
+					if( $listItem->getRefItem() ) {
+						$map[$listItem->getDomain()][] = $listItem->getRefId();
+					}
+				}
+			}
+		}
+
+		foreach( $map as $domain => $ids ) {
+			\Aimeos\MShop::create( $this->getContext(), $domain )->begin()->deleteItems( $ids )->commit();
+		}
+
+		return $this;
+	}
 
 
 	/**
