@@ -288,6 +288,8 @@ abstract class Base
 			unset( $list[$this->prefix . 'id'] );
 		}
 
+		unset( $list['id'] ); // don't add foreign IDs, leads to not saving new items
+
 		foreach( $list as $key => $value )
 		{
 			if( is_string( $value ) && strpos( $key, '.' ) === false ) {
