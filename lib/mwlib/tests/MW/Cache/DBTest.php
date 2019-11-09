@@ -190,8 +190,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	public function testCleanup()
 	{
-		$this->object->cleanup();
-
+		$this->assertTrue( $this->object->cleanup() );
 
 		$conn = self::$dbm->acquire();
 		$result = $conn->create( 'SELECT "id" FROM "mw_cache_test"' )->execute();
@@ -204,7 +203,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	public function testDelete()
 	{
-		$this->object->delete( 't:1' );
+		$this->assertTrue( $this->object->delete( 't:1' ) );
 
 		$conn = self::$dbm->acquire();
 		$row = $conn->create( 'SELECT * FROM "mw_cache_tag_test"' )->execute()->fetch();
@@ -224,7 +223,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	public function testDeleteMultiple()
 	{
-		$this->object->deleteMultiple( array( 't:1', 't:2' ) );
+		$this->assertTrue( $this->object->deleteMultiple( array( 't:1', 't:2' ) ) );
 
 		$conn = self::$dbm->acquire();
 		$row = $conn->create( 'SELECT * FROM "mw_cache_test"' )->execute()->fetch();
@@ -236,7 +235,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	public function testDeleteByTags()
 	{
-		$this->object->deleteByTags( array( 'tag:1' ) );
+		$this->assertTrue( $this->object->deleteByTags( array( 'tag:1' ) ) );
 
 		$conn = self::$dbm->acquire();
 		$row = $conn->create( 'SELECT * FROM "mw_cache_tag_test"' )->execute()->fetch();
@@ -256,7 +255,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	public function testClear()
 	{
-		$this->object->clear();
+		$this->assertTrue( $this->object->clear() );
 
 		$conn = self::$dbm->acquire();
 		$row = $conn->create( 'SELECT * FROM "mw_cache_tag_test"' )->execute()->fetch();
@@ -291,9 +290,15 @@ class DBTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testHas()
+	{
+		$this->assertTrue( $this->object->has( 't:1' ) );
+	}
+
+
 	public function testSet()
 	{
-		$this->object->set( 't:3', 'test 3', '2100-01-01 00:00:00', ['tag:2', 'tag:3'] );
+		$this->assertTrue( $this->object->set( 't:3', 'test 3', '2100-01-01 00:00:00', ['tag:2', 'tag:3'] ) );
 
 
 		$conn = self::$dbm->acquire();
@@ -324,7 +329,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 	{
 		$pairs = ['t:3' => 'test 3', 't:2' => 'test 4'];
 
-		$this->object->setMultiple( $pairs, '2100-01-01 00:00:00', ['tag:2', 'tag:3'] );
+		$this->assertTrue( $this->object->setMultiple( $pairs, '2100-01-01 00:00:00', ['tag:2', 'tag:3'] ) );
 
 
 		$conn = self::$dbm->acquire();

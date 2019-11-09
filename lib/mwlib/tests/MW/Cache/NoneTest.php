@@ -26,27 +26,27 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testClear()
+	{
+		$this->assertTrue( $this->object->clear() );
+	}
+
+
 	public function testDelete()
 	{
-		$this->object->delete( 'test' );
+		$this->assertTrue( $this->object->delete( 'test' ) );
 	}
 
 
 	public function testDeleteMultiple()
 	{
-		$this->object->deleteMultiple( array( 'test' ) );
+		$this->assertTrue( $this->object->deleteMultiple( array( 'test' ) ) );
 	}
 
 
 	public function testDeleteByTags()
 	{
-		$this->object->deleteByTags( array( 'test' ) );
-	}
-
-
-	public function testClear()
-	{
-		$this->object->clear();
+		$this->assertTrue( $this->object->deleteByTags( array( 'test' ) ) );
 	}
 
 
@@ -62,9 +62,15 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testHas()
+	{
+		$this->assertFalse( $this->object->has( 'test' ) );
+	}
+
+
 	public function testSet()
 	{
-		$this->object->set( 'test', 'testval' );
+		$this->assertTrue( $this->object->set( 'test', 'testval' ) );
 	}
 
 

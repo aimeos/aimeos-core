@@ -39,6 +39,8 @@ class Standard
 	/**
 	 * Removes all expired cache entries.
 	 *
+	 * @inheritDoc
+	 *
 	 * @return bool True on success and false on failure
 	 */
 	public function cleanup() : bool
@@ -50,6 +52,8 @@ class Standard
 	/**
 	 * Removes all entries of the site from the cache.
 	 *
+	 * @inheritDoc
+	 *
 	 * @return bool True on success and false on failure
 	 */
 	public function clear() : bool
@@ -60,6 +64,8 @@ class Standard
 
 	/**
 	 * Removes the cache entry identified by the given key.
+	 *
+	 * @inheritDoc
 	 *
 	 * @param string $key Key string that identifies the single cache entry
 	 * @return bool True if the item was successfully removed. False if there was an error
@@ -74,6 +80,8 @@ class Standard
 	/**
 	 * Removes the cache entries identified by the given keys.
 	 *
+	 * @inheritDoc
+	 *
 	 * @param iterable $keys List of key strings that identify the cache entries that should be removed
 	 * @return bool True if the items were successfully removed. False if there was an error.
 	 * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -86,6 +94,8 @@ class Standard
 
 	/**
 	 * Removes the cache entries identified by the given tags.
+	 *
+	 * @inheritDoc
 	 *
 	 * @param iterable $tags List of tag strings that are associated to one or
 	 *  more cache entries that should be removed
@@ -100,6 +110,8 @@ class Standard
 
 	/**
 	 * Returns the cached value for the given key.
+	 *
+	 * @inheritDoc
 	 *
 	 * @param string $key Path to the requested value like product/id/123
 	 * @param mixed $default Value returned if requested key isn't found
@@ -116,6 +128,8 @@ class Standard
 	/**
 	 * Returns the cached values for the given cache keys if available.
 	 *
+	 * @inheritDoc
+	 *
 	 * @param iterable $keys List of key strings for the requested cache entries
 	 * @param mixed $default Default value to return for keys that do not exist
 	 * @return iterable A list of key => value pairs. Cache keys that do not exist or are stale will have $default as value.
@@ -128,7 +142,24 @@ class Standard
 
 
 	/**
+	 * Determines whether an item is present in the cache.
+	 *
+	 * @inheritDoc
+	 *
+	 * @param string $key The cache item key
+	 * @return bool True if cache entry is available, false if not
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
+	 */
+	public function has( string $key ) : bool
+	{
+		return $this->getObject()->has( $key );
+	}
+
+
+	/**
 	 * Sets the value for the given key in the cache.
+	 *
+	 * @inheritDoc
 	 *
 	 * @param string $key Key string for the given value like product/id/123
 	 * @param mixed $value Value string that should be stored for the given key
@@ -148,6 +179,8 @@ class Standard
 	/**
 	 * Adds or overwrites the given key/value pairs in the cache, which is much
 	 * more efficient than setting them one by one using the set() method.
+	 *
+	 * @inheritDoc
 	 *
 	 * @param iterable $pairs Associative list of key/value pairs. Both must be a string
 	 * @param \DateInterval|int|string|null $expires Date interval object,

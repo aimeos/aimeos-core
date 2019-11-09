@@ -93,6 +93,8 @@ class DB
 	/**
 	 * Removes all expired cache entries.
 	 *
+	 * @inheritDoc
+	 *
 	 * @return bool True on success and false on failure
 	 */
 	public function cleanup() : bool
@@ -130,6 +132,8 @@ class DB
 	/**
 	 * Removes all entries of the site from the cache.
 	 *
+	 * @inheritDoc
+	 *
 	 * @return bool True on success and false on failure
 	 */
 	public function clear() : bool
@@ -158,6 +162,8 @@ class DB
 
 	/**
 	 * Removes the cache entries identified by the given keys.
+	 *
+	 * @inheritDoc
 	 *
 	 * @param iterable $keys List of key strings that identify the cache entries that should be removed
 	 * @return bool True if the items were successfully removed. False if there was an error.
@@ -196,6 +202,8 @@ class DB
 
 	/**
 	 * Removes the cache entries identified by the given tags.
+	 *
+	 * @inheritDoc
 	 *
 	 * @param iterable $tags List of tag strings that are associated to one or
 	 *  more cache entries that should be removed
@@ -236,6 +244,8 @@ class DB
 
 	/**
 	 * Returns the cached values for the given cache keys if available.
+	 *
+	 * @inheritDoc
 	 *
 	 * @param string[] $keys List of key strings for the requested cache entries
 	 * @param mixed $default Default value to return for keys that do not exist
@@ -294,8 +304,61 @@ class DB
 
 
 	/**
+	 * Determines whether an item is present in the cache.
+	 *
+	 * @inheritDoc
+	 *
+	 * @param string $key The cache item key
+	 * @return bool True if cache entry is available, false if not
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
+	 */
+	public function has( string $key ) : bool
+	{
+		$return = false;
+		$conn = $this->dbm->acquire( $this->dbname );
+
+		try
+		{
+			$search = new \Aimeos\MW\Criteria\SQL( $conn );
+			$expires = array(
+				$search->compare( '>', 'cache.expire', date( 'Y-m-d H:i:00' ) ),
+				$search->compare( '==', 'cache.expire', null ),
+			);
+			$expr = array(
+				$search->compare( '==', 'cache.id', $key ),
+				$search->combine( '||', $expires ),
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+
+			$types = $this->getSearchTypes( $this->searchConfig );
+			$translations = $this->getSearchTranslations( $this->searchConfig );
+			$conditions = $search->getConditionSource( $types, $translations );
+
+			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['get'] ) );
+			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$result = $stmt->execute();
+
+			while( ( $row = $result->fetch() ) !== false ) {
+				$return = true;
+			}
+
+			$this->dbm->release( $conn, $this->dbname );
+		}
+		catch( \Exception $e )
+		{
+			$this->dbm->release( $conn, $this->dbname );
+			error_log( __METHOD__ . ': ' . $e->getMessage() );
+		}
+
+		return $return;
+	}
+
+
+	/**
 	 * Adds or overwrites the given key/value pairs in the cache, which is much
 	 * more efficient than setting them one by one using the set() method.
+	 *
+	 * @inheritDoc
 	 *
 	 * @param iterable $pairs Associative list of key/value pairs. Both must be a string
 	 * @param \DateInterval|int|string|null $expires Date interval object,

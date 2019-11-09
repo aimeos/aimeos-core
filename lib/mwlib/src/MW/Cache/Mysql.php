@@ -83,6 +83,8 @@ class Mysql
 	 * Adds or overwrites the given key/value pairs in the cache, which is much
 	 * more efficient than setting them one by one using the set() method.
 	 *
+	 * @inheritDoc
+	 *
 	 * @param iterable $pairs Associative list of key/value pairs. Both must be a string
 	 * @param \DateInterval|int|string|null $expires Date interval object,
 	 *  date/time string in "YYYY-MM-DD HH:mm:ss" format or as integer TTL value

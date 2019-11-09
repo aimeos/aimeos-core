@@ -145,7 +145,7 @@ class MysqlTest extends \PHPUnit\Framework\TestCase
 	{
 		$pairs = ['t:3' => 'test 3', 't:2' => 'test 4'];
 
-		$this->object->setMultiple( $pairs, '2100-01-01 00:00:00', ['tag:2', 'tag:3'] );
+		$this->assertTrue( $this->object->setMultiple( $pairs, '2100-01-01 00:00:00', ['tag:2', 'tag:3'] ) );
 
 
 		$conn = self::$dbm->acquire();
