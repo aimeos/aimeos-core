@@ -293,7 +293,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	public function testSet()
 	{
-		$this->object->set( 't:3', 'test 3', '2100-01-01 00:00:00', array( 'tag:2', 'tag:3' ) );
+		$this->object->set( 't:3', 'test 3', '2100-01-01 00:00:00', ['tag:2', 'tag:3'] );
 
 
 		$conn = self::$dbm->acquire();
@@ -322,11 +322,9 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetMultiple()
 	{
-		$pairs = array( 't:3' => 'test 3', 't:2' => 'test 4' );
-		$tags = array( 't:3' => array( 'tag:2', 'tag:3' ), 't:2' => array( 'tag:4' ) );
-		$expires = array( 't:3' => '2100-01-01 00:00:00', 't:2' => 300 );
+		$pairs = ['t:3' => 'test 3', 't:2' => 'test 4'];
 
-		$this->object->setMultiple( $pairs, $expires, $tags );
+		$this->object->setMultiple( $pairs, '2100-01-01 00:00:00', ['tag:2', 'tag:3'] );
 
 
 		$conn = self::$dbm->acquire();
@@ -342,7 +340,8 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( 'SELECT "tname" FROM "mw_cache_tag_test" WHERE "tid" = \'t:2\'' )->execute();
 		self::$dbm->release( $conn );
 
-		$this->assertEquals( array( 'tname' => 'tag:4' ), $result->fetch() );
+		$this->assertEquals( array( 'tname' => 'tag:2' ), $result->fetch() );
+		$this->assertEquals( array( 'tname' => 'tag:3' ), $result->fetch() );
 		$this->assertFalse( $result->fetch() );
 
 
@@ -364,20 +363,13 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( 'SELECT * FROM "mw_cache_test" WHERE "id" = \'t:2\'' )->execute();
 		self::$dbm->release( $conn );
 
-		$actual = $result->fetch();
-
+		$expected = array(
+			'expire' => '2100-01-01 00:00:00',
+			'id' => 't:2',
+			'siteid' => 1,
+			'value' => 'test 4',
+		);
+		$this->assertEquals( $expected, $result->fetch() );
 		$this->assertFalse( $result->fetch() );
-		$this->assertEquals( 't:2', $actual['id'] );
-		$this->assertEquals( 1, $actual['siteid'] );
-		$this->assertEquals( 'test 4', $actual['value'] );
-		$this->assertGreaterThan( date( 'Y-m-d H:i:s' ), $actual['expire'] );
 	}
-
-
-	public function testSetException()
-	{
-		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
-		$this->object->set( [], '' );
-	}
-
 }

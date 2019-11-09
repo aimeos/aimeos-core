@@ -93,9 +93,9 @@ class DB
 	/**
 	 * Removes all expired cache entries.
 	 *
-	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
+	 * @return bool True on success and false on failure
 	 */
-	public function cleanup()
+	public function cleanup() : bool
 	{
 		$conn = $this->dbm->acquire( $this->dbname );
 
@@ -118,18 +118,52 @@ class DB
 		catch( \Exception $e )
 		{
 			$this->dbm->release( $conn, $this->dbname );
-			throw $e;
+
+			error_log( __METHOD__ . ': ' . $e->getMessage() );
+			return false;
 		}
+
+		return true;
+	}
+
+
+	/**
+	 * Removes all entries of the site from the cache.
+	 *
+	 * @return bool True on success and false on failure
+	 */
+	public function clear() : bool
+	{
+		$conn = $this->dbm->acquire( $this->dbname );
+
+		try
+		{
+			$stmt = $conn->create( str_replace( ':cond', '1=1', $this->sql['delete'] ) );
+			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->execute()->finish();
+
+			$this->dbm->release( $conn, $this->dbname );
+		}
+		catch( \Exception $e )
+		{
+			$this->dbm->release( $conn, $this->dbname );
+
+			error_log( __METHOD__ . ': ' . $e->getMessage() );
+			return false;
+		}
+
+		return true;
 	}
 
 
 	/**
 	 * Removes the cache entries identified by the given keys.
 	 *
-	 * @param string[] $keys List of key strings that identify the cache entries that should be removed
-	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
+	 * @param iterable $keys List of key strings that identify the cache entries that should be removed
+	 * @return bool True if the items were successfully removed. False if there was an error.
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
 	 */
-	public function deleteMultiple( $keys )
+	public function deleteMultiple( iterable $keys ) : bool
 	{
 		$conn = $this->dbm->acquire( $this->dbname );
 
@@ -151,18 +185,24 @@ class DB
 		catch( \Exception $e )
 		{
 			$this->dbm->release( $conn, $this->dbname );
-			throw $e;
+
+			error_log( __METHOD__ . ': ' . $e->getMessage() );
+			return false;
 		}
+
+		return true;
 	}
 
 
 	/**
 	 * Removes the cache entries identified by the given tags.
 	 *
-	 * @param string[] $tags List of tag strings that are associated to one or more cache entries that should be removed
-	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
+	 * @param iterable $tags List of tag strings that are associated to one or
+	 *  more cache entries that should be removed
+	 * @return bool True if the items were successfully removed. False if there was an error.
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
 	 */
-	public function deleteByTags( array $tags )
+	public function deleteByTags( iterable $tags ) : bool
 	{
 		$conn = $this->dbm->acquire( $this->dbname );
 
@@ -185,33 +225,12 @@ class DB
 		catch( \Exception $e )
 		{
 			$this->dbm->release( $conn, $this->dbname );
-			throw $e;
+
+			error_log( __METHOD__ . ': ' . $e->getMessage() );
+			return false;
 		}
-	}
 
-
-	/**
-	 * Removes all entries of the site from the cache.
-	 *
-	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
-	 */
-	public function clear()
-	{
-		$conn = $this->dbm->acquire( $this->dbname );
-
-		try
-		{
-			$stmt = $conn->create( str_replace( ':cond', '1=1', $this->sql['delete'] ) );
-			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->execute()->finish();
-
-			$this->dbm->release( $conn, $this->dbname );
-		}
-		catch( \Exception $e )
-		{
-			$this->dbm->release( $conn, $this->dbname );
-			throw $e;
-		}
+		return true;
 	}
 
 
@@ -220,12 +239,12 @@ class DB
 	 *
 	 * @param string[] $keys List of key strings for the requested cache entries
 	 * @param mixed $default Default value to return for keys that do not exist
-	 * @return array Associative list of key/value pairs for the requested cache
+	 * @return iterable Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
 	 * 	will be in the result list
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function getMultiple( $keys, $default = null )
+	public function getMultiple( iterable $keys, $default = null ) : iterable
 	{
 		$list = [];
 		$conn = $this->dbm->acquire( $this->dbname );
@@ -260,7 +279,7 @@ class DB
 		catch( \Exception $e )
 		{
 			$this->dbm->release( $conn, $this->dbname );
-			throw $e;
+			error_log( __METHOD__ . ': ' . $e->getMessage() );
 		}
 
 		foreach( $keys as $key )
@@ -278,15 +297,15 @@ class DB
 	 * Adds or overwrites the given key/value pairs in the cache, which is much
 	 * more efficient than setting them one by one using the set() method.
 	 *
-	 * @param string[] $pairs Associative list of key/value pairs. Both must be a string
-	 * @param array|int|string|null $expires Associative list of keys and datetime string or integer TTL pairs.
-	 * @param string[] $tags Associative list of key/tag or key/tags pairs that
-	 *  should be associated to the values identified by their key. The value
-	 *  associated to the key can either be a tag string or an array of tag strings
-	 * @return null
-	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
+	 * @param iterable $pairs Associative list of key/value pairs. Both must be a string
+	 * @param \DateInterval|int|string|null $expires Date interval object,
+	 *  date/time string in "YYYY-MM-DD HH:mm:ss" format or as integer TTL value
+	 *  when the cache entry will expiry
+	 * @param iterable $tags List of tags that should be associated to the cache entries
+	 * @return bool True on success and false on failure.
+	 * @throws \Psr\SimpleCache\InvalidArgumentException
 	 */
-	public function setMultiple( $pairs, $expires = null, array $tags = [] )
+	public function setMultiple( iterable $pairs, $expires = null, iterable $tags = [] ) : bool
 	{
 		// Remove existing entries first to avoid duplicate key conflicts
 		$this->deleteMultiple( array_keys( $pairs ) );
@@ -302,27 +321,24 @@ class DB
 
 			foreach( $pairs as $key => $value )
 			{
-				$date = ( is_array( $expires ) && isset( $expires[$key] ) ? $expires[$key] : $expires );
-
-				if( is_int( $date ) ) {
-					$date = date( 'Y-m-d H:i:s', time() + $date );
+				if( $expires instanceof \DateInterval ) {
+					$expires = date_create()->add( $expires )->format( 'Y-m-d H:i:s' );
+				} elseif( is_int( $expires ) ) {
+					$expires = date( 'Y-m-d H:i:s', time() + $expires );
 				}
 
 				$stmt->bind( 1, (string) $key );
 				$stmt->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 3, $date );
+				$stmt->bind( 3, $expires );
 				$stmt->bind( 4, (string) $value );
 				$stmt->execute()->finish();
 
-				if( isset( $tags[$key] ) )
+				foreach( $tags as $name )
 				{
-					foreach( (array) $tags[$key] as $name )
-					{
-						$stmtTag->bind( 1, (string) $key );
-						$stmtTag->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-						$stmtTag->bind( 3, (string) $name );
-						$stmtTag->execute()->finish();
-					}
+					$stmtTag->bind( 1, (string) $key );
+					$stmtTag->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+					$stmtTag->bind( 3, (string) $name );
+					$stmtTag->execute()->finish();
 				}
 			}
 
@@ -333,8 +349,12 @@ class DB
 		{
 			$conn->rollback();
 			$this->dbm->release( $conn, $this->dbname );
-			throw $e;
+
+			error_log( __METHOD__ . ': ' . $e->getMessage() );
+			return false;
 		}
+
+		return true;
 	}
 
 
