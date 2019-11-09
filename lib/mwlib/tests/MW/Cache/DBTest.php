@@ -342,7 +342,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 
 		$conn = self::$dbm->acquire();
-		$result = $conn->create( 'SELECT "tname" FROM "mw_cache_tag_test" WHERE "tid" = \'t:2\'' )->execute();
+		$result = $conn->create( 'SELECT "tname" FROM "mw_cache_tag_test" WHERE "tid" = \'t:2\' ORDER BY "tname"' )->execute();
 		self::$dbm->release( $conn );
 
 		$this->assertEquals( array( 'tname' => 'tag:2' ), $result->fetch() );

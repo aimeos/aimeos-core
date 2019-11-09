@@ -59,7 +59,7 @@ abstract class Base
 	{
 		$list = $this->getMultiple( [$key] );
 
-		if( ( $value = reset( $list ) ) !== false ) {
+		if( ( $value = current( $list ) ) !== false ) {
 			return $value;
 		}
 

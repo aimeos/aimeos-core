@@ -338,7 +338,7 @@ class DB
 			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$result = $stmt->execute();
 
-			while( ( $row = $result->fetch() ) !== false ) {
+			while( $result->fetch() !== false ) {
 				$return = true;
 			}
 
