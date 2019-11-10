@@ -371,7 +371,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$nodes[2] = $nodes[1]->getChild( 0 );
 		$nodes[3] = $nodes[2]->getChild( 1 );
 
-		$path = $manager->getPath( $nodes[3]->getId() );
+		$path = $manager->getPath( (string) $nodes[3]->getId() );
 
 		foreach( $nodes as $node )
 		{
@@ -460,7 +460,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$nodeid = $root->getChild( 0 )->getChild( 0 )->getChild( 0 )->getId();
 		$oldparentid = $root->getChild( 0 )->getChild( 0 )->getId();
 
-		$result = $manager->moveNode( $nodeid, $oldparentid, null );
+		$result = $manager->moveNode( (string) $nodeid, $oldparentid, null );
 		$this->assertInstanceOf( \Aimeos\MW\Tree\Manager\Iface::class, $result );
 
 		$testroot = $manager->getNode( $nodeid, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
@@ -480,8 +480,8 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$nodeid = $root->getChild( 0 )->getId();
 		$oldparentid = $root->getId();
 
-		$manager->moveNode( $nodeid, $oldparentid, $oldparentid );
-		$manager->moveNode( $nodeid, $oldparentid, $oldparentid );
+		$manager->moveNode( (string) $nodeid, $oldparentid, $oldparentid );
+		$manager->moveNode( (string) $nodeid, $oldparentid, $oldparentid );
 
 		$testroot = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 
@@ -503,7 +503,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$newparentid = $root->getChild( 0 )->getId();
 		$refnodeid = null;
 
-		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
+		$manager->moveNode( (string) $nodeid, $oldparentid, $newparentid, $refnodeid );
 
 		$testroot = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 
@@ -564,7 +564,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$newparentid = $root->getId();
 		$refnodeid = $root->getChild( 1 )->getId();
 
-		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
+		$manager->moveNode( (string) $nodeid, $oldparentid, $newparentid, $refnodeid );
 
 		$testroot = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 
@@ -625,7 +625,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$newparentid = $root->getId();
 		$refnodeid = $root->getChild( 2 )->getId();
 
-		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
+		$manager->moveNode( (string) $nodeid, $oldparentid, $newparentid, $refnodeid );
 
 		$testroot = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 
@@ -686,7 +686,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$newparentid = $root->getId();
 		$refnodeid = null;
 
-		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
+		$manager->moveNode( (string) $nodeid, $oldparentid, $newparentid, $refnodeid );
 
 		$testroot = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 
@@ -747,7 +747,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$newparentid = $root->getChild( 2 )->getId();
 		$refnodeid = null;
 
-		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
+		$manager->moveNode( (string) $nodeid, $oldparentid, $newparentid, $refnodeid );
 
 		$testroot = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 
@@ -808,7 +808,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$newparentid = $root->getId();
 		$refnodeid = $root->getChild( 2 )->getId();
 
-		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
+		$manager->moveNode( (string) $nodeid, $oldparentid, $newparentid, $refnodeid );
 
 
 		$root = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
@@ -880,7 +880,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$newparentid = $root->getId();
 		$refnodeid = $root->getChild( 1 )->getId();
 
-		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
+		$manager->moveNode( (string) $nodeid, $oldparentid, $newparentid, $refnodeid );
 
 
 		$root = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
@@ -952,7 +952,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$newparentid = $root->getChild( 0 )->getId();
 		$refnodeid = null;
 
-		$manager->moveNode( $nodeid, $oldparentid, $newparentid, $refnodeid );
+		$manager->moveNode( (string) $nodeid, $oldparentid, $newparentid, $refnodeid );
 
 
 		$testroot = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
@@ -1028,7 +1028,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$newparentid = $root->getChild( 0 )->getId();
 
 		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
-		$manager->moveNode( $nodeid, $oldparentid, $newparentid );
+		$manager->moveNode( (string) $nodeid, $oldparentid, $newparentid );
 	}
 
 
