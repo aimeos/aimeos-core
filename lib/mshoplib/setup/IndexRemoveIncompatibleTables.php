@@ -10,7 +10,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Remove incompatible index tables
+ * Remove incompatible index tables.
  */
 class IndexRemoveIncompatibleTables extends \Aimeos\MW\Setup\Task\Base
 {

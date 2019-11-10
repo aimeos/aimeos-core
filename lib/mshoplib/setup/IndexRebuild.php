@@ -71,7 +71,7 @@ class IndexRebuild extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
-	 * Rebuilds the index if requested before via Helper\IndexRebuild.
+	 * Rebuilds the index if requested before via forceExecute().
 	 */
 	public function migrate()
 	{
