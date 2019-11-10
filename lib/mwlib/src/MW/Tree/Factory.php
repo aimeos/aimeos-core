@@ -29,12 +29,12 @@ class Factory
 	 * @return \Aimeos\MW\Tree\Manager\Iface Tree manager object of the requested type
 	 * @throws \Aimeos\MW\Tree\Exception if class isn't found
 	 */
-	public static function create( $name, array $config, $resource )
+	public static function create( string $name, array $config, $resource )
 	{
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? '\Aimeos\MW\Tree\Manager\\' . $name : '<not a string>';
-			throw new \Aimeos\MW\Tree\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$msg = sprintf( 'Invalid characters in class name "%1$s"', '\Aimeos\MW\Tree\Manager\\' . $name );
+			throw new \Aimeos\MW\Tree\Exception( $msg );
 		}
 
 		$iface = \Aimeos\MW\Tree\Manager\Iface::class;

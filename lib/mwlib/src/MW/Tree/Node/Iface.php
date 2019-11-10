@@ -27,7 +27,7 @@ interface Iface
 	 * @return mixed Value associated to the given name
 	 * @throws \Aimeos\MW\Tree\Exception If no value is available for the given name
 	 */
-	public function __get( $name );
+	public function __get( string $name );
 
 	/**
 	 * Sets the new value associated with the given name.
@@ -36,15 +36,15 @@ interface Iface
 	 * @param mixed $value Value of member variable tried to access
 	 * @return void
 	 */
-	public function __set( $name, $value );
+	public function __set( string $name, $value );
 
 	/**
 	 * Tests if a value for the given name is available.
 	 *
 	 * @param string $name Name of member variable tried to access
-	 * @return boolean True if a value is available, false if not
+	 * @return bool True if a value is available, false if not
 	 */
-	public function __isset( $name );
+	public function __isset( string $name ) : bool;
 
 	/**
 	 * Removes the value associated to the given name.
@@ -52,14 +52,14 @@ interface Iface
 	 * @param string $name Name of member variable tried to access
 	 * @return void
 	 */
-	public function __unset( $name );
+	public function __unset( string $name );
 
 	/**
 	 * Returns the unique ID of the node.
 	 *
 	 * @return string|null Unique ID of the node
 	 */
-	public function getId();
+	public function getId() : ?string;
 
 	/**
 	 * Sets the unique ID of the node.
@@ -67,14 +67,14 @@ interface Iface
 	 * @param mixed|null $id Unique ID of the node
 	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
-	public function setId( $id );
+	public function setId( string $id = null ) : Iface;
 
 	/**
 	 * Returns the name of the node.
 	 *
 	 * @return string Default name of the node
 	 */
-	public function getLabel();
+	public function getLabel() : string;
 
 	/**
 	 * Sets the new name of the node.
@@ -82,14 +82,14 @@ interface Iface
 	 * @param string $name New default name of the node
 	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
-	public function setLabel( $name );
+	public function setLabel( string $name ) : Iface;
 
 	/**
 	 * Returns the code of the node.
 	 *
 	 * @return string Code of the node
 	 */
-	public function getCode();
+	public function getCode() : string;
 
 	/**
 	 * Sets the new code of the node.
@@ -97,45 +97,45 @@ interface Iface
 	 * @param string $name New code of the node
 	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
-	public function setCode( $name );
+	public function setCode( string $name ) : Iface;
 
 
 	/**
 	 * Returns the status of the node.
 	 *
-	 * @return integer Greater than zero if enabled, zero or less than if not
+	 * @return int Greater than zero if enabled, zero or less than if not
 	 */
-	public function getStatus();
+	public function getStatus() : int;
 
 	/**
 	 * Sets the new status of the node.
 	 *
-	 * @param integer $status Greater than zero if enabled, zero or less than if not
+	 * @param int $status Greater than zero if enabled, zero or less than if not
 	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
-	public function setStatus( $status );
+	public function setStatus( int $status ) : Iface;
 
 	/**
 	 * Returns a child of this node identified by its index.
 	 *
-	 * @param integer $index Index of child node
+	 * @param int $index Index of child node
 	 * @return \Aimeos\MW\Tree\Node\Iface Selected node
 	 */
-	public function getChild( $index );
+	public function getChild( int $index ) : Iface;
 
 	/**
 	 * Returns all children of this node.
 	 *
 	 * @return \Aimeos\MW\Tree\Node\Iface[] Numerically indexed list of nodes
 	 */
-	public function getChildren();
+	public function getChildren() : array;
 
 	/**
 	 * Tests if a node has children.
 	 *
-	 * @return boolean True if node has children, false if not
+	 * @return bool True if node has children, false if not
 	 */
-	public function hasChildren();
+	public function hasChildren() : bool;
 
 	/**
 	 * Adds a child node to this node.
@@ -143,19 +143,19 @@ interface Iface
 	 * @param \Aimeos\MW\Tree\Node\Iface $node Child node to add
 	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
-	public function addChild( \Aimeos\MW\Tree\Node\Iface $node );
+	public function addChild( \Aimeos\MW\Tree\Node\Iface $node ) : Iface;
 
 	/**
 	 * Returns the public values of the node as array.
 	 *
 	 * @return array Assciative list of key/value pairs
 	 */
-	public function toArray();
+	public function toArray() : array;
 
 	/**
 	 * Checks, whether this node was modified.
 	 *
-	 * @return boolean True if the content of the node is modified, false if not
+	 * @return bool True if the content of the node is modified, false if not
 	 */
-	public function isModified();
+	public function isModified() : bool;
 }

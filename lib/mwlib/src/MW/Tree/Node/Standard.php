@@ -32,7 +32,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 * @param \Aimeos\MW\Tree\Node\Iface[] $children Children of the node
 	 * @throws \Aimeos\MW\Common\Exception if the children doesn't implement the interface
 	 */
-	public function __construct( array $values = [], $children = [] )
+	public function __construct( array $values = [], array $children = [] )
 	{
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MW\Tree\Node\Iface::class, $children );
 
@@ -48,7 +48,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 * @return mixed Value associated to the given name
 	 * @throws \Aimeos\MW\Tree\Exception If no value is available for the given name
 	 */
-	public function __get( $name )
+	public function __get( string $name )
 	{
 		if( array_key_exists( $name, $this->values ) ) {
 			return $this->values[$name];
@@ -64,7 +64,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 * @param string $name Name of member variable tried to access
 	 * @param mixed $value Value of member variable tried to access
 	 */
-	public function __set( $name, $value )
+	public function __set( string $name, $value )
 	{
 		if( array_key_exists( $name, $this->values ) && $this->values[$name] === $value ) {
 			return;
@@ -79,9 +79,9 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 * Tests if a value for the given name is available.
 	 *
 	 * @param string $name Name of member variable tried to access
-	 * @return boolean True if a value is available, false if not
+	 * @return bool True if a value is available, false if not
 	 */
-	public function __isset( $name )
+	public function __isset( string $name ) : bool
 	{
 		return array_key_exists( $name, $this->values );
 	}
@@ -92,7 +92,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 *
 	 * @param string $name Name of member variable tried to access
 	 */
-	public function __unset( $name )
+	public function __unset( string $name )
 	{
 		if( !array_key_exists( $name, $this->values ) ) {
 			return;
@@ -108,7 +108,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 *
 	 * @return string|null Unique ID of th node
 	 */
-	public function getId()
+	public function getId() : ?string
 	{
 		return ( isset( $this->values['id'] ) ? (string) $this->values['id'] : null );
 	}
@@ -120,7 +120,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 * @param mixed|null $id Unique ID of the node
 	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
-	public function setId( $id )
+	public function setId( string $id = null ) : Iface
 	{
 		$this->values['id'] = $id;
 		$this->modified = ( $id === null ? true : false );
@@ -134,7 +134,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 *
 	 * @return string Default name of the node
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
 		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
 	}
@@ -146,7 +146,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 * @param string $name New default name of the node
 	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
-	public function setLabel( $name )
+	public function setLabel( string $name ) : Iface
 	{
 		if( (string) $name !== $this->getLabel() )
 		{
@@ -163,7 +163,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 *
 	 * @return string Code of the node
 	 */
-	public function getCode()
+	public function getCode() : string
 	{
 		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
 	}
@@ -175,7 +175,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 * @param string $name New code of the node
 	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
-	public function setCode( $name )
+	public function setCode( string $name ) : Iface
 	{
 		if( (string) $name !== $this->getCode() )
 		{
@@ -189,9 +189,9 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	/**
 	 * Returns the status of the node.
 	 *
-	 * @return integer Greater than zero if enabled, zero or less than if not
+	 * @return int Greater than zero if enabled, zero or less than if not
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
 		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 1 );
 	}
@@ -200,10 +200,10 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	/**
 	 * Sets the new status of the node.
 	 *
-	 * @param integer $status Greater than zero if enabled, zero or less than if not
+	 * @param int $status Greater than zero if enabled, zero or less than if not
 	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : Iface
 	{
 		if( (int) $status !== $this->getStatus() )
 		{
@@ -218,11 +218,11 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	/**
 	 * Returns a child of this node identified by its index.
 	 *
-	 * @param integer $index Index of child node
+	 * @param int $index Index of child node
 	 * @return \Aimeos\MW\Tree\Node\Iface Selected node
 	 * @throws \Aimeos\MW\Tree\Exception If there's no child at the given position
 	 */
-	public function getChild( $index )
+	public function getChild( int $index ) : Iface
 	{
 		if( isset( $this->children[$index] ) ) {
 			return $this->children[$index];
@@ -237,7 +237,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 *
 	 * @return \Aimeos\MW\Tree\Node\Iface[] Numerically indexed list of nodes
 	 */
-	public function getChildren()
+	public function getChildren() : array
 	{
 		return $this->children;
 	}
@@ -246,9 +246,9 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	/**
 	 * Tests if a node has children.
 	 *
-	 * @return boolean True if node has children, false if not
+	 * @return bool True if node has children, false if not
 	 */
-	public function hasChildren()
+	public function hasChildren() : bool
 	{
 		return ( count( $this->children ) > 0 ? true : false );
 	}
@@ -260,7 +260,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 * @param \Aimeos\MW\Tree\Node\Iface $node Child node to add
 	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
-	public function addChild( \Aimeos\MW\Tree\Node\Iface $node )
+	public function addChild( \Aimeos\MW\Tree\Node\Iface $node ) : Iface
 	{
 		// don't set the modified flag as it's only for the values
 		$this->children[] = $node;
@@ -272,7 +272,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 *
 	 * @return array Assciative list of key/value pairs
 	 */
-	public function toArray()
+	public function toArray() : array
 	{
 		return array(
 			'id' => $this->getId(),
@@ -285,9 +285,9 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	/**
 	 * Checks, whether this node was modified.
 	 *
-	 * @return boolean True if the content of the node is modified, false if not
+	 * @return bool True if the content of the node is modified, false if not
 	 */
-	public function isModified()
+	public function isModified() : bool
 	{
 		return $this->modified;
 	}
@@ -296,9 +296,9 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	/**
 	 * Counts children
 	 *
-	 * @return integer Count of this nodes children
+	 * @return int Count of this nodes children
 	 */
-	public function count()
+	public function count() : int
 	{
 		return count( $this->children );
 	}
