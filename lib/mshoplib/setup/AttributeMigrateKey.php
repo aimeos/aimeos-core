@@ -21,7 +21,7 @@ class AttributeMigrateKey extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return [];
+		return ['TypesMigrateColumns'];
 	}
 
 
