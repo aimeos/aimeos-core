@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'coupon.config' => array( 'key'=>'test' ),
 			'coupon.start' => null,
 			'coupon.end' => null,
-			'coupon.status' => true,
+			'coupon.status' => 1,
 			'coupon.mtime' => '2011-01-01 00:00:02',
 			'coupon.ctime' => '2011-01-01 00:00:01',
 			'coupon.editor' => 'unitTestUser',

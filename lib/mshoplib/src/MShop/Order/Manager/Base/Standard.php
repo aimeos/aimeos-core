@@ -969,19 +969,21 @@ class Standard extends Base
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
 
-		$price = $priceManager->createItem();
-		$price->setCurrencyId( $row['order.base.currencyid'] );
-		$price->setValue( $row['order.base.price'] );
-		$price->setCosts( $row['order.base.costs'] );
-		$price->setRebate( $row['order.base.rebate'] );
-		$price->setTaxFlag( $row['order.base.taxflag'] );
-		$price->setTaxValue( $row['order.base.taxvalue'] );
+		$price = $priceManager->createItem( [
+			'price.currencyid' => $row['order.base.currencyid'],
+			'price.value' => $row['order.base.price'],
+			'price.costs' => $row['order.base.costs'],
+			'price.rebate' => $row['order.base.rebate'],
+			'price.taxvalue' => $row['order.base.taxvalue'],
+			'price.taxflag' => $row['order.base.taxflag'],
+		] );
 
 		// you may need the site object! take care!
-		$localeItem = $localeManager->createItem();
-		$localeItem->setLanguageId( $row['order.base.languageid'] );
-		$localeItem->setCurrencyId( $row['order.base.currencyid'] );
-		$localeItem->setSiteId( $row['order.base.siteid'] );
+		$localeItem = $localeManager->createItem( [
+			'locale.languageid' => $row['order.base.languageid'],
+			'locale.currencyid' => $row['order.base.currencyid'],
+			'locale.siteid' => $row['order.base.siteid'],
+		] );
 
 		if( $fresh === false ) {
 			$basket = $this->loadItems( $id, $price, $localeItem, $row, $parts );
