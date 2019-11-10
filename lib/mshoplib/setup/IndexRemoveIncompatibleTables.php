@@ -14,49 +14,49 @@ namespace Aimeos\MW\Setup\Task;
  */
 class IndexRemoveIncompatibleTables extends \Aimeos\MW\Setup\Task\Base
 {
-    /**
-     * Returns the list of task names which this task depends on.
-     *
-     * @return string[] List of task names
-     */
-    public function getPreDependencies()
-    {
-        return [];
-    }
+	/**
+	 * Returns the list of task names which this task depends on.
+	 *
+	 * @return string[] List of task names
+	 */
+	public function getPreDependencies()
+	{
+		return [];
+	}
 
 
-    /**
-     * Returns the list of task names which depends on this task.
-     *
-     * @return string[] List of task names
-     */
-    public function getPostDependencies()
-    {
-        return ['TablesCreateMShop', 'IndexRebuild'];
-    }
+	/**
+	 * Returns the list of task names which depends on this task.
+	 *
+	 * @return string[] List of task names
+	 */
+	public function getPostDependencies()
+	{
+		return ['TablesCreateMShop', 'IndexRebuild'];
+	}
 
 
-    /**
-     * Executes the task
-     */
-    public function migrate()
-    {
-        $this->msg('Remove incompatible index tables', 0);
-        $this->status('');
+	/**
+	 * Executes the task
+	 */
+	public function migrate()
+	{
+		$this->msg('Remove incompatible index tables', 0);
+		$this->status('');
 
-        $schema = $this->getSchema('db-product');
+		$schema = $this->getSchema('db-product');
 
-        $table = 'mshop_index_text';
-        $this->msg(sprintf('Checking table "%1$s"', $table), 1);
+		$table = 'mshop_index_text';
+		$this->msg(sprintf('Checking table "%1$s"', $table), 1);
 
-        if ($schema->tableExists($table) === true
-            && $schema->columnExists($table, 'url') === false) {
-            $this->execute('DROP TABLE "mshop_index_text"');
-            IndexRebuild::forceExecute();
+		if ($schema->tableExists($table) === true
+			&& $schema->columnExists($table, 'url') === false) {
+			$this->execute('DROP TABLE "mshop_index_text"');
+			IndexRebuild::forceExecute();
 
-            $this->status('done');
-        } else {
-            $this->status('OK');
-        }
-    }
+			$this->status('done');
+		} else {
+			$this->status('OK');
+		}
+	}
 }
