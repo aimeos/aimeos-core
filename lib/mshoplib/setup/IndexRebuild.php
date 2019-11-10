@@ -33,7 +33,7 @@ class IndexRebuild extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @param bool $value
 	 */
-	private static function setExecute(bool $value): void
+	private static function setExecute( bool $value ): void
 	{
 		self::$execute = $value;
 	}
@@ -75,7 +75,7 @@ class IndexRebuild extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		if (self::getExecute() === true) {
+		if ( self::getExecute() === true ) {
 			\Aimeos\MW\Common\Base::checkClass(\Aimeos\MShop\Context\Item\Iface::class, $this->additional);
 			$this->msg('Rebuilding index', 0);
 

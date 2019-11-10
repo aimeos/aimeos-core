@@ -49,8 +49,8 @@ class IndexRemoveIncompatibleTables extends \Aimeos\MW\Setup\Task\Base
 		$table = 'mshop_index_text';
 		$this->msg(sprintf('Checking table "%1$s"', $table), 1);
 
-		if ($schema->tableExists($table) === true
-			&& $schema->columnExists($table, 'url') === false) {
+		if ( $schema->tableExists($table) === true
+			&& $schema->columnExists($table, 'url') === false ) {
 			$this->execute('DROP TABLE "mshop_index_text"');
 			IndexRebuild::forceExecute();
 
