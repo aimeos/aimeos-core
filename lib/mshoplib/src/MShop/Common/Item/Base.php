@@ -57,9 +57,7 @@ abstract class Base
 	 */
 	public function __get( $name )
 	{
-		if( isset( $this->bdata[$name] ) ) {
-			return $this->bdata[$name];
-		}
+		return $this->get( $name );
 	}
 
 
@@ -87,11 +85,7 @@ abstract class Base
 	 */
 	public function __set( $name, $value )
 	{
-		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] !== $value ) {
-			$this->setModified();
-		}
-
-		$this->bdata[$name] = $value;
+		$this->set( $name, $value );
 	}
 
 
@@ -121,8 +115,12 @@ abstract class Base
 	 */
 	public function set( $name, $value )
 	{
-		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] !== $value )
-		{
+		// workaround for NULL values instead of empty strings and stringified integers from database
+		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] != $value
+			|| $value === null && $this->bdata[$name] !== null
+			|| $value === 0 && $this->bdata[$name] !== '0'
+			|| $value === '' && $this->bdata[$name] != ''
+		) {
 			$this->bdata[$name] = $value;
 			$this->setModified();
 		}
@@ -144,9 +142,7 @@ abstract class Base
 			return (string) $this->bdata[$key];
 		}
 
-		if( isset( $this->bdata['id'] ) && $this->bdata['id'] != '' ) {
-			return (string) $this->bdata['id'];
-		}
+		return null;
 	}
 
 
@@ -166,7 +162,6 @@ abstract class Base
 			$this->modified = false;
 		}
 
-		$this->bdata['id'] = $this->bdata[$key];
 		return $this;
 	}
 
@@ -277,8 +272,7 @@ abstract class Base
 			unset( $list[$this->prefix . 'id'] );
 		}
 
-		unset( $list['id'] ); // don't add foreign IDs, leads to not saving new items
-
+		// Add custom columns
 		foreach( $list as $key => $value )
 		{
 			if( is_string( $value ) && strpos( $key, '.' ) === false ) {

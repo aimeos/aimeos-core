@@ -118,7 +118,6 @@ abstract class Base
 		$groupIds = [];
 
 		$manager = $this->getObject()->getSubManager( 'lists' );
-		$listItem = $manager->createItem()->setType( 'default' );
 		$listItems = $item->getListItems( 'customer/group', 'default', null, false );
 
 		foreach( $item->getGroups() as $refId )
@@ -126,7 +125,7 @@ abstract class Base
 			if( ( $litem = $item->getListItem( 'customer/group', 'default', $refId, false ) ) !== null ) {
 				unset( $listItems[$litem->getId()] );
 			} else {
-				$litem = clone $listItem;
+				$litem = $manager->createItem()->setType( 'default' );
 			}
 
 			$item->addListItem( 'customer/group', $litem->setRefId( $refId )->setPosition( $pos++ ) );
