@@ -59,7 +59,9 @@ abstract class Base
 	{
 		$list = $this->getMultiple( [$key] );
 
-		if( ( $value = current( $list ) ) !== false ) {
+		if( $list instanceof \Iterator ) {
+			return $list->current();
+		} elseif( is_array( $list ) && ( $value = current( $list ) ) !== false ) {
 			return $value;
 		}
 
