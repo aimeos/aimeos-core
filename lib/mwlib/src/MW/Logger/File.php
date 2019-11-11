@@ -30,11 +30,11 @@ class File extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 	 * Initializes the logger object.
 	 *
 	 * @param string $filename Log file name
-	 * @param integer $priority Minimum priority for logging
+	 * @param int $priority Minimum priority for logging
 	 * @param string[]|null $facilities Facilities for which messages should be logged
 	 * @param string|null $requestid Unique identifier to identify multiple log entries for the same request faster
 	 */
-	public function __construct( $filename, $priority = \Aimeos\MW\Logger\Base::ERR, array $facilities = null, $requestid = null )
+	public function __construct( string $filename, int $priority = Base::ERR, array $facilities = null, string $requestid = null )
 	{
 		$this->filename = $filename;
 		$this->loglevel = $priority;
@@ -51,13 +51,13 @@ class File extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 	 * Writes a message to the configured log facility.
 	 *
 	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param integer $prio Priority of the message for filtering
+	 * @param int $prio Priority of the message for filtering
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
 	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 * @throws \Aimeos\MW\Logger\Exception If an error occurs in Zend_Log
 	 * @see \Aimeos\MW\Logger\Base for available log level constants
 	 */
-	public function log( $message, $prio = \Aimeos\MW\Logger\Base::ERR, $facility = 'message' )
+	public function log( $message, int $prio = Base::ERR, string $facility = 'message' ) : Iface
 	{
 		if( $prio <= $this->loglevel && ( $this->facilities === null || in_array( $facility, $this->facilities ) ) )
 		{

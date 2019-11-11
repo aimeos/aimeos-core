@@ -647,8 +647,9 @@ class Standard
 	 * @param string|array|object $message Message text that should be written to the log facility
 	 * @param integer $priority Priority of the message for filtering
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
+	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 */
-	public function log( $message, $priority = \Aimeos\MW\Logger\Base::ERR, $facility = 'message' )
+	public function log( $message, int $priority = \Aimeos\MW\Logger\Base::ERR, string $facility = 'message' ) : \Aimeos\MW\Logger\Iface
 	{
 		if( $priority <= $this->loglevel )
 		{
@@ -665,5 +666,7 @@ class Standard
 
 			$this->getObject()->saveItem( $item );
 		}
+
+		return $this;
 	}
 }

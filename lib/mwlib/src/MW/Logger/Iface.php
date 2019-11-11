@@ -24,9 +24,9 @@ interface Iface
 	 * Writes a message to the configured log facility.
 	 *
 	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param integer $prio Priority of the message for filtering
+	 * @param int $prio Priority of the message for filtering
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
 	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 */
-	public function log( $message, $prio = \Aimeos\MW\Logger\Base::ERR, $facility = 'message' );
+	public function log( $message, int $prio = Base::ERR, string $facility = 'message' ) : Iface;
 }

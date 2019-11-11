@@ -64,10 +64,11 @@ abstract class Base
 	/**
 	 * Checks if the given log constant is valid
 	 *
-	 * @param integer $level Log constant
+	 * @param int $level Log constant
+	 * @return mixed Log level
 	 * @throws \Aimeos\MW\Logger\Exception If log constant is unknown
 	 */
-	protected function getLogLevel( $level )
+	protected function getLogLevel( int $level )
 	{
 		switch( $level )
 		{
