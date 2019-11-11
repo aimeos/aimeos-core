@@ -13,7 +13,7 @@ return array(
 		'config' => array(
 			'voucher.productcode' => 'demo-rebate',
 		),
-		'codes' => array(),
+		'codes' => [],
 	),
 	array(
 		'label' => 'demo-fixed', 'provider' => 'FixedRebate,BasketValues', 'status' => 1,

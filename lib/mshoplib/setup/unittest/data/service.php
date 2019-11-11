@@ -28,7 +28,7 @@ return array(
 			'code' => 'unitcode',
 			'label' => 'unitlabel',
 			'provider' => 'Standard',
-			'config' => array(),
+			'config' => [],
 			'status' => 1
 		),
 		'service/payment/unitcode' => array(
