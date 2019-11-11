@@ -32,7 +32,7 @@ class Errorlog extends Base implements Iface
 	 * @param string[]|null $facilities Facilities for which messages should be logged
 	 * @param string|null $requestid Unique identifier to identify multiple log entries for the same request faster
 	 */
-	public function __construct( int $loglevel = Base::ERR, array $facilities = null, $requestid = null )
+	public function __construct( int $loglevel = Base::ERR, array $facilities = null, string $requestid = null )
 	{
 		$this->loglevel = $loglevel;
 		$this->facilities = $facilities;
@@ -54,7 +54,7 @@ class Errorlog extends Base implements Iface
 	 * @throws \Aimeos\MW\Logger\Exception If the priority is invalid
 	 * @see \Aimeos\MW\Logger\Base for available log level constants
 	 */
-	public function log( $message, int $prio = Base::ERR, $facility = 'message' ) : Iface
+	public function log( $message, int $prio = Base::ERR, string $facility = 'message' ) : Iface
 	{
 		if( $prio <= $this->loglevel && ( $this->facilities === null || in_array( $facility, $this->facilities ) ) )
 		{
