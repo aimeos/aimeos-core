@@ -5,13 +5,13 @@ namespace Aimeos\MW\Setup\Task;
 
 class TwoTask extends Base
 {
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
 		return [];
 	}
 
 
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
 		return [];
 	}

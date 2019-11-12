@@ -69,7 +69,7 @@ class Mysql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param string $what Type of object
 	 * @return bool True if supported, false if not
 	 */
-	public function supports( $what ) : bool
+	public function supports( string $what ) : bool
 	{
 		return false;
 	}
