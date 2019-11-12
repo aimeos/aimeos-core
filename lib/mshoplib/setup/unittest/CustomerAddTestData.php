@@ -20,7 +20,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
 		return ['ProductAddTestData', 'TextAddTestData'];
 	}

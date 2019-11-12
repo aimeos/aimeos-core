@@ -23,9 +23,9 @@ class Db2 extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * Checks if the given table exists in the database.
 	 *
 	 * @param string $tablename Name of the database table
-	 * @return boolean True if the table exists, false if not
+	 * @return bool True if the table exists, false if not
 	 */
-	public function tableExists( $tablename )
+	public function tableExists( string $tablename ) : bool
 	{
 		$sql = "
 			SELECT TABLE_NAME
@@ -52,9 +52,9 @@ class Db2 extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * Checks if the given sequence exists in the database.
 	 *
 	 * @param string $seqname Name of the database sequence
-	 * @return boolean True if the sequence exists, false if not
+	 * @return bool True if the sequence exists, false if not
 	 */
-	public function sequenceExists( $seqname )
+	public function sequenceExists( string $seqname ) : bool
 	{
 		return false;
 	}
@@ -65,9 +65,9 @@ class Db2 extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 *
 	 * @param string $tablename Name of the database table
 	 * @param string $indexname Name of the database index
-	 * @return boolean True if the index exists, false if not
+	 * @return bool True if the index exists, false if not
 	 */
-	public function indexExists( $tablename, $indexname )
+	public function indexExists( string $tablename, string $indexname ) : bool
 	{
 		$sql = "
 			SELECT NAME
@@ -96,9 +96,9 @@ class Db2 extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 *
 	 * @param string $tablename Name of the database table
 	 * @param string $constraintname Name of the database table constraint
-	 * @return boolean True if the constraint exists, false if not
+	 * @return bool True if the constraint exists, false if not
 	 */
-	public function constraintExists( $tablename, $constraintname )
+	public function constraintExists( string $tablename, string $constraintname ) : bool
 	{
 		$sql = "
 			SELECT CONSTRAINT_NAME
@@ -127,9 +127,9 @@ class Db2 extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 *
 	 * @param string $tablename Name of the database table
 	 * @param string $columnname Name of the table column
-	 * @return boolean True if the column exists, false if not
+	 * @return bool True if the column exists, false if not
 	 */
-	public function columnExists( $tablename, $columnname )
+	public function columnExists( string $tablename, string $columnname ) : bool
 	{
 		$sql = "
 			SELECT COLUMN_NAME
@@ -160,7 +160,7 @@ class Db2 extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param string $columnname Name of the table column
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Object which contains the details
 	 */
-	public function getColumnDetails( $tablename, $columnname )
+	public function getColumnDetails( string $tablename, string $columnname ) : \Aimeos\MW\Setup\DBSchema\Column\Iface
 	{
 		$sql = "
 			SELECT *

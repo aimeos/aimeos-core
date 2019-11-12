@@ -20,9 +20,9 @@ class MShopAddPluginDataUnitperf extends \Aimeos\MW\Setup\Task\MShopAddPluginDat
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
-		return array( 'MShopAddTypeDataUnitperf' );
+		return ['MShopAddTypeDataUnitperf'];
 	}
 
 

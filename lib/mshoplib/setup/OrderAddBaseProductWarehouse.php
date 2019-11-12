@@ -25,9 +25,9 @@ class OrderAddBaseProductWarehouse extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
-		return array( 'OrderRenameTables' );
+		return ['OrderRenameTables'];
 	}
 
 
@@ -36,9 +36,9 @@ class OrderAddBaseProductWarehouse extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
-		return array( 'TablesCreateMShop' );
+		return ['TablesCreateMShop'];
 	}
 
 

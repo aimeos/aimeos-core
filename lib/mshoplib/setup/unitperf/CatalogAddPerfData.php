@@ -44,7 +44,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
 		return ['MShopAddCodeDataUnitperf', 'AttributeAddPerfData', 'LocaleAddPerfData', 'MShopSetLocale'];
 	}
@@ -55,7 +55,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
 		return ['IndexRebuildPerf'];
 	}

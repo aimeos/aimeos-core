@@ -28,7 +28,7 @@ class TablesMigratePropertyKey extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
 		return ['TypesMigrateColumns'];
 	}
@@ -39,7 +39,7 @@ class TablesMigratePropertyKey extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return array List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
 		return ['TablesCreateMShop'];
 	}

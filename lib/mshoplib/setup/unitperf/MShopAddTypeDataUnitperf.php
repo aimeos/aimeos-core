@@ -20,9 +20,9 @@ class MShopAddTypeDataUnitperf extends \Aimeos\MW\Setup\Task\MShopAddTypeData
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
-		return array( 'MShopSetLocale' );
+		return ['MShopSetLocale'];
 	}
 
 
@@ -31,9 +31,9 @@ class MShopAddTypeDataUnitperf extends \Aimeos\MW\Setup\Task\MShopAddTypeData
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
-		return array( 'MShopAddTypeData', 'ProductAddBasePerfData' );
+		return ['MShopAddTypeData', 'ProductAddBasePerfData'];
 	}
 
 

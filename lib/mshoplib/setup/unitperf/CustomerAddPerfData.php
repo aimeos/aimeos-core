@@ -27,20 +27,9 @@ class CustomerAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
 		return ['MShopAddTypeDataUnitperf', 'LocaleAddPerfData', 'MShopSetLocale'];
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return array List of task names
-	 */
-	public function getPostDependencies()
-	{
-		return [];
 	}
 
 

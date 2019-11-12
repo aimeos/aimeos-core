@@ -20,20 +20,9 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
-		return array( 'MShopAddTypeDataDefault', 'MShopAddCodeDataDefault' );
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return array List of task names
-	 */
-	public function getPostDependencies()
-	{
-		return [];
+		return ['MShopAddTypeDataDefault', 'MShopAddCodeDataDefault'];
 	}
 
 

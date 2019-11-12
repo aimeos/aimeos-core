@@ -20,7 +20,7 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
 		return ['MShopAddLocaleLangCurData'];
 	}
@@ -31,7 +31,7 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
 		return ['MShopAddLocaleData'];
 	}

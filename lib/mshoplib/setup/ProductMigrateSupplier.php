@@ -28,20 +28,9 @@ class ProductMigrateSupplier extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
-		return array( 'ProductPackagesToProducts', 'MShopAddTypeData' );
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies()
-	{
-		return [];
+		return ['ProductPackagesToProducts', 'MShopAddTypeData'];
 	}
 
 

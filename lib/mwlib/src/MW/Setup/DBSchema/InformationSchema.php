@@ -34,7 +34,7 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	 * @param string $dbname Database name
 	 * @param string $name Adapter name
 	 */
-	public function __construct( \Aimeos\MW\DB\Manager\Iface $dbm, $rname, $dbname, $name )
+	public function __construct( \Aimeos\MW\DB\Manager\Iface $dbm, string $rname, string $dbname, string $name )
 	{
 		$this->rname = $rname;
 		$this->dbname = $dbname;
@@ -47,9 +47,9 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	 * Checks if the given table exists in the database.
 	 *
 	 * @param string $tablename Name of the database table
-	 * @return boolean True if the table exists, false if not
+	 * @return bool True if the table exists, false if not
 	 */
-	public function tableExists( $tablename )
+	public function tableExists( string $tablename ) : bool
 	{
 		$sql = "
 			SELECT TABLE_NAME
@@ -76,9 +76,9 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	 * Checks if the given sequence exists in the database.
 	 *
 	 * @param string $seqname Name of the database sequence
-	 * @return boolean True if the sequence exists, false if not
+	 * @return bool True if the sequence exists, false if not
 	 */
-	public function sequenceExists( $seqname )
+	public function sequenceExists( string $seqname ) : bool
 	{
 		$sql = "
 			SELECT SEQUENCE_NAME
@@ -105,9 +105,9 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	 *
 	 * @param string $tablename Name of the database table
 	 * @param string $constraintname Name of the database table constraint
-	 * @return boolean True if the constraint exists, false if not
+	 * @return bool True if the constraint exists, false if not
 	 */
-	public function constraintExists( $tablename, $constraintname )
+	public function constraintExists( string $tablename, string $constraintname ) : bool
 	{
 		$sql = "
 			SELECT CONSTRAINT_NAME
@@ -136,9 +136,9 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	 *
 	 * @param string $tablename Name of the database table
 	 * @param string $columnname Name of the table column
-	 * @return boolean True if the column exists, false if not
+	 * @return bool True if the column exists, false if not
 	 */
-	public function columnExists( $tablename, $columnname )
+	public function columnExists( string $tablename, string $columnname ) : bool
 	{
 		$sql = "
 			SELECT COLUMN_NAME
@@ -169,7 +169,7 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	 * @param string $columnname Name of the table column
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Object which contains the details
 	 */
-	public function getColumnDetails( $tablename, $columnname )
+	public function getColumnDetails( string $tablename, string $columnname ) : \Aimeos\MW\Setup\DBSchema\Column\Iface
 	{
 		$sql = "
 			SELECT *
@@ -202,7 +202,7 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	 *
 	 * @return string Name of the adapter, e.g. 'mysql'
 	 */
-	public function getName()
+	public function getName() : string
 	{
 		return $this->name;
 	}
@@ -212,9 +212,9 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	 * Tests if something is supported
 	 *
 	 * @param string $what Type of object
-	 * @return boolean True if supported, false if not
+	 * @return bool True if supported, false if not
 	 */
-	public function supports( $what )
+	public function supports( string $what ) : bool
 	{
 		return false;
 	}
@@ -225,7 +225,7 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Database connection
 	 */
-	protected function acquire()
+	protected function acquire() : \Aimeos\MW\DB\Connection\Iface
 	{
 		return $this->dbm->acquire( $this->rname );
 	}
@@ -249,7 +249,7 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	 * 	NUMERIC_PRECISION, COLUMN_DEFAULT, IS_NULLABLE
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Column item
 	 */
-	protected function createColumnItem( array $record = [] )
+	protected function createColumnItem( array $record = [] ) : \Aimeos\MW\Setup\DBSchema\Column\Iface
 	{
 		$length = ( isset( $record['CHARACTER_MAXIMUM_LENGTH'] ) ? $record['CHARACTER_MAXIMUM_LENGTH'] : $record['NUMERIC_PRECISION'] );
 		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['TABLE_NAME'], $record['COLUMN_NAME'], $record['DATA_TYPE'], $length,
@@ -262,7 +262,7 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	 *
 	 * @return string Database name
 	 */
-	protected function getDBName()
+	protected function getDBName() : string
 	{
 		return $this->dbname;
 	}

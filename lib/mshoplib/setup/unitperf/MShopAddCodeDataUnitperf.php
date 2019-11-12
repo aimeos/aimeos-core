@@ -19,20 +19,9 @@ class MShopAddCodeDataUnitperf extends \Aimeos\MW\Setup\Task\MShopAddCodeData
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
-		return array( 'MShopSetLocale' );
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies()
-	{
-		return [];
+		return ['MShopSetLocale'];
 	}
 
 

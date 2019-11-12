@@ -19,20 +19,9 @@ class MShopAddAttributeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddAttribu
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
-		return array( 'MShopSetLocale', 'MShopAddTypeDataDefault' );
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies()
-	{
-		return [];
+		return ['MShopSetLocale', 'MShopAddTypeDataDefault'];
 	}
 
 

@@ -20,17 +20,8 @@ class MShopAddPluginDataDefault extends \Aimeos\MW\Setup\Task\MShopAddPluginData
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
-		return array( 'MShopAddTypeDataDefault' );
-	}
-
-
-	/**
-	 * Executes the task for MySQL databases.
-	 */
-	public function migrate()
-	{
-		$this->process();
+		return ['MShopAddTypeDataDefault'];
 	}
 }

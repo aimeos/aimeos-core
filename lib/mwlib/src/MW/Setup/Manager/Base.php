@@ -42,9 +42,9 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 	 * Autoloader for setup tasks.
 	 *
 	 * @param string $classname Name of the class to load
-	 * @return boolean True if class was found, false if not
+	 * @return bool True if class was found, false if not
 	 */
-	public static function autoload( $classname )
+	public static function autoload( string $classname ) : bool
 	{
 		if( strncmp( $classname, 'Aimeos\MW\Setup\Task\\', 21 ) === 0 )
 		{
@@ -73,7 +73,7 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 	 * @param string $dbname Name of the database that will be used
 	 * @return \Aimeos\MW\Setup\DBSchema\Iface Database schema object
 	 */
-	protected function createSchema( \Aimeos\MW\DB\Manager\Iface $dbm, $rname, $adapter, $dbname )
+	protected function createSchema( \Aimeos\MW\DB\Manager\Iface $dbm, string $rname, string $adapter, string $dbname ) : \Aimeos\MW\Setup\DBSchema\Iface
 	{
 		if( empty( $adapter ) || ctype_alnum( $adapter ) === false ) {
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Invalid database adapter "%1$s"', $adapter ) );
@@ -94,7 +94,7 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 	 *
 	 * @param string $pathname Path to the file including the file name
 	 */
-	protected function includeFile( $pathname )
+	protected function includeFile( string $pathname )
 	{
 		if( ( include_once $pathname ) === false ) {
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unable to include file "%1$s"', $pathname ) );
@@ -111,7 +111,7 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 	 * @param mixed $additional Additional data that should be handed over to the setup tasks
 	 * @return \Aimeos\MW\Setup\Task\Iface[] List of setup task objects
 	 */
-	protected function createTasks( array $paths, \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional )
+	protected function createTasks( array $paths, \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional ) : array
 	{
 		$tasks = [];
 

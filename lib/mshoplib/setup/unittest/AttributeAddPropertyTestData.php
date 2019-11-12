@@ -20,7 +20,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
 		return ['AttributeAddTestData'];
 	}
@@ -31,7 +31,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
 		return ['CatalogRebuildTestIndex'];
 	}

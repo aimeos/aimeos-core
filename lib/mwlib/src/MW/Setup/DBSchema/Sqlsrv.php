@@ -23,9 +23,9 @@ class Sqlsrv extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * Checks if the given sequence exists in the database.
 	 *
 	 * @param string $seqname Name of the database sequence
-	 * @return boolean True if the sequence exists, false if not
+	 * @return bool True if the sequence exists, false if not
 	 */
-	public function sequenceExists( $seqname )
+	public function sequenceExists( string $seqname ) : bool
 	{
 		return false;
 	}
@@ -36,9 +36,9 @@ class Sqlsrv extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 *
 	 * @param string $tablename Name of the database table
 	 * @param string $indexname Name of the database index
-	 * @return boolean True if the index exists, false if not
+	 * @return bool True if the index exists, false if not
 	 */
-	public function indexExists( $tablename, $indexname )
+	public function indexExists( string $tablename, string $indexname ) : bool
 	{
 		$sql = "
 			SELECT name
@@ -66,7 +66,7 @@ class Sqlsrv extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param array $record Associative array with column details
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Column item
 	 */
-	protected function createColumnItem( array $record = [] )
+	protected function createColumnItem( array $record = [] ) : \Aimeos\MW\Setup\DBSchema\Column\Iface
 	{
 		$length = ( isset( $record['CHARACTER_MAXIMUM_LENGTH'] ) ? $record['CHARACTER_MAXIMUM_LENGTH'] : $record['NUMERIC_PRECISION'] );
 

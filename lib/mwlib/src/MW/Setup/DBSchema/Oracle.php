@@ -25,7 +25,7 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param string $tablename Name of the database table
 	 * @return boolean True if the table exists, false if not
 	 */
-	public function tableExists( $tablename )
+	public function tableExists( string $tablename ) : bool
 	{
 		$sql = "
 			SELECT TABLE_NAME
@@ -51,7 +51,7 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param string $seqname Name of the database sequence
 	 * @return boolean True if the sequence exists, false if not
 	 */
-	public function sequenceExists( $seqname )
+	public function sequenceExists( string $seqname ) : bool
 	{
 		$sql = "
 			SELECT SEQUENCE_NAME
@@ -78,7 +78,7 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param string $constraintname Name of the database table constraint
 	 * @return boolean True if the constraint exists, false if not
 	 */
-	public function constraintExists( $tablename, $constraintname )
+	public function constraintExists( string $tablename, string $constraintname ) : bool
 	{
 		$sql = "
 			SELECT CONSTRAINT_NAME
@@ -107,7 +107,7 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param string $columnname Name of the table column
 	 * @return boolean True if the column exists, false if not
 	 */
-	public function columnExists( $tablename, $columnname )
+	public function columnExists( string $tablename, string $columnname ) : bool
 	{
 		$sql = "
 			SELECT COLUMN_NAME
@@ -136,7 +136,7 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param string $indexname Name of the database index
 	 * @return boolean True if the index exists, false if not
 	 */
-	public function indexExists( $tablename, $indexname )
+	public function indexExists( string $tablename, string $indexname ) : bool
 	{
 		$sql = "
 			SELECT INDEX_NAME
@@ -165,7 +165,7 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param string $columnname Name of the table column
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Object which contains the details
 	 */
-	public function getColumnDetails( $tablename, $columnname )
+	public function getColumnDetails( string $tablename, string $columnname ) : \Aimeos\MW\Setup\DBSchema\Column\Iface
 	{
 		$sql = "
 			SELECT *
@@ -197,7 +197,7 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param array $record Associative array with column details
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Column item
 	 */
-	protected function createColumnItem( array $record = [] )
+	protected function createColumnItem( array $record = [] ) : \Aimeos\MW\Setup\DBSchema\Column\Iface
 	{
 		$length = ( isset( $record['CHAR_COL_DECL_LENGTH'] ) ? $record['CHAR_COL_DECL_LENGTH'] : $record['DATA_PRECISION'] );
 

@@ -20,9 +20,9 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
-		return array( 'DemoAddProductData' );
+		return ['DemoAddProductData'];
 	}
 
 
@@ -31,9 +31,9 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
-		return array( 'DemoRebuildIndex' );
+		return ['DemoRebuildIndex'];
 	}
 
 

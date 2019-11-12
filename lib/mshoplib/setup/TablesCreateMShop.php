@@ -16,28 +16,6 @@ namespace Aimeos\MW\Setup\Task;
 class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return array List of task names
-	 */
-	public function getPreDependencies()
-	{
-		return [];
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return array List of task names
-	 */
-	public function getPostDependencies()
-	{
-		return [];
-	}
-
-
-	/**
 	 * Removes old columns and sequences
 	 */
 	public function clean()

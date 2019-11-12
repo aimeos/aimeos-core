@@ -20,7 +20,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
 		return ['AttributeAddTestData', 'MediaAddTestData', 'PriceAddTestData', 'TextAddTestData'];
 	}

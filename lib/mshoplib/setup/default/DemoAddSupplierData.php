@@ -19,9 +19,9 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
-		return array( 'MShopAddTypeDataDefault', 'MShopAddCodeDataDefault', 'DemoAddProductData' );
+		return ['MShopAddTypeDataDefault', 'MShopAddCodeDataDefault', 'DemoAddProductData'];
 	}
 
 
@@ -30,7 +30,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 *
 	 * @return array List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
 		return ['DemoRebuildIndex'];
 	}

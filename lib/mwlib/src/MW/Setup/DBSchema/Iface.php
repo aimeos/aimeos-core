@@ -30,50 +30,50 @@ interface Iface
 	 * @param string $dbname Database name
 	 * @param string $name Adapter name
 	 */
-	public function __construct( \Aimeos\MW\DB\Manager\Iface $dbm, $rname, $dbname, $name );
+	public function __construct( \Aimeos\MW\DB\Manager\Iface $dbm, string $rname, string $dbname, string $name );
 
 	/**
 	 * Checks if the given table exists for the specified table in the database.
 	 *
 	 * @param string $tablename Name of the database table
-	 * @return boolean True if the table exists, false if not
+	 * @return bool True if the table exists, false if not
 	 */
-	public function tableExists( $tablename );
+	public function tableExists( string $tablename ) : bool;
 
 	/**
 	 * Checks if the given sequence exists in the database.
 	 *
 	 * @param string $seqname Name of the database sequence
-	 * @return boolean True if the sequence exists, false if not
+	 * @return bool True if the sequence exists, false if not
 	 */
-	public function sequenceExists( $seqname );
+	public function sequenceExists( string $seqname ) : bool;
 
 	/**
 	 * Checks if the given index (not foreign keys, primary or unique constraints) exists in the database.
 	 *
 	 * @param string $tablename Name of the database table
 	 * @param string $indexname Name of the database index
-	 * @return boolean True if the index exists, false if not
+	 * @return bool True if the index exists, false if not
 	 */
-	public function indexExists( $tablename, $indexname );
+	public function indexExists( string $tablename, string $indexname ) : bool;
 
 	/**
 	 * Checks if the given constraint (foreign key, primary, unique) exists for the specified table in the database.
 	 *
 	 * @param string $tablename Name of the database table
 	 * @param string $constraintname Name of the database table constraint
-	 * @return boolean True if the constraint exists, false if not
+	 * @return bool True if the constraint exists, false if not
 	 */
-	public function constraintExists( $tablename, $constraintname );
+	public function constraintExists( string $tablename, string $constraintname ) : bool;
 
 	/**
 	 * Checks if the given column exists for the specified table in the database.
 	 *
 	 * @param string $tablename Name of the database table
 	 * @param string $columnname Name of the table column
-	 * @return boolean True if the column exists, false if not
+	 * @return bool True if the column exists, false if not
 	 */
-	public function columnExists( $tablename, $columnname );
+	public function columnExists( string $tablename, string $columnname ) : bool;
 
 	/**
 	 * Returns an object containing the details of the column.
@@ -82,20 +82,20 @@ interface Iface
 	 * @param string $columnname Name of the table column
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Object which contains the details
 	 */
-	public function getColumnDetails( $tablename, $columnname );
+	public function getColumnDetails( string $tablename, string $columnname ) : \Aimeos\MW\Setup\DBSchema\Column\Iface;
 
 	/**
 	 * Returns the name of the database adapter
 	 *
 	 * @return string Name of the adapter, e.g. 'mysql'
 	 */
-	public function getName();
+	public function getName() : string;
 
 	/**
 	 * Tests if something is supported
 	 *
 	 * @param string $what Type of object
-	 * @return boolean True if supported, false if not
+	 * @return bool True if supported, false if not
 	 */
-	public function supports( $what );
+	public function supports( string $what ) : bool;
 }

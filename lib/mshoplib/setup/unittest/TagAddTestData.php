@@ -15,13 +15,12 @@ namespace Aimeos\MW\Setup\Task;
  */
 class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 {
-
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
 		return ['MShopSetLocale'];
 	}

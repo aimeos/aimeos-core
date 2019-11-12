@@ -33,16 +33,16 @@ interface Iface
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
-	public function getPreDependencies();
+	public function getPreDependencies() : array;
 
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
-	public function getPostDependencies();
+	public function getPostDependencies() : array;
 
 	/**
 	 * Updates the schema and migrates the data
@@ -69,13 +69,15 @@ interface Iface
 	 * Sets the database manager object
 	 *
 	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database manager
+	 * @return Aimeos\MW\Setup\Task\Iface Task object for fluent interface
 	 */
-	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $dbm );
+	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $dbm ) : Iface;
 
 	/**
 	 * Sets the associative list of schemas with the resource name as key.
 	 *
 	 * @param \Aimeos\MW\Setup\DBSchema\Iface[] $schemas Associative list of schemas
+	 * @return Aimeos\MW\Setup\Task\Iface Task object for fluent interface
 	 */
-	public function setSchemas( array $schemas );
+	public function setSchemas( array $schemas ) : Iface;
 }

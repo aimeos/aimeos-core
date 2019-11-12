@@ -36,13 +36,14 @@ class Item implements \Aimeos\MW\Setup\DBSchema\Column\Iface
 	 * @param string $tablename Name of the table the column belongs to
 	 * @param string $name Name of the column
 	 * @param string $type Type of the column
-	 * @param integer $length Length of the column if the column type is of variable length
-	 * @param string $default Default value if not specified
+	 * @param int $length Length of the column if the column type is of variable length
+	 * @param mixed $default Default value if not specified
 	 * @param string $nullable "YES" if null values are allowed, "NO" if not
 	 * @param string|null $charset Charset of the column
 	 * @param string|null $collation Collation type of the column
 	 */
-	public function __construct( $tablename, $name, $type, $length, $default, $nullable, $charset, $collation )
+	public function __construct( string $tablename, string $name, string $type, int $length, $default,
+		string $nullable, string $charset = null, string $collation = null )
 	{
 		$this->tablename = (string) $tablename;
 		$this->name = (string) $name;
@@ -74,7 +75,7 @@ class Item implements \Aimeos\MW\Setup\DBSchema\Column\Iface
 	 *
 	 * @return string|null Charset of the column
 	 */
-	public function getCharset()
+	public function getCharset() : ?string
 	{
 		return $this->charset;
 	}
@@ -85,7 +86,7 @@ class Item implements \Aimeos\MW\Setup\DBSchema\Column\Iface
 	 *
 	 * @return string|null Collation type of the column
 	 */
-	public function getCollationType()
+	public function getCollationType() : ?string
 	{
 		return $this->collation;
 	}
@@ -96,7 +97,7 @@ class Item implements \Aimeos\MW\Setup\DBSchema\Column\Iface
 	 *
 	 * @return string Data type of the column
 	 */
-	public function getDataType()
+	public function getDataType() : string
 	{
 		return $this->type;
 	}
@@ -116,9 +117,9 @@ class Item implements \Aimeos\MW\Setup\DBSchema\Column\Iface
 	/**
 	 * Returns the maximum length of the column.
 	 *
-	 * @return integer Maximum length of the column
+	 * @return int Maximum length of the column
 	 */
-	public function getMaxLength()
+	public function getMaxLength() : int
 	{
 		return $this->length;
 	}
@@ -129,7 +130,7 @@ class Item implements \Aimeos\MW\Setup\DBSchema\Column\Iface
 	 *
 	 * @return string Name of the column
 	 */
-	public function getName()
+	public function getName() : string
 	{
 		return $this->name;
 	}
@@ -140,7 +141,7 @@ class Item implements \Aimeos\MW\Setup\DBSchema\Column\Iface
 	 *
 	 * @return string Table name of the column
 	 */
-	public function getTableName()
+	public function getTableName() : string
 	{
 		return $this->tablename;
 	}
@@ -151,7 +152,7 @@ class Item implements \Aimeos\MW\Setup\DBSchema\Column\Iface
 	 *
 	 * @return bool True if null is allowed, false if not
 	 */
-	public function isNullable()
+	public function isNullable() : bool
 	{
 		return $this->nullable;
 	}

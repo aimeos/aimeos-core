@@ -20,9 +20,9 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
-		return array( 'MShopAddLocaleLangCurData', 'TablesCreateMAdmin' );
+		return ['MShopAddLocaleLangCurData', 'TablesCreateMAdmin'];
 	}
 
 
@@ -31,9 +31,9 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return array List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
-		return array( 'MShopSetLocale' );
+		return ['MShopSetLocale'];
 	}
 
 

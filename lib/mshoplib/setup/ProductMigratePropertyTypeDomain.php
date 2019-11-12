@@ -18,24 +18,13 @@ class ProductMigratePropertyTypeDomain extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies()
-	{
-		return [];
-	}
-
-
-	/**
 	 * Returns the list of task names which depends on this task.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
-		return array( 'TablesCreateMShop' );
+		return ['TablesCreateMShop'];
 	}
 
 

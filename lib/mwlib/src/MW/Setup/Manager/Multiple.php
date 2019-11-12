@@ -73,7 +73,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 *
 	 * @param string|null $task Name of the task
 	 */
-	public function clean( $task = null )
+	public function clean( string $task = null )
 	{
 		$this->tasksDone = [];
 		$tasks = ( $task !== null && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
@@ -89,7 +89,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 *
 	 * @param string|null $task Name of the task
 	 */
-	public function migrate( $task = null )
+	public function migrate( string $task = null )
 	{
 		$this->tasksDone = [];
 		$tasks = ( $task !== null && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
@@ -105,7 +105,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 *
 	 * @param string|null $task Name of the task
 	 */
-	public function rollback( $task = null )
+	public function rollback( string $task = null )
 	{
 		$this->tasksDone = [];
 		$tasks = ( $task !== null && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
