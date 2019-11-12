@@ -107,7 +107,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * Sets the database manager object
 	 *
 	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database manager
-	 * @return Aimeos\MW\Setup\Task\Iface Task object for fluent interface
+	 * @return \Aimeos\MW\Setup\Task\Iface Task object for fluent interface
 	 */
 	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $dbm ) : Iface
 	{
@@ -120,7 +120,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * Sets the associative list of schemas with the resource name as key.
 	 *
 	 * @param \Aimeos\MW\Setup\DBSchema\Iface[] $schemas Associative list of schemas
-	 * @return Aimeos\MW\Setup\Task\Iface Task object for fluent interface
+	 * @return \Aimeos\MW\Setup\Task\Iface Task object for fluent interface
 	 */
 	public function setSchemas( array $schemas ) : Iface
 	{
@@ -158,7 +158,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 *
 	 * @param string $sql SQL statement to execute
 	 * @param string $name Name from the resource configuration
-	 * @return Aimeos\MW\Setup\Task\Iface Task object for fluent interface
+	 * @return \Aimeos\MW\Setup\Task\Iface Task object for fluent interface
 	 */
 	protected function execute( string $sql, string $name = 'db' ) : Iface
 	{
@@ -174,7 +174,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 *
 	 * @param string[] $list List of SQL statement to execute
 	 * @param string $name Name from the resource configuration
-	 * @return Aimeos\MW\Setup\Task\Iface Task object for fluent interface
+	 * @return \Aimeos\MW\Setup\Task\Iface Task object for fluent interface
 	 */
 	protected function executeList( array $list, string $name = 'db' ) : Iface
 	{
@@ -313,7 +313,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * @param string $msg Current message
 	 * @param int $level Indent level of the message (default: 0 )
 	 * @param string|null $status Current status
-	 * @return Aimeos\MW\Setup\Task\Iface Task object for fluent interface
+	 * @return \Aimeos\MW\Setup\Task\Iface Task object for fluent interface
 	 */
 	protected function msg( string $msg, int $level = 0, string $status = null ) : Iface
 	{
@@ -331,7 +331,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * Prints the status for the current test.
 	 *
 	 * @param string $status Current status
-	 * @return Aimeos\MW\Setup\Task\Iface Task object for fluent interface
+	 * @return \Aimeos\MW\Setup\Task\Iface Task object for fluent interface
 	 */
 	protected function status( string $status ) : Iface
 	{
@@ -418,7 +418,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * @param \Doctrine\DBAL\Schema\Schema $src Source schema object
 	 * @param \Doctrine\DBAL\Schema\Schema $dest Destination schema object
 	 * @param string $rname Resource name of the connection the table belongs to
-	 * @return Aimeos\MW\Setup\Task\Iface Task object for fluent interface
+	 * @return \Aimeos\MW\Setup\Task\Iface Task object for fluent interface
 	 */
 	protected function update( \Doctrine\DBAL\Schema\Schema $src, \Doctrine\DBAL\Schema\Schema $dest, string $rname )
 	{

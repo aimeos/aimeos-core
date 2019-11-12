@@ -125,13 +125,8 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 class BaseImpl extends \Aimeos\MW\Setup\Task\Base
 {
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
 		return array( 'TestTask' );
-	}
-
-	public function getPostDependencies()
-	{
-		return [];
 	}
 }
