@@ -32,4 +32,4 @@ before_script:
 script: "vendor/bin/phing setup coverage check"
 
 after_success:
-  - php vendor/bin/coveralls
+  - php vendor/bin/php-coveralls
