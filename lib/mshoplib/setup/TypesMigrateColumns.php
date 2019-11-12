@@ -165,7 +165,7 @@ class TypesMigrateColumns extends \Aimeos\MW\Setup\Task\Base
 				&& ( $tableDef = $dbalManager->listTableDetails( $name ) )->hasColumn( 'type' ) === false
 			) {
 				$beforeSchema = new \Doctrine\DBAL\Schema\Schema( [clone $tableDef], [], $config );
-				$tableDef->addColumn( 'type', 'string', ['length' => 64, 'notnull' => false] );
+				$tableDef->addColumn( 'type', 'string', ['length' => 64, 'default' => ''] );
 				$afterSchema = new \Doctrine\DBAL\Schema\Schema( [$tableDef], [], $config );
 
 				$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $beforeSchema, $afterSchema );
@@ -200,7 +200,7 @@ class TypesMigrateColumns extends \Aimeos\MW\Setup\Task\Base
 		{
 			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
-			if( $dbalManager->tablesExist( [$name] )
+			if( $dbalManager->tablesExist( [$table] )
 				&& ( $tableDef = $dbalManager->listTableDetails( $table ) )->hasIndex( $name ) === true
 			) {
 				$beforeSchema = new \Doctrine\DBAL\Schema\Schema( [clone $tableDef], [], $config );
