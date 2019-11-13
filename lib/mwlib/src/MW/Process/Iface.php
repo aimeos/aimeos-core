@@ -22,24 +22,24 @@ interface Iface
 	/**
 	 * Checks if processing tasks in parallel is available
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable();
+	public function isAvailable() : bool;
 
 	/**
 	 * Starts a new task by executing the given anonymous function
 	 *
 	 * @param \Closure $fcn Anonymous function to execute
 	 * @param array $data List of parameters that is passed to the closure function
-	 * @param boolean $restart True if the task should be restarted if it fails (only once)
+	 * @param bool $restart True if the task should be restarted if it fails (only once)
 	 * @return \Aimeos\MW\Process\Iface Self object for method chaining
 	 */
-	public function start( \Closure $fcn, array $data, $restart = false );
+	public function start( \Closure $fcn, array $data, bool $restart = false ) : Iface;
 
 	/**
 	 * Waits for the running tasks until all have finished
 	 *
 	 * @return \Aimeos\MW\Process\Iface Self object for method chaining
 	 */
-	public function wait();
+	public function wait() : Iface;
 }
