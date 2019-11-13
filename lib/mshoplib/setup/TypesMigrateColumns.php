@@ -201,8 +201,9 @@ class TypesMigrateColumns extends \Aimeos\MW\Setup\Task\Base
 			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
 			if( $dbal->tablesExist( [$table] )
-				&& ( $tableDef = $dbal->listTableDetails( $table ) )->hasIndex( $name ) === true
+				&& $dbal->listTableDetails( $table )->hasIndex( $name ) === true
 			) {
+				$tableDef = $dbal->listTableDetails( $table );
 				$beforeSchema = new \Doctrine\DBAL\Schema\Schema( [clone $tableDef], [], $config );
 				$tableDef->dropIndex( $name );
 				$afterSchema = new \Doctrine\DBAL\Schema\Schema( [$tableDef], [], $config );
