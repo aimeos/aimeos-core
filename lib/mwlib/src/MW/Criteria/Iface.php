@@ -191,7 +191,7 @@ interface Iface
 	 * Nested combine operators are also possible.
 	 *
 	 * @param array $array Multi-dimensional associative array containing the expression arrays
-	 * @return \Aimeos\MW\Criteria\Expression\Iface Condition expressions (maybe nested)
+	 * @return \Aimeos\MW\Criteria\Expression\Iface|null Condition expressions (maybe nested) or null for none
 	 * @throws \Aimeos\MW\Common\Exception If given array is invalid
 	 */
 	public function toConditions( array $array );

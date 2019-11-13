@@ -54,17 +54,13 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 * Nested combine operators are also possible.
 	 *
 	 * @param array $array Multi-dimensional associative array containing the expression arrays
-	 * @return \Aimeos\MW\Criteria\Expression\Iface Condition expressions (maybe nested)
+	 * @return \Aimeos\MW\Criteria\Expression\Iface|null Condition expressions (maybe nested) or null for none
 	 * @throws \Aimeos\MW\Common\Exception If given array is invalid
 	 */
 	public function toConditions( array $array )
 	{
-		if( count( $array ) === 0 ) {
-			return $this->compare( '==', '1', '1' );
-		}
-
 		if( ( $value = reset( $array ) ) === false ) {
-			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid condition array "%1$s"', json_encode( $array ) ) );
+			return null;
 		}
 
 		$op = key( $array );

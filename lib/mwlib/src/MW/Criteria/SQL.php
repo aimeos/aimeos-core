@@ -20,11 +20,11 @@ namespace Aimeos\MW\Criteria;
  */
 class SQL extends \Aimeos\MW\Criteria\Base
 {
+	private $conn;
 	private $conditions;
 	private $sortations = [];
 	private $sliceStart = 0;
 	private $sliceSize = 100;
-	private $conn = null;
 
 
 	/**
