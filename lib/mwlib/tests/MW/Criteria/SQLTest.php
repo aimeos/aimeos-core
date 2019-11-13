@@ -219,8 +219,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testToConditionsEmptyArray()
 	{
-		$condition = $this->object->toConditions( [] );
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\SQL::class, $condition );
+		$this->assertNull( $this->object->toConditions( [] ) );
 	}
 
 
@@ -234,17 +233,13 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	public function testToConditionsInvalidOperator()
 	{
 		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
-		$this->object->toConditions( array( '><' => array( 'name', 'value' ) ) );
+		$this->object->toConditions( ['><' => ['name', 'value']] );
 	}
 
 
 	public function testToConditionsCompare()
 	{
-		$array = array(
-			'==' => array( 'name' => 'value' ),
-		);
-
-		$condition = $this->object->toConditions( $array );
+		$condition = $this->object->toConditions( ['==' => ['name' => 'value']] );
 
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\Iface::class, $condition );
 		$this->assertEquals( '==', $condition->getOperator() );
