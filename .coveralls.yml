@@ -1,4 +1,3 @@
-src_dir: ./
 json_path: misc/coveralls.json
 coverage_clover:
   - controller/common/tests/coverage.xml
