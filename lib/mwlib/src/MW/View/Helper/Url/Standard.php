@@ -31,7 +31,7 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $baseUrl URL which acts as base for all constructed URLs
 	 */
-	public function __construct( $view, $baseUrl )
+	public function __construct( \Aimeos\MW\View\Iface $view, string $baseUrl )
 	{
 		parent::__construct( $view );
 
@@ -50,7 +50,8 @@ class Standard
 	 * @param array $config Additional configuration parameter per URL
 	 * @return string Complete URL that can be used in the template
 	 */
-	public function transform( $target = null, $controller = null, $action = null, array $params = [], array $trailing = [], array $config = [] )
+	public function transform( string $target = null, string $controller = null, string $action = null,
+		array $params = [], array $trailing = [], array $config = [] ) : string
 	{
 		$path = ( $target !== null ? $target . '/' : '' );
 		$path .= ( $controller !== null ? $controller . '/' : '' );

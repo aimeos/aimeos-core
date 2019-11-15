@@ -24,26 +24,26 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 *
 	 * @return \Aimeos\MW\View\Helper\Iface CSRF partial object
 	 */
-	public function transform();
+	public function transform() : Iface;
 
 	/**
 	 * Returns the CSRF token name.
 	 *
 	 * @return string CSRF token name
 	 */
-	public function name();
+	public function name() : string;
 
 	/**
 	 * Returns the CSRF token value.
 	 *
 	 * @return string CSRF token value
 	 */
-	public function value();
+	public function value() : string;
 
 	/**
 	 * Returns the HTML form field for the CSRF token.
 	 *
 	 * @return string HTML form field code
 	 */
-	public function formfield();
+	public function formfield() : string;
 }

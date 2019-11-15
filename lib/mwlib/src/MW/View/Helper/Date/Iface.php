@@ -25,5 +25,5 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * @param string $date ISO date and time
 	 * @return string Formatted date
 	 */
-	public function transform( $date );
+	public function transform( string $date ) : string;
 }

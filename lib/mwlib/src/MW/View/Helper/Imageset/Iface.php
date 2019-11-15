@@ -25,5 +25,5 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * @param array $images List of widths as keys and URLs as values
 	 * @return string Image srcset value
 	 */
-	public function transform( array $images );
+	public function transform( array $images ) : string;
 }

@@ -31,7 +31,7 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param \Aimeos\MW\Mail\Message\Iface $message E-mail message object
 	 */
-	public function __construct( $view, \Aimeos\MW\Mail\Message\Iface $message )
+	public function __construct( \Aimeos\MW\View\Iface $view, \Aimeos\MW\Mail\Message\Iface $message )
 	{
 		parent::__construct( $view );
 
@@ -44,7 +44,7 @@ class Standard
 	 *
 	 * @return \Aimeos\MW\Mail\Message\Iface E-mail message object
 	 */
-	public function transform()
+	public function transform() : \Aimeos\MW\Mail\Message\Iface
 	{
 		return $this->message;
 	}

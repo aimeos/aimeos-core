@@ -26,7 +26,7 @@ abstract class Base extends \Aimeos\MW\View\Helper\Base
 	 * @param string[] $names Replace characters in the parameters of the given names, empty for all
 	 * @return array Associative list with encoded values
 	 */
-	protected function sanitize( array $params, $names = array( 'f_name', 'd_name' ) )
+	protected function sanitize( array $params, array$names = ['f_name', 'd_name'] ) : array
 	{
 		foreach( $params as $key => $value )
 		{

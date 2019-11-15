@@ -30,8 +30,9 @@ class Locale
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $locale Language locale like "en" or "en_UK"
+	 * @param string|null ICU pattern to format the number or null for default formatting
 	 */
-	public function __construct( $view, $locale = 'en', $pattern = null )
+	public function __construct( \Aimeos\MW\View\Iface $view, string $locale = 'en', string $pattern = null )
 	{
 		parent::__construct( $view );
 
@@ -46,11 +47,11 @@ class Locale
 	/**
 	 * Returns the formatted number.
 	 *
-	 * @param integer|double|string $number Number to format
-	 * @param integer|null $decimals Number of decimals behind the decimal point or null for default value
+	 * @param int|double|string $number Number to format
+	 * @param int|null $decimals Number of decimals behind the decimal point or null for default value
 	 * @return string Formatted number
 	 */
-	public function transform( $number, $decimals = null )
+	public function transform( $number, int $decimals = null ) : string
 	{
 		$this->formatter->setAttribute( \NumberFormatter::FRACTION_DIGITS, (int) $decimals ?: 2 );
 		return $this->formatter->format( (double) $number );

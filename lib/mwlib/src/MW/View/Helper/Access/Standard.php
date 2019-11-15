@@ -39,9 +39,9 @@ class Standard extends \Aimeos\MW\View\Helper\Base implements Iface
 	 * Checks the access level of the current user
 	 *
 	 * @param string|array $groups Group names that are allowed
-	 * @return boolean True if access is allowed, false if not
+	 * @return bool True if access is allowed, false if not
 	 */
-	public function transform( $groups )
+	public function transform( $groups ) : bool
 	{
 		if( is_callable( $this->groups ) )
 		{

@@ -33,8 +33,9 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $decimalSeparator Character for the decimal point
 	 * @param string $thousandsSeperator Character separating groups of thousands
+	 * @param int $decimals Number of decimal digits
 	 */
-	public function __construct( $view, $decimalSeparator = '.', $thousandsSeperator = '', $decimals = 2 )
+	public function __construct( \Aimeos\MW\View\Iface $view, string $decimalSeparator = '.', string $thousandsSeperator = '', int $decimals = 2 )
 	{
 		parent::__construct( $view );
 
@@ -47,11 +48,11 @@ class Standard
 	/**
 	 * Returns the formatted number.
 	 *
-	 * @param integer|double|string $number Number to format
-	 * @param integer|null $decimals Number of decimals behind the decimal point or null for default value
+	 * @param int|double|string $number Number to format
+	 * @param int|null $decimals Number of decimals behind the decimal point or null for default value
 	 * @return string Formatted number
 	 */
-	public function transform( $number, $decimals = null )
+	public function transform( $number, int $decimals = null ) : string
 	{
 		if( $decimals === null ) {
 			$decimals = $this->decimals;

@@ -32,7 +32,7 @@ class Standard
 	 * @param string $format New date format
 	 * @see http://php.net/manual/en/datetime.createfromformat.php
 	 */
-	public function __construct( $view, $format = '' )
+	public function __construct( \Aimeos\MW\View\Iface $view, string $format = '' )
 	{
 		parent::__construct( $view );
 
@@ -46,7 +46,7 @@ class Standard
 	 * @param string $date ISO date and time
 	 * @return string Formatted date
 	 */
-	public function transform( $date )
+	public function transform( string $date ) : string
 	{
 		return \DateTime::createFromFormat( 'Y-m-d H:i:s', $date )->format( $this->format );
 	}

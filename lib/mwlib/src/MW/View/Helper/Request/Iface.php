@@ -24,19 +24,19 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface, \Psr\Http\Message\ServerRe
 	 *
 	 * @return \Aimeos\MW\View\Helper\Request\Iface Request view helper
 	 */
-	public function transform();
+	public function transform() : Iface;
 
 	/**
 	 * Returns the client IP address.
 	 *
 	 * @return string Client IP address
 	 */
-	public function getClientAddress();
+	public function getClientAddress() : string;
 
 	/**
 	 * Returns the current page or route name
 	 *
 	 * @return string|null Current page or route name
 	 */
-	public function getTarget();
+	public function getTarget() : ?string;
 }

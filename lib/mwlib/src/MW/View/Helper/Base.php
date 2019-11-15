@@ -54,7 +54,7 @@ abstract class Base
 	 * @param array $args Arguments passed to the view helper
 	 * @return mixed Output depending on the view helper
 	 */
-	public function __call( $name, array $args )
+	public function __call( string $name, array $args )
 	{
 		return call_user_func_array( array( $this->view, $name ), $args );
 	}
@@ -64,10 +64,12 @@ abstract class Base
 	 * Sets a new view object for changing views afterwards
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View object
+	 * @return \Aimeos\MW\View\Helper\Iface Helper object for method chaining
 	 */
-	public function setView( \Aimeos\MW\View\Iface $view )
+	public function setView( \Aimeos\MW\View\Iface $view ) : Iface
 	{
 		$this->view = $view;
+		return $this;
 	}
 
 
@@ -76,7 +78,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MW\View\Iface View object
 	 */
-	protected function getView()
+	protected function getView() : \Aimeos\MW\View\Iface
 	{
 		return $this->view;
 	}

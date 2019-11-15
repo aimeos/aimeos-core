@@ -33,7 +33,7 @@ class Standard
 	 * @param string $name CSRF token name
 	 * @param string $value CSRF token value
 	 */
-	public function __construct( $view, $name = '', $value = '' )
+	public function __construct( \Aimeos\MW\View\Iface $view, string $name = '', string $value = '' )
 	{
 		parent::__construct( $view );
 
@@ -51,7 +51,7 @@ class Standard
 	 *
 	 * @return \Aimeos\MW\View\Helper\Iface CSRF partial object
 	 */
-	public function transform()
+	public function transform() : Iface
 	{
 		return $this;
 	}
@@ -62,7 +62,7 @@ class Standard
 	 *
 	 * @return string CSRF token name
 	 */
-	public function name()
+	public function name() : string
 	{
 		return $this->name;
 	}
@@ -73,7 +73,7 @@ class Standard
 	 *
 	 * @return string CSRF token value
 	 */
-	public function value()
+	public function value() : string
 	{
 		return $this->value;
 	}
@@ -84,7 +84,7 @@ class Standard
 	 *
 	 * @return string HTML form field code
 	 */
-	public function formfield()
+	public function formfield() : string
 	{
 		return $this->formfield;
 	}

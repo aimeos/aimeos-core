@@ -30,7 +30,7 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param \Aimeos\MW\Session\Iface $session Session object
 	 */
-	public function __construct( $view, \Aimeos\MW\Session\Iface $session )
+	public function __construct( \Aimeos\MW\View\Iface $view, \Aimeos\MW\Session\Iface $session )
 	{
 		parent::__construct( $view );
 
@@ -45,7 +45,7 @@ class Standard
 	 * @param mixed $default Default value if session key is not available
 	 * @return mixed Session value
 	 */
-	public function transform( $name, $default = null )
+	public function transform( string $name, $default = null )
 	{
 		return $this->session->get( $name, $default );
 	}

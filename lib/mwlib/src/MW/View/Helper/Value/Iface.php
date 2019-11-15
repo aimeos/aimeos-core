@@ -27,5 +27,5 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * @param mixed $default Returned value if no one for key is available
 	 * @return mixed Value from the array or default value if not present in array
 	 */
-	public function transform( array $values, $key, $default = null );
+	public function transform( array $values, string $key, $default = null );
 }

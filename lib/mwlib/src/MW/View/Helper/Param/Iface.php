@@ -24,7 +24,8 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 *
 	 * @param string|null $name Name of the parameter key or null for all parameters
 	 * @param mixed $default Default value if parameter key is not available
+	 * @param bool $escape Escape HTML if single parameter is returned
 	 * @return mixed Parameter value or associative list of key/value pairs
 	 */
-	public function transform( $name = null, $default = null );
+	public function transform( string $name = null, $default = null, bool $escape = true );
 }

@@ -32,7 +32,7 @@ class Standard
 	 *
 	 * @return \Aimeos\MW\View\Helper\Iface Block object
 	 */
-	public function transform()
+	public function transform() : Iface
 	{
 		return $this;
 	}
@@ -42,13 +42,15 @@ class Standard
 	 * Returns the content block for the given name
 	 *
 	 * @param string $name Name of the block
-	 * @return string Content of the block
+	 * @return string|null Content of the block
 	 */
-	public function get( $name )
+	public function get( string $name ) : ?string
 	{
 		if( isset( $this->blocks[$name] ) ) {
 			return $this->blocks[$name];
 		}
+
+		return null;
 	}
 
 
@@ -57,10 +59,12 @@ class Standard
 	 *
 	 * @param string $name Name of the block
 	 * @param string $content Block content
+	 * @return \Aimeos\MW\View\Helper\Iface Block object for fluent interface
 	 */
-	public function set( $name, $content )
+	public function set( string $name, string $content ) : Iface
 	{
 		$this->blocks[$name] = $content;
+		return $this;
 	}
 
 
@@ -68,8 +72,9 @@ class Standard
 	 * Starts a new content block
 	 *
 	 * @param string $name Name of the block
+	 * @return \Aimeos\MW\View\Helper\Iface Block object for fluent interface
 	 */
-	public function start( $name )
+	public function start( string $name ) : Iface
 	{
 		if( in_array( $name, $this->stack ) ) {
 			throw new Exception( sprintf( 'Block "%1$s" has already been started', $name ) );
@@ -77,18 +82,23 @@ class Standard
 
 		$this->stack[] = $name;
 		ob_start();
+
+		return $this;
 	}
 
 
 	/**
 	 * Stores the current content block
+	 *
+	 * @return \Aimeos\MW\View\Helper\Iface Block object for fluent interface
 	 */
-	public function stop()
+	public function stop() : Iface
 	{
 		if( ( $name = array_pop( $this->stack ) ) === null ) {
 			throw new Exception( sprintf( 'No block has been started before' ) );
 		}
 
 		$this->blocks[$name] = ob_get_clean();
+		return $this;
 	}
 }

@@ -27,7 +27,7 @@ class Standard
 	 * @param array $images List of widths as keys and URLs as values
 	 * @return string Image srcset value
 	 */
-	public function transform( array $images )
+	public function transform( array $images ) : string
 	{
 		$srcset = [];
 		$view = $this->getView();

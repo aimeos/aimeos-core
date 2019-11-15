@@ -32,7 +32,7 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string|null $baseurl Base URL for the content
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, $baseurl = null )
+	public function __construct( \Aimeos\MW\View\Iface $view, string $baseurl = null )
 	{
 		parent::__construct( $view );
 
@@ -51,7 +51,7 @@ class Standard
 	 * @param string $url Absolute, relative or data: URL
 	 * @return string Complete encoded content URL
 	 */
-	public function transform( $url )
+	public function transform( string $url ) : string
 	{
 		if( strncmp( $url, 'http', 4 ) !== 0 && strncmp( $url, 'data:', 5 ) !== 0 && strncmp( $url, '/', 1 ) !== 0 ) {
 			$url = $this->baseurl . '/' . $url;

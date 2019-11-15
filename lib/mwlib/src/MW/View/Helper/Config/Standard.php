@@ -31,7 +31,7 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param \Aimeos\MW\Config\Iface $config Configuration object
 	 */
-	public function __construct( $view, \Aimeos\MW\Config\Iface $config )
+	public function __construct( \Aimeos\MW\View\Iface $view, \Aimeos\MW\Config\Iface $config )
 	{
 		parent::__construct( $view );
 
@@ -46,7 +46,7 @@ class Standard
 	 * @param mixed $default Default value if config key is not available
 	 * @return mixed Config value or associative list of key/value pairs
 	 */
-	public function transform( $name = null, $default = null )
+	public function transform( string $name = null, $default = null )
 	{
 		return $this->config->get( $name, $default );
 	}

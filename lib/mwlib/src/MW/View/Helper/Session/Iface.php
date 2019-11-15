@@ -26,5 +26,5 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * @param mixed $default Default value if session key is not available
 	 * @return mixed Session value
 	 */
-	public function transform( $name, $default = null );
+	public function transform( string $name, $default = null );
 }

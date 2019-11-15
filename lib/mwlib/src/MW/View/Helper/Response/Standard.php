@@ -45,7 +45,7 @@ class Standard
 	 *
 	 * @return \Aimeos\MW\View\Helper\Response\Iface Response view helper
 	 */
-	public function transform()
+	public function transform() : Iface
 	{
 		return $this;
 	}
@@ -57,7 +57,7 @@ class Standard
 	 * @param string|resource $resource Absolute file path or file descriptor
 	 * @return \Psr\Http\Message\StreamInterface Stream object
 	 */
-	public function createStream( $resource )
+	public function createStream( $resource ) : \Psr\Http\Message\StreamInterface
 	{
 		if( class_exists( \Zend\Diactoros\Stream::class ) ) {
 			return new \Zend\Diactoros\Stream( $resource );
@@ -73,7 +73,7 @@ class Standard
 	 * @param string $content Content as string
 	 * @return \Psr\Http\Message\StreamInterface Stream object
 	 */
-	public function createStreamFromString( $content )
+	public function createStreamFromString( $content ) : \Psr\Http\Message\StreamInterface
 	{
 		if( ( $resource = fopen( 'php://temp', 'rw' ) ) === false ) {
 			throw new \Aimeos\MW\Exception( 'Unable to create temporary file' );

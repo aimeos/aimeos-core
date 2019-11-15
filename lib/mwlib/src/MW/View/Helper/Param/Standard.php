@@ -31,7 +31,7 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param array $params Associative list of key/value pairs
 	 */
-	public function __construct( $view, array $params = [] )
+	public function __construct( \Aimeos\MW\View\Iface $view, array $params = [] )
 	{
 		parent::__construct( $view );
 
@@ -44,10 +44,10 @@ class Standard
 	 *
 	 * @param string|null $name Name of the parameter key or null for all parameters
 	 * @param mixed $default Default value if parameter key is not available
-	 * @param boolean $escape Escape HTML if single parameter is returned
+	 * @param bool $escape Escape HTML if single parameter is returned
 	 * @return mixed Parameter value or associative list of key/value pairs
 	 */
-	public function transform( $name = null, $default = null, $escape = true )
+	public function transform( string $name = null, $default = null, bool $escape = true )
 	{
 		if( $name === null ) {
 			return $this->params;

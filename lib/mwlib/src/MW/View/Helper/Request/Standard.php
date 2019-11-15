@@ -37,7 +37,8 @@ class Standard
 	 * @param string $clientaddr Client IP address
 	 * @param string|null $target Page ID or route name
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, \Psr\Http\Message\ServerRequestInterface $request, $clientaddr = '', $target = null )
+	public function __construct( \Aimeos\MW\View\Iface $view, \Psr\Http\Message\ServerRequestInterface $request,
+		string $clientaddr = '', string $target = null )
 	{
 		parent::__construct( $view );
 
@@ -52,7 +53,7 @@ class Standard
 	 *
 	 * @return \Aimeos\MW\View\Helper\Request\Iface Request view helper
 	 */
-	public function transform()
+	public function transform() : Iface
 	{
 		return $this;
 	}
@@ -63,7 +64,7 @@ class Standard
 	 *
 	 * @return string Client IP address
 	 */
-	public function getClientAddress()
+	public function getClientAddress() : string
 	{
 		return $this->clientaddr;
 	}
@@ -74,7 +75,7 @@ class Standard
 	 *
 	 * @return string|null Current page or route name
 	 */
-	public function getTarget()
+	public function getTarget() : ?string
 	{
 		return $this->target;
 	}

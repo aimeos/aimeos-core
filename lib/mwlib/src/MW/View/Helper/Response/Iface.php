@@ -24,7 +24,7 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface, \Psr\Http\Message\Response
 	 *
 	 * @return \Aimeos\MW\View\Helper\Response\Iface Response view helper
 	 */
-	public function transform();
+	public function transform() : Iface;
 
 	/**
 	 * Creates a new PSR-7 stream object
@@ -32,7 +32,7 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface, \Psr\Http\Message\Response
 	 * @param string|resource $resource Absolute file path or file descriptor
 	 * @return \Psr\Http\Message\StreamInterface Stream object
 	 */
-	public function createStream( $resource );
+	public function createStream( $resource ) : \Psr\Http\Message\StreamInterface;
 
 	/**
 	 * Creates a new PSR-7 stream object from a string
@@ -40,5 +40,5 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface, \Psr\Http\Message\Response
 	 * @param string $content Content as string
 	 * @return \Psr\Http\Message\StreamInterface Stream object
 	 */
-	public function createStreamFromString( $content );
+	public function createStreamFromString( $content ) : \Psr\Http\Message\StreamInterface;
 }

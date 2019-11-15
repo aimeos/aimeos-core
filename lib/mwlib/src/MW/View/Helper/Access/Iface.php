@@ -23,7 +23,7 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * Checks the access level
 	 *
 	 * @param string|array $groups Group names that are allowed
-	 * @return boolean True if access is allowed, false if not
+	 * @return bool True if access is allowed, false if not
 	 */
-	public function transform( $groups );
+	public function transform( $groups ) : bool;
 }

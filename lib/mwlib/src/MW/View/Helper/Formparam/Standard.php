@@ -31,7 +31,7 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string[] $names Prefix names when generating form parameters (will be "name1[name2][name3]..." )
 	 */
-	public function __construct( $view, array $names = [] )
+	public function __construct( \Aimeos\MW\View\Iface $view, array $names = [] )
 	{
 		parent::__construct( $view );
 
@@ -47,7 +47,7 @@ class Standard
 	 * @param string|array $names Name or list of names
 	 * @return string Form parameter name
 	 */
-	public function transform( $names )
+	public function transform( $names ) : string
 	{
 		$names = array_merge( $this->names, (array) $names );
 

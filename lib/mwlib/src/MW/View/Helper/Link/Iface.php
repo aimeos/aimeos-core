@@ -27,5 +27,5 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * @param string[] $fragments Trailing URL fragment that are not relevant to identify the resource
 	 * @return string Complete URL that can be used in the template
 	 */
-	public function transform( $cfgkey, array $params = [], array $fragments = [] );
+	public function transform( string $cfgkey, array $params = [], array $fragments = [] ) : string;
 }

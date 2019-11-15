@@ -28,46 +28,46 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 *
 	 * @return \Aimeos\MW\View\Helper\Iface Encoder object
 	 */
-	public function transform();
+	public function transform() : Iface;
 
 	/**
 	 * Escapes strings for HTML/XML attributes.
 	 * All attribute values must be surrounded by " (double quote)
 	 *
-	 * @param string $value Attribute string
-	 * @param integer $trust Zero to distrust the input, one (1) if you trust in it
+	 * @param mixed $value Attribute string
+	 * @param int $trust Zero to distrust the input, one (1) if you trust in it
 	 * @param string $replace Replace whitespace characters by given string
 	 * @return string Escaped attribute string
 	 */
-	public function attr( $value, $trust = self::TAINT, $replace = '' );
+	public function attr( $value, int $trust = self::TAINT, string $replace = '' ) : string;
 
 	/**
 	 * Escapes strings for HTML.
 	 *
-	 * @param string $value HTML string
-	 * @param integer $trust Zero to distrust the input, one (1) if you trust in it
+	 * @param mixed $value HTML string
+	 * @param int $trust Zero to distrust the input, one (1) if you trust in it
 	 * @return string Escaped HTML string
 	 */
-	public function html( $value, $trust = self::TAINT );
+	public function html( $value, int $trust = self::TAINT ) : string;
 
 	/**
 	 * Escapes strings for XML.
 	 * All node values must be surrounded by <![CDATA[...]]>
 	 *
-	 * @param string $value XML string
-	 * @param integer $trust Zero to distrust the input, one (1) if you trust in it
+	 * @param mixed $value XML string
+	 * @param int $trust Zero to distrust the input, one (1) if you trust in it
 	 * @return string Escaped XML string
 	 */
-	public function xml( $value, $trust = self::TAINT );
+	public function xml( $value, int $trust = self::TAINT ) : string;
 
 	/**
 	 * Escapes strings for URLs.
 	 *
 	 * @param string $value URI/URL string
-	 * @param integer $trust Zero to distrust the input, one (1) if you trust in it
-	 * @param boolean $strip Stip HTML tags if they are part of the input
+	 * @param int $trust Zero to distrust the input, one (1) if you trust in it
+	 * @param bool $strip Stip HTML tags if they are part of the input
 	 * @param string[] $replace Associative list of characters or strings that should be replaced
 	 * @return string Escaped URI/URL string
 	 */
-	public function url( $value, $trust = self::TAINT, $strip = true, $replace = array( ' ' => '_' ) );
+	public function url( string $value, int $trust = self::TAINT, bool $strip = true, array $replace = [' ' => '_'] ) : string;
 }

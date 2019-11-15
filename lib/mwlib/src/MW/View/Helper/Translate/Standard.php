@@ -45,10 +45,10 @@ class Standard
 	 * @param string $domain Translation domain from core or an extension
 	 * @param string $singular Singular form of the text to translate
 	 * @param string $plural Plural form of the text, used if $number is greater than one
-	 * @param integer $number Amount of things relevant for the plural form
+	 * @param int $number Amount of things relevant for the plural form
 	 * @return string Translated string
 	 */
-	public function transform( $domain, $singular, $plural = '', $number = 1 )
+	public function transform( string $domain, string $singular, string $plural = '', int $number = 1 ) : string
 	{
 		if( $plural !== '' ) {
 			return $this->translator->dn( $domain, $singular, $plural, $number );

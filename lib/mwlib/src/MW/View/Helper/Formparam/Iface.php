@@ -27,5 +27,5 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * @param string|array $names Name or list of names
 	 * @return string Form parameter name
 	 */
-	public function transform( $names );
+	public function transform( $names ) : string;
 }
