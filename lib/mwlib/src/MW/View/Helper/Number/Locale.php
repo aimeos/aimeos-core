@@ -30,7 +30,7 @@ class Locale
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $locale Language locale like "en" or "en_UK"
-	 * @param string|null ICU pattern to format the number or null for default formatting
+	 * @param string|null $pattern ICU pattern to format the number or null for default formatting
 	 */
 	public function __construct( \Aimeos\MW\View\Iface $view, string $locale = 'en', string $pattern = null )
 	{
