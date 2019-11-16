@@ -31,7 +31,7 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	 * @param \Aimeos\MW\DB\Connection\PDO $conn Database connection object
 	 * @param string $sql SQL statement
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\PDO $conn, $sql )
+	public function __construct( \Aimeos\MW\DB\Connection\PDO $conn, string $sql )
 	{
 		parent::__construct( $conn );
 
@@ -42,16 +42,18 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	/**
 	 * Binds a value to a parameter in the statement.
 	 *
-	 * @param integer $position Position index of the placeholder
+	 * @param int $position Position index of the placeholder
 	 * @param mixed $value Value which should be bound to the placeholder
-	 * @param integer $type Type of given value defined in \Aimeos\MW\DB\Statement\Base as constant
+	 * @param int $type Type of given value defined in \Aimeos\MW\DB\Statement\Base as constant
 	 * @return \Aimeos\MW\DB\Statement\Iface Statement instance for method chaining
 	 * @throws \Aimeos\MW\DB\Exception If the parameter type is invalid
 	 */
-	public function bind( $position, $value, $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR )
+	public function bind( int $position, $value, int $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR ) : \Aimeos\MW\DB\Statement\Iface
 	{
-		if( is_null( $value ) ) {
-			$this->binds[$position] = 'NULL'; return;
+		if( is_null( $value ) )
+		{
+			$this->binds[$position] = 'NULL';
+			return $this;
 		}
 
 		switch( $type )
@@ -81,7 +83,7 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	 * @return \Aimeos\MW\DB\Result\Iface Result object
 	 * @throws \Aimeos\MW\DB\Exception If an error occured in the unterlying driver or if the number of binds doesn't match
 	 */
-	public function execute()
+	public function execute() : \Aimeos\MW\DB\Result\Iface
 	{
 		if( count( $this->binds ) !== count( $this->parts ) - 1 )
 		{
@@ -119,7 +121,7 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	 *
 	 * @return \PDOStatement Executed PDO statement
 	 */
-	protected function exec()
+	protected function exec() : \PDOStatement
 	{
 		if( $this->sql === null ) {
 			$this->sql = $this->buildSQL( $this->parts, $this->binds );

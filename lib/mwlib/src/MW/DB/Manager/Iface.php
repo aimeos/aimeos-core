@@ -26,7 +26,7 @@ interface Iface
 	 * @param string $name Name of the resource in configuration
 	 * @return \Aimeos\MW\DB\Connection\Iface
 	 */
-	public function acquire( $name = 'db' );
+	public function acquire( string $name = 'db' );
 
 
 	/**
@@ -36,5 +36,5 @@ interface Iface
 	 * @param string $name Name of resource
 	 * @return void
 	 */
-	public function release( \Aimeos\MW\DB\Connection\Iface $connection, $name = 'db' );
+	public function release( \Aimeos\MW\DB\Connection\Iface $connection, string $name = 'db' );
 }

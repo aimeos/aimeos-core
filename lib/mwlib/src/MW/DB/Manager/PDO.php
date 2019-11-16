@@ -80,7 +80,7 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 	 * @param string $name Name of the resource in configuration
 	 * @return \Aimeos\MW\DB\Connection\Iface
 	 */
-	public function acquire( $name = 'db' )
+	public function acquire( string $name = 'db' ) : \Aimeos\MW\DB\Connection\Iface
 	{
 		try
 		{
@@ -122,7 +122,7 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 	 * @param \Aimeos\MW\DB\Connection\Iface $connection Connection object
 	 * @param string $name Name of resource
 	 */
-	public function release( \Aimeos\MW\DB\Connection\Iface $connection, $name = 'db' )
+	public function release( \Aimeos\MW\DB\Connection\Iface $connection, string $name = 'db' )
 	{
 		if( ( $connection instanceof \Aimeos\MW\DB\Connection\PDO ) === false ) {
 			throw new \Aimeos\MW\DB\Exception( 'Connection object isn\'t of type \PDO' );
@@ -143,7 +143,7 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 	 * @param string $adapter Name of the database adapter, e.g. "mysql"
 	 * @return \Aimeos\MW\DB\Connection\Iface Database connection
 	 */
-	protected function createConnection( $name, $adapter )
+	protected function createConnection( string $name, string $adapter ) : \Aimeos\MW\DB\Connection\Iface
 	{
 		$host = $this->config->get( 'resource/' . $name . '/host' );
 		$port = $this->config->get( 'resource/' . $name . '/port' );
@@ -165,7 +165,7 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 		}
 
 		$params = array( $dsn, $user, $pass, array( \PDO::ATTR_PERSISTENT => $persist ) );
-		$stmts = $this->config->get( 'resource/' . $name . '/stmt', array() );
+		$stmts = $this->config->get( 'resource/' . $name . '/stmt', [] );
 
 		return new \Aimeos\MW\DB\Connection\PDO( $params, $stmts );
 	}

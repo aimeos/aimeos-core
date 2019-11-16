@@ -39,7 +39,7 @@ abstract class Base
 	 *
 	 * @param array $params Connection parameters
 	 */
-	public function __construct( array $params = array() )
+	public function __construct( array $params = [] )
 	{
 		$this->params = $params;
 	}
@@ -59,7 +59,7 @@ abstract class Base
 	 * @param string $data Value to escape
 	 * @return string Escaped string
 	 */
-	public function escape( $data )
+	public function escape( string $data ) : string
 	{
 		$quoted = $this->getRawObject()->quote( $data );
 
@@ -76,7 +76,7 @@ abstract class Base
 	 *
 	 * @return array Parameters to connect to the database server
 	 */
-	protected function getParameters()
+	protected function getParameters() : array
 	{
 		return $this->params;
 	}
@@ -85,9 +85,9 @@ abstract class Base
 	/**
 	 * Checks if a transaction is currently running
 	 *
-	 * @return boolean True if transaction is currently running, false if not
+	 * @return bool True if transaction is currently running, false if not
 	 */
-	public function inTransaction()
+	public function inTransaction() : bool
 	{
 		return true; // safe default
 	}

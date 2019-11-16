@@ -44,7 +44,7 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function connect()
+	public function connect() : \Aimeos\MW\DB\Connection\Iface
 	{
 		if( $this->connection && $this->connection->ping() ) {
 			return $this;
@@ -78,11 +78,11 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 * Creates a DBAL database statement
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
-	 * @param integer $type Simple or prepared statement type constant from abstract class
-	 * @return \Aimeos\MW\DB\Statement\Iface \PDO statement object
+	 * @param int $type Simple or prepared statement type constant from abstract class
+	 * @return \Aimeos\MW\DB\Statement\Iface DBAL statement object
 	 * @throws \Aimeos\MW\DB\Exception if type is invalid or the DBAL object throws an exception
 	 */
-	public function create( $sql, $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE )
+	public function create( string $sql, int $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE ) : \Aimeos\MW\DB\Statement\Iface
 	{
 		try
 		{
@@ -117,9 +117,9 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	/**
 	 * Checks if a transaction is currently running
 	 *
-	 * @return boolean True if transaction is currently running, false if not
+	 * @return bool True if transaction is currently running, false if not
 	 */
-	public function inTransaction()
+	public function inTransaction() : bool
 	{
 		return $this->connection->getWrappedConnection()->inTransaction();
 	}
@@ -133,7 +133,7 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function begin()
+	public function begin() : Iface
 	{
 		if( $this->txnumber === 0 )
 		{
@@ -152,7 +152,7 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function commit()
+	public function commit() : Iface
 	{
 		if( $this->txnumber === 1 )
 		{
@@ -171,7 +171,7 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function rollback()
+	public function rollback() : Iface
 	{
 		if( $this->txnumber === 1 )
 		{

@@ -72,7 +72,7 @@ abstract class Base
 	 * @param string[] $binds List of values for the markers
 	 * @return string SQL statement
 	 */
-	protected function buildSQL( array $parts, array $binds )
+	protected function buildSQL( array $parts, array $binds ) : string
 	{
 		$i = 1; $stmt = '';
 
@@ -94,7 +94,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection object
 	 */
-	protected function getConnection()
+	protected function getConnection() : \Aimeos\MW\DB\Connection\Iface
 	{
 		return $this->conn;
 	}
@@ -108,7 +108,7 @@ abstract class Base
 	 * @return integer PDO parameter type constant
 	 * @throws \Aimeos\MW\DB\Exception If the type is unknown
 	 */
-	protected function getPdoType( $type, $value )
+	protected function getPdoType( int $type, $value ) : int
 	{
 		switch( $type )
 		{
@@ -143,7 +143,7 @@ abstract class Base
 	 * @return array List of SQL parts split at the markers
 	 * @throws \Aimeos\MW\DB\Exception If the SQL statement is invalid
 	 */
-	protected function getSqlParts( $sql )
+	protected function getSqlParts( string $sql ) : array
 	{
 		$result = [];
 		$parts = explode( '?', $sql );

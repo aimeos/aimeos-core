@@ -29,7 +29,7 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 	 * @param \Aimeos\MW\DB\Connection\DBAL $conn Database connection object
 	 * @param string $sql SQL statement
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\DBAL $conn, $sql )
+	public function __construct( \Aimeos\MW\DB\Connection\DBAL $conn, string $sql )
 	{
 		parent::__construct( $conn );
 		$this->sql = $sql;
@@ -39,13 +39,13 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 	/**
 	 * Binds a value to a parameter in the statement
 	 *
-	 * @param integer $position Position index of the placeholder
+	 * @param int $position Position index of the placeholder
 	 * @param mixed $value Value which should be bound to the placeholder
-	 * @param integer $type Type of given value defined in \Aimeos\MW\DB\Statement\Base as constant
+	 * @param int $type Type of given value defined in \Aimeos\MW\DB\Statement\Base as constant
 	 * @return \Aimeos\MW\DB\Statement\Iface Statement instance for method chaining
 	 * @throws \Aimeos\MW\DB\Exception If an error occured in the unterlying driver
 	 */
-	public function bind( $position, $value, $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR )
+	public function bind( int $position, $value, int $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR ) : \Aimeos\MW\DB\Statement\Iface
 	{
 		$this->binds[$position] = [$value, $type];
 		return $this;
@@ -58,7 +58,7 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 	 * @return \Aimeos\MW\DB\Result\Iface Result object
 	 * @throws \Aimeos\MW\DB\Exception If an error occured in the unterlying driver
 	 */
-	public function execute()
+	public function execute() : \Aimeos\MW\DB\Result\Iface
 	{
 		try {
 			$stmt = $this->exec();
@@ -75,7 +75,7 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 	 *
 	 * @return \Doctrine\DBAL\Driver\Statement Executed DBAL statement
 	 */
-	protected function exec()
+	protected function exec() : \Doctrine\DBAL\Driver\Statement
 	{
 		$conn = $this->getConnection();
 		$stmt = $conn->getRawObject()->getWrappedConnection()->prepare( $this->sql );

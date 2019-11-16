@@ -27,7 +27,7 @@ class None
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function connect()
+	public function connect() : Iface
 	{
 		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
 	}
@@ -39,10 +39,10 @@ class None
 	 * Throws an exception because there is no implementation available.
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
-	 * @param integer $type Simple or prepared statement type constant from abstract class
+	 * @param int $type Simple or prepared statement type constant from abstract class
 	 * @throws \Aimeos\MW\DB\Exception
 	 */
-	public function create( $sql, $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE )
+	public function create( string $sql, int $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE ) : \Aimeos\MW\DB\Statement\Iface
 	{
 		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
 	}
@@ -68,7 +68,7 @@ class None
 	 *
 	 * @throws \Aimeos\MW\DB\Exception
 	 */
-	public function begin()
+	public function begin() : Iface
 	{
 		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
 	}
@@ -81,7 +81,7 @@ class None
 	 *
 	 * @throws \Aimeos\MW\DB\Exception
 	 */
-	public function commit()
+	public function commit() : Iface
 	{
 		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
 	}
@@ -94,7 +94,7 @@ class None
 	 *
 	 * @throws \Aimeos\MW\DB\Exception
 	 */
-	public function rollback()
+	public function rollback() : Iface
 	{
 		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
 	}

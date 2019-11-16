@@ -45,7 +45,7 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function connect()
+	public function connect() : Iface
 	{
 		list( $dsn, $user, $pass, $attr ) = $this->getParameters();
 
@@ -75,11 +75,11 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 * Creates a \PDO database statement.
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
-	 * @param integer $type Simple or prepared statement type constant from abstract class
-	 * @return \Aimeos\MW\DB\Statement\Iface \PDO statement object
+	 * @param int $type Simple or prepared statement type constant from abstract class
+	 * @return \Aimeos\MW\DB\Statement\Iface PDO statement object
 	 * @throws \Aimeos\MW\DB\Exception if type is invalid or the \PDO object throws an exception
 	 */
-	public function create( $sql, $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE )
+	public function create( string $sql, int $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE ) : \Aimeos\MW\DB\Statement\Iface
 	{
 		try {
 			switch( $type )
@@ -111,9 +111,9 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	/**
 	 * Checks if a transaction is currently running
 	 *
-	 * @return boolean True if transaction is currently running, false if not
+	 * @return bool True if transaction is currently running, false if not
 	 */
-	public function inTransaction()
+	public function inTransaction() : bool
 	{
 		return $this->connection->inTransaction();
 	}
@@ -127,7 +127,7 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function begin()
+	public function begin() : Iface
 	{
 		if( $this->txnumber === 0 )
 		{
@@ -146,7 +146,7 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function commit()
+	public function commit() : Iface
 	{
 		if( $this->txnumber === 1 )
 		{
@@ -165,7 +165,7 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function rollback()
+	public function rollback() : Iface
 	{
 		if( $this->txnumber === 1 )
 		{

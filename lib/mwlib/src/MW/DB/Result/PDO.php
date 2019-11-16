@@ -13,7 +13,7 @@ namespace Aimeos\MW\DB\Result;
 
 
 /**
- * Database result set object for \PDO connections.
+ * Database result set object for PDO connections.
  *
  * @package MW
  * @subpackage DB
@@ -26,7 +26,7 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 	/**
 	 * Initializes the result object.
 	 *
-	 * @param \PDOStatement $stmt Statement object created by \PDO
+	 * @param \PDOStatement $stmt Statement object created by PDO
 	 */
 	public function __construct( \PDOStatement $stmt )
 	{
@@ -37,10 +37,10 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 	/**
 	 * Returns the number of rows affected by a INSERT, UPDATE or DELETE statement.
 	 *
-	 * @return integer Number of touched records
+	 * @return int Number of touched records
 	 * @throws \Aimeos\MW\DB\Exception if an error occured in the unterlying driver
 	 */
-	public function affectedRows()
+	public function affectedRows() : int
 	{
 		try {
 			return $this->statement->rowCount();
@@ -53,11 +53,11 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 	/**
 	 * Retrieves the next row from database result set.
 	 *
-	 * @param integer $style The data can be returned as associative or numerical array
+	 * @param int $style The data can be returned as associative or numerical array
 	 * @return array|false Numeric or associative array of columns returned by the database or false if no more rows are available
 	 * @throws \Aimeos\MW\DB\Exception if an error occured in the unterlying driver or the fetch style is unknown
 	 */
-	public function fetch( $style = \Aimeos\MW\DB\Result\Base::FETCH_ASSOC )
+	public function fetch( int $style = \Aimeos\MW\DB\Result\Base::FETCH_ASSOC )
 	{
 		try {
 			return $this->statement->fetch( $style ? \PDO::FETCH_ASSOC : \PDO::FETCH_NUM );
@@ -73,7 +73,7 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 	 * @return \Aimeos\MW\DB\Result\Iface Result instance for method chaining
 	 * @throws \Aimeos\MW\DB\Exception if an error occured in the unterlying driver
 	 */
-	public function finish()
+	public function finish() : Iface
 	{
 		try {
 			$this->statement->closeCursor();
@@ -88,9 +88,9 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 	/**
 	 * Retrieves the next database result set.
 	 *
-	 * @return boolean True if another result is available, false if not
+	 * @return bool True if another result is available, false if not
 	 */
-	public function nextResult()
+	public function nextResult() : bool
 	{
 		try {
 			return $this->statement->nextRowset();

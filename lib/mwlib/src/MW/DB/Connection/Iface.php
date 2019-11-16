@@ -25,7 +25,7 @@ interface Iface
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function connect();
+	public function connect() : Iface;
 
 
 	/**
@@ -35,7 +35,7 @@ interface Iface
 	 * @param integer $type Simple or prepared statement type
 	 * @return \Aimeos\MW\DB\Statement\Iface
 	 */
-	public function create( $sql, $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE );
+	public function create( string $sql, int $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE ) : \Aimeos\MW\DB\Statement\Iface;
 
 
 	/**
@@ -44,7 +44,7 @@ interface Iface
 	 * @param string $data Value to escape
 	 * @return string Escaped string
 	 */
-	public function escape( $data );
+	public function escape( string $data ) : string;
 
 
 	/**
@@ -58,9 +58,9 @@ interface Iface
 	/**
 	 * Checks if a transaction is currently running
 	 *
-	 * @return boolean True if transaction is currently running, false if not
+	 * @return bool True if transaction is currently running, false if not
 	 */
-	public function inTransaction();
+	public function inTransaction() : bool;
 
 
 	/**
@@ -71,7 +71,7 @@ interface Iface
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function begin();
+	public function begin() : Iface;
 
 
 	/**
@@ -79,7 +79,7 @@ interface Iface
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function commit();
+	public function commit() : Iface;
 
 
 	/**
@@ -87,5 +87,5 @@ interface Iface
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function rollback();
+	public function rollback() : Iface;
 }
