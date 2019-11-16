@@ -23,17 +23,17 @@ interface MetaIface
 	 * Returns the file size
 	 *
 	 * @param string $path Path to the file
-	 * @return integer Size in bytes
+	 * @return int Size in bytes
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function size( $path );
+	public function size( string $path ) : int;
 
 	/**
 	 * Returns the Unix time stamp for the file
 	 *
 	 * @param string $path Path to the file
-	 * @return integer Unix time stamp in seconds
+	 * @return int Unix time stamp in seconds
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function time( $path );
+	public function time( string $path ) : int;
 }

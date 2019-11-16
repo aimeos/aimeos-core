@@ -26,5 +26,5 @@ interface Iface
 	 * @return \Aimeos\MW\Filesystem\Iface File system object
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function get( $name );
+	public function get( string $name ) : \Aimeos\MW\Filesystem\Iface;
 }

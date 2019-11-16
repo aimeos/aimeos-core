@@ -30,10 +30,10 @@ interface Iface
 	 *  }
 	 *
 	 * @param string|null $path Path to the filesystem or directory
-	 * @return \Iterator|array Iterator over the entries or array with entries
+	 * @return iterable Iterator over the entries or array with entries
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function scan( $path = null );
+	public function scan( string $path = null ) : iterable;
 
 	/**
 	 * Deletes the file for the given path
@@ -42,15 +42,15 @@ interface Iface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function rm( $path );
+	public function rm( string $path ) : Iface;
 
 	/**
 	 * Tests if a file exists at the given path
 	 *
 	 * @param string $path Path to the file
-	 * @return boolean True if it exists, false if not
+	 * @return bool True if it exists, false if not
 	 */
-	public function has( $path );
+	public function has( string $path ) : bool;
 
 	/**
 	 * Returns the content of the remote file
@@ -63,7 +63,7 @@ interface Iface
 	 * @return string File content
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function read( $path );
+	public function read( string $path ) : string;
 
 	/**
 	 * Reads the content of the remote file and writes it to a local one
@@ -72,7 +72,7 @@ interface Iface
 	 * @return string Path of the local file
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function readf( $path );
+	public function readf( string $path ) : string;
 
 	/**
 	 * Returns the stream descriptor for the remote file
@@ -102,11 +102,14 @@ interface Iface
 	 * Checking if "$readhandle" is a resource is necessary to avoid errors
 	 * because some drivers will close the handle automatically!
 	 *
+	 * If you want to copy the remote file to a local file only, you can also use
+	 * the readf() method instead which implements the code listed above
+	 *
 	 * @param string $path Path to the remote file
 	 * @return resource File stream descriptor
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function reads( $path );
+	public function reads( string $path );
 
 	/**
 	 * Writes the given content to the file
@@ -119,7 +122,7 @@ interface Iface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function write( $path, $content );
+	public function write( string $path, string $content ) : Iface;
 
 	/**
 	 * Writes the content of the local file to the remote path
@@ -131,7 +134,7 @@ interface Iface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function writef( $path, $file );
+	public function writef( string $path, string $file ) : Iface;
 
 	/**
 	 * Write the content of the stream descriptor into the remote file
@@ -159,7 +162,7 @@ interface Iface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function writes( $path, $stream );
+	public function writes( string $path, $stream ) : Iface;
 
 	/**
 	 * Renames a file, moves it to a new location or both at once
@@ -169,7 +172,7 @@ interface Iface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function move( $from, $to );
+	public function move( string $from, string $to ) : Iface;
 
 	/**
 	 * Copies a file to a new location
@@ -179,5 +182,5 @@ interface Iface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function copy( $from, $to );
+	public function copy( string $from, string $to ) : Iface;
 }

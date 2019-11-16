@@ -65,7 +65,7 @@ class Standard implements Iface
 	 * @return \Aimeos\MW\Filesystem\Iface File system object
 	 * @throws \Aimeos\MW\Filesystem\Exception If an no configuration for that name is found
 	 */
-	public function get( $name )
+	public function get( string $name ) : \Aimeos\MW\Filesystem\Iface
 	{
 		if( !isset( $this->objects[$name] ) ) {
 			$this->objects[$name] = \Aimeos\MW\Filesystem\Factory::create( (array) $this->getConfig( $name ) );
@@ -82,7 +82,7 @@ class Standard implements Iface
 	 * @return array|string Configuration values
 	 * @throws \Aimeos\MW\Filesystem\Exception If an no configuration for that name is found
 	 */
-	protected function getConfig( $name )
+	protected function getConfig( string $name )
 	{
 		if( ( $conf = $this->config->get( 'resource/' . $name ) ) !== null ) {
 			return $conf;

@@ -56,10 +56,10 @@ class Standard implements Iface, DirIface, MetaIface
 	 * Tests if the given path is a directory
 	 *
 	 * @param string $path Path to the file or directory
-	 * @return boolean True if directory, false if not
+	 * @return bool True if directory, false if not
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function isdir( $path )
+	public function isdir( string $path ) : bool
 	{
 		return is_dir( $this->resolve( $path ) );
 	}
@@ -72,7 +72,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function mkdir( $path )
+	public function mkdir( string $path ) : DirIface
 	{
 		if( @mkdir( $this->resolve( $path ), 0775, true ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t create directory "%1$s"', $path ) );
@@ -89,7 +89,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function rmdir( $path )
+	public function rmdir( string $path ) : DirIface
 	{
 		if( @rmdir( $this->resolve( $path ) ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t remove directory "%1$s"', $path ) );
@@ -103,10 +103,10 @@ class Standard implements Iface, DirIface, MetaIface
 	 * Returns an iterator over the entries in the given path
 	 *
 	 * @param string|null $path Path to the filesystem or directory
-	 * @return \Iterator|array Iterator over the entries or array with entries
+	 * @return iterable Iterator over the entries or array with entries
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function scan( $path = null )
+	public function scan( string $path = null ) : iterable
 	{
 		try {
 			return new \DirectoryIterator( $this->resolve( $path ) );
@@ -120,10 +120,10 @@ class Standard implements Iface, DirIface, MetaIface
 	 * Returns the file size
 	 *
 	 * @param string $path Path to the file
-	 * @return integer Size in bytes
+	 * @return int Size in bytes
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function size( $path )
+	public function size( string $path ) : int
 	{
 		if( ( $size = @filesize( $this->resolve( $path ) ) ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t get file size for "%1$s"', $path ) );
@@ -137,10 +137,10 @@ class Standard implements Iface, DirIface, MetaIface
 	 * Returns the Unix time stamp for the file
 	 *
 	 * @param string $path Path to the file
-	 * @return integer Unix time stamp in seconds
+	 * @return int Unix time stamp in seconds
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function time( $path )
+	public function time( string $path ) : int
 	{
 		if( ( $time = @filemtime( $this->resolve( $path ) ) ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t get file time for "%1$s"', $path ) );
@@ -157,7 +157,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function rm( $path )
+	public function rm( string $path ) : Iface
 	{
 		if( @unlink( $this->resolve( $path ) ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t delete file "%1$s"', $path ) );
@@ -171,9 +171,9 @@ class Standard implements Iface, DirIface, MetaIface
 	 * Tests if a file exists at the given path
 	 *
 	 * @param string $path Path to the file
-	 * @return boolean True if it exists, false if not
+	 * @return bool True if it exists, false if not
 	 */
-	public function has( $path )
+	public function has( string $path ) : bool
 	{
 		return file_exists( $this->resolve( $path ) );
 	}
@@ -186,7 +186,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @return string File content
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function read( $path )
+	public function read( string $path ) : string
 	{
 		if( ( $content = @file_get_contents( $this->resolve( $path ) ) ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t read file "%1$s"', $path ) );
@@ -203,7 +203,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @return string Path of the local file
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function readf( $path )
+	public function readf( string $path ) : string
 	{
 		if( ( $filename = tempnam( $this->tempdir, 'ai-' ) ) === false ) {
 			throw new Exception( sprintf( 'Unable to create file in "%1$s"', $this->tempdir ) );
@@ -224,7 +224,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @return resource File stream descriptor
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function reads( $path )
+	public function reads( string $path )
 	{
 		if( ( $handle = @fopen( $this->resolve( $path ), 'r' ) ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t read file "%1$s"', $path ) );
@@ -242,7 +242,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function write( $path, $content )
+	public function write( string $path, string $content ) : Iface
 	{
 		if( !$this->isDir( dirname( $path ) ) ) {
 			$this->mkdir( dirname( $path ) );
@@ -264,7 +264,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function writef( $path, $local )
+	public function writef( string $path, string $local ) : Iface
 	{
 		if( ( $handle = @fopen( $local, 'r' ) ) === false ) {
 			throw new Exception( sprintf( 'Unable to open file "%1$s"', $local ) );
@@ -285,7 +285,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function writes( $path, $stream )
+	public function writes( string $path, $stream ) : Iface
 	{
 		if( !$this->isDir( dirname( $path ) ) ) {
 			$this->mkdir( dirname( $path ) );
@@ -312,7 +312,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function move( $from, $to )
+	public function move( string $from, string $to ) : Iface
 	{
 		if( !$this->isDir( dirname( $to ) ) ) {
 			$this->mkdir( dirname( $to ) );
@@ -334,7 +334,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function copy( $from, $to )
+	public function copy( string $from, string $to ) : Iface
 	{
 		if( !$this->isDir( dirname( $to ) ) ) {
 			$this->mkdir( dirname( $to ) );
@@ -355,7 +355,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @return string Absolute path
 	 * @throws Exception If relative path is invalid
 	 */
-	protected function resolve( $path )
+	protected function resolve( string $path = null ) : string
 	{
 		$path = trim( $path, '/' );
 

@@ -23,10 +23,10 @@ interface DirIface
 	 * Tests if the given path is a directory
 	 *
 	 * @param string $path Path to the file or directory
-	 * @return boolean True if directory, false if not
+	 * @return bool True if directory, false if not
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function isdir( $path );
+	public function isdir( string $path ) : bool;
 
 	/**
 	 * Creates a new directory for the given path
@@ -35,7 +35,7 @@ interface DirIface
 	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function mkdir( $path );
+	public function mkdir( string $path ) : DirIface;
 
 	/**
 	 * Deletes the directory for the given path
@@ -44,5 +44,5 @@ interface DirIface
 	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function rmdir( $path );
+	public function rmdir( string $path ) : DirIface;
 }
