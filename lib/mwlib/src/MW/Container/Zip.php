@@ -39,7 +39,7 @@ class Zip
 	 * @param string $format Format of the content objects inside the container
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public function __construct( $resourcepath, $format, array $options = [] )
+	public function __construct( string $resourcepath, string $format, array $options = [] )
 	{
 		$this->classname = '\Aimeos\MW\Container\Content\\' . $format;
 
@@ -71,7 +71,7 @@ class Zip
 	 * @param string $name Name of the content
 	 * @return \Aimeos\MW\Container\Content\Iface New content object
 	 */
-	public function create( $name )
+	public function create( string $name ) : \Aimeos\MW\Container\Content\Iface
 	{
 		$tmpfile = tempnam( $this->getOption( 'tempdir', sys_get_temp_dir() ), '' );
 
@@ -85,7 +85,7 @@ class Zip
 	 * @param \Aimeos\MW\Container\Content\Iface $content Content object
 	 * @return \Aimeos\MW\Container\Iface Container instance for method chaining
 	 */
-	public function add( \Aimeos\MW\Container\Content\Iface $content )
+	public function add( \Aimeos\MW\Container\Content\Iface $content ) : Iface
 	{
 		$this->content[] = $content;
 		return $this;
@@ -98,7 +98,7 @@ class Zip
 	 * @param string $name Name of the content object that should be returned
 	 * @return \Aimeos\MW\Container\Content\Iface Content object
 	 */
-	public function get( $name )
+	public function get( string $name ) : \Aimeos\MW\Container\Content\Iface
 	{
 		if( $this->container->locateName( $name ) === false )
 		{
@@ -116,7 +116,7 @@ class Zip
 	 *
 	 * @return \Aimeos\MW\Container\Iface Container instance for method chaining
 	 */
-	public function close()
+	public function close() : Iface
 	{
 		foreach( $this->content as $content )
 		{

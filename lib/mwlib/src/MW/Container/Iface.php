@@ -28,7 +28,7 @@ interface Iface extends \Iterator
 	 * @param array $options Associative list of key/value pairs for configuration
 	 * @return null
 	 */
-	public function __construct( $resourcepath, $format, array $options = [] );
+	public function __construct( string $resourcepath, string $format, array $options = [] );
 
 	/**
 	 * Adds content data to the container.
@@ -36,14 +36,14 @@ interface Iface extends \Iterator
 	 * @param \Aimeos\MW\Container\Content\Iface $content Content object
 	 * @return \Aimeos\MW\Container\Iface Container instance for method chaining
 	 */
-	public function add( \Aimeos\MW\Container\Content\Iface $content );
+	public function add( \Aimeos\MW\Container\Content\Iface $content ) : Iface;
 
 	/**
 	 * Cleans up and saves the container.
 	 *
 	 * @return \Aimeos\MW\Container\Iface Container instance for method chaining
 	 */
-	public function close();
+	public function close() : Iface;
 
 	/**
 	 * Creates a new content object.
@@ -51,7 +51,7 @@ interface Iface extends \Iterator
 	 * @param string $name Name of the content
 	 * @return \Aimeos\MW\Container\Content\Iface New content object
 	 */
-	public function create( $name );
+	public function create( string $name ) : \Aimeos\MW\Container\Content\Iface;
 
 	/**
 	 * Returns the element specified by its name.
@@ -59,5 +59,5 @@ interface Iface extends \Iterator
 	 * @param string $name Name of the content object that should be returned
 	 * @return \Aimeos\MW\Container\Content\Iface Content object
 	 */
-	public function get( $name );
+	public function get( string $name ) : \Aimeos\MW\Container\Content\Iface;
 }

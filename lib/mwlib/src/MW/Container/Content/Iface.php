@@ -26,25 +26,25 @@ interface Iface extends \Iterator
 	 * @param mixed $data Content data
 	 * @return \Aimeos\MW\Container\Content\Iface Container content instance for method chaining
 	 */
-	public function add( $data );
+	public function add( $data ) : Iface;
 
 	/**
 	 * Cleans up and saves the content.
 	 * @return \Aimeos\MW\Container\Content\Iface Container content instance for method chaining
 	 */
-	public function close();
+	public function close() : Iface;
 
 	/**
 	 * Returns the resource of content object.
 	 *
-	 * @return mixed Content resource
+	 * @return string Content resource
 	 */
-	public function getResource();
+	public function getResource() : string;
 
 	/**
 	 * Returns the name of the content object.
 	 *
 	 * @return string Name of the content object
 	 */
-	public function getName();
+	public function getName() : string;
 }

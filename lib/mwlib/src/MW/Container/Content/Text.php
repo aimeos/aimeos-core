@@ -39,7 +39,7 @@ class Text
 	 * @param string $name Name of the file
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public function __construct( $resource, $name, array $options = [] )
+	public function __construct( string $resource, string $name, array $options = [] )
 	{
 		if( !is_file( $resource ) && substr( $resource, -4 ) !== '.txt' ) {
 			$resource .= '.txt';
@@ -69,7 +69,7 @@ class Text
 	 * @return \Aimeos\MW\Container\Content\Iface Container content instance for method chaining
 	 * @throws \Aimeos\MW\Container\Exception If the file handle couldn't be flushed or closed
 	 */
-	public function close()
+	public function close() : Iface
 	{
 		if( fflush( $this->fh ) === false ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to flush file "%1$s"', $this->getResource() ) );
@@ -89,7 +89,7 @@ class Text
 	 * @param string $data Data to add
 	 * @return \Aimeos\MW\Container\Content\Iface Container content instance for method chaining
 	 */
-	public function add( $data )
+	public function add( $data ) : Iface
 	{
 		if( fwrite( $this->fh, $data . $this->lineend ) === false ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );

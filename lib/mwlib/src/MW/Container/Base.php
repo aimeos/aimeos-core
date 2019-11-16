@@ -30,7 +30,7 @@ abstract class Base
 	 * @param string $name File path and name of the resource
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public function __construct( $name, array $options )
+	public function __construct( string $name, array $options )
 	{
 		$this->options = $options;
 		$this->name = $name;
@@ -42,7 +42,7 @@ abstract class Base
 	 *
 	 * @return string Path to the actual file
 	 */
-	public function getName()
+	public function getName() : string
 	{
 		return $this->name;
 	}
@@ -53,7 +53,7 @@ abstract class Base
 	 *
 	 * @return array Associative list of option keys and values
 	 */
-	protected function getOptions()
+	protected function getOptions() : array
 	{
 		return $this->options;
 	}
@@ -66,7 +66,7 @@ abstract class Base
 	 * @param mixed $default Default value if option is not configured
 	 * @return string Option value
 	 */
-	protected function getOption( $name, $default = null )
+	protected function getOption( string $name, $default = null )
 	{
 		return ( isset( $this->options[$name] ) ? $this->options[$name] : $default );
 	}

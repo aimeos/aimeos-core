@@ -44,7 +44,7 @@ class CSV
 	 * @param string $name Name of the CSV file
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public function __construct( $resource, $name, array $options = [] )
+	public function __construct( string $resource, string $name, array $options = [] )
 	{
 		ini_set( 'auto_detect_line_endings', true );
 
@@ -73,32 +73,12 @@ class CSV
 
 
 	/**
-	 * Closes the CSV file so it's written to disk.
-	 *
-	 * @throws \Aimeos\MW\Container\Exception If the file handle couldn't be flushed or closed
-	 * @return \Aimeos\MW\Container\Content\Iface Container content instance for method chaining
-	 */
-	public function close()
-	{
-		if( fflush( $this->fh ) === false ) {
-			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to flush file "%1$s"', $this->getResource() ) );
-		}
-
-		if( fclose( $this->fh ) === false ) {
-			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Adds row to the content object.
 	 *
 	 * @param string[] $data Data to add
 	 * @return \Aimeos\MW\Container\Content\Iface Container content instance for method chaining
 	 */
-	public function add( $data )
+	public function add( $data ) : Iface
 	{
 		$list = [];
 		$data = (array) $data;
@@ -115,6 +95,26 @@ class CSV
 
 		if( fwrite( $this->fh, implode( $this->separator, $list ) . $this->lineend ) === false ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Closes the CSV file so it's written to disk.
+	 *
+	 * @throws \Aimeos\MW\Container\Exception If the file handle couldn't be flushed or closed
+	 * @return \Aimeos\MW\Container\Content\Iface Container content instance for method chaining
+	 */
+	public function close() : Iface
+	{
+		if( fflush( $this->fh ) === false ) {
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to flush file "%1$s"', $this->getResource() ) );
+		}
+
+		if( fclose( $this->fh ) === false ) {
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
 		}
 
 		return $this;

@@ -28,11 +28,11 @@ abstract class Base
 	/**
 	 * Initializes the CSV content object.
 	 *
-	 * @param mixed $resource Path to the actual file
+	 * @param string $resource Path to the actual file
 	 * @param string $name Name of the CSV file
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public function __construct( $resource, $name, array $options )
+	public function __construct( string $resource, string $name, array $options )
 	{
 		$this->resource = $resource;
 		$this->options = $options;
@@ -45,7 +45,7 @@ abstract class Base
 	 *
 	 * @return string Path to the actual file
 	 */
-	public function getResource()
+	public function getResource() : string
 	{
 		return $this->resource;
 	}
@@ -56,7 +56,7 @@ abstract class Base
 	 *
 	 * @return string Name of the content object
 	 */
-	public function getName()
+	public function getName() : string
 	{
 		return $this->name;
 	}
@@ -69,7 +69,7 @@ abstract class Base
 	 * @param mixed $default Default value if option is not configured
 	 * @return mixed Option value
 	 */
-	protected function getOption( $name, $default = null )
+	protected function getOption( string $name, $default = null )
 	{
 		return ( isset( $this->options[$name] ) ? $this->options[$name] : $default );
 	}
