@@ -32,7 +32,7 @@ class APC
 	 * @param \Aimeos\MW\Config\Iface $object Config object or decorator
 	 * @param string $prefix Prefix for keys to distinguish several instances
 	 */
-	public function __construct( \Aimeos\MW\Config\Iface $object, $prefix = '' )
+	public function __construct( \Aimeos\MW\Config\Iface $object, string $prefix = '' )
 	{
 		parent::__construct( $object );
 
@@ -51,7 +51,7 @@ class APC
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key
 	 */
-	public function get( $path, $default = null )
+	public function get( string $path, $default = null )
 	{
 		if( $this->enable === false ) {
 			return parent::get( $path, $default );
@@ -95,7 +95,7 @@ class APC
 	 * @param string $value Value that should be associated with the given path
 	 * @return \Aimeos\MW\Config\Iface Config instance for method chaining
 	 */
-	public function set( $path, $value )
+	public function set( string $path, $value ) : \Aimeos\MW\Config\Iface
 	{
 		if( $this->enable === false ) {
 			return parent::set( $path, $value );

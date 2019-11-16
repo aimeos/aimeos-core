@@ -50,7 +50,7 @@ abstract class Base implements \Aimeos\MW\Config\Decorator\Iface
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key
 	 */
-	public function get( $path, $default = null )
+	public function get( string $path, $default = null )
 	{
 		return $this->object->get( $path, $default );
 	}
@@ -62,9 +62,9 @@ abstract class Base implements \Aimeos\MW\Config\Decorator\Iface
 	 * @param string $path Path to the requested value like tree/node/classname
 	 * @param mixed $value Value that should be associated with the given path
 	 */
-	public function set( $path, $value )
+	public function set( string $path, $value ) : \Aimeos\MW\Config\Iface
 	{
-		$this->object->set( $path, $value );
+		return $this->object->set( $path, $value );
 	}
 
 
@@ -73,7 +73,7 @@ abstract class Base implements \Aimeos\MW\Config\Decorator\Iface
 	 *
 	 * @return \Aimeos\MW\Config\Iface Config object
 	 */
-	protected function getObject()
+	protected function getObject() : \Aimeos\MW\Config\Iface
 	{
 		return $this->object;
 	}

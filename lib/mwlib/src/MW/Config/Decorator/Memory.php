@@ -33,7 +33,7 @@ class Memory
 	 * @param \Aimeos\MW\Config\Iface $object Config object or decorator
 	 * @param array $config Pre-cached non-shared configuration
 	 */
-	public function __construct( \Aimeos\MW\Config\Iface $object, $config = [] )
+	public function __construct( \Aimeos\MW\Config\Iface $object, array $config = [] )
 	{
 		parent::__construct( $object );
 
@@ -48,7 +48,7 @@ class Memory
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key
 	 */
-	public function get( $name, $default = null )
+	public function get( string $name, $default = null )
 	{
 		$name = trim( $name, '/' );
 
@@ -82,7 +82,7 @@ class Memory
 	 * @param string $value Value that should be associated with the given path
 	 * @return \Aimeos\MW\Config\Iface Config instance for method chaining
 	 */
-	public function set( $name, $value )
+	public function set( string $name, $value ) : \Aimeos\MW\Config\Iface
 	{
 		$name = trim( $name, '/' );
 
@@ -111,7 +111,7 @@ class Memory
 	 * @param array $parts Configuration path parts to look for inside the array
 	 * @return mixed Found configuration value or null if not available
 	 */
-	protected function getValueFromArray( $config, $parts )
+	protected function getValueFromArray( array $config, array $parts )
 	{
 		if( ( $key = array_shift( $parts ) ) !== null && isset( $config[$key] ) )
 		{

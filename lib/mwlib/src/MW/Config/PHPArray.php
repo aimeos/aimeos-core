@@ -31,7 +31,7 @@ class PHPArray
 	 * @param array $config Configuration array
 	 * @param string|array $paths Filesystem path or list of paths to the configuration files
 	 */
-	public function __construct( $config = [], $paths = [] )
+	public function __construct( array $config = [], $paths = [] )
 	{
 		$this->config = $config;
 
@@ -48,7 +48,7 @@ class PHPArray
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key
 	 */
-	public function get( $name, $default = null )
+	public function get( string $name, $default = null )
 	{
 		$parts = explode( '/', trim( $name, '/' ) );
 
@@ -67,7 +67,7 @@ class PHPArray
 	 * @param mixed $value Value that should be associated with the given path
 	 * @return \Aimeos\MW\Config\Iface Config instance for method chaining
 	 */
-	public function set( $name, $value )
+	public function set( string $name, $value ) : Iface
 	{
 		$this->config = $this->setPart( $this->config, explode( '/', trim( $name, '/' ) ), $value );
 		return $this;
@@ -81,7 +81,7 @@ class PHPArray
 	 * @param string[] $parts Configuration path parts to look for inside the array
 	 * @return mixed Found value or null if no value is available
 	 */
-	protected function getPart( $config, $parts )
+	protected function getPart( array $config, array $parts )
 	{
 		if( ( $current = array_shift( $parts ) ) !== null && isset( $config[$current] ) )
 		{
@@ -99,11 +99,11 @@ class PHPArray
 	/**
 	 * Sets a configuration value in the array.
 	 *
-	 * @param array $config Configuration sub-part
+	 * @param mixed $config Configuration sub-part
 	 * @param string[] $path Configuration path parts
 	 * @param mixed $value The new value
 	 */
-	protected function setPart( $config, $path, $value )
+	protected function setPart( $config, array $path, $value )
 	{
 		if( ( $current = array_shift( $path ) ) !== null )
 		{
@@ -125,10 +125,9 @@ class PHPArray
 	 *
 	 * @param array $config Configuration array which should contain the loaded configuration
 	 * @param string $path Path to the configuration directory
-	 * @param string[] $parts List of config name parts to look for
 	 * @return array Merged configuration
 	 */
-	protected function load( array $config, $path )
+	protected function load( array $config, string $path ) : array
 	{
 		if( is_dir( $path ) )
 		{

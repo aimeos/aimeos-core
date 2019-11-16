@@ -31,7 +31,7 @@ class Documentor
 	 * @param \Aimeos\MW\Config\Iface $object Config object or decorator
 	 * @param string $filename File name the collected configuration is written to
 	 */
-	public function __construct( \Aimeos\MW\Config\Iface $object, $filename = 'confdoc.ser' )
+	public function __construct( \Aimeos\MW\Config\Iface $object, string $filename = 'confdoc.ser' )
 	{
 		parent::__construct( $object );
 
@@ -47,7 +47,7 @@ class Documentor
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key
 	 */
-	public function get( $name, $default = null )
+	public function get( string $name, $default = null )
 	{
 		$value = parent::get( $name, $default );
 
@@ -76,7 +76,7 @@ class ConfigFile
 	 * @param string $filename
 	 * @throws \Aimeos\MW\Config\Exception If file could not be opened or created
 	 */
-	public function __construct( $filename )
+	public function __construct( string $filename )
 	{
 		if( ( $this->file = fopen( $filename, 'w' ) ) === false ) {
 			throw new \Aimeos\MW\Config\Exception( sprintf( 'Unable to open file "%1$s"', $filename ) );
@@ -104,10 +104,10 @@ class ConfigFile
 	 * Stores the configuration key, the actual and the default value
 	 *
 	 * @param string $name Configuration key
-	 * @param string $value Configuration value
-	 * @param string $default Default value
+	 * @param mixed $value Configuration value
+	 * @param mixed $default Default value
 	 */
-	public function set( $name, $value, $default )
+	public function set( string $name, $value, $default )
 	{
 		$this->config[$name]['value'] = $value;
 		$this->config[$name]['default'] = $default;

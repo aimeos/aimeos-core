@@ -29,7 +29,7 @@ abstract class Base implements \Aimeos\MW\Config\Iface
 	 * @param string $file Path and file name of a config file
 	 * @return array Value of the requested config file
 	 **/
-	protected function includeFile( $file )
+	protected function includeFile( string $file ) : array
 	{
 		if( !isset( $this->includeCache[$file] ) ) {
 			$this->includeCache[$file] = include $file;

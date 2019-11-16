@@ -46,8 +46,9 @@ class Protect
 	 * @param string $name Path to the requested value like tree/node/classname
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key
+	 * @throws \Aimeos\MW\Config\Exception If retrieving configuration isn't allowed
 	 */
-	public function get( $name, $default = null )
+	public function get( string $name, $default = null )
 	{
 		foreach( $this->prefixes as $prefix => $len )
 		{
@@ -66,8 +67,9 @@ class Protect
 	 * @param string $name Path to the requested value like tree/node/classname
 	 * @param mixed $value Value that should be associated with the given path
 	 * @return \Aimeos\MW\Config\Iface Config instance for method chaining
+	 * @throws \Aimeos\MW\Config\Exception If setting configuration isn't allowed
 	 */
-	public function set( $name, $value )
+	public function set( string $name, $value ) : \Aimeos\MW\Config\Iface
 	{
 		foreach( $this->prefixes as $prefix => $len )
 		{
