@@ -307,13 +307,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testMoveException()
-	{
-		$this->setExpectedException( \Aimeos\MW\Filesystem\Exception::class );
-		$this->object->move( 'moveinvalid', null );
-	}
-
-
 	public function testCopy()
 	{
 		touch( $this->basedir . 'file12' );
@@ -329,12 +322,5 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MW\Filesystem\Iface::class, $object );
 		$this->assertTrue( $result );
 		$this->assertTrue( $result2 );
-	}
-
-
-	public function testCopyException()
-	{
-		$this->setExpectedException( \Aimeos\MW\Filesystem\Exception::class );
-		$this->object->copy( 'copyinvalid', null );
 	}
 }
