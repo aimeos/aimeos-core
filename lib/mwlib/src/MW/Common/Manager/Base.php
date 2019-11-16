@@ -27,7 +27,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	 * @param string[] $required List of prefixes of required search conditions
 	 * @return string[] Sorted list of criteria keys
 	 */
-	protected function getCriteriaKeyList( \Aimeos\MW\Criteria\Iface $criteria, array $required )
+	protected function getCriteriaKeyList( \Aimeos\MW\Criteria\Iface $criteria, array $required ) : array
 	{
 		$keys = array_merge( $required, $this->getCriteriaKeys( $required, $criteria->getConditions() ) );
 
@@ -47,7 +47,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	 *
 	 * @return string Separator string (default: ".")
 	 */
-	protected function getKeySeparator()
+	protected function getKeySeparator() : string
 	{
 		return '.';
 	}
@@ -59,7 +59,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes List of search attribute items
 	 * @return array Associative array of attribute code and helper function
 	 */
-	protected function getSearchFunctions( array $attributes )
+	protected function getSearchFunctions( array $attributes ) : array
 	{
 		$list = [];
 		$iface = \Aimeos\MW\Criteria\Attribute\Iface::class;
@@ -85,7 +85,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes List of search attribute items
 	 * @return array Associative array of attribute code and internal attribute code
 	 */
-	protected function getSearchTranslations( array $attributes )
+	protected function getSearchTranslations( array $attributes ) : array
 	{
 		$translations = [];
 		$iface = \Aimeos\MW\Criteria\Attribute\Iface::class;
@@ -111,7 +111,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes List of search attribute items
 	 * @return array Associative array of attribute code and internal attribute type
 	 */
-	protected function getSearchTypes( array $attributes )
+	protected function getSearchTypes( array $attributes ) : array
 	{
 		$types = [];
 		$iface = \Aimeos\MW\Criteria\Attribute\Iface::class;
@@ -138,7 +138,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	 * @param string $string String containing parts separated by dots
 	 * @return array List of resulting strings
 	 */
-	private function cutNameTail( array $prefix, $string )
+	private function cutNameTail( array $prefix, string $string ) : array
 	{
 		$result = [];
 		$noprefix = true;
@@ -184,7 +184,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	 * @param \Aimeos\MW\Criteria\Expression\Iface|null Criteria object
 	 * @return array List of shortend criteria names
 	 */
-	private function getCriteriaKeys( array $prefix, \Aimeos\MW\Criteria\Expression\Iface $expr = null )
+	private function getCriteriaKeys( array $prefix, \Aimeos\MW\Criteria\Expression\Iface $expr = null ) : array
 	{
 		if( $expr === null ) { return []; }
 
@@ -213,7 +213,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	 * @param \Aimeos\MW\Criteria\Expression\Iface Criteria object
 	 * @return array List of criteria names
 	 */
-	private function getCriteriaNames( \Aimeos\MW\Criteria\Expression\Iface $expr )
+	private function getCriteriaNames( \Aimeos\MW\Criteria\Expression\Iface $expr ) : array
 	{
 		if( $expr instanceof \Aimeos\MW\Criteria\Expression\Compare\Iface ) {
 			return array( $expr->getName() );

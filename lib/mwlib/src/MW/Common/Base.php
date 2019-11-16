@@ -28,7 +28,7 @@ abstract class Base
 	 * @return mixed Tested class instance
 	 * @throws \Aimeos\MW\Common\Exception if the object doesn't extend the class or implements the interface
 	 */
-	public static function checkClass( $name, $object )
+	public static function checkClass( string $name, $object )
 	{
 		if( ( $object instanceof $name ) === false ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Object doesn\'t implement "%1$s"', $name ) );
@@ -43,10 +43,10 @@ abstract class Base
 	 *
 	 * @param string $name Name of the class or interface
 	 * @param array $list List of objects to test
-	 * @return mixed Tested list of class instances
+	 * @return array Tested list of class instances
 	 * @throws \Aimeos\MW\Common\Exception if an object of the list doesn't match the type
 	 */
-	public static function checkClassList( $name, array $list )
+	public static function checkClassList( string $name, array $list ) : array
 	{
 		foreach( $list as $object )
 		{
@@ -65,7 +65,7 @@ abstract class Base
 	 * @param string $string String to sanitize
 	 * @return string Sanitized string
 	 */
-	public static function sanitize( $string )
+	public static function sanitize( string $string ) : string
 	{
 		$regex = '/(\s|\&|\%|\?|\#|\=|\{|\}|\||\\\\|\~|\[|\]|\`|\^|\_|\/|\,)+/';
 		return trim( preg_replace( $regex, '_', $string ), '_' );
