@@ -41,10 +41,10 @@ interface Iface
 	/**
 	 * Escapes the value if necessary for direct inclusion in SQL statement.
 	 *
-	 * @param string $data Value to escape
+	 * @param string|null $data Value to escape or null for no value
 	 * @return string Escaped string
 	 */
-	public function escape( string $data ) : string;
+	public function escape( string $data = null ) : string;
 
 
 	/**
