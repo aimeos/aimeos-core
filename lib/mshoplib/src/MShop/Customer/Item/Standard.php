@@ -237,8 +237,10 @@ class Standard extends Base implements Iface
 	 */
 	public function setGroups( array $ids )
 	{
-		if( $ids != $this->getGroups() ) {
-			return $this->set( 'customer.groups', $ids );
+		$list = $this->getGroups();
+
+		if( array_diff( $ids, $list ) !== [] || array_diff( $list, $ids ) !== [] ) {
+			$this->groups = $ids;
 		}
 
 		return $this;
