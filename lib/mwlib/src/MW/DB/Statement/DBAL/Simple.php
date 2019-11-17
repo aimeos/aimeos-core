@@ -118,9 +118,9 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	/**
 	 * Binds the parameters and executes the SQL statment
 	 *
-	 * @return \Doctrine\DBAL\Driver\Statement Executed DBAL statement
+	 * @return \PDOStatement Executed DBAL statement
 	 */
-	protected function exec() : \Doctrine\DBAL\Driver\Statement
+	protected function exec() : \PDOStatement
 	{
 		if( $this->sql === null ) {
 			$this->sql = $this->buildSQL( $this->parts, $this->binds );
