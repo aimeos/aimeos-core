@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Customer\Item;
  */
 class Standard extends Base implements Iface
 {
-	private $values;
+	private $groups;
 	private $helper;
 	private $salt;
 
@@ -43,7 +43,6 @@ class Standard extends Base implements Iface
 	{
 		parent::__construct( $address, $values, $listItems, $refItems, $addrItems, $propItems );
 
-		$this->values = $values;
 		$this->helper = $helper;
 		$this->salt = $salt;
 	}
@@ -214,14 +213,19 @@ class Standard extends Base implements Iface
 	 */
 	public function getGroups()
 	{
-		if( ( $list = (array) $this->get( 'customer.groups', [] ) ) === [] )
+		if( !isset( $this->groups ) )
 		{
-			foreach( $this->getListItems( 'customer/group', 'default' ) as $listItem ) {
-				$list[] = $listItem->getRefId();
+			if( ( $list = (array) $this->get( 'customer.groups', [] ) ) === [] )
+			{
+				foreach( $this->getListItems( 'customer/group', 'default' ) as $listItem ) {
+					$list[] = $listItem->getRefId();
+				}
 			}
+
+			$this->groups = $list;
 		}
 
-		return $list;
+		return $this->groups;
 	}
 
 
@@ -233,7 +237,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setGroups( array $ids )
 	{
-		if( $ids !== $this->getGroups() ) {
+		if( $ids != $this->getGroups() ) {
 			return $this->set( 'customer.groups', $ids );
 		}
 
