@@ -22,9 +22,9 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	/**
 	 * Returns the config value.
 	 *
-	 * @param string|null $name Name of the config key or null for all parameters
+	 * @param string $name Name of the config key
 	 * @param mixed $default Default value if config key is not available
 	 * @return mixed Config value or associative list of key/value pairs
 	 */
-	public function transform( string $name = null, $default = null );
+	public function transform( string $name, $default = null );
 }
