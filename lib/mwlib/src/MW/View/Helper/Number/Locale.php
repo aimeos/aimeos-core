@@ -29,17 +29,17 @@ class Locale
 	 * Initializes the Number view helper.
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
-	 * @param string $locale Language locale like "en" or "en_UK"
+	 * @param string|null $locale Language locale like "en" or "en_UK" or null for default
 	 * @param string|null $pattern ICU pattern to format the number or null for default formatting
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, string $locale = 'en', string $pattern = null )
+	public function __construct( \Aimeos\MW\View\Iface $view, string $locale = null, string $pattern = null )
 	{
 		parent::__construct( $view );
 
 		if( $pattern !== null ) {
-			$this->formatter = new \NumberFormatter( $locale, \NumberFormatter::PATTERN_DECIMAL, $pattern );
+			$this->formatter = new \NumberFormatter( $locale ?: 'en', \NumberFormatter::PATTERN_DECIMAL, $pattern );
 		} else {
-			$this->formatter = new \NumberFormatter( $locale, \NumberFormatter::DECIMAL );
+			$this->formatter = new \NumberFormatter( $locale ?: 'en', \NumberFormatter::DECIMAL );
 		}
 	}
 
