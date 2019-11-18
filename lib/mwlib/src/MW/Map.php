@@ -231,6 +231,27 @@ class Map implements MapIface
 
 
 	/**
+	 * Tests if the passed items are equal to the items in the map.
+	 *
+	 * @inheritDoc
+	 *
+	 * @param iterable $items List of items to test against
+	 * @param bool $assoc True to compare keys too, false to compare only values
+	 * @return bool True if both are equal, false if not
+	 */
+	public function equals( iterable $items, $assoc = false ) : bool
+	{
+		$items = $this->getArray( $items );
+
+		if( $assoc ) {
+			return array_diff_assoc( $this->items, $items ) === [] && array_diff_assoc( $items, $this->items ) === [];
+		}
+
+		return array_diff( $this->items, $items ) === [] && array_diff( $items, $this->items ) === [];
+	}
+
+
+	/**
 	 * Run a filter over each of the items.
 	 *
 	 * @param  callable|null $callback Function with (item) parameter and returns true/false

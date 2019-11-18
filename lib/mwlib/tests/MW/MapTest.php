@@ -38,6 +38,62 @@ class MapTest extends \PHPUnit\Framework\TestCase
 		$this->assertCount( 2, $cp );
 	}
 
+	public function testEquals()
+	{
+		$map = new Map( ['foo' => 'one', 'bar' => 'two'] );
+
+		$this->assertTrue( $map->equals( ['foo' => 'one', 'bar' => 'two'] ) );
+		$this->assertTrue( $map->equals( ['bar' => 'two', 'foo' => 'one'] ) );
+	}
+
+	public function testEqualsTypes()
+	{
+		$map = new Map( ['foo' => 1, 'bar' => '2'] );
+
+		$this->assertTrue( $map->equals( ['foo' => '1', 'bar' => 2] ) );
+		$this->assertTrue( $map->equals( ['bar' => 2, 'foo' => '1'] ) );
+	}
+
+	public function testEqualsNoKeys()
+	{
+		$map = new Map( ['foo' => 'one', 'bar' => 'two'] );
+
+		$this->assertTrue( $map->equals( [0 => 'one', 1 => 'two'] ) );
+		$this->assertTrue( $map->equals( [0 => 'two', 1 => 'one'] ) );
+	}
+
+	public function testEqualsKeys()
+	{
+		$map = new Map( ['foo' => 1, 'bar' => '2'] );
+
+		$this->assertTrue( $map->equals( ['foo' => '1', 'bar' => 2], true ) );
+		$this->assertFalse( $map->equals( ['0' => 1, '1' => '2'], true ) );
+	}
+
+	public function testEqualsLess()
+	{
+		$map = new Map( ['foo' => 'one', 'bar' => 'two'] );
+		$this->assertFalse( $map->equals( ['foo' => 'one'] ) );
+	}
+
+	public function testEqualsLessKeys()
+	{
+		$map = new Map( ['foo' => 'one', 'bar' => 'two'] );
+		$this->assertFalse( $map->equals( ['foo' => 'one'], true ) );
+	}
+
+	public function testEqualsMore()
+	{
+		$map = new Map( ['foo' => 'one', 'bar' => 'two'] );
+		$this->assertFalse( $map->equals( ['foo' => 'one', 'bar' => 'two', 'baz' => 'three'] ) );
+	}
+
+	public function testEqualsMoreKeys()
+	{
+		$map = new Map( ['foo' => 'one', 'bar' => 'two'] );
+		$this->assertFalse( $map->equals( ['foo' => 'one', 'bar' => 'two', 'baz' => 'three'], true ) );
+	}
+
 	public function testFirstReturnsFirstItemInMap()
 	{
 		$c = new Map( ['foo', 'bar'] );
