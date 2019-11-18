@@ -39,7 +39,7 @@ interface MapIface extends \ArrayAccess, \Countable, \IteratorAggregate
 	 *
 	 * @return MapIface Same map for fluid interface
 	 */
-	public function clear();
+	public function clear() : MapIface;
 
 	/**
 	 * Push all of the given items onto the map.
@@ -64,26 +64,28 @@ interface MapIface extends \ArrayAccess, \Countable, \IteratorAggregate
 	public function count() : int;
 
 	/**
-	 * Get the items in the map whose keys are not present in the given items.
+	 * Returns the keys/values in the map whose values are not present in the given items.
 	 *
 	 * @param iterable $items List of items
-	 * @param  callable|null $callback Function with (keyA, keyB) parameters and returns -1 (<), 0 (=) and 1 (>)
+	 * @param  callable|null $callback Function with (valueA, valueB) parameters and returns -1 (<), 0 (=) and 1 (>)
 	 * @return MapIface New map
 	 */
 	public function diff( iterable $items, callable $callback = null ) : MapIface;
 
 	/**
-	 * Get the items in the collection whose keys and values are not present in the given items.
+	 * Returns the keys/values in the map whose keys and values are not present in the given items.
 	 *
 	 * @param iterable $items List of items
+	 * @param  callable|null $callback Function with (valueA, valueB) parameters and returns -1 (<), 0 (=) and 1 (>)
 	 * @return MapIface New map
 	 */
 	public function diffAssoc( iterable $items, callable $callback = null ) : MapIface;
 
 	/**
-	 * Get the items in the collection whose keys are not present in the given items.
+	 * Returns the keys/values in the map whose keys are not present in the given items.
 	 *
 	 * @param iterable $items List of items
+	 * @param  callable|null $callback Function with (keyA, keyB) parameters and returns -1 (<), 0 (=) and 1 (>)
 	 * @return MapIface New map
 	 */
 	public function diffKeys( iterable $items, callable $callback = null ) : MapIface;
@@ -302,7 +304,7 @@ interface MapIface extends \ArrayAccess, \Countable, \IteratorAggregate
 	 *
 	 * @param mixed $value Item to search for
 	 * @param bool $strict True if type of the item should be checked too
-	 * @return mixed Value from map or null if not found
+	 * @return mixed|null Value from map or null if not found
 	 */
 	public function search( $value, $strict = true );
 
@@ -318,7 +320,7 @@ interface MapIface extends \ArrayAccess, \Countable, \IteratorAggregate
 	/**
 	 * Get and remove the first item from the map.
 	 *
-	 * @return mixed Value from map or null if not found
+	 * @return mixed|null Value from map or null if not found
 	 */
 	public function shift();
 
