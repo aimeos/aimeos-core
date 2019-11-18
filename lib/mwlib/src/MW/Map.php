@@ -108,6 +108,21 @@ class Map implements MapIface
 
 
 	/**
+	 * Return the values of a single column/property from an array of arrays or list of items.
+	 *
+	 * @inheritDoc
+	 *
+	 * @param string $valuecol Name of the value property
+	 * @param string|null $indexcol Name of the index property
+	 * @return MapIface New instance with mapped entries
+	 */
+	public function col( string $valuecol, $indexcol = null ) : MapIface
+	{
+		return new static( array_column( $this->items, $valuecol, $indexcol ) );
+	}
+
+
+	/**
 	 * Push all of the given items onto the map.
 	 *
 	 * @param iterable $items List of items

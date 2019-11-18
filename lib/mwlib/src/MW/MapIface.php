@@ -42,6 +42,22 @@ interface MapIface extends \ArrayAccess, \Countable, \IteratorAggregate
 	public function clear() : MapIface;
 
 	/**
+	 * Return the values of a single column/property from an array of arrays or list of items.
+	 *
+	 * Example:
+	 *  Map::from( [['id' => 'i1', 'val' => 'v1'], ['id' => 'i2', 'val' => 'v2']] )->col( 'val', 'id' );
+	 * Returns:
+	 *  ['i1' => 'v1', 'i2' => 'v2']
+	 *
+	 * If $indexcol is omitted, the result will be indexed from 0-n.
+	 *
+	 * @param string $valuecol Name of the value property
+	 * @param string|null $indexcol Name of the index property
+	 * @return MapIface New instance with mapped entries
+	 */
+	public function col( string $valuecol, $indexcol = null ) : MapIface;
+
+	/**
 	 * Push all of the given items onto the map.
 	 *
 	 * @param iterable $items List of items

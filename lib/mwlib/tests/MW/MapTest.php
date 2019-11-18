@@ -18,6 +18,18 @@ class MapTest extends \PHPUnit\Framework\TestCase
 		$this->assertCount( 0, $c->clear() );
 	}
 
+	public function testCol()
+	{
+		$map = new Map( [['foo' => 'one', 'bar' => 'two']] );
+		$this->assertEquals( [0 => 'two'], $map->col( 'bar' )->toArray() );
+	}
+
+	public function testColIndex()
+	{
+		$map = new Map( [['foo' => 'one', 'bar' => 'two']] );
+		$this->assertEquals( ['one' => 'two'], $map->col( 'bar', 'foo' )->toArray() );
+	}
+
 	public function testCopy()
 	{
 		$c = new Map( ['foo', 'bar'] );
