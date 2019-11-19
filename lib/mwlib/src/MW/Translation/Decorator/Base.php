@@ -43,7 +43,7 @@ abstract class Base
 	 * @param string $string String to be translated
 	 * @return string The translated string
 	 */
-	public function dt( $domain, $string )
+	public function dt( string $domain, string $string ) : string
 	{
 		return $this->object->dt( $domain, $string );
 	}
@@ -55,10 +55,10 @@ abstract class Base
 	 * @param string $domain Translation domain
 	 * @param string $singular String in singular form
 	 * @param string $plural String in plural form
-	 * @param integer $number Quantity to chose the correct plural form for languages with plural forms
+	 * @param int $number Quantity to chose the correct plural form for languages with plural forms
 	 * @return string Returns the translated singular or plural form of the string depending on the given number.
 	 */
-	public function dn( $domain, $singular, $plural, $number )
+	public function dn( string $domain, string $singular, string $plural, int $number ) : string
 	{
 		return $this->object->dn( $domain, $singular, $plural, $number );
 	}
@@ -72,7 +72,7 @@ abstract class Base
 	 * 	as value or an associative list with index => translation as value if
 	 * 	plural forms are available
 	 */
-	public function getAll( $domain )
+	public function getAll( string $domain ) : array
 	{
 		return $this->object->getAll( $domain );
 	}
@@ -83,7 +83,7 @@ abstract class Base
 	 *
 	 * @return string ISO locale string
 	 */
-	public function getLocale()
+	public function getLocale() : string
 	{
 		return $this->object->getLocale();
 	}
@@ -94,7 +94,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MW\Translation\Iface Translation object
 	 */
-	protected function getObject()
+	protected function getObject() : \Aimeos\MW\Translation\Iface
 	{
 		return $this->object;
 	}

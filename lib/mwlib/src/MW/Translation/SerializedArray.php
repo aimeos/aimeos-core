@@ -44,7 +44,7 @@ class SerializedArray
 	 * domain as key and the directory where the translation files are located as value.
 	 * @param string $locale Locale string, e.g. en or en_GB
 	 */
-	public function __construct( array $translationSources, $locale )
+	public function __construct( array $translationSources, string $locale )
 	{
 		parent::__construct( $locale );
 
@@ -60,7 +60,7 @@ class SerializedArray
 	 * @return string The translated string
 	 * @throws \Aimeos\MW\Translation\Exception Throws exception on initialization of the translation
 	 */
-	public function dt( $domain, $string )
+	public function dt( string $domain, string $string ) : string
 	{
 		try
 		{
@@ -87,11 +87,11 @@ class SerializedArray
 	 * @param string $domain Translation domain
 	 * @param string $singular String in singular form
 	 * @param string $plural String in plural form
-	 * @param integer $number Quantity to choose the correct plural form for languages with plural forms
+	 * @param int $number Quantity to choose the correct plural form for languages with plural forms
 	 * @return string Returns the translated singular or plural form of the string depending on the given number
 	 * @throws \Aimeos\MW\Translation\Exception If the initialization of the translation
 	 */
-	public function dn( $domain, $singular, $plural, $number )
+	public function dn( string $domain, string $singular, string $plural, int $number ) : string
 	{
 		$index = $this->getPluralIndex( $number, $this->getLocale() );
 
@@ -122,7 +122,7 @@ class SerializedArray
 	 * 	as value or an associative list with index => translation as value if
 	 * 	plural forms are available
 	 */
-	public function getAll( $domain )
+	public function getAll( string $domain ) : array
 	{
 		$messages = [];
 
@@ -141,7 +141,7 @@ class SerializedArray
 	 * @return array Returns a list with key value pairs for each domain.
 	 * @throws \Aimeos\MW\Translation\Exception Throws exception on initialization of the translation
 	 */
-	private function getTranslations( $domain )
+	private function getTranslations( string $domain ) : array
 	{
 		if( !isset( $this->translations[$domain] ) )
 		{

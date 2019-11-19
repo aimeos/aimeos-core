@@ -32,7 +32,7 @@ class APC
 	 * @param \Aimeos\MW\Translation\Iface $object Translation object or decorator
 	 * @param string $prefix Prefix for keys to distinguish several instances
 	 */
-	public function __construct( \Aimeos\MW\Translation\Iface $object, $prefix = '' )
+	public function __construct( \Aimeos\MW\Translation\Iface $object, string $prefix = '' )
 	{
 		parent::__construct( $object );
 
@@ -51,7 +51,7 @@ class APC
 	 * @param string $string String to be translated
 	 * @return string The translated string
 	 */
-	public function dt( $domain, $string )
+	public function dt( string $domain, string $string ) : string
 	{
 		if( $this->enable === false ) {
 			return parent::dt( $domain, $string );
@@ -82,10 +82,10 @@ class APC
 	 * @param string $domain Translation domain
 	 * @param string $singular String in singular form
 	 * @param string $plural String in plural form
-	 * @param integer $number Quantity to chose the correct plural form for languages with plural forms
+	 * @param int $number Quantity to chose the correct plural form for languages with plural forms
 	 * @return string Returns the translated singular or plural form of the string depending on the given number.
 	 */
-	public function dn( $domain, $singular, $plural, $number )
+	public function dn( string $domain, string $singular, string $plural, int $number ) : string
 	{
 		if( $this->enable === false ) {
 			return parent::dn( $domain, $singular, $plural, $number );

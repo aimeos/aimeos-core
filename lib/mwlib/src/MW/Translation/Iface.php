@@ -27,7 +27,7 @@ interface Iface
 	 * @return string The translated string
 	 * @throws @throws \Aimeos\MW\Translation\Exception Throws exception on initialization of the translation
 	 */
-	public function dt( $domain, $string );
+	public function dt( string $domain, string $string ) : string;
 
 	/**
 	 * Returns the translated string by the given plural and quantity.
@@ -35,11 +35,11 @@ interface Iface
 	 * @param string $domain Translation domain
 	 * @param string $singular String in singular form
 	 * @param string $plural String in plural form
-	 * @param integer $number Quantity to chose the correct plural form for languages with plural forms
+	 * @param int $number Quantity to chose the correct plural form for languages with plural forms
 	 * @return string Returns the translated singular or plural form of the string depending on the given number.
 	 * @throws \Aimeos\MW\Translation\Exception Throws exception on initialization of the translation
 	 */
-	public function dn( $domain, $singular, $plural, $number );
+	public function dn( string $domain, string $singular, string $plural, int $number ) : string;
 
 
 	/**
@@ -50,7 +50,7 @@ interface Iface
 	 * 	as value or an associative list with index => translation as value if
 	 * 	plural forms are available
 	 */
-	public function getAll( $domain );
+	public function getAll( string $domain ) : array;
 
 
 	/**
@@ -58,5 +58,5 @@ interface Iface
 	 *
 	 * @return string ISO locale string
 	 */
-	public function getLocale();
+	public function getLocale() : string;
 }

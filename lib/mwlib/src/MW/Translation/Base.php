@@ -28,7 +28,7 @@ abstract class Base
 	 *
 	 * @param string $locale Locale string, e.g. en or en_GB
 	 */
-	public function __construct( $locale )
+	public function __construct( string $locale )
 	{
 		if( preg_match( '/^[a-z]{2,3}(_[A-Z]{2})?$/', $locale ) !== 1 ) {
 			throw new \Aimeos\MW\Translation\Exception( sprintf( 'Invalid locale "%1$s"', $locale ) );
@@ -43,7 +43,7 @@ abstract class Base
 	 *
 	 * @return string ISO locale string
 	 */
-	public function getLocale()
+	public function getLocale() : string
 	{
 		return $this->locale;
 	}
@@ -59,7 +59,7 @@ abstract class Base
 	 * @return string[] List of locations to the translation files
 	 * @throws \Aimeos\MW\Translation\Exception If translation file doesn't exist
 	 */
-	protected function getTranslationFileLocations( array $paths, $locale )
+	protected function getTranslationFileLocations( array $paths, string $locale ) : array
 	{
 		$locations = [];
 
@@ -90,14 +90,14 @@ abstract class Base
 	/**
 	 * Returns the plural index number to be used for the plural translation.
 	 *
-	 * @param  integer $number Quantity to find the plural index
+	 * @param  int $number Quantity to find the plural index
 	 * @param  string  $locale Locale to be used
-	 * @return integer Number of the plural index
+	 * @return int Number of the plural index
 	 *
 	 * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
 	 * @license    http://framework.zend.com/license/new-bsd     New BSD License
 	 */
-	protected function getPluralIndex( $number, $locale )
+	protected function getPluralIndex( int $number, string $locale ) : int
 	{
 		$number = abs( (int) $number );
 
