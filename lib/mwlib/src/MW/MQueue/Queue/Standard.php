@@ -50,7 +50,7 @@ class Standard implements Iface
 	 * @param string $msg Message, e.g. JSON encoded data
 	 * @return \Aimeos\MW\MQueue\Queue\Iface MQueue queue instance for method chaining
 	 */
-	public function add( $msg ) : \Aimeos\MW\MQueue\Queue\Iface
+	public function add( string $msg ) : \Aimeos\MW\MQueue\Queue\Iface
 	{
 		try
 		{
