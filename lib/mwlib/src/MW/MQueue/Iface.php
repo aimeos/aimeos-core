@@ -33,5 +33,5 @@ interface Iface
 	 * @param string $name Queue name
 	 * @return \Aimeos\MW\MQueue\Queue\Iface Message queue
 	 */
-	public function getQueue( $name );
+	public function getQueue( string $name ) : \Aimeos\MW\MQueue\Queue\Iface;
 }

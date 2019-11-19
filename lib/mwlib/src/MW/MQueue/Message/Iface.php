@@ -24,5 +24,5 @@ interface Iface
 	 *
 	 * @return string Message body
 	 */
-	public function getBody();
+	public function getBody() : string;
 }

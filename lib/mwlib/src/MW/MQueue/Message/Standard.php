@@ -38,7 +38,7 @@ class Standard implements Iface
 	 *
 	 * @return string Message body
 	 */
-	public function getBody()
+	public function getBody() : string
 	{
 		return ( isset( $this->values['message'] ) ? $this->values['message'] : '' );
 	}
@@ -49,7 +49,7 @@ class Standard implements Iface
 	 *
 	 * @return integer|null Message ID
 	 */
-	public function getId()
+	public function getId() : ?string
 	{
 		return ( isset( $this->values['id'] ) ? $this->values['id'] : null );
 	}

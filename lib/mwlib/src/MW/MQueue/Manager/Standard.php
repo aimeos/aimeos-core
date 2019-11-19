@@ -65,7 +65,7 @@ class Standard implements Iface
 	 * @return \Aimeos\MW\MQueue\Iface Message queue object
 	 * @throws \Aimeos\MW\MQueue\Exception If an no configuration for that name is found
 	 */
-	public function get( $resource )
+	public function get( string $resource ) : \Aimeos\MW\MQueue\Iface
 	{
 		$conf = (array) $this->getConfig( $resource );
 
@@ -85,10 +85,10 @@ class Standard implements Iface
 	 * Returns the configuration for the given name
 	 *
 	 * @param string &$resource Name of the resource, e.g. "mq" or "mq-email"
-	 * @return array|string Configuration values
+	 * @return array Configuration values
 	 * @throws \Aimeos\MW\MQueue\Exception If an no configuration for that name is found
 	 */
-	protected function getConfig( &$resource )
+	protected function getConfig( string &$resource ) : array
 	{
 		if( ( $conf = $this->config->get( 'resource/' . $resource ) ) !== null ) {
 			return $conf;

@@ -26,5 +26,5 @@ interface Iface
 	 * @return \Aimeos\MW\MQueue\Iface Message queue object
 	 * @throws \Aimeos\MW\MQueue\Exception If an error occurs
 	 */
-	public function get( $resource );
+	public function get( string $resource ) : \Aimeos\MW\MQueue\Iface;
 }

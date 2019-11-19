@@ -23,19 +23,9 @@ interface Iface
 	 * Adds a new message to the message queue
 	 *
 	 * @param string $msg Message, e.g. JSON encoded data
-	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
+	 * @return \Aimeos\MW\MQueue\Queue\Iface MQueue queue instance for method chaining
 	 */
-	public function add( $msg );
-
-	/**
-	 * Returns the next message from the queue
-	 *
-	 * Don't forget to remove the message after processing it using the del()
-	 * method. Otherwise, it will be handed over in the next call to get() again!
-	 *
-	 * @return \Aimeos\MW\MQueue\Message\Iface|null Message object or null if none is available
-	 */
-	public function get();
+	public function add( string $msg ) : \Aimeos\MW\MQueue\Queue\Iface;
 
 	/**
 	 * Removes the message from the queue
@@ -48,7 +38,17 @@ interface Iface
 	 *  $queue->del( $msg );
 	 *
 	 * @param \Aimeos\MW\MQueue\Message\Iface $msg Message object
-	 * @return \Aimeos\MW\MQueue\Iface MQueue instance for method chaining
+	 * @return \Aimeos\MW\MQueue\Queue\Iface MQueue queue instance for method chaining
 	 */
-	public function del( \Aimeos\MW\MQueue\Message\Iface $msg );
+	public function del( \Aimeos\MW\MQueue\Message\Iface $msg ) : \Aimeos\MW\MQueue\Queue\Iface;
+
+	/**
+	 * Returns the next message from the queue
+	 *
+	 * Don't forget to remove the message after processing it using the del()
+	 * method. Otherwise, it will be handed over in the next call to get() again!
+	 *
+	 * @return \Aimeos\MW\MQueue\Message\Iface|null Message object or null if none is available
+	 */
+	public function get() : ?\Aimeos\MW\MQueue\Message\Iface;
 }
