@@ -21,7 +21,7 @@ class Imagick
 	extends \Aimeos\MW\Media\Image\Base
 	implements \Aimeos\MW\Media\Image\Iface
 {
-	private static $watermark = null;
+	private static $watermark;
 
 	private $options;
 	private $image;
@@ -35,7 +35,7 @@ class Imagick
 	 * @param array $options Associative list of configuration options
 	 * @throws \Aimeos\MW\Media\Exception If image couldn't be retrieved from the given file name
 	 */
-	public function __construct( $content, $mimetype, array $options )
+	public function __construct( string $content, string $mimetype, array $options )
 	{
 		parent::__construct( $mimetype );
 
@@ -84,9 +84,9 @@ class Imagick
 	/**
 	 * Returns the height of the image
 	 *
-	 * @return integer Height in pixel
+	 * @return int Height in pixel
 	 */
-	public function getHeight()
+	public function getHeight() : int
 	{
 		return $this->image->getImageHeight();
 	}
@@ -95,9 +95,9 @@ class Imagick
 	/**
 	 * Returns the width of the image
 	 *
-	 * @return integer Width in pixel
+	 * @return int Width in pixel
 	 */
-	public function getWidth()
+	public function getWidth() : int
 	{
 		return $this->image->getImageWidth();
 	}
@@ -111,7 +111,7 @@ class Imagick
 	 * @return string|null File content if file name is null or null if data is saved to the given file name
 	 * @throws \Aimeos\MW\Media\Exception If image couldn't be saved to the given file name
 	 */
-	public function save( $filename = null, $mimetype = null )
+	public function save( string $filename = null, string $mimetype = null ) : ?string
 	{
 		if( $mimetype === null ) {
 			$mimetype = $this->getMimeType();
@@ -143,21 +143,21 @@ class Imagick
 		{
 			throw new \Aimeos\MW\Media\Exception( $e->getMessage() );
 		}
+
+		return null;
 	}
 
 
 	/**
 	 * Scales the image to the given width and height.
 	 *
-	 * @param integer|null $width New width of the image or null for automatic calculation
-	 * @param integer|null $height New height of the image or null for automatic calculation
-	 * @param boolean $fit True to keep the width/height ratio of the image
-	 * @return \Aimeos\MW\Media\Iface Self object for method chaining
+	 * @param int|null $width New width of the image or null for automatic calculation
+	 * @param int|null $height New height of the image or null for automatic calculation
+	 * @param bool $fit True to keep the width/height ratio of the image
+	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
 	 */
-	public function scale( $width, $height, $fit = true )
+	public function scale( int $width, int $height, bool $fit = true ) : \Aimeos\MW\Media\Image\Iface
 	{
-		$fit = (bool) $fit;
-
 		try
 		{
 			if( $fit === true )

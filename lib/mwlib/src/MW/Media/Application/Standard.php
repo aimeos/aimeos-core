@@ -34,7 +34,7 @@ class Standard
 	 * @param array $options Associative list of configuration options
 	 * @throws \Aimeos\MW\Media\Exception If image couldn't be retrieved from the given file name
 	 */
-	public function __construct( $content, $mimetype, array $options )
+	public function __construct( string $content, string $mimetype, array $options )
 	{
 		parent::__construct( $mimetype );
 
@@ -51,7 +51,7 @@ class Standard
 	 * @return string|null File content if file name is null or null if data is saved to the given file name
 	 * @throws \Aimeos\MW\Media\Exception If image couldn't be saved to the given file name
 	 */
-	public function save( $filename = null, $mimetype = null )
+	public function save( string $filename = null, string $mimetype = null ) : ?string
 	{
 		if( $filename === null ) {
 			return $this->content;
@@ -60,5 +60,7 @@ class Standard
 		if( file_put_contents( $filename, $this->content ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save content to "%1$s"', $filename ) );
 		}
+
+		return null;
 	}
 }

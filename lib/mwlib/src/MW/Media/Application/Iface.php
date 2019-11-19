@@ -18,7 +18,6 @@ namespace Aimeos\MW\Media\Application;
  * @package MW
  * @subpackage Media
  */
-interface Iface
-	extends \Aimeos\MW\Media\Iface
+interface Iface extends \Aimeos\MW\Media\Iface
 {
 }

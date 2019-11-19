@@ -24,24 +24,24 @@ interface Iface
 	/**
 	 * Returns the height of the image
 	 *
-	 * @return integer Height in pixel
+	 * @return int Height in pixel
 	 */
-	public function getHeight();
+	public function getHeight() : int;
 
 	/**
 	 * Returns the width of the image
 	 *
-	 * @return integer Width in pixel
+	 * @return int Width in pixel
 	 */
-	public function getWidth();
+	public function getWidth() : int;
 
 	/**
 	 * Scales the image to the given width and height.
 	 *
-	 * @param integer|null $width New width of the image or null for automatic calculation
-	 * @param integer|null $height New height of the image or null for automatic calculation
-	 * @param boolean $fit True to keep the width/height ratio of the image
+	 * @param int|null $width New width of the image or null for automatic calculation
+	 * @param int|null $height New height of the image or null for automatic calculation
+	 * @param bool $fit True to keep the width/height ratio of the image
 	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
 	 */
-	public function scale( $width, $height, $fit = true );
+	public function scale( int $width, int $height, bool $fit = true ) : Iface;
 }

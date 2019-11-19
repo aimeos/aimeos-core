@@ -32,7 +32,7 @@ class Svg
 	 * @param array $options Associative list of configuration options
 	 * @throws \Aimeos\MW\Media\Exception If image couldn't be retrieved from the given file name
 	 */
-	public function __construct( $content, $mimetype, array $options )
+	public function __construct( string $content, string $mimetype, array $options )
 	{
 		parent::__construct( $mimetype );
 
@@ -58,9 +58,9 @@ class Svg
 	/**
 	 * Returns the height of the image
 	 *
-	 * @return integer Height in pixel
+	 * @return int Height in pixel
 	 */
-	public function getHeight()
+	public function getHeight() : int
 	{
 		return ( isset( $this->svg['height'] ) ? (int) preg_replace( '/[^0-9.]/', '', $this->svg['height'] ) : 1 );
 	}
@@ -69,9 +69,9 @@ class Svg
 	/**
 	 * Returns the width of the image
 	 *
-	 * @return integer Width in pixel
+	 * @return int Width in pixel
 	 */
-	public function getWidth()
+	public function getWidth() : int
 	{
 		return ( isset( $this->svg['width'] ) ? (int) preg_replace( '/[^0-9.]/', '', $this->svg['width'] ) : 1 );
 	}
@@ -85,7 +85,7 @@ class Svg
 	 * @return string|null File content if file name is null or null if data is saved to the given file name
 	 * @throws \Aimeos\MW\Media\Exception If image couldn't be saved to the given file name
 	 */
-	public function save( $filename = null, $mimetype = null )
+	public function save( string $filename = null, string $mimetype = null ) : ?string
 	{
 		if( ( $content = $this->svg->asXml() ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Could not create SVG file' );
@@ -98,18 +98,20 @@ class Svg
 		if( file_put_contents( $filename, $content ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Could not save SVG file' );
 		}
+
+		return null;
 	}
 
 
 	/**
 	 * Scales the image to the given width and height.
 	 *
-	 * @param integer|null $width New width of the image or null for automatic calculation
-	 * @param integer|null $height New height of the image or null for automatic calculation
-	 * @param boolean $fit True to keep the width/height ratio of the image
+	 * @param int|null $width New width of the image or null for automatic calculation
+	 * @param int|null $height New height of the image or null for automatic calculation
+	 * @param bool $fit True to keep the width/height ratio of the image
 	 * @return \Aimeos\MW\Media\Iface Self object for method chaining
 	 */
-	public function scale( $width, $height, $fit = true )
+	public function scale( int $width, int $height, bool $fit = true ) : Iface
 	{
 		if( $width == null && $height == null ) {
 			return $this;

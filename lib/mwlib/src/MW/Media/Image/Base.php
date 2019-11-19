@@ -24,13 +24,13 @@ class Base
 	/**
 	 * Returns the fitted width and height.
 	 *
-	 * @param integer $srcWidth Width of the image
-	 * @param integer $srcHeight Height of the image
-	 * @param integer|null $destWidth New width of the image
-	 * @param integer|null $destHeight New height of the image
+	 * @param int $srcWidth Width of the image
+	 * @param int $srcHeight Height of the image
+	 * @param int|null $destWidth New width of the image
+	 * @param int|null $destHeight New height of the image
 	 * @return array Array containing the new width at position 0 and the new height as position 1
 	 */
-	protected function getSizeFitted( $srcWidth, $srcHeight, $destWidth, $destHeight )
+	protected function getSizeFitted( int $srcWidth, int $srcHeight, int $destWidth, int $destHeight )
 	{
 		if( !empty( $srcWidth ) && !empty( $srcHeight ) )
 		{

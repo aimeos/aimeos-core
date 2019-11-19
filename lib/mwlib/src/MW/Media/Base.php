@@ -28,7 +28,7 @@ class Base
 	 *
 	 * @param string $mimetype Mime type of the media data
 	 */
-	public function __construct( $mimetype )
+	public function __construct( string $mimetype )
 	{
 		$this->mimetype = $mimetype;
 	}
@@ -39,7 +39,7 @@ class Base
 	 *
 	 * @return string Mime type like "image/png"
 	 */
-	public function getMimetype()
+	public function getMimetype() : string
 	{
 		return $this->mimetype;
 	}

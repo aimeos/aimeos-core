@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MW\Media\Image\Base
 	implements \Aimeos\MW\Media\Image\Iface
 {
-	private static $watermark = null;
+	private static $watermark;
 
 	private $options;
 	private $image;
@@ -36,7 +36,7 @@ class Standard
 	 * @param array $options Associative list of configuration options
 	 * @throws \Aimeos\MW\Media\Exception If image couldn't be retrieved from the given file name
 	 */
-	public function __construct( $content, $mimetype, array $options )
+	public function __construct( string $content, string $mimetype, array $options )
 	{
 		parent::__construct( $mimetype );
 
@@ -81,9 +81,9 @@ class Standard
 	/**
 	 * Returns the height of the image
 	 *
-	 * @return integer Height in pixel
+	 * @return int Height in pixel
 	 */
-	public function getHeight()
+	public function getHeight() : int
 	{
 		return imagesy( $this->image );
 	}
@@ -92,9 +92,9 @@ class Standard
 	/**
 	 * Returns the width of the image
 	 *
-	 * @return integer Width in pixel
+	 * @return int Width in pixel
 	 */
-	public function getWidth()
+	public function getWidth() : int
 	{
 		return imagesx( $this->image );
 	}
@@ -108,7 +108,7 @@ class Standard
 	 * @return string|null File content if file name is null or null if data is saved to the given file name
 	 * @throws \Aimeos\MW\Media\Exception If image couldn't be saved to the given file name
 	 */
-	public function save( $filename = null, $mimetype = null )
+	public function save( string $filename = null, string $mimetype = null ) : ?string
 	{
 		if( $mimetype === null ) {
 			$mimetype = $this->getMimeType();
@@ -170,18 +170,20 @@ class Standard
 			ob_end_clean();
 			throw $e;
 		}
+
+		return null;
 	}
 
 
 	/**
 	 * Scales the image to the given width and height.
 	 *
-	 * @param integer|null $width New width of the image or null for automatic calculation
-	 * @param integer|null $height New height of the image or null for automatic calculation
-	 * @param boolean $fit True to keep the width/height ratio of the image
+	 * @param int|null $width New width of the image or null for automatic calculation
+	 * @param int|null $height New height of the image or null for automatic calculation
+	 * @param bool $fit True to keep the width/height ratio of the image
 	 * @return \Aimeos\MW\Media\Iface Self object for method chaining
 	 */
-	public function scale( $width, $height, $fit = true )
+	public function scale( int $width, int $height, bool $fit = true ) : Iface
 	{
 		$w = imagesx( $this->image );
 		$h = imagesy( $this->image );
@@ -212,14 +214,14 @@ class Standard
 	/**
 	 * Resizes and crops the image if necessary
 	 *
-	 * @param integer $scaleWidth Width of the image before cropping
-	 * @param integer $scaleHeight Height of the image before cropping
-	 * @param integer $width New width of the image
-	 * @param integer $height New height of the image
-	 * @param boolean $fit True to keep the width/height ratio of the image
-	 * @return \Aimeos\MW\Media\Image\Standard Resized media object
+	 * @param int $scaleWidth Width of the image before cropping
+	 * @param int $scaleHeight Height of the image before cropping
+	 * @param int $width New width of the image
+	 * @param int $height New height of the image
+	 * @param bool $fit True to keep the width/height ratio of the image
+	 * @return \Aimeos\MW\Media\Image\Iface Resized media object
 	 */
-	protected function resize( $scaleWidth, $scaleHeight, $width, $height, $fit )
+	protected function resize( int $scaleWidth, int $scaleHeight, int $width, int $height, bool $fit ) : Iface
 	{
 		if( ( $result = imagescale( $this->image, $scaleWidth, $scaleHeight, IMG_BICUBIC ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Unable to scale image' );

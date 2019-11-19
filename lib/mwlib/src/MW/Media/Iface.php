@@ -25,7 +25,7 @@ interface Iface
 	 *
 	 * @return string Mime type like "image/png"
 	 */
-	public function getMimetype();
+	public function getMimetype() : string;
 
 
 	/**
@@ -35,5 +35,5 @@ interface Iface
 	 * @param string|null $mimetype Mime type to save the content as or null to leave the mime type unchanged
 	 * @return string|null File content if file name is null or null if data is saved to the given file name
 	 */
-	public function save( $filename = null, $mimetype = null );
+	public function save( string $filename = null, string $mimetype = null ) : ?string;
 }
