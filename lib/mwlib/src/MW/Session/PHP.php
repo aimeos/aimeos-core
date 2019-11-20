@@ -30,7 +30,7 @@ class PHP extends Base implements \Aimeos\MW\Session\Iface
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key
 	 */
-	public function get( $name, $default = null )
+	public function get( string $name, $default = null )
 	{
 		if( isset( $_SESSION[$name] ) ) {
 			return $_SESSION[$name];
@@ -50,7 +50,7 @@ class PHP extends Base implements \Aimeos\MW\Session\Iface
 	 * @param mixed $value Value that should be associated with the given key
 	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
 	 */
-	public function set( $name, $value )
+	public function set( string $name, $value ) : Iface
 	{
 		$_SESSION[$name] = $value;
 		return $this;

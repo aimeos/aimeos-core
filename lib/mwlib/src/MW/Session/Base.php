@@ -25,7 +25,7 @@ abstract class Base implements \Aimeos\MW\Session\Iface
 	 * @param array $values Associative list of key/value pairs
 	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
 	 */
-	public function apply( array $values )
+	public function apply( array $values ) : Iface
 	{
 		foreach( $values as $key => $value ) {
 			$this->set( $key, $value );

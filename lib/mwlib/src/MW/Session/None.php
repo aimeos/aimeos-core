@@ -30,7 +30,7 @@ class None extends Base implements \Aimeos\MW\Session\Iface
 	 * @param string|null $default Value returned if requested key isn't found
 	 * @return string Value associated to the requested key
 	 */
-	public function get( $name, $default = null )
+	public function get( string $name, $default = null )
 	{
 		if( array_key_exists( $name, $this->data ) !== false ) {
 			return $this->data[$name];
@@ -47,7 +47,7 @@ class None extends Base implements \Aimeos\MW\Session\Iface
 	 * @param string $value Value that should be associated with the given key
 	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
 	 */
-	public function set( $name, $value )
+	public function set( string $name, $value ) : Iface
 	{
 		$this->data[$name] = $value;
 		return $this;
