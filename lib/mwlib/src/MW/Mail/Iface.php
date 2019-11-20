@@ -26,7 +26,7 @@ interface Iface
 	 * @param string $charset Default charset of the message
 	 * @return \Aimeos\MW\Mail\Message\Iface E-mail message object
 	 */
-	public function createMessage( $charset = 'UTF-8' );
+	public function createMessage( string $charset = 'UTF-8' ) : \Aimeos\MW\Mail\Message\Iface;
 
 
 	/**
@@ -35,5 +35,5 @@ interface Iface
 	 * @param \Aimeos\MW\Mail\Message\Iface $message E-mail message object
 	 * @return \Aimeos\MW\Mail\Iface Mail instance for method chaining
 	 */
-	public function send( \Aimeos\MW\Mail\Message\Iface $message );
+	public function send( \Aimeos\MW\Mail\Message\Iface $message ) : Iface;
 }

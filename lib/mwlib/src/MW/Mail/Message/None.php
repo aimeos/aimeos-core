@@ -28,7 +28,7 @@ class None
 	 * @param string|null $name Name of the user sending the e-mail or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addFrom( $email, $name = null )
+	public function addFrom( string $email, string $name = null ) : Iface
 	{
 		return $this;
 	}
@@ -41,7 +41,7 @@ class None
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addTo( $email, $name = null )
+	public function addTo( string $email, string $name = null ) : Iface
 	{
 		return $this;
 	}
@@ -54,7 +54,7 @@ class None
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addCc( $email, $name = null )
+	public function addCc( string $email, string $name = null ) : Iface
 	{
 		return $this;
 	}
@@ -67,7 +67,7 @@ class None
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addBcc( $email, $name = null )
+	public function addBcc( string $email, string $name = null ) : Iface
 	{
 		return $this;
 	}
@@ -80,7 +80,7 @@ class None
 	 * @param string|null $name Name of the user which should receive all replies or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addReplyTo( $email, $name = null )
+	public function addReplyTo( string $email, string $name = null ) : Iface
 	{
 		return $this;
 	}
@@ -93,7 +93,7 @@ class None
 	 * @param string $value Text content of the custom e-mail header
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addHeader( $name, $value )
+	public function addHeader( string $name, string $value ) : Iface
 	{
 		return $this;
 	}
@@ -106,7 +106,7 @@ class None
 	 * @param string|null $name Name of the user who sent the message or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function setSender( $email, $name = null )
+	public function setSender( string $email, string $name = null ) : Iface
 	{
 		return $this;
 	}
@@ -118,7 +118,7 @@ class None
 	 * @param string $subject Subject of the message
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function setSubject( $subject )
+	public function setSubject( string $subject ) : Iface
 	{
 		return $this;
 	}
@@ -130,7 +130,7 @@ class None
 	 * @param string $message Text body of the message
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function setBody( $message )
+	public function setBody( string $message ) : Iface
 	{
 		return $this;
 	}
@@ -142,7 +142,7 @@ class None
 	 * @param string $message HTML body of the message
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function setBodyHtml( $message )
+	public function setBodyHtml( string $message ) : Iface
 	{
 		return $this;
 	}
@@ -157,7 +157,7 @@ class None
 	 * @param string $disposition Type of the disposition ("attachment" or "inline")
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addAttachment( $data, $mimetype, $filename, $disposition = 'attachment' )
+	public function addAttachment( string $data, string $mimetype, string $filename, string $disposition = 'attachment' ) : Iface
 	{
 		return $this;
 	}
@@ -171,7 +171,7 @@ class None
 	 * @param string|null $filename Name of the attached file
 	 * @return string Content ID for referencing the attachment in the HTML body
 	 */
-	public function embedAttachment( $data, $mimetype, $filename )
+	public function embedAttachment( string $data, string $mimetype, string $filename ) : string
 	{
 		return '';
 	}
