@@ -208,7 +208,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSetGroups()
 	{
 		$this->object->setGroups( array( 1, 2, 3 ) );
+
 		$this->assertEquals( array( 1, 2, 3 ), $this->object->getGroups() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetPaymentAddress()

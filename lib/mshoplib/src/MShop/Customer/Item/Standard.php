@@ -239,8 +239,10 @@ class Standard extends Base implements Iface
 	{
 		$list = $this->getGroups();
 
-		if( array_diff( $ids, $list ) !== [] || array_diff( $list, $ids ) !== [] ) {
+		if( array_diff( $ids, $list ) !== [] || array_diff( $list, $ids ) !== [] )
+		{
 			$this->groups = $ids;
+			$this->setModified();
 		}
 
 		return $this;
