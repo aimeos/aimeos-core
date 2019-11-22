@@ -183,7 +183,7 @@ class Standard
 	 * @param bool $fit True to keep the width/height ratio of the image
 	 * @return \Aimeos\MW\Media\Iface Self object for method chaining
 	 */
-	public function scale( int $width, int $height, bool $fit = true ) : Iface
+	public function scale( int $width = null, int $height = null, bool $fit = true ) : Iface
 	{
 		$w = imagesx( $this->image );
 		$h = imagesy( $this->image );

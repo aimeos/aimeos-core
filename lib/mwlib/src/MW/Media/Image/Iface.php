@@ -43,5 +43,5 @@ interface Iface
 	 * @param bool $fit True to keep the width/height ratio of the image
 	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
 	 */
-	public function scale( int $width, int $height, bool $fit = true ) : Iface;
+	public function scale( int $width = null, int $height = null, bool $fit = true ) : Iface;
 }
