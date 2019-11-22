@@ -216,12 +216,12 @@ class Standard
 	 *
 	 * @param int $scaleWidth Width of the image before cropping
 	 * @param int $scaleHeight Height of the image before cropping
-	 * @param int $width New width of the image
-	 * @param int $height New height of the image
+	 * @param int|null $width New width of the image
+	 * @param int|null $height New height of the image
 	 * @param bool $fit True to keep the width/height ratio of the image
 	 * @return \Aimeos\MW\Media\Image\Iface Resized media object
 	 */
-	protected function resize( int $scaleWidth, int $scaleHeight, int $width, int $height, bool $fit ) : Iface
+	protected function resize( int $scaleWidth, int $scaleHeight, int $width = null, int $height = null, bool $fit = true ) : Iface
 	{
 		if( ( $result = imagescale( $this->image, $scaleWidth, $scaleHeight, IMG_BICUBIC ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Unable to scale image' );
