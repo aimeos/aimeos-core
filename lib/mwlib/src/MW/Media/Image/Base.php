@@ -30,7 +30,7 @@ class Base
 	 * @param int|null $destHeight New height of the image
 	 * @return array Array containing the new width at position 0 and the new height as position 1
 	 */
-	protected function getSizeFitted( int $srcWidth, int $srcHeight, int $destWidth, int $destHeight )
+	protected function getSizeFitted( int $srcWidth, int $srcHeight, int $destWidth = null, int $destHeight = null )
 	{
 		if( !empty( $srcWidth ) && !empty( $srcHeight ) )
 		{
