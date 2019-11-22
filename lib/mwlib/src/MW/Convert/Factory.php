@@ -48,7 +48,7 @@ class Factory
 	 * @param string $key Key of the converter class
 	 * @return \Aimeos\MW\Convert\Iface Instance of converter class
 	 */
-	protected static function createObject( $key )
+	protected static function createObject( string $key )
 	{
 		$key = str_replace( '/', '\\', $key );
 
@@ -56,8 +56,8 @@ class Factory
 		{
 			if( ctype_alnum( $part ) === false )
 			{
-				$classname = is_string( $key ) ? '\Aimeos\MW\Convert\\' . $key : '<not a string>';
-				throw new \Aimeos\MW\Convert\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+				$msg = sprintf( 'Invalid characters in class name "%1$s"', '\Aimeos\MW\Convert\\' . $key );
+				throw new \Aimeos\MW\Convert\Exception( $msg );
 			}
 		}
 

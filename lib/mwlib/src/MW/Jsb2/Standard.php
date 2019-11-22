@@ -33,7 +33,7 @@ class Standard
 	 * @param string $baseURL Base URL for HTML output
 	 * @param string[] $filter Which packages should NOT be returned
 	 */
-	public function __construct( $filename, $baseURL = "", $filter = [] )
+	public function __construct( string $filename, string $baseURL = '', array $filter = [] )
 	{
 		$manifest = $this->getManifest( $filename );
 
@@ -50,7 +50,7 @@ class Standard
 	 * @param string $type Specific filetypes to create output
 	 * @return string[] List of URLs for the package files
 	 */
-	public function getFiles( $type )
+	public function getFiles( string $type ) : array
 	{
 		$files = [];
 
@@ -78,7 +78,7 @@ class Standard
 	 * @param string $version URL version string with %s placeholder for the file time
 	 * @return string[] List of URLs for the package files
 	 */
-	public function getUrls( $type, $version = '?v=%s' )
+	public function getUrls( string $type, string $version = '?v=%s' ) : array
 	{
 		$files = [];
 
@@ -102,7 +102,7 @@ class Standard
 	 * @param string $type Specific filetypes to create output
 	 * @return string HTML output with script and stylesheet link tags
 	 */
-	public function getHTML( $type )
+	public function getHTML( string $type ) : string
 	{
 		$html = '';
 		$version = '?v=%s';
@@ -137,7 +137,7 @@ class Standard
 	 * @return string[] List of URLs to the files from the package
 	 * @throws \Aimeos\MW\Jsb2\Exception If the file modification timestamp couldn't be determined
 	 */
-	protected function getFileUrls( \stdClass $package, $version = '?v=%s' )
+	protected function getFileUrls( \stdClass $package, string $version = '?v=%s' ) : array
 	{
 		$list = [];
 
@@ -162,7 +162,7 @@ class Standard
 	 * @param object JSON decoded manifest
 	 * @param string[] $filter What packages should NOT be returned
 	 */
-	protected function getPackages( $manifest, $filter = [] )
+	protected function getPackages( $manifest, array $filter = [] ) : array
 	{
 		$packageContainer = [];
 
@@ -193,9 +193,10 @@ class Standard
 	 * Returns the content of a manifest file.
 	 *
 	 * @param string $filepath Path to manifest
+	 * @return object Manifest file content
 	 * @throws \Aimeos\MW\Jsb2\Exception
 	 */
-	protected function getManifest( $filepath )
+	protected function getManifest( string $filepath )
 	{
 		if( !file_exists( $filepath ) ) {
 			throw new \Aimeos\MW\Jsb2\Exception( sprintf( 'File does not exists: "%1$s"', $filepath ) );
