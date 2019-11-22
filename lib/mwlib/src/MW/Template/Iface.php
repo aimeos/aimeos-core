@@ -28,7 +28,7 @@ interface Iface
 	 * @param string $end Marker for stop sequence with '*' as wildcard
 	 * @return null
 	 */
-	public function __construct( $text, $begin = '', $end = '' );
+	public function __construct( string $text, string $begin = '', string $end = '' );
 
 
 	/**
@@ -37,7 +37,7 @@ interface Iface
 	 * @param array|string $name Marker name or list thereof
 	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
-	public function disable( $name );
+	public function disable( $name ) : Iface;
 
 
 	/**
@@ -46,16 +46,16 @@ interface Iface
 	 * @param array|string $name Marker name or list thereof
 	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
-	public function enable( $name );
+	public function enable( $name ) : Iface;
 
 
 	/**
 	 * Returns the text part from template.
 	 *
 	 * @param string $name Marker whose content should be returned
-	 * @return string Text inside given marker
+	 * @return \Aimeos\MW\Template\Iface Subtemplate object containing the template between the given marker name
 	 */
-	public function get( $name );
+	public function get( string $name ) : Iface;
 
 
 	/**
@@ -65,7 +65,7 @@ interface Iface
 	 * @param string|array $new String or list of strings to insert instead
 	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
-	public function replace( $old, $new );
+	public function replace( $old, $new ) : Iface;
 
 
 	/**
@@ -74,7 +74,7 @@ interface Iface
 	 * @param string[] $substitute Array of marker names (keys) and text to substitute (values)
 	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
-	public function substitute( array $substitute );
+	public function substitute( array $substitute ) : Iface;
 
 
 	/**
@@ -83,5 +83,5 @@ interface Iface
 	 * @param bool $remove Remove still disabled markers from template
 	 * @return string String with replaced sub-strings and removed markers
 	 */
-	public function str( $remove = true );
+	public function str( bool $remove = true ) : string;
 }

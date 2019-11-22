@@ -32,7 +32,7 @@ class Base implements \Aimeos\MW\Template\Iface
 	 * @param string $begin Marker for start sequence with '$' as wildcard
 	 * @param string $end Marker for stop sequence with '$' as wildcard
 	 */
-	public function __construct( $text, $begin = '[$]', $end = '[/$]' )
+	public function __construct( string $text, string $begin = '[$]', string $end = '[/$]' )
 	{
 		$this->begin = $begin;
 		$this->end = $end;
@@ -46,7 +46,7 @@ class Base implements \Aimeos\MW\Template\Iface
 	 * @param array|string $name Marker name or list thereof
 	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
-	public function enable( $name )
+	public function enable( $name ) : Iface
 	{
 		$marray = [];
 
@@ -68,7 +68,7 @@ class Base implements \Aimeos\MW\Template\Iface
 	 * @param array|string $name Marker name or list thereof
 	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
-	public function disable( $name )
+	public function disable( $name ) : Iface
 	{
 		$list = [];
 
@@ -88,7 +88,7 @@ class Base implements \Aimeos\MW\Template\Iface
 	 * @param string $name Marker whose content should be returned
 	 * @return \Aimeos\MW\Template\Iface Subtemplate object containing the template between the given marker name
 	 */
-	public function get( $name )
+	public function get( string $name ) : Iface
 	{
 		$mbegin = str_replace( '$', $name, $this->begin );
 		$mend = str_replace( '$', $name, $this->end );
@@ -114,7 +114,7 @@ class Base implements \Aimeos\MW\Template\Iface
 	 *
 	 * @return array List of marker names
 	 */
-	public function getMarkerNames()
+	public function getMarkerNames() : array
 	{
 		$matches = [];
 		$regex = '/' . str_replace( '\$', '(.*)', preg_quote( $this->begin, '/' ) ) . '/U';
@@ -134,7 +134,7 @@ class Base implements \Aimeos\MW\Template\Iface
 	 * @param string|array $new String or list of strings to insert instead
 	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
-	public function replace( $old, $new )
+	public function replace( $old, $new ) : Iface
 	{
 		$this->text = str_replace( $old, $new, $this->text );
 
@@ -148,7 +148,7 @@ class Base implements \Aimeos\MW\Template\Iface
 	 * @param string[] $substitute Array of marker names (keys) and text to substitute (values)
 	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
-	public function substitute( array $substitute )
+	public function substitute( array $substitute ) : Iface
 	{
 		foreach( $substitute as $marker => $value )
 		{
@@ -174,10 +174,10 @@ class Base implements \Aimeos\MW\Template\Iface
 	/**
 	 * Generates the template by replacing substrings and remove markers.
 	 *
-	 * @param boolean $remove Remove still disabled markers from statement
+	 * @param bool $remove Remove still disabled markers from statement
 	 * @return string
 	 */
-	public function str( $remove = true )
+	public function str( bool $remove = true ) : string
 	{
 		if( $remove === false ) {
 			return $this->text;

@@ -27,7 +27,7 @@ class T3 extends \Aimeos\MW\Template\Base
 	 * @param string $begin Marker for start sequence with '*' as wildcard
 	 * @param string $end Marker for stop sequence with '*' as wildcard
 	 */
-	public function __construct( $text, $begin = '<!--###$-->', $end = '<!--$###-->' )
+	public function __construct( string $text, string $begin = '<!--###$-->', string $end = '<!--$###-->' )
 	{
 		parent::__construct( $text, $begin, $end );
 	}
