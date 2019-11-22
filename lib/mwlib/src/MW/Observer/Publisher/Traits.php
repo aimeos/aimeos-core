@@ -29,7 +29,7 @@ trait Traits
 	 * @param string $action Name of the action to listen for
 	 * @return \Aimeos\MW\Observer\Publisher\Iface Publisher object for method chaining
 	 */
-	public function attach( \Aimeos\MW\Observer\Listener\Iface $l, $action )
+	public function attach( \Aimeos\MW\Observer\Listener\Iface $l, string $action ) : Iface
 	{
 		$this->listeners[$action][] = $l;
 		return $this;
@@ -43,7 +43,7 @@ trait Traits
 	 * @param string $action Name of the action to remove the listener from
 	 * @return \Aimeos\MW\Observer\Publisher\Iface Publisher object for method chaining
 	 */
-	public function detach( \Aimeos\MW\Observer\Listener\Iface $l, $action )
+	public function detach( \Aimeos\MW\Observer\Listener\Iface $l, string $action ) : Iface
 	{
 		if( isset( $this->listeners[$action] ) )
 		{
@@ -64,7 +64,7 @@ trait Traits
 	 *
 	 * @return \Aimeos\MW\Observer\Publisher\Iface Publisher object for method chaining
 	 */
-	public function off()
+	public function off() : Iface
 	{
 		$this->listeners = [];
 		return $this;
@@ -78,7 +78,7 @@ trait Traits
 	 * @param mixed $value Value or object given to the listeners
 	 * @return mixed Modified value parameter
 	 */
-	protected function notify( $action, $value = null )
+	protected function notify( string $action, $value = null )
 	{
 		if( isset( $this->listeners[$action] ) )
 		{

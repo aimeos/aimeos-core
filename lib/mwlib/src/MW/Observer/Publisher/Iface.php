@@ -28,7 +28,7 @@ interface Iface
 	 * @return \Aimeos\MW\Observer\Publisher\Iface Publisher object for method chaining
 	 */
 
-	public function attach( \Aimeos\MW\Observer\Listener\Iface $l, $action );
+	public function attach( \Aimeos\MW\Observer\Listener\Iface $l, string $action ) : Iface;
 
 
 	/**
@@ -39,5 +39,13 @@ interface Iface
 	 * @return \Aimeos\MW\Observer\Publisher\Iface Publisher object for method chaining
 	 */
 
-	public function detach( \Aimeos\MW\Observer\Listener\Iface $l, $action );
+	public function detach( \Aimeos\MW\Observer\Listener\Iface $l, string $action ) : Iface;
+
+
+	/**
+	 * Removes all attached listeners from the publisher
+	 *
+	 * @return \Aimeos\MW\Observer\Publisher\Iface Publisher object for method chaining
+	 */
+	public function off() : Iface;
 }
