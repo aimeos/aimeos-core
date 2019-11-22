@@ -29,9 +29,9 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface, \Psr\Http\Message\ServerRe
 	/**
 	 * Returns the client IP address.
 	 *
-	 * @return string Client IP address
+	 * @return string|null Client IP address
 	 */
-	public function getClientAddress() : string;
+	public function getClientAddress() : ?string;
 
 	/**
 	 * Returns the current page or route name

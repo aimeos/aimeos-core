@@ -34,11 +34,11 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param \Psr\Http\Message\ServerRequestInterface $request Request object
-	 * @param string $clientaddr Client IP address
+	 * @param string|null $clientaddr Client IP address
 	 * @param string|null $target Page ID or route name
 	 */
 	public function __construct( \Aimeos\MW\View\Iface $view, \Psr\Http\Message\ServerRequestInterface $request,
-		string $clientaddr = '', string $target = null )
+		string $clientaddr = null, string $target = null )
 	{
 		parent::__construct( $view );
 
@@ -62,9 +62,9 @@ class Standard
 	/**
 	 * Returns the client IP address.
 	 *
-	 * @return string Client IP address
+	 * @return string|null Client IP address
 	 */
-	public function getClientAddress() : string
+	public function getClientAddress() : ?string
 	{
 		return $this->clientaddr;
 	}
