@@ -117,7 +117,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getCode()
 	{
-		return (string) $this->get( 'customer.code', '' );
+		return (string) $this->get( 'customer.code', $this->getPaymentAddress()->getEmail() );
 	}
 
 
