@@ -158,12 +158,11 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetName()
+	public function testGetListItemsDeletedDomain()
 	{
-		$object = new \Aimeos\MShop\Common\Item\ListRef\Test( [], [] );
+		$this->object->deleteListItem( 'text', $this->listItem1, $this->textItem1 );
 
-		$this->assertEquals( 'test label', $object->getName() );
-		$this->assertEquals( 'test name', $this->object->getName() );
+		$this->assertEquals( [$this->listItem1], $this->object->getListItemsDeleted( 'text' ) );
 	}
 
 
@@ -262,6 +261,15 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 			$this->assertInstanceOf( \Aimeos\MShop\Text\Item\Iface::class, $listItem->getRefItem() );
 			$this->assertSame( $expected[$listItem->getRefId()], $listItem->getRefItem() );
 		}
+	}
+
+
+	public function testGetName()
+	{
+		$object = new \Aimeos\MShop\Common\Item\ListRef\Test( [], [] );
+
+		$this->assertEquals( 'test label', $object->getName() );
+		$this->assertEquals( 'test name', $this->object->getName() );
 	}
 
 

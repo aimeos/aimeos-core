@@ -23,6 +23,7 @@ trait Traits
 	private $listRefItems = [];
 	private $listRmItems = [];
 	private $listPrepared = false;
+	private $listRmMap = [];
 	private $listMap = [];
 	private $listMax = 0;
 
@@ -104,7 +105,7 @@ trait Traits
 		if( isset( $this->listItems[$domain] )
 			&& ( $key = array_search( $listItem, $this->listItems[$domain], true ) ) !== false
 		) {
-			$this->listRmItems[] = $listItem->setRefItem( $refItem );
+			$this->listRmItems[] = $this->listRmMap[$domain][] = $listItem->setRefItem( $refItem );
 
 			unset( $this->listMap[$domain][$listItem->getType()][$listItem->getRefId()] );
 			unset( $this->listItems[$domain][$key] );
@@ -152,8 +153,12 @@ trait Traits
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface[] List items with referenced items attached (optional)
 	 */
-	public function getListItemsDeleted()
+	public function getListItemsDeleted( $domain = null )
 	{
+		if( $domain !== null ) {
+			return $this->listRmMap[$domain] ?: [];
+		}
+
 		return $this->listRmItems;
 	}
 
