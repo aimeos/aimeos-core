@@ -38,8 +38,11 @@ class OrderAddBaseServiceCurrencyid extends \Aimeos\MW\Setup\Task\Base
 	public function migrate()
 	{
 		$this->msg( 'Adding currency ID to order base service table', 0 );
+		$schema = $this->getSchema( 'db-order' );
 
-		$this->execute( $this->sql, 'db-order' );
+		if( $schema->tableExists( 'mshop_order_base' ) && $schema->tableExists( 'mshop_order_base_product' ) ) {
+			$this->execute( $this->sql, 'db-order' );
+		}
 
 		$this->status( 'done' );
 	}
