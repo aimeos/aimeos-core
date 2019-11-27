@@ -36,9 +36,9 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	/**
 	 * Returns the CSRF token value.
 	 *
-	 * @return string CSRF token value
+	 * @return string|null CSRF token value
 	 */
-	public function value() : string;
+	public function value() : ?string;
 
 	/**
 	 * Returns the HTML form field for the CSRF token.

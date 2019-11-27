@@ -31,16 +31,16 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $name CSRF token name
-	 * @param string $value CSRF token value
+	 * @param string|null $value CSRF token value
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, string $name = '', string $value = '' )
+	public function __construct( \Aimeos\MW\View\Iface $view, string $name = '', string $value = null )
 	{
 		parent::__construct( $view );
 
 		$this->name = $name;
 		$this->value = $value;
 
-		if( $value != '' ) {
+		if( $value != null ) {
 			$this->formfield = '<input class="csrf-token" type="hidden" name="' . $this->name . '" value="' . $this->value . '" />';
 		}
 	}
@@ -71,9 +71,9 @@ class Standard
 	/**
 	 * Returns the CSRF token value.
 	 *
-	 * @return string CSRF token value
+	 * @return string|null CSRF token value
 	 */
-	public function value() : string
+	public function value() : ?string
 	{
 		return $this->value;
 	}
