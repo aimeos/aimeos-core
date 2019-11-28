@@ -40,7 +40,7 @@ class Standard
 		$this->name = $name;
 		$this->value = $value;
 
-		if( $value != null ) {
+		if( $value ) {
 			$this->formfield = '<input class="csrf-token" type="hidden" name="' . $this->name . '" value="' . $this->value . '" />';
 		}
 	}
