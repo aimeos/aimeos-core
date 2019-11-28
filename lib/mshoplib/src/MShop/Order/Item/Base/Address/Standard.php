@@ -163,7 +163,7 @@ class Standard
 			switch( $key )
 			{
 				case 'order.base.address.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
-				case 'order.base.address.addressid': !$private ?: $item = $item->setAddressId( $value ); break;
+				case 'order.base.address.addressid': $item = $item->setAddressId( $value ); break;
 				case 'order.base.address.position': $item = $item->setPosition( $value ); break;
 				case 'order.base.address.type': $item = $item->setType( $value ); break;
 				default: continue 2;
@@ -188,11 +188,10 @@ class Standard
 
 		$list['order.base.address.type'] = $this->getType();
 		$list['order.base.address.position'] = $this->getPosition();
+		$list['order.base.address.addressid'] = $this->getAddressId();
 
-		if( $private === true )
-		{
+		if( $private === true ) {
 			$list['order.base.address.baseid'] = $this->getBaseId();
-			$list['order.base.address.addressid'] = $this->getAddressId();
 		}
 
 		return $list;
