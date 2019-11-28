@@ -22,7 +22,7 @@ class Standard
 	implements \Aimeos\MShop\Common\Item\Address\Iface, \Aimeos\MShop\Common\Item\Position\Iface
 {
 	private $prefix;
-	private $values;
+
 
 	/**
 	 * Initializes the provider common address item object
@@ -34,7 +34,6 @@ class Standard
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->values = $values;
 		$this->prefix = $prefix;
 	}
 
@@ -46,11 +45,7 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		if( isset( $this->values[$this->prefix . 'parentid'] ) ) {
-			return (string) $this->values[$this->prefix . 'parentid'];
-		}
-
-		return '';
+		return (string) $this->get( $this->prefix . 'parentid' );
 	}
 
 
@@ -62,13 +57,7 @@ class Standard
 	 */
 	public function setParentId( $parentid )
 	{
-		if( (string) $parentid !== $this->getParentId() )
-		{
-			$this->values[$this->prefix . 'parentid'] = (string) $parentid;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'parentid', (string) $parentid );
 	}
 
 
@@ -79,11 +68,7 @@ class Standard
 	 */
 	public function getPosition()
 	{
-		if( isset( $this->values[$this->prefix . 'position'] ) ) {
-			return (int) $this->values[$this->prefix . 'position'];
-		}
-
-		return 0;
+		return (int) $this->get( $this->prefix . 'position' );
 	}
 
 
@@ -95,13 +80,7 @@ class Standard
 	 */
 	public function setPosition( $position )
 	{
-		if( (int) $position !== $this->getPosition() )
-		{
-			$this->values[$this->prefix . 'position'] = (int) $position;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( $this->prefix . 'position', (int) $position );
 	}
 
 
