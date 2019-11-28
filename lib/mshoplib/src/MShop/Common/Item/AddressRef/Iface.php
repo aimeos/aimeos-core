@@ -54,10 +54,10 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the address items
 	 *
-	 * @param integer $pos Position (key) in the list of address items
+	 * @param string $id Position (key) in the list of address items
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface|null Address item or null if not found
 	 */
-	public function getAddressItem( $pos );
+	public function getAddressItem( $id );
 
 	/**
 	 * Returns the address items
