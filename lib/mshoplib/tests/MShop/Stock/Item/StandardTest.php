@@ -115,9 +115,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->setStockLevel( null );
 		$this->assertEquals( null, $this->object->getStockLevel() );
+		$this->assertTrue( $this->object->isModified() );
 
 		$this->object->setStockLevel( '' );
 		$this->assertEquals( null, $this->object->getStockLevel() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
