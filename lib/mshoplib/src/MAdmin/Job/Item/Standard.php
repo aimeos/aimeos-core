@@ -22,8 +22,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MAdmin\Job\Item\Iface
 {
-	private $values;
-
 	/**
 	 * Initializes the job item.
 	 *
@@ -32,8 +30,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'job.', $values );
-
-		$this->values = $values;
 	}
 
 
@@ -44,11 +40,7 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		if( isset( $this->values['job.label'] ) ) {
-			return (string) $this->values['job.label'];
-		}
-
-		return '';
+		return (string) $this->get( 'job.label', '' );
 	}
 
 
@@ -60,13 +52,7 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( (string) $label !== $this->getLabel() )
-		{
-			$this->values['job.label'] = (string) $label;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'job.label', (string) $label );
 	}
 
 
@@ -77,11 +63,7 @@ class Standard
 	 */
 	public function getMethod()
 	{
-		if( isset( $this->values['job.method'] ) ) {
-			return (string) $this->values['job.method'];
-		}
-
-		return '';
+		return (string) $this->get( 'job.method', '' );
 	}
 
 
@@ -93,13 +75,7 @@ class Standard
 	 */
 	public function setMethod( $method )
 	{
-		if( (string) $method !== $this->getMethod() )
-		{
-			$this->values['job.method'] = (string) $method;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'job.method', (string) $method );
 	}
 
 
@@ -110,11 +86,7 @@ class Standard
 	 */
 	public function getParameter()
 	{
-		if( isset( $this->values['job.parameter'] ) ) {
-			return (array) $this->values['job.parameter'];
-		}
-
-		return [];
+		return (array) $this->get( 'job.parameter', [] );
 	}
 
 
@@ -126,10 +98,7 @@ class Standard
 	 */
 	public function setParameter( array $param )
 	{
-		$this->values['job.parameter'] = $param;
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'job.parameter', $param );
 	}
 
 
@@ -140,11 +109,7 @@ class Standard
 	 */
 	public function getResult()
 	{
-		if( isset( $this->values['job.result'] ) ) {
-			return (array) $this->values['job.result'];
-		}
-
-		return [];
+		return (array) $this->get( 'job.result', [] );
 	}
 
 
@@ -156,10 +121,7 @@ class Standard
 	 */
 	public function setResult( array $result )
 	{
-		$this->values['job.result'] = $result;
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'job.result', $result );
 	}
 
 
@@ -170,11 +132,7 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		if( isset( $this->values['job.status'] ) ) {
-			return (int) $this->values['job.status'];
-		}
-
-		return 1;
+		return (int) $this->get( 'job.status', 1 );
 	}
 
 
@@ -186,13 +144,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() )
-		{
-			$this->values['job.status'] = (int) $status;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'job.status', (int) $status );
 	}
 
 

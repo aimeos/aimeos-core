@@ -59,7 +59,7 @@ class CacheAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		foreach( $testdata['cache'] as $dataset ) {
-			$manager->saveItem( $manager->createItem()->fromArray( $dataset ), false );
+			$manager->saveItem( $manager->createItem()->fromArray( $dataset, true ), false );
 		}
 	}
 

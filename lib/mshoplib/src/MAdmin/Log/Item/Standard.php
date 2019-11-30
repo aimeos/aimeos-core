@@ -22,8 +22,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MAdmin\Log\Item\Iface
 {
-	private $values;
-
 	/**
 	 * Initializes the log item.
 	 *
@@ -32,8 +30,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'log.', $values );
-
-		$this->values = $values;
 	}
 
 
@@ -44,11 +40,7 @@ class Standard
 	 */
 	public function getFacility()
 	{
-		if( isset( $this->values['log.facility'] ) ) {
-			return (string) $this->values['log.facility'];
-		}
-
-		return '';
+		return (string) $this->get( 'log.facility', '' );
 	}
 
 
@@ -60,13 +52,7 @@ class Standard
 	 */
 	public function setFacility( $facility )
 	{
-		if( (string) $facility !== $this->getFacility() )
-		{
-			$this->values['log.facility'] = (string) $facility;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'log.facility', (string) $facility );
 	}
 
 
@@ -77,9 +63,7 @@ class Standard
 	 */
 	public function getTimestamp()
 	{
-		if( isset( $this->values['log.timestamp'] ) ) {
-			return (string) $this->values['log.timestamp'];
-		}
+		return $this->get( 'log.timestamp' );
 	}
 
 
@@ -90,11 +74,7 @@ class Standard
 	 */
 	public function getPriority()
 	{
-		if( isset( $this->values['log.priority'] ) ) {
-			return (int) $this->values['log.priority'];
-		}
-
-		return 0;
+		return (int) $this->get( 'log.priority', 0 );
 	}
 
 
@@ -106,13 +86,7 @@ class Standard
 	 */
 	public function setPriority( $priority )
 	{
-		if( (int) $priority !== $this->getPriority() )
-		{
-			$this->values['log.priority'] = (int) $priority;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'log.priority', (int) $priority );
 	}
 
 
@@ -123,11 +97,7 @@ class Standard
 	 */
 	public function getMessage()
 	{
-		if( isset( $this->values['log.message'] ) ) {
-			return (string) $this->values['log.message'];
-		}
-
-		return '';
+		return (string) $this->get( 'log.message', '' );
 	}
 
 
@@ -139,13 +109,7 @@ class Standard
 	 */
 	public function setMessage( $message )
 	{
-		if( (string) $message !== $this->getMessage() )
-		{
-			$this->values['log.message'] = (string) $message;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'log.message', (string) $message );
 	}
 
 
@@ -156,11 +120,7 @@ class Standard
 	 */
 	public function getRequest()
 	{
-		if( isset( $this->values['log.request'] ) ) {
-			return (string) $this->values['log.request'];
-		}
-
-		return '';
+		return (string) $this->get( 'log.request', '' );
 	}
 
 
@@ -172,13 +132,7 @@ class Standard
 	 */
 	public function setRequest( $request )
 	{
-		if( (string) $request !== $this->getRequest() )
-		{
-			$this->values['log.request'] = (string) $request;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'log.request', (string) $request );
 	}
 
 

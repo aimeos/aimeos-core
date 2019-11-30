@@ -22,9 +22,6 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MAdmin\Cache\Item\Iface
 {
-	private $values;
-
-
 	/**
 	 * Initializes the log item.
 	 *
@@ -33,8 +30,6 @@ class Standard
 	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'cache.', $values );
-
-		$this->values = $values;
 	}
 
 
@@ -45,9 +40,7 @@ class Standard
 	 */
 	public function getId()
 	{
-		if( isset( $this->values['id'] ) ) {
-			return (string) $this->values['id'];
-		}
+		return $this->get( 'id' );
 	}
 
 
@@ -59,13 +52,7 @@ class Standard
 	 */
 	public function setId( $id )
 	{
-		if( (string) $id !== $this->getId() )
-		{
-			$this->values['id'] = (string) $id;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'id', $id );
 	}
 
 
@@ -76,9 +63,7 @@ class Standard
 	 */
 	public function getSiteId()
 	{
-		if( isset( $this->values['siteid'] ) ) {
-			return (string) $this->values['siteid'];
-		}
+		return $this->get( 'siteid' );
 	}
 
 
@@ -89,11 +74,7 @@ class Standard
 	 */
 	public function getValue()
 	{
-		if( isset( $this->values['value'] ) ) {
-			return (string) $this->values['value'];
-		}
-
-		return '';
+		return (string) $this->get( 'value', '' );
 	}
 
 
@@ -105,13 +86,7 @@ class Standard
 	 */
 	public function setValue( $value )
 	{
-		if( (string) $value !== $this->getValue() )
-		{
-			$this->values['value'] = (string) $value;
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'value', (string) $value );
 	}
 
 
@@ -122,9 +97,7 @@ class Standard
 	 */
 	public function getTimeExpire()
 	{
-		if( isset( $this->values['expire'] ) ) {
-			return (string) $this->values['expire'];
-		}
+		return $this->get( 'expire' );
 	}
 
 
@@ -136,13 +109,7 @@ class Standard
 	 */
 	public function setTimeExpire( $timestamp )
 	{
-		if( $timestamp !== $this->getValue() )
-		{
-			$this->values['expire'] = $this->checkDateFormat( $timestamp );
-			$this->setModified();
-		}
-
-		return $this;
+		return $this->set( 'expire', $this->checkDateFormat( $timestamp ) );
 	}
 
 
@@ -153,11 +120,7 @@ class Standard
 	 */
 	public function getTags()
 	{
-		if( isset( $this->values['tags'] ) ) {
-			return (array) $this->values['tags'];
-		}
-
-		return [];
+		return (array) $this->get( 'tags', [] );
 	}
 
 
@@ -169,10 +132,7 @@ class Standard
 	 */
 	public function setTags( array $tags )
 	{
-		$this->values['tags'] = $tags;
-		$this->setModified();
-
-		return $this;
+		return $this->set( 'tags', $tags );
 	}
 
 
@@ -202,7 +162,7 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'cache.id': $item = $item->setId( $value ); break;
+				case 'cache.id': !$private ?: $item = $item->setId( $value ); break;
 				case 'cache.value': $item = $item->setValue( $value ); break;
 				case 'cache.expire': $item = $item->setTimeExpire( $value ); break;
 				case 'cache.tags': $item = $item->setTags( $value ); break;
