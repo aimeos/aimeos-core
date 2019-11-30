@@ -129,8 +129,6 @@ abstract class Base
 		// workaround for NULL values instead of empty strings and stringified integers from database
 		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] != $value
 			|| $value === null && $this->bdata[$name] !== null
-			|| $value === 0 && $this->bdata[$name] !== '0'
-			|| $value === '' && $this->bdata[$name] != ''
 		) {
 			$this->bdata[$name] = $value;
 			$this->setModified();

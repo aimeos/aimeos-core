@@ -678,10 +678,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$newProducts = $newBasket->getProducts();
 
-		foreach( $basket->getProducts() as $key => $product )
-		{
+		foreach( $basket->getProducts() as $key => $product ) {
 			$this->assertEquals( $product->getId(), $newProducts[$key]->getId() );
-			$this->assertEquals( $product->getPosition(), $newProducts[$key]->getPosition() );
 		}
 
 		$newServices = $newBasket->getServices();

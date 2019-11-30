@@ -198,7 +198,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setReason( 1 );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
-		$this->assertEquals( 1, $this->object->getReason() );
+		$this->assertSame( 1, $this->object->getReason() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -208,7 +208,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setReason( null );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
-		$this->assertEquals( null, $this->object->getReason() );
+		$this->assertSame( null, $this->object->getReason() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setReason( '-1' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
-		$this->assertEquals( -1, $this->object->getReason() );
+		$this->assertSame( -1, $this->object->getReason() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
