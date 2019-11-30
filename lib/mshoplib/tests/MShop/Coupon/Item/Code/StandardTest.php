@@ -106,14 +106,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetCount()
 	{
 		$this->assertEquals( 100, $this->object->getCount() );
-	}
 
-
-	public function testGetCountNull()
-	{
-		$this->object->setCount( null );
-		$this->assertEquals( null, $this->object->getCount() );
-		$this->assertTrue( $this->object->isModified() );
+		$object = new \Aimeos\MShop\Coupon\Item\Code\Standard();
+		$this->assertSame( 0, $object->getCount() );
 	}
 
 
@@ -130,11 +125,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSetCountNull()
 	{
 		$return = $this->object->setCount( null );
-		$this->assertEquals( null, $this->object->getCount() );
+		$this->assertSame( null, $this->object->getCount() );
 		$this->assertTrue( $this->object->isModified() );
+	}
 
+
+	public function testSetCountEmpty()
+	{
 		$return = $this->object->setCount( '' );
-		$this->assertEquals( null, $this->object->getCount() );
+		$this->assertSame( null, $this->object->getCount() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
