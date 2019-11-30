@@ -756,7 +756,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 		foreach( $items as $key => $item )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $item );
-			$items[$key] = $item->setType( $type )->setId( null ); // enforce that the type and saving as new item
+			$items[$key] = $item->setType( $type );
 		}
 
 		return $items;
@@ -781,7 +781,6 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 			}
 
 			$this->checkPrice( $item->getPrice() );
-			$items[$key] = $item->setId( null ); // enforce saving as new item
 		}
 
 		return $items;
@@ -803,7 +802,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
 
 			$this->checkPrice( $item->getPrice() );
-			$items[$key] = $item->setType( $type )->setId( null ); // enforce the type and saving as new item
+			$items[$key] = $item->setType( $type );
 		}
 
 		return $items;
