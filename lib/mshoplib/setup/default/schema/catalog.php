@@ -14,7 +14,7 @@ return array(
 			$table = $schema->createTable( 'mshop_catalog' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'parentid', 'integer', ['notnull' => false] );
 			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'level', 'smallint', [] );
 			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
