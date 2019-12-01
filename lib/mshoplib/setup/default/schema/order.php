@@ -110,10 +110,10 @@ return array(
 			$table->addColumn( 'suppliercode', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'stocktype', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'name', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'description', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'target', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'timeframe', 'string', array( 'length' => 16 ) );
+			$table->addColumn( 'description', 'text', array( 'length' => 0xffff, 'default' => '' ) );
+			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255, 'default' => '' ) );
+			$table->addColumn( 'target', 'string', array( 'length' => 255, 'default' => '' ) );
+			$table->addColumn( 'timeframe', 'string', array( 'length' => 16, 'default' => '' ) );
 			$table->addColumn( 'quantity', 'integer', [] );
 			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
@@ -186,8 +186,8 @@ return array(
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'tax', 'decimal', array( 'precision' => 14, 'scale' => 4 ) );
 			$table->addColumn( 'taxrate', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'taxflag', 'smallint', [] );
-			$table->addColumn( 'pos', 'integer', [] );
+			$table->addColumn( 'taxflag', 'smallint', ['default' => 1] );
+			$table->addColumn( 'pos', 'integer', ['default' => 0] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
