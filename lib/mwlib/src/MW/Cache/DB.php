@@ -48,10 +48,6 @@ class DB
 	 *		)
 	 *	[get] =>
 	 *		SELECT id, value, expire FROM cachetable WHERE siteid = ? AND :cond
-	 *	[getbytag] =>
-	 *		SELECT id, value, expire FROM cachetable
-	 *		JOIN cachetagtable ON tid = id
-	 *		WHERE siteid = ? AND tsiteid = ? AND :cond
 	 *	[set] =>
 	 *		INSERT INTO cachetable ( id, siteid, expire, value ) VALUES ( ?, ?, ?, ? )
 	 *	[settag] =>
@@ -373,14 +369,13 @@ class DB
 		// Remove existing entries first to avoid duplicate key conflicts
 		$this->deleteMultiple( array_keys( $pairs ) );
 
-		$type = ( count( $pairs ) > 1 ? \Aimeos\MW\DB\Connection\Base::TYPE_PREP : \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE );
 		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
 			$conn->begin();
-			$stmt = $conn->create( $this->sql['set'], $type );
-			$stmtTag = $conn->create( $this->sql['settag'], \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+			$stmt = $conn->create( $this->sql['set'] );
+			$stmtTag = $conn->create( $this->sql['settag'] );
 
 			foreach( $pairs as $key => $value )
 			{
@@ -454,7 +449,7 @@ class DB
 	 */
 	protected function checkSqlConfig( array $config )
 	{
-		$required = array( 'delete', 'deletebytag', 'get', 'getbytag', 'set', 'settag' );
+		$required = array( 'delete', 'deletebytag', 'get', 'set', 'settag' );
 
 		foreach( $required as $key => $entry )
 		{

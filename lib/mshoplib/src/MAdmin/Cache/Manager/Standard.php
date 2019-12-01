@@ -111,36 +111,6 @@ class Standard
 			 * @category Developer
 			 * @see madmin/cache/manager/standard/delete/ansi
 			 * @see madmin/cache/manager/standard/get/ansi
-			 * @see madmin/cache/manager/standard/getbytag/ansi
-			 * @see madmin/cache/manager/standard/set/ansi
-			 * @see madmin/cache/manager/standard/settag/ansi
-			 * @see madmin/cache/manager/standard/search/ansi
-			 * @see madmin/cache/manager/standard/count/ansi
-			 */
-
-			/** madmin/cache/manager/standard/getbytag/mysql
-			 * Retrieves the records from the database matched by the given tags
-			 *
-			 * @see madmin/cache/manager/standard/getbytag/ansi
-			 */
-
-			/** madmin/cache/manager/standard/getbytag/ansi
-			 * Retrieves the records from the database matched by the given tags
-			 *
-			 * Fetches the records matched by the given tags from the cache
-			 * database. The records must be from the sites that is
-			 * configured in the context item.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for retrieving items by tag
-			 * @since 2014.03
-			 * @category Developer
-			 * @see madmin/cache/manager/standard/delete/ansi
-			 * @see madmin/cache/manager/standard/deletebytag/ansi
-			 * @see madmin/cache/manager/standard/get/ansi
 			 * @see madmin/cache/manager/standard/set/ansi
 			 * @see madmin/cache/manager/standard/settag/ansi
 			 * @see madmin/cache/manager/standard/search/ansi
@@ -174,7 +144,6 @@ class Standard
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see madmin/cache/manager/standard/getbytag/ansi
 			 * @see madmin/cache/manager/standard/delete/ansi
 			 * @see madmin/cache/manager/standard/deletebytag/ansi
 			 * @see madmin/cache/manager/standard/set/ansi
@@ -209,19 +178,13 @@ class Standard
 				'sql' => array(
 					'delete' => $this->getSqlConfig( 'madmin/cache/manager/standard/delete' ),
 					'deletebytag' => $this->getSqlConfig( 'madmin/cache/manager/standard/deletebytag' ),
-					'getbytag' => $this->getSqlConfig( 'madmin/cache/manager/standard/getbytag' ),
 					'get' => $this->getSqlConfig( 'madmin/cache/manager/standard/get' ),
 					'set' => $this->getSqlConfig( 'madmin/cache/manager/standard/set' ),
 					'settag' => $this->getSqlConfig( 'madmin/cache/manager/standard/settag' ),
 				),
 			);
 			$dbm = $context->getDatabaseManager();
-
-			try {
-				$this->object = \Aimeos\MW\Cache\Factory::create( $name, $config, $dbm );
-			} catch( \Exception $e ) {
-				$this->object = \Aimeos\MW\Cache\Factory::create( 'DB', $config, $dbm );
-			}
+			$this->object = \Aimeos\MW\Cache\Factory::create( 'DB', $config, $dbm );
 		}
 
 		return $this->object;
@@ -270,7 +233,6 @@ class Standard
 		 * @category Developer
 		 * @see madmin/cache/manager/standard/deletebytag/ansi
 		 * @see madmin/cache/manager/standard/get/ansi
-		 * @see madmin/cache/manager/standard/getbytag/ansi
 		 * @see madmin/cache/manager/standard/set/ansi
 		 * @see madmin/cache/manager/standard/settag/ansi
 		 * @see madmin/cache/manager/standard/search/ansi
@@ -348,7 +310,6 @@ class Standard
 		 * @see madmin/cache/manager/standard/delete/ansi
 		 * @see madmin/cache/manager/standard/deletebytag/ansi
 		 * @see madmin/cache/manager/standard/get/ansi
-		 * @see madmin/cache/manager/standard/getbytag/ansi
 		 * @see madmin/cache/manager/standard/settag/ansi
 		 * @see madmin/cache/manager/standard/search/ansi
 		 * @see madmin/cache/manager/standard/count/ansi
@@ -386,7 +347,6 @@ class Standard
 		 * @see madmin/cache/manager/standard/delete/ansi
 		 * @see madmin/cache/manager/standard/deletebytag/ansi
 		 * @see madmin/cache/manager/standard/get/ansi
-		 * @see madmin/cache/manager/standard/getbytag/ansi
 		 * @see madmin/cache/manager/standard/set/ansi
 		 * @see madmin/cache/manager/standard/search/ansi
 		 * @see madmin/cache/manager/standard/count/ansi
@@ -490,7 +450,6 @@ class Standard
 			 * @since 2014.03
 			 * @category Developer
 			 * @see madmin/cache/manager/standard/get/ansi
-			 * @see madmin/cache/manager/standard/getbytag/ansi
 			 * @see madmin/cache/manager/standard/delete/ansi
 			 * @see madmin/cache/manager/standard/deletebytag/ansi
 			 * @see madmin/cache/manager/standard/set/ansi
@@ -532,7 +491,6 @@ class Standard
 			 * @since 2014.03
 			 * @category Developer
 			 * @see madmin/cache/manager/standard/get/ansi
-			 * @see madmin/cache/manager/standard/getbytag/ansi
 			 * @see madmin/cache/manager/standard/delete/ansi
 			 * @see madmin/cache/manager/standard/deletebytag/ansi
 			 * @see madmin/cache/manager/standard/set/ansi

@@ -28,23 +28,9 @@ return array(
 					WHERE "siteid" = ? AND :cond
 				',
 			),
-			'getbytag' => array(
-				'ansi' => '
-					SELECT "id", "value", "expire" FROM "madmin_cache"
-					JOIN "madmin_cache_tag" ON "tid" = "id"
-					WHERE "siteid" = ? AND "tsiteid" = ? AND :cond
-				',
-			),
 			'set' => array(
 				'ansi' => '
 					INSERT INTO "madmin_cache" (
-						"id", "siteid", "expire", "value"
-					) VALUES (
-						?, ?, ?, ?
-					)
-				',
-				'mysql' => '
-					REPLACE INTO "madmin_cache" (
 						"id", "siteid", "expire", "value"
 					) VALUES (
 						?, ?, ?, ?
@@ -58,11 +44,6 @@ return array(
 					) VALUES (
 						?, ?, ?
 					)
-				',
-				'mysql' => '
-					REPLACE INTO "madmin_cache_tag" (
-						"tid", "tsiteid", "tname"
-					) VALUES :tuples
 				',
 			),
 			'search' => array(
