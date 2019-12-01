@@ -53,7 +53,7 @@ class Standard
 			'internalcode' => 'mordbapr."ordaddrid"',
 			'label' => 'Address ID for the product',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.orderproductid' => array(
@@ -69,7 +69,7 @@ class Standard
 			'internalcode' => 'mordbapr."prodid"',
 			'label' => 'Product original ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.name' => array(
