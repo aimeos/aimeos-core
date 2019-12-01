@@ -35,6 +35,15 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 
 
 	/**
+	 * Clears the result set if anything is left.
+	 */
+	public function __destruct()
+	{
+		$this->statement->closeCursor();
+	}
+
+
+	/**
 	 * Returns the number of rows affected by a INSERT, UPDATE or DELETE statement.
 	 *
 	 * @return int Number of touched records
