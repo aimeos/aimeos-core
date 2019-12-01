@@ -238,9 +238,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 
 		try
 		{
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->config['get'] ) );
+			$stmt = $conn->create( str_replace( [':level', ':cond'], [$numlevel, $conditions], $this->config['get'] ) );
 			$stmt->bind( 1, $id, $this->searchConfig['parentid']['internaltype'] );
-			$stmt->bind( 2, $numlevel, $this->searchConfig['level']['internaltype'] );
 			$result = $stmt->execute();
 
 			if( ( $row = $result->fetch() ) === false ) {
@@ -785,9 +784,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 
 		try
 		{
-			$stmt = $conn->create( str_replace( ':cond', '1=1', $this->config['get'] ) );
+			$stmt = $conn->create( str_replace( [':level', ':cond'], ['0', '1=1'], $this->config['get'] ) );
 			$stmt->bind( 1, $id, $this->searchConfig['parentid']['internaltype'] );
-			$stmt->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
 			$result = $stmt->execute();
 
 			if( ( $row = $result->fetch() ) === false ) {
