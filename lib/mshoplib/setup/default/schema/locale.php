@@ -14,7 +14,7 @@ return array(
 			$table = $schema->createTable( 'mshop_locale_site' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'parentid', 'integer', ['notnull' => false] );
 			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'config', 'text', array( 'default' => '', 'length' => 0xffff ) );
