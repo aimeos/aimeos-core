@@ -241,8 +241,6 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$stmt->execute()->finish();
 
 		$this->object->release( $conn );
-
-		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (1, \'test\')', strval( $stmt ) );
 	}
 
 
@@ -258,8 +256,6 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$stmt2->execute()->finish();
 
 		$this->object->release( $conn );
-
-		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (1, \'0.12\')', strval( $stmt2 ) );
 	}
 
 
@@ -274,8 +270,6 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$stmt2->execute()->finish();
 
 		$this->object->release( $conn );
-
-		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("name", "id") VALUES (\'?te?st?\', 1)', strval( $stmt2 ) );
 	}
 
 
@@ -322,42 +316,6 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testStmtPreparedBindOne()
-	{
-		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (1, ?)';
-
-		$conn = $this->object->acquire();
-
-		$stmt = $conn->create( $sqlinsert, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
-		$stmt->bind( 1, 'test' );
-		$result = $stmt->execute();
-		$rows = $result->affectedRows();
-		$result->finish();
-
-		$this->object->release( $conn );
-
-		$this->assertEquals( 1, $rows );
-	}
-
-
-	public function testStmtPreparedBindTwo()
-	{
-		$sqlinsert2 = 'INSERT INTO "mw_unit_test" ("name", "id") VALUES (\'?te?st?\', ?)';
-
-		$conn = $this->object->acquire();
-
-		$stmt = $conn->create( $sqlinsert2, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
-		$stmt->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-		$result = $stmt->execute();
-		$rows = $result->affectedRows();
-		$result->finish();
-
-		$this->object->release( $conn );
-
-		$this->assertEquals( 1, $rows );
-	}
-
-
 	public function testResultFetch()
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
@@ -365,7 +323,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 
 		$conn = $this->object->acquire();
 
-		$stmt = $conn->create( $sqlinsert, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+		$stmt = $conn->create( $sqlinsert );
 		$stmt->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, 'test' );
 		$stmt->execute()->finish();
@@ -388,7 +346,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 
 		$conn = $this->object->acquire();
 
-		$stmt = $conn->create( $sqlinsert, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+		$stmt = $conn->create( $sqlinsert );
 		$stmt->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, 'test' );
 		$stmt->execute()->finish();
@@ -428,7 +386,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 
 		try
 		{
-			$stmt = $conn->create( $sqlinsert, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+			$stmt = $conn->create( $sqlinsert );
 			$stmt->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, 'test', 123 );
 			$stmt->execute();
@@ -480,26 +438,6 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		try
 		{
 			$conn->create( 'SELECT *' )->execute()->finish();
-		}
-		catch( \Aimeos\MW\DB\Exception $e )
-		{
-			$this->object->release( $conn );
-			throw $e;
-		}
-	}
-
-
-	public function testWrongStmtType()
-	{
-		$sql = 'SELECT * FROM "mw_unit_test"';
-
-		$conn = $this->object->acquire();
-
-		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
-
-		try
-		{
-			$conn->create( $sql, 123 );
 		}
 		catch( \Aimeos\MW\DB\Exception $e )
 		{

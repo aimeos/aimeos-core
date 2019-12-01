@@ -39,10 +39,9 @@ class None
 	 * Throws an exception because there is no implementation available.
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
-	 * @param int $type Simple or prepared statement type constant from abstract class
 	 * @throws \Aimeos\MW\DB\Exception
 	 */
-	public function create( string $sql, int $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE ) : \Aimeos\MW\DB\Statement\Iface
+	public function create( string $sql ) : \Aimeos\MW\DB\Statement\Iface
 	{
 		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
 	}

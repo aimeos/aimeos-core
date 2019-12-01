@@ -66,30 +66,6 @@ abstract class Base
 
 
 	/**
-	 * Creates the SQL string with bound parameters.
-	 *
-	 * @param string[] $parts List of SQL statement parts
-	 * @param string[] $binds List of values for the markers
-	 * @return string SQL statement
-	 */
-	protected function buildSQL( array $parts, array $binds ) : string
-	{
-		$i = 1; $stmt = '';
-
-		foreach( $parts as $part )
-		{
-			$stmt .= $part;
-			if( isset( $binds[$i] ) ) {
-				$stmt .= $binds[$i];
-			}
-			$i++;
-		}
-
-		return $stmt;
-	}
-
-
-	/**
 	 * Returns the connection object
 	 *
 	 * @return \Aimeos\MW\DB\Connection\Iface Connection object
@@ -133,43 +109,5 @@ abstract class Base
 		}
 
 		return $pdotype;
-	}
-
-
-	/**
-	 * Returns the SQL parts split at the markers
-	 *
-	 * @param string $sql SQL statement, mayby with markers
-	 * @return array List of SQL parts split at the markers
-	 * @throws \Aimeos\MW\DB\Exception If the SQL statement is invalid
-	 */
-	protected function getSqlParts( string $sql ) : array
-	{
-		$result = [];
-		$parts = explode( '?', $sql );
-
-		if( count( $parts ) === 1 ) {
-			return $parts;
-		}
-
-		if( ( $part = reset( $parts ) ) !== false )
-		{
-			do
-			{
-				$count = 0; $temp = $part;
-				while( ( $pr = str_replace( ['\\\'', '\'\''], '', $part ) ) !== false
-					&& ( $count += substr_count( $pr, '\'' ) ) % 2 !== 0 )
-				{
-					if( ( $part = next( $parts ) ) === false ) {
-						throw new \Aimeos\MW\DB\Exception( 'Number of apostrophes don\'t match: ' . $sql );
-					}
-					$temp .= '?' . $part;
-				}
-				$result[] = $temp;
-			}
-			while( ( $part = next( $parts ) ) !== false );
-		}
-
-		return $result;
 	}
 }

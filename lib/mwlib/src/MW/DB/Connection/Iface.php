@@ -32,10 +32,9 @@ interface Iface
 	 * Creates a database statement.
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
-	 * @param integer $type Simple or prepared statement type
 	 * @return \Aimeos\MW\DB\Statement\Iface
 	 */
-	public function create( string $sql, int $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE ) : \Aimeos\MW\DB\Statement\Iface;
+	public function create( string $sql ) : \Aimeos\MW\DB\Statement\Iface;
 
 
 	/**

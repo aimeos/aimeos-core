@@ -19,8 +19,6 @@ namespace Aimeos\MW\DB\Statement\DBAL;
  */
 class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Statement\Iface
 {
-	private $binds = [];
-	private $parts;
 	private $sql;
 
 
@@ -33,8 +31,18 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	public function __construct( \Aimeos\MW\DB\Connection\DBAL $conn, string $sql )
 	{
 		parent::__construct( $conn );
+		$this->sql = $sql;
+	}
 
-		$this->parts = $this->getSqlParts( $sql );
+
+	/**
+	 * Returns the SQL string as sent to the database (magic PHP method)
+	 *
+	 * @return string SQL statement
+	 */
+	public function __toString()
+	{
+		return $this->sql;
 	}
 
 
@@ -49,30 +57,7 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	 */
 	public function bind( int $position, $value, int $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR ) : \Aimeos\MW\DB\Statement\Iface
 	{
-		if( is_null( $value ) )
-		{
-			$this->binds[$position] = 'NULL';
-			return $this;
-		}
-
-		switch( $type )
-		{
-			case \Aimeos\MW\DB\Statement\Base::PARAM_NULL:
-				$this->binds[$position] = 'NULL'; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
-				$this->binds[$position] = ( (bool) $value ? 'TRUE' : 'FALSE' ); break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
-				$this->binds[$position] = (int) $value; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
-				$this->binds[$position] = (float) $value; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
-				$this->binds[$position] = $this->getConnection()->getRawObject()->quote( $value ); break;
-			default:
-				throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid parameter type "%1$s"', $type ) );
-		}
-
-		$this->sql = null;
-		return $this;
+		throw new \Aimeos\MW\DB\Exception( 'Binding parameters is not available for simple statements' );
 	}
 
 
@@ -84,12 +69,6 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	 */
 	public function execute() : \Aimeos\MW\DB\Result\Iface
 	{
-		if( count( $this->binds ) !== count( $this->parts ) - 1 )
-		{
-			$msg = 'Number of binds (%1$d) doesn\'t match the number of markers in "%2$s"';
-			throw new \Aimeos\MW\DB\Exception( sprintf( $msg, count( $this->binds ), implode( '?', $this->parts ) ) );
-		}
-
 		try {
 			$result = $this->exec();
 		} catch( \PDOException $e ) {
@@ -101,31 +80,12 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 
 
 	/**
-	 * Returns the SQL string as sent to the database (magic PHP method)
-	 *
-	 * @return string SQL statement
-	 */
-	public function __toString()
-	{
-		if( $this->sql === null ) {
-			$this->sql = $this->buildSQL( $this->parts, $this->binds );
-		}
-
-		return $this->sql;
-	}
-
-
-	/**
 	 * Binds the parameters and executes the SQL statment
 	 *
 	 * @return \PDOStatement Executed DBAL statement
 	 */
 	protected function exec() : \PDOStatement
 	{
-		if( $this->sql === null ) {
-			$this->sql = $this->buildSQL( $this->parts, $this->binds );
-		}
-
 		$level = error_reporting(); // Workaround for PDO warnings
 		$conn = $this->getConnection();
 

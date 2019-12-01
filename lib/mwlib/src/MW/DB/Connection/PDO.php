@@ -75,23 +75,21 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 * Creates a \PDO database statement.
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
-	 * @param int $type Simple or prepared statement type constant from abstract class
 	 * @return \Aimeos\MW\DB\Statement\Iface PDO statement object
 	 * @throws \Aimeos\MW\DB\Exception if type is invalid or the \PDO object throws an exception
 	 */
-	public function create( string $sql, int $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE ) : \Aimeos\MW\DB\Statement\Iface
+	public function create( string $sql ) : \Aimeos\MW\DB\Statement\Iface
 	{
-		try {
-			switch( $type )
-			{
-				case \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE:
-					return new \Aimeos\MW\DB\Statement\PDO\Simple( $this, $sql );
-				case \Aimeos\MW\DB\Connection\Base::TYPE_PREP:
-					return new \Aimeos\MW\DB\Statement\PDO\Prepared( $this, $sql );
-				default:
-					throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid value "%1$d" for statement type', $type ) );
+		try
+		{
+			if( strpos( $sql, '?' ) === false ) {
+				return new \Aimeos\MW\DB\Statement\PDO\Simple( $this, $sql );
 			}
-		} catch( \PDOException $e ) {
+
+			return new \Aimeos\MW\DB\Statement\PDO\Prepared( $this, $sql );
+		}
+		catch( \PDOException $e )
+		{
 			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
 	}

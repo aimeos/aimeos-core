@@ -249,8 +249,6 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$stmt->execute()->finish();
 
 		$this->object->release( $conn );
-
-		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("name") VALUES (\'test\')', strval( $stmt ) );
 	}
 
 
@@ -303,7 +301,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 		$conn = $this->object->acquire();
 
-		$stmt = $conn->create( $sqlinsert, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+		$stmt = $conn->create( $sqlinsert );
 		$stmt->bind( 1, 'test' );
 		$result = $stmt->execute();
 		$rows = $result->affectedRows();
@@ -322,7 +320,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 		$conn = $this->object->acquire();
 
-		$stmt = $conn->create( $sqlinsert, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+		$stmt = $conn->create( $sqlinsert );
 		$stmt->bind( 1, 1 );
 		$stmt->bind( 2, 'test' );
 		$stmt->execute()->finish();
@@ -347,7 +345,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 		try
 		{
-			$stmt = $conn->create( $sqlinsert, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+			$stmt = $conn->create( $sqlinsert );
 			$stmt->bind( 1, 1 );
 			$stmt->bind( 2, 'test', 123 );
 			$stmt->execute();
@@ -399,26 +397,6 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		try
 		{
 			$conn->create( 'SELECT *' )->execute()->finish();
-		}
-		catch( \Aimeos\MW\DB\Exception $e )
-		{
-			$this->object->release( $conn );
-			throw $e;
-		}
-	}
-
-
-	public function testWrongStmtType()
-	{
-		$sql = 'SELECT * FROM "mw_unit_test"';
-
-		$conn = $this->object->acquire();
-
-		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
-
-		try
-		{
-			$conn->create( $sql, 123 );
 		}
 		catch( \Aimeos\MW\DB\Exception $e )
 		{

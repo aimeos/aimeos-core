@@ -78,23 +78,18 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 * Creates a DBAL database statement
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
-	 * @param int $type Simple or prepared statement type constant from abstract class
 	 * @return \Aimeos\MW\DB\Statement\Iface DBAL statement object
 	 * @throws \Aimeos\MW\DB\Exception if type is invalid or the DBAL object throws an exception
 	 */
-	public function create( string $sql, int $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE ) : \Aimeos\MW\DB\Statement\Iface
+	public function create( string $sql ) : \Aimeos\MW\DB\Statement\Iface
 	{
 		try
 		{
-			switch( $type )
-			{
-				case \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE:
-					return new \Aimeos\MW\DB\Statement\DBAL\Simple( $this, $sql );
-				case \Aimeos\MW\DB\Connection\Base::TYPE_PREP:
-					return new \Aimeos\MW\DB\Statement\DBAL\Prepared( $this, $sql );
-				default:
-					throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid value "%1$d" for statement type', $type ) );
+			if( strpos( $sql, '?' ) === false ) {
+				return new \Aimeos\MW\DB\Statement\DBAL\Simple( $this, $sql );
 			}
+
+			return new \Aimeos\MW\DB\Statement\DBAL\Prepared( $this, $sql );
 		}
 		catch( \Exception $e )
 		{

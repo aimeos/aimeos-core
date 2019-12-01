@@ -38,6 +38,17 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 
 
 	/**
+	 * Returns the SQL string as sent to the database (magic PHP method)
+	 *
+	 * @return string SQL statement
+	 */
+	public function __toString()
+	{
+		return $this->sql . ":\n" . print_r( array_column( $this->binds, 0 ), true );
+	}
+
+
+	/**
 	 * Binds a value to a parameter in the statement
 	 *
 	 * @param int $position Position index of the placeholder
