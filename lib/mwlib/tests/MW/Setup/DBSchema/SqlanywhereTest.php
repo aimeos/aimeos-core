@@ -40,7 +40,7 @@ class SqlanywhereTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$result = $this->getMockBuilder( \Aimeos\MW\DB\Result\PDO::class )
-			->setMethods( array( 'fetch' ) )
+			->setMethods( array( 'fetch', '__destruct' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -70,7 +70,7 @@ class SqlanywhereTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$result = $this->getMockBuilder( \Aimeos\MW\DB\Result\PDO::class )
-			->setMethods( array( 'fetch' ) )
+			->setMethods( array( 'fetch', '__destruct' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -93,7 +93,7 @@ class SqlanywhereTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$result = $this->getMockBuilder( \Aimeos\MW\DB\Result\PDO::class )
-			->setMethods( array( 'fetch' ) )
+			->setMethods( array( 'fetch', '__destruct' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -116,7 +116,7 @@ class SqlanywhereTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$result = $this->getMockBuilder( \Aimeos\MW\DB\Result\PDO::class )
-			->setMethods( array( 'fetch' ) )
+			->setMethods( array( 'fetch', '__destruct' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -148,7 +148,7 @@ class SqlanywhereTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$result = $this->getMockBuilder( \Aimeos\MW\DB\Result\PDO::class )
-			->setMethods( array( 'fetch' ) )
+			->setMethods( array( 'fetch', '__destruct' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
