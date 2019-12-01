@@ -42,7 +42,7 @@ class OrderMigrateTaxrate extends \Aimeos\MW\Setup\Task\Base
 			$select = 'SELECT "id", "taxrate" FROM "mshop_order_base_product" WHERE "taxrate" NOT LIKE \'{%\' LIMIT 1000 OFFSET :offset';
 			$update = 'UPDATE "mshop_order_base_product" SET "taxrate" = ? WHERE "id" = ?';
 
-			$stmt = $conn->create( $update, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+			$stmt = $conn->create( $update );
 
 			do
 			{
@@ -88,7 +88,7 @@ class OrderMigrateTaxrate extends \Aimeos\MW\Setup\Task\Base
 			$select = 'SELECT "id", "taxrate" FROM "mshop_order_base_service" WHERE "taxrate" NOT LIKE \'{%\' LIMIT 1000 OFFSET :offset';
 			$update = 'UPDATE "mshop_order_base_service" SET "taxrate" = ? WHERE "id" = ?';
 
-			$stmt = $conn->create( $update, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+			$stmt = $conn->create( $update );
 
 			do
 			{

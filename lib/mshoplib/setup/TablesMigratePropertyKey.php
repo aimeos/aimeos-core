@@ -67,7 +67,7 @@ class TablesMigratePropertyKey extends \Aimeos\MW\Setup\Task\Base
 				$select = sprintf( 'SELECT "id", "type", "langid", "value" FROM "%1$s"', $table );
 				$update = sprintf( 'UPDATE "%1$s" SET "key" = ? WHERE "id" = ?', $table );
 
-				$stmt = $conn->create( $update, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+				$stmt = $conn->create( $update );
 				$result = $conn->create( $select )->execute();
 
 				while( ( $row = $result->fetch() ) !== false )

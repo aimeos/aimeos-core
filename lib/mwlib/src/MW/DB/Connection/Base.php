@@ -20,17 +20,6 @@ namespace Aimeos\MW\DB\Connection;
  */
 abstract class Base
 {
-	/**
-	 * Simple (direct) SQL queries
-	 */
-	const TYPE_SIMPLE = 0;
-
-	/**
-	 * Prepared statements
-	 */
-	const TYPE_PREP = 1;
-
-
 	private $params;
 
 

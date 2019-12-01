@@ -70,7 +70,7 @@ class TablesMigrateListsKey extends \Aimeos\MW\Setup\Task\Base
 				$select = sprintf( 'SELECT "id", "domain", "type", "refid" FROM "%1$s" WHERE "key"=\'\'', $table );
 				$update = sprintf( 'UPDATE "%1$s" SET "key" = ? WHERE "id" = ?', $table );
 
-				$stmt = $conn->create( $update, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+				$stmt = $conn->create( $update );
 				$result = $conn->create( $select )->execute();
 
 				while( ( $row = $result->fetch() ) !== false )

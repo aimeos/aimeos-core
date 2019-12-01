@@ -44,7 +44,7 @@ class MediaMigratePreview extends \Aimeos\MW\Setup\Task\Base
 		$select = 'SELECT "id", "preview" FROM "mshop_media" WHERE "preview" NOT LIKE \'{%\' LIMIT 1000 OFFSET :offset';
 		$update = 'UPDATE "mshop_media" SET "preview" = ? WHERE "id" = ?';
 
-		$stmt = $conn->create( $update, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+		$stmt = $conn->create( $update );
 
 		do
 		{

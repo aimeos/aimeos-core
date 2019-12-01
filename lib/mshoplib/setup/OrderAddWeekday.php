@@ -44,7 +44,7 @@ class OrderAddWeekday extends \Aimeos\MW\Setup\Task\Base
 		$select = 'SELECT "id", "ctime" FROM "mshop_order" WHERE "cwday" = \'\' LIMIT 1000 OFFSET :offset';
 		$update = 'UPDATE "mshop_order" SET "cwday" = ? WHERE "id" = ?';
 
-		$stmt = $conn->create( $update, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+		$stmt = $conn->create( $update );
 
 		do
 		{

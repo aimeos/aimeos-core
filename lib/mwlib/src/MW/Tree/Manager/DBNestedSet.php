@@ -440,9 +440,9 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 
 		try
 		{
-			$stmtLeft = $conn->create( $this->config['move-left'], \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
-			$stmtRight = $conn->create( $this->config['move-right'], \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
-			$updateParentId = $conn->create( $this->config['update-parentid'], \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+			$stmtLeft = $conn->create( $this->config['move-left'] );
+			$stmtRight = $conn->create( $this->config['move-right'] );
+			$updateParentId = $conn->create( $this->config['update-parentid'] );
 			// open gap for inserting node or subtree
 
 			$stmtLeft->bind( 1, $diff, $this->searchConfig['left']['internaltype'] );

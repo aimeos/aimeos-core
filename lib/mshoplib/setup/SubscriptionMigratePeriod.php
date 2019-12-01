@@ -44,7 +44,7 @@ class SubscriptionMigratePeriod extends \Aimeos\MW\Setup\Task\Base
 		$select = 'SELECT "id", "interval", "next", "ctime" FROM "mshop_subscription" WHERE "period" = 0 LIMIT 1000 OFFSET :offset';
 		$update = 'UPDATE "mshop_subscription" SET "period" = ? WHERE "id" = ?';
 
-		$stmt = $conn->create( $update, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+		$stmt = $conn->create( $update );
 
 		do
 		{

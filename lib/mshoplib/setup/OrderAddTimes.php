@@ -44,7 +44,7 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 		$select = 'SELECT "id", "ctime" FROM "mshop_order" WHERE "cdate" = \'\' LIMIT 1000 OFFSET :offset';
 		$update = 'UPDATE "mshop_order" SET "cdate" = ?, "cmonth" = ?, "cweek" = ?, "chour" = ? WHERE "id" = ?';
 
-		$stmt = $conn->create( $update, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
+		$stmt = $conn->create( $update );
 
 		do
 		{
