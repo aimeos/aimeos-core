@@ -86,7 +86,11 @@ class Standard
 	 */
 	public function getPosition()
 	{
-		return $this->get( 'order.base.address.position' );
+		if( ( $result = $this->get( 'order.base.address.position' ) ) !== null ) {
+			return (int) $result;
+		}
+
+		return null;
 	}
 
 

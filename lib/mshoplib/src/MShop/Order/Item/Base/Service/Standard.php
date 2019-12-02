@@ -201,7 +201,11 @@ class Standard extends Base implements Iface
 	 */
 	public function getPosition()
 	{
-		return $this->get( 'order.base.service.position' );
+		if( ( $result = $this->get( 'order.base.service.position' ) ) !== null ) {
+			return (int) $result;
+		}
+
+		return null;
 	}
 
 

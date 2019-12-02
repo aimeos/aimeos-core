@@ -204,7 +204,11 @@ class Standard
 	 */
 	public function getReason()
 	{
-		return $this->get( 'subscription.reason' );
+		if( ( $result = $this->get( 'subscription.reason' ) ) !== null ) {
+			return (int) $result;
+		}
+
+		return null;
 	}
 
 
