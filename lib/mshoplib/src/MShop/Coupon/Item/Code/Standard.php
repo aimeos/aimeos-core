@@ -91,7 +91,11 @@ class Standard
 	 */
 	public function getCount()
 	{
-		return $this->get( 'coupon.code.count', 0 );
+		if( ( $result = $this->get( 'coupon.code.count', 0 ) ) !== null ) {
+			return (int) $result;
+		}
+
+		return null;
 	}
 
 

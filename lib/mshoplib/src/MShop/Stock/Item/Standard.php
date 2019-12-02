@@ -109,7 +109,11 @@ class Standard
 	 */
 	public function getStockLevel()
 	{
-		return $this->get( 'stock.stocklevel' );
+		if( ( $result = $this->get( 'stock.stocklevel' ) ) !== null ) {
+			return (int) $result;
+		}
+
+		return null;
 	}
 
 
