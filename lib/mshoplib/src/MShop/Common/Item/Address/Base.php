@@ -585,8 +585,6 @@ abstract class Base
 		$this->setLongitude( $item->getLongitude() );
 		$this->setLatitude( $item->getLatitude() );
 
-		$this->setModified();
-
 		return $this;
 	}
 
@@ -602,40 +600,37 @@ abstract class Base
 	{
 		$item = parent::fromArray( $list, $private );
 
-		foreach( $list as $key => $value )
+		foreach( $list as $idx => $value )
 		{
-			if( strncmp( 'customer.address.', $key, 17 ) !== 0 ) {
-				$key = str_replace( ['order.base.address.', 'customer.'], $this->prefix, $key );
-			} else {
-				$key = str_replace( 'customer.address.', $this->prefix, $key );
-			}
+			$pos = strrpos( $idx, '.' );
+			$key = $pos ? substr( $idx, $pos + 1 ) : $idx;
 
 			switch( $key )
 			{
-				case $this->prefix . 'salutation': $item = $item->setSalutation( $value ); break;
-				case $this->prefix . 'company': $item = $item->setCompany( $value ); break;
-				case $this->prefix . 'vatid': $item = $item->setVatID( $value ); break;
-				case $this->prefix . 'title': $item = $item->setTitle( $value ); break;
-				case $this->prefix . 'firstname': $item = $item->setFirstname( $value ); break;
-				case $this->prefix . 'lastname': $item = $item->setLastname( $value ); break;
-				case $this->prefix . 'address1': $item = $item->setAddress1( $value ); break;
-				case $this->prefix . 'address2': $item = $item->setAddress2( $value ); break;
-				case $this->prefix . 'address3': $item = $item->setAddress3( $value ); break;
-				case $this->prefix . 'postal': $item = $item->setPostal( $value ); break;
-				case $this->prefix . 'city': $item = $item->setCity( $value ); break;
-				case $this->prefix . 'state': $item = $item->setState( $value ); break;
-				case $this->prefix . 'countryid': $item = $item->setCountryId( $value ); break;
-				case $this->prefix . 'languageid': $item = $item->setLanguageId( $value ); break;
-				case $this->prefix . 'telephone': $item = $item->setTelephone( $value ); break;
-				case $this->prefix . 'telefax': $item = $item->setTelefax( $value ); break;
-				case $this->prefix . 'email': $item = $item->setEmail( $value ); break;
-				case $this->prefix . 'website': $item = $item->setWebsite( $value ); break;
-				case $this->prefix . 'longitude': $item = $item->setLongitude( $value ); break;
-				case $this->prefix . 'latitude': $item = $item->setLatitude( $value ); break;
+				case 'salutation': $item = $item->setSalutation( $value ); break;
+				case 'company': $item = $item->setCompany( $value ); break;
+				case 'vatid': $item = $item->setVatID( $value ); break;
+				case 'title': $item = $item->setTitle( $value ); break;
+				case 'firstname': $item = $item->setFirstname( $value ); break;
+				case 'lastname': $item = $item->setLastname( $value ); break;
+				case 'address1': $item = $item->setAddress1( $value ); break;
+				case 'address2': $item = $item->setAddress2( $value ); break;
+				case 'address3': $item = $item->setAddress3( $value ); break;
+				case 'postal': $item = $item->setPostal( $value ); break;
+				case 'city': $item = $item->setCity( $value ); break;
+				case 'state': $item = $item->setState( $value ); break;
+				case 'countryid': $item = $item->setCountryId( $value ); break;
+				case 'languageid': $item = $item->setLanguageId( $value ); break;
+				case 'telephone': $item = $item->setTelephone( $value ); break;
+				case 'telefax': $item = $item->setTelefax( $value ); break;
+				case 'email': $item = $item->setEmail( $value ); break;
+				case 'website': $item = $item->setWebsite( $value ); break;
+				case 'longitude': $item = $item->setLongitude( $value ); break;
+				case 'latitude': $item = $item->setLatitude( $value ); break;
 				default: continue 2;
 			}
 
-			unset( $list[$key] );
+			unset( $list[$idx] );
 		}
 
 		return $item;
