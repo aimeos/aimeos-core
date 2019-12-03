@@ -22,10 +22,12 @@ abstract class Base
 	extends \Aimeos\MW\Common\Item\Base
 	implements \Aimeos\MShop\Common\Item\Iface
 {
-	private $bdata;
 	private $prefix;
 	private $available = true;
 	private $modified = false;
+
+	protected static $methods = [];
+	protected $bdata;
 
 
 	/**
@@ -38,6 +40,46 @@ abstract class Base
 	{
 		$this->prefix = (string) $prefix;
 		$this->bdata = $values;
+	}
+
+
+	/**
+	 * Handles dynamic calls to custom methods for the class.
+	 *
+	 * Calls a custom method added by Item::method(). The called method has
+	 * access to the internal $this->bdata property and all other proteced
+	 * properties.
+	 *
+	 * @param string $name Method name
+	 * @param array $params List of parameters
+	 * @return mixed Result from called function
+	 * @throws \BadMethodCallException If the method hasn't been registered
+	 */
+	public function __call( string $name, array $params )
+	{
+		if( isset( static::$methods[$name] ) ) {
+			return call_user_func_array( static::$methods[$name]->bindTo( $this, static::class ), $params );
+		}
+
+		$msg = sprintf( 'Called unknown method "%1$s" on class "%2$s"', $name, get_class( $this ) );
+		throw new \BadMethodCallException( $msg );
+	}
+
+
+	/**
+	 * Registers a custom method that has access to the class properties if called non-static.
+	 *
+	 * Examples:
+	 *  Item::method( 'test', function( $arg1, $arg2 ) {
+	 *      return  $arg1 + $arg2;
+	 *  } );
+	 *
+	 * @param string $name Method name
+	 * @param \Closure $function Anonymous method
+	 */
+	public static function method( string $name, \Closure $function )
+	{
+		static::$methods[$name] = $function;
 	}
 
 
