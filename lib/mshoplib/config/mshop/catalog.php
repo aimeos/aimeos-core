@@ -184,7 +184,7 @@ return array(
 					WHERE mcat."siteid" = :siteid AND mcat."nleft" >= parent."nleft"
 						AND mcat."nleft" <= parent."nright"
 						AND parent."siteid" = :siteid AND parent."id" = ?
-						AND mcat."level" <= parent."level" + :level AND :cond
+						AND mcat."level" <= parent."level" + ? AND :cond
 					GROUP BY :columns
 						mcat."id", mcat."code", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid",

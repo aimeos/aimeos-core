@@ -84,7 +84,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 				FROM "mw_tree_test" AS parent, "mw_tree_test" AS node
 				WHERE
 					node.nleft >= parent.nleft AND node.nleft <= parent.nright
-					AND parent.id = ? AND node.level <= parent.level + :level
+					AND parent.id = ? AND node.level <= parent.level + ?
 					AND :cond
 				ORDER BY node.nleft
 			',

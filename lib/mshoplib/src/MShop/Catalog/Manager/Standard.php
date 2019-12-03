@@ -758,7 +758,7 @@ class Standard extends Base
 		{
 			try {
 				$node = $this->createTreeManager( $siteId )->getNode( $id, $level, $criteria );
-			} catch( \Exception $e ) {
+			} catch( \Aimeos\MW\Tree\Exception $e ) {
 				continue;
 			}
 
