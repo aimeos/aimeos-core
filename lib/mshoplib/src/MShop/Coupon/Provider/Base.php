@@ -241,7 +241,7 @@ abstract class Base implements Iface
 				break;
 			}
 
-			if( ( $amount = $price->getValue() + $price->getCosts() ) < 0.01 ) {
+			if( ( $amount = $price->getValue() + $price->getCosts() + $price->getRebate() ) < 0.01 ) {
 				continue;
 			}
 
