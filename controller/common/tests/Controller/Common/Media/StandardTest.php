@@ -116,6 +116,37 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$fsm->expects( $this->once() )->method( 'get' )
 			->will( $this->returnValue( $fs ) );
 
+		$fs->expects( $this->exactly( 2 ) )->method( 'has' )
+			->will( $this->returnValue( true ) );
+
+		$fs->expects( $this->exactly( 2 ) )->method( 'rm' );
+
+		$this->context->setFilesystemManager( $fsm );
+
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
+		$item->setPreview( 'test' )->setUrl( 'test' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->delete( $item ) );
+	}
+
+
+	public function testDeleteMimeicon()
+	{
+		$this->context->getConfig()->set( 'controller/common/media/standard/mimeicon/directory', 'path/to/mimeicons' );
+
+		$fsm = $this->getMockBuilder( \Aimeos\MW\Filesystem\Manager\Standard::class )
+			->setMethods( array( 'get' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fs = $this->getMockBuilder( \Aimeos\MW\Filesystem\Standard::class )
+			->setMethods( array( 'has', 'rm' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$fsm->expects( $this->once() )->method( 'get' )
+			->will( $this->returnValue( $fs ) );
+
 		$fs->expects( $this->exactly( 1 ) )->method( 'has' )
 			->will( $this->returnValue( true ) );
 
@@ -124,7 +155,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->context->setFilesystemManager( $fsm );
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
-		$item->setPreview( 'test' )->setUrl( 'test' );
+		$item->setPreview( 'path/to/mimeicons/application/test.png' )->setUrl( 'test' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->delete( $item ) );
 	}
