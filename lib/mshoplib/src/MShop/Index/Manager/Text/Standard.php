@@ -90,17 +90,7 @@ class Standard
 		$locale = $context->getLocale();
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
-
-		$siteIds = [$locale->getSiteId()];
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
-			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
-		}
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
-			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
-		}
-
+		$siteIds = $this->getSiteIds( $level );
 
 		$this->searchConfig['index.text:relevance']['function'] = function( $source, array $params ) {
 
@@ -111,9 +101,11 @@ class Standard
 			return $params;
 		};
 
-		$this->replaceSiteMarker( $this->searchConfig['index.text:url'], 'mindte."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.text:name'], 'mindte."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.text:relevance'], 'mindte."siteid"', $siteIds );
+		foreach( ['index.text:name', 'index.text:url', 'index.text:relevance'] as $key )
+		{
+			$expr = $siteIds ? $this->toExpression( 'mindte."siteid"', $siteIds ) : '1=1';
+			$this->searchConfig[$key]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$key]['internalcode'] );
+		}
 	}
 
 

@@ -76,23 +76,19 @@ class Standard
 		$locale = $context->getLocale();
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
-
-		$siteIds = [$locale->getSiteId()];
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
-			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
-		}
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
-			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
-		}
+		$siteIds = $this->getSiteIds( $level );
 
 		$this->searchConfig['index.attribute:allof']['function'] = function( $source, array $params ) {
 			return [$params[0], count( explode( ',', $params[0] ) )];
 		};
 
-		$this->replaceSiteMarker( $this->searchConfig['index.attribute:allof'], 'mindat_allof."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.attribute:oneof'], 'mindat_oneof."siteid"', $siteIds );
+		$name = 'index.attribute:allof';
+		$expr = $siteIds ? $this->toExpression( 'mindat_allof."siteid"', $siteIds ) : '1=1';
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
+
+		$name = 'index.attribute:oneof';
+		$expr = $siteIds ? $this->toExpression( 'mindat_oneof."siteid"', $siteIds ) : '1=1';
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 	}
 
 

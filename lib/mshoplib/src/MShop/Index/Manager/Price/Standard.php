@@ -66,17 +66,10 @@ class Standard
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
 
-		$siteIds = [$locale->getSiteId()];
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
-			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
-		}
-
-		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
-			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
-		}
-
-		$this->replaceSiteMarker( $this->searchConfig['index.price:value'], 'mindpr."siteid"', $siteIds );
+		$name = 'index.price:value';
+		$siteIds = $this->getSiteIds( $level );
+		$expr = $siteIds ? $this->toExpression( 'mindpr."siteid"', $siteIds ) : '1=1';
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 	}
 
 

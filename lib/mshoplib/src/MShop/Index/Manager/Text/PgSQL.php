@@ -49,9 +49,7 @@ class PgSQL
 	{
 		parent::__construct( $context );
 
-		$site = $context->getLocale()->getSitePath();
-
-		$func = function( $source, array $params ) {
+		$this->searchConfig['index.text:relevance']['function'] = function( $source, array $params ) {
 
 			if( isset( $params[1] ) )
 			{
@@ -65,8 +63,10 @@ class PgSQL
 			return $params;
 		};
 
-		$this->searchConfig['index.text:relevance']['function'] = $func;
-		$this->replaceSiteMarker( $this->searchConfig['index.text:relevance'], 'mindte."siteid"', $site );
+		$name = 'index.text:relevance';
+		$siteIds = $context->getLocale()->getSitePath();
+		$expr = $siteIds ? $this->toExpression( 'mindte."siteid"', $siteIds ) : '1=1';
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 	}
 
 

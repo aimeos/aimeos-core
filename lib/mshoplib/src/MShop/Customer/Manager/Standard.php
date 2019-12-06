@@ -299,7 +299,7 @@ class Standard
 				$params[$key] = trim( $param, '\'' );
 			}
 
-			$source = str_replace( ':site', $self->toExpression( 'mcusli_has."siteid"', $siteIds ), $source );
+			$source = str_replace( ':site', $siteIds ? $self->toExpression( 'mcusli_has."siteid"', $siteIds ) : '1=1', $source );
 			$str = $self->toExpression( 'mcusli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
 			$source = str_replace( ':key', $str, $source );
 
@@ -314,7 +314,7 @@ class Standard
 			}
 
 			$params[2] = ( isset( $params[2] ) ? md5( $params[2] ) : null );
-			$source = str_replace( ':site', $self->toExpression( 'mcuspr_prop."siteid"', $siteIds ), $source );
+			$source = str_replace( ':site', $siteIds ? $self->toExpression( 'mcuspr_prop."siteid"', $siteIds ) : '1=1', $source );
 			$str = $self->toExpression( 'mcuspr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
 			$source = str_replace( ':key', $str, $source );
 
