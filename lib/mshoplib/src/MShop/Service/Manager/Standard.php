@@ -168,7 +168,7 @@ class Standard
 				$params[$key] = trim( $param, '\'' );
 			}
 
-			$source = str_replace( ':site', $self->toExpression( 'mserli_has."siteid"', $siteIds ), $source );
+			$source = str_replace( ':site', $siteIds ? $self->toExpression( 'mserli_has."siteid"', $siteIds ) : '1=1', $source );
 			$str = $self->toExpression( 'mserli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
 			$source = str_replace( ':key', $str, $source );
 

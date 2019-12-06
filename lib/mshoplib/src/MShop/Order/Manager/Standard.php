@@ -188,11 +188,11 @@ class Standard
 		$siteIds = $context->getLocale()->getSiteSubTree();
 
 		$name = 'order:status';
-		$expr = $this->toExpression( 'mordst."siteid"', $siteIds );
+		$expr = $siteIds ? $this->toExpression( 'mordst."siteid"', $siteIds ) : '1=1';
 		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
 
 		$name = 'order.containsStatus';
-		$expr = $this->toExpression( 'mordst_cs."siteid"', $siteIds );
+		$expr = $siteIds ? $this->toExpression( 'mordst_cs."siteid"', $siteIds ) : '1=1';
 		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
 	}
 

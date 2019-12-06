@@ -67,7 +67,8 @@ class PgSQL
 		};
 
 		$name = 'index.text:relevance';
-		$expr = $this->toExpression( 'mindte."siteid"', $this->getSiteIds( $level ) );
+		$siteIds = $this->getSiteIds( $level );
+		$expr = $siteIds ? $this->toExpression( 'mindte."siteid"', $siteIds ) : '1=1';
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 		$this->searchConfig['index.text:relevance']['function'] = $func;
 	}

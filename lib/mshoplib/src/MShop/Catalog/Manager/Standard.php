@@ -167,7 +167,7 @@ class Standard extends Base
 				$params[$key] = trim( $param, '\'' );
 			}
 
-			$source = str_replace( ':site', $self->toExpression( 'mcatli_has."siteid"', $siteIds ), $source );
+			$source = str_replace( ':site', $siteIds ? $self->toExpression( 'mcatli_has."siteid"', $siteIds ) : '1=1', $source );
 			$str = $self->toExpression( 'mcatli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
 			$source = str_replace( ':key', $str, $source );
 
