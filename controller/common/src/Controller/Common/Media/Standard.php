@@ -134,6 +134,7 @@ class Standard
 
 		$mimedir = (string) $this->context->getConfig()->get( 'controller/common/media/standard/mimeicon/directory' );
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
+		$mimelen = strlen( $mimedir );
 		$path = $item->getUrl();
 
 		if( $path !== '' && $fs->has( $path ) ) {
@@ -144,7 +145,7 @@ class Standard
 		{
 			try
 			{
-				if( $preview !== '' && !strcmp( $preview, $mimedir ) && $fs->has( $preview ) ) {
+				if( $preview !== '' && strncmp( $preview, $mimedir, $mimelen ) !== 0 && $fs->has( $preview ) ) {
 					$fs->rm( $preview );
 				}
 			}
