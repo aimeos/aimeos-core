@@ -59,7 +59,7 @@ class TablesMigratePropertyKey extends \Aimeos\MW\Setup\Task\Base
 			$this->msg( sprintf( 'Checking table %1$s', $table ), 1 );
 
 			if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'key' )
-				&& ( $item = $schema->getColumnDetails( $table, 'key' ) ) && ( $item->getMaxLength() !== 130 )
+				&& ( $item = $schema->getColumnDetails( $table, 'key' ) ) && ( $item->getMaxLength() !== 103 )
 			) {
 				$dbm = $this->additional->getDatabaseManager();
 				$conn = $dbm->acquire( $rname );
