@@ -733,7 +733,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	{
 		$cond = [];
 
-		if( $siteIds )
+		if( !empty( $siteIds ) )
 		{
 			$sep = $this->getKeySeparator();
 
