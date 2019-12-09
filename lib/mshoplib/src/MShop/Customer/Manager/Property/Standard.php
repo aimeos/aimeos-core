@@ -46,6 +46,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'customer.property.key' => array(
+			'code' => 'customer.property.key',
+			'internalcode' => 'mcuspr."key"',
+			'label' => 'Property key',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'customer.property.type' => array(
 			'code' => 'customer.property.type',
 			'internalcode' => 'mcuspr."type"',

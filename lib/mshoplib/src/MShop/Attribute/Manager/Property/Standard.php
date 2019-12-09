@@ -46,6 +46,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'attribute.property.key' => array(
+			'code' => 'attribute.property.key',
+			'internalcode' => 'mattpr."key"',
+			'label' => 'Property key',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'attribute.property.type' => array(
 			'code' => 'attribute.property.type',
 			'internalcode' => 'mattpr."type"',
