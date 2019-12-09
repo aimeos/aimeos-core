@@ -46,6 +46,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'attribute.lists.key' => array(
+			'code' => 'attribute.lists.key',
+			'internalcode' => 'mattli."key"',
+			'label' => 'List key',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'attribute.lists.type' => array(
 			'code' => 'attribute.lists.type',
 			'internalcode' => 'mattli."type"',

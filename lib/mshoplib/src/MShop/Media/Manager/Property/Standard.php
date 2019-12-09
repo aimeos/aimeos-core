@@ -46,6 +46,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'media.property.key' => array(
+			'code' => 'media.property.key',
+			'internalcode' => 'mmedpr."key"',
+			'label' => 'Property key',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'media.property.type' => array(
 			'code' => 'media.property.type',
 			'internalcode' => 'mmedpr."type"',
