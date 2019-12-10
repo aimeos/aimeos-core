@@ -246,14 +246,16 @@ abstract class Base implements Iface
 			}
 
 			if( $amount < $rebate ) {
-				$value = $amount; $rebate -= $amount;
+				$value = $price->getValue() + $price->getRebate(); $costs = $price->getCosts(); $rebate -= $amount;
+			} elseif( ( $amount = $price->getValue() + $price->getRebate() ) < $rebate ) {
+				$value = $amount; $costs = $rebate - $amount; $rebate -= $value - $costs;
 			} else {
-				$value = $rebate; $rebate = 0;
+				$value = $rebate; $costs = 0; $rebate = 0;
 			}
 
 			$orderProduct = $this->createProduct( $prodcode, $quantity, $stockType );
 			$price = $orderProduct->getPrice()->setTaxRate( $taxrate )
-				->setValue( -$value )->setRebate( $value );
+				->setValue( -$value )->setCosts( -$costs )->setRebate( $value + $costs );
 
 			$orderProducts[] = $orderProduct->setPrice( $price );
 		}
@@ -275,11 +277,14 @@ abstract class Base implements Iface
 
 		foreach( $basket->getProducts() as $product )
 		{
-			$price = $product->getPrice();
-			$taxrate = $price->getTaxRate();
-			$newPrice = isset( $taxrates[$taxrate] ) ? $taxrates[$taxrate] : $manager->createItem();
+			if( ( $product->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) === 0 )
+			{
+				$price = $product->getPrice();
+				$taxrate = $price->getTaxRate();
+				$newPrice = isset( $taxrates[$taxrate] ) ? $taxrates[$taxrate] : $manager->createItem();
 
-			$taxrates[$taxrate] = $newPrice->addItem( $price, $product->getQuantity() );
+				$taxrates[$taxrate] = $newPrice->addItem( $price, $product->getQuantity() );
+			}
 		}
 
 		foreach( $basket->getServices() as $services )
