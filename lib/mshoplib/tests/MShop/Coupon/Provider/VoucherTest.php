@@ -68,7 +68,8 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $coupons ) );
 		$this->assertEquals( 2, count( $products ) );
-		$this->assertEquals( '-74.00', $product->getPrice()->getValue() );
+		$this->assertEquals( '-72.00', $product->getPrice()->getValue() );
+		$this->assertEquals( '-2.00', $product->getPrice()->getCosts() );
 		$this->assertEquals( '74.00', $product->getPrice()->getRebate() );
 		$this->assertEquals( 'U:MD', $product->getProductCode() );
 		$this->assertNotEquals( '', $product->getProductId() );
