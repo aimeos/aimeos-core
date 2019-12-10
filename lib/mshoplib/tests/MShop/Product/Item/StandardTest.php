@@ -371,6 +371,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIsAvailableOnTime()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
+		$this->object->setDateStart( date( 'Y-m-d H:i:s', time() + 600 ) );
+		$this->assertFalse( $this->object->isAvailable() );
+		$this->object->setDateEnd( date( 'Y-m-d H:i:s', time() - 600 ) );
+		$this->assertFalse( $this->object->isAvailable() );
+	}
+
+
+	public function testIsAvailableEvent()
+	{
+		$this->object->setType( 'event' );
+		$this->assertTrue( $this->object->isAvailable() );
+		$this->object->setDateStart( date( 'Y-m-d H:i:s', time() + 600 ) );
+		$this->assertTrue( $this->object->isAvailable() );
+		$this->object->setDateEnd( date( 'Y-m-d H:i:s', time() - 600 ) );
+		$this->assertFalse( $this->object->isAvailable() );
+	}
+
+
 	public function testIsModified()
 	{
 		$this->assertFalse( $this->object->isModified() );
