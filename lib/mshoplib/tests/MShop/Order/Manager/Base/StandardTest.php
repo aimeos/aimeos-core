@@ -103,14 +103,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'order.base.costs', '1.50' ) );
+		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \Aimeos\MShop\Order\Exception( 'No order base item found' );
 		}
 
-		$this->assertEquals( $expected, $this->object->getItem( $expected->getId() ) );
+		$item = $this->object->getItem( $expected->getId() );
+
+		$this->assertEquals( $expected, $item );
+		$this->assertEquals( '32.00', $item->getPrice()->getCosts() );
+		$this->assertEquals( '5.00', $item->getPrice()->getRebate() );
+		$this->assertEquals( '112.4034', $item->getPrice()->getTaxValue() );
 	}
 
 
@@ -158,6 +163,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemPrice->getValue(), $itemSavedPrice->getValue() );
 		$this->assertEquals( $itemPrice->getCosts(), $itemSavedPrice->getCosts() );
 		$this->assertEquals( $itemPrice->getRebate(), $itemSavedPrice->getRebate() );
+		$this->assertEquals( $itemPrice->getTaxValue(), $itemSavedPrice->getTaxValue() );
 		$this->assertEquals( $itemPrice->getCurrencyId(), $itemSavedPrice->getCurrencyId() );
 		$this->assertEquals( $item->getProducts(), $itemSaved->getProducts() );
 		$this->assertEquals( $item->getAddresses(), $itemSaved->getAddresses() );
@@ -178,6 +184,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExpPrice->getValue(), $itemUpdPrice->getValue() );
 		$this->assertEquals( $itemExpPrice->getCosts(), $itemUpdPrice->getCosts() );
 		$this->assertEquals( $itemExpPrice->getRebate(), $itemUpdPrice->getRebate() );
+		$this->assertEquals( $itemExpPrice->getTaxValue(), $itemUpdPrice->getTaxValue() );
 		$this->assertEquals( $itemExpPrice->getCurrencyId(), $itemUpdPrice->getCurrencyId() );
 		$this->assertEquals( $itemExp->getProducts(), $itemUpd->getProducts() );
 		$this->assertEquals( $itemExp->getAddresses(), $itemUpd->getAddresses() );
@@ -233,6 +240,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.price', '53.50' );
 		$expr[] = $search->compare( '==', 'order.base.costs', '1.50' );
 		$expr[] = $search->compare( '==', 'order.base.rebate', '14.50' );
+		$expr[] = $search->compare( '==', 'order.base.taxvalue', '0.0000' );
 		$expr[] = $search->compare( '~=', 'order.base.customerref', 'ABC-1234' );
 		$expr[] = $search->compare( '~=', 'order.base.comment', 'This is a comment' );
 		$expr[] = $search->compare( '>=', 'order.base.mtime', '1970-01-01 00:00:00' );
@@ -289,6 +297,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.product.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.rebate', '0.00' );
 		$expr[] = $search->compare( '=~', 'order.base.product.taxrates', '{' );
+		$expr[] = $search->compare( '==', 'order.base.product.taxvalue', '0.0000' );
 		$expr[] = $search->compare( '==', 'order.base.product.flags', 0 );
 		$expr[] = $search->compare( '==', 'order.base.product.position', 1 );
 		$expr[] = $search->compare( '==', 'order.base.product.status', 1 );
@@ -318,6 +327,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.service.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.rebate', '0.00' );
 		$expr[] = $search->compare( '=~', 'order.base.service.taxrates', '{' );
+		$expr[] = $search->compare( '==', 'order.base.service.taxvalue', '0.0000' );
 		$expr[] = $search->compare( '>=', 'order.base.service.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.base.service.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.service.editor', $this->editor );

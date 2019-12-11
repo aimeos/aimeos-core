@@ -1002,7 +1002,7 @@ class Standard
 						'price.costs' => $row['order.base.product.costs'],
 						'price.rebate' => $row['order.base.product.rebate'],
 						'price.taxflag' => $row['order.base.product.taxflag'],
-						'price.tax' => $row['order.base.product.taxvalue'],
+						'price.taxvalue' => $row['order.base.product.taxvalue'],
 					] );
 
 					$items[(string) $row['order.base.product.id']] = array( 'price' => $price, 'item' => $row );

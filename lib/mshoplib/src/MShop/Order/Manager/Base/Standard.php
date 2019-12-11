@@ -974,8 +974,8 @@ class Standard extends Base
 			'price.value' => $row['order.base.price'],
 			'price.costs' => $row['order.base.costs'],
 			'price.rebate' => $row['order.base.rebate'],
-			'price.taxvalue' => $row['order.base.taxvalue'],
 			'price.taxflag' => $row['order.base.taxflag'],
+			'price.taxvalue' => $row['order.base.taxvalue'],
 		] );
 
 		// you may need the site object! take care!
