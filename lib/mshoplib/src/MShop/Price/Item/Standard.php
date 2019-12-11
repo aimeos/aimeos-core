@@ -39,7 +39,7 @@ class Standard extends Base
 
 		$this->currencyid = ( isset( $values['.currencyid'] ) ? $values['.currencyid'] : null );
 		$this->precision = ( isset( $values['.precision'] ) ? $values['.precision'] : 2 );
-		$this->tax = $this->get( 'price.tax' );
+		$this->tax = $this->get( 'price.taxvalue' );
 	}
 
 
