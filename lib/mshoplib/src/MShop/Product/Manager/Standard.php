@@ -207,7 +207,7 @@ class Standard
 
 			foreach( (array) $params[1] as $lang ) {
 				foreach( (array) $params[2] as $id ) {
-					$keys[] = $params[0] . '|' . ( $lang ? $lang . '|' : '' ) .( $id !== '' ?  md5( $id ) : '' );
+					$keys[] = $params[0] . '|' . ( $lang ? $lang . '|' : '' ) . ( $id !== '' ?  md5( $id ) : '' );
 				}
 			}
 
