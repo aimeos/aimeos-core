@@ -95,7 +95,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 		$string = $item->toSource( $types, $translations, $plugins, $funcs );
 
 		if( $this->operator == '!' && $string !== '' && $string !== null ) {
-			return ' ' . self::$operators[$this->operator] . ' ' . $string;
+			return ' ' . self::$operators[$this->operator] . ' ( ' . $string . ' )';
 		}
 
 		while( ( $item = next( $this->expressions ) ) !== false )

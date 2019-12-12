@@ -50,13 +50,6 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testUpdateTwoConditions()
-	{
-		$this->plugin->setConfig( ['values' => ['package-height' => '10.0', 'package-length' => '20.0']] );
-		$this->assertEquals( $this->product, $this->object->update( $this->order, 'addProduct.before', $this->product ) );
-	}
-
-
 	public function testUpdateFail()
 	{
 		$this->plugin->setConfig( ['values' => ['package-height' => 0]] );

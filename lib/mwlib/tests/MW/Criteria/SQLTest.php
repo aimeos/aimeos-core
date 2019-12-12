@@ -105,7 +105,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 		$expr = array( $this->object->compare( '==', 'int_column', 1 ), $this->object->compare( '!=', 'int_column', 2 ) );
 		$this->object->setConditions( $this->object->combine( '!', array( $this->object->combine( '&&', $expr ) ) ) );
-		$this->assertEquals( " NOT ( int_col = 1 AND int_col <> 2 )", $this->object->getConditionSource( $types, $translations ) );
+		$this->assertEquals( " NOT ( ( int_col = 1 AND int_col <> 2 ) )", $this->object->getConditionSource( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', null ), $this->object->compare( '!=', 'str_column', null ) );
 		$this->object->setConditions( $this->object->combine( '&&', $expr ) );

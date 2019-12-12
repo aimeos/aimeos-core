@@ -184,8 +184,10 @@ abstract class Base
 			$find = [];
 			$count = count( $params );
 
-			for( $i = 0; $i < $count; $i++ ) {
+			for( $i = 0; $i < $count; $i++ )
+			{
 				$find[$i] = '$' . ( $i + 1 );
+				$params[$i] = is_array( $params[$i] ) ? join( ',', $params[$i] ) : $params[$i];
 			}
 
 			if( is_array( $source ) ) {
@@ -281,7 +283,7 @@ abstract class Base
 						$list[] = $this->escape( '==', $this->getParamType( $item ), $item );
 					}
 
-					$params[] = implode( ',', $list );
+					$params[] = $list;
 				}
 			}
 			else

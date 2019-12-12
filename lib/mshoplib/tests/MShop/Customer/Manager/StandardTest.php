@@ -294,20 +294,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.longitude', '10.0' );
 		$expr[] = $search->compare( '==', 'customer.latitude', '50.0' );
 
-		$param = ['text','default', '0'];
-		$expr[] = $search->compare( '==', $search->createFunction( 'customer:has', $param ), null );
-
-		$param = ['text','default', $listItem->getRefId()];
+		$param = ['text', 'default', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:has', $param ), null );
 
-		$param = ['text','default'];
+		$param = ['text', 'default'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:has', $param ), null );
 
 		$param = ['text'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:has', $param ), null );
-
-		$param = ['newsletter', null, '0'];
-		$expr[] = $search->compare( '==', $search->createFunction( 'customer:prop', $param ), null );
 
 		$param = ['newsletter', null, '1'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:prop', $param ), null );

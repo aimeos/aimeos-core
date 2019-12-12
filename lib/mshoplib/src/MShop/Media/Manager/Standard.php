@@ -124,10 +124,8 @@ class Standard
 		),
 		'media:has' => array(
 			'code' => 'media:has()',
-			'internalcode' => '(
-				SELECT mmedli_has."id" FROM mshop_media_list AS mmedli_has
-				WHERE mmed."id" = mmedli_has."parentid" AND :site AND :key LIMIT 1
-			)',
+			'internalcode' => ':site :key AND mmedli."id"',
+			'internaldeps' => ['LEFT JOIN "mshop_media_list" AS mmedli ON ( mmedli."parentid" = mmed."id" )'],
 			'label' => 'Media has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
@@ -135,10 +133,8 @@ class Standard
 		),
 		'media:prop' => array(
 			'code' => 'media:prop()',
-			'internalcode' => '(
-				SELECT mmedpr_prop."id" FROM mshop_media_property AS mmedpr_prop
-				WHERE mmed."id" = mmedpr_prop."parentid" AND :site AND :key LIMIT 1
-			)',
+			'internalcode' => ':site :key AND mmedpr."id"',
+			'internaldeps' => ['LEFT JOIN "mshop_media_property" AS mmedpr ON ( mmedpr."parentid" = mmed."id" )'],
 			'label' => 'Media has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
 			'internaltype' => 'null',
@@ -170,13 +166,21 @@ class Standard
 
 		$this->searchConfig['media:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-			foreach( $params as $key => $param ) {
-				$params[$key] = trim( $param, '\'' );
+			array_walk_recursive( $params, function( &$v ) {
+				$v = trim( $v, '\'' );
+			} );
+
+			$keys = [];
+			$params[1] = isset( $params[1] ) ? $params[1] : '';
+			$params[2] = isset( $params[2] ) ? $params[2] : '';
+
+			foreach( (array) $params[2] as $id ) {
+				$keys[] = $params[0] . '|' . ( $params[1] ? $params[1] . '|' : '' ) . $id;
 			}
 
-			$source = str_replace( ':site', $siteIds ? $self->toExpression( 'mmedli_has."siteid"', $siteIds ) : '1=1', $source );
-			$str = $self->toExpression( 'mmedli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
-			$source = str_replace( ':key', $str, $source );
+			$sitestr = $siteIds ? $self->toExpression( 'mmedli."siteid"', $siteIds ) . ' AND' : '';
+			$keystr = $self->toExpression( 'mmedli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};
@@ -184,14 +188,21 @@ class Standard
 
 		$this->searchConfig['media:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-			foreach( $params as $key => $param ) {
-				$params[$key] = trim( $param, '\'' );
+			array_walk_recursive( $params, function( &$v ) {
+				$v = trim( $v, '\'' );
+			} );
+
+			$keys = [];
+			$params[1] = array_key_exists( 1, $params ) ? $params[1] : '';
+			$params[2] = isset( $params[2] ) ? $params[2] : '';
+
+			foreach( (array) $params[2] as $id ) {
+				$keys[] = $params[0] . '|' . ( $params[1] ? $params[1] . '|' : '' ) .( $id !== '' ?  md5( $id ) : '' );
 			}
 
-			$params[2] = ( isset( $params[2] ) ? md5( $params[2] ) : null );
-			$source = str_replace( ':site', $siteIds ? $self->toExpression( 'mmedpr_prop."siteid"', $siteIds ) : '1=1', $source );
-			$str = $self->toExpression( 'mmedpr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
-			$source = str_replace( ':key', $str, $source );
+			$sitestr = $siteIds ? $self->toExpression( 'mmedpr."siteid"', $siteIds ) . ' AND' : '';
+			$keystr = $self->toExpression( 'mmedpr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};
