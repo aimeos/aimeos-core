@@ -197,7 +197,7 @@ class Standard
 			$params[2] = isset( $params[2] ) ? $params[2] : '';
 
 			foreach( (array) $params[2] as $id ) {
-				$keys[] = $params[0] . '|' . ( $params[1] ? $params[1] . '|' : '' ) .( $id !== '' ?  md5( $id ) : '' );
+				$keys[] = $params[0] . '|' . ( $params[1] ? $params[1] . '|' : '' ) . ( $id !== '' ?  md5( $id ) : '' );
 			}
 
 			$sitestr = $siteIds ? $self->toExpression( 'mmedpr."siteid"', $siteIds ) . ' AND' : '';
