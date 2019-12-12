@@ -174,9 +174,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'supplier.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'supplier.editor', $this->editor );
 
-		$param = ['text', 'default', '0'];
-		$expr[] = $search->compare( '==', $search->createFunction( 'supplier:has', $param ), null );
-
 		$param = ['text', 'default', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'supplier:has', $param ), null );
 

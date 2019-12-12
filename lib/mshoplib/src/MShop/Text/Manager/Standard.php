@@ -110,10 +110,8 @@ class Standard
 		),
 		'text:has' => array(
 			'code' => 'text:has()',
-			'internalcode' => '(
-				SELECT mtexli_has."id" FROM mshop_text_list AS mtexli_has
-				WHERE mtex."id" = mtexli_has."parentid" AND :site AND :key LIMIT 1
-			)',
+			'internalcode' => ':site :key AND mtexli."id"',
+			'internaldeps' => ['LEFT JOIN "mshop_text_list" AS mtexli ON ( mtexli."parentid" = mtex."id" )'],
 			'label' => 'Text has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
@@ -144,13 +142,21 @@ class Standard
 
 		$this->searchConfig['text:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-			foreach( $params as $key => $param ) {
-				$params[$key] = trim( $param, '\'' );
+			array_walk_recursive( $params, function( &$v ) {
+				$v = trim( $v, '\'' );
+			} );
+
+			$keys = [];
+			$params[1] = isset( $params[1] ) ? $params[1] : '';
+			$params[2] = isset( $params[2] ) ? $params[2] : '';
+
+			foreach( (array) $params[2] as $id ) {
+				$keys[] = $params[0] . '|' . ( $params[1] ? $params[1] . '|' : '' ) . $id;
 			}
 
-			$source = str_replace( ':site', $siteIds ? $self->toExpression( 'mtexli_has."siteid"', $siteIds ) : '1=1', $source );
-			$str = $self->toExpression( 'mtexli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
-			$source = str_replace( ':key', $str, $source );
+			$sitestr = $siteIds ? $self->toExpression( 'mtexli."siteid"', $siteIds ) . ' AND' : '';
+			$keystr = $self->toExpression( 'mtexli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};

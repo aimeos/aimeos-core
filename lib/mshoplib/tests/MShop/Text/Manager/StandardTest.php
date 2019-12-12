@@ -97,9 +97,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'text.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'text.editor', $this->editor );
 
-		$param = ['media', 'align-top', '0'];
-		$expr[] = $search->compare( '==', $search->createFunction( 'text:has', $param ), null );
-
 		$param = ['media', 'align-top', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'text:has', $param ), null );
 

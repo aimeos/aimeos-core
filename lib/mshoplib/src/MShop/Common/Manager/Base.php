@@ -633,7 +633,10 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$sep = $this->getKeySeparator();
 		$name = $prefix . $sep . 'id';
 
-		if( isset( $attributes[$name] ) && $attributes[$name] instanceof $iface ) {
+		if( isset( $attributes[$prefix] ) && $attributes[$prefix] instanceof $iface ) {
+			return $attributes[$prefix]->getInternalDeps();
+		}
+		elseif( isset( $attributes[$name] ) && $attributes[$name] instanceof $iface ) {
 			return $attributes[$name]->getInternalDeps();
 		}
 		else if( isset( $attributes['id'] ) && $attributes['id'] instanceof $iface ) {
@@ -831,6 +834,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			}
 		}
 
+		$joins = array_unique( $joins );
 		$cond = $this->getSearchSiteConditions( $search, $keys, $attributes, $siteIds );
 
 		if( $conditions !== null ) {

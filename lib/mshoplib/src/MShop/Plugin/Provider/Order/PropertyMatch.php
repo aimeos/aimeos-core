@@ -156,13 +156,8 @@ class PropertyMatch
 
 		foreach( $map as $type => $value )
 		{
-			$funcLang = $search->createFunction( 'product:prop', [$type, $langId, (string) $value] );
-			$funcNull = $search->createFunction( 'product:prop', [$type, null, (string) $value] );
-
-			$expr[] = $search->combine( '||', [
-				$search->compare( '!=', $funcLang, null ),
-				$search->compare( '!=', $funcNull, null )
-			] );
+			$func = $search->createFunction( 'product:prop', [$type, [$langId, null], (string) $value] );
+			$expr[] = $search->compare( '!=', $func, null );
 		}
 
 		$search->setConditions( $search->combine( '&&', $expr ) );

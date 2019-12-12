@@ -216,9 +216,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'price.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'price.editor', $this->editor );
 
-		$param = ['customer', 'test', '0'];
-		$expr[] = $search->compare( '==', $search->createFunction( 'price:has', $param ), null );
-
 		$param = ['customer', 'test', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
 
@@ -256,9 +253,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'price.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'price.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'price.editor', $this->editor );
-
-		$param = ['zone', null, 'xx'];
-		$expr[] = $search->compare( '==', $search->createFunction( 'price:prop', $param ), null );
 
 		$param = ['zone', null, 'NY'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'price:prop', $param ), null );

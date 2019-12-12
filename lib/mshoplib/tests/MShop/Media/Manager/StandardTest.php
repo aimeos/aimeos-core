@@ -104,9 +104,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'media.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'media.editor', $this->editor );
 
-		$param = ['attribute', 'option', '0'];
-		$expr[] = $search->compare( '==', $search->createFunction( 'media:has', $param ), null );
-
 		$param = ['attribute', 'option', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'media:has', $param ), null );
 
@@ -115,9 +112,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$param = ['attribute'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'media:has', $param ), null );
-
-		$param = ['copyright', null, 'me'];
-		$expr[] = $search->compare( '==', $search->createFunction( 'media:prop', $param ), null );
 
 		$param = ['copyright', 'de', 'ich, 2019'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'media:prop', $param ), null );

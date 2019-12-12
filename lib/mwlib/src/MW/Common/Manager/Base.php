@@ -155,9 +155,9 @@ abstract class Base extends \Aimeos\MW\Common\Base
 				{
 					$result[] = $string = substr( $string, 0, $pos );
 					$result = array_merge( $result, $this->cutNameTail( $prefix, $string ) );
+					$noprefix = false;
 				}
 
-				$noprefix = false;
 				break;
 			}
 		}
@@ -166,6 +166,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 		{
 			if( ( $pos = strrpos( $string, ':' ) ) !== false ) {
 				$result[] = substr( $string, 0, $pos );
+				$result[] = $string;
 			} elseif( ( $pos = strrpos( $string, $sep ) ) !== false ) {
 				$result[] = substr( $string, 0, $pos );
 			} else {

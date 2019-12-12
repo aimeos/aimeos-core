@@ -339,9 +339,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.editor', $this->editor );
 		$expr[] = $search->compare( '>=', 'product.target', '' );
 
-		$param = ['product', 'suggestion', '0'];
-		$expr[] = $search->compare( '==', $search->createFunction( 'product:has', $param ), null );
-
 		$param = ['product', 'suggestion', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
 
@@ -350,9 +347,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$param = ['product'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
-
-		$param = ['package-height', null, '0'];
-		$expr[] = $search->compare( '==', $search->createFunction( 'product:prop', $param ), null );
 
 		$param = ['package-weight', null, '1'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );

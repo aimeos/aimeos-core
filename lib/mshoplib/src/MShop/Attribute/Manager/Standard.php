@@ -120,10 +120,8 @@ class Standard
 		),
 		'attribute:has' => array(
 			'code' => 'attribute:has()',
-			'internalcode' => '(
-				SELECT mattli_has."id" FROM mshop_attribute_list AS mattli_has
-				WHERE matt."id" = mattli_has."parentid" AND :site AND :key LIMIT 1
-			)',
+			'internalcode' => ':site :key AND mattli."id"',
+			'internaldeps' => ['LEFT JOIN "mshop_attribute_list" AS mattli ON ( mattli."parentid" = matt."id" )'],
 			'label' => 'Attribute has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
@@ -131,10 +129,8 @@ class Standard
 		),
 		'attribute:prop' => array(
 			'code' => 'attribute:prop()',
-			'internalcode' => '(
-				SELECT mattpr_prop."id" FROM mshop_attribute_property AS mattpr_prop
-				WHERE matt."id" = mattpr_prop."parentid" AND :site AND :key LIMIT 1
-			)',
+			'internalcode' => ':site :key AND mattpr."id"',
+			'internaldeps' => ['LEFT JOIN "mshop_attribute_property" AS mattpr ON ( mattpr."parentid" = matt."id" )'],
 			'label' => 'Attribute has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
 			'internaltype' => 'null',
@@ -163,13 +159,21 @@ class Standard
 
 		$this->searchConfig['attribute:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-			foreach( $params as $key => $param ) {
-				$params[$key] = trim( $param, '\'' );
+			array_walk_recursive( $params, function( &$v ) {
+				$v = trim( $v, '\'' );
+			} );
+
+			$keys = [];
+			$params[1] = isset( $params[1] ) ? $params[1] : '';
+			$params[2] = isset( $params[2] ) ? $params[2] : '';
+
+			foreach( (array) $params[2] as $id ) {
+				$keys[] = $params[0] . '|' . ( $params[1] ? $params[1] . '|' : '' ) . $id;
 			}
 
-			$source = str_replace( ':site', $siteIds ? $self->toExpression( 'mattli_has."siteid"', $siteIds ) : '1=1', $source );
-			$str = $self->toExpression( 'mattli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
-			$source = str_replace( ':key', $str, $source );
+			$sitestr = $siteIds ? $self->toExpression( 'mattli."siteid"', $siteIds ) . ' AND' : '';
+			$keystr = $self->toExpression( 'mattli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};
@@ -177,14 +181,21 @@ class Standard
 
 		$this->searchConfig['attribute:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-			foreach( $params as $key => $param ) {
-				$params[$key] = trim( $param, '\'' );
+			array_walk_recursive( $params, function( &$v ) {
+				$v = trim( $v, '\'' );
+			} );
+
+			$keys = [];
+			$params[1] = array_key_exists( 1, $params ) ? $params[1] : '';
+			$params[2] = isset( $params[2] ) ? $params[2] : '';
+
+			foreach( (array) $params[2] as $id ) {
+				$keys[] = $params[0] . '|' . ( $params[1] ? $params[1] . '|' : '' ) .( $id !== '' ?  md5( $id ) : '' );
 			}
 
-			$params[2] = ( isset( $params[2] ) ? md5( $params[2] ) : null );
-			$source = str_replace( ':site', $siteIds ? $self->toExpression( 'mattpr_prop."siteid"', $siteIds ) : '1=1', $source );
-			$str = $self->toExpression( 'mattpr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
-			$source = str_replace( ':key', $str, $source );
+			$sitestr = $siteIds ? $self->toExpression( 'mattpr."siteid"', $siteIds ) . ' AND' : '';
+			$keystr = $self->toExpression( 'mattpr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};

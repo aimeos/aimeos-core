@@ -78,7 +78,7 @@ class Standard
 		$siteIds = $this->getSiteIds( $level );
 
 		$this->searchConfig['index.attribute:allof']['function'] = function( $source, array $params ) {
-			return [$params[0], count( explode( ',', $params[0] ) )];
+			return [$params[0], count( $params[0] )];
 		};
 
 		$name = 'index.attribute:allof';
