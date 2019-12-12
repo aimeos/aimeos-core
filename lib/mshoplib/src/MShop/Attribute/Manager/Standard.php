@@ -167,8 +167,10 @@ class Standard
 			$params[1] = isset( $params[1] ) ? $params[1] : '';
 			$params[2] = isset( $params[2] ) ? $params[2] : '';
 
-			foreach( (array) $params[2] as $id ) {
-				$keys[] = $params[0] . '|' . ( $params[1] ? $params[1] . '|' : '' ) . $id;
+			foreach( (array) $params[1] as $type ) {
+				foreach( (array) $params[2] as $id ) {
+					$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
+				}
 			}
 
 			$sitestr = $siteIds ? $self->toExpression( 'mattli."siteid"', $siteIds ) . ' AND' : '';
@@ -189,8 +191,10 @@ class Standard
 			$params[1] = array_key_exists( 1, $params ) ? $params[1] : '';
 			$params[2] = isset( $params[2] ) ? $params[2] : '';
 
-			foreach( (array) $params[2] as $id ) {
-				$keys[] = $params[0] . '|' . ( $params[1] ? $params[1] . '|' : '' ) . ( $id !== '' ?  md5( $id ) : '' );
+			foreach( (array) $params[1] as $lang ) {
+				foreach( (array) $params[2] as $id ) {
+					$keys[] = $params[0] . '|' . ( $lang ? $lang . '|' : '' ) . ( $id !== '' ?  md5( $id ) : '' );
+				}
 			}
 
 			$sitestr = $siteIds ? $self->toExpression( 'mattpr."siteid"', $siteIds ) . ' AND' : '';
