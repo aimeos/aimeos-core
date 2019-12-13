@@ -77,24 +77,18 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	/**
 	 * Creates a term which contains a null value.
 	 *
-	 * @param string|array $name Translated name of the variable or column
+	 * @param string $name Translated name of the variable or column
 	 * @return string String that can be inserted into a SQL statement
 	 */
-	protected function createNullTerm( $name ) : string
+	protected function createNullTerm( string $name ) : string
 	{
-		if( is_array( $name ) ) {
-			return '';
-		}
-
 		switch( $this->getOperator() )
 		{
-			case '==':
-				return $name . ' IS NULL';
-			case '!=':
-				return $name . ' IS NOT NULL';
-			default:
-				throw new \Aimeos\MW\Common\Exception( sprintf( 'NULL value not allowed for operator "%1$s"', $this->getOperator() ) );
+			case '==': return $name . ' IS NULL';
+			case '!=': return $name . ' IS NOT NULL';
 		}
+
+		throw new \Aimeos\MW\Common\Exception( sprintf( 'NULL value not allowed for operator "%1$s"', $this->getOperator() ) );
 	}
 
 
