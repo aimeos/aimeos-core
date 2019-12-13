@@ -25,7 +25,7 @@ class Factory
 	 * @param string|array $keys Key or list of keys of the converter classes
 	 * @return \Aimeos\MW\Convert\Iface Instance of converter class
 	 */
-	public static function createConverter( $keys )
+	public static function createConverter( $keys ) : Iface
 	{
 		if( is_array( $keys ) )
 		{
@@ -48,7 +48,7 @@ class Factory
 	 * @param string $key Key of the converter class
 	 * @return \Aimeos\MW\Convert\Iface Instance of converter class
 	 */
-	protected static function createObject( string $key )
+	protected static function createObject( string $key ) : Iface
 	{
 		$key = str_replace( '/', '\\', $key );
 
