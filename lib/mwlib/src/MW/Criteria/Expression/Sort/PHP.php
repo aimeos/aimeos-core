@@ -91,8 +91,9 @@ class PHP
 		$this->setPlugins( $plugins );
 
 		$name = $this->name;
+		$transname = $this->translateName( $name, $translations, $funcs );
 
-		if( ( $transname = $this->translateName( $name, $translations, $funcs ) ) === '' ) {
+		if( !$transname ) {
 			return '';
 		}
 

@@ -147,10 +147,10 @@ class Nolimit
 	/**
 	 * Returns the product codes from the conditions
 	 *
-	 * @param \Aimeos\MW\Criteria\Expression\Iface $cond Criteria object
+	 * @param \Aimeos\MW\Criteria\Expression\Iface|null $cond Criteria object
 	 * @return string[] List of product codes
 	 */
-	protected function getProductCodes( \Aimeos\MW\Criteria\Expression\Iface $cond )
+	protected function getProductCodes( \Aimeos\MW\Criteria\Expression\Iface $cond = null )
 	{
 		$list = [];
 
