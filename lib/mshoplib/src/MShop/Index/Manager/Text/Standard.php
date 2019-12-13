@@ -94,7 +94,7 @@ class Standard
 		$this->searchConfig['index.text:relevance']['function'] = function( $source, array $params ) {
 
 			if( isset( $params[1] ) ) {
-				$params[1] = strtolower( $params[1] );
+				$params[1] = mb_strtolower( $params[1] );
 			}
 
 			return $params;
@@ -775,7 +775,7 @@ class Standard
 		$stmt->bind( 2, $lang );
 		$stmt->bind( 3, $url );
 		$stmt->bind( 4, $name );
-		$stmt->bind( 5, strtolower( $content ) ); // for case insensitive searches
+		$stmt->bind( 5, mb_strtolower( $content ) ); // for case insensitive searches
 		$stmt->bind( 6, $date ); //mtime
 		$stmt->bind( 7, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
