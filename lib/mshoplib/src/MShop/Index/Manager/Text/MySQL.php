@@ -66,7 +66,7 @@ class MySQL
 					$len = strlen( $part );
 
 					if( $len > 0 ) {
-						$str .= ' ' . strtolower( $part ) . '*';
+						$str .= ' ' . mb_strtolower( $part ) . '*';
 					}
 				}
 
