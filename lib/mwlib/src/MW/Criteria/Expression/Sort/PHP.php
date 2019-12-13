@@ -33,7 +33,7 @@ class PHP
 	 * @param string $operator Sorting operator ("+": ascending, "-": descending)
 	 * @param string $name Name of the variable to sort
 	 */
-	public function __construct( $operator, $name )
+	public function __construct( string $operator, string $name )
 	{
 		if( !isset( self::$operators[$operator] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
@@ -49,7 +49,7 @@ class PHP
 	 *
 	 * @return string Sorting direction ("+": ascending, "-": descending)
 	 */
-	public function getOperator()
+	public function getOperator() : string
 	{
 		return $this->operator;
 	}
@@ -60,7 +60,7 @@ class PHP
 	 *
 	 * @return array List of available operators
 	 */
-	public static function getOperators()
+	public static function getOperators() : array
 	{
 		return array_keys( self::$operators );
 	}
@@ -71,7 +71,7 @@ class PHP
 	 *
 	 * @return string Name of the variable or column to sort
 	 */
-	public function getName()
+	public function getName() : string
 	{
 		return $this->name;
 	}
@@ -108,11 +108,11 @@ class PHP
 	 * Escapes the value so it can be inserted into a SQL statement
 	 *
 	 * @param string $operator Operator used for the expression
-	 * @param integer $type Type constant
+	 * @param string $type Type constant
 	 * @param mixed $value Value that the variable or column should be compared to
-	 * @return double|integer|string Escaped value
+	 * @return double|int|string Escaped value
 	 */
-	protected function escape( $operator, $type, $value )
+	protected function escape( string $operator, string $type, $value )
 	{
 		$value = $this->translateValue( $this->getName(), $value );
 
@@ -135,7 +135,7 @@ class PHP
 	 * @return string Internal parameter type like string, float or int
 	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
-	protected function getParamType( &$item )
+	protected function getParamType( string &$item ) : string
 	{
 		if( $item[0] == '"' )
 		{

@@ -32,7 +32,7 @@ interface Iface
 	 * @param \Aimeos\MW\Criteria\Expression\Compare\Iface[] $list List of expression objects
 	 * @return \Aimeos\MW\Criteria\Expression\Combine\Iface Combine expression object
 	 */
-	public function combine( $operator, array $list );
+	public function combine( string $operator, array $list ) : \Aimeos\MW\Criteria\Expression\Combine\Iface;
 
 
 	/**
@@ -52,7 +52,7 @@ interface Iface
 	 * @param mixed $value Value the variable or column should be compared to
 	 * @return \Aimeos\MW\Criteria\Expression\Compare\Iface Compare expression object
 	 */
-	public function compare( $operator, $name, $value );
+	public function compare( string $operator, string $name, $value ) : \Aimeos\MW\Criteria\Expression\Compare\Iface;
 
 
 	/**
@@ -60,8 +60,9 @@ interface Iface
 	 *
 	 * @param string $name Function name
 	 * @param array $params Single- or multi-dimensional list of parameters of type boolean, integer, float and string
+	 * @return string Function signature
 	 */
-	public function createFunction( $name, array $params );
+	public function createFunction( string $name, array $params ) : string;
 
 
 	/**
@@ -75,7 +76,7 @@ interface Iface
 	 * @param string $name Name of the variable or column that should be used for sorting
 	 * @return \Aimeos\MW\Criteria\Expression\Sort\Iface Sort expression object
 	 */
-	public function sort( $operator, $name );
+	public function sort( string $operator, string $name ) : \Aimeos\MW\Criteria\Expression\Sort\Iface;
 
 
 	/**
@@ -83,7 +84,7 @@ interface Iface
 	 *
 	 * @return array Associative list of lists (compare, combine, sort) containing the available operators
 	 */
-	public function getOperators();
+	public function getOperators() : array;
 
 
 	/**
@@ -101,9 +102,9 @@ interface Iface
 	/**
 	 * Returns the original condition expression objects.
 	 *
-	 * @return \Aimeos\MW\Criteria\Expression\Iface Original expression objects
+	 * @return \Aimeos\MW\Criteria\Expression\Iface|null Original expression objects
 	 */
-	public function getConditions();
+	public function getConditions() : ?\Aimeos\MW\Criteria\Expression\Iface;
 
 
 	/**
@@ -112,7 +113,7 @@ interface Iface
 	 * @param \Aimeos\MW\Criteria\Expression\Iface $conditions Expression object
 	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
 	 */
-	public function setConditions( \Aimeos\MW\Criteria\Expression\Iface $conditions );
+	public function setConditions( \Aimeos\MW\Criteria\Expression\Iface $conditions ) : Iface;
 
 
 	/**
@@ -131,7 +132,7 @@ interface Iface
 	 *
 	 * @return array Original sortation array
 	 */
-	public function getSortations();
+	public function getSortations() : array;
 
 
 	/**
@@ -140,33 +141,33 @@ interface Iface
 	 * @param \Aimeos\MW\Criteria\Expression\Sort\Iface[] $sortation List of objects implementing \Aimeos\MW\Criteria\Expression\Sort\Iface
 	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
 	 */
-	public function setSortations( array $sortation );
+	public function setSortations( array $sortation ) : \Aimeos\MW\Criteria\Iface;
 
 
 	/**
 	 * Returns the start number of requested items.
 	 *
-	 * @return integer Start number of the items
+	 * @return int Start number of the items
 	 */
-	public function getSliceStart();
+	public function getSliceStart() : int;
 
 
 	/**
 	 * Returns the number of requested items.
 	 *
-	 * @return integer Number of items
+	 * @return int Number of items
 	 */
-	public function getSliceSize();
+	public function getSliceSize() : int;
 
 
 	/**
 	 * Sets the start number and the size of the requested data slice.
 	 *
-	 * @param integer $start Start number of the items
-	 * @param integer $size Number of items
+	 * @param int $start Start number of the items
+	 * @param int $size Number of items
 	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
 	 */
-	public function setSlice( $start, $size = 100 );
+	public function setSlice( int $start, int $size = 100 );
 
 
 	/**
@@ -194,7 +195,7 @@ interface Iface
 	 * @return \Aimeos\MW\Criteria\Expression\Iface|null Condition expressions (maybe nested) or null for none
 	 * @throws \Aimeos\MW\Common\Exception If given array is invalid
 	 */
-	public function toConditions( array $array );
+	public function toConditions( array $array ) : ?\Aimeos\MW\Criteria\Expression\Iface;
 
 
 	/**
@@ -209,7 +210,7 @@ interface Iface
 	 * @param string[] $array Single-dimensional array of name and operator pairs
 	 * @return array List of sort expressions implementing \Aimeos\MW\Criteria\Expression\Sort\Iface
 	 */
-	public function toSortations( array $array );
+	public function toSortations( array $array ) : array;
 
 
 	/**
@@ -219,5 +220,5 @@ interface Iface
 	 * @param array $translations Associative list of item names that should be translated
 	 * @return array List of translated columns
 	 */
-	public function translate( array $columns, array $translations = [] );
+	public function translate( array $columns, array $translations = [] ) : array;
 }

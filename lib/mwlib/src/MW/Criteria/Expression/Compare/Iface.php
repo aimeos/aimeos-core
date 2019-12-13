@@ -25,13 +25,13 @@ interface Iface extends \Aimeos\MW\Criteria\Expression\Iface
 	 *
 	 * @return string Name of variable or column that should be compared.
 	 */
-	public function getName();
+	public function getName() : string;
 
 
 	/**
 	 * Returns the right side of the compare expression.
 	 *
-	 * @return string Value that the variable or column should be compared to.
+	 * @return mixed Value that the variable or column should be compared to.
 	 */
 	public function getValue();
 }

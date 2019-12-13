@@ -51,7 +51,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 * @param \Aimeos\MW\Criteria\Expression\Compare\Iface[] $list List of expression objects
 	 * @return \Aimeos\MW\Criteria\Expression\Combine\Iface Combine expression object
 	 */
-	public function combine( $operator, array $list )
+	public function combine( string $operator, array $list ) : \Aimeos\MW\Criteria\Expression\Combine\Iface
 	{
 		return new \Aimeos\MW\Criteria\Expression\Combine\SQL( $operator, $list );
 	}
@@ -75,7 +75,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 * @param mixed $value Value the variable or column should be compared to
 	 * @return \Aimeos\MW\Criteria\Expression\Compare\Iface Compare expression object
 	 */
-	public function compare( $operator, $name, $value )
+	public function compare( string $operator, string $name, $value ) : \Aimeos\MW\Criteria\Expression\Compare\Iface
 	{
 		return new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, $operator, $name, $value );
 	}
@@ -92,7 +92,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 * @param string $name Name of the variable or column that should be used for sorting
 	 * @return \Aimeos\MW\Criteria\Expression\Sort\Iface Sort expression object
 	 */
-	public function sort( $operator, $name )
+	public function sort( string $operator, string $name ) : \Aimeos\MW\Criteria\Expression\Sort\Iface
 	{
 		return new \Aimeos\MW\Criteria\Expression\Sort\SQL( $this->conn, $operator, $name );
 	}
@@ -103,7 +103,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 *
 	 * @return array Associative list of lists (compare, combine, sort) containing the available operators
 	 */
-	public function getOperators()
+	public function getOperators() : array
 	{
 		return array(
 			'combine' => \Aimeos\MW\Criteria\Expression\Combine\SQL::getOperators(),
@@ -137,9 +137,9 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	/**
 	 * Returns the original condition expression objects.
 	 *
-	 * @return \Aimeos\MW\Criteria\Expression\Iface Original expression objects
+	 * @return \Aimeos\MW\Criteria\Expression\Iface|null Original expression objects
 	 */
-	public function getConditions()
+	public function getConditions() : ?\Aimeos\MW\Criteria\Expression\Iface
 	{
 		return $this->conditions;
 	}
@@ -151,7 +151,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 * @param \Aimeos\MW\Criteria\Expression\Iface $conditions Expression object
 	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
 	 */
-	public function setConditions( \Aimeos\MW\Criteria\Expression\Iface $conditions )
+	public function setConditions( \Aimeos\MW\Criteria\Expression\Iface $conditions ) : Iface
 	{
 		if( $conditions instanceof \Aimeos\MW\Criteria\Expression\Sort\Iface ) {
 			throw new \Aimeos\MW\Common\Exception( 'Sortation objects are not allowed' );
@@ -202,7 +202,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 *
 	 * @return array Original sortation list (array of objects)
 	 */
-	public function getSortations()
+	public function getSortations() : array
 	{
 		return $this->sortations;
 	}
@@ -214,7 +214,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 * @param \Aimeos\MW\Criteria\Expression\Sort\SQL[] $sortations List of objects implementing \Aimeos\MW\Criteria\Expression\Sort\Iface
 	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
 	 */
-	public function setSortations( array $sortations )
+	public function setSortations( array $sortations ) : Iface
 	{
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MW\Criteria\Expression\Sort\Iface::class, $sortations );
 
@@ -226,9 +226,9 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	/**
 	 * Returns the number of requested items.
 	 *
-	 * @return integer Number of items
+	 * @return int Number of items
 	 */
-	public function getSliceSize()
+	public function getSliceSize() : int
 	{
 		return $this->sliceSize;
 	}
@@ -237,9 +237,9 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	/**
 	 * Returns the start number of requested items.
 	 *
-	 * @return integer Start number of the items
+	 * @return int Start number of the items
 	 */
-	public function getSliceStart()
+	public function getSliceStart() : int
 	{
 		return $this->sliceStart;
 	}
@@ -248,11 +248,11 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	/**
 	 * Sets the start number and the size of the requested data slice.
 	 *
-	 * @param integer $start Start number of the items
-	 * @param integer $size Number of items
+	 * @param int $start Start number of the items
+	 * @param int $size Number of items
 	 * @return \Aimeos\MW\Criteria\SQL Object instance for fluent interface
 	 */
-	public function setSlice( $start, $size = 100 )
+	public function setSlice( int $start, int $size = 100 )
 	{
 		$this->sliceStart = (int) $start;
 		$this->sliceSize = (int) $size;
@@ -266,7 +266,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 *
 	 * return \Aimeos\MW\DB\Connection\Iface Connection object
 	 */
-	public function getConnection()
+	public function getConnection() : \Aimeos\MW\DB\Connection\Iface
 	{
 		return $this->conn;
 	}

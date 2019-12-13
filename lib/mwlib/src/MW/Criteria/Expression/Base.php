@@ -28,7 +28,7 @@ abstract class Base
 	 *
 	 * @return string Name of variable or column that should be compared
 	 */
-	abstract public function getName();
+	abstract public function getName() : string;
 
 
 	/**
@@ -38,7 +38,7 @@ abstract class Base
 	 * @param array $params Single- or multi-dimensional list of parameters of type boolean, integer, etc.
 	 * @return string Function signature
 	 */
-	public static function createFunction( $name, array $params )
+	public static function createFunction( string $name, array $params ) : string
 	{
 		return $name . '(' . self::createSignature( $params ) . ')';
 	}
@@ -48,9 +48,9 @@ abstract class Base
 	 * Translates the sort key into the name required by the storage
 	 *
 	 * @param array $translations Associative list of variable or column names that should be translated
-	 * @return string Translated name (with replaced parameters if the name is an expression function)
+	 * @return string|null Translated name (with replaced parameters if the name is an expression function)
 	 */
-	public function translate( array $translations )
+	public function translate( array $translations ) : ?string
 	{
 		$name = $this->getName();
 		return $this->translateName( $name, $translations );
@@ -63,7 +63,7 @@ abstract class Base
 	 * @param array $params Single- or multi-dimensional list of parameters of type boolean, integer, etc.
 	 * @return string Parameter signature
 	 */
-	protected static function createSignature( array $params )
+	protected static function createSignature( array $params ) : string
 	{
 		$list = [];
 
@@ -98,9 +98,9 @@ abstract class Base
 	 *
 	 * @param string $name Function string to check, will be cut to <function>() (without parameter)
 	 * @param array $params Array that will contain the list of parameters afterwards
-	 * @return boolean True if string is an expression function, false if not
+	 * @return bool True if string is an expression function, false if not
 	 */
-	protected function isFunction( &$name, array &$params )
+	protected function isFunction( string &$name, array &$params ) : bool
 	{
 		$len = strlen( $name );
 		if( $len === 0 || $name[$len - 1] !== ')' ) {
@@ -143,7 +143,7 @@ abstract class Base
 	 * @param string[] $replace List of strings to replace by, e.g. ['val1', 'val2']
 	 * @return array Multi-dimensional associative array with parameters replaced
 	 */
-	protected function replaceParameter( array $list, array $find, array $replace )
+	protected function replaceParameter( array $list, array $find, array $replace ) : array
 	{
 		foreach( $list as $key => $value )
 		{
@@ -164,9 +164,9 @@ abstract class Base
 	 * @param string $name Expresion string or function
 	 * @param array $translations Associative list of names and their translations (may include parameter if a name is an expression function)
 	 * @param array $funcs Associative list of item names and functions modifying the conditions
-	 * @return string Translated name (with replaced parameters if the name is an expression function)
+	 * @return mixed Translated name (with replaced parameters if the name is an expression function)
 	 */
-	protected function translateName( &$name, array $translations = [], array $funcs = [] )
+	protected function translateName( string &$name, array $translations = [], array $funcs = [] )
 	{
 		$params = [];
 
@@ -210,9 +210,9 @@ abstract class Base
 	 *
 	 * @param string $name Name of variable or column that should be translated
 	 * @param mixed $value Original value
-	 * @return string Translated value
+	 * @return mixed Translated value
 	 */
-	protected function translateValue( $name, $value )
+	protected function translateValue( string $name, $value )
 	{
 		if( isset( $this->plugins[$name] ) ) {
 			return $this->plugins[$name]->translate( $value );
@@ -237,21 +237,21 @@ abstract class Base
 	 * Escapes the value so it can be inserted into a SQL statement
 	 *
 	 * @param string $operator Operator used for the expression
-	 * @param integer $type Type constant
-	 * @param string $value Value that the variable or column should be compared to
-	 * @return string Escaped value
+	 * @param string $type Type constant
+	 * @param mixed $value Value that the variable or column should be compared to
+	 * @return string|int|double Escaped value
 	 */
-	abstract protected function escape( $operator, $type, $value );
+	abstract protected function escape( string $operator, string $type, $value );
 
 
 	/**
 	 * @param string &$item Reference to parameter value (will be updated if necessary)
 	 *
 	 * @param string $item Parameter value
-	 * @return integer Internal parameter type
+	 * @return string Internal parameter type
 	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
-	abstract protected function getParamType( &$item );
+	abstract protected function getParamType( string &$item );
 
 
 	/**
@@ -260,7 +260,7 @@ abstract class Base
 	 * @param string[] $strings List of matched strings
 	 * @return array List of found parameters
 	 */
-	protected function extractParams( array $strings )
+	protected function extractParams( array $strings ) : array
 	{
 		$params = [];
 

@@ -30,7 +30,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * @param string $name Name of variable that should be compared.
 	 * @param mixed $value Value that the variable should be compared to
 	 */
-	public function __construct( $operator, $name, $value )
+	public function __construct( string $operator, string $name, $value )
 	{
 		if( !isset( self::$operators[$operator] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
@@ -45,7 +45,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 *
 	 * @return array List of available operators
 	 */
-	public static function getOperators()
+	public static function getOperators() : array
 	{
 		return array_keys( self::$operators );
 	}
@@ -55,11 +55,11 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * Creates a term string from the given parameters.
 	 *
 	 * @param string $name Translated name of variable that should be compared
-	 * @param integer $type Type constant
+	 * @param string $type Type constant
 	 * @param mixed $value Value that the variable should be compared to
 	 * @return string Created term string (name operator value)
 	 */
-	protected function createTerm( $name, $type, $value )
+	protected function createTerm( string $name, string $type, $value ) : string
 	{
 		$escaped = $this->escape( $this->getOperator(), $type, $value );
 		return $name . ' ' . self::$operators[$this->getOperator()] . ' ' . $escaped;
@@ -72,7 +72,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * @param string $name Translated name of the variable or column
 	 * @return string Created term string (name operator null)
 	 */
-	protected function createNullTerm( $name )
+	protected function createNullTerm( string $name ) : string
 	{
 		if( is_array( $name ) ) {
 			return '';
@@ -94,10 +94,10 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * Creates a term from a list of values.
 	 *
 	 * @param string $name Translated name of the variable
-	 * @param integer $type Type constant
+	 * @param string $type Type constant
 	 * @return string Created term string
 	 */
-	protected function createListTerm( $name, $type )
+	protected function createListTerm( string $name, string $type ) : string
 	{
 		switch( $this->getOperator() )
 		{
@@ -130,7 +130,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * @param array $values Value list for the variable
 	 * @return string array-String of comma separated values
 	 */
-	protected function createValueList( $type, array $values )
+	protected function createValueList( string $type, array $values ) : string
 	{
 		if( ( $val = reset( $values ) ) === false ) {
 			return '';
@@ -154,7 +154,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * @param mixed $value Value that the variable should be compared to
 	 * @return boolean|double|integer|string Escaped value
 	 */
-	protected function escape( $operator, $type, $value )
+	protected function escape( string $operator, string $type, $value )
 	{
 		$value = $this->translateValue( $this->getName(), $value );
 
@@ -180,7 +180,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * @param string &$item Parameter string to evaluate (double quotes will be removed if necessary)
 	 * @return string Data type (string, float, int)
 	 */
-	protected function getParamType( &$item )
+	protected function getParamType( string &$item ) : string
 	{
 		if( $item[0] == '"' )
 		{

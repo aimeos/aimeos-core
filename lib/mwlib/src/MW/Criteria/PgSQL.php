@@ -38,7 +38,7 @@ class PgSQL extends \Aimeos\MW\Criteria\SQL
 	 * @param mixed $value Value of the variable or column should be compared to
 	 * @return \Aimeos\MW\Criteria\Expression\Compare\Iface Compare expression object
 	 */
-	public function compare( $operator, $name, $value )
+	public function compare( string $operator, string $name, $value ) : \Aimeos\MW\Criteria\Expression\Compare\Iface
 	{
 		return new \Aimeos\MW\Criteria\Expression\Compare\PgSQL( $this->getConnection(), $operator, $name, $value );
 	}

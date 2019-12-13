@@ -37,7 +37,7 @@ interface Iface
 	 *
 	 * @return string Operator for combining or comparing
 	 */
-	public function getOperator();
+	public function getOperator() : string;
 
 
 	/**
@@ -45,7 +45,7 @@ interface Iface
 	 *
 	 * @return array List of available operators
 	 */
-	public static function getOperators();
+	public static function getOperators() : array;
 
 
 	/**
@@ -54,5 +54,5 @@ interface Iface
 	 * @param array $translations Associative list of variable or column names that should be translated
 	 * @return string|null Translated name (with replaced parameters if the name is an expression function)
 	 */
-	public function translate( array $translations );
+	public function translate( array $translations ) : ?string;
 }

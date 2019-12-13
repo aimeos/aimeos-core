@@ -35,7 +35,7 @@ class SQL
 	 * @param string $operator Sorting operator ("+": ascending, "-": descending)
 	 * @param string $name Name of the variable or column to sort
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $operator, $name )
+	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, string $operator, string $name )
 	{
 		if( !isset( self::$operators[$operator] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
@@ -52,7 +52,7 @@ class SQL
 	 *
 	 * @return string Sorting direction ("+": ascending, "-": descending)
 	 */
-	public function getOperator()
+	public function getOperator() : string
 	{
 		return $this->operator;
 	}
@@ -63,7 +63,7 @@ class SQL
 	 *
 	 * @return array List of available operators
 	 */
-	public static function getOperators()
+	public static function getOperators() : array
 	{
 		return array_keys( self::$operators );
 	}
@@ -74,7 +74,7 @@ class SQL
 	 *
 	 * @return string Name of the variable or column to sort
 	 */
-	public function getName()
+	public function getName() : string
 	{
 		return $this->name;
 	}
@@ -111,11 +111,11 @@ class SQL
 	 * Escapes the value so it can be inserted into a SQL statement
 	 *
 	 * @param string $operator Operator used for the expression
-	 * @param integer $type Type constant
+	 * @param string $type Type constant
 	 * @param mixed $value Value that the variable or column should be compared to
 	 * @return string Escaped value
 	 */
-	protected function escape( $operator, $type, $value )
+	protected function escape( string $operator, string $type, $value ) : string
 	{
 		$value = $this->translateValue( $this->getName(), $value );
 
@@ -145,10 +145,10 @@ class SQL
 	 * Returns the internal type of the function parameter.
 	 *
 	 * @param string &$item Reference to parameter value (will be updated if necessary)
-	 * @return integer Internal parameter type
+	 * @return string Internal parameter type
 	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
-	protected function getParamType( &$item )
+	protected function getParamType( string &$item ) : string
 	{
 		if( $item[0] == '"' )
 		{

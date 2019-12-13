@@ -34,7 +34,7 @@ abstract class Base
 	 * @param string $name Name of variable or column that should be compared.
 	 * @param string|array $value Value that the variable or column should be compared to
 	 */
-	public function __construct( $operator, $name, $value )
+	public function __construct( string $operator, string $name, $value )
 	{
 		$this->operator = $operator;
 		$this->name = $name;
@@ -47,7 +47,7 @@ abstract class Base
 	 *
 	 * @return string Operator used for the expression
 	 */
-	public function getOperator()
+	public function getOperator() : string
 	{
 		return $this->operator;
 	}
@@ -58,7 +58,7 @@ abstract class Base
 	 *
 	 * @return string Name of variable or column that should be compared
 	 */
-	public function getName()
+	public function getName() : string
 	{
 		return $this->name;
 	}
@@ -124,11 +124,11 @@ abstract class Base
 	 * Creates a term string from the given parameters.
 	 *
 	 * @param string $name Translated name of variable or column that should be compared
-	 * @param integer $type Type constant
-	 * @param string $value Value that the variable or column should be compared to
+	 * @param string $type Type constant
+	 * @param mixed $value Value that the variable or column should be compared to
 	 * @return string Created term string (name operator value)
 	 */
-	abstract protected function createTerm( $name, $type, $value );
+	abstract protected function createTerm( string $name, string $type, $value );
 
 
 	/**
@@ -137,15 +137,15 @@ abstract class Base
 	 * @param string $name Translated name of the variable or column
 	 * @return string String that can be inserted into a SQL statement
 	 */
-	abstract protected function createNullTerm( $name );
+	abstract protected function createNullTerm( string $name );
 
 
 	/**
 	 * Creates a term from a list of values.
 	 *
 	 * @param string $name Translated name of the variable or column
-	 * @param integer $type Type constant
+	 * @param string $type Type constant
 	 * @return string String that can be inserted into a SQL statement
 	 */
-	abstract protected function createListTerm( $name, $type );
+	abstract protected function createListTerm( string $name, string $type );
 }

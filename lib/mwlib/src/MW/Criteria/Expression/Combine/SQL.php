@@ -31,7 +31,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 * @param string $operator The used combine operator
 	 * @param array $list List of expression objects
 	 */
-	public function __construct( $operator, array $list )
+	public function __construct( string $operator, array $list )
 	{
 		if( !isset( self::$operators[$operator] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
@@ -49,7 +49,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 *
 	 * @return array List of expression objects
 	 */
-	public function getExpressions()
+	public function getExpressions() : array
 	{
 		return $this->expressions;
 	}
@@ -60,7 +60,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 *
 	 * @return string Operator used for the expressions
 	 */
-	public function getOperator()
+	public function getOperator() : string
 	{
 		return $this->operator;
 	}
@@ -71,7 +71,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 *
 	 * @return array List of available operators
 	 */
-	public static function getOperators()
+	public static function getOperators() : array
 	{
 		return array_keys( self::$operators );
 	}
@@ -122,7 +122,8 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 * @param array $translations Associative list of variable or column names that should be translated
 	 * @return string|null Translated name (with replaced parameters if the name is an expression function)
 	 */
-	public function translate( array $translations )
+	public function translate( array $translations ) : ?string
 	{
+		return null;
 	}
 }

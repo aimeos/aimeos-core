@@ -62,7 +62,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 *
 	 * @return string Available types are "string", "integer", "float", "boolean", "date", "time", "datetime"
 	 */
-	public function getType()
+	public function getType() : string
 	{
 		return $this->values['type'];
 	}
@@ -84,7 +84,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 *
 	 * @return string Public code of the search attribute
 	 */
-	public function getCode()
+	public function getCode() : string
 	{
 		return $this->values['code'];
 	}
@@ -106,7 +106,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 *
 	 * @return array List of internal dependency strings
 	 */
-	public function getInternalDeps()
+	public function getInternalDeps() : array
 	{
 		return isset( $this->values['internaldeps'] ) ? (array) $this->values['internaldeps'] : [];
 	}
@@ -117,7 +117,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 *
 	 * @return \Closure|null Helper function
 	 */
-	public function getFunction()
+	public function getFunction() : ?\Closure
 	{
 		return isset( $this->values['function'] ) ? $this->values['function'] : null;
 	}
@@ -128,7 +128,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 *
 	 * @return string Name of the search attribute
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
 		return isset( $this->values['label'] ) ? $this->values['label'] : '';
 	}
@@ -148,9 +148,9 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	/**
 	 * Returns true if the attribute should be publically available.
 	 *
-	 * @return boolean True if the attribute is public, false if not
+	 * @return bool True if the attribute is public, false if not
 	 */
-	public function isPublic()
+	public function isPublic() : bool
 	{
 		return isset( $this->values['public'] ) ? (bool) $this->values['public'] : true;
 	}
@@ -159,9 +159,9 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	/**
 	 * Returns true if the attribute is required.
 	 *
-	 * @return boolean True if the attribute is required, false if not
+	 * @return bool True if the attribute is required, false if not
 	 */
-	public function isRequired()
+	public function isRequired() : bool
 	{
 		return isset( $this->values['required'] ) ? (bool) $this->values['required'] : true;
 	}
@@ -172,7 +172,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 *
 	 * @return array Associative list of attribute key/value pairs
 	 */
-	public function toArray()
+	public function toArray() : array
 	{
 		return array(
 			'code' => $this->getCode(),

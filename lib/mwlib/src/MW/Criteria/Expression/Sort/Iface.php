@@ -25,5 +25,5 @@ interface Iface extends \Aimeos\MW\Criteria\Expression\Iface
 	 *
 	 * @return string Name of variable or column that should be compared.
 	 */
-	public function getName();
+	public function getName() : string;
 }

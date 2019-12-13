@@ -32,7 +32,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * @param string $name Name of variable or column that should be compared.
 	 * @param mixed $value Value that the variable or column should be compared to
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $operator, $name, $value )
+	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, string $operator, string $name, $value )
 	{
 		if( !isset( self::$operators[$operator] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
@@ -48,7 +48,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 *
 	 * @return array List of available operators
 	 */
-	public static function getOperators()
+	public static function getOperators() : array
 	{
 		return array_keys( self::$operators );
 	}
@@ -58,11 +58,11 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * Creates a term string from the given parameters.
 	 *
 	 * @param string $name Translated name of variable or column that should be compared
-	 * @param integer $type Type constant
+	 * @param mixed $type Type constant
 	 * @param mixed $value Value that the variable or column should be compared to
 	 * @return string Created term string (name operator value)
 	 */
-	protected function createTerm( $name, $type, $value )
+	protected function createTerm( string $name, $type, $value ) : string
 	{
 		$term = $name . ' ' . self::$operators[$this->getOperator()] . ' ' . $this->escape( $this->getOperator(), $type, $value );
 
@@ -80,7 +80,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * @param string|array $name Translated name of the variable or column
 	 * @return string String that can be inserted into a SQL statement
 	 */
-	protected function createNullTerm( $name )
+	protected function createNullTerm( $name ) : string
 	{
 		if( is_array( $name ) ) {
 			return '';
@@ -102,10 +102,10 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * Creates a term from a list of values.
 	 *
 	 * @param string $name Translated name of the variable or column
-	 * @param integer $type Type constant
+	 * @param string $type Type constant
 	 * @return string String that can be inserted into a SQL statement
 	 */
-	protected function createListTerm( $name, $type )
+	protected function createListTerm( string $name, string $type ) : string
 	{
 		switch( $this->getOperator() )
 		{
@@ -128,11 +128,11 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	/**
 	 * Creates a list of search values.
 	 *
-	 * @param integer $type Type constant
+	 * @param string $type Type constant
 	 * @param string[] $values Value list for the variable or column name
 	 * @return string String of comma separated values in parenthesis
 	 */
-	protected function createValueList( $type, array $values )
+	protected function createValueList( string $type, array $values ) : string
 	{
 		if( empty( $values ) ) {
 			return '(NULL)';
@@ -152,11 +152,11 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * Escapes the value so it can be inserted into a SQL statement
 	 *
 	 * @param string $operator Operator used for the expression
-	 * @param integer $type Type constant
+	 * @param string $type Type constant
 	 * @param mixed $value Value that the variable or column should be compared to
-	 * @return double|string|integer Escaped value
+	 * @return double|string|int Escaped value
 	 */
-	protected function escape( $operator, $type, $value )
+	protected function escape( string $operator, string $type, $value )
 	{
 		$value = $this->translateValue( $this->getName(), $value );
 
@@ -190,7 +190,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 *
 	 * return \Aimeos\MW\DB\Connection\Iface Connection object
 	 */
-	public function getConnection()
+	public function getConnection() : \Aimeos\MW\DB\Connection\Iface
 	{
 		return $this->conn;
 	}
@@ -200,10 +200,10 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * Returns the internal type of the function parameter.
 	 *
 	 * @param string &$item Reference to parameter value (will be updated if necessary)
-	 * @return integer Internal parameter type
+	 * @return string Internal parameter type
 	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
-	protected function getParamType( &$item )
+	protected function getParamType( string &$item ) : string
 	{
 		if( $item[0] == '"' )
 		{

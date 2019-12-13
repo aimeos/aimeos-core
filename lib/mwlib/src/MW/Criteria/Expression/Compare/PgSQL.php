@@ -23,11 +23,11 @@ class PgSQL extends \Aimeos\MW\Criteria\Expression\Compare\SQL
 	 * Escapes the value so it can be inserted into a SQL statement
 	 *
 	 * @param string $operator Operator used for the expression
-	 * @param integer $type Type constant
+	 * @param string $type Type constant
 	 * @param mixed $value Value that the variable or column should be compared to
 	 * @return double|string|integer Escaped value
 	 */
-	protected function escape( $operator, $type, $value )
+	protected function escape( string $operator, string $type, $value )
 	{
 		$value = $this->translateValue( $this->getName(), $value );
 

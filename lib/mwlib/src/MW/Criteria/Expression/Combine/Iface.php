@@ -25,5 +25,5 @@ interface Iface extends \Aimeos\MW\Criteria\Expression\Iface
 	 *
 	 * @return array List of expressions
 	 */
-	public function getExpressions();
+	public function getExpressions() : array;
 }

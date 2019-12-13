@@ -25,8 +25,9 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 *
 	 * @param string $name Function name
 	 * @param array $params Single- or multi-dimensional list of parameters of type boolean, integer, float and string
+	 * @return string Function signature
 	 */
-	public function createFunction( $name, array $params )
+	public function createFunction( string $name, array $params ) : string
 	{
 		return \Aimeos\MW\Criteria\Expression\Base::createFunction( $name, $params );
 	}
@@ -57,7 +58,7 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 * @return \Aimeos\MW\Criteria\Expression\Iface|null Condition expressions (maybe nested) or null for none
 	 * @throws \Aimeos\MW\Common\Exception If given array is invalid
 	 */
-	public function toConditions( array $array )
+	public function toConditions( array $array ) : ?\Aimeos\MW\Criteria\Expression\Iface
 	{
 		if( ( $value = reset( $array ) ) === false ) {
 			return null;
@@ -89,7 +90,7 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 * @param string[] $array Single-dimensional array of name and operator pairs
 	 * @return \Aimeos\MW\Criteria\Expression\Sort\Iface[] List of sort expressions
 	 */
-	public function toSortations( array $array )
+	public function toSortations( array $array ) : array
 	{
 		$results = [];
 
@@ -108,7 +109,7 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 * @param array $translations Associative list of item names that should be translated
 	 * @return array List of translated columns
 	 */
-	public function translate( array $columns, array $translations = [] )
+	public function translate( array $columns, array $translations = [] ) : array
 	{
 		$list = [];
 
@@ -128,9 +129,10 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 *
 	 * @param string $operator One of the "combine" operators
 	 * @param array $list List of arrays with "combine" or "compare" representations
+	 * @return \Aimeos\MW\Criteria\Expression\Combine\Iface Combine expression object
 	 * @throws \Aimeos\MW\Common\Exception If operator is invalid
 	 */
-	protected function createCombineExpression( $operator, array $list )
+	protected function createCombineExpression( string $operator, array $list )
 	{
 		$results = [];
 		$operators = $this->getOperators();
@@ -163,6 +165,7 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 *
 	 * @param string $op One of the "compare" operators
 	 * @param array $pair Associative list containing one name/value pair
+	 * @return \Aimeos\MW\Criteria\Expression\Compare\Iface Compare expression object
 	 * @throws \Aimeos\MW\Common\Exception If no name/value pair is available
 	 */
 	protected function createCompareExpression( $op, array $pair )
