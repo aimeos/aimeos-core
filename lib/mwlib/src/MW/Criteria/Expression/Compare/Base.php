@@ -128,7 +128,7 @@ abstract class Base
 	 * @param mixed $value Value that the variable or column should be compared to
 	 * @return string Created term string (name operator value)
 	 */
-	abstract protected function createTerm( string $name, string $type, $value );
+	abstract protected function createTerm( string $name, string $type, $value ) : string;
 
 
 	/**
@@ -137,7 +137,7 @@ abstract class Base
 	 * @param string $name Translated name of the variable or column
 	 * @return string String that can be inserted into a SQL statement
 	 */
-	abstract protected function createNullTerm( string $name );
+	abstract protected function createNullTerm( string $name ) : string;
 
 
 	/**
@@ -147,5 +147,5 @@ abstract class Base
 	 * @param string $type Type constant
 	 * @return string String that can be inserted into a SQL statement
 	 */
-	abstract protected function createListTerm( string $name, string $type );
+	abstract protected function createListTerm( string $name, string $type ) : string;
 }
