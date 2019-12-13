@@ -58,11 +58,11 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * Creates a term string from the given parameters.
 	 *
 	 * @param string $name Translated name of variable or column that should be compared
-	 * @param mixed $type Type constant
+	 * @param string $type Type constant
 	 * @param mixed $value Value that the variable or column should be compared to
 	 * @return string Created term string (name operator value)
 	 */
-	protected function createTerm( string $name, $type, $value ) : string
+	protected function createTerm( string $name, string $type, $value ) : string
 	{
 		$term = $name . ' ' . self::$operators[$this->getOperator()] . ' ' . $this->escape( $this->getOperator(), $type, $value );
 
