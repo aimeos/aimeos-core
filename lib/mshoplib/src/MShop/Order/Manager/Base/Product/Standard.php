@@ -44,8 +44,8 @@ class Standard
 			'code' => 'order.base.product.siteid',
 			'internalcode' => 'mordbapr."siteid"',
 			'label' => 'Product site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.orderaddressid' => array(

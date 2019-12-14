@@ -14,7 +14,7 @@ return array(
 			$table = $schema->createTable( 'mshop_coupon' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'provider', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
@@ -41,7 +41,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', [] );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'count', 'integer', ['notnull' => false, 'default' => 0] );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );

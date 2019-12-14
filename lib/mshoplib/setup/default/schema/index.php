@@ -20,7 +20,7 @@ return array(
 			$table = $schema->createTable( 'mshop_index_attribute' );
 
 			$table->addColumn( 'prodid', 'integer', [] );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'attrid', 'string', ['length' => 36, 'notnull' => false] );
 			$table->addColumn( 'listtype', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
@@ -39,7 +39,7 @@ return array(
 			$table = $schema->createTable( 'mshop_index_catalog' );
 
 			$table->addColumn( 'prodid', 'integer', [] );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'catid', 'string', ['length' => 36] );
 			$table->addColumn( 'listtype', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'pos', 'integer', [] );
@@ -56,7 +56,7 @@ return array(
 			$table = $schema->createTable( 'mshop_index_price' );
 
 			$table->addColumn( 'prodid', 'integer', [] );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
 			$table->addColumn( 'value', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
@@ -72,7 +72,7 @@ return array(
 			$table = $schema->createTable( 'mshop_index_supplier' );
 
 			$table->addColumn( 'prodid', 'integer', [] );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'supid', 'string', ['length' => 36] );
 			$table->addColumn( 'listtype', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'pos', 'integer', [] );
@@ -89,7 +89,7 @@ return array(
 			$table = $schema->createTable( 'mshop_index_text' );
 
 			$table->addColumn( 'prodid', 'integer', [] );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'langid', 'string', ['length' => 5, 'notnull' => false] );
 			$table->addColumn( 'url', 'string', ['length' => 240] );
 			$table->addColumn( 'name', 'string', ['length' => 240] );

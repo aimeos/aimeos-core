@@ -34,8 +34,8 @@ class Standard extends Base
 			'code' => 'catalog.siteid',
 			'internalcode' => 'mcat."siteid"',
 			'label' => 'Site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'parentid' => array(
@@ -1067,13 +1067,13 @@ class Standard extends Base
 
 			if( $case !== true )
 			{
-				$stmt->bind( $idx++, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $siteid );
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			}
 			else
 			{
 				$stmt->bind( $idx++, $date ); // ctime
-				$stmt->bind( $idx++, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $siteid );
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			}
 

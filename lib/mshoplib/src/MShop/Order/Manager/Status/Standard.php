@@ -34,8 +34,8 @@ class Standard
 			'code' => 'order.status.siteid',
 			'internalcode' => 'mordst."siteid"',
 			'label' => 'Status site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.status.parentid' => array(

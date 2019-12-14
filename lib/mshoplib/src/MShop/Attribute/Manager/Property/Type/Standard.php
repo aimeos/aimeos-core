@@ -33,8 +33,8 @@ class Standard
 			'code' => 'attribute.property.type.siteid',
 			'internalcode' => 'mattprty."siteid"',
 			'label' => 'Property type site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.property.type.label' => array(

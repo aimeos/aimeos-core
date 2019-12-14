@@ -34,8 +34,8 @@ class Standard
 			'code' => 'customer.group.siteid',
 			'internalcode' => 'mcusgr."siteid"',
 			'label' => 'Group site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.group.code' => array(

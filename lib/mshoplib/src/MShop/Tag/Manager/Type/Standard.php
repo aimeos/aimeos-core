@@ -34,8 +34,8 @@ class Standard
 			'code' => 'tag.type.siteid',
 			'internalcode' => 'mtagty."siteid"',
 			'label' => 'Type site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'tag.type.label' => array(

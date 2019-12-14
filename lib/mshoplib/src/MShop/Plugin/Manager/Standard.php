@@ -35,8 +35,8 @@ class Standard
 			'label' => 'Site ID',
 			'code' => 'plugin.siteid',
 			'internalcode' => 'mplu."siteid"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'plugin.type' => array(

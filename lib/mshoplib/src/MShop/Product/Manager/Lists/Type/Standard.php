@@ -34,8 +34,8 @@ class Standard
 			'code' => 'product.lists.type.siteid',
 			'internalcode' => 'mprolity."siteid"',
 			'label' => 'List type site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.lists.type.label' => array(

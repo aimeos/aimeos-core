@@ -13,7 +13,7 @@ return array(
 			$table = $schema->createTable( 'madmin_job' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'method', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'parameter', 'text', array( 'length' => 0xffff ) );

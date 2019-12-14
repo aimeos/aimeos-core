@@ -36,9 +36,8 @@ class Standard
 			'code' => 'cache.siteid',
 			'internalcode' => '"siteid"',
 			'label' => 'Site ID',
-			'type' => 'integer',
-			'public' => false,
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'cache.value' => array(

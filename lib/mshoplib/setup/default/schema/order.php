@@ -21,7 +21,7 @@ return array(
 			$table = $schema->createTable( 'mshop_order_base' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'customerid', 'string', array( 'length' => 36 ) );
 			$table->addColumn( 'sitecode', 'string', array( 'length' => 255, 'notnull' => false ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5 ) );
@@ -51,7 +51,7 @@ return array(
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'baseid', 'bigint', [] );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'addrid', 'string', array( 'length' => 36 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
@@ -101,7 +101,7 @@ return array(
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'baseid', 'bigint', [] );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'ordprodid', 'bigint', array( 'notnull' => false ) );
 			$table->addColumn( 'ordaddrid', 'bigint', array( 'notnull' => false ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
@@ -147,7 +147,7 @@ return array(
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'ordprodid', 'bigint', [] );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'attrid', 'string', array( 'length' => 36 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
@@ -174,7 +174,7 @@ return array(
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'baseid', 'bigint', [] );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'servid', 'string', array( 'length' => 36 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
@@ -209,7 +209,7 @@ return array(
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'ordservid', 'bigint', [] );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'attrid', 'string', array( 'length' => 36 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
@@ -236,7 +236,7 @@ return array(
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'baseid', 'bigint', [] );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'ordprodid', 'bigint', array( 'notnull' => false ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
@@ -263,7 +263,7 @@ return array(
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'baseid', 'bigint', [] );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'datepayment', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'datedelivery', 'datetime', array( 'notnull' => false ) );
@@ -307,7 +307,7 @@ return array(
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'bigint', [] );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'value', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );

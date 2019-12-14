@@ -34,8 +34,8 @@ class Standard
 			'code' => 'media.lists.siteid',
 			'internalcode' => 'mmedli."siteid"',
 			'label' => 'List site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.lists.parentid' => array(

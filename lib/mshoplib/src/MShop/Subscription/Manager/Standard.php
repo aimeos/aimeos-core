@@ -33,8 +33,8 @@ class Standard
 			'code' => 'subscription.siteid',
 			'internalcode' => 'mord."siteid"',
 			'label' => 'Site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'subscription.ordbaseid' => array(

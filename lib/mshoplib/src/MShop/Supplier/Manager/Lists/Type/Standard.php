@@ -33,8 +33,8 @@ class Standard
 			'code' => 'supplier.lists.type.siteid',
 			'internalcode' => 'msuplity."siteid"',
 			'label' => 'List type site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'supplier.lists.type.label' => array(

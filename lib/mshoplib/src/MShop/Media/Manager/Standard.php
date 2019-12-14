@@ -38,8 +38,8 @@ class Standard
 			'label' => 'Site ID',
 			'code' => 'media.siteid',
 			'internalcode' => 'mmed."siteid"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.type' => array(

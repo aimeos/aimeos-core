@@ -42,8 +42,8 @@ class Standard
 			'code' => 'customer.property.siteid',
 			'internalcode' => 'mcuspr."siteid"',
 			'label' => 'Property site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.property.key' => array(

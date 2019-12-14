@@ -34,8 +34,8 @@ class Standard
 			'code' => 'order.siteid',
 			'internalcode' => 'mord."siteid"',
 			'label' => 'Invoice site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.baseid' => array(

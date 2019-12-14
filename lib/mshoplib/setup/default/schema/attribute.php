@@ -13,7 +13,7 @@ return array(
 			$table = $schema->createTable( 'mshop_attribute_type' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
@@ -37,7 +37,7 @@ return array(
 			$table = $schema->createTable( 'mshop_attribute' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'key', 'string', array( 'length' => 32, 'default' => '' ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
@@ -66,7 +66,7 @@ return array(
 			$table = $schema->createTable( 'mshop_attribute_list_type' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
@@ -91,7 +91,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', [] );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'key', 'string', array( 'length' => 134, 'default' => '' ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
@@ -121,7 +121,7 @@ return array(
 			$table = $schema->createTable( 'mshop_attribute_property_type' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
@@ -145,8 +145,8 @@ return array(
 			$table = $schema->createTable( 'mshop_attribute_property' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'key', 'string', array( 'length' => 103, 'default' => '' ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );

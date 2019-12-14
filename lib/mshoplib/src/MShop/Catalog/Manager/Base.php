@@ -198,6 +198,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			$context = $this->getContext();
 			$dbm = $context->getDatabaseManager();
 
+			$conn = $dbm->acquire( 'db-catalog' );
+			$sitestr = '\'' . $conn->escape( $siteid ) . '\'';
+			$dbm->release( $conn, 'db-catalog' );
+
 
 			$colstring = '';
 			foreach( $this->getObject()->getSaveAttributes() as $name => $entry ) {
@@ -246,7 +250,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/standard/insert-usage/ansi
 					 * @see mshop/catalog/manager/standard/update-usage/ansi
 					 */
-					'delete' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/delete' ) ),
+					'delete' => str_replace( ':siteid', $sitestr, $this->getSqlConfig( 'mshop/catalog/manager/standard/delete' ) ),
 
 					/** mshop/catalog/manager/standard/get/mysql
 					 * Returns a node record and its complete subtree optionally limited by the level
@@ -292,7 +296,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/standard/insert-usage/ansi
 					 * @see mshop/catalog/manager/standard/update-usage/ansi
 					 */
-					'get' => str_replace( [':columns', ':siteid'], [$colstring, $siteid], $this->getSqlConfig( 'mshop/catalog/manager/standard/get' ) ),
+					'get' => str_replace( [':columns', ':siteid'], [$colstring, $sitestr], $this->getSqlConfig( 'mshop/catalog/manager/standard/get' ) ),
 
 					/** mshop/catalog/manager/standard/insert/mysql
 					 * Inserts a new catalog node into the database table
@@ -336,7 +340,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/standard/insert-usage/ansi
 					 * @see mshop/catalog/manager/standard/update-usage/ansi
 					 */
-					'insert' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/insert' ) ),
+					'insert' => str_replace( ':siteid', $sitestr, $this->getSqlConfig( 'mshop/catalog/manager/standard/insert' ) ),
 
 					/** mshop/catalog/manager/standard/move-left/mysql
 					 * Updates the left values of the nodes that are moved within the catalog tree
@@ -378,7 +382,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/standard/insert-usage/ansi
 					 * @see mshop/catalog/manager/standard/update-usage/ansi
 					 */
-					'move-left' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/move-left' ) ),
+					'move-left' => str_replace( ':siteid', $sitestr, $this->getSqlConfig( 'mshop/catalog/manager/standard/move-left' ) ),
 
 					/** mshop/catalog/manager/standard/move-right/mysql
 					 * Updates the left values of the nodes that are moved within the catalog tree
@@ -420,7 +424,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/standard/insert-usage/ansi
 					 * @see mshop/catalog/manager/standard/update-usage/ansi
 					 */
-					'move-right' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/move-right' ) ),
+					'move-right' => str_replace( ':siteid', $sitestr, $this->getSqlConfig( 'mshop/catalog/manager/standard/move-right' ) ),
 
 					/** mshop/catalog/manager/standard/search/mysql
 					 * Retrieves the records matched by the given criteria in the database
@@ -468,7 +472,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/standard/insert-usage/ansi
 					 * @see mshop/catalog/manager/standard/update-usage/ansi
 					 */
-					'search' => str_replace( [':columns', ':siteid'], [$colstring, $siteid], $this->getSqlConfig( 'mshop/catalog/manager/standard/search' ) ),
+					'search' => str_replace( [':columns', ':siteid'], [$colstring, $sitestr], $this->getSqlConfig( 'mshop/catalog/manager/standard/search' ) ),
 
 					/** mshop/catalog/manager/standard/update/mysql
 					 * Updates an existing catalog node in the database
@@ -509,7 +513,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/standard/insert-usage/ansi
 					 * @see mshop/catalog/manager/standard/update-usage/ansi
 					 */
-					'update' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/update' ) ),
+					'update' => str_replace( ':siteid', $sitestr, $this->getSqlConfig( 'mshop/catalog/manager/standard/update' ) ),
 
 					/** mshop/catalog/manager/standard/update-parentid/mysql
 					 * Updates the parent ID after moving a node record
@@ -550,7 +554,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/standard/insert-usage/ansi
 					 * @see mshop/catalog/manager/standard/update-usage/ansi
 					 */
-					'update-parentid' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/update-parentid' ) ),
+					'update-parentid' => str_replace( ':siteid', $sitestr, $this->getSqlConfig( 'mshop/catalog/manager/standard/update-parentid' ) ),
 
 					/** mshop/catalog/manager/standard/newid/mysql
 					 * Retrieves the ID generated by the database when inserting a new record

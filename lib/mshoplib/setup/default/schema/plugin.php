@@ -13,7 +13,7 @@ return array(
 			$table = $schema->createTable( 'mshop_plugin_type' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
@@ -37,7 +37,7 @@ return array(
 			$table = $schema->createTable( 'mshop_plugin' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'provider', 'string', array( 'length' => 255 ) );

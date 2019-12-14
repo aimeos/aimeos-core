@@ -13,7 +13,7 @@ return array(
 			$table = $schema->createTable( 'madmin_cache' );
 
 			$table->addColumn( 'id', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
 			$table->addColumn( 'expire', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0x1ffff ) );
 
@@ -28,7 +28,7 @@ return array(
 			$table = $schema->createTable( 'madmin_cache_tag' );
 
 			$table->addColumn( 'tid', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'tsiteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'tsiteid', 'string', ['length' => 255, 'default' => ''] );
 			$table->addColumn( 'tname', 'string', array( 'length' => 255 ) );
 
 			$table->addUniqueIndex( array( 'tid', 'tsiteid', 'tname' ), 'unq_macacta_tid_tsid_tname' );

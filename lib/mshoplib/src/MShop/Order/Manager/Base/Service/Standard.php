@@ -36,8 +36,8 @@ class Standard
 			'code' => 'order.base.service.siteid',
 			'internalcode' => 'mordbase."siteid"',
 			'label' => 'Service site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.service.baseid' => array(

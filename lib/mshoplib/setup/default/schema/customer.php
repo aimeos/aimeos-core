@@ -13,7 +13,7 @@ return array(
 			$table = $schema->createTable( 'mshop_customer' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
 			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
@@ -61,7 +61,7 @@ return array(
 			$table = $schema->createTable( 'mshop_customer_address' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
 			$table->addColumn( 'parentid', 'integer', [] );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
 			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
@@ -103,12 +103,31 @@ return array(
 			return $schema;
 		},
 
+		'mshop_customer_group' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+
+			$table = $schema->createTable( 'mshop_customer_group' );
+
+			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
+			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+
+			$table->setPrimaryKey( array( 'id' ), 'pk_mscusgr_id' );
+			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_mscusgr_sid_code' );
+			$table->addIndex( array( 'siteid', 'label' ), 'idx_mscusgr_sid_label' );
+
+			return $schema;
+		},
+
 		'mshop_customer_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_customer_list_type' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
@@ -132,7 +151,7 @@ return array(
 			$table = $schema->createTable( 'mshop_customer_list' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'parentid', 'integer', [] );
 			$table->addColumn( 'key', 'string', array( 'length' => 134, 'default' => '' ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
@@ -158,31 +177,12 @@ return array(
 			return $schema;
 		},
 
-		'mshop_customer_group' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$table = $schema->createTable( 'mshop_customer_group' );
-
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
-
-			$table->setPrimaryKey( array( 'id' ), 'pk_mscusgr_id' );
-			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_mscusgr_sid_code' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mscusgr_sid_label' );
-
-			return $schema;
-		},
-
 		'mshop_customer_property_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_customer_property_type' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
@@ -206,8 +206,8 @@ return array(
 			$table = $schema->createTable( 'mshop_customer_property' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'key', 'string', array( 'length' => 103, 'default' => '' ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );

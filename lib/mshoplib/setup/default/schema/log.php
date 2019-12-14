@@ -13,7 +13,7 @@ return array(
 			$table = $schema->createTable( 'madmin_log' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
 			$table->addColumn( 'facility', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'timestamp', 'datetime', [] );
 			$table->addColumn( 'priority', 'smallint', [] );

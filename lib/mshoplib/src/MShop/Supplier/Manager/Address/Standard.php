@@ -36,8 +36,8 @@ class Standard
 			'code' => 'supplier.address.siteid',
 			'internalcode' => 'msupad."siteid"',
 			'label' => 'Address site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'supplier.address.parentid' => array(

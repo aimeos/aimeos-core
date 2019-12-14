@@ -15,7 +15,7 @@ return array(
 			$table = $schema->createTable( 'mshop_subscription' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'ordprodid', 'bigint', [] );
 			$table->addColumn( 'next', 'date', ['notnull' => false] );
