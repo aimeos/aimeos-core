@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Locale\Item\Iface
 {
-	private $site;
+	private $siteItem;
 	private $sitePath;
 	private $siteSubTree;
 
@@ -31,16 +31,16 @@ class Standard
 	 * Initializes the object with the locale values.
 	 *
 	 * @param array $values Values to be set on initialisation
-	 * @param \Aimeos\MShop\Locale\Item\Site\Iface|null $site Site object
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface|null $siteItem Site item object
 	 * @param string[] $sitePath List of site IDs up to the root site item
 	 * @param string[] $siteSubTree List of site IDs from all sites below the current site
 	 */
-	public function __construct( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $site = null,
+	public function __construct( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $siteItem = null,
 		array $sitePath = [], array $siteSubTree = [] )
 	{
 		parent::__construct( 'locale.', $values );
 
-		$this->site = $site;
+		$this->siteItem = $siteItem;
 		$this->sitePath = $sitePath;
 		$this->siteSubTree = $siteSubTree;
 	}
@@ -51,7 +51,7 @@ class Standard
 	 */
 	public function __clone()
 	{
-		$this->site = ( isset( $this->site ) ? clone $this->site : null );
+		$this->siteItem = ( isset( $this->siteItem ) ? clone $this->siteItem : null );
 	}
 
 
@@ -61,13 +61,13 @@ class Standard
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item object
 	 * @throws \Aimeos\MShop\Locale\Exception if site object isn't available
 	 */
-	public function getSite()
+	public function getSiteItem()
 	{
-		if( $this->site === null ) {
+		if( $this->siteItem === null ) {
 			throw new \Aimeos\MShop\Locale\Exception( 'No site item available' );
 		}
 
-		return $this->site;
+		return $this->siteItem;
 	}
 
 

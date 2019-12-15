@@ -32,7 +32,7 @@ class MShopAddCodeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddCodeData
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
-		$site = $this->additional->getLocale()->getSite()->getCode();
+		$site = $this->additional->getLocale()->getSiteItem()->getCode();
 		$this->msg( sprintf( 'Adding default code data for site "%1$s"', $site ), 0 ); $this->status( '' );
 
 		$ds = DIRECTORY_SEPARATOR;

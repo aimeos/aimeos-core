@@ -27,7 +27,7 @@ interface Iface
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item object
 	 * @throws \Aimeos\MShop\Locale\Exception if site object isn't available
 	 */
-	public function getSite();
+	public function getSiteItem();
 
 	/**
 	 * Returns the list site IDs up to the root site item.

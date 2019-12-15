@@ -667,7 +667,7 @@ class Standard extends Base
 			}
 
 			$stmt->bind( $idx++, $item->getCustomerId() );
-			$stmt->bind( $idx++, $localeItem->getSite()->getCode() );
+			$stmt->bind( $idx++, $localeItem->getSiteItem()->getCode() );
 			$stmt->bind( $idx++, $item->getLocale()->getLanguageId() );
 			$stmt->bind( $idx++, $priceItem->getCurrencyId() );
 			$stmt->bind( $idx++, $priceItem->getValue() );

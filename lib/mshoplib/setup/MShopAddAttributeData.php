@@ -32,7 +32,7 @@ class MShopAddAttributeData extends MShopAddDataAbstract
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
-		$site = $this->additional->getLocale()->getSite()->getCode();
+		$site = $this->additional->getLocale()->getSiteItem()->getCode();
 		$this->msg( sprintf( 'Adding default attribute data for site "%1$s"', $site ), 0 );
 
 		$ds = DIRECTORY_SEPARATOR;

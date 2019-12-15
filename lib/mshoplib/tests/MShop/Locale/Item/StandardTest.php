@@ -54,11 +54,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSite()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $this->object->getSite() );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $this->object->getSiteItem() );
 
 		$wrongobject = new \Aimeos\MShop\Locale\Item\Standard();
 		$this->setExpectedException( \Aimeos\MShop\Locale\Exception::class );
-		$wrongobject->getSite();
+		$wrongobject->getSiteItem();
 	}
 
 

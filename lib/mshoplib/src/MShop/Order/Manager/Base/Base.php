@@ -70,7 +70,7 @@ abstract class Base
 		$locale = $context->getLocale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
-		$sitecode = $locale->getSite()->getCode();
+		$sitecode = $locale->getSiteItem()->getCode();
 		$key = 'aimeos/basket/content-' . $sitecode . '-' . $language . '-' . $currency . '-' . strval( $type );
 
 		if( ( $serorder = $session->get( $key ) ) === null ) {
@@ -106,7 +106,7 @@ abstract class Base
 		$locale = $context->getLocale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
-		$sitecode = $locale->getSite()->getCode();
+		$sitecode = $locale->getSiteItem()->getCode();
 		$key = 'aimeos/basket/lock-' . $sitecode . '-' . $language . '-' . $currency . '-' . strval( $type );
 
 		if( ( $value = $session->get( $key ) ) !== null ) {
@@ -131,7 +131,7 @@ abstract class Base
 		$locale = $context->getLocale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
-		$sitecode = $locale->getSite()->getCode();
+		$sitecode = $locale->getSiteItem()->getCode();
 		$key = 'aimeos/basket/content-' . $sitecode . '-' . $language . '-' . $currency . '-' . strval( $type );
 
 		$list = $session->get( 'aimeos/basket/list', [] );
@@ -161,7 +161,7 @@ abstract class Base
 		$locale = $context->getLocale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
-		$sitecode = $locale->getSite()->getCode();
+		$sitecode = $locale->getSiteItem()->getCode();
 		$key = 'aimeos/basket/lock-' . $sitecode . '-' . $language . '-' . $currency . '-' . strval( $type );
 
 		$session->set( $key, strval( $lock ) );
