@@ -171,7 +171,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 				$stmts = $this->exclude( $schemaDiff, $relpath )->toSaveSql( $platform );
 
 				$this->executeList( $stmts, $rname );
-				$this->status( 'done' );
+				$this->status( !empty( $stmts ) ? 'done' : 'OK' );
 			}
 
 			if( $schema->supports( $schema::HAS_SEQUENCES ) )
@@ -187,7 +187,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 					$stmts = $schemaDiff->toSaveSql( $platform );
 
 					$this->executeList( $stmts, $rname );
-					$this->status( 'done' );
+					$this->status( !empty( $stmts ) ? 'done' : 'OK' );
 				}
 			}
 
@@ -220,7 +220,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 
 				if( $schema->tableExists( $name ) !== true ) {
 					$this->execute( $sql, $rname );
-					$this->status( 'created' );
+					$this->status( 'done' );
 				} else {
 					$this->status( 'OK' );
 				}
@@ -233,7 +233,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 
 				if( $schema->indexExists( $parts[0], $parts[1] ) !== true ) {
 					$this->execute( $sql, $rname );
-					$this->status( 'created' );
+					$this->status( 'done' );
 				} else {
 					$this->status( 'OK' );
 				}

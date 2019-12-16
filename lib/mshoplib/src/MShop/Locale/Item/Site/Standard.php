@@ -68,7 +68,7 @@ class Standard
 	/**
 	 * Sets the ID of the site.
 	 *
-	 * @return string Unique ID of the site
+	 * @param string Unique ID of the site
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
 	public function setSiteId( $value )
