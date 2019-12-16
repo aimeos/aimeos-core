@@ -30,14 +30,14 @@ class TablesMigratePropertyKey extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies() : array
 	{
-		return ['TypesMigrateColumns'];
+		return ['TablesClearPropertyKey'];
 	}
 
 
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies() : array
 	{
@@ -58,33 +58,27 @@ class TablesMigratePropertyKey extends \Aimeos\MW\Setup\Task\Base
 
 			$this->msg( sprintf( 'Checking table %1$s', $table ), 1 );
 
-			if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'key' )
-				&& ( $item = $schema->getColumnDetails( $table, 'key' ) ) && ( $item->getMaxLength() !== 130 )
-			) {
-				$dbm = $this->additional->getDatabaseManager();
-				$conn = $dbm->acquire( $rname );
+			$dbm = $this->additional->getDatabaseManager();
+			$cselect = $dbm->acquire( $rname );
+			$cupdate = $dbm->acquire( $rname );
 
-				$select = sprintf( 'SELECT "id", "type", "langid", "value" FROM "%1$s"', $table );
-				$update = sprintf( 'UPDATE "%1$s" SET "key" = ? WHERE "id" = ?', $table );
+			$select = sprintf( 'SELECT "id", "type", "langid", "value" FROM "%1$s" WHERE "key"=\'\'', $table );
+			$update = sprintf( 'UPDATE "%1$s" SET "key" = ? WHERE "id" = ?', $table );
 
-				$stmt = $conn->create( $update );
-				$result = $conn->create( $select )->execute();
+			$stmt = $cupdate->create( $update );
+			$result = $cselect->create( $select )->execute();
 
-				while( ( $row = $result->fetch() ) !== false )
-				{
-					$stmt->bind( 1, $row['type'] . '|' . ( $row['langid'] ?: 'null' ) . '|' . md5( $row['value'] ) );
-					$stmt->bind( 2, $row['id'] );
-					$stmt->execute()->finish();
-				}
-
-				$dbm->release( $conn, $rname );
-
-				$this->status( 'done' );
-			}
-			else
+			while( ( $row = $result->fetch() ) !== false )
 			{
-				$this->status( 'OK' );
+				$stmt->bind( 1, $row['type'] . '|' . ( $row['langid'] ?: 'null' ) . '|' . md5( $row['value'] ) );
+				$stmt->bind( 2, $row['id'] );
+				$stmt->execute()->finish();
 			}
+
+			$dbm->release( $cupdate, $rname );
+			$dbm->release( $cselect, $rname );
+
+			$this->status( 'done' );
 		}
 	}
 }
