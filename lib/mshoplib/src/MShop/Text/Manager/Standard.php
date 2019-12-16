@@ -110,7 +110,7 @@ class Standard
 		),
 		'text:has' => array(
 			'code' => 'text:has()',
-			'internalcode' => ':site :key AND mtexli."id"',
+			'internalcode' => ':site AND :key AND mtexli."id"',
 			'internaldeps' => ['LEFT JOIN "mshop_text_list" AS mtexli ON ( mtexli."parentid" = mtex."id" )'],
 			'label' => 'Text has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -130,17 +130,15 @@ class Standard
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
+
 		$this->setResourceName( 'db-text' );
+		$this->languageId = $context->getLocale()->getLanguageId();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/text/manager/sitemode', $level );
 
-		$locale = $context->getLocale();
-		$this->languageId = $locale->getLanguageId();
-		$siteIds = $this->getSiteIds( $level );
-		$self = $this;
 
-		$this->searchConfig['text:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['text:has']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -156,8 +154,8 @@ class Standard
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 'mtexli."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 'mtexli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'mtexli."siteid"', $level );
+			$keystr = $this->toExpression( 'mtexli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;

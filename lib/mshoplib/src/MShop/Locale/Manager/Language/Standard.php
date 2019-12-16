@@ -32,14 +32,6 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'locale.language.siteid' => array(
-			'code' => 'locale.language.siteid',
-			'internalcode' => 'mlocla."siteid"',
-			'label' => 'Language site ID',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
 		'locale.language.label' => array(
 			'code' => 'locale.language.label',
 			'internalcode' => 'mlocla."label"',
@@ -97,6 +89,18 @@ class Standard
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-locale' );
+	}
+
+
+	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Locale\Manager\Iface Manager object for chaining method calls
+	 */
+	public function clear( array $siteids )
+	{
+		return $this;
 	}
 
 
@@ -221,7 +225,6 @@ class Standard
 
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->getEditor() );
 			// code and ID are identical after saving and ID is the flag to detect updates or inserts
@@ -286,7 +289,7 @@ class Standard
 		 */
 		$path = 'mshop/locale/manager/language/standard/delete';
 
-		return $this->deleteItemsBase( $itemIds, $path );
+		return $this->deleteItemsBase( $itemIds, $path, false );
 	}
 
 

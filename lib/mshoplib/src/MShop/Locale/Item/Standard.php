@@ -11,6 +11,8 @@
 
 namespace Aimeos\MShop\Locale\Item;
 
+use \Aimeos\MShop\Locale\Manager\Base as Locale;
+
 
 /**
  * Common locale class containing the site, language and currency information.
@@ -23,8 +25,7 @@ class Standard
 	implements \Aimeos\MShop\Locale\Item\Iface
 {
 	private $siteItem;
-	private $sitePath;
-	private $siteSubTree;
+	private $sites;
 
 
 	/**
@@ -33,16 +34,14 @@ class Standard
 	 * @param array $values Values to be set on initialisation
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface|null $siteItem Site item object
 	 * @param string[] $sitePath List of site IDs up to the root site item
-	 * @param string[] $siteSubTree List of site IDs from all sites below the current site
+	 * @param string[]|string Site ID prefix or list of site IDs
 	 */
-	public function __construct( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $siteItem = null,
-		array $sitePath = [], array $siteSubTree = [] )
+	public function __construct( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $siteItem = null, array $sites = [] )
 	{
 		parent::__construct( 'locale.', $values );
 
 		$this->siteItem = $siteItem;
-		$this->sitePath = $sitePath;
-		$this->siteSubTree = $siteSubTree;
+		$this->sites = $sites;
 	}
 
 
@@ -72,24 +71,29 @@ class Standard
 
 
 	/**
+	 * Returns the site IDs for the locale site constants.
+	 *
+	 * @param int $level Site level constant from \Aimeos\MShop\Locale\Manager\Base
+	 * @return array|string Associative list of site constant as key and sites as values or site ID
+	 */
+	public function getSites( $level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL )
+	{
+		if( $level === Locale::SITE_ALL ) {
+			return $this->sites;
+		}
+
+		return $this->sites[$level] ?? $this->sites[Locale::SITE_ONE];
+	}
+
+
+	/**
 	 * Returns the list site IDs up to the root site item.
 	 *
 	 * @return array List of site IDs
 	 */
 	public function getSitePath()
 	{
-		return $this->sitePath;
-	}
-
-
-	/**
-	 * Returns the list site IDs of the whole site subtree.
-	 *
-	 * @return array List of site IDs
-	 */
-	public function getSiteSubTree()
-	{
-		return $this->siteSubTree;
+		return $this->sites[Locale::SITE_PATH] ?? [$this->sites[Locale::SITE_ONE]];
 	}
 
 
@@ -112,13 +116,6 @@ class Standard
 	 */
 	public function setSiteId( $id )
 	{
-		if( $id !== $this->getSiteId() )
-		{
-			/** @todo: Wrong site item shouldn't be available any more but causes problems in controller */
-			$this->sitePath = array( (string) $id );
-			$this->siteSubTree = array( (string) $id );
-		}
-
 		return $this->set( 'locale.siteid', (string) $id );
 	}
 

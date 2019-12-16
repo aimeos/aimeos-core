@@ -132,7 +132,7 @@ class Standard extends Base
 		),
 		'catalog:has' => array(
 			'code' => 'catalog:has()',
-			'internalcode' => ':site :key AND mcatli."id"',
+			'internalcode' => ':site AND :key AND mcatli."id"',
 			'internaldeps' => ['LEFT JOIN "mshop_catalog_list" AS mcatli ON ( mcatli."parentid" = mcat."id" )'],
 			'label' => 'Catalog has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -155,11 +155,8 @@ class Standard extends Base
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/catalog/manager/sitemode', $level );
 
-		$siteIds = $this->getSiteIds( $level );
-		$self = $this;
 
-
-		$this->searchConfig['catalog:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['catalog:has']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -175,8 +172,8 @@ class Standard extends Base
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 'mcatli."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 'mcatli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'mcatli."siteid"', $level );
+			$keystr = $this->toExpression( 'mcatli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
@@ -691,7 +688,7 @@ class Standard extends Base
 				$siteMap[(string) $row['siteid']][(string) $row['id']] = new \Aimeos\MW\Tree\Node\Standard( $row );
 			}
 
-			$sitePath = array_reverse( $this->getContext()->getLocale()->getSitePath() );
+			$sitePath = array_reverse( (array) $this->getContext()->getLocale()->getSitePath() );
 
 			foreach( $sitePath as $siteId )
 			{
@@ -723,7 +720,7 @@ class Standard extends Base
 	 */
 	public function getPath( $id, array $ref = [] )
 	{
-		$sitePath = array_reverse( $this->getContext()->getLocale()->getSitePath() );
+		$sitePath = array_reverse( (array) $this->getContext()->getLocale()->getSitePath() );
 
 		foreach( $sitePath as $siteId )
 		{
@@ -760,7 +757,7 @@ class Standard extends Base
 	 */
 	public function getTree( $id = null, array $ref = [], $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $criteria = null )
 	{
-		$sitePath = array_reverse( $this->getContext()->getLocale()->getSitePath() );
+		$sitePath = array_reverse( (array) $this->getContext()->getLocale()->getSitePath() );
 
 		foreach( $sitePath as $siteId )
 		{

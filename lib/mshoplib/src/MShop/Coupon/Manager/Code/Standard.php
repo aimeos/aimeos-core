@@ -770,9 +770,10 @@ class Standard
 	public function increase( $code, $amount )
 	{
 		$context = $this->getContext();
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
 
 		$search = $this->getObject()->createSearch();
-		$search->setConditions( $search->compare( '==', 'coupon.code.siteid', $context->getLocale()->getSitePath() ) );
+		$search->setConditions( $search->compare( '==', 'coupon.code.siteid', $context->getLocale()->getSites( $level ) ) );
 
 		$types = array( 'coupon.code.siteid' => $this->searchConfig['coupon.code.siteid']['internaltype'] );
 		$translations = array( 'coupon.code.siteid' => 'siteid' );

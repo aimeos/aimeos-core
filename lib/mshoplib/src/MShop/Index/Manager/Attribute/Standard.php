@@ -75,18 +75,17 @@ class Standard
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
-		$siteIds = $this->getSiteIds( $level );
 
 		$this->searchConfig['index.attribute:allof']['function'] = function( $source, array $params ) {
 			return [$params[0], count( $params[0] )];
 		};
 
 		$name = 'index.attribute:allof';
-		$expr = $siteIds ? $this->toExpression( 'mindat_allof."siteid"', $siteIds ) : '1=1';
+		$expr = $this->getSiteString( 'mindat_allof."siteid"', $level );
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 
 		$name = 'index.attribute:oneof';
-		$expr = $siteIds ? $this->toExpression( 'mindat_oneof."siteid"', $siteIds ) : '1=1';
+		$expr = $this->getSiteString( 'mindat_oneof."siteid"', $level );
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 	}
 

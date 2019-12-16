@@ -184,15 +184,12 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
 
-
-		$siteIds = $context->getLocale()->getSiteSubTree();
-
 		$name = 'order:status';
-		$expr = $siteIds ? $this->toExpression( 'mordst."siteid"', $siteIds ) : '1=1';
+		$expr = $this->getSiteString( 'mordst."siteid"', \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE );
 		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
 
 		$name = 'order.containsStatus';
-		$expr = $siteIds ? $this->toExpression( 'mordst_cs."siteid"', $siteIds ) : '1=1';
+		$expr = $this->getSiteString( 'mordst_cs."siteid"', \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE );
 		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
 	}
 

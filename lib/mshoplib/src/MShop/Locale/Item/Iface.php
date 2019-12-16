@@ -30,18 +30,19 @@ interface Iface
 	public function getSiteItem();
 
 	/**
+	 * Returns the site IDs for the locale site constants.
+	 *
+	 * @param int $level Site level constant from \Aimeos\MShop\Locale\Manager\Base
+	 * @return array Associative list of site constant as key and sites as values
+	 */
+	public function getSites( $level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL );
+
+	/**
 	 * Returns the list site IDs up to the root site item.
 	 *
 	 * @return array List of site IDs
 	 */
 	public function getSitePath();
-
-	/**
-	 * Returns the list site IDs of the whole site subtree.
-	 *
-	 * @return array List of site IDs
-	 */
-	public function getSiteSubTree();
 
 	/**
 	 * Sets the identifier of the shop instance.

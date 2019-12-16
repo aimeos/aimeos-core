@@ -28,7 +28,7 @@ class Standard
 		'locale.site.id' => array(
 			'code' => 'locale.site.id',
 			'internalcode' => 'mlocsi."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."id")' ),
+			'internaldeps' => ['LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."siteid")'],
 			'label' => 'Site ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -36,10 +36,10 @@ class Standard
 		),
 		'locale.site.siteid' => array(
 			'code' => 'locale.site.siteid',
-			'internalcode' => 'mlocsi."id"',
-			'label' => 'Site ID',
+			'internalcode' => 'mlocsi."siteid"',
+			'label' => 'Unique site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.label' => array(
@@ -268,6 +268,7 @@ class Standard
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
+			$stmt->bind( $idx++, $item->getSiteId() );
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
@@ -299,7 +300,16 @@ class Standard
 	 */
 	public function deleteItems( array $itemIds )
 	{
-		$this->getObject()->clear( $itemIds );
+		$siteIds = [];
+		$search = $this->getObject()->createSearch()->setSlice( 0, count( $itemIds ) );
+		$search->setConditions( $search->compare( '==', 'locale.site.id', $itemIds ) );
+
+		foreach( $this->getObject()->searchItems( $search ) as $item ) {
+			$siteIds[] = $item->getSiteId();
+		}
+
+		$this->getObject()->clear( $siteIds );
+
 
 		/** mshop/locale/manager/site/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -816,6 +826,7 @@ class Standard
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
+			$stmt->bind( $idx++, '' ); // site ID
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
@@ -866,6 +877,9 @@ class Standard
 			$item->setId( $this->newId( $conn, $this->getSqlConfig( $path ) ) );
 
 			$dbm->release( $conn, $dbname );
+
+			// Add unique site identifier
+			$item = $this->getObject()->saveItem( $item->setSiteId( '/' . $item->getId() . '/' ) );
 		}
 		catch( \Exception $e )
 		{

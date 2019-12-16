@@ -120,7 +120,7 @@ class Standard
 		),
 		'attribute:has' => array(
 			'code' => 'attribute:has()',
-			'internalcode' => ':site :key AND mattli."id"',
+			'internalcode' => ':site AND :key AND mattli."id"',
 			'internaldeps' => ['LEFT JOIN "mshop_attribute_list" AS mattli ON ( mattli."parentid" = matt."id" )'],
 			'label' => 'Attribute has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -129,7 +129,7 @@ class Standard
 		),
 		'attribute:prop' => array(
 			'code' => 'attribute:prop()',
-			'internalcode' => ':site :key AND mattpr."id"',
+			'internalcode' => ':site AND :key AND mattpr."id"',
 			'internaldeps' => ['LEFT JOIN "mshop_attribute_property" AS mattpr ON ( mattpr."parentid" = matt."id" )'],
 			'label' => 'Attribute has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
@@ -153,11 +153,8 @@ class Standard
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/attribute/manager/sitemode', $level );
 
-		$siteIds = $this->getSiteIds( $level );
-		$self = $this;
 
-
-		$this->searchConfig['attribute:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['attribute:has']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -173,15 +170,15 @@ class Standard
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 'mattli."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 'mattli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'mattli."siteid"', $level );
+			$keystr = $this->toExpression( 'mattli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};
 
 
-		$this->searchConfig['attribute:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['attribute:prop']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -197,8 +194,8 @@ class Standard
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 'mattpr."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 'mattpr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'mattpr."siteid"', $level );
+			$keystr = $this->toExpression( 'mattpr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;

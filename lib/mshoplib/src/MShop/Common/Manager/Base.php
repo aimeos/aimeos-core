@@ -11,6 +11,8 @@
 
 namespace Aimeos\MShop\Common\Manager;
 
+use \Aimeos\MShop\Locale\Manager\Base as Locale;
+
 
 /**
  * Provides common methods required by most of the manager classes.
@@ -27,6 +29,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	private $object;
 	private $resourceName;
 	private $stmts = [];
+	private $search;
 
 
 	/**
@@ -467,53 +470,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
-	 * Returns the site IDs for the given site level constant.
-	 *
-	 * @param integer $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
-	 * @return string[] List of site IDs
-	 */
-	protected function getSiteIds( $sitelevel )
-	{
-		/** mshop/common/manager/sitecheck
-		 * Enables or disables using the site IDs in search queries
-		 *
-		 * For market places, products of different shop owners managing their
-		 * own sites should be shown in the frontend. By default, only the items
-		 * from the current site are displayed. Setting this option to false
-		 * disables the restriction to the current site and shows all products
-		 * from all sites. This does also apply to all other records from
-		 * different domains than "product".
-		 *
-		 * This option is most effective if it's only set for the shop frontend,
-		 * so the shop owners will only see and manager their own products in
-		 * the administration interface.
-		 *
-		 * @param boolean True to resrict items to the current site, false to show item form all sites
-		 * @since 2016.10
-		 * @category Developer
-		 */
-		if( $this->context->getConfig()->get( 'mshop/common/manager/sitecheck', true ) == false ) {
-			return [];
-		}
-
-		$locale = $this->context->getLocale();
-		$siteIds = [$locale->getSiteId()];
-
-		if( $sitelevel & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
-			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
-		}
-
-		if( $sitelevel & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
-			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
-		}
-
-		$siteIds = array_unique( $siteIds );
-
-		return $siteIds;
-	}
-
-
-	/**
 	 * Returns the SQL statement for the given config path
 	 *
 	 * If available, the database specific SQL statement is returned, otherwise
@@ -704,6 +660,21 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
+	 * Returns a search object singleton
+	 *
+	 * @return \Aimeos\MW\Criteria\Iface Search object
+	 */
+	protected function getSearch()
+	{
+		if( !isset( $this->search ) ) {
+			$this->search = $this->createSearch();
+		}
+
+		return $this->search;
+	}
+
+
+	/**
 	 * Replaces the given marker with an expression
 	 *
 	 * @param string $column Name (including alias) of the column
@@ -718,39 +689,84 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$translations = ['marker' => $column];
 		$value = ( is_array( $value ) ? array_unique( $value ) : $value );
 
-		return $this->createSearch()->compare( $op, 'marker', $value )->toSource( $types, $translations );
+		return $this->getSearch()->compare( $op, 'marker', $value )->toSource( $types, $translations );
+	}
+
+
+	/**
+	 * Returns the site expression for the given name
+	 *
+	 * @param string $name Name of the site condition
+	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
+	 * @return \Aimeos\MW\Criteria\Expression\Iface Site search condition
+	 * @since 2020.01
+	 */
+	protected function getSiteCondition( $name, $sitelevel )
+	{
+		$search = $this->getSearch();
+		$sites = $this->context->getLocale()->getSites();
+
+		if( isset( $sites[Locale::SITE_PATH] ) && $sitelevel & Locale::SITE_PATH ) {
+			$cond = $search->compare( '==', $name, $sites[Locale::SITE_PATH] );
+		} else {
+			$cond = $search->compare( '==', $name, $sites[Locale::SITE_ONE] );
+		}
+
+		if( isset( $sites[Locale::SITE_SUBTREE] ) )
+		{
+			if( $sitelevel & ( Locale::SITE_SUBTREE | Locale::SITE_PATH ) ) {
+				$cond = $search->combine( '||', [$cond, $search->compare( '=~', $name, $sites[Locale::SITE_SUBTREE] )] );
+			} else {
+				$cond = $search->compare( '=~', $name, $sites[Locale::SITE_SUBTREE] );
+			}
+		}
+
+		return $cond;
 	}
 
 
 	/**
 	 * Returns the site coditions for the search request
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $keys Sorted list of criteria keys
 	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
-	 * @param string[] $siteIds List of site IDs that should be used for searching
+	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
 	 * @return \Aimeos\MW\Criteria\Expression\Iface[] List of search conditions
 	 * @since 2015.01
 	 */
-	protected function getSearchSiteConditions( \Aimeos\MW\Criteria\Iface $search, array $keys, array $attributes, array $siteIds )
+	protected function getSiteConditions( array $keys, array $attributes, $sitelevel )
 	{
-		$cond = [];
+		$list = [];
+		$sep = $this->getKeySeparator();
+		$sites = $this->context->getLocale()->getSites();
 
-		if( !empty( $siteIds ) )
+		foreach( $keys as $key )
 		{
-			$sep = $this->getKeySeparator();
+			$name = $key . $sep . 'siteid';
 
-			foreach( $keys as $key )
-			{
-				$name = $key . $sep . 'siteid';
-
-				if( isset( $attributes[$name] ) ) {
-					$cond[] = $search->compare( '==', $name, $siteIds );
-				}
+			if( isset( $attributes[$name] ) ) {
+				$list[] = $this->getSiteCondition( $name, $sitelevel );
 			}
 		}
 
-		return $cond;
+		return $list;
+	}
+
+
+	/**
+	 * Returns the site expression for the given name
+	 *
+	 * @param string $name SQL name for the site condition
+	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
+	 * @return string Site search condition
+	 * @since 2020.01
+	 */
+	protected function getSiteString( $name, $sitelevel )
+	{
+		$translation = ['marker' => $name];
+		$types = ['marker' => \Aimeos\MW\DB\Statement\Base::PARAM_STR];
+
+		return $this->getSiteCondition( 'marker', $sitelevel )->toSource( $types, $translation );
 	}
 
 
@@ -820,7 +836,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	{
 		$joins = [];
 		$conditions = $search->getConditions();
-		$siteIds = $this->getSiteIds( $sitelevel );
 		$columns = $this->getObject()->getSaveAttributes();
 		$attributes = $this->getObject()->getSearchAttributes();
 		$keys = $this->getCriteriaKeyList( $search, $required );
@@ -835,7 +850,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		}
 
 		$joins = array_unique( $joins );
-		$cond = $this->getSearchSiteConditions( $search, $keys, $attributes, $siteIds );
+		$cond = $this->getSiteConditions( $keys, $attributes, $sitelevel );
 
 		if( $conditions !== null ) {
 			$cond[] = $conditions;

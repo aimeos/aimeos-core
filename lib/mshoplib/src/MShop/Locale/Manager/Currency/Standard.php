@@ -32,14 +32,6 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'locale.currency.siteid' => array(
-			'code' => 'locale.currency.siteid',
-			'internalcode' => 'mloccu."siteid"',
-			'label' => 'Currency site ID',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
 		'locale.currency.label' => array(
 			'code' => 'locale.currency.label',
 			'internalcode' => 'mloccu."label"',
@@ -97,6 +89,18 @@ class Standard
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-locale' );
+	}
+
+
+	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Locale\Manager\Iface Manager object for chaining method calls
+	 */
+	public function clear( array $siteids )
+	{
+		return $this;
 	}
 
 
@@ -221,7 +225,6 @@ class Standard
 
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->getEditor() );
 			// bind ID but code and id are identical after saveing the stuff
@@ -287,7 +290,7 @@ class Standard
 		 */
 		$path = 'mshop/locale/manager/currency/standard/delete';
 
-		return $this->deleteItemsBase( $itemIds, $path );
+		return $this->deleteItemsBase( $itemIds, $path, false );
 	}
 
 

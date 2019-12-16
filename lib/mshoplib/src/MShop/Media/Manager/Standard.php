@@ -124,7 +124,7 @@ class Standard
 		),
 		'media:has' => array(
 			'code' => 'media:has()',
-			'internalcode' => ':site :key AND mmedli."id"',
+			'internalcode' => ':site AND :key AND mmedli."id"',
 			'internaldeps' => ['LEFT JOIN "mshop_media_list" AS mmedli ON ( mmedli."parentid" = mmed."id" )'],
 			'label' => 'Media has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -133,7 +133,7 @@ class Standard
 		),
 		'media:prop' => array(
 			'code' => 'media:prop()',
-			'internalcode' => ':site :key AND mmedpr."id"',
+			'internalcode' => ':site AND :key AND mmedpr."id"',
 			'internaldeps' => ['LEFT JOIN "mshop_media_property" AS mmedpr ON ( mmedpr."parentid" = mmed."id" )'],
 			'label' => 'Media has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
@@ -153,18 +153,15 @@ class Standard
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
-		$this->setResourceName( 'db-media' );
 
-		$self = $this;
-		$locale = $context->getLocale();
-		$this->languageId = $locale->getLanguageId();
+		$this->setResourceName( 'db-media' );
+		$this->languageId = $context->getLocale()->getLanguageId();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/media/manager/sitemode', $level );
-		$siteIds = $this->getSiteIds( $level );
 
 
-		$this->searchConfig['media:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['media:has']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -180,15 +177,15 @@ class Standard
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 'mmedli."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 'mmedli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'mmedli."siteid"', $level );
+			$keystr = $this->toExpression( 'mmedli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};
 
 
-		$this->searchConfig['media:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['media:prop']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -204,8 +201,8 @@ class Standard
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 'mmedpr."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 'mmedpr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'mmedpr."siteid"', $level );
+			$keystr = $this->toExpression( 'mmedpr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;

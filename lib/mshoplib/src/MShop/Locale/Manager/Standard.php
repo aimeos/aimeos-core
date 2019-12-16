@@ -35,8 +35,8 @@ class Standard
 			'code' => 'locale.siteid',
 			'internalcode' => 'mloc."siteid"',
 			'label' => 'Site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.languageid' => array(
@@ -122,9 +122,23 @@ class Standard
 	public function bootstrap( $site, $lang = '', $currency = '', $active = true, $level = null, $bare = false )
 	{
 		$siteItem = $this->getObject()->getSubManager( 'site' )->findItem( $site );
-		$siteIds = array( $siteItem->getId() );
 
-		return $this->bootstrapBase( $site, $lang, $currency, $active, $siteItem, $siteIds, $siteIds, $bare );
+		$siteId = $siteItem->getSiteId();
+		$sites = [Base::SITE_ONE => $siteId];
+
+		return $this->bootstrapBase( $site, $lang, $currency, $active, $siteItem, $siteId, $sites, $bare );
+	}
+
+
+	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Locale\Manager\Iface Manager object for chaining method calls
+	 */
+	public function clear( array $siteids )
+	{
+		return $this->clearBase( $siteids, 'mshop/locale/manager/standard/delete' );
 	}
 
 
@@ -189,14 +203,12 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$locale = $this->getContext()->getLocale();
-		$siteIds = $locale->getSitePath();
-		$siteIds[] = $locale->getSiteId();
 		$items = [];
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
 
 		$search = clone $search;
 		$expr = array(
-			$search->compare( '==', 'locale.siteid', $siteIds ),
+			$this->getSiteCondition( 'locale.siteid', $level ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -369,7 +381,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->getEditor() );
-			$stmt->bind( $idx++, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getSiteId() );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -502,33 +514,30 @@ class Standard
 	 * @param string $site Site code
 	 * @param string $lang Language code
 	 * @param string $currency Currency code
-	 * @param boolean $active Flag to get only active items
+	 * @param bool $active Flag to get only active items
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface Site item
-	 * @param string[] $sitePath List of site IDs up to the root site
-	 * @param string[] $siteSubTree List of site IDs below and including the current site
-	 * @param boolean $bare Allow locale items with sites only
+	 * @param string Site ID
+	 * @param array Associative list of site constant as key and sites as values
+	 * @param bool $bare Allow locale items with sites only
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for the given parameters
 	 * @throws \Aimeos\MShop\Locale\Exception If no locale item is found
 	 */
 	protected function bootstrapBase( $site, $lang, $currency, $active,
-		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sitePath, array $siteSubTree, $bare )
+		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, $siteId, array $sites, $bare )
 	{
-		$siteId = $siteItem->getId();
-
-		$result = $this->bootstrapMatch( $siteId, $lang, $currency, $active, $siteItem, $sitePath, $siteSubTree );
-
+		$result = $this->bootstrapMatch( $siteId, $lang, $currency, $active, $siteItem, $sites );
 		if( $result !== false ) {
 			return $result;
 		}
 
-		$result = $this->bootstrapClosest( $siteId, $lang, $active, $siteItem, $sitePath, $siteSubTree );
+		$result = $this->bootstrapClosest( $siteId, $lang, $active, $siteItem, $sites );
 
 		if( $result !== false ) {
 			return $result;
 		}
 
 		if( $bare === true ) {
-			return $this->createItemBase( ['locale.siteid' => $siteId], $siteItem, $sitePath, $siteSubTree );
+			return $this->createItemBase( ['locale.siteid' => $siteId], $siteItem, $sites );
 		}
 
 		throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Locale item for site "%1$s" not found', $site ) );
@@ -545,19 +554,18 @@ class Standard
 	 * @param string $siteId Site ID
 	 * @param string $lang Language code
 	 * @param string $currency Currency code
-	 * @param boolean $active Flag to get only active items
+	 * @param bool $active Flag to get only active items
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface Site item
-	 * @param string[] $sitePath List of site IDs up to the root site
-	 * @param string[] $siteSubTree List of site IDs below and including the current site
+	 * @param array Associative list of site constant as key and sites as values
 	 * @return \Aimeos\MShop\Locale\Item\Iface|boolean Locale item for the given parameters or false if no item was found
 	 */
 	private function bootstrapMatch( $siteId, $lang, $currency, $active,
-		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sitePath, array $siteSubTree )
+		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sites )
 	{
 		// Try to find exact match
 		$search = $this->getObject()->createSearch( $active );
 
-		$expr = array( $search->compare( '==', 'locale.siteid', $sitePath ) );
+		$expr = array( $search->compare( '==', 'locale.siteid', $sites[Base::SITE_PATH] ?? $sites[Base::SITE_ONE] ) );
 
 		if( !empty( $lang ) ) {
 			$expr[] = $search->compare( '==', 'locale.languageid', $lang );
@@ -584,15 +592,15 @@ class Standard
 		// Try to find first item where site matches
 		foreach( $result as $row )
 		{
-			if( $row['locale.siteid'] == $siteId ) {
-				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
+			if( $row['locale.siteid'] === $siteId ) {
+				return $this->createItemBase( $row, $siteItem, $sites );
 			}
 		}
 
 		if( ( $row = reset( $result ) ) !== false )
 		{
 			$row['locale.siteid'] = $siteId;
-			return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
+			return $this->createItemBase( $row, $siteItem, $sites );
 		}
 
 		return false;
@@ -608,20 +616,19 @@ class Standard
 	 *
 	 * @param string $siteId Site ID
 	 * @param string $lang Language code
-	 * @param boolean $active Flag to get only active items
+	 * @param bool $active Flag to get only active items
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface Site item
-	 * @param string[] $sitePath List of site IDs up to the root site
-	 * @param string[] $siteSubTree List of site IDs below and including the current site
+	 * @param array Associative list of site constant as key and sites as values
 	 * @return \Aimeos\MShop\Locale\Item\Iface|boolean Locale item for the given parameters or false if no item was found
 	 */
 	private function bootstrapClosest( $siteId, $lang, $active,
-		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sitePath, array $siteSubTree )
+		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sites )
 	{
 		// Try to find the best matching locale
 		$search = $this->getObject()->createSearch( $active );
 
 		$expr = array(
-			$search->compare( '==', 'locale.siteid', $sitePath ),
+			$search->compare( '==', 'locale.siteid', $sites[Base::SITE_PATH] ?? $sites[Base::SITE_ONE] ),
 			$search->getConditions()
 		);
 
@@ -639,8 +646,8 @@ class Standard
 		// Try to find first item where site and language matches
 		foreach( $result as $row )
 		{
-			if( $row['locale.siteid'] == $siteId && $row['locale.languageid'] == $lang ) {
-				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
+			if( $row['locale.siteid'] === $siteId && $row['locale.languageid'] === $lang ) {
+				return $this->createItemBase( $row, $siteItem, $sites );
 			}
 		}
 
@@ -650,15 +657,15 @@ class Standard
 			if( $row['locale.languageid'] == $lang )
 			{
 				$row['locale.siteid'] = $siteId;
-				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
+				return $this->createItemBase( $row, $siteItem, $sites );
 			}
 		}
 
 		// Try to find first item where site matches
 		foreach( $result as $row )
 		{
-			if( $row['locale.siteid'] == $siteId ) {
-				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
+			if( $row['locale.siteid'] === $siteId ) {
+				return $this->createItemBase( $row, $siteItem, $sites );
 			}
 		}
 
@@ -666,7 +673,7 @@ class Standard
 		if( ( $row = reset( $result ) ) !== false )
 		{
 			$row['locale.siteid'] = $siteId;
-			return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
+			return $this->createItemBase( $row, $siteItem, $sites );
 		}
 
 		return false;
@@ -683,7 +690,7 @@ class Standard
 	 * @return \Aimeos\MShop\Locale\Item\Standard Locale item
 	 */
 	protected function createItemBase( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $site = null,
-		array $sitePath = [], array $siteSubTree = [] )
+		array $sitePath = [], $siteSubTree = [] )
 	{
 		return new \Aimeos\MShop\Locale\Item\Standard( $values, $site, $sitePath, $siteSubTree );
 	}

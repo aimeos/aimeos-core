@@ -90,7 +90,7 @@ class Standard
 		),
 		'supplier:has' => array(
 			'code' => 'supplier:has()',
-			'internalcode' => ':site :key AND msupli."id"',
+			'internalcode' => ':site AND :key AND msupli."id"',
 			'internaldeps' => ['LEFT JOIN "mshop_supplier_list" AS msupli ON ( msupli."parentid" = msup."id" )'],
 			'label' => 'Supplier has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -113,11 +113,8 @@ class Standard
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/supplier/manager/sitemode', $level );
 
-		$siteIds = $this->getSiteIds( $level );
-		$self = $this;
 
-
-		$this->searchConfig['supplier:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['supplier:has']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -133,8 +130,8 @@ class Standard
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 'msupli."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 'msupli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'msupli."siteid"', $level );
+			$keystr = $this->toExpression( 'msupli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;

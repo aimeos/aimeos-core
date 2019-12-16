@@ -65,8 +65,7 @@ class Standard
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
 
 		$name = 'index.catalog:position';
-		$siteIds = $this->getSiteIds( $level );
-		$expr = $siteIds ? $this->toExpression( 'mindca."siteid"', $siteIds ) : '1=1';
+		$expr = $this->getSiteString( 'mindca."siteid"', $level );
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 	}
 

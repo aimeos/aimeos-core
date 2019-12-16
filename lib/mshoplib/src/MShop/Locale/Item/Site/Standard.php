@@ -55,13 +55,25 @@ class Standard
 
 
 	/**
-	 * Returns the id of the site.
+	 * Returns the ID of the site.
 	 *
-	 * @return string|null Id of the site
+	 * @return string Unique ID of the site
 	 */
 	public function getSiteId()
 	{
-		return (string) $this->getId();
+		return (string) $this->get( 'locale.site.siteid', '' );
+	}
+
+
+	/**
+	 * Sets the ID of the site.
+	 *
+	 * @return string Unique ID of the site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setSiteId( $value )
+	{
+		return $this->set( 'locale.site.siteid', (string) $value );
 	}
 
 

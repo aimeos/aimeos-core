@@ -9,6 +9,8 @@
 
 namespace Aimeos\MShop\Locale\Item;
 
+use \Aimeos\MShop\Locale\Manager\Base as Locale;
+
 
 /**
  * Test class for \Aimeos\MShop\Locale\Item\Standard.
@@ -37,11 +39,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'locale.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Locale\Item\Standard(
-			$this->values,
-			$this->siteItem,
-			array( 1, 2 ),
-			array( 1, 3, 4 )
+		$this->object = new \Aimeos\MShop\Locale\Item\Standard( $this->values, $this->siteItem,
+			[Locale::SITE_ONE => '/1/2/', Locale::SITE_PATH => ['/1/', '/1/2'], Locale::SITE_SUBTREE => '/1/2/']
 		);
 	}
 
@@ -68,26 +67,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetSitePath()
+	public function testGetSites()
 	{
-		$this->assertEquals( array( 1, 2 ), $this->object->getSitePath() );
-	}
+		$expected = [Locale::SITE_ONE => '/1/2/', Locale::SITE_PATH => ['/1/', '/1/2'], Locale::SITE_SUBTREE => '/1/2/'];
 
-
-	public function testGetSiteSubTree()
-	{
-		$this->assertEquals( array( 1, 3, 4 ), $this->object->getSiteSubTree() );
+		$this->assertEquals( $expected, $this->object->getSites() );
+		$this->assertEquals( '/1/2/', $this->object->getSites( Locale::SITE_ONE ) );
+		$this->assertEquals( ['/1/', '/1/2'], $this->object->getSites( Locale::SITE_PATH ) );
+		$this->assertEquals( '/1/2/', $this->object->getSites( Locale::SITE_SUBTREE ) );
 	}
 
 
 	public function testSetSiteId()
 	{
-		$return = $this->object->setSiteId( 5 );
+		$return = $this->object->setSiteId( '/5/' );
 
 		$this->assertTrue( $this->object->isModified() );
-		$this->assertEquals( '5', $this->object->getSiteId() );
-		$this->assertEquals( array( 5 ), $this->object->getSitePath() );
-		$this->assertEquals( array( 5 ), $this->object->getSiteSubTree() );
+		$this->assertEquals( '/5/', $this->object->getSiteId() );
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Iface::class, $return );
 	}
 

@@ -12,16 +12,15 @@ return array(
 			'standard' => array(
 				'delete' => array(
 					'ansi' => '
-						DELETE FROM "mshop_locale_currency"
-						WHERE :cond AND siteid = ?
+						DELETE FROM "mshop_locale_currency" WHERE :cond
 					'
 				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_locale_currency" ( :names
-							"label", "status", "siteid", "mtime", "editor", "id", "ctime"
+							"label", "status", "mtime", "editor", "id", "ctime"
 						) VALUES ( :values
-							?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?
 						)
 					'
 				),
@@ -29,7 +28,7 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_locale_currency"
 						SET :names
-							"label" = ?, "status" = ?, "siteid"=?, "mtime" = ?, "editor" = ?
+							"label" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "id" = ?
 					'
 				),
@@ -37,9 +36,8 @@ return array(
 					'ansi' => '
 						SELECT DISTINCT :columns
 							mloccu."id" AS "locale.currency.id", mloccu."label" AS "locale.currency.label",
-							mloccu."siteid" AS "locale.currency.siteid", mloccu."status" AS "locale.currency.status",
-							mloccu."mtime" AS "locale.currency.mtime", mloccu."editor" AS "locale.currency.editor",
-							mloccu."ctime" AS "locale.currency.ctime"
+							mloccu."status" AS "locale.currency.status", mloccu."mtime" AS "locale.currency.mtime",
+							mloccu."editor" AS "locale.currency.editor", mloccu."ctime" AS "locale.currency.ctime"
 						FROM "mshop_locale_currency" AS mloccu
 						WHERE :cond
 						ORDER BY :order
@@ -72,16 +70,15 @@ return array(
 			'standard' => array(
 				'delete' => array(
 					'ansi' => '
-						DELETE FROM "mshop_locale_language"
-						WHERE :cond AND siteid = ?
+						DELETE FROM "mshop_locale_language" WHERE :cond
 					'
 				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_locale_language" ( :names
-							"label", "status", "siteid", "mtime", "editor", "id", "ctime"
+							"label", "status", "mtime", "editor", "id", "ctime"
 						) VALUES ( :values
-							?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?
 						)
 					'
 				),
@@ -89,7 +86,7 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_locale_language"
 						SET :names
-							"label" = ?, "status" = ?, "siteid"=?, "mtime" = ?, "editor" = ?
+							"label" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "id" = ?
 					'
 				),
@@ -97,9 +94,8 @@ return array(
 					'ansi' => '
 						SELECT DISTINCT :columns
 							mlocla."id" AS "locale.language.id", mlocla."label" AS "locale.language.label",
-							mlocla."siteid" AS "locale.language.siteid", mlocla."status" AS "locale.language.status",
-							mlocla."mtime" AS "locale.language.mtime", mlocla."editor" AS "locale.language.editor",
-							mlocla."ctime" AS "locale.language.ctime"
+							mlocla."status" AS "locale.language.status", mlocla."mtime" AS "locale.language.mtime",
+							mlocla."editor" AS "locale.language.editor", mlocla."ctime" AS "locale.language.ctime"
 						FROM "mshop_locale_language" AS mlocla
 						WHERE :cond
 						ORDER BY :order
@@ -139,11 +135,11 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_locale_site" ( :names
-							"code", "label", "config", "status", "editor",
+							"siteid", "code", "label", "config", "status", "editor",
 							"mtime", "ctime", "parentid", "level", "nleft", "nright"
 						)
 						SELECT :values
-							?, ?, ?, ?, ?, ?, ?, 0, 0,
+							?, ?, ?, ?, ?, ?, ?, ?, 0, 0,
 							COALESCE( MAX("nright"), 0 ) + 1, COALESCE( MAX("nright"), 0 ) + 2
 						FROM "mshop_locale_site"
 					'
@@ -152,17 +148,18 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_locale_site"
 						SET :names
-							"code" = ?, "label" = ?, "config" = ?, "status" = ?, "editor" = ?, "mtime" = ?
+							"siteid" = ?, "code" = ?, "label" = ?, "config" = ?, "status" = ?, "editor" = ?, "mtime" = ?
 						WHERE id = ?
 					'
 				),
 				'search' => array(
 					'ansi' => '
 						SELECT DISTINCT :columns
-							mlocsi."id" AS "locale.site.id", mlocsi."code" AS "locale.site.code",
-							mlocsi."label" AS "locale.site.label", mlocsi."config" AS "locale.site.config",
-							mlocsi."status" AS "locale.site.status", mlocsi."editor" AS "locale.site.editor",
-							mlocsi."mtime" AS "locale.site.mtime", mlocsi."ctime" AS "locale.site.ctime"
+							mlocsi."id" AS "locale.site.id", mlocsi."siteid" AS "locale.site.siteid",
+							mlocsi."code" AS "locale.site.code", mlocsi."label" AS "locale.site.label",
+							mlocsi."config" AS "locale.site.config", mlocsi."status" AS "locale.site.status",
+							mlocsi."editor" AS "locale.site.editor", mlocsi."mtime" AS "locale.site.mtime",
+							mlocsi."ctime" AS "locale.site.ctime"
 						FROM "mshop_locale_site" AS mlocsi
 						WHERE mlocsi."level" = 0 AND :cond
 						ORDER BY :order
@@ -226,7 +223,7 @@ return array(
 						mloc."mtime" AS "locale.mtime", mloc."editor" AS "locale.editor",
 						mloc."ctime" AS "locale.ctime"
 					FROM "mshop_locale" AS mloc
-					LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."id")
+					LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."siteid")
 					LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
 					LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
 					WHERE :cond
@@ -243,7 +240,7 @@ return array(
 					FROM (
 						SELECT DISTINCT mloc."id"
 						FROM "mshop_locale" AS mloc
-						LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."id")
+						LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."siteid")
 						LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
 						LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
 						WHERE :cond

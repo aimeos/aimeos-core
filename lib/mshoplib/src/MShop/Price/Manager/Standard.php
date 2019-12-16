@@ -131,7 +131,7 @@ class Standard
 		),
 		'price:has' => array(
 			'code' => 'price:has()',
-			'internalcode' => ':site :key AND mprili."id"',
+			'internalcode' => ':site AND :key AND mprili."id"',
 			'internaldeps' => ['LEFT JOIN "mshop_price_list" AS mprili ON ( mprili."parentid" = mpri."id" )'],
 			'label' => 'Price has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -140,7 +140,7 @@ class Standard
 		),
 		'price:prop' => array(
 			'code' => 'price:prop()',
-			'internalcode' => ':site :key AND mpripr."id"',
+			'internalcode' => ':site AND :key AND mpripr."id"',
 			'internaldeps' => ['LEFT JOIN "mshop_price_property" AS mpripr ON ( mpripr."parentid" = mpri."id" )'],
 			'label' => 'Price has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
@@ -196,11 +196,8 @@ class Standard
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/price/manager/sitemode', $level );
 
-		$siteIds = $this->getSiteIds( $level );
-		$self = $this;
 
-
-		$this->searchConfig['price:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['price:has']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -216,15 +213,15 @@ class Standard
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 'mprili."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 'mprili."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'mprili."siteid"', $level );
+			$keystr = $this->toExpression( 'mprili."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};
 
 
-		$this->searchConfig['price:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['price:prop']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -240,8 +237,8 @@ class Standard
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 'mpripr."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 'mpripr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'mpripr."siteid"', $level );
+			$keystr = $this->toExpression( 'mpripr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;

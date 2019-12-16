@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Iface::class, $item );
 		$this->assertEquals( 'en', $item->getLanguageId() );
 		$this->assertEquals( 'EUR', $item->getCurrencyId() );
-		$this->assertEquals( 1, count( $item->getSitePath() ) );
+		$this->assertEquals( 1, count( $item->getSites() ) );
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
 		$this->assertEquals( 'unittest', $item->getSiteItem()->getCode() );
 	}
@@ -46,7 +46,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Iface::class, $item );
 		$this->assertEquals( 'en', $item->getLanguageId() );
 		$this->assertEquals( 'EUR', $item->getCurrencyId() );
-		$this->assertEquals( 1, count( $item->getSitePath() ) );
+		$this->assertEquals( 1, count( $item->getSites() ) );
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
 		$this->assertEquals( 'unittest', $item->getSiteItem()->getCode() );
 	}
@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Iface::class, $item );
 		$this->assertEquals( 'de', $item->getLanguageId() );
 		$this->assertEquals( 'EUR', $item->getCurrencyId() );
-		$this->assertEquals( 1, count( $item->getSitePath() ) );
+		$this->assertEquals( 1, count( $item->getSites() ) );
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
 		$this->assertEquals( 'unittest', $item->getSiteItem()->getCode() );
 	}
@@ -79,7 +79,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'EUR', $item->getCurrencyId() );
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
 		$this->assertEquals( 'unittest', $item->getSiteItem()->getCode() );
-		$this->assertEquals( 1, count( $item->getSitePath() ) );
+		$this->assertEquals( 1, count( $item->getSites() ) );
 	}
 
 
@@ -91,7 +91,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'EUR', $item->getCurrencyId() );
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
 		$this->assertEquals( 'unittest', $item->getSiteItem()->getCode() );
-		$this->assertEquals( 1, count( $item->getSitePath() ) );
+		$this->assertEquals( 1, count( $item->getSites() ) );
 	}
 
 
@@ -103,7 +103,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'EUR', $item->getCurrencyId() );
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
 		$this->assertEquals( 'unittest', $item->getSiteItem()->getCode() );
-		$this->assertEquals( 1, count( $item->getSitePath() ) );
+		$this->assertEquals( 1, count( $item->getSites() ) );
 	}
 
 

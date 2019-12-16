@@ -89,7 +89,6 @@ class Standard
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
-		$siteIds = $this->getSiteIds( $level );
 
 		$this->searchConfig['index.text:relevance']['function'] = function( $source, array $params ) {
 
@@ -102,7 +101,7 @@ class Standard
 
 		foreach( ['index.text:name', 'index.text:url', 'index.text:relevance'] as $key )
 		{
-			$expr = $siteIds ? $this->toExpression( 'mindte."siteid"', $siteIds ) : '1=1';
+			$expr = $this->getSiteString( 'mindte."siteid"', $level );
 			$this->searchConfig[$key]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$key]['internalcode'] );
 		}
 	}

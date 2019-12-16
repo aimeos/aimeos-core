@@ -73,7 +73,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 		try
 		{
 			$localeItem = $localeManager->createItem();
-			$localeItem->setSiteId( $siteItem->getId() );
+			$localeItem->setSiteId( $siteItem->getSiteId() );
 			$localeItem->setLanguageId( 'en' );
 			$localeItem->setCurrencyId( 'EUR' );
 			$localeItem->setStatus( 1 );
@@ -118,7 +118,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 				$siteItem->setStatus( $dataset['status'] );
 
 				$localeSiteManager->insertItem( $siteItem, $parentId );
-				$siteIds[$key] = $siteItem->getId();
+				$siteIds[$key] = $siteItem->getSiteId();
 			}
 			catch( \Exception $e )
 			{
@@ -130,7 +130,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 					throw new \RuntimeException( sprintf( 'No site for code "%1$s" available', $dataset['code'] ) );
 				}
 
-				$siteIds[$key] = $item->getId();
+				$siteIds[$key] = $item->getSiteId();
 			}
 		}
 
