@@ -126,6 +126,10 @@ class Standard
 	 */
 	public function clear( array $siteids )
 	{
+		if( empty( $siteids ) ) {
+			return $this;
+		}
+
 		$context = $this->getContext();
 		$config = $context->getConfig();
 

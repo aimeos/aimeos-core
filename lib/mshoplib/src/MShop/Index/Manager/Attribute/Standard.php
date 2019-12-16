@@ -680,7 +680,7 @@ class Standard
 				$stmt->bind( 4, $refItem->getType() );
 				$stmt->bind( 5, $refItem->getCode() );
 				$stmt->bind( 6, $date ); // mtime
-				$stmt->bind( 7, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 7, $siteid );
 
 				try {
 					$stmt->execute()->finish();

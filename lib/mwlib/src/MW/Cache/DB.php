@@ -108,7 +108,7 @@ class DB
 			$conditions = $search->getConditionSource( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) );
-			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $this->siteid );
 			$stmt->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
@@ -139,7 +139,7 @@ class DB
 		try
 		{
 			$stmt = $conn->create( str_replace( ':cond', '1=1', $this->sql['delete'] ) );
-			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $this->siteid );
 			$stmt->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
@@ -179,7 +179,7 @@ class DB
 			$conditions = $search->getConditionSource( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) );
-			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $this->siteid );
 			$stmt->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
@@ -220,8 +220,8 @@ class DB
 			$conditions = $search->getConditionSource( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['deletebytag'] ) );
-			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $this->siteid );
+			$stmt->bind( 2, $this->siteid );
 			$stmt->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
@@ -273,7 +273,7 @@ class DB
 			$conditions = $search->getConditionSource( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['get'] ) );
-			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $this->siteid );
 			$result = $stmt->execute();
 
 			while( ( $row = $result->fetch() ) !== false ) {
@@ -331,7 +331,7 @@ class DB
 			$conditions = $search->getConditionSource( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['get'] ) );
-			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $this->siteid );
 			$result = $stmt->execute();
 
 			while( $result->fetch() !== false ) {
@@ -386,7 +386,7 @@ class DB
 				}
 
 				$stmt->bind( 1, (string) $key );
-				$stmt->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 2, $this->siteid );
 				$stmt->bind( 3, $expires );
 				$stmt->bind( 4, (string) $value );
 				$stmt->execute()->finish();
@@ -394,7 +394,7 @@ class DB
 				foreach( $tags as $name )
 				{
 					$stmtTag->bind( 1, (string) $key );
-					$stmtTag->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+					$stmtTag->bind( 2, $this->siteid );
 					$stmtTag->bind( 3, (string) $name );
 					$stmtTag->execute()->finish();
 				}

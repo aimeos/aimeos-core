@@ -216,7 +216,7 @@ abstract class DBBase
 			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $timestamp ); // ctime
-			$stmt->bind( 2, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $siteid );
 
 			$stmt->execute()->finish();
 

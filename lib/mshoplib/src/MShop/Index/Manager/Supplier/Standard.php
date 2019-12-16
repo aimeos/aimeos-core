@@ -461,7 +461,7 @@ class Standard
 					$stmt->bind( 3, $listItem->getType() );
 					$stmt->bind( 4, $listItem->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 					$stmt->bind( 5, $date ); //mtime
-					$stmt->bind( 6, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+					$stmt->bind( 6, $siteid );
 
 					try {
 						$stmt->execute()->finish();

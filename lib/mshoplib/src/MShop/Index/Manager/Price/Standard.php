@@ -680,7 +680,7 @@ class Standard
 			$stmt->bind( 2, $currencyId );
 			$stmt->bind( 3, reset( $list ) );
 			$stmt->bind( 4, $date ); // mtime
-			$stmt->bind( 5, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 5, $siteid );
 
 			try {
 				$stmt->execute()->finish();

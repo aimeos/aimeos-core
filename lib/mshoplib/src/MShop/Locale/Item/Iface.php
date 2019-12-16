@@ -33,7 +33,7 @@ interface Iface
 	 * Returns the site IDs for the locale site constants.
 	 *
 	 * @param int $level Site level constant from \Aimeos\MShop\Locale\Manager\Base
-	 * @return array Associative list of site constant as key and sites as values
+	 * @return array|string Associative list of site constant as key and sites as values or site ID
 	 */
 	public function getSites( $level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL );
 

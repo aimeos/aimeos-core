@@ -315,6 +315,10 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 */
 	protected function clearBase( array $siteids, $cfgpath )
 	{
+		if( empty( $siteids ) ) {
+			return $this;
+		}
+
 		$dbm = $this->context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
@@ -328,7 +332,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 			foreach( $siteids as $siteid )
 			{
-				$stmt->bind( 1, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 1, $siteid );
 				$stmt->execute()->finish();
 			}
 
@@ -917,7 +921,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$stmt = $conn->create( $sql );
 
 			if( $siteidcheck ) {
-				$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 1, $context->getLocale()->getSiteId() );
 			}
 
 			$stmt->execute()->finish();

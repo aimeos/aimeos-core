@@ -287,7 +287,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getPriority(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getMessage() );
 			$stmt->bind( $idx++, $item->getRequest() );
-			$stmt->bind( $idx++, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $siteid );
 
 			if( $item->getId() !== null ) {
 				$stmt->bind( $idx++, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
