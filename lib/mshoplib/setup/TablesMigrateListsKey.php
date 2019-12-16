@@ -34,7 +34,7 @@ class TablesMigrateListsKey extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['TypesMigrateColumns', 'TablesCreateMShop'];
 	}
 
 

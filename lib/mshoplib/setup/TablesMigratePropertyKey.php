@@ -30,18 +30,7 @@ class TablesMigratePropertyKey extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies() : array
 	{
-		return ['TablesClearPropertyKey'];
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies() : array
-	{
-		return ['TablesCreateMShop'];
+		return ['TypesMigrateColumns', 'TablesClearPropertyKey', 'TablesCreateMShop'];
 	}
 
 
