@@ -49,44 +49,4 @@ class MultipleTest extends \PHPUnit\Framework\TestCase
 		$this->assertContains( 'OneTask', $result );
 		$this->assertContains( 'TwoTask', $result );
 	}
-
-
-	public function testRollback()
-	{
-		$expected = 'Executing TwoTask                                                     OK
-';
-
-		$taskPath = __DIR__ . DIRECTORY_SEPARATOR . 'tasks';
-		$conf = array( 'db' => $this->config->get( 'resource/db', [] ) );
-		$object = new \Aimeos\MW\Setup\Manager\Multiple( $this->dbm, $conf, $taskPath );
-
-		ob_start();
-
-		$object->rollback( 'TwoTask' );
-
-		$result = ob_get_contents();
-		ob_end_clean();
-
-		$this->assertEquals( $expected, $result );
-	}
-
-
-	public function testClean()
-	{
-		$expected = 'Executing TwoTask                                                     OK
-';
-
-		$taskPath = __DIR__ . DIRECTORY_SEPARATOR . 'tasks';
-		$conf = array( 'db' => $this->config->get( 'resource/db', [] ) );
-		$object = new \Aimeos\MW\Setup\Manager\Multiple( $this->dbm, $conf, $taskPath );
-
-		ob_start();
-
-		$object->clean( 'TwoTask' );
-
-		$result = ob_get_contents();
-		ob_end_clean();
-
-		$this->assertEquals( $expected, $result );
-	}
 }

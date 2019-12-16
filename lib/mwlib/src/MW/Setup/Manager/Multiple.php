@@ -69,22 +69,6 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 
 
 	/**
-	 * Cleans up old data required for roll back
-	 *
-	 * @param string|null $task Name of the task
-	 */
-	public function clean( string $task = null )
-	{
-		$this->tasksDone = [];
-		$tasks = ( $task !== null && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
-
-		foreach( $tasks as $taskname => $task ) {
-			$this->cleanTasks( array( $taskname ) );
-		}
-	}
-
-
-	/**
 	 * Updates the schema and migrates the data
 	 *
 	 * @param string|null $task Name of the task
@@ -96,53 +80,6 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 
 		foreach( $tasks as $taskname => $task ) {
 			$this->migrateTasks( array( $taskname ) );
-		}
-	}
-
-
-	/**
-	 * Undo all schema changes and migrate data back
-	 *
-	 * @param string|null $task Name of the task
-	 */
-	public function rollback( string $task = null )
-	{
-		$this->tasksDone = [];
-		$tasks = ( $task !== null && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
-
-		foreach( array_reverse( $tasks, true ) as $taskname => $task ) {
-			$this->rollbackTasks( array( $taskname ) );
-		}
-	}
-
-
-	/**
-	 * Runs the clean method of the given tasks and their dependencies
-	 *
-	 * @param string[] $tasknames List of task names
-	 * @param string[] $stack List of task names that are scheduled after this task
-	 */
-	protected function cleanTasks( array $tasknames, array $stack = [] )
-	{
-		foreach( $tasknames as $taskname )
-		{
-			if( in_array( $taskname, $this->tasksDone ) ) {
-				continue;
-			}
-
-			if( in_array( $taskname, $stack ) )
-			{
-				$msg = 'Circular dependency for "%1$s" detected. Task stack: %2$s';
-				throw new \Aimeos\MW\Setup\Exception( sprintf( $msg, $taskname, implode( ', ', $stack ) ) );
-			}
-
-			$stack[] = $taskname;
-
-			if( isset( $this->tasks[$taskname] ) ) {
-				$this->tasks[$taskname]->clean();
-			}
-
-			$this->tasksDone[] = $taskname;
 		}
 	}
 
@@ -175,41 +112,6 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 
 			if( isset( $this->tasks[$taskname] ) ) {
 				$this->tasks[$taskname]->migrate();
-			}
-
-			$this->tasksDone[] = $taskname;
-		}
-	}
-
-
-	/**
-	 * Runs the rollback method of the given tasks and their dependencies
-	 *
-	 * @param string[] $tasknames List of task names
-	 * @param string[] $stack List of task names that are sheduled after this task
-	 */
-	protected function rollbackTasks( array $tasknames, array $stack = [] )
-	{
-		foreach( $tasknames as $taskname )
-		{
-			if( in_array( $taskname, $this->tasksDone ) ) {
-				continue;
-			}
-
-			if( in_array( $taskname, $stack ) )
-			{
-				$msg = 'Circular dependency for "%1$s" detected. Task stack: %2$s';
-				throw new \Aimeos\MW\Setup\Exception( sprintf( $msg, $taskname, implode( ', ', $stack ) ) );
-			}
-
-			$stack[] = $taskname;
-
-			if( isset( $this->reverse[$taskname] ) ) {
-				$this->rollbackTasks( (array) $this->reverse[$taskname], $stack );
-			}
-
-			if( isset( $this->tasks[$taskname] ) ) {
-				$this->tasks[$taskname]->rollback();
 			}
 
 			$this->tasksDone[] = $taskname;

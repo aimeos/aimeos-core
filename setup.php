@@ -207,20 +207,8 @@ try
 
 	$manager = new \Aimeos\MW\Setup\Manager\Multiple( $dbm, $dbconfig, $taskPaths, $ctx );
 
-	$action = ( isset( $options['action'] ) ? $options['action'] : 'migrate' );
 	$task = ( isset( $options['task'] ) ? $options['task'] : null );
-
-	switch( $action )
-	{
-		case 'clean':
-			$manager->clean( $task ); break;
-		case 'migrate':
-			$manager->migrate( $task ); break;
-		case 'rollback':
-			$manager->rollback( $task ); break;
-		default:
-			throw new \Exception( sprintf( 'Invalid action "%1$s"', $action ) );
-	}
+	$manager->migrate( $task );
 }
 catch( Throwable $t )
 {

@@ -27,20 +27,4 @@ interface Iface
 	 * @return void
 	 */
 	public function migrate( string $task = null );
-
-	/**
-	 * Undo all schema changes and migrate data back
-	 *
-	 * @param string|null $task Name of the task
-	 * @return void
-	 */
-	public function rollback( string $task = null );
-
-	/**
-	 * Cleans up old data required for roll back
-	 *
-	 * @param string|null $task Name of the task
-	 * @return void
-	 */
-	public function clean( string $task = null );
 }

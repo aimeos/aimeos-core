@@ -56,18 +56,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testRollback()
-	{
-		$this->object->rollback();
-	}
-
-
-	public function testClean()
-	{
-		$this->object->clean();
-	}
-
-
 	public function testGetSchema()
 	{
 		$class = new \ReflectionClass( \Aimeos\MW\Setup\Task\Base::class );

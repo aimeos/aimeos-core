@@ -52,20 +52,6 @@ interface Iface
 	public function migrate();
 
 	/**
-	 * Undo all schema changes and migrate data back
-	 *
-	 * @return void
-	 */
-	public function rollback();
-
-	/**
-	 * Cleans up old data required for roll back
-	 *
-	 * @return void
-	 */
-	public function clean();
-
-	/**
 	 * Sets the database manager object
 	 *
 	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database manager
