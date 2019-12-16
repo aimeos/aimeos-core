@@ -28,7 +28,7 @@ class TablesClearPropertyKey extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies() : array
+	public function getPostDependencies()
 	{
 		return ['TablesCreateMShop'];
 	}
