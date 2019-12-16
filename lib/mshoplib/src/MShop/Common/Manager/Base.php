@@ -738,7 +738,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	{
 		$list = [];
 		$sep = $this->getKeySeparator();
-		$sites = $this->context->getLocale()->getSites();
 
 		foreach( $keys as $key )
 		{

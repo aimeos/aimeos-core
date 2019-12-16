@@ -515,9 +515,9 @@ class Standard
 	 * @param string $lang Language code
 	 * @param string $currency Currency code
 	 * @param bool $active Flag to get only active items
-	 * @param \Aimeos\MShop\Locale\Item\Site\Iface Site item
-	 * @param string Site ID
-	 * @param array Associative list of site constant as key and sites as values
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $siteItem Site item
+	 * @param string $siteId Site ID
+	 * @param array $sites Associative list of site constant as key and sites as values
 	 * @param bool $bare Allow locale items with sites only
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for the given parameters
 	 * @throws \Aimeos\MShop\Locale\Exception If no locale item is found
@@ -555,8 +555,8 @@ class Standard
 	 * @param string $lang Language code
 	 * @param string $currency Currency code
 	 * @param bool $active Flag to get only active items
-	 * @param \Aimeos\MShop\Locale\Item\Site\Iface Site item
-	 * @param array Associative list of site constant as key and sites as values
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $siteItem Site item
+	 * @param array $sites Associative list of site constant as key and sites as values
 	 * @return \Aimeos\MShop\Locale\Item\Iface|boolean Locale item for the given parameters or false if no item was found
 	 */
 	private function bootstrapMatch( $siteId, $lang, $currency, $active,
@@ -617,8 +617,8 @@ class Standard
 	 * @param string $siteId Site ID
 	 * @param string $lang Language code
 	 * @param bool $active Flag to get only active items
-	 * @param \Aimeos\MShop\Locale\Item\Site\Iface Site item
-	 * @param array Associative list of site constant as key and sites as values
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $siteItem Site item
+	 * @param array $sites Associative list of site constant as key and sites as values
 	 * @return \Aimeos\MShop\Locale\Item\Iface|boolean Locale item for the given parameters or false if no item was found
 	 */
 	private function bootstrapClosest( $siteId, $lang, $active,
@@ -685,14 +685,12 @@ class Standard
 	 *
 	 * @param array $values Parameter to initialise the item
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface|null $site Site item
-	 * @param string[] $sitePath List of site IDs up to the root site
-	 * @param string[] $siteSubTree List of site IDs below and including the current site
+	 * @param array $sites Associative list of site constant as key and sites as values
 	 * @return \Aimeos\MShop\Locale\Item\Standard Locale item
 	 */
-	protected function createItemBase( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $site = null,
-		array $sitePath = [], $siteSubTree = [] )
+	protected function createItemBase( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $site = null, array $sites = [] )
 	{
-		return new \Aimeos\MShop\Locale\Item\Standard( $values, $site, $sitePath, $siteSubTree );
+		return new \Aimeos\MShop\Locale\Item\Standard( $values, $site, $sites );
 	}
 
 

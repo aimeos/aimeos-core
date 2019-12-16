@@ -22,4 +22,11 @@ interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Config\Iface,
 		\Aimeos\MShop\Common\Item\Tree\Iface
 {
+	/**
+	 * Sets the ID of the site.
+	 *
+	 * @return string Unique ID of the site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setSiteId( $value );
 }
