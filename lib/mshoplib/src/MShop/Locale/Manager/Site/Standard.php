@@ -830,7 +830,7 @@ class Standard
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, '' ); // site ID
+			$stmt->bind( $idx++, '/' ); // site ID
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
