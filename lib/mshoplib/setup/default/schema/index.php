@@ -87,6 +87,7 @@ return array(
 		'mshop_index_text' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_index_text' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
