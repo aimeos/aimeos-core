@@ -85,6 +85,13 @@ interface Iface
 	public function getColumnDetails( string $tablename, string $columnname ) : \Aimeos\MW\Setup\DBSchema\Column\Iface;
 
 	/**
+	 * Returns the database name.
+	 *
+	 * @return string Database name
+	 */
+	public function getDBName() : string;
+
+	/**
 	 * Returns the name of the database adapter
 	 *
 	 * @return string Name of the adapter, e.g. 'mysql'

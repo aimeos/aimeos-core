@@ -198,6 +198,17 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 
 
 	/**
+	 * Returns the database name.
+	 *
+	 * @return string Database name
+	 */
+	public function getDBName() : string
+	{
+		return $this->dbname;
+	}
+
+
+	/**
 	 * Returns the name of the database adapter
 	 *
 	 * @return string Name of the adapter, e.g. 'mysql'
@@ -254,16 +265,5 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 		$length = ( isset( $record['CHARACTER_MAXIMUM_LENGTH'] ) ? $record['CHARACTER_MAXIMUM_LENGTH'] : $record['NUMERIC_PRECISION'] );
 		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['TABLE_NAME'], $record['COLUMN_NAME'], $record['DATA_TYPE'], $length,
 			$record['COLUMN_DEFAULT'], $record['IS_NULLABLE'], $record['CHARACTER_SET_NAME'], $record['COLLATION_NAME'] );
-	}
-
-
-	/**
-	 * Returns the database name.
-	 *
-	 * @return string Database name
-	 */
-	protected function getDBName() : string
-	{
-		return $this->dbname;
 	}
 }

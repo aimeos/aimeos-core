@@ -97,6 +97,18 @@ class MysqlTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetDBName()
+	{
+		$this->assertNotNull( $this->object->getDBName() );
+	}
+
+
+	public function testGetName()
+	{
+		$this->assertNotNull( $this->object->getName() );
+	}
+
+
 	public function testIndexExists()
 	{
 		$this->assertTrue( $this->object->indexExists( 'mw_setup_dbschema_test', 'idx_msdt_smallint' ) );
