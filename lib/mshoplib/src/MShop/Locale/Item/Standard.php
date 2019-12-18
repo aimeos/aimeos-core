@@ -82,7 +82,7 @@ class Standard
 			return $this->sites;
 		}
 
-		return $this->sites[$level] ?? $this->sites[Locale::SITE_ONE];
+		return $this->sites[$level] ?? ( $this->sites[Locale::SITE_ONE] ?? [] );
 	}
 
 
@@ -93,7 +93,7 @@ class Standard
 	 */
 	public function getSitePath()
 	{
-		return $this->sites[Locale::SITE_PATH] ?? [$this->sites[Locale::SITE_ONE]];
+		return $this->sites[Locale::SITE_PATH] ?? ( $this->sites[Locale::SITE_ONE] ?? [] );
 	}
 
 
