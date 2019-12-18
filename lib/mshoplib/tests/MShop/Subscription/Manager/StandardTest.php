@@ -177,7 +177,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'subscription.dateend', '2010-01-01' );
 		$expr[] = $search->compare( '==', 'subscription.interval', 'P0Y1M0W0D' );
 		$expr[] = $search->compare( '>=', 'subscription.productid', '' );
-		$expr[] = $search->compare( '==', 'subscription.period', 5 );
+		$expr[] = $search->compare( '==', 'subscription.period', 120 );
 		$expr[] = $search->compare( '==', 'subscription.reason', 1 );
 		$expr[] = $search->compare( '==', 'subscription.status', 1 );
 		$expr[] = $search->compare( '>=', 'subscription.mtime', '1970-01-01 00:00:00' );

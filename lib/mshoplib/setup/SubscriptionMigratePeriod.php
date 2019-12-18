@@ -39,47 +39,35 @@ class SubscriptionMigratePeriod extends \Aimeos\MW\Setup\Task\Base
 			return;
 		}
 
-		$start = 0;
-		$conn = $this->acquire( $dbdomain );
-		$select = 'SELECT "id", "interval", "next", "ctime" FROM "mshop_subscription" WHERE "period" = 0 LIMIT 1000 OFFSET :offset';
+		$select = 'SELECT "id", "interval", "end", "ctime" FROM "mshop_subscription" WHERE "period" = 0';
 		$update = 'UPDATE "mshop_subscription" SET "period" = ? WHERE "id" = ?';
 
-		$stmt = $conn->create( $update );
+		$cselect = $this->acquire( $dbdomain );
+		$cupdate = $this->acquire( $dbdomain );
 
-		do
+		$stmt = $cupdate->create( $update );
+		$result = $cselect->create( $select )->execute();
+
+		while( ( $row = $result->fetch() ) !== false )
 		{
-			$map = [];
-			$count = 0;
-			$today = date( 'Y-m-d' );
-			$result = $conn->create( str_replace( ':offset', $start, $select ) )->execute();
+			$period = 0;
+			$end = $row['end'] ?:  date( 'Y-m-d' );
+			$interval = new \DateInterval( $row['interval'] );
 
-			while( ( $row = $result->fetch() ) !== false ) {
-				$map[$row['id']] = $row;
-			}
-
-			foreach( $map as $id => $entry )
+			do
 			{
-				$period = 0;
-				$interval = new \DateInterval( $entry['interval'] );
-
-				do
-				{
-					$period++;
-					$entry['ctime'] = date_create( $entry['ctime'] )->add( $interval )->format( 'Y-m-d' );
-				}
-				while( $entry['ctime'] < $today );
-
-				$stmt->bind( 1, $period );
-				$stmt->bind( 2, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->execute()->finish();
+				$period++;
+				$row['ctime'] = date_create( $row['ctime'] )->add( $interval )->format( 'Y-m-d' );
 			}
+			while( $row['ctime'] < $end );
 
-			$count = count( $map );
-			$start += $count;
+			$stmt->bind( 1, $period );
+			$stmt->bind( 2, $row['id'], \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->execute()->finish();
 		}
-		while( $count === 1000 );
 
-		$this->release( $conn, $dbdomain );
+		$this->release( $cupdate, $dbdomain );
+		$this->release( $cselect, $dbdomain );
 
 		$this->status( 'done' );
 	}
