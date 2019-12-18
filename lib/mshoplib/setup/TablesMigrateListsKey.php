@@ -45,8 +45,15 @@ class TablesMigrateListsKey extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Update lists "key" columns', 0 ); $this->status( '' );
 
-		foreach( $this->tables as $rname => $table )
+		$this->process( $this->tables );
+	}
+
+
+	protected function process( array $tables )
+	{
+		foreach( $tables as $rname => $table )
 		{
+			$count = 0;
 			$schema = $this->getSchema( $rname );
 
 			$this->msg( sprintf( 'Checking table %1$s', $table ), 1 );
@@ -66,12 +73,13 @@ class TablesMigrateListsKey extends \Aimeos\MW\Setup\Task\Base
 				$stmt->bind( 1, $row['domain'] . '|' . $row['type'] . '|' . $row['refid'] );
 				$stmt->bind( 2, $row['id'] );
 				$stmt->execute()->finish();
+				$count++;
 			}
 
 			$dbm->release( $cupdate, $rname );
 			$dbm->release( $cselect, $rname );
 
-			$this->status( 'done' );
+			$this->status( $count > 0 ? 'done' : 'OK' );
 		}
 	}
 }
