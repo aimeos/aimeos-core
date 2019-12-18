@@ -712,8 +712,10 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 		if( isset( $sites[Locale::SITE_PATH] ) && $sitelevel & Locale::SITE_PATH ) {
 			$cond = $search->compare( '==', $name, $sites[Locale::SITE_PATH] );
-		} else {
+		} elseif( isset( $sites[Locale::SITE_ONE] ) ) {
 			$cond = $search->compare( '==', $name, $sites[Locale::SITE_ONE] );
+		} else {
+			$cond = $search->compare( '==', $name, null );
 		}
 
 		if( isset( $sites[Locale::SITE_SUBTREE] ) )
