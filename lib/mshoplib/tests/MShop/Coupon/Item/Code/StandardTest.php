@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'coupon.code.id' => '1',
 			'coupon.code.siteid' => 123,
 			'coupon.code.parentid' => '2',
-			'coupon.code.code' => 'abcd',
+			'coupon.code.code' => 'ABCD',
 			'coupon.code.count' => '100',
 			'coupon.code.datestart' => null,
 			'coupon.code.dateend' => null,
@@ -89,7 +89,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetCode()
 	{
-		$this->assertEquals( 'abcd', $this->object->getCode() );
+		$this->assertEquals( 'ABCD', $this->object->getCode() );
 	}
 
 
@@ -98,7 +98,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setCode( 'dcba' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Item\Code\Iface::class, $return );
-		$this->assertEquals( 'dcba', $this->object->getCode() );
+		$this->assertEquals( 'DCBA', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -217,7 +217,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$list = $entries = array(
 			'coupon.code.id' => 1,
 			'coupon.code.parentid' => 2,
-			'coupon.code.code' => 'test',
+			'coupon.code.code' => 'TEST',
 			'coupon.code.count' => 100,
 			'coupon.code.ref' => 'def',
 		);

@@ -376,6 +376,8 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 */
 	public function addCoupon( $code )
 	{
+		$code = mb_strtoupper( $code );
+
 		if( !isset( $this->coupons[$code] ) )
 		{
 			$code = $this->notify( 'addCoupon.before', $code );
@@ -398,6 +400,8 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 */
 	public function deleteCoupon( $code )
 	{
+		$code = mb_strtoupper( $code );
+
 		if( isset( $this->coupons[$code] ) )
 		{
 			$old = [$code => $this->coupons[$code]];
@@ -441,6 +445,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 */
 	public function setCoupon( $code, array $products = [] )
 	{
+		$code = mb_strtoupper( $code );
 		$new = $this->notify( 'setCoupon.before', [$code => $products] );
 
 		$products = $this->checkProducts( current( $new ) );
@@ -479,9 +484,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	public function setCoupons( array $map )
 	{
 		$map = $this->notify( 'setCoupons.before', $map );
+		$list = [];
 
 		foreach( $map as $code => $products ) {
-			$map[$code] = $this->checkProducts( $products );
+			$list[mb_strtoupper( $code )] = $this->checkProducts( $products );
 		}
 
 		foreach( $this->coupons as $code => $products )
@@ -494,7 +500,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 			}
 		}
 
-		foreach( $map as $code => $products )
+		foreach( $list as $code => $products )
 		{
 			foreach( $products as $product ) {
 				$this->products[] = $product;
@@ -502,7 +508,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 		}
 
 		$old = $this->coupons;
-		$this->coupons = $map;
+		$this->coupons = $list;
 		$this->setModified();
 
 		$this->notify( 'setCoupons.after', $old );

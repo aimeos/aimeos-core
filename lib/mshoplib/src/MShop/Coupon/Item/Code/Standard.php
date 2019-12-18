@@ -80,7 +80,7 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		return $this->set( 'coupon.code.code', $this->checkCode( $code ) );
+		return $this->set( 'coupon.code.code', mb_strtoupper( $this->checkCode( $code ) ) );
 	}
 
 

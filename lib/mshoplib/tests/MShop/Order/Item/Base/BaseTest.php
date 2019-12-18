@@ -432,7 +432,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddCoupon()
 	{
-		$result = $this->object->addCoupon( 'OPQR' );
+		$result = $this->object->addCoupon( 'opqr' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
 		$this->assertEquals( ['OPQR' => []], $this->object->getCoupons() );
@@ -443,7 +443,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testDeleteCoupon()
 	{
 		$this->object->setCoupons( $this->coupons );
-		$result = $this->object->deleteCoupon( 'OPQR' );
+		$result = $this->object->deleteCoupon( 'opqr' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
 		$this->assertEquals( [], $this->object->getCoupons() );
@@ -460,7 +460,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetCoupon()
 	{
-		$result = $this->object->setCoupon( 'OPQR', $this->coupons['OPQR'] );
+		$result = $this->object->setCoupon( 'opqr', $this->coupons['OPQR'] );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
 		$this->assertEquals( ['OPQR' => $this->coupons['OPQR']], $this->object->getCoupons() );

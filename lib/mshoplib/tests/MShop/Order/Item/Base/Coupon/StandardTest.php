@@ -31,7 +31,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.coupon.id' => 1,
 			'order.base.coupon.siteid' => 99,
 			'order.base.coupon.baseid' => 42,
-			'order.base.coupon.code' => 'SomeCode',
+			'order.base.coupon.code' => 'SOMECODE',
 			'order.base.coupon.ordprodid' => 566778,
 			'order.base.coupon.mtime' => '2001-12-30 23:59:59',
 			'order.base.coupon.ctime' => '2011-01-01 00:00:01',
@@ -93,7 +93,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetCode()
 	{
-		$this->assertEquals( 'SomeCode', $this->object->getCode() );
+		$this->assertEquals( 'SOMECODE', $this->object->getCode() );
 	}
 
 	public function testSetCode()
@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setCode( 'testId' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Coupon\Iface::class, $return );
-		$this->assertEquals( 'testId', $this->object->getCode() );
+		$this->assertEquals( 'TESTID', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.coupon.id' => 1,
 			'order.base.coupon.baseid' => 2,
 			'order.base.coupon.productid' => 3,
-			'order.base.coupon.code' => 'test',
+			'order.base.coupon.code' => 'TEST',
 		);
 
 		$item = $item->fromArray( $entries, true );
