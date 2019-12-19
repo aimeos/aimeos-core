@@ -22,7 +22,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msloccu_id' );
 			$table->addIndex( array( 'status' ), 'idx_msloccu_status' );
-			$table->addIndex( array( 'label' ), 'idx_mslocla_label' );
+			$table->addIndex( array( 'label' ), 'idx_msloccu_label' );
 
 			return $schema;
 		},
