@@ -92,8 +92,6 @@ abstract class DBBase
 			$submanager->deleteItems( $itemIds );
 		}
 
-		$this->manager->deleteItems( $itemIds );
-
 		return $this;
 	}
 
