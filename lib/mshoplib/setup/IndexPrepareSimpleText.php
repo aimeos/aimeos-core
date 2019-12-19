@@ -10,7 +10,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Prepares the mshop_index_text table to simplification
+ * Prepares the mshop_index_text table for simplification
  */
 class IndexPrepareSimpleText extends \Aimeos\MW\Setup\Task\Base
 {
@@ -30,7 +30,7 @@ class IndexPrepareSimpleText extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$this->msg( 'Prepare mshop_index_text table to simplification', 0 );
+		$this->msg( 'Prepare mshop_index_text table for simplification', 0 );
 		$schema = $this->getSchema( 'db-index' );
 
 		if( $schema->tableExists( 'mshop_index_text' ) === true

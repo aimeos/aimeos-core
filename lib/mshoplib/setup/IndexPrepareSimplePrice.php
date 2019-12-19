@@ -10,7 +10,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Prepares the mshop_index_price table to simplification
+ * Prepares the mshop_index_price table for simplification
  */
 class IndexPrepareSimplePrice extends \Aimeos\MW\Setup\Task\Base
 {
@@ -30,7 +30,7 @@ class IndexPrepareSimplePrice extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$this->msg( 'Prepare mshop_index_price table to simplification', 0 );
+		$this->msg( 'Prepare mshop_index_price table for simplification', 0 );
 		$schema = $this->getSchema( 'db-index' );
 
 		if( $schema->tableExists( 'mshop_index_price' ) === true
