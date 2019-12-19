@@ -51,7 +51,7 @@ class SubscriptionMigratePeriod extends \Aimeos\MW\Setup\Task\Base
 		while( ( $row = $result->fetch() ) !== false )
 		{
 			$period = 0;
-			$end = $row['end'] ?:  date( 'Y-m-d' );
+			$end = $row['end'] ?: date( 'Y-m-d' );
 			$interval = new \DateInterval( $row['interval'] );
 
 			do
