@@ -21,7 +21,7 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msloccu_id' );
-			$table->addIndex( array( 'status' ), 'idx_msloccu_sid_status' );
+			$table->addIndex( array( 'status' ), 'idx_msloccu_status' );
 			$table->addIndex( array( 'label' ), 'idx_mslocla_label' );
 
 			return $schema;
@@ -39,8 +39,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mslocla_id' );
-			$table->addIndex( array( 'status' ), 'idx_mslocla_sid_status' );
-			$table->addIndex( array( 'label' ), 'idx_mslocla_sid_label' );
+			$table->addIndex( array( 'status' ), 'idx_mslocla_status' );
+			$table->addIndex( array( 'label' ), 'idx_mslocla_label' );
 
 			return $schema;
 		},
