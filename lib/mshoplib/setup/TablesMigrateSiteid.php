@@ -111,78 +111,7 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Update "siteid" columns', 0, '' );
 
-		if( $this->addLocaleSiteColumn() )
-		{
-			foreach( $this->getSites() as $siteid => $site )
-			{
-				foreach( $this->resources as $rname => $tables )
-				{
-					$schema = $this->getSchema( $rname );
-
-					$dbm = $this->additional->getDatabaseManager();
-					$conn = $dbm->acquire( $rname );
-
-					$dbal = $conn->getRawObject();
-
-					if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
-						throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
-					}
-
-					$dbalManager = $dbal->getSchemaManager();
-					$config = $dbalManager->createSchemaConfig();
-
-					foreach( $tables as $table )
-					{
-						$this->msg( sprintf( 'Checking table %1$s', $table ), 1 );
-						$colname = null;
-
-						if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'siteid' )
-							&& $schema->getColumnDetails( $table, 'siteid' )->getDataType() === 'integer'
-						) {
-							$colname = 'siteid';
-						}
-
-						if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'tsiteid' )
-							&& $schema->getColumnDetails( $table, 'tsiteid' )->getDataType() === 'integer'
-						) {
-							$colname = 'tsiteid';
-						}
-
-						if( $colname )
-						{
-							$tabledef = $dbalManager->listTableDetails( $table );
-							$newdef = clone $tabledef;
-
-							foreach( ['fk_macac_tid_tsid', 'fk_mslocla_siteid', 'fk_msloccu_siteid', 'fk_msloc_siteid'] as $foreignkey )
-							{
-								if( $newdef->hasForeignKey( $foreignkey ) ) {
-									$newdef->removeForeignKey( $foreignkey );
-								}
-							}
-
-							$type = new \Doctrine\DBAL\Types\StringType();
-							$newdef->changeColumn( $colname, ['type' => $type, 'length' => 255] );
-
-							$src = new \Doctrine\DBAL\Schema\Schema( [$tabledef], [], $config );
-							$dest = new \Doctrine\DBAL\Schema\Schema( [$newdef], [], $config );
-
-							$this->update( $src, $dest, $rname );
-
-							$stmt = $conn->create( sprintf( 'UPDATE "%1$s" SET "%2$s" = ? WHERE "%2$s" = ?', $table, $colname ) );
-							$result = $stmt->bind( 1, $site )->bind( 2, $siteid )->execute();
-
-							$this->status( $result->affectedRows() > 0 ? 'done' : 'OK' );
-						}
-						else
-						{
-							$this->status( 'OK' );
-						}
-					}
-
-					$dbm->release( $conn, $rname );
-				}
-			}
-		}
+		$this->process( $this->resources );
 	}
 
 
@@ -192,14 +121,10 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 		$table = 'mshop_locale_site';
 		$schema = $this->getSchema( $rname );
 
-		if( $schema->tableExists( $table ) === false ) {
-			return false;
-		}
-
-		$this->msg( 'Adding "siteid" column to "mshop_locale_site" table', 1 );
-
 		if( $schema->columnExists( $table, 'siteid' ) === false )
 		{
+			$this->msg( 'Adding "siteid" column to "mshop_locale_site" table', 1 );
+
 			$dbm = $this->additional->getDatabaseManager();
 			$conn = $dbm->acquire( $rname );
 
@@ -226,12 +151,6 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 
 			$this->status( 'done' );
 		}
-		else
-		{
-			$this->status( 'OK' );
-		}
-
-		return true;
 	}
 
 
@@ -260,5 +179,85 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$map[$item->getId()] = $site;
+	}
+
+
+	protected function process( array $resources )
+	{
+		if( $this->getSchema( 'db-locale' )->tableExists( 'mshop_locale_site' ) === false ) {
+			return;
+		}
+
+		$this->addLocaleSiteColumn();
+
+		foreach( $resources as $rname => $tables )
+		{
+			$schema = $this->getSchema( $rname );
+
+			$dbm = $this->additional->getDatabaseManager();
+			$conn = $dbm->acquire( $rname );
+
+			$dbal = $conn->getRawObject();
+
+			if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
+				throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
+			}
+
+			$dbalManager = $dbal->getSchemaManager();
+			$config = $dbalManager->createSchemaConfig();
+
+			foreach( $tables as $table )
+			{
+				$this->msg( sprintf( 'Checking table %1$s', $table ), 1 );
+				$colname = null;
+
+				if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'siteid' )
+					&& $schema->getColumnDetails( $table, 'siteid' )->getDataType() === 'integer'
+				) {
+					$colname = 'siteid';
+				}
+
+				if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'tsiteid' )
+					&& $schema->getColumnDetails( $table, 'tsiteid' )->getDataType() === 'integer'
+				) {
+					$colname = 'tsiteid';
+				}
+
+				if( $colname )
+				{
+					$tabledef = $dbalManager->listTableDetails( $table );
+					$newdef = clone $tabledef;
+
+					foreach( ['fk_macac_tid_tsid', 'fk_mslocla_siteid', 'fk_msloccu_siteid', 'fk_msloc_siteid'] as $foreignkey )
+					{
+						if( $newdef->hasForeignKey( $foreignkey ) ) {
+							$newdef->removeForeignKey( $foreignkey );
+						}
+					}
+
+					$type = new \Doctrine\DBAL\Types\StringType();
+					$newdef->changeColumn( $colname, ['type' => $type, 'length' => 255] );
+
+					$src = new \Doctrine\DBAL\Schema\Schema( [$tabledef], [], $config );
+					$dest = new \Doctrine\DBAL\Schema\Schema( [$newdef], [], $config );
+
+					$this->update( $src, $dest, $rname );
+
+					foreach( $this->getSites() as $siteid => $site )
+					{
+						$stmt = $conn->create( sprintf( 'UPDATE "%1$s" SET "%2$s" = ? WHERE "%2$s" = ?', $table, $colname ) );
+						$result = $stmt->bind( 1, $site )->bind( 2, $siteid )->execute();
+					}
+
+					$this->status( 'done' );
+				}
+				else
+				{
+					$this->status( 'OK' );
+				}
+			}
+
+			$dbm->release( $conn, $rname );
+		}
 	}
 }
