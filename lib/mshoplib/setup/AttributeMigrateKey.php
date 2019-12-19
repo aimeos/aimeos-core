@@ -49,13 +49,13 @@ class AttributeMigrateKey extends \Aimeos\MW\Setup\Task\Base
 
 		$this->msg( 'Checking table mshop_attribute', 1 );
 
-		if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'key' )
-			&& ( $item = $schema->getColumnDetails( $table, 'key' ) ) && ( $item->getMaxLength() !== 32 )
-		) {
+		if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'key' ) )
+		{
 			$dbm = $this->additional->getDatabaseManager();
 			$conn = $dbm->acquire( $rname );
+			$count = 0;
 
-			$select = sprintf( 'SELECT "id", "domain", "type", "code" FROM "%1$s"', $table );
+			$select = sprintf( 'SELECT "id", "domain", "type", "code" FROM "%1$s" WHERE "key" = \'\'', $table );
 			$update = sprintf( 'UPDATE "%1$s" SET "key" = ? WHERE "id" = ?', $table );
 
 			$stmt = $conn->create( $update );
@@ -66,11 +66,12 @@ class AttributeMigrateKey extends \Aimeos\MW\Setup\Task\Base
 				$stmt->bind( 1, md5( $row['domain'] . '|' . $row['type'] . '|' . $row['code'] ) );
 				$stmt->bind( 2, $row['id'] );
 				$stmt->execute()->finish();
+				$count++;
 			}
 
 			$dbm->release( $conn, $rname );
 
-			$this->status( 'done' );
+			$this->status( $count > 0 ? 'done' : 'OK' );
 		}
 		else
 		{
