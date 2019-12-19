@@ -92,8 +92,6 @@ abstract class DBBase
 			$submanager->deleteItems( $itemIds );
 		}
 
-		$this->manager->deleteItems( $itemIds );
-
 		return $this;
 	}
 
@@ -165,10 +163,7 @@ abstract class DBBase
 	 */
 	public function saveItem( \Aimeos\MShop\Product\Item\Iface $item, $fetch = true )
 	{
-		$item = $this->manager->saveItem( $item, true );
-		$this->rebuild( [$item->getId() => $item] );
-
-		return $item;
+		return $this->manager->saveItem( $item, $fetch );
 	}
 
 
@@ -187,7 +182,6 @@ abstract class DBBase
 			$list[$item->getId()] = $item;
 		}
 
-		$this->rebuild( $list );
 		return $list;
 	}
 
