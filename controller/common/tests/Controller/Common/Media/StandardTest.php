@@ -42,6 +42,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->exactly( 4 ) )->method( 'store' );
 
 		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
+
+		$file->expects( $this->once() )->method( 'getClientFilename' )
+			->will( $this->returnValue( 'test.gif' ) );
+
 		$file->expects( $this->once() )->method( 'getStream' )
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.gif' ) ) );
 
@@ -63,6 +67,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'store' );
 
 		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
+
+		$file->expects( $this->exactly( 2 ) )->method( 'getClientFilename' )
+			->will( $this->returnValue( 'test.gif' ) );
+
 		$file->expects( $this->once() )->method( 'getStream' )
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.pdf' ) ) );
 

@@ -31,7 +31,7 @@ class Factory
 	 * @return \Aimeos\Controller\Common\Order\Iface New order controller object
 	 * @throws \Aimeos\Controller\Common\Exception
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null ) : Iface
 	{
 		/** controller/common/order/name
 		 * Class name of the used order common controller implementation
@@ -104,9 +104,9 @@ class Factory
 	 * with the name name is requested.
 	 *
 	 * @param string $classname Full name of the class for which the object should be returned
-	 * @param null|\Aimeos\Controller\Common\Order\Iface $controller Frontend controller object
+	 * @param \Aimeos\Controller\Common\Order\Iface|null $controller Frontend controller object
 	 */
-	public static function inject( $classname, \Aimeos\Controller\Common\Order\Iface $controller = null )
+	public static function inject( string $classname, \Aimeos\Controller\Common\Order\Iface $controller = null )
 	{
 		self::$objects[trim( $classname, '\\' )] = $controller;
 	}

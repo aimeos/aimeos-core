@@ -30,7 +30,7 @@ class Factory
 	 * @return \Aimeos\Controller\Common\Media\Iface New media controller object
 	 * @throws \Aimeos\Controller\Common\Exception
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $name = null ) : Iface
 	{
 		/** controller/common/media/name
 		 * Class name of the used media common controller implementation
@@ -105,7 +105,7 @@ class Factory
 	 * @param string $classname Full name of the class for which the object should be returned
 	 * @param null|\Aimeos\Controller\Common\Media\Iface $controller Frontend controller object
 	 */
-	public static function inject( $classname, \Aimeos\Controller\Common\Media\Iface $controller = null )
+	public static function inject( string $classname, \Aimeos\Controller\Common\Media\Iface $controller = null )
 	{
 		self::$objects[trim( $classname, '\\' )] = $controller;
 	}

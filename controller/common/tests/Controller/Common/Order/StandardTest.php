@@ -177,7 +177,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 		$result = $method->invokeArgs( $object, array( -1, 0, 0 ) );
 
-		$this->assertFalse( $result );
+		$this->assertNull( $result );
 	}
 
 
@@ -278,7 +278,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateStatus()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem()->setId( -1 );
 		$statusItem = \Aimeos\MShop::create( $context, 'order/status' )->createItem();
 		$statusItem->setValue( 1 );
 
@@ -302,7 +302,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateStatusStock()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem()->setId( -1 );
 		$statusItem = \Aimeos\MShop::create( $context, 'order/status' )->createItem();
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
@@ -326,7 +326,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateStatusCoupons()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem()->setId( -1 );
 		$statusItem = \Aimeos\MShop::create( $context, 'order/status' )->createItem();
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )

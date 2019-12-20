@@ -54,7 +54,7 @@ class Standard
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item object
 	 */
-	public function block( \Aimeos\MShop\Order\Item\Iface $orderItem )
+	public function block( \Aimeos\MShop\Order\Item\Iface $orderItem ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, 1, -1 );
 		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE, 1, -1 );
@@ -82,7 +82,7 @@ class Standard
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item object
 	 */
-	public function unblock( \Aimeos\MShop\Order\Item\Iface $orderItem )
+	public function unblock( \Aimeos\MShop\Order\Item\Iface $orderItem ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, 0, +1 );
 		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE, 0, +1 );
@@ -106,7 +106,7 @@ class Standard
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item object
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Iface $orderItem )
+	public function update( \Aimeos\MShop\Order\Item\Iface $orderItem ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		switch( $orderItem->getPaymentStatus() )
 		{
@@ -134,8 +134,9 @@ class Standard
 	 * @param string $parentid Order ID
 	 * @param string $type Status type
 	 * @param string $value Status value
+	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
 	 */
-	protected function addStatusItem( $parentid, $type, $value )
+	protected function addStatusItem( string $parentid, string $type, string $value ) : Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/status' );
 
@@ -145,6 +146,8 @@ class Standard
 		$item->setValue( $value );
 
 		$manager->saveItem( $item, false );
+
+		return $this;
 	}
 
 
@@ -154,7 +157,7 @@ class Standard
 	 * @param string $prodId Product ID of the article whose stock level changed
 	 * @return array Associative list of article codes as keys and lists of bundle product codes as values
 	 */
-	protected function getBundleMap( $prodId )
+	protected function getBundleMap( string $prodId ) : array
 	{
 		$bundleMap = [];
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
@@ -186,7 +189,7 @@ class Standard
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item object
 	 */
-	protected function getContext()
+	protected function getContext() : \Aimeos\MShop\Context\Item\Iface
 	{
 		return $this->context;
 	}
@@ -198,9 +201,9 @@ class Standard
 	 * @param string $parentid Order ID
 	 * @param string $type Status type constant
 	 * @param string $status New status value stored along with the order item
-	 * @return \Aimeos\MShop\Order\Item\Status\Iface|false Order status item or false if no item is available
+	 * @return \Aimeos\MShop\Order\Item\Status\Iface|null Order status item or NULL if no item is available
 	 */
-	protected function getLastStatusItem( $parentid, $type, $status )
+	protected function getLastStatusItem( string $parentid, string $type, string $status ) : ?\Aimeos\MShop\Order\Item\Status\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/status' );
 
@@ -216,7 +219,7 @@ class Standard
 
 		$result = $manager->searchItems( $search );
 
-		return reset( $result );
+		return reset( $result ) ?: null;
 	}
 
 
@@ -227,7 +230,7 @@ class Standard
 	 * @param string $stockType Stock type code the stock items must belong to
 	 * @return \Aimeos\MShop\Stock\Item\Iface[] Associative list of stock IDs as keys and stock items as values
 	 */
-	protected function getStockItems( array $prodCodes, $stockType )
+	protected function getStockItems( array $prodCodes, string $stockType ) : array
 	{
 		$stockManager = \Aimeos\MShop::create( $this->context, 'stock' );
 
@@ -247,9 +250,10 @@ class Standard
 	 * Increases or decreses the coupon code counts referenced in the order by the given value.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
-	 * @param integer $how Positive or negative integer number for increasing or decreasing the coupon count
+	 * @param int $how Positive or negative integer number for increasing or decreasing the coupon count
+	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
 	 */
-	protected function updateCoupons( \Aimeos\MShop\Order\Item\Iface $orderItem, $how = +1 )
+	protected function updateCoupons( \Aimeos\MShop\Order\Item\Iface $orderItem, int $how = +1 )
 	{
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop::create( $context, 'order/base/coupon' );
@@ -285,6 +289,8 @@ class Standard
 			$couponCodeManager->rollback();
 			throw $e;
 		}
+
+		return $this;
 	}
 
 
@@ -294,13 +300,14 @@ class Standard
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @param string $type Constant from \Aimeos\MShop\Order\Item\Status\Base, e.g. STOCK_UPDATE or COUPON_UPDATE
 	 * @param string $status New status value stored along with the order item
-	 * @param integer $value Number to increse or decrease the stock level or coupon code count
+	 * @param int $value Number to increse or decrease the stock level or coupon code count
+	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
 	 */
-	protected function updateStatus( \Aimeos\MShop\Order\Item\Iface $orderItem, $type, $status, $value )
+	protected function updateStatus( \Aimeos\MShop\Order\Item\Iface $orderItem, string $type, string $status, int $value )
 	{
 		$statusItem = $this->getLastStatusItem( $orderItem->getId(), $type, $status );
 
-		if( $statusItem !== false && $statusItem->getValue() == $status ) {
+		if( $statusItem && $statusItem->getValue() == $status ) {
 			return;
 		}
 
@@ -310,7 +317,7 @@ class Standard
 			$this->updateCoupons( $orderItem, $value );
 		}
 
-		$this->addStatusItem( $orderItem->getId(), $type, $status );
+		return $this->addStatusItem( $orderItem->getId(), $type, $status );
 	}
 
 
@@ -318,9 +325,10 @@ class Standard
 	 * Increases or decreses the stock levels of the products referenced in the order by the given value.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
-	 * @param integer $how Positive or negative integer number for increasing or decreasing the stock levels
+	 * @param int $how Positive or negative integer number for increasing or decreasing the stock levels
+	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
 	 */
-	protected function updateStock( \Aimeos\MShop\Order\Item\Iface $orderItem, $how = +1 )
+	protected function updateStock( \Aimeos\MShop\Order\Item\Iface $orderItem, int $how = +1 )
 	{
 		$context = $this->getContext();
 		$stockManager = \Aimeos\MShop::create( $context, 'stock' );
@@ -364,6 +372,8 @@ class Standard
 			$stockManager->rollback();
 			throw $e;
 		}
+
+		return $this;
 	}
 
 
@@ -372,8 +382,9 @@ class Standard
 	 *
 	 * @param string $prodId Unique product ID
 	 * @param string $stockType Unique stock type
+	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
 	 */
-	protected function updateStockBundle( $prodId, $stockType )
+	protected function updateStockBundle( string $prodId, string $stockType )
 	{
 		if( ( $bundleMap = $this->getBundleMap( $prodId ) ) === [] ) {
 			return;
@@ -413,6 +424,8 @@ class Standard
 				$stockManager->saveItem( $item );
 			}
 		}
+
+		return $this;
 	}
 
 
@@ -421,8 +434,9 @@ class Standard
 	 *
 	 * @param string $prodId Unique product ID
 	 * @param string $stocktype Unique stock type
+	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
 	 */
-	protected function updateStockSelection( $prodId, $stocktype )
+	protected function updateStockSelection( string $prodId, string $stocktype )
 	{
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$stockManager = \Aimeos\MShop::create( $this->context, 'stock' );
@@ -461,5 +475,7 @@ class Standard
 
 		$selStockItem->setStockLevel( $sum );
 		$stockManager->saveItem( $selStockItem, false );
+
+		return $this;
 	}
 }

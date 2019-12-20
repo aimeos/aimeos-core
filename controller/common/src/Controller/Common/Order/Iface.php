@@ -48,7 +48,7 @@ interface Iface
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item object
 	 */
-	public function block( \Aimeos\MShop\Order\Item\Iface $orderItem );
+	public function block( \Aimeos\MShop\Order\Item\Iface $orderItem ) : \Aimeos\MShop\Order\Item\Iface;
 
 
 	/**
@@ -70,7 +70,7 @@ interface Iface
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item object
 	 */
-	public function unblock( \Aimeos\MShop\Order\Item\Iface $orderItem );
+	public function unblock( \Aimeos\MShop\Order\Item\Iface $orderItem ) : \Aimeos\MShop\Order\Item\Iface;
 
 
 	/**
@@ -88,5 +88,5 @@ interface Iface
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item object
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Iface $orderItem );
+	public function update( \Aimeos\MShop\Order\Item\Iface $orderItem ) : \Aimeos\MShop\Order\Item\Iface;
 }

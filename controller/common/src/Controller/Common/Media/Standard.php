@@ -44,7 +44,7 @@ class Standard
 	 * @param string $fsname Name of the file system to store the files at
 	 * @return \Aimeos\MShop\Media\Item\Iface Added media item
 	 */
-	public function add( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, $fsname = 'fs-media' )
+	public function add( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		$this->checkFileUpload( $file );
 
@@ -74,7 +74,7 @@ class Standard
 	 * @param string $fsname Name of the file system to delete the files from
 	 * @return \Aimeos\MShop\Media\Item\Iface Copied media item with new files
 	 */
-	public function copy( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' )
+	public function copy( \Aimeos\MShop\Media\Item\Iface $item, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'media' );
 
@@ -121,8 +121,9 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be deleted
 	 * @param string $fsname Name of the file system to delete the files from
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item with deleted files
 	 */
-	public function delete( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' )
+	public function delete( \Aimeos\MShop\Media\Item\Iface $item, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'media' );
 		$search = $manager->createSearch()->setSlice( 0, 2 );
@@ -168,7 +169,7 @@ class Standard
 	 * @param string $fsname Name of the file system to rescale the files from
 	 * @return \Aimeos\MShop\Media\Item\Iface Rescaled media item
 	 */
-	public function scale( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' )
+	public function scale( \Aimeos\MShop\Media\Item\Iface $item, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		$path = $item->getUrl();
 		$media = $this->getMediaFile( $this->getFileContent( $path, $fsname ) );
@@ -186,13 +187,13 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item which will contains the image URLs afterwards
 	 * @param \Aimeos\MW\Media\Image\Iface $media Image object to scale
-	 * @param string $path Path to the file or URL, empty or random for uploaded files
+	 * @param string|null $path Path to the file or URL, empty or random for uploaded files
 	 * @param string $fsname File system name the file is located at
 	 * @return \Aimeos\MShop\Media\Item\Iface Updated media item with URLs
 	 */
-	protected function addImages( \Aimeos\MShop\Media\Item\Iface $item, \Aimeos\MW\Media\Image\Iface $media, $path, $fsname )
+	protected function addImages( \Aimeos\MShop\Media\Item\Iface $item, \Aimeos\MW\Media\Image\Iface $media, string $path = null, string $fsname ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		if( $path == null )
+		if( $path === null )
 		{
 			$path = $this->getFilePath( rand(), 'files', $media->getMimeType() );
 			$this->store( $path, $media->save(), $fsname );
@@ -251,7 +252,7 @@ class Standard
 	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
 	 * @return \Aimeos\MW\Media\Image\Iface[] Associative list of image width as keys and scaled media object as values
 	 */
-	protected function createPreviews( \Aimeos\MW\Media\Image\Iface $media )
+	protected function createPreviews( \Aimeos\MW\Media\Image\Iface $media ) : array
 	{
 		$list = [];
 		$config = $this->context->getConfig();
@@ -331,7 +332,7 @@ class Standard
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item
 	 */
-	protected function getContext()
+	protected function getContext() : \Aimeos\MShop\Context\Item\Iface
 	{
 		return $this->context;
 	}
@@ -345,7 +346,7 @@ class Standard
 	 * @return string File content
 	 * @throws \Aimeos\Controller\Common\Exception If no file is found
 	 */
-	protected function getFileContent( $path, $fsname )
+	protected function getFileContent( string $path, string $fsname ) : string
 	{
 		if( $path !== '' )
 		{
@@ -379,7 +380,7 @@ class Standard
 	 * @param string $mimeext Mime type or extension of the file
 	 * @return string New file name including the file path
 	 */
-	protected function getFilePath( $filename, $type, $mimeext )
+	protected function getFilePath( string $filename, string $type, string $mimeext ) : string
 	{
 		/** controller/common/media/standard/extensions
 		 * Available files extensions for mime types of uploaded files
@@ -410,7 +411,7 @@ class Standard
 	 * @param string $file Path to the file or file content
 	 * @return \Aimeos\MW\Media\Iface Media object
 	 */
-	protected function getMediaFile( $file )
+	protected function getMediaFile( string $file ) : \Aimeos\MW\Media\Iface
 	{
 		/** controller/common/media/standard/options
 		 * Options used for processing the uploaded media files
@@ -444,7 +445,7 @@ class Standard
 	 * @param string $mimetype Mime type like "image/png"
 	 * @return string Relative path to the mime icon
 	 */
-	protected function getMimeIcon( $mimetype )
+	protected function getMimeIcon( string $mimetype ) : string
 	{
 		$config = $this->context->getConfig();
 
@@ -494,7 +495,7 @@ class Standard
 	 * @return string New mime type
 	 * @throws \Aimeos\Controller\Common\Exception If no mime types are configured
 	 */
-	protected function getMimeType( \Aimeos\MW\Media\Image\Iface $media, $type )
+	protected function getMimeType( \Aimeos\MW\Media\Image\Iface $media, string $type ) : string
 	{
 		$mimetype = $media->getMimetype();
 		$config = $this->context->getConfig();
@@ -549,7 +550,7 @@ class Standard
 	 * @param string $fsname Name of the file system to store the files at
 	 * @return \Aimeos\Controller\Common\Media\Iface Self object for fluent interface
 	 */
-	protected function store( $filepath, $content, $fsname )
+	protected function store( string $filepath, string $content, string $fsname ) : Iface
 	{
 		$this->context->getFilesystemManager()->get( $fsname )->write( $filepath, $content );
 		return $this;
