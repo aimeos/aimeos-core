@@ -29,7 +29,7 @@ abstract class Base
 	 * @param string $classname Full name of the class for which the object should be returned
 	 * @param \Aimeos\Controller\Jobs\Iface|null $controller Frontend controller object
 	 */
-	public static function injectController( $classname, \Aimeos\Controller\Jobs\Iface $controller = null )
+	public static function injectController( string $classname, \Aimeos\Controller\Jobs\Iface $controller = null )
 	{
 		self::$objects[$classname] = $controller;
 	}
@@ -46,7 +46,7 @@ abstract class Base
 	 * @return \Aimeos\Controller\Jobs\Iface Controller object
 	 */
 	protected static function addDecorators( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
-		\Aimeos\Controller\Jobs\Iface $controller, array $decorators, $classprefix )
+		\Aimeos\Controller\Jobs\Iface $controller, array $decorators, string $classprefix ) : \Aimeos\Controller\Jobs\Iface
 	{
 		$iface = \Aimeos\Controller\Jobs\Common\Decorator\Iface::class;
 
@@ -85,7 +85,7 @@ abstract class Base
 	 * @return \Aimeos\Controller\Jobs\Iface Controller object
 	 */
 	protected static function addControllerDecorators( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
-		\Aimeos\Controller\Jobs\Iface $controller, $domain )
+		\Aimeos\Controller\Jobs\Iface $controller, string $domain ) : \Aimeos\Controller\Jobs\Iface
 	{
 		if( !is_string( $domain ) || $domain === '' ) {
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
@@ -151,7 +151,7 @@ abstract class Base
 	 * @return \Aimeos\Controller\Jobs\Iface Controller object
 	 */
 	protected static function createController( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
-		$classname, $interface )
+		string $classname, string $interface ) : \Aimeos\Controller\Jobs\Iface
 	{
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];

@@ -50,7 +50,7 @@ abstract class Base
 	 * @return mixed Returns the value of the called method
 	 * @throws \Aimeos\Controller\Jobs\Exception If method call failed
 	 */
-	public function __call( $name, array $param )
+	public function __call( string $name, array $param )
 	{
 		return call_user_func_array( array( $this->controller, $name ), $param );
 	}
@@ -61,7 +61,7 @@ abstract class Base
 	 *
 	 * @return string Name of the job
 	 */
-	public function getName()
+	public function getName() : string
 	{
 		return $this->controller->getName();
 	}
@@ -72,7 +72,7 @@ abstract class Base
 	 *
 	 * @return string Description of the job
 	 */
-	public function getDescription()
+	public function getDescription() : string
 	{
 		return $this->controller->getDescription();
 	}
@@ -94,7 +94,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface context object implementing \Aimeos\MShop\Context\Item\Iface
 	 */
-	protected function getContext()
+	protected function getContext() : \Aimeos\MShop\Context\Item\Iface
 	{
 		return $this->context;
 	}
@@ -105,7 +105,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\Bootstrap \Aimeos\Bootstrap object
 	 */
-	protected function getAimeos()
+	protected function getAimeos() : \Aimeos\Bootstrap
 	{
 		return $this->aimeos;
 	}

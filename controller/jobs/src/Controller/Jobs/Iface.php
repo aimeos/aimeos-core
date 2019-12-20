@@ -25,14 +25,14 @@ interface Iface
 	 *
 	 * @return string Name of the job
 	 */
-	public function getName();
+	public function getName() : string;
 
 	/**
 	 * Returns the localized description of the job.
 	 *
 	 * @return string Description of the job
 	 */
-	public function getDescription();
+	public function getDescription() : string;
 
 	/**
 	 * Executes the job.

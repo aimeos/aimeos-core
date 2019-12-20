@@ -44,7 +44,7 @@ abstract class Base
 	 * @param array $param List of method parameter
 	 * @throws \Aimeos\Controller\Jobs\Exception If method call failed
 	 */
-	public function __call( $name, array $param )
+	public function __call( string $name, array $param )
 	{
 		throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
 	}
@@ -55,7 +55,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
-	protected function getContext()
+	protected function getContext() : \Aimeos\MShop\Context\Item\Iface
 	{
 		return $this->context;
 	}
@@ -66,7 +66,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\Bootstrap \Aimeos\Bootstrap object
 	 */
-	protected function getAimeos()
+	protected function getAimeos() : \Aimeos\Bootstrap
 	{
 		return $this->aimeos;
 	}
@@ -80,7 +80,7 @@ abstract class Base
 	 * @param mixed $default Default value if key isn't found
 	 * @return mixed Value for the key in the list or the default value
 	 */
-	protected function getValue( array $list, $key, $default = null )
+	protected function getValue( array $list, string $key, $default = null )
 	{
 		return isset( $list[$key] ) && ( $value = trim( $list[$key] ) ) !== '' ? $value : $default;
 	}
