@@ -57,7 +57,7 @@ class Standard
 		}
 		else
 		{
-			$filepath = $this->getFilePath( $file->getClientFilename(), 'files', $mimetype );
+			$filepath = $this->getFilePath( $file->getClientFilename() ?: rand(), 'files', $mimetype );
 
 			$this->store( $filepath, $media->save(), $fsname );
 			$item->setUrl( $filepath )->setPreviews( [1 => $this->getMimeIcon( $mimetype )] )->setMimeType( $mimetype );
