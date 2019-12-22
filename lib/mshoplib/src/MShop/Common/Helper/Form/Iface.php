@@ -21,12 +21,26 @@ namespace Aimeos\MShop\Common\Helper\Form;
 interface Iface
 {
 	/**
+	 * Returns if the URL points to an external site.
+	 *
+	 * @return boolean True if URL points to an external site, false if it stays on the same site
+	 */
+	public function getExternal();
+
+	/**
+	 * Sets if the URL points to an external site.
+	 *
+	 * @param boolean $value True if URL points to an external site, false if it stays on the same site
+	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
+	 */
+	public function setExternal( $value );
+
+	/**
 	 * Returns the url.
 	 *
 	 * @return string Url
 	 */
 	public function getUrl();
-
 
 	/**
 	 * Sets the url.
@@ -36,14 +50,12 @@ interface Iface
 	 */
 	public function setUrl( $url );
 
-
 	/**
 	 * Returns the method.
 	 *
 	 * @return string Method
 	 */
 	public function getMethod();
-
 
 	/**
 	 * Sets the method.
@@ -53,7 +65,6 @@ interface Iface
 	 */
 	public function setMethod( $method );
 
-
 	/**
 	 * Returns the value for the given key.
 	 *
@@ -61,7 +72,6 @@ interface Iface
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface Attribute item for the given key
 	 */
 	public function getValue( $key );
-
 
 	/**
 	 * Sets the value for the key.
@@ -72,7 +82,6 @@ interface Iface
 	 */
 	public function setValue( $key, \Aimeos\MW\Criteria\Attribute\Iface $value );
 
-
 	/**
 	 * Returns the all key/value pairs.
 	 *
@@ -80,14 +89,12 @@ interface Iface
 	 */
 	public function getValues();
 
-
 	/**
 	 * Returns the custom HTML string.
 	 *
 	 * @return string HTML string
 	 */
 	public function getHtml();
-
 
 	/**
 	 * Sets the custom HTML string.
