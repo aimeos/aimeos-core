@@ -31,7 +31,7 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $baseUrl URL which acts as base for all constructed URLs
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, string $baseUrl )
+	public function __construct( \Aimeos\MW\View\Iface $view, string $baseUrl = '' )
 	{
 		parent::__construct( $view );
 
