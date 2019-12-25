@@ -30,7 +30,7 @@ class Factory
 	 * @throws \Aimeos\MShop\Subscription\Exception|\Aimeos\MShop\Exception If requested manager
 	 * implementation couldn't be found or initialisation fails
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/subscription/manager/name
 		 * Class name of the used subscription manager implementation
@@ -69,14 +69,12 @@ class Factory
 			$name = $context->getConfig()->get( 'mshop/subscription/manager/name', 'Standard' );
 		}
 
-		if( ctype_alnum( $name ) === false )
-		{
-			$classname = is_string( $name ) ? '\Aimeos\MShop\Subscription\Manager\\' . $name : '<not a string>';
-			throw new \Aimeos\MShop\Subscription\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
-		}
-
 		$iface = \Aimeos\MShop\Subscription\Manager\Iface::class;
 		$classname = '\Aimeos\MShop\Subscription\Manager\\' . $name;
+
+		if( ctype_alnum( $name ) === false ) {
+			throw new \Aimeos\MShop\Subscription\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+		}
 
 		$manager = self::createManager( $context, $classname, $iface );
 

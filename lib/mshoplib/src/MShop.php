@@ -25,11 +25,11 @@ class MShop
 	/**
 	 * Enables or disables caching of class instances and clears cache
 	 *
-	 * @param boolean $value True to enable caching, false to disable it.
+	 * @param bool $value True to enable caching, false to disable it.
 	 */
-	public static function cache( $value )
+	public static function cache( bool $value )
 	{
-		self::$cache = (boolean) $value;
+		self::$cache = (bool) $value;
 		self::$context = null;
 		self::$objects = [];
 	}
@@ -52,7 +52,7 @@ class MShop
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 * @throws \Aimeos\MShop\Exception If the given path is invalid or the manager wasn't found
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $path )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $path ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( empty( $path ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Manager path is empty' ) );
@@ -124,7 +124,7 @@ class MShop
 	 * @param string $path Name of the domain (and sub-managers) separated by slashes, e.g "product/list"
 	 * @param \Aimeos\MShop\Common\Manager\Iface|null $object Manager object for the given manager path or null to clear
 	 */
-	public static function inject( $path, \Aimeos\MShop\Common\Manager\Iface $object = null )
+	public static function inject( string $path, \Aimeos\MShop\Common\Manager\Iface $object = null )
 	{
 		self::$objects[$path] = $object;
 	}

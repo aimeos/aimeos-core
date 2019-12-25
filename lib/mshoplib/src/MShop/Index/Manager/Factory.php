@@ -29,7 +29,7 @@ class Factory
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 * @throws \Aimeos\MShop\Index\Exception If requested manager implementation couldn't be found
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/index/manager/name
 		 * Class name of the used index manager implementation
@@ -68,14 +68,12 @@ class Factory
 			$name = $context->getConfig()->get( 'mshop/index/manager/name', 'Standard' );
 		}
 
-		if( ctype_alnum( $name ) === false )
-		{
-			$classname = is_string( $name ) ? '\Aimeos\MShop\Index\Manager\\' . $name : '<not a string>';
-			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
-		}
-
 		$iface = \Aimeos\MShop\Index\Manager\Iface::class;
 		$classname = '\Aimeos\MShop\Index\Manager\\' . $name;
+
+		if( ctype_alnum( $name ) === false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+		}
 
 		$manager = self::createManager( $context, $classname, $iface );
 

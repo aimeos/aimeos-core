@@ -27,9 +27,9 @@ class Factory
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param string|null $name Manager name
-	 * @return \Aimeos\MAdmin\Cache\Manager\Iface Cache manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Cache manager object
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** madmin/cache/manager/name
 		 * Class name of the used cache manager implementation
@@ -68,14 +68,12 @@ class Factory
 			$name = $context->getConfig()->get( 'madmin/cache/manager/name', 'Standard' );
 		}
 
-		if( ctype_alnum( $name ) === false )
-		{
-			$classname = is_string( $name ) ? '\Aimeos\MAdmin\Cache\Manager\\' . $name : '<not a string>';
-			throw new \Aimeos\MAdmin\Cache\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
-		}
-
 		$iface = \Aimeos\MAdmin\Cache\Manager\Iface::class;
 		$classname = '\Aimeos\MAdmin\Cache\Manager\\' . $name;
+
+		if( ctype_alnum( $name ) === false ) {
+			throw new \Aimeos\MAdmin\Cache\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+		}
 
 		$manager = self::createManager( $context, $classname, $iface );
 

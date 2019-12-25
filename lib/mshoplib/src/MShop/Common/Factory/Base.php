@@ -31,7 +31,7 @@ abstract class Base
 	 * @param string $classname Full name of the class for which the object should be returned
 	 * @param \Aimeos\MShop\Common\Manager\Iface|null $manager Manager object or null for removing the manager object
 	 */
-	public static function injectManager( $classname, \Aimeos\MShop\Common\Manager\Iface $manager = null )
+	public static function injectManager( string $classname, \Aimeos\MShop\Common\Manager\Iface $manager = null )
 	{
 		self::$objects[$classname] = $manager;
 	}
@@ -47,7 +47,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected static function addDecorators( \Aimeos\MShop\Context\Item\Iface $context,
-		\Aimeos\MShop\Common\Manager\Iface $manager, array $decorators, $classprefix )
+		\Aimeos\MShop\Common\Manager\Iface $manager, array $decorators, string $classprefix ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		foreach( $decorators as $name )
 		{
@@ -79,7 +79,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected static function addManagerDecorators( \Aimeos\MShop\Context\Item\Iface $context,
-		\Aimeos\MShop\Common\Manager\Iface $manager, $domain )
+		\Aimeos\MShop\Common\Manager\Iface $manager, string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$config = $context->getConfig();
 
@@ -138,7 +138,7 @@ abstract class Base
 	 * @param string $interface Name of the manager interface
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $classname, $interface )
+	protected static function createManager( \Aimeos\MShop\Context\Item\Iface $context, string $classname, string $interface ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];

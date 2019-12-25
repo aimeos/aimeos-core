@@ -31,7 +31,7 @@ class Factory
 	 * @throws \Aimeos\MShop\Customer\Exception|\Aimeos\MShop\Exception If requested manager
 	 * implementation couldn't be found or initialisation fails
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/customer/manager/name
 		 * Class name of the used customer manager implementation
@@ -70,14 +70,12 @@ class Factory
 			$name = $context->getConfig()->get( 'mshop/customer/manager/name', 'Standard' );
 		}
 
-		if( ctype_alnum( $name ) === false )
-		{
-			$classname = is_string( $name ) ? '\Aimeos\MShop\Customer\Manager\\' . $name : '<not a string>';
-			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
-		}
-
 		$iface = \Aimeos\MShop\Customer\Manager\Iface::class;
 		$classname = '\Aimeos\MShop\Customer\Manager\\' . $name;
+
+		if( ctype_alnum( $name ) === false ) {
+			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+		}
 
 		$manager = self::createManager( $context, $classname, $iface );
 

@@ -27,9 +27,9 @@ class Factory
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param string|null $name Manager name
-	 * @return \Aimeos\MAdmin\Log\Manager\Iface Log manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Log manager object
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** madmin/log/manager/name
 		 * Class name of the used log manager implementation

@@ -30,7 +30,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected static function addManagerDecorators( \Aimeos\MShop\Context\Item\Iface $context,
-		\Aimeos\MShop\Common\Manager\Iface $manager, $domain )
+		\Aimeos\MShop\Common\Manager\Iface $manager, string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$config = $context->getConfig();
 

@@ -27,9 +27,9 @@ class Factory
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param string|null $name Manager name
-	 * @return \Aimeos\MAdmin\Job\Manager\Iface Job manager object
+	 * @return \Aimeos\MShop\Common\Manager\Iface Job manager object
 	 */
-	public static function create( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
+	public static function create( \Aimeos\MShop\Context\Item\Iface $context, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** madmin/job/manager/name
 		 * Class name of the used job manager implementation
@@ -68,14 +68,12 @@ class Factory
 			$name = $context->getConfig()->get( 'madmin/job/manager/name', 'Standard' );
 		}
 
-		if( ctype_alnum( $name ) === false )
-		{
-			$classname = is_string( $name ) ? '\Aimeos\MAdmin\Job\Manager\\' . $name : '<not a string>';
-			throw new \Aimeos\MAdmin\Job\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
-		}
-
 		$iface = \Aimeos\MAdmin\Job\Manager\Iface::class;
 		$classname = '\Aimeos\MAdmin\Job\Manager\\' . $name;
+
+		if( ctype_alnum( $name ) === false ) {
+			throw new \Aimeos\MAdmin\Job\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+		}
 
 		$manager = self::createManager( $context, $classname, $iface );
 

@@ -26,8 +26,9 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @param string $managerpath Manager sub-names separated by slashes, e.g. "list/type"
 	 * @param string $domain Domain name in lower case, e.g. "product"
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager with decorators added
 	 */
-	protected function addManagerDecorators( \Aimeos\MShop\Common\Manager\Iface $manager, $managerpath, $domain )
+	protected function addManagerDecorators( \Aimeos\MShop\Common\Manager\Iface $manager, string $managerpath, string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
@@ -87,7 +88,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions
 	 */
-	protected function getSubManagerBase( $domain, $manager, $name )
+	protected function getSubManagerBase( string $domain, string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$domain = strtolower( $domain );
 		$manager = strtolower( $manager );
