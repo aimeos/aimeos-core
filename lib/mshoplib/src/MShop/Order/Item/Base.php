@@ -158,7 +158,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'order';
 	}
@@ -167,31 +167,33 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	/**
 	 * Checks if the given delivery status is a valid constant.
 	 *
-	 * @param integer $value Delivery status constant defined in \Aimeos\MShop\Order\Item\Base
+	 * @param int $value Delivery status constant defined in \Aimeos\MShop\Order\Item\Base
+	 * @return int Delivery status constant defined in \Aimeos\MShop\Order\Item\Base
 	 * @throws \Aimeos\MShop\Order\Exception If delivery status is invalid
 	 */
-	protected function checkDeliveryStatus( $value )
+	protected function checkDeliveryStatus( int $value )
 	{
 		if( $value < \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED || $value > \Aimeos\MShop\Order\Item\Base::STAT_RETURNED ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order delivery status "%1$s" not within allowed range', $value ) );
 		}
 
-		return (int) $value;
+		return $value;
 	}
 
 
 	/**
 	 * Checks the given payment status is a valid constant.
 	 *
-	 * @param integer $value Payment status constant defined in \Aimeos\MShop\Order\Item\Base
+	 * @param int $value Payment status constant defined in \Aimeos\MShop\Order\Item\Base
+	 * @return int Payment status constant defined in \Aimeos\MShop\Order\Item\Base
 	 * @throws \Aimeos\MShop\Order\Exception If payment status is invalid
 	 */
-	protected function checkPaymentStatus( $value )
+	protected function checkPaymentStatus( int $value )
 	{
 		if( $value < \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED || $value > \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order payment status "%1$s" not within allowed range', $value ) );
 		}
 
-		return (int) $value;
+		return $value;
 	}
 }

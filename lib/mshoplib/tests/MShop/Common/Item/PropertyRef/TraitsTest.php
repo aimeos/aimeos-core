@@ -9,16 +9,16 @@
 namespace Aimeos\MShop\Common\Item\PropertyRef;
 
 
-class TraitsClass extends \Aimeos\MShop\Common\Item\Base implements \Aimeos\MShop\Common\Item\PropertyRef\Iface
+class TraitsClass extends \Aimeos\MShop\Common\Item\Base implements Iface
 {
 	use \Aimeos\MShop\Common\Item\PropertyRef\Traits;
 
-	public function getId()
+	public function getId() : ?string
 	{
 		return 'id';
 	}
 
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'product';
 	}

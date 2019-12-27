@@ -28,7 +28,7 @@ interface Iface
 	 *
 	 * @return string Service item code
 	 */
-	public function getCode();
+	public function getCode() : string;
 
 	/**
 	 * Sets a new code for the service item.
@@ -36,14 +36,14 @@ interface Iface
 	 * @param string $code Code as defined by the service provider
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function setCode( $code );
+	public function setCode( string $code ) : \Aimeos\MShop\Service\Item\Iface;
 
 	/**
 	 * Returns the name of the service provider the item belongs to.
 	 *
 	 * @return string Name of the service provider
 	 */
-	public function getProvider();
+	public function getProvider() : string;
 
 	/**
 	 * Sets the new name of the service provider the item belongs to.
@@ -51,14 +51,14 @@ interface Iface
 	 * @param string $provider Name of the service provider
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function setProvider( $provider );
+	public function setProvider( string $provider ) : \Aimeos\MShop\Service\Item\Iface;
 
 	/**
 	 * Returns the label of the service item.
 	 *
 	 * @return string Service item label
 	 */
-	public function getLabel();
+	public function getLabel() : string;
 
 	/**
 	 * Sets a new label for the service item.
@@ -66,5 +66,5 @@ interface Iface
 	 * @param string $label Label as defined by the service provider
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function setLabel( $label );
+	public function setLabel( string $label ) : \Aimeos\MShop\Service\Item\Iface;
 }

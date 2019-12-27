@@ -39,7 +39,7 @@ class Standard extends Base implements Iface
 	 */
 	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [],
 		array $listItems = [], array $refItems = [], array $addrItems = [], array $propItems = [],
-		\Aimeos\MShop\Common\Helper\Password\Iface $helper = null, $salt = null )
+		\Aimeos\MShop\Common\Helper\Password\Iface $helper = null, string $salt = null )
 	{
 		parent::__construct( $address, $values, $listItems, $refItems, $addrItems, $propItems );
 
@@ -52,8 +52,9 @@ class Standard extends Base implements Iface
 	 * Sets the new ID of the item.
 	 *
 	 * @param string|null $id ID of the item
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setId( $id )
+	public function setId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		parent::setId( $id );
 
@@ -69,9 +70,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Label of the customer item
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
-		return (string) $this->get( 'customer.label', '' );
+		return $this->get( 'customer.label', '' );
 	}
 
 
@@ -81,32 +82,32 @@ class Standard extends Base implements Iface
 	 * @param string $value Label of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setLabel( $value )
+	public function setLabel( string $value ) : \Aimeos\MShop\Customer\Item\Iface
 	{
-		return $this->set( 'customer.label', (string) $value );
+		return $this->set( 'customer.label', $value );
 	}
 
 
 	/**
 	 * Returns the status of the item.
 	 *
-	 * @return integer Status of the item
+	 * @return int Status of the item
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
-		return (int) $this->get( 'customer.status', 1 );
+		return $this->get( 'customer.status', 1 );
 	}
 
 
 	/**
 	 * Sets the status of the item.
 	 *
-	 * @param integer $value Status of the item
+	 * @param int $value Status of the item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setStatus( $value )
+	public function setStatus( int $value ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'customer.status', (int) $value );
+		return $this->set( 'customer.status', $value );
 	}
 
 
@@ -115,7 +116,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Code of the customer item
 	 */
-	public function getCode()
+	public function getCode() : string
 	{
 		return (string) $this->get( 'customer.code', $this->getPaymentAddress()->getEmail() );
 	}
@@ -127,7 +128,7 @@ class Standard extends Base implements Iface
 	 * @param string $value Code of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setCode( $value )
+	public function setCode( string $value ) : \Aimeos\MShop\Customer\Item\Iface
 	{
 		return $this->set( 'customer.code', $this->checkCode( $value, 255 ) );
 	}
@@ -138,7 +139,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string|null Birthday in YYYY-MM-DD format
 	 */
-	public function getBirthday()
+	public function getBirthday() : ?string
 	{
 		return $this->get( 'customer.birthday' );
 	}
@@ -150,7 +151,7 @@ class Standard extends Base implements Iface
 	 * @param string|null $value Birthday of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setBirthday( $value )
+	public function setBirthday( string $value = null ) : \Aimeos\MShop\Customer\Item\Iface
 	{
 		return $this->set( 'customer.birthday', $this->checkDateOnlyFormat( $value ) );
 	}
@@ -161,7 +162,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string
 	 */
-	public function getPassword()
+	public function getPassword() : string
 	{
 		return (string) $this->get( 'customer.password', '' );
 	}
@@ -173,13 +174,13 @@ class Standard extends Base implements Iface
 	 * @param string $value password of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setPassword( $value )
+	public function setPassword( string $value ) : \Aimeos\MShop\Customer\Item\Iface
 	{
 		if( (string) $value !== $this->getPassword() && $this->helper !== null ) {
 			$value = $this->helper->encode( $value, $this->salt );
 		}
 
-		return $this->set( 'customer.password', (string) $value );
+		return $this->set( 'customer.password', $value );
 	}
 
 
@@ -188,7 +189,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string|null Last verification date of the customer (YYYY-MM-DD format) or null if unknown
 	 */
-	public function getDateVerified()
+	public function getDateVerified() : ?string
 	{
 		return $this->get( 'customer.dateverified' );
 	}
@@ -200,7 +201,7 @@ class Standard extends Base implements Iface
 	 * @param string|null $value Latest verification date of the customer (YYYY-MM-DD) or null if unknown
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setDateVerified( $value )
+	public function setDateVerified( string $value = null ) : \Aimeos\MShop\Customer\Item\Iface
 	{
 		return $this->set( 'customer.dateverified', $this->checkDateOnlyFormat( $value ) );
 	}
@@ -211,7 +212,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @return array List of group IDs
 	 */
-	public function getGroups()
+	public function getGroups() : array
 	{
 		if( !isset( $this->groups ) )
 		{
@@ -235,7 +236,7 @@ class Standard extends Base implements Iface
 	 * @param string[] $ids List of group IDs
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setGroups( array $ids )
+	public function setGroups( array $ids ) : \Aimeos\MShop\Customer\Item\Iface
 	{
 		$list = $this->getGroups();
 
@@ -252,9 +253,9 @@ class Standard extends Base implements Iface
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getStatus() > 0;
 	}
@@ -264,10 +265,10 @@ class Standard extends Base implements Iface
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -295,10 +296,10 @@ class Standard extends Base implements Iface
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 
@@ -323,7 +324,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @param string|null $date ISO date in YYYY-MM-DD format or null for no date
 	 */
-	protected function checkDateOnlyFormat( $date )
+	protected function checkDateOnlyFormat( string $date = null ) : ?string
 	{
 		if( $date !== null && $date !== '' )
 		{
@@ -333,5 +334,7 @@ class Standard extends Base implements Iface
 
 			return (string) $date;
 		}
+
+		return null;
 	}
 }

@@ -26,29 +26,29 @@ interface Iface
 	 *
 	 * @return string Unique key consisting of type/language/value
 	 */
-	public function getKey();
+	public function getKey() : string;
 
 	/**
 	 * Returns the language id of the property item
 	 *
-	 * @return string Language ID of the property item
+	 * @return string|null Language ID of the property item
 	 */
-	public function getLanguageId();
+	public function getLanguageId() : ?string;
 
 	/**
 	 * Sets the Language Id of the property item
 	 *
-	 * @param string $id New Language ID of the property item
+	 * @param string|null $id New Language ID of the property item
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface Common property item for chaining method calls
 	 */
-	public function setLanguageId( $id );
+	public function setLanguageId( string $id = null ) : \Aimeos\MShop\Common\Item\Property\Iface;
 
 	/**
 	 * Returns the value of the property item.
 	 *
 	 * @return string Value of the property item
 	 */
-	public function getValue();
+	public function getValue() : string;
 
 	/**
 	 * Sets the new value of the property item.
@@ -56,6 +56,6 @@ interface Iface
 	 * @param string $value Value of the property item
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface Common property item for chaining method calls
 	 */
-	public function setValue( $value );
+	public function setValue( string $value ) : \Aimeos\MShop\Common\Item\Property\Iface;
 
 }

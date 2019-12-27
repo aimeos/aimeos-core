@@ -41,7 +41,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
 	 */
-	public function __construct( $prefix, array $values = [], array $listItems = [], array $refItems = [], array $propItems = [] )
+	public function __construct( string $prefix, array $values = [], array $listItems = [], array $refItems = [], array $propItems = [] )
 	{
 		parent::__construct( $prefix, $values );
 
@@ -77,10 +77,10 @@ abstract class Base
 	 * All other item properties are not compared.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item to compare with
-	 * @return boolean True if equal, false if not
+	 * @return bool True if equal, false if not
 	 * @since 2014.09
 	 */
-	public function compare( \Aimeos\MShop\Price\Item\Iface $price )
+	public function compare( \Aimeos\MShop\Price\Item\Iface $price ) : bool
 	{
 		if( $this->getValue() === $price->getValue()
 			&& $this->getCosts() === $price->getCosts()
@@ -101,9 +101,9 @@ abstract class Base
 	/**
 	 * Returns the decimal precision of the price
 	 *
-	 * @return integer Number of decimal digits
+	 * @return int Number of decimal digits
 	 */
-	public function getPrecision()
+	public function getPrecision() : int
 	{
 		return $this->precision;
 	}
@@ -114,7 +114,7 @@ abstract class Base
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'price';
 	}
@@ -123,11 +123,11 @@ abstract class Base
 	/**
 	 * Tests if the price is within the requirements.
 	 *
-	 * @param string|integer|double $value Monetary value
-	 * @param integer|null $precision Number of decimal digits, null for default value
+	 * @param string|int|double $value Monetary value
+	 * @param int|null $precision Number of decimal digits, null for default value
 	 * @return string Sanitized monetary value
 	 */
-	protected function checkPrice( $value, $precision = null )
+	protected function checkPrice( $value, int $precision = null ) : string
 	{
 		if( $value != '' && !is_numeric( $value ) ) {
 			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Invalid characters in price "%1$s"', $value ) );
@@ -140,11 +140,11 @@ abstract class Base
 	/**
 	 * Formats the money value.
 	 *
-	 * @param string|integer|double $number Money value
-	 * @param integer|null $precision Number of decimal digits, null for default value
+	 * @param string|int|double $number Money value
+	 * @param int|null $precision Number of decimal digits, null for default value
 	 * @return string Formatted money value
 	 */
-	protected function formatNumber( $number, $precision = null )
+	protected function formatNumber( $number, int $precision = null ) : string
 	{
 		return number_format( (double) $number, $precision ?: $this->precision, '.', '' );
 	}

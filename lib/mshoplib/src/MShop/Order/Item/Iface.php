@@ -18,14 +18,14 @@ namespace Aimeos\MShop\Order\Item;
  * @package MShop
  * @subpackage Order
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
 	 * Returns the basic order ID.
 	 *
-	 * @return string Basic order ID
+	 * @return string|null Basic order ID
 	 */
-	public function getBaseId();
+	public function getBaseId() : ?string;
 
 	/**
 	 * Sets the ID of the basic order item which contains the order details.
@@ -33,29 +33,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string $id ID of the basic order item
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setBaseId( $id );
-
-	/**
-	 * Returns the type of the invoice (repeating, web, phone, etc).
-	 *
-	 * @return string Invoice type
-	 */
-	public function getType();
-
-	/**
-	 * Sets the type of the invoice.
-	 *
-	 * @param string $type Invoice type
-	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
-	 */
-	public function setType( $type );
+	public function setBaseId( string $id ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Returns the delivery date of the invoice.
 	 *
 	 * @return string|null ISO date in yyyy-mm-dd HH:ii:ss format
 	 */
-	public function getDateDelivery();
+	public function getDateDelivery() : ?string;
 
 	/**
 	 * Sets the delivery date of the invoice.
@@ -63,14 +48,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setDateDelivery( $date );
+	public function setDateDelivery( string $date = null ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Returns the payment date of the invoice.
 	 *
 	 * @return string|null ISO date in yyyy-mm-dd HH:ii:ss format
 	 */
-	public function getDatePayment();
+	public function getDatePayment() : ?string;
 
 	/**
 	 * Sets the payment date of the invoice.
@@ -78,44 +63,44 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setDatePayment( $date );
+	public function setDatePayment( string $date = null ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Returns the delivery status of the invoice.
 	 *
-	 * @return integer Status code constant from \Aimeos\MShop\Order\Item\Base
+	 * @return int Status code constant from \Aimeos\MShop\Order\Item\Base
 	 */
-	public function getDeliveryStatus();
+	public function getDeliveryStatus() : int;
 
 	/**
 	 * Sets the delivery status of the invoice.
 	 *
-	 * @param integer $status Status code constant from \Aimeos\MShop\Order\Item\Base
+	 * @param int $status Status code constant from \Aimeos\MShop\Order\Item\Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setDeliveryStatus( $status );
+	public function setDeliveryStatus( int $status ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Returns the payment status of the invoice.
 	 *
-	 * @return integer Payment constant from \Aimeos\MShop\Order\Item\Base
+	 * @return int Payment constant from \Aimeos\MShop\Order\Item\Base
 	 */
-	public function getPaymentStatus();
+	public function getPaymentStatus() : int;
 
 	/**
 	 * Sets the payment status of the invoice.
 	 *
-	 * @param integer $status Payment constant from \Aimeos\MShop\Order\Item\Base
+	 * @param int $status Payment constant from \Aimeos\MShop\Order\Item\Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setPaymentStatus( $status );
+	public function setPaymentStatus( int $status ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Returns the related invoice ID.
 	 *
 	 * @return string|null Related invoice ID
 	 */
-	public function getRelatedId();
+	public function getRelatedId() : ?string;
 
 	/**
 	 * Sets the related invoice ID.
@@ -123,6 +108,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string|null $id Related invoice ID
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setRelatedId( $id );
+	public function setRelatedId( string $id = null ) : \Aimeos\MShop\Order\Item\Iface;
 
 }

@@ -27,10 +27,10 @@ interface Iface
 	 * Add the given price to the current one.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item which should be added
-	 * @param integer $quantity Number of times the Price should be added
+	 * @param int $quantity Number of times the Price should be added
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function addItem( \Aimeos\MShop\Price\Item\Iface $item, $quantity = 1 );
+	public function addItem( \Aimeos\MShop\Price\Item\Iface $item, int $quantity = 1 );
 
 	/**
 	 * Resets the values of the price item.
@@ -58,21 +58,21 @@ interface Iface
 	 * @return boolean True if equal, false if not
 	 * @since 2014.09
 	 */
-	public function compare( \Aimeos\MShop\Price\Item\Iface $price );
+	public function compare( \Aimeos\MShop\Price\Item\Iface $price ) : bool;
 
 	/**
 	 * Returns the decimal precision of the price
 	 *
-	 * @return integer Number of decimal digits
+	 * @return int Number of decimal digits
 	 */
-	public function getPrecision();
+	public function getPrecision() : int;
 
 	/**
 	 * Returns the label of the item
 	 *
 	 * @return string Label of the item
 	 */
-	public function getLabel();
+	public function getLabel() : string;
 
 	/**
 	 * Sets the label of the item
@@ -80,59 +80,59 @@ interface Iface
 	 * @param string $label Label of the item
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setLabel( $label );
+	public function setLabel( string $label ) : \Aimeos\MShop\Price\Item\Iface;
 
 	/**
 	 * Returns the quantity.
 	 *
-	 * @return integer Quantity
+	 * @return int Quantity
 	 */
-	public function getQuantity();
+	public function getQuantity() : int;
 
 	/**
 	 * Sets the quantity.
 	 *
-	 * @param integer $quantity Quantity
+	 * @param int $quantity Quantity
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setQuantity( $quantity );
+	public function setQuantity( int $quantity ) : \Aimeos\MShop\Price\Item\Iface;
 
 	/**
 	 * Returns the amount of money.
 	 *
 	 * @return string Price
 	 */
-	public function getValue();
+	public function getValue() : string;
 
 	/**
 	 * Sets the new amount of money.
 	 *
-	 * @param string|integer|double $price Amount with two digits precision
+	 * @param string|int|double $price Amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setValue( $price );
+	public function setValue( $price ) : \Aimeos\MShop\Price\Item\Iface;
 
 	/**
 	 * Returns the costs.
 	 *
 	 * @return string Costs
 	 */
-	public function getCosts();
+	public function getCosts() : string;
 
 	/**
 	 * Sets the new costs.
 	 *
-	 * @param string|integer|double $price Amount with two digits precision
+	 * @param string|int|double $price Amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setCosts( $price );
+	public function setCosts( $price ) : \Aimeos\MShop\Price\Item\Iface;
 
 	/**
 	 * Returns the rebate amount.
 	 *
 	 * @return string Rebate amount
 	 */
-	public function getRebate();
+	public function getRebate() : string;
 
 	/**
 	 * Sets the new rebate amount.
@@ -140,21 +140,21 @@ interface Iface
 	 * @param string|integer|double $price Rebate amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setRebate( $price );
+	public function setRebate( $price ) : \Aimeos\MShop\Price\Item\Iface;
 
 	/**
 	 * Returns the tax rate in percent.
 	 *
 	 * @return string Tax rate of product
 	 */
-	public function getTaxRate();
+	public function getTaxRate() : string;
 
 	/**
 	 * Returns all tax rates in percent.
 	 *
 	 * @return string[] Tax rates for the price
 	 */
-	 public function getTaxRates();
+	 public function getTaxRates() : array;
 
 	/**
 	 * Sets the new tax rate in percent.
@@ -162,7 +162,7 @@ interface Iface
 	 * @param string|integer|double $taxrate Tax rate with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setTaxRate( $taxrate );
+	public function setTaxRate( $taxrate ) : \Aimeos\MShop\Price\Item\Iface;
 
 	/**
 	 * Sets the new tax rates in percent
@@ -177,17 +177,17 @@ interface Iface
 	 *
 	 * True if tax is included in the price value, costs and rebate, false if not
 	 *
-	 * @return boolean Tax rate flag for the price
+	 * @return bool Tax rate flag for the price
 	 */
-	public function getTaxFlag();
+	public function getTaxFlag() : bool;
 
 	/**
 	 * Sets the new tax flag.
 	 *
-	 * @param boolean $flag True if tax is included in the price value, costs and rebate, false if not
+	 * @param bool $flag True if tax is included in the price value, costs and rebate, false if not
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setTaxFlag( $flag );
+	public function setTaxFlag( bool $flag ) : \Aimeos\MShop\Price\Item\Iface;
 
 	/**
 	 * Returns the tax for the price item
@@ -198,7 +198,7 @@ interface Iface
 	 * @return string Tax value with four digits precision
 	 * @see mshop/price/taxflag
 	 */
-	public function getTaxValue();
+	public function getTaxValue() : string;
 
 	/**
 	 * Sets the tax amount
@@ -206,14 +206,14 @@ interface Iface
 	 * @param string|integer|double $value Tax value with up to four digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setTaxValue( $value );
+	public function setTaxValue( $value ) : \Aimeos\MShop\Price\Item\Iface;
 
 	/**
 	 * Returns the currency ID.
 	 *
 	 * @return string|null Three letter ISO currency code (e.g. EUR)
 	 */
-	public function getCurrencyId();
+	public function getCurrencyId() : ?string;
 
 	/**
 	 * Sets the currency ID.
@@ -222,5 +222,5 @@ interface Iface
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 */
-	public function setCurrencyId( $currencyid );
+	public function setCurrencyId( string $currencyid ) : \Aimeos\MShop\Price\Item\Iface;
 }

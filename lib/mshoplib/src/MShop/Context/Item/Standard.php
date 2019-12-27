@@ -83,7 +83,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Cleans up internal objects of the context item
 	 */
-	public function __sleep()
+	public function __sleep() : array
 	{
 		$objects = array(
 			$this->cache, $this->config, $this->dbm, $this->fsm, $this->locale, $this->logger,
@@ -106,7 +106,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return string Hash for identifying the context object
 	 */
-	public function __toString()
+	public function __toString() : string
 	{
 		$objects = array(
 			$this, $this->cache, $this->config, $this->dbm, $this->fsm, $this->locale,
@@ -123,7 +123,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param \Aimeos\MW\Cache\Iface $cache Cache object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setCache( \Aimeos\MW\Cache\Iface $cache )
+	public function setCache( \Aimeos\MW\Cache\Iface $cache ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->cache = $cache;
 
@@ -136,7 +136,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\Cache\Iface Cache object
 	 */
-	public function getCache()
+	public function getCache() : \Aimeos\MW\Cache\Iface
 	{
 		if( !isset( $this->cache ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Cache object not available' ) );
@@ -152,7 +152,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param \Aimeos\MW\Config\Iface $config Configuration object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setConfig( \Aimeos\MW\Config\Iface $config )
+	public function setConfig( \Aimeos\MW\Config\Iface $config ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->config = $config;
 
@@ -165,7 +165,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\Config\Iface Configuration object
 	 */
-	public function getConfig()
+	public function getConfig() : \Aimeos\MW\Config\Iface
 	{
 		if( !isset( $this->config ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Configuration object not available' ) );
@@ -181,7 +181,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param \Aimeos\MW\DB\Manager\Iface $manager Database manager object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $manager )
+	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $manager ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->dbm = $manager;
 
@@ -194,7 +194,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
 	 */
-	public function getDatabaseManager()
+	public function getDatabaseManager() : \Aimeos\MW\DB\Manager\Iface
 	{
 		if( !isset( $this->dbm ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Database manager object not available' ) );
@@ -211,7 +211,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return string Current date and time as ISO string (YYYY-MM-DD HH:mm:ss)
 	 */
-	public function getDateTime()
+	public function getDateTime() : string
 	{
 		if( $this->date === null ) {
 			$this->date = date( 'Y-m-d H:i:00' );
@@ -226,7 +226,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @param string $datetime Date and time as ISO string (YYYY-MM-DD HH:mm:ss)
 	 */
-	public function setDateTime( $datetime )
+	public function setDateTime( string $datetime ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
 
@@ -246,7 +246,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param \Aimeos\MW\Filesystem\Manager\Iface $manager File system object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setFilesystemManager( \Aimeos\MW\Filesystem\Manager\Iface $manager )
+	public function setFilesystemManager( \Aimeos\MW\Filesystem\Manager\Iface $manager ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->fsm = $manager;
 
@@ -259,7 +259,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\Filesystem\Manager\Iface File system manager object
 	 */
-	public function getFilesystemManager()
+	public function getFilesystemManager() : \Aimeos\MW\Filesystem\Manager\Iface
 	{
 		if( !isset( $this->fsm ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'File system manager object not available' ) );
@@ -275,7 +275,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param string $resource Resource name, e.g. "fs-admin"
 	 * @return \Aimeos\MW\Filesystem\Iface File system object
 	 */
-	public function getFilesystem( $resource )
+	public function getFilesystem( string $resource ) : \Aimeos\MW\Filesystem\Iface
 	{
 		if( !isset( $this->fsm ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'File system manager object not available' ) );
@@ -292,7 +292,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * 	\Aimeos\MW\Translation\Iface with locale as key
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setI18n( array $translations )
+	public function setI18n( array $translations ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->i18n = $translations;
 
@@ -306,7 +306,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param string|null $locale Two letter language ISO code for specific language instead of default one
 	 * @return \Aimeos\MW\Translation\Iface Internationalization object
 	 */
-	public function getI18n( $locale = null )
+	public function getI18n( string $locale = null ) : \Aimeos\MW\Translation\Iface
 	{
 		if( $locale === null ) {
 			$locale = $this->getLocale()->getLanguageId();
@@ -335,7 +335,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Localization object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale )
+	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->locale = $locale;
 
@@ -348,7 +348,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MShop\Locale\Item\Iface Localization object
 	 */
-	public function getLocale()
+	public function getLocale() : \Aimeos\MShop\Locale\Item\Iface
 	{
 		if( !isset( $this->locale ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Locale object not available' ) );
@@ -364,7 +364,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param \Aimeos\MW\Logger\Iface $logger Logger object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setLogger( \Aimeos\MW\Logger\Iface $logger )
+	public function setLogger( \Aimeos\MW\Logger\Iface $logger ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->logger = $logger;
 
@@ -377,7 +377,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\Logger\Iface Logger object
 	 */
-	public function getLogger()
+	public function getLogger() : \Aimeos\MW\Logger\Iface
 	{
 		if( !isset( $this->logger ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Log manager object not available' ) );
@@ -393,7 +393,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param \Aimeos\MW\Mail\Iface $mail Mail object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setMail( \Aimeos\MW\Mail\Iface $mail )
+	public function setMail( \Aimeos\MW\Mail\Iface $mail ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->mail = $mail;
 
@@ -406,7 +406,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\Mail\Iface Mail object
 	 */
-	public function getMail()
+	public function getMail() : \Aimeos\MW\Mail\Iface
 	{
 		if( !isset( $this->mail ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Mail object not available' ) );
@@ -422,7 +422,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param \Aimeos\MW\MQueue\Manager\Iface $mqManager Message queue manager object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setMessageQueueManager( \Aimeos\MW\MQueue\Manager\Iface $mqManager )
+	public function setMessageQueueManager( \Aimeos\MW\MQueue\Manager\Iface $mqManager ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->mqueue = $mqManager;
 
@@ -435,7 +435,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\MQueue\Manager\Iface Message queue manager object
 	 */
-	public function getMessageQueueManager()
+	public function getMessageQueueManager() : \Aimeos\MW\MQueue\Manager\Iface
 	{
 		if( !isset( $this->mqueue ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Message queue object not available' ) );
@@ -450,9 +450,9 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @param string $resource Resource name, e.g. "mq-email"
 	 * @param string $queue Message queue name, e.g. "order/email/payment"
-	 * @return \Aimeos\MW\MQueue\Manager\Iface Message queue object
+	 * @return \Aimeos\MW\MQueue\Queue\Iface Message queue object
 	 */
-	public function getMessageQueue( $resource, $queue )
+	public function getMessageQueue( string $resource, string $queue ) : \Aimeos\MW\MQueue\Queue\Iface
 	{
 		if( !isset( $this->mqueue ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Message queue object not available' ) );
@@ -468,7 +468,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param \Aimeos\MW\Process\Iface $process Process object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setProcess( \Aimeos\MW\Process\Iface $process )
+	public function setProcess( \Aimeos\MW\Process\Iface $process ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->process = $process;
 
@@ -481,7 +481,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\Process\Iface Process object
 	 */
-	public function getProcess()
+	public function getProcess() : \Aimeos\MW\Process\Iface
 	{
 		if( !isset( $this->process ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Process object not available' ) );
@@ -497,7 +497,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param \Aimeos\MW\Session\Iface $session Session object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setSession( \Aimeos\MW\Session\Iface $session )
+	public function setSession( \Aimeos\MW\Session\Iface $session ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->session = $session;
 
@@ -510,7 +510,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\Session\Iface Session object
 	 */
-	public function getSession()
+	public function getSession() : \Aimeos\MW\Session\Iface
 	{
 		if( !isset( $this->session ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Session object not available' ) );
@@ -526,7 +526,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setView( \Aimeos\MW\View\Iface $view )
+	public function setView( \Aimeos\MW\View\Iface $view ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->view = $view;
 
@@ -539,7 +539,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\View\Iface View object
 	 */
-	public function getView()
+	public function getView() : \Aimeos\MW\View\Iface
 	{
 		if( !isset( $this->view ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'View object not available' ) );
@@ -555,9 +555,9 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param string $name Account name of the user/editor
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setEditor( $name )
+	public function setEditor( string $name ) : \Aimeos\MShop\Context\Item\Iface
 	{
-		$this->editor = (string) $name;
+		$this->editor = $name;
 
 		return $this;
 	}
@@ -568,7 +568,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return string Account name of the user/editor
 	 */
-	public function getEditor()
+	public function getEditor() : string
 	{
 		return $this->editor;
 	}
@@ -580,7 +580,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param \Closure|string|null $user User ID of the logged in user or closure to retrieve them
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setUserId( $user )
+	public function setUserId( $user ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->user = $user;
 
@@ -593,7 +593,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return string|null User ID of the logged in user
 	 */
-	public function getUserId()
+	public function getUserId() : ?string
 	{
 		if( $this->user instanceof \Closure )
 		{
@@ -611,7 +611,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param \Closure|array $groupIds Group IDs of the logged in user or closure to retrieve them
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setGroupIds( $groupIds )
+	public function setGroupIds( $groupIds ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->groups = $groupIds;
 
@@ -624,7 +624,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return array Group IDs of the logged in user
 	 */
-	public function getGroupIds()
+	public function getGroupIds() : array
 	{
 		if( $this->groups instanceof \Closure )
 		{
@@ -642,7 +642,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param array $list List of objects
 	 * @return string Hash for the objects
 	 */
-	private function hash( array $list )
+	private function hash( array $list ) : string
 	{
 		$hash = '';
 

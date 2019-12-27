@@ -66,7 +66,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'catalog';
 	}
@@ -77,7 +77,7 @@ class Standard
 	 *
 	 * @return string|null Unique ID of the node
 	 */
-	public function getId()
+	public function getId() : ?string
 	{
 		return $this->node->getId();
 	}
@@ -89,7 +89,7 @@ class Standard
 	 * @param string|null $id Unique ID of the node
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function setId( $id )
+	public function setId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$this->node->setId( $id );
 		return $this;
@@ -101,7 +101,7 @@ class Standard
 	 *
 	 * @return string|null Site ID of the item
 	 */
-	public function getSiteId()
+	public function getSiteId() : ?string
 	{
 		return ( $this->node->__isset( 'siteid' ) ? (string) $this->node->__get( 'siteid' ) : null );
 	}
@@ -112,7 +112,7 @@ class Standard
 	 *
 	 * @return string Name of the item
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
 		return $this->node->getLabel();
 	}
@@ -124,7 +124,7 @@ class Standard
 	 * @param string $name New name of the item
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function setLabel( $name )
+	public function setLabel( string $name ) : \Aimeos\MShop\Common\Item\Tree\Iface
 	{
 		$this->node->setLabel( $name );
 		return $this;
@@ -136,7 +136,7 @@ class Standard
 	 *
 	 * @return array Returns the config of the catalog node
 	 */
-	public function getConfig()
+	public function getConfig() : array
 	{
 		return ( $this->node->__isset( 'config' ) ? (array) $this->node->__get( 'config' ) : [] );
 	}
@@ -148,7 +148,7 @@ class Standard
 	 * @param array $options Options to be set for the catalog node
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function setConfig( array $options )
+	public function setConfig( array $options ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$this->node->config = $options;
 		return $this;
@@ -160,7 +160,7 @@ class Standard
 	 *
 	 * @return string Code of the item
 	 */
-	public function getCode()
+	public function getCode() : string
 	{
 		return $this->node->getCode();
 	}
@@ -172,7 +172,7 @@ class Standard
 	 * @param string $code New code of the item
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function setCode( $code )
+	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Tree\Iface
 	{
 		$this->node->setCode( $this->checkCode( $code ) );
 		return $this;
@@ -182,9 +182,9 @@ class Standard
 	/**
 	 * Returns the status of the item.
 	 *
-	 * @return integer Greater than zero if enabled, zero or negative values if disabled
+	 * @return int Greater than zero if enabled, zero or negative values if disabled
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
 		return $this->node->getStatus();
 	}
@@ -193,10 +193,10 @@ class Standard
 	/**
 	 * Sets the new status of the item.
 	 *
-	 * @param integer $status True if enabled, false if not
+	 * @param int $status True if enabled, false if not
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$this->node->setStatus( $status );
 		return $this;
@@ -208,9 +208,9 @@ class Standard
 	 *
 	 * @return string URL target specific for that category
 	 */
-	public function getTarget()
+	public function getTarget() : string
 	{
-		return ( $this->node->__isset( 'target' ) ? (string) $this->node->__get( 'target' ) : '' );
+		return ( $this->node->__isset( 'target' ) ? $this->node->__get( 'target' ) : '' );
 	}
 
 
@@ -218,11 +218,11 @@ class Standard
 	 * Sets a new URL target specific for that category
 	 *
 	 * @param string $value New URL target specific for that category
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function setTarget( $value )
+	public function setTarget( string $value ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
-		$this->node->target = (string) $value;
+		$this->node->target = $value;
 		return $this;
 	}
 
@@ -230,9 +230,9 @@ class Standard
 	/**
 	 * Returns modify date/time of the order item base product.
 	 *
-	 * @return string Returns modify date/time of the order base item
+	 * @return string|null Returns modify date/time of the order base item
 	 */
-	public function getTimeModified()
+	public function getTimeModified() : ?string
 	{
 		return ( $this->node->__isset( 'mtime' ) ? $this->node->__get( 'mtime' ) : null );
 	}
@@ -241,9 +241,9 @@ class Standard
 	/**
 	 * Returns the create date of the item.
 	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
-	public function getTimeCreated()
+	public function getTimeCreated() : ?string
 	{
 		return ( $this->node->__isset( 'ctime' ) ? $this->node->__get( 'ctime' ) : null );
 	}
@@ -254,9 +254,9 @@ class Standard
 	 *
 	 * @return string Editor who created/modified the item at last
 	 */
-	public function getEditor()
+	public function getEditor() : string
 	{
-		return ( $this->node->__isset( 'editor' ) ? $this->node->__get( 'editor' ) : null );
+		return ( $this->node->__isset( 'editor' ) ? $this->node->__get( 'editor' ) : '' );
 	}
 
 
@@ -266,7 +266,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
 	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
 	 */
-	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item )
+	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface
 	{
 		// don't set the modified flag as it's only for the values
 		$this->children[] = $item;
@@ -281,7 +281,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to remove
 	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
 	 */
-	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item )
+	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface
 	{
 		foreach( $this->children as $idx => $child )
 		{
@@ -299,10 +299,10 @@ class Standard
 	/**
 	 * Returns a child of this node identified by its index.
 	 *
-	 * @param integer $index Index of child node
+	 * @param int $index Index of child node
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Selected node
 	 */
-	public function getChild( $index )
+	public function getChild( int $index ) : \Aimeos\MShop\Common\Item\Tree\Iface
 	{
 		if( isset( $this->children[$index] ) ) {
 			return $this->children[$index];
@@ -317,7 +317,7 @@ class Standard
 	 *
 	 * @return array Numerically indexed list of nodes
 	 */
-	public function getChildren()
+	public function getChildren() : array
 	{
 		return $this->children;
 	}
@@ -328,7 +328,7 @@ class Standard
 	 *
 	 * @return \Aimeos\MShop\Catalog\Item\Iface[] List of removed children
 	 */
-	public function getChildrenDeleted()
+	public function getChildrenDeleted() : array
 	{
 		return $this->deletedItems;
 	}
@@ -337,9 +337,9 @@ class Standard
 	/**
 	 * Tests if a node has children.
 	 *
-	 * @return boolean True if node has children, false if not
+	 * @return bool True if node has children, false if not
 	 */
-	public function hasChildren()
+	public function hasChildren() : bool
 	{
 		if( count( $this->children ) > 0 ) {
 			return true;
@@ -356,7 +356,7 @@ class Standard
 	 *
 	 * @return \Aimeos\MW\Tree\Node\Iface Internal node object
 	 */
-	public function getNode()
+	public function getNode() : \Aimeos\MW\Tree\Node\Iface
 	{
 		return $this->node;
 	}
@@ -367,9 +367,9 @@ class Standard
 	 *
 	 * For internal use only!
 	 *
-	 * @return integer Level of the item starting with "0" for the root node
+	 * @return int Level of the item starting with "0" for the root node
 	 */
-	public function getLevel()
+	public function getLevel() : int
 	{
 		return ( $this->node->__isset( 'level' ) ? $this->node->__get( 'level' ) : 0 );
 	}
@@ -382,7 +382,7 @@ class Standard
 	 *
 	 * @return string|null Unique ID of the parent category
 	 */
-	public function getParentId()
+	public function getParentId() : ?string
 	{
 		return ( $this->node->__isset( 'parentid' ) ? $this->node->__get( 'parentid' ) : null );
 	}
@@ -391,9 +391,9 @@ class Standard
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return $this->getStatus() > 0;
 	}
@@ -402,9 +402,9 @@ class Standard
 	/**
 	 * Checks, whether this node was modified.
 	 *
-	 * @return boolean True if the content of the node is modified, false if not
+	 * @return bool True if the content of the node is modified, false if not
 	 */
-	public function isModified()
+	public function isModified() : bool
 	{
 		return $this->node->isModified();
 	}
@@ -414,10 +414,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -444,10 +444,10 @@ class Standard
 	/**
 	 * Returns the public values of the node as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Assciative list of key/value pairs
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = [
 			'catalog.code' => $this->getCode(),
@@ -476,9 +476,9 @@ class Standard
 	/**
 	 * Returns the node and its children as list
 	 *
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Associative list of IDs as keys and nodes as values
+	 * @return \Aimeos\MShop\Catalog\Item\Iface[] Associative list of IDs as keys and nodes as values
 	 */
-	public function toList()
+	public function toList() : array
 	{
 		$list = [$this->getId() => $this];
 

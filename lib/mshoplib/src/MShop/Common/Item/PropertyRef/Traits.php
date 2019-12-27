@@ -45,9 +45,9 @@ trait Traits
 	 * Adds a new property item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item New or existing property item
-	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Self object for method chaining
 	 */
-	public function addPropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item )
+	public function addPropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
 	{
 		$id = $item->getId() ?: '_' . $this->getId() . '_' . $item->getType() . '_' . $item->getLanguageId() . '_' . $item->getValue();
 
@@ -62,9 +62,9 @@ trait Traits
 	 * Adds new property items or overwrite existing ones
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item New or existing property item
-	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Self object for method chaining
 	 */
-	public function addPropertyItems( array $items )
+	public function addPropertyItems( array $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
 	{
 		foreach( $items as $item ) {
 			$this->addPropertyItem( $item );
@@ -78,9 +78,9 @@ trait Traits
 	 * Removes an existing property item
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item Existing property item
-	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Self object for method chaining
 	 */
-	public function deletePropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item )
+	public function deletePropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
 	{
 		$id = $item->getId();
 
@@ -110,7 +110,7 @@ trait Traits
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 * @throws \Aimeos\MShop\Exception If an item isn't a property item or isn't found
 	 */
-	public function deletePropertyItems( array $items )
+	public function deletePropertyItems( array $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
 	{
 		foreach( $items as $item ) {
 			$this->deletePropertyItem( $item );
@@ -125,7 +125,7 @@ trait Traits
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface[] Property items
 	 */
-	public function getPropertyItemsDeleted()
+	public function getPropertyItemsDeleted() : array
 	{
 		return $this->propRmItems;
 	}
@@ -137,7 +137,7 @@ trait Traits
 	 * @param string $type Type of the properties
 	 * @return array List of property values
 	 */
-	public function getProperties( $type )
+	public function getProperties( string $type ) : array
 	{
 		$list = [];
 
@@ -153,12 +153,12 @@ trait Traits
 	 * Returns the property item for the given type, language and value
 	 *
 	 * @param string $type Name of the property type
-	 * @param string $langId ISO language code (e.g. "en" or "en_US") or null if not language specific
+	 * @param string|null $langId ISO language code (e.g. "en" or "en_US") or null if not language specific
 	 * @param string $value Value of the property
-	 * @param boolean $active True to return only active items, false to return all
+	 * @param bool $active True to return only active items, false to return all
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface|null Matching property item or null if none
 	 */
-	public function getPropertyItem( $type, $langId, $value, $active = true )
+	public function getPropertyItem( string $type, string $langId = null, string $value, bool $active = true ) : ?\Aimeos\MShop\Common\Item\Property\Iface
 	{
 		foreach( $this->propItems as $propItem )
 		{
@@ -168,6 +168,8 @@ trait Traits
 				return $propItem;
 			}
 		}
+
+		return null;
 	}
 
 
@@ -175,10 +177,10 @@ trait Traits
 	 * Returns the property items of the product
 	 *
 	 * @param array|string|null $type Name of the property item type or null for all
-	 * @param boolean $active True to return only active items, false to return all
+	 * @param bool $active True to return only active items, false to return all
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
 	 */
-	public function getPropertyItems( $type = null, $active = true )
+	public function getPropertyItems( $type = null, bool $active = true ) : array
 	{
 		$list = [];
 
@@ -199,9 +201,9 @@ trait Traits
 	 * Adds a new property item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items New list of property items
-	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Self object for method chaining
 	 */
-	public function setPropertyItems( array $items )
+	public function setPropertyItems( array $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
 	{
 		$list = [];
 
@@ -224,7 +226,7 @@ trait Traits
 	 *
 	 * @return string|null ID of the item
 	 */
-	abstract public function getId();
+	abstract public function getId() : ?string;
 
 
 	/**

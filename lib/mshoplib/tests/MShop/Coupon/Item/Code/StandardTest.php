@@ -130,14 +130,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSetCountEmpty()
-	{
-		$return = $this->object->setCount( '' );
-		$this->assertSame( null, $this->object->getCount() );
-		$this->assertTrue( $this->object->isModified() );
-	}
-
-
 	public function testGetDateStart()
 	{
 		$this->assertNull( $this->object->getDateStart() );

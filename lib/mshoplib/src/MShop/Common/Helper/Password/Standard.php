@@ -40,7 +40,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Password\Iface
 	 * @param string|null $salt Password salt
 	 * @return string Hashed password
 	 */
-	public function encode( $password, $salt = null )
+	public function encode( string $password, string $salt = null ) : string
 	{
 		$format = ( isset( $this->options['format'] ) ? $this->options['format'] : '%1$s%2$s' );
 

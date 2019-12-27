@@ -358,13 +358,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSetQuantityNoNumber()
-	{
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
-		$this->object->setQuantity( 'a' );
-	}
-
-
 	public function testSetQuantityNegative()
 	{
 		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );

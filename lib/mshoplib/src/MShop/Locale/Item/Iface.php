@@ -27,7 +27,7 @@ interface Iface
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item object
 	 * @throws \Aimeos\MShop\Locale\Exception if site object isn't available
 	 */
-	public function getSiteItem();
+	public function getSiteItem() : \Aimeos\MShop\Locale\Item\Site\Iface;
 
 	/**
 	 * Returns the site IDs for the locale site constants.
@@ -35,14 +35,14 @@ interface Iface
 	 * @param int $level Site level constant from \Aimeos\MShop\Locale\Manager\Base
 	 * @return array|string Associative list of site constant as key and sites as values or site ID
 	 */
-	public function getSites( $level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL );
+	public function getSites( int $level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL );
 
 	/**
 	 * Returns the list site IDs up to the root site item.
 	 *
 	 * @return array List of site IDs
 	 */
-	public function getSitePath();
+	public function getSitePath() : array;
 
 	/**
 	 * Sets the identifier of the shop instance.
@@ -50,14 +50,14 @@ interface Iface
 	 * @param string $id ID of the shop instance
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
-	public function setSiteId( $id );
+	public function setSiteId( string $id ) : \Aimeos\MShop\Locale\Item\Iface;
 
 	/**
 	 * Returns the ISO language code.
 	 *
 	 * @return string|null ISO language code (e.g. de or de_DE)
 	 */
-	public function getLanguageId();
+	public function getLanguageId() : ?string;
 
 	/**
 	 * Sets the ISO language code.
@@ -65,14 +65,14 @@ interface Iface
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
-	public function setLanguageId( $langid );
+	public function setLanguageId( string $langid = null ) : \Aimeos\MShop\Locale\Item\Iface;
 
 	/**
 	 * Returns the currency ID.
 	 *
 	 * @return string|null Three letter ISO currency code (e.g. EUR)
 	 */
-	public function getCurrencyId();
+	public function getCurrencyId() : ?string;
 
 	/**
 	 * Sets the currency ID.
@@ -80,5 +80,5 @@ interface Iface
 	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
-	public function setCurrencyId( $currencyid );
+	public function setCurrencyId( string $currencyid = null ) : \Aimeos\MShop\Locale\Item\Iface;
 }

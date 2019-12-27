@@ -36,13 +36,13 @@ class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 	 * @param boolean $external True if URL points to an external site, false if it stays on the same site
 	 * @param string $html Custom HTML for rendering form (e.g. Including JS or custom html)
 	 */
-	public function __construct( $url = '', $method = '', array $values = [], $external = true, $html = '' )
+	public function __construct( string $url = '', string $method = '', array $values = [], bool $external = true, string $html = '' )
 	{
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MW\Criteria\Attribute\Iface::class, $values );
 
-		$this->url = (string) $url;
-		$this->external = (bool) $external;
-		$this->method = (string) $method;
+		$this->url = $url;
+		$this->external = $external;
+		$this->method = $method;
 		$this->values = $values;
 		$this->html = $html;
 	}
@@ -51,9 +51,9 @@ class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 	/**
 	 * Returns if the URL points to an external site.
 	 *
-	 * @return boolean True if URL points to an external site, false if it stays on the same site
+	 * @return bool True if URL points to an external site, false if it stays on the same site
 	 */
-	public function getExternal()
+	public function getExternal() : bool
 	{
 		return $this->external;
 	}
@@ -62,10 +62,10 @@ class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 	/**
 	 * Sets if the URL points to an external site.
 	 *
-	 * @param boolean $value True if URL points to an external site, false if it stays on the same site
+	 * @param bool $value True if URL points to an external site, false if it stays on the same site
 	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
-	public function setExternal( $value )
+	public function setExternal( bool $value ) : \Aimeos\MShop\Common\Helper\Form\Iface
 	{
 		$this->external = (bool) $value;
 
@@ -74,26 +74,25 @@ class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 
 
 	/**
-	 * Returns the url.
+	 * Returns the custom HTML string.
 	 *
-	 * @return string Url
+	 * @return string HTML string
 	 */
-	public function getUrl()
+	public function getHtml() : string
 	{
-		return $this->url;
+		return $this->html;
 	}
 
 
 	/**
-	 * Sets the url.
+	 * Sets the custom HTML string.
 	 *
-	 * @param string $url Url
+	 * @param string $html HTML string
 	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
-	public function setUrl( $url )
+	public function setHtml( string $html ) : \Aimeos\MShop\Common\Helper\Form\Iface
 	{
-		$this->url = (string) $url;
-
+		$this->html = $html;
 		return $this;
 	}
 
@@ -103,7 +102,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 	 *
 	 * @return string Method
 	 */
-	public function getMethod()
+	public function getMethod() : string
 	{
 		return $this->method;
 	}
@@ -115,10 +114,33 @@ class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 	 * @param string $method Method
 	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
-	public function setMethod( $method )
+	public function setMethod( string $method ) : \Aimeos\MShop\Common\Helper\Form\Iface
 	{
-		$this->method = (string) $method;
+		$this->method = $method;
+		return $this;
+	}
 
+
+	/**
+	 * Returns the url.
+	 *
+	 * @return string Url
+	 */
+	public function getUrl() : string
+	{
+		return $this->url;
+	}
+
+
+	/**
+	 * Sets the url.
+	 *
+	 * @param string $url Url
+	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
+	 */
+	public function setUrl( string $url ) : \Aimeos\MShop\Common\Helper\Form\Iface
+	{
+		$this->url = $url;
 		return $this;
 	}
 
@@ -129,7 +151,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 	 * @param string $key Unique key
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface Attribute item for the given key
 	 */
-	public function getValue( $key )
+	public function getValue( string $key ) : \Aimeos\MW\Criteria\Attribute\Iface
 	{
 		if( !isset( $this->values[$key] ) ) {
 			return null;
@@ -146,10 +168,9 @@ class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 	 * @param \Aimeos\MW\Criteria\Attribute\Iface $value Attribute item for the given key
 	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
 	 */
-	public function setValue( $key, \Aimeos\MW\Criteria\Attribute\Iface $value )
+	public function setValue( string $key, \Aimeos\MW\Criteria\Attribute\Iface $value ) : \Aimeos\MShop\Common\Helper\Form\Iface
 	{
 		$this->values[$key] = $value;
-
 		return $this;
 	}
 
@@ -159,33 +180,8 @@ class Standard implements \Aimeos\MShop\Common\Helper\Form\Iface
 	 *
 	 * @return array Key/value pairs, values implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
-	public function getValues()
+	public function getValues() : array
 	{
 		return $this->values;
-	}
-
-
-	/**
-	 * Returns the custom HTML string.
-	 *
-	 * @return string HTML string
-	 */
-	public function getHtml()
-	{
-		return $this->html;
-	}
-
-
-	/**
-	 * Sets the custom HTML string.
-	 *
-	 * @param string $html HTML string
-	 * @return \Aimeos\MShop\Common\Helper\Form\Iface Helper for chaining method calls
-	 */
-	public function setHtml( $html )
-	{
-		$this->html = (string) $html;
-
-		return $this;
 	}
 }

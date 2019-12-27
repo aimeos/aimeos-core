@@ -38,7 +38,7 @@ class Standard
 	 *
 	 * @return string|null ID of the item
 	 */
-	public function getId()
+	public function getId() : ?string
 	{
 		return $this->get( 'id' );
 	}
@@ -47,10 +47,10 @@ class Standard
 	/**
 	 * Sets the unique ID of the item.
 	 *
-	 * @param string $id Unique ID of the item
+	 * @param string|null $id Unique ID of the item
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
 	 */
-	public function setId( $id )
+	public function setId( $id = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'id', $id );
 	}
@@ -61,7 +61,7 @@ class Standard
 	 *
 	 * @return string|null Site ID (or null if not available)
 	 */
-	public function getSiteId()
+	public function getSiteId() : ?string
 	{
 		return $this->get( 'siteid' );
 	}
@@ -72,9 +72,9 @@ class Standard
 	 *
 	 * @return string Returns the value of the item
 	 */
-	public function getValue()
+	public function getValue() : string
 	{
-		return (string) $this->get( 'value', '' );
+		return $this->get( 'value', '' );
 	}
 
 
@@ -84,9 +84,9 @@ class Standard
 	 * @param string $value Value of the item or null for no expiration
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
 	 */
-	public function setValue( $value )
+	public function setValue( string $value ) : \Aimeos\MAdmin\Cache\Item\Iface
 	{
-		return $this->set( 'value', (string) $value );
+		return $this->set( 'value', $value );
 	}
 
 
@@ -95,7 +95,7 @@ class Standard
 	 *
 	 * @return string|null Expiration time of the item or null for no expiration
 	 */
-	public function getTimeExpire()
+	public function getTimeExpire() : ?string
 	{
 		return $this->get( 'expire' );
 	}
@@ -107,7 +107,7 @@ class Standard
 	 * @param string|null $timestamp Expiration time of the item
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
 	 */
-	public function setTimeExpire( $timestamp )
+	public function setTimeExpire( string $timestamp = null ) : \Aimeos\MAdmin\Cache\Item\Iface
 	{
 		return $this->set( 'expire', $this->checkDateFormat( $timestamp ) );
 	}
@@ -118,9 +118,9 @@ class Standard
 	 *
 	 * @return array Tags associated to the item
 	 */
-	public function getTags()
+	public function getTags() : array
 	{
-		return (array) $this->get( 'tags', [] );
+		return $this->get( 'tags', [] );
 	}
 
 
@@ -130,7 +130,7 @@ class Standard
 	 * @param array $tags Tags associated to the item
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
 	 */
-	public function setTags( array $tags )
+	public function setTags( array $tags ) : \Aimeos\MAdmin\Cache\Item\Iface
 	{
 		return $this->set( 'tags', $tags );
 	}
@@ -141,7 +141,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'cache';
 	}
@@ -151,10 +151,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -179,10 +179,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = [];
 

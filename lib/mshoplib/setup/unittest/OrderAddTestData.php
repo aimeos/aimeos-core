@@ -137,10 +137,10 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 			$orderAddr->setId( null );
 			$orderAddr->setBaseId( $bases['ids'][$dataset['baseid']] );
-			$orderAddr->setAddressId( ( isset( $dataset['addrid'] ) ? $dataset['addrid'] : '' ) );
+			$orderAddr->setAddressId( ( $dataset['addrid'] ?? '' ) );
 			$orderAddr->setType( $dataset['type'] );
-			$orderAddr->setCompany( $dataset['company'] );
-			$orderAddr->setVatID( ( isset( $dataset['vatid'] ) ? $dataset['vatid'] : '' ) );
+			$orderAddr->setCompany( $dataset['company'] ?? '' );
+			$orderAddr->setVatID( ( $dataset['vatid'] ?? '' ) );
 			$orderAddr->setSalutation( $dataset['salutation'] );
 			$orderAddr->setTitle( $dataset['title'] );
 			$orderAddr->setFirstname( $dataset['firstname'] );

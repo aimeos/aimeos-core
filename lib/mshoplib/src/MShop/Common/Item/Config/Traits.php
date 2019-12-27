@@ -24,7 +24,7 @@ trait Traits
 	 *
 	 * @return array Configuration values
 	 */
-	abstract public function getConfig();
+	abstract public function getConfig() : array;
 
 
 	/**
@@ -34,7 +34,7 @@ trait Traits
 	 * @param mixed $default Default value if no configration is found
 	 * @return mixed Configuration value or array of values
 	 */
-	public function getConfigValue( $key, $default = null )
+	public function getConfigValue( string $key, $default = null )
 	{
 		return $this->getArrayValue( $this->getConfig(), explode( '/', trim( $key, '/' ) ), $default );
 	}
@@ -48,7 +48,7 @@ trait Traits
 	 * @param mixed $default Default value if no configuration is found
 	 * @return mixed Found value or null if no value is available
 	 */
-	protected function getArrayValue( $config, $parts, $default )
+	protected function getArrayValue( array $config, array $parts, $default )
 	{
 		if( ( $current = array_shift( $parts ) ) !== null && isset( $config[$current] ) )
 		{

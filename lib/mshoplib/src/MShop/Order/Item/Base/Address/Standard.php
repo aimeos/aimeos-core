@@ -38,7 +38,7 @@ class Standard
 	 *
 	 * @return string|null Base ID
 	 */
-	public function getBaseId()
+	public function getBaseId() : ?string
 	{
 		return $this->get( 'order.base.address.baseid' );
 	}
@@ -47,12 +47,12 @@ class Standard
 	/**
 	 * Sets the order base ID the address belongs to.
 	 *
-	 * @param string $value New base ID
+	 * @param string|null $value New base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
-	public function setBaseId( $value )
+	public function setBaseId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Address\Iface
 	{
-		return $this->set( 'order.base.address.baseid', (string) $value );
+		return $this->set( 'order.base.address.baseid', $value );
 	}
 
 
@@ -61,9 +61,9 @@ class Standard
 	 *
 	 * @return string Customer address ID
 	 */
-	public function getAddressId()
+	public function getAddressId() : string
 	{
-		return (string) $this->get( 'order.base.address.addressid', '' );
+		return $this->get( 'order.base.address.addressid', '' );
 	}
 
 
@@ -73,9 +73,9 @@ class Standard
 	 * @param string $addrid New customer address ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
-	public function setAddressId( $addrid )
+	public function setAddressId( string $addrid ) : \Aimeos\MShop\Order\Item\Base\Address\Iface
 	{
-		return $this->set( 'order.base.address.addressid', (string) $addrid );
+		return $this->set( 'order.base.address.addressid', $addrid );
 	}
 
 
@@ -84,10 +84,10 @@ class Standard
 	 *
 	 * @return integer|null Address position in the order from 0-n
 	 */
-	public function getPosition()
+	public function getPosition() : ?int
 	{
 		if( ( $result = $this->get( 'order.base.address.position' ) ) !== null ) {
-			return (int) $result;
+			return $result;
 		}
 
 		return null;
@@ -97,17 +97,17 @@ class Standard
 	/**
 	 * Sets the position of the address within the list of ordered addresses
 	 *
-	 * @param integer|null $value Address position in the order from 0-n or null for resetting the position
+	 * @param int|null $value Address position in the order from 0-n or null for resetting the position
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 * @throws \Aimeos\MShop\Order\Exception If the position is invalid
 	 */
-	public function setPosition( $value )
+	public function setPosition( int $value = null ) : \Aimeos\MShop\Order\Item\Base\Address\Iface
 	{
 		if( $value < 0 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order address position "%1$s" must be greater than 0', $value ) );
 		}
 
-		return $this->set( 'order.base.address.position', ( $value !== null ? (int) $value : null ) );
+		return $this->set( 'order.base.address.position', ( $value !== null ? $value : null ) );
 	}
 
 
@@ -116,9 +116,9 @@ class Standard
 	 *
 	 * @return string Address type
 	 */
-	public function getType()
+	public function getType() : string
 	{
-		return (string) $this->get( 'order.base.address.type', \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+		return $this->get( 'order.base.address.type', \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 	}
 
 
@@ -128,7 +128,7 @@ class Standard
 	 * @param string $type New type of the address
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'order.base.address.type', $this->checkType( $type ) );
 	}
@@ -140,11 +140,11 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item New address
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
-	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $item )
+	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $item ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
 		parent::copyFrom( $item );
 
-		$this->setAddressId( $item->getId() );
+		$this->setAddressId( (string) $item->getId() );
 		$this->setModified();
 
 		return $this;
@@ -155,10 +155,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order address item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -183,10 +183,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

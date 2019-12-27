@@ -24,7 +24,7 @@ interface Iface
 	 *
 	 * @return string Domain name e.g. catalog, product, service, ...
 	 */
-	public function getDomain();
+	public function getDomain() : string;
 
 	/**
 	 * Set the domain name the item is stored for
@@ -32,5 +32,5 @@ interface Iface
 	 * @param string $domain Domain name e.g. catalog, product, service, ...
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object for chaining method calls
 	 */
-	public function setDomain( $domain );
+	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface;
 }

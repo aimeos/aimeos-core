@@ -46,10 +46,10 @@ trait Traits
 	 * Adds a new address item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item New or existing address item
-	 * @param integer|null $idx Key in the list of address items or null to add the item at the end
+	 * @param int|null $idx Key in the list of address items or null to add the item at the end
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 */
-	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, $idx = null )
+	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, int $idx = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$idx !== null ? $this->addrItems[$idx] = $item : $this->addrItems[] = $item;
 		return $this;
@@ -62,7 +62,7 @@ trait Traits
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item Existing address item
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 */
-	public function deleteAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item )
+	public function deleteAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		foreach( $this->addrItems as $key => $addrItem )
 		{
@@ -86,7 +86,7 @@ trait Traits
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 * @throws \Aimeos\MShop\Exception If an item isn't a address item or isn't found
 	 */
-	public function deleteAddressItems( array $items )
+	public function deleteAddressItems( array $items ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		foreach( $items as $item ) {
 			$this->deleteAddressItem( $item );
@@ -101,7 +101,7 @@ trait Traits
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface[] Address items
 	 */
-	public function getAddressItemsDeleted()
+	public function getAddressItemsDeleted() : array
 	{
 		return $this->addrRmItems;
 	}
@@ -110,10 +110,10 @@ trait Traits
 	/**
 	 * Returns the address items
 	 *
-	 * @param integer $idx Key in the list of address items
+	 * @param int $idx Key in the list of address items
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface|null Address item or null if not found
 	 */
-	public function getAddressItem( $idx )
+	public function getAddressItem( int $idx ) : ?\Aimeos\MShop\Common\Item\Iface
 	{
 		return ( isset( $this->addrItems[$idx] ) ? $this->addrItems[$idx] : null );
 	}
@@ -124,7 +124,7 @@ trait Traits
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface[] Associative list of address IDs as keys and address items as values
 	 */
-	public function getAddressItems()
+	public function getAddressItems() : array
 	{
 		return $this->addrItems;
 	}

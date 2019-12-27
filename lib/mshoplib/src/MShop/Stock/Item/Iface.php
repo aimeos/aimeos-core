@@ -26,7 +26,7 @@ interface Iface
 	 *
 	 * @return string Product code (SKU)
 	 */
-	public function getProductCode();
+	public function getProductCode() : string;
 
 	/**
 	 * Sets a new code of the stock item.
@@ -34,29 +34,29 @@ interface Iface
 	 * @param string $code New product code (SKU)
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
-	public function setProductCode( $code );
+	public function setProductCode( string $code ) : \Aimeos\MShop\Stock\Item\Iface;
 
 	/**
 	 * Returns the stock level.
 	 *
-	 * @return integer|null Stock level
+	 * @return int|null Stock level
 	 */
-	public function getStockLevel();
+	public function getStockLevel() : ?int;
 
 	/**
 	 * Sets the stock level.
 	 *
-	 * @param integer|null $stocklevel New stock level
+	 * @param string|int|double|null $stocklevel New stock level
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
 	 */
-	public function setStockLevel( $stocklevel );
+	public function setStockLevel( $stocklevel = null ) : \Aimeos\MShop\Stock\Item\Iface;
 
 	/**
 	 * Returns the back in stock date of the stock.
 	 *
 	 * @return string|null Back in stock date of the stock
 	 */
-	public function getDateBack();
+	public function getDateBack() : ?string;
 
 	/**
 	 * Sets the stock back in stock date.
@@ -64,14 +64,14 @@ interface Iface
 	 * @param string|null $backdate New back in stock date of the stock
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
 	 */
-	public function setDateBack( $backdate );
+	public function setDateBack( string $backdate = null ) : \Aimeos\MShop\Stock\Item\Iface;
 
 	/**
 	 * Returns the expected delivery time frame
 	 *
 	 * @return string Expected delivery time frame
 	 */
-	public function getTimeframe();
+	public function getTimeframe() : string;
 
 	/**
 	 * Sets the expected delivery time frame
@@ -79,5 +79,5 @@ interface Iface
 	 * @param string $timeframe Expected delivery time frame
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
 	 */
-	public function setTimeframe( $timeframe );
+	public function setTimeframe( string $timeframe ) : \Aimeos\MShop\Stock\Item\Iface;
 }

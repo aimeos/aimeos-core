@@ -47,9 +47,9 @@ class Standard
 	 *
 	 * @return string Name/label for this coupon
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
-		return (string) $this->get( 'coupon.label', '' );
+		return $this->get( 'coupon.label', '' );
 	}
 
 
@@ -59,9 +59,9 @@ class Standard
 	 * @param string $name Coupon name, esp. short coupon class name
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
-	public function setLabel( $name )
+	public function setLabel( string $name ) : \Aimeos\MShop\Coupon\Item\Iface
 	{
-		return $this->set( 'coupon.label', (string) $name );
+		return $this->set( 'coupon.label', $name );
 	}
 
 
@@ -70,7 +70,7 @@ class Standard
 	 *
 	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
-	public function getDateStart()
+	public function getDateStart() : ?string
 	{
 		return $this->get( 'coupon.datestart' );
 	}
@@ -82,7 +82,7 @@ class Standard
 	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
-	public function setDateStart( $date )
+	public function setDateStart( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'coupon.datestart', $this->checkDateFormat( $date ) );
 	}
@@ -93,7 +93,7 @@ class Standard
 	 *
 	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
-	public function getDateEnd()
+	public function getDateEnd() : ?string
 	{
 		return $this->get( 'coupon.dateend' );
 	}
@@ -105,7 +105,7 @@ class Standard
 	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
-	public function setDateEnd( $date )
+	public function setDateEnd( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'coupon.dateend', $this->checkDateFormat( $date ) );
 	}
@@ -116,9 +116,9 @@ class Standard
 	 *
 	 * @return string Returns the provider class name
 	 */
-	public function getProvider()
+	public function getProvider() : string
 	{
-		return (string) $this->get( 'coupon.provider', '' );
+		return $this->get( 'coupon.provider', '' );
 	}
 
 
@@ -128,9 +128,9 @@ class Standard
 	 * @param string $provider Provider class name
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
-	public function setProvider( $provider )
+	public function setProvider( string $provider ) : \Aimeos\MShop\Coupon\Item\Iface
 	{
-		return $this->set( 'coupon.provider', (string) $provider );
+		return $this->set( 'coupon.provider', $provider );
 	}
 
 
@@ -139,9 +139,9 @@ class Standard
 	 *
 	 * @return array Custom configuration values
 	 */
-	public function getConfig()
+	public function getConfig() : array
 	{
-		return (array) $this->get( 'coupon.config', [] );
+		return $this->get( 'coupon.config', [] );
 	}
 
 
@@ -151,7 +151,7 @@ class Standard
 	 * @param array $config Custom configuration values
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
-	public function setConfig( array $config )
+	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'coupon.config', $config );
 	}
@@ -160,23 +160,23 @@ class Standard
 	/**
 	 * Returns the status of the coupon item.
 	 *
-	 * @return integer Status of the item
+	 * @return int Status of the item
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
-		return (int) $this->get( 'coupon.status', 1 );
+		return $this->get( 'coupon.status', 1 );
 	}
 
 
 	/**
 	 * Sets the new status of the coupon item.
 	 *
-	 * @param integer $status Status of the item
+	 * @param int $status Status of the item
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'coupon.status', (int) $status );
+		return $this->set( 'coupon.status', $status );
 	}
 
 
@@ -185,7 +185,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'coupon';
 	}
@@ -194,9 +194,9 @@ class Standard
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
 			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->date )
@@ -208,10 +208,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -238,10 +238,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

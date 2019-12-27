@@ -19,8 +19,7 @@ namespace Aimeos\MShop\Order\Item\Base\Product;
  * @subpackage Order
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Position\Iface,
-		\Aimeos\MShop\Common\Item\Status\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
 	 * Sets the site ID of the item.
@@ -28,29 +27,29 @@ interface Iface
 	 * @param string $value Unique site ID of the item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setSiteId( $value );
+	public function setSiteId( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the base ID.
 	 *
 	 * @return string|null Base ID
 	 */
-	public function getBaseId();
+	public function getBaseId() : ?string;
 
 	/**
 	 * Sets the base ID.
 	 *
-	 * @param string $baseid New base ID
+	 * @param string $baseid|null New base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setBaseId( $baseid );
+	public function setBaseId( string $baseid = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the order address ID the product should be shipped to
 	 *
 	 * @return string|null Order address ID
 	 */
-	public function getOrderAddressId();
+	public function getOrderAddressId() : ?string;
 
 	/**
 	 * Sets the order address ID the product should be shipped to
@@ -58,7 +57,7 @@ interface Iface
 	 * @param string|null $value Order address ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setOrderAddressId( $value );
+	public function setOrderAddressId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the parent ID of the ordered product if there is one.
@@ -66,7 +65,7 @@ interface Iface
 	 *
 	 * @return string|null order product ID
 	 */
-	public function getOrderProductId();
+	public function getOrderProductId() : ?string;
 
 	/**
 	 * Sets the parent ID of the ordered product.
@@ -75,14 +74,14 @@ interface Iface
 	 * @param string|null $value Order product ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setOrderProductId( $value );
+	public function setOrderProductId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the supplier code.
 	 *
 	 * @return string supplier code
 	 */
-	public function getSupplierCode();
+	public function getSupplierCode() : string;
 
 	/**
 	 * Sets the supplier code.
@@ -90,14 +89,29 @@ interface Iface
 	 * @param string $suppliercode
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setSupplierCode( $suppliercode );
+	public function setSupplierCode( string $suppliercode ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+
+	/**
+	 * Returns the position of the product in the order.
+	 *
+	 * @return int|null Product position in the order from 0-n
+	 */
+	public function getPosition() : ?int;
+
+	/**
+	 * Sets the position of the product within the list of ordered products.
+	 *
+	 * @param int|null $value Product position in the order from 0-n or null for resetting the position
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setPosition( int $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the product ID the customer has selected.
 	 *
 	 * @return string Original product ID
 	 */
-	public function getProductId();
+	public function getProductId() : string;
 
 	/**
 	 * Sets the ID of a product the customer has selected.
@@ -105,14 +119,14 @@ interface Iface
 	 * @param string $id Original product ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setProductId( $id );
+	public function setProductId( string $id ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the product code the customer has selected.
 	 *
 	 * @return string product code
 	 */
-	public function getProductCode();
+	public function getProductCode() : string;
 
 	/**
 	 * Sets the code of a product the customer has selected.
@@ -120,14 +134,14 @@ interface Iface
 	 * @param string $code product code
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setProductCode( $code );
+	public function setProductCode( string $code ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns all of sub-product items
 	 *
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of product items
 	 */
-	public function getProducts();
+	public function getProducts() : array;
 
 	/**
 	 * Sets all sub-product items
@@ -135,21 +149,21 @@ interface Iface
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of product items
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setProducts( array $products );
+	public function setProducts( array $products ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the code of the stock type the product should be retrieved from.
 	 *
 	 * @return string Stock type
 	 */
-	public function getStockType();
+	public function getStockType() : string;
 
 	/**
 	 * Returns the expected delivery time frame
 	 *
 	 * @return string Expected delivery time frame
 	 */
-	public function getTimeframe();
+	public function getTimeframe() : string;
 
 	/**
 	 * Sets the expected delivery time frame
@@ -157,7 +171,7 @@ interface Iface
 	 * @param string $timeframe Expected delivery time frame
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setTimeframe( $timeframe );
+	public function setTimeframe( string $timeframe ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Sets the code of the stock type the product should be retrieved from.
@@ -165,14 +179,14 @@ interface Iface
 	 * @param string $code Stock type
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setStockType( $code );
+	public function setStockType( string $code ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the localized name of the product
 	 *
 	 * @return string Returns the localized name of the product
 	 */
-	public function getName();
+	public function getName() : string;
 
 	/**
 	 * Sets the localized name of the product.
@@ -180,14 +194,14 @@ interface Iface
 	 * @param string $value Value of the localized name of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setName( $value );
+	public function setName( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the localized description of the product
 	 *
 	 * @return string Returns the localized description of the product
 	 */
-	public function getDescription();
+	public function getDescription() : string;
 
 	/**
 	 * Sets the localized description of the product.
@@ -195,14 +209,14 @@ interface Iface
 	 * @param string $value Value of the localized description of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setDescription( $value );
+	public function setDescription( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the location of the media.
 	 *
 	 * @return string Location of the media
 	 */
-	public function getMediaUrl();
+	public function getMediaUrl() : string;
 
 	/**
 	 * Sets the media url of the product the customer has added.
@@ -210,14 +224,14 @@ interface Iface
 	 * @param string $value Location of the media/picture
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setMediaUrl( $value );
+	public function setMediaUrl( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the URL target specific for that product
 	 *
 	 * @return string URL target specific for that product
 	 */
-	public function getTarget();
+	public function getTarget() : string;
 
 	/**
 	 * Sets the URL target specific for that product
@@ -225,29 +239,29 @@ interface Iface
 	 * @param string $value New URL target specific for that product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setTarget( $value );
+	public function setTarget( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the number of packages the customer has added.
 	 *
-	 * @return integer Amount of product packages
+	 * @return int Amount of product packages
 	 */
-	public function getQuantity();
+	public function getQuantity() : int;
 
 	/**
 	 * Sets the number of product packages the customer has added.
 	 *
-	 * @param integer $quantitiy Amount of product packages
+	 * @param int $quantitiy Amount of product packages
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setQuantity( $quantitiy );
+	public function setQuantity( int $quantitiy ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the stored price item for the selected product and package.
 	 *
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, additional costs and rebate
 	 */
-	public function getPrice();
+	public function getPrice() : \Aimeos\MShop\Price\Item\Iface;
 
 	/**
 	 * Sets the new price item for the selected product and package.
@@ -255,40 +269,40 @@ interface Iface
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item containing price and additional costs
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price );
+	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 *	Returns the set flags for the product item.
 	 *
-	 * @return integer Flags, e.g. for immutable products
+	 * @return int Flags, e.g. for immutable products
 	 */
-	public function getFlags();
+	public function getFlags() : int;
 
 	/**
 	 *	Sets the new value for the product item flags.
 	 *
-	 * @param integer $value Flags, e.g. for immutable products
+	 * @param int $value Flags, e.g. for immutable products
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setFlags( $value );
+	public function setFlags( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the value of the attribute item for the ordered product with the given code.
 	 *
 	 * @param string $code Code of the product attribute item
 	 * @param array|string $type Type or list of types of the product attribute items
-	 * @return string|null Value of the attribute item for the ordered product and the given code
+	 * @return array|string|null Value of the attribute item for the ordered product and the given code
 	 */
-	public function getAttribute( $code, $type = '' );
+	public function getAttribute( string $code, $type = '' );
 
 	/**
 	 * Returns the attribute item for the ordered product with the given code.
 	 *
 	 * @param string $code Code of the product attribute item
 	 * @param array|string $type Type or list of types of the product attribute items
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface|null Attribute item for the ordered product and the given code
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface|array|null Attribute item for the ordered product and the given code
 	 */
-	public function getAttributeItem( $code, $type = '' );
+	public function getAttributeItem( string $code, $type = '' );
 
 	/**
 	 * Returns the list of attribute items for the ordered product.
@@ -296,7 +310,7 @@ interface Iface
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
 	 * @return array List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 */
-	public function getAttributeItems( $type = null );
+	public function getAttributeItems( string $type = null ) : array;
 
 	/**
 	 * Adds or replaces the attribute item in the list of product attributes.
@@ -304,7 +318,7 @@ interface Iface
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item Product attribute item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setAttributeItem( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item );
+	public function setAttributeItem( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Sets the new list of attribute items for the product.
@@ -312,7 +326,7 @@ interface Iface
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] $attributes List of order product attribute items
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setAttributeItems( array $attributes );
+	public function setAttributeItems( array $attributes ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Copys all data from a given product.
@@ -320,14 +334,14 @@ interface Iface
 	 * @param \Aimeos\MShop\Product\Item\Iface $product New product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function copyFrom( \Aimeos\MShop\Product\Item\Iface $product );
+	public function copyFrom( \Aimeos\MShop\Product\Item\Iface $product ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Compares the properties of the given order product item with its own ones.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item
-	 * @return boolean True if the item properties are equal, false if not
+	 * @return bool True if the item properties are equal, false if not
 	 * @since 2014.09
 	 */
-	public function compare( \Aimeos\MShop\Order\Item\Base\Product\Iface $item );
+	public function compare( \Aimeos\MShop\Order\Item\Base\Product\Iface $item ) : bool;
 }

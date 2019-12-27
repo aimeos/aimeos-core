@@ -78,7 +78,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * @param array|string $type Type or list of types of the product attribute items
 	 * @return array|string|null Value or list of values of the attribute item for the ordered product and the given code
 	 */
-	public function getAttribute( $code, $type = '' )
+	public function getAttribute( string $code, $type = '' )
 	{
 		$list = [];
 		$map = $this->getAttributeMap();
@@ -101,11 +101,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * Returns the attribute item or list of attribute items for the ordered product with the given code.
 	 *
 	 * @param string $code Code of the product attribute item
-	 * @param string $type Type of the product attribute item
+	 * @param array|string $type Type of the product attribute item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface|array|null
 	 * 	Attribute item or list of items for the ordered product and the given code
 	 */
-	public function getAttributeItem( $code, $type = '' )
+	public function getAttributeItem( string $code, $type = '' )
 	{
 		$list = [];
 		$map = $this->getAttributeMap();
@@ -130,7 +130,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
 	 * @return array List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 */
-	public function getAttributeItems( $type = null )
+	public function getAttributeItems( string $type = null ) : array
 	{
 		if( $type === null ) {
 			return $this->attributes;
@@ -155,7 +155,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item Service attribute item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setAttributeItem( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item )
+	public function setAttributeItem( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		$this->getAttributeMap();
 
@@ -182,7 +182,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] $attributes List of order product attribute items
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setAttributeItems( array $attributes )
+	public function setAttributeItems( array $attributes ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $attributes );
 
@@ -199,7 +199,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 *
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate
 	 */
-	public function getPrice()
+	public function getPrice() : \Aimeos\MShop\Price\Item\Iface
 	{
 		return $this->price;
 	}
@@ -211,7 +211,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item containing price and additional costs
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price )
+	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		if( $price !== $this->price )
 		{
@@ -228,7 +228,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 *
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of product items
 	 */
-	public function getProducts()
+	public function getProducts() : array
 	{
 		return $this->products;
 	}
@@ -240,7 +240,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of product items
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setProducts( array $products )
+	public function setProducts( array $products ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $products );
 
@@ -256,7 +256,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'order/base/product';
 	}
@@ -266,10 +266,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 		$price = $item->getPrice();
@@ -296,10 +296,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	/**
 	 * Returns the item values as associative list.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 
@@ -316,12 +316,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	/**
 	 * Checks if the given flag constant is valid.
 	 *
-	 * @param integer $value Flag constant value
+	 * @param int $value Flag constant value
 	 */
-	protected function checkFlags( $value )
+	protected function checkFlags( int $value )
 	{
-		$value = (int) $value;
-
 		if( $value < \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE ||
 			$value > \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE
 		) {
@@ -337,7 +335,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 *
 	 * @return array Associative list of type and code as key and an \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface as value
 	 */
-	protected function getAttributeMap()
+	protected function getAttributeMap() : array
 	{
 		if( !isset( $this->attributesMap ) )
 		{

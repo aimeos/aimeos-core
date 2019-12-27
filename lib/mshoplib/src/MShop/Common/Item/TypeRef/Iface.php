@@ -24,7 +24,7 @@ interface Iface
 	 *
 	 * @return string|null Type of the item
 	 */
-	public function getType();
+	public function getType() : ?string;
 
 	/**
 	 * Sets the new type of the item.
@@ -32,5 +32,5 @@ interface Iface
 	 * @param string $type Type of the item
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function setType( $type );
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface;
 }

@@ -36,10 +36,10 @@ class Standard
 	/**
 	 * Sets the id of the language.
 	 *
-	 * @param string $key Id to set
+	 * @param string|null $key Id to set
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
-	public function setId( $key )
+	public function setId( string $key = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return parent::setId( $this->checkLanguageId( $key ) );
 	}
@@ -50,7 +50,7 @@ class Standard
 	 *
 	 * @return string two letter ISO language code
 	 */
-	public function getCode()
+	public function getCode() : string
 	{
 		return (string) $this->get( 'locale.language.code', $this->get( 'locale.language.id', '' ) );
 	}
@@ -62,7 +62,7 @@ class Standard
 	 * @param string $code two letter ISO language code
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
-	public function setCode( $code )
+	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'locale.language.code', $this->checkLanguageId( $code, false ) );
 	}
@@ -73,7 +73,7 @@ class Standard
 	 *
 	 * @return string Returns the label of the language
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
 		return (string) $this->get( 'locale.language.label', '' );
 	}
@@ -85,7 +85,7 @@ class Standard
 	 * @param string $label Label of the language
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
-	public function setLabel( $label )
+	public function setLabel( string $label ) : \Aimeos\MShop\Locale\Item\Language\Iface
 	{
 		return $this->set( 'locale.language.label', (string) $label );
 	}
@@ -94,23 +94,23 @@ class Standard
 	/**
 	 * Returns the status of the item.
 	 *
-	 * @return integer Status of the item
+	 * @return int Status of the item
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
-		return (int) $this->get( 'locale.language.status', 1 );
+		return $this->get( 'locale.language.status', 1 );
 	}
 
 
 	/**
 	 * Sets the status of the item.
 	 *
-	 * @param integer $status Status of the item
+	 * @param int $status Status of the item
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'locale.language.status', (int) $status );
+		return $this->set( 'locale.language.status', $status );
 	}
 
 
@@ -119,7 +119,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'locale/language';
 	}
@@ -128,9 +128,9 @@ class Standard
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getStatus() > 0;
 	}
@@ -140,10 +140,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Language item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -167,10 +167,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

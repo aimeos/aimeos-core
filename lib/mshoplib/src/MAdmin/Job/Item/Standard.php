@@ -38,9 +38,9 @@ class Standard
 	 *
 	 * @return string Label of the job item
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
-		return (string) $this->get( 'job.label', '' );
+		return $this->get( 'job.label', '' );
 	}
 
 
@@ -50,9 +50,9 @@ class Standard
 	 * @param string $label Type label of the job item
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function setLabel( $label )
+	public function setLabel( string $label ) : \Aimeos\MAdmin\Job\Item\Iface
 	{
-		return $this->set( 'job.label', (string) $label );
+		return $this->set( 'job.label', $label );
 	}
 
 
@@ -61,9 +61,9 @@ class Standard
 	 *
 	 * @return string Label of the job item
 	 */
-	public function getMethod()
+	public function getMethod() : string
 	{
-		return (string) $this->get( 'job.method', '' );
+		return $this->get( 'job.method', '' );
 	}
 
 
@@ -73,9 +73,9 @@ class Standard
 	 * @param string $method Method (object/methodname) to call
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function setMethod( $method )
+	public function setMethod( string $method ) : \Aimeos\MAdmin\Job\Item\Iface
 	{
-		return $this->set( 'job.method', (string) $method );
+		return $this->set( 'job.method', $method );
 	}
 
 
@@ -84,9 +84,9 @@ class Standard
 	 *
 	 * @return array Parameter of the job
 	 */
-	public function getParameter()
+	public function getParameter() : array
 	{
-		return (array) $this->get( 'job.parameter', [] );
+		return $this->get( 'job.parameter', [] );
 	}
 
 
@@ -96,7 +96,7 @@ class Standard
 	 * @param array $param Parameter for the job
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function setParameter( array $param )
+	public function setParameter( array $param ) : \Aimeos\MAdmin\Job\Item\Iface
 	{
 		return $this->set( 'job.parameter', $param );
 	}
@@ -107,9 +107,9 @@ class Standard
 	 *
 	 * @return array Associative list of result key/value pairs or list thereof
 	 */
-	public function getResult()
+	public function getResult() : array
 	{
-		return (array) $this->get( 'job.result', [] );
+		return $this->get( 'job.result', [] );
 	}
 
 
@@ -119,7 +119,7 @@ class Standard
 	 * @param array $result Associative list of result key/value pairs or list thereof
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function setResult( array $result )
+	public function setResult( array $result ) : \Aimeos\MAdmin\Job\Item\Iface
 	{
 		return $this->set( 'job.result', $result );
 	}
@@ -128,23 +128,23 @@ class Standard
 	/**
 	 * Returns the status (enabled/disabled) of the job item.
 	 *
-	 * @return integer Returns the status of the item
+	 * @return int Returns the status of the item
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
-		return (int) $this->get( 'job.status', 1 );
+		return $this->get( 'job.status', 1 );
 	}
 
 
 	/**
 	 * Sets the new status of the job item.
 	 *
-	 * @param integer $status Status of the item
+	 * @param int $status Status of the item
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'job.status', (int) $status );
+		return $this->set( 'job.status', $status );
 	}
 
 
@@ -153,7 +153,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'job';
 	}
@@ -163,10 +163,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -192,10 +192,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

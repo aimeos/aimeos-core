@@ -26,15 +26,15 @@ interface Iface
 	 *
 	 * @return string URL target specific for that category
 	 */
-	public function getTarget();
+	public function getTarget() : string;
 
 	/**
 	 * Sets a new URL target specific for that category
 	 *
 	 * @param string $value New URL target specific for that category
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function setTarget( $value );
+	public function setTarget( string $value ) : \Aimeos\MShop\Catalog\Item\Iface;
 
 	/**
 	 * Adds a child node to this node.
@@ -42,7 +42,7 @@ interface Iface
 	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
 	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
 	 */
-	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item );
+	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface;
 
 	/**
 	 * Removes a child node from this node.
@@ -50,41 +50,41 @@ interface Iface
 	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to remove
 	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
 	 */
-	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item );
+	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface;
 
 	/**
 	 * Returns a child of this node identified by its index.
 	 *
-	 * @param integer $index Index of child node
+	 * @param int $index Index of child node
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Selected node
 	 */
-	public function getChild( $index );
+	public function getChild( int $index ) : \Aimeos\MShop\Common\Item\Tree\Iface;
 
 	/**
 	 * Returns all children of this node.
 	 *
 	 * @return array Numerically indexed list of nodes
 	 */
-	public function getChildren();
+	public function getChildren() : array;
 
 	/**
 	 * Returns the deleted children.
 	 *
 	 * @return \Aimeos\MShop\Catalog\Item\Iface[] List of removed children
 	 */
-	public function getChildrenDeleted();
+	public function getChildrenDeleted() : array;
 
 	/**
 	 * Tests if a node has children.
 	 *
-	 * @return boolean True if node has children, false if not
+	 * @return bool True if node has children, false if not
 	 */
-	public function hasChildren();
+	public function hasChildren() : bool;
 
 	/**
 	 * Returns the node and its children as list
 	 *
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Associative list of IDs as keys and nodes as values
+	 * @return \Aimeos\MShop\Catalog\Item\Iface[] Associative list of IDs as keys and nodes as values
 	 */
-	public function toList();
+	public function toList() : array;
 }

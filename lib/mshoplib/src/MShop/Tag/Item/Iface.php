@@ -27,7 +27,7 @@ interface Iface
 	 *
 	 * @return string|null Language ID of the tag item
 	 */
-	public function getLanguageId();
+	public function getLanguageId() : ?string;
 
 	/**
 	 * Sets the Language Id of the tag item
@@ -35,14 +35,14 @@ interface Iface
 	 * @param string|null $id New Language ID of the tag item
 	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
-	public function setLanguageId( $id );
+	public function setLanguageId( string $id = null ) : \Aimeos\MShop\Tag\Item\Iface;
 
 	/**
 	 * Returns the label of the tag item.
 	 *
 	 * @return string Label of the tag item
 	 */
-	public function getLabel();
+	public function getLabel() : string;
 
 	/**
 	 * Sets the new label of the tag item.
@@ -50,5 +50,5 @@ interface Iface
 	 * @param string $label Label of the tag item
 	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
-	public function setLabel( $label );
+	public function setLabel( string $label ) : \Aimeos\MShop\Tag\Item\Iface;
 }

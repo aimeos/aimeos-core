@@ -25,7 +25,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 *
 	 * @return string Label of the attribute item
 	 */
-	public function getLabel();
+	public function getLabel() : string;
 
 	/**
 	 * Sets the new label of the attribute item.
@@ -33,7 +33,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @param string $label Type label of the attribute item
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function setLabel( $label );
+	public function setLabel( string $label ) : \Aimeos\MAdmin\Job\Item\Iface;
 
 
 	/**
@@ -41,7 +41,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 *
 	 * @return string Label of the job item
 	 */
-	public function getMethod();
+	public function getMethod() : string;
 
 	/**
 	 * Sets the new method for the job.
@@ -49,14 +49,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @param string $method Method (object/methodname) to call
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function setMethod( $method );
+	public function setMethod( string $method ) : \Aimeos\MAdmin\Job\Item\Iface;
 
 	/**
 	 * Returns the parameter for the job.
 	 *
 	 * @return array Parameter of the job
 	 */
-	public function getParameter();
+	public function getParameter() : array;
 
 	/**
 	 * Sets the new parameter for the job.
@@ -64,14 +64,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @param array $param Parameter for the job
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function setParameter( array $param );
+	public function setParameter( array $param ) : \Aimeos\MAdmin\Job\Item\Iface;
 
 	/**
 	 * Returns the result of the job.
 	 *
 	 * @return array Associative list of result key/value pairs or list thereof
 	 */
-	public function getResult();
+	public function getResult() : array;
 
 	/**
 	 * Sets the new result of the job.
@@ -79,5 +79,5 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @param array $result Associative list of result key/value pairs or list thereof
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function setResult( array $result );
+	public function setResult( array $result ) : \Aimeos\MAdmin\Job\Item\Iface;
 }

@@ -49,7 +49,7 @@ class Standard
 	 *
 	 * @return string|null ISO language code (e.g. de or de_DE)
 	 */
-	public function getLanguageId()
+	public function getLanguageId() : ?string
 	{
 		return $this->get( 'text.languageid' );
 	}
@@ -62,7 +62,7 @@ class Standard
 	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
-	public function setLanguageId( $id )
+	public function setLanguageId( string $id = null ) : \Aimeos\MShop\Text\Item\Iface
 	{
 		return $this->set( 'text.languageid', $this->checkLanguageId( $id ) );
 	}
@@ -73,7 +73,7 @@ class Standard
 	 *
 	 * @return string|null Type of the text item
 	 */
-	public function getType()
+	public function getType() : ?string
 	{
 		return $this->get( 'text.type' );
 	}
@@ -85,7 +85,7 @@ class Standard
 	 * @param string $type Type of the text type
 	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'text.type', $this->checkCode( $type ) );
 	}
@@ -96,9 +96,9 @@ class Standard
 	 *
 	 * @return string Domain of the text item
 	 */
-	public function getDomain()
+	public function getDomain() : string
 	{
-		return (string) $this->get( 'text.domain', '' );
+		return $this->get( 'text.domain', '' );
 	}
 
 
@@ -108,9 +108,9 @@ class Standard
 	 * @param string $domain Domain of the text item
 	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
-	public function setDomain( $domain )
+	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'text.domain', (string) $domain );
+		return $this->set( 'text.domain', $domain );
 	}
 
 
@@ -119,9 +119,9 @@ class Standard
 	 *
 	 * @return string Content of the text item
 	 */
-	public function getContent()
+	public function getContent() : string
 	{
-		return (string) $this->get( 'text.content', '' );
+		return $this->get( 'text.content', '' );
 	}
 
 
@@ -131,10 +131,10 @@ class Standard
 	 * @param string $text Content of the text item
 	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
-	public function setContent( $text )
+	public function setContent( string $text ) : \Aimeos\MShop\Text\Item\Iface
 	{
 		ini_set( 'mbstring.substitute_character', 'none' );
-		return $this->set( 'text.content', @mb_convert_encoding( (string) $text, 'UTF-8', 'UTF-8' ) );
+		return $this->set( 'text.content', @mb_convert_encoding( $text, 'UTF-8', 'UTF-8' ) );
 	}
 
 
@@ -143,9 +143,9 @@ class Standard
 	 *
 	 * @return string Label of the attribute item
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
-		return (string) $this->get( 'text.label', '' );
+		return $this->get( 'text.label', '' );
 	}
 
 
@@ -155,32 +155,32 @@ class Standard
 	 * @param string $label Type label of the attribute item
 	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
-	public function setLabel( $label )
+	public function setLabel( string $label ) : \Aimeos\MShop\Text\Item\Iface
 	{
-		return $this->set( 'text.label', (string) $label );
+		return $this->set( 'text.label', $label );
 	}
 
 
 	/**
 	 * Returns the status of the text item.
 	 *
-	 * @return integer Status of the text item
+	 * @return int Status of the text item
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
-		return (int) $this->get( 'text.status', 1 );
+		return $this->get( 'text.status', 1 );
 	}
 
 
 	/**
 	 * Sets the status of the text item.
 	 *
-	 * @param integer $status true/false for enabled/disabled
+	 * @param int $status true/false for enabled/disabled
 	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'text.status', (int) $status );
+		return $this->set( 'text.status', $status );
 	}
 
 
@@ -189,7 +189,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'text';
 	}
@@ -198,9 +198,9 @@ class Standard
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
 			&& ( $this->langid === null || $this->getLanguageId() === null
@@ -208,14 +208,14 @@ class Standard
 	}
 
 
-	/*
+	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -242,10 +242,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

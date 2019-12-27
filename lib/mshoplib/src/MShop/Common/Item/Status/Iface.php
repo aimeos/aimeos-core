@@ -22,15 +22,15 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the status of the common list type item
 	 *
-	 * @return integer Status of the common list type item
+	 * @return int Status of the common list type item
 	 */
-	public function getStatus();
+	public function getStatus() : int;
 
 	/**
 	 * Sets the status of the common list type item
 	 *
-	 * @param integer $status New status of the common list type item
+	 * @param int $status New status of the common list type item
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
-	public function setStatus( $status );
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface;
 }

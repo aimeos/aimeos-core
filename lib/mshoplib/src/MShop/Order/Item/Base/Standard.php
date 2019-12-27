@@ -64,11 +64,11 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	/**
 	 * Tests if all necessary items are available to create the order.
 	 *
-	 * @param integer $what Test for the specific type of completeness
+	 * @param int $what Test for the specific type of completeness
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 * @throws \Aimeos\MShop\Order\Exception if there are no products in the basket
 	 */
-	public function check( $what = self::PARTS_ALL )
+	public function check( int $what = self::PARTS_ALL ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$this->checkParts( $what );
 
@@ -89,7 +89,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @return string|null ID of the order item
 	 */
-	public function getId()
+	public function getId() : ?string
 	{
 		return $this->get( 'order.base.id' );
 	}
@@ -98,10 +98,10 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	/**
 	 * Sets the id of the order base object.
 	 *
-	 * @param string $id Unique ID of the order base object
+	 * @param string|null $id Unique ID of the order base object
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function setId( $id )
+	public function setId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$id = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id );
 		$this->set( 'order.base.id', $id );
@@ -119,7 +119,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @return string|null Site ID (or null if not available)
 	 */
-	public function getSiteId()
+	public function getSiteId() : ?string
 	{
 		return $this->get( 'order.base.siteid' );
 	}
@@ -130,7 +130,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @return string Site code (or empty string if not available)
 	 */
-	public function getSiteCode()
+	public function getSiteCode() : string
 	{
 		return $this->get( 'order.base.sitecode', '' );
 	}
@@ -141,7 +141,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @return string Comment for the order
 	 */
-	public function getComment()
+	public function getComment() : string
 	{
 		return $this->get( 'order.base.comment', '' );
 	}
@@ -153,9 +153,9 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * @param string $comment Comment for the order
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function setComment( $comment )
+	public function setComment( string $comment ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		return $this->set( 'order.base.comment', (string) $comment );
+		return $this->set( 'order.base.comment', $comment );
 	}
 
 
@@ -164,7 +164,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @return string|null Returns modify date/time of the order base item
 	 */
-	public function getTimeModified()
+	public function getTimeModified() : ?string
 	{
 		return $this->get( 'order.base.mtime' );
 	}
@@ -175,7 +175,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
-	public function getTimeCreated()
+	public function getTimeCreated() : ?string
 	{
 		return $this->get( 'order.base.ctime' );
 	}
@@ -186,9 +186,9 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @return string Editorcode of editor who created/modified the item at last
 	 */
-	public function getEditor()
+	public function getEditor() : string
 	{
-		return (string) $this->get( 'order.base.editor' );
+		return $this->get( 'order.base.editor', '' );
 	}
 
 
@@ -197,9 +197,9 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @return string Unique ID of the customer
 	 */
-	public function getCustomerId()
+	public function getCustomerId() : string
 	{
-		return (string) $this->get( 'order.base.customerid' );
+		return $this->get( 'order.base.customerid', '' );
 	}
 
 
@@ -209,12 +209,12 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * @param string $customerid Unique ID of the customer
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function setCustomerId( $customerid )
+	public function setCustomerId( string $customerid ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		if( (string) $customerid !== $this->getCustomerId() )
+		if( $customerid !== $this->getCustomerId() )
 		{
 			$this->notify( 'setCustomerId.before', $customerid );
-			$this->set( 'order.base.customerid', (string) $customerid );
+			$this->set( 'order.base.customerid', $customerid );
 			$this->notify( 'setCustomerId.after', $customerid );
 		}
 
@@ -227,9 +227,9 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @return string Customer reference for the order
 	 */
-	public function getCustomerReference()
+	public function getCustomerReference() : string
 	{
-		return (string) $this->get( 'order.base.customerref' );
+		return $this->get( 'order.base.customerref', '' );
 	}
 
 
@@ -239,9 +239,9 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * @param string $value Customer reference for the order
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function setCustomerReference( $value )
+	public function setCustomerReference( string $value ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		return $this->set( 'order.base.customerref', (string) $value );
+		return $this->set( 'order.base.customerref', $value );
 	}
 
 
@@ -251,7 +251,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * @return \Aimeos\MShop\Locale\Item\Iface Object containing information
 	 *  about site, language, country and currency
 	 */
-	public function getLocale()
+	public function getLocale() : \Aimeos\MShop\Locale\Item\Iface
 	{
 		return $this->locale;
 	}
@@ -264,7 +264,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *  about site, language, country and currency
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale )
+	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$this->notify( 'setLocale.before', $locale );
 
@@ -282,7 +282,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate the customer has to pay
 	 */
-	public function getPrice()
+	public function getPrice() : \Aimeos\MShop\Price\Item\Iface
 	{
 		if( $this->recalc )
 		{
@@ -310,9 +310,9 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return $this->available;
 	}
@@ -321,11 +321,12 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	/**
 	 * Sets the general availability of the item
 	 *
-	 * @return boolean $value True if available, false if not
+	 * @param bool $value True if available, false if not
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setAvailable( $value )
+	public function setAvailable( bool $value ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$this->available = (bool) $value;
+		$this->available = $value;
 	}
 
 
@@ -334,7 +335,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setModified()
+	public function setModified() : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$this->recalc = true;
 		return parent::setModified();
@@ -345,10 +346,10 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = $this;
 		$locale = $item->getLocale();
@@ -380,10 +381,10 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$price = $this->getPrice();
 		$locale = $this->getLocale();
@@ -420,7 +421,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function finish()
+	public function finish() : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$this->notify( 'setOrder.before' );
 		return $this;
@@ -430,13 +431,11 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	/**
 	 * Checks the constants for the different parts of the basket.
 	 *
-	 * @param integer $value Part constant
+	 * @param int $value Part constant
 	 * @throws \Aimeos\MShop\Order\Exception If parts constant is invalid
 	 */
-	protected function checkParts( $value )
+	protected function checkParts( int $value )
 	{
-		$value = (int) $value;
-
 		if( $value < self::PARTS_NONE || $value > self::PARTS_ALL ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Flags not within allowed range' ) );
 		}

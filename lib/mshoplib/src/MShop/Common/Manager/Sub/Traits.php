@@ -40,7 +40,7 @@ trait Traits
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
 	protected function addDecorators( \Aimeos\MShop\Context\Item\Iface $context,
-		\Aimeos\MShop\Common\Manager\Iface $manager, array $decorators, $classprefix )
+		\Aimeos\MShop\Common\Manager\Iface $manager, array $decorators, string $classprefix ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		foreach( $decorators as $name )
 		{
@@ -69,8 +69,9 @@ trait Traits
 	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @param string $managerpath Manager sub-names separated by slashes, e.g. "list/type"
 	 * @param string $domain Domain name in lower case, e.g. "product"
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function addManagerDecorators( \Aimeos\MShop\Common\Manager\Iface $manager, $managerpath, $domain )
+	protected function addManagerDecorators( \Aimeos\MShop\Common\Manager\Iface $manager, string $managerpath, string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$config = $this->getContext()->getConfig();
 
@@ -130,7 +131,7 @@ trait Traits
 	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions
 	 */
-	protected function getSubManagerBase( $domain, $manager, $name )
+	protected function getSubManagerBase( string $domain, string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$domain = strtolower( $domain );
 		$manager = strtolower( $manager );

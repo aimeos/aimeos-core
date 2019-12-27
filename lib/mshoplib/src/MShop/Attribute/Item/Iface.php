@@ -29,14 +29,14 @@ interface Iface
 	 *
 	 * @return string Unique key consisting of domain/type/code
 	 */
-	public function getKey();
+	public function getKey() : string;
 
 	/**
 	 * Returns the code of the attribute item.
 	 *
 	 * @return string Returns the code of the attribute item
 	 */
-	public function getCode();
+	public function getCode() : string;
 
 	/**
 	 * Sets the code for the attribute item.
@@ -44,14 +44,14 @@ interface Iface
 	 * @param string $code Code of the attribute item
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
-	public function setCode( $code );
+	public function setCode( string $code ) : \Aimeos\MShop\Attribute\Item\Iface;
 
 	/**
 	 * Returns the name of the attribute item.
 	 *
 	 * @return string Label of the attribute item
 	 */
-	public function getLabel();
+	public function getLabel() : string;
 
 	/**
 	 * Sets the new label of the attribute item.
@@ -59,6 +59,6 @@ interface Iface
 	 * @param string $label Type label of the attribute item
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
-	public function setLabel( $label );
+	public function setLabel( string $label ) : \Aimeos\MShop\Attribute\Item\Iface;
 
 }

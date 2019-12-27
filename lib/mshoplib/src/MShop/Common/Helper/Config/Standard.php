@@ -40,7 +40,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	public function check( $config )
+	public function check( array $config ) : array
 	{
 		$errors = [];
 

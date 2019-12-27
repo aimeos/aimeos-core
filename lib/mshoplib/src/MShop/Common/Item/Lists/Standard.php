@@ -36,7 +36,7 @@ class Standard
 	 * @param string $prefix Property prefix when converting to array
 	 * @param array $values Associative list of key/value pairs of the list item
 	 */
-	public function __construct( $prefix, array $values = [] )
+	public function __construct( string $prefix, array $values = [] )
 	{
 		parent::__construct( $prefix, $values );
 
@@ -45,15 +45,13 @@ class Standard
 	}
 
 
-
-
 	/**
 	 * Returns the parent ID of the common list item,
 	 * like the unique ID of a product or a tree node.
 	 *
 	 * @return string|null Parent ID of the common list item
 	 */
-	public function getParentId()
+	public function getParentId() : ?string
 	{
 		return $this->get( $this->prefix . 'parentid' );
 	}
@@ -63,12 +61,12 @@ class Standard
 	 * Sets the parent ID of the common list item,
 	 * like the unique ID of a product or a tree node.
 	 *
-	 * @param string $parentid New parent ID of the common list item
+	 * @param string|null $parentid New parent ID of the common list item
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setParentId( $parentid )
+	public function setParentId( string $parentid = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( $this->prefix . 'parentid', (string) $parentid );
+		return $this->set( $this->prefix . 'parentid', $parentid );
 	}
 
 
@@ -77,7 +75,7 @@ class Standard
 	 *
 	 * @return string Unique key consisting of domain/type/refid
 	 */
-	public function getKey()
+	public function getKey() : string
 	{
 		return $this->getDomain() . '|' . $this->getType() . '|' . $this->getRefId();
 	}
@@ -88,9 +86,9 @@ class Standard
 	 *
 	 * @return string Domain of the common list item
 	 */
-	public function getDomain()
+	public function getDomain() : string
 	{
-		return (string) $this->get( $this->prefix . 'domain', '' );
+		return $this->get( $this->prefix . 'domain', '' );
 	}
 
 
@@ -100,9 +98,9 @@ class Standard
 	 * @param string $domain New domain of the common list item
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setDomain( $domain )
+	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( $this->prefix . 'domain', (string) $domain );
+		return $this->set( $this->prefix . 'domain', $domain );
 	}
 
 
@@ -112,9 +110,9 @@ class Standard
 	 *
 	 * @return string Reference id of the common list item
 	 */
-	public function getRefId()
+	public function getRefId() : string
 	{
-		return (string) $this->get( $this->prefix . 'refid', '' );
+		return $this->get( $this->prefix . 'refid', '' );
 	}
 
 
@@ -125,9 +123,9 @@ class Standard
 	 * @param string $refid New reference id of the common list item
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setRefId( $refid )
+	public function setRefId( string $refid ) : \Aimeos\MShop\Common\Item\Lists\Iface
 	{
-		return $this->set( $this->prefix . 'refid', (string) $refid );
+		return $this->set( $this->prefix . 'refid', $refid );
 	}
 
 
@@ -136,7 +134,7 @@ class Standard
 	 *
 	 * @return string|null Start date of the common list item (YYYY-MM-DD hh:mm:ss)
 	 */
-	public function getDateStart()
+	public function getDateStart() : ?string
 	{
 		return $this->get( $this->prefix . 'datestart' );
 	}
@@ -145,10 +143,10 @@ class Standard
 	/**
 	 * Sets the new start date of the common list item (YYYY-MM-DD hh:mm:ss).
 	 *
-	 * @param string $date New start date of the common list item (YYYY-MM-DD hh:mm:ss)
+	 * @param string|null $date New start date of the common list item (YYYY-MM-DD hh:mm:ss)
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setDateStart( $date )
+	public function setDateStart( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( $this->prefix . 'datestart', $this->checkDateFormat( $date ) );
 	}
@@ -159,7 +157,7 @@ class Standard
 	 *
 	 * @return string|null End date of the common list item (YYYY-MM-DD hh:mm:ss)
 	 */
-	public function getDateEnd()
+	public function getDateEnd() : ?string
 	{
 		return $this->get( $this->prefix . 'dateend' );
 	}
@@ -168,10 +166,10 @@ class Standard
 	/**
 	 * Sets the new end date of the common list item (YYYY-MM-DD hh:mm:ss).
 	 *
-	 * @param string $date New end date of the common list item (YYYY-MM-DD hh:mm:ss)
+	 * @param string|null $date New end date of the common list item (YYYY-MM-DD hh:mm:ss)
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setDateEnd( $date )
+	public function setDateEnd( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( $this->prefix . 'dateend', $this->checkDateFormat( $date ) );
 	}
@@ -182,7 +180,7 @@ class Standard
 	 *
 	 * @return string|null Type of the list item
 	 */
-	public function getType()
+	public function getType() : ?string
 	{
 		return $this->get( $this->prefix . 'type', 'default' );
 	}
@@ -195,7 +193,7 @@ class Standard
 	 * @param string $type type of the list item
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( $this->prefix . 'type', $this->checkCode( $type ) );
 	}
@@ -204,46 +202,46 @@ class Standard
 	/**
 	 * Returns the position of the list item.
 	 *
-	 * @return integer Position of the list item
+	 * @return int Position of the list item
 	 */
-	public function getPosition()
+	public function getPosition() : int
 	{
-		return (int) $this->get( $this->prefix . 'position', 0 );
+		return $this->get( $this->prefix . 'position', 0 );
 	}
 
 
 	/**
 	 * Sets the new position of the list item.
 	 *
-	 * @param integer $pos position of the list item
+	 * @param int $pos position of the list item
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setPosition( $pos )
+	public function setPosition( int $pos ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( $this->prefix . 'position', (int) $pos );
+		return $this->set( $this->prefix . 'position', $pos );
 	}
 
 
 	/**
 	 * Returns the status of the list item.
 	 *
-	 * @return integer Status of the item
+	 * @return int Status of the item
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
-		return (int) $this->get( $this->prefix . 'status', 1 );
+		return $this->get( $this->prefix . 'status', 1 );
 	}
 
 
 	/**
 	 * Sets the new status of the list item.
 	 *
-	 * @param integer $status Status of the item
+	 * @param int $status Status of the item
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( $this->prefix . 'status', (int) $status );
+		return $this->set( $this->prefix . 'status', $status );
 	}
 
 
@@ -252,9 +250,9 @@ class Standard
 	 *
 	 * @return array Custom configuration values
 	 */
-	public function getConfig()
+	public function getConfig() : array
 	{
-		return (array) $this->get( $this->prefix . 'config', [] );
+		return $this->get( $this->prefix . 'config', [] );
 	}
 
 
@@ -264,7 +262,7 @@ class Standard
 	 * @param array $config Custom configuration values
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setConfig( array $config )
+	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( $this->prefix . 'config', $config );
 	}
@@ -273,9 +271,9 @@ class Standard
 	/**
 	 * Returns the referenced item if it's available.
 	 *
-	 * @return \Aimeos\MShop\Common\Item\Iface Referenced list item
+	 * @return \Aimeos\MShop\Common\Item\Iface|null Referenced list item
 	 */
-	public function getRefItem()
+	public function getRefItem() : ?\Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->refItem;
 	}
@@ -287,7 +285,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Item referenced by the list item or null for no reference
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setRefItem( \Aimeos\MShop\Common\Item\Iface $refItem = null )
+	public function setRefItem( \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\Lists\Iface
 	{
 		$this->refItem = $refItem;
 
@@ -300,7 +298,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return str_replace( '.', '/', rtrim( $this->prefix, '.' ) );
 	}
@@ -311,7 +309,7 @@ class Standard
 	 *
 	 * @return boolean True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
 			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->date )
@@ -326,7 +324,7 @@ class Standard
 	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface List item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -356,10 +354,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

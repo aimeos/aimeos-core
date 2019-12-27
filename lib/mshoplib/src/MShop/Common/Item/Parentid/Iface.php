@@ -24,14 +24,14 @@ interface Iface
 	 *
 	 * @return string Parent ID of the item
 	 */
-	public function getParentId();
+	public function getParentId() : ?string;
 
 
 	/**
 	 * Sets the new parent ID this item belongs to
 	 *
-	 * @param string $parentid New parent ID of the item
+	 * @param string|null $parentid New parent ID of the item
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function setParentId( $parentid );
+	public function setParentId( string $parentid = null ) : \Aimeos\MShop\Common\Item\Iface;
 }

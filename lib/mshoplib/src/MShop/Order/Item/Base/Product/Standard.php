@@ -38,7 +38,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string|null Site ID (or null if not available)
 	 */
-	public function getSiteId()
+	public function getSiteId() : ?string
 	{
 		return $this->get( 'order.base.product.siteid' );
 	}
@@ -50,9 +50,9 @@ class Standard extends Base implements Iface
 	 * @param string $value Unique site ID of the item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setSiteId( $value )
+	public function setSiteId( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.siteid', (string) $value );
+		return $this->set( 'order.base.product.siteid', $value );
 	}
 
 
@@ -61,7 +61,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string|null Base ID
 	 */
-	public function getBaseId()
+	public function getBaseId() : ?string
 	{
 		return $this->get( 'order.base.product.baseid' );
 	}
@@ -70,12 +70,12 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the base order ID the product belongs to.
 	 *
-	 * @param string $value New order base ID
+	 * @param string|null $value New order base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setBaseId( $value )
+	public function setBaseId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.baseid', (string) $value );
+		return $this->set( 'order.base.product.baseid', $value );
 	}
 
 
@@ -84,7 +84,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string|null Order address ID
 	 */
-	public function getOrderAddressId()
+	public function getOrderAddressId() : ?string
 	{
 		return $this->get( 'order.base.product.orderaddressid' );
 	}
@@ -96,9 +96,9 @@ class Standard extends Base implements Iface
 	 * @param string|null $value Order address ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setOrderAddressId( $value )
+	public function setOrderAddressId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.orderaddressid', ( $value !== null ? (string) $value : null ) );
+		return $this->set( 'order.base.product.orderaddressid', ( $value !== null ? $value : null ) );
 	}
 
 
@@ -108,7 +108,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string|null Order product ID
 	 */
-	public function getOrderProductId()
+	public function getOrderProductId() : ?string
 	{
 		return $this->get( 'order.base.product.orderproductid' );
 	}
@@ -121,9 +121,9 @@ class Standard extends Base implements Iface
 	 * @param string|null $value Order product ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setOrderProductId( $value )
+	public function setOrderProductId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.orderproductid', ( $value !== null ? (string) $value : null ) );
+		return $this->set( 'order.base.product.orderproductid', ( $value !== null ? $value : null ) );
 	}
 
 
@@ -132,9 +132,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Type of the ordered product
 	 */
-	public function getType()
+	public function getType() : string
 	{
-		return (string) $this->get( 'order.base.product.type', '' );
+		return $this->get( 'order.base.product.type', '' );
 	}
 
 
@@ -144,7 +144,7 @@ class Standard extends Base implements Iface
 	 * @param string $type Type of the order product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'order.base.product.type', $this->checkCode( $type ) );
 	}
@@ -155,9 +155,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string the code of supplier
 	 */
-	public function getSupplierCode()
+	public function getSupplierCode() : string
 	{
-		return (string) $this->get( 'order.base.product.suppliercode', '' );
+		return $this->get( 'order.base.product.suppliercode', '' );
 	}
 
 
@@ -167,7 +167,7 @@ class Standard extends Base implements Iface
 	 * @param string $suppliercode Code of supplier
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setSupplierCode( $suppliercode )
+	public function setSupplierCode( string $suppliercode ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		return $this->set( 'order.base.product.suppliercode', $this->checkCode( $suppliercode ) );
 	}
@@ -178,9 +178,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Original product ID
 	 */
-	public function getProductId()
+	public function getProductId() : string
 	{
-		return (string) $this->get( 'order.base.product.productid', '' );
+		return $this->get( 'order.base.product.productid', '' );
 	}
 
 
@@ -190,9 +190,9 @@ class Standard extends Base implements Iface
 	 * @param string $id Product Code ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setProductId( $id )
+	public function setProductId( string $id ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.productid', (string) $id );
+		return $this->set( 'order.base.product.productid', $id );
 	}
 
 
@@ -201,9 +201,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Product code
 	 */
-	public function getProductCode()
+	public function getProductCode() : string
 	{
-		return (string) $this->get( 'order.base.product.prodcode', '' );
+		return $this->get( 'order.base.product.prodcode', '' );
 	}
 
 
@@ -213,7 +213,7 @@ class Standard extends Base implements Iface
 	 * @param string $code Product code
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setProductCode( $code )
+	public function setProductCode( string $code ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		return $this->set( 'order.base.product.prodcode', $this->checkCode( $code ) );
 	}
@@ -224,9 +224,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Stock type
 	 */
-	public function getStockType()
+	public function getStockType() : string
 	{
-		return (string) $this->get( 'order.base.product.stocktype', '' );
+		return $this->get( 'order.base.product.stocktype', '' );
 	}
 
 
@@ -236,7 +236,7 @@ class Standard extends Base implements Iface
 	 * @param string $code Stock type
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setStockType( $code )
+	public function setStockType( string $code ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		return $this->set( 'order.base.product.stocktype', $this->checkCode( $code ) );
 	}
@@ -247,9 +247,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Returns the localized name of the product
 	 */
-	public function getName()
+	public function getName() : string
 	{
-		return (string) $this->get( 'order.base.product.name', '' );
+		return $this->get( 'order.base.product.name', '' );
 	}
 
 
@@ -259,9 +259,9 @@ class Standard extends Base implements Iface
 	 * @param string $value Localized name of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setName( $value )
+	public function setName( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.name', (string) $value );
+		return $this->set( 'order.base.product.name', $value );
 	}
 
 
@@ -270,9 +270,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Returns the localized description of the product
 	 */
-	public function getDescription()
+	public function getDescription() : string
 	{
-		return (string) $this->get( 'order.base.product.description', '' );
+		return $this->get( 'order.base.product.description', '' );
 	}
 
 
@@ -282,9 +282,9 @@ class Standard extends Base implements Iface
 	 * @param string $value Localized description of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setDescription( $value )
+	public function setDescription( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.description', (string) $value );
+		return $this->set( 'order.base.product.description', $value );
 	}
 
 
@@ -293,9 +293,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Location of the media
 	 */
-	public function getMediaUrl()
+	public function getMediaUrl() : string
 	{
-		return (string) $this->get( 'order.base.product.mediaurl', '' );
+		return $this->get( 'order.base.product.mediaurl', '' );
 	}
 
 
@@ -305,9 +305,9 @@ class Standard extends Base implements Iface
 	 * @param string $value Location of the media/picture
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setMediaUrl( $value )
+	public function setMediaUrl( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.mediaurl', (string) $value );
+		return $this->set( 'order.base.product.mediaurl', $value );
 	}
 
 
@@ -316,9 +316,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string URL target specific for that product
 	 */
-	public function getTarget()
+	public function getTarget() : string
 	{
-		return (string) $this->get( 'order.base.product.target', '' );
+		return $this->get( 'order.base.product.target', '' );
 	}
 
 
@@ -328,9 +328,9 @@ class Standard extends Base implements Iface
 	 * @param string $value New URL target specific for that product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setTarget( $value )
+	public function setTarget( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.target', (string) $value );
+		return $this->set( 'order.base.product.target', $value );
 	}
 
 
@@ -339,9 +339,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Expected delivery time frame
 	 */
-	public function getTimeframe()
+	public function getTimeframe() : string
 	{
-		return (string) $this->get( 'order.base.product.timeframe', '' );
+		return $this->get( 'order.base.product.timeframe', '' );
 	}
 
 
@@ -351,91 +351,87 @@ class Standard extends Base implements Iface
 	 * @param string $timeframe Expected delivery time frame
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setTimeframe( $timeframe )
+	public function setTimeframe( string $timeframe ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.timeframe', (string) $timeframe );
+		return $this->set( 'order.base.product.timeframe', $timeframe );
 	}
 
 
 	/**
 	 * Returns the amount of products the customer has added.
 	 *
-	 * @return integer Amount of products
+	 * @return int Amount of products
 	 */
-	public function getQuantity()
+	public function getQuantity() : int
 	{
-		return (int) $this->get( 'order.base.product.quantity', 1 );
+		return $this->get( 'order.base.product.quantity', 1 );
 	}
 
 
 	/**
 	 * Sets the amount of products the customer has added.
 	 *
-	 * @param integer $quantity Amount of products
+	 * @param int $quantity Amount of products
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setQuantity( $quantity )
+	public function setQuantity( int $quantity ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		if( $quantity < 1 || $quantity > 2147483647 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Quantity must be a positive integer and must not exceed %1$d', 2147483647 ) );
 		}
 
-		return $this->set( 'order.base.product.quantity', (int) $quantity );
+		return $this->set( 'order.base.product.quantity', $quantity );
 	}
 
 
 	/**
 	 * 	Returns the flags for the product item.
 	 *
-	 * @return integer Flags, e.g. for immutable products
+	 * @return int Flags, e.g. for immutable products
 	 */
-	public function getFlags()
+	public function getFlags() : int
 	{
-		return (int) $this->get( 'order.base.product.flags', \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE );
+		return $this->get( 'order.base.product.flags', \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE );
 	}
 
 
 	/**
 	 * Sets the new value for the product item flags.
 	 *
-	 * @param integer $value Flags, e.g. for immutable products
+	 * @param int $value Flags, e.g. for immutable products
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setFlags( $value )
+	public function setFlags( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.flags', (int) $this->checkFlags( $value ) );
+		return $this->set( 'order.base.product.flags', $this->checkFlags( $value ) );
 	}
 
 
 	/**
 	 * Returns the position of the product in the order.
 	 *
-	 * @return integer|null Product position in the order from 0-n
+	 * @return int|null Product position in the order from 0-n
 	 */
-	public function getPosition()
+	public function getPosition() : ?int
 	{
-		if( ( $result = $this->get( 'order.base.product.position' ) ) !== null ) {
-			return (int) $result;
-		}
-
-		return null;
+		return $this->get( 'order.base.product.position' );
 	}
 
 
 	/**
 	 * Sets the position of the product within the list of ordered products.
 	 *
-	 * @param integer|null $value Product position in the order from 0-n or null for resetting the position
+	 * @param int|null $value Product position in the order from 0-n or null for resetting the position
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 * @throws \Aimeos\MShop\Order\Exception If the position is invalid
 	 */
-	public function setPosition( $value )
+	public function setPosition( int $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		if( $value < 0 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order product position "%1$s" must be greater than 0', $value ) );
 		}
 
-		return $this->set( 'order.base.product.position', ( $value !== null ? (int) $value : null ) );
+		return $this->set( 'order.base.product.position', ( $value !== null ? $value : null ) );
 	}
 
 
@@ -445,11 +441,11 @@ class Standard extends Base implements Iface
 	 * The returned status values are the STAT_* constants from the
 	 * \Aimeos\MShop\Order\Item\Base class
 	 *
-	 * @return integer Delivery status of the product
+	 * @return int Delivery status of the product
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
-		return (int) $this->get( 'order.base.product.status', \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
+		return $this->get( 'order.base.product.status', \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
 	}
 
 
@@ -459,12 +455,12 @@ class Standard extends Base implements Iface
 	 * Possible status values are the STAT_* constants from the
 	 * \Aimeos\MShop\Order\Item\Base class
 	 *
-	 * @param integer $value New delivery status of the product
+	 * @param int $value New delivery status of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setStatus( $value )
+	public function setStatus( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.status', (int) $value );
+		return $this->set( 'order.base.product.status', $value );
 	}
 
 
@@ -472,10 +468,10 @@ class Standard extends Base implements Iface
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -514,10 +510,10 @@ class Standard extends Base implements Iface
 	/**
 	 * Returns the item values as associative list.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 
@@ -550,10 +546,10 @@ class Standard extends Base implements Iface
 	 * Compares the properties of the given order product item with its own ones.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item
-	 * @return boolean True if the item properties are equal, false if not
+	 * @return bool True if the item properties are equal, false if not
 	 * @since 2014.09
 	 */
-	public function compare( \Aimeos\MShop\Order\Item\Base\Product\Iface $item )
+	public function compare( \Aimeos\MShop\Order\Item\Base\Product\Iface $item ) : bool
 	{
 		if( $this->getFlags() === $item->getFlags()
 			&& $this->getName() === $item->getName()
@@ -574,8 +570,9 @@ class Standard extends Base implements Iface
 	 * Copys all data from a given product item.
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface $product Product item to copy from
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item for chaining method calls
 	 */
-	public function copyFrom( \Aimeos\MShop\Product\Item\Iface $product )
+	public function copyFrom( \Aimeos\MShop\Product\Item\Iface $product ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		$this->setSiteId( $product->getSiteId() );
 		$this->setProductCode( $product->getCode() );

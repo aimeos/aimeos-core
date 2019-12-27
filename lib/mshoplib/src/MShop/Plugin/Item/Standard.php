@@ -41,7 +41,7 @@ class Standard
 	 *
 	 * @return string|null Plugin type
 	 */
-	public function getType()
+	public function getType() : ?string
 	{
 		return $this->get( 'plugin.type', 'order' );
 	}
@@ -53,7 +53,7 @@ class Standard
 	 * @param string $type New plugin type
 	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'plugin.type', $this->checkCode( $type ) );
 	}
@@ -64,9 +64,9 @@ class Standard
 	 *
 	 * @return string Plugin provider which is the short plugin class name
 	 */
-	public function getProvider()
+	public function getProvider() : string
 	{
-		return (string) $this->get( 'plugin.provider', '' );
+		return $this->get( 'plugin.provider', '' );
 	}
 
 
@@ -77,13 +77,13 @@ class Standard
 	 * @param string $provider Plugin provider, esp. short plugin class name
 	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
-	public function setProvider( $provider )
+	public function setProvider( string $provider ) : \Aimeos\MShop\Plugin\Item\Iface
 	{
 		if( preg_match( '/^[A-Za-z0-9]+(,[A-Za-z0-9]+)*$/', $provider ) !== 1 ) {
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Invalid provider name "%1$s"', $provider ) );
 		}
 
-		return $this->set( 'plugin.provider', (string) $provider );
+		return $this->set( 'plugin.provider', $provider );
 	}
 
 
@@ -92,9 +92,9 @@ class Standard
 	 *
 	 * @return string Label of the plugin item
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
-		return (string) $this->get( 'plugin.label', '' );
+		return $this->get( 'plugin.label', '' );
 	}
 
 
@@ -104,9 +104,9 @@ class Standard
 	 * @param string $label New label of the plugin item
 	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
-	public function setLabel( $label )
+	public function setLabel( string $label ) : \Aimeos\MShop\Plugin\Item\Iface
 	{
-		return $this->set( 'plugin.label', (string) $label );
+		return $this->set( 'plugin.label', $label );
 	}
 
 
@@ -115,9 +115,9 @@ class Standard
 	 *
 	 * @return array Custom configuration values
 	 */
-	public function getConfig()
+	public function getConfig() : array
 	{
-		return (array) $this->get( 'plugin.config', [] );
+		return $this->get( 'plugin.config', [] );
 	}
 
 
@@ -127,7 +127,7 @@ class Standard
 	 * @param array $config Custom configuration values
 	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
-	public function setConfig( array $config )
+	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'plugin.config', $config );
 	}
@@ -136,46 +136,46 @@ class Standard
 	/**
 	 * Returns the position of the plugin item.
 	 *
-	 * @return integer Position of the item
+	 * @return int Position of the item
 	 */
-	public function getPosition()
+	public function getPosition() : int
 	{
-		return (int) $this->get( 'plugin.position', 0 );
+		return $this->get( 'plugin.position', 0 );
 	}
 
 
 	/**
 	 * Sets the new position of the plugin item.
 	 *
-	 * @param integer $position Position of the item
+	 * @param int $position Position of the item
 	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
-	public function setPosition( $position )
+	public function setPosition( int $position ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'plugin.position', (int) $position );
+		return $this->set( 'plugin.position', $position );
 	}
 
 
 	/**
 	 * Returns the status of the plugin item.
 	 *
-	 * @return integer Status of the item
+	 * @return int Status of the item
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
-		return (int) $this->get( 'plugin.status', 1 );
+		return $this->get( 'plugin.status', 1 );
 	}
 
 
 	/**
 	 * Sets the new status of the plugin item.
 	 *
-	 * @param integer $status Status of the item
+	 * @param int $status Status of the item
 	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'plugin.status', (int) $status );
+		return $this->set( 'plugin.status', $status );
 	}
 
 
@@ -184,7 +184,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'plugin';
 	}
@@ -193,22 +193,22 @@ class Standard
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getStatus() > 0;
 	}
 
 
-	/*
+	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -235,10 +235,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

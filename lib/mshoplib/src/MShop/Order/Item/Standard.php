@@ -15,8 +15,8 @@ namespace Aimeos\MShop\Order\Item;
 /**
  * Default implementation of an order invoice item.
  *
- * @property integer oldPaymentStatus Last delivery status before it was changed by setDeliveryStatus()
- * @property integer oldDeliveryStatus Last payment status before it was changed by setPaymentStatus()
+ * @property int oldPaymentStatus Last delivery status before it was changed by setDeliveryStatus()
+ * @property int oldDeliveryStatus Last payment status before it was changed by setPaymentStatus()
  *
  * @package MShop
  * @subpackage Order
@@ -41,7 +41,7 @@ class Standard
 	 *
 	 * @return string|null Basic order ID
 	 */
-	public function getBaseId()
+	public function getBaseId() : ?string
 	{
 		return $this->get( 'order.baseid' );
 	}
@@ -53,9 +53,9 @@ class Standard
 	 * @param string $id ID of the basic order item
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setBaseId( $id )
+	public function setBaseId( string $id ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return $this->set( 'order.baseid', (string) $id );
+		return $this->set( 'order.baseid', $id );
 	}
 
 
@@ -64,9 +64,9 @@ class Standard
 	 *
 	 * @return string Invoice type
 	 */
-	public function getType()
+	public function getType() : string
 	{
-		return (string) $this->get( 'order.type', '' );
+		return $this->get( 'order.type', '' );
 	}
 
 
@@ -76,7 +76,7 @@ class Standard
 	 * @param string $type Invoice type
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'order.type', $this->checkCode( $type ) );
 	}
@@ -87,7 +87,7 @@ class Standard
 	 *
 	 * @return string|null ISO date in yyyy-mm-dd HH:ii:ss format
 	 */
-	public function getDateDelivery()
+	public function getDateDelivery() : ?string
 	{
 		return $this->get( 'order.datedelivery' );
 	}
@@ -99,7 +99,7 @@ class Standard
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setDateDelivery( $date )
+	public function setDateDelivery( string $date = null ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		return $this->set( 'order.datedelivery', $this->checkDateFormat( $date ) );
 	}
@@ -110,7 +110,7 @@ class Standard
 	 *
 	 * @return string|null ISO date in yyyy-mm-dd HH:ii:ss format
 	 */
-	public function getDatePayment()
+	public function getDatePayment() : ?string
 	{
 		return $this->get( 'order.datepayment' );
 	}
@@ -122,7 +122,7 @@ class Standard
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setDatePayment( $date )
+	public function setDatePayment( string $date = null ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		return $this->set( 'order.datepayment', $this->checkDateFormat( $date ) );
 	}
@@ -131,52 +131,52 @@ class Standard
 	/**
 	 * Returns the delivery status of the invoice.
 	 *
-	 * @return integer Status code constant from \Aimeos\MShop\Order\Item\Base
+	 * @return int Status code constant from \Aimeos\MShop\Order\Item\Base
 	 */
-	public function getDeliveryStatus()
+	public function getDeliveryStatus() : int
 	{
-		return (int) $this->get( 'order.statusdelivery', \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
+		return $this->get( 'order.statusdelivery', \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
 	}
 
 
 	/**
 	 * Sets the delivery status of the invoice.
 	 *
-	 * @param integer $status Status code constant from \Aimeos\MShop\Order\Item\Base
+	 * @param int $status Status code constant from \Aimeos\MShop\Order\Item\Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setDeliveryStatus( $status )
+	public function setDeliveryStatus( int $status ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$this->set( '.statusdelivery', $this->get( 'order.statusdelivery' ) );
-		return $this->set( 'order.statusdelivery', (int) $status );
+		return $this->set( 'order.statusdelivery', $status );
 	}
 
 
 	/**
 	 * Returns the payment status of the invoice.
 	 *
-	 * @return integer Payment constant from \Aimeos\MShop\Order\Item\Base
+	 * @return int Payment constant from \Aimeos\MShop\Order\Item\Base
 	 */
-	public function getPaymentStatus()
+	public function getPaymentStatus() : int
 	{
-		return (int) $this->get( 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
+		return $this->get( 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
 	}
 
 
 	/**
 	 * Sets the payment status of the invoice.
 	 *
-	 * @param integer $status Payment constant from \Aimeos\MShop\Order\Item\Base
+	 * @param int $status Payment constant from \Aimeos\MShop\Order\Item\Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setPaymentStatus( $status )
+	public function setPaymentStatus( int $status ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		if( (int) $status !== $this->getPaymentStatus() ) {
+		if( $status !== $this->getPaymentStatus() ) {
 			$this->set( 'order.datepayment', date( 'Y-m-d H:i:s' ) );
 		}
 
 		$this->set( '.statuspayment', $this->get( 'order.statuspayment' ) );
-		return $this->set( 'order.statuspayment', (int) $status );
+		return $this->set( 'order.statuspayment', $status );
 	}
 
 
@@ -185,7 +185,7 @@ class Standard
 	 *
 	 * @return string|null Related invoice ID
 	 */
-	public function getRelatedId()
+	public function getRelatedId() : ?string
 	{
 		return $this->get( 'order.relatedid' );
 	}
@@ -198,7 +198,7 @@ class Standard
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 * @throws \Aimeos\MShop\Order\Exception If ID is invalid
 	 */
-	public function setRelatedId( $id )
+	public function setRelatedId( string $id = null ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		return $this->set( 'order.relatedid', $id );
 	}
@@ -208,10 +208,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -239,10 +239,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

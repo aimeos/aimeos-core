@@ -29,21 +29,21 @@ interface Iface
 	 *
 	 * @return \Aimeos\MShop\Catalog\Item\Iface[] Catalog items
 	 */
-	public function getCatalogItems();
+	public function getCatalogItems() : array;
 
 	/**
 	 * Returns the supplier items referencing the product
 	 *
 	 * @return \Aimeos\MShop\Supplier\Item\Iface[] Supplier items
 	 */
-	public function getSupplierItems();
+	public function getSupplierItems() : array;
 
 	/**
 	 * Returns the code of the product item.
 	 *
 	 * @return string Code of the product
 	 */
-	public function getCode();
+	public function getCode() : string;
 
 	/**
 	 * Sets a new code of the product item.
@@ -51,14 +51,14 @@ interface Iface
 	 * @param string $code New code of the product item
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setCode( $code );
+	public function setCode( string $code ) : \Aimeos\MShop\Product\Item\Iface;
 
 	/**
 	 * Returns the data set name assigned to the product item.
 	 *
 	 * @return string Data set name
 	 */
-	public function getDataset();
+	public function getDataset() : string;
 
 	/**
 	 * Sets a new data set name assignd to the product item.
@@ -66,14 +66,14 @@ interface Iface
 	 * @param string $name New data set name
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setDataset( $name );
+	public function setDataset( string $name ) : \Aimeos\MShop\Product\Item\Iface;
 
 	/**
 	 * Returns the label of the product item.
 	 *
 	 * @return string Label of the product item
 	 */
-	public function getLabel();
+	public function getLabel() : string;
 
 	/**
 	 * Sets a new URL target specific for that product
@@ -81,14 +81,14 @@ interface Iface
 	 * @param string $label New label of the product item
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setLabel( $label );
+	public function setLabel( string $label ) : \Aimeos\MShop\Product\Item\Iface;
 
 	/**
 	 * Returns the URL target specific for that product
 	 *
 	 * @return string URL target specific for that product
 	 */
-	public function getTarget();
+	public function getTarget() : string;
 
 	/**
 	 * Sets a new label of the product item.
@@ -96,5 +96,5 @@ interface Iface
 	 * @param string $value New URL target specific for that product
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setTarget( $value );
+	public function setTarget( string $value ) : \Aimeos\MShop\Product\Item\Iface;
 }

@@ -19,7 +19,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$serviceItem = \Aimeos\MShop\Service\Manager\Factory::create( $this->context )->createItem();
+		$serviceItem = \Aimeos\MShop\Service\Manager\Factory::create( $this->context )->createItem()->setId( -1 );
 
 		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Base::class )
 			->setConstructorArgs( [$this->context, $serviceItem] )

@@ -83,7 +83,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface
 	 */
-	public function getPaymentAddress()
+	public function getPaymentAddress() : \Aimeos\MShop\Common\Item\Address\Iface
 	{
 		return $this->billingaddress;
 	}
@@ -95,7 +95,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Billingaddress of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address )
+	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address ) : \Aimeos\MShop\Customer\Item\Iface
 	{
 		if( $address === $this->billingaddress && $address->isModified() === false ) { return $this; }
 
@@ -111,7 +111,7 @@ abstract class Base
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'customer';
 	}
@@ -120,9 +120,9 @@ abstract class Base
 	/**
 	 * Tests if this item object was modified
 	 *
-	 * @return boolean True if modified, false if not
+	 * @return bool True if modified, false if not
 	 */
-	public function isModified()
+	public function isModified() : bool
 	{
 		return parent::isModified() || $this->getPaymentAddress()->isModified();
 	}
@@ -132,10 +132,10 @@ abstract class Base
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 		$addr = $item->getPaymentAddress()->fromArray( $list, $private );
@@ -147,10 +147,10 @@ abstract class Base
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

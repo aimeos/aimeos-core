@@ -37,7 +37,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
-	public function __construct( array $values = [], array $listItems = [], array $refItems = [], $addresses = [] )
+	public function __construct( array $values = [], array $listItems = [], array $refItems = [], array $addresses = [] )
 	{
 		parent::__construct( 'supplier.', $values );
 
@@ -62,9 +62,9 @@ class Standard
 	 *
 	 * @return string label of the supplier item
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
-		return (string) $this->get( 'supplier.label', '' );
+		return $this->get( 'supplier.label', '' );
 	}
 
 
@@ -74,9 +74,9 @@ class Standard
 	 * @param string $value label of the supplier item
 	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
 	 */
-	public function setLabel( $value )
+	public function setLabel( string $value ) : \Aimeos\MShop\Supplier\Item\Iface
 	{
-		return $this->set( 'supplier.label', (string) $value );
+		return $this->set( 'supplier.label', $value );
 	}
 
 
@@ -85,9 +85,9 @@ class Standard
 	 *
 	 * @return string Code of the supplier item
 	 */
-	public function getCode()
+	public function getCode() : string
 	{
-		return (string) $this->get( 'supplier.code', '' );
+		return $this->get( 'supplier.code', '' );
 	}
 
 
@@ -97,7 +97,7 @@ class Standard
 	 * @param string $value Code of the supplier item
 	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
 	 */
-	public function setCode( $value )
+	public function setCode( string $value ) : \Aimeos\MShop\Supplier\Item\Iface
 	{
 		return $this->set( 'supplier.code', $this->checkCode( $value ) );
 	}
@@ -107,23 +107,23 @@ class Standard
 	/**
 	 * Returns the status of the item
 	 *
-	 * @return integer Status of the item
+	 * @return int Status of the item
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
-		return (int) $this->get( 'supplier.status', 1 );
+		return $this->get( 'supplier.status', 1 );
 	}
 
 
 	/**
 	 * Sets the new status of the supplier item.
 	 *
-	 * @param integer $value status of the supplier item
+	 * @param int $value status of the supplier item
 	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
 	 */
-	public function setStatus( $value )
+	public function setStatus( int $value ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'supplier.status', (int) $value );
+		return $this->set( 'supplier.status', $value );
 	}
 
 
@@ -132,7 +132,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'supplier';
 	}
@@ -141,22 +141,22 @@ class Standard
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getStatus() > 0;
 	}
 
 
-	/*
+	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -180,10 +180,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

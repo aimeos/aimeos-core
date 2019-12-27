@@ -38,7 +38,7 @@ class Standard
 	 *
 	 * @return string|null Site ID (or null if not available)
 	 */
-	public function getSiteId()
+	public function getSiteId() : ?string
 	{
 		return $this->get( 'order.base.service.attribute.siteid' );
 	}
@@ -47,12 +47,12 @@ class Standard
 	/**
 	 * Sets the site ID of the item.
 	 *
-	 * @param integer $value Unique site ID of the item
+	 * @param string $value Unique site ID of the item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
-	public function setSiteId( $value )
+	public function setSiteId( string $value ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	{
-		return $this->set( 'order.base.service.attribute.siteid', (string) $value );
+		return $this->set( 'order.base.service.attribute.siteid', $value );
 	}
 
 
@@ -61,9 +61,9 @@ class Standard
 	 *
 	 * @return string Attribute ID of the service attribute item
 	 */
-	public function getAttributeId()
+	public function getAttributeId() : string
 	{
-		return (string) $this->get( 'order.base.service.attribute.attributeid', '' );
+		return $this->get( 'order.base.service.attribute.attributeid', '' );
 	}
 
 
@@ -73,9 +73,9 @@ class Standard
 	 * @param string $id Attribute ID of the service attribute item
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
-	public function setAttributeId( $id )
+	public function setAttributeId( string $id ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	{
-		return $this->set( 'order.base.service.attribute.attributeid', (string) $id );
+		return $this->set( 'order.base.service.attribute.attributeid', $id );
 	}
 
 
@@ -84,7 +84,7 @@ class Standard
 	 *
 	 * @return string|null ID of the ordered service item
 	 */
-	public function getParentId()
+	public function getParentId() : ?string
 	{
 		return $this->get( 'order.base.service.attribute.parentid' );
 	}
@@ -93,12 +93,12 @@ class Standard
 	/**
 	 * Sets the ID of the ordered service item as parent
 	 *
-	 * @param string $id ID of the ordered service item
+	 * @param string|null $id ID of the ordered service item
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
-	public function setParentId( $id )
+	public function setParentId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'order.base.service.attribute.parentid', (string) $id );
+		return $this->set( 'order.base.service.attribute.parentid', $id );
 	}
 
 
@@ -107,9 +107,9 @@ class Standard
 	 *
 	 * @return string Type of the service attribute item
 	 */
-	public function getType()
+	public function getType() : string
 	{
-		return (string) $this->get( 'order.base.service.attribute.type', '' );
+		return $this->get( 'order.base.service.attribute.type', '' );
 	}
 
 
@@ -119,7 +119,7 @@ class Standard
 	 * @param string $type Type of the service attribute
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'order.base.service.attribute.type', $this->checkCode( $type ) );
 	}
@@ -130,9 +130,9 @@ class Standard
 	 *
 	 * @return string Code of the service attribute item
 	 */
-	public function getCode()
+	public function getCode() : string
 	{
-		return (string) $this->get( 'order.base.service.attribute.code', '' );
+		return $this->get( 'order.base.service.attribute.code', '' );
 	}
 
 
@@ -142,7 +142,7 @@ class Standard
 	 * @param string $code Code as defined by the service provider
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
-	public function setCode( $code )
+	public function setCode( string $code ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	{
 		return $this->set( 'order.base.service.attribute.code', $this->checkCode( $code, 255 ) );
 	}
@@ -153,9 +153,9 @@ class Standard
 	 *
 	 * @return string Name of the service attribute item
 	 */
-	public function getName()
+	public function getName() : string
 	{
-		return (string) $this->get( 'order.base.service.attribute.name', '' );
+		return $this->get( 'order.base.service.attribute.name', '' );
 	}
 
 
@@ -165,7 +165,7 @@ class Standard
 	 * @param string $name Name as defined by the service provider
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
-	public function setName( $name )
+	public function setName( string $name ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	{
 		return $this->set( 'order.base.service.attribute.name', (string) $name );
 	}
@@ -178,7 +178,7 @@ class Standard
 	 */
 	public function getValue()
 	{
-		return (string) $this->get( 'order.base.service.attribute.value', '' );
+		return $this->get( 'order.base.service.attribute.value', '' );
 	}
 
 
@@ -188,7 +188,7 @@ class Standard
 	 * @param string|array $value service attribute item value
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
-	public function setValue( $value )
+	public function setValue( $value ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	{
 		return $this->set( 'order.base.service.attribute.value', $value );
 	}
@@ -199,21 +199,21 @@ class Standard
 	 *
 	 * @return integer Quantity of the service attribute
 	 */
-	public function getQuantity()
+	public function getQuantity() : int
 	{
-		return (int) $this->get( 'order.base.service.attribute.quantity', 1 );
+		return $this->get( 'order.base.service.attribute.quantity', 1 );
 	}
 
 
 	/**
 	 * Sets the quantity of the service attribute.
 	 *
-	 * @param integer $value Quantity of the service attribute
+	 * @param int $value Quantity of the service attribute
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
-	public function setQuantity( $value )
+	public function setQuantity( int $value ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	{
-		return $this->set( 'order.base.service.attribute.quantity', (int) $value );
+		return $this->set( 'order.base.service.attribute.quantity', $value );
 	}
 
 
@@ -222,7 +222,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'order/base/service/attribute';
 	}
@@ -234,7 +234,7 @@ class Standard
 	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item to copy from
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
-	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item )
+	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	{
 		$this->setSiteId( $item->getSiteId() );
 		$this->setAttributeId( $item->getId() );
@@ -255,7 +255,7 @@ class Standard
 	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order service attribute item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -284,10 +284,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

@@ -59,9 +59,9 @@ class Standard
 	 *
 	 * @return string Unique ID of the site
 	 */
-	public function getSiteId()
+	public function getSiteId() : string
 	{
-		return (string) $this->get( 'locale.site.siteid', '' );
+		return $this->get( 'locale.site.siteid', '' );
 	}
 
 
@@ -71,9 +71,9 @@ class Standard
 	 * @param string $value Unique ID of the site
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
-	public function setSiteId( $value )
+	public function setSiteId( string $value ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
-		return $this->set( 'locale.site.siteid', (string) $value );
+		return $this->set( 'locale.site.siteid', $value );
 	}
 
 
@@ -82,9 +82,9 @@ class Standard
 	 *
 	 * @return string Returns the code of the item
 	 */
-	public function getCode()
+	public function getCode() : string
 	{
-		return (string) $this->get( 'locale.site.code', '' );
+		return $this->get( 'locale.site.code', '' );
 	}
 
 
@@ -94,7 +94,7 @@ class Standard
 	 * @param string $code The code to set
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
-	public function setCode( $code )
+	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Tree\Iface
 	{
 		return $this->set( 'locale.site.code', $this->checkCode( $code, 255 ) );
 	}
@@ -105,9 +105,9 @@ class Standard
 	 *
 	 * @return array Returns the config of the Site
 	 */
-	public function getConfig()
+	public function getConfig() : array
 	{
-		return (array) $this->get( 'locale.site.config', [] );
+		return $this->get( 'locale.site.config', [] );
 	}
 
 
@@ -117,7 +117,7 @@ class Standard
 	 * @param array $options Options to be set for the Site
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
-	public function setConfig( array $options )
+	public function setConfig( array $options ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'locale.site.config', $options );
 	}
@@ -128,9 +128,9 @@ class Standard
 	 *
 	 * @return string Returns the label of the Site
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
-		return (string) $this->get( 'locale.site.label', '' );
+		return $this->get( 'locale.site.label', '' );
 	}
 
 
@@ -140,18 +140,18 @@ class Standard
 	 * @param string $label The label of the Site
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
-	public function setLabel( $label )
+	public function setLabel( string $label ) : \Aimeos\MShop\Common\Item\Tree\Iface
 	{
-		return $this->set( 'locale.site.label', (string) $label );
+		return $this->set( 'locale.site.label', $label );
 	}
 
 
 	/**
 	 * Returns the level of the item in the tree
 	 *
-	 * @return integer Level of the item starting with "0" for the root node
+	 * @return int Level of the item starting with "0" for the root node
 	 */
-	public function getLevel()
+	public function getLevel() : int
 	{
 		return 0;
 	}
@@ -162,7 +162,7 @@ class Standard
 	 *
 	 * @return string Unique ID of the parent site
 	 */
-	public function getParentId()
+	public function getParentId() : string
 	{
 		return '0';
 	}
@@ -171,23 +171,23 @@ class Standard
 	/**
 	 * Returns the status property of the Site.
 	 *
-	 * @return integer Returns the status of the Site
+	 * @return int Returns the status of the Site
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
-		return (int) $this->get( 'locale.site.status', 1 );
+		return $this->get( 'locale.site.status', 1 );
 	}
 
 
 	/**
 	 * Sets status property.
 	 *
-	 * @param integer $status The status of the Site
+	 * @param int $status The status of the Site
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'locale.site.status', (int) $status );
+		return $this->set( 'locale.site.status', $status );
 	}
 
 
@@ -196,7 +196,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'locale/site';
 	}
@@ -205,9 +205,9 @@ class Standard
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getStatus() > 0;
 	}
@@ -217,10 +217,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -245,10 +245,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 
@@ -271,10 +271,10 @@ class Standard
 	/**
 	 * Returns a child of this node identified by its index.
 	 *
-	 * @param integer $index Index of child node
+	 * @param int $index Index of child node
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Selected node
 	 */
-	public function getChild( $index )
+	public function getChild( int $index ) : \Aimeos\MShop\Common\Item\Tree\Iface
 	{
 		throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
 	}
@@ -285,7 +285,7 @@ class Standard
 	 *
 	 * @return array Numerically indexed list of nodes
 	 */
-	public function getChildren()
+	public function getChildren() : array
 	{
 		return [];
 	}
@@ -294,9 +294,9 @@ class Standard
 	/**
 	 * Tests if a node has children.
 	 *
-	 * @return boolean True if node has children, false if not
+	 * @return bool True if node has children, false if not
 	 */
-	public function hasChildren()
+	public function hasChildren() : bool
 	{
 		return false;
 	}
@@ -306,8 +306,10 @@ class Standard
 	 * Adds a child node to this node.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
+	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
 	 */
-	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item )
+	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface
 	{
+		return $this;
 	}
 }

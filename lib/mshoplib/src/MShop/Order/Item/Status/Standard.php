@@ -37,7 +37,7 @@ class Standard
 	 *
 	 * @return string|null Parent ID of the order
 	 */
-	public function getParentId()
+	public function getParentId() : ?string
 	{
 		return $this->get( 'order.status.parentid' );
 	}
@@ -46,12 +46,12 @@ class Standard
 	/**
 	 * Sets the parentid of the order status.
 	 *
-	 * @param string $parentid Parent ID of the order status
+	 * @param string|null $parentid Parent ID of the order status
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
 	 */
-	public function setParentId( $parentid )
+	public function setParentId( string $parentid = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'order.status.parentid', (string) $parentid );
+		return $this->set( 'order.status.parentid', $parentid );
 	}
 
 
@@ -60,9 +60,9 @@ class Standard
 	 *
 	 * @return string Type of the order status
 	 */
-	public function getType()
+	public function getType() : string
 	{
-		return (string) $this->get( 'order.status.type', '' );
+		return $this->get( 'order.status.type', '' );
 	}
 
 
@@ -72,7 +72,7 @@ class Standard
 	 * @param string $type Type of the order status
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'order.status.type', $this->checkCode( $type ) );
 	}
@@ -83,7 +83,7 @@ class Standard
 	 *
 	 * @return string Value of the order status
 	 */
-	public function getValue()
+	public function getValue() : string
 	{
 		return (string) $this->get( 'order.status.value', '' );
 	}
@@ -95,9 +95,9 @@ class Standard
 	 * @param string $value Value of the order status
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
 	 */
-	public function setValue( $value )
+	public function setValue( string $value ) : \Aimeos\MShop\Order\Item\Status\Iface
 	{
-		return $this->set( 'order.status.value', (string) $value );
+		return $this->set( 'order.status.value', $value );
 	}
 
 
@@ -105,10 +105,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -133,10 +133,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

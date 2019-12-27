@@ -67,7 +67,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'order/base/service';
 	}
@@ -80,7 +80,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * @param array|string $type Type or list of types of the service attribute items
 	 * @return array|string|null Value or list of values of the attribute item for the ordered service and the given code
 	 */
-	public function getAttribute( $code, $type = '' )
+	public function getAttribute( string $code, $type = '' )
 	{
 		$list = [];
 		$map = $this->getAttributeMap();
@@ -103,11 +103,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * Returns the attribute item or list of attribute items for the ordered service with the given code.
 	 *
 	 * @param string $code Code of the service attribute item
-	 * @param string $type Type of the service attribute item
+	 * @param array|string $type Type of the service attribute item
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface|array|null
 	 * 	Attribute item or list of items for the ordered service and the given code
 	 */
-	public function getAttributeItem( $code, $type = '' )
+	public function getAttributeItem( string $code, $type = '' )
 	{
 		$list = [];
 		$map = $this->getAttributeMap();
@@ -132,7 +132,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface $item Service attribute item
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function setAttributeItem( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface $item )
+	public function setAttributeItem( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface $item ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		$this->getAttributeMap();
 
@@ -159,7 +159,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
 	 * @return array List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	 */
-	public function getAttributeItems( $type = null )
+	public function getAttributeItems( string $type = null ) : array
 	{
 		if( $type === null ) {
 			return $this->attributes;
@@ -184,7 +184,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface[] $attributes List of order service attribute items
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function setAttributeItems( array $attributes )
+	public function setAttributeItems( array $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, $attributes );
 
@@ -201,7 +201,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 *
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate
 	 */
-	public function getPrice()
+	public function getPrice() : \Aimeos\MShop\Price\Item\Iface
 	{
 		return $this->price;
 	}
@@ -211,9 +211,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * Sets the price item for the product.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item containing price and additional costs
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base product item for chaining method calls
 	 */
-	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price )
+	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		if( $price !== $this->price )
 		{
@@ -229,10 +229,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order service item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 		$price = $item->getPrice();
@@ -259,10 +259,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	/**
 	 * Returns the item values as associative list.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 
@@ -282,7 +282,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * @param string $value Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
 	 * @throws \Aimeos\MShop\Order\Exception If type is invalid
 	 */
-	protected function checkType( $value )
+	protected function checkType( string $value )
 	{
 		switch( $value )
 		{
@@ -300,7 +300,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 *
 	 * @return array Associative list of type and code as key and an \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface as value
 	 */
-	protected function getAttributeMap()
+	protected function getAttributeMap() : array
 	{
 		if( !isset( $this->attributesMap ) )
 		{

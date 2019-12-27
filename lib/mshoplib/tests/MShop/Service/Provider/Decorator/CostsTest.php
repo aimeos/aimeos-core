@@ -27,7 +27,7 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 
 		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
-		$this->servItem = $servManager->createItem();
+		$this->servItem = $servManager->createItem()->setId( -1 );
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Costs::class )
 			->disableOriginalConstructor()->getMock();
@@ -112,8 +112,8 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 		$price = $priceManager->createItem();
 		$price->setValue( '20.00' );
 
-		$product = $productManager->createItem();
-		$product->setCode( 'test' );
+		$product = $productManager->createItem()->setId( '-1' );
+		$product->setCode( 'test' )->setType( 'test' );
 
 		$orderProduct = $orderProductManager->createItem();
 		$orderProduct->copyFrom( $product );

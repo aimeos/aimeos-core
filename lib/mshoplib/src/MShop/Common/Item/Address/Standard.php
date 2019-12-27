@@ -30,7 +30,7 @@ class Standard
 	 * @param string $prefix Property prefix when converting to array
 	 * @param array $values List of attributes that belong to the provider common address item
 	 */
-	public function __construct( $prefix, array $values = [] )
+	public function __construct( string $prefix, array $values = [] )
 	{
 		parent::__construct( $prefix, $values );
 
@@ -41,46 +41,46 @@ class Standard
 	/**
 	 * Returns the customer ID this address belongs to
 	 *
-	 * @return string Customer ID of the address
+	 * @return string|null Customer ID of the address
 	 */
-	public function getParentId()
+	public function getParentId() : ?string
 	{
-		return (string) $this->get( $this->prefix . 'parentid' );
+		return $this->get( $this->prefix . 'parentid' );
 	}
 
 
 	/**
 	 * Sets the new customer ID this address belongs to
 	 *
-	 * @param string $parentid New customer ID of the address
+	 * @param string|null $parentid New customer ID of the address
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
-	public function setParentId( $parentid )
+	public function setParentId( string $parentid = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( $this->prefix . 'parentid', (string) $parentid );
+		return $this->set( $this->prefix . 'parentid', $parentid );
 	}
 
 
 	/**
 	 * Returns the position of the address item.
 	 *
-	 * @return integer Position of the address item
+	 * @return int Position of the address item
 	 */
-	public function getPosition()
+	public function getPosition() : int
 	{
-		return (int) $this->get( $this->prefix . 'position' );
+		return $this->get( $this->prefix . 'position', 0 );
 	}
 
 
 	/**
 	 * Sets the Position of the address item.
 	 *
-	 * @param integer $position Position of the address item
+	 * @param int $position Position of the address item
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
-	public function setPosition( $position )
+	public function setPosition( int $position ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( $this->prefix . 'position', (int) $position );
+		return $this->set( $this->prefix . 'position', $position );
 	}
 
 
@@ -88,10 +88,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Address item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -117,7 +117,7 @@ class Standard
 	 * @param boolean True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

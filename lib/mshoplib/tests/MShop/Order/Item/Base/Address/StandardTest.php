@@ -124,16 +124,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSetAddressIdNull()
-	{
-		$return = $this->object->setAddressId( null );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
-		$this->assertEquals( '', $this->object->getAddressId() );
-		$this->assertTrue( $this->object->isModified() );
-	}
-
-
 	public function testGetType()
 	{
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY, $this->object->getType() );

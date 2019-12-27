@@ -25,13 +25,13 @@ interface Iface
 	 *
 	 * @return integer Position of the item in the list
 	 */
-	public function getPosition();
+	public function getPosition() : int;
 
 	/**
 	 * Sets the new position of the item in the list.
 	 *
-	 * @param integer $pos position of the item in the list
+	 * @param int $pos position of the item in the list
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function setPosition( $pos );
+	public function setPosition( int $pos ) : \Aimeos\MShop\Common\Item\Iface;
 }

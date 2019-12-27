@@ -28,7 +28,7 @@ interface Iface
 	 *
 	 * @return string|null ISO language code (e.g. de or de_DE)
 	 */
-	public function getLanguageId();
+	public function getLanguageId() : ?string;
 
 	/**
 	 * Sets the ISO language code.
@@ -36,14 +36,14 @@ interface Iface
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setLanguageId( $langid );
+	public function setLanguageId( string $langid = null ) : \Aimeos\MShop\Media\Item\Iface;
 
 	/**
 	 * Returns the name of the media item.
 	 *
 	 * @return string Label of the media item
 	 */
-	public function getLabel();
+	public function getLabel() : string;
 
 	/**
 	 * Sets the new label of the media item.
@@ -51,14 +51,14 @@ interface Iface
 	 * @param string $label Type label of the media item
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setLabel( $label );
+	public function setLabel( string $label ) : \Aimeos\MShop\Media\Item\Iface;
 
 	/**
 	 * Returns the mime type of the media item.
 	 *
 	 * @return string Mime type of the media item
 	 */
-	public function getMimeType();
+	public function getMimeType() : string;
 
 	/**
 	 * Sets the new mime type of the media.
@@ -66,21 +66,21 @@ interface Iface
 	 * @param string $mimetype Mime type of the media item
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setMimeType( $mimetype );
+	public function setMimeType( string $mimetype ) : \Aimeos\MShop\Media\Item\Iface;
 
 	/**
 	 * Returns the preview url of the media item.
 	 *
 	 * @return string Preview URL of the media file
 	 */
-	public function getPreview();
+	public function getPreview() : string;
 
 	/**
 	 * Returns all preview urls of the media item
 	 *
 	 * @return array Associative list of widths in pixels as keys and urls as values
 	 */
-	public function getPreviews();
+	public function getPreviews() : array;
 
 	/**
 	 * Sets the new preview url of the media item.
@@ -88,7 +88,7 @@ interface Iface
 	 * @param string $url Preview URL of the media file
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setPreview( $url );
+	public function setPreview( string $url ) : \Aimeos\MShop\Media\Item\Iface;
 
 	/**
 	 * Sets the new preview url of the media item.
@@ -96,14 +96,14 @@ interface Iface
 	 * @param array $url Preview URL or list of URLs with widths of the media file in pixels as keys
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setPreviews( array $urls );
+	public function setPreviews( array $urls ) : \Aimeos\MShop\Media\Item\Iface;
 
 	/**
 	 * Returns the url of the media item.
 	 *
 	 * @return string URL of the media file
 	 */
-	public function getUrl();
+	public function getUrl() : string;
 
 	/**
 	 * Sets the new url of the media item.
@@ -111,5 +111,5 @@ interface Iface
 	 * @param string $url URL of the media file
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setUrl( $url );
+	public function setUrl( string $url ) : \Aimeos\MShop\Media\Item\Iface;
 }

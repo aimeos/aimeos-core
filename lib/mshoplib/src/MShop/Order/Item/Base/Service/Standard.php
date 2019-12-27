@@ -38,7 +38,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string|null Site ID (or null if not available)
 	 */
-	public function getSiteId()
+	public function getSiteId() : ?string
 	{
 		return $this->get( 'order.base.service.siteid' );
 	}
@@ -50,9 +50,9 @@ class Standard extends Base implements Iface
 	 * @param string $value Unique site ID of the item
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function setSiteId( $value )
+	public function setSiteId( string $value ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
-		return $this->set( 'order.base.service.siteid', (string) $value );
+		return $this->set( 'order.base.service.siteid', $value );
 	}
 
 
@@ -61,7 +61,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string|null Base ID of the item.
 	 */
-	public function getBaseId()
+	public function getBaseId() : ?string
 	{
 		return $this->get( 'order.base.service.baseid' );
 	}
@@ -70,12 +70,12 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the order service base ID of the order service item.
 	 *
-	 * @param string $value Order service base ID
+	 * @param string|null $value Order service base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function setBaseId( $value )
+	public function setBaseId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
-		return $this->set( 'order.base.service.baseid', (string) $value );
+		return $this->set( 'order.base.service.baseid', $value );
 	}
 
 
@@ -84,9 +84,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Original service ID
 	 */
-	public function getServiceId()
+	public function getServiceId() : string
 	{
-		return (string) $this->get( 'order.base.service.serviceid', '' );
+		return $this->get( 'order.base.service.serviceid', '' );
 	}
 
 
@@ -96,9 +96,9 @@ class Standard extends Base implements Iface
 	 * @param string $servid ID of the service item used for the order
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function setServiceId( $servid )
+	public function setServiceId( string $servid ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
-		return $this->set( 'order.base.service.serviceid', (string) $servid );
+		return $this->set( 'order.base.service.serviceid', $servid );
 	}
 
 
@@ -107,9 +107,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Service item code
 	 */
-	public function getCode()
+	public function getCode() : string
 	{
-		return (string) $this->get( 'order.base.service.code', '' );
+		return $this->get( 'order.base.service.code', '' );
 	}
 
 
@@ -119,7 +119,7 @@ class Standard extends Base implements Iface
 	 * @param string $code Code as defined by the service provider
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function setCode( $code )
+	public function setCode( string $code ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		return $this->set( 'order.base.service.code', $this->checkCode( $code ) );
 	}
@@ -130,9 +130,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Service item name
 	 */
-	public function getName()
+	public function getName() : string
 	{
-		return (string) $this->get( 'order.base.service.name', '' );
+		return $this->get( 'order.base.service.name', '' );
 	}
 
 
@@ -142,9 +142,9 @@ class Standard extends Base implements Iface
 	 * @param string $name service item name
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function setName( $name )
+	public function setName( string $name ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
-		return $this->set( 'order.base.service.name', (string) $name );
+		return $this->set( 'order.base.service.name', $name );
 	}
 
 
@@ -153,9 +153,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string service item type
 	 */
-	public function getType()
+	public function getType() : string
 	{
-		return (string) $this->get( 'order.base.service.type', '' );
+		return $this->get( 'order.base.service.type', '' );
 	}
 
 
@@ -165,7 +165,7 @@ class Standard extends Base implements Iface
 	 * @param string $type Type of the service item
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'order.base.service.type', $this->checkCode( $type ) );
 	}
@@ -176,9 +176,9 @@ class Standard extends Base implements Iface
 	 *
 	 * @return string Location of the media
 	 */
-	public function getMediaUrl()
+	public function getMediaUrl() : string
 	{
-		return (string) $this->get( 'order.base.service.mediaurl', '' );
+		return $this->get( 'order.base.service.mediaurl', '' );
 	}
 
 
@@ -188,21 +188,21 @@ class Standard extends Base implements Iface
 	 * @param string $value Location of the media/picture
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function setMediaUrl( $value )
+	public function setMediaUrl( string $value ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
-		return $this->set( 'order.base.service.mediaurl', (string) $value );
+		return $this->set( 'order.base.service.mediaurl', $value );
 	}
 
 
 	/**
 	 * Returns the position of the service in the order.
 	 *
-	 * @return integer|null Service position in the order from 0-n
+	 * @return int|null Service position in the order from 0-n
 	 */
-	public function getPosition()
+	public function getPosition() : ?int
 	{
 		if( ( $result = $this->get( 'order.base.service.position' ) ) !== null ) {
-			return (int) $result;
+			return $result;
 		}
 
 		return null;
@@ -212,28 +212,28 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the position of the service within the list of ordered servicees
 	 *
-	 * @param integer|null $value Service position in the order from 0-n or null for resetting the position
+	 * @param int|null $value Service position in the order from 0-n or null for resetting the position
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 * @throws \Aimeos\MShop\Order\Exception If the position is invalid
 	 */
-	public function setPosition( $value )
+	public function setPosition( int $value = null ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		if( $value < 0 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order service position "%1$s" must be greater than 0', $value ) );
 		}
 
-		return $this->set( 'order.base.service.position', ( $value !== null ? (int) $value : null ) );
+		return $this->set( 'order.base.service.position', ( $value !== null ? $value : null ) );
 	}
 
 
-	/*
+	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -262,10 +262,10 @@ class Standard extends Base implements Iface
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values.
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 
@@ -291,7 +291,7 @@ class Standard extends Base implements Iface
 	 * @param \Aimeos\MShop\Service\Item\Iface $service New service item
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function copyFrom( \Aimeos\MShop\Service\Item\Iface $service )
+	public function copyFrom( \Aimeos\MShop\Service\Item\Iface $service ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		$this->setSiteId( $service->getSiteId() );
 		$this->setCode( $service->getCode() );

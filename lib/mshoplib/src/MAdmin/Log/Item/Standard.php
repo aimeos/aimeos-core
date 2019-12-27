@@ -38,7 +38,7 @@ class Standard
 	 *
 	 * @return string Returns the facility
 	 */
-	public function getFacility()
+	public function getFacility() : string
 	{
 		return (string) $this->get( 'log.facility', '' );
 	}
@@ -50,7 +50,7 @@ class Standard
 	 * @param string $facility Facility
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
-	public function setFacility( $facility )
+	public function setFacility( string $facility ) : \Aimeos\MAdmin\Log\Item\Iface
 	{
 		return $this->set( 'log.facility', (string) $facility );
 	}
@@ -61,7 +61,7 @@ class Standard
 	 *
 	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
-	public function getTimestamp()
+	public function getTimestamp() : ?string
 	{
 		return $this->get( 'log.timestamp' );
 	}
@@ -70,23 +70,23 @@ class Standard
 	/**
 	 * Returns the priority of the item.
 	 *
-	 * @return integer Returns the priority
+	 * @return int Returns the priority
 	 */
-	public function getPriority()
+	public function getPriority() : int
 	{
-		return (int) $this->get( 'log.priority', 0 );
+		return $this->get( 'log.priority', 0 );
 	}
 
 
 	/**
 	 * Sets the new priority of the item.
 	 *
-	 * @param integer $priority Priority
+	 * @param int $priority Priority
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
-	public function setPriority( $priority )
+	public function setPriority( int $priority ) : \Aimeos\MAdmin\Log\Item\Iface
 	{
-		return $this->set( 'log.priority', (int) $priority );
+		return $this->set( 'log.priority', $priority );
 	}
 
 
@@ -95,9 +95,9 @@ class Standard
 	 *
 	 * @return string Returns the message
 	 */
-	public function getMessage()
+	public function getMessage() : string
 	{
-		return (string) $this->get( 'log.message', '' );
+		return $this->get( 'log.message', '' );
 	}
 
 
@@ -107,9 +107,9 @@ class Standard
 	 * @param string $message Message
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
-	public function setMessage( $message )
+	public function setMessage( string $message ) : \Aimeos\MAdmin\Log\Item\Iface
 	{
-		return $this->set( 'log.message', (string) $message );
+		return $this->set( 'log.message', $message );
 	}
 
 
@@ -118,7 +118,7 @@ class Standard
 	 *
 	 * @return string Returns the request
 	 */
-	public function getRequest()
+	public function getRequest() : string
 	{
 		return (string) $this->get( 'log.request', '' );
 	}
@@ -130,7 +130,7 @@ class Standard
 	 * @param string $request Request
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
-	public function setRequest( $request )
+	public function setRequest( string $request ) : \Aimeos\MAdmin\Log\Item\Iface
 	{
 		return $this->set( 'log.request', (string) $request );
 	}
@@ -141,7 +141,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'log';
 	}
@@ -151,10 +151,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -179,10 +179,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

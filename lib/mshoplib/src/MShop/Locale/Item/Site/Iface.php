@@ -28,5 +28,5 @@ interface Iface
 	 * @param string $value Unique ID of the site
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
-	public function setSiteId( $value );
+	public function setSiteId( string $value ) : \Aimeos\MShop\Locale\Item\Site\Iface;
 }

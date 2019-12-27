@@ -23,24 +23,24 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the base ID of the order.
 	 *
-	 * @return string Order base ID.
+	 * @return string|null Order base ID.
 	 */
-	public function getBaseId();
+	public function getBaseId() : ?string;
 
 	/**
 	 * Sets the base ID of the order.
 	 *
-	 * @param string $baseid Order base ID.
+	 * @param string|null $baseid Order base ID.
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
-	public function setBaseId( $baseid );
+	public function setBaseId( string $baseid = null ) : \Aimeos\MShop\Order\Item\Base\Coupon\Iface;
 
 	/**
 	 *	Returns the product id of the ordered product.
 	 *
-	 *  @return string Product ID of the ordered product
+	 *  @return string|null Product ID of the ordered product
 	 */
-	public function getProductId();
+	public function getProductId() : ?string;
 
 
 	/**
@@ -49,14 +49,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 *	@param string $productid The product ID of the ordered product
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
-	public function setProductId( $productid );
+	public function setProductId( string $productid ) : \Aimeos\MShop\Order\Item\Base\Coupon\Iface;
 
 	/**
 	 * Returns the coupon code the customer has selected.
 	 *
-	 * @return string Returns the coupon code the customer has selected.
+	 * @return string|null Returns the coupon code the customer has selected.
 	 */
-	public function getCode();
+	public function getCode() : ?string;
 
 	/**
 	 * Sets the code of a coupon the customer has selected.
@@ -64,5 +64,5 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string $code The code of a coupon the customer has selected.
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
-	public function setCode( $code );
+	public function setCode( string $code ) : \Aimeos\MShop\Order\Item\Base\Coupon\Iface;
 }

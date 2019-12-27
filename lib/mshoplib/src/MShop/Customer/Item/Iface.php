@@ -28,7 +28,7 @@ interface Iface
 	 *
 	 * @return string Label of the customer item
 	 */
-	public function getLabel();
+	public function getLabel() : string;
 
 	/**
 	 * Sets the new label of the customer item.
@@ -36,7 +36,7 @@ interface Iface
 	 * @param string $value Label of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setLabel( $value );
+	public function setLabel( string $value ) : \Aimeos\MShop\Customer\Item\Iface;
 
 	/**
 	 * Returns the unique code of the customer item.
@@ -44,7 +44,7 @@ interface Iface
 	 *
 	 * @return string Unique code of the customer item
 	 */
-	public function getCode();
+	public function getCode() : string;
 
 	/**
 	 * Sets the code of the customer item.
@@ -52,14 +52,14 @@ interface Iface
 	 * @param string $value Code of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setCode( $value );
+	public function setCode( string $value ) : \Aimeos\MShop\Customer\Item\Iface;
 
 	/**
 	 * Returns the birthday of the customer item.
 	 *
 	 * @return string|null Birthday date of the customer (YYYY-MM-DD format)
 	 */
-	public function getBirthday();
+	public function getBirthday() : ?string;
 
 	/**
 	 * Sets the birthday of the customer item.
@@ -67,14 +67,14 @@ interface Iface
 	 * @param string|null $value Birthday of the customer item (YYYY-MM-DD format)
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setBirthday( $value );
+	public function setBirthday( string $value = null ) : \Aimeos\MShop\Customer\Item\Iface;
 
 	/**
 	 * Returns the billing address of the customer item.
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Address object
 	 */
-	public function getPaymentAddress();
+	public function getPaymentAddress() : \Aimeos\MShop\Common\Item\Address\Iface;
 
 	/**
 	 * Sets the billing address of the customer item.
@@ -82,14 +82,14 @@ interface Iface
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Billing address of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address );
+	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address ) : \Aimeos\MShop\Customer\Item\Iface;
 
 	/**
 	 * Returns the password of the customer item.
 	 *
 	 * @return string Encrypted password
 	 */
-	public function getPassword();
+	public function getPassword() : string;
 
 	/**
 	 * Sets the password of the customer item.
@@ -97,14 +97,14 @@ interface Iface
 	 * @param string $value Password of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setPassword( $value );
+	public function setPassword( string $value ) : \Aimeos\MShop\Customer\Item\Iface;
 
 	/**
 	 * Returns the last verification date of the customer.
 	 *
 	 * @return string|null Last verification date of the customer (YYYY-MM-DD format) or null if unknown
 	 */
-	public function getDateVerified();
+	public function getDateVerified() : ?string;
 
 	/**
 	 * Sets the latest verification date of the customer.
@@ -112,14 +112,14 @@ interface Iface
 	 * @param string|null $value Latest verification date of the customer (YYYY-MM-DD format) or null if unknown
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setDateVerified( $value );
+	public function setDateVerified( string $value = null ) : \Aimeos\MShop\Customer\Item\Iface;
 
 	/**
 	 * Returns the group IDs the customer belongs to
 	 *
 	 * @return array List of group IDs
 	 */
-	public function getGroups();
+	public function getGroups() : array;
 
 	/**
 	 * Sets the group IDs the customer belongs to
@@ -127,5 +127,5 @@ interface Iface
 	 * @param string[] $ids List of group IDs
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setGroups( array $ids );
+	public function setGroups( array $ids ) : \Aimeos\MShop\Customer\Item\Iface;
 }

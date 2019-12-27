@@ -38,7 +38,7 @@ class Standard
 	 *
 	 * @return string|null Back in stock date of the product
 	 */
-	public function getDateBack()
+	public function getDateBack() : ?string
 	{
 		return $this->get( 'stock.backdate' );
 	}
@@ -50,7 +50,7 @@ class Standard
 	 * @param string|null $backdate New back in stock date of the product
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
-	public function setDateBack( $backdate )
+	public function setDateBack( string $backdate = null ) : \Aimeos\MShop\Stock\Item\Iface
 	{
 		return $this->set( 'stock.backdate', $this->checkDateFormat( $backdate ) );
 	}
@@ -61,7 +61,7 @@ class Standard
 	 *
 	 * @return string|null Type code of the product stock item
 	 */
-	public function getType()
+	public function getType() : ?string
 	{
 		return $this->get( 'stock.type', 'default' );
 	}
@@ -73,7 +73,7 @@ class Standard
 	 * @param string $type Type of the product stock item
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'stock.type', $this->checkCode( $type ) );
 	}
@@ -84,9 +84,9 @@ class Standard
 	 *
 	 * @return string Product code (SKU)
 	 */
-	public function getProductCode()
+	public function getProductCode() : string
 	{
-		return (string) $this->get( 'stock.productcode', '' );
+		return $this->get( 'stock.productcode', '' );
 	}
 
 
@@ -96,36 +96,32 @@ class Standard
 	 * @param string $code New product code (SKU)
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
-	public function setProductCode( $code )
+	public function setProductCode( string $code ) : \Aimeos\MShop\Stock\Item\Iface
 	{
-		return $this->set( 'stock.productcode', (string) $code );
+		return $this->set( 'stock.productcode', $code );
 	}
 
 
 	/**
 	 * Returns the stock level.
 	 *
-	 * @return integer|null Stock level
+	 * @return int|null Stock level
 	 */
-	public function getStockLevel()
+	public function getStockLevel() : ?int
 	{
-		if( ( $result = $this->get( 'stock.stocklevel' ) ) !== null ) {
-			return (int) $result;
-		}
-
-		return null;
+		return $this->get( 'stock.stocklevel' );
 	}
 
 
 	/**
 	 * Sets the stock level.
 	 *
-	 * @param integer|null $stocklevel New stock level
+	 * @param int|null $stocklevel New stock level
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
-	public function setStockLevel( $stocklevel )
+	public function setStockLevel( $stocklevel = null ) : \Aimeos\MShop\Stock\Item\Iface
 	{
-		return $this->set( 'stock.stocklevel', is_numeric( $stocklevel ) ? (int) $stocklevel : null );
+		return $this->set( 'stock.stocklevel', is_numeric( $stocklevel ) ? $stocklevel : null );
 	}
 
 
@@ -134,9 +130,9 @@ class Standard
 	 *
 	 * @return string Expected delivery time frame
 	 */
-	public function getTimeframe()
+	public function getTimeframe() : string
 	{
-		return (string) $this->get( 'stock.timeframe', '' );
+		return $this->get( 'stock.timeframe', '' );
 	}
 
 
@@ -146,9 +142,9 @@ class Standard
 	 * @param string $timeframe Expected delivery time frame
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
 	 */
-	public function setTimeframe( $timeframe )
+	public function setTimeframe( string $timeframe ) : \Aimeos\MShop\Stock\Item\Iface
 	{
-		return $this->set( 'stock.timeframe', (string) $timeframe );
+		return $this->set( 'stock.timeframe', $timeframe );
 	}
 
 
@@ -157,20 +153,20 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'stock';
 	}
 
 
-	/*
+	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -196,10 +192,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

@@ -64,7 +64,7 @@ class Standard
 	 *
 	 * @return string Unique key consisting of domain/type/code
 	 */
-	public function getKey()
+	public function getKey() : string
 	{
 		return md5( $this->getDomain() . '|' . $this->getType() . '|' . $this->getCode() );
 	}
@@ -75,7 +75,7 @@ class Standard
 	 *
 	 * @return string Returns the domain for this item e.g. text, media, price...
 	 */
-	public function getDomain()
+	public function getDomain() : string
 	{
 		return (string) $this->get( 'attribute.domain', '' );
 	}
@@ -87,9 +87,9 @@ class Standard
 	 * @param string $domain Name of the domain e.g. text, media, price...
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
-	public function setDomain( $domain )
+	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'attribute.domain', (string) $domain );
+		return $this->set( 'attribute.domain', $domain );
 	}
 
 
@@ -98,7 +98,7 @@ class Standard
 	 *
 	 * @return string|null Type code of the attribute item
 	 */
-	public function getType()
+	public function getType() : ?string
 	{
 		return $this->get( 'attribute.type' );
 	}
@@ -110,7 +110,7 @@ class Standard
 	 * @param string $type Type of the attribute
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'attribute.type', $this->checkCode( $type ) );
 	}
@@ -121,7 +121,7 @@ class Standard
 	 *
 	 * @return string Returns the code of the attribute item
 	 */
-	public function getCode()
+	public function getCode() : string
 	{
 		return (string) $this->get( 'attribute.code', '' );
 	}
@@ -133,7 +133,7 @@ class Standard
 	 * @param string $code Code of the attribute item
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
-	public function setCode( $code )
+	public function setCode( string $code ) : \Aimeos\MShop\Attribute\Item\Iface
 	{
 		return $this->set( 'attribute.code', $this->checkCode( $code, 255 ) );
 	}
@@ -144,9 +144,9 @@ class Standard
 	 *
 	 * @return string Label of the attribute item
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
-		return (string) $this->get( 'attribute.label', '' );
+		return $this->get( 'attribute.label', '' );
 	}
 
 
@@ -156,18 +156,18 @@ class Standard
 	 * @param string $label Type label of the attribute item
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
-	public function setLabel( $label )
+	public function setLabel( string $label ) : \Aimeos\MShop\Attribute\Item\Iface
 	{
-		return $this->set( 'attribute.label', (string) $label );
+		return $this->set( 'attribute.label', $label );
 	}
 
 
 	/**
 	 * Returns the status (enabled/disabled) of the attribute item.
 	 *
-	 * @return integer Returns the status of the item
+	 * @return int Returns the status of the item
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
 		return (int) $this->get( 'attribute.status', 1 );
 	}
@@ -179,9 +179,9 @@ class Standard
 	 * @param integer $status Status of the item
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'attribute.status', (int) $status );
+		return $this->set( 'attribute.status', $status );
 	}
 
 
@@ -190,21 +190,21 @@ class Standard
 	 *
 	 * @return integer Position of the attribute item
 	 */
-	public function getPosition()
+	public function getPosition() : int
 	{
-		return (int) $this->get( 'attribute.position', 0 );
+		return $this->get( 'attribute.position', 0 );
 	}
 
 
 	/**
 	 * Sets the position of the attribute item
 	 *
-	 * @param integer $pos Position of the attribute item
+	 * @param int $pos Position of the attribute item
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
-	public function setPosition( $pos )
+	public function setPosition( int $pos ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'attribute.position', (int) $pos );
+		return $this->set( 'attribute.position', $pos );
 	}
 
 
@@ -213,7 +213,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'attribute';
 	}
@@ -222,9 +222,9 @@ class Standard
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getStatus() > 0;
 	}
@@ -237,7 +237,7 @@ class Standard
 	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -264,10 +264,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

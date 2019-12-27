@@ -38,7 +38,7 @@ class Standard
 	 *
 	 * @return string|null Order base ID
 	 */
-	public function getBaseId()
+	public function getBaseId() : ?string
 	{
 		return $this->get( 'order.base.coupon.baseid' );
 	}
@@ -47,10 +47,10 @@ class Standard
 	/**
 	 * Sets the Base ID of the order.
 	 *
-	 * @param string $baseid Order base ID.
+	 * @param string|null $baseid Order base ID.
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
-	public function setBaseId( $baseid )
+	public function setBaseId( string $baseid = null ) : \Aimeos\MShop\Order\Item\Base\Coupon\Iface
 	{
 		return $this->set( 'order.base.coupon.baseid', (string) $baseid );
 	}
@@ -61,7 +61,7 @@ class Standard
 	 *
 	 * @return string|null ID of the ordered product.
 	 */
-	public function getProductId()
+	public function getProductId() : ?string
 	{
 		return $this->get( 'order.base.coupon.ordprodid' );
 	}
@@ -73,7 +73,7 @@ class Standard
 	 * @param string $productid ID of the ordered product
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
-	public function setProductId( $productid )
+	public function setProductId( string $productid ) : \Aimeos\MShop\Order\Item\Base\Coupon\Iface
 	{
 		return $this->set( 'order.base.coupon.ordprodid', (string) $productid );
 	}
@@ -84,7 +84,7 @@ class Standard
 	 *
 	 * @return string|null Coupon code.
 	 */
-	public function getCode()
+	public function getCode() : ?string
 	{
 		return $this->get( 'order.base.coupon.code' );
 	}
@@ -96,7 +96,7 @@ class Standard
 	 * @param string $code Coupon code
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
-	public function setCode( $code )
+	public function setCode( string $code ) : \Aimeos\MShop\Order\Item\Base\Coupon\Iface
 	{
 		return $this->set( 'order.base.coupon.code', mb_strtoupper( $this->checkCode( $code ) ) );
 	}
@@ -107,7 +107,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'order/base/coupon';
 	}
@@ -120,7 +120,7 @@ class Standard
 	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order coupon item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -144,10 +144,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

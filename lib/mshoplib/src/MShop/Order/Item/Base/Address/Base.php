@@ -36,7 +36,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Address\Base
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'order/base/address';
 	}
@@ -49,7 +49,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Address\Base
 	 * @return string Sanitized address type
 	 * @throws \Aimeos\MShop\Order\Exception If type is invalid
 	 */
-	protected function checkType( $value )
+	protected function checkType( string $value ) : string
 	{
 		switch( $value )
 		{

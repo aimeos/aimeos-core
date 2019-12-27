@@ -10,7 +10,7 @@
 namespace Aimeos\MShop\Common\Item\ListRef;
 
 
-class Test
+class Test extends \Aimeos\MShop\Common\Item\Base implements Iface
 {
 	use \Aimeos\MShop\Common\Item\ListRef\Traits;
 
@@ -19,17 +19,17 @@ class Test
 		$this->initListItems( $listItems, $refItems );
 	}
 
-	public function getId()
+	public function getId() : ?string
 	{
 		return 'id';
 	}
 
-	public function getLabel()
+	public function getLabel() : string
 	{
 		return 'test label';
 	}
 
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'test';
 	}

@@ -48,7 +48,7 @@ class Standard extends Base
 	 *
 	 * @return string|null Type of the price
 	 */
-	public function getType()
+	public function getType() : ?string
 	{
 		return $this->get( 'price.type', 'default' );
 	}
@@ -60,7 +60,7 @@ class Standard extends Base
 	 * @param string $type Type of the price
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'price.type', $this->checkCode( $type ) );
 	}
@@ -71,7 +71,7 @@ class Standard extends Base
 	 *
 	 * @return string|null Three letter ISO currency code (e.g. EUR)
 	 */
-	public function getCurrencyId()
+	public function getCurrencyId() : ?string
 	{
 		return $this->get( 'price.currencyid' );
 	}
@@ -84,7 +84,7 @@ class Standard extends Base
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
-	public function setCurrencyId( $currencyid )
+	public function setCurrencyId( string $currencyid ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		return $this->set( 'price.currencyid', $this->checkCurrencyId( $currencyid, false ) );
 	}
@@ -95,9 +95,9 @@ class Standard extends Base
 	 *
 	 * @return string Domain name
 	 */
-	public function getDomain()
+	public function getDomain() : string
 	{
-		return (string) $this->get( 'price.domain', '' );
+		return $this->get( 'price.domain', '' );
 	}
 
 
@@ -107,9 +107,9 @@ class Standard extends Base
 	 * @param string $domain Domain name
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setDomain( $domain )
+	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'price.domain', (string) $domain );
+		return $this->set( 'price.domain', $domain );
 	}
 
 
@@ -118,9 +118,9 @@ class Standard extends Base
 	 *
 	 * @return string Label of the item
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
-		return (string) $this->get( 'price.label', '' );
+		return $this->get( 'price.label', '' );
 	}
 
 
@@ -130,32 +130,32 @@ class Standard extends Base
 	 * @param string $label Label of the item
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setLabel( $label )
+	public function setLabel( string $label ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		return $this->set( 'price.label', (string) $label );
+		return $this->set( 'price.label', $label );
 	}
 
 
 	/**
 	 * Returns the quantity the price is valid for.
 	 *
-	 * @return integer Quantity
+	 * @return int Quantity
 	 */
-	public function getQuantity()
+	public function getQuantity() : int
 	{
-		return (int) $this->get( 'price.quantity', 1 );
+		return $this->get( 'price.quantity', 1 );
 	}
 
 
 	/**
 	 * Sets the quantity the price is valid for.
 	 *
-	 * @param integer $quantity Quantity
+	 * @param int $quantity Quantity
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setQuantity( $quantity )
+	public function setQuantity( int $quantity ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		return $this->set( 'price.quantity', (int) $quantity );
+		return $this->set( 'price.quantity', $quantity );
 	}
 
 
@@ -164,9 +164,9 @@ class Standard extends Base
 	 *
 	 * @return string Price value
 	 */
-	public function getValue()
+	public function getValue() : string
 	{
-		return (string) $this->get( 'price.value', '0.00' );
+		return $this->get( 'price.value', '0.00' );
 	}
 
 
@@ -176,7 +176,7 @@ class Standard extends Base
 	 * @param string|integer|double $price Amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setValue( $price )
+	public function setValue( $price ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		return $this->set( 'price.value', $this->checkPrice( $price ) );
 	}
@@ -187,9 +187,9 @@ class Standard extends Base
 	 *
 	 * @return string Costs
 	 */
-	public function getCosts()
+	public function getCosts() : string
 	{
-		return (string) $this->get( 'price.costs', '0.00' );
+		return $this->get( 'price.costs', '0.00' );
 	}
 
 
@@ -199,7 +199,7 @@ class Standard extends Base
 	 * @param string|integer|double $price Amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setCosts( $price )
+	public function setCosts( $price ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		return $this->set( 'price.costs', $this->checkPrice( $price ) );
 	}
@@ -210,9 +210,9 @@ class Standard extends Base
 	 *
 	 * @return string Rebate amount
 	 */
-	public function getRebate()
+	public function getRebate() : string
 	{
-		return (string) $this->get( 'price.rebate', '0.00' );
+		return $this->get( 'price.rebate', '0.00' );
 	}
 
 
@@ -222,7 +222,7 @@ class Standard extends Base
 	 * @param string|integer|double $price Rebate amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setRebate( $price )
+	public function setRebate( $price ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		return $this->set( 'price.rebate', $this->checkPrice( $price ) );
 	}
@@ -233,10 +233,10 @@ class Standard extends Base
 	 *
 	 * @return string Tax rate
 	 */
-	public function getTaxRate()
+	public function getTaxRate() : string
 	{
 		$list = (array) $this->get( 'price.taxrates', [] );
-		return ( isset( $list[''] ) ? (string) $list[''] : '0.00' );
+		return ( isset( $list[''] ) ? $list[''] : '0.00' );
 	}
 
 
@@ -245,9 +245,9 @@ class Standard extends Base
 	 *
 	 * @return string[] Tax rates for the price
 	 */
-	 public function getTaxRates()
+	 public function getTaxRates() : array
 	 {
-		return (array) $this->get( 'price.taxrates', [] );
+		return $this->get( 'price.taxrates', [] );
 	 }
 
 
@@ -257,7 +257,7 @@ class Standard extends Base
 	 * @param string|integer|double $taxrate Tax rate with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setTaxRate( $taxrate )
+	public function setTaxRate( $taxrate ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		return $this->setTaxRates( ['' => $taxrate] );
 	}
@@ -269,7 +269,7 @@ class Standard extends Base
 	 * @param array $taxrates Tax rates with name as key and values with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setTaxRates( array $taxrates )
+	public function setTaxRates( array $taxrates ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		foreach( $taxrates as $name => $taxrate )
 		{
@@ -286,23 +286,23 @@ class Standard extends Base
 	 *
 	 * True if tax is included in the price value, costs and rebate, false if not
 	 *
-	 * @return boolean Tax rate flag for the price
+	 * @return bool Tax rate flag for the price
 	 */
-	public function getTaxFlag()
+	public function getTaxFlag() : bool
 	{
-		return (bool) $this->get( 'price.taxflag', true );
+		return $this->get( 'price.taxflag', true );
 	}
 
 
 	/**
 	 * Sets the new tax flag.
 	 *
-	 * @param boolean $flag True if tax is included in the price value, costs and rebate, false if not
+	 * @param bool $flag True if tax is included in the price value, costs and rebate, false if not
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setTaxFlag( $flag )
+	public function setTaxFlag( bool $flag ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		return $this->set( 'price.taxflag', (bool) $flag );
+		return $this->set( 'price.taxflag', $flag );
 	}
 
 
@@ -312,7 +312,7 @@ class Standard extends Base
 	 * @return string Tax value with four digits precision
 	 * @see mshop/price/taxflag
 	 */
-	public function getTaxValue()
+	public function getTaxValue() : string
 	{
 		if( $this->tax === null )
 		{
@@ -337,7 +337,7 @@ class Standard extends Base
 	 *
 	 * @param string|integer|double $value Tax value with up to four digits precision
 	 */
-	public function setTaxValue( $value )
+	public function setTaxValue( $value ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$this->tax = $this->checkPrice( $value, $this->precision + 2 );
 		parent::setModified();
@@ -348,23 +348,23 @@ class Standard extends Base
 	/**
 	 * Returns the status of the item
 	 *
-	 * @return integer Status of the item
+	 * @return int Status of the item
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
-		return (int) $this->get( 'price.status', 1 );
+		return $this->get( 'price.status', 1 );
 	}
 
 
 	/**
 	 * Sets the status of the item
 	 *
-	 * @param integer $status Status of the item
+	 * @param int $status Status of the item
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'price.status', (int) $status );
+		return $this->set( 'price.status', $status );
 	}
 
 
@@ -373,7 +373,7 @@ class Standard extends Base
 	 *
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setModified()
+	public function setModified() : \Aimeos\MShop\Common\Item\Iface
 	{
 		$this->tax = null;
 		return parent::setModified();
@@ -383,9 +383,9 @@ class Standard extends Base
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
 			&& ( $this->currencyid === null || $this->getCurrencyId() === $this->currencyid );
@@ -396,10 +396,10 @@ class Standard extends Base
 	 * Add the given price to the current one.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item which should be added
-	 * @param integer $quantity Number of times the Price should be added
+	 * @param int $quantity Number of times the Price should be added
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function addItem( \Aimeos\MShop\Price\Item\Iface $item, $quantity = 1 )
+	public function addItem( \Aimeos\MShop\Price\Item\Iface $item, int $quantity = 1 ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		if( $item->getCurrencyId() != $this->getCurrencyId() )
 		{
@@ -446,7 +446,7 @@ class Standard extends Base
 	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -480,10 +480,10 @@ class Standard extends Base
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

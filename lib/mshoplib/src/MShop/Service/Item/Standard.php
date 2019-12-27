@@ -50,9 +50,9 @@ class Standard
 	 *
 	 * @return string Service item code
 	 */
-	public function getCode()
+	public function getCode() : string
 	{
-		return (string) $this->get( 'service.code', '' );
+		return $this->get( 'service.code', '' );
 	}
 
 
@@ -62,7 +62,7 @@ class Standard
 	 * @param string $code Code of the service item
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function setCode( $code )
+	public function setCode( string $code ) : \Aimeos\MShop\Service\Item\Iface
 	{
 		return $this->set( 'service.code', $this->checkCode( $code ) );
 	}
@@ -73,7 +73,7 @@ class Standard
 	 *
 	 * @return string|null Service item type
 	 */
-	public function getType()
+	public function getType() : ?string
 	{
 		return $this->get( 'service.type' );
 	}
@@ -85,7 +85,7 @@ class Standard
 	 * @param string $type Type of the service item
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'service.type', $this->checkCode( $type ) );
 	}
@@ -96,9 +96,9 @@ class Standard
 	 *
 	 * @return string Name of the service provider
 	 */
-	public function getProvider()
+	public function getProvider() : string
 	{
-		return (string) $this->get( 'service.provider', '' );
+		return $this->get( 'service.provider', '' );
 	}
 
 
@@ -108,13 +108,13 @@ class Standard
 	 * @param string $provider Name of the service provider
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function setProvider( $provider )
+	public function setProvider( string $provider ) : \Aimeos\MShop\Service\Item\Iface
 	{
 		if( preg_match( '/^[A-Za-z0-9]+(,[A-Za-z0-9]+)*$/', $provider ) !== 1 ) {
 			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid provider name "%1$s"', $provider ) );
 		}
 
-		return $this->set( 'service.provider', (string) $provider );
+		return $this->set( 'service.provider', $provider );
 	}
 
 
@@ -123,9 +123,9 @@ class Standard
 	 *
 	 * @return string Service item label
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
-		return (string) $this->get( 'service.label', '' );
+		return $this->get( 'service.label', '' );
 	}
 
 
@@ -135,9 +135,9 @@ class Standard
 	 * @param string $label Label of the service item
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function setLabel( $label )
+	public function setLabel( string $label ) : \Aimeos\MShop\Service\Item\Iface
 	{
-		return $this->set( 'service.label', (string) $label );
+		return $this->set( 'service.label', $label );
 	}
 
 
@@ -146,7 +146,7 @@ class Standard
 	 *
 	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
-	public function getDateStart()
+	public function getDateStart() : ?string
 	{
 		return $this->get( 'service.datestart' );
 	}
@@ -158,7 +158,7 @@ class Standard
 	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setDateStart( $date )
+	public function setDateStart( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'service.datestart', $this->checkDateFormat( $date ) );
 	}
@@ -169,7 +169,7 @@ class Standard
 	 *
 	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
-	public function getDateEnd()
+	public function getDateEnd() : ?string
 	{
 		return $this->get( 'service.dateend' );
 	}
@@ -181,7 +181,7 @@ class Standard
 	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setDateEnd( $date )
+	public function setDateEnd( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'service.dateend', $this->checkDateFormat( $date ) );
 	}
@@ -192,9 +192,9 @@ class Standard
 	 *
 	 * @return array Configuration values
 	 */
-	public function getConfig()
+	public function getConfig() : array
 	{
-		return (array) $this->get( 'service.config', [] );
+		return $this->get( 'service.config', [] );
 	}
 
 
@@ -204,7 +204,7 @@ class Standard
 	 * @param array $config Configuration values
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function setConfig( array $config )
+	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'service.config', $config );
 	}
@@ -213,46 +213,46 @@ class Standard
 	/**
 	 * Returns the position of the service item in the list of deliveries.
 	 *
-	 * @return integer Position in item list
+	 * @return int Position in item list
 	 */
-	public function getPosition()
+	public function getPosition() : int
 	{
-		return (int) $this->get( 'service.position', 0 );
+		return $this->get( 'service.position', 0 );
 	}
 
 
 	/**
 	 * Sets the new position of the service item in the list of deliveries.
 	 *
-	 * @param integer $pos Position in item list
+	 * @param int $pos Position in item list
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function setPosition( $pos )
+	public function setPosition( int $pos ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'service.position', (int) $pos );
+		return $this->set( 'service.position', $pos );
 	}
 
 
 	/**
 	 * Returns the status of the item.
 	 *
-	 * @return integer Status of the item
+	 * @return int Status of the item
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
-		return (int) $this->get( 'service.status', 1 );
+		return $this->get( 'service.status', 1 );
 	}
 
 
 	/**
 	 * Sets the status of the item.
 	 *
-	 * @param integer $status Status of the item
+	 * @param int $status Status of the item
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'service.status', (int) $status );
+		return $this->set( 'service.status', $status );
 	}
 
 
@@ -261,7 +261,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'service';
 	}
@@ -270,9 +270,9 @@ class Standard
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
 			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->date )
@@ -280,14 +280,14 @@ class Standard
 	}
 
 
-	/*
+	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -317,10 +317,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

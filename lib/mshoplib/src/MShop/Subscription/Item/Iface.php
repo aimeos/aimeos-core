@@ -38,9 +38,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the ID of the base order
 	 *
-	 * @return string ID of the base order
+	 * @return string|null ID of the base order
 	 */
-	public function getOrderBaseId();
+	public function getOrderBaseId() : ?string;
 
 	/**
 	 * Sets the ID of the base order item which the customer bought
@@ -48,14 +48,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string $id ID of the base order
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setOrderBaseId( $id );
+	public function setOrderBaseId( string $id ) : \Aimeos\MShop\Subscription\Item\Iface;
 
 	/**
 	 * Returns the ID of the ordered product
 	 *
 	 * @return string ID of the ordered product
 	 */
-	public function getOrderProductId();
+	public function getOrderProductId() : string;
 
 	/**
 	 * Sets the ID of the ordered product item which the customer subscribed for
@@ -63,14 +63,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string $id ID of the ordered product
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setOrderProductId( $id );
+	public function setOrderProductId( string $id ) : \Aimeos\MShop\Subscription\Item\Iface;
 
 	/**
 	 * Returns the date of the next subscription renewal
 	 *
 	 * @return string ISO date in "YYYY-MM-DD HH:mm:ss" format
 	 */
-	public function getDateNext();
+	public function getDateNext() : string;
 
 	/**
 	 * Sets the date of the next subscription renewal
@@ -78,14 +78,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string $date ISO date in "YYYY-MM-DD HH:mm:ss" format
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setDateNext( $date );
+	public function setDateNext( string $date ) : \Aimeos\MShop\Subscription\Item\Iface;
 
 	/**
 	 * Returns the date when the subscription renewal ends
 	 *
 	 * @return string|null ISO date in "YYYY-MM-DD HH:mm:ss" format
 	 */
-	public function getDateEnd();
+	public function getDateEnd() : ?string;
 
 	/**
 	 * Sets the delivery date of the invoice.
@@ -93,14 +93,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string|null $date ISO date in "YYYY-MM-DD HH:mm:ss" format
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setDateEnd( $date );
+	public function setDateEnd( string $date = null ) : \Aimeos\MShop\Subscription\Item\Iface;
 
 	/**
 	 * Returns the time interval to pass between the subscription renewals
 	 *
 	 * @return string PHP time interval, e.g. "P1M2W"
 	 */
-	public function getInterval();
+	public function getInterval() : string;
 
 	/**
 	 * Sets the time interval to pass between the subscription renewals
@@ -108,29 +108,29 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string $value PHP time interval, e.g. "P1M2W"
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setInterval( $value );
+	public function setInterval( string $value ) : \Aimeos\MShop\Subscription\Item\Iface;
 
 	/**
 	 * Returns the current renewal period of the subscription product
 	 *
-	 * @return integer Current renewal period
+	 * @return int Current renewal period
 	 */
-	public function getPeriod();
+	public function getPeriod() : int;
 
 	/**
 	 * Sets the current renewal period of the subscription product
 	 *
-	 * @param integer $value Current renewal period
+	 * @param int $value Current renewal period
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setPeriod( $value );
+	public function setPeriod( int $value ) : \Aimeos\MShop\Subscription\Item\Iface;
 
 	/**
 	 * Returns the product ID of the subscription product
 	 *
 	 * @return string Product ID
 	 */
-	public function getProductId();
+	public function getProductId() : string;
 
 	/**
 	 * Sets the product ID of the subscription product
@@ -138,35 +138,35 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string $value Product ID
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setProductId( $value );
+	public function setProductId( string $value ) : \Aimeos\MShop\Subscription\Item\Iface;
 
 	/**
 	 * Returns the reason for the end of the subscriptions
 	 *
-	 * @return integer|null Reason code or NULL for no reason
+	 * @return int|null Reason code or NULL for no reason
 	 */
-	public function getReason();
+	public function getReason() : ?int;
 
 	/**
 	 * Sets the reason for the end of the subscriptions
 	 *
-	 * @return integer|null Reason code or NULL for no reason
+	 * @param int|null Reason code or NULL for no reason
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setReason( $status );
+	public function setReason( int $status = null ) : \Aimeos\MShop\Subscription\Item\Iface;
 
 	/**
 	 * Returns the status of the subscriptions
 	 *
-	 * @return integer Subscription status, i.e. "1" for enabled, "0" for disabled
+	 * @return int Subscription status, i.e. "1" for enabled, "0" for disabled
 	 */
-	public function getStatus();
+	public function getStatus() : int;
 
 	/**
 	 * Sets the status of the subscriptions
 	 *
-	 * @return integer Subscription status, i.e. "1" for enabled, "0" for disabled
+	 * @param int Subscription status, i.e. "1" for enabled, "0" for disabled
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setStatus( $status );
+	public function setStatus( int $status ) : \Aimeos\MShop\Subscription\Item\Iface;
 }

@@ -27,7 +27,7 @@ interface Iface
 	 *
 	 * @return string Code of the common list type item
 	 */
-	public function getCode();
+	public function getCode() : string;
 
 	/**
 	 * Sets the code of the common list type item
@@ -35,21 +35,21 @@ interface Iface
 	 * @param string $code New code of the common list type item
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
-	public function setCode( $code );
+	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Iface;
 
 	/**
 	 * Returns the translated name for the type item
 	 *
 	 * @return string Translated name of the type item
 	 */
-	public function getName();
+	public function getName() : string;
 
 	/**
 	 * Returns the label of the common list type item
 	 *
 	 * @return string Label of the common list type item
 	 */
-	public function getLabel();
+	public function getLabel() : string;
 
 	/**
 	 * Sets the label of the common list type item
@@ -57,5 +57,5 @@ interface Iface
 	 * @param string $label New label of the common list type item
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
-	public function setLabel( $label );
+	public function setLabel( string $label ) : \Aimeos\MShop\Common\Item\Type\Iface;
 }

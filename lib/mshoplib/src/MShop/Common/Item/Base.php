@@ -36,7 +36,7 @@ abstract class Base
 	 * @param string $prefix Prefix for the keys returned by toArray()
 	 * @param array $values Associative list of key/value pairs of the item properties
 	 */
-	public function __construct( $prefix, array $values )
+	public function __construct( string $prefix, array $values )
 	{
 		$this->prefix = (string) $prefix;
 		$this->bdata = $values;
@@ -97,7 +97,7 @@ abstract class Base
 	 * @param string $name Name of the property
 	 * @return mixed|null Property value or null if property is unknown
 	 */
-	public function __get( $name )
+	public function __get( string $name )
 	{
 		return $this->get( $name );
 	}
@@ -107,9 +107,9 @@ abstract class Base
 	 * Tests if the item property for the given name is available
 	 *
 	 * @param string $name Name of the property
-	 * @return boolean True if the property exists, false if not
+	 * @return bool True if the property exists, false if not
 	 */
-	public function __isset( $name )
+	public function __isset( string $name ) : bool
 	{
 		if( array_key_exists( $name, $this->bdata ) ) {
 			return true;
@@ -125,7 +125,7 @@ abstract class Base
 	 * @param string $name Name of the property
 	 * @param mixed $value New property value
 	 */
-	public function __set( $name, $value )
+	public function __set( string $name, $value )
 	{
 		$this->set( $name, $value );
 	}
@@ -136,7 +136,7 @@ abstract class Base
 	 *
 	 * @return string|null ID of the item or null
 	 */
-	public function __toString()
+	public function __toString() : ?string
 	{
 		return $this->getId();
 	}
@@ -149,7 +149,7 @@ abstract class Base
 	 * @param mixed $default Default value if property is unknown
 	 * @return mixed|null Property value or default value if property is unknown
 	 */
-	public function get( $name, $default = null )
+	public function get( string $name, $default = null )
 	{
 		if( array_key_exists( $name, $this->bdata ) ) {
 			return $this->bdata[$name];
@@ -164,9 +164,9 @@ abstract class Base
 	 *
 	 * @param string $name Name of the property
 	 * @param mixed $value New property value
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for method chaining
 	 */
-	public function set( $name, $value )
+	public function set( string $name, $value ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		// workaround for NULL values instead of empty strings and stringified integers from database
 		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] != $value
@@ -185,7 +185,7 @@ abstract class Base
 	 *
 	 * @return string|null ID of the item
 	 */
-	public function getId()
+	public function getId() : ?string
 	{
 		$key = $this->prefix . 'id';
 
@@ -203,7 +203,7 @@ abstract class Base
 	 * @param string|null $id ID of the item
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function setId( $id )
+	public function setId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$key = $this->prefix . 'id';
 
@@ -222,7 +222,7 @@ abstract class Base
 	 *
 	 * @return string|null Site ID or null if no site id is available
 	 */
-	public function getSiteId()
+	public function getSiteId() : ?string
 	{
 		return $this->get( $this->prefix . 'siteid', $this->get( 'siteid' ) );
 	}
@@ -233,7 +233,7 @@ abstract class Base
 	 *
 	 * @return string|null Modification time (YYYY-MM-DD HH:mm:ss)
 	 */
-	public function getTimeModified()
+	public function getTimeModified() : ?string
 	{
 		return $this->get( $this->prefix . 'mtime', $this->get( 'mtime' ) );
 	}
@@ -244,7 +244,7 @@ abstract class Base
 	 *
 	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
-	public function getTimeCreated()
+	public function getTimeCreated() : ?string
 	{
 		return $this->get( $this->prefix . 'ctime', $this->get( 'ctime' ) );
 	}
@@ -255,18 +255,18 @@ abstract class Base
 	 *
 	 * @return string Name of editor who created/modified the item at last
 	 */
-	public function getEditor()
+	public function getEditor() : string
 	{
-		return (string) $this->get( $this->prefix . 'editor', $this->get( 'editor', '' ) );
+		return $this->get( $this->prefix . 'editor', $this->get( 'editor', '' ) );
 	}
 
 
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return $this->available;
 	}
@@ -275,12 +275,12 @@ abstract class Base
 	/**
 	 * Sets the general availability of the item
 	 *
-	 * @return boolean $value True if available, false if not
+	 * @return bool $value True if available, false if not
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function setAvailable( $value )
+	public function setAvailable( bool $value ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$this->available = (bool) $value;
+		$this->available = $value;
 		return $this;
 	}
 
@@ -288,9 +288,9 @@ abstract class Base
 	/**
 	 * Tests if this Item object was modified.
 	 *
-	 * @return boolean True if modified, false if not
+	 * @return bool True if modified, false if not
 	 */
-	public function isModified()
+	public function isModified() : bool
 	{
 		return $this->modified;
 	}
@@ -301,7 +301,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function setModified()
+	public function setModified() : \Aimeos\MShop\Common\Item\Iface
 	{
 		$this->modified = true;
 		return $this;
@@ -312,10 +312,10 @@ abstract class Base
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array $list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		if( $private && array_key_exists( $this->prefix . 'id', $list ) )
 		{
@@ -338,10 +338,10 @@ abstract class Base
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = [$this->prefix . 'id' => $this->getId()];
 
@@ -367,11 +367,11 @@ abstract class Base
 	/**
 	 * Checks if the new ID is valid for the item.
 	 *
-	 * @param string $old Current ID of the item
-	 * @param string $new New ID which should be set in the item
+	 * @param string|null $old Current ID of the item
+	 * @param string|null $new New ID which should be set in the item
 	 * @return string|null Value of the new ID
 	 */
-	public static function checkId( $old, $new )
+	public static function checkId( string $old = null, string $new = null ) : ?string
 	{
 		return ( $new !== null ? (string) $new : $new );
 	}
@@ -384,7 +384,7 @@ abstract class Base
 	 * @return string|null Clean date or null for no date
 	 * @throws \Aimeos\MShop\Exception If the date is invalid
 	 */
-	protected function checkDateFormat( $date )
+	protected function checkDateFormat( string $date = null ) : ?string
 	{
 		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9](( |T)[0-2][0-9]:[0-5][0-9](:[0-5][0-9])?)?$/';
 
@@ -402,6 +402,8 @@ abstract class Base
 
 			return str_replace( 'T', ' ', (string) $date );
 		}
+
+		return null;
 	}
 
 
@@ -413,7 +415,7 @@ abstract class Base
 	 * @return string Item code
 	 * @throws \Aimeos\MShop\Exception If the code is invalid
 	 */
-	protected function checkCode( $code, $length = 64 )
+	protected function checkCode( string $code, int $length = 64 ) : string
 	{
 		if( strlen( $code ) > $length )
 		{
@@ -429,11 +431,11 @@ abstract class Base
 	 * Tests if the country ID parameter represents an ISO country format.
 	 *
 	 * @param string|null $countryid Two letter ISO country format, e.g. DE
-	 * @param boolean $null True if null is allowed, false if not
+	 * @param bool $null True if null is allowed, false if not
 	 * @return string|null Two letter ISO country ID or null for no country
 	 * @throws \Aimeos\MShop\Exception If the country ID is invalid
 	 */
-	protected function checkCountryId( $countryid, $null = true )
+	protected function checkCountryId( string $countryid = null, bool $null = true ) : ?string
 	{
 		if( $null === false && $countryid == null ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO country code "%1$s"', '<null>' ) );
@@ -447,6 +449,8 @@ abstract class Base
 
 			return strtoupper( $countryid );
 		}
+
+		return null;
 	}
 
 
@@ -454,11 +458,11 @@ abstract class Base
 	 * Tests if the currency ID parameter represents an ISO currency format.
 	 *
 	 * @param string|null $currencyid Three letter ISO currency format, e.g. EUR
-	 * @param boolean $null True if null is allowed, false if not
+	 * @param bool $null True if null is allowed, false if not
 	 * @return string|null Three letter ISO currency ID or null for no currency
 	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 */
-	protected function checkCurrencyId( $currencyid, $null = true )
+	protected function checkCurrencyId( string $currencyid = null, bool $null = true ) : ?string
 	{
 		if( $null === false && $currencyid == null ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code "%1$s"', '<null>' ) );
@@ -472,6 +476,8 @@ abstract class Base
 
 			return strtoupper( $currencyid );
 		}
+
+		return null;
 	}
 
 
@@ -479,11 +485,11 @@ abstract class Base
 	 * Tests if the language ID parameter represents an ISO language format.
 	 *
 	 * @param string|null $langid ISO language format, e.g. de or de_DE
-	 * @param boolean $null True if null is allowed, false if not
+	 * @param bool $null True if null is allowed, false if not
 	 * @return string|null ISO language ID or null for no language
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
-	protected function checkLanguageId( $langid, $null = true )
+	protected function checkLanguageId( string $langid = null, bool $null = true ) : ?string
 	{
 		if( $null === false && $langid == null ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO language code "%1$s"', '<null>' ) );
@@ -504,5 +510,7 @@ abstract class Base
 
 			return implode( '_', $parts );
 		}
+
+		return null;
 	}
 }

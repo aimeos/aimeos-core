@@ -114,7 +114,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @param string $name Name of the property
 	 * @return mixed|null Property value or null if property is unknown
 	 */
-	public function __get( $name )
+	public function __get( string $name )
 	{
 		if( isset( $this->bdata[$name] ) ) {
 			return $this->bdata[$name];
@@ -126,9 +126,9 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * Tests if the item property for the given name is available
 	 *
 	 * @param string $name Name of the property
-	 * @return boolean True if the property exists, false if not
+	 * @return bool True if the property exists, false if not
 	 */
-	public function __isset( $name )
+	public function __isset( string $name ) : bool
 	{
 		if( array_key_exists( $name, $this->bdata ) ) {
 			return true;
@@ -144,7 +144,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @param string $name Name of the property
 	 * @param mixed $value New property value
 	 */
-	public function __set( $name, $value )
+	public function __set( string $name, $value )
 	{
 		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] !== $value ) {
 			$this->setModified();
@@ -159,7 +159,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 *
 	 * @return array List of properties that should be serialized
 	 */
-	public function __sleep()
+	public function __sleep() : array
 	{
 		/*
 		 * Workaround because database connections can't be serialized
@@ -176,7 +176,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 *
 	 * @return string|null ID of the item or null
 	 */
-	public function __toString()
+	public function __toString() : ?string
 	{
 		return $this->getId();
 	}
@@ -189,7 +189,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @param mixed $default Default value if property is unknown
 	 * @return mixed|null Property value or default value if property is unknown
 	 */
-	public function get( $name, $default = null )
+	public function get( string $name, $default = null )
 	{
 		if( isset( $this->bdata[$name] ) ) {
 			return $this->bdata[$name];
@@ -206,7 +206,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @param mixed $value New property value
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function set( $name, $value )
+	public function set( string $name, $value ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] !== $value )
 		{
@@ -223,7 +223,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'order/base';
 	}
@@ -234,7 +234,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 *
 	 * @return bool True if modified, false if not
 	 */
-	public function isModified()
+	public function isModified() : bool
 	{
 		return $this->modified;
 	}
@@ -245,7 +245,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 *
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setModified()
+	public function setModified() : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$this->modified = true;
 		return $this;
@@ -257,10 +257,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given type
 	 * @param string $type Address type, usually "billing" or "delivery"
-	 * @param integer|null $position Position of the address in the list
+	 * @param int|null $position Position of the address in the list
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function addAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type, $position = null )
+	public function addAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, string $type, int $position = null ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$address = $this->notify( 'addAddress.before', $address );
 
@@ -285,10 +285,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * Deletes an order address from the basket
 	 *
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
-	 * @param integer|null $position Position of the address in the list
+	 * @param int|null $position Position of the address in the list
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function deleteAddress( $type, $position = null )
+	public function deleteAddress( string $type, int $position = null ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		if( $position === null && isset( $this->addresses[$type] ) || isset( $this->addresses[$type][$position] ) )
 		{
@@ -314,10 +314,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * Returns the order address depending on the given type
 	 *
 	 * @param string $type Address type, usually "billing" or "delivery"
-	 * @param integer|null $position Address position in list of addresses
+	 * @param int|null $position Address position in list of addresses
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface[]|\Aimeos\MShop\Order\Item\Base\Address\Iface Order address item or list of
 	 */
-	public function getAddress( $type, $position = null )
+	public function getAddress( string $type, int $position = null )
 	{
 		if( $position !== null )
 		{
@@ -338,7 +338,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @return array Associative list of address items implementing
 	 *  \Aimeos\MShop\Order\Item\Base\Address\Iface with "billing" or "delivery" as key
 	 */
-	public function getAddresses()
+	public function getAddresses() : array
 	{
 		return $this->addresses;
 	}
@@ -350,7 +350,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @param array $map Associative list of order addresses as returned by getAddresses()
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setAddresses( array $map )
+	public function setAddresses( array $map ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$map = $this->notify( 'setAddresses.before', $map );
 
@@ -374,7 +374,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @param string $code Coupon code
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function addCoupon( $code )
+	public function addCoupon( string $code ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$code = mb_strtoupper( $code );
 
@@ -398,7 +398,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @param string $code Coupon code
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function deleteCoupon( $code )
+	public function deleteCoupon( string $code ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$code = mb_strtoupper( $code );
 
@@ -430,7 +430,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @return array Associative array of codes and lists of product items
 	 *  implementing \Aimeos\MShop\Order\Product\Iface
 	 */
-	public function getCoupons()
+	public function getCoupons() : array
 	{
 		return $this->coupons;
 	}
@@ -443,7 +443,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of coupon products
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setCoupon( $code, array $products = [] )
+	public function setCoupon( string $code, array $products = [] ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$code = mb_strtoupper( $code );
 		$new = $this->notify( 'setCoupon.before', [$code => $products] );
@@ -481,7 +481,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @param array $map Associative list of order coupons as returned by getCoupons()
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setCoupons( array $map )
+	public function setCoupons( array $map ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$map = $this->notify( 'setCoupons.before', $map );
 		$list = [];
@@ -522,10 +522,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * If a similar item is found, only the quantity is increased.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
-	 * @param integer|null $position position of the new order product item
+	 * @param int|null $position position of the new order product item
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function addProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position = null )
+	public function addProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, int $position = null ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$item = $this->notify( 'addProduct.before', $item );
 
@@ -533,7 +533,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 
 		if( $position !== null ) {
 			$this->products[$position] = $item;
-		} elseif( ( $pos = $this->getSameProduct( $item, $this->products ) ) !== false ) {
+		} elseif( ( $pos = $this->getSameProduct( $item, $this->products ) ) !== null ) {
 			$this->products[$pos]->setQuantity( $this->products[$pos]->getQuantity() + $item->getQuantity() );
 		} else {
 			$this->products[] = $item;
@@ -551,10 +551,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	/**
 	 * Deletes an order product item from the basket
 	 *
-	 * @param integer $position Position of the order product item
+	 * @param int $position Position of the order product item
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function deleteProduct( $position )
+	public function deleteProduct( int $position ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		if( isset( $this->products[$position] ) )
 		{
@@ -574,10 +574,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	/**
 	 * Returns the product item of an basket specified by its key
 	 *
-	 * @param integer $key Key returned by getProducts() identifying the requested product
+	 * @param int $key Key returned by getProducts() identifying the requested product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Product item of an order
 	 */
-	public function getProduct( $key )
+	public function getProduct( int $key ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		if( !isset( $this->products[$key] ) ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Product not available' ) );
@@ -592,7 +592,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 *
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of order product items
 	 */
-	public function getProducts()
+	public function getProducts() : array
 	{
 		return $this->products;
 	}
@@ -604,7 +604,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @param array $map Associative list of ordered products as returned by getProducts()
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setProducts( array $map )
+	public function setProducts( array $map ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$map = $this->notify( 'setProducts.before', $map );
 
@@ -625,10 +625,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given domain
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @param integer|null $position Position of the service in the list to overwrite
+	 * @param int|null $position Position of the service in the list to overwrite
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function addService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type, $position = null )
+	public function addService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, string $type, int $position = null ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$service = $this->notify( 'addService.before', $service );
 
@@ -655,10 +655,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * Deletes an order service from the basket
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @param integer|null $position Position of the service in the list to delete
+	 * @param int|null $position Position of the service in the list to delete
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function deleteService( $type, $position = null )
+	public function deleteService( string $type, int $position = null ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		if( $position === null && isset( $this->services[$type] ) || isset( $this->services[$type][$position] ) )
 		{
@@ -689,7 +689,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * 	Order service item or list of items for the requested type
 	 * @throws \Aimeos\MShop\Order\Exception If no service for the given type and position is found
 	 */
-	public function getService( $type, $position = null )
+	public function getService( string $type, $position = null )
 	{
 		if( $position !== null )
 		{
@@ -710,7 +710,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @return array Associative list of service types ("delivery" or "payment") as keys and list of
 	 *	service items implementing \Aimeos\MShop\Order\Service\Iface as values
 	 */
-	public function getServices()
+	public function getServices() : array
 	{
 		return $this->services;
 	}
@@ -722,7 +722,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @param array $map Associative list of order services as returned by getServices()
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setServices( array $map )
+	public function setServices( array $map ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$map = $this->notify( 'setServices.before', $map );
 
@@ -744,7 +744,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * Checks if the price uses the same currency as the price in the basket.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item
-	 * @return null
+	 * @return void
 	 */
 	abstract protected function checkPrice( \Aimeos\MShop\Price\Item\Iface $item );
 
@@ -757,7 +757,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface[] List of checked items
 	 * @throws \Aimeos\MShop\Exception If one of the order addresses is invalid
 	 */
-	protected function checkAddresses( array $items, $type )
+	protected function checkAddresses( array $items, string $type ) : array
 	{
 		foreach( $items as $key => $item )
 		{
@@ -776,7 +776,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of checked items
 	 * @throws \Aimeos\MShop\Exception If one of the order products is invalid
 	 */
-	protected function checkProducts( array $items )
+	protected function checkProducts( array $items ) : array
 	{
 		foreach( $items as $key => $item )
 		{
@@ -801,7 +801,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface[] List of checked items
 	 * @throws \Aimeos\MShop\Exception If one of the order services is invalid
 	 */
-	protected function checkServices( array $items, $type )
+	protected function checkServices( array $items, string $type ) : array
 	{
 		foreach( $items as $key => $item )
 		{
@@ -822,10 +822,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item
 	 * @param array $products List of order product items to check against
-	 * @return integer|false Positon of the same product in the product list of false if product is unique
+	 * @return int|null Positon of the same product in the product list of false if product is unique
 	 * @throws \Aimeos\MShop\Order\Exception If no similar item was found
 	 */
-	protected function getSameProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, array $products )
+	protected function getSameProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, array $products ) : ?int
 	{
 		$attributeMap = [];
 		$attributeCount = 0;
@@ -860,6 +860,6 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 			return $position;
 		}
 
-		return false;
+		return null;
 	}
 }

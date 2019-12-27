@@ -24,7 +24,7 @@ interface Iface
 	 *
 	 * @return array Configuration values
 	 */
-	public function getConfig();
+	public function getConfig() : array;
 
 	/**
 	 * Returns the configuration value for the specified path
@@ -41,7 +41,7 @@ interface Iface
 	 * @param mixed $default Default value if no configration is found
 	 * @return mixed Configuration value or array of values
 	 */
-	public function getConfigValue( $key, $default = null );
+	public function getConfigValue( string $key, $default = null );
 
 	/**
 	 * Sets the configuration values of the item
@@ -49,5 +49,5 @@ interface Iface
 	 * @param array $config Configuration values
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function setConfig( array $config );
+	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface;
 }

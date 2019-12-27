@@ -27,7 +27,7 @@ interface Iface
 	 *
 	 * @return string label of the supplier item
 	 */
-	public function getLabel();
+	public function getLabel() : string;
 
 	/**
 	 * Sets the new label of the supplier item.
@@ -35,14 +35,14 @@ interface Iface
 	 * @param string $value label of the supplier item
 	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
 	 */
-	public function setLabel( $value );
+	public function setLabel( string $value ) : \Aimeos\MShop\Supplier\Item\Iface;
 
 	/**
 	 * Returns the code of the supplier item.
 	 *
 	 * @return string Code of the supplier item
 	 */
-	public function getCode();
+	public function getCode() : string;
 
 	/**
 	 * Sets the new code of the supplier item.
@@ -50,5 +50,5 @@ interface Iface
 	 * @param string $value Code of the supplier item
 	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
 	 */
-	public function setCode( $value );
+	public function setCode( string $value ) : \Aimeos\MShop\Supplier\Item\Iface;
 }

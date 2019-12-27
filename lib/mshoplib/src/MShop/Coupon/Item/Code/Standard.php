@@ -43,7 +43,7 @@ class Standard
 	 *
 	 * @return string|null Unique ID of the coupon item
 	 */
-	public function getParentId()
+	public function getParentId() : ?string
 	{
 		return $this->get( 'coupon.code.parentid' );
 	}
@@ -52,12 +52,12 @@ class Standard
 	/**
 	 * Sets the new unique ID of the coupon item the code belongs to.
 	 *
-	 * @param string $id Unique ID of the coupon item
+	 * @param string|null $id Unique ID of the coupon item
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
-	public function setParentId( $id )
+	public function setParentId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'coupon.code.parentid', (string) $id );
+		return $this->set( 'coupon.code.parentid', $id );
 	}
 
 
@@ -66,7 +66,7 @@ class Standard
 	 *
 	 * @return string|null Coupon code
 	 */
-	public function getCode()
+	public function getCode() : ?string
 	{
 		return $this->get( 'coupon.code.code' );
 	}
@@ -78,7 +78,7 @@ class Standard
 	 * @param string $code Coupon code
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
-	public function setCode( $code )
+	public function setCode( string $code ) : \Aimeos\MShop\Coupon\Item\Code\Iface
 	{
 		return $this->set( 'coupon.code.code', mb_strtoupper( $this->checkCode( $code ) ) );
 	}
@@ -87,12 +87,12 @@ class Standard
 	/**
 	 * Returns the number of tries the code is valid.
 	 *
-	 * @return integer|null Number of available tries or null for unlimited
+	 * @return int|null Number of available tries or null for unlimited
 	 */
-	public function getCount()
+	public function getCount() : ?int
 	{
 		if( ( $result = $this->get( 'coupon.code.count', 0 ) ) !== null ) {
-			return (int) $result;
+			return $result;
 		}
 
 		return null;
@@ -102,13 +102,12 @@ class Standard
 	/**
 	 * Sets the new number of tries the code is valid.
 	 *
-	 * @param integer|null $count Number of tries or null for unlimited
+	 * @param string|int|null $count Number of tries or null for unlimited
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
-	public function setCount( $count )
+	public function setCount( $count = null ) : \Aimeos\MShop\Coupon\Item\Code\Iface
 	{
-		$count = ( is_numeric( $count ) ? (int) $count : null );
-		return $this->set( 'coupon.code.count', $count );
+		return $this->set( 'coupon.code.count', is_numeric( $count ) ? $count : null );
 	}
 
 
@@ -117,7 +116,7 @@ class Standard
 	 *
 	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
-	public function getDateStart()
+	public function getDateStart() : ?string
 	{
 		return $this->get( 'coupon.code.datestart' );
 	}
@@ -126,10 +125,10 @@ class Standard
 	/**
 	 * Sets a new starting point of time, in which the code is available.
 	 *
-	 * @param string $date New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
-	public function setDateStart( $date )
+	public function setDateStart( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'coupon.code.datestart', $this->checkDateFormat( $date ) );
 	}
@@ -140,7 +139,7 @@ class Standard
 	 *
 	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
-	public function getDateEnd()
+	public function getDateEnd() : ?string
 	{
 		return $this->get( 'coupon.code.dateend' );
 	}
@@ -149,10 +148,10 @@ class Standard
 	/**
 	 * Sets a new ending point of time, in which the code is available.
 	 *
-	 * @param string New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @param string|null New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
-	public function setDateEnd( $date )
+	public function setDateEnd( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'coupon.code.dateend', $this->checkDateFormat( $date ) );
 	}
@@ -164,9 +163,9 @@ class Standard
 	 *
 	 * @return string Arbitrary value depending on the coupon provider
 	 */
-	public function getRef()
+	public function getRef() : string
 	{
-		return (string) $this->get( 'coupon.code.ref', '' );
+		return $this->get( 'coupon.code.ref', '' );
 	}
 
 
@@ -177,9 +176,9 @@ class Standard
 	 * @param string $ref Arbitrary value depending on the coupon provider
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
-	public function setRef( $ref )
+	public function setRef( string $ref ) : \Aimeos\MShop\Coupon\Item\Code\Iface
 	{
-		return $this->set( 'coupon.code.ref', (string) $ref );
+		return $this->set( 'coupon.code.ref', $ref );
 	}
 
 
@@ -188,7 +187,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'coupon/code';
 	}
@@ -197,9 +196,9 @@ class Standard
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable()
 			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->date )
@@ -211,10 +210,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -241,10 +240,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

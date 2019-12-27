@@ -43,9 +43,9 @@ class Standard
 	 *
 	 * @return string Domain of the tag item
 	 */
-	public function getDomain()
+	public function getDomain() : string
 	{
-		return (string) $this->get( 'tag.domain', '' );
+		return $this->get( 'tag.domain', '' );
 	}
 
 
@@ -55,9 +55,9 @@ class Standard
 	 * @param string $domain Domain of the tag item
 	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
-	public function setDomain( $domain )
+	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'tag.domain', (string) $domain );
+		return $this->set( 'tag.domain', $domain );
 	}
 
 
@@ -66,7 +66,7 @@ class Standard
 	 *
 	 * @return string|null Language ID of the product tag item
 	 */
-	public function getLanguageId()
+	public function getLanguageId(): ?string
 	{
 		return $this->get( 'tag.languageid' );
 	}
@@ -78,7 +78,7 @@ class Standard
 	 * @param string|null $id Language ID of the product tag item
 	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
-	public function setLanguageId( $id )
+	public function setLanguageId( string $id = null ) : \Aimeos\MShop\Tag\Item\Iface
 	{
 		return $this->set( 'tag.languageid', $this->checkLanguageId( $id ) );
 	}
@@ -89,7 +89,7 @@ class Standard
 	 *
 	 * @return string|null Type code of the product tag item
 	 */
-	public function getType()
+	public function getType() : ?string
 	{
 		return $this->get( 'tag.type' );
 	}
@@ -101,7 +101,7 @@ class Standard
 	 * @param string $type Type of the product tag item
 	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'tag.type', $this->checkCode( $type ) );
 	}
@@ -112,9 +112,9 @@ class Standard
 	 *
 	 * @return string Label of the product tag item
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
-		return (string) $this->get( 'tag.label', '' );
+		return $this->get( 'tag.label', '' );
 	}
 
 
@@ -124,9 +124,9 @@ class Standard
 	 * @param string $label Label of the product tag item
 	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
-	public function setLabel( $label )
+	public function setLabel( string $label ) : \Aimeos\MShop\Tag\Item\Iface
 	{
-		return $this->set( 'tag.label', (string) $label );
+		return $this->set( 'tag.label', $label );
 	}
 
 
@@ -135,7 +135,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'tag';
 	}
@@ -144,9 +144,9 @@ class Standard
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getLanguageId() === $this->langid;
 	}
@@ -156,10 +156,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -184,10 +184,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

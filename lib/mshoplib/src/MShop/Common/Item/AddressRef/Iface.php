@@ -23,10 +23,10 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Adds a new address item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item New or existing address item
-	 * @param integer|null $pos Position (key) in the list of address items or null to add the item at the end
+	 * @param int|null $pos Position (key) in the list of address items or null to add the item at the end
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 */
-	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, $pos = null );
+	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, int $pos = null ) : \Aimeos\MShop\Common\Item\Iface;
 
 	/**
 	 * Removes an existing address item
@@ -34,7 +34,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item Existing address item
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 */
-	public function deleteAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item );
+	public function deleteAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item ) : \Aimeos\MShop\Common\Item\Iface;
 
 	/**
 	 * Removes a list of existing address items
@@ -42,27 +42,27 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $items Existing address items
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 */
-	public function deleteAddressItems( array $items );
+	public function deleteAddressItems( array $items ) : \Aimeos\MShop\Common\Item\Iface;
 
 	/**
 	 * Returns the deleted address items
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface[] Address items
 	 */
-	public function getAddressItemsDeleted();
+	public function getAddressItemsDeleted() : array;
 
 	/**
 	 * Returns the address items
 	 *
-	 * @param string $id Position (key) in the list of address items
+	 * @param int $idx Position (key) in the list of address items
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface|null Address item or null if not found
 	 */
-	public function getAddressItem( $id );
+	public function getAddressItem( int $idx ) : ?\Aimeos\MShop\Common\Item\Iface;
 
 	/**
 	 * Returns the address items
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface[] Associative list of address IDs as keys and address items as values
 	 */
-	public function getAddressItems();
+	public function getAddressItems() : array;
 }

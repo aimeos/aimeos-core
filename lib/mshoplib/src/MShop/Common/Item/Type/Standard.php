@@ -31,7 +31,7 @@ class Standard
 	 * @param string $prefix Property prefix when converting to array
 	 * @param array $values Initial values of the list type item
 	 */
-	public function __construct( $prefix, array $values = [] )
+	public function __construct( string $prefix, array $values = [] )
 	{
 		parent::__construct( $prefix, $values );
 
@@ -44,9 +44,9 @@ class Standard
 	 *
 	 * @return string Code of the common list type item
 	 */
-	public function getCode()
+	public function getCode() : string
 	{
-		return (string) $this->get( $this->prefix . 'code', '' );
+		return $this->get( $this->prefix . 'code', '' );
 	}
 
 
@@ -56,7 +56,7 @@ class Standard
 	 * @param string $code New code of the common list type item
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
-	public function setCode( $code )
+	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( $this->prefix . 'code', $this->checkCode( $code ) );
 	}
@@ -67,9 +67,9 @@ class Standard
 	 *
 	 * @return string Domain of the common list type item
 	 */
-	public function getDomain()
+	public function getDomain() : string
 	{
-		return (string) $this->get( $this->prefix . 'domain', '' );
+		return $this->get( $this->prefix . 'domain', '' );
 	}
 
 
@@ -79,9 +79,9 @@ class Standard
 	 * @param string $domain New domain of the common list type item
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
-	public function setDomain( $domain )
+	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( $this->prefix . 'domain', (string) $domain );
+		return $this->set( $this->prefix . 'domain', $domain );
 	}
 
 
@@ -90,9 +90,9 @@ class Standard
 	 *
 	 * @return string Translated name of the type item
 	 */
-	public function getName()
+	public function getName() : string
 	{
-		return (string) $this->get( $this->prefix . 'name', $this->getLabel() );
+		return $this->get( $this->prefix . 'name', $this->getLabel() );
 	}
 
 
@@ -101,9 +101,9 @@ class Standard
 	 *
 	 * @return string Label of the common list type item
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
-		return (string) $this->get( $this->prefix . 'label', '' );
+		return $this->get( $this->prefix . 'label', '' );
 	}
 
 
@@ -113,55 +113,55 @@ class Standard
 	 * @param string $label New label of the common list type item
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
-	public function setLabel( $label )
+	public function setLabel( string $label ) : \Aimeos\MShop\Common\Item\Type\Iface
 	{
-		return $this->set( $this->prefix . 'label', (string) $label );
+		return $this->set( $this->prefix . 'label', $label );
 	}
 
 
 	/**
 	 * Returns the position of the item in the list.
 	 *
-	 * @return integer Position of the item in the list
+	 * @return int Position of the item in the list
 	 */
-	public function getPosition()
+	public function getPosition() : int
 	{
-		return (int) $this->get( $this->prefix . 'position', 0 );
+		return $this->get( $this->prefix . 'position', 0 );
 	}
 
 
 	/**
 	 * Sets the new position of the item in the list.
 	 *
-	 * @param integer $pos position of the item in the list
+	 * @param int $pos position of the item in the list
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function setPosition( $pos )
+	public function setPosition( int $pos ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( $this->prefix . 'position', (int) $pos );
+		return $this->set( $this->prefix . 'position', $pos );
 	}
 
 
 	/**
 	 * Returns the status of the common list type item
 	 *
-	 * @return integer Status of the common list type item
+	 * @return int Status of the common list type item
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
-		return (int) $this->get( $this->prefix . 'status', 1 );
+		return $this->get( $this->prefix . 'status', 1 );
 	}
 
 
 	/**
 	 * Sets the status of the common list type item
 	 *
-	 * @param integer $status New status of the common list type item
+	 * @param int $status New status of the common list type item
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( $this->prefix . 'status', (int) $status );
+		return $this->set( $this->prefix . 'status', $status );
 	}
 
 
@@ -170,7 +170,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return str_replace( '.', '/', rtrim( $this->prefix, '.' ) );
 	}
@@ -179,9 +179,9 @@ class Standard
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getStatus() > 0;
 	}
@@ -191,10 +191,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Type item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -220,10 +220,10 @@ class Standard
 	/**
 	 * Returns an associative list of item properties.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array List of item properties.
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

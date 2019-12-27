@@ -25,7 +25,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 *
 	 * @return string Returns the facility of the item
 	 */
-	public function getFacility();
+	public function getFacility() : string;
 
 	/**
 	 * Sets the new facility of the item.
@@ -33,21 +33,21 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string $facility Facility of the item
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
-	public function setFacility( $facility );
+	public function setFacility( string $facility ) : \Aimeos\MAdmin\Log\Item\Iface;
 
 	/**
 	 * Returns the timestamp of the item.
 	 *
-	 * @return string Returns the timestamp of the item
+	 * @return string|null Returns the timestamp of the item
 	 */
-	public function getTimestamp();
+	public function getTimestamp() : ?string;
 
 	/**
 	 * Returns the priority of the item.
 	 *
-	 * @return integer Returns the priority of the item
+	 * @return int Returns the priority of the item
 	 */
-	public function getPriority();
+	public function getPriority() : int;
 
 	/**
 	 * Sets the new priority of the item.
@@ -55,14 +55,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param integer $priority Priority of the item
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
-	public function setPriority( $priority );
+	public function setPriority( int $priority ) : \Aimeos\MAdmin\Log\Item\Iface;
 
 	/**
 	 * Returns the message of the item.
 	 *
 	 * @return string Returns the message of the item
 	 */
-	public function getMessage();
+	public function getMessage() : string;
 
 	/**
 	 * Sets the new message of the item.
@@ -70,14 +70,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string $message Message of the item
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
-	public function setMessage( $message );
+	public function setMessage( string $message ) : \Aimeos\MAdmin\Log\Item\Iface;
 
 	/**
 	 * Returns the request of the item.
 	 *
 	 * @return string Returns the request of the item
 	 */
-	public function getRequest();
+	public function getRequest() : string;
 
 	/**
 	 * Sets the new request of the item.
@@ -85,5 +85,5 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string $request Request of the item
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
-	public function setRequest( $request );
+	public function setRequest( string $request ) : \Aimeos\MAdmin\Log\Item\Iface;
 }

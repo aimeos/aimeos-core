@@ -63,7 +63,7 @@ trait Traits
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem New item added to the given domain or null if no item should be referenced
 	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
 	 */
-	public function addListItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null )
+	public function addListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListRef\Iface
 	{
 		if( $refItem !== null )
 		{
@@ -100,7 +100,7 @@ trait Traits
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Existing item removed from the given domain or null if item shouldn't be removed
 	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
 	 */
-	public function deleteListItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null )
+	public function deleteListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListRef\Iface
 	{
 		if( isset( $this->listItems[$domain] )
 			&& ( $key = array_search( $listItem, $this->listItems[$domain], true ) ) !== false
@@ -119,11 +119,11 @@ trait Traits
 	 * Removes a list of list items which references their domain items (removed as well if it exists)
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $items Existing list items
-	 * @param boolean $all True to delete referenced items as well, false for list items only
-	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 * @param bool $all True to delete referenced items as well, false for list items only
+	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
 	 * @throws \Aimeos\MShop\Exception If an item isn't a list item or isn't found
 	 */
-	public function deleteListItems( array $items, $all = false )
+	public function deleteListItems( array $items, bool $all = false ) : \Aimeos\MShop\Common\Item\ListRef\Iface
 	{
 		foreach( $items as $item )
 		{
@@ -142,7 +142,7 @@ trait Traits
 	 *
 	 * @return string[] List of domain names
 	 */
-	public function getDomains()
+	public function getDomains() : array
 	{
 		return array_keys( $this->listItems );
 	}
@@ -153,7 +153,7 @@ trait Traits
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface[] List items with referenced items attached (optional)
 	 */
-	public function getListItemsDeleted( $domain = null )
+	public function getListItemsDeleted( $domain = null ) : array
 	{
 		if( $domain !== null ) {
 			return $this->listRmMap[$domain] ?: [];
@@ -169,10 +169,10 @@ trait Traits
 	 * @param string $domain Name of the domain (e.g. product, text, etc.)
 	 * @param string $listtype Name of the list item type
 	 * @param string $refId Unique ID of the referenced item
-	 * @param boolean $active True to return only active items, false to return all
+	 * @param bool $active True to return only active items, false to return all
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface|null Matching list item or null if none
 	 */
-	public function getListItem( $domain, $listtype, $refId, $active = true )
+	public function getListItem( string $domain, string $listtype, string $refId, bool $active = true ) : ?\Aimeos\MShop\Common\Item\Lists\Iface
 	{
 		if( !isset( $this->listMap[$domain] ) && isset( $this->listItems[$domain] ) )
 		{
@@ -190,7 +190,7 @@ trait Traits
 			$listItem = $this->listMap[$domain][$listtype][$refId];
 
 			if( $active === true && $listItem->isAvailable() === false ) {
-				return;
+				return null;
 			}
 
 			if( isset( $this->listRefItems[$domain][$refId] ) ) {
@@ -199,6 +199,8 @@ trait Traits
 
 			return $listItem;
 		}
+
+		return null;
 	}
 
 
@@ -215,7 +217,7 @@ trait Traits
 	 * @param boolean $active True to return only active items, false to return all
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
-	public function getListItems( $domain = null, $listtype = null, $type = null, $active = true )
+	public function getListItems( $domain = null, $listtype = null, $type = null, bool $active = true ) : array
 	{
 		$result = [];
 		$this->prepareListItems();
@@ -265,10 +267,10 @@ trait Traits
 	 * @param array|string|null $domain Name/Names of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $type Name/Names of the item type or null for all
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
-	 * @param boolean $active True to return only active items, false to return all
+	 * @param bool $active True to return only active items, false to return all
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function getRefItems( $domain = null, $type = null, $listtype = null, $active = true )
+	public function getRefItems( $domain = null, $type = null, $listtype = null, bool $active = true ) : array
 	{
 		$list = [];
 
@@ -297,7 +299,7 @@ trait Traits
 	 *
 	 * @return string Label of the item
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
 		return '';
 	}
@@ -309,7 +311,7 @@ trait Traits
 	 * @param string $type Text type to be returned
 	 * @return string Specified text type or label of the item
 	 */
-	public function getName( $type = 'name' )
+	public function getName( string $type = 'name' ) : string
 	{
 		$items = $this->getRefItems( 'text', $type );
 
@@ -326,7 +328,7 @@ trait Traits
 	 *
 	 * @return string|null ID of the item
 	 */
-	abstract public function getId();
+	abstract public function getId() : ?string;
 
 
 	/**
@@ -334,7 +336,7 @@ trait Traits
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	abstract public function getResourceType();
+	abstract public function getResourceType() : string;
 
 
 	/**
@@ -342,9 +344,9 @@ trait Traits
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Position\Iface $a First item
 	 * @param \Aimeos\MShop\Common\Item\Position\Iface $b Second item
-	 * @return integer -1 if position of $a < $b, 1 if position of $a > $b and 0 if both positions are equal
+	 * @return int -1 if position of $a < $b, 1 if position of $a > $b and 0 if both positions are equal
 	 */
-	protected function comparePosition( \Aimeos\MShop\Common\Item\Position\Iface $a, \Aimeos\MShop\Common\Item\Position\Iface $b )
+	protected function comparePosition( \Aimeos\MShop\Common\Item\Position\Iface $a, \Aimeos\MShop\Common\Item\Position\Iface $b ) : int
 	{
 		if( $a->getPosition() === $b->getPosition() ) {
 			return 0;

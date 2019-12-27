@@ -24,7 +24,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Status\Iface
 	 *
 	 * @return string Code of the item
 	 */
-	public function getCode();
+	public function getCode() : string;
 
 	/**
 	 * Sets the code of the item.
@@ -32,14 +32,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Status\Iface
 	 * @param string $name New code of the item
 	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Item for chaining method calls
 	 */
-	public function setCode( $name );
+	public function setCode( string $name ) : \Aimeos\MShop\Common\Item\Tree\Iface;
 
 	/**
 	 * Returns the name of the item.
 	 *
 	 * @return string Name of the item
 	 */
-	public function getLabel();
+	public function getLabel() : string;
 
 	/**
 	 * Sets the new name of the item.
@@ -47,43 +47,43 @@ interface Iface extends \Aimeos\MShop\Common\Item\Status\Iface
 	 * @param string $name New name of the item
 	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Item for chaining method calls
 	 */
-	public function setLabel( $name );
+	public function setLabel( string $name ) : \Aimeos\MShop\Common\Item\Tree\Iface;
 
 	/**
 	 * Returns the level of the item in the tree
 	 *
-	 * @return integer Level of the item starting with "0" for the root node
+	 * @return int Level of the item starting with "0" for the root node
 	 */
-	public function getLevel();
+	public function getLevel() : int;
 
 	/**
 	 * Returns the ID of the parent category
 	 *
-	 * @return string Unique ID of the parent category
+	 * @return string|null Unique ID of the parent category
 	 */
-	public function getParentId();
+	public function getParentId() : ?string;
 
 	/**
 	 * Returns a child of this node identified by its index.
 	 *
-	 * @param integer $index Index of child node
+	 * @param int $index Index of child node
 	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Selected node
 	 */
-	public function getChild( $index );
+	public function getChild( int $index ) : \Aimeos\MShop\Common\Item\Tree\Iface;
 
 	/**
 	 * Returns all children of this node.
 	 *
 	 * @return array Numerically indexed list of nodes
 	 */
-	public function getChildren();
+	public function getChildren() : array;
 
 	/**
 	 * Tests if a node has children.
 	 *
-	 * @return boolean True if node has children, false if not
+	 * @return bool True if node has children, false if not
 	 */
-	public function hasChildren();
+	public function hasChildren() : bool;
 
 	/**
 	 * Adds a child node to this node.
@@ -91,5 +91,5 @@ interface Iface extends \Aimeos\MShop\Common\Item\Status\Iface
 	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
 	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Catalog item for chaining method calls
 	 */
-	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item );
+	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface;
 }

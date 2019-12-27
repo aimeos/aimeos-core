@@ -177,13 +177,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSetCurrencyIdNull()
-	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
-		$this->object->setCurrencyId( null );
-	}
-
-
 	public function testSetCurrencyIdInvalid()
 	{
 		$this->setExpectedException( \Aimeos\MShop\Exception::class );

@@ -39,7 +39,7 @@ class Standard
 	 *
 	 * @return string|null Site ID (or null if not available)
 	 */
-	public function getSiteId()
+	public function getSiteId() : ?string
 	{
 		return $this->get( 'order.base.product.attribute.siteid' );
 	}
@@ -51,9 +51,9 @@ class Standard
 	 * @param string $value Unique site ID of the item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setSiteId( $value )
+	public function setSiteId( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	{
-		return $this->set( 'order.base.product.attribute.siteid', (string) $value );
+		return $this->set( 'order.base.product.attribute.siteid', $value );
 	}
 
 
@@ -62,9 +62,9 @@ class Standard
 	 *
 	 * @return string Attribute ID of the product attribute item
 	 */
-	public function getAttributeId()
+	public function getAttributeId() : string
 	{
-		return (string) $this->get( 'order.base.product.attribute.attributeid', '' );
+		return $this->get( 'order.base.product.attribute.attributeid', '' );
 	}
 
 
@@ -74,9 +74,9 @@ class Standard
 	 * @param string $id Attribute ID of the product attribute item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setAttributeId( $id )
+	public function setAttributeId( string $id ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	{
-		return $this->set( 'order.base.product.attribute.attributeid', (string) $id );
+		return $this->set( 'order.base.product.attribute.attributeid', $id );
 	}
 
 
@@ -85,7 +85,7 @@ class Standard
 	 *
 	 * @return string|null ID of the ordered product
 	 */
-	public function getParentId()
+	public function getParentId() : ?string
 	{
 		return $this->get( 'order.base.product.attribute.parentid' );
 	}
@@ -94,12 +94,12 @@ class Standard
 	/**
 	 * Sets the ID of the ordered product as parent
 	 *
-	 * @param string $id ID of the ordered product
+	 * @param string|null $id ID of the ordered product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setParentId( $id )
+	public function setParentId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'order.base.product.attribute.parentid', (string) $id );
+		return $this->set( 'order.base.product.attribute.parentid', $id );
 	}
 
 
@@ -108,9 +108,9 @@ class Standard
 	 *
 	 * @return string Value of the product attribute
 	 */
-	public function getType()
+	public function getType() : string
 	{
-		return (string) $this->get( 'order.base.product.attribute.type', '' );
+		return $this->get( 'order.base.product.attribute.type', '' );
 	}
 
 
@@ -120,7 +120,7 @@ class Standard
 	 * @param string $type Type of the product attribute
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'order.base.product.attribute.type', $this->checkCode( $type ) );
 	}
@@ -131,7 +131,7 @@ class Standard
 	 *
 	 * @return string Code of the attribute
 	 */
-	public function getCode()
+	public function getCode() : string
 	{
 		return (string) $this->get( 'order.base.product.attribute.code', '' );
 	}
@@ -143,7 +143,7 @@ class Standard
 	 * @param string $code Code of the attribute
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setCode( $code )
+	public function setCode( string $code ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	{
 		return $this->set( 'order.base.product.attribute.code', $this->checkCode( $code, 255 ) );
 	}
@@ -154,9 +154,9 @@ class Standard
 	 *
 	 * @return string Localized name of the product attribute
 	 */
-	public function getName()
+	public function getName() : string
 	{
-		return (string) $this->get( 'order.base.product.attribute.name', '' );
+		return $this->get( 'order.base.product.attribute.name', '' );
 	}
 
 
@@ -166,9 +166,9 @@ class Standard
 	 * @param string $name Localized name of the product attribute
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setName( $name )
+	public function setName( string $name ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	{
-		return $this->set( 'order.base.product.attribute.name', (string) $name );
+		return $this->set( 'order.base.product.attribute.name', $name );
 	}
 
 
@@ -189,7 +189,7 @@ class Standard
 	 * @param string|array $value Value of the product attribute
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setValue( $value )
+	public function setValue( $value ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	{
 		return $this->set( 'order.base.product.attribute.value', $value );
 	}
@@ -198,23 +198,23 @@ class Standard
 	/**
 	 * Returns the quantity of the product attribute.
 	 *
-	 * @return integer Quantity of the product attribute
+	 * @return int Quantity of the product attribute
 	 */
-	public function getQuantity()
+	public function getQuantity() : int
 	{
-		return (int) $this->get( 'order.base.product.attribute.quantity', 1 );
+		return $this->get( 'order.base.product.attribute.quantity', 1 );
 	}
 
 
 	/**
 	 * Sets the quantity of the product attribute.
 	 *
-	 * @param integer $value Quantity of the product attribute
+	 * @param int $value Quantity of the product attribute
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setQuantity( $value )
+	public function setQuantity( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	{
-		return $this->set( 'order.base.product.attribute.quantity', (int) $value );
+		return $this->set( 'order.base.product.attribute.quantity', $value );
 	}
 
 
@@ -223,7 +223,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'order/base/product/attribute';
 	}
@@ -235,7 +235,7 @@ class Standard
 	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item to copy from
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item )
+	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	{
 		$this->setSiteId( $item->getSiteId() );
 		$this->setAttributeId( $item->getId() );
@@ -256,7 +256,7 @@ class Standard
 	 * @param boolean True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order product attribute item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -285,10 +285,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 

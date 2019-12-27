@@ -69,7 +69,7 @@ class Standard
 	 *
 	 * @return string|null ISO language code (e.g. de or de_DE)
 	 */
-	public function getLanguageId()
+	public function getLanguageId() : ?string
 	{
 		return $this->get( 'media.languageid' );
 	}
@@ -82,7 +82,7 @@ class Standard
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
-	public function setLanguageId( $id )
+	public function setLanguageId( string $id = null ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		return $this->set( 'media.languageid', $this->checkLanguageId( $id ) );
 	}
@@ -93,7 +93,7 @@ class Standard
 	 *
 	 * @return string|null Type code of the media item
 	 */
-	public function getType()
+	public function getType() : ?string
 	{
 		return $this->get( 'media.type', 'default' );
 	}
@@ -105,7 +105,7 @@ class Standard
 	 * @param string $type Type of the media
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setType( $type )
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'media.type', $this->checkCode( $type ) );
 	}
@@ -116,7 +116,7 @@ class Standard
 	 *
 	 * @return string Domain the media item belongs to
 	 */
-	public function getDomain()
+	public function getDomain() : string
 	{
 		return (string) $this->get( 'media.domain', '' );
 	}
@@ -128,7 +128,7 @@ class Standard
 	 * @param string $domain Domain of media item
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setDomain( $domain )
+	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'media.domain', (string) $domain );
 	}
@@ -139,7 +139,7 @@ class Standard
 	 *
 	 * @return string Label of the media item
 	 */
-	public function getLabel()
+	public function getLabel() : string
 	{
 		return (string) $this->get( 'media.label', '' );
 	}
@@ -151,7 +151,7 @@ class Standard
 	 * @param string $label Label of the media item
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setLabel( $label )
+	public function setLabel( string $label ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		return $this->set( 'media.label', (string) $label );
 	}
@@ -160,9 +160,9 @@ class Standard
 	/**
 	 * Returns the status of the media item.
 	 *
-	 * @return integer Status of the item
+	 * @return int Status of the item
 	 */
-	public function getStatus()
+	public function getStatus() : int
 	{
 		return (int) $this->get( 'media.status', 1 );
 	}
@@ -171,12 +171,12 @@ class Standard
 	/**
 	 * Sets the new status of the media item.
 	 *
-	 * @param integer $status Status of the item
+	 * @param int $status Status of the item
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setStatus( $status )
+	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'media.status', (int) $status );
+		return $this->set( 'media.status', $status );
 	}
 
 
@@ -185,7 +185,7 @@ class Standard
 	 *
 	 * @return string Mime type of the media item
 	 */
-	public function getMimeType()
+	public function getMimeType() : string
 	{
 		return (string) $this->get( 'media.mimetype', '' );
 	}
@@ -197,7 +197,7 @@ class Standard
 	 * @param string $mimetype Mime type of the media item
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setMimeType( $mimetype )
+	public function setMimeType( string $mimetype ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		if( preg_match( '/^[a-z\-]+\/[a-zA-Z0-9\.\-\+]+$/', $mimetype ) !== 1 ) {
 			throw new \Aimeos\MShop\Media\Exception( sprintf( 'Invalid mime type "%1$s"', $mimetype ) );
@@ -212,7 +212,7 @@ class Standard
 	 *
 	 * @return string URL of the media file
 	 */
-	public function getUrl()
+	public function getUrl() : string
 	{
 		return (string) $this->get( 'media.url', '' );
 	}
@@ -224,7 +224,7 @@ class Standard
 	 * @param string $url URL of the media file
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setUrl( $url )
+	public function setUrl( string $url ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		return $this->set( 'media.url', (string) $url );
 	}
@@ -235,7 +235,7 @@ class Standard
 	 *
 	 * @return string Preview URL of the media file
 	 */
-	public function getPreview()
+	public function getPreview() : string
 	{
 		if( ( $list = (array) $this->get( 'media.previews', [] ) ) !== [] ) {
 			return (string) current( $list );
@@ -250,7 +250,7 @@ class Standard
 	 *
 	 * @return array Associative list of widths in pixels as keys and urls as values
 	 */
-	public function getPreviews()
+	public function getPreviews() : array
 	{
 		return (array) $this->get( 'media.previews', [] );
 	}
@@ -262,7 +262,7 @@ class Standard
 	 * @param string|array $url Preview URL of the media file
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setPreview( $url )
+	public function setPreview( $url ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		return $this->setPreviews( ['1' => $url] );
 	}
@@ -274,7 +274,7 @@ class Standard
 	 * @param array $url Preview URL or list of URLs with widths of the media file in pixels as keys
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setPreviews( array $urls )
+	public function setPreviews( array $urls ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		return $this->set( 'media.previews', $urls );
 	}
@@ -286,7 +286,7 @@ class Standard
 	 * @param string $type Text type to be returned
 	 * @return string Specified text type or label of the item
 	 */
-	public function getName( $type = 'name' )
+	public function getName( string $type = 'name' ) : string
 	{
 		$items = $this->getPropertyItems( $type );
 
@@ -303,7 +303,7 @@ class Standard
 	 *
 	 * @return string Item type, subtypes are separated by slashes
 	 */
-	public function getResourceType()
+	public function getResourceType() : string
 	{
 		return 'media';
 	}
@@ -312,9 +312,9 @@ class Standard
 	/**
 	 * Tests if the item is available based on status, time, language and currency
 	 *
-	 * @return boolean True if available, false if not
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable()
+	public function isAvailable() : bool
 	{
 		return parent::isAvailable() && $this->getStatus() > 0
 			&& ( $this->langid === null || $this->getLanguageId() === null
@@ -326,10 +326,10 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function fromArray( array &$list, $private = false )
+	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -359,10 +359,10 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param boolean True to return private properties, false for public only
+	 * @param bool True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray( $private = false )
+	public function toArray( bool $private = false ) : array
 	{
 		$list = parent::toArray( $private );
 
@@ -378,5 +378,4 @@ class Standard
 
 		return $list;
 	}
-
 }
