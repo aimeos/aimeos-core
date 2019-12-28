@@ -110,7 +110,7 @@ class Standard
 	 * @param string $type Type of the attribute
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
-	public function setType( $type ) : \Aimeos\MShop\Common\Item\Iface
+	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'attribute.type', $this->checkCode( $type ) );
 	}
@@ -176,7 +176,7 @@ class Standard
 	/**
 	 * Sets the new status of the attribute item.
 	 *
-	 * @param integer $status Status of the item
+	 * @param int $status Status of the item
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
 	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
@@ -234,7 +234,7 @@ class Standard
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array &$list Associative list of item keys and their values
-	 * @param boolean True to set private properties too, false for public only
+	 * @param bool True to set private properties too, false for public only
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
 	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
