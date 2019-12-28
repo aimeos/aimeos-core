@@ -259,10 +259,10 @@ class Standard
 	/**
 	 * Sets the new preview url of the media item.
 	 *
-	 * @param string|array $url Preview URL of the media file
+	 * @param string $url Preview URL of the media file
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setPreview( $url ) : \Aimeos\MShop\Media\Item\Iface
+	public function setPreview( string $url ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		return $this->setPreviews( ['1' => $url] );
 	}
