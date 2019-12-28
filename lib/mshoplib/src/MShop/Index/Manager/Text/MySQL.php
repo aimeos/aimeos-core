@@ -50,7 +50,7 @@ class MySQL
 	{
 		parent::__construct( $context );
 
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
 
 		$func = function( $source, array $params ) {
