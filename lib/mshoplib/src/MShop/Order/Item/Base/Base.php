@@ -684,12 +684,12 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * Returns the order services depending on the given type
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @param integer|null $position Position of the service in the list to retrieve
+	 * @param int|null $position Position of the service in the list to retrieve
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface[]|\Aimeos\MShop\Order\Item\Base\Service\Iface
 	 * 	Order service item or list of items for the requested type
 	 * @throws \Aimeos\MShop\Order\Exception If no service for the given type and position is found
 	 */
-	public function getService( string $type, $position = null )
+	public function getService( string $type, int $position = null )
 	{
 		if( $position !== null )
 		{
