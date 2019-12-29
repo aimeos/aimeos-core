@@ -27,7 +27,7 @@ class Nolimit
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this;
 	}
@@ -40,10 +40,11 @@ class Nolimit
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param boolean $default True to add default criteria
-	 * @return \Aimeos\MShop\Common\Item\Iface Item object
+	 * @param bool $default True to add default criteria
+	 * @return \Aimeos\MShop\Stock\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
+	public function findItem( string $code, array $ref = [], string $domain = null, string $type = null,
+		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values = ['stock.productcode' => $code, 'stock.type' => $type];
 		return $this->getObject()->createItem( $values );
@@ -54,10 +55,10 @@ class Nolimit
 	 * Inserts the new stock item
 	 *
 	 * @param \Aimeos\MShop\Stock\Item\Iface $item Stock item which should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Stock\Item\Iface Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Stock\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Stock\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Stock\Item\Iface
 	{
 		return $item;
 	}
@@ -69,7 +70,7 @@ class Nolimit
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this;
 	}
@@ -80,11 +81,11 @@ class Nolimit
 	 *
 	 * @param string $id Id of the stock item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Stock\Item\Iface Returns the product stock item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values = ['stock.id' => $id, 'stock.type' => 'default'];
 		return $this->getObject()->createItem( $values );
@@ -96,10 +97,10 @@ class Nolimit
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\MShop\Stock\Item\Iface[] List of stock items
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$items = [];
 		$item = $this->getObject()->createItem( ['stock.type' => 'default'] );
@@ -125,7 +126,7 @@ class Nolimit
 	 * @param string $type Unique code of the stock type
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function decrease( array $codeqty, $type = 'default' )
+	public function decrease( array $codeqty, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
 	{
 		return $this;
 	}
@@ -138,7 +139,7 @@ class Nolimit
 	 * @param string $type Unique code of the type
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function increase( array $codeqty, $type = 'default' )
+	public function increase( array $codeqty, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
 	{
 		return $this;
 	}
@@ -150,7 +151,7 @@ class Nolimit
 	 * @param \Aimeos\MW\Criteria\Expression\Iface|null $cond Criteria object
 	 * @return string[] List of product codes
 	 */
-	protected function getProductCodes( \Aimeos\MW\Criteria\Expression\Iface $cond = null )
+	protected function getProductCodes( \Aimeos\MW\Criteria\Expression\Iface $cond = null ) : array
 	{
 		$list = [];
 

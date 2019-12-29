@@ -143,7 +143,7 @@ class BasketLimits
 		 * doesn't satisfy all requirements. It may be useful if you want to
 		 * allow them to send free or replacements for lost or damaged products.
 		 *
-		 * @param boolean True to disable the check, false to keep it enabled
+		 * @param bool True to disable the check, false to keep it enabled
 		 * @category Developer
 		 * @category User
 		 * @since 2014.03
@@ -170,7 +170,7 @@ class BasketLimits
 	 * Checks for the configured basket limits.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $sum Total sum of all product price items
-	 * @param integer $count Total number of products in the basket
+	 * @param int $count Total number of products in the basket
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one of the minimum or maximum limits is exceeded
 	 */
 	protected function checkLimits( \Aimeos\MShop\Price\Item\Iface $sum, $count )
@@ -213,7 +213,7 @@ class BasketLimits
 	 * Checks for the configured basket limits.
 	 *
 	 * @param array $config Associative list of configuration key/value pairs
-	 * @param integer $count Total number of products in the basket
+	 * @param int $count Total number of products in the basket
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one of the minimum or maximum limits is exceeded
 	 */
 	protected function checkLimitsProducts( array $config, $count )

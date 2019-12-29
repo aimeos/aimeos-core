@@ -25,7 +25,7 @@ trait Traits
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface New address item object
 	 */
-	public function createAddressItem( array $values = [] )
+	public function createAddressItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
 		return $this->getObject()->getSubManager( 'address' )->createItem( $values );
 	}
@@ -39,7 +39,7 @@ trait Traits
 	 * @return array Associative list of parent IDs / address IDs as keys and items implementing
 	 * 	\Aimeos\MShop\Common\Item\Address\Iface as values
 	 */
-	protected function getAddressItems( array $parentIds, $domain )
+	protected function getAddressItems( array $parentIds, string $domain ) : array
 	{
 		$list = [];
 
@@ -65,7 +65,7 @@ trait Traits
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
 	 */
-	abstract protected function getObject();
+	abstract protected function getObject() : \Aimeos\MShop\Common\Manager\Iface;
 
 
 	/**
@@ -75,7 +75,7 @@ trait Traits
 	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
-	abstract public function getSubManager( $domain, $name = null );
+	abstract public function getSubManager( string $domain, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface;
 
 
 	/**
@@ -83,10 +83,11 @@ trait Traits
 	 *
 	 * @param \Aimeos\MShop\Common\Item\AddressRef\Iface $item Item with referenced items
 	 * @param string $domain Domain of the calling manager
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Common\Item\AddressRef\Iface Item with saved referenced items
 	 */
-	protected function saveAddressItems( \Aimeos\MShop\Common\Item\AddressRef\Iface $item, $domain, $fetch = true )
+	protected function saveAddressItems( \Aimeos\MShop\Common\Item\AddressRef\Iface $item, string $domain,
+		bool $fetch = true ) : \Aimeos\MShop\Common\Item\AddressRef\Iface
 	{
 		$pos = 0;
 		$manager = $this->getObject()->getSubManager( 'address' );

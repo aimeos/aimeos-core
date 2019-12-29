@@ -28,7 +28,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Returns a coupon provider instance
 	 * @throws \Aimeos\MShop\Coupon\Exception If coupon couldn't be found
 	 */
-	public function getProvider( \Aimeos\MShop\Coupon\Item\Iface $item, $code )
+	public function getProvider( \Aimeos\MShop\Coupon\Item\Iface $item, string $code ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		$names = explode( ',', $item->getProvider() );
 
@@ -94,8 +94,8 @@ abstract class Base
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon provider wrapped by one or more coupon decorators
 	 * @throws \Aimeos\MShop\Coupon\Exception If a coupon decorator couldn't be instantiated
 	 */
-	protected function addCouponDecorators( \Aimeos\MShop\Coupon\Item\Iface $item, $code,
-		\Aimeos\MShop\Coupon\Provider\Iface $provider, array $names )
+	protected function addCouponDecorators( \Aimeos\MShop\Coupon\Item\Iface $item, string $code,
+		\Aimeos\MShop\Coupon\Provider\Iface $provider, array $names ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		$classprefix = '\Aimeos\MShop\Coupon\Provider\Decorator\\';
 

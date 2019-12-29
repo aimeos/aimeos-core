@@ -187,7 +187,7 @@ class Standard extends Base
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
@@ -264,7 +264,7 @@ class Standard extends Base
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Catalog\Item\Iface New catalog item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
@@ -274,10 +274,10 @@ class Standard extends Base
 	/**
 	 * Creates a search object.
 	 *
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MW\Criteria\Iface Returns the search object
 	 */
-	public function createSearch( $default = false )
+	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true ) {
 			return $this->createSearchBase( 'catalog' );
@@ -293,7 +293,7 @@ class Standard extends Base
 	 * @param \Aimeos\MShop\Common\Item\Iface|string $itemId Item object or ID of the item object
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItem( $id )
+	public function deleteItem( $id ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$this->begin();
 		$this->lock();
@@ -322,7 +322,7 @@ class Standard extends Base
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		foreach( $itemIds as $itemId ) {
 			$this->getObject()->deleteItem( $itemId );
@@ -339,10 +339,11 @@ class Standard extends Base
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param boolean $default True to add default criteria
+	 * @param bool $default True to add default criteria
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item object
 	 */
-	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
+	public function findItem( string $code, array $ref = [], string $domain = null, string $type = null,
+		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->findItemBase( array( 'catalog.code' => $code ), $ref, $default );
 	}
@@ -353,11 +354,11 @@ class Standard extends Base
 	 *
 	 * @param string $id Unique ID of the catalog item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item of the given ID
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'catalog.id', $id, $ref, $default );
 	}
@@ -366,10 +367,10 @@ class Standard extends Base
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'mshop/catalog/manager/submanagers';
 		return $this->getResourceTypeBase( 'catalog', $path, array( 'lists' ), $withsub );
@@ -379,10 +380,10 @@ class Standard extends Base
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		/** mshop/catalog/manager/submanagers
 		 * List of manager names that can be instantiated by the catalog manager
@@ -415,7 +416,8 @@ class Standard extends Base
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Item\Iface $item Updated item including the generated ID
 	 */
-	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, $parentId = null, $refId = null )
+	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, string $parentId = null,
+		string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
 		$this->begin();
 		$this->lock();
@@ -451,7 +453,7 @@ class Standard extends Base
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
+	public function moveItem( string $id, string $oldParentId, string $newParentId, $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface
 	{
 		$this->begin();
 		$this->lock();
@@ -481,10 +483,10 @@ class Standard extends Base
 	 * Updates an item object.
 	 *
 	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Item object whose data should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Catalog\Item\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Catalog\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Catalog\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
 		if( !$item->isModified() )
 		{
@@ -508,10 +510,10 @@ class Standard extends Base
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\MShop\Catalog\Item\Iface[] List of catalog items
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$nodeMap = $siteMap = [];
 		$context = $this->getContext();
@@ -548,7 +550,7 @@ class Standard extends Base
 			 * this domain, then items wil be only inherited. Thus, you have full
 			 * control over inheritance and aggregation in each domain.
 			 *
-			 * @param integer Constant from Aimeos\MShop\Locale\Manager\Base class
+			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 			 * @category Developer
 			 * @since 2018.01
 			 * @see mshop/locale/manager/standard/sitelevel
@@ -718,7 +720,7 @@ class Standard extends Base
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Catalog\Item\Iface[] Associative list of catalog items with IDs as keys
 	 */
-	public function getPath( $id, array $ref = [] )
+	public function getPath( string $id, array $ref = [] ) : array
 	{
 		$sitePath = array_reverse( (array) $this->getContext()->getLocale()->getSitePath() );
 
@@ -751,11 +753,12 @@ class Standard extends Base
 	 *
 	 * @param string|null $id Retrieve nodes starting from the given ID
 	 * @param string[] List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
-	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
+	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
 	 * @param \Aimeos\MW\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = [], $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $criteria = null )
+	public function getTree( string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
+		\Aimeos\MW\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
 		$sitePath = array_reverse( (array) $this->getContext()->getLocale()->getSitePath() );
 
@@ -813,7 +816,7 @@ class Standard extends Base
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default)
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'catalog', $manager, $name );
 	}
@@ -825,7 +828,7 @@ class Standard extends Base
 	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Catalog item object incl. child items
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item with saved child items
 	 */
-	protected function saveChildren( \Aimeos\MShop\Catalog\Item\Iface $item )
+	protected function saveChildren( \Aimeos\MShop\Catalog\Item\Iface $item ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
 		$rmIds = [];
 		foreach( $item->getChildrenDeleted() as $child ) {
@@ -859,7 +862,7 @@ class Standard extends Base
 	 *
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function lock()
+	protected function lock() : \Aimeos\MShop\Catalog\Manager\Iface
 	{
 		/** mshop/catalog/manager/standard/lock/mysql
 		 * SQL statement for locking the catalog table
@@ -899,7 +902,7 @@ class Standard extends Base
 	 *
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function unlock()
+	protected function unlock() : \Aimeos\MShop\Catalog\Manager\Iface
 	{
 		/** mshop/catalog/manager/standard/unlock/mysql
 		 * SQL statement for unlocking the catalog table
@@ -940,10 +943,11 @@ class Standard extends Base
 	 *
 	 * @param string $id Id of the record
 	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Catalog item
-	 * @param boolean $case True if the record shoud be added or false for an update
+	 * @param bool $case True if the record shoud be added or false for an update
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	private function updateUsage( $id, \Aimeos\MShop\Catalog\Item\Iface $item, $case = false )
+	private function updateUsage( string $id, \Aimeos\MShop\Catalog\Item\Iface $item,
+		bool $case = false ) : \Aimeos\MShop\Catalog\Manager\Iface
 	{
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->getContext();

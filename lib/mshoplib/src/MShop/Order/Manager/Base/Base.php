@@ -54,7 +54,7 @@ abstract class Base
 	 */
 	abstract protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
 		array $values = [], array $products = [], array $addresses = [],
-		array $services = [], array $coupons = [] );
+		array $services = [], array $coupons = [] ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 
 	/**
@@ -63,7 +63,7 @@ abstract class Base
 	 * @param string $type Basket type if a customer can have more than one basket
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Shopping basket
 	 */
-	public function getSession( $type = 'default' )
+	public function getSession( string $type = 'default' ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$context = $this->getContext();
 		$session = $context->getSession();
@@ -97,9 +97,9 @@ abstract class Base
 	 * Returns the current lock status of the basket.
 	 *
 	 * @param string $type Basket type if a customer can have more than one basket
-	 * @return integer Lock status (@see \Aimeos\MShop\Order\Manager\Base\Base)
+	 * @return int Lock status (@see \Aimeos\MShop\Order\Manager\Base\Base)
 	 */
-	public function getSessionLock( $type = 'default' )
+	public function getSessionLock( string $type = 'default' ) : int
 	{
 		$context = $this->getContext();
 		$session = $context->getSession();
@@ -124,7 +124,7 @@ abstract class Base
 	 * @param string $type Order type if a customer can have more than one order at once
 	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
-	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, $type = 'default' )
+	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, string $type = 'default' ) : \Aimeos\MShop\Order\Manager\Base\Iface
 	{
 		$context = $this->getContext();
 		$session = $context->getSession();
@@ -148,11 +148,11 @@ abstract class Base
 	 * Locks or unlocks the session by setting the lock value.
 	 * The lock is a cooperative lock and you have to check the lock value before you proceed.
 	 *
-	 * @param integer $lock Lock value (@see \Aimeos\MShop\Order\Manager\Base\Base)
+	 * @param int $lock Lock value (@see \Aimeos\MShop\Order\Manager\Base\Base)
 	 * @param string $type Order type if a customer can have more than one order at once
 	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
-	public function setSessionLock( $lock, $type = 'default' )
+	public function setSessionLock( int $lock, string $type = 'default' ) : \Aimeos\MShop\Order\Manager\Base\Iface
 	{
 		$this->checkLock( $lock );
 
@@ -173,19 +173,20 @@ abstract class Base
 	/**
 	 * Checks if the lock value is a valid constant.
 	 *
-	 * @param integer $value Lock constant
+	 * @param int $value Lock constant
+	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 * @throws \Aimeos\MShop\Order\Exception If given value is invalid
 	 */
-	protected function checkLock( $value )
+	protected function checkLock( int $value ) : \Aimeos\MShop\Order\Manager\Base\Iface
 	{
 		switch( $value )
 		{
 			case \Aimeos\MShop\Order\Manager\Base\Base::LOCK_DISABLE:
 			case \Aimeos\MShop\Order\Manager\Base\Base::LOCK_ENABLE:
-				break;
-			default:
-				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Lock flag "%1$d" not within allowed range', $value ) );
+				return $this;
 		}
+
+		throw new \Aimeos\MShop\Order\Exception( sprintf( 'Lock flag "%1$d" not within allowed range', $value ) );
 	}
 
 
@@ -193,10 +194,10 @@ abstract class Base
 	 * Returns the address item map for the given order base IDs
 	 *
 	 * @param string[] $baseIds List of order base IDs
-	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return array Multi-dimensional associative list of order base IDs as keys and order address type/item pairs as values
 	 */
-	protected function getAddresses( array $baseIds, $fresh = false )
+	protected function getAddresses( array $baseIds, bool $fresh = false ) : array
 	{
 		$items = [];
 		$manager = $this->getObject()->getSubManager( 'address' );
@@ -223,11 +224,11 @@ abstract class Base
 	 * Returns the coupon map for the given order base IDs
 	 *
 	 * @param string[] $baseIds List of order base IDs
-	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
 	 * @param array $products Associative list of base IDs and order product ID/item pairs as values
 	 * @return array Multi-dimensional associative list of order base IDs as keys and coupons with product items as values
 	 */
-	protected function getCoupons( array $baseIds, $fresh = false, array $products = [] )
+	protected function getCoupons( array $baseIds, bool $fresh = false, array $products = [] ) : array
 	{
 		$map = $productMap = [];
 		$manager = $this->getObject()->getSubManager( 'coupon' );
@@ -273,11 +274,11 @@ abstract class Base
 	 * Retrieves the ordered products from the storage.
 	 *
 	 * @param string[] $baseIds List of order base IDs
-	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return array Multi-dimensional associative list of order base IDs as keys and order product
 	 *	IDs/items pairs in reversed order as values
 	 */
-	protected function getProducts( array $baseIds, $fresh = false )
+	protected function getProducts( array $baseIds, bool $fresh = false ) : array
 	{
 		$map = $attributes = $subProducts = [];
 		$manager = $this->getObject()->getSubManager( 'product' );
@@ -343,10 +344,10 @@ abstract class Base
 	 * Retrieves the order services from the storage.
 	 *
 	 * @param string[] $baseIds List of order base IDs
-	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return array Multi-dimensional associative list of order base IDs as keys and service type/items pairs as values
 	 */
-	protected function getServices( array $baseIds, $fresh = false )
+	protected function getServices( array $baseIds, bool $fresh = false ) : array
 	{
 		$map = [];
 		$manager = $this->getObject()->getSubManager( 'service' );
@@ -382,11 +383,11 @@ abstract class Base
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object with total order value
 	 * @param \Aimeos\MShop\Locale\Item\Iface $localeItem Locale object of the order
 	 * @param array $row Array of values with all relevant order information
-	 * @param integer $parts Bitmap of the basket parts that should be loaded
-	 * @return \Aimeos\MShop\Order\Item\Base\Standard The loaded order item for the given ID
+	 * @param int $parts Bitmap of the basket parts that should be loaded
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface The loaded order item for the given ID
 	 */
-	protected function loadItems( $id, \Aimeos\MShop\Price\Item\Iface $price,
-		\Aimeos\MShop\Locale\Item\Iface $localeItem, $row, $parts )
+	protected function loadItems( string $id, \Aimeos\MShop\Price\Item\Iface $price,
+		\Aimeos\MShop\Locale\Item\Iface $localeItem, array $row, int $parts )
 	{
 		$products = $coupons = $addresses = $services = [];
 
@@ -421,11 +422,11 @@ abstract class Base
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object with total order value
 	 * @param \Aimeos\MShop\Locale\Item\Iface $localeItem Locale object of the order
 	 * @param array $row Array of values with all relevant order information
-	 * @param integer $parts Bitmap of the basket parts that should be loaded
+	 * @param int $parts Bitmap of the basket parts that should be loaded
 	 * @return \Aimeos\MShop\Order\Item\Base\Standard The loaded order item for the given ID
 	 */
-	protected function loadFresh( $id, \Aimeos\MShop\Price\Item\Iface $price,
-		\Aimeos\MShop\Locale\Item\Iface $localeItem, $row, $parts )
+	protected function loadFresh( string $id, \Aimeos\MShop\Price\Item\Iface $price,
+		\Aimeos\MShop\Locale\Item\Iface $localeItem, array $row, int $parts )
 	{
 		$products = $coupons = $addresses = $services = [];
 
@@ -478,10 +479,10 @@ abstract class Base
 	 * Retrieves the addresses of the order from the storage.
 	 *
 	 * @param string $id Order base ID
-	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface[] List of order address items
 	 */
-	protected function loadAddresses( $id, $fresh )
+	protected function loadAddresses( string $id, bool $fresh ) : array
 	{
 		$map = $this->getAddresses( [$id], $fresh );
 
@@ -497,12 +498,12 @@ abstract class Base
 	 * Retrieves the coupons of the order from the storage.
 	 *
 	 * @param string $id Order base ID
-	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
 	 * @param array $products Multi-dimensional associative list of order base IDs as keys and order product
 	 *	IDs/items pairs in reversed order as values
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] Associative list of coupon codes as keys and items as values
 	 */
-	protected function loadCoupons( $id, $fresh, array $products )
+	protected function loadCoupons( string $id, bool $fresh, array $products ) : array
 	{
 		$map = $this->getCoupons( [$id], $fresh, [$id => $products] );
 
@@ -518,10 +519,10 @@ abstract class Base
 	 * Retrieves the ordered products from the storage.
 	 *
 	 * @param string $id Order base ID
-	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of product items
 	 */
-	protected function loadProducts( $id, $fresh )
+	protected function loadProducts( string $id, bool $fresh ) : array
 	{
 		$items = current( $this->getProducts( [$id], $fresh ) );
 		return $items ?: [];
@@ -532,10 +533,10 @@ abstract class Base
 	 * Retrieves the services of the order from the storage.
 	 *
 	 * @param string $id Order base ID
-	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @param bool $fresh Create new items by copying the existing ones and remove their IDs
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface[] List of order service items
 	 */
-	protected function loadServices( $id, $fresh )
+	protected function loadServices( string $id, bool $fresh ) : array
 	{
 		$map = $this->getServices( [$id], $fresh );
 
@@ -553,7 +554,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing ordered products or bundles
 	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
-	protected function storeProducts( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	protected function storeProducts( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Manager\Base\Iface
 	{
 		$position = 0;
 		$manager = $this->getObject()->getSubManager( 'product' );
@@ -612,7 +613,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing address items
 	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
-	protected function storeAddresses( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	protected function storeAddresses( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Manager\Base\Iface
 	{
 		$position = 0;
 		$manager = $this->getObject()->getSubManager( 'address' );
@@ -641,7 +642,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing coupon items
 	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
-	protected function storeCoupons( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	protected function storeCoupons( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Manager\Base\Iface
 	{
 		$manager = $this->getObject()->getSubManager( 'coupon' );
 
@@ -677,7 +678,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing service items
 	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
-	protected function storeServices( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	protected function storeServices( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Manager\Base\Iface
 	{
 		$manager = $this->getObject()->getSubManager( 'service' );
 		$attrManager = $manager->getSubManager( 'attribute' );

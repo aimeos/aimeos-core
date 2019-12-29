@@ -30,9 +30,9 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
-	 * @return integer[] List of ID values as key and the number of counted products as value
+	 * @return string[] List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key ) : array
 	{
 		/** mshop/index/manager/standard/aggregate/mysql
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -90,7 +90,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$this->getManager()->deleteItems( $itemIds );
 		return $this->clearItems( $itemIds )->clearCache( $itemIds );
@@ -100,10 +100,10 @@ class Standard
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		return $this->getResourceTypeBase( 'index', 'mshop/index/manager/submanagers', [], $withsub );
 	}
@@ -112,10 +112,10 @@ class Standard
 	/**
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		$list = parent::getSearchAttributes( $withsub );
 
@@ -137,7 +137,7 @@ class Standard
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'index', $manager, $name );
 	}
@@ -150,7 +150,7 @@ class Standard
 	 *
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function optimize()
+	public function optimize() : \Aimeos\MShop\Index\Manager\Iface
 	{
 		/** mshop/index/manager/standard/optimize/mysql
 		 * Optimizes the stored product data for retrieving the records faster
@@ -187,7 +187,7 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->clear( $siteids );
@@ -204,7 +204,7 @@ class Standard
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function cleanup( $timestamp )
+	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->cleanup( $timestamp );
@@ -221,7 +221,7 @@ class Standard
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function rebuild( array $items = [] )
+	public function rebuild( array $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
@@ -238,7 +238,7 @@ class Standard
 		 * downside of big bunches is a higher memory consumption that can
 		 * exceed the maximum allowed memory of the process.
 		 *
-		 * @param integer Number of products
+		 * @param int Number of products
 		 * @since 2014.09
 		 * @category User
 		 * @category Developer
@@ -325,10 +325,10 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Product\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		/** mshop/index/manager/standard/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
@@ -448,7 +448,7 @@ class Standard
 	 * @param string[] $ids list of product IDs
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function clearItems( array $ids )
+	protected function clearItems( array $ids ) : \Aimeos\MShop\Index\Manager\Iface
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->deleteItems( $ids );
@@ -464,7 +464,7 @@ class Standard
 	 * @param string[] $ids List of product IDs
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function clearCache( array $ids )
+	protected function clearCache( array $ids ) : \Aimeos\MShop\Index\Manager\Iface
 	{
 		$tags = [];
 
@@ -482,9 +482,9 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string[] $domains List of domains to be
-	 * @param integer $size Size of a chunk of products to handle at a time
+	 * @param int $size Size of a chunk of products to handle at a time
 	 */
-	protected function writeIndex( \Aimeos\MW\Criteria\Iface $search, array $domains, $size )
+	protected function writeIndex( \Aimeos\MW\Criteria\Iface $search, array $domains, int $size )
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 		$submanagers = $this->getSubManagers();
@@ -526,9 +526,9 @@ class Standard
 	/**
 	 * Returns the list of sub-managers available for the index attribute manager.
 	 *
-	 * @return array Associative list of the sub-domain as key and the manager object as value
+	 * @return \Aimeos\MShop\Index\Manager\Iface[] Associative list of the sub-domain as key and the manager object as value
 	 */
-	protected function getSubManagers()
+	protected function getSubManagers() : array
 	{
 		if( $this->subManagers === null )
 		{

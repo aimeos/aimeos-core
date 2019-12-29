@@ -331,7 +331,7 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Customer\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/submanagers';
 		$default = ['address', 'group', 'lists', 'property'];
@@ -350,7 +350,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values['customer.siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
@@ -360,10 +360,10 @@ class Standard
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'mshop/customer/manager/submanagers';
 		$default = ['address', 'group', 'lists', 'property'];
@@ -375,10 +375,10 @@ class Standard
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface List of search attribute items
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		/** mshop/customer/manager/submanagers
 		 * List of manager names that can be instantiated by the customer manager
@@ -409,7 +409,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Customer\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/customer/manager/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -451,10 +451,10 @@ class Standard
 	 * Saves a customer item object.
 	 *
 	 * @param \Aimeos\MShop\Customer\Item\Iface $item Customer item object
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Customer\Item\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Customer\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Customer\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Customer\Item\Iface
 	{
 		$item = $this->addGroups( $item );
 
@@ -664,10 +664,10 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return array Associative list of IDs as keys and items implementing \Aimeos\MShop\Customer\Item\Iface as values
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$map = [];
 		$context = $this->getContext();
@@ -704,7 +704,7 @@ class Standard
 			 * this domain, then items wil be only inherited. Thus, you have full
 			 * control over inheritance and aggregation in each domain.
 			 *
-			 * @param integer Constant from Aimeos\MShop\Locale\Manager\Base class
+			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 			 * @category Developer
 			 * @since 2018.01
 			 * @see mshop/locale/manager/standard/sitelevel
@@ -860,7 +860,7 @@ class Standard
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'customer', $manager, $name );
 	}

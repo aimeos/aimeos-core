@@ -209,7 +209,7 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Attribute\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/attribute/manager/submanagers';
 		$default = ['lists', 'property', 'type'];
@@ -225,10 +225,10 @@ class Standard
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'mshop/attribute/manager/submanagers';
 		$default = ['lists', 'property'];
@@ -240,10 +240,10 @@ class Standard
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		/** mshop/attribute/manager/submanagers
 		 * List of manager names that can be instantiated by the attribute manager
@@ -274,7 +274,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Attribute\Item\Iface New attribute item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values['attribute.siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
@@ -288,10 +288,11 @@ class Standard
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param boolean $default True to add default criteria
+	 * @param bool $default True to add default criteria
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item object
 	 */
-	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
+	public function findItem( string $code, array $ref = [], string $domain = null, string $type = null,
+		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$find = array(
 			'attribute.code' => $code,
@@ -307,11 +308,11 @@ class Standard
 	 *
 	 * @param string $id Unique ID of the attribute item in the storage
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Returns the attribute item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'attribute.id', $id, $ref, $default );
 	}
@@ -321,10 +322,10 @@ class Standard
 	 * Saves an attribute item to the storage.
 	 *
 	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Attribute\Item\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Attribute\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Attribute\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Attribute\Item\Iface
 	{
 		if( !$item->isModified() )
 		{
@@ -510,7 +511,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Attribute\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/attribute/manager/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -553,10 +554,10 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\MShop\Attribute\Item\Iface[] List of attribute items
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$map = [];
 		$context = $this->getContext();
@@ -593,7 +594,7 @@ class Standard
 			 * this domain, then items wil be only inherited. Thus, you have full
 			 * control over inheritance and aggregation in each domain.
 			 *
-			 * @param integer Constant from Aimeos\MShop\Locale\Manager\Base class
+			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 			 * @category Developer
 			 * @since 2018.01
 			 * @see mshop/locale/manager/standard/sitelevel
@@ -742,10 +743,10 @@ class Standard
 	/**
 	 * Creates a search object
 	 *
-	 * @param boolean $default Add default criteria (optional)
+	 * @param bool $default Add default criteria (optional)
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function createSearch( $default = false )
+	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true ) {
 			return $this->createSearchBase( 'attribute' );
@@ -762,7 +763,7 @@ class Standard
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g Type, List's etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'attribute', $manager, $name );
 	}
@@ -778,7 +779,7 @@ class Standard
 	 * @return \Aimeos\MShop\Attribute\Item\Iface New attribute item
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [],
-		array $refItems = [], array $propertyItems = [] )
+		array $refItems = [], array $propertyItems = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return new \Aimeos\MShop\Attribute\Item\Standard( $values, $listItems, $refItems, $propertyItems );
 	}

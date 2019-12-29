@@ -25,8 +25,8 @@ interface Iface
 	 * Adds a new item to the storage or updates an existing one.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Coupon\Iface $item Item that should be saved to the storage
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Order\Item\Base\Coupon\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Order\Item\Base\Coupon\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Coupon\Iface;
 }

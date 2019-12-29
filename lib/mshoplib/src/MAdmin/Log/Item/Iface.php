@@ -52,7 +52,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Sets the new priority of the item.
 	 *
-	 * @param integer $priority Priority of the item
+	 * @param int $priority Priority of the item
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
 	public function setPriority( int $priority ) : \Aimeos\MAdmin\Log\Item\Iface;

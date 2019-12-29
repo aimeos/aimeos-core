@@ -27,7 +27,7 @@ interface Iface
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return array Associative list of items implementing \Aimeos\MShop\Catalog\Item\Iface with IDs as keys
 	 */
-	public function getPath( $id, array $ref = [] );
+	public function getPath( string $id, array $ref = [] ) : array;
 
 
 	/**
@@ -35,11 +35,12 @@ interface Iface
 	 *
 	 * @param string|null $id Retrieve nodes starting from the given ID
 	 * @param string[] List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
-	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
+	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
 	 * @param \Aimeos\MW\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = [], $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $criteria = null );
+	public function getTree( string $id = null, array $ref = [],
+		int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $criteria = null );
 
 
 	/**
@@ -50,7 +51,8 @@ interface Iface
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Inserted catalog item
 	 */
-	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, $parentId = null, $refId = null );
+	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, string $parentId = null,
+		string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface;
 
 
 	/**
@@ -62,14 +64,15 @@ interface Iface
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function moveItem( $id, $oldParentId, $newParentId, $refId = null );
+	public function moveItem( string $id, string $oldParentId, string $newParentId,
+		string $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface;
 
 	/**
 	 * Updates an item object.
 	 *
 	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Item object whose data should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Catalog\Item\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Catalog\Item\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Catalog\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Catalog\Item\Iface;
 }

@@ -32,7 +32,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Service\Provider\Iface Service provider object
 	 * @throws \Aimeos\MShop\Service\Exception If provider couldn't be found
 	 */
-	public function getProvider( \Aimeos\MShop\Service\Item\Iface $item, $type )
+	public function getProvider( \Aimeos\MShop\Service\Item\Iface $item, string $type ) : \Aimeos\MShop\Service\Provider\Iface
 	{
 		$type = ucwords( $type );
 		$names = explode( ',', $item->getProvider() );
@@ -122,7 +122,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Service\Provider\Iface
 	 */
 	protected function addServiceDecorators( \Aimeos\MShop\Service\Item\Iface $serviceItem,
-		\Aimeos\MShop\Service\Provider\Iface $provider, array $names )
+		\Aimeos\MShop\Service\Provider\Iface $provider, array $names ) : \Aimeos\MShop\Service\Provider\Iface
 	{
 		$classprefix = '\Aimeos\MShop\Service\Provider\Decorator\\';
 

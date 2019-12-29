@@ -23,8 +23,8 @@ interface Iface
 	 * Adds or updates an order status object.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Status\Iface $item Order status object whose data should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Order\Item\Status\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Order\Item\Status\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Status\Iface;
 }

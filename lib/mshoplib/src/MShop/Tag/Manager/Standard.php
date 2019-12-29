@@ -115,7 +115,7 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Tag\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/tag/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
@@ -132,7 +132,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Tag\Item\Iface New tag item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values['tag.siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
@@ -143,10 +143,10 @@ class Standard
 	 * Inserts the new tag items for tag item
 	 *
 	 * @param \Aimeos\MShop\Tag\Item\Iface $item Tag item which should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Tag\Item\Iface Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Tag\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Tag\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Tag\Item\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
@@ -326,7 +326,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Tag\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/tag/manager/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -369,11 +369,11 @@ class Standard
 	 *
 	 * @param string $id Id of the tag tag item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Tag\Item\Iface Returns the tag tag item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'tag.id', $id, $ref, $default );
 	}
@@ -382,10 +382,10 @@ class Standard
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'mshop/tag/manager/submanagers';
 		return $this->getResourceTypeBase( 'tag', $path, [], $withsub );
@@ -395,10 +395,10 @@ class Standard
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		/** mshop/tag/manager/submanagers
 		 * List of manager names that can be instantiated by the tag tag manager
@@ -428,10 +428,10 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return array List of tag items implementing \Aimeos\MShop\Tag\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$items = [];
 		$context = $this->getContext();
@@ -468,7 +468,7 @@ class Standard
 			 * this domain, then items wil be only inherited. Thus, you have full
 			 * control over inheritance and aggregation in each domain.
 			 *
-			 * @param integer Constant from Aimeos\MShop\Locale\Manager\Base class
+			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 			 * @category Developer
 			 * @since 2018.01
 			 * @see mshop/locale/manager/standard/sitelevel
@@ -612,7 +612,7 @@ class Standard
 	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g tag types, tag lists etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/tag/manager/name
 		 * Class name of the used tag tag manager implementation
@@ -734,7 +734,7 @@ class Standard
 	 * @param array $values Possible optional array keys can be given: id, type, langid, type, label
 	 * @return \Aimeos\MShop\Tag\Item\Standard New tag item object
 	 */
-	protected function createItemBase( array $values = [] )
+	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Tag\Item\Iface
 	{
 		$values['.languageid'] = $this->languageId;
 		return new \Aimeos\MShop\Tag\Item\Standard( $values );

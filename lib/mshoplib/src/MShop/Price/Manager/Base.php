@@ -29,12 +29,12 @@ abstract class Base
 	 * Returns the price item with the lowest price for the given quantity.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface[] $priceItems List of price items
-	 * @param integer $quantity Number of products
+	 * @param int $quantity Number of products
 	 * @param string|null $currencyId Three letter ISO currency code or null for all
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with the lowest price
 	 * @throws \Aimeos\MShop\Price\Exception if no price item is available
 	 */
-	public function getLowestPrice( array $priceItems, $quantity, $currencyId = null )
+	public function getLowestPrice( array $priceItems, int $quantity, string $currencyId = null ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$priceList = $this->getPriceList( $priceItems, $currencyId );
 
@@ -68,7 +68,7 @@ abstract class Base
 	 * @return array Associative list of quantity as keys and price item as value
 	 * @throws \Aimeos\MShop\Price\Exception If an object is no price item
 	 */
-	protected function getPriceList( array $priceItems, $currencyId )
+	protected function getPriceList( array $priceItems, string $currencyId = null ) : array
 	{
 		$list = [];
 

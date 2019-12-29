@@ -25,8 +25,8 @@ interface Iface
 	 * Adds or updates an order base service item to the storage.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $item Order base service object
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Order\Item\Base\Service\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Order\Item\Base\Service\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Service\Iface;
 }

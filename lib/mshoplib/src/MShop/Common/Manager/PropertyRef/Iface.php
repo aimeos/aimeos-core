@@ -23,7 +23,7 @@ interface Iface
 	 * Creates a new property item object
 	 *
 	 * @param array $values Values the item should be initialized with
-	 * @return \Aimeos\MShop\Common\Item\Lists\Iface New property item object
+	 * @return \Aimeos\MShop\Common\Item\Property\Iface New property item object
 	 */
-	public function createPropertyItem( array $values = [] );
+	public function createPropertyItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Property\Iface;
 }

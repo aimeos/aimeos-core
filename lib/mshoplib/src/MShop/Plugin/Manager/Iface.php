@@ -26,7 +26,7 @@ interface Iface extends \Aimeos\MShop\Common\Manager\Iface
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Returns the decoratad plugin provider object
 	 * @throws \Aimeos\MShop\Plugin\Exception If provider couldn't be found
 	 */
-	public function getProvider( \Aimeos\MShop\Plugin\Item\Iface $item, $type );
+	public function getProvider( \Aimeos\MShop\Plugin\Item\Iface $item, string $type ) : \Aimeos\MShop\Plugin\Provider\Iface;
 
 	/**
 	 * Registers plugins to the given publisher.
@@ -35,14 +35,14 @@ interface Iface extends \Aimeos\MShop\Common\Manager\Iface
 	 * @param string $type Plugin type code
 	 * @return \Aimeos\MShop\Plugin\Manager\Iface Manager object for chaining method calls
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $publisher, $type );
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $publisher, string $type ) : \Aimeos\MShop\Plugin\Manager\Iface;
 
 	/**
 	 * Saves a new or modified plugin to the storage.
 	 *
 	 * @param \Aimeos\MShop\Plugin\Item\Iface $item Plugin item
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Plugin\Item\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Plugin\Item\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Plugin\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Plugin\Item\Iface;
 }

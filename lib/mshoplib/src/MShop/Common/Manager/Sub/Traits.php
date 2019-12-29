@@ -27,7 +27,7 @@ trait Traits
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
-	abstract protected function getContext();
+	abstract protected function getContext() : \Aimeos\MShop\Context\Item\Iface;
 
 
 	/**
@@ -39,8 +39,8 @@ trait Traits
 	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\MShop\Product\Manager\Decorator\"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function addDecorators( \Aimeos\MShop\Context\Item\Iface $context,
-		\Aimeos\MShop\Common\Manager\Iface $manager, array $decorators, string $classprefix ) : \Aimeos\MShop\Common\Manager\Iface
+	protected function addDecorators( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Common\Manager\Iface $manager,
+		array $decorators, string $classprefix ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		foreach( $decorators as $name )
 		{
@@ -71,7 +71,8 @@ trait Traits
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function addManagerDecorators( \Aimeos\MShop\Common\Manager\Iface $manager, string $managerpath, string $domain ) : \Aimeos\MShop\Common\Manager\Iface
+	protected function addManagerDecorators( \Aimeos\MShop\Common\Manager\Iface $manager, string $managerpath,
+		string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$config = $this->getContext()->getConfig();
 
@@ -106,7 +107,7 @@ trait Traits
 	 * @param string $manager Path of manager names, e.g. "list/type"
 	 * @return string Class names, e.g. "List_Type"
 	 */
-	protected function createSubNames( $manager )
+	protected function createSubNames( string $manager ) : string
 	{
 		$names = explode( '/', $manager );
 

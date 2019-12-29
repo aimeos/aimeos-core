@@ -131,7 +131,7 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Coupon\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/coupon/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'code' ) ) as $domain ) {
@@ -148,7 +148,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Coupon\Item\Iface New coupon item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values['coupon.siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
@@ -158,10 +158,10 @@ class Standard
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'mshop/coupon/manager/submanagers';
 
@@ -172,10 +172,10 @@ class Standard
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		/** mshop/coupon/manager/submanagers
 		 * List of manager names that can be instantiated by the coupon manager
@@ -205,11 +205,11 @@ class Standard
 	 *
 	 * @param string $id Unique ID of the coupon item in the storage
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Returns the coupon item of the given ID
 	 * @throws \Aimeos\MShop\Exception If coupon couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'coupon.id', $id, $ref, $default );
 	}
@@ -219,10 +219,10 @@ class Standard
 	 * Saves a coupon item to the storage.
 	 *
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon implementing the coupon interface
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Coupon\Item\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Coupon\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Coupon\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Coupon\Item\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
@@ -404,7 +404,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Coupon\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/coupon/manager/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -447,10 +447,10 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return array Returns a list of coupon items implementing \Aimeos\MShop\Coupon\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$context = $this->getContext();
 		$dbm = $context->getDatabaseManager();
@@ -486,7 +486,7 @@ class Standard
 			 * this domain, then items wil be only inherited. Thus, you have full
 			 * control over inheritance and aggregation in each domain.
 			 *
-			 * @param integer Constant from Aimeos\MShop\Locale\Manager\Base class
+			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 			 * @category Developer
 			 * @since 2018.01
 			 * @see mshop/locale/manager/standard/sitelevel
@@ -644,9 +644,9 @@ class Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return \Aimeos\MShop\Common\Manager\Lists\Iface List manager
+	 * @return \Aimeos\MShop\Common\Manager\Iface Sub manager
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'coupon', $manager, $name );
 	}
@@ -655,10 +655,10 @@ class Standard
 	/**
 	 * Creates a search critera object
 	 *
-	 * @param boolean $default Add default criteria (optional)
+	 * @param bool $default Add default criteria (optional)
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function createSearch( $default = false )
+	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true )
 		{
@@ -692,7 +692,7 @@ class Standard
 	 * @param array $values Values of the coupon item from the storage
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Returns a new created coupon item instance
 	 */
-	protected function createItemBase( array $values = [] )
+	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Coupon\Item\Iface
 	{
 		$values['.date'] = $this->date;
 

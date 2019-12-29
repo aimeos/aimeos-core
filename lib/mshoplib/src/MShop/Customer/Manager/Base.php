@@ -62,10 +62,10 @@ abstract class Base
 	/**
 	 * Creates a criteria object for searching.
 	 *
-	 * @param boolean $default Include default criteria like the status
+	 * @param bool $default Include default criteria like the status
 	 * @return \Aimeos\MW\Criteria\Iface Search criteria object
 	 */
-	public function createSearch( $default = false )
+	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true ) {
 			return $this->createSearchBase( 'customer' );
@@ -82,10 +82,11 @@ abstract class Base
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param boolean $default True to add default criteria
-	 * @return \Aimeos\MShop\Common\Item\Iface Item object
+	 * @param bool $default True to add default criteria
+	 * @return \Aimeos\MShop\Customer\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
+	public function findItem( string $code, array $ref = [], string $domain = null, string $type = null,
+		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->findItemBase( array( 'customer.code' => $code ), $ref, $default );
 	}
@@ -96,11 +97,11 @@ abstract class Base
 	 *
 	 * @param string $id Unique customer ID referencing an existing customer
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Customer\Item\Iface Returns the customer item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'customer.id', $id, $ref, $default );
 	}
@@ -112,7 +113,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Customer\Item\Iface $item Customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface $item Modified customer item
 	 */
-	protected function addGroups( \Aimeos\MShop\Customer\Item\Iface $item )
+	protected function addGroups( \Aimeos\MShop\Customer\Item\Iface $item ): \Aimeos\MShop\Customer\Item\Iface
 	{
 		$pos = 0;
 		$groupIds = [];
@@ -146,7 +147,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [],
-		array $addrItems = [], array $propItems = [] )
+		array $addrItems = [], array $propItems = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$helper = $this->getPasswordHelper();
 		$address = new \Aimeos\MShop\Common\Item\Address\Simple( 'customer.', $values );
@@ -163,7 +164,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Common\Helper\Password\Iface Password helper object
 	 * @throws \Aimeos\MShop\Exception If the name is invalid or the class isn't found
 	 */
-	protected function getPasswordHelper()
+	protected function getPasswordHelper() : \Aimeos\MShop\Common\Helper\Password\Iface
 	{
 		if( $this->helper ) {
 			return $this->helper;

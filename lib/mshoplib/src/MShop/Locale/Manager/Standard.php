@@ -112,14 +112,15 @@ class Standard
 	 * @param string $site Site code
 	 * @param string $lang Language code (optional)
 	 * @param string $currency Currency code (optional)
-	 * @param boolean $active Flag to get only active items (optional)
-	 * @param integer|null $level Constant from abstract class which site ID levels should be available (optional),
+	 * @param bool $active Flag to get only active items (optional)
+	 * @param int|null $level Constant from abstract class which site ID levels should be available (optional),
 	 * 	based on config or value for SITE_PATH if null
-	 * @param boolean $bare Allow locale items with sites only
+	 * @param bool $bare Allow locale items with sites only
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for the given parameters
 	 * @throws \Aimeos\MShop\Locale\Exception If no locale item is found
 	 */
-	public function bootstrap( $site, $lang = '', $currency = '', $active = true, $level = null, $bare = false )
+	public function bootstrap( string $site, string $lang = '', string $currency = '', bool $active = true, int $level = null,
+		bool $bare = false ) : \Aimeos\MShop\Locale\Item\Iface
 	{
 		$siteItem = $this->getObject()->getSubManager( 'site' )->findItem( $site );
 
@@ -136,7 +137,7 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Locale\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->clearBase( $siteids, 'mshop/locale/manager/standard/delete' );
 	}
@@ -148,7 +149,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Locale\Item\Iface New locale item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		try
 		{
@@ -165,10 +166,10 @@ class Standard
 	/**
 	 * Creates a search critera object
 	 *
-	 * @param boolean $default Add default criteria (optional)
+	 * @param bool $default Add default criteria (optional)
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function createSearch( $default = false )
+	public function createSearch( bool $default = false ): \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true ) {
 			return $this->createSearchBase( 'locale' );
@@ -183,11 +184,11 @@ class Standard
 	 *
 	 * @param string $id Unique ID of the locale item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Locale\Item\Iface Returns the locale item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'locale.id', $id, $ref, $default );
 	}
@@ -198,10 +199,10 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer &$total Number of items that are available in total
+	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\MShop\Locale\Item\Iface[] List of locale items
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$items = [];
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
@@ -227,7 +228,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Locale\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/locale/manager/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -269,10 +270,10 @@ class Standard
 	 * Adds or updates an item object.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Iface $item Item object whose data should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Locale\Item\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Locale\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Locale\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Locale\Item\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
@@ -453,7 +454,7 @@ class Standard
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g site, language, currency.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'locale', $manager, $name );
 	}
@@ -462,10 +463,10 @@ class Standard
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'mshop/locale/manager/submanagers';
 		return $this->getResourceTypeBase( 'locale', $path, array( 'currency', 'language', 'site' ), $withsub );
@@ -475,10 +476,10 @@ class Standard
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		/** mshop/locale/manager/submanagers
 		 * List of manager names that can be instantiated by the locale manager
@@ -522,17 +523,17 @@ class Standard
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for the given parameters
 	 * @throws \Aimeos\MShop\Locale\Exception If no locale item is found
 	 */
-	protected function bootstrapBase( $site, $lang, $currency, $active,
-		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, $siteId, array $sites, $bare )
+	protected function bootstrapBase( string $site, string $lang, string $currency, bool $active,
+		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, string $siteId, array $sites, bool $bare ) : \Aimeos\MShop\Locale\Item\Iface
 	{
 		$result = $this->bootstrapMatch( $siteId, $lang, $currency, $active, $siteItem, $sites );
-		if( $result !== false ) {
+		if( $result !== null ) {
 			return $result;
 		}
 
 		$result = $this->bootstrapClosest( $siteId, $lang, $active, $siteItem, $sites );
 
-		if( $result !== false ) {
+		if( $result !== null ) {
 			return $result;
 		}
 
@@ -557,10 +558,10 @@ class Standard
 	 * @param bool $active Flag to get only active items
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $siteItem Site item
 	 * @param array $sites Associative list of site constant as key and sites as values
-	 * @return \Aimeos\MShop\Locale\Item\Iface|boolean Locale item for the given parameters or false if no item was found
+	 * @return \Aimeos\MShop\Locale\Item\Iface|null Locale item for the given parameters or null if no item was found
 	 */
-	private function bootstrapMatch( $siteId, $lang, $currency, $active,
-		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sites )
+	private function bootstrapMatch( string $siteId, string $lang, string $currency, bool $active,
+		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sites ) : ?\Aimeos\MShop\Locale\Item\Iface
 	{
 		// Try to find exact match
 		$search = $this->getObject()->createSearch( $active );
@@ -603,7 +604,7 @@ class Standard
 			return $this->createItemBase( $row, $siteItem, $sites );
 		}
 
-		return false;
+		return null;
 	}
 
 
@@ -619,10 +620,10 @@ class Standard
 	 * @param bool $active Flag to get only active items
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $siteItem Site item
 	 * @param array $sites Associative list of site constant as key and sites as values
-	 * @return \Aimeos\MShop\Locale\Item\Iface|boolean Locale item for the given parameters or false if no item was found
+	 * @return \Aimeos\MShop\Locale\Item\Iface|null Locale item for the given parameters or null if no item was found
 	 */
-	private function bootstrapClosest( $siteId, $lang, $active,
-		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sites )
+	private function bootstrapClosest( string $siteId, string $lang, bool $active,
+		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sites ) : ?\Aimeos\MShop\Locale\Item\Iface
 	{
 		// Try to find the best matching locale
 		$search = $this->getObject()->createSearch( $active );
@@ -676,7 +677,7 @@ class Standard
 			return $this->createItemBase( $row, $siteItem, $sites );
 		}
 
-		return false;
+		return null;
 	}
 
 
@@ -686,9 +687,10 @@ class Standard
 	 * @param array $values Parameter to initialise the item
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface|null $site Site item
 	 * @param array $sites Associative list of site constant as key and sites as values
-	 * @return \Aimeos\MShop\Locale\Item\Standard Locale item
+	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item
 	 */
-	protected function createItemBase( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $site = null, array $sites = [] )
+	protected function createItemBase( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $site = null,
+		array $sites = [] ) : \Aimeos\MShop\Locale\Item\Iface
 	{
 		return new \Aimeos\MShop\Locale\Item\Standard( $values, $site, $sites );
 	}
@@ -701,7 +703,7 @@ class Standard
 	 * @param string $sql SQL statement
 	 * @return \Aimeos\MW\DB\Result\Iface Search result object
 	 */
-	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
+	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, string $sql ) : \Aimeos\MW\DB\Result\Iface
 	{
 		$time = microtime( true );
 
@@ -724,10 +726,10 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer &$total Number of items that are available in total
+	 * @param int &$total Number of items that are available in total
 	 * @return array Associative list of key/value pairs
 	 */
-	protected function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	protected function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$map = [];
 		$context = $this->getContext();

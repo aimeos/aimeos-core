@@ -58,7 +58,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * @param string $name Filter name
 	 * @param \Closure $fcn Callback function
 	 */
-	public function registerItemFilter( $name, \Closure $fcn )
+	public function registerItemFilter( string $name, \Closure $fcn )
 	{
 		$this->filter[$name] = $fcn;
 	}
@@ -74,7 +74,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * @param array $local2 Associative list of IDs as keys and the associative array of items as values
 	 * @return array List of items implementing \Aimeos\MShop\Catalog\Item\Iface
 	 */
-	protected function buildItems( array $itemMap, $domains, $prefix, array $local = [], array $local2 = [] )
+	protected function buildItems( array $itemMap, array $domains, string $prefix, array $local = [], array $local2 = [] ) : array
 	{
 		$items = $listItemMap = $refItemMap = $refIdMap = [];
 
@@ -124,7 +124,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * @return \Aimeos\MShop\Catalog\Item\Iface New catalog item
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [],
-			array $children = [], \Aimeos\MW\Tree\Node\Iface $node = null )
+			array $children = [], \Aimeos\MW\Tree\Node\Iface $node = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		if( $node === null )
 		{
@@ -191,7 +191,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * @param string $siteid Site ID for the specific tree
 	 * @return \Aimeos\MW\Tree\Manager\Iface Tree manager
 	 */
-	protected function createTreeManager( $siteid )
+	protected function createTreeManager( string $siteid ) : \Aimeos\MW\Tree\Manager\Iface
 	{
 		if( !isset( $this->treeManagers[$siteid] ) )
 		{
@@ -616,7 +616,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * @param \Aimeos\MW\Tree\Node\Iface $node Root node
 	 * @return array Associated list of ID / node object pairs
 	 */
-	protected function getNodeMap( \Aimeos\MW\Tree\Node\Iface $node )
+	protected function getNodeMap( \Aimeos\MW\Tree\Node\Iface $node ) : array
 	{
 		$map = [];
 

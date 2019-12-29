@@ -156,7 +156,7 @@ class Standard
 	 * @param array $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Price\Manager\Lists\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/price/manager/lists/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
@@ -170,10 +170,10 @@ class Standard
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'mshop/price/manager/lists/submanagers';
 
@@ -184,10 +184,10 @@ class Standard
 	/**
 	 * Returns the list attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		/** mshop/price/manager/lists/submanagers
 		 * List of manager names that can be instantiated by the price list manager
@@ -219,7 +219,7 @@ class Standard
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g types, lists etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/price/manager/lists/name
 		 * Class name of the used price list manager implementation
@@ -342,7 +342,7 @@ class Standard
 	 *
 	 * @return string Configuration path
 	 */
-	protected function getConfigPath()
+	protected function getConfigPath() : string
 	{
 		/** mshop/price/manager/lists/standard/insert/mysql
 		 * Inserts a new price list record into the database table
@@ -656,7 +656,7 @@ class Standard
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	protected function getSearchConfig()
+	protected function getSearchConfig() : array
 	{
 		return $this->searchConfig;
 	}

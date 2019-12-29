@@ -25,26 +25,26 @@ interface Iface
 	 * Decreases the counter of the coupon code.
 	 *
 	 * @param string $couponCode Unique code of a coupon
-	 * @param integer $amount Amount the coupon count should be decreased
+	 * @param int $amount Amount the coupon count should be decreased
 	 * @return \Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
-	public function decrease( $couponCode, $amount );
+	public function decrease( string $couponCode, int $amount ) : \Aimeos\MShop\Coupon\Manager\Code\Iface;
 
 	/**
 	 * Increases the counter of the coupon code.
 	 *
 	 * @param string $couponCode Unique code of a coupon
-	 * @param integer $amount Amount the coupon count should be increased
+	 * @param int $amount Amount the coupon count should be increased
 	 * @return \Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
-	public function increase( $couponCode, $amount );
+	public function increase( string $couponCode, int $amount ) : \Aimeos\MShop\Coupon\Manager\Code\Iface;
 
 	/**
 	 * Saves a modified code object to the storage.
 	 *
 	 * @param \Aimeos\MShop\Coupon\Item\Code\Iface $item Coupon code object
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Coupon\Item\Code\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Coupon\Item\Code\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Coupon\Item\Code\Iface;
 }

@@ -28,10 +28,10 @@ class Depth
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer &$total Number of items that are available in total
+	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\MShop\Common\Item\Iface[] List of items
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$items = [];
 
@@ -49,7 +49,7 @@ class Depth
 			 * sub-products will retrieve the directly associated products but not the
 			 * products referenced by the associated product for example.
 			 *
-			 * @param integer Number of levels
+			 * @param int Number of levels
 			 * @since 2019.04
 			 * @category Developer
 			 */

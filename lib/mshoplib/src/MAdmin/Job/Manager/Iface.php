@@ -25,8 +25,8 @@ interface Iface
 	 * Adds a new job to the storage.
 	 *
 	 * @param \Aimeos\MAdmin\Job\Item\Iface $item Job item that should be saved to the storage
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MAdmin\Job\Item\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MAdmin\Job\Item\Iface $item, bool $fetch = true ) : \Aimeos\MAdmin\Job\Item\Iface;
 }

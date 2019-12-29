@@ -69,7 +69,7 @@ class ProductFreeOptions
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Product price item
 	 * @param array $attrItems Associative list of attribute IDs as keys and items with prices as values
 	 * @param array $quantities Associative list of attribute IDs as keys and their quantities as values
-	 * @param integer $free Number of free items
+	 * @param int $free Number of free items
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with attribute prices added
 	 */
 	protected function addPrices( \Aimeos\MShop\Price\Item\Iface $price, array $attrItems, array $quantities, $free )

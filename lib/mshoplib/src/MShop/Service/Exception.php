@@ -27,7 +27,7 @@ class Exception extends \Aimeos\MShop\Exception
 	 * Initializes the exception object.
 	 *
 	 * @param string $message The exception message to throw
-	 * @param integer $code The exception code
+	 * @param int $code The exception code
 	 * @param \Exception|null $previous The previous exception used for the exception chaining
 	 * @param array $errorCodes Associative list of error codes
 	 */

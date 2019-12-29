@@ -25,10 +25,10 @@ class Changelog
 	 * Adds or updates an item object.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object whose data should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$manager = $this->getManager();
 

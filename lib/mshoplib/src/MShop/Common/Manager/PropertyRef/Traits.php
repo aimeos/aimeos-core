@@ -25,7 +25,7 @@ trait Traits
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface New property item object
 	 */
-	public function createPropertyItem( array $values = [] )
+	public function createPropertyItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Property\Iface
 	{
 		return $this->getObject()->getSubManager( 'property' )->createItem( $values );
 	}
@@ -36,7 +36,7 @@ trait Traits
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
 	 */
-	abstract protected function getObject();
+	abstract protected function getObject() : \Aimeos\MShop\Common\Manager\Iface;
 
 
 	/**
@@ -46,7 +46,7 @@ trait Traits
 	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
-	abstract public function getSubManager( $domain, $name = null );
+	abstract public function getSubManager( string $domain, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface;
 
 
 	/**
@@ -58,7 +58,7 @@ trait Traits
 	 * @return array Associative list of parent IDs / property IDs as keys and items implementing
 	 * 	\Aimeos\MShop\Common\Item\Property\Iface as values
 	 */
-	protected function getPropertyItems( array $parentIds, $domain, $types = null )
+	protected function getPropertyItems( array $parentIds, string $domain, array $types = null ) : array
 	{
 		$list = [];
 
@@ -91,10 +91,11 @@ trait Traits
 	 *
 	 * @param \Aimeos\MShop\Common\Item\PropertyRef\Iface $item Item with referenced items
 	 * @param string $domain Domain of the calling manager
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Item with saved referenced items
 	 */
-	protected function savePropertyItems( \Aimeos\MShop\Common\Item\PropertyRef\Iface $item, $domain, $fetch = true )
+	protected function savePropertyItems( \Aimeos\MShop\Common\Item\PropertyRef\Iface $item, string $domain,
+		bool $fetch = true ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
 	{
 		$propManager = $this->getObject()->getSubManager( 'property' );
 		$propManager->deleteItems( array_keys( $item->getPropertyItemsDeleted() ) );

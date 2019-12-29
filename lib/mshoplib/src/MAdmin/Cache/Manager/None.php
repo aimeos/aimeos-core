@@ -38,7 +38,7 @@ class None
 	 *
 	 * @return \Aimeos\MW\Cache\Iface Cache object
 	 */
-	public function getCache()
+	public function getCache() : \Aimeos\MW\Cache\Iface
 	{
 		return \Aimeos\MW\Cache\Factory::create( 'None', [], null );
 	}
@@ -50,7 +50,7 @@ class None
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface New cache item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return new \Aimeos\MAdmin\Cache\Item\Standard( $values );
@@ -61,10 +61,10 @@ class None
 	 * Adds a new cache to the storage.
 	 *
 	 * @param \Aimeos\MAdmin\Cache\Item\Iface $item Cache item that should be saved to the storage
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MAdmin\Cache\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MAdmin\Cache\Item\Iface $item, $fetch = true ) : \Aimeos\MAdmin\Cache\Item\Iface
 	{
 		return $item;
 	}
@@ -76,8 +76,9 @@ class None
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MAdmin\Cache\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
+		return $this;
 	}
 
 
@@ -86,11 +87,11 @@ class None
 	 *
 	 * @param string $id Cache ID to fetch cache object for
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface Returns the cache item of the given id
 	 * @throws \Aimeos\MAdmin\Cache\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		throw new \Aimeos\MAdmin\Cache\Exception( sprintf( 'Operation not supported' ) );
 	}
@@ -101,11 +102,11 @@ class None
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer &$total Number of items that are available in total
+	 * @param int &$total Number of items that are available in total
 	 *
 	 * @return array List of cache items implementing \Aimeos\MAdmin\Cache\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null ) : array
 	{
 		return [];
 	}
@@ -114,10 +115,10 @@ class None
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'madmin/cache/manager/submanagers';
 		return $this->getResourceTypeBase( 'cache', $path, [], $withsub );
@@ -127,10 +128,10 @@ class None
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] Returns a list of search attributes
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		$path = 'madmin/cache/manager/submanagers';
 
@@ -145,7 +146,7 @@ class None
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'cache', $manager, $name );
 	}

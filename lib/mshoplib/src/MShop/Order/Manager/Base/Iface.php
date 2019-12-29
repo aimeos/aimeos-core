@@ -27,15 +27,15 @@ interface Iface
 	 * @param string $type Basket type if a customer can have more than one basket
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Shopping basket
 	 */
-	public function getSession( $type = 'default' );
+	public function getSession( string $type = 'default' ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
 	 * Returns the current lock status of the basket.
 	 *
 	 * @param string $type Basket type if a customer can have more than one basket
-	 * @return integer Lock status (@see \Aimeos\MShop\Order\Manager\Base\Base)
+	 * @return int Lock status (@see \Aimeos\MShop\Order\Manager\Base\Base)
 	 */
-	public function getSessionLock( $type = 'default' );
+	public function getSessionLock( string $type = 'default' ) : int;
 
 	/**
 	 * Saves the current shopping basket of the customer.
@@ -44,17 +44,17 @@ interface Iface
 	 * @param string $type Order type if a customer can have more than one order at once
 	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
-	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, $type = 'default' );
+	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, string $type = 'default' ) : \Aimeos\MShop\Order\Manager\Base\Iface;
 
 	/**
 	 * Locks or unlocks the session by setting the lock value.
 	 * The lock is a cooperative lock and you have to check the lock value before you proceed.
 	 *
-	 * @param integer $lock Lock value (@see \Aimeos\MShop\Order\Manager\Base\Base)
+	 * @param int $lock Lock value (@see \Aimeos\MShop\Order\Manager\Base\Base)
 	 * @param string $type Order type if a customer can have more than one order at once
 	 * @return \Aimeos\MShop\Order\Manager\Base\Iface Manager object for chaining method calls
 	 */
-	public function setSessionLock( $lock, $type = 'default' );
+	public function setSessionLock( int $lock, string $type = 'default' ) : \Aimeos\MShop\Order\Manager\Base\Iface;
 
 	/**
 	 * Creates a new basket containing the items from the order excluding the coupons.
@@ -62,28 +62,30 @@ interface Iface
 	 * modified so an additional order is stored when the basket is saved.
 	 *
 	 * @param string $baseId Base ID of the order to load
-	 * @param integer $parts Bitmap of the basket parts that should be loaded
-	 * @param boolean $fresh Create a new basket by copying the existing one and remove IDs
-	 * @param boolean $default True to use default criteria, false for no limitation
+	 * @param int $parts Bitmap of the basket parts that should be loaded
+	 * @param bool $fresh Create a new basket by copying the existing one and remove IDs
+	 * @param bool $default True to use default criteria, false for no limitation
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket including all items
 	 */
-	public function load( $baseId, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, $fresh = false, $default = false );
+	public function load( string $baseId, int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, bool $fresh = false,
+		bool $default = false ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
 	 * Adds or updates an order base item in the storage.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $item Order base object (sub-items are not saved)
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Order\Item\Base\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Order\Item\Base\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
 	 * Saves the complete basket to the storage including the items attached.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object containing all information
-	 * @param integer $parts Bitmap of the basket parts that should be stored
+	 * @param int $parts Bitmap of the basket parts that should be stored
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Stored order basket
 	 */
-	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
+	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket,
+		int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL ) : \Aimeos\MShop\Order\Item\Base\Iface;
 }

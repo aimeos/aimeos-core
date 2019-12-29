@@ -98,7 +98,7 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Locale\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this;
 	}
@@ -110,7 +110,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface New locale currency item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		try {
 			$values['locale.currency.siteid'] = $this->getContext()->getLocale()->getSiteId();
@@ -126,10 +126,10 @@ class Standard
 	 * Saves a currency item to the storage.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Currency\Iface $item Currency item to save in the storage
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Locale\Item\Currency\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Locale\Item\Currency\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Locale\Item\Currency\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
@@ -257,7 +257,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Locale\Manager\Currency\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/locale/manager/currency/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -299,11 +299,11 @@ class Standard
 	 *
 	 * @param string $id Currency ID indentifying the currency object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Returns the currency item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'locale.currency.id', $id, $ref, $default );
 	}
@@ -312,10 +312,10 @@ class Standard
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'mshop/locale/manager/currency/submanagers';
 		return $this->getResourceTypeBase( 'locale/currency', $path, [], $withsub );
@@ -325,10 +325,10 @@ class Standard
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		/** mshop/locale/manager/currency/submanagers
 		 * List of manager names that can be instantiated by the locale currency manager
@@ -358,10 +358,10 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface[] List of locale currency items
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$context = $this->getContext();
 
@@ -487,9 +487,9 @@ class Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return \Aimeos\MShop\Locale\Manager\Iface manager
+	 * @return \Aimeos\MShop\Common\Manager\Iface manager
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/locale/manager/currency/name
 		 * Class name of the used locale currency manager implementation
@@ -614,10 +614,11 @@ class Standard
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param boolean $default True to add default criteria
+	 * @param bool $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
+	public function findItem( string $code, array $ref = [], string $domain = null, string $type = null,
+		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->findItemBase( array( 'locale.currency.id' => $code ), $ref, $default );
 	}
@@ -626,10 +627,10 @@ class Standard
 	/**
 	 * Creates a search critera object
 	 *
-	 * @param boolean $default Add default criteria (optional)
+	 * @param bool $default Add default criteria (optional)
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function createSearch( $default = false )
+	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true ) {
 			return $this->createSearchBase( 'locale.currency' );
@@ -646,7 +647,7 @@ class Standard
 	 * @param string $sql SQL statement
 	 * @return \Aimeos\MW\DB\Result\Iface Search result object
 	 */
-	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
+	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, string $sql ) : \Aimeos\MW\DB\Result\Iface
 	{
 		$time = microtime( true );
 
@@ -670,7 +671,7 @@ class Standard
 	 * @param array $data Associative list of item key/value pairs
 	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Currency item object
 	 */
-	protected function createItemBase( array $data = [] )
+	protected function createItemBase( array $data = [] ) : \Aimeos\MShop\Locale\Item\Currency\Iface
 	{
 		return new \Aimeos\MShop\Locale\Item\Currency\Standard( $data );
 	}
@@ -683,9 +684,9 @@ class Standard
 	 * @param string[] $find List of markers that should be replaced in the SQL statement
 	 * @param string[] $replace List of replacements for the markers in the SQL statement
 	 * @throws \Aimeos\MShop\Locale\Exception If no total value was found
-	 * @return integer Total number of found items
+	 * @return int Total number of found items
 	 */
-	protected function getTotal( \Aimeos\MW\DB\Connection\Iface $conn, array $find, array $replace )
+	protected function getTotal( \Aimeos\MW\DB\Connection\Iface $conn, array $find, array $replace ) : int
 	{
 		/** mshop/locale/manager/currency/standard/count/mysql
 		 * Counts the number of records matched by the given criteria in the database

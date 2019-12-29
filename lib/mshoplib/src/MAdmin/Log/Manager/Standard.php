@@ -121,7 +121,7 @@ class Standard
 		 * down the system and the debug log level shouldn't be used in
 		 * production environments with a high number of visitors!
 		 *
-		 * @param integer Log level number
+		 * @param int Log level number
 		 * @since 2014.03
 		 * @category Developer
 		 * @category User
@@ -137,7 +137,7 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MAdmin\Log\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'madmin/log/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
@@ -154,7 +154,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MAdmin\Log\Item\Iface New log item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		try {
 			$values['log.siteid'] = $this->getContext()->getLocale()->getSiteId();
@@ -170,10 +170,10 @@ class Standard
 	 * Adds a new log to the storage.
 	 *
 	 * @param \Aimeos\MAdmin\Log\Item\Iface $item Log item that should be saved to the storage
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MAdmin\Log\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MAdmin\Log\Item\Iface $item, bool $fetch = true ) : \Aimeos\MAdmin\Log\Item\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
@@ -355,7 +355,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MAdmin\Log\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** madmin/log/manager/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -398,11 +398,11 @@ class Standard
 	 *
 	 * @param string $id Log ID to fetch log object for
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Returns the log item of the given id
 	 * @throws \Aimeos\MAdmin\Log\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$criteria = $this->getObject()->createSearch( $default );
 		$expr = [
@@ -425,10 +425,10 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer &$total Number of items that are available in total
+	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\MAdmin\Log\Item\Iface[] List of log items
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$items = [];
 		$context = $this->getContext();
@@ -575,10 +575,10 @@ class Standard
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'madmin/log/manager/submanagers';
 		return $this->getResourceTypeBase( 'log', $path, [], $withsub );
@@ -588,10 +588,10 @@ class Standard
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] Returns a list of search attributes
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		/** madmin/log/manager/submanagers
 		 * List of manager names that can be instantiated by the log manager
@@ -623,7 +623,7 @@ class Standard
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'log', $manager, $name );
 	}
@@ -635,7 +635,7 @@ class Standard
 	 * @param array $values Associative list of key/value pairs of a job
 	 * @return \Aimeos\MAdmin\Log\Item\Iface New log item
 	 */
-	protected function createItemBase( array $values = [] )
+	protected function createItemBase( array $values = [] ) : \Aimeos\MAdmin\Log\Item\Iface
 	{
 		return new \Aimeos\MAdmin\Log\Item\Standard( $values );
 	}
@@ -645,7 +645,7 @@ class Standard
 	 * Writes a message to the configured log facility.
 	 *
 	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param integer $priority Priority of the message for filtering
+	 * @param int $priority Priority of the message for filtering
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
 	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 */

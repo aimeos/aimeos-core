@@ -25,8 +25,8 @@ interface Iface
 	 * Inserts the new tag items for tag item
 	 *
 	 * @param \Aimeos\MShop\Tag\Item\Iface $item Tag item which should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Tag\Item\Iface Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Tag\Item\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Tag\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Tag\Item\Iface;
 }

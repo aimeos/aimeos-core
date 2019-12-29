@@ -190,7 +190,7 @@ abstract class Base implements Iface
 	 * Creates an order product for the given product code
 	 *
 	 * @param string $prodcode Unique product code
-	 * @param integer $quantity Number of products
+	 * @param int $quantity Number of products
 	 * @param string $stocktype Unique stock type code for the order product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product
 	 */
@@ -220,7 +220,7 @@ abstract class Base implements Iface
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basket object
 	 * @param string $prodcode Unique product code
 	 * @param float $rebate Rebate amount that should be granted, will contain the remaining rebate if not fully used
-	 * @param integer $quantity Number of products in basket
+	 * @param int $quantity Number of products in basket
 	 * @param string $stockType Unique code of the stock type the product is from
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] Order products with monetary rebates
 	 */

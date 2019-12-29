@@ -58,7 +58,7 @@ abstract class Base
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface New address item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values[$this->prefix . 'siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
@@ -71,9 +71,9 @@ abstract class Base
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Common\Manager\Address\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$this->deleteItemsBase( $itemIds, $this->getConfigPath() . 'delete' );
+		return $this->deleteItemsBase( $itemIds, $this->getConfigPath() . 'delete' );
 	}
 
 
@@ -82,11 +82,11 @@ abstract class Base
 	 *
 	 * @param string $id Unique common address ID referencing an existing address
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Returns the address item of the given id
 	 * @throws \Aimeos\MShop\Exception If address search configuration isn't available
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		if( ( $conf = reset( $this->searchConfig ) ) === false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Address search configuration not available' ) );
@@ -100,10 +100,10 @@ abstract class Base
 	 * Saves a common address item object.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item common address item object
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Address\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Address\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
@@ -191,10 +191,10 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Address\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -233,7 +233,7 @@ abstract class Base
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g type, etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'common', 'address/' . $manager, $name );
 	}
@@ -244,7 +244,7 @@ abstract class Base
 	 *
 	 * @return string Configuration path
 	 */
-	abstract protected function getConfigPath();
+	abstract protected function getConfigPath() : string;
 
 
 	/**
@@ -252,7 +252,7 @@ abstract class Base
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	abstract protected function getSearchConfig();
+	abstract protected function getSearchConfig() : array;
 
 
 	/**
@@ -260,7 +260,7 @@ abstract class Base
 	 *
 	 * @return string Search key / item prefix
 	 */
-	protected function getPrefix()
+	protected function getPrefix() : string
 	{
 		return $this->prefix;
 	}
@@ -272,7 +272,7 @@ abstract class Base
 	 * @param array $values List of attributes for address item
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface New address item
 	 */
-	protected function createItemBase( array $values = [] )
+	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
 		return new \Aimeos\MShop\Common\Item\Address\Standard( $this->prefix, $values );
 	}

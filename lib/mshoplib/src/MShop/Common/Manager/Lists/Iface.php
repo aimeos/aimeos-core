@@ -121,14 +121,14 @@ interface Iface
 	 * @return array List of the search keys as key and the number of counted items as value
 	 * @see \Aimeos\MW\Criteria\Iface
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key );
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key ) : array;
 
 	/**
 	 * Updates or adds a common list item object.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $item List item object which should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Lists\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Common\Item\Lists\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Lists\Iface;
 }

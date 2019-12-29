@@ -27,7 +27,7 @@ abstract class Base
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface New lists item object
 	 */
-	public function createListsItem( array $values = [] )
+	public function createListsItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Lists\Iface
 	{
 		return $this->getManager()->createListsItem( $values );
 	}
@@ -40,7 +40,7 @@ abstract class Base
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return array Associative list of items implementing \Aimeos\MShop\Catalog\Item\Iface with IDs as keys
 	 */
-	public function getPath( $id, array $ref = [] )
+	public function getPath( string $id, array $ref = [] ) : array
 	{
 		return $this->getManager()->getPath( $id, $ref );
 	}
@@ -51,11 +51,12 @@ abstract class Base
 	 *
 	 * @param string|null $id Retrieve nodes starting from the given ID
 	 * @param string[] $ref List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
-	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
+	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
 	 * @param \Aimeos\MW\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = [], $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $criteria = null )
+	public function getTree( string $id = null, array $ref = [],
+		int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $criteria = null )
 	{
 		return $this->getManager()->getTree( $id, $ref, $level, $criteria );
 	}
@@ -69,7 +70,7 @@ abstract class Base
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Item\Iface $item Updated item including the generated ID
 	 */
-	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, $parentId = null, $refId = null )
+	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, string $parentId = null, string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
 		return $this->getManager()->insertItem( $item, $parentId, $refId );
 	}
@@ -84,7 +85,7 @@ abstract class Base
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
+	public function moveItem( string $id, string $oldParentId, string $newParentId, string $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface
 	{
 		$this->getManager()->moveItem( $id, $oldParentId, $newParentId, $refId );
 		return $this;

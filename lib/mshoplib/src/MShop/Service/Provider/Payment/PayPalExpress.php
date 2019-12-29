@@ -491,7 +491,7 @@ class PayPalExpress
 	/**
 	 * Checks what features the payment provider implements.
 	 *
-	 * @param integer $what Constant from abstract class
+	 * @param int $what Constant from abstract class
 	 * @return boolean True if feature is available in the payment provider, false if not
 	 */
 	public function isImplemented( $what )
@@ -782,7 +782,7 @@ class PayPalExpress
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface[] $prices Associative list of tax rates as key and price items as value
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item that should be added
-	 * @param integer $quantity Product quantity
+	 * @param int $quantity Product quantity
 	 * @return \Aimeos\MShop\Price\Item\Iface[] Updated list of price items
 	 */
 	protected function addPrice( array $prices, $price, $quantity = 1 )

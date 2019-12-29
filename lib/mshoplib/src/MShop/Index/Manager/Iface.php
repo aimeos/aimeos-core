@@ -26,9 +26,9 @@ interface Iface
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
-	 * @return integer[] List of ID values as key and the number of counted products as value
+	 * @return string[] List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key );
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key ) : array;
 
 	/**
 	 * Optimizes the index if necessary.
@@ -37,7 +37,7 @@ interface Iface
 	 *
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function optimize();
+	public function optimize() : \Aimeos\MShop\Index\Manager\Iface;
 
 	/**
 	 * Removes all entries not touched after the given timestamp in the index.
@@ -46,7 +46,7 @@ interface Iface
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function cleanup( $timestamp );
+	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface;
 
 	/**
 	 * Rebuilds the index for searching products or specified list of products.
@@ -55,14 +55,14 @@ interface Iface
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function rebuild( array $items = [] );
+	public function rebuild( array $items = [] ) : \Aimeos\MShop\Index\Manager\Iface;
 
 	/**
 	 * Stores a new item into the index
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
-	 * @param boolean $fetch True if the new ID should be set in the item
+	 * @param bool $fetch True if the new ID should be set in the item
 	 * @return \Aimeos\MShop\Product\Item\Iface Saved item
 	 */
-	public function saveItem( \Aimeos\MShop\Product\Item\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Product\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Product\Item\Iface;
 }

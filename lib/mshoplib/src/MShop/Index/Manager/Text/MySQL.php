@@ -86,10 +86,10 @@ class MySQL
 	/**
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attriubte items
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		$list = parent::getSearchAttributes( $withsub );
 

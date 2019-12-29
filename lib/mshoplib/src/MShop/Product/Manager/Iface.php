@@ -25,8 +25,8 @@ interface Iface
 	 * Adds a new product to the storage.
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item that should be saved to the storage
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Product\Item\Iface Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Product\Item\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Product\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Product\Item\Iface;
 }

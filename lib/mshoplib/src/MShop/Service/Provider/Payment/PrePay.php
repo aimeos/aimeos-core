@@ -73,7 +73,7 @@ class PrePay
 	/**
 	 * Checks what features the payment provider implements.
 	 *
-	 * @param integer $what Constant from abstract class
+	 * @param int $what Constant from abstract class
 	 * @return boolean True if feature is available in the payment provider, false if not
 	 */
 	public function isImplemented( $what )

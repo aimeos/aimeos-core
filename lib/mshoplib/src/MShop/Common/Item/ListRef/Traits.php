@@ -214,7 +214,7 @@ trait Traits
 	 * @param array|string|null $domain Name/Names of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
 	 * @param array|string|null $type Name/Names of the item type or null for all
-	 * @param boolean $active True to return only active items, false to return all
+	 * @param bool $active True to return only active items, false to return all
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
 	public function getListItems( $domain = null, $listtype = null, $type = null, bool $active = true ) : array

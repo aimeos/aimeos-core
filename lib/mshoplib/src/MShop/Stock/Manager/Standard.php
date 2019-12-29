@@ -119,7 +119,7 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/stock/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
@@ -136,7 +136,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Stock\Item\Iface New stock item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values['stock.siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
@@ -150,10 +150,11 @@ class Standard
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param boolean $default True to add default criteria
+	 * @param bool $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
+	public function findItem( string $code, array $ref = [], string $domain = null, string $type = null,
+		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$list = array( 'stock.productcode' => $code, 'stock.type' => $type );
 		return $this->findItemBase( $list, $ref, $default );
@@ -164,10 +165,10 @@ class Standard
 	 * Inserts the new stock item
 	 *
 	 * @param \Aimeos\MShop\Stock\Item\Iface $item Stock item which should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Stock\Item\Iface Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Stock\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Stock\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Stock\Item\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
@@ -351,7 +352,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/stock/manager/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -395,11 +396,11 @@ class Standard
 	 *
 	 * @param string $id Id of the stock item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Stock\Item\Iface Returns the product stock item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'stock.id', $id, $ref, $default );
 	}
@@ -408,10 +409,10 @@ class Standard
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'mshop/stock/manager/submanagers';
 		return $this->getResourceTypeBase( 'stock', $path, [], $withsub );
@@ -421,10 +422,10 @@ class Standard
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		/** mshop/stock/manager/submanagers
 		 * List of manager names that can be instantiated by the product stock manager
@@ -454,10 +455,10 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\MShop\Stock\Item\Iface[] List of stock items
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$items = [];
 		$context = $this->getContext();
@@ -494,7 +495,7 @@ class Standard
 			 * this domain, then items wil be only inherited. Thus, you have full
 			 * control over inheritance and aggregation in each domain.
 			 *
-			 * @param integer Constant from Aimeos\MShop\Locale\Manager\Base class
+			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 			 * @category Developer
 			 * @since 2018.01
 			 * @see mshop/locale/manager/standard/sitelevel
@@ -641,7 +642,7 @@ class Standard
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g base, etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/stock/manager/name
 		 * Class name of the used product stock manager implementation
@@ -763,7 +764,7 @@ class Standard
 	 * @param string $type Unique code of the stock type
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function decrease( array $codeqty, $type = 'default' )
+	public function decrease( array $codeqty, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
 	{
 		$context = $this->getContext();
 		$translations = ['stock.siteid' => '"siteid"'];
@@ -848,7 +849,7 @@ class Standard
 	 * @param string $type Unique code of the type
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function increase( array $codeqty, $type = 'default' )
+	public function increase( array $codeqty, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
 	{
 		foreach( $codeqty as $code => $qty ) {
 			$codeqty[$code] = -$qty;
@@ -864,7 +865,7 @@ class Standard
 	 * @param array $values Possible optional array keys can be given: id, parentid, siteid, type, stocklevel, backdate
 	 * @return \Aimeos\MShop\Stock\Item\Standard New stock item object
 	 */
-	protected function createItemBase( array $values = [] )
+	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Stock\Item\Iface
 	{
 		return new \Aimeos\MShop\Stock\Item\Standard( $values );
 	}

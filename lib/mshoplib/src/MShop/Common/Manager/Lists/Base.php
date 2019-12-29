@@ -61,7 +61,7 @@ abstract class Base
 	 * @param string $key Search key to aggregate items for
 	 * @return integer[] List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key ) : array
 	{
 		$required = array( trim( $this->prefix, '.' ) );
 		return $this->aggregateBase( $search, $key, $this->getConfigPath() . 'aggregate', $required );
@@ -74,7 +74,7 @@ abstract class Base
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface New list item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values[$this->prefix . 'siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
@@ -85,10 +85,10 @@ abstract class Base
 	 * Updates or adds a common list item object.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $item List item object which should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Lists\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Lists\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Lists\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
@@ -170,7 +170,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Common\Manager\Lists\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->deleteItemsBase( $itemIds, $this->getConfigPath() . 'delete' );
 	}
@@ -181,11 +181,11 @@ abstract class Base
 	 *
 	 * @param string $id Id of common list item object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Returns common list item object of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		if( ( $conf = reset( $this->searchConfig ) ) === false || !isset( $conf['code'] ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration not available' ) );
@@ -214,10 +214,10 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return array List of list items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$items = [];
 
@@ -262,10 +262,10 @@ abstract class Base
 	/**
 	 * Creates a search object including the base criteria (optional)
 	 *
-	 * @param boolean $default Include default criteria
+	 * @param bool $default Include default criteria
 	 * @return \Aimeos\MW\Criteria\Iface Search critera object
 	 */
-	public function createSearch( $default = false )
+	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true )
 		{
@@ -300,7 +300,7 @@ abstract class Base
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g type, etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'common', 'lists/' . $manager, $name );
 	}
@@ -311,7 +311,7 @@ abstract class Base
 	 *
 	 * @return string Configuration path
 	 */
-	abstract protected function getConfigPath();
+	abstract protected function getConfigPath() : string;
 
 
 	/**
@@ -319,7 +319,7 @@ abstract class Base
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	abstract protected function getSearchConfig();
+	abstract protected function getSearchConfig() : array;
 
 
 	/**
@@ -327,9 +327,9 @@ abstract class Base
 	 *
 	 * @see \Aimeos\MShop\Common\Item\Lists\Standard Default list item
 	 * @param array $values Possible optional array keys can be given: id, parentid, refid, domain, pos, start, end
-	 * @return \Aimeos\MShop\Common\Item\Lists\Standard New common list item object
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface New common list item object
 	 */
-	protected function createItemBase( array $values = [] )
+	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Common\Item\Lists\Iface
 	{
 		$values['.date'] = $this->date;
 
@@ -342,7 +342,7 @@ abstract class Base
 	 *
 	 * @return string Domain prefix with sub-domains separated by "."
 	 */
-	protected function getPrefix()
+	protected function getPrefix() : string
 	{
 		return $this->prefix;
 	}

@@ -28,17 +28,17 @@ interface Iface
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface[] Associative list of IDs as keys and items as values
 	 */
-	public function getPath( $id, array $ref = [] );
+	public function getPath( string $id, array $ref = [] ) : array;
 
 	/**
 	 * Returns a node and its descendants depending on the given resource.
 	 *
 	 * @param string|null $id Retrieve nodes starting from the given ID
 	 * @param string[] $ref List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
-	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
-	 * @return \Aimeos\MW\Tree\Node\Iface Site node, maybe with subnodes
+	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site node, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = [], $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
+	public function getTree( string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE ) : \Aimeos\MShop\Locale\Item\Site\Iface;
 
 	/**
 	 * Adds a new item object.
@@ -48,7 +48,7 @@ interface Iface
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface $item Updated item including the generated ID
 	 */
-	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, $parentId = null, $refId = null );
+	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, string $parentId = null, string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface;
 
 	/**
 	 * Moves an existing item to the new parent in the storage.
@@ -59,14 +59,14 @@ interface Iface
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Locale\Manager\Site\Iface Manager object for chaining method calls
 	 */
-	public function moveItem( $id, $oldParentId, $newParentId, $refId = null );
+	public function moveItem( string $id, string $oldParentId, string $newParentId, string $refId = null ) : \Aimeos\MShop\Locale\Manager\Site\Iface;
 
 	/**
 	 * Adds a new site to the storage or updates an existing one.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item New site item for saving to the storage
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Locale\Item\Site\Iface;
 }

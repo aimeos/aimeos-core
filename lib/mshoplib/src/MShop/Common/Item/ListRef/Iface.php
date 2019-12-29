@@ -44,7 +44,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Removes a list of list items which references their domain items (removed as well if it exists)
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $items Existing list items
-	 * @param boolean $all True to delete referenced items as well, false for list items only
+	 * @param bool $all True to delete referenced items as well, false for list items only
 	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
 	 */
 	public function deleteListItems( array $items, bool $all = false ) : \Aimeos\MShop\Common\Item\ListRef\Iface;
@@ -69,7 +69,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string $domain Name of the domain (e.g. product, text, etc.)
 	 * @param string $listtype Name of the list item type
 	 * @param string $refId Unique ID of the referenced item
-	 * @param boolean $active True to return only active items, false to return all
+	 * @param bool $active True to return only active items, false to return all
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface|null Matching list item or null if none
 	 */
 	public function getListItem( string $domain, string $listtype, string $refId, bool $active = true ) : ?\Aimeos\MShop\Common\Item\Lists\Iface;
@@ -83,7 +83,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param array|string|null $domain Name/Names of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
 	 * @param array|string|null $type Name/Names of the item type or null for all
-	 * @param boolean $active True to return only active items, false to return all
+	 * @param bool $active True to return only active items, false to return all
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
 	public function getListItems( $domain = null, $listtype = null, $type = null, bool $active = true ) : array;

@@ -112,9 +112,9 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
-	 * @return integer[] List of ID values as key and the number of counted products as value
+	 * @return string[] List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key ) : array
 	{
 		return [];
 	}
@@ -126,7 +126,7 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		parent::clear( $siteids );
 
@@ -141,7 +141,7 @@ class Standard
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function cleanup( $timestamp )
+	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface
 	{
 		/** mshop/index/manager/text/standard/cleanup/mysql
 		 * Deletes the index text records that haven't been touched
@@ -184,7 +184,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/index/manager/text/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -223,10 +223,10 @@ class Standard
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'mshop/index/manager/text/submanagers';
 		return $this->getResourceTypeBase( 'index/text', $path, [], $withsub );
@@ -236,10 +236,10 @@ class Standard
 	/**
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return array List of items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		$list = parent::getSearchAttributes( $withsub );
 
@@ -273,7 +273,7 @@ class Standard
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/index/manager/text/name
 		 * Class name of the used index text manager implementation
@@ -398,7 +398,7 @@ class Standard
 	 *
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function optimize()
+	public function optimize() : \Aimeos\MShop\Index\Manager\Iface
 	{
 		/** mshop/index/manager/text/standard/optimize/mysql
 		 * Optimizes the stored text data for retrieving the records faster
@@ -439,7 +439,7 @@ class Standard
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function rebuild( array $items = [] )
+	public function rebuild( array $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
 	{
 		if( empty( $items ) ) { return $this; }
 
@@ -515,10 +515,10 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		/** mshop/index/manager/text/standard/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
@@ -643,7 +643,7 @@ class Standard
 	 *
 	 * @return string[] List of ISO language codes
 	 */
-	protected function getLanguageIds()
+	protected function getLanguageIds() : array
 	{
 		if( !isset( $this->languageIds ) )
 		{
@@ -767,8 +767,8 @@ class Standard
 	 * @param string $content Text content to store
 	 * @param string $date Current timestamp in "YYYY-MM-DD HH:mm:ss" format
 	 */
-	protected function saveText( \Aimeos\MW\DB\Statement\Iface $stmt, $id, $siteid, $lang,
-		$url, $name, $content, $date )
+	protected function saveText( \Aimeos\MW\DB\Statement\Iface $stmt, string $id, string $siteid, string $lang,
+		string $url, string $name, string $content, string $date )
 	{
 		$stmt->bind( 1, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, $lang );
@@ -787,9 +787,9 @@ class Standard
 	/**
 	 * Returns the list of sub-managers available for the index attribute manager.
 	 *
-	 * @return \Aimeos\MShop\Index\Manager\Iface Associative list of the sub-domain as key and the manager object as value
+	 * @return \Aimeos\MShop\Index\Manager\Iface[] Associative list of the sub-domain as key and the manager object as value
 	 */
-	protected function getSubManagers()
+	protected function getSubManagers() : array
 	{
 		if( $this->subManagers === null )
 		{

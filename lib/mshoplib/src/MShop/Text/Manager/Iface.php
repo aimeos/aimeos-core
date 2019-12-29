@@ -26,8 +26,8 @@ interface Iface
 	 * This method doesn't update the type string that belongs to the type ID
 	 *
 	 * @param \Aimeos\MShop\Text\Item\Iface $item Text item which should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Text\Item\Iface Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Text\Item\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Text\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Text\Item\Iface;
 }

@@ -50,7 +50,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param array $param List of method parameter
 	 * @throws \Aimeos\MShop\Exception If method call failed
 	 */
-	public function __call( $name, array $param )
+	public function __call( string $name, array $param )
 	{
 		throw new \Aimeos\MShop\Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
 	}
@@ -62,7 +62,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this;
 	}
@@ -71,10 +71,10 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Creates a search critera object
 	 *
-	 * @param boolean $default Add default criteria (optional)
+	 * @param bool $default Add default criteria (optional)
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function createSearch( $default = false )
+	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		$db = $this->getResourceName();
 		$config = $this->context->getConfig();
@@ -106,7 +106,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param \Aimeos\MShop\Common\Item\Iface|string $itemId Item object or ID of the item object
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItem( $itemId )
+	public function deleteItem( $itemId ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getObject()->deleteItems( [$itemId] );
 	}
@@ -117,7 +117,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function begin()
+	public function begin() : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->beginTransation( $this->getResourceName() );
 	}
@@ -128,7 +128,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function commit()
+	public function commit() : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->commitTransaction( $this->getResourceName() );
 	}
@@ -139,7 +139,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function rollback()
+	public function rollback() : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->rollbackTransaction( $this->getResourceName() );
 	}
@@ -150,7 +150,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @return array Associative list of column names as keys and items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
-	public function getSaveAttributes()
+	public function getSaveAttributes() : array
 	{
 		return [];
 	}
@@ -160,10 +160,10 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * Adds or updates a list of item objects.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $items List of item object whose data should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Common\Item\Iface[] Saved item objects
 	 */
-	public function saveItems( array $items, $fetch = true )
+	public function saveItems( array $items, bool $fetch = true ) : array
 	{
 		foreach( $items as $id => $item ) {
 			$items[$id] = $this->getObject()->saveItem( $item, $fetch );
@@ -179,7 +179,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param \Aimeos\MShop\Common\Manager\Iface $object Reference to the outmost manager or decorator
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object )
+	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$this->object = $object;
 		return $this;
@@ -191,10 +191,10 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @param string[] $columns List of column names
 	 * @param string $sql Insert or update SQL statement
-	 * @param boolean $mode True for insert, false for update statement
+	 * @param bool $mode True for insert, false for update statement
 	 * @return string Modified insert or update SQL statement
 	 */
-	protected function addSqlColumns( array $columns, $sql, $mode = true )
+	protected function addSqlColumns( array $columns, string $sql, bool $mode = true ) : string
 	{
 		$names = $values = '';
 
@@ -226,7 +226,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @return integer[] List of ID values as key and the number of counted products as value
 	 * @todo 2018.01 Reorder Parameter list
 	 */
-	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, $key, $cfgPath, $required = [], $value = null )
+	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, string $key, string $cfgPath,
+		array $required = [], string $value = null ) : array
 	{
 		$list = [];
 		$context = $this->getContext();
@@ -293,7 +294,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @return string ID of the last record that was inserted by using the given connection
 	 * @throws \Aimeos\MShop\Exception if there's no ID of the last record available
 	 */
-	protected function newId( \Aimeos\MW\DB\Connection\Iface $conn, $cfgpath )
+	protected function newId( \Aimeos\MW\DB\Connection\Iface $conn, string $cfgpath ) : string
 	{
 		$result = $conn->create( $this->getSqlConfig( $cfgpath ) )->execute();
 
@@ -313,7 +314,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $cfgpath Configuration key to the cleanup statement
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function clearBase( array $siteids, $cfgpath )
+	protected function clearBase( array $siteids, string $cfgpath ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( empty( $siteids ) ) {
 			return $this;
@@ -354,7 +355,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param array $list Associative array of code as key and array with properties as values
 	 * @return \Aimeos\MW\Criteria\Attribute\Standard[] List of criteria attribute items
 	 */
-	protected function createAttributes( array $list )
+	protected function createAttributes( array $list ) : array
 	{
 		$attr = [];
 
@@ -373,7 +374,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
 	 * @return \Aimeos\MW\Criteria\Iface Search critery object
 	 */
-	protected function createSearchBase( $domain )
+	protected function createSearchBase( string $domain ) : \Aimeos\MW\Criteria\Iface
 	{
 		$object = $this->createSearch();
 		$object->setConditions( $object->compare( '==', $domain . '.status', 1 ) );
@@ -387,7 +388,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
-	protected function getContext()
+	protected function getContext() : \Aimeos\MShop\Context\Item\Iface
 	{
 		return $this->context;
 	}
@@ -398,7 +399,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
 	 */
-	protected function getObject()
+	protected function getObject() : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( $this->object !== null ) {
 			return $this->object;
@@ -414,11 +415,11 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param array $list Associative list of search keys and the lists of search definitions
 	 * @param string $path Configuration path to the sub-domains for fetching the search definitions
 	 * @param string[] $default List of sub-domains if no others are configured
-	 * @param boolean $withsub True to include search definitions of sub-domains, false if not
+	 * @param bool $withsub True to include search definitions of sub-domains, false if not
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] Associative list of search keys and criteria attribute items as values
 	 * @since 2014.09
 	 */
-	protected function getSearchAttributesBase( array $list, $path, array $default, $withsub )
+	protected function getSearchAttributesBase( array $list, string $path, array $default, bool $withsub ) : array
 	{
 		$attr = $this->createAttributes( $list );
 
@@ -442,7 +443,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $sql SQL statement
 	 * @return \Aimeos\MW\DB\Result\Iface Search result object
 	 */
-	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
+	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, string $sql ) : \Aimeos\MW\DB\Result\Iface
 	{
 		$time = microtime( true );
 
@@ -481,9 +482,9 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * adapter.
 	 *
 	 * @param string $path Configuration path to the SQL statement
-	 * @return string ANSI or database specific SQL statement
+	 * @return array|string ANSI or database specific SQL statement
 	 */
-	protected function getSqlConfig( $path )
+	protected function getSqlConfig( string $path )
 	{
 		$config = $this->getContext()->getConfig();
 		$adapter = $config->get( 'resource/' . $this->getResourceName() . '/adapter' );
@@ -497,11 +498,11 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @param array $pairs Search key/value pairs for the item
 	 * @param string[] $ref List of domains whose items should be fetched too
-	 * @param boolean $default True to add default criteria
+	 * @param bool $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
 	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	protected function findItemBase( array $pairs, array $ref, $default )
+	protected function findItemBase( array $pairs, array $ref, bool $default ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$expr = [];
 		$criteria = $this->getObject()->createSearch( $default )->setSlice( 0, 1 );
@@ -534,7 +535,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string|null $sql SQL string if it shouldn't be retrieved from the configuration
 	 * @return \Aimeos\MW\DB\Statement\Iface Database statement object
 	 */
-	protected function getCachedStatement( \Aimeos\MW\DB\Connection\Iface $conn, $cfgkey, $sql = null )
+	protected function getCachedStatement( \Aimeos\MW\DB\Connection\Iface $conn, string $cfgkey,
+		string $sql = null ) : \Aimeos\MW\DB\Statement\Iface
 	{
 		if( !isset( $this->stmts['stmt'][$cfgkey] )
 			|| !isset( $this->stmts['conn'][$cfgkey] )
@@ -558,11 +560,11 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $key Search key for the requested ID
 	 * @param string $id Unique ID to search for
 	 * @param string[] $ref List of domains whose items should be fetched too
-	 * @param boolean $default True to add default criteria
+	 * @param bool $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
 	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	protected function getItemBase( $key, $id, array $ref, $default )
+	protected function getItemBase( string $key, string $id, array $ref, bool $default ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$criteria = $this->getObject()->createSearch( $default )->setSlice( 0, 1 );
 		$expr = [
@@ -587,7 +589,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $prefix Search key prefix
 	 * @return array List of JOIN SQL strings
 	 */
-	private function getJoins( array $attributes, $prefix )
+	private function getJoins( array $attributes, string $prefix ) : array
 	{
 		$iface = \Aimeos\MW\Criteria\Attribute\Iface::class;
 		$sep = $this->getKeySeparator();
@@ -613,10 +615,10 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $type Main manager type
 	 * @param string $path Configuration path to the sub-domains
 	 * @param string[] $default List of sub-domains if no others are configured
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	protected function getResourceTypeBase( $type, $path, array $default, $withsub )
+	protected function getResourceTypeBase( string $type, string $path, array $default, bool $withsub ) : array
 	{
 		$list = array( $type );
 
@@ -633,7 +635,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @return string Name of the resource
 	 */
-	protected function getResourceName()
+	protected function getResourceName() : string
 	{
 		if( $this->resourceName === null ) {
 			$this->resourceName = $this->context->getConfig()->get( 'resource/default', 'db' );
@@ -649,7 +651,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $name Name of the resource
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function setResourceName( $name )
+	protected function setResourceName( string $name ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$config = $this->context->getConfig();
 
@@ -668,7 +670,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @return \Aimeos\MW\Criteria\Iface Search object
 	 */
-	protected function getSearch()
+	protected function getSearch() : \Aimeos\MW\Criteria\Iface
 	{
 		if( !isset( $this->search ) ) {
 			$this->search = $this->createSearch();
@@ -684,10 +686,11 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $column Name (including alias) of the column
 	 * @param mixed $value Value used in the expression
 	 * @param string $op Operator used in the expression
-	 * @param integer $type Type constant from \Aimeos\MW\DB\Statement\Base class
+	 * @param int $type Type constant from \Aimeos\MW\DB\Statement\Base class
 	 * @return string Created expression
 	 */
-	protected function toExpression( $column, $value, $op = '==', $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR )
+	protected function toExpression( string $column, $value, string $op = '==',
+		int $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR ) : string
 	{
 		$types = ['marker' => $type];
 		$translations = ['marker' => $column];
@@ -705,7 +708,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @return \Aimeos\MW\Criteria\Expression\Iface Site search condition
 	 * @since 2020.01
 	 */
-	protected function getSiteCondition( $name, $sitelevel )
+	protected function getSiteCondition( string $name, int $sitelevel ) : \Aimeos\MW\Criteria\Expression\Iface
 	{
 		$search = $this->getSearch();
 		$sites = $this->context->getLocale()->getSites();
@@ -740,7 +743,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @return \Aimeos\MW\Criteria\Expression\Iface[] List of search conditions
 	 * @since 2015.01
 	 */
-	protected function getSiteConditions( array $keys, array $attributes, $sitelevel )
+	protected function getSiteConditions( array $keys, array $attributes, int $sitelevel ) : array
 	{
 		$list = [];
 		$sep = $this->getKeySeparator();
@@ -766,7 +769,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @return string Site search condition
 	 * @since 2020.01
 	 */
-	protected function getSiteString( $name, $sitelevel )
+	protected function getSiteString( string $name, int $sitelevel ) : string
 	{
 		$translation = ['marker' => $name];
 		$types = ['marker' => \Aimeos\MW\DB\Statement\Base::PARAM_STR];
@@ -785,7 +788,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param \Aimeos\MW\Criteria\Attribute\Iface[] $columns Additional columns to retrieve values from
 	 * @return array Array of keys, find and replace arrays
 	 */
-	protected function getSQLReplacements( \Aimeos\MW\Criteria\Iface $search, array $attributes, array $plugins, array $joins, array $columns = [] )
+	protected function getSQLReplacements( \Aimeos\MW\Criteria\Iface $search, array $attributes, array $plugins,
+		array $joins, array $columns = [] ) : array
 	{
 		$types = $this->getSearchTypes( $attributes );
 		$funcs = $this->getSearchFunctions( $attributes );
@@ -829,15 +833,15 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $cfgPathSearch Path to SQL statement in configuration for searching
 	 * @param string $cfgPathCount Path to SQL statement in configuration for counting
 	 * @param string[] $required Additional search keys to add conditions for even if no conditions are available
-	 * @param integer|null $total Contains the number of all records matching the criteria if not null
-	 * @param integer $sitelevel Constant from \Aimeos\MShop\Locale\Manager\Base for defining which site IDs should be used for searching
+	 * @param int|null $total Contains the number of all records matching the criteria if not null
+	 * @param int $sitelevel Constant from \Aimeos\MShop\Locale\Manager\Base for defining which site IDs should be used for searching
 	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
 	 * @return \Aimeos\MW\DB\Result\Iface SQL result object for accessing the found records
 	 * @throws \Aimeos\MShop\Exception if no number of all matching records is available
 	 */
 	protected function searchItemsBase( \Aimeos\MW\DB\Connection\Iface $conn, \Aimeos\MW\Criteria\Iface $search,
-		$cfgPathSearch, $cfgPathCount, array $required, &$total = null,
-		$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = [] )
+		string $cfgPathSearch, string $cfgPathCount, array $required, int &$total = null,
+		int $sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = [] ) : \Aimeos\MW\DB\Result\Iface
 	{
 		$joins = [];
 		$conditions = $search->getConditions();
@@ -895,11 +899,12 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @param string $cfgpath Configuration path to the SQL statement
-	 * @param boolean $siteidcheck If siteid should be used in the statement
+	 * @param bool $siteidcheck If siteid should be used in the statement
 	 * @param string $name Name of the ID column
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function deleteItemsBase( array $itemIds, $cfgpath, $siteidcheck = true, $name = 'id' )
+	protected function deleteItemsBase( array $itemIds, string $cfgpath, bool $siteidcheck = true,
+		string $name = 'id' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( empty( $itemIds ) ) { return $this; }
 
@@ -946,7 +951,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $dbname Name of the database settings in the resource configuration
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function beginTransation( $dbname = 'db' )
+	protected function beginTransation( string $dbname = 'db' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$dbm = $this->context->getDatabaseManager();
 
@@ -964,7 +969,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $dbname Name of the database settings in the resource configuration
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function commitTransaction( $dbname = 'db' )
+	protected function commitTransaction( string $dbname = 'db' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$dbm = $this->context->getDatabaseManager();
 
@@ -982,7 +987,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $dbname Name of the database settings in the resource configuration
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function rollbackTransaction( $dbname = 'db' )
+	protected function rollbackTransaction( string $dbname = 'db' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$dbm = $this->context->getDatabaseManager();
 

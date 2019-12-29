@@ -26,5 +26,5 @@ interface Iface
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface New lists item object
 	 */
-	public function createListsItem( array $values = [] );
+	public function createListsItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Lists\Iface;
 }

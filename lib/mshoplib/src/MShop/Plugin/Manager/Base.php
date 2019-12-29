@@ -31,7 +31,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Returns the decoratad plugin provider object
 	 * @throws \Aimeos\MShop\Plugin\Exception If provider couldn't be found
 	 */
-	public function getProvider( \Aimeos\MShop\Plugin\Item\Iface $item, $type )
+	public function getProvider( \Aimeos\MShop\Plugin\Item\Iface $item, string $type ) : \Aimeos\MShop\Plugin\Provider\Iface
 	{
 		$type = ucwords( $type );
 		$names = explode( ',', $item->getProvider() );
@@ -98,7 +98,7 @@ abstract class Base
 	 * @param string $type Unique plugin type code
 	 * @return \Aimeos\MShop\Plugin\Manager\Iface Manager object for chaining method calls
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $publisher, $type )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $publisher, string $type ) : \Aimeos\MShop\Plugin\Manager\Iface
 	{
 		if( !isset( $this->plugins[$type] ) )
 		{
@@ -135,7 +135,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin provider object
 	 */
 	protected function addPluginDecorators( \Aimeos\MShop\Plugin\Item\Iface $pluginItem,
-		\Aimeos\MShop\Plugin\Provider\Iface $provider, array $names )
+		\Aimeos\MShop\Plugin\Provider\Iface $provider, array $names ) : \Aimeos\MShop\Plugin\Provider\Iface
 	{
 		$classprefix = '\Aimeos\MShop\Plugin\Provider\Decorator\\';
 

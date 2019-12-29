@@ -161,7 +161,7 @@ class Delivery
 	 * Sorts the entry with the given key to the first position
 	 *
 	 * @param array $values Associative list of keys and codes
-	 * @param integer $value Key that should be at first position
+	 * @param int $value Key that should be at first position
 	 * @return array Sorted associative array
 	 */
 	protected function sort( array $values, $value )

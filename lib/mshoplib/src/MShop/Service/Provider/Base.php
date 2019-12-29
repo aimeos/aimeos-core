@@ -173,7 +173,7 @@ abstract class Base
 	/**
 	 * Checks what features the payment provider implements.
 	 *
-	 * @param integer $what Constant from abstract class
+	 * @param int $what Constant from abstract class
 	 * @return boolean True if feature is available in the payment provider, false if not
 	 */
 	public function isImplemented( $what )
@@ -321,8 +321,8 @@ abstract class Base
 	 * Returns the calculated amount of the price item
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
-	 * @param boolean $costs Include costs per item
-	 * @param boolean $tax Include tax
+	 * @param bool $costs Include costs per item
+	 * @param bool $tax Include tax
 	 * @return string Formatted money amount
 	 */
 	protected function getAmount( \Aimeos\MShop\Price\Item\Iface $price, $costs = true, $tax = true, $precision = null )
@@ -420,7 +420,7 @@ abstract class Base
 	 * Returns the base order which is equivalent to the basket.
 	 *
 	 * @param string $baseId Order base ID stored in the order item
-	 * @param integer $parts Bitmap of the basket parts that should be loaded
+	 * @param int $parts Bitmap of the basket parts that should be loaded
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket, optional with addresses, products, services and coupons
 	 */
 	protected function getOrderBase( $baseId, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE )
@@ -467,7 +467,7 @@ abstract class Base
 	 * Saves the base order which is equivalent to the basket and its dependent objects.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object with associated items
-	 * @param integer $parts Bitmap of the basket parts that should be stored
+	 * @param int $parts Bitmap of the basket parts that should be stored
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Stored order base item
 	 */
 	protected function saveOrderBase( \Aimeos\MShop\Order\Item\Base\Iface $base, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE )

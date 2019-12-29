@@ -212,7 +212,7 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Subscription\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/subscription/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
@@ -229,7 +229,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Subscription\Item\Iface New subscription item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values['subscription.siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
@@ -239,10 +239,10 @@ class Standard
 	/**
 	 * Creates a search critera object
 	 *
-	 * @param boolean $default Add default criteria (optional)
+	 * @param bool $default Add default criteria (optional)
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function createSearch( $default = false )
+	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true ) {
 			return $this->createSearchBase( 'subscription' );
@@ -256,10 +256,10 @@ class Standard
 	 * Creates a one-time subscription in the storage from the given invoice object.
 	 *
 	 * @param \Aimeos\MShop\Subscription\Item\Iface $item Subscription item with necessary values
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Subscription\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Subscription\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Subscription\Item\Iface
 	{
 		if( $item->getOrderProductId() === null ) {
 			throw new \Aimeos\MShop\Subscription\Exception( 'Required order product ID is missing' );
@@ -447,11 +447,11 @@ class Standard
 	 *
 	 * @param string $id Unique id of the subscription invoice
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Returns subscription invoice item of the given id
 	 * @throws \Aimeos\MShop\Subscription\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'subscription.id', $id, $ref, $default );
 	}
@@ -463,7 +463,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Subscription\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/subscription/manager/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -504,10 +504,10 @@ class Standard
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'mshop/subscription/manager/submanagers';
 		return $this->getResourceTypeBase( 'subscription', $path, [], $withsub );
@@ -517,10 +517,10 @@ class Standard
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		/** mshop/subscription/manager/submanagers
 		 * List of manager names that can be instantiated by the subscription manager
@@ -550,10 +550,10 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\MShop\Subscription\Item\Iface[] List of subscription items
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null ) : array
 	{
 		$context = $this->getContext();
 
@@ -591,7 +591,7 @@ class Standard
 			 * this domain, then items wil be only inherited. Thus, you have full
 			 * control over inheritance and aggregation in each domain.
 			 *
-			 * @param integer Constant from Aimeos\MShop\Locale\Manager\Base class
+			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 			 * @category Developer
 			 * @since 2018.04
 			 * @see mshop/locale/manager/standard/sitelevel
@@ -745,7 +745,7 @@ class Standard
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g base, etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'order', $manager, $name );
 	}
@@ -757,7 +757,7 @@ class Standard
 	 * @param array $values List of attributes for subscription item
 	 * @return \Aimeos\MShop\Subscription\Item\Iface New subscription item
 	 */
-	protected function createItemBase( array $values = [] )
+	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Subscription\Item\Iface
 	{
 		return new \Aimeos\MShop\Subscription\Item\Standard( $values );
 	}

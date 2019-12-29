@@ -25,5 +25,5 @@ interface Iface
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface New address item object
 	 */
-	public function createAddressItem( array $values = [] );
+	public function createAddressItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Address\Iface;
 }

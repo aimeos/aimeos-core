@@ -25,8 +25,8 @@ interface Iface
 	 * Saves a currency item to the storage.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Currency\Iface $item Currency item to save in the storage
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Locale\Item\Currency\Iface $item, $fetch = true );
+	public function saveItem( \Aimeos\MShop\Locale\Item\Currency\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Locale\Item\Currency\Iface;
 }

@@ -96,9 +96,9 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Locale\Manager\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Locale\Manager\Language\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this;
 	}
@@ -110,7 +110,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface New locale language item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		try {
 			$values['locale.language.siteid'] = $this->getContext()->getLocale()->getSiteId();
@@ -126,10 +126,10 @@ class Standard
 	 * Saves the language object to the storage.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Language\Iface $item Language object
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Locale\Item\Language\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Locale\Item\Language\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Locale\Item\Language\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
@@ -254,9 +254,9 @@ class Standard
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Locale\Manager\Currency\Iface Manager object for chaining method calls
+	 * @return \Aimeos\MShop\Locale\Manager\Language\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/locale/manager/language/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -299,11 +299,11 @@ class Standard
 	 * @param string $id Language id to create the Language object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Returns the language item of the given id
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @throws \Aimeos\MW\DB\Exception If language object couldn't be fetched
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'locale.language.id', $id, $ref, $default );
 	}
@@ -312,10 +312,10 @@ class Standard
 	/**
 	 * Returns the available manager types
 	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true )
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'mshop/locale/manager/language/submanagers';
 		return $this->getResourceTypeBase( 'locale/language', $path, [], $withsub );
@@ -325,10 +325,10 @@ class Standard
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		/** mshop/locale/manager/language/submanagers
 		 * List of manager names that can be instantiated by the locale language manager
@@ -358,9 +358,9 @@ class Standard
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return \Aimeos\MShop\Locale\Manager\Iface manager
+	 * @return \Aimeos\MShop\Common\Manager\Iface manager
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/locale/manager/language/name
 		 * Class name of the used locale language manager implementation
@@ -485,10 +485,11 @@ class Standard
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param boolean $default True to add default criteria
+	 * @param bool $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
+	public function findItem( string $code, array $ref = [], string $domain = null, string $type = null,
+		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->findItemBase( array( 'locale.language.id' => $code ), $ref, $default );
 	}
@@ -499,10 +500,10 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface[] List of locale language items
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$items = [];
 		$context = $this->getContext();
@@ -625,10 +626,10 @@ class Standard
 	/**
 	 * Creates a search critera object
 	 *
-	 * @param boolean $default Add default criteria (optional)
+	 * @param bool $default Add default criteria (optional)
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function createSearch( $default = false )
+	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true ) {
 			return $this->createSearchBase( 'locale.language' );
@@ -645,7 +646,7 @@ class Standard
 	 * @param string $sql SQL statement
 	 * @return \Aimeos\MW\DB\Result\Iface Search result object
 	 */
-	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
+	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, string $sql ) : \Aimeos\MW\DB\Result\Iface
 	{
 		$time = microtime( true );
 
@@ -669,7 +670,7 @@ class Standard
 	 * @param array $data Associative list of item key/value pairs
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Language item
 	 */
-	protected function createItemBase( array $data = [] )
+	protected function createItemBase( array $data = [] ) : \Aimeos\MShop\Locale\Item\Language\Iface
 	{
 		return new \Aimeos\MShop\Locale\Item\Language\Standard( $data );
 	}
@@ -684,7 +685,7 @@ class Standard
 	 * @throws \Aimeos\MShop\Locale\Exception If no total value was found
 	 * @return integer Total number of found items
 	 */
-	protected function getTotal( \Aimeos\MW\DB\Connection\Iface $conn, array $find, array $replace )
+	protected function getTotal( \Aimeos\MW\DB\Connection\Iface $conn, array $find, array $replace ) : int
 	{
 		/** mshop/locale/manager/language/standard/count/mysql
 		 * Counts the number of records matched by the given criteria in the database

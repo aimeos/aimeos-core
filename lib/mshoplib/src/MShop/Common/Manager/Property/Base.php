@@ -57,7 +57,7 @@ abstract class Base
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface New property item object
 	 */
-	public function createItem( array $values = [] )
+	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values[$this->prefix . 'siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
@@ -67,10 +67,10 @@ abstract class Base
 	/**
 	 * Creates a search object and optionally sets base criteria.
 	 *
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MW\Criteria\Iface Criteria object
 	 */
-	public function createSearch( $default = false )
+	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		$object = parent::createSearch();
 
@@ -94,10 +94,10 @@ abstract class Base
 	 * Inserts the new property items for product item
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item Property item which should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Property\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Property\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Property\Iface
 	{
 		if( !$item->isModified() ) {
 			return $item;
@@ -173,9 +173,9 @@ abstract class Base
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Common\Manager\Property\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds )
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$this->deleteItemsBase( $itemIds, $this->getConfigPath() . 'delete' );
+		return $this->deleteItemsBase( $itemIds, $this->getConfigPath() . 'delete' );
 	}
 
 
@@ -184,11 +184,11 @@ abstract class Base
 	 *
 	 * @param string $id Id of the product property item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
+	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface Returns the product property item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = [], $default = false )
+	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( $this->prefix . 'id', $id, $ref, $default );
 	}
@@ -199,10 +199,10 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
+	 * @param int|null &$total Number of items that are available in total
 	 * @return array List of property items implementing \Aimeos\MShop\Common\Item\Property\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$items = [];
 		$context = $this->getContext();
@@ -244,7 +244,7 @@ abstract class Base
 	 * configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g property types, property lists etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'common', 'property/' . $manager, $name );
 	}
@@ -255,7 +255,7 @@ abstract class Base
 	 *
 	 * @return string Configuration path
 	 */
-	abstract protected function getConfigPath();
+	abstract protected function getConfigPath() : string;
 
 
 	/**
@@ -263,16 +263,16 @@ abstract class Base
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	abstract protected function getSearchConfig();
+	abstract protected function getSearchConfig() : array;
 
 
 	/**
 	 * Creates new property item object.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @return \Aimeos\MShop\Common\Item\Property\Standard New property item object
+	 * @return \Aimeos\MShop\Common\Item\Property\Iface New property item object
 	 */
-	protected function createItemBase( array $values = [] )
+	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Common\Item\Property\Iface
 	{
 		$values['.languageid'] = $this->languageId;
 		return new \Aimeos\MShop\Common\Item\Property\Standard( $this->prefix, $values );
@@ -284,7 +284,7 @@ abstract class Base
 	 *
 	 * @return string Item key prefix
 	 */
-	protected function getPrefix()
+	protected function getPrefix() : string
 	{
 		return $this->prefix;
 	}
