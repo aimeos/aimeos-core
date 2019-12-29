@@ -212,7 +212,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderCouponStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( array( $orderCouponStub->createItem() ) ) );
+			->will( $this->returnValue( array( $orderCouponStub->createItem()->setCode( 'test' ) ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/coupon', $orderCouponStub );
 
@@ -248,7 +248,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderCouponStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( array( $orderCouponStub->createItem() ) ) );
+			->will( $this->returnValue( array( $orderCouponStub->createItem()->setCode( 'test' ) ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/coupon', $orderCouponStub );
 
