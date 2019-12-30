@@ -920,7 +920,7 @@ class Standard
 	 * @param string $name Filter name
 	 * @param \Closure $fcn Callback function
 	 */
-	public function registerItemFilter( string $name, \Closure $fcn ) : Aimeos\MShop\Locale\Manager\Site\Iface
+	public function registerItemFilter( string $name, \Closure $fcn ) : \Aimeos\MShop\Locale\Manager\Site\Iface
 	{
 		return $this;
 	}

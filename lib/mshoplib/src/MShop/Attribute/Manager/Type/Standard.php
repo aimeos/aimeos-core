@@ -135,7 +135,7 @@ class Standard
 	 * @param bool $withsub Return also the resource type of sub-managers if true
 	 * @return string[] Type of the manager and submanagers, subtypes are separated by slashes
 	 */
-	public function getResourceType( $withsub = true ) : array
+	public function getResourceType( bool $withsub = true ) : array
 	{
 		$path = 'mshop/attribute/manager/type/submanagers';
 		return $this->getResourceTypeBase( 'attribute/type', $path, [], $withsub );
@@ -148,7 +148,7 @@ class Standard
 	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attribute items
 	 */
-	public function getSearchAttributes( $withsub = true ) : array
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		/** mshop/attribute/manager/type/submanagers
 		 * List of manager names that can be instantiated by the attribute type manager
