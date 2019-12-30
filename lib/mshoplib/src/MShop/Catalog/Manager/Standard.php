@@ -453,7 +453,8 @@ class Standard extends Base
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function moveItem( string $id, string $oldParentId, string $newParentId, $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface
+	public function moveItem( string $id, string $oldParentId, string $newParentId,
+		string $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface
 	{
 		$this->begin();
 		$this->lock();
