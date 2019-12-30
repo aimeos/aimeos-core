@@ -64,7 +64,7 @@ class None
 	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MAdmin\Cache\Item\Iface $item, $fetch = true ) : \Aimeos\MAdmin\Cache\Item\Iface
+	public function saveItem( \Aimeos\MAdmin\Cache\Item\Iface $item, bool $fetch = true ) : \Aimeos\MAdmin\Cache\Item\Iface
 	{
 		return $item;
 	}
@@ -106,7 +106,7 @@ class None
 	 *
 	 * @return array List of cache items implementing \Aimeos\MAdmin\Cache\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null ) : array
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		return [];
 	}
