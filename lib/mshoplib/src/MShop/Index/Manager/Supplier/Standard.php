@@ -76,7 +76,7 @@ class Standard
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @return string[] List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key ) : array
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key ) : array
 	{
 		return $this->aggregateBase( $search, $key, 'mshop/index/manager/standard/aggregate' );
 	}
