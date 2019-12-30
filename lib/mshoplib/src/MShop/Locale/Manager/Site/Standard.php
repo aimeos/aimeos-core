@@ -900,12 +900,12 @@ class Standard
 	 * Moves an existing item to the new parent in the storage.
 	 *
 	 * @param string $id ID of the item that should be moved
-	 * @param string $oldParentId ID of the old parent item which currently contains the item that should be removed
-	 * @param string $newParentId ID of the new parent item where the item should be moved to
+	 * @param string|null $oldParentId ID of the old parent item which currently contains the item that should be removed
+	 * @param string|null $newParentId ID of the new parent item where the item should be moved to
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Locale\Manager\Site\Iface Manager object for chaining method calls
 	 */
-	public function moveItem( string $id, string $oldParentId, string $newParentId,
+	public function moveItem( string $id, string $oldParentId = null, string $newParentId = null,
 		string $refId = null ) : \Aimeos\MShop\Locale\Manager\Site\Iface
 	{
 		throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Method "%1$s" for locale site manager not available', 'moveItem()' ) );

@@ -38,7 +38,8 @@ interface Iface
 	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site node, maybe with subnodes
 	 */
-	public function getTree( string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE ) : \Aimeos\MShop\Locale\Item\Site\Iface;
+	public function getTree( string $id = null, array $ref = [],
+		int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE ) : \Aimeos\MShop\Locale\Item\Site\Iface;
 
 	/**
 	 * Adds a new item object.
@@ -48,18 +49,20 @@ interface Iface
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface $item Updated item including the generated ID
 	 */
-	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, string $parentId = null, string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface;
+	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, string $parentId = null,
+		string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface;
 
 	/**
 	 * Moves an existing item to the new parent in the storage.
 	 *
 	 * @param string $id ID of the item that should be moved
-	 * @param string $oldParentId ID of the old parent item which currently contains the item that should be removed
-	 * @param string $newParentId ID of the new parent item where the item should be moved to
+	 * @param string|null $oldParentId ID of the old parent item which currently contains the item that should be removed
+	 * @param string|null $newParentId ID of the new parent item where the item should be moved to
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Locale\Manager\Site\Iface Manager object for chaining method calls
 	 */
-	public function moveItem( string $id, string $oldParentId, string $newParentId, string $refId = null ) : \Aimeos\MShop\Locale\Manager\Site\Iface;
+	public function moveItem( string $id, string $oldParentId = null, string $newParentId = null,
+		string $refId = null ) : \Aimeos\MShop\Locale\Manager\Site\Iface;
 
 	/**
 	 * Adds a new site to the storage or updates an existing one.
