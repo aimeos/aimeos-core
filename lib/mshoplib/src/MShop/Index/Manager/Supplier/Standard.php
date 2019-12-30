@@ -103,7 +103,7 @@ class Standard
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function cleanup( $timestamp ) : \Aimeos\MShop\Index\Manager\Iface
+	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface
 	{
 		/** mshop/index/manager/supplier/standard/cleanup/mysql
 		 * Deletes the index supplier records that haven't been touched
