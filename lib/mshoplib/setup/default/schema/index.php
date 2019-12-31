@@ -22,9 +22,9 @@ return array(
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'attrid', 'string', ['length' => 36, 'notnull' => false, 'customSchemaOptions' => ['charset' => 'binary']] );
-			$table->addColumn( 'listtype', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'listtype', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 255, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 
 			$table->addUniqueIndex( array( 'prodid', 'siteid', 'attrid', 'listtype' ), 'unq_msindat_p_s_aid_lt' );
@@ -41,7 +41,7 @@ return array(
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'catid', 'string', ['length' => 36, 'customSchemaOptions' => ['charset' => 'binary']] );
-			$table->addColumn( 'listtype', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'listtype', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 
@@ -74,7 +74,7 @@ return array(
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'supid', 'string', ['length' => 36, 'customSchemaOptions' => ['charset' => 'binary']] );
-			$table->addColumn( 'listtype', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'listtype', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 

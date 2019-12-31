@@ -52,7 +52,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', ['notnull' => false] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 255, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'config', 'text', array( 'default' => '', 'length' => 0xffff ) );
 			$table->addColumn( 'level', 'smallint', [] );

@@ -23,7 +23,7 @@ return array(
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'customerid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'sitecode', 'string', array( 'length' => 255, 'notnull' => false ) );
+			$table->addColumn( 'sitecode', 'string', array( 'length' => 255, 'notnull' => false, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5 ) );
 			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
@@ -53,7 +53,7 @@ return array(
 			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'addrid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
 			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
@@ -104,11 +104,11 @@ return array(
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'ordprodid', 'bigint', array( 'notnull' => false ) );
 			$table->addColumn( 'ordaddrid', 'bigint', array( 'notnull' => false ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'prodid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'prodcode', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'suppliercode', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'stocktype', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'prodcode', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
+			$table->addColumn( 'suppliercode', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
+			$table->addColumn( 'stocktype', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'name', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'description', 'text', array( 'length' => 0xffff, 'default' => '' ) );
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255, 'default' => '' ) );
@@ -149,8 +149,8 @@ return array(
 			$table->addColumn( 'ordprodid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'attrid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 255, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'quantity', 'integer', [] );
@@ -176,8 +176,8 @@ return array(
 			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'servid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
@@ -211,8 +211,8 @@ return array(
 			$table->addColumn( 'ordservid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'attrid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 255, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'quantity', 'integer', [] );
@@ -264,7 +264,7 @@ return array(
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'datepayment', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'datedelivery', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'statuspayment', 'smallint', array( 'default' => -1 ) );
@@ -308,7 +308,7 @@ return array(
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'type', 'string', array( 'length' => 64 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'value', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
