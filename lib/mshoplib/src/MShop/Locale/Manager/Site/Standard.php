@@ -831,7 +831,7 @@ class Standard
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, '/' ); // site ID
+			$stmt->bind( $idx++, '' ); // site ID
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
@@ -884,7 +884,7 @@ class Standard
 			$dbm->release( $conn, $dbname );
 
 			// Add unique site identifier
-			$item = $this->getObject()->saveItem( $item->setSiteId( '/' . $item->getId() . '/' ) );
+			$item = $this->getObject()->saveItem( $item->setSiteId( $item->getId() . '.' ) );
 		}
 		catch( \Exception $e )
 		{

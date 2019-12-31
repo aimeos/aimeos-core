@@ -163,7 +163,7 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'locale.site.level', 0 ) );
 
 		foreach( $manager->searchItems( $search ) as $siteid => $siteItem ) {
-			$this->map( $manager->getTree( $siteid ), $map, '/' );
+			$this->map( $manager->getTree( $siteid ), $map, '' );
 		}
 
 		return $map;
@@ -172,7 +172,7 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 
 	protected function map( \Aimeos\MShop\Locale\Item\Site\Iface $item, &$map, $site )
 	{
-		$site .= $item->getId() . '/';
+		$site .= $item->getId() . '.';
 
 		foreach( $item->getChildren() as $child ) {
 			$this->map( $child, $map, $site );
