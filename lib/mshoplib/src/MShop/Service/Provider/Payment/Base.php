@@ -54,7 +54,7 @@ abstract class Base
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		return [];
 	}
@@ -66,7 +66,7 @@ abstract class Base
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return [];
 	}
@@ -76,8 +76,9 @@ abstract class Base
 	 * Cancels the authorization for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function cancel( \Aimeos\MShop\Order\Item\Iface $order )
+	public function cancel( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', 'cancel' ) );
 	}
@@ -87,8 +88,9 @@ abstract class Base
 	 * Captures the money later on request for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function capture( \Aimeos\MShop\Order\Item\Iface $order )
+	public function capture( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', 'capture' ) );
 	}
@@ -100,13 +102,12 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
 	 * @param array $params Request parameter if available
-	 * @return \Aimeos\MShop\Common\Helper\Form\Standard Form object with URL, action and parameters to redirect to
+	 * @return \Aimeos\MShop\Common\Helper\Form\Iface|null Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
-	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] )
+	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] ) : ?\Aimeos\MShop\Common\Helper\Form\Iface
 	{
 		$url = $this->getConfigValue( array( 'payment.url-success' ) );
-
 		return new \Aimeos\MShop\Common\Helper\Form\Standard( $url, 'POST', [] );
 	}
 
@@ -115,8 +116,9 @@ abstract class Base
 	 * Refunds the money for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function refund( \Aimeos\MShop\Order\Item\Iface $order )
+	public function refund( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', 'refund' ) );
 	}
@@ -127,9 +129,9 @@ abstract class Base
 	 * This requires support of the payment gateway and token based payment
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function repay( \Aimeos\MShop\Order\Item\Iface $order )
+	public function repay( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', 'repay' ) );
 	}
@@ -140,8 +142,10 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem Order service item that will be added to the basket
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item with attributes added
 	 */
-	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes )
+	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem,
+		array $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		return $this->setAttributes( $orderServiceItem, $attributes, 'payment' );
 	}

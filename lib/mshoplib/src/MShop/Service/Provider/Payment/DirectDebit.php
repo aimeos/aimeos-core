@@ -69,7 +69,7 @@ class DirectDebit
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
 	{
 		$feconfig = $this->feConfig;
 
@@ -94,7 +94,7 @@ class DirectDebit
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	public function checkConfigFE( array $attributes )
+	public function checkConfigFE( array $attributes ) : array
 	{
 		return $this->checkConfig( $this->feConfig, $attributes );
 	}
@@ -107,7 +107,8 @@ class DirectDebit
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item with attributes added
 	 */
-	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes )
+	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem,
+		array $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		$orderServiceItem = $this->setAttributes( $orderServiceItem, $attributes, 'payment' );
 
@@ -136,12 +137,12 @@ class DirectDebit
 	 * This requires support of the payment gateway and token based payment
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
 	 */
-	public function repay( \Aimeos\MShop\Order\Item\Iface $order )
+	public function repay( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED );
-		$this->saveOrder( $order );
+		return $this->saveOrder( $order );
 	}
 
 
@@ -153,12 +154,13 @@ class DirectDebit
 	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
 	 * @throws \Aimeos\MShop\Service\Exception If updating the orders failed
 	 */
-	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request, \Aimeos\MShop\Order\Item\Iface $order )
+	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request,
+		\Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		if( $order->getPaymentStatus() === \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED )
 		{
 			$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED );
-			$this->saveOrder( $order );
+			$order = $this->saveOrder( $order );
 		}
 
 		return $order;

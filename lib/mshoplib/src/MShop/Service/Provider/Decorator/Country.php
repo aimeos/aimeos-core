@@ -74,7 +74,7 @@ class Country
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		$error = $this->getProvider()->checkConfigBE( $attributes );
 		$error += $this->checkConfig( $this->beConfig, $attributes );
@@ -89,7 +89,7 @@ class Country
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return array_merge( $this->getProvider()->getConfigBE(), $this->getConfigItems( $this->beConfig ) );
 	}
@@ -99,9 +99,9 @@ class Country
 	 * Checks if the country code is allowed for the service provider.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
-	 * @return boolean True if payment provider can be used, false if not
+	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
 		$paymentType = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
 		$deliveryType = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY;
@@ -149,8 +149,9 @@ class Country
 	 *
 	 * @param string $code Two letter ISO country code in upper case
 	 * @param string $key Configuration key referring to the country code configuration
+	 * @return bool|null True if country code is in the list, false if not, null if no codes are availble
 	 */
-	protected function checkCountryCode( $code, $key )
+	protected function checkCountryCode( string $code, string $key ) : ?bool
 	{
 		if( ( $str = $this->getConfigValue( $key ) ) == null ) {
 			return null;

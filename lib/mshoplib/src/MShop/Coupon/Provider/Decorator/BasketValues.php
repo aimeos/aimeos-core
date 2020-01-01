@@ -51,7 +51,7 @@ class BasketValues
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		return $this->checkConfig( $this->beConfig, $attributes );
 	}
@@ -63,7 +63,7 @@ class BasketValues
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return $this->getConfigItems( $this->beConfig );
 	}
@@ -73,9 +73,9 @@ class BasketValues
 	 * Checks for the min/max order value.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @return boolean True if the basket matches the constraints, false if not
+	 * @return bool True if the basket matches the constraints, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base ) : bool
 	{
 		$price = $base->getPrice();
 		$currency = $price->getCurrencyId();

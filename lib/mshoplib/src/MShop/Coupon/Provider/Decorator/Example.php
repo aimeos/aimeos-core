@@ -28,7 +28,7 @@ class Example
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		$this->getProvider()->update( $base );
 		return $this;
@@ -39,8 +39,9 @@ class Example
 	 * Tests if a coupon should be granted
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base
+	 * @return bool True if available, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base ) : bool
 	{
 		return true;
 	}

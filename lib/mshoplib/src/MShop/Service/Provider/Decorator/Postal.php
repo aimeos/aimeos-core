@@ -74,7 +74,7 @@ class Postal
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		$error = $this->getProvider()->checkConfigBE( $attributes );
 		$error += $this->checkConfig( $this->beConfig, $attributes );
@@ -89,7 +89,7 @@ class Postal
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return array_merge( $this->getProvider()->getConfigBE(), $this->getConfigItems( $this->beConfig ) );
 	}
@@ -99,9 +99,9 @@ class Postal
 	 * Checks if the postal code is allowed for the service provider.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
-	 * @return boolean True if payment provider can be used, false if not
+	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
 		$paymentType = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
 		$deliveryType = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY;
@@ -149,8 +149,9 @@ class Postal
 	 *
 	 * @param string $code Postal code
 	 * @param string $key Configuration key referring to the postal code configuration
+	 * @return bool|null True if postal code is in the list, false if not, null if no codes are availble
 	 */
-	protected function checkPostalCode( $code, $key )
+	protected function checkPostalCode( string $code, string $key ) : ?bool
 	{
 		if( ( $str = $this->getConfigValue( $key ) ) == null ) {
 			return null;

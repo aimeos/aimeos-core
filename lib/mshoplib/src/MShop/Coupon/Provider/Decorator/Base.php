@@ -33,7 +33,7 @@ abstract class Base
 	 * @param string $code Coupon code entered by the customer
 	 */
 	public function __construct( \Aimeos\MShop\Coupon\Provider\Iface $provider,
-		\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $couponItem, $code )
+		\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $couponItem, string $code )
 	{
 		$this->provider = $provider;
 
@@ -47,7 +47,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		if( $this->isAvailable( $base ) ) {
 			$this->provider->update( $base );
@@ -63,9 +63,9 @@ abstract class Base
 	 * Tests if a coupon should be granted.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @return boolean True of coupon can be granted, false if not
+	 * @return bool True of coupon can be granted, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base ) : bool
 	{
 		return $this->provider->isAvailable( $base );
 	}
@@ -77,7 +77,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Coupon\Provider\Iface $object Reference to the outmost provider or decorator
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Coupon\Provider\Iface $object )
+	public function setObject( \Aimeos\MShop\Coupon\Provider\Iface $object ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		parent::setObject( $object );
 
@@ -92,7 +92,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon provider
 	 */
-	protected function getProvider()
+	protected function getProvider() : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		return $this->provider;
 	}

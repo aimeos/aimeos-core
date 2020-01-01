@@ -27,12 +27,12 @@ class PostPay
 	 * This requires support of the payment gateway and token based payment
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
 	 */
-	public function repay( \Aimeos\MShop\Order\Item\Iface $order )
+	public function repay( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED );
-		$this->saveOrder( $order );
+		return $this->saveOrder( $order );
 	}
 
 
@@ -44,12 +44,13 @@ class PostPay
 	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
 	 * @throws \Aimeos\MShop\Service\Exception If updating the orders failed
 	 */
-	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request, \Aimeos\MShop\Order\Item\Iface $order )
+	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request,
+		\Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		if( $order->getPaymentStatus() === \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED )
 		{
 			$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED );
-			$this->saveOrder( $order );
+			$order = $this->saveOrder( $order );
 		}
 
 		return $order;

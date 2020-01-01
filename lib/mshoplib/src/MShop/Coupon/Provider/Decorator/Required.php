@@ -42,7 +42,7 @@ class Required
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		return $this->checkConfig( $this->beConfig, $attributes );
 	}
@@ -54,7 +54,7 @@ class Required
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return $this->getConfigItems( $this->beConfig );
 	}
@@ -63,9 +63,9 @@ class Required
 	 * Checks for requirements.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @return boolean True if the requirements are met, false if not
+	 * @return bool True if the requirements are met, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base ) : bool
 	{
 		if( ( $prodcode = $this->getConfigValue( 'required.productcode' ) ) !== null )
 		{

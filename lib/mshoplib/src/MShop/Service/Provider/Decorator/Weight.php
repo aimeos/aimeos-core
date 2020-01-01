@@ -55,7 +55,7 @@ class Weight
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 *    known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		$error = $this->getProvider()->checkConfigBE( $attributes );
 		$error += $this->checkConfig( $this->beConfig, $attributes );
@@ -70,9 +70,9 @@ class Weight
 	 * This will generate a list of available fields and rules for the value of
 	 * each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return array_merge( $this->getProvider()->getConfigBE(), $this->getConfigItems( $this->beConfig ) );
 	}
@@ -82,9 +82,9 @@ class Weight
 	 * Checks if the the basket weight is ok for the service provider.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
-	 * @return boolean True if payment provider can be used, false if not
+	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
 		$prodMap = [];
 
@@ -116,9 +116,9 @@ class Weight
 	 * Checks if the country code is in the list of codes specified by the given key
 	 *
 	 * @param float $basketWeight The basket weight
-	 * @return boolean True if the current basket weight is within the providers weight range
+	 * @return bool True if the current basket weight is within the providers weight range
 	 */
-	protected function checkWeightScale( $basketWeight )
+	protected function checkWeightScale( float $basketWeight ) : bool
 	{
 		$min = $this->getConfigValue( array( 'weight.min' ) );
 		$max = $this->getConfigValue( array( 'weight.max' ) );
@@ -139,9 +139,9 @@ class Weight
 	 * Returns the weight of the products
 	 *
 	 * @param array $prodMap Associative list of product codes as keys and quantities as values
-	 * @return double Sumed up product weight multiplied with its quantity
+	 * @return float Sumed up product weight multiplied with its quantity
 	 */
-	protected function getWeight( array $prodMap )
+	protected function getWeight( array $prodMap ) : float
 	{
 		$weight = 0;
 
@@ -160,6 +160,6 @@ class Weight
 			}
 		}
 
-		return (double) $weight;
+		return (float) $weight;
 	}
 }

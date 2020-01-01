@@ -78,7 +78,7 @@ class Reduction
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		$error = $this->getProvider()->checkConfigBE( $attributes );
 		$error += $this->checkConfig( $this->beConfig, $attributes );
@@ -93,7 +93,7 @@ class Reduction
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return array_merge( $this->getProvider()->getConfigBE(), $this->getConfigItems( $this->beConfig ) );
 	}
@@ -107,7 +107,7 @@ class Reduction
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item containing the price, shipping, rebate
 	 */
-	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$price = $this->getProvider()->calcPrice( $basket );
 		$total = $basket->getPrice()->getValue() + $basket->getPrice()->getRebate();

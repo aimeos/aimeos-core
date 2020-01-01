@@ -51,7 +51,7 @@ class Present
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		return $this->checkConfig( $this->beConfig, $attributes );
 	}
@@ -63,7 +63,7 @@ class Present
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return $this->getConfigItems( $this->beConfig );
 	}
@@ -75,7 +75,7 @@ class Present
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		$quantity = (int) $this->getConfigValue( 'present.quantity', 0 );
 		$prodcode = $this->getConfigValue( 'present.productcode' );

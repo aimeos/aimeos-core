@@ -139,7 +139,7 @@ class Supplier
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	public function checkConfigFE( array $attributes )
+	public function checkConfigFE( array $attributes ) : array
 	{
 		$result = $this->getProvider()->checkConfigFE( $attributes );
 
@@ -154,7 +154,7 @@ class Supplier
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
 	{
 		$feconfig = $this->feConfig;
 
@@ -185,7 +185,8 @@ class Supplier
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item with attributes added
 	 */
-	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes )
+	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem,
+		array $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		if( ( $code = $attributes['supplier.code'] ) != '' )
 		{

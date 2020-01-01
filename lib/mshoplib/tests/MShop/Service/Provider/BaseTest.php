@@ -21,9 +21,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 		$serviceItem = \Aimeos\MShop\Service\Manager\Factory::create( $this->context )->createItem()->setId( -1 );
 
-		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Base::class )
+		$this->object = $this->getMockBuilder( TestBase::class )
 			->setConstructorArgs( [$this->context, $serviceItem] )
-			->setMethods( null )
+			->setMethods( ['test'] )
 			->getMock();
 
 		\Aimeos\MShop::cache( true );
@@ -135,5 +135,17 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$method->setAccessible( true );
 
 		return $method;
+	}
+}
+
+
+class TestBase
+	extends \Aimeos\MShop\Service\Provider\Base
+	implements \Aimeos\MShop\Service\Provider\Iface
+{
+	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem,
+		array $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
+	{
+		return $orderServiceItem;
 	}
 }

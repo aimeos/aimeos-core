@@ -27,7 +27,7 @@ interface Iface
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	public function checkConfigBE( array $attributes );
+	public function checkConfigBE( array $attributes ) : array;
 
 	/**
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
@@ -35,7 +35,7 @@ interface Iface
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE();
+	public function getConfigBE() : array;
 
 	/**
 	 * Tests if a coupon should be granted
@@ -44,9 +44,9 @@ interface Iface
 	 * again if the coupon or the code itself are still available.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @return boolean True of coupon can be granted, false if not
+	 * @return bool True of coupon can be granted, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base );
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base ) : bool;
 
 	/**
 	 * Injects the reference of the outmost object
@@ -54,7 +54,7 @@ interface Iface
 	 * @param \Aimeos\MShop\Coupon\Provider\Iface $object Reference to the outmost provider or decorator
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Coupon\Provider\Iface $object );
+	public function setObject( \Aimeos\MShop\Coupon\Provider\Iface $object ) : \Aimeos\MShop\Coupon\Provider\Iface;
 
 	/**
 	 * Updates the result of a coupon to the order base instance.
@@ -62,5 +62,5 @@ interface Iface
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base );
+	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface;
 }

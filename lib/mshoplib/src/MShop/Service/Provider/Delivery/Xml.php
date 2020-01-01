@@ -70,7 +70,7 @@ class Xml
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		$errors = parent::checkConfigBE( $attributes );
 
@@ -84,7 +84,7 @@ class Xml
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return $this->getConfigItems( $this->beConfig );
 	}
@@ -96,7 +96,7 @@ class Xml
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order instance
 	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
 	 */
-	public function process( \Aimeos\MShop\Order\Item\Iface $order )
+	public function process( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$baseItem = $this->getOrderBase( $order->getBaseId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
 		$this->createFile( $this->createXml( [$order], [$baseItem->getId() => $baseItem] ) );
@@ -111,7 +111,7 @@ class Xml
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orders List of order invoice objects
 	 * @return \Aimeos\MShop\Order\Item\Iface[] Updated order items
 	 */
-	public function processBatch( array $orders )
+	public function processBatch( array $orders ) : array
 	{
 		$baseItems = $this->getOrderBaseItems( $orders );
 		$this->createFile( $this->createXml( $orders, $baseItems ) );
@@ -128,10 +128,10 @@ class Xml
 	 * Looks for new update files and updates the orders for which status updates were received.
 	 * If batch processing of files isn't supported, this method can be empty.
 	 *
-	 * @return boolean True if the update was successful, false if async updates are not supported
+	 * @return bool True if the update was successful, false if async updates are not supported
 	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
-	public function updateAsync()
+	public function updateAsync() : bool
 	{
 		$context = $this->getContext();
 		$logger = $context->getLogger();
@@ -177,8 +177,9 @@ class Xml
 	 * Stores the content into the file
 	 *
 	 * @param string $content XML content
+	 * @return \Aimeos\MShop\Service\Provider\Delivery\Iface Same object for fluent interface
 	 */
-	protected function createFile( $content )
+	protected function createFile( string $content ) : \Aimeos\MShop\Service\Provider\Delivery\Iface
 	{
 		$filepath = $this->getConfigValue( 'xml.exportpath', './order_%Y-%m-%d_%T_%%d.xml' );
 		$filepath = sprintf( strftime( $filepath ), $this->num++ );
@@ -188,6 +189,8 @@ class Xml
 			$msg = sprintf( 'Unable to create order XML file "%1$s"', $filepath );
 			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
+
+		return $this;
 	}
 
 
@@ -198,7 +201,7 @@ class Xml
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface[] $baseItems Associative list of order base items to export
 	 * @return string Generated XML
 	 */
-	protected function createXml( array $orderItems, array $baseItems )
+	protected function createXml( array $orderItems, array $baseItems ) : string
 	{
 		$view = $this->getContext()->getView();
 		$template = $this->getConfigValue( 'template', 'service/provider/delivery/xml-body-standard' );
@@ -213,7 +216,7 @@ class Xml
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orderItems List of order items
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface[] Associative list of IDs as keys and order base items as values
 	 */
-	protected function getOrderBaseItems( array $orderItems )
+	protected function getOrderBaseItems( array $orderItems ) : array
 	{
 		$ids = [];
 		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
@@ -234,8 +237,9 @@ class Xml
 	 * Imports all orders from the given XML file name
 	 *
 	 * @param string $filename Relative or absolute path to the XML file
+	 * @return \Aimeos\MShop\Service\Provider\Delivery\Iface Same object for fluent interface
 	 */
-	protected function importFile( $filename )
+	protected function importFile( string $filename ) : \Aimeos\MShop\Service\Provider\Delivery\Iface
 	{
 		$nodes = [];
 		$xml = new \XMLReader();
@@ -275,6 +279,8 @@ class Xml
 			$msg = sprintf( 'Unable to move imported file "%1$s" to "%2$s"', $filename, strftime( $backup ) );
 			throw new \Aimeos\Controller\Jobs\Exception( $msg );
 		}
+
+		return $this;
 	}
 
 
@@ -282,8 +288,9 @@ class Xml
 	 * Imports the orders from the given XML nodes
 	 *
 	 * @param \DomElement[] List of order DOM nodes
+	 * @return \Aimeos\MShop\Service\Provider\Delivery\Iface Same object for fluent interface
 	 */
-	protected function importNodes( array $nodes )
+	protected function importNodes( array $nodes ) : \Aimeos\MShop\Service\Provider\Delivery\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
 		$search = $manager->createSearch()->setSlice( 0, count( $nodes ) );
@@ -304,5 +311,6 @@ class Xml
 		}
 
 		$manager->saveItems( $items );
+		return $this;
 	}
 }

@@ -69,7 +69,7 @@ class PercentRebate
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		return $this->checkConfig( $this->beConfig, $attributes );
 	}
@@ -81,7 +81,7 @@ class PercentRebate
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return $this->getConfigItems( $this->beConfig );
 	}
@@ -93,7 +93,7 @@ class PercentRebate
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		$rebate = (float) $this->getConfigValue( 'percentrebate.rebate', 0 );
 		$prodcode = $this->getConfigValue( 'percentrebate.productcode' );
@@ -122,10 +122,10 @@ class PercentRebate
 	/**
 	 * Rounds the number to the configured precision
 	 *
-	 * @param double $number Number to round
-	 * @return double Rounded number
+	 * @param float $number Number to round
+	 * @return float Rounded number
 	 */
-	protected function round( $number )
+	protected function round( float $number ) : float
 	{
 		$prec = $this->getConfigValue( 'percentrebate.precision', 2 );
 		$value = $this->getConfigValue( 'percentrebate.roundvalue', 0 );

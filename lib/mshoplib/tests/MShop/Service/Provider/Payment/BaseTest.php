@@ -110,7 +110,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 }
 
 
-class TestBase extends \Aimeos\MShop\Service\Provider\Payment\Base
+class TestBase
+	extends \Aimeos\MShop\Service\Provider\Payment\Base
+	implements \Aimeos\MShop\Service\Provider\Payment\Iface
 {
 
 }

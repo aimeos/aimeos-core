@@ -30,9 +30,9 @@ class Not
 	 * Checks if the products are withing the allowed code is allowed for the service provider.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
-	 * @return boolean True if payment provider can be used, false if not
+	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
 		return !$this->getProvider()->isAvailable( $basket );
 	}

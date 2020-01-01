@@ -41,7 +41,7 @@ class Voucher
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		return $this->checkConfig( $this->beConfig, $attributes );
 	}
@@ -53,7 +53,7 @@ class Voucher
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return $this->getConfigItems( $this->beConfig );
 	}
@@ -65,7 +65,7 @@ class Voucher
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Provider object for method chaining
 	 */
-	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		$context = $this->getContext();
 
@@ -108,7 +108,7 @@ class Voucher
 	 * @param integer[] $status List of allowed payment status values
 	 * @throws \Aimeos\MShop\Coupon\Exception If voucher isn't available any more
 	 */
-	protected function checkVoucher( $orderProductId, array $status )
+	protected function checkVoucher( string $orderProductId, array $status )
 	{
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop::create( $context, 'order' );
@@ -134,7 +134,7 @@ class Voucher
 	 * @param string[] $baseIds List of order base IDs to check
 	 * @return string[] List of filtered order base IDs
 	 */
-	protected function filterOrderBaseIds( array $baseIds )
+	protected function filterOrderBaseIds( array $baseIds ) : array
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
 
@@ -162,7 +162,7 @@ class Voucher
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item
 	 * @throws \Aimeos\MShop\Coupon\Exception If there's a mismatch between the currency IDs (order product vs. given one)
 	 */
-	protected function getOrderProductItem( $orderProductId, $currencyId )
+	protected function getOrderProductItem( string $orderProductId, string $currencyId ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
@@ -186,7 +186,7 @@ class Voucher
 	 * @param string $code Voucher code
 	 * @return float Already used rebate value
 	 */
-	protected function getUsedRebate( $code )
+	protected function getUsedRebate( string $code ) : float
 	{
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop::create( $context, 'order/base/coupon' );
@@ -226,10 +226,10 @@ class Voucher
 	 * Adds an attribute with the remaining rebate to the order products
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $orderProducts Order product items
-	 * @param double $remaining Remaining rebate
+	 * @param float $remaining Remaining rebate
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] Modified order product items
 	 */
-	protected function setOrderAttributeRebate( array $orderProducts, $remaining )
+	protected function setOrderAttributeRebate( array $orderProducts, float $remaining ) : array
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base/product/attribute' );
 

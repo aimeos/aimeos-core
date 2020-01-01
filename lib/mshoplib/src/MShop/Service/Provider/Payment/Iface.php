@@ -24,17 +24,17 @@ interface Iface extends \Aimeos\MShop\Service\Provider\Iface, \Aimeos\MShop\Serv
 	 * Cancels the authorization for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function cancel( \Aimeos\MShop\Order\Item\Iface $order );
+	public function cancel( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Captures the money later on request for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function capture( \Aimeos\MShop\Order\Item\Iface $order );
+	public function capture( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Tries to get an authorization or captures the money immediately for the given order if capturing the money
@@ -42,25 +42,25 @@ interface Iface extends \Aimeos\MShop\Service\Provider\Iface, \Aimeos\MShop\Serv
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
 	 * @param array $params Request parameter if available
-	 * @return \Aimeos\MShop\Common\Helper\Form\Standard Form object with URL, action and parameters to redirect to
+	 * @return \Aimeos\MShop\Common\Helper\Form\Iface|null Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
-	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] );
+	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] ) : ?\Aimeos\MShop\Common\Helper\Form\Iface;
 
 	/**
 	 * Refunds the money for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function refund( \Aimeos\MShop\Order\Item\Iface $order );
+	public function refund( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Executes the payment again for the given order if supported.
 	 * This requires support of the payment gateway and token based payment
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function repay( \Aimeos\MShop\Order\Item\Iface $order );
+	public function repay( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface;
 }

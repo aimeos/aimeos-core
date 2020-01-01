@@ -32,7 +32,7 @@ abstract class Base implements Iface
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon item to set
 	 * @param string $code Coupon code entered by the customer
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $item, $code )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $item, string $code )
 	{
 		$this->context = $context;
 		$this->item = $item;
@@ -47,7 +47,7 @@ abstract class Base implements Iface
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		return [];
 	}
@@ -59,7 +59,7 @@ abstract class Base implements Iface
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return [];
 	}
@@ -72,9 +72,9 @@ abstract class Base implements Iface
 	 * again if the coupon or the code itself are still available.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @return boolean True of coupon can be granted, false if not
+	 * @return bool True of coupon can be granted, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base ) : bool
 	{
 		return true;
 	}
@@ -86,7 +86,7 @@ abstract class Base implements Iface
 	 * @param \Aimeos\MShop\Coupon\Provider\Iface $object Reference to the outmost provider or decorator
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Coupon\Provider\Iface $object )
+	public function setObject( \Aimeos\MShop\Coupon\Provider\Iface $object ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		$this->object = $object;
 		return $this;
@@ -101,7 +101,7 @@ abstract class Base implements Iface
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	protected function checkConfig( array $criteria, array $map )
+	protected function checkConfig( array $criteria, array $map ) : array
 	{
 		$helper = new \Aimeos\MShop\Common\Helper\Config\Standard( $this->getConfigItems( $criteria ) );
 		return $helper->check( $map );
@@ -113,7 +113,7 @@ abstract class Base implements Iface
 	 *
 	 * @return string Coupon code
 	 */
-	protected function getCode()
+	protected function getCode() : string
 	{
 		return $this->code;
 	}
@@ -124,7 +124,7 @@ abstract class Base implements Iface
 	 *
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of criteria attribute items
 	 */
-	protected function getConfigItems( array $configList )
+	protected function getConfigItems( array $configList ) : array
 	{
 		$list = [];
 
@@ -143,7 +143,7 @@ abstract class Base implements Iface
 	 * @param mixed $default Default value if configuration key isn't available
 	 * @return mixed Value from service item configuration
 	 */
-	protected function getConfigValue( $key, $default = null )
+	protected function getConfigValue( string $key, $default = null )
 	{
 		return $this->item->getConfigValue( $key, $default );
 	}
@@ -154,7 +154,7 @@ abstract class Base implements Iface
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
-	protected function getContext()
+	protected function getContext() : \Aimeos\MShop\Context\Item\Iface
 	{
 		return $this->context;
 	}
@@ -165,7 +165,7 @@ abstract class Base implements Iface
 	 *
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item
 	 */
-	protected function getItem()
+	protected function getItem() : \Aimeos\MShop\Coupon\Item\Iface
 	{
 		return $this->item;
 	}
@@ -176,7 +176,7 @@ abstract class Base implements Iface
 	 *
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Outmost decorator object
 	 */
-	protected function getObject()
+	protected function getObject() : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		if( $this->object !== null ) {
 			return $this->object;
@@ -194,7 +194,8 @@ abstract class Base implements Iface
 	 * @param string $stocktype Unique stock type code for the order product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product
 	 */
-	protected function createProduct( $prodcode, $quantity = 1, $stocktype = 'default' )
+	protected function createProduct( string $prodcode, int $quantity = 1,
+		string $stocktype = 'default' ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$product = $productManager->findItem( $prodcode, ['text', 'media', 'price'] );
@@ -225,7 +226,7 @@ abstract class Base implements Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] Order products with monetary rebates
 	 */
 	protected function createRebateProducts( \Aimeos\MShop\Order\Item\Base\Iface $base,
-		$prodcode, &$rebate, $quantity = 1, $stockType = 'default' )
+		$prodcode, &$rebate, $quantity = 1, $stockType = 'default' ) : array
 	{
 		$prices = $this->getPriceByTaxRate( $base );
 		$orderProducts = [];
@@ -270,7 +271,7 @@ abstract class Base implements Iface
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing the products, services, etc.
 	 * @return \Aimeos\MShop\Price\Item\Iface[] Associative list of tax rates as key and price items as values
 	 */
-	protected function getPriceByTaxRate( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	protected function getPriceByTaxRate( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
 	{
 		$taxrates = [];
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'price' );

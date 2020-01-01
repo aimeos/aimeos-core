@@ -26,13 +26,12 @@ class PrePay
 	 * Cancels the authorization for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
 	 */
-	public function cancel( \Aimeos\MShop\Order\Item\Iface $order )
+	public function cancel( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
-		$this->saveOrder( $order );
-
-		return $order;
+		return $this->saveOrder( $order );
 	}
 
 
@@ -41,12 +40,12 @@ class PrePay
 	 * This requires support of the payment gateway and token based payment
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
 	 */
-	public function repay( \Aimeos\MShop\Order\Item\Iface $order )
+	public function repay( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
-		$this->saveOrder( $order );
+		return $this->saveOrder( $order );
 	}
 
 
@@ -58,12 +57,13 @@ class PrePay
 	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
 	 * @throws \Aimeos\MShop\Service\Exception If updating the orders failed
 	 */
-	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request, \Aimeos\MShop\Order\Item\Iface $order )
+	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request,
+		\Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		if( $order->getPaymentStatus() === \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED )
 		{
 			$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
-			$this->saveOrder( $order );
+			$order = $this->saveOrder( $order );
 		}
 
 		return $order;
@@ -74,9 +74,9 @@ class PrePay
 	 * Checks what features the payment provider implements.
 	 *
 	 * @param int $what Constant from abstract class
-	 * @return boolean True if feature is available in the payment provider, false if not
+	 * @return bool True if feature is available in the payment provider, false if not
 	 */
-	public function isImplemented( $what )
+	public function isImplemented( int $what ) : bool
 	{
 		return $what === \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CANCEL;
 	}

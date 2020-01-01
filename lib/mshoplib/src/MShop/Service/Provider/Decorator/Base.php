@@ -48,7 +48,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item containing the price, shipping, rebate
 	 */
-	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		return $this->object->calcPrice( $basket );
 	}
@@ -61,7 +61,7 @@ abstract class Base
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		return $this->object->checkConfigBE( $attributes );
 	}
@@ -74,7 +74,7 @@ abstract class Base
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigFE( array $attributes )
+	public function checkConfigFE( array $attributes ) : array
 	{
 		return $this->object->checkConfigFE( $attributes );
 	}
@@ -86,7 +86,7 @@ abstract class Base
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return $this->object->getConfigBE();
 	}
@@ -99,7 +99,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
 	{
 		return $this->object->getConfigFE( $basket );
 	}
@@ -119,11 +119,12 @@ abstract class Base
 	 *
 	 * @param array $config Associative list of config keys and their value
 	 */
-	public function injectGlobalConfigBE( array $config )
+	public function injectGlobalConfigBE( array $config ) : \Aimeos\MShop\Service\Provider\Iface
 	{
 		parent::injectGlobalConfigBE( $config );
 
 		$this->object->injectGlobalConfigBE( $config );
+		return $this;
 	}
 
 
@@ -132,9 +133,9 @@ abstract class Base
 	 * Checks for country, currency, address, scoring, etc. should be implemented in separate decorators
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
-	 * @return boolean True if payment provider can be used, false if not
+	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
 		return $this->object->isAvailable( $basket );
 	}
@@ -144,9 +145,9 @@ abstract class Base
 	 * Checks what features the payment provider implements.
 	 *
 	 * @param int $what Constant from abstract class
-	 * @return boolean True if feature is available in the payment provider, false if not
+	 * @return bool True if feature is available in the payment provider, false if not
 	 */
-	public function isImplemented( $what )
+	public function isImplemented( int $what ) : bool
 	{
 		return $this->object->isImplemented( $what );
 	}
@@ -156,11 +157,11 @@ abstract class Base
 	 * Cancels the authorization for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function cancel( \Aimeos\MShop\Order\Item\Iface $order )
+	public function cancel( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$this->object->cancel( $order );
+		return $this->object->cancel( $order );
 	}
 
 
@@ -168,11 +169,11 @@ abstract class Base
 	 * Captures the money later on request for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function capture( \Aimeos\MShop\Order\Item\Iface $order )
+	public function capture( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$this->object->capture( $order );
+		return $this->object->capture( $order );
 	}
 
 
@@ -183,7 +184,7 @@ abstract class Base
 	 * @param array $params Request parameter if available
 	 * @return \Aimeos\MShop\Common\Helper\Form\Standard|null Form object or null
 	 */
-	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] )
+	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] ) : ?\Aimeos\MShop\Common\Helper\Form\Iface
 	{
 		return $this->object->process( $order, $params );
 	}
@@ -193,9 +194,9 @@ abstract class Base
 	 * Sends the details of all orders to the ERP system for further processing
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orders List of order invoice objects
-	 * @return null
+	 * @return \Aimeos\MShop\Order\Item\Iface[] Updated order item objects
 	 */
-	public function processBatch( array $orders )
+	public function processBatch( array $orders ) : array
 	{
 		return $this->object->processBatch( $orders );
 	}
@@ -205,24 +206,25 @@ abstract class Base
 	 * Refunds the money for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function refund( \Aimeos\MShop\Order\Item\Iface $order )
+	public function refund( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$this->object->refund( $order );
+		return $this->object->refund( $order );
 	}
 
 
 	/**
 	 * Executes the payment again for the given order if supported.
+	 *
 	 * This requires support of the payment gateway and token based payment
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function repay( \Aimeos\MShop\Order\Item\Iface $order )
+	public function repay( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$this->object->repay( $order );
+		return $this->object->repay( $order );
 	}
 
 
@@ -230,10 +232,11 @@ abstract class Base
 	 * Queries for status updates for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function query( \Aimeos\MShop\Order\Item\Iface $order )
+	public function query( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$this->object->query( $order );
+		return $this->object->query( $order );
 	}
 
 
@@ -244,7 +247,8 @@ abstract class Base
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item with attributes added
 	 */
-	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes )
+	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem,
+		array $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		return $this->object->setConfigFE( $orderServiceItem, $attributes );
 	}
@@ -254,10 +258,10 @@ abstract class Base
 	 * Looks for new update files and updates the orders for which status updates were received.
 	 * If batch processing of files isn't supported, this method can be empty.
 	 *
-	 * @return boolean True if the update was successful, false if async updates are not supported
+	 * @return bool True if the update was successful, false if async updates are not supported
 	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
-	public function updateAsync()
+	public function updateAsync() : bool
 	{
 		return $this->object->updateAsync();
 	}
@@ -270,7 +274,8 @@ abstract class Base
 	 * @param \Psr\Http\Message\ResponseInterface $response Response object
 	 * @return \Psr\Http\Message\ResponseInterface Response object
 	 */
-	public function updatePush( \Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response )
+	public function updatePush( \Psr\Http\Message\ServerRequestInterface $request,
+		\Psr\Http\Message\ResponseInterface $response ) : \Psr\Http\Message\ResponseInterface
 	{
 		return $this->object->updatePush( $request, $response );
 	}
@@ -284,7 +289,8 @@ abstract class Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
 	 * @throws \Aimeos\MShop\Service\Exception If updating the orders failed
 	 */
-	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request, \Aimeos\MShop\Order\Item\Iface $orderItem )
+	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request,
+		\Aimeos\MShop\Order\Item\Iface $orderItem ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		return $this->object->updateSync( $request, $orderItem );
 	}
@@ -295,7 +301,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Service\Provider\Iface Service provider object
 	 */
-	protected function getProvider()
+	protected function getProvider() : \Aimeos\MShop\Service\Provider\Iface
 	{
 		return $this->object;
 	}
@@ -309,7 +315,7 @@ abstract class Base
 	 * @return mixed Returns the value of the called method
 	 * @throws \Aimeos\MShop\Service\Exception If method call failed
 	 */
-	public function __call( $name, array $param )
+	public function __call( string $name, array $param )
 	{
 		return @call_user_func_array( array( $this->object, $name ), $param );
 	}

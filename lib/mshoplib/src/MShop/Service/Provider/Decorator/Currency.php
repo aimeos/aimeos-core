@@ -55,7 +55,7 @@ class Currency
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		$error = $this->getProvider()->checkConfigBE( $attributes );
 		$error += $this->checkConfig( $this->beConfig, $attributes );
@@ -70,7 +70,7 @@ class Currency
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return array_merge( $this->getProvider()->getConfigBE(), $this->getConfigItems( $this->beConfig ) );
 	}
@@ -82,9 +82,9 @@ class Currency
 	 * Checks if the country code is allowed for the service provider.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
-	 * @return boolean True if payment provider can be used, false if not
+	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
 		$code = strtoupper( $basket->getPrice()->getCurrencyId() );
 
@@ -103,8 +103,9 @@ class Currency
 	 *
 	 * @param string $code Three letter ISO currency code in upper case
 	 * @param string $key Configuration key referring to the currency code configuration
+	 * @return bool|null True if currency code is in the list, false if not, null if no codes are availble
 	 */
-	protected function checkCurrencyCode( $code, $key )
+	protected function checkCurrencyCode( string $code, string $key ) : ?bool
 	{
 		if( ( $str = $this->getConfigValue( array( $key ) ) ) === null ) {
 			return null;

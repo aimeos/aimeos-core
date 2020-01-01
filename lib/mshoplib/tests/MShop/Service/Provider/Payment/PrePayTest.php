@@ -55,6 +55,8 @@ class PrePayTest extends \PHPUnit\Framework\TestCase
 		$orderItem = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
+		$this->object->expects( $this->once() )->method( 'saveOrder' )->will( $this->returnArgument( 0 ) );
+
 		$result = $this->object->updateSync( $request, $orderItem );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );

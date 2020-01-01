@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Service\Provider;
  * @package MShop
  * @subpackage Service
  */
-abstract class Base
+abstract class Base implements Iface
 {
 	private $object;
 	private $context;
@@ -46,7 +46,7 @@ abstract class Base
 	 * @param array $param List of method parameter
 	 * @throws \Aimeos\MShop\Service\Exception If method call failed
 	 */
-	public function __call( $name, array $param )
+	public function __call( string $name, array $param )
 	{
 		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
 	}
@@ -60,7 +60,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item containing the price, shipping, rebate
 	 */
-	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$prices = $this->serviceItem->getRefItems( 'price', 'default', 'default' );
@@ -80,7 +80,7 @@ abstract class Base
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		return [];
 	}
@@ -93,7 +93,7 @@ abstract class Base
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	public function checkConfigFE( array $attributes )
+	public function checkConfigFE( array $attributes ) : array
 	{
 		return [];
 	}
@@ -105,7 +105,7 @@ abstract class Base
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return [];
 	}
@@ -118,7 +118,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
 	{
 		return [];
 	}
@@ -129,7 +129,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item
 	 */
-	public function getServiceItem()
+	public function getServiceItem() : \Aimeos\MShop\Service\Item\Iface
 	{
 		return $this->serviceItem;
 	}
@@ -150,7 +150,7 @@ abstract class Base
 	 * @param array $config Associative list of config keys and their value
 	 * @return \Aimeos\MShop\Service\Provider\Iface Provider object for chaining method calls
 	 */
-	public function injectGlobalConfigBE( array $config )
+	public function injectGlobalConfigBE( array $config ) : \Aimeos\MShop\Service\Provider\Iface
 	{
 		$this->beGlobalConfig = $config;
 		return $this;
@@ -162,9 +162,9 @@ abstract class Base
 	 * Checks for country, currency, address, RMS, etc. -> in separate decorators
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
-	 * @return boolean True if payment provider can be used, false if not
+	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
 		return true;
 	}
@@ -174,9 +174,9 @@ abstract class Base
 	 * Checks what features the payment provider implements.
 	 *
 	 * @param int $what Constant from abstract class
-	 * @return boolean True if feature is available in the payment provider, false if not
+	 * @return bool True if feature is available in the payment provider, false if not
 	 */
-	public function isImplemented( $what )
+	public function isImplemented( int $what ) : bool
 	{
 		return false;
 	}
@@ -186,8 +186,9 @@ abstract class Base
 	 * Queries for status updates for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	public function query( \Aimeos\MShop\Order\Item\Iface $order )
+	public function query( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', 'query' ) );
 	}
@@ -199,7 +200,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Plugin\Provider\Iface $object First object of the decorator stack
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object )
+	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object ) : \Aimeos\MShop\Plugin\Provider\Iface
 	{
 		$this->object = $object;
 		return $this;
@@ -210,10 +211,10 @@ abstract class Base
 	 * Looks for new update files and updates the orders for which status updates were received.
 	 * If batch processing of files isn't supported, this method can be empty.
 	 *
-	 * @return boolean True if the update was successful, false if async updates are not supported
+	 * @return bool True if the update was successful, false if async updates are not supported
 	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
-	public function updateAsync()
+	public function updateAsync() : bool
 	{
 		return false;
 	}
@@ -226,7 +227,8 @@ abstract class Base
 	 * @param \Psr\Http\Message\ResponseInterface $response Response object
 	 * @return \Psr\Http\Message\ResponseInterface Response object
 	 */
-	public function updatePush( \Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response )
+	public function updatePush( \Psr\Http\Message\ServerRequestInterface $request,
+		\Psr\Http\Message\ResponseInterface $response ) : \Psr\Http\Message\ResponseInterface
 	{
 		return $response->withStatus( 501, 'Not implemented' );
 	}
@@ -240,7 +242,8 @@ abstract class Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
 	 * @throws \Aimeos\MShop\Service\Exception If updating the orders failed
 	 */
-	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request, \Aimeos\MShop\Order\Item\Iface $order )
+	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request,
+		\Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		return $order;
 	}
@@ -254,7 +257,7 @@ abstract class Base
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	protected function checkConfig( array $criteria, array $map )
+	protected function checkConfig( array $criteria, array $map ) : array
 	{
 		$helper = new \Aimeos\MShop\Common\Helper\Config\Standard( $this->getConfigItems( $criteria ) );
 		return $helper->check( $map );
@@ -266,7 +269,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of criteria attribute items
 	 */
-	protected function getConfigItems( array $configList )
+	protected function getConfigItems( array $configList ) : array
 	{
 		$list = [];
 
@@ -311,7 +314,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item
 	 */
-	protected function getContext()
+	protected function getContext() : \Aimeos\MShop\Context\Item\Iface
 	{
 		return $this->context;
 	}
@@ -323,9 +326,11 @@ abstract class Base
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
 	 * @param bool $costs Include costs per item
 	 * @param bool $tax Include tax
+	 * @param int $precision Number for decimal digits
 	 * @return string Formatted money amount
 	 */
-	protected function getAmount( \Aimeos\MShop\Price\Item\Iface $price, $costs = true, $tax = true, $precision = null )
+	protected function getAmount( \Aimeos\MShop\Price\Item\Iface $price, bool $costs = true, bool $tax = true,
+		int $precision = null ) : string
 	{
 		$amount = $price->getValue();
 
@@ -361,7 +366,8 @@ abstract class Base
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item
 	 * @throws \Aimeos\MShop\Order\Exception If no service for the given type and code is found
 	 */
-	protected function getBasketService( \Aimeos\MShop\Order\Item\Base\Iface $basket, $type, $code )
+	protected function getBasketService( \Aimeos\MShop\Order\Item\Base\Iface $basket, string $type,
+		string $code ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		foreach( $basket->getService( $type ) as $service )
 		{
@@ -379,7 +385,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Service\Provider\Iface First object of the decorator stack
 	 */
-	protected function getObject()
+	protected function getObject() : \Aimeos\MShop\Service\Provider\Iface
 	{
 		if( $this->object !== null ) {
 			return $this->object;
@@ -395,7 +401,7 @@ abstract class Base
 	 * @param string $id Unique order ID
 	 * @return \Aimeos\MShop\Order\Item\Iface $item Order object
 	 */
-	protected function getOrder( $id )
+	protected function getOrder( string $id ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'order' );
 
@@ -423,7 +429,8 @@ abstract class Base
 	 * @param int $parts Bitmap of the basket parts that should be loaded
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket, optional with addresses, products, services and coupons
 	 */
-	protected function getOrderBase( $baseId, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE )
+	protected function getOrderBase( string $baseId,
+		int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		return \Aimeos\MShop::create( $this->context, 'order/base' )->load( $baseId, $parts );
 	}
@@ -435,7 +442,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Order object
 	 * @return \Aimeos\MShop\Order\Item\Iface Order object including the generated ID
 	 */
-	protected function saveOrder( \Aimeos\MShop\Order\Item\Iface $item )
+	protected function saveOrder( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		return \Aimeos\MShop::create( $this->context, 'order' )->saveItem( $item );
 	}
@@ -448,7 +455,7 @@ abstract class Base
 	 * @param string $type Type of the value that should be returned
 	 * @return string|null Service data or null if none is available
 	 */
-	protected function getCustomerData( $customerId, $type )
+	protected function getCustomerData( string $customerId, string $type ) : ?string
 	{
 		if( $customerId != null )
 		{
@@ -460,6 +467,8 @@ abstract class Base
 				return $listItem->getConfigValue( $type );
 			}
 		}
+
+		return null;
 	}
 
 
@@ -470,7 +479,8 @@ abstract class Base
 	 * @param int $parts Bitmap of the basket parts that should be stored
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Stored order base item
 	 */
-	protected function saveOrderBase( \Aimeos\MShop\Order\Item\Base\Iface $base, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE )
+	protected function saveOrderBase( \Aimeos\MShop\Order\Item\Base\Iface $base,
+		int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		return \Aimeos\MShop::create( $this->context, 'order/base' )->store( $base, $parts );
 	}
@@ -484,7 +494,8 @@ abstract class Base
 	 * @param string $type Type of the configuration values (delivery or payment)
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Modified order service item
 	 */
-	protected function setAttributes( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes, $type )
+	protected function setAttributes( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes,
+		string $type ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'order/base/service/attribute' );
 
@@ -510,7 +521,7 @@ abstract class Base
 	 * @param string|array $data Service data to store
 	 * @param \Aimeos\MShop\Service\Provider\Iface Provider object for chaining method calls
 	 */
-	protected function setCustomerData( $customerId, $type, $data )
+	protected function setCustomerData( string $customerId, string $type, $data ) : \Aimeos\MShop\Service\Provider\Iface
 	{
 		if( $customerId != null )
 		{

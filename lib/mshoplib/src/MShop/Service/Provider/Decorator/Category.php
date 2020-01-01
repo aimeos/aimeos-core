@@ -55,7 +55,7 @@ class Category
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		$error = $this->getProvider()->checkConfigBE( $attributes );
 		$error += $this->checkConfig( $this->beConfig, $attributes );
@@ -70,21 +70,19 @@ class Category
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return array_merge( $this->getProvider()->getConfigBE(), $this->getConfigItems( $this->beConfig ) );
 	}
-
-
 
 
 	/**
 	 * Checks if the products are withing the allowed code is allowed for the service provider.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
-	 * @return boolean True if payment provider can be used, false if not
+	 * @return bool True if payment provider can be used, false if not
 	 */
-	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
 		$catalogIds = $this->getRefCatalogIds( $this->getProductIds( $basket ) );
 
@@ -103,9 +101,9 @@ class Category
 	 *
 	 * @param array $catalogIds List of category IDs
 	 * @param string $key Configuration key (category.include or category.exclude)
-	 * @return boolean|null True if one catalog code is part of the config, false if not, null for no configuration
+	 * @return bool|null True if one catalog code is part of the config, false if not, null for no configuration
 	 */
-	protected function checkCategories( array $catalogIds, $key )
+	protected function checkCategories( array $catalogIds, string $key ) : ?bool
 	{
 		if( ( $codes = $this->getConfigValue( array( $key ) ) ) == null ) {
 			return null;
@@ -124,7 +122,7 @@ class Category
 	 * @param array $catalogCodes List of catalog codes
 	 * @return array List of catalog IDs
 	 */
-	protected function getCatalogIds( array $catalogCodes )
+	protected function getCatalogIds( array $catalogCodes ) : array
 	{
 		$catalogManager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
 
@@ -145,7 +143,7 @@ class Category
 	 * @param \Aimeos\MShop\Catalog\Item\Iface $catalogItem Catalog node object
 	 * @return array List of catalog IDs
 	 */
-	protected function getNodeCatalogIds( \Aimeos\MShop\Catalog\Item\Iface $catalogItem )
+	protected function getNodeCatalogIds( \Aimeos\MShop\Catalog\Item\Iface $catalogItem ) : array
 	{
 		$catalogIds = array( $catalogItem->getId() );
 
@@ -166,7 +164,7 @@ class Category
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object with ordered products included
 	 * @return array List of proudct IDs
 	 */
-	protected function getProductIds( \Aimeos\MShop\Order\Item\Base\Iface $basket )
+	protected function getProductIds( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
 	{
 		$productIds = [];
 
@@ -184,7 +182,7 @@ class Category
 	 * @param array $productIds List of product IDs
 	 * @return array List of catalog IDs
 	 */
-	protected function getRefCatalogIds( array $productIds )
+	protected function getRefCatalogIds( array $productIds ) : array
 	{
 		if( empty( $productIds ) ) {
 			return [];
@@ -211,7 +209,7 @@ class Category
 	 * @param array $catalogIds List of catalog IDs
 	 * @return array List of catalog codes
 	 */
-	protected function getTreeCatalogIds( array $catalogIds )
+	protected function getTreeCatalogIds( array $catalogIds ) : array
 	{
 		$ids = [];
 		$catalogManager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );

@@ -59,6 +59,8 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
 
+		$this->orderMock->expects( $this->any() )->method( 'saveItem' )->will( $this->returnArgument( 0 ) );
+
 		$this->context->getConfig()->set( 'mshop/order/manager/name', 'MockPayPal' );
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\MockPayPal', $this->orderMock );
 	}

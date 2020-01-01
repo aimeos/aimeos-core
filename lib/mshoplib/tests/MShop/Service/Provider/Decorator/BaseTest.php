@@ -33,7 +33,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			->setConstructorArgs( array( $this->context, $item ) )
 			->setMethods( array( 'calcPrice', 'checkConfigBE', 'checkConfigFE', 'getConfigBE',
 				'getConfigFE', 'injectGlobalConfigBE', 'isAvailable', 'isImplemented', 'query',
-				'cancel', 'capture', 'process', 'refund', 'repay', 'setCommunication', 'setConfigFE',
+				'cancel', 'capture', 'process', 'refund', 'repay', 'setConfigFE',
 				'updateAsync', 'updatePush', 'updateSync' ) )
 			->getMock();
 
@@ -41,12 +41,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -99,7 +93,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testInjectGlobalConfigBE()
 	{
-		$this->mock->expects( $this->once() )->method( 'injectGlobalConfigBE' );
+		$this->mock->expects( $this->once() )->method( 'injectGlobalConfigBE' )->will( $this->returnSelf() );
 
 		$this->object->injectGlobalConfigBE( [] );
 	}
@@ -228,7 +222,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 }
 
 
-class TestBase extends \Aimeos\MShop\Service\Provider\Decorator\Base
+class TestBase
+	extends \Aimeos\MShop\Service\Provider\Decorator\Base
+	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
 
 }

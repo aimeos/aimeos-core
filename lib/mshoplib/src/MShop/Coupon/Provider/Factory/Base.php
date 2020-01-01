@@ -31,7 +31,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon item
 	 * @param string $code Coupon code entered by the customer
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $item, $code )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $item, string $code )
 	{
 		parent::__construct( $context, $item, $code );
 	}
