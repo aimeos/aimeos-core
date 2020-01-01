@@ -27,7 +27,7 @@ interface Iface extends \Aimeos\MW\Observer\Listener\Iface
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	public function checkConfigBE( array $attributes );
+	public function checkConfigBE( array $attributes ) : array;
 
 	/**
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
@@ -35,7 +35,7 @@ interface Iface extends \Aimeos\MW\Observer\Listener\Iface
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE();
+	public function getConfigBE() : array;
 
 	/**
 	 * Injects the outer object into the decorator stack
@@ -43,5 +43,5 @@ interface Iface extends \Aimeos\MW\Observer\Listener\Iface
 	 * @param \Aimeos\MShop\Plugin\Provider\Iface $object First object of the decorator stack
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object );
+	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object ) : \Aimeos\MShop\Plugin\Provider\Iface;
 }

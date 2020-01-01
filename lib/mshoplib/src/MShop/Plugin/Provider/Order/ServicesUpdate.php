@@ -37,7 +37,7 @@ class ServicesUpdate
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
 		$plugin = $this->getObject();
 
@@ -64,7 +64,7 @@ class ServicesUpdate
 	 * @param mixed $value Object or value changed in publisher
 	 * @return mixed Modified value parameter
 	 */
-	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
@@ -122,7 +122,7 @@ class ServicesUpdate
 	 * 	of items implementing \Aimeos\MShop\Order\Item\Base\Service\Iface as values
 	 * @return \Aimeos\MShop\Service\Item\Iface[] List of service items with IDs as keys and items as values
 	 */
-	protected function getServiceItems( array $services )
+	protected function getServiceItems( array $services ) : array
 	{
 		$list = [];
 

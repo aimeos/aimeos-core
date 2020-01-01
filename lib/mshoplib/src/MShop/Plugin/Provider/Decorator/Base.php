@@ -47,7 +47,7 @@ abstract class Base
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		return $this->provider->checkConfigBE( $attributes );
 	}
@@ -59,7 +59,7 @@ abstract class Base
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return $this->provider->getConfigBE();
 	}
@@ -70,9 +70,10 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
 		$this->provider->register( $p );
+		return $this;
 	}
 
 
@@ -84,7 +85,7 @@ abstract class Base
 	 * @param mixed $value Object or value changed in publisher
 	 * @return mixed Modified value parameter
 	 */
-	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
 		return $this->provider->update( $order, $action, $value );
 	}
@@ -96,7 +97,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Plugin\Provider\Iface $object First object of the decorator stack
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object )
+	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object ) : \Aimeos\MShop\Plugin\Provider\Iface
 	{
 		parent::setObject( $object );
 
@@ -111,7 +112,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Provider or decorator object
 	 */
-	protected function getProvider()
+	protected function getProvider() : \Aimeos\MShop\Plugin\Provider\Iface
 	{
 		return $this->provider;
 	}

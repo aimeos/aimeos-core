@@ -40,7 +40,7 @@ class ProductStock
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
 		$p->attach( $this->getObject(), 'check.after' );
 		return $this;
@@ -56,7 +56,7 @@ class ProductStock
 	 * @return mixed Modified value parameter
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if checks fail
 	 */
-	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
 		if( ( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) === 0 ) {
 			return $value;
@@ -80,7 +80,7 @@ class ProductStock
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket object
 	 * @return array Associative list of basket product positions as keys and the error codes as values
 	 */
-	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order )
+	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order ) : array
 	{
 		$productCodes = $stockTypes = $stockMap = [];
 
@@ -108,7 +108,7 @@ class ProductStock
 	 * @param array $stockMap Multi-dimensional associative list of product ID / stock type as keys and stock level as values
 	 * @return array Associative list of basket positions as keys and error codes as values
 	 */
-	protected function checkStockLevels( \Aimeos\MShop\Order\Item\Base\Iface $order, array $stockMap )
+	protected function checkStockLevels( \Aimeos\MShop\Order\Item\Base\Iface $order, array $stockMap ) : array
 	{
 		$outOfStock = [];
 		$products = $order->getProducts();
@@ -155,7 +155,7 @@ class ProductStock
 	 * @param array|string $types Unique stock types to limit the stock items
 	 * @return array Associative list of stock item IDs as keys and items implementing \Aimeos\MShop\Stock\Item\Iface as values
 	 */
-	protected function getStockItems( $codes, $types )
+	protected function getStockItems( $codes, $types ) : array
 	{
 		$stockManager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
 

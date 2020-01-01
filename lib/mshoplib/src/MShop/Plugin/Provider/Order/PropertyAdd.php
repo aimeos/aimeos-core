@@ -67,7 +67,7 @@ class PropertyAdd
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		$errors = parent::checkConfigBE( $attributes );
 
@@ -81,7 +81,7 @@ class PropertyAdd
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return $this->getConfigItems( $this->beConfig );
 	}
@@ -93,7 +93,7 @@ class PropertyAdd
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
 		$plugin = $this->getObject();
 
@@ -112,7 +112,7 @@ class PropertyAdd
 	 * @param mixed $value Object or value changed in publisher
 	 * @return mixed Modified value parameter
 	 */
-	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
 		if( ( $types = (array) $this->getItemBase()->getConfigValue( 'types', [] ) ) === [] ) {
 			return $value;
@@ -150,10 +150,11 @@ class PropertyAdd
 	 * @param string[] $types List of property types to add
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Modified order product item
 	 */
-	protected function addAttributes( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct, array $products, array $types )
+	protected function addAttributes( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct,
+		array $products, array $types ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		if( !isset( $products[$orderProduct->getProductId()] ) ) {
-			return;
+			return $orderProduct;
 		}
 
 		$product = $products[$orderProduct->getProductId()];
@@ -189,7 +190,7 @@ class PropertyAdd
 	 * @param string[] $productIds List of product IDs
 	 * @return \Aimeos\MShop\Product\Item\Iface[] Found product items
 	 */
-	protected function getProductItems( array $productIds )
+	protected function getProductItems( array $productIds ) : array
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 		$search = $manager->createSearch( true );

@@ -56,7 +56,7 @@ class Shipping
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		$errors = parent::checkConfigBE( $attributes );
 
@@ -70,7 +70,7 @@ class Shipping
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return $this->getConfigItems( $this->beConfig );
 	}
@@ -82,7 +82,7 @@ class Shipping
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
 		$plugin = $this->getObject();
 
@@ -109,7 +109,7 @@ class Shipping
 	 * @param mixed $value Object or value changed in publisher
 	 * @return mixed Modified value parameter
 	 */
-	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
@@ -144,10 +144,10 @@ class Shipping
 	 * Tests if the shipping threshold is reached and updates the price accordingly
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $orderProducts List of ordered products
-	 * @param array $threshold Associative list of currency/threshold pairs
-	 * @return boolean True if threshold is reached, false if not
+	 * @param string $threshold Threshold for the actual currency
+	 * @return bool True if threshold is reached, false if not
 	 */
-	protected function checkThreshold( array $orderProducts, $threshold )
+	protected function checkThreshold( array $orderProducts, string $threshold ) : bool
 	{
 		$sum = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
 

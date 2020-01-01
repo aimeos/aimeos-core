@@ -45,7 +45,7 @@ abstract class Base
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		return [];
 	}
@@ -57,7 +57,7 @@ abstract class Base
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return [];
 	}
@@ -69,7 +69,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Plugin\Provider\Iface $object First object of the decorator stack
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object )
+	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object ) : \Aimeos\MShop\Plugin\Provider\Iface
 	{
 		$this->object = $object;
 		return $this;
@@ -84,7 +84,7 @@ abstract class Base
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	protected function checkConfig( array $criteria, array $map )
+	protected function checkConfig( array $criteria, array $map ) : array
 	{
 		$helper = new \Aimeos\MShop\Common\Helper\Config\Standard( $this->getConfigItems( $criteria ) );
 		return $helper->check( $map );
@@ -96,7 +96,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of criteria attribute items
 	 */
-	protected function getConfigItems( array $configList )
+	protected function getConfigItems( array $configList ) : array
 	{
 		$list = [];
 
@@ -113,7 +113,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface First object of the decorator stack
 	 */
-	protected function getObject()
+	protected function getObject() : \Aimeos\MShop\Plugin\Provider\Iface
 	{
 		if( $this->object !== null ) {
 			return $this->object;
@@ -128,7 +128,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item object
 	 */
-	protected function getItemBase()
+	protected function getItemBase() : \Aimeos\MShop\Plugin\Item\Iface
 	{
 		return $this->item;
 	}
@@ -139,9 +139,9 @@ abstract class Base
 	 *
 	 * @param string $key Configuration key
 	 * @param mixed $default Default value if configuration key isn't available
-	 * @return string|null Value from service item configuration
+	 * @return mixed Value from service item configuration
 	 */
-	protected function getConfigValue( $key, $default = null )
+	protected function getConfigValue( string $key, $default = null )
 	{
 		$config = $this->item->getConfig();
 
@@ -158,7 +158,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item object
 	 */
-	protected function getContext()
+	protected function getContext() : \Aimeos\MShop\Context\Item\Iface
 	{
 		return $this->context;
 	}

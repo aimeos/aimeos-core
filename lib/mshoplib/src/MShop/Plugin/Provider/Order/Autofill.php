@@ -126,7 +126,7 @@ class Autofill
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		$errors = parent::checkConfigBE( $attributes );
 
@@ -140,7 +140,7 @@ class Autofill
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return $this->getConfigItems( $this->beConfig );
 	}
@@ -152,7 +152,7 @@ class Autofill
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
 		$plugin = $this->getObject();
 
@@ -172,7 +172,7 @@ class Autofill
 	 * @return mixed Modified value parameter
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if an error occurs
 	 */
-	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
@@ -215,7 +215,8 @@ class Autofill
 	 * @param string|null $code Service item code
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface|null Order service item if available or null otherwise
 	 */
-	protected function getServiceItem( \Aimeos\MShop\Order\Item\Base\Iface $order, $type, $code = null )
+	protected function getServiceItem( \Aimeos\MShop\Order\Item\Base\Iface $order, string $type,
+		string $code = null ) : ?\Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		$context = $this->getContext();
 		$serviceManager = \Aimeos\MShop::create( $context, 'service' );
@@ -246,6 +247,8 @@ class Autofill
 					->copyFrom( $item )->setPrice( $provider->calcPrice( $order ) );
 			}
 		}
+
+		return null;
 	}
 
 
@@ -254,8 +257,10 @@ class Autofill
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Basket object
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Existing order to fetch the addresses from
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Updated basket object
 	 */
-	protected function setAddresses( \Aimeos\MShop\Order\Item\Base\Iface $order, \Aimeos\MShop\Order\Item\Iface $item )
+	protected function setAddresses( \Aimeos\MShop\Order\Item\Base\Iface $order,
+		\Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$addresses = $order->getAddresses();
 
@@ -271,6 +276,8 @@ class Autofill
 
 			$order->setAddresses( $addresses );
 		}
+
+		return $order;
 	}
 
 
@@ -279,8 +286,10 @@ class Autofill
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Basket object
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Existing order to fetch the services from
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Updated basket object
 	 */
-	protected function setServices( \Aimeos\MShop\Order\Item\Base\Iface $order, \Aimeos\MShop\Order\Item\Iface $item )
+	protected function setServices( \Aimeos\MShop\Order\Item\Base\Iface $order,
+		\Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$services = $order->getServices();
 
@@ -301,6 +310,8 @@ class Autofill
 
 			$order->setServices( $services );
 		}
+
+		return $order;
 	}
 
 
@@ -308,8 +319,9 @@ class Autofill
 	 * Adds the default addresses to the basket if they are not available.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Basket object
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Updated basket object
 	 */
-	protected function setAddressDefault( \Aimeos\MShop\Order\Item\Base\Iface $order )
+	protected function setAddressDefault( \Aimeos\MShop\Order\Item\Base\Iface $order ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$context = $this->getContext();
 		$addresses = $order->getAddresses();
@@ -326,6 +338,8 @@ class Autofill
 
 			$order->addAddress( $addrItem, $type );
 		}
+
+		return $order;
 	}
 
 
@@ -333,8 +347,9 @@ class Autofill
 	 * Adds the default services to the basket if they are not available.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Basket object
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Updated basket object
 	 */
-	protected function setServicesDefault( \Aimeos\MShop\Order\Item\Base\Iface $order )
+	protected function setServicesDefault( \Aimeos\MShop\Order\Item\Base\Iface $order ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
 
@@ -354,5 +369,7 @@ class Autofill
 		) {
 			$order->addService( $item, $type );
 		}
+
+		return $order;
 	}
 }

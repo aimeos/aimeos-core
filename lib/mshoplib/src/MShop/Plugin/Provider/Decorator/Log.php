@@ -26,7 +26,7 @@ class Log
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
 		$level = \Aimeos\MW\Logger\Base::DEBUG;
 		$class = get_class( $this->getProvider() );
@@ -34,6 +34,8 @@ class Log
 		$this->getContext()->getLogger()->log( 'Plugin::register: ' . $class, $level, 'core/plugin' );
 
 		$this->getProvider()->register( $p );
+
+		return $this;
 	}
 
 
@@ -45,7 +47,7 @@ class Log
 	 * @param mixed $value Object or value changed in publisher
 	 * @return mixed Modified value parameter
 	 */
-	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
 		$level = \Aimeos\MW\Logger\Base::DEBUG;
 		$class = get_class( $this->getProvider() );

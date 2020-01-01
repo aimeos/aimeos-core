@@ -55,7 +55,7 @@ class ProductPrice
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid
 	 */
-	public function checkConfigBE( array $attributes )
+	public function checkConfigBE( array $attributes ) : array
 	{
 		$errors = parent::checkConfigBE( $attributes );
 
@@ -69,7 +69,7 @@ class ProductPrice
 	 *
 	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigBE()
+	public function getConfigBE() : array
 	{
 		return $this->getConfigItems( $this->beConfig );
 	}
@@ -81,7 +81,7 @@ class ProductPrice
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
 		$p->attach( $this->getObject(), 'check.after' );
 		return $this;
@@ -97,7 +97,7 @@ class ProductPrice
 	 * @return mixed Modified value parameter
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if checks fail
 	 */
-	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
 		if( ( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) === 0 ) {
 			return $value;
@@ -169,7 +169,7 @@ class ProductPrice
 	 * @param array $list List of attribute IDs
 	 * @return \Aimeos\MShop\Attribute\Item\Iface[] List of attribute items
 	 */
-	protected function getAttributeItems( array $list )
+	protected function getAttributeItems( array $list ) : array
 	{
 		if( $list !== [] )
 		{
@@ -192,7 +192,7 @@ class ProductPrice
 	 * @param string[] $prodCodes Product codes
 	 * @return \Aimeos\MShop\Product\Item\Iface[] Associative list of codes as keys and product items as values
 	 */
-	protected function getProductItems( array $prodCodes )
+	protected function getProductItems( array $prodCodes ) : array
 	{
 		if( empty( $prodCodes ) ) {
 			return [];
@@ -231,7 +231,8 @@ class ProductPrice
 	 * @param int $pos Position of the product in the basket
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item including the calculated price
 	 */
-	private function getPrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct, array $refPrices, array $attributes, $pos )
+	private function getPrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct, array $refPrices,
+		array $attributes, int $pos ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$context = $this->getContext();
 

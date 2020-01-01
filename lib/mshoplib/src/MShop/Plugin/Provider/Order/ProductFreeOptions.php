@@ -27,7 +27,7 @@ class ProductFreeOptions
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
 		$plugin = $this->getObject();
 
@@ -46,7 +46,7 @@ class ProductFreeOptions
 	 * @param mixed $value Object or value changed in publisher
 	 * @return mixed Modified value parameter
 	 */
-	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
 		if( is_array( $value ) )
 		{
@@ -72,7 +72,8 @@ class ProductFreeOptions
 	 * @param int $free Number of free items
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with attribute prices added
 	 */
-	protected function addPrices( \Aimeos\MShop\Price\Item\Iface $price, array $attrItems, array $quantities, $free )
+	protected function addPrices( \Aimeos\MShop\Price\Item\Iface $price, array $attrItems, array $quantities,
+		int $free ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$priceManager = \Aimeos\MShop::create( $this->getContext(), 'price' );
 
@@ -103,7 +104,7 @@ class ProductFreeOptions
 	 * @param array $ids List of attribute IDs
 	 * @return array Associative List of attribute type and ID as keys and \Aimeos\MShop\Attribute\Item\Iface as values
 	 */
-	protected function getAttributeMap( array $ids )
+	protected function getAttributeMap( array $ids ) : array
 	{
 		$attrMap = [];
 		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
@@ -126,7 +127,7 @@ class ProductFreeOptions
 	 * @param array $attrQtys Associative list of attribute IDs as keys and their quantities as values
 	 * @return \Aimeos\MShop\Attribute\Item\Iface[] Sorted associative list of attribute IDs as keys and items as values
 	 */
-	protected function sortByPrice( array $attrItems, array $attrQtys )
+	protected function sortByPrice( array $attrItems, array $attrQtys ) : array
 	{
 		$priceManager = \Aimeos\MShop::create( $this->getContext(), 'price' );
 
@@ -166,7 +167,7 @@ class ProductFreeOptions
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $product Ordered product for updating the price
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Ordered product with updated price
 	 */
-	protected function updatePrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $product )
+	protected function updatePrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $product ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		$attrQtys = $attrTypes = [];
 		$context = $this->getContext();

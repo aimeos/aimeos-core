@@ -42,11 +42,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 class TestListener implements \Aimeos\MW\Observer\Listener\Iface
 {
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
+		return $this;
 	}
 
-	public function update( \Aimeos\MW\Observer\Publisher\Iface $p, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $p, string $action, $value = null )
 	{
 		return $value;
 	}
