@@ -61,7 +61,7 @@ class AttributeMigrateKey extends \Aimeos\MW\Setup\Task\Base
 			$stmt = $conn->create( $update );
 			$result = $conn->create( $select )->execute();
 
-			while( ( $row = $result->fetch() ) !== false )
+			while( ( $row = $result->fetch() ) !== null )
 			{
 				$stmt->bind( 1, md5( $row['domain'] . '|' . $row['type'] . '|' . $row['code'] ) );
 				$stmt->bind( 2, $row['id'] );

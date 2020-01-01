@@ -717,7 +717,7 @@ class Standard
 			$plugins = ['attribute.key' => new \Aimeos\MW\Criteria\Plugin\Md5()];
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level, $plugins );
 
-			while( ( $row = $results->fetch() ) !== false ) {
+			while( ( $row = $results->fetch() ) !== null ) {
 				$map[(string) $row['attribute.id']] = $row;
 			}
 

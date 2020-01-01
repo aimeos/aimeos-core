@@ -243,7 +243,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			$stmt->bind( 2, $numlevel, $this->searchConfig['level']['internaltype'] );
 			$result = $stmt->execute();
 
-			if( ( $row = $result->fetch() ) === false ) {
+			if( ( $row = $result->fetch() ) === null ) {
 				throw new \Aimeos\MW\Tree\Exception( sprintf( 'No node with ID "%1$d" found', $id ) );
 			}
 
@@ -588,7 +588,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			try
 			{
 				$nodes = [];
-				while( ( $row = $result->fetch() ) !== false ) {
+				while( ( $row = $result->fetch() ) !== null ) {
 					$nodes[$row['id']] = $this->createNodeBase( $row );
 				}
 			}
@@ -715,7 +715,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 */
 	protected function createTree( \Aimeos\MW\DB\Result\Iface $result, \Aimeos\MW\Tree\Node\Iface $node ) : ?\Aimeos\MW\Tree\Node\Iface
 	{
-		while( ( $record = $result->fetch() ) !== false )
+		while( ( $record = $result->fetch() ) !== null )
 		{
 			$newNode = $this->createNodeBase( $record );
 
@@ -790,7 +790,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			$stmt->bind( 2, 0, $this->searchConfig['level']['internaltype'] );
 			$result = $stmt->execute();
 
-			if( ( $row = $result->fetch() ) === false ) {
+			if( ( $row = $result->fetch() ) === null ) {
 				throw new \Aimeos\MW\Tree\Exception( sprintf( 'No node with ID "%1$d" found', $id ) );
 			}
 

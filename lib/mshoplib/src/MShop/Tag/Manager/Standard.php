@@ -589,7 +589,8 @@ class Standard
 			$cfgPathCount = 'mshop/tag/manager/standard/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-			while( ( $row = $results->fetch() ) !== false ) {
+
+			while( ( $row = $results->fetch() ) !== null ) {
 				$items[(string) $row['tag.id']] = $this->createItemBase( $row );
 			}
 

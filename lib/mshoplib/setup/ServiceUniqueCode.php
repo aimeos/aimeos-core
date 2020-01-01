@@ -49,7 +49,7 @@ class ServiceUniqueCode extends \Aimeos\MW\Setup\Task\Base
 			$conn = $this->acquire( 'db-service' );
 			$result = $conn->create( $this->select )->execute();
 
-			while( ( $row = $result->fetch() ) !== false ) {
+			while( ( $row = $result->fetch() ) !== null ) {
 				$list[] = $row['code'];
 			}
 			$result->finish();

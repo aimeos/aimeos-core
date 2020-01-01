@@ -685,7 +685,7 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false )
+			while( ( $row = $results->fetch() ) !== null )
 			{
 				if( ( $row['service.config'] = json_decode( $config = $row['service.config'], true ) ) === null )
 				{

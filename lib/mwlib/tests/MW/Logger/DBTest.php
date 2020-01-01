@@ -89,7 +89,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 		self::$dbm->release( $conn );
 
-		if( $row === false ) {
+		if( $row === null ) {
 			throw new \RuntimeException( 'No log record found' );
 		}
 
@@ -118,7 +118,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 		self::$dbm->release( $conn );
 
-		if( $row === false ) {
+		if( $row === null ) {
 			throw new \RuntimeException( 'No log record found' );
 		}
 
@@ -141,7 +141,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 		self::$dbm->release( $conn );
 
-		if( $row === false ) {
+		if( $row === null ) {
 			throw new \RuntimeException( 'No log record found' );
 		}
 
@@ -163,7 +163,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 		self::$dbm->release( $conn );
 
-		if( $row !== false ) {
+		if( $row !== null ) {
 			throw new \RuntimeException( 'Log record found but none expected' );
 		}
 	}
@@ -180,7 +180,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 		self::$dbm->release( $conn );
 
-		if( $row === false ) {
+		if( $row === null ) {
 			throw new \RuntimeException( 'No log record found' );
 		}
 

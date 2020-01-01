@@ -197,7 +197,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		self::$dbm->release( $conn );
 
 		$this->assertEquals( array( 'id' => 't:1' ), $result->fetch() );
-		$this->assertFalse( $result->fetch() );
+		$this->assertNull( $result->fetch() );
 	}
 
 
@@ -209,7 +209,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$row = $conn->create( 'SELECT * FROM "mw_cache_tag_test"' )->execute()->fetch();
 		self::$dbm->release( $conn );
 
-		$this->assertFalse( $row );
+		$this->assertNull( $row );
 
 
 		$conn = self::$dbm->acquire();
@@ -217,7 +217,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		self::$dbm->release( $conn );
 
 		$this->assertEquals( array( 'id' => 't:2' ), $result->fetch() );
-		$this->assertFalse( $result->fetch() );
+		$this->assertNull( $result->fetch() );
 	}
 
 
@@ -229,7 +229,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$row = $conn->create( 'SELECT * FROM "mw_cache_test"' )->execute()->fetch();
 		self::$dbm->release( $conn );
 
-		$this->assertFalse( $row );
+		$this->assertNull( $row );
 	}
 
 
@@ -241,7 +241,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$row = $conn->create( 'SELECT * FROM "mw_cache_tag_test"' )->execute()->fetch();
 		self::$dbm->release( $conn );
 
-		$this->assertFalse( $row );
+		$this->assertNull( $row );
 
 
 		$conn = self::$dbm->acquire();
@@ -249,7 +249,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		self::$dbm->release( $conn );
 
 		$this->assertEquals( array( 'id' => 't:2' ), $result->fetch() );
-		$this->assertFalse( $result->fetch() );
+		$this->assertNull( $result->fetch() );
 	}
 
 
@@ -261,14 +261,14 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$row = $conn->create( 'SELECT * FROM "mw_cache_tag_test"' )->execute()->fetch();
 		self::$dbm->release( $conn );
 
-		$this->assertFalse( $row );
+		$this->assertNull( $row );
 
 
 		$conn = self::$dbm->acquire();
 		$row = $conn->create( 'SELECT "id" FROM "mw_cache_test"' )->execute()->fetch();
 		self::$dbm->release( $conn );
 
-		$this->assertFalse( $row );
+		$this->assertNull( $row );
 	}
 
 
@@ -307,7 +307,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( array( 'tname' => 'tag:2' ), $result->fetch() );
 		$this->assertEquals( array( 'tname' => 'tag:3' ), $result->fetch() );
-		$this->assertFalse( $result->fetch() );
+		$this->assertNull( $result->fetch() );
 
 
 		$conn = self::$dbm->acquire();
@@ -321,7 +321,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 			'value' => 'test 3',
 		);
 		$this->assertEquals( $expected, $result->fetch() );
-		$this->assertFalse( $result->fetch() );
+		$this->assertNull( $result->fetch() );
 	}
 
 
@@ -338,7 +338,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( array( 'tname' => 'tag:2' ), $result->fetch() );
 		$this->assertEquals( array( 'tname' => 'tag:3' ), $result->fetch() );
-		$this->assertFalse( $result->fetch() );
+		$this->assertNull( $result->fetch() );
 
 
 		$conn = self::$dbm->acquire();
@@ -347,7 +347,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( array( 'tname' => 'tag:2' ), $result->fetch() );
 		$this->assertEquals( array( 'tname' => 'tag:3' ), $result->fetch() );
-		$this->assertFalse( $result->fetch() );
+		$this->assertNull( $result->fetch() );
 
 
 		$conn = self::$dbm->acquire();
@@ -361,7 +361,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 			'value' => 'test 3',
 		);
 		$this->assertEquals( $expected, $result->fetch() );
-		$this->assertFalse( $result->fetch() );
+		$this->assertNull( $result->fetch() );
 
 
 		$conn = self::$dbm->acquire();
@@ -375,6 +375,6 @@ class DBTest extends \PHPUnit\Framework\TestCase
 			'value' => 'test 4',
 		);
 		$this->assertEquals( $expected, $result->fetch() );
-		$this->assertFalse( $result->fetch() );
+		$this->assertNull( $result->fetch() );
 	}
 }

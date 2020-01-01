@@ -327,7 +327,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$stmt->bind( 2, $productId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$result = $stmt->execute();
 
-			if( ( $row = $result->fetch() ) === false ) {
+			if( ( $row = $result->fetch() ) === null ) {
 				throw new \RuntimeException( 'No rows available' );
 			}
 

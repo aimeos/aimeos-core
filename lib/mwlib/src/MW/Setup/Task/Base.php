@@ -265,7 +265,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 		{
 			$result = $conn->create( $sql )->execute();
 
-			if( ( $row = $result->fetch() ) === false ) {
+			if( ( $row = $result->fetch() ) === null ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No rows found: %1$s', $sql ) );
 			}
 

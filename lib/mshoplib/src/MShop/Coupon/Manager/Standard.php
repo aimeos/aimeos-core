@@ -610,7 +610,7 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== false )
+				while( ( $row = $results->fetch() ) !== null )
 				{
 					if( ( $row['coupon.config'] = json_decode( $config = $row['coupon.config'], true ) ) === null )
 					{

@@ -50,7 +50,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( $sqlselect )->execute();
 
 		$rows = [];
-		while( ( $row = $result->fetch() ) !== false ) {
+		while( ( $row = $result->fetch() ) !== null ) {
 			$rows[] = $row;
 		}
 
@@ -82,7 +82,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( $sqlselect )->execute();
 
 		$rows = [];
-		while( ( $row = $result->fetch() ) !== false ) {
+		while( ( $row = $result->fetch() ) !== null ) {
 			$rows[] = $row;
 		}
 
@@ -110,7 +110,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( $sqlselect )->execute();
 
 		$rows = [];
-		while( ( $row = $result->fetch() ) !== false ) {
+		while( ( $row = $result->fetch() ) !== null ) {
 			$rows[] = $row;
 		}
 
@@ -141,7 +141,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( $sqlselect )->execute();
 
 		$rows = [];
-		while( ( $row = $result->fetch() ) !== false ) {
+		while( ( $row = $result->fetch() ) !== null ) {
 			$rows[] = $row;
 		}
 
@@ -172,7 +172,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( $sqlselect )->execute();
 
 		$rows = [];
-		while( ( $row = $result->fetch() ) !== false ) {
+		while( ( $row = $result->fetch() ) !== null ) {
 			$rows[] = $row;
 		}
 

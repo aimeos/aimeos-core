@@ -987,7 +987,7 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== false )
+				while( ( $row = $results->fetch() ) !== null )
 				{
 					if( ( $row['order.base.product.taxrates'] = json_decode( $config = $row['order.base.product.taxrates'], true ) ) === null )
 					{

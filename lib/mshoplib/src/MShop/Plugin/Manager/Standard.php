@@ -634,7 +634,7 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false )
+			while( ( $row = $results->fetch() ) !== null )
 			{
 				if( ( $row['plugin.config'] = json_decode( $config = $row['plugin.config'], true ) ) === null )
 				{

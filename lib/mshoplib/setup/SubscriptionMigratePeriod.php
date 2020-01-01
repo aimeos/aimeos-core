@@ -48,7 +48,7 @@ class SubscriptionMigratePeriod extends \Aimeos\MW\Setup\Task\Base
 		$stmt = $cupdate->create( $update );
 		$result = $cselect->create( $select )->execute();
 
-		while( ( $row = $result->fetch() ) !== false )
+		while( ( $row = $result->fetch() ) !== null )
 		{
 			$period = 0;
 			$end = $row['end'] ?: date( 'Y-m-d' );

@@ -716,7 +716,7 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== false ) {
+				while( ( $row = $results->fetch() ) !== null ) {
 					$items[(string) $row['subscription.id']] = $this->createItemBase( $row );
 				}
 			}

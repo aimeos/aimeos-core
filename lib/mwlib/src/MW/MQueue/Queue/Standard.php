@@ -128,7 +128,7 @@ class Standard implements Iface
 
 			$result = $stmt->execute();
 
-			if( ( $row = $result->fetch() ) !== false ) {
+			if( ( $row = $result->fetch() ) !== null ) {
 				$msg = new \Aimeos\MW\MQueue\Message\Standard( $row );
 			}
 

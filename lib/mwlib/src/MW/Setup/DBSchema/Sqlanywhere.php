@@ -42,7 +42,7 @@ class Sqlanywhere extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 
 		$this->release( $conn );
 
-		return $result !== false ? true : false;
+		return $result ? true : false;
 	}
 
 
@@ -81,7 +81,7 @@ class Sqlanywhere extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 
 		$this->release( $conn );
 
-		return $result !== false ? true : false;
+		return $result ? true : false;
 	}
 
 
@@ -108,7 +108,7 @@ class Sqlanywhere extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 
 		$this->release( $conn );
 
-		return $result !== false ? true : false;
+		return $result ? true : false;
 	}
 
 
@@ -138,7 +138,7 @@ class Sqlanywhere extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 
 		$this->release( $conn );
 
-		return $result !== false ? true : false;
+		return $result ? true : false;
 	}
 
 
@@ -169,7 +169,7 @@ class Sqlanywhere extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 
 		$this->release( $conn );
 
-		if( $result === false ) {
+		if( $result === null ) {
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unknown column "%1$s" in table "%2$s"', $columnname, $tablename ) );
 		}
 

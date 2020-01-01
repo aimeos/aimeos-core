@@ -276,7 +276,7 @@ class DB
 			$stmt->bind( 1, $this->siteid );
 			$result = $stmt->execute();
 
-			while( ( $row = $result->fetch() ) !== false ) {
+			while( ( $row = $result->fetch() ) !== null ) {
 				$list[$row['id']] = (string) $row['value'];
 			}
 
@@ -334,7 +334,7 @@ class DB
 			$stmt->bind( 1, $this->siteid );
 			$result = $stmt->execute();
 
-			while( $result->fetch() !== false ) {
+			while( $result->fetch() !== null ) {
 				$return = true;
 			}
 

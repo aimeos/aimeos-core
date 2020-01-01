@@ -887,7 +887,7 @@ class Standard extends Base
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false )
+			while( ( $row = $results->fetch() ) !== null )
 			{
 				$price = $priceManager->createItem();
 				$price->setCurrencyId( $row['order.base.currencyid'] );
@@ -954,7 +954,7 @@ class Standard extends Base
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $sitelevel );
 
-			if( ( $row = $results->fetch() ) === false ) {
+			if( ( $row = $results->fetch() ) === null ) {
 				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order base item with order ID "%1$s" not found', $id ) );
 			}
 			$results->finish();

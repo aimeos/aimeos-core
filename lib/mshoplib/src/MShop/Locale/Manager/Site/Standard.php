@@ -656,7 +656,7 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== false )
+				while( ( $row = $results->fetch() ) !== null )
 				{
 					$config = $row['locale.site.config'];
 
@@ -1044,7 +1044,7 @@ class Standard
 		$row = $results->fetch();
 		$results->finish();
 
-		if( $row === false ) {
+		if( $row === null ) {
 			throw new \Aimeos\MShop\Locale\Exception( 'No total results value found' );
 		}
 

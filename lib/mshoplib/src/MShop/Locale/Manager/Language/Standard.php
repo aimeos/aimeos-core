@@ -597,7 +597,7 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== false ) {
+				while( ( $row = $results->fetch() ) !== null ) {
 					$items[(string) $row['locale.language.id']] = $this->createItemBase( $row );
 				}
 			}
@@ -745,7 +745,7 @@ class Standard
 		$row = $results->fetch();
 		$results->finish();
 
-		if( $row === false ) {
+		if( $row === null ) {
 			throw new \Aimeos\MShop\Locale\Exception( 'No total results value found' );
 		}
 

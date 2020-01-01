@@ -544,7 +544,7 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false )
+			while( ( $row = $results->fetch() ) !== null )
 			{
 				$config = $row['job.parameter'];
 				if( ( $row['job.parameter'] = json_decode( $row['job.parameter'], true ) ) === null )

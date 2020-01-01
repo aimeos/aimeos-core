@@ -32,9 +32,9 @@ interface Iface
 	 * Retrieves the next row from database result set.
 	 *
 	 * @param int $style The data can be returned as associative or numerical array
-	 * @return array|false Numeric or associative array of columns returned by the database or false if no more rows are available
+	 * @return array|null Numeric or associative array of columns returned by the database or null if no more rows are available
 	 */
-	public function fetch( int $style = \Aimeos\MW\DB\Result\Base::FETCH_ASSOC );
+	public function fetch( int $style = \Aimeos\MW\DB\Result\Base::FETCH_ASSOC ) : ?array;
 
 
 	/**

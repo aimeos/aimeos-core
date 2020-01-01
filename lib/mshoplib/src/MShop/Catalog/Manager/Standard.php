@@ -687,7 +687,7 @@ class Standard extends Base
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false ) {
+			while( ( $row = $results->fetch() ) !== null ) {
 				$siteMap[(string) $row['siteid']][(string) $row['id']] = new \Aimeos\MW\Tree\Node\Standard( $row );
 			}
 

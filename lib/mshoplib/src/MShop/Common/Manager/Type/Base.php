@@ -228,7 +228,8 @@ abstract class Base
 			$required = array( trim( $this->prefix, '.' ) );
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-			while( ( $row = $results->fetch() ) !== false ) {
+
+			while( ( $row = $results->fetch() ) !== null ) {
 				$items[(string) $row[$this->prefix . 'id']] = $this->createItemBase( $row );
 			}
 

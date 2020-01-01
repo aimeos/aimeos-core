@@ -702,7 +702,7 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false )
+			while( ( $row = $results->fetch() ) !== null )
 			{
 				if( ( $row['media.previews'] = json_decode( $config = $row['media.previews'], true ) ) === null )
 				{

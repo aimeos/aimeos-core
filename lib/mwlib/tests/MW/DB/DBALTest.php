@@ -58,7 +58,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( $sqlselect )->execute();
 
 		$rows = [];
-		while( ( $row = $result->fetch() ) !== false ) {
+		while( ( $row = $result->fetch() ) !== null ) {
 			$rows[] = $row;
 		}
 
@@ -90,7 +90,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( $sqlselect )->execute();
 
 		$rows = [];
-		while( ( $row = $result->fetch() ) !== false ) {
+		while( ( $row = $result->fetch() ) !== null ) {
 			$rows[] = $row;
 		}
 
@@ -118,7 +118,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( $sqlselect )->execute();
 
 		$rows = [];
-		while( ( $row = $result->fetch() ) !== false ) {
+		while( ( $row = $result->fetch() ) !== null ) {
 			$rows[] = $row;
 		}
 
@@ -149,7 +149,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( $sqlselect )->execute();
 
 		$rows = [];
-		while( ( $row = $result->fetch() ) !== false ) {
+		while( ( $row = $result->fetch() ) !== null ) {
 			$rows[] = $row;
 		}
 
@@ -180,7 +180,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( $sqlselect )->execute();
 
 		$rows = [];
-		while( ( $row = $result->fetch() ) !== false ) {
+		while( ( $row = $result->fetch() ) !== null ) {
 			$rows[] = $row;
 		}
 

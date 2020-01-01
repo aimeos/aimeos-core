@@ -53,7 +53,7 @@ class PriceMigrateTaxrate extends \Aimeos\MW\Setup\Task\Base
 			$sql = str_replace( ':offset', $start, $select );
 			$result = $conn->create( $sql )->execute();
 
-			while( ( $row = $result->fetch() ) !== false )
+			while( ( $row = $result->fetch() ) !== null )
 			{
 				$map[$row['id']] = $row['taxrate'];
 				$count++;

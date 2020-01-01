@@ -56,7 +56,7 @@ class Sqlsrv extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 
 		$this->release( $conn );
 
-		return $result !== false ? true : false;
+		return $result ? true : false;
 	}
 
 

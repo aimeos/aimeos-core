@@ -619,7 +619,7 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false ) {
+			while( ( $row = $results->fetch() ) !== null ) {
 				$items[(string) $row['stock.id']] = $this->createItemBase( $row );
 			}
 

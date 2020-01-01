@@ -49,7 +49,7 @@ class SqlservTest extends \PHPUnit\Framework\TestCase
 
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );
-		$result->expects( $this->once() )->method( 'fetch' )->will( $this->returnValue( false ) );
+		$result->expects( $this->once() )->method( 'fetch' )->will( $this->returnValue( null ) );
 
 		$this->assertFalse( $this->object->tableExists( 'testtable' ) );
 	}
@@ -78,7 +78,7 @@ class SqlservTest extends \PHPUnit\Framework\TestCase
 
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );
-		$result->expects( $this->once() )->method( 'fetch' )->will( $this->returnValue( false ) );
+		$result->expects( $this->once() )->method( 'fetch' )->will( $this->returnValue( null ) );
 
 		$this->assertFalse( $this->object->indexExists( 'testtable', 'testindex' ) );
 	}
@@ -101,7 +101,7 @@ class SqlservTest extends \PHPUnit\Framework\TestCase
 
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );
-		$result->expects( $this->once() )->method( 'fetch' )->will( $this->returnValue( false ) );
+		$result->expects( $this->once() )->method( 'fetch' )->will( $this->returnValue( null ) );
 
 		$this->assertFalse( $this->object->constraintExists( 'testtable', 'testconstraint' ) );
 	}
@@ -124,7 +124,7 @@ class SqlservTest extends \PHPUnit\Framework\TestCase
 
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );
-		$result->expects( $this->once() )->method( 'fetch' )->will( $this->returnValue( false ) );
+		$result->expects( $this->once() )->method( 'fetch' )->will( $this->returnValue( null ) );
 
 		$this->assertFalse( $this->object->columnExists( 'testtable', 'testcolumn' ) );
 	}

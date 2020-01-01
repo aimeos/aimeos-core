@@ -816,7 +816,7 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== false ) {
+				while( ( $row = $results->fetch() ) !== null ) {
 					$map[$row['locale.id']] = $row;
 				}
 			}
@@ -879,7 +879,7 @@ class Standard
 				$row = $results->fetch();
 				$results->finish();
 
-				if( $row === false ) {
+				if( $row === null ) {
 					throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Total results value not found' ) );
 				}
 

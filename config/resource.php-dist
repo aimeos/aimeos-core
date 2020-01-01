@@ -9,7 +9,7 @@ return array(
 	// default database configuration
 	'db' => array(
 
-		// database adapter (currently only 'mysql')
+		// database adapter (e.g 'mysql', 'pgsql', etc.)
 		'adapter' => 'mysql',
 
 		// database server name, IP address or path to local (socket) file

@@ -270,7 +270,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 			$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false ) {
+			while( ( $row = $results->fetch() ) !== null ) {
 				$list[$row['key']] = $row['count'];
 			}
 
@@ -879,7 +879,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$row = $result->fetch();
 			$result->finish();
 
-			if( $row === false ) {
+			if( $row === null ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Total results value not found' ) );
 			}
 

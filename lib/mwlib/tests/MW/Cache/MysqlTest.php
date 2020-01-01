@@ -154,7 +154,7 @@ class MysqlTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( array( 'tname' => 'tag:2' ), $result->fetch() );
 		$this->assertEquals( array( 'tname' => 'tag:3' ), $result->fetch() );
-		$this->assertFalse( $result->fetch() );
+		$this->assertNull( $result->fetch() );
 
 
 		$conn = self::$dbm->acquire();
@@ -163,7 +163,7 @@ class MysqlTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( array( 'tname' => 'tag:2' ), $result->fetch() );
 		$this->assertEquals( array( 'tname' => 'tag:3' ), $result->fetch() );
-		$this->assertFalse( $result->fetch() );
+		$this->assertNull( $result->fetch() );
 
 
 		$conn = self::$dbm->acquire();
@@ -177,7 +177,7 @@ class MysqlTest extends \PHPUnit\Framework\TestCase
 			'value' => 'test 3',
 		);
 		$this->assertEquals( $expected, $result->fetch() );
-		$this->assertFalse( $result->fetch() );
+		$this->assertNull( $result->fetch() );
 
 
 		$conn = self::$dbm->acquire();
@@ -191,6 +191,6 @@ class MysqlTest extends \PHPUnit\Framework\TestCase
 			'value' => 'test 4',
 		);
 		$this->assertEquals( $expected, $result->fetch() );
-		$this->assertFalse( $result->fetch() );
+		$this->assertNull( $result->fetch() );
 	}
 }

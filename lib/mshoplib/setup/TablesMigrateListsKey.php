@@ -68,7 +68,7 @@ class TablesMigrateListsKey extends \Aimeos\MW\Setup\Task\Base
 			$stmt = $cupdate->create( $update );
 			$result = $cselect->create( $select )->execute();
 
-			while( ( $row = $result->fetch() ) !== false )
+			while( ( $row = $result->fetch() ) !== null )
 			{
 				$stmt->bind( 1, $row['domain'] . '|' . $row['type'] . '|' . $row['refid'] );
 				$stmt->bind( 2, $row['id'] );

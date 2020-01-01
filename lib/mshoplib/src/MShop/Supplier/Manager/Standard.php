@@ -638,7 +638,8 @@ class Standard
 			$cfgPathCount = 'mshop/supplier/manager/standard/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-			while( ( $row = $results->fetch() ) !== false ) {
+
+			while( ( $row = $results->fetch() ) !== null ) {
 				$map[(string) $row['supplier.id']] = $row;
 			}
 
