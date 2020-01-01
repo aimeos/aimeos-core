@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testTransformMap()
 	{
-		$list = \Aimeos\MW\Map::from( [['test1' => 'value1', 'test2' => 'value2']] );
+		$list = \Aimeos\Map::from( [['test1' => 'value1', 'test2' => 'value2']] );
 		$this->assertEquals( ['value1' => 'value2'], $this->object->transform( $list, 'test1', 'test2' )->toArray() );
 	}
 }

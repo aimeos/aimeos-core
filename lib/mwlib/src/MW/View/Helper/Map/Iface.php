@@ -27,5 +27,5 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * @param string $prop Property name or names that should be mapped to the key
 	 * @return \Aimeos\MW\MapIface Associative list of key/value pairs
 	 */
-	public function transform( iterable $list, string $key, string $prop ) : \Aimeos\MW\MapIface;
+	public function transform( iterable $list, string $key, string $prop ) : \Aimeos\Map;
 }

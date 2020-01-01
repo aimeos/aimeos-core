@@ -27,9 +27,9 @@ class Standard
 	 * @param iterable $cfgkey List of arrays of object that should be mapped
 	 * @param array $key Name of the property whose value should be the key of the mapped pairs
 	 * @param string $prop Property name that should be mapped to the key
-	 * @return \Aimeos\MW\MapIface Associative list of key/value pairs
+	 * @return \Aimeos\Map Map object with results
 	 */
-	public function transform( iterable $list, string $key, string $prop ) : \Aimeos\MW\MapIface
+	public function transform( iterable $list, string $key, string $prop ) : \Aimeos\Map
 	{
 		$result = [];
 
@@ -44,6 +44,6 @@ class Standard
 			}
 		}
 
-		return \Aimeos\MW\Map::from( $result );
+		return \Aimeos\Map::from( $result );
 	}
 }
