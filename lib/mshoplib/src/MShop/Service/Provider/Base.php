@@ -453,9 +453,9 @@ abstract class Base implements Iface
 	 *
 	 * @param string $customerId Unique customer ID the service token belongs to
 	 * @param string $type Type of the value that should be returned
-	 * @return string|null Service data or null if none is available
+	 * @return array|string|null Service data or null if none is available
 	 */
-	protected function getCustomerData( string $customerId, string $type ) : ?string
+	protected function getCustomerData( string $customerId, string $type )
 	{
 		if( $customerId != null )
 		{

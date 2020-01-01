@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Service\Provider\Delivery;
  * @package MShop
  * @subpackage Service
  */
-abstract class Base extends \Aimeos\MShop\Service\Provider\Base
+abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 {
 	/**
 	 * Feature constant if querying for status updates for an order is supported.

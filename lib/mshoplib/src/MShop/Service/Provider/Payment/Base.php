@@ -18,8 +18,7 @@ namespace Aimeos\MShop\Service\Provider\Payment;
  * @package MShop
  * @subpackage Service
  */
-abstract class Base
-	extends \Aimeos\MShop\Service\Provider\Base
+abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 {
 	/**
 	 * Feature constant if querying for status updates for an order is supported.
@@ -107,7 +106,7 @@ abstract class Base
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] ) : ?\Aimeos\MShop\Common\Helper\Form\Iface
 	{
-		$url = $this->getConfigValue( array( 'payment.url-success' ) );
+		$url = $this->getConfigValue( 'payment.url-success', '' );
 		return new \Aimeos\MShop\Common\Helper\Form\Standard( $url, 'POST', [] );
 	}
 
