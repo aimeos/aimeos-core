@@ -222,8 +222,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'order.base.address.baseid', null );
 		$expr[] = $search->compare( '==', 'order.base.address.addressid', '103' );
 		$expr[] = $search->compare( '==', 'order.base.address.type', 'payment' );
-		$expr[] = $search->compare( '==', 'order.base.address.company', '' );
-		$expr[] = $search->compare( '==', 'order.base.address.vatid', '' );
+		$expr[] = $search->compare( '==', 'order.base.address.company', 'Example company' );
+		$expr[] = $search->compare( '==', 'order.base.address.vatid', 'DE999999999' );
 		$expr[] = $search->compare( '==', 'order.base.address.salutation', 'mr' );
 		$expr[] = $search->compare( '==', 'order.base.address.title', '' );
 		$expr[] = $search->compare( '==', 'order.base.address.firstname', 'Our' );
