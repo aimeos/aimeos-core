@@ -25,7 +25,7 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * @param iterable $cfgkey List of arrays of object that should be mapped
 	 * @param string $key Name of the property whose value should be the key of the mapped pairs
 	 * @param string $prop Property name or names that should be mapped to the key
-	 * @return \Aimeos\MW\MapIface Associative list of key/value pairs
+	 * @return \Aimeos\Map Associative list of key/value pairs
 	 */
 	public function transform( iterable $list, string $key, string $prop ) : \Aimeos\Map;
 }
