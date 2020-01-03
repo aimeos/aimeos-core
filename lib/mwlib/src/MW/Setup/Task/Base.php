@@ -189,7 +189,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * @param string|null $sequence Name of the sequence which generated the last ID (only Oracle)
 	 * @return string|null Last inserted ID or null if not available
 	 */
-	protected function getLastId( \Aimeos\MW\DB\Connection\Iface $conn, string $rname, string $sequence = null ) : ?string
+	protected function getLastId( \Aimeos\MW\DB\Connection\Iface $conn, $rname, $sequence = null )
 	{
 		$adapter = $this->getSchema( $rname )->getName();
 		$map = [
