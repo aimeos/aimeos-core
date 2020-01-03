@@ -98,7 +98,7 @@ class Standard
 	 */
 	public function setCode( string $code ) : \Aimeos\MShop\Order\Item\Base\Coupon\Iface
 	{
-		return $this->set( 'order.base.coupon.code', mb_strtoupper( $this->checkCode( $code ) ) );
+		return $this->set( 'order.base.coupon.code', $this->checkCode( $code ) );
 	}
 
 

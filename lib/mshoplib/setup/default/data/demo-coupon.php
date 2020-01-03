@@ -25,7 +25,7 @@ return array(
 		),
 		'codes' => array(
 			array(
-				'code' => 'FIXED', 'count' => 1000,
+				'code' => 'fixed', 'count' => 1000,
 				'datestart' => null, 'dateend' => null,
 			),
 		),
@@ -39,7 +39,7 @@ return array(
 		),
 		'codes' => array(
 			array(
-				'code' => 'PERCENT', 'count' => 1000,
+				'code' => 'percent', 'count' => 1000,
 				'datestart' => null, 'dateend' => null,
 			),
 		),
