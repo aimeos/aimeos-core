@@ -15,7 +15,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $request;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$view = new \Aimeos\MW\View\Standard();
 		$this->request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
@@ -23,7 +23,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->request );
 	}

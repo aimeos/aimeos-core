@@ -15,7 +15,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 
@@ -33,7 +33,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -50,12 +50,12 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( ['country' => 'DE'] );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'null', $result['country'] );
+		$this->assertNull( $result['country'] );
 
 		$result = $this->object->checkConfigBE( ['country' => ''] );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'string', $result['country'] );
+		$this->assertIsString( $result['country'] );
 	}
 
 

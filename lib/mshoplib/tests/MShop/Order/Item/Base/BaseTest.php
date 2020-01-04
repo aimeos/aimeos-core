@@ -19,7 +19,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	private $coupons;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 
@@ -75,7 +75,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->products, $this->addresses, $this->services, $this->coupons );
 	}
@@ -311,7 +311,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAddressException()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
+		$this->expectException( \Aimeos\MShop\Order\Exception::class );
 		$this->object->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT, 0 );
 	}
 
@@ -415,7 +415,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetServiceException()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
+		$this->expectException( \Aimeos\MShop\Order\Exception::class );
 		$this->object->getService( 'payment', 100 );
 	}
 
@@ -498,27 +498,28 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			}
 		}
 
-		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
+		$result = $this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
 	}
 
 
 	public function testCheckInvalid()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
+		$this->expectException( \Aimeos\MShop\Order\Exception::class );
 		$this->object->check( -1 );
 	}
 
 
 	public function testCheckAllFailure()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
+		$this->expectException( \Aimeos\MShop\Order\Exception::class );
 		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
 	}
 
 
 	public function testCheckProductsFailure()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
+		$this->expectException( \Aimeos\MShop\Order\Exception::class );
 		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 

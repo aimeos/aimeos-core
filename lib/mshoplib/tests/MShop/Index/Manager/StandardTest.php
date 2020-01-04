@@ -18,7 +18,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $editor = '';
 
 
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		$context = \TestHelperMShop::getContext();
 
@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->editor = $this->context->getEditor();
@@ -53,7 +53,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -252,13 +252,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testOptimize()
 	{
-		$this->object->optimize();
+		$this->assertInstanceOf( \Aimeos\MShop\Index\Manager\Iface::class, $this->object->optimize() );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->object->cleanup( '1970-01-01 00:00:00' );
+		$this->assertInstanceOf( \Aimeos\MShop\Index\Manager\Iface::class, $this->object->cleanup( '1970-01-01 00:00:00' ) );
 	}
 
 

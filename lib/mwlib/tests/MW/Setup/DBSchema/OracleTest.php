@@ -9,7 +9,7 @@ class OracleTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->mock = $this->getMockBuilder( \Aimeos\MW\DB\Connection\PDO::class )
 			->setMethods( array( 'create' ) )
@@ -28,7 +28,7 @@ class OracleTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

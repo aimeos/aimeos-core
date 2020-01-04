@@ -15,14 +15,14 @@ class APCTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$conf = new \Aimeos\MW\Config\PHPArray( [] );
 		$this->object = new \Aimeos\MW\Config\Decorator\APC( $conf, 'test:' );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

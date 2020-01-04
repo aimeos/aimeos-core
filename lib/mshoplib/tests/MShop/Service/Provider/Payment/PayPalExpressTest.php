@@ -19,7 +19,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	private $order;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
@@ -66,7 +66,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 		unset( $this->serviceItem );
@@ -341,7 +341,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			$this->returnValue( '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=wrong authorization test method error' )
 		);
 
-		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->process( $this->order );
 	}
 

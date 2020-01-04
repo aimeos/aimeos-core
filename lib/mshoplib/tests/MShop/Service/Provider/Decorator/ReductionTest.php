@@ -19,7 +19,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 	private $mockProvider;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -36,7 +36,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->basket, $this->mockProvider, $this->servItem, $this->context );
 	}
@@ -71,10 +71,10 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'null', $result['reduction.percent'] );
-		$this->assertInternalType( 'null', $result['reduction.product-costs'] );
-		$this->assertInternalType( 'null', $result['reduction.basket-value-min'] );
-		$this->assertInternalType( 'null', $result['reduction.basket-value-max'] );
+		$this->assertNull( $result['reduction.percent'] );
+		$this->assertNull( $result['reduction.product-costs'] );
+		$this->assertNull( $result['reduction.basket-value-min'] );
+		$this->assertNull( $result['reduction.basket-value-max'] );
 	}
 
 
@@ -87,10 +87,10 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'string', $result['reduction.percent'] );
-		$this->assertInternalType( 'null', $result['reduction.product-costs'] );
-		$this->assertInternalType( 'null', $result['reduction.basket-value-min'] );
-		$this->assertInternalType( 'null', $result['reduction.basket-value-max'] );
+		$this->assertIsString( $result['reduction.percent'] );
+		$this->assertNull( $result['reduction.product-costs'] );
+		$this->assertNull( $result['reduction.basket-value-min'] );
+		$this->assertNull( $result['reduction.basket-value-max'] );
 	}
 
 
@@ -103,7 +103,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( array( 'reduction.basket-value-min' => '10.00' ) );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'string', $result['reduction.basket-value-min'] );
+		$this->assertIsString( $result['reduction.basket-value-min'] );
 	}
 
 
@@ -116,7 +116,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( array( 'reduction.basket-value-max' => '100.00' ) );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'string', $result['reduction.basket-value-max'] );
+		$this->assertIsString( $result['reduction.basket-value-max'] );
 	}
 
 

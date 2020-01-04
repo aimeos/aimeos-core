@@ -14,13 +14,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->object = new \Aimeos\MW\View\Helper\Map\Standard( new \Aimeos\MW\View\Standard() );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

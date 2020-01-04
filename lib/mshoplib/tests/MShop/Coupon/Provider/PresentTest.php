@@ -16,7 +16,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 	private $orderBase;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 
@@ -30,7 +30,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 		unset( $this->orderBase );
@@ -39,7 +39,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdate()
 	{
-		$this->object->update( $this->orderBase );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();
@@ -66,7 +66,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MShop\Coupon\Provider\Present( $context, $couponItem, '90AB' );
 
-		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
+		$this->expectException( \Aimeos\MShop\Coupon\Exception::class );
 		$object->update( $this->orderBase );
 	}
 
@@ -86,8 +86,8 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'null', $result['present.productcode'] );
-		$this->assertInternalType( 'null', $result['present.quantity'] );
+		$this->assertNull( $result['present.productcode'] );
+		$this->assertNull( $result['present.quantity'] );
 	}
 
 
@@ -96,8 +96,8 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'string', $result['present.productcode'] );
-		$this->assertInternalType( 'null', $result['present.quantity'] );
+		$this->assertIsString( $result['present.productcode'] );
+		$this->assertNull( $result['present.quantity'] );
 	}
 
 

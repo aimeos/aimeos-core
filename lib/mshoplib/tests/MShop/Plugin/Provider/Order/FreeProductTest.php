@@ -16,7 +16,7 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 	private $orderProduct;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
@@ -33,7 +33,7 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->plugin, $this->orderProduct, $this->order, $this->object );
 	}
@@ -70,13 +70,13 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$this->object->register( $this->order );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $this->order ) );
 	}
 
 
 	public function testUpdateInvalid()
 	{
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$this->object->update( $this->order, 'addProduct.after' );
 	}
 

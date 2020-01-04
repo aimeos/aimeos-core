@@ -17,7 +17,7 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 	private $couponItem;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$orderProducts = [];
 		$context = \TestHelperMShop::getContext();
@@ -56,7 +56,7 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 		unset( $this->orderBase );
@@ -82,8 +82,8 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'null', $result['basketvalues.total-value-min'] );
-		$this->assertInternalType( 'null', $result['basketvalues.total-value-max'] );
+		$this->assertNull( $result['basketvalues.total-value-min'] );
+		$this->assertNull( $result['basketvalues.total-value-max'] );
 	}
 
 
@@ -92,8 +92,8 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( ['basketvalues.total-value-min' => '10.5'] );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'string', $result['basketvalues.total-value-min'] );
-		$this->assertInternalType( 'null', $result['basketvalues.total-value-max'] );
+		$this->assertIsString( $result['basketvalues.total-value-min'] );
+		$this->assertNull( $result['basketvalues.total-value-max'] );
 	}
 
 

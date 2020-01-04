@@ -15,7 +15,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $values;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->values = array(
 			'common.property.id' => 987,
@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		$this->object = null;
 	}

@@ -15,7 +15,7 @@ class MultipleTest extends \PHPUnit\Framework\TestCase
 	private $dbm;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->config = \TestHelperMw::getConfig();
 
@@ -27,7 +27,7 @@ class MultipleTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->dbm );
 	}
@@ -46,7 +46,7 @@ class MultipleTest extends \PHPUnit\Framework\TestCase
 		$result = ob_get_contents();
 		ob_end_clean();
 
-		$this->assertContains( 'OneTask', $result );
-		$this->assertContains( 'TwoTask', $result );
+		$this->assertStringContainsString( 'OneTask', $result );
+		$this->assertStringContainsString( 'TwoTask', $result );
 	}
 }

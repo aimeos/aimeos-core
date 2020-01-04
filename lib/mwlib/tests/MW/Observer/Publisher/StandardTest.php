@@ -15,13 +15,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->object = new TestPublisher();
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -29,7 +29,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAttach()
 	{
-		$this->object->attach( new TestListener(), 'test' );
+		$this->assertInstanceOf( \Aimeos\MW\Observer\Publisher\Iface::class, $this->object->attach( new TestListener(), 'test' ) );
 	}
 
 	public function testDetach()
@@ -37,13 +37,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$l = new TestListener();
 
 		$this->object->attach( $l, 'test' );
-		$this->object->detach( $l, 'test' );
+		$this->assertInstanceOf( \Aimeos\MW\Observer\Publisher\Iface::class, $this->object->detach( $l, 'test' ) );
 	}
 
 
 	public function testOff()
 	{
-		$this->object->off();
+		$this->assertInstanceOf( \Aimeos\MW\Observer\Publisher\Iface::class, $this->object->off() );
 	}
 
 
@@ -56,7 +56,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->attach( $l, 'testagain' );
 
 		$this->object->notifyPublic( 'test', $value );
-		$this->object->notifyPublic( 'testagain', $value );
+		$this->assertEquals( 'something', $this->object->notifyPublic( 'testagain', $value ) );
 	}
 }
 

@@ -27,28 +27,28 @@ class MShopTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateManagerEmpty()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		\Aimeos\MShop::create( \TestHelperMShop::getContext(), "\n" );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		\Aimeos\MShop::create( \TestHelperMShop::getContext(), '%^' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		\Aimeos\MShop::create( \TestHelperMShop::getContext(), 'unknown' );
 	}
 
 
 	public function testCreateSubManagerNotExisting()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		\Aimeos\MShop::create( \TestHelperMShop::getContext(), 'attribute/unknown' );
 	}
 

@@ -15,7 +15,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $response;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$view = new \Aimeos\MW\View\Standard();
 		$this->response = $this->getMockBuilder( \Psr\Http\Message\ResponseInterface::class )->getMock();
@@ -23,7 +23,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->response );
 	}
@@ -39,7 +39,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		if( !class_exists( \Zend\Diactoros\Stream::class ) )
 		{
-			$this->setExpectedException( \Aimeos\MW\Exception::class );
+			$this->expectException( \Aimeos\MW\Exception::class );
 			$this->object->createStream( 'test' );
 		}
 

@@ -18,7 +18,7 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 	private $mockProvider;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -35,7 +35,7 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->basket, $this->mockProvider, $this->servItem, $this->context );
 	}
@@ -67,8 +67,8 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'null', $result['currency.include'] );
-		$this->assertInternalType( 'null', $result['currency.exclude'] );
+		$this->assertNull( $result['currency.include'] );
+		$this->assertNull( $result['currency.exclude'] );
 	}
 
 
@@ -81,8 +81,8 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'null', $result['currency.include'] );
-		$this->assertInternalType( 'null', $result['currency.exclude'] );
+		$this->assertNull( $result['currency.include'] );
+		$this->assertNull( $result['currency.exclude'] );
 	}
 
 
@@ -99,8 +99,8 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'string', $result['currency.include'] );
-		$this->assertInternalType( 'string', $result['currency.exclude'] );
+		$this->assertIsString( $result['currency.include'] );
+		$this->assertIsString( $result['currency.exclude'] );
 	}
 
 

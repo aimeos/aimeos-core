@@ -15,7 +15,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $session;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$view = new \Aimeos\MW\View\Standard();
 		$this->session = new \Aimeos\MW\Session\None();
@@ -24,7 +24,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->session );
 	}

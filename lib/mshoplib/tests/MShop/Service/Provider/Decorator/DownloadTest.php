@@ -17,7 +17,7 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 	private $mockProvider;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -31,7 +31,7 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', null );
 	}
@@ -57,7 +57,7 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'null', $result['download.all'] );
+		$this->assertNull( $result['download.all'] );
 	}
 
 
@@ -71,7 +71,7 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'string', $result['download.all'] );
+		$this->assertIsString( $result['download.all'] );
 	}
 
 

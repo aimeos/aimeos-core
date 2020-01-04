@@ -16,14 +16,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->object = new \Aimeos\MShop\Locale\Manager\Site\Standard( $this->context );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		$this->object = null;
 	}
@@ -49,7 +49,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveIdException()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Locale\Exception::class );
+		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
 		$this->object->saveItem( $this->object->createItem() );
 	}
 
@@ -100,7 +100,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultSaved );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->getItem( $item->getId() );
 	}
 
@@ -187,7 +187,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -249,7 +249,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->returnValue( [] ) );
 
-		$this->setExpectedException( \Aimeos\MShop\Locale\Exception::class );
+		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
 		$object->getTree();
 	}
 
@@ -276,8 +276,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'default' ) );
-
 		$results = $this->object->searchItems( $search );
+
+		$this->assertIsArray( $results );
 
 		if( ( $expected = reset( $results ) ) !== false )
 		{
@@ -289,7 +290,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testMoveItem()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Locale\Exception::class );
+		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
 		$this->object->moveItem( '', '', '' );
 	}
 }

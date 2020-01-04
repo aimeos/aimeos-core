@@ -20,7 +20,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	 *
 	 * @access protected
 	 */
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$child1 = new \Aimeos\MW\Tree\Node\Standard( array( 'id' => null, 'label' => 'child1', 'status' => '0', 'custom' => 'test' ) );
 		$child2 = new \Aimeos\MW\Tree\Node\Standard( array( 'id' => null, 'label' => 'child2', 'status' => '1', 'custom' => 'test' ) );
@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	 *
 	 * @access protected
 	 */
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

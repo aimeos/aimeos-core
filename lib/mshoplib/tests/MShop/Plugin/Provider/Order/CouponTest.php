@@ -16,7 +16,7 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 	private $order;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 		$plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
@@ -26,7 +26,7 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->order, $this->object );
 	}
@@ -34,7 +34,7 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$this->object->register( $this->order );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $this->order ) );
 	}
 
 
@@ -47,7 +47,7 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateInvalidObject()
 	{
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$this->object->update( new TestPublisher(), 'test' );
 	}
 }

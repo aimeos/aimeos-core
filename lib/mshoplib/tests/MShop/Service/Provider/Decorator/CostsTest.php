@@ -22,7 +22,7 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 	private $mockProvider;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -39,7 +39,7 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->basket, $this->mockProvider, $this->servItem, $this->context );
 	}
@@ -65,7 +65,7 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'null', $result['costs.percent'] );
+		$this->assertNull( $result['costs.percent'] );
 	}
 
 
@@ -78,7 +78,7 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'string', $result['costs.percent'] );
+		$this->assertIsString( $result['costs.percent'] );
 	}
 
 

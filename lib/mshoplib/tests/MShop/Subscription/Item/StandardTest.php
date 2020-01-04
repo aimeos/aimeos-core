@@ -15,7 +15,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $values;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->values = array(
 			'subscription.id' => 15,
@@ -38,7 +38,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -134,7 +134,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '2020-01-01', $this->object->getDateEnd() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setDateEnd( '2008-34-12' );
 	}
 

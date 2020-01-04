@@ -20,21 +20,21 @@ class MAdminTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateEmpty()
 	{
-		$this->setExpectedException( \Aimeos\MAdmin\Exception::class );
+		$this->expectException( \Aimeos\MAdmin\Exception::class );
 		\Aimeos\MAdmin::create( \TestHelperMShop::getContext(), "\n" );
 	}
 
 
 	public function testCreateInvalidName()
 	{
-		$this->setExpectedException( \Aimeos\MAdmin\Exception::class );
+		$this->expectException( \Aimeos\MAdmin\Exception::class );
 		\Aimeos\MAdmin::create( \TestHelperMShop::getContext(), '%^' );
 	}
 
 
 	public function testCreateNotExisting()
 	{
-		$this->setExpectedException( \Aimeos\MAdmin\Exception::class );
+		$this->expectException( \Aimeos\MAdmin\Exception::class );
 		\Aimeos\MAdmin::create( \TestHelperMShop::getContext(), 'unknown' );
 	}
 

@@ -15,13 +15,13 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->object = new \Aimeos\MW\Translation\None( 'ru_XX' );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		$this->object = null;
 	}
@@ -29,33 +29,33 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testConstructTwoLetterLocale()
 	{
-		new \Aimeos\MW\Translation\None( 'de' );
+		$this->assertInstanceOf( \Aimeos\MW\Translation\Iface::class, new \Aimeos\MW\Translation\None( 'de' ) );
 	}
 
 
 	public function testConstructFiveLetterLocale()
 	{
-		new \Aimeos\MW\Translation\None( 'de_DE' );
+		$this->assertInstanceOf( \Aimeos\MW\Translation\Iface::class, new \Aimeos\MW\Translation\None( 'de_DE' ) );
 	}
 
 
 	public function testConstructInvalidUnderscoreLocale()
 	{
-		$this->setExpectedException( \Aimeos\MW\Translation\Exception::class );
+		$this->expectException( \Aimeos\MW\Translation\Exception::class );
 		new \Aimeos\MW\Translation\None( 'de_' );
 	}
 
 
 	public function testConstructInvalidCaseLocale()
 	{
-		$this->setExpectedException( \Aimeos\MW\Translation\Exception::class );
+		$this->expectException( \Aimeos\MW\Translation\Exception::class );
 		new \Aimeos\MW\Translation\None( 'de_de' );
 	}
 
 
 	public function testConstructInvalidCharLocale()
 	{
-		$this->setExpectedException( \Aimeos\MW\Translation\Exception::class );
+		$this->expectException( \Aimeos\MW\Translation\Exception::class );
 		new \Aimeos\MW\Translation\None( 'd' );
 	}
 

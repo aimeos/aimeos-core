@@ -12,7 +12,7 @@ class ComposeTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$loggers = array(
 			new \Aimeos\MW\Logger\File( 'tmp/error1.log', \Aimeos\MW\Logger\Base::ERR ),
@@ -24,7 +24,7 @@ class ComposeTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		if( file_exists( 'tmp/error2.log' ) ) {
 			unlink( 'tmp/error2.log' );

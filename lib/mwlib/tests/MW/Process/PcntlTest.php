@@ -5,7 +5,7 @@ namespace Aimeos\MW\Process;
 
 class PcntlTest extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( function_exists( 'pcntl_fork' ) === false ) {
 			$this->markTestSkipped( 'PCNTL extension not available' );
@@ -42,9 +42,11 @@ class PcntlTest extends \PHPUnit\Framework\TestCase
 		$filter = stream_filter_prepend( STDERR, "redirect", STREAM_FILTER_WRITE );
 
 		$object = new \Aimeos\MW\Process\Pcntl();
-		$object->start( $fcn, [], true )->wait();
+		$result = $object->start( $fcn, [], true )->wait();
 
 		stream_filter_remove( $filter );
+
+		$this->assertInstanceOf( \Aimeos\MW\Process\Iface::class, $result );
 	}
 }
 

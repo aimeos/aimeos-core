@@ -14,13 +14,13 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->object = $this->getMockForAbstractClass( \Aimeos\MW\Common\Manager\Base::class );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -115,7 +115,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$method = $class->getMethod( 'getSearchTranslations' );
 		$method->setAccessible( true );
 
-		$this->setExpectedException( \Aimeos\Mw\Exception::class );
+		$this->expectException( \Aimeos\Mw\Exception::class );
 		$method->invokeArgs( $this->object, array( array( [] ) ) );
 	}
 
@@ -165,7 +165,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$method = $class->getMethod( 'getSearchTypes' );
 		$method->setAccessible( true );
 
-		$this->setExpectedException( \Aimeos\Mw\Exception::class );
+		$this->expectException( \Aimeos\Mw\Exception::class );
 		$method->invokeArgs( $this->object, array( array( [] ) ) );
 	}
 }

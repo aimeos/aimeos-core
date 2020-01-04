@@ -110,6 +110,8 @@ class Standard
 	 */
 	public function save( string $filename = null, string $mimetype = null ) : ?string
 	{
+		$result = null;
+
 		if( $mimetype === null ) {
 			$mimetype = $this->getMimeType();
 		}
@@ -123,10 +125,12 @@ class Standard
 			$quality = max( min( (int) $this->options['image']['quality'], 100 ), 0 );
 		}
 
+		if( $filename === null ) {
+			ob_start();
+		}
+
 		try
 		{
-			ob_start();
-
 			switch( $mimetype )
 			{
 				case 'image/gif':
@@ -160,18 +164,15 @@ class Standard
 				default:
 					throw new \Aimeos\MW\Media\Exception( sprintf( 'File format "%1$s" is not supported', $mimetype ) );
 			}
-
+		}
+		finally
+		{
 			if( $filename === null ) {
-				return ob_get_clean();
+				$result = ob_get_clean();
 			}
 		}
-		catch( \Exception $e )
-		{
-			ob_end_clean();
-			throw $e;
-		}
 
-		return null;
+		return $result;
 	}
 
 

@@ -17,7 +17,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 	private $mockProvider;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -31,7 +31,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->context, $this->servItem, $this->mockProvider );
 	}
@@ -58,7 +58,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'null', $result['quantity.packagecosts'] );
+		$this->assertNull( $result['quantity.packagecosts'] );
 	}
 
 
@@ -72,7 +72,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'string', $result['quantity.packagecosts'] );
+		$this->assertIsString( $result['quantity.packagecosts'] );
 	}
 
 

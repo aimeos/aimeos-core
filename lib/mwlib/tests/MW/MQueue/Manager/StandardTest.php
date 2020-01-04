@@ -9,14 +9,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->config = \TestHelperMw::getConfig();
 		$this->object = new \Aimeos\MW\MQueue\Manager\Standard( $this->config );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		$this->config->set( 'resource/mq-email', null );
 		$this->config->set( 'resource/mq', null );

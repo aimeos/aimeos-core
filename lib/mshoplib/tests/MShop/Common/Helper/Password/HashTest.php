@@ -11,7 +11,7 @@ namespace Aimeos\MShop\Common\Helper\Password;
 
 class HashTest extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !function_exists( 'hash' ) ) {
 			$this->markTestSkipped( 'Function "hash()" is not available' );

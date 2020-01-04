@@ -15,7 +15,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $values;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->values = array(
 			'locale.site.id' => 12,
@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		$this->object = null;
 	}
@@ -226,13 +226,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddChild()
 	{
-		$this->object->addChild( $this->object );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Tree\Iface::class, $this->object->addChild( $this->object ) );
 	}
 
 
 	public function testGetChild()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Locale\Exception::class );
+		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
 		$this->object->getChild( 0 );
 	}
 

@@ -17,7 +17,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $values;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 
@@ -38,7 +38,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->locale, $this->object, $this->values );
 	}

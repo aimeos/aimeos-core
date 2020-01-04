@@ -15,7 +15,7 @@ class MemoryTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$strings = array( 'domain' => array(
 			'test singular' => array( 0 => 'translation singular' ),
@@ -31,7 +31,7 @@ class MemoryTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 	}
 

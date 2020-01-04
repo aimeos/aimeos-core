@@ -17,7 +17,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $editor = '';
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
 		$this->object = new \Aimeos\MShop\Customer\Manager\Standard( \TestHelperMShop::getContext() );
@@ -31,7 +31,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->fixture, $this->address );
 	}
@@ -201,7 +201,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->getItem( $item->getId() );
 	}
 
@@ -391,14 +391,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'address' ) );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'address', 'Standard' ) );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->getSubManager( 'address', 'unknown' );
 	}
 }

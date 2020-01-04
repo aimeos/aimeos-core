@@ -14,13 +14,13 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->object = new \Aimeos\MShop\Index\Manager\Attribute\MySQL( \TestHelperMShop::getContext() );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

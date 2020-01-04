@@ -18,7 +18,7 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 	private $product;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
@@ -31,7 +31,7 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->order, $this->plugin, $this->product );
 	}
@@ -39,7 +39,7 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$this->object->register( $this->order );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $this->order ) );
 	}
 
 
@@ -54,7 +54,7 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->plugin->setConfig( ['values' => ['package-height' => 0]] );
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Exception::class );
 		$this->object->update( $this->order, 'addProduct.before', $this->product );
 	}
 }

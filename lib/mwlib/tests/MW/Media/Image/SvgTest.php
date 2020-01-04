@@ -14,7 +14,7 @@ class SvgTest extends \PHPUnit\Framework\TestCase
 	private $content;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$ds = DIRECTORY_SEPARATOR;
 		$this->content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.svgz' );
@@ -31,7 +31,7 @@ class SvgTest extends \PHPUnit\Framework\TestCase
 
 	public function testConstructException()
 	{
-		$this->setExpectedException( \Aimeos\MW\Media\Exception::class );
+		$this->expectException( \Aimeos\MW\Media\Exception::class );
 		new \Aimeos\MW\Media\Image\Svg( 'test', 'text/plain', [] );
 	}
 

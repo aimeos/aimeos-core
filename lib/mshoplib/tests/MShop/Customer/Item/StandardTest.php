@@ -17,7 +17,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $address;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->values = array(
 			'customer.id' => 541,
@@ -66,7 +66,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->address, $this->values );
 	}

@@ -21,7 +21,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 	private $mockProvider;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -38,7 +38,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->basket, $this->mockProvider, $this->servItem, $this->context );
 	}
@@ -74,10 +74,10 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'null', $result['postal.billing-include'] );
-		$this->assertInternalType( 'null', $result['postal.billing-exclude'] );
-		$this->assertInternalType( 'null', $result['postal.delivery-include'] );
-		$this->assertInternalType( 'null', $result['postal.delivery-exclude'] );
+		$this->assertNull( $result['postal.billing-include'] );
+		$this->assertNull( $result['postal.billing-exclude'] );
+		$this->assertNull( $result['postal.delivery-include'] );
+		$this->assertNull( $result['postal.delivery-exclude'] );
 	}
 
 
@@ -90,10 +90,10 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'null', $result['postal.billing-include'] );
-		$this->assertInternalType( 'null', $result['postal.billing-exclude'] );
-		$this->assertInternalType( 'null', $result['postal.delivery-include'] );
-		$this->assertInternalType( 'null', $result['postal.delivery-exclude'] );
+		$this->assertNull( $result['postal.billing-include'] );
+		$this->assertNull( $result['postal.billing-exclude'] );
+		$this->assertNull( $result['postal.delivery-include'] );
+		$this->assertNull( $result['postal.delivery-exclude'] );
 	}
 
 
@@ -112,10 +112,10 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'string', $result['postal.billing-include'] );
-		$this->assertInternalType( 'string', $result['postal.billing-exclude'] );
-		$this->assertInternalType( 'string', $result['postal.delivery-include'] );
-		$this->assertInternalType( 'string', $result['postal.delivery-exclude'] );
+		$this->assertIsString( $result['postal.billing-include'] );
+		$this->assertIsString( $result['postal.billing-exclude'] );
+		$this->assertIsString( $result['postal.delivery-include'] );
+		$this->assertIsString( $result['postal.delivery-exclude'] );
 	}
 
 

@@ -16,7 +16,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $values;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->values = array(
 			'order.base.address.id' => 23,
@@ -31,7 +31,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.address.firstname' => 'firstunit',
 			'order.base.address.lastname' => 'lastunit',
 			'order.base.address.address1' => 'unit str.',
-			'order.base.address.address2' => ' 166',
+			'order.base.address.address2' => '166',
 			'order.base.address.address3' => '4.OG',
 			'order.base.address.postal' => '22769',
 			'order.base.address.city' => 'Hamburg',
@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -378,7 +378,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'unit@test.de', $this->object->getEmail() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setEmail( 'a@.' );
 	}
 
@@ -413,7 +413,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'www.test.de', $this->object->getWebsite() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setWebsite( 'abcde:abc' );
 	}
 
@@ -494,7 +494,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetPositionInvalid()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
+		$this->expectException( \Aimeos\MShop\Order\Exception::class );
 		$this->object->setPosition( -1 );
 	}
 

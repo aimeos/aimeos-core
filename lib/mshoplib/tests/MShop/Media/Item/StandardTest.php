@@ -16,7 +16,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $values;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->values = array(
 			'media.id' => 1,
@@ -39,7 +39,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -127,7 +127,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLanguageIdInvalid()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setLanguageId( '00' );
 	}
 
@@ -150,14 +150,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetMimeTypeNoSlash()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Media\Exception::class );
+		$this->expectException( \Aimeos\MShop\Media\Exception::class );
 		$this->object->setMimeType( 'image' );
 	}
 
 
 	public function testSetMimeTypeInvalidCategory()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Media\Exception::class );
+		$this->expectException( \Aimeos\MShop\Media\Exception::class );
 		$this->object->setMimeType( 'image+audio/test' );
 	}
 

@@ -753,9 +753,8 @@ class Standard
 			return $this->cache[$id];
 		}
 
-		$criteria = $this->getObject()->createSearch();
+		$criteria = $this->getObject()->createSearch()->setSlice( 0, 1 );
 		$criteria->setConditions( $criteria->compare( '==', 'locale.site.code', 'default' ) );
-		$criteria->setSlice( 0, 1 );
 
 		$items = $this->getObject()->searchItems( $criteria, $ref );
 

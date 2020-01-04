@@ -15,7 +15,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $values;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->values = array(
 			'supplier.address.id' => 23,
@@ -28,7 +28,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'supplier.address.firstname' => 'firstunit',
 			'supplier.address.lastname' => 'lastunit',
 			'supplier.address.address1' => 'unit str.',
-			'supplier.address.address2' => ' 166',
+			'supplier.address.address2' => '166',
 			'supplier.address.address3' => '4.OG',
 			'supplier.address.postal' => '22769',
 			'supplier.address.city' => 'Hamburg',
@@ -51,7 +51,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		$this->object = null;
 	}
@@ -343,7 +343,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'unit@test.de', $this->object->getEmail() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setEmail( 'unittest.de' );
 	}
 
@@ -382,14 +382,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setWebsite( 'http://www.test.de:443' );
 		$this->object->setWebsite( 'https://www.test.de:8080/abc?123' );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setWebsite( '_test:de' );
 	}
 
 
 	public function testSetWebsiteHostException()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setWebsite( 'localhost' );
 	}
 

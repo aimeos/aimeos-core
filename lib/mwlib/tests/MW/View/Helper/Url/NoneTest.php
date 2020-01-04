@@ -15,14 +15,14 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$view = new \Aimeos\MW\View\Standard();
 		$this->object = new \Aimeos\MW\View\Helper\Url\None( $view );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		$this->object = null;
 	}

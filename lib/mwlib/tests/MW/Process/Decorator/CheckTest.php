@@ -9,7 +9,7 @@ class CheckTest extends \PHPUnit\Framework\TestCase
 	private $stub;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->stub = $this->getMockBuilder( 'Aimeos\MW\Process\Iface' )
 			->setMethods( ['isAvailable', 'start', 'wait'] )
@@ -19,7 +19,7 @@ class CheckTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->stub );
 	}

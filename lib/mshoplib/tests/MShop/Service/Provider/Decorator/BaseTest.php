@@ -16,7 +16,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	private $context;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -41,7 +41,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

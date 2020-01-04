@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$ds = DIRECTORY_SEPARATOR;
 		$content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'application.txt' );
 
-		$this->setExpectedException( \Aimeos\MW\Media\Exception::class );
+		$this->expectException( \Aimeos\MW\Media\Exception::class );
 		new \Aimeos\MW\Media\Image\Standard( $content, 'text/plain', [] );
 	}
 
@@ -62,6 +62,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/png', [] );
 
+		$this->assertInstanceOf( \Aimeos\MW\Media\Image\Iface::class, $media );
 		unset( $media );
 	}
 
@@ -110,7 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/png', [] );
 
-		$this->setExpectedException( \Aimeos\MW\Media\Exception::class );
+		$this->expectException( \Aimeos\MW\Media\Exception::class );
 		$media->save( $dest, 'image/gif' );
 	}
 
@@ -137,7 +138,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/png', [] );
 
-		$this->setExpectedException( \Aimeos\MW\Media\Exception::class );
+		$this->expectException( \Aimeos\MW\Media\Exception::class );
 		$media->save( $dest, 'image/jpeg' );
 	}
 
@@ -164,7 +165,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/gif', [] );
 
-		$this->setExpectedException( \Aimeos\MW\Media\Exception::class );
+		$this->expectException( \Aimeos\MW\Media\Exception::class );
 		$media->save( $dest, 'image/png' );
 	}
 
@@ -177,7 +178,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$content = file_get_contents( $basedir . $ds . '_testfiles' . $ds . 'image.jpg' );
 		$options = ['image' => ['watermark' => $basedir . $ds . 'notexisting' . $ds . 'image.png']];
 
-		$this->setExpectedException( \Aimeos\MW\Media\Exception::class );
+		$this->expectException( \Aimeos\MW\Media\Exception::class );
 		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/png', $options );
 	}
 
@@ -190,7 +191,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$content = file_get_contents( $basedir . $ds . '_testfiles' . $ds . 'image.jpg' );
 		$options = ['image' => ['watermark' => $basedir . $ds . '_testfiles' . $ds . 'application.txt']];
 
-		$this->setExpectedException( \Aimeos\MW\Media\Exception::class );
+		$this->expectException( \Aimeos\MW\Media\Exception::class );
 		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/png', $options );
 	}
 

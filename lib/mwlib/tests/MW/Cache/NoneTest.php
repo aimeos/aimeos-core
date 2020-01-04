@@ -14,13 +14,13 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->object = new \Aimeos\MW\Cache\None();
 	}
 
 
-	public function tearDown()
+	public function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -76,6 +76,6 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetMultiple()
 	{
-		$this->object->setMultiple( [] );
+		$this->assertTrue( $this->object->setMultiple( [] ) );
 	}
 }

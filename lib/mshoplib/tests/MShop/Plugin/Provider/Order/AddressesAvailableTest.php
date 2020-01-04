@@ -18,7 +18,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 	private $plugin;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
@@ -31,7 +31,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->plugin, $this->order, $this->address, $this->object );
 	}
@@ -63,7 +63,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$this->object->register( $this->order );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $this->order ) );
 	}
 
 
@@ -109,7 +109,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => true
 		) );
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', $value );
 	}
 
@@ -140,7 +140,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => false
 		) );
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', $value );
 	}
 }

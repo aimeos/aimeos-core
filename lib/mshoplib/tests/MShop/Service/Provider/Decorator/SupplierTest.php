@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
 
-class SupplierTest extends \PHPUnit_Framework_TestCase
+class SupplierTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $basket;
@@ -18,7 +18,7 @@ class SupplierTest extends \PHPUnit_Framework_TestCase
 	private $mockProvider;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -35,7 +35,7 @@ class SupplierTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->basket, $this->mockProvider, $this->servItem, $this->context );
 	}
@@ -63,7 +63,7 @@ class SupplierTest extends \PHPUnit_Framework_TestCase
 		$basket = $orderBaseManager->load( $order->getBaseId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 		$config = $this->object->getConfigFE( $basket );
 
-		$this->assertInternalType( 'array', $config['supplier.code']->getDefault() );
+		$this->assertIsArray( $config['supplier.code']->getDefault() );
 		$this->assertGreaterThanOrEqual( 2, count( $config['supplier.code']->getDefault() ) );
 
 		foreach( $config['supplier.code']->getDefault() as $string ) {

@@ -24,7 +24,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	 *
 	 * @access protected
 	 */
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$config = $this->context->getConfig();
@@ -35,7 +35,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		\Aimeos\MShop\Attribute\Manager\Factory::injectManager( '\Aimeos\MShop\Attribute\Manager\StandardMock', null );
 	}
@@ -58,7 +58,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Attribute\Manager\Factory::injectManager( '\Aimeos\MShop\Attribute\Manager\StandardMock', $manager );
 		\Aimeos\MShop\Attribute\Manager\Factory::injectManager( '\Aimeos\MShop\Attribute\Manager\StandardMock', null );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		\Aimeos\MShop\Attribute\Manager\Factory::create( $this->context, 'StandardMock' );
 	}
 

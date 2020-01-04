@@ -16,7 +16,7 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 	private $ordServItem;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 
@@ -31,7 +31,7 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

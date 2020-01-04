@@ -10,7 +10,7 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 	private $dbmStub;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->mock = $this->getMockBuilder( \Aimeos\MW\DB\Connection\PDO::class )
 			->setMethods( array( 'create' ) )
@@ -26,7 +26,7 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

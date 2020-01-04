@@ -14,13 +14,13 @@ class NolimitTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->object = new \Aimeos\MShop\Stock\Manager\Nolimit( \TestHelperMShop::getContext() );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -56,7 +56,8 @@ class NolimitTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->getItem( -1 );
 		$item = $this->object->saveItem( $item );
-		$this->object->deleteItem( $item->getId() );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->deleteItem( $item->getId() ) );
 	}
 
 
@@ -78,12 +79,12 @@ class NolimitTest extends \PHPUnit\Framework\TestCase
 
 	public function testDecrease()
 	{
-		$this->object->decrease( ['text' => 5] );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->decrease( ['text' => 5] ) );
 	}
 
 
 	public function testIncrease()
 	{
-		$this->object->increase( ['text' => 5] );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->increase( ['text' => 5] ) );
 	}
 }

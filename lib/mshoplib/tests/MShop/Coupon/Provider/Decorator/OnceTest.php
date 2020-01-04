@@ -16,7 +16,7 @@ class OnceTest extends \PHPUnit\Framework\TestCase
 	private $couponItem;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->couponItem = \Aimeos\MShop::create( $this->context, 'coupon' )->createItem();
@@ -34,7 +34,7 @@ class OnceTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->context, $this->orderBase, $this->couponItem );
 	}

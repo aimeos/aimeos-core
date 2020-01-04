@@ -18,7 +18,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 	private $context;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
@@ -40,7 +40,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'product' );
 		$manager->deleteItem( $manager->findItem( 'WTF' )->getId() );
@@ -51,7 +51,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$this->object->register( $this->order );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $this->order ) );
 	}
 
 
@@ -76,7 +76,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $badItem );
 		$type = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', $type );
 	}
 
@@ -92,7 +92,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $badItem );
 		$type = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', $type );
 	}
 
@@ -108,7 +108,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $badItem );
 		$type = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', $type );
 	}
 

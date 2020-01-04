@@ -19,7 +19,7 @@ class ExceptionTest extends \PHPUnit\Framework\TestCase
 	 *
 	 * @access protected
 	 */
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->codes = array( 'something' => array( 'went', 'terribly', 'wrong' ) );
 	}

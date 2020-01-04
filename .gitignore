@@ -2,17 +2,20 @@ composer.lock
 /config/resource.php
 
 Packages/
+public/
 vendor/
 
 misc/apidoc/
 misc/confdoc/
 misc/coveralls.json
-coverage.xml
 tmp/
+
+coverage.xml
 confdoc.ser
 *.junit.xml
 *.log
 
+.phpunit.result.cache
 .buildpath
 .project
 .settings/

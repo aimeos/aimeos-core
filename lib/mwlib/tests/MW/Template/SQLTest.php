@@ -15,7 +15,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$template = 'SELECT * FROM /*-FROM*/table/*FROM-*/';
 
@@ -29,7 +29,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	 *
 	 * @access protected
 	 */
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 	}
 

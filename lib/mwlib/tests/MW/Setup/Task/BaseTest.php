@@ -16,7 +16,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$config = \TestHelperMw::getConfig();
 
@@ -32,7 +32,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->dbm );
 	}
@@ -47,12 +47,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testGetPostDependencies()
 	{
 		$this->assertEquals( [], $this->object->getPostDependencies() );
-	}
-
-
-	public function testMigrate()
-	{
-		$this->object->migrate();
 	}
 
 

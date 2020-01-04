@@ -9,7 +9,7 @@ namespace Aimeos\MW\Container\Content;
  */
 class BinaryTest extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !is_dir( 'tmp' ) ) {
 			mkdir( 'tmp', 0755 );

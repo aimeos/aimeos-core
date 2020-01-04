@@ -17,7 +17,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 	private $plugin;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
@@ -26,7 +26,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->plugin, $this->context );
 	}
@@ -60,7 +60,8 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$this->object->register( \Aimeos\MShop::create( $this->context, 'order/base' )->createItem() );
+		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem();
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $order ) );
 	}
 
 

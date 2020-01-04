@@ -15,14 +15,14 @@ class APCTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$trans = new \Aimeos\MW\Translation\None( 'en_GB' );
 		$this->object = new \Aimeos\MW\Translation\Decorator\APC( $trans, 'i18n' );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

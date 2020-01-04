@@ -15,14 +15,14 @@ class MemoryTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$conf = new \Aimeos\MW\Config\PHPArray( [] );
 		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 	}
 

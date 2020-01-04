@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	 *
 	 * @access protected
 	 */
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->values = array(
 			'order.base.coupon.id' => 1,
@@ -47,7 +47,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	 *
 	 * @access protected
 	 */
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

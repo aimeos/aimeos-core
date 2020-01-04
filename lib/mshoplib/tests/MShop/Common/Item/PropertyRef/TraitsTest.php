@@ -32,7 +32,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	private $propItem2;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->propItem = new \Aimeos\MShop\Common\Item\Property\Standard( 'c.', ['.languageid' => 'de', 'c.type' => 'test', 'c.value' => 'value'] );
 		$this->propItem2 = new \Aimeos\MShop\Common\Item\Property\Standard( 'c.', ['.languageid' => 'de', 'c.languageid' => 'en', 'c.type' => 'test2'] );
@@ -43,7 +43,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->propItem, $this->propItem2 );
 	}

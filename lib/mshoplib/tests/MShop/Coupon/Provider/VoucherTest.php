@@ -17,7 +17,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $this->context );
@@ -32,7 +32,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->context, $this->couponItem, $this->orderBase );
 	}
@@ -57,7 +57,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'getUsedRebate' )
 			->will( $this->returnValue( 20.0 ) );
 
-		$object->update( $this->orderBase );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $object->update( $this->orderBase ) );
 
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();
@@ -82,7 +82,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckVoucher()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
+		$this->expectException( \Aimeos\MShop\Coupon\Exception::class );
 		$this->access( 'checkVoucher' )->invokeArgs( $this->object, [-1, [5, 6]] );
 	}
 
@@ -115,7 +115,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $id, $item->getId() );
 
-		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
+		$this->expectException( \Aimeos\MShop\Coupon\Exception::class );
 		$this->access( 'getOrderProductItem' )->invokeArgs( $this->object, [$id, 'XXX'] );
 	}
 

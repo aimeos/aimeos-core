@@ -21,7 +21,7 @@ class T3Test extends \PHPUnit\Framework\TestCase
 	 *
 	 * @access protected
 	 */
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$template = 'TYPO3 Template <!--###NAME-->Name<!--NAME###-->';
 
@@ -35,7 +35,7 @@ class T3Test extends \PHPUnit\Framework\TestCase
 	 *
 	 * @access protected
 	 */
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 	}
 

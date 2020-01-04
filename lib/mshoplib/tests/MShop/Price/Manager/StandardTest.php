@@ -16,13 +16,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $editor = '';
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
 		$this->object = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelperMShop::getContext() );
 	}
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultSaved );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -337,14 +337,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->createItem();
 		$item->setValue( '1.00' );
 
-		$this->setExpectedException( \Aimeos\MShop\Price\Exception::class );
+		$this->expectException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->getLowestPrice( array( $item ), 1, 'USD' );
 	}
 
 
 	public function testGetLowestPriceNoPrice()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Price\Exception::class );
+		$this->expectException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->getLowestPrice( [], 1 );
 	}
 
@@ -355,14 +355,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setValue( '1.00' );
 		$item->setQuantity( 5 );
 
-		$this->setExpectedException( \Aimeos\MShop\Price\Exception::class );
+		$this->expectException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->getLowestPrice( array( $item ), 1 );
 	}
 
 
 	public function testGetLowestPriceWrongItem()
 	{
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$this->object->getLowestPrice( array( new \stdClass() ), 1 );
 	}
 }

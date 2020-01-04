@@ -19,7 +19,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 	private $products;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem()->setConfig( ['single-number-max' => 10] );
@@ -40,7 +40,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->order, $this->plugin, $this->products, $this->context );
 	}
@@ -83,7 +83,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$this->object->register( $this->order );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $this->order ) );
 	}
 
 
@@ -97,7 +97,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 
 		$product = $this->products['CNE']->setQuantity( 11 );
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Exception::class );
 		$this->object->update( $this->order, 'addProduct.before', $product );
 	}
 
@@ -116,7 +116,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 		$product = $this->products['CNE']->setQuantity( 3 )
 			->setPrice( $priceManager->createItem()->setValue( '3.50' ) );
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Exception::class );
 		$this->object->update( $this->order, 'addProduct.before', $product );
 	}
 
@@ -132,7 +132,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $this->products['CNC'] );
 		$product = $this->products['CNE']->setQuantity( 1 );
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Exception::class );
 		$this->object->update( $this->order, 'addProduct.before', $product );
 	}
 
@@ -152,7 +152,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 		$product = $this->products['CNE']->setQuantity( 2 )
 			->setPrice( $priceManager->createItem()->setValue( '10.00' ) );
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Exception::class );
 		$this->object->update( $this->order, 'addProduct.before', $product );
 	}
 }

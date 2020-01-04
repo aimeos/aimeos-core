@@ -16,7 +16,7 @@ class NotTest extends \PHPUnit\Framework\TestCase
 	private $orderBase;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 		$item = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->createItem();
@@ -33,7 +33,7 @@ class NotTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->provider, $this->orderBase );
 	}

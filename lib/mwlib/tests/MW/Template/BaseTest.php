@@ -21,7 +21,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	 *
 	 * @access protected
 	 */
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$template = '
 <html>
@@ -48,7 +48,7 @@ test template
 	 *
 	 * @access protected
 	 */
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 	}
 
@@ -89,7 +89,7 @@ test template
 
 	public function testGetBeginIsNotDefined()
 	{
-		$this->setExpectedException( \Aimeos\MW\Template\Exception::class );
+		$this->expectException( \Aimeos\MW\Template\Exception::class );
 		$this->object->get( 'NOTDEFINED' );
 	}
 
@@ -113,7 +113,7 @@ test template
 
 		$object = new \Aimeos\MW\Template\Base( $template, '<!--###$-->', '<!--$###-->' );
 
-		$this->setExpectedException( \Aimeos\MW\Template\Exception::class );
+		$this->expectException( \Aimeos\MW\Template\Exception::class );
 		$object->get( 'ITEM' );
 	}
 
@@ -168,7 +168,7 @@ test template
 
 		$object = new \Aimeos\MW\Template\Base( $template, '<!--###$-->', '<!--$###-->' );
 
-		$this->setExpectedException( \Aimeos\MW\Template\Exception::class );
+		$this->expectException( \Aimeos\MW\Template\Exception::class );
 		$object->substitute( array( 'ITEM'=>'Title' ) );
 	}
 

@@ -16,14 +16,14 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	private $context;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->object = new \Aimeos\MAdmin\Cache\Manager\None( $this->context );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		$this->object = null;
 	}
@@ -53,7 +53,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( \Aimeos\MAdmin\Exception::class );
+		$this->expectException( \Aimeos\MAdmin\Exception::class );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -70,7 +70,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$this->setExpectedException( \Aimeos\MAdmin\Cache\Exception::class );
+		$this->expectException( \Aimeos\MAdmin\Cache\Exception::class );
 		$this->object->getItem( 'unittest' );
 	}
 

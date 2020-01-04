@@ -18,7 +18,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	private $plugin;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
@@ -43,7 +43,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->plugin, $this->order, $this->context );
 	}
@@ -76,7 +76,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$this->object->register( $this->order );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $this->order ) );
 	}
 
 

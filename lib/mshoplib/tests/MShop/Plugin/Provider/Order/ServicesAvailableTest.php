@@ -18,7 +18,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 	private $service;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
@@ -29,7 +29,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->plugin, $this->service, $this->order );
 	}
@@ -66,7 +66,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$this->object->register( $this->order );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $this->order ) );
 	}
 
 
@@ -112,7 +112,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 				'payment' => true
 		) );
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', $part );
 	}
 
@@ -146,7 +146,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 				'payment' => true
 		) );
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', $part );
 	}
 
@@ -177,7 +177,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 				'payment' => false
 		) );
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', $part );
 	}
 }

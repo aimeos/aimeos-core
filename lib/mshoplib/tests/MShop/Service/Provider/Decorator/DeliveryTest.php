@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
 
-class DeliveryTest extends \PHPUnit_Framework_TestCase
+class DeliveryTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $basket;
@@ -18,7 +18,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
 	private $mockProvider;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -35,7 +35,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->basket, $this->mockProvider, $this->servItem, $this->context );
 	}
@@ -68,8 +68,8 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'null', $result['delivery.partial'] );
-		$this->assertInternalType( 'null', $result['delivery.collective'] );
+		$this->assertNull( $result['delivery.partial'] );
+		$this->assertNull( $result['delivery.collective'] );
 	}
 
 
@@ -82,8 +82,8 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'null', $result['delivery.partial'] );
-		$this->assertInternalType( 'null', $result['delivery.collective'] );
+		$this->assertNull( $result['delivery.partial'] );
+		$this->assertNull( $result['delivery.collective'] );
 	}
 
 
@@ -100,8 +100,8 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'string', $result['delivery.partial'] );
-		$this->assertInternalType( 'string', $result['delivery.collective'] );
+		$this->assertIsString( $result['delivery.partial'] );
+		$this->assertIsString( $result['delivery.collective'] );
 	}
 
 
@@ -127,7 +127,7 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
 		$basket = $orderBaseManager->load( $order->getBaseId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 		$config = $this->object->getConfigFE( $basket );
 
-		$this->assertInternalType( 'array', $config['delivery.type']->getDefault() );
+		$this->assertIsArray( $config['delivery.type']->getDefault() );
 	}
 
 

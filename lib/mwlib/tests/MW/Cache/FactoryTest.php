@@ -33,21 +33,21 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testFactoryUnknown()
 	{
-		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
+		$this->expectException( \Aimeos\MW\Cache\Exception::class );
 		\Aimeos\MW\Cache\Factory::create( 'unknown' );
 	}
 
 
 	public function testFactoryInvalidCharacters()
 	{
-		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
+		$this->expectException( \Aimeos\MW\Cache\Exception::class );
 		\Aimeos\MW\Cache\Factory::create( '$$$' );
 	}
 
 
 	public function testFactoryInvalidClass()
 	{
-		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
+		$this->expectException( \Aimeos\MW\Cache\Exception::class );
 		\Aimeos\MW\Cache\Factory::create( 'InvalidCache' );
 	}
 }

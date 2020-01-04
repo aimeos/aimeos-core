@@ -46,7 +46,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	private $listItem2;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$values = ['.languageid' => null, 'text.status' => 1];
 
@@ -88,7 +88,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

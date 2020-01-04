@@ -7,9 +7,10 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $config;
+	private $conn;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$schema = new \Doctrine\DBAL\Schema\Schema();
 
@@ -22,21 +23,18 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$this->config = \TestHelperMw::getConfig();
 		$this->object = new \Aimeos\MW\DB\Manager\DBAL( $this->config );
 
-		$conn = $this->object->acquire();
+		$this->conn = $this->object->acquire();
 
-		foreach( $schema->toSQL( $conn->getRawObject()->getDatabasePlatform() ) as $sql ) {
-			$conn->create( $sql )->execute()->finish();
+		foreach( $schema->toSQL( $this->conn->getRawObject()->getDatabasePlatform() ) as $sql ) {
+			$this->conn->create( $sql )->execute()->finish();
 		}
-
-		$this->object->release( $conn );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
-		$conn = $this->object->acquire();
-		$conn->create( 'DROP TABLE "mw_unit_test"' )->execute()->finish();
-		$this->object->release( $conn );
+		$this->conn->create( 'DROP TABLE "mw_unit_test"' )->execute()->finish();
+		$this->object->release( $this->conn );
 
 		unset( $this->object );
 	}
@@ -47,15 +45,13 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (\'1\')';
 		$sqlselect = 'SELECT "name" FROM "mw_unit_test" WHERE "name" = \'1\'';
 
-		$conn = $this->object->acquire();
-
-		$conn->begin();
-		$stmt = $conn->create( $sqlinsert );
+		$this->conn->begin();
+		$stmt = $this->conn->create( $sqlinsert );
 		$stmt->execute()->finish();
 		$stmt->execute()->finish();
-		$conn->commit();
+		$this->conn->commit();
 
-		$result = $conn->create( $sqlselect )->execute();
+		$result = $this->conn->create( $sqlselect )->execute();
 
 		$rows = [];
 		while( ( $row = $result->fetch() ) !== null ) {
@@ -63,8 +59,6 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$result->finish();
-
-		$this->object->release( $conn );
 
 		$this->assertEquals( 2, count( $rows ) );
 	}
@@ -75,19 +69,17 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (\'1\')';
 		$sqlselect = 'SELECT "name" FROM "mw_unit_test" WHERE "name" = \'1\'';
 
-		$conn = $this->object->acquire();
+		$stmt = $this->conn->create( $sqlinsert );
 
-		$stmt = $conn->create( $sqlinsert );
-
-		$conn->begin();
+		$this->conn->begin();
 		$stmt->execute()->finish();
-		$conn->commit();
+		$this->conn->commit();
 
-		$conn->begin();
+		$this->conn->begin();
 		$stmt->execute()->finish();
-		$conn->commit();
+		$this->conn->commit();
 
-		$result = $conn->create( $sqlselect )->execute();
+		$result = $this->conn->create( $sqlselect )->execute();
 
 		$rows = [];
 		while( ( $row = $result->fetch() ) !== null ) {
@@ -95,8 +87,6 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$result->finish();
-
-		$this->object->release( $conn );
 
 		$this->assertEquals( 2, count( $rows ) );
 	}
@@ -107,15 +97,13 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (\'1\')';
 		$sqlselect = 'SELECT "name" FROM "mw_unit_test" WHERE "name" = \'1\'';
 
-		$conn = $this->object->acquire();
-
-		$conn->begin();
-		$stmt = $conn->create( $sqlinsert );
+		$this->conn->begin();
+		$stmt = $this->conn->create( $sqlinsert );
 		$stmt->execute()->finish();
 		$stmt->execute()->finish();
-		$conn->rollback();
+		$this->conn->rollback();
 
-		$result = $conn->create( $sqlselect )->execute();
+		$result = $this->conn->create( $sqlselect )->execute();
 
 		$rows = [];
 		while( ( $row = $result->fetch() ) !== null ) {
@@ -123,8 +111,6 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$result->finish();
-
-		$this->object->release( $conn );
 
 		$this->assertEquals( 0, count( $rows ) );
 	}
@@ -135,18 +121,16 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (\'1\')';
 		$sqlselect = 'SELECT "name" FROM "mw_unit_test" WHERE "name" = \'1\'';
 
-		$conn = $this->object->acquire();
+		$this->conn->begin();
+		$this->conn->begin();
 
-		$conn->begin();
-		$conn->begin();
-
-		$stmt = $conn->create( $sqlinsert );
+		$stmt = $this->conn->create( $sqlinsert );
 		$stmt->execute()->finish();
 
-		$conn->commit();
-		$conn->commit();
+		$this->conn->commit();
+		$this->conn->commit();
 
-		$result = $conn->create( $sqlselect )->execute();
+		$result = $this->conn->create( $sqlselect )->execute();
 
 		$rows = [];
 		while( ( $row = $result->fetch() ) !== null ) {
@@ -154,8 +138,6 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$result->finish();
-
-		$this->object->release( $conn );
 
 		$this->assertEquals( 1, count( $rows ) );
 	}
@@ -166,18 +148,16 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (\'1\')';
 		$sqlselect = 'SELECT "name" FROM "mw_unit_test" WHERE "name" = \'1\'';
 
-		$conn = $this->object->acquire();
+		$this->conn->begin();
+		$this->conn->begin();
 
-		$conn->begin();
-		$conn->begin();
-
-		$stmt = $conn->create( $sqlinsert );
+		$stmt = $this->conn->create( $sqlinsert );
 		$stmt->execute()->finish();
 
-		$conn->rollback();
-		$conn->rollback();
+		$this->conn->rollback();
+		$this->conn->rollback();
 
-		$result = $conn->create( $sqlselect )->execute();
+		$result = $this->conn->create( $sqlselect )->execute();
 
 		$rows = [];
 		while( ( $row = $result->fetch() ) !== null ) {
@@ -185,8 +165,6 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$result->finish();
-
-		$this->object->release( $conn );
 
 		$this->assertEquals( 0, count( $rows ) );
 	}
@@ -196,13 +174,9 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (\'1\')';
 
-		$conn = $this->object->acquire();
-
-		$result = $conn->create( $sqlinsert )->execute();
+		$result = $this->conn->create( $sqlinsert )->execute();
 		$rows = $result->affectedRows();
 		$result->finish();
-
-		$this->object->release( $conn );
 
 		$this->assertEquals( 1, $rows );
 	}
@@ -212,14 +186,10 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (:value)';
 
-		$conn = $this->object->acquire();
-
 		$value = "(\\')";
-		$sqlinsert = str_replace( ':value', '\'' . $conn->escape( $value ) . '\'', $sqlinsert );
-		$stmt = $conn->create( $sqlinsert );
+		$sqlinsert = str_replace( ':value', '\'' . $this->conn->escape( $value ) . '\'', $sqlinsert );
+		$stmt = $this->conn->create( $sqlinsert );
 		$stmt->execute()->finish();
-
-		$this->object->release( $conn );
 
 		$this->assertRegexp( '/^INSERT INTO "mw_unit_test" \("name"\) VALUES \(\'\(.*\\\'\)\'\)$/', strval( $stmt ) );
 	}
@@ -227,14 +197,11 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 	public function testStmtSimpleBindApostrophes()
 	{
-		$conn = $this->object->acquire();
+		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (1, \'' . $this->conn->escape( '\'\'' ) . '\')';
 
-		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (1, \'' . $conn->escape( '\'\'' ) . '\')';
+		$result = $this->conn->create( $sqlinsert )->execute()->finish();
 
-		$stmt = $conn->create( $sqlinsert );
-		$stmt->execute()->finish();
-
-		$this->object->release( $conn );
+		$this->assertInstanceOf( \Aimeos\MW\DB\Result\Iface::class, $result );
 	}
 
 
@@ -242,13 +209,11 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (?)';
 
-		$conn = $this->object->acquire();
-
-		$stmt = $conn->create( $sqlinsert );
+		$stmt = $this->conn->create( $sqlinsert );
 		$stmt->bind( 1, 'test' );
-		$stmt->execute()->finish();
+		$result = $stmt->execute()->finish();
 
-		$this->object->release( $conn );
+		$this->assertInstanceOf( \Aimeos\MW\DB\Result\Iface::class, $result );
 	}
 
 
@@ -256,23 +221,12 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 	{
 		$sqlinsert2 = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
-		$conn = $this->object->acquire();
+		$stmt2 = $this->conn->create( $sqlinsert2 );
+		$stmt2->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$stmt2->bind( 2, 0.15, 123 );
 
-		try
-		{
-			$stmt2 = $conn->create( $sqlinsert2 );
-			$stmt2->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt2->bind( 2, 0.15, 123 );
-			$stmt2->execute();
-		}
-		catch( \Aimeos\MW\DB\Exception $de )
-		{
-			$this->object->release( $conn );
-			return;
-		}
-
-		$this->object->release( $conn );
-		$this->fail( 'An expected exception has not been raised' );
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$stmt2->execute();
 	}
 
 
@@ -280,18 +234,10 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (?)';
 
-		$conn = $this->object->acquire();
+		$stmt = $this->conn->create( $sqlinsert );
 
-		try {
-			$stmt = $conn->create( $sqlinsert );
-			$stmt->execute();
-		} catch( \Aimeos\MW\DB\Exception $de ) {
-			$this->object->release( $conn );
-			return;
-		}
-
-		$this->object->release( $conn );
-		$this->fail( 'An expected exception has not been raised' );
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$stmt->execute();
 	}
 
 
@@ -299,15 +245,11 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (?)';
 
-		$conn = $this->object->acquire();
-
-		$stmt = $conn->create( $sqlinsert );
+		$stmt = $this->conn->create( $sqlinsert );
 		$stmt->bind( 1, 'test' );
 		$result = $stmt->execute();
 		$rows = $result->affectedRows();
 		$result->finish();
-
-		$this->object->release( $conn );
 
 		$this->assertEquals( 1, $rows );
 	}
@@ -318,19 +260,15 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 		$sqlselect = 'SELECT * FROM "mw_unit_test"';
 
-		$conn = $this->object->acquire();
-
-		$stmt = $conn->create( $sqlinsert );
+		$stmt = $this->conn->create( $sqlinsert );
 		$stmt->bind( 1, 1 );
 		$stmt->bind( 2, 'test' );
 		$stmt->execute()->finish();
 
-		$stmt = $conn->create( $sqlselect );
+		$stmt = $this->conn->create( $sqlselect );
 		$result = $stmt->execute();
 		$row = $result->fetch();
 		$result->finish();
-
-		$this->object->release( $conn );
 
 		$this->assertEquals( array( 'id' => 1, 'name' => 'test' ), $row );
 	}
@@ -338,33 +276,21 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 	public function testWrongFieldType()
 	{
-		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
-		$conn = $this->object->acquire();
+		$stmt = $this->conn->create( $sqlinsert );
+		$stmt->bind( 1, 1 );
+		$stmt->bind( 2, 'test', 123 );
 
-		try
-		{
-			$stmt = $conn->create( $sqlinsert );
-			$stmt->bind( 1, 1 );
-			$stmt->bind( 2, 'test', 123 );
-			$stmt->execute();
-		}
-		catch( \Aimeos\MW\DB\Exception $e )
-		{
-			$this->object->release( $conn );
-			throw $e;
-		}
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$stmt->execute();
 	}
 
 
 	public function testGetRawObject()
 	{
-		$conn = $this->object->acquire();
-		$raw = $conn->getRawObject();
-		$this->object->release( $conn );
-
-		$this->assertInstanceOf( \Doctrine\DBAL\Connection::class, $raw );
+		$this->assertInstanceOf( \Doctrine\DBAL\Connection::class, $this->conn->getRawObject() );
 	}
 
 
@@ -372,37 +298,15 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 	{
 		$sql = 'SELECT * FROM "mw_non_existing"';
 
-		$conn = $this->object->acquire();
-
-		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
-
-		try
-		{
-			$conn->create( $sql )->execute()->finish();
-		}
-		catch( \Aimeos\MW\DB\Exception $e )
-		{
-			$this->object->release( $conn );
-			throw $e;
-		}
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->conn->create( $sql )->execute()->finish();
 	}
 
 
 	public function testSqlError()
 	{
-		$conn = $this->object->acquire();
-
-		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
-
-		try
-		{
-			$conn->create( 'SELECT *' )->execute()->finish();
-		}
-		catch( \Aimeos\MW\DB\Exception $e )
-		{
-			$this->object->release( $conn );
-			throw $e;
-		}
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->conn->create( 'SELECT *' )->execute()->finish();
 	}
 
 
@@ -410,7 +314,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 	{
 		$mock = $this->getMockBuilder( \Aimeos\MW\DB\Connection\Iface::class )->getMock();
 
-		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
 		$this->object->release( $mock );
 	}
 
@@ -423,7 +327,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 	public function testFactoryFail()
 	{
-		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
 		\Aimeos\MW\DB\Factory::create( \TestHelperMw::getConfig(), 'notDefined' );
 	}
 }

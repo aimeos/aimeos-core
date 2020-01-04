@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
 
-class TimeTest extends \PHPUnit_Framework_TestCase
+class TimeTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $basket;
@@ -18,7 +18,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	private $mockProvider;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -35,7 +35,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->basket, $this->mockProvider, $this->servItem, $this->context );
 	}
@@ -69,9 +69,9 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 3, count( $result ) );
-		$this->assertInternalType( 'null', $result['time.start'] );
-		$this->assertInternalType( 'null', $result['time.end'] );
-		$this->assertInternalType( 'null', $result['time.weekdays'] );
+		$this->assertNull( $result['time.start'] );
+		$this->assertNull( $result['time.end'] );
+		$this->assertNull( $result['time.weekdays'] );
 	}
 
 
@@ -84,9 +84,9 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 3, count( $result ) );
-		$this->assertInternalType( 'null', $result['time.start'] );
-		$this->assertInternalType( 'null', $result['time.end'] );
-		$this->assertInternalType( 'null', $result['time.weekdays'] );
+		$this->assertNull( $result['time.start'] );
+		$this->assertNull( $result['time.end'] );
+		$this->assertNull( $result['time.weekdays'] );
 	}
 
 
@@ -104,9 +104,9 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 3, count( $result ) );
-		$this->assertInternalType( 'string', $result['time.start'] );
-		$this->assertInternalType( 'string', $result['time.end'] );
-		$this->assertInternalType( 'string', $result['time.weekdays'] );
+		$this->assertIsString( $result['time.start'] );
+		$this->assertIsString( $result['time.end'] );
+		$this->assertIsString( $result['time.weekdays'] );
 	}
 
 

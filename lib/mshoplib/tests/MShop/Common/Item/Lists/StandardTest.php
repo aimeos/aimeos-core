@@ -15,7 +15,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$values = array(
 			'common.lists.id' => 8,
@@ -39,7 +39,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -129,7 +129,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '2002-01-01 00:00:00', $this->object->getDateStart() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setDateStart( '2008-34-12' );
 	}
 
@@ -148,7 +148,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '4400-12-31 00:00:00', $this->object->getDateEnd() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setDateEnd( '2008-34-12' );
 	}
 

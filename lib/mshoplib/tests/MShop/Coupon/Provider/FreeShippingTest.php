@@ -16,7 +16,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 	private $orderBase;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 
@@ -46,7 +46,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -54,7 +54,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdate()
 	{
-		$this->object->update( $this->orderBase );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class,  $this->object->update( $this->orderBase ) );
 		$coupons = $this->orderBase->getCoupons();
 
 		if( ( $product = reset( $coupons['90AB'] ) ) === false ) {
@@ -82,7 +82,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
 		$object = new \Aimeos\MShop\Coupon\Provider\FreeShipping( $context, $couponItem, '90AB' );
 
-		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
+		$this->expectException( \Aimeos\MShop\Coupon\Exception::class );
 		$object->update( $this->orderBase );
 	}
 
@@ -101,7 +101,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'null', $result['freeshipping.productcode'] );
+		$this->assertNull( $result['freeshipping.productcode'] );
 	}
 
 
@@ -110,7 +110,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'string', $result['freeshipping.productcode'] );
+		$this->assertIsString( $result['freeshipping.productcode'] );
 	}
 
 

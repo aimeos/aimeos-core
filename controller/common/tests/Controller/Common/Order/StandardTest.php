@@ -11,13 +11,13 @@ namespace Aimeos\Controller\Common\Order;
 
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		\Aimeos\MShop::cache( true );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		\Aimeos\MShop::cache( false );
 	}
@@ -270,7 +270,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 
-		$this->setExpectedException( \Exception::class );
+		$this->expectException( \Exception::class );
 		$method->invokeArgs( $object, array( $orderItem, 1 ) );
 	}
 
@@ -505,7 +505,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 
-		$this->setExpectedException( \Exception::class );
+		$this->expectException( \Exception::class );
 		$method->invokeArgs( $object, array( $orderItem, 1 ) );
 	}
 

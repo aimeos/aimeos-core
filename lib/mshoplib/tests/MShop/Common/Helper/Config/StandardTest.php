@@ -199,7 +199,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$criteria = new \Aimeos\MW\Criteria\Attribute\Standard( $def );
 		$object = new \Aimeos\MShop\Common\Helper\Config\Standard( ['key' => $criteria] );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$object->check( ['key' => 'abc'] );
 	}
 }

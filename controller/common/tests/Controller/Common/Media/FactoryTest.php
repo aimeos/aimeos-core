@@ -23,21 +23,21 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateControllerInvalidImplementation()
 	{
-		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
+		$this->expectException( \Aimeos\Controller\Common\Exception::class );
 		\Aimeos\Controller\Common\Media\Factory::create( \TestHelperCntl::getContext(), 'Invalid' );
 	}
 
 
 	public function testCreateControllerInvalidName()
 	{
-		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
+		$this->expectException( \Aimeos\Controller\Common\Exception::class );
 		\Aimeos\Controller\Common\Media\Factory::create( \TestHelperCntl::getContext(), '%^' );
 	}
 
 
 	public function testCreateControllerNotExisting()
 	{
-		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
+		$this->expectException( \Aimeos\Controller\Common\Exception::class );
 		\Aimeos\Controller\Common\Media\Factory::create( \TestHelperCntl::getContext(), 'notexist' );
 	}
 }

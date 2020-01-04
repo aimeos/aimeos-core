@@ -15,7 +15,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 	private $orderBase;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 		$item = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->createItem();
@@ -29,7 +29,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 		unset( $this->orderBase );
@@ -44,12 +44,12 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetObject()
 	{
-		$this->object->setObject( $this->object );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->setObject( $this->object ) );
 	}
 
 
 	public function testUpdate()
 	{
-		$this->object->update( $this->orderBase );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 	}
 }

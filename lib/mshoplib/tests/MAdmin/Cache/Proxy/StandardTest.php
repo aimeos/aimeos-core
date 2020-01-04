@@ -17,7 +17,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $context;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		\Aimeos\MAdmin::cache( true );
 		$this->context = \TestHelperMShop::getContext();
@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		\Aimeos\MAdmin::cache( false );
 		unset( $this->object, $this->mock, $this->context );

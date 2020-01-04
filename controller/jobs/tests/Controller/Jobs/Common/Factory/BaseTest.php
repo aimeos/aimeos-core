@@ -16,7 +16,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	private $aimeos;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->aimeos = \TestHelperJobs::getAimeos();
 		$this->context = \TestHelperJobs::getContext();
@@ -40,7 +40,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$decorators = array( '$' );
 		$cntl = $this->getMockBuilder( \Aimeos\Controller\Jobs\Iface::class )->getMock();
 
-		$this->setExpectedException( \Aimeos\Controller\Jobs\Exception::class );
+		$this->expectException( \Aimeos\Controller\Jobs\Exception::class );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl, $decorators, 'Test_' );
 	}
 
@@ -50,7 +50,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$decorators = array( 'Test' );
 		$cntl = $this->getMockBuilder( \Aimeos\Controller\Jobs\Iface::class )->getMock();
 
-		$this->setExpectedException( \Aimeos\Controller\Jobs\Exception::class );
+		$this->expectException( \Aimeos\Controller\Jobs\Exception::class );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl, $decorators, 'TestDecorator' );
 	}
 
@@ -60,7 +60,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$decorators = array( 'Test' );
 		$cntl = $this->getMockBuilder( \Aimeos\Controller\Jobs\Iface::class )->getMock();
 
-		$this->setExpectedException( \Aimeos\Controller\Jobs\Exception::class );
+		$this->expectException( \Aimeos\Controller\Jobs\Exception::class );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl,
 			$decorators, '\Aimeos\Controller\Jobs\Common\Decorator\\' );
 	}
@@ -70,7 +70,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$cntl = $this->getMockBuilder( \Aimeos\Controller\Jobs\Iface::class )->getMock();
 
-		$this->setExpectedException( \Aimeos\Controller\Jobs\Exception::class );
+		$this->expectException( \Aimeos\Controller\Jobs\Exception::class );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addControllerDecoratorsPublic( $this->context, $this->aimeos, $cntl, '' );
 	}
 }

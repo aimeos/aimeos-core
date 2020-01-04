@@ -15,7 +15,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	private $context;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -32,7 +32,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -51,7 +51,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->getConfigBE();
 
 		$this->assertEquals( 0, count( $result ) );
-		$this->assertInternalType( 'array', $result );
+		$this->assertIsArray( $result );
 	}
 
 
@@ -59,7 +59,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
 
-		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->cancel( $item );
 	}
 
@@ -68,7 +68,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
 
-		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->capture( $item );
 	}
 
@@ -86,7 +86,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
 
-		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->refund( $item );
 	}
 
@@ -95,7 +95,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
 
-		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->repay( $item );
 	}
 
@@ -105,7 +105,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
 			->getSubManager( 'base' )->getSubManager( 'service' )->createItem();
 
-		$this->object->setConfigFE( $item, [] );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $this->object->setConfigFE( $item, [] ) );
 	}
 }
 

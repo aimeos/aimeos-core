@@ -9,7 +9,7 @@ class PgsqlTest extends \PHPUnit\Framework\TestCase
 	private $dbm;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$config = \TestHelperMw::getConfig();
 
@@ -39,7 +39,7 @@ class PgsqlTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === 'pgsql' )
 		{
@@ -91,7 +91,7 @@ class PgsqlTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $columnItem->getDefaultValue() );
 		$this->assertTrue( $columnItem->isNullable() );
 
-		$this->setExpectedException( \Aimeos\MW\Setup\Exception::class );
+		$this->expectException( \Aimeos\MW\Setup\Exception::class );
 		$this->object->getColumnDetails( 'mw_setup_dbschema_test', 'notexisting' );
 	}
 

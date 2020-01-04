@@ -16,7 +16,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $values;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->values = array(
 			'product.id' => 1,
@@ -57,7 +57,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->values );
 	}
@@ -72,7 +72,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MShop\Product\Item\Standard( $this->values );
 		$this->assertEquals( 'TEST', $object->test( 'product.code' ) );
 
-		$this->setExpectedException( \BadMethodCallException::class );
+		$this->expectException( \BadMethodCallException::class );
 		$object->invalid();
 	}
 

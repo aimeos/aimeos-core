@@ -9,7 +9,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		self::$dbm = \TestHelperMw::getDBManager();
 
@@ -38,7 +38,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public static function tearDownAfterClass()
+	public static function tearDownAfterClass() : void
 	{
 		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
 		{
@@ -51,7 +51,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$config = array(
 			'db' => \TestHelperMw::getConfig()->get( 'resource/db' ),
@@ -67,7 +67,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

@@ -15,7 +15,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$child1 = new \Aimeos\MW\Tree\Node\DBNestedSet( array( 'id' => null, 'label' => 'child1', 'status' => '0', 'left' => 2, 'right' => 3 ) );
 		$child2 = new \Aimeos\MW\Tree\Node\DBNestedSet( array( 'id' => null, 'label' => 'child2', 'status' => '1', 'left' => 4, 'right' => 5 ) );
@@ -24,7 +24,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -52,7 +52,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 	public function testMagicGet()
 	{
-		$this->setExpectedException( \Aimeos\MW\Tree\Exception::class );
+		$this->expectException( \Aimeos\MW\Tree\Exception::class );
 		$this->object->notDefined;
 	}
 

@@ -17,7 +17,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 	private $plugin;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
@@ -27,7 +27,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->order, $this->plugin, $this->context );
 	}
@@ -35,7 +35,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$this->object->register( $this->order );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $this->order ) );
 	}
 
 

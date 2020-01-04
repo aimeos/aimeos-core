@@ -18,7 +18,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $attribute = [];
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->price = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
 
@@ -56,7 +56,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -249,7 +249,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetPositionInvalid()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
+		$this->expectException( \Aimeos\MShop\Order\Exception::class );
 		$this->object->setPosition( -1 );
 	}
 

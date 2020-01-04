@@ -14,14 +14,14 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateNoAdapter()
 	{
-		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
 		Factory::create( [] );
 	}
 
 
 	public function testCreateInvalid()
 	{
-		$this->setExpectedException( \Aimeos\MW\MQueue\Exception::class );
+		$this->expectException( \Aimeos\MW\MQueue\Exception::class );
 		Factory::create( array( 'adapter' => 'invalid' ) );
 	}
 }

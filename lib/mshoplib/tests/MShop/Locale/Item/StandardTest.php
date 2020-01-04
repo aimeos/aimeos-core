@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $values;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$manager = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$this->siteItem = $manager->getSubManager( 'site' )->createItem();
@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->values );
 	}
@@ -56,7 +56,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $this->object->getSiteItem() );
 
 		$wrongobject = new \Aimeos\MShop\Locale\Item\Standard();
-		$this->setExpectedException( \Aimeos\MShop\Locale\Exception::class );
+		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
 		$wrongobject->getSiteItem();
 	}
 
@@ -125,14 +125,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLanguageIdInvalid()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setLanguageId( 'test' );
 	}
 
 
 	public function testSetLanguageIdCountryInvalid()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setLanguageId( 'en-GB' );
 	}
 
@@ -165,7 +165,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetCurrencyIdInvalid()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setCurrencyId( 'TEST' );
 	}
 

@@ -16,14 +16,14 @@ class FileTest extends \PHPUnit\Framework\TestCase
 	private $filename;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->filename = 'loggertest.log';
 		$this->object = new \Aimeos\MW\Logger\File( $this->filename );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		if( file_exists( 'loggertest.log' ) ) {
 			unlink( 'loggertest.log' );
@@ -54,7 +54,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'error', $msg[5] );
 
 
-		$this->setExpectedException( \Aimeos\MW\Logger\Exception::class );
+		$this->expectException( \Aimeos\MW\Logger\Exception::class );
 		$this->object->log( 'wrong log level', -1 );
 	}
 

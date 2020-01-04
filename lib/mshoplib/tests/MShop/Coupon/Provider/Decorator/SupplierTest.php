@@ -17,7 +17,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 	private $couponItem;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )->createItem();
@@ -46,7 +46,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 		unset( $this->orderBase );
@@ -68,7 +68,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'null', $result['supplier.code'] );
+		$this->assertNull( $result['supplier.code'] );
 	}
 
 
@@ -77,7 +77,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'string', $result['supplier.code'] );
+		$this->assertIsString( $result['supplier.code'] );
 	}
 
 

@@ -22,7 +22,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 	private $mockProvider;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->context->setUserId( null );
@@ -40,7 +40,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', null );
 	}
@@ -67,7 +67,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'null', $result['ordercheck.total-number-min'] );
+		$this->assertNull( $result['ordercheck.total-number-min'] );
 	}
 
 
@@ -81,7 +81,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'string', $result['ordercheck.total-number-min'] );
+		$this->assertIsString( $result['ordercheck.total-number-min'] );
 	}
 
 
@@ -95,7 +95,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'null', $result['ordercheck.limit-days-pending'] );
+		$this->assertNull( $result['ordercheck.limit-days-pending'] );
 	}
 
 
@@ -109,7 +109,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'string', $result['ordercheck.limit-days-pending'] );
+		$this->assertIsString( $result['ordercheck.limit-days-pending'] );
 	}
 
 

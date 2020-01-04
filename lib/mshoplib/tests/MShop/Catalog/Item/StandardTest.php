@@ -17,7 +17,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $listItems;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$listValues = ['id' => 1, 'type' => 'default', 'domain' => 'text'];
 		$this->listItems = ['text' => [1 => new \Aimeos\MShop\Common\Item\Lists\Standard( 'catalog.lists.', $listValues )]];
@@ -46,7 +46,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -293,7 +293,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $this->object->getChild( 0 ) );
 
-		$this->setExpectedException( \Aimeos\MShop\Catalog\Exception::class );
+		$this->expectException( \Aimeos\MShop\Catalog\Exception::class );
 		$this->object->getChild( 1 );
 	}
 

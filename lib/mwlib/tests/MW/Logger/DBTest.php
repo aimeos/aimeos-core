@@ -9,7 +9,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		self::$dbm = \TestHelperMw::getDBManager();
 
@@ -36,7 +36,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public static function tearDownAfterClass()
+	public static function tearDownAfterClass() : void
 	{
 		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
 		{
@@ -49,7 +49,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
 			$this->markTestSkipped( 'No DBAL database manager configured' );
@@ -65,7 +65,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
 		{
@@ -100,7 +100,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'error', $row['message'] );
 
 
-		$this->setExpectedException( \Aimeos\MW\Logger\Exception::class );
+		$this->expectException( \Aimeos\MW\Logger\Exception::class );
 		$this->object->log( 'wrong log level', -1 );
 	}
 
@@ -163,9 +163,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 		self::$dbm->release( $conn );
 
-		if( $row !== null ) {
-			throw new \RuntimeException( 'Log record found but none expected' );
-		}
+		$this->assertNull( $row );
 	}
 
 

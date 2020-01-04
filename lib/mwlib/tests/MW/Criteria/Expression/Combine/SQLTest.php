@@ -12,7 +12,7 @@ namespace Aimeos\MW\Criteria\Expression\Combine;
 
 class SQLTest extends \PHPUnit\Framework\TestCase
 {
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
@@ -78,7 +78,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$obj = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '&&', [] );
 		$this->assertEquals( '', $obj->toSource( $types ) );
 
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		new \Aimeos\MW\Criteria\Expression\Combine\SQL( '', [] );
 	}
 }

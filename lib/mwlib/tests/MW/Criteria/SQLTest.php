@@ -15,7 +15,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
@@ -30,7 +30,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		$this->object = null;
 	}
@@ -131,14 +131,14 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$types = array( 'int_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 		$this->object->setConditions( $this->object->compare( '==', 'icol', 10 ) );
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$this->object->getConditionSource( $types );
 	}
 
 
 	public function testGetConditionSourceInvalidOperator()
 	{
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$this->object->setConditions( $this->object->compare( '?', 'int_column', 10 ) );
 	}
 
@@ -172,14 +172,14 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$translations = array( 'asc_column' => 'asc_int_col' );
 
 		$this->object->setSortations( array( $this->object->sort( '+', 'asc_col' ) ) );
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$this->object->getSortationSource( $types, $translations );
 	}
 
 
 	public function testGetSortationSourceInvalidDirection()
 	{
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$this->object->setSortations( array( $this->object->sort( '/', 'asc_column' ) ) );
 	}
 
@@ -225,14 +225,14 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testToConditionsInvalid()
 	{
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$this->object->toConditions( ['=][attribute.id]=15'] );
 	}
 
 
 	public function testToConditionsInvalidOperator()
 	{
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$this->object->toConditions( ['><' => ['name', 'value']] );
 	}
 

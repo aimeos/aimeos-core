@@ -17,7 +17,7 @@ class MysqlTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		self::$dbm = \TestHelperMw::getDBManager();
 
@@ -53,7 +53,7 @@ class MysqlTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public static function tearDownAfterClass()
+	public static function tearDownAfterClass() : void
 	{
 		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
 		{
@@ -67,7 +67,7 @@ class MysqlTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
 			$this->markTestSkipped( 'No DBAL database manager configured' );
@@ -127,7 +127,7 @@ class MysqlTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function tearDown()
+	public function tearDown() : void
 	{
 		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
 		{

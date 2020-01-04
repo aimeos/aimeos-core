@@ -15,7 +15,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $values;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->values = array(
 			'price.id' => 199,
@@ -42,7 +42,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -82,7 +82,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$price = new \Aimeos\MShop\Price\Item\Standard( $values );
 
-		$this->setExpectedException( \Aimeos\MShop\Price\Exception::class );
+		$this->expectException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->addItem( $price );
 	}
 
@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '0.00', $this->object->getValue() );
 		$this->assertEquals( '0.00', $this->object->getCosts() );
 		$this->assertEquals( '0.00', $this->object->getRebate() );
-		$this->assertEquals( '0.00', $this->object->getTaxValue() );
+		$this->assertEquals( '0.0000', $this->object->getTaxValue() );
 		$this->assertEquals( true, $this->object->getTaxFlag() );
 		$this->assertEquals( 1, $this->object->getQuantity() );
 	}
@@ -179,7 +179,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetCurrencyIdInvalid()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->setCurrencyId( 'usd' );
 	}
 
@@ -246,7 +246,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 199.00, $this->object->getValue() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( \Aimeos\MShop\Price\Exception::class );
+		$this->expectException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->setValue( '190,90' );
 	}
 
@@ -265,7 +265,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 20.00, $this->object->getValue() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( \Aimeos\MShop\Price\Exception::class );
+		$this->expectException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->setValue( '19,90' );
 	}
 
@@ -284,7 +284,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 20.00, $this->object->getRebate() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( \Aimeos\MShop\Price\Exception::class );
+		$this->expectException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->setValue( '19,90' );
 	}
 
@@ -297,7 +297,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetTaxRates()
 	{
-		$this->assertEquals( ['' => '19.00', 'local' => '5.0'], $this->object->getTaxRates() );
+		$this->assertEquals( ['' => '19.00', 'local' => '5.00'], $this->object->getTaxRates() );
 	}
 
 
@@ -370,7 +370,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setTaxValue( '100.00' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
-		$this->assertEquals( '100.00', $this->object->getTaxValue() );
+		$this->assertEquals( '100.0000', $this->object->getTaxValue() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -428,7 +428,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'price.value' => '10.00',
 			'price.costs' => '5.00',
 			'price.rebate' => '2.00',
-			'price.taxvalue' => '3.00',
+			'price.taxvalue' => '3.0000',
 			'price.taxrates' => ['' => '20.00'],
 			'price.taxrate' => '20.00',
 			'price.taxflag' => false,

@@ -15,7 +15,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $values = [];
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->values = array(
 			'service.id' => 541,
@@ -39,7 +39,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		$this->object = null;
 	}
@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetProviderInvalid()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->setProvider( ',newProvider' );
 	}
 

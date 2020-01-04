@@ -15,13 +15,13 @@ class ErrorlogTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->object = new \Aimeos\MW\Logger\Errorlog( \Aimeos\MW\Logger\Base::DEBUG );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		if( file_exists( 'error.log' ) ) {
 			unlink( 'error.log' );
@@ -31,10 +31,6 @@ class ErrorlogTest extends \PHPUnit\Framework\TestCase
 
 	public function testLog()
 	{
-		if( defined( 'HHVM_VERSION' ) ) {
-			$this->markTestSkipped( 'Hiphop VM does not support ini settings yet' );
-		}
-
 		ini_set( "error_log", "error.log" );
 
 		$this->object->log( 'error test' );
@@ -44,13 +40,11 @@ class ErrorlogTest extends \PHPUnit\Framework\TestCase
 		$this->object->log( 'debug test', \Aimeos\MW\Logger\Base::DEBUG );
 		$this->object->log( array( 'scalar', 'test' ) );
 
-		if( ( $content = file( 'error.log' ) ) === false ) {
-			throw new \RuntimeException( 'Unable to open file "error.log"' );
-		}
-
 		ini_restore( "error_log" );
 
-		foreach( $content as $line ) {
+		$this->assertFileExists( 'error.log', 'Unable to open file "error.log"' );
+
+		foreach( file( 'error.log' ) as $line ) {
 			$this->assertRegExp( '/\[[^\]]+\] <message> \[[^\]]+\] \[[^\]]+\] .+test/', $line, $line );
 		}
 	}
@@ -65,15 +59,13 @@ class ErrorlogTest extends \PHPUnit\Framework\TestCase
 
 		ini_restore( "error_log" );
 
-		if( file_exists( 'error.log' ) ) {
-			throw new \RuntimeException( 'File "error.log" should not be created' );
-		}
+		$this->assertFileNotExists( 'error.log', 'File "error.log" should not be created' );
 	}
 
 
 	public function testLogLevel()
 	{
-		$this->setExpectedException( \Aimeos\MW\Logger\Exception::class );
+		$this->expectException( \Aimeos\MW\Logger\Exception::class );
 		$this->object->log( 'wrong loglevel test', -1 );
 	}
 }

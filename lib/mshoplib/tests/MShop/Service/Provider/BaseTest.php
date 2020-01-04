@@ -16,7 +16,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	private $context;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$serviceItem = \Aimeos\MShop\Service\Manager\Factory::create( $this->context )->createItem()->setId( -1 );
@@ -30,7 +30,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		\Aimeos\MShop::cache( false );
 
@@ -57,7 +57,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
 
-		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->query( $item );
 	}
 
@@ -94,7 +94,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckConfig()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 
 		$args = [['key' => ['code' => 'key', 'type' => 'invalid', 'required' => true]], ['key' => 'abc']];
 		$this->access( 'checkConfig' )->invokeArgs( $this->object, $args );

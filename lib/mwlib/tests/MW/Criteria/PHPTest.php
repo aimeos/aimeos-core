@@ -15,13 +15,13 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->object = new \Aimeos\MW\Criteria\PHP();
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		$this->object = null;
 	}
@@ -128,14 +128,14 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$types = array( 'int_value' => \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 		$this->object->setConditions( $this->object->compare( '==', 'ival', 10 ) );
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$this->object->getConditionSource( $types );
 	}
 
 
 	public function testGetConditionSourceInvalidOperator()
 	{
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$this->object->setConditions( $this->object->compare( '?', 'int_value', 10 ) );
 	}
 
@@ -176,14 +176,14 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$translations = array( 'asc_array' => 'asc_int_list' );
 
 		$this->object->setSortations( array( $this->object->sort( '+', 'asc_col' ) ) );
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$this->object->getSortationSource( $types, $translations );
 	}
 
 
 	public function testGetSortationSourceInvalidDirection()
 	{
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$this->object->setSortations( array( $this->object->sort( '/', 'asc_array' ) ) );
 	}
 

@@ -17,7 +17,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 	private $slizeSize = 100;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext( 'unitperf' );
 

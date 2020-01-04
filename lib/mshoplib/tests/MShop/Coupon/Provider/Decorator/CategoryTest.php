@@ -17,7 +17,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	private $couponItem;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )->createItem();
@@ -39,7 +39,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 		unset( $this->orderBase );
@@ -61,7 +61,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'null', $result['category.code'] );
+		$this->assertNull( $result['category.code'] );
 	}
 
 
@@ -70,7 +70,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'string', $result['category.code'] );
+		$this->assertIsString( $result['category.code'] );
 	}
 
 

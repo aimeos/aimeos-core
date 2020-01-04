@@ -17,7 +17,7 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 	private $product;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
@@ -30,7 +30,7 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->order, $this->plugin, $this->product );
 	}
@@ -38,7 +38,7 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$this->object->register( $this->order );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $this->order ) );
 	}
 
 

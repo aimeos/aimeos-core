@@ -14,7 +14,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$config = ['test' => ['target' => 'module', 'controller' => 'test', 'action' => 'index']];
 		$conf = new \Aimeos\MW\Config\PHPArray( $config );
@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

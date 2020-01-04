@@ -63,7 +63,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 	public function testException1()
 	{
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		new \Aimeos\MW\Criteria\Expression\Sort\PHP( '/', 'test(1,2)' );
 	}
 
@@ -81,7 +81,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MW\Criteria\Expression\Sort\PHP( '+', 'wrongType' );
 
-		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$object->toSource( $types, $translations );
 	}
 }

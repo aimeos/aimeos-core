@@ -16,14 +16,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $editor = '';
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
 		$this->object = new \Aimeos\MShop\Catalog\Manager\Standard( \TestHelperMShop::getContext() );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -53,7 +53,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testDeleteItems()
 	{
-		$this->setExpectedException( 'Aimeos\MW\Tree\Exception' );
+		$this->expectException( 'Aimeos\MW\Tree\Exception' );
 		$this->object->deleteItems( array( -1 ) );
 	}
 
@@ -77,12 +77,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegisterItemFilter()
 	{
-		$callback = function( \Aimeos\MShop\Common\Item\ListRef\Iface $item, $index )
-		{
+		$callback = function( \Aimeos\MShop\Common\Item\ListRef\Iface $item, $index ) {
 			return true;
 		};
 
-		$this->object->registerItemFilter( 'test', $callback );
+		$result = $this->object->registerItemFilter( 'test', $callback );
+		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Manager\Iface::class, $result );
 	}
 
 
@@ -357,7 +357,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultSaved );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultInsert );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->getItem( $item->getId() );
 	}
 
@@ -374,7 +374,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 3, count( $item->getListItems() ) );
 		$this->assertEquals( 3, count( $item->getChild( 0 )->getListItems() ) );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->findItem( 'ccafe' );
 	}
 
@@ -385,14 +385,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( $target, $this->object->getSubManager( 'lists' ) );
 		$this->assertInstanceOf( $target, $this->object->getSubManager( 'lists', 'Standard' ) );
 
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Exception::class );
+		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->getSubManager( 'lists', 'unknown' );
 	}
 }

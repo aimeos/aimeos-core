@@ -22,7 +22,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 	private $mockProvider;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -39,7 +39,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->basket, $this->mockProvider, $this->servItem, $this->context );
 	}
@@ -75,10 +75,10 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'null', $result['country.billing-include'] );
-		$this->assertInternalType( 'null', $result['country.billing-exclude'] );
-		$this->assertInternalType( 'null', $result['country.delivery-include'] );
-		$this->assertInternalType( 'null', $result['country.delivery-exclude'] );
+		$this->assertNull( $result['country.billing-include'] );
+		$this->assertNull( $result['country.billing-exclude'] );
+		$this->assertNull( $result['country.delivery-include'] );
+		$this->assertNull( $result['country.delivery-exclude'] );
 	}
 
 
@@ -91,10 +91,10 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'null', $result['country.billing-include'] );
-		$this->assertInternalType( 'null', $result['country.billing-exclude'] );
-		$this->assertInternalType( 'null', $result['country.delivery-include'] );
-		$this->assertInternalType( 'null', $result['country.delivery-exclude'] );
+		$this->assertNull( $result['country.billing-include'] );
+		$this->assertNull( $result['country.billing-exclude'] );
+		$this->assertNull( $result['country.delivery-include'] );
+		$this->assertNull( $result['country.delivery-exclude'] );
 	}
 
 
@@ -113,10 +113,10 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'string', $result['country.billing-include'] );
-		$this->assertInternalType( 'string', $result['country.billing-exclude'] );
-		$this->assertInternalType( 'string', $result['country.delivery-include'] );
-		$this->assertInternalType( 'string', $result['country.delivery-exclude'] );
+		$this->assertIsString( $result['country.billing-include'] );
+		$this->assertIsString( $result['country.billing-exclude'] );
+		$this->assertIsString( $result['country.delivery-include'] );
+		$this->assertIsString( $result['country.delivery-exclude'] );
 	}
 
 

@@ -14,7 +14,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = clone \TestHelperMShop::getContext();
 		$config = $context->getConfig();
@@ -29,7 +29,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

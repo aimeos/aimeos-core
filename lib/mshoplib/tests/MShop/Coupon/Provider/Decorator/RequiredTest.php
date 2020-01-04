@@ -17,7 +17,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 	private $couponItem;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$orderProducts = [];
 		$context = \TestHelperMShop::getContext();
@@ -54,7 +54,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 		unset( $this->orderBase );
@@ -76,7 +76,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'null', $result['required.productcode'] );
+		$this->assertNull( $result['required.productcode'] );
 	}
 
 
@@ -85,7 +85,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'string', $result['required.productcode'] );
+		$this->assertIsString( $result['required.productcode'] );
 	}
 
 

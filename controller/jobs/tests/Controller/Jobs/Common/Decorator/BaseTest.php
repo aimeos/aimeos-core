@@ -10,35 +10,23 @@
 namespace Aimeos\Controller\Jobs\Common\Decorator;
 
 
-/**
- * Test class for \Aimeos\Controller\Jobs\Common\Decorator\BaseTest.
- */
 class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	private $stub;
 	private $object;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperJobs::getContext();
 		$aimeos = \TestHelperJobs::getAimeos();
 
-		$this->stub = $this->getMockBuilder( \Aimeos\Controller\Jobs\Iface::class )
-			->setConstructorArgs( array( $context, $aimeos ) )
-			->getMock();
-
+		$this->stub = $this->getMockBuilder( \Aimeos\Controller\Jobs\Iface::class )->getMock();
 		$this->object = new TestBase( $this->stub, $context, $aimeos );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

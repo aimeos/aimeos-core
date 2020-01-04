@@ -13,13 +13,13 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->object = new \Aimeos\MW\DB\Connection\None();
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -27,42 +27,42 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testConnect()
 	{
-		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
 		$this->object->connect();
 	}
 
 
 	public function testCreate()
 	{
-		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
 		$this->object->create( 'SELECT' );
 	}
 
 
 	public function testGetRawObject()
 	{
-		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
 		$this->object->getRawObject();
 	}
 
 
 	public function testBegin()
 	{
-		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
 		$this->object->begin();
 	}
 
 
 	public function testCommit()
 	{
-		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
 		$this->object->commit();
 	}
 
 
 	public function testRollback()
 	{
-		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\MW\DB\Exception::class );
 		$this->object->rollback();
 	}
 }

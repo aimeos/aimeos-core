@@ -16,7 +16,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $translate;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$engines = array( '.phtml' => new \Aimeos\MW\View\Engine\TestEngine() );
 
@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->translate );
 	}
@@ -42,7 +42,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		unset( $this->object->test );
 		$this->assertEquals( false, isset( $this->object->test ) );
 
-		$this->setExpectedException( \Aimeos\MW\View\Exception::class );
+		$this->expectException( \Aimeos\MW\View\Exception::class );
 		$this->object->test;
 	}
 
@@ -72,14 +72,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCallInvalidName()
 	{
-		$this->setExpectedException( \Aimeos\MW\View\Exception::class );
+		$this->expectException( \Aimeos\MW\View\Exception::class );
 		$this->object->invalid();
 	}
 
 
 	public function testCallUnknown()
 	{
-		$this->setExpectedException( \Aimeos\MW\View\Exception::class );
+		$this->expectException( \Aimeos\MW\View\Exception::class );
 		$this->object->unknown();
 	}
 

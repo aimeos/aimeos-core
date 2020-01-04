@@ -17,7 +17,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	private $orderBase;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 
@@ -31,7 +31,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 		unset( $this->orderBase );
@@ -45,7 +45,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$this->orderBase->addProduct( $orderProducts['CNE'] );
 		$this->orderBase->addProduct( $orderProducts['CNC'] );
 
-		$this->object->update( $this->orderBase );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();
@@ -76,7 +76,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$orderProducts = $this->getOrderProducts();
 		$this->orderBase->addProduct( $orderProducts['CNE'] );
 
-		$this->object->update( $this->orderBase );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 
 		$coupons = $this->orderBase->getCoupons();
 
@@ -100,7 +100,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$orderProducts = $this->getOrderProducts();
 		$this->orderBase->addProduct( $orderProducts['CNE'] );
 
-		$this->object->update( $this->orderBase );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 
 		$coupons = $this->orderBase->getCoupons();
 
@@ -127,7 +127,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$this->orderBase->addProduct( $products['CNE'] );
 		$this->orderBase->addProduct( $products['CNC'] );
 
-		$this->object->update( $this->orderBase );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();
@@ -157,7 +157,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $couponItem, '90AB' );
 
-		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
+		$this->expectException( \Aimeos\MShop\Coupon\Exception::class );
 		$object->update( $this->orderBase );
 	}
 
@@ -180,10 +180,10 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'null', $result['percentrebate.productcode'] );
-		$this->assertInternalType( 'null', $result['percentrebate.rebate'] );
-		$this->assertInternalType( 'null', $result['percentrebate.precision'] );
-		$this->assertInternalType( 'null', $result['percentrebate.roundvalue'] );
+		$this->assertNull( $result['percentrebate.productcode'] );
+		$this->assertNull( $result['percentrebate.rebate'] );
+		$this->assertNull( $result['percentrebate.precision'] );
+		$this->assertNull( $result['percentrebate.roundvalue'] );
 	}
 
 
@@ -192,8 +192,8 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'string', $result['percentrebate.productcode'] );
-		$this->assertInternalType( 'string', $result['percentrebate.rebate'] );
+		$this->assertIsString( $result['percentrebate.productcode'] );
+		$this->assertIsString( $result['percentrebate.rebate'] );
 	}
 
 

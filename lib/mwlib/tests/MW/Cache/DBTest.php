@@ -17,7 +17,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		self::$dbm = \TestHelperMw::getDBManager();
 
@@ -53,7 +53,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public static function tearDownAfterClass()
+	public static function tearDownAfterClass() : void
 	{
 		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
 		{
@@ -67,7 +67,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
 			$this->markTestSkipped( 'No DBAL database manager configured' );
@@ -127,7 +127,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function tearDown()
+	public function tearDown() : void
 	{
 		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
 		{
@@ -143,7 +143,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	public function testConstructorNoConfig()
 	{
-		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
+		$this->expectException( \Aimeos\MW\Cache\Exception::class );
 		new \Aimeos\MW\Cache\DB( [], self::$dbm );
 	}
 
@@ -153,7 +153,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$config = $this->config;
 		unset( $config['sql'] );
 
-		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
+		$this->expectException( \Aimeos\MW\Cache\Exception::class );
 		new \Aimeos\MW\Cache\DB( $config, self::$dbm );
 	}
 
@@ -163,7 +163,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$config = $this->config;
 		unset( $config['search'] );
 
-		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
+		$this->expectException( \Aimeos\MW\Cache\Exception::class );
 		new \Aimeos\MW\Cache\DB( $config, self::$dbm );
 	}
 
@@ -173,7 +173,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$config = $this->config;
 		unset( $config['sql']['delete'] );
 
-		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
+		$this->expectException( \Aimeos\MW\Cache\Exception::class );
 		new \Aimeos\MW\Cache\DB( $config, self::$dbm );
 	}
 
@@ -183,7 +183,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$config = $this->config;
 		unset( $config['search']['cache.id'] );
 
-		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
+		$this->expectException( \Aimeos\MW\Cache\Exception::class );
 		new \Aimeos\MW\Cache\DB( $config, self::$dbm );
 	}
 

@@ -8,14 +8,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$config = array( 'db' => \TestHelperMw::getConfig()->get( 'resource/db' ) );
 		$this->object = new \Aimeos\MW\MQueue\Standard( $config );
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}

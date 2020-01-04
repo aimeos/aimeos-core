@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
 
-class DateTest extends \PHPUnit_Framework_TestCase
+class DateTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $basket;
@@ -18,7 +18,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
 	private $mockProvider;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -35,7 +35,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->basket, $this->mockProvider, $this->servItem, $this->context );
 	}
@@ -65,7 +65,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'null', $result['date.minimumdays'] );
+		$this->assertNull( $result['date.minimumdays'] );
 	}
 
 
@@ -78,7 +78,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'null', $result['date.minimumdays'] );
+		$this->assertNull( $result['date.minimumdays'] );
 	}
 
 
@@ -94,7 +94,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'string', $result['date.minimumdays'] );
+		$this->assertIsString( $result['date.minimumdays'] );
 	}
 
 

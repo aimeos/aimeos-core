@@ -16,7 +16,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 	private $orderBase;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 
@@ -30,7 +30,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 		unset( $this->orderBase );
@@ -52,8 +52,8 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'null', $result['fixedrebate.productcode'] );
-		$this->assertInternalType( 'null', $result['fixedrebate.rebate'] );
+		$this->assertNull( $result['fixedrebate.productcode'] );
+		$this->assertNull( $result['fixedrebate.rebate'] );
 	}
 
 
@@ -62,8 +62,8 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertInternalType( 'string', $result['fixedrebate.productcode'] );
-		$this->assertInternalType( 'string', $result['fixedrebate.rebate'] );
+		$this->assertIsString( $result['fixedrebate.productcode'] );
+		$this->assertIsString( $result['fixedrebate.rebate'] );
 	}
 
 
@@ -78,7 +78,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 		$products = $this->getOrderProducts();
 		$this->orderBase->addProduct( $products['CNE'] );
 
-		$this->object->update( $this->orderBase );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();
@@ -117,7 +117,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );
 
-		$object->update( $this->orderBase );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $object->update( $this->orderBase ) );
 
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();
@@ -159,7 +159,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );
 
-		$object->update( $this->orderBase );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $object->update( $this->orderBase ) );
 
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();
@@ -190,7 +190,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );
 
-		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
+		$this->expectException( \Aimeos\MShop\Coupon\Exception::class );
 		$object->update( $this->orderBase );
 	}
 

@@ -57,10 +57,12 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 *
 	 * @param string $name Filter name
 	 * @param \Closure $fcn Callback function
+	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
 	public function registerItemFilter( string $name, \Closure $fcn )
 	{
 		$this->filter[$name] = $fcn;
+		return $this;
 	}
 
 

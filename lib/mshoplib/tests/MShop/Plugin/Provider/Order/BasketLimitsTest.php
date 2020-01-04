@@ -16,7 +16,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	private $order;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
 		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem()->off(); // remove event listeners
@@ -52,7 +52,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->order );
 	}
@@ -95,7 +95,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$this->object->register( $this->order );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $this->order ) );
 	}
 
 
@@ -114,7 +114,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $this->products['CNC'] );
 		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', $value );
 	}
 
@@ -125,7 +125,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $this->products['CNE'] );
 		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', $value );
 	}
 
@@ -135,7 +135,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $this->products['CNE'] );
 		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', $value );
 	}
 
@@ -146,7 +146,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $this->products['CNC'] );
 		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
-		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', $value );
 	}
 }

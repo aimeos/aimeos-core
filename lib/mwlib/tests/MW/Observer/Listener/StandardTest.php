@@ -15,13 +15,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->object = new TestListener();
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -29,13 +29,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$this->object->register( new TestPublisher() );
+		$this->assertInstanceOf( \Aimeos\MW\Observer\Listener\Iface::class, $this->object->register( new TestPublisher() ) );
 	}
 
 
 	public function testUpdate()
 	{
-		$this->object->update( new TestPublisher(), 'test' );
+		$this->assertEquals( 'value', $this->object->update( new TestPublisher(), 'test', 'value' ) );
 	}
 }
 

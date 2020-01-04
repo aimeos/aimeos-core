@@ -19,7 +19,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $subProducts;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->price = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
 
@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -360,21 +360,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetQuantityNegative()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
+		$this->expectException( \Aimeos\MShop\Order\Exception::class );
 		$this->object->setQuantity( -5 );
 	}
 
 
 	public function testSetQuantityZero()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
+		$this->expectException( \Aimeos\MShop\Order\Exception::class );
 		$this->object->setQuantity( 0 );
 	}
 
 
 	public function testSetQuantityOverflow()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
+		$this->expectException( \Aimeos\MShop\Order\Exception::class );
 		$this->object->setQuantity( 2147483648 );
 	}
 
@@ -440,7 +440,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetPositionInvalid()
 	{
-		$this->setExpectedException( \Aimeos\MShop\Order\Exception::class );
+		$this->expectException( \Aimeos\MShop\Order\Exception::class );
 		$this->object->setPosition( -1 );
 	}
 

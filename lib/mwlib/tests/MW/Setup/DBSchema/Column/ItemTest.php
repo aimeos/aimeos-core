@@ -15,12 +15,12 @@ class ItemTest extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->object = new \Aimeos\MW\Setup\DBSchema\Column\Item( 'testtable', 'testcol', 'varchar', '255', 'default', 'YES', 'utf8', 'utf8_general_ci' );
 	}
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
@@ -67,7 +67,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase
 		$item = new \Aimeos\MW\Setup\DBSchema\Column\Item( '', '', '', 0, '', 'NO', '', '' );
 		$this->assertFalse( $item->isNullable() );
 
-		$this->setExpectedException( \Aimeos\MW\Setup\Exception::class );
+		$this->expectException( \Aimeos\MW\Setup\Exception::class );
 		new \Aimeos\MW\Setup\DBSchema\Column\Item( '', '', '', 0, '', '', '', '' );
 	}
 }
