@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCleanup()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Index\Manager\Iface::class,  $this->object->cleanup( '1970-01-01 00:00:00' ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Index\Manager\Iface::class, $this->object->cleanup( '1970-01-01 00:00:00' ) );
 	}
 
 
