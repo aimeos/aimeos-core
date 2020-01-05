@@ -353,7 +353,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetMimeIcon()
 	{
 		$result = $this->access( 'getMimeIcon' )->invokeArgs( $this->object, array( 'image/jpeg' ) );
-		$this->assertContains( 'tmp/media/mimeicons/image/jpeg.png', $result );
+		$this->assertStringContainsString( 'tmp/media/mimeicons/image/jpeg.png', $result );
 	}
 
 
