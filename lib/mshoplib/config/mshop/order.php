@@ -854,7 +854,7 @@ return array(
 					FROM "mshop_order" AS mord
 					:joins
 					WHERE :cond
-					GROUP BY :columns
+					GROUP BY :columns /*-group*/ :group /*group-*/
 						mord."id", mord."baseid", mord."siteid", mord."type", mord."datepayment",
 						mord."datedelivery", mord."statuspayment", mord."statusdelivery", mord."relatedid",
 						mord."ctime", mord."mtime", mord."editor"
