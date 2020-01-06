@@ -816,9 +816,9 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$find[] = ':order';
 			$replace[] = $search->getSortationSource( $types, $translations, $funcs );
 
-			$keys[] = 'columns';
-			$find[] = ':columns';
-			$replace[] = implode( ', ', $search->translate( $search->getSortations(), $translations ) );
+			$keys[] = 'group';
+			$find[] = ':group';
+			$replace[] = implode( ', ', $search->translate( $search->getSortations(), $translations ) ) . ', ';
 		}
 
 		return [$keys, $find, $replace];
