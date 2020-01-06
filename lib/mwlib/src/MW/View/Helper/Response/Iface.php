@@ -40,5 +40,5 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface, \Psr\Http\Message\Response
 	 * @param string $content Content as string
 	 * @return \Psr\Http\Message\StreamInterface Stream object
 	 */
-	public function createStreamFromString( $content ) : \Psr\Http\Message\StreamInterface;
+	public function createStreamFromString( string $content ) : \Psr\Http\Message\StreamInterface;
 }

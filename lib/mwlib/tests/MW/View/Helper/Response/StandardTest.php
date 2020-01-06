@@ -37,22 +37,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateStream()
 	{
-		if( !class_exists( \Zend\Diactoros\Stream::class ) )
-		{
-			$this->expectException( \Aimeos\MW\Exception::class );
-			$this->object->createStream( 'test' );
-		}
-
 		$this->assertInstanceOf( \Psr\Http\Message\StreamInterface::class, $this->object->createStream( __FILE__ ) );
 	}
 
 
 	public function testCreateStreamFromString()
 	{
-		if( !class_exists( \Zend\Diactoros\Stream::class ) ) {
-			$this->markTestSkipped( 'Please install "\Zend\Diactoros\Stream"' );
-		}
-
 		$this->assertInstanceOf( \Psr\Http\Message\StreamInterface::class, $this->object->createStreamFromString( 'test' ) );
 	}
 

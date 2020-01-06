@@ -59,11 +59,13 @@ class Standard
 	 */
 	public function createStream( $resource ) : \Psr\Http\Message\StreamInterface
 	{
-		if( class_exists( \Zend\Diactoros\Stream::class ) ) {
-			return new \Zend\Diactoros\Stream( $resource );
+		$psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
+
+		if( is_resource( $resource ) ) {
+			return $psr17Factory->createStreamFromResource( $resource );
 		}
 
-		throw new \Aimeos\MW\Exception( 'Please install zendframework/zend-diactoros first' );
+		return $psr17Factory->createStreamFromFile( $resource );
 	}
 
 
@@ -73,17 +75,10 @@ class Standard
 	 * @param string $content Content as string
 	 * @return \Psr\Http\Message\StreamInterface Stream object
 	 */
-	public function createStreamFromString( $content ) : \Psr\Http\Message\StreamInterface
+	public function createStreamFromString( string $content ) : \Psr\Http\Message\StreamInterface
 	{
-		if( ( $resource = fopen( 'php://temp', 'rw' ) ) === false ) {
-			throw new \Aimeos\MW\Exception( 'Unable to create temporary file' );
-		}
-
-		if( fwrite( $resource, (string) $content ) === false ) {
-			throw new \Aimeos\MW\Exception( 'Unable to write to temporary file' );
-		}
-
-		return $this->createStream( $resource );
+		$psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
+		return $psr17Factory->createStream( $content );
 	}
 
 
