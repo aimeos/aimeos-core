@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-03 10:00+0200\n"
-"PO-Revision-Date: 2019-10-03 08:03+0000\n"
+"PO-Revision-Date: 2019-10-15 21:18+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -118,7 +118,7 @@ msgstr "Sınıf \"%1$s\" mevcut değil"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
-msgstr ""
+msgstr "Kod \"%1$s\" %2$d karakterden daha uzun olmamalı"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than 32 characters"
@@ -194,11 +194,11 @@ msgstr "Dosya sistem yöneticisi nesnesi mevcut değil"
 
 #, php-format
 msgid "Finished order status import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\"dan sipariş durumu içeri aktarımı tamamlandı"
 
 #, php-format
 msgid "Finished order status import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dosyasından sipariş durumu içeri aktarımı tamamlandı"
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
@@ -292,7 +292,7 @@ msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
 msgstr "\"%1$s\" kupon sağlayıcı için geçersiz yapılandırma, \"%2$s\" gerekiyor"
 
 msgid "Invalid delivery type"
-msgstr ""
+msgstr "Geçersiz teslimat türü"
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
@@ -742,11 +742,11 @@ msgstr "Kod \"%1$s\" için site bulunamadı"
 
 #, php-format
 msgid "Started order status import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\"dan sipariş durumu içeri aktarımı başladı"
 
 #, php-format
 msgid "Started order status import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dosyasından sipariş durumu içeri aktarımı başladı"
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"
