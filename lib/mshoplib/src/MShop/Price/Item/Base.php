@@ -123,7 +123,7 @@ abstract class Base
 	/**
 	 * Tests if the price is within the requirements.
 	 *
-	 * @param string|int|double $value Monetary value
+	 * @param string|int|float $value Monetary value
 	 * @param int|null $precision Number of decimal digits, null for default value
 	 * @return string Sanitized monetary value
 	 */
@@ -140,12 +140,12 @@ abstract class Base
 	/**
 	 * Formats the money value.
 	 *
-	 * @param string|int|double $number Money value
+	 * @param string|int|float $number Money value
 	 * @param int|null $precision Number of decimal digits, null for default value
 	 * @return string Formatted money value
 	 */
 	protected function formatNumber( $number, int $precision = null ) : string
 	{
-		return number_format( (double) $number, $precision ?: $this->precision, '.', '' );
+		return number_format( $number, $precision ?: $this->precision, '.', '' );
 	}
 }
