@@ -48,8 +48,9 @@ class Factory
 		$mimetype = $finfo->buffer( $content );
 		$mime = explode( '/', $mimetype );
 
-		$type = ( $mime[0] === 'image' ? 'Image' : 'Application' );
-		$name = ( isset( $options[$mime[0]]['name'] ) ? ucfirst( $options[$mime[0]]['name'] ) : 'Standard' );
+		$type = $mime[0] === 'image' ? 'Image' : 'Application';
+		$name = $type === 'Image' && extension_loaded( 'imagick' ) ? 'Imagick' : 'Standard';
+		$name = ucfirst( $options[$mime[0]]['name'] ?? $name );
 
 		if( in_array( $mimetype, ['image/svg', 'image/svg+xml'] )
 			|| in_array( $mimetype, ['application/gzip', 'application/x-gzip'] )
