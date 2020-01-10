@@ -126,8 +126,6 @@ class Shipping
 
 				if( $this->checkThreshold( $order->getProducts(), $threshold ) ) {
 					$price = $price->setRebate( $price->getCosts() )->setCosts( '0.00' );
-				} else {
-					$price = $price->setCosts( $price->getRebate() )->setRebate( '0.00' );
 				}
 
 				$services[$type][$key] = $service->setPrice( $price );
