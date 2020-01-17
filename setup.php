@@ -11,9 +11,13 @@ if( php_sapi_name() != 'cli' ) {
 	exit( 'Setup can only be started via command line for security reasons' );
 }
 
+
+set_error_handler( function( $severity, $message, $file, $line ) {
+	throw new ErrorException( $message, 0, $severity, $file, $line );
+});
+
 ini_set( 'display_errors', 1 );
 date_default_timezone_set( 'UTC' );
-
 
 
 /**
