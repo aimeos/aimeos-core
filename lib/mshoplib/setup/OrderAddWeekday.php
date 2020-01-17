@@ -39,39 +39,22 @@ class OrderAddWeekday extends \Aimeos\MW\Setup\Task\Base
 			return;
 		}
 
-		$start = 0;
 		$conn = $this->acquire( $dbdomain );
-		$select = 'SELECT "id", "ctime" FROM "mshop_order" WHERE "cwday" = \'\' LIMIT 1000 OFFSET :offset';
+		$select = 'SELECT "id", "ctime" FROM "mshop_order" WHERE "cwday" = \'\'';
 		$update = 'UPDATE "mshop_order" SET "cwday" = ? WHERE "id" = ?';
 
 		$stmt = $conn->create( $update );
+		$result = $conn->create( $select )->execute();
 
-		do
+		while( ( $row = $result->fetch() ) !== null )
 		{
-			$count = 0;
-			$map = [];
-			$sql = str_replace( ':offset', $start, $select );
-			$result = $conn->create( $sql )->execute();
+			list( $date, $time ) = explode( ' ', $row['ctime'] );
 
-			while( ( $row = $result->fetch() ) !== null )
-			{
-				$map[$row['id']] = $row['ctime'];
-				$count++;
-			}
+			$stmt->bind( 1, date_create_from_format( 'Y-m-d', $date )->format( 'w' ) );
+			$stmt->bind( 2, $row['id'], \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
-			foreach( $map as $id => $ctime )
-			{
-				list( $date, $time ) = explode( ' ', $ctime );
-
-				$stmt->bind( 1, date_create_from_format( 'Y-m-d', $date )->format( 'w' ) );
-				$stmt->bind( 2, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-
-				$stmt->execute()->finish();
-			}
-
-			$start += $count;
+			$stmt->execute()->finish();
 		}
-		while( $count === 1000 );
 
 		$this->release( $conn, $dbdomain );
 

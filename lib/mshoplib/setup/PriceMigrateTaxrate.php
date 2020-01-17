@@ -39,37 +39,20 @@ class PriceMigrateTaxrate extends \Aimeos\MW\Setup\Task\Base
 			return;
 		}
 
-		$start = 0;
 		$conn = $this->acquire( $dbdomain );
-		$select = 'SELECT "id", "taxrate" FROM "mshop_price" WHERE "taxrate" NOT LIKE \'{%\' LIMIT 1000 OFFSET :offset';
+		$select = 'SELECT "id", "taxrate" FROM "mshop_price" WHERE "taxrate" NOT LIKE \'{%\'';
 		$update = 'UPDATE "mshop_price" SET "taxrate" = ? WHERE "id" = ?';
 
 		$stmt = $conn->create( $update );
+		$result = $conn->create( $select )->execute();
 
-		do
+		while( ( $row = $result->fetch() ) !== null )
 		{
-			$count = 0;
-			$map = [];
-			$sql = str_replace( ':offset', $start, $select );
-			$result = $conn->create( $sql )->execute();
+			$stmt->bind( 1, json_encode( ['' => $row['taxrate']], JSON_FORCE_OBJECT ) );
+			$stmt->bind( 2, $row['id'], \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
-			while( ( $row = $result->fetch() ) !== null )
-			{
-				$map[$row['id']] = $row['taxrate'];
-				$count++;
-			}
-
-			foreach( $map as $id => $taxrate )
-			{
-				$stmt->bind( 1, json_encode( ['' => $taxrate], JSON_FORCE_OBJECT ) );
-				$stmt->bind( 2, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-
-				$stmt->execute()->finish();
-			}
-
-			$start += $count;
+			$stmt->execute()->finish();
 		}
-		while( $count === 1000 );
 
 		$this->release( $conn, $dbdomain );
 

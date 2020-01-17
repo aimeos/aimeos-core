@@ -39,37 +39,20 @@ class MediaMigratePreview extends \Aimeos\MW\Setup\Task\Base
 			return;
 		}
 
-		$start = 0;
 		$conn = $this->acquire( $dbdomain );
-		$select = 'SELECT "id", "preview" FROM "mshop_media" WHERE "preview" NOT LIKE \'{%\' LIMIT 1000 OFFSET :offset';
+		$select = 'SELECT "id", "preview" FROM "mshop_media" WHERE "preview" NOT LIKE \'{%\'';
 		$update = 'UPDATE "mshop_media" SET "preview" = ? WHERE "id" = ?';
 
 		$stmt = $conn->create( $update );
+		$result = $conn->create( $select )->execute();
 
-		do
+		while( ( $row = $result->fetch() ) !== null )
 		{
-			$count = 0;
-			$map = [];
-			$sql = str_replace( ':offset', $start, $select );
-			$result = $conn->create( $sql )->execute();
+			$stmt->bind( 1, json_encode( ['1' => $row['preview']], JSON_FORCE_OBJECT ) );
+			$stmt->bind( 2, $row['id'], \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
-			while( ( $row = $result->fetch() ) !== null )
-			{
-				$map[$row['id']] = $row['preview'];
-				$count++;
-			}
-
-			foreach( $map as $id => $preview )
-			{
-				$stmt->bind( 1, json_encode( ['1' => $preview], JSON_FORCE_OBJECT ) );
-				$stmt->bind( 2, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-
-				$stmt->execute()->finish();
-			}
-
-			$start += $count;
+			$stmt->execute()->finish();
 		}
-		while( $count === 1000 );
 
 		$this->release( $conn, $dbdomain );
 
