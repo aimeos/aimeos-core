@@ -38,9 +38,9 @@ class PgSQL extends \Aimeos\MW\Criteria\Expression\Compare\SQL
 			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
 				$value = ( $value ? "'t'" : "'f'" ); break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
-				$value = (int) $value; break;
+				$value = (int) (string) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
-				$value = (double) $value; break;
+				$value = (double) (string) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
 				if( $operator === '~=' ) {
 					$value = '\'%' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->getConnection()->escape( $value ) ) . '%\''; break;
