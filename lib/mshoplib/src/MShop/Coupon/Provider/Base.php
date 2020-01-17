@@ -246,9 +246,9 @@ abstract class Base implements Iface
 				continue;
 			}
 
-			if( $amount < $rebate ) {
+			if( $amount <= $rebate ) {
 				$value = $price->getValue() + $price->getRebate(); $costs = $price->getCosts(); $rebate -= $amount;
-			} elseif( ( $amount = $price->getValue() + $price->getRebate() ) < $rebate ) {
+			} elseif( ( $amount = $price->getValue() + $price->getRebate() ) <= $rebate ) {
 				$value = $amount; $costs = $rebate - $amount; $rebate -= $value - $costs;
 			} else {
 				$value = $rebate; $costs = 0; $rebate = 0;
