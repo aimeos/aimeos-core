@@ -125,7 +125,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );
 
-		$items = $this->object->searchItems( $search, [], $total );
+		$items = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, $total );
 		$this->assertEquals( 1, count( $items ) );
@@ -146,11 +146,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search, array( 'text' ) );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'Catalog item not found' );
-		}
+		$item = $this->object->searchItems( $search, array( 'text' ) )->first();
 
 		$this->assertEquals( 'Sonstiges', $item->getName() );
 	}
@@ -172,11 +168,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search, array( 'text' ) );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'Catalog item not found' );
-		}
+		$item = $this->object->searchItems( $search, array( 'text' ) )->first();
 
 		$testItem = $this->object->getItem( $item->getId() );
 
@@ -196,11 +188,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'Catalog item not found' );
-		}
+		$item = $this->object->searchItems( $search )->first();
 
 		$rootItem = $this->object->getTree( $item->getId(), array( 'text' ), \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 		$categoryItem = $rootItem->getChild( 0 );
@@ -220,7 +208,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search );
+		$items = $this->object->searchItems( $search )->toArray();
 		$parentIds = [];
 
 		foreach( $items as $item ) {
@@ -293,11 +281,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search, array( 'text' ) );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'Catalog item not found' );
-		}
+		$item = $this->object->searchItems( $search, array( 'text' ) )->first();
 
 		$items = $this->object->getPath( $item->getId() );
 		$expected = array( 'Root', 'Categories', 'Kaffee' );

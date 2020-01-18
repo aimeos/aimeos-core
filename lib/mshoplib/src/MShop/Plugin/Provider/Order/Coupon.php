@@ -83,9 +83,8 @@ class Coupon
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$items = $manager->searchItems( $search );
 
-			if( ( $item = reset( $items ) ) !== false ) {
+			if( ( $item = $manager->searchItems( $search )->first() ) !== null ) {
 				$manager->getProvider( $item, $code )->update( $order );
 			} else {
 				$notAvailable[$code] = 'gone';

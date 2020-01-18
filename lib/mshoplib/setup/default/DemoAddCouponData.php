@@ -48,7 +48,7 @@ class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$search->setConditions( $search->compare( '=~', 'coupon.label', 'demo-' ) );
 		$services = $manager->searchItems( $search );
 
-		$manager->deleteItems( array_keys( $services ) );
+		$manager->deleteItems( $services->toArray() );
 
 
 		if( $value === '1' )

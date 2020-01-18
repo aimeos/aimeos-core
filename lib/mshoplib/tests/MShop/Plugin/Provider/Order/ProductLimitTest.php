@@ -32,7 +32,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 
-		foreach( $manager->searchItems( $search ) as $product ) {
+		foreach( $manager->searchItems( $search )->toArray() as $product ) {
 			$this->products[$product->getCode()] = $orderBaseProductManager->createItem()->copyFrom( $product );
 		}
 

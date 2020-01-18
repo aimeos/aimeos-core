@@ -167,9 +167,9 @@ class ProductPrice
 	 * Returns the attribute items for the given IDs.
 	 *
 	 * @param array $list List of attribute IDs
-	 * @return \Aimeos\MShop\Attribute\Item\Iface[] List of attribute items
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Attribute\Item\Iface
 	 */
-	protected function getAttributeItems( array $list ) : array
+	protected function getAttributeItems( array $list ) : \Aimeos\Map
 	{
 		if( $list !== [] )
 		{
@@ -182,7 +182,7 @@ class ProductPrice
 			$list = $attrManager->searchItems( $search, ['price'] );
 		}
 
-		return $list;
+		return new \Aimeos\Map( $list );
 	}
 
 
@@ -227,12 +227,12 @@ class ProductPrice
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct Ordered product
 	 * @param \Aimeos\MShop\Price\Item\Iface[] $refPrices Prices associated to the original product
-	 * @param \Aimeos\MShop\Attribute\Item\Iface[] $attributes Attribute items with prices
+	 * @param \Aimeos\Map $attributes Attribute items implementing \Aimeos\MShop\Attribute\Item\Iface with prices
 	 * @param int $pos Position of the product in the basket
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item including the calculated price
 	 */
 	private function getPrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct, array $refPrices,
-		array $attributes, int $pos ) : \Aimeos\MShop\Price\Item\Iface
+		\Aimeos\Map $attributes, int $pos ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$context = $this->getContext();
 

@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'text.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( [$search->sort( '-', 'text.type.position' )] );
 		$search->setSlice( 0, 2 );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 4, $total );
 
@@ -108,7 +108,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'text.type.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No text type found for code "%1$s"', 'name' ) );
@@ -123,7 +123,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.type.editor', $this->editor ) );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No type item found' );

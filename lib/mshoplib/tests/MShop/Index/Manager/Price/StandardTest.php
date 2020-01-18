@@ -64,7 +64,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$func = $search->createFunction( 'index.price:value', ['EUR'] );
 		$search->setConditions( $search->compare( '==', $func, '18.00' ) );
 
-		$this->assertEquals( 3, count( $this->object->searchItems( $search ) ) );
+		$this->assertEquals( 3, count( $this->object->searchItems( $search )->toArray() ) );
 	}
 
 

@@ -22,7 +22,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
 		$search = $servManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
-		$result = $servManager->searchItems( $search, array( 'price' ) );
+		$result = $servManager->searchItems( $search, array( 'price' ) )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new \RuntimeException( 'No order base item found' );

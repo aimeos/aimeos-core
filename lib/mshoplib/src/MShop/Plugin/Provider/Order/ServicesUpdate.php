@@ -118,11 +118,10 @@ class ServicesUpdate
 	/**
 	 * Returns the service items for the given order services
 	 *
-	 * @param array $services Associative list of service types as key and list
-	 * 	of items implementing \Aimeos\MShop\Order\Item\Base\Service\Iface as values
-	 * @return \Aimeos\MShop\Service\Item\Iface[] List of service items with IDs as keys and items as values
+	 * @param array $services List of items implementing \Aimeos\MShop\Order\Item\Base\Service\Iface with IDs as keys
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Service\Item\Iface with IDs as keys
 	 */
-	protected function getServiceItems( array $services ) : array
+	protected function getServiceItems( array $services ) : \Aimeos\Map
 	{
 		$list = [];
 
@@ -144,6 +143,6 @@ class ServicesUpdate
 			$list = $serviceManager->searchItems( $search, ['media', 'price', 'text'] );
 		}
 
-		return $list;
+		return new \Aimeos\Map( $list );
 	}
 }

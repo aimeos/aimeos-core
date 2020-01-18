@@ -57,7 +57,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'text.lists.type.editor', $this->editor ) );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No text list type item found' );
@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.lists.type.editor', $this->editor ) );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No type item found' );
@@ -138,7 +138,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 
 
@@ -150,7 +150,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'text.lists.type.position' )] );
 		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );
 

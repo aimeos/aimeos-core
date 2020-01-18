@@ -286,10 +286,10 @@ abstract class Base
 
 		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.product.baseid', $baseIds ) );
-		$items = array_reverse( $manager->searchItems( $criteria ), true );
+		$items = $manager->searchItems( $criteria )->reverse();
 
 		$search = $attrManager->createSearch()->setSlice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.parentid', array_keys( $items ) ) );
+		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.parentid', $items->keys()->toArray() ) );
 
 		foreach( $attrManager->searchItems( $search ) as $id => $attribute )
 		{

@@ -27,7 +27,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $customer->searchItems( $search );
+		$result = $customer->searchItems( $search )->toArray();
 
 		if( ( $customerItem = reset( $result ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No customer item found for label "%1$s".', 'unitCustomer001' ) );
@@ -103,7 +103,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Example company' ) );
 
-		$items = $this->object->searchItems( $search );
+		$items = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No address item found' );
@@ -234,7 +234,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.address.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
+		$this->assertEquals( 1, count( $this->object->searchItems( $search )->toArray() ) );
 	}
 
 
@@ -251,7 +251,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 2 );
 
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );

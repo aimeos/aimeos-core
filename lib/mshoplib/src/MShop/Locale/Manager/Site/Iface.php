@@ -26,9 +26,9 @@ interface Iface
 	 *
 	 * @param string $id ID of item to get the path for
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface[] Associative list of IDs as keys and items as values
+	 * @return \Aimeos\Map List of IDs as keys and items implementing \Aimeos\MShop\Locale\Item\Site\Iface
 	 */
-	public function getPath( string $id, array $ref = [] ) : array;
+	public function getPath( string $id, array $ref = [] ) : \Aimeos\Map;
 
 	/**
 	 * Returns a node and its descendants depending on the given resource.

@@ -751,9 +751,9 @@ class Standard extends Base
 	 * @param string[] $ref List of domains to fetch list items and referenced items for, e.g.
 	 *	"order/base/address", "order/base/coupon", "order/base/product", "order/base/service"
 	 * @param int|null &$total Number of items that are available in total
-	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Base\Iface
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Order\Item\Base\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
 
@@ -1039,9 +1039,9 @@ class Standard extends Base
 	 * @param array $map Associative list of order base IDs as keys and list of price/locale/row as values
 	 * @param string[] $ref Domain items that should be added as well, e.g.
 	 *	"order/base/address", "order/base/coupon", "order/base/product", "order/base/service"
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface[] Associative list of order base IDs as keys and items as values
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Order\Item\Base\Iface with IDs as keys
 	 */
-	protected function buildItems( array $map, array $ref ) : array
+	protected function buildItems( array $map, array $ref ) : \Aimeos\Map
 	{
 		$items = [];
 		$baseIds = array_keys( $map );
@@ -1087,7 +1087,7 @@ class Standard extends Base
 			$items[$id] = $this->createItemBase( $price, $locale, $row, $products, $addresses, $services, $coupons );
 		}
 
-		return $items;
+		return new \Aimeos\Map( $items );
 	}
 
 

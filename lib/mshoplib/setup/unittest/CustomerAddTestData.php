@@ -64,7 +64,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'customer.code', 'UTC00' ) );
-		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
+		$manager->deleteItems( $manager->searchItems( $search )->toArray() );
 
 		$this->storeTypes( $testdata, ['customer/lists/type', 'customer/property/type'] );
 		$this->addGroupItems( $groupManager, $testdata );

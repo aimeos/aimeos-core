@@ -192,9 +192,9 @@ abstract class Base
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int|null &$total Number of items that are available in total
-	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Address\Iface
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Address\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -222,7 +222,7 @@ abstract class Base
 			throw $e;
 		}
 
-		return $items;
+		return new \Aimeos\Map( $items );
 	}
 
 

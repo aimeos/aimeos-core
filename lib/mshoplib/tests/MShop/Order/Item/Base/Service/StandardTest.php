@@ -537,7 +537,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
-		$services = $manager->searchItems( $search );
+		$services = $manager->searchItems( $search )->toArray();
 
 		if( ( $service = reset( $services ) ) === false ) {
 			throw new \RuntimeException( 'No service found' );

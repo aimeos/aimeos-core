@@ -217,9 +217,7 @@ class Standard
 		$search->setSortations( array( $search->sort( '-', 'order.status.ctime' ) ) );
 		$search->setSlice( 0, 1 );
 
-		$result = $manager->searchItems( $search );
-
-		return reset( $result ) ?: null;
+		return $manager->searchItems( $search )->first();
 	}
 
 
@@ -228,9 +226,9 @@ class Standard
 	 *
 	 * @param array $prodCodes List of product codes
 	 * @param string $stockType Stock type code the stock items must belong to
-	 * @return \Aimeos\MShop\Stock\Item\Iface[] Associative list of stock IDs as keys and stock items as values
+	 * @return \Aimeos\Map Associative list of \Aimeos\MShop\Stock\Item\Iface and IDs as values
 	 */
-	protected function getStockItems( array $prodCodes, string $stockType ) : array
+	protected function getStockItems( array $prodCodes, string $stockType ) : \Aimeos\Map
 	{
 		$stockManager = \Aimeos\MShop::create( $this->context, 'stock' );
 

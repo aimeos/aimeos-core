@@ -62,9 +62,8 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'cache.id', 'unittest' ) );
-		$results = $this->object->searchItems( $search );
 
-		$this->assertEquals( [], $results );
+		$this->assertTrue( $this->object->searchItems( $search )->isEmpty() );
 	}
 
 

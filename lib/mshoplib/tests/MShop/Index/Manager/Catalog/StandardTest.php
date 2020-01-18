@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$listManager = $catalogManager->getSubManager( 'lists' );
 		$search = $listManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.lists.domain', 'product' ) );
-		$catListItems = $listManager->searchItems( $search );
+		$catListItems = $listManager->searchItems( $search )->toArray();
 
 		if( ( $catListItem = reset( $catListItems ) ) === false ) {
 			throw new \RuntimeException( 'No catalog list item found!' );
@@ -88,7 +88,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catListItem->getParentId() ) );
-		$result = $this->object->searchItems( $search );
+		$result = $this->object->searchItems( $search )->toArray();
 
 
 		$this->object->deleteItem( $product->getId() );
@@ -98,7 +98,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catListItem->getParentId() ) );
-		$result2 = $this->object->searchItems( $search );
+		$result2 = $this->object->searchItems( $search )->toArray();
 
 
 		$this->assertContains( $product->getId(), array_keys( $result ) );

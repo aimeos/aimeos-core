@@ -832,11 +832,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
-		$products = $manager->searchItems( $search, ['text'] );
-
-		if( ( $product = reset( $products ) ) === false ) {
-			throw new \RuntimeException( 'No product found' );
-		}
+		$product = $manager->searchItems( $search, ['text'] )->first();
 
 		$return = $productCopy->copyFrom( $product );
 

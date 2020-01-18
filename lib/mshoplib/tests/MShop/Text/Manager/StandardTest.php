@@ -75,7 +75,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.label', 'misc_long_desc' ) );
-		$item = current( $this->object->searchItems( $search, ['media'] ) );
+		$item = $this->object->searchItems( $search, ['media'] )->first();
 
 		if( $item && ( $listItem = current( $item->getListItems( 'media', 'align-top' ) ) ) === false ) {
 			throw new \RuntimeException( 'No list item found' );
@@ -107,7 +107,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', $search->createFunction( 'text:has', $param ), null );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, [], $total );
+		$result = $this->object->searchItems( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
 	}
@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.editor', $this->editor ) );
-		$this->assertEquals( 90, count( $this->object->searchItems( $search ) ) );
+		$this->assertEquals( 90, count( $this->object->searchItems( $search )->toArray() ) );
 	}
 
 
@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 5 );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 		$this->assertEquals( 5, count( $results ) );
 		$this->assertEquals( 89, $total );
 
@@ -150,7 +150,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$result = $this->object->searchItems( $search );
+		$result = $this->object->searchItems( $search )->toArray();
 
 		if( ( $expected = reset( $result ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No text item including "%1$s" found', 'Monetary' ) );
@@ -171,7 +171,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$a = $this->object->searchItems( $search );
+		$a = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $a ) ) === false ) {
 			throw new \RuntimeException( 'Text item not found.' );

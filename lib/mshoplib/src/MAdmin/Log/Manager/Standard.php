@@ -410,13 +410,12 @@ class Standard
 			$criteria->getConditions()
 		];
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
-		$items = $this->getObject()->searchItems( $criteria, $ref );
 
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Aimeos\MAdmin\Log\Exception( sprintf( 'Log entry with ID "%1$s" not found', $id ) );
+		if( ( $item = $this->getObject()->searchItems( $criteria, $ref )->first() ) ) {
+			return $item;
 		}
 
-		return $item;
+		throw new \Aimeos\MAdmin\Log\Exception( sprintf( 'Log entry with ID "%1$s" not found', $id ) );
 	}
 
 
@@ -426,9 +425,9 @@ class Standard
 	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int &$total Number of items that are available in total
-	 * @return \Aimeos\MAdmin\Log\Item\Iface[] List of log items
+	 * @return \Aimeos\Map List of items implementing Aimeos\MAdmin\Log\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
 		$context = $this->getContext();
@@ -568,7 +567,7 @@ class Standard
 			throw $e;
 		}
 
-		return $items;
+		return new \Aimeos\Map( $items );
 	}
 
 

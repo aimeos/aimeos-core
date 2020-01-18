@@ -145,7 +145,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No order found in shop_order_invoice with statuspayment "%1$s"', $status ) );
@@ -164,7 +164,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No order item found.' );
@@ -229,7 +229,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No order item found.' );
@@ -241,7 +241,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $statusManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
-		$results = $statusManager->searchItems( $search );
+		$results = $statusManager->searchItems( $search )->toArray();
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -254,7 +254,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $statusManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
-		$results = $statusManager->searchItems( $search );
+		$results = $statusManager->searchItems( $search )->toArray();
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -278,7 +278,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No order item found.' );
@@ -290,7 +290,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $statusManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
-		$results = $statusManager->searchItems( $search );
+		$results = $statusManager->searchItems( $search )->toArray();
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -303,7 +303,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $statusManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
-		$results = $statusManager->searchItems( $search );
+		$results = $statusManager->searchItems( $search )->toArray();
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -465,7 +465,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, [], $total );
+		$result = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -479,7 +479,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
 		$total = 0;
-		$items = $this->object->searchItems( $search, [], $total );
+		$items = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 3, $total );

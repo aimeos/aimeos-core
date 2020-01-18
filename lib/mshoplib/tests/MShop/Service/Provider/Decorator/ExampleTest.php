@@ -22,7 +22,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $context );
 		$search = $servManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
-		$result = $servManager->searchItems( $search, array( 'price' ) );
+		$result = $servManager->searchItems( $search, array( 'price' ) )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new \RuntimeException( 'No service item found' );
@@ -64,7 +64,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() )->getSubManager( 'base' );
 		$search = $orderBaseManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
-		$result = $orderBaseManager->searchItems( $search );
+		$result = $orderBaseManager->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new \RuntimeException( 'No order base item found' );

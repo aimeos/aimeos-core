@@ -79,7 +79,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $listManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'supplier.lists.domain', 'product' ) );
-		$supListItems = $listManager->searchItems( $search );
+		$supListItems = $listManager->searchItems( $search )->toArray();
 
 		if( ( $supListItem = reset( $supListItems ) ) === false ) {
 			throw new \RuntimeException( 'No supplier list item found!' );
@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.supplier.id', $supListItem->getParentId() ) );
-		$result = $this->object->searchItems( $search );
+		$result = $this->object->searchItems( $search )->toArray();
 
 
 		$this->object->deleteItem( $product->getId() );
@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.supplier.id', $supListItem->getParentId() ) );
-		$result2 = $this->object->searchItems( $search );
+		$result2 = $this->object->searchItems( $search )->toArray();
 
 
 		$this->assertContains( $product->getId(), array_keys( $result ) );

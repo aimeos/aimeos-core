@@ -27,7 +27,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 		$search = $orderBaseProductManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.product.prodcode', 'CNC' ) );
-		$orderProducts = $orderBaseProductManager->searchItems( $search );
+		$orderProducts = $orderBaseProductManager->searchItems( $search )->toArray();
 
 		if( ( $orderProduct = reset( $orderProducts ) ) === false ) {
 			throw new \RuntimeException( 'No order base product item found.' );

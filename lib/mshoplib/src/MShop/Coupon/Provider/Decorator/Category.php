@@ -85,7 +85,7 @@ class Category
 				$search->getConditions(),
 			] ) );
 
-			if( count( $manager->searchItems( $search ) ) === 0 ) {
+			if( $manager->searchItems( $search )->isEmpty() ) {
 				return false;
 			}
 		}

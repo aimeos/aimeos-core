@@ -78,7 +78,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'price.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No results available' );
@@ -93,14 +93,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'price.label', 'product/default/600.00/30.00' ) );
-		$items = $this->object->searchItems( $search, ['price/property'] );
+		$items = $this->object->searchItems( $search, ['price/property'] )->toArray();
 		$item = reset( $items );
 
 		$item->setId( null )->setLabel( 'core:property-test' );
 		$this->object->saveItem( $item );
 
 		$search->setConditions( $search->compare( '==', 'price.label', 'core:property-test' ) );
-		$items = $this->object->searchItems( $search, ['price/property'] );
+		$items = $this->object->searchItems( $search, ['price/property'] )->toArray();
 		$item2 = reset( $items );
 
 		$this->object->deleteItem( $item->getId() );
@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'price.editor', $this->editor ) );
-		$items = $this->object->searchItems( $search );
+		$items = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No item found' );
@@ -190,7 +190,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'price.value', '99.99' ) );
-		$item = current( $this->object->searchItems( $search, ['customer'] ) );
+		$item = $this->object->searchItems( $search, ['customer'] )->first();
 
 		if( $item && ( $listItem = current( $item->getListItems( 'customer', 'test' ) ) ) === false ) {
 			throw new \RuntimeException( 'No list item found' );
@@ -226,7 +226,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
 	}
@@ -264,7 +264,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', $search->createFunction( 'price:prop', $param ), null );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
 	}
@@ -276,7 +276,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'price.editor', $this->editor ) );
 		$search->setSlice( 0, 10 );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 		$this->assertEquals( 10, count( $results ) );
 		$this->assertEquals( 27, $total );
 	}
@@ -290,7 +290,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 		$this->assertEquals( 25, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {

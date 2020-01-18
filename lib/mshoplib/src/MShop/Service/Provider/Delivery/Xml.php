@@ -214,7 +214,7 @@ class Xml
 	 * Returns the order base items for the given orders
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orderItems List of order items
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface[] Associative list of IDs as keys and order base items as values
+	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Base\Iface with IDs as keys
 	 */
 	protected function getOrderBaseItems( array $orderItems ) : array
 	{
@@ -229,7 +229,7 @@ class Xml
 		$search = $manager->createSearch()->setSlice( 0, count( $ids ) );
 		$search->setConditions( $search->compare( '==', 'order.base.id', array_keys( $ids ) ) );
 
-		return $manager->searchItems( $search, $ref );
+		return $manager->searchItems( $search, $ref )->toArray();
 	}
 
 
@@ -305,12 +305,12 @@ class Xml
 				$list[$childNode->nodeName] = $childNode->nodeValue;
 			}
 
-			if( ( $attr = $node->attributes->getNamedItem( 'ref' ) ) !== null && isset( $items[$attr->nodeValue] ) ) {
+			if( ( $attr = $node->attributes->getNamedItem( 'ref' ) ) !== null && $items->has( $attr->nodeValue ) ) {
 				$items[$attr->nodeValue]->fromArray( $list );
 			}
 		}
 
-		$manager->saveItems( $items );
+		$manager->saveItems( $items->toArray() );
 		return $this;
 	}
 }

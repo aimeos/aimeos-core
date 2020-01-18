@@ -146,18 +146,16 @@ class PropertyAdd
 	 * Adds the product properties as attribute items to the order product item
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct Order product containing attributes
-	 * @param \Aimeos\MShop\Product\Item\Iface[] $products Product items with properties
+	 * @param \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys and properties
 	 * @param string[] $types List of property types to add
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Modified order product item
 	 */
 	protected function addAttributes( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct,
-		array $products, array $types ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	\Aimeos\Map $products, array $types ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		if( !isset( $products[$orderProduct->getProductId()] ) ) {
+		if( ( $product = $products->get( $orderProduct->getProductId() ) ) === null ) {
 			return $orderProduct;
 		}
-
-		$product = $products[$orderProduct->getProductId()];
 
 		foreach( $types as $type )
 		{
@@ -188,9 +186,9 @@ class PropertyAdd
 	 * Returns the product items for the given product IDs limited by the map of properties
 	 *
 	 * @param string[] $productIds List of product IDs
-	 * @return \Aimeos\MShop\Product\Item\Iface[] Found product items
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys
 	 */
-	protected function getProductItems( array $productIds ) : array
+	protected function getProductItems( array $productIds ) : \Aimeos\Map
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 		$search = $manager->createSearch( true );

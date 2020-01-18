@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No list type item found' );
@@ -68,7 +68,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No type item found' );
@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setSortations( [$search->sort( '-', 'customer.lists.type.position' )] );
 		$search->setSlice( 0, 1 );
 
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 

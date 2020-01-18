@@ -66,7 +66,7 @@ class NolimitTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search = $this->object->createSearch()->setSlice( 0, 2 );
 		$search->setConditions( $search->compare( '==', 'stock.productcode', ['abc', 'def', 'ghi'] ) );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );

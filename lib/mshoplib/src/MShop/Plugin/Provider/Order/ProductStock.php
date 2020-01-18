@@ -153,9 +153,9 @@ class ProductStock
 	 *
 	 * @param array|string $codes Unique product code or list of product codes
 	 * @param array|string $types Unique stock types to limit the stock items
-	 * @return array Associative list of stock item IDs as keys and items implementing \Aimeos\MShop\Stock\Item\Iface as values
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Stock\Item\Iface with IDs as keys
 	 */
-	protected function getStockItems( $codes, $types ) : array
+	protected function getStockItems( $codes, $types ) : \Aimeos\Map
 	{
 		$stockManager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
 

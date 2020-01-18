@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 				$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$products = $this->object->searchItems( $search, $domains );
+		$products = $this->object->searchItems( $search, $domains )->toArray();
 
 		if( ( $product = reset( $products ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'Found no Productitem with text "%1$s"', 'Cafe Noire Cappuccino' ) );
@@ -152,7 +152,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 				$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search );
+		$items = $this->object->searchItems( $search )->toArray();
 
 		$this->assertIsArray( $this->object->saveItems( $items ) );
 	}
@@ -169,7 +169,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 				$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search );
+		$items = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No product item found' );
@@ -294,7 +294,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
 		$search->setSlice( 0, 1 );
-		$products = $manager->searchItems( $search );
+		$products = $manager->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $products ) ) === false ) {
 			throw new \RuntimeException( 'No product found' );
@@ -361,7 +361,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );
 
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
@@ -377,7 +377,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
 		$search->setSlice( 0, 10 );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 		$this->assertEquals( 10, count( $results ) );
 		$this->assertEquals( 28, $total );
 	}
@@ -402,21 +402,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'CN_' ) );
-		$result = $this->object->searchItems( $search );
+		$result = $this->object->searchItems( $search )->toArray();
 
 		$this->assertEquals( 0, count( $result ) );
 
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'CN%' ) );
-		$result = $this->object->searchItems( $search );
+		$result = $this->object->searchItems( $search )->toArray();
 
 		$this->assertEquals( 0, count( $result ) );
 
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'CN[C]' ) );
-		$result = $this->object->searchItems( $search );
+		$result = $this->object->searchItems( $search )->toArray();
 
 		$this->assertEquals( 0, count( $result ) );
 	}
@@ -433,7 +433,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		do
 		{
-			$result = $this->object->searchItems( $search );
+			$result = $this->object->searchItems( $search )->toArray();
 
 			foreach( $result as $item ) {
 				$numproducts++;

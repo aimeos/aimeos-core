@@ -516,13 +516,12 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		}
 
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
-		$items = $this->getObject()->searchItems( $criteria, $ref );
 
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No item found for conditions: %1$s', print_r( $pairs, true ) ) );
+		if( ( $item = $this->getObject()->searchItems( $criteria, $ref )->first() ) ) {
+			return $item;
 		}
 
-		return $item;
+		throw new \Aimeos\MShop\Exception( sprintf( 'No item found for conditions: %1$s', print_r( $pairs, true ) ) );
 	}
 
 
@@ -572,13 +571,12 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$criteria->getConditions()
 		];
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
-		$items = $this->getObject()->searchItems( $criteria, $ref );
 
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Item with ID "%2$s" in "%1$s" not found', $key, $id ) );
+		if( ( $item = $this->getObject()->searchItems( $criteria, $ref )->first() ) ) {
+			return $item;
 		}
 
-		return $item;
+		throw new \Aimeos\MShop\Exception( sprintf( 'Item with ID "%2$s" in "%1$s" not found', $key, $id ) );
 	}
 
 

@@ -559,9 +559,9 @@ class Standard
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int|null &$total Number of items that are available in total
-	 * @return array List of site items implementing \Aimeos\MShop\Locale\Item\Site\Iface
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Locale\Item\Site\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
 		$context = $this->getContext();
@@ -687,7 +687,7 @@ class Standard
 			throw $e;
 		}
 
-		return $items;
+		return new \Aimeos\Map( $items );
 	}
 
 
@@ -721,12 +721,12 @@ class Standard
 	 *
 	 * @param string $id ID of item to get the path for
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface[] Associative list of IDs as keys and items as values
+	 * @return \Aimeos\Map List of IDs as keys and items implementing \Aimeos\MShop\Locale\Item\Site\Iface
 	 */
-	public function getPath( string $id, array $ref = [] ) : array
+	public function getPath( string $id, array $ref = [] ) : \Aimeos\Map
 	{
 		$item = $this->getTree( $id, $ref, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
-		return array( $item->getId() => $item );
+		return new \Aimeos\Map( [$item->getId() => $item] );
 	}
 
 
@@ -756,9 +756,7 @@ class Standard
 		$criteria = $this->getObject()->createSearch()->setSlice( 0, 1 );
 		$criteria->setConditions( $criteria->compare( '==', 'locale.site.code', 'default' ) );
 
-		$items = $this->getObject()->searchItems( $criteria, $ref );
-
-		if( ( $item = reset( $items ) ) === false ) {
+		if( ( $item = $this->getObject()->searchItems( $criteria, $ref )->first() ) === null ) {
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Tree root with code "%1$s" in "%2$s" not found', 'default', 'locale.site.code' ) );
 		}
 

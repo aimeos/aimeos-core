@@ -88,7 +88,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'plugin.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $this->object->searchItems( $search );
+		$result = $this->object->searchItems( $search )->toArray();
 		if( ( $expected = reset( $result ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No plugin item including "%1$s" found', 'Shipping' ) );
 		}
@@ -108,7 +108,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$a = $this->object->searchItems( $search );
+		$a = $this->object->searchItems( $search )->toArray();
 		if( ( $item = reset( $a ) ) === false ) {
 			throw new \RuntimeException( 'Search provider in test failt' );
 		}
@@ -184,7 +184,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'plugin.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 	}
 
@@ -209,7 +209,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		//search without base criteria
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->combine( '||', $conditions ) );
-		$this->assertEquals( 3, count( $this->object->searchItems( $search ) ) );
+		$this->assertEquals( 3, count( $this->object->searchItems( $search )->toArray() ) );
 	}
 
 

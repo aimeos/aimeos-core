@@ -476,14 +476,14 @@ class Standard
 	/**
 	 * Returns the node and its children as list
 	 *
-	 * @return \Aimeos\MShop\Catalog\Item\Iface[] Associative list of IDs as keys and nodes as values
+	 * @return \Aimeos\Map List of IDs as keys and items implementing \Aimeos\MShop\Catalog\Item\Iface
 	 */
-	public function toList() : array
+	public function toList() : \Aimeos\Map
 	{
-		$list = [$this->getId() => $this];
+		$list = new \Aimeos\Map( [$this->getId() => $this] );
 
 		foreach( $this->getChildren() as $child ) {
-			$list += $child->toList();
+			$list = $list->union( $child->toList() );
 		}
 
 		return $list;

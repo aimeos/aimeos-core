@@ -98,9 +98,9 @@ class Nolimit
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int|null &$total Number of items that are available in total
-	 * @return \Aimeos\MShop\Stock\Item\Iface[] List of stock items
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Stock\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
 		$item = $this->getObject()->createItem( ['stock.type' => 'default'] );
@@ -115,7 +115,7 @@ class Nolimit
 			$total = count( $items );
 		}
 
-		return array_splice( $items, 0, $search->getSliceSize() );
+		return new \Aimeos\Map( array_splice( $items, 0, $search->getSliceSize() ) );
 	}
 
 

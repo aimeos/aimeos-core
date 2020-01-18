@@ -326,9 +326,9 @@ class Standard
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int|null &$total Number of items that are available in total
-	 * @return array List of items implementing \Aimeos\MShop\Product\Item\Iface
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		/** mshop/index/manager/standard/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
@@ -494,7 +494,7 @@ class Standard
 		{
 			$search->setSlice( $start, $size );
 			$products = $manager->searchItems( $search, $domains );
-			$prodIds = array_keys( $products );
+			$prodIds = $products->keys()->toArray();
 
 			try
 			{
@@ -503,7 +503,7 @@ class Standard
 				$this->clearItems( $prodIds );
 
 				foreach( $submanagers as $submanager ) {
-					$submanager->rebuild( $products );
+					$submanager->rebuild( $products->toArray() );
 				}
 
 				$this->commit();

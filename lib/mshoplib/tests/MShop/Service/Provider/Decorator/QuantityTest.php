@@ -145,7 +145,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', $paydate ) );
-		$result = $manager->searchItems( $search );
+		$result = $manager->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new \RuntimeException( 'No order item found' );

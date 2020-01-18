@@ -74,9 +74,9 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * @param string $prefix Domain prefix
 	 * @param array $local Associative list of IDs as keys and the associative array of items as values
 	 * @param array $local2 Associative list of IDs as keys and the associative array of items as values
-	 * @return array List of items implementing \Aimeos\MShop\Catalog\Item\Iface
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Catalog\Item\Iface
 	 */
-	protected function buildItems( array $itemMap, array $domains, string $prefix, array $local = [], array $local2 = [] ) : array
+	protected function buildItems( array $itemMap, array $domains, string $prefix, array $local = [], array $local2 = [] ) : \Aimeos\Map
 	{
 		$items = $listItemMap = $refItemMap = $refIdMap = [];
 
@@ -111,7 +111,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			$items[$id] = $this->createItemBase( [], $listItems, $refItems, [], $node );
 		}
 
-		return $items;
+		return new \Aimeos\Map( $items );
 	}
 
 

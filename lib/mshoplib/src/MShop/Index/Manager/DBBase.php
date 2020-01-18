@@ -369,7 +369,7 @@ abstract class DBBase
 	 * @return \Aimeos\MShop\Product\Item\Iface[] List of product items
 	 */
 	protected function searchItemsIndexBase( \Aimeos\MW\Criteria\Iface $search,
-		array $ref, int &$total = null, string $cfgPathSearch, string $cfgPathCount ) : array
+		array $ref, int &$total = null, string $cfgPathSearch, string $cfgPathCount ) : \Aimeos\Map
 	{
 		$list = $ids = [];
 		$context = $this->getContext();
@@ -441,7 +441,7 @@ abstract class DBBase
 			}
 		}
 
-		return $list;
+		return new \Aimeos\Map( $list );
 	}
 
 

@@ -63,7 +63,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No service provider item found.' );
@@ -145,7 +145,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'service.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $this->object->searchItems( $search, array( 'text' ) );
+		$result = $this->object->searchItems( $search, array( 'text' ) )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new \RuntimeException( 'No item found' );
@@ -193,7 +193,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', $search->createFunction( 'service:has', $param ), null );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
@@ -212,7 +212,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$this->assertEquals( 0, count( $this->object->searchItems( $search ) ) );
+		$this->assertEquals( 0, count( $this->object->searchItems( $search )->toArray() ) );
 	}
 
 
@@ -225,7 +225,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
-		$result = $this->object->searchItems( $search );
+		$result = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new \RuntimeException( 'No service item found' );

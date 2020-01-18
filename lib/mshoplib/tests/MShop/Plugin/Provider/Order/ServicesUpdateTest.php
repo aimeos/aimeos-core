@@ -80,7 +80,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 			->will( $this->returnValue( [$orderProduct] ) );
 
 		$serviceStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) );
+			->will( $this->returnValue( \Aimeos\Map::from( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) ) );
 
 		$serviceStub->expects( $this->exactly( 2 ) )->method( 'getProvider' )
 			->will( $this->returnValue( $providerStub ) );
@@ -136,7 +136,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 			->will( $this->returnValue( [$orderProduct] ) );
 
 		$serviceStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) );
+			->will( $this->returnValue( \Aimeos\Map::from( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) ) );
 
 		$serviceStub->expects( $this->exactly( 2 ) )->method( 'getProvider' )
 			->will( $this->returnValue( $providerStub ) );

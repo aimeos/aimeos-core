@@ -555,9 +555,9 @@ class Standard
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int|null &$total Number of items that are available in total
-	 * @return \Aimeos\MShop\Attribute\Item\Iface[] List of attribute items
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Attribute\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
 		$context = $this->getContext();

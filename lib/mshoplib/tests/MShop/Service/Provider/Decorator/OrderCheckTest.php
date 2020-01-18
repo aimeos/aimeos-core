@@ -10,9 +10,6 @@
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
 
-/**
- * Test class for \Aimeos\MShop\Service\Provider\Decorator\OrderCheck.
- */
 class OrderCheckTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -144,7 +141,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'searchItems' )
-			->will( $this->returnValue( array( $mock->createItem() ) ) );
+			->will( $this->returnValue( \Aimeos\Map::from( [$mock->createItem()] ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
 
@@ -169,7 +166,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'searchItems' )
-			->will( $this->returnValue( [] ) );
+			->will( $this->returnValue( new \Aimeos\Map() ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
 
@@ -190,7 +187,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'searchItems' )
-			->will( $this->returnValue( [] ) );
+			->will( $this->returnValue( new \Aimeos\Map() ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
 
@@ -215,7 +212,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'searchItems' )
-			->will( $this->returnValue( array( $mock->createItem() ) ) );
+			->will( $this->returnValue( \Aimeos\Map::from( [$mock->createItem()] ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
 

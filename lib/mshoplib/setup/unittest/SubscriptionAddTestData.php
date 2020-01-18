@@ -107,7 +107,7 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$result = $manager->searchItems( $search );
 
-		if( ( $item = reset( $result ) ) !== false ) {
+		if( ( $item = $result->first() ) !== null ) {
 			return $item;
 		}
 

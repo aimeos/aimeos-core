@@ -200,9 +200,9 @@ class Standard
 	 * @param \Aimeos\MW\Criteria\Iface $search Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int &$total Number of items that are available in total
-	 * @return \Aimeos\MShop\Locale\Item\Iface[] List of locale items
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Locale\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
@@ -218,7 +218,7 @@ class Standard
 			$items[(string) $row['locale.id']] = $this->createItemBase( $row );
 		}
 
-		return $items;
+		return new \Aimeos\Map( $items );
 	}
 
 

@@ -212,7 +212,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderCouponStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( array( $orderCouponStub->createItem()->setCode( 'test' ) ) ) );
+			->will( $this->returnValue( \Aimeos\Map::from( [$orderCouponStub->createItem()->setCode( 'test' )] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/coupon', $orderCouponStub );
 
@@ -248,7 +248,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderCouponStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( array( $orderCouponStub->createItem()->setCode( 'test' ) ) ) );
+			->will( $this->returnValue( \Aimeos\Map::from( [$orderCouponStub->createItem()->setCode( 'test' )] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/coupon', $orderCouponStub );
 
@@ -359,7 +359,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderProductStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( array( $orderProductStub->createItem() ) ) );
+			->will( $this->returnValue( \Aimeos\Map::from( [$orderProductStub->createItem()] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
 
@@ -405,7 +405,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderProductItem->setType( 'default' );
 
 		$orderProductStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( array( $orderProductItem ) ) );
+			->will( $this->returnValue( \Aimeos\Map::from( [$orderProductItem] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
 
@@ -451,7 +451,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderProductItem->setType( 'select' );
 
 		$orderProductStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( array( $orderProductItem ) ) );
+			->will( $this->returnValue( \Aimeos\Map::from( [$orderProductItem] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
 
@@ -551,7 +551,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->will( $this->returnValue( array( 'X2' => array( 'X1' ), 'X3' => array( 'X1' ) ) ) );
 
 		$object->expects( $this->exactly( 2 ) )->method( 'getStockItems' )
-			->will( $this->onConsecutiveCalls( array( $stockItem2, $stockItem1 ), array( $stockItem3 ) ) );
+			->will( $this->onConsecutiveCalls(
+				\Aimeos\Map::from( [$stockItem2, $stockItem1] ),
+				\Aimeos\Map::from( [$stockItem3] )
+			) );
 
 
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
@@ -588,19 +591,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function getOrderItem( $datepayment )
+	protected function getOrderItem( $datepayment ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$manager = \Aimeos\MShop::create( \TestHelperCntl::getContext(), 'order' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', $datepayment ) );
 
-		$result = $manager->searchItems( $search );
-
-		if( ( $item = reset( $result ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No order item for payment date "%1$s" found', $datepayment ) );
-		}
-
-		return $item;
+		return $manager->searchItems( $search )->first();
 	}
 }

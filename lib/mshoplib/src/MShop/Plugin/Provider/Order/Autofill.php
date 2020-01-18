@@ -191,9 +191,7 @@ class Autofill
 			$search->setSortations( array( $search->sort( '-', 'order.ctime' ) ) );
 			$search->setSlice( 0, 1 );
 
-			$result = $orderManager->searchItems( $search );
-
-			if( ( $item = reset( $result ) ) !== false )
+			if( ( $item = $orderManager->searchItems( $search )->first() ) !== null )
 			{
 				$this->setAddresses( $order, $item );
 				$this->setServices( $order, $item );
@@ -235,9 +233,7 @@ class Autofill
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
 
-		$result = $serviceManager->searchItems( $search, array( 'media', 'price', 'text' ) );
-
-		foreach( $result as $item )
+		foreach( $serviceManager->searchItems( $search, array( 'media', 'price', 'text' ) ) as $item )
 		{
 			$provider = $serviceManager->getProvider( $item, $item->getType() );
 

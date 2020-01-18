@@ -122,9 +122,7 @@ class PropertyMatch
 			$list[] = $value->getProductId();
 		}
 
-		$result = $this->getProductItems( array_unique( $list ), $map );
-
-		if( count( $result ) !== count( $list ) )
+		if( $this->getProductItems( array_unique( $list ), $map )->count() !== count( $list ) )
 		{
 			$code = array( 'product' => $map );
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Product matching given properties not found' );
@@ -140,9 +138,9 @@ class PropertyMatch
 	 *
 	 * @param string[] $productIds List of product IDs
 	 * @param array $map Assoicative list of property types as keys and property values
-	 * @return \Aimeos\MShop\Product\Item\Iface[] Found product items
+	 * @return List of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys
 	 */
-	protected function getProductItems( array $productIds, array $map ) : array
+	protected function getProductItems( array $productIds, array $map ) : \Aimeos\Map
 	{
 		$context = $this->getContext();
 		$langId = $context->getLocale()->getLanguageId();

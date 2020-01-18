@@ -38,9 +38,9 @@ abstract class Base
 	 *
 	 * @param string $id ID of item to get the path for
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return array Associative list of items implementing \Aimeos\MShop\Catalog\Item\Iface with IDs as keys
+	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Catalog\Item\Iface with IDs as keys
 	 */
-	public function getPath( string $id, array $ref = [] ) : array
+	public function getPath( string $id, array $ref = [] ) : \Aimeos\Map
 	{
 		return $this->getManager()->getPath( $id, $ref );
 	}

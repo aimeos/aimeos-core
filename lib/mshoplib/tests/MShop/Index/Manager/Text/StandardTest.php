@@ -126,7 +126,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$func = $search->createFunction( 'index.text:name', ['de'] );
 		$search->setConditions( $search->compare( '==', $func, 'Cafe Noire Expresso' ) );
 
-		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
+		$this->assertEquals( 1, count( $this->object->searchItems( $search )->toArray() ) );
 	}
 
 
@@ -143,6 +143,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$func = $search->createFunction( 'index.text:name', ['de'] );
 		$search->setConditions( $search->compare( '==', $func, 'Unterproduct 3' ) );
 
-		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
+		$this->assertEquals( 1, count( $this->object->searchItems( $search )->toArray() ) );
 	}
 }

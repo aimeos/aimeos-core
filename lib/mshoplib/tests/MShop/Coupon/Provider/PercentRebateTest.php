@@ -219,7 +219,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.product.prodcode', array( 'CNE', 'CNC' ) ),
 			$search->compare( '==', 'order.base.product.price', array( '600.00', '36.00' ) )
 		) ) );
-		$items = $manager->searchItems( $search );
+		$items = $manager->searchItems( $search )->toArray();
 
 		if( count( $items ) < 2 ) {
 			throw new \RuntimeException( 'Please fix the test data in your database.' );

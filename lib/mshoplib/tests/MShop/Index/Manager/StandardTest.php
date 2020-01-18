@@ -83,7 +83,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$items = $manager->searchItems( $search );
+		$items = $manager->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No attribute found' );
@@ -202,7 +202,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->searchItems( $search, [], $total );
+		$result = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$products = $this->object->searchItems( $search );
+		$products = $this->object->searchItems( $search )->toArray();
 		$this->assertEquals( 8, count( $products ) );
 
 		foreach( $products as $itemId => $item ) {
@@ -243,7 +243,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, [], $total );
+		$result = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
@@ -269,7 +269,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
-		$items = $manager->searchItems( $search );
+		$items = $manager->searchItems( $search )->toArray();
 
 		$this->object->cleanup( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuild( $items );
 
@@ -367,7 +367,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		return $subIndex->searchItems( $search );
+		return $subIndex->searchItems( $search )->toArray();
 	}
 
 }

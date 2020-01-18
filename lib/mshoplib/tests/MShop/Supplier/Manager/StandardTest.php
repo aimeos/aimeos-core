@@ -82,7 +82,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'supplier.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search );
+		$items = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No supplier item with label "unitSupplier" found' );
@@ -100,7 +100,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'supplier.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search );
+		$items = $this->object->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No supplier item found' );
@@ -209,7 +209,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'supplier.address.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search );
+		$result = $this->object->searchItems( $search )->toArray();
 		$this->assertEquals( 1, count( $result ) );
 	}
 
@@ -221,7 +221,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setSlice( 0, 2 );
 
 		$total = 0;
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
@@ -236,7 +236,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		$this->assertEquals( 2, count( $results ) );
 
@@ -251,12 +251,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'supplier.code', 'unitCode001' ) );
 
-		$results = $this->object->searchItems( $search, ['supplier/address', 'text'] );
+		$item = $this->object->searchItems( $search, ['supplier/address', 'text'] )->first();
 
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \Exception( 'No supplier item for "unitCode001" available' );
-		}
-
+		$this->assertInstanceOf( \Aimeos\MShop\Supplier\Item\Iface::class, $item );
 		$this->assertEquals( 3, count( $item->getRefItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 1, count( $item->getAddressItems() ) );
 	}

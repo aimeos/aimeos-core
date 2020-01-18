@@ -219,11 +219,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCopyFrom()
 	{
 		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::create( \TestHelperMShop::getContext() );
-
-		$items = $attrManager->searchItems( $attrManager->createSearch() );
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No attribute item found' );
-		}
+		$item = $attrManager->searchItems( $attrManager->createSearch() )->first();
 
 		$return = $this->object->copyFrom( $item );
 

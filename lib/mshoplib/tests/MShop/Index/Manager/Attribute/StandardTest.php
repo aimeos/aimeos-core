@@ -68,18 +68,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$product = $productManager->findItem( 'CNC', ['attribute'] );
-
-		$attributes = $product->getRefItems( 'attribute' );
-		if( ( $attrItem = reset( $attributes ) ) === false ) {
-			throw new \RuntimeException( 'Product doesnt have any attribute item' );
-		}
+		$attrItem = current( $product->getRefItems( 'attribute' ) );
 
 		$product = $this->object->saveItem( $product->setId( null )->setCode( 'ModifiedCNC' ) );
 
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrItem->getId() ) );
-		$result = $this->object->searchItems( $search );
+		$result = $this->object->searchItems( $search )->toArray();
 
 
 		$this->object->deleteItem( $product->getId() );
@@ -88,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrItem->getId() ) );
-		$result2 = $this->object->searchItems( $search );
+		$result2 = $this->object->searchItems( $search )->toArray();
 
 
 		$this->assertContains( $product->getId(), array_keys( $result ) );
@@ -144,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 'CNE', reset( $result )->getCode() );
+		$this->assertEquals( 'CNE', $result->first()->getCode() );
 	}
 
 
@@ -166,7 +162,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertEquals( 'CNE', reset( $result )->getCode() );
+		$this->assertEquals( 'CNE', $result->first()->getCode() );
 	}
 
 

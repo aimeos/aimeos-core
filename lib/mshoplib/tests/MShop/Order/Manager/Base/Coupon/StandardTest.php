@@ -100,7 +100,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'order.base.coupon.editor', '' );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, [], $total );
+		$result = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( 2, $total );
@@ -110,7 +110,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setSlice( 0, 1 );
 
 		$total = 0;
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertGreaterThanOrEqual( 4, $total );
@@ -123,7 +123,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $obj->createSearch()->setSlice( 0, 1 );
 
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', 'OPQR' ) );
-		$results = $obj->searchItems( $search );
+		$results = $obj->searchItems( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'empty results' );
@@ -137,7 +137,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '>=', 'order.base.coupon.productid', '1' ) );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search )->toArray();
 
 		if( !( $item = reset( $results ) ) ) {
 			throw new \RuntimeException( 'empty results' );

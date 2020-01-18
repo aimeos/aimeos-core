@@ -31,7 +31,7 @@ class Once
 	{
 		$addresses = $base->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
-		if( ( $address = current( $addresses ) ) !== false )
+		if( ( $address = reset( $addresses ) ) !== false )
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
 
@@ -43,7 +43,7 @@ class Once
 			];
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			if( count( $manager->searchItems( $search ) ) > 0 ) {
+			if( !$manager->searchItems( $search )->isEmpty() ) {
 				return false;
 			}
 		}

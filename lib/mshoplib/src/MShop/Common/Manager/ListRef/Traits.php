@@ -70,9 +70,9 @@ trait Traits
 	 * @param string $prefix Domain prefix
 	 * @param array $local Associative list of IDs as keys and the associative array of items as values
 	 * @param array $local2 Associative list of IDs as keys and the associative array of items as values
-	 * @return \Aimeos\MShop\Common\Item\Iface[] List of items
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
-	protected function buildItems( array $map, array $domains = null, string $prefix, array $local = [], array $local2 = [] ) : array
+	protected function buildItems( array $map, array $domains = null, string $prefix, array $local = [], array $local2 = [] ) : \Aimeos\Map
 	{
 		$items = $listItemMap = $refItemMap = $refIdMap = [];
 
@@ -102,7 +102,7 @@ trait Traits
 			$items[$id] = $this->createItemBase( $values, $listItems, $refItems, $localItems, $localItems2 );
 		}
 
-		return $items;
+		return new \Aimeos\Map( $items );
 	}
 
 
@@ -147,9 +147,9 @@ trait Traits
 	 * @param string[] $ids List of IDs
 	 * @param string[]|null $domains List of domain names whose referenced items should be attached or null for all
 	 * @param string $prefix Domain prefix
-	 * @return \Aimeos\MShop\Common\Item\Lists\Iface[] List of list items
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface with IDs as keys
 	 */
-	protected function getListItems( array $ids, array $domains = null, string $prefix ) : array
+	protected function getListItems( array $ids, array $domains = null, string $prefix ) : \Aimeos\Map
 	{
 		$manager = $this->getObject()->getSubManager( 'lists' );
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );

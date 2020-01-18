@@ -100,11 +100,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 			$serviceSearch->compare( '==', 'order.base.service.costs', '5.00' )
 		);
 		$serviceSearch->setConditions( $serviceSearch->combine( '&&', $exp ) );
-		$results = $orderBaseServiceManager->searchItems( $serviceSearch );
-
-		if( ( $delivery = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No order service item found' );
-		}
+		$delivery = $orderBaseServiceManager->searchItems( $serviceSearch )->first();
 
 		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
 
