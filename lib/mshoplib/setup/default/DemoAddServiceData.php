@@ -56,7 +56,7 @@ class DemoAddServiceData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			$this->removeItems( $item->getId(), 'service/lists', 'service', 'text' );
 		}
 
-		$manager->deleteItems( array_keys( $services ) );
+		$manager->deleteItems( $services->toArray() );
 
 
 		if( $value === '1' )

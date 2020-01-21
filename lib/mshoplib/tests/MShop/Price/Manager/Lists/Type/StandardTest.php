@@ -137,7 +137,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->searchItems( $search );
 		$this->assertEquals( 1, count( $results ) );
 	}
 
@@ -150,7 +150,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'price.lists.type.editor', $this->editor ) );
 		$search->setSortations( [$search->sort( '-', 'price.lists.type.position' )] );
 
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );

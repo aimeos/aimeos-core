@@ -146,7 +146,7 @@ class PropertyAdd
 	 * Adds the product properties as attribute items to the order product item
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct Order product containing attributes
-	 * @param \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys and properties
+	 * @param \Aimeos\Map $products List of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys and properties
 	 * @param string[] $types List of property types to add
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Modified order product item
 	 */

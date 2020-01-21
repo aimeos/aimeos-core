@@ -25,7 +25,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 		$search->setSlice( 0, 1 );
 		$result = $productManager->searchItems( $search, array( 'text', 'media', 'price', 'product', 'attribute' ) );
 
-		if( ( $this->item = reset( $result ) ) === false ) {
+		if( ( $this->item = $result->first() ) === null ) {
 			throw new \RuntimeException( 'No product item found' );
 		}
 	}
