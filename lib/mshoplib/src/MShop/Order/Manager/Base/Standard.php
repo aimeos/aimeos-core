@@ -1087,7 +1087,7 @@ class Standard extends Base
 			$items[$id] = $this->createItemBase( $price, $locale, $row, $products, $addresses, $services, $coupons );
 		}
 
-		return new \Aimeos\Map( $items );
+		return map( $items );
 	}
 
 

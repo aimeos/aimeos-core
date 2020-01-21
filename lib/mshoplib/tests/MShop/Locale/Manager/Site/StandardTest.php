@@ -243,7 +243,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( new \Aimeos\Map() ) );
+			->will( $this->returnValue( map() ) );
 
 		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
 		$object->getTree();

@@ -115,7 +115,7 @@ class Nolimit
 			$total = count( $items );
 		}
 
-		return new \Aimeos\Map( array_splice( $items, 0, $search->getSliceSize() ) );
+		return map( array_splice( $items, 0, $search->getSliceSize() ) );
 	}
 
 

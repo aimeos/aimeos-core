@@ -817,7 +817,7 @@ class Standard
 			throw $e;
 		}
 
-		return new \Aimeos\Map( $items );
+		return map( $items );
 	}
 
 

@@ -241,7 +241,7 @@ abstract class Base
 			throw $e;
 		}
 
-		return new \Aimeos\Map( $items );
+		return map( $items );
 	}
 
 

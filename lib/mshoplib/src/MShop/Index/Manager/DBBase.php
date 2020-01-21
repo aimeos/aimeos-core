@@ -441,7 +441,7 @@ abstract class DBBase
 			}
 		}
 
-		return new \Aimeos\Map( $list );
+		return map( $list );
 	}
 
 

@@ -33,7 +33,7 @@ class Depth
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$items = new \Aimeos\Map();
+		$items = map();
 
 		try
 		{

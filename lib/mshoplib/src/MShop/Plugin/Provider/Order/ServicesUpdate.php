@@ -143,6 +143,6 @@ class ServicesUpdate
 			$list = $serviceManager->searchItems( $search, ['media', 'price', 'text'] );
 		}
 
-		return new \Aimeos\Map( $list );
+		return map( $list );
 	}
 }

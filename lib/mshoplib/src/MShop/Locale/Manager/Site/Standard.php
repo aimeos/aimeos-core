@@ -687,7 +687,7 @@ class Standard
 			throw $e;
 		}
 
-		return new \Aimeos\Map( $items );
+		return map( $items );
 	}
 
 
@@ -726,7 +726,7 @@ class Standard
 	public function getPath( string $id, array $ref = [] ) : \Aimeos\Map
 	{
 		$item = $this->getTree( $id, $ref, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
-		return new \Aimeos\Map( [$item->getId() => $item] );
+		return map( [$item->getId() => $item] );
 	}
 
 

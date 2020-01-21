@@ -182,7 +182,7 @@ class ProductPrice
 			$list = $attrManager->searchItems( $search, ['price'] );
 		}
 
-		return new \Aimeos\Map( $list );
+		return map( $list );
 	}
 
 

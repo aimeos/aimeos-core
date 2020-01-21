@@ -166,7 +166,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'searchItems' )
-			->will( $this->returnValue( new \Aimeos\Map() ) );
+			->will( $this->returnValue( map() ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
 
@@ -187,7 +187,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'searchItems' )
-			->will( $this->returnValue( new \Aimeos\Map() ) );
+			->will( $this->returnValue( map() ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
 

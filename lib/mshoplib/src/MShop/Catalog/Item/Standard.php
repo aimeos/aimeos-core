@@ -480,7 +480,7 @@ class Standard
 	 */
 	public function toList() : \Aimeos\Map
 	{
-		$list = new \Aimeos\Map( [$this->getId() => $this] );
+		$list = map( [$this->getId() => $this] );
 
 		foreach( $this->getChildren() as $child ) {
 			$list = $list->union( $child->toList() );

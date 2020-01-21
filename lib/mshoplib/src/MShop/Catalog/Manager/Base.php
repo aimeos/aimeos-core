@@ -111,7 +111,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			$items[$id] = $this->createItemBase( [], $listItems, $refItems, [], $node );
 		}
 
-		return new \Aimeos\Map( $items );
+		return map( $items );
 	}
 
 

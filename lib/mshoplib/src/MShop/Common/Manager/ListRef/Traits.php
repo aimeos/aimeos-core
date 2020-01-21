@@ -102,7 +102,7 @@ trait Traits
 			$items[$id] = $this->createItemBase( $values, $listItems, $refItems, $localItems, $localItems2 );
 		}
 
-		return new \Aimeos\Map( $items );
+		return map( $items );
 	}
 
 

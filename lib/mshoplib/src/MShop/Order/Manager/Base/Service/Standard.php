@@ -942,7 +942,7 @@ class Standard
 			$result[$id] = $this->createItemBase( $row['price'], $row['item'], $attrList );
 		}
 
-		return new \Aimeos\Map( $result );
+		return map( $result );
 	}
 
 

@@ -218,7 +218,7 @@ class Standard
 			$items[(string) $row['locale.id']] = $this->createItemBase( $row );
 		}
 
-		return new \Aimeos\Map( $items );
+		return map( $items );
 	}
 
 
