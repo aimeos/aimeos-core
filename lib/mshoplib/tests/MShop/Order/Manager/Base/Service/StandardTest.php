@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.service.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.base.service.code' );
+		$result = $this->object->aggregate( $search, 'order.base.service.code' )->toArray();
 
 		$this->assertEquals( 4, count( $result ) );
 		$this->assertArrayHasKey( 'OGONE', $result );
@@ -47,7 +47,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.service.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.base.service.type', 'order.base.service.costs', 'avg' );
+		$result = $this->object->aggregate( $search, 'order.base.service.type', 'order.base.service.costs', 'avg' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'delivery', $result );
@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.service.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.base.service.type', 'order.base.service.costs', 'sum' );
+		$result = $this->object->aggregate( $search, 'order.base.service.type', 'order.base.service.costs', 'sum' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'delivery', $result );

@@ -36,7 +36,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.base.rebate' );
+		$result = $this->object->aggregate( $search, 'order.base.rebate' )->toArray();
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertArrayHasKey( '5.00', $result );
@@ -48,7 +48,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.base.address.email', 'order.base.price', 'avg' );
+		$result = $this->object->aggregate( $search, 'order.base.address.email', 'order.base.price', 'avg' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 'test@example.com', $result );
@@ -60,7 +60,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.base.address.email', 'order.base.price', 'sum' );
+		$result = $this->object->aggregate( $search, 'order.base.address.email', 'order.base.price', 'sum' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 'test@example.com', $result );

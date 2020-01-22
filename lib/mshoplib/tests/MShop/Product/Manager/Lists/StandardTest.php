@@ -55,7 +55,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->aggregate( $search, 'product.lists.domain' );
+		$result = $this->object->aggregate( $search, 'product.lists.domain' )->toArray();
 
 		$this->assertEquals( 6, count( $result ) );
 		$this->assertArrayHasKey( 'price', $result );

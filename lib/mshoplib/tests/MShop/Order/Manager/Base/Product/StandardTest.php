@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.base.product.stocktype' );
+		$result = $this->object->aggregate( $search, 'order.base.product.stocktype' )->toArray();
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertArrayHasKey( 'unit_type1', $result );
@@ -47,7 +47,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.base.product.type', 'order.base.product.price', 'avg' );
+		$result = $this->object->aggregate( $search, 'order.base.product.type', 'order.base.product.price', 'avg' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'default', $result );
@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.base.product.type', 'order.base.product.quantity', 'sum' );
+		$result = $this->object->aggregate( $search, 'order.base.product.type', 'order.base.product.quantity', 'sum' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'default', $result );

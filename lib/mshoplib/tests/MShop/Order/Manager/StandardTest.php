@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.type' );
+		$result = $this->object->aggregate( $search, 'order.type' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'web', $result );
@@ -47,7 +47,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'avg' );
+		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'avg' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( '1384.75', round( reset( $result ), 2 ) );
@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'sum' );
+		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'sum' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( '5539.00', reset( $result ) );
@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 		$search->setSortations( array( $search->sort( '-', 'order.cdate' ) ) );
-		$result = $this->object->aggregate( $search, 'order.cmonth' );
+		$result = $this->object->aggregate( $search, 'order.cmonth' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 4, reset( $result ) );
@@ -81,7 +81,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.base.address.countryid' );
+		$result = $this->object->aggregate( $search, 'order.base.address.countryid' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 'DE', $result );
@@ -93,7 +93,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.type' );
+		$result = $this->object->aggregate( $search, 'order.type' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'web', $result );

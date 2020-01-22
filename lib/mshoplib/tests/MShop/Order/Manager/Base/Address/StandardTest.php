@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.address.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.base.address.salutation' );
+		$result = $this->object->aggregate( $search, 'order.base.address.salutation' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS, $result );

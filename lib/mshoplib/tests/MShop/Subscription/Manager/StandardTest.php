@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'subscription.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'subscription.status' );
+		$result = $this->object->aggregate( $search, 'subscription.status' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( '0', $result );

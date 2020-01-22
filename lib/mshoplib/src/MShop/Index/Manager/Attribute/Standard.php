@@ -95,11 +95,13 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
-	 * @return string[] List of ID values as key and the number of counted products as value
+	 * @param string|null $value Search key for aggregating the value column
+	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
+	 * @return \Aimeos\Map List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key ) : array
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
-		return $this->aggregateBase( $search, $key, 'mshop/index/manager/standard/aggregate' );
+		return $this->aggregateBase( $search, $key, 'mshop/index/manager/standard/aggregate' . $type, [], $value );
 	}
 
 

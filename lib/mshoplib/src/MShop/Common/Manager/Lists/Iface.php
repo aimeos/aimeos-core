@@ -118,10 +118,12 @@ interface Iface
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
-	 * @return array List of the search keys as key and the number of counted items as value
+	 * @param string|null $value Search key for aggregating the value column
+	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
+	 * @return \Aimeos\Map List of the search keys as key and the number of counted items as value
 	 * @see \Aimeos\MW\Criteria\Iface
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key ) : array;
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key, string $value = null, string $type = null ) : \Aimeos\Map;
 
 	/**
 	 * Updates or adds a common list item object.

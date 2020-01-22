@@ -40,7 +40,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop::create( $this->context, 'attribute' )->findItem( 'white', [], 'product', 'color' );
 
 		$search = $this->object->createSearch( true );
-		$result = $this->object->aggregate( $search, 'index.attribute.id' );
+		$result = $this->object->aggregate( $search, 'index.attribute.id' )->toArray();
 
 		$this->assertEquals( 14, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );

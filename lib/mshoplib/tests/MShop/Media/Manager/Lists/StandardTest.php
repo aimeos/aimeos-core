@@ -55,7 +55,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->aggregate( $search, 'media.lists.domain' );
+		$result = $this->object->aggregate( $search, 'media.lists.domain' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'attribute', $result );

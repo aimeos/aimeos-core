@@ -38,7 +38,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->aggregate( $search, 'order.base.service.attribute.code' );
+		$result = $this->object->aggregate( $search, 'order.base.service.attribute.code' )->toArray();
 
 		$this->assertEquals( 9, count( $result ) );
 		$this->assertArrayHasKey( 'ACOWNER', $result );
