@@ -242,14 +242,14 @@ abstract class Base implements Iface
 				break;
 			}
 
-			if( ( $amount = $price->getValue() + $price->getCosts() + $price->getRebate() ) < 0.01 ) {
+			if( ( $amount = $price->getValue() + $price->getCosts() ) < 0.01 ) {
 				continue;
 			}
 
 			if( $amount <= $rebate ) {
-				$value = $price->getValue() + $price->getRebate(); $costs = $price->getCosts(); $rebate -= $amount;
-			} elseif( ( $amount = $price->getValue() + $price->getRebate() ) <= $rebate ) {
-				$value = $amount; $costs = $rebate - $amount; $rebate -= $value - $costs;
+				$value = $price->getValue(); $costs = $price->getCosts(); $rebate -= $amount;
+			} elseif( ( $amount = $price->getValue() ) <= $rebate ) {
+				$value = $amount; $costs = $rebate - $amount; $rebate = 0;
 			} else {
 				$value = $rebate; $costs = 0; $rebate = 0;
 			}
