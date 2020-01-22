@@ -223,11 +223,11 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $cfgPath Configuration key for the SQL statement
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
 	 * @param string|null $value Search key for aggregating the value column
-	 * @return integer[] List of ID values as key and the number of counted products as value
+	 * @return \Aimeos\Map List of ID values as key and the number of counted products as value
 	 * @todo 2018.01 Reorder Parameter list
 	 */
 	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, string $key, string $cfgPath,
-		array $required = [], string $value = null ) : array
+		array $required = [], string $value = null ) : \Aimeos\Map
 	{
 		$list = [];
 		$context = $this->getContext();
@@ -282,7 +282,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			throw $e;
 		}
 
-		return $list;
+		return map( $list );
 	}
 
 
