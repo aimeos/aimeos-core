@@ -46,8 +46,6 @@ class ServicesUpdate
 		$p->attach( $plugin, 'setAddresses.after' );
 		$p->attach( $plugin, 'addCoupon.after' );
 		$p->attach( $plugin, 'deleteCoupon.after' );
-		$p->attach( $plugin, 'setCoupons.after' );
-		$p->attach( $plugin, 'setCoupon.after' );
 		$p->attach( $plugin, 'addProduct.after' );
 		$p->attach( $plugin, 'deleteProduct.after' );
 		$p->attach( $plugin, 'setProducts.after' );

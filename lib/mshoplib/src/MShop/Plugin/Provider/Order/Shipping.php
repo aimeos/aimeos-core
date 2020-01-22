@@ -149,8 +149,11 @@ class Shipping
 	{
 		$sum = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
 
-		foreach( $orderProducts as $product ) {
-			$sum = $sum->addItem( $product->getPrice(), $product->getQuantity() );
+		foreach( $orderProducts as $product )
+		{
+			if( ( $product->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) === 0 ) {
+				$sum = $sum->addItem( $product->getPrice(), $product->getQuantity() );
+			}
 		}
 
 		if( $sum->getValue() + $sum->getRebate() >= $threshold ) {
