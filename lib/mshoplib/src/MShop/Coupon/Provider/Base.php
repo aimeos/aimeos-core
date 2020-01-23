@@ -276,9 +276,12 @@ abstract class Base implements Iface
 		$taxrates = [];
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'price' );
 
-		foreach( $basket->getProducts() as $product )
+		$map = $basket->getCoupons();
+		$products = isset( $map[$this->getCode()] ) ? $map[$this->getCode()] : [];
+
+		foreach( $basket->getProducts() as $key => $product )
 		{
-			if( ( $product->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) === 0 )
+			if( !in_array( $product, $products, true ) )
 			{
 				$price = $product->getPrice();
 				$taxrate = $price->getTaxRate();
