@@ -313,6 +313,10 @@ abstract class DBBase
 			$keys[] = 'mincols';
 			$find[] = ':mincols';
 			$replace[] = implode( ', ', $list );
+
+			$keys[] = 'groupby';
+			$find[] = ':group';
+			$replace[] = implode( ', ', $cols );
 		}
 
 		return [$keys, $find, $replace];

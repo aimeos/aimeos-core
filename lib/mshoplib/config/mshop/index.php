@@ -41,7 +41,7 @@ return array(
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
-						GROUP BY mpro."id"
+						GROUP BY mpro."id" /*-groupby*/ , :group /*groupby-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -105,7 +105,7 @@ return array(
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
-						GROUP BY mpro."id"
+						GROUP BY mpro."id" /*-groupby*/ , :group /*groupby-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -167,7 +167,7 @@ return array(
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
-						GROUP BY mpro."id"
+						GROUP BY mpro."id" /*-groupby*/ , :group /*groupby-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -231,7 +231,7 @@ return array(
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
-						GROUP BY mpro."id"
+						GROUP BY mpro."id" /*-groupby*/ , :group /*groupby-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -293,7 +293,7 @@ return array(
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
-						GROUP BY mpro."id"
+						GROUP BY mpro."id" /*-groupby*/ , :group /*groupby-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -345,7 +345,7 @@ return array(
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
-					GROUP BY mpro."id"
+					GROUP BY mpro."id" /*-groupby*/ , :group /*groupby-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'
