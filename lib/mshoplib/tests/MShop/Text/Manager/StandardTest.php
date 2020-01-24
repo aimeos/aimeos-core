@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'text.label', 'misc_long_desc' ) );
 		$item = $this->object->searchItems( $search, ['media'] )->first();
 
-		if( $item && ( $listItem = current( $item->getListItems( 'media', 'align-top' ) ) ) === false ) {
+		if( $item && ( $listItem = $item->getListItems( 'media', 'align-top' )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );
 		}
 

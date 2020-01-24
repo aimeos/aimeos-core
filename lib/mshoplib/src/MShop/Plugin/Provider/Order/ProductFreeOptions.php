@@ -79,7 +79,9 @@ class ProductFreeOptions
 
 		foreach( $attrItems as $attrId => $attrItem )
 		{
-			if( ( $prices = $attrItem->getRefItems( 'price', 'default', 'default' ) ) !== [] )
+			$prices = $attrItem->getRefItems( 'price', 'default', 'default' );
+
+			if( !$prices->isEmpty() )
 			{
 				$qty = ( isset( $quantities[$attrId] ) ? $quantities[$attrId] : 0 );
 
@@ -133,11 +135,11 @@ class ProductFreeOptions
 
 		$sortFcn = function( $a, $b ) use( $priceManager, $attrQtys )
 		{
-			if( ( $pricesA = $a->getRefItems( 'price', 'default', 'default' ) ) === [] ) {
+			if( ( $pricesA = $a->getRefItems( 'price', 'default', 'default' )->toArray() ) === [] ) {
 				return 1;
 			}
 
-			if( ( $pricesB = $b->getRefItems( 'price', 'default', 'default' ) ) === [] ) {
+			if( ( $pricesB = $b->getRefItems( 'price', 'default', 'default' )->toArray() ) === [] ) {
 				return -1;
 			}
 

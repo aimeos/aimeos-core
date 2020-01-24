@@ -203,7 +203,7 @@ abstract class Base implements Iface
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$prices = $product->getRefItems( 'price', 'default', 'default' );
 
-		if( !empty( $prices ) ) {
+		if( !$prices->isEmpty() ) {
 			$price = $priceManager->getLowestPrice( $prices, $quantity );
 		} else {
 			$price = $priceManager->createItem();
@@ -228,11 +228,9 @@ abstract class Base implements Iface
 	protected function createRebateProducts( \Aimeos\MShop\Order\Item\Base\Iface $base,
 		$prodcode, &$rebate, $quantity = 1, $stockType = 'default' ) : array
 	{
-		$prices = $this->getPriceByTaxRate( $base );
 		$orderProducts = [];
-		krsort( $prices );
 
-		if( empty( $prices ) ) {
+		if( ( $prices = $this->getPriceByTaxRate( $base ) )->isEmpty() ) {
 			$prices = ['0.00' => \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem()];
 		}
 
@@ -269,40 +267,36 @@ abstract class Base implements Iface
 	 * Returns a list of tax rates and their price items for the given basket.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket containing the products, services, etc.
-	 * @return \Aimeos\MShop\Price\Item\Iface[] Associative list of tax rates as key and price items as values
+	 * @return \Aimeos\Map Associative list of tax rates as key and price items implementing \Aimeos\MShop\Price\Item\Iface
 	 */
-	protected function getPriceByTaxRate( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
+	protected function getPriceByTaxRate( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\Map
 	{
-		$taxrates = [];
+		$prices = map();
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'price' );
 
 		$map = $basket->getCoupons();
-		$products = isset( $map[$this->getCode()] ) ? $map[$this->getCode()] : [];
+		$products = $map[$this->getCode()] ?? [];
 
-		foreach( $basket->getProducts() as $key => $product )
+		foreach( $basket->getProducts() as $key => $item )
 		{
-			if( !in_array( $product, $products, true ) )
+			if( !in_array( $item, $products, true ) )
 			{
-				$price = $product->getPrice();
-				$taxrate = $price->getTaxRate();
-				$newPrice = isset( $taxrates[$taxrate] ) ? $taxrates[$taxrate] : $manager->createItem();
-
-				$taxrates[$taxrate] = $newPrice->addItem( $price, $product->getQuantity() );
+				$price = $item->getPrice();
+				$rate = $price->getTaxRate();
+				$prices[$rate] = $prices->get( $rate, $manager->createItem() )->addItem( $price, $item->getQuantity() );
 			}
 		}
 
 		foreach( $basket->getServices() as $services )
 		{
-			foreach( $services as $service )
+			foreach( $services as $item )
 			{
-				$price = $service->getPrice();
-				$taxrate = $price->getTaxRate();
-				$newPrice = isset( $taxrates[$taxrate] ) ? $taxrates[$taxrate] : $manager->createItem();
-
-				$taxrates[$taxrate] = $newPrice->addItem( $price );
+				$price = $item->getPrice();
+				$rate = $price->getTaxRate();
+				$prices[$rate] = $prices->get( $rate, $manager->createItem() )->addItem( $price );
 			}
 		}
 
-		return $taxrates;
+		return $prices->krsort();
 	}
 }

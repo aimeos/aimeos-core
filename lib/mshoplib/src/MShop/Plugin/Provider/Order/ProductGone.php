@@ -78,13 +78,11 @@ class ProductGone
 
 		foreach( $order->getProducts() as $position => $orderProduct )
 		{
-			if( !$checkItems->has( $orderProduct->getProductId() ) )
+			if( ( $product = $checkItems->get( $orderProduct->getProductId() ) ) === null )
 			{
 				$notAvailable[$position] = 'gone.notexist';
 				continue;
 			}
-
-			$product = $checkItems[$orderProduct->getProductId()];
 
 			if( $product->getStatus() <= 0 )
 			{

@@ -99,11 +99,11 @@ trait Traits
 	/**
 	 * Returns the deleted address items
 	 *
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface[] Address items
+	 * @return \Aimeos\Map List of IDs as keys and items implementing \Aimeos\MShop\Common\Item\Address\Iface
 	 */
-	public function getAddressItemsDeleted() : array
+	public function getAddressItemsDeleted() : \Aimeos\Map
 	{
-		return $this->addrRmItems;
+		return map( $this->addrRmItems );
 	}
 
 
@@ -122,11 +122,11 @@ trait Traits
 	/**
 	 * Returns the address items
 	 *
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface[] Associative list of address IDs as keys and address items as values
+	 * @return \Aimeos\Map List of IDs as keys and items implementing \Aimeos\MShop\Common\Item\Address\Iface
 	 */
-	public function getAddressItems() : array
+	public function getAddressItems() : \Aimeos\Map
 	{
-		return $this->addrItems;
+		return map( $this->addrItems );
 	}
 
 

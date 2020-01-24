@@ -98,8 +98,8 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->addListItem( 'test', $this->listItem1, $this->textItem1 );
 
-		$this->assertEquals( [11 => $this->listItem1], $this->object->getListItems( 'test' ) );
-		$this->assertEquals( [1 => $this->textItem1], $this->object->getRefItems( 'test' ) );
+		$this->assertEquals( [11 => $this->listItem1], $this->object->getListItems( 'test' )->toArray() );
+		$this->assertEquals( [1 => $this->textItem1], $this->object->getRefItems( 'test' )->toArray() );
 	}
 
 
@@ -107,8 +107,8 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->addListItem( 'test', $this->listItem1->setId( null ), $this->textItem1->setId( null ) );
 
-		$this->assertEquals( ['_id_test_test_#2' => $this->listItem1], $this->object->getListItems( 'test' ) );
-		$this->assertEquals( ['#2' => $this->textItem1], $this->object->getRefItems( 'test' ) );
+		$this->assertEquals( ['_id_test_test_#2' => $this->listItem1], $this->object->getListItems( 'test' )->toArray() );
+		$this->assertEquals( ['#2' => $this->textItem1], $this->object->getRefItems( 'test' )->toArray() );
 	}
 
 
@@ -116,7 +116,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->deleteListItem( 'text', $this->listItem1, $this->textItem1 );
 
-		$this->assertEquals( [$this->listItem1], $this->object->getListItemsDeleted() );
+		$this->assertEquals( [$this->listItem1], $this->object->getListItemsDeleted()->toArray() );
 	}
 
 
@@ -142,7 +142,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->deleteListItems( [$this->listItem1, $this->listItem2], true );
 
-		$this->assertEquals( [$this->listItem1, $this->listItem2], $this->object->getListItemsDeleted() );
+		$this->assertEquals( [$this->listItem1, $this->listItem2], $this->object->getListItemsDeleted()->toArray() );
 	}
 
 
@@ -154,7 +154,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetListItemsDeleted()
 	{
-		$this->assertEquals( [], $this->object->getListItemsDeleted() );
+		$this->assertEquals( [], $this->object->getListItemsDeleted()->toArray() );
 	}
 
 
@@ -162,7 +162,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->deleteListItem( 'text', $this->listItem1, $this->textItem1 );
 
-		$this->assertEquals( [$this->listItem1], $this->object->getListItemsDeleted( 'text' ) );
+		$this->assertEquals( [$this->listItem1], $this->object->getListItemsDeleted( 'text' )->toArray() );
 	}
 
 
@@ -177,7 +177,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetListItems()
 	{
-		$result = $this->object->getListItems();
+		$result = $this->object->getListItems()->toArray();
 		$expected = array(
 			$this->listItem2->getId() => $this->listItem2,
 			$this->listItem1->getId() => $this->listItem1,
@@ -193,7 +193,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetListItemsWithDomain()
 	{
-		$result = $this->object->getListItems( 'text' );
+		$result = $this->object->getListItems( 'text' )->toArray();
 		$expected = array(
 			$this->listItem2->getId() => $this->listItem2,
 			$this->listItem1->getId() => $this->listItem1,
@@ -205,13 +205,13 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 			$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Lists\Iface::class, $listItem );
 		}
 
-		$this->assertEquals( [], $this->object->getListItems( 'undefined' ) );
+		$this->assertEquals( [], $this->object->getListItems( 'undefined' )->toArray() );
 	}
 
 
 	public function testGetListItemsWithListtype()
 	{
-		$result = $this->object->getListItems( 'text', 'test' );
+		$result = $this->object->getListItems( 'text', 'test' )->toArray();
 		$expected = array( $this->listItem1->getId() => $this->listItem1 );
 
 		$this->assertEquals( $expected, $result );
@@ -220,7 +220,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetListItemsWithListtypes()
 	{
-		$result = $this->object->getListItems( 'text', array( 'test' ) );
+		$result = $this->object->getListItems( 'text', array( 'test' ) )->toArray();
 		$expected = array( $this->listItem1->getId() => $this->listItem1 );
 
 		$this->assertEquals( $expected, $result );
@@ -229,7 +229,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetListItemsWithType()
 	{
-		$result = $this->object->getListItems( 'text', null, 'name' );
+		$result = $this->object->getListItems( 'text', null, 'name' )->toArray();
 		$expected = array( $this->listItem1->getId() => $this->listItem1 );
 
 		$this->assertEquals( $expected, $result );
@@ -238,7 +238,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetListItemsWithTypes()
 	{
-		$result = $this->object->getListItems( 'text', null, array( 'name', 'short' ) );
+		$result = $this->object->getListItems( 'text', null, array( 'name', 'short' ) )->toArray();
 		$expected = array(
 			$this->listItem1->getId() => $this->listItem1,
 			$this->listItem2->getId() => $this->listItem2,
@@ -250,7 +250,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetListItemsWithRefItems()
 	{
-		$result = $this->object->getListItems( 'text' );
+		$result = $this->object->getListItems( 'text' )->toArray();
 		$expected = array(
 			$this->textItem2->getId() => $this->textItem2,
 			$this->textItem1->getId() => $this->textItem1,
@@ -275,7 +275,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetRefItems()
 	{
-		$result = $this->object->getRefItems();
+		$result = $this->object->getRefItems()->toArray();
 		$expected = array(
 			'text' => array(
 				$this->textItem2->getId() => $this->textItem2,
@@ -296,7 +296,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetRefItemsWithDomain()
 	{
-		$result = $this->object->getRefItems( 'text' );
+		$result = $this->object->getRefItems( 'text' )->toArray();
 		$expected = array(
 			$this->textItem2->getId() => $this->textItem2,
 			$this->textItem1->getId() => $this->textItem1,
@@ -308,39 +308,39 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 			$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $item );
 		}
 
-		$this->assertEquals( [], $this->object->getRefItems( 'undefined' ) );
+		$this->assertEquals( [], $this->object->getRefItems( 'undefined' )->toArray() );
 	}
 
 
 	public function testGetRefItemsWithType()
 	{
-		$result = $this->object->getRefItems( 'text', 'name' );
+		$result = $this->object->getRefItems( 'text', 'name' )->toArray();
 		$expected = array( $this->textItem1->getId() => $this->textItem1 );
 
 		$this->assertEquals( $expected, $result );
-		$this->assertEquals( [], $this->object->getRefItems( 'text', 'undefined' ) );
+		$this->assertEquals( [], $this->object->getRefItems( 'text', 'undefined' )->toArray() );
 	}
 
 
 	public function testGetRefItemsWithTypes()
 	{
-		$result = $this->object->getRefItems( 'text', array( 'short', 'name' ) );
+		$result = $this->object->getRefItems( 'text', array( 'short', 'name' ) )->toArray();
 		$expected = array(
 			$this->textItem2->getId() => $this->textItem2,
 			$this->textItem1->getId() => $this->textItem1,
 		);
 
 		$this->assertEquals( $expected, $result );
-		$this->assertEquals( [], $this->object->getRefItems( 'text', 'undefined' ) );
+		$this->assertEquals( [], $this->object->getRefItems( 'text', 'undefined' )->toArray() );
 	}
 
 
 	public function testGetRefItemsWithTypeAndListtype()
 	{
-		$result = $this->object->getRefItems( 'text', 'name', 'test' );
+		$result = $this->object->getRefItems( 'text', 'name', 'test' )->toArray();
 		$expected = array( $this->textItem1->getId() => $this->textItem1 );
 
 		$this->assertEquals( $expected, $result );
-		$this->assertEquals( [], $this->object->getRefItems( 'text', 'name', 'undefined' ) );
+		$this->assertEquals( [], $this->object->getRefItems( 'text', 'name', 'undefined' )->toArray() );
 	}
 }

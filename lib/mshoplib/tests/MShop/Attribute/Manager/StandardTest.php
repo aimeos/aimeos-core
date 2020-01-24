@@ -227,7 +227,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->findItem( 'black', ['text'], 'product', 'color' );
 
-		if( ( $listItem = current( $item->getListItems( 'text', 'default', null, false ) ) ) === false ) {
+		if( ( $listItem = $item->getListItems( 'text', 'default', null, false )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );
 		}
 

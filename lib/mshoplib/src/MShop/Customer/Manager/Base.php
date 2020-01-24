@@ -132,7 +132,7 @@ abstract class Base
 			$item->addListItem( 'customer/group', $litem->setRefId( $refId )->setPosition( $pos++ ) );
 		}
 
-		return $item->deleteListItems( $listItems );
+		return $item->deleteListItems( $listItems->toArray() );
 	}
 
 

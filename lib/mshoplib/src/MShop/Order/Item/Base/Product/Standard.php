@@ -581,13 +581,11 @@ class Standard extends Base implements Iface
 		$this->setTarget( $product->getTarget() );
 		$this->setName( $product->getName() );
 
-		$items = $product->getRefItems( 'text', 'basket', 'default' );
-		if( ( $item = reset( $items ) ) !== false ) {
+		if( ( $item = $product->getRefItems( 'text', 'basket', 'default' )->first() ) !== null ) {
 			$this->setDescription( $item->getContent() );
 		}
 
-		$items = $product->getRefItems( 'media', 'default', 'default' );
-		if( ( $item = reset( $items ) ) !== false ) {
+		if( ( $item = $product->getRefItems( 'media', 'default', 'default' )->first() ) !== null ) {
 			$this->setMediaUrl( $item->getPreview() );
 		}
 

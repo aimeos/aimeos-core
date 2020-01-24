@@ -59,9 +59,10 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the deleted list items which include the domain items if available
 	 *
-	 * @return array Associative list of domains as keys and lists of list items containing the referenced items as values
+	 * @param string|null $domain Domain name to get the deleted list items for
+	 * @return \Aimeos\Map Associative list of domains as keys list items as values or list items only
 	 */
-	public function getListItemsDeleted() : array;
+	public function getListItemsDeleted( string $domain = null ) : \Aimeos\Map;
 
 	/**
 	 * Returns the list item for the given reference ID, domain and list type
@@ -84,9 +85,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
 	 * @param array|string|null $type Name/Names of the item type or null for all
 	 * @param bool $active True to return only active items, false to return all
-	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
-	public function getListItems( $domain = null, $listtype = null, $type = null, bool $active = true ) : array;
+	public function getListItems( $domain = null, $listtype = null, $type = null, bool $active = true ) : \Aimeos\Map;
 
 	/**
 	 * Returns the product, text, etc. items, optionally filtered by type.
@@ -98,9 +99,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param array|string|null $type Name/Names of the item type or null for all
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
 	 * @param bool $active True to return only active items, false to return all
-	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function getRefItems( $domain = null, $type = null, $listtype = null, bool $active = true ) : array;
+	public function getRefItems( $domain = null, $type = null, $listtype = null, bool $active = true ) : \Aimeos\Map;
 
 	/**
 	 * Returns the localized text type of the item or the internal label if no name is available.

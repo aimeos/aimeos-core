@@ -68,7 +68,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$product = $productManager->findItem( 'CNC', ['attribute'] );
-		$attrItem = current( $product->getRefItems( 'attribute' ) );
+		$attrItem = $product->getRefItems( 'attribute' )->first();
 
 		$product = $this->object->saveItem( $product->setId( null )->setCode( 'ModifiedCNC' ) );
 

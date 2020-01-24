@@ -46,17 +46,17 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the deleted property items
 	 *
-	 * @return \Aimeos\MShop\Common\Item\Property\Iface[] Property items
+	 * @return \Aimeos\Map Property items implementing \Aimeos\MShop\Common\Item\Property\Iface
 	 */
-	public function getPropertyItemsDeleted() : array;
+	public function getPropertyItemsDeleted() : \Aimeos\Map;
 
 	/**
 	 * Returns the property values for the given type
 	 *
 	 * @param string $type Type of the properties
-	 * @return array List of property values
+	 * @return \Aimeos\Map List of property values
 	 */
-	public function getProperties( string $type ) : array;
+	public function getProperties( string $type ) : \Aimeos\Map;
 
 	/**
 	 * Returns the property item for the given type, language and value
@@ -74,9 +74,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 *
 	 * @param array|string|null $type Name of the property item type or null for all
 	 * @param bool $active True to return only active items, false to return all
-	 * @return \Aimeos\MShop\Common\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
+	 * @return \Aimeos\Map List of property IDs as keys and property items implementing \Aimeos\MShop\Common\Item\Property\Iface
 	 */
-	public function getPropertyItems( $type = null, bool $active = true ) : array;
+	public function getPropertyItems( $type = null, bool $active = true ) : \Aimeos\Map;
 
 	/**
 	 * Adds a new property item or overwrite an existing one

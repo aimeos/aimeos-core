@@ -83,7 +83,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'Wrong number of products' );
 		}
 
-		if( ( $price = current( $products['IJKL']->getRefItems( 'price' ) ) ) === false ) {
+		if( ( $price = $products['IJKL']->getRefItems( 'price' )->first() ) === null ) {
 			throw new \RuntimeException( 'No price item found' );
 		}
 		$price = $price->setValue( 10.00 );

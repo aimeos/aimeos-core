@@ -90,21 +90,18 @@ class ServicesUpdate
 		{
 			foreach( $list as $key => $item )
 			{
-				if( isset( $serviceItems[$item->getServiceId()] ) )
+				if( ( $serviceItem = $serviceItems->get( $item->getServiceId() ) ) !== null )
 				{
-					$serviceItem = $serviceItems[$item->getServiceId()];
 					$provider = $serviceManager->getProvider( $serviceItem, $serviceItem->getType() );
 
-					if( $provider->isAvailable( $order ) ) {
+					if( $provider->isAvailable( $order ) )
+					{
 						$services[$type][$key] = $item->setPrice( $provider->calcPrice( $order ) );
-					} else {
-						unset( $services[$type][$key] );
+						continue;
 					}
 				}
-				else
-				{
-					unset( $services[$type][$key] );
-				}
+
+				unset( $services[$type][$key] );
 			}
 		}
 

@@ -159,20 +159,16 @@ class PropertyAdd
 
 		foreach( $types as $type )
 		{
-			$list = [];
+			$list = $product->getProperties( $type );
 
-			foreach( $product->getPropertyItems( $type ) as $property ) {
-				$list[] = $property->getValue();
-			}
-
-			if( !empty( $list ) )
+			if( !$list->isEmpty() )
 			{
 				if( ( $attrItem = $orderProduct->getAttributeItem( $type, 'product/property' ) ) === null ) {
 					$attrItem = $this->orderAttrManager->createItem();
 				}
 
 				$attrItem = $attrItem->setType( 'product/property' )->setCode( $type )
-					->setValue( count( $list ) > 1 ? $list : reset( $list ) );
+					->setValue( count( $list ) > 1 ? $list->toArray() : $list->first() );
 
 				$orderProduct = $orderProduct->setAttributeItem( $attrItem );
 			}

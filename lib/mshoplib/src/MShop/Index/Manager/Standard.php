@@ -279,11 +279,6 @@ class Standard
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
 
-		$prodIds = [];
-		foreach( $items as $item ) {
-			$prodIds[] = $item->getId(); // don't rely on array keys
-		}
-
 		$catalogListManager = \Aimeos\MShop::create( $context, 'catalog/lists' );
 		$catalogSearch = $catalogListManager->createSearch( true );
 
@@ -292,8 +287,8 @@ class Standard
 			$catalogSearch->getConditions(),
 		);
 
-		if( !empty( $prodIds ) ) {
-			$expr[] = $catalogSearch->compare( '==', 'catalog.lists.refid', $prodIds );
+		if( !( $prodIds = map( $items)->getId() )->isEmpty() ) { // don't rely on array keys
+			$expr[] = $catalogSearch->compare( '==', 'catalog.lists.refid', $prodIds->toArray() );
 		}
 
 		$catalogSearch->setConditions( $catalogSearch->combine( '&&', $expr ) );

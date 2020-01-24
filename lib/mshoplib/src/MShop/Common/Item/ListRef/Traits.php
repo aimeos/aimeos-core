@@ -151,15 +151,16 @@ trait Traits
 	/**
 	 * Returns the deleted list items which include the domain items if available
 	 *
-	 * @return \Aimeos\MShop\Common\Item\Lists\Iface[] List items with referenced items attached (optional)
+	 * @param string|null $domain Domain name to get the deleted list items for
+	 * @return \Aimeos\Map Associative list of domains as keys list items as values or list items only
 	 */
-	public function getListItemsDeleted( $domain = null ) : array
+	public function getListItemsDeleted( string $domain = null ) : \Aimeos\Map
 	{
 		if( $domain !== null ) {
-			return $this->listRmMap[$domain] ?: [];
+			return map( $this->listRmMap[$domain] ?: [] );
 		}
 
-		return $this->listRmItems;
+		return map( $this->listRmItems );
 	}
 
 
@@ -215,9 +216,9 @@ trait Traits
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
 	 * @param array|string|null $type Name/Names of the item type or null for all
 	 * @param bool $active True to return only active items, false to return all
-	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
-	public function getListItems( $domain = null, $listtype = null, $type = null, bool $active = true ) : array
+	public function getListItems( $domain = null, $listtype = null, $type = null, bool $active = true ) : \Aimeos\Map
 	{
 		$result = [];
 		$this->prepareListItems();
@@ -253,7 +254,7 @@ trait Traits
 			}
 		}
 
-		return $result;
+		return map( $result );
 	}
 
 
@@ -268,9 +269,9 @@ trait Traits
 	 * @param array|string|null $type Name/Names of the item type or null for all
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
 	 * @param bool $active True to return only active items, false to return all
-	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function getRefItems( $domain = null, $type = null, $listtype = null, bool $active = true ) : array
+	public function getRefItems( $domain = null, $type = null, $listtype = null, bool $active = true ) : \Aimeos\Map
 	{
 		$list = [];
 
@@ -282,14 +283,14 @@ trait Traits
 		}
 
 		if( is_array( $domain ) || $domain === null ) {
-			return $list;
+			return map( $list );
 		}
 
 		if( isset( $list[$domain] ) ) {
-			return $list[$domain];
+			return map( $list[$domain] );
 		}
 
-		return [];
+		return map();
 	}
 
 
@@ -313,9 +314,7 @@ trait Traits
 	 */
 	public function getName( string $type = 'name' ) : string
 	{
-		$items = $this->getRefItems( 'text', $type );
-
-		if( ( $item = reset( $items ) ) !== false ) {
+		if( ( $item = $this->getRefItems( 'text', $type )->first() ) !== null ) {
 			return $item->getContent();
 		}
 

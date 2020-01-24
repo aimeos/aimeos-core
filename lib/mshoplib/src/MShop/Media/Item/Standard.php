@@ -288,9 +288,7 @@ class Standard
 	 */
 	public function getName( string $type = 'name' ) : string
 	{
-		$items = $this->getPropertyItems( $type );
-
-		if( ( $item = reset( $items ) ) !== false ) {
+		if( ( $item = $this->getPropertyItems( $type )->first() ) !== null ) {
 			return $item->getValue();
 		}
 

@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->findItem( 'cafe', ['product'] );
 
-		if( ( $listItem = current( $item->getListItems( 'product', 'promotion' ) ) ) === false ) {
+		if( ( $listItem = $item->getListItems( 'product', 'promotion' )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );
 		}
 

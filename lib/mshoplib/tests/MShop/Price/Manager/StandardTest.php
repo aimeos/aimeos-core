@@ -192,7 +192,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'price.value', '99.99' ) );
 		$item = $this->object->searchItems( $search, ['customer'] )->first();
 
-		if( $item && ( $listItem = current( $item->getListItems( 'customer', 'test' ) ) ) === false ) {
+		if( $item && ( $listItem = $item->getListItems( 'customer', 'test' )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );
 		}
 
@@ -311,7 +311,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->createItem();
 		$item->setValue( '1.00' );
 
-		$lowest = $this->object->getLowestPrice( array( $item ), 1 );
+		$lowest = $this->object->getLowestPrice( map( [$item] ), 1 );
 
 		$this->assertEquals( $item, $lowest );
 	}
@@ -326,7 +326,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item2->setValue( '5.00' );
 		$item2->setQuantity( 5 );
 
-		$lowest = $this->object->getLowestPrice( array( $item, $item2 ), 10 );
+		$lowest = $this->object->getLowestPrice( map( [$item, $item2] ), 10 );
 
 		$this->assertEquals( $item2, $lowest );
 	}
@@ -338,14 +338,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setValue( '1.00' );
 
 		$this->expectException( \Aimeos\MShop\Price\Exception::class );
-		$this->object->getLowestPrice( array( $item ), 1, 'USD' );
+		$this->object->getLowestPrice( map( [$item] ), 1, 'USD' );
 	}
 
 
 	public function testGetLowestPriceNoPrice()
 	{
 		$this->expectException( \Aimeos\MShop\Price\Exception::class );
-		$this->object->getLowestPrice( [], 1 );
+		$this->object->getLowestPrice( map(), 1 );
 	}
 
 
@@ -356,13 +356,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setQuantity( 5 );
 
 		$this->expectException( \Aimeos\MShop\Price\Exception::class );
-		$this->object->getLowestPrice( array( $item ), 1 );
-	}
-
-
-	public function testGetLowestPriceWrongItem()
-	{
-		$this->expectException( \Aimeos\MW\Common\Exception::class );
-		$this->object->getLowestPrice( array( new \stdClass() ), 1 );
+		$this->object->getLowestPrice( map( [$item] ), 1 );
 	}
 }

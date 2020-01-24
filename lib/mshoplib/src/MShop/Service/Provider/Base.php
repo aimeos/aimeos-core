@@ -62,14 +62,10 @@ abstract class Base implements Iface
 	 */
 	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
+		$manager = \Aimeos\MShop::create( $this->context, 'price' );
 		$prices = $this->serviceItem->getRefItems( 'price', 'default', 'default' );
 
-		if( count( $prices ) > 0 ) {
-			return $priceManager->getLowestPrice( $prices, 1 );
-		}
-
-		return $priceManager->createItem();
+		return $prices->isEmpty() ? $manager->createItem() : $manager->getLowestPrice( $prices, 1 );
 	}
 
 

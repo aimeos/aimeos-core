@@ -226,25 +226,25 @@ class ProductPrice
 	 * Returns the actual price for the given order product.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct Ordered product
-	 * @param \Aimeos\MShop\Price\Item\Iface[] $refPrices Prices associated to the original product
+	 * @param \Aimeos\Map $refPrices Prices implementing \Aimeos\MShop\Price\Item\Iface and associated to the original product
 	 * @param \Aimeos\Map $attributes Attribute items implementing \Aimeos\MShop\Attribute\Item\Iface with prices
 	 * @param int $pos Position of the product in the basket
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item including the calculated price
 	 */
-	private function getPrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct, array $refPrices,
+	private function getPrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct, \Aimeos\Map $refPrices,
 		\Aimeos\Map $attributes, int $pos ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$context = $this->getContext();
 
 		// fetch prices of selection/parent products
-		if( empty( $refPrices ) )
+		if( $refPrices->isEmpty() )
 		{
 			$productManager = \Aimeos\MShop::create( $context, 'product' );
 			$product = $productManager->getItem( $orderProduct->getProductId(), array( 'price' ) );
 			$refPrices = $product->getRefItems( 'price', 'default', 'default' );
 		}
 
-		if( empty( $refPrices ) )
+		if( $refPrices->isEmpty() )
 		{
 			$pid = $orderProduct->getProductId();
 			$pcode = $orderProduct->getProductCode();
@@ -260,14 +260,10 @@ class ProductPrice
 		// add prices of product attributes to compute the end price for comparison
 		foreach( $orderProduct->getAttributeItems() as $orderAttribute )
 		{
-			$attrPrices = [];
-			$attrId = $orderAttribute->getAttributeId();
+			$attrItem = $attributes->get( $orderAttribute->getAttributeId() );
+			$attrPrices = $attrItem ? $attrItem->getRefItems( 'price', 'default', 'default' ) : map();
 
-			if( isset( $attributes[$attrId] ) ) {
-				$attrPrices = $attributes[$attrId]->getRefItems( 'price', 'default', 'default' );
-			}
-
-			if( !empty( $attrPrices ) )
+			if( !$attrPrices->isEmpty() )
 			{
 				$lowPrice = $priceManager->getLowestPrice( $attrPrices, $orderAttribute->getQuantity() );
 				$price = $price->addItem( $lowPrice, $orderAttribute->getQuantity() );

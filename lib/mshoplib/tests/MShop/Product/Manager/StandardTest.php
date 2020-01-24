@@ -96,10 +96,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->findItem( 'CNE', ['attribute', 'product'] );
 		$products = $item->getRefItems( 'product' );
-		$product = reset( $products );
+		$product = $products->first();
 
 		$this->assertEquals( 4, count( $products ) );
-		$this->assertNotEquals( false, $product );
 		$this->assertEquals( 'CNC', $product->getCode() );
 		$this->assertEquals( 1, count( $product->getRefItems( 'attribute' ) ) );
 	}
@@ -185,7 +184,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->getItem( $itemExp->getId(), ['text'] );
 
-		$this->object->deleteItem( $itemUpd->deleteListItems( $itemUpd->getListItems( 'text' ), true ) );
+		$this->object->deleteItem( $itemUpd->deleteListItems( $itemUpd->getListItems( 'text' )->toArray(), true ) );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -316,7 +315,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->findItem( 'CNE', ['product'] );
 
-		if( ( $listItem = current( $item->getListItems( 'product', 'suggestion' ) ) ) === false ) {
+		if( ( $listItem = $item->getListItems( 'product', 'suggestion' )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );
 		}
 

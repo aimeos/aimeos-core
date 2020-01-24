@@ -55,7 +55,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		$result = $object->addPropertyItem( $this->propItem );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
-		$this->assertEquals( ['_id_test__value' => $this->propItem], $object->getPropertyItems() );
+		$this->assertEquals( ['_id_test__value' => $this->propItem], $object->getPropertyItems()->toArray() );
 	}
 
 
@@ -66,7 +66,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		$expected = ['_id_test__value' => $this->propItem, '_id_test2_en_' => $this->propItem2];
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
-		$this->assertEquals( $expected, $object->getPropertyItems( null, false ) );
+		$this->assertEquals( $expected, $object->getPropertyItems( null, false )->toArray() );
 	}
 
 
@@ -74,8 +74,8 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->deletePropertyItem( $this->propItem->setId( 123 ) );
 
-		$this->assertEquals( ['_id_test2_en_' => $this->propItem2], $this->object->getPropertyItems( null, false ) );
-		$this->assertEquals( ['_id_test__value' => $this->propItem], $this->object->getPropertyItemsDeleted() );
+		$this->assertEquals( ['_id_test2_en_' => $this->propItem2], $this->object->getPropertyItems( null, false )->toArray() );
+		$this->assertEquals( ['_id_test__value' => $this->propItem], $this->object->getPropertyItemsDeleted()->toArray() );
 	}
 
 
@@ -83,14 +83,14 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->deletePropertyItems( [$this->propItem] );
 
-		$this->assertEquals( ['_id_test2_en_' => $this->propItem2], $this->object->getPropertyItems( null, false ) );
-		$this->assertEquals( ['_id_test__value' => $this->propItem], $this->object->getPropertyItemsDeleted() );
+		$this->assertEquals( ['_id_test2_en_' => $this->propItem2], $this->object->getPropertyItems( null, false )->toArray() );
+		$this->assertEquals( ['_id_test__value' => $this->propItem], $this->object->getPropertyItemsDeleted()->toArray() );
 	}
 
 
 	public function testGetProperties()
 	{
-		$this->assertEquals( ['value'], array_values( $this->object->getProperties( 'test' ) ) );
+		$this->assertEquals( ['_id_test__value' => 'value'], $this->object->getProperties( 'test' )->toArray() );
 	}
 
 
@@ -103,32 +103,32 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	public function testGetPropertyItems()
 	{
 		$expected = [$this->propItem, $this->propItem2];
-		$this->assertEquals( $expected, array_values( $this->object->getPropertyItems( null, false ) ) );
+		$this->assertEquals( $expected, $this->object->getPropertyItems( null, false )->values()->toArray() );
 	}
 
 
 	public function testGetPropertyItemsActive()
 	{
-		$this->assertEquals( [$this->propItem], array_values( $this->object->getPropertyItems() ) );
+		$this->assertEquals( [$this->propItem], $this->object->getPropertyItems()->values()->toArray() );
 	}
 
 
 	public function testGetPropertyItemsWithType()
 	{
-		$this->assertEquals( [$this->propItem2], array_values( $this->object->getPropertyItems( 'test2', false ) ) );
+		$this->assertEquals( [$this->propItem2], $this->object->getPropertyItems( 'test2', false )->values()->toArray() );
 	}
 
 
 	public function testGetPropertyItemsWithTypes()
 	{
 		$expected = [$this->propItem, $this->propItem2];
-		$this->assertEquals( $expected, array_values( $this->object->getPropertyItems( ['test', 'test2'], false ) ) );
+		$this->assertEquals( $expected, $this->object->getPropertyItems( ['test', 'test2'], false )->values()->toArray() );
 	}
 
 
 	public function testGetPropertyItemsDeleted()
 	{
-		$this->assertEquals( [], $this->object->getPropertyItemsDeleted() );
+		$this->assertEquals( [], $this->object->getPropertyItemsDeleted()->toArray() );
 	}
 
 
@@ -138,7 +138,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->setPropertyItems( $expected );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
-		$this->assertEquals( $expected, $this->object->getPropertyItems( null, false ) );
+		$this->assertEquals( $expected, $this->object->getPropertyItems( null, false )->toArray() );
 	}
 
 
@@ -148,7 +148,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->setPropertyItems( $expected );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\PropertyRef\Iface', $result );
-		$this->assertEquals( $expected, $this->object->getPropertyItems( null, false ) );
-		$this->assertEquals( ['_id_test__value' => $this->propItem], $this->object->getPropertyItemsDeleted() );
+		$this->assertEquals( $expected, $this->object->getPropertyItems( null, false )->toArray() );
+		$this->assertEquals( ['_id_test__value' => $this->propItem], $this->object->getPropertyItemsDeleted()->toArray() );
 	}
 }

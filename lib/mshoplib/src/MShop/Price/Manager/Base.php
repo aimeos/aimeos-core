@@ -28,17 +28,18 @@ abstract class Base
 	/**
 	 * Returns the price item with the lowest price for the given quantity.
 	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface[] $priceItems List of price items
+	 * @param \Aimeos\Map $priceItems List of price items implementing \Aimeos\MShop\Price\Item\Iface
 	 * @param int $quantity Number of products
 	 * @param string|null $currencyId Three letter ISO currency code or null for all
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with the lowest price
 	 * @throws \Aimeos\MShop\Price\Exception if no price item is available
 	 */
-	public function getLowestPrice( array $priceItems, int $quantity, string $currencyId = null ) : \Aimeos\MShop\Price\Item\Iface
+	public function getLowestPrice( \Aimeos\Map $priceItems, int $quantity, string $currencyId = null ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$priceList = $this->getPriceList( $priceItems, $currencyId );
 
-		if( ( $price = reset( $priceList ) ) === false ) {
+		if( ( $price = $priceList->first() ) === null )
+		{
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Price item not available' );
 			throw new \Aimeos\MShop\Price\Exception( $msg );
 		}
@@ -63,14 +64,14 @@ abstract class Base
 	/**
 	 * Returns the price items sorted by quantity
 	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface[] $priceItems List of price items
+	 * @param \Aimeos\Map $priceItems List of price items implementing \Aimeos\MShop\Price\Item\Iface
 	 * @param string|null $currencyId Three letter ISO currency code or null for all
-	 * @return array Associative list of quantity as keys and price item as value
+	 * @return \Aimeos\Map Associative list of quantity as keys and price item as value
 	 * @throws \Aimeos\MShop\Price\Exception If an object is no price item
 	 */
-	protected function getPriceList( array $priceItems, string $currencyId = null ) : array
+	protected function getPriceList( \Aimeos\Map $priceItems, string $currencyId = null ) : \Aimeos\Map
 	{
-		$list = [];
+		$list = map();
 
 		foreach( $priceItems as $priceItem )
 		{
@@ -87,8 +88,6 @@ abstract class Base
 			}
 		}
 
-		ksort( $list );
-
-		return $list;
+		return $list->ksort();
 	}
 }

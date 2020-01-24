@@ -94,7 +94,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		$productItem = \Aimeos\MShop::create( $this->context, 'product' )->findItem( 'U:TEST', ['price'] );
 		$refPrices = $productItem->getRefItems( 'price', 'default', 'default' );
 
-		if( ( $productPrice = reset( $refPrices ) ) === false ) {
+		if( ( $productPrice = $refPrices->first() ) === null ) {
 			throw new \RuntimeException( 'No product price available' );
 		}
 

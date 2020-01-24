@@ -305,8 +305,10 @@ class Xml
 				$list[$childNode->nodeName] = $childNode->nodeValue;
 			}
 
-			if( ( $attr = $node->attributes->getNamedItem( 'ref' ) ) !== null && $items->has( $attr->nodeValue ) ) {
-				$items[$attr->nodeValue]->fromArray( $list );
+			if( ( $attr = $node->attributes->getNamedItem( 'ref' ) ) !== null
+				&& ( $item = $items->get( $attr->nodeValue ) ) !== null
+			) {
+				$item->fromArray( $list );
 			}
 		}
 

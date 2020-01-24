@@ -83,7 +83,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'media.url', 'prod_266x221/198_prod_266x221.jpg' ) );
 		$item = $this->object->searchItems( $search, ['attribute'] )->first();
 
-		if( $item && ( $listItem = current( $item->getListItems( 'attribute', 'option' ) ) ) === false ) {
+		if( $item && ( $listItem = $item->getListItems( 'attribute', 'option' )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );
 		}
 

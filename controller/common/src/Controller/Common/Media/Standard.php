@@ -153,7 +153,7 @@ class Standard
 			catch( \Exception $e ) { ; } // continue if removing file fails
 		}
 
-		return $item->setUrl( '' )->setPreviews( [] )->deletePropertyItems( $item->getPropertyItems() );
+		return $item->setUrl( '' )->setPreviews( [] )->deletePropertyItems( $item->getPropertyItems()->toArray() );
 	}
 
 

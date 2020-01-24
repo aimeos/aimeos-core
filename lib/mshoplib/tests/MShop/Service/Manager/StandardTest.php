@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->findItem( 'unitcode', ['text'] );
 
-		if( ( $listItem = current( $item->getListItems( 'text', 'unittype1' ) ) ) === false ) {
+		if( ( $listItem = $item->getListItems( 'text', 'unittype1' )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );
 		}
 
