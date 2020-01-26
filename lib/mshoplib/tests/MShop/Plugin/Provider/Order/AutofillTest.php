@@ -200,8 +200,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 2, count( $this->order->getServices() ) );
 		$this->assertEquals( [], $this->order->getAddresses() );
 
-		foreach( $this->order->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT ) as $service ) {
-			$this->assertEquals( 1, count( $service->getAttributeItems() ) );
+		foreach( $this->order->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT ) as $item )
+		{
+			$this->assertEquals( 1, count( $item->getAttributeItems() ) );
+			$this->assertNull( $item->getId() );
 		}
 	}
 
@@ -230,8 +232,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
 
-		foreach( $this->order->getService( $type ) as $item ) {
+		foreach( $this->order->getService( $type ) as $item )
+		{
 			$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
+			$this->assertNull( $item->getId() );
 		}
 	}
 
@@ -249,6 +253,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		{
 			$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
 			$this->assertEquals( 'unitcode', $item->getCode() );
+			$this->assertNull( $item->getId() );
 		}
 	}
 
@@ -262,8 +267,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
 
-		foreach( $this->order->getService( $type ) as $item ) {
+		foreach( $this->order->getService( $type ) as $item )
+		{
 			$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
+			$this->assertNull( $item->getId() );
 		}
 	}
 
@@ -277,8 +284,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
 
-		foreach( $this->order->getService( $type ) as $item ) {
+		foreach( $this->order->getService( $type ) as $item )
+		{
 			$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
+			$this->assertNull( $item->getId() );
 		}
 	}
 
@@ -296,6 +305,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		{
 			$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
 			$this->assertEquals( 'unitpaymentcode', $item->getCode() );
+			$this->assertNull( $item->getId() );
 		}
 	}
 
@@ -309,8 +319,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
 
-		foreach( $this->order->getService( $type ) as $item ) {
+		foreach( $this->order->getService( $type ) as $item )
+		{
 			$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
+			$this->assertNull( $item->getId() );
 		}
 	}
 }

@@ -264,9 +264,10 @@ class Autofill
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base/address' );
 			$search = $manager->createSearch();
 			$search->setConditions( $search->compare( '==', 'order.base.address.baseid', $item->getBaseId() ) );
+			$addresses = [];
 
 			foreach( $manager->searchItems( $search ) as $address ) {
-				$addresses[$address->getType()][] = $address;
+				$addresses[$address->getType()][] = $address->setId( null );
 			}
 
 			$order->setAddresses( $addresses );
@@ -282,20 +283,19 @@ class Autofill
 	 */
 	protected function setServices( \Aimeos\MShop\Order\Item\Base\Iface $order, \Aimeos\MShop\Order\Item\Iface $item )
 	{
-		$services = $order->getServices();
-
-		if( empty( $services ) && $this->getConfigValue( 'orderservice', true ) == true )
+		if( empty( $order->getServices() ) && $this->getConfigValue( 'orderservice', true ) == true )
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base/service' );
 			$search = $manager->createSearch();
 			$search->setConditions( $search->compare( '==', 'order.base.service.baseid', $item->getBaseId() ) );
+			$services = [];
 
 			foreach( $manager->searchItems( $search ) as $service )
 			{
 				$type = $service->getType();
 
 				if( ( $item = $this->getServiceItem( $order, $type, $service->getCode() ) ) !== null ) {
-					$services[$type][] = $item->setAttributeItems( $service->getAttributeItems() );
+					$services[$type][] = $item->setAttributeItems( $service->getAttributeItems() )->setId( null );
 				}
 			}
 
