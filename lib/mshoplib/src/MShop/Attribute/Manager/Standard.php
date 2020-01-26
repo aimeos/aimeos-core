@@ -430,7 +430,7 @@ class Standard
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, md5( $item->getKey() ) );
+			$stmt->bind( $idx++, $item->getKey() );
 			$stmt->bind( $idx++, $item->getType() );
 			$stmt->bind( $idx++, $item->getDomain() );
 			$stmt->bind( $idx++, $item->getCode() );
