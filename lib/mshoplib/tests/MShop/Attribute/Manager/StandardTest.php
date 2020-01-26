@@ -236,7 +236,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'attribute.id', null );
 		$expr[] = $search->compare( '!=', 'attribute.siteid', null );
-		$expr[] = $search->compare( '==', 'attribute.key', '177f8d74236b560109c5dc2223c9e295' );
+		$expr[] = $search->compare( '==', 'attribute.key', 'product|color|black' );
 		$expr[] = $search->compare( '==', 'attribute.domain', 'product' );
 		$expr[] = $search->compare( '==', 'attribute.type', 'color' );
 		$expr[] = $search->compare( '==', 'attribute.code', 'black' );
