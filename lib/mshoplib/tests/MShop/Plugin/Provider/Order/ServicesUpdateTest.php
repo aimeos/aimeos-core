@@ -77,10 +77,10 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 			->setMethods( ['isAvailable'] )->getMock();
 
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
-			->will( $this->returnValue( [$orderProduct] ) );
+			->will( $this->returnValue( map( [$orderProduct] ) ) );
 
 		$serviceStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( \Aimeos\Map::from( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) ) );
+			->will( $this->returnValue( map( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) ) );
 
 		$serviceStub->expects( $this->exactly( 2 ) )->method( 'getProvider' )
 			->will( $this->returnValue( $providerStub ) );
@@ -133,10 +133,10 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 			->setMethods( ['isAvailable'] )->getMock();
 
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
-			->will( $this->returnValue( [$orderProduct] ) );
+			->will( $this->returnValue( map([$orderProduct] ) ) );
 
 		$serviceStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( \Aimeos\Map::from( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) ) );
+			->will( $this->returnValue( map( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) ) );
 
 		$serviceStub->expects( $this->exactly( 2 ) )->method( 'getProvider' )
 			->will( $this->returnValue( $providerStub ) );
@@ -146,7 +146,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->assertEquals( null, $this->object->update( $orderStub, 'addProduct.after' ) );
-		$this->assertEquals( ['delivery' => [], 'payment' => []], $orderStub->getServices() );
+		$this->assertEquals( ['delivery' => [], 'payment' => []], $orderStub->getServices()->toArray() );
 	}
 
 
@@ -175,11 +175,11 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
-			->will( $this->returnValue( [$orderProduct] ) );
+			->will( $this->returnValue( map( [$orderProduct] ) ) );
 
 
 		$this->assertEquals( null, $this->object->update( $orderStub, 'addAddress.after' ) );
-		$this->assertEquals( ['delivery' => [], 'payment' => []], $orderStub->getServices() );
+		$this->assertEquals( ['delivery' => [], 'payment' => []], $orderStub->getServices()->toArray() );
 	}
 
 

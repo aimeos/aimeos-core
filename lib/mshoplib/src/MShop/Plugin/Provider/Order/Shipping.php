@@ -118,9 +118,9 @@ class Shipping
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
 		$threshold = $this->getItemBase()->getConfigValue( 'threshold/' . $currency );
 
-		if( $threshold && isset( $services[$type] ) )
+		if( $threshold && ( $serviceItems = $services->get( $type ) ) )
 		{
-			foreach( $services[$type] as $key => $service )
+			foreach( $serviceItems as $key => $service )
 			{
 				$price = $service->getPrice();
 
@@ -128,10 +128,10 @@ class Shipping
 					$price = $price->setRebate( $price->getCosts() )->setCosts( '0.00' );
 				}
 
-				$services[$type][$key] = $service->setPrice( $price );
+				$serviceItems[$key] = $service->setPrice( $price );
 			}
 
-			$order->setServices( $services );
+			$order->setServices( $services->set( $type, $serviceItems )->toArray() );
 		}
 
 		return $value;
@@ -141,11 +141,11 @@ class Shipping
 	/**
 	 * Tests if the shipping threshold is reached and updates the price accordingly
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $orderProducts List of ordered products
+	 * @param \Aimeos\Map $orderProducts List of ordered products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 * @param string $threshold Threshold for the actual currency
 	 * @return bool True if threshold is reached, false if not
 	 */
-	protected function checkThreshold( array $orderProducts, string $threshold ) : bool
+	protected function checkThreshold( \Aimeos\Map $orderProducts, string $threshold ) : bool
 	{
 		$sum = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
 

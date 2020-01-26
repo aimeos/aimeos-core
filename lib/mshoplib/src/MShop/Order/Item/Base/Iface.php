@@ -156,9 +156,9 @@ interface Iface
 	/**
 	 * Returns all addresses of the (future) order.
 	 *
-	 * @return array Array of \Aimeos\MShop\Order\Item\Base\Address\Iface order address items
+	 * @return \Aimeos\Map Array of \Aimeos\MShop\Order\Item\Base\Address\Iface order address items
 	 */
-	public function getAddresses() : array;
+	public function getAddresses() : \Aimeos\Map;
 
 	/**
 	 * Replaces all addresses in the current basket with the new ones
@@ -187,9 +187,9 @@ interface Iface
 	/**
 	 * Returns all coupon codes and the lists of affected product items.
 	 *
-	 * @return array Associative array of codes and lists of product items implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
+	 * @return \Aimeos\Map Associative list of codes and lists of product items implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
-	public function getCoupons() : array;
+	public function getCoupons() : \Aimeos\Map;
 
 	/**
 	 * Sets a coupon code and the given product items in the basket.
@@ -236,9 +236,9 @@ interface Iface
 	/**
 	 * Returns the product items that are or should be part of an (future) order.
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of order product items
+	 * @return \Aimeos\Map List of order product items implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
-	public function getProducts() : array;
+	public function getProducts() : \Aimeos\Map;
 
 	/**
 	 * Replaces all products in the current basket with the new ones
@@ -281,9 +281,9 @@ interface Iface
 	/**
 	 * Returns all services (delivery, payment, etc.) attached to the shopping basket.
 	 *
-	 * @return array Array of \Aimeos\MShop\Order\Item\Base\Service\Iface Order service items
+	 * @return \Aimeos\Map List of \Aimeos\MShop\Order\Item\Base\Service\Iface Order service items
 	 */
-	public function getServices() : array;
+	public function getServices() : \Aimeos\Map;
 
 	/**
 	 * Replaces all services in the current basket with the new ones

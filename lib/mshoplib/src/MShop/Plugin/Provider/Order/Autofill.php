@@ -182,7 +182,7 @@ class Autofill
 
 		if( ( $userid = $context->getUserId() ) !== null
 			&& (bool) $this->getConfigValue( 'useorder', false ) === true
-			&& ( empty( $addresses ) || empty( $services ) )
+			&& ( $addresses->isEmpty() || $services->isEmpty() )
 		) {
 			$orderManager = \Aimeos\MShop::create( $context, 'order' );
 
@@ -258,9 +258,7 @@ class Autofill
 	protected function setAddresses( \Aimeos\MShop\Order\Item\Base\Iface $order,
 		\Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		$addresses = $order->getAddresses();
-
-		if( empty( $addresses ) && (bool) $this->getConfigValue( 'orderaddress', true ) === true )
+		if( $order->getAddresses()->isEmpty() && (bool) $this->getConfigValue( 'orderaddress', true ) === true )
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base/address' );
 			$search = $manager->createSearch();

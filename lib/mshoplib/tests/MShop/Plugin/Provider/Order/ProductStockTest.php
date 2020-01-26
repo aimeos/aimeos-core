@@ -67,7 +67,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
 		{
 			$this->assertEquals( ['product' => ['0' => 'stock.notenough']], $e->getErrorCodes() );
-			$this->assertEquals( [], $this->order->getProducts() );
+			$this->assertEquals( [], $this->order->getProducts()->toArray() );
 		}
 	}
 
@@ -86,7 +86,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
 		{
 			$this->assertEquals( ['product' => ['0' => 'stock.notenough']], $e->getErrorCodes() );
-			$this->assertEquals( [], $this->order->getProducts() );
+			$this->assertEquals( [], $this->order->getProducts()->toArray() );
 		}
 	}
 

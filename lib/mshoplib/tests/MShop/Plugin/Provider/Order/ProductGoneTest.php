@@ -121,7 +121,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->saveItem( $this->product->setStatus( 0 ) );
 
 		$this->order->addProduct( $badItem );
-		$products = $this->order->getProducts();
+		$products = $this->order->getProducts()->toArray();
 		$badItemPosition = key( $products );
 
 		try

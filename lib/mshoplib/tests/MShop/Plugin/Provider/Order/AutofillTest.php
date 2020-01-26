@@ -89,8 +89,8 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateNone()
 	{
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( [], $this->order->getAddresses() );
-		$this->assertEquals( [], $this->order->getServices() );
+		$this->assertEquals( [], $this->order->getAddresses()->toArray() );
+		$this->assertEquals( [], $this->order->getServices()->toArray() );
 	}
 
 
@@ -101,8 +101,8 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setConfig( array( 'useorder' => '1' ) );
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( [], $this->order->getAddresses() );
-		$this->assertEquals( [], $this->order->getServices() );
+		$this->assertEquals( [], $this->order->getAddresses()->toArray() );
+		$this->assertEquals( [], $this->order->getServices()->toArray() );
 	}
 
 
@@ -118,8 +118,8 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		) );
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( [], $this->order->getAddresses() );
-		$this->assertEquals( [], $this->order->getServices() );
+		$this->assertEquals( [], $this->order->getAddresses()->toArray() );
+		$this->assertEquals( [], $this->order->getServices()->toArray() );
 	}
 
 
@@ -144,7 +144,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$orderStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseStub ) );
 		$orderBaseStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseAddressStub ) );
 		$orderBaseAddressStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( \Aimeos\Map::from( [$item1, $item2] ) ) );
+			->will( $this->returnValue( map( [$item1, $item2] ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\PluginAutofill', $orderStub );
 		$this->context->getConfig()->set( 'mshop/order/manager/name', 'PluginAutofill' );
@@ -158,7 +158,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( 2, count( $this->order->getAddresses() ) );
-		$this->assertEquals( [], $this->order->getServices() );
+		$this->assertEquals( [], $this->order->getServices()->toArray() );
 	}
 
 
@@ -200,7 +200,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( 2, count( $this->order->getServices() ) );
-		$this->assertEquals( [], $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses()->toArray() );
 
 		foreach( $this->order->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT ) as $item )
 		{
@@ -219,7 +219,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( [], $this->order->getServices() );
+		$this->assertEquals( [], $this->order->getServices()->toArray() );
 		$this->assertEquals( 1, count( $this->order->getAddresses() ) );
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $this->order->getAddress( $type, 0 ) );
 	}
@@ -231,7 +231,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( [], $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses()->toArray() );
 		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
 
 		foreach( $this->order->getService( $type ) as $item )
@@ -248,7 +248,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setConfig( ['delivery' => '1', 'deliverycode' => 'unitcode'] );
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( [], $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses()->toArray() );
 		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
 
 		foreach( $this->order->getService( $type ) as $item )
@@ -266,7 +266,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setConfig( ['delivery' => '1', 'deliverycode' => 'xyz'] );
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( [], $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses()->toArray() );
 		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
 
 		foreach( $this->order->getService( $type ) as $item )
@@ -283,7 +283,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setConfig( ['payment' => '1'] );
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( [], $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses()->toArray() );
 		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
 
 		foreach( $this->order->getService( $type ) as $item )
@@ -300,7 +300,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setConfig( ['payment' => '1', 'paymentcode' => 'unitpaymentcode'] );
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( [], $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses()->toArray() );
 		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
 
 		foreach( $this->order->getService( $type ) as $item )
@@ -318,7 +318,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setConfig( ['payment' => '1', 'paymentcode' => 'xyz'] );
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( [], $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses()->toArray() );
 		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
 
 		foreach( $this->order->getService( $type ) as $item )

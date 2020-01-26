@@ -59,10 +59,10 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $object->update( $this->orderBase ) );
 
-		$coupons = $this->orderBase->getCoupons();
+		$coupons = $this->orderBase->getCoupons()->get( '90AB', [] );
 		$products = $this->orderBase->getProducts();
 
-		if( ( $product = reset( $coupons['90AB'] ) ) === false ) {
+		if( ( $product = reset( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
 		}
 

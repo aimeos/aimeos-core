@@ -120,7 +120,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->addProduct( $product );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
-		$this->assertSame( $products, $this->object->getProducts() );
+		$this->assertEquals( $products, $this->object->getProducts() );
 		$this->assertSame( $product, $this->object->getProduct( 2 ) );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -167,7 +167,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->object->addProduct( $product );
 
 		$this->assertEquals( 10, $this->object->getProduct( 0 )->getQuantity() );
-		$this->assertEquals( [0 => $product], $this->object->getProducts() );
+		$this->assertEquals( [0 => $product], $this->object->getProducts()->toArray() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -185,7 +185,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->addProduct( $testProduct, 1 );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
-		$this->assertEquals( [1 => $testProduct, 2 => $product], $this->object->getProducts() );
+		$this->assertEquals( [1 => $testProduct, 2 => $product], $this->object->getProducts()->toArray() );
 	}
 
 
@@ -195,7 +195,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->deleteProduct( 0 );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
-		$this->assertSame( [], $this->object->getProducts() );
+		$this->assertSame( [], $this->object->getProducts()->toArray() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -204,7 +204,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->setProducts( $this->products );
 
-		$this->assertSame( $this->products, $this->object->getProducts() );
+		$this->assertSame( $this->products, $this->object->getProducts()->toArray() );
 		$this->assertSame( $this->products[1], $this->object->getProduct( 1 ) );
 	}
 
@@ -214,7 +214,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->setProducts( $this->products );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
-		$this->assertSame( $this->products, $this->object->getProducts() );
+		$this->assertSame( $this->products, $this->object->getProducts()->toArray() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -321,7 +321,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->setAddresses( $this->addresses );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
-		$this->assertEquals( $this->addresses, $this->object->getAddresses() );
+		$this->assertEquals( $this->addresses, $this->object->getAddresses()->toArray() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -425,7 +425,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->setServices( $this->services );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
-		$this->assertEquals( $this->services, $this->object->getServices() );
+		$this->assertEquals( $this->services, $this->object->getServices()->toArray() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -435,7 +435,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->addCoupon( 'OPQR' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
-		$this->assertEquals( ['OPQR' => []], $this->object->getCoupons() );
+		$this->assertEquals( ['OPQR' => []], $this->object->getCoupons()->toArray() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -446,7 +446,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->deleteCoupon( 'OPQR' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
-		$this->assertEquals( [], $this->object->getCoupons() );
+		$this->assertEquals( [], $this->object->getCoupons()->toArray() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -454,7 +454,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testGetCoupons()
 	{
 		$this->object->setCoupons( $this->coupons );
-		$this->assertEquals( $this->coupons, $this->object->getCoupons() );
+		$this->assertEquals( $this->coupons, $this->object->getCoupons()->toArray() );
 	}
 
 
@@ -463,7 +463,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->setCoupon( 'OPQR', $this->coupons['OPQR'] );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
-		$this->assertEquals( ['OPQR' => $this->coupons['OPQR']], $this->object->getCoupons() );
+		$this->assertEquals( ['OPQR' => $this->coupons['OPQR']], $this->object->getCoupons()->toArray() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -473,7 +473,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->setCoupons( $this->coupons );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
-		$this->assertEquals( $this->coupons, $this->object->getCoupons() );
+		$this->assertEquals( $this->coupons, $this->object->getCoupons()->toArray() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 

@@ -55,9 +55,9 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 	public function testUpdate()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
-		$coupons = $this->orderBase->getCoupons();
+		$coupons = $this->orderBase->getCoupons()->get( '90AB', [] );
 
-		if( ( $product = reset( $coupons['90AB'] ) ) === false ) {
+		if( ( $product = reset( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
 		}
 

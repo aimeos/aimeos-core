@@ -68,18 +68,22 @@ class ServicesUpdate
 
 		$services = $order->getServices();
 
-		if( count( $order->getProducts() ) === 0 )
+		if( $order->getProducts()->isEmpty() )
 		{
 			$priceManager = \Aimeos\MShop::create( $this->getContext(), 'price' );
 
 			foreach( $services as $type => $list )
 			{
+				$serviceItems = $list;
+
 				foreach( $list as $key => $item ) {
-					$services[$type][$key] = $item->setPrice( $priceManager->createItem() );
+					$serviceItems[$key] = $item->setPrice( $priceManager->createItem() );
 				}
+
+				$services[$type] = $serviceItems;
 			}
 
-			$order->setServices( $services );
+			$order->setServices( $services->toArray() );
 			return $value;
 		}
 
@@ -88,6 +92,8 @@ class ServicesUpdate
 
 		foreach( $services as $type => $list )
 		{
+			$orderServices = $list;
+
 			foreach( $list as $key => $item )
 			{
 				if( ( $serviceItem = $serviceItems->get( $item->getServiceId() ) ) !== null )
@@ -96,16 +102,18 @@ class ServicesUpdate
 
 					if( $provider->isAvailable( $order ) )
 					{
-						$services[$type][$key] = $item->setPrice( $provider->calcPrice( $order ) );
+						$orderServices[$key] = $item->setPrice( $provider->calcPrice( $order ) );
 						continue;
 					}
 				}
 
-				unset( $services[$type][$key] );
+				unset( $orderServices[$key] );
 			}
+
+			$services[$type] = $orderServices;
 		}
 
-		$order->setServices( $services );
+		$order->setServices( $services->toArray() );
 		return $value;
 	}
 
@@ -113,10 +121,10 @@ class ServicesUpdate
 	/**
 	 * Returns the service items for the given order services
 	 *
-	 * @param array $services List of items implementing \Aimeos\MShop\Order\Item\Base\Service\Iface with IDs as keys
+	 * @param \Aimeos\Map $services List of items implementing \Aimeos\MShop\Order\Item\Base\Service\Iface with IDs as keys
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Service\Item\Iface with IDs as keys
 	 */
-	protected function getServiceItems( array $services ) : \Aimeos\Map
+	protected function getServiceItems( \Aimeos\Map $services ) : \Aimeos\Map
 	{
 		$list = [];
 

@@ -47,15 +47,15 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 
-		$coupons = $this->orderBase->getCoupons();
+		$coupons = $this->orderBase->getCoupons()->get( '90AB', [] );
 		$products = $this->orderBase->getProducts();
 
-		if( ( $product = reset( $coupons['90AB'] ) ) === false ) {
+		if( ( $product = reset( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
 		}
 
 		$this->assertEquals( 3, count( $products ) );
-		$this->assertEquals( 1, count( $coupons['90AB'] ) );
+		$this->assertEquals( 1, count( $coupons ) );
 		$this->assertEquals( '-70.40', $product->getPrice()->getValue() );
 		$this->assertEquals( '70.40', $product->getPrice()->getRebate() );
 		$this->assertEquals( 'U:MD', $product->getProductCode() );
@@ -78,13 +78,13 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 
-		$coupons = $this->orderBase->getCoupons();
+		$coupons = $this->orderBase->getCoupons()->get( '90AB', [] );
 
-		if( ( $product = reset( $coupons['90AB'] ) ) === false ) {
+		if( ( $product = reset( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
 		}
 
-		$this->assertEquals( 1, count( $coupons['90AB'] ) );
+		$this->assertEquals( 1, count( $coupons ) );
 		$this->assertEquals( '-3.95', $product->getPrice()->getValue() );
 		$this->assertEquals( '3.95', $product->getPrice()->getRebate() );
 	}
@@ -102,13 +102,13 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 
-		$coupons = $this->orderBase->getCoupons();
+		$coupons = $this->orderBase->getCoupons()->get( '90AB', [] );
 
-		if( ( $product = reset( $coupons['90AB'] ) ) === false ) {
+		if( ( $product = reset( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
 		}
 
-		$this->assertEquals( 1, count( $coupons['90AB'] ) );
+		$this->assertEquals( 1, count( $coupons ) );
 		$this->assertEquals( '-3.90', $product->getPrice()->getValue() );
 		$this->assertEquals( '3.90', $product->getPrice()->getRebate() );
 	}
@@ -129,14 +129,14 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 
-		$coupons = $this->orderBase->getCoupons();
+		$coupons = $this->orderBase->getCoupons()->get( '90AB', [] );
 		$products = $this->orderBase->getProducts();
 
-		if( ( $couponProduct20 = reset( $coupons['90AB'] ) ) === false ) {
+		if( ( $couponProduct20 = reset( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
 		}
 
-		if( ( $couponProduct10 = end( $coupons['90AB'] ) ) === false ) {
+		if( ( $couponProduct10 = end( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
 		}
 

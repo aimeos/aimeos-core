@@ -335,12 +335,12 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	/**
 	 * Returns all addresses that are part of the basket
 	 *
-	 * @return array Associative list of address items implementing
+	 * @return \Aimeos\Map Associative list of address items implementing
 	 *  \Aimeos\MShop\Order\Item\Base\Address\Iface with "billing" or "delivery" as key
 	 */
-	public function getAddresses() : array
+	public function getAddresses() : \Aimeos\Map
 	{
-		return $this->addresses;
+		return map( $this->addresses );
 	}
 
 
@@ -423,12 +423,12 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	/**
 	 * Returns the available coupon codes and the lists of affected product items
 	 *
-	 * @return array Associative array of codes and lists of product items
+	 * @return \Aimeos\Map Associative array of codes and lists of product items
 	 *  implementing \Aimeos\MShop\Order\Product\Iface
 	 */
-	public function getCoupons() : array
+	public function getCoupons() : \Aimeos\Map
 	{
-		return $this->coupons;
+		return map( $this->coupons );
 	}
 
 
@@ -584,11 +584,11 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	/**
 	 * Returns the product items that are or should be part of a basket
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of order product items
+	 * @return \Aimeos\Map List of order product items implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
-	public function getProducts() : array
+	public function getProducts() : \Aimeos\Map
 	{
-		return $this->products;
+		return map( $this->products );
 	}
 
 
@@ -701,12 +701,12 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	/**
 	 * Returns all services that are part of the basket
 	 *
-	 * @return array Associative list of service types ("delivery" or "payment") as keys and list of
+	 * @return \Aimeos\Map Associative list of service types ("delivery" or "payment") as keys and list of
 	 *	service items implementing \Aimeos\MShop\Order\Service\Iface as values
 	 */
-	public function getServices() : array
+	public function getServices() : \Aimeos\Map
 	{
-		return $this->services;
+		return map( $this->services );
 	}
 
 

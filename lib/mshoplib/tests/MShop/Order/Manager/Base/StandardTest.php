@@ -465,10 +465,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->getOrderItem();
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_NONE );
 
-		$this->assertEquals( [], $order->getProducts() );
-		$this->assertEquals( [], $order->getCoupons() );
-		$this->assertEquals( [], $order->getServices() );
-		$this->assertEquals( [], $order->getAddresses() );
+		$this->assertEquals( [], $order->getProducts()->toArray() );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
 	}
 
 
@@ -478,9 +478,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
 
 		$this->assertGreaterThan( 0, count( $order->getAddresses() ) );
-		$this->assertEquals( [], $order->getCoupons() );
-		$this->assertEquals( [], $order->getProducts() );
-		$this->assertEquals( [], $order->getServices() );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getProducts()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
 	}
 
 
@@ -490,9 +490,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
-		$this->assertEquals( [], $order->getCoupons() );
-		$this->assertEquals( [], $order->getServices() );
-		$this->assertEquals( [], $order->getAddresses() );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
 	}
 
 
@@ -503,8 +503,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
 		$this->assertGreaterThan( 0, count( $order->getCoupons() ) );
-		$this->assertEquals( [], $order->getServices() );
-		$this->assertEquals( [], $order->getAddresses() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
 	}
 
 
@@ -514,9 +514,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 
 		$this->assertGreaterThan( 0, count( $order->getServices() ) );
-		$this->assertEquals( [], $order->getCoupons() );
-		$this->assertEquals( [], $order->getProducts() );
-		$this->assertEquals( [], $order->getAddresses() );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getProducts()->toArray() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
 	}
 
 
@@ -560,10 +560,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->getOrderItem();
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_NONE, true );
 
-		$this->assertEquals( [], $order->getAddresses() );
-		$this->assertEquals( [], $order->getCoupons() );
-		$this->assertEquals( [], $order->getProducts() );
-		$this->assertEquals( [], $order->getServices() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getProducts()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
 	}
 
 
@@ -573,9 +573,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS, true );
 
 		$this->assertGreaterThan( 0, count( $order->getAddresses() ) );
-		$this->assertEquals( [], $order->getCoupons() );
-		$this->assertEquals( [], $order->getProducts() );
-		$this->assertEquals( [], $order->getServices() );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getProducts()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
 	}
 
 
@@ -585,9 +585,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT, true );
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
-		$this->assertEquals( [], $order->getCoupons() );
-		$this->assertEquals( [], $order->getAddresses() );
-		$this->assertEquals( [], $order->getServices() );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
 	}
 
 
@@ -596,10 +596,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->getOrderItem();
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON, true );
 
-		$this->assertEquals( [], $order->getAddresses() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
 		$this->assertEquals( 2, count( $order->getCoupons() ) );
-		$this->assertEquals( [], $order->getProducts() );
-		$this->assertEquals( [], $order->getServices() );
+		$this->assertEquals( [], $order->getProducts()->toArray() );
+		$this->assertEquals( [], $order->getServices()->toArray() );
 	}
 
 
@@ -609,9 +609,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE, true );
 
 		$this->assertGreaterThan( 0, count( $order->getServices() ) );
-		$this->assertEquals( [], $order->getCoupons() );
-		$this->assertEquals( [], $order->getAddresses() );
-		$this->assertEquals( [], $order->getProducts() );
+		$this->assertEquals( [], $order->getCoupons()->toArray() );
+		$this->assertEquals( [], $order->getAddresses()->toArray() );
+		$this->assertEquals( [], $order->getProducts()->toArray() );
 	}
 
 
@@ -756,10 +756,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$basket = $this->object->load( $newBasketId, \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
 		$this->object->deleteItem( $newBasketId );
 
-		$this->assertEquals( [], $basket->getCoupons() );
-		$this->assertEquals( [], $basket->getAddresses() );
-		$this->assertEquals( [], $basket->getProducts() );
-		$this->assertEquals( [], $basket->getServices() );
+		$this->assertEquals( [], $basket->getCoupons()->toArray() );
+		$this->assertEquals( [], $basket->getAddresses()->toArray() );
+		$this->assertEquals( [], $basket->getProducts()->toArray() );
+		$this->assertEquals( [], $basket->getServices()->toArray() );
 	}
 
 
@@ -776,9 +776,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getAddresses() ) );
-		$this->assertEquals( [], $basket->getCoupons() );
-		$this->assertEquals( [], $basket->getProducts() );
-		$this->assertEquals( [], $basket->getServices() );
+		$this->assertEquals( [], $basket->getCoupons()->toArray() );
+		$this->assertEquals( [], $basket->getProducts()->toArray() );
+		$this->assertEquals( [], $basket->getServices()->toArray() );
 	}
 
 
@@ -795,9 +795,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getProducts() ) );
-		$this->assertEquals( [], $basket->getAddresses() );
-		$this->assertEquals( [], $basket->getCoupons() );
-		$this->assertEquals( [], $basket->getServices() );
+		$this->assertEquals( [], $basket->getAddresses()->toArray() );
+		$this->assertEquals( [], $basket->getCoupons()->toArray() );
+		$this->assertEquals( [], $basket->getServices()->toArray() );
 	}
 
 
@@ -814,9 +814,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getServices() ) );
-		$this->assertEquals( [], $basket->getAddresses() );
-		$this->assertEquals( [], $basket->getCoupons() );
-		$this->assertEquals( [], $basket->getProducts() );
+		$this->assertEquals( [], $basket->getAddresses()->toArray() );
+		$this->assertEquals( [], $basket->getCoupons()->toArray() );
+		$this->assertEquals( [], $basket->getProducts()->toArray() );
 	}
 
 
