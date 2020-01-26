@@ -279,7 +279,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getQuantity(), $itemUpd->getQuantity() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 		$this->assertEquals( $itemExp->getFlags(), $itemUpd->getFlags() );
-		$this->assertEquals( [], $itemUpd->getAttributeItems() );
+		$this->assertEquals( [], $itemUpd->getAttributeItems()->toArray() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );

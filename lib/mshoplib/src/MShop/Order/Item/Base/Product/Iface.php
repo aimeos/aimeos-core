@@ -139,9 +139,9 @@ interface Iface
 	/**
 	 * Returns all of sub-product items
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of product items
+	 * @return \Aimeos\Map List of product items implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
-	public function getProducts() : array;
+	public function getProducts() : \Aimeos\Map;
 
 	/**
 	 * Sets all sub-product items
@@ -308,9 +308,9 @@ interface Iface
 	 * Returns the list of attribute items for the ordered product.
 	 *
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
-	 * @return array List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
+	 * @return \Aimeos\Map List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 */
-	public function getAttributeItems( string $type = null ) : array;
+	public function getAttributeItems( string $type = null ) : \Aimeos\Map;
 
 	/**
 	 * Adds or replaces the attribute item in the list of product attributes.

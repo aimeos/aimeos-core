@@ -128,12 +128,12 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * Returns the list of attribute items for the ordered product.
 	 *
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
-	 * @return array List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
+	 * @return \Aimeos\Map List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 */
-	public function getAttributeItems( string $type = null ) : array
+	public function getAttributeItems( string $type = null ) : \Aimeos\Map
 	{
 		if( $type === null ) {
-			return $this->attributes;
+			return map( $this->attributes );
 		}
 
 		$list = [];
@@ -145,7 +145,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			}
 		}
 
-		return $list;
+		return map( $list );
 	}
 
 
@@ -226,11 +226,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	/**
 	 * Returns all of sub-product items
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of product items
+	 * @return \Aimeos\Map List of product items implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
-	public function getProducts() : array
+	public function getProducts() : \Aimeos\Map
 	{
-		return $this->products;
+		return map( $this->products );
 	}
 
 

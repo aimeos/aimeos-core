@@ -381,19 +381,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeItems()
 	{
-		$this->assertEquals( $this->attribute, $this->object->getAttributeItems() );
+		$this->assertEquals( $this->attribute, $this->object->getAttributeItems()->toArray() );
 	}
 
 
 	public function testGetAttributeItemsByType()
 	{
-		$this->assertEquals( $this->attribute, $this->object->getAttributeItems( 'default' ) );
+		$this->assertEquals( $this->attribute, $this->object->getAttributeItems( 'default' )->toArray() );
 	}
 
 
 	public function testGetAttributeItemsInvalidType()
 	{
-		$this->assertEquals( [], $this->object->getAttributeItems( 'invalid' ) );
+		$this->assertEquals( [], $this->object->getAttributeItems( 'invalid' )->toArray() );
 	}
 
 
@@ -441,7 +441,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setAttributeItems( $list );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $return );
-		$this->assertEquals( $list, $this->object->getAttributeItems() );
+		$this->assertEquals( $list, $this->object->getAttributeItems()->toArray() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 

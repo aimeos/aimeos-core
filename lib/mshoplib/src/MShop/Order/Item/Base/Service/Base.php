@@ -157,12 +157,12 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * Returns the list of attribute items for the service.
 	 *
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
-	 * @return array List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
+	 * @return \Aimeos\Map List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	 */
-	public function getAttributeItems( string $type = null ) : array
+	public function getAttributeItems( string $type = null ) : \Aimeos\Map
 	{
 		if( $type === null ) {
-			return $this->attributes;
+			return map( $this->attributes );
 		}
 
 		$list = [];
@@ -174,7 +174,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 			}
 		}
 
-		return $list;
+		return map( $list );
 	}
 
 

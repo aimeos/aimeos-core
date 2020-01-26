@@ -52,9 +52,9 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 
 		$attributes = $this->product->getAttributeItems();
 		$this->assertEquals( 1, count( $attributes ) );
-		$this->assertEquals( 'product/property', reset( $attributes )->getType() );
-		$this->assertEquals( 'package-width', reset( $attributes )->getCode() );
-		$this->assertEquals( '15.0', reset( $attributes )->getValue() );
+		$this->assertEquals( 'product/property', $attributes->first()->getType() );
+		$this->assertEquals( 'package-width', $attributes->first()->getCode() );
+		$this->assertEquals( '15.0', $attributes->first()->getValue() );
 	}
 
 

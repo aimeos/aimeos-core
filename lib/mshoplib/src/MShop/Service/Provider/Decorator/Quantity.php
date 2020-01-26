@@ -93,7 +93,7 @@ class Quantity
 		{
 			$qty = $orderProduct->getQuantity();
 
-			if( ( $products = $orderProduct->getProducts() ) !== [] )
+			if( !( $products = $orderProduct->getProducts() )->isEmpty() )
 			{
 				foreach( $products as $prodItem ) { // calculate bundled products
 					$sum += $qty * $prodItem->getQuantity();
