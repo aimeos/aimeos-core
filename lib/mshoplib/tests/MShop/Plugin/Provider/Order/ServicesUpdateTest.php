@@ -133,7 +133,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 			->setMethods( ['isAvailable'] )->getMock();
 
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
-			->will( $this->returnValue( map([$orderProduct] ) ) );
+			->will( $this->returnValue( map( [$orderProduct] ) ) );
 
 		$serviceStub->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->returnValue( map( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) ) );

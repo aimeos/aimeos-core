@@ -287,7 +287,7 @@ class Standard
 			$catalogSearch->getConditions(),
 		);
 
-		if( !( $prodIds = map( $items)->getId() )->isEmpty() ) { // don't rely on array keys
+		if( !( $prodIds = map( $items )->getId() )->isEmpty() ) { // don't rely on array keys
 			$expr[] = $catalogSearch->compare( '==', 'catalog.lists.refid', $prodIds->toArray() );
 		}
 
