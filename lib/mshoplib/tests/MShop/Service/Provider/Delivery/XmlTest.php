@@ -128,7 +128,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$mock->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( \Aimeos\Map::from( ['123' => $itemMock] ) ) );
+			->will( $this->returnValue( map( ['123' => $itemMock] ) ) );
 
 		$mock->expects( $this->once() )->method( 'saveItems' );
 

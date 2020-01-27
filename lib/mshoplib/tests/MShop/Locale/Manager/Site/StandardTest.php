@@ -229,7 +229,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( \Aimeos\Map::from( [$object->createItem()] ) ) );
+			->will( $this->returnValue( map( [$object->createItem()] ) ) );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $object->getTree() );
 	}

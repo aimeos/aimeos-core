@@ -212,7 +212,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderCouponStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( \Aimeos\Map::from( [$orderCouponStub->createItem()->setCode( 'test' )] ) ) );
+			->will( $this->returnValue( map( [$orderCouponStub->createItem()->setCode( 'test' )] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/coupon', $orderCouponStub );
 
@@ -248,7 +248,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderCouponStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( \Aimeos\Map::from( [$orderCouponStub->createItem()->setCode( 'test' )] ) ) );
+			->will( $this->returnValue( map( [$orderCouponStub->createItem()->setCode( 'test' )] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/coupon', $orderCouponStub );
 
@@ -359,7 +359,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderProductStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( \Aimeos\Map::from( [$orderProductStub->createItem()] ) ) );
+			->will( $this->returnValue( map( [$orderProductStub->createItem()] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
 
@@ -405,7 +405,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderProductItem->setType( 'default' );
 
 		$orderProductStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( \Aimeos\Map::from( [$orderProductItem] ) ) );
+			->will( $this->returnValue( map( [$orderProductItem] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
 
@@ -451,7 +451,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderProductItem->setType( 'select' );
 
 		$orderProductStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( \Aimeos\Map::from( [$orderProductItem] ) ) );
+			->will( $this->returnValue( map( [$orderProductItem] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
 
@@ -552,8 +552,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object->expects( $this->exactly( 2 ) )->method( 'getStockItems' )
 			->will( $this->onConsecutiveCalls(
-				\Aimeos\Map::from( [$stockItem2, $stockItem1] ),
-				\Aimeos\Map::from( [$stockItem3] )
+				map( [$stockItem2, $stockItem1] ),
+				map( [$stockItem3] )
 			) );
 
 
