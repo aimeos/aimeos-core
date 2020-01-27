@@ -294,15 +294,8 @@ class Autofill
 			{
 				$type = $service->getType();
 
-				if( ( $item = $this->getServiceItem( $order, $type, $service->getCode() ) ) !== null )
-				{
-					$attrItems = $service->getAttributeItems();
-
-					foreach( $attrItems as $attrItem ) {
-						$attrItem->setId( null );
-					}
-
-					$services[$type][] = $item->setAttributeItems( $attrItems )->setId( null );
+				if( ( $item = $this->getServiceItem( $order, $type, $service->getCode() ) ) !== null ) {
+					$services[$type][] = $item->setAttributeItems( [] )->setId( null );
 				}
 			}
 
