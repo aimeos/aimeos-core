@@ -186,7 +186,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$orderStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseStub ) );
 		$orderBaseStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseServiceStub ) );
 		$orderBaseServiceStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( \Aimeos\Map::from( [$item1, $item2] ) ) );
+			->will( $this->returnValue( map( [$item1, $item2] ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\PluginAutofill', $orderStub );
 		$this->context->getConfig()->set( 'mshop/order/manager/name', 'PluginAutofill' );
@@ -238,6 +238,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		{
 			$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
 			$this->assertNull( $item->getId() );
+
+			foreach( $item->getAttributeItems() as $attrItem ) {
+				$this->assertNull( $attrItem->getId() );
+			}
 		}
 	}
 
@@ -290,6 +294,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		{
 			$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
 			$this->assertNull( $item->getId() );
+
+			foreach( $item->getAttributeItems() as $attrItem ) {
+				$this->assertNull( $attrItem->getId() );
+			}
 		}
 	}
 
