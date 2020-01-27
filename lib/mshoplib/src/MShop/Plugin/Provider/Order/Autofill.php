@@ -298,7 +298,7 @@ class Autofill
 				$type = $service->getType();
 
 				if( ( $item = $this->getServiceItem( $order, $type, $service->getCode() ) ) !== null ) {
-					$services[$type][] = $item->setAttributeItems( $service->getAttributeItems()->setId( null )->toArray() )->setId( null );
+					$services[$type][] = $item->setAttributeItems( [] )->setId( null );
 				}
 			}
 
