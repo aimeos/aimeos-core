@@ -236,6 +236,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		{
 			$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
 			$this->assertNull( $item->getId() );
+
+			foreach( $item->getAttributeItems() as $attrItem ) {
+				$this->assertNull( $attrItem->getId() );
+			}
 		}
 	}
 
@@ -288,6 +292,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		{
 			$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
 			$this->assertNull( $item->getId() );
+
+			foreach( $item->getAttributeItems() as $attrItem ) {
+				$this->assertNull( $attrItem->getId() );
+			}
 		}
 	}
 
