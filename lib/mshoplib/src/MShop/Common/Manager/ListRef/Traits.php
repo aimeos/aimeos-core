@@ -210,7 +210,10 @@ trait Traits
 			$manager = \Aimeos\MShop::create( $this->getContext(), $domain );
 
 			$search = $manager->createSearch()->setSlice( 0, count( $list ) );
-			$search->setConditions( $search->compare( '==', str_replace( '/', '.', $domain ) . '.id', array_keys( $list ) ) );
+			$search->setConditions( $search->combine( '&&', [
+				$search->compare( '==', str_replace( '/', '.', $domain ) . '.id', array_keys( $list ) ),
+				$search->getConditions()
+			] ) );
 
 			foreach( $manager->searchItems( $search, $domains ?: [] ) as $id => $item )
 			{
