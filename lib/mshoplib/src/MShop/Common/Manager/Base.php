@@ -701,14 +701,14 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Returns the site expression for the given name
 	 *
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string $name Name of the site condition
 	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
 	 * @return \Aimeos\MW\Criteria\Expression\Iface Site search condition
 	 * @since 2020.01
 	 */
-	protected function getSiteCondition( string $name, int $sitelevel ) : \Aimeos\MW\Criteria\Expression\Iface
+	protected function getSiteCondition( \Aimeos\MW\Criteria\Iface $search, string $name, int $sitelevel ) : \Aimeos\MW\Criteria\Expression\Iface
 	{
-		$search = $this->getSearch();
 		$sites = $this->context->getLocale()->getSites();
 
 		if( isset( $sites[Locale::SITE_PATH] ) && $sitelevel & Locale::SITE_PATH ) {
@@ -751,7 +751,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$name = $key . $sep . 'siteid';
 
 			if( isset( $attributes[$name] ) ) {
-				$list[] = $this->getSiteCondition( $name, $sitelevel );
+				$list[] = $this->getSiteCondition( $this->getSearch(), $name, $sitelevel );
 			}
 		}
 
@@ -772,7 +772,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$translation = ['marker' => $name];
 		$types = ['marker' => \Aimeos\MW\DB\Statement\Base::PARAM_STR];
 
-		return $this->getSiteCondition( 'marker', $sitelevel )->toSource( $types, $translation );
+		return $this->getSiteCondition( $this->getSearch(), 'marker', $sitelevel )->toSource( $types, $translation );
 	}
 
 

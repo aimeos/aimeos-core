@@ -209,7 +209,7 @@ class Standard
 
 		$search = clone $search;
 		$expr = array(
-			$this->getSiteCondition( 'locale.siteid', $level ),
+			$this->getSiteCondition( $search, 'locale.siteid', $level ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
