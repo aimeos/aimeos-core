@@ -24,10 +24,11 @@ class TaxratesTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 
-		$this->address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem()->setCountryID( 'DE' );
+		$this->address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem()->setCountryId( 'US' );
 		$this->basket = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
-		$this->plugin->setConfig( ['country-taxrates' => ['DE' => '19']] );
+
+		$this->plugin->setConfig( ['country-taxrates' => ['US' => '5'], 'state-taxrates' => ['CA' => '6.25']] );
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\Taxrates( $this->context, $this->plugin );
 	}
@@ -41,12 +42,13 @@ class TaxratesTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckConfigBE()
 	{
-		$attributes = ['country-taxrates' => ['DE' => '19']];
+		$attributes = ['country-taxrates' => ['US' => '5'], 'state-taxrates' => ['CA' => '6.25']];
 
 		$result = $this->object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( null, $result['country-taxrates'] );
+		$this->assertEquals( null, $result['state-taxrates'] );
 	}
 
 
@@ -54,8 +56,9 @@ class TaxratesTest extends \PHPUnit\Framework\TestCase
 	{
 		$list = $this->object->getConfigBE();
 
-		$this->assertEquals( 1, count( $list ) );
+		$this->assertEquals( 2, count( $list ) );
 		$this->assertArrayHasKey( 'country-taxrates', $list );
+		$this->assertArrayHasKey( 'state-taxrates', $list );
 
 		foreach( $list as $entry ) {
 			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
@@ -72,21 +75,35 @@ class TaxratesTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateProduct()
 	{
 		$orderProduct = $this->getOrderProductItem();
-		$orderProduct->getPrice()->setTaxrate( '10.00' );
+		$orderProduct->getPrice()->setTaxrate( '20.00' );
 
 		$this->basket->addAddress( $this->address, 'payment' );
 
 		$result = $this->object->update( $this->basket, 'addProduct.after', $orderProduct );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $result );
-		$this->assertEquals( '19.00', $result->getPrice()->getTaxRate() );
+		$this->assertEquals( '5.00', $result->getPrice()->getTaxRate() );
+	}
+
+
+	public function testUpdateProductState()
+	{
+		$orderProduct = $this->getOrderProductItem();
+		$orderProduct->getPrice()->setTaxrate( '20.00' );
+
+		$this->basket->addAddress( $this->address->setState( 'CA' ), 'payment' );
+
+		$result = $this->object->update( $this->basket, 'addProduct.after', $orderProduct );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $result );
+		$this->assertEquals( '6.25', $result->getPrice()->getTaxRate() );
 	}
 
 
 	public function testUpdateAll()
 	{
 		$orderProduct = $this->getOrderProductItem();
-		$orderProduct->getPrice()->setTaxrate( '10.00' );
+		$orderProduct->getPrice()->setTaxrate( '20.00' );
 
 		$this->basket->addProduct( $this->getOrderProductItem() );
 		$this->basket->addAddress( $this->address, 'delivery' );
@@ -96,7 +113,25 @@ class TaxratesTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $result );
 
 		foreach( $this->basket->getProducts() as $item ) {
-			$this->assertEquals( '19.00', $item->getPrice()->getTaxRate() );
+			$this->assertEquals( '5.00', $item->getPrice()->getTaxRate() );
+		}
+	}
+
+
+	public function testUpdateAllState()
+	{
+		$orderProduct = $this->getOrderProductItem();
+		$orderProduct->getPrice()->setTaxrate( '20.00' );
+
+		$this->basket->addProduct( $this->getOrderProductItem() );
+		$this->basket->addAddress( $this->address->setState( 'CA' ), 'delivery' );
+
+		$result = $this->object->update( $this->basket, 'addAddress.after', $this->address );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $result );
+
+		foreach( $this->basket->getProducts() as $item ) {
+			$this->assertEquals( '6.25', $item->getPrice()->getTaxRate() );
 		}
 	}
 

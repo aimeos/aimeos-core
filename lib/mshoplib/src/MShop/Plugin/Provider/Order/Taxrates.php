@@ -40,6 +40,15 @@ class Taxrates
 			'default' => [],
 			'required' => false,
 		),
+		'state-taxrates' => array(
+			'code' => 'state-taxrates',
+			'internalcode' => 'state-taxrates',
+			'label' => 'Tax rate for each two letter state code',
+			'type' => 'map',
+			'internaltype' => 'array',
+			'default' => [],
+			'required' => false,
+		),
 	);
 
 
@@ -104,15 +113,17 @@ class Taxrates
 		$addrpay = $order->getAddress( 'payment' );
 		$addrship = $order->getAddress( 'delivery' );
 		$taxrates = $this->getConfigValue( 'country-taxrates', [] );
+		$staterates = $this->getConfigValue( 'state-taxrates', [] );
 
 		if( ( $address = reset( $addrship ) ) === false
 			&& ( $address = reset( $addrpay ) ) === false
 			|| !isset( $taxrates[$address->getCountryId()] )
+			&& !isset( $staterates[$address->getState()] )
 		) {
 			return $value;
 		}
 
-		$taxrate = $taxrates[$address->getCountryId()];
+		$taxrate = $staterates[$address->getState()] ?? $taxrates[$address->getCountryId()];
 
 		if( $value instanceof \Aimeos\MShop\Order\Item\Base\Product\Iface )
 		{
