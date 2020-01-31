@@ -20,7 +20,7 @@ class TaxratesTest extends \PHPUnit\Framework\TestCase
 	private $plugin;
 
 
-	protected function setUp() : void
+	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
 
@@ -33,7 +33,7 @@ class TaxratesTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown() : void
+	protected function tearDown()
 	{
 		unset( $this->object, $this->plugin, $this->basket, $this->address, $this->context );
 	}
