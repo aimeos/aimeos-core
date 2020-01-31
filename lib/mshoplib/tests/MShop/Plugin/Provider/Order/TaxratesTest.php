@@ -117,8 +117,9 @@ class TaxratesTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.product.price', '36.00' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$items = $manager->searchItems( $search );
 
-		if( ( $item = $manager->searchItems( $search )->first() ) === null ) {
+		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No ordered product found' );
 		}
 
