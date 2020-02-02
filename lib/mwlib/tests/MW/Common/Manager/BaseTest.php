@@ -9,6 +9,19 @@
 namespace Aimeos\MW\Common\Manager;
 
 
+interface Test1
+{
+}
+
+interface Test2
+{
+}
+
+class Test implements Test1, Test2
+{
+}
+
+
 class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -23,6 +36,84 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	protected function tearDown() : void
 	{
 		unset( $this->object );
+	}
+
+
+	public function testFilter()
+	{
+		$this->assertTrue( $this->access( 'filter' )->invokeArgs( $this->object, [new \stdClass()] ) );
+	}
+
+
+	public function testFilterTrue()
+	{
+		$this->object->addFilter( \stdClass::class, function( $item ) {
+			return true;
+		} );
+
+		$this->assertTrue( $this->access( 'filter' )->invokeArgs( $this->object, [new \stdClass()] ) );
+	}
+
+
+	public function testFilterFalse()
+	{
+		$this->object->addFilter( \stdClass::class, function( $item ) {
+			return false;
+		} );
+
+		$this->assertFalse( $this->access( 'filter' )->invokeArgs( $this->object, [new \stdClass()] ) );
+	}
+
+
+	public function testFilterMultipleSameTrue()
+	{
+		$this->object->addFilter( Test1::class, function( $item ) {
+			return true;
+		} );
+		$this->object->addFilter( Test2::class, function( $item ) {
+			return true;
+		} );
+
+		$this->assertTrue( $this->access( 'filter' )->invokeArgs( $this->object, [new Test] ) );
+	}
+
+
+	public function testFilterMultipleSameFalse()
+	{
+		$this->object->addFilter( Test1::class, function( $item ) {
+			return true;
+		} );
+		$this->object->addFilter( Test2::class, function( $item ) {
+			return false;
+		} );
+
+		$this->assertFalse( $this->access( 'filter' )->invokeArgs( $this->object, [new Test] ) );
+	}
+
+
+	public function testFilterMultipleIfaceTrue()
+	{
+		$this->object->addFilter( Test1::class, function( $item ) {
+			return true;
+		} );
+		$this->object->addFilter( Test2::class, function( $item ) {
+			return true;
+		} );
+
+		$this->assertTrue( $this->access( 'filter' )->invokeArgs( $this->object, [new Test] ) );
+	}
+
+
+	public function testFilterMultipleIfaceFalse()
+	{
+		$this->object->addFilter( Test1::class, function( $item ) {
+			return true;
+		} );
+		$this->object->addFilter( Test2::class, function( $item ) {
+			return false;
+		} );
+
+		$this->assertFalse( $this->access( 'filter' )->invokeArgs( $this->object, [new Test] ) );
 	}
 
 
@@ -167,5 +258,15 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 		$this->expectException( \Aimeos\Mw\Exception::class );
 		$method->invokeArgs( $this->object, array( array( [] ) ) );
+	}
+
+
+	protected function access( $name )
+	{
+		$class = new \ReflectionClass( \Aimeos\MW\Common\Manager\Base::class );
+		$method = $class->getMethod( $name );
+		$method->setAccessible( true );
+
+		return $method;
 	}
 }
