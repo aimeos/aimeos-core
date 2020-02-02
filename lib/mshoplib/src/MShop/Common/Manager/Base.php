@@ -25,6 +25,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 	private $context;
 	private $object;
+	private $filterFcn = [];
 	private $resourceName;
 	private $stmts = [];
 
@@ -50,6 +51,24 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	public function __call( $name, array $param )
 	{
 		throw new \Aimeos\MShop\Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
+	}
+
+
+	/**
+	 * Adds a filter callback for an item type
+	 *
+	 * @param string $iface Interface name of the item to apply the filter to
+	 * @param \Closure $fcn Anonymous function receiving the item to check as first parameter
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function addFilter( $iface, \Closure $fcn )
+	{
+		if( !isset( $this->filterFcn[$iface] ) ) {
+			$this->filterFcn[$iface] = [];
+		}
+
+		$this->filterFcn[$iface][] = $fcn;
+		return $this;
 	}
 
 
@@ -372,6 +391,31 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$object->setConditions( $object->compare( '==', $domain . '.status', 1 ) );
 
 		return $object;
+	}
+
+
+	/**
+	 * Applies the filters for the item type to the item
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item to apply the filter to
+	 * @return bool True if the item should be used, false if not
+	 */
+	protected function filter( \Aimeos\MShop\Common\Item\Iface $item )
+	{
+		foreach( $this->filterFcn as $iface => $fcnList )
+		{
+			if( $item instanceof $iface )
+			{
+				foreach( $fcnList as $fcn )
+				{
+					if( $fcn( $item ) === false ) {
+						return false;
+					}
+				}
+			}
+		}
+
+		return true;
 	}
 
 
