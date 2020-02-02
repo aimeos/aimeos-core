@@ -20,6 +20,52 @@ namespace Aimeos\MW\Common\Manager;
  */
 abstract class Base extends \Aimeos\MW\Common\Base
 {
+	private $filterFcn = [];
+
+
+	/**
+	 * Adds a filter callback for an item type
+	 *
+	 * @param string $iface Interface name of the item to apply the filter to
+	 * @param \Closure $fcn Anonymous function receiving the item to check as first parameter
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function addFilter( string $iface, \Closure $fcn ) : self
+	{
+		if( !isset( $this->filterFcn[$iface] ) ) {
+			$this->filterFcn[$iface] = [];
+		}
+
+		$this->filterFcn[$iface][] = $fcn;
+		return $this;
+	}
+
+
+	/**
+	 * Applies the filters for the item type to the item
+	 *
+	 * @param $item Item to apply the filter to
+	 * @return bool True if the item should be used, false if not
+	 */
+	protected function filter( $item ) : bool
+	{
+		foreach( $this->filterFcn as $iface => $fcnList )
+		{
+			if( is_object( $item ) && $item instanceof $iface )
+			{
+				foreach( $fcnList as $fcn )
+				{
+					if( $fcn( $item ) === false ) {
+						return false;
+					}
+				}
+			}
+		}
+
+		return true;
+	}
+
+
 	/**
 	 * Returns a sorted list of required criteria keys.
 	 *
