@@ -10,6 +10,9 @@
 namespace Aimeos\MShop\Common\Factory;
 
 
+/**
+ * Test class for \Aimeos\MShop\Common\Factory\Base.
+ */
 class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
