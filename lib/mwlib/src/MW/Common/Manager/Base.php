@@ -30,7 +30,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	 * @param \Closure $fcn Anonymous function receiving the item to check as first parameter
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function addFilter( string $iface, \Closure $fcn ) : self
+	public function addFilter( $iface, \Closure $fcn )
 	{
 		if( !isset( $this->filterFcn[$iface] ) ) {
 			$this->filterFcn[$iface] = [];
@@ -47,7 +47,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	 * @param $item Item to apply the filter to
 	 * @return bool True if the item should be used, false if not
 	 */
-	protected function filter( $item ) : bool
+	protected function filter( $item )
 	{
 		foreach( $this->filterFcn as $iface => $fcnList )
 		{
