@@ -41,79 +41,83 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testFilter()
 	{
-		$this->assertTrue( $this->access( 'filter' )->invokeArgs( $this->object, [new \stdClass()] ) );
+		$item = new \stdClass();
+		$this->assertSame( $item, $this->access( 'filter' )->invokeArgs( $this->object, [$item] ) );
 	}
 
 
 	public function testFilterTrue()
 	{
 		$this->object->addFilter( \stdClass::class, function( $item ) {
-			return true;
+			return $item;
 		} );
 
-		$this->assertTrue( $this->access( 'filter' )->invokeArgs( $this->object, [new \stdClass()] ) );
+		$item = new \stdClass();
+		$this->assertSame( $item, $this->access( 'filter' )->invokeArgs( $this->object, [$item] ) );
 	}
 
 
 	public function testFilterFalse()
 	{
 		$this->object->addFilter( \stdClass::class, function( $item ) {
-			return false;
+			return null;
 		} );
 
-		$this->assertFalse( $this->access( 'filter' )->invokeArgs( $this->object, [new \stdClass()] ) );
+		$this->assertNull( $this->access( 'filter' )->invokeArgs( $this->object, [new \stdClass()] ) );
 	}
 
 
 	public function testFilterMultipleSameTrue()
 	{
 		$this->object->addFilter( Test1::class, function( $item ) {
-			return true;
+			return $item;
 		} );
 		$this->object->addFilter( Test2::class, function( $item ) {
-			return true;
+			return $item;
 		} );
 
-		$this->assertTrue( $this->access( 'filter' )->invokeArgs( $this->object, [new Test] ) );
+		$item = new Test();
+		$this->assertSame( $item, $this->access( 'filter' )->invokeArgs( $this->object, [$item] ) );
 	}
 
 
 	public function testFilterMultipleSameFalse()
 	{
 		$this->object->addFilter( Test1::class, function( $item ) {
-			return true;
+			return $item;
 		} );
 		$this->object->addFilter( Test2::class, function( $item ) {
-			return false;
+			return null;
 		} );
 
-		$this->assertFalse( $this->access( 'filter' )->invokeArgs( $this->object, [new Test] ) );
+		$this->assertNull( $this->access( 'filter' )->invokeArgs( $this->object, [new Test()] ) );
 	}
 
 
 	public function testFilterMultipleIfaceTrue()
 	{
 		$this->object->addFilter( Test1::class, function( $item ) {
-			return true;
+			return $item;
 		} );
 		$this->object->addFilter( Test2::class, function( $item ) {
-			return true;
+			return $item;
 		} );
 
-		$this->assertTrue( $this->access( 'filter' )->invokeArgs( $this->object, [new Test] ) );
+		$item = new Test();
+		$this->assertSame( $item, $this->access( 'filter' )->invokeArgs( $this->object, [$item] ) );
 	}
 
 
 	public function testFilterMultipleIfaceFalse()
 	{
 		$this->object->addFilter( Test1::class, function( $item ) {
-			return true;
+			return $item;
 		} );
 		$this->object->addFilter( Test2::class, function( $item ) {
-			return false;
+			return null;
 		} );
 
-		$this->assertFalse( $this->access( 'filter' )->invokeArgs( $this->object, [new Test] ) );
+		$this->assertNull( $this->access( 'filter' )->invokeArgs( $this->object, [new Test()] ) );
 	}
 
 

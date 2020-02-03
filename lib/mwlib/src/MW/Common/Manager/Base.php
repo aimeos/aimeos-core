@@ -28,26 +28,24 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	 *
 	 * @param string $iface Interface name of the item to apply the filter to
 	 * @param \Closure $fcn Anonymous function receiving the item to check as first parameter
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function addFilter( string $iface, \Closure $fcn ) : self
+	public function addFilter( string $iface, \Closure $fcn )
 	{
 		if( !isset( $this->filterFcn[$iface] ) ) {
 			$this->filterFcn[$iface] = [];
 		}
 
 		$this->filterFcn[$iface][] = $fcn;
-		return $this;
 	}
 
 
 	/**
 	 * Applies the filters for the item type to the item
 	 *
-	 * @param $item Item to apply the filter to
-	 * @return bool True if the item should be used, false if not
+	 * @param object $item Item to apply the filter to
+	 * @return object|null Object if the item should be used, null if not
 	 */
-	protected function filter( $item ) : bool
+	protected function filter( $item )
 	{
 		foreach( $this->filterFcn as $iface => $fcnList )
 		{
@@ -55,14 +53,14 @@ abstract class Base extends \Aimeos\MW\Common\Base
 			{
 				foreach( $fcnList as $fcn )
 				{
-					if( $fcn( $item ) === false ) {
-						return false;
+					if( $fcn( $item ) === null ) {
+						return null;
 					}
 				}
 			}
 		}
 
-		return true;
+		return $item;
 	}
 
 
