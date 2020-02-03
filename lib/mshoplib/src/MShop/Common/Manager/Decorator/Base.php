@@ -58,7 +58,7 @@ abstract class Base
 	 * @param string $iface Interface name of the item to apply the filter to
 	 * @param \Closure $fcn Anonymous function receiving the item to check as first parameter
 	 */
-	public function addFilter( string $iface, \Closure $fcn )
+	public function addFilter( $iface, \Closure $fcn )
 	{
 		$this->manager->addFilter( $iface, $fcn );
 	}
