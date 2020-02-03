@@ -238,6 +238,13 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testToConditionsInvalidStructure()
+	{
+		$this->expectException( \Aimeos\MW\Common\Exception::class );
+		$this->object->toConditions( ['&&' => ['name', 'value']] );
+	}
+
+
 	public function testToConditionsCompare()
 	{
 		$array = array(
