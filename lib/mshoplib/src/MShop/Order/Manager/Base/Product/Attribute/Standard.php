@@ -801,7 +801,10 @@ class Standard
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_base_product_attribute.value', $row['order.base.product.attribute.id'], $config );
 						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
-					$items[(string) $row['order.base.product.attribute.id']] = $this->createItemBase( $row );
+
+					if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+						$items[$row['order.base.product.attribute.id']] = $item;
+					}
 				}
 			}
 			catch( \Exception $e )

@@ -244,7 +244,9 @@ abstract class Base
 					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
-				$items[(string) $row[$this->prefix . 'id']] = $this->createItemBase( $row );
+				if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+					$items[$row[$this->prefix . 'id']] = $item;
+				}
 			}
 
 			$dbm->release( $conn, $dbname );

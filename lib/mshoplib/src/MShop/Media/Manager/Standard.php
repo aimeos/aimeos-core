@@ -709,7 +709,7 @@ class Standard
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_media.config', $row['media.id'], $config );
 					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
-				$map[(string) $row['media.id']] = $row;
+				$map[$row['media.id']] = $row;
 			}
 
 			$dbm->release( $conn, $dbname );

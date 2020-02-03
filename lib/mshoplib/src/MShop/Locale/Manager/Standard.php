@@ -214,8 +214,11 @@ class Standard
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		foreach( $this->search( $search, $ref, $total ) as $row ) {
-			$items[(string) $row['locale.id']] = $this->createItemBase( $row );
+		foreach( $this->search( $search, $ref, $total ) as $row )
+		{
+			if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+				$items[$row['locale.id']] = $item;
+			}
 		}
 
 		return map( $items );

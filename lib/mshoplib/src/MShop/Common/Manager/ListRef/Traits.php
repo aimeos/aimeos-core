@@ -45,6 +45,15 @@ trait Traits
 
 
 	/**
+	 * Applies the filters for the item type to the item
+	 *
+	 * @param object $item Item to apply the filter to
+	 * @return object|null Object if the item should be used, null if not
+	 */
+	abstract protected function filter( $item );
+
+
+	/**
 	 * Returns the context object.
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context object
@@ -99,7 +108,9 @@ trait Traits
 			$localItems = ( isset( $local[$id] ) ? $local[$id] : [] );
 			$localItems2 = ( isset( $local2[$id] ) ? $local2[$id] : [] );
 
-			$items[$id] = $this->createItemBase( $values, $listItems, $refItems, $localItems, $localItems2 );
+			if( $item = $this->filter( $this->createItemBase( $values, $listItems, $refItems, $localItems, $localItems2 ) ) ) {
+				$items[$id] = $item;
+			}
 		}
 
 		return map( $items );

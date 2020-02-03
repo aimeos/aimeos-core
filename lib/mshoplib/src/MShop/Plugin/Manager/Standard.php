@@ -642,7 +642,9 @@ class Standard
 					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
-				$items[(string) $row['plugin.id']] = $this->createItemBase( $row );
+				if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+					$items[$row['plugin.id']] = $item;
+				}
 			}
 
 			$dbm->release( $conn, $dbname );

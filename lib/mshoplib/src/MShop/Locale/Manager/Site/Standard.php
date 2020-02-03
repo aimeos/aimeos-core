@@ -666,7 +666,9 @@ class Standard
 						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
 
-					$items[(string) $row['locale.site.id']] = $this->createItemBase( $row );
+					if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+						$items[$row['locale.site.id']] = $item;
+					}
 				}
 			}
 			catch( \Exception $e )

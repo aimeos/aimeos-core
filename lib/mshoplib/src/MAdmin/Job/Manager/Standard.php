@@ -559,7 +559,9 @@ class Standard
 					$logger->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
-				$items[(string) $row['job.id']] = $this->createItemBase( $row );
+				if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+					$items[$row['job.id']] = $item;
+				}
 			}
 
 			$dbm->release( $conn, $dbname );

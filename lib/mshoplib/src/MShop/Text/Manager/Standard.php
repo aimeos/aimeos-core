@@ -648,7 +648,7 @@ class Standard
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== null ) {
-				$map[(string) $row['text.id']] = $row;
+				$map[$row['text.id']] = $row;
 			}
 
 			$dbm->release( $conn, $dbname );

@@ -24,7 +24,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 
 	private $searchConfig;
-	private $filter = [];
 	private $treeManagers = [];
 
 
@@ -38,31 +37,6 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		parent::__construct( $context );
 
 		$this->searchConfig = $searchConfig;
-	}
-
-
-	/**
-	 * Registers a new item filter for the given name
-	 *
-	 * To prevent catalog items to be added to the tree, you can register a
-	 * closure function that checks if the item should be part of the category
-	 * tree or not. The function signature must be:
-	 *
-	 * function( \Aimeos\MShop\Common\Item\ListRef\Iface $item, $index )
-	 *
-	 * It must accept an item implementing the list reference interface and the
-	 * index of the category in the list starting from 0. Its return value must
-	 * be a boolean value of "true" if the category item should be added to the
-	 * tree and "false" if not.
-	 *
-	 * @param string $name Filter name
-	 * @param \Closure $fcn Callback function
-	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
-	 */
-	public function registerItemFilter( string $name, \Closure $fcn )
-	{
-		$this->filter[$name] = $fcn;
-		return $this;
 	}
 
 
@@ -108,7 +82,9 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 				$refItems = $refItemMap[$id];
 			}
 
-			$items[$id] = $this->createItemBase( [], $listItems, $refItems, [], $node );
+			if( $item = $this->filter( $this->createItemBase( [], $listItems, $refItems, [], $node ) ) ) {
+				$items[$id] = $item;
+			}
 		}
 
 		return map( $items );
@@ -171,14 +147,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 				$refItems = $refItemMap[$child->getId()];
 			}
 
-			$newItem = $this->createItemBase( [], $listItems, $refItems, [], $child );
-
-			$result = true;
-			foreach( $this->filter as $fcn ) {
-				$result = $result && $fcn( $newItem, $idx );
-			}
-
-			if( $result === true )
+			if( $newItem = $this->filter( $this->createItemBase( [], $listItems, $refItems, [], $child ) ) )
 			{
 				$item->addChild( $newItem );
 				$this->createTree( $child, $newItem, $listItemMap, $refItemMap );

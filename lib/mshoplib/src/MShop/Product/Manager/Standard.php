@@ -784,7 +784,7 @@ class Standard
 					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
-				$map[(string) $row['product.id']] = $row;
+				$map[$row['product.id']] = $row;
 			}
 
 			$dbm->release( $conn, $dbname );

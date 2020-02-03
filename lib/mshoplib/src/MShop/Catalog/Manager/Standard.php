@@ -800,10 +800,11 @@ class Standard extends Base
 				$refItems = $refItemMap[$nodeid];
 			}
 
-			$item = $this->createItemBase( [], $listItems, $refItems, [], $node );
-			$this->createTree( $node, $item, $listItemMap, $refItemMap );
-
-			return $item;
+			if( $item = $this->filter( $this->createItemBase( [], $listItems, $refItems, [], $node ) ) )
+			{
+				$this->createTree( $node, $item, $listItemMap, $refItemMap );
+				return $item;
+			}
 		}
 
 		throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'No catalog node for ID "%1$s"', $id ) );

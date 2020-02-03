@@ -742,8 +742,11 @@ class Standard
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== null ) {
-				$items[(string) $row['order.status.id']] = $this->createItemBase( $row );
+			while( ( $row = $results->fetch() ) !== null )
+			{
+				if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+					$items[$row['order.status.id']] = $item;
+				}
 			}
 
 			$dbm->release( $conn, $dbname );

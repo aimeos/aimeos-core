@@ -53,6 +53,18 @@ abstract class Base
 
 
 	/**
+	 * Adds a filter callback for an item type
+	 *
+	 * @param string $iface Interface name of the item to apply the filter to
+	 * @param \Closure $fcn Anonymous function receiving the item to check as first parameter
+	 */
+	public function addFilter( string $iface, \Closure $fcn )
+	{
+		$this->manager->addFilter( $iface, $fcn );
+	}
+
+
+	/**
 	 * Removes old entries from the storage
 	 *
 	 * @param string[] $siteids List of IDs for sites Whose entries should be deleted

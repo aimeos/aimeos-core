@@ -75,17 +75,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testRegisterItemFilter()
-	{
-		$callback = function( \Aimeos\MShop\Common\Item\ListRef\Iface $item, $index ) {
-			return true;
-		};
-
-		$result = $this->object->registerItemFilter( 'test', $callback );
-		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Manager\Iface::class, $result );
-	}
-
-
 	public function testSearchItems()
 	{
 		$item = $this->object->findItem( 'cafe', ['product'] );
@@ -253,20 +242,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetTreeWithFilter()
 	{
-		$this->assertEquals( 2, count( $this->object->getTree()->getChildren() ) );
+		$index = 1;
+		$this->object->addFilter( \Aimeos\MShop\Common\Item\ListRef\Iface::class, function( $item ) use ( &$index ) {
+			return $index++ % 2 ? $item : null;
+		} );
 
-		$callback = function( \Aimeos\MShop\Common\Item\ListRef\Iface $item, $index )
-		{
-			return (bool) $index % 2;
-		};
-
-		$this->object->registerItemFilter( 'test', $callback );
 		$tree = $this->object->getTree();
+		$groupItem = $tree->getChild( 0 );
 
-		$rootItem = $this->object->getTree();
 		$this->assertEquals( 1, count( $tree->getChildren() ) );
-
-		$groupItem = $rootItem->getChild( 0 );
 		$this->assertEquals( 'Groups', $groupItem->getLabel() );
 		$this->assertEquals( 1, count( $groupItem->getChildren() ) );
 		$this->assertEquals( 'Internet', $groupItem->getChild( 0 )->getLabel() );

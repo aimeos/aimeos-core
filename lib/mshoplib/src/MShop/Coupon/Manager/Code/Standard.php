@@ -725,8 +725,11 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== null ) {
-					$items[(string) $row['coupon.code.id']] = $this->createItemBase( $row );
+				while( ( $row = $results->fetch() ) !== null )
+				{
+					if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+						$items[$row['coupon.code.id']] = $item;
+					}
 				}
 			}
 			catch( \Exception $e )

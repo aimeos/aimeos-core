@@ -21,6 +21,15 @@ namespace Aimeos\MShop\Common\Manager;
 interface Iface
 {
 	/**
+	 * Adds a filter callback for an item type
+	 *
+	 * @param string $iface Interface name of the item to apply the filter to
+	 * @param \Closure $fcn Anonymous function receiving the item to check as first parameter
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function addFilter( string $iface, \Closure $fcn );
+
+	/**
 	 * Removes old entries from the storage
 	 *
 	 * @param string[] $siteids List of IDs for sites Whose entries should be deleted

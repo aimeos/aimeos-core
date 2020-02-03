@@ -456,8 +456,11 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== null ) {
-					$items[(string) $row['locale.currency.id']] = $this->createItemBase( $row );
+				while( ( $row = $results->fetch() ) !== null )
+				{
+					if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+						$items[$row['locale.currency.id']] = $item;
+					}
 				}
 			}
 			catch( \Exception $e )

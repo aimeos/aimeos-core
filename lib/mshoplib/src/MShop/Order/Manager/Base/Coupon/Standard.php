@@ -760,8 +760,11 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== null ) {
-					$items[(string) $row['order.base.coupon.id']] = $this->createItemBase( $row );
+				while( ( $row = $results->fetch() ) !== null )
+				{
+					if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+						$items[$row['order.base.coupon.id']] = $item;
+					}
 				}
 			}
 			catch( \Exception $e )

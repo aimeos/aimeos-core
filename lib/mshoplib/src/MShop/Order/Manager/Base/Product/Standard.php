@@ -1028,8 +1028,9 @@ class Standard
 
 		foreach( $items as $id => $row )
 		{
-			$attrList = ( isset( $attributes[$id] ) ? $attributes[$id] : [] );
-			$result[$id] = $this->createItemBase( $row['price'], $row['item'], $attrList );
+			if( $item = $this->filter( $this->createItemBase( $row['price'], $row['item'], $attributes[$id] ?? [] ) ) ) {
+				$result[$id] = $item;
+			}
 		}
 
 		return map( $result );

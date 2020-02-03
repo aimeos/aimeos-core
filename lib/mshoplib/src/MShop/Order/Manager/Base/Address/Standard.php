@@ -935,8 +935,11 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== null ) {
-					$items[(string) $row['order.base.address.id']] = $this->createItemBase( $row );
+				while( ( $row = $results->fetch() ) !== null )
+				{
+					if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+						$items[$row['order.base.address.id']] = $item;
+					}
 				}
 			}
 			catch( \Exception $e )

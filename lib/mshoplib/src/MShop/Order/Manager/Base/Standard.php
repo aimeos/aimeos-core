@@ -1067,25 +1067,17 @@ class Standard extends Base
 		foreach( $map as $id => $list )
 		{
 			list( $price, $locale, $row ) = $list;
-			$addresses = $coupons = $products = $services = [];
 
-			if( isset( $addressMap[$id] ) ) {
-				$addresses = $addressMap[$id];
+			$addresses = $addressMap[$id] ?? [];
+			$coupons = $couponMap[$id] ?? [];
+			$products = $productMap[$id] ?? [];
+			$services = $serviceMap[$id] ?? [];
+
+			$item = $this->createItemBase( $price, $locale, $row, $products, $addresses, $services, $coupons );
+
+			if( $item = $this->filter( $item ) ) {
+				$items[$id] = $item;
 			}
-
-			if( isset( $couponMap[$id] ) ) {
-				$coupons = $couponMap[$id];
-			}
-
-			if( isset( $productMap[$id] ) ) {
-				$products = $productMap[$id];
-			}
-
-			if( isset( $serviceMap[$id] ) ) {
-				$services = $serviceMap[$id];
-			}
-
-			$items[$id] = $this->createItemBase( $price, $locale, $row, $products, $addresses, $services, $coupons );
 		}
 
 		return map( $items );

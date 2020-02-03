@@ -556,8 +556,11 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== null ) {
-				$items[(string) $row['customer.group.id']] = $this->createItemBase( $row );
+			while( ( $row = $results->fetch() ) !== null )
+			{
+				if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+					$items[$row['customer.group.id']] = $item;
+				}
 			}
 
 			$dbm->release( $conn, $dbname );

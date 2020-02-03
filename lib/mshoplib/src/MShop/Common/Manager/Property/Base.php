@@ -220,8 +220,11 @@ abstract class Base
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== null ) {
-				$items[(string) $row[$this->prefix . 'id']] = $this->createItemBase( $row );
+			while( ( $row = $results->fetch() ) !== null )
+			{
+				if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+					$items[$row[$this->prefix . 'id']] = $item;
+				}
 			}
 
 			$dbm->release( $conn, $dbname );

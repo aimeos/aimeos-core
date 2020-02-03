@@ -590,8 +590,11 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== null ) {
-				$items[(string) $row['tag.id']] = $this->createItemBase( $row );
+			while( ( $row = $results->fetch() ) !== null )
+			{
+				if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+					$items[$row['tag.id']] = $item;
+				}
 			}
 
 			$dbm->release( $conn, $dbname );

@@ -717,8 +717,11 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== null ) {
-					$items[(string) $row['subscription.id']] = $this->createItemBase( $row );
+				while( ( $row = $results->fetch() ) !== null )
+				{
+					if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+						$items[$row['subscription.id']] = $item;
+					}
 				}
 			}
 			catch( \Exception $e )
