@@ -145,10 +145,10 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid combine condition array "%1$s"', json_encode( $entry ) ) );
 			}
 
-			if( in_array( $op, $operators['combine'] ) ) {
+			if( in_array( $op, $operators['combine'], true ) ) {
 				$results[] = $this->createCombineExpression( $op, (array) $entry[$op] );
 			}
-			else if( in_array( $op, $operators['compare'] ) ) {
+			else if( in_array( $op, $operators['compare'], true ) ) {
 				$results[] = $this->createCompareExpression( $op, (array) $entry[$op] );
 			}
 			else {
