@@ -34,8 +34,8 @@ class Standard
 		),
 		'index.text:url' => array(
 			'code' => 'index.text:url()',
-			'internalcode' => ':site AND mindte."langid" = $1 AND mindte."url"',
-			'label' => 'Product URL by language, parameter(<language ID>)',
+			'internalcode' => ':site AND mindte."url"',
+			'label' => 'Product URL',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
