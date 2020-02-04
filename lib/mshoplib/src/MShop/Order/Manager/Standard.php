@@ -666,7 +666,7 @@ class Standard
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
-		$items = [];
+		$map = $items = $baseItems = [];
 
 		try
 		{
@@ -821,11 +821,8 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== null )
-				{
-					if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
-						$items[$row['order.id']] = $item;
-					}
+				while( ( $row = $results->fetch() ) !== null ) {
+					$map[$row['order.id']] = $row;
 				}
 			}
 			catch( \Exception $e )
@@ -840,6 +837,29 @@ class Standard
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
+		}
+
+
+		if( in_array( 'order/base', $ref ) )
+		{
+			$ids = [];
+			foreach( $map as $row ) {
+				$ids[] = $row['order.baseid'];
+			}
+
+			$manager = $this->getObject()->getSubManager( 'base' );
+			$search = $manager->createSearch()->setSlice( 0, count( $ids ) );
+			$search->setConditions( $search->compare( '==', 'order.base.id', $ids ) );
+			$baseItems = $manager->searchItems( $search, $ref );
+		}
+
+		foreach( $map as $id => $row )
+		{
+			$baseItem = $baseItems[$row['order.baseid']] ?? null;
+
+			if( $item = $this->filter( $this->createItemBase( $row, $baseItem ) ) ) {
+				$items[$id] = $item;
+			}
 		}
 
 		return map( $items );
@@ -893,10 +913,11 @@ class Standard
 	 * Creates a new order item.
 	 *
 	 * @param array $values List of attributes for order item
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface|null $baseItem Order basket if requested and available
 	 * @return \Aimeos\MShop\Order\Item\Iface New order item
 	 */
-	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Order\Item\Iface
+	protected function createItemBase( array $values = [], \Aimeos\MShop\Order\Item\Base\Iface $baseItem = null ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return new \Aimeos\MShop\Order\Item\Standard( $values );
+		return new \Aimeos\MShop\Order\Item\Standard( $values, $baseItem );
 	}
 }

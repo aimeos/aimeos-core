@@ -469,16 +469,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
+	}
 
 
-		$search = $this->object->createSearch();
+	public function testSearchItemsTotal()
+	{
+		$total = 0;
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice( 0, 1 );
-		$total = 0;
 		$items = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $items ) );
@@ -487,6 +489,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		foreach( $items as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+	}
+
+
+	public function testSearchItemsRef()
+	{
+		$total = 0;
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$conditions = array(
+			$search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ),
+			$search->compare( '==', 'order.editor', $this->editor )
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$item = $this->object->searchItems( $search, ['order/base', 'order/base/product'], $total )->first();
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $item->getBaseItem() );
+		$this->assertEquals( 4, count( $item->getBaseItem()->getProducts() ) );
 	}
 
 

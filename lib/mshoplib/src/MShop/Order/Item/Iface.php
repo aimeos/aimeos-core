@@ -21,6 +21,13 @@ namespace Aimeos\MShop\Order\Item;
 interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
+	 * Returns the associated order base item
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface|null Order base item
+	 */
+	public function getBaseItem() : ?\Aimeos\MShop\Order\Item\Base\Iface;
+
+	/**
 	 * Returns the basic order ID.
 	 *
 	 * @return string|null Basic order ID

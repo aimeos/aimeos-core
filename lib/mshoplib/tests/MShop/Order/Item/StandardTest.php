@@ -33,13 +33,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Order\Item\Standard( $this->values );
+		$baseItem = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base' )->createItem();
+		$this->object = new \Aimeos\MShop\Order\Item\Standard( $this->values, $baseItem );
 	}
 
 
 	protected function tearDown() : void
 	{
 		unset( $this->object );
+	}
+
+
+	public function testGetBaseItem()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $this->object->getBaseItem() );
+		$this->assertNull( (new \Aimeos\MShop\Order\Item\Standard( $this->values ))->getBaseItem() );
 	}
 
 
