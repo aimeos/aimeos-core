@@ -47,7 +47,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetBaseItem()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $this->object->getBaseItem() );
-		$this->assertNull( (new \Aimeos\MShop\Order\Item\Standard( $this->values ))->getBaseItem() );
+		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Standard( $this->values ) )->getBaseItem() );
 	}
 
 
