@@ -33,8 +33,8 @@ class Standard
 		),
 		'index.catalog:position' => array(
 			'code' => 'index.catalog:position()',
-			'internalcode' => ':site AND mindca."catid" IN ( $2 ) AND mindca."listtype" = $1 AND mindca."pos"',
-			'label' => 'Product position in category, parameter(<list type code>,<category IDs>)',
+			'internalcode' => ':site :catid :listtype AND mindca."pos"',
+			'label' => 'Product position in category, parameter([<list type code>,[<category IDs>]])',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -42,7 +42,7 @@ class Standard
 		'sort:index.catalog:position' => array(
 			'code' => 'sort:index.catalog:position()',
 			'internalcode' => 'mindca."pos"',
-			'label' => 'Sort product position in category, parameter(<list type code>,<category IDs>)',
+			'label' => 'Sort product position in category, parameter([<list type code>,[<category IDs>]])',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -64,9 +64,14 @@ class Standard
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
 
-		$name = 'index.catalog:position';
-		$expr = $this->getSiteString( 'mindca."siteid"', $level );
-		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
+		$this->searchConfig['index.catalog:position']['function'] = function( &$source, array $params ) use ( $level ) {
+
+			$source = str_replace( ':listtype', isset( $params[0] ) ? 'AND mindca."listtype" = $1' : '', $source );
+			$source = str_replace( ':catid', isset( $params[1] ) ? 'AND mindca."catid" IN ( $2 )' : '', $source );
+			$source = str_replace( ':site', $this->getSiteString( 'mindca."siteid"', $level ), $source );
+
+			return $params;
+		};
 	}
 
 
