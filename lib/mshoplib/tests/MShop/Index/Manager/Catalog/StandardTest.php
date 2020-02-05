@@ -159,6 +159,34 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSearchItemsPositionNoCatid()
+	{
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
+		$id = $catalogManager->findItem( 'cafe' )->getId();
+
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion'] ), 0 ) );
+		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion'] ) )] );
+		$result = $this->object->searchItems( $search, [] );
+
+		$this->assertEquals( 3, count( $result ) );
+	}
+
+
+	public function testSearchItemsPositionNoParams()
+	{
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
+		$id = $catalogManager->findItem( 'cafe' )->getId();
+
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', [] ), 0 ) );
+		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', [] ) )] );
+		$result = $this->object->searchItems( $search, [] );
+
+		$this->assertEquals( 9, count( $result ) );
+	}
+
+
 	public function testCleanup()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Index\Manager\Iface::class, $this->object->cleanup( '1970-01-01 00:00:00' ) );

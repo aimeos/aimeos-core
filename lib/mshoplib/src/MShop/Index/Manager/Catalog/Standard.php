@@ -33,7 +33,7 @@ class Standard
 		),
 		'index.catalog:position' => array(
 			'code' => 'index.catalog:position()',
-			'internalcode' => ':site :catid :listtype AND mindca."pos"',
+			'internalcode' => ':site :catid :listtype mindca."pos"',
 			'label' => 'Product position in category, parameter([<list type code>,[<category IDs>]])',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -66,9 +66,9 @@ class Standard
 
 		$this->searchConfig['index.catalog:position']['function'] = function( &$source, array $params ) use ( $level ) {
 
-			$source = str_replace( ':listtype', isset( $params[0] ) ? 'AND mindca."listtype" = $1' : '', $source );
-			$source = str_replace( ':catid', isset( $params[1] ) ? 'AND mindca."catid" IN ( $2 )' : '', $source );
-			$source = str_replace( ':site', $this->getSiteString( 'mindca."siteid"', $level ), $source );
+			$source = str_replace( ':listtype', isset( $params[0] ) ? 'mindca."listtype" = $1 AND' : '', $source );
+			$source = str_replace( ':catid', isset( $params[1] ) ? 'mindca."catid" IN ( $2 ) AND' : '', $source );
+			$source = str_replace( ':site', $this->getSiteString( 'mindca."siteid"', $level ) . 'AND', $source );
 
 			return $params;
 		};
