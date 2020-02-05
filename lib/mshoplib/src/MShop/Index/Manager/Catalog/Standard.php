@@ -33,8 +33,8 @@ class Standard
 		),
 		'index.catalog:position' => array(
 			'code' => 'index.catalog:position()',
-			'internalcode' => ':site AND mindca."catid" IN ( $2 ) AND mindca."listtype" = $1 AND mindca."pos"',
-			'label' => 'Product position in category, parameter(<list type code>,<category IDs>)',
+			'internalcode' => ':site :catid :listtype mindca."pos"',
+			'label' => 'Product position in category, parameter([<list type code>,[<category IDs>]])',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -42,7 +42,7 @@ class Standard
 		'sort:index.catalog:position' => array(
 			'code' => 'sort:index.catalog:position()',
 			'internalcode' => 'mindca."pos"',
-			'label' => 'Sort product position in category, parameter(<list type code>,<category IDs>)',
+			'label' => 'Sort product position in category, parameter([<list type code>,[<category IDs>]])',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -61,14 +61,20 @@ class Standard
 	{
 		parent::__construct( $context );
 
-		$locale = $context->getLocale();
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
 
-		$name = 'index.catalog:position';
-		$siteIds = $this->getSiteIds( $level );
-		$expr = $siteIds ? $this->toExpression( 'mindca."siteid"', $siteIds ) : '1=1';
-		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
+		$this->searchConfig['index.catalog:position']['function'] = function( &$source, array $params ) use ( $level ) {
+
+			$siteIds = $this->getSiteIds( $level );
+			$expr = $siteIds ? $this->toExpression( 'mindca."siteid"', $siteIds ) : '1=1';
+
+			$source = str_replace( ':listtype', isset( $params[0] ) ? 'mindca."listtype" = $1 AND' : '', $source );
+			$source = str_replace( ':catid', isset( $params[1] ) ? 'mindca."catid" IN ( $2 ) AND' : '', $source );
+			$source = str_replace( ':site', $expr . ' AND', $source );
+
+			return $params;
+		};
 	}
 
 
