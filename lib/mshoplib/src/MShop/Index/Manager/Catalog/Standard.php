@@ -68,7 +68,7 @@ class Standard
 
 			$source = str_replace( ':listtype', isset( $params[0] ) ? 'mindca."listtype" = $1 AND' : '', $source );
 			$source = str_replace( ':catid', isset( $params[1] ) ? 'mindca."catid" IN ( $2 ) AND' : '', $source );
-			$source = str_replace( ':site', $this->getSiteString( 'mindca."siteid"', $level ) . 'AND', $source );
+			$source = str_replace( ':site', $this->getSiteString( 'mindca."siteid"', $level ) . ' AND', $source );
 
 			return $params;
 		};
