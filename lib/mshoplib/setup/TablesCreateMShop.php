@@ -142,7 +142,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 	 * @param array $files Associative list of resource names as keys and file paths as values
 	 * @param boolean $clean True to remove left over columns or indexes, false to keep them untouched
 	 */
-	protected function setupSchema( array $files, $clean = false )
+	protected function setupSchema( array $files, $clean = true )
 	{
 		foreach( $files as $rname => $relpath )
 		{
@@ -265,13 +265,17 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 
 			if( isset( $list['exclude'] ) )
 			{
-				foreach( $schemaDiff->changedTables as $tableDiff )
+				foreach( $schemaDiff->changedTables as $table => $tableDiff )
 				{
 					foreach( $tableDiff->removedIndexes as $idx => $index )
 					{
 						if( in_array( $index->getName(), $list['exclude'] ) ) {
 							unset( $tableDiff->removedIndexes[$idx] );
 						}
+					}
+
+					if( in_array( $table, $list['exclude'] ) ) {
+						$tableDiff->removedColumns = [];
 					}
 				}
 			}
