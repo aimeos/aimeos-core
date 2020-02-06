@@ -168,7 +168,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 				$tables = ( $dbalManager->tablesExist( [$name] ) ? [$dbalManager->listTableDetails( $name )] : [] );
 				$tableSchema = new \Doctrine\DBAL\Schema\Schema( $tables, [], $config );
 				$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $tableSchema, $dbalschema );
-				$stmts = $this->exclude( $schemaDiff, $relpath )->toSaveSql( $platform );
+				$stmts = $this->remove( $this->exclude( $schemaDiff, $relpath ), $clean )->toSaveSql( $platform );
 
 				$this->executeList( $stmts, $rname );
 				$this->status( !empty( $stmts ) ? 'done' : 'OK' );
@@ -184,7 +184,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 
 					$seqSchema = new \Doctrine\DBAL\Schema\Schema( [], $sequences, $config );
 					$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $seqSchema, $dbalschema );
-					$stmts = $schemaDiff->toSaveSql( $platform );
+					$stmts = $this->remove( $schemaDiff, $clean )->toSaveSql( $platform );
 
 					$this->executeList( $stmts, $rname );
 					$this->status( !empty( $stmts ) ? 'done' : 'OK' );
