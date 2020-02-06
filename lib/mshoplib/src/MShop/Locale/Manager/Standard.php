@@ -638,10 +638,12 @@ class Standard
 		$search->setSortations( array( $search->sort( '+', 'locale.position' ) ) );
 		$result = $this->search( $search );
 
+		$langIds = strlen( $lang ) > 2 ? [$lang, substr( $lang, 0, 2 )] : [$lang];
+
 		// Try to find first item where site and language matches
 		foreach( $result as $row )
 		{
-			if( $row['locale.siteid'] == $siteId && $row['locale.languageid'] == $lang ) {
+			if( $row['locale.siteid'] === $siteId && in_array( $row['locale.languageid'], $langIds, true ) ) {
 				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
 			}
 		}
@@ -649,7 +651,7 @@ class Standard
 		// Try to find first item where language matches
 		foreach( $result as $row )
 		{
-			if( $row['locale.languageid'] == $lang )
+			if( in_array( $row['locale.languageid'], $langIds, true ) )
 			{
 				$row['locale.siteid'] = $siteId;
 				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );

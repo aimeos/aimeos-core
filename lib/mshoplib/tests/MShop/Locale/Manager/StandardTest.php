@@ -95,6 +95,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testBootstrapClosestLangidWithCountry()
+	{
+		$item = $this->object->bootstrap( 'unittest', 'de_DE', 'CHF', false );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Iface::class, $item );
+		$this->assertEquals( 'de', $item->getLanguageId() );
+		$this->assertEquals( 'EUR', $item->getCurrencyId() );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSite() );
+		$this->assertEquals( 'unittest', $item->getSite()->getCode() );
+		$this->assertEquals( 1, count( $item->getSitePath() ) );
+	}
+
+
 	public function testBootstrapClosestSiteid()
 	{
 		$item = $this->object->bootstrap( 'unittest', 'it', 'CHF', false );
