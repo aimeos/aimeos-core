@@ -41,7 +41,7 @@ interface Iface
 	 * @param string|null $id New Language ID of the property item
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface Common property item for chaining method calls
 	 */
-	public function setLanguageId( string $id = null ) : \Aimeos\MShop\Common\Item\Property\Iface;
+	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Common\Item\Property\Iface;
 
 	/**
 	 * Returns the value of the property item.

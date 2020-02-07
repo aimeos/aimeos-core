@@ -59,5 +59,5 @@ interface Iface
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Item referenced by the list item or null for no reference
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setRefItem( \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\Lists\Iface;
+	public function setRefItem( ?\Aimeos\MShop\Common\Item\Iface $refItem ) : \Aimeos\MShop\Common\Item\Lists\Iface;
 }

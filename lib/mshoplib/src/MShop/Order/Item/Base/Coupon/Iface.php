@@ -33,7 +33,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string|null $baseid Order base ID.
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
-	public function setBaseId( string $baseid = null ) : \Aimeos\MShop\Order\Item\Base\Coupon\Iface;
+	public function setBaseId( ?string $baseid ) : \Aimeos\MShop\Order\Item\Base\Coupon\Iface;
 
 	/**
 	 *	Returns the product id of the ordered product.

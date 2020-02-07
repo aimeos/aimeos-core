@@ -349,7 +349,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param float|null $value Longitude coordinate as decimal value or null
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setLongitude( float $value = null ) : \Aimeos\MShop\Common\Item\Address\Iface;
+	public function setLongitude( ?float $value ) : \Aimeos\MShop\Common\Item\Address\Iface;
 
 
 	/**
@@ -366,5 +366,5 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param float|null $value Latitude coordinate as decimal value or null
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setLatitude( float $value = null ) : \Aimeos\MShop\Common\Item\Address\Iface;
+	public function setLatitude( ?float $value ) : \Aimeos\MShop\Common\Item\Address\Iface;
 }

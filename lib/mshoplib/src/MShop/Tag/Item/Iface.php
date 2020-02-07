@@ -35,7 +35,7 @@ interface Iface
 	 * @param string|null $id New Language ID of the tag item
 	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
-	public function setLanguageId( string $id = null ) : \Aimeos\MShop\Tag\Item\Iface;
+	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Tag\Item\Iface;
 
 	/**
 	 * Returns the label of the tag item.

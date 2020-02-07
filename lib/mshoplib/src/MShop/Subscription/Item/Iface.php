@@ -93,7 +93,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string|null $date ISO date in "YYYY-MM-DD HH:mm:ss" format
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setDateEnd( string $date = null ) : \Aimeos\MShop\Subscription\Item\Iface;
+	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Subscription\Item\Iface;
 
 	/**
 	 * Returns the time interval to pass between the subscription renewals
@@ -153,7 +153,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param int|null Reason code or NULL for no reason
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setReason( int $status = null ) : \Aimeos\MShop\Subscription\Item\Iface;
+	public function setReason( ?int $status ) : \Aimeos\MShop\Subscription\Item\Iface;
 
 	/**
 	 * Returns the status of the subscriptions

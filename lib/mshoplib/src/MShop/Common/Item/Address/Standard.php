@@ -55,7 +55,7 @@ class Standard
 	 * @param string|null $parentid New customer ID of the address
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
-	public function setParentId( string $parentid = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setParentId( ?string $parentid ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( $this->prefix . 'parentid', $parentid );
 	}

@@ -50,7 +50,7 @@ interface Iface
 	/**
 	 * Sets the new number of tries the code is valid.
 	 *
-	 * @param string|int|null $count Number of tries or null for unlimited
+	 * @param int|null $count Number of tries or null for unlimited
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
 	public function setCount( $count = null ) : \Aimeos\MShop\Coupon\Item\Code\Iface;

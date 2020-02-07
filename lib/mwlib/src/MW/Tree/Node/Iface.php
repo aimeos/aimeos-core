@@ -67,7 +67,7 @@ interface Iface
 	 * @param mixed|null $id Unique ID of the node
 	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
-	public function setId( string $id = null ) : Iface;
+	public function setId( ?string $id ) : Iface;
 
 	/**
 	 * Returns the name of the node.

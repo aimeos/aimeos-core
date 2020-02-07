@@ -39,7 +39,7 @@ class Standard
 	 * @param string|null $key Id to set
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
-	public function setId( string $key = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $key ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return parent::setId( $this->checkLanguageId( $key ) );
 	}

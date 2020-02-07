@@ -55,7 +55,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setDateDelivery( string $date = null ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setDateDelivery( ?string $date ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Returns the payment date of the invoice.
@@ -70,7 +70,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setDatePayment( string $date = null ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setDatePayment( ?string $date ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Returns the delivery status of the invoice.
@@ -115,6 +115,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @param string|null $id Related invoice ID
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setRelatedId( string $id = null ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setRelatedId( ?string $id ) : \Aimeos\MShop\Order\Item\Iface;
 
 }

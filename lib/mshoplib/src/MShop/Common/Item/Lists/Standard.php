@@ -64,7 +64,7 @@ class Standard
 	 * @param string|null $parentid New parent ID of the common list item
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setParentId( string $parentid = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setParentId( ?string $parentid ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( $this->prefix . 'parentid', $parentid );
 	}
@@ -146,7 +146,7 @@ class Standard
 	 * @param string|null $date New start date of the common list item (YYYY-MM-DD hh:mm:ss)
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setDateStart( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDateStart( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( $this->prefix . 'datestart', $this->checkDateFormat( $date ) );
 	}
@@ -169,7 +169,7 @@ class Standard
 	 * @param string|null $date New end date of the common list item (YYYY-MM-DD hh:mm:ss)
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setDateEnd( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( $this->prefix . 'dateend', $this->checkDateFormat( $date ) );
 	}
@@ -285,7 +285,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Item referenced by the list item or null for no reference
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setRefItem( \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\Lists\Iface
+	public function setRefItem( ?\Aimeos\MShop\Common\Item\Iface $refItem ) : \Aimeos\MShop\Common\Item\Lists\Iface
 	{
 		$this->refItem = $refItem;
 

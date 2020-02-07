@@ -42,7 +42,7 @@ interface Iface
 	 * @param string $baseid|null New base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setBaseId( string $baseid = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setBaseId( ?string $baseid ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the order address ID the product should be shipped to
@@ -57,7 +57,7 @@ interface Iface
 	 * @param string|null $value Order address ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setOrderAddressId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setOrderAddressId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the parent ID of the ordered product if there is one.
@@ -74,7 +74,7 @@ interface Iface
 	 * @param string|null $value Order product ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setOrderProductId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setOrderProductId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the supplier code.
@@ -104,7 +104,7 @@ interface Iface
 	 * @param int|null $value Product position in the order from 0-n or null for resetting the position
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setPosition( int $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setPosition( ?int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the product ID the customer has selected.

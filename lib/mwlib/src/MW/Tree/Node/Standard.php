@@ -120,7 +120,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 * @param mixed|null $id Unique ID of the node
 	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
-	public function setId( string $id = null ) : Iface
+	public function setId( ?string $id ) : Iface
 	{
 		$this->values['id'] = $id;
 		$this->modified = ( $id === null ? true : false );

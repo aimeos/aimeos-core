@@ -73,7 +73,7 @@ class Standard extends Base implements Iface
 	 * @param string|null $value New order base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setBaseId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setBaseId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		return $this->set( 'order.base.product.baseid', $value );
 	}
@@ -96,7 +96,7 @@ class Standard extends Base implements Iface
 	 * @param string|null $value Order address ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setOrderAddressId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setOrderAddressId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		return $this->set( 'order.base.product.orderaddressid', ( $value !== null ? $value : null ) );
 	}
@@ -121,7 +121,7 @@ class Standard extends Base implements Iface
 	 * @param string|null $value Order product ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setOrderProductId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setOrderProductId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		return $this->set( 'order.base.product.orderproductid', ( $value !== null ? $value : null ) );
 	}
@@ -425,7 +425,7 @@ class Standard extends Base implements Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 * @throws \Aimeos\MShop\Order\Exception If the position is invalid
 	 */
-	public function setPosition( int $value = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setPosition( ?int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		if( $value < 0 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order product position "%1$s" must be greater than 0', $value ) );

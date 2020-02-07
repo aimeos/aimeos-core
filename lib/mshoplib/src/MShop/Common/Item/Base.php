@@ -203,7 +203,7 @@ abstract class Base
 	 * @param string|null $id ID of the item
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function setId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$key = $this->prefix . 'id';
 
@@ -371,7 +371,7 @@ abstract class Base
 	 * @param string|null $new New ID which should be set in the item
 	 * @return string|null Value of the new ID
 	 */
-	public static function checkId( string $old = null, string $new = null ) : ?string
+	public static function checkId( ?string $old, ?string $new ) : ?string
 	{
 		return ( $new !== null ? (string) $new : $new );
 	}
@@ -384,7 +384,7 @@ abstract class Base
 	 * @return string|null Clean date or null for no date
 	 * @throws \Aimeos\MShop\Exception If the date is invalid
 	 */
-	protected function checkDateFormat( string $date = null ) : ?string
+	protected function checkDateFormat( ?string $date ) : ?string
 	{
 		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9](( |T)[0-2][0-9]:[0-5][0-9](:[0-5][0-9])?)?$/';
 
@@ -435,7 +435,7 @@ abstract class Base
 	 * @return string|null Two letter ISO country ID or null for no country
 	 * @throws \Aimeos\MShop\Exception If the country ID is invalid
 	 */
-	protected function checkCountryId( string $countryid = null, bool $null = true ) : ?string
+	protected function checkCountryId( ?string $countryid, bool $null = true ) : ?string
 	{
 		if( $null === false && $countryid == null ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO country code "%1$s"', '<null>' ) );
@@ -462,7 +462,7 @@ abstract class Base
 	 * @return string|null Three letter ISO currency ID or null for no currency
 	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 */
-	protected function checkCurrencyId( string $currencyid = null, bool $null = true ) : ?string
+	protected function checkCurrencyId( ?string $currencyid, bool $null = true ) : ?string
 	{
 		if( $null === false && $currencyid == null ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code "%1$s"', '<null>' ) );
@@ -489,7 +489,7 @@ abstract class Base
 	 * @return string|null ISO language ID or null for no language
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
-	protected function checkLanguageId( string $langid = null, bool $null = true ) : ?string
+	protected function checkLanguageId( ?string $langid, bool $null = true ) : ?string
 	{
 		if( $null === false && $langid == null ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO language code "%1$s"', '<null>' ) );

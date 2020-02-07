@@ -46,7 +46,7 @@ interface Iface
 	/**
 	 * Sets the stock level.
 	 *
-	 * @param string|int|double|null $stocklevel New stock level
+	 * @param int|null $stocklevel New stock level
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
 	 */
 	public function setStockLevel( $stocklevel = null ) : \Aimeos\MShop\Stock\Item\Iface;
@@ -64,7 +64,7 @@ interface Iface
 	 * @param string|null $backdate New back in stock date of the stock
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
 	 */
-	public function setDateBack( string $backdate = null ) : \Aimeos\MShop\Stock\Item\Iface;
+	public function setDateBack( ?string $backdate ) : \Aimeos\MShop\Stock\Item\Iface;
 
 	/**
 	 * Returns the expected delivery time frame

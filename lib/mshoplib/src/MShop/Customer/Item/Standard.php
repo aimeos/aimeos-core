@@ -54,7 +54,7 @@ class Standard extends Base implements Iface
 	 * @param string|null $id ID of the item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		parent::setId( $id );
 
@@ -151,7 +151,7 @@ class Standard extends Base implements Iface
 	 * @param string|null $value Birthday of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setBirthday( string $value = null ) : \Aimeos\MShop\Customer\Item\Iface
+	public function setBirthday( ?string $value ) : \Aimeos\MShop\Customer\Item\Iface
 	{
 		return $this->set( 'customer.birthday', $this->checkDateOnlyFormat( $value ) );
 	}
@@ -201,7 +201,7 @@ class Standard extends Base implements Iface
 	 * @param string|null $value Latest verification date of the customer (YYYY-MM-DD) or null if unknown
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setDateVerified( string $value = null ) : \Aimeos\MShop\Customer\Item\Iface
+	public function setDateVerified( ?string $value ) : \Aimeos\MShop\Customer\Item\Iface
 	{
 		return $this->set( 'customer.dateverified', $this->checkDateOnlyFormat( $value ) );
 	}
@@ -324,7 +324,7 @@ class Standard extends Base implements Iface
 	 *
 	 * @param string|null $date ISO date in YYYY-MM-DD format or null for no date
 	 */
-	protected function checkDateOnlyFormat( string $date = null ) : ?string
+	protected function checkDateOnlyFormat( ?string $date ) : ?string
 	{
 		if( $date !== null && $date !== '' )
 		{

@@ -361,7 +361,7 @@ abstract class Base
 	 * @param string|null $countryid Unique ID of the country
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
-	public function setCountryId( string $countryid = null ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setCountryId( ?string $countryid ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
 		return $this->set( $this->prefix . 'countryid', $this->checkCountryId( $countryid ) );
 	}
@@ -384,7 +384,7 @@ abstract class Base
 	 * @param string|null $langid Unique ID of the language
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
-	public function setLanguageId( string $langid = null ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setLanguageId( ?string $langid ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
 		return $this->set( $this->prefix . 'languageid', $this->checkLanguageId( $langid ) );
 	}
@@ -513,7 +513,7 @@ abstract class Base
 	 * @param float|null $value Longitude coordinate as decimal value or null
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setLongitude( float $value = null ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setLongitude( ?float $value ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
 		return $this->set( $this->prefix . 'longitude', $value !== '' && $value !== null ? $value : null );
 	}
@@ -540,7 +540,7 @@ abstract class Base
 	 * @param float|null $value Latitude coordinate as decimal value or null
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setLatitude( float $value = null ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setLatitude( ?float $value ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
 		return $this->set( $this->prefix . 'latitude', $value !== '' && $value !== null ? $value : null );
 	}

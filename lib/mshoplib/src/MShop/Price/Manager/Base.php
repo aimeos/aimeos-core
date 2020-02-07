@@ -69,7 +69,7 @@ abstract class Base
 	 * @return \Aimeos\Map Associative list of quantity as keys and price item as value
 	 * @throws \Aimeos\MShop\Price\Exception If an object is no price item
 	 */
-	protected function getPriceList( \Aimeos\Map $priceItems, string $currencyId = null ) : \Aimeos\Map
+	protected function getPriceList( \Aimeos\Map $priceItems, ?string $currencyId ) : \Aimeos\Map
 	{
 		$list = map();
 

@@ -138,7 +138,7 @@ class Standard
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
-	public function setLanguageId( string $id = null ) : \Aimeos\MShop\Locale\Item\Iface
+	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Locale\Item\Iface
 	{
 		return $this->set( 'locale.languageid', $this->checkLanguageId( $id ) );
 	}
@@ -162,7 +162,7 @@ class Standard
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 */
-	public function setCurrencyId( string $currencyid = null ) : \Aimeos\MShop\Locale\Item\Iface
+	public function setCurrencyId( ?string $currencyid ) : \Aimeos\MShop\Locale\Item\Iface
 	{
 		return $this->set( 'locale.currencyid', $this->checkCurrencyId( $currencyid ) );
 	}

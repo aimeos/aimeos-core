@@ -73,7 +73,7 @@ class Standard extends Base implements Iface
 	 * @param string|null $value Order service base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function setBaseId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
+	public function setBaseId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		return $this->set( 'order.base.service.baseid', $value );
 	}
@@ -216,7 +216,7 @@ class Standard extends Base implements Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 * @throws \Aimeos\MShop\Order\Exception If the position is invalid
 	 */
-	public function setPosition( int $value = null ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
+	public function setPosition( ?int $value ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		if( $value < 0 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order service position "%1$s" must be greater than 0', $value ) );

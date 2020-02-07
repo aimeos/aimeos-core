@@ -55,7 +55,7 @@ class Standard
 	 * @param string|null $id Unique ID of the coupon item
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
-	public function setParentId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setParentId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'coupon.code.parentid', $id );
 	}
@@ -102,12 +102,12 @@ class Standard
 	/**
 	 * Sets the new number of tries the code is valid.
 	 *
-	 * @param string|int|null $count Number of tries or null for unlimited
+	 * @param int|null $count Number of tries or null for unlimited
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
 	public function setCount( $count = null ) : \Aimeos\MShop\Coupon\Item\Code\Iface
 	{
-		return $this->set( 'coupon.code.count', is_numeric( $count ) ? $count : null );
+		return $this->set( 'coupon.code.count', is_numeric( $count )  ? (int) $count : null );
 	}
 
 
@@ -128,7 +128,7 @@ class Standard
 	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
-	public function setDateStart( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDateStart( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'coupon.code.datestart', $this->checkDateFormat( $date ) );
 	}
@@ -151,7 +151,7 @@ class Standard
 	 * @param string|null New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
-	public function setDateEnd( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'coupon.code.dateend', $this->checkDateFormat( $date ) );
 	}

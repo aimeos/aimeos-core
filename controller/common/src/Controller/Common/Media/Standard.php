@@ -191,7 +191,7 @@ class Standard
 	 * @param string $fsname File system name the file is located at
 	 * @return \Aimeos\MShop\Media\Item\Iface Updated media item with URLs
 	 */
-	protected function addImages( \Aimeos\MShop\Media\Item\Iface $item, \Aimeos\MW\Media\Image\Iface $media, string $path = null, string $fsname ) : \Aimeos\MShop\Media\Item\Iface
+	protected function addImages( \Aimeos\MShop\Media\Item\Iface $item, \Aimeos\MW\Media\Image\Iface $media, ?string $path, string $fsname ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		if( $path === null )
 		{

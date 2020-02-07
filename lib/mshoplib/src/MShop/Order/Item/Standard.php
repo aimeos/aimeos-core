@@ -115,7 +115,7 @@ class Standard
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setDateDelivery( string $date = null ) : \Aimeos\MShop\Order\Item\Iface
+	public function setDateDelivery( ?string $date ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		return $this->set( 'order.datedelivery', $this->checkDateFormat( $date ) );
 	}
@@ -138,7 +138,7 @@ class Standard
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setDatePayment( string $date = null ) : \Aimeos\MShop\Order\Item\Iface
+	public function setDatePayment( ?string $date ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		return $this->set( 'order.datepayment', $this->checkDateFormat( $date ) );
 	}
@@ -214,7 +214,7 @@ class Standard
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 * @throws \Aimeos\MShop\Order\Exception If ID is invalid
 	 */
-	public function setRelatedId( string $id = null ) : \Aimeos\MShop\Order\Item\Iface
+	public function setRelatedId( ?string $id ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		return $this->set( 'order.relatedid', $id );
 	}

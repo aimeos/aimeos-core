@@ -49,7 +49,7 @@ class Standard
 	 * @param string|null $parentid Parent ID of the order status
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
 	 */
-	public function setParentId( string $parentid = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setParentId( ?string $parentid ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'order.status.parentid', $parentid );
 	}

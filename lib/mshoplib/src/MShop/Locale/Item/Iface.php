@@ -65,7 +65,7 @@ interface Iface
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
-	public function setLanguageId( string $langid = null ) : \Aimeos\MShop\Locale\Item\Iface;
+	public function setLanguageId( ?string $langid ) : \Aimeos\MShop\Locale\Item\Iface;
 
 	/**
 	 * Returns the currency ID.
@@ -80,5 +80,5 @@ interface Iface
 	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
-	public function setCurrencyId( string $currencyid = null ) : \Aimeos\MShop\Locale\Item\Iface;
+	public function setCurrencyId( ?string $currencyid ) : \Aimeos\MShop\Locale\Item\Iface;
 }

@@ -118,7 +118,7 @@ class Standard
 	 * @param string|null $date ISO date in "YYYY-MM-DD HH:mm:ss" format
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setDateEnd( string $date = null ) : \Aimeos\MShop\Subscription\Item\Iface
+	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Subscription\Item\Iface
 	{
 		return $this->set( 'subscription.dateend', $this->checkDateFormat( $date ) );
 	}
@@ -214,7 +214,7 @@ class Standard
 	 * @param int|null $value Reason code or NULL for no reason
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
-	public function setReason( int $value = null ) : \Aimeos\MShop\Subscription\Item\Iface
+	public function setReason( ?int $value ) : \Aimeos\MShop\Subscription\Item\Iface
 	{
 		return $this->set( 'subscription.reason', $value );
 	}

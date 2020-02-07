@@ -62,7 +62,7 @@ class Standard
 	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
-	public function setLanguageId( string $id = null ) : \Aimeos\MShop\Text\Item\Iface
+	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Text\Item\Iface
 	{
 		return $this->set( 'text.languageid', $this->checkLanguageId( $id ) );
 	}

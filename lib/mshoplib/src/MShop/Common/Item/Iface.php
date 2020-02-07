@@ -83,7 +83,7 @@ interface Iface
 	 * @param string|null $id Unique ID of the item
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function setId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface;
 
 	/**
 	 * Returns the ID of the site the item is stored

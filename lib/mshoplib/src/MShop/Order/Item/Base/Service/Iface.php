@@ -42,7 +42,7 @@ interface Iface
 	 * @param string|null $id Order service base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function setBaseId( string $id = null ) : \Aimeos\MShop\Order\Item\Base\Service\Iface;
+	public function setBaseId( ?string $id ) : \Aimeos\MShop\Order\Item\Base\Service\Iface;
 
 	/**
 	 * Returns the original ID of the service item used for the order.
@@ -117,7 +117,7 @@ interface Iface
 	 * @param int|null $value Product position in the order from 0-n or null for resetting the position
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setPosition( int $value = null ) : \Aimeos\MShop\Order\Item\Base\Service\Iface;
+	public function setPosition( ?int $value ) : \Aimeos\MShop\Order\Item\Base\Service\Iface;
 
 	/**
 	 * Returns the price object which belongs to the service item.
@@ -158,7 +158,7 @@ interface Iface
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
 	 * @return \Aimeos\Map List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	 */
-	public function getAttributeItems( string $type = null ) : \Aimeos\Map;
+	public function getAttributeItems( ?string $type ) : \Aimeos\Map;
 
 	/**
 	 * Adds or replaces the attribute item in the list of service attributes.

@@ -68,7 +68,7 @@ class Standard
 	 * @param string|null $id Language ID of the property item
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface Common property item for chaining method calls
 	 */
-	public function setLanguageId( string $id = null ) : \Aimeos\MShop\Common\Item\Property\Iface
+	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Common\Item\Property\Iface
 	{
 		return $this->set( $this->prefix . 'languageid', $this->checkLanguageId( $id ) );
 	}
@@ -91,7 +91,7 @@ class Standard
 	 * @param string|null $id Parent ID of the property item
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface Common property item for chaining method calls
 	 */
-	public function setParentId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setParentId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( $this->prefix . 'parentid', $id );
 	}

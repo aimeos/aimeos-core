@@ -218,7 +218,7 @@ class Standard
 	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setDateStart( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDateStart( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'product.datestart', $this->checkDateFormat( $date ) );
 	}
@@ -241,7 +241,7 @@ class Standard
 	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setDateEnd( string $date = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'product.dateend', $this->checkDateFormat( $date ) );
 	}
@@ -310,7 +310,7 @@ class Standard
 	 * @param string|null $value ISO date in YYYY-MM-DD hh:mm:ss format
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setTimeCreated( string $value = null ) : \Aimeos\MShop\Product\Item\Iface
+	public function setTimeCreated( ?string $value ) : \Aimeos\MShop\Product\Item\Iface
 	{
 		return $this->set( 'product.ctime', $this->checkDateFormat( $value ) );
 	}

@@ -50,7 +50,7 @@ class Standard
 	 * @param string|null $backdate New back in stock date of the product
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
-	public function setDateBack( string $backdate = null ) : \Aimeos\MShop\Stock\Item\Iface
+	public function setDateBack( ?string $backdate ) : \Aimeos\MShop\Stock\Item\Iface
 	{
 		return $this->set( 'stock.backdate', $this->checkDateFormat( $backdate ) );
 	}
@@ -121,7 +121,7 @@ class Standard
 	 */
 	public function setStockLevel( $stocklevel = null ) : \Aimeos\MShop\Stock\Item\Iface
 	{
-		return $this->set( 'stock.stocklevel', is_numeric( $stocklevel ) ? $stocklevel : null );
+		return $this->set( 'stock.stocklevel', is_numeric( $stocklevel ) ? (int) $stocklevel : null );
 	}
 
 

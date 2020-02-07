@@ -78,7 +78,7 @@ class Standard
 	 * @param string|null $id Language ID of the product tag item
 	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
-	public function setLanguageId( string $id = null ) : \Aimeos\MShop\Tag\Item\Iface
+	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Tag\Item\Iface
 	{
 		return $this->set( 'tag.languageid', $this->checkLanguageId( $id ) );
 	}

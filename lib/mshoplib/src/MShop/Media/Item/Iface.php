@@ -36,7 +36,7 @@ interface Iface
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setLanguageId( string $langid = null ) : \Aimeos\MShop\Media\Item\Iface;
+	public function setLanguageId( ?string $langid ) : \Aimeos\MShop\Media\Item\Iface;
 
 	/**
 	 * Returns the name of the media item.

@@ -82,7 +82,7 @@ class Standard
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
-	public function setLanguageId( string $id = null ) : \Aimeos\MShop\Media\Item\Iface
+	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		return $this->set( 'media.languageid', $this->checkLanguageId( $id ) );
 	}

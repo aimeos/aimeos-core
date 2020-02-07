@@ -50,7 +50,7 @@ class Standard
 	 * @param string|null $value New base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
-	public function setBaseId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Address\Iface
+	public function setBaseId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Address\Iface
 	{
 		return $this->set( 'order.base.address.baseid', $value );
 	}
@@ -101,7 +101,7 @@ class Standard
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 * @throws \Aimeos\MShop\Order\Exception If the position is invalid
 	 */
-	public function setPosition( int $value = null ) : \Aimeos\MShop\Order\Item\Base\Address\Iface
+	public function setPosition( ?int $value ) : \Aimeos\MShop\Order\Item\Base\Address\Iface
 	{
 		if( $value < 0 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order address position "%1$s" must be greater than 0', $value ) );

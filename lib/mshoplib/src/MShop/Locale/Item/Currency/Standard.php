@@ -39,7 +39,7 @@ class Standard
 	 * @param string|null $key ID of the currency
 	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
 	 */
-	public function setId( string $key = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $key ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return parent::setId( $this->checkCurrencyId( $key ) );
 	}

@@ -101,7 +101,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * @param string|null $id Unique ID of the order base object
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function setId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$id = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id );
 		$this->set( 'order.base.id', $id );

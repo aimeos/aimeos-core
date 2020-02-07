@@ -49,7 +49,7 @@ interface Iface
 	 * @param string|null $value New base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
-	public function setBaseId( string $value = null ) : \Aimeos\MShop\Order\Item\Base\Address\Iface;
+	public function setBaseId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Address\Iface;
 
 	/**
 	 * Returns the position of the address in the order.
@@ -65,7 +65,7 @@ interface Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 * @throws \Aimeos\MShop\Order\Exception If the position is invalid
 	 */
-	public function setPosition( int $value = null ) : \Aimeos\MShop\Order\Item\Base\Address\Iface;
+	public function setPosition( ?int $value ) : \Aimeos\MShop\Order\Item\Base\Address\Iface;
 
 	/**
 	 * Copys all data from a given address.

@@ -67,7 +67,7 @@ interface Iface
 	 * @param string|null $value Birthday of the customer item (YYYY-MM-DD format)
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setBirthday( string $value = null ) : \Aimeos\MShop\Customer\Item\Iface;
+	public function setBirthday( ?string $value ) : \Aimeos\MShop\Customer\Item\Iface;
 
 	/**
 	 * Returns the billing address of the customer item.
@@ -112,7 +112,7 @@ interface Iface
 	 * @param string|null $value Latest verification date of the customer (YYYY-MM-DD format) or null if unknown
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setDateVerified( string $value = null ) : \Aimeos\MShop\Customer\Item\Iface;
+	public function setDateVerified( ?string $value ) : \Aimeos\MShop\Customer\Item\Iface;
 
 	/**
 	 * Returns the group IDs the customer belongs to

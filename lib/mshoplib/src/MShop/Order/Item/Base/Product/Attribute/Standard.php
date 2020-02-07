@@ -97,7 +97,7 @@ class Standard
 	 * @param string|null $id ID of the ordered product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setParentId( string $id = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setParentId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'order.base.product.attribute.parentid', $id );
 	}

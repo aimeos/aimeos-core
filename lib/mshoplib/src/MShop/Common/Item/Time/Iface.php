@@ -33,7 +33,7 @@ interface Iface
 	 * @return string|null $date ISO date in "YYYY-MM-DD hh:mm:ss" format or null for no date
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function setDateStart( string $date = null ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setDateStart( ?string $date ) : \Aimeos\MShop\Common\Item\Iface;
 
 
 	/**
@@ -50,5 +50,5 @@ interface Iface
 	 * @return string|null $date ISO date in "YYYY-MM-DD hh:mm:ss" format or null for no date
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
-	public function setDateEnd( string $date = null ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Common\Item\Iface;
 }
