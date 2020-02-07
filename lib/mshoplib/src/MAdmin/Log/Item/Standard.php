@@ -132,7 +132,7 @@ class Standard
 	 */
 	public function setRequest( string $request ) : \Aimeos\MAdmin\Log\Item\Iface
 	{
-		return $this->set( 'log.request', (string) $request );
+		return $this->set( 'log.request', $request );
 	}
 
 

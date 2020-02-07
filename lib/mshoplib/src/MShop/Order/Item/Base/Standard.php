@@ -153,9 +153,9 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * @param string $comment Comment for the order
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function setComment( string $comment ) : \Aimeos\MShop\Order\Item\Base\Iface
+	public function setComment( ?string $comment ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		return $this->set( 'order.base.comment', $comment );
+		return $this->set( 'order.base.comment', (string) $comment );
 	}
 
 
@@ -209,13 +209,13 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * @param string $customerid Unique ID of the customer
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function setCustomerId( string $customerid ) : \Aimeos\MShop\Order\Item\Base\Iface
+	public function setCustomerId( ?string $customerid ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		if( $customerid !== $this->getCustomerId() )
+		if( (string) $customerid !== $this->getCustomerId() )
 		{
-			$this->notify( 'setCustomerId.before', $customerid );
-			$this->set( 'order.base.customerid', $customerid );
-			$this->notify( 'setCustomerId.after', $customerid );
+			$this->notify( 'setCustomerId.before', (string) $customerid );
+			$this->set( 'order.base.customerid', (string) $customerid );
+			$this->notify( 'setCustomerId.after', (string) $customerid );
 		}
 
 		return $this;
@@ -239,9 +239,9 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * @param string $value Customer reference for the order
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function setCustomerReference( string $value ) : \Aimeos\MShop\Order\Item\Base\Iface
+	public function setCustomerReference( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		return $this->set( 'order.base.customerref', $value );
+		return $this->set( 'order.base.customerref', (string) $value );
 	}
 
 

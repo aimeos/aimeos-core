@@ -155,9 +155,9 @@ class Standard
 	 * @param string $label Type label of the attribute item
 	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Text\Item\Iface
+	public function setLabel( ?string $label ) : \Aimeos\MShop\Text\Item\Iface
 	{
-		return $this->set( 'text.label', $label );
+		return $this->set( 'text.label', (string) $label );
 	}
 
 

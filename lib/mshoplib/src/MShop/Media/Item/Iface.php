@@ -51,7 +51,7 @@ interface Iface
 	 * @param string $label Type label of the media item
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Media\Item\Iface;
+	public function setLabel( ?string $label ) : \Aimeos\MShop\Media\Item\Iface;
 
 	/**
 	 * Returns the mime type of the media item.

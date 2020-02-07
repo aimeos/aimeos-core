@@ -50,9 +50,9 @@ class Standard
 	 * @param string $label Type label of the job item
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MAdmin\Job\Item\Iface
+	public function setLabel( ?string $label ) : \Aimeos\MAdmin\Job\Item\Iface
 	{
-		return $this->set( 'job.label', $label );
+		return $this->set( 'job.label', (string) $label );
 	}
 
 

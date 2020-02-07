@@ -33,7 +33,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @param string $label Type label of the attribute item
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MAdmin\Job\Item\Iface;
+	public function setLabel( ?string $label ) : \Aimeos\MAdmin\Job\Item\Iface;
 
 
 	/**

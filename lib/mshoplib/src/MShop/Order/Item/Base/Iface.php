@@ -49,7 +49,7 @@ interface Iface
 	 * @param string $comment Comment for the order
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function setComment( string $comment ) : \Aimeos\MShop\Order\Item\Base\Iface;
+	public function setComment( ?string $comment ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
 	 * Returns the customer code of the customer who has ordered.
@@ -64,7 +64,7 @@ interface Iface
 	 * @param string $customerid Unique ID of the customer
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function setCustomerId( string $customerid ) : \Aimeos\MShop\Order\Item\Base\Iface;
+	public function setCustomerId( ?string $customerid ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
 	 * Returns the customer reference field of the order item
@@ -79,7 +79,7 @@ interface Iface
 	 * @param string $value Customer reference for the order
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function setCustomerReference( string $value ) : \Aimeos\MShop\Order\Item\Base\Iface;
+	public function setCustomerReference( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
 	 * Returns the locales for the basic order item.
