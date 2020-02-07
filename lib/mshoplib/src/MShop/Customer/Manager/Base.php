@@ -123,7 +123,7 @@ abstract class Base
 		foreach( $item->getGroups() as $refId )
 		{
 			if( ( $litem = $item->getListItem( 'customer/group', 'default', $refId, false ) ) !== null ) {
-				unset( $listItems[$litem->getId()] );
+				unset( $listItems[$litem->getId()], $listItems['__customer/group_default_' . $refId] );
 			} else {
 				$litem = $manager->createItem()->setType( 'default' );
 			}
