@@ -79,5 +79,5 @@ interface Iface
 	 * @param string $timeframe Expected delivery time frame
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
 	 */
-	public function setTimeframe( string $timeframe ) : \Aimeos\MShop\Stock\Item\Iface;
+	public function setTimeframe( ?string $timeframe ) : \Aimeos\MShop\Stock\Item\Iface;
 }

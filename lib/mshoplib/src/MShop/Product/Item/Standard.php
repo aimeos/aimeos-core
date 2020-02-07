@@ -172,9 +172,9 @@ class Standard
 	 * @param string $name New data set name
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setDataset( string $name ) : \Aimeos\MShop\Product\Item\Iface
+	public function setDataset( ?string $name ) : \Aimeos\MShop\Product\Item\Iface
 	{
-		return $this->set( 'product.dataset', $this->checkCode( $name ) );
+		return $this->set( 'product.dataset', $this->checkCode( (string) $name ) );
 	}
 
 
@@ -287,9 +287,9 @@ class Standard
 	 * @param string $value New URL target specific for that product
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setTarget( string $value ) : \Aimeos\MShop\Product\Item\Iface
+	public function setTarget( ?string $value ) : \Aimeos\MShop\Product\Item\Iface
 	{
-		return $this->set( 'product.target', $value );
+		return $this->set( 'product.target', (string) $value );
 	}
 
 

@@ -66,7 +66,7 @@ interface Iface
 	 * @param string $name New data set name
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setDataset( string $name ) : \Aimeos\MShop\Product\Item\Iface;
+	public function setDataset( ?string $name ) : \Aimeos\MShop\Product\Item\Iface;
 
 	/**
 	 * Returns the label of the product item.
@@ -96,5 +96,5 @@ interface Iface
 	 * @param string $value New URL target specific for that product
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setTarget( string $value ) : \Aimeos\MShop\Product\Item\Iface;
+	public function setTarget( ?string $value ) : \Aimeos\MShop\Product\Item\Iface;
 }
