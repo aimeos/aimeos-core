@@ -107,7 +107,7 @@ class Standard
 	 */
 	public function setCount( $count = null ) : \Aimeos\MShop\Coupon\Item\Code\Iface
 	{
-		return $this->set( 'coupon.code.count', is_numeric( $count )  ? (int) $count : null );
+		return $this->set( 'coupon.code.count', is_numeric( $count ) ? (int) $count : null );
 	}
 
 
