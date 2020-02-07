@@ -48,7 +48,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string|null $timestamp Expiration time of the item or null for no expiration
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
 	 */
-	public function setTimeExpire( string $timestamp = null ) : \Aimeos\MAdmin\Cache\Item\Iface;
+	public function setTimeExpire( ?string $timestamp ) : \Aimeos\MAdmin\Cache\Item\Iface;
 
 	/**
 	 * Returns the tags associated to the item.

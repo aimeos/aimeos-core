@@ -82,9 +82,9 @@ class Standard extends Base implements Iface
 	 * @param string $value Label of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
-	public function setLabel( string $value ) : \Aimeos\MShop\Customer\Item\Iface
+	public function setLabel( ?string $value ) : \Aimeos\MShop\Customer\Item\Iface
 	{
-		return $this->set( 'customer.label', $value );
+		return $this->set( 'customer.label', (string) $value );
 	}
 
 

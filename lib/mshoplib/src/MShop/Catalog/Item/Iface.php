@@ -34,7 +34,7 @@ interface Iface
 	 * @param string $value New URL target specific for that category
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function setTarget( string $value ) : \Aimeos\MShop\Catalog\Item\Iface;
+	public function setTarget( ?string $value ) : \Aimeos\MShop\Catalog\Item\Iface;
 
 	/**
 	 * Adds a child node to this node.

@@ -151,7 +151,7 @@ class Standard
 	 * @param string $label Label of the media item
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Media\Item\Iface
+	public function setLabel( ?string $label ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		return $this->set( 'media.label', (string) $label );
 	}

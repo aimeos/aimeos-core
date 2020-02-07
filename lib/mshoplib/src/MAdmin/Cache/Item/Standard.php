@@ -107,7 +107,7 @@ class Standard
 	 * @param string|null $timestamp Expiration time of the item
 	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
 	 */
-	public function setTimeExpire( string $timestamp = null ) : \Aimeos\MAdmin\Cache\Item\Iface
+	public function setTimeExpire( ?string $timestamp ) : \Aimeos\MAdmin\Cache\Item\Iface
 	{
 		return $this->set( 'expire', $this->checkDateFormat( $timestamp ) );
 	}

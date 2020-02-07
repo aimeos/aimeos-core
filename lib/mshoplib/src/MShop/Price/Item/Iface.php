@@ -80,7 +80,7 @@ interface Iface
 	 * @param string $label Label of the item
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Price\Item\Iface;
+	public function setLabel( ?string $label ) : \Aimeos\MShop\Price\Item\Iface;
 
 	/**
 	 * Returns the quantity.

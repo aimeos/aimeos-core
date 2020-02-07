@@ -137,9 +137,9 @@ class Standard
 	 * @param string $value Value of the property item
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface Common property item for chaining method calls
 	 */
-	public function setValue( string $value ) : \Aimeos\MShop\Common\Item\Property\Iface
+	public function setValue( ?string $value ) : \Aimeos\MShop\Common\Item\Property\Iface
 	{
-		return $this->set( $this->prefix . 'value', $value );
+		return $this->set( $this->prefix . 'value', (string) $value );
 	}
 
 
