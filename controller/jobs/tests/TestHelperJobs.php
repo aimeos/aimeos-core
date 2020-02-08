@@ -106,8 +106,8 @@ class TestHelperJobs
 		$ctx->setMessageQueueManager( $mq );
 
 
-		$session = new \Aimeos\MW\Session\None();
-		$ctx->setSession( $session );
+		$mail = new \Aimeos\MW\Mail\None();
+		$ctx->setMail( $mail );
 
 
 		$i18n = new \Aimeos\MW\Translation\None( 'de' );

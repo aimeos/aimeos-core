@@ -19,6 +19,8 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperJobs::getContext();
 		$aimeos = \TestHelperJobs::getAimeos();
 
+		$context->getConfig()->set( 'controller/jobs/to-email', 'me@localhost' );
+
 		$this->object = $this->getMockForAbstractClass( '\Aimeos\Controller\Jobs\Base', [$context, $aimeos] );
 	}
 

@@ -116,7 +116,7 @@ abstract class Base
 		$message = $this->context->getMail()->createMessage();
 
 		foreach( (array) $to as $email ) {
-			$message->addRecipient( $email );
+			$message->addTo( $email );
 		}
 
 		/** controller/jobs/from-email
