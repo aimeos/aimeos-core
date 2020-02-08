@@ -84,4 +84,59 @@ abstract class Base
 	{
 		return isset( $list[$key] ) && ( $value = trim( $list[$key] ) ) !== '' ? $value : $default;
 	}
+
+
+	/**
+	 * Sends a mail with the given data to the configured e-mails
+	 *
+	 * @param string $subject Subject of the e-mail
+	 * @param string $body Text body of the e-mail
+	 * @return \Aimeos\Controller\Jobs\Iface Same object for fluent interface
+	 */
+	protected function mail( string $subject, string $body ) : self
+	{
+		$config = $this->context->getConfig();
+
+		/** controller/jobs/to-email
+		 * Recipient e-mail address used when sending job e-mails
+		 *
+		 * Job controllers can send e-mails when they has finished of if an
+		 * error occurred. This setting will be used as the recipient e-mail
+		 * address for these e-mails.
+		 *
+		 * @param string E-mail address
+		 * @since 2020.04
+		 * @category User
+		 * @see controller/jobs/from-email
+		 */
+		if( ( $to = $config->get( 'controller/jobs/to-email' ) ) === null ) {
+			return $this;
+		}
+
+		$message = $this->context->getMail()->createMessage();
+
+		foreach( (array) $to as $email ) {
+			$message->addRecipient( $email );
+		}
+
+		/** controller/jobs/from-email
+		 * Sender e-mail address used when sending job e-mails
+		 *
+		 * Job controllers can send e-mails when they has finished of if an
+		 * error occurred. This setting will be used as the sender e-mail
+		 * address in these e-mails.
+		 *
+		 * @param string E-mail address
+		 * @since 2020.04
+		 * @category User
+		 * @see controller/jobs/to-email
+		 */
+		if( $from = $config->get( 'controller/jobs/from-email' ) ) {
+			$message->setSender( $from );
+		}
+
+		$message->setSubject( $subject )->setBody( $body )->send();
+
+		return $this;
+	}
 }

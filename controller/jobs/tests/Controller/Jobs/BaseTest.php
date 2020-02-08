@@ -11,25 +11,47 @@ namespace Aimeos\Controller\Jobs;
 
 class BaseTest extends \PHPUnit\Framework\TestCase
 {
-	public function testGetValue()
+	private $object;
+
+
+	protected function setUp() : void
 	{
 		$context = \TestHelperJobs::getContext();
 		$aimeos = \TestHelperJobs::getAimeos();
 
-		$object = new TestBase( $context, $aimeos );
-
-		$this->assertEquals( 'value', $object->getValuePublic( ['key' => ' value '], 'key', 'def' ) );
-		$this->assertEquals( 'def', $object->getValuePublic( ['key' => ' '], 'key', 'def' ) );
-		$this->assertEquals( 'def', $object->getValuePublic( [], 'key', 'def' ) );
+		$this->object = $this->getMockForAbstractClass( '\Aimeos\Controller\Jobs\Base', [$context, $aimeos] );
 	}
-}
 
 
-
-class TestBase extends \Aimeos\Controller\Jobs\Base
-{
-	public function getValuePublic( $list, $key, $default )
+	protected function tearDown() : void
 	{
-		return $this->getValue( $list, $key, $default );
+		unset( $this->object );
+	}
+
+
+	public function testGetValue()
+	{
+		$method = $this->access( 'getValue' );
+
+		$this->assertEquals( 'value', $method->invokeArgs( $this->object, [['key' => ' value '], 'key', 'def'] ) );
+		$this->assertEquals( 'def', $method->invokeArgs( $this->object, [['key' => ' '], 'key', 'def'] ) );
+		$this->assertEquals( 'def', $method->invokeArgs( $this->object, [[], 'key', 'def'] ) );
+	}
+
+
+	public function testMail()
+	{
+		$result = $this->access( 'mail' )->invokeArgs( $this->object, ['me@localhost', 'test'] );
+		$this->assertSame( $this->object, $result );
+	}
+
+
+	protected function access( $name )
+	{
+		$class = new \ReflectionClass( \Aimeos\Controller\Jobs\Base::class );
+		$method = $class->getMethod( $name );
+		$method->setAccessible( true );
+
+		return $method;
 	}
 }
