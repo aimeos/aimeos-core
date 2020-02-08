@@ -61,6 +61,12 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSend()
+	{
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->send() );
+	}
+
+
 	public function testSetSender()
 	{
 		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->setSender( 'test@example.com' ) );

@@ -75,6 +75,13 @@ interface Iface
 	public function addHeader( string $name, string $value ) : Iface;
 
 	/**
+	 * Sends the e-mail message to the mail server.
+	 *
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 */
+	public function send() : Iface;
+
+	/**
 	 * Sets the e-mail address and name of the sender of the message (higher precedence than "From").
 	 *
 	 * @param string $email Source e-mail address
