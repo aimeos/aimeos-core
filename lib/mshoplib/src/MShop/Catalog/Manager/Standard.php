@@ -787,7 +787,7 @@ class Standard extends Base
 				$refIdMap[$domain][$listItem->getRefId()][] = $parentid;
 			}
 
-			$refItemMap = $this->getRefItems( $refIdMap );
+			$refItemMap = $this->getRefItems( $refIdMap, $ref );
 			$nodeid = $node->getId();
 
 			$listItems = [];

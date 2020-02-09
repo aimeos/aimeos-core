@@ -659,7 +659,7 @@ class Standard
 			throw $e;
 		}
 
-		return $this->buildItems( $map, null, 'text' );
+		return $this->buildItems( $map, $ref, 'text' );
 	}
 
 

@@ -67,7 +67,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 				$refIdMap[$domain][$listItem->getRefId()][] = $parentid;
 			}
 
-			$refItemMap = $this->getRefItems( $refIdMap );
+			$refItemMap = $this->getRefItems( $refIdMap, $domains );
 		}
 
 		foreach( $itemMap as $id => $node )
