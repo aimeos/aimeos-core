@@ -198,9 +198,9 @@ class Standard
 	/**
 	 * Returns the quantity of the product attribute.
 	 *
-	 * @return int Quantity of the product attribute
+	 * @return float Quantity of the product attribute
 	 */
-	public function getQuantity() : int
+	public function getQuantity() : float
 	{
 		return $this->get( 'order.base.product.attribute.quantity', 1 );
 	}
@@ -209,10 +209,10 @@ class Standard
 	/**
 	 * Sets the quantity of the product attribute.
 	 *
-	 * @param int $value Quantity of the product attribute
+	 * @param float $value Quantity of the product attribute
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setQuantity( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
+	public function setQuantity( float $value ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	{
 		return $this->set( 'order.base.product.attribute.quantity', $value );
 	}

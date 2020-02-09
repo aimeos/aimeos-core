@@ -27,10 +27,10 @@ interface Iface
 	 * Add the given price to the current one.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item which should be added
-	 * @param int $quantity Number of times the Price should be added
+	 * @param float $quantity Number of times the Price should be added
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function addItem( \Aimeos\MShop\Price\Item\Iface $item, int $quantity = 1 );
+	public function addItem( \Aimeos\MShop\Price\Item\Iface $item, float $quantity = 1 );
 
 	/**
 	 * Resets the values of the price item.
@@ -85,17 +85,17 @@ interface Iface
 	/**
 	 * Returns the quantity.
 	 *
-	 * @return int Quantity
+	 * @return float Quantity
 	 */
-	public function getQuantity() : int;
+	public function getQuantity() : float;
 
 	/**
 	 * Sets the quantity.
 	 *
-	 * @param int $quantity Quantity
+	 * @param float $quantity Quantity
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
-	public function setQuantity( int $quantity ) : \Aimeos\MShop\Price\Item\Iface;
+	public function setQuantity( float $quantity ) : \Aimeos\MShop\Price\Item\Iface;
 
 	/**
 	 * Returns the amount of money.

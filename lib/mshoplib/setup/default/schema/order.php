@@ -114,7 +114,7 @@ return array(
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255, 'default' => '' ) );
 			$table->addColumn( 'target', 'string', array( 'length' => 255, 'default' => '' ) );
 			$table->addColumn( 'timeframe', 'string', array( 'length' => 16, 'default' => '' ) );
-			$table->addColumn( 'quantity', 'integer', [] );
+			$table->addColumn( 'quantity', 'float', [] );
 			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
@@ -153,7 +153,7 @@ return array(
 			$table->addColumn( 'code', 'string', array( 'length' => 255, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'quantity', 'integer', [] );
+			$table->addColumn( 'quantity', 'float', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
@@ -215,7 +215,7 @@ return array(
 			$table->addColumn( 'code', 'string', array( 'length' => 255, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'quantity', 'integer', [] );
+			$table->addColumn( 'quantity', 'float', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );

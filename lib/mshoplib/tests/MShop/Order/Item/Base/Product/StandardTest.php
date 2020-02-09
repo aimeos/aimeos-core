@@ -353,7 +353,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setQuantity( 1.5 );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
-		$this->assertEquals( 1, $this->object->getQuantity() );
+		$this->assertEquals( 1.5, $this->object->getQuantity() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 

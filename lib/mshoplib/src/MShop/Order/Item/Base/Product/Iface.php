@@ -244,17 +244,17 @@ interface Iface
 	/**
 	 * Returns the number of packages the customer has added.
 	 *
-	 * @return int Amount of product packages
+	 * @return float Amount of product packages
 	 */
-	public function getQuantity() : int;
+	public function getQuantity() : float;
 
 	/**
 	 * Sets the number of product packages the customer has added.
 	 *
-	 * @param int $quantitiy Amount of product packages
+	 * @param float $quantitiy Amount of product packages
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setQuantity( int $quantitiy ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setQuantity( float $quantitiy ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the stored price item for the selected product and package.

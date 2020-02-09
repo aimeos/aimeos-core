@@ -360,24 +360,24 @@ class Standard extends Base implements Iface
 	/**
 	 * Returns the amount of products the customer has added.
 	 *
-	 * @return int Amount of products
+	 * @return float Amount of products
 	 */
-	public function getQuantity() : int
+	public function getQuantity() : float
 	{
-		return $this->get( 'order.base.product.quantity', 1 );
+		return (float) $this->get( 'order.base.product.quantity', 1 );
 	}
 
 
 	/**
 	 * Sets the amount of products the customer has added.
 	 *
-	 * @param int $quantity Amount of products
+	 * @param float $quantity Amount of products
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setQuantity( int $quantity ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setQuantity( float $quantity ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		if( $quantity < 1 || $quantity > 2147483647 ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Quantity must be a positive integer and must not exceed %1$d', 2147483647 ) );
+		if( $quantity <= 0 || $quantity > 2147483647 ) {
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Quantity must greater than 0 and must not exceed %1$d', 2147483647 ) );
 		}
 
 		return $this->set( 'order.base.product.quantity', $quantity );

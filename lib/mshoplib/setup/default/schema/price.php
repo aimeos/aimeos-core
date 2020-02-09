@@ -42,7 +42,7 @@ return array(
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
-			$table->addColumn( 'quantity', 'integer', [] );
+			$table->addColumn( 'quantity', 'float', [] );
 			$table->addColumn( 'value', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );

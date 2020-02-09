@@ -70,8 +70,8 @@ class Standard
 			'code' => 'price.quantity',
 			'internalcode' => 'mpri."quantity"',
 			'label' => 'Price quantity',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'price.value' => array(
 			'code' => 'price.value',

@@ -92,17 +92,17 @@ interface Iface
 	/**
 	 * Returns the quantity of the service attribute.
 	 *
-	 * @return integer Quantity of the service attribute
+	 * @return float Quantity of the service attribute
 	 */
-	public function getQuantity() : int;
+	public function getQuantity() : float;
 
 	/**
 	 * Sets the quantity of the service attribute.
 	 *
-	 * @param int $value Quantity of the service attribute
+	 * @param float $value Quantity of the service attribute
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
-	public function setQuantity( int $value ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface;
+	public function setQuantity( float $value ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface;
 
 	/**
 	 * Copys all data from a given attribute item.

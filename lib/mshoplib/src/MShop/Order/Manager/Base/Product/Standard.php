@@ -125,8 +125,8 @@ class Standard
 			'code' => 'order.base.product.quantity',
 			'internalcode' => 'mordbapr."quantity"',
 			'label' => 'Product quantity',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'order.base.product.currencyid' => array(
 			'code' => 'order.base.product.currencyid',
