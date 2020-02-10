@@ -271,6 +271,29 @@ class Standard
 
 
 	/**
+	 * Returns the quantity scale of the product item.
+	 *
+	 * @return float Quantity scale
+	 */
+	public function getScale() : float
+	{
+		return (float) $this->get( 'product.scale', 1 ) ?: 1;
+	}
+
+
+	/**
+	 * Sets a new quantity scale of the product item.
+	 *
+	 * @param string $name New quantity scale
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setScale( ?string $value ) : \Aimeos\MShop\Product\Item\Iface
+	{
+		return $this->set( 'product.scale', (float) ( $value > 0 ? $value : 1 ) );
+	}
+
+
+	/**
 	 * Returns the URL target specific for that product
 	 *
 	 * @return string URL target specific for that product
@@ -363,6 +386,7 @@ class Standard
 				case 'product.datestart': $item = $item->setDateStart( $value ); break;
 				case 'product.dateend': $item = $item->setDateEnd( $value ); break;
 				case 'product.config': $item = $item->setConfig( $value ); break;
+				case 'product.scale': $item = $item->setScale( $value ); break;
 				case 'product.target': $item = $item->setTarget( $value ); break;
 				case 'product.ctime': $item = $item->setTimeCreated( $value ); break;
 				default: continue 2;
@@ -393,6 +417,7 @@ class Standard
 		$list['product.datestart'] = $this->getDateStart();
 		$list['product.dateend'] = $this->getDateEnd();
 		$list['product.config'] = $this->getConfig();
+		$list['product.scale'] = $this->getScale();
 		$list['product.target'] = $this->getTarget();
 		$list['product.ctime'] = $this->getTimeCreated();
 

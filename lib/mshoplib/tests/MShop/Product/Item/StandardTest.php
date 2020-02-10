@@ -29,6 +29,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.config' => array( 'css-class' => 'test' ),
 			'product.datestart' => null,
 			'product.dateend' => null,
+			'product.scale' => '',
 			'product.ctime' => '2011-01-19 17:04:32',
 			'product.mtime' => '2011-01-19 18:04:32',
 			'product.editor' => 'unitTestUser',
@@ -215,6 +216,42 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
 		$this->assertEquals( 'Skirts', $this->object->getDataset() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetScale()
+	{
+		$this->assertEquals( 1, $this->object->getScale() );
+	}
+
+
+	public function testSetScale()
+	{
+		$return = $this->object->setScale( 0.25 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
+		$this->assertEquals( 0.25, $this->object->getScale() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetScaleEmpty()
+	{
+		$return = $this->object->setScale( '' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
+		$this->assertEquals( 1, $this->object->getScale() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetScaleInvalid()
+	{
+		$return = $this->object->setScale( -1 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
+		$this->assertEquals( 1, $this->object->getScale() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -425,6 +462,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.dateend' => '2001-01-01 00:00:00',
 			'product.config' => array( 'key' => 'value' ),
 			'product.status' => 0,
+			'product.scale' => '0.5',
 			'product.target' => 'ttarget',
 			'additional' => 'value',
 		);
@@ -442,6 +480,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['product.config'], $item->getConfig() );
 		$this->assertEquals( $list['product.status'], $item->getStatus() );
 		$this->assertEquals( $list['product.target'], $item->getTarget() );
+		$this->assertEquals( $list['product.scale'], $item->getScale() );
 		$this->assertEquals( $list['additional'], $item->additional );
 		$this->assertNull( $item->getSiteId() );
 	}
@@ -466,6 +505,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['product.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['product.editor'] );
 		$this->assertEquals( $this->object->getTarget(), $arrayObject['product.target'] );
+		$this->assertEquals( $this->object->getScale(), $arrayObject['product.scale'] );
 	}
 
 }

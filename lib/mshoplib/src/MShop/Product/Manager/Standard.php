@@ -92,6 +92,13 @@ class Standard
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
+		'product.scale' => array(
+			'code' => 'product.scale',
+			'internalcode' => 'mpro."scale"',
+			'label' => 'Quantity scale',
+			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+		),
 		'product.config' => array(
 			'code' => 'product.config',
 			'internalcode' => 'mpro."config"',
@@ -537,6 +544,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getDataset() );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getScale(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( $idx++, $item->getDateStart() );
 			$stmt->bind( $idx++, $item->getDateEnd() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );

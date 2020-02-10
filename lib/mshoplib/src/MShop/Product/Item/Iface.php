@@ -84,6 +84,21 @@ interface Iface
 	public function setLabel( string $label ) : \Aimeos\MShop\Product\Item\Iface;
 
 	/**
+	 * Returns the quantity scale of the product item.
+	 *
+	 * @return float Quantity scale
+	 */
+	public function getScale() : float;
+
+	/**
+	 * Sets a new quantity scale of the product item.
+	 *
+	 * @param string $name New quantity scale
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setScale( ?string $value ) : \Aimeos\MShop\Product\Item\Iface;
+
+	/**
 	 * Returns the URL target specific for that product
 	 *
 	 * @return string URL target specific for that product
