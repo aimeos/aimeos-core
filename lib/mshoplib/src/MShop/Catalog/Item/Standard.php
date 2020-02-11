@@ -315,22 +315,22 @@ class Standard
 	/**
 	 * Returns all children of this node.
 	 *
-	 * @return array Numerically indexed list of nodes
+	 * @return \Aimeos\Map Numerically indexed list of children implementing \Aimeos\MShop\Catalog\Item\Iface
 	 */
-	public function getChildren() : array
+	public function getChildren() : \Aimeos\Map
 	{
-		return $this->children;
+		return map( $this->children );
 	}
 
 
 	/**
 	 * Returns the deleted children.
 	 *
-	 * @return \Aimeos\MShop\Catalog\Item\Iface[] List of removed children
+	 * @return \Aimeos\Map List of removed children implementing \Aimeos\MShop\Catalog\Item\Iface
 	 */
-	public function getChildrenDeleted() : array
+	public function getChildrenDeleted() : \Aimeos\Map
 	{
-		return $this->deletedItems;
+		return map( $this->deletedItems );
 	}
 
 

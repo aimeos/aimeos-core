@@ -282,6 +282,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$children = $this->object->getChildren();
 		$this->assertEquals( 1, count( $children ) );
+		$this->assertInstanceOf( \Aimeos\Map::class, $children );
 
 		foreach( $children as $child ) {
 			$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $child );
@@ -323,9 +324,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$child = $this->object->getChild( 0 );
 		$this->object->deleteChild( $child );
 
-		$return = $this->object->getChildrenDeleted();
+		$result = $this->object->getChildrenDeleted();
 
-		$this->assertEquals( [$child], $return );
+		$this->assertInstanceOf( \Aimeos\Map::class, $result );
+		$this->assertEquals( [$child], $result->toArray() );
 	}
 
 

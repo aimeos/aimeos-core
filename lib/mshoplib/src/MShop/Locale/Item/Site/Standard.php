@@ -269,6 +269,30 @@ class Standard
 
 
 	/**
+	 * Adds a child node to this node.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
+	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
+	 */
+	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	{
+		return $this;
+	}
+
+
+	/**
+	 * Removes a child node from this node.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to remove
+	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
+	 */
+	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	{
+		return $this;
+	}
+
+
+	/**
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param int $index Index of child node
@@ -283,11 +307,22 @@ class Standard
 	/**
 	 * Returns all children of this node.
 	 *
-	 * @return array Numerically indexed list of nodes
+	 * @return \Aimeos\Map Numerically indexed list of items implementing \Aimeos\MShop\Locale\Item\Site\Iface
 	 */
-	public function getChildren() : array
+	public function getChildren() : \Aimeos\Map
 	{
-		return [];
+		return map();
+	}
+
+
+	/**
+	 * Returns the deleted children.
+	 *
+	 * @return \Aimeos\Map List of removed children implementing \Aimeos\MShop\Locale\Item\Site\Iface
+	 */
+	public function getChildrenDeleted() : \Aimeos\Map
+	{
+		return map();
 	}
 
 
@@ -303,13 +338,12 @@ class Standard
 
 
 	/**
-	 * Adds a child node to this node.
+	 * Returns the node and its children as list
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
-	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
+	 * @return \Aimeos\Map List of IDs as keys and items implementing \Aimeos\MShop\Locale\Item\Site\Iface
 	 */
-	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function toList() : \Aimeos\Map
 	{
-		return $this;
+		return map( [$this->getId() => $this] );
 	}
 }

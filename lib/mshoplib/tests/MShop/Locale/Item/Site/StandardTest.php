@@ -230,6 +230,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testDeleteChild()
+	{
+		$result = $this->object->deleteChild( $this->object );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $result );
+		$this->assertEquals( 0, count( $this->object->getChildren() ) );
+	}
+
+
 	public function testGetChild()
 	{
 		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
@@ -239,7 +248,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetChildren()
 	{
-		$this->assertEquals( [], $this->object->getChildren() );
+		$this->assertInstanceOf( \Aimeos\Map::class, $this->object->getChildren() );
+		$this->assertEquals( [], $this->object->getChildren()->toArray() );
+	}
+
+
+	public function testGetChildrenDeleted()
+	{
+		$result = $this->object->getChildrenDeleted();
+
+		$this->assertInstanceOf( \Aimeos\Map::class, $result );
+		$this->assertEquals( [], $result->toArray() );
+	}
+
+
+	public function testToList()
+	{
+		$list = $this->object->toList();
+
+		$this->assertEquals( 1, count( $list ) );
+		$this->assertInstanceOf( \Aimeos\Map::class, $list );
+		$this->assertEquals( [$this->object->getId() => $this->object], $list->toArray() );
 	}
 
 

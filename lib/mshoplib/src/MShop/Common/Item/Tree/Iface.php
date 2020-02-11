@@ -64,6 +64,22 @@ interface Iface extends \Aimeos\MShop\Common\Item\Status\Iface
 	public function getParentId() : ?string;
 
 	/**
+	 * Adds a child node to this node.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
+	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Catalog item for chaining method calls
+	 */
+	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+
+	/**
+	 * Removes a child node from this node.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to remove
+	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
+	 */
+	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+
+	/**
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param int $index Index of child node
@@ -74,9 +90,16 @@ interface Iface extends \Aimeos\MShop\Common\Item\Status\Iface
 	/**
 	 * Returns all children of this node.
 	 *
-	 * @return array Numerically indexed list of nodes
+	 * @return \Aimeos\Map Numerically indexed list of items implementing \Aimeos\MShop\Common\Item\Tree\Iface
 	 */
-	public function getChildren() : array;
+	public function getChildren() : \Aimeos\Map;
+
+	/**
+	 * Returns the deleted children.
+	 *
+	 * @return \Aimeos\Map List of removed children implementing \Aimeos\MShop\Common\Item\Tree\Iface
+	 */
+	public function getChildrenDeleted() : \Aimeos\Map;
 
 	/**
 	 * Tests if a node has children.
@@ -86,10 +109,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Status\Iface
 	public function hasChildren() : bool;
 
 	/**
-	 * Adds a child node to this node.
+	 * Returns the node and its children as list
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
-	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Catalog item for chaining method calls
+	 * @return \Aimeos\Map List of IDs as keys and items implementing \Aimeos\MShop\Common\Item\Tree\Iface
 	 */
-	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+	public function toList() : \Aimeos\Map;
 }

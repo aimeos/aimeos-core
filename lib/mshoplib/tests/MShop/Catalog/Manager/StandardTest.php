@@ -235,7 +235,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $tree->getId(), $groupcat->getNode()->parentid );
 		$this->assertEquals( $categorycat->getId(), $cafecat->getNode()->parentid );
 		$this->assertEquals( $cafecat->getId(), $caffein->getNode()->parentid );
-		$this->assertEquals( [], $groupcatChildren );
+		$this->assertEquals( [], $groupcatChildren->toArray() );
 		$this->assertEquals( 3, count( $categorycatChildren ) );
 	}
 
