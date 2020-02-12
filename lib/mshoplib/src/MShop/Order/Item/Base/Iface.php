@@ -231,7 +231,7 @@ interface Iface
 	 * @param int $key Key returned by getProducts() identifying the requested product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Product item of an order
 	 */
-	public function getProduct( int $key );
+	public function getProduct( int $key ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the product items that are or should be part of an (future) order.
