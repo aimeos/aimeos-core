@@ -201,19 +201,23 @@ class ProductPrice
 		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
 		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 
-		$attrId = $attrManager->findItem( 'custom', [], 'product', 'price' )->getId();
-
 		$search = $productManager->createSearch( true )->setSlice( 0, count( $prodCodes ) );
-		$func = $search->createFunction( 'product:has', ['attribute', 'custom', $attrId] );
-		$expr = array(
+		$expr = [
 			$search->compare( '==', 'product.code', $prodCodes ),
-			$search->combine( '!', [$search->compare( '!=', $func, null )] ),
 			$search->getConditions(),
-		);
+		];
+
+		try
+		{
+			$attrId = $attrManager->findItem( 'custom', [], 'product', 'price' )->getId();
+			$func = $search->createFunction( 'product:has', ['attribute', 'custom', $attrId] );
+			$expr[] = $search->combine( '!', [$search->compare( '!=', $func, null )] );
+		}
+		catch( \Aimeos\MShop\Exception $e ) {} // no custom prices available
+
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$map = [];
-
 		foreach( $productManager->searchItems( $search, ['price'] ) as $item ) {
 			$map[$item->getCode()] = $item;
 		}
