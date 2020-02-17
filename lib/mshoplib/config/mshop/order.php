@@ -359,7 +359,7 @@ return array(
 							FROM "mshop_order_base_product" AS mordbapr
 							:joins
 							WHERE :cond
-							GROUP BY :columns
+							GROUP BY :columns /*-group*/ :group /*group-*/
 								mordbapr."id", mordbapr."baseid", mordbapr."siteid", mordbapr."ordprodid", mordbapr."prodid",
 								mordbapr."prodcode", mordbapr."suppliercode", mordbapr."stocktype", mordbapr."type", mordbapr."name",
 								mordbapr."mediaurl", mordbapr."timeframe", mordbapr."quantity", mordbapr."currencyid", mordbapr."price",
@@ -557,7 +557,7 @@ return array(
 							FROM "mshop_order_base_service" AS mordbase
 							:joins
 							WHERE :cond
-							GROUP BY :columns
+							GROUP BY :columns /*-group*/ :group /*group-*/
 								mordbase."id", mordbase."baseid", mordbase."siteid", mordbase."servid",
 								mordbase."type", mordbase."code", mordbase."name", mordbase."mediaurl",
 								mordbase."currencyid", mordbase."price", mordbase."costs", mordbase."rebate",
@@ -670,7 +670,7 @@ return array(
 						FROM "mshop_order_base" AS mordba
 						:joins
 						WHERE :cond
-						GROUP BY :columns
+						GROUP BY :columns /*-group*/ :group /*group-*/
 							mordba."id", mordba."siteid", mordba."sitecode", mordba."customerid", mordba."langid",
 							mordba."currencyid", mordba."price", mordba."costs", mordba."rebate", mordba."tax",
 							mordba."taxflag", mordba."comment", mordba."customerref", mordba."mtime", mordba."editor",
