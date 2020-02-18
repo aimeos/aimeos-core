@@ -88,8 +88,10 @@ class FixedRebate
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
-		if( isset( $rebate[$currency] ) ) {
-			$base->setCoupon( $this->getCode(), $this->createRebateProducts( $base, $prodcode, $rebate[$currency] ) );
+		if( isset( $rebate[$currency] ) )
+		{
+			$rebate = $this->getObject()->calcRebate( $base, $rebate[$currency] );
+			$base->setCoupon( $this->getCode(), $this->createRebateProducts( $base, $prodcode, $rebate ) );
 		}
 
 		return $this;
