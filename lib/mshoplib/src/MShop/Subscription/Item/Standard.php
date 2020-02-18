@@ -58,9 +58,9 @@ class Standard
 	/**
 	 * Returns the ID of the ordered product
 	 *
-	 * @return string ID of the ordered product
+	 * @return string|null ID of the ordered product
 	 */
-	public function getOrderProductId() : string
+	public function getOrderProductId() : ?string
 	{
 		return $this->get( 'subscription.ordprodid' );
 	}
@@ -81,9 +81,9 @@ class Standard
 	/**
 	 * Returns the date of the next subscription renewal
 	 *
-	 * @return string ISO date in "YYYY-MM-DD HH:mm:ss" format
+	 * @return string|null ISO date in "YYYY-MM-DD HH:mm:ss" format
 	 */
-	public function getDateNext() : string
+	public function getDateNext() : ?string
 	{
 		return $this->get( 'subscription.datenext' );
 	}
@@ -131,7 +131,7 @@ class Standard
 	 */
 	public function getInterval() : string
 	{
-		return $this->get( 'subscription.interval' );
+		return $this->get( 'subscription.interval', '' );
 	}
 
 

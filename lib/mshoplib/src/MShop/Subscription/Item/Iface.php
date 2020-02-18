@@ -53,9 +53,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the ID of the ordered product
 	 *
-	 * @return string ID of the ordered product
+	 * @return string|null ID of the ordered product
 	 */
-	public function getOrderProductId() : string;
+	public function getOrderProductId() : ?string;
 
 	/**
 	 * Sets the ID of the ordered product item which the customer subscribed for
@@ -68,9 +68,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the date of the next subscription renewal
 	 *
-	 * @return string ISO date in "YYYY-MM-DD HH:mm:ss" format
+	 * @return string|null ISO date in "YYYY-MM-DD HH:mm:ss" format
 	 */
-	public function getDateNext() : string;
+	public function getDateNext() : ?string;
 
 	/**
 	 * Sets the date of the next subscription renewal
