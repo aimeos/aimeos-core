@@ -48,7 +48,7 @@ abstract class Base
 	 * equal to the passed value.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @param float Rebate value that would be applied to the basket
+	 * @param float $rebate Rebate value that would be applied to the basket
 	 * @return float New rebate value that will be used
 	 */
 	public function calcRebate( \Aimeos\MShop\Order\Item\Base\Iface $base, float $rebate ) : float

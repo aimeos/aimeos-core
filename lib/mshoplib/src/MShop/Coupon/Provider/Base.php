@@ -47,7 +47,7 @@ abstract class Base implements Iface
 	 * equal to the passed value.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @param float Rebate value that would be applied to the basket
+	 * @param float $rebate Rebate value that would be applied to the basket
 	 * @return float New rebate value that will be used
 	 */
 	public function calcRebate( \Aimeos\MShop\Order\Item\Base\Iface $base, float $rebate ) : float
@@ -206,11 +206,11 @@ abstract class Base implements Iface
 	 * Creates an order product for the given product code
 	 *
 	 * @param string $prodcode Unique product code
-	 * @param int $quantity Number of products
+	 * @param float $quantity Number of products
 	 * @param string $stocktype Unique stock type code for the order product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product
 	 */
-	protected function createProduct( string $prodcode, int $quantity = 1,
+	protected function createProduct( string $prodcode, float $quantity = 1,
 		string $stocktype = 'default' ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );

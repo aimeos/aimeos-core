@@ -50,15 +50,15 @@ class Category
 	 * equal to the passed value.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @param float Rebate value that would be applied to the basket
+	 * @param float $rebate Rebate value that would be applied to the basket
 	 * @return float New rebate value that will be used
 	 */
 	public function calcRebate( \Aimeos\MShop\Order\Item\Base\Iface $base, float $rebate ) : float
 	{
-		if( ( $value = $this->getConfigValue( 'category.only' ) ) == true )
+		if( $this->getConfigValue( 'category.only' ) == true )
 		{
 			$sum = 0;
-			$prodIds = $refIds = [];
+			$prodIds = [];
 
 			foreach( $base->getProducts() as $product ) {
 				$prodIds[$product->getProductId()][] = $product;
