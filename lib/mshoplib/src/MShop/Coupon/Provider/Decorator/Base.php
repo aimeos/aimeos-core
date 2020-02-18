@@ -42,6 +42,22 @@ abstract class Base
 
 
 	/**
+	 * Returns the maximum rebate allowed when using the provider
+	 *
+	 * The result depends on the configured restrictions and it must be less or
+	 * equal to the passed value.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @param float Rebate value that would be applied to the basket
+	 * @return float New rebate value that will be used
+	 */
+	public function calcRebate( \Aimeos\MShop\Order\Item\Base\Iface $base, float $rebate ) : float
+	{
+		return $this->provider->calcRebate( $base, $rebate );
+	}
+
+
+	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer

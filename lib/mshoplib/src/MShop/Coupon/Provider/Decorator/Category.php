@@ -31,7 +31,68 @@ class Category
 			'default' => '',
 			'required' => true,
 		),
+		'category.only' => array(
+			'code' => 'category.only',
+			'internalcode' => 'category.only',
+			'label' => 'Rebate is applied only to products of that category',
+			'type' => 'boolean',
+			'internaltype' => 'boolean',
+			'default' => false,
+			'required' => false,
+		),
 	);
+
+
+	/**
+	 * Returns the maximum rebate allowed when using the provider
+	 *
+	 * The result depends on the configured restrictions and it must be less or
+	 * equal to the passed value.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @param float Rebate value that would be applied to the basket
+	 * @return float New rebate value that will be used
+	 */
+	public function calcRebate( \Aimeos\MShop\Order\Item\Base\Iface $base, float $rebate ) : float
+	{
+		if( ( $value = $this->getConfigValue( 'category.only' ) ) == true )
+		{
+			$sum = 0;
+			$prodIds = $refIds = [];
+
+			foreach( $base->getProducts() as $product ) {
+				$prodIds[$product->getProductId()][] = $product;
+			}
+
+			$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
+			$listManager = \Aimeos\MShop::create( $this->getContext(), 'catalog/lists' );
+
+			$catItem = $manager->findItem( $this->getConfigValue( 'category.code' ) );
+
+			$search = $listManager->createSearch( true )->setSlice( 0, count( $prodIds ) );
+			$search->setConditions( $search->combine( '&&', [
+				$search->compare( '==', 'catalog.lists.parentid', $catItem->getId() ),
+				$search->compare( '==', 'catalog.lists.refid', array_keys( $prodIds ) ),
+				$search->compare( '==', 'catalog.lists.type', ['default', 'promotion'] ),
+				$search->compare( '==', 'catalog.lists.domain', 'product' ),
+				$search->getConditions()
+			] ) );
+
+			foreach( $listManager->searchItems( $search ) as $listItem )
+			{
+				if( isset( $prodIds[$listItem->getRefId()] ) )
+				{
+					foreach( $prodIds[$listItem->getRefId()] as $product ) {
+						$sum += ( $product->getPrice()->getValue() + $product->getPrice()->getCosts() ) * $product->getQuantity();
+					}
+				}
+			}
+
+			$rebate = $sum < $rebate ? $sum : $rebate;
+		}
+
+		return $this->getProvider()->calcRebate( $base, $rebate );
+	}
 
 
 	/**

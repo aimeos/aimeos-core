@@ -21,6 +21,18 @@ namespace Aimeos\MShop\Coupon\Provider;
 interface Iface
 {
 	/**
+	 * Returns the maximum rebate allowed when using the provider
+	 *
+	 * The result depends on the configured restrictions and it must be less or
+	 * equal to the passed value.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @param float Rebate value that would be applied to the basket
+	 * @return float New rebate value that will be used
+	 */
+	public function calcRebate( \Aimeos\MShop\Order\Item\Base\Iface $base, float $rebate ) : float;
+
+	/**
 	 * Checks the backend configuration attributes for validity.
 	 *
 	 * @param array $attributes Attributes added by the shop owner in the administraton interface

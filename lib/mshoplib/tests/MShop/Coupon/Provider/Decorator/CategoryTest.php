@@ -20,19 +20,18 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )->createItem();
+		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )
+			->createItem()->setConfig( ['category.code' => 'cafe', 'category.only' => '1'] );
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $this->context, $this->couponItem, 'abcd' );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Category( $provider, $this->context, $this->couponItem, 'abcd' );
 		$this->object->setObject( $this->object );
 
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
-		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
-		$product = $productManager->findItem( 'CNE' );
-
-		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
-		$orderProduct = $orderProductManager->createItem();
-		$orderProduct->copyFrom( $product );
+		$product = \Aimeos\MShop::create( $this->context, 'product' )->findItem( 'CNE' );
+		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem();
+		$orderPrice = $orderProduct->copyFrom( $product )->getPrice();
+		$orderPrice->setValue( '18.00' )->setCosts( '1.50' );
 
 		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $this->context->getLocale() );
 		$this->orderBase->addProduct( $orderProduct );
@@ -44,6 +43,13 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		unset( $this->object );
 		unset( $this->orderBase );
 		unset( $this->couponItem );
+	}
+
+
+	public function testCalcRebate()
+	{
+		$this->assertEquals( 19.5, $this->object->calcRebate( $this->orderBase, 20.0 ) );
+		$this->assertEquals( 10.0, $this->object->calcRebate( $this->orderBase, 10.0 ) );
 	}
 
 
@@ -60,8 +66,9 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$attributes = ['category.code' => 'test'];
 		$result = $this->object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertNull( $result['category.code'] );
+		$this->assertNull( $result['category.only'] );
 	}
 
 
@@ -69,8 +76,9 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->object->checkConfigBE( [] );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertIsString( $result['category.code'] );
+		$this->assertNull( $result['category.only'] );
 	}
 
 

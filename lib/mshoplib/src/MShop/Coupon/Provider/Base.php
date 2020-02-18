@@ -41,6 +41,22 @@ abstract class Base implements Iface
 
 
 	/**
+	 * Returns the maximum rebate allowed when using the provider
+	 *
+	 * The result depends on the configured restrictions and it must be less or
+	 * equal to the passed value.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @param float Rebate value that would be applied to the basket
+	 * @return float New rebate value that will be used
+	 */
+	public function calcRebate( \Aimeos\MShop\Order\Item\Base\Iface $base, float $rebate ) : float
+	{
+		return $rebate;
+	}
+
+
+	/**
 	 * Checks the backend configuration attributes for validity.
 	 *
 	 * @param array $attributes Attributes added by the shop owner in the administraton interface
@@ -221,12 +237,12 @@ abstract class Base implements Iface
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basket object
 	 * @param string $prodcode Unique product code
 	 * @param float $rebate Rebate amount that should be granted, will contain the remaining rebate if not fully used
-	 * @param int $quantity Number of products in basket
+	 * @param float $quantity Number of products in basket
 	 * @param string $stockType Unique code of the stock type the product is from
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] Order products with monetary rebates
 	 */
 	protected function createRebateProducts( \Aimeos\MShop\Order\Item\Base\Iface $base,
-		$prodcode, &$rebate, $quantity = 1, $stockType = 'default' ) : array
+		string $prodcode, float &$rebate, float $quantity = 1, string $stockType = 'default' ) : array
 	{
 		$orderProducts = [];
 
