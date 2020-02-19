@@ -145,14 +145,11 @@ abstract class Base
 
 			$stmt->execute()->finish();
 
-			if( $fetch === true )
-			{
-				if( $id === null ) {
-					$item->setId( $this->newId( $conn, $this->getConfigPath() . 'newid' ) );
-				} else {
-					$item->setId( $id ); // modified false
-				}
+			if( $id === null && $fetch === true ) {
+				$id = $this->newId( $conn, $this->getConfigPath() . 'newid' );
 			}
+
+			$item->setId( $id );
 
 			$dbm->release( $conn, $dbname );
 		}

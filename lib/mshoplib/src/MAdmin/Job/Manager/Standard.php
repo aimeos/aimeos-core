@@ -276,7 +276,6 @@ class Standard
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$item->setId( $id ); // so item is no longer modified
 			} else {
 				$stmt->bind( $idx++, $date );
 			}
@@ -321,8 +320,10 @@ class Standard
 				 * @see madmin/job/manager/standard/search/ansi
 				 * @see madmin/job/manager/standard/count/ansi
 				 */
-				$item->setId( $this->newId( $conn, 'madmin/job/manager/standard/newid' ) );
+				$id = $this->newId( $conn, 'madmin/job/manager/standard/newid' );
 			}
+
+			$item->setId( $id ); // so item is no longer modified
 
 			$dbm->release( $conn, $dbname );
 		}

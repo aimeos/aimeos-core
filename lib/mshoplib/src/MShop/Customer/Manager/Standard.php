@@ -596,7 +596,6 @@ class Standard
 			if( $id !== null ) {
 				$stmt->bind( $idx, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$billingAddress->setId( $id ); // enforce ID to be present
-				$item->setId( $id );
 			} else {
 				$stmt->bind( $idx, $date ); // Creation time
 			}
@@ -642,8 +641,10 @@ class Standard
 				 * @see mshop/customer/manager/standard/count/ansi
 				 */
 				$path = 'mshop/customer/manager/standard/newid';
-				$item->setId( $this->newId( $conn, $path ) );
+				$id = $this->newId( $conn, $path );
 			}
+
+			$item->setId( $id );
 
 			$dbm->release( $conn, $dbname );
 		}

@@ -284,7 +284,6 @@ class Standard
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$item->setId( $id ); // modified false
 			} else {
 				$stmt->bind( $idx++, $date ); //ctime
 			}
@@ -331,8 +330,10 @@ class Standard
 				 * @see mshop/stock/manager/standard/stocklevel
 				 */
 				$path = 'mshop/stock/manager/standard/newid';
-				$item->setId( $this->newId( $conn, $path ) );
+				$id = $this->newId( $conn, $path );
 			}
+
+			$item->setId( $id );
 
 			$dbm->release( $conn, $dbname );
 		}

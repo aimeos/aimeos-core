@@ -139,21 +139,17 @@ abstract class Base
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( $idx++, $date ); //ctime
 			}
 
 			$stmt->execute()->finish();
 
-			if( $fetch === true )
-			{
-				if( $id === null ) {
-					$item->setId( $this->newId( $conn, $this->getConfigPath() . 'newid' ) );
-				} else {
-					$item->setId( $id ); // modified false
-				}
+			if( $id === null && $fetch === true ) {
+				$id = $this->newId( $conn, $this->getConfigPath() . 'newid' );
 			}
+
+			$item->setId( $id );
 
 			$dbm->release( $conn, $dbname );
 		}

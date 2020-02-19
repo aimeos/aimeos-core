@@ -291,7 +291,6 @@ class Standard
 
 			if( $item->getId() !== null ) {
 				$stmt->bind( $idx++, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$item->setId( $id );
 			}
 
 			$stmt->execute()->finish();
@@ -334,8 +333,10 @@ class Standard
 				 * @see madmin/log/manager/standard/search/ansi
 				 * @see madmin/log/manager/standard/count/ansi
 				 */
-				$item->setId( $this->newId( $conn, 'madmin/log/manager/standard/newid' ) );
+				$id = $this->newId( $conn, 'madmin/log/manager/standard/newid' );
 			}
+
+			$item->setId( $id );
 
 			$dbm->release( $conn, $dbname );
 		}

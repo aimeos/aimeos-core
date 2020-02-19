@@ -389,7 +389,6 @@ class Standard
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$item->setId( $id ); //so item is no longer modified
 			} else {
 				$stmt->bind( $idx++, $date ); // ctime
 			}
@@ -435,8 +434,10 @@ class Standard
 				 * @see mshop/locale/manager/standard/count/ansi
 				 */
 				$path = 'mshop/locale/manager/standard/newid';
-				$item->setId( $this->newId( $conn, $path ) );
+				$id = $this->newId( $conn, $path );
 			}
+
+			$item->setId( $id );
 
 			$dbm->release( $conn, $dbname );
 		}

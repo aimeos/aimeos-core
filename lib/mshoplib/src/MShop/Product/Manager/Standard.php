@@ -554,10 +554,8 @@ class Standard
 			$stmt->bind( $idx++, $item->getTimeCreated() ?: $date );
 			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
 
-			if( $id !== null )
-			{
+			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$item->setId( $id ); //so item is no longer modified
 			}
 
 			$stmt->execute()->finish();
@@ -601,8 +599,10 @@ class Standard
 				 * @see mshop/product/manager/standard/count/ansi
 				 */
 				$path = 'mshop/product/manager/standard/newid';
-				$item->setId( $this->newId( $conn, $path ) );
+				$id = $this->newId( $conn, $path );
 			}
+
+			$item->setId( $id );
 
 			$dbm->release( $conn, $dbname );
 		}

@@ -559,7 +559,6 @@ class Standard
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$item->setId( $id );
 			} else {
 				$stmt->bind( $idx++, $date ); // ctime
 			}
@@ -605,8 +604,10 @@ class Standard
 				 * @see mshop/order/manager/base/coupon/standard/count/ansi
 				 */
 				$path = 'mshop/order/manager/base/coupon/standard/newid';
-				$item->setId( $this->newId( $conn, $path ) );
+				$id = $this->newId( $conn, $path );
 			}
+
+			$item->setId( $id );
 
 			$dbm->release( $conn, $dbname );
 		}
