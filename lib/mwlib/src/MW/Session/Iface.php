@@ -29,6 +29,14 @@ interface Iface
 	public function apply( array $values ) : Iface;
 
 	/**
+	 * Remove the given key from the session.
+	 *
+	 * @param string $name Key of the requested value in the session
+	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
+	 */
+	public function del( string $name ) : Iface;
+
+	/**
 	 * Returns the value of the requested session key.
 	 *
 	 * If the returned value wasn't a string, it's decoded from its serialized
@@ -39,6 +47,26 @@ interface Iface
 	 * @return mixed Value associated to the requested key
 	 */
 	public function get( string $name, $default = null );
+
+	/**
+	 * Returns the value of the requested session key and remove it from the session.
+	 *
+	 * If the returned value wasn't a string, it's decoded from its serialized
+	 * representation.
+	 *
+	 * @param string $name Key of the requested value in the session
+	 * @param mixed $default Value returned if requested key isn't found
+	 * @return mixed Value associated to the requested key
+	 */
+	public function pull( string $name, $default = null );
+
+	/**
+	 * Remove the list of keys from the session.
+	 *
+	 * @param array $name Keys to remove from the session
+	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
+	 */
+	public function remove( array $names ) : Iface;
 
 	/**
 	 * Sets the value for the specified key.

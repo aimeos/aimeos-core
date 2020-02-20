@@ -27,12 +27,59 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testApply()
+	{
+		$result = $this->object->apply( ['test' => '123456789', 'test2' => '987654321'] );
+
+		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $result );
+		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
+		$this->assertEquals( '987654321', $this->object->get( 'test2' ) );
+	}
+
+
+	public function testDel()
+	{
+		$this->object->set( 'test', '123456789' );
+		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
+
+		$result = $this->object->del( 'test' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $result );
+		$this->assertEquals( null, $this->object->get( 'test' ) );
+	}
+
+
 	public function testGet()
 	{
 		$this->assertEquals( null, $this->object->get( 'test' ) );
 
 		$this->object->set( 'test', '123456789' );
 		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
+
+		$this->object->set( 'test', ['123456789'] );
+		$this->assertEquals( ['123456789'], $this->object->get( 'test' ) );
+	}
+
+
+	public function testPull()
+	{
+		$this->object->set( 'test', '123456789' );
+		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
+
+		$this->assertEquals( '123456789', $this->object->pull( 'test' ) );
+		$this->assertEquals( null, $this->object->pull( 'test' ) );
+	}
+
+
+	public function testRemove()
+	{
+		$this->object->set( 'test', '123456789' );
+		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
+
+		$result = $this->object->remove( ['test'] );
+
+		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $result );
+		$this->assertEquals( null, $this->object->get( 'test' ) );
 	}
 
 
@@ -41,7 +88,9 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$this->object->set( 'test', null );
 		$this->assertEquals( null, $this->object->get( 'test' ) );
 
-		$this->object->set( 'test', '234' );
+		$result = $this->object->set( 'test', '234' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $result );
 		$this->assertEquals( '234', $this->object->get( 'test' ) );
 	}
 }

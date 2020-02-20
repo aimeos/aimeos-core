@@ -21,6 +21,19 @@ namespace Aimeos\MW\Session;
 class PHP extends Base implements \Aimeos\MW\Session\Iface
 {
 	/**
+	 * Remove the given key from the session.
+	 *
+	 * @param string $name Key of the requested value in the session
+	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
+	 */
+	public function del( string $name ) : Iface
+	{
+		unset( $_SESSION[$name] );
+		return $this;
+	}
+
+
+	/**
 	 * Returns the value of the requested session key.
 	 *
 	 * If the returned value wasn't a string, it's decoded from its JSON
