@@ -56,7 +56,6 @@ class Category
 	{
 		if( $this->getConfigValue( 'category.only' ) == true )
 		{
-			$sum = 0;
 			$prodIds = [];
 
 			foreach( $base->getProducts() as $product ) {
