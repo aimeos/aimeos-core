@@ -41,18 +41,23 @@ abstract class Base implements Iface
 
 
 	/**
-	 * Returns the maximum rebate allowed when using the provider
+	 * Returns the price the discount should be applied to
 	 *
 	 * The result depends on the configured restrictions and it must be less or
-	 * equal to the passed value.
+	 * equal to the passed price.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @param float $rebate Rebate value that would be applied to the basket
-	 * @return float New rebate value that will be used
+	 * @return \Aimeos\MShop\Price\Item\Iface New price that should be used
 	 */
-	public function calcRebate( \Aimeos\MShop\Order\Item\Base\Iface $base, float $rebate ) : float
+	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		return $rebate;
+		$price = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
+
+		foreach( $base->getProducts() as $product ) {
+			$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
+		}
+
+		return $price;
 	}
 
 

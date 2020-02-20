@@ -44,16 +44,15 @@ class Category
 
 
 	/**
-	 * Returns the maximum rebate allowed when using the provider
+	 * Returns the price the discount should be applied to
 	 *
 	 * The result depends on the configured restrictions and it must be less or
-	 * equal to the passed value.
+	 * equal to the passed price.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
-	 * @param float $rebate Rebate value that would be applied to the basket
-	 * @return float New rebate value that will be used
+	 * @return \Aimeos\MShop\Price\Item\Iface New price that should be used
 	 */
-	public function calcRebate( \Aimeos\MShop\Order\Item\Base\Iface $base, float $rebate ) : float
+	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		if( $this->getConfigValue( 'category.only' ) == true )
 		{
@@ -67,6 +66,7 @@ class Category
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
 			$listManager = \Aimeos\MShop::create( $this->getContext(), 'catalog/lists' );
 
+			$price = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
 			$catItem = $manager->findItem( $this->getConfigValue( 'category.code' ) );
 
 			$search = $listManager->createSearch( true )->setSlice( 0, count( $prodIds ) );
@@ -83,15 +83,15 @@ class Category
 				if( isset( $prodIds[$listItem->getRefId()] ) )
 				{
 					foreach( $prodIds[$listItem->getRefId()] as $product ) {
-						$sum += ( $product->getPrice()->getValue() + $product->getPrice()->getCosts() ) * $product->getQuantity();
+						$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
 					}
 				}
 			}
 
-			$rebate = $sum < $rebate ? $sum : $rebate;
+			return $price;
 		}
 
-		return $this->getProvider()->calcRebate( $base, $rebate );
+		return $this->getProvider()->calcPrice( $base );
 	}
 
 

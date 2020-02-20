@@ -95,24 +95,18 @@ class PercentRebate
 	 */
 	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
-		$rebate = (float) $this->getConfigValue( 'percentrebate.rebate', 0 );
+		$percent = (float) $this->getConfigValue( 'percentrebate.rebate', 0 );
 		$prodcode = $this->getConfigValue( 'percentrebate.productcode' );
 
-		if( $rebate == 0 || $prodcode === null )
+		if( $percent == 0 || $prodcode === null )
 		{
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
 			$msg = sprintf( $msg, $this->getItem()->getProvider(), 'percentrebate.productcode, percentrebate.rebate' );
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
-		$sum = 0;
-		$base->setCoupon( $this->getCode(), [] );
-
-		foreach( $base->getProducts() as $product ) {
-			$sum += ( $product->getPrice()->getValue() + $product->getPrice()->getCosts() ) * $product->getQuantity();
-		}
-
-		$rebate = $this->round( $this->getObject()->calcRebate( $base, $sum ) * $rebate / 100 );
+		$price = $this->getObject()->calcPrice( $base->setCoupon( $this->getCode(), [] ) );
+		$rebate = $this->round( ( $price->getValue() + $price->getCosts() ) * $percent / 100 );
 		$base->setCoupon( $this->getCode(), $this->createRebateProducts( $base, $prodcode, $rebate ) );
 
 		return $this;
