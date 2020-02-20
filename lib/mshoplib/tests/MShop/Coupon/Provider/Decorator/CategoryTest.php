@@ -29,7 +29,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$product = \Aimeos\MShop::create( $this->context, 'product' )->findItem( 'CNE' );
-		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem();
+		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem()->setQuantity( 2 );
 		$orderPrice = $orderProduct->copyFrom( $product )->getPrice();
 		$orderPrice->setValue( '18.00' )->setCosts( '1.50' );
 
@@ -46,10 +46,10 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCalcRebate()
+	public function testCalcPrice()
 	{
-		$this->assertEquals( 19.5, $this->object->calcRebate( $this->orderBase, 20.0 ) );
-		$this->assertEquals( 10.0, $this->object->calcRebate( $this->orderBase, 10.0 ) );
+		$price = $this->object->calcPrice( $this->orderBase );
+		$this->assertEquals( 39.0, $price->getValue() + $price->getCosts() );
 	}
 
 
