@@ -3,7 +3,7 @@
 	"description": "Full-featured e-commerce components for high performance online shops",
 	"homepage": "https://aimeos.org/",
 	"license": "LGPL-3.0-or-later",
-	"keywords": ["e-commerce", "shop", "portal", "market place"],
+	"keywords": ["ecommerce", "shop", "portal", "marketplace", "gigacommerce", "B2B", "B2C"],
 	"support": {
 		"source": "https://github.com/aimeos/aimeos-core",
 		"issues": "https://github.com/aimeos/aimeos-core/issues",
@@ -24,7 +24,7 @@
 		"ext-pcre": "*",
 		"ext-PDO": "*",
 		"ext-zip": "*",
-		"aimeos/map": "^1.0",
+		"aimeos/map": "^1.2",
 		"doctrine/dbal": "~2.0",
 		"psr/http-message": "~1.0",
 		"nyholm/psr7": "^1.2"
