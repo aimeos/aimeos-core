@@ -315,13 +315,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$item = $this->object->findItem( 'CNE', ['product'] );
-
-		if( ( $listItem = $item->getListItems( 'product', 'suggestion' )->first() ) === null ) {
-			throw new \RuntimeException( 'No list item found' );
-		}
-
 		$total = 0;
+		$suggestItem = $this->object->findItem( 'CNC' );
 		$search = $this->object->createSearch();
 
 		$expr = [];
@@ -341,7 +336,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.editor', $this->editor );
 		$expr[] = $search->compare( '>=', 'product.target', '' );
 
-		$param = ['product', ['suggestion', 'invalid'], $listItem->getRefId()];
+		$param = ['product', ['suggestion', 'invalid'], [$suggestItem->getRefId()]];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
 
 		$param = ['product', 'suggestion'];
@@ -350,7 +345,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = ['product'];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
 
-		$param = ['package-weight', null, '1'];
+		$param = ['package-weight', null, ['1']];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );
 
 		$param = ['package-weight', null];
