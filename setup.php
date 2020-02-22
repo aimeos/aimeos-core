@@ -206,9 +206,6 @@ try
 	$ctx = getContext( $conf );
 	$dbm = $ctx->getDatabaseManager();
 
-	\Aimeos\MShop::cache( false );
-	\Aimeos\MAdmin::cache( false );
-
 	$manager = new \Aimeos\MW\Setup\Manager\Multiple( $dbm, $dbconfig, $taskPaths, $ctx );
 
 	$task = ( isset( $options['task'] ) ? $options['task'] : null );
