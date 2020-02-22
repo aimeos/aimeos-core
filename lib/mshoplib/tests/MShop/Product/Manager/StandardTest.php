@@ -336,7 +336,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.editor', $this->editor );
 		$expr[] = $search->compare( '>=', 'product.target', '' );
 
-		$param = ['product', ['suggestion', 'invalid'], [$suggestItem->getRefId()]];
+		$param = ['product', ['suggestion', 'invalid'], [$suggestItem->getId()]];
 		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
 
 		$param = ['product', 'suggestion'];
