@@ -39,15 +39,8 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 		$this->additional->setEditor( 'core:lib/mshoplib' );
 
 		$testdata = $this->getData();
-		$config = $this->additional->getConfig();
-		$name = $config->get( 'mshop/stock/manager/name' );
-
-		$config->set( 'mshop/stock/manager/name', 'Standard' );
-
 		$this->addTypeItems( $testdata, ['stock/type'] );
 		$this->createData( $testdata );
-
-		$config->set( 'mshop/stock/manager/name', $name );
 
 		$this->status( 'done' );
 	}
@@ -82,8 +75,8 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function createData( array $testdata )
 	{
-		$manager = \Aimeos\MShop::create( $this->additional, 'stock' );
 		$items = [];
+		$manager = $this->getManager();
 
 		foreach( $testdata['stock'] as $key => $entry ) {
 			$items[] = $manager->createItem( $entry )->setId( null );
@@ -109,5 +102,16 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		return $testdata;
+	}
+
+
+	/**
+	 * Returns the manager for the current setup task
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
+	 */
+	protected function getManager()
+	{
+		return \Aimeos\MShop\Stock\Manager\Factory::create( $this->additional, 'Standard' );
 	}
 }
