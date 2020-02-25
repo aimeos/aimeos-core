@@ -238,7 +238,7 @@ abstract class Base
 				if( ( $row[$this->prefix . 'config'] = json_decode( $config = $row[$this->prefix . 'config'], true ) ) === null )
 				{
 					$str = 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s';
-					$msg = sprintf( $str, $this->prefix . 'list.config', $row[$this->prefix . 'id'], $config );
+					$msg = sprintf( $str, $this->prefix . 'config', $row[$this->prefix . 'id'], $config );
 					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
