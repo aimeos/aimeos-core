@@ -117,6 +117,7 @@ return array(
 
 	'supplier/lists/type' => array(
 		array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'promotion', 'label' => 'Promotion', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'media', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'text', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
