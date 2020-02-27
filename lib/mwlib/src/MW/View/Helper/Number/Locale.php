@@ -53,7 +53,7 @@ class Locale
 	 */
 	public function transform( $number, int $decimals = null ) : string
 	{
-		$this->formatter->setAttribute( \NumberFormatter::FRACTION_DIGITS, (int) $decimals ?: 2 );
+		$this->formatter->setAttribute( \NumberFormatter::FRACTION_DIGITS, $decimals !== null ? (int) $decimals : 2 );
 		return $this->formatter->format( (double) $number );
 	}
 }

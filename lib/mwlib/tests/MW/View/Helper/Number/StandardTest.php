@@ -38,9 +38,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testTransformNoDecimals()
 	{
-		$this->assertEquals( '1', $this->object->transform( 1, 0 ) );
-		$this->assertEquals( '1', $this->object->transform( 1.0, 0 ) );
-		$this->assertEquals( '1 000', $this->object->transform( 1000.0, 0 ) );
+		$this->assertSame( '1', $this->object->transform( 1, 0 ) );
+		$this->assertSame( '1', $this->object->transform( 1.0, 0 ) );
+		$this->assertSame( '1 000', $this->object->transform( 1000.0, 0 ) );
 	}
 
 }
