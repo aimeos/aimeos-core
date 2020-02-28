@@ -32,6 +32,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testTransform()
+	{
+		$this->assertEquals( '', $this->object->transform( null ) );
+	}
+
+
 	public function testTransformRelativeUrl()
 	{
 		$output = $this->object->transform( 'path/to/resource' );

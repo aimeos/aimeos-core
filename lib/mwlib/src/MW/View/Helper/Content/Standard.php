@@ -48,12 +48,12 @@ class Standard
 	/**
 	 * Returns the complete encoded content URL.
 	 *
-	 * @param string $url Absolute, relative or data: URL
+	 * @param string|null $url Absolute, relative or data: URL
 	 * @return string Complete encoded content URL
 	 */
-	public function transform( string $url ) : string
+	public function transform( ?string $url ) : string
 	{
-		if( strncmp( $url, 'http', 4 ) !== 0 && strncmp( $url, 'data:', 5 ) !== 0 && strncmp( $url, '/', 1 ) !== 0 ) {
+		if( $url && strncmp( $url, 'http', 4 ) !== 0 && strncmp( $url, 'data:', 5 ) !== 0 && strncmp( $url, '/', 1 ) !== 0 ) {
 			$url = $this->baseurl . '/' . $url;
 		}
 

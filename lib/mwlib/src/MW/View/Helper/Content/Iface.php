@@ -22,8 +22,8 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	/**
 	 * Returns the complete encoded content URL.
 	 *
-	 * @param string $url Absolute, relative or data: URL
+	 * @param string|null $url Absolute, relative or data: URL
 	 * @return string Complete encoded content URL
 	 */
-	public function transform( string $url ) : string;
+	public function transform( ?string $url ) : string;
 }
