@@ -329,10 +329,11 @@ return array(
 				'ansi' => '
 				SELECT "key", COUNT("id") AS "count"
 				FROM (
-					SELECT DISTINCT :key AS "key", mpro."id" AS "id"
+					SELECT :key AS "key", mpro."id" AS "id" /*-mincols*/ , :mincols /*mincols-*/
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
+					GROUP BY "key", "id"
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				) AS list
