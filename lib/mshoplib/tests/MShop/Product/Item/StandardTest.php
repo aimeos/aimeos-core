@@ -96,9 +96,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertEquals( false, $this->object->get( 'test', false ) );
 
-		$this->object->set( 'test', 'value' );
+		$return = $this->object->set( 'test', 'value' );
 
 		$this->assertEquals( 'value', $this->object->get( 'test', false ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
+	}
+
+
+	public function testAssign()
+	{
+		$this->assertEquals( false, $this->object->get( 'test', false ) );
+
+		$return = $this->object->assign( ['test' => 'value'] );
+
+		$this->assertEquals( 'value', $this->object->get( 'test', false ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
 	}
 
 
