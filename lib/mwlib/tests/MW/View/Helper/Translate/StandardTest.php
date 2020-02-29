@@ -33,6 +33,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertEquals( 'File', $this->object->transform( 'test', 'File', 'Files', 1 ) );
 		$this->assertEquals( 'Files', $this->object->transform( 'test', 'File', 'Files', 2 ) );
-	}
 
+		$this->assertNull( $this->object->transform( 'test', 'File', null, 0, false ) );
+		$this->assertNull( $this->object->transform( 'test', 'File', 'Files', 2, false ) );
+	}
 }

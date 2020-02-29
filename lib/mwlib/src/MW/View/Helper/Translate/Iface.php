@@ -24,9 +24,10 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 *
 	 * @param string $domain Translation domain from core or an extension
 	 * @param string $singular Singular form of the text to translate
-	 * @param string $plural Plural form of the text, used if $number is greater than one
+	 * @param string|null $plural Plural form of the text, used if $number is greater than one
 	 * @param int $number Amount of things relevant for the plural form
-	 * @return string Translated string
+	 * @param bool $force Return string untranslated if no translation is available
+	 * @return string|null Translated string or NULL if no translation is available and force parameter is FALSE
 	 */
-	public function transform( string $domain, string $singular, string $plural = '', int $number = 1 ) : string;
+	public function transform( string $domain, string $singular, ?string $plural = null, int $number = 1, bool $force = true ) : ?string;
 }
