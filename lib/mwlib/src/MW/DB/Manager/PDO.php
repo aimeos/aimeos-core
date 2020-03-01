@@ -151,7 +151,6 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 		$pass = $this->config->get( 'resource/' . $name . '/password' );
 		$sock = $this->config->get( 'resource/' . $name . '/socket' );
 		$dbase = $this->config->get( 'resource/' . $name . '/database' );
-		$persist = $this->config->get( 'resource/' . $name . '/opt-persistent', false );
 
 		$dsn = $adapter . ':dbname=' . $dbase;
 		if( $sock == null )
@@ -164,7 +163,7 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 			$dsn .= ';unix_socket=' . $sock;
 		}
 
-		$params = array( $dsn, $user, $pass, array( \PDO::ATTR_PERSISTENT => $persist ) );
+		$params = array( $dsn, $user, $pass, [] );
 		$stmts = $this->config->get( 'resource/' . $name . '/stmt', [] );
 
 		return new \Aimeos\MW\DB\Connection\PDO( $params, $stmts );
