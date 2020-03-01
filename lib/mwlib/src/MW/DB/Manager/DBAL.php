@@ -159,6 +159,7 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 			case 'oracle': $params['driver'] = 'oci8'; break;
 			case 'pgsql': $params['driver'] = 'pdo_pgsql'; break;
 			case 'sqlite': $params['driver'] = 'pdo_sqlite'; break;
+			case 'sqlsrv': $params['driver'] = 'pdo_sqlsrv'; break;
 			default: $params['driver'] = $adapter;
 		}
 
