@@ -83,7 +83,7 @@ return array(
 				'oracle' => 'SELECT mshop_subscription_seq.CURRVAL FROM DUAL',
 				'pgsql' => 'SELECT lastval()',
 				'sqlite' => 'SELECT last_insert_rowid()',
-				'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+				'sqlsrv' => 'SELECT @@IDENTITY',
 				'sqlanywhere' => 'SELECT @@IDENTITY',
 			),
 		),
