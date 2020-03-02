@@ -170,7 +170,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetUrl()
 	{
-		$return = $this->object->setUrl( '/pictures/category.jpg' );
+		$return = $this->object->setUrl( null )->setUrl( '/pictures/category.jpg' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
 		$this->assertEquals( '/pictures/category.jpg', $this->object->getUrl() );

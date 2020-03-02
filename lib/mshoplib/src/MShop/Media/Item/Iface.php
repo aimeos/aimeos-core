@@ -108,8 +108,8 @@ interface Iface
 	/**
 	 * Sets the new url of the media item.
 	 *
-	 * @param string $url URL of the media file
+	 * @param string|null $url URL of the media file
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
-	public function setUrl( string $url ) : \Aimeos\MShop\Media\Item\Iface;
+	public function setUrl( ?string $url ) : \Aimeos\MShop\Media\Item\Iface;
 }
