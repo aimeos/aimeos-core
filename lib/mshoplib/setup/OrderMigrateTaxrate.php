@@ -31,12 +31,12 @@ class OrderMigrateTaxrate extends \Aimeos\MW\Setup\Task\Base
 	public function migrate()
 	{
 		$dbdomain = 'db-order';
-		$this->msg( 'Migrating taxrate column in order tables', 0 ); $this->status( '' );
+		$this->msg( 'Migrating taxrate column in order tables', 0, '' );
+
+		$this->msg( 'Migrating taxrate column in order base product table', 1 );
 
 		if( $this->getSchema( $dbdomain )->tableExists( 'mshop_order_base_product' ) === true )
 		{
-			$this->msg( 'Migrating taxrate column in order base product table', 1 );
-
 			$conn = $this->acquire( $dbdomain );
 			$select = 'SELECT "id", "taxrate" FROM "mshop_order_base_product" WHERE "taxrate" NOT LIKE \'{%\'';
 			$update = 'UPDATE "mshop_order_base_product" SET "taxrate" = ? WHERE "id" = ?';
@@ -62,10 +62,10 @@ class OrderMigrateTaxrate extends \Aimeos\MW\Setup\Task\Base
 		}
 
 
+		$this->msg( 'Migrating taxrate column in order base service table', 1 );
+
 		if( $this->getSchema( $dbdomain )->tableExists( 'mshop_order_base_service' ) === true )
 		{
-			$this->msg( 'Migrating taxrate column in order base service table', 1 );
-
 			$conn = $this->acquire( $dbdomain );
 			$select = 'SELECT "id", "taxrate" FROM "mshop_order_base_service" WHERE "taxrate" NOT LIKE \'{%\'';
 			$update = 'UPDATE "mshop_order_base_service" SET "taxrate" = ? WHERE "id" = ?';
