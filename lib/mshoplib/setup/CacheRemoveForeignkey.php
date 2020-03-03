@@ -41,23 +41,27 @@ class CacheRemoveForeignkey extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$dbalManager = $dbal->getSchemaManager();
-		$table = $dbalManager->listTableDetails( 'madmin_cache_tag' );
 
-		if( $table->hasForeignKey( 'fk_macac_tid_tsid' ) )
+		if( $dbalManager->tablesExist( ['madmin_cache_tag'] ) )
 		{
-			$platform = $dbal->getDatabasePlatform();
-			$config = $dbalManager->createSchemaConfig();
+			$table = $dbalManager->listTableDetails( 'madmin_cache_tag' );
 
-			$newTable = clone $table;
-			$newTable->removeForeignKey( 'fk_macac_tid_tsid' );
+			if( $table->hasForeignKey( 'fk_macac_tid_tsid' ) )
+			{
+				$platform = $dbal->getDatabasePlatform();
+				$config = $dbalManager->createSchemaConfig();
 
-			$oldSchema = new \Doctrine\DBAL\Schema\Schema( [$table], [], $config );
-			$newSchema = new \Doctrine\DBAL\Schema\Schema( [$newTable], [], $config );
-			$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $oldSchema, $newSchema );
+				$newTable = clone $table;
+				$newTable->removeForeignKey( 'fk_macac_tid_tsid' );
 
-			$this->executeList( $schemaDiff->toSaveSql( $platform ) );
+				$oldSchema = new \Doctrine\DBAL\Schema\Schema( [$table], [], $config );
+				$newSchema = new \Doctrine\DBAL\Schema\Schema( [$newTable], [], $config );
+				$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $oldSchema, $newSchema );
 
-			$status = 'done';
+				$this->executeList( $schemaDiff->toSaveSql( $platform ) );
+
+				$status = 'done';
+			}
 		}
 
 		$this->release( $conn, 'db-cache' );
