@@ -798,7 +798,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$colstring .= $entry->getInternalCode() . ', ';
 		}
 
-		$keys = [];
 		$find = array( ':columns', ':joins', ':cond', ':start', ':size' );
 		$replace = array(
 			$colstring,
@@ -808,18 +807,17 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$search->getSliceSize(),
 		);
 
-		if( count( $search->getSortations() ) > 0 )
-		{
-			$keys[] = 'orderby';
-			$find[] = ':order';
-			$replace[] = $search->getSortationSource( $types, $translations, $funcs );
-
-			$keys[] = 'group';
-			$find[] = ':group';
-			$replace[] = implode( ', ', $search->translate( $search->getSortations(), $translations ) ) . ', ';
+		if( empty( $search->getSortations() ) && ( $attribute = reset( $attributes ) ) !== false ) {
+			$search = (clone $search)->setSortations( [$search->sort( '+', $attribute->getCode() )] );
 		}
 
-		return [$keys, $find, $replace];
+		$find[] = ':order';
+		$replace[] = $search->getSortationSource( $types, $translations, $funcs );
+
+		$find[] = ':group';
+		$replace[] = implode( ', ', $search->translate( $search->getSortations(), $translations ) ) . ', ';
+
+		return [$find, $replace];
 	}
 
 
@@ -866,14 +864,12 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$search = clone $search;
 		$search->setConditions( $search->combine( '&&', $cond ) );
 
-		list( $keys, $find, $replace ) = $this->getSQLReplacements( $search, $attributes, $plugins, $joins, $columns );
+		list( $find, $replace ) = $this->getSQLReplacements( $search, $attributes, $plugins, $joins, $columns );
 
 		if( $total !== null )
 		{
-			$sql = new \Aimeos\MW\Template\SQL( $this->getSqlConfig( $cfgPathCount ) );
-			$sql->replace( $find, $replace )->enable( $keys );
-
-			$result = $this->getSearchResults( $conn, $sql->str() );
+			$sql = str_replace( $find, $replace, $this->getSqlConfig( $cfgPathCount ) );
+			$result = $this->getSearchResults( $conn, $sql );
 			$row = $result->fetch();
 			$result->finish();
 
@@ -884,11 +880,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$total = (int) $row['count'];
 		}
 
-
-		$sql = new \Aimeos\MW\Template\SQL( $this->getSqlConfig( $cfgPathSearch ) );
-		$sql->replace( $find, $replace )->enable( $keys );
-
-		return $this->getSearchResults( $conn, $sql->str() );
+		return $this->getSearchResults( $conn, str_replace( $find, $replace, $this->getSqlConfig( $cfgPathSearch ) ) );
 	}
 
 

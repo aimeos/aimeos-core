@@ -47,7 +47,7 @@ return array(
 							FROM "mshop_media_list_type" AS mmedlity
 							:joins
 							WHERE :cond
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
 					),
@@ -83,8 +83,8 @@ return array(
 							FROM "mshop_media_list" AS mmedli
 							:joins
 							WHERE :cond
-							GROUP BY :key, mmedli."id" /*-columns*/ , :columns /*columns-*/
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							GROUP BY :columns :key, mmedli."id"
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						) AS list
 						GROUP BY "key"
@@ -128,11 +128,12 @@ return array(
 						FROM "mshop_media_list" AS mmedli
 						:joins
 						WHERE :cond
-						GROUP BY mmedli."id", mmedli."parentid", mmedli."siteid", mmedli."type",
+						GROUP BY :columns
+							mmedli."id", mmedli."parentid", mmedli."siteid", mmedli."type",
 							mmedli."domain", mmedli."refid", mmedli."start", mmedli."end",
 							mmedli."config", mmedli."pos", mmedli."status", mmedli."mtime",
-							mmedli."editor", mmedli."ctime" /*-columns*/ , :columns /*columns-*/
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+							mmedli."editor", mmedli."ctime"
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -198,7 +199,7 @@ return array(
 							FROM "mshop_media_property_type" mmedprty
 							:joins
 							WHERE :cond
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
 					),
@@ -262,7 +263,7 @@ return array(
 						FROM "mshop_media_property" AS mmedpr
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -327,7 +328,7 @@ return array(
 						FROM "mshop_media_type" mmedty
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -393,7 +394,7 @@ return array(
 					FROM "mshop_media" AS mmed
 					:joins
 					WHERE :cond
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),

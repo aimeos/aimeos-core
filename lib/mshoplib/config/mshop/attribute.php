@@ -47,7 +47,7 @@ return array(
 							FROM "mshop_attribute_list_type" AS mattlity
 							:joins
 							WHERE :cond
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
 					),
@@ -83,8 +83,8 @@ return array(
 							FROM "mshop_attribute_list" AS mattli
 							:joins
 							WHERE :cond
-							GROUP BY :key, mattli."id" /*-columns*/ , :columns /*columns-*/
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							GROUP BY :columns :key, mattli."id"
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						) AS list
 						GROUP BY "key"
@@ -133,7 +133,7 @@ return array(
 							mattli."domain", mattli."refid", mattli."start", mattli."end",
 							mattli."config", mattli."pos", mattli."status", mattli."mtime",
 							mattli."ctime", mattli."editor"
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -199,7 +199,7 @@ return array(
 							FROM "mshop_attribute_property_type" mattprty
 							:joins
 							WHERE :cond
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
 					),
@@ -263,7 +263,7 @@ return array(
 						FROM "mshop_attribute_property" AS mattpr
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -328,7 +328,7 @@ return array(
 						FROM "mshop_attribute_type" AS mattty
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -393,7 +393,7 @@ return array(
 					FROM "mshop_attribute" AS matt
 					:joins
 					WHERE :cond
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),

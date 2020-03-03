@@ -42,7 +42,7 @@ return array(
 					FROM "madmin_log" AS malog
 					:joins
 					WHERE :cond
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 			',
 			),

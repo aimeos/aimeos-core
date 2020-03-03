@@ -62,7 +62,7 @@ return array(
 						FROM "mshop_customer_address" AS mcusad
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -124,7 +124,7 @@ return array(
 						FROM "mshop_customer_group" AS mcusgr
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -190,7 +190,7 @@ return array(
 							FROM "mshop_customer_list_type" AS mcuslity
 							:joins
 							WHERE :cond
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
 					),
@@ -227,7 +227,7 @@ return array(
 							:joins
 							WHERE :cond
 							GROUP BY :key, mcusli."id"
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						) AS list
 						GROUP BY "key"
@@ -276,7 +276,7 @@ return array(
 							mcusli."domain", mcusli."refid", mcusli."start", mcusli."end",
 							mcusli."config", mcusli."pos", mcusli."status", mcusli."mtime",
 							mcusli."editor", mcusli."ctime"
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -342,7 +342,7 @@ return array(
 							FROM "mshop_customer_property_type" mcusprty
 							:joins
 							WHERE :cond
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
 					),
@@ -406,7 +406,7 @@ return array(
 						FROM "mshop_customer_property" AS mcuspr
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -489,7 +489,7 @@ return array(
 					FROM "mshop_customer" AS mcus
 					:joins
 					WHERE :cond
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),

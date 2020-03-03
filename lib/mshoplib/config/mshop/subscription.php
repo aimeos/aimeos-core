@@ -17,7 +17,7 @@ return array(
 						FROM "mshop_subscription" AS mord
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					) AS list
 					GROUP BY "key"
@@ -65,7 +65,7 @@ return array(
 						mord."id", mord."baseid", mord."ordprodid", mord."siteid", mord."next", mord."end",
 						mord."interval", mord."reason", mord."productid", mord."period", mord."status",
 						mord."ctime", mord."mtime", mord."editor"
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),

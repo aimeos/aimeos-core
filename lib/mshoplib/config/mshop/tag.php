@@ -46,7 +46,7 @@ return array(
 						FROM "mshop_tag_type" mtagty
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -109,7 +109,7 @@ return array(
 					FROM "mshop_tag" AS mtag
 					:joins
 					WHERE :cond
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),

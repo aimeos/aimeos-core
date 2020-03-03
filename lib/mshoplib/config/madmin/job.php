@@ -46,7 +46,7 @@ return array(
 					FROM "madmin_job" AS majob
 					:joins
 					WHERE :cond
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				',
 			),

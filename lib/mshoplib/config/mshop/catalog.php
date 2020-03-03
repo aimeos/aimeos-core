@@ -47,7 +47,7 @@ return array(
 							FROM "mshop_catalog_list_type" AS mcatlity
 							:joins
 							WHERE :cond
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
 					),
@@ -84,7 +84,7 @@ return array(
 							:joins
 							WHERE :cond
 							GROUP BY :key, mcatli."id"
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						) AS list
 						GROUP BY "key"
@@ -133,7 +133,7 @@ return array(
 							mcatli."domain", mcatli."refid", mcatli."start", mcatli."end",
 							mcatli."config", mcatli."pos", mcatli."status", mcatli."mtime",
 							mcatli."editor", mcatli."ctime"
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -268,7 +268,7 @@ return array(
 					FROM "mshop_catalog" AS mcat
 					:joins
 					WHERE :cond
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),

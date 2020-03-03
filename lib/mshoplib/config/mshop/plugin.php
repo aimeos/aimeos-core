@@ -53,7 +53,7 @@ return array(
 						FROM "mshop_plugin_type" mpluty
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -118,7 +118,7 @@ return array(
 					FROM "mshop_plugin" mplu
 					:joins
 					WHERE :cond
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),

@@ -46,7 +46,7 @@ return array(
 						FROM "mshop_stock_type" mstoty
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -110,7 +110,7 @@ return array(
 					FROM "mshop_stock" AS msto
 					:joins
 					WHERE :cond
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),

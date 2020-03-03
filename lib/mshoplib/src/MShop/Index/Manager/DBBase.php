@@ -288,37 +288,41 @@ abstract class DBBase
 		$funcs = $this->getSearchFunctions( $attributes );
 		$translations = $this->getSearchTranslations( $attributes );
 
-		$keys = [];
-		$find = array( ':joins', ':cond', ':start', ':size' );
+		$colstring = '';
+		foreach( $columns as $name => $entry ) {
+			$colstring .= $entry->getInternalCode() . ', ';
+		}
+
+		$find = array( ':columns', ':joins', ':cond', ':start', ':size' );
 		$replace = array(
+			$colstring,
 			implode( "\n", array_unique( $joins ) ),
 			$search->getConditionSource( $types, $translations, $plugins, $funcs ),
 			$search->getSliceStart(),
 			$search->getSliceSize(),
 		);
 
-		if( count( $search->getSortations() ) > 0 )
-		{
-			$names = $search->translate( $search->getSortations() );
-			$cols = $search->translate( $search->getSortations(), $translations );
-
-			$list = $aliases = [];
-			foreach( $cols as $idx => $col )
-			{
-				$list[] = 'MIN(' . $col . ') AS "s' . $idx . '"';
-				$aliases[$names[$idx]] = '"s' . $idx . '"';
-			}
-
-			$keys[] = 'orderby';
-			$find[] = ':order';
-			$replace[] = $search->getSortationSource( $types, $aliases, $funcs );
-
-			$keys[] = 'mincols';
-			$find[] = ':mincols';
-			$replace[] = implode( ', ', $list );
+		if( empty( $search->getSortations() ) && ( $attribute = reset( $attributes ) ) !== false ) {
+			$search = (clone $search)->setSortations( [$search->sort( '+', $attribute->getCode() )] );
 		}
 
-		return [$keys, $find, $replace];
+		$names = $search->translate( $search->getSortations() );
+		$cols = $search->translate( $search->getSortations(), $translations );
+
+		$list = $aliases = [];
+		foreach( $cols as $idx => $col )
+		{
+			$list[] = 'MIN(' . $col . ') AS "s' . $idx . '"';
+			$aliases[$names[$idx]] = '"s' . $idx . '"';
+		}
+
+		$find[] = ':order';
+		$replace[] = $search->getSortationSource( $types, $aliases, $funcs );
+
+		$find[] = ':mincols';
+		$replace[] = ', ' . implode( ', ', $list );
+
+		return [$find, $replace];
 	}
 
 

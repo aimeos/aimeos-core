@@ -28,6 +28,13 @@ class Standard
 
 
 	private $searchConfig = array(
+		'product.id' => array(
+			'code' => 'product.id',
+			'internalcode' => 'mpro."id"',
+			'label' => 'ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'product.siteid' => array(
 			'code' => 'product.siteid',
 			'internalcode' => 'mpro."siteid"',
@@ -56,13 +63,6 @@ class Standard
 			'label' => 'SKU',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'product.id' => array(
-			'code' => 'product.id',
-			'internalcode' => 'mpro."id"',
-			'label' => 'ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'product.dataset' => array(
 			'code' => 'product.dataset',

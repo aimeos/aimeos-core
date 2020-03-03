@@ -47,7 +47,7 @@ return array(
 						FROM "mshop_coupon_code" AS mcouco
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -119,7 +119,7 @@ return array(
 					FROM "mshop_coupon" AS mcou
 					:joins
 					WHERE :cond
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),

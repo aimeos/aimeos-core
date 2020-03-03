@@ -37,12 +37,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mpro."id" /*-mincols*/ , :mincols /*mincols-*/
+						SELECT mpro."id" :mincols
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -101,12 +101,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mpro."id" /*-mincols*/ , :mincols /*mincols-*/
+						SELECT mpro."id" :mincols
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -163,12 +163,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mpro."id" /*-mincols*/ , :mincols /*mincols-*/
+						SELECT mpro."id" :mincols
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -227,12 +227,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mpro."id" /*-mincols*/ , :mincols /*mincols-*/
+						SELECT mpro."id" :mincols
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -289,12 +289,12 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mpro."id" /*-mincols*/ , :mincols /*mincols-*/
+						SELECT mpro."id" :mincols
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -329,12 +329,12 @@ return array(
 				'ansi' => '
 				SELECT "key", COUNT("id") AS "count"
 				FROM (
-					SELECT :key AS "key", mpro."id" AS "id" /*-mincols*/ , :mincols /*mincols-*/
+					SELECT :key AS "key", mpro."id" AS "id" :mincols
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
 					GROUP BY "key", "id"
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				) AS list
 				GROUP BY "key"
@@ -342,12 +342,12 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mpro."id" /*-mincols*/ , :mincols /*mincols-*/
+					SELECT mpro."id" :mincols
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),

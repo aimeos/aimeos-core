@@ -47,7 +47,7 @@ return array(
 							FROM "mshop_service_list_type" AS mserlity
 							:joins
 							WHERE :cond
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
 					),
@@ -83,8 +83,8 @@ return array(
 							FROM "mshop_service_list" AS mserli
 							:joins
 							WHERE :cond
-							GROUP BY :key, mserli."id" /*-columns*/ , :columns /*columns-*/
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							GROUP BY :columns :key, mserli."id"
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						) AS list
 						GROUP BY "key"
@@ -132,7 +132,7 @@ return array(
 							mserli."id", mserli."parentid", mserli."siteid", mserli."type", mserli."domain",
 							mserli."refid", mserli."start", mserli."end", mserli."config", mserli."pos",
 							mserli."status", mserli."mtime", mserli."editor", mserli."ctime"
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -197,7 +197,7 @@ return array(
 						FROM "mshop_service_type" AS mserty
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -263,7 +263,7 @@ return array(
 					FROM "mshop_service" AS mser
 					:joins
 					WHERE :cond
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),

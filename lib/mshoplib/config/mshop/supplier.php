@@ -62,7 +62,7 @@ return array(
 						FROM "mshop_supplier_address" AS msupad
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -132,7 +132,7 @@ return array(
 								msuplity."id", msuplity."siteid", msuplity."code", msuplity."domain",
 								msuplity."label", msuplity."status", msuplity."mtime", msuplity."editor",
 								msuplity."ctime", msuplity."pos"
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
 					),
@@ -168,8 +168,8 @@ return array(
 							FROM "mshop_supplier_list" AS msupli
 							:joins
 							WHERE :cond
-							GROUP BY :key, msupli."id" /*-columns*/ , :columns /*columns-*/
-							/*-orderby*/ ORDER BY :order /*orderby-*/
+							GROUP BY :columns :key, msupli."id"
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						) AS list
 						GROUP BY "key"
@@ -213,7 +213,7 @@ return array(
 						FROM "mshop_supplier_list" AS msupli
 						:joins
 						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -274,7 +274,7 @@ return array(
 					FROM "mshop_supplier" AS msup
 					:joins
 					WHERE :cond
-					/*-orderby*/ ORDER BY :order /*orderby-*/
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),
