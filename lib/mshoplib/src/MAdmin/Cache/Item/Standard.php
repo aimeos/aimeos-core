@@ -57,17 +57,6 @@ class Standard
 
 
 	/**
-	 * Returns the ID of the site the item is stored
-	 *
-	 * @return string|null Site ID (or null if not available)
-	 */
-	public function getSiteId() : ?string
-	{
-		return $this->get( 'siteid' );
-	}
-
-
-	/**
 	 * Returns the value associated to the key.
 	 *
 	 * @return string Returns the value of the item
@@ -190,10 +179,6 @@ class Standard
 		$list['cache.value'] = $this->getValue();
 		$list['cache.expire'] = $this->getTimeExpire();
 		$list['cache.tags'] = $this->getTags();
-
-		if( $private === true ) {
-			$list['cache.siteid'] = $this->getSiteId();
-		}
 
 		return $list;
 	}

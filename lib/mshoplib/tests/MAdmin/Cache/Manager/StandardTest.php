@@ -72,7 +72,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$siteid = $this->context->getLocale()->getSiteId();
+		$this->object->saveItem( $this->object->createItem()->setId( 'unittest' )->setValue( 'test' ) );
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'cache.id', 'unittest' ) );
@@ -84,20 +84,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		{
 			$this->assertEquals( 'unittest', $id );
 			$this->assertEquals( 'unittest', $item->getId() );
-			$this->assertEquals( $siteid, $item->getSiteId() );
-			$this->assertEquals( 'unit test value', $item->getValue() );
+			$this->assertEquals( 'test', $item->getValue() );
 		}
+
+		$this->object->deleteItem( 'unittest' );
 	}
 
 
 	public function testGetItem()
 	{
-		$siteid = $this->context->getLocale()->getSiteId();
+		$this->object->saveItem( $this->object->createItem()->setId( 'unittest' )->setValue( 'test' ) );
+
 		$item = $this->object->getItem( 'unittest' );
 
 		$this->assertEquals( 'unittest', $item->getId() );
-		$this->assertEquals( $siteid, $item->getSiteId() );
-		$this->assertEquals( 'unit test value', $item->getValue() );
+		$this->assertEquals( 'test', $item->getValue() );
+
+		$this->object->deleteItem( 'unittest' );
 	}
 
 
@@ -118,13 +121,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 'unittest2', $item->getId() );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
-		$this->assertEquals( $item->getSiteid(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getTimeExpire(), $itemSaved->getTimeExpire() );
 		$this->assertEquals( $item->getValue(), $itemSaved->getValue() );
 		$this->assertEquals( $item->getTags(), $itemSaved->getTags() );
 
 		$this->assertEquals( $itemExp->getId(), $itemSaved->getId() );
-		$this->assertEquals( $itemExp->getSiteid(), $itemSaved->getSiteId() );
 		$this->assertEquals( $itemExp->getTimeExpire(), $itemUpd->getTimeExpire() );
 		$this->assertEquals( $itemExp->getValue(), $itemUpd->getValue() );
 		$this->assertEquals( $itemExp->getTags(), $itemUpd->getTags() );

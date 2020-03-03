@@ -32,14 +32,6 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'cache.siteid' => array(
-			'code' => 'cache.siteid',
-			'internalcode' => '"siteid"',
-			'label' => 'Site ID',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
-		),
 		'cache.value' => array(
 			'code' => 'cache.value',
 			'internalcode' => '"value"',
@@ -201,8 +193,7 @@ class Standard
 		$context = $this->getContext();
 		$config = $context->getConfig();
 
-		$path = 'madmin/cache/manager/submanagers';
-		foreach( $config->get( $path, [] ) as $domain ) {
+		foreach( $config->get( 'madmin/cache/manager/submanagers', [] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -238,7 +229,24 @@ class Standard
 		 * @see madmin/cache/manager/standard/count/ansi
 		 */
 
-		return $this->clearBase( $siteids, 'madmin/cache/manager/standard/delete' );
+		$dbm = $context->getDatabaseManager();
+		$dbname = $this->getResourceName();
+		$conn = $dbm->acquire( $dbname );
+
+		try
+		{
+			$sql = str_replace( ':cond', '1=1', $this->getSqlConfig( 'madmin/cache/manager/standard/delete' ) );
+			$stmt = $conn->create( $sql )->execute()->finish();
+
+			$dbm->release( $conn, $dbname );
+		}
+		catch( \Exception $e )
+		{
+			$dbm->release( $conn, $dbname );
+			throw $e;
+		}
+
+		return $this;
 	}
 
 

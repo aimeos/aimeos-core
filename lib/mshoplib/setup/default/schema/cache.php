@@ -13,11 +13,10 @@ return array(
 			$table = $schema->createTable( 'madmin_cache' );
 
 			$table->addColumn( 'id', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
 			$table->addColumn( 'expire', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0x1ffff ) );
 
-			$table->addUniqueIndex( array( 'id', 'siteid' ), 'unq_macac_id_siteid' );
+			$table->addUniqueIndex( array( 'id' ), 'unq_macac_id' );
 			$table->addIndex( array( 'expire' ), 'idx_majob_expire' );
 
 			return $schema;
@@ -28,14 +27,13 @@ return array(
 			$table = $schema->createTable( 'madmin_cache_tag' );
 
 			$table->addColumn( 'tid', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'tsiteid', 'string', ['length' => 255, 'default' => ''] );
 			$table->addColumn( 'tname', 'string', array( 'length' => 255 ) );
 
-			$table->addUniqueIndex( array( 'tid', 'tsiteid', 'tname' ), 'unq_macacta_tid_tsid_tname' );
-			$table->addIndex( array( 'tid', 'tsiteid' ), 'fk_macac_tid_tsid' );
+			$table->addUniqueIndex( array( 'tid', 'tname' ), 'unq_macacta_tid_tname' );
+			$table->addIndex( array( 'tid' ), 'fk_macac_tid' );
 
-			$table->addForeignKeyConstraint( 'madmin_cache', array( 'tid', 'tsiteid' ), array( 'id', 'siteid' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_macac_tid_tsid' );
+			$table->addForeignKeyConstraint( 'madmin_cache', array( 'tid' ), array( 'id' ),
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_macacta_tid' );
 
 			return $schema;
 		},

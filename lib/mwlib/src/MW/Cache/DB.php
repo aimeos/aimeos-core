@@ -25,7 +25,6 @@ class DB
 	private $sql;
 	private $dbm;
 	private $dbname;
-	private $siteid;
 	private $searchConfig;
 
 
@@ -34,33 +33,27 @@ class DB
 	 *
 	 * The config['search] array must contain these key/array pairs suitable for \Aimeos\MW\Criteria\Attribute\Standard:
 	 *	[cache.id] => Array containing the codes/types/labels for the unique ID
-	 *	[cache.siteid] => Array containing the codes/types/labels for the site ID
 	 *	[cache.value] => Array containing the codes/types/labels for the cached value
 	 *	[cache.expire] => Array containing the codes/types/labels for the expiration date
 	 *	[cache.tag.name] => Array containing the codes/types/labels for the tag name
 	 *
 	 * The config['sql] array must contain these statement:
 	 *	[delete] =>
-	 *		DELETE FROM cachetable WHERE siteid = ? AND :cond
+	 *		DELETE FROM cachetable WHERE :cond
 	 *	[deletebytag] =>
-	 *		DELETE FROM cachetable WHERE siteid = ? AND id IN (
-	 *			SELECT tid FROM cachetagtable WHERE tsiteid = ? AND :cond
+	 *		DELETE FROM cachetable WHERE id IN (
+	 *			SELECT tid FROM cachetagtable WHERE :cond
 	 *		)
 	 *	[get] =>
-	 *		SELECT id, value, expire FROM cachetable WHERE siteid = ? AND :cond
+	 *		SELECT id, value, expire FROM cachetable WHERE :cond
 	 *	[set] =>
-	 *		INSERT INTO cachetable ( id, siteid, expire, value ) VALUES ( ?, ?, ?, ? )
+	 *		INSERT INTO cachetable ( id, expire, value ) VALUES ( ?, ?, ? )
 	 *	[settag] =>
-	 *		INSERT INTO cachetagtable ( tid, tsiteid, tname ) VALUES ( ?, ?, ? )
+	 *		INSERT INTO cachetagtable ( tid, tname ) VALUES ( ?, ? )
 	 *
 	 * For using a different database connection, the name of the database connection
 	 * can be also given in the "config" parameter. In this case, use e.g.
 	 *  config['dbname'] = 'db-cache'
-	 *
-	 * If a site ID is given, the cache is partitioned for different
-	 * sites. This also includes access control so cached values can be only
-	 * retrieved from the same site. Specify a site ID with
-	 *  config['siteid'] = 123
 	 *
 	 * @param array $config Associative list with SQL statements, search attribute definitions and database name
 	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database manager
@@ -79,7 +72,6 @@ class DB
 		$this->checkSqlConfig( $config['sql'] );
 
 		$this->dbname = ( isset( $config['dbname'] ) ? $config['dbname'] : 'db' );
-		$this->siteid = ( isset( $config['siteid'] ) ? $config['siteid'] : null );
 		$this->searchConfig = $config['search'];
 		$this->sql = $config['sql'];
 		$this->dbm = $dbm;
@@ -107,9 +99,7 @@ class DB
 			$translations = $this->getSearchTranslations( $this->searchConfig );
 			$conditions = $search->getConditionSource( $types, $translations );
 
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) );
-			$stmt->bind( 1, $this->siteid );
-			$stmt->execute()->finish();
+			$conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) )->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
 		}
@@ -138,10 +128,7 @@ class DB
 
 		try
 		{
-			$stmt = $conn->create( str_replace( ':cond', '1=1', $this->sql['delete'] ) );
-			$stmt->bind( 1, $this->siteid );
-			$stmt->execute()->finish();
-
+			$conn->create( str_replace( ':cond', '1=1', $this->sql['delete'] ) )->execute()->finish();
 			$this->dbm->release( $conn, $this->dbname );
 		}
 		catch( \Exception $e )
@@ -178,9 +165,7 @@ class DB
 			$translations = $this->getSearchTranslations( $this->searchConfig );
 			$conditions = $search->getConditionSource( $types, $translations );
 
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) );
-			$stmt->bind( 1, $this->siteid );
-			$stmt->execute()->finish();
+			$conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) )->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
 		}
@@ -219,10 +204,7 @@ class DB
 			$translations = $this->getSearchTranslations( $this->searchConfig );
 			$conditions = $search->getConditionSource( $types, $translations );
 
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['deletebytag'] ) );
-			$stmt->bind( 1, $this->siteid );
-			$stmt->bind( 2, $this->siteid );
-			$stmt->execute()->finish();
+			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['deletebytag'] ) )->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
 		}
@@ -272,9 +254,7 @@ class DB
 			$translations = $this->getSearchTranslations( $this->searchConfig );
 			$conditions = $search->getConditionSource( $types, $translations );
 
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['get'] ) );
-			$stmt->bind( 1, $this->siteid );
-			$result = $stmt->execute();
+			$result = $conn->create( str_replace( ':cond', $conditions, $this->sql['get'] ) )->execute();
 
 			while( ( $row = $result->fetch() ) !== null ) {
 				$list[$row['id']] = (string) $row['value'];
@@ -330,9 +310,7 @@ class DB
 			$translations = $this->getSearchTranslations( $this->searchConfig );
 			$conditions = $search->getConditionSource( $types, $translations );
 
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['get'] ) );
-			$stmt->bind( 1, $this->siteid );
-			$result = $stmt->execute();
+			$result = $conn->create( str_replace( ':cond', $conditions, $this->sql['get'] ) )->execute();
 
 			while( $result->fetch() !== null ) {
 				$return = true;
@@ -386,16 +364,14 @@ class DB
 				}
 
 				$stmt->bind( 1, (string) $key );
-				$stmt->bind( 2, $this->siteid );
-				$stmt->bind( 3, $expires );
-				$stmt->bind( 4, (string) $value );
+				$stmt->bind( 2, $expires );
+				$stmt->bind( 3, (string) $value );
 				$stmt->execute()->finish();
 
 				foreach( $tags as $name )
 				{
 					$stmtTag->bind( 1, (string) $key );
-					$stmtTag->bind( 2, $this->siteid );
-					$stmtTag->bind( 3, (string) $name );
+					$stmtTag->bind( 2, (string) $name );
 					$stmtTag->execute()->finish();
 				}
 			}
@@ -424,7 +400,7 @@ class DB
 	 */
 	protected function checkSearchConfig( array $config )
 	{
-		$required = array( 'cache.id', 'cache.siteid', 'cache.value', 'cache.expire', 'cache.tag.name' );
+		$required = array( 'cache.id', 'cache.value', 'cache.expire', 'cache.tag.name' );
 
 		foreach( $required as $key => $entry )
 		{

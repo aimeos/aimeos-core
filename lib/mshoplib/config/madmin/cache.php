@@ -11,38 +11,37 @@ return array(
 		'standard' => array(
 			'delete' => array(
 				'ansi' => '
-					DELETE FROM "madmin_cache" WHERE "siteid" = ? AND :cond
+					DELETE FROM "madmin_cache" WHERE :cond
 				',
 			),
 			'deletebytag' => array(
 				'ansi' => '
-					DELETE FROM "madmin_cache" WHERE "siteid" = ? AND id IN (
-						SELECT "tid" FROM "madmin_cache_tag"
-						WHERE "tsiteid" = ? AND :cond
+					DELETE FROM "madmin_cache" WHERE id IN (
+						SELECT "tid" FROM "madmin_cache_tag" WHERE :cond
 					)
 				',
 			),
 			'get' => array(
 				'ansi' => '
 					SELECT "id", "value", "expire" FROM "madmin_cache"
-					WHERE "siteid" = ? AND :cond
+					WHERE :cond
 				',
 			),
 			'set' => array(
 				'ansi' => '
 					INSERT INTO "madmin_cache" (
-						"id", "siteid", "expire", "value"
+						"id", "expire", "value"
 					) VALUES (
-						?, ?, ?, ?
+						?, ?, ?
 					)
 				',
 			),
 			'settag' => array(
 				'ansi' => '
 					INSERT INTO "madmin_cache_tag" (
-						"tid", "tsiteid", "tname"
+						"tid", "tname"
 					) VALUES (
-						?, ?, ?
+						?, ?
 					)
 				',
 			),

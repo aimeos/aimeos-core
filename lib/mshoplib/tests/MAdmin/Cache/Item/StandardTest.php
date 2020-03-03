@@ -20,7 +20,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->values = array(
 			'id' => 'product/id/1:detail-body',
-			'siteid' => 1,
 			'value' => 'test',
 			'expire' => '2000-01-01 00:00:00',
 			'tags' => array( 'tag:1', 'tag:2' ),
@@ -48,12 +47,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setId( 'product/id/2:detail-header' );
 		$this->assertEquals( 'product/id/2:detail-header', $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
-	}
-
-
-	public function testGetSiteId()
-	{
-		$this->assertEquals( 1, $this->object->getSiteId() );
 	}
 
 
@@ -131,9 +124,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$list = $this->object->toArray( true );
 
-		$this->assertEquals( 5, count( $list ) );
+		$this->assertEquals( 4, count( $list ) );
 		$this->assertEquals( 'product/id/1:detail-body', $list['cache.id'] );
-		$this->assertEquals( 1, $list['cache.siteid'] );
 		$this->assertEquals( 'test', $list['cache.value'] );
 		$this->assertEquals( '2000-01-01 00:00:00', $list['cache.expire'] );
 		$this->assertEquals( array( 'tag:1', 'tag:2' ), $list['cache.tags'] );
