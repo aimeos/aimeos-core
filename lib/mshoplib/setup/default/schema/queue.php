@@ -19,7 +19,7 @@ return array(
 			$table->addColumn( 'message', 'text', array( 'length' => 0xffff ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_maque_id' );
-			$table->addIndex( array( 'queue', 'cname', 'rtime' ), 'idx_maque_queue_cname_rtime' );
+			$table->addIndex( array( 'queue', 'rtime', 'cname' ), 'idx_maque_queue_rtime_cname' );
 
 			return $schema;
 		},
