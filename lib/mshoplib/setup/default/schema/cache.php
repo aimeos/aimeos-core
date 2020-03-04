@@ -16,7 +16,7 @@ return array(
 			$table->addColumn( 'expire', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0x1ffff ) );
 
-			$table->addUniqueIndex( array( 'id' ), 'unq_macac_id' );
+			$table->setPrimaryKey( array( 'id' ), 'pk_macac_id' );
 			$table->addIndex( array( 'expire' ), 'idx_majob_expire' );
 
 			return $schema;

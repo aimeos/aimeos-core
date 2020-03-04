@@ -31,7 +31,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$cacheTable->addColumn( 'id', 'string', array( 'length' => 255 ) );
 		$cacheTable->addColumn( 'expire', 'datetime', array( 'notnull' => false ) );
 		$cacheTable->addColumn( 'value', 'text', array( 'length' => 0xffff ) );
-		$cacheTable->addUniqueIndex( array( 'id' ) );
+		$cacheTable->setPrimaryKey( array( 'id' ) );
 		$cacheTable->addIndex( array( 'expire' ) );
 
 		$tagTable = $schema->createTable( 'mw_cache_tag_test' );
