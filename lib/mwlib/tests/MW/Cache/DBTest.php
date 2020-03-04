@@ -25,6 +25,8 @@ class DBTest extends \PHPUnit\Framework\TestCase
 			return;
 		}
 
+		$conn = self::$dbm->acquire();
+
 		$schema = new \Doctrine\DBAL\Schema\Schema();
 
 		$cacheTable = $schema->createTable( 'mw_cache_test' );
@@ -34,14 +36,17 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$cacheTable->setPrimaryKey( array( 'id' ) );
 		$cacheTable->addIndex( array( 'expire' ) );
 
+		foreach( $schema->toSQL( $conn->getRawObject()->getDatabasePlatform() ) as $sql ) {
+			$conn->create( $sql )->execute()->finish();
+		}
+
+		$schema = new \Doctrine\DBAL\Schema\Schema();
+
 		$tagTable = $schema->createTable( 'mw_cache_tag_test' );
 		$tagTable->addColumn( 'tid', 'string', array( 'length' => 255 ) );
 		$tagTable->addColumn( 'tname', 'string', array( 'length' => 255 ) );
 		$tagTable->addUniqueIndex( array( 'tid', 'tname' ) );
 		$tagTable->addForeignKeyConstraint( 'mw_cache_test', array( 'tid' ), array( 'id' ), array( 'onDelete' => 'CASCADE' ) );
-
-
-		$conn = self::$dbm->acquire();
 
 		foreach( $schema->toSQL( $conn->getRawObject()->getDatabasePlatform() ) as $sql ) {
 			$conn->create( $sql )->execute()->finish();
