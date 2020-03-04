@@ -5,59 +5,120 @@
  * @copyright Aimeos (aimeos.org), 2015-2020
  */
 
-return array(
-	'service/type' => array(
-		'service/payment' => array(
-			'domain' => 'service',
-			'code' => 'payment',
-			'label' => 'Payment',
-			'status' => 1
-		),
-		'service/delivery' => array(
-			'domain' => 'service',
-			'code' => 'delivery',
-			'label' => 'Delivery',
-			'status' => 1
-		),
-	),
+return [
+	'service/type' => [
+		['service.type.domain' => 'service', 'service.type.code' => 'payment', 'service.type.label' => 'Payment', 'service.type.status' => 1 ],
+		['service.type.domain' => 'service', 'service.type.code' => 'delivery', 'service.type.label' => 'Delivery', 'service.type.status' => 1 ],
+	],
 
-	'service' => array(
-		'service/delivery/unitcode' => array(
-			'pos' => 0,
-			'type' => 'delivery',
-			'code' => 'unitcode',
-			'label' => 'unitlabel',
-			'provider' => 'Standard',
-			'config' => [],
-			'status' => 1
-		),
-		'service/payment/unitcode' => array(
-			'pos' => 0,
-			'type' => 'payment',
-			'code' => 'unitpaymentcode',
-			'label' => 'unitpaymentlabel',
-			'provider' => 'PrePay',
-			'config' => array(
+	'service/lists/type' => [
+		['service.lists.type.domain' => 'product', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
+		['service.lists.type.domain' => 'attribute', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
+		['service.lists.type.domain' => 'catalog', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
+		['service.lists.type.domain' => 'media', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
+		['service.lists.type.domain' => 'price', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
+		['service.lists.type.domain' => 'service', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
+		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
+		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype1', 'service.lists.type.label' => 'Unit type 1', 'service.lists.type.status' => 1 ],
+		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype2', 'service.lists.type.label' => 'Unit type 2', 'service.lists.type.status' => 1 ],
+		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype3', 'service.lists.type.label' => 'Unit type 3', 'service.lists.type.status' => 1 ],
+		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype4', 'service.lists.type.label' => 'Unit type 4', 'service.lists.type.status' => 1 ],
+	],
+
+	'service' => [
+		'service/delivery/unitcode' => [
+			'service.type' => 'delivery', 'service.code' => 'unitcode', 'service.label' => 'unitlabel',
+			'service.provider' => 'Standard', 'service.position' => 0, 'service.status' => 1,
+			'service.config' => [],
+			'lists' => [
+				'price' => [[
+					'service.lists.type' => 'default', 'service.lists.position' => 0,
+					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'service',
+					'price.label'=>'product/default/12.95/1.99', 'price.quantity' => 1, 'price.value' => '12.95',
+					'price.costs' => '1.99', 'price.rebate' => '1.05', 'price.taxrate' => '19.00'
+				], [
+					'service.lists.type' => 'default', 'service.lists.position' => 0,
+					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'service',
+					'price.label'=>'product/default/2.95/0.00', 'price.quantity' => 2, 'price.value' => '2.95',
+					'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00'
+				]],
+				'media' => [[
+					'service.lists.type' => 'default', 'service.lists.position' => 0,
+					'media.languageid' => null, 'media.type' => 'default', 'media.domain' => 'service',
+					'media.label' => 'service_image1',  'media.status' => 1, 'media.mimetype' => 'image/png',
+					'media.url' => 'path/to/service.png', 'media.previews' => [1 => 'path/to/service.png'],
+				]],
+				'text' => [[
+					'service.lists.type' => 'unittype1', 'service.lists.position' => 0,
+					'text.languageid' => 'de', 'text.type' => 'serviceinformation', 'text.domain' => 'service',
+					'text.label' => 'service_text1', 'text.content' => 'Unittest: Service text 1 de', 'text.status' => 1
+				], [
+					'service.lists.type' => 'unittype1', 'service.lists.position' => 1,
+					'text.languageid' => 'de', 'text.type' => 'serviceinformation', 'text.domain' => 'service',
+					'text.label' => 'service_text2', 'text.content' => 'Unittest: Service text 2 de', 'text.status' => 1
+				], [
+					'service.lists.type' => 'unittype1', 'service.lists.position' => 2,
+					'service.lists.datestart' => '2008-02-17 12:34:58', 'service.lists.dateend' => '2010-01-01 23:59:59',
+					'text.languageid' => 'de', 'text.type' => 'serviceinformation', 'text.domain' => 'service',
+					'text.label' => 'service_text3', 'text.content' => 'Unittest: Service text 3 de', 'text.status' => 0
+				], [
+					'service.lists.type' => 'default', 'service.lists.position' => 1,
+					'text.languageid' => 'de', 'text.type' => 'name', 'text.domain' => 'service',
+					'text.label' => 'service_text4', 'text.content' => 'Unittest service name', 'text.status' => 1
+				], [
+					'service.lists.type' => 'default', 'service.lists.position' => 2,
+					'text.languageid' => 'de', 'text.type' => 'short', 'text.domain' => 'service',
+					'text.label' => 'service_text5', 'text.content' => 'Short service description', 'text.status' => 1
+				], [
+					'service.lists.type' => 'default', 'service.lists.position' => 3,
+					'text.languageid' => 'de', 'text.type' => 'long', 'text.domain' => 'service',
+					'text.label' => 'service_text6', 'text.content' => 'A long description for the service item', 'text.status' => 1
+				]],
+			],
+		],
+		'service/payment/unitcode' => [
+			'service.type' => 'payment', 'service.code' => 'unitpaymentcode', 'service.label' => 'unitpaymentlabel',
+			'service.provider' => 'PrePay', 'service.position' => 0, 'service.status' => 1,
+			'service.config' => [
 				'payment.url-success' => 'paymenturl'
-			),
-			'status' => 1
-		),
-		'service/payment/directdebit' => array(
-			'pos' => 1,
-			'type' => 'payment',
-			'code' => 'directdebit-test',
-			'label' => 'direct debit label',
-			'provider' => 'DirectDebit',
-			'config' => [],
-			'status' => 1
-		),
-		'service/payment/paypalexpress' => array(
-			'pos' => 2,
-			'type' => 'payment',
-			'code' => 'paypalexpress',
-			'label' => 'PayPalExpress',
-			'provider' => 'PayPalExpress',
-			'config' => array(
+			],
+			'lists' => [
+				'price' => [[
+					'service.lists.type' => 'default', 'service.lists.position' => 0,
+					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'service',
+					'price.label'=>'product/default/12.95/1.99', 'price.quantity' => 1, 'price.value' => '12.95',
+					'price.costs' => '1.99', 'price.rebate' => '1.05', 'price.taxrate' => '19.00'
+				], [
+					'service.lists.type' => 'default', 'service.lists.position' => 0,
+					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'service',
+					'price.label'=>'product/default/2.95/0.00', 'price.quantity' => 2, 'price.value' => '2.95',
+					'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00'
+				]],
+				'text' => [[
+					'service.lists.type' => 'unittype1', 'service.lists.position' => 0,
+					'text.languageid' => 'de', 'text.type' => 'serviceinformation', 'text.domain' => 'service',
+					'text.label' => 'service_text1', 'text.content' => 'Unittest: Service text 1 de', 'text.status' => 1
+				], [
+					'service.lists.type' => 'unittype1', 'service.lists.position' => 1,
+					'text.languageid' => 'de', 'text.type' => 'serviceinformation', 'text.domain' => 'service',
+					'text.label' => 'service_text2', 'text.content' => 'Unittest: Service text 2 de', 'text.status' => 1
+				], [
+					'service.lists.type' => 'unittype1', 'service.lists.position' => 2,
+					'service.lists.datestart' => '2008-02-17 12:34:58', 'service.lists.dateend' => '2010-01-01 23:59:59',
+					'text.languageid' => 'de', 'text.type' => 'serviceinformation', 'text.domain' => 'service',
+					'text.label' => 'service_text3', 'text.content' => 'Unittest: Service text 3 de', 'text.status' => 0
+				]],
+			],
+		],
+		'service/payment/directdebit' => [
+			'service.type' => 'payment', 'service.code' => 'directdebit-test', 'service.label' => 'direct debit label',
+			'service.provider' => 'DirectDebit', 'service.position' => 1, 'service.status' => 1,
+			'service.config' => [],
+		],
+		'service/payment/paypalexpress' => [
+			'service.type' => 'payment', 'service.code' => 'paypalexpress', 'service.label' => 'PayPalExpress',
+			'service.provider' => 'PayPalExpress', 'service.position' => 2, 'service.status' => 1,
+			'service.config' => [
 				'paypalexpress.url-validate' => 'https://www.sandbox.paypal.com/webscr&cmd=_notify-validate',
 				'paypalexpress.ApiUsername' => 'selling2_api1.metaways.de',
 				'paypalexpress.AccountEmail' => 'selling2@metaways.de',
@@ -69,8 +130,7 @@ return array(
 				'payment.url-success' => 'http://returnurl.com/updatesync.php',
 				'payment.url-cancel' => 'http://cancelurl.com',
 				'payment.url-update' => 'http://shopurl.com/ipn.php'
-			),
-			'status' => 1
-		),
-	)
-);
+			],
+		],
+	]
+	];

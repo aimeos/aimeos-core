@@ -120,13 +120,5 @@ return array(
 		'text/service' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'service', 'label' => 'service', 'content' => 'Service Name', 'status' => 1 ),
 //dummy default
 		'text/text' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'text', 'label' => 'text', 'content' => 'Text Name', 'status' => 1 ),
-
-//SERVICE
-		'text/service_text1' => array( 'langid' => 'de', 'type' => 'serviceinformation', 'domain' => 'service', 'label' => 'service_text1', 'content' => 'Unittest: Service text 1 de', 'status' => 1 ),
-		'text/service_text2' => array( 'langid' => 'de', 'type' => 'serviceinformation', 'domain' => 'service', 'label' => 'service_text2', 'content' => 'Unittest: Service text 2 de', 'status' => 1 ),
-		'text/service_text3' => array( 'langid' => 'de', 'type' => 'serviceinformation', 'domain' => 'service', 'label' => 'service_text3', 'content' => 'Unittest: Service text 3 de', 'status' => 0 ),
-		'text/service_text4' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'service', 'label' => 'service_text4', 'content' => 'Unittest service name', 'status' => 1 ),
-		'text/service_text5' => array( 'langid' => 'de', 'type' => 'short', 'domain' => 'service', 'label' => 'service_text5', 'content' => 'Short service description', 'status' => 1 ),
-		'text/service_text6' => array( 'langid' => 'de', 'type' => 'long', 'domain' => 'service', 'label' => 'service_text6', 'content' => 'A long description for the service item', 'status' => 1 ),
 	),
 );

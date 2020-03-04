@@ -278,7 +278,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setSlice( 0, 10 );
 		$results = $this->object->searchItems( $search, [], $total )->toArray();
 		$this->assertEquals( 10, count( $results ) );
-		$this->assertEquals( 27, $total );
+		$this->assertEquals( 29, $total );
 	}
 
 
@@ -291,7 +291,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->object->searchItems( $search )->toArray();
-		$this->assertEquals( 25, count( $results ) );
+		$this->assertEquals( 27, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

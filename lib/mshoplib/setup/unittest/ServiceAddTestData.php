@@ -13,7 +13,7 @@ namespace Aimeos\MW\Setup\Task;
 /**
  * Adds service test data.
  */
-class ServiceAddTestData extends \Aimeos\MW\Setup\Task\Base
+class ServiceAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -34,63 +34,53 @@ class ServiceAddTestData extends \Aimeos\MW\Setup\Task\Base
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
 		$this->msg( 'Adding service test data', 0 );
+
 		$this->additional->setEditor( 'core:lib/mshoplib' );
-
-		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'service.php';
-
-		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for service domain', $path ) );
-		}
-
-		$this->addServiceData( $testdata );
+		$this->process( $this->getData() );
 
 		$this->status( 'done' );
 	}
 
 
 	/**
-	 * Adds the service test data.
+	 * Returns the test data array
 	 *
-	 * @param array $testdata Associative list of key/list pairs
-	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
+	 * @return array Multi-dimensional array of test data
 	 */
-	private function addServiceData( array $testdata )
+	protected function getData()
 	{
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->additional, 'Standard' );
-		$serviceTypeManager = $serviceManager->getSubManager( 'type', 'Standard' );
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'service.php';
 
-		$type = $serviceTypeManager->createItem();
-
-		$serviceManager->begin();
-
-		foreach( $testdata['service/type'] as $key => $dataset )
-		{
-			$type->setId( null );
-			$type->setCode( $dataset['code'] );
-			$type->setDomain( $dataset['domain'] );
-			$type->setLabel( $dataset['label'] );
-			$type->setStatus( $dataset['status'] );
-
-			$serviceTypeManager->saveItem( $type );
+		if( ( $testdata = include( $path ) ) == false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for service domain', $path ) );
 		}
 
-		$parent = $serviceManager->createItem();
+		return $testdata;
+	}
 
-		foreach( $testdata['service'] as $key => $dataset )
+
+	/**
+	 * Adds the product data from the given array
+	 *
+	 * @param array Multi-dimensional array of test data
+	 */
+	protected function process( array $testdata )
+	{
+		$manager = $this->getManager( 'service' );
+		$listManager = $manager->getSubManager( 'lists' );
+
+		$manager->begin();
+
+		$this->storeTypes( $testdata, ['service/type', 'service/lists/type'] );
+
+		foreach( $testdata['service'] as $entry )
 		{
-			$parent->setId( null );
-			$parent->setType( $dataset['type'] );
-			$parent->setPosition( $dataset['pos'] );
-			$parent->setCode( $dataset['code'] );
-			$parent->setLabel( $dataset['label'] );
-			$parent->setProvider( $dataset['provider'] );
-			$parent->setConfig( $dataset['config'] );
-			$parent->setStatus( $dataset['status'] );
+			$item = $manager->createItem()->fromArray( $entry );
+			$item = $this->addListData( $listManager, $item, $entry );
 
-			$serviceManager->saveItem( $parent, false );
+			$manager->saveItem( $item );
 		}
 
-		$serviceManager->commit();
+		$manager->commit();
 	}
 }
