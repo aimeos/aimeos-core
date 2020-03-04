@@ -316,12 +316,11 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( 'SELECT * FROM "mw_cache_test" WHERE "id" = \'t:3\'' )->execute();
 		self::$dbm->release( $conn );
 
-		$expected = array(
-			'expire' => '2100-01-01 00:00:00',
-			'id' => 't:3',
-			'value' => 'test 3',
-		);
-		$this->assertEquals( $expected, $result->fetch() );
+		$row = $result->fetch();
+
+		$this->assertEquals( 't:3', $row['id'] );
+		$this->assertEquals( 'test 3', $row['value'] );
+		$this->assertEquals( '2100-01-01 00:00:00', substr( $row['expire'], 0, 19 ) );
 		$this->assertNull( $result->fetch() );
 	}
 
@@ -355,12 +354,11 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( 'SELECT * FROM "mw_cache_test" WHERE "id" = \'t:3\'' )->execute();
 		self::$dbm->release( $conn );
 
-		$expected = array(
-			'expire' => '2100-01-01 00:00:00',
-			'id' => 't:3',
-			'value' => 'test 3',
-		);
-		$this->assertEquals( $expected, $result->fetch() );
+		$row = $result->fetch();
+
+		$this->assertEquals( 't:3', $row['id'] );
+		$this->assertEquals( 'test 3', $row['value'] );
+		$this->assertEquals( '2100-01-01 00:00:00', substr( $row['expire'], 0, 19 ) );
 		$this->assertNull( $result->fetch() );
 
 
@@ -368,12 +366,11 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$result = $conn->create( 'SELECT * FROM "mw_cache_test" WHERE "id" = \'t:2\'' )->execute();
 		self::$dbm->release( $conn );
 
-		$expected = array(
-			'expire' => '2100-01-01 00:00:00',
-			'id' => 't:2',
-			'value' => 'test 4',
-		);
-		$this->assertEquals( $expected, $result->fetch() );
+		$row = $result->fetch();
+
+		$this->assertEquals( 't:2', $row['id'] );
+		$this->assertEquals( 'test 4', $row['value'] );
+		$this->assertEquals( '2100-01-01 00:00:00', substr( $row['expire'], 0, 19 ) );
 		$this->assertNull( $result->fetch() );
 	}
 }

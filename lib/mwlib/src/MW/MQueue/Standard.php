@@ -79,20 +79,27 @@ class Standard extends Base implements Iface
 		$pass = $this->getConfig( 'db/password', '' );
 		$sock = $this->getConfig( 'db/socket' );
 		$dbase = $this->getConfig( 'db/database', 'aimeos' );
-		$persist = $this->getConfig( 'db/opt-persistent', false );
 
-		$dsn = $adapter . ':dbname=' . $dbase;
-		if( $sock == null )
+		$dsn = $adapter . ':';
+
+		if( $adapter === 'sqlsrv' )
+		{
+			$dsn .= isset( $host ) ? 'Server=' . $host : '';
+			$dsn .= isset( $port ) ? ',' . $port : '';
+			$dsn .= ( isset( $host ) ? ';' : '' ) . 'Database=' . $dbase;
+		}
+		elseif( $sock == null )
 		{
 			$dsn .= isset( $host ) ? ';host=' . $host : '';
 			$dsn .= isset( $port ) ? ';port=' . $port : '';
+			$dsn .= ( isset( $host ) ? ';' : '' ) . 'dbname=' . $dbase;
 		}
 		else
 		{
-			$dsn .= ';unix_socket=' . $sock;
+			$dsn .= 'unix_socket=' . $sock . ';dbname=' . $dbase;
 		}
 
-		$params = array( $dsn, $user, $pass, array( \PDO::ATTR_PERSISTENT => $persist ) );
+		$params = array( $dsn, $user, $pass, [] );
 		$stmts = $this->getConfig( 'db/stmt', [] );
 
 		return new \Aimeos\MW\DB\Connection\PDO( $params, $stmts );
