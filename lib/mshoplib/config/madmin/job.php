@@ -47,6 +47,19 @@ return array(
 					:joins
 					WHERE :cond
 					ORDER BY :order
+					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+				',
+				'mysql' => '
+					SELECT DISTINCT :columns
+						majob."id" AS "job.id", majob."siteid" AS "job.siteid",
+						majob."label" AS "job.label", majob."method" AS "job.method",
+						majob."parameter" AS "job.parameter", majob."result" AS "job.result",
+						majob."status" AS "job.status", majob."editor" AS "job.editor",
+						majob."mtime" AS "job.mtime", majob."ctime" AS "job.ctime"
+					FROM "madmin_job" AS majob
+					:joins
+					WHERE :cond
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				',
 			),
@@ -58,6 +71,18 @@ return array(
 						FROM "madmin_job" AS majob
 						:joins
 						WHERE :cond
+						ORDER BY "id"
+						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+					) AS list
+				',
+				'mysql' => '
+					SELECT COUNT(*) AS "count"
+					FROM(
+						SELECT DISTINCT majob."id"
+						FROM "madmin_job" AS majob
+						:joins
+						WHERE :cond
+						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				',

@@ -48,6 +48,19 @@ return array(
 							:joins
 							WHERE :cond
 							ORDER BY :order
+							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+						',
+						'mysql' => '
+							SELECT DISTINCT :columns
+								mserlity."id" AS "service.lists.type.id", mserlity."siteid" AS "service.lists.type.siteid",
+								mserlity."code" AS "service.lists.type.code", mserlity."domain" AS "service.lists.type.domain",
+								mserlity."label" AS "service.lists.type.label", mserlity."status" AS "service.lists.type.status",
+								mserlity."mtime" AS "service.lists.type.mtime", mserlity."editor" AS "service.lists.type.editor",
+								mserlity."ctime" AS "service.lists.type.ctime", mserlity."pos" AS "service.lists.type.position"
+							FROM "mshop_service_list_type" AS mserlity
+							:joins
+							WHERE :cond
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
 					),
@@ -59,6 +72,18 @@ return array(
 								FROM "mshop_service_list_type" as mserlity
 								:joins
 								WHERE :cond
+								ORDER BY "id"
+								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+							) AS list
+						',
+						'mysql' => '
+							SELECT COUNT(*) AS "count"
+							FROM (
+								SELECT DISTINCT mserlity."id"
+								FROM "mshop_service_list_type" as mserlity
+								:joins
+								WHERE :cond
+								ORDER BY "id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -83,7 +108,20 @@ return array(
 							FROM "mshop_service_list" AS mserli
 							:joins
 							WHERE :cond
-							GROUP BY :columns :key, mserli."id"
+							GROUP BY :key, mserli."id"
+							ORDER BY :order
+							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+						) AS list
+						GROUP BY "key"
+					',
+					'mysql' => '
+						SELECT "key", COUNT("id") AS "count"
+						FROM (
+							SELECT :key AS "key", mserli."id" AS "id"
+							FROM "mshop_service_list" AS mserli
+							:joins
+							WHERE :cond
+							GROUP BY :key, mserli."id"
 							ORDER BY :order
 							LIMIT :size OFFSET :start
 						) AS list
@@ -133,6 +171,25 @@ return array(
 							mserli."refid", mserli."start", mserli."end", mserli."config", mserli."pos",
 							mserli."status", mserli."mtime", mserli."editor", mserli."ctime"
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT :columns
+							mserli."id" AS "service.lists.id", mserli."parentid" AS "service.lists.parentid",
+							mserli."siteid" AS "service.lists.siteid", mserli."type" AS "service.lists.type",
+							mserli."domain" AS "service.lists.domain", mserli."refid" AS "service.lists.refid",
+							mserli."start" AS "service.lists.datestart", mserli."end" AS "service.lists.dateend",
+							mserli."config" AS "service.lists.config", mserli."pos" AS "service.lists.position",
+							mserli."status" AS "service.lists.status", mserli."mtime" AS "service.lists.mtime",
+							mserli."editor" AS "service.lists.editor", mserli."ctime" AS "service.lists.ctime"
+						FROM "mshop_service_list" AS mserli
+						:joins
+						WHERE :cond
+						GROUP BY :columns
+							mserli."id", mserli."parentid", mserli."siteid", mserli."type", mserli."domain",
+							mserli."refid", mserli."start", mserli."end", mserli."config", mserli."pos",
+							mserli."status", mserli."mtime", mserli."editor", mserli."ctime"
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -144,6 +201,18 @@ return array(
 							FROM "mshop_service_list" AS mserli
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mserli."id"
+							FROM "mshop_service_list" AS mserli
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -198,6 +267,19 @@ return array(
 						:joins
 						WHERE :cond
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT DISTINCT :columns
+							mserty."id" AS "service.type.id", mserty."siteid" AS "service.type.siteid",
+							mserty."domain" AS "service.type.domain", mserty."code" AS "service.type.code",
+							mserty."label" AS "service.type.label", mserty."status" AS "service.type.status",
+							mserty."mtime" AS "service.type.mtime", mserty."editor" AS "service.type.editor",
+							mserty."ctime" AS "service.type.ctime", mserty."pos" AS "service.type.position"
+						FROM "mshop_service_type" AS mserty
+						:joins
+						WHERE :cond
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -209,6 +291,18 @@ return array(
 							FROM "mshop_service_type" AS mserty
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mserty."id"
+							FROM "mshop_service_type" AS mserty
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -264,6 +358,21 @@ return array(
 					:joins
 					WHERE :cond
 					ORDER BY :order
+					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+				',
+				'mysql' => '
+					SELECT DISTINCT :columns
+						mser."id" AS "service.id", mser."siteid" AS "service.siteid",
+						mser."pos" AS "service.position", mser."type" AS "service.type",
+						mser."code" AS "service.code", mser."label" AS "service.label",
+						mser."provider" AS "service.provider", mser."config" AS "service.config",
+						mser."start" AS "service.datestart", mser."end" AS "service.dateend",
+						mser."status" AS "service.status", mser."mtime" AS "service.mtime",
+						mser."editor" AS "service.editor",	mser."ctime" AS "service.ctime"
+					FROM "mshop_service" AS mser
+					:joins
+					WHERE :cond
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),
@@ -275,6 +384,18 @@ return array(
 						FROM "mshop_service" AS mser
 						:joins
 						WHERE :cond
+						ORDER BY "id"
+						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+					) AS list
+				',
+				'mysql' => '
+					SELECT count(*) as "count"
+					FROM (
+						SELECT DISTINCT mser."id"
+						FROM "mshop_service" AS mser
+						:joins
+						WHERE :cond
+						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

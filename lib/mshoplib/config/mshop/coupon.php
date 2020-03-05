@@ -48,6 +48,20 @@ return array(
 						:joins
 						WHERE :cond
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT DISTINCT :columns
+							mcouco."id" AS "coupon.code.id", mcouco."parentid" AS "coupon.code.parentid",
+							mcouco."siteid" AS "coupon.code.siteid", mcouco."code" AS "coupon.code.code",
+							mcouco."start" AS "coupon.code.datestart", mcouco."end" AS "coupon.code.dateend",
+							mcouco."count" AS "coupon.code.count", mcouco."ref" AS "coupon.code.ref",
+							mcouco."mtime" AS "coupon.code.mtime", mcouco."ctime" AS "coupon.code.ctime",
+							mcouco."editor" AS "coupon.code.editor"
+						FROM "mshop_coupon_code" AS mcouco
+						:joins
+						WHERE :cond
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -59,6 +73,18 @@ return array(
 							FROM "mshop_coupon_code" AS mcouco
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mcouco."id"
+							FROM "mshop_coupon_code" AS mcouco
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -120,6 +146,20 @@ return array(
 					:joins
 					WHERE :cond
 					ORDER BY :order
+					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+				',
+				'mysql' => '
+					SELECT DISTINCT :columns
+						mcou."id" AS "coupon.id", mcou."siteid" AS "coupon.siteid",
+						mcou."label" AS "coupon.label", mcou."provider" AS "coupon.provider",
+						mcou."start" AS "coupon.datestart", mcou."end" AS "coupon.dateend",
+						mcou."config" AS "coupon.config", mcou."status" AS "coupon.status",
+						mcou."mtime" AS "coupon.mtime", mcou."editor" AS "coupon.editor",
+						mcou."ctime" AS "coupon.ctime"
+					FROM "mshop_coupon" AS mcou
+					:joins
+					WHERE :cond
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),
@@ -131,6 +171,18 @@ return array(
 						FROM "mshop_coupon" AS mcou
 						:joins
 						WHERE :cond
+						ORDER BY "id"
+						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+					) AS list
+				',
+				'mysql' => '
+					SELECT COUNT(*) AS "count"
+					FROM (
+						SELECT DISTINCT mcou."id"
+						FROM "mshop_coupon" AS mcou
+						:joins
+						WHERE :cond
+						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

@@ -48,6 +48,19 @@ return array(
 							:joins
 							WHERE :cond
 							ORDER BY :order
+							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+						',
+						'mysql' => '
+							SELECT DISTINCT :columns
+								mcatlity."id" AS "catalog.lists.type.id", mcatlity."siteid" AS "catalog.lists.type.siteid",
+								mcatlity."code" AS "catalog.lists.type.code", mcatlity."domain" AS "catalog.lists.type.domain",
+								mcatlity."label" AS "catalog.lists.type.label", mcatlity."mtime" AS "catalog.lists.type.mtime",
+								mcatlity."editor" AS "catalog.lists.type.editor", mcatlity."ctime" AS "catalog.lists.type.ctime",
+								mcatlity."status" AS "catalog.lists.type.status", mcatlity."pos" AS "catalog.lists.type.position"
+							FROM "mshop_catalog_list_type" AS mcatlity
+							:joins
+							WHERE :cond
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
 					),
@@ -59,6 +72,18 @@ return array(
 								FROM "mshop_catalog_list_type" AS mcatlity
 								:joins
 								WHERE :cond
+								ORDER BY "id"
+								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+							) AS list
+						',
+						'mysql' => '
+							SELECT COUNT(*) AS "count"
+							FROM (
+								SELECT DISTINCT mcatlity."id"
+								FROM "mshop_catalog_list_type" AS mcatlity
+								:joins
+								WHERE :cond
+								ORDER BY "id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -77,6 +102,19 @@ return array(
 			'standard' => array(
 				'aggregate' => array(
 					'ansi' => '
+						SELECT "key", COUNT("id") AS "count"
+						FROM (
+							SELECT :key AS "key", mcatli."id" AS "id"
+							FROM "mshop_catalog_list" AS mcatli
+							:joins
+							WHERE :cond
+							GROUP BY :key, mcatli."id"
+							ORDER BY :order
+							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+						) AS list
+						GROUP BY "key"
+					',
+					'mysql' => '
 						SELECT "key", COUNT("id") AS "count"
 						FROM (
 							SELECT :key AS "key", mcatli."id" AS "id"
@@ -134,6 +172,26 @@ return array(
 							mcatli."config", mcatli."pos", mcatli."status", mcatli."mtime",
 							mcatli."editor", mcatli."ctime"
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT :columns
+							mcatli."id" AS "catalog.lists.id", mcatli."parentid" AS "catalog.lists.parentid",
+							mcatli."siteid" AS "catalog.lists.siteid", mcatli."type" AS "catalog.lists.type",
+							mcatli."domain" AS "catalog.lists.domain", mcatli."refid" AS "catalog.lists.refid",
+							mcatli."start" AS "catalog.lists.datestart", mcatli."end" AS "catalog.lists.dateend",
+							mcatli."config" AS "catalog.lists.config", mcatli."pos" AS "catalog.lists.position",
+							mcatli."status" AS "catalog.lists.status", mcatli."mtime" AS "catalog.lists.mtime",
+							mcatli."editor" AS "catalog.lists.editor", mcatli."ctime" AS "catalog.lists.ctime"
+						FROM "mshop_catalog_list" AS mcatli
+						:joins
+						WHERE :cond
+						GROUP BY :columns
+							mcatli."id", mcatli."parentid", mcatli."siteid", mcatli."type",
+							mcatli."domain", mcatli."refid", mcatli."start", mcatli."end",
+							mcatli."config", mcatli."pos", mcatli."status", mcatli."mtime",
+							mcatli."editor", mcatli."ctime"
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -145,6 +203,18 @@ return array(
 							FROM "mshop_catalog_list" AS mcatli
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mcatli."id"
+							FROM "mshop_catalog_list" AS mcatli
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -269,6 +339,18 @@ return array(
 					:joins
 					WHERE :cond
 					ORDER BY :order
+					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+				',
+				'mysql' => '
+					SELECT DISTINCT :columns
+						mcat."id", mcat."code", mcat."label", mcat."config",
+						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
+						mcat."nleft" AS "left", mcat."nright" AS "right",
+						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
+					FROM "mshop_catalog" AS mcat
+					:joins
+					WHERE :cond
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),
@@ -280,6 +362,18 @@ return array(
 						FROM "mshop_catalog" AS mcat
 						:joins
 						WHERE :cond
+						ORDER BY "id"
+						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+					) AS list
+				',
+				'mysql' => '
+					SELECT COUNT(*) AS "count"
+					FROM (
+						SELECT DISTINCT mcat."id"
+						FROM "mshop_catalog" AS mcat
+						:joins
+						WHERE :cond
+						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

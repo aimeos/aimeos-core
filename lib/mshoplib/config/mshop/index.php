@@ -43,6 +43,15 @@ return array(
 						WHERE :cond
 						GROUP BY mpro."id"
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT mpro."id" :mincols
+						FROM "mshop_product" AS mpro
+						:joins
+						WHERE :cond
+						GROUP BY mpro."id"
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -54,6 +63,18 @@ return array(
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mpro."id"
+							FROM "mshop_product" AS mpro
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 1000 OFFSET 0
 						) AS list
 					'
@@ -108,6 +129,15 @@ return array(
 						WHERE :cond
 						GROUP BY mpro."id"
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT mpro."id" :mincols
+						FROM "mshop_product" AS mpro
+						:joins
+						WHERE :cond
+						GROUP BY mpro."id"
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -119,6 +149,18 @@ return array(
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mpro."id"
+							FROM "mshop_product" AS mpro
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 1000 OFFSET 0
 						) AS list
 					'
@@ -171,6 +213,15 @@ return array(
 						WHERE :cond
 						GROUP BY mpro."id"
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT mpro."id" :mincols
+						FROM "mshop_product" AS mpro
+						:joins
+						WHERE :cond
+						GROUP BY mpro."id"
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -182,6 +233,18 @@ return array(
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mpro."id"
+							FROM "mshop_product" AS mpro
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 1000 OFFSET 0
 						) AS list
 					'
@@ -236,6 +299,15 @@ return array(
 						WHERE :cond
 						GROUP BY mpro."id"
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT mpro."id" :mincols
+						FROM "mshop_product" AS mpro
+						:joins
+						WHERE :cond
+						GROUP BY mpro."id"
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -247,6 +319,18 @@ return array(
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mpro."id"
+							FROM "mshop_product" AS mpro
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 1000 OFFSET 0
 						) AS list
 					'
@@ -299,6 +383,15 @@ return array(
 						WHERE :cond
 						GROUP BY mpro."id"
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT mpro."id" :mincols
+						FROM "mshop_product" AS mpro
+						:joins
+						WHERE :cond
+						GROUP BY mpro."id"
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -310,6 +403,18 @@ return array(
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mpro."id"
+							FROM "mshop_product" AS mpro
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 1000 OFFSET 0
 						) AS list
 					'
@@ -332,21 +437,43 @@ return array(
 		'standard' => array(
 			'aggregate' => array(
 				'ansi' => '
-				SELECT "key", COUNT("id") AS "count"
-				FROM (
-					SELECT :key AS "key", mpro."id" AS "id" :mincols
-					FROM "mshop_product" AS mpro
-					:joins
-					WHERE :cond
-					GROUP BY "key", "id"
-					ORDER BY :order
-					LIMIT :size OFFSET :start
-				) AS list
-				GROUP BY "key"
-			'
+					SELECT "key", COUNT("id") AS "count"
+					FROM (
+						SELECT :key AS "key", mpro."id" AS "id" :mincols
+						FROM "mshop_product" AS mpro
+						:joins
+						WHERE :cond
+						GROUP BY :key, mpro."id"
+						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					) AS list
+					GROUP BY "key"
+				',
+				'mysql' => '
+					SELECT "key", COUNT("id") AS "count"
+					FROM (
+						SELECT :key AS "key", mpro."id" AS "id" :mincols
+						FROM "mshop_product" AS mpro
+						:joins
+						WHERE :cond
+						GROUP BY :key, mpro."id"
+						ORDER BY :order
+						LIMIT :size OFFSET :start
+					) AS list
+					GROUP BY "key"
+				'
 			),
 			'search' => array(
 				'ansi' => '
+					SELECT mpro."id" :mincols
+					FROM "mshop_product" AS mpro
+					:joins
+					WHERE :cond
+					GROUP BY mpro."id"
+					ORDER BY :order
+					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+				',
+				'mysql' => '
 					SELECT mpro."id" :mincols
 					FROM "mshop_product" AS mpro
 					:joins
@@ -364,6 +491,18 @@ return array(
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
+						ORDER BY "id"
+						OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
+					) AS list
+				',
+				'mysql' => '
+					SELECT COUNT(*) AS "count"
+					FROM (
+						SELECT DISTINCT mpro."id"
+						FROM "mshop_product" AS mpro
+						:joins
+						WHERE :cond
+						ORDER BY "id"
 						LIMIT 1000 OFFSET 0
 					) AS list
 				'

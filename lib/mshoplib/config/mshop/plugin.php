@@ -54,6 +54,19 @@ return array(
 						:joins
 						WHERE :cond
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT DISTINCT :columns
+							mpluty."id" AS "plugin.type.id", mpluty."siteid" AS "plugin.type.siteid",
+							mpluty."code" AS "plugin.type.code", mpluty."domain" AS "plugin.type.domain",
+							mpluty."label" AS "plugin.type.label", mpluty."status" AS "plugin.type.status",
+							mpluty."mtime" AS "plugin.type.mtime", mpluty."editor" AS "plugin.type.editor",
+							mpluty."ctime" AS "plugin.type.ctime", mpluty."pos" AS "plugin.type.position"
+						FROM "mshop_plugin_type" mpluty
+						:joins
+						WHERE :cond
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -65,6 +78,18 @@ return array(
 							FROM "mshop_plugin_type" mpluty
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mpluty."id"
+							FROM "mshop_plugin_type" mpluty
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -119,6 +144,20 @@ return array(
 					:joins
 					WHERE :cond
 					ORDER BY :order
+					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+				',
+				'mysql' => '
+					SELECT DISTINCT :columns
+						mplu."id" AS "plugin.id", mplu."siteid" AS "plugin.siteid",
+						mplu."type" AS "plugin.type", mplu."label" AS "plugin.label",
+						mplu."provider" AS "plugin.provider", mplu."config" AS "plugin.config",
+						mplu."pos" AS "plugin.position", mplu."status" AS "plugin.status",
+						mplu."mtime" AS "plugin.mtime", mplu."editor" AS "plugin.editor",
+						mplu."ctime" AS "plugin.ctime"
+					FROM "mshop_plugin" mplu
+					:joins
+					WHERE :cond
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),
@@ -130,6 +169,18 @@ return array(
 						FROM "mshop_plugin" mplu
 						:joins
 						WHERE :cond
+						ORDER BY "id"
+						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+					) AS list
+				',
+				'mysql' => '
+					SELECT COUNT(*) AS "count"
+					FROM (
+						SELECT DISTINCT mplu."id"
+						FROM "mshop_plugin" mplu
+						:joins
+						WHERE :cond
+						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

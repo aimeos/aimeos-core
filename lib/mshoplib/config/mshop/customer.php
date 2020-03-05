@@ -63,6 +63,28 @@ return array(
 						:joins
 						WHERE :cond
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT DISTINCT :columns
+							mcusad."id" AS "customer.address.id", mcusad."siteid" AS "customer.address.siteid",
+							mcusad."parentid" AS "customer.address.parentid", mcusad."pos" AS "customer.address.position",
+							mcusad."company" AS "customer.address.company", mcusad."vatid" AS "customer.address.vatid",
+							mcusad."salutation" AS "customer.address.salutation", mcusad."title" AS "customer.address.title",
+							mcusad."firstname" AS "customer.address.firstname", mcusad."lastname" AS "customer.address.lastname",
+							mcusad."address1" AS "customer.address.address1", mcusad."address2" AS "customer.address.address2",
+							mcusad."address3" AS "customer.address.address3", mcusad."postal" AS "customer.address.postal",
+							mcusad."city" AS "customer.address.city", mcusad."state" AS "customer.address.state",
+							mcusad."countryid" AS "customer.address.countryid", mcusad."langid" AS "customer.address.languageid",
+							mcusad."telephone" AS "customer.address.telephone", mcusad."email" AS "customer.address.email",
+							mcusad."telefax" AS "customer.address.telefax", mcusad."website" AS "customer.address.website",
+							mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
+							mcusad."mtime" AS "customer.address.mtime", mcusad."editor" AS "customer.address.editor",
+							mcusad."ctime" AS "customer.address.ctime"
+						FROM "mshop_customer_address" AS mcusad
+						:joins
+						WHERE :cond
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -74,6 +96,18 @@ return array(
 							FROM "mshop_customer_address" AS mcusad
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mcusad."id"
+							FROM "mshop_customer_address" AS mcusad
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -125,6 +159,18 @@ return array(
 						:joins
 						WHERE :cond
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT DISTINCT :columns
+							mcusgr."id" AS "customer.group.id", mcusgr."siteid" AS "customer.group.siteid",
+							mcusgr."code" AS "customer.group.code", mcusgr."label" AS "customer.group.label",
+							mcusgr."mtime" AS "customer.group.mtime", mcusgr."editor" AS "customer.group.editor",
+							mcusgr."ctime" AS "customer.group.ctime"
+						FROM "mshop_customer_group" AS mcusgr
+						:joins
+						WHERE :cond
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -136,6 +182,18 @@ return array(
 							FROM "mshop_customer_group" AS mcusgr
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mcusgr."id"
+							FROM "mshop_customer_group" AS mcusgr
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -191,6 +249,19 @@ return array(
 							:joins
 							WHERE :cond
 							ORDER BY :order
+							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+						',
+						'mysql' => '
+							SELECT DISTINCT :columns
+								mcuslity."id" AS "customer.lists.type.id", mcuslity."siteid" AS "customer.lists.type.siteid",
+								mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
+								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
+								mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
+								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position"
+							FROM "mshop_customer_list_type" AS mcuslity
+							:joins
+							WHERE :cond
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
 					),
@@ -202,6 +273,18 @@ return array(
 								FROM "mshop_customer_list_type" as mcuslity
 								:joins
 								WHERE :cond
+								ORDER BY "id"
+								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+							) AS LIST
+						',
+						'mysql' => '
+							SELECT COUNT(*) AS "count"
+							FROM (
+								SELECT DISTINCT mcuslity."id"
+								FROM "mshop_customer_list_type" as mcuslity
+								:joins
+								WHERE :cond
+								ORDER BY "id"
 								LIMIT 10000 OFFSET 0
 							) AS LIST
 						'
@@ -220,6 +303,19 @@ return array(
 			'standard' => array(
 				'aggregate' => array(
 					'ansi' => '
+						SELECT "key", COUNT("id") AS "count"
+						FROM (
+							SELECT :key AS "key", mcusli."id" AS "id"
+							FROM "mshop_customer_list" AS mcusli
+							:joins
+							WHERE :cond
+							GROUP BY :key, mcusli."id"
+							ORDER BY :order
+							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+						) AS list
+						GROUP BY "key"
+					',
+					'mysql' => '
 						SELECT "key", COUNT("id") AS "count"
 						FROM (
 							SELECT :key AS "key", mcusli."id" AS "id"
@@ -277,6 +373,26 @@ return array(
 							mcusli."config", mcusli."pos", mcusli."status", mcusli."mtime",
 							mcusli."editor", mcusli."ctime"
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT :columns
+							mcusli."id" AS "customer.lists.id", mcusli."parentid" AS "customer.lists.parentid",
+							mcusli."siteid" AS "customer.lists.siteid", mcusli."type" AS "customer.lists.type",
+							mcusli."domain" AS "customer.lists.domain", mcusli."refid" AS "customer.lists.refid",
+							mcusli."start" AS "customer.lists.datestart", mcusli."end" AS "customer.lists.dateend",
+							mcusli."config" AS "customer.lists.config", mcusli."pos" AS "customer.lists.position",
+							mcusli."status" AS "customer.lists.status", mcusli."mtime" AS "customer.lists.mtime",
+							mcusli."editor" AS "customer.lists.editor", mcusli."ctime" AS "customer.lists.ctime"
+						FROM "mshop_customer_list" AS mcusli
+						:joins
+						WHERE :cond
+						GROUP BY :columns
+							mcusli."id", mcusli."parentid", mcusli."siteid", mcusli."type",
+							mcusli."domain", mcusli."refid", mcusli."start", mcusli."end",
+							mcusli."config", mcusli."pos", mcusli."status", mcusli."mtime",
+							mcusli."editor", mcusli."ctime"
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -288,6 +404,18 @@ return array(
 							FROM "mshop_customer_list" AS mcusli
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mcusli."id"
+							FROM "mshop_customer_list" AS mcusli
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -343,6 +471,19 @@ return array(
 							:joins
 							WHERE :cond
 							ORDER BY :order
+							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+						',
+						'mysql' => '
+							SELECT DISTINCT :columns
+								mcusprty."id" AS "customer.property.type.id", mcusprty."siteid" AS "customer.property.type.siteid",
+								mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
+								mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
+								mcusprty."mtime" AS "customer.property.type.mtime", mcusprty."editor" AS "customer.property.type.editor",
+								mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position"
+							FROM "mshop_customer_property_type" mcusprty
+							:joins
+							WHERE :cond
+							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
 					),
@@ -354,6 +495,18 @@ return array(
 								FROM "mshop_customer_property_type" mcusprty
 								:joins
 								WHERE :cond
+								ORDER BY "id"
+								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+							) AS list
+						',
+						'mysql' => '
+							SELECT COUNT(*) AS "count"
+							FROM (
+								SELECT DISTINCT mcusprty."id"
+								FROM "mshop_customer_property_type" mcusprty
+								:joins
+								WHERE :cond
+								ORDER BY "id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -407,6 +560,19 @@ return array(
 						:joins
 						WHERE :cond
 						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					',
+					'mysql' => '
+						SELECT DISTINCT :columns
+							mcuspr."id" AS "customer.property.id", mcuspr."parentid" AS "customer.property.parentid",
+							mcuspr."siteid" AS "customer.property.siteid", mcuspr."type" AS "customer.property.type",
+							mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
+							mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
+							mcuspr."ctime" AS "customer.property.ctime"
+						FROM "mshop_customer_property" AS mcuspr
+						:joins
+						WHERE :cond
+						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
 				),
@@ -418,6 +584,18 @@ return array(
 							FROM "mshop_customer_property" AS mcuspr
 							:joins
 							WHERE :cond
+							ORDER BY "id"
+							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+						) AS list
+					',
+					'mysql' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mcuspr."id"
+							FROM "mshop_customer_property" AS mcuspr
+							:joins
+							WHERE :cond
+							ORDER BY "id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -490,6 +668,30 @@ return array(
 					:joins
 					WHERE :cond
 					ORDER BY :order
+					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+				',
+				'mysql' => '
+					SELECT DISTINCT :columns
+						mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
+						mcus."label" AS "customer.label", mcus."code" AS "customer.code",
+						mcus."company" AS "customer.company", mcus."vatid" AS "customer.vatid",
+						mcus."salutation" AS "customer.salutation", mcus."title" AS "customer.title",
+						mcus."firstname" AS "customer.firstname", mcus."lastname" AS "customer.lastname",
+						mcus."address1" AS "customer.address1", mcus."address2" AS "customer.address2",
+						mcus."address3" AS "customer.address3", mcus."postal" AS "customer.postal",
+						mcus."city" AS "customer.city", mcus."state" AS "customer.state",
+						mcus."countryid" AS "customer.countryid", mcus."langid" AS "customer.languageid",
+						mcus."telephone" AS "customer.telephone", mcus."email" AS "customer.email",
+						mcus."telefax" AS "customer.telefax", mcus."website" AS "customer.website",
+						mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
+						mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
+						mcus."vdate" AS "customer.dateverified", mcus."password" AS "customer.password",
+						mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
+						mcus."editor" AS "customer.editor"
+					FROM "mshop_customer" AS mcus
+					:joins
+					WHERE :cond
+					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
 			),
@@ -501,6 +703,18 @@ return array(
 						FROM "mshop_customer" AS mcus
 						:joins
 						WHERE :cond
+						ORDER BY "id"
+						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
+					) AS list
+				',
+				'mysql' => '
+					SELECT COUNT(*) AS "count"
+					FROM (
+						SELECT DISTINCT mcus."id"
+						FROM "mshop_customer" AS mcus
+						:joins
+						WHERE :cond
+						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'
