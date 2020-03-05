@@ -31,7 +31,7 @@ class IndexPrepareSimpleText extends \Aimeos\MW\Setup\Task\Base
 	public function migrate()
 	{
 		$this->msg( 'Prepare mshop_index_text table for simplification', 0 );
-		$schema = $this->getSchema( 'db-index' );
+		$schema = $this->getSchema( 'db-product' );
 
 		if( $schema->tableExists( 'mshop_index_text' ) === true
 			&& $schema->constraintExists( 'mshop_index_text', 'unq_msindte_p_s_tid_lt' ) === true

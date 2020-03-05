@@ -32,7 +32,7 @@ class IndexMigrateTextInnodb extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Migrate mshop_index_text table engine to InnoDB', 0 );
 
-		$schema = $this->getSchema( 'db-index' );
+		$schema = $this->getSchema( 'db-product' );
 		$sql = sprintf( '
 			SELECT ENGINE FROM INFORMATION_SCHEMA.TABLES
 			WHERE TABLE_SCHEMA = \'%1$s\' AND TABLE_NAME = \'mshop_index_text\'

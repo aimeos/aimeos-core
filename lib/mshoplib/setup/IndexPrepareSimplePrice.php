@@ -31,7 +31,7 @@ class IndexPrepareSimplePrice extends \Aimeos\MW\Setup\Task\Base
 	public function migrate()
 	{
 		$this->msg( 'Prepare mshop_index_price table for simplification', 0 );
-		$schema = $this->getSchema( 'db-index' );
+		$schema = $this->getSchema( 'db-product' );
 
 		if( $schema->tableExists( 'mshop_index_price' ) === true
 			&& $schema->constraintExists( 'mshop_index_price', 'unq_msindpr_p_s_prid_lt' ) === true
