@@ -284,6 +284,7 @@ abstract class DBBase
 	protected function getSQLReplacements( \Aimeos\MW\Criteria\Iface $search, array $attributes, array $plugins,
 		array $joins, array $columns = [] ) : array
 	{
+		$list = [];
 		$types = $this->getSearchTypes( $attributes );
 		$funcs = $this->getSearchFunctions( $attributes );
 		$translations = $this->getSearchTranslations( $attributes );
@@ -302,25 +303,28 @@ abstract class DBBase
 			$search->getSliceSize(),
 		);
 
-		if( empty( $search->getSortations() ) && ( $attribute = reset( $attributes ) ) !== false ) {
+		if( empty( $search->getSortations() ) && ( $attribute = reset( $attributes ) ) !== false )
+		{
 			$search = (clone $search)->setSortations( [$search->sort( '+', $attribute->getCode() )] );
 		}
-
-		$names = $search->translate( $search->getSortations() );
-		$cols = $search->translate( $search->getSortations(), $translations );
-
-		$list = $aliases = [];
-		foreach( $cols as $idx => $col )
+		elseif( !empty( $search->getSortations() ) )
 		{
-			$list[] = 'MIN(' . $col . ') AS "s' . $idx . '"';
-			$aliases[$names[$idx]] = '"s' . $idx . '"';
+			$names = $search->translate( $search->getSortations() );
+			$cols = $search->translate( $search->getSortations(), $translations );
+
+			$list = $translations = [];
+			foreach( $cols as $idx => $col )
+			{
+				$list[] = 'MIN(' . $col . ') AS "s' . $idx . '"';
+				$translations[$names[$idx]] = '"s' . $idx . '"';
+			}
 		}
 
-		$find[] = ':order';
-		$replace[] = $search->getSortationSource( $types, $aliases, $funcs );
-
 		$find[] = ':mincols';
-		$replace[] = ', ' . implode( ', ', $list );
+		$replace[] = !empty( $list ) ? ', ' . implode( ', ', $list ) : '';
+
+		$find[] = ':order';
+		$replace[] = $search->getSortationSource( $types, $translations, $funcs );
 
 		return [$find, $replace];
 	}
