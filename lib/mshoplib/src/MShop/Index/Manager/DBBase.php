@@ -305,7 +305,7 @@ abstract class DBBase
 
 		if( empty( $search->getSortations() ) && ( $attribute = reset( $attributes ) ) !== false )
 		{
-			$search = (clone $search)->setSortations( [$search->sort( '+', $attribute->getCode() )] );
+			$search = ( clone $search )->setSortations( [$search->sort( '+', $attribute->getCode() )] );
 		}
 		elseif( !empty( $search->getSortations() ) )
 		{
