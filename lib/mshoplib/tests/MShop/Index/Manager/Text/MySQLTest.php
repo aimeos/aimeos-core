@@ -19,7 +19,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 		$context = clone \TestHelperMShop::getContext();
 		$config = $context->getConfig();
 
-		$dbadapter = $config->get( 'resource/db-index/adapter', $config->get( 'resource/db/adapter' ) );
+		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
 
 		if( $dbadapter !== 'mysql' ) {
 			$this->markTestSkipped( 'MySQL specific test' );
@@ -48,16 +48,20 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsRelevance()
 	{
 		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 'T-DISC'] ), 0 ) );
+		$search->setSortations( [$search->sort( '-', $search->createFunction( 'sort:index.text:relevance', ['de', 'T-DISC'] ) )] );
 
-		$search->setConditions( $search->combine( '&&', [
-			$search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 'T-DISC'] ), 0 ),
-			$search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 't-disc'] ), 0 ),
-		] ) );
+		$result = $this->object->searchItems( $search, [] );
 
-		$search->setSortations( [
-			$search->sort( '+', $search->createFunction( 'sort:index.text:relevance', ['de', 'T-DISC'] ) ),
-			$search->sort( '+', $search->createFunction( 'sort:index.text:relevance', ['de', 't-disc'] ) ),
-		] );
+		$this->assertGreaterThanOrEqual( 3, count( $result ) );
+	}
+
+
+	public function testSearchItemsRelevanceCase()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 't-disc'] ), 0 ) );
+		$search->setSortations( [$search->sort( '-', $search->createFunction( 'sort:index.text:relevance', ['de', 't-disc'] ) )] );
 
 		$result = $this->object->searchItems( $search, [] );
 

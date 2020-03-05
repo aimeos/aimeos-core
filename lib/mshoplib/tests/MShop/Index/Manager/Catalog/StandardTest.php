@@ -142,16 +142,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$id = $catalogManager->findItem( 'cafe' )->getId();
 
 		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', $id] ), 0 ) );
+		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion', $id] ) )] );
 
-		$search->setConditions( $search->combine( '&&', [
-			$search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', $id] ), 0 ),
-			$search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', [$id]] ), 0 ),
-		] ) );
+		$result = $this->object->searchItems( $search, [] );
 
-		$search->setSortations( [
-			$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion', [$id]] ) ),
-			$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion', $id] ) ),
-		] );
+		$this->assertEquals( 2, count( $result ) );
+	}
+
+
+	public function testSearchItemsPositionList()
+	{
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
+		$id = $catalogManager->findItem( 'cafe' )->getId();
+
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', [$id]] ), 0 ) );
+		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion', [$id]] ) )] );
 
 		$result = $this->object->searchItems( $search, [] );
 

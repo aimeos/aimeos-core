@@ -66,17 +66,35 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsRelevance()
 	{
+		$config = $this->context->getConfig();
+		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
+
+		if( $dbadapter === 'sqlsrv' ) {
+			$this->markTestSkipped( 'Not supported by SQL Server' );
+		}
+
 		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 't-disc'] ), 0 ) );
+		$search->setSortations( [$search->sort( '-', $search->createFunction( 'sort:index.text:relevance', ['de', 't-disc'] ) )] );
 
-		$search->setConditions( $search->combine( '&&', [
-			$search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 'T-DISC'] ), 0 ),
-			$search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 't-disc'] ), 0 ),
-		] ) );
+		$result = $this->object->searchItems( $search, [] );
 
-		$search->setSortations( [
-			$search->sort( '+', $search->createFunction( 'sort:index.text:relevance', ['de', 'T-DISC'] ) ),
-			$search->sort( '+', $search->createFunction( 'sort:index.text:relevance', ['de', 't-disc'] ) ),
-		] );
+		$this->assertEquals( 1, count( $result ) );
+	}
+
+
+	public function testSearchItemsRelevanceCase()
+	{
+		$config = $this->context->getConfig();
+		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
+
+		if( $dbadapter === 'sqlsrv' ) {
+			$this->markTestSkipped( 'Not supported by SQL Server' );
+		}
+
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 'T-DISC'] ), 0 ) );
+		$search->setSortations( [$search->sort( '-', $search->createFunction( 'sort:index.text:relevance', ['de', 'T-DISC'] ) )] );
 
 		$result = $this->object->searchItems( $search, [] );
 
