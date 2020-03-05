@@ -75,16 +75,16 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		unlink( 'tmp/order-export_0.xml' );
 
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getDeliveryStatus() );
-		$this->assertEquals( '2008-02-15 12:34:56', $xml->orderitem[0]->{'order.datepayment'} );
-		$this->assertEquals( 'unittest', $xml->orderitem[0]->{'order.base.sitecode'} );
-		$this->assertEquals( 'payment', $xml->orderitem[0]->address->addressitem[0]['type'] );
+		$this->assertEquals( '2008-02-15 12:34:56', (string) $xml->orderitem[0]->{'order.datepayment'} );
+		$this->assertEquals( 'unittest', (string) $xml->orderitem[0]->{'order.base.sitecode'} );
+		$this->assertEquals( 'payment', (string) $xml->orderitem[0]->address->addressitem[0]['type'] );
 		$this->assertEquals( 0, (string) $xml->orderitem[0]->address->addressitem[0]['position'] );
 		$this->assertEquals( 1, (string) $xml->orderitem[0]->product->productitem[0]['position'] );
-		$this->assertEquals( 3, $xml->orderitem[0]->product->productitem[0]->attribute->attributeitem->count() );
-		$this->assertEquals( 'payment', $xml->orderitem[0]->service->serviceitem[0]['type'] );
+		$this->assertEquals( 3, (string) $xml->orderitem[0]->product->productitem[0]->attribute->attributeitem->count() );
+		$this->assertEquals( 'payment', (string) $xml->orderitem[0]->service->serviceitem[0]['type'] );
 		$this->assertEquals( 0, (string) $xml->orderitem[0]->service->serviceitem[0]['position'] );
-		$this->assertEquals( 9, $xml->orderitem[0]->service->serviceitem[0]->attribute->attributeitem->count() );
-		$this->assertEquals( 2, $xml->orderitem[0]->coupon->couponitem->count() );
+		$this->assertEquals( 9, (string) $xml->orderitem[0]->service->serviceitem[0]->attribute->attributeitem->count() );
+		$this->assertEquals( 2, (string) $xml->orderitem[0]->coupon->couponitem->count() );
 	}
 
 
@@ -96,16 +96,16 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $orders ) );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, current( $orders )->getDeliveryStatus() );
-		$this->assertEquals( '2008-02-15 12:34:56', $xml->orderitem[0]->{'order.datepayment'} );
-		$this->assertEquals( 'unittest', $xml->orderitem[0]->{'order.base.sitecode'} );
-		$this->assertEquals( 'payment', $xml->orderitem[0]->address->addressitem[0]['type'] );
+		$this->assertEquals( '2008-02-15 12:34:56', (string) $xml->orderitem[0]->{'order.datepayment'} );
+		$this->assertEquals( 'unittest', (string) $xml->orderitem[0]->{'order.base.sitecode'} );
+		$this->assertEquals( 'payment', (string) $xml->orderitem[0]->address->addressitem[0]['type'] );
 		$this->assertEquals( 0, (string) $xml->orderitem[0]->address->addressitem[0]['position'] );
 		$this->assertEquals( 1, (string) $xml->orderitem[0]->product->productitem[0]['position'] );
-		$this->assertEquals( 3, $xml->orderitem[0]->product->productitem[0]->attribute->attributeitem->count() );
-		$this->assertEquals( 'payment', $xml->orderitem[0]->service->serviceitem[0]['type'] );
+		$this->assertEquals( 3, (string) $xml->orderitem[0]->product->productitem[0]->attribute->attributeitem->count() );
+		$this->assertEquals( 'payment', (string) $xml->orderitem[0]->service->serviceitem[0]['type'] );
 		$this->assertEquals( 0, (string) $xml->orderitem[0]->service->serviceitem[0]['position'] );
-		$this->assertEquals( 9, $xml->orderitem[0]->service->serviceitem[0]->attribute->attributeitem->count() );
-		$this->assertEquals( 2, $xml->orderitem[0]->coupon->couponitem->count() );
+		$this->assertEquals( 9, (string) $xml->orderitem[0]->service->serviceitem[0]->attribute->attributeitem->count() );
+		$this->assertEquals( 2, (string) $xml->orderitem[0]->coupon->couponitem->count() );
 	}
 
 

@@ -118,7 +118,8 @@ class Standard
 	 */
 	public function getDateStart() : ?string
 	{
-		return $this->get( 'coupon.code.datestart' );
+		$value = $this->get( 'coupon.code.datestart' );
+		return $value ? substr( $value, 0, 19 ) : null;
 	}
 
 
@@ -141,7 +142,8 @@ class Standard
 	 */
 	public function getDateEnd() : ?string
 	{
-		return $this->get( 'coupon.code.dateend' );
+		$value = $this->get( 'coupon.code.dateend' );
+		return $value ? substr( $value, 0, 19 ) : null;
 	}
 
 

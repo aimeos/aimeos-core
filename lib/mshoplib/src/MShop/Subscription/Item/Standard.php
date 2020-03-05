@@ -85,7 +85,8 @@ class Standard
 	 */
 	public function getDateNext() : ?string
 	{
-		return $this->get( 'subscription.datenext' );
+		$value = $this->get( 'subscription.datenext' );
+		return $value ? substr( $value, 0, 19 ) : null;
 	}
 
 
@@ -108,7 +109,8 @@ class Standard
 	 */
 	public function getDateEnd() : ?string
 	{
-		return $this->get( 'subscription.dateend' );
+		$value = $this->get( 'subscription.dateend' );
+		return $value ? substr( $value, 0, 19 ) : null;
 	}
 
 

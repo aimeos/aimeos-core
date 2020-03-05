@@ -208,7 +208,8 @@ class Standard
 	 */
 	public function getDateStart() : ?string
 	{
-		return $this->get( 'product.datestart' );
+		$value = $this->get( 'product.datestart' );
+		return $value ? substr( $value, 0, 19 ) : null;
 	}
 
 
@@ -231,7 +232,8 @@ class Standard
 	 */
 	public function getDateEnd() : ?string
 	{
-		return $this->get( 'product.dateend' );
+		$value = $this->get( 'product.dateend' );
+		return $value ? substr( $value, 0, 19 ) : null;
 	}
 
 

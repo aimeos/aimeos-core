@@ -136,7 +136,8 @@ class Standard
 	 */
 	public function getDateStart() : ?string
 	{
-		return $this->get( $this->prefix . 'datestart' );
+		$value = $this->get( $this->prefix . 'datestart' );
+		return $value ? substr( $value, 0, 19 ) : null;
 	}
 
 
@@ -159,7 +160,8 @@ class Standard
 	 */
 	public function getDateEnd() : ?string
 	{
-		return $this->get( $this->prefix . 'dateend' );
+		$value = $this->get( $this->prefix . 'dateend' );
+		return $value ? substr( $value, 0, 19 ) : null;
 	}
 
 

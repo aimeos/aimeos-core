@@ -105,7 +105,8 @@ class Standard
 	 */
 	public function getDateDelivery() : ?string
 	{
-		return $this->get( 'order.datedelivery' );
+		$value = $this->get( 'order.datedelivery' );
+		return $value ? substr( $value, 0, 19 ) : null;
 	}
 
 
@@ -128,7 +129,8 @@ class Standard
 	 */
 	public function getDatePayment() : ?string
 	{
-		return $this->get( 'order.datepayment' );
+		$value = $this->get( 'order.datepayment' );
+		return $value ? substr( $value, 0, 19 ) : null;
 	}
 
 

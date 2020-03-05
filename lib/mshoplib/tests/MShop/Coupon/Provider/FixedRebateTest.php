@@ -177,7 +177,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '-1.00', $couponProduct20->getPrice()->getCosts() );
 		$this->assertEquals( '37.00', $couponProduct20->getPrice()->getRebate() );
 		$this->assertEquals( '-13.00', $couponProduct10->getPrice()->getValue() );
-		$this->assertEquals( '0.00', $couponProduct10->getPrice()->getCosts() );
+		$this->assertEquals( 0, $couponProduct10->getPrice()->getCosts() );
 		$this->assertEquals( '13.00', $couponProduct10->getPrice()->getRebate() );
 	}
 

@@ -148,7 +148,8 @@ class Standard
 	 */
 	public function getDateStart() : ?string
 	{
-		return $this->get( 'service.datestart' );
+		$value = $this->get( 'service.datestart' );
+		return $value ? substr( $value, 0, 19 ) : null;
 	}
 
 
@@ -171,7 +172,8 @@ class Standard
 	 */
 	public function getDateEnd() : ?string
 	{
-		return $this->get( 'service.dateend' );
+		$value = $this->get( 'service.dateend' );
+		return $value ? substr( $value, 0, 19 ) : null;
 	}
 
 
