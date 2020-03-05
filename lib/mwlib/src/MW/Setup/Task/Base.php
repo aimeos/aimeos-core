@@ -186,7 +186,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 			'oracle' => 'SELECT ' . $sequence . '.CURRVAL FROM DUAL',
 			'pgsql' => 'SELECT lastval()',
 			'sqlite' => 'SELECT last_insert_rowid()',
-			'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+			'sqlsrv' => 'SELECT @@IDENTITY',
 			'sqlanywhere' => 'SELECT @@IDENTITY',
 		];
 
