@@ -853,7 +853,7 @@ class Standard
 	 * @param array $ref List of referenced items that should be fetched too
 	 * @return array Associative list of product IDs as keys and list of domain items as values
 	 */
-	protected function getDomainRefItems( array $ids, string $domain, array $ref )
+	protected function getDomainRefItems( array $ids, $domain, array $ref )
 	{
 		$keys = $map = $result = [];
 		$context = $this->getContext();
