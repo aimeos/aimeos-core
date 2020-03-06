@@ -751,7 +751,7 @@ class Standard
 				}
 			}
 
-			$content = join( ' ', $map['content'] );
+			$content = ' ' . join( ' ', $map['content'] ); // extra space for SQL POSITION() > 0
 			$this->saveText( $stmt, $item->getId(), $siteid, $langId, $map['url'], $map['name'], $content, $date );
 		}
 	}
