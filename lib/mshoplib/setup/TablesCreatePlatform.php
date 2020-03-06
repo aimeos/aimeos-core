@@ -50,6 +50,9 @@ class TablesCreatePlatform extends TablesCreateMShop
 		$this->setupPlatform( 'db-product', 'pgsql', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'index-pgsql.sql' );
 		$this->setupPlatform( 'db-order', 'pgsql', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'order-pgsql.sql' );
 		$this->setupPlatform( 'db-text', 'pgsql', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'text-pgsql.sql' );
+
+		$this->setupPlatform( 'db-order', 'sqlsrv', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'order-sqlsrv.sql' );
+		$this->setupPlatform( 'db-text', 'sqlsrv', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'text-sqlsrv.sql' );
 	}
 
 
