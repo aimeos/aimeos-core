@@ -20,7 +20,6 @@ matrix:
   include:
     - php: 7.4
       env: DB=pgsql
-  include:
     - php: 7.4
       env: DB=sqlsrv
 
