@@ -20,8 +20,8 @@ class StockMigrateProductcode extends \Aimeos\MW\Setup\Task\Base
 	);
 	private $updates = array(
 		'ALTER TABLE "mshop_stock" ADD COLUMN "productcode" VARCHAR(32) NOT NULL',
-		'UPDATE "mshop_stock" SET "productcode" = (
-			SELECT "code" FROM "mshop_product" AS p WHERE p."id" = "parentid" AND p."siteid" = "siteid" LIMIT 1
+		'UPDATE "mshop_stock" SET "productcode" IN (
+			SELECT "code" FROM "mshop_product" AS p WHERE p."id" = "parentid" AND p."siteid" = "siteid"
 		)',
 	);
 	private $constraints = array(

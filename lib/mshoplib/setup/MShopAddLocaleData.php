@@ -120,7 +120,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 				$localeSiteManager->insertItem( $siteItem, $parentId );
 				$siteIds[$key] = $siteItem->getSiteId();
 			}
-			catch( \Exception $e )
+			catch( \Aimeos\MW\DB\Exception $e )
 			{
 				$search = $localeSiteManager->createSearch();
 				$search->setConditions( $search->compare( '==', 'locale.site.code', $dataset['code'] ) );
