@@ -1,4 +1,4 @@
-sudo: false
+sudo: true
 dist: xenial
 language: php
 
@@ -20,17 +20,33 @@ matrix:
   include:
     - php: 7.4
       env: DB=pgsql
+  include:
+    - php: 7.4
+      env: DB=sqlsrv
 
 before_script:
   - travis_retry composer update
-  - if [[ $DB = 'mysql' ]]; then mysql -e "CREATE DATABASE aimeos; GRANT ALL ON aimeos.* TO 'aimeos'@'127.0.0.1' IDENTIFIED BY 'aimeos'"; fi
-  - if [[ $DB = 'mysql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
+
+  - if [[ $DB = 'mysql' ]]; then sudo mysql -e "CREATE DATABASE aimeos; GRANT ALL ON aimeos.* TO 'aimeos'@'localhost' IDENTIFIED BY 'aimeos'"; fi
+  - if [[ $DB = 'mysql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => 'localhost', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
+
   - if [[ $DB = 'pgsql' ]]; then psql -c "CREATE DATABASE aimeos;" -U postgres; fi
   - if [[ $DB = 'pgsql' ]]; then psql -c "CREATE USER aimeos PASSWORD 'aimeos';" -U postgres; fi
   - if [[ $DB = 'pgsql' ]]; then psql -c "GRANT ALL PRIVILEGES ON DATABASE aimeos TO aimeos;" -U postgres; fi
   - if [[ $DB = 'pgsql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
 
-script: "vendor/bin/phing setup coverage check"
+  - if [[ $DB = 'sqlsrv' ]]; then curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -; fi
+  - if [[ $DB = 'sqlsrv' ]]; then curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee -a /etc/apt/sources.list; fi
+  - if [[ $DB = 'sqlsrv' ]]; then sudo apt-get update; fi
+  - if [[ $DB = 'sqlsrv' ]]; then sudo ACCEPT_EULA=Y apt-get install msodbcsql17 unixodbc-dev; fi
+  - if [[ $DB = 'sqlsrv' ]]; then pecl install sqlsrv; fi
+  - if [[ $DB = 'sqlsrv' ]]; then pecl install pdo_sqlsrv; fi
+  - if [[ $DB = 'sqlsrv' ]]; then echo "CREATE DATABASE aimeos;" > sqlserver.sql; fi
+  - if [[ $DB = 'sqlsrv' ]]; then sudo docker run --name=mssql-server -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=S3c0r3P4ss' -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest; fi
+  - if [[ $DB = 'sqlsrv' ]]; then sudo docker cp sqlserver.sql mssql-server:sqlserver.sql; fi
+  - if [[ $DB = 'sqlsrv' ]]; then sudo docker exec -it mssql-server /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U SA -P 'S3c0r3P4ss' -i sqlserver.sql; fi
+  - if [[ $DB = 'sqlsrv' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'sqlsrv', 'host' => '127.0.0.1', 'port' => 1433, 'database' => 'aimeos', 'username' => 'SA', 'password' => 'S3c0r3P4ss', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
 
-after_success:
-  - php vendor/bin/php-coveralls
+script: vendor/bin/phing setup coverage check
+
+after_success: php vendor/bin/php-coveralls
