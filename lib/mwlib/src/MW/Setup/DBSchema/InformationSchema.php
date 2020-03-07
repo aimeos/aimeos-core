@@ -55,7 +55,7 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 			SELECT TABLE_NAME
 			FROM INFORMATION_SCHEMA.TABLES
 			WHERE TABLE_TYPE = 'BASE TABLE'
-				AND TABLE_SCHEMA = ?
+				AND TABLE_CATALOG = ?
 				AND TABLE_NAME = ?
 		";
 
@@ -83,7 +83,7 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 		$sql = "
 			SELECT SEQUENCE_NAME
 			FROM INFORMATION_SCHEMA.SEQUENCES
-			WHERE SEQUENCE_SCHEMA = ?
+			WHERE SEQUENCE_CATALOG = ?
 				AND SEQUENCE_NAME = ?
 		";
 
@@ -112,7 +112,7 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 		$sql = "
 			SELECT CONSTRAINT_NAME
 			FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
-			WHERE TABLE_SCHEMA = ?
+			WHERE TABLE_CATALOG = ?
 				AND TABLE_NAME = ?
 				AND CONSTRAINT_NAME = ?
 		";
@@ -143,7 +143,7 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 		$sql = "
 			SELECT COLUMN_NAME
 			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE TABLE_SCHEMA = ?
+			WHERE TABLE_CATALOG = ?
 				AND TABLE_NAME = ?
 				AND COLUMN_NAME = ?
 		";
@@ -174,7 +174,7 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 		$sql = "
 			SELECT *
 			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE TABLE_SCHEMA = ?
+			WHERE TABLE_CATALOG = ?
 				AND TABLE_NAME = ?
 				AND COLUMN_NAME = ?
 		";

@@ -27,7 +27,7 @@ class PgsqlTest extends \PHPUnit\Framework\TestCase
 				"varchar16" VARCHAR(16) NOT NULL DEFAULT \'default\',
 				"smallint" SMALLINT NOT NULL,
 				"integernull" INTEGER,
-			CONSTRAINT "unq_mwsdt_integer" UNIQUE ("integer")
+				CONSTRAINT "unq_mwsdt_integer" UNIQUE ("integer")
 			);
 		';
 		$conn->create( $sql )->execute()->finish();

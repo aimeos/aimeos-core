@@ -20,61 +20,6 @@ namespace Aimeos\MW\Setup\DBSchema;
 class Pgsql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 {
 	/**
-	 * Checks if the given table exists in the database.
-	 *
-	 * @param string $tablename Name of the database table
-	 * @return bool True if the table exists, false if not
-	 */
-	public function tableExists( string $tablename ) : bool
-	{
-		$sql = "
-			SELECT TABLE_NAME
-			FROM INFORMATION_SCHEMA.TABLES
-			WHERE TABLE_TYPE = 'BASE TABLE'
-				AND TABLE_SCHEMA = 'public'
-				AND TABLE_NAME = ?
-		";
-
-		$conn = $this->acquire();
-
-		$stmt = $conn->create( $sql );
-		$stmt->bind( 1, $tablename );
-		$result = $stmt->execute()->fetch();
-
-		$this->release( $conn );
-
-		return $result ? true : false;
-	}
-
-
-	/**
-	 * Checks if the given sequence exists in the database.
-	 *
-	 * @param string $seqname Name of the database sequence
-	 * @return bool True if the sequence exists, false if not
-	 */
-	public function sequenceExists( string $seqname ) : bool
-	{
-		$sql = "
-			SELECT SEQUENCE_NAME
-			FROM INFORMATION_SCHEMA.SEQUENCES
-			WHERE SEQUENCE_SCHEMA = 'public'
-				AND SEQUENCE_NAME = ?
-		";
-
-		$conn = $this->acquire();
-
-		$stmt = $conn->create( $sql );
-		$stmt->bind( 1, $seqname );
-		$result = $stmt->execute()->fetch();
-
-		$this->release( $conn );
-
-		return $result ? true : false;
-	}
-
-
-	/**
 	 * Checks if the given constraint exists for the specified table in the database.
 	 *
 	 * @param string $tablename Name of the database table
@@ -83,22 +28,7 @@ class Pgsql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 */
 	public function constraintExists( string $tablename, string $constraintname ) : bool
 	{
-		$sql = "
-			SELECT CONSTRAINT_NAME
-			FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
-			WHERE TABLE_SCHEMA = 'public'
-				AND TABLE_NAME = ?
-				AND CONSTRAINT_NAME = ?
-		";
-
-		$conn = $this->acquire();
-
-		$stmt = $conn->create( $sql );
-		$stmt->bind( 1, $tablename );
-		$stmt->bind( 2, $constraintname );
-		$result = $stmt->execute()->fetch();
-
-		if( $result === null )
+		if( ( $result = parent::constraintExists( $tablename, $constraintname ) ) === false )
 		{
 			$sql = "
 				SELECT indexname
@@ -108,43 +38,15 @@ class Pgsql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 					AND indexname = ?
 			";
 
+			$conn = $this->acquire();
+
 			$stmt = $conn->create( $sql );
 			$stmt->bind( 1, $tablename );
 			$stmt->bind( 2, $constraintname );
 			$result = $stmt->execute()->fetch();
+
+			$this->release( $conn );
 		}
-
-		$this->release( $conn );
-
-		return $result ? true : false;
-	}
-
-
-	/**
-	 * Checks if the given column exists for the specified table in the database.
-	 *
-	 * @param string $tablename Name of the database table
-	 * @param string $columnname Name of the table column
-	 * @return bool True if the column exists, false if not
-	 */
-	public function columnExists( string $tablename, string $columnname ) : bool
-	{
-		$sql = "
-			SELECT COLUMN_NAME
-			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE TABLE_SCHEMA = 'public'
-				AND TABLE_NAME = ?
-				AND COLUMN_NAME = ?
-		";
-
-		$conn = $this->acquire();
-
-		$stmt = $conn->create( $sql );
-		$stmt->bind( 1, $tablename );
-		$stmt->bind( 2, $columnname );
-		$result = $stmt->execute()->fetch();
-
-		$this->release( $conn );
 
 		return $result ? true : false;
 	}
@@ -177,40 +79,6 @@ class Pgsql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 		$this->release( $conn );
 
 		return $result ? true : false;
-	}
-
-
-	/**
-	 * Returns an object containing the details of the column.
-	 *
-	 * @param string $tablename Name of the database table
-	 * @param string $columnname Name of the table column
-	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Object which contains the details
-	 */
-	public function getColumnDetails( string $tablename, string $columnname ) : \Aimeos\MW\Setup\DBSchema\Column\Iface
-	{
-		$sql = "
-			SELECT *
-			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE TABLE_SCHEMA = 'public'
-				AND TABLE_NAME = ?
-				AND COLUMN_NAME = ?
-		";
-
-		$conn = $this->acquire();
-
-		$stmt = $conn->create( $sql );
-		$stmt->bind( 1, $tablename );
-		$stmt->bind( 2, $columnname );
-		$result = $stmt->execute()->fetch();
-
-		$this->release( $conn );
-
-		if( $result === null ) {
-			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unknown column "%1$s" in table "%2$s"', $columnname, $tablename ) );
-		}
-
-		return $this->createColumnItem( $result );
 	}
 
 
