@@ -27,16 +27,23 @@ interface Iface
 	/**
 	 * Returns the catalog items referencing the product
 	 *
-	 * @return \Aimeos\MShop\Catalog\Item\Iface[] Catalog items
+	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Catalog\Item\Iface
 	 */
-	public function getCatalogItems() : array;
+	public function getCatalogItems() : \Aimeos\Map;
 
 	/**
 	 * Returns the supplier items referencing the product
 	 *
-	 * @return \Aimeos\MShop\Supplier\Item\Iface[] Supplier items
+	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Supplier\Item\Iface
 	 */
-	public function getSupplierItems() : array;
+	public function getSupplierItems() : \Aimeos\Map;
+
+	/**
+	 * Returns the stock items associated to the product
+	 *
+	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Stock\Item\Iface
+	 */
+	public function getStockItems() : \Aimeos\Map;
 
 	/**
 	 * Returns the code of the product item.

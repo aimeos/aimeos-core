@@ -829,6 +829,18 @@ class Standard
 			}
 		}
 
+		if( isset( $ref['stock'] ) || in_array( 'stock', $ref, true ) )
+		{
+			$codes = array_column( $map, 'product.id', 'product.code' );
+
+			foreach( $this->getStockItems( array_keys( $codes ), $ref ) as $stockId => $stockItem )
+			{
+				if( isset( $codes[$stockItem->getProductCode()] ) ) {
+					$map[$codes[$stockItem->getProductCode()]]['stock'][$stockId] = $stockItem;
+				}
+			}
+		}
+
 		return $this->buildItems( $map, $ref, 'product', $propItems );
 	}
 
@@ -903,5 +915,32 @@ class Standard
 		}
 
 		return $result;
+	}
+
+
+	/**
+	 * Returns the stock items for the given product codes
+	 *
+	 * @param string[] $codes Unique product codes
+	 * @param string[] $ref List of domains to fetch referenced items for
+	 * @return \Aimeos\Map List of IDs as keys and items implementing \Aimeos\MShop\Stock\Item\Iface as values
+	 */
+	protected function getStockItems( array $codes, array $ref ) : \Aimeos\Map
+	{
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
+
+		$search = $manager->createSearch( true )->setSlice( 0, 0x7fffffff );
+		$expr = [
+			$search->compare( '==', 'stock.productcode', $codes ),
+			$search->getConditions(),
+		];
+
+		if( isset( $ref['stock'] ) ) {
+			$expr[] = $search->compare( '==', 'stock.type', $ref['stock'] );
+		}
+
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		return $manager->searchItems( $search );
 	}
 }

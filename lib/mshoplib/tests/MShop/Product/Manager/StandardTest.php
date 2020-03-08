@@ -113,10 +113,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItemForeignDomains()
 	{
-		$item = $this->object->findItem( 'CNE', ['catalog', 'supplier'] );
+		$item = $this->object->findItem( 'CNE', ['catalog', 'supplier', 'stock'] );
 
 		$this->assertEquals( 1, count( $item->getSupplierItems() ) );
 		$this->assertEquals( 2, count( $item->getCatalogItems() ) );
+		$this->assertEquals( 1, count( $item->getStockItems() ) );
 	}
 
 
