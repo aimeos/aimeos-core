@@ -67,7 +67,7 @@ class Standard
 	/**
 	 * Returns the catalog items referencing the product
 	 *
-	 * @return \Aimeos\MShop\Catalog\Item\Iface[] Catalog items
+	 * @return array Associative list of items implementing \Aimeos\MShop\Catalog\Item\Iface
 	 */
 	public function getCatalogItems()
 	{
@@ -78,11 +78,22 @@ class Standard
 	/**
 	 * Returns the supplier items referencing the product
 	 *
-	 * @return \Aimeos\MShop\Supplier\Item\Iface[] Supplier items
+	 * @return array Associative list of items implementing \Aimeos\MShop\Supplier\Item\Iface
 	 */
 	public function getSupplierItems()
 	{
 		return (array) $this->get( 'supplier', [] );
+	}
+
+
+	/**
+	 * Returns the stock items associated to the product
+	 *
+	 * @return array Associative list of items implementing \Aimeos\MShop\Stock\Item\Iface
+	 */
+	public function getStockItems()
+	{
+		return (array) $this->get( 'stock', [] );
 	}
 
 

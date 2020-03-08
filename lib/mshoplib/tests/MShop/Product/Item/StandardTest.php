@@ -113,42 +113,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetPropertyItems()
-	{
-		$propItems = $this->object->getPropertyItems();
-
-		$this->assertEquals( 1, count( $propItems ) );
-
-		foreach( $propItems as $propItem ) {
-			$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $propItem );
-		}
-	}
-
-
-	public function testGetPropertyItemsAll()
-	{
-		$propItems = $this->object->getPropertyItems( null, false );
-
-		$this->assertEquals( 2, count( $propItems ) );
-
-		foreach( $propItems as $propItem ) {
-			$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $propItem );
-		}
-	}
-
-
-	public function testGetPropertyItemsType()
-	{
-		$propItems = $this->object->getPropertyItems( 'proptest' );
-
-		$this->assertEquals( 1, count( $propItems ) );
-
-		foreach( $propItems as $propItem ) {
-			$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $propItem );
-		}
-	}
-
-
 	public function testGetType()
 	{
 		$this->assertEquals( 'test', $this->object->getType() );
@@ -371,6 +335,66 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetResourceType()
 	{
 		$this->assertEquals( 'product', $this->object->getResourceType() );
+	}
+
+
+	public function testGetPropertyItems()
+	{
+		$propItems = $this->object->getPropertyItems();
+
+		$this->assertEquals( 1, count( $propItems ) );
+
+		foreach( $propItems as $propItem ) {
+			$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $propItem );
+		}
+	}
+
+
+	public function testGetCatalogItems()
+	{
+		$object = new \Aimeos\MShop\Product\Item\Standard( ['catalog' => []] );
+
+		$this->assertEquals( [], $object->getCatalogItems() );
+	}
+
+
+	public function testGetSupplierItems()
+	{
+		$object = new \Aimeos\MShop\Product\Item\Standard( ['supplier' => []] );
+
+		$this->assertEquals( [], $object->getSupplierItems() );
+	}
+
+
+	public function testGetStockItems()
+	{
+		$object = new \Aimeos\MShop\Product\Item\Standard( ['stock' => []] );
+
+		$this->assertEquals( [], $object->getStockItems() );
+	}
+
+
+	public function testGetPropertyItemsAll()
+	{
+		$propItems = $this->object->getPropertyItems( null, false );
+
+		$this->assertEquals( 2, count( $propItems ) );
+
+		foreach( $propItems as $propItem ) {
+			$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $propItem );
+		}
+	}
+
+
+	public function testGetPropertyItemsType()
+	{
+		$propItems = $this->object->getPropertyItems( 'proptest' );
+
+		$this->assertEquals( 1, count( $propItems ) );
+
+		foreach( $propItems as $propItem ) {
+			$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $propItem );
+		}
 	}
 
 
