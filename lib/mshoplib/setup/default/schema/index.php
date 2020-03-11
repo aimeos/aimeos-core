@@ -21,7 +21,7 @@ return array(
 
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'attrid', 'string', ['length' => 36, 'notnull' => false, 'customSchemaOptions' => ['charset' => 'binary']] );
+			$table->addColumn( 'attrid', 'string', ['length' => 36, 'customSchemaOptions' => ['charset' => 'binary']] );
 			$table->addColumn( 'listtype', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 255, 'customSchemaOptions' => ['charset' => 'binary'] ) );
@@ -93,8 +93,8 @@ return array(
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'langid', 'string', ['length' => 5, 'notnull' => false] );
-			$table->addColumn( 'url', 'string', ['length' => 240] );
-			$table->addColumn( 'name', 'string', ['length' => 240] );
+			$table->addColumn( 'url', 'string', ['length' => 255] );
+			$table->addColumn( 'name', 'string', ['length' => 255] );
 			$table->addColumn( 'content', 'text', ['length' => 0xffffff] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 
