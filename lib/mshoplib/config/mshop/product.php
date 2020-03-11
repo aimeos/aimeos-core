@@ -508,10 +508,10 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_product" ( :names
-						"type", "code", "dataset", "label", "status", "scale", "start", "end",
+						"type", "code", "dataset", "label", "url", "status", "scale", "start", "end",
 						"config", "target", "editor", "mtime", "ctime", "siteid"
 					) VALUES ( :values
-						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
 			),
@@ -519,7 +519,7 @@ return array(
 				'ansi' => '
 					UPDATE "mshop_product"
 					SET :names
-						"type" = ?, "code" = ?, "dataset" = ?, "label" = ?, "status" = ?, "scale" = ?,
+						"type" = ?, "code" = ?, "dataset" = ?, "label" = ?, "url" = ?, "status" = ?, "scale" = ?,
 						"start" = ?, "end" = ?, "config" = ?, "target" = ?, "editor" = ?, "mtime" = ?, "ctime" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
@@ -529,12 +529,12 @@ return array(
 					SELECT DISTINCT :columns
 						mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
 						mpro."type" AS "product.type", mpro."code" AS "product.code",
-						mpro."label" AS "product.label", mpro."config" AS "product.config",
+						mpro."label" AS "product.label", mpro."label" AS "product.label",
 						mpro."start" AS "product.datestart", mpro."end" AS "product.dateend",
 						mpro."status" AS "product.status", mpro."ctime" AS "product.ctime",
 						mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor",
 						mpro."target" AS "product.target", mpro."dataset" AS "product.dataset",
-						mpro."scale" AS "product.scale"
+						mpro."scale" AS "product.scale", mpro."config" AS "product.config"
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
@@ -545,12 +545,12 @@ return array(
 					SELECT DISTINCT :columns
 						mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
 						mpro."type" AS "product.type", mpro."code" AS "product.code",
-						mpro."label" AS "product.label", mpro."config" AS "product.config",
+						mpro."label" AS "product.label", mpro."label" AS "product.label",
 						mpro."start" AS "product.datestart", mpro."end" AS "product.dateend",
 						mpro."status" AS "product.status", mpro."ctime" AS "product.ctime",
 						mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor",
 						mpro."target" AS "product.target", mpro."dataset" AS "product.dataset",
-						mpro."scale" AS "product.scale"
+						mpro."scale" AS "product.scale", mpro."config" AS "product.config"
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond

@@ -736,10 +736,8 @@ class Standard
 				$map['content'] = array_merge( $map['content'], $texts['']['content'] );
 			}
 
-			if( !isset( $map['url'] ) )
-			{
-				$url = ( isset( $texts['']['url'] ) ? $texts['']['url'] : $item->getLabel() );
-				$map['url'] = \Aimeos\MW\Common\Base::sanitize( $url );
+			if( !isset( $map['url'] ) ) {
+				$map['url'] = $item->getUrl() ?: \Aimeos\MW\Common\Base::sanitize( $item->getLabel() );
 			}
 
 			if( !isset( $map['name'] ) )

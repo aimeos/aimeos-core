@@ -83,12 +83,27 @@ interface Iface
 	public function getLabel() : string;
 
 	/**
-	 * Sets a new URL target specific for that product
+	 * Sets a new label of the product.
 	 *
 	 * @param string $label New label of the product item
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setLabel( string $label ) : \Aimeos\MShop\Product\Item\Iface;
+
+	/**
+	 * Returns the URL segment for the product item.
+	 *
+	 * @return string URL segment of the product item
+	 */
+	public function getUrl() : string;
+
+	/**
+	 * Sets a new URL segment for the product.
+	 *
+	 * @param string $url New URL segment of the product item
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setUrl( string $url ) : \Aimeos\MShop\Product\Item\Iface;
 
 	/**
 	 * Returns the quantity scale of the product item.

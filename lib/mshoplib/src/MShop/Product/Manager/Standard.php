@@ -64,6 +64,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'product.url' => array(
+			'code' => 'product.url',
+			'internalcode' => 'mpro."url"',
+			'label' => 'URL segment',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'product.dataset' => array(
 			'code' => 'product.dataset',
 			'internalcode' => 'mpro."dataset"',
@@ -543,6 +550,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $item->getDataset() );
 			$stmt->bind( $idx++, $item->getLabel() );
+			$stmt->bind( $idx++, $item->getUrl() );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getScale(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( $idx++, $item->getDateStart() );

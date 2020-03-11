@@ -211,6 +211,28 @@ class Standard
 		return $this->set( 'product.label', $label );
 	}
 
+	/**
+	 * Returns the URL segment for the product item.
+	 *
+	 * @return string URL segment of the product item
+	 */
+	public function getUrl() : string
+	{
+		return $this->get( 'product.url', '' );
+	}
+
+
+	/**
+	 * Sets a new URL segment for the product.
+	 *
+	 * @param string $url New URL segment of the product item
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setUrl( string $url ) : \Aimeos\MShop\Product\Item\Iface
+	{
+		return $this->set( 'product.url', $url );
+	}
+
 
 	/**
 	 * Returns the starting point of time, in which the product is available.
@@ -391,6 +413,7 @@ class Standard
 		{
 			switch( $key )
 			{
+				case 'product.url': $item = $item->setUrl( $value ); break;
 				case 'product.type': $item = $item->setType( $value ); break;
 				case 'product.code': $item = $item->setCode( $value ); break;
 				case 'product.label': $item = $item->setLabel( $value ); break;
@@ -422,6 +445,7 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
+		$list['product.url'] = $this->getUrl();
 		$list['product.type'] = $this->getType();
 		$list['product.code'] = $this->getCode();
 		$list['product.label'] = $this->getLabel();

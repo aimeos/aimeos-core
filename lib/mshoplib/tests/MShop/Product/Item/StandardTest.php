@@ -25,6 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.status' => 1,
 			'product.code' => 'TEST',
 			'product.dataset' => 'Shirts',
+			'product.url' => 'test_product',
 			'product.label' => 'testproduct',
 			'product.config' => array( 'css-class' => 'test' ),
 			'product.datestart' => null,
@@ -270,6 +271,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetUrl()
+	{
+		$this->assertEquals( 'test_product', $this->object->getUrl() );
+	}
+
+
+	public function testSetUrl()
+	{
+		$return = $this->object->setUrl( 'edit_product' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
+		$this->assertEquals( 'edit_product', $this->object->getUrl() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetConfig()
 	{
 		$this->assertEquals( array( 'css-class' => 'test' ), $this->object->getConfig() );
@@ -495,6 +512,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.id' => 1,
 			'product.type' => 'test',
 			'product.label' => 'test item',
+			'product.url' => 'test_item',
 			'product.code' => 'test',
 			'product.dataset' => 'Shirts',
 			'product.datestart' => '2000-01-01 00:00:00',
@@ -510,6 +528,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( ['additional' => 'value'], $entries );
 		$this->assertEquals( $list['product.id'], $item->getId() );
+		$this->assertEquals( $list['product.url'], $item->getUrl() );
 		$this->assertEquals( $list['product.type'], $item->getType() );
 		$this->assertEquals( $list['product.code'], $item->getCode() );
 		$this->assertEquals( $list['product.label'], $item->getLabel() );
@@ -536,6 +555,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getType(), $arrayObject['product.type'] );
 		$this->assertEquals( $this->object->getDataset(), $arrayObject['product.dataset'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['product.label'] );
+		$this->assertEquals( $this->object->getUrl(), $arrayObject['product.url'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['product.status'] );
 		$this->assertEquals( $this->object->getDateStart(), $arrayObject['product.datestart'] );
 		$this->assertEquals( $this->object->getDateEnd(), $arrayObject['product.dateend'] );
