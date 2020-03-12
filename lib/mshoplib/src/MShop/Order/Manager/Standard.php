@@ -184,8 +184,9 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
 
-
-		$siteIds = $context->getLocale()->getSiteSubTree();
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/order/manager/sitemode', $level );
+		$siteIds = $this->getSiteIds( $level );
 
 		$name = 'order:status';
 		$expr = $siteIds ? $this->toExpression( 'mordst."siteid"', $siteIds ) : '1=1';
