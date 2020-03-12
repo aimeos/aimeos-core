@@ -707,7 +707,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @return \Aimeos\MW\Criteria\Expression\Iface Site search condition
 	 * @since 2020.01
 	 */
-	protected function getSiteCondition( \Aimeos\MW\Criteria\Iface $search, string $name, int $sitelevel ) : \Aimeos\MW\Criteria\Expression\Iface
+	protected function getSiteCondition( \Aimeos\MW\Criteria\Iface $search, string $name,
+		int $sitelevel ) : \Aimeos\MW\Criteria\Expression\Iface
 	{
 		$sites = $this->context->getLocale()->getSites();
 
@@ -728,7 +729,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			}
 		}
 
-		return $cond;
+		return $search->combine( '||', [$cond, $search->compare( '==', $name, null )] );
 	}
 
 
