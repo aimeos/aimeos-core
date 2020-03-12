@@ -529,7 +529,7 @@ return array(
 					SELECT DISTINCT :columns
 						mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
 						mpro."type" AS "product.type", mpro."code" AS "product.code",
-						mpro."label" AS "product.label", mpro."label" AS "product.label",
+						mpro."label" AS "product.label", mpro."url" AS "product.url",
 						mpro."start" AS "product.datestart", mpro."end" AS "product.dateend",
 						mpro."status" AS "product.status", mpro."ctime" AS "product.ctime",
 						mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor",
@@ -545,7 +545,7 @@ return array(
 					SELECT DISTINCT :columns
 						mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
 						mpro."type" AS "product.type", mpro."code" AS "product.code",
-						mpro."label" AS "product.label", mpro."label" AS "product.label",
+						mpro."label" AS "product.label", mpro."url" AS "product.url",
 						mpro."start" AS "product.datestart", mpro."end" AS "product.dateend",
 						mpro."status" AS "product.status", mpro."ctime" AS "product.ctime",
 						mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor",
