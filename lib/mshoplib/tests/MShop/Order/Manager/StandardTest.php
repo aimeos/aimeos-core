@@ -329,8 +329,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$total = 0;
 		$search = $this->object->createSearch();
-
-		$funcStatPayment = $search->createFunction( 'order.containsStatus', ['typestatus', 'shipped'] );
 		$funcStatus = $search->createFunction( 'order:status', ['typestatus'] );
 
 		$expr = [];
@@ -347,7 +345,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'order.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.editor', $this->editor );
 		$expr[] = $search->compare( '==', $funcStatus, 'shipped' );
-		$expr[] = $search->compare( '==', $funcStatPayment, 1 );
 
 		$expr[] = $search->compare( '!=', 'order.status.id', null );
 		$expr[] = $search->compare( '==', 'order.status.siteid', $siteid );
