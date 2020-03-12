@@ -100,10 +100,10 @@ interface Iface
 	/**
 	 * Sets a new URL segment for the product.
 	 *
-	 * @param string $url New URL segment of the product item
+	 * @param string|null $url New URL segment of the product item
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setUrl( string $url ) : \Aimeos\MShop\Product\Item\Iface;
+	public function setUrl( ?string $url ) : \Aimeos\MShop\Product\Item\Iface;
 
 	/**
 	 * Returns the quantity scale of the product item.

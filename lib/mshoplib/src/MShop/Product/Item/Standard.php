@@ -218,17 +218,17 @@ class Standard
 	 */
 	public function getUrl() : string
 	{
-		return $this->get( 'product.url', '' );
+		return $this->get( 'product.url' ) ?: \Aimeos\MW\Common\Base::sanitize( $this->getLabel() );
 	}
 
 
 	/**
 	 * Sets a new URL segment for the product.
 	 *
-	 * @param string $url New URL segment of the product item
+	 * @param string|null $url New URL segment of the product item
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setUrl( string $url ) : \Aimeos\MShop\Product\Item\Iface
+	public function setUrl( ?string $url ) : \Aimeos\MShop\Product\Item\Iface
 	{
 		return $this->set( 'product.url', $url );
 	}

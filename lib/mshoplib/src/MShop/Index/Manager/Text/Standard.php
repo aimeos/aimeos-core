@@ -732,12 +732,10 @@ class Standard
 				continue;
 			}
 
+			$url = $map['url'] ?? $item->getUrl();
+
 			if( isset( $texts[''] ) ) {
 				$map['content'] = array_merge( $map['content'], $texts['']['content'] );
-			}
-
-			if( !isset( $map['url'] ) ) {
-				$map['url'] = $item->getUrl() ?: \Aimeos\MW\Common\Base::sanitize( $item->getLabel() );
 			}
 
 			if( !isset( $map['name'] ) )
@@ -750,7 +748,7 @@ class Standard
 			}
 
 			$content = ' ' . join( ' ', $map['content'] ); // extra space for SQL POSITION() > 0
-			$this->saveText( $stmt, $item->getId(), $siteid, $langId, $map['url'], $map['name'], $content, $date );
+			$this->saveText( $stmt, $item->getId(), $siteid, $langId, $url, $map['name'], $content, $date );
 		}
 	}
 
