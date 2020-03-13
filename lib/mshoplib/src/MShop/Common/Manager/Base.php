@@ -729,7 +729,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			}
 		}
 
-		return $search->combine( '||', [$cond, $search->compare( '==', $name, null )] );
+		return $search->combine( '||', [$cond, $search->compare( '==', $name, '' )] );
 	}
 
 
