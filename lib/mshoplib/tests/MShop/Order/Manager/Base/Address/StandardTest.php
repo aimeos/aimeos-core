@@ -239,7 +239,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.address.telephone', '055544332211' );
 		$expr[] = $search->compare( '==', 'order.base.address.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'order.base.address.telefax', '055544332213' );
-		$expr[] = $search->compare( '==', 'order.base.address.website', 'www.metaways.net' );
+		$expr[] = $search->compare( '==', 'order.base.address.website', 'www.example.net' );
 		$expr[] = $search->compare( '==', 'order.base.address.longitude', '11.0' );
 		$expr[] = $search->compare( '==', 'order.base.address.latitude', '52.0' );
 		$expr[] = $search->compare( '==', 'order.base.address.position', 0 );

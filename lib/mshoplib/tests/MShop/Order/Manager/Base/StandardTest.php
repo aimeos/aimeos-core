@@ -268,7 +268,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.address.telephone', '055544332211' );
 		$expr[] = $search->compare( '==', 'order.base.address.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'order.base.address.telefax', '055544332213' );
-		$expr[] = $search->compare( '==', 'order.base.address.website', 'www.metaways.net' );
+		$expr[] = $search->compare( '==', 'order.base.address.website', 'www.example.net' );
 		$expr[] = $search->compare( '>=', 'order.base.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.base.address.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.address.editor', $this->editor );
