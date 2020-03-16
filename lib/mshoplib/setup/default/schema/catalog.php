@@ -18,8 +18,8 @@ return array(
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'level', 'smallint', [] );
 			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'url', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'url', 'string', array( 'length' => 255, 'default' => '' ) );
 			$table->addColumn( 'config', 'text', array( 'default' => '', 'length' => 0xffff ) );
 			$table->addColumn( 'nleft', 'integer', [] );
 			$table->addColumn( 'nright', 'integer', [] );
