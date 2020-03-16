@@ -84,13 +84,6 @@ class Standard extends Base
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'catalog.target' => array(
-			'code' => 'catalog.target',
-			'internalcode' => 'mcat."target"',
-			'label' => 'URL target',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
 		'status' => array(
 			'code' => 'catalog.status',
 			'internalcode' => 'mcat."status"',
@@ -98,7 +91,21 @@ class Standard extends Base
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'config' => array(
+		'catalog.url' => array(
+			'code' => 'catalog.url',
+			'internalcode' => 'mcat."url"',
+			'label' => 'URL segment',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'catalog.target' => array(
+			'code' => 'catalog.target',
+			'internalcode' => 'mcat."target"',
+			'label' => 'URL target',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'catalog.config' => array(
 			'code' => 'catalog.config',
 			'internalcode' => 'mcat."config"',
 			'label' => 'Config',
@@ -1063,6 +1070,7 @@ class Standard extends Base
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
+			$stmt->bind( $idx++, $item->getUrl() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->getEditor() );

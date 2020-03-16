@@ -22,6 +22,21 @@ interface Iface
 		\Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Tree\Iface
 {
 	/**
+	 * Returns the URL segment for the catalog item.
+	 *
+	 * @return string URL segment of the catalog item
+	 */
+	public function getUrl() : string;
+
+	/**
+	 * Sets a new URL segment for the catalog.
+	 *
+	 * @param string|null $url New URL segment of the catalog item
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 */
+	public function setUrl( ?string $url ) : \Aimeos\MShop\Catalog\Item\Iface;
+
+	/**
 	 * Returns the URL target specific for that category
 	 *
 	 * @return string URL target specific for that category

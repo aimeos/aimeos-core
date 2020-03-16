@@ -132,6 +132,30 @@ class Standard
 
 
 	/**
+	 * Returns the URL segment for the catalog item.
+	 *
+	 * @return string URL segment of the catalog item
+	 */
+	public function getUrl() : string
+	{
+		return $this->node->__isset( 'url' ) ? $this->node->__get( 'url' ) : \Aimeos\MW\Common\Base::sanitize( $this->getLabel() );
+	}
+
+
+	/**
+	 * Sets a new URL segment for the catalog.
+	 *
+	 * @param string|null $url New URL segment of the catalog item
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 */
+	public function setUrl( ?string $url ) : \Aimeos\MShop\Catalog\Item\Iface
+	{
+		$this->node->url = (string) $url;
+		return $this;
+	}
+
+
+	/**
 	 * Returns the config property of the catalog.
 	 *
 	 * @return array Returns the config of the catalog node
@@ -425,6 +449,7 @@ class Standard
 		{
 			switch( $key )
 			{
+				case 'catalog.url': $item = $item->setUrl( $value ); break;
 				case 'catalog.code': $item = $item->setCode( $value ); break;
 				case 'catalog.label': $item = $item->setLabel( $value ); break;
 				case 'catalog.status': $item = $item->setStatus( $value ); break;
@@ -450,6 +475,7 @@ class Standard
 	public function toArray( bool $private = false ) : array
 	{
 		$list = [
+			'catalog.url' => $this->getUrl(),
 			'catalog.code' => $this->getCode(),
 			'catalog.label' => $this->getLabel(),
 			'catalog.config' => $this->getConfig(),

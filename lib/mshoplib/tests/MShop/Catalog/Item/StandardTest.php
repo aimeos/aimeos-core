@@ -28,6 +28,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'level' => 1,
 			'code' => 'unit-test',
 			'label' => 'unittest',
+			'url' => 'unit_test',
 			'config' => ['testcategory' => '10'],
 			'status' => 1,
 			'siteid' => '99',
@@ -114,6 +115,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
 		$this->assertEquals( 'unit test', $this->object->getLabel() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetUrl()
+	{
+		$this->assertEquals( 'unit_test', $this->object->getUrl() );
+	}
+
+
+	public function testSetUrl()
+	{
+		$return = $this->object->setUrl( 'summer_shirts' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
+		$this->assertEquals( 'summer_shirts', $this->object->getUrl() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 

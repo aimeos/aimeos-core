@@ -63,13 +63,13 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		foreach( $domains as $domain )
 		{
-			$rmIds = [];
+			$rmIds = map();
 
 			foreach( $products as $item ) {
-				$rmIds = array_merge( $rmIds, array_keys( $item->getRefItems( $domain, null, null, false ) ) );
+				$rmIds = $rmIds->merge( $item->getRefItems( $domain, null, null, false )->keys() );
 			}
 
-			\Aimeos\MShop::create( $context, $domain )->deleteItems( $rmIds );
+			\Aimeos\MShop::create( $context, $domain )->deleteItems( $rmIds->toArray() );
 		}
 
 		$manager->deleteItems( $products->toArray() );

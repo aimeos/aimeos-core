@@ -246,7 +246,7 @@ return array(
 			'get' => array(
 				'ansi' => '
 					SELECT :columns
-						mcat."id", mcat."code", mcat."label", mcat."config",
+						mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
 						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
@@ -256,7 +256,7 @@ return array(
 						AND parent."siteid" = :siteid AND parent."id" = ?
 						AND mcat."level" <= parent."level" + ? AND :cond
 					GROUP BY :columns
-						mcat."id", mcat."code", mcat."label", mcat."config",
+						mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid",
 						mcat."siteid", mcat."nleft", mcat."nright",
 						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
@@ -276,7 +276,7 @@ return array(
 			'insert-usage' => array(
 				'ansi' => '
 					UPDATE "mshop_catalog"
-					SET :names "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?, "ctime" = ?
+					SET :names "url" = ?, "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?, "ctime" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
@@ -297,7 +297,7 @@ return array(
 			'update-usage' => array(
 				'ansi' => '
 					UPDATE "mshop_catalog"
-					SET "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?
+					SET "url" = ?, "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
@@ -318,7 +318,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT DISTINCT :columns
-						mcat."id", mcat."code", mcat."label", mcat."config",
+						mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
 						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
@@ -331,7 +331,7 @@ return array(
 			'search-item' => array(
 				'ansi' => '
 					SELECT DISTINCT :columns
-						mcat."id", mcat."code", mcat."label", mcat."config",
+						mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
 						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
@@ -343,7 +343,7 @@ return array(
 				',
 				'mysql' => '
 					SELECT DISTINCT :columns
-						mcat."id", mcat."code", mcat."label", mcat."config",
+						mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
 						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"

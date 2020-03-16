@@ -93,6 +93,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'catalog.left', 3 );
 		$expr[] = $search->compare( '==', 'catalog.right', 4 );
 		$expr[] = $search->compare( '==', 'catalog.status', 1 );
+		$expr[] = $search->compare( '==', 'catalog.url', 'kaffee' );
 		$expr[] = $search->compare( '==', 'catalog.label', 'Kaffee' );
 		$expr[] = $search->compare( '~=', 'catalog.config', '{' );
 		$expr[] = $search->compare( '>=', 'catalog.mtime', '1970-01-01 00:00:00' );
@@ -165,6 +166,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getId(), $testItem->getId() );
 		$this->assertEquals( 'Root', $testItem->getLabel() );
 		$this->assertEquals( 'Root', $testItem->getName() );
+		$this->assertEquals( 'home', $testItem->getUrl() );
 		$this->assertEquals( 1, $testItem->getStatus() );
 	}
 
@@ -275,6 +277,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->assertEquals( 0, count( $expected ) );
+		$this->assertEquals( 'home', $items->getUrl()->first() );
 	}
 
 
