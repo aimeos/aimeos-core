@@ -943,7 +943,7 @@ class Standard
 			$search->getConditions(),
 		];
 
-		if( isset( $ref['stock'] ) ) {
+		if( isset( $ref['stock'] ) && is_array( $ref['stock'] ) ) {
 			$expr[] = $search->compare( '==', 'stock.type', $ref['stock'] );
 		}
 
