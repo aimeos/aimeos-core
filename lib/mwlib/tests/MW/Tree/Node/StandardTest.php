@@ -1,25 +1,20 @@
 <?php
 
-namespace Aimeos\MW\Tree\Node;
-
-
 /**
- * Test class for \Aimeos\MW\Tree\Node\Standard.
- *
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2020
  */
+
+
+namespace Aimeos\MW\Tree\Node;
+
+
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function setUp() : void
 	{
 		$child1 = new \Aimeos\MW\Tree\Node\Standard( array( 'id' => null, 'label' => 'child1', 'status' => '0', 'custom' => 'test' ) );
@@ -28,16 +23,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MW\Tree\Node\Standard( array( 'id' => 1, 'label' => 'parent', 'status' => '1', 'custom' => 'test' ), array( $child1, $child2 ) );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown() : void
 	{
 		unset( $this->object );
 	}
+
 
 	public function testMagicMethods1()
 	{
@@ -49,17 +40,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testMagicMethods2()
 	{
+		$this->assertNull( $this->object->notavailable );
+
 		$this->object->custom = 'test2';
 		$this->assertEquals( 'test2', $this->object->custom );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetId()
 	{
 		$this->assertEquals( 1, $this->object->getId() );
 	}
+
 
 	public function testLabel()
 	{
@@ -70,6 +66,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'ancestor', $this->object->getLabel() );
 	}
 
+
 	public function testStatus()
 	{
 		$this->assertEquals( 1, $this->object->getStatus() );
@@ -79,16 +76,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 0, $this->object->getStatus() );
 	}
 
+
 	public function testChildren()
 	{
 		$this->assertEquals( 'child2', $this->object->getChild( 1 )->getLabel() );
 		$this->assertEquals( 2, count( $this->object->getChildren() ) );
 	}
 
+
 	public function testHasChildren()
 	{
 		$this->assertEquals( true, $this->object->hasChildren() );
 	}
+
 
 	public function testAddChild()
 	{
@@ -98,6 +98,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'child3', $this->object->getChild( 2 )->getLabel() );
 	}
 
+
 	public function testToArray()
 	{
 		$values = $this->object->toArray();
@@ -106,10 +107,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'parent', $values['label'] );
 	}
 
+
 	public function testIsModified()
 	{
 		$this->assertFalse( $this->object->isModified() );
 	}
+
 
 	public function testCount()
 	{

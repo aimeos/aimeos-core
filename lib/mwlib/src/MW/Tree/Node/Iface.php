@@ -25,7 +25,6 @@ interface Iface
 	 *
 	 * @param string $name Name of member variable tried to access
 	 * @return mixed Value associated to the given name
-	 * @throws \Aimeos\MW\Tree\Exception If no value is available for the given name
 	 */
 	public function __get( string $name );
 
@@ -34,7 +33,6 @@ interface Iface
 	 *
 	 * @param string $name Name of member variable tried to access
 	 * @param mixed $value Value of member variable tried to access
-	 * @return void
 	 */
 	public function __set( string $name, $value );
 
@@ -50,7 +48,6 @@ interface Iface
 	 * Removes the value associated to the given name.
 	 *
 	 * @param string $name Name of member variable tried to access
-	 * @return void
 	 */
 	public function __unset( string $name );
 

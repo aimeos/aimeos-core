@@ -45,16 +45,11 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 * Returns the value associated with the given name.
 	 *
 	 * @param string $name Name of member variable tried to access
-	 * @return mixed Value associated to the given name
-	 * @throws \Aimeos\MW\Tree\Exception If no value is available for the given name
+	 * @return mixed Value associated to the given name or NULL if not available
 	 */
 	public function __get( string $name )
 	{
-		if( array_key_exists( $name, $this->values ) ) {
-			return $this->values[$name];
-		}
-
-		throw new \Aimeos\MW\Tree\Exception( sprintf( 'No value for "%1$s" set in node', $name ) );
+		return $this->values[$name] ?? null;
 	}
 
 
@@ -66,12 +61,11 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function __set( string $name, $value )
 	{
-		if( array_key_exists( $name, $this->values ) && $this->values[$name] === $value ) {
-			return;
+		if( !array_key_exists( $name, $this->values ) || $this->values[$name] !== $value )
+		{
+			$this->values[$name] = $value;
+			$this->modified = true;
 		}
-
-		$this->values[$name] = $value;
-		$this->modified = true;
 	}
 
 
@@ -94,12 +88,11 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function __unset( string $name )
 	{
-		if( !array_key_exists( $name, $this->values ) ) {
-			return;
+		if( array_key_exists( $name, $this->values ) )
+		{
+			unset( $this->values[$name] );
+			$this->modified = true;
 		}
-
-		unset( $this->values[$name] );
-		$this->modified = true;
 	}
 
 

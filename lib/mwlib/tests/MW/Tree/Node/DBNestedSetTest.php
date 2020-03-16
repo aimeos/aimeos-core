@@ -48,12 +48,4 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$this->object->setId( null );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
-
-
-	public function testMagicGet()
-	{
-		$this->expectException( \Aimeos\MW\Tree\Exception::class );
-		$this->object->notDefined;
-	}
-
 }
