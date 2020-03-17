@@ -707,7 +707,7 @@ class Standard
 			{
 				if( ( $row['media.previews'] = json_decode( $config = $row['media.previews'], true ) ) === null )
 				{
-					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_media.config', $row['media.id'], $config );
+					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_media.previews', $row['media.id'], $config );
 					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 				$map[$row['media.id']] = $row;
