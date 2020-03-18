@@ -167,11 +167,9 @@ trait Traits
 				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$subManager = new $classname( $this->getContext() );
-
-			\Aimeos\MW\Common\Base::checkClass( $interface, $subManager );
-
-			$this->subManagers[$key] = $this->addManagerDecorators( $subManager, $manager, $domain );
+			$subManager = \Aimeos\MW\Common\Base::checkClass( $interface, new $classname( $this->getContext() ) );
+			$subManager = $this->addManagerDecorators( $subManager, $manager, $domain );
+			$this->subManagers[$key] = $subManager->setObject( $subManager );
 		}
 
 		return $this->subManagers[$key];
