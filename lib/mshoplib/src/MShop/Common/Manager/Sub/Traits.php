@@ -169,7 +169,8 @@ trait Traits
 
 			\Aimeos\MW\Common\Base::checkClass( $interface, $subManager );
 
-			$this->subManagers[$key] = $this->addManagerDecorators( $subManager, $manager, $domain );
+			$subManager = $this->addManagerDecorators( $subManager, $manager, $domain );
+			$this->subManagers[$key] = $subManager->setObject( $subManager );
 		}
 
 		return $this->subManagers[$key];
