@@ -184,7 +184,7 @@ class Standard
 		try {
 			$siteid = $context->getLocale()->getSiteId();
 		} catch( \Exception $e ) {
-			$siteid = null;
+			$siteid = '';
 		}
 
 		$dbm = $context->getDatabaseManager();
