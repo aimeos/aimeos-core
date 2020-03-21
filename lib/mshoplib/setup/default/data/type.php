@@ -19,6 +19,7 @@ return array(
 		array( 'domain' => 'product', 'code' => 'text', 'label' => 'Text', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'date', 'label' => 'Date', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'interval', 'label' => 'Interval', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'customer/group', 'label' => 'Customer group ID', 'status' => 1 ),
 	),
 
 	'attribute/lists/type' => array(
