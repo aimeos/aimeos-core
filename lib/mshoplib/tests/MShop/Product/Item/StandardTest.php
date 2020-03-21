@@ -480,6 +480,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetStockItemsType()
+	{
+		$stock = new \Aimeos\MShop\Stock\Item\Standard();
+		$stocks = [123 => (clone $stock)->setType( 'something' ), 456 => (clone $stock)->setType( 'default' )];
+		$object = new \Aimeos\MShop\Product\Item\Standard( ['stock' => $stocks] );
+
+		$this->assertInstanceOf( \Aimeos\Map::class, $object->getStockItems( 'default' ) );
+		$this->assertEquals( 'default', $object->getStockItems( 'default' )->getType()->first() );
+		$this->assertCount( 1, $object->getStockItems( 'default' ) );
+	}
+
+
 	public function testGetPropertyItemsAll()
 	{
 		$propItems = $this->object->getPropertyItems( null, false );

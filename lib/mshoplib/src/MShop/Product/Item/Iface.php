@@ -41,9 +41,10 @@ interface Iface
 	/**
 	 * Returns the stock items associated to the product
 	 *
+	 * @param string|null $type Type of the stock item
 	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Stock\Item\Iface
 	 */
-	public function getStockItems() : \Aimeos\Map;
+	public function getStockItems( $type = null ) : \Aimeos\Map;
 
 	/**
 	 * Returns the code of the product item.
