@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$listItem = $this->object->createListsItem();
+		$listItem = $this->object->createListItem();
 		$refItem = \Aimeos\MShop\Text\Manager\Factory::create( $this->context )->createItem()->setType( 'name' );
 
 		$search = $this->object->createSearch();
