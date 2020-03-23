@@ -315,6 +315,12 @@ abstract class DBBase
 			$list = $translations = [];
 			foreach( $cols as $idx => $col )
 			{
+				if( !strncmp( $names[$idx], 'product', 7 ) && !strncmp( $names[$idx], 'sort:product', 12 ) )
+				{
+					$translations[$names[$idx]] = $col;
+					continue;
+				}
+
 				$list[] = 'MIN(' . $col . ') AS "s' . $idx . '"';
 				$translations[$names[$idx]] = '"s' . $idx . '"';
 			}
