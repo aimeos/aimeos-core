@@ -302,17 +302,26 @@ abstract class DBBase
 			$list = $aliases = [];
 			foreach( $cols as $idx => $col )
 			{
+				if( !strncmp( $names[$idx], 'product', 7 ) && !strncmp( $names[$idx], 'sort:product', 12 ) )
+				{
+					$aliases[$names[$idx]] = $col;
+					continue;
+				}
+
 				$list[] = 'MIN(' . $col . ') AS "s' . $idx . '"';
-				$aliases[ $names[$idx] ] = '"s' . $idx . '"';
+				$aliases[$names[$idx]] = '"s' . $idx . '"';
+			}
+
+			if( !empty( $list ) )
+			{
+				$keys[] = 'mincols';
+				$find[] = ':mincols';
+				$replace[] = implode( ', ', $list );
 			}
 
 			$keys[] = 'orderby';
 			$find[] = ':order';
 			$replace[] = $search->getSortationSource( $types, $aliases, $funcs );
-
-			$keys[] = 'mincols';
-			$find[] = ':mincols';
-			$replace[] = implode( ', ', $list );
 		}
 
 		return [$keys, $find, $replace];
