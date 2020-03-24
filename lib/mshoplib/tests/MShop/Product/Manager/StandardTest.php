@@ -61,8 +61,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch( true );
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\SQL::class, $search );
+	}
+
+
+	public function testCreateSearchEvents()
+	{
+		$this->context->getConfig()->set( 'mshop/product/manager/standard/strict-events', 0 );
+
+		$search = $this->object->createSearch( true );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\SQL::class, $search );
+		$this->assertEquals( 'event', $search->getConditions()->getExpressions()[2]->getExpressions()[2]->getValue() );
 	}
 
 

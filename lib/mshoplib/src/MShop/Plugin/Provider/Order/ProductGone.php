@@ -62,19 +62,16 @@ class ProductGone
 
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
-		$productIds = [];
-		foreach( $order->getProducts() as $pr ) {
-			$productIds[] = $pr->getProductId();
-		}
-
+		$notAvailable = [];
+		$productIds = $order->getProducts()->getProductId()->toArray();
 		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.id', $productIds ) );
+		$search = $productManager->createSearch( true );
+		$search->setConditions( $search->combine( '&&', [
+			$search->compare( '==', 'product.id', $productIds ),
+			$search->getConditions()
+		] ) );
 		$checkItems = $productManager->searchItems( $search );
-
-		$notAvailable = [];
-		$now = date( 'Y-m-d H-i-s' );
 
 		foreach( $order->getProducts() as $position => $orderProduct )
 		{
@@ -82,20 +79,6 @@ class ProductGone
 			{
 				$notAvailable[$position] = 'gone.notexist';
 				continue;
-			}
-
-			if( $product->getStatus() <= 0 )
-			{
-				$notAvailable[$position] = 'gone.status';
-				continue;
-			}
-
-			$start = $product->getDateStart();
-			$end = $product->getDateEnd();
-			$type = $product->getType();
-
-			if( ( $type !== 'event' && $start !== null && $start >= $now ) || ( $end !== null && $now > $end ) ) {
-				$notAvailable[$position] = 'gone.timeframe';
 			}
 		}
 

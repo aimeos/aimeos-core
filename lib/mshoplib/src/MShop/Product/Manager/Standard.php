@@ -289,6 +289,27 @@ class Standard
 				$object->compare( '==', 'product.dateend', null ),
 				$object->compare( '>=', 'product.dateend', $this->date ),
 			);
+
+			/** mshop/product/manager/standard/strict-events
+			 * Hide events automatically if they are over
+			 *
+			 * Events are hidden by default if they are finished, removed from the
+			 * list view and can't be bought any more. If you sell webinars including
+			 * an archive of old ones you want to continue to sell for example, then
+			 * these webinars should be still shown.
+			 *
+			 * Setting this configuration option to false will display event products
+			 * that are already over and customers can still buy them.
+			 *
+			 * @param bool TRUE to hide events after they are over (default), FALSE to continue to show them
+			 * @category Developer
+			 * @category User
+			 * @since 2019.10
+			 */
+			if( !$this->getContext()->getConfig()->get( 'mshop/product/manager/standard/strict-events', true ) ) {
+				$temp[] = $object->compare( '==', 'product.type', 'event' );
+			}
+
 			$expr[] = $object->combine( '||', $temp );
 
 			$object->setConditions( $object->combine( '&&', $expr ) );

@@ -121,19 +121,10 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->saveItem( $this->product->setStatus( 0 ) );
 
 		$this->order->addProduct( $badItem );
-		$products = $this->order->getProducts()->toArray();
-		$badItemPosition = key( $products );
+		$badItemPosition = $this->order->getProducts()->firstKey();
+		$type = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
-		try
-		{
-			$type = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
-			$this->object->update( $this->order, 'check.after', $type );
-			$this->fail( '\Aimeos\MShop\Plugin\Provider\Exception not thrown.' );
-		}
-		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
-		{
-			$ref = ['product' => [$badItemPosition => 'gone.status']];
-			$this->assertEquals( $ref, $e->getErrorCodes() );
-		}
+		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
+		$this->object->update( $this->order, 'check.after', $type );
 	}
 }
