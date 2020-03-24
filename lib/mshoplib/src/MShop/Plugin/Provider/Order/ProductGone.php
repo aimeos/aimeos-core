@@ -94,8 +94,9 @@ class ProductGone
 
 			$start = $product->getDateStart();
 			$end = $product->getDateEnd();
+			$type = $product->getType();
 
-			if( ( ( $start !== null ) && ( $start >= $now ) ) || ( ( $end !== null ) && ( $now > $end ) ) ) {
+			if( ( $type !== 'event' && $start !== null && $start >= $now ) || ( $end !== null && $now > $end ) ) {
 				$notAvailable[$position] = 'gone.timeframe';
 			}
 		}
