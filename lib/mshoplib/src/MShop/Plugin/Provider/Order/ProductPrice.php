@@ -105,48 +105,43 @@ class ProductPrice
 
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
-		$attrIds = $prodCodes = $changedProducts = [];
+		$attrIds = map();
+		$prodCodes = $changedProducts = [];
 		$orderProducts = $order->getProducts();
 
 		foreach( $orderProducts as $pos => $item )
 		{
-			if( $item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) {
+			if( $item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE
+				|| $this->getConfigValue( 'ignore-modified' ) && $item->getPrice()->isModified()
+			) {
 				unset( $orderProducts[$pos] );
 			}
 
-			if( $this->getConfigValue( 'ignore-modified' ) == true && $item->getPrice()->isModified() ) {
-				unset( $orderProducts[$pos] );
-			}
-
+			$attrIds->merge( $item->getAttributeItems()->getAttributeId()->toArray() );
 			$prodCodes[] = $item->getProductCode();
-
-			foreach( $item->getAttributeItems() as $ordAttrItem )
-			{
-				if( ( $id = $ordAttrItem->getAttributeId() ) != '' ) {
-					$attrIds[] = $id;
-				}
-			}
 		}
 
 
-		$attributes = $this->getAttributeItems( array_unique( $attrIds ) );
+		$attributes = $this->getAttributeItems( $attrIds->unique()->toArray() );
 		$prodMap = $this->getProductItems( $prodCodes );
 
 
 		foreach( $orderProducts as $pos => $orderProduct )
 		{
-			if( !isset( $prodMap[$orderProduct->getProductCode()] ) ) {
+error_log( print_r( $prodMap->get( $orderProduct->getProductCode() )->getRefItems( 'attribute', 'price', 'custom' ), true ) );
+			if( !$prodMap->has( $orderProduct->getProductCode() )
+				|| !$prodMap->get( $orderProduct->getProductCode() )->getRefItems( 'attribute', 'price', 'custom' )->isEmpty()
+			) {
 				continue; // Product isn't available or excluded
 			}
 
 			// fetch prices of articles/sub-products
 			$refPrices = $prodMap[$orderProduct->getProductCode()]->getRefItems( 'price', 'default', 'default' );
-
-			$orderPosPrice = $orderProduct->getPrice();
 			$price = $this->getPrice( $orderProduct, $refPrices, $attributes, $pos );
 
-			if( $orderPosPrice->getTaxFlag() === $price->getTaxFlag() && $orderPosPrice->compare( $price ) === false )
-			{
+			if( $orderProduct->getPrice()->getTaxFlag() === $price->getTaxFlag()
+				&& $orderProduct->getPrice()->compare( $price ) === false
+			) {
 				$order->addProduct( $orderProduct->setPrice( $price ), $pos );
 				$changedProducts[$pos] = 'price.changed';
 			}
@@ -154,7 +149,7 @@ class ProductPrice
 
 		if( count( $changedProducts ) > 0 )
 		{
-			$code = array( 'product' => $changedProducts );
+			$code = ['product' => $changedProducts];
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Please have a look at the prices of the products in your basket' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
@@ -171,18 +166,19 @@ class ProductPrice
 	 */
 	protected function getAttributeItems( array $list ) : \Aimeos\Map
 	{
-		if( $list !== [] )
-		{
-			$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
-
-			$search = $attrManager->createSearch( true );
-			$expr = [$search->compare( '==', 'attribute.id', $list ), $search->getConditions()];
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			$list = $attrManager->searchItems( $search, ['price'] );
+		if( empty( $list ) ) {
+			return map();
 		}
 
-		return map( $list );
+		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
+
+		$search = $attrManager->createSearch( true )->setSlice( 0, count( $list ) );
+		$search->setConditions( $search->combine( '&&', [
+			$search->compare( '==', 'attribute.id', $list ),
+			$search->getConditions()
+		] ) );
+
+		return $attrManager->searchItems( $search, ['price'] );
 	}
 
 
@@ -190,39 +186,23 @@ class ProductPrice
 	 * Returns the product items for the given product codes.
 	 *
 	 * @param string[] $prodCodes Product codes
-	 * @return \Aimeos\MShop\Product\Item\Iface[] Associative list of codes as keys and product items as values
+	 * @return \Aimeos\Map Associative list of codes as keys and product items as values
 	 */
-	protected function getProductItems( array $prodCodes ) : array
+	protected function getProductItems( array $prodCodes ) : \Aimeos\Map
 	{
 		if( empty( $prodCodes ) ) {
-			return [];
+			return map();
 		}
 
-		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
 		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 
 		$search = $productManager->createSearch( true )->setSlice( 0, count( $prodCodes ) );
-		$expr = [
+		$search->setConditions( $search->combine( '&&', [
 			$search->compare( '==', 'product.code', $prodCodes ),
 			$search->getConditions(),
-		];
+		] ) );
 
-		try
-		{
-			$attrId = $attrManager->findItem( 'custom', [], 'product', 'price' )->getId();
-			$func = $search->createFunction( 'product:has', ['attribute', 'custom', $attrId] );
-			$expr[] = $search->combine( '!', [$search->compare( '!=', $func, null )] );
-		}
-		catch( \Aimeos\MShop\Exception $e ) {} // no custom prices available
-
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$map = [];
-		foreach( $productManager->searchItems( $search, ['price'] ) as $item ) {
-			$map[$item->getCode()] = $item;
-		}
-
-		return $map;
+		return $productManager->searchItems( $search, ['price', 'attribute' => ['custom']] )->col( null, 'product.code' );
 	}
 
 
