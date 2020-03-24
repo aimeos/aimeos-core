@@ -50,4 +50,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'pre[fix][test]', $object->transform( array( 'test' ) ) );
 	}
 
+
+	public function testTransformWithNoPrefix()
+	{
+		$view = new \Aimeos\MW\View\Standard();
+		$object = new \Aimeos\MW\View\Helper\Formparam\Standard( $view, array( 'prefix' ) );
+
+		$this->assertEquals( 'test', $object->transform( 'test', false ) );
+		$this->assertEquals( 'test', $object->transform( array( 'test' ), false ) );
+	}
+
 }

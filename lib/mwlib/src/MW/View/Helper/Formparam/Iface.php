@@ -25,7 +25,8 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * this is necessary, e.g. "name1[name2][name3]..."
 	 *
 	 * @param string|array $names Name or list of names
+	 * @param bool $prefix TRUE to use available prefix, FALSE for names without prefix
 	 * @return string Form parameter name
 	 */
-	public function transform( $names ) : string;
+	public function transform( $names, bool $prefix = true ) : string;
 }
