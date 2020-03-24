@@ -302,7 +302,7 @@ abstract class DBBase
 			$list = $aliases = [];
 			foreach( $cols as $idx => $col )
 			{
-				if( !strncmp( $names[$idx], 'product', 7 ) && !strncmp( $names[$idx], 'sort:product', 12 ) )
+				if( !strncmp( $names[$idx], 'product', 7 ) || !strncmp( $names[$idx], 'sort:product', 12 ) )
 				{
 					$aliases[$names[$idx]] = $col;
 					continue;
