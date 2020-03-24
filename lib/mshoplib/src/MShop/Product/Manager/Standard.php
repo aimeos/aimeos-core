@@ -275,7 +275,6 @@ class Standard
 			$expr[] = $object->combine( '||', $temp );
 
 			$temp = array(
-				$object->compare( '==', 'product.type', 'event' ),
 				$object->compare( '==', 'product.dateend', null ),
 				$object->compare( '>=', 'product.dateend', $this->date ),
 			);
