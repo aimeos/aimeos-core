@@ -128,7 +128,6 @@ class ProductPrice
 
 		foreach( $orderProducts as $pos => $orderProduct )
 		{
-error_log( print_r( $prodMap->get( $orderProduct->getProductCode() )->getRefItems( 'attribute', 'price', 'custom' ), true ) );
 			if( !$prodMap->has( $orderProduct->getProductCode() )
 				|| !$prodMap->get( $orderProduct->getProductCode() )->getRefItems( 'attribute', 'price', 'custom' )->isEmpty()
 			) {
@@ -136,7 +135,7 @@ error_log( print_r( $prodMap->get( $orderProduct->getProductCode() )->getRefItem
 			}
 
 			// fetch prices of articles/sub-products
-			$refPrices = $prodMap[$orderProduct->getProductCode()]->getRefItems( 'price', 'default', 'default' );
+			$refPrices = $prodMap->get( $orderProduct->getProductCode() )->getRefItems( 'price', 'default', 'default' );
 			$price = $this->getPrice( $orderProduct, $refPrices, $attributes, $pos );
 
 			if( $orderProduct->getPrice()->getTaxFlag() === $price->getTaxFlag()
