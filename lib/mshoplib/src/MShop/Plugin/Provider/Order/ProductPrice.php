@@ -135,7 +135,9 @@ class ProductPrice
 
 		foreach( $orderProducts as $pos => $orderProduct )
 		{
-			if( !isset( $prodMap[$orderProduct->getProductCode()] ) ) {
+			if( !isset( $prodMap[$orderProduct->getProductCode()] )
+				|| $prodMap[$orderProduct->getProductCode()]->getRefItems( 'attribute', 'price', 'custom' ) !== []
+			) {
 				continue; // Product isn't available or excluded
 			}
 
@@ -198,23 +200,17 @@ class ProductPrice
 			return [];
 		}
 
-		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
 		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 
-		$attrId = $attrManager->findItem( 'custom', [], 'product', 'price' )->getId();
-
 		$search = $productManager->createSearch( true )->setSlice( 0, count( $prodCodes ) );
-		$func = $search->createFunction( 'product:has', ['attribute', 'custom', $attrId] );
-		$expr = array(
+		$search->setConditions( $search->combine( '&&', array(
 			$search->compare( '==', 'product.code', $prodCodes ),
-			$search->combine( '!', [$search->compare( '!=', $func, null )] ),
 			$search->getConditions(),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		) ) );
 
 		$map = [];
 
-		foreach( $productManager->searchItems( $search, ['price'] ) as $item ) {
+		foreach( $productManager->searchItems( $search, ['price', 'attribute' => ['custom']] ) as $item ) {
 			$map[$item->getCode()] = $item;
 		}
 
