@@ -76,7 +76,7 @@ class Supplier
 			{
 				$addrId = ( count( $addresses ) > 1 ) ? $item->getCode() . '-' . $id : $item->getCode();
 
-				$this->feConfig['supplier.code']['default'][$addrId] = preg_replace( "/\n+/m", "\n", sprintf(
+				$this->feConfig['supplier.code']['default'][$addrId] = trim( preg_replace( "/\n+/m", "\n", sprintf(
 					/// Supplier address format with label (%1$s), company (%2$s),
 					/// address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 					/// postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
@@ -90,8 +90,8 @@ class Supplier
 %10$s
 %11$s
 %12$s
-%13$s
-' 					),
+%13$s'
+					),
 					$item->getLabel(),
 					$addr->getCompany(),
 					$addr->getAddress1(),
@@ -105,9 +105,9 @@ class Supplier
 					$addr->getTelephone(),
 					$addr->getTelefax(),
 					$addr->getWebsite()
-				) );
+				) ) );
 
-				$this->feConfig['supplier.code']['short'][$addrId] = preg_replace( "/\n+/m", "\n", sprintf(
+				$this->feConfig['supplier.code']['short'][$addrId] = trim( preg_replace( "/\n+/m", "\n", sprintf(
 					/// Supplier address format with label (%1$s), company (%2$s),
 					/// address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 					/// postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
@@ -126,7 +126,7 @@ class Supplier
 					$addr->getTelephone(),
 					$addr->getTelefax(),
 					$addr->getWebsite()
-				) );
+				) ) );
 			}
 		}
 	}
