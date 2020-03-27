@@ -17,6 +17,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$view = new \Aimeos\MW\View\Standard();
+		$view->list = ['a' => 1, 'b' => 2, 'c' => 2];
+
 		$this->object = new \Aimeos\MW\View\Helper\Value\Standard( $view );
 	}
 
@@ -44,5 +46,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'test', $this->object->transform( $params, 'key' ) );
 		$this->assertEquals( 'value', $this->object->transform( $params, '/list/test/key' ) );
 		$this->assertEquals( null, $this->object->transform( $params, 'missing' ) );
+	}
+
+
+	public function testTransformString()
+	{
+		$this->assertEquals( 1, $this->object->transform( 'list', 'a', 'none' ) );
+		$this->assertEquals( 'none', $this->object->transform( 'list', 'd', 'none' ) );
 	}
 }

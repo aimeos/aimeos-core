@@ -24,13 +24,15 @@ class Standard
 	/**
 	 * Returns the value for the given key in the array
 	 *
-	 * @param array $values Multi-dimensional associative list of key/value pairs
+	 * @param array|string $values Multi-dimensional associative list of key/value pairs or name of the view variable
 	 * @param string $key Parameter key like "name" or "list/test" for associative arrays
 	 * @param mixed $default Returned value if no one for key is available
 	 * @return mixed Value from the array or default value if not present in array
 	 */
-	public function transform( array $values, string $key, $default = null )
+	public function transform( $values, $key, $default = null )
 	{
+		$values = (array) ( is_string( $values ) ? $this->getView()->get( $values, [] ) : $values );
+
 		foreach( explode( '/', trim( $key, '/' ) ) as $part )
 		{
 			if( isset( $values[$part] ) ) {
