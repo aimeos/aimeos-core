@@ -51,5 +51,14 @@
 			"controller/jobs/src",
 			"Bootstrap.php"
 		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Aimeos\\MW\\": "lib/mwlib/tests/MW/",
+			"Aimeos\\MShop\\": "lib/mshoplib/tests/MShop/",
+			"Aimeos\\MAdmin\\": "lib/mshoplib/tests/MAdmin/",
+			"Aimeos\\Controller\\Common\\": "controller/common/tests/Controller/Common/",
+			"Aimeos\\Controller\\Jobs\\": "controller/common/tests/Controller/Jobs/"
+		}
 	}
 }
