@@ -1,12 +1,13 @@
 <?php
 
-namespace Aimeos\MW\Container;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2020
  */
+
+namespace Aimeos\MW\Container;
+
+
 class DirectoryTest extends \PHPUnit\Framework\TestCase
 {
 	public function testNewFile()
