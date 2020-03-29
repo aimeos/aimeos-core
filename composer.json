@@ -47,6 +47,7 @@
 		"classmap": [
 			"lib/mwlib/src",
 			"lib/mshoplib/src",
+			"lib/mshoplib/setup",
 			"controller/common/src",
 			"controller/jobs/src",
 			"Bootstrap.php"
