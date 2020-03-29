@@ -59,6 +59,12 @@
 			"Aimeos\\MAdmin\\": "lib/mshoplib/tests/MAdmin/",
 			"Aimeos\\Controller\\Common\\": "controller/common/tests/Controller/Common/",
 			"Aimeos\\Controller\\Jobs\\": "controller/common/tests/Controller/Jobs/"
-		}
+		},
+		"classmap": [
+			"lib/mwlib/tests",
+			"lib/mshoplib/tests",
+			"controller/common/tests",
+			"controller/jobs/tests"
+		]
 	}
 }
