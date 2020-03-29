@@ -55,7 +55,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testTransformSanitize()
 	{
-		$expected = '/baseurl/module/test/index/?f_name=tech_1m_2&d_name=weird_a_b_123';
+		$expected = '/baseurl/module/test/index/?f_name=tech-1m-2&d_name=weird-a-b-123';
 		$params = array( 'f_name' => 'tech /1m & 2%', 'd_name' => 'weird #`[a]~{b}\\|123^?' );
 
 		$this->assertEquals( $expected, $this->object->transform( 'module', 'test', 'index', $params ) );

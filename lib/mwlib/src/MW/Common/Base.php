@@ -67,7 +67,6 @@ abstract class Base
 	 */
 	public static function sanitize( string $string ) : string
 	{
-		$regex = '/(\s|\&|\%|\?|\#|\=|\{|\}|\||\\\\|\~|\[|\]|\`|\^|\_|\/|\,)+/';
-		return trim( preg_replace( $regex, '_', $string ), '_' );
+		return trim( preg_replace( '/(\-|\+|\%[0-9A-F]{2})+/', '-', urlencode( $string ) ), '-' );
 	}
 }

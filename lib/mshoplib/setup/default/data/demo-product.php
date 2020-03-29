@@ -157,13 +157,13 @@ return array(
 					),
 					array(
 						'text.label' => 'Demo url/de: Kleiner Aufdruck',
-						'text.content' => 'Kleiner_Aufdruck',
+						'text.content' => 'Kleiner-Aufdruck',
 						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
 						'text.label' => 'Demo url/en: Small print',
-						'text.content' => 'small_print',
+						'text.content' => 'small-print',
 						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
@@ -202,13 +202,13 @@ return array(
 					),
 					array(
 						'text.label' => 'Demo url/de: Grosser Aufdruck',
-						'text.content' => 'Grosser_Aufdruck',
+						'text.content' => 'Grosser-Aufdruck',
 						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
 						'text.label' => 'Demo url/en: Large print',
-						'text.content' => 'large_print',
+						'text.content' => 'large-print',
 						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
@@ -353,12 +353,12 @@ return array(
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'text.label' => 'Demo url: Width 32', 'text.content' => 'Weite_32',
+						'text.label' => 'Demo url: Width 32', 'text.content' => 'Weite-32',
 						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'text.label' => 'Demo url: Width 32', 'text.content' => 'width_32',
+						'text.label' => 'Demo url: Width 32', 'text.content' => 'width-32',
 						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
@@ -375,12 +375,12 @@ return array(
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					),
 					array(
-						'text.label' => 'Demo url: Length 34', 'text.content' => 'Länge_34',
+						'text.label' => 'Demo url: Length 34', 'text.content' => 'Länge-34',
 						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					),
 					array(
-						'text.label' => 'Demo url: Length 34', 'text.content' => 'length_34',
+						'text.label' => 'Demo url: Length 34', 'text.content' => 'length-34',
 						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					),
@@ -456,12 +456,12 @@ return array(
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'text.label' => 'Demo url: Width 33', 'text.content' => 'Weite_33',
+						'text.label' => 'Demo url: Width 33', 'text.content' => 'Weite-33',
 						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'text.label' => 'Demo url: Width 33', 'text.content' => 'width_33',
+						'text.label' => 'Demo url: Width 33', 'text.content' => 'width-33',
 						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
@@ -478,12 +478,12 @@ return array(
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					),
 					array(
-						'text.label' => 'Demo url: Length 36', 'text.content' => 'Länge_36',
+						'text.label' => 'Demo url: Length 36', 'text.content' => 'Länge-36',
 						'text.type' => 'url', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					),
 					array(
-						'text.label' => 'Demo url: Length 36', 'text.content' => 'length_36',
+						'text.label' => 'Demo url: Length 36', 'text.content' => 'length-36',
 						'text.type' => 'url', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					),
@@ -506,7 +506,7 @@ return array(
 			),
 			array(
 				'text.label' => 'Demo url/de: Demoartikel mit Auswahl',
-				'text.content' => 'Demoartikel_mit_Auswahl',
+				'text.content' => 'Demoartikel-mit-Auswahl',
 				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
@@ -645,7 +645,7 @@ return array(
 			),
 			array(
 				'text.label' => 'Demo url/de: Demoartikel mit Bundle',
-				'text.content' => 'Demoartikel_mit_Bundle',
+				'text.content' => 'Demoartikel-mit-Bundle',
 				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
@@ -768,13 +768,13 @@ return array(
 					),
 					array(
 						'text.label' => 'Demo url/de: Kleines Etikett',
-						'text.content' => 'Kleines_Etikett',
+						'text.content' => 'Kleines-Etikett',
 						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
 						'text.label' => 'Demo url/en: Small sticker',
-						'text.content' => 'small_sticker',
+						'text.content' => 'small-sticker',
 						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
@@ -813,13 +813,13 @@ return array(
 					),
 					array(
 						'text.label' => 'Demo url/de: Grosses Etikett',
-						'text.content' => 'Grosses_Etikett',
+						'text.content' => 'Grosses-Etikett',
 						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
 						'text.label' => 'Demo url/en: Large sticker',
-						'text.content' => 'large_sticker',
+						'text.content' => 'large-sticker',
 						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),

@@ -121,7 +121,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsUrl()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'index.text:url()', 'Cafe_Noire_Cappuccino' ) );
+		$search->setConditions( $search->compare( '==', 'index.text:url()', 'Cafe-Noire-Cappuccino' ) );
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 1, count( $result ) );
