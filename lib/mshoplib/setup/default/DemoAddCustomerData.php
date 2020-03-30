@@ -86,7 +86,6 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			$item = $manager->createItem();
 			$item->setCode( $entry['code'] );
 			$item->setLabel( $entry['label'] );
-			$item->setBirthday( $entry['birthday'] );
 			$item->setPassword( $entry['password'] );
 			$item->setStatus( $entry['status'] );
 			$item->setDateVerified( $entry['vtime'] );
@@ -110,6 +109,7 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			$addr->setEmail( $entry['email'] );
 			$addr->setTelefax( $entry['telefax'] );
 			$addr->setWebsite( $entry['website'] );
+			$addr->setBirthday( $entry['birthday'] );
 
 			$manager->saveItem( $item );
 
@@ -152,6 +152,7 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			$addr->setEmail( $entry['email'] );
 			$addr->setTelefax( $entry['telefax'] );
 			$addr->setWebsite( $entry['website'] );
+			$addr->setBirthday( $entry['birthday'] );
 
 			$manager->saveItem( $addr );
 		}
