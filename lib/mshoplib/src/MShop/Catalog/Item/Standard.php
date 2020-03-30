@@ -154,7 +154,7 @@ class Standard
 	 */
 	public function getUrl() : string
 	{
-		return $this->node->__isset( 'url' ) ? $this->node->__get( 'url' ) : \Aimeos\MW\Common\Base::sanitize( $this->getLabel() );
+		return $this->node->__get( 'url' ) ?: \Aimeos\MW\Common\Base::sanitize( $this->getLabel() );
 	}
 
 
