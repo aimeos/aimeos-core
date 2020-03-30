@@ -104,6 +104,7 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$supAdr->setLanguageId( $dataset['langid'] );
 			$supAdr->setLatitude( $dataset['latitude'] );
 			$supAdr->setLongitude( $dataset['longitude'] );
+			$supAdr->setBirthday( $dataset['birthday'] ?? null );
 			$supAdr->setParentId( $supIds[$dataset['parentid']] );
 
 			$supplierAddressManager->saveItem( $supAdr, false );

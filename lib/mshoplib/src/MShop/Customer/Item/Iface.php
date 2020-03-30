@@ -55,21 +55,6 @@ interface Iface
 	public function setCode( string $value ) : \Aimeos\MShop\Customer\Item\Iface;
 
 	/**
-	 * Returns the birthday of the customer item.
-	 *
-	 * @return string|null Birthday date of the customer (YYYY-MM-DD format)
-	 */
-	public function getBirthday() : ?string;
-
-	/**
-	 * Sets the birthday of the customer item.
-	 *
-	 * @param string|null $value Birthday of the customer item (YYYY-MM-DD format)
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
-	 */
-	public function setBirthday( ?string $value ) : \Aimeos\MShop\Customer\Item\Iface;
-
-	/**
 	 * Returns the billing address of the customer item.
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Address object

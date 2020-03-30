@@ -135,29 +135,6 @@ class Standard extends Base implements Iface
 
 
 	/**
-	 * Returns the birthday of the customer item.
-	 *
-	 * @return string|null Birthday in YYYY-MM-DD format
-	 */
-	public function getBirthday() : ?string
-	{
-		return $this->get( 'customer.birthday' );
-	}
-
-
-	/**
-	 * Sets the birthday of the customer item.
-	 *
-	 * @param string|null $value Birthday of the customer item
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
-	 */
-	public function setBirthday( ?string $value ) : \Aimeos\MShop\Customer\Item\Iface
-	{
-		return $this->set( 'customer.birthday', $this->checkDateOnlyFormat( $value ) );
-	}
-
-
-	/**
 	 * Returns the password of the customer item.
 	 *
 	 * @return string
@@ -278,7 +255,6 @@ class Standard extends Base implements Iface
 			{
 				case 'customer.label': $item = $item->setLabel( $value ); break;
 				case 'customer.code': $item = $item->setCode( $value ); break;
-				case 'customer.birthday': $item = $item->setBirthday( $value ); break;
 				case 'customer.status': $item = $item->setStatus( $value ); break;
 				case 'customer.groups': $item = $item->setGroups( $value ); break;
 				case 'customer.password': !$private ?: $item = $item->setPassword( $value ); break;
@@ -305,7 +281,6 @@ class Standard extends Base implements Iface
 
 		$list['customer.label'] = $this->getLabel();
 		$list['customer.code'] = $this->getCode();
-		$list['customer.birthday'] = $this->getBirthday();
 		$list['customer.status'] = $this->getStatus();
 		$list['customer.groups'] = $this->getGroups();
 
@@ -316,25 +291,5 @@ class Standard extends Base implements Iface
 		}
 
 		return $list;
-	}
-
-
-	/**
-	 * Tests if the date param represents an ISO format.
-	 *
-	 * @param string|null $date ISO date in YYYY-MM-DD format or null for no date
-	 */
-	protected function checkDateOnlyFormat( ?string $date ) : ?string
-	{
-		if( $date !== null && $date !== '' )
-		{
-			if( preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/', (string) $date ) !== 1 ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD" expected.', $date ) );
-			}
-
-			return (string) $date;
-		}
-
-		return null;
 	}
 }

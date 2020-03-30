@@ -197,6 +197,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'supplier.address.birthday' => array(
+			'code' => 'supplier.address.birthday',
+			'internalcode' => 'msupad."birthday"',
+			'label' => 'Address birthday',
+			'type' => 'date',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'supplier.address.ctime' => array(
 			'code' => 'supplier.address.ctime',
 			'internalcode' => 'msupad."ctime"',

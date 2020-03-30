@@ -50,9 +50,9 @@ return array(
 								"title", "firstname", "lastname", "address1", "address2",
 								"address3", "postal", "city", "state", "countryid", "langid",
 								"telephone", "email", "telefax", "website", "longitude", "latitude",
-								"pos", "mtime", "editor", "siteid", "ctime"
+								"pos", "birthday", "mtime", "editor", "siteid", "ctime"
 							) VALUES ( :values
-								?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+								?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 							)
 						'
 					),
@@ -60,12 +60,11 @@ return array(
 						'ansi' => '
 							UPDATE "mshop_order_base_address"
 							SET :names
-								"baseid" = ?, "addrid" = ?, "type" = ?, "company" = ?, "vatid" = ?,
-								"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
-								"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
-								"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
-								"telephone" = ?, "email" = ?, "telefax" = ?, "website" = ?,
-								"longitude" = ?, "latitude" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
+								"baseid" = ?, "addrid" = ?, "type" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
+								"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?, "address2" = ?,
+								"address3" = ?, "postal" = ?, "city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
+								"telephone" = ?, "email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
+								"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
@@ -86,7 +85,7 @@ return array(
 								mordbaad."website" AS "order.base.address.website", mordbaad."longitude" AS "order.base.address.longitude",
 								mordbaad."latitude" AS "order.base.address.latitude", mordbaad."pos" AS "order.base.address.position",
 								mordbaad."mtime" AS "order.base.address.mtime", mordbaad."editor" AS "order.base.address.editor",
-								mordbaad."ctime" AS "order.base.address.ctime"
+								mordbaad."ctime" AS "order.base.address.ctime", mordbaad."birthday" AS "order.base.address.birthday"
 							FROM "mshop_order_base_address" AS mordbaad
 							:joins
 							WHERE :cond
@@ -96,7 +95,7 @@ return array(
 								mordbaad."address1", mordbaad."address2", mordbaad."address3", mordbaad."postal", mordbaad."city",
 								mordbaad."state", mordbaad."countryid", mordbaad."langid", mordbaad."telephone", mordbaad."email",
 								mordbaad."telefax", mordbaad."website", mordbaad."longitude", mordbaad."latitude", mordbaad."pos",
-								mordbaad."mtime", mordbaad."editor", mordbaad."ctime"
+								mordbaad."mtime", mordbaad."editor", mordbaad."ctime", mordbaad."birthday"
 							ORDER BY :order
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
@@ -116,7 +115,7 @@ return array(
 								mordbaad."website" AS "order.base.address.website", mordbaad."longitude" AS "order.base.address.longitude",
 								mordbaad."latitude" AS "order.base.address.latitude", mordbaad."pos" AS "order.base.address.position",
 								mordbaad."mtime" AS "order.base.address.mtime", mordbaad."editor" AS "order.base.address.editor",
-								mordbaad."ctime" AS "order.base.address.ctime"
+								mordbaad."ctime" AS "order.base.address.ctime", mordbaad."birthday" AS "order.base.address.birthday"
 							FROM "mshop_order_base_address" AS mordbaad
 							:joins
 							WHERE :cond
@@ -126,7 +125,7 @@ return array(
 								mordbaad."address1", mordbaad."address2", mordbaad."address3", mordbaad."postal", mordbaad."city",
 								mordbaad."state", mordbaad."countryid", mordbaad."langid", mordbaad."telephone", mordbaad."email",
 								mordbaad."telefax", mordbaad."website", mordbaad."longitude", mordbaad."latitude", mordbaad."pos",
-								mordbaad."mtime", mordbaad."editor", mordbaad."ctime"
+								mordbaad."mtime", mordbaad."editor", mordbaad."ctime", mordbaad."birthday"
 							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'

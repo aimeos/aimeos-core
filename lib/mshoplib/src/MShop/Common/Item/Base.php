@@ -424,6 +424,26 @@ abstract class Base
 
 
 	/**
+	 * Tests if the date param represents an ISO format.
+	 *
+	 * @param string|null $date ISO date in YYYY-MM-DD format or null for no date
+	 */
+	protected function checkDateOnlyFormat( ?string $date ) : ?string
+	{
+		if( $date !== null && $date !== '' )
+		{
+			if( preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/', (string) $date ) !== 1 ) {
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD" expected.', $date ) );
+			}
+
+			return (string) $date;
+		}
+
+		return null;
+	}
+
+
+	/**
 	 * Tests if the code is valid.
 	 *
 	 * @param string $code New code for an item

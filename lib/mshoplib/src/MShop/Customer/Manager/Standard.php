@@ -593,7 +593,7 @@ class Standard
 			$stmt->bind( $idx++, $billingAddress->getWebsite() );
 			$stmt->bind( $idx++, $billingAddress->getLongitude() );
 			$stmt->bind( $idx++, $billingAddress->getLatitude() );
-			$stmt->bind( $idx++, $item->getBirthday() );
+			$stmt->bind( $idx++, $billingAddress->getBirthday() );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getDateVerified() );
 			$stmt->bind( $idx++, $item->getPassword() );

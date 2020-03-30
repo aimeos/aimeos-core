@@ -347,7 +347,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the longitude coordinate of the customer address
 	 *
 	 * @param string|null $value Longitude coordinate as decimal value or null
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return \Aimeos\MShop\Common\Item\Iface Common address item for chaining method calls
 	 */
 	public function setLongitude( ?string $value ) : \Aimeos\MShop\Common\Item\Address\Iface;
 
@@ -364,7 +364,24 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the latitude coordinate of the customer address
 	 *
 	 * @param string|null $value Latitude coordinate as decimal value or null
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return \Aimeos\MShop\Common\Item\Iface Common address item for chaining method calls
 	 */
 	public function setLatitude( ?string $value ) : \Aimeos\MShop\Common\Item\Address\Iface;
+
+
+	/**
+	 * Returns the birthday of the customer item.
+	 *
+	 * @return string|null Birthday date of the customer (YYYY-MM-DD format)
+	 */
+	public function getBirthday() : ?string;
+
+
+	/**
+	 * Sets the birthday of the customer item.
+	 *
+	 * @param string|null $value Birthday of the customer item (YYYY-MM-DD format)
+	 * @return \Aimeos\MShop\Common\Item\Iface Common address item for chaining method calls
+	 */
+	public function setBirthday( ?string $value ) : \Aimeos\MShop\Common\Item\Address\Iface;
 }

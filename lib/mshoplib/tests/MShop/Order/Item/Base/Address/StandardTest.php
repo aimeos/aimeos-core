@@ -45,6 +45,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.address.latitude' => '50.0',
 			'order.base.address.languageid' => 'de',
 			'order.base.address.position' => 1,
+			'order.base.address.birthday' => '2000-01-01',
 			'order.base.address.mtime' => '2011-01-01 00:00:02',
 			'order.base.address.ctime' => '2011-01-01 00:00:01',
 			'order.base.address.editor' => 'unitTestUser'
@@ -583,6 +584,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getLongitude(), $arrayObject['order.base.address.longitude'] );
 		$this->assertEquals( $this->object->getLatitude(), $arrayObject['order.base.address.latitude'] );
 		$this->assertEquals( $this->object->getPosition(), $arrayObject['order.base.address.position'] );
+		$this->assertEquals( $this->object->getBirthday(), $arrayObject['order.base.address.birthday'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['order.base.address.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['order.base.address.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['order.base.address.editor'] );

@@ -165,6 +165,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLongitude(), $itemSaved->getLongitude() );
 		$this->assertEquals( $item->getLatitude(), $itemSaved->getLatitude() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
+		$this->assertEquals( $item->getBirthday(), $itemSaved->getBirthday() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -196,6 +197,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLongitude(), $itemUpd->getLongitude() );
 		$this->assertEquals( $itemExp->getLatitude(), $itemUpd->getLatitude() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
+		$this->assertEquals( $itemExp->getBirthday(), $itemUpd->getBirthday() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
@@ -243,6 +245,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.address.longitude', '11.0' );
 		$expr[] = $search->compare( '==', 'order.base.address.latitude', '52.0' );
 		$expr[] = $search->compare( '==', 'order.base.address.position', 0 );
+		$expr[] = $search->compare( '==', 'order.base.address.birthday', '2001-01-01' );
 		$expr[] = $search->compare( '>=', 'order.base.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.base.address.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.address.editor', $this->editor );

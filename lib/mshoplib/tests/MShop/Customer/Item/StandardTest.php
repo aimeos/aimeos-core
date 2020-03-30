@@ -49,6 +49,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.website' => 'www.example.com',
 			'customer.longitude' => '10.0',
 			'customer.latitude' => '50.0',
+			'customer.birthday' => '2000-01-01',
 			'customer.mtime'=> '2010-01-05 00:00:05',
 			'customer.ctime'=> '2010-01-01 00:00:00',
 			'customer.editor' => 'unitTestUser',
@@ -71,11 +72,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		unset( $this->object, $this->address, $this->values );
 	}
 
+
 	public function testGet()
 	{
 		$this->assertEquals( 'something', $this->object->additional );
 		$this->assertNull( $this->object->missing );
 	}
+
 
 	public function testIsset()
 	{
@@ -83,10 +86,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( isset( $this->object->missing ) );
 	}
 
+
 	public function testGetId()
 	{
 		$this->assertEquals( 541, $this->object->getId() );
 	}
+
 
 	public function testSetId()
 	{
@@ -97,15 +102,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 123, $this->object->getSiteId() );
 	}
 
+
 	public function testGetLabel()
 	{
 		$this->assertEquals( 'unitObject', $this->object->getLabel() );
 	}
+
 
 	public function testSetLabel()
 	{
@@ -116,10 +124,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetCode()
 	{
 		$this->assertEquals( '12345ABCDEF', $this->object->getCode() );
 	}
+
 
 	public function testSetCode()
 	{
@@ -130,10 +140,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetStatus()
 	{
 		$this->assertEquals( 1, $this->object->getStatus() );
 	}
+
 
 	public function testSetStatus()
 	{
@@ -144,6 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetSetPassword()
 	{
 		$return = $this->object->setPassword( '08154712' );
@@ -153,39 +166,30 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2010-01-01 00:00:00', $this->object->getTimeCreated() );
 	}
+
 
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2010-01-05 00:00:05', $this->object->getTimeModified() );
 	}
 
+
 	public function testGetEditor()
 	{
 		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
-	public function testGetBirthday()
-	{
-		$this->assertEquals( '2010-01-01', $this->object->getBirthday() );
-	}
-
-	public function testSetBirthday()
-	{
-		$return = $this->object->setBirthday( '2010-02-01' );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Iface::class, $return );
-		$this->assertEquals( '2010-02-01', $this->object->getBirthday() );
-		$this->assertTrue( $this->object->isModified() );
-	}
 
 	public function testGetDateVerified()
 	{
 		$this->assertEquals( null, $this->object->getDateVerified() );
 	}
+
 
 	public function testSetDateVerified()
 	{
@@ -196,6 +200,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetGroups()
 	{
 		$listValues = array( 'domain' => 'customer/group', 'type' => 'default', 'refid' => 123 );
@@ -205,6 +210,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( array( 123 ), $object->getGroups() );
 	}
 
+
 	public function testSetGroups()
 	{
 		$this->object->setGroups( array( 1, 2, 3 ) );
@@ -212,6 +218,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( array( 1, 2, 3 ), $this->object->getGroups() );
 		$this->assertTrue( $this->object->isModified() );
 	}
+
 
 	public function testGetPaymentAddress()
 	{
@@ -236,7 +243,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $address->getWebsite(), 'www.example.com' );
 		$this->assertEquals( $address->getLongitude(), '10.0' );
 		$this->assertEquals( $address->getLatitude(), '50.0' );
+		$this->assertEquals( $address->getBirthday(), '2000-01-01' );
 	}
+
 
 	public function testSetPaymentAddress()
 	{
@@ -329,6 +338,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.website' => 'www.example.com',
 			'customer.longitude' => '10.0',
 			'customer.latitude' => '53.5',
+			'customer.birthday' => '1999-01-01',
 			'customer.groups' => [1, 2],
 		);
 
@@ -338,7 +348,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['customer.id'], $item->getId() );
 		$this->assertEquals( $list['customer.code'], $item->getCode() );
 		$this->assertEquals( $list['customer.label'], $item->getLabel() );
-		$this->assertEquals( $list['customer.birthday'], $item->getBirthday() );
 		$this->assertEquals( $list['customer.status'], $item->getStatus() );
 		$this->assertEquals( $list['customer.groups'], $item->getGroups() );
 		$this->assertEquals( $list['customer.password'], $item->getPassword() );
@@ -365,6 +374,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['customer.website'], $address->getWebsite() );
 		$this->assertEquals( $list['customer.longitude'], $address->getLongitude() );
 		$this->assertEquals( $list['customer.latitude'], $address->getLatitude() );
+		$this->assertEquals( $list['customer.birthday'], $address->getBirthday() );
 	}
 
 
@@ -380,7 +390,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['customer.status'] );
 		$this->assertEquals( $this->object->getGroups(), $arrayObject['customer.groups'] );
 		$this->assertEquals( $this->object->getPassword(), $arrayObject['customer.password'] );
-		$this->assertEquals( $this->object->getBirthday(), $arrayObject['customer.birthday'] );
 		$this->assertEquals( $this->object->getDateVerified(), $arrayObject['customer.dateverified'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['customer.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['customer.mtime'] );
@@ -407,6 +416,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $address->getWebsite(), $arrayObject['customer.website'] );
 		$this->assertEquals( $address->getLongitude(), $arrayObject['customer.longitude'] );
 		$this->assertEquals( $address->getLatitude(), $arrayObject['customer.latitude'] );
+		$this->assertEquals( $address->getBirthday(), $arrayObject['customer.birthday'] );
 	}
 
 

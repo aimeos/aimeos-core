@@ -511,7 +511,7 @@ abstract class Base
 	 * Sets the longitude coordinate of the customer address
 	 *
 	 * @param string|null $value Longitude coordinate as decimal value or null
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer address item for chaining method calls
 	 */
 	public function setLongitude( ?string $value ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
@@ -527,7 +527,7 @@ abstract class Base
 	public function getLatitude() : ?float
 	{
 		if( ( $result = $this->get( $this->prefix . 'latitude' ) ) !== null ) {
-			return $result;
+			return (float) $result;
 		}
 
 		return null;
@@ -538,11 +538,34 @@ abstract class Base
 	 * Sets the latitude coordinate of the customer address
 	 *
 	 * @param string|null $value Latitude coordinate as decimal value or null
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer address item for chaining method calls
 	 */
 	public function setLatitude( ?string $value ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
 		return $this->set( $this->prefix . 'latitude', $value !== '' && $value !== null ? $value : null );
+	}
+
+
+	/**
+	 * Returns the birthday of the customer item.
+	 *
+	 * @return string|null Birthday in YYYY-MM-DD format
+	 */
+	public function getBirthday() : ?string
+	{
+		return $this->get( $this->prefix . 'birthday' );
+	}
+
+
+	/**
+	 * Sets the birthday of the customer item.
+	 *
+	 * @param string|null $value Birthday of the customer item
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Customer address item for chaining method calls
+	 */
+	public function setBirthday( ?string $value ) : \Aimeos\MShop\Common\Item\Address\Iface
+	{
+		return $this->set( $this->prefix . 'birthday', $this->checkDateOnlyFormat( $value ) );
 	}
 
 
@@ -585,6 +608,7 @@ abstract class Base
 		$this->setWebsite( $item->getWebsite() );
 		$this->setLongitude( $item->getLongitude() );
 		$this->setLatitude( $item->getLatitude() );
+		$this->setBirthday( $item->getBirthday() );
 
 		return $this;
 	}
@@ -628,6 +652,7 @@ abstract class Base
 				case 'website': $item = $item->setWebsite( $value ); break;
 				case 'longitude': $item = $item->setLongitude( $value ); break;
 				case 'latitude': $item = $item->setLatitude( $value ); break;
+				case 'birthday': $item = $item->setBirthday( $value ); break;
 				default: continue 2;
 			}
 
@@ -668,6 +693,7 @@ abstract class Base
 		$list[$this->prefix . 'website'] = $this->getWebsite();
 		$list[$this->prefix . 'longitude'] = $this->getLongitude();
 		$list[$this->prefix . 'latitude'] = $this->getLatitude();
+		$list[$this->prefix . 'birthday'] = $this->getBirthday();
 
 		return $list;
 	}

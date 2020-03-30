@@ -42,6 +42,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.address.longitude' => '10.0',
 			'customer.address.latitude' => '50.0',
 			'customer.address.position' => 1,
+			'customer.address.birthday' => '2000-01-01',
 			'customer.address.mtime' => '2011-01-01 00:00:02',
 			'customer.address.ctime' => '2011-01-01 00:00:01',
 			'customer.address.editor' => 'unitTestUser',
@@ -442,6 +443,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetBirthday()
+	{
+		$this->assertEquals( '2000-01-01', $this->object->getBirthday() );
+	}
+
+
+	public function testSetBirthday()
+	{
+		$return = $this->object->setBirthday( '1990-01-01' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Address\Iface::class, $return );
+		$this->assertEquals( '1990-01-01', $this->object->getBirthday() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
@@ -498,6 +515,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.address.telefax' => '02345',
 			'customer.address.email' => 'a@b',
 			'customer.address.website' => 'example.com',
+			'customer.address.birthday' => '1990-01-01',
 			'customer.address.longitude' => '10.0',
 			'customer.address.latitude' => '53.5',
 			'customer.address.position' => 4,
@@ -531,6 +549,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['customer.address.longitude'], $object->getLongitude() );
 		$this->assertEquals( $list['customer.address.latitude'], $object->getLatitude() );
 		$this->assertEquals( $list['customer.address.position'], $object->getPosition() );
+		$this->assertEquals( $list['customer.address.birthday'], $object->getBirthday() );
 	}
 
 	public function testToArray()
@@ -563,6 +582,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getWebsite(), $arrayObject['customer.address.website'] );
 		$this->assertEquals( $this->object->getLongitude(), $arrayObject['customer.address.longitude'] );
 		$this->assertEquals( $this->object->getLatitude(), $arrayObject['customer.address.latitude'] );
+		$this->assertEquals( $this->object->getBirthday(), $arrayObject['customer.address.birthday'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['customer.address.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['customer.address.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['customer.address.editor'] );

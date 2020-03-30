@@ -23,9 +23,9 @@ return array(
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
 							"email", "telefax", "website", "longitude", "latitude",
-							"pos", "mtime", "editor", "siteid", "ctime"
+							"pos", "birthday", "mtime", "editor", "siteid", "ctime"
 						) VALUES ( :values
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
@@ -38,7 +38,7 @@ return array(
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-							"pos" = ?, "mtime" = ?, "editor" = ?
+							"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
@@ -58,7 +58,7 @@ return array(
 							msupad."telefax" AS "supplier.address.telefax", msupad."website" AS "supplier.address.website",
 							msupad."longitude" AS "supplier.address.longitude", msupad."latitude" AS "supplier.address.latitude",
 							msupad."mtime" AS "supplier.address.mtime", msupad."ctime" AS "supplier.address.ctime",
-							msupad."editor" AS "supplier.address.editor"
+							msupad."editor" AS "supplier.address.editor", msupad."birthday" AS "supplier.address.birthday"
 						FROM "mshop_supplier_address" AS msupad
 						:joins
 						WHERE :cond
@@ -80,7 +80,7 @@ return array(
 							msupad."telefax" AS "supplier.address.telefax", msupad."website" AS "supplier.address.website",
 							msupad."longitude" AS "supplier.address.longitude", msupad."latitude" AS "supplier.address.latitude",
 							msupad."mtime" AS "supplier.address.mtime", msupad."ctime" AS "supplier.address.ctime",
-							msupad."editor" AS "supplier.address.editor"
+							msupad."editor" AS "supplier.address.editor", msupad."birthday" AS "supplier.address.birthday"
 						FROM "mshop_supplier_address" AS msupad
 						:joins
 						WHERE :cond

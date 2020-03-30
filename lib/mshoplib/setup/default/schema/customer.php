@@ -36,9 +36,9 @@ return array(
 			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'longitude', 'float', array( 'notnull' => false ) );
 			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
-			$table->addColumn( 'password', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'birthday', 'date', array( 'notnull' => false ) );
 			$table->addColumn( 'vdate', 'date', array( 'notnull' => false ) );
+			$table->addColumn( 'password', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
@@ -83,6 +83,7 @@ return array(
 			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'longitude', 'float', array( 'notnull' => false ) );
 			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
+			$table->addColumn( 'birthday', 'date', array( 'notnull' => false ) );
 			$table->addColumn( 'pos', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );

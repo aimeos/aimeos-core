@@ -42,6 +42,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'supplier.address.longitude' => '10.0',
 			'supplier.address.latitude' => '50.0',
 			'supplier.address.position' => 1,
+			'supplier.address.birthday' => '2001-01-01',
 			'supplier.address.mtime' => '2011-01-01 00:00:02',
 			'supplier.address.ctime' => '2011-01-01 00:00:01',
 			'supplier.address.editor' => 'unitTestUser',
@@ -499,6 +500,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'supplier.address.website' => 'example.com',
 			'supplier.address.longitude' => '10.0',
 			'supplier.address.latitude' => '53.5',
+			'supplier.address.birthday' => '2000-01-01',
 			'supplier.address.position' => 4,
 		);
 
@@ -529,6 +531,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['supplier.address.longitude'], $object->getLongitude() );
 		$this->assertEquals( $list['supplier.address.latitude'], $object->getLatitude() );
 		$this->assertEquals( $list['supplier.address.position'], $object->getPosition() );
+		$this->assertEquals( $list['supplier.address.birthday'], $object->getBirthday() );
 	}
 
 	public function testToArray()
@@ -561,6 +564,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getWebsite(), $arrayObject['supplier.address.website'] );
 		$this->assertEquals( $this->object->getLongitude(), $arrayObject['supplier.address.longitude'] );
 		$this->assertEquals( $this->object->getLatitude(), $arrayObject['supplier.address.latitude'] );
+		$this->assertEquals( $this->object->getBirthday(), $arrayObject['supplier.address.birthday'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['supplier.address.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['supplier.address.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['supplier.address.editor'] );

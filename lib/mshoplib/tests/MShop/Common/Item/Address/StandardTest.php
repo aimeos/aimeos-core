@@ -42,6 +42,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.address.website' => 'www.example.com',
 			'common.address.longitude' => '10.0',
 			'common.address.latitude' => '50.0',
+			'common.address.birthday' => '2000-01-01',
 			'common.address.position' => 1,
 			'common.address.mtime' => '2011-01-01 00:00:02',
 			'common.address.ctime' => '2011-01-01 00:00:01',

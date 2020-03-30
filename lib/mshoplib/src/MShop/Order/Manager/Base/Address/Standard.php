@@ -213,6 +213,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'order.base.address.birthday' => array(
+			'code' => 'order.base.address.birthday',
+			'internalcode' => 'mordbaad."birthday"',
+			'label' => 'Address birthday',
+			'type' => 'date',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'order.base.address.ctime' => array(
 			'code' => 'order.base.address.ctime',
 			'internalcode' => 'mordbaad."ctime"',
@@ -726,6 +734,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getLongitude() );
 			$stmt->bind( $idx++, $item->getLatitude() );
 			$stmt->bind( $idx++, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getBirthday() );
 			$stmt->bind( $idx++, $date );
 			$stmt->bind( $idx++, $context->getEditor() );
 			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );

@@ -174,6 +174,7 @@ abstract class Base
 		$list['customer.website'] = $this->getPaymentAddress()->getWebsite();
 		$list['customer.longitude'] = $this->getPaymentAddress()->getLongitude();
 		$list['customer.latitude'] = $this->getPaymentAddress()->getLatitude();
+		$list['customer.birthday'] = $this->getPaymentAddress()->getBirthday();
 
 		return $list;
 	}

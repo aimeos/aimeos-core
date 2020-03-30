@@ -159,6 +159,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$orderAddr->setLanguageId( $dataset['langid'] );
 			$orderAddr->setLatitude( $dataset['latitude'] );
 			$orderAddr->setLongitude( $dataset['longitude'] );
+			$orderAddr->setBirthday( $dataset['birthday'] ?? null );
 
 			$manager->saveItem( $orderAddr, false );
 		}

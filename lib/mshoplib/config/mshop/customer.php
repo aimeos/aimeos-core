@@ -23,9 +23,9 @@ return array(
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
 							"email", "telefax", "website", "longitude", "latitude", "pos",
-							"mtime", "editor", "siteid", "ctime"
+							"birthday", "mtime", "editor", "siteid", "ctime"
 						) VALUES ( :values
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
@@ -38,7 +38,7 @@ return array(
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-							"pos" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
+							"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
 						WHERE "id" = ?
 					'
 				),
@@ -58,7 +58,7 @@ return array(
 							mcusad."telefax" AS "customer.address.telefax", mcusad."website" AS "customer.address.website",
 							mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
 							mcusad."mtime" AS "customer.address.mtime", mcusad."editor" AS "customer.address.editor",
-							mcusad."ctime" AS "customer.address.ctime"
+							mcusad."ctime" AS "customer.address.ctime", mcusad."birthday" AS "customer.address.birthday"
 						FROM "mshop_customer_address" AS mcusad
 						:joins
 						WHERE :cond
@@ -80,7 +80,7 @@ return array(
 							mcusad."telefax" AS "customer.address.telefax", mcusad."website" AS "customer.address.website",
 							mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
 							mcusad."mtime" AS "customer.address.mtime", mcusad."editor" AS "customer.address.editor",
-							mcusad."ctime" AS "customer.address.ctime"
+							mcusad."ctime" AS "customer.address.ctime", mcusad."birthday" AS "customer.address.birthday"
 						FROM "mshop_customer_address" AS mcusad
 						:joins
 						WHERE :cond
