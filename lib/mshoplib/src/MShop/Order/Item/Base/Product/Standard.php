@@ -377,7 +377,7 @@ class Standard extends Base implements Iface
 	public function setQuantity( float $quantity ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		if( $quantity <= 0 || $quantity > 2147483647 ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Quantity must greater than 0 and must not exceed %1$d', 2147483647 ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Quantity must be greater than 0 and must not exceed %1$d', 2147483647 ) );
 		}
 
 		return $this->set( 'order.base.product.quantity', $quantity );
