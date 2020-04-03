@@ -164,11 +164,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No order item found.' );
-		}
+		$item = $this->object->searchItems( $search )->first( new \RuntimeException( 'No order item found' ) );
 
 		$item->setId( null );
 		$resultSaved = $this->object->saveItem( $item );

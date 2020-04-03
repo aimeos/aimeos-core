@@ -325,12 +325,21 @@ class Standard
 	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		$search = parent::createSearch();
+		$context = $this->getContext();
 
 		if( $default === true )
 		{
 			$search->setConditions( $search->combine( '&&', [
-				$search->compare( '==', 'order.base.customerid', $this->getContext()->getUserId() ),
+				$search->compare( '==', 'order.base.customerid', $context->getUserId() ),
+				$search->compare( '=~', 'order.base.product.siteid', $context->getLocale()->getSiteId() ),
 				$search->getConditions()
+			] ) );
+		}
+		else
+		{
+			$search->setConditions( $search->combine( '&&', [
+				$search->compare( '=~', 'order.base.product.siteid', $context->getLocale()->getSiteId() ),
+				$search->getConditions(),
 			] ) );
 		}
 
