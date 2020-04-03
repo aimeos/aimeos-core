@@ -309,15 +309,22 @@ class Standard extends Base
 	public function createSearch( $default = false )
 	{
 		$search = parent::createSearch( $default );
+		$context = $this->getContext();
 
-		if( $default !== false )
+		if( $default === true )
 		{
-			$userId = $this->getContext()->getUserId();
-			$expr = [
-				$search->compare( '==', 'order.base.customerid', $userId ),
+			$search->setConditions( $search->combine( '&&', [
+				$search->compare( '==', 'order.base.customerid', $context->getUserId() ),
+				$search->compare( '==', 'order.base.product.siteid', $context->getLocale()->getSiteSubTree() ),
 				$search->getConditions(),
-			];
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			] ) );
+		}
+		else
+		{
+			$search->setConditions( $search->combine( '&&', [
+				$search->compare( '==', 'order.base.product.siteid', $context->getLocale()->getSiteSubTree() ),
+				$search->getConditions(),
+			] ) );
 		}
 
 		return $search;

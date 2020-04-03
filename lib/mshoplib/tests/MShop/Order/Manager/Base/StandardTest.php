@@ -128,24 +128,34 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
+		$orderProductManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
+			->getSubManager( 'base' )->getSubManager( 'product' );
+
 		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'order.base.costs', '1.50' ),
 			$search->compare( '==', 'order.base.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search );
+		$results = $this->object->searchItems( $search, ['order/base/product'] );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No order base item found.' );
+			throw new \RuntimeException( 'No order base item found' );
 		}
+
+		$products = $item->getProducts();
 
 		$item->setId( null );
 		$item->setComment( 'Unittest1' );
 		$resultSaved = $this->object->saveItem( $item );
+
+		$product = reset( $products )->setBaseId( $item->getId() )->setId( null );
+		$orderProductManager->saveItem( $product );
+
 		$itemSaved = $this->object->getItem( $item->getId() );
 		$itemPrice = $item->getPrice();
 		$itemSavedPrice = $item->getPrice();
+
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setComment( 'Unittest2' );
@@ -172,10 +182,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemPrice->getRebate(), $itemSavedPrice->getRebate() );
 		$this->assertEquals( $itemPrice->getTaxValue(), $itemSavedPrice->getTaxValue() );
 		$this->assertEquals( $itemPrice->getCurrencyId(), $itemSavedPrice->getCurrencyId() );
-		$this->assertEquals( $item->getProducts(), $itemSaved->getProducts() );
-		$this->assertEquals( $item->getAddresses(), $itemSaved->getAddresses() );
-		$this->assertEquals( $item->getCoupons(), $itemSaved->getCoupons() );
-		$this->assertEquals( $item->getServices(), $itemSaved->getServices() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -193,10 +199,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExpPrice->getRebate(), $itemUpdPrice->getRebate() );
 		$this->assertEquals( $itemExpPrice->getTaxValue(), $itemUpdPrice->getTaxValue() );
 		$this->assertEquals( $itemExpPrice->getCurrencyId(), $itemUpdPrice->getCurrencyId() );
-		$this->assertEquals( $itemExp->getProducts(), $itemUpd->getProducts() );
-		$this->assertEquals( $itemExp->getAddresses(), $itemUpd->getAddresses() );
-		$this->assertEquals( $itemExp->getCoupons(), $itemUpd->getCoupons() );
-		$this->assertEquals( $itemExp->getServices(), $itemUpd->getServices() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
@@ -377,7 +379,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$items = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $items ) );
-		$this->assertEquals( 4, $total );
+		$this->assertGreaterThanOrEqual( 4, $total );
 
 		foreach( $items as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
@@ -387,7 +389,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsDefault()
 	{
-		$search = $this->object->createSearch(  true );
+		$search = $this->object->createSearch( true );
 		$items = $this->object->searchItems( $search );
 
 		$this->assertEquals( 0, count( $items ) );
@@ -759,16 +761,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
 		$this->object->store( $basket, \Aimeos\MShop\Order\Item\Base\Base::PARTS_NONE );
+		$this->object->deleteItem( $basket->getId() );
 
-		$newBasketId = $basket->getId();
-
-		$basket = $this->object->load( $newBasketId, \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
-		$this->object->deleteItem( $newBasketId );
-
-		$this->assertEquals( [], $basket->getCoupons() );
-		$this->assertEquals( [], $basket->getAddresses() );
-		$this->assertEquals( [], $basket->getProducts() );
-		$this->assertEquals( [], $basket->getServices() );
+		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->object->load( $basket->getId() );
 	}
 
 
@@ -776,8 +772,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->getOrderItem();
 
+		$parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT | \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS;
 		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
-		$this->object->store( $basket, \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
+		$this->object->store( $basket, $parts );
 
 		$newBasketId = $basket->getId();
 
@@ -785,8 +782,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getAddresses() ) );
+		$this->assertGreaterThan( 0, count( $basket->getProducts() ) );
 		$this->assertEquals( [], $basket->getCoupons() );
-		$this->assertEquals( [], $basket->getProducts() );
 		$this->assertEquals( [], $basket->getServices() );
 	}
 
@@ -814,8 +811,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->getOrderItem();
 
+		$parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT | \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE;
 		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
-		$this->object->store( $basket, \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
+		$this->object->store( $basket, $parts );
 
 		$newBasketId = $basket->getId();
 
@@ -823,9 +821,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getServices() ) );
+		$this->assertGreaterThan( 0, count( $basket->getProducts() ) );
 		$this->assertEquals( [], $basket->getAddresses() );
 		$this->assertEquals( [], $basket->getCoupons() );
-		$this->assertEquals( [], $basket->getProducts() );
 	}
 
 
