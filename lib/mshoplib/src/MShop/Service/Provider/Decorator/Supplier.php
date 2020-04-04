@@ -33,18 +33,6 @@ class Supplier
 		),
 	);
 
-	private $beConfig = array(
-		'supplier.display-code' => array(
-			'code' => 'supplier.display-code',
-			'internalcode' => 'supplier.display-code',
-			'label' => 'Display supplier code in summary and e-mail',
-			'type' => 'boolean',
-			'internaltype' => 'boolean',
-			'default' => 1,
-			'required' => false,
-		),
-	);
-
 
 	/**
 	 * Initializes a new service provider object using the given context object.
@@ -194,9 +182,8 @@ class Supplier
 			$attributes['supplier.address'] = $this->feConfig['supplier.code']['short'][$code];
 
 			// remove code attribute for summary page / customer email
-			if( $this->getConfigValue( 'supplier.display-code' ) == 0 ) {
-				unset( $attributes['supplier.code'] );
-			}
+			$attributes['supplier.code/hidden'] = $attributes['supplier.code'];
+			unset( $attributes['supplier.code'] );
 		}
 
 		return $this->getProvider()->setConfigFE( $orderServiceItem, $attributes );
