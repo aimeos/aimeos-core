@@ -701,8 +701,17 @@ class Standard
 
 		foreach( $products as $product )
 		{
-			foreach( $this->getLanguageIds() as $langId ) {
+			foreach( $this->getLanguageIds() as $langId )
+			{
 				$texts[$langId]['content'][] = $product->getCode();
+
+				foreach( $product->getCatalogItems() as $catItem ) {
+					$texts[$langId]['content'][] = $catItem->getName();
+				}
+
+				foreach( $product->getSupplierItems() as $supItem ) {
+					$texts[$langId]['content'][] = $supItem->getName();
+				}
 			}
 
 			foreach( $product->getRefItems( 'text', $types ) as $text ) {
