@@ -41,8 +41,7 @@
 			"Aimeos\\MShop\\": "lib/mshoplib/src/MShop/",
 			"Aimeos\\MAdmin\\": "lib/mshoplib/src/MAdmin/",
 			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/",
-			"Aimeos\\Controller\\Jobs\\": "controller/common/src/Controller/Jobs/",
-			"Aimeos\\": "."
+			"Aimeos\\Controller\\Jobs\\": "controller/common/src/Controller/Jobs/"
 		},
 		"classmap": [
 			"lib/mwlib/src",
