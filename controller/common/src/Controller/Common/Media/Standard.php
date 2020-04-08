@@ -81,9 +81,8 @@ class Standard
 		$search = $manager->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'media.url', $item->getUrl() ) );
 
-		if( count( $manager->searchItems( $search ) ) > 0 ) {
-			return $item;
-		}
+		$items = $manager->searchItems( $search );
+		$item = !empty( $items ) ? current( $items )->setId( null ) : $item;
 
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
 		$previews = $item->getPreviews();
