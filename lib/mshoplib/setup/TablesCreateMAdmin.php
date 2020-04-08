@@ -16,24 +16,13 @@ namespace Aimeos\MW\Setup\Task;
 class TablesCreateMAdmin extends TablesCreateMShop
 {
 	/**
-	 * Returns the list of task names which this task depends on.
+	 * Returns the list of task names which depends on this task.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
-	{
-		return array( 'TablesCreateMShop' );
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return array List of task names
-	 */
 	public function getPostDependencies()
 	{
-		return [];
+		return array( 'TablesCreateMShop' );
 	}
 
 
