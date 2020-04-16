@@ -155,6 +155,7 @@ class Standard
 		'order:status' => array(
 			'code' => 'order:status()',
 			'internalcode' => ':site AND mordst."type" = $1 AND mordst."value"',
+			'internaldeps' => ['LEFT JOIN "mshop_order_status" AS mordst ON ( mordst."parentid" = mord."id" )'],
 			'label' => 'Order has status item, parameter(<type>)',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
