@@ -154,15 +154,6 @@ class Standard
 		),
 		'order:status' => array(
 			'code' => 'order:status()',
-			'internalcode' => ':site AND mordst."type" = $1 AND mordst."value"',
-			'internaldeps' => ['LEFT JOIN "mshop_order_status" AS mordst ON ( mordst."parentid" = mord."id" )'],
-			'label' => 'Order has status item, parameter(<type>)',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
-		),
-		'order.containsStatus' => array(
-			'code' => 'order.containsStatus()',
 			'internalcode' => '( SELECT COUNT(mordst_cs."parentid")
 				FROM "mshop_order_status" AS mordst_cs
 				WHERE mord."id" = mordst_cs."parentid" AND :site
@@ -189,10 +180,6 @@ class Standard
 		$level = $context->getConfig()->get( 'mshop/order/manager/sitemode', $level );
 
 		$name = 'order:status';
-		$expr = $this->getSiteString( 'mordst."siteid"', $level );
-		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
-
-		$name = 'order.containsStatus';
 		$expr = $this->getSiteString( 'mordst_cs."siteid"', $level );
 		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
 	}
