@@ -185,12 +185,15 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
 
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/order/manager/sitemode', $level );
+
 		$name = 'order:status';
-		$expr = $this->getSiteString( 'mordst."siteid"', \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE );
+		$expr = $this->getSiteString( 'mordst."siteid"', $level );
 		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
 
 		$name = 'order.containsStatus';
-		$expr = $this->getSiteString( 'mordst_cs."siteid"', \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE );
+		$expr = $this->getSiteString( 'mordst_cs."siteid"', $level );
 		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
 	}
 
