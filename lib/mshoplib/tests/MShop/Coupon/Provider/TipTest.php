@@ -45,7 +45,7 @@ class TipTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 
-		$coupons = $this->orderBase->getCoupons()['90AB'] ?? [];
+		$coupons = $this->orderBase->getCoupons()['90AB'];
 		$products = $this->orderBase->getProducts();
 
 		if( ( $product = reset( $coupons ) ) === false ) {
@@ -76,7 +76,7 @@ class TipTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 
-		$coupons = $this->orderBase->getCoupons()['90AB'] ?? [];
+		$coupons = $this->orderBase->getCoupons()['90AB'];
 
 		if( ( $product = reset( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
@@ -100,7 +100,7 @@ class TipTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Provider\Iface::class, $this->object->update( $this->orderBase ) );
 
-		$coupons = $this->orderBase->getCoupons()['90AB'] ?? [];
+		$coupons = $this->orderBase->getCoupons()['90AB'];
 
 		if( ( $product = reset( $coupons ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
