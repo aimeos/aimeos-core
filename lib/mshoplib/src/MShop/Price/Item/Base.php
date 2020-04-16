@@ -45,7 +45,7 @@ abstract class Base
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->precision = ( isset( $values['.precision'] ) ? $values['.precision'] : 2 );
+		$this->precision = (int) ( isset( $values['.precision'] ) ? $values['.precision'] : 2 );
 		$this->initListItems( $listItems, $refItems );
 		$this->initPropertyItems( $propItems );
 	}
