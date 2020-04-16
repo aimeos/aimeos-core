@@ -161,6 +161,17 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'order.containsStatus' => array(
+			'code' => 'order.containsStatus()',
+			'internalcode' => '( SELECT COUNT(mordst_cs."parentid")
+				FROM "mshop_order_status" AS mordst_cs
+				WHERE mord."id" = mordst_cs."parentid" AND :site
+				AND mordst_cs."type" = $1 AND mordst_cs."value" IN ( $2 ) )',
+			'label' => 'Number of order status items, parameter(<type>,<value>)',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
 	);
 
 
@@ -174,11 +185,12 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-order' );
 
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/order/manager/sitemode', $level );
-
 		$name = 'order:status';
-		$expr = $this->getSiteString( 'mordst."siteid"', $level );
+		$expr = $this->getSiteString( 'mordst."siteid"', \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE );
+		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
+
+		$name = 'order.containsStatus';
+		$expr = $this->getSiteString( 'mordst_cs."siteid"', \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE );
 		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
 	}
 
