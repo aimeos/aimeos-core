@@ -166,7 +166,7 @@ class Standard extends Base
 	 */
 	public function getValue() : string
 	{
-		return $this->get( 'price.value', '0.00' );
+		return $this->formatNumber( $this->get( 'price.value', '0.00' ) );
 	}
 
 
@@ -189,7 +189,7 @@ class Standard extends Base
 	 */
 	public function getCosts() : string
 	{
-		return $this->get( 'price.costs', '0.00' );
+		return $this->formatNumber( $this->get( 'price.costs', '0.00' ) );
 	}
 
 
@@ -212,7 +212,7 @@ class Standard extends Base
 	 */
 	public function getRebate() : string
 	{
-		return $this->get( 'price.rebate', '0.00' );
+		return $this->formatNumber( $this->get( 'price.rebate', '0.00' ) );
 	}
 
 
@@ -236,7 +236,7 @@ class Standard extends Base
 	public function getTaxRate() : string
 	{
 		$list = (array) $this->get( 'price.taxrates', [] );
-		return ( isset( $list[''] ) ? $list[''] : '0.00' );
+		return $this->formatNumber( isset( $list[''] ) ? $list[''] : '0.00' );
 	}
 
 
