@@ -955,7 +955,9 @@ class Standard extends Base
 
 		try
 		{
-			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
+			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+			$sitelevel = $context->getConfig()->get( 'mshop/order/manager/sitemode', $sitelevel );
+
 			$cfgPathSearch = 'mshop/order/manager/base/standard/search';
 			$cfgPathCount = 'mshop/order/manager/base/standard/count';
 			$required = array( 'order.base' );
