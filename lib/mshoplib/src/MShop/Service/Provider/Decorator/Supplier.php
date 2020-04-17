@@ -182,7 +182,7 @@ class Supplier
 			$attributes['supplier.address'] = $this->feConfig['supplier.code']['short'][$code];
 
 			// remove code attribute for summary page / customer email
-			$attributes['supplier.code/hidden'] = $attributes['supplier.code'];
+			$this->setAttributes( $orderServiceItem, ['supplier.code' => $attributes['supplier.code']], 'hidden' );
 			unset( $attributes['supplier.code'] );
 		}
 
