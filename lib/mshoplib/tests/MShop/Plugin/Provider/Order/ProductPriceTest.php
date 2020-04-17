@@ -21,7 +21,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
+		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem()->setConfig( ['warn' => true] );;
 		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
 
 		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
@@ -53,11 +53,13 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	{
 		$attributes = array(
 			'ignore-modified' => '0',
+			'warn' => '1',
 		);
 
 		$result = $this->object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( null, $result['warn'] );
 		$this->assertEquals( null, $result['ignore-modified'] );
 	}
 
@@ -66,7 +68,8 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	{
 		$list = $this->object->getConfigBE();
 
-		$this->assertEquals( 1, count( $list ) );
+		$this->assertEquals( 2, count( $list ) );
+		$this->assertArrayHasKey( 'warn', $list );
 		$this->assertArrayHasKey( 'ignore-modified', $list );
 
 		foreach( $list as $entry ) {
@@ -82,7 +85,6 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateArticlePriceCorrect()
 	{
-		$this->plugin->setConfig( ['update' => true] );
 		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
@@ -112,8 +114,6 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateArticlePriceUpdated()
 	{
-		$this->plugin->setConfig( array( 'update' => true ) );
-
 		$orderProduct = $this->order->getProduct( 0 );
 		$orderProduct->setPrice( $orderProduct->getPrice()->setValue( 13.13 ) );
 		$this->order->addProduct( $orderProduct, 0 );

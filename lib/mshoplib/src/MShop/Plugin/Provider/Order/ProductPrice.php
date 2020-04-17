@@ -21,6 +21,10 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * the customer won't be notified.
  *
  * The following option is available:
+ * - warn: Warn users by displaying a message in the basket if one or more prices
+ *   has changed. This can be intentional if the price really has changed but will
+ *   also be displayed if the customers get lower block/tier prices or custom prices
+ *   after login
  * - ignore-modified: Set to true if all basket items with modified prices (e.g. by
  *   another plugin) should be excluded from the check. Uses the isModified() method
  *   of the item's price object.
@@ -36,6 +40,15 @@ class ProductPrice
 	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	private $beConfig = array(
+		'warn' => array(
+			'code' => 'warn',
+			'internalcode' => 'warn',
+			'label' => 'Warn customers if price has changed',
+			'type' => 'boolean',
+			'internaltype' => 'boolean',
+			'default' => '0',
+			'required' => false,
+		),
 		'ignore-modified' => array(
 			'code' => 'ignore-modified',
 			'internalcode' => 'ignore-modified',
@@ -146,7 +159,7 @@ class ProductPrice
 			}
 		}
 
-		if( count( $changedProducts ) > 0 )
+		if( $this->getConfigValue( 'warn', false ) == true && count( $changedProducts ) > 0 )
 		{
 			$code = ['product' => $changedProducts];
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Please have a look at the prices of the products in your basket' );
