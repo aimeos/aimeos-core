@@ -108,7 +108,7 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_msattli_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_msattli_pid_sid_dm_ty_rid' );
 			$table->addIndex( array( 'siteid', 'key' ), 'idx_msattli_sid_key' );
-			$table->addIndex( array( 'parentid' ), 'idx_msattli_pid' );
+			$table->addIndex( array( 'parentid' ), 'fk_msattli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_attribute', array( 'parentid' ), array( 'id' ),
 					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msattli_pid' );
@@ -157,8 +157,8 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msattpr_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_msattpr_sid_ty_lid_value' );
-			$table->addIndex( array( 'siteid', 'key' ), 'idx_msattpr_sid_key' );
-			$table->addIndex( array( 'parentid' ), 'idx_msattpr_pid' );
+			$table->addIndex( array( 'siteid', 'key' ), 'fk_msattpr_sid_key' );
+			$table->addIndex( array( 'parentid' ), 'fk_msattpr_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_attribute', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msattpr_pid' );

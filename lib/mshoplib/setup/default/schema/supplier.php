@@ -120,7 +120,7 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_mssupli_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_mssupli_pid_sid_dm_ty_rid' );
 			$table->addIndex( array( 'siteid', 'key' ), 'idx_mssupli_sid_key' );
-			$table->addIndex( array( 'parentid' ), 'idx_mssupli_pid' );
+			$table->addIndex( array( 'parentid' ), 'fk_mssupli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_supplier', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mssupli_pid' );

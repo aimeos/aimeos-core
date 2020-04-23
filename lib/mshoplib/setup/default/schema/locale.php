@@ -91,9 +91,9 @@ return array(
 			$table->addIndex( array( 'siteid', 'currencyid' ), 'idx_msloc_sid_curid' );
 			$table->addIndex( array( 'siteid', 'status' ), 'idx_msloc_sid_status' );
 			$table->addIndex( array( 'siteid', 'pos' ), 'idx_msloc_sid_pos' );
-			$table->addIndex( array( 'siteid' ), 'idx_msloc_siteid' );
-			$table->addIndex( array( 'langid' ), 'idx_msloc_langid' );
-			$table->addIndex( array( 'currencyid' ), 'idx_msloc_currid' );
+			$table->addIndex( array( 'siteid' ), 'fk_msloc_siteid' );
+			$table->addIndex( array( 'langid' ), 'fk_msloc_langid' );
+			$table->addIndex( array( 'currencyid' ), 'fk_msloc_currid' );
 
 			$table->addForeignKeyConstraint( 'mshop_locale_site', array( 'siteid' ), array( 'siteid' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msloc_siteid' );

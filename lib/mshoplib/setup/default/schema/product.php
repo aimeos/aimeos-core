@@ -111,7 +111,7 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_msproli_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_msproli_pid_sid_dm_ty_rid' );
 			$table->addIndex( array( 'siteid', 'key' ), 'idx_msproli_sid_key' );
-			$table->addIndex( array( 'parentid' ), 'idx_msproli_pid' );
+			$table->addIndex( array( 'parentid' ), 'fk_msproli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product', array( 'parentid' ), array( 'id' ),
 					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msproli_pid' );
@@ -160,8 +160,8 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mspropr_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_mspropr_sid_ty_lid_value' );
-			$table->addIndex( array( 'siteid', 'key' ), 'idx_mspropr_sid_key' );
-			$table->addIndex( array( 'parentid' ), 'idx_mspropr_pid' );
+			$table->addIndex( array( 'siteid', 'key' ), 'fk_mspropr_sid_key' );
+			$table->addIndex( array( 'parentid' ), 'fk_mspropr_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mspropr_pid' );

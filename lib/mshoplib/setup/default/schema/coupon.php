@@ -56,7 +56,7 @@ return array(
 			$table->addIndex( array( 'siteid', 'count', 'start', 'end' ), 'idx_mscouco_sid_ct_start_end' );
 			$table->addIndex( array( 'siteid', 'start' ), 'idx_mscouco_sid_start' );
 			$table->addIndex( array( 'siteid', 'end' ), 'idx_mscouco_sid_end' );
-			$table->addIndex( array( 'parentid' ), 'idx_mscouco_pid' );
+			$table->addIndex( array( 'parentid' ), 'fk_mscouco_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_coupon', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscouco_pid' );

@@ -84,7 +84,7 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscatli_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_mscatli_pid_sid_dm_ty_rid' );
 			$table->addIndex( array( 'siteid', 'key' ), 'idx_mscatli_sid_key' );
-			$table->addIndex( array( 'parentid' ), 'idx_mscatli_pid' );
+			$table->addIndex( array( 'parentid' ), 'fk_mscatli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_catalog', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscatli_pid' );

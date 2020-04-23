@@ -30,7 +30,7 @@ return array(
 			$table->addColumn( 'tname', 'string', array( 'length' => 255 ) );
 
 			$table->addUniqueIndex( array( 'tid', 'tname' ), 'unq_macacta_tid_tname' );
-			$table->addIndex( array( 'tid' ), 'idx_macacta_tid' );
+			$table->addIndex( array( 'tid' ), 'fk_macac_tid' );
 
 			$table->addForeignKeyConstraint( 'madmin_cache', array( 'tid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_macacta_tid' );

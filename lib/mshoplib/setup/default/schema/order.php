@@ -88,7 +88,7 @@ return array(
 			$table->addIndex( array( 'baseid', 'siteid', 'postal' ), 'idx_msordbaad_bid_sid_postal' );
 			$table->addIndex( array( 'baseid', 'siteid', 'city' ), 'idx_msordbaad_bid_sid_city' );
 			$table->addIndex( array( 'baseid', 'siteid', 'email' ), 'idx_msordbaad_bid_sid_email' );
-			$table->addIndex( array( 'baseid' ), 'idx_msordbaad_baseid' );
+			$table->addIndex( array( 'baseid' ), 'fk_msordbaad_baseid' );
 
 			$table->addForeignKeyConstraint( 'mshop_order_base', array( 'baseid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msordbaad_baseid' );
@@ -134,7 +134,7 @@ return array(
 			$table->addUniqueIndex( array( 'baseid', 'pos' ), 'unq_msordbapr_bid_pos' );
 			$table->addIndex( array( 'siteid', 'baseid', 'prodcode' ), 'idx_msordbapr_sid_bid_pcd' );
 			$table->addIndex( array( 'siteid', 'ctime', 'prodid', 'baseid' ), 'idx_msordbapr_sid_ct_pid_bid' );
-			$table->addIndex( array( 'baseid' ), 'idx_msordbapr_baseid' );
+			$table->addIndex( array( 'baseid' ), 'fk_msordbapr_baseid' );
 
 			$table->addForeignKeyConstraint( 'mshop_order_base', array( 'baseid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msordbapr_baseid' );
@@ -161,7 +161,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaprat_id' );
 			$table->addUniqueIndex( array( 'ordprodid', 'attrid', 'type', 'code' ), 'unq_msordbaprat_oid_aid_ty_cd' );
-			$table->addIndex( array( 'ordprodid' ), 'idx_msordbaprat_ordprodid' );
+			$table->addIndex( array( 'ordprodid' ), 'fk_msordbaprat_ordprodid' );
 
 			$table->addForeignKeyConstraint( 'mshop_order_base_product', array( 'ordprodid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msordbaprat_ordprodid' );
@@ -196,7 +196,7 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbase_id' );
 			$table->addUniqueIndex( array( 'siteid', 'baseid', 'code', 'type' ), 'unq_msordbase_sid_bid_cd_typ' );
 			$table->addIndex( array( 'siteid', 'code', 'type' ), 'idx_msordbase_sid_code_type' );
-			$table->addIndex( array( 'baseid' ), 'idx_msordbase_baseid' );
+			$table->addIndex( array( 'baseid' ), 'fk_msordbase_baseid' );
 
 			$table->addForeignKeyConstraint( 'mshop_order_base', array( 'baseid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msordbase_baseid' );
@@ -223,7 +223,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaseat_id' );
 			$table->addUniqueIndex( array( 'ordservid', 'attrid', 'type', 'code' ), 'unq_msordbaseat_oid_aid_ty_cd' );
-			$table->addIndex( array( 'ordservid' ), 'idx_msordbaseat_ordservid' );
+			$table->addIndex( array( 'ordservid' ), 'fk_msordbaseat_ordservid' );
 
 			$table->addForeignKeyConstraint( 'mshop_order_base_service', array( 'ordservid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msordbaseat_ordservid' );
@@ -246,8 +246,8 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaco_id' );
 			$table->addIndex( array( 'siteid', 'baseid', 'code' ), 'idx_msordbaco_sid_bid_code' );
-			$table->addIndex( array( 'ordprodid' ), 'idx_msordbaco_ordprodid' );
-			$table->addIndex( array( 'baseid' ), 'idx_msordbaco_baseid' );
+			$table->addIndex( array( 'ordprodid' ), 'fk_msordbaco_ordprodid' );
+			$table->addIndex( array( 'baseid' ), 'fk_msordbaco_baseid' );
 
 			$table->addForeignKeyConstraint( 'mshop_order_base', array( 'baseid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msordbaco_baseid' );
@@ -294,7 +294,7 @@ return array(
 			$table->addIndex( array( 'siteid', 'cweek' ), 'idx_msord_sid_cweek' );
 			$table->addIndex( array( 'siteid', 'cwday' ), 'idx_msord_sid_cwday' );
 			$table->addIndex( array( 'siteid', 'chour' ), 'idx_msord_sid_chour' );
-			$table->addIndex( array( 'baseid' ), 'idx_msord_baseid' );
+			$table->addIndex( array( 'baseid' ), 'fk_msord_baseid' );
 
 			$table->addForeignKeyConstraint( 'mshop_order_base', array( 'baseid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msord_baseid' );
@@ -317,7 +317,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordst_id' );
 			$table->addIndex( array( 'siteid', 'parentid', 'type', 'value' ), 'idx_msordstatus_val_sid' );
-			$table->addIndex( array( 'parentid' ), 'idx_msordst_pid' );
+			$table->addIndex( array( 'parentid' ), 'fk_msordst_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_order', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msordst_pid' );
