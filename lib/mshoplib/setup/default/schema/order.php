@@ -246,14 +246,10 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaco_id' );
 			$table->addIndex( array( 'siteid', 'baseid', 'code' ), 'idx_msordbaco_sid_bid_code' );
-			$table->addIndex( array( 'ordprodid' ), 'fk_msordbaco_ordprodid' );
 			$table->addIndex( array( 'baseid' ), 'fk_msordbaco_baseid' );
 
 			$table->addForeignKeyConstraint( 'mshop_order_base', array( 'baseid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msordbaco_baseid' );
-
-			$table->addForeignKeyConstraint( 'mshop_order_base_product', array( 'ordprodid' ), array( 'id' ),
-				array( 'onUpdate' => 'NO ACTION', 'onDelete' => 'NO ACTION' ), 'fk_msordbaco_ordprodid' );
 
 			return $schema;
 		},
