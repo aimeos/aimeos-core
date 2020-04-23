@@ -90,7 +90,7 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscusad_id' );
-			$table->addIndex( array( 'parentid' ), 'fk_mscusad_pid' );
+			$table->addIndex( array( 'parentid' ), 'idx_mscusad_pid' );
 			$table->addIndex( array( 'langid' ), 'idx_mscusad_langid' );
 			$table->addIndex( array( 'siteid', 'lastname', 'firstname' ), 'idx_mscusad_sid_last_first' );
 			$table->addIndex( array( 'siteid', 'postal', 'address1' ), 'idx_mscusad_sid_post_addr1' );
@@ -170,7 +170,7 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscusli_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_mscusli_pid_sid_dm_ty_rid' );
 			$table->addIndex( array( 'siteid', 'key' ), 'idx_mscusli_sid_key' );
-			$table->addIndex( array( 'parentid' ), 'fk_mscusli_pid' );
+			$table->addIndex( array( 'parentid' ), 'idx_mscusli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_customer', array( 'parentid' ), array( 'id' ),
 					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscusli_pid' );
@@ -219,8 +219,8 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mcuspr_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_mcuspr_sid_ty_lid_value' );
-			$table->addIndex( array( 'siteid', 'key' ), 'fk_mscuspr_sid_key' );
-			$table->addIndex( array( 'parentid' ), 'fk_mcuspr_pid' );
+			$table->addIndex( array( 'siteid', 'key' ), 'idx_mscuspr_sid_key' );
+			$table->addIndex( array( 'parentid' ), 'idx_mcuspr_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_customer', array( 'parentid' ), array( 'id' ),
 					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mcuspr_pid' );

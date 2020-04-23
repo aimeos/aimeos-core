@@ -109,7 +109,7 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_msserli_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_msserli_pid_sid_dm_ty_rid' );
 			$table->addIndex( array( 'siteid', 'key' ), 'idx_msserli_sid_key' );
-			$table->addIndex( array( 'parentid' ), 'fk_msserli_pid' );
+			$table->addIndex( array( 'parentid' ), 'idx_msserli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_service', array( 'parentid' ), array( 'id' ),
 					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msserli_pid' );
