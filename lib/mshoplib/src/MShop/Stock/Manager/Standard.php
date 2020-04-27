@@ -773,7 +773,9 @@ class Standard
 		$context = $this->getContext();
 		$translations = ['stock.siteid' => '"siteid"'];
 		$types = ['stock.siteid' => $this->searchConfig['stock.siteid']['internaltype']];
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
+
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/stock/manager/sitemode', $level );
 
 		$search = $this->getObject()->createSearch();
 		$search->setConditions( $search->compare( '==', 'stock.siteid', $context->getLocale()->getSites( $level ) ) );
