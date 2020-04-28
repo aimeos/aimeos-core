@@ -717,7 +717,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		} elseif( isset( $sites[Locale::SITE_ONE] ) ) {
 			$cond = $search->compare( '==', $name, $sites[Locale::SITE_ONE] );
 		} else {
-			$cond = $search->compare( '==', $name, null );
+			$cond = $search->compare( '==', $name, '' );
 		}
 
 		if( isset( $sites[Locale::SITE_SUBTREE] ) )
