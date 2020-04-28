@@ -778,7 +778,7 @@ class Standard
 		$level = $context->getConfig()->get( 'mshop/stock/manager/sitemode', $level );
 
 		$search = $this->getObject()->createSearch();
-		$search->setConditions( $search->compare( '==', 'stock.siteid', $context->getLocale()->getSites( $level ) ) );
+		$search->setConditions( $this->getSiteCondition( $search, 'stock.siteid', $level ) );
 		$conditions = $search->getConditionSource( $types, $translations );
 
 		$dbm = $context->getDatabaseManager();
