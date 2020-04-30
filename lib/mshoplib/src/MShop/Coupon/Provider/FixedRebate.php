@@ -91,7 +91,7 @@ class FixedRebate
 		if( isset( $rebate[$currency] ) )
 		{
 			$price = $this->getObject()->calcPrice( $base );
-			$sum = $price->getValue() + $price->getCosts();
+			$sum = $price->getValue() + $price->getCosts() + $price->getRebate();
 			$rebate = $rebate[$currency] < $sum ? $rebate[$currency] : $sum;
 			$base->setCoupon( $this->getCode(), $this->createRebateProducts( $base, $prodcode, $rebate ) );
 		}
