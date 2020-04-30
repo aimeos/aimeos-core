@@ -106,7 +106,7 @@ class PercentRebate
 		}
 
 		$price = $this->getObject()->calcPrice( $base->setCoupon( $this->getCode(), [] ) );
-		$rebate = $this->round( ( $price->getValue() + $price->getCosts() ) * $percent / 100 );
+		$rebate = $this->round( ( $price->getValue() + $price->getCosts() + $price->getRebate() ) * $percent / 100 );
 		$base->setCoupon( $this->getCode(), $this->createRebateProducts( $base, $prodcode, $rebate ) );
 
 		return $this;
