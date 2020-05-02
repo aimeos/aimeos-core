@@ -36,6 +36,55 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAdd()
+	{
+		$expected = $this->object->and( [
+			$this->object->is( 'test', '==', 'value' ),
+			$this->object->getConditions(),
+		] );
+		$result = $this->object->add( 'test', '==', 'value' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $result );
+		$this->assertEquals( $expected, $result->getConditions() );
+	}
+
+
+	public function testAddArray()
+	{
+		$expected = $this->object->and( [
+			$this->object->and( [
+				$this->object->is( 'test', '=~', 'value' ),
+				$this->object->is( 'key', '=~', 'val' )
+			] ),
+			$this->object->getConditions()
+		] );
+		$result = $this->object->add( ['test' => 'value', 'key' => 'val'], '=~' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $result );
+		$this->assertEquals( $expected, $result->getConditions() );
+	}
+
+
+	public function testAddExpression()
+	{
+		$expected = $this->object->and( [
+			$this->object->is( 'test', '==', 'value' ),
+			$this->object->getConditions(),
+		] );
+		$result = $this->object->add( $this->object->is( 'test', '==', 'value' ) );
+
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $result );
+		$this->assertEquals( $expected, $result->getConditions() );
+	}
+
+
+	public function testMake()
+	{
+		$func = $this->object->make( 'test', [1, null, 2] );
+		$this->assertEquals( 'test(1,null,2)', $func );
+	}
+
+
 	public function testCreateFunction()
 	{
 		$func = $this->object->createFunction( 'test', [1, null, 2] );
@@ -55,15 +104,40 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCombine()
+	public function testIs()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\SQL::class, $this->object->combine( '||', [] ) );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\SQL::class, $this->object->is( 'name', '!=', 'value' ) );
 	}
 
 
 	public function testCompare()
 	{
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\SQL::class, $this->object->compare( '!=', 'name', 'value' ) );
+	}
+
+
+	public function testAnd()
+	{
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\SQL::class, $this->object->and( [] ) );
+	}
+
+
+	public function testOr()
+	{
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\SQL::class, $this->object->or( [] ) );
+	}
+
+
+	public function testNot()
+	{
+		$expr = $this->object->is( 'name', '==', 'value' );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\SQL::class, $this->object->not( $expr ) );
+	}
+
+
+	public function testCombine()
+	{
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\SQL::class, $this->object->combine( '||', [] ) );
 	}
 
 
@@ -195,6 +269,42 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testOrder()
+	{
+		$this->assertEquals( [], $this->object->getSortations() );
+
+		$sortations = [$this->object->sort( '+', 'asc_column' )];
+		$result = $this->object->order( 'asc_column' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $result );
+		$this->assertEquals( $sortations, $this->object->getSortations() );
+	}
+
+
+	public function testOrderDesc()
+	{
+		$this->assertEquals( [], $this->object->getSortations() );
+
+		$sortations = [$this->object->sort( '-', 'desc_column' )];
+		$result = $this->object->order( '-desc_column' );
+
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $result );
+		$this->assertEquals( $sortations, $this->object->getSortations() );
+	}
+
+
+	public function testOrderMultiple()
+	{
+		$this->assertEquals( [], $this->object->getSortations() );
+
+		$sortations = [$this->object->sort( '+', 'asc_column' ), $this->object->sort( '-', 'desc_column' )];
+		$result = $this->object->order( ['asc_column', '-desc_column'] );
+
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $result );
+		$this->assertEquals( $sortations, $this->object->getSortations() );
+	}
+
+
 	public function testGetSortations()
 	{
 		$this->assertEquals( [], $this->object->getSortations() );
@@ -205,7 +315,19 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSlice()
+	public function testSliceOffsetLimit()
+	{
+		$this->assertEquals( 0, $this->object->getOffset() );
+		$this->assertEquals( 100, $this->object->getLimit() );
+
+		$this->object->slice( 10, 20 );
+
+		$this->assertEquals( 10, $this->object->getOffset() );
+		$this->assertEquals( 20, $this->object->getLimit() );
+	}
+
+
+	public function testSliceMethods()
 	{
 		$this->assertEquals( 0, $this->object->getSliceStart() );
 		$this->assertEquals( 100, $this->object->getSliceSize() );
@@ -214,6 +336,12 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 10, $this->object->getSliceStart() );
 		$this->assertEquals( 20, $this->object->getSliceSize() );
+	}
+
+
+	public function testParseEmptyArray()
+	{
+		$this->assertNull( $this->object->parse( [] ) );
 	}
 
 

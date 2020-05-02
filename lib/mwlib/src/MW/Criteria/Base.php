@@ -21,15 +21,198 @@ namespace Aimeos\MW\Criteria;
 abstract class Base implements \Aimeos\MW\Criteria\Iface
 {
 	/**
-	 * Creates a function signature for expressions.
+	 * Adds a new expression to the existing list combined by the AND operator.
 	 *
-	 * @param string $name Function name
+	 * You can add expression is three ways:
+	 *
+	 * - Name, operator and value:
+	 *   $f->add( 'product.code', '==', 'abc' );
+	 *
+	 * - Name/value pairs and optional operator ("==" by default):
+	 *   $f->add( ['product.type' => 'voucher', 'product.status' => 1], '!=' );
+	 *   $f->add( ['product.type' => 'default', 'product.status' => 1] );
+	 *
+	 * - Single expression:
+	 *   $f->add( $f->is( 'product.code', '==', 'abc' ) );
+	 *   $f->add( $f->and( [$f->is( 'product.code', '==', 'abc' ), $f->is( 'product.status', '>', 0 )] );
+	 *   $f->add( $f->or( [$f->is( 'product.code', '==', 'abc' ), $f->is( 'product.label', '=~', 'abc' )] );
+	 *   $f->add( $f->not( $f->is( 'product.code', '=~', 'abc' ) );
+	 *
+	 * @param \Aimeos\MW\Criteria\Expression\Combine\Iface|\Aimeos\MW\Criteria\Expression\Compare\Iface|array|string Expression, list of name/value pairs or name
+	 * @param string $operator Operator to compare name and value with
+	 * @param mixed $value Value to compare the name with
+	 */
+	public function add( $expr, string $operator = '==', $value = null ) : \Aimeos\MW\Criteria\Iface
+	{
+		$cond = [];
+
+		if( is_string( $expr ) ) {
+			$cond[] = $this->compare( $operator, $expr, $value );
+		}
+
+		if( is_array( $expr ) )
+		{
+			$list = [];
+
+			foreach( $expr as $name => $value ) {
+				$list[] = $this->compare( $operator, $name, $value );
+			}
+
+			$cond[] = $this->combine( '&&', $list );
+		}
+
+		if( $expr instanceof \Aimeos\MW\Criteria\Expression\Combine\Iface
+			|| $expr instanceof \Aimeos\MW\Criteria\Expression\Compare\Iface
+		) {
+			$cond[] = $expr;
+		}
+
+		if( !empty( $cond ) )
+		{
+			$cond[] = $this->getConditions();
+			return $this->setConditions( $this->combine( '&&', $cond ) );
+		}
+
+		$msg = 'Use a column name, an array of name/value pairs or the result from and(), or(), not() or is() as first argument for add()';
+		throw new \Aimeos\MW\Exception( $msg );
+	}
+
+
+	/**
+	 * Combines the expression with an AND operator
+	 *
+	 * @param \Aimeos\MW\Criteria\Expression\Compare\Iface[] $list List of expression objects
+	 * @return \Aimeos\MW\Criteria\Expression\Combine\Iface Combine expression object
+	 */
+	public function and( array $list ) : \Aimeos\MW\Criteria\Expression\Combine\Iface
+	{
+		return $this->combine( '&&', $list );
+	}
+
+
+	/**
+	 * Creates a new compare expression.
+	 *
+	 * Available comparision operators are:
+	 * "==": item EQUAL value
+	 * "!=": item NOT EQUAL value
+	 * "~=": item LIKE value
+	 * ">=": item GREATER OR EQUAL value
+	 * "<=": item SMALLER OR EQUAL value
+	 * ">": item GREATER value
+	 * "<": item SMALLER value
+	 *
+	 * @param string $name Name of the column or property that should be used for comparison
+	 * @param string $operator One of the known operators
+	 * @param mixed $value Value the column or property should be compared to
+	 * @return \Aimeos\MW\Criteria\Expression\Compare\Iface Compare expression object
+	 */
+	public function is( string $name, string $operator, $value ) : \Aimeos\MW\Criteria\Expression\Compare\Iface
+	{
+		return $this->compare( $operator, $name, $value );
+	}
+
+
+	/**
+	 * Creates a function signature for expressions used in is() and add().
+	 *
+	 * @param string $name Function name without parentheses
 	 * @param array $params Single- or multi-dimensional list of parameters of type boolean, integer, float and string
 	 * @return string Function signature
 	 */
-	public function createFunction( string $name, array $params ) : string
+	public function make( string $name, array $params ) : string
 	{
 		return \Aimeos\MW\Criteria\Expression\Base::createFunction( $name, $params );
+	}
+
+
+	/**
+	 * Negates the whole expression.
+	 *
+	 * @param \Aimeos\MW\Criteria\Expression\Iface $expr Expression object
+	 * @return \Aimeos\MW\Criteria\Expression\Combine\Iface Combine expression object
+	 */
+	public function not( \Aimeos\MW\Criteria\Expression\Iface $expr ) : \Aimeos\MW\Criteria\Expression\Combine\Iface
+	{
+		return $this->combine( '!', [$expr] );
+	}
+
+
+	/**
+	 * Combines the expression with an OR operator
+	 *
+	 * @param \Aimeos\MW\Criteria\Expression\Compare\Iface[] $list List of expression objects
+	 * @return \Aimeos\MW\Criteria\Expression\Combine\Iface Combine expression object
+	 */
+	public function or( array $list ) : \Aimeos\MW\Criteria\Expression\Combine\Iface
+	{
+		return $this->combine( '||', $list );
+	}
+
+
+	/**
+	 * Sets the keys the data should be ordered by.
+	 *
+	 *
+	 * Available sorting operators are:
+	 * "product.label": sort ascending
+	 * "-product.label": sort descending
+	 *
+	 * @param array|string $keys Name of the column or property that should be used for sorting
+	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
+	 */
+	public function order( $names ) : \Aimeos\MW\Criteria\Iface
+	{
+		$sort = [];
+
+		foreach( (array) $names as $name )
+		{
+			$op = '+';
+			$name = (string) $name;
+
+			if( strlen( $name ) && $name[0] === '-' ) {
+				$op = '-'; $name = substr( $name, 1 );
+			}
+
+			$sort[] = $this->sort( $op, $name );
+		}
+
+		return $this->setSortations( $sort );
+	}
+
+
+	/**
+	 * Sets the offset and the size of the requested data slice.
+	 *
+	 * @param int $start Start number of the items
+	 * @param int $size Number of items
+	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
+	 */
+	public function slice( int $offset, int $limit = 100 ) : \Aimeos\MW\Criteria\Iface
+	{
+		return $this->setSlice( $offset, $limit );
+	}
+
+
+	/**
+	 * Returns the number of requested items.
+	 *
+	 * @return int Number of items
+	 */
+	public function getLimit() : int
+	{
+		return $this->getSliceSize();
+	}
+
+
+	/**
+	 * Returns the start number of requested items.
+	 *
+	 * @return int Start number of the items
+	 */
+	public function getOffset() : int
+	{
+		return $this->getSliceStart();
 	}
 
 
@@ -37,28 +220,25 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 * Creates condition expressions from a multi-dimensional associative array.
 	 *
 	 * The simplest form of a valid associative array is a single comparison:
-	 * 	$array = array(
-	 * 		'==' => array( 'name' => 'value' ),
-	 * 	);
+	 * 	$array = [
+	 * 		'==' => ['name' => 'value'],
+	 * 	];
 	 *
 	 * Combining several conditions can look like:
-	 * 	$array = array(
-	 * 		'&&' => array(
-	 * 			0 => array(
-	 * 				'==' => array( 'name' => 'value' ),
-	 * 			1 => array(
-	 * 				'==' => array( 'name2' => 'value2' ),
-	 * 			),
-	 * 		),
-	 * 	);
+	 * 	$array = [
+	 * 		'&&' => [
+	 * 			['==' => ['name' => 'value']],
+	 * 			['==' => ['name2' => 'value2']],
+	 * 		],
+	 * 	];
 	 *
 	 * Nested combine operators are also possible.
 	 *
 	 * @param array $array Multi-dimensional associative array containing the expression arrays
 	 * @return \Aimeos\MW\Criteria\Expression\Iface|null Condition expressions (maybe nested) or null for none
-	 * @throws \Aimeos\MW\Common\Exception If given array is invalid
+	 * @throws \Aimeos\MW\Exception If given array is invalid
 	 */
-	public function toConditions( array $array ) : ?\Aimeos\MW\Criteria\Expression\Iface
+	public function parse( array $array ) : ?\Aimeos\MW\Criteria\Expression\Iface
 	{
 		if( ( $value = reset( $array ) ) === false ) {
 			return null;
@@ -75,30 +255,6 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 		}
 
 		throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $op ) );
-	}
-
-
-	/**
-	 * Creates sortation expressions from an associative array.
-	 *
-	 * The array must be a single-dimensional array of name and operator pairs like
-	 * 	$array = array(
-	 * 		'name' => '+',
-	 * 		'name2' => '-',
-	 * 	);
-	 *
-	 * @param string[] $array Single-dimensional array of name and operator pairs
-	 * @return \Aimeos\MW\Criteria\Expression\Sort\Iface[] List of sort expressions
-	 */
-	public function toSortations( array $array ) : array
-	{
-		$results = [];
-
-		foreach( $array as $name => $op ) {
-			$results[] = $this->sort( $op, $name );
-		}
-
-		return $results;
 	}
 
 
@@ -121,6 +277,57 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 		}
 
 		return $list;
+	}
+	/**
+	 * Creates a function signature for expressions.
+	 *
+	 * @param string $name Function name
+	 * @param array $params Single- or multi-dimensional list of parameters of type boolean, integer, float and string
+	 * @return string Function signature
+	 * @deprecated 2021.01
+	 */
+	public function createFunction( string $name, array $params ) : string
+	{
+		return \Aimeos\MW\Criteria\Expression\Base::createFunction( $name, $params );
+	}
+
+
+	/**
+	 * Creates condition expressions from a multi-dimensional associative array.
+	 *
+	 * @param array $array Multi-dimensional associative array containing the expression arrays
+	 * @return \Aimeos\MW\Criteria\Expression\Iface|null Condition expressions (maybe nested) or null for none
+	 * @throws \Aimeos\MW\Exception If given array is invalid
+	 * @deprecated 2021.01
+	 */
+	public function toConditions( array $array ) : ?\Aimeos\MW\Criteria\Expression\Iface
+	{
+		return $this->parse( $array );
+	}
+
+
+	/**
+	 * Creates sortation expressions from an associative array.
+	 *
+	 * The array must be a single-dimensional array of name and operator pairs like
+	 * 	$array = array(
+	 * 		'name' => '+',
+	 * 		'name2' => '-',
+	 * 	);
+	 *
+	 * @param string[] $array Single-dimensional array of name and operator pairs
+	 * @return \Aimeos\MW\Criteria\Expression\Sort\Iface[] List of sort expressions
+	 * @deprecated 2021.01
+	 */
+	public function toSortations( array $array ) : array
+	{
+		$results = [];
+
+		foreach( $array as $name => $op ) {
+			$results[] = $this->sort( $op, $name );
+		}
+
+		return $results;
 	}
 
 

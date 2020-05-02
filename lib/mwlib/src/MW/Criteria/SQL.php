@@ -50,6 +50,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 * @param string $operator One of the known operators
 	 * @param \Aimeos\MW\Criteria\Expression\Compare\Iface[] $list List of expression objects
 	 * @return \Aimeos\MW\Criteria\Expression\Combine\Iface Combine expression object
+	 * @deprecated 2021.01
 	 */
 	public function combine( string $operator, array $list ) : \Aimeos\MW\Criteria\Expression\Combine\Iface
 	{
@@ -74,6 +75,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 * @param string $name Name of the variable or column that should be used for comparison
 	 * @param mixed $value Value the variable or column should be compared to
 	 * @return \Aimeos\MW\Criteria\Expression\Compare\Iface Compare expression object
+	 * @deprecated 2021.01
 	 */
 	public function compare( string $operator, string $name, $value ) : \Aimeos\MW\Criteria\Expression\Compare\Iface
 	{
@@ -91,6 +93,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 * @param string $operator One of the known operators
 	 * @param string $name Name of the variable or column that should be used for sorting
 	 * @return \Aimeos\MW\Criteria\Expression\Sort\Iface Sort expression object
+	 * @deprecated 2021.01
 	 */
 	public function sort( string $operator, string $name ) : \Aimeos\MW\Criteria\Expression\Sort\Iface
 	{
@@ -126,7 +129,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	{
 		$types['1'] = \Aimeos\MW\DB\Statement\Base::PARAM_INT;
 
-		if( ( $string = $this->conditions->toSource( $types, $translations, $plugins, $funcs ) ) !== '' ) {
+		if( $this->conditions && ( $string = $this->conditions->toSource( $types, $translations, $plugins, $funcs ) ) !== '' ) {
 			return $string;
 		}
 
@@ -150,6 +153,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 *
 	 * @param \Aimeos\MW\Criteria\Expression\Iface $conditions Expression object
 	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
+	 * @deprecated 2021.01
 	 */
 	public function setConditions( \Aimeos\MW\Criteria\Expression\Iface $conditions ) : Iface
 	{
@@ -213,6 +217,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 *
 	 * @param \Aimeos\MW\Criteria\Expression\Sort\SQL[] $sortations List of objects implementing \Aimeos\MW\Criteria\Expression\Sort\Iface
 	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
+	 * @deprecated 2021.01
 	 */
 	public function setSortations( array $sortations ) : Iface
 	{
@@ -227,6 +232,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 * Returns the number of requested items.
 	 *
 	 * @return int Number of items
+	 * @deprecated 2021.01
 	 */
 	public function getSliceSize() : int
 	{
@@ -238,6 +244,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 * Returns the start number of requested items.
 	 *
 	 * @return int Start number of the items
+	 * @deprecated 2021.01
 	 */
 	public function getSliceStart() : int
 	{
@@ -251,6 +258,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 * @param int $start Start number of the items
 	 * @param int $size Number of items
 	 * @return \Aimeos\MW\Criteria\SQL Object instance for fluent interface
+	 * @deprecated 2021.01
 	 */
 	public function setSlice( int $start, int $size = 100 )
 	{
