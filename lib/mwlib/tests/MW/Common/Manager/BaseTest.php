@@ -42,7 +42,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testFilter()
 	{
 		$item = new \stdClass();
-		$this->assertSame( $item, $this->access( 'filter' )->invokeArgs( $this->object, [$item] ) );
+		$this->assertSame( $item, $this->access( 'applyFilter' )->invokeArgs( $this->object, [$item] ) );
 	}
 
 
@@ -53,7 +53,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		} );
 
 		$item = new \stdClass();
-		$this->assertSame( $item, $this->access( 'filter' )->invokeArgs( $this->object, [$item] ) );
+		$this->assertSame( $item, $this->access( 'applyFilter' )->invokeArgs( $this->object, [$item] ) );
 	}
 
 
@@ -63,7 +63,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			return null;
 		} );
 
-		$this->assertNull( $this->access( 'filter' )->invokeArgs( $this->object, [new \stdClass()] ) );
+		$this->assertNull( $this->access( 'applyFilter' )->invokeArgs( $this->object, [new \stdClass()] ) );
 	}
 
 
@@ -77,7 +77,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		} );
 
 		$item = new Test();
-		$this->assertSame( $item, $this->access( 'filter' )->invokeArgs( $this->object, [$item] ) );
+		$this->assertSame( $item, $this->access( 'applyFilter' )->invokeArgs( $this->object, [$item] ) );
 	}
 
 
@@ -90,7 +90,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			return null;
 		} );
 
-		$this->assertNull( $this->access( 'filter' )->invokeArgs( $this->object, [new Test()] ) );
+		$this->assertNull( $this->access( 'applyFilter' )->invokeArgs( $this->object, [new Test()] ) );
 	}
 
 
@@ -104,7 +104,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		} );
 
 		$item = new Test();
-		$this->assertSame( $item, $this->access( 'filter' )->invokeArgs( $this->object, [$item] ) );
+		$this->assertSame( $item, $this->access( 'applyFilter' )->invokeArgs( $this->object, [$item] ) );
 	}
 
 
@@ -117,7 +117,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			return null;
 		} );
 
-		$this->assertNull( $this->access( 'filter' )->invokeArgs( $this->object, [new Test()] ) );
+		$this->assertNull( $this->access( 'applyFilter' )->invokeArgs( $this->object, [new Test()] ) );
 	}
 
 

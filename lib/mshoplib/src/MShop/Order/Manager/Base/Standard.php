@@ -1085,7 +1085,7 @@ class Standard extends Base
 
 			$item = $this->createItemBase( $price, $locale, $row, $products, $addresses, $services, $coupons );
 
-			if( $item = $this->filter( $item ) ) {
+			if( $item = $this->applyFilter( $item ) ) {
 				$items[$id] = $item;
 			}
 		}

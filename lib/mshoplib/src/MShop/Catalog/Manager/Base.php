@@ -82,7 +82,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 				$refItems = $refItemMap[$id];
 			}
 
-			if( $item = $this->filter( $this->createItemBase( [], $listItems, $refItems, [], $node ) ) ) {
+			if( $item = $this->applyFilter( $this->createItemBase( [], $listItems, $refItems, [], $node ) ) ) {
 				$items[$id] = $item;
 			}
 		}
@@ -147,7 +147,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 				$refItems = $refItemMap[$child->getId()];
 			}
 
-			if( $newItem = $this->filter( $this->createItemBase( [], $listItems, $refItems, [], $child ) ) )
+			if( $newItem = $this->applyFilter( $this->createItemBase( [], $listItems, $refItems, [], $child ) ) )
 			{
 				$item->addChild( $newItem );
 				$this->createTree( $child, $newItem, $listItemMap, $refItemMap );

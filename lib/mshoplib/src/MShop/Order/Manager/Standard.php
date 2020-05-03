@@ -858,7 +858,7 @@ class Standard
 		{
 			$baseItem = $baseItems[$row['order.baseid']] ?? null;
 
-			if( $item = $this->filter( $this->createItemBase( $row, $baseItem ) ) ) {
+			if( $item = $this->applyFilter( $this->createItemBase( $row, $baseItem ) ) ) {
 				$items[$id] = $item;
 			}
 		}

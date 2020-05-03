@@ -807,7 +807,7 @@ class Standard extends Base
 				$refItems = $refItemMap[$nodeid];
 			}
 
-			if( $item = $this->filter( $this->createItemBase( [], $listItems, $refItems, [], $node ) ) )
+			if( $item = $this->applyFilter( $this->createItemBase( [], $listItems, $refItems, [], $node ) ) )
 			{
 				$this->createTree( $node, $item, $listItemMap, $refItemMap );
 				return $item;

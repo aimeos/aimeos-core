@@ -45,7 +45,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	 * @param object $item Item to apply the filter to
 	 * @return object|null Object if the item should be used, null if not
 	 */
-	protected function filter( $item )
+	protected function applyFilter( $item )
 	{
 		foreach( $this->filterFcn as $iface => $fcnList )
 		{

@@ -937,7 +937,7 @@ class Standard
 
 		foreach( $items as $id => $row )
 		{
-			if( $item = $this->filter( $this->createItemBase( $row['price'], $row['item'], $attributes[$id] ?? [] ) ) ) {
+			if( $item = $this->applyFilter( $this->createItemBase( $row['price'], $row['item'], $attributes[$id] ?? [] ) ) ) {
 				$result[$id] = $item;
 			}
 		}

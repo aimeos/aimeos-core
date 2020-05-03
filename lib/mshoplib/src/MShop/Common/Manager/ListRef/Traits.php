@@ -50,7 +50,7 @@ trait Traits
 	 * @param object $item Item to apply the filter to
 	 * @return object|null Object if the item should be used, null if not
 	 */
-	abstract protected function filter( $item );
+	abstract protected function applyFilter( $item );
 
 
 	/**
@@ -108,7 +108,7 @@ trait Traits
 			$localItems = ( isset( $local[$id] ) ? $local[$id] : [] );
 			$localItems2 = ( isset( $local2[$id] ) ? $local2[$id] : [] );
 
-			if( $item = $this->filter( $this->createItemBase( $values, $listItems, $refItems, $localItems, $localItems2 ) ) ) {
+			if( $item = $this->applyFilter( $this->createItemBase( $values, $listItems, $refItems, $localItems, $localItems2 ) ) ) {
 				$items[$id] = $item;
 			}
 		}

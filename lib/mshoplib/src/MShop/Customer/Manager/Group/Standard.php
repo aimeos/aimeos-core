@@ -559,7 +559,7 @@ class Standard
 
 			while( ( $row = $results->fetch() ) !== null )
 			{
-				if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
 					$items[$row['customer.group.id']] = $item;
 				}
 			}

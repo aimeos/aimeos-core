@@ -216,7 +216,7 @@ class Standard
 
 		foreach( $this->search( $search, $ref, $total ) as $row )
 		{
-			if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
 				$items[$row['locale.id']] = $item;
 			}
 		}

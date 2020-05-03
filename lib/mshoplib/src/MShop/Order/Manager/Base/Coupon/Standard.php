@@ -763,7 +763,7 @@ class Standard
 			{
 				while( ( $row = $results->fetch() ) !== null )
 				{
-					if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+					if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
 						$items[$row['order.base.coupon.id']] = $item;
 					}
 				}

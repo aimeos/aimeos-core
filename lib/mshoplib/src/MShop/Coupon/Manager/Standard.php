@@ -619,7 +619,7 @@ class Standard
 						$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
 
-					if( $item = $this->filter( $this->createItemBase( $row ) ) ) {
+					if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
 						$items[$row['coupon.id']] = $item;
 					}
 				}
