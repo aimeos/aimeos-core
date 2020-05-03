@@ -214,7 +214,7 @@ class Standard
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		foreach( $this->search( $search, $ref, $total ) as $row )
+		foreach( $this->searchEntries( $search, $ref, $total ) as $row )
 		{
 			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
 				$items[$row['locale.id']] = $item;
@@ -589,7 +589,7 @@ class Standard
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'locale.position' ) ) );
-		$result = $this->search( $search );
+		$result = $this->searchEntries( $search );
 
 		// Try to find first item where site matches
 		foreach( $result as $row )
@@ -643,7 +643,7 @@ class Standard
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'locale.position' ) ) );
-		$result = $this->search( $search );
+		$result = $this->searchEntries( $search );
 
 		$langIds = strlen( $lang ) > 2 ? [$lang, substr( $lang, 0, 2 )] : [$lang];
 
@@ -732,7 +732,7 @@ class Standard
 	 * @param int &$total Number of items that are available in total
 	 * @return array Associative list of key/value pairs
 	 */
-	protected function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
+	protected function searchEntries( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$map = [];
 		$context = $this->getContext();

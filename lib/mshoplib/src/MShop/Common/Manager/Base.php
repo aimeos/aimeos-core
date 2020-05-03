@@ -69,6 +69,18 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
+	 * Creates a new empty item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Common\Item\Iface New item object
+	 */
+	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->getObject()->createItem( $values );
+	}
+
+
+	/**
 	 * Creates a search critera object
 	 *
 	 * @param bool $default Add default criteria (optional)
@@ -101,6 +113,34 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
+	 * Creates a filter object.
+	 *
+	 * @param bool $default Add default criteria
+	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
+	 */
+	public function filter( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	{
+		return $this->getObject()->createSearch( $default );
+	}
+
+
+	/**
+	 * Deletes one or more items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface|array|string $items Item object, ID of the item or a list of them
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		if( !is_array( $items ) ) {
+			$items = [$items];
+		}
+
+		return $this->getObject()->deleteItems( $items );
+	}
+
+
+	/**
 	 * Deletes an item from storage.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|string $itemId Item object or ID of the item object
@@ -109,6 +149,68 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	public function deleteItem( $itemId ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getObject()->deleteItems( [$itemId] );
+	}
+
+
+	/**
+	 * Returns the item specified by its code and domain/type if necessary
+	 *
+	 * @param string $code Code of the item
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
+	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
+	 * @param bool $default True to add default criteria
+	 * @return \Aimeos\MShop\Common\Item\Iface Item object
+	 */
+	public function find( string $code, array $ref = [], string $domain = 'product', string $type = null,
+		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->getObject()->findItem( $code, $ref, $domain, $type, $default );
+	}
+
+
+	/**
+	 * Returns the item specified by its ID
+	 *
+	 * @param string $id Id of item
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param bool $default Add default criteria
+	 * @return \Aimeos\MShop\Common\Item\Iface Item object
+	 */
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->getObject()->getItem( $id, $ref, $default );
+	}
+
+
+	/**
+	 * Adds or updates an item object or a list of them.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface Saved item or items
+	 */
+	public function save( $items, bool $fetch = true )
+	{
+		if( is_array( $items ) ) {
+			return $this->getObject()->saveItems( $items, $fetch );
+		}
+
+		return $this->getObject()->saveItem( $items, $fetch );
+	}
+
+
+	/**
+	 * Searches for all items matching the given critera.
+	 *
+	 * @param \Aimeos\MW\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param int &$total Number of items that are available in total
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
+	 */
+	public function search( \Aimeos\MW\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map
+	{
+		return $this->getObject()->searchItems( $filter, $ref, $total );
 	}
 
 

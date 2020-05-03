@@ -43,21 +43,48 @@ interface Iface
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Common\Item\Iface New item object
 	 */
+	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface;
+
+	/**
+	 * Creates a new empty item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Common\Item\Iface New item object
+	 * @deprecated 2021.01
+	 */
 	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface;
+
+	/**
+	 * Creates a filter object.
+	 *
+	 * @param bool $default Add default criteria
+	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
+	 */
+	public function filter( bool $default = false ) : \Aimeos\MW\Criteria\Iface;
 
 	/**
 	 * Creates a search object.
 	 *
 	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MW\Criteria\Iface Returns the Search object
+	 * @deprecated 2021.01
 	 */
 	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface;
+
+	/**
+	 * Deletes one or more items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface|array|string $items Item object, ID of the item or a list of them
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface;
 
 	/**
 	 * Deletes the item.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|string $itemId Item object or ID of the item object
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @deprecated 2021.01
 	 */
 	public function deleteItem( $itemId ) : \Aimeos\MShop\Common\Manager\Iface;
 
@@ -66,6 +93,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @deprecated 2021.01
 	 */
 	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface;
 
@@ -76,6 +104,17 @@ interface Iface
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
+	 */
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface;
+
+	/**
+	 * Returns the item specified by its ID
+	 *
+	 * @param string $id Id of item
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param bool $default Add default criteria
+	 * @return \Aimeos\MShop\Common\Item\Iface Item object
+	 * @deprecated 2021.01
 	 */
 	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface;
 
@@ -112,13 +151,33 @@ interface Iface
 	public function getSubManager( string $domain, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface;
 
 	/**
+	 * Adds or updates an item object or a list of them.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface Saved item or items
+	 */
+	public function save( $items, bool $fetch = true );
+
+	/**
 	 * Adds or updates a list of item objects.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $items List of item object whose data should be saved
 	 * @param bool $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Common\Item\Iface[] Saved item objects
+	 * @deprecated 2021.01
 	 */
 	public function saveItems( array $items, bool $fetch = true ) : array;
+
+	/**
+	 * Searches for all items matching the given critera.
+	 *
+	 * @param \Aimeos\MW\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param int &$total Number of items that are available in total
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
+	 */
+	public function search( \Aimeos\MW\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map;
 
 	/**
 	 * Searches for all items matching the given critera.
@@ -127,6 +186,7 @@ interface Iface
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
+	 * @deprecated 2021.01
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map;
 
