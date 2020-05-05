@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-03 10:00+0200\n"
-"PO-Revision-Date: 2019-10-03 08:03+0000\n"
+"POT-Creation-Date: 2020-04-02 15:46+0200\n"
+"PO-Revision-Date: 2020-04-02 13:51+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Czech (http://www.transifex.com/aimeos/aimeos-core/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s"
+msgstr ""
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -87,6 +107,10 @@ msgstr ""
 #, php-format
 msgid "Cache object not available"
 msgstr "Objekt nenalezen v mezipaměti"
+
+#, php-format
+msgid "Called unknown method \"%1$s\" on class \"%2$s\""
+msgstr ""
 
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
@@ -627,6 +651,10 @@ msgid "Price for the given quantity \"%1$d\" not available"
 msgstr ""
 
 #, php-format
+msgid "Price for the given quantity \"%1$s\" not available"
+msgstr ""
+
+#, php-format
 msgid "Price item not available"
 msgstr ""
 
@@ -681,7 +709,7 @@ msgid "Provider in \"%1$s\" not available"
 msgstr ""
 
 #, php-format
-msgid "Quantity must be a positive integer and must not exceed %1$d"
+msgid "Quantity must be greater than 0 and must not exceed %1$d"
 msgstr ""
 
 #, php-format
