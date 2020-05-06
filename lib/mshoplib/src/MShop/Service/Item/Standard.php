@@ -206,9 +206,9 @@ class Standard
 	 * @param array $config Configuration values
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
-	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
+	public function setConfig( $config ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'service.config', $config );
+		return $this->set( 'service.config', (array) $config );
 	}
 
 
