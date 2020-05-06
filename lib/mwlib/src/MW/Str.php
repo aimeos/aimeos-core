@@ -158,10 +158,10 @@ class Str
 	 * @param string $sep Separator between the words
 	 * @return string String suitable for an URL segment
 	 */
-	public static function slug( string $str, string $sep = '-' ) : string
+	public static function slug( string $str, string $lang = 'en', string $sep = '-' ) : string
 	{
-		$pattern = '/(\ |\!|\"|\#|\$|\%|\&|\'|\(|\)|\*|\+|\,|\.|\/|\:|\;|\<|\=|\>|\?|\@|\[|\\|\]|\^|\`|\%)+/';
-		return trim( preg_replace( $pattern, $sep, $str ), $sep );
+		$str = strtolower( \voku\helper\ASCII::to_ascii( $str, $lang ) );
+		return trim( preg_replace( '/[^A-Za-z0-9]+/', $sep, $str ), $sep );
 	}
 
 

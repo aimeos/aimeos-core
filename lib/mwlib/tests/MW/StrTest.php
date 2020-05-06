@@ -123,14 +123,10 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 	public function testSlug()
 	{
+		$this->assertEquals( 'a_b_c', Str::slug( 'a/b&c', 'en', '_' ) );
+		$this->assertEquals( 'ae-oe-ue', Str::slug( 'Ä/ö&ü', 'de' ) );
+		$this->assertEquals( 'a-o-u', Str::slug( 'ä/ö&ü' ) );
 		$this->assertEquals( 'a-b-c', Str::slug( 'a/b&c' ) );
-		$this->assertEquals( 'a_b_c', Str::slug( 'a/b&c', '_' ) );
-
-		$this->assertEquals( 'は-し-こ', Str::slug( 'は/し&こ' ) );
-		$this->assertEquals( 'は_し_こ', Str::slug( 'は/し&こ', '_' ) );
-
-		$this->assertEquals( '他-弛-池', Str::slug( '他/弛&池' ) );
-		$this->assertEquals( '他_弛_池', Str::slug( '他/弛&池', '_' ) );
 	}
 
 
