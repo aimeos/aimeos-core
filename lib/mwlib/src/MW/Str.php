@@ -26,8 +26,8 @@ class Str
 	 */
 	public static function after( string $str, string $needle ) : ?string
 	{
-		if( ( $pos = strpos( $str, $needle ) ) !== false
-			&& ( $result = substr( $str, $pos + 1 ) ) !== false
+		if( ( $len = strlen( $needle ) ) > 0 && ( $pos = strpos( $str, $needle ) ) !== false
+			&& ( $result = substr( $str, $pos + $len ) ) !== false
 		) {
 			return $result;
 		}
@@ -45,7 +45,7 @@ class Str
 	 */
 	public static function before( string $str, string $needle ) : ?string
 	{
-		if( ( $pos = strpos( $str, $needle ) ) !== false
+		if( $needle !== '' && ( $pos = strpos( $str, $needle ) ) !== false
 			&& ( $result = substr( $str, 0, $pos ) ) !== false
 		) {
 			return $result;
@@ -76,7 +76,7 @@ class Str
 	 */
 	public static function ends( string $str, string $needle ) : bool
 	{
-		return substr_compare( $str, $needle, -strlen( $needle ) );
+		return $needle !== '' && substr_compare( $str, $needle, -strlen( $needle ) ) === 0;
 	}
 
 
@@ -104,7 +104,7 @@ class Str
 	{
 		foreach( (array) $needles as $needle )
 		{
-			if( strpos( $str, $needle ) === false ) {
+			if( $needle === '' || strpos( $str, $needle ) === false ) {
 				return false;
 			}
 		}
@@ -147,7 +147,7 @@ class Str
 	 */
 	public static function match( string $str, string $pattern ) : bool
 	{
-		return preg_match( $pattern, $str ) === 1 ? true : false;
+		return (bool) preg_match( $pattern, $str );
 	}
 
 
@@ -160,7 +160,8 @@ class Str
 	 */
 	public static function slug( string $str, string $sep = '-' ) : string
 	{
-		return trim( preg_replace( '/(\+|\%[0-9A-F]{2})+/', $sep, urlencode( $str ) ), $sep );
+		$pattern = '/(\ |\!|\"|\#|\$|\%|\&|\'|\(|\)|\*|\+|\,|\.|\/|\:|\;|\<|\=|\>|\?|\@|\[|\\|\]|\^|\`|\%)+/';
+		return trim( preg_replace( $pattern, $sep, $str ), $sep );
 	}
 
 
@@ -175,7 +176,7 @@ class Str
 	{
 		foreach( $needles as $needle )
 		{
-			if( strpos( $str, $needle ) !== false ) {
+			if( $needle !== '' && strpos( $str, $needle ) !== false ) {
 				return true;
 			}
 		}
@@ -193,7 +194,7 @@ class Str
 	 */
 	public static function starts( string $str, string $needle ) : bool
 	{
-		return strncmp( $str, $needle, strlen( $needle ) );
+		return $needle !== '' && strncmp( $str, $needle, strlen( $needle ) ) === 0;
 	}
 
 
@@ -206,6 +207,6 @@ class Str
 	 */
 	public static function strip( string $str, array $allowed = [] ) : string
 	{
-		return strip_tags( $str, $allowed );
+		return strip_tags( $str, join( '', $allowed ) );
 	}
 }
