@@ -26,14 +26,14 @@ abstract class Base extends \Aimeos\MW\View\Helper\Base
 	 * @param string[] $names Replace characters in the parameters of the given names, empty for all
 	 * @return array Associative list with encoded values
 	 */
-	protected function sanitize( array $params, array$names = ['f_name', 'd_name'] ) : array
+	protected function sanitize( array $params, array $names = ['f_name', 'd_name'] ) : array
 	{
 		foreach( $params as $key => $value )
 		{
 			if( is_array( $value ) ) {
 				$params[$key] = $this->sanitize( $value, $names );
 			} elseif( empty( $names ) || in_array( (string) $key, $names ) ) {
-				$params[$key] = \Aimeos\MW\Common\Base::sanitize( $value );
+				$params[$key] = \Aimeos\MW\Str::slug( $value );
 			}
 		}
 

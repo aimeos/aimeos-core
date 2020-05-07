@@ -11,6 +11,8 @@
 
 namespace Aimeos\MW\View\Helper\Encoder;
 
+use Aimeos\MW\Str;
+
 
 /**
  * View helper class for encoding data into the output.
@@ -75,7 +77,7 @@ class Standard
 			return (string) $value;
 		}
 
-		return htmlspecialchars( (string) $value, ENT_QUOTES, 'UTF-8' );
+		return Str::html( (string) $value, ENT_QUOTES );
 	}
 
 
@@ -97,7 +99,7 @@ class Standard
 			return (string) $value;
 		}
 
-		return htmlspecialchars( (string) $value, ENT_NOQUOTES, 'UTF-8' );
+		return Str::html( (string) $value, ENT_NOQUOTES );
 	}
 
 

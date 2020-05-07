@@ -151,7 +151,7 @@ class Xml
 		{
 			foreach( new \DirectoryIterator( $location ) as $entry )
 			{
-				if( strncmp( $entry->getFilename(), 'order', 5 ) === 0 && $entry->getExtension() === 'xml' ) {
+				if( !strncmp( $entry->getFilename(), 'order', 5 ) && $entry->getExtension() === 'xml' ) {
 					$files[] = $entry->getPathname();
 				}
 			}

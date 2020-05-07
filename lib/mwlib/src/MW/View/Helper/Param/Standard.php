@@ -69,6 +69,6 @@ class Standard
 			return $param;
 		}
 
-		return htmlspecialchars( $param, ENT_NOQUOTES, 'UTF-8' );
+		return Str::html( (string) $param, ENT_NOQUOTES );
 	}
 }

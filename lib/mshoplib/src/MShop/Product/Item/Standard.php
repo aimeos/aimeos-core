@@ -245,7 +245,7 @@ class Standard
 	 */
 	public function getUrl() : string
 	{
-		return $this->get( 'product.url' ) ?: \Aimeos\MW\Common\Base::sanitize( $this->getLabel() );
+		return $this->get( 'product.url' ) ?: \Aimeos\MW\Str::slug( $this->getLabel() );
 	}
 
 

@@ -675,7 +675,7 @@ class Standard
 		$texts = [];
 
 		foreach( $item->getRefItems( 'text', 'url', 'default' ) as $text ) {
-			$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Common\Base::sanitize( $text->getContent() );
+			$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Str::slug( $text->getContent() );
 		}
 
 		foreach( $item->getRefItems( 'text', 'name', 'default' ) as $text ) {

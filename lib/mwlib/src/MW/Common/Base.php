@@ -67,6 +67,6 @@ abstract class Base
 	 */
 	public static function sanitize( string $string ) : string
 	{
-		return trim( preg_replace( '/(\-|\+|\%[0-9A-F]{2})+/', '-', urlencode( $string ) ), '-' );
+		return \Aimeos\MW\Str::slug( $string );
 	}
 }
