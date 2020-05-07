@@ -51,7 +51,9 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( Str::ends( 'abc', 'a' ) );
 		$this->assertFalse( Str::ends( 'abc', 'ab' ) );
 		$this->assertFalse( Str::ends( 'abc', 'x' ) );
+		$this->assertFalse( Str::ends( 'abc', ['x', 'y'] ) );
 
+		$this->assertTrue( Str::ends( 'abc', ['c', 'x'] ) );
 		$this->assertTrue( Str::ends( 'abc', 'bc' ) );
 		$this->assertTrue( Str::ends( 'abc', 'c' ) );
 
@@ -107,7 +109,9 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( Str::starts( 'abc', 'c' ) );
 		$this->assertFalse( Str::starts( 'abc', 'bc' ) );
 		$this->assertFalse( Str::starts( 'abc', 'x' ) );
+		$this->assertFalse( Str::starts( 'abc', ['x', 'y'] ) );
 
+		$this->assertTrue( Str::starts( 'abc', ['a', 'x'] ) );
 		$this->assertTrue( Str::starts( 'abc', 'ab' ) );
 		$this->assertTrue( Str::starts( 'abc', 'a' ) );
 

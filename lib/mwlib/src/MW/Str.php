@@ -59,12 +59,19 @@ class Str
 	 * Tests if the strings ends with the needle.
 	 *
 	 * @param string $str String to test
-	 * @param string $needle String or character to compare with
+	 * @param array|string $needles String/character or list thereof to compare with
 	 * @return bool TRUE if string ends with needle, FALSE if not
 	 */
-	public static function ends( string $str, string $needle ) : bool
+	public static function ends( string $str, $needles ) : bool
 	{
-		return $needle !== '' && substr_compare( $str, $needle, -strlen( $needle ) ) === 0;
+		foreach( (array) $needles as $needle )
+		{
+			if( $needle !== '' && substr_compare( $str, $needle, -strlen( $needle ) ) === 0 ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 
@@ -85,7 +92,7 @@ class Str
 	 * Tests if the strings contains all of the needles.
 	 *
 	 * @param string $str String to test
-	 * @param string|array $needles String/character or multiple thereof to search for
+	 * @param string|array $needles String/character or list thereof to search for
 	 * @return bool TRUE if string contains all needles, FALSE if not
 	 */
 	public static function in( string $str, $needles ) : bool
@@ -139,11 +146,18 @@ class Str
 	 * Tests if the strings starts with the needle.
 	 *
 	 * @param string $str String to test
-	 * @param string $needle String or character to compare with
+	 * @param array|string $needles String/character or list thereof to compare with
 	 * @return bool TRUE if string starts with needle, FALSE if not
 	 */
-	public static function starts( string $str, string $needle ) : bool
+	public static function starts( string $str, $needles ) : bool
 	{
-		return $needle !== '' && strncmp( $str, $needle, strlen( $needle ) ) === 0;
+		foreach( (array) $needles as $needle )
+		{
+			if( $needle !== '' && strncmp( $str, $needle, strlen( $needle ) ) === 0 ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

@@ -53,7 +53,7 @@ class Standard
 	 */
 	public function transform( ?string $url ) : string
 	{
-		if( $url && strncmp( $url, 'http', 4 ) !== 0 && strncmp( $url, 'data:', 5 ) !== 0 && strncmp( $url, '/', 1 ) !== 0 ) {
+		if( $url && !\Aimeos\MW\Str::starts( $url, ['http', 'data:', '/'] ) ) {
 			$url = $this->baseurl . '/' . $url;
 		}
 
