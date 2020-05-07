@@ -11,7 +11,7 @@ namespace Aimeos\MW;
 use Aimeos\MW\Str;
 
 
-class PHPTest extends \PHPUnit\Framework\TestCase
+class StrTest extends \PHPUnit\Framework\TestCase
 {
 	public function testAfter()
 	{
