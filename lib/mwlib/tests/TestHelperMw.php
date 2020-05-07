@@ -23,7 +23,7 @@ class TestHelperMw
 	{
 		$fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
 
-		if( strncmp( $fileName, 'Aimeos' . DIRECTORY_SEPARATOR, 7 ) === 0 ) {
+		if( !strncmp( $fileName, 'Aimeos' . DIRECTORY_SEPARATOR, 7 ) ) {
 			$fileName = substr( $fileName, 7 );
 		}
 

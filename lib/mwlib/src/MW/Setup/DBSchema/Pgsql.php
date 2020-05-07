@@ -96,6 +96,7 @@ class Pgsql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 			default: $type = $record['data_type'];
 		}
 
+		$match = [];
 		$length = ( isset( $record['character_maximum_length'] ) ? $record['character_maximum_length'] : $record['numeric_precision'] );
 		$default = ( preg_match( '/^\'(.*)\'::.+$/', $record['column_default'], $match ) === 1 ? $match[1] : $record['column_default'] );
 

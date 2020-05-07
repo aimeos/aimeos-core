@@ -359,7 +359,7 @@ class Standard implements Iface, DirIface, MetaIface
 	{
 		$path = trim( $path, '/' );
 
-		if( strncmp( $path, '..', 2 ) === 0 || strpos( $path, '/../' ) !== false ) {
+		if( strncmp( $path, '../', 3 ) === 0 || strpos( $path, '/../' ) !== false ) {
 			throw new Exception( sprintf( 'No ".." allowed in path "%1$s"', $path ) );
 		}
 

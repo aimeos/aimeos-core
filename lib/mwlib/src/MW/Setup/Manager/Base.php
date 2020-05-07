@@ -46,7 +46,7 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 	 */
 	public static function autoload( string $classname ) : bool
 	{
-		if( strncmp( $classname, 'Aimeos\MW\Setup\Task\\', 21 ) === 0 )
+		if( !strncmp( $classname, 'Aimeos\MW\Setup\Task\\', 21 ) )
 		{
 			$fileName = substr( $classname, 21 ) . '.php';
 
