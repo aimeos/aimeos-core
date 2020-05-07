@@ -45,22 +45,6 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testChars()
-	{
-		$this->assertEquals( 3, strlen( 'abc' ) );
-		$this->assertEquals( 3, Str::chars( 'abc' ) );
-
-		$this->assertEquals( 6, strlen( 'äöü' ) );
-		$this->assertEquals( 3, Str::chars( 'äöü' ) );
-
-		$this->assertEquals( 9, strlen( 'はしこ' ) );
-		$this->assertEquals( 3, Str::chars( 'はしこ' ) );
-
-		$this->assertEquals( 9, strlen( '他弛池' ) );
-		$this->assertEquals( 3, Str::chars( '他弛池' ) );
-	}
-
-
 	public function testEnds()
 	{
 		$this->assertFalse( Str::ends( 'abc', '' ) );
@@ -93,31 +77,6 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( Str::in( 'abc', 'a' ) );
 		$this->assertTrue( Str::in( 'abc', ['a', 'c'] ) );
-	}
-
-
-	public function testIs()
-	{
-		$this->assertTrue( Str::is( '' ) );
-		$this->assertTrue( Str::is( 'abc' ) );
-
-		$this->assertFalse( Str::is( 123 ) );
-		$this->assertFalse( Str::is( [] ) );
-	}
-
-
-	public function testLimit()
-	{
-		$this->assertEquals( 'ab', Str::limit( 'abc', 2 ) );
-		$this->assertEquals( 'はし', Str::limit( 'はしこ', 2 ) );
-		$this->assertEquals( '他弛', Str::limit( '他弛池', 2 ) );
-	}
-
-
-	public function testMatch()
-	{
-		$this->assertTrue( Str::match( 'abc', '/b/' ) );
-		$this->assertFalse( Str::match( 'abc', '/x/' ) );
 	}
 
 
@@ -157,13 +116,5 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( Str::starts( '他弛池', '他弛' ) );
 		$this->assertTrue( Str::starts( '他弛池', '他' ) );
-	}
-
-
-	public function testStrip()
-	{
-		$this->assertEquals( 'a  b', Str::strip( 'a <html> b' ) );
-		$this->assertEquals( 'a  b <p> c', Str::strip( 'a <html> b <p> c', ['<p>'] ) );
-		$this->assertEquals( 'a  b <p onclick=""> c', Str::strip( 'a <html> b <p onclick=""> c', ['<p>'] ) );
 	}
 }

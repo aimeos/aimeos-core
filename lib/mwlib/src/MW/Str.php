@@ -56,18 +56,6 @@ class Str
 
 
 	/**
-	 * Returns the number of characters (not bytes).
-	 *
-	 * @param string $str String with variable width UTF-8 characters
-	 * @return int Number of characters
-	 */
-	public static function chars( string $str ) : int
-	{
-		return mb_strlen( $str );
-	}
-
-
-	/**
 	 * Tests if the strings ends with the needle.
 	 *
 	 * @param string $str String to test
@@ -89,7 +77,7 @@ class Str
 	 */
 	public static function html( string $str, int $flags = ENT_COMPAT | ENT_HTML401 ) : string
 	{
-		return htmlspecialchars( $str, $flags );
+		return htmlspecialchars( $str, $flags, 'UTF-8' );
 	}
 
 
@@ -110,44 +98,6 @@ class Str
 		}
 
 		return true;
-	}
-
-
-	/**
-	 * Tests if the value is a string.
-	 *
-	 * @param mixed $value Value to test
-	 * @return bool TRUE if value is a string, FALSE if not
-	 */
-	public static function is( $value ) : bool
-	{
-		return is_string( $value );
-	}
-
-
-	/**
-	 * Returns a string with the number of characters (not bytes) limited.
-	 *
-	 * @param string $str Original string
-	 * @param int $chars Number of characters
-	 * @return string Shortend string
-	 */
-	public static function limit( string $str, int $chars ) : string
-	{
-		return mb_substr( $str, 0, $chars );
-	}
-
-
-	/**
-	 * Tests if the string matches the pattern.
-	 *
-	 * @param string $str String to test
-	 * @param string $pattern Regular expression pattern
-	 * @param bool TRUE if the pattern matches, FALSE if not
-	 */
-	public static function match( string $str, string $pattern ) : bool
-	{
-		return (bool) preg_match( $pattern, $str );
 	}
 
 
@@ -195,18 +145,5 @@ class Str
 	public static function starts( string $str, string $needle ) : bool
 	{
 		return $needle !== '' && strncmp( $str, $needle, strlen( $needle ) ) === 0;
-	}
-
-
-	/**
-	 * Removes all HTML tags besides the allowed ones
-	 *
-	 * @param string $str Original string
-	 * @param array $allowed Which HTML tags are allowed
-	 * @return string String HTML tags removed
-	 */
-	public static function strip( string $str, array $allowed = [] ) : string
-	{
-		return strip_tags( $str, join( '', $allowed ) );
 	}
 }
