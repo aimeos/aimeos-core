@@ -7,22 +7,22 @@
 
 return [
 	'service/type' => [
-		['service.type.domain' => 'service', 'service.type.code' => 'payment', 'service.type.label' => 'Payment', 'service.type.status' => 1 ],
-		['service.type.domain' => 'service', 'service.type.code' => 'delivery', 'service.type.label' => 'Delivery', 'service.type.status' => 1 ],
+		['service.type.domain' => 'service', 'service.type.code' => 'payment', 'service.type.label' => 'Payment', 'service.type.status' => 1],
+		['service.type.domain' => 'service', 'service.type.code' => 'delivery', 'service.type.label' => 'Delivery', 'service.type.status' => 1],
 	],
 
 	'service/lists/type' => [
-		['service.lists.type.domain' => 'product', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
-		['service.lists.type.domain' => 'attribute', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
-		['service.lists.type.domain' => 'catalog', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
-		['service.lists.type.domain' => 'media', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
-		['service.lists.type.domain' => 'price', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
-		['service.lists.type.domain' => 'service', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
-		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1 ],
-		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype1', 'service.lists.type.label' => 'Unit type 1', 'service.lists.type.status' => 1 ],
-		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype2', 'service.lists.type.label' => 'Unit type 2', 'service.lists.type.status' => 1 ],
-		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype3', 'service.lists.type.label' => 'Unit type 3', 'service.lists.type.status' => 1 ],
-		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype4', 'service.lists.type.label' => 'Unit type 4', 'service.lists.type.status' => 1 ],
+		['service.lists.type.domain' => 'product', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
+		['service.lists.type.domain' => 'attribute', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
+		['service.lists.type.domain' => 'catalog', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
+		['service.lists.type.domain' => 'media', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
+		['service.lists.type.domain' => 'price', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
+		['service.lists.type.domain' => 'service', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
+		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
+		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype1', 'service.lists.type.label' => 'Unit type 1', 'service.lists.type.status' => 1],
+		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype2', 'service.lists.type.label' => 'Unit type 2', 'service.lists.type.status' => 1],
+		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype3', 'service.lists.type.label' => 'Unit type 3', 'service.lists.type.status' => 1],
+		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype4', 'service.lists.type.label' => 'Unit type 4', 'service.lists.type.status' => 1],
 	],
 
 	'service' => [
@@ -45,7 +45,7 @@ return [
 				'media' => [[
 					'service.lists.type' => 'default', 'service.lists.position' => 0,
 					'media.languageid' => null, 'media.type' => 'default', 'media.domain' => 'service',
-					'media.label' => 'service_image1',  'media.status' => 1, 'media.mimetype' => 'image/png',
+					'media.label' => 'service_image1', 'media.status' => 1, 'media.mimetype' => 'image/png',
 					'media.url' => 'path/to/service.png', 'media.previews' => [1 => 'path/to/service.png'],
 				]],
 				'text' => [[
