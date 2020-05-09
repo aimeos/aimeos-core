@@ -41,8 +41,8 @@ return array(
 			$table->addColumn( 'dataset', 'string', array( 'length' => 64, 'default' => '' ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'url', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'label', 'string', array( 'length' => 255, 'default' => '' ) );
+			$table->addColumn( 'url', 'string', array( 'length' => 255, 'default' => '' ) );
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
