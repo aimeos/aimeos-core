@@ -72,6 +72,10 @@ class Str
 	{
 		$str = (string) $str;
 
+		if( $str === '' || $needles == null ) {
+			return false;
+		}
+
 		foreach( (array) $needles as $needle )
 		{
 			$needle = (string) $needle;
@@ -175,6 +179,10 @@ class Str
 	public static function starts( $str, $needles ) : bool
 	{
 		$str = (string) $str;
+
+		if( $str === '' || $needles == null ) {
+			return false;
+		}
 
 		foreach( (array) $needles as $needle )
 		{
