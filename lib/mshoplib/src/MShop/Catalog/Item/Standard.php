@@ -74,7 +74,7 @@ class Standard
 			return $value;
 		}
 
-		return $this->node[$name] ?? $default;
+		return $this->node->$name ?? $default;
 	}
 
 
