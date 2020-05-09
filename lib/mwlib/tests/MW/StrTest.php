@@ -85,7 +85,7 @@ class StrTest extends \PHPUnit\Framework\TestCase
 	public function testSlug()
 	{
 		$this->assertEquals( 'a_b_c', Str::slug( 'a/b&c', 'en', '_' ) );
-		$this->assertEquals( 'ae-oe-ue', Str::slug( 'Ä/ö&ü', 'de' ) );
+		$this->assertEquals( 'Ae-oe-ue', Str::slug( 'Ä/ö&ü', 'de' ) );
 		$this->assertEquals( 'a-o-u', Str::slug( 'ä/ö&ü' ) );
 		$this->assertEquals( 'a-b-c', Str::slug( 'a/b&c' ) );
 	}

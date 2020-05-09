@@ -117,8 +117,7 @@ class Str
 	 */
 	public static function slug( string $str, string $lang = 'en', string $sep = '-' ) : string
 	{
-		$str = strtolower( \voku\helper\ASCII::to_ascii( $str, $lang ) );
-		return trim( preg_replace( '/[^A-Za-z0-9]+/', $sep, $str ), $sep );
+		return trim( preg_replace( '/[^A-Za-z0-9]+/', $sep, \voku\helper\ASCII::to_ascii( $str, $lang ) ), $sep );
 	}
 
 
