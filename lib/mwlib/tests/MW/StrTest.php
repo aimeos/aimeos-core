@@ -18,6 +18,12 @@ class StrTest extends \PHPUnit\Framework\TestCase
 		$this->assertNull( Str::after( 'abc', '' ) );
 		$this->assertNull( Str::after( 'abc', 'x' ) );
 
+		$this->assertNull( Str::after( 'abc', null ) );
+		$this->assertNull( Str::after( null, 'x' ) );
+
+		$this->assertEquals( 3, Str::after( 123, 2 ) );
+		$this->assertEquals( 3, Str::after( 123, 12 ) );
+
 		$this->assertEquals( 'c', Str::after( 'abc', 'b' ) );
 		$this->assertEquals( 'c', Str::after( 'abc', 'ab' ) );
 
@@ -33,6 +39,12 @@ class StrTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertNull( Str::before( 'abc', '' ) );
 		$this->assertNull( Str::before( 'abc', 'x' ) );
+
+		$this->assertNull( Str::before( 'abc', null ) );
+		$this->assertNull( Str::before( null, 'x' ) );
+
+		$this->assertEquals( 1, Str::before( 123, 2 ) );
+		$this->assertEquals( 1, Str::before( 123, 23 ) );
 
 		$this->assertEquals( 'a', Str::before( 'abc', 'b' ) );
 		$this->assertEquals( 'a', Str::before( 'abc', 'bc' ) );
@@ -50,8 +62,15 @@ class StrTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( Str::ends( 'abc', '' ) );
 		$this->assertFalse( Str::ends( 'abc', 'a' ) );
 		$this->assertFalse( Str::ends( 'abc', 'ab' ) );
+
 		$this->assertFalse( Str::ends( 'abc', 'x' ) );
 		$this->assertFalse( Str::ends( 'abc', ['x', 'y'] ) );
+
+		$this->assertFalse( Str::ends( 'abc', null ) );
+		$this->assertFalse( Str::ends( null, 'x' ) );
+
+		$this->assertTrue( Str::ends( 123, 3 ) );
+		$this->assertTrue( Str::ends( 123, 23 ) );
 
 		$this->assertTrue( Str::ends( 'abc', ['c', 'x'] ) );
 		$this->assertTrue( Str::ends( 'abc', 'bc' ) );
@@ -68,6 +87,8 @@ class StrTest extends \PHPUnit\Framework\TestCase
 	public function testHtml()
 	{
 		$this->assertEquals( '&lt;html&gt;', Str::html( '<html>' ) );
+		$this->assertEquals( '123', Str::html( 123 ) );
+		$this->assertEquals( '', Str::html( null ) );
 	}
 
 
@@ -76,6 +97,12 @@ class StrTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( Str::in( 'abc', '' ) );
 		$this->assertFalse( Str::in( 'abc', 'ax' ) );
 		$this->assertFalse( Str::in( 'abc', ['x'] ) );
+
+		$this->assertFalse( Str::in( 'abc', null ) );
+		$this->assertFalse( Str::in( null, 'x' ) );
+
+		$this->assertTrue( Str::in( 123, 2 ) );
+		$this->assertTrue( Str::in( 123, [1, 3] ) );
 
 		$this->assertTrue( Str::in( 'abc', 'a' ) );
 		$this->assertTrue( Str::in( 'abc', ['a', 'c'] ) );
@@ -88,14 +115,21 @@ class StrTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'Ae-oe-ue', Str::slug( 'Ä/ö&ü', 'de' ) );
 		$this->assertEquals( 'a-o-u', Str::slug( 'ä/ö&ü' ) );
 		$this->assertEquals( 'a-b-c', Str::slug( 'a/b&c' ) );
+		$this->assertEquals( '123', Str::slug( 123 ) );
+		$this->assertEquals( '', Str::slug( null ) );
 	}
 
 
 	public function testSome()
 	{
+		$this->assertFalse( Str::some( null, [''] ) );
 		$this->assertFalse( Str::some( 'abc', [''] ) );
+
 		$this->assertFalse( Str::some( 'abc', ['ax'] ) );
 		$this->assertFalse( Str::some( 'abc', ['x', 'y'] ) );
+
+		$this->assertTrue( Str::some( 123, [2] ) );
+		$this->assertTrue( Str::some( 123, [1, 3] ) );
 
 		$this->assertTrue( Str::some( 'abc', ['a'] ) );
 		$this->assertTrue( Str::some( 'abc', ['a', 'c'] ) );
@@ -108,8 +142,15 @@ class StrTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( Str::starts( 'abc', '' ) );
 		$this->assertFalse( Str::starts( 'abc', 'c' ) );
 		$this->assertFalse( Str::starts( 'abc', 'bc' ) );
+
 		$this->assertFalse( Str::starts( 'abc', 'x' ) );
 		$this->assertFalse( Str::starts( 'abc', ['x', 'y'] ) );
+
+		$this->assertFalse( Str::starts( 'abc', null ) );
+		$this->assertFalse( Str::starts( null, 'c' ) );
+
+		$this->assertTrue( Str::starts( 123, 12 ) );
+		$this->assertTrue( Str::starts( 123, 1 ) );
 
 		$this->assertTrue( Str::starts( 'abc', ['a', 'x'] ) );
 		$this->assertTrue( Str::starts( 'abc', 'ab' ) );
