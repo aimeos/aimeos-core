@@ -62,6 +62,23 @@ class Standard
 
 
 	/**
+	 * Returns the item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @param mixed $default Default value if property is unknown
+	 * @return mixed|null Property value or default value if property is unknown
+	 */
+	public function get( string $name, $default = null )
+	{
+		if( ( $value = parent::get( $name ) ) !== null ) {
+			return $value;
+		}
+
+		return $this->node[$name] ?? $default;
+	}
+
+
+	/**
 	 * Returns the item type
 	 *
 	 * @return string Item type, subtypes are separated by slashes
