@@ -911,7 +911,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		);
 
 		if( empty( $search->getSortations() ) && ( $attribute = reset( $attributes ) ) !== false ) {
-			$search = (clone $search)->setSortations( [$search->sort( '+', $attribute->getCode() )] );
+			$search = ( clone $search )->setSortations( [$search->sort( '+', $attribute->getCode() )] );
 		}
 
 		$find[] = ':order';
