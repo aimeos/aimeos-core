@@ -569,8 +569,10 @@ class Standard
 
 		$expr = array( $search->compare( '==', 'locale.siteid', $sites[Base::SITE_PATH] ?? $sites[Base::SITE_ONE] ) );
 
-		if( !empty( $lang ) ) {
-			$expr[] = $search->compare( '==', 'locale.languageid', $lang );
+		if( !empty( $lang ) )
+		{
+			$langIds = strlen( $lang ) > 2 ? [$lang, substr( $lang, 0, 2 )] : [$lang];
+			$expr[] = $search->compare( '==', 'locale.languageid', $langIds );
 		}
 
 		if( !empty( $currency ) ) {
