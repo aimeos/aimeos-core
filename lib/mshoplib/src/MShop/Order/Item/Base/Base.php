@@ -528,7 +528,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 		if( $position !== null ) {
 			$this->products[$position] = $item;
 		} elseif( ( $pos = $this->getSameProduct( $item, $this->products ) ) !== null ) {
-			$this->products[$pos]->setQuantity( $this->products[$pos]->getQuantity() + $item->getQuantity() );
+			$item = $this->products[$pos]->setQuantity( $this->products[$pos]->getQuantity() + $item->getQuantity() );
 		} else {
 			$this->products[] = $item;
 		}
