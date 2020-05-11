@@ -805,18 +805,19 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item
 	 * @param array $products List of order product items to check against
-	 * @return integer|false Positon of the same product in the product list of false if product is unique
+	 * @return integer|false Position of the same product in the product list of false if product is unique
 	 * @throws \Aimeos\MShop\Order\Exception If no similar item was found
 	 */
 	protected function getSameProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, array $products )
 	{
-		$attributeMap = [];
-		$attributeCount = 0;
+		$map = [];
+		$count = 0;
 
 		foreach( $item->getAttributeItems() as $attributeItem )
 		{
-			$attributeMap[$attributeItem->getCode()][$attributeItem->getValue()] = $attributeItem;
-			$attributeCount++;
+			$key = md5( $attributeItem->getCode() . json_encode( $attributeItem->getValue() ) );
+			$map[$key] = $attributeItem;
+			$count++;
 		}
 
 		foreach( $products as $position => $product )
@@ -827,15 +828,15 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 
 			$prodAttributes = $product->getAttributeItems();
 
-			if( count( $prodAttributes ) !== $attributeCount ) {
+			if( count( $prodAttributes ) !== $count ) {
 				continue;
 			}
 
 			foreach( $prodAttributes as $attribute )
 			{
-				if( isset( $attributeMap[$attribute->getCode()][$attribute->getValue()] ) === false
-					|| $attributeMap[$attribute->getCode()][$attribute->getValue()]->getQuantity() != $attribute->getQuantity()
-				) {
+				$key = md5( $attributeItem->getCode() . json_encode( $attributeItem->getValue() ) );
+
+				if( isset( $map[$key] ) === false || $map[$key]->getQuantity() != $attribute->getQuantity() ) {
 					continue 2; // jump to outer loop
 				}
 			}
