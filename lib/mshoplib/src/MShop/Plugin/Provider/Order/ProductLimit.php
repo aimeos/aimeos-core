@@ -167,6 +167,8 @@ class ProductLimit
 		if( isset( $config['single-number-max'] ) && !is_array( $config['single-number-max'] )
 			&& $value->getQuantity() > (int) $config['single-number-max']
 		) {
+			$value->setQuantity( $config['single-number-max'] ); // reset to allowed value
+
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'The maximum product quantity is %1$d' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, (int) $config['single-number-max'] ) );
 		}
