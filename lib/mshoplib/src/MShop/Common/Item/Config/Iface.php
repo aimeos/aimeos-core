@@ -32,7 +32,7 @@ interface Iface
 	 * If your configuration looks like
 	 *  [
 	 *    'path' => [
-	 *      'to' => 'value
+	 *      'to' => 'value'
 	 *    ]
 	 *  ]
 	 *  you can get "value" by using "path/to" as key.
@@ -50,4 +50,21 @@ interface Iface
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
 	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface;
+
+	/**
+	 * Sets the configuration value for the specified path
+	 *
+	 *  Setting "value" by using "path/to" as key would result in:
+	 *  [
+	 *    'path' => [
+	 *      'to' => 'value'
+	 *    ]
+	 *  ]
+	 *
+	 *
+	 * @param string $key Key of the associative array or path to value like "path/to/value"
+	 * @param mixed $value Value to set for the key
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 */
+	public function setConfigValue( string $key, $value ) : \Aimeos\MShop\Common\Item\Iface;
 }

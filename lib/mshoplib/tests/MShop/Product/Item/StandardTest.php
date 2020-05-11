@@ -311,6 +311,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetConfigValue()
+	{
+		$result = $this->object->setConfigValue( 'path/to/value', 'test' );
+		$expected = ['path' => ['to' => ['value' => 'test']], 'css-class' => 'test'];
+
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $result );
+		$this->assertEquals( $expected, $this->object->getConfig() );
+
+		$result = $this->object->setConfigValue( 'path/to/value2', 'test2' );
+		$expected = ['path' => ['to' => ['value' => 'test', 'value2' => 'test2']], 'css-class' => 'test'];
+
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $result );
+		$this->assertEquals( $expected, $this->object->getConfig() );
+	}
+
+
 	public function testGetTarget()
 	{
 		$this->assertEquals( 'testtarget', $this->object->getTarget() );
