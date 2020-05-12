@@ -132,6 +132,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbapr_id' );
 			$table->addUniqueIndex( array( 'baseid', 'pos' ), 'unq_msordbapr_bid_pos' );
+			$table->addIndex( array( 'siteid', 'baseid', 'prodid' ), 'idx_msordbapr_sid_bid_pid' );
 			$table->addIndex( array( 'siteid', 'baseid', 'prodcode' ), 'idx_msordbapr_sid_bid_pcd' );
 			$table->addIndex( array( 'siteid', 'ctime', 'prodid', 'baseid' ), 'idx_msordbapr_sid_ct_pid_bid' );
 			$table->addIndex( array( 'baseid' ), 'fk_msordbapr_baseid' );
@@ -278,13 +279,13 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msord_id' );
 			$table->addIndex( array( 'siteid', 'type' ), 'idx_msord_sid_type' );
+			$table->addIndex( array( 'siteid', 'ctime', 'statuspayment' ), 'idx_msord_sid_ctime_pstat' );
 			$table->addIndex( array( 'siteid', 'mtime', 'statuspayment' ), 'idx_msord_sid_mtime_pstat' );
 			$table->addIndex( array( 'siteid', 'mtime', 'statusdelivery' ), 'idx_msord_sid_mtime_dstat' );
 			$table->addIndex( array( 'siteid', 'statusdelivery' ), 'idx_msord_sid_dstatus' );
 			$table->addIndex( array( 'siteid', 'datedelivery' ), 'idx_msord_sid_ddate' );
 			$table->addIndex( array( 'siteid', 'datepayment' ), 'idx_msord_sid_pdate' );
 			$table->addIndex( array( 'siteid', 'editor' ), 'idx_msord_sid_editor' );
-			$table->addIndex( array( 'siteid', 'ctime' ), 'idx_msord_sid_ctime' );
 			$table->addIndex( array( 'siteid', 'cdate' ), 'idx_msord_sid_cdate' );
 			$table->addIndex( array( 'siteid', 'cmonth' ), 'idx_msord_sid_cmonth' );
 			$table->addIndex( array( 'siteid', 'cweek' ), 'idx_msord_sid_cweek' );
