@@ -320,13 +320,6 @@ class Standard extends Base
 				$search->getConditions(),
 			] ) );
 		}
-		else
-		{
-			$search->setConditions( $search->combine( '&&', [
-				$search->compare( '=~', 'order.base.product.siteid', $context->getLocale()->getSiteId() ),
-				$search->getConditions(),
-			] ) );
-		}
 
 		return $search;
 	}
