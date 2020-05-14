@@ -869,7 +869,7 @@ class Standard
 		{
 			$required = array( 'order.base.product' );
 
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$level = $context->getConfig()->get( 'mshop/order/manager/sitemode', $level );
 
 			/** mshop/order/manager/base/product/standard/search/mysql
