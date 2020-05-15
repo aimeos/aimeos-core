@@ -68,7 +68,7 @@ class Coupon
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
-		$notAvailable = [];
+		$notAvailable = false;
 		$context = $this->getContext();
 
 		$manager = \Aimeos\MShop::create( $context, 'coupon' );
@@ -87,15 +87,15 @@ class Coupon
 			if( ( $item = $manager->searchItems( $search )->first() ) !== null ) {
 				$manager->getProvider( $item, $code )->update( $order );
 			} else {
-				$notAvailable[$code] = 'gone';
+				$order->deleteCoupon( $code );
+				$notAvailable = true;
 			}
 		}
 
-		if( count( $notAvailable ) > 0 )
+		if( $notAvailable )
 		{
-			$codes = array( 'coupon' => $notAvailable );
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Coupon in basket is not available any more' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $codes );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Coupon is not available any more' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
 		}
 
 		return $value;
