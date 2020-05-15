@@ -395,7 +395,8 @@ class Standard
 		 */
 		$list = $this->context->getConfig()->get( 'controller/common/media/standard/extensions', [] );
 
-		$filename = md5( $filename . getmypid() . microtime( true ) );
+		$filename = trim( preg_replace( '/[^A-Za-z0-9]+/', '_', $filename ), '_' );
+		$filename = substr( md5( $filename . getmypid() . microtime( true ) ), -8 ) . '_' . $filename;
 		$ext = isset( $list[$mimeext] ) ? '.' . $list[$mimeext] : ( ctype_alpha( $mimeext ) ? '.' . $mimeext : '' );
 
 		return "${type}/${filename[0]}/${filename[1]}/${filename}${ext}";
