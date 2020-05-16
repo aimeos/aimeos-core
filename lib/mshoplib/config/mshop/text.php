@@ -72,7 +72,7 @@ return array(
 								FROM "mshop_text_list_type" as mtexlity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mtexlity."id"
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 							) AS list
 						',
@@ -83,7 +83,7 @@ return array(
 								FROM "mshop_text_list_type" as mtexlity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mtexlity."id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -193,7 +193,7 @@ return array(
 							FROM "mshop_text_list" AS mtexli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mtexli."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -204,7 +204,7 @@ return array(
 							FROM "mshop_text_list" AS mtexli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mtexli."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -283,7 +283,7 @@ return array(
 							FROM "mshop_text_type" mtexty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mtexty."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -294,7 +294,7 @@ return array(
 							FROM "mshop_text_type" mtexty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mtexty."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -377,7 +377,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mtex."id"
-						ORDER BY "id"
+						ORDER BY mtex."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
@@ -389,7 +389,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mtex."id"
-						ORDER BY "id"
+						ORDER BY mtex."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

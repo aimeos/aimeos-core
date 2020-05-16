@@ -72,7 +72,7 @@ return array(
 								FROM "mshop_catalog_list_type" AS mcatlity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mcatlity."id"
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 							) AS list
 						',
@@ -83,7 +83,7 @@ return array(
 								FROM "mshop_catalog_list_type" AS mcatlity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mcatlity."id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -193,7 +193,7 @@ return array(
 							FROM "mshop_catalog_list" AS mcatli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mcatli."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -204,7 +204,7 @@ return array(
 							FROM "mshop_catalog_list" AS mcatli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mcatli."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -351,7 +351,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mcat."id"
-						ORDER BY "id"
+						ORDER BY mcat."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
@@ -363,7 +363,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mcat."id"
-						ORDER BY "id"
+						ORDER BY mcat."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

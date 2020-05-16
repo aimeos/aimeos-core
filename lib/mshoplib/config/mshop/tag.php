@@ -71,7 +71,7 @@ return array(
 							FROM "mshop_tag_type" mtagty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mtagty."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -82,7 +82,7 @@ return array(
 							FROM "mshop_tag_type" mtagty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mtagty."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -159,7 +159,7 @@ return array(
 						FROM "mshop_tag" AS mtag
 						:joins
 						WHERE :cond
-						ORDER BY "id"
+						ORDER BY mtag."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
@@ -170,7 +170,7 @@ return array(
 						FROM "mshop_tag" AS mtag
 						:joins
 						WHERE :cond
-						ORDER BY "id"
+						ORDER BY mtag."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

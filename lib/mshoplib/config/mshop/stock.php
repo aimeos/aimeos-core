@@ -71,7 +71,7 @@ return array(
 							FROM "mshop_stock_type" mstoty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mstoty."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -82,7 +82,7 @@ return array(
 							FROM "mshop_stock_type" mstoty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mstoty."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -160,7 +160,7 @@ return array(
 						FROM "mshop_stock" AS msto
 						:joins
 						WHERE :cond
-						ORDER BY "id"
+						ORDER BY msto."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
@@ -171,7 +171,7 @@ return array(
 						FROM "mshop_stock" AS msto
 						:joins
 						WHERE :cond
-						ORDER BY "id"
+						ORDER BY msto."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

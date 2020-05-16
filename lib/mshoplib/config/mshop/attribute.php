@@ -72,7 +72,7 @@ return array(
 								FROM "mshop_attribute_list_type" AS mattlity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mattlity."id"
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 							) AS list
 						',
@@ -83,7 +83,7 @@ return array(
 								FROM "mshop_attribute_list_type" AS mattlity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mattlity."id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -193,7 +193,7 @@ return array(
 							FROM "mshop_attribute_list" AS mattli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mattli."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -204,7 +204,7 @@ return array(
 							FROM "mshop_attribute_list" AS mattli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mattli."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -284,7 +284,7 @@ return array(
 								FROM "mshop_attribute_property_type" mattprty
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mattprty."id"
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 							) AS list
 						',
@@ -295,7 +295,7 @@ return array(
 								FROM "mshop_attribute_property_type" mattprty
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mattprty."id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -373,7 +373,7 @@ return array(
 							FROM "mshop_attribute_property" AS mattpr
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mattpr."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -384,7 +384,7 @@ return array(
 							FROM "mshop_attribute_property" AS mattpr
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mattpr."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -463,7 +463,7 @@ return array(
 							FROM "mshop_attribute_type" AS mattty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mattty."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -474,7 +474,7 @@ return array(
 							FROM "mshop_attribute_type" AS mattty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mattty."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'

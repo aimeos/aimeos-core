@@ -72,7 +72,7 @@ return array(
 								FROM "mshop_price_list_type" AS mprility
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mprility."id"
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 							) AS list
 						',
@@ -83,7 +83,7 @@ return array(
 								FROM "mshop_price_list_type" AS mprility
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mprility."id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -193,7 +193,7 @@ return array(
 							FROM "mshop_price_list" AS mprili
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mprili."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -204,7 +204,7 @@ return array(
 							FROM "mshop_price_list" AS mprili
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mprili."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -284,7 +284,7 @@ return array(
 								FROM "mshop_price_property_type" mpriprty
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mpriprty."id"
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 							) AS list
 						',
@@ -295,7 +295,7 @@ return array(
 								FROM "mshop_price_property_type" mpriprty
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mpriprty."id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -373,7 +373,7 @@ return array(
 							FROM "mshop_price_property" AS mpripr
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mpripr."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -384,7 +384,7 @@ return array(
 							FROM "mshop_price_property" AS mpripr
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mpripr."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -463,7 +463,7 @@ return array(
 							FROM "mshop_price_type" AS mprity
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mprity."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -474,7 +474,7 @@ return array(
 							FROM "mshop_price_type" AS mprity
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mprity."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -563,7 +563,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mpri."id"
-						ORDER BY "id"
+						ORDER BY mpri."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
@@ -575,7 +575,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mpri."id"
-						ORDER BY "id"
+						ORDER BY mpri."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

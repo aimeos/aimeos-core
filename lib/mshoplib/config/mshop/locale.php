@@ -61,7 +61,7 @@ return array(
 							SELECT mloccu."id"
 							FROM "mshop_locale_currency" AS mloccu
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mloccu."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -71,7 +71,7 @@ return array(
 							SELECT mloccu."id"
 							FROM "mshop_locale_currency" AS mloccu
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mloccu."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -140,7 +140,7 @@ return array(
 							SELECT mlocla."id"
 							FROM "mshop_locale_language" AS mlocla
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mlocla."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -150,7 +150,7 @@ return array(
 							SELECT mlocla."id"
 							FROM "mshop_locale_language" AS mlocla
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mlocla."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -227,7 +227,7 @@ return array(
 							SELECT mlocsi."id"
 							FROM "mshop_locale_site" AS mlocsi
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mlocsi."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -237,7 +237,7 @@ return array(
 							SELECT mlocsi."id"
 							FROM "mshop_locale_site" AS mlocsi
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mlocsi."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -324,7 +324,7 @@ return array(
 						LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
 						WHERE :cond
 						GROUP BY mloc."id"
-						ORDER BY "id"
+						ORDER BY mloc."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
@@ -338,7 +338,7 @@ return array(
 						LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
 						WHERE :cond
 						GROUP BY mloc."id"
-						ORDER BY "id"
+						ORDER BY mloc."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

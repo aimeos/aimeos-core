@@ -96,7 +96,7 @@ return array(
 							FROM "mshop_customer_address" AS mcusad
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mcusad."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -107,7 +107,7 @@ return array(
 							FROM "mshop_customer_address" AS mcusad
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mcusad."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -182,7 +182,7 @@ return array(
 							FROM "mshop_customer_group" AS mcusgr
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mcusgr."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -193,7 +193,7 @@ return array(
 							FROM "mshop_customer_group" AS mcusgr
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mcusgr."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -273,7 +273,7 @@ return array(
 								FROM "mshop_customer_list_type" as mcuslity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mcuslity."id"
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 							) AS LIST
 						',
@@ -284,7 +284,7 @@ return array(
 								FROM "mshop_customer_list_type" as mcuslity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mcuslity."id"
 								LIMIT 10000 OFFSET 0
 							) AS LIST
 						'
@@ -394,7 +394,7 @@ return array(
 							FROM "mshop_customer_list" AS mcusli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mcusli."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -405,7 +405,7 @@ return array(
 							FROM "mshop_customer_list" AS mcusli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mcusli."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -485,7 +485,7 @@ return array(
 								FROM "mshop_customer_property_type" mcusprty
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mcusprty."id"
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 							) AS list
 						',
@@ -496,7 +496,7 @@ return array(
 								FROM "mshop_customer_property_type" mcusprty
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mcusprty."id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -574,7 +574,7 @@ return array(
 							FROM "mshop_customer_property" AS mcuspr
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mcuspr."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -585,7 +585,7 @@ return array(
 							FROM "mshop_customer_property" AS mcuspr
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mcuspr."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -696,7 +696,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mcus."id"
-						ORDER BY "id"
+						ORDER BY mcus."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
@@ -708,7 +708,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mcus."id"
-						ORDER BY "id"
+						ORDER BY mcus."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

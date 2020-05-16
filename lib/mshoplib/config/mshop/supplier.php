@@ -96,7 +96,7 @@ return array(
 							FROM "mshop_supplier_address" AS msupad
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY msupad."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -107,7 +107,7 @@ return array(
 							FROM "mshop_supplier_address" AS msupad
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY msupad."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -187,7 +187,7 @@ return array(
 								FROM "mshop_supplier_list_type" AS msuplity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY msuplity."id"
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 							) AS list
 						',
@@ -198,7 +198,7 @@ return array(
 								FROM "mshop_supplier_list_type" AS msuplity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY msuplity."id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -308,7 +308,7 @@ return array(
 							FROM "mshop_supplier_list" AS msupli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY msupli."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -319,7 +319,7 @@ return array(
 							FROM "mshop_supplier_list" AS msupli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY msupli."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -396,7 +396,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY msup."id"
-						ORDER BY "id"
+						ORDER BY msup."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
@@ -408,7 +408,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY msup."id"
-						ORDER BY "id"
+						ORDER BY msup."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

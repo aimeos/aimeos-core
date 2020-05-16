@@ -47,13 +47,15 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT "id", "value", "expire" FROM "madmin_cache"
+					SELECT "id", "value", "expire"
+					FROM "madmin_cache"
 					WHERE :cond
 					ORDER BY "id"
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT "id", "value", "expire" FROM "madmin_cache"
+					SELECT "id", "value", "expire"
+					FROM "madmin_cache"
 					WHERE :cond
 					ORDER BY "id"
 					LIMIT :size OFFSET :start

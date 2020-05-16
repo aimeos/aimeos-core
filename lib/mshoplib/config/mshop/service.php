@@ -72,7 +72,7 @@ return array(
 								FROM "mshop_service_list_type" as mserlity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mserlity."id"
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 							) AS list
 						',
@@ -83,7 +83,7 @@ return array(
 								FROM "mshop_service_list_type" as mserlity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mserlity."id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -193,7 +193,7 @@ return array(
 							FROM "mshop_service_list" AS mserli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mserli."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -204,7 +204,7 @@ return array(
 							FROM "mshop_service_list" AS mserli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mserli."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -283,7 +283,7 @@ return array(
 							FROM "mshop_service_type" AS mserty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mserty."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -294,7 +294,7 @@ return array(
 							FROM "mshop_service_type" AS mserty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mserty."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -379,7 +379,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mser."id"
-						ORDER BY "id"
+						ORDER BY mser."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
@@ -391,7 +391,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mser."id"
-						ORDER BY "id"
+						ORDER BY mser."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

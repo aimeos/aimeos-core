@@ -73,7 +73,7 @@ return array(
 							FROM "mshop_coupon_code" AS mcouco
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mcouco."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -84,7 +84,7 @@ return array(
 							FROM "mshop_coupon_code" AS mcouco
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mcouco."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -174,7 +174,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mcou."id"
-						ORDER BY "id"
+						ORDER BY mcou."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
@@ -186,7 +186,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mcou."id"
-						ORDER BY "id"
+						ORDER BY mcou."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

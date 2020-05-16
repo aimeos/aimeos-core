@@ -72,7 +72,7 @@ return array(
 								FROM "mshop_media_list_type" AS mmedlity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mmedlity."id"
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 							) AS list
 						',
@@ -83,7 +83,7 @@ return array(
 								FROM "mshop_media_list_type" AS mmedlity
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mmedlity."id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -193,7 +193,7 @@ return array(
 							FROM "mshop_media_list" AS mmedli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mmedli."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -204,7 +204,7 @@ return array(
 							FROM "mshop_media_list" AS mmedli
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mmedli."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -284,7 +284,7 @@ return array(
 								FROM "mshop_media_property_type" mmedprty
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mmedprty."id"
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 							) AS list
 						',
@@ -295,7 +295,7 @@ return array(
 								FROM "mshop_media_property_type" mmedprty
 								:joins
 								WHERE :cond
-								ORDER BY "id"
+								ORDER BY mmedprty."id"
 								LIMIT 10000 OFFSET 0
 							) AS list
 						'
@@ -373,7 +373,7 @@ return array(
 							FROM "mshop_media_property" AS mmedpr
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mmedpr."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -384,7 +384,7 @@ return array(
 							FROM "mshop_media_property" AS mmedpr
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mmedpr."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -463,7 +463,7 @@ return array(
 							FROM "mshop_media_type" mmedty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mmedty."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -474,7 +474,7 @@ return array(
 							FROM "mshop_media_type" mmedty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mmedty."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -559,7 +559,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mmed."id"
-						ORDER BY "id"
+						ORDER BY mmed."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
@@ -571,7 +571,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mmed."id"
-						ORDER BY "id"
+						ORDER BY mmed."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

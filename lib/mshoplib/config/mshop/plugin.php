@@ -78,7 +78,7 @@ return array(
 							FROM "mshop_plugin_type" mpluty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mpluty."id"
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 						) AS list
 					',
@@ -89,7 +89,7 @@ return array(
 							FROM "mshop_plugin_type" mpluty
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							ORDER BY mpluty."id"
 							LIMIT 10000 OFFSET 0
 						) AS list
 					'
@@ -169,7 +169,7 @@ return array(
 						FROM "mshop_plugin" mplu
 						:joins
 						WHERE :cond
-						ORDER BY "id"
+						ORDER BY mplu."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
@@ -180,7 +180,7 @@ return array(
 						FROM "mshop_plugin" mplu
 						:joins
 						WHERE :cond
-						ORDER BY "id"
+						ORDER BY mplu."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

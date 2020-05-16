@@ -103,7 +103,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mord."id"
-						ORDER BY "id"
+						ORDER BY mord."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
@@ -115,7 +115,7 @@ return array(
 						:joins
 						WHERE :cond
 						GROUP BY mord."id"
-						ORDER BY "id"
+						ORDER BY mord."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'
