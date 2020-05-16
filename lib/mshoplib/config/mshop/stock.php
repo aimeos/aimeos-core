@@ -37,7 +37,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mstoty."id" AS "stock.type.id", mstoty."siteid" AS "stock.type.siteid",
 							mstoty."code" AS "stock.type.code", mstoty."domain" AS "stock.type.domain",
 							mstoty."label" AS "stock.type.label", mstoty."status" AS "stock.type.status",
@@ -50,7 +50,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mstoty."id" AS "stock.type.id", mstoty."siteid" AS "stock.type.siteid",
 							mstoty."code" AS "stock.type.code", mstoty."domain" AS "stock.type.domain",
 							mstoty."label" AS "stock.type.label", mstoty."status" AS "stock.type.status",
@@ -67,7 +67,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mstoty."id"
+							SELECT mstoty."id"
 							FROM "mshop_stock_type" mstoty
 							:joins
 							WHERE :cond
@@ -78,7 +78,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mstoty."id"
+							SELECT mstoty."id"
 							FROM "mshop_stock_type" mstoty
 							:joins
 							WHERE :cond
@@ -126,7 +126,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						msto."id" AS "stock.id", msto."productcode" AS "stock.productcode",
 						msto."siteid" AS "stock.siteid", msto."type" AS "stock.type",
 						msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.backdate",
@@ -139,7 +139,7 @@ return array(
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						msto."id" AS "stock.id", msto."productcode" AS "stock.productcode",
 						msto."siteid" AS "stock.siteid", msto."type" AS "stock.type",
 						msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.backdate",
@@ -156,7 +156,7 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT msto."id"
+						SELECT msto."id"
 						FROM "mshop_stock" AS msto
 						:joins
 						WHERE :cond
@@ -167,7 +167,7 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT msto."id"
+						SELECT msto."id"
 						FROM "mshop_stock" AS msto
 						:joins
 						WHERE :cond

@@ -44,7 +44,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mcusad."id" AS "customer.address.id", mcusad."siteid" AS "customer.address.siteid",
 							mcusad."parentid" AS "customer.address.parentid", mcusad."pos" AS "customer.address.position",
 							mcusad."company" AS "customer.address.company", mcusad."vatid" AS "customer.address.vatid",
@@ -66,7 +66,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mcusad."id" AS "customer.address.id", mcusad."siteid" AS "customer.address.siteid",
 							mcusad."parentid" AS "customer.address.parentid", mcusad."pos" AS "customer.address.position",
 							mcusad."company" AS "customer.address.company", mcusad."vatid" AS "customer.address.vatid",
@@ -92,7 +92,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mcusad."id"
+							SELECT mcusad."id"
 							FROM "mshop_customer_address" AS mcusad
 							:joins
 							WHERE :cond
@@ -103,7 +103,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mcusad."id"
+							SELECT mcusad."id"
 							FROM "mshop_customer_address" AS mcusad
 							:joins
 							WHERE :cond
@@ -150,7 +150,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mcusgr."id" AS "customer.group.id", mcusgr."siteid" AS "customer.group.siteid",
 							mcusgr."code" AS "customer.group.code", mcusgr."label" AS "customer.group.label",
 							mcusgr."mtime" AS "customer.group.mtime", mcusgr."editor" AS "customer.group.editor",
@@ -162,7 +162,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mcusgr."id" AS "customer.group.id", mcusgr."siteid" AS "customer.group.siteid",
 							mcusgr."code" AS "customer.group.code", mcusgr."label" AS "customer.group.label",
 							mcusgr."mtime" AS "customer.group.mtime", mcusgr."editor" AS "customer.group.editor",
@@ -178,7 +178,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mcusgr."id"
+							SELECT mcusgr."id"
 							FROM "mshop_customer_group" AS mcusgr
 							:joins
 							WHERE :cond
@@ -189,7 +189,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mcusgr."id"
+							SELECT mcusgr."id"
 							FROM "mshop_customer_group" AS mcusgr
 							:joins
 							WHERE :cond
@@ -239,7 +239,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mcuslity."id" AS "customer.lists.type.id", mcuslity."siteid" AS "customer.lists.type.siteid",
 								mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
 								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
@@ -252,7 +252,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mcuslity."id" AS "customer.lists.type.id", mcuslity."siteid" AS "customer.lists.type.siteid",
 								mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
 								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
@@ -269,7 +269,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mcuslity."id"
+								SELECT mcuslity."id"
 								FROM "mshop_customer_list_type" as mcuslity
 								:joins
 								WHERE :cond
@@ -280,7 +280,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mcuslity."id"
+								SELECT mcuslity."id"
 								FROM "mshop_customer_list_type" as mcuslity
 								:joins
 								WHERE :cond
@@ -367,11 +367,6 @@ return array(
 						FROM "mshop_customer_list" AS mcusli
 						:joins
 						WHERE :cond
-						GROUP BY :columns
-							mcusli."id", mcusli."parentid", mcusli."siteid", mcusli."type",
-							mcusli."domain", mcusli."refid", mcusli."start", mcusli."end",
-							mcusli."config", mcusli."pos", mcusli."status", mcusli."mtime",
-							mcusli."editor", mcusli."ctime"
 						ORDER BY :order
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
@@ -387,11 +382,6 @@ return array(
 						FROM "mshop_customer_list" AS mcusli
 						:joins
 						WHERE :cond
-						GROUP BY :columns
-							mcusli."id", mcusli."parentid", mcusli."siteid", mcusli."type",
-							mcusli."domain", mcusli."refid", mcusli."start", mcusli."end",
-							mcusli."config", mcusli."pos", mcusli."status", mcusli."mtime",
-							mcusli."editor", mcusli."ctime"
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
@@ -400,7 +390,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mcusli."id"
+							SELECT mcusli."id"
 							FROM "mshop_customer_list" AS mcusli
 							:joins
 							WHERE :cond
@@ -411,7 +401,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mcusli."id"
+							SELECT mcusli."id"
 							FROM "mshop_customer_list" AS mcusli
 							:joins
 							WHERE :cond
@@ -461,7 +451,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mcusprty."id" AS "customer.property.type.id", mcusprty."siteid" AS "customer.property.type.siteid",
 								mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
 								mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
@@ -474,7 +464,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mcusprty."id" AS "customer.property.type.id", mcusprty."siteid" AS "customer.property.type.siteid",
 								mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
 								mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
@@ -491,7 +481,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mcusprty."id"
+								SELECT mcusprty."id"
 								FROM "mshop_customer_property_type" mcusprty
 								:joins
 								WHERE :cond
@@ -502,7 +492,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mcusprty."id"
+								SELECT mcusprty."id"
 								FROM "mshop_customer_property_type" mcusprty
 								:joins
 								WHERE :cond
@@ -550,7 +540,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mcuspr."id" AS "customer.property.id", mcuspr."parentid" AS "customer.property.parentid",
 							mcuspr."siteid" AS "customer.property.siteid", mcuspr."type" AS "customer.property.type",
 							mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
@@ -563,7 +553,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mcuspr."id" AS "customer.property.id", mcuspr."parentid" AS "customer.property.parentid",
 							mcuspr."siteid" AS "customer.property.siteid", mcuspr."type" AS "customer.property.type",
 							mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
@@ -580,7 +570,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mcuspr."id"
+							SELECT mcuspr."id"
 							FROM "mshop_customer_property" AS mcuspr
 							:joins
 							WHERE :cond
@@ -591,7 +581,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mcuspr."id"
+							SELECT mcuspr."id"
 							FROM "mshop_customer_property" AS mcuspr
 							:joins
 							WHERE :cond
@@ -647,7 +637,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
 						mcus."label" AS "customer.label", mcus."code" AS "customer.code",
 						mcus."company" AS "customer.company", mcus."vatid" AS "customer.vatid",
@@ -667,11 +657,12 @@ return array(
 					FROM "mshop_customer" AS mcus
 					:joins
 					WHERE :cond
+					GROUP BY :group mcus."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
 						mcus."label" AS "customer.label", mcus."code" AS "customer.code",
 						mcus."company" AS "customer.company", mcus."vatid" AS "customer.vatid",
@@ -691,6 +682,7 @@ return array(
 					FROM "mshop_customer" AS mcus
 					:joins
 					WHERE :cond
+					GROUP BY :group mcus."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
@@ -699,10 +691,11 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mcus."id"
+						SELECT mcus."id"
 						FROM "mshop_customer" AS mcus
 						:joins
 						WHERE :cond
+						GROUP BY mcus."id"
 						ORDER BY "id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
@@ -710,10 +703,11 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mcus."id"
+						SELECT mcus."id"
 						FROM "mshop_customer" AS mcus
 						:joins
 						WHERE :cond
+						GROUP BY mcus."id"
 						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list

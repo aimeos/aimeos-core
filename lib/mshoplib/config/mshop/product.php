@@ -38,7 +38,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mprolity."id" AS "product.lists.type.id", mprolity."siteid" AS "product.lists.type.siteid",
 								mprolity."code" AS "product.lists.type.code", mprolity."domain" AS "product.lists.type.domain",
 								mprolity."label" AS "product.lists.type.label", mprolity."status" AS "product.lists.type.status",
@@ -51,7 +51,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mprolity."id" AS "product.lists.type.id", mprolity."siteid" AS "product.lists.type.siteid",
 								mprolity."code" AS "product.lists.type.code", mprolity."domain" AS "product.lists.type.domain",
 								mprolity."label" AS "product.lists.type.label", mprolity."status" AS "product.lists.type.status",
@@ -68,7 +68,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mprolity."id"
+								SELECT mprolity."id"
 								FROM "mshop_product_list_type" AS mprolity
 								:joins
 								WHERE :cond
@@ -79,7 +79,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mprolity."id"
+								SELECT mprolity."id"
 								FROM "mshop_product_list_type" AS mprolity
 								:joins
 								WHERE :cond
@@ -104,10 +104,11 @@ return array(
 					'ansi' => '
 						SELECT "key", COUNT("id") AS "count"
 						FROM (
-							SELECT DISTINCT :key AS "key", mproli."id" AS "id"
+							SELECT :key AS "key", mproli."id" AS "id"
 							FROM "mshop_product_list" AS mproli
 							:joins
 							WHERE :cond
+							GROUP BY :key, mproli."id"
 							ORDER BY :order
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						) AS list
@@ -116,10 +117,11 @@ return array(
 					'mysql' => '
 						SELECT "key", COUNT("id") AS "count"
 						FROM (
-							SELECT DISTINCT :key AS "key", mproli."id" AS "id"
+							SELECT :key AS "key", mproli."id" AS "id"
 							FROM "mshop_product_list" AS mproli
 							:joins
 							WHERE :cond
+							GROUP BY :key, mproli."id"
 							ORDER BY :order
 							LIMIT :size OFFSET :start
 						) AS list
@@ -164,11 +166,6 @@ return array(
 						FROM "mshop_product_list" AS mproli
 						:joins
 						WHERE :cond
-						GROUP BY :columns
-							mproli."id", mproli."parentid", mproli."siteid", mproli."type",
-							mproli."domain", mproli."refid", mproli."start", mproli."end",
-							mproli."config", mproli."pos", mproli."status", mproli."mtime",
-							mproli."editor", mproli."ctime"
 						ORDER BY :order
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
@@ -184,11 +181,6 @@ return array(
 						FROM "mshop_product_list" AS mproli
 						:joins
 						WHERE :cond
-						GROUP BY :columns
-							mproli."id", mproli."parentid", mproli."siteid", mproli."type",
-							mproli."domain", mproli."refid", mproli."start", mproli."end",
-							mproli."config", mproli."pos", mproli."status", mproli."mtime",
-							mproli."editor", mproli."ctime"
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
@@ -197,7 +189,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mproli."id"
+							SELECT mproli."id"
 							FROM "mshop_product_list" AS mproli
 							:joins
 							WHERE :cond
@@ -208,7 +200,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mproli."id"
+							SELECT mproli."id"
 							FROM "mshop_product_list" AS mproli
 							:joins
 							WHERE :cond
@@ -258,7 +250,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mproprty."id" AS "product.property.type.id", mproprty."siteid" AS "product.property.type.siteid",
 								mproprty."code" AS "product.property.type.code", mproprty."domain" AS "product.property.type.domain",
 								mproprty."label" AS "product.property.type.label", mproprty."status" AS "product.property.type.status",
@@ -271,7 +263,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mproprty."id" AS "product.property.type.id", mproprty."siteid" AS "product.property.type.siteid",
 								mproprty."code" AS "product.property.type.code", mproprty."domain" AS "product.property.type.domain",
 								mproprty."label" AS "product.property.type.label", mproprty."status" AS "product.property.type.status",
@@ -288,7 +280,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mproprty."id"
+								SELECT mproprty."id"
 								FROM "mshop_product_property_type" mproprty
 								:joins
 								WHERE :cond
@@ -299,7 +291,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mproprty."id"
+								SELECT mproprty."id"
 								FROM "mshop_product_property_type" mproprty
 								:joins
 								WHERE :cond
@@ -347,7 +339,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mpropr."id" AS "product.property.id", mpropr."parentid" AS "product.property.parentid",
 							mpropr."siteid" AS "product.property.siteid", mpropr."type" AS "product.property.type",
 							mpropr."langid" AS "product.property.languageid", mpropr."value" AS "product.property.value",
@@ -360,7 +352,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mpropr."id" AS "product.property.id", mpropr."parentid" AS "product.property.parentid",
 							mpropr."siteid" AS "product.property.siteid", mpropr."type" AS "product.property.type",
 							mpropr."langid" AS "product.property.languageid", mpropr."value" AS "product.property.value",
@@ -377,7 +369,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpropr."id"
+							SELECT mpropr."id"
 							FROM "mshop_product_property" AS mpropr
 							:joins
 							WHERE :cond
@@ -388,7 +380,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpropr."id"
+							SELECT mpropr."id"
 							FROM "mshop_product_property" AS mpropr
 							:joins
 							WHERE :cond
@@ -437,7 +429,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mproty."id" AS "product.type.id", mproty."siteid" AS "product.type.siteid",
 							mproty."code" AS "product.type.code", mproty."domain" AS "product.type.domain",
 							mproty."label" AS "product.type.label", mproty."status" AS "product.type.status",
@@ -450,7 +442,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mproty."id" AS "product.type.id", mproty."siteid" AS "product.type.siteid",
 							mproty."code" AS "product.type.code", mproty."domain" AS "product.type.domain",
 							mproty."label" AS "product.type.label", mproty."status" AS "product.type.status",
@@ -467,7 +459,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mproty."id"
+							SELECT mproty."id"
 							FROM "mshop_product_type" AS mproty
 							:joins
 							WHERE :cond
@@ -478,7 +470,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mproty."id"
+							SELECT mproty."id"
 							FROM "mshop_product_type" AS mproty
 							:joins
 							WHERE :cond
@@ -526,7 +518,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
 						mpro."type" AS "product.type", mpro."code" AS "product.code",
 						mpro."label" AS "product.label", mpro."url" AS "product.url",
@@ -538,11 +530,12 @@ return array(
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
+					GROUP BY :group mpro."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
 						mpro."type" AS "product.type", mpro."code" AS "product.code",
 						mpro."label" AS "product.label", mpro."url" AS "product.url",
@@ -554,6 +547,7 @@ return array(
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
+					GROUP BY :group mpro."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
@@ -562,10 +556,11 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mpro."id"
+						SELECT mpro."id"
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
+						GROUP BY mpro."id"
 						ORDER BY "id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
@@ -573,10 +568,11 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mpro."id"
+						SELECT mpro."id"
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
+						GROUP BY mpro."id"
 						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list

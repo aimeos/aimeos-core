@@ -34,7 +34,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						malog."id" AS "log.id", malog."siteid" AS "log.siteid",
 						malog."facility" AS "log.facility", malog."timestamp" AS "log.timestamp",
 						malog."priority" AS "log.priority", malog."message" AS "log.message",
@@ -46,7 +46,7 @@ return array(
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						malog."id" AS "log.id", malog."siteid" AS "log.siteid",
 						malog."facility" AS "log.facility", malog."timestamp" AS "log.timestamp",
 						malog."priority" AS "log.priority", malog."message" AS "log.message",
@@ -62,7 +62,7 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM(
-						SELECT DISTINCT malog."id"
+						SELECT malog."id"
 						FROM "madmin_log" AS malog
 						:joins
 						WHERE :cond
@@ -73,7 +73,7 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM(
-						SELECT DISTINCT malog."id"
+						SELECT malog."id"
 						FROM "madmin_log" AS malog
 						:joins
 						WHERE :cond

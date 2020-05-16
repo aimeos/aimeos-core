@@ -63,7 +63,7 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM(
-						SELECT DISTINCT "id"
+						SELECT "id"
 						FROM "madmin_cache"
 						WHERE :cond
 						ORDER BY "id"
@@ -73,7 +73,7 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM(
-						SELECT DISTINCT "id"
+						SELECT "id"
 						FROM "madmin_cache"
 						WHERE :cond
 						ORDER BY "id"

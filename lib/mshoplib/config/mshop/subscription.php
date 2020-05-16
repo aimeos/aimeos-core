@@ -73,10 +73,7 @@ return array(
 					FROM "mshop_subscription" AS mord
 					:joins
 					WHERE :cond
-					GROUP BY :columns
-						mord."id", mord."baseid", mord."ordprodid", mord."siteid", mord."next", mord."end",
-						mord."interval", mord."reason", mord."productid", mord."period", mord."status",
-						mord."ctime", mord."mtime", mord."editor"
+					GROUP BY :group mord."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
@@ -92,10 +89,7 @@ return array(
 					FROM "mshop_subscription" AS mord
 					:joins
 					WHERE :cond
-					GROUP BY :columns
-						mord."id", mord."baseid", mord."ordprodid", mord."siteid", mord."next", mord."end",
-						mord."interval", mord."reason", mord."productid", mord."period", mord."status",
-						mord."ctime", mord."mtime", mord."editor"
+					GROUP BY :group mord."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
@@ -104,10 +98,11 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mord."id"
+						SELECT mord."id"
 						FROM "mshop_subscription" AS mord
 						:joins
 						WHERE :cond
+						GROUP BY mord."id"
 						ORDER BY "id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
@@ -115,10 +110,11 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mord."id"
+						SELECT mord."id"
 						FROM "mshop_subscription" AS mord
 						:joins
 						WHERE :cond
+						GROUP BY mord."id"
 						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list

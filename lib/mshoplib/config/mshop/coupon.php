@@ -37,7 +37,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mcouco."id" AS "coupon.code.id", mcouco."parentid" AS "coupon.code.parentid",
 							mcouco."siteid" AS "coupon.code.siteid", mcouco."code" AS "coupon.code.code",
 							mcouco."start" AS "coupon.code.datestart", mcouco."end" AS "coupon.code.dateend",
@@ -51,7 +51,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mcouco."id" AS "coupon.code.id", mcouco."parentid" AS "coupon.code.parentid",
 							mcouco."siteid" AS "coupon.code.siteid", mcouco."code" AS "coupon.code.code",
 							mcouco."start" AS "coupon.code.datestart", mcouco."end" AS "coupon.code.dateend",
@@ -69,7 +69,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mcouco."id"
+							SELECT mcouco."id"
 							FROM "mshop_coupon_code" AS mcouco
 							:joins
 							WHERE :cond
@@ -80,7 +80,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mcouco."id"
+							SELECT mcouco."id"
 							FROM "mshop_coupon_code" AS mcouco
 							:joins
 							WHERE :cond
@@ -135,7 +135,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mcou."id" AS "coupon.id", mcou."siteid" AS "coupon.siteid",
 						mcou."label" AS "coupon.label", mcou."provider" AS "coupon.provider",
 						mcou."start" AS "coupon.datestart", mcou."end" AS "coupon.dateend",
@@ -145,11 +145,12 @@ return array(
 					FROM "mshop_coupon" AS mcou
 					:joins
 					WHERE :cond
+					GROUP BY :group mcou."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mcou."id" AS "coupon.id", mcou."siteid" AS "coupon.siteid",
 						mcou."label" AS "coupon.label", mcou."provider" AS "coupon.provider",
 						mcou."start" AS "coupon.datestart", mcou."end" AS "coupon.dateend",
@@ -159,6 +160,7 @@ return array(
 					FROM "mshop_coupon" AS mcou
 					:joins
 					WHERE :cond
+					GROUP BY :group mcou."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
@@ -167,10 +169,11 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mcou."id"
+						SELECT mcou."id"
 						FROM "mshop_coupon" AS mcou
 						:joins
 						WHERE :cond
+						GROUP BY mcou."id"
 						ORDER BY "id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
@@ -178,10 +181,11 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mcou."id"
+						SELECT mcou."id"
 						FROM "mshop_coupon" AS mcou
 						:joins
 						WHERE :cond
+						GROUP BY mcou."id"
 						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list

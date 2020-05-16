@@ -38,7 +38,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mmedlity."id" AS "media.lists.type.id", mmedlity."siteid" AS "media.lists.type.siteid",
 								mmedlity."code" AS "media.lists.type.code", mmedlity."domain" AS "media.lists.type.domain",
 								mmedlity."label" AS "media.lists.type.label", mmedlity."status" AS "media.lists.type.status",
@@ -51,7 +51,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mmedlity."id" AS "media.lists.type.id", mmedlity."siteid" AS "media.lists.type.siteid",
 								mmedlity."code" AS "media.lists.type.code", mmedlity."domain" AS "media.lists.type.domain",
 								mmedlity."label" AS "media.lists.type.label", mmedlity."status" AS "media.lists.type.status",
@@ -68,7 +68,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM(
-								SELECT DISTINCT mmedlity."id"
+								SELECT mmedlity."id"
 								FROM "mshop_media_list_type" AS mmedlity
 								:joins
 								WHERE :cond
@@ -79,7 +79,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM(
-								SELECT DISTINCT mmedlity."id"
+								SELECT mmedlity."id"
 								FROM "mshop_media_list_type" AS mmedlity
 								:joins
 								WHERE :cond
@@ -166,11 +166,6 @@ return array(
 						FROM "mshop_media_list" AS mmedli
 						:joins
 						WHERE :cond
-						GROUP BY :columns
-							mmedli."id", mmedli."parentid", mmedli."siteid", mmedli."type",
-							mmedli."domain", mmedli."refid", mmedli."start", mmedli."end",
-							mmedli."config", mmedli."pos", mmedli."status", mmedli."mtime",
-							mmedli."editor", mmedli."ctime"
 						ORDER BY :order
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
@@ -186,11 +181,6 @@ return array(
 						FROM "mshop_media_list" AS mmedli
 						:joins
 						WHERE :cond
-						GROUP BY :columns
-							mmedli."id", mmedli."parentid", mmedli."siteid", mmedli."type",
-							mmedli."domain", mmedli."refid", mmedli."start", mmedli."end",
-							mmedli."config", mmedli."pos", mmedli."status", mmedli."mtime",
-							mmedli."editor", mmedli."ctime"
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
@@ -199,7 +189,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM(
-							SELECT DISTINCT mmedli."id"
+							SELECT mmedli."id"
 							FROM "mshop_media_list" AS mmedli
 							:joins
 							WHERE :cond
@@ -210,7 +200,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM(
-							SELECT DISTINCT mmedli."id"
+							SELECT mmedli."id"
 							FROM "mshop_media_list" AS mmedli
 							:joins
 							WHERE :cond
@@ -260,7 +250,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mmedprty."id" AS "media.property.type.id", mmedprty."siteid" AS "media.property.type.siteid",
 								mmedprty."code" AS "media.property.type.code", mmedprty."domain" AS "media.property.type.domain",
 								mmedprty."label" AS "media.property.type.label", mmedprty."status" AS "media.property.type.status",
@@ -273,7 +263,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mmedprty."id" AS "media.property.type.id", mmedprty."siteid" AS "media.property.type.siteid",
 								mmedprty."code" AS "media.property.type.code", mmedprty."domain" AS "media.property.type.domain",
 								mmedprty."label" AS "media.property.type.label", mmedprty."status" AS "media.property.type.status",
@@ -290,7 +280,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mmedprty."id"
+								SELECT mmedprty."id"
 								FROM "mshop_media_property_type" mmedprty
 								:joins
 								WHERE :cond
@@ -301,7 +291,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mmedprty."id"
+								SELECT mmedprty."id"
 								FROM "mshop_media_property_type" mmedprty
 								:joins
 								WHERE :cond
@@ -349,7 +339,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mmedpr."id" AS "media.property.id", mmedpr."parentid" AS "media.property.parentid",
 							mmedpr."siteid" AS "media.property.siteid", mmedpr."type" AS "media.property.type",
 							mmedpr."langid" AS "media.property.languageid", mmedpr."value" AS "media.property.value",
@@ -362,7 +352,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mmedpr."id" AS "media.property.id", mmedpr."parentid" AS "media.property.parentid",
 							mmedpr."siteid" AS "media.property.siteid", mmedpr."type" AS "media.property.type",
 							mmedpr."langid" AS "media.property.languageid", mmedpr."value" AS "media.property.value",
@@ -379,7 +369,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mmedpr."id"
+							SELECT mmedpr."id"
 							FROM "mshop_media_property" AS mmedpr
 							:joins
 							WHERE :cond
@@ -390,7 +380,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mmedpr."id"
+							SELECT mmedpr."id"
 							FROM "mshop_media_property" AS mmedpr
 							:joins
 							WHERE :cond
@@ -439,7 +429,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mmedty."id" AS "media.type.id", mmedty."siteid" AS "media.type.siteid",
 							mmedty."code" AS "media.type.code", mmedty."domain" AS "media.type.domain",
 							mmedty."label" AS "media.type.label", mmedty."status" AS "media.type.status",
@@ -452,7 +442,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mmedty."id" AS "media.type.id", mmedty."siteid" AS "media.type.siteid",
 							mmedty."code" AS "media.type.code", mmedty."domain" AS "media.type.domain",
 							mmedty."label" AS "media.type.label", mmedty."status" AS "media.type.status",
@@ -469,7 +459,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM(
-							SELECT DISTINCT mmedty."id"
+							SELECT mmedty."id"
 							FROM "mshop_media_type" mmedty
 							:joins
 							WHERE :cond
@@ -480,7 +470,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM(
-							SELECT DISTINCT mmedty."id"
+							SELECT mmedty."id"
 							FROM "mshop_media_type" mmedty
 							:joins
 							WHERE :cond
@@ -528,7 +518,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mmed."id" AS "media.id", mmed."siteid" AS "media.siteid",
 						mmed."langid" AS "media.languageid", mmed."type" AS "media.type",
 						mmed."link" AS "media.url", mmed."label" AS "media.label",
@@ -539,11 +529,12 @@ return array(
 					FROM "mshop_media" AS mmed
 					:joins
 					WHERE :cond
+					GROUP BY :group mmed."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mmed."id" AS "media.id", mmed."siteid" AS "media.siteid",
 						mmed."langid" AS "media.languageid", mmed."type" AS "media.type",
 						mmed."link" AS "media.url", mmed."label" AS "media.label",
@@ -554,6 +545,7 @@ return array(
 					FROM "mshop_media" AS mmed
 					:joins
 					WHERE :cond
+					GROUP BY :group mmed."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
@@ -562,10 +554,11 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mmed."id"
+						SELECT mmed."id"
 						FROM "mshop_media" AS mmed
 						:joins
 						WHERE :cond
+						GROUP BY mmed."id"
 						ORDER BY "id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
@@ -573,10 +566,11 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mmed."id"
+						SELECT mmed."id"
 						FROM "mshop_media" AS mmed
 						:joins
 						WHERE :cond
+						GROUP BY mmed."id"
 						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list

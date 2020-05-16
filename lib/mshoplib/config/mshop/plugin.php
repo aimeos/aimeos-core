@@ -44,7 +44,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mpluty."id" AS "plugin.type.id", mpluty."siteid" AS "plugin.type.siteid",
 							mpluty."code" AS "plugin.type.code", mpluty."domain" AS "plugin.type.domain",
 							mpluty."label" AS "plugin.type.label", mpluty."status" AS "plugin.type.status",
@@ -57,7 +57,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mpluty."id" AS "plugin.type.id", mpluty."siteid" AS "plugin.type.siteid",
 							mpluty."code" AS "plugin.type.code", mpluty."domain" AS "plugin.type.domain",
 							mpluty."label" AS "plugin.type.label", mpluty."status" AS "plugin.type.status",
@@ -74,7 +74,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpluty."id"
+							SELECT mpluty."id"
 							FROM "mshop_plugin_type" mpluty
 							:joins
 							WHERE :cond
@@ -85,7 +85,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpluty."id"
+							SELECT mpluty."id"
 							FROM "mshop_plugin_type" mpluty
 							:joins
 							WHERE :cond
@@ -133,7 +133,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mplu."id" AS "plugin.id", mplu."siteid" AS "plugin.siteid",
 						mplu."type" AS "plugin.type", mplu."label" AS "plugin.label",
 						mplu."provider" AS "plugin.provider", mplu."config" AS "plugin.config",
@@ -147,7 +147,7 @@ return array(
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mplu."id" AS "plugin.id", mplu."siteid" AS "plugin.siteid",
 						mplu."type" AS "plugin.type", mplu."label" AS "plugin.label",
 						mplu."provider" AS "plugin.provider", mplu."config" AS "plugin.config",
@@ -165,7 +165,7 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mplu."id"
+						SELECT mplu."id"
 						FROM "mshop_plugin" mplu
 						:joins
 						WHERE :cond
@@ -176,7 +176,7 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mplu."id"
+						SELECT mplu."id"
 						FROM "mshop_plugin" mplu
 						:joins
 						WHERE :cond

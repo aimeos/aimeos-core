@@ -38,7 +38,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mtexlity."id" AS "text.lists.type.id", mtexlity."siteid" AS "text.lists.type.siteid",
 								mtexlity."code" AS "text.lists.type.code", mtexlity."domain" AS "text.lists.type.domain",
 								mtexlity."label" AS "text.lists.type.label", mtexlity."status" AS "text.lists.type.status",
@@ -51,7 +51,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mtexlity."id" AS "text.lists.type.id", mtexlity."siteid" AS "text.lists.type.siteid",
 								mtexlity."code" AS "text.lists.type.code", mtexlity."domain" AS "text.lists.type.domain",
 								mtexlity."label" AS "text.lists.type.label", mtexlity."status" AS "text.lists.type.status",
@@ -68,7 +68,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mtexlity."id"
+								SELECT mtexlity."id"
 								FROM "mshop_text_list_type" as mtexlity
 								:joins
 								WHERE :cond
@@ -79,7 +79,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mtexlity."id"
+								SELECT mtexlity."id"
 								FROM "mshop_text_list_type" as mtexlity
 								:joins
 								WHERE :cond
@@ -155,7 +155,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mtexli."id" AS "text.lists.id", mtexli."parentid" AS "text.lists.parentid",
 							mtexli."siteid" AS "text.lists.siteid", mtexli."type" AS "text.lists.type",
 							mtexli."domain" AS "text.lists.domain", mtexli."refid" AS "text.lists.refid",
@@ -170,7 +170,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mtexli."id" AS "text.lists.id", mtexli."parentid" AS "text.lists.parentid",
 							mtexli."siteid" AS "text.lists.siteid", mtexli."type" AS "text.lists.type",
 							mtexli."domain" AS "text.lists.domain", mtexli."refid" AS "text.lists.refid",
@@ -189,7 +189,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mtexli."id"
+							SELECT mtexli."id"
 							FROM "mshop_text_list" AS mtexli
 							:joins
 							WHERE :cond
@@ -200,7 +200,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mtexli."id"
+							SELECT mtexli."id"
 							FROM "mshop_text_list" AS mtexli
 							:joins
 							WHERE :cond
@@ -249,7 +249,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mtexty."id" AS "text.type.id", mtexty."siteid" AS "text.type.siteid",
 							mtexty."code" AS "text.type.code", mtexty."domain" AS "text.type.domain",
 							mtexty."label" AS "text.type.label", mtexty."status" AS "text.type.status",
@@ -262,7 +262,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mtexty."id" AS "text.type.id", mtexty."siteid" AS "text.type.siteid",
 							mtexty."code" AS "text.type.code", mtexty."domain" AS "text.type.domain",
 							mtexty."label" AS "text.type.label", mtexty."status" AS "text.type.status",
@@ -279,7 +279,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mtexty."id"
+							SELECT mtexty."id"
 							FROM "mshop_text_type" mtexty
 							:joins
 							WHERE :cond
@@ -290,7 +290,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mtexty."id"
+							SELECT mtexty."id"
 							FROM "mshop_text_type" mtexty
 							:joins
 							WHERE :cond
@@ -338,7 +338,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mtex."id" AS "text.id", mtex."siteid" AS "text.siteid",
 						mtex."langid" AS "text.languageid",	mtex."type" AS "text.type",
 						mtex."domain" AS "text.domain", mtex."label" AS "text.label",
@@ -348,11 +348,12 @@ return array(
 					FROM "mshop_text" AS mtex
 					:joins
 					WHERE :cond
+					GROUP BY :group mtex."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mtex."id" AS "text.id", mtex."siteid" AS "text.siteid",
 						mtex."langid" AS "text.languageid",	mtex."type" AS "text.type",
 						mtex."domain" AS "text.domain", mtex."label" AS "text.label",
@@ -362,6 +363,7 @@ return array(
 					FROM "mshop_text" AS mtex
 					:joins
 					WHERE :cond
+					GROUP BY :group mtex."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
@@ -370,10 +372,11 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mtex."id"
+						SELECT mtex."id"
 						FROM "mshop_text" AS mtex
 						:joins
 						WHERE :cond
+						GROUP BY mtex."id"
 						ORDER BY "id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
@@ -381,10 +384,11 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mtex."id"
+						SELECT mtex."id"
 						FROM "mshop_text" AS mtex
 						:joins
 						WHERE :cond
+						GROUP BY mtex."id"
 						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list

@@ -38,7 +38,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mattlity."id" AS "attribute.lists.type.id", mattlity."siteid" AS "attribute.lists.type.siteid",
 								mattlity."code" AS "attribute.lists.type.code", mattlity."domain" AS "attribute.lists.type.domain",
 								mattlity."label" AS "attribute.lists.type.label", mattlity."status" AS "attribute.lists.type.status",
@@ -51,7 +51,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mattlity."id" AS "attribute.lists.type.id", mattlity."siteid" AS "attribute.lists.type.siteid",
 								mattlity."code" AS "attribute.lists.type.code", mattlity."domain" AS "attribute.lists.type.domain",
 								mattlity."label" AS "attribute.lists.type.label", mattlity."status" AS "attribute.lists.type.status",
@@ -68,7 +68,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mattlity."id"
+								SELECT mattlity."id"
 								FROM "mshop_attribute_list_type" AS mattlity
 								:joins
 								WHERE :cond
@@ -79,7 +79,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mattlity."id"
+								SELECT mattlity."id"
 								FROM "mshop_attribute_list_type" AS mattlity
 								:joins
 								WHERE :cond
@@ -166,11 +166,6 @@ return array(
 						FROM "mshop_attribute_list" AS mattli
 						:joins
 						WHERE :cond
-						GROUP BY :columns
-							mattli."id", mattli."siteid", mattli."parentid", mattli."type",
-							mattli."domain", mattli."refid", mattli."start", mattli."end",
-							mattli."config", mattli."pos", mattli."status", mattli."mtime",
-							mattli."ctime", mattli."editor"
 						ORDER BY :order
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
@@ -186,11 +181,6 @@ return array(
 						FROM "mshop_attribute_list" AS mattli
 						:joins
 						WHERE :cond
-						GROUP BY :columns
-							mattli."id", mattli."siteid", mattli."parentid", mattli."type",
-							mattli."domain", mattli."refid", mattli."start", mattli."end",
-							mattli."config", mattli."pos", mattli."status", mattli."mtime",
-							mattli."ctime", mattli."editor"
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
@@ -199,7 +189,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mattli."id"
+							SELECT mattli."id"
 							FROM "mshop_attribute_list" AS mattli
 							:joins
 							WHERE :cond
@@ -210,7 +200,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mattli."id"
+							SELECT mattli."id"
 							FROM "mshop_attribute_list" AS mattli
 							:joins
 							WHERE :cond
@@ -260,7 +250,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mattprty."id" AS "attribute.property.type.id", mattprty."siteid" AS "attribute.property.type.siteid",
 								mattprty."code" AS "attribute.property.type.code", mattprty."domain" AS "attribute.property.type.domain",
 								mattprty."label" AS "attribute.property.type.label", mattprty."status" AS "attribute.property.type.status",
@@ -273,7 +263,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mattprty."id" AS "attribute.property.type.id", mattprty."siteid" AS "attribute.property.type.siteid",
 								mattprty."code" AS "attribute.property.type.code", mattprty."domain" AS "attribute.property.type.domain",
 								mattprty."label" AS "attribute.property.type.label", mattprty."status" AS "attribute.property.type.status",
@@ -290,7 +280,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mattprty."id"
+								SELECT mattprty."id"
 								FROM "mshop_attribute_property_type" mattprty
 								:joins
 								WHERE :cond
@@ -301,7 +291,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mattprty."id"
+								SELECT mattprty."id"
 								FROM "mshop_attribute_property_type" mattprty
 								:joins
 								WHERE :cond
@@ -349,7 +339,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mattpr."id" AS "attribute.property.id", mattpr."parentid" AS "attribute.property.parentid",
 							mattpr."siteid" AS "attribute.property.siteid", mattpr."type" AS "attribute.property.type",
 							mattpr."langid" AS "attribute.property.languageid", mattpr."value" AS "attribute.property.value",
@@ -362,7 +352,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mattpr."id" AS "attribute.property.id", mattpr."parentid" AS "attribute.property.parentid",
 							mattpr."siteid" AS "attribute.property.siteid", mattpr."type" AS "attribute.property.type",
 							mattpr."langid" AS "attribute.property.languageid", mattpr."value" AS "attribute.property.value",
@@ -379,7 +369,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mattpr."id"
+							SELECT mattpr."id"
 							FROM "mshop_attribute_property" AS mattpr
 							:joins
 							WHERE :cond
@@ -390,7 +380,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mattpr."id"
+							SELECT mattpr."id"
 							FROM "mshop_attribute_property" AS mattpr
 							:joins
 							WHERE :cond
@@ -439,7 +429,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mattty."id" AS "attribute.type.id", mattty."siteid" AS "attribute.type.siteid",
 							mattty."code" AS "attribute.type.code", mattty."domain" AS "attribute.type.domain",
 							mattty."label" AS "attribute.type.label", mattty."status" AS "attribute.type.status",
@@ -452,7 +442,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mattty."id" AS "attribute.type.id", mattty."siteid" AS "attribute.type.siteid",
 							mattty."code" AS "attribute.type.code", mattty."domain" AS "attribute.type.domain",
 							mattty."label" AS "attribute.type.label", mattty."status" AS "attribute.type.status",
@@ -469,7 +459,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mattty."id"
+							SELECT mattty."id"
 							FROM "mshop_attribute_type" AS mattty
 							:joins
 							WHERE :cond
@@ -480,7 +470,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mattty."id"
+							SELECT mattty."id"
 							FROM "mshop_attribute_type" AS mattty
 							:joins
 							WHERE :cond
@@ -528,7 +518,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						matt."id" AS "attribute.id", matt."siteid" AS "attribute.siteid",
 						matt."type" AS "attribute.type", matt."domain" AS "attribute.domain",
 						matt."code" AS "attribute.code", matt."status" AS "attribute.status",
@@ -538,11 +528,12 @@ return array(
 					FROM "mshop_attribute" AS matt
 					:joins
 					WHERE :cond
+					GROUP BY :group matt."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						matt."id" AS "attribute.id", matt."siteid" AS "attribute.siteid",
 						matt."type" AS "attribute.type", matt."domain" AS "attribute.domain",
 						matt."code" AS "attribute.code", matt."status" AS "attribute.status",
@@ -552,6 +543,7 @@ return array(
 					FROM "mshop_attribute" AS matt
 					:joins
 					WHERE :cond
+					GROUP BY :group matt."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
@@ -560,22 +552,24 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT matt."id"
+						SELECT matt."id"
 						FROM "mshop_attribute" AS matt
 						:joins
 						WHERE :cond
-						ORDER BY "id"
+						GROUP BY matt."id"
+						ORDER BY matt."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT matt."id"
+						SELECT matt."id"
 						FROM "mshop_attribute" AS matt
 						:joins
 						WHERE :cond
-						ORDER BY "id"
+						GROUP BY matt."id"
+						ORDER BY matt."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				'

@@ -38,7 +38,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mcatlity."id" AS "catalog.lists.type.id", mcatlity."siteid" AS "catalog.lists.type.siteid",
 								mcatlity."code" AS "catalog.lists.type.code", mcatlity."domain" AS "catalog.lists.type.domain",
 								mcatlity."label" AS "catalog.lists.type.label", mcatlity."mtime" AS "catalog.lists.type.mtime",
@@ -51,7 +51,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mcatlity."id" AS "catalog.lists.type.id", mcatlity."siteid" AS "catalog.lists.type.siteid",
 								mcatlity."code" AS "catalog.lists.type.code", mcatlity."domain" AS "catalog.lists.type.domain",
 								mcatlity."label" AS "catalog.lists.type.label", mcatlity."mtime" AS "catalog.lists.type.mtime",
@@ -68,7 +68,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mcatlity."id"
+								SELECT mcatlity."id"
 								FROM "mshop_catalog_list_type" AS mcatlity
 								:joins
 								WHERE :cond
@@ -79,7 +79,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mcatlity."id"
+								SELECT mcatlity."id"
 								FROM "mshop_catalog_list_type" AS mcatlity
 								:joins
 								WHERE :cond
@@ -166,11 +166,6 @@ return array(
 						FROM "mshop_catalog_list" AS mcatli
 						:joins
 						WHERE :cond
-						GROUP BY :columns
-							mcatli."id", mcatli."parentid", mcatli."siteid", mcatli."type",
-							mcatli."domain", mcatli."refid", mcatli."start", mcatli."end",
-							mcatli."config", mcatli."pos", mcatli."status", mcatli."mtime",
-							mcatli."editor", mcatli."ctime"
 						ORDER BY :order
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
@@ -186,11 +181,6 @@ return array(
 						FROM "mshop_catalog_list" AS mcatli
 						:joins
 						WHERE :cond
-						GROUP BY :columns
-							mcatli."id", mcatli."parentid", mcatli."siteid", mcatli."type",
-							mcatli."domain", mcatli."refid", mcatli."start", mcatli."end",
-							mcatli."config", mcatli."pos", mcatli."status", mcatli."mtime",
-							mcatli."editor", mcatli."ctime"
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
@@ -199,7 +189,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mcatli."id"
+							SELECT mcatli."id"
 							FROM "mshop_catalog_list" AS mcatli
 							:joins
 							WHERE :cond
@@ -210,7 +200,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mcatli."id"
+							SELECT mcatli."id"
 							FROM "mshop_catalog_list" AS mcatli
 							:joins
 							WHERE :cond
@@ -255,11 +245,7 @@ return array(
 						AND mcat."nleft" <= parent."nright"
 						AND parent."siteid" = :siteid AND parent."id" = ?
 						AND mcat."level" <= parent."level" + ? AND :cond
-					GROUP BY :columns
-						mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
-						mcat."status", mcat."level", mcat."parentid",
-						mcat."siteid", mcat."nleft", mcat."nright",
-						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
+					GROUP BY mcat."id"
 					ORDER BY mcat."nleft"
 				'
 			),
@@ -317,7 +303,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
@@ -330,7 +316,7 @@ return array(
 			),
 			'search-item' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
@@ -338,11 +324,12 @@ return array(
 					FROM "mshop_catalog" AS mcat
 					:joins
 					WHERE :cond
+					GROUP BY :group mcat."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
@@ -350,6 +337,7 @@ return array(
 					FROM "mshop_catalog" AS mcat
 					:joins
 					WHERE :cond
+					GROUP BY :group mcat."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
@@ -358,10 +346,11 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mcat."id"
+						SELECT mcat."id"
 						FROM "mshop_catalog" AS mcat
 						:joins
 						WHERE :cond
+						GROUP BY mcat."id"
 						ORDER BY "id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
@@ -369,10 +358,11 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mcat."id"
+						SELECT mcat."id"
 						FROM "mshop_catalog" AS mcat
 						:joins
 						WHERE :cond
+						GROUP BY mcat."id"
 						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list

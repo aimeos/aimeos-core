@@ -38,7 +38,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mprility."id" AS "price.lists.type.id", mprility."siteid" AS "price.lists.type.siteid",
 								mprility."code" AS "price.lists.type.code", mprility."domain" AS "price.lists.type.domain",
 								mprility."label" AS "price.lists.type.label", mprility."status" AS "price.lists.type.status",
@@ -51,7 +51,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mprility."id" AS "price.lists.type.id", mprility."siteid" AS "price.lists.type.siteid",
 								mprility."code" AS "price.lists.type.code", mprility."domain" AS "price.lists.type.domain",
 								mprility."label" AS "price.lists.type.label", mprility."status" AS "price.lists.type.status",
@@ -68,7 +68,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mprility."id"
+								SELECT mprility."id"
 								FROM "mshop_price_list_type" AS mprility
 								:joins
 								WHERE :cond
@@ -79,7 +79,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mprility."id"
+								SELECT mprility."id"
 								FROM "mshop_price_list_type" AS mprility
 								:joins
 								WHERE :cond
@@ -166,11 +166,6 @@ return array(
 						FROM "mshop_price_list" AS mprili
 						:joins
 						WHERE :cond
-						GROUP BY :columns
-							mprili."id", mprili."parentid", mprili."siteid", mprili."type",
-							mprili."domain", mprili."refid", mprili."start", mprili."end",
-							mprili."config", mprili."pos", mprili."status", mprili."mtime",
-							mprili."editor", mprili."ctime"
 						ORDER BY :order
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
@@ -186,11 +181,6 @@ return array(
 						FROM "mshop_price_list" AS mprili
 						:joins
 						WHERE :cond
-						GROUP BY :columns
-							mprili."id", mprili."parentid", mprili."siteid", mprili."type",
-							mprili."domain", mprili."refid", mprili."start", mprili."end",
-							mprili."config", mprili."pos", mprili."status", mprili."mtime",
-							mprili."editor", mprili."ctime"
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'
@@ -199,7 +189,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mprili."id"
+							SELECT mprili."id"
 							FROM "mshop_price_list" AS mprili
 							:joins
 							WHERE :cond
@@ -210,7 +200,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mprili."id"
+							SELECT mprili."id"
 							FROM "mshop_price_list" AS mprili
 							:joins
 							WHERE :cond
@@ -260,7 +250,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mpriprty."id" AS "price.property.type.id", mpriprty."siteid" AS "price.property.type.siteid",
 								mpriprty."code" AS "price.property.type.code", mpriprty."domain" AS "price.property.type.domain",
 								mpriprty."label" AS "price.property.type.label", mpriprty."status" AS "price.property.type.status",
@@ -273,7 +263,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								mpriprty."id" AS "price.property.type.id", mpriprty."siteid" AS "price.property.type.siteid",
 								mpriprty."code" AS "price.property.type.code", mpriprty."domain" AS "price.property.type.domain",
 								mpriprty."label" AS "price.property.type.label", mpriprty."status" AS "price.property.type.status",
@@ -290,7 +280,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mpriprty."id"
+								SELECT mpriprty."id"
 								FROM "mshop_price_property_type" mpriprty
 								:joins
 								WHERE :cond
@@ -301,7 +291,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT mpriprty."id"
+								SELECT mpriprty."id"
 								FROM "mshop_price_property_type" mpriprty
 								:joins
 								WHERE :cond
@@ -349,7 +339,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mpripr."id" AS "price.property.id", mpripr."parentid" AS "price.property.parentid",
 							mpripr."siteid" AS "price.property.siteid", mpripr."type" AS "price.property.type",
 							mpripr."langid" AS "price.property.languageid", mpripr."value" AS "price.property.value",
@@ -362,7 +352,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mpripr."id" AS "price.property.id", mpripr."parentid" AS "price.property.parentid",
 							mpripr."siteid" AS "price.property.siteid", mpripr."type" AS "price.property.type",
 							mpripr."langid" AS "price.property.languageid", mpripr."value" AS "price.property.value",
@@ -379,7 +369,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpripr."id"
+							SELECT mpripr."id"
 							FROM "mshop_price_property" AS mpripr
 							:joins
 							WHERE :cond
@@ -390,7 +380,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpripr."id"
+							SELECT mpripr."id"
 							FROM "mshop_price_property" AS mpripr
 							:joins
 							WHERE :cond
@@ -439,7 +429,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mprity."id" AS "price.type.id", mprity."siteid" AS "price.type.siteid",
 							mprity."code" AS "price.type.code", mprity."domain" AS "price.type.domain",
 							mprity."label" AS "price.type.label", mprity."status" AS "price.type.status",
@@ -452,7 +442,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mprity."id" AS "price.type.id", mprity."siteid" AS "price.type.siteid",
 							mprity."code" AS "price.type.code", mprity."domain" AS "price.type.domain",
 							mprity."label" AS "price.type.label", mprity."status" AS "price.type.status",
@@ -469,7 +459,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mprity."id"
+							SELECT mprity."id"
 							FROM "mshop_price_type" AS mprity
 							:joins
 							WHERE :cond
@@ -480,7 +470,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mprity."id"
+							SELECT mprity."id"
 							FROM "mshop_price_type" AS mprity
 							:joins
 							WHERE :cond
@@ -530,7 +520,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mpri."id" AS "price.id", mpri."siteid" AS "price.siteid",
 						mpri."type" AS "price.type", mpri."currencyid" AS "price.currencyid",
 						mpri."domain" AS "price.domain", mpri."label" AS "price.label",
@@ -542,11 +532,12 @@ return array(
 					FROM "mshop_price" AS mpri
 					:joins
 					WHERE :cond
+					GROUP BY :group mpri."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mpri."id" AS "price.id", mpri."siteid" AS "price.siteid",
 						mpri."type" AS "price.type", mpri."currencyid" AS "price.currencyid",
 						mpri."domain" AS "price.domain", mpri."label" AS "price.label",
@@ -558,6 +549,7 @@ return array(
 					FROM "mshop_price" AS mpri
 					:joins
 					WHERE :cond
+					GROUP BY :group mpri."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
@@ -566,10 +558,11 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mpri."id"
+						SELECT mpri."id"
 						FROM "mshop_price" AS mpri
 						:joins
 						WHERE :cond
+						GROUP BY mpri."id"
 						ORDER BY "id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
@@ -577,10 +570,11 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mpri."id"
+						SELECT mpri."id"
 						FROM "mshop_price" AS mpri
 						:joins
 						WHERE :cond
+						GROUP BY mpri."id"
 						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list

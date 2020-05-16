@@ -59,22 +59,24 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpro."id"
+							SELECT mpro."id"
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							GROUP BY mpro."id"
+							ORDER BY mpro."id"
 							OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
 						) AS list
 					',
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpro."id"
+							SELECT mpro."id"
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							GROUP BY mpro."id"
+							ORDER BY mpro."id"
 							LIMIT 1000 OFFSET 0
 						) AS list
 					'
@@ -145,22 +147,24 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpro."id"
+							SELECT mpro."id"
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							GROUP BY mpro."id"
+							ORDER BY mpro."id"
 							OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
 						) AS list
 					',
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpro."id"
+							SELECT mpro."id"
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							GROUP BY mpro."id"
+							ORDER BY mpro."id"
 							LIMIT 1000 OFFSET 0
 						) AS list
 					'
@@ -229,22 +233,24 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpro."id"
+							SELECT mpro."id"
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							GROUP BY mpro."id"
+							ORDER BY mpro."id"
 							OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
 						) AS list
 					',
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpro."id"
+							SELECT mpro."id"
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							GROUP BY mpro."id"
+							ORDER BY mpro."id"
 							LIMIT 1000 OFFSET 0
 						) AS list
 					'
@@ -315,22 +321,24 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpro."id"
+							SELECT mpro."id"
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							GROUP BY mpro."id"
+							ORDER BY mpro."id"
 							OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
 						) AS list
 					',
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpro."id"
+							SELECT mpro."id"
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							GROUP BY mpro."id"
+							ORDER BY mpro."id"
 							LIMIT 1000 OFFSET 0
 						) AS list
 					'
@@ -399,22 +407,24 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpro."id"
+							SELECT mpro."id"
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							GROUP BY mpro."id"
+							ORDER BY mpro."id"
 							OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
 						) AS list
 					',
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mpro."id"
+							SELECT mpro."id"
 							FROM "mshop_product" AS mpro
 							:joins
 							WHERE :cond
-							ORDER BY "id"
+							GROUP BY mpro."id"
+							ORDER BY mpro."id"
 							LIMIT 1000 OFFSET 0
 						) AS list
 					'
@@ -487,22 +497,24 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mpro."id"
+						SELECT mpro."id"
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
-						ORDER BY "id"
+						GROUP BY mpro."id"
+						ORDER BY mpro."id"
 						OFFSET 0 ROWS FETCH NEXT 1000 ROWS ONLY
 					) AS list
 				',
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mpro."id"
+						SELECT mpro."id"
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
-						ORDER BY "id"
+						GROUP BY mpro."id"
+						ORDER BY mpro."id"
 						LIMIT 1000 OFFSET 0
 					) AS list
 				'

@@ -44,7 +44,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							msupad."id" AS "supplier.address.id", msupad."siteid" AS "supplier.address.siteid",
 							msupad."parentid" AS "supplier.address.parentid", msupad."pos" AS "supplier.address.position",
 							msupad."company" AS "supplier.address.company", msupad."vatid" AS "supplier.address.vatid",
@@ -66,7 +66,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							msupad."id" AS "supplier.address.id", msupad."siteid" AS "supplier.address.siteid",
 							msupad."parentid" AS "supplier.address.parentid", msupad."pos" AS "supplier.address.position",
 							msupad."company" AS "supplier.address.company", msupad."vatid" AS "supplier.address.vatid",
@@ -92,7 +92,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT msupad."id"
+							SELECT msupad."id"
 							FROM "mshop_supplier_address" AS msupad
 							:joins
 							WHERE :cond
@@ -103,7 +103,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT msupad."id"
+							SELECT msupad."id"
 							FROM "mshop_supplier_address" AS msupad
 							:joins
 							WHERE :cond
@@ -162,10 +162,6 @@ return array(
 							FROM "mshop_supplier_list_type" AS msuplity
 							:joins
 							WHERE :cond
-							GROUP BY :columns
-								msuplity."id", msuplity."siteid", msuplity."code", msuplity."domain",
-								msuplity."label", msuplity."status", msuplity."mtime", msuplity."editor",
-								msuplity."ctime", msuplity."pos"
 							ORDER BY :order
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
@@ -179,10 +175,6 @@ return array(
 							FROM "mshop_supplier_list_type" AS msuplity
 							:joins
 							WHERE :cond
-							GROUP BY :columns
-								msuplity."id", msuplity."siteid", msuplity."code", msuplity."domain",
-								msuplity."label", msuplity."status", msuplity."mtime", msuplity."editor",
-								msuplity."ctime", msuplity."pos"
 							ORDER BY :order
 							LIMIT :size OFFSET :start
 						'
@@ -191,7 +183,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT msuplity."id"
+								SELECT msuplity."id"
 								FROM "mshop_supplier_list_type" AS msuplity
 								:joins
 								WHERE :cond
@@ -202,7 +194,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT msuplity."id"
+								SELECT msuplity."id"
 								FROM "mshop_supplier_list_type" AS msuplity
 								:joins
 								WHERE :cond
@@ -278,7 +270,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							msupli."id" AS "supplier.lists.id", msupli."parentid" AS "supplier.lists.parentid",
 							msupli."siteid" AS "supplier.lists.siteid", msupli."type" AS "supplier.lists.type",
 							msupli."domain" AS "supplier.lists.domain", msupli."refid" AS "supplier.lists.refid",
@@ -293,7 +285,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							msupli."id" AS "supplier.lists.id", msupli."parentid" AS "supplier.lists.parentid",
 							msupli."siteid" AS "supplier.lists.siteid", msupli."type" AS "supplier.lists.type",
 							msupli."domain" AS "supplier.lists.domain", msupli."refid" AS "supplier.lists.refid",
@@ -312,7 +304,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT msupli."id"
+							SELECT msupli."id"
 							FROM "mshop_supplier_list" AS msupli
 							:joins
 							WHERE :cond
@@ -323,7 +315,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT msupli."id"
+							SELECT msupli."id"
 							FROM "mshop_supplier_list" AS msupli
 							:joins
 							WHERE :cond
@@ -369,7 +361,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						msup."id" AS "supplier.id", msup."siteid" AS "supplier.siteid",
 						msup."code" AS "supplier.code", msup."label" AS "supplier.label",
 						msup."status" AS "supplier.status", msup."mtime" AS "supplier.mtime",
@@ -377,11 +369,12 @@ return array(
 					FROM "mshop_supplier" AS msup
 					:joins
 					WHERE :cond
+					GROUP BY :group msup."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						msup."id" AS "supplier.id", msup."siteid" AS "supplier.siteid",
 						msup."code" AS "supplier.code", msup."label" AS "supplier.label",
 						msup."status" AS "supplier.status", msup."mtime" AS "supplier.mtime",
@@ -389,6 +382,7 @@ return array(
 					FROM "mshop_supplier" AS msup
 					:joins
 					WHERE :cond
+					GROUP BY :group msup."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
@@ -397,10 +391,11 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT msup."id"
+						SELECT msup."id"
 						FROM "mshop_supplier" AS msup
 						:joins
 						WHERE :cond
+						GROUP BY msup."id"
 						ORDER BY "id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
@@ -408,10 +403,11 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT msup."id"
+						SELECT msup."id"
 						FROM "mshop_supplier" AS msup
 						:joins
 						WHERE :cond
+						GROUP BY msup."id"
 						ORDER BY "id"
 						LIMIT 10000 OFFSET 0
 					) AS list

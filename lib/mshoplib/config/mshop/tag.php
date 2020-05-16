@@ -37,7 +37,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mtagty."id" AS "tag.type.id", mtagty."siteid" AS "tag.type.siteid",
 							mtagty."code" AS "tag.type.code", mtagty."domain" AS "tag.type.domain",
 							mtagty."label" AS "tag.type.label", mtagty."status" AS "tag.type.status",
@@ -50,7 +50,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							mtagty."id" AS "tag.type.id", mtagty."siteid" AS "tag.type.siteid",
 							mtagty."code" AS "tag.type.code", mtagty."domain" AS "tag.type.domain",
 							mtagty."label" AS "tag.type.label", mtagty."status" AS "tag.type.status",
@@ -67,7 +67,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mtagty."id"
+							SELECT mtagty."id"
 							FROM "mshop_tag_type" mtagty
 							:joins
 							WHERE :cond
@@ -78,7 +78,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT mtagty."id"
+							SELECT mtagty."id"
 							FROM "mshop_tag_type" mtagty
 							:joins
 							WHERE :cond
@@ -125,7 +125,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mtag."id" AS "tag.id", mtag."siteid" AS "tag.siteid",
 						mtag."type" AS "tag.type", mtag."langid" AS "tag.languageid",
 						mtag."domain" AS "tag.domain", mtag."label" AS "tag.label",
@@ -138,7 +138,7 @@ return array(
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						mtag."id" AS "tag.id", mtag."siteid" AS "tag.siteid",
 						mtag."type" AS "tag.type", mtag."langid" AS "tag.languageid",
 						mtag."domain" AS "tag.domain", mtag."label" AS "tag.label",
@@ -155,7 +155,7 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mtag."id"
+						SELECT mtag."id"
 						FROM "mshop_tag" AS mtag
 						:joins
 						WHERE :cond
@@ -166,7 +166,7 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT mtag."id"
+						SELECT mtag."id"
 						FROM "mshop_tag" AS mtag
 						:joins
 						WHERE :cond

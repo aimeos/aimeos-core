@@ -37,7 +37,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						majob."id" AS "job.id", majob."siteid" AS "job.siteid",
 						majob."label" AS "job.label", majob."method" AS "job.method",
 						majob."parameter" AS "job.parameter", majob."result" AS "job.result",
@@ -50,7 +50,7 @@ return array(
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						majob."id" AS "job.id", majob."siteid" AS "job.siteid",
 						majob."label" AS "job.label", majob."method" AS "job.method",
 						majob."parameter" AS "job.parameter", majob."result" AS "job.result",
@@ -67,7 +67,7 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM(
-						SELECT DISTINCT majob."id"
+						SELECT majob."id"
 						FROM "madmin_job" AS majob
 						:joins
 						WHERE :cond
@@ -78,7 +78,7 @@ return array(
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM(
-						SELECT DISTINCT majob."id"
+						SELECT majob."id"
 						FROM "madmin_job" AS majob
 						:joins
 						WHERE :cond
