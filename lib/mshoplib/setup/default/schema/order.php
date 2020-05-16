@@ -38,8 +38,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordba_id' );
-			$table->addIndex( array( 'sitecode', 'customerid' ), 'idx_msordba_scode_custid' );
-			$table->addIndex( array( 'siteid', 'customerid' ), 'idx_msordba_sid_custid' );
+			$table->addIndex( array( 'customerid', 'sitecode' ), 'idx_msordba_custid_scode' );
+			$table->addIndex( array( 'customerid', 'siteid' ), 'idx_msordba_custid_sid' );
 			$table->addIndex( array( 'siteid', 'ctime' ), 'idx_msordba_sid_ctime' );
 
 			return $schema;
@@ -132,9 +132,9 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbapr_id' );
 			$table->addUniqueIndex( array( 'baseid', 'pos' ), 'unq_msordbapr_bid_pos' );
-			$table->addIndex( array( 'siteid', 'baseid', 'prodid' ), 'idx_msordbapr_sid_bid_pid' );
-			$table->addIndex( array( 'siteid', 'baseid', 'prodcode' ), 'idx_msordbapr_sid_bid_pcd' );
-			$table->addIndex( array( 'siteid', 'ctime', 'prodid', 'baseid' ), 'idx_msordbapr_sid_ct_pid_bid' );
+			$table->addIndex( array( 'baseid', 'siteid', 'prodid' ), 'idx_msordbapr_bid_sid_pid' );
+			$table->addIndex( array( 'baseid', 'siteid', 'prodcode' ), 'idx_msordbapr_bid_sid_pcd' );
+			$table->addIndex( array( 'ctime', 'siteid', 'prodid', 'baseid' ), 'idx_msordbapr_ct_sid_pid_bid' );
 			$table->addIndex( array( 'baseid' ), 'fk_msordbapr_baseid' );
 
 			$table->addForeignKeyConstraint( 'mshop_order_base', array( 'baseid' ), array( 'id' ),
@@ -195,7 +195,7 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbase_id' );
-			$table->addUniqueIndex( array( 'siteid', 'baseid', 'code', 'type' ), 'unq_msordbase_sid_bid_cd_typ' );
+			$table->addUniqueIndex( array( 'baseid', 'siteid', 'code', 'type' ), 'unq_msordbase_bid_sid_cd_typ' );
 			$table->addIndex( array( 'siteid', 'code', 'type' ), 'idx_msordbase_sid_code_type' );
 			$table->addIndex( array( 'baseid' ), 'fk_msordbase_baseid' );
 
@@ -246,7 +246,7 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaco_id' );
-			$table->addIndex( array( 'siteid', 'baseid', 'code' ), 'idx_msordbaco_sid_bid_code' );
+			$table->addIndex( array( 'baseid', 'siteid', 'code' ), 'idx_msordbaco_bid_sid_code' );
 			$table->addIndex( array( 'baseid' ), 'fk_msordbaco_baseid' );
 
 			$table->addForeignKeyConstraint( 'mshop_order_base', array( 'baseid' ), array( 'id' ),
