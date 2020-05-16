@@ -756,11 +756,12 @@ class Standard
 				$colstring .= $entry->getInternalCode() . ', ';
 			}
 
-			$find = array( ':columns', ':cond', ':order', ':start', ':size' );
+			$find = array( ':columns', ':cond', ':order', ':group', ':start', ':size' );
 			$replace = array(
 				$colstring . ( $sortcols ? join( ', ', $sortcols ) . ', ' : '' ),
 				$search->getConditionSource( $types, $translations ),
 				$search->getSortationSource( $types, $translations ),
+				implode( ', ', $search->translate( $search->getSortations(), $translations ) ) . ', ',
 				$search->getSliceStart(),
 				$search->getSliceSize(),
 			);
