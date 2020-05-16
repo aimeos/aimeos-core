@@ -17,6 +17,10 @@ namespace Aimeos\MW;
  */
 class Str
 {
+	private static $node;
+	private static $seq = 0;
+
+
 	/**
 	 * Returns the sub-string after the given needle.
 	 *
@@ -194,5 +198,48 @@ class Str
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * Generates a unique ID string suitable as global identifier
+	 *
+	 * The ID is similar to an UUID and is as unique as an UUID but it's human
+	 * readable string is only 20 bytes long. Additionally, the unique ID is
+	 * optimized for being used as primary key in databases.
+	 *
+	 * @return string Global unique ID of 20 bytes length
+	 */
+	public static function uid() : string
+	{
+		if( self::$node === null )
+		{
+			try {
+				self::$node = random_bytes( 6 );
+			} catch( \Throwable $t ) {
+				if( function_exists( 'openssl_random_pseudo_bytes' ) ) {
+					self::$node = openssl_random_pseudo_bytes( 6 );
+				} else {
+					self::$node = pack( 'n*', rand( 0, 0xffff ), rand( 0, 0xffff ), rand( 0, 0xffff ) );
+				}
+			}
+		}
+
+		$t = gettimeofday();
+		$sec = $t['sec'];
+		$usec = $t['usec'];
+
+		self::$seq = self::$seq + 1 & 0xfff; // 20 bits for sequence (1 to 4,095), wraps around
+
+		$hsec = ( $sec & 0xff00000000 ) >> 32; // 5th byte from seconds till 1970-01-01T00:00:00 (on 64 bit platforms)
+		$lsec = $sec & 0xffffffff; // Lowest 32 bits from seconds till 1970-01-01T00:00:00
+		$husec = ( $usec & 0xffff0 ) >> 4; // Highest 16 bits from micro seconds (total 20 bits)
+		$mix = ( $usec & 0xf ) << 4 | ( self::$seq & 0xf00 ) >> 8; // Lowest 4 bits (usec) and highest 4 bits (seq)
+		$lseq = self::$seq & 0xff; // Lowest 16 bits from sequence
+
+		// 5 bytes seconds, 2 byte usec, 1 byte usec+seq, 1 byte seq, 6 bytes node
+		$uid = base64_encode( pack( 'CNnCC', $hsec, $lsec, $husec, $mix, $lseq )  . self::$node );
+
+		return str_replace( ['+', '/'], ['-', '_'], $uid ); // URL safety
 	}
 }

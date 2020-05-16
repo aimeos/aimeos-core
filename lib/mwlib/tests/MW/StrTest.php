@@ -162,4 +162,13 @@ class StrTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( Str::starts( '他弛池', '他弛' ) );
 		$this->assertTrue( Str::starts( '他弛池', '他' ) );
 	}
+
+
+	public function testUid()
+	{
+		$r = Str::uid();
+
+		$this->assertNotEquals( $r, Str::uid() );
+		$this->assertEquals( 20, strlen( $r ) );
+	}
 }
