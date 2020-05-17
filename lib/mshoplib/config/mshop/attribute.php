@@ -528,7 +528,9 @@ return array(
 					FROM "mshop_attribute" AS matt
 					:joins
 					WHERE :cond
-					GROUP BY :group matt."id"
+					GROUP BY :columns :group
+						matt."id", matt."siteid", matt."type", matt."domain", matt."code", matt."status",
+						matt."pos", matt."label", matt."mtime", matt."ctime", matt."editor"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',

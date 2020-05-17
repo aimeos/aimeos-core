@@ -349,7 +349,10 @@ return array(
 					FROM "mshop_service" AS mser
 					:joins
 					WHERE :cond
-					GROUP BY :group mser."id"
+					GROUP BY :columns :group
+						mser."id", mser."siteid", mser."pos", mser."type", mser."code", mser."label",
+						mser."provider", mser."config", mser."start", mser."end", mser."status", mser."mtime",
+						mser."editor",	mser."ctime"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',

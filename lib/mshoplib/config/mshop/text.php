@@ -348,7 +348,9 @@ return array(
 					FROM "mshop_text" AS mtex
 					:joins
 					WHERE :cond
-					GROUP BY :group mtex."id"
+					GROUP BY :columns :group
+						mtex."id", mtex."siteid", mtex."langid",	mtex."type", mtex."domain", mtex."label",
+						mtex."content", mtex."status", mtex."mtime", mtex."editor", mtex."ctime"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',

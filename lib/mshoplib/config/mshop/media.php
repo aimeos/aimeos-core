@@ -529,7 +529,10 @@ return array(
 					FROM "mshop_media" AS mmed
 					:joins
 					WHERE :cond
-					GROUP BY :group mmed."id"
+					GROUP BY :columns :group
+						mmed."id", mmed."siteid", mmed."langid", mmed."type", mmed."link",
+						mmed."label", mmed."status", mmed."mimetype", mmed."domain", mmed."preview",
+						mmed."mtime", mmed."editor", mmed."ctime"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',

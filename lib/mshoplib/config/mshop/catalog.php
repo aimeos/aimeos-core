@@ -324,7 +324,11 @@ return array(
 					FROM "mshop_catalog" AS mcat
 					:joins
 					WHERE :cond
-					GROUP BY :group mcat."id"
+					GROUP BY :columns :group
+						mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
+						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
+						mcat."nleft", mcat."nright", mcat."mtime", mcat."editor",
+						mcat."ctime", mcat."target"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',

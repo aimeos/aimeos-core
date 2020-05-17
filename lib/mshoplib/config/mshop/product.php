@@ -530,7 +530,10 @@ return array(
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
-					GROUP BY :group mpro."id"
+					GROUP BY :columns :group
+						mpro."id", mpro."siteid", mpro."type", mpro."code", mpro."label", mpro."url",
+						mpro."target", mpro."dataset", mpro."scale", mpro."config", mpro."start", mpro."end",
+						mpro."status", mpro."ctime", mpro."mtime", mpro."editor"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',

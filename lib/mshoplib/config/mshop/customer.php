@@ -657,7 +657,13 @@ return array(
 					FROM "mshop_customer" AS mcus
 					:joins
 					WHERE :cond
-					GROUP BY :group mcus."id"
+					GROUP BY :columns :group
+						mcus."id", mcus."siteid", mcus."label", mcus."code", mcus."company", mcus."vatid",
+						mcus."salutation", mcus."title", mcus."firstname", mcus."lastname", mcus."address1",
+						mcus."address2", mcus."address3", mcus."postal", mcus."city", mcus."state",
+						mcus."countryid", mcus."langid", mcus."telephone", mcus."email", mcus."telefax",
+						mcus."website", mcus."longitude", mcus."latitude", mcus."birthday", mcus."status",
+						mcus."vdate", mcus."password", mcus."ctime", mcus."mtime", mcus."editor"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',

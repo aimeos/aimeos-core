@@ -73,7 +73,10 @@ return array(
 					FROM "mshop_subscription" AS mord
 					:joins
 					WHERE :cond
-					GROUP BY :group mord."id"
+					GROUP BY :columns :group
+						mord."id", mord."baseid", mord."ordprodid", mord."siteid", mord."next", mord."end",
+						mord."interval", mord."reason", mord."productid", mord."period", mord."status", mord."ctime",
+						mord."mtime", mord."editor"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',

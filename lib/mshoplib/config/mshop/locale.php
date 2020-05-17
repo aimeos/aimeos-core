@@ -292,7 +292,9 @@ return array(
 					LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
 					LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
 					WHERE :cond
-					GROUP BY :group mloc."id"
+					GROUP BY :columns :group
+						mloc."id", mloc."siteid", mloc."langid", mloc."currencyid", mloc."pos",
+						mloc."status", mloc."mtime", mloc."editor", mloc."ctime"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',

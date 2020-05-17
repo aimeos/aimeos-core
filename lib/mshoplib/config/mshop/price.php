@@ -532,7 +532,10 @@ return array(
 					FROM "mshop_price" AS mpri
 					:joins
 					WHERE :cond
-					GROUP BY :group mpri."id"
+					GROUP BY :columns :group
+						mpri."id", mpri."siteid", mpri."type", mpri."currencyid", mpri."domain", mpri."label",
+						mpri."quantity", mpri."value", mpri."costs", mpri."rebate", mpri."taxrate", mpri."status",
+						mpri."mtime", mpri."editor", mpri."ctime"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',

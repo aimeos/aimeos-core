@@ -369,7 +369,9 @@ return array(
 					FROM "mshop_supplier" AS msup
 					:joins
 					WHERE :cond
-					GROUP BY :group msup."id"
+					GROUP BY :columns :group
+						msup."id", msup."siteid", msup."code", msup."label", msup."status", msup."mtime",
+						msup."editor", msup."ctime"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',

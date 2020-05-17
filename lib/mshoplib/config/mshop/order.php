@@ -465,7 +465,14 @@ return array(
 							FROM "mshop_order_base_product" AS mordbapr
 							:joins
 							WHERE :cond
-							GROUP BY :group mordbapr."id"
+							GROUP BY :columns :group
+								mordbapr."id", mordbapr."baseid", mordbapr."siteid", mordbapr."ordprodid", mordbapr."prodid",
+								mordbapr."prodcode", mordbapr."suppliercode", mordbapr."stocktype", mordbapr."type",
+								mordbapr."name", mordbapr."mediaurl", mordbapr."timeframe", mordbapr."quantity",
+								mordbapr."currencyid", mordbapr."price", mordbapr."costs", mordbapr."rebate", mordbapr."tax",
+								mordbapr."taxrate", mordbapr."taxflag", mordbapr."flags", mordbapr."status", mordbapr."pos",
+								mordbapr."mtime", mordbapr."editor", mordbapr."ctime", mordbapr."target", mordbapr."ordaddrid",
+								mordbapr."description"
 							ORDER BY :order
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
@@ -739,7 +746,11 @@ return array(
 							FROM "mshop_order_base_service" AS mordbase
 							:joins
 							WHERE :cond
-							GROUP BY :group mordbase."id"
+							GROUP BY :columns :group
+								mordbase."id", mordbase."baseid", mordbase."siteid", mordbase."servid", mordbase."type",
+								mordbase."code", mordbase."name", mordbase."mediaurl", mordbase."currencyid", mordbase."price",
+								mordbase."costs", mordbase."rebate", mordbase."tax", mordbase."taxrate", mordbase."taxflag",
+								mordbase."pos", mordbase."mtime", mordbase."editor", mordbase."ctime"
 							ORDER BY :order
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
@@ -902,7 +913,11 @@ return array(
 						FROM "mshop_order_base" AS mordba
 						:joins
 						WHERE :cond
-						GROUP BY :group mordba."id"
+						GROUP BY :columns :group
+							mordba."id", mordba."siteid", mordba."sitecode", mordba."customerid", mordba."langid",
+							mordba."currencyid", mordba."price", mordba."costs", mordba."rebate", mordba."tax",
+							mordba."taxflag", mordba."customerref", mordba."comment", mordba."mtime", mordba."ctime",
+							mordba."editor"
 						ORDER BY :order
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
@@ -1158,7 +1173,9 @@ return array(
 					FROM "mshop_order" AS mord
 					:joins
 					WHERE :cond
-					GROUP BY :group mord."id"
+					GROUP BY :columns :group
+						mord."id", mord."baseid", mord."siteid", mord."type", mord."datepayment", mord."datedelivery",
+						mord."statuspayment", mord."statusdelivery", mord."relatedid", mord."ctime", mord."mtime", mord."editor"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
