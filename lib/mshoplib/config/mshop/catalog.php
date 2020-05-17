@@ -245,7 +245,11 @@ return array(
 						AND mcat."nleft" <= parent."nright"
 						AND parent."siteid" = :siteid AND parent."id" = ?
 						AND mcat."level" <= parent."level" + ? AND :cond
-					GROUP BY mcat."id"
+					GROUP BY :columns
+						mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
+						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
+						mcat."nleft", mcat."nright", mcat."target",
+						mcat."mtime", mcat."editor", mcat."ctime"
 					ORDER BY mcat."nleft"
 				'
 			),
