@@ -751,6 +751,10 @@ class Standard
 			$columns = $this->getObject()->getSaveAttributes();
 			$sortcols = $search->translate( $search->getSortations(), $translations );
 
+			if( empty( $search->getSortations() ) && ( $attribute = reset( $attributes ) ) !== false ) {
+				$search = ( clone $search )->setSortations( [$search->sort( '+', $attribute->getCode() )] );
+			}
+
 			$colstring = '';
 			foreach( $columns as $name => $entry ) {
 				$colstring .= $entry->getInternalCode() . ', ';

@@ -292,7 +292,7 @@ return array(
 					LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
 					LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
 					WHERE :cond
-					GROUP BY mloc."id"
+					GROUP BY :group mloc."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
@@ -308,7 +308,7 @@ return array(
 					LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
 					LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
 					WHERE :cond
-					GROUP BY mloc."id"
+					GROUP BY :group mloc."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
