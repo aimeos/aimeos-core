@@ -238,7 +238,7 @@ class Str
 		$lseq = self::$seq & 0xff; // Lowest 16 bits from sequence
 
 		// 5 bytes seconds, 2 byte usec, 1 byte usec+seq, 1 byte seq, 6 bytes node
-		$uid = base64_encode( pack( 'CNnCC', $hsec, $lsec, $husec, $mix, $lseq )  . self::$node );
+		$uid = base64_encode( pack( 'CNnCC', $hsec, $lsec, $husec, $mix, $lseq ) . self::$node );
 
 		return str_replace( ['+', '/'], ['-', '_'], $uid ); // URL safety
 	}
