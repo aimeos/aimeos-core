@@ -1019,7 +1019,6 @@ return array(
 						FROM "mshop_order_status" AS mordst
 						:joins
 						WHERE :cond
-						GROUP BY :group mordst."id"
 						ORDER BY :order
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
@@ -1032,7 +1031,6 @@ return array(
 						FROM "mshop_order_status" AS mordst
 						:joins
 						WHERE :cond
-						GROUP BY :group mordst."id"
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					'

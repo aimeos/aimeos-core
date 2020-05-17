@@ -145,7 +145,9 @@ return array(
 					FROM "mshop_coupon" AS mcou
 					:joins
 					WHERE :cond
-					GROUP BY :group mcou."id"
+					GROUP BY :columns :group
+						mcou."id", mcou."siteid", mcou."label", mcou."provider", mcou."start", mcou."end",
+						mcou."config", mcou."status", mcou."mtime", mcou."editor", mcou."ctime"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
