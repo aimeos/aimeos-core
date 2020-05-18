@@ -167,7 +167,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 			case 'float':
 				$value = (double) $value; break;
 			default:
-				$value = '\'' . addcslashes( $value, '\'' ) . '\'';
+				$value = '\'' . addcslashes( (string) $value, '\'' ) . '\'';
 		}
 
 		return $value;
