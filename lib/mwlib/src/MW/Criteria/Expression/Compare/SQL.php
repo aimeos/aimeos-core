@@ -166,13 +166,13 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 				$value = (double) (string) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
 				if( $operator === '~=' ) {
-					$value = '\'%' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->conn->escape( $value ) ) . '%\''; break;
+					$value = '\'%' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->conn->escape( (string) $value ) ) . '%\''; break;
 				}
 				if( $operator === '=~' ) {
-					$value = '\'' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->conn->escape( $value ) ) . '%\''; break;
+					$value = '\'' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->conn->escape( (string) $value ) ) . '%\''; break;
 				}
 			default: // all other operators: escape in default case
-				$value = '\'' . $this->conn->escape( $value ) . '\'';
+				$value = '\'' . $this->conn->escape( (string) $value ) . '\'';
 		}
 
 		return $value;

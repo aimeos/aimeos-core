@@ -43,14 +43,14 @@ class PgSQL extends \Aimeos\MW\Criteria\Expression\Compare\SQL
 				$value = (double) (string) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
 				if( $operator === '~=' ) {
-					$value = '\'%' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->getConnection()->escape( $value ) ) . '%\''; break;
+					$value = '\'%' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->getConnection()->escape( (string) $value ) ) . '%\''; break;
 				}
 				if( $operator === '=~' ) {
-					$value = '\'' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->getConnection()->escape( $value ) ) . '%\''; break;
+					$value = '\'' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->getConnection()->escape( (string) $value ) ) . '%\''; break;
 				}
 				// all other operators: escape in default case
 			default:
-				$value = '\'' . $this->getConnection()->escape( $value ) . '\'';
+				$value = '\'' . $this->getConnection()->escape( (string) $value ) . '\'';
 		}
 
 		return $value;
