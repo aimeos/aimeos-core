@@ -65,8 +65,8 @@ abstract class Base
 	 * @param string $string String to sanitize
 	 * @return string Sanitized string
 	 */
-	public static function sanitize( string $string ) : string
+	public static function sanitize( $string ) : string
 	{
-		return trim( preg_replace( '/(\-|\+|\%[0-9A-F]{2})+/', '-', urlencode( $string ) ), '-' );
+		return trim( preg_replace( '/(\-|\+|\%[0-9A-F]{2})+/', '-', urlencode( (string) $string ) ), '-' );
 	}
 }
