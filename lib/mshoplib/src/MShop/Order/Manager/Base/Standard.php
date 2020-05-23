@@ -315,14 +315,6 @@ class Standard extends Base
 		{
 			$search->setConditions( $search->combine( '&&', [
 				$search->compare( '==', 'order.base.customerid', $context->getUserId() ),
-				$search->compare( '==', 'order.base.product.siteid', $context->getLocale()->getSiteSubTree() ),
-				$search->getConditions(),
-			] ) );
-		}
-		else
-		{
-			$search->setConditions( $search->combine( '&&', [
-				$search->compare( '==', 'order.base.product.siteid', $context->getLocale()->getSiteSubTree() ),
 				$search->getConditions(),
 			] ) );
 		}
