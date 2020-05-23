@@ -605,17 +605,17 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_customer"
-					WHERE :cond AND siteid = ?
+					WHERE :cond AND "siteid" = ?
 				'
 			),
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_customer" ( :names
-						"siteid", "label", "code", "company", "vatid", "salutation", "title",
+						"label", "code", "company", "vatid", "salutation", "title",
 						"firstname", "lastname", "address1", "address2", "address3",
 						"postal", "city", "state", "countryid", "langid", "telephone",
 						"email", "telefax", "website", "longitude", "latitude", "birthday",
-						"status", "vdate", "password", "mtime", "editor", "ctime"
+						"status", "vdate", "password", "mtime", "editor", "siteid", "ctime"
 					) VALUES ( :values
 						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 					)
@@ -625,14 +625,14 @@ return array(
 				'ansi' => '
 					UPDATE "mshop_customer"
 					SET :names
-						"siteid" = ?, "label" = ?, "code" = ?, "company" = ?, "vatid" = ?,
+						"label" = ?, "code" = ?, "company" = ?, "vatid" = ?,
 						"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
 						"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 						"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 						"telephone" = ?, "email" = ?, "telefax" = ?, "website" = ?,
 						"longitude" = ?, "latitude" = ?, "birthday" = ?, "status" = ?,
 						"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?
-					WHERE "id" = ?
+					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
 			'search' => array(
