@@ -213,16 +213,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSetScaleEmpty()
-	{
-		$return = $this->object->setScale( '' );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
-		$this->assertEquals( 1, $this->object->getScale() );
-		$this->assertTrue( $this->object->isModified() );
-	}
-
-
 	public function testSetScaleInvalid()
 	{
 		$return = $this->object->setScale( -1 );

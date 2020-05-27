@@ -346,12 +346,12 @@ class Standard
 	/**
 	 * Sets a new quantity scale of the product item.
 	 *
-	 * @param string $name New quantity scale
+	 * @param float $value New quantity scale
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setScale( ?string $value ) : \Aimeos\MShop\Product\Item\Iface
+	public function setScale( float $value ) : \Aimeos\MShop\Product\Item\Iface
 	{
-		return $this->set( 'product.scale', (float) ( $value > 0 ? $value : 1 ) );
+		return $this->set( 'product.scale', $value > 0 ? $value : 1 );
 	}
 
 
@@ -444,12 +444,12 @@ class Standard
 				case 'product.type': $item = $item->setType( $value ); break;
 				case 'product.code': $item = $item->setCode( $value ); break;
 				case 'product.label': $item = $item->setLabel( $value ); break;
-				case 'product.status': $item = $item->setStatus( $value ); break;
 				case 'product.dataset': $item = $item->setDataset( $value ); break;
+				case 'product.scale': $item = $item->setScale( (float) $value ); break;
+				case 'product.status': $item = $item->setStatus( (int) $value ); break;
 				case 'product.datestart': $item = $item->setDateStart( $value ); break;
 				case 'product.dateend': $item = $item->setDateEnd( $value ); break;
 				case 'product.config': $item = $item->setConfig( $value ); break;
-				case 'product.scale': $item = $item->setScale( $value ); break;
 				case 'product.target': $item = $item->setTarget( $value ); break;
 				case 'product.ctime': $item = $item->setTimeCreated( $value ); break;
 				default: continue 2;

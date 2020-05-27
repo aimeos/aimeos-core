@@ -301,11 +301,11 @@ class Standard
 				case 'service.code': $item = $item->setCode( $value ); break;
 				case 'service.label': $item = $item->setLabel( $value ); break;
 				case 'service.provider': $item = $item->setProvider( $value ); break;
-				case 'service.position': $item = $item->setPosition( $value ); break;
 				case 'service.datestart': $item = $item->setDateStart( $value ); break;
 				case 'service.dateend': $item = $item->setDateEnd( $value ); break;
-				case 'service.config': $item = $item->setConfig( $value ); break;
-				case 'service.status': $item = $item->setStatus( $value ); break;
+				case 'service.status': $item = $item->setStatus( (int) $value ); break;
+				case 'service.config': $item = $item->setConfig( (array) $value ); break;
+				case 'service.position': $item = $item->setPosition( (int) $value ); break;
 				default: continue 2;
 			}
 

@@ -228,7 +228,7 @@ class Standard
 				case 'text.label': $item = $item->setLabel( $value ); break;
 				case 'text.domain': $item = $item->setDomain( $value ); break;
 				case 'text.content': $item = $item->setContent( $value ); break;
-				case 'text.status': $item = $item->setStatus( $value ); break;
+				case 'text.status': $item = $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 

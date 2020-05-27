@@ -485,9 +485,9 @@ class Standard
 				case 'catalog.url': $item = $item->setUrl( $value ); break;
 				case 'catalog.code': $item = $item->setCode( $value ); break;
 				case 'catalog.label': $item = $item->setLabel( $value ); break;
-				case 'catalog.status': $item = $item->setStatus( $value ); break;
-				case 'catalog.config': $item = $item->setConfig( $value ); break;
 				case 'catalog.target': $item = $item->setTarget( $value ); break;
+				case 'catalog.status': $item = $item->setStatus( (int) $value ); break;
+				case 'catalog.config': $item = $item->setConfig( (array) $value ); break;
 				case 'catalog.id': !$private ?: $item = $item->setId( $value ); break;
 				default: continue 2;
 			}

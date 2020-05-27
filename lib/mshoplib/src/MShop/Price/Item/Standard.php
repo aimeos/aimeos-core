@@ -456,16 +456,16 @@ class Standard extends Base
 			{
 				case 'price.type': $item = $item->setType( $value ); break;
 				case 'price.currencyid': $item = $item->setCurrencyId( $value ); break;
+				case 'price.quantity': $item = $item->setQuantity( (float) $value ); break;
 				case 'price.domain': $item = $item->setDomain( $value ); break;
-				case 'price.quantity': $item = $item->setQuantity( $value ); break;
 				case 'price.value': $item = $item->setValue( $value ); break;
 				case 'price.costs': $item = $item->setCosts( $value ); break;
 				case 'price.rebate': $item = $item->setRebate( $value ); break;
 				case 'price.taxvalue': $item = $item->setTaxValue( $value ); break;
-				case 'price.taxrates': $item = $item->setTaxRates( (array) $value ); break;
 				case 'price.taxrate': $item = $item->setTaxRate( $value ); break;
-				case 'price.taxflag': $item = $item->setTaxFlag( $value ); break;
-				case 'price.status': $item = $item->setStatus( $value ); break;
+				case 'price.taxrates': $item = $item->setTaxRates( (array) $value ); break;
+				case 'price.taxflag': $item = $item->setTaxFlag( (bool) $value ); break;
+				case 'price.status': $item = $item->setStatus( (int) $value ); break;
 				case 'price.label': $item = $item->setLabel( $value ); break;
 				default: continue 2;
 			}
