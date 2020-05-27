@@ -205,8 +205,8 @@ class Standard
 				case $this->prefix . 'code': $item = $item->setCode( $value ); break;
 				case $this->prefix . 'domain': $item = $item->setDomain( $value ); break;
 				case $this->prefix . 'label': $item = $item->setLabel( $value ); break;
-				case $this->prefix . 'position': $item = $item->setPosition( $value ); break;
-				case $this->prefix . 'status': $item = $item->setStatus( $value ); break;
+				case $this->prefix . 'position': $item = $item->setPosition( (int) $value ); break;
+				case $this->prefix . 'status': $item = $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 

@@ -255,8 +255,8 @@ class Standard extends Base implements Iface
 			{
 				case 'customer.label': $item = $item->setLabel( $value ); break;
 				case 'customer.code': $item = $item->setCode( $value ); break;
-				case 'customer.status': $item = $item->setStatus( $value ); break;
-				case 'customer.groups': $item = $item->setGroups( $value ); break;
+				case 'customer.status': $item = $item->setStatus( (int) $value ); break;
+				case 'customer.groups': $item = $item->setGroups( (array) $value ); break;
 				case 'customer.password': !$private ?: $item = $item->setPassword( $value ); break;
 				case 'customer.dateverified': !$private ?: $item = $item->setDateVerified( $value ); break;
 				default: continue 2;

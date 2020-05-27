@@ -230,8 +230,8 @@ class Standard
 			{
 				case 'locale.site.code': $item = $item->setCode( $value ); break;
 				case 'locale.site.label': $item = $item->setLabel( $value ); break;
-				case 'locale.site.config': $item = $item->setConfig( $value ); break;
-				case 'locale.site.status': $item = $item->setStatus( $value ); break;
+				case 'locale.site.status': $item = $item->setStatus( (int) $value ); break;
+				case 'locale.site.config': $item = $item->setConfig( (array) $value ); break;
 				default: continue 2;
 			}
 

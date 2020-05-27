@@ -219,9 +219,9 @@ class Standard
 				case 'plugin.type': $item = $item->setType( $value ); break;
 				case 'plugin.label': $item = $item->setLabel( $value ); break;
 				case 'plugin.provider': $item = $item->setProvider( $value ); break;
-				case 'plugin.config': $item = $item->setConfig( $value ); break;
-				case 'plugin.status': $item = $item->setStatus( $value ); break;
-				case 'plugin.position': $item = $item->setPosition( $value ); break;
+				case 'plugin.status': $item = $item->setStatus( (int) $value ); break;
+				case 'plugin.config': $item = $item->setConfig( (array) $value ); break;
+				case 'plugin.position': $item = $item->setPosition( (int) $value ); break;
 				default: continue 2;
 			}
 

@@ -153,7 +153,7 @@ class Standard
 			{
 				case 'locale.currency.code': $item = $item->setCode( $value ); break;
 				case 'locale.currency.label': $item = $item->setLabel( $value ); break;
-				case 'locale.currency.status': $item = $item->setStatus( $value ); break;
+				case 'locale.currency.status': $item = $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 

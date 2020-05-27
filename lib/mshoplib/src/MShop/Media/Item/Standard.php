@@ -343,7 +343,7 @@ class Standard
 				case 'media.url': $item = $item->setUrl( $value ); break;
 				case 'media.preview': $item = $item->setPreview( $value ); break;
 				case 'media.previews': $item = $item->setPreviews( (array) $value ); break;
-				case 'media.status': $item = $item->setStatus( $value ); break;
+				case 'media.status': $item = $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 

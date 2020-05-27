@@ -166,7 +166,7 @@ class Standard
 			{
 				case 'supplier.code': $item = $item->setCode( $value ); break;
 				case 'supplier.label': $item = $item->setLabel( $value ); break;
-				case 'supplier.status': $item = $item->setStatus( $value ); break;
+				case 'supplier.status': $item = $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 

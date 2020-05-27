@@ -116,10 +116,10 @@ interface Iface
 	/**
 	 * Sets a new quantity scale of the product item.
 	 *
-	 * @param string $name New quantity scale
+	 * @param float $value New quantity scale
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
-	public function setScale( ?string $value ) : \Aimeos\MShop\Product\Item\Iface;
+	public function setScale( float $value ) : \Aimeos\MShop\Product\Item\Iface;
 
 	/**
 	 * Returns the URL target specific for that product

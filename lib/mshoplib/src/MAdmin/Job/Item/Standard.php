@@ -176,9 +176,9 @@ class Standard
 			{
 				case 'job.label': $item = $item->setLabel( $value ); break;
 				case 'job.method': $item = $item->setMethod( $value ); break;
-				case 'job.parameter': $item = $item->setParameter( $value ); break;
-				case 'job.result': $item = $item->setResult( $value ); break;
-				case 'job.status': $item = $item->setStatus( $value ); break;
+				case 'job.parameter': $item = $item->setParameter( (array) $value ); break;
+				case 'job.result': $item = $item->setResult( (array) $value ); break;
+				case 'job.status': $item = $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 

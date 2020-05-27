@@ -254,8 +254,8 @@ class Standard
 				case 'locale.siteid': $item = $item->setSiteId( $value ); break;
 				case 'locale.languageid': $item = $item->setLanguageId( $value ); break;
 				case 'locale.currencyid': $item = $item->setCurrencyId( $value ); break;
-				case 'locale.position': $item = $item->setPosition( $value ); break;
-				case 'locale.status': $item = $item->setStatus( $value ); break;
+				case 'locale.position': $item = $item->setPosition( (int) $value ); break;
+				case 'locale.status': $item = $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
 

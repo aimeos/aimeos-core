@@ -221,12 +221,12 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'coupon.config': $item = $item->setConfig( $value ); break;
 				case 'coupon.label': $item = $item->setLabel( $value ); break;
 				case 'coupon.datestart': $item = $item->setDateStart( $value ); break;
 				case 'coupon.dateend': $item = $item->setDateEnd( $value ); break;
 				case 'coupon.provider': $item = $item->setProvider( $value ); break;
-				case 'coupon.status': $item = $item->setStatus( $value ); break;
+				case 'coupon.status': $item = $item->setStatus( (int) $value ); break;
+				case 'coupon.config': $item = $item->setConfig( (array) $value ); break;
 				default: continue 2;
 			}
 
