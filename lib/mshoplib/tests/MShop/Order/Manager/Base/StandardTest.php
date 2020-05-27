@@ -222,6 +222,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateSearchSite()
+	{
+		$result = $this->object->createSearch( false, true );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
+	}
+
+
 	public function testSearchItems()
 	{
 		$siteid = $this->context->getLocale()->getSiteId();
