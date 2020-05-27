@@ -305,9 +305,10 @@ class Standard extends Base
 	 * Creates a search critera object
 	 *
 	 * @param bool $default Add default criteria (optional)
+	 * @param bool $site TRUE to add site criteria to show orders with available products only
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	public function createSearch( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		$search = parent::createSearch( $default );
 		$context = $this->getContext();
@@ -316,8 +317,16 @@ class Standard extends Base
 		{
 			$search->setConditions( $search->combine( '&&', [
 				$search->compare( '==', 'order.base.customerid', $context->getUserId() ),
-				$search->compare( '=~', 'order.base.product.siteid', $context->getLocale()->getSiteId() ),
 				$search->getConditions(),
+			] ) );
+		}
+
+		if( $site === true )
+		{
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+			$search->setConditions( $search->combine( '&&', [
+				$this->getSiteCondition( $search, 'order.base.product.siteid', $level ),
+				$search->getConditions()
 			] ) );
 		}
 
