@@ -94,7 +94,7 @@ abstract class Base
 	 *
 	 * @return string|null ID of the item or null
 	 */
-	public function __toString() : ?string
+	public function __toString()
 	{
 		return $this->getId();
 	}
