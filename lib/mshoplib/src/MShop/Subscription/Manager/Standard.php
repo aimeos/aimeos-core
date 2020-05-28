@@ -241,15 +241,27 @@ class Standard
 	 * Creates a search critera object
 	 *
 	 * @param bool $default Add default criteria (optional)
+	 * @param bool $site TRUE to add site criteria to show orders with available products only
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	public function createSearch( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
+		$search = parent::createSearch();
+
 		if( $default === true ) {
-			return $this->createSearchBase( 'subscription' );
+			$search = $this->createSearchBase( 'subscription' );
 		}
 
-		return parent::createSearch();
+		if( $site === true )
+		{
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+			$search->setConditions( $search->combine( '&&', [
+				$this->getSiteCondition( $search, 'order.base.product.siteid', $level ),
+				$search->getConditions()
+			] ) );
+		}
+
+		return $search;
 	}
 
 
