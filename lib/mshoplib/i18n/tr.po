@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Metal <meteoramic@yahoo.com>, 2015-2019
+# Metal <meteoramic@yahoo.com>, 2015-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-02 15:46+0200\n"
-"PO-Revision-Date: 2020-04-02 13:51+0000\n"
-"Last-Translator: Aimeos\n"
+"PO-Revision-Date: 2020-05-01 10:07+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +36,7 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr ""
+msgstr "%1$s\n%2$s\n%3$s%4$s\n%5$s\n%6$s%7$s\n%8$s%9$s\n%10$s\n%11$s\n%12$s\n%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -110,7 +110,7 @@ msgstr "Önbellek nesnesi mevcut değil"
 
 #, php-format
 msgid "Called unknown method \"%1$s\" on class \"%2$s\""
-msgstr ""
+msgstr "Class \"%2$s\" üzerinde bilinmeyen metot \"%1$s\" çağrıldı"
 
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
@@ -565,7 +565,7 @@ msgstr "Teslimat sağlayıcının XML yanıtındaki sipariş kimlik numarası ol
 
 #, php-format
 msgid "Order address position \"%1$s\" must be greater than 0"
-msgstr "Sipariş adresi konumu \"%1$s \" 0'dan büyük olmalıdır"
+msgstr "Sipariş adresi konumu \"%1$s\" 0'dan büyük olmalıdır"
 
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
@@ -648,11 +648,11 @@ msgstr "Fiyat eklenemiyor.  Fiyat öğesinin para birimi kimlik numarası \"%1$s
 
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
-msgstr "Verilen miktar olan \"%1$d\" için fiyat mevcut değil"
+msgstr "Belirtilen miktar \"%1$d\" minimum sipariş miktarının altında. Lütfen bu ürün için minimum sipariş miktarına bakın."
 
 #, php-format
 msgid "Price for the given quantity \"%1$s\" not available"
-msgstr ""
+msgstr "Belirtilen miktar \"%1$s\" minimum sipariş miktarının altında. Lütfen bu ürün için minimum sipariş miktarına bakın."
 
 #, php-format
 msgid "Price item not available"
@@ -710,7 +710,7 @@ msgstr "\"%1$s\" içinde tedarikçi mevcut değil"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
-msgstr ""
+msgstr "Miktar 0'dan büyük olmalıdır ve %1$d sayısını geçmemelidir"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
