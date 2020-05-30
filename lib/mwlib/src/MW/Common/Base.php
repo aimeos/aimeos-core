@@ -30,8 +30,10 @@ abstract class Base
 	 */
 	public static function checkClass( string $name, $object )
 	{
-		if( ( $object instanceof $name ) === false ) {
-			throw new \Aimeos\MW\Common\Exception( sprintf( 'Object doesn\'t implement "%1$s"', $name ) );
+		if( ( $object instanceof $name ) === false )
+		{
+			$msg = sprintf( 'Object "%1$s" doesn\'t implement "%2$s"', $object ? get_class( $object ) : 'NULL', $name );
+			throw new \Aimeos\MW\Common\Exception( $msg );
 		}
 
 		return $object;
@@ -50,8 +52,10 @@ abstract class Base
 	{
 		foreach( $list as $object )
 		{
-			if( ( $object instanceof $name ) === false ) {
-				throw new \Aimeos\MW\Common\Exception( sprintf( 'Object doesn\'t implement "%1$s"', $name ) );
+			if( ( $object instanceof $name ) === false )
+			{
+				$msg = sprintf( 'Object "%1$s" doesn\'t implement "%2$s"', $object ? get_class( $object ) : 'NULL', $name );
+				throw new \Aimeos\MW\Common\Exception( $msg );
 			}
 		}
 
