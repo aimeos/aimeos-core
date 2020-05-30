@@ -25,7 +25,7 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 *
 	 * @return array Multi-dimensional expression structure
 	 */
-	public function __toArray() : ?array
+	public function __toArray() : array
 	{
 		$cond = $this->getConditions();
 		return $cond ? $cond->__toArray() : [];

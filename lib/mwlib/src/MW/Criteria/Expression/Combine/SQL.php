@@ -18,11 +18,9 @@ namespace Aimeos\MW\Criteria\Expression\Combine;
  * @package MW
  * @subpackage Common
  */
-class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
+class SQL extends Base
 {
 	private static $operators = array( '&&' => 'AND', '||' => 'OR', '!' => 'NOT' );
-	private $expressions = [];
-	private $operator;
 
 
 	/**
@@ -37,49 +35,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MW\Criteria\Expression\Iface::class, $list );
-
-		$this->operator = $operator;
-		$this->expressions = $list;
-	}
-
-
-	/**
-	 * Returns an array representation of the expression that can be parsed again
-	 *
-	 * @return array Multi-dimensional expression structure
-	 */
-	public function __toArray() : array
-	{
-		$list = [];
-
-		foreach( $this->expressions as $expr ) {
-			$list[] = $expr->__toArray();
-		}
-
-		return [$this->operator => $list];
-	}
-
-
-	/**
-	 * Returns the list of expression objects that should be combined.
-	 *
-	 * @return array List of expression objects
-	 */
-	public function getExpressions() : array
-	{
-		return $this->expressions;
-	}
-
-
-	/**
-	 * Returns the operator used for the expressions.
-	 *
-	 * @return string Operator used for the expressions
-	 */
-	public function getOperator() : string
-	{
-		return $this->operator;
+		parent::__construct( $operator, $list );
 	}
 
 
@@ -105,24 +61,27 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 */
 	public function toSource( array $types, array $translations = [], array $plugins = [], array $funcs = [] )
 	{
-		if( ( $item = reset( $this->expressions ) ) === false ) {
+		$expr = $this->getExpressions();
+
+		if( ( $item = reset( $expr ) ) === false ) {
 			return '';
 		}
 
+		$op = $this->getOperator();
 		$string = $item->toSource( $types, $translations, $plugins, $funcs );
 
-		if( $this->operator == '!' && $string !== '' && $string !== null ) {
-			return ' ' . self::$operators[$this->operator] . ' ( ' . $string . ' )';
+		if( $op == '!' && $string !== '' && $string !== null ) {
+			return ' ' . self::$operators[$op] . ' ( ' . $string . ' )';
 		}
 
-		while( ( $item = next( $this->expressions ) ) !== false )
+		while( ( $item = next( $expr ) ) !== false )
 		{
 			$itemstr = $item->toSource( $types, $translations, $plugins, $funcs );
 
 			if( $itemstr !== '' && $itemstr !== null )
 			{
 				if( $string !== '' && $string !== null ) {
-					$string .= ' ' . self::$operators[$this->operator] . ' ' . $itemstr;
+					$string .= ' ' . self::$operators[$op] . ' ' . $itemstr;
 				} else {
 					$string = $itemstr;
 				}

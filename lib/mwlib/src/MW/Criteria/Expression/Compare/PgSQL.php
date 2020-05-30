@@ -17,7 +17,7 @@ namespace Aimeos\MW\Criteria\Expression\Compare;
  * @package MW
  * @subpackage Common
  */
-class PgSQL extends \Aimeos\MW\Criteria\Expression\Compare\SQL
+class PgSQL extends SQL
 {
 	/**
 	 * Escapes the value so it can be inserted into a SQL statement

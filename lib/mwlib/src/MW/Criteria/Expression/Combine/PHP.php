@@ -18,7 +18,7 @@ namespace Aimeos\MW\Criteria\Expression\Combine;
  * @package MW
  * @subpackage Common
  */
-class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
+class PHP extends Base
 {
 	private static $operators = array( '&&' => '&&', '||' => '||', '!' => '!' );
 	private $expressions = [];
@@ -37,49 +37,7 @@ class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MW\Criteria\Expression\Iface::class, $list );
-
-		$this->operator = $operator;
-		$this->expressions = $list;
-	}
-
-
-	/**
-	 * Returns an array representation of the expression that can be parsed again
-	 *
-	 * @return array Multi-dimensional expression structure
-	 */
-	public function __toArray() : array
-	{
-		$list = [];
-
-		foreach( $this->expressions as $expr ) {
-			$list[] = $expr->__toArray();
-		}
-
-		return [$this->operator => $list];
-	}
-
-
-	/**
-	 * Returns the list of expression objects that should be combined.
-	 *
-	 * @return array List of expression objects
-	 */
-	public function getExpressions() : array
-	{
-		return $this->expressions;
-	}
-
-
-	/**
-	 * Returns the operator used for the expressions.
-	 *
-	 * @return string Operator used for the expressions
-	 */
-	public function getOperator() : string
-	{
-		return $this->operator;
+		parent::__construct( $operator, $list );
 	}
 
 
@@ -104,20 +62,24 @@ class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 */
 	public function toSource( array $types, array $translations = [], array $plugins = [], array $funcs = [] )
 	{
-		if( ( $item = reset( $this->expressions ) ) === false ) {
+		$expr = $this->getExpressions();
+
+		if( ( $item = reset( $expr ) ) === false ) {
 			return '';
 		}
 
-		if( $this->operator == '!' ) {
-			return ' ' . self::$operators[$this->operator] . ' ' . $item->toSource( $types, $translations, $plugins );
+		$op = $this->getOperator();
+
+		if( $op == '!' ) {
+			return ' ' . self::$operators[$op] . ' ' . $item->toSource( $types, $translations, $plugins );
 		}
 
 		$string = $item->toSource( $types, $translations, $plugins, $funcs );
 
-		while( ( $item = next( $this->expressions ) ) !== false )
+		while( ( $item = next( $expr ) ) !== false )
 		{
 			if( ( $itemstr = $item->toSource( $types, $translations, $plugins ) ) !== '' ) {
-				$string .= ' ' . self::$operators[$this->operator] . ' ' . $itemstr;
+				$string .= ' ' . self::$operators[$op] . ' ' . $itemstr;
 			}
 		}
 

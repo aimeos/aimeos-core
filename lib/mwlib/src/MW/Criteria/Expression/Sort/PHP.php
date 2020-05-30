@@ -18,13 +18,9 @@ namespace Aimeos\MW\Criteria\Expression\Sort;
  * @package MW
  * @subpackage Common
  */
-class PHP
-	extends \Aimeos\MW\Criteria\Expression\Base
-	implements \Aimeos\MW\Criteria\Expression\Sort\Iface
+class PHP extends Base
 {
 	private static $operators = array( '+' => 'asort', '-' => 'arsort' );
-	private $operator;
-	private $name;
 
 
 	/**
@@ -39,30 +35,7 @@ class PHP
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
-		$this->operator = $operator;
-		$this->name = $name;
-	}
-
-
-	/**
-	 * Returns an array representation of the expression that can be parsed again
-	 *
-	 * @return array Multi-dimensional expression structure
-	 */
-	public function __toArray() : array
-	{
-		return [$this->name => $this->operator];
-	}
-
-
-	/**
-	 * Returns the sorting direction operator.
-	 *
-	 * @return string Sorting direction ("+": ascending, "-": descending)
-	 */
-	public function getOperator() : string
-	{
-		return $this->operator;
+		parent::__construct( $operator, $name );
 	}
 
 
@@ -74,17 +47,6 @@ class PHP
 	public static function getOperators() : array
 	{
 		return array_keys( self::$operators );
-	}
-
-
-	/**
-	 * Returns the name of the variable to sort.
-	 *
-	 * @return string Name of the variable or column to sort
-	 */
-	public function getName() : string
-	{
-		return $this->name;
 	}
 
 
@@ -101,7 +63,7 @@ class PHP
 	{
 		$this->setPlugins( $plugins );
 
-		$name = $this->name;
+		$name = $this->getName();
 		$transname = $this->translateName( $name, $translations, $funcs );
 
 		if( !$transname ) {
@@ -112,7 +74,7 @@ class PHP
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
-		return self::$operators[$this->operator] . '(' . $transname . ');';
+		return self::$operators[$this->getOperator()] . '(' . $transname . ');';
 	}
 
 

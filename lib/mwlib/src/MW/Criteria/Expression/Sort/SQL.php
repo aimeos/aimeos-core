@@ -18,14 +18,10 @@ namespace Aimeos\MW\Criteria\Expression\Sort;
  * @package MW
  * @subpackage Common
  */
-class SQL
-	extends \Aimeos\MW\Criteria\Expression\Base
-	implements \Aimeos\MW\Criteria\Expression\Sort\Iface
+class SQL extends Base
 {
 	private static $operators = array( '+' => 'ASC', '-' => 'DESC' );
-	private $operator;
 	private $conn;
-	private $name;
 
 
 	/**
@@ -41,31 +37,8 @@ class SQL
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
-		$this->operator = $operator;
+		parent::__construct( $operator, $name );
 		$this->conn = $conn;
-		$this->name = $name;
-	}
-
-
-	/**
-	 * Returns an array representation of the expression that can be parsed again
-	 *
-	 * @return array Multi-dimensional expression structure
-	 */
-	public function __toArray() : array
-	{
-		return [$this->name => $this->operator];
-	}
-
-
-	/**
-	 * Returns the sorting direction operator.
-	 *
-	 * @return string Sorting direction ("+": ascending, "-": descending)
-	 */
-	public function getOperator() : string
-	{
-		return $this->operator;
 	}
 
 
@@ -77,17 +50,6 @@ class SQL
 	public static function getOperators() : array
 	{
 		return array_keys( self::$operators );
-	}
-
-
-	/**
-	 * Returns the name of the variable or column to sort.
-	 *
-	 * @return string Name of the variable or column to sort
-	 */
-	public function getName() : string
-	{
-		return $this->name;
 	}
 
 
@@ -104,7 +66,7 @@ class SQL
 	{
 		$this->setPlugins( $plugins );
 
-		$name = $this->name;
+		$name = $this->getName();
 		$transname = $this->translateName( $name, $translations, $funcs );
 
 		if( !$transname ) {
@@ -115,7 +77,7 @@ class SQL
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
-		return $transname . ' ' . self::$operators[$this->operator];
+		return $transname . ' ' . self::$operators[$this->getOperator()];
 	}
 
 

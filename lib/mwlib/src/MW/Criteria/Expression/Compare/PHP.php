@@ -18,7 +18,7 @@ namespace Aimeos\MW\Criteria\Expression\Compare;
  * @package MW
  * @subpackage Common
  */
-class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
+class PHP extends Base
 {
 	private static $operators = array( '>' => '>', '>=' => '>=', '<' => '<', '<=' => '<=', '==' => '==', '!=' => '!=' );
 
@@ -54,12 +54,12 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	/**
 	 * Creates a term string from the given parameters.
 	 *
-	 * @param string $name Translated name of variable that should be compared
+	 * @param string|array $name Translated name(s) of the variable or column
 	 * @param string $type Type constant
 	 * @param mixed $value Value that the variable should be compared to
 	 * @return string Created term string (name operator value)
 	 */
-	protected function createTerm( string $name, string $type, $value ) : string
+	protected function createTerm( $name, string $type, $value ) : string
 	{
 		$escaped = $this->escape( $this->getOperator(), $type, $value );
 		return $name . ' ' . self::$operators[$this->getOperator()] . ' ' . $escaped;
@@ -69,10 +69,11 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	/**
 	 * Creates a term which contains a null value.
 	 *
-	 * @param string $name Translated name of the variable or column
+	 * @param string|array $name Translated name(s) of the variable or column
+	 * @param string $type Code of the internal value type
 	 * @return string Created term string (name operator null)
 	 */
-	protected function createNullTerm( string $name ) : string
+	protected function createNullTerm( $name, string $type ) : string
 	{
 		if( is_array( $name ) ) {
 			return '';
@@ -93,11 +94,11 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	/**
 	 * Creates a term from a list of values.
 	 *
-	 * @param string $name Translated name of the variable
+	 * @param string|array $name Translated name(s) of the variable or column
 	 * @param string $type Type constant
 	 * @return string Created term string
 	 */
-	protected function createListTerm( string $name, string $type ) : string
+	protected function createListTerm( $name, string $type ) : string
 	{
 		switch( $this->getOperator() )
 		{

@@ -21,6 +21,14 @@ namespace Aimeos\MW\Criteria;
 interface Iface
 {
 	/**
+	 * Returns an array representation of the expression that can be parsed again
+	 *
+	 * @return array Multi-dimensional expression structure
+	 */
+	public function __toArray() : array;
+
+
+	/**
 	 * Adds a new expression to the existing list combined by the AND operator.
 	 *
 	 * You can add expression is three ways:

@@ -23,7 +23,7 @@ interface Iface extends \Aimeos\MW\Criteria\Expression\Iface
 	/**
 	 * Returns the list of expressions that should be combined.
 	 *
-	 * @return array List of expressions
+	 * @return array List of expressions implementing \Aimeos\MW\Criteria\Expression\Iface
 	 */
 	public function getExpressions() : array;
 }

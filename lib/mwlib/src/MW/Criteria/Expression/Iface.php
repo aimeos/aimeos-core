@@ -21,6 +21,27 @@ namespace Aimeos\MW\Criteria\Expression;
 interface Iface
 {
 	/**
+	 * Returns an array representation of the expression that can be parsed again
+	 *
+	 * @return array Multi-dimensional expression structure
+	 */
+	public function __toArray() : array;
+
+	/**
+	 * Returns the operator for combining or comparing the expressions.
+	 *
+	 * @return string Operator for combining or comparing
+	 */
+	public function getOperator() : string;
+
+	/**
+	 * Returns the available operators for the expression.
+	 *
+	 * @return array List of available operators
+	 */
+	public static function getOperators() : array;
+
+	/**
 	 * Generates a string from the expression objects.
 	 *
 	 * @param array $types Associative list of variable or column names as keys and their corresponding types
@@ -30,23 +51,6 @@ interface Iface
 	 * @return mixed Expression that evaluates to a boolean result
 	 */
 	public function toSource( array $types, array $translations = [], array $plugins = [], array $funcs = [] );
-
-
-	/**
-	 * Returns the operator for combining or comparing the expressions.
-	 *
-	 * @return string Operator for combining or comparing
-	 */
-	public function getOperator() : string;
-
-
-	/**
-	 * Returns the available operators for the expression.
-	 *
-	 * @return array List of available operators
-	 */
-	public static function getOperators() : array;
-
 
 	/**
 	 * Translates the sort key into the name required by the storage

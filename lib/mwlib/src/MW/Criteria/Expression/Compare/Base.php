@@ -18,10 +18,10 @@ namespace Aimeos\MW\Criteria\Expression\Compare;
  * @package MW
  * @subpackage Common
  */
-abstract class Base
-	extends \Aimeos\MW\Criteria\Expression\Base
-	implements \Aimeos\MW\Criteria\Expression\Compare\Iface
+abstract class Base implements Iface
 {
+	use \Aimeos\MW\Criteria\Expression\Traits;
+
 	private $operator;
 	private $name;
 	private $value;
@@ -115,8 +115,8 @@ abstract class Base
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
-		if( $transvalue === null && ( $this->operator === '==' || $this->operator === '!=' ) ) {
-			return $this->createNullTerm( $transname );
+		if( $transvalue === null && in_array( $this->getOperator(), ['==', '!='] ) ) {
+			return $this->createNullTerm( $transname, $types[$name] );
 		}
 
 		if( is_array( $transname ) ) {
@@ -134,29 +134,30 @@ abstract class Base
 	/**
 	 * Creates a term string from the given parameters.
 	 *
-	 * @param string $name Translated name of variable or column that should be compared
+	 * @param string|array $name Translated name(s) of the variable or column
 	 * @param string $type Type constant
 	 * @param mixed $value Value that the variable or column should be compared to
-	 * @return string Created term string (name operator value)
+	 * @return mixed Created term
 	 */
-	abstract protected function createTerm( string $name, string $type, $value ) : string;
+	abstract protected function createTerm( $name, string $type, $value );
 
 
 	/**
 	 * Creates a term which contains a null value.
 	 *
-	 * @param string $name Translated name of the variable or column
-	 * @return string String that can be inserted into a SQL statement
+	 * @param string|array $name Translated name(s) of the variable or column
+	 * @param string $type Code of the internal value type
+	 * @return mixed Created null term
 	 */
-	abstract protected function createNullTerm( string $name ) : string;
+	abstract protected function createNullTerm( $name, string $type );
 
 
 	/**
 	 * Creates a term from a list of values.
 	 *
-	 * @param string $name Translated name of the variable or column
+	 * @param string|array $name Translated name(s) of the variable or column
 	 * @param string $type Type constant
-	 * @return string String that can be inserted into a SQL statement
+	 * @return mixed Created list term
 	 */
-	abstract protected function createListTerm( string $name, string $type ) : string;
+	abstract protected function createListTerm( $name, string $type );
 }
