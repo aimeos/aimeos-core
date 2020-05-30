@@ -21,14 +21,30 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Subscription\Item\Iface
 {
+	private $baseItem;
+
+
 	/**
 	 * Initializes the object with the given values.
 	 *
 	 * @param array $values Associative list of values from database
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface|null $baseItem Order basket if available
 	 */
-	public function __construct( array $values = [] )
+	public function __construct( array $values = [], ?\Aimeos\MShop\Order\Item\Base\Iface $baseItem = null )
 	{
 		parent::__construct( 'subscription.', $values );
+		$this->baseItem = $baseItem;
+	}
+
+
+	/**
+	 * Returns the associated order base item
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface|null Order base item
+	 */
+	public function getBaseItem() : ?\Aimeos\MShop\Order\Item\Base\Iface
+	{
+		return $this->baseItem;
 	}
 
 

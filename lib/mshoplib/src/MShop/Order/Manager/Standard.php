@@ -919,7 +919,7 @@ class Standard
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface|null $baseItem Order basket if requested and available
 	 * @return \Aimeos\MShop\Order\Item\Iface New order item
 	 */
-	protected function createItemBase( array $values = [], \Aimeos\MShop\Order\Item\Base\Iface $baseItem = null ) : \Aimeos\MShop\Order\Item\Iface
+	protected function createItemBase( array $values = [], ?\Aimeos\MShop\Order\Item\Base\Iface $baseItem = null ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		return new \Aimeos\MShop\Order\Item\Standard( $values, $baseItem );
 	}

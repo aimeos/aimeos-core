@@ -208,15 +208,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
+	}
 
 
-		$search = $this->object->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'subscription.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice( 0, 1 );
+	public function testSearchItemsTotal()
+	{
 		$total = 0;
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search->setConditions( $search->compare( '==', 'subscription.editor', $this->editor ) );
 		$items = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $items ) );
@@ -225,6 +224,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		foreach( $items as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+	}
+
+
+	public function testSearchItemsRef()
+	{
+		$total = 0;
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search->setConditions( $search->compare( '==', 'subscription.dateend', '2010-01-01' ) );
+		$item = $this->object->searchItems( $search, ['order/base', 'order/base/product'], $total )->first();
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $item->getBaseItem() );
+		$this->assertEquals( 4, count( $item->getBaseItem()->getProducts() ) );
 	}
 
 

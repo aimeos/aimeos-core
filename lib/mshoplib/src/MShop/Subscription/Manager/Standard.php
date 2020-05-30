@@ -575,7 +575,7 @@ class Standard
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
-		$items = [];
+		$map = $items = $baseItems = [];
 
 		try
 		{
@@ -730,11 +730,8 @@ class Standard
 
 			try
 			{
-				while( ( $row = $results->fetch() ) !== null )
-				{
-					if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-						$items[$row['subscription.id']] = $item;
-					}
+				while( ( $row = $results->fetch() ) !== null ) {
+					$map[$row['subscription.id']] = $row;
 				}
 			}
 			catch( \Exception $e )
@@ -749,6 +746,29 @@ class Standard
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
+		}
+
+
+		if( in_array( 'order/base', $ref ) )
+		{
+			$ids = [];
+			foreach( $map as $row ) {
+				$ids[] = $row['subscription.ordbaseid'];
+			}
+
+			$manager = $this->getObject()->getSubManager( 'base' );
+			$search = $manager->createSearch()->setSlice( 0, count( $ids ) );
+			$search->setConditions( $search->compare( '==', 'order.base.id', $ids ) );
+			$baseItems = $manager->searchItems( $search, $ref );
+		}
+
+		foreach( $map as $id => $row )
+		{
+			$baseItem = $baseItems[$row['subscription.ordbaseid']] ?? null;
+
+			if( $item = $this->applyFilter( $this->createItemBase( $row, $baseItem ) ) ) {
+				$items[$id] = $item;
+			}
 		}
 
 		return map( $items );
@@ -772,10 +792,11 @@ class Standard
 	 * Creates a new subscription item.
 	 *
 	 * @param array $values List of attributes for subscription item
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface|null $baseItem Order basket if requested and available
 	 * @return \Aimeos\MShop\Subscription\Item\Iface New subscription item
 	 */
-	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Subscription\Item\Iface
+	protected function createItemBase( array $values = [], ?\Aimeos\MShop\Order\Item\Base\Iface $baseItem = null ) : \Aimeos\MShop\Subscription\Item\Iface
 	{
-		return new \Aimeos\MShop\Subscription\Item\Standard( $values );
+		return new \Aimeos\MShop\Subscription\Item\Standard( $values, $baseItem );
 	}
 }

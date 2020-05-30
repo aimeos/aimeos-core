@@ -34,7 +34,7 @@ class Standard
 	 * @param array $values Associative list of values from database
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface|null $baseItem Order basket if available
 	 */
-	public function __construct( array $values = [], \Aimeos\MShop\Order\Item\Base\Iface $baseItem = null )
+	public function __construct( array $values = [], ?\Aimeos\MShop\Order\Item\Base\Iface $baseItem = null )
 	{
 		parent::__construct( 'order.', $values );
 		$this->baseItem = $baseItem;
