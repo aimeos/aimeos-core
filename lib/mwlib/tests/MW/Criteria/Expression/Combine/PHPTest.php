@@ -73,4 +73,24 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$expected = " ! ( ( ( \$listitem == 'a' || \$listitem == 'b' || \$listitem == 'c' ) && \$stringvar == 'value' ) || ( \$floatvar < 0.1 && \$intvar > 10 ) )";
 		$this->assertEquals( $expected, $test->toSource( $types, $translations ) );
 	}
+
+
+	public function testToArray()
+	{
+		$expected = [
+			'&&' => [
+				['==' => ['stringvar' => 'value']],
+				['>' => ['intvar' => 10]],
+			]
+		];
+
+		$expr = [
+			new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'stringvar', 'value' ),
+			new \Aimeos\MW\Criteria\Expression\Compare\PHP( '>', 'intvar', 10 ),
+		];
+
+		$object = new \Aimeos\MW\Criteria\Expression\Combine\PHP( '&&', $expr );
+
+		$this->assertEquals( $expected, $object->__toArray() );
+	}
 }

@@ -221,6 +221,20 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 10, $this->object->getSliceStart() );
 		$this->assertEquals( 20, $this->object->getSliceSize() );
 	}
+
+
+	public function testToArray()
+	{
+		$array = [
+			'&&' => [
+				['==' => ['stringvar' => 'value']],
+				['>' => ['intvar' => 10]],
+			]
+		];
+		$this->object->setConditions( $this->object->parse( $array ) );
+
+		$this->assertEquals( $array, $this->object->__toArray() );
+	}
 }
 
 

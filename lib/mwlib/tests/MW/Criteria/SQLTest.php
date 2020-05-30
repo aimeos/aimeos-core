@@ -430,6 +430,20 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '-', $sortations[1]->getOperator() );
 		$this->assertEquals( 'name2', $sortations[1]->getName() );
 	}
+
+
+	public function testToArray()
+	{
+		$array = [
+			'&&' => [
+				['==' => ['stringvar' => 'value']],
+				['>' => ['intvar' => 10]],
+			]
+		];
+		$this->object->setConditions( $this->object->parse( $array ) );
+
+		$this->assertEquals( $array, $this->object->__toArray() );
+	}
 }
 
 

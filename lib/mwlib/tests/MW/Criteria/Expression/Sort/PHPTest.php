@@ -61,14 +61,14 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testException1()
+	public function testExceptionWrongOperator()
 	{
 		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		new \Aimeos\MW\Criteria\Expression\Sort\PHP( '/', 'test(1,2)' );
 	}
 
 
-	public function testException2()
+	public function testExceptionWrongType()
 	{
 		$types = array(
 			'test' => 'array',
@@ -83,5 +83,13 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		$object->toSource( $types, $translations );
+	}
+
+
+	public function testToArray()
+	{
+		$object = new \Aimeos\MW\Criteria\Expression\Sort\PHP( '+', 'stringvar' );
+
+		$this->assertEquals( ['stringvar' => '+'], $object->__toArray() );
 	}
 }

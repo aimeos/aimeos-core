@@ -143,4 +143,13 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'substring("hello world", 0, 5)', 'hello' );
 		$this->assertEquals( "substr('hello world',0,5) == 'hello'", $expr->toSource( $types, $translations ) );
 	}
+
+
+	public function testToArray()
+	{
+		$expected = ['==' => ['stringvar' => 'value']];
+		$object = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'stringvar', 'value' );
+
+		$this->assertEquals( $expected, $object->__toArray() );
+	}
 }

@@ -43,6 +43,17 @@ abstract class Base
 
 
 	/**
+	 * Returns an array representation of the expression that can be parsed again
+	 *
+	 * @return array Multi-dimensional expression structure
+	 */
+	public function __toArray() : array
+	{
+		return [$this->operator => [$this->name => $this->value]];
+	}
+
+
+	/**
 	 * Returns the operator used for the expression.
 	 *
 	 * @return string Operator used for the expression

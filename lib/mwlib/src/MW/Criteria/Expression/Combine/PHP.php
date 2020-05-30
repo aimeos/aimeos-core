@@ -21,8 +21,8 @@ namespace Aimeos\MW\Criteria\Expression\Combine;
 class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 {
 	private static $operators = array( '&&' => '&&', '||' => '||', '!' => '!' );
-	private $operator = '&&';
 	private $expressions = [];
+	private $operator;
 
 
 	/**
@@ -41,6 +41,23 @@ class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 
 		$this->operator = $operator;
 		$this->expressions = $list;
+	}
+
+
+	/**
+	 * Returns an array representation of the expression that can be parsed again
+	 *
+	 * @return array Multi-dimensional expression structure
+	 */
+	public function __toArray() : array
+	{
+		$list = [];
+
+		foreach( $this->expressions as $expr ) {
+			$list[] = $expr->__toArray();
+		}
+
+		return [$this->operator => $list];
 	}
 
 

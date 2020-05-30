@@ -76,4 +76,16 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MW\Criteria\Expression\Sort\SQL( $this->conn, '-', 'test("a",2)' );
 		$this->assertEquals( 'testfunc(\'a\',2) DESC', $object->toSource( $types, $translations ) );
 	}
+
+
+	public function testToArray()
+	{
+		$dbm = \TestHelperMw::getDBManager();
+		$conn = $dbm->acquire();
+		$dbm->release( $conn );
+
+		$object = new \Aimeos\MW\Criteria\Expression\Sort\SQL( $conn, '+', 'stringvar' );
+
+		$this->assertEquals( ['stringvar' => '+'], $object->__toArray() );
+	}
 }

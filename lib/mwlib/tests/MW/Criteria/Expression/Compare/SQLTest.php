@@ -144,4 +144,17 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '!=', 'isnull(null)', null );
 		$this->assertEquals( "(null IS NULL) IS NOT NULL", $expr->toSource( $types, $translations ) );
 	}
+
+
+	public function testToArray()
+	{
+		$dbm = \TestHelperMw::getDBManager();
+		$conn = $dbm->acquire();
+		$dbm->release( $conn );
+
+		$expected = ['==' => ['stringvar' => 'value']];
+		$object = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $conn, '==', 'stringvar', 'value' );
+
+		$this->assertEquals( $expected, $object->__toArray() );
+	}
 }

@@ -21,6 +21,18 @@ namespace Aimeos\MW\Criteria;
 abstract class Base implements \Aimeos\MW\Criteria\Iface
 {
 	/**
+	 * Returns an array representation of the expression that can be parsed again
+	 *
+	 * @return array Multi-dimensional expression structure
+	 */
+	public function __toArray() : ?array
+	{
+		$cond = $this->getConditions();
+		return $cond ? $cond->__toArray() : [];
+	}
+
+
+	/**
 	 * Adds a new expression to the existing list combined by the AND operator.
 	 *
 	 * You can add expression is three ways:

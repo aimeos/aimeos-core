@@ -48,6 +48,17 @@ class SQL
 
 
 	/**
+	 * Returns an array representation of the expression that can be parsed again
+	 *
+	 * @return array Multi-dimensional expression structure
+	 */
+	public function __toArray() : array
+	{
+		return [$this->name => $this->operator];
+	}
+
+
+	/**
 	 * Returns the sorting direction operator.
 	 *
 	 * @return string Sorting direction ("+": ascending, "-": descending)

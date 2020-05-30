@@ -81,4 +81,28 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->expectException( \Aimeos\MW\Common\Exception::class );
 		new \Aimeos\MW\Criteria\Expression\Combine\SQL( '', [] );
 	}
+
+
+	public function testToArray()
+	{
+		$dbm = \TestHelperMw::getDBManager();
+		$conn = $dbm->acquire();
+		$dbm->release( $conn );
+
+		$expected = [
+			'&&' => [
+				['==' => ['stringvar' => 'value']],
+				['>' => ['intvar' => 10]],
+			]
+		];
+
+		$expr = [
+			new \Aimeos\MW\Criteria\Expression\Compare\SQL( $conn, '==', 'stringvar', 'value' ),
+			new \Aimeos\MW\Criteria\Expression\Compare\SQL( $conn, '>', 'intvar', 10 ),
+		];
+
+		$object = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '&&', $expr );
+
+		$this->assertEquals( $expected, $object->__toArray() );
+	}
 }
