@@ -32,13 +32,13 @@ abstract class Base implements Iface
 	 *
 	 * @param string $operator Operator used for the expression
 	 * @param string $name Name of variable or column that should be compared.
-	 * @param string|array $value Value that the variable or column should be compared to
+	 * @param string|array|\Aimeos\Map $value Value that the variable or column should be compared to
 	 */
 	public function __construct( string $operator, string $name, $value )
 	{
+		$this->value = is_map( $value ) ? $value->toArray() : $value;
 		$this->operator = $operator;
 		$this->name = $name;
-		$this->value = $value;
 	}
 
 
