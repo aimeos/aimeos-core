@@ -867,13 +867,14 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$items = [];
 		$context = $this->getContext();
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
+
+		$map = $items = $prodItems = [];
 
 		try
 		{
@@ -1017,7 +1018,7 @@ class Standard
 						'price.taxvalue' => $row['order.base.product.taxvalue'],
 					] );
 
-					$items[(string) $row['order.base.product.id']] = array( 'price' => $price, 'item' => $row );
+					$map[$row['order.base.product.id']] = ['price' => $price, 'item' => $row];
 				}
 			}
 			catch( \Exception $e )
@@ -1034,17 +1035,33 @@ class Standard
 			throw $e;
 		}
 
-		$result = [];
-		$attributes = $this->getAttributeItems( array_keys( $items ) );
 
-		foreach( $items as $id => $row )
+		if( isset( $ref['product'] ) || in_array( 'product', $ref ) )
 		{
-			if( $item = $this->applyFilter( $this->createItemBase( $row['price'], $row['item'], $attributes[$id] ?? [] ) ) ) {
-				$result[$id] = $item;
+			$ids = [];
+			foreach( $map as $list ) {
+				$ids[] = $list['item']['order.base.product.productid'] ?? null;
+			}
+
+			$manager = \Aimeos\MShop::create( $context, 'product' );
+			$search = $manager->createSearch()->setSlice( 0, count( $ids ) );
+			$search->setConditions( $search->compare( '==', 'product.id', array_filter( $ids ) ) );
+			$prodItems = $manager->searchItems( $search, $ref );
+		}
+
+		$attributes = $this->getAttributeItems( array_keys( $map ) );
+
+		foreach( $map as $id => $list )
+		{
+			$prodItem = $prodItems[$list['item']['order.base.product.productid'] ?? null] ?? null;
+			$item = $this->createItemBase( $list['price'], $list['item'], $attributes[$id] ?? [], $prodItem );
+
+			if( $item = $this->applyFilter( $item ) ) {
+				$items[$id] = $item;
 			}
 		}
 
-		return map( $result );
+		return map( $items );
 	}
 
 
@@ -1054,12 +1071,13 @@ class Standard
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item object with product price
 	 * @param array $values Associative list of order product properties
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] $attributes List of order product attributes
+	 * @param \Aimeos\MShop\Product\Item\Iface|null $prodItem Original product item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item
 	 */
-	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, array $values = [],
-		array $attributes = [] ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [],
+		?\Aimeos\MShop\Product\Item\Iface $prodItem = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return new \Aimeos\MShop\Order\Item\Base\Product\Standard( $price, $values, $attributes );
+		return new \Aimeos\MShop\Order\Item\Base\Product\Standard( $price, $values, $attributes, [], $prodItem );
 	}
 
 

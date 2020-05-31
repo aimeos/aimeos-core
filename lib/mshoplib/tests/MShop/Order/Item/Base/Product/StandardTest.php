@@ -66,13 +66,25 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			new \Aimeos\MShop\Order\Item\Base\Product\Standard( clone $this->price ),
 			new \Aimeos\MShop\Order\Item\Base\Product\Standard( clone $this->price )
 		);
-		$this->object = new \Aimeos\MShop\Order\Item\Base\Product\Standard( $this->price, $this->values, $this->attribute, $this->subProducts );
+
+		$productItem = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'product' )->createItem();
+		$this->object = new \Aimeos\MShop\Order\Item\Base\Product\Standard(
+			$this->price, $this->values, $this->attribute,
+			$this->subProducts, $productItem
+		);
 	}
 
 
 	protected function tearDown() : void
 	{
 		unset( $this->object );
+	}
+
+
+	public function testGetProductItem()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->getProductItem() );
+		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Base\Product\Standard( $this->price ) )->getProductItem() );
 	}
 
 

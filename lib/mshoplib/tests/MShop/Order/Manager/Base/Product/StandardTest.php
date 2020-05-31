@@ -168,6 +168,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
+	}
+
+
+	public function testSearchItemRef()
+	{
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search->setConditions( $search->compare( '==', 'order.base.product.prodcode', 'CNE' ) );
+		$result = $this->object->searchItems( $search, ['product'] );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertNotNull( $result->first()->getProductItem() );
+	}
+
+
+	public function testSearchItemTotal()
+	{
+		$total = 0;
+		$search = $this->object->createSearch();
 
 		$conditions = array(
 			$search->compare( '==', 'order.base.product.suppliercode', 'unitsupplier' ),
