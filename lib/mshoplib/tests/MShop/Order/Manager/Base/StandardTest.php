@@ -364,6 +364,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSearchItemsRef()
+	{
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
+
+		$search->setConditions( $search->compare( '!=', 'order.base.customerid', '' ) );
+		$result = $this->object->searchItems( $search, ['customer'] );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertNotNull( $result->first()->getCustomerItem() );
+	}
+
+
 	public function testSearchItemsTotal()
 	{
 		$search = $this->object->createSearch();

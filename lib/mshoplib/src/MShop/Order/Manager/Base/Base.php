@@ -50,11 +50,12 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface[] $addresses List of order address items
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface[] $services List of order serviceitems
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $coupons Associative list of coupon codes as keys and items as values
+	 * @param \Aimeos\MShop\Customer\Item\Iface|null $custItem Customer item object if requested
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base object
 	 */
 	abstract protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
-		array $values = [], array $products = [], array $addresses = [],
-		array $services = [], array $coupons = [] ) : \Aimeos\MShop\Order\Item\Base\Iface;
+		array $values = [], array $products = [], array $addresses = [], array $services = [], array $coupons = [],
+		?\Aimeos\MShop\Customer\Item\Iface $custItem = null ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 
 	/**

@@ -766,8 +766,6 @@ class Standard extends Base
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$map = [];
-
 		$context = $this->getContext();
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
@@ -775,6 +773,8 @@ class Standard extends Base
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
+
+		$map = $items = $custItems = [];
 
 		try
 		{
@@ -898,23 +898,8 @@ class Standard extends Base
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== null )
-			{
-				$price = $priceManager->createItem();
-				$price->setCurrencyId( $row['order.base.currencyid'] );
-				$price->setValue( $row['order.base.price'] );
-				$price->setCosts( $row['order.base.costs'] );
-				$price->setRebate( $row['order.base.rebate'] );
-				$price->setTaxValue( $row['order.base.taxvalue'] );
-				$price->setTaxFlag( $row['order.base.taxflag'] );
-
-				// you may need the site object! take care!
-				$localeItem = $localeManager->createItem();
-				$localeItem->setLanguageId( $row['order.base.languageid'] );
-				$localeItem->setCurrencyId( $row['order.base.currencyid'] );
-				$localeItem->setSiteId( $row['order.base.siteid'] );
-
-				$map[(string) $row['order.base.id']] = [$price, $localeItem, $row];
+			while( ( $row = $results->fetch() ) !== null ) {
+				$map[$row['order.base.id']] = $row;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -923,6 +908,34 @@ class Standard extends Base
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
+		}
+
+		if( ( isset( $ref['customer'] ) || in_array( 'customer', $ref ) )
+			&& !( $ids = map( $map )->col( 'order.base.customerid' )->filter() )->empty()
+		) {
+			$manager = \Aimeos\MShop::create( $context, 'customer' );
+			$search = $manager->createSearch()->setSlice( 0, count( $ids ) );
+			$search->setConditions( $search->compare( '==', 'customer.id', $ids ) );
+			$custItems = $manager->searchItems( $search, $ref );
+		}
+
+		foreach( $map as $id => $row )
+		{
+			$price = $priceManager->createItem();
+			$price->setCurrencyId( $row['order.base.currencyid'] );
+			$price->setValue( $row['order.base.price'] );
+			$price->setCosts( $row['order.base.costs'] );
+			$price->setRebate( $row['order.base.rebate'] );
+			$price->setTaxValue( $row['order.base.taxvalue'] );
+			$price->setTaxFlag( $row['order.base.taxflag'] );
+
+			// you may need the site object! take care!
+			$localeItem = $localeManager->createItem();
+			$localeItem->setLanguageId( $row['order.base.languageid'] );
+			$localeItem->setCurrencyId( $row['order.base.currencyid'] );
+			$localeItem->setSiteId( $row['order.base.siteid'] );
+
+			$map[$id] = [$price, $localeItem, $row, $custItems[$row['order.base.customerid'] ?? null] ?? null];
 		}
 
 		return $this->buildItems( $map, $ref );
@@ -1078,14 +1091,14 @@ class Standard extends Base
 
 		foreach( $map as $id => $list )
 		{
-			list( $price, $locale, $row ) = $list;
+			list( $price, $locale, $row, $custItem ) = $list;
 
 			$addresses = $addressMap[$id] ?? [];
 			$coupons = $couponMap[$id] ?? [];
 			$products = $productMap[$id] ?? [];
 			$services = $serviceMap[$id] ?? [];
 
-			$item = $this->createItemBase( $price, $locale, $row, $products, $addresses, $services, $coupons );
+			$item = $this->createItemBase( $price, $locale, $row, $products, $addresses, $services, $coupons, $custItem );
 
 			if( $item = $this->applyFilter( $item ) ) {
 				$items[$id] = $item;
@@ -1106,13 +1119,14 @@ class Standard extends Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface[] $addresses List of order address items
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface[] $services List of order serviceitems
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $coupons Associative list of coupon codes as keys and items as values
+	 * @param \Aimeos\MShop\Customer\Item\Iface|null $custItem Customer item object if requested
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base object
 	 */
 	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
-		array $values = [], array $products = [], array $addresses = [],
-		array $services = [], array $coupons = [] ) : \Aimeos\MShop\Order\Item\Base\Iface
+		array $values = [], array $products = [], array $addresses = [], array $services = [], array $coupons = [],
+		?\Aimeos\MShop\Customer\Item\Iface $custItem = null ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		return new \Aimeos\MShop\Order\Item\Base\Standard( $price, $locale,
-			$values, $products, $addresses, $services, $coupons );
+			$values, $products, $addresses, $services, $coupons, $custItem );
 	}
 }

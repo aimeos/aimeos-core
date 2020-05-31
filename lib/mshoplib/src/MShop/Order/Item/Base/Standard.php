@@ -23,6 +23,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	// protected is a workaround for serialize problem
 	protected $price;
 	protected $locale;
+	protected $customer;
 	protected $recalc = false;
 	protected $available = true;
 
@@ -37,15 +38,17 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface[] $addresses List of order address items
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface[] $services List of order service items
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $coupons Associative list of coupon codes as keys and order product items as values
+	 * @param \Aimeos\MShop\Customer\Item\Iface|null $custItem Customer item object
 	 */
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
-		array $values = [], array $products = [], array $addresses = [],
-		array $services = [], array $coupons = [] )
+		array $values = [], array $products = [], array $addresses = [], array $services = [], array $coupons = [],
+		?\Aimeos\MShop\Customer\Item\Iface $custItem = null )
 	{
 		parent::__construct( $price, $locale, $values, $products, $addresses, $services, $coupons );
 
 		$this->price = $price;
 		$this->locale = $locale;
+		$this->customer = $custItem;
 	}
 
 
@@ -81,6 +84,17 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$this->notify( 'check.after', $what );
 
 		return $this;
+	}
+
+
+	/**
+	 * Returns the associated customer item
+	 *
+	 * @return \Aimeos\MShop\Customer\Item\Iface|null Customer item
+	 */
+	public function getCustomerItem() : ?\Aimeos\MShop\Customer\Item\Iface
+	{
+		return $this->customer;
 	}
 
 
