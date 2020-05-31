@@ -20,16 +20,34 @@ namespace Aimeos\MShop\Order\Item\Base\Service;
  */
 class Standard extends Base implements Iface
 {
+	private $serviceItem;
+
+
 	/**
 	 * Initializes the order base service item
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price
 	 * @param array $values Values to be set on initialisation
 	 * @param array $attributes Attributes to be set on initialisation
+	 * @param \Aimeos\MShop\Service\Item\Iface|null $serviceItem Service item
 	 */
-	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [] )
+	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [],
+		?\Aimeos\MShop\Service\Item\Iface $serviceItem = null )
 	{
 		parent::__construct( $price, $values, $attributes );
+
+		$this->serviceItem = $serviceItem;
+	}
+
+
+	/**
+	 * Returns the associated service item
+	 *
+	 * @return \Aimeos\MShop\Service\Item\Iface|null Product item
+	 */
+	public function getServiceItem() : ?\Aimeos\MShop\Service\Item\Iface
+	{
+		return $this->serviceItem;
 	}
 
 

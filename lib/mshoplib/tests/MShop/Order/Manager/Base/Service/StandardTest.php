@@ -153,15 +153,30 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
+	}
 
 
-		$search = $this->object->createSearch();
-		$conditions = array(
+	public function testSearchItemRef()
+	{
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search->setConditions( $search->compare( '==', 'order.base.service.code', 'OGONE' ) );
+		$result = $this->object->searchItems( $search, ['service'] );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertNotNull( $result->first()->getServiceItem() );
+	}
+
+
+	public function testSearchItemTotal()
+	{
+		$total = 0;
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
+
+		$search->setConditions( $search->combine( '&&', [
 			$search->compare( '==', 'order.base.service.code', array( 'OGONE', 'not exists' ) ),
 			$search->compare( '==', 'order.base.service.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice( 0, 1 );
+		] ) );
+
 		$results = $this->object->searchItems( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );

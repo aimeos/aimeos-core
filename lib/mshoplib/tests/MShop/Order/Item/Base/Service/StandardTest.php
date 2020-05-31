@@ -52,13 +52,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.service.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Order\Item\Base\Service\Standard( $this->price, $this->values, $this->attribute );
+		$servItem = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'service' )->createItem();
+		$this->object = new \Aimeos\MShop\Order\Item\Base\Service\Standard(
+			$this->price, $this->values, $this->attribute, $servItem
+		);
 	}
 
 
 	protected function tearDown() : void
 	{
 		unset( $this->object );
+	}
+
+
+	public function testGetServiceItem()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $this->object->getServiceItem() );
+		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Base\Service\Standard( $this->price ) )->getServiceItem() );
 	}
 
 
