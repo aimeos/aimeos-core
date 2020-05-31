@@ -46,12 +46,12 @@ trait Traits
 	 * Adds a new address item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item New or existing address item
-	 * @param int|null $idx Key in the list of address items or null to add the item at the end
+	 * @param string|null $key Key in the list of address items or null to add the item at the end
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 */
-	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, int $idx = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, string $key = null ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$idx !== null ? $this->addrItems[$idx] = $item : $this->addrItems[] = $item;
+		$key !== null ? $this->addrItems[$key] = $item : $this->addrItems[] = $item;
 		return $this;
 	}
 
@@ -110,12 +110,12 @@ trait Traits
 	/**
 	 * Returns the address items
 	 *
-	 * @param int $idx Key in the list of address items
+	 * @param string $key Key in the list of address items
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface|null Address item or null if not found
 	 */
-	public function getAddressItem( int $idx ) : ?\Aimeos\MShop\Common\Item\Iface
+	public function getAddressItem( string $key ) : ?\Aimeos\MShop\Common\Item\Iface
 	{
-		return ( isset( $this->addrItems[$idx] ) ? $this->addrItems[$idx] : null );
+		return $this->addrItems[$key] ?? null;
 	}
 
 
