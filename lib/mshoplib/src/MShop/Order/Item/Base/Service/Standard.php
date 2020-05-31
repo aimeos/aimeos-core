@@ -292,11 +292,10 @@ class Standard extends Base implements Iface
 		$list['order.base.service.name'] = $this->getName();
 		$list['order.base.service.position'] = $this->getPosition();
 		$list['order.base.service.mediaurl'] = $this->getMediaUrl();
+		$list['order.base.service.serviceid'] = $this->getServiceId();
 
-		if( $private === true )
-		{
+		if( $private === true ) {
 			$list['order.base.service.baseid'] = $this->getBaseId();
-			$list['order.base.service.serviceid'] = $this->getServiceId();
 		}
 
 		return $list;
