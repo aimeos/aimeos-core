@@ -90,14 +90,7 @@ class Standard
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
 
-		$this->searchConfig['index.text:relevance']['function'] = function( $source, array $params ) {
-
-			if( isset( $params[1] ) ) {
-				$params[1] = mb_strtolower( $params[1] );
-			}
-
-			return $params;
-		};
+		$this->searchConfig['index.text:relevance']['function'] = $this->getFunctionRelevance();
 
 		foreach( ['index.text:name', 'index.text:url', 'index.text:relevance'] as $key )
 		{
@@ -637,6 +630,24 @@ class Standard
 		$cfgPathCount = 'mshop/index/manager/text/standard/count';
 
 		return $this->searchItemsIndexBase( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
+	}
+
+
+	/**
+	 * Returns the search function for searching by relevance
+	 *
+	 * @return \Closure Relevance search function
+	 */
+	protected function getFunctionRelevance()
+	{
+		return function( $source, array $params ) {
+
+			if( isset( $params[1] ) ) {
+				$params[1] = mb_strtolower( $params[1] );
+			}
+
+			return $params;
+		};
 	}
 
 

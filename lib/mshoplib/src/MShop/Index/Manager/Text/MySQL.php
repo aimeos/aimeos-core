@@ -53,7 +53,39 @@ class MySQL
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
 
-		$func = function( $source, array $params ) {
+		$name = 'index.text:relevance';
+		$expr = $this->getSiteString( 'mindte."siteid"', $level );
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
+		$this->searchConfig['index.text:relevance']['function'] = $this->getFunctionRelevance();
+	}
+
+
+	/**
+	 * Returns a list of objects describing the available criterias for searching.
+	 *
+	 * @param bool $withsub Return also attributes of sub-managers if true
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attriubte items
+	 */
+	public function getSearchAttributes( bool $withsub = true ) : array
+	{
+		$list = parent::getSearchAttributes( $withsub );
+
+		foreach( $this->searchConfig as $key => $fields ) {
+			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $fields );
+		}
+
+		return $list;
+	}
+
+
+	/**
+	 * Returns the search function for searching by relevance
+	 *
+	 * @return \Closure Relevance search function
+	 */
+	protected function getFunctionRelevance()
+	{
+		return function( $source, array $params ) {
 
 			if( isset( $params[1] ) )
 			{
@@ -75,28 +107,5 @@ class MySQL
 
 			return $params;
 		};
-
-		$name = 'index.text:relevance';
-		$expr = $this->getSiteString( 'mindte."siteid"', $level );
-		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
-		$this->searchConfig['index.text:relevance']['function'] = $func;
-	}
-
-
-	/**
-	 * Returns a list of objects describing the available criterias for searching.
-	 *
-	 * @param bool $withsub Return also attributes of sub-managers if true
-	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of search attriubte items
-	 */
-	public function getSearchAttributes( bool $withsub = true ) : array
-	{
-		$list = parent::getSearchAttributes( $withsub );
-
-		foreach( $this->searchConfig as $key => $fields ) {
-			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $fields );
-		}
-
-		return $list;
 	}
 }

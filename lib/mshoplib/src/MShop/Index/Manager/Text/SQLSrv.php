@@ -59,28 +59,7 @@ class SQLSrv
 			)';
 			$sort = 'mindte_ft.RANK';
 
-			$func = function( $source, array $params ) {
-
-				if( isset( $params[1] ) )
-				{
-					$strings = [];
-					$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
-					$search = trim( preg_replace( $regex, ' ', $params[1] ), "' \t\n\r\0\x0B" );
-
-					foreach( explode( ' ', $search ) as $part )
-					{
-						$len = strlen( $part );
-
-						if( $len > 0 ) {
-							$strings[] = '"' . mb_strtolower( $part ) . '*"';
-						}
-					}
-
-					$params[1] = '\'' . join( ' | ', $strings ) . '\'';
-				}
-
-				return $params;
-			};
+			$func = $this->getFunctionRelevance();
 		}
 		else
 		{
@@ -120,5 +99,37 @@ class SQLSrv
 		}
 
 		return $list;
+	}
+
+
+	/**
+	 * Returns the search function for searching by relevance
+	 *
+	 * @return \Closure Relevance search function
+	 */
+	protected function getFunctionRelevance()
+	{
+		return function( $source, array $params ) {
+
+			if( isset( $params[1] ) )
+			{
+				$strings = [];
+				$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
+				$search = trim( preg_replace( $regex, ' ', $params[1] ), "' \t\n\r\0\x0B" );
+
+				foreach( explode( ' ', $search ) as $part )
+				{
+					$len = strlen( $part );
+
+					if( $len > 0 ) {
+						$strings[] = '"' . mb_strtolower( $part ) . '*"';
+					}
+				}
+
+				$params[1] = '\'' . join( ' | ', $strings ) . '\'';
+			}
+
+			return $params;
+		};
 	}
 }
