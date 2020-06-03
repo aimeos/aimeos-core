@@ -32,7 +32,7 @@ class MySQL
 		),
 		'sort:index.text:relevance' => array(
 			'code' => 'sort:index.text:relevance()',
-			'internalcode' => '1',
+			'internalcode' => 'MATCH( mindte."content" ) AGAINST( $2 IN BOOLEAN MODE )',
 			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
@@ -53,10 +53,13 @@ class MySQL
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
 
-		$name = 'index.text:relevance';
+		$func = $this->getFunctionRelevance();
 		$expr = $this->getSiteString( 'mindte."siteid"', $level );
-		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
-		$this->searchConfig['index.text:relevance']['function'] = $this->getFunctionRelevance();
+		$sql = $this->searchConfig['index.text:relevance']['internalcode'];
+
+		$this->searchConfig['index.text:relevance']['internalcode'] = str_replace( ':site', $expr, $sql );
+		$this->searchConfig['sort:index.text:relevance']['function'] = $func;
+		$this->searchConfig['index.text:relevance']['function'] = $func;
 	}
 
 
@@ -91,18 +94,16 @@ class MySQL
 			{
 				$str = '';
 				$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
-				$search = trim( preg_replace( $regex, ' ', $params[1] ), "' \t\n\r\0\x0B" );
+				$search = trim( mb_strtolower( preg_replace( $regex, ' ', $params[1] ) ), "' \t\n\r\0\x0B" );
 
 				foreach( explode( ' ', $search ) as $part )
 				{
-					$len = strlen( $part );
-
-					if( $len > 0 ) {
-						$str .= ' ' . mb_strtolower( $part ) . '*';
+					if( $part ) {
+						$str .= $part . '* ';
 					}
 				}
 
-				$params[1] = '\'' . $str . '\'';
+				$params[1] = '\'' . $str . '"' . $search . '"\'';
 			}
 
 			return $params;
