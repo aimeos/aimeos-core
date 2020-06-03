@@ -83,6 +83,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscatli_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_mscatli_pid_sid_dm_ty_rid' );
+			$table->addIndex( array( 'parentid', 'siteid', 'domain', 'pos', 'refid' ), 'idx_mscatli_pid_sid_dm_pos_rid' );
 			$table->addIndex( array( 'siteid', 'key' ), 'idx_mscatli_sid_key' );
 			$table->addIndex( array( 'parentid' ), 'fk_mscatli_pid' );
 
