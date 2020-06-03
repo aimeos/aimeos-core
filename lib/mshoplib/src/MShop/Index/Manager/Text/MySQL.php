@@ -32,7 +32,7 @@ class MySQL
 		),
 		'sort:index.text:relevance' => array(
 			'code' => 'sort:index.text:relevance()',
-			'internalcode' => '1',
+			'internalcode' => 'MATCH( mindte."content" ) AGAINST( $2 IN BOOLEAN MODE )',
 			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
@@ -56,18 +56,16 @@ class MySQL
 			{
 				$str = '';
 				$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
-				$search = trim( preg_replace( $regex, ' ', $params[1] ), "' \t\n\r\0\x0B" );
+				$search = trim( mb_strtolower( preg_replace( $regex, ' ', $params[1] ) ), "' \t\n\r\0\x0B" );
 
 				foreach( explode( ' ', $search ) as $part )
 				{
-					$len = strlen( $part );
-
-					if( $len > 0 ) {
-						$str .= ' ' . mb_strtolower( $part ) . '*';
+					if( $part ) {
+						$str .= $part . '* ';
 					}
 				}
 
-				$params[1] = '\'' . $str . '\'';
+				$params[1] = '\'' . $str . '"' . $search . '"\'';
 			}
 
 			return $params;
