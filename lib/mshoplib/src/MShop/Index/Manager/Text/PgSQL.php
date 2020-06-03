@@ -23,7 +23,7 @@ class PgSQL
 	private $searchConfig = array(
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => ':site AND mindte."langid" = $1 AND CAST( mindte."content" @@ to_tsquery( $2 ) AS integer )',
+			'internalcode' => ':site AND mindte."langid" = $1 AND CAST( to_tsvector(\'english\', mindte."content") @@ to_tsquery( $2 ) AS integer )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -31,7 +31,7 @@ class PgSQL
 		),
 		'sort:index.text:relevance' => array(
 			'code' => 'sort:index.text:relevance()',
-			'internalcode' => 'ts_rank(to_tsvector(mindte."content"), to_tsquery( $2 ))',
+			'internalcode' => 'ts_rank(to_tsvector(\'english\', mindte."content"), to_tsquery( $2 ))',
 			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
