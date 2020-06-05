@@ -96,9 +96,10 @@ class SQL extends Base
 	 * Translates the sort key into the name required by the storage
 	 *
 	 * @param array $translations Associative list of variable or column names that should be translated
+	 * @param array $funcs Associative list of item names and functions modifying the conditions
 	 * @return string|null Translated name (with replaced parameters if the name is an expression function)
 	 */
-	public function translate( array $translations ) : ?string
+	public function translate( array $translations, array $funcs = [] ) : ?string
 	{
 		return null;
 	}
