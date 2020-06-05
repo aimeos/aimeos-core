@@ -296,8 +296,8 @@ abstract class DBBase
 
 		if( count( $search->getSortations() ) > 0 )
 		{
-			$names = $search->translate( $search->getSortations() );
-			$cols = $search->translate( $search->getSortations(), $translations );
+			$names = $search->translate( $search->getSortations(), [], $funcs );
+			$cols = $search->translate( $search->getSortations(), $translations, $funcs );
 
 			$list = $aliases = [];
 			foreach( $cols as $idx => $col )

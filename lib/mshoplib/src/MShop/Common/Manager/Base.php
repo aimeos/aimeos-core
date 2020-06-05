@@ -820,7 +820,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 			$keys[] = 'group';
 			$find[] = ':group';
-			$replace[] = implode( ', ', $search->translate( $search->getSortations(), $translations ) ) . ', ';
+			$replace[] = implode( ', ', $search->translate( $search->getSortations(), $translations, $funcs ) ) . ', ';
 		}
 
 		return [$keys, $find, $replace];

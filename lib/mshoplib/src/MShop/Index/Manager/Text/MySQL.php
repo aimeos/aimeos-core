@@ -50,7 +50,7 @@ class MySQL
 	{
 		parent::__construct( $context );
 
-		$this->searchConfig['index.text:relevance']['function'] = function( $source, array $params ) {
+		$func = function( $source, array $params ) {
 
 			if( isset( $params[1] ) )
 			{
@@ -74,7 +74,10 @@ class MySQL
 		$name = 'index.text:relevance';
 		$siteIds = $context->getLocale()->getSitePath();
 		$expr = $siteIds ? $this->toExpression( 'mindte."siteid"', $siteIds ) : '1=1';
+
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
+		$this->searchConfig['sort:index.text:relevance']['function'] = $func;
+		$this->searchConfig['index.text:relevance']['function'] = $func;
 	}
 
 
