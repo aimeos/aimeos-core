@@ -228,9 +228,10 @@ interface Iface
 	 *
 	 * @param array $columns List of objects implementing getName() method
 	 * @param array $translations Associative list of item names that should be translated
+	 * @param array $funcs Associative list of item names and functions modifying the conditions
 	 * @return array List of translated columns
 	 */
-	public function translate( array $columns, array $translations = [] ) : array;
+	public function translate( array $columns, array $translations = [], array $funcs = [] ) : array;
 
 
 	/**

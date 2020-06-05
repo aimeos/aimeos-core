@@ -284,7 +284,7 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 
 		foreach( $columns as $item )
 		{
-			if( ( $value = $item->translate( $translations ) ) !== null ) {
+			if( ( $value = $item->translate( $translations, $funcs ) ) !== null ) {
 				$list[] = $value;
 			}
 		}
