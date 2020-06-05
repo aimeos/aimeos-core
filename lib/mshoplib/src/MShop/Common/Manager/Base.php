@@ -918,7 +918,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$replace[] = $search->getSortationSource( $types, $translations, $funcs );
 
 		$find[] = ':group';
-		$replace[] = implode( ', ', $search->translate( $search->getSortations(), $translations ) ) . ', ';
+		$replace[] = implode( ', ', $search->translate( $search->getSortations(), $translations, $funcs ) ) . ', ';
 
 		return [$find, $replace];
 	}

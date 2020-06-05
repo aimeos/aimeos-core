@@ -309,8 +309,8 @@ abstract class DBBase
 		}
 		elseif( !empty( $search->getSortations() ) )
 		{
-			$names = $search->translate( $search->getSortations() );
-			$cols = $search->translate( $search->getSortations(), $translations );
+			$names = $search->translate( $search->getSortations(), [], $funcs );
+			$cols = $search->translate( $search->getSortations(), $translations, $funcs );
 
 			$list = $translations = [];
 			foreach( $cols as $idx => $col )
