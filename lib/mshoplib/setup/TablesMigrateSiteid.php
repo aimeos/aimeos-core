@@ -245,7 +245,7 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 
 					foreach( $this->getSites() as $siteid => $site )
 					{
-						$stmt = $conn->create( sprintf( 'UPDATE "%1$s" SET "%2$s" = ? WHERE "%2$s" = ?', $table, $colname ) );
+						$stmt = $conn->create( sprintf( 'UPDATE "%1$s" SET "%2$s" = ? WHERE "%2$s" = ? OR "%2$s" = \'\'', $table, $colname ) );
 						$result = $stmt->bind( 1, $site )->bind( 2, $siteid )->execute();
 					}
 
