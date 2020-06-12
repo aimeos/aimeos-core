@@ -32,11 +32,11 @@ class Standard
 	 * @param string $format New date format
 	 * @see http://php.net/manual/en/datetime.createfromformat.php
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, string $format = '' )
+	public function __construct( \Aimeos\MW\View\Iface $view, ?string $format = null )
 	{
 		parent::__construct( $view );
 
-		$this->format = $format;
+		$this->format = $format ?: 'Y-m-d';
 	}
 
 
