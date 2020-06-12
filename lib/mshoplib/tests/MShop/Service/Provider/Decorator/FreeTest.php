@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
 
-class DownloadTest extends \PHPUnit\Framework\TestCase
+class FreeTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $context;
@@ -78,7 +78,7 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 	public function testIsAvailable()
 	{
 		$this->servItem->setConfig( array( 'free.show' => '1' ) );
-		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->off();
+		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off();
 
 		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
 
@@ -86,21 +86,11 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testIsNotAvailable()
+	public function testIsAvailableNotZero()
 	{
 		$this->servItem->setConfig( array( 'free.show' => '1' ) );
-		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->off()->getPrice()->setValue( '0.01' );
-
-		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
-
-		$this->assertFalse( $this->object->isAvailable( $basket ) );
-	}
-
-
-	public function testIsAvailableHidden()
-	{
-		$this->servItem->setConfig( array( 'free.show' => '0' ) );
-		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->off()->getPrice()->setValue( '0.01' );
+		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off();
+		$basket->getPrice()->setValue( '0.01' );
 
 		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
 
@@ -111,10 +101,20 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 	public function testIsNotAvailableHidden()
 	{
 		$this->servItem->setConfig( array( 'free.show' => '0' ) );
-		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->off();
+		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off();
+
+		$this->assertFalse( $this->object->isAvailable( $basket ) );
+	}
+
+
+	public function testIsAvailableHiddenNotZero()
+	{
+		$this->servItem->setConfig( array( 'free.show' => '0' ) );
+		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off();
+		$basket->getPrice()->setValue( '0.01' );
 
 		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
 
-		$this->assertFalse( $this->object->isAvailable( $basket ) );
+		$this->assertTrue( $this->object->isAvailable( $basket ) );
 	}
 }

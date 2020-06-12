@@ -72,7 +72,7 @@ class Free
 	{
 		$value = $basket->getPrice()->getValue();
 
-		if( $value === '0.00' && (bool) $this->getConfigValue( 'free.show' ) === false ) {
+		if( $value === '0.00' && $this->getConfigValue( 'free.show' ) == false ) {
 			return false;
 		}
 
