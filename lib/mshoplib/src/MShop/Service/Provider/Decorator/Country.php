@@ -120,7 +120,8 @@ class Country
 				}
 			}
 		}
-		elseif( ( $addresses = $basket->getAddress( $paymentType ) ) !== [] ) // use billing address if no delivery address is available
+
+		if( ( $addresses = $basket->getAddress( $paymentType ) ) !== [] ) // use billing address if no delivery address is available
 		{
 			foreach( $addresses as $address )
 			{
