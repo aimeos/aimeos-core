@@ -58,7 +58,7 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	 */
 	public function bind( int $position, $value, int $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR ) : \Aimeos\MW\DB\Statement\Iface
 	{
-		throw new \Aimeos\MW\DB\Exception( 'Binding parameters is not available for simple statements' );
+		throw new \Aimeos\MW\DB\Exception( 'Binding parameters is not available for simple statements: ' . $this->sql );
 	}
 
 
