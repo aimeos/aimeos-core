@@ -98,7 +98,7 @@ class MySQL
 
 				foreach( explode( ' ', $search ) as $part )
 				{
-					if( $part ) {
+					if( strlen( $part ) > 2 ) {
 						$str .= $part . '* ';
 					}
 				}

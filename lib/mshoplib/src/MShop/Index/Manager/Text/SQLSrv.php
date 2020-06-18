@@ -115,14 +115,12 @@ class SQLSrv
 			{
 				$strings = [];
 				$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
-				$search = trim( preg_replace( $regex, ' ', $params[1] ), "' \t\n\r\0\x0B" );
+				$search = trim( mb_strtolower( preg_replace( $regex, ' ', $params[1] ) ), "' \t\n\r\0\x0B" );
 
 				foreach( explode( ' ', $search ) as $part )
 				{
-					$len = strlen( $part );
-
-					if( $len > 0 ) {
-						$strings[] = '"' . mb_strtolower( $part ) . '*"';
+					if( strlen( $part ) > 2 ) {
+						$strings[] = '"' . $part . '*"';
 					}
 				}
 

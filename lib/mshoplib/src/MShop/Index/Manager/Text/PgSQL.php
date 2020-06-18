@@ -88,11 +88,18 @@ class PgSQL
 
 			if( isset( $params[1] ) )
 			{
+				$strings = [];
 				$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
-				$search = trim( preg_replace( $regex, ' ', $params[1] ), "' \t\n\r\0\x0B" );
+				$search = trim( mb_strtolower( preg_replace( $regex, ' ', $params[1] ) ), "' \t\n\r\0\x0B" );
 
-				$str = implode( ':* & ', explode( ' ', mb_strtolower( $search ) ) );
-				$params[1] = '\'' . $str . ':*\'';
+				foreach( explode( ' ', $search ) as $part )
+				{
+					if( strlen( $part ) > 2 ) {
+						$strings[] = $part . ':*';
+					}
+				}
+
+				$params[1] = '\'' . join( ' & ', $strings ) . '\'';
 			}
 
 			return $params;
