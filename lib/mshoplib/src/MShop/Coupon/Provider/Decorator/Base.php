@@ -64,7 +64,7 @@ abstract class Base
 	 */
 	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
-		if( $this->isAvailable( $base ) ) {
+		if( $this->getObject()->isAvailable( $base ) ) {
 			$this->provider->update( $base );
 		} else {
 			$base->setCoupon( $this->getCode(), [] );
