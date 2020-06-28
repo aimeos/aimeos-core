@@ -722,7 +722,7 @@ class PayPalExpress
 				{
 					$deliveryPrices = $this->addPrice( $deliveryPrices, $service->getPrice() );
 
-					$values['L_SHIPPINGOPTIONAMOUNT' . $lastPos] = number_format( $deliveryCosts, 2, '.', '' );
+					$values['L_SHIPPINGOPTIONAMOUNT' . $lastPos] = number_format( $service->getPrice()->getCosts(), 2, '.', '' );
 					$values['L_SHIPPINGOPTIONLABEL' . $lastPos] = $service->getCode();
 					$values['L_SHIPPINGOPTIONNAME' . $lastPos] = $service->getName();
 					$values['L_SHIPPINGOPTIONISDEFAULT' . $lastPos] = 'true';
