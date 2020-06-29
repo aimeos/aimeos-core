@@ -33,24 +33,22 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC' ) ) );
+		$search->setConditions( $search->compare( '==', 'product.code', ['CNC', 'CNE'] ) );
 		$products = $productManager->searchItems( $search )->toArray();
 
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
 		$price = $priceManager->createItem();
-		$price->setValue( 321 );
 
-		foreach( $products as $product )
-		{
-			$orderProduct = $orderProductManager->createItem();
-			$orderProduct->copyFrom( $product );
-			$orderProducts[$product->getCode()] = $orderProduct;
+		foreach( $products as $product ) {
+			$orderProducts[$product->getCode()] = $orderProductManager->createItem()->copyFrom( $product );
 		}
 
-		$orderProducts['CNC']->setPrice( $price );
+		$orderProducts['CNC']->setPrice( clone $price->setValue( 321 ) );
+		$orderProducts['CNE']->setPrice( clone $price->setValue( 123 ) );
 
 		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
 		$this->orderBase->addProduct( $orderProducts['CNC'] );
+		$this->orderBase->addProduct( $orderProducts['CNE'] );
 	}
 
 
@@ -59,6 +57,24 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 		unset( $this->object );
 		unset( $this->orderBase );
 		unset( $this->couponItem );
+	}
+
+
+	public function testCalcPrice()
+	{
+		$this->couponItem->setConfig( ['required.productcode' => 'CNC'] );
+
+		$price = $this->object->calcPrice( $this->orderBase );
+		$this->assertEquals( 444, $price->getValue() + $price->getCosts() );
+	}
+
+
+	public function testCalcPriceOnly()
+	{
+		$this->couponItem->setConfig( ['required.productcode' => 'CNC', 'required.only' => 1] );
+
+		$price = $this->object->calcPrice( $this->orderBase );
+		$this->assertEquals( 321, $price->getValue() + $price->getCosts() );
 	}
 
 
@@ -75,8 +91,9 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 		$attributes = ['required.productcode' => 'test'];
 		$result = $this->object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertNull( $result['required.productcode'] );
+		$this->assertNull( $result['required.only'] );
 	}
 
 
@@ -84,8 +101,9 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->object->checkConfigBE( [] );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertIsString( $result['required.productcode'] );
+		$this->assertNull( $result['required.only'] );
 	}
 
 
@@ -105,7 +123,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableWithoutProduct()
 	{
-		$this->couponItem->setConfig( array( 'required.productcode' => 'CNE' ) );
+		$this->couponItem->setConfig( array( 'required.productcode' => 'ABCD' ) );
 
 		$this->assertFalse( $this->object->isAvailable( $this->orderBase ) );
 	}

@@ -32,7 +32,46 @@ class Required
 			'default' => '',
 			'required' => true,
 		),
+		'required.only' => array(
+			'code' => 'required.only',
+			'internalcode' => 'required.only',
+			'label' => 'Rebate is applied only to products',
+			'type' => 'boolean',
+			'internaltype' => 'boolean',
+			'default' => false,
+			'required' => false,
+		),
 	);
+
+
+	/**
+	 * Returns the price the discount should be applied to
+	 *
+	 * The result depends on the configured restrictions and it must be less or
+	 * equal to the passed price.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @return \Aimeos\MShop\Price\Item\Iface New price that should be used
+	 */
+	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Price\Item\Iface
+	{
+		if( $this->getConfigValue( 'required.only' ) == true )
+		{
+			$price = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
+			$codes = explode( ',', $this->getConfigValue( 'required.productcode', '' ) );
+
+			foreach( $base->getProducts() as $product )
+			{
+				if( in_array( $product->getProductCode(), $codes ) ) {
+					$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
+				}
+			}
+
+			return $price;
+		}
+
+		return $this->getProvider()->calcPrice( $base );
+	}
 
 
 	/**
