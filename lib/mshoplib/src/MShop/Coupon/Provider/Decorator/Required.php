@@ -106,11 +106,13 @@ class Required
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base ) : bool
 	{
-		if( ( $prodcode = $this->getConfigValue( 'required.productcode' ) ) !== null )
+		if( $prodcode = $this->getConfigValue( 'required.productcode', '' ) )
 		{
+			$codes = explode( ',', $prodcode );
+
 			foreach( $base->getProducts() as $product )
 			{
-				if( $product->getProductCode() == $prodcode ) {
+				if( in_array( $product->getProductCode(), $codes ) ) {
 					return parent::isAvailable( $base );
 				}
 			}
