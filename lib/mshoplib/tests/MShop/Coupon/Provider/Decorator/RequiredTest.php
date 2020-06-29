@@ -113,6 +113,22 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIsAvailableTrue()
+	{
+		$this->couponItem->setConfig( array( 'required.productcode' => 'CNC,CNE,ABCD' ) );
+
+		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
+	}
+
+
+	public function testIsAvailableFalse()
+	{
+		$this->couponItem->setConfig( array( 'required.productcode' => 'ABCD' ) );
+
+		$this->assertFalse( $this->object->isAvailable( $this->orderBase ) );
+	}
+
+
 	public function testIsAvailableWithProduct()
 	{
 		$this->couponItem->setConfig( array( 'required.productcode' => 'CNC' ) );
