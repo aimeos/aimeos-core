@@ -57,8 +57,9 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( null, $result['ignore-modified'] );
+		$this->assertEquals( null, $result['warn'] );
 	}
 
 
@@ -66,8 +67,9 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	{
 		$list = $this->object->getConfigBE();
 
-		$this->assertEquals( 1, count( $list ) );
+		$this->assertEquals( 2, count( $list ) );
 		$this->assertArrayHasKey( 'ignore-modified', $list );
+		$this->assertArrayHasKey( 'warn', $list );
 
 		foreach( $list as $entry ) {
 			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
@@ -112,7 +114,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateArticlePriceUpdated()
 	{
-		$this->plugin->setConfig( array( 'update' => true ) );
+		$this->plugin->setConfig( array( 'update' => true, 'warn' => true ) );
 
 		$orderProduct = $this->order->getProduct( 0 );
 		$orderProduct->setPrice( $orderProduct->getPrice()->setValue( 13.13 ) );
@@ -136,6 +138,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateSelectionPriceUpdated()
 	{
 		$productItem = \Aimeos\MShop::create( $this->context, 'product' )->findItem( 'U:TEST' );
+		$this->plugin->setConfig( ['warn' => true] );
 
 		$orderProduct = $this->order->getProduct( 0 );
 		$orderProduct = $orderProduct->setProductCode( 'U:TESTSUB02' )
@@ -160,6 +163,8 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateAttributePriceUpdated()
 	{
+		$this->plugin->setConfig( ['warn' => true] );
+
 		$attribute = \Aimeos\MShop::create( $this->context, 'attribute' )
 			->findItem( 'xs', ['price'], 'product', 'size' );
 
@@ -186,6 +191,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateNoPriceChange()
 	{
+		$this->plugin->setConfig( ['warn' => true] );
 		$orderProduct = $this->order->getProduct( 0 );
 
 		$refPrice = $orderProduct->getPrice()->getValue();

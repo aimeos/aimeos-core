@@ -45,6 +45,15 @@ class ProductPrice
 			'default' => '0',
 			'required' => false,
 		),
+		'warn' => array(
+			'code' => 'warn',
+			'internalcode' => 'warn',
+			'label' => 'Warn customers if price has changed',
+			'type' => 'boolean',
+			'internaltype' => 'boolean',
+			'default' => '0',
+			'required' => false,
+		),
 	);
 
 
@@ -154,7 +163,7 @@ class ProductPrice
 			}
 		}
 
-		if( count( $changedProducts ) > 0 )
+		if( $this->getConfigValue( 'warn', false ) == true && count( $changedProducts ) > 0 )
 		{
 			$code = array( 'product' => $changedProducts );
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Please have a look at the prices of the products in your basket' );
