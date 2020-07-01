@@ -250,8 +250,9 @@ class ProductPrice
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $pid, $pcode ), -1, null, $codes );
 		}
 
+		$currency = $orderProduct->getPrice()->getCurrencyId();
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
-		$price = clone $priceManager->getLowestPrice( $refPrices, $orderProduct->getQuantity() );
+		$price = clone $priceManager->getLowestPrice( $refPrices, $orderProduct->getQuantity(), $currency );
 
 		// add prices of product attributes to compute the end price for comparison
 		foreach( $orderProduct->getAttributeItems() as $orderAttribute )
