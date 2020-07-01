@@ -152,11 +152,9 @@ class ProductPrice
 
 			// fetch prices of articles/sub-products
 			$refPrices = $prodMap[$orderProduct->getProductCode()]->getRefItems( 'price', 'default', 'default' );
-
-			$orderPosPrice = $orderProduct->getPrice();
 			$price = $this->getPrice( $orderProduct, $refPrices, $attributes, $pos );
 
-			if( $orderPosPrice->getTaxFlag() === $price->getTaxFlag() && $orderPosPrice->compare( $price ) === false )
+			if( $orderProduct->getPrice()->compare( $price ) === false )
 			{
 				$order->addProduct( $orderProduct->setPrice( $price ), $pos );
 				$changedProducts[$pos] = 'price.changed';
