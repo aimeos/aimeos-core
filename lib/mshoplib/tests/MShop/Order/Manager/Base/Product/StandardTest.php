@@ -38,8 +38,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->aggregate( $search, 'order.base.product.stocktype' )->toArray();
 
 		$this->assertEquals( 3, count( $result ) );
-		$this->assertArrayHasKey( 'unit_type1', $result );
-		$this->assertEquals( 11, $result['unit_type1'] );
+		$this->assertArrayHasKey( 'default', $result );
+		$this->assertEquals( 5, $result['default'] );
 	}
 
 
@@ -132,7 +132,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'order.base.product.productid', null );
 		$expr[] = $search->compare( '==', 'order.base.product.prodcode', 'CNE' );
 		$expr[] = $search->compare( '==', 'order.base.product.suppliercode', 'unitsupplier' );
-		$expr[] = $search->compare( '==', 'order.base.product.stocktype', 'unit_type1' );
+		$expr[] = $search->compare( '==', 'order.base.product.stocktype', 'default' );
 		$expr[] = $search->compare( '==', 'order.base.product.name', 'Cafe Noire Expresso' );
 		$expr[] = $search->compare( '==', 'order.base.product.description', '' );
 		$expr[] = $search->compare( '==', 'order.base.product.mediaurl', 'somewhere/thump1.jpg' );
