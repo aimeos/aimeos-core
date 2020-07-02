@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-02 15:46+0200\n"
+"POT-Creation-Date: 2020-07-01 17:23+0200\n"
 "PO-Revision-Date: 2018-09-27 06:33+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Vietnamese (http://www.transifex.com/aimeos/aimeos-core/language/vi/)\n"
@@ -171,6 +171,9 @@ msgstr ""
 
 #, php-format
 msgid "Coupon in basket is not available any more"
+msgstr ""
+
+msgid "Coupon is not available any more"
 msgstr ""
 
 #, php-format
@@ -689,15 +692,7 @@ msgid "Provider in \"%1$s\" not available"
 msgstr ""
 
 #, php-format
-msgid "Quantity must be a positive integer and must not exceed %1$d"
-msgstr ""
-
-#, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
-msgstr ""
-
-#, php-format
-msgid "Quantity must greater than 0 and must not exceed %1$d"
 msgstr ""
 
 #, php-format

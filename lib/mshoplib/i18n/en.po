@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aimeos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-02 15:46+0200\n"
+"POT-Creation-Date: 2020-07-01 17:23+0200\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/aimeos/language/en/)\n"
@@ -201,6 +201,9 @@ msgstr "Configuration of necessary SQL statement for \"%1$s\" not available"
 
 #, php-format
 msgid "Coupon in basket is not available any more"
+msgstr ""
+
+msgid "Coupon is not available any more"
 msgstr ""
 
 # error domain: service
@@ -829,15 +832,7 @@ msgid "Provider in \"%1$s\" not available"
 msgstr ""
 
 #, php-format
-msgid "Quantity must be a positive integer and must not exceed %1$d"
-msgstr ""
-
-#, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
-msgstr ""
-
-#, php-format
-msgid "Quantity must greater than 0 and must not exceed %1$d"
 msgstr ""
 
 #, php-format

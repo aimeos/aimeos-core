@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-02 15:46+0200\n"
+"POT-Creation-Date: 2020-07-01 17:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -172,6 +172,9 @@ msgstr "Configuration of necessary SQL statement for \"%1$s\" not available"
 #, php-format
 msgid "Coupon in basket is not available any more"
 msgstr "Coupon in basket is not available any more"
+
+msgid "Coupon is not available any more"
+msgstr ""
 
 #, php-format
 msgid "Curl could not be initialized"

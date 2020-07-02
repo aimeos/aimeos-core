@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-02 15:46+0200\n"
-"PO-Revision-Date: 2020-04-02 13:51+0000\n"
+"POT-Creation-Date: 2020-07-01 17:23+0200\n"
+"PO-Revision-Date: 2020-07-01 19:43+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -183,6 +183,9 @@ msgstr "Configuration de la déclaration SQL requise pour \"%1$s\" indisponible"
 #, php-format
 msgid "Coupon in basket is not available any more"
 msgstr "Le chèque-cadeau dans le panier n'est plus disponible"
+
+msgid "Coupon is not available any more"
+msgstr ""
 
 #, php-format
 msgid "Curl could not be initialized"
