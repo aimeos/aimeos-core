@@ -16,7 +16,7 @@ class OrderAddBaseServiceCurrencyid extends \Aimeos\MW\Setup\Task\Base
 {
 	private $sql = '
 		UPDATE "mshop_order_base_service" SET "currencyid" = (
-			SELECT ob."currencyid" FROM "mshop_order_base" ob WHERE ob."id" = "baseid"
+			SELECT ob."currencyid" FROM "mshop_order_base" ob WHERE ob."id" = "baseid" LIMIT 1
 		) WHERE "currencyid" = \'\'  OR "currencyid" = \'   \'
 	';
 

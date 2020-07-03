@@ -47,6 +47,7 @@ class SubscriptionMigrateProductId extends \Aimeos\MW\Setup\Task\Base
 				SELECT obp."prodid"
 				FROM "mshop_order_base_product" AS obp
 				WHERE "mshop_subscription"."ordprodid" = obp."id"
+				LIMIT 1
 			) WHERE "productid" = \'\'
 		';
 
