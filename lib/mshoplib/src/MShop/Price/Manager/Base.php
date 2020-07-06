@@ -52,7 +52,7 @@ abstract class Base
 
 		foreach( $priceList as $qty => $priceItem )
 		{
-			if( $qty <= $quantity && $qty > $price->getQuantity() ) {
+			if( $qty <= $quantity && $qty > $price->getQuantity() && $priceItem->getValue() < $price->getValue() ) {
 				$price = $priceItem;
 			}
 		}
