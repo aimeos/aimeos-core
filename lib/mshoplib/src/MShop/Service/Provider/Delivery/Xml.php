@@ -204,7 +204,7 @@ class Xml
 	protected function createXml( array $orderItems, array $baseItems ) : string
 	{
 		$view = $this->getContext()->getView();
-		$template = $this->getConfigValue( 'template', 'service/provider/delivery/xml-body-standard' );
+		$template = $this->getConfigValue( 'xml.template', 'service/provider/delivery/xml-body-standard' );
 
 		return $view->assign( ['orderItems' => $orderItems, 'baseItems' => $baseItems] )->render( $template );
 	}
