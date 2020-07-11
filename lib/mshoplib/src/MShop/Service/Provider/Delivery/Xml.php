@@ -218,16 +218,12 @@ class Xml
 	 */
 	protected function getOrderBaseItems( array $orderItems ) : array
 	{
-		$ids = [];
+		$ids = map( $orderItems )->getBaseId()->toArray();
 		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
-
-		foreach( $orderItems as $item ) {
-			$ids[$item->getBaseId()] = null;
-		}
 
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base' );
 		$search = $manager->createSearch()->setSlice( 0, count( $ids ) );
-		$search->setConditions( $search->compare( '==', 'order.base.id', array_keys( $ids ) ) );
+		$search->setConditions( $search->compare( '==', 'order.base.id', $ids ) );
 
 		return $manager->searchItems( $search, $ref )->toArray();
 	}
