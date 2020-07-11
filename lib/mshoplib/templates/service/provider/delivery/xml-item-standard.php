@@ -11,10 +11,10 @@
  */
 
 $enc = $this->encoder();
-$baseItems = $this->baseItems;
+$baseItems = $this->get( 'baseItems', [] );
 
 ?>
-<?php foreach( $this->orderItems as $id => $item ) : ?>
+<?php foreach( $this->get( 'orderItems', [] ) as $id => $item ) : ?>
 
 	<orderitem ref="<?= $enc->attr( $id ) ?>">
 
