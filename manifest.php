@@ -33,7 +33,7 @@ return array(
 		'lib/mshoplib/setup',
 	),
 	'custom' => array(
-		'lib/custom/templates' => array(
+		'controller/jobs/templates' => array(
 			'lib/mshoplib/templates',
 		),
 	),
