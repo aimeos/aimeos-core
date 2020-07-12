@@ -11,6 +11,8 @@
 
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
+use \Aimeos\MShop\Order\Item\Base\Address;
+
 
 /**
  * Country-limiting decorator for service providers
@@ -103,11 +105,7 @@ class Country
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
-		$paymentType = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
-		$deliveryType = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY;
-
-
-		if( ( $addresses = $basket->getAddress( $deliveryType ) ) !== [] )
+		if( ( $addresses = $basket->getAddress( Address\Base::TYPE_DELIVERY ) ) !== [] )
 		{
 			foreach( $addresses as $address )
 			{
@@ -120,9 +118,9 @@ class Country
 				}
 			}
 		}
-
-		if( ( $addresses = $basket->getAddress( $paymentType ) ) !== [] ) // use billing address if no delivery address is available
+		elseif( ( $addresses = $basket->getAddress( Address\Base::TYPE_PAYMENT ) ) !== [] )
 		{
+			// use billing address if no delivery address is available
 			foreach( $addresses as $address )
 			{
 				$code = strtoupper( $address->getCountryId() );
