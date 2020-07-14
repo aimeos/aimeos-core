@@ -461,7 +461,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetCatalogItems()
 	{
-		$object = new \Aimeos\MShop\Product\Item\Standard( ['catalog' => []] );
+		$object = new \Aimeos\MShop\Product\Item\Standard( ['.catalog' => []] );
 
 		$this->assertInstanceOf( \Aimeos\Map::class, $object->getCatalogItems() );
 		$this->assertEquals( [], $object->getCatalogItems()->toArray() );
@@ -470,7 +470,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSupplierItems()
 	{
-		$object = new \Aimeos\MShop\Product\Item\Standard( ['supplier' => []] );
+		$object = new \Aimeos\MShop\Product\Item\Standard( ['.supplier' => []] );
 
 		$this->assertInstanceOf( \Aimeos\Map::class, $object->getSupplierItems() );
 		$this->assertEquals( [], $object->getSupplierItems()->toArray() );
@@ -479,7 +479,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetStockItems()
 	{
-		$object = new \Aimeos\MShop\Product\Item\Standard( ['stock' => []] );
+		$object = new \Aimeos\MShop\Product\Item\Standard( ['.stock' => []] );
 
 		$this->assertInstanceOf( \Aimeos\Map::class, $object->getStockItems() );
 		$this->assertEquals( [], $object->getStockItems()->toArray() );
@@ -490,7 +490,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$stock = new \Aimeos\MShop\Stock\Item\Standard();
 		$stocks = [123 => ( clone $stock )->setType( 'something' ), 456 => ( clone $stock )->setType( 'default' )];
-		$object = new \Aimeos\MShop\Product\Item\Standard( ['stock' => $stocks] );
+		$object = new \Aimeos\MShop\Product\Item\Standard( ['.stock' => $stocks] );
 
 		$this->assertInstanceOf( \Aimeos\Map::class, $object->getStockItems( 'default' ) );
 		$this->assertEquals( 'default', $object->getStockItems( 'default' )->getType()->first() );

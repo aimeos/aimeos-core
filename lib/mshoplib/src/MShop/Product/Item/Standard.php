@@ -71,7 +71,7 @@ class Standard
 	 */
 	public function getCatalogItems() : \Aimeos\Map
 	{
-		return map( $this->get( 'catalog', [] ) );
+		return map( $this->get( '.catalog', [] ) );
 	}
 
 
@@ -82,7 +82,7 @@ class Standard
 	 */
 	public function getSupplierItems() : \Aimeos\Map
 	{
-		return map( $this->get( 'supplier', [] ) );
+		return map( $this->get( '.supplier', [] ) );
 	}
 
 
@@ -94,7 +94,7 @@ class Standard
 	 */
 	public function getStockItems( $type = null ) : \Aimeos\Map
 	{
-		$list = map( $this->get( 'stock', [] ) );
+		$list = map( $this->get( '.stock', [] ) );
 
 		if( $type !== null )
 		{
