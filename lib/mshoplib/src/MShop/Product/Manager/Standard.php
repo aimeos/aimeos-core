@@ -830,7 +830,7 @@ class Standard
 			$domains = isset( $ref['catalog'] ) && is_array( $ref['catalog'] ) ?  $ref['catalog'] : [];
 
 			foreach( $this->getDomainRefItems( array_keys( $map ), 'catalog', $domains ) as $prodId => $list ) {
-				$map[$prodId]['catalog'] = $list;
+				$map[$prodId]['.catalog'] = $list;
 			}
 		}
 
@@ -839,7 +839,7 @@ class Standard
 			$domains = isset( $ref['supplier'] ) && is_array( $ref['supplier'] ) ?  $ref['supplier'] : [];
 
 			foreach( $this->getDomainRefItems( array_keys( $map ), 'supplier', $domains ) as $prodId => $list ) {
-				$map[$prodId]['supplier'] = $list;
+				$map[$prodId]['.supplier'] = $list;
 			}
 		}
 
@@ -850,7 +850,7 @@ class Standard
 			foreach( $this->getStockItems( array_keys( $codes ), $ref ) as $stockId => $stockItem )
 			{
 				if( isset( $codes[$stockItem->getProductCode()] ) ) {
-					$map[$codes[$stockItem->getProductCode()]]['stock'][$stockId] = $stockItem;
+					$map[$codes[$stockItem->getProductCode()]]['.stock'][$stockId] = $stockItem;
 				}
 			}
 		}

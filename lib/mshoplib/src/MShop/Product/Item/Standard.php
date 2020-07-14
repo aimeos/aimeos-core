@@ -71,7 +71,7 @@ class Standard
 	 */
 	public function getCatalogItems()
 	{
-		return (array) $this->get( 'catalog', [] );
+		return (array) $this->get( '.catalog', [] );
 	}
 
 
@@ -82,7 +82,7 @@ class Standard
 	 */
 	public function getSupplierItems()
 	{
-		return (array) $this->get( 'supplier', [] );
+		return (array) $this->get( '.supplier', [] );
 	}
 
 
@@ -93,7 +93,7 @@ class Standard
 	 */
 	public function getStockItems()
 	{
-		return (array) $this->get( 'stock', [] );
+		return (array) $this->get( '.stock', [] );
 	}
 
 
