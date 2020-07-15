@@ -602,6 +602,7 @@ class Standard
 		if( $this->subManagers === null )
 		{
 			$this->subManagers = [];
+			$config = $this->getContext()->getConfig();
 
 			/** mshop/index/manager/price/submanagers
 			 * A list of sub-manager names used for indexing associated items to prices
@@ -621,10 +622,10 @@ class Standard
 			 * @category Developer
 			 * @see mshop/index/manager/standard/submanagers
 			 */
-			$path = 'mshop/index/manager/price/submanagers';
-
-			foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
-				$this->subManagers[$domain] = $this->getObject()->getSubManager( $domain );
+			foreach( $config->get( 'mshop/index/manager/price/submanagers', [] ) as $domain )
+			{
+				$name = $config->get( 'mshop/index/manager/price/' . $domain . '/name' );
+				$this->subManagers[$domain] = $this->getObject()->getSubManager( $domain, $name );
 			}
 
 			return $this->subManagers;
