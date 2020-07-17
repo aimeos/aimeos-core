@@ -53,6 +53,18 @@ class Standard
 
 
 	/**
+	 * Sets the associated order base item
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item
+	 */
+	public function setBaseItem( \Aimeos\MShop\Order\Item\Base\Iface $baseItem ) : \Aimeos\MShop\Order\Item\Iface
+	{
+		$this->baseItem = $baseItem;
+		return $this;
+	}
+
+
+	/**
 	 * Returns the basic order ID.
 	 *
 	 * @return string|null Basic order ID

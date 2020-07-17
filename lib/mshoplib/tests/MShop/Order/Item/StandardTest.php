@@ -51,6 +51,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetBaseItem()
+	{
+		$item = new \Aimeos\MShop\Order\Item\Standard( $this->values );
+		$baseItem = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base' )->createItem();
+
+		$result = $this->object->setBaseItem( $baseItem );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result->getBaseItem() );
+	}
+
+
 	public function testGetId()
 	{
 		$this->assertEquals( $this->values['order.id'], $this->object->getId() );
