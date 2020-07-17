@@ -12,6 +12,7 @@ return array(
 		'mshop_locale_currency' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_locale_currency' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'string', array( 'length' => 3 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
@@ -30,6 +31,7 @@ return array(
 		'mshop_locale_language' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_locale_language' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'string', array( 'length' => 5 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
@@ -48,6 +50,7 @@ return array(
 		'mshop_locale_site' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_locale_site' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', ['notnull' => false] );
@@ -75,6 +78,7 @@ return array(
 		'mshop_locale' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_locale' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );

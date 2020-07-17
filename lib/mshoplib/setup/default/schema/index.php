@@ -18,6 +18,7 @@ return array(
 		'mshop_index_attribute' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_index_attribute' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
@@ -37,6 +38,7 @@ return array(
 		'mshop_index_catalog' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_index_catalog' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
@@ -54,6 +56,7 @@ return array(
 		'mshop_index_price' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_index_price' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
@@ -70,6 +73,7 @@ return array(
 		'mshop_index_supplier' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_index_supplier' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );

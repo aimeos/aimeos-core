@@ -11,6 +11,7 @@ return array(
 		'madmin_cache' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'madmin_cache' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'expire', 'datetime', array( 'notnull' => false ) );
@@ -25,6 +26,7 @@ return array(
 		'madmin_cache_tag' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'madmin_cache_tag' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'tid', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'tname', 'string', array( 'length' => 255 ) );
