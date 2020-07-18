@@ -74,7 +74,7 @@ return array(
 					:joins
 					WHERE :cond
 					GROUP BY :columns :group
-						mrev."id", mrev."siteid", mrev."domain", mrev."refid", mrev."customerid", mrev."orderproductid",
+						mrev."id", mrev."siteid", mrev."domain", mrev."refid", mrev."customerid", mrev."ordprodid",
 						mrev."name", mrev."comment", mrev."response", mrev."rating", mrev."status", mrev."ctime",
 						mrev."mtime", mrev."editor"
 					ORDER BY :order
