@@ -58,8 +58,6 @@ class ReviewAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$manager = \Aimeos\MShop\Review\Manager\Factory::create( $this->additional, 'Standard' );
 		$custManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Standard' );
-		$ordProdManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->additional, 'Standard' )
-			->getSubManager( 'base', 'Standard' )->getSubManager( 'product', 'Standard' );
 
 		$manager->begin();
 
