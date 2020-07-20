@@ -715,11 +715,10 @@ class Standard
 		$stmt = $conn->create( $sql );
 		$result = $stmt->execute();
 
-		$msg = [
-			'time' => ( microtime( true ) - $time ) * 1000,
-			'class' => get_class( $this ),
-			'stmt' => (string) $stmt,
-		];
+		$msg = 'Time: ' . ( microtime( true ) - $time ) * 1000 . "ms\n"
+			. 'Class: ' . get_class( $this ) . "\n"
+			. str_replace( ["\t", "\n\n"], ['', "\n"], trim( (string) $stmt ) );
+
 		$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
 
 		return $result;

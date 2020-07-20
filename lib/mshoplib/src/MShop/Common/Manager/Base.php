@@ -552,22 +552,16 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$stmt = $conn->create( $sql );
 		$result = $stmt->execute();
 
+		$level = \Aimeos\MW\Logger\Base::DEBUG;
 		$time = ( microtime( true ) - $time ) * 1000;
-		$msg = [
-			'time' => $time,
-			'class' => get_class( $this ),
-			'stmt' => (string) $stmt,
-		];
+		$msg = 'Time: ' . $time . "ms\n"
+			. 'Class: ' . get_class( $this ) . "\n"
+			. str_replace( ["\t", "\n\n"], ['', "\n"], trim( (string) $stmt ) );
 
 		if( $time > 1000.0 )
 		{
-			$e = new \Exception();
-			$msg['trace'] = $e->getTraceAsString();
 			$level = \Aimeos\MW\Logger\Base::NOTICE;
-		}
-		else
-		{
-			$level = \Aimeos\MW\Logger\Base::DEBUG;
+			$msg .= "\n" . ( new \Exception() )->getTraceAsString();
 		}
 
 		$this->context->getLogger()->log( $msg, $level, 'core/sql' );
