@@ -49,7 +49,7 @@ class Standard
 		$this->checkFileUpload( $file );
 
 		$media = $this->getMediaFile( $file->getStream() );
-		$mimetype = $media->getMimeType();
+		$mimetype = $this->getMimeType( $media, 'files' );
 
 		if( $media instanceof \Aimeos\MW\Media\Image\Iface )
 		{
@@ -488,12 +488,12 @@ class Standard
 	/**
 	 * Returns the mime type for the new image
 	 *
-	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
+	 * @param \Aimeos\MW\Media\Iface $media Media object
 	 * @param string $type Type of the image like "preview" or "files"
 	 * @return string New mime type
 	 * @throws \Aimeos\Controller\Common\Exception If no mime types are configured
 	 */
-	protected function getMimeType( \Aimeos\MW\Media\Image\Iface $media, string $type ) : string
+	protected function getMimeType( \Aimeos\MW\Media\Iface $media, string $type ) : string
 	{
 		$mimetype = $media->getMimetype();
 		$config = $this->context->getConfig();
