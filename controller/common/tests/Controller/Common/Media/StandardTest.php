@@ -352,8 +352,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetMimeIcon()
 	{
+		file_exists( 'tmp/image' ) ?: mkdir( 'tmp/image' );
+		touch( 'tmp/image/jpeg.png' );
+
+		$this->context->getConfig()->set( 'controller/common/media/standard/mimeicon/directory', 'tmp' );
 		$result = $this->access( 'getMimeIcon' )->invokeArgs( $this->object, array( 'image/jpeg' ) );
-		$this->assertStringContainsString( 'tmp/media/mimeicons/image/jpeg.png', $result );
+		$this->assertStringContainsString( 'tmp/image/jpeg.png', $result );
 	}
 
 
