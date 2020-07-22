@@ -481,7 +481,11 @@ class Standard
 		 */
 		$ext = $config->get( 'controller/common/media/standard/mimeicon/extension', '.png' );
 
-		return $mimedir . DIRECTORY_SEPARATOR . $mimetype . $ext;
+		if( file_exists( $icon = $mimedir . DIRECTORY_SEPARATOR . $mimetype . $ext ) ) {
+			return $icon;
+		}
+
+		return $mimedir . DIRECTORY_SEPARATOR . 'unknown.png';
 	}
 
 
