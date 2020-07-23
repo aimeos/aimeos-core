@@ -12,8 +12,8 @@ return array(
 	),
 
 	'price/lists' => array(
-		array( 'parentid' => 'price/attribute/default/99.99/9.99', 'type' => 'test', 'domain' => 'customer', 'refid' => 'customer/UTC001', 'start' => null, 'end' => null, 'config' => [], 'pos' => 1, 'status' => 1 ),
-		array( 'parentid' => 'price/attribute/default/99.99/9.99', 'type' => 'test', 'domain' => 'customer', 'refid' => 'customer/UTC002', 'start' => null, 'end' => null, 'config' => [], 'pos' => 2, 'status' => 1 ),
-		array( 'parentid' => 'price/attribute/default/99.99/9.99', 'type' => 'test', 'domain' => 'customer', 'refid' => 'customer/UTC003', 'start' => '2002-01-01 00:00:00', 'end' => '2006-12-31 23:59:59', 'config' => [], 'pos' => 3, 'status' => 1 ),
+		array( 'parentid' => 'price/attribute/default/99.99/9.99', 'type' => 'test', 'domain' => 'customer', 'refid' => 'customer/test@example.com', 'start' => null, 'end' => null, 'config' => [], 'pos' => 1, 'status' => 1 ),
+		array( 'parentid' => 'price/attribute/default/99.99/9.99', 'type' => 'test', 'domain' => 'customer', 'refid' => 'customer/test2@example.com', 'start' => null, 'end' => null, 'config' => [], 'pos' => 2, 'status' => 1 ),
+		array( 'parentid' => 'price/attribute/default/99.99/9.99', 'type' => 'test', 'domain' => 'customer', 'refid' => 'customer/test3@example.com', 'start' => '2002-01-01 00:00:00', 'end' => '2006-12-31 23:59:59', 'config' => [], 'pos' => 3, 'status' => 1 ),
 	)
 );

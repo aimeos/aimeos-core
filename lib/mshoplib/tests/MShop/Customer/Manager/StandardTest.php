@@ -93,9 +93,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'UTC003' );
+		$item = $this->object->findItem( 'test3@example.com' );
 
-		$this->assertEquals( 'UTC003', $item->getCode() );
+		$this->assertEquals( 'test3@example.com', $item->getCode() );
 	}
 
 
@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$domains = ['text', 'customer/property' => ['newsletter']];
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$conditions = array(
-			$search->compare( '==', 'customer.code', 'UTC001' ),
+			$search->compare( '==', 'customer.code', 'test@example.com' ),
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$payAddr = $actual->getPaymentAddress();
 
 		$this->assertEquals( 'unitCustomer001', $actual->getLabel() );
-		$this->assertEquals( 'UTC001', $actual->getCode() );
+		$this->assertEquals( 'test@example.com', $actual->getCode() );
 		$this->assertEquals( 'mr', $payAddr->getSalutation() );
 		$this->assertEquals( 'Example company', $payAddr->getCompany() );
 		$this->assertEquals( 'Dr', $payAddr->getTitle() );
@@ -202,7 +202,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSaveAddressItems()
 	{
-		$item = $this->object->findItem( 'UTC001', ['customer/address'] );
+		$item = $this->object->findItem( 'test@example.com', ['customer/address'] );
 
 		$item->setId( null )->setCode( 'xyz' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
@@ -220,7 +220,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSavePropertyItems()
 	{
-		$item = $this->object->findItem( 'UTC001', ['customer/property'] );
+		$item = $this->object->findItem( 'test@example.com', ['customer/property'] );
 
 		$item->setId( null )->setCode( 'xyz' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
@@ -243,7 +243,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$item = $this->object->findItem( 'UTC001', ['text'] );
+		$item = $this->object->findItem( 'test@example.com', ['text'] );
 
 		if( ( $listItem = $item->getListItems( 'text', 'default' )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );
@@ -254,7 +254,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'customer.id', null );
 		$expr[] = $search->compare( '==', 'customer.label', 'unitCustomer001' );
-		$expr[] = $search->compare( '==', 'customer.code', 'UTC001' );
+		$expr[] = $search->compare( '==', 'customer.code', 'test@example.com' );
 		$expr[] = $search->compare( '>=', 'customer.password', '' );
 		$expr[] = $search->compare( '==', 'customer.status', 1 );
 		$expr[] = $search->compare( '>', 'customer.mtime', '1970-01-01 00:00:00' );
@@ -368,7 +368,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsRef()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
+		$search->setConditions( $search->compare( '==', 'customer.code', 'test@example.com' ) );
 
 		$item = $this->object->searchItems( $search, ['customer/address', 'text'] )->first();
 

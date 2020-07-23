@@ -26,8 +26,8 @@ return [
 	],
 
 	'customer' => [
-		'customer/UTC001' => [
-			'customer.label' => 'unitCustomer001', 'customer.code' => 'UTC001', 'customer.status' => 1,
+		'customer/test@example.com' => [
+			'customer.label' => 'unitCustomer001', 'customer.code' => 'test@example.com', 'customer.status' => 1,
 			'customer.company' => 'Example company', 'customer.vatid' => 'DE999999999', 'customer.salutation' => 'mr',
 			'customer.title' => 'Dr', 'customer.firstname' => 'Our', 'customer.lastname' => 'Unittest',
 			'customer.address1' => 'Pickhuben', 'customer.address2' => '2-4', 'customer.address3' => '',
@@ -71,8 +71,8 @@ return [
 				]],
 			],
 		],
-		'customer/UTC002' => [
-			'customer.label' => 'unitCustomer002', 'customer.code' => 'UTC002', 'customer.status' => 1,
+		'customer/test2@example.com' => [
+			'customer.label' => 'unitCustomer002', 'customer.code' => 'test2@example.com', 'customer.status' => 1,
 			'customer.languageid' => 'de', 'customer.email' => 'test2@example.com',
 			'address' => [[
 				'customer.address.company' => 'Example company LLC', 'customer.address.vatid' => 'DE999999999',
@@ -100,8 +100,8 @@ return [
 				'customer.address.position' => '1',
 			]],
 		],
-		'customer/UTC003' => [
-			'customer.label' => 'unitCustomer003', 'customer.code' => 'UTC003', 'customer.status' => 0,
+		'customer/test3@example.com' => [
+			'customer.label' => 'unitCustomer003', 'customer.code' => 'test3@example.com', 'customer.status' => 0,
 			'customer.languageid' => 'de', 'customer.email' => 'test3@example.com',
 			'address' => [[
 				'customer.address.company' => 'unitcompany', 'customer.address.vatid' => 'vatnumber',
