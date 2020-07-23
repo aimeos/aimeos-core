@@ -81,6 +81,22 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 
 
 	/**
+	 * Returns the manager for the current setup task
+	 *
+	 * @param string $domain Domain name of the manager
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
+	 */
+	protected function getManager( $domain )
+	{
+		if( $domain === 'customer' ) {
+			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Standard' );
+		}
+
+		return \Aimeos\MShop::create( $this->additional, $domain );
+	}
+
+
+	/**
 	 * Adds the group test data
 	 *
 	 * @param \Aimeos\MShop\Common\Manager\Iface $groupManager Customer group manager
