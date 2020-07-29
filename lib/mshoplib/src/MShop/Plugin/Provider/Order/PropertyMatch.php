@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * product properties.
  *
  * Example:
- * - values: ["mytype" => "myvalue"]
+ * - values: {"mytype": "myvalue"}
  *
  * This configuration enforces products to have a size and color property.
  * Otherwise, they can't be added to the basket by the customers.

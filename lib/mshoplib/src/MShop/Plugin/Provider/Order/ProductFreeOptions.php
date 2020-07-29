@@ -12,7 +12,13 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
 /**
- * Configurable free product options
+ * Defines the number of the free "config" attributes for products with configurable options
+ *
+ * If customers can configure products using several options they can add and each option must be paid additionally,
+ * this plugin recalculates the total product price based on the added options.
+ *
+ * Example:
+ *  <attribute type> : <number of free options>
  *
  * @package MShop
  * @subpackage Plugin
