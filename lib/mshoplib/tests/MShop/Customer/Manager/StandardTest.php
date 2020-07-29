@@ -280,7 +280,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.telefax', '055544332212' );
 		$expr[] = $search->compare( '==', 'customer.website', 'www.example.com' );
 		$expr[] = $search->compare( '==', 'customer.longitude', '10.0' );
-		$expr[] = $search->compare( '==', 'customer.latitude', '50.0' );
+		$expr[] = $search->compare( '>=', 'customer.latitude', '50.0' );
 		$expr[] = $search->compare( '==', 'customer.birthday', '1999-01-01' );
 
 		$param = ['text', 'default', $listItem->getRefId()];
