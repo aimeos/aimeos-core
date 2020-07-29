@@ -1,9 +1,8 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2020
  */
 
 
@@ -11,17 +10,16 @@ require_once 'phing/Task.php';
 
 
 /**
- * Generating Mediawiki pages for the configuration documentation.
+ * Generate Markdown pages for the configuration documentation
  */
 class MShopConfigDocTask extends Task
 {
 	private $file;
+	private $outdir;
 	private $optfile;
-	private $outfile;
-	private $filesets = array();
-	private $keyprefix = '';
-	private $wikiprefix = '';
+	private $filesets = [];
 	private $keyparts = 1;
+	private $prefix = '';
 
 
 	/**
@@ -38,70 +36,42 @@ class MShopConfigDocTask extends Task
 
 
 	/**
-	 * Initializes the object.
+	 * Initializes the object
 	 */
 	public function init()
 	{
 		return true;
 	}
 
+
 	/**
-	 * Generates Mediawiki pages for the configuration documentation.
+	 * Generates Markdown pages for the configuration documentation
 	 */
 	public function main()
 	{
-		$options = array();
+		$options = [];
 
-		if( !isset( $this->file ) && count( $this->filesets ) == 0 ) {
+		if( !isset( $this->file ) && empty( $this->filesets ) ) {
 			throw new BuildException( "Missing either a nested fileset or attribute 'file' set" );
 		}
 
-		if( isset( $this->optfile ) && ( $string = file_get_contents( $this->optfile ) ) !== false
-			&& ( $options = unserialize( $string ) ) === false ) {
+		if( isset( $this->optfile )
+			&& ( $string = file_get_contents( $this->optfile ) ) !== false
+			&& ( $options = unserialize( $string ) ) === false
+		) {
 			throw new BuildException( sprintf( 'Unable to unserialize content of file "%1$s"', $this->optfile ) );
 		}
 
-		if( $this->file instanceof PhingFile )
-		{
-			$this->extract( $this->file->getPath(), $options );
-		}
-		else // process filesets
-		{
-			$project = $this->getProject();
-
-			foreach( $this->filesets as $fs )
-			{
-				$files = $fs->getDirectoryScanner( $project )->getIncludedFiles();
-				$dir = $fs->getDir( $this->project )->getPath();
-
-				foreach( $files as $file ) {
-					$this->extract( $dir . DIRECTORY_SEPARATOR . $file, $options );
-				}
-			}
-		}
-
-		$len = strlen( $this->keyprefix );
-
-		foreach( $options as $key => $values )
-		{
-			if( strncmp( $key, $this->keyprefix, $len ) !== 0 ) {
-				unset( $options[$key] );
-			} else if( strpos( $key, 'unknown' ) !== false ) {
-				unset( $options[$key] );
-			} else if( !isset( $values['short'] ) && $key[0] !== "\n" ) {
-				$this->log( 'No doc: ' . $key );
-			}
-		}
-
+		$options = $this->sanitize( $this->extract( $options ) );
 		ksort( $options );
-		$this->log( 'Number of config options for ' . $this->keyprefix . ': ' . count( $options ) );
+		$this->writeFiles( $this->createContent( $options ) );
 
-		$this->createWikiPages( $options );
+		$this->log( 'Number of config options for ' . $this->prefix . ': ' . count( $options ) );
 	}
 
 
 	/**
-	 * File to be performed syntax check on.
+	 * File to be performed syntax check on
 	 *
 	 * @param PhingFile $file
 	 */
@@ -112,7 +82,7 @@ class MShopConfigDocTask extends Task
 
 
 	/**
-	 * File with serialized PHP array of extracted configuration options.
+	 * File with serialized PHP array of extracted configuration options
 	 *
 	 * @param string $file
 	 */
@@ -123,31 +93,31 @@ class MShopConfigDocTask extends Task
 
 
 	/**
-	 * File that will contain the generated pages.
+	 * Directory that will contain the generated pages
 	 *
-	 * @param string $file
+	 * @param string $dir
 	 */
-	public function setOutfile( $file )
+	public function setOutdir( $dir )
 	{
-		$this->outfile = $file;
+		$this->outdir = $dir;
 	}
 
 
 	/**
-	 * The configuration options must start with this prefix.
+	 * The configuration options must start with this prefix
 	 *
 	 * All other config options are ignored
 	 *
 	 * @param string $prefix
 	 */
-	public function setKeyPrefix( $prefix )
+	public function setPrefix( $prefix )
 	{
-		$this->keyprefix = $prefix;
+		$this->prefix = $prefix;
 	}
 
 
 	/**
-	 * Sets the number of grouped key parts.
+	 * Sets the number of grouped key parts
 	 *
 	 * @param string $keyparts
 	 */
@@ -158,54 +128,26 @@ class MShopConfigDocTask extends Task
 
 
 	/**
-	 * Title prefix for the wiki pages.
-	 *
-	 * @param string $prefix
-	 */
-	public function setWikiPrefix( $prefix )
-	{
-		$this->wikiprefix = $prefix;
-	}
-
-
-	/**
-	 * Creates the wiki pages for the given options.
+	 * Creates the Markdown files for the given options
 	 *
 	 * @param array $options Associative list of the keys and an array of
-	 * 	"short", "desc", "param", "since" and "see" entries
+	 * 	"short", "long", "param", "default", "deprecated", "since" and "see" entries
 	 */
-	protected function createWikiPages( array $options )
+	protected function createContent( array $options )
 	{
-		if( ( $fh = fopen( $this->outfile, 'w' ) ) === false ) {
-			throw new BuildException( sprintf( 'Unable to open file "%1$s"', $this->outfile ) );
-		}
-
-		$date = date( 'c' );
-		$wikiprefix = $this->wikiprefix;
-		$prefixlen = strlen( $this->keyprefix ) + 1;
-		$matches = $sections = array();
-
-		$this->writeFile( $fh, '<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4"
- xml:lang="en"><siteinfo><namespaces><namespace key="0" case="first-letter" /></namespaces></siteinfo>' . "\n" );
+		$prefixlen = strlen( $this->prefix ) + 1;
+		$header = '';
+		$files = [];
 
 		foreach( $options as $key => $list )
 		{
-			$short = $type = $since = $deprecated = '';
+			$data = $short = $type = $since = $deprecated = '';
 			$parts = explode( '/', substr( $key, $prefixlen ) );
-			$first = implode( '/', array_slice( $parts, 0, $this->keyparts ) );
-
-			if( $this->keyparts == 0 ) {
-				$sections[$parts[0]][] = $key;
-			} else if( count( $parts ) > $this->keyparts + 1 ) {
-				$sections[$first][$parts[$this->keyparts]][] = $key;
-			} else {
-				$sections[$first]['global'][] = $key;
-			}
 
 			if( isset( $list['param'] ) )
 			{
+				$matches = [];
+
 				if( preg_match( '/([^\t ]+)[\t ]+(.*)/u', $list['param'], $matches ) === false ) {
 					throw new BuildException( 'Invalid match pattern' );
 				}
@@ -216,7 +158,7 @@ class MShopConfigDocTask extends Task
 			if( isset( $list['since'] ) )
 			{
 				foreach( $list['since'] as $text ) {
-					$since .= "* Since: " . $text . "\n";
+					$since .= "* Since: " . $text. "\n";
 				}
 			}
 
@@ -224,125 +166,98 @@ class MShopConfigDocTask extends Task
 				$deprecated = "* Deprecated: " . $list['deprecated'] . "\n";
 			}
 
-			$default = "* Default: " . str_replace( array( '<', '>', '&', "\n\t" ), array( '&lt;', '&gt;', '&amp;', "\n " ), $list['default'] ) . "\n";
-			$value = str_replace( array( '<', '>', '&', "\n\t" ), array( '&lt;', '&gt;', '&amp;', "\n " ), $list['value'] );
-
 			if( isset( $list['short'] ) )
 			{
-				$short = "\n" . trim( str_replace( array( '<', '>', '&' ), array( '&lt;', '&gt;', '&amp;' ), $list['short'] ) ) . "\n";
+				$short = "\n" . trim( $list['short'] ) . "\n";
 				$options[$key]['short'] = $short;
 			}
 
-			$data = "<page>\n<title>$wikiprefix/$key</title>\n<ns>0</ns><revision><timestamp>$date</timestamp>";
-			$data .= "<contributor></contributor>\n<comment>Generated by MShopConfigDocTask</comment><text>\n";
-			$data .= "== Summary ==\n$short";
-			$data .= "\n $key = " . rtrim( str_replace( array( "\n(", "\n)" ), array( "\n (", "\n )" ), print_r( $value, true ) ) ) . "\n";
+			if( $header !== join( '/', array_slice( $parts, 0, $this->keyparts + 1 ) ) ) {
+				$data .= "\n# " . join( '/', array_slice( $parts, $this->keyparts, 1 ) );
+			}
+
+			if( count( $parts ) > $this->keyparts + 1 ) {
+				$data .= "\n## " . join( '/', array_slice( $parts, $this->keyparts + 1 ) );
+			}
+
+			$header = join( '/', array_slice( $parts, 0, $this->keyparts + 1 ) );
+
+			$keyvalue = print_r( str_replace( ["\n\t"], ["\n "], $list['value'] ), true );
+			$defvalue = $list['default'];
+			$matches = [];
+
+			if( preg_match( "/([\t]+)/", $keyvalue, $matches ) === 1 )
+			{
+				$keyvalue = str_replace( $matches[1], '', $keyvalue );
+				$defvalue = str_replace( $matches[1], '', $defvalue );
+			}
+
+			$default = "* Default: " . str_replace( ["\n\t"], ["\n "], $defvalue ) . "\n";
+
+			$data .= "\n$short";
+			$data .= "\n```";
+			$data .= "\n$key = " . rtrim( str_replace( ["\n(", "\n)"], ["\n(", "\n)"], $keyvalue ) );
+			$data .= "\n```\n";
 			$data .= "\n${deprecated}${default}${type}${since}";
 
 			if( isset( $list['long'] ) )
 			{
-				$data .= "\n== Description ==\n";
-
 				foreach( $list['long'] as $desc )
 				{
-					if( ( $desc = preg_replace( '/\{\@link ([^ ]+) ([^\}]*)\}/', '[\1 \2]', $desc ) ) === null ) {
+					if( ( $desc = preg_replace( '/\{\@link ([^ ]+) ([^\}]+)\}/', '[$2]($1)', $desc ) ) === null ) {
 						throw new BuildException( 'Unable to compile link regex' );
 					}
 
-					$data .= "\n" . str_replace( array( '<', '>', '&' ), array( '&lt;', '&gt;', '&amp;' ), $desc );
+					if( ( $desc = preg_replace( "/^ (.+)\n/sm", "```\n \$1\n```\n", $desc ) ) === null ) {
+						throw new BuildException( 'Unable to compile code regex' );
+					}
+
+					$data .= "\n" . $desc;
 				}
-
 			}
-
-			$data .= "\n== See also ==\n";
 
 			if( isset( $list['see'] ) )
 			{
+				$data .= "\nSee also:\n";
+
 				foreach( $list['see'] as $see ) {
-					$data .= "\n* [[$wikiprefix/$see|$see]]";
+					$data .= "\n* $see";
 				}
 			}
 
-			$data .= "\nHow to adapt the configuration:\n";
-			$data .= "* [[TYPO3/Change_configuration|TYPO3]]\n";
-			$data .= "* [[Symfony/Change_configuration|Symfony]]\n";
-			$data .= "* [[Laravel/Change_configuration|Laravel]]\n";
-			$data .= "* [[Flow/Change_configuration|Flow]]\n";
-
-			if( isset( $list['category'] ) )
+			if( count( $parts ) > $this->keyparts )
 			{
-				$last = end( $parts );
-
-				foreach( $list['category'] as $category ) {
-					$data .= "\n[[Category:$category|$last]]\n";
-				}
+				$filename = implode( '-', array_slice( $parts, 0, $this->keyparts ) );
+				$files[$filename][] = $data;
 			}
-
-			$data .= "</text><model>wikitext</model><format>text/x-wiki</format></revision>\n</page>\n";
-
-			$this->writeFile( $fh, $data );
 		}
 
-		$this->writeFile( $fh, $this->createWikiPagesList( $options, $sections ) );
-		$this->writeFile( $fh, '</mediawiki>' );
+		return $files;
 	}
 
 
 	/**
-	 * Creates the list page for all wiki pages.
+	 * Extracts the configuration documentation
 	 *
-	 * @param array $options Associative list of the keys and an array of
-	 * 	"short", "desc", "param", "since" and "see" entries
-	 * @param array $sections Two dimensional associative list of section names and sub-names
-	 * @return string Mediawiki page as XML for import
+	 * @param array $options Associative list of extracted configuration options
+	 * @return array Map of config key and associative list with
+	 * 	"short", "long", "param", "default", "deprecated", "since" and "see" entries
 	 */
-	protected function createWikiPagesList( array $options, array $sections )
+	protected function extract( array $options )
 	{
-		$data = '';
-		$date = date( 'c' );
-		$keyprefix = $this->keyprefix;
-		$wikiprefix = $this->wikiprefix;
+		$project = $this->getProject();
 
-		foreach( $sections as $name => $list )
+		foreach( $this->filesets as $fs )
 		{
-			$data .= "<page>\n<title>$wikiprefix/$keyprefix/$name</title>\n<ns>0</ns><revision><timestamp>$date</timestamp>
-<contributor></contributor>\n<comment>Generated by MShopConfigDocTask</comment>
-<text xml:space=\"preserve\">__TOC__\n\n\n&lt;div class=\"config\"&gt;";
+			$files = $fs->getDirectoryScanner( $project )->getIncludedFiles();
+			$dir = $fs->getDir( $project )->getPath();
 
-			if( isset( $list['global'] ) )
-			{
-				foreach( (array) $list['global'] as $key )
-				{
-					$desc = $options[$key]['short'];
-					$data .= "\n; [[$wikiprefix/$key|$key]] : $desc\n";
-				}
-
-				unset( $list['global'] );
+			foreach( $files as $file ) {
+				$this->extractFile( $dir . DIRECTORY_SEPARATOR . $file, $options );
 			}
-
-			foreach( $list as $subname => $keys )
-			{
-				if( is_array( $keys ) )
-				{
-					$data .= "\n== $subname ==\n";
-
-					foreach( $keys as $key )
-					{
-						$desc = $options[$key]['short'];
-						$data .= "\n; [[$wikiprefix/$key|$key]] : $desc\n";
-					}
-				}
-				else
-				{
-					$desc = $options[$keys]['short'];
-					$data .= "\n; [[$wikiprefix/$keys|$keys]] : $desc\n";
-				}
-			}
-
-			$data .= "&lt;/div&gt;</text><model>wikitext</model><format>text/x-wiki</format></revision>\n</page>\n";
 		}
 
-		return $data;
+		return $options;
 	}
 
 
@@ -352,7 +267,7 @@ class MShopConfigDocTask extends Task
 	 * @param string $filename Absolute name of the file
 	 * @param array &$options Associative list of extracted configuration options
 	 */
-	protected function extract( $filename, array &$options )
+	protected function extractFile( $filename, array &$options )
 	{
 		$matches = $result = array();
 
@@ -415,10 +330,52 @@ class MShopConfigDocTask extends Task
 	}
 
 
-	protected function writeFile( $handle, $data )
+	/**
+	 * Removes invalid keys from options map
+	 *
+	 * @param array $options Map of config key and associative list with
+	 * 	"short", "long", "param", "default", "deprecated", "since" and "see" entries
+	 * @return array Sanitized map of config key and associative list of option pairs
+	 */
+	protected function sanitize( array $options )
 	{
-		if( fwrite( $handle, $data ) === false ) {
-			throw new BuildException( sprintf( 'Unable to write to file "%1$s"', $this->outfile ) );
+		$len = strlen( $this->prefix );
+
+		foreach( $options as $key => $values )
+		{
+			if( strncmp( $key, $this->prefix, $len ) !== 0 ) {
+				unset( $options[$key] );
+			} else if( strpos( $key, 'unknown' ) !== false ) {
+				unset( $options[$key] );
+			} else if( !isset( $values['short'] ) && $key[0] !== "\n" ) {
+				$this->log( 'No doc: ' . $key );
+			}
+		}
+
+		return $options;
+	}
+
+
+	/**
+	 * Write the file content to the disc
+	 *
+	 * @param array $files Map of file name and file content
+	 */
+	protected function writeFiles( array $files )
+	{
+		$dir = $this->outdir . '/' . str_replace( '/', '-', $this->prefix );
+
+		if( !file_exists( $dir ) ) {
+			mkdir( $dir );
+		}
+
+		foreach( $files as $filename => $list )
+		{
+			$filepath = $dir . '/' . $filename . '.md';
+
+			if( file_put_contents( $filepath, join( "\n", $list ) ) === false ) {
+				throw new BuildException( sprintf( 'Unable to write to file "%1$s"', $filepath ) );
+			}
 		}
 	}
 }
