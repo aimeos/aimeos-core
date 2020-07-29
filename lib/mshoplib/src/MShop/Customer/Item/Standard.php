@@ -255,8 +255,8 @@ class Standard extends Base implements Iface
 			{
 				case 'customer.label': $item = $item->setLabel( $value ); break;
 				case 'customer.code': $item = $item->setCode( $value ); break;
-				case 'customer.status': $item = $item->setStatus( (int) $value ); break;
-				case 'customer.groups': $item = $item->setGroups( (array) $value ); break;
+				case 'customer.status': !$private ?: $item = $item->setStatus( (int) $value ); break;
+				case 'customer.groups': !$private ?: $item = $item->setGroups( (array) $value ); break;
 				case 'customer.password': !$private ?: $item = $item->setPassword( $value ); break;
 				case 'customer.dateverified': !$private ?: $item = $item->setDateVerified( $value ); break;
 				default: continue 2;
@@ -281,11 +281,11 @@ class Standard extends Base implements Iface
 
 		$list['customer.label'] = $this->getLabel();
 		$list['customer.code'] = $this->getCode();
-		$list['customer.status'] = $this->getStatus();
-		$list['customer.groups'] = $this->getGroups();
 
 		if( $private === true )
 		{
+			$list['customer.status'] = $this->getStatus();
+			$list['customer.groups'] = $this->getGroups();
 			$list['customer.password'] = $this->getPassword();
 			$list['customer.dateverified'] = $this->getDateVerified();
 		}
