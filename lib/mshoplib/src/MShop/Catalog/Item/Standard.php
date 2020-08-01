@@ -452,7 +452,7 @@ class Standard
 	 */
 	public function isAvailable() : bool
 	{
-		return $this->getStatus() > 0;
+		return parent::isAvailable() && $this->getStatus() > 0;
 	}
 
 
