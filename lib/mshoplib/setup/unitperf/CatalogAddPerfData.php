@@ -368,7 +368,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			$listItems = $catItem->getListItems( 'product' );
 			$ids = []; $num = 5;
 
-			while( ( $litem = array_pop( $listItems ) ) !== null && $num > 0 )
+			while( ( $litem = $listItems->pop() ) !== null && $num > 0 )
 			{
 				if( !in_array( $litem->getRefId(), $ids ) )
 				{
