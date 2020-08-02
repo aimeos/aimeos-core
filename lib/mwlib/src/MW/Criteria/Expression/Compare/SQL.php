@@ -71,7 +71,7 @@ class SQL extends Base
 			$parts = explode( ' - ', $value );
 
 			return $name . ' >= ' . $this->escape( '>=', $type, $parts[0] )
-				. ' && ' . $name . ' < ' . $this->escape( '<', $type, $parts[1] );
+				. ' AND ' . $name . ' < ' . $this->escape( '<', $type, $parts[1] );
 		}
 
 		$term = $name . ' ' . self::$operators[$op] . ' ' . $this->escape( $op, $type, $value );
