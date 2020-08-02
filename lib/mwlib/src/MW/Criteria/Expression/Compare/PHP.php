@@ -20,7 +20,7 @@ namespace Aimeos\MW\Criteria\Expression\Compare;
  */
 class PHP extends Base
 {
-	private static $operators = array( '>' => '>', '>=' => '>=', '<' => '<', '<=' => '<=', '==' => '==', '!=' => '!=' );
+	private static $operators = ['>' => '>', '>=' => '>=', '<' => '<', '<=' => '<=', '==' => '==', '!=' => '!=', '-' => '-'];
 
 
 	/**
@@ -61,8 +61,17 @@ class PHP extends Base
 	 */
 	protected function createTerm( $name, string $type, $value ) : string
 	{
-		$escaped = $this->escape( $this->getOperator(), $type, $value );
-		return $name . ' ' . self::$operators[$this->getOperator()] . ' ' . $escaped;
+		$op = $this->getOperator();
+
+		if( $op === '-' )
+		{
+			$parts = explode( ' - ', $value );
+
+			return $name . ' >= ' . $this->escape( '>=', $type, $parts[0] )
+				. ' && ' . $name . ' < ' . $this->escape( '<', $type, $parts[1] );
+		}
+
+		return $name . ' ' . self::$operators[$op] . ' ' . $this->escape( $op, $type, $value );
 	}
 
 

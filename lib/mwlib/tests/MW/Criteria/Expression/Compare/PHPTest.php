@@ -14,7 +14,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 {
 	public function testGetOperators()
 	{
-		$expected = array( '>', '>=', '<', '<=', '==', '!=' );
+		$expected = ['>', '>=', '<', '<=', '==', '!=', '-'];
 		$actual = \Aimeos\MW\Criteria\Expression\Compare\PHP::getOperators();
 		$this->assertEquals( $expected, $actual );
 	}
@@ -84,6 +84,9 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'undefined', null );
 		$this->assertEquals( '$undefined === null', $expr->toSource( $types, $translations ) );
+
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '-', 'intvar', '10 - 20' );
+		$this->assertEquals( '$intvar >= 10 && $intvar < 20', $expr->toSource( $types, $translations ) );
 	}
 
 

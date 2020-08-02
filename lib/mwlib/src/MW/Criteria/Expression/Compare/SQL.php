@@ -20,7 +20,7 @@ namespace Aimeos\MW\Criteria\Expression\Compare;
  */
 class SQL extends Base
 {
-	private static $operators = array( '=~' => 'LIKE', '~=' => 'LIKE', '==' => '=', '!=' => '<>', '>' => '>', '>=' => '>=', '<' => '<', '<=' => '<=' );
+	private static $operators = ['=~' => 'LIKE', '~=' => 'LIKE', '==' => '=', '!=' => '<>', '>' => '>', '>=' => '>=', '<' => '<', '<=' => '<=', '-' => '-'];
 	private $conn;
 
 
@@ -64,9 +64,19 @@ class SQL extends Base
 	 */
 	protected function createTerm( $name, string $type, $value ) : string
 	{
-		$term = $name . ' ' . self::$operators[$this->getOperator()] . ' ' . $this->escape( $this->getOperator(), $type, $value );
+		$op = $this->getOperator();
 
-		if( in_array( $this->getOperator(), array( '=~', '~=' ), true ) ) {
+		if( $op === '-' )
+		{
+			$parts = explode( ' - ', $value );
+
+			return $name . ' >= ' . $this->escape( '>=', $type, $parts[0] )
+				. ' && ' . $name . ' < ' . $this->escape( '<', $type, $parts[1] );
+		}
+
+		$term = $name . ' ' . self::$operators[$op] . ' ' . $this->escape( $op, $type, $value );
+
+		if( in_array( $op, array( '=~', '~=' ), true ) ) {
 			$term .= ' ESCAPE \'#\'';
 		}
 

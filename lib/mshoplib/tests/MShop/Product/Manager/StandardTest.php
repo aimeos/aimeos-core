@@ -346,7 +346,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.status', 1 );
 		$expr[] = $search->compare( '==', 'product.scale', 0.1 );
 		$expr[] = $search->compare( '>=', 'product.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'product.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '-', 'product.mtime', '1970-01-01 00:00 - 2100-01-01 00:00' );
 		$expr[] = $search->compare( '==', 'product.editor', $this->editor );
 		$expr[] = $search->compare( '>=', 'product.target', '' );
 

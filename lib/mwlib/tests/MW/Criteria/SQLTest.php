@@ -95,9 +95,9 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	public function testGetOperators()
 	{
 		$expected = array(
-			'combine' => array( '&&', '||', '!' ),
-			'compare' => array( '=~', '~=', '==', '!=', '>', '>=', '<', '<=' ),
-			'sort' => array( '+', '-' ),
+			'combine' => ['&&', '||', '!' ],
+			'compare' => ['=~', '~=', '==', '!=', '>', '>=', '<', '<=', '-'],
+			'sort' => ['+', '-' ],
 		);
 		$actual = $this->object->getOperators();
 		$this->assertEquals( $expected, $actual );
