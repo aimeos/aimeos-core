@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2020
  * @package MW
@@ -30,7 +30,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $format New date format
-	 * @see http://php.net/manual/en/datetime.createfromformat.php
+	 * @see https://www.php.net/manual/en/datetime.createfromformat.php
 	 */
 	public function __construct( \Aimeos\MW\View\Iface $view, ?string $format = null )
 	{

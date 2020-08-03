@@ -1,4 +1,4 @@
-<a href="https://aimeos.org/">
+<a href="https://aimeos.org">
     <img src="https://aimeos.org/fileadmin/template/icons/logo.png" alt="Aimeos logo" title="Aimeos" align="right" height="60" />
 </a>
 
@@ -12,7 +12,7 @@
 
 :star: Star us on GitHub — it helps!
 
-[![Aimeos demo](https://aimeos.org/fileadmin/aimeos.org/images/aimeos-github.png)](http://demo.aimeos.org/)
+[![Aimeos demo](https://aimeos.org/fileadmin/aimeos.org/images/aimeos-github.png)](https://demo.aimeos.org)
 
 ## What is Aimeos core?
 
@@ -40,7 +40,7 @@ fits as base for portals or market places.
 
 ## Links
 
-* [Web site](https://aimeos.org/)
+* [Web site](https://aimeos.org)
 * [Documentation](https://aimeos.org/docs/)
 * [Forum](https://aimeos.org/help/)
 * [Issue tracker](https://github.com/aimeos/aimeos-core/issues)

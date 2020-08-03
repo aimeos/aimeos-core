@@ -1,7 +1,7 @@
 {
 	"name": "aimeos/aimeos-core",
 	"description": "Full-featured e-commerce components for high performance online shops",
-	"homepage": "https://aimeos.org/",
+	"homepage": "https://aimeos.org",
 	"license": "LGPL-3.0-or-later",
 	"keywords": ["ecommerce", "shop", "portal", "marketplace", "gigacommerce", "B2B", "B2C"],
 	"support": {

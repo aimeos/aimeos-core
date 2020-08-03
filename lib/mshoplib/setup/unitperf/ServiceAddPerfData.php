@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2020
  */
 
@@ -46,28 +46,28 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 				'pickup' => [
 					'name' => 'Pickup',
 					'short' => 'Pick-up at one of our local stores',
-					'image' => 'http://demo.aimeos.org/media/service/pickup.png',
+					'image' => 'https://demo.aimeos.org/media/service/pickup.png',
 					'provider' => 'Standard',
 					'costs' => '0.00',
 				],
 				'dhl' => [
 					'name' => 'DHL',
 					'short' => 'Delivery within three days by DHL',
-					'image' => 'http://demo.aimeos.org/media/service/dhl.png',
+					'image' => 'https://demo.aimeos.org/media/service/dhl.png',
 					'provider' => 'Standard',
 					'costs' => '3.90',
 				],
 				'fedex' => [
 					'name' => 'Fedex',
 					'short' => 'Delivery within two days by Fedex',
-					'image' => 'http://demo.aimeos.org/media/service/fedex.png',
+					'image' => 'https://demo.aimeos.org/media/service/fedex.png',
 					'provider' => 'Standard',
 					'costs' => '6.90',
 				],
 				'tnt' => [
 					'name' => 'TNT',
 					'short' => 'Delivery within one day by TNT',
-					'image' => 'http://demo.aimeos.org/media/service/tnt.png',
+					'image' => 'https://demo.aimeos.org/media/service/tnt.png',
 					'provider' => 'Standard',
 					'costs' => '9.90',
 				],
@@ -76,28 +76,28 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 				'invoice' => [
 					'name' => 'Invoice',
 					'short' => 'Pay by invoice within 14 days',
-					'image' => 'http://demo.aimeos.org/media/service/payment-in-advance.png',
+					'image' => 'https://demo.aimeos.org/media/service/payment-in-advance.png',
 					'provider' => 'PostPay',
 					'costs' => '0.00',
 				],
 				'directdebit' => [
 					'name' => 'Direct debit',
 					'short' => 'Payment via your bank account',
-					'image' => 'http://demo.aimeos.org/media/service/sepa.png',
+					'image' => 'https://demo.aimeos.org/media/service/sepa.png',
 					'provider' => 'PostPay',
 					'costs' => '0.00',
 				],
 				'cash' => [
 					'name' => 'Cash on delivery',
 					'short' => 'Pay cash on delivery of the parcel',
-					'image' => 'http://demo.aimeos.org/media/service/dhl-cod.png',
+					'image' => 'https://demo.aimeos.org/media/service/dhl-cod.png',
 					'provider' => 'PrePay',
 					'costs' => '8.00',
 				],
 				'prepay' => [
 					'name' => 'Prepayment',
 					'short' => 'Pay in advance before the parcel is shipped',
-					'image' => 'http://demo.aimeos.org/media/service/payment-in-advance-alternative.png',
+					'image' => 'https://demo.aimeos.org/media/service/payment-in-advance-alternative.png',
 					'provider' => 'PrePay',
 					'costs' => '0.00',
 				],

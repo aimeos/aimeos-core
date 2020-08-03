@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2020
  * @package MW
  * @subpackage View
@@ -241,7 +241,7 @@ class Standard
 	/**
 	 * Return an instance with the specific request-target.
 	 *
-	 * @see http://tools.ietf.org/html/rfc7230#section-2.7 (for the various
+	 * @see https://tools.ietf.org/html/rfc7230#section-2.7 (for the various
 	 *	 request-target forms allowed in request messages)
 	 * @param mixed $requestTarget
 	 * @return self
@@ -281,7 +281,7 @@ class Standard
 	/**
 	 * Retrieves the URI instance.
 	 *
-	 * @see http://tools.ietf.org/html/rfc3986#section-4.3
+	 * @see https://tools.ietf.org/html/rfc3986#section-4.3
 	 * @return UriInterface Returns a UriInterface instance
 	 *	 representing the URI of the request.
 	 */
