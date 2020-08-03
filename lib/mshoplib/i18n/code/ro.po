@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
-# 
+#
+#
 # Translators:
 # Translators:
 # Translators:
@@ -14,7 +14,7 @@ msgstr ""
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2019-02-12 08:30+0000\n"
 "Last-Translator: Robert Patan <robert@bytepath.ro>\n"
-"Language-Team: Romanian (http://www.transifex.com/aimeos/aimeos-core/language/ro/)\n"
+"Language-Team: Romanian (https://www.transifex.com/aimeos/aimeos-core/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
