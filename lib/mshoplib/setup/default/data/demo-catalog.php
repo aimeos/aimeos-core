@@ -53,8 +53,8 @@ return array(
 	'media' => array(
 		array(
 			'label' => 'Demo: Home stage image', 'mimetype' => 'image/png',
-			'url' => 'http://demo.aimeos.org/media/stage.jpg',
-			'preview' => 'http://demo.aimeos.org/media/stage.jpg',
+			'url' => 'https://demo.aimeos.org/media/stage.jpg',
+			'preview' => 'https://demo.aimeos.org/media/stage.jpg',
 			'type' => 'stage', 'languageid' => null, 'status' => 1,
 			'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1

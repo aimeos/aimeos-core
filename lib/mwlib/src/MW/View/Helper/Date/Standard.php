@@ -30,7 +30,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $format New date format
-	 * @see http://php.net/manual/en/datetime.createfromformat.php
+	 * @see https://www.php.net/manual/en/datetime.createfromformat.php
 	 */
 	public function __construct( \Aimeos\MW\View\Iface $view, ?string $format = null )
 	{
