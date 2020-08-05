@@ -51,12 +51,10 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 		}
 
 		$param = $this->getParameters();
-		$param['driverOptions'] = [
-			\PDO::ATTR_CASE => \PDO::CASE_NATURAL,
-			\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-			\PDO::ATTR_ORACLE_NULLS => \PDO::NULL_NATURAL,
-			\PDO::ATTR_STRINGIFY_FETCHES => false,
-		];
+		$param['driverOptions'][\PDO::ATTR_CASE] = \PDO::CASE_NATURAL;
+		$param['driverOptions'][\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
+		$param['driverOptions'][\PDO::ATTR_ORACLE_NULLS] = \PDO::NULL_NATURAL;
+		$param['driverOptions'][\PDO::ATTR_STRINGIFY_FETCHES] = false;
 
 		$conn = $this->connection;
 
