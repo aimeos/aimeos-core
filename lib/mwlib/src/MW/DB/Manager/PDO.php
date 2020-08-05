@@ -145,32 +145,36 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 	 */
 	protected function createConnection( string $name, string $adapter ) : \Aimeos\MW\DB\Connection\Iface
 	{
-		$host = $this->config->get( 'resource/' . $name . '/host' );
-		$port = $this->config->get( 'resource/' . $name . '/port' );
-		$user = $this->config->get( 'resource/' . $name . '/username' );
-		$pass = $this->config->get( 'resource/' . $name . '/password' );
-		$sock = $this->config->get( 'resource/' . $name . '/socket' );
-		$dbase = $this->config->get( 'resource/' . $name . '/database' );
+		$params = $this->config->get( 'resource/' . $name );
 
-		$dsn = $adapter . ':';
+		if( !isset( $params['dsn'] ) )
+		{
+			$host = $this->config->get( 'resource/' . $name . '/host' );
+			$port = $this->config->get( 'resource/' . $name . '/port' );
+			$sock = $this->config->get( 'resource/' . $name . '/socket' );
+			$dbase = $this->config->get( 'resource/' . $name . '/database' );
 
-		if( $adapter === 'sqlsrv' )
-		{
-			$dsn .= 'Database=' . $dbase;
-			$dsn .= isset( $host ) ? ';Server=' . $host . ( isset( $port ) ? ',' . $port : '' ) : '';
-		}
-		elseif( $sock == null )
-		{
-			$dsn .= 'dbname=' . $dbase;
-			$dsn .= isset( $host ) ? ';host=' . $host : '';
-			$dsn .= isset( $port ) ? ';port=' . $port : '';
-		}
-		else
-		{
-			$dsn .= 'dbname=' . $dbase . ';unix_socket=' . $sock;
+			$dsn = $adapter . ':';
+
+			if( $adapter === 'sqlsrv' )
+			{
+				$dsn .= 'Database=' . $dbase;
+				$dsn .= isset( $host ) ? ';Server=' . $host . ( isset( $port ) ? ',' . $port : '' ) : '';
+			}
+			elseif( $sock == null )
+			{
+				$dsn .= 'dbname=' . $dbase;
+				$dsn .= isset( $host ) ? ';host=' . $host : '';
+				$dsn .= isset( $port ) ? ';port=' . $port : '';
+			}
+			else
+			{
+				$dsn .= 'dbname=' . $dbase . ';unix_socket=' . $sock;
+			}
+
+			$params['dsn'] = $dsn;
 		}
 
-		$params = array( $dsn, $user, $pass, [] );
 		$stmts = $this->config->get( 'resource/' . $name . '/stmt', [] );
 
 		return new \Aimeos\MW\DB\Connection\PDO( $params, $stmts );

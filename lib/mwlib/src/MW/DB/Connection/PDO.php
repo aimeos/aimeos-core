@@ -47,14 +47,13 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 */
 	public function connect() : Iface
 	{
-		list( $dsn, $user, $pass, $attr ) = $this->getParameters();
+		$param = $this->getParameters();
+		$param['driverOptions'][\PDO::ATTR_CASE] = \PDO::CASE_NATURAL;
+		$param['driverOptions'][\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
+		$param['driverOptions'][\PDO::ATTR_ORACLE_NULLS] = \PDO::NULL_NATURAL;
+		$param['driverOptions'][\PDO::ATTR_STRINGIFY_FETCHES] = false;
 
-		$attr[\PDO::ATTR_CASE] = \PDO::CASE_NATURAL;
-		$attr[\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
-		$attr[\PDO::ATTR_ORACLE_NULLS] = \PDO::NULL_NATURAL;
-		$attr[\PDO::ATTR_STRINGIFY_FETCHES] = false;
-
-		$pdo = new \PDO( $dsn, $user, $pass, $attr );
+		$pdo = new \PDO( $param['dsn'], $param['username'] ?? '', $param['password'] ?? '', $param['driverOptions'] );
 		$conn = $this->connection;
 
 		$this->connection = $pdo;

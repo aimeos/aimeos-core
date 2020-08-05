@@ -97,13 +97,12 @@ class Standard extends Base implements Iface
 	 */
 	protected function createConnection() : \Aimeos\MW\DB\Connection\Iface
 	{
-		$adapter = $this->getConfig( 'db/adapter', 'mysql' );
+		$params = $this->getConfig( 'db' );
 		$host = $this->getConfig( 'db/host' );
 		$port = $this->getConfig( 'db/port' );
-		$user = $this->getConfig( 'db/username', 'root' );
-		$pass = $this->getConfig( 'db/password', '' );
 		$sock = $this->getConfig( 'db/socket' );
-		$dbase = $this->getConfig( 'db/database', 'aimeos' );
+		$dbase = $this->getConfig( 'db/database' );
+		$adapter = $this->getConfig( 'db/adapter', 'mysql' );
 
 		$dsn = $adapter . ':';
 
@@ -123,9 +122,8 @@ class Standard extends Base implements Iface
 			$dsn .= 'dbname=' . $dbase . ';unix_socket=' . $sock;
 		}
 
-		$params = array( $dsn, $user, $pass, [] );
 		$stmts = $this->getConfig( 'db/stmt', [] );
 
-		return new \Aimeos\MW\DB\Connection\PDO( $params, $stmts );
+		return new \Aimeos\MW\DB\Connection\PDO( $params + ['dsn' => $dsn], $stmts );
 	}
 }
