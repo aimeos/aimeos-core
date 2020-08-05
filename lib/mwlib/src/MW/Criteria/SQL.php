@@ -188,7 +188,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 
 		foreach( $this->sortations as $sortitem )
 		{
-			if( ( $string = $sortitem->toSource( $types, $translations ) ) !== '' ) {
+			if( ( $string = $sortitem->toSource( $types, $translations, [], $funcs ) ) !== '' ) {
 				$sortation[] = $string;
 			}
 		}
