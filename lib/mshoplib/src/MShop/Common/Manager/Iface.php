@@ -25,7 +25,6 @@ interface Iface
 	 *
 	 * @param string $iface Interface name of the item to apply the filter to
 	 * @param \Closure $fcn Anonymous function receiving the item to check as first parameter
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function addFilter( string $iface, \Closure $fcn );
 

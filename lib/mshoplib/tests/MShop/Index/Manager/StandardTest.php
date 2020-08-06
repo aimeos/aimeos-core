@@ -283,9 +283,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testRebuild()
 	{
-		$context = $this->context;
-		$config = $context->getConfig();
-
 		$this->object->cleanup( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuild();
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );

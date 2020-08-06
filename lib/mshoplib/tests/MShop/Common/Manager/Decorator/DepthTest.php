@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Common\Manager\Decorator;
 
 
-class StandardTest extends \PHPUnit\Framework\TestCase
+class DepthTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
 	private $object;

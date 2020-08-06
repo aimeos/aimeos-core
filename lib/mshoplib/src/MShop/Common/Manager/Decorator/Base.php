@@ -83,6 +83,18 @@ abstract class Base
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Common\Item\Iface New item object
 	 */
+	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->manager->create( $values );
+	}
+
+
+	/**
+	 * Creates a new empty item instance
+	 *
+	 * @param array $values Values the item should be initialized with
+	 * @return \Aimeos\MShop\Common\Item\Iface New item object
+	 */
 	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->manager->createItem( $values );
@@ -98,6 +110,19 @@ abstract class Base
 	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		return $this->manager->createSearch( $default );
+	}
+
+
+	/**
+	 * Deletes one or more items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface|array|string $items Item object, ID of the item or a list of them
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		$this->manager->delete( $items );
+		return $this;
 	}
 
 
@@ -124,6 +149,32 @@ abstract class Base
 	{
 		$this->manager->deleteItems( $itemIds );
 		return $this;
+	}
+
+
+	/**
+	 * Creates a filter object.
+	 *
+	 * @param bool $default Add default criteria
+	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
+	 */
+	public function filter( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	{
+		return $this->manager->filter( $default );
+	}
+
+
+	/**
+	 * Returns the item specified by its ID
+	 *
+	 * @param string $id Id of item
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param bool $default Add default criteria
+	 * @return \Aimeos\MShop\Common\Item\Iface Item object
+	 */
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->manager->get( $id, $ref, $default );
 	}
 
 
@@ -188,6 +239,19 @@ abstract class Base
 
 
 	/**
+	 * Adds or updates an item object or a list of them.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
+	 * @param bool $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface Saved item or items
+	 */
+	public function save( $items, bool $fetch = true )
+	{
+		return $this->manager->save( $items, $fetch );
+	}
+
+
+	/**
 	 * Adds or updates an item object.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object whose data should be saved
@@ -210,6 +274,20 @@ abstract class Base
 	public function saveItems( array $items, bool $fetch = true ) : array
 	{
 		return $this->manager->saveItems( $items, $fetch );
+	}
+
+
+	/**
+	 * Searches for all items matching the given critera.
+	 *
+	 * @param \Aimeos\MW\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param int &$total Number of items that are available in total
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
+	 */
+	public function search( \Aimeos\MW\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map
+	{
+		return $this->manager->search( $filter, $ref, $total );
 	}
 
 
