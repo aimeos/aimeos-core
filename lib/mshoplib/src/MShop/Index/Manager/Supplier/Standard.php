@@ -488,6 +488,18 @@ class Standard
 
 
 	/**
+	 * Removes the products from the product index.
+	 *
+	 * @param string[] $ids List of product IDs
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 */
+	public function remove( array $ids ) : \Aimeos\MShop\Index\Manager\Iface
+	{
+		return parent::remove( $ids )->deleteItems( $ids );
+	}
+
+
+	/**
 	 * Searches for items matching the given criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object

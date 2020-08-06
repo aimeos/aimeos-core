@@ -69,6 +69,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testRemove()
+	{
+		$this->assertEquals( $this->object, $this->object->remove( [-1] ) );
+	}
+
+
 	public function testSaveDeleteItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );

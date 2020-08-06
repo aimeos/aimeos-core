@@ -60,6 +60,14 @@ interface Iface
 	public function rebuild( array $items = [] ) : \Aimeos\MShop\Index\Manager\Iface;
 
 	/**
+	 * Removes the products from the product index.
+	 *
+	 * @param string[] $ids List of product IDs
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 */
+	public function remove( array $ids ) : \Aimeos\MShop\Index\Manager\Iface;
+
+	/**
 	 * Stores a new item into the index
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item

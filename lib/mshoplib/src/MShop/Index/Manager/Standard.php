@@ -87,19 +87,6 @@ class Standard
 
 
 	/**
-	 * Removes multiple items.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
-	 */
-	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		$this->getManager()->deleteItems( $itemIds );
-		return $this->clearItems( $itemIds )->clearCache( $itemIds );
-	}
-
-
-	/**
 	 * Returns the available manager types
 	 *
 	 * @param bool $withsub Return also the resource type of sub-managers if true
@@ -213,6 +200,20 @@ class Standard
 		}
 
 		return $this;
+	}
+
+
+	/**
+	 * Removes multiple items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 */
+	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		$this->getManager()->deleteItems( $itemIds );
+
+		return parent::deleteitems( $itemIds )->clearCache( $itemIds );
 	}
 
 
@@ -444,33 +445,11 @@ class Standard
 	 *
 	 * @param string[] $ids list of product IDs
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @deprecated 2021.01 Use remove()
 	 */
 	protected function clearItems( array $ids ) : \Aimeos\MShop\Index\Manager\Iface
 	{
-		foreach( $this->getSubManagers() as $submanager ) {
-			$submanager->deleteItems( $ids );
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Deletes the cache entries using the given product IDs.
-	 *
-	 * @param string[] $ids List of product IDs
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
-	 */
-	protected function clearCache( array $ids ) : \Aimeos\MShop\Index\Manager\Iface
-	{
-		$tags = [];
-
-		foreach( $ids as $id ) {
-			$tags[] = 'product-' . $id;
-		}
-
-		$this->getContext()->getCache()->deleteByTags( $tags );
-		return $this;
+		return $this->remove( $ids );
 	}
 
 

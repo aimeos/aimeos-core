@@ -53,7 +53,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->searchItems( $search, [] );
 
-		$this->assertGreaterThanOrEqual( 3, count( $result ) );
+		$this->assertGreaterThanOrEqual( 1, count( $result ) );
 	}
 
 
@@ -65,6 +65,6 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->searchItems( $search, [] );
 
-		$this->assertGreaterThanOrEqual( 3, count( $result ) );
+		$this->assertGreaterThanOrEqual( 1, count( $result ) );
 	}
 }

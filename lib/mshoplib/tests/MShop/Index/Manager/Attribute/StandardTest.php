@@ -99,6 +99,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testRemove()
+	{
+		$this->assertEquals( $this->object, $this->object->remove( [-1] ) );
+	}
+
+
 	public function testSearchItems()
 	{
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );

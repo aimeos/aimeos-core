@@ -262,7 +262,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testRebuildIndexWithList()
+	public function testRebuildWithList()
 	{
 		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$search = $manager->createSearch();
@@ -281,12 +281,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testRebuildIndexCategorizedOnly()
+	public function testRebuild()
 	{
 		$context = $this->context;
 		$config = $context->getConfig();
 
-		$config->set( 'mshop/index/manager/standard/index', 'categorized' );
 		$this->object->cleanup( date( 'Y-m-d H:i:s', time() + 1 ) )->rebuild();
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
@@ -294,6 +293,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 7, count( $afterInsertAttr ) );
 		$this->assertEquals( 9, count( $afterInsertCat ) );
+	}
+
+
+	public function testRemove()
+	{
+		$this->assertEquals( $this->object, $this->object->remove( [-1] ) );
 	}
 
 

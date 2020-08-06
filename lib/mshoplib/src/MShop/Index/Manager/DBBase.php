@@ -156,6 +156,22 @@ abstract class DBBase
 
 
 	/**
+	 * Removes the products from the product index.
+	 *
+	 * @param string[] $ids List of product IDs
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 */
+	 public function remove( array $ids ) : \Aimeos\MShop\Index\Manager\Iface
+	 {
+		foreach( $this->getSubManagers() as $submanager ) {
+			$submanager->remove( $ids );
+		}
+
+		return $this;
+	 }
+
+
+	/**
 	 * Stores a new item into the index
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
@@ -236,6 +252,25 @@ abstract class DBBase
 
 		return $this;
 	}
+
+
+	/**
+	 * Deletes the cache entries using the given product IDs.
+	 *
+	 * @param string[] $ids List of product IDs
+	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 */
+	 protected function clearCache( array $ids ) : \Aimeos\MShop\Index\Manager\Iface
+	 {
+		 $tags = [];
+
+		 foreach( $ids as $id ) {
+			 $tags[] = 'product-' . $id;
+		 }
+
+		 $this->getContext()->getCache()->deleteByTags( $tags );
+		 return $this;
+	 }
 
 
 	/**
