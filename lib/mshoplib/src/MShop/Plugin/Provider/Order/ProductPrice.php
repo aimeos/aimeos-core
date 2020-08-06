@@ -55,7 +55,7 @@ class ProductPrice
 			'label' => 'Ignore order items with a modified price (e.g. by another plugin)',
 			'type' => 'boolean',
 			'internaltype' => 'boolean',
-			'default' => '0',
+			'default' => '1',
 			'required' => false,
 		),
 	);
