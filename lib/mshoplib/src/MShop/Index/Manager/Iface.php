@@ -62,10 +62,10 @@ interface Iface
 	/**
 	 * Removes the products from the product index.
 	 *
-	 * @param string[] $ids List of product IDs
+	 * @param array|string $ids Product ID or list of IDs
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function remove( array $ids ) : \Aimeos\MShop\Index\Manager\Iface;
+	public function remove( $ids ) : \Aimeos\MShop\Index\Manager\Iface;
 
 	/**
 	 * Stores a new item into the index
