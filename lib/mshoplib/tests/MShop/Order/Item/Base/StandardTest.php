@@ -182,6 +182,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
+		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['order.base.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.customerid'], $item->getCustomerId() );
 		$this->assertEquals( $list['order.base.languageid'], $item->getLocale()->getLanguageId() );

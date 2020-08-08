@@ -154,6 +154,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
+		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['order.status.id'], $item->getId() );
 		$this->assertEquals( $list['order.status.parentid'], $item->getParentId() );
 		$this->assertEquals( $list['order.status.type'], $item->getType() );

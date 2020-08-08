@@ -209,6 +209,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['coupon.label'], $item->getLabel() );
 		$this->assertEquals( $list['coupon.provider'], $item->getProvider() );
 		$this->assertEquals( $list['coupon.status'], $item->getStatus() );
+		$this->assertEquals( '', $item->getSiteId() );
 	}
 
 

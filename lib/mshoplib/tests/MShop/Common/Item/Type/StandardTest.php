@@ -181,7 +181,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['common.type.label'], $item->getLabel() );
 		$this->assertEquals( $list['common.type.position'], $item->getPosition() );
 		$this->assertEquals( $list['common.type.status'], $item->getStatus() );
-		$this->assertNull( $item->getSiteId() );
+		$this->assertEquals( '', $item->getSiteId() );
 	}
 
 	public function testToArray()

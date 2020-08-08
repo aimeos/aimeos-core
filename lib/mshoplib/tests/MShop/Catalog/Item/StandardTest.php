@@ -264,6 +264,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['catalog.status'], $item->getStatus() );
 		$this->assertEquals( $list['catalog.label'], $item->getLabel() );
 		$this->assertEquals( $list['catalog.target'], $item->getTarget() );
+		$this->assertEquals( '', $item->getSiteId() );
 	}
 
 

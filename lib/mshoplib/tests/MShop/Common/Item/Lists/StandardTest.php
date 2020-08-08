@@ -313,7 +313,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
-
+		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['common.lists.id'], $item->getId() );
 		$this->assertEquals( $list['common.lists.parentid'], $item->getParentId() );
 		$this->assertEquals( $list['common.lists.type'], $item->getType() );

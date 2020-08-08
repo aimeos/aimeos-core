@@ -223,6 +223,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['coupon.code.code'], $item->getCode() );
 		$this->assertEquals( $list['coupon.code.count'], $item->getCount() );
 		$this->assertEquals( $list['coupon.code.ref'], $item->getRef() );
+		$this->assertEquals( '', $item->getSiteId() );
 	}
 
 

@@ -112,11 +112,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
+		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['cache.id'], $item->getId() );
 		$this->assertEquals( $list['cache.value'], $item->getValue() );
 		$this->assertEquals( $list['cache.expire'], $item->getTimeExpire() );
 		$this->assertEquals( $list['cache.tags'], $item->getTags() );
-		$this->assertNull( $item->getSiteId() );
 	}
 
 

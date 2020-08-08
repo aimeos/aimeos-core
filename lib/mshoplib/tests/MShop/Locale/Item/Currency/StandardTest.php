@@ -174,6 +174,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
+		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['locale.currency.id'], $item->getId() );
 		$this->assertEquals( $list['locale.currency.code'], $item->getCode() );
 		$this->assertEquals( $list['locale.currency.label'], $item->getLabel() );

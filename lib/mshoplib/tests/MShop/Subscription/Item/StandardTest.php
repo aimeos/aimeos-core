@@ -297,6 +297,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
+		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['subscription.id'], $item->getId() );
 		$this->assertEquals( $list['subscription.ordbaseid'], $item->getOrderBaseId() );
 		$this->assertEquals( $list['subscription.ordprodid'], $item->getOrderProductId() );

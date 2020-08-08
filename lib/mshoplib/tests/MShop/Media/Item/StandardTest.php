@@ -297,7 +297,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['media.preview'], $item->getPreview() );
 		$this->assertEquals( $list['media.url'], $item->getUrl() );
 		$this->assertEquals( $list['media.status'], $item->getStatus() );
-		$this->assertNull( $item->getSiteId() );
+		$this->assertEquals( '', $item->getSiteId() );
 	}
 
 

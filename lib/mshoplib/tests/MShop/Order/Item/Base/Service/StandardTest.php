@@ -491,6 +491,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
+		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['order.base.service.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.service.baseid'], $item->getBaseId() );
 		$this->assertEquals( $list['order.base.service.serviceid'], $item->getServiceId() );

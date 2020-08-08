@@ -272,7 +272,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['service.dateend'], $item->getDateEnd() );
 		$this->assertEquals( $list['service.config'], $item->getConfig() );
 		$this->assertEquals( $list['service.status'], $item->getStatus() );
-		$this->assertNull( $item->getSiteId() );
+		$this->assertEquals( '', $item->getSiteId() );
 	}
 
 

@@ -438,6 +438,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
+		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['price.id'], $item->getId() );
 		$this->assertEquals( $list['price.type'], $item->getType() );
 		$this->assertEquals( $list['price.label'], $item->getLabel() );
@@ -451,7 +452,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['price.taxrate'], $item->getTaxRate() );
 		$this->assertEquals( $list['price.taxflag'], $item->getTaxFlag() );
 		$this->assertEquals( $list['price.status'], $item->getStatus() );
-		$this->assertNull( $item->getSiteId() );
 	}
 
 

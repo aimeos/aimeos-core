@@ -558,7 +558,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['product.target'], $item->getTarget() );
 		$this->assertEquals( $list['product.scale'], $item->getScale() );
 		$this->assertEquals( $list['additional'], $item->additional );
-		$this->assertNull( $item->getSiteId() );
+		$this->assertEquals( '', $item->getSiteId() );
 	}
 
 

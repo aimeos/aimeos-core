@@ -213,13 +213,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
+		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['plugin.id'], $item->getId() );
 		$this->assertEquals( $list['plugin.type'], $item->getType() );
 		$this->assertEquals( $list['plugin.label'], $item->getLabel() );
 		$this->assertEquals( $list['plugin.provider'], $item->getProvider() );
 		$this->assertEquals( $list['plugin.config'], $item->getConfig() );
 		$this->assertEquals( $list['plugin.status'], $item->getStatus() );
-		$this->assertNull( $item->getSiteId() );
 	}
 
 

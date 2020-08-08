@@ -220,7 +220,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['attribute.type'], $item->getType() );
 		$this->assertEquals( $list['attribute.label'], $item->getLabel() );
 		$this->assertEquals( $list['attribute.position'], $item->getPosition() );
-		$this->assertNull( $item->getSiteId() );
+		$this->assertEquals( '', $item->getSiteId() );
 	}
 
 

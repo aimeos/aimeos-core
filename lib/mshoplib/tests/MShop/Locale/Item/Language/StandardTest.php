@@ -187,6 +187,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
+		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['locale.language.id'], $item->getId() );
 		$this->assertEquals( $list['locale.language.code'], $item->getCode() );
 		$this->assertEquals( $list['locale.language.label'], $item->getLabel() );

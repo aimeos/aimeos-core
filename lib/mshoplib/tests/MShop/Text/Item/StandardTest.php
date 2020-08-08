@@ -209,6 +209,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
+		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['text.id'], $item->getId() );
 		$this->assertEquals( $list['text.type'], $item->getType() );
 		$this->assertEquals( $list['text.languageid'], $item->getLanguageId() );
@@ -216,7 +217,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['text.domain'], $item->getDomain() );
 		$this->assertEquals( $list['text.content'], $item->getContent() );
 		$this->assertEquals( $list['text.status'], $item->getStatus() );
-		$this->assertNull( $item->getSiteId() );
 	}
 
 

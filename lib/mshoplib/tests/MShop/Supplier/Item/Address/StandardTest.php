@@ -508,6 +508,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object = $object->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
+		$this->assertEquals( '', $object->getSiteId() );
 		$this->assertEquals( $list['supplier.address.id'], $object->getId() );
 		$this->assertEquals( $list['supplier.address.parentid'], $object->getParentId() );
 		$this->assertEquals( $list['supplier.address.salutation'], $object->getSalutation() );

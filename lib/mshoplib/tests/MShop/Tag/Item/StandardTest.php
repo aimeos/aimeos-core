@@ -154,12 +154,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
+		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['tag.id'], $item->getId() );
 		$this->assertEquals( $list['tag.type'], $item->getType() );
 		$this->assertEquals( $list['tag.domain'], $item->getDomain() );
 		$this->assertEquals( $list['tag.label'], $item->getLabel() );
 		$this->assertEquals( $list['tag.languageid'], $item->getLanguageId() );
-		$this->assertNull( $item->getSiteId() );
 	}
 
 

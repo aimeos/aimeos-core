@@ -308,7 +308,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['review.rating'], $item->getRating() );
 		$this->assertEquals( $list['review.status'], $item->getStatus() );
 		$this->assertEquals( $list['review.name'], $item->getName() );
-		$this->assertNull( $item->getSiteId() );
+		$this->assertEquals( '', $item->getSiteId() );
 	}
 
 

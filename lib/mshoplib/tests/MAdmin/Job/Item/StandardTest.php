@@ -172,13 +172,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $item->fromArray( $entries, true );
 
 		$this->assertEquals( [], $entries );
+		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['job.id'], $item->getId() );
 		$this->assertEquals( $list['job.label'], $item->getLabel() );
 		$this->assertEquals( $list['job.method'], $item->getMethod() );
 		$this->assertEquals( $list['job.parameter'], $item->getParameter() );
 		$this->assertEquals( $list['job.result'], $item->getResult() );
 		$this->assertEquals( $list['job.status'], $item->getStatus() );
-		$this->assertNull( $item->getSiteId() );
 	}
 
 
