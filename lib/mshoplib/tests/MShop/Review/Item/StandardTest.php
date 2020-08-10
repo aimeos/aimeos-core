@@ -180,6 +180,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetRatingMinMax()
+	{
+		$this->assertEquals( 0, $this->object->setRating( -1 )->getRating() );
+		$this->assertEquals( 5, $this->object->setRating( 6 )->getRating() );
+	}
+
+
 	public function testGetRefId()
 	{
 		$this->assertEquals( 'abc-123', $this->object->getRefId() );

@@ -166,7 +166,7 @@ class Standard
 	 */
 	public function setRating( int $value ) : \Aimeos\MShop\Review\Item\Iface
 	{
-		return $this->set( 'review.rating', $value );
+		return $this->set( 'review.rating', min( 5, max( 0, $value ) ) );
 	}
 
 
