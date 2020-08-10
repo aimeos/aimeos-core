@@ -42,6 +42,7 @@ class ProductStock
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
+		$p->attach( $this->getObject(), 'addProduct.after' );
 		$p->attach( $this->getObject(), 'check.after' );
 		return $this;
 	}
@@ -58,7 +59,7 @@ class ProductStock
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		if( ( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) === 0 ) {
+		if( ( is_int( $value ) && ( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) ) === 0 ) {
 			return $value;
 		}
 

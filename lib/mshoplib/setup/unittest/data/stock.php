@@ -16,7 +16,7 @@ return array(
 	),
 
 	'stock' => array(
-		array( 'stock.productcode' => 'CNE', 'stock.type' => 'default', 'stock.stocklevel' => 1000, 'stock.backdate' => '2010-04-01 00:00:00' ),
+		array( 'stock.productcode' => 'CNE', 'stock.type' => 'default', 'stock.stocklevel' => 1000, 'stock.backdate' => '2010-04-01 00:00:00', 'stock.timeframe' => '4-5d' ),
 		array( 'stock.productcode' => 'CNC', 'stock.type' => 'default', 'stock.stocklevel' => 1200, 'stock.backdate' => '2015-05-01 00:00:00' ),
 		array( 'stock.productcode' => 'U:MD', 'stock.type' => 'unit_type3', 'stock.stocklevel' => 200, 'stock.backdate' => '2006-06-01 00:00:00' ),
 		array( 'stock.productcode' => 'U:SD', 'stock.type' => 'unit_type4', 'stock.stocklevel' => 100, 'stock.backdate' => null, 'stock.timeframe' => '1-2d' ),
@@ -31,5 +31,11 @@ return array(
 		array( 'stock.productcode' => 'U:TESTSUB03', 'stock.type' => 'default', 'stock.stocklevel' => 100, 'stock.backdate' => null, 'stock.timeframe' => '3d' ),
 		array( 'stock.productcode' => 'U:TESTSUB05', 'stock.type' => 'default', 'stock.stocklevel' => 100, 'stock.backdate' => null, 'stock.timeframe' => '3-4d' ),
 		array( 'stock.productcode' => 'U:BUNDLE', 'stock.type' => 'default', 'stock.stocklevel' => 1000, 'stock.backdate' => null, 'stock.timeframe' => '1w' ),
+		array( 'stock.productcode' => 'bdl:zyx', 'stock.type' => 'unit_type1', 'stock.stocklevel' => null, 'stock.backdate' => null ),
+		array( 'stock.productcode' => 'bdl:EFG', 'stock.type' => 'unit_type1', 'stock.stocklevel' => null, 'stock.backdate' => null ),
+		array( 'stock.productcode' => 'bdl:HIJ', 'stock.type' => 'unit_type1', 'stock.stocklevel' => null, 'stock.backdate' => null ),
+		array( 'stock.productcode' => 'bdl:hal', 'stock.type' => 'unit_type1', 'stock.stocklevel' => null, 'stock.backdate' => null ),
+		array( 'stock.productcode' => 'bdl:EFX', 'stock.type' => 'unit_type1', 'stock.stocklevel' => null, 'stock.backdate' => null ),
+		array( 'stock.productcode' => 'bdl:HKL', 'stock.type' => 'unit_type1', 'stock.stocklevel' => null, 'stock.backdate' => null ),
 	)
 );

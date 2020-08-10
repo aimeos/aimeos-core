@@ -223,7 +223,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$product = $productManager->findItem( $code );
 
 		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
-		$orderProduct = $orderProductManager->createItem()->copyFrom( $product );
+		$orderProduct = $orderProductManager->createItem()->copyFrom( $product )->setStockType( 'default' );
 
 		return $orderProduct;
 	}
