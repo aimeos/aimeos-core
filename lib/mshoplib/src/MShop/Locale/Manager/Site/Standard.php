@@ -155,8 +155,8 @@ class Standard
 		$path = 'mshop/locale/manager/site/cleanup/shop/domains';
 		$default = array(
 			'attribute', 'catalog', 'coupon', 'customer', 'index',
-			'media', 'order', 'plugin', 'price', 'product', 'tag',
-			'service', 'stock', 'subscription', 'supplier', 'text'
+			'media', 'order', 'plugin', 'price', 'product', 'review',
+			'tag', 'service', 'stock', 'subscription', 'supplier', 'text'
 		);
 
 		foreach( $config->get( $path, $default ) as $domain ) {
