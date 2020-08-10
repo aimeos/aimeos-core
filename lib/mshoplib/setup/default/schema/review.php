@@ -29,11 +29,11 @@ return array(
 			$table->addColumn( 'editor', 'string', ['length' => 255] );
 
 			$table->setPrimaryKey( ['id'], 'pk_msrev_id' );
-			$table->addUniqueIndex( ['siteid', 'domain', 'refid', 'customerid'], 'unq_msrev_sid_dom_rid_cid' );
+			$table->addUniqueIndex( ['siteid', 'customerid', 'domain', 'refid'], 'unq_msrev_sid_cid_dom_rid' );
 			$table->addIndex( ['siteid', 'domain', 'refid', 'status', 'ctime'], 'idx_msrev_sid_dom_rid_sta_ct' );
-			$table->addIndex( ['siteid', 'customerid', 'domain', 'mtime'], 'idx_msrev_sid_cid_dom_mt' );
-			$table->addIndex( ['siteid', 'rating'], 'idx_msrev_sid_rate' );
-			$table->addIndex( ['siteid', 'mtime'], 'idx_msrev_sid_mt' );
+			$table->addIndex( ['siteid', 'domain', 'refid', 'status', 'rating'], 'idx_msrev_sid_dom_rid_sta_rate' );
+			$table->addIndex( ['siteid', 'domain', 'customerid', 'mtime'], 'idx_msrev_sid_dom_cid_mt' );
+			$table->addIndex( ['siteid', 'rating', 'domain'], 'idx_msrev_sid_rate_dom' );
 
 			return $schema;
 		},
