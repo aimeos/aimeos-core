@@ -165,7 +165,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'stock.type', null );
 		$expr[] = $search->compare( '!=', 'stock.productcode', null );
 		$expr[] = $search->compare( '==', 'stock.stocklevel', 1000 );
-		$expr[] = $search->compare( '==', 'stock.timeframe', '' );
+		$expr[] = $search->compare( '==', 'stock.timeframe', '4-5d' );
 		$expr[] = $search->compare( '==', 'stock.dateback', '2010-04-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'stock.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'stock.ctime', '1970-01-01 00:00:00' );
