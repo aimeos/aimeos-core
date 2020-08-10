@@ -772,7 +772,7 @@ class Standard
 		$types = ['stock.siteid' => $this->searchConfig['stock.siteid']['internaltype']];
 
 		$search = $this->getObject()->createSearch();
-		$search->setConditions( $search->compare( '==', 'stock.siteid', $context->getLocale()->getSitePath() ) );
+		$search->setConditions( $search->compare( '==', 'stock.siteid', $context->getLocale()->getSiteSubtree() ) );
 		$conditions = $search->getConditionSource( $types, $translations );
 
 		$dbm = $context->getDatabaseManager();
