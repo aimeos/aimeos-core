@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-01 17:24+0200\n"
-"PO-Revision-Date: 2020-07-01 19:44+0000\n"
+"POT-Creation-Date: 2020-07-07 11:14+0200\n"
+"PO-Revision-Date: 2020-07-20 21:24+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -19,10 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "All XML import"
-msgstr ""
+msgstr "Tüm XML içe aktarma"
 
 msgid "Attribute import XML"
-msgstr "Nitelik içe aktarma XML"
+msgstr "Nitelikleri XML olarak içe aktarma"
 
 msgid ""
 "Authorized payments of orders will be captured after dispatching or after a "
@@ -39,16 +39,16 @@ msgid "Capture authorized payments"
 msgstr "Yetkili ödemeleri çek"
 
 msgid "Catalog import CSV"
-msgstr "Katalog içe aktarma CSV"
+msgstr "Katalogları CSV olarak içe aktarma"
 
 msgid "Catalog import XML"
-msgstr "Katalog içe aktarma XML"
+msgstr "Kategorileri XML olarak içe aktarma"
 
 msgid "Catalog index optimization"
 msgstr "Katalog dizin optimizasyonu"
 
 msgid "Catalog index rebuild"
-msgstr "Katalog dizin yeniden oluşturma"
+msgstr "Katalog dizinini yeniden oluşturma"
 
 msgid "Catalog site map"
 msgstr "Katalog site haritası"
@@ -62,7 +62,7 @@ msgid "Class \"%1$s\" not found"
 msgstr "Class \"%1$s\" bulunamadı"
 
 msgid "Coupon code import CSV"
-msgstr "Kupon kodu içe aktarma CSV"
+msgstr "Kupon kodunu CSV olarak içe aktarma"
 
 msgid "Creates a catalog site map for search engines"
 msgstr "Arama motorları için bir katalog site haritası oluşturur"
@@ -74,18 +74,18 @@ msgid "Creates bought together product suggestions"
 msgstr "Beraber satın alınan ürün önerileri oluşturur"
 
 msgid "Customer import XML"
-msgstr "Müşteri içe aktarma XML"
+msgstr "Müşterileri XML olarak içe aktarma"
 
 msgid ""
 "Deletes unfinished orders an makes their products and coupon codes available"
 " again"
-msgstr "Bitmemiş siparişleri siler ve onların ürünlerini ve kupon kodlarını kullanılabilir hale getirir"
+msgstr "Bitmemiş siparişleri siler ve onların ürünlerini ve kupon kodlarını tekrar kullanılabilir hale getirir"
 
 msgid "Deletes unpaid orders to keep the database clean"
 msgstr "Veritabanını temiz tutmak için ödenmemiş siparişleri siler"
 
 msgid "Executes all XML importers and rebuild the index"
-msgstr ""
+msgstr "Tüm XML içe aktarıcılarını yürütür ve dizini yeniden oluşturur"
 
 msgid "Executes payment or delivery service providers that uses batch updates"
 msgstr "Toplu güncelleştirmeleri kullanan ödeme veya teslimat servisi sağlayıcılarını çalıştırır"
@@ -98,10 +98,10 @@ msgid "Exports all available products"
 msgstr "Mevcut tüm ürünleri dışa aktarır"
 
 msgid "Exports orders to CSV file"
-msgstr "Siparişleri CSV dosyasına dışa aktarır"
+msgstr "Siparişleri CSV dosya formatında dışa aktarır"
 
 msgid "Exports subscriptions to CSV file"
-msgstr "Abonelikleri CSV dosyasına dışa aktarır"
+msgstr "Abonelikleri CSV dosya formatında dışa aktarır"
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
@@ -172,7 +172,7 @@ msgid "Imports new and updates existing stocks from CSV files"
 msgstr "CSV dosyalarından yeni stoklar içe aktarır veya mevcut stokları günceller"
 
 msgid "Imports new and updates existing suppliers from CSV files"
-msgstr ""
+msgstr "CSV dosyalarından yeni tedarikçiler içe aktarır veya mevcut tedarikçileri günceller"
 
 msgid "Imports new and updates existing suppliers from XML files"
 msgstr "XML dosyalarından yeni tedarikçiler içe aktarır veya mevcut tedarikçileri günceller"
@@ -209,7 +209,7 @@ msgstr "Geçersiz ürün türü \"%1$s\""
 
 #, php-format
 msgid "Invalid supplier lines in \"%1$s\": %2$d/%3$d"
-msgstr ""
+msgstr "\"%1$s\" içinde geçersiz tedarikçi satırları: %2$d/%3$d"
 
 msgid "Log cleanup"
 msgstr "Günlük temizleme"
@@ -228,7 +228,7 @@ msgstr "CSV eşlemede \"product.code\" sütunu bulunamadı"
 
 #, php-format
 msgid "No \"supplier.code\" column in CSV mapping found"
-msgstr ""
+msgstr "CSV eşlemede \"supplier.code\" sütunu bulunamadı"
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
@@ -241,17 +241,17 @@ msgid "Optimizes the index for searching products faster"
 msgstr "Daha hızlı ürün araması için dizini optimize eder"
 
 msgid "Order export CSV"
-msgstr "Sipariş dışa aktarma CSV"
+msgstr "Siparişleri CSV olarak dışa aktarma"
 
 msgid "Order status import CSV"
-msgstr "Sipariş durumu dışa aktarma CSV"
+msgstr "Sipariş durumunu CSV olarak dışa aktarma"
 
 #, php-format
 msgid "Parent node for code \"%1$s\" not found"
 msgstr "\"%1$s\" kodu için üst düğüm bulunamadı"
 
 msgid "Process order delivery services"
-msgstr "Sipariş dağıtım hizmetlerini işleme tabi tut"
+msgstr "Sipariş teslimat hizmetlerini işleme tabi tut"
 
 msgid "Process subscriptions initially"
 msgstr "Aboneliklerin ilk kez işlenmesi"
@@ -260,10 +260,10 @@ msgid "Product export"
 msgstr "Ürün dışa aktarma"
 
 msgid "Product import CSV"
-msgstr "Ürün içe aktarma CSV"
+msgstr "Ürünleri CSV olarak içe aktarma"
 
 msgid "Product import XML"
-msgstr "Ürün içe aktarma XML"
+msgstr "Ürünleri XML olarak içe aktarma"
 
 msgid "Product site map"
 msgstr "Ürün site haritası"
@@ -278,7 +278,7 @@ msgid "Rebuilds the index for searching products"
 msgstr "Ürün araması için dizini yeniden oluşturur"
 
 msgid "Removes the expired entries from the cache"
-msgstr "Süresi dolan girişleri önbellekten kaldırır"
+msgstr "Süresi dolan girdileri önbellekten kaldırır"
 
 msgid ""
 "Removes the old log entries from the database and archives them (optional)"
@@ -348,7 +348,7 @@ msgstr "\"%1$s\" dan müşteri içe aktarma başladı"
 
 #, php-format
 msgid "Started customer import from file \"%1$s\""
-msgstr "\"%1$s\" dan müşteri içe aktarma başladı"
+msgstr "\"%1$s\" dosyasından müşteri içe aktarma başladı"
 
 #, php-format
 msgid "Started order status import from \"%1$s\" (%2$s)"
@@ -360,7 +360,7 @@ msgstr "\"%1$s\" dan ürün içe aktarma başladı"
 
 #, php-format
 msgid "Started product import from \"%1$s\" (%2$s)"
-msgstr "\"%1$s\" (%2$s)'dan ürün içe aktarma başladı"
+msgstr "\"%1$s\" dan ürün içe aktarma başladı (%2$s)"
 
 #, php-format
 msgid "Started product import from file \"%1$s\""
@@ -376,13 +376,13 @@ msgstr "\"%1$s\" dosyasından stok içe aktarma başladı"
 
 #, php-format
 msgid "Started supplier import from \"%1$s\" (%2$s)"
-msgstr "\"%1$s\" (%2$s) dan tedarikçi içe aktarma başladı"
+msgstr "\"%1$s\" dan tedarikçi içe aktarma başladı (%2$s)"
 
 msgid "Stock import CSV"
-msgstr "Stok içe aktarma CSV"
+msgstr "Stokları CSV olarak içe aktarma"
 
 msgid "Subscription export CSV"
-msgstr "Abonelik dışa aktarma CSV"
+msgstr "Abonelikleri CSV olarak dışa aktarma"
 
 msgid "Subscription process end"
 msgstr "Abonelik sürecinin sonu"
@@ -394,21 +394,21 @@ msgid "Subscription process start"
 msgstr "Abonelik sürecini başlat"
 
 msgid "Supplier import CSV"
-msgstr ""
+msgstr "Tedarikçileri CSV olarak içe aktarma"
 
 msgid "Supplier import XML"
-msgstr "Tedarikçi içe aktarma XML"
+msgstr "Tedarikçileri XML olarak içe aktarma"
 
 msgid "Terminates expired subscriptions"
 msgstr "Süresi dolan abonelikleri sonlandırır"
 
 #, php-format
 msgid "Unable to begin subscription with ID \"%1$s\": %2$s"
-msgstr ""
+msgstr "\"%1$s\" kimlik numaralı abonelik başlatılamıyor: %2$s"
 
 #, php-format
 msgid "Unable to end subscription with ID \"%1$s\": %2$s"
-msgstr ""
+msgstr "\"%1$s\" kimlik numaralı abonelik sonlandırılamıyor: %2$s"
 
 #, php-format
 msgid "Unable to import catalog with code \"%1$s\": %2$s"
@@ -428,7 +428,7 @@ msgstr "\"%1$s\" kodlu ürün içe aktarılamıyor: %2$s"
 
 #, php-format
 msgid "Unable to import supplier with code \"%1$s\": %2$s"
-msgstr ""
+msgstr "\"%1$s\" kodlu tedarikçi içe aktarılamıyor: %2$s"
 
 #, php-format
 msgid "Unable to move imported file"
@@ -440,7 +440,7 @@ msgstr "İçe aktarılan \"%1$s\" dosyası \"%2$s\" ya taşınamadı"
 
 #, php-format
 msgid "Unable to renew subscription with ID \"%1$s\": %2$s"
-msgstr ""
+msgstr "\"%1$s\" kimlik numaralı abonelik yenilenemiyor: %2$s"
 
 msgid "Updates order status from CSV files"
 msgstr "CSV dosyalarından sipariş durumunu günceller"

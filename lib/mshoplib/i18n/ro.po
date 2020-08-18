@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-07 11:14+0200\n"
-"PO-Revision-Date: 2020-07-01 19:43+0000\n"
-"Last-Translator: Aimeos\n"
-"Language-Team: Estonian (http://www.transifex.com/aimeos/aimeos-core/language/et/)\n"
+"PO-Revision-Date: 2020-07-31 18:39+0000\n"
+"Last-Translator: iulian iulian <iulian.abc@gmail.com>\n"
+"Language-Team: Romanian (http://www.transifex.com/aimeos/aimeos-core/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: et\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -137,7 +137,7 @@ msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Clasa \"%1$s\" nu este disponibila"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
@@ -269,7 +269,7 @@ msgstr ""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "Caracter invalid in numele clasei \"%1$s\""
 
 #, php-format
 msgid ""
@@ -322,7 +322,7 @@ msgstr ""
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr "factory \"%1$s\" on vigane"
+msgstr ""
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
@@ -636,7 +636,7 @@ msgid "PayPal Express: Wrong receiver email \"%1$s\""
 msgstr ""
 
 msgid "Payment costs"
-msgstr "Maksmiskulu"
+msgstr "Cost plata"
 
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
@@ -716,7 +716,7 @@ msgstr ""
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
-msgstr ""
+msgstr "Parametrul necesar \"%1$s\" lipseste"
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
@@ -840,7 +840,7 @@ msgstr ""
 
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr ""
+msgstr "Imposibil de apelat metoda \"%1$s\""
 
 #, php-format
 msgid "Unable to create order XML file \"%1$s\""
