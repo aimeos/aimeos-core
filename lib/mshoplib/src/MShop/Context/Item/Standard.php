@@ -147,6 +147,17 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
+	 * Returns the cache object.
+	 *
+	 * @return \Aimeos\MW\Cache\Iface Cache object
+	 */
+	public function cache() : \Aimeos\MW\Cache\Iface
+	{
+		return $this->getCache();
+	}
+
+
+	/**
 	 * Sets the configuration object.
 	 *
 	 * @param \Aimeos\MW\Config\Iface $config Configuration object
@@ -172,6 +183,17 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		}
 
 		return $this->config;
+	}
+
+
+	/**
+	 * Returns the configuration object.
+	 *
+	 * @return \Aimeos\MW\Config\Iface Configuration object
+	 */
+	public function config() : \Aimeos\MW\Config\Iface
+	{
+		return $this->getConfig();
 	}
 
 
@@ -205,19 +227,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
-	 * Returns the current date and time
-	 * This is especially useful to share the same request time or if applications
-	 * allow to travel in time.
+	 * Returns the database manager object.
 	 *
-	 * @return string Current date and time as ISO string (YYYY-MM-DD HH:mm:ss)
+	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
 	 */
-	public function getDateTime() : string
+	public function db() : \Aimeos\MW\DB\Manager\Iface
 	{
-		if( $this->date === null ) {
-			$this->date = date( 'Y-m-d H:i:00' );
-		}
-
-		return $this->date;
+		return $this->getDatabaseManager();
 	}
 
 
@@ -237,6 +253,36 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		$this->date = $datetime;
 
 		return $this;
+	}
+
+
+	/**
+	 * Returns the current date and time
+	 * This is especially useful to share the same request time or if applications
+	 * allow to travel in time.
+	 *
+	 * @return string Current date and time as ISO string (YYYY-MM-DD HH:mm:ss)
+	 */
+	public function getDateTime() : string
+	{
+		if( $this->date === null ) {
+			$this->date = date( 'Y-m-d H:i:00' );
+		}
+
+		return $this->date;
+	}
+
+
+	/**
+	 * Returns the current date and time
+	 * This is especially useful to share the same request time or if applications
+	 * allow to travel in time.
+	 *
+	 * @return string Current date and time as ISO string (YYYY-MM-DD HH:mm:ss)
+	 */
+	public function datetime() : string
+	{
+		return $this->getDateTime();
 	}
 
 
@@ -286,6 +332,18 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
+	 * Returns the file system object for the given resource name.
+	 *
+	 * @param string $resource Resource name, e.g. "fs-admin"
+	 * @return \Aimeos\MW\Filesystem\Iface File system object
+	 */
+	public function fs( string $resource ) : \Aimeos\MW\Filesystem\Iface
+	{
+		return $this->getFilesystem( $resource );
+	}
+
+
+	/**
 	 * Sets the translation/internationalization objects.
 	 *
 	 * @param array $translations Associative list of internationalization objects implementing
@@ -330,6 +388,18 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
+	 * Returns the translation/internationalization object for the given locale (null for default one).
+	 *
+	 * @param string|null $locale Two letter language ISO code for specific language instead of default one
+	 * @return \Aimeos\MW\Translation\Iface Internationalization object
+	 */
+	public function i18n( string $locale = null ) : \Aimeos\MW\Translation\Iface
+	{
+		return $this->getI18n( $locale );
+	}
+
+
+	/**
 	 * Sets the localization object.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Localization object
@@ -355,6 +425,17 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		}
 
 		return $this->locale;
+	}
+
+
+	/**
+	 * Returns the localization object.
+	 *
+	 * @return \Aimeos\MShop\Locale\Item\Iface Localization object
+	 */
+	public function locale() : \Aimeos\MShop\Locale\Item\Iface
+	{
+		return $this->getLocale();
 	}
 
 
@@ -388,6 +469,17 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
+	 * Returns the logger object.
+	 *
+	 * @return \Aimeos\MW\Logger\Iface Logger object
+	 */
+	public function logger() : \Aimeos\MW\Logger\Iface
+	{
+		return $this->getLogger();
+	}
+
+
+	/**
 	 * Sets the mail object.
 	 *
 	 * @param \Aimeos\MW\Mail\Iface $mail Mail object
@@ -413,6 +505,17 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		}
 
 		return $this->mail;
+	}
+
+
+	/**
+	 * Returns the mail object.
+	 *
+	 * @return \Aimeos\MW\Mail\Iface Mail object
+	 */
+	public function mail() : \Aimeos\MW\Mail\Iface
+	{
+		return $this->getMail();
 	}
 
 
@@ -463,6 +566,19 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
+	 * Returns the message queue object.
+	 *
+	 * @param string $resource Resource name, e.g. "mq-email"
+	 * @param string $queue Message queue name, e.g. "order/email/payment"
+	 * @return \Aimeos\MW\MQueue\Queue\Iface Message queue object
+	 */
+	public function queue( string $resource, string $queue ) : \Aimeos\MW\MQueue\Queue\Iface
+	{
+		return $this->getMessageQueue( $resource, $queue );
+	}
+
+
+	/**
 	 * Sets the process object.
 	 *
 	 * @param \Aimeos\MW\Process\Iface $process Process object
@@ -488,6 +604,17 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		}
 
 		return $this->process;
+	}
+
+
+	/**
+	 * Returns the process object.
+	 *
+	 * @return \Aimeos\MW\Process\Iface Process object
+	 */
+	public function process() : \Aimeos\MW\Process\Iface
+	{
+		return $this->getProcess();
 	}
 
 
@@ -521,6 +648,17 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
+	 * Returns the session object.
+	 *
+	 * @return \Aimeos\MW\Session\Iface Session object
+	 */
+	public function session() : \Aimeos\MW\Session\Iface
+	{
+		return $this->getSession();
+	}
+
+
+	/**
 	 * Sets the view object.
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View object
@@ -550,6 +688,17 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
+	 * Returns the view object.
+	 *
+	 * @return \Aimeos\MW\View\Iface View object
+	 */
+	public function view() : \Aimeos\MW\View\Iface
+	{
+		return $this->getView();
+	}
+
+
+	/**
 	 * Sets the account name of the user/editor.
 	 *
 	 * @param string $name Account name of the user/editor
@@ -569,6 +718,17 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @return string Account name of the user/editor
 	 */
 	public function getEditor() : string
+	{
+		return $this->editor;
+	}
+
+
+	/**
+	 * Returns the account name of the user/editor.
+	 *
+	 * @return string Account name of the user/editor
+	 */
+	public function editor() : string
 	{
 		return $this->editor;
 	}
@@ -606,6 +766,17 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
+	 * Returns the user ID of the logged in user.
+	 *
+	 * @return string|null User ID of the logged in user
+	 */
+	public function user() : ?string
+	{
+		return $this->getUserId();
+	}
+
+
+	/**
 	 * Sets the group IDs of the logged in user.
 	 *
 	 * @param \Closure|array $groupIds Group IDs of the logged in user or closure to retrieve them
@@ -633,6 +804,17 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		}
 
 		return (array) $this->groups;
+	}
+
+
+	/**
+	 * Returns the group IDs of the logged in user.
+	 *
+	 * @return array Group IDs of the logged in user
+	 */
+	public function groups() : array
+	{
+		return $this->getGroupIds();
 	}
 
 

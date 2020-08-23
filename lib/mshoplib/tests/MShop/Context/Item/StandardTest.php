@@ -108,7 +108,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 		$return = $this->object->setConfig( $context->getConfig() );
 
-		$this->assertSame( $context->getConfig(), $this->object->getConfig() );
+		$this->assertSame( $context->getConfig(), $this->object->config() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 		$return = $this->object->setDatabaseManager( $context->getDatabaseManager() );
 
-		$this->assertSame( $context->getDatabaseManager(), $this->object->getDatabaseManager() );
+		$this->assertSame( $context->getDatabaseManager(), $this->object->db() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -125,7 +125,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setDateTime( '2000-01-01 00:00:00' );
 
-		$this->assertEquals( '2000-01-01 00:00:00', $this->object->getDateTime() );
+		$this->assertEquals( '2000-01-01 00:00:00', $this->object->datetime() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -138,6 +138,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 
 		$this->object->getFilesystem( 'fs-admin' );
+		$this->object->fs( 'fs-admin' );
 	}
 
 	public function testSetI18n()
@@ -150,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$return = $this->object->setI18n( array( 'en' => $context->getI18n() ) );
 
-		$this->assertSame( $context->getI18n(), $this->object->getI18n() );
+		$this->assertSame( $context->getI18n(), $this->object->i18n() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -159,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
 		$return = $this->object->setLocale( $locale );
 
-		$this->assertSame( $locale, $this->object->getLocale() );
+		$this->assertSame( $locale, $this->object->locale() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -168,7 +169,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 		$return = $this->object->setLogger( $context->getLogger() );
 
-		$this->assertSame( $context->getLogger(), $this->object->getLogger() );
+		$this->assertSame( $context->getLogger(), $this->object->logger() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -177,7 +178,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$mail = new \Aimeos\MW\Mail\None();
 		$return = $this->object->setMail( $mail );
 
-		$this->assertInstanceOf( \Aimeos\MW\Mail\Iface::class, $this->object->getMail() );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Iface::class, $this->object->mail() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -190,6 +191,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 
 		$this->object->getMessageQueue( 'mq-test', 'test' );
+		$this->object->queue( 'mq-test', 'test' );
 	}
 
 	public function testSetSession()
@@ -197,7 +199,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 		$return = $this->object->setSession( $context->getSession() );
 
-		$this->assertSame( $context->getSession(), $this->object->getSession() );
+		$this->assertSame( $context->getSession(), $this->object->session() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -206,7 +208,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$process = new \Aimeos\MW\Process\Pcntl();
 		$return = $this->object->setProcess( $process );
 
-		$this->assertSame( $process, $this->object->getProcess() );
+		$this->assertSame( $process, $this->object->process() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -215,7 +217,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$view = new \Aimeos\MW\View\Standard();
 		$return = $this->object->setView( $view );
 
-		$this->assertInstanceOf( \Aimeos\MW\View\Iface::class, $this->object->getView() );
+		$this->assertInstanceOf( \Aimeos\MW\View\Iface::class, $this->object->view() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -225,7 +227,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$return = $this->object->setEditor( 'testuser' );
 
-		$this->assertEquals( 'testuser', $this->object->getEditor() );
+		$this->assertEquals( 'testuser', $this->object->editor() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -234,11 +236,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $this->object->getUserId() );
 
 		$return = $this->object->setUserId( 123 );
-		$this->assertEquals( '123', $this->object->getUserId() );
+		$this->assertEquals( '123', $this->object->user() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 
 		$return = $this->object->setUserId( function() { return 456; } );
-		$this->assertEquals( '456', $this->object->getUserId() );
+		$this->assertEquals( '456', $this->object->user() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -247,11 +249,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $this->object->getGroupIds() );
 
 		$return = $this->object->setGroupIds( array( 123 ) );
-		$this->assertEquals( array( '123' ), $this->object->getGroupIds() );
+		$this->assertEquals( array( '123' ), $this->object->groups() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 
 		$return = $this->object->setGroupIds( function() { return array( 456 ); } );
-		$this->assertEquals( array( '456' ), $this->object->getGroupIds() );
+		$this->assertEquals( array( '456' ), $this->object->groups() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 }
