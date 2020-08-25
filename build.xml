@@ -156,6 +156,21 @@
 				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
+		<confdoc prefix="controller/common" keyparts="2"
+			optfile="${extdir}/ai-controller-jobs/controller/common/tests/confdoc.ser"
+			outdir="${coredir}/misc/confdoc">
+			<fileset dir="${extdir}/ai-controller-jobs" expandsymboliclinks="true" >
+				<include name="controller/common/src/**/*.php" />
+			</fileset>
+		</confdoc>
+		<confdoc prefix="controller/common" keyparts="2"
+			optfile="${extdir}/ai-controller-jobs/controller/jobs/tests/confdoc.ser"
+			outdir="${coredir}/misc/confdoc">
+			<fileset dir="${extdir}/ai-controller-jobs" expandsymboliclinks="true" >
+				<include name="controller/jobs/templates/**/*.php" />
+				<include name="controller/jobs/src/**/*.php" />
+			</fileset>
+		</confdoc>
 		<confdoc prefix="controller/jobs" keyparts="2"
 			optfile="${extdir}/ai-client-html/controller/jobs/tests/confdoc.ser"
 			outdir="${coredir}/misc/confdoc">
