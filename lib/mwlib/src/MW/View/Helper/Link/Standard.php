@@ -37,6 +37,9 @@ class Standard
 		$cntl = $view->config( $cfgkey . '/controller' );
 		$action = $view->config( $cfgkey . '/action' );
 		$config = $view->config( $cfgkey . '/config', [] );
+		$filter = $view->config( $cfgkey . '/filter', [] );
+
+		$params = array_diff( $params, array_flip( $filter ) );
 
 		return $view->url( $target, $cntl, $action, $params, $fragments, $config );
 	}
