@@ -845,7 +845,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 
 			foreach( $prodAttributes as $attribute )
 			{
-				$key = md5( $attributeItem->getCode() . json_encode( $attributeItem->getValue() ) );
+				$key = md5( $attribute->getCode() . json_encode( $attribute->getValue() ) );
 
 				if( isset( $map[$key] ) === false || $map[$key]->getQuantity() != $attribute->getQuantity() ) {
 					continue 2; // jump to outer loop
