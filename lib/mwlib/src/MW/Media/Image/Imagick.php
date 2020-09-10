@@ -39,15 +39,15 @@ class Imagick
 
 		try
 		{
-			if( !self::$watermark && isset( $options['image']['watermark'] ) )
+			$this->image = new \Imagick( [] );
+			$this->image->readImageBlob( $content );
+
+			if( isset( $options['image']['watermark'] ) )
 			{
 				$wmimg = new \Imagick( [] );
 				$wmimg->readImage( $options['image']['watermark'] );
 				$this->watermark( $wmimg );
 			}
-
-			$this->image = new \Imagick( [] );
-			$this->image->readImageBlob( $content );
 		}
 		catch( \Exception $e )
 		{
