@@ -21,8 +21,6 @@ class Imagick
 	extends \Aimeos\MW\Media\Image\Base
 	implements \Aimeos\MW\Media\Image\Iface
 {
-	private static $watermark;
-
 	private $options;
 	private $image;
 
@@ -43,10 +41,9 @@ class Imagick
 		{
 			if( !self::$watermark && isset( $options['image']['watermark'] ) )
 			{
-				$image = new \Imagick( [] );
-				$image->readImage( $options['image']['watermark'] );
-
-				self::$watermark = $image;
+				$wmimg = new \Imagick( [] );
+				$wmimg->readImage( $options['image']['watermark'] );
+				$this->watermark( $wmimg );
 			}
 
 			$this->image = new \Imagick( [] );
@@ -126,10 +123,6 @@ class Imagick
 
 		try
 		{
-			if( self::$watermark !== null ) {
-				$this->watermark();
-			}
-
 			$this->image->setImageFormat( $mime[1] );
 			$this->image->setImageCompressionQuality( $quality );
 
@@ -195,22 +188,31 @@ class Imagick
 
 	/**
 	 * Adds the configured water mark to the image
+	 *
+	 * @param \Imagick $image Watermark image
 	 */
-	protected function watermark()
+	protected function watermark( \Imagick $image )
 	{
-		$ww = self::$watermark->getImageHeight();
-		$wh = self::$watermark->getImageWidth();
+		$ww = $image->getImageHeight();
+		$wh = $image->getImageWidth();
 
-		$ratio = min( $this->getWidth() / $ww, $this->getHeight() / $wh );
-		$newHeight = (int) ( $wh * $ratio );
-		$newWidth = (int) ( $ww * $ratio );
+		if( $ww > $this->getWidth() )
+		{
+			$wh = $this->getWidth() * $ww / $wh;
+			$ww = $this->getWidth();
+		}
 
-		$dx = (int) ( $this->getWidth() - $newWidth ) / 2;
-		$dy = (int) ( $this->getHeight() - $newHeight ) / 2;
+		if( $wh > $this->getHeight() )
+		{
+			$ww = $this->getHeight() * $wh / $ww;
+			$wh = $this->getHeight();
+		}
 
-		$image = clone self::$watermark;
+		$dx = (int) ( $this->getWidth() - $ww ) / 2;
+		$dy = (int) ( $this->getHeight() - $wh ) / 2;
+
 		$image->setImageColorspace( $this->image->getImageColorspace() );
-		$image->resizeImage( $newWidth, $newHeight, \Imagick::FILTER_CUBIC, 0.8 );
+		$image->resizeImage( $ww, $wh, \Imagick::FILTER_CUBIC, 0.8 );
 
 		$this->image->compositeImage( $image, \Imagick::COMPOSITE_OVER, $dx, $dy );
 
