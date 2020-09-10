@@ -196,11 +196,6 @@ class Imagick
 		$ww = $image->getImageHeight();
 		$wh = $image->getImageWidth();
 
-<<<<<<< HEAD
-		$ratio = min( $this->getWidth() / $ww, $this->getHeight() / $wh );
-		$newHeight = (int) ($wh * $ratio);
-		$newWidth = (int) ($ww * $ratio);
-=======
 		if( $ww > $this->getWidth() )
 		{
 			$wh = $this->getWidth() * $ww / $wh;
@@ -212,7 +207,6 @@ class Imagick
 			$ww = $this->getHeight() * $wh / $ww;
 			$wh = $this->getHeight();
 		}
->>>>>>> 19c44cf77... Fixed watermark resizing and composition
 
 		$dx = (int) ( $this->getWidth() - $ww ) / 2;
 		$dy = (int) ( $this->getHeight() - $wh ) / 2;
