@@ -387,14 +387,14 @@ return array(
 			),
 			'lock' => array(
 				'db2' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
-				'mysql' => "SELECT GET_LOCK('aimeos.catalog', -1)", // LOCK TABLE implicit commits transactions
+				'mysql' => "DO GET_LOCK('aimeos.catalog', -1)", // LOCK TABLE implicit commits transactions
 				'oracle' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
 				'pgsql' => 'LOCK TABLE ONLY "mshop_catalog" IN EXCLUSIVE MODE',
 				'sqlanywhere' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
 				'sqlsrv' => "EXEC sp_getapplock @Resource = 'aimeos.catalog', @LockMode = 'Exclusive'",
 			),
 			'unlock' => array(
-				'mysql' => "SELECT RELEASE_LOCK('aimeos.catalog')",
+				'mysql' => "DO RELEASE_LOCK('aimeos.catalog')",
 				'sqlsrv' => "EXEC sp_releaseapplock @Resource = 'aimeos.catalog'",
 			),
 		),
