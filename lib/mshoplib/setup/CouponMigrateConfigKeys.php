@@ -18,31 +18,31 @@ class CouponMigrateConfigKeys extends \Aimeos\MW\Setup\Task\Base
 	private $mysql = array(
 		'UPDATE "mshop_coupon" SET "provider" = CONCAT("provider", \',Required\')
 			WHERE "provider" NOT LIKE \'%,Required%\' AND "config" LIKE \'%reqproduct%\'',
-		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'reqproduct\', \'required.productcode\')
-			WHERE "config" LIKE \'%reqproduct%\'',
+		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"reqproduct":\', \'"required.productcode":\')
+			WHERE "config" LIKE \'%"reqproduct":%\'',
 
 		'UPDATE "mshop_coupon" SET "provider" = CONCAT("provider", \',BasketValues\')
-			WHERE "provider" NOT LIKE \'%,BasketValues%\' AND "config" LIKE \'%minorder%\'',
-		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'minorder\', \'basketvalues.total-value-min\')
-			WHERE "config" LIKE \'%minorder%\'',
+			WHERE "provider" NOT LIKE \'%,BasketValues%\' AND "config" LIKE \'%"minorder":%\'',
+		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"minorder":\', \'basketvalues.total-value-min\')
+			WHERE "config" LIKE \'%"minorder":%\'',
 
-		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"product"\', \'"fixedrebate.productcode"\')
-			WHERE "provider" LIKE \'%FixedRebate%\' AND "config" LIKE \'%"product"%\'',
-		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"rebate"\', \'"fixedrebate.rebate"\')
-			WHERE "provider" LIKE \'%FixedRebate%\' AND "config" LIKE \'%"rebate"%\'',
+		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"product":\', \'"fixedrebate.productcode":\')
+			WHERE "provider" LIKE \'%FixedRebate%\' AND "config" LIKE \'%"product":%\'',
+		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"rebate":\', \'"fixedrebate.rebate":\')
+			WHERE "provider" LIKE \'%FixedRebate%\' AND "config" LIKE \'%"rebate":%\'',
 
-		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"product"\', \'"freeshipping.productcode"\')
-			WHERE "provider" LIKE \'%FreeShipping%\' AND "config" LIKE \'%"product"%\'',
+		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"product":\', \'"freeshipping.productcode":\')
+			WHERE "provider" LIKE \'%FreeShipping%\' AND "config" LIKE \'%"product":%\'',
 
-		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"product"\', \'"percentrebate.productcode"\')
-			WHERE "provider" LIKE \'%PercentRebate%\' AND "config" LIKE \'%"product"%\'',
-		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"rebate"\', \'"percentrebate.rebate"\')
-			WHERE "provider" LIKE \'%PercentRebate%\' AND "config" LIKE \'%"rebate"%\'',
+		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"product":\', \'"percentrebate.productcode":\')
+			WHERE "provider" LIKE \'%PercentRebate%\' AND "config" LIKE \'%"product":%\'',
+		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"rebate":\', \'"percentrebate.rebate":\')
+			WHERE "provider" LIKE \'%PercentRebate%\' AND "config" LIKE \'%"rebate":%\'',
 
-		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"product"\', \'"present.productcode"\')
-			WHERE "provider" LIKE \'%Present%\' AND "config" LIKE \'%"product"%\'',
-		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"quantity"\', \'"present.quantity"\')
-			WHERE "provider" LIKE \'%Present%\' AND "config" LIKE \'%"quantity"%\'',
+		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"product":\', \'"present.productcode":\')
+			WHERE "provider" LIKE \'%Present%\' AND "config" LIKE \'%"product":%\'',
+		'UPDATE "mshop_coupon" SET "config" = REPLACE("config", \'"quantity":\', \'"present.quantity":\')
+			WHERE "provider" LIKE \'%Present%\' AND "config" LIKE \'%"quantity":%\'',
 	);
 
 
