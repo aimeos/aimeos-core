@@ -21,7 +21,8 @@ namespace Aimeos\MShop\Product\Manager;
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Product\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface,
-		\Aimeos\MShop\Common\Manager\ListRef\Iface, \Aimeos\MShop\Common\Manager\PropertyRef\Iface // workaround for PHP problem, should be in Iface
+		\Aimeos\MShop\Common\Manager\ListRef\Iface, \Aimeos\MShop\Common\Manager\PropertyRef\Iface,
+		\Aimeos\MShop\Common\Manager\Rating\Iface
 {
 	use \Aimeos\MShop\Common\Manager\ListRef\Traits;
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
@@ -144,6 +145,22 @@ class Standard
 			'label' => 'Editor',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'product.rating' => array(
+			'code' => 'product.rating',
+			'internalcode' => 'mpro."rating"',
+			'label' => 'Rating value',
+			'type' => 'decimal',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'product.ratings' => array(
+			'code' => 'product.ratings',
+			'internalcode' => 'mpro."ratings"',
+			'label' => 'Number of ratings',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product:has' => array(
@@ -451,6 +468,77 @@ class Standard
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'product', $manager, $name );
+	}
+
+
+	/**
+	 * Updates the rating of the item
+	 *
+	 * @param string $id ID of the item
+	 * @param string $rating Decimal value of the rating
+	 * @param int $ratings Total number of ratings for the item
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function rate( string $id, string $rating, int $ratings ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		$context = $this->getContext();
+
+		$dbm = $context->getDatabaseManager();
+		$dbname = $this->getResourceName();
+		$conn = $dbm->acquire( $dbname );
+
+		try
+		{
+			/** mshop/product/manager/standard/rate/mysql
+			 * Updates the rating of the product in the database
+			 *
+			 * @see mshop/product/manager/standard/rate/ansi
+			 */
+
+			/** mshop/product/manager/standard/rate/ansi
+			 * Updates the rating of the product in the database
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values for the rating to the statement before they are
+			 * sent to the database server. The order of the columns must
+			 * correspond to the order in the rate() method, so the
+			 * correct values are bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for update ratings
+			 * @since 2020.10
+			 * @category Developer
+			 * @see mshop/product/manager/standard/insert/ansi
+			 * @see mshop/product/manager/standard/update/ansi
+			 * @see mshop/product/manager/standard/newid/ansi
+			 * @see mshop/product/manager/standard/delete/ansi
+			 * @see mshop/product/manager/standard/search/ansi
+			 * @see mshop/product/manager/standard/count/ansi
+			 */
+			$path = 'mshop/product/manager/standard/rate';
+
+			$stmt = $this->getCachedStatement( $conn, $path, $this->getSqlConfig( $path ) );
+
+			$stmt->bind( 1, $rating );
+			$stmt->bind( 2, $ratings, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $context->getLocale()->getSiteId() );
+			$stmt->bind( 4, (int) $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+
+			$stmt->execute()->finish();
+
+			$dbm->release( $conn, $dbname );
+		}
+		catch( \Exception $e )
+		{
+			$dbm->release( $conn, $dbname );
+			throw $e;
+		}
+
+		return $this;
 	}
 
 

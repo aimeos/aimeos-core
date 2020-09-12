@@ -49,6 +49,8 @@ return array(
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'scale', 'float', ['default' => 1] );
+			$table->addColumn( 'rating', 'decimal', ['precision' => 4, 'scale' => 2, 'default' => 0] );
+			$table->addColumn( 'ratings', 'integer', ['default' => 0] );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
@@ -57,8 +59,9 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mspro_id' );
 			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_mspro_siteid_code' );
-			$table->addIndex( array( 'id', 'siteid', 'status', 'start', 'end' ), 'idx_mspro_id_sid_stat_st_end' );
-			$table->addIndex( array( 'siteid', 'status', 'start', 'end' ), 'idx_mspro_sid_stat_st_end' );
+			$table->addIndex( array( 'id', 'siteid', 'status', 'start', 'end', 'rating' ), 'idx_mspro_id_sid_stat_st_end_rt' );
+			$table->addIndex( array( 'siteid', 'status', 'start', 'end', 'rating' ), 'idx_mspro_sid_stat_st_end_rt' );
+			$table->addIndex( array( 'siteid', 'rating' ), 'idx_mspro_sid_rating' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_mspro_sid_label' );
 			$table->addIndex( array( 'siteid', 'start' ), 'idx_mspro_sid_start' );
 			$table->addIndex( array( 'siteid', 'end' ), 'idx_mspro_sid_end' );

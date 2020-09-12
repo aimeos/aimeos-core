@@ -516,6 +516,13 @@ return array(
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
+			'rate' => array(
+				'ansi' => '
+					UPDATE "mshop_product"
+					SET "rating" = ?, "ratings" = ?
+					WHERE "siteid" = ? AND "id" = ?
+				'
+			),
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
@@ -526,14 +533,15 @@ return array(
 						mpro."status" AS "product.status", mpro."ctime" AS "product.ctime",
 						mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor",
 						mpro."target" AS "product.target", mpro."dataset" AS "product.dataset",
-						mpro."scale" AS "product.scale", mpro."config" AS "product.config"
+						mpro."scale" AS "product.scale", mpro."config" AS "product.config",
+						mpro."rating" AS "product.rating", mpro."ratings" AS "product.ratings"
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
 					GROUP BY :columns :group
 						mpro."id", mpro."siteid", mpro."type", mpro."code", mpro."label", mpro."url",
 						mpro."target", mpro."dataset", mpro."scale", mpro."config", mpro."start", mpro."end",
-						mpro."status", mpro."ctime", mpro."mtime", mpro."editor"
+						mpro."status", mpro."ctime", mpro."mtime", mpro."editor", mpro."rating", mpro."ratings"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
@@ -546,7 +554,8 @@ return array(
 						mpro."status" AS "product.status", mpro."ctime" AS "product.ctime",
 						mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor",
 						mpro."target" AS "product.target", mpro."dataset" AS "product.dataset",
-						mpro."scale" AS "product.scale", mpro."config" AS "product.config"
+						mpro."scale" AS "product.scale", mpro."config" AS "product.config",
+						mpro."rating" AS "product.rating", mpro."ratings" AS "product.ratings"
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
