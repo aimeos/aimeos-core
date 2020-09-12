@@ -17,7 +17,7 @@ namespace Aimeos\MShop\Common\Item\Status;
  * @package MShop
  * @subpackage Common
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface
+interface Iface
 {
 	/**
 	 * Returns the status of the common list type item
