@@ -35,6 +35,32 @@ return array(
 					GROUP BY "key"
 				'
 			),
+			'aggregaterate' => array(
+				'ansi' => '
+					SELECT "key", SUM("val") AS "sum", COUNT(*) AS "count"
+					FROM (
+						SELECT :key AS "key", mrev.rating AS "val"
+						FROM "mshop_review" AS mrev
+						:joins
+						WHERE :cond
+						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					) AS list
+					GROUP BY "key"
+				',
+				'mysql' => '
+					SELECT "key", SUM("val") AS "sum", COUNT(*) AS "count"
+					FROM (
+						SELECT :key AS "key", mrev.rating AS "val"
+						FROM "mshop_review" AS mrev
+						:joins
+						WHERE :cond
+						ORDER BY :order
+						LIMIT :size OFFSET :start
+					) AS list
+					GROUP BY "key"
+				'
+			),
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_review" ( :names

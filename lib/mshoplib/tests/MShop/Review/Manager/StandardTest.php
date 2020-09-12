@@ -48,6 +48,25 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAggregateRating()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->combine( '&&', [
+			$search->compare( '==', 'review.domain', 'product' ),
+			$search->compare( '==', 'review.editor', 'core:lib/mshoplib' )
+		] ) );
+		$result = $this->object->aggregate( $search, 'review.rating', 'review.id', 'rate' )->toArray();
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertArrayHasKey( 0, $result );
+		$this->assertArrayHasKey( 4, $result );
+		$this->assertEquals( 0, $result[0]['sum'] );
+		$this->assertEquals( 1, $result[0]['count'] );
+		$this->assertEquals( 4, $result[4]['sum'] );
+		$this->assertEquals( 1, $result[4]['count'] );
+	}
+
+
 	public function testClear()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->clear( [-1] ) );

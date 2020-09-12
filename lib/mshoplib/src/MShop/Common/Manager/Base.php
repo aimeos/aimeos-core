@@ -372,8 +372,13 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 			$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== null ) {
-				$list[$row['key']] = $row['count'];
+			while( ( $row = $results->fetch() ) !== null )
+			{
+				if( count( $row ) === 2 ) {
+					$list[$row['key']] = $row['count'];
+				} else {
+					$list[$row['key']] = $row;
+				}
 			}
 
 			$dbm->release( $conn, $dbname );
