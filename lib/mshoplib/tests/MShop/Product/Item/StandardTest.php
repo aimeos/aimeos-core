@@ -35,6 +35,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.mtime' => '2011-01-19 18:04:32',
 			'product.editor' => 'unitTestUser',
 			'product.target' => 'testtarget',
+			'product.rating' => '4.80',
+			'product.ratings' => 5,
 			'additional' => 'value',
 		);
 
@@ -389,6 +391,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetRating()
+	{
+		$this->assertEquals( '4.80', $this->object->getRating() );
+	}
+
+
+	public function testGetRatings()
+	{
+		$this->assertEquals( 5, $this->object->getRatings() );
+	}
+
+
 	public function testIsAvailable()
 	{
 		$this->assertTrue( $this->object->isAvailable() );
@@ -583,6 +597,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['product.editor'] );
 		$this->assertEquals( $this->object->getTarget(), $arrayObject['product.target'] );
 		$this->assertEquals( $this->object->getScale(), $arrayObject['product.scale'] );
+		$this->assertEquals( $this->object->getRating(), $arrayObject['product.rating'] );
+		$this->assertEquals( $this->object->getRatings(), $arrayObject['product.ratings'] );
 	}
-
 }

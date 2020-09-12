@@ -402,6 +402,28 @@ class Standard
 
 
 	/**
+	 * Returns the rating of the item
+	 *
+	 * @return string Decimal value of the item rating
+	 */
+	public function getRating() : string
+	{
+		return (string) $this->get( 'product.rating', 0 );
+	}
+
+
+	/**
+	 * Returns the total number of ratings for the item
+	 *
+	 * @return int Total number of ratings for the item
+	 */
+	public function getRatings() : int
+	{
+		return (int) $this->get( 'product.ratings', 0 );
+	}
+
+
+	/**
 	 * Returns the item type
 	 *
 	 * @return string Item type, subtypes are separated by slashes
@@ -484,6 +506,8 @@ class Standard
 		$list['product.scale'] = $this->getScale();
 		$list['product.target'] = $this->getTarget();
 		$list['product.ctime'] = $this->getTimeCreated();
+		$list['product.rating'] = $this->getRating();
+		$list['product.ratings'] = $this->getRatings();
 
 		return $list;
 	}
