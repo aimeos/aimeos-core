@@ -127,7 +127,7 @@ class Imagick
 			$this->image->setImageCompressionQuality( $quality );
 
 			if( $filename === null ) {
-				return $this->image->getImageBlob();
+				return $this->image->getImagesBlob();
 			}
 
 			$this->image->writeImage( $filename );
