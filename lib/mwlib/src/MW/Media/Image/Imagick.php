@@ -21,8 +21,9 @@ class Imagick
 	extends \Aimeos\MW\Media\Image\Base
 	implements \Aimeos\MW\Media\Image\Iface
 {
-	private $options;
 	private $image;
+	private $options;
+	private $wmimg;
 
 
 	/**
@@ -44,9 +45,8 @@ class Imagick
 
 			if( isset( $options['image']['watermark'] ) )
 			{
-				$wmimg = new \Imagick( [] );
-				$wmimg->readImage( $options['image']['watermark'] );
-				$this->watermark( $wmimg );
+				$this->wmimg = new \Imagick( [] );
+				$this->wmimg->readImage( $options['image']['watermark'] );
 			}
 		}
 		catch( \Exception $e )
@@ -176,6 +176,11 @@ class Imagick
 			{
 				$newMedia->image->resizeImage( $width, $height, \Imagick::FILTER_CUBIC, 0.8 );
 			}
+
+			if( $this->wmimg ) {
+				$this->watermark( $this->wmimg );
+			}
+
 
 			return $newMedia;
 		}
