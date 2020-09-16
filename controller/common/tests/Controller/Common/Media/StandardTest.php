@@ -121,7 +121,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$fsm->expects( $this->once() )->method( 'get' )
+		$fsm->expects( $this->exactly( 2 ) )->method( 'get' )
 			->will( $this->returnValue( $fs ) );
 
 		$fs->expects( $this->exactly( 2 ) )->method( 'has' )
@@ -152,7 +152,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$fsm->expects( $this->once() )->method( 'get' )
+		$fsm->expects( $this->exactly( 2 ) )->method( 'get' )
 			->will( $this->returnValue( $fs ) );
 
 		$fs->expects( $this->exactly( 1 ) )->method( 'has' )

@@ -130,27 +130,15 @@ class Standard
 			return $item->setUrl( '' )->setPreview( '' );
 		}
 
-		$mimedir = (string) $this->context->getConfig()->get( 'controller/common/media/standard/mimeicon/directory' );
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
-		$mimelen = strlen( $mimedir );
 		$path = $item->getUrl();
 
-		if( $path !== '' && $fs->has( $path ) ) {
+		if( $path && $fs->has( $path ) ) {
 			$fs->rm( $path );
 		}
 
-		foreach( $item->getPreviews() as $preview )
-		{
-			try
-			{
-				if( $preview !== '' && strncmp( $preview, $mimedir, $mimelen ) !== 0 && $fs->has( $preview ) ) {
-					$fs->rm( $preview );
-				}
-			}
-			catch( \Exception $e ) { ; } // continue if removing file fails
-		}
-
-		return $item->setUrl( '' )->setPreviews( [] )->deletePropertyItems( $item->getPropertyItems()->toArray() );
+		return $this->deletePreviews( $item, $fsname )->setUrl( '' )
+			->deletePropertyItems( $item->getPropertyItems()->toArray() );
 	}
 
 
@@ -175,22 +163,7 @@ class Standard
 			return $item;
 		}
 
-		$mimedir = (string) $this->context->getConfig()->get( 'controller/common/media/standard/mimeicon/directory' );
-		$fs = $this->context->getFilesystemManager()->get( $fsname );
-		$mimelen = strlen( $mimedir );
-
-		foreach( $item->getPreviews() as $preview )
-		{
-			try
-			{
-				if( $preview !== '' && strncmp( $preview, $mimedir, $mimelen ) !== 0 && $fs->has( $preview ) ) {
-					$fs->rm( $preview );
-				}
-			}
-			catch( \Exception $e ) { ; } // continue if removing file fails
-		}
-
-		return $this->addImages( $item, $media, $path, $fsname );
+		return $this->addImages( $this->deletePreviews( $item, $fsname ), $media, $path, $fsname );
 	}
 
 
@@ -322,22 +295,46 @@ class Standard
 			}
 		}
 
-		/** @todo 2021.x Remove old config */
-
 		if( empty( $list ) )
 		{
+			/** @todo 2021.x Remove old config */
 			$maxwidth = $config->get( 'controller/common/media/standard/preview/maxwidth', null );
 			$maxheight = $config->get( 'controller/common/media/standard/preview/maxheight', null );
 			$fit = (bool) $config->get( 'controller/common/media/standard/preview/force-size', false );
 
-			if( $maxheight || $maxwidth )
-			{
-				$image = $media->scale( $maxwidth, $maxheight, !$fit );
-				$list[$image->getWidth()] = $image;
-			}
+			$image = $media->scale( $maxwidth, $maxheight, !$fit );
+			$list[$image->getWidth()] = $image;
 		}
 
 		return $list;
+	}
+
+
+	/**
+	 * Removes the previes images from the storage
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item which will contains the image URLs afterwards
+	 * @param string $fsname File system name the file is located at
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item with preview images removed
+	 */
+	protected function deletePreviews( \Aimeos\MShop\Media\Item\Iface $item, string $fsname )
+	{
+		$mimedir = (string) $this->context->getConfig()->get( 'controller/common/media/standard/mimeicon/directory' );
+		$fs = $this->context->getFilesystemManager()->get( $fsname );
+		$mimelen = strlen( $mimedir );
+
+		foreach( $item->getPreviews() as $preview )
+		{
+			try
+			{
+				if( $preview && strncmp( $preview, $mimedir, $mimelen ) !== 0 && $fs->has( $preview ) ) {
+					$fs->rm( $preview );
+				}
+			}
+			catch( \Exception $e ) { ; } // continue if removing file fails
+		}
+
+		return $item->setPreviews( [] );
 	}
 
 
