@@ -175,6 +175,21 @@ class Standard
 			return $item;
 		}
 
+		$mimedir = (string) $this->context->getConfig()->get( 'controller/common/media/standard/mimeicon/directory' );
+		$fs = $this->context->getFilesystemManager()->get( $fsname );
+		$mimelen = strlen( $mimedir );
+
+		foreach( $item->getPreviews() as $preview )
+		{
+			try
+			{
+				if( $preview !== '' && strncmp( $preview, $mimedir, $mimelen ) !== 0 && $fs->has( $preview ) ) {
+					$fs->rm( $preview );
+				}
+			}
+			catch( \Exception $e ) { ; } // continue if removing file fails
+		}
+
 		return $this->addImages( $item, $media, $path, $fsname );
 	}
 
@@ -306,6 +321,8 @@ class Standard
 				$list[$image->getWidth()] = $image;
 			}
 		}
+
+		/** @todo 2021.x Remove old config */
 
 		if( empty( $list ) )
 		{
