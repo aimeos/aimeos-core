@@ -32,6 +32,15 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'index.price.currencyid' => array(
+			'code' => 'index.price.currencyid',
+			'internalcode' => 'mindpr."currencyid"',
+			'internaldeps'=>array( 'LEFT JOIN "mshop_index_price" AS mindpr ON mindpr."prodid" = mpro."id"' ),
+			'label' => 'Product index price currency',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'index.price:value' => array(
 			'code' => 'index.price:value()',
 			'internalcode' => ':site AND mindpr."currencyid" = $1 AND mindpr."value"',

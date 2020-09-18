@@ -99,6 +99,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAggregateMax()
+	{
+		$search = $this->object->createSearch( true );
+		$result = $this->object->aggregate( $search, 'index.price.currencyid', null, 'max' )->toArray();
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 600, $result['EUR'] );
+	}
+
+
 	public function testDeleteItems()
 	{
 		$this->assertEquals( $this->object, $this->object->deleteItems( [-1] ) );
