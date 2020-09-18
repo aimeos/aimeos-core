@@ -501,6 +501,34 @@ return array(
 					GROUP BY "key"
 				'
 			),
+			'aggregatemin' => array(
+				'ansi' => '
+					SELECT "key", MIN("val") AS "count"
+					FROM (
+						SELECT :key AS "key", mindpr."value" AS "val"
+						FROM "mshop_product" AS mpro
+						JOIN "mshop_index_price" mindpr ON mpro."id" = mindpr."prodid"
+						WHERE :cond
+						GROUP BY :key, mindpr.value, mpro."id"
+						ORDER BY :order
+						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+					) AS list
+					GROUP BY "key"
+				',
+				'mysql' => '
+					SELECT "key", MIN("val") AS "count"
+					FROM (
+						SELECT :key AS "key", mindpr."value" AS "val"
+						FROM "mshop_product" AS mpro
+						JOIN "mshop_index_price" mindpr ON mpro."id" = mindpr."prodid"
+						WHERE :cond
+						GROUP BY :key, mindpr.value, mpro."id"
+						ORDER BY :order
+						LIMIT :size OFFSET :start
+					) AS list
+					GROUP BY "key"
+				'
+			),
 			'search' => array(
 				'ansi' => '
 					SELECT mpro."id" :mincols

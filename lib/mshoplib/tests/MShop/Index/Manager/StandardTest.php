@@ -109,6 +109,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAggregateMin()
+	{
+		$search = $this->object->createSearch( true );
+		$result = $this->object->aggregate( $search, 'index.price.currencyid', null, 'min' )->toArray();
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 12, $result['EUR'] );
+	}
+
+
 	public function testDeleteItems()
 	{
 		$this->assertEquals( $this->object, $this->object->deleteItems( [-1] ) );
