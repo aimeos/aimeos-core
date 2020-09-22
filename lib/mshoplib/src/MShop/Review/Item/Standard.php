@@ -312,6 +312,7 @@ class Standard
 		$list['review.rating'] = $this->getRating();
 		$list['review.status'] = $this->getStatus();
 		$list['review.name'] = $this->getName();
+		$list['review.ctime'] = $this->getTimeCreated();
 
 		if( $private )
 		{

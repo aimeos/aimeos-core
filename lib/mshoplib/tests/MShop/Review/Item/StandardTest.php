@@ -338,5 +338,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getTimeCreated(), $list['review.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $list['review.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $list['review.editor'] );
+
+		$list = $this->object->toArray();
+		$this->assertEquals( $this->object->getTimeCreated(), $list['review.ctime'] );
 	}
 }
