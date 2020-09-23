@@ -51,7 +51,7 @@ class Standard
 	 */
 	public function setComment( string $value ) : \Aimeos\MShop\Review\Item\Iface
 	{
-		return $this->set( 'review.comment', $value );
+		return $this->set( 'review.comment', strip_tags( $value ) );
 	}
 
 
@@ -143,7 +143,7 @@ class Standard
 	 */
 	public function setName( string $value ) : \Aimeos\MShop\Review\Item\Iface
 	{
-		return $this->set( 'review.name', $value );
+		return $this->set( 'review.name', strip_tags( $value ) );
 	}
 
 
@@ -212,7 +212,7 @@ class Standard
 	 */
 	public function setResponse( string $value ) : \Aimeos\MShop\Review\Item\Iface
 	{
-		return $this->set( 'review.response', $value );
+		return $this->set( 'review.response', strip_tags( $value ) );
 	}
 
 

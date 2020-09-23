@@ -80,7 +80,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetComment()
 	{
-		$return = $this->object->setComment( 'edit comment' );
+		$return = $this->object->setComment( '<span>edit comment</span>' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Review\Item\Iface::class, $return );
 		$this->assertEquals( 'edit comment', $this->object->getComment() );
@@ -140,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertFalse( $this->object->isModified() );
 
-		$return = $this->object->setName( 'test reviewer' );
+		$return = $this->object->setName( '<span>test reviewer' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Review\Item\Iface::class, $return );
 		$this->assertEquals( 'test reviewer', $this->object->getName() );
@@ -213,7 +213,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetResponse()
 	{
-		$return = $this->object->setResponse( 'edit response' );
+		$return = $this->object->setResponse( 'edit response</span>' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Review\Item\Iface::class, $return );
 		$this->assertEquals( 'edit response', $this->object->getResponse() );
