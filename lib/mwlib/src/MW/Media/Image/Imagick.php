@@ -160,7 +160,7 @@ class Imagick
 				list( $width, $height ) = $this->getSizeFitted( $w, $h, $width, $height );
 
 				if( $w <= $width && $h <= $height ) {
-					return $this;
+					return $this->watermark( clone $this );
 				}
 			}
 
@@ -177,12 +177,7 @@ class Imagick
 				$newMedia->image->resizeImage( $width, $height, \Imagick::FILTER_CUBIC, 0.8 );
 			}
 
-			if( $this->wmimg ) {
-				$this->watermark( $this->wmimg );
-			}
-
-
-			return $newMedia;
+			return $this->watermark( $newMedia );
 		}
 		catch( \Exception $e )
 		{
@@ -194,33 +189,41 @@ class Imagick
 	/**
 	 * Adds the configured water mark to the image
 	 *
-	 * @param \Imagick $image Watermark image
+	 * @param \Aimeos\MW\Media\Image\Iface $media Media object the watermark should be applied to
+	 * @return \Aimeos\MW\Media\Image\Iface Media object with watermark
 	 */
-	protected function watermark( \Imagick $image )
+	protected function watermark( \Aimeos\MW\Media\Image\Iface $media )
 	{
-		$ww = $image->getImageHeight();
-		$wh = $image->getImageWidth();
+		if( $this->wmimg === null ) {
+			return $media;
+		}
+
+		$ww = $this->wmimg->getImageHeight();
+		$wh = $this->wmimg->getImageWidth();
 
 		if( $ww > $this->getWidth() )
 		{
-			$wh = $this->getWidth() * $ww / $wh;
+			$wh = $this->getWidth() * $wh / $ww;
 			$ww = $this->getWidth();
 		}
 
 		if( $wh > $this->getHeight() )
 		{
-			$ww = $this->getHeight() * $wh / $ww;
+			$ww = $this->getHeight() * $ww / $wh;
 			$wh = $this->getHeight();
 		}
 
 		$dx = (int) ( $this->getWidth() - $ww ) / 2;
 		$dy = (int) ( $this->getHeight() - $wh ) / 2;
 
-		$image->setImageColorspace( $this->image->getImageColorspace() );
-		$image->resizeImage( $ww, $wh, \Imagick::FILTER_CUBIC, 0.8 );
+		$wmimage = clone $this->wmimg;
+		$wmimage->setImageColorspace( $media->image->getImageColorspace() );
+		$wmimage->resizeImage( $ww, $wh, \Imagick::FILTER_CUBIC, 0.8 );
 
-		$this->image->compositeImage( $image, \Imagick::COMPOSITE_OVER, $dx, $dy );
+		$media->image->compositeImage( $wmimage, \Imagick::COMPOSITE_OVER, $dx, $dy );
 
-		$image->clear();
+		$wmimage->clear();
+
+		return $media;
 	}
 }
