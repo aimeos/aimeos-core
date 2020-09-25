@@ -23,7 +23,10 @@ class Imagick
 {
 	private $image;
 	private $options;
-	private $wmimg;
+
+	private static $wmimg;
+	private static $wmpath;
+	private static $wmimages;
 
 
 	/**
@@ -40,13 +43,14 @@ class Imagick
 
 		try
 		{
-			$this->image = new \Imagick( [] );
+			$this->image = new \Imagick();
 			$this->image->readImageBlob( $content );
 
-			if( isset( $options['image']['watermark'] ) )
+			if( isset( $options['image']['watermark'] ) && self::$wmpath !== $options['image']['watermark'] )
 			{
-				$this->wmimg = new \Imagick( [] );
-				$this->wmimg->readImage( $options['image']['watermark'] );
+					self::$wmimg = new \Imagick( realpath( $options['image']['watermark'] ) );
+					self::$wmpath = $options['image']['watermark'];
+					self::$wmimages = [];
 			}
 		}
 		catch( \Exception $e )
@@ -194,35 +198,44 @@ class Imagick
 	 */
 	protected function watermark( \Aimeos\MW\Media\Image\Iface $media )
 	{
-		if( $this->wmimg === null ) {
+		if( self::$wmimg === null ) {
 			return $media;
 		}
 
-		$ww = $this->wmimg->getImageHeight();
-		$wh = $this->wmimg->getImageWidth();
+		$wh = self::$wmimg->getImageHeight();
+		$ww = self::$wmimg->getImageWidth();
 
-		if( $ww > $this->getWidth() )
+		if( $ww > $media->getWidth() )
 		{
-			$wh = $this->getWidth() * $wh / $ww;
-			$ww = $this->getWidth();
+			$wh = $media->getWidth() / $ww * $wh;
+			$ww = $media->getWidth();
 		}
 
-		if( $wh > $this->getHeight() )
+		if( $wh > $media->getHeight() )
 		{
-			$ww = $this->getHeight() * $ww / $wh;
-			$wh = $this->getHeight();
+			$ww = $media->getHeight() / $wh * $ww;
+			$wh = $media->getHeight();
 		}
 
-		$dx = (int) ( $this->getWidth() - $ww ) / 2;
-		$dy = (int) ( $this->getHeight() - $wh ) / 2;
+		$ww = round( $ww );
+		$wh = round( $wh );
 
-		$wmimage = clone $this->wmimg;
+		$dx = round( ( $media->getWidth() - $ww ) / 2 );
+		$dy = round( ( $media->getHeight() - $wh ) / 2 );
+
+		if( !isset( self::$wmimages[$ww . 'x' . $wh] ) )
+		{
+			$wmimage = clone self::$wmimg;
+			$wmimage->resizeImage( $ww, $wh, \Imagick::FILTER_CUBIC, 0.8 );
+			self::$wmimages[$ww . 'x' . $wh] = $wmimage;
+		}
+		else
+		{
+			$wmimage = self::$wmimages[$ww . 'x' . $wh];
+		}
+
 		$wmimage->setImageColorspace( $media->image->getImageColorspace() );
-		$wmimage->resizeImage( $ww, $wh, \Imagick::FILTER_CUBIC, 0.8 );
-
 		$media->image->compositeImage( $wmimage, \Imagick::COMPOSITE_OVER, $dx, $dy );
-
-		$wmimage->clear();
 
 		return $media;
 	}
