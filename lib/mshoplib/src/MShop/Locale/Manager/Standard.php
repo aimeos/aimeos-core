@@ -124,6 +124,10 @@ class Standard
 	{
 		$siteItem = $this->getObject()->getSubManager( 'site' )->findItem( $site );
 
+		if( $siteItem->getStatus() < 1 ) {
+			throw new \Aimeos\MShop\Locale\Exception( 'Site not found' );
+		}
+
 		$siteId = $siteItem->getSiteId();
 		$sites = [Base::SITE_ONE => $siteId];
 

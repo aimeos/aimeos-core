@@ -210,7 +210,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'locale.site.code', 'unittest' );
 		$expr[] = $search->compare( '==', 'locale.site.label', 'Unit test site' );
 		$expr[] = $search->compare( '~=', 'locale.site.config', '{' );
-		$expr[] = $search->compare( '==', 'locale.site.status', 0 );
+		$expr[] = $search->compare( '==', 'locale.site.status', 1 );
 		$expr[] = $search->compare( '>=', 'locale.site.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'locale.site.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'locale.site.editor', '' );
