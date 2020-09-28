@@ -124,6 +124,10 @@ class Standard
 		$siteItem = $this->getObject()->getSubManager( 'site' )->findItem( $site );
 		$siteIds = array( $siteItem->getId() );
 
+		if( $siteItem->getStatus() < 1 ) {
+			throw new \Aimeos\MShop\Locale\Exception( 'Site not found' );
+		}
+
 		return $this->bootstrapBase( $site, $lang, $currency, $active, $siteItem, $siteIds, $siteIds, $bare );
 	}
 
