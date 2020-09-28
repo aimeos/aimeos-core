@@ -567,7 +567,7 @@ class Standard
 		// Try to find exact match
 		$search = $this->getObject()->createSearch( $active );
 
-		$expr = array( $search->compare( '==', 'locale.siteid', $sites[Base::SITE_ONE] ) );
+		$expr = array( $search->compare( '==', 'locale.siteid', $sites[Base::SITE_PATH] ?? $sites[Base::SITE_ONE] ) );
 
 		if( !empty( $lang ) )
 		{
@@ -632,7 +632,7 @@ class Standard
 		$search = $this->getObject()->createSearch( $active );
 
 		$expr = array(
-			$search->compare( '==', 'locale.siteid', $sites[Base::SITE_ONE] ),
+			$search->compare( '==', 'locale.siteid', $sites[Base::SITE_PATH] ?? $sites[Base::SITE_ONE] ),
 			$search->getConditions()
 		);
 
