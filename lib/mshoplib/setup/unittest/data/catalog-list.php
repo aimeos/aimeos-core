@@ -108,7 +108,7 @@ return array(
 		array( 'parentid' => 'catalog/new', 'type' => 'default', 'domain' => 'product', 'refid' => 'product/U:BUNDLE', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => [], 'pos' => 2, 'status' => 1 ),
 		array( 'parentid' => 'catalog/internet', 'type' => 'default', 'domain' => 'product', 'refid' => 'product/CNC', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => [], 'pos' => 0, 'status' => 1 ),
 
-		array( 'parentid' => 'catalog/internet', 'type' => 'default', 'domain' => 'product', 'refid' => 'product/IJKL', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => [], 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'catalog/internet', 'type' => 'default', 'domain' => 'product', 'refid' => 'product/ABCD', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => [], 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'catalog/internet', 'type' => 'default', 'domain' => 'product', 'refid' => 'product/MNOP', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => [], 'pos' => 1, 'status' => 1 ),
 		array( 'parentid' => 'catalog/internet', 'type' => 'default', 'domain' => 'product', 'refid' => 'product/QRST', 'start' => '2010-01-01 00:00:00', 'end' => '2099-01-01 00:00:00', 'config' => [], 'pos' => 2, 'status' => 1 ),
 
