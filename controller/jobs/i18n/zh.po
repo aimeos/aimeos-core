@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-07 11:14+0200\n"
-"PO-Revision-Date: 2020-07-07 09:17+0000\n"
-"Last-Translator: Bruce Liu <zcon.bruce@gmail.com>\n"
+"POT-Creation-Date: 2020-10-05 09:22+0200\n"
+"PO-Revision-Date: 2020-10-05 07:29+0000\n"
+"Last-Translator: stevechen <steve.stevechen@gmail.com>\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -402,6 +402,10 @@ msgid "Supplier import XML"
 msgstr ""
 
 msgid "Terminates expired subscriptions"
+msgstr ""
+
+#, php-format
+msgid "Unable to add current address for customer with ID \"%1$s\""
 msgstr ""
 
 #, php-format

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-07 11:14+0200\n"
-"PO-Revision-Date: 2020-07-20 21:24+0000\n"
+"POT-Creation-Date: 2020-10-05 09:22+0200\n"
+"PO-Revision-Date: 2020-10-05 07:29+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -401,6 +401,10 @@ msgstr "Tedarikçileri XML olarak içe aktarma"
 
 msgid "Terminates expired subscriptions"
 msgstr "Süresi dolan abonelikleri sonlandırır"
+
+#, php-format
+msgid "Unable to add current address for customer with ID \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Unable to begin subscription with ID \"%1$s\": %2$s"

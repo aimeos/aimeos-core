@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-07 11:14+0200\n"
-"PO-Revision-Date: 2020-07-07 09:17+0000\n"
+"POT-Creation-Date: 2020-10-05 09:22+0200\n"
+"PO-Revision-Date: 2020-10-05 08:16+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -403,6 +403,10 @@ msgstr "Lieferantenimport XML"
 
 msgid "Terminates expired subscriptions"
 msgstr "Beendet abgelaufene Abonnements"
+
+#, php-format
+msgid "Unable to add current address for customer with ID \"%1$s\""
+msgstr "Die Adresse des Kunden \"%1$s\" konnte nicht gespeichert werden"
 
 #, php-format
 msgid "Unable to begin subscription with ID \"%1$s\": %2$s"
