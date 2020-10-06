@@ -275,7 +275,7 @@ class MShopConfigDocTask extends Task
 			throw new BuildException( sprintf( 'Unable to get file content from "%1$s"', $filename ) );
 		}
 
-		if( preg_match_all( '#/\*\*[\t ]+([a-zA-Z0-9/\-_]+)[\t ]*$.*\*/#smuU', $text, $matches ) === false ) {
+		if( preg_match_all( '#/\*\*[\t ]+([a-zA-Z0-9/\-\._]+)[\t ]*$.*\*/#smuU', $text, $matches ) === false ) {
 			throw new BuildException( 'Invalid extract pattern' );
 		}
 
