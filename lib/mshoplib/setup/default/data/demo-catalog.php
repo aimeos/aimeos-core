@@ -49,12 +49,22 @@ return array(
 			'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),
+		array(
+			'text.label' => 'Demo meta-description',
+			'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+			'text.type' => 'long', 'text.languageid' => null, 'text.status' => 1,
+			'product.lists.type' => 'default', 'product.lists.position' => 6
+		),
 	),
 	'media' => array(
 		array(
 			'label' => 'Demo: Home stage image', 'mimetype' => 'image/png',
-			'url' => 'https://demo.aimeos.org/media/stage.jpg',
-			'preview' => 'https://demo.aimeos.org/media/stage.jpg',
+			'url' => 'https://demo.aimeos.org/media/stage-big.jpg',
+			'media.previews' => [
+				360 => 'https://demo.aimeos.org/media/stage.jpg',
+				720 => 'https://demo.aimeos.org/media/stage-med.jpg',
+				1200 => 'https://demo.aimeos.org/media/stage-big.jpg',
+			],
 			'type' => 'stage', 'languageid' => null, 'status' => 1,
 			'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1

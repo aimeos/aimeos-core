@@ -48,6 +48,12 @@ return array(
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			),
+			array(
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'long', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			),
 		),
 		'price' => array(
 			array(
@@ -67,7 +73,11 @@ return array(
 			array(
 				'media.label' => 'Demo: Article 1.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/1-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/1.jpg', 250 => 'https://demo.aimeos.org/media/1-big.jpg'],
+				'media.previews' => [
+					240 => 'https://demo.aimeos.org/media/1.jpg',
+					720 => 'https://demo.aimeos.org/media/1-med.jpg',
+					1200 => 'https://demo.aimeos.org/media/1-big.jpg',
+				],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
 				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
@@ -75,7 +85,11 @@ return array(
 			array(
 				'media.label' => 'Demo: Article 2.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/2-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/2.jpg', 250 => 'https://demo.aimeos.org/media/2-big.jpg'],
+				'media.previews' => [
+					240 => 'https://demo.aimeos.org/media/2.jpg',
+					720 => 'https://demo.aimeos.org/media/2-med.jpg',
+					1200 => 'https://demo.aimeos.org/media/2-big.jpg',
+				],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
 				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
@@ -83,7 +97,11 @@ return array(
 			array(
 				'media.label' => 'Demo: Article 3.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/3-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/3.jpg', 250 => 'https://demo.aimeos.org/media/3-big.jpg'],
+				'media.previews' => [
+					240 => 'https://demo.aimeos.org/media/3.jpg',
+					720 => 'https://demo.aimeos.org/media/3-med.jpg',
+					1200 => 'https://demo.aimeos.org/media/3-big.jpg',
+				],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2, 'product.lists.config' => [],
 				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
@@ -91,7 +109,11 @@ return array(
 			array(
 				'media.label' => 'Demo: Article 4.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/4-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/4.jpg', 250 => 'https://demo.aimeos.org/media/4-big.jpg'],
+				'media.previews' => [
+					240 => 'https://demo.aimeos.org/media/4.jpg',
+					720 => 'https://demo.aimeos.org/media/4-med.jpg',
+					1200 => 'https://demo.aimeos.org/media/4-big.jpg',
+				],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3, 'product.lists.config' => [],
 				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
@@ -540,6 +562,12 @@ return array(
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			),
+			array(
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'long', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			),
 		),
 		'price' => array(
 			array(
@@ -583,6 +611,11 @@ return array(
 			array(
 				'media.label' => 'Demo: Selection article 1.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/1-big.jpg',
+				'media.previews' => [
+					240 => 'https://demo.aimeos.org/media/4.jpg',
+					720 => 'https://demo.aimeos.org/media/4-med.jpg',
+					1200 => 'https://demo.aimeos.org/media/4-big.jpg',
+				],
 				'media.previews' => [1 => 'https://demo.aimeos.org/media/1.jpg', 250 => 'https://demo.aimeos.org/media/1-big.jpg'],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3,
@@ -590,21 +623,33 @@ return array(
 			array(
 				'media.label' => 'Demo: Selection article 2.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/2-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/2.jpg', 250 => 'https://demo.aimeos.org/media/2-big.jpg'],
+				'media.previews' => [
+					240 => 'https://demo.aimeos.org/media/2.jpg',
+					720 => 'https://demo.aimeos.org/media/2-med.jpg',
+					1200 => 'https://demo.aimeos.org/media/3-big.jpg',
+				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0,
 			),
 			array(
 				'media.label' => 'Demo: Selection article 3.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/3-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/3.jpg', 250 => 'https://demo.aimeos.org/media/3-big.jpg'],
+				'media.previews' => [
+					240 => 'https://demo.aimeos.org/media/3.jpg',
+					720 => 'https://demo.aimeos.org/media/3-med.jpg',
+					1200 => 'https://demo.aimeos.org/media/3-big.jpg',
+				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1,
 			),
 			array(
 				'media.label' => 'Demo: Selection article 4.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/4-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/4.jpg', 250 => 'https://demo.aimeos.org/media/4-big.jpg'],
+				'media.previews' => [
+					240 => 'https://demo.aimeos.org/media/4.jpg',
+					720 => 'https://demo.aimeos.org/media/4-med.jpg',
+					1200 => 'https://demo.aimeos.org/media/4-big.jpg',
+				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2,
 			),
@@ -679,6 +724,12 @@ return array(
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			),
+			array(
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'long', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			),
 		),
 		'price' => array(
 			array(
@@ -722,28 +773,44 @@ return array(
 			array(
 				'media.label' => 'Demo: Bundle article 1.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/1-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/1.jpg', 250 => 'https://demo.aimeos.org/media/1-big.jpg'],
+				'media.previews' => [
+					240 => 'https://demo.aimeos.org/media/1.jpg',
+					720 => 'https://demo.aimeos.org/media/1-med.jpg',
+					1200 => 'https://demo.aimeos.org/media/1-big.jpg',
+				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2,
 			),
 			array(
 				'media.label' => 'Demo: Bundle article 2.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/2-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/2.jpg', 250 => 'https://demo.aimeos.org/media/2-big.jpg'],
+				'media.previews' => [
+					240 => 'https://demo.aimeos.org/media/2.jpg',
+					720 => 'https://demo.aimeos.org/media/2-med.jpg',
+					1200 => 'https://demo.aimeos.org/media/2-big.jpg',
+				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3,
 			),
 			array(
 				'media.label' => 'Demo: Bundle article 3.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/3-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/3.jpg', 250 => 'https://demo.aimeos.org/media/3-big.jpg'],
+				'media.previews' => [
+					240 => 'https://demo.aimeos.org/media/3.jpg',
+					720 => 'https://demo.aimeos.org/media/3-med.jpg',
+					1200 => 'https://demo.aimeos.org/media/3-big.jpg',
+				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0,
 			),
 			array(
 				'media.label' => 'Demo: Bundle article 4.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/4-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/4.jpg', 250 => 'https://demo.aimeos.org/media/4-big.jpg'],
+				'media.previews' => [
+					240 => 'https://demo.aimeos.org/media/4.jpg',
+					720 => 'https://demo.aimeos.org/media/4-med.jpg',
+					1200 => 'https://demo.aimeos.org/media/4-big.jpg',
+				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1,
 			),
@@ -894,6 +961,12 @@ return array(
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			),
+			array(
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'long', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			),
 		),
 		'price' => array(
 			array(
@@ -953,7 +1026,11 @@ return array(
 			array(
 				'media.label' => 'Demo: Voucher 0.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://demo.aimeos.org/media/0-voucher-big.jpg',
-				'media.previews' => [1 => 'https://demo.aimeos.org/media/0-voucher.jpg', 250 => 'https://demo.aimeos.org/media/0-voucher-big.jpg'],
+				'media.previews' => [
+					240 => 'https://demo.aimeos.org/media/0-voucher.jpg',
+					720 => 'https://demo.aimeos.org/media/0-voucher-med.jpg',
+					1200 => 'https://demo.aimeos.org/media/0-voucher-big.jpg',
+				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0,
 			),
