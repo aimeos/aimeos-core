@@ -60,7 +60,7 @@ return array(
 		array(
 			'label' => 'Demo: Home stage image', 'mimetype' => 'image/png',
 			'url' => 'https://demo.aimeos.org/media/stage-big.jpg',
-			'media.previews' => [
+			'preview' => [
 				360 => 'https://demo.aimeos.org/media/stage.jpg',
 				720 => 'https://demo.aimeos.org/media/stage-med.jpg',
 				1200 => 'https://demo.aimeos.org/media/stage-big.jpg',
