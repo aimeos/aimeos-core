@@ -50,10 +50,11 @@ return array(
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),
 		array(
-			'text.label' => 'Demo meta-description',
-			'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-			'text.type' => 'long', 'text.languageid' => null, 'text.status' => 1,
-			'product.lists.type' => 'default', 'product.lists.position' => 6
+			'label' => 'Demo meta-description',
+			'content' => 'Meta descriptions are important because they are shown in the search engine result page',
+			'type' => 'long', 'languageid' => null, 'status' => 1,
+			'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
+			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),
 	),
 	'media' => array(
