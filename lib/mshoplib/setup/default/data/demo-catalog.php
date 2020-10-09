@@ -52,7 +52,7 @@ return array(
 		array(
 			'label' => 'Demo meta-description',
 			'content' => 'Meta descriptions are important because they are shown in the search engine result page',
-			'type' => 'long', 'languageid' => null, 'status' => 1,
+			'type' => 'meta-description', 'languageid' => null, 'status' => 1,
 			'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),

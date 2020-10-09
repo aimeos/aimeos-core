@@ -51,7 +51,7 @@ return array(
 			array(
 				'text.label' => 'Demo meta-description',
 				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'long', 'text.languageid' => null, 'text.status' => 1,
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 6
 			),
 		),
@@ -565,7 +565,7 @@ return array(
 			array(
 				'text.label' => 'Demo meta-description',
 				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'long', 'text.languageid' => null, 'text.status' => 1,
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 6
 			),
 		),
@@ -727,7 +727,7 @@ return array(
 			array(
 				'text.label' => 'Demo meta-description',
 				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'long', 'text.languageid' => null, 'text.status' => 1,
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 6
 			),
 		),
@@ -964,7 +964,7 @@ return array(
 			array(
 				'text.label' => 'Demo meta-description',
 				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'long', 'text.languageid' => null, 'text.status' => 1,
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 6
 			),
 		),
