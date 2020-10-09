@@ -67,7 +67,7 @@ trait Traits
 	 * Adds the configured decorators to the given manager object.
 	 *
 	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
-	 * @param string $managerpath Manager sub-names separated by slashes, e.g. "list/type"
+	 * @param string $managerpath Manager sub-names separated by slashes, e.g. "lists/type"
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
@@ -104,7 +104,7 @@ trait Traits
 	/**
 	 * Transforms the manager path to the appropriate class names.
 	 *
-	 * @param string $manager Path of manager names, e.g. "list/type"
+	 * @param string $manager Path of manager names, e.g. "lists/type"
 	 * @return string Class names, e.g. "List_Type"
 	 */
 	protected function createSubNames( string $manager ) : string

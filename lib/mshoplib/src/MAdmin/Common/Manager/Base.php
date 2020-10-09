@@ -24,7 +24,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Adds the configured decorators to the given manager object.
 	 *
 	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
-	 * @param string $managerpath Manager sub-names separated by slashes, e.g. "list/type"
+	 * @param string $managerpath Manager sub-names separated by slashes, e.g. "lists/type"
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager with decorators added
 	 */
