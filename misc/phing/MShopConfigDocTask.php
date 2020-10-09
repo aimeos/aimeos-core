@@ -63,6 +63,7 @@ class MShopConfigDocTask extends Task
 		}
 
 		$options = $this->sanitize( $this->extract( $options ) );
+
 		ksort( $options );
 		$this->writeFiles( $this->createContent( $options ) );
 
@@ -269,7 +270,7 @@ class MShopConfigDocTask extends Task
 	 */
 	protected function extractFile( $filename, array &$options )
 	{
-		$matches = $result = array();
+		$matches = array();
 
 		if( ( $text = file_get_contents( $filename ) ) === false ) {
 			throw new BuildException( sprintf( 'Unable to get file content from "%1$s"', $filename ) );
@@ -325,8 +326,6 @@ class MShopConfigDocTask extends Task
 				$options[$key]['long'] = str_replace( '\\/', '/', $desc );
 			}
 		}
-
-		return $result;
 	}
 
 
