@@ -105,11 +105,12 @@ abstract class Base
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param bool $default Add default criteria
+	 * @param bool $site TRUE to add site criteria to show orders with available products only
 	 * @return \Aimeos\MW\Criteria\Iface Criteria object
 	 */
-	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	public function createSearch( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
-		return $this->manager->createSearch( $default );
+		return $this->manager->createSearch( $default, $site );
 	}
 
 
@@ -156,11 +157,12 @@ abstract class Base
 	 * Creates a filter object.
 	 *
 	 * @param bool $default Add default criteria
+	 * @param bool $site TRUE to add site criteria to show orders with available products only
 	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function filter( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
-		return $this->manager->filter( $default );
+		return $this->manager->filter( $default, $site );
 	}
 
 
