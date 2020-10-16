@@ -3,11 +3,11 @@
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2014
- * @copyright Aimeos (aimeos.org), 2015-2020
+ * @copyright Aimeos (aimeos.org], 2015-2020
  */
 
 return array(
-	'code' => 'home', 'label' => 'Home', 'config' => [], 'status' => 1,
+	'catalog.code' => 'home', 'catalog.label' => 'Home', 'catalog.config' => [], 'catalog.status' => 1,
 	'text' => array(
 		array(
 			'label' => 'Demo name/de: Start', 'content' => 'Start',
@@ -75,6 +75,11 @@ return array(
 		array(
 			'code' => 'demo-article',
 			'list-type' => 'promotion', 'list-position' => 0, 'list-config' => [],
+			'list-start' => null, 'list-end' => null, 'list-status' => 1
+		),
+		array(
+			'code' => 'demo-voucher',
+			'list-type' => 'promotion', 'list-position' => 1, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),
 		array(
