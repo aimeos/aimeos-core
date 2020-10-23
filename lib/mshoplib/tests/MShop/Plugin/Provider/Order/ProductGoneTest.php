@@ -30,7 +30,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop::create( $this->context, 'order/base' );
 		$search = $manager->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'order.base.price', 672.00 ) );
-		$items = $manager->searchItems( $search )->toArray();
+		$items = $manager->search( $search )->toArray();
 
 		if( ( $this->order = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No order base item found.' );

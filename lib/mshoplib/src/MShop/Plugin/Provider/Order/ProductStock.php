@@ -167,6 +167,6 @@ class ProductStock
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		return $stockManager->searchItems( $search );
+		return $stockManager->search( $search );
 	}
 }

@@ -27,7 +27,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.code', 'paypalexpress' ) );
 
-		$serviceItems = $serviceManager->searchItems( $search )->toArray();
+		$serviceItems = $serviceManager->search( $search )->toArray();
 
 		if( ( $this->serviceItem = reset( $serviceItems ) ) === false ) {
 			throw new \RuntimeException( 'No paypalexpress service item available' );
@@ -47,7 +47,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED )
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$orderItems = $orderManager->searchItems( $search )->toArray();
+		$orderItems = $orderManager->search( $search )->toArray();
 
 		if( ( $this->order = reset( $orderItems ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::TYPE_WEB ) );

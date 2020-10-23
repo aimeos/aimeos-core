@@ -124,7 +124,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 			{
 				$search = $localeSiteManager->createSearch();
 				$search->setConditions( $search->compare( '==', 'locale.site.code', $dataset['code'] ) );
-				$result = $localeSiteManager->searchItems( $search );
+				$result = $localeSiteManager->search( $search );
 
 				if( ( $item = $result->first() ) === null ) {
 					throw new \RuntimeException( sprintf( 'No site for code "%1$s" available', $dataset['code'] ) );
@@ -151,7 +151,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding data for MShop locale currencies', 1 );
 
 		$currencyManager = $localeManager->getSubManager( 'currency', 'Standard' );
-		$items = $currencyManager->searchItems( $currencyManager->createSearch()->setSlice( 0, 0x7fffffff ) );
+		$items = $currencyManager->search( $currencyManager->createSearch()->setSlice( 0, 0x7fffffff ) );
 
 		$num = $total = 0;
 
@@ -188,7 +188,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding data for MShop locale languages', 1 );
 
 		$languageManager = $localeManager->getSubManager( 'language', 'Standard' );
-		$items = $languageManager->searchItems( $languageManager->createSearch()->setSlice( 0, 0x7fffffff ) );
+		$items = $languageManager->search( $languageManager->createSearch()->setSlice( 0, 0x7fffffff ) );
 
 		$num = $total = 0;
 

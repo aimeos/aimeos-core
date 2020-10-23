@@ -71,7 +71,7 @@ class ProductGone
 			$search->compare( '==', 'product.id', $productIds ),
 			$search->getConditions()
 		] ) );
-		$checkItems = $productManager->searchItems( $search );
+		$checkItems = $productManager->search( $search );
 
 		foreach( $order->getProducts() as $position => $orderProduct )
 		{

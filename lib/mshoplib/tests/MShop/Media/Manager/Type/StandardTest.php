@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
@@ -91,7 +91,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( [$search->sort( '-', 'media.type.position' )] );
 		$search->setSlice( 0, 5 );
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 5, count( $results ) );
 		$this->assertEquals( 8, $total );
 
@@ -109,7 +109,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'media.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No item found' );
@@ -125,7 +125,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$conditions = $search->compare( '==', 'media.type.editor', $this->editor );
 		$search->setCOnditions( $conditions );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No type item found' );

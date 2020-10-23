@@ -51,7 +51,7 @@ trait Traits
 			$search->setConditions( $search->compare( '==', $domain . '.address.parentid', $parentIds ) );
 			$search->setSortations( [$search->sort( '+', $domain . '.address.position' )] );
 
-			foreach( $manager->searchItems( $search ) as $id => $addrItem ) {
+			foreach( $manager->search( $search ) as $id => $addrItem ) {
 				$list[$addrItem->getParentId()][$id] = $addrItem;
 			}
 		}

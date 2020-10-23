@@ -189,7 +189,7 @@ class ProductPrice
 			$search->getConditions()
 		] ) );
 
-		return $attrManager->searchItems( $search, ['price'] );
+		return $attrManager->search( $search, ['price'] );
 	}
 
 
@@ -213,7 +213,7 @@ class ProductPrice
 			$search->getConditions(),
 		] ) );
 
-		return $productManager->searchItems( $search, ['price', 'attribute' => ['custom']] )->col( null, 'product.code' );
+		return $productManager->search( $search, ['price', 'attribute' => ['custom']] )->col( null, 'product.code' );
 	}
 
 

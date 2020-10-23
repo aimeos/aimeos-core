@@ -108,7 +108,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$expected = $this->object->searchItems( $search, $domains )->first();
+		$expected = $this->object->search( $search, $domains )->first();
 
 		$actual = $this->object->getItem( $expected->getId(), $domains );
 		$payAddr = $actual->getPaymentAddress();
@@ -330,7 +330,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search )->toArray();
+		$result = $this->object->search( $search )->toArray();
 		$this->assertEquals( 1, count( $result ) );
 	}
 
@@ -342,7 +342,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setSlice( 0, 2 );
 
 		$total = 0;
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
@@ -361,7 +361,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 2, count( $this->object->searchItems( $search )->toArray() ) );
+		$this->assertEquals( 2, count( $this->object->search( $search )->toArray() ) );
 	}
 
 
@@ -370,7 +370,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'test@example.com' ) );
 
-		$item = $this->object->searchItems( $search, ['customer/address', 'text'] )->first();
+		$item = $this->object->search( $search, ['customer/address', 'text'] )->first();
 
 		$this->assertEquals( 1, count( $item->getRefItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 1, count( $item->getAddressItems() ) );

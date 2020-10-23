@@ -52,7 +52,7 @@ class Supplier
 		$search = $manager->createSearch( true );
 		$search->setSortations( [$search->sort( '+', 'supplier.label' )] );
 
-		foreach( $manager->searchItems( $search, ['supplier/address'] ) as $item )
+		foreach( $manager->search( $search, ['supplier/address'] ) as $item )
 		{
 			$addresses = $item->getAddressItems();
 

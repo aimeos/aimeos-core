@@ -475,7 +475,7 @@ abstract class DBBase
 		$prodSearch = $manager->createSearch();
 		$prodSearch->setConditions( $prodSearch->compare( '==', 'product.id', $ids ) );
 		$prodSearch->setSlice( 0, $search->getSliceSize() );
-		$items = $manager->searchItems( $prodSearch, $ref );
+		$items = $manager->search( $prodSearch, $ref );
 
 		foreach( $ids as $id )
 		{

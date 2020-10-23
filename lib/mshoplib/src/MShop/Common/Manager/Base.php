@@ -210,7 +210,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 */
 	public function search( \Aimeos\MW\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		return $this->getObject()->searchItems( $filter, $ref, $total );
+		return $this->getObject()->search( $filter, $ref, $total );
 	}
 
 
@@ -618,7 +618,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
-		if( ( $item = $this->getObject()->searchItems( $criteria, $ref )->first() ) ) {
+		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
 			return $item;
 		}
 
@@ -673,7 +673,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		];
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
-		if( ( $item = $this->getObject()->searchItems( $criteria, $ref )->first() ) ) {
+		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
 			return $item;
 		}
 

@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \Aimeos\MShop\Order\Exception( 'No order base item found' );
@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$item = $this->object->searchItems( $search, ['order/base/product'] )
+		$item = $this->object->search( $search, ['order/base/product'] )
 			->first( new \RuntimeException( 'No order base item found' ) );
 
 
@@ -350,7 +350,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
-		$result = $this->object->searchItems( $search, $ref, $total );
+		$result = $this->object->search( $search, $ref, $total );
 
 		$this->assertEquals( 1, $total );
 		$this->assertEquals( 1, $result->count() );
@@ -369,7 +369,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
 		$search->setConditions( $search->compare( '!=', 'order.base.customerid', '' ) );
-		$result = $this->object->searchItems( $search, ['customer'] );
+		$result = $this->object->search( $search, ['customer'] );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertNotNull( $result->first()->getCustomerItem() );
@@ -386,7 +386,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
 		$total = 0;
-		$items = $this->object->searchItems( $search, [], $total );
+		$items = $this->object->search( $search, [], $total );
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertGreaterThanOrEqual( 4, $total );
 
@@ -399,7 +399,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsDefault()
 	{
 		$search = $this->object->createSearch( true );
-		$items = $this->object->searchItems( $search );
+		$items = $this->object->search( $search );
 
 		$this->assertEquals( 0, count( $items ) );
 	}
@@ -729,7 +729,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
 		$expr[] = $search->compare( '==', 'order.base.price', 4800.00 );
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) == false ) {
 			throw new \RuntimeException( 'No order found' );
@@ -838,7 +838,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.price', '53.50' ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No order found' );
@@ -884,7 +884,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.price', 53.50 );
 		$expr[] = $search->compare( '==', 'order.base.editor', $this->editor );
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No order found' );

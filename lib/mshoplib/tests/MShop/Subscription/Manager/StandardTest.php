@@ -79,7 +79,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'subscription.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No subscription found in mshop_subscription with status "%1$s"', 1 ) );
@@ -98,7 +98,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'subscription.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No subscription item found.' );
@@ -204,7 +204,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, [], $total )->toArray();
+		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -216,7 +216,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'subscription.editor', $this->editor ) );
-		$items = $this->object->searchItems( $search, [], $total )->toArray();
+		$items = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 2, $total );
@@ -232,7 +232,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'subscription.dateend', '2010-01-01' ) );
-		$item = $this->object->searchItems( $search, ['order/base', 'order/base/product'], $total )->first();
+		$item = $this->object->search( $search, ['order/base', 'order/base/product'], $total )->first();
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $item->getBaseItem() );
 		$this->assertEquals( 4, count( $item->getBaseItem()->getProducts() ) );

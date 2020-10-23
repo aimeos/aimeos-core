@@ -162,7 +162,7 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'locale.site.level', 0 ) );
 
-		foreach( $manager->searchItems( $search ) as $siteid => $siteItem ) {
+		foreach( $manager->search( $search ) as $siteid => $siteItem ) {
 			$this->map( $manager->getTree( $siteid ), $map, '' );
 		}
 

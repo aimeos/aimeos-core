@@ -120,7 +120,7 @@ class Voucher
 		];
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		if( $manager->searchItems( $search )->isEmpty() )
+		if( $manager->search( $search )->isEmpty() )
 		{
 			$msg = $context->getI18n()->dt( 'mshop', 'No bought voucher for code "%1$s" available' );
 			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $this->getCode() ) );
@@ -146,7 +146,7 @@ class Voucher
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$list = [];
-		foreach( $manager->searchItems( $search ) as $orderItem ) {
+		foreach( $manager->search( $search ) as $orderItem ) {
 			$list[] = $orderItem->getBaseId();
 		}
 
@@ -195,7 +195,7 @@ class Voucher
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', $code ) );
 
 		$baseIds = $prodIds = [];
-		foreach( $manager->searchItems( $search ) as $orderCouponItem )
+		foreach( $manager->search( $search ) as $orderCouponItem )
 		{
 			$prodIds[] = $orderCouponItem->getProductId();
 			$baseIds[] = $orderCouponItem->getBaseId();
@@ -214,7 +214,7 @@ class Voucher
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$rebate = 0;
-		foreach( $manager->searchItems( $search ) as $orderProductItem ) {
+		foreach( $manager->search( $search ) as $orderProductItem ) {
 			$rebate += $orderProductItem->getPrice()->getRebate();
 		}
 

@@ -125,7 +125,7 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ) );
-		$result = $manager->searchItems( $search )->toArray();
+		$result = $manager->search( $search )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new \RuntimeException( 'No order item found' );

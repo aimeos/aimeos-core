@@ -351,7 +351,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array_keys( $codes ) ) );
-		$products = $productManager->searchItems( $search );
+		$products = $productManager->search( $search );
 
 		foreach( $products as $product ) {
 			$codes[$product->getCode()] = $product->getId();
@@ -389,7 +389,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock/type' );
 
 		$types = [];
-		foreach( $manager->searchItems( $manager->createSearch() ) as $id => $item ) {
+		foreach( $manager->search( $manager->createSearch() ) as $id => $item ) {
 			$types[$item->getCode()] = $id;
 		}
 
@@ -424,7 +424,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
 
-			foreach( $manager->searchItems( $manager->createSearch() ) as $item ) {
+			foreach( $manager->search( $manager->createSearch() ) as $item ) {
 				$this->attributes[$item->getDomain()][$item->getType()][$item->getCode()] = $item;
 			}
 		}
@@ -470,7 +470,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$ids = $manager->searchItems( $search )->keys()->toArray();
+		$ids = $manager->search( $search )->keys()->toArray();
 		$manager->deleteItems( $ids );
 
 
@@ -482,7 +482,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$listManager->deleteItems( $listManager->searchItems( $search )->toArray() );
+		$listManager->deleteItems( $listManager->search( $search )->toArray() );
 	}
 
 
@@ -513,7 +513,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		do
 		{
 			$refIds = $listIds = $map = [];
-			$result = $listManager->searchItems( $search );
+			$result = $listManager->search( $search );
 
 			foreach( $result as $id => $listItem )
 			{
@@ -524,7 +524,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 
 			$search = $manager->createSearch();
 			$search->setConditions( $search->compare( '==', $refdomain . '.id', $refIds ) );
-			$ids = $manager->searchItems( $search )->keys()->toArray();
+			$ids = $manager->search( $search )->keys()->toArray();
 
 			foreach( array_diff( $refIds, $ids ) as $refId ) {
 				$listIds = array_merge( $listIds, $map[$refId] );
@@ -542,7 +542,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', $refdomain . '.label', 'Demo' ) );
-		$ids = $manager->searchItems( $search )->keys()->toArray();
+		$ids = $manager->search( $search )->keys()->toArray();
 
 		$search = $listManager->createSearch();
 		$expr = array(
@@ -552,7 +552,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$listManager->deleteItems( $listManager->searchItems( $search )->toArray() );
+		$listManager->deleteItems( $listManager->search( $search )->toArray() );
 	}
 
 

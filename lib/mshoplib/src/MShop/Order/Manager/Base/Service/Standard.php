@@ -763,7 +763,7 @@ class Standard
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Order\Item\Base\Service\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$context = $this->getContext();
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
@@ -944,7 +944,7 @@ class Standard
 			$manager = \Aimeos\MShop::create( $context, 'service' );
 			$search = $manager->createSearch()->setSlice( 0, count( $ids ) );
 			$search->setConditions( $search->compare( '==', 'service.id', array_filter( $ids ) ) );
-			$servItems = $manager->searchItems( $search, $ref );
+			$servItems = $manager->search( $search, $ref );
 		}
 
 		$attributes = $this->getAttributeItems( array_keys( $map ) );
@@ -993,7 +993,7 @@ class Standard
 		$search->setConditions( $search->compare( '==', 'order.base.service.attribute.parentid', $ids ) );
 
 		$result = [];
-		foreach( $manager->searchItems( $search ) as $item ) {
+		foreach( $manager->search( $search ) as $item ) {
 			$result[$item->getParentId()][$item->getId()] = $item;
 		}
 

@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, [], $total )->toArray();
+		$result = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $result ) );
 
 		$conditions = array(
@@ -121,7 +121,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
 		$total = 0;
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );
@@ -140,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.service.attribute.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( !( $item = reset( $results ) ) ) {
 			throw new \RuntimeException( 'empty results' );
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.service.attribute.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$orderItems = $this->object->searchItems( $search )->toArray();
+		$orderItems = $this->object->search( $search )->toArray();
 
 		if( !( $item = reset( $orderItems ) ) ) {
 			throw new \RuntimeException( 'empty search result' );

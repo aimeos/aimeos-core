@@ -508,7 +508,7 @@ class Standard
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		/** mshop/index/manager/supplier/standard/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
@@ -641,7 +641,7 @@ class Standard
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		foreach( $listManager->searchItems( $search ) as $listItem ) {
+		foreach( $listManager->search( $search ) as $listItem ) {
 			$listItems[$listItem->getRefId()][] = $listItem;
 		}
 

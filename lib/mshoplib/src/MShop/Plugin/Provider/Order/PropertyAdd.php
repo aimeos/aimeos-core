@@ -194,6 +194,6 @@ class PropertyAdd
 		];
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		return $manager->searchItems( $search, ['product/property'] );
+		return $manager->search( $search, ['product/property'] );
 	}
 }

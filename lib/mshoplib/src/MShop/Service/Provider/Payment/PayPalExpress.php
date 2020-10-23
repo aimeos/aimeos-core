@@ -578,7 +578,7 @@ class PayPalExpress
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		if( !$attrManager->searchItems( $search )->isEmpty() )
+		if( !$attrManager->search( $search )->isEmpty() )
 		{
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'PayPal Express: Duplicate transaction with ID "%1$s" and status "%2$s"' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $params['txn_id'], $params['txn_status'] ) );

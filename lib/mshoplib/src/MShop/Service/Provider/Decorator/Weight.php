@@ -153,7 +153,7 @@ class Weight
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		foreach( $manager->searchItems( $search, ['product/property'] ) as $product )
+		foreach( $manager->search( $search, ['product/property'] ) as $product )
 		{
 			foreach( $product->getPropertyItems( 'package-weight' ) as $property ) {
 				$weight += ( (float) $property->getValue() ) * $prodMap[$product->getCode()];

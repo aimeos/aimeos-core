@@ -128,7 +128,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $orderBase->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.price', $orderBasePrices ) );
 
-		foreach( $orderBase->searchItems( $search ) as $orderBaseItem ) {
+		foreach( $orderBase->search( $search ) as $orderBaseItem ) {
 			$orderBaseIds[$orderBaseItem->getPrice()->getValue()] = $orderBaseItem->getId();
 		}
 
@@ -141,7 +141,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		foreach( $orderBaseProd->searchItems( $search ) as $ordProd ) {
+		foreach( $orderBaseProd->search( $search ) as $ordProd ) {
 			$ordProdIds[$ordProd->getProductCode() . '/' . $ordProd->getQuantity() . '/' . $ordProd->getPosition()] = $ordProd->getId();
 		}
 

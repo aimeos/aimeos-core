@@ -81,7 +81,7 @@ interface Iface
 	 * </code>
 	 *
 	 * The problem is to set the value of $start to the number of returned records.
-	 * That's correct for calls to searchItems() but grouping records with
+	 * That's correct for calls to search() but grouping records with
 	 * aggregate() is different! The result of the example code would be:
 	 *
 	 * <code>

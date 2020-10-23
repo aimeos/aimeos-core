@@ -153,7 +153,7 @@ class TaxratesTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		if( ( $item = $manager->searchItems( $search )->first() ) === null ) {
+		if( ( $item = $manager->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No ordered product found' );
 		}
 

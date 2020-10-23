@@ -661,7 +661,7 @@ class Standard
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Order\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$context = $this->getContext();
 
@@ -853,7 +853,7 @@ class Standard
 			$manager = $this->getObject()->getSubManager( 'base' );
 			$search = $manager->createSearch()->setSlice( 0, count( $ids ) );
 			$search->setConditions( $search->compare( '==', 'order.base.id', $ids ) );
-			$baseItems = $manager->searchItems( $search, $ref );
+			$baseItems = $manager->search( $search, $ref );
 		}
 
 		foreach( $map as $id => $row )

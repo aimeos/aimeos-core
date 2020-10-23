@@ -31,7 +31,7 @@ class Depth
 	 * @param int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = map();
 
@@ -42,7 +42,7 @@ class Depth
 			 *
 			 * Searching for items also fetches the associated items referenced in the
 			 * list tables if the domain names are passed to the second parameter of e.g. the
-			 * searchItems() method. To avoid infinite recursion because two items reference
+			 * search() method. To avoid infinite recursion because two items reference
 			 * each other, the maximum level must be limited.
 			 *
 			 * The default setting (two levels) means that retrieving a product item with
@@ -56,7 +56,7 @@ class Depth
 			$max = $this->getContext()->getConfig()->get( 'mshop/common/manager/maxdepth', 2 );
 
 			if( $this->level++ < $max ) {
-				$items = $this->getManager()->searchItems( $search, $ref, $total );
+				$items = $this->getManager()->search( $search, $ref, $total );
 			}
 
 			$this->level--;

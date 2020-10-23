@@ -75,7 +75,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrItem->getId() ) );
-		$result = $this->object->searchItems( $search )->toArray();
+		$result = $this->object->search( $search )->toArray();
 
 
 		$this->object->deleteItem( $product->getId() );
@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrItem->getId() ) );
-		$result2 = $this->object->searchItems( $search )->toArray();
+		$result2 = $this->object->search( $search )->toArray();
 
 
 		$this->assertContains( $product->getId(), array_keys( $result ) );
@@ -112,7 +112,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $id ) );
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
 	}
@@ -122,7 +122,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '!=', 'index.attribute.id', null ) );
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}
@@ -143,7 +143,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '!=', $func, null ) );
 		$search->setSortations( array( $search->sort( '+', 'product.code' ) ) );
 
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 'CNE', $result->first()->getCode() );
@@ -165,7 +165,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '!=', $func, null ) );
 		$search->setSortations( array( $search->sort( '+', 'product.code' ) ) );
 
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( 'CNE', $result->first()->getCode() );

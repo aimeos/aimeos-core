@@ -46,7 +46,7 @@ class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$manager = \Aimeos\MShop::create( $context, 'coupon' );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'coupon.label', 'demo-' ) );
-		$services = $manager->searchItems( $search );
+		$services = $manager->search( $search );
 
 		$manager->deleteItems( $services->toArray() );
 

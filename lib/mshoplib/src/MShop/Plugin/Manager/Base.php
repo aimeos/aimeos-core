@@ -114,7 +114,7 @@ abstract class Base
 
 			$this->plugins[$type] = [];
 
-			foreach( $this->getObject()->searchItems( $search ) as $item ) {
+			foreach( $this->getObject()->search( $search ) as $item ) {
 				$this->plugins[$type][$item->getId()] = $this->getProvider( $item, $type );
 			}
 		}

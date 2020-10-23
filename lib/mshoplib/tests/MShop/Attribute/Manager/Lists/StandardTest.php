@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No item found' );
@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
-		$items = $this->object->searchItems( $search )->toArray();
+		$items = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No item found' );
@@ -171,7 +171,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -187,7 +187,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		$this->assertEquals( 27, count( $results ) );
 
@@ -206,7 +206,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'attribute.lists.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search, [], $total )->toArray();
+		$items = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 25, $total );

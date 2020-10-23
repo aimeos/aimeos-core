@@ -77,7 +77,7 @@ trait Traits
 				] ) );
 			}
 
-			foreach( $manager->searchItems( $search ) as $id => $propItem ) {
+			foreach( $manager->search( $search ) as $id => $propItem ) {
 				$list[$propItem->getParentId()][$id] = $propItem;
 			}
 		}

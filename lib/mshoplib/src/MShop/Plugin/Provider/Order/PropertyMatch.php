@@ -160,6 +160,6 @@ class PropertyMatch
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		return $manager->searchItems( $search );
+		return $manager->search( $search );
 	}
 }

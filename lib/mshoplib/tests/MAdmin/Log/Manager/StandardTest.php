@@ -83,7 +83,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -98,7 +98,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$criteria = $this->object->createSearch()->setSlice( 0, 1 );
 		$criteria->setConditions( $criteria->compare( '==', 'log.priority', 1 ) );
-		$result = $this->object->searchItems( $criteria )->toArray();
+		$result = $this->object->search( $criteria )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new \RuntimeException( 'No item found' );

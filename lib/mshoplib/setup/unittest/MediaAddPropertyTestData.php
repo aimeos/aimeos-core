@@ -103,7 +103,7 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$entry = [];
 		$search = $mediaManager->createSearch();
 
-		foreach( $mediaManager->searchItems( $search ) as $id => $item ) {
+		foreach( $mediaManager->search( $search ) as $id => $item ) {
 			$entry['media/' . $item->getUrl()] = $id;
 		}
 

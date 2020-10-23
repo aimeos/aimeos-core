@@ -136,11 +136,11 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
-			->setMethods( array( 'searchItems' ) )
+			->setMethods( array( 'search' ) )
 			->getMock();
 
 		$mock->expects( $this->once() )
-			->method( 'searchItems' )
+			->method( 'search' )
 			->will( $this->returnValue( map( [$mock->createItem()] ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
@@ -161,11 +161,11 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
-			->setMethods( array( 'searchItems' ) )
+			->setMethods( array( 'search' ) )
 			->getMock();
 
 		$mock->expects( $this->once() )
-			->method( 'searchItems' )
+			->method( 'search' )
 			->will( $this->returnValue( map() ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
@@ -182,11 +182,11 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
-			->setMethods( array( 'searchItems' ) )
+			->setMethods( array( 'search' ) )
 			->getMock();
 
 		$mock->expects( $this->once() )
-			->method( 'searchItems' )
+			->method( 'search' )
 			->will( $this->returnValue( map() ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
@@ -207,11 +207,11 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
-			->setMethods( array( 'searchItems' ) )
+			->setMethods( array( 'search' ) )
 			->getMock();
 
 		$mock->expects( $this->once() )
-			->method( 'searchItems' )
+			->method( 'search' )
 			->will( $this->returnValue( map( [$mock->createItem()] ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );

@@ -120,7 +120,7 @@ class ProductFreeOptions
 		$search = $attrManager->createSearch()->setSlice( 0, count( $ids ) );
 		$search->setConditions( $search->compare( '==', 'attribute.id', $ids ) );
 
-		foreach( $attrManager->searchItems( $search, ['price'] ) as $attrId => $attrItem ) {
+		foreach( $attrManager->search( $search, ['price'] ) as $attrId => $attrItem ) {
 			$attrMap[$attrItem->getType()][$attrId] = $attrItem;
 		}
 

@@ -95,7 +95,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 
 		$list = [];
-		foreach( $manager->searchItems( $search )->toArray() as $item ) {
+		foreach( $manager->search( $search )->toArray() as $item ) {
 			$list[] = $item->getBaseId();
 		}
 		sort( $list );
@@ -147,7 +147,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.product.prodcode', 'CNE' ),
 			$search->compare( '==', 'order.base.product.price', '36.00' )
 		) ) );
-		$items = $manager->searchItems( $search )->toArray();
+		$items = $manager->search( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'Please fix the test data in your database.' );

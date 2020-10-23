@@ -83,7 +83,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
 		$refIds = [];
-		foreach( $textManager->searchItems( $search ) as $item ) {
+		foreach( $textManager->search( $search ) as $item ) {
 			$refIds['text/' . $item->getLabel()] = $item->getId();
 		}
 
@@ -115,7 +115,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'media.url', $urls ) );
 
 		$refIds = [];
-		foreach( $mediaManager->searchItems( $search ) as $item ) {
+		foreach( $mediaManager->search( $search ) as $item ) {
 			$refIds['media/' . $item->getUrl()] = $item->getId();
 		}
 
@@ -147,7 +147,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
 
 		$refIds = [];
-		foreach( $productManager->searchItems( $search ) as $item ) {
+		foreach( $productManager->search( $search ) as $item ) {
 			$refIds['product/' . $item->getCode()] = $item->getId();
 		}
 
@@ -182,7 +182,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'catalog.code', $itemCode ) );
 
 		$parentIds = [];
-		foreach( $catalogManager->searchItems( $search ) as $item ) {
+		foreach( $catalogManager->search( $search ) as $item ) {
 			$parentIds['catalog/' . $item->getCode()] = $item->getId();
 		}
 

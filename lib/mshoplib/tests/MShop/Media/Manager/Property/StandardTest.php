@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'media.property.editor', $this->editor ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No property item found' );
@@ -106,7 +106,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'media.property.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No media property item found for value "%1$s".', '1024' ) );
@@ -148,7 +148,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'media.property.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 	}
 

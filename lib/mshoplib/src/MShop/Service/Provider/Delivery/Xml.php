@@ -225,7 +225,7 @@ class Xml
 		$search = $manager->createSearch()->setSlice( 0, count( $ids ) );
 		$search->setConditions( $search->compare( '==', 'order.base.id', $ids ) );
 
-		return $manager->searchItems( $search, $ref )->toArray();
+		return $manager->search( $search, $ref )->toArray();
 	}
 
 
@@ -291,7 +291,7 @@ class Xml
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
 		$search = $manager->createSearch()->setSlice( 0, count( $nodes ) );
 		$search->setConditions( $search->compare( '==', 'order.id', array_keys( $nodes ) ) );
-		$items = $manager->searchItems( $search );
+		$items = $manager->search( $search );
 
 		foreach( $nodes as $node )
 		{

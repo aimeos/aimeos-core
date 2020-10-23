@@ -80,7 +80,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$search = $mediaManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'media.url', $urls ) );
-		$result = $mediaManager->searchItems( $search );
+		$result = $mediaManager->search( $search );
 
 		$refIds = [];
 		foreach( $result as $item ) {
@@ -118,7 +118,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
 		$parentIds = [];
-		foreach( $textManager->searchItems( $search ) as $item ) {
+		foreach( $textManager->search( $search ) as $item ) {
 			$parentIds['text/' . $item->getLabel()] = $item->getId();
 		}
 

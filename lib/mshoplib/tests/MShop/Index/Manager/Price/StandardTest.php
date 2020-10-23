@@ -64,7 +64,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$func = $search->createFunction( 'index.price:value', ['EUR'] );
 		$search->setConditions( $search->compare( '==', $func, '18.00' ) );
 
-		$this->assertEquals( 3, count( $this->object->searchItems( $search )->toArray() ) );
+		$this->assertEquals( 3, count( $this->object->search( $search )->toArray() ) );
 	}
 
 
@@ -91,7 +91,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$sortfunc = $search->createFunction( 'sort:index.price:value', ['EUR'] );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}

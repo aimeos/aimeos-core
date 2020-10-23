@@ -206,7 +206,7 @@ abstract class Base
 		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.address.baseid', $baseIds ) );
 
-		foreach( $manager->searchItems( $criteria ) as $item )
+		foreach( $manager->search( $criteria ) as $item )
 		{
 			if( $fresh === true )
 			{
@@ -256,7 +256,7 @@ abstract class Base
 		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.coupon.baseid', $baseIds ) );
 
-		foreach( $manager->searchItems( $criteria ) as $item )
+		foreach( $manager->search( $criteria ) as $item )
 		{
 			if( !isset( $map[$item->getBaseId()][$item->getCode()] ) ) {
 				$map[$item->getBaseId()][$item->getCode()] = [];
@@ -287,12 +287,12 @@ abstract class Base
 
 		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.product.baseid', $baseIds ) );
-		$items = $manager->searchItems( $criteria )->reverse();
+		$items = $manager->search( $criteria )->reverse();
 
 		$search = $attrManager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.parentid', $items->keys()->toArray() ) );
 
-		foreach( $attrManager->searchItems( $search ) as $id => $attribute )
+		foreach( $attrManager->search( $search ) as $id => $attribute )
 		{
 			if( $fresh === true )
 			{
@@ -356,7 +356,7 @@ abstract class Base
 		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.service.baseid', $baseIds ) );
 
-		foreach( $manager->searchItems( $criteria ) as $item )
+		foreach( $manager->search( $criteria ) as $item )
 		{
 			if( $fresh === true )
 			{

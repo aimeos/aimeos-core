@@ -408,7 +408,7 @@ abstract class Base implements Iface
 		];
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		if( ( $item = $manager->searchItems( $search )->first() ) === null ) {
+		if( ( $item = $manager->search( $search )->first() ) === null ) {
 			throw new \Aimeos\MShop\Service\Exception( sprintf( 'No order for ID "%1$s" found', $id ) );
 		}
 

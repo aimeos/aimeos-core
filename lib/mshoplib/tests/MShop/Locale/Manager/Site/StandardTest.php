@@ -118,7 +118,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
 
-		$a = $this->object->searchItems( $search )->toArray();
+		$a = $this->object->search( $search )->toArray();
 		if( ( $expected = reset( $a ) ) === false ) {
 			throw new \RuntimeException( 'Site item not found' );
 		}
@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -159,7 +159,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'locale.site.code', array( 'unittest' ) ) );
 		$search->setSlice( 0, 1 );
 
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertGreaterThanOrEqual( 1, $total );
 
@@ -197,7 +197,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
 
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No item found' );
@@ -214,7 +214,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
 
-		$expected = $this->object->searchItems( $search )->first();
+		$expected = $this->object->search( $search )->first();
 
 		$item = $this->object->getTree( $expected->getId() );
 		$this->assertEquals( $expected, $item );
@@ -225,10 +225,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = $this->getMockBuilder( \Aimeos\MShop\Locale\Manager\Site\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
-			->setMethods( array( 'searchItems' ) )
+			->setMethods( array( 'search' ) )
 			->getMock();
 
-		$object->expects( $this->once() )->method( 'searchItems' )
+		$object->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$object->createItem()] ) ) );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $object->getTree() );
@@ -239,10 +239,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = $this->getMockBuilder( \Aimeos\MShop\Locale\Manager\Site\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
-			->setMethods( array( 'searchItems' ) )
+			->setMethods( array( 'search' ) )
 			->getMock();
 
-		$object->expects( $this->once() )->method( 'searchItems' )
+		$object->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map() ) );
 
 		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
@@ -255,7 +255,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
 
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No item found' );
@@ -272,7 +272,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'default' ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		$this->assertIsArray( $results );
 

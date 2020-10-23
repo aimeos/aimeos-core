@@ -308,7 +308,7 @@ class Standard
 		$search = $this->getObject()->createSearch()->setSlice( 0, count( $itemIds ) );
 		$search->setConditions( $search->compare( '==', 'locale.site.id', $itemIds ) );
 
-		foreach( $this->getObject()->searchItems( $search ) as $item ) {
+		foreach( $this->getObject()->search( $search ) as $item ) {
 			$siteIds[] = $item->getSiteId();
 		}
 
@@ -561,7 +561,7 @@ class Standard
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Locale\Item\Site\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
 		$context = $this->getContext();
@@ -758,7 +758,7 @@ class Standard
 		$criteria = $this->getObject()->createSearch()->setSlice( 0, 1 );
 		$criteria->setConditions( $criteria->compare( '==', 'locale.site.code', 'default' ) );
 
-		if( ( $item = $this->getObject()->searchItems( $criteria, $ref )->first() ) === null ) {
+		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) === null ) {
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Tree root with code "%1$s" in "%2$s" not found', 'default', 'locale.site.code' ) );
 		}
 

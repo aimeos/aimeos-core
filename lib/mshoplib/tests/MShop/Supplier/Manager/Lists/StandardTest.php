@@ -79,7 +79,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'supplier.lists.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No list item found' );
@@ -109,7 +109,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'supplier.lists.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search )->toArray();
+		$items = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No item found' );
@@ -189,7 +189,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'supplier.lists.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 	}
 
@@ -205,7 +205,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 3, $total );
 

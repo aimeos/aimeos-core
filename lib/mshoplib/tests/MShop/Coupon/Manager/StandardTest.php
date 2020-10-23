@@ -97,7 +97,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $itemA = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No results available' );
@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
-		$result = $this->object->searchItems( $search )->toArray();
+		$result = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new \RuntimeException( 'No coupon item found' );
@@ -221,7 +221,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -239,7 +239,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'coupon.code.editor', 'core:lib/mshoplib' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, [], $total )->toArray();
+		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 6, $total );

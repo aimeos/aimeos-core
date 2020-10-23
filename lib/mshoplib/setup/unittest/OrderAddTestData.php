@@ -43,7 +43,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $orderBaseManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.sitecode', array( 'unittest', 'unit' ) ) );
 
-		foreach( $orderBaseManager->searchItems( $search ) as $order ) {
+		foreach( $orderBaseManager->search( $search ) as $order ) {
 			$orderBaseManager->deleteItem( $order->getId() );
 		}
 
@@ -325,7 +325,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$attrCodes = [];
 		$attributeManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
-		$attributes = $attributeManager->searchItems( $attributeManager->createSearch() );
+		$attributes = $attributeManager->search( $attributeManager->createSearch() );
 
 		foreach( $attributes as $attrItem ) {
 			$attrCodes[$attrItem->getType()][] = $attrItem;
@@ -474,7 +474,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', $customercodes ) );
 
-		foreach( $customerManager->searchItems( $search ) as $id => $customerItem ) {
+		foreach( $customerManager->search( $search ) as $id => $customerItem ) {
 			$customerIds[$customerItem->getCode()] = $id;
 		}
 
@@ -502,7 +502,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
-		$result = $productManager->searchItems( $search );
+		$result = $productManager->search( $search );
 
 		foreach( $result as $item ) {
 			$items[$item->getCode()] = $item;
@@ -532,7 +532,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.code', $services ) );
-		$servicesResult = $serviceManager->searchItems( $search );
+		$servicesResult = $serviceManager->search( $search );
 
 		foreach( $servicesResult as $id => $service ) {
 			$servIds[$service->getCode()] = $id;

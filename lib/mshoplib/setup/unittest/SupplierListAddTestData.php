@@ -86,7 +86,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'media.url', $urls ) );
 
 		$refIds = [];
-		foreach( $mediaManager->searchItems( $search ) as $item ) {
+		foreach( $mediaManager->search( $search ) as $item ) {
 			$refIds['media/' . $item->getUrl()] = $item->getId();
 		}
 
@@ -118,7 +118,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
 
 		$refIds = [];
-		foreach( $manager->searchItems( $search ) as $item ) {
+		foreach( $manager->search( $search ) as $item ) {
 			$refIds['product/' . $item->getCode()] = $item->getId();
 		}
 
@@ -150,7 +150,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
 		$refIds = [];
-		foreach( $textManager->searchItems( $search ) as $item ) {
+		foreach( $textManager->search( $search ) as $item ) {
 			$refIds['text/' . $item->getLabel()] = $item->getId();
 		}
 
@@ -186,7 +186,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'supplier.code', $itemCode ) );
 
 		$parentIds = [];
-		foreach( $supplierManager->searchItems( $search ) as $item ) {
+		foreach( $supplierManager->search( $search ) as $item ) {
 			$parentIds['supplier/' . $item->getCode()] = $item->getId();
 		}
 

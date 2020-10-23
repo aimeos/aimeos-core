@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
-		$items = $this->object->searchItems( $search )->toArray();
+		$items = $this->object->search( $search )->toArray();
 
 		if( ( $tmpItem = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No locale item found for code: "unit"' );
@@ -236,7 +236,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -251,7 +251,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
-		$items = $this->object->searchItems( $search )->toArray();
+		$items = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( 'No locale item found for code: "unit"' );

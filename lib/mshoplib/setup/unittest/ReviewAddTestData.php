@@ -107,7 +107,7 @@ class ReviewAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$search->compare( '==', 'order.base.product.price', $parts[1] ),
 		];
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $manager->searchItems( $search );
+		$result = $manager->search( $search );
 
 		if( ( $item = $result->first() ) !== null ) {
 			return $item;

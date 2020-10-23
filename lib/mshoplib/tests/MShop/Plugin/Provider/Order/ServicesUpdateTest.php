@@ -59,7 +59,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 			->setConstructorArgs( [$priceItem, $localeItem] )->setMethods( ['getProducts'] )->getMock();
 
 		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
-			->setConstructorArgs( [$this->context] )->setMethods( ['searchItems', 'getProvider'] )->getMock();
+			->setConstructorArgs( [$this->context] )->setMethods( ['search', 'getProvider'] )->getMock();
 
 		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\Aimeos\MShop\Service\Manager\PluginServicesUpdate', $serviceStub );
 		$this->context->getConfig()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
@@ -79,7 +79,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
 			->will( $this->returnValue( map( [$orderProduct] ) ) );
 
-		$serviceStub->expects( $this->once() )->method( 'searchItems' )
+		$serviceStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) ) );
 
 		$serviceStub->expects( $this->exactly( 2 ) )->method( 'getProvider' )
@@ -115,7 +115,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 			->setConstructorArgs( [$priceItem, $localeItem] )->setMethods( ['getProducts'] )->getMock();
 
 		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
-			->setConstructorArgs( [$this->context] )->setMethods( ['searchItems', 'getProvider'] )->getMock();
+			->setConstructorArgs( [$this->context] )->setMethods( ['search', 'getProvider'] )->getMock();
 
 		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\Aimeos\MShop\Service\Manager\PluginServicesUpdate', $serviceStub );
 		$this->context->getConfig()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
@@ -135,7 +135,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
 			->will( $this->returnValue( map( [$orderProduct] ) ) );
 
-		$serviceStub->expects( $this->once() )->method( 'searchItems' )
+		$serviceStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) ) );
 
 		$serviceStub->expects( $this->exactly( 2 ) )->method( 'getProvider' )

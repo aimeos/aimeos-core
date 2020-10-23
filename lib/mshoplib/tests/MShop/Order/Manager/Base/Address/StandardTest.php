@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.address.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search )->toArray();
+		$items = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No order base address item found for type "%1$s".', $type ) );
@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.address.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search )->toArray();
+		$items = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No order base address item found for type "%1$s".', $type ) );
@@ -251,7 +251,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.address.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, [], $total )->toArray();
+		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -262,7 +262,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
-		$items = $this->object->searchItems( $search, [], $total )->toArray();
+		$items = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 4, $total );

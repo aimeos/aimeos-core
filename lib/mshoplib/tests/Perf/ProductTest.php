@@ -23,7 +23,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$search = $productManager->createSearch();
 		$search->setSlice( 0, 1 );
-		$result = $productManager->searchItems( $search, array( 'text', 'media', 'price', 'product', 'attribute' ) );
+		$result = $productManager->search( $search, array( 'text', 'media', 'price', 'product', 'attribute' ) );
 
 		if( ( $this->item = $result->first() ) === null ) {
 			throw new \RuntimeException( 'No product item found' );
@@ -47,7 +47,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 		{
 			$search = $productManager->createSearch( true );
 			$search->setConditions( $search->compare( '==', 'product.id', $ids ) );
-			$productManager->searchItems( $search, array( 'text', 'media', 'price', 'product', 'attribute' ) );
+			$productManager->search( $search, array( 'text', 'media', 'price', 'product', 'attribute' ) );
 		}
 
 		$stop = microtime( true );

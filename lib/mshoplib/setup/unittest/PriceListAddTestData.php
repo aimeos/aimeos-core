@@ -82,7 +82,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'customer.code', $codes ) );
 
 		$refIds = [];
-		foreach( $customerManager->searchItems( $search ) as $item ) {
+		foreach( $customerManager->search( $search ) as $item ) {
 			$refIds['customer/' . $item->getCode()] = $item->getId();
 		}
 
@@ -173,7 +173,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$parentIds = [];
-		foreach( $manager->searchItems( $search ) as $item ) {
+		foreach( $manager->search( $search ) as $item ) {
 			$parentIds['price/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getValue() . '/' . $item->getCosts()] = $item->getId();
 		}
 

@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, [], $total )->toArray();
+		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'order.base.service.code', 'OGONE' ) );
-		$result = $this->object->searchItems( $search, ['service'] );
+		$result = $this->object->search( $search, ['service'] );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertNotNull( $result->first()->getServiceItem() );
@@ -177,7 +177,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.service.editor', $this->editor )
 		] ) );
 
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );
@@ -227,7 +227,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.service.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( !( $item = reset( $results ) ) ) {
 			throw new \RuntimeException( 'empty results' );
@@ -247,7 +247,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.service.attribute.code', 'NAME' ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$orderItems = $this->object->searchItems( $search )->toArray();
+		$orderItems = $this->object->search( $search )->toArray();
 
 		if( !( $item = reset( $orderItems ) ) ) {
 			throw new \RuntimeException( 'empty search result' );

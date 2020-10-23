@@ -193,7 +193,7 @@ trait Traits
 			$search->setConditions( $search->compare( '==', $prefix . '.lists.parentid', $ids ) );
 		}
 
-		return $manager->searchItems( $search );
+		return $manager->search( $search );
 	}
 
 
@@ -223,7 +223,7 @@ trait Traits
 			$search = $manager->createSearch()->setSlice( 0, count( $list ) );
 			$search->setConditions( $search->compare( '==', str_replace( '/', '.', $domain ) . '.id', array_keys( $list ) ) );
 
-			foreach( $manager->searchItems( $search, $domains ) as $id => $item )
+			foreach( $manager->search( $search, $domains ) as $id => $item )
 			{
 				foreach( $list[$id] as $parentId ) {
 					$items[$parentId][$domain][$id] = $item;

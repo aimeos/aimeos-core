@@ -85,7 +85,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $listManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'supplier.lists.domain', 'product' ) );
-		$supListItems = $listManager->searchItems( $search )->toArray();
+		$supListItems = $listManager->search( $search )->toArray();
 
 		if( ( $supListItem = reset( $supListItems ) ) === false ) {
 			throw new \RuntimeException( 'No supplier list item found!' );
@@ -107,7 +107,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.supplier.id', $supListItem->getParentId() ) );
-		$result = $this->object->searchItems( $search )->toArray();
+		$result = $this->object->search( $search )->toArray();
 
 
 		$this->object->deleteItem( $product->getId() );
@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.supplier.id', $supListItem->getParentId() ) );
-		$result2 = $this->object->searchItems( $search )->toArray();
+		$result2 = $this->object->search( $search )->toArray();
 
 
 		$this->assertContains( $product->getId(), array_keys( $result ) );
@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.supplier.id', $id ) );
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
 	}
@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '!=', 'index.supplier.id', null ) );
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
 	}
@@ -164,7 +164,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.supplier:position', ['default', $id] ), 0 ) );
 		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.supplier:position', ['default', $id] ) )] );
 
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
 	}
@@ -179,7 +179,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.supplier:position', ['default', [$id]] ), 0 ) );
 		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.supplier:position', ['default', [$id]] ) )] );
 
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
 	}

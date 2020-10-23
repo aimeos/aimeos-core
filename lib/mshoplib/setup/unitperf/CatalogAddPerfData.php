@@ -518,7 +518,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setSortations( [$search->sort( '+', 'attribute.position' )] );
 
-		foreach( $manager->searchItems( $search ) as $id => $item ) {
+		foreach( $manager->search( $search ) as $id => $item ) {
 			$this->attributes[$item->getType()][$id] = $item->getLabel();
 		}
 	}

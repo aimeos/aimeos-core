@@ -123,11 +123,11 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$itemMock->expects( $this->once() )->method( 'setDatePayment' )->will( $this->returnSelf() );
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
-			->setMethods( ['saveItems', 'searchItems'] )
+			->setMethods( ['saveItems', 'search'] )
 			->setConstructorArgs( [$this->context] )
 			->getMock();
 
-		$mock->expects( $this->once() )->method( 'searchItems' )
+		$mock->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( ['123' => $itemMock] ) ) );
 
 		$mock->expects( $this->once() )->method( 'saveItems' );
@@ -145,7 +145,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ) );
 
-		$result = $manager->searchItems( $search )->toArray();
+		$result = $manager->search( $search )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No order item for payment date "%1$s" found', '2008-02-15 12:34:56' ) );

@@ -46,7 +46,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.type.editor', $this->editor ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No type item found' );
@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $this->object->searchItems( $search )->toArray();
+		$result = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $result ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No type item found for code "%1$s"', 'product' ) );
@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 
 
@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'product.type.position' )] );
 		$search->setSlice( 0, 2 );
-		$items = $this->object->searchItems( $search, [], $total )->toArray();
+		$items = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 2, count( $items ) );
 		$this->assertEquals( 4, $total );

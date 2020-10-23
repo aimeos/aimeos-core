@@ -237,10 +237,10 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$item = $manager->createItem();
 		$total = 0;
 
-		$this->stub->expects( $this->once() )->method( 'searchItems' )
+		$this->stub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$item] ) ) );
 
-		$this->assertEquals( [$item], $this->object->searchItems( $manager->filter(), [], $total )->toArray() );
+		$this->assertEquals( [$item], $this->object->search( $manager->filter(), [], $total )->toArray() );
 	}
 
 

@@ -79,7 +79,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$listManager = $catalogManager->getSubManager( 'lists' );
 		$search = $listManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.lists.domain', 'product' ) );
-		$catListItems = $listManager->searchItems( $search )->toArray();
+		$catListItems = $listManager->search( $search )->toArray();
 
 		if( ( $catListItem = reset( $catListItems ) ) === false ) {
 			throw new \RuntimeException( 'No catalog list item found!' );
@@ -94,7 +94,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catListItem->getParentId() ) );
-		$result = $this->object->searchItems( $search )->toArray();
+		$result = $this->object->search( $search )->toArray();
 
 
 		$this->object->deleteItem( $product->getId() );
@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catListItem->getParentId() ) );
-		$result2 = $this->object->searchItems( $search )->toArray();
+		$result2 = $this->object->search( $search )->toArray();
 
 
 		$this->assertContains( $product->getId(), array_keys( $result ) );
@@ -126,7 +126,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.catalog.id', $id ) );
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
 	}
@@ -136,7 +136,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '!=', 'index.catalog.id', null ) );
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 9, count( $result ) );
 	}
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', $id] ), 0 ) );
 		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion', $id] ) )] );
 
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
 	}
@@ -166,7 +166,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', [$id]] ), 0 ) );
 		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion', [$id]] ) )] );
 
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
 	}
@@ -180,7 +180,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion'] ), 0 ) );
 		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion'] ) )] );
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 3, count( $result ) );
 	}
@@ -194,7 +194,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', [] ), 0 ) );
 		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', [] ) )] );
-		$result = $this->object->searchItems( $search, [] );
+		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 9, count( $result ) );
 	}

@@ -310,6 +310,8 @@ class Standard
 
 			$this->writeIndex( $search, $domains, $size );
 
+			// $context->cache()->deleteByTags( map( $result->keys() )->prefix( 'product-' )->toArray() );
+
 			$start += $size;
 		}
 		while( !$result->isEmpty() );
@@ -326,7 +328,7 @@ class Standard
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		/** mshop/index/manager/standard/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
@@ -469,7 +471,7 @@ class Standard
 		do
 		{
 			$search->setSlice( $start, $size );
-			$products = $manager->searchItems( $search, $domains );
+			$products = $manager->search( $search, $domains );
 			$prodIds = $products->keys()->toArray();
 
 			try

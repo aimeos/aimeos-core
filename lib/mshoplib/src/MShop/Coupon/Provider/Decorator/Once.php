@@ -43,7 +43,7 @@ class Once
 			];
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			if( !$manager->searchItems( $search )->isEmpty() ) {
+			if( !$manager->search( $search )->isEmpty() ) {
 				return false;
 			}
 		}

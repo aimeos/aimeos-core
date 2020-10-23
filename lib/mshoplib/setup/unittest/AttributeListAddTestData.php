@@ -83,7 +83,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'media.url', $urls ) );
 
 		$refIds = [];
-		foreach( $mediaManager->searchItems( $search ) as $item ) {
+		foreach( $mediaManager->search( $search ) as $item ) {
 			$refIds['media/' . $item->getUrl()] = $item->getId();
 		}
 
@@ -115,7 +115,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
 		$refIds = [];
-		foreach( $textManager->searchItems( $search ) as $item ) {
+		foreach( $textManager->search( $search ) as $item ) {
 			$refIds['text/' . $item->getLabel()] = $item->getId();
 		}
 
@@ -230,7 +230,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$parentIds = [];
-		foreach( $manager->searchItems( $search ) as $item ) {
+		foreach( $manager->search( $search ) as $item ) {
 			$parentIds[$item->getDomain() . '/' . $item->getType() . '/' . $item->getCode()] = $item->getId();
 		}
 
@@ -283,7 +283,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$parentIds = [];
-		foreach( $manager->searchItems( $search ) as $item ) {
+		foreach( $manager->search( $search ) as $item ) {
 			$parentIds['price/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getValue() . '/' . $item->getCosts()] = $item->getId();
 		}
 

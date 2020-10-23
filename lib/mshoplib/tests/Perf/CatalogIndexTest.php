@@ -33,7 +33,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$search->setSlice( 0, 10 );
 
 		$total = 0;
-		$indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
+		$indexManager->search( $search, array( 'text', 'price', 'media' ), $total );
 	}
 
 
@@ -61,7 +61,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$search->setSlice( 0, 1 );
 
 		$total = 0;
-		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media', 'attribute' ), $total );
+		$result = $indexManager->search( $search, array( 'text', 'price', 'media', 'attribute' ), $total );
 
 		$stop = microtime( true );
 		printf( "\n    index list by category, sort by position (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
@@ -92,7 +92,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$search->setSortations( $sort );
 
 		$total = 0;
-		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
+		$result = $indexManager->search( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
 		printf( "\n    index list by category, sort by name (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
@@ -123,7 +123,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$search->setSortations( $sort );
 
 		$total = 0;
-		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
+		$result = $indexManager->search( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
 		printf( "\n    index list by category, sort by price (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
@@ -154,7 +154,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$search->setSortations( $sort );
 
 		$total = 0;
-		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
+		$result = $indexManager->search( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
 		printf( "\n    index search by category count, sort by position (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
@@ -182,7 +182,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$search->setSortations( $sort );
 
 		$total = 0;
-		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
+		$result = $indexManager->search( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
 		printf( "\n    index search by price range, sort by price (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
@@ -209,7 +209,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$search->setSortations( $sort );
 
 		$total = 0;
-		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
+		$result = $indexManager->search( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
 		printf( "\n    index search by text, sort by relevance (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
@@ -236,7 +236,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$search->setSortations( $sort );
 
 		$total = 0;
-		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
+		$result = $indexManager->search( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
 		printf( "\n    index search by text, sort by name (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
@@ -268,7 +268,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$search->setSortations( $sort );
 
 		$total = 0;
-		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
+		$result = $indexManager->search( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
 		printf( "\n    index search by category/text/price, sort by relevance (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
@@ -299,7 +299,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 		$search->setSortations( $sort );
 
 		$total = 0;
-		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
+		$result = $indexManager->search( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
 		printf( "\n    index search by category count/text/price, sort by relevance (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );

@@ -115,7 +115,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$entry = [];
 		$search = $attributeManager->createSearch();
 
-		foreach( $attributeManager->searchItems( $search ) as $id => $item ) {
+		foreach( $attributeManager->search( $search ) as $id => $item ) {
 			$entry['attribute/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getCode()] = $id;
 		}
 

@@ -81,7 +81,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'media.url', 'prod_266x221/198_prod_266x221.jpg' ) );
-		$item = $this->object->searchItems( $search, ['attribute'] )->first();
+		$item = $this->object->search( $search, ['attribute'] )->first();
 
 		if( $item && ( $listItem = $item->getListItems( 'attribute', 'option' )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );
@@ -124,7 +124,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -143,7 +143,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setSlice( 0, 4 );
 
 		$total = 0;
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 4, count( $results ) );
 		$this->assertEquals( 17, $total );
@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'media.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$item = $this->object->searchItems( $search, ['media/property'] )->first();
+		$item = $this->object->search( $search, ['media/property'] )->first();
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId(), ['media/property'] ) );
 		$this->assertEquals( 2, count( $item->getPropertyItems() ) );
@@ -176,7 +176,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'media.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$item = $this->object->searchItems( $search )->first();
+		$item = $this->object->search( $search )->first();
 
 		$item->setId( null );
 		$item->setLanguageId( 'de' );
@@ -240,13 +240,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'media.label', 'path/to/folder/example1.jpg' ) );
-		$item = $this->object->searchItems( $search, ['media/property'] )->first();
+		$item = $this->object->search( $search, ['media/property'] )->first();
 
 		$item->setId( null )->setLabel( 'path/to/folder/example1-1.jpg' );
 		$this->object->saveItem( $item );
 
 		$search->setConditions( $search->compare( '==', 'media.label', 'path/to/folder/example1-1.jpg' ) );
-		$item2 = $this->object->searchItems( $search, ['media/property'] )->first();
+		$item2 = $this->object->search( $search, ['media/property'] )->first();
 
 		$this->object->deleteItem( $item->getId() );
 

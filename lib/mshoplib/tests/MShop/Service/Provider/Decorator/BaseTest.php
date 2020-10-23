@@ -24,7 +24,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$search = $servManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
 
-		if( ( $item = $servManager->searchItems( $search, ['price'] )->first() ) === null ) {
+		if( ( $item = $servManager->search( $search, ['price'] )->first() ) === null ) {
 			throw new \RuntimeException( 'No order base item found' );
 		}
 

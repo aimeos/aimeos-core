@@ -75,7 +75,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'product.code', ['CNE', 'CNC', 'IJKL'] ) );
 
 		$products = [];
-		foreach( $manager->searchItems( $search, ['price'] ) as $prod ) {
+		foreach( $manager->search( $search, ['price'] ) as $prod ) {
 			$products[$prod->getCode()] = $prod;
 		}
 
@@ -100,7 +100,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 			$serviceSearch->compare( '==', 'order.base.service.costs', '5.00' )
 		);
 		$serviceSearch->setConditions( $serviceSearch->combine( '&&', $exp ) );
-		$delivery = $orderBaseServiceManager->searchItems( $serviceSearch )->first();
+		$delivery = $orderBaseServiceManager->search( $serviceSearch )->first();
 
 		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
 

@@ -208,10 +208,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$orderCouponStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Coupon\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'searchItems' ) )
+			->setMethods( ['search'] )
 			->getMock();
 
-		$orderCouponStub->expects( $this->once() )->method( 'searchItems' )
+		$orderCouponStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$orderCouponStub->createItem()->setCode( 'test' )] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/coupon', $orderCouponStub );
@@ -244,10 +244,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$orderCouponStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Coupon\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'searchItems' ) )
+			->setMethods( ['search'] )
 			->getMock();
 
-		$orderCouponStub->expects( $this->once() )->method( 'searchItems' )
+		$orderCouponStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$orderCouponStub->createItem()->setCode( 'test' )] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/coupon', $orderCouponStub );
@@ -355,10 +355,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'searchItems' ) )
+			->setMethods( ['search'] )
 			->getMock();
 
-		$orderProductStub->expects( $this->once() )->method( 'searchItems' )
+		$orderProductStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$orderProductStub->createItem()] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
@@ -398,13 +398,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'searchItems' ) )
+			->setMethods( ['search'] )
 			->getMock();
 
 		$orderProductItem = $orderProductStub->createItem();
 		$orderProductItem->setType( 'default' );
 
-		$orderProductStub->expects( $this->once() )->method( 'searchItems' )
+		$orderProductStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$orderProductItem] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
@@ -444,13 +444,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'searchItems' ) )
+			->setMethods( ['search'] )
 			->getMock();
 
 		$orderProductItem = $orderProductStub->createItem();
 		$orderProductItem->setType( 'select' );
 
-		$orderProductStub->expects( $this->once() )->method( 'searchItems' )
+		$orderProductStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$orderProductItem] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
@@ -490,10 +490,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'searchItems' ) )
+			->setMethods( ['search'] )
 			->getMock();
 
-		$orderProductStub->expects( $this->once() )->method( 'searchItems' )
+		$orderProductStub->expects( $this->once() )->method( 'search' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
 		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
@@ -598,6 +598,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', $datepayment ) );
 
-		return $manager->searchItems( $search )->first();
+		return $manager->search( $search )->first();
 	}
 }

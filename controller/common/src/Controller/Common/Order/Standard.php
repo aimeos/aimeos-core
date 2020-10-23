@@ -171,7 +171,7 @@ class Standard
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7fffffff );
 
-		$bundleItems = $productManager->searchItems( $search, array( 'product' ) );
+		$bundleItems = $productManager->search( $search, array( 'product' ) );
 
 		foreach( $bundleItems as $bundleItem )
 		{
@@ -217,7 +217,7 @@ class Standard
 		$search->setSortations( array( $search->sort( '-', 'order.status.ctime' ) ) );
 		$search->setSlice( 0, 1 );
 
-		return $manager->searchItems( $search )->first();
+		return $manager->search( $search )->first();
 	}
 
 
@@ -240,7 +240,7 @@ class Standard
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, count( $prodCodes ) );
 
-		return $stockManager->searchItems( $search );
+		return $stockManager->search( $search );
 	}
 
 
@@ -268,7 +268,7 @@ class Standard
 		{
 			do
 			{
-				$items = $manager->searchItems( $search );
+				$items = $manager->search( $search );
 
 				foreach( $items as $item ) {
 					$couponCodeManager->decrease( $item->getCode(), $how * -1 );
@@ -343,7 +343,7 @@ class Standard
 		{
 			do
 			{
-				$items = $manager->searchItems( $search );
+				$items = $manager->search( $search );
 
 				foreach( $items as $item )
 				{

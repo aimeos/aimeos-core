@@ -133,7 +133,7 @@ class Category
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		return $catalogManager->searchItems( $search )->keys()->toArray();
+		return $catalogManager->search( $search )->keys()->toArray();
 	}
 
 
@@ -199,7 +199,7 @@ class Category
 		}
 
 		$search->setConditions( $search->combine( '||', $expr ) );
-		return $manager->searchItems( $search )->keys()->toArray();
+		return $manager->search( $search )->keys()->toArray();
 	}
 
 

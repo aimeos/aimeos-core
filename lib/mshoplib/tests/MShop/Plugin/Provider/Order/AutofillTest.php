@@ -136,14 +136,14 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 			->setConstructorArgs( [$this->context] )->setMethods( ['getSubManager'] )->getMock();
 
 		$orderBaseAddressStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Address\Standard::class )
-			->setConstructorArgs( [$this->context] )->setMethods( ['searchItems'] )->getMock();
+			->setConstructorArgs( [$this->context] )->setMethods( ['search'] )->getMock();
 
 		$item1 = $orderBaseAddressStub->createItem()->setType( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 		$item2 = $orderBaseAddressStub->createItem()->setType( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
 		$orderStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseStub ) );
 		$orderBaseStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseAddressStub ) );
-		$orderBaseAddressStub->expects( $this->once() )->method( 'searchItems' )
+		$orderBaseAddressStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$item1, $item2] ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\PluginAutofill', $orderStub );
@@ -175,7 +175,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 			->setConstructorArgs( [$this->context] )->setMethods( ['getSubManager'] )->getMock();
 
 		$orderBaseServiceStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Service\Standard::class )
-			->setConstructorArgs( [$this->context] )->setMethods( ['searchItems'] )->getMock();
+			->setConstructorArgs( [$this->context] )->setMethods( ['search'] )->getMock();
 
 		$item1 = $orderBaseServiceStub->createItem()->setCode( 'unitcode' )
 			->setType( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY );
@@ -185,7 +185,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 		$orderStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseStub ) );
 		$orderBaseStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseServiceStub ) );
-		$orderBaseServiceStub->expects( $this->once() )->method( 'searchItems' )
+		$orderBaseServiceStub->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( [$item1, $item2] ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\PluginAutofill', $orderStub );

@@ -208,7 +208,7 @@ trait Traits
 	/**
 	 * Returns the list items attached, optionally filtered by domain and list type.
 	 *
-	 * The reference parameter in searchItems() must have been set accordingly
+	 * The reference parameter in search() must have been set accordingly
 	 * to the requested domain to get the items. Otherwise, no items will be
 	 * returned by this method.
 	 *
@@ -261,7 +261,7 @@ trait Traits
 	/**
 	 * Returns the product, text, etc. items filtered by domain and optionally by type and list type.
 	 *
-	 * The reference parameter in searchItems() must have been set accordingly
+	 * The reference parameter in search() must have been set accordingly
 	 * to the requested domain to get the items. Otherwise, no items will be
 	 * returned by this method.
 	 *

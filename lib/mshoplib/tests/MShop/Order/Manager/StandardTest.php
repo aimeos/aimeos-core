@@ -145,7 +145,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No order found in shop_order_invoice with statuspayment "%1$s"', $status ) );
@@ -164,7 +164,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$item = $this->object->searchItems( $search )->first( new \RuntimeException( 'No order item found' ) );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order item found' ) );
 
 		$item->setId( null );
 		$resultSaved = $this->object->saveItem( $item );
@@ -225,7 +225,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No order item found.' );
@@ -237,7 +237,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $statusManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
-		$results = $statusManager->searchItems( $search )->toArray();
+		$results = $statusManager->search( $search )->toArray();
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -250,7 +250,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $statusManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
-		$results = $statusManager->searchItems( $search )->toArray();
+		$results = $statusManager->search( $search )->toArray();
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -274,7 +274,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No order item found.' );
@@ -286,7 +286,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $statusManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
-		$results = $statusManager->searchItems( $search )->toArray();
+		$results = $statusManager->search( $search )->toArray();
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -299,7 +299,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $statusManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
-		$results = $statusManager->searchItems( $search )->toArray();
+		$results = $statusManager->search( $search )->toArray();
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -472,7 +472,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, [], $total )->toArray();
+		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -488,7 +488,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search, [], $total )->toArray();
+		$items = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 3, $total );
@@ -508,7 +508,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$item = $this->object->searchItems( $search, ['order/base', 'order/base/product'], $total )->first();
+		$item = $this->object->search( $search, ['order/base', 'order/base/product'], $total )->first();
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $item->getBaseItem() );
 		$this->assertEquals( 4, count( $item->getBaseItem()->getProducts() ) );

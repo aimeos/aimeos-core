@@ -118,7 +118,7 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 
 		$sites = [];
 
-		foreach( $localeSiteManager->searchItems( $search ) as $site )
+		foreach( $localeSiteManager->search( $search ) as $site )
 		{
 			$site = $localeSiteManager->getTree( $site->getId() );
 			$sites = array_merge( $sites, $this->getSites( $site ) );

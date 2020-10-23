@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -89,7 +89,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( [$search->sort( '-', 'attribute.type.position' )] );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {
@@ -110,7 +110,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No item found' );
@@ -124,7 +124,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
-		$results = $this->object->searchItems( $search )->toArray();
+		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No type item found' );

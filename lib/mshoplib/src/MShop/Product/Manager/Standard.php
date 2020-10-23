@@ -741,7 +741,7 @@ class Standard
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
 		$context = $this->getContext();
@@ -1005,7 +1005,7 @@ class Standard
 			$search->getConditions(),
 		] ) );
 
-		foreach( $manager->searchItems( $search ) as $listItem ) {
+		foreach( $manager->search( $search ) as $listItem ) {
 			$map[$listItem->getParentId()][] = $listItem->getRefId();
 		}
 
@@ -1017,7 +1017,7 @@ class Standard
 			$search->getConditions(),
 		] ) );
 
-		$items = $manager->searchItems( $search, $ref );
+		$items = $manager->search( $search, $ref );
 
 
 		foreach( $map as $parentId => $list )
@@ -1057,6 +1057,6 @@ class Standard
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		return $manager->searchItems( $search );
+		return $manager->search( $search );
 	}
 }

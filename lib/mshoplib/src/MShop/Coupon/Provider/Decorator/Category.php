@@ -77,7 +77,7 @@ class Category
 				$search->getConditions()
 			] ) );
 
-			foreach( $listManager->searchItems( $search ) as $listItem )
+			foreach( $listManager->search( $search ) as $listItem )
 			{
 				if( isset( $prodIds[$listItem->getRefId()] ) )
 				{
@@ -145,7 +145,7 @@ class Category
 				$search->getConditions(),
 			] ) );
 
-			if( $manager->searchItems( $search )->isEmpty() ) {
+			if( $manager->search( $search )->isEmpty() ) {
 				return false;
 			}
 		}

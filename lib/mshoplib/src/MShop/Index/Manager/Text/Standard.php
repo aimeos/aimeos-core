@@ -526,7 +526,7 @@ class Standard
 	 * @param int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		/** mshop/index/manager/text/standard/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
@@ -675,7 +675,7 @@ class Standard
 		{
 			$list = [];
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'locale' );
-			$items = $manager->searchItems( $manager->createSearch()->setSlice( 0, 10000 ) );
+			$items = $manager->search( $manager->createSearch()->setSlice( 0, 10000 ) );
 
 			foreach( $items as $item ) {
 				$list[$item->getLanguageId()] = null;
