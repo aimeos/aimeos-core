@@ -403,7 +403,7 @@ class Standard
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Returns the log item of the given id
 	 * @throws \Aimeos\MAdmin\Log\Exception If item couldn't be found
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$criteria = $this->getObject()->createSearch( $default );
 		$expr = [

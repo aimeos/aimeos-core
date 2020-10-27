@@ -48,13 +48,13 @@ class NolimitTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Stock\Item\Iface::class, $this->object->getItem( -1 ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Stock\Item\Iface::class, $this->object->get( -1 ) );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = $this->object->getItem( -1 );
+		$item = $this->object->get( -1 );
 		$item = $this->object->saveItem( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->deleteItem( $item->getId() ) );

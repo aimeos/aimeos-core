@@ -325,7 +325,7 @@ class Autofill
 			&& (bool) $this->getConfigValue( 'address', false ) === true
 		) {
 			$address = \Aimeos\MShop::create( $context, 'customer' )
-				->getItem( $context->getUserId() )->getPaymentAddress();
+				->get( $context->getUserId() )->getPaymentAddress();
 
 			$addrItem = \Aimeos\MShop::create( $context, 'order/base/address' )
 				->createItem()->copyFrom( $address );

@@ -33,7 +33,7 @@ class Changelog
 		$manager = $this->getManager();
 
 		$item = $manager->saveItem( $item, $fetch );
-		$new = $manager->getItem( $item->getId() );
+		$new = $manager->get( $item->getId() );
 
 		$this->getContext()->getLogger()->log( json_encode( $new->toArray() ), \Aimeos\MW\Logger\Base::NOTICE, 'changelog' );
 

@@ -147,7 +147,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( sprintf( 'Found no Productitem with text "%1$s"', 'Cafe Noire Cappuccino' ) );
 		}
 
-		$this->assertEquals( $product, $this->object->getItem( $product->getId(), $domains ) );
+		$this->assertEquals( $product, $this->object->get( $product->getId(), $domains ) );
 		$this->assertEquals( 6, count( $product->getRefItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 1, count( $product->getRefItems( 'media', null, null, false ) ) );
 		$this->assertEquals( 1, count( $product->getPropertyItems() ) );
@@ -202,12 +202,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setId( null );
 		$item->setCode( 'CNC unit test' );
 		$resultSaved = $this->object->saveItem( $item );
-		$itemSaved = $this->object->getItem( $item->getId() );
+		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unit save test' )->addListItem( 'text', $listItem, $refItem );
 		$resultUpd = $this->object->saveItem( $itemExp );
-		$itemUpd = $this->object->getItem( $itemExp->getId(), ['text'] );
+		$itemUpd = $this->object->get( $itemExp->getId(), ['text'] );
 
 		$this->object->deleteItem( $itemUpd->deleteListItems( $itemUpd->getListItems( 'text' )->toArray(), true ) );
 
@@ -255,7 +255,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getItem( $itemSaved->getId() );
+		$this->object->get( $itemSaved->getId() );
 	}
 
 
@@ -299,12 +299,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->addListItem( 'text', $listItem, $textItem );
 
 		$item = $manager->saveItem( $item );
-		$item2 = $manager->getItem( $item->getId(), ['text'] );
+		$item2 = $manager->get( $item->getId(), ['text'] );
 
 		$item->deleteListItem( 'text', $listItem, $textItem );
 
 		$item = $manager->saveItem( $item );
-		$item3 = $manager->getItem( $item->getId(), ['text'] );
+		$item3 = $manager->get( $item->getId(), ['text'] );
 
 		$manager->deleteItem( $item->getId() );
 
@@ -332,11 +332,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setCode( 'unittest' );
 
 		$manager->saveItem( $item );
-		$manager->getItem( $item->getId() );
+		$manager->get( $item->getId() );
 		$manager->deleteItem( $item->getId() );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$manager->getItem( $item->getId() );
+		$manager->get( $item->getId() );
 	}
 
 

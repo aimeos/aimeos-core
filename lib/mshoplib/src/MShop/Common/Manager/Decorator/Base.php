@@ -181,19 +181,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the item specified by its ID
-	 *
-	 * @param string $id Unique ID of the item
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool $default Add default criteria
-	 * @return \Aimeos\MShop\Common\Item\Iface Item object
-	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->manager->getItem( $id, $ref, $default );
-	}
-
-	/**
 	 * Returns the available manager types
 	 *
 	 * @param bool $withsub Return also the resource type of sub-managers if true
@@ -203,6 +190,7 @@ abstract class Base
 	{
 		return $this->manager->getResourceType( $withsub );
 	}
+
 
 	/**
 	 * Returns the additional column/search definitions

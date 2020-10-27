@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$product = $productManager->findItem( 'CNE' );
 
-		$item = $this->object->getItem( $product->getId() );
+		$item = $this->object->get( $product->getId() );
 		$this->assertEquals( $product, $item );
 	}
 

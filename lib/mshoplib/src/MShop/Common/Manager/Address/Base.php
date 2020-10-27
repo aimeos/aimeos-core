@@ -86,7 +86,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Returns the address item of the given id
 	 * @throws \Aimeos\MShop\Exception If address search configuration isn't available
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		if( ( $conf = reset( $this->searchConfig ) ) === false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Address search configuration not available' ) );

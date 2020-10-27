@@ -102,7 +102,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( sprintf( 'No order base address item found for type "%1$s".', $type ) );
 		}
 
-		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
@@ -130,12 +130,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setId( null );
 		$item->setFirstname( 'unittestdata' );
 		$resultSaved = $this->object->saveItem( $item );
-		$itemSaved = $this->object->getItem( $item->getId() );
+		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setFirstname( $firstname );
 		$resultUpd = $this->object->saveItem( $itemExp );
-		$itemUpd = $this->object->getItem( $itemExp->getId() );
+		$itemUpd = $this->object->get( $itemExp->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -207,7 +207,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getItem( $oldId );
+		$this->object->get( $oldId );
 	}
 
 

@@ -455,7 +455,7 @@ class Standard
 	 * @return \Aimeos\MShop\Review\Item\Iface Returns review invoice item of the given id
 	 * @throws \Aimeos\MShop\Review\Exception If item couldn't be found
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'review.id', $id, $ref, $default );
 	}

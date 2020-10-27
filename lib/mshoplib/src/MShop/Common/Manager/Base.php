@@ -170,20 +170,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
-	 * Returns the item specified by its ID
-	 *
-	 * @param string $id Id of item
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool $default Add default criteria
-	 * @return \Aimeos\MShop\Common\Item\Iface Item object
-	 */
-	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->getObject()->getItem( $id, $ref, $default );
-	}
-
-
-	/**
 	 * Adds or updates an item object or a list of them.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved

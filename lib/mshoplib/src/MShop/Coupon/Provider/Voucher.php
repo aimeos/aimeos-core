@@ -167,7 +167,7 @@ class Voucher
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
 
-		$orderProduct = $manager->getItem( $orderProductId );
+		$orderProduct = $manager->get( $orderProductId );
 		$currency = $orderProduct->getPrice()->getCurrencyId();
 
 		if( $currencyId !== $currency )

@@ -209,7 +209,7 @@ class Standard
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Returns the coupon item of the given ID
 	 * @throws \Aimeos\MShop\Exception If coupon couldn't be found
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'coupon.id', $id, $ref, $default );
 	}

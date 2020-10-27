@@ -390,7 +390,7 @@ class Standard
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Returns the job item of the given id
 	 * @throws \Aimeos\MAdmin\Job\Exception If item couldn't be found
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$criteria = $this->getObject()->createSearch( $default );
 		$expr = [

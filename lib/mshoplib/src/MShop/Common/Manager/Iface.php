@@ -107,17 +107,6 @@ interface Iface
 	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface;
 
 	/**
-	 * Returns the item specified by its ID
-	 *
-	 * @param string $id Id of item
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool $default Add default criteria
-	 * @return \Aimeos\MShop\Common\Item\Iface Item object
-	 * @deprecated 2021.01
-	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface;
-
-	/**
 	 * Returns the available manager types
 	 *
 	 * @param bool $withsub Return also the resource type of sub-managers if true

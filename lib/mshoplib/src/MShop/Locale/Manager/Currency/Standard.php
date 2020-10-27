@@ -303,7 +303,7 @@ class Standard
 	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Returns the currency item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'locale.currency.id', $id, $ref, $default );
 	}

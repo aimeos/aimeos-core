@@ -129,7 +129,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'empty results' );
 		}
 
-		$this->assertEquals( $item, $obj->getItem( $item->getId() ) );
+		$this->assertEquals( $item, $obj->get( $item->getId() ) );
 	}
 
 
@@ -145,12 +145,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null );
 		$resultSaved = $this->object->saveItem( $item );
-		$itemSaved = $this->object->getItem( $item->getId() );
+		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unitUpdCode' );
 		$resultUpd = $this->object->saveItem( $itemExp );
-		$itemUpd = $this->object->getItem( $item->getId() );
+		$itemUpd = $this->object->get( $item->getId() );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -181,7 +181,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getItem( $item->getId() );
+		$this->object->get( $item->getId() );
 	}
 
 

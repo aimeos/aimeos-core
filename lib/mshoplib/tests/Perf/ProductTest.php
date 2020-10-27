@@ -36,7 +36,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 		$start = microtime( true );
 
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$product = $productManager->getItem( $this->item->getId(), array( 'text', 'media', 'price', 'product', 'attribute' ) );
+		$product = $productManager->get( $this->item->getId(), array( 'text', 'media', 'price', 'product', 'attribute' ) );
 
 		$ids = [];
 		foreach( $product->getRefItems( 'product' ) as $subproduct ) {

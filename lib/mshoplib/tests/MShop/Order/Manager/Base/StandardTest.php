@@ -110,7 +110,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \Aimeos\MShop\Order\Exception( 'No order base item found' );
 		}
 
-		$item = $this->object->getItem( $expected->getId() );
+		$item = $this->object->get( $expected->getId() );
 
 		$this->assertEquals( $expected, $item );
 		$this->assertEquals( '32.00', $item->getPrice()->getCosts() );
@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$product = $item->getProducts()->first()->setBaseId( $item->getId() )->setId( null );
 		$orderProductManager->saveItem( $product );
 
-		$itemSaved = $this->object->getItem( $item->getId() );
+		$itemSaved = $this->object->get( $item->getId() );
 		$itemPrice = $item->getPrice();
 		$itemSavedPrice = $item->getPrice();
 
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$itemExp->setComment( 'Unittest2' );
 		$itemExp->setCustomerId( 'unittest2' );
 		$resultUpd = $this->object->saveItem( $itemExp );
-		$itemUpd = $this->object->getItem( $itemExp->getId() );
+		$itemUpd = $this->object->get( $itemExp->getId() );
 		$itemExpPrice = $itemExp->getPrice();
 		$itemUpdPrice = $itemUpd->getPrice();
 
@@ -198,7 +198,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getItem( $itemSaved->getId() );
+		$this->object->get( $itemSaved->getId() );
 	}
 
 
@@ -678,7 +678,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 0, count( $attributes['73'] ) );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getItem( $newBasketId );
+		$this->object->get( $newBasketId );
 	}
 
 
@@ -758,7 +758,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getItem( $newBasketId );
+		$this->object->get( $newBasketId );
 	}
 
 

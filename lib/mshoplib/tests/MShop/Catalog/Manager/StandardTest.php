@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$item = $this->object->search( $search, array( 'text' ) )->first();
 
-		$testItem = $this->object->getItem( $item->getId() );
+		$testItem = $this->object->get( $item->getId() );
 
 		$this->assertEquals( \TestHelperMShop::getContext()->getLocale()->getSiteId(), $testItem->getSiteId() );
 		$this->assertEquals( $item->getId(), $testItem->getId() );
@@ -291,12 +291,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setCode( 'new Root child' );
 		$resultInsert = $this->object->insertItem( $item, $parentId );
 		$this->object->moveItem( $item->getId(), $parentId, $parentId );
-		$itemSaved = $this->object->getItem( $item->getId() );
+		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setStatus( true );
 		$resultSaved = $this->object->saveItem( $itemExp );
-		$itemUpd = $this->object->getItem( $itemExp->getId() );
+		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->deleteItem( $itemSaved->getId() );
 
@@ -329,7 +329,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultInsert );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getItem( $item->getId() );
+		$this->object->get( $item->getId() );
 	}
 
 

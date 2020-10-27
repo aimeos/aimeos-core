@@ -377,7 +377,7 @@ class Standard
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Returns the site item of the given id
 	 * @throws \Aimeos\MShop\Exception If the item couldn't be found
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'locale.site.id', $id, $ref, $default );
 	}
@@ -745,11 +745,11 @@ class Standard
 		if( $id !== null )
 		{
 			if( count( $ref ) > 0 ) {
-				return $this->getObject()->getItem( $id, $ref );
+				return $this->getObject()->get( $id, $ref );
 			}
 
 			if( !isset( $this->cache[$id] ) ) {
-				$this->cache[$id] = $this->getObject()->getItem( $id, $ref );
+				$this->cache[$id] = $this->getObject()->get( $id, $ref );
 			}
 
 			return $this->cache[$id];

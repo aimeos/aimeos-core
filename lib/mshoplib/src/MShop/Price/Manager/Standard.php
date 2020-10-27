@@ -380,7 +380,7 @@ class Standard
 	 * @return \Aimeos\MShop\Price\Item\Iface $item Returns the price item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'price.id', $id, $ref, $default );
 	}

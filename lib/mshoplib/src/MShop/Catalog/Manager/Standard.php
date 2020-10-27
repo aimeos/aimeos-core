@@ -365,7 +365,7 @@ class Standard extends Base
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item of the given ID
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'catalog.id', $id, $ref, $default );
 	}
@@ -468,7 +468,7 @@ class Standard extends Base
 
 		try
 		{
-			$item = $this->getObject()->getItem( $id );
+			$item = $this->getObject()->get( $id );
 			$siteid = $this->getContext()->getLocale()->getSiteId();
 
 			$this->createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );

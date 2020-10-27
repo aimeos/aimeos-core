@@ -54,13 +54,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setCode( 'XXX' );
 
 		$resultSaved = $this->object->saveItem( $item );
-		$itemSaved = $this->object->getItem( $item->getId() );
+		$itemSaved = $this->object->get( $item->getId() );
 
 		// update case
 		$itemExp = clone $itemSaved;
 		$itemExp->setLabel( 'new new name' );
 		$resultUpd = $this->object->saveItem( $itemExp );
-		$itemUpd = $this->object->getItem( $itemExp->getId() );
+		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -89,7 +89,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getItem( $item->getId() );
+		$this->object->get( $item->getId() );
 	}
 
 
@@ -103,7 +103,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$actual = $this->object->getItem( 'EUR' );
+		$actual = $this->object->get( 'EUR' );
 
 		$this->assertEquals( 'EUR', $actual->getId() );
 		$this->assertEquals( 'Euro', $actual->getLabel() );

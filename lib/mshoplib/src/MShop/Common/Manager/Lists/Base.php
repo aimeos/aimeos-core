@@ -184,7 +184,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Returns common list item object of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		if( ( $conf = reset( $this->searchConfig ) ) === false || !isset( $conf['code'] ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration not available' ) );

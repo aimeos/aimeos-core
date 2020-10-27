@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'no item found exception' );
 		}
 
-		$item = $this->object->getItem( $codeItem->getId() );
+		$item = $this->object->get( $codeItem->getId() );
 		$this->assertEquals( $codeItem, $item );
 	}
 
@@ -110,13 +110,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setId( null );
 		$item->setCode( 'unittest' );
 		$resultSaved = $this->object->saveItem( $item );
-		$itemSaved = $this->object->getItem( $item->getId() );
+		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 
 		$itemExp->setCount( '231199' );
 		$resultUpd = $this->object->saveItem( $itemExp );
-		$itemUpd = $this->object->getItem( $itemExp->getId() );
+		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -153,7 +153,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getItem( $item->getId() );
+		$this->object->get( $item->getId() );
 	}
 
 
@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->object->decrease( $codeItem->getCode(), 1 );
-		$actual = $this->object->getItem( $codeItem->getId() );
+		$actual = $this->object->get( $codeItem->getId() );
 		$this->object->increase( $codeItem->getCode(), 1 );
 
 		$this->assertEquals( $codeItem->getCount() - 1, $actual->getCount() );
@@ -236,7 +236,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->object->increase( $codeItem->getCode(), 1 );
-		$actual = $this->object->getItem( $codeItem->getId() );
+		$actual = $this->object->get( $codeItem->getId() );
 		$this->object->decrease( $codeItem->getCode(), 1 );
 
 		$this->assertEquals( $codeItem->getCount() + 1, $actual->getCount() );

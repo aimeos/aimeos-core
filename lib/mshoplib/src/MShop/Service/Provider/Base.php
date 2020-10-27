@@ -454,7 +454,7 @@ abstract class Base implements Iface
 		if( $customerId != null )
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'customer' );
-			$item = $manager->getItem( $customerId, ['service'] );
+			$item = $manager->get( $customerId, ['service'] );
 			$serviceId = $this->getServiceItem()->getId();
 
 			if( ( $listItem = $item->getListItem( 'service', 'default', $serviceId ) ) !== null ) {
@@ -520,7 +520,7 @@ abstract class Base implements Iface
 		if( $customerId != null )
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'customer' );
-			$item = $manager->getItem( $customerId, ['service'] );
+			$item = $manager->get( $customerId, ['service'] );
 			$serviceId = $this->getServiceItem()->getId();
 
 			if( ( $listItem = $item->getListItem( 'service', 'default', $serviceId, false ) ) === null )

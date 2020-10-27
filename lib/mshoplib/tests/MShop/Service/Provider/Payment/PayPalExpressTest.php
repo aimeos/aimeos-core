@@ -185,7 +185,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
-		$price = $orderBaseManager->getItem( $this->order->getBaseId() )->getPrice();
+		$price = $orderBaseManager->get( $this->order->getBaseId() )->getPrice();
 		$amount = $price->getValue() + $price->getCosts();
 
 		$params = array(

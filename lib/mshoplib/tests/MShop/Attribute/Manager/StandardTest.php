@@ -120,7 +120,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$itemA = $this->object->findItem( 'black', [], 'product', 'color' );
-		$itemB = $this->object->getItem( $itemA->getId(), ['attribute/property', 'text'] );
+		$itemB = $this->object->get( $itemA->getId(), ['attribute/property', 'text'] );
 
 		$this->assertEquals( $itemA->getId(), $itemB->getId() );
 		$this->assertEquals( 1, count( $itemB->getPropertyItems() ) );
@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetItemLists()
 	{
 		$itemA = $this->object->findItem( 'xxl', [], 'product', 'size' );
-		$itemB = $this->object->getItem( $itemA->getId(), ['text'] );
+		$itemB = $this->object->get( $itemA->getId(), ['text'] );
 
 		$this->assertEquals( $itemA->getId(), $itemB->getId() );
 		$this->assertEquals( 1, count( $itemB->getListItems( 'text', null, null, false ) ) );
@@ -150,14 +150,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setPosition( 0 );
 		$item->setStatus( 7 );
 		$resultSaved = $this->object->saveItem( $item );
-		$itemSaved = $this->object->getItem( $item->getId() );
+		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setDomain( 'tmpDomain' );
 		$itemExp->setCode( '106' );
 		$itemExp->setLabel( '106' );
 		$resultUpd = $this->object->saveItem( $itemExp );
-		$itemUpd = $this->object->getItem( $itemExp->getId() );
+		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -196,7 +196,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getItem( $item->getId() );
+		$this->object->get( $item->getId() );
 	}
 
 

@@ -179,7 +179,7 @@ class ProductFreeOptions
 	{
 		$attrQtys = $attrTypes = [];
 		$context = $this->getContext();
-		$prodItem = \Aimeos\MShop::create( $context, 'product' )->getItem( $product->getProductId(), ['price'] );
+		$prodItem = \Aimeos\MShop::create( $context, 'product' )->get( $product->getProductId(), ['price'] );
 		$prodConf = $prodItem->getConfig();
 
 

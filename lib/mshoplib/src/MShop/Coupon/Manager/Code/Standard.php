@@ -350,7 +350,7 @@ class Standard
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code object
 	 * @throws \Aimeos\MShop\Coupon\Exception If coupon couldn't be found
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'coupon.code.id', $id, $ref, $default );
 	}

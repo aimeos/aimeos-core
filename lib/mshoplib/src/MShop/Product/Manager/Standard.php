@@ -408,7 +408,7 @@ class Standard
 	 * @return \Aimeos\MShop\Product\Item\Iface Returns the product item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'product.id', $id, $ref, $default );
 	}

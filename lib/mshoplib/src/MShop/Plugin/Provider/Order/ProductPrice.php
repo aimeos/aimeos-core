@@ -235,7 +235,7 @@ class ProductPrice
 		if( $refPrices->isEmpty() )
 		{
 			$productManager = \Aimeos\MShop::create( $context, 'product' );
-			$product = $productManager->getItem( $orderProduct->getProductId(), array( 'price' ) );
+			$product = $productManager->get( $orderProduct->getProductId(), array( 'price' ) );
 			$refPrices = $product->getRefItems( 'price', 'default', 'default' );
 		}
 

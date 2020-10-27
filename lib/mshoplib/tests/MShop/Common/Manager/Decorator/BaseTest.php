@@ -142,10 +142,10 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'product' )->createItem();
 
-		$this->stub->expects( $this->once() )->method( 'getItem' )
+		$this->stub->expects( $this->once() )->method( 'get' )
 			->will( $this->returnValue( $item ) );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->getItem( -1 ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->get( -1 ) );
 	}
 
 

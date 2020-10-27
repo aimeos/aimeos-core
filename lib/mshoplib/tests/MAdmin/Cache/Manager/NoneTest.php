@@ -70,7 +70,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$this->expectException( \Aimeos\MAdmin\Cache\Exception::class );
-		$this->object->getItem( 'unittest' );
+		$this->object->get( 'unittest' );
 	}
 
 

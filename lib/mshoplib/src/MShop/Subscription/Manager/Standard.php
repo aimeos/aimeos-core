@@ -465,7 +465,7 @@ class Standard
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Returns subscription invoice item of the given id
 	 * @throws \Aimeos\MShop\Subscription\Exception If item couldn't be found
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'subscription.id', $id, $ref, $default );
 	}

@@ -220,7 +220,7 @@ class Standard
 	 * @param bool $default Add default criteria
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Item for the given ID
 	 */
-	public function getItem( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'order.base.coupon.id', $id, $ref, $default );
 	}
