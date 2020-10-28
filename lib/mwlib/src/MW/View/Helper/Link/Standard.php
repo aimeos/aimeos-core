@@ -32,10 +32,11 @@ class Standard
 	public function transform( string $cfgkey, array $params = [], array $fragments = [] ) : string
 	{
 		$view = $this->getView();
+		$list = \Aimeos\Map::split( $cfgkey, '/' )->skip( 2 );
 
 		$target = $view->config( $cfgkey . '/target' );
-		$cntl = $view->config( $cfgkey . '/controller' );
-		$action = $view->config( $cfgkey . '/action' );
+		$cntl = $view->config( $cfgkey . '/controller', ucfirst( $list->shift() ) );
+		$action = $view->config( $cfgkey . '/action', $list->shift() );
 		$config = $view->config( $cfgkey . '/config', [] );
 		$filter = $view->config( $cfgkey . '/filter', [] );
 
