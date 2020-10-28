@@ -21,6 +21,20 @@ namespace Aimeos\MShop\Context\Item;
 interface Iface
 {
 	/**
+	 * Returns the cache object.
+	 *
+	 * @return \Aimeos\MW\Cache\Iface Cache object
+	 */
+	public function cache() : \Aimeos\MW\Cache\Iface;
+
+	/**
+	 * Returns the cache object.
+	 *
+	 * @return \Aimeos\MW\Cache\Iface Cache object
+	 */
+	public function getCache() : \Aimeos\MW\Cache\Iface;
+
+	/**
 	 * Sets the cache object.
 	 *
 	 * @param \Aimeos\MW\Cache\Iface $cache Cache object
@@ -29,11 +43,18 @@ interface Iface
 	public function setCache( \Aimeos\MW\Cache\Iface $cache ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
-	 * Returns the cache object.
+	 * Returns the configuration object.
 	 *
-	 * @return \Aimeos\MW\Cache\Iface Cache object
+	 * @return \Aimeos\MW\Config\Iface Configuration object
 	 */
-	public function getCache() : \Aimeos\MW\Cache\Iface;
+	public function config() : \Aimeos\MW\Config\Iface;
+
+	/**
+	 * Returns the configuration object.
+	 *
+	 * @return \Aimeos\MW\Config\Iface Configuration object
+	 */
+	public function getConfig() : \Aimeos\MW\Config\Iface;
 
 	/**
 	 * Sets the configuration object.
@@ -44,11 +65,18 @@ interface Iface
 	public function setConfig( \Aimeos\MW\Config\Iface $config ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
-	 * Returns the configuration object.
+	 * Returns the database manager object.
 	 *
-	 * @return \Aimeos\MW\Config\Iface Configuration object
+	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
 	 */
-	public function getConfig() : \Aimeos\MW\Config\Iface;
+	public function db() : \Aimeos\MW\DB\Manager\Iface;
+
+	/**
+	 * Returns the database manager object.
+	 *
+	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
+	 */
+	public function getDatabaseManager() : \Aimeos\MW\DB\Manager\Iface;
 
 	/**
 	 * Sets the database connection manager object.
@@ -59,19 +87,13 @@ interface Iface
 	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $dbManager ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
-	 * Returns the database manager object.
+	 * Returns the current date and time
+	 * This is especially useful to share the same request time or if applications
+	 * allow to travel in time.
 	 *
-	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
+	 * @return string Current date and time as ISO string (YYYY-MM-DD HH:mm:ss)
 	 */
-	public function getDatabaseManager() : \Aimeos\MW\DB\Manager\Iface;
-
-	/**
-	 * Sets the file system manager object.
-	 *
-	 * @param \Aimeos\MW\Filesystem\Manager\Iface $fsManager File system manager object
-	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
-	 */
-	public function setFilesystemManager( \Aimeos\MW\Filesystem\Manager\Iface $fsManager ) : \Aimeos\MShop\Context\Item\Iface;
+	public function datetime() : string;
 
 	/**
 	 * Returns the current date and time
@@ -90,11 +112,12 @@ interface Iface
 	public function setDateTime( string $datetime ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
-	 * Returns the file system manager object.
+	 * Returns the file system object for the given resource name.
 	 *
-	 * @return \Aimeos\MW\Filesystem\Manager\Iface File system manager object
+	 * @param string $resource Resource name, e.g. "fs-admin"
+	 * @return \Aimeos\MW\Filesystem\Iface File system object
 	 */
-	public function getFilesystemManager() : \Aimeos\MW\Filesystem\Manager\Iface;
+	public function fs( string $resource ) : \Aimeos\MW\Filesystem\Iface;
 
 	/**
 	 * Returns the file system object for the given resource name.
@@ -105,12 +128,27 @@ interface Iface
 	public function getFilesystem( string $resource ) : \Aimeos\MW\Filesystem\Iface;
 
 	/**
-	 * Sets the translation/internationalization objects.
+	 * Returns the file system manager object.
 	 *
-	 * @param \Aimeos\MW\Translation\Iface[] $translations Associative list locale as key as items as values
+	 * @return \Aimeos\MW\Filesystem\Manager\Iface File system manager object
+	 */
+	public function getFilesystemManager() : \Aimeos\MW\Filesystem\Manager\Iface;
+
+	/**
+	 * Sets the file system manager object.
+	 *
+	 * @param \Aimeos\MW\Filesystem\Manager\Iface $fsManager File system manager object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setI18n( array $translations ) : \Aimeos\MShop\Context\Item\Iface;
+	public function setFilesystemManager( \Aimeos\MW\Filesystem\Manager\Iface $fsManager ) : \Aimeos\MShop\Context\Item\Iface;
+
+	/**
+	 * Returns the translation/internationalization object for the given locale (null for default one).
+	 *
+	 * @param string|null $locale Two letter language ISO code for specific language instead of default one
+	 * @return \Aimeos\MW\Translation\Iface Internationalization object
+	 */
+	public function i18n( string $locale = null ) : \Aimeos\MW\Translation\Iface;
 
 	/**
 	 * Returns the translation/internationalization object for the given locale (null for default one).
@@ -121,6 +159,28 @@ interface Iface
 	public function getI18n( string $locale = null ) : \Aimeos\MW\Translation\Iface;
 
 	/**
+	 * Sets the translation/internationalization objects.
+	 *
+	 * @param \Aimeos\MW\Translation\Iface[] $translations Associative list locale as key as items as values
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
+	 */
+	public function setI18n( array $translations ) : \Aimeos\MShop\Context\Item\Iface;
+
+	/**
+	 * Returns the localization object.
+	 *
+	 * @return \Aimeos\MShop\Locale\Item\Iface Localization object
+	 */
+	public function locale() : \Aimeos\MShop\Locale\Item\Iface;
+
+	/**
+	 * Returns the localization object.
+	 *
+	 * @return \Aimeos\MShop\Locale\Item\Iface Localization object
+	 */
+	public function getLocale() : \Aimeos\MShop\Locale\Item\Iface;
+
+	/**
 	 * Sets the localization object.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Localization object
@@ -129,11 +189,18 @@ interface Iface
 	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
-	 * Returns the localization object.
+	 * Returns the logger object.
 	 *
-	 * @return \Aimeos\MShop\Locale\Item\Iface Localization object
+	 * @return \Aimeos\MW\Logger\Iface Logger object
 	 */
-	public function getLocale() : \Aimeos\MShop\Locale\Item\Iface;
+	public function logger() : \Aimeos\MW\Logger\Iface;
+
+	/**
+	 * Returns the logger object.
+	 *
+	 * @return \Aimeos\MW\Logger\Iface Logger object
+	 */
+	public function getLogger() : \Aimeos\MW\Logger\Iface;
 
 	/**
 	 * Sets the logger object.
@@ -144,11 +211,18 @@ interface Iface
 	public function setLogger( \Aimeos\MW\Logger\Iface $logger ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
-	 * Returns the logger object.
+	 * Returns the mail object.
 	 *
-	 * @return \Aimeos\MW\Logger\Iface Logger object
+	 * @return \Aimeos\MW\Mail\Iface Mail object
 	 */
-	public function getLogger() : \Aimeos\MW\Logger\Iface;
+	public function mail() : \Aimeos\MW\Mail\Iface;
+
+	/**
+	 * Returns the mail object.
+	 *
+	 * @return \Aimeos\MW\Mail\Iface Mail object
+	 */
+	public function getMail() : \Aimeos\MW\Mail\Iface;
 
 	/**
 	 * Sets the mail object.
@@ -159,26 +233,13 @@ interface Iface
 	public function setMail( \Aimeos\MW\Mail\Iface $mail ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
-	 * Returns the mail object.
+	 * Returns the message queue object.
 	 *
-	 * @return \Aimeos\MW\Mail\Iface Mail object
+	 * @param string $resource Resource name, e.g. "mq-email"
+	 * @param string $queue Message queue name, e.g. "order/email/payment"
+	 * @return \Aimeos\MW\MQueue\Queue\Iface Message queue object
 	 */
-	public function getMail() : \Aimeos\MW\Mail\Iface;
-
-	/**
-	 * Sets the message queue manager object.
-	 *
-	 * @param \Aimeos\MW\MQueue\Manager\Iface $mqManager Message queue manager object
-	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
-	 */
-	public function setMessageQueueManager( \Aimeos\MW\MQueue\Manager\Iface $mqManager ) : \Aimeos\MShop\Context\Item\Iface;
-
-	/**
-	 * Returns the message queue manager object.
-	 *
-	 * @return \Aimeos\MW\MQueue\Manager\Iface Message queue manager object
-	 */
-	public function getMessageQueueManager() : \Aimeos\MW\MQueue\Manager\Iface;
+	public function queue( string $resource, string $queue ) : \Aimeos\MW\MQueue\Queue\Iface;
 
 	/**
 	 * Returns the message queue object.
@@ -190,6 +251,35 @@ interface Iface
 	public function getMessageQueue( string $resource, string $queue ) : \Aimeos\MW\MQueue\Queue\Iface;
 
 	/**
+	 * Returns the message queue manager object.
+	 *
+	 * @return \Aimeos\MW\MQueue\Manager\Iface Message queue manager object
+	 */
+	public function getMessageQueueManager() : \Aimeos\MW\MQueue\Manager\Iface;
+
+	/**
+	 * Sets the message queue manager object.
+	 *
+	 * @param \Aimeos\MW\MQueue\Manager\Iface $mqManager Message queue manager object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
+	 */
+	public function setMessageQueueManager( \Aimeos\MW\MQueue\Manager\Iface $mqManager ) : \Aimeos\MShop\Context\Item\Iface;
+
+	/**
+	 * Returns the process object.
+	 *
+	 * @return \Aimeos\MW\Process\Iface Process object
+	 */
+	public function process() : \Aimeos\MW\Process\Iface;
+
+	/**
+	 * Returns the process object.
+	 *
+	 * @return \Aimeos\MW\Process\Iface Process object
+	 */
+	public function getProcess() : \Aimeos\MW\Process\Iface;
+
+	/**
 	 * Sets the process object.
 	 *
 	 * @param \Aimeos\MW\Process\Iface $process Process object
@@ -198,11 +288,18 @@ interface Iface
 	public function setProcess( \Aimeos\MW\Process\Iface $process ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
-	 * Returns the process object.
+	 * Returns the session object.
 	 *
-	 * @return \Aimeos\MW\Process\Iface Process object
+	 * @return \Aimeos\MW\Session\Iface Session object
 	 */
-	public function getProcess() : \Aimeos\MW\Process\Iface;
+	public function session() : \Aimeos\MW\Session\Iface;
+
+	/**
+	 * Returns the session object.
+	 *
+	 * @return \Aimeos\MW\Session\Iface Session object
+	 */
+	public function getSession() : \Aimeos\MW\Session\Iface;
 
 	/**
 	 * Sets the session object.
@@ -213,11 +310,18 @@ interface Iface
 	public function setSession( \Aimeos\MW\Session\Iface $session ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
-	 * Returns the session object.
+	 * Returns the view object.
 	 *
-	 * @return \Aimeos\MW\Session\Iface Session object
+	 * @return \Aimeos\MW\View\Iface View object
 	 */
-	public function getSession() : \Aimeos\MW\Session\Iface;
+	public function view() : \Aimeos\MW\View\Iface;
+
+	/**
+	 * Returns the view object.
+	 *
+	 * @return \Aimeos\MW\View\Iface View object
+	 */
+	public function getView() : \Aimeos\MW\View\Iface;
 
 	/**
 	 * Sets the view object.
@@ -228,11 +332,18 @@ interface Iface
 	public function setView( \Aimeos\MW\View\Iface $view ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
-	 * Returns the view object.
+	 * Returns the account name of the user/editor.
 	 *
-	 * @return \Aimeos\MW\View\Iface View object
+	 * @return string Account name of the user/editor
 	 */
-	public function getView() : \Aimeos\MW\View\Iface;
+	public function editor() : string;
+
+	/**
+	 * Returns the account name of the user/editor.
+	 *
+	 * @return string Account name or IP address of the user/editor
+	 */
+	public function getEditor() : string;
 
 	/**
 	 * Sets the account name of the user/editor.
@@ -243,11 +354,18 @@ interface Iface
 	public function setEditor( string $name ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
-	 * Returns the account name of the user/editor.
+	 * Returns the user ID of the logged in user.
 	 *
-	 * @return string Account name or IP address of the user/editor
+	 * @return string|null User ID of the logged in user
 	 */
-	public function getEditor() : string;
+	public function user() : ?string;
+
+	/**
+	 * Returns the user ID of the logged in user.
+	 *
+	 * @return string|null User ID of the logged in user
+	 */
+	public function getUserId() : ?string;
 
 	/**
 	 * Sets the user ID of the logged in user.
@@ -258,12 +376,18 @@ interface Iface
 	public function setUserId( $user ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
-	 * Returns the user ID of the logged in user.
+	 * Returns the group IDs of the logged in user.
 	 *
-	 * @return string|null User ID of the logged in user
+	 * @return array Group IDs of the logged in user
 	 */
-	public function getUserId() : ?string;
+	public function groups() : array;
 
+	/**
+	 * Returns the group IDs of the logged in user.
+	 *
+	 * @return array Group IDs of the logged in user
+	 */
+	public function getGroupIds() : array;
 
 	/**
 	 * Sets the group IDs of the logged in user.
@@ -272,12 +396,4 @@ interface Iface
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setGroupIds( $groupIds ) : \Aimeos\MShop\Context\Item\Iface;
-
-
-	/**
-	 * Returns the group IDs of the logged in user.
-	 *
-	 * @return array Group IDs of the logged in user
-	 */
-	public function getGroupIds() : array;
 }
