@@ -24,7 +24,7 @@
 		"ext-pcre": "*",
 		"ext-PDO": "*",
 		"ext-zip": "*",
-		"aimeos/map": "^1.6",
+		"aimeos/map": "^1.9",
 		"nyholm/psr7": "^1.2",
 		"doctrine/dbal": "~2.0",
 		"psr/http-message": "~1.0",

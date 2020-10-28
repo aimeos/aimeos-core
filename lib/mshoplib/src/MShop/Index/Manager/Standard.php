@@ -212,8 +212,10 @@ class Standard
 	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$this->getManager()->deleteItems( $itemIds );
+		parent::deleteitems( $itemIds );
 
-		return parent::deleteitems( $itemIds )->clearCache( $itemIds );
+		$this->getContext()->cache()->deleteByTags( map( $itemIds ) ->prefix( 'product-' )->toArray() );
+		return $this;
 	}
 
 
@@ -309,8 +311,6 @@ class Standard
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
 			$this->writeIndex( $search, $domains, $size );
-
-			// $context->cache()->deleteByTags( map( $result->keys() )->prefix( 'product-' )->toArray() );
 
 			$start += $size;
 		}
@@ -443,19 +443,6 @@ class Standard
 
 
 	/**
-	 * Removes multiple items from the index.
-	 *
-	 * @param string[] $ids list of product IDs
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
-	 * @deprecated 2021.01 Use remove()
-	 */
-	protected function clearItems( array $ids ) : \Aimeos\MShop\Index\Manager\Iface
-	{
-		return $this->remove( $ids );
-	}
-
-
-	/**
 	 * Re-writes the index entries for all products that are search result of given criteria
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
@@ -464,7 +451,8 @@ class Standard
 	 */
 	protected function writeIndex( \Aimeos\MW\Criteria\Iface $search, array $domains, int $size )
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
+		$context = $this->getContext();
+		$manager = \Aimeos\MShop::create( $context, 'product' );
 		$submanagers = $this->getSubManagers();
 		$start = 0;
 
@@ -472,13 +460,12 @@ class Standard
 		{
 			$search->setSlice( $start, $size );
 			$products = $manager->search( $search, $domains );
-			$prodIds = $products->keys()->toArray();
 
 			try
 			{
 				$this->begin();
 
-				$this->clearItems( $prodIds );
+				$this->remove( $products->toArray() );
 
 				foreach( $submanagers as $submanager ) {
 					$submanager->rebuild( $products->toArray() );
@@ -492,7 +479,7 @@ class Standard
 				throw $e;
 			}
 
-			$this->clearCache( $prodIds );
+			$context->cache()->deleteByTags( $products->keys()->prefix( 'product-' )->toArray() );
 
 			$count = count( $products );
 			$start += $count;

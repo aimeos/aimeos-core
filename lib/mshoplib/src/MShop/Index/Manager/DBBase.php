@@ -255,25 +255,6 @@ abstract class DBBase
 
 
 	/**
-	 * Deletes the cache entries using the given product IDs.
-	 *
-	 * @param string[] $ids List of product IDs
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
-	 */
-	 protected function clearCache( array $ids ) : \Aimeos\MShop\Index\Manager\Iface
-	 {
-		 $tags = [];
-
-		 foreach( $ids as $id ) {
-			 $tags[] = 'product-' . $id;
-		 }
-
-		 $this->getContext()->getCache()->deleteByTags( $tags );
-		 return $this;
-	 }
-
-
-	/**
 	 * Removes several items from the index
 	 *
 	 * @param string[] $ids List of product IDs
