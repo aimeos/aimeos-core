@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '==', 'locale.currency.id', 'EUR' );
@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, $total );
 
 		// search without base criteria, slice & total
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '~=', 'locale.currency.label', 'CFA' ) );
 		$search->setSlice( 0, 1 );
 		$results = $this->object->search( $search, [], $total )->toArray();

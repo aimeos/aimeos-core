@@ -67,14 +67,15 @@ abstract class DBBase
 
 
 	/**
-	 * Creates a search object and optionally sets its base criteria
+	 * Creates a filter object.
 	 *
-	 * @param bool $default True to add the default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Criteria object
+	 * @param bool $default Add default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
-		return $this->manager->createSearch( $default );
+		return $this->manager->filter( $default );
 	}
 
 
@@ -453,7 +454,7 @@ abstract class DBBase
 		}
 
 		$manager = \Aimeos\MShop::create( $context, 'product' );
-		$prodSearch = $manager->createSearch();
+		$prodSearch = $manager->filter();
 		$prodSearch->setConditions( $prodSearch->compare( '==', 'product.id', $ids ) );
 		$prodSearch->setSlice( 0, $search->getSliceSize() );
 		$items = $manager->search( $prodSearch, $ref );

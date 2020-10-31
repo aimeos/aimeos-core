@@ -139,7 +139,7 @@ class ServicesUpdate
 		{
 			$serviceManager = \Aimeos\MShop::create( $this->getContext(), 'service' );
 
-			$search = $serviceManager->createSearch( true );
+			$search = $serviceManager->filter( true );
 			$expr = [$search->compare( '==', 'service.id', $list ), $search->getConditions()];
 			$search->setConditions( $search->combine( '&&', $expr ) );
 

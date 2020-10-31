@@ -61,7 +61,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItems()
 	{
 		//search without base criteria
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'media.type.id', null );
@@ -82,7 +82,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, $total );
 
 		// search with base criteria
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$expr = array(
 			$search->compare( '==', 'media.type.code', 'default' ),
 			$search->compare( '==', 'media.type.editor', $this->editor ),
@@ -103,7 +103,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'media.type.code', 'prod_266x221' ),
 			$search->compare( '==', 'media.type.editor', $this->editor )
@@ -122,7 +122,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = $search->compare( '==', 'media.type.editor', $this->editor );
 		$search->setCOnditions( $conditions );
 		$results = $this->object->search( $search )->toArray();

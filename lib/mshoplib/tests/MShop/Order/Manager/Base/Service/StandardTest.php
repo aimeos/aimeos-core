@@ -33,7 +33,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.service.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.base.service.code' )->toArray();
 
@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateAvg()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.service.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.base.service.type', 'order.base.service.costs', 'avg' )->toArray();
 
@@ -57,7 +57,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateSum()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.service.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.base.service.type', 'order.base.service.costs', 'sum' )->toArray();
 
@@ -106,8 +106,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch() );
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch( true ) );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter( true ) );
 	}
 
 
@@ -116,7 +116,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$siteid = $this->context->getLocale()->getSiteId();
 
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'order.base.service.id', null );
@@ -158,7 +158,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemRef()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'order.base.service.code', 'OGONE' ) );
 		$result = $this->object->search( $search, ['service'] );
 
@@ -170,7 +170,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemTotal()
 	{
 		$total = 0;
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 
 		$search->setConditions( $search->combine( '&&', [
 			$search->compare( '==', 'order.base.service.code', array( 'OGONE', 'not exists' ) ),
@@ -221,7 +221,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.base.service.code', 'OGONE' ),
 			$search->compare( '==', 'order.base.service.editor', $this->editor ),
@@ -240,7 +240,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'order.base.service.code', 'OGONE' ),
 			$search->compare( '==', 'order.base.service.editor', $this->editor ),

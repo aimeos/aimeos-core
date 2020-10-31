@@ -115,7 +115,7 @@ class FreeProduct
 
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$expr = [
 			$search->compare( '==', 'order.base.address.email', $email ),
 			$search->compare( '==', 'order.base.product.prodcode', $code ),

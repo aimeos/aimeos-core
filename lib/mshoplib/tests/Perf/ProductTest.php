@@ -21,7 +21,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext( 'unitperf' );
 
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$search = $productManager->createSearch();
+		$search = $productManager->filter();
 		$search->setSlice( 0, 1 );
 		$result = $productManager->search( $search, array( 'text', 'media', 'price', 'product', 'attribute' ) );
 
@@ -45,7 +45,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 
 		if( count( $ids ) > 0 )
 		{
-			$search = $productManager->createSearch( true );
+			$search = $productManager->filter( true );
 			$search->setConditions( $search->compare( '==', 'product.id', $ids ) );
 			$productManager->search( $search, array( 'text', 'media', 'price', 'product', 'attribute' ) );
 		}

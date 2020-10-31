@@ -22,7 +22,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem()->off(); // remove event listeners
 
 		$orderBaseProductManager = \Aimeos\MShop::create( $context, 'order/base/product' );
-		$search = $orderBaseProductManager->createSearch();
+		$search = $orderBaseProductManager->filter();
 		$search->setConditions( $search->combine( '&&', array(
 			$search->compare( '==', 'order.base.product.prodcode', array( 'CNE', 'CNC' ) ),
 			$search->compare( '==', 'order.base.product.price', array( '600.00', '36.00' ) )

@@ -308,9 +308,9 @@ class Standard extends Base
 	 * @param bool $site TRUE to add site criteria to show orders with available products only
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function createSearch( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
-		$search = parent::createSearch( $default );
+		$search = parent::filter( $default );
 		$context = $this->getContext();
 
 		if( $default === true )
@@ -914,7 +914,7 @@ class Standard extends Base
 			&& !( $ids = map( $map )->col( 'order.base.customerid' )->filter() )->empty()
 		) {
 			$manager = \Aimeos\MShop::create( $context, 'customer' );
-			$search = $manager->createSearch()->setSlice( 0, count( $ids ) );
+			$search = $manager->filter()->setSlice( 0, count( $ids ) );
 			$search->setConditions( $search->compare( '==', 'customer.id', $ids ) );
 			$custItems = $manager->search( $search, $ref );
 		}
@@ -956,7 +956,7 @@ class Standard extends Base
 	public function load( string $id, int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, bool $fresh = false,
 		bool $default = false ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		$search = $this->getObject()->createSearch( $default );
+		$search = $this->getObject()->filter( $default );
 		$expr = [
 			$search->compare( '==', 'order.base.id', $id ),
 			$search->getConditions(),

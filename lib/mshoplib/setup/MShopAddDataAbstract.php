@@ -349,7 +349,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$codes[$entry['code']] = null;
 		}
 
-		$search = $productManager->createSearch();
+		$search = $productManager->filter();
 		$search->setConditions( $search->compare( '==', 'product.code', array_keys( $codes ) ) );
 		$products = $productManager->search( $search );
 
@@ -389,7 +389,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock/type' );
 
 		$types = [];
-		foreach( $manager->search( $manager->createSearch() ) as $id => $item ) {
+		foreach( $manager->search( $manager->filter() ) as $id => $item ) {
 			$types[$item->getCode()] = $id;
 		}
 
@@ -424,7 +424,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
 
-			foreach( $manager->search( $manager->createSearch() ) as $item ) {
+			foreach( $manager->search( $manager->filter() ) as $item ) {
 				$this->attributes[$item->getDomain()][$item->getType()][$item->getCode()] = $item;
 			}
 		}
@@ -463,7 +463,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$listManager = \Aimeos\MShop::create( $context, $name );
 
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$expr = array(
 			$search->compare( '==', $refdomain . '.domain', $domain ),
 			$search->compare( '=~', $refdomain . '.label', 'Demo' ),
@@ -474,7 +474,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$manager->deleteItems( $ids );
 
 
-		$search = $listManager->createSearch();
+		$search = $listManager->filter();
 		$expr = array(
 			$search->compare( '==', $key . '.parentid', $parentid ),
 			$search->compare( '==', $key . '.domain', $refdomain ),
@@ -503,7 +503,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$listManager = \Aimeos\MShop::create( $context, $name );
 
 
-		$search = $listManager->createSearch();
+		$search = $listManager->filter();
 		$expr = array(
 			$search->compare( '==', $key . '.parentid', $parentid ),
 			$search->compare( '==', $key . '.domain', $refdomain ),
@@ -522,7 +522,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			}
 
 
-			$search = $manager->createSearch();
+			$search = $manager->filter();
 			$search->setConditions( $search->compare( '==', $refdomain . '.id', $refIds ) );
 			$ids = $manager->search( $search )->keys()->toArray();
 
@@ -540,11 +540,11 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		while( $count == $search->getSliceSize() );
 
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', $refdomain . '.label', 'Demo' ) );
 		$ids = $manager->search( $search )->keys()->toArray();
 
-		$search = $listManager->createSearch();
+		$search = $listManager->filter();
 		$expr = array(
 			$search->compare( '==', $key . '.parentid', $parentid ),
 			$search->compare( '==', $key . '.refid', $ids ),

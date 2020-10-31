@@ -238,18 +238,18 @@ class Standard
 
 
 	/**
-	 * Creates a search critera object
+	 * Creates a filter object.
 	 *
-	 * @param bool $default Add default criteria (optional)
-	 * @param bool $site TRUE to add site criteria to show orders with available products only
-	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
+	 * @param bool $default Add default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function createSearch( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
-		$search = parent::createSearch();
+		$search = parent::filter();
 
 		if( $default === true ) {
-			$search = $this->createSearchBase( 'subscription' );
+			$search = $this->filterBase( 'subscription' );
 		}
 
 		if( $site === true )
@@ -757,7 +757,7 @@ class Standard
 			}
 
 			$manager = $this->getObject()->getSubManager( 'base' );
-			$search = $manager->createSearch()->setSlice( 0, count( $ids ) );
+			$search = $manager->filter()->setSlice( 0, count( $ids ) );
 			$search->setConditions( $search->compare( '==', 'order.base.id', $ids ) );
 			$baseItems = $manager->search( $search, $ref );
 		}

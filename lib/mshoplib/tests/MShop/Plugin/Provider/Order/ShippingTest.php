@@ -71,7 +71,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 			->setConfig( ['threshold' => ['EUR' => '34.00']] );
 
 		$manager = \Aimeos\MShop::create( $this->context, 'product' );
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'product.code', ['CNE', 'CNC', 'IJKL'] ) );
 
 		$products = [];
@@ -94,7 +94,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 		$product3 = $orderBaseProductManager->createItem()->copyFrom( $products['IJKL'] )->setPrice( $price );
 
 		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
-		$serviceSearch = $orderBaseServiceManager->createSearch();
+		$serviceSearch = $orderBaseServiceManager->filter();
 		$exp = array(
 			$serviceSearch->compare( '==', 'order.base.service.type', 'delivery' ),
 			$serviceSearch->compare( '==', 'order.base.service.costs', '5.00' )

@@ -68,7 +68,7 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		}
 		catch( \Exception $e ) {; } // If no root node was already inserted into the database
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'catalog.code', 'demo-' ) );
 		$manager->deleteItems( $manager->search( $search )->getId()->toArray() );
 

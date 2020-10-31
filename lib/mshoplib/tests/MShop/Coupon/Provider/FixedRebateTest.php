@@ -200,7 +200,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 		$products = [];
 		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base/product' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->combine( '&&', array(
 			$search->compare( '==', 'order.base.product.prodcode', array( 'CNE', 'CNC' ) ),
 			$search->compare( '==', 'order.base.product.price', array( '600.00', '36.00' ) )

@@ -570,7 +570,7 @@ class PayPalExpress
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $params['payment_amount'], $params['invoice'] ) );
 		}
 
-		$search = $attrManager->createSearch();
+		$search = $attrManager->filter();
 		$expr = array(
 			$search->compare( '==', 'order.base.service.attribute.code', $params['txn_id'] ),
 			$search->compare( '==', 'order.base.service.attribute.value', $params['payment_status'] ),

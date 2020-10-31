@@ -401,7 +401,7 @@ abstract class Base implements Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'order' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$expr = [
 			$search->compare( '==', 'order.id', $id ),
 			$search->compare( '==', 'order.base.service.code', $this->serviceItem->getCode() ),

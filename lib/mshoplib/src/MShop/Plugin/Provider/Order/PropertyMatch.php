@@ -146,7 +146,7 @@ class PropertyMatch
 		$langId = $context->getLocale()->getLanguageId();
 
 		$manager = \Aimeos\MShop::create( $context, 'product' );
-		$search = $manager->createSearch( true );
+		$search = $manager->filter( true );
 		$expr = [
 			$search->compare( '==', 'product.id', $productIds ),
 			$search->getConditions(),

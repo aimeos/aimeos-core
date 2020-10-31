@@ -40,7 +40,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->additional, 'Standard' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
-		$search = $orderBaseManager->createSearch();
+		$search = $orderBaseManager->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.sitecode', array( 'unittest', 'unit' ) ) );
 
 		foreach( $orderBaseManager->search( $search ) as $order ) {
@@ -325,7 +325,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$attrCodes = [];
 		$attributeManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
-		$attributes = $attributeManager->search( $attributeManager->createSearch() );
+		$attributes = $attributeManager->search( $attributeManager->filter() );
 
 		foreach( $attributes as $attrItem ) {
 			$attrCodes[$attrItem->getType()][] = $attrItem;
@@ -471,7 +471,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$customerManager = \Aimeos\MShop::create( $this->additional, 'customer' );
-		$search = $customerManager->createSearch();
+		$search = $customerManager->filter();
 		$search->setConditions( $search->compare( '==', 'customer.code', $customercodes ) );
 
 		foreach( $customerManager->search( $search ) as $id => $customerItem ) {
@@ -500,7 +500,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			}
 		}
 
-		$search = $productManager->createSearch();
+		$search = $productManager->filter();
 		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
 		$result = $productManager->search( $search );
 
@@ -530,7 +530,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			}
 		}
 
-		$search = $serviceManager->createSearch();
+		$search = $serviceManager->filter();
 		$search->setConditions( $search->compare( '==', 'service.code', $services ) );
 		$servicesResult = $serviceManager->search( $search );
 

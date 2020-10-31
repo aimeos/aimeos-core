@@ -595,7 +595,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$manager = \Aimeos\MShop::create( \TestHelperCntl::getContext(), 'order' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', $datepayment ) );
 
 		return $manager->search( $search )->first();

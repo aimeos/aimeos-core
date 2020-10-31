@@ -40,7 +40,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'catalog.lists.editor', 'core:lib/mshoplib' ),
@@ -64,7 +64,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -93,7 +93,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch()->slice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$items = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -155,7 +155,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'catalog.lists.id', null );
@@ -185,7 +185,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsBase()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$conditions = array(
 			$search->compare( '==', 'catalog.lists.editor', $this->editor ),
 			$search->getConditions()

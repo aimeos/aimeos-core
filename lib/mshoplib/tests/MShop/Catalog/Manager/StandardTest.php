@@ -46,8 +46,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch() );
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch( true ) );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter( true ) );
 	}
 
 
@@ -83,7 +83,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No list item found' );
 		}
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'catalog.id', null );
@@ -129,7 +129,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsTranslation()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$conditions = array(
 			$search->compare( '==', 'catalog.label', 'Misc' ),
@@ -152,7 +152,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'catalog.label', 'Root' ),
 			$search->compare( '==', 'catalog.editor', $this->editor )
@@ -173,7 +173,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetTree()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'catalog.code', 'root' ),
 			$search->compare( '==', 'catalog.editor', $this->editor )
@@ -193,7 +193,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetTreeWithConditions()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'catalog.code', array( 'root', 'categories' ) ),
 			$search->compare( '==', 'catalog.editor', $this->editor )
@@ -212,7 +212,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$parentIds[] = 0;
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'catalog.parentid', $parentIds ) );
 
 		$tree = $this->object->getTree( null, [], \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, $search );
@@ -261,7 +261,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetPath()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'catalog.label', 'Kaffee' ),
 			$search->compare( '==', 'catalog.editor', $this->editor )

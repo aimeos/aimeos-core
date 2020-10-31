@@ -55,7 +55,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'text.lists.type.editor', $this->editor ) );
 		$results = $this->object->search( $search )->toArray();
 
@@ -69,7 +69,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'text.lists.type.editor', $this->editor ) );
 		$results = $this->object->search( $search )->toArray();
 
@@ -124,7 +124,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItems()
 	{
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'text.lists.type.id', null );
@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, count( $results ) );
 
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '~=', 'text.lists.type.code', 'o' ),
 			$search->compare( '==', 'text.lists.type.editor', $this->editor ),

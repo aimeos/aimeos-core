@@ -125,7 +125,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$orderBasePrices[$dataset['baseid']] = $dataset['baseid'];
 		}
 
-		$search = $orderBase->createSearch();
+		$search = $orderBase->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.price', $orderBasePrices ) );
 
 		foreach( $orderBase->search( $search ) as $orderBaseItem ) {
@@ -133,7 +133,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 
-		$search = $orderBaseProd->createSearch();
+		$search = $orderBaseProd->filter();
 		$expr = array(
 			$search->compare( '==', 'order.base.product.prodcode', $prodcode ),
 			$search->compare( '==', 'order.base.product.quantity', $quantity ),

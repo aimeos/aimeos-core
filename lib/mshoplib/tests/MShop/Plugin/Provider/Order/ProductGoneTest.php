@@ -28,7 +28,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$this->product = $manager->saveItem( $newProduct );
 
 		$manager = \Aimeos\MShop::create( $this->context, 'order/base' );
-		$search = $manager->createSearch()->setSlice( 0, 1 );
+		$search = $manager->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'order.base.price', 672.00 ) );
 		$items = $manager->search( $search )->toArray();
 

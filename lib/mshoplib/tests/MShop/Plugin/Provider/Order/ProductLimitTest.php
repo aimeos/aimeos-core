@@ -29,7 +29,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 
 		$manager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 
 		foreach( $manager->search( $search )->toArray() as $product ) {

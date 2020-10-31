@@ -32,7 +32,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.status.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.status.value' )->toArray();
 
@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'order.status.value', 'shipped' ) );
 		$results = $this->object->search( $search )->toArray();
 
@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'order.status.value', 'shipped' ),
 			$search->compare( '==', 'order.status.editor', $this->editor )
@@ -138,7 +138,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
 	}
 
 	public function testSearchItems()
@@ -146,7 +146,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$siteid = $this->context->getLocale()->getSiteId();
 
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'order.status.id', null );
@@ -167,7 +167,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, $total );
 
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '>=', 'order.status.value', 'waiting' ),
 			$search->compare( '==', 'order.status.editor', $this->editor )

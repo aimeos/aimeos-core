@@ -72,7 +72,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'price.value', 12.00 ),
 			$search->compare( '==', 'price.editor', $this->editor )
@@ -91,7 +91,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSavePropertyItems()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'price.label', 'product/default/600.00/30.00' ) );
 		$items = $this->object->search( $search, ['price/property'] )->toArray();
 		$item = reset( $items );
@@ -112,7 +112,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'price.editor', $this->editor ) );
 		$items = $this->object->search( $search )->toArray();
 
@@ -182,13 +182,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\SQL::class, $this->object->createSearch() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\SQL::class, $this->object->filter() );
 	}
 
 
 	public function testSearchItems()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'price.value', '99.99' ) );
 		$item = $this->object->search( $search, ['customer'] )->first();
 
@@ -197,7 +197,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'price.id', null );
@@ -235,7 +235,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsProperty()
 	{
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'price.id', null );
@@ -273,7 +273,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsTotal()
 	{
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'price.editor', $this->editor ) );
 		$search->setSlice( 0, 10 );
 		$results = $this->object->search( $search, [], $total )->toArray();
@@ -284,7 +284,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsBase()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$conditions = array(
 			$search->compare( '==', 'price.editor', $this->editor ),
 			$search->getConditions()

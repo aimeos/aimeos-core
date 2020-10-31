@@ -55,7 +55,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		$manager = \Aimeos\MShop::create( $context, 'supplier' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'supplier.code', 'demo-' ) );
 		$services = $manager->search( $search );
 

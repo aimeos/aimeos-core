@@ -320,14 +320,15 @@ class Standard
 
 
 	/**
-	 * Creates a search critera object
+	 * Creates a filter object.
 	 *
-	 * @param bool $default Add default criteria (optional)
-	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
+	 * @param bool $default Add default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
-		$search = parent::createSearch( $default );
+		$search = parent::filter( $default );
 		$search->setSortations( [$search->sort( '+', 'order.base.service.id' )] );
 
 		return $search;
@@ -942,7 +943,7 @@ class Standard
 			}
 
 			$manager = \Aimeos\MShop::create( $context, 'service' );
-			$search = $manager->createSearch()->setSlice( 0, count( $ids ) );
+			$search = $manager->filter()->setSlice( 0, count( $ids ) );
 			$search->setConditions( $search->compare( '==', 'service.id', array_filter( $ids ) ) );
 			$servItems = $manager->search( $search, $ref );
 		}
@@ -989,7 +990,7 @@ class Standard
 	protected function getAttributeItems( array $ids ) : array
 	{
 		$manager = $this->getObject()->getSubManager( 'attribute' );
-		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+		$search = $manager->filter()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.service.attribute.parentid', $ids ) );
 
 		$result = [];

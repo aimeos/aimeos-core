@@ -55,7 +55,7 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 	{
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
-		$search = $orderManager->createSearch();
+		$search = $orderManager->filter();
 		$expr = array(
 			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_WEB ),
 			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED )

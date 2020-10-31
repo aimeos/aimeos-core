@@ -20,7 +20,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 
 		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $context );
-		$search = $servManager->createSearch();
+		$search = $servManager->filter();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
 		$result = $servManager->search( $search, array( 'price' ) )->toArray();
 
@@ -62,7 +62,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 	public function testCalcPrice()
 	{
 		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() )->getSubManager( 'base' );
-		$search = $orderBaseManager->createSearch();
+		$search = $orderBaseManager->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
 		$result = $orderBaseManager->search( $search )->toArray();
 

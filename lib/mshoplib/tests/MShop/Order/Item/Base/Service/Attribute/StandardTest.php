@@ -220,7 +220,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCopyFrom()
 	{
 		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$item = $attrManager->search( $attrManager->createSearch() )->first();
+		$item = $attrManager->search( $attrManager->filter() )->first();
 
 		$return = $this->object->copyFrom( $item );
 

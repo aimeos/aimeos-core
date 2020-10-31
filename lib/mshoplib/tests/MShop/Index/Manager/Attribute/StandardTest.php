@@ -39,7 +39,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'attribute' )->findItem( 'white', [], 'product', 'color' );
 
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$result = $this->object->aggregate( $search, 'index.attribute.id' )->toArray();
 
 		$this->assertEquals( 14, count( $result ) );
@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$product = $this->object->saveItem( $product->setId( null )->setCode( 'ModifiedCNC' ) );
 
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrItem->getId() ) );
 		$result = $this->object->search( $search )->toArray();
 
@@ -82,7 +82,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$productManager->deleteItem( $product->getId() );
 
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrItem->getId() ) );
 		$result2 = $this->object->search( $search )->toArray();
 
@@ -110,7 +110,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
 		$id = $attributeManager->findItem( '30', [], 'product', 'length' )->getId();
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $id ) );
 		$result = $this->object->search( $search, [] );
 
@@ -120,7 +120,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsNoId()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '!=', 'index.attribute.id', null ) );
 		$result = $this->object->search( $search, [] );
 
@@ -137,7 +137,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$manager->findItem( '29', [], 'product', 'width' )->getId()
 		];
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$func = $search->createFunction( 'index.attribute:allof', [$attrIds] );
 		$search->setConditions( $search->compare( '!=', $func, null ) );
@@ -159,7 +159,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$manager->findItem( '30', [], 'product', 'width' )->getId()
 		];
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$func = $search->createFunction( 'index.attribute:oneof', [$attrIds] );
 		$search->setConditions( $search->compare( '!=', $func, null ) );

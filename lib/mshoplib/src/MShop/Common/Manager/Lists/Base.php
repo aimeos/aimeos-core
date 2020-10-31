@@ -190,7 +190,7 @@ abstract class Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration not available' ) );
 		}
 
-		$criteria = $this->getObject()->createSearch( $default );
+		$criteria = $this->getObject()->filter( $default );
 		$expr = [
 			$criteria->compare( '==', $conf['code'], $id ),
 			$criteria->getConditions()
@@ -260,17 +260,18 @@ abstract class Base
 
 
 	/**
-	 * Creates a search object including the base criteria (optional)
+	 * Creates a filter object.
 	 *
-	 * @param bool $default Include default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Search critera object
+	 * @param bool $default Add default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true )
 		{
 			$prefix = rtrim( $this->getPrefix(), '.' );
-			$object = $this->createSearchBase( $prefix );
+			$object = $this->filterBase( $prefix );
 
 			$expr = [$object->getConditions()];
 
@@ -289,7 +290,7 @@ abstract class Base
 			return $object;
 		}
 
-		return parent::createSearch();
+		return parent::filter();
 	}
 
 

@@ -33,7 +33,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->combine( '&&', [
 			$search->compare( '==', 'review.domain', 'product' ),
 			$search->compare( '==', 'review.editor', 'core:lib/mshoplib' )
@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateRating()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->combine( '&&', [
 			$search->compare( '==', 'review.domain', 'product' ),
 			$search->compare( '==', 'review.editor', 'core:lib/mshoplib' )
@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'review.status', 1 ),
 			$search->compare( '==', 'review.editor', $this->editor )
@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'review.status', 1 ),
 			$search->compare( '==', 'review.editor', $this->editor )
@@ -180,13 +180,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
 	}
 
 
 	public function testCreateSearchDefault()
 	{
-		$result = $this->object->createSearch( true );
+		$result = $this->object->filter( true );
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\Iface::class, $result->getConditions() );
 	}
 
@@ -194,7 +194,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItems()
 	{
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$siteid = $this->context->getLocale()->getSiteId();
 
 		$expr = [];
@@ -225,7 +225,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsTotal()
 	{
 		$total = 0;
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'review.editor', $this->editor ) );
 		$items = $this->object->search( $search, [], $total )->toArray();
 

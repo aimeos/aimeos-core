@@ -48,7 +48,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'service.lists.editor', 'core:lib/mshoplib' ),
@@ -72,7 +72,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'service.lists.editor', $this->editor ) );
 		$results = $this->object->search( $search )->toArray();
 
@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'service.lists.editor', $this->editor ) );
 		$items = $this->object->search( $search )->toArray();
 
@@ -159,7 +159,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItems()
 	{
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'service.lists.id', null );
@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsBase()
 	{
 		$total = 0;
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$conditions = array(
 			$search->compare( '==', 'service.lists.editor', $this->editor ),
 			$search->getConditions()

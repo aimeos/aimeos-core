@@ -20,7 +20,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 
 		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
-		$search = $servManager->createSearch();
+		$search = $servManager->filter();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
 		$result = $servManager->search( $search, array( 'price' ) )->toArray();
 

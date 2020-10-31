@@ -49,7 +49,7 @@ class Supplier
 		$manager = \Aimeos\MShop::create( $context, 'supplier' );
 		$addrManager = \Aimeos\MShop::create( $context, 'supplier/address' );
 
-		$search = $manager->createSearch( true );
+		$search = $manager->filter( true );
 		$search->setSortations( [$search->sort( '+', 'supplier.label' )] );
 
 		foreach( $manager->search( $search, ['supplier/address'] ) as $item )

@@ -305,7 +305,7 @@ class Standard
 	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$siteIds = [];
-		$search = $this->getObject()->createSearch()->setSlice( 0, count( $itemIds ) );
+		$search = $this->getObject()->filter()->setSlice( 0, count( $itemIds ) );
 		$search->setConditions( $search->compare( '==', 'locale.site.id', $itemIds ) );
 
 		foreach( $this->getObject()->search( $search ) as $item ) {
@@ -694,17 +694,18 @@ class Standard
 
 
 	/**
-	 * Creates a search critera object
+	 * Creates a filter object.
 	 *
-	 * @param bool $default Add default criteria (optional)
-	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
+	 * @param bool $default Add default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true ) {
-			$search = $this->createSearchBase( 'locale.site' );
+			$search = $this->filterBase( 'locale.site' );
 		} else {
-			$search = parent::createSearch( $default );
+			$search = parent::filter( $default );
 		}
 
 		$expr = array(
@@ -755,7 +756,7 @@ class Standard
 			return $this->cache[$id];
 		}
 
-		$criteria = $this->getObject()->createSearch()->setSlice( 0, 1 );
+		$criteria = $this->getObject()->filter()->setSlice( 0, 1 );
 		$criteria->setConditions( $criteria->compare( '==', 'locale.site.code', 'default' ) );
 
 		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) === null ) {

@@ -76,10 +76,10 @@ class Coupon
 
 		foreach( $order->getCoupons() as $code => $products )
 		{
-			$search = $manager->createSearch( true )->setSlice( 0, 1 );
+			$search = $manager->filter( true )->setSlice( 0, 1 );
 			$expr = array(
 				$search->compare( '==', 'coupon.code.code', $code ),
-				$codeManager->createSearch( true )->getConditions(),
+				$codeManager->filter( true )->getConditions(),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );

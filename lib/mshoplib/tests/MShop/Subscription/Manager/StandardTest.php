@@ -33,7 +33,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'subscription.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'subscription.status' )->toArray();
 
@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'subscription.status', 1 ),
 			$search->compare( '==', 'subscription.editor', $this->editor )
@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'subscription.status', 1 ),
 			$search->compare( '==', 'subscription.editor', $this->editor )
@@ -157,20 +157,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
 	}
 
 
 	public function testCreateSearchDefault()
 	{
-		$result = $this->object->createSearch( true );
+		$result = $this->object->filter( true );
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\Iface::class, $result->getConditions() );
 	}
 
 
 	public function testCreateSearchSite()
 	{
-		$result = $this->object->createSearch( false, true );
+		$result = $this->object->filter( false, true );
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
 	}
 
@@ -180,7 +180,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$siteid = $this->context->getLocale()->getSiteId();
 
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'subscription.id', null );
@@ -214,7 +214,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsTotal()
 	{
 		$total = 0;
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'subscription.editor', $this->editor ) );
 		$items = $this->object->search( $search, [], $total )->toArray();
 
@@ -230,7 +230,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsRef()
 	{
 		$total = 0;
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'subscription.dateend', '2010-01-01' ) );
 		$item = $this->object->search( $search, ['order/base', 'order/base/product'], $total )->first();
 

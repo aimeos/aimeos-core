@@ -33,7 +33,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.type' )->toArray();
 
@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateAvg()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'avg' )->toArray();
 
@@ -56,7 +56,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateSum()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'sum' )->toArray();
 
@@ -67,7 +67,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateTimes()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 		$search->setSortations( array( $search->sort( '-', 'order.cdate' ) ) );
 		$result = $this->object->aggregate( $search, 'order.cmonth' )->toArray();
@@ -79,7 +79,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateAddress()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.base.address.countryid' )->toArray();
 
@@ -91,7 +91,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateMonth()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.type' )->toArray();
 
@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$status = \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED;
 
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.statuspayment', $status ),
 			$search->compare( '==', 'order.editor', $this->editor )
@@ -158,7 +158,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_PHONE ),
 			$search->compare( '==', 'order.editor', $this->editor )
@@ -219,7 +219,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$statusManager = \Aimeos\MShop::create( $this->context, 'order/status' );
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_PHONE ),
 			$search->compare( '==', 'order.editor', $this->editor )
@@ -235,7 +235,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->saveItem( $item );
 
 
-		$search = $statusManager->createSearch();
+		$search = $statusManager->filter();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
 		$results = $statusManager->search( $search )->toArray();
 
@@ -248,7 +248,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
 		$this->object->saveItem( $item );
 
-		$search = $statusManager->createSearch();
+		$search = $statusManager->filter();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
 		$results = $statusManager->search( $search )->toArray();
 
@@ -268,7 +268,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$statusManager = \Aimeos\MShop::create( $this->context, 'order/status' );
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_PHONE ),
 			$search->compare( '==', 'order.editor', $this->editor )
@@ -284,7 +284,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->saveItem( $item );
 
 
-		$search = $statusManager->createSearch();
+		$search = $statusManager->filter();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
 		$results = $statusManager->search( $search )->toArray();
 
@@ -297,7 +297,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_LOST );
 		$this->object->saveItem( $item );
 
-		$search = $statusManager->createSearch();
+		$search = $statusManager->filter();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
 		$results = $statusManager->search( $search )->toArray();
 
@@ -315,20 +315,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
 	}
 
 
 	public function testCreateSearchDefault()
 	{
-		$result = $this->object->createSearch( true );
+		$result = $this->object->filter( true );
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
 	}
 
 
 	public function testCreateSearchSite()
 	{
-		$result = $this->object->createSearch( false, true );
+		$result = $this->object->filter( false, true );
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
 	}
 
@@ -338,7 +338,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$siteid = $this->context->getLocale()->getSiteId();
 
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$funcStatus = $search->createFunction( 'order:status', ['typestatus', 'shipped'] );
 
 		$expr = [];
@@ -482,7 +482,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsTotal()
 	{
 		$total = 0;
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED ),
 			$search->compare( '==', 'order.editor', $this->editor )
@@ -502,7 +502,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsRef()
 	{
 		$total = 0;
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ),
 			$search->compare( '==', 'order.editor', $this->editor )

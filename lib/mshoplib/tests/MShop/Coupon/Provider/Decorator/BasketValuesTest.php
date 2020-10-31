@@ -34,7 +34,7 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 		$orderProductManager = $orderBaseManager->getSubManager( 'product' );
 
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
-		$search = $productManager->createSearch();
+		$search = $productManager->filter();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC' ) ) );
 		$products = $productManager->search( $search )->toArray();
 

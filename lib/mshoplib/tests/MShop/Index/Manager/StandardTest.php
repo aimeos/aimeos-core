@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$manager = new \Aimeos\MShop\Index\Manager\Standard( $context );
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
 
-		$search = $productManager->createSearch();
+		$search = $productManager->filter();
 		$conditions = array(
 			$search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ),
 			$search->compare( '==', 'product.editor', $context->getEditor() ),
@@ -67,7 +67,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
 	}
 
 
@@ -75,7 +75,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'attribute' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$expr = array(
 			$search->compare( '==', 'attribute.code', 'white' ),
 			$search->compare( '==', 'attribute.domain', 'product' ),
@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$result = $this->object->aggregate( $search, 'index.attribute.id' )->toArray();
 
 		$this->assertEquals( 14, count( $result ) );
@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateMax()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$result = $this->object->aggregate( $search, 'index.price.currencyid', null, 'max' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateMin()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$result = $this->object->aggregate( $search, 'index.price.currencyid', null, 'min' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
@@ -212,7 +212,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItems()
 	{
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setSlice( 0, 1 );
 
 		$expr = array(
@@ -231,7 +231,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsBase()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$conditions = array(
 			$search->compare( '!=', 'index.catalog.id', null ),
 			$search->compare( '==', 'product.editor', $this->editor ),
@@ -250,7 +250,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsSub()
 	{
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setSlice( 0, 1 );
 
 		$expr = array(
@@ -285,9 +285,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testRebuildWithList()
 	{
 		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 		$items = $manager->search( $search )->toArray();
 
@@ -380,7 +380,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function getCatalogSubDomainItems( $key, $domain )
 	{
 		$subIndex = $this->object->getSubManager( $domain );
-		$search = $subIndex->createSearch();
+		$search = $subIndex->filter();
 
 		$expr = array(
 			$search->compare( '!=', $key, null ),

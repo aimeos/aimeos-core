@@ -68,7 +68,7 @@ class Category
 			$price = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
 			$catItem = $manager->findItem( $this->getConfigValue( 'category.code' ) );
 
-			$search = $listManager->createSearch( true )->setSlice( 0, count( $prodIds ) );
+			$search = $listManager->filter( true )->setSlice( 0, count( $prodIds ) );
 			$search->setConditions( $search->combine( '&&', [
 				$search->compare( '==', 'catalog.lists.parentid', $catItem->getId() ),
 				$search->compare( '==', 'catalog.lists.refid', array_keys( $prodIds ) ),
@@ -130,7 +130,7 @@ class Category
 		if( ( $value = $this->getConfigValue( 'category.code' ) ) !== null )
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
-			$search = $manager->createSearch( true )->setSlice( 0, 1 );
+			$search = $manager->filter( true )->setSlice( 0, 1 );
 			$expr = [];
 
 			foreach( $base->getProducts() as $product )

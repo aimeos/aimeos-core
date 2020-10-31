@@ -143,7 +143,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'order' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', $paydate ) );
 		$result = $manager->search( $search )->toArray();
 

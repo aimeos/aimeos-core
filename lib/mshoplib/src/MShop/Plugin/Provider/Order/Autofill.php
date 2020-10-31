@@ -186,7 +186,7 @@ class Autofill
 		) {
 			$orderManager = \Aimeos\MShop::create( $context, 'order' );
 
-			$search = $orderManager->createSearch();
+			$search = $orderManager->filter();
 			$search->setConditions( $search->compare( '==', 'order.base.customerid', $userid ) );
 			$search->setSortations( array( $search->sort( '-', 'order.ctime' ) ) );
 			$search->setSlice( 0, 1 );
@@ -219,7 +219,7 @@ class Autofill
 		$context = $this->getContext();
 		$serviceManager = \Aimeos\MShop::create( $context, 'service' );
 
-		$search = $serviceManager->createSearch( true );
+		$search = $serviceManager->filter( true );
 
 		$expr = [];
 
@@ -261,7 +261,7 @@ class Autofill
 		if( $order->getAddresses()->isEmpty() && (bool) $this->getConfigValue( 'orderaddress', true ) === true )
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base/address' );
-			$search = $manager->createSearch();
+			$search = $manager->filter();
 			$search->setConditions( $search->compare( '==', 'order.base.address.baseid', $item->getBaseId() ) );
 			$addresses = [];
 
@@ -289,7 +289,7 @@ class Autofill
 		if( $order->getServices()->isEmpty() && $this->getConfigValue( 'orderservice', true ) == true )
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base/service' );
-			$search = $manager->createSearch();
+			$search = $manager->filter();
 			$search->setConditions( $search->compare( '==', 'order.base.service.baseid', $item->getBaseId() ) );
 			$services = [];
 

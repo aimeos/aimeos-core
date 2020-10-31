@@ -83,10 +83,11 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Creates a search critera object
 	 *
-	 * @param bool $default Add default criteria (optional)
+	 * @param bool $default Add default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		$db = $this->getResourceName();
 		$config = $this->context->getConfig();
@@ -109,18 +110,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$dbm->release( $conn, $db );
 
 		return $search;
-	}
-
-
-	/**
-	 * Creates a filter object.
-	 *
-	 * @param bool $default Add default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
-	 */
-	public function filter( bool $default = false ) : \Aimeos\MW\Criteria\Iface
-	{
-		return $this->getObject()->createSearch( $default );
 	}
 
 
@@ -467,9 +456,9 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
 	 * @return \Aimeos\MW\Criteria\Iface Search critery object
 	 */
-	protected function createSearchBase( string $domain ) : \Aimeos\MW\Criteria\Iface
+	protected function filterBase( string $domain ) : \Aimeos\MW\Criteria\Iface
 	{
-		$object = $this->createSearch();
+		$object = $this->filter();
 		$object->setConditions( $object->compare( '==', $domain . '.status', 1 ) );
 
 		return $object;
@@ -592,7 +581,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	protected function findItemBase( array $pairs, array $ref, bool $default ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$expr = [];
-		$criteria = $this->getObject()->createSearch( $default )->setSlice( 0, 1 );
+		$criteria = $this->getObject()->filter( $default )->setSlice( 0, 1 );
 
 		foreach( $pairs as $key => $value )
 		{
@@ -652,7 +641,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 */
 	protected function getItemBase( string $key, string $id, array $ref, bool $default ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$criteria = $this->getObject()->createSearch( $default )->setSlice( 0, 1 );
+		$criteria = $this->getObject()->filter( $default )->setSlice( 0, 1 );
 		$expr = [
 			$criteria->compare( '==', $key, $id ),
 			$criteria->getConditions()
@@ -758,7 +747,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	protected function getSearch() : \Aimeos\MW\Criteria\Iface
 	{
 		if( !isset( $this->search ) ) {
-			$this->search = $this->createSearch();
+			$this->search = $this->filter();
 		}
 
 		return $this->search;
@@ -989,7 +978,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$context = $this->getContext();
 		$dbname = $this->getResourceName();
 
-		$search = $this->getObject()->createSearch();
+		$search = $this->getObject()->filter();
 		$search->setConditions( $search->compare( '==', $name, $itemIds ) );
 
 		$types = array( $name => \Aimeos\MW\DB\Statement\Base::PARAM_STR );

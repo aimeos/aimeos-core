@@ -34,7 +34,7 @@ interface Iface
 	 * // second record: domain='text', refid=11
 	 * // third record: domain='media', refid=11
 	 *
-	 * $listManager->aggregate( $listManager->createSearch(), 'catalog.lists.domain' );
+	 * $listManager->aggregate( $listManager->filter(), 'catalog.lists.domain' );
 	 * </code>
 	 *
 	 * The result in the example will be:
@@ -48,7 +48,7 @@ interface Iface
 	 *
 	 * The items used for aggregation can be filtered before counting the items by
 	 * adding criteria to the first parameter instaed of handing over a default
-	 * search object for no further filtering ($listManager->createSearch() in this
+	 * search object for no further filtering ($listManager->filter() in this
 	 * case).
 	 *
 	 * Caution: When using getSlice() to retrieve certain record windows (e.g. from
@@ -66,7 +66,7 @@ interface Iface
 	 * // fourth record: domain='text', refid=13
 	 *
 	 * $start = 0;
-	 * $search = $listManager->createSearch();
+	 * $search = $listManager->filter();
 	 *
 	 * $search->setSlice( $start, 2 );
 	 * $result = $listManager->aggregate( $search, 'catalog.lists.domain' );
@@ -100,7 +100,7 @@ interface Iface
 	 * // second record: domain='text', refid=11
 	 * // third record: domain='text', refid=12
 	 *
-	 * $search = $listManager->createSearch();
+	 * $search = $listManager->filter();
 	 *
 	 * $search->setSlice( 0, 2 );
 	 * $listManager->aggregate( $search, 'catalog.lists.domain' );

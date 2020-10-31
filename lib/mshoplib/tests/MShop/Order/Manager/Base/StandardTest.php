@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.base.rebate' )->toArray();
 
@@ -46,7 +46,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateAvg()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.base.address.email', 'order.base.price', 'avg' )->toArray();
 
@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateSum()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.base.address.email', 'order.base.price', 'sum' )->toArray();
 
@@ -102,7 +102,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
 		$results = $this->object->search( $search )->toArray();
 
@@ -124,7 +124,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderProductManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
 			->getSubManager( 'base' )->getSubManager( 'product' );
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'order.base.costs', '1.50' ),
 			$search->compare( '==', 'order.base.editor', $this->editor )
@@ -204,13 +204,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
 	}
 
 
 	public function testCreateSearchDefault()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $search );
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $search->getConditions() );
@@ -224,7 +224,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearchSite()
 	{
-		$result = $this->object->createSearch( false, true );
+		$result = $this->object->filter( false, true );
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
 	}
 
@@ -234,7 +234,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$siteid = $this->context->getLocale()->getSiteId();
 
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'order.base.id', null );
@@ -366,7 +366,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsRef()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 
 		$search->setConditions( $search->compare( '!=', 'order.base.customerid', '' ) );
 		$result = $this->object->search( $search, ['customer'] );
@@ -378,7 +378,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsTotal()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '>=', 'order.base.customerid', '' ),
 			$search->compare( '==', 'order.base.editor', $this->editor )
@@ -398,7 +398,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsDefault()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$items = $this->object->search( $search );
 
 		$this->assertEquals( 0, count( $items ) );
@@ -723,7 +723,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testStoreBundles()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
@@ -836,7 +836,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testLoadStoreCoupons()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.price', '53.50' ) );
 		$results = $this->object->search( $search )->toArray();
 
@@ -876,7 +876,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function getOrderItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '==', 'order.base.rebate', 14.50 );

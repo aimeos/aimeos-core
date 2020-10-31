@@ -79,7 +79,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$labels[] = $str;
 		}
 
-		$search = $textManager->createSearch();
+		$search = $textManager->filter();
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
 		$refIds = [];
@@ -111,7 +111,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$urls[] = $str;
 		}
 
-		$search = $mediaManager->createSearch();
+		$search = $mediaManager->filter();
 		$search->setConditions( $search->compare( '==', 'media.url', $urls ) );
 
 		$refIds = [];
@@ -143,7 +143,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$codes[] = $str;
 		}
 
-		$search = $productManager->createSearch();
+		$search = $productManager->filter();
 		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
 
 		$refIds = [];
@@ -178,7 +178,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$itemCode[] = $str;
 		}
 
-		$search = $catalogManager->createSearch();
+		$search = $catalogManager->filter();
 		$search->setConditions( $search->compare( '==', 'catalog.code', $itemCode ) );
 
 		$parentIds = [];

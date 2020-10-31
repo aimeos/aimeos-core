@@ -101,7 +101,7 @@ class ReviewAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Exception( sprintf( 'Invalid order product key "%1$s"', $key ) );
 		}
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$expr = [
 			$search->compare( '==', 'order.base.product.prodcode', $parts[0] ),
 			$search->compare( '==', 'order.base.product.price', $parts[1] ),

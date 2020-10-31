@@ -278,12 +278,12 @@ class Standard
 		$domains = $config->get( 'mshop/index/manager/standard/domains', [] );
 
 		$manager = \Aimeos\MShop::create( $context, 'product' );
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
 
 		$catalogListManager = \Aimeos\MShop::create( $context, 'catalog/lists' );
-		$catalogSearch = $catalogListManager->createSearch( true );
+		$catalogSearch = $catalogListManager->filter( true );
 
 		$expr = array(
 			$catalogSearch->compare( '==', 'catalog.lists.domain', 'product' ),

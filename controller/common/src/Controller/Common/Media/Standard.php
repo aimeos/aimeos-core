@@ -78,7 +78,7 @@ class Standard
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'media' );
 
-		$search = $manager->createSearch()->setSlice( 0, 1 );
+		$search = $manager->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'media.url', $item->getUrl() ) );
 
 		$item = $manager->search( $search )->first( $item )->setId( null );
@@ -123,7 +123,7 @@ class Standard
 	public function delete( \Aimeos\MShop\Media\Item\Iface $item, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'media' );
-		$search = $manager->createSearch()->setSlice( 0, 2 );
+		$search = $manager->filter()->setSlice( 0, 2 );
 		$search->setConditions( $search->compare( '==', 'media.url', $item->getUrl() ) );
 
 		if( count( $manager->search( $search ) ) > 1 ) {

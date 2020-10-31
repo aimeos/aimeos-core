@@ -203,7 +203,7 @@ abstract class Base
 		$items = [];
 		$manager = $this->getObject()->getSubManager( 'address' );
 
-		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+		$criteria = $manager->filter()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.address.baseid', $baseIds ) );
 
 		foreach( $manager->search( $criteria ) as $item )
@@ -253,7 +253,7 @@ abstract class Base
 			}
 		}
 
-		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+		$criteria = $manager->filter()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.coupon.baseid', $baseIds ) );
 
 		foreach( $manager->search( $criteria ) as $item )
@@ -285,11 +285,11 @@ abstract class Base
 		$manager = $this->getObject()->getSubManager( 'product' );
 		$attrManager = $manager->getSubManager( 'attribute' );
 
-		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+		$criteria = $manager->filter()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.product.baseid', $baseIds ) );
 		$items = $manager->search( $criteria )->reverse();
 
-		$search = $attrManager->createSearch()->setSlice( 0, 0x7fffffff );
+		$search = $attrManager->filter()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.parentid', $items->keys()->toArray() ) );
 
 		foreach( $attrManager->search( $search ) as $id => $attribute )
@@ -353,7 +353,7 @@ abstract class Base
 		$map = [];
 		$manager = $this->getObject()->getSubManager( 'service' );
 
-		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+		$criteria = $manager->filter()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.service.baseid', $baseIds ) );
 
 		foreach( $manager->search( $criteria ) as $item )

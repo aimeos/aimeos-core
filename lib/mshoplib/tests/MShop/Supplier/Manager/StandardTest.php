@@ -76,7 +76,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '~=', 'supplier.label', 'unitSupplier' ),
 			$search->compare( '==', 'supplier.editor', $this->editor ),
@@ -94,7 +94,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'supplier.label', 'unitSupplier001' ),
 			$search->compare( '==', 'supplier.editor', $this->editor ),
@@ -150,7 +150,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
 	}
 
 
@@ -162,7 +162,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No list item found' );
 		}
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'supplier.id', null );
@@ -216,7 +216,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemTotal()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'supplier.editor', $this->editor ) );
 		$search->setSlice( 0, 2 );
 
@@ -230,7 +230,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemCriteria()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$conditions = array(
 			$search->compare( '==', 'supplier.editor', $this->editor ),
 			$search->getConditions()
@@ -248,7 +248,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsRef()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'supplier.code', 'unitCode001' ) );
 
 		$item = $this->object->search( $search, ['supplier/address', 'text'] )->first();

@@ -53,7 +53,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
@@ -66,7 +66,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -119,7 +119,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'catalog.lists.type.id', null );
@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		// search with base criteria
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$expr = array(
 			$search->compare( '==', 'catalog.lists.type.domain', 'text' ),
 			$search->compare( '==', 'catalog.lists.type.code', 'unittype1' ),
@@ -159,7 +159,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		// search without base criteria, slice & total
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '~=', 'catalog.lists.type.code', 'unit' ),
 			$search->compare( '~=', 'catalog.lists.type.editor', $this->editor )

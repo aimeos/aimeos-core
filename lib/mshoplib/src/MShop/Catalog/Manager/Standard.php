@@ -198,7 +198,7 @@ class Standard extends Base
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
-		$search = $this->getObject()->createSearch();
+		$search = $this->getObject()->filter();
 
 		foreach( $config->get( 'mshop/catalog/manager/submanagers', ['lists'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
@@ -279,18 +279,19 @@ class Standard extends Base
 
 
 	/**
-	 * Creates a search object.
+	 * Creates a filter object.
 	 *
 	 * @param bool $default Add default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Returns the search object
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true ) {
-			return $this->createSearchBase( 'catalog' );
+			return $this->filterBase( 'catalog' );
 		}
 
-		return parent::createSearch();
+		return parent::filter();
 	}
 
 

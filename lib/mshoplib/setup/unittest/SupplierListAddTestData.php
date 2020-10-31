@@ -82,7 +82,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$urls[] = $str;
 		}
 
-		$search = $mediaManager->createSearch();
+		$search = $mediaManager->filter();
 		$search->setConditions( $search->compare( '==', 'media.url', $urls ) );
 
 		$refIds = [];
@@ -114,7 +114,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$codes[] = $str;
 		}
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
 
 		$refIds = [];
@@ -146,7 +146,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$labels[] = $str;
 		}
 
-		$search = $textManager->createSearch();
+		$search = $textManager->filter();
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
 		$refIds = [];
@@ -182,7 +182,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$itemCode[] = $str;
 		}
 
-		$search = $supplierManager->createSearch();
+		$search = $supplierManager->filter();
 		$search->setConditions( $search->compare( '==', 'supplier.code', $itemCode ) );
 
 		$parentIds = [];

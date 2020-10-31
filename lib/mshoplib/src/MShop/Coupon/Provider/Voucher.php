@@ -113,7 +113,7 @@ class Voucher
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop::create( $context, 'order' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$expr = [
 			$search->compare( '==', 'order.base.product.id', $orderProductId ),
 			$search->compare( '==', 'order.statuspayment', $status ),
@@ -138,7 +138,7 @@ class Voucher
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$expr = [
 			$search->compare( '==', 'order.baseid', $baseIds ),
 			$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
@@ -191,7 +191,7 @@ class Voucher
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop::create( $context, 'order/base/coupon' );
 
-		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+		$search = $manager->filter()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', $code ) );
 
 		$baseIds = $prodIds = [];
@@ -206,7 +206,7 @@ class Voucher
 
 		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$expr = [
 			$search->compare( '==', 'order.base.product.id', $prodIds ),
 			$search->compare( '==', 'order.base.product.baseid', $baseIds ),

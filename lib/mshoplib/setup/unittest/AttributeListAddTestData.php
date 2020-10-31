@@ -79,7 +79,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$urls[] = $str;
 		}
 
-		$search = $mediaManager->createSearch();
+		$search = $mediaManager->filter();
 		$search->setConditions( $search->compare( '==', 'media.url', $urls ) );
 
 		$refIds = [];
@@ -111,7 +111,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$labels[] = $str;
 		}
 
-		$search = $textManager->createSearch();
+		$search = $textManager->filter();
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
 		$refIds = [];
@@ -222,7 +222,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->additional, 'Standard' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$expr = array(
 			$search->compare( '==', 'attribute.code', $codes ),
 			$search->compare( '==', 'attribute.type', $typeCodes ),
@@ -275,7 +275,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$manager = \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$expr = array(
 			$search->compare( '==', 'price.value', $value ),
 			$search->compare( '==', 'price.costs', $ship ),

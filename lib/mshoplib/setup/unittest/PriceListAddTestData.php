@@ -78,7 +78,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$codes[] = $str;
 		}
 
-		$search = $customerManager->createSearch();
+		$search = $customerManager->filter();
 		$search->setConditions( $search->compare( '==', 'customer.code', $codes ) );
 
 		$refIds = [];
@@ -164,7 +164,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$manager = \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$expr = array(
 			$search->compare( '==', 'price.value', $value ),
 			$search->compare( '==', 'price.costs', $ship ),

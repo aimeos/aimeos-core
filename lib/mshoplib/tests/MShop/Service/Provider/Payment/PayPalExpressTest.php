@@ -24,7 +24,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
 
-		$search = $serviceManager->createSearch();
+		$search = $serviceManager->filter();
 		$search->setConditions( $search->compare( '==', 'service.code', 'paypalexpress' ) );
 
 		$serviceItems = $serviceManager->search( $search )->toArray();
@@ -41,7 +41,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
 
-		$search = $orderManager->createSearch();
+		$search = $orderManager->filter();
 		$expr = array(
 			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_WEB ),
 			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED )

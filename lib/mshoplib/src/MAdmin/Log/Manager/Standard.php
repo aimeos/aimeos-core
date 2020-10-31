@@ -405,7 +405,7 @@ class Standard
 	 */
 	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$criteria = $this->getObject()->createSearch( $default );
+		$criteria = $this->getObject()->filter( $default );
 		$expr = [
 			$criteria->compare( '==', 'log.id', $id ),
 			$criteria->getConditions()

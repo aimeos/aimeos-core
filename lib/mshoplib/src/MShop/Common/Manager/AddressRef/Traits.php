@@ -47,7 +47,7 @@ trait Traits
 		{
 			$manager = $this->getObject()->getSubManager( 'address' );
 
-			$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+			$search = $manager->filter()->setSlice( 0, 0x7fffffff );
 			$search->setConditions( $search->compare( '==', $domain . '.address.parentid', $parentIds ) );
 			$search->setSortations( [$search->sort( '+', $domain . '.address.position' )] );
 

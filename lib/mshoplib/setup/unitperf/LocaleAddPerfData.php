@@ -66,7 +66,7 @@ class LocaleAddPerfData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 			$localeSiteManager = $localeManager->getSubManager( 'site' );
 			$siteIds = [];
 
-			$search = $localeSiteManager->createSearch();
+			$search = $localeSiteManager->filter();
 			$search->setConditions( $search->compare( '==', 'locale.site.code', 'unitperf' ) );
 
 			foreach( $localeSiteManager->search( $search ) as $site )

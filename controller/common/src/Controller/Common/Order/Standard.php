@@ -162,7 +162,7 @@ class Standard
 		$bundleMap = [];
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 
-		$search = $productManager->createSearch();
+		$search = $productManager->filter();
 		$func = $search->createFunction( 'product:has', ['product', 'default', $prodId] );
 		$expr = array(
 			$search->compare( '==', 'product.type', 'bundle' ),
@@ -207,7 +207,7 @@ class Standard
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/status' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$expr = array(
 			$search->compare( '==', 'order.status.parentid', $parentid ),
 			$search->compare( '==', 'order.status.type', $type ),
@@ -232,7 +232,7 @@ class Standard
 	{
 		$stockManager = \Aimeos\MShop::create( $this->context, 'stock' );
 
-		$search = $stockManager->createSearch();
+		$search = $stockManager->filter();
 		$expr = array(
 			$search->compare( '==', 'stock.productcode', $prodCodes ),
 			$search->compare( '==', 'stock.type', $stockType ),
@@ -257,7 +257,7 @@ class Standard
 		$manager = \Aimeos\MShop::create( $context, 'order/base/coupon' );
 		$couponCodeManager = \Aimeos\MShop::create( $context, 'coupon/code' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.baseid', $orderItem->getBaseId() ) );
 
 		$start = 0;
@@ -332,7 +332,7 @@ class Standard
 		$stockManager = \Aimeos\MShop::create( $context, 'stock' );
 		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.product.baseid', $orderItem->getBaseId() ) );
 
 		$start = 0;

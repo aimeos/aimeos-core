@@ -546,7 +546,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$manager = \Aimeos\MShop\Service\Manager\Factory::create( \TestHelperMShop::getContext() );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
 		$services = $manager->search( $search )->toArray();
 

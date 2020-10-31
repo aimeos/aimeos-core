@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->saveItem( $this->object->createItem()->setId( 'unittest' )->setValue( 'test' ) );
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'cache.id', 'unittest' ) );
 		$results = $this->object->search( $search )->toArray();
 

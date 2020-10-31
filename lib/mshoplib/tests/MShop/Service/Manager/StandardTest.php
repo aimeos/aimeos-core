@@ -56,7 +56,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'service.code', 'unitcode' ),
 			$search->compare( '==', 'service.editor', $this->editor )
@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'service.code', 'unitcode' ),
 			$search->compare( '==', 'service.editor', $this->editor )
@@ -165,7 +165,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'service.id', null );
@@ -205,7 +205,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemBase()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$expr = array(
 			$search->compare( '==', 'service.provider', 'unitprovider' ),
 			$search->compare( '==', 'service.editor', $this->editor ),
@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetProvider()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'service.type', 'delivery' ),
 			$search->compare( '==', 'service.editor', $this->editor )
@@ -283,7 +283,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $search );
 	}
 }

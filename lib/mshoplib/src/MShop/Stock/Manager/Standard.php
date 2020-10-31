@@ -777,7 +777,7 @@ class Standard
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/stock/manager/sitemode', $level );
 
-		$search = $this->getObject()->createSearch();
+		$search = $this->getObject()->filter();
 		$search->setConditions( $this->getSiteCondition( $search, 'stock.siteid', $level ) );
 		$conditions = $search->getConditionSource( $types, $translations );
 

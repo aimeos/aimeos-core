@@ -75,7 +75,7 @@ class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
 		$types = [];
 		$manager = $pluginManager->getSubManager( 'type' );
 
-		foreach( $manager->search( $manager->createSearch() ) as $item ) {
+		foreach( $manager->search( $manager->filter() ) as $item ) {
 			$types['plugin/' . $item->getCode()] = $item;
 		}
 

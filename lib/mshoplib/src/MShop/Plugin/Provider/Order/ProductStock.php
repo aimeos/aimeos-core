@@ -160,7 +160,7 @@ class ProductStock
 	{
 		$stockManager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
 
-		$search = $stockManager->createSearch();
+		$search = $stockManager->filter();
 		$expr = array(
 			$search->compare( '==', 'stock.productcode', $codes ),
 			$search->compare( '==', 'stock.type', $types ),

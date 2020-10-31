@@ -113,7 +113,7 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 	{
 		$localeSiteManager = $localeManager->getSubManager( 'site' );
 
-		$search = $localeSiteManager->createSearch();
+		$search = $localeSiteManager->filter();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', array( 'unittest' ) ) );
 
 		$sites = [];

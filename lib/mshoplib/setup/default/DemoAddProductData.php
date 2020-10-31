@@ -57,7 +57,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$domains = ['media', 'price', 'text'];
 		$manager = \Aimeos\MShop::create( $context, 'product' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'demo-' ) );
 		$products = $manager->search( $search, $domains );
 
@@ -233,7 +233,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock/type' );
 
 		$types = [];
-		foreach( $manager->search( $manager->createSearch() ) as $id => $item ) {
+		foreach( $manager->search( $manager->filter() ) as $id => $item ) {
 			$types[$item->getCode()] = $id;
 		}
 
@@ -254,7 +254,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'attribute.label', 'Demo:' ) );
 
 		$manager->deleteItems( $manager->search( $search )->toArray() );
@@ -268,7 +268,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'stock.productcode', 'demo-' ) );
 
 		$manager->deleteItems( $manager->search( $search )->toArray() );

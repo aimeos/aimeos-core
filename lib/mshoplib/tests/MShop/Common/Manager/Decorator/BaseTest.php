@@ -89,12 +89,12 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$filter = \Aimeos\MShop::create( $this->context, 'product' )->createSearch();
+		$filter = \Aimeos\MShop::create( $this->context, 'product' )->filter();
 
-		$this->stub->expects( $this->once() )->method( 'createSearch' )
+		$this->stub->expects( $this->once() )->method( 'filter' )
 			->will( $this->returnValue( $filter ) );
 
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
 	}
 
 

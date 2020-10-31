@@ -282,16 +282,17 @@ class Standard
 
 
 	/**
-	 * Creates a search object and optionally sets base criteria.
+	 * Creates a filter object.
 	 *
 	 * @param bool $default Add default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Criteria object
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true )
 		{
-			$object = $this->createSearchBase( 'product' );
+			$object = $this->filterBase( 'product' );
 
 			$expr = array( $object->getConditions() );
 
@@ -334,7 +335,7 @@ class Standard
 			return $object;
 		}
 
-		return parent::createSearch();
+		return parent::filter();
 	}
 
 
@@ -999,7 +1000,7 @@ class Standard
 
 		$manager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
-		$search = $manager->createSearch( true )->setSlice( 0, 0x7fffffff );
+		$search = $manager->filter( true )->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->combine( '&&', [
 			$search->compare( '==', $domain . '.lists.key', $keys ),
 			$search->getConditions(),
@@ -1011,7 +1012,7 @@ class Standard
 
 		$manager = \Aimeos\MShop::create( $context, $domain );
 
-		$search = $manager->createSearch( true )->setSlice( 0, 0x7fffffff );
+		$search = $manager->filter( true )->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->combine( '&&', [
 			$search->compare( '==', $domain . '.id', array_keys( $map ) ),
 			$search->getConditions(),
@@ -1045,7 +1046,7 @@ class Standard
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
 
-		$search = $manager->createSearch( true )->setSlice( 0, 0x7fffffff );
+		$search = $manager->filter( true )->setSlice( 0, 0x7fffffff );
 		$expr = [
 			$search->compare( '==', 'stock.productcode', $codes ),
 			$search->getConditions(),

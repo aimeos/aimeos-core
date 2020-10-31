@@ -61,7 +61,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\SQL::class, $search );
 	}
 
@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context->getConfig()->set( 'mshop/product/manager/standard/strict-events', 0 );
 
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\SQL::class, $search );
 		$this->assertEquals( 'event', $search->getConditions()->getExpressions()[2]->getExpressions()[2]->getValue() );
 	}
@@ -135,7 +135,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$domains = ['text', 'product', 'price', 'media' => ['unittype10'], 'attribute', 'product/property' => ['package-weight']];
 
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$conditions = array(
 				$search->compare( '==', 'product.code', 'CNC' ),
 				$search->compare( '==', 'product.editor', $this->editor )
@@ -170,7 +170,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveItems()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 				$search->compare( '==', 'product.code', 'CNC' ),
 				$search->compare( '==', 'product.editor', $this->editor )
@@ -187,7 +187,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$listItem = $this->object->createListItem();
 		$refItem = \Aimeos\MShop\Text\Manager\Factory::create( $this->context )->createItem()->setType( 'name' );
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 				$search->compare( '==', 'product.code', 'CNC' ),
 				$search->compare( '==', 'product.editor', $this->editor )
@@ -319,7 +319,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$manager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
 		$search->setSlice( 0, 1 );
 		$products = $manager->search( $search )->toArray();
@@ -344,7 +344,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$total = 0;
 		$suggestItem = $this->object->findItem( 'CNC' );
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'product.id', null );
@@ -401,7 +401,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsAll()
 	{
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
 		$search->setSlice( 0, 10 );
 		$results = $this->object->search( $search, [], $total )->toArray();
@@ -412,7 +412,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsBase()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$expr = array(
 			$search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ),
 			$search->compare( '==', 'product.editor', $this->editor ),
@@ -427,21 +427,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchWildcards()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'CN_' ) );
 		$result = $this->object->search( $search )->toArray();
 
 		$this->assertEquals( 0, count( $result ) );
 
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'CN%' ) );
 		$result = $this->object->search( $search )->toArray();
 
 		$this->assertEquals( 0, count( $result ) );
 
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'CN[C]' ) );
 		$result = $this->object->search( $search )->toArray();
 
@@ -454,7 +454,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$start = 0;
 		$numproducts = 0;
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'product.editor', 'core:lib/mshoplib' ) );
 		$search->setSlice( $start, 5 );
 

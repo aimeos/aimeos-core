@@ -39,7 +39,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'catalog' )->findItem( 'cafe' );
 
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$result = $this->object->aggregate( $search, 'index.catalog.id' )->toArray();
 
 		$this->assertEquals( 4, count( $result ) );
@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 		$listManager = $catalogManager->getSubManager( 'lists' );
-		$search = $listManager->createSearch( true );
+		$search = $listManager->filter( true );
 		$search->setConditions( $search->compare( '==', 'catalog.lists.domain', 'product' ) );
 		$catListItems = $listManager->search( $search )->toArray();
 
@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->saveItem( $product );
 
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catListItem->getParentId() ) );
 		$result = $this->object->search( $search )->toArray();
 
@@ -102,7 +102,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$listManager->deleteItem( $catListItem->getId() );
 
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catListItem->getParentId() ) );
 		$result2 = $this->object->search( $search )->toArray();
 
@@ -124,7 +124,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 		$id = $catalogManager->findItem( 'cafe' )->getId();
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'index.catalog.id', $id ) );
 		$result = $this->object->search( $search, [] );
 
@@ -134,7 +134,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsNoId()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '!=', 'index.catalog.id', null ) );
 		$result = $this->object->search( $search, [] );
 
@@ -147,7 +147,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 		$id = $catalogManager->findItem( 'cafe' )->getId();
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', $id] ), 0 ) );
 		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion', $id] ) )] );
 
@@ -162,7 +162,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 		$id = $catalogManager->findItem( 'cafe' )->getId();
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', [$id]] ), 0 ) );
 		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion', [$id]] ) )] );
 
@@ -177,7 +177,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 		$id = $catalogManager->findItem( 'cafe' )->getId();
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion'] ), 0 ) );
 		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion'] ) )] );
 		$result = $this->object->search( $search, [] );
@@ -191,7 +191,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 		$id = $catalogManager->findItem( 'cafe' )->getId();
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', [] ), 0 ) );
 		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', [] ) )] );
 		$result = $this->object->search( $search, [] );

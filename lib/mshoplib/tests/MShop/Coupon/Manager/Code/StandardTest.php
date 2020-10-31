@@ -20,7 +20,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() );
 
-		$search = $couponManager->createSearch();
+		$search = $couponManager->filter();
 		$search->setConditions( $search->compare( '~=', 'coupon.code.code', 'OPQR' ) );
 		$results = $couponManager->search( $search )->toArray();
 
@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
 		$results = $this->object->search( $search )->toArray();
 
@@ -99,7 +99,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
 		$result = $this->object->search( $search )->toArray();
 
@@ -159,13 +159,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\SQL::class, $this->object->createSearch() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\SQL::class, $this->object->filter() );
 	}
 
 
 	public function testSearchItems()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'coupon.code.id', null );
@@ -193,7 +193,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$total = 0;
 		//search with base criteria
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$search->setSlice( 0, 1 );
 		$expr = array(
 			$search->getConditions(),
@@ -209,7 +209,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testDecrease()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
 		$results = $this->object->search( $search )->toArray();
 
@@ -227,7 +227,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testIncrease()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
 		$results = $this->object->search( $search )->toArray();
 

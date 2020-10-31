@@ -113,7 +113,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function getAttributeIds( \Aimeos\MShop\Common\Manager\Iface $attributeManager )
 	{
 		$entry = [];
-		$search = $attributeManager->createSearch();
+		$search = $attributeManager->filter();
 
 		foreach( $attributeManager->search( $search ) as $id => $item ) {
 			$entry['attribute/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getCode()] = $id;

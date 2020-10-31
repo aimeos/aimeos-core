@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->deleteItem( $product->getId() );
 		$this->object->saveItem( $product );
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$func = $search->createFunction( 'index.price:value', ['EUR'] );
 		$search->setConditions( $search->compare( '==', $func, '18.00' ) );
@@ -83,7 +83,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$func = $search->createFunction( 'index.price:value', ['EUR'] );
 		$search->setConditions( $search->compare( '>=', $func, '18.00' ) );

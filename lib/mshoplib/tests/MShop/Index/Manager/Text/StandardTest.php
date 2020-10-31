@@ -79,7 +79,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( 'Not supported by SQL Server' );
 		}
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 't-disc'] ), 0 ) );
 		$search->setSortations( [$search->sort( '-', $search->createFunction( 'sort:index.text:relevance', ['de', 't-disc'] ) )] );
 
@@ -98,7 +98,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( 'Not supported by SQL Server' );
 		}
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 'T-DISC'] ), 0 ) );
 		$search->setSortations( [$search->sort( '-', $search->createFunction( 'sort:index.text:relevance', ['de', 'T-DISC'] ) )] );
 
@@ -110,7 +110,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsName()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$func = $search->createFunction( 'index.text:name', ['de'] );
 		$search->setConditions( $search->compare( '=~', $func, 'Cafe' ) );
@@ -126,7 +126,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsUrl()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'index.text:url()', 'Cafe-Noire-Cappuccino' ) );
 		$result = $this->object->search( $search, [] );
 
@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->deleteItem( $product->getId() );
 		$this->object->saveItem( $product );
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$func = $search->createFunction( 'index.text:name', ['de'] );
 		$search->setConditions( $search->compare( '==', $func, 'Cafe Noire Expresso' ) );
@@ -159,7 +159,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->deleteItem( $product->getId() );
 		$this->object->saveItem( $product );
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$func = $search->createFunction( 'index.text:name', ['de'] );
 		$search->setConditions( $search->compare( '==', $func, 'Unterproduct 3' ) );

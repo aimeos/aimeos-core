@@ -22,7 +22,7 @@ class OnceTest extends \PHPUnit\Framework\TestCase
 		$this->couponItem = \Aimeos\MShop::create( $this->context, 'coupon' )->createItem();
 
 		$orderBaseManager = \Aimeos\MShop::create( $this->context, 'order/base' );
-		$search = $orderBaseManager->createSearch();
+		$search = $orderBaseManager->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.price', '4800.00' ) );
 		$basket = $orderBaseManager->search( $search )->first();
 

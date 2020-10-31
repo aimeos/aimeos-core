@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $search );
 	}
 
@@ -231,7 +231,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No list item found' );
 		}
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'attribute.id', null );
@@ -278,7 +278,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchBase()
 	{
 		//search with base criteria
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$expr = array(
 			$search->compare( '==', 'attribute.domain', 'product' ),
 			$search->compare( '~=', 'attribute.code', '3' ),
@@ -302,7 +302,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchTotal()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'attribute.type', 'size' ),
 			$search->compare( '==', 'attribute.domain', 'product' ),

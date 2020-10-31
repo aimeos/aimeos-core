@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'text.label', 'misc_long_desc' ) );
 		$item = $this->object->search( $search, ['media'] )->first();
 
@@ -82,7 +82,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'text.id', null );
@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsAll()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'text.editor', $this->editor ) );
 		$this->assertEquals( 93, count( $this->object->search( $search )->toArray() ) );
 	}
@@ -124,7 +124,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsBase()
 	{
 		$total = 0;
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$conditions = array(
 			$search->compare( '==', 'text.editor', $this->editor ),
 			$search->getConditions()
@@ -143,7 +143,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$conditions = array(
 			$search->compare( '~=', 'text.content', 'Monetary' ),
 			$search->compare( '==', 'text.editor', $this->editor ),
@@ -164,7 +164,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'text.content', 'Cafe Noire Expresso' ),
 			$search->compare( '==', 'text.editor', $this->editor ),

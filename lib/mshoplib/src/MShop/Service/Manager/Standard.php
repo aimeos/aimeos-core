@@ -723,16 +723,17 @@ class Standard
 
 
 	/**
-	 * Creates a search critera object
+	 * Creates a filter object.
 	 *
-	 * @param bool $default Add default criteria (optional)
-	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
+	 * @param bool $default Add default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function createSearch( bool $default = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true )
 		{
-			$object = $this->createSearchBase( 'service' );
+			$object = $this->filterBase( 'service' );
 
 			$expr = array( $object->getConditions() );
 
@@ -753,7 +754,7 @@ class Standard
 			return $object;
 		}
 
-		return parent::createSearch();
+		return parent::filter();
 	}
 
 

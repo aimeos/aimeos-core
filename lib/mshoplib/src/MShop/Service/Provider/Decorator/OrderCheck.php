@@ -97,7 +97,7 @@ class OrderCheck
 
 		if( isset( $config['ordercheck.total-number-min'] ) )
 		{
-			$search = $manager->createSearch( true );
+			$search = $manager->filter( true );
 			$expr = array(
 				$search->compare( '==', 'order.base.customerid', $customerId ),
 				$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED ),
@@ -115,7 +115,7 @@ class OrderCheck
 		{
 			$time = time() - (int) $config['ordercheck.limit-days-pending'] * 86400;
 
-			$search = $manager->createSearch( true );
+			$search = $manager->filter( true );
 			$expr = array(
 				$search->compare( '==', 'order.base.customerid', $customerId ),
 				$search->compare( '>=', 'order.datepayment', date( 'Y-m-d H:i:s', $time ) ),

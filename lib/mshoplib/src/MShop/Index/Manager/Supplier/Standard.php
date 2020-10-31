@@ -633,7 +633,7 @@ class Standard
 		$listItems = [];
 		$listManager = \Aimeos\MShop::create( $this->getContext(), 'supplier/lists' );
 
-		$search = $listManager->createSearch( true )->setSlice( 0, 0x7FFFFFFF );
+		$search = $listManager->filter( true )->setSlice( 0, 0x7FFFFFFF );
 		$expr = array(
 			$search->compare( '==', 'supplier.lists.refid', array_keys( $items ) ),
 			$search->compare( '==', 'supplier.lists.domain', 'product' ),

@@ -25,7 +25,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
 
 		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
-		$search = $orderBaseProductManager->createSearch();
+		$search = $orderBaseProductManager->filter();
 		$search->setConditions( $search->compare( '==', 'order.base.product.prodcode', 'CNC' ) );
 		$orderProducts = $orderBaseProductManager->search( $search )->toArray();
 

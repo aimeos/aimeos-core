@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
 
 		$a = $this->object->search( $search )->toArray();
@@ -134,7 +134,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$siteid = $this->context->getLocale()->getSiteId();
 
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'locale.site.id', null );
@@ -155,7 +155,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, $total );
 
 		//search with base criteria and total
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$search->setConditions( $search->compare( '==', 'locale.site.code', array( 'unittest' ) ) );
 		$search->setSlice( 0, 1 );
 
@@ -194,7 +194,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetPath()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
 
 		$results = $this->object->search( $search )->toArray();
@@ -211,7 +211,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetTree()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
 
 		$expected = $this->object->search( $search )->first();
@@ -252,7 +252,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetTreeCache()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
 
 		$results = $this->object->search( $search )->toArray();
@@ -270,7 +270,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetTreeDefault()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', 'default' ) );
 		$results = $this->object->search( $search )->toArray();
 

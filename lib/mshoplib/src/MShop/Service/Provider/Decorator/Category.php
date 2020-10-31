@@ -126,7 +126,7 @@ class Category
 	{
 		$catalogManager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
 
-		$search = $catalogManager->createSearch( true );
+		$search = $catalogManager->filter( true );
 		$expr = array(
 			$search->compare( '==', 'catalog.code', $catalogCodes ),
 			$search->getConditions(),
@@ -189,7 +189,7 @@ class Category
 		}
 
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$expr = [];
 
 		foreach( $productIds as $id )

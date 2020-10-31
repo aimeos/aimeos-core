@@ -326,9 +326,9 @@ class Standard
 	 * @param bool $site TRUE to add site criteria to show orders with available products only
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function createSearch( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
-		$search = parent::createSearch();
+		$search = parent::filter();
 		$context = $this->getContext();
 
 		if( $default === true )
@@ -851,7 +851,7 @@ class Standard
 			}
 
 			$manager = $this->getObject()->getSubManager( 'base' );
-			$search = $manager->createSearch()->setSlice( 0, count( $ids ) );
+			$search = $manager->filter()->setSlice( 0, count( $ids ) );
 			$search->setConditions( $search->compare( '==', 'order.base.id', $ids ) );
 			$baseItems = $manager->search( $search, $ref );
 		}

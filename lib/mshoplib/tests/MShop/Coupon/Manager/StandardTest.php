@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
 		$results = $this->object->search( $search )->toArray();
 
@@ -110,7 +110,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$result = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
@@ -186,14 +186,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\SQL::class, $search );
 	}
 
 
 	public function testSearchItems()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'coupon.id', null );
@@ -232,7 +232,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$total = 0;
 		//search with base criteria
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$search->setSlice( 0, 1 );
 		$expr = array(
 			$search->getConditions(),

@@ -159,7 +159,7 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 		$map = [];
 		$manager = \Aimeos\MShop::create( $this->additional, 'locale/site' );
 
-		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+		$search = $manager->filter()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'locale.site.level', 0 ) );
 
 		foreach( $manager->search( $search ) as $siteid => $siteItem ) {

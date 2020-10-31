@@ -101,7 +101,7 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function getMediaIds( \Aimeos\MShop\Common\Manager\Iface $mediaManager )
 	{
 		$entry = [];
-		$search = $mediaManager->createSearch();
+		$search = $mediaManager->filter();
 
 		foreach( $mediaManager->search( $search ) as $id => $item ) {
 			$entry['media/' . $item->getUrl()] = $id;

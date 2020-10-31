@@ -45,7 +45,7 @@ class DemoAddServiceData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		$manager = \Aimeos\MShop::create( $context, 'service' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'service.code', 'demo-' ) );
 		$services = $manager->search( $search );
 

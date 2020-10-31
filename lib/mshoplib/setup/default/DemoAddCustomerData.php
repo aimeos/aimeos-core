@@ -45,7 +45,7 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		$manager = \Aimeos\MShop::create( $context, 'customer' );
 
-		$search = $manager->createSearch();
+		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'demo@example.com' ) );
 		$services = $manager->search( $search );
 

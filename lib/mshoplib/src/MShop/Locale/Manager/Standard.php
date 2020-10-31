@@ -168,18 +168,19 @@ class Standard
 
 
 	/**
-	 * Creates a search critera object
+	 * Creates a filter object.
 	 *
-	 * @param bool $default Add default criteria (optional)
-	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
+	 * @param bool $default Add default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function createSearch( bool $default = false ): \Aimeos\MW\Criteria\Iface
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		if( $default === true ) {
-			return $this->createSearchBase( 'locale' );
+			return $this->filterBase( 'locale' );
 		}
 
-		return parent::createSearch();
+		return parent::filter();
 	}
 
 
@@ -569,7 +570,7 @@ class Standard
 		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sites ) : ?\Aimeos\MShop\Locale\Item\Iface
 	{
 		// Try to find exact match
-		$search = $this->getObject()->createSearch( $active );
+		$search = $this->getObject()->filter( $active );
 
 		$expr = array( $search->compare( '==', 'locale.siteid', $sites[Base::SITE_PATH] ?? $sites[Base::SITE_ONE] ) );
 
@@ -633,7 +634,7 @@ class Standard
 		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sites ) : ?\Aimeos\MShop\Locale\Item\Iface
 	{
 		// Try to find the best matching locale
-		$search = $this->getObject()->createSearch( $active );
+		$search = $this->getObject()->filter( $active );
 
 		$expr = array(
 			$search->compare( '==', 'locale.siteid', $sites[Base::SITE_PATH] ?? $sites[Base::SITE_ONE] ),

@@ -641,7 +641,7 @@ class Standard
 		$listItems = [];
 		$listManager = \Aimeos\MShop::create( $this->getContext(), 'catalog/lists' );
 
-		$search = $listManager->createSearch( true )->setSlice( 0, 0x7fffffff );
+		$search = $listManager->filter( true )->setSlice( 0, 0x7fffffff );
 		$expr = array(
 			$search->compare( '==', 'catalog.lists.refid', array_keys( $items ) ),
 			$search->compare( '==', 'catalog.lists.domain', 'product' ),

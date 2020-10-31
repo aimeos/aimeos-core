@@ -109,7 +109,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 		if( isset( $data['group'] ) )
 		{
 			$grpIds = $list = [];
-			$search = $groupManager->createSearch()->setSlice( 0, 10000 );
+			$search = $groupManager->filter()->setSlice( 0, 10000 );
 
 			foreach( $groupManager->search( $search ) as $id => $groupItem ) {
 				$list[$groupItem->getCode()] = $id;
