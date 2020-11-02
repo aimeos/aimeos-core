@@ -76,7 +76,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'OPQR' );
+		$item = $this->object->find( 'OPQR' );
 
 		$this->assertEquals( 'OPQR', $item->getCode() );
 	}

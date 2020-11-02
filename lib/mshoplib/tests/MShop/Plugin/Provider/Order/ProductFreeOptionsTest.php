@@ -47,9 +47,9 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 		$attribute = \Aimeos\MShop::create( $this->context, 'order/base/product/attribute' )->createItem();
 
 		$attribute = $attribute->setQuantity( 2 )->setCode( 'size' )->setType( 'config' )
-			->setAttributeId( $attrManager->findItem( 'xs', [], 'product', 'size' )->getId() );
+			->setAttributeId( $attrManager->find( 'xs', [], 'product', 'size' )->getId() );
 
-		$product = $product->setAttributeItem( $attribute )->setProductId( $prodManager->findItem( 'CNE' )->getId() );
+		$product = $product->setAttributeItem( $attribute )->setProductId( $prodManager->find( 'CNE' )->getId() );
 
 		$this->assertEquals( $product, $this->object->update( $basket, 'addProduct.after', $product ) );
 		$this->assertEquals( [$product], $this->object->update( $basket, 'addProduct.after', [$product] ) );
@@ -63,8 +63,8 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 		$price = \Aimeos\MShop::create( $this->context, 'price' )->createItem()->setValue( '10.00' );
 
 		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
-		$attrItem = $attrManager->findItem( 'xs', ['price'], 'product', 'size' );
-		$attrItem2 = $attrManager->findItem( 'xl', ['price'], 'product', 'size' );
+		$attrItem = $attrManager->find( 'xs', ['price'], 'product', 'size' );
+		$attrItem2 = $attrManager->find( 'xl', ['price'], 'product', 'size' );
 
 		$quantities = [$attrItem->getId() => 2, $attrItem2->getId() => 1];
 		$attrItems = [$attrItem->getId() => $attrItem, $attrItem2->getId() => $attrItem2];
@@ -78,7 +78,7 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 	public function testSortByPrice()
 	{
 		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
-		$attrItem = $attrManager->findItem( 'xs', ['price'], 'product', 'size' );
+		$attrItem = $attrManager->find( 'xs', ['price'], 'product', 'size' );
 
 		$quantities = [1 => 2];
 		$attrItems = [1 => $attrItem];
@@ -92,8 +92,8 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 	public function testSortByPriceFirstNoPrice()
 	{
 		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
-		$attrItem1 = $attrManager->findItem( 'xs', ['price'], 'product', 'size' );
-		$attrItem2 = $attrManager->findItem( 's', [], 'product', 'size' );
+		$attrItem1 = $attrManager->find( 'xs', ['price'], 'product', 'size' );
+		$attrItem2 = $attrManager->find( 's', [], 'product', 'size' );
 
 		$quantities = [1 => 1, 2 => 1];
 		$attrItems = [1 => $attrItem2, 2 => $attrItem1];
@@ -107,8 +107,8 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 	public function testSortByPriceSecondNoPrice()
 	{
 		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
-		$attrItem1 = $attrManager->findItem( 'xs', ['price'], 'product', 'size' );
-		$attrItem2 = $attrManager->findItem( 's', [], 'product', 'size' );
+		$attrItem1 = $attrManager->find( 'xs', ['price'], 'product', 'size' );
+		$attrItem2 = $attrManager->find( 's', [], 'product', 'size' );
 
 		$quantities = [1 => 1, 2 => 1];
 		$attrItems = [1 => $attrItem1, 2 => $attrItem2];

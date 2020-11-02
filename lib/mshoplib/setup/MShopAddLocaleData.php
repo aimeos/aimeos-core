@@ -67,7 +67,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 		}
 		catch( \Aimeos\MW\DB\Exception $e ) // already in the database
 		{
-			$siteItem = $siteManager->findItem( $code );
+			$siteItem = $siteManager->find( $code );
 		}
 
 		try

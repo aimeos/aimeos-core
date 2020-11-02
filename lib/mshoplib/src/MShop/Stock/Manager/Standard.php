@@ -153,11 +153,11 @@ class Standard
 	 * @param bool $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( string $code, array $ref = [], string $domain = null, string $type = null,
+	public function find( string $code, array $ref = [], string $domain = null, string $type = null,
 		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$list = array( 'stock.productcode' => $code, 'stock.type' => $type );
-		return $this->findItemBase( $list, $ref, $default );
+		return $this->findBase( $list, $ref, $default );
 	}
 
 

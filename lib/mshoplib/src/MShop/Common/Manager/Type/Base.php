@@ -177,14 +177,14 @@ abstract class Base
 	 * @param bool $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( string $code, array $ref = [], string $domain = 'product', string $type = null,
+	public function find( string $code, array $ref = [], string $domain = 'product', string $type = null,
 		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$find = array(
 			$this->prefix . 'code' => $code,
 			$this->prefix . 'domain' => $domain,
 		);
-		return $this->findItemBase( $find, $ref, $default );
+		return $this->findBase( $find, $ref, $default );
 	}
 
 

@@ -119,7 +119,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetBundleMap()
 	{
 		$context = \TestHelperCntl::getContext();
-		$prodId = \Aimeos\MShop::create( $context, 'product' )->findItem( 'CNC' )->getId();
+		$prodId = \Aimeos\MShop::create( $context, 'product' )->find( 'CNC' )->getId();
 
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'getBundleMap' );
@@ -567,7 +567,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateStockSelection()
 	{
 		$context = \TestHelperCntl::getContext();
-		$prodId = \Aimeos\MShop::create( $context, 'product' )->findItem( 'U:TEST' )->getId();
+		$prodId = \Aimeos\MShop::create( $context, 'product' )->find( 'U:TEST' )->getId();
 
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )

@@ -94,7 +94,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'en' );
+		$item = $this->object->find( 'en' );
 
 		$this->assertEquals( 'en', $item->getCode() );
 	}

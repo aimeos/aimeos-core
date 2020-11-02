@@ -108,7 +108,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function getOrderProduct( $code )
 	{
-		$productItem = \Aimeos\MShop::create( $this->context, 'product' )->findItem( $code );
+		$productItem = \Aimeos\MShop::create( $this->context, 'product' )->find( $code );
 
 		return \Aimeos\MShop::create( $this->context, 'order/base/product' )
 			->createItem()->copyFrom( $productItem );

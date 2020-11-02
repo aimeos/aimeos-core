@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'unitcode' );
+		$item = $this->object->find( 'unitcode' );
 
 		$this->assertEquals( 'unitcode', $item->getCode() );
 	}
@@ -158,7 +158,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItem()
 	{
-		$item = $this->object->findItem( 'unitcode', ['text'] );
+		$item = $this->object->find( 'unitcode', ['text'] );
 
 		if( ( $listItem = $item->getListItems( 'text', 'unittype1' )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );

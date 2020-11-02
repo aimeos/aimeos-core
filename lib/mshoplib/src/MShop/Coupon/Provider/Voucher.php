@@ -77,7 +77,7 @@ class Voucher
 		}
 
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'coupon/code' );
-		$orderProductId = $manager->findItem( $this->getCode() )->getRef();
+		$orderProductId = $manager->find( $this->getCode() )->getRef();
 
 		$status = [\Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED];
 		$this->checkVoucher( $orderProductId, $status );

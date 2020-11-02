@@ -93,7 +93,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSelectionPriceCorrect()
 	{
-		$productItem = \Aimeos\MShop::create( $this->context, 'product' )->findItem( 'U:TEST', ['price'] );
+		$productItem = \Aimeos\MShop::create( $this->context, 'product' )->find( 'U:TEST', ['price'] );
 		$refPrices = $productItem->getRefItems( 'price', 'default', 'default' );
 
 		if( ( $productPrice = $refPrices->first() ) === null ) {
@@ -135,7 +135,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSelectionPriceUpdated()
 	{
-		$productItem = \Aimeos\MShop::create( $this->context, 'product' )->findItem( 'U:TEST' );
+		$productItem = \Aimeos\MShop::create( $this->context, 'product' )->find( 'U:TEST' );
 
 		$orderProduct = $this->order->getProduct( 0 );
 		$orderProduct = $orderProduct->setProductCode( 'U:TESTSUB02' )
@@ -161,7 +161,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateAttributePriceUpdated()
 	{
 		$attribute = \Aimeos\MShop::create( $this->context, 'attribute' )
-			->findItem( 'xs', ['price'], 'product', 'size' );
+			->find( 'xs', ['price'], 'product', 'size' );
 
 		$ordAttr = \Aimeos\MShop::create( $this->context, 'order/base/product/attribute' )->createItem()
 			->copyFrom( $attribute )->setQuantity( 2 );

@@ -36,7 +36,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$item = \Aimeos\MShop::create( $this->context, 'supplier' )->findItem( 'unitCode001' );
+		$item = \Aimeos\MShop::create( $this->context, 'supplier' )->find( 'unitCode001' );
 
 		$search = $this->object->filter( true );
 		$result = $this->object->aggregate( $search, 'index.supplier.id' )->toArray();
@@ -78,7 +78,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveDeleteItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$product = $productManager->findItem( 'CNC' );
+		$product = $productManager->find( 'CNC' );
 
 		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context );
 		$listManager = $supplierManager->getSubManager( 'lists' );
@@ -135,7 +135,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsId()
 	{
 		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context );
-		$id = $supplierManager->findItem( 'unitCode001' )->getId();
+		$id = $supplierManager->find( 'unitCode001' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'index.supplier.id', $id ) );
@@ -158,7 +158,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsPosition()
 	{
 		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context );
-		$id = $supplierManager->findItem( 'unitCode001' )->getId();
+		$id = $supplierManager->find( 'unitCode001' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.supplier:position', ['default', $id] ), 0 ) );
@@ -173,7 +173,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsPositionList()
 	{
 		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context );
-		$id = $supplierManager->findItem( 'unitCode001' )->getId();
+		$id = $supplierManager->find( 'unitCode001' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.supplier:position', ['default', [$id]] ), 0 ) );

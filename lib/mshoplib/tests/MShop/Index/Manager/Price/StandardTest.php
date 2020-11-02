@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveDeleteItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$product = $productManager->findItem( 'CNC', ['price'] );
+		$product = $productManager->find( 'CNC', ['price'] );
 
 		$this->object->deleteItem( $product->getId() );
 		$this->object->saveItem( $product );

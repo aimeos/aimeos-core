@@ -93,7 +93,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'm', array( 'text' ), 'product', 'size' );
+		$item = $this->object->find( 'm', array( 'text' ), 'product', 'size' );
 
 		$this->assertEquals( 'm', $item->getCode() );
 		$this->assertEquals( 'size', $item->getType() );
@@ -106,20 +106,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testFindItemInvalid()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->findItem( 'invalid' );
+		$this->object->find( 'invalid' );
 	}
 
 
 	public function testFindItemMissing()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->findItem( 'm', [], 'product' );
+		$this->object->find( 'm', [], 'product' );
 	}
 
 
 	public function testGetItem()
 	{
-		$itemA = $this->object->findItem( 'black', [], 'product', 'color' );
+		$itemA = $this->object->find( 'black', [], 'product', 'color' );
 		$itemB = $this->object->get( $itemA->getId(), ['attribute/property', 'text'] );
 
 		$this->assertEquals( $itemA->getId(), $itemB->getId() );
@@ -130,7 +130,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItemLists()
 	{
-		$itemA = $this->object->findItem( 'xxl', [], 'product', 'size' );
+		$itemA = $this->object->find( 'xxl', [], 'product', 'size' );
 		$itemB = $this->object->get( $itemA->getId(), ['text'] );
 
 		$this->assertEquals( $itemA->getId(), $itemB->getId() );
@@ -202,12 +202,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSavePropertyItems()
 	{
-		$item = $this->object->findItem( 'black', ['attribute/property'], 'product', 'color' );
+		$item = $this->object->find( 'black', ['attribute/property'], 'product', 'color' );
 
 		$item->setId( null )->setCode( 'xyz' );
 		$this->object->saveItem( $item );
 
-		$item2 = $this->object->findItem( 'xyz', ['attribute/property'], 'product', 'color' );
+		$item2 = $this->object->find( 'xyz', ['attribute/property'], 'product', 'color' );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -225,7 +225,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$item = $this->object->findItem( 'black', ['text'], 'product', 'color' );
+		$item = $this->object->find( 'black', ['text'], 'product', 'color' );
 
 		if( ( $listItem = $item->getListItems( 'text', 'default', null, false )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );

@@ -219,7 +219,7 @@ abstract class Base implements Iface
 		string $stocktype = 'default' ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
-		$product = $productManager->findItem( $prodcode, ['text', 'media', 'price'] );
+		$product = $productManager->find( $prodcode, ['text', 'media', 'price'] );
 
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$prices = $product->getRefItems( 'price', 'default', 'default' );

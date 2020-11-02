@@ -840,7 +840,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCopyFrom()
 	{
 		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'product' );
-		$product = $manager->findItem( 'CNE', ['text'] );
+		$product = $manager->find( 'CNE', ['text'] );
 
 		$productCopy = new \Aimeos\MShop\Order\Item\Base\Product\Standard( $this->price );
 		$return = $productCopy->copyFrom( $product );

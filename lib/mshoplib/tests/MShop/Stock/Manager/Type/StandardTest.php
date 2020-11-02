@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'unit_type1', [], 'product' );
+		$item = $this->object->find( 'unit_type1', [], 'product' );
 
 		$this->assertEquals( 'unit_type1', $item->getCode() );
 	}

@@ -104,7 +104,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testGetCustomerData()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
-		$customerId = $manager->findItem( 'test@example.com' )->getId();
+		$customerId = $manager->find( 'test@example.com' )->getId();
 
 		$this->assertNull( $this->access( 'getCustomerData' )->invokeArgs( $this->object, [$customerId, 'token'] ) );
 	}
@@ -122,7 +122,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$stub->expects( $this->once() )->method( 'saveItem' );
 
 		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
-		$customerId = $manager->findItem( 'test@example.com' )->getId();
+		$customerId = $manager->find( 'test@example.com' )->getId();
 
 		$this->access( 'setCustomerData' )->invokeArgs( $this->object, [$customerId, 'token', 'abcd'] );
 	}

@@ -180,7 +180,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 	protected function getOrderProduct( $code )
 	{
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
-		$product = $productManager->findItem( $code );
+		$product = $productManager->find( $code );
 
 		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 		$orderProduct = $orderProductManager->createItem()->copyFrom( $product )->setStockType( 'default' );

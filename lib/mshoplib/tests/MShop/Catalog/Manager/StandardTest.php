@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$item = $this->object->findItem( 'cafe', ['product'] );
+		$item = $this->object->find( 'cafe', ['product'] );
 
 		if( ( $listItem = $item->getListItems( 'product', 'promotion' )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );
@@ -144,7 +144,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'root' );
+		$item = $this->object->find( 'root' );
 
 		$this->assertEquals( 'root', $item->getCode() );
 	}
@@ -283,7 +283,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveInsertMoveDeleteItem()
 	{
-		$item = $this->object->findItem( 'root', ['text'] );
+		$item = $this->object->find( 'root', ['text'] );
 
 		$parentId = $item->getId();
 		$item->setId( null );
@@ -335,8 +335,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveChildren()
 	{
-		$item = $this->object->findItem( 'cafe', ['product'] )->setCode( 'ccafe' )->setId( null );
-		$child = $this->object->findItem( 'misc', ['product'] )->setCode( 'cmisc' )->setId( null );
+		$item = $this->object->find( 'cafe', ['product'] )->setCode( 'ccafe' )->setId( null );
+		$child = $this->object->find( 'misc', ['product'] )->setCode( 'cmisc' )->setId( null );
 
 		$item = $this->object->insertItem( $item->addChild( $child ) );
 		$this->object->deleteItem( $item->getId() );
@@ -346,7 +346,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 3, count( $item->getChild( 0 )->getListItems() ) );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->findItem( 'ccafe' );
+		$this->object->find( 'ccafe' );
 	}
 
 

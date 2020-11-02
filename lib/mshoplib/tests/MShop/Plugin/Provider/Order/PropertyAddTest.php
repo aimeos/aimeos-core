@@ -23,7 +23,7 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
 		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem()->off(); // remove event listeners
 
-		$product = \Aimeos\MShop::create( $context, 'product' )->findItem( 'CNC' );
+		$product = \Aimeos\MShop::create( $context, 'product' )->find( 'CNC' );
 		$this->product = \Aimeos\MShop::create( $context, 'order/base/product' )->createItem()->copyFrom( $product );
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyAdd( $context, $this->plugin );

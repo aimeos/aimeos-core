@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$item = \Aimeos\MShop::create( $this->context, 'catalog' )->findItem( 'cafe' );
+		$item = \Aimeos\MShop::create( $this->context, 'catalog' )->find( 'cafe' );
 
 		$search = $this->object->filter( true );
 		$result = $this->object->aggregate( $search, 'index.catalog.id' )->toArray();
@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveDeleteItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$product = $productManager->findItem( 'CNC' );
+		$product = $productManager->find( 'CNC' );
 
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
 		$listManager = $catalogManager->getSubManager( 'lists' );
@@ -122,7 +122,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsId()
 	{
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-		$id = $catalogManager->findItem( 'cafe' )->getId();
+		$id = $catalogManager->find( 'cafe' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'index.catalog.id', $id ) );
@@ -145,7 +145,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsPosition()
 	{
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-		$id = $catalogManager->findItem( 'cafe' )->getId();
+		$id = $catalogManager->find( 'cafe' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', $id] ), 0 ) );
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsPositionList()
 	{
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-		$id = $catalogManager->findItem( 'cafe' )->getId();
+		$id = $catalogManager->find( 'cafe' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', [$id]] ), 0 ) );
@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsPositionNoCatid()
 	{
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-		$id = $catalogManager->findItem( 'cafe' )->getId();
+		$id = $catalogManager->find( 'cafe' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion'] ), 0 ) );
@@ -189,7 +189,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsPositionNoParams()
 	{
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-		$id = $catalogManager->findItem( 'cafe' )->getId();
+		$id = $catalogManager->find( 'cafe' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', [] ), 0 ) );

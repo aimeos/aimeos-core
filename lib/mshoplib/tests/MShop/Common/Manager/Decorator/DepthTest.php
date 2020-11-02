@@ -30,7 +30,7 @@ class DepthTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$item = $this->object->findItem( 'U:TESTP', ['product'] );
+		$item = $this->object->find( 'U:TESTP', ['product'] );
 
 		$this->assertEquals( 1, count( $item->getRefItems( 'product' ) ) );
 	}
@@ -39,7 +39,7 @@ class DepthTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context->getConfig()->set( 'mshop/common/manager/maxdepth', 0 );
 
-		$item = $this->object->findItem( 'U:TESTP', ['product'] );
+		$item = $this->object->find( 'U:TESTP', ['product'] );
 
 		$this->assertEquals( 0, count( $item->getRefItems( 'product' ) ) );
 	}

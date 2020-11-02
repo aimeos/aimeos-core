@@ -67,8 +67,8 @@ class ReviewAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 			foreach( $list as $dataset )
 			{
-				$refId = $domainManager->findItem( $dataset['refid'] )->getId();
-				$custId = $custManager->findItem( $dataset['customerid'] )->getId();
+				$refId = $domainManager->find( $dataset['refid'] )->getId();
+				$custId = $custManager->find( $dataset['customerid'] )->getId();
 
 				$ordProdItem = $this->getOrderProductItem( $dataset['ordprodid'] );
 

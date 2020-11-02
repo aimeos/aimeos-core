@@ -93,7 +93,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'test3@example.com' );
+		$item = $this->object->find( 'test3@example.com' );
 
 		$this->assertEquals( 'test3@example.com', $item->getCode() );
 	}
@@ -202,14 +202,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSaveAddressItems()
 	{
-		$item = $this->object->findItem( 'test@example.com', ['customer/address'] );
+		$item = $this->object->find( 'test@example.com', ['customer/address'] );
 
 		$item->setId( null )->setCode( 'xyz' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
 		$item->addAddressItem( new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.' ) );
 		$this->object->saveItem( $item );
 
-		$item2 = $this->object->findItem( 'xyz', ['customer/address'] );
+		$item2 = $this->object->find( 'xyz', ['customer/address'] );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -220,13 +220,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSavePropertyItems()
 	{
-		$item = $this->object->findItem( 'test@example.com', ['customer/property'] );
+		$item = $this->object->find( 'test@example.com', ['customer/property'] );
 
 		$item->setId( null )->setCode( 'xyz' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
 		$this->object->saveItem( $item );
 
-		$item2 = $this->object->findItem( 'xyz', ['customer/property'] );
+		$item2 = $this->object->find( 'xyz', ['customer/property'] );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -243,7 +243,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$item = $this->object->findItem( 'test@example.com', ['text'] );
+		$item = $this->object->find( 'test@example.com', ['text'] );
 
 		if( ( $listItem = $item->getListItems( 'text', 'default' )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );

@@ -171,7 +171,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 				try
 				{
 					$manager = \Aimeos\MShop::create( $context, 'attribute' );
-					$refItem = $manager->findItem( $refItem->getCode(), [], $domain, $refItem->getType() );
+					$refItem = $manager->find( $refItem->getCode(), [], $domain, $refItem->getType() );
 				}
 				catch( \Aimeos\MShop\Exception $e ) { ; } // attribute doesn't exist yet
 
@@ -212,7 +212,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			foreach( $entry['product'] as $data )
 			{
 				$listItem = $listManager->createItem()->fromArray( $data );
-				$listItem->setRefId( $manager->findItem( $data['product.code'] )->getId() );
+				$listItem->setRefId( $manager->find( $data['product.code'] )->getId() );
 
 				$item->addListItem( 'product', $listItem );
 			}

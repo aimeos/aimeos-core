@@ -52,7 +52,7 @@ class MShopAddCodeData extends \Aimeos\MW\Setup\Task\Base
 
 				try
 				{
-					$item = $domainManager->findItem( $dataset['code'] );
+					$item = $domainManager->find( $dataset['code'] );
 				}
 				catch( \Exception $e )
 				{

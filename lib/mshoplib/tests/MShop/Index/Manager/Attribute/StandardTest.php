@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$item = \Aimeos\MShop::create( $this->context, 'attribute' )->findItem( 'white', [], 'product', 'color' );
+		$item = \Aimeos\MShop::create( $this->context, 'attribute' )->find( 'white', [], 'product', 'color' );
 
 		$search = $this->object->filter( true );
 		$result = $this->object->aggregate( $search, 'index.attribute.id' )->toArray();
@@ -67,7 +67,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveDeleteItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$product = $productManager->findItem( 'CNC', ['attribute'] );
+		$product = $productManager->find( 'CNC', ['attribute'] );
 		$attrItem = $product->getRefItems( 'attribute' )->first();
 
 		$product = $this->object->saveItem( $product->setId( null )->setCode( 'ModifiedCNC' ) );
@@ -108,7 +108,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItems()
 	{
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
-		$id = $attributeManager->findItem( '30', [], 'product', 'length' )->getId();
+		$id = $attributeManager->find( '30', [], 'product', 'length' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $id ) );
@@ -133,8 +133,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
 
 		$attrIds = [
-			$manager->findItem( '30', [], 'product', 'length' )->getId(),
-			$manager->findItem( '29', [], 'product', 'width' )->getId()
+			$manager->find( '30', [], 'product', 'length' )->getId(),
+			$manager->find( '29', [], 'product', 'width' )->getId()
 		];
 
 		$search = $this->object->filter();
@@ -155,8 +155,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
 
 		$attrIds = [
-			$manager->findItem( '30', [], 'product', 'length' )->getId(),
-			$manager->findItem( '30', [], 'product', 'width' )->getId()
+			$manager->find( '30', [], 'product', 'length' )->getId(),
+			$manager->find( '30', [], 'product', 'width' )->getId()
 		];
 
 		$search = $this->object->filter();

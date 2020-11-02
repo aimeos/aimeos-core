@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'CNC' );
+		$item = $this->object->find( 'CNC' );
 
 		$this->assertEquals( 'CNC', $item->getCode() );
 	}
@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItemDeep()
 	{
-		$item = $this->object->findItem( 'CNE', ['attribute', 'product'] );
+		$item = $this->object->find( 'CNE', ['attribute', 'product'] );
 		$products = $item->getRefItems( 'product' );
 		$product = $products->first();
 
@@ -116,14 +116,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItemDomainFilter()
 	{
-		$item = $this->object->findItem( 'CNE', ['product' => ['default']] );
+		$item = $this->object->find( 'CNE', ['product' => ['default']] );
 		$this->assertEquals( 3, count( $item->getListItems( 'product' ) ) );
 	}
 
 
 	public function testFindItemForeignDomains()
 	{
-		$item = $this->object->findItem( 'CNE', ['catalog', 'supplier', 'stock'] );
+		$item = $this->object->find( 'CNE', ['catalog', 'supplier', 'stock'] );
 
 		$this->assertEquals( 1, count( $item->getSupplierItems() ) );
 		$this->assertEquals( 2, count( $item->getCatalogItems() ) );
@@ -261,12 +261,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSavePropertyItems()
 	{
-		$item = $this->object->findItem( 'CNE', ['product/property'] );
+		$item = $this->object->find( 'CNE', ['product/property'] );
 
 		$item->setId( null )->setCode( 'xyz' );
 		$this->object->saveItem( $item );
 
-		$item2 = $this->object->findItem( 'CNE', ['product/property'] );
+		$item2 = $this->object->find( 'CNE', ['product/property'] );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -343,7 +343,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItems()
 	{
 		$total = 0;
-		$suggestItem = $this->object->findItem( 'CNC' );
+		$suggestItem = $this->object->find( 'CNC' );
 		$search = $this->object->filter();
 
 		$expr = [];

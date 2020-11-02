@@ -28,7 +28,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$serviceManager = \Aimeos\MShop::create( $this->context, 'service' );
-		$service = $serviceManager->findItem( 'unitcode' );
+		$service = $serviceManager->find( 'unitcode' );
 
 		$orderServiceAttrManager = \Aimeos\MShop::create( $this->context, 'order/base/service/attribute' );
 		$orderServiceAttr = $orderServiceAttrManager->createItem();

@@ -107,10 +107,10 @@ abstract class DBBase
 	 * @param bool $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( string $code, array $ref = [], string $domain = 'product', string $type = null,
+	public function find( string $code, array $ref = [], string $domain = 'product', string $type = null,
 		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->manager->findItem( $code, $ref, $domain, $type, $default );
+		return $this->manager->find( $code, $ref, $domain, $type, $default );
 	}
 
 

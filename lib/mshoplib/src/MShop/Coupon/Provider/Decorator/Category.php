@@ -66,7 +66,7 @@ class Category
 			$listManager = \Aimeos\MShop::create( $this->getContext(), 'catalog/lists' );
 
 			$price = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
-			$catItem = $manager->findItem( $this->getConfigValue( 'category.code' ) );
+			$catItem = $manager->find( $this->getConfigValue( 'category.code' ) );
 
 			$search = $listManager->filter( true )->setSlice( 0, count( $prodIds ) );
 			$search->setConditions( $search->combine( '&&', [

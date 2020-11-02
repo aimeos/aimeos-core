@@ -122,7 +122,7 @@ class Standard
 	public function bootstrap( string $site, string $lang = '', string $currency = '', bool $active = true, int $level = null,
 		bool $bare = false ) : \Aimeos\MShop\Locale\Item\Iface
 	{
-		$siteItem = $this->getObject()->getSubManager( 'site' )->findItem( $site );
+		$siteItem = $this->getObject()->getSubManager( 'site' )->find( $site );
 
 		if( $siteItem->getStatus() < 1 ) {
 			throw new \Aimeos\MShop\Locale\Exception( 'Site not found' );

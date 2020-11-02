@@ -24,7 +24,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
 
 		$manager = \Aimeos\MShop::create( $this->context, 'product' );
-		$newProduct = $manager->findItem( 'CNE' )->setId( null )->setLabel( 'Bad Product' )->setCode( 'WTF' );
+		$newProduct = $manager->find( 'CNE' )->setId( null )->setLabel( 'Bad Product' )->setCode( 'WTF' );
 		$this->product = $manager->saveItem( $newProduct );
 
 		$manager = \Aimeos\MShop::create( $this->context, 'order/base' );
@@ -43,7 +43,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 	protected function tearDown() : void
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'product' );
-		$manager->deleteItem( $manager->findItem( 'WTF' )->getId() );
+		$manager->deleteItem( $manager->find( 'WTF' )->getId() );
 
 		unset( $this->object, $this->product, $this->order, $this->context );
 	}

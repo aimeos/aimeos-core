@@ -109,7 +109,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateOrderNone()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
-		$this->context->setUserId( $manager->findItem( 'test@example.com' )->getId() );
+		$this->context->setUserId( $manager->find( 'test@example.com' )->getId() );
 
 		$this->plugin->setConfig( array(
 			'useorder' => '1',
@@ -126,7 +126,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateOrderAddress()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
-		$this->context->setUserId( $manager->findItem( 'test@example.com' )->getId() );
+		$this->context->setUserId( $manager->find( 'test@example.com' )->getId() );
 
 
 		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
@@ -165,7 +165,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateOrderService()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
-		$this->context->setUserId( $manager->findItem( 'test@example.com' )->getId() );
+		$this->context->setUserId( $manager->find( 'test@example.com' )->getId() );
 
 
 		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
@@ -213,7 +213,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateAddress()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'customer' );
-		$this->context->setUserId( $manager->findItem( 'test@example.com' )->getId() );
+		$this->context->setUserId( $manager->find( 'test@example.com' )->getId() );
 
 		$this->plugin->setConfig( ['address' => '1'] );
 		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;

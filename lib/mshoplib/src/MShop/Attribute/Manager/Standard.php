@@ -291,7 +291,7 @@ class Standard
 	 * @param bool $default True to add default criteria
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item object
 	 */
-	public function findItem( string $code, array $ref = [], string $domain = null, string $type = null,
+	public function find( string $code, array $ref = [], string $domain = null, string $type = null,
 		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$find = array(
@@ -299,7 +299,7 @@ class Standard
 			'attribute.domain' => $domain,
 			'attribute.type' => $type,
 		);
-		return $this->findItemBase( $find, $ref, $default );
+		return $this->findBase( $find, $ref, $default );
 	}
 
 

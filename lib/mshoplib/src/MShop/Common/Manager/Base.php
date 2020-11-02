@@ -142,23 +142,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
-	 * Returns the item specified by its code and domain/type if necessary
-	 *
-	 * @param string $code Code of the item
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
-	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param bool $default True to add default criteria
-	 * @return \Aimeos\MShop\Common\Item\Iface Item object
-	 */
-	public function find( string $code, array $ref = [], string $domain = 'product', string $type = null,
-		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->getObject()->findItem( $code, $ref, $domain, $type, $default );
-	}
-
-
-	/**
 	 * Adds or updates an item object or a list of them.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
@@ -578,7 +561,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
 	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	protected function findItemBase( array $pairs, array $ref, bool $default ) : \Aimeos\MShop\Common\Item\Iface
+	protected function findBase( array $pairs, array $ref, bool $default ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$expr = [];
 		$criteria = $this->getObject()->filter( $default )->setSlice( 0, 1 );

@@ -128,16 +128,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testFindItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$product = $productManager->findItem( 'CNE' );
+		$product = $productManager->find( 'CNE' );
 
-		$this->assertEquals( $product, $this->object->findItem( 'CNE' ) );
+		$this->assertEquals( $product, $this->object->find( 'CNE' ) );
 	}
 
 
 	public function testGetItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$product = $productManager->findItem( 'CNE' );
+		$product = $productManager->find( 'CNE' );
 
 		$item = $this->object->get( $product->getId() );
 		$this->assertEquals( $product, $item );

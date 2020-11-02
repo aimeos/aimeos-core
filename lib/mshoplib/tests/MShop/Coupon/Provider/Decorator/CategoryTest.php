@@ -28,7 +28,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$this->object->setObject( $this->object );
 
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
-		$product = \Aimeos\MShop::create( $this->context, 'product' )->findItem( 'CNE' );
+		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNE' );
 		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem()->setQuantity( 2 );
 		$orderPrice = $orderProduct->copyFrom( $product )->getPrice();
 		$orderPrice->setValue( '18.00' )->setCosts( '1.50' );

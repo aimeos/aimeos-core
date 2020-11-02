@@ -488,10 +488,10 @@ class Standard
 	 * @param bool $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( string $code, array $ref = [], string $domain = null, string $type = null,
+	public function find( string $code, array $ref = [], string $domain = null, string $type = null,
 		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->findItemBase( array( 'locale.language.id' => $code ), $ref, $default );
+		return $this->findBase( array( 'locale.language.id' => $code ), $ref, $default );
 	}
 
 
