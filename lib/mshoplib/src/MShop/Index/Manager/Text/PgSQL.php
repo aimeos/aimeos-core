@@ -64,8 +64,12 @@ class PgSQL
 		};
 
 		$name = 'index.text:relevance';
-		$siteIds = $context->getLocale()->getSitePath();
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
+
+		$siteIds = $this->getSiteIds( $level );
 		$expr = $siteIds ? $this->toExpression( 'mindte."siteid"', $siteIds ) : '1=1';
+
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 	}
 
