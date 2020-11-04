@@ -83,16 +83,22 @@ class ProductStock
 	 */
 	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order ) : array
 	{
-		$productCodes = $stockTypes = $stockMap = [];
+		$codes = $types = $stockMap = [];
 
 		foreach( $order->getProducts() as $orderProduct )
 		{
-			$productCodes[] = $orderProduct->getProductCode();
-			$stockTypes[] = $orderProduct->getStockType();
+			$codes[$orderProduct->getProductCode()][] = $orderProduct->getStockType();
+			$types[$orderProduct->getStockType()] = null;
 		}
 
-		foreach( $this->getStockItems( $productCodes, $stockTypes ) as $stockItem ) {
-			$stockMap[$stockItem->getProductCode()][$stockItem->getType()] = $stockItem;
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
+		$filter = $manager->filter()->add( ['product.code' => array_keys( $codes )] )->slice( 0, count( $codes ) );
+
+		foreach( $manager->search( $filter, ['stock' => array_keys( $types )] ) as $prodItem )
+		{
+			foreach( $prodItem->getStockItems( $codes[$prodItem->getCode()] ?? [] ) as $stockItem ) {
+				$stockMap[$prodItem->getCode()][$stockItem->getType()] = $stockItem;
+			}
 		}
 
 		return $this->checkStockLevels( $order, $stockMap );
@@ -120,7 +126,7 @@ class ProductStock
 			$type = $orderProduct->getStockType();
 			$code = $orderProduct->getProductCode();
 
-			if( isset( $stockMap[$code] ) && array_key_exists( $type, $stockMap[$code] ) )
+			if( isset( $stockMap[$code][$type] ) )
 			{
 				$orderProduct->setTimeFrame( $stockMap[$code][$type]->getTimeFrame() );
 
@@ -160,12 +166,10 @@ class ProductStock
 	{
 		$stockManager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
 
-		$search = $stockManager->filter();
-		$expr = array(
-			$search->compare( '==', 'stock.productcode', $codes ),
-			$search->compare( '==', 'stock.type', $types ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search = $stockManager->filter()->slice( 0, 0x7fffffff )->add( [
+			'stock.productid' => $prodids,
+			'stock.type' => $types
+		] );
 
 		return $stockManager->search( $search );
 	}

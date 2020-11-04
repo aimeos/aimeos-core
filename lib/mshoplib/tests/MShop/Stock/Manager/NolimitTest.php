@@ -38,14 +38,6 @@ class NolimitTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testFindItem()
-	{
-		$item = $this->object->find( 'CNC', [], 'product', 'default' );
-
-		$this->assertEquals( 'CNC', $item->getProductCode() );
-	}
-
-
 	public function testGetItem()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Stock\Item\Iface::class, $this->object->get( -1 ) );
@@ -65,7 +57,7 @@ class NolimitTest extends \PHPUnit\Framework\TestCase
 	{
 		$total = 0;
 		$search = $this->object->filter()->setSlice( 0, 2 );
-		$search->setConditions( $search->compare( '==', 'stock.productcode', ['abc', 'def', 'ghi'] ) );
+		$search->setConditions( $search->compare( '==', 'stock.productid', ['123', '456', '789'] ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 2, count( $results ) );

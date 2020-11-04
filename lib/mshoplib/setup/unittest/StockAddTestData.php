@@ -12,10 +12,8 @@ namespace Aimeos\MW\Setup\Task;
 
 /**
  * Adds stock test data.
- *
- * @todo 2020.01 Rename to StockAddTestData
  */
-class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
+class StockAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -76,10 +74,17 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function createData( array $testdata )
 	{
 		$items = [];
-		$manager = $this->getManager();
+		$manager = $this->getManager( 'stock' );
+		$prodManager = $this->getManager( 'product' );
+		$codes = map( $testdata['stock'] )->col( 'prodcode' );
 
-		foreach( $testdata['stock'] as $key => $entry ) {
-			$items[] = $manager->createItem( $entry )->setId( null );
+		$filter = $prodManager->filter()->add( ['product.code' => $codes] );
+		$map = $prodManager->search( $filter )->col( 'product.id', 'product.code' );
+
+		foreach( $testdata['stock'] as $entry )
+		{
+			$prodid = $map->get( $entry['prodcode'] ?? null, new \Exception( 'No "prodcode" in ' . print_r( $entry, true ) ) );
+			$items[] = $manager->createItem( $entry )->setProductId( $prodid );
 		}
 
 		$manager->begin();
@@ -108,10 +113,19 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Returns the manager for the current setup task
 	 *
+	 * @param string $domain Domain name of the manager
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager()
+	protected function getManager( $domain )
 	{
-		return \Aimeos\MShop\Stock\Manager\Factory::create( $this->additional, 'Standard' );
+		if( $domain === 'product' ) {
+			return \Aimeos\MShop\Product\Manager\Factory::create( $this->additional, 'Standard' );
+		}
+
+		if( $domain === 'stock' ) {
+			return \Aimeos\MShop\Stock\Manager\Factory::create( $this->additional, 'Standard' );
+		}
+
+		return parent::getManager( $domain );
 	}
 }

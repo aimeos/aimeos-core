@@ -108,7 +108,7 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_stock" ( :names
-						"productcode", "type", "stocklevel", "backdate",
+						"prodid", "type", "stocklevel", "backdate",
 						"timeframe", "mtime", "editor", "siteid", "ctime"
 					) VALUES ( :values
 						?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -119,7 +119,7 @@ return array(
 				'ansi' => '
 					UPDATE "mshop_stock"
 					SET :names
-						"productcode" = ?, "type" = ?, "stocklevel" = ?, "backdate" = ?,
+						"prodid" = ?, "type" = ?, "stocklevel" = ?, "backdate" = ?,
 						"timeframe" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
@@ -127,7 +127,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						msto."id" AS "stock.id", msto."productcode" AS "stock.productcode",
+						msto."id" AS "stock.id", msto."prodid" AS "stock.productid",
 						msto."siteid" AS "stock.siteid", msto."type" AS "stock.type",
 						msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.backdate",
 						msto."timeframe" AS "stock.timeframe", msto."mtime" AS "stock.mtime",
@@ -140,7 +140,7 @@ return array(
 				',
 				'mysql' => '
 					SELECT :columns
-						msto."id" AS "stock.id", msto."productcode" AS "stock.productcode",
+						msto."id" AS "stock.id", msto."prodid" AS "stock.productid",
 						msto."siteid" AS "stock.siteid", msto."type" AS "stock.type",
 						msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.backdate",
 						msto."timeframe" AS "stock.timeframe", msto."mtime" AS "stock.mtime",
@@ -180,7 +180,7 @@ return array(
 				'ansi' => '
 					UPDATE "mshop_stock"
 					SET "stocklevel" = "stocklevel" - ?, "mtime" = ?, "editor" = ?
-					WHERE "productcode" = ? AND "type" = ? AND :cond
+					WHERE "prodid" = ? AND "type" = ? AND :cond
 				'
 			),
 			'newid' => array(

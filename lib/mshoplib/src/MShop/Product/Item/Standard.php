@@ -89,7 +89,7 @@ class Standard
 	/**
 	 * Returns the stock items associated to the product
 	 *
-	 * @param string|null $type Type of the stock item
+	 * @param array|string|null $type Type or types of the stock item
 	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Stock\Item\Iface
 	 */
 	public function getStockItems( $type = null ) : \Aimeos\Map
@@ -99,7 +99,9 @@ class Standard
 		if( $type !== null )
 		{
 			$list = $list->filter( function( $item ) use ( $type ) {
-				return $item->getType() === $type;
+				foreach( (array) $type as $name ) {
+					return $item->getType() === $name;
+				}
 			});
 		}
 

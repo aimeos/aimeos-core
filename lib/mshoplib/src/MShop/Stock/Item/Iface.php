@@ -22,19 +22,19 @@ interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
-	 * Returns the code of the stock item.
+	 * Returns the ID of the product the stock item belongs to.
 	 *
-	 * @return string Product code (SKU)
+	 * @return string Product ID
 	 */
-	public function getProductCode() : string;
+	public function getProductId() : string;
 
 	/**
-	 * Sets a new code of the stock item.
+	 * Sets a new product ID the stock item belongs to.
 	 *
-	 * @param string $code New product code (SKU)
+	 * @param string $value New product ID
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
-	public function setProductCode( string $code ) : \Aimeos\MShop\Stock\Item\Iface;
+	public function setProductId( string $value ) : \Aimeos\MShop\Stock\Item\Iface;
 
 	/**
 	 * Returns the stock level.

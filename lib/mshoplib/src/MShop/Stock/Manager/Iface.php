@@ -18,25 +18,25 @@ namespace Aimeos\MShop\Stock\Manager;
  * @subpackage Stock
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 	/**
 	 * Decreases the stock level for the given product codes/quantity pairs and type
 	 *
-	 * @param array $codeqty Associative list of product codes as keys and quantities as values
+	 * @param array $pairs Associative list of product codes as keys and quantities as values
 	 * @param string $type Unique code of the stock type
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function decrease( array $codeqty, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface;
+	public function decrease( array $pairs, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface;
 
 	/**
 	 * Increases the stock level for the given product codes/quantity pairs and type
 	 *
-	 * @param array $codeqty Associative list of product codes as keys and quantities as values
+	 * @param array $pairs Associative list of product codes as keys and quantities as values
 	 * @param string $type Unique code of the type
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function increase( array $codeqty, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface;
+	public function increase( array $pairs, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface;
 
 	/**
 	 * Inserts the new stock item

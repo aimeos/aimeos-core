@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2016-2020
+ * @copyright Aimeos (aimeos.org), 2020
  */
 
 
@@ -10,25 +10,20 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Migrates the product code column
+ * Migrates product code to ID
  */
-class StockMigrateProductcode extends \Aimeos\MW\Setup\Task\Base
+class StockMigrateProductId extends \Aimeos\MW\Setup\Task\Base
 {
 	private $indexes = array(
-		'unq_msprost_sid_pid_tid' => 'DROP INDEX "unq_msprost_sid_pid_tid" ON "mshop_stock"',
-		'unq_msprost_sid_pid_wid' => 'DROP INDEX "unq_msprost_sid_pid_wid" ON "mshop_stock"',
+		'unq_mssto_sid_pcode_ty' => 'DROP INDEX "unq_mssto_sid_pcode_ty" ON "mshop_stock"',
 	);
 	private $updates = array(
-		'ALTER TABLE "mshop_stock" ADD COLUMN "productcode" VARCHAR(32) NOT NULL',
-		'UPDATE "mshop_stock" SET "productcode" = (
-			SELECT "code" FROM "mshop_product" AS p WHERE p."id" = "parentid" AND p."siteid" = "siteid"
+		'ALTER TABLE "mshop_stock" ADD COLUMN "prodid" VARCHAR(36) NOT NULL',
+		'UPDATE "mshop_stock" SET "prodid" = (
+			SELECT "id" FROM "mshop_product" AS p WHERE p."code" = "productcode" AND p."siteid" = "siteid"
 		)',
 	);
-	private $constraints = array(
-		'fk_msprost_parentid' => 'ALTER TABLE "mshop_stock" DROP FOREIGN KEY "fk_msprost_parentid"',
-		'fk_msprost_pid' => 'ALTER TABLE "mshop_stock" DROP FOREIGN KEY "fk_msprost_pid"',
-	);
-	private $column = 'ALTER TABLE "mshop_stock" DROP COLUMN "parentid"';
+	private $column = 'ALTER TABLE "mshop_stock" DROP COLUMN "productcode"';
 
 
 	/**
@@ -38,7 +33,7 @@ class StockMigrateProductcode extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies() : array
 	{
-		return ['ProductMoveStock'];
+		return ['StockMigrateProductcode'];
 	}
 
 
@@ -88,9 +83,9 @@ class StockMigrateProductcode extends \Aimeos\MW\Setup\Task\Base
 			}
 
 
-			$this->msg( 'Migrate to column "productcode"', 1 );
+			$this->msg( 'Migrate to column "prodid"', 1 );
 
-			if( $schema->columnExists( 'mshop_stock', 'productcode' ) === false )
+			if( $schema->columnExists( 'mshop_stock', 'prodid' ) === false )
 			{
 				$this->executeList( $this->updates );
 				$this->status( 'done' );
@@ -100,25 +95,9 @@ class StockMigrateProductcode extends \Aimeos\MW\Setup\Task\Base
 				$this->status( 'OK' );
 			}
 
+			$this->msg( 'Remove column "productcode"', 1 );
 
-			foreach( $this->constraints as $name => $stmt )
-			{
-				$this->msg( sprintf( 'Remove foreign key "%1$s"', $name ), 1 );
-
-				if( $schema->constraintExists( 'mshop_stock', $name ) === true )
-				{
-					$this->execute( $stmt );
-					$this->status( 'done' );
-				}
-				else
-				{
-					$this->status( 'OK' );
-				}
-			}
-
-			$this->msg( 'Remove column "parentid"', 1 );
-
-			if( $schema->columnExists( 'mshop_stock', 'parentid' ) === true )
+			if( $schema->columnExists( 'mshop_stock', 'productcode' ) === true )
 			{
 				$this->execute( $this->column );
 				$this->status( 'done' );

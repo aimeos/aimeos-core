@@ -34,24 +34,6 @@ class Nolimit
 
 
 	/**
-	 * Returns the item specified by its code and domain/type
-	 *
-	 * @param string $code Code of the item
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
-	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param bool $default True to add default criteria
-	 * @return \Aimeos\MShop\Stock\Item\Iface Item object
-	 */
-	public function find( string $code, array $ref = [], string $domain = null, string $type = null,
-		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$values = ['stock.productcode' => $code, 'stock.type' => $type];
-		return $this->getObject()->createItem( $values );
-	}
-
-
-	/**
 	 * Inserts the new stock item
 	 *
 	 * @param \Aimeos\MShop\Stock\Item\Iface $item Stock item which should be saved
@@ -105,10 +87,8 @@ class Nolimit
 		$items = [];
 		$item = $this->getObject()->createItem( ['stock.type' => 'default'] );
 
-		foreach( $this->getProductCodes( $search->getConditions() ) as $idx => $code )
-		{
-			$sitem = clone $item;
-			$items[$idx] = $sitem->setProductCode( $code )->setId( $idx );
+		foreach( $this->getProductIds( $search->getConditions() ) as $idx => $prodid ) {
+			$items[$idx] = ( clone $item )->setProductId( $prodid )->setId( $idx );
 		}
 
 		if( $total !== null ) {
@@ -120,50 +100,50 @@ class Nolimit
 
 
 	/**
-	 * Decreases the stock level for the given product codes/quantity pairs and type
+	 * Decreases the stock level for the given product ID/quantity pairs and type
 	 *
-	 * @param array $codeqty Associative list of product codes as keys and quantities as values
+	 * @param array $pairs Associative list of product IDs as keys and quantities as values
 	 * @param string $type Unique code of the stock type
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function decrease( array $codeqty, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
+	public function decrease( array $pairs, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
 	{
 		return $this;
 	}
 
 
 	/**
-	 * Increases the stock level for the given product codes/quantity pairs and type
+	 * Increases the stock level for the given product ID/quantity pairs and type
 	 *
-	 * @param array $codeqty Associative list of product codes as keys and quantities as values
+	 * @param array $pairs Associative list of product IDs as keys and quantities as values
 	 * @param string $type Unique code of the type
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function increase( array $codeqty, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
+	public function increase( array $pairs, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
 	{
 		return $this;
 	}
 
 
 	/**
-	 * Returns the product codes from the conditions
+	 * Returns the product IDs from the conditions
 	 *
 	 * @param \Aimeos\MW\Criteria\Expression\Iface|null $cond Criteria object
-	 * @return string[] List of product codes
+	 * @return string[] List of product IDs
 	 */
-	protected function getProductCodes( \Aimeos\MW\Criteria\Expression\Iface $cond = null ) : array
+	protected function getProductIds( \Aimeos\MW\Criteria\Expression\Iface $cond = null ) : array
 	{
 		$list = [];
 
 		if( $cond instanceof \Aimeos\MW\Criteria\Expression\Combine\Iface )
 		{
 			foreach( $cond->getExpressions() as $expr ) {
-				$list = array_merge( $list, $this->getProductCodes( $expr ) );
+				$list = array_merge( $list, $this->getProductIds( $expr ) );
 			}
 		}
 		elseif( $cond instanceof \Aimeos\MW\Criteria\Expression\Compare\Iface )
 		{
-			if( $cond->getName() === 'stock.productcode' && $cond->getOperator() === '==' ) {
+			if( $cond->getName() === 'stock.productid' && $cond->getOperator() === '==' ) {
 				$list = array_merge( $list, (array) $cond->getValue() );
 			}
 		}

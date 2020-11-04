@@ -40,8 +40,8 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
+			$table->addColumn( 'prodid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'productcode', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'stocklevel', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'backdate', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'timeframe', 'string', array( 'length' => 16, 'default' => '' ) );
@@ -50,7 +50,7 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mssto_id' );
-			$table->addUniqueIndex( array( 'siteid', 'productcode', 'type' ), 'unq_mssto_sid_pcode_ty' );
+			$table->addUniqueIndex( array( 'siteid', 'prodid', 'type' ), 'unq_mssto_sid_pid_ty' );
 			$table->addIndex( array( 'siteid', 'stocklevel' ), 'idx_mssto_sid_stocklevel' );
 			$table->addIndex( array( 'siteid', 'backdate' ), 'idx_mssto_sid_backdate' );
 

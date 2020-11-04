@@ -54,14 +54,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testFindItem()
-	{
-		$item = $this->object->find( 'CNC', [], 'product', 'default' );
-
-		$this->assertEquals( 'CNC', $item->getProductCode() );
-	}
-
-
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->filter();
@@ -74,7 +66,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$item->setId( null );
-		$item->setProductCode( 'XYZ' );
+		$item->setProductId( '-1' );
 		$resultSaved = $this->object->saveItem( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
@@ -90,7 +82,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getType(), $itemSaved->getType() );
-		$this->assertEquals( $item->getProductCode(), $itemSaved->getProductCode() );
+		$this->assertEquals( $item->getProductId(), $itemSaved->getProductId() );
 		$this->assertEquals( $item->getStockLevel(), $itemSaved->getStockLevel() );
 		$this->assertEquals( $item->getTimeFrame(), $itemSaved->getTimeFrame() );
 		$this->assertEquals( $item->getDateBack(), $itemSaved->getDateBack() );
@@ -102,7 +94,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
-		$this->assertEquals( $itemExp->getProductCode(), $itemUpd->getProductCode() );
+		$this->assertEquals( $itemExp->getProductId(), $itemUpd->getProductId() );
 		$this->assertEquals( $itemExp->getStockLevel(), $itemUpd->getStockLevel() );
 		$this->assertEquals( $itemExp->getTimeFrame(), $itemUpd->getTimeFrame() );
 		$this->assertEquals( $itemExp->getDateBack(), $itemUpd->getDateBack() );
@@ -162,8 +154,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'stock.id', null );
 		$expr[] = $search->compare( '!=', 'stock.siteid', null );
+		$expr[] = $search->compare( '!=', 'stock.productid', null );
 		$expr[] = $search->compare( '!=', 'stock.type', null );
-		$expr[] = $search->compare( '!=', 'stock.productcode', null );
 		$expr[] = $search->compare( '==', 'stock.stocklevel', 1000 );
 		$expr[] = $search->compare( '==', 'stock.timeframe', '4-5d' );
 		$expr[] = $search->compare( '==', 'stock.dateback', '2010-04-01 00:00:00' );
@@ -188,12 +180,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$stockItem = $this->object->createItem();
 		$stockItem->setType( 'unit_type1' );
-		$stockItem->setProductCode( 'CNC' );
+		$stockItem->setProductId( '-1' );
 		$stockItem->setStockLevel( 0 );
 
 		$this->object->saveItem( $stockItem );
 
-		$this->object->decrease( ['CNC' => 5], 'unit_type1' );
+		$this->object->decrease( ['-1' => 5], 'unit_type1' );
 		$actual = $this->object->get( $stockItem->getId() );
 
 		$this->object->deleteItem( $stockItem->getId() );
@@ -206,12 +198,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$stockItem = $this->object->createItem();
 		$stockItem->setType( 'unit_type1' );
-		$stockItem->setProductCode( 'CNC' );
+		$stockItem->setProductId( '-1' );
 		$stockItem->setStockLevel( 0 );
 
 		$this->object->saveItem( $stockItem );
 
-		$this->object->increase( ['CNC' => 5], 'unit_type1' );
+		$this->object->increase( ['-1' => 5], 'unit_type1' );
 		$actual = $this->object->get( $stockItem->getId() );
 
 		$this->object->deleteItem( $stockItem->getId() );

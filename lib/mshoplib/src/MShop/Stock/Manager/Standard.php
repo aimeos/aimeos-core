@@ -46,10 +46,10 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'stock.productcode' => array(
-			'code' => 'stock.productcode',
-			'internalcode' => 'msto."productcode"',
-			'label' => 'Product code',
+		'stock.productid' => array(
+			'code' => 'stock.productid',
+			'internalcode' => 'msto."prodid"',
+			'label' => 'Product ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -140,24 +140,6 @@ class Standard
 	{
 		$values['stock.siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
-	}
-
-
-	/**
-	 * Returns the item specified by its code and domain/type
-	 *
-	 * @param string $code Code of the item
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
-	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param bool $default True to add default criteria
-	 * @return \Aimeos\MShop\Common\Item\Iface Item object
-	 */
-	public function find( string $code, array $ref = [], string $domain = null, string $type = null,
-		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		$list = array( 'stock.productcode' => $code, 'stock.type' => $type );
-		return $this->findBase( $list, $ref, $default );
 	}
 
 
@@ -273,7 +255,7 @@ class Standard
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, $item->getProductCode() );
+			$stmt->bind( $idx++, $item->getProductId() );
 			$stmt->bind( $idx++, $item->getType() );
 			$stmt->bind( $idx++, $item->getStockLevel(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getDateBack() );
@@ -764,11 +746,11 @@ class Standard
 	/**
 	 * Decreases the stock level for the given product codes/quantity pairs and type
 	 *
-	 * @param array $codeqty Associative list of product codes as keys and quantities as values
+	 * @param array $pairs Associative list of product codes as keys and quantities as values
 	 * @param string $type Unique code of the stock type
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function decrease( array $codeqty, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
+	public function decrease( array $pairs, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
 	{
 		$context = $this->getContext();
 		$translations = ['stock.siteid' => '"siteid"'];
@@ -823,14 +805,14 @@ class Standard
 			 */
 			$path = 'mshop/stock/manager/standard/stocklevel';
 
-			foreach( $codeqty as $code => $qty )
+			foreach( $pairs as $prodid => $qty )
 			{
 				$stmt = $conn->create( str_replace( ':cond', $conditions, $this->getSqlConfig( $path ) ) );
 
 				$stmt->bind( 1, $qty, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); //mtime
 				$stmt->bind( 3, $context->getEditor() );
-				$stmt->bind( 4, $code );
+				$stmt->bind( 4, $prodid );
 				$stmt->bind( 5, $type );
 
 				$stmt->execute()->finish();
@@ -851,17 +833,17 @@ class Standard
 	/**
 	 * Increases the stock level for the given product codes/quantity pairs and type
 	 *
-	 * @param array $codeqty Associative list of product codes as keys and quantities as values
+	 * @param array $pairs Associative list of product codes as keys and quantities as values
 	 * @param string $type Unique code of the type
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function increase( array $codeqty, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
+	public function increase( array $pairs, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
 	{
-		foreach( $codeqty as $code => $qty ) {
-			$codeqty[$code] = -$qty;
+		foreach( $pairs as $prodid => $qty ) {
+			$pairs[$prodid] = -$qty;
 		}
 
-		return $this->getObject()->decrease( $codeqty, $type );
+		return $this->getObject()->decrease( $pairs, $type );
 	}
 
 

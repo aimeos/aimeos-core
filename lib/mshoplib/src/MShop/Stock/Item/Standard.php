@@ -80,25 +80,25 @@ class Standard
 
 
 	/**
-	 * Returns the code of the stock item.
+	 * Returns the ID of the product the stock item belongs to.
 	 *
-	 * @return string Product code (SKU)
+	 * @return string Product ID
 	 */
-	public function getProductCode() : string
+	public function getProductId() : string
 	{
-		return $this->get( 'stock.productcode', '' );
+		return $this->get( 'stock.productid', '' );
 	}
 
 
 	/**
-	 * Sets a new code of the stock item.
+	 * Sets a new product ID the stock item belongs to.
 	 *
-	 * @param string $code New product code (SKU)
+	 * @param string $value New product ID
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
-	public function setProductCode( string $code ) : \Aimeos\MShop\Stock\Item\Iface
+	public function setProductId( string $value ) : \Aimeos\MShop\Stock\Item\Iface
 	{
-		return $this->set( 'stock.productcode', $code );
+		return $this->set( 'stock.productid', $value );
 	}
 
 
@@ -174,7 +174,7 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'stock.productcode': $item = $item->setProductCode( $value ); break;
+				case 'stock.productid': $item = $item->setProductId( $value ); break;
 				case 'stock.stocklevel': $item = $item->setStockLevel( $value ); break;
 				case 'stock.timeframe': $item = $item->setTimeFrame( $value ); break;
 				case 'stock.dateback': $item = $item->setDateBack( $value ); break;
@@ -199,7 +199,7 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['stock.productcode'] = $this->getProductCode();
+		$list['stock.productid'] = $this->getProductId();
 		$list['stock.stocklevel'] = $this->getStockLevel();
 		$list['stock.timeframe'] = $this->getTimeFrame();
 		$list['stock.dateback'] = $this->getDateBack();

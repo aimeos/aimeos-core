@@ -184,13 +184,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetStockItems()
 	{
 		$context = \TestHelperCntl::getContext();
+		$prodid = \Aimeos\MShop::create( $context, 'product' )->find( 'CNE' )->getId();
 
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'getStockItems' );
 		$method->setAccessible( true );
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
-		$result = $method->invokeArgs( $object, array( array( 'CNE' ), 'default' ) );
+		$result = $method->invokeArgs( $object, [[$prodid], 'default'] );
 
 		$this->assertEquals( 1, count( $result ) );
 
@@ -530,25 +531,25 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$stockItem = $stockStub->createItem();
 
 		$stockItem1 = clone $stockItem;
-		$stockItem1->setProductCode( 'X2' );
+		$stockItem1->setProductId( '123' );
 		$stockItem1->setStockLevel( 10 );
 
 		$stockItem2 = clone $stockItem;
-		$stockItem2->setProductCode( 'X3' );
+		$stockItem2->setProductId( '456' );
 		$stockItem2->setStockLevel( 20 );
 
 		$stockItem3 = clone $stockItem;
-		$stockItem3->setProductCode( 'X1' );
+		$stockItem3->setProductId( '789' );
 		$stockItem3->setStockLevel( 30 );
 
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
-			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'getBundleMap', 'getStockItems' ) )
+			->setConstructorArgs( [$context] )
+			->setMethods( ['getBundleMap', 'getStockItems'] )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'getBundleMap' )
-			->will( $this->returnValue( array( 'X2' => array( 'X1' ), 'X3' => array( 'X1' ) ) ) );
+			->will( $this->returnValue( ['123' => ['789'], '456' => ['789']] ) );
 
 		$object->expects( $this->exactly( 2 ) )->method( 'getStockItems' )
 			->will( $this->onConsecutiveCalls(
@@ -560,7 +561,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'updateStockBundle' );
 		$method->setAccessible( true );
-		$method->invokeArgs( $object, array( 1, 'default' ) );
+		$method->invokeArgs( $object, [1, 'default'] );
 	}
 
 
