@@ -153,24 +153,4 @@ class ProductStock
 
 		return $outOfStock;
 	}
-
-
-	/**
-	 * Returns the stock items for the given product codes and stock types
-	 *
-	 * @param array|string $codes Unique product code or list of product codes
-	 * @param array|string $types Unique stock types to limit the stock items
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Stock\Item\Iface with IDs as keys
-	 */
-	protected function getStockItems( $codes, $types ) : \Aimeos\Map
-	{
-		$stockManager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
-
-		$search = $stockManager->filter()->slice( 0, 0x7fffffff )->add( [
-			'stock.productid' => $prodids,
-			'stock.type' => $types
-		] );
-
-		return $stockManager->search( $search );
-	}
 }
