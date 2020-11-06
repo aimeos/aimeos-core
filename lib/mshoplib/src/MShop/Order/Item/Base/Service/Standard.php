@@ -43,7 +43,7 @@ class Standard extends Base implements Iface
 	/**
 	 * Returns the associated service item
 	 *
-	 * @return \Aimeos\MShop\Service\Item\Iface|null Product item
+	 * @return \Aimeos\MShop\Service\Item\Iface|null Service item
 	 */
 	public function getServiceItem() : ?\Aimeos\MShop\Service\Item\Iface
 	{

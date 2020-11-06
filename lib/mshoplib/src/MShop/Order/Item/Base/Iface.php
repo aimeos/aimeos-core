@@ -37,6 +37,13 @@ interface Iface
 	public function finish() : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
+	 * Returns the associated customer item
+	 *
+	 * @return \Aimeos\MShop\Customer\Item\Iface|null Customer item
+	 */
+	public function getCustomerItem() : ?\Aimeos\MShop\Customer\Item\Iface;
+
+	/**
 	 * Returns the comment field of the order item
 	 *
 	 * @return string Comment for the order

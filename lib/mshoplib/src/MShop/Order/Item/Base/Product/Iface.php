@@ -22,6 +22,13 @@ interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
+	 * Returns the associated product item
+	 *
+	 * @return \Aimeos\MShop\Product\Item\Iface|null Product item
+	 */
+	public function getProductItem() : ?\Aimeos\MShop\Product\Item\Iface;
+
+	/**
 	 * Sets the site ID of the item.
 	 *
 	 * @param string $value Unique site ID of the item
