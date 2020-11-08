@@ -21,8 +21,8 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
-		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
+		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
+		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductStock( $this->context, $this->plugin );
 	}
@@ -111,6 +111,6 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 		$productItem = \Aimeos\MShop::create( $this->context, 'product' )->find( $code );
 
 		return \Aimeos\MShop::create( $this->context, 'order/base/product' )
-			->createItem()->copyFrom( $productItem );
+			->create()->copyFrom( $productItem );
 	}
 }

@@ -71,7 +71,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$attributePropertyManager = $attributeManager->getSubManager( 'property', 'Standard' );
 		$attributePropertyTypeManager = $attributePropertyManager->getSubManager( 'type', 'Standard' );
 
-		$type = $attributePropertyTypeManager->createItem();
+		$type = $attributePropertyTypeManager->create();
 		$prodIds = $this->getAttributeIds( $attributeManager );
 
 		$attributeManager->begin();
@@ -88,7 +88,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 			$attributePropertyTypeManager->saveItem( $type );
 		}
 
-		$prodProperty = $attributePropertyManager->createItem();
+		$prodProperty = $attributePropertyManager->create();
 		foreach( $testdata['attribute/property'] as $key => $dataset )
 		{
 			$prodProperty->setId( null );

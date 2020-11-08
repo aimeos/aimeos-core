@@ -58,7 +58,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 
 		try
 		{
-			$siteItem = $siteManager->createItem();
+			$siteItem = $siteManager->create();
 			$siteItem->setLabel( $code );
 			$siteItem->setCode( $code );
 			$siteItem->setStatus( 1 );
@@ -72,7 +72,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 
 		try
 		{
-			$localeItem = $localeManager->createItem();
+			$localeItem = $localeManager->create();
 			$localeItem->setSiteId( $siteItem->getSiteId() );
 			$localeItem->setLanguageId( 'en' );
 			$localeItem->setCurrencyId( 'EUR' );
@@ -104,7 +104,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding data for MShop locale sites', 1 );
 
 		$localeSiteManager = $localeManager->getSubManager( 'site', $manager );
-		$siteItem = $localeSiteManager->createItem();
+		$siteItem = $localeSiteManager->create();
 		$siteIds = [];
 
 		foreach( $data as $key => $dataset )
@@ -161,7 +161,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 
 			if( !isset( $items[$dataset['id']] ) )
 			{
-				$currencyItem = $currencyManager->createItem();
+				$currencyItem = $currencyManager->create();
 				$currencyItem->setCode( $dataset['id'] );
 				$currencyItem->setLabel( $dataset['label'] );
 				$currencyItem->setStatus( $dataset['status'] );
@@ -198,7 +198,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 
 			if( !isset( $items[$dataset['id']] ) )
 			{
-				$languageItem = $languageManager->createItem();
+				$languageItem = $languageManager->create();
 				$languageItem->setCode( $dataset['id'] );
 				$languageItem->setLabel( $dataset['label'] );
 				$languageItem->setStatus( $dataset['status'] );
@@ -224,7 +224,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Adding data for MShop locales', 1 );
 
-		$localeItem = $localeItemManager->createItem();
+		$localeItem = $localeItemManager->create();
 
 		foreach( $data as $key => $dataset )
 		{

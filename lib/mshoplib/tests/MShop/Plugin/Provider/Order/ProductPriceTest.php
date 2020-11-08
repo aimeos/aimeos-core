@@ -21,8 +21,8 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem()->setConfig( ['warn' => true] );
-		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
+		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create()->setConfig( ['warn' => true] );
+		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
 
 		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 		$search = $orderBaseProductManager->filter();
@@ -163,7 +163,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		$attribute = \Aimeos\MShop::create( $this->context, 'attribute' )
 			->find( 'xs', ['price'], 'product', 'size' );
 
-		$ordAttr = \Aimeos\MShop::create( $this->context, 'order/base/product/attribute' )->createItem()
+		$ordAttr = \Aimeos\MShop::create( $this->context, 'order/base/product/attribute' )->create()
 			->copyFrom( $attribute )->setQuantity( 2 );
 
 		$orderProduct = $this->order->getProduct( 0 )->setAttributeItems( [$ordAttr] );

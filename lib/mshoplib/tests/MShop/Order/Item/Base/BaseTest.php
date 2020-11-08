@@ -24,9 +24,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
-		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( $context )->createItem();
+		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( $context )->create();
 
-		$this->object = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $locale, [] );
+		$this->object = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $locale, [] );
 
 
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $context );
@@ -37,25 +37,25 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$orderServiceManager = $orderBaseManager->getSubManager( 'service' );
 
 
-		$price = $priceManager->createItem();
+		$price = $priceManager->create();
 		$price->setRebate( '3.01' );
 		$price->setValue( '43.12' );
 		$price->setCosts( '1.11' );
 		$price->setTaxRate( '0.00' );
 		$price->setCurrencyId( 'EUR' );
 
-		$prod1 = $orderProductManager->createItem();
+		$prod1 = $orderProductManager->create();
 		$prod1->setProductCode( 'prod1' );
 		$prod1->setPrice( $price );
 
-		$price = $priceManager->createItem();
+		$price = $priceManager->create();
 		$price->setRebate( '4.00' );
 		$price->setValue( '20.00' );
 		$price->setCosts( '2.00' );
 		$price->setTaxRate( '0.50' );
 		$price->setCurrencyId( 'EUR' );
 
-		$prod2 = $orderProductManager->createItem();
+		$prod2 = $orderProductManager->create();
 		$prod2->setProductCode( 'prod2' );
 		$prod2->setPrice( $price );
 
@@ -64,13 +64,13 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->coupons = ['OPQR' => [$prod1]];
 
 		$this->addresses = array(
-			'payment' => [0 => $orderAddressManager->createItem()->setType( 'payment' )->setId( null )],
-			'delivery' => [0 => $orderAddressManager->createItem()->setType( 'delivery' )->setId( null )],
+			'payment' => [0 => $orderAddressManager->create()->setType( 'payment' )->setId( null )],
+			'delivery' => [0 => $orderAddressManager->create()->setType( 'delivery' )->setId( null )],
 		);
 
 		$this->services = array(
-			'payment' => [0 => $orderServiceManager->createItem()->setType( 'payment' )->setCode( 'testpay' )->setId( null )],
-			'delivery' => [1 => $orderServiceManager->createItem()->setType( 'delivery' )->setCode( 'testship' )->setId( null )],
+			'payment' => [0 => $orderServiceManager->create()->setType( 'payment' )->setCode( 'testpay' )->setId( null )],
+			'delivery' => [1 => $orderServiceManager->create()->setType( 'delivery' )->setCode( 'testship' )->setId( null )],
 		);
 	}
 
@@ -531,9 +531,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$orderProductManager = $orderManager->getSubManager( 'base' )->getSubManager( 'product' );
-		$product = $orderProductManager->createItem();
+		$product = $orderProductManager->create();
 
-		$price = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
+		$price = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
 		$price->setValue( '2.99' );
 
 		$product->setPrice( $price );

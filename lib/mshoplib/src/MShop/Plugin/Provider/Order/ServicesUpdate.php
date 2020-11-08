@@ -77,7 +77,7 @@ class ServicesUpdate
 				$serviceItems = $list;
 
 				foreach( $list as $key => $item ) {
-					$serviceItems[$key] = $item->setPrice( $priceManager->createItem() );
+					$serviceItems[$key] = $item->setPrice( $priceManager->create() );
 				}
 
 				$services[$type] = $serviceItems;

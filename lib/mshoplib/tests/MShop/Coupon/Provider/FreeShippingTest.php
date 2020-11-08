@@ -21,13 +21,13 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 
 
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->createItem();
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
 		$couponItem->setConfig( array( 'freeshipping.productcode' => 'U:SD' ) );
 
 		$this->object = new \Aimeos\MShop\Coupon\Provider\FreeShipping( $context, $couponItem, '90AB' );
 
 
-		$delPrice = \Aimeos\MShop\Price\Manager\Factory::create( $context )->createItem();
+		$delPrice = \Aimeos\MShop\Price\Manager\Factory::create( $context )->create();
 		$delPrice->setCosts( '5.00' );
 		$delPrice->setCurrencyId( 'EUR' );
 
@@ -35,13 +35,13 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $context )
 			->getSubManager( 'base' )->getSubManager( 'service' );
 
-		$delivery = $manager->createItem();
+		$delivery = $manager->create();
 		$delivery->setCode( 'test' );
 		$delivery->setType( 'delivery' );
 		$delivery->setPrice( $delPrice );
 
-		// Don't create order base item by createItem() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
+		// Don't create order base item by create() as this would already register the plugins
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->getLocale() );
 		$this->orderBase->addService( $delivery, 'delivery' );
 	}
 
@@ -79,7 +79,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
 		$object = new \Aimeos\MShop\Coupon\Provider\FreeShipping( $context, $couponItem, '90AB' );
 
 		$this->expectException( \Aimeos\MShop\Coupon\Exception::class );

@@ -21,7 +21,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 	{
 		$orderProducts = [];
 		$context = \TestHelperMShop::getContext();
-		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->createItem();
+		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $context, $this->couponItem, 'abcd' );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Required( $provider, $context, $this->couponItem, 'abcd' );
@@ -37,16 +37,16 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 		$products = $productManager->search( $search )->toArray();
 
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
-		$price = $priceManager->createItem();
+		$price = $priceManager->create();
 
 		foreach( $products as $product ) {
-			$orderProducts[$product->getCode()] = $orderProductManager->createItem()->copyFrom( $product );
+			$orderProducts[$product->getCode()] = $orderProductManager->create()->copyFrom( $product );
 		}
 
 		$orderProducts['CNC']->setPrice( clone $price->setValue( 321 ) );
 		$orderProducts['CNE']->setPrice( clone $price->setValue( 123 ) );
 
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->getLocale() );
 		$this->orderBase->addProduct( $orderProducts['CNC'] );
 		$this->orderBase->addProduct( $orderProducts['CNE'] );
 	}

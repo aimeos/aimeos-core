@@ -36,13 +36,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $this->object->create() );
 	}
 
 
 	public function testCreateItemType()
 	{
-		$item = $this->object->createItem( ['attribute.property.type' => 'htmlcolor'] );
+		$item = $this->object->create( ['attribute.property.type' => 'htmlcolor'] );
 		$this->assertEquals( 'htmlcolor', $item->getType() );
 	}
 

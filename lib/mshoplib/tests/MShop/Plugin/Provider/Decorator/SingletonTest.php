@@ -20,11 +20,11 @@ class SingletonTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$priceItem = \Aimeos\MShop\Price\Manager\Factory::create( $context )->createItem();
+		$priceItem = \Aimeos\MShop\Price\Manager\Factory::create( $context )->create();
 		$this->order = new \Aimeos\MShop\Order\Item\Base\Standard( $priceItem, $context->getLocale() );
 
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $context );
-		$item = $pluginManager->createItem();
+		$item = $pluginManager->create();
 
 
 		$this->mock = $this->getMockBuilder( \Aimeos\MShop\Plugin\Provider\Decorator\Example::class )

@@ -58,7 +58,7 @@ abstract class Base
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface New type item object
 	 */
-	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
+	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values[$this->prefix . 'siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );

@@ -110,7 +110,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface New locale language item object
 	 */
-	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
+	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		try {
 			$values['locale.language.siteid'] = $this->getContext()->getLocale()->getSiteId();

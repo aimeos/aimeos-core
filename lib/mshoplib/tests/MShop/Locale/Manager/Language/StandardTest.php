@@ -41,14 +41,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Language\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Language\Iface::class, $this->object->create() );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
 		// insert case
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$item->setLabel( 'new name' );
 		$item->setStatus( 1 );
 		$item->setCode( 'xx' );

@@ -801,7 +801,7 @@ class PayPalExpress
 
 		if( !isset( $prices[$taxrate] ) )
 		{
-			$prices[$taxrate] = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
+			$prices[$taxrate] = \Aimeos\MShop::create( $this->getContext(), 'price' )->create();
 			$prices[$taxrate]->setTaxRate( $taxrate );
 		}
 

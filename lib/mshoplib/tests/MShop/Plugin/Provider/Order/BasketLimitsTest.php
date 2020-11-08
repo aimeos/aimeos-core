@@ -19,7 +19,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
-		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem()->off(); // remove event listeners
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->create()->off(); // remove event listeners
 
 		$orderBaseProductManager = \Aimeos\MShop::create( $context, 'order/base/product' );
 		$search = $orderBaseProductManager->filter();
@@ -47,7 +47,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 			'max-products' => 5
 		);
 
-		$plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem()->setConfig( $config );
+		$plugin = \Aimeos\MShop::create( $context, 'plugin' )->create()->setConfig( $config );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\BasketLimits( $context, $plugin );
 	}
 

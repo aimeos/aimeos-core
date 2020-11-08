@@ -23,7 +23,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
 		$this->object = \Aimeos\MShop\Plugin\Manager\Factory::create( \TestHelperMShop::getContext() );
 
-		$this->examplePlugin = $this->object->createItem();
+		$this->examplePlugin = $this->object->create();
 		$this->examplePlugin->setType( 'order' );
 
 		$this->examplePlugin->setProvider( 'Example' );
@@ -62,13 +62,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Item\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Item\Iface::class, $this->object->create() );
 	}
 
 
 	public function testCreateItemType()
 	{
-		$item = $this->object->createItem( ['plugin.type' => 'order'] );
+		$item = $this->object->create( ['plugin.type' => 'order'] );
 		$this->assertEquals( 'order', $item->getType() );
 	}
 

@@ -42,14 +42,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$textItem = $this->object->createItem();
+		$textItem = $this->object->create();
 		$this->assertInstanceOf( \Aimeos\MShop\Text\Item\Iface::class, $textItem );
 	}
 
 
 	public function testCreateItemType()
 	{
-		$item = $this->object->createItem( ['text.type' => 'name'] );
+		$item = $this->object->create( ['text.type' => 'name'] );
 		$this->assertEquals( 'name', $item->getType() );
 	}
 

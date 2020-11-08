@@ -27,7 +27,7 @@ trait Traits
 	 */
 	public function createAddressItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
-		return $this->getObject()->getSubManager( 'address' )->createItem( $values );
+		return $this->getObject()->getSubManager( 'address' )->create( $values );
 	}
 
 

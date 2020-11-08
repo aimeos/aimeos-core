@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MAdmin\Job\Item\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MAdmin\Job\Item\Iface::class, $this->object->create() );
 	}
 
 
@@ -113,7 +113,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$item->setLabel( 'unit test' );
 		$item->setMethod( 'crtl.method' );
 		$resultSaved = $this->object->saveItem( $item );

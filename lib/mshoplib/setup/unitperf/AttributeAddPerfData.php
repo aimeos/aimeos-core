@@ -80,7 +80,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $characteristics as $type => $list )
 		{
-			$attrItem = $attrManager->createItem()
+			$attrItem = $attrManager->create()
 				->setDomain( 'product' )
 				->setType( $type )
 				->setStatus( 1 );
@@ -132,17 +132,17 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$attrManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
 		$listManager = \Aimeos\MShop::create( $this->additional, 'attribute/lists' );
 
-		$attrItem = $attrManager->createItem()
+		$attrItem = $attrManager->create()
 			->setDomain( 'product' )
 			->setType( 'color' )
 			->setStatus( 1 );
 
-		$mediaItem = $mediaManager->createItem()
+		$mediaItem = $mediaManager->create()
 			->setMimeType( 'image/svg+xml' )
 			->setType( 'icon' )
 			->setStatus( 1 );
 
-		$listItem = $listManager->createItem()->setType( 'default' );
+		$listItem = $listManager->create()->setType( 'default' );
 		$pos = 0;
 
 		foreach( $colors as $code => $name )
@@ -170,18 +170,18 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$attrManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
 		$listManager = \Aimeos\MShop::create( $this->additional, 'attribute/lists' );
 
-		$priceItem = $priceManager->createItem()
+		$priceItem = $priceManager->create()
 			->setCurrencyId( 'EUR' )
 			->setTaxRate( '20.00' )
 			->setType( 'default' )
 			->setStatus( 1 );
 
-		$attrItem = $attrManager->createItem()
+		$attrItem = $attrManager->create()
 			->setDomain( 'product' )
 			->setType( 'sticker' )
 			->setStatus( 1 );
 
-		$listItem = $listManager->createItem()->setType( 'sticker' );
+		$listItem = $listManager->create()->setType( 'sticker' );
 		$pos = 0;
 
 		foreach( ['small sticker' => '+2.50', 'large sticker' => '+7.50'] as $option => $price )
@@ -218,7 +218,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $sizes as $type => $list )
 		{
-			$attrItem = $attrManager->createItem()
+			$attrItem = $attrManager->create()
 				->setDomain( 'product' )
 				->setType( $type )
 				->setStatus( 1 );

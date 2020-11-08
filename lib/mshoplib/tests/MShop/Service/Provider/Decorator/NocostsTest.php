@@ -23,13 +23,13 @@ class NocostsTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 
 		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
-		$this->servItem = $servManager->createItem()->setId( -1 );
+		$this->servItem = $servManager->create()->setId( -1 );
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Nocosts::class )
 			->disableOriginalConstructor()->getMock();
 
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
-		$this->basket = $orderManager->getSubManager( 'base' )->createItem()->off(); // remove plugins
+		$this->basket = $orderManager->getSubManager( 'base' )->create()->off(); // remove plugins
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Nocosts( $this->mockProvider, $this->context, $this->servItem );
 	}
@@ -44,7 +44,7 @@ class NocostsTest extends \PHPUnit\Framework\TestCase
 	public function testCalcPrice()
 	{
 		$this->basket->addProduct( $this->getOrderProduct() );
-		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
+		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->create();
 
 		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )->will( $this->returnValue( $priceItem ) );
 
@@ -65,13 +65,13 @@ class NocostsTest extends \PHPUnit\Framework\TestCase
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 
-		$price = $priceManager->createItem();
+		$price = $priceManager->create();
 		$price->setValue( '20.00' )->setCosts( '5.00' );
 
-		$product = $productManager->createItem()->setId( '-1' );
+		$product = $productManager->create()->setId( '-1' );
 		$product->setCode( 'test' )->setType( 'test' );
 
-		$orderProduct = $orderProductManager->createItem();
+		$orderProduct = $orderProductManager->create();
 		$orderProduct->copyFrom( $product );
 		$orderProduct->setPrice( $price );
 

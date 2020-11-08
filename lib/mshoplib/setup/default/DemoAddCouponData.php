@@ -62,7 +62,7 @@ class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 			foreach( $data as $entry )
 			{
-				$item = $manager->createItem();
+				$item = $manager->create();
 				$item->setLabel( $entry['label'] );
 				$item->setProvider( $entry['provider'] );
 				$item->setDateStart( $entry['datestart'] );
@@ -96,7 +96,7 @@ class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		foreach( $data as $entry )
 		{
-			$item = $manager->createItem();
+			$item = $manager->create();
 			$item->setParentId( $couponId );
 			$item->setCode( $entry['code'] );
 			$item->setCount( $entry['count'] );

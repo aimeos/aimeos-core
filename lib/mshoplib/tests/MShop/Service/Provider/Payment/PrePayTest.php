@@ -20,7 +20,7 @@ class PrePayTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $context );
 
-		$serviceItem = $serviceManager->createItem();
+		$serviceItem = $serviceManager->create();
 		$serviceItem->setCode( 'test' );
 
 		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\PrePay::class )
@@ -52,7 +52,7 @@ class PrePayTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSync()
 	{
-		$orderItem = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
+		$orderItem = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
 		$this->object->expects( $this->once() )->method( 'saveOrder' )->will( $this->returnArgument( 0 ) );
@@ -74,7 +74,7 @@ class PrePayTest extends \PHPUnit\Framework\TestCase
 	public function testCancel()
 	{
 		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
-		$orderItem = $manager->createItem();
+		$orderItem = $manager->create();
 		$this->object->cancel( $orderItem );
 
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED, $orderItem->getPaymentStatus() );
@@ -83,7 +83,7 @@ class PrePayTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetConfigFE()
 	{
-		$item = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base/service' )->createItem();
+		$item = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base/service' )->create();
 		$this->object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
 
 		$this->assertEquals( 2, count( $item->getAttributeItems() ) );

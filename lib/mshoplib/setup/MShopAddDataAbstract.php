@@ -68,10 +68,10 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
 
-		$item = $attrManager->createItem();
+		$item = $attrManager->create();
 		$item->setDomain( $domain );
 
-		$listItem = $listManager->createItem();
+		$listItem = $listManager->create();
 		$listItem->setParentId( $parentid );
 		$listItem->setDomain( 'attribute' );
 
@@ -140,10 +140,10 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
 
-		$item = $mediaManager->createItem();
+		$item = $mediaManager->create();
 		$item->setDomain( $domain );
 
-		$listItem = $listManager->createItem();
+		$listItem = $listManager->create();
 		$listItem->setParentId( $parentid );
 		$listItem->setDomain( 'media' );
 
@@ -206,10 +206,10 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
 
-		$item = $mediaManager->createItem();
+		$item = $mediaManager->create();
 		$item->setDomain( $domain );
 
-		$listItem = $listManager->createItem();
+		$listItem = $listManager->create();
 		$listItem->setParentId( $parentid );
 		$listItem->setDomain( 'price' );
 
@@ -274,10 +274,10 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
 
-		$item = $textManager->createItem();
+		$item = $textManager->create();
 		$item->setDomain( $domain );
 
-		$listItem = $listManager->createItem();
+		$listItem = $listManager->create();
 		$listItem->setParentId( $parentid );
 		$listItem->setDomain( 'text' );
 
@@ -338,7 +338,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
 
-		$listItem = $listManager->createItem();
+		$listItem = $listManager->create();
 		$listItem->setParentId( $parentid );
 		$listItem->setDomain( 'product' );
 
@@ -395,7 +395,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
 
-		$item = $manager->createItem();
+		$item = $manager->create();
 		$item->setProductCode( $productcode );
 
 		foreach( $data as $entry )

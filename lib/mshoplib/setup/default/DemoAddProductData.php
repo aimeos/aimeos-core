@@ -108,7 +108,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		foreach( $data as $entry )
 		{
-			$item = $manager->createItem()->fromArray( $entry );
+			$item = $manager->create()->fromArray( $entry );
 
 			$this->addRefItems( $item, $entry );
 			$this->addPropertyItems( $item, $entry );
@@ -137,7 +137,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 			foreach( (array) $entry['property'] as $values )
 			{
-				$propItem = $manager->createItem()->fromArray( $values );
+				$propItem = $manager->create()->fromArray( $values );
 				$item->addPropertyItem( $propItem );
 			}
 		}
@@ -165,8 +165,8 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 			foreach( $entry['attribute'] as $data )
 			{
-				$listItem = $listManager->createItem()->fromArray( $data );
-				$refItem = $manager->createItem()->fromArray( $data );
+				$listItem = $listManager->create()->fromArray( $data );
+				$refItem = $manager->create()->fromArray( $data );
 
 				try
 				{
@@ -188,8 +188,8 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 				foreach( $entry[$refDomain] as $data )
 				{
-					$listItem = $listManager->createItem()->fromArray( $data );
-					$refItem = $manager->createItem()->fromArray( $data );
+					$listItem = $listManager->create()->fromArray( $data );
+					$refItem = $manager->create()->fromArray( $data );
 
 					if( isset( $data['property'] ) )
 					{
@@ -211,7 +211,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 			foreach( $entry['product'] as $data )
 			{
-				$listItem = $listManager->createItem()->fromArray( $data );
+				$listItem = $listManager->create()->fromArray( $data );
 				$listItem->setRefId( $manager->find( $data['product.code'] )->getId() );
 
 				$item->addListItem( 'product', $listItem );
@@ -241,7 +241,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		foreach( $data as $entry )
 		{
-			$item = $manager->createItem()->fromArray( $entry )->setProductCode( $productcode );
+			$item = $manager->create()->fromArray( $entry )->setProductCode( $productcode );
 			$manager->saveItem( $item, false );
 		}
 	}

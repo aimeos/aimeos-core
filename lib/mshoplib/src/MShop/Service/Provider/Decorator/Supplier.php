@@ -57,7 +57,7 @@ class Supplier
 			$addresses = $item->getAddressItems();
 
 			if( empty( $addresses ) ) {
-				$addresses[] = $addrManager->createItem();
+				$addresses[] = $addrManager->create();
 			}
 
 			foreach( $addresses as $id => $addr )

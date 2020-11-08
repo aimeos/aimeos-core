@@ -90,18 +90,6 @@ abstract class Base
 
 
 	/**
-	 * Creates a new empty item instance
-	 *
-	 * @param array $values Values the item should be initialized with
-	 * @return \Aimeos\MShop\Common\Item\Iface New item object
-	 */
-	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->manager->createItem( $values );
-	}
-
-
-	/**
 	 * Deletes one or more items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|array|string $items Item object, ID of the item or a list of them

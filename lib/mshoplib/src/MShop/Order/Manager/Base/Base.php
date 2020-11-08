@@ -75,7 +75,7 @@ abstract class Base
 		$key = 'aimeos/basket/content-' . $sitecode . '-' . $language . '-' . $currency . '-' . strval( $type );
 
 		if( ( $serorder = $session->get( $key ) ) === null ) {
-			return $this->getObject()->createItem();
+			return $this->getObject()->create();
 		}
 
 		$iface = \Aimeos\MShop\Order\Item\Base\Iface::class;
@@ -85,7 +85,7 @@ abstract class Base
 			$msg = sprintf( 'Invalid serialized basket. "%1$s" returns "%2$s".', __METHOD__, $serorder );
 			$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 
-			return $this->getObject()->createItem();
+			return $this->getObject()->create();
 		}
 
 		\Aimeos\MShop::create( $context, 'plugin' )->register( $order, 'order' );
@@ -647,7 +647,7 @@ abstract class Base
 	{
 		$manager = $this->getObject()->getSubManager( 'coupon' );
 
-		$item = $manager->createItem();
+		$item = $manager->create();
 		$item->setBaseId( $basket->getId() );
 
 		foreach( $basket->getCoupons() as $code => $products )

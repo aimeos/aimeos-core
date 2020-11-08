@@ -23,7 +23,7 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 
 		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::create( $context );
-		$this->couponItem = $couponManager->createItem();
+		$this->couponItem = $couponManager->create();
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $context, $this->couponItem, 'abcd' );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\BasketValues( $provider, $context, $this->couponItem, 'abcd' );
@@ -39,19 +39,19 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 		$products = $productManager->search( $search )->toArray();
 
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
-		$price = $priceManager->createItem();
+		$price = $priceManager->create();
 		$price->setValue( 321 );
 
 		foreach( $products as $product )
 		{
-			$orderProduct = $orderProductManager->createItem();
+			$orderProduct = $orderProductManager->create();
 			$orderProduct->copyFrom( $product );
 			$orderProducts[$product->getCode()] = $orderProduct;
 		}
 
 		$orderProducts['CNC']->setPrice( $price );
 
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->getLocale() );
 		$this->orderBase->addProduct( $orderProducts['CNC'] );
 	}
 

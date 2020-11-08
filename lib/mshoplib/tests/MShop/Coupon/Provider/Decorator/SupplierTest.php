@@ -20,7 +20,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )->createItem();
+		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )->create();
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $this->context, $this->couponItem, 'abcd' );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Supplier( $provider, $this->context, $this->couponItem, 'abcd' );
@@ -31,17 +31,17 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 		$service = $serviceManager->find( 'unitcode' );
 
 		$orderServiceAttrManager = \Aimeos\MShop::create( $this->context, 'order/base/service/attribute' );
-		$orderServiceAttr = $orderServiceAttrManager->createItem();
+		$orderServiceAttr = $orderServiceAttrManager->create();
 		$orderServiceAttr->setCode( 'supplier.code' );
 		$orderServiceAttr->setType( 'delivery' );
 		$orderServiceAttr->setValue( 'berlin' );
 
 		$orderServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
-		$orderService = $orderServiceManager->createItem();
+		$orderService = $orderServiceManager->create();
 		$orderService->copyFrom( $service );
 		$orderService->setAttributeItems( [$orderServiceAttr] );
 
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $this->context->getLocale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $this->context->getLocale() );
 		$this->orderBase->addService( $orderService, \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY );
 	}
 

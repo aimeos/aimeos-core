@@ -59,7 +59,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$couponCodeManager = $couponManager->getSubmanager( 'code' );
 
 		$couponIds = [];
-		$coupon = $couponManager->createItem();
+		$coupon = $couponManager->create();
 		foreach( $testdata['coupon'] as $key => $dataset )
 		{
 			$coupon->setId( null );
@@ -75,7 +75,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 
-		$ccode = $couponCodeManager->createItem();
+		$ccode = $couponCodeManager->create();
 		foreach( $testdata['coupon/code'] as $key => $dataset )
 		{
 			if( !isset( $couponIds[$dataset['parentid']] ) ) {
@@ -145,7 +145,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ordProdIds[$ordProd->getProductCode() . '/' . $ordProd->getQuantity() . '/' . $ordProd->getPosition()] = $ordProd->getId();
 		}
 
-		$orderCoupon = $orderBaseCoupon->createItem();
+		$orderCoupon = $orderBaseCoupon->create();
 		foreach( $testdata['order/base/coupon'] as $key => $dataset )
 		{
 			if( !isset( $orderBaseIds[$dataset['baseid']] ) ) {

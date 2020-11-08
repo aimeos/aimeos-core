@@ -65,7 +65,7 @@ abstract class Base implements Iface
 		$manager = \Aimeos\MShop::create( $this->context, 'price' );
 		$prices = $this->serviceItem->getRefItems( 'price', 'default', 'default' );
 
-		return $prices->isEmpty() ? $manager->createItem() : $manager->getLowestPrice( $prices, 1 );
+		return $prices->isEmpty() ? $manager->create() : $manager->getLowestPrice( $prices, 1 );
 	}
 
 
@@ -495,7 +495,7 @@ abstract class Base implements Iface
 
 		foreach( $attributes as $key => $value )
 		{
-			$item = $manager->createItem();
+			$item = $manager->create();
 			$item->setCode( $key );
 			$item->setValue( $value );
 			$item->setType( $type );
@@ -526,7 +526,7 @@ abstract class Base implements Iface
 			if( ( $listItem = $item->getListItem( 'service', 'default', $serviceId, false ) ) === null )
 			{
 				$listManager = \Aimeos\MShop::create( $this->getContext(), 'customer/lists' );
-				$listItem = $listManager->createItem()->setType( 'default' )->setRefId( $serviceId );
+				$listItem = $listManager->create()->setType( 'default' )->setRefId( $serviceId );
 			}
 
 			$listItem->setConfig( array_merge( $listItem->getConfig(), [$type => $data] ) );

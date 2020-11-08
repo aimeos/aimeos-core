@@ -122,7 +122,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$parentIds['text/' . $item->getLabel()] = $item->getId();
 		}
 
-		$tListType = $textListTypeManager->createItem();
+		$tListType = $textListTypeManager->create();
 
 		$textManager->begin();
 
@@ -137,7 +137,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$textListTypeManager->saveItem( $tListType );
 		}
 
-		$tList = $textListManager->createItem();
+		$tList = $textListManager->create();
 		foreach( $testdata['text/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {

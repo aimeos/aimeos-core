@@ -153,7 +153,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Locale\Item\Iface New locale item object
 	 */
-	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
+	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		try
 		{

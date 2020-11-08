@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.gif' ) ) );
 
 
-		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $object->add( $item, $file ) );
 	}
@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$file->expects( $this->once() )->method( 'getStream' )
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.pdf' ) ) );
 
-		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $object->add( $item, $file ) );
 	}
@@ -102,7 +102,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->context->setFilesystemManager( $fsm );
 
-		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
 		$item->setPreview( 'test' )->setUrl( 'test' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->copy( $item ) );
@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->context->setFilesystemManager( $fsm );
 
-		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
 		$item->setPreview( 'test' )->setUrl( 'test' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->delete( $item ) );
@@ -162,7 +162,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->context->setFilesystemManager( $fsm );
 
-		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
 		$item->setPreview( 'path/to/mimeicons/application/test.png' )->setUrl( 'test' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->delete( $item ) );
@@ -184,7 +184,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->exactly( 3 ) )->method( 'store' );
 
 
-		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
 		$item->setPreview( 'preview.jpg' )->setUrl( 'test.jpg' );
 
 		$result = $object->scale( $item );

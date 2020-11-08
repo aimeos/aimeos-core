@@ -20,11 +20,11 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
-		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
-		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem()->off(); // remove event listeners
+		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->create();
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->create()->off(); // remove event listeners
 
 		$product = \Aimeos\MShop::create( $context, 'product' )->find( 'CNC' );
-		$this->product = \Aimeos\MShop::create( $context, 'order/base/product' )->createItem()->copyFrom( $product );
+		$this->product = \Aimeos\MShop::create( $context, 'order/base/product' )->create()->copyFrom( $product );
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyAdd( $context, $this->plugin );
 	}

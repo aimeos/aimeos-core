@@ -112,13 +112,13 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$priceManager = \Aimeos\MShop::create( $this->additional, 'price' );
 		$textManager = \Aimeos\MShop::create( $this->additional, 'text' );
 
-		$mListItem = $listManager->createItem()->setType( 'default' );
-		$pListItem = $listManager->createItem()->setType( 'default' );
-		$tListItem = $listManager->createItem()->setType( 'default' );
+		$mListItem = $listManager->create()->setType( 'default' );
+		$pListItem = $listManager->create()->setType( 'default' );
+		$tListItem = $listManager->create()->setType( 'default' );
 
-		$mediaItem = $mediaManager->createItem()->setType( 'icon' )->setMimeType( 'image/png' );
-		$priceItem = $priceManager->createItem()->setType( 'default' )->setCurrencyId( 'EUR' );
-		$textItem = $textManager->createItem()->setType( 'short' );
+		$mediaItem = $mediaManager->create()->setType( 'icon' )->setMimeType( 'image/png' );
+		$priceItem = $priceManager->create()->setType( 'default' )->setCurrencyId( 'EUR' );
+		$textItem = $textManager->create()->setType( 'short' );
 
 
 		$manager->begin();
@@ -126,7 +126,7 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		foreach( $services as $type => $list )
 		{
 			$pos = 0;
-			$serviceItem = $manager->createItem()->setType( $type );
+			$serviceItem = $manager->create()->setType( $type );
 
 			for( $i = 0; $i < $numServices / 4; $i++ )
 			{

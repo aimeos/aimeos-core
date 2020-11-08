@@ -164,7 +164,7 @@ class PropertyAdd
 			if( !$list->isEmpty() )
 			{
 				if( ( $attrItem = $orderProduct->getAttributeItem( $type, 'product/property' ) ) === null ) {
-					$attrItem = $this->orderAttrManager->createItem();
+					$attrItem = $this->orderAttrManager->create();
 				}
 
 				$attrItem = $attrItem->setType( 'product/property' )->setCode( $type )

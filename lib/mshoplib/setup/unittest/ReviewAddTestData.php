@@ -72,7 +72,7 @@ class ReviewAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 				$ordProdItem = $this->getOrderProductItem( $dataset['ordprodid'] );
 
-				$item = $manager->createItem()->fromArray( $dataset )
+				$item = $manager->create()->fromArray( $dataset )
 					->setDomain( $domain )->setOrderProductId( $ordProdItem->getId() )
 					->setCustomerId( $custId )->setRefId( $refId );
 

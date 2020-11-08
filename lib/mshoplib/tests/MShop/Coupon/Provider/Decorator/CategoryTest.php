@@ -21,7 +21,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )
-			->createItem()->setConfig( ['category.code' => 'cafe', 'category.only' => '1'] );
+			->create()->setConfig( ['category.code' => 'cafe', 'category.only' => '1'] );
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $this->context, $this->couponItem, 'abcd' );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Category( $provider, $this->context, $this->couponItem, 'abcd' );
@@ -29,11 +29,11 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNE' );
-		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem()->setQuantity( 2 );
+		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/base/product' )->create()->setQuantity( 2 );
 		$orderPrice = $orderProduct->copyFrom( $product )->getPrice();
 		$orderPrice->setValue( '18.00' )->setCosts( '1.50' );
 
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $this->context->getLocale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $this->context->getLocale() );
 		$this->orderBase->addProduct( $orderProduct );
 	}
 

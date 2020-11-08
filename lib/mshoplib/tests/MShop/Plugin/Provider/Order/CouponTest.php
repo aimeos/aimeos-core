@@ -19,8 +19,8 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
-		$plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
-		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem()->off(); // remove event listeners
+		$plugin = \Aimeos\MShop::create( $context, 'plugin' )->create();
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->create()->off(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( $context, $plugin );
 	}

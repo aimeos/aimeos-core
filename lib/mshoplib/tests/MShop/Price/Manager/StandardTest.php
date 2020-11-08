@@ -59,13 +59,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $this->object->create() );
 	}
 
 
 	public function testCreateItemType()
 	{
-		$item = $this->object->createItem( ['price.type' => 'default'] );
+		$item = $this->object->create( ['price.type' => 'default'] );
 		$this->assertEquals( 'default', $item->getType() );
 	}
 
@@ -308,7 +308,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetLowestPrice()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$item->setValue( '1.00' );
 
 		$lowest = $this->object->getLowestPrice( map( [$item] ), 1 );
@@ -319,10 +319,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetLowestPriceQuantity()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$item->setValue( '10.00' );
 
-		$item2 = $this->object->createItem();
+		$item2 = $this->object->create();
 		$item2->setValue( '5.00' );
 		$item2->setQuantity( 5 );
 
@@ -334,7 +334,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetLowestPriceCurrency()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$item->setValue( '1.00' );
 
 		$this->expectException( \Aimeos\MShop\Price\Exception::class );
@@ -351,7 +351,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetLowestPriceNoPriceForQuantity()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$item->setValue( '1.00' );
 		$item->setQuantity( 5 );
 

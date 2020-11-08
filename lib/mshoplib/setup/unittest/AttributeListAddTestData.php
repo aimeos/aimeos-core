@@ -182,7 +182,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$parentIds = $this->getAttributeIds( $codes, $typeCodes );
 		$this->addAttributeListTypeItems( $testdata['attribute/lists/type'] );
 
-		$listItem = $attributeListManager->createItem();
+		$listItem = $attributeListManager->create();
 		foreach( $testdata['attribute/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
@@ -249,7 +249,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$listManager = $manager->getSubManager( 'lists', 'Standard' );
 		$listTypeManager = $listManager->getSubManager( 'type', 'Standard' );
 
-		$listItemType = $listTypeManager->createItem();
+		$listItemType = $listTypeManager->create();
 
 		foreach( $data as $key => $dataset )
 		{

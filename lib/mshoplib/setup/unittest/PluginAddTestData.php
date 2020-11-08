@@ -62,11 +62,11 @@ class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$pluginManager->begin();
 
 		foreach( $testdata['plugin/type'] as $dataset ) {
-			$pluginTypeManager->saveItem( $pluginTypeManager->createItem()->fromArray( $dataset ), false );
+			$pluginTypeManager->saveItem( $pluginTypeManager->create()->fromArray( $dataset ), false );
 		}
 
 		foreach( $testdata['plugin'] as $dataset ) {
-			$pluginManager->saveItem( $pluginManager->createItem()->fromArray( $dataset ), false );
+			$pluginManager->saveItem( $pluginManager->create()->fromArray( $dataset ), false );
 		}
 
 		$pluginManager->commit();

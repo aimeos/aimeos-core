@@ -60,7 +60,7 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$supIds = [];
-		$supplier = $supplierManager->createItem();
+		$supplier = $supplierManager->create();
 
 		$supplierManager->begin();
 
@@ -75,7 +75,7 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$supIds[$key] = $supplier->getId();
 		}
 
-		$supAdr = $supplierAddressManager->createItem();
+		$supAdr = $supplierAddressManager->create();
 		foreach( $testdata['supplier/address'] as $dataset )
 		{
 			if( !isset( $supIds[$dataset['parentid']] ) ) {

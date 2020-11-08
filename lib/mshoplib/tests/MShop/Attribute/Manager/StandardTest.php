@@ -60,13 +60,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Attribute\Item\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Attribute\Item\Iface::class, $this->object->create() );
 	}
 
 
 	public function testCreateItemType()
 	{
-		$item = $this->object->createItem( ['attribute.type' => 'color'] );
+		$item = $this->object->create( ['attribute.type' => 'color'] );
 		$this->assertEquals( 'color', $item->getType() );
 	}
 
@@ -141,7 +141,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$item->setId( null );
 		$item->setDomain( 'tmpDomainx' );
 		$item->setCode( '106x' );

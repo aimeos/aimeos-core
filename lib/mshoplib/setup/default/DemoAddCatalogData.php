@@ -84,7 +84,7 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 			if( $item === null )
 			{
-				$item = $manager->createItem()->fromArray( $data );
+				$item = $manager->create()->fromArray( $data );
 				$item = $manager->insertItem( $item );
 			}
 
@@ -128,7 +128,7 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		foreach( $data as $entry )
 		{
-			$item = $manager->createItem()->fromArray( $entry );
+			$item = $manager->create()->fromArray( $entry );
 			$item = $manager->insertItem( $item, $id );
 
 			if( isset( $entry['media'] ) ) {

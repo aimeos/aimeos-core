@@ -43,13 +43,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Stock\Item\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Stock\Item\Iface::class, $this->object->create() );
 	}
 
 
 	public function testCreateItemType()
 	{
-		$item = $this->object->createItem( ['stock.type' => 'default'] );
+		$item = $this->object->create( ['stock.type' => 'default'] );
 		$this->assertEquals( 'default', $item->getType() );
 	}
 
@@ -178,7 +178,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testDecrease()
 	{
-		$stockItem = $this->object->createItem();
+		$stockItem = $this->object->create();
 		$stockItem->setType( 'unit_type1' );
 		$stockItem->setProductId( '-1' );
 		$stockItem->setStockLevel( 0 );
@@ -196,7 +196,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testIncrease()
 	{
-		$stockItem = $this->object->createItem();
+		$stockItem = $this->object->create();
 		$stockItem->setType( 'unit_type1' );
 		$stockItem->setProductId( '-1' );
 		$stockItem->setStockLevel( 0 );

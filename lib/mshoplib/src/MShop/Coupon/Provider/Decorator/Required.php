@@ -57,7 +57,7 @@ class Required
 	{
 		if( $this->getConfigValue( 'required.only' ) == true )
 		{
-			$price = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
+			$price = \Aimeos\MShop::create( $this->getContext(), 'price' )->create();
 			$codes = explode( ',', $this->getConfigValue( 'required.productcode', '' ) );
 
 			foreach( $base->getProducts() as $product )

@@ -25,13 +25,13 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 		$this->context->setUserId( null );
 
 		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
-		$this->servItem = $servManager->createItem();
+		$this->servItem = $servManager->create();
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\OrderCheck::class )
 			->disableOriginalConstructor()->getMock();
 
 		$this->basket = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
-			->getSubManager( 'base' )->createItem();
+			->getSubManager( 'base' )->create();
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\OrderCheck( $this->mockProvider, $this->context, $this->servItem );
 	}
@@ -141,7 +141,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'search' )
-			->will( $this->returnValue( map( [$mock->createItem()] ) ) );
+			->will( $this->returnValue( map( [$mock->create()] ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
 
@@ -212,7 +212,7 @@ class OrderCheckTest extends \PHPUnit\Framework\TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'search' )
-			->will( $this->returnValue( map( [$mock->createItem()] ) ) );
+			->will( $this->returnValue( map( [$mock->create()] ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', $mock );
 

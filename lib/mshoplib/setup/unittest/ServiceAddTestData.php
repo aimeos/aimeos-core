@@ -75,7 +75,7 @@ class ServiceAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 
 		foreach( $testdata['service'] as $entry )
 		{
-			$item = $manager->createItem()->fromArray( $entry );
+			$item = $manager->create()->fromArray( $entry );
 			$item = $this->addListData( $listManager, $item, $entry );
 
 			$manager->saveItem( $item );

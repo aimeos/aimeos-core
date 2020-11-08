@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testBlock()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
@@ -43,7 +43,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUnblock()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
@@ -61,7 +61,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperCntl::getContext();
 
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 		$orderItem->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
@@ -79,7 +79,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperCntl::getContext();
 
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 		$orderItem->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_DELETED );
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
@@ -204,7 +204,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateCoupons()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 
 		$orderCouponStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Coupon\Standard::class )
@@ -213,7 +213,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderCouponStub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$orderCouponStub->createItem()->setCode( 'test' )] ) ) );
+			->will( $this->returnValue( map( [$orderCouponStub->create()->setCode( 'test' )] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/coupon', $orderCouponStub );
 
@@ -240,7 +240,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateCouponsException()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 
 		$orderCouponStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Coupon\Standard::class )
@@ -249,7 +249,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderCouponStub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$orderCouponStub->createItem()->setCode( 'test' )] ) ) );
+			->will( $this->returnValue( map( [$orderCouponStub->create()->setCode( 'test' )] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/coupon', $orderCouponStub );
 
@@ -279,8 +279,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateStatus()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem()->setId( -1 );
-		$statusItem = \Aimeos\MShop::create( $context, 'order/status' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create()->setId( -1 );
+		$statusItem = \Aimeos\MShop::create( $context, 'order/status' )->create();
 		$statusItem->setValue( 1 );
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
@@ -303,8 +303,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateStatusStock()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem()->setId( -1 );
-		$statusItem = \Aimeos\MShop::create( $context, 'order/status' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create()->setId( -1 );
+		$statusItem = \Aimeos\MShop::create( $context, 'order/status' )->create();
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
@@ -327,8 +327,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateStatusCoupons()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem()->setId( -1 );
-		$statusItem = \Aimeos\MShop::create( $context, 'order/status' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create()->setId( -1 );
+		$statusItem = \Aimeos\MShop::create( $context, 'order/status' )->create();
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
@@ -351,7 +351,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateStock()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 
 		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class )
@@ -360,7 +360,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderProductStub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$orderProductStub->createItem()] ) ) );
+			->will( $this->returnValue( map( [$orderProductStub->create()] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
 
@@ -394,7 +394,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateStockArticle()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 
 		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class )
@@ -402,7 +402,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->setMethods( ['search'] )
 			->getMock();
 
-		$orderProductItem = $orderProductStub->createItem();
+		$orderProductItem = $orderProductStub->create();
 		$orderProductItem->setType( 'default' );
 
 		$orderProductStub->expects( $this->once() )->method( 'search' )
@@ -440,7 +440,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateStockSelect()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 
 		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class )
@@ -448,7 +448,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->setMethods( ['search'] )
 			->getMock();
 
-		$orderProductItem = $orderProductStub->createItem();
+		$orderProductItem = $orderProductStub->create();
 		$orderProductItem->setType( 'select' );
 
 		$orderProductStub->expects( $this->once() )->method( 'search' )
@@ -486,7 +486,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateStockException()
 	{
 		$context = \TestHelperCntl::getContext();
-		$orderItem = \Aimeos\MShop::create( $context, 'order' )->createItem();
+		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 
 		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class )
@@ -528,7 +528,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop::inject( 'stock', $stockStub );
 
 
-		$stockItem = $stockStub->createItem();
+		$stockItem = $stockStub->create();
 
 		$stockItem1 = clone $stockItem;
 		$stockItem1->setProductId( '123' );

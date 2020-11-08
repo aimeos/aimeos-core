@@ -24,9 +24,9 @@ class TaxratesTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 
-		$this->address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->createItem()->setCountryId( 'US' );
-		$this->basket = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off();
-		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
+		$this->address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->create()->setCountryId( 'US' );
+		$this->basket = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off();
+		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
 
 		$this->plugin->setConfig( ['country-taxrates' => ['US' => '5'], 'state-taxrates' => ['CA' => '6.25']] );
 

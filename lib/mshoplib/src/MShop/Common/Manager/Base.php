@@ -69,18 +69,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
-	 * Creates a new empty item instance
-	 *
-	 * @param array $values Values the item should be initialized with
-	 * @return \Aimeos\MShop\Common\Item\Iface New item object
-	 */
-	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->getObject()->createItem( $values );
-	}
-
-
-	/**
 	 * Creates a search critera object
 	 *
 	 * @param bool $default Add default criteria

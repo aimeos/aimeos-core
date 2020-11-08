@@ -58,7 +58,7 @@ class StockAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 
 			foreach( $testdata[$domain] as $key => $entry )
 			{
-				$item = $manager->createItem()->fromArray( $entry );
+				$item = $manager->create()->fromArray( $entry );
 				$manager->saveItem( $item );
 			}
 		}
@@ -84,7 +84,7 @@ class StockAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 		foreach( $testdata['stock'] as $entry )
 		{
 			$prodid = $map->get( $entry['prodcode'] ?? null, new \Exception( 'No "prodcode" in ' . print_r( $entry, true ) ) );
-			$items[] = $manager->createItem( $entry )->setProductId( $prodid );
+			$items[] = $manager->create( $entry )->setProductId( $prodid );
 		}
 
 		$manager->begin();

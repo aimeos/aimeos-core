@@ -269,7 +269,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Price\Item\Iface New price item object
 	 */
-	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
+	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$locale = $this->getContext()->getLocale();
 		$values['price.siteid'] = $locale->getSiteId();

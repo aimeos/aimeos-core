@@ -51,7 +51,7 @@ abstract class Base implements Iface
 	 */
 	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		$price = \Aimeos\MShop::create( $this->context, 'price' )->createItem();
+		$price = \Aimeos\MShop::create( $this->context, 'price' )->create();
 
 		foreach( $base->getProducts() as $product ) {
 			$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
@@ -227,10 +227,10 @@ abstract class Base implements Iface
 		if( !$prices->isEmpty() ) {
 			$price = $priceManager->getLowestPrice( $prices, $quantity );
 		} else {
-			$price = $priceManager->createItem();
+			$price = $priceManager->create();
 		}
 
-		return \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem()
+		return \Aimeos\MShop::create( $this->context, 'order/base/product' )->create()
 			->copyFrom( $product )->setQuantity( $quantity )->setStockType( $stocktype )->setPrice( $price )
 			->setFlags( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE );
 	}
@@ -252,7 +252,7 @@ abstract class Base implements Iface
 		$orderProducts = [];
 
 		if( ( $prices = $this->getPriceByTaxRate( $base ) )->isEmpty() ) {
-			$prices = ['0.00' => \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem()];
+			$prices = ['0.00' => \Aimeos\MShop::create( $this->getContext(), 'price' )->create()];
 		}
 
 		foreach( $prices as $taxrate => $price )
@@ -304,7 +304,7 @@ abstract class Base implements Iface
 			{
 				$price = $item->getPrice();
 				$rate = $price->getTaxRate();
-				$prices[$rate] = $prices->get( $rate, $manager->createItem() )->addItem( $price, $item->getQuantity() );
+				$prices[$rate] = $prices->get( $rate, $manager->create() )->addItem( $price, $item->getQuantity() );
 			}
 		}
 
@@ -314,7 +314,7 @@ abstract class Base implements Iface
 			{
 				$price = $item->getPrice();
 				$rate = $price->getTaxRate();
-				$prices[$rate] = $prices->get( $rate, $manager->createItem() )->addItem( $price );
+				$prices[$rate] = $prices->get( $rate, $manager->create() )->addItem( $price );
 			}
 		}
 

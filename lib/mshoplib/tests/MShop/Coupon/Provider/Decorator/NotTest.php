@@ -19,10 +19,10 @@ class NotTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
-		$item = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->createItem();
+		$item = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
 
 		$this->orderBase = \Aimeos\MShop\Order\Manager\Factory::create( $context )
-			->getSubmanager( 'base' )->createItem()->off();
+			->getSubmanager( 'base' )->create()->off();
 
 		$this->provider = $this->getMockBuilder( \Aimeos\MShop\Coupon\Provider\Example::class )
 			->setConstructorArgs( [$context, $item, 'abcd'] )

@@ -60,7 +60,7 @@ class AttributeAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->additional, 'Standard' );
 		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
 
-		$atype = $attributeTypeManager->createItem();
+		$atype = $attributeTypeManager->create();
 
 		$attributeManager->begin();
 
@@ -75,7 +75,7 @@ class AttributeAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$attributeTypeManager->saveItem( $atype );
 		}
 
-		$attribute = $attributeManager->createItem();
+		$attribute = $attributeManager->create();
 		foreach( $testdata['attribute'] as $key => $dataset )
 		{
 			$attribute->setId( null );

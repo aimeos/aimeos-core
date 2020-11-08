@@ -60,7 +60,7 @@ class CatalogAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->additional, 'Standard' );
 
 		$parentIds = array( 'init' => null );
-		$catalog = $catalogManager->createItem();
+		$catalog = $catalogManager->create();
 
 		foreach( $testdata['catalog'] as $key => $dataset )
 		{

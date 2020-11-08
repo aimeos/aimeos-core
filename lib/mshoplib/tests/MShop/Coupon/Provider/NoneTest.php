@@ -19,10 +19,10 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
-		$item = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->createItem();
+		$item = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
 
-		// Don't create order base item by createItem() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
+		// Don't create order base item by create() as this would already register the plugins
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->getLocale() );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\None( $context, $item, '1234' );
 	}
 

@@ -22,11 +22,11 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
-		$this->coupon = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->createItem();
+		$this->coupon = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
 		$this->coupon->setConfig( array( 'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '10' ) );
 
-		// Don't create order base item by createItem() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
+		// Don't create order base item by create() as this would already register the plugins
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->getLocale() );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $this->coupon, '90AB' );
 	}
 
@@ -153,7 +153,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateInvalidConfig()
 	{
 		$context = \TestHelperMShop::getContext();
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
 
 		$object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $couponItem, '90AB' );
 

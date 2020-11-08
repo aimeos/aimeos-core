@@ -60,9 +60,9 @@ abstract class DBBase
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Product\Item\Iface New product item object
 	 */
-	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
+	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->manager->createItem( $values );
+		return $this->manager->create( $values );
 	}
 
 

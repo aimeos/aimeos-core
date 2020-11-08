@@ -22,7 +22,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 
 		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
-		$this->servItem = $servManager->createItem();
+		$this->servItem = $servManager->create();
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Example::class )
 			->disableOriginalConstructor()->getMock();
@@ -79,7 +79,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 	public function testCalcPrice()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'price' );
-		$price = $manager->createItem();
+		$price = $manager->create();
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
@@ -94,7 +94,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 	public function testCalcPriceBundle()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'price' );
-		$price = $manager->createItem();
+		$price = $manager->create();
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
@@ -109,7 +109,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 	public function testCalcPricePackageHalf()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'price' );
-		$price = $manager->createItem();
+		$price = $manager->create();
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
@@ -124,7 +124,7 @@ class QuantityTest extends \PHPUnit\Framework\TestCase
 	public function testCalcPricePackageFull()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'price' );
-		$price = $manager->createItem();
+		$price = $manager->create();
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )

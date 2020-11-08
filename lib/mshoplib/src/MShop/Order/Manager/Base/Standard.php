@@ -285,7 +285,7 @@ class Standard extends Base
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface New order base item object
 	 */
-	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
+	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$context = $this->getContext();
 		$locale = $context->getLocale();
@@ -293,7 +293,7 @@ class Standard extends Base
 		$values['order.base.siteid'] = $locale->getSiteId();
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 
-		$base = $this->createItemBase( $priceManager->createItem(), clone $locale, $values );
+		$base = $this->createItemBase( $priceManager->create(), clone $locale, $values );
 
 		\Aimeos\MShop::create( $context, 'plugin' )->register( $base, 'order' );
 
@@ -921,7 +921,7 @@ class Standard extends Base
 
 		foreach( $map as $id => $row )
 		{
-			$price = $priceManager->createItem();
+			$price = $priceManager->create();
 			$price->setCurrencyId( $row['order.base.currencyid'] );
 			$price->setValue( $row['order.base.price'] );
 			$price->setCosts( $row['order.base.costs'] );
@@ -930,7 +930,7 @@ class Standard extends Base
 			$price->setTaxFlag( $row['order.base.taxflag'] );
 
 			// you may need the site object! take care!
-			$localeItem = $localeManager->createItem();
+			$localeItem = $localeManager->create();
 			$localeItem->setLanguageId( $row['order.base.languageid'] );
 			$localeItem->setCurrencyId( $row['order.base.currencyid'] );
 			$localeItem->setSiteId( $row['order.base.siteid'] );
@@ -996,7 +996,7 @@ class Standard extends Base
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
 
-		$price = $priceManager->createItem( [
+		$price = $priceManager->create( [
 			'price.currencyid' => $row['order.base.currencyid'],
 			'price.value' => $row['order.base.price'],
 			'price.costs' => $row['order.base.costs'],
@@ -1006,7 +1006,7 @@ class Standard extends Base
 		] );
 
 		// you may need the site object! take care!
-		$localeItem = $localeManager->createItem( [
+		$localeItem = $localeManager->create( [
 			'locale.languageid' => $row['order.base.languageid'],
 			'locale.currencyid' => $row['order.base.currencyid'],
 			'locale.siteid' => $row['order.base.siteid'],

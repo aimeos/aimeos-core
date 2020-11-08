@@ -60,7 +60,7 @@ class JobAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		foreach( $testdata['job'] as $dataset ) {
-			$manager->saveItem( $manager->createItem()->fromArray( $dataset ), false );
+			$manager->saveItem( $manager->create()->fromArray( $dataset ), false );
 		}
 	}
 }

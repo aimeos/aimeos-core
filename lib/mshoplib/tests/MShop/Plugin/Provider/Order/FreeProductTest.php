@@ -19,14 +19,14 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$context = \TestHelperMShop::getContext();
-		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->createItem();
-		$address = \Aimeos\MShop::create( $context, 'order/base/address' )->createItem()->setEmail( 'test@example.com' );
+		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->create();
+		$address = \Aimeos\MShop::create( $context, 'order/base/address' )->create()->setEmail( 'test@example.com' );
 
 		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
-		$this->orderProduct = $manager->createItem()->setProductCode( 'ABCD' );
+		$this->orderProduct = $manager->create()->setProductCode( 'ABCD' );
 		$this->orderProduct = $this->orderProduct->setPrice( $this->orderProduct->getPrice()->setValue( '100.00' ) );
 
-		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->createItem()->off(); // remove event listeners
+		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->create()->off(); // remove event listeners
 		$this->order->addAddress( $address, 'payment' )->addProduct( $this->orderProduct );
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\FreeProduct( $context, $this->plugin );

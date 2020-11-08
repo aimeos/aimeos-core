@@ -127,7 +127,7 @@ abstract class Base
 			if( ( $litem = $item->getListItem( 'customer/group', 'default', $refId, false ) ) !== null ) {
 				unset( $listItems[$litem->getId()], $listItems['__customer/group_default_' . $refId] );
 			} else {
-				$litem = $manager->createItem()->setType( 'default' );
+				$litem = $manager->create()->setType( 'default' );
 			}
 
 			$item->addListItem( 'customer/group', $litem->setRefId( $refId )->setPosition( $pos++ ) );

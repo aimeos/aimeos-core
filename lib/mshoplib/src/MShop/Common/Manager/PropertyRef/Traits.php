@@ -27,7 +27,7 @@ trait Traits
 	 */
 	public function createPropertyItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Property\Iface
 	{
-		return $this->getObject()->getSubManager( 'property' )->createItem( $values );
+		return $this->getObject()->getSubManager( 'property' )->create( $values );
 	}
 
 

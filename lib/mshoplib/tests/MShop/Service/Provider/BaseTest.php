@@ -19,7 +19,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$serviceItem = \Aimeos\MShop\Service\Manager\Factory::create( $this->context )->createItem()->setId( -1 );
+		$serviceItem = \Aimeos\MShop\Service\Manager\Factory::create( $this->context )->create()->setId( -1 );
 
 		$this->object = $this->getMockBuilder( TestBase::class )
 			->setConstructorArgs( [$this->context, $serviceItem] )
@@ -55,7 +55,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testQuery()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
 
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->query( $item );
@@ -83,7 +83,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSync()
 	{
-		$orderItem = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
+		$orderItem = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
 		$result = $this->object->updateSync( $request, $orderItem );

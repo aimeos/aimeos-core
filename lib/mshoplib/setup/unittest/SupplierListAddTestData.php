@@ -190,7 +190,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$parentIds['supplier/' . $item->getCode()] = $item->getId();
 		}
 
-		$listItemType = $supplierListTypeManager->createItem();
+		$listItemType = $supplierListTypeManager->create();
 
 		$supplierManager->begin();
 
@@ -205,7 +205,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$supplierListTypeManager->saveItem( $listItemType );
 		}
 
-		$listItem = $supplierListManager->createItem();
+		$listItem = $supplierListManager->create();
 		foreach( $testdata['supplier/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {

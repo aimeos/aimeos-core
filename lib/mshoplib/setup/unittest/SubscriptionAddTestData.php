@@ -64,7 +64,7 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$ordProdItem = $this->getOrderProductItem( $dataset['ordprodid'] );
 
-			$item = $subscriptionManager->createItem();
+			$item = $subscriptionManager->create();
 			$item->setOrderBaseId( $ordProdItem->getBaseId() );
 			$item->setOrderProductId( $ordProdItem->getId() );
 			$item->setProductId( $ordProdItem->getProductId() );

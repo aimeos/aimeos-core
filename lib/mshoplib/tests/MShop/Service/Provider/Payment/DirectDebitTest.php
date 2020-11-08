@@ -20,8 +20,8 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 
-		$this->ordServItem = \Aimeos\MShop::create( $context, 'order/base/service' )->createItem();
-		$serviceItem = \Aimeos\MShop::create( $context, 'service' )->createItem();
+		$this->ordServItem = \Aimeos\MShop::create( $context, 'order/base/service' )->create();
+		$serviceItem = \Aimeos\MShop::create( $context, 'service' )->create();
 		$serviceItem->setCode( 'test' );
 
 		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\DirectDebit::class )
@@ -138,7 +138,7 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSync()
 	{
-		$orderItem = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() )->createItem();
+		$orderItem = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
 		$this->object->expects( $this->once() )->method( 'saveOrder' )->will( $this->returnArgument( 0 ) );

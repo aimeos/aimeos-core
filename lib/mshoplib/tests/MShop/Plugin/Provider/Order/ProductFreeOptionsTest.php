@@ -18,7 +18,7 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
+		$plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductFreeOptions( $this->context, $plugin );
 	}
@@ -32,7 +32,7 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem();
+		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->create();
 		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $order ) );
 	}
 
@@ -42,9 +42,9 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 		$prodManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 
-		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off();
-		$product = \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem();
-		$attribute = \Aimeos\MShop::create( $this->context, 'order/base/product/attribute' )->createItem();
+		$basket = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off();
+		$product = \Aimeos\MShop::create( $this->context, 'order/base/product' )->create();
+		$attribute = \Aimeos\MShop::create( $this->context, 'order/base/product/attribute' )->create();
 
 		$attribute = $attribute->setQuantity( 2 )->setCode( 'size' )->setType( 'config' )
 			->setAttributeId( $attrManager->find( 'xs', [], 'product', 'size' )->getId() );
@@ -60,7 +60,7 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddPrices()
 	{
-		$price = \Aimeos\MShop::create( $this->context, 'price' )->createItem()->setValue( '10.00' );
+		$price = \Aimeos\MShop::create( $this->context, 'price' )->create()->setValue( '10.00' );
 
 		$attrManager = \Aimeos\MShop::create( $this->context, 'attribute' );
 		$attrItem = $attrManager->find( 'xs', ['price'], 'product', 'size' );

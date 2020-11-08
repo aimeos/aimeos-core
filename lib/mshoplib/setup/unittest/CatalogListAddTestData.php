@@ -186,7 +186,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$parentIds['catalog/' . $item->getCode()] = $item->getId();
 		}
 
-		$listItemType = $catalogListTypeManager->createItem();
+		$listItemType = $catalogListTypeManager->create();
 
 		foreach( $testdata['catalog/lists/type'] as $key => $dataset )
 		{
@@ -201,7 +201,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$catalogManager->begin();
 
-		$listItem = $catalogListManager->createItem();
+		$listItem = $catalogListManager->create();
 		foreach( $testdata['catalog/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {

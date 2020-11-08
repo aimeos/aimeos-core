@@ -31,7 +31,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MAdmin\Cache\Item\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MAdmin\Cache\Item\Iface::class, $this->object->create() );
 	}
 
 
@@ -76,7 +76,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = $this->object->saveItem( $this->object->createItem() );
+		$item = $this->object->saveItem( $this->object->create() );
 		$this->object->deleteItem( $item->getId() );
 
 		$this->assertInstanceOf( \Aimeos\MAdmin\Cache\Item\Iface::class, $item );

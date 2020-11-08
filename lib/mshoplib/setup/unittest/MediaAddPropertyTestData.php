@@ -60,7 +60,7 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$mediaPropertyManager = $mediaManager->getSubManager( 'property', 'Standard' );
 		$mediaPropertyTypeManager = $mediaPropertyManager->getSubManager( 'type', 'Standard' );
 
-		$type = $mediaPropertyTypeManager->createItem();
+		$type = $mediaPropertyTypeManager->create();
 		$prodIds = $this->getMediaIds( $mediaManager );
 
 		$mediaManager->begin();
@@ -76,7 +76,7 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 			$mediaPropertyTypeManager->saveItem( $type );
 		}
 
-		$prodProperty = $mediaPropertyManager->createItem();
+		$prodProperty = $mediaPropertyManager->create();
 		foreach( $testdata['media/property'] as $key => $dataset )
 		{
 			$prodProperty->setId( null );

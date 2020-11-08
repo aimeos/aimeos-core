@@ -22,11 +22,11 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $this->context );
 
-		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )->createItem();
+		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )->create();
 		$this->couponItem->setConfig( array( 'voucher.productcode' => 'U:MD' ) );
 
-		// Don't create order base item by createItem() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $this->context->getLocale() );
+		// Don't create order base item by create() as this would already register the plugins
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $this->context->getLocale() );
 
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Voucher( $this->context, $this->couponItem, '90AB' );
 	}
@@ -42,7 +42,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->orderBase->addProduct( $this->getOrderProduct() );
 
-		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem();
+		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/base/product' )->create();
 		$orderProduct->getPrice()->setCurrencyId( 'EUR' );
 		$orderProduct->getPrice()->setValue( '100.00' );
 

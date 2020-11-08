@@ -43,20 +43,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $this->object->create() );
 	}
 
 
 	public function testSaveIdException()
 	{
 		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
-		$this->object->saveItem( $this->object->createItem() );
+		$this->object->saveItem( $this->object->create() );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$item->setLabel( 'new name' );
 		$item->setStatus( 1 );
 		$item->setCode( 'xx' );
@@ -229,7 +229,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$object->createItem()] ) ) );
+			->will( $this->returnValue( map( [$object->create()] ) ) );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $object->getTree() );
 	}

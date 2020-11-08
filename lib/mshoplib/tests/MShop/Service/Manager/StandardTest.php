@@ -43,13 +43,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $this->object->create() );
 	}
 
 
 	public function testCreateItemType()
 	{
-		$item = $this->object->createItem( ['service.type' => 'delivery'] );
+		$item = $this->object->create( ['service.type' => 'delivery'] );
 		$this->assertEquals( 'delivery', $item->getType() );
 	}
 
@@ -239,7 +239,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getProvider( $this->object->createItem(), 'payment' );
+		$this->object->getProvider( $this->object->create(), 'payment' );
 	}
 
 

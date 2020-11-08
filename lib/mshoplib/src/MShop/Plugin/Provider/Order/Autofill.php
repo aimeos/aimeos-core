@@ -239,7 +239,7 @@ class Autofill
 
 			if( $provider->isAvailable( $order ) === true )
 			{
-				return \Aimeos\MShop::create( $context, 'order/base/service' )->createItem()
+				return \Aimeos\MShop::create( $context, 'order/base/service' )->create()
 					->copyFrom( $item )->setPrice( $provider->calcPrice( $order ) );
 			}
 		}
@@ -328,7 +328,7 @@ class Autofill
 				->get( $context->getUserId() )->getPaymentAddress();
 
 			$addrItem = \Aimeos\MShop::create( $context, 'order/base/address' )
-				->createItem()->copyFrom( $address );
+				->create()->copyFrom( $address );
 
 			$order->addAddress( $addrItem, $type );
 		}

@@ -56,7 +56,7 @@ class MShopAddCodeData extends \Aimeos\MW\Setup\Task\Base
 				}
 				catch( \Exception $e )
 				{
-					$item = $domainManager->createItem();
+					$item = $domainManager->create();
 					$item->setCode( $dataset['code'] );
 					$item->setLabel( $dataset['label'] );
 

@@ -21,7 +21,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 
 		$this->context = \TestHelperMShop::getContext();
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
-		$serviceItem = $serviceManager->createItem()->setConfig( [
+		$serviceItem = $serviceManager->create()->setConfig( [
 			'xml.exportpath' => 'tmp/order-export_%%d.xml',
 			'xml.updatedir' => __DIR__ . '/_tests',
 		] );

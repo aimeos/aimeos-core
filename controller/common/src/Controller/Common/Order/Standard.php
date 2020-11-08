@@ -140,7 +140,7 @@ class Standard
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/status' );
 
-		$item = $manager->createItem();
+		$item = $manager->create();
 		$item->setParentId( $parentid );
 		$item->setType( $type );
 		$item->setValue( $value );
@@ -466,7 +466,7 @@ class Standard
 
 		if( $selStockItem === null )
 		{
-			$selStockItem = $stockManager->createItem();
+			$selStockItem = $stockManager->create();
 			$selStockItem->setProductId( $productItem->getId() );
 			$selStockItem->setType( $stocktype );
 		}

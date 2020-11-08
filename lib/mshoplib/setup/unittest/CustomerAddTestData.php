@@ -68,7 +68,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 		$items = [];
 		foreach( $testdata['customer'] as $entry )
 		{
-			$item = $manager->createItem()->fromArray( $entry, true );
+			$item = $manager->create()->fromArray( $entry, true );
 			$item = $this->addGroupData( $groupManager, $item, $entry );
 			$item = $this->addPropertyData( $propManager, $item, $entry );
 			$item = $this->addAddressData( $addrManager, $item, $entry );
@@ -143,7 +143,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 			foreach( $data['customer/group'] as $entry )
 			{
 				try {
-					$groupManager->saveItem( $groupManager->createItem()->fromArray( $entry ), false );
+					$groupManager->saveItem( $groupManager->create()->fromArray( $entry ), false );
 				} catch( \Exception $e ) { echo $e->getMessage(); } // ignore duplicates
 			}
 		}

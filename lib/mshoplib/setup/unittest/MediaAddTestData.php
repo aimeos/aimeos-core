@@ -78,7 +78,7 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 
 		foreach( $testdata['media'] as $key => $dataset )
 		{
-			$media = $mediaManager->createItem();
+			$media = $mediaManager->create();
 			$media->setLanguageId( $dataset['langid'] );
 			$media->setType( $dataset['type'] );
 			$media->setDomain( $dataset['domain'] );

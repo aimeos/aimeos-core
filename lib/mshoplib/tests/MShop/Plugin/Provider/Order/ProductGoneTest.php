@@ -21,7 +21,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
+		$plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
 
 		$manager = \Aimeos\MShop::create( $this->context, 'product' );
 		$newProduct = $manager->find( 'CNE' )->setId( null )->setLabel( 'Bad Product' )->setCode( 'WTF' );
@@ -70,7 +70,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateProductDeleted()
 	{
-		$badItem = \Aimeos\MShop::create( $this->context, 'order/base/product' )->createItem()
+		$badItem = \Aimeos\MShop::create( $this->context, 'order/base/product' )->create()
 			->setProductId( -13 )->setProductCode( 'NONE' );
 
 		$this->order->addProduct( $badItem );
@@ -84,7 +84,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateProductEnded()
 	{
 		$badItem = \Aimeos\MShop::create( $this->context, 'order/base/product' )
-			->createItem()->copyFrom( $this->product );
+			->create()->copyFrom( $this->product );
 
 		$this->product->setDateEnd( '1999-12-31 23:59:59' );
 		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->saveItem( $this->product );
@@ -100,7 +100,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateProductNotStarted()
 	{
 		$badItem = \Aimeos\MShop::create( $this->context, 'order/base/product' )
-			->createItem()->copyFrom( $this->product );
+			->create()->copyFrom( $this->product );
 
 		$this->product->setDateStart( '2100-12-31 23:59:59' );
 		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->saveItem( $this->product );
@@ -116,7 +116,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateProductDeactivated()
 	{
 		$badItem = \Aimeos\MShop::create( $this->context, 'order/base/product' )
-			->createItem()->copyFrom( $this->product );
+			->create()->copyFrom( $this->product );
 
 		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->saveItem( $this->product->setStatus( 0 ) );
 

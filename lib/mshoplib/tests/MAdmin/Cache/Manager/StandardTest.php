@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MAdmin\Cache\Item\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MAdmin\Cache\Item\Iface::class, $this->object->create() );
 	}
 
 
@@ -72,7 +72,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$this->object->saveItem( $this->object->createItem()->setId( 'unittest' )->setValue( 'test' ) );
+		$this->object->saveItem( $this->object->create()->setId( 'unittest' )->setValue( 'test' ) );
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'cache.id', 'unittest' ) );
@@ -93,7 +93,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$this->object->saveItem( $this->object->createItem()->setId( 'unittest' )->setValue( 'test' ) );
+		$this->object->saveItem( $this->object->create()->setId( 'unittest' )->setValue( 'test' ) );
 
 		$item = $this->object->get( 'unittest' );
 
@@ -106,7 +106,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$item->setId( 'unittest2' );
 		$item->setValue( 'test2' );
 		$resultSaved = $this->object->saveItem( $item );

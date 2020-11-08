@@ -48,13 +48,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->create() );
 	}
 
 
 	public function testCreateItemType()
 	{
-		$item = $this->object->createItem( ['product.type' => 'default'] );
+		$item = $this->object->create( ['product.type' => 'default'] );
 		$this->assertEquals( 'default', $item->getType() );
 	}
 
@@ -185,7 +185,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$listItem = $this->object->createListItem();
-		$refItem = \Aimeos\MShop\Text\Manager\Factory::create( $this->context )->createItem()->setType( 'name' );
+		$refItem = \Aimeos\MShop\Text\Manager\Factory::create( $this->context )->create()->setType( 'name' );
 
 		$search = $this->object->filter();
 		$conditions = array(
@@ -281,18 +281,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
 
-		$item = $manager->createItem();
+		$item = $manager->create();
 		$item->setType( 'default' );
 		$item->setCode( 'unitreftest' );
 
 		$listManager = $manager->getSubManager( 'lists' );
 
-		$listItem = $listManager->createItem();
+		$listItem = $listManager->create();
 		$listItem->setType( 'default' );
 
 		$textManager = \Aimeos\MShop\Text\Manager\Factory::create( $context );
 
-		$textItem = $textManager->createItem();
+		$textItem = $textManager->create();
 		$textItem->setType( 'name' );
 
 

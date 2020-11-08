@@ -23,13 +23,13 @@ class DateTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 
 		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
-		$this->servItem = $servManager->createItem()->setCode( '73' );
+		$this->servItem = $servManager->create()->setCode( '73' );
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Date::class )
 			->disableOriginalConstructor()->getMock();
 
 		$this->basket = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
-			->getSubManager( 'base' )->createItem();
+			->getSubManager( 'base' )->create();
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Date( $this->mockProvider, $this->context, $this->servItem );
 	}

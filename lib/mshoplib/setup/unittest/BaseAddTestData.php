@@ -46,7 +46,7 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 		if( isset( $data['address'] ) )
 		{
 			foreach( $data['address'] as $entry ) {
-				$item->addAddressItem( $addrManager->createItem( $entry )->fromArray( $entry ) );
+				$item->addAddressItem( $addrManager->create( $entry )->fromArray( $entry ) );
 			}
 		}
 
@@ -73,12 +73,12 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 				foreach( $entries as $entry )
 				{
-					$listItem = $listManager->createItem()->fromArray( $entry );
+					$listItem = $listManager->create()->fromArray( $entry );
 
 					if( isset( $entry['ref'] ) && isset( $refItems[$entry['ref']] ) ) {
 						$refItem = $refItems[$entry['ref']];
 					} else {
-						$refItem = $manager->createItem()->fromArray( $entry );
+						$refItem = $manager->create()->fromArray( $entry );
 					}
 
 					if( $refItem instanceof \Aimeos\MShop\Common\Item\ListRef\Iface ) {
@@ -111,7 +111,7 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 		if( isset( $data['property'] ) )
 		{
 			foreach( $data['property'] as $entry ) {
-				$item->addPropertyItem( $propManager->createItem()->fromArray( $entry ) );
+				$item->addPropertyItem( $propManager->create()->fromArray( $entry ) );
 			}
 		}
 
@@ -174,7 +174,7 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 				foreach( $testdata[$domain] as $entry )
 				{
 					try {
-						$manager->saveItem( $manager->createItem()->fromArray( $entry ), false );
+						$manager->saveItem( $manager->create()->fromArray( $entry ), false );
 					} catch( \Exception $e ) {} // Duplicate entry
 				}
 			}

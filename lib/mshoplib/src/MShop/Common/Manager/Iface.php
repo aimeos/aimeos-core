@@ -45,15 +45,6 @@ interface Iface
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface;
 
 	/**
-	 * Creates a new empty item instance
-	 *
-	 * @param array $values Values the item should be initialized with
-	 * @return \Aimeos\MShop\Common\Item\Iface New item object
-	 * @deprecated 2021.01
-	 */
-	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface;
-
-	/**
 	 * Creates a filter object.
 	 *
 	 * @param bool $default Add default criteria

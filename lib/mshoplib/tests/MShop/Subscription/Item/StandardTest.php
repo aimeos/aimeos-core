@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'subscription.editor' => 'unitTestUser'
 		);
 
-		$baseItem = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base' )->createItem();
+		$baseItem = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base' )->create();
 		$this->object = new \Aimeos\MShop\Subscription\Item\Standard( $this->values, $baseItem );
 	}
 

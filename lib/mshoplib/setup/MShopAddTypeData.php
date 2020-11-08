@@ -65,7 +65,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 			$this->msg( sprintf( 'Checking "%1$s" type data', $domain ), 1 );
 
 			$domainManager = $this->getDomainManager( $domain );
-			$type = $domainManager->createItem();
+			$type = $domainManager->create();
 			$num = $total = 0;
 
 			foreach( $datasets as $dataset )

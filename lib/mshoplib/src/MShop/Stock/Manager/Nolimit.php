@@ -70,7 +70,7 @@ class Nolimit
 	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values = ['stock.id' => $id, 'stock.type' => 'default'];
-		return $this->getObject()->createItem( $values );
+		return $this->getObject()->create( $values );
 	}
 
 
@@ -85,7 +85,7 @@ class Nolimit
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
-		$item = $this->getObject()->createItem( ['stock.type' => 'default'] );
+		$item = $this->getObject()->create( ['stock.type' => 'default'] );
 
 		foreach( $this->getProductIds( $search->getConditions() ) as $idx => $prodid ) {
 			$items[$idx] = ( clone $item )->setProductId( $prodid )->setId( $idx );

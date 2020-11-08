@@ -123,7 +123,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$this->addPriceListTypeItems( $testdata['price/lists/type'] );
 		$parentIds = $this->getPriceIds( $value, $ship, $code );
 
-		$listItem = $priceListManager->createItem();
+		$listItem = $priceListManager->create();
 		foreach( $testdata['price/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
@@ -192,7 +192,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$listManager = $manager->getSubManager( 'lists', 'Standard' );
 		$listTypeManager = $listManager->getSubManager( 'type', 'Standard' );
 
-		$listItemType = $listTypeManager->createItem();
+		$listItemType = $listTypeManager->create();
 
 		foreach( $data as $key => $dataset )
 		{

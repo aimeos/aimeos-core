@@ -22,7 +22,7 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 
 		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
-		$this->servItem = $servManager->createItem();
+		$this->servItem = $servManager->create();
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Example::class )
 			->disableOriginalConstructor()->getMock();
@@ -110,7 +110,7 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop::create( $this->context, 'order/base' );
 		$this->servItem->setConfig( array( 'download.all' => '0' ) );
 
-		$this->assertFalse( $this->object->isAvailable( $manager->createItem() ) );
+		$this->assertFalse( $this->object->isAvailable( $manager->create() ) );
 	}
 
 

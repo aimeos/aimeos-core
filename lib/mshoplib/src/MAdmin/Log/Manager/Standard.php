@@ -154,7 +154,7 @@ class Standard
 	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MAdmin\Log\Item\Iface New log item object
 	 */
-	public function createItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
+	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		try {
 			$values['log.siteid'] = $this->getContext()->getLocale()->getSiteId();
@@ -660,7 +660,7 @@ class Standard
 				$message = json_encode( $message );
 			}
 
-			$item = $this->getObject()->createItem();
+			$item = $this->getObject()->create();
 
 			$item->setFacility( $facility );
 			$item->setPriority( $priority );

@@ -93,7 +93,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		foreach( $data as $entry )
 		{
-			$item = $manager->createItem();
+			$item = $manager->create();
 			$item->setCode( $entry['code'] );
 			$item->setLabel( $entry['label'] );
 			$item->setStatus( $entry['status'] );
@@ -123,7 +123,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		foreach( $data as $entry )
 		{
-			$addr = $manager->createItem();
+			$addr = $manager->create();
 			$addr->setParentId( $id );
 			$addr->setTitle( $entry['title'] );
 			$addr->setSalutation( $entry['salutation'] );

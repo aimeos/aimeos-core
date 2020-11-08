@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 
 		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $item );
 		$this->assertEquals( \TestHelperMShop::getContext()->getLocale()->getSiteId(), $item->getNode()->siteid );
@@ -223,7 +223,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$categorycatChildren = $categorycat->getChildren();
 		$cafecat = $categorycat->getChild( 0 );
 
-		$caffein = $this->object->createItem();
+		$caffein = $this->object->create();
 		$caffein->setCode( 'caffein' );
 		$caffein->setLabel( 'Caffein' );
 

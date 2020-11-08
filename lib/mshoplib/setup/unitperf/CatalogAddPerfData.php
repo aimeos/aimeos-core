@@ -129,7 +129,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$catalogManager = \Aimeos\MShop::create( $this->additional, 'catalog' );
 
-		$item = $catalogManager->createItem()
+		$item = $catalogManager->create()
 			->setLabel( 'category-' . $catLabel )
 			->setCode( 'cat-' . $catLabel )
 			->setStatus( 1 );
@@ -151,7 +151,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	protected function addCatalogProducts( array $catItems, array $items, $num )
 	{
 		$catalogListManager = \Aimeos\MShop::create( $this->additional, 'catalog/lists' );
-		$defListItem = $catalogListManager->createItem()->setType( 'default' );
+		$defListItem = $catalogListManager->create()->setType( 'default' );
 		$start = 0;
 
 		foreach( $catItems as $idx => $catItem )
@@ -179,14 +179,14 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$textManager = \Aimeos\MShop::create( $this->additional, 'text' );
 		$catalogListManager = \Aimeos\MShop::create( $this->additional, 'catalog/lists' );
 
-		$textItem = $textManager->createItem()
+		$textItem = $textManager->create()
 			->setContent( 'Category ' . $catLabel )
 			->setLabel( 'cat-' . $catLabel )
 			->setLanguageId( 'en' )
 			->setType( 'name' )
 			->setStatus( 1 );
 
-		$listItem = $catalogListManager->createItem()->setType( 'default' );
+		$listItem = $catalogListManager->create()->setType( 'default' );
 
 		return $catItem->addListItem( 'text', $listItem, $textItem );
 	}
@@ -196,13 +196,13 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$productListManager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
 
-		$listItem = $productListManager->createItem()->setType( 'default' );
+		$listItem = $productListManager->create()->setType( 'default' );
 
 		foreach( $attrIds as $attrId ) {
 			$prodItem->addListItem( 'attribute', ( clone $listItem )->setRefId( $attrId ) );
 		}
 
-		$listItem = $productListManager->createItem()->setType( 'config' );
+		$listItem = $productListManager->create()->setType( 'config' );
 
 		foreach( $this->attributes['sticker'] as $attrId => $label ) {
 			$prodItem->addListItem( 'attribute', ( clone $listItem )->setRefId( $attrId ) );
@@ -230,7 +230,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$productManager = \Aimeos\MShop::create( $this->additional, 'product' );
 		$productManager->begin();
 
-		$newItem = $productManager->createItem()->setType( $this->numProdVariants > 0 ? 'select' : 'default' );
+		$newItem = $productManager->create()->setType( $this->numProdVariants > 0 ? 'select' : 'default' );
 		$slice = (int) ceil( $this->maxBatch / ( $this->numProdVariants ?: 1 ) );
 
 		$property = $this->shuffle( $this->attributes['property'] );
@@ -303,8 +303,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$mediaManager = \Aimeos\MShop::create( $this->additional, 'media' );
 		$productListManager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
 
-		$litem = $productListManager->createItem()->setType( 'default' );
-		$newItem = $mediaManager->createItem()->setType( 'default' );
+		$litem = $productListManager->create()->setType( 'default' );
+		$newItem = $mediaManager->create()->setType( 'default' );
 
 		foreach( array_values( $this->shuffle( range( 0, 3 ) ) ) as $pos => $i )
 		{
@@ -326,7 +326,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			->setLabel( 'PDF download' )
 			->setStatus( 1 );
 
-		$litem = $productListManager->createItem()->setType( 'download' );
+		$litem = $productListManager->create()->setType( 'download' );
 
 		return $prodItem->addListItem( 'media', ( clone $litem ), $mediaItem );
 	}
@@ -337,8 +337,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$priceManager = \Aimeos\MShop::create( $this->additional, 'price' );
 		$productListManager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
 
-		$litem = $productListManager->createItem()->setType( 'default' );
-		$newItem = $priceManager->createItem()->setType( 'default' );
+		$litem = $productListManager->create()->setType( 'default' );
+		$newItem = $priceManager->create()->setType( 'default' );
 		$base = rand( 0, 896 );
 
 		for( $i = 0; $i < 3; $i++ )
@@ -364,7 +364,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$productListManager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
 
-			$listItem = $productListManager->createItem()->setType( 'suggestion' );
+			$listItem = $productListManager->create()->setType( 'suggestion' );
 			$listItems = $catItem->getListItems( 'product' );
 			$ids = []; $num = 5;
 
@@ -388,9 +388,9 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$textManager = \Aimeos\MShop::create( $this->additional, 'text' );
 		$productListManager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
 
-		$listItem = $productListManager->createItem()->setType( 'default' );
+		$listItem = $productListManager->create()->setType( 'default' );
 
-		$textItem = $textManager->createItem()
+		$textItem = $textManager->create()
 			->setContent( str_replace( ' ', '_', $label . '_' . $catLabel ) )
 			->setLabel( $label . '(' . $catLabel . ')' )
 			->setLanguageId( 'en' )
@@ -399,7 +399,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$prodItem->addListItem( 'text', ( clone $listItem ), $textItem );
 
-		$textItem = $textManager->createItem()
+		$textItem = $textManager->create()
 			->setLanguageId( 'en' )
 			->setContent( $label )
 			->setLabel( $label )
@@ -408,7 +408,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$prodItem->addListItem( 'text', ( clone $listItem )->setPosition( 0 ), $textItem );
 
-		$textItem = $textManager->createItem()
+		$textItem = $textManager->create()
 			->setContent( 'Short description for ' . $label )
 			->setLabel( $label . ' (short)' )
 			->setLanguageId( 'en' )
@@ -417,7 +417,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$prodItem->addListItem( 'text', ( clone $listItem )->setPosition( 1 ), $textItem );
 
-		$textItem = $textManager->createItem()
+		$textItem = $textManager->create()
 			->setContent( 'Long description for ' . $label . '. This may include some "lorem ipsum" text' )
 			->setLabel( $label . ' (long)' )
 			->setLanguageId( 'en' )
@@ -435,9 +435,9 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$productManager = \Aimeos\MShop::create( $this->additional, 'product' );
 		$productListManager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
 
-		$defListItem = $productListManager->createItem()->setType( 'default' );
-		$varListItem = $productListManager->createItem()->setType( 'variant' );
-		$newItem = $productManager->createItem()->setType( 'default' );
+		$defListItem = $productListManager->create()->setType( 'default' );
+		$varListItem = $productListManager->create()->setType( 'variant' );
+		$newItem = $productManager->create()->setType( 'default' );
 
 		$length = $this->attributes['length'];
 		$width = $this->attributes['width'];
@@ -482,7 +482,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$stockManager = \Aimeos\MShop::create( $this->additional, 'stock' );
 
-		$stockItem = $stockManager->createItem()->setType( 'default' );
+		$stockItem = $stockManager->create()->setType( 'default' );
 		$stocklevels = $this->shuffle( [null, 100, 80, 60, 40, 20, 10, 5, 2, 0] );
 		$list = [];
 

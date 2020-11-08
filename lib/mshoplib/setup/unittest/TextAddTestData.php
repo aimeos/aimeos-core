@@ -60,7 +60,7 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$textManager = \Aimeos\MShop\Text\Manager\Factory::create( $this->additional, 'Standard' );
 		$textTypeManager = $textManager->getSubManager( 'type', 'Standard' );
 
-		$ttype = $textTypeManager->createItem();
+		$ttype = $textTypeManager->create();
 
 		$textManager->begin();
 
@@ -75,7 +75,7 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$textTypeManager->saveItem( $ttype );
 		}
 
-		$text = $textManager->createItem();
+		$text = $textManager->create();
 		foreach( $testdata['text'] as $key => $dataset )
 		{
 			$text->setId( null );

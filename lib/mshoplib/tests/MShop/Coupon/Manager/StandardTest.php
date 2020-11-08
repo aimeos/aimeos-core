@@ -20,7 +20,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() );
 
-		$this->item = $this->object->createItem();
+		$this->item = $this->object->create();
 		$this->item->setProvider( 'Example' );
 		$this->item->setConfig( array( 'key'=>'value' ) );
 		$this->item->setStatus( '1' );
@@ -65,7 +65,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Item\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Item\Iface::class, $this->object->create() );
 	}
 
 
@@ -171,7 +171,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetProvider()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$item->setProvider( 'Present,Example' );
 		$provider = $this->object->getProvider( $item, 'abcd' );
 
@@ -180,7 +180,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getProvider( $this->object->createItem(), '' );
+		$this->object->getProvider( $this->object->create(), '' );
 	}
 
 

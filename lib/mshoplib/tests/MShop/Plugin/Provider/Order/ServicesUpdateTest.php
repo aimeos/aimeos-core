@@ -20,8 +20,8 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
-		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
+		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
+		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesUpdate( $this->context, $this->plugin );
 	}
@@ -47,12 +47,12 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
 
-		$priceItem = $priceManager->createItem();
-		$localeItem = $localeManager->createItem();
-		$orderProduct = $orderBaseProductManager->createItem();
+		$priceItem = $priceManager->create();
+		$localeItem = $localeManager->create();
+		$orderProduct = $orderBaseProductManager->create();
 
-		$serviceDelivery = $orderBaseServiceManager->createItem()->setServiceId( 1 );
-		$servicePayment = $orderBaseServiceManager->createItem()->setServiceId( 2 );
+		$serviceDelivery = $orderBaseServiceManager->create()->setServiceId( 1 );
+		$servicePayment = $orderBaseServiceManager->create()->setServiceId( 2 );
 
 
 		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Base\Standard::class )
@@ -68,12 +68,12 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$orderStub->addService( $serviceDelivery, 'delivery' );
 		$orderStub->addService( $servicePayment, 'payment' );
 
-		$serviceItemDelivery = $serviceManager->createItem()->setType( 'delivery' );
-		$serviceItemPayment = $serviceManager->createItem()->setType( 'payment' );
+		$serviceItemDelivery = $serviceManager->create()->setType( 'delivery' );
+		$serviceItemPayment = $serviceManager->create()->setType( 'payment' );
 
 
 		$providerStub = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Delivery\Standard::class )
-			->setConstructorArgs( [$this->context, $serviceStub->createItem()] )
+			->setConstructorArgs( [$this->context, $serviceStub->create()] )
 			->setMethods( ['isAvailable'] )->getMock();
 
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
@@ -103,12 +103,12 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
 
-		$priceItem = $priceManager->createItem();
-		$localeItem = $localeManager->createItem();
-		$orderProduct = $orderBaseProductManager->createItem();
+		$priceItem = $priceManager->create();
+		$localeItem = $localeManager->create();
+		$orderProduct = $orderBaseProductManager->create();
 
-		$serviceDelivery = $orderBaseServiceManager->createItem()->setServiceId( 1 );
-		$servicePayment = $orderBaseServiceManager->createItem()->setServiceId( 2 );
+		$serviceDelivery = $orderBaseServiceManager->create()->setServiceId( 1 );
+		$servicePayment = $orderBaseServiceManager->create()->setServiceId( 2 );
 
 
 		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Base\Standard::class )
@@ -124,12 +124,12 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$orderStub->addService( $serviceDelivery, 'delivery' );
 		$orderStub->addService( $servicePayment, 'payment' );
 
-		$serviceItemDelivery = $serviceManager->createItem()->setType( 'delivery' );
-		$serviceItemPayment = $serviceManager->createItem()->setType( 'payment' );
+		$serviceItemDelivery = $serviceManager->create()->setType( 'delivery' );
+		$serviceItemPayment = $serviceManager->create()->setType( 'payment' );
 
 
 		$providerStub = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Delivery\Standard::class )
-			->setConstructorArgs( [$this->context, $serviceStub->createItem()] )
+			->setConstructorArgs( [$this->context, $serviceStub->create()] )
 			->setMethods( ['isAvailable'] )->getMock();
 
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
@@ -157,12 +157,12 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
 
-		$priceItem = $priceManager->createItem();
-		$localeItem = $localeManager->createItem();
-		$orderProduct = $orderBaseProductManager->createItem();
+		$priceItem = $priceManager->create();
+		$localeItem = $localeManager->create();
+		$orderProduct = $orderBaseProductManager->create();
 
-		$serviceDelivery = $orderBaseServiceManager->createItem()->setServiceId( -1 );
-		$servicePayment = $orderBaseServiceManager->createItem()->setServiceId( -2 );
+		$serviceDelivery = $orderBaseServiceManager->create()->setServiceId( -1 );
+		$servicePayment = $orderBaseServiceManager->create()->setServiceId( -2 );
 
 
 		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Base\Standard::class )
@@ -188,10 +188,10 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
 		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
 
-		$priceItem = $priceManager->createItem()->setCosts( '5.00' );
+		$priceItem = $priceManager->create()->setCosts( '5.00' );
 
-		$serviceDelivery = $orderBaseServiceManager->createItem()->setPrice( $priceItem )->setId( 1 );
-		$servicePayment = $orderBaseServiceManager->createItem()->setPrice( $priceItem )->setId( 2 );
+		$serviceDelivery = $orderBaseServiceManager->create()->setPrice( $priceItem )->setId( 1 );
+		$servicePayment = $orderBaseServiceManager->create()->setPrice( $priceItem )->setId( 2 );
 
 		$this->order->addService( $serviceDelivery, 'delivery' );
 		$this->order->addService( $servicePayment, 'payment' );

@@ -23,13 +23,13 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 
 		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
-		$this->servItem = $servManager->createItem();
+		$this->servItem = $servManager->create();
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Supplier::class )
 			->disableOriginalConstructor()->getMock();
 
 		$this->basket = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
-			->getSubManager( 'base' )->createItem();
+			->getSubManager( 'base' )->create();
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Supplier( $this->mockProvider, $this->context, $this->servItem );
 	}

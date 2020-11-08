@@ -20,7 +20,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
+		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\Shipping( $this->context, $this->plugin );
 	}
@@ -60,7 +60,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 
 	public function testRegister()
 	{
-		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem();
+		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->create();
 		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Provider\Iface::class, $this->object->register( $order ) );
 	}
 
@@ -89,9 +89,9 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 		$price = $price->setValue( 10.00 );
 
 		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
-		$product = $orderBaseProductManager->createItem()->copyFrom( $products['CNE'] )->setPrice( $price );
-		$product2 = $orderBaseProductManager->createItem()->copyFrom( $products['CNC'] )->setPrice( $price );
-		$product3 = $orderBaseProductManager->createItem()->copyFrom( $products['IJKL'] )->setPrice( $price );
+		$product = $orderBaseProductManager->create()->copyFrom( $products['CNE'] )->setPrice( $price );
+		$product2 = $orderBaseProductManager->create()->copyFrom( $products['CNC'] )->setPrice( $price );
+		$product3 = $orderBaseProductManager->create()->copyFrom( $products['IJKL'] )->setPrice( $price );
 
 		$orderBaseServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
 		$serviceSearch = $orderBaseServiceManager->filter();
@@ -102,7 +102,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 		$serviceSearch->setConditions( $serviceSearch->combine( '&&', $exp ) );
 		$delivery = $orderBaseServiceManager->search( $serviceSearch )->first();
 
-		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
+		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
 
 		$order = $order->addService( $delivery, 'delivery' )
 			->addProduct( $product )->addProduct( $product2 )->addProduct( $product3 );

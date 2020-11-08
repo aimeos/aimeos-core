@@ -29,7 +29,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		};
 
 		$this->object = $couponManager->getSubManager( 'code' );
-		$this->code = $this->object->createItem();
+		$this->code = $this->object->create();
 		$this->code->setCode( 'abcd' );
 		$this->code->setCount( '1' );
 		$this->code->setParentId( $item->getId() );
@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Item\Code\Iface::class, $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Item\Code\Iface::class, $this->object->create() );
 	}
 
 

@@ -82,13 +82,13 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 		$orderBaseManager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base' );
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelperMShop::getContext() );
 
-		$localeItem = $localeManager->createItem();
+		$localeItem = $localeManager->create();
 
-		$orderBaseDeItem = $orderBaseManager->createItem();
+		$orderBaseDeItem = $orderBaseManager->create();
 		$localeItem->setLanguageId( 'de' );
 		$orderBaseDeItem->setLocale( $localeItem );
 
-		$orderBaseEnItem = $orderBaseManager->createItem();
+		$orderBaseEnItem = $orderBaseManager->create();
 		$localeItem->setLanguageId( 'en' );
 		$orderBaseEnItem->setLocale( $localeItem );
 

@@ -233,7 +233,7 @@ class Voucher
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base/product/attribute' );
 
-		$orderAttrItem = $manager->createItem();
+		$orderAttrItem = $manager->create();
 		$orderAttrItem->setValue( number_format( $remaining, 2, '.', '' ) );
 		$orderAttrItem->setCode( 'coupon-remain' );
 		$orderAttrItem->setType( 'coupon' );

@@ -65,7 +65,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Iface::class, $item );
 	}
 
@@ -146,7 +146,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 
 		$item->setCode( 'unitTest' );
 		$item->setLabel( 'unitTest' );

@@ -43,7 +43,7 @@ class MShopAddAttributeData extends MShopAddDataAbstract
 		}
 
 		$manager = \Aimeos\MShop::create( $this->additional, 'attribute' );
-		$item = $manager->createItem();
+		$item = $manager->create();
 		$num = $total = 0;
 
 		foreach( $data as $dataset )

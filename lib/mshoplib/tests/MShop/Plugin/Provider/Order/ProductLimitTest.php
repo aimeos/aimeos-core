@@ -22,8 +22,8 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem()->setConfig( ['single-number-max' => 10] );
-		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
+		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create()->setConfig( ['single-number-max' => 10] );
+		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
 
 		$this->products = [];
 		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
@@ -33,7 +33,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 
 		foreach( $manager->search( $search )->toArray() as $product ) {
-			$this->products[$product->getCode()] = $orderBaseProductManager->createItem()->copyFrom( $product );
+			$this->products[$product->getCode()] = $orderBaseProductManager->create()->copyFrom( $product );
 		}
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductLimit( $this->context, $this->plugin );
@@ -108,13 +108,13 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setConfig( ['single-value-max' => ['EUR' => '10.00']] );
 
 		$product = $this->products['CNC']->setQuantity( 1 )
-			->setPrice( $priceManager->createItem()->setValue( '10.00' ) );
+			->setPrice( $priceManager->create()->setValue( '10.00' ) );
 
 		$this->assertEquals( $product, $this->object->update( $this->order, 'addProduct.before', $product ) );
 
 
 		$product = $this->products['CNE']->setQuantity( 3 )
-			->setPrice( $priceManager->createItem()->setValue( '3.50' ) );
+			->setPrice( $priceManager->create()->setValue( '3.50' ) );
 
 		$this->expectException( \Aimeos\MShop\Plugin\Exception::class );
 		$this->object->update( $this->order, 'addProduct.before', $product );
@@ -143,14 +143,14 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setConfig( ['total-value-max' => ['EUR' => '110.00']] );
 
 		$product = $this->products['CNC']->setQuantity( 1 )
-			->setPrice( $priceManager->createItem()->setValue( '100.00' ) );
+			->setPrice( $priceManager->create()->setValue( '100.00' ) );
 
 		$this->assertEquals( $product, $this->object->update( $this->order, 'addProduct.before', $product ) );
 
 
 		$this->order->addProduct( $this->products['CNC'] );
 		$product = $this->products['CNE']->setQuantity( 2 )
-			->setPrice( $priceManager->createItem()->setValue( '10.00' ) );
+			->setPrice( $priceManager->create()->setValue( '10.00' ) );
 
 		$this->expectException( \Aimeos\MShop\Plugin\Exception::class );
 		$this->object->update( $this->order, 'addProduct.before', $product );

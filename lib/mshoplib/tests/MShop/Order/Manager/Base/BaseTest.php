@@ -28,7 +28,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSetSession()
 	{
-		$order = $this->object->createItem();
+		$order = $this->object->create();
 		$order->setComment( 'test comment' );
 
 		$this->object->setSession( $order, 'test' );

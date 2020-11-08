@@ -20,8 +20,8 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->createItem();
-		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->createItem()->off(); // remove event listeners
+		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
+		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( $this->context, $this->plugin );
 	}
@@ -138,8 +138,8 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$orderBaseAddressStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Address\Standard::class )
 			->setConstructorArgs( [$this->context] )->setMethods( ['search'] )->getMock();
 
-		$item1 = $orderBaseAddressStub->createItem()->setType( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
-		$item2 = $orderBaseAddressStub->createItem()->setType( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$item1 = $orderBaseAddressStub->create()->setType( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+		$item2 = $orderBaseAddressStub->create()->setType( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
 		$orderStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseStub ) );
 		$orderBaseStub->expects( $this->any() )->method( 'getSubManager' )->will( $this->returnValue( $orderBaseAddressStub ) );
@@ -177,9 +177,9 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$orderBaseServiceStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Service\Standard::class )
 			->setConstructorArgs( [$this->context] )->setMethods( ['search'] )->getMock();
 
-		$item1 = $orderBaseServiceStub->createItem()->setCode( 'unitcode' )
+		$item1 = $orderBaseServiceStub->create()->setCode( 'unitcode' )
 			->setType( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY );
-		$item2 = $orderBaseServiceStub->createItem()->setCode( 'unitpaymentcode' )
+		$item2 = $orderBaseServiceStub->create()->setCode( 'unitpaymentcode' )
 			->setType( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT )
 			->setAttributeItems( [new \Aimeos\MShop\Order\Item\Base\Service\Attribute\Standard()] );
 

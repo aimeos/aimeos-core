@@ -23,13 +23,13 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 
 		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
-		$this->servItem = $servManager->createItem();
+		$this->servItem = $servManager->create();
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Category::class )
 			->disableOriginalConstructor()->getMock();
 
 		$this->basket = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
-			->getSubManager( 'base' )->createItem();
+			->getSubManager( 'base' )->create();
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Category( $this->mockProvider, $this->context, $this->servItem );
 	}
@@ -223,7 +223,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$product = $productManager->find( $code );
 
 		$orderProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
-		$orderProduct = $orderProductManager->createItem()->copyFrom( $product )->setStockType( 'default' );
+		$orderProduct = $orderProductManager->create()->copyFrom( $product )->setStockType( 'default' );
 
 		return $orderProduct;
 	}

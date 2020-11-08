@@ -147,7 +147,7 @@ class Shipping
 	 */
 	protected function checkThreshold( \Aimeos\Map $orderProducts, string $threshold ) : bool
 	{
-		$sum = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
+		$sum = \Aimeos\MShop::create( $this->getContext(), 'price' )->create();
 
 		foreach( $orderProducts as $product )
 		{

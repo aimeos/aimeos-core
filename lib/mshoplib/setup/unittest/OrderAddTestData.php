@@ -86,7 +86,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		\Aimeos\MShop\Common\Manager\Iface $orderBaseManager, array $testdata )
 	{
 		$bases = [];
-		$locale = $localeManager->createItem();
+		$locale = $localeManager->create();
 		$customerIds = $this->getCustomerIds( $testdata );
 		$orderBaseAddressManager = $orderBaseManager->getSubManager( 'address', 'Standard' );
 
@@ -94,7 +94,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $testdata['order/base'] as $key => $dataset )
 		{
-			$bases['items'][$key] = $orderBaseManager->createItem();
+			$bases['items'][$key] = $orderBaseManager->create();
 			$bases['items'][$key]->setId( null );
 			$bases['items'][$key]->setComment( $dataset['comment'] );
 			$bases['items'][$key]->setCustomerReference( $dataset['customerref'] );
@@ -127,7 +127,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function addOrderBaseAddressData( \Aimeos\MShop\Common\Manager\Iface $manager,
 		array $bases, array $testdata )
 	{
-		$orderAddr = $manager->createItem();
+		$orderAddr = $manager->create();
 
 		foreach( $testdata['order/base/address'] as $dataset )
 		{
@@ -183,7 +183,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service', 'Standard' );
 		$orderBaseServiceAttrManager = $orderBaseServiceManager->getSubManager( 'attribute', 'Standard' );
 		$priceManager = \Aimeos\MShop::create( $this->additional, 'price' );
-		$ordServ = $orderBaseServiceManager->createItem();
+		$ordServ = $orderBaseServiceManager->create();
 
 		$orderBaseManager->begin();
 
@@ -208,7 +208,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 				$ordServ->setServiceId( $servIds[$dataset['servid']] );
 			}
 
-			$priceItem = $priceManager->createItem();
+			$priceItem = $priceManager->create();
 			$priceItem->setCurrencyId( $dataset['currencyid'] );
 			$priceItem->setValue( $dataset['price'] );
 			$priceItem->setCosts( $dataset['shipping'] );
@@ -260,7 +260,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base Item found for "%1$s" in order base product data', $dataset['baseid'] ) );
 			}
 
-			$ordProdItem = $orderBaseProductManager->createItem();
+			$ordProdItem = $orderBaseProductManager->create();
 
 			$ordProdItem->setId( null );
 			$ordProdItem->setBaseId( $bases['ids'][$dataset['baseid']] );
@@ -291,7 +291,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 				$ordProdItem->setOrderProductId( $ordProds[$dataset['ordprodid']] );
 			}
 
-			$priceItem = $priceManager->createItem();
+			$priceItem = $priceManager->create();
 			$priceItem->setCurrencyId( $dataset['currencyid'] );
 			$priceItem->setValue( $dataset['price'] );
 			$priceItem->setCosts( $dataset['shipping'] );
@@ -331,7 +331,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$attrCodes[$attrItem->getType()][] = $attrItem;
 		}
 
-		$ordProdAttr = $manager->createItem();
+		$ordProdAttr = $manager->create();
 
 		foreach( $testdata['order/base/product/attr'] as $dataset )
 		{
@@ -376,7 +376,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function addOrderBaseServiceAttributeData( \Aimeos\MShop\Common\Manager\Iface $manager,
 		array $testdata, array $ordServices )
 	{
-		$ordServAttr = $manager->createItem();
+		$ordServAttr = $manager->create();
 
 		foreach( $testdata['order/base/service/attr'] as $dataset )
 		{
@@ -414,7 +414,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$orderStatusManager = $orderManager->getSubManager( 'status', 'Standard' );
 
 		$ords = [];
-		$ordItem = $orderManager->createItem();
+		$ordItem = $orderManager->create();
 
 		$orderManager->begin();
 
@@ -437,7 +437,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ords[$key] = $ordItem->getId();
 		}
 
-		$ordStat = $orderStatusManager->createItem();
+		$ordStat = $orderStatusManager->create();
 		foreach( $testdata['order/status'] as $dataset )
 		{
 			if( !isset( $ords[$dataset['parentid']] ) ) {

@@ -57,7 +57,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCancel()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
 
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->cancel( $item );
@@ -66,7 +66,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCapture()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
 
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->capture( $item );
@@ -74,7 +74,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testProcess()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
 		$this->object->injectGlobalConfigBE( ['payment.url-success' => 'url'] );
 
 		$result = $this->object->process( $item, [] );
@@ -84,7 +84,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testRefund()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
 
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->refund( $item );
@@ -93,7 +93,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testRepay()
 	{
-		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->createItem();
+		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
 
 		$this->expectException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->repay( $item );
@@ -103,7 +103,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testSetConfigFE()
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
-			->getSubManager( 'base' )->getSubManager( 'service' )->createItem();
+			->getSubManager( 'base' )->getSubManager( 'service' )->create();
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $this->object->setConfigFE( $item, [] ) );
 	}

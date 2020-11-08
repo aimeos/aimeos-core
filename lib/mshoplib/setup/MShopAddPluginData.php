@@ -80,7 +80,7 @@ class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$num = $total = 0;
-		$item = $pluginManager->createItem();
+		$item = $pluginManager->create();
 
 		foreach( $data as $key => $dataset )
 		{
