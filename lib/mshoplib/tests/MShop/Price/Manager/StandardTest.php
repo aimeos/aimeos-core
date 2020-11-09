@@ -103,7 +103,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$items = $this->object->search( $search, ['price/property'] )->toArray();
 		$item2 = reset( $items );
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 1, count( $item->getPropertyItems() ) );
 		$this->assertEquals( 1, count( $item2->getPropertyItems() ) );
@@ -130,7 +130,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
-		$this->object->deleteItem( $itemSaved->getId() );
+		$this->object->delete( $itemSaved->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );

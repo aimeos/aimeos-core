@@ -62,15 +62,6 @@ interface Iface
 	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface;
 
 	/**
-	 * Deletes the item.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface|string $itemId Item object or ID of the item object
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 * @deprecated 2021.01
-	 */
-	public function deleteItem( $itemId ) : \Aimeos\MShop\Common\Manager\Iface;
-
-	/**
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items

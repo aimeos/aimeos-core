@@ -87,7 +87,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$this->assertEquals( 'test', $item->getValue() );
 		}
 
-		$this->object->deleteItem( 'unittest' );
+		$this->object->delete( 'unittest' );
 	}
 
 
@@ -100,7 +100,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'unittest', $item->getId() );
 		$this->assertEquals( 'test', $item->getValue() );
 
-		$this->object->deleteItem( 'unittest' );
+		$this->object->delete( 'unittest' );
 	}
 
 
@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->get( $item->getId() );
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 'unittest2', $item->getId() );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );

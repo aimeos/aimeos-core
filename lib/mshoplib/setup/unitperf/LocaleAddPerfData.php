@@ -72,7 +72,7 @@ class LocaleAddPerfData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 			foreach( $localeSiteManager->search( $search ) as $site )
 			{
 				$this->additional->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
-				$localeSiteManager->deleteItem( $site->getId() );
+				$localeSiteManager->delete( $site->getId() );
 			}
 
 			if( isset( $testdata['locale/site'] ) ) {

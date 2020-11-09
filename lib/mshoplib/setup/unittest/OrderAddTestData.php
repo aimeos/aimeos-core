@@ -44,7 +44,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'order.base.sitecode', array( 'unittest', 'unit' ) ) );
 
 		foreach( $orderBaseManager->search( $search ) as $order ) {
-			$orderBaseManager->deleteItem( $order->getId() );
+			$orderBaseManager->delete( $order->getId() );
 		}
 
 

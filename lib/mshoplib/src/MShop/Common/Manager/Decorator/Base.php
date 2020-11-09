@@ -103,19 +103,6 @@ abstract class Base
 
 
 	/**
-	 * Deletes the item.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface|string $itemId Item object or ID of the item object
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 */
-	public function deleteItem( $itemId ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		$this->manager->deleteItem( $itemId );
-		return $this;
-	}
-
-
-	/**
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items

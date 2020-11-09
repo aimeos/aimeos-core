@@ -110,9 +110,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->search( $search )->toArray();
 
 
-		$this->object->deleteItem( $product->getId() );
-		$listManager->deleteItem( $supListItem->getId() );
-		$productManager->deleteItem( $product->getId() );
+		$this->object->delete( $product->getId() );
+		$listManager->delete( $supListItem->getId() );
+		$productManager->delete( $product->getId() );
 
 
 		$search = $this->object->filter();

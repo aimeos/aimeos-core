@@ -301,7 +301,7 @@ class Standard extends Base
 	 * @param \Aimeos\MShop\Common\Item\Iface|string $itemId Item object or ID of the item object
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItem( $id ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $id ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$this->begin();
 		$this->lock();
@@ -333,7 +333,7 @@ class Standard extends Base
 	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		foreach( $itemIds as $itemId ) {
-			$this->getObject()->deleteItem( $itemId );
+			$this->getObject()->delete( $itemId );
 		}
 
 		return $this->deleteRefItems( $itemIds );

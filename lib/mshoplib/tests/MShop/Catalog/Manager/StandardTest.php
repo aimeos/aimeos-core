@@ -228,7 +228,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$caffein->setLabel( 'Caffein' );
 
 		$this->object->insertItem( $caffein, $cafecat->getId() );
-		$this->object->deleteItem( $caffein->getId() );
+		$this->object->delete( $caffein->getId() );
 
 		$this->assertEquals( 0, $tree->getNode()->parentid );
 		$this->assertEquals( 'categories', $categorycat->getCode() );
@@ -298,7 +298,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$resultSaved = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
-		$this->object->deleteItem( $itemSaved->getId() );
+		$this->object->delete( $itemSaved->getId() );
 
 		$context = \TestHelperMShop::getContext();
 
@@ -339,7 +339,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$child = $this->object->find( 'misc', ['product'] )->setCode( 'cmisc' )->setId( null );
 
 		$item = $this->object->insertItem( $item->addChild( $child ) );
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 1, count( $item->getChildren() ) );
 		$this->assertEquals( 3, count( $item->getListItems() ) );

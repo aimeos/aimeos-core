@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$itemExp = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId(), array( 'customer/group' ) );
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $itemSaved );
@@ -211,7 +211,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item2 = $this->object->find( 'xyz', ['customer/address'] );
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 2, count( $item->getAddressItems() ) );
 		$this->assertEquals( 2, count( $item2->getAddressItems() ) );
@@ -228,7 +228,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item2 = $this->object->find( 'xyz', ['customer/property'] );
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 1, count( $item->getPropertyItems() ) );
 		$this->assertEquals( 1, count( $item2->getPropertyItems() ) );

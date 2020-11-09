@@ -122,7 +122,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->get( $item->getId() );
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertTrue( $item->getTimestamp() === null );

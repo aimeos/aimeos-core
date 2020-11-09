@@ -118,18 +118,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
-	 * Deletes an item from storage.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface|string $itemId Item object or ID of the item object
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 */
-	public function deleteItem( $itemId ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->getObject()->deleteItems( [$itemId] );
-	}
-
-
-	/**
 	 * Adds or updates an item object or a list of them.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved

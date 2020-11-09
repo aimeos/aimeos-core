@@ -123,7 +123,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( sprintf( 'No order base address item found for type "%1$s".', $type ) );
 		}
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 		$firstname = $item->getFirstname();
 		$oldId = $item->getId();
 

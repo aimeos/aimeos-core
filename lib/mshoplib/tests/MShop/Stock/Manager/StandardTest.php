@@ -75,7 +75,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
-		$this->object->deleteItem( $itemSaved->getId() );
+		$this->object->delete( $itemSaved->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -188,7 +188,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->decrease( ['-1' => 5], 'unit_type1' );
 		$actual = $this->object->get( $stockItem->getId() );
 
-		$this->object->deleteItem( $stockItem->getId() );
+		$this->object->delete( $stockItem->getId() );
 
 		$this->assertEquals( -5, $actual->getStockLevel() );
 	}
@@ -206,7 +206,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->increase( ['-1' => 5], 'unit_type1' );
 		$actual = $this->object->get( $stockItem->getId() );
 
-		$this->object->deleteItem( $stockItem->getId() );
+		$this->object->delete( $stockItem->getId() );
 
 		$this->assertEquals( 5, $actual->getStockLevel() );
 	}

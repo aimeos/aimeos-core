@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
-		$this->object->deleteItem( $itemSaved->getId() );
+		$this->object->delete( $itemSaved->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -239,7 +239,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
 		$results = $statusManager->search( $search )->toArray();
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 0, count( $results ) );
 
@@ -252,7 +252,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
 		$results = $statusManager->search( $search )->toArray();
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		if( ( $statusItem = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No status item found' );
@@ -288,7 +288,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
 		$results = $statusManager->search( $search )->toArray();
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 0, count( $results ) );
 
@@ -301,7 +301,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
 		$results = $statusManager->search( $search )->toArray();
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		if( ( $statusItem = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No status item found' );

@@ -67,7 +67,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
-		$this->object->deleteItem( $itemSaved->getId() );
+		$this->object->delete( $itemSaved->getId() );
 
 		$context = \TestHelperMShop::getContext();
 

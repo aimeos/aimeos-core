@@ -230,7 +230,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		foreach( $attributes as $attribute ) {
 			//remove attr where txn ids as keys, because next test with same txn id would fail
 			if( $attribute->getCode() === '111111110' || $attribute->getCode() === '111111111' ) {
-				$attrManager->deleteItem( $attribute->getId() );
+				$attrManager->delete( $attribute->getId() );
 			}
 
 			$attributeList[$attribute->getCode()] = $attribute;

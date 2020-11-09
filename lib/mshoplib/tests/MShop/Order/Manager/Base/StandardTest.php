@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$itemUpdPrice = $itemUpd->getPrice();
 
 
-		$this->object->deleteItem( $itemSaved->getId() );
+		$this->object->delete( $itemSaved->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -643,7 +643,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$newBasketId = $basket->getId();
 
 		$basket = $this->object->load( $newBasketId );
-		$this->object->deleteItem( $newBasketId );
+		$this->object->delete( $newBasketId );
 
 
 		$this->assertEquals( $item->getCustomerId(), $basket->getCustomerId() );
@@ -692,7 +692,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->store( $basket );
 		$newBasket = $this->object->load( $newBasketId );
 
-		$this->object->deleteItem( $newBasketId );
+		$this->object->delete( $newBasketId );
 
 
 		$newAddresses = $newBasket->getAddresses();
@@ -741,7 +741,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$newBasketId = $basket->getId();
 
 		$basket = $this->object->load( $newBasketId );
-		$this->object->deleteItem( $newBasketId );
+		$this->object->delete( $newBasketId );
 
 		$this->assertEquals( $item->getCustomerId(), $basket->getCustomerId() );
 		$this->assertEquals( $basket->getLocale()->getSiteId(), $basket->getSiteId() );
@@ -768,7 +768,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
 		$this->object->store( $basket, \Aimeos\MShop\Order\Item\Base\Base::PARTS_NONE );
-		$this->object->deleteItem( $basket->getId() );
+		$this->object->delete( $basket->getId() );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->load( $basket->getId() );
@@ -786,7 +786,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$newBasketId = $basket->getId();
 
 		$basket = $this->object->load( $newBasketId, \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
-		$this->object->deleteItem( $newBasketId );
+		$this->object->delete( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getAddresses() ) );
 		$this->assertGreaterThan( 0, count( $basket->getProducts() ) );
@@ -805,7 +805,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$newBasketId = $basket->getId();
 
 		$basket = $this->object->load( $newBasketId, \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
-		$this->object->deleteItem( $newBasketId );
+		$this->object->delete( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getProducts() ) );
 		$this->assertEquals( [], $basket->getAddresses()->toArray() );
@@ -825,7 +825,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$newBasketId = $basket->getId();
 
 		$basket = $this->object->load( $newBasketId, \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
-		$this->object->deleteItem( $newBasketId );
+		$this->object->delete( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getServices() ) );
 		$this->assertGreaterThan( 0, count( $basket->getProducts() ) );
@@ -859,7 +859,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->store( $basket );
 		$newBasket = $this->object->load( $basket->getId() );
-		$this->object->deleteItem( $newBasket->getId() );
+		$this->object->delete( $newBasket->getId() );
 
 		$this->assertEquals( '52.50', $newBasket->getPrice()->getValue() );
 		$this->assertEquals( '1.50', $newBasket->getPrice()->getCosts() );

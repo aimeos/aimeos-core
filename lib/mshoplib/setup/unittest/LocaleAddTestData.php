@@ -127,7 +127,7 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 		foreach( array_reverse( $sites ) as $site )
 		{
 			$this->additional->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
-			$localeSiteManager->deleteItem( $site->getId() );
+			$localeSiteManager->delete( $site->getId() );
 		}
 	}
 }

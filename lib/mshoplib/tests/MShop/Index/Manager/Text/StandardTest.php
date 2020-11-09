@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$product = $productManager->find( 'CNC', ['text'] );
 
-		$this->object->deleteItem( $product->getId() );
+		$this->object->delete( $product->getId() );
 		$this->object->saveItem( $product );
 
 		$search = $this->object->filter();
@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$product = $productManager->find( 'IJKL', ['text'] );
 
-		$this->object->deleteItem( $product->getId() );
+		$this->object->delete( $product->getId() );
 		$this->object->saveItem( $product );
 
 		$search = $this->object->filter();

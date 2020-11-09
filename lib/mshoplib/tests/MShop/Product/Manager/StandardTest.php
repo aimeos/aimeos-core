@@ -209,7 +209,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId(), ['text'] );
 
-		$this->object->deleteItem( $itemUpd->deleteListItems( $itemUpd->getListItems( 'text' )->toArray(), true ) );
+		$this->object->delete( $itemUpd->deleteListItems( $itemUpd->getListItems( 'text' )->toArray(), true ) );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -268,7 +268,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item2 = $this->object->find( 'CNE', ['product/property'] );
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 4, count( $item->getPropertyItems() ) );
 		$this->assertEquals( 4, count( $item2->getPropertyItems() ) );
@@ -306,7 +306,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $manager->saveItem( $item );
 		$item3 = $manager->get( $item->getId(), ['text'] );
 
-		$manager->deleteItem( $item->getId() );
+		$manager->delete( $item->getId() );
 
 
 		$this->assertEquals( 0, count( $item->getRefItems( 'text', 'name', 'default', false ) ) );
@@ -333,7 +333,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$manager->saveItem( $item );
 		$manager->get( $item->getId() );
-		$manager->deleteItem( $item->getId() );
+		$manager->delete( $item->getId() );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
 		$manager->get( $item->getId() );

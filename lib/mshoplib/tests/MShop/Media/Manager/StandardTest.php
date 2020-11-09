@@ -194,7 +194,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -248,7 +248,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'media.label', 'path/to/folder/example1-1.jpg' ) );
 		$item2 = $this->object->search( $search, ['media/property'] )->first();
 
-		$this->object->deleteItem( $item->getId() );
+		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 2, count( $item->getPropertyItems() ) );
 		$this->assertEquals( 2, count( $item2->getPropertyItems() ) );

@@ -43,7 +43,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 	protected function tearDown() : void
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'product' );
-		$manager->deleteItem( $manager->find( 'WTF' )->getId() );
+		$manager->delete( $manager->find( 'WTF' )->getId() );
 
 		unset( $this->object, $this->product, $this->order, $this->context );
 	}
