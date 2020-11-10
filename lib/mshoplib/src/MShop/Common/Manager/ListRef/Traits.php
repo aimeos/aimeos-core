@@ -120,14 +120,14 @@ trait Traits
 	/**
 	 * Removes the items referenced by the given list items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface[] $items List of items with deleted list items
+	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface[]|\Aimeos\Map|array $items List of items with deleted list items
 	 * @return \Aimeos\MShop\Common\Manager\ListRef\Iface Manager object for method chaining
 	 */
-	protected function deleteRefItems( array $items ) : \Aimeos\MShop\Common\Manager\ListRef\Iface
+	protected function deleteRefItems( $items ) : \Aimeos\MShop\Common\Manager\ListRef\Iface
 	{
-		if( empty( $items ) ) {
-			return $this;
-		}
+		if( is_map( $items ) ) { $items = $items->toArray(); }
+		if( !is_array( $items ) ) { $items = [$items]; }
+		if( empty( $items ) ) { return $this; }
 
 		$map = [];
 

@@ -141,12 +141,32 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$func = $search->createFunction( 'index.attribute:allof', [$attrIds] );
 		$search->setConditions( $search->compare( '!=', $func, null ) );
-		$search->setSortations( array( $search->sort( '+', 'product.code' ) ) );
 
 		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 'CNE', $result->first()->getCode() );
+	}
+
+
+	public function testSearchItemsAllofArticle()
+	{
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
+
+		$attrIds = [
+			$manager->find( '30', [], 'product', 'length' )->getId(),
+			$manager->find( '30', [], 'product', 'width' )->getId()
+		];
+
+		$search = $this->object->filter();
+
+		$func = $search->createFunction( 'index.attribute:allof', [$attrIds] );
+		$search->setConditions( $search->compare( '!=', $func, null ) );
+
+		$result = $this->object->search( $search, [] );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 'U:TEST', $result->first()->getCode() );
 	}
 
 

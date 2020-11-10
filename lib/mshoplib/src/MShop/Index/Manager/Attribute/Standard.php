@@ -35,10 +35,12 @@ class Standard
 			'code' => 'index.attribute:allof()',
 			'internalcode' => '( SELECT mpro_allof."id" FROM mshop_product AS mpro_allof
 				WHERE mpro."id" = mpro_allof."id" AND (
-					SELECT COUNT(DISTINCT mindat_allof."attrid")
+					SELECT COUNT(mindat_allof."attrid")
 					FROM "mshop_index_attribute" AS mindat_allof
-					WHERE mpro."id" = mindat_allof."prodid" AND :site
-					AND mindat_allof."attrid" IN ( $1 ) ) = $2
+					WHERE mpro."id" = mindat_allof."prodid" AND :site AND mindat_allof."attrid" IN ( $1 )
+					GROUP BY mindat_allof."prodid"
+					HAVING COUNT(DISTINCT mindat_allof."artid") = 1
+					) = $2
 				)',
 			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
 			'type' => 'null',
@@ -691,12 +693,13 @@ class Standard
 				}
 
 				$stmt->bind( 1, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 2, $refItem->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 3, $listItem->getType() );
-				$stmt->bind( 4, $refItem->getType() );
-				$stmt->bind( 5, $refItem->getCode() );
-				$stmt->bind( 6, $date ); // mtime
-				$stmt->bind( 7, $siteid );
+				$stmt->bind( 2, $product->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 3, $refItem->getId() );
+				$stmt->bind( 4, $listItem->getType() );
+				$stmt->bind( 5, $refItem->getType() );
+				$stmt->bind( 6, $refItem->getCode() );
+				$stmt->bind( 7, $date ); // mtime
+				$stmt->bind( 8, $siteid );
 
 				try {
 					$stmt->execute()->finish();

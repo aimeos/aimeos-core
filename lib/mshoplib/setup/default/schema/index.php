@@ -21,6 +21,7 @@ return array(
 			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'prodid', 'integer', [] );
+			$table->addColumn( 'artid', 'integer', ['notnull' => false] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'attrid', 'string', ['length' => 36, 'customSchemaOptions' => ['charset' => 'binary']] );
 			$table->addColumn( 'listtype', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );

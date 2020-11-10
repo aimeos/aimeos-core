@@ -82,13 +82,11 @@ abstract class DBBase
 	/**
 	 * Removes multiple items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items Item object, ID or a list of them
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		if( empty( $itemIds ) ) { return $this; }
-
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->deleteItems( $itemIds );
 		}
@@ -264,11 +262,9 @@ abstract class DBBase
 	 * @param string $name Name of the ID column
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function deleteItemsBase( array $ids, string $path, bool $siteidcheck = true,
+	protected function deleteItemsBase( $ids, string $path, bool $siteidcheck = true,
 		string $name = 'prodid' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		if( empty( $ids ) ) { return $this; }
-
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->deleteItems( $ids );
 		}

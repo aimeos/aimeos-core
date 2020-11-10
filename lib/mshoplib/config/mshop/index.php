@@ -19,18 +19,18 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_index_attribute" (
-							"prodid", "attrid", "listtype", "type", "code",
+							"prodid", "artid", "attrid", "listtype", "type", "code",
 							"mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 					'pgsql' => '
 						INSERT INTO "mshop_index_attribute" (
-							"prodid", "attrid", "listtype", "type", "code",
+							"prodid", "artid", "attrid", "listtype", "type", "code",
 							"mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?
 						)
 						ON CONFLICT DO NOTHING
 					',

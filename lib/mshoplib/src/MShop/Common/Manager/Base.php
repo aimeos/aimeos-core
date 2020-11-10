@@ -923,22 +923,24 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Deletes items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items List of item objects or IDs of the items
 	 * @param string $cfgpath Configuration path to the SQL statement
-	 * @param bool $siteidcheck If siteid should be used in the statement
+	 * @param bool $siteid If siteid should be used in the statement
 	 * @param string $name Name of the ID column
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function deleteItemsBase( array $itemIds, string $cfgpath, bool $siteidcheck = true,
+	protected function deleteItemsBase( $items, string $cfgpath, bool $siteid = true,
 		string $name = 'id' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		if( empty( $itemIds ) ) { return $this; }
+		if( is_map( $items ) ) { $items = $items->toArray(); }
+		if( !is_array( $items ) ) { $items = [$items]; }
+		if( empty( $items ) ) { return $this; }
 
 		$context = $this->getContext();
 		$dbname = $this->getResourceName();
 
 		$search = $this->getObject()->filter();
-		$search->setConditions( $search->compare( '==', $name, $itemIds ) );
+		$search->setConditions( $search->compare( '==', $name, $items ) );
 
 		$types = array( $name => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 		$translations = array( $name => '"' . $name . '"' );
@@ -953,7 +955,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		{
 			$stmt = $conn->create( $sql );
 
-			if( $siteidcheck ) {
+			if( $siteid ) {
 				$stmt->bind( 1, $context->getLocale()->getSiteId() );
 			}
 
