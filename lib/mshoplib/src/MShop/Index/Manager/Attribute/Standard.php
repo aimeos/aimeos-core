@@ -35,7 +35,7 @@ class Standard
 			'code' => 'index.attribute:allof()',
 			'internalcode' => '( SELECT mpro_allof."id" FROM mshop_product AS mpro_allof
 				WHERE mpro."id" = mpro_allof."id" AND (
-					SELECT COUNT(mindat_allof."attrid")
+					SELECT COUNT(DISTINCT mindat_allof."attrid")
 					FROM "mshop_index_attribute" AS mindat_allof
 					WHERE mpro."id" = mindat_allof."prodid" AND :site AND mindat_allof."attrid" IN ( $1 )
 					GROUP BY mindat_allof."prodid"
