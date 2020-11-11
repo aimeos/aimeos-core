@@ -471,7 +471,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$ids = $manager->search( $search )->keys()->toArray();
-		$manager->deleteItems( $ids );
+		$manager->delete( $ids );
 
 
 		$search = $listManager->filter();
@@ -482,7 +482,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$listManager->deleteItems( $listManager->search( $search )->toArray() );
+		$listManager->delete( $listManager->search( $search )->toArray() );
 	}
 
 
@@ -530,7 +530,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 				$listIds = array_merge( $listIds, $map[$refId] );
 			}
 
-			$listManager->deleteItems( $listIds );
+			$listManager->delete( $listIds );
 
 
 			$count = count( $result );
@@ -552,7 +552,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$listManager->deleteItems( $listManager->search( $search )->toArray() );
+		$listManager->delete( $listManager->search( $search )->toArray() );
 	}
 
 

@@ -85,10 +85,10 @@ abstract class DBBase
 	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items Item object, ID or a list of them
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
-			$submanager->deleteItems( $itemIds );
+			$submanager->delete( $itemIds );
 		}
 
 		return $this;
@@ -266,7 +266,7 @@ abstract class DBBase
 		string $name = 'prodid' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
-			$submanager->deleteItems( $ids );
+			$submanager->delete( $ids );
 		}
 
 		return parent::deleteItemsBase( $ids, $path, $siteidcheck, $name );

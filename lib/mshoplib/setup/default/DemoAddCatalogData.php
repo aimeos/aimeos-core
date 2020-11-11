@@ -70,7 +70,7 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'catalog.code', 'demo-' ) );
-		$manager->deleteItems( $manager->search( $search )->getId()->toArray() );
+		$manager->delete( $manager->search( $search )->getId()->toArray() );
 
 
 		if( $value === '1' )

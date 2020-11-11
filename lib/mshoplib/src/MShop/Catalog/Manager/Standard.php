@@ -296,20 +296,28 @@ class Standard extends Base
 
 
 	/**
-	 * Deletes the item.
+	 * Removes multiple items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface|string $itemId Item object or ID of the item object
+	 * @param \Aimeos\MShop\Common\Item\Iface|array|string $items List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function delete( $id ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
 	{
+		if( is_map( $items ) ) { $items = $items->toArray(); }
+		if( !is_array( $items ) ) { $items = [$items]; }
+		if( empty( $items ) ) { return $this; }
+
 		$this->begin();
 		$this->lock();
 
 		try
 		{
 			$siteid = $this->getContext()->getLocale()->getSiteId();
-			$this->createTreeManager( $siteid )->deleteNode( $id );
+
+			foreach( $items as $item ) {
+				$this->createTreeManager( $siteid )->deleteNode( (string) $item );
+			}
+
 			$this->unlock();
 			$this->commit();
 		}
@@ -320,23 +328,7 @@ class Standard extends Base
 			throw $e;
 		}
 
-		return $this;
-	}
-
-
-	/**
-	 * Removes multiple items.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
-	 */
-	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		foreach( $itemIds as $itemId ) {
-			$this->getObject()->delete( $itemId );
-		}
-
-		return $this->deleteRefItems( $itemIds );
+		return $this->deleteRefItems( $items );
 	}
 
 
@@ -845,7 +837,7 @@ class Standard extends Base
 			$rmIds[] = $child->getId();
 		}
 
-		$this->deleteItems( $rmIds );
+		$this->delete( $rmIds );
 
 		foreach( $item->getChildren() as $child )
 		{

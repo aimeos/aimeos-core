@@ -372,12 +372,16 @@ class Standard
 	/**
 	 * Removes multiple items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @param \Aimeos\MShop\Common\Item\Iface|array|string $items List of item objects or IDs of the items
 	 * @return \Aimeos\MAdmin\Cache\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$this->getCache()->deleteMultiple( $itemIds );
+		if( is_map( $items ) ) { $items = $items->toArray(); }
+		if( !is_array( $items ) ) { $items = [$items]; }
+		if( empty( $items ) ) { return $this; }
+
+		$this->getCache()->deleteMultiple( $items );
 		return $this;
 	}
 

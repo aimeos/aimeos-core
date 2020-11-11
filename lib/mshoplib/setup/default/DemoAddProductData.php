@@ -69,10 +69,10 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 				$rmIds = $rmIds->merge( $item->getRefItems( $domain, null, null, false )->keys() );
 			}
 
-			\Aimeos\MShop::create( $context, $domain )->deleteItems( $rmIds->toArray() );
+			\Aimeos\MShop::create( $context, $domain )->delete( $rmIds->toArray() );
 		}
 
-		$manager->deleteItems( $products->toArray() );
+		$manager->delete( $products->toArray() );
 		$this->removeAttributeItems();
 		$this->removeStockItems();
 
@@ -257,7 +257,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'attribute.label', 'Demo:' ) );
 
-		$manager->deleteItems( $manager->search( $search )->toArray() );
+		$manager->delete( $manager->search( $search )->toArray() );
 	}
 
 
@@ -271,6 +271,6 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'stock.productcode', 'demo-' ) );
 
-		$manager->deleteItems( $manager->search( $search )->toArray() );
+		$manager->delete( $manager->search( $search )->toArray() );
 	}
 }

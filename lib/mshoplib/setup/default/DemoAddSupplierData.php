@@ -59,7 +59,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$search->setConditions( $search->compare( '=~', 'supplier.code', 'demo-' ) );
 		$services = $manager->search( $search );
 
-		$manager->deleteItems( $services->toArray() );
+		$manager->delete( $services->toArray() );
 
 
 		if( $value === '1' )

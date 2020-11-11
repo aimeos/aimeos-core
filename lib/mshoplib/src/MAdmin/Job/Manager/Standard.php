@@ -344,7 +344,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MAdmin\Job\Manager\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** madmin/job/manager/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database

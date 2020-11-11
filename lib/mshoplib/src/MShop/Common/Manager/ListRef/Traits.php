@@ -145,7 +145,7 @@ trait Traits
 		}
 
 		foreach( $map as $domain => $ids ) {
-			\Aimeos\MShop::create( $this->getContext(), $domain )->begin()->deleteItems( $ids )->commit();
+			\Aimeos\MShop::create( $this->getContext(), $domain )->begin()->delete( $ids )->commit();
 		}
 
 		return $this;
@@ -268,10 +268,10 @@ trait Traits
 				$refManager[$refDomain] = \Aimeos\MShop::create( $context, $refDomain );
 				$refManager[$refDomain]->begin();
 
-				$refManager[$refDomain]->deleteItems( $ids );
+				$refManager[$refDomain]->delete( $ids );
 			}
 
-			$listManager->deleteItems( $rmListIds );
+			$listManager->delete( $rmListIds );
 
 
 			foreach( $item->getListItems( null, null, null, false ) as $listItem )

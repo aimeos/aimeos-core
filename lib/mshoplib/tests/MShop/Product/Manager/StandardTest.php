@@ -41,8 +41,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = ( new \Aimeos\MShop\Product\Item\Standard() )->setId( -1 );
 
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->deleteItems( [-1] ) );
-		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->deleteItems( [$item] ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->delete( [-1] ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->delete( [$item] ) );
 	}
 
 

@@ -91,7 +91,7 @@ trait Traits
 	{
 		$pos = 0;
 		$manager = $this->getObject()->getSubManager( 'address' );
-		$manager->deleteItems( $item->getAddressItemsDeleted()->keys()->toArray() );
+		$manager->delete( $item->getAddressItemsDeleted()->keys()->toArray() );
 
 		foreach( $item->getAddressItems() as $idx => $addrItem )
 		{

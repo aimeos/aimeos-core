@@ -161,7 +161,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Common\Manager\Type\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->deleteItemsBase( $itemIds, $this->getConfigPath() . 'delete' );
 	}

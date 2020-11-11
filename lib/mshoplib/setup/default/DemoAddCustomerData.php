@@ -49,7 +49,7 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$search->setConditions( $search->compare( '==', 'customer.code', 'demo@example.com' ) );
 		$services = $manager->search( $search );
 
-		$manager->deleteItems( $services->toArray() );
+		$manager->delete( $services->toArray() );
 
 
 		if( $value === '1' )

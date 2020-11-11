@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testDeleteItems()
 	{
 		$this->expectException( 'Aimeos\MW\Tree\Exception' );
-		$this->object->deleteItems( array( -1 ) );
+		$this->object->delete( array( -1 ) );
 	}
 
 

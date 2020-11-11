@@ -299,19 +299,21 @@ class Standard
 	/**
 	 * Removes multiple items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @param \Aimeos\MShop\Common\Item\Iface|array|string $items List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Locale\Manager\Site\Iface Manager object for chaining method calls
 	 */
-	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$siteIds = [];
-		$search = $this->getObject()->filter()->setSlice( 0, count( $itemIds ) );
-		$search->setConditions( $search->compare( '==', 'locale.site.id', $itemIds ) );
+		if( is_map( $items ) ) { $items = $items->toArray(); }
+		if( !is_array( $items ) ) { $items = [$items]; }
+		if( empty( $items ) ) { return $this; }
 
-		foreach( $this->getObject()->search( $search ) as $item ) {
-			$siteIds[] = $item->getSiteId();
-		}
 
+		$filter = $this->getObject()->filter()
+			->add( ['locale.site.id' => $items] )
+			->slice( 0, count( $items ) );
+
+		$siteIds = $this->getObject()->search( $filter )->getSiteId()->toArray();
 		$this->getObject()->clear( $siteIds );
 
 
@@ -347,7 +349,7 @@ class Standard
 		 */
 		$path = 'mshop/locale/manager/site/standard/delete';
 
-		return $this->deleteItemsBase( $itemIds, $path, false );
+		return $this->deleteItemsBase( $items, $path, false );
 	}
 
 

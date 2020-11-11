@@ -103,19 +103,6 @@ abstract class Base
 
 
 	/**
-	 * Removes multiple items.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
-	 */
-	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		$this->manager->deleteItems( $itemIds );
-		return $this;
-	}
-
-
-	/**
 	 * Creates a filter object.
 	 *
 	 * @param bool $default Add default criteria

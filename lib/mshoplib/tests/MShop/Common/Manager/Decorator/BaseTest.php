@@ -123,7 +123,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testDeleteItems()
 	{
-		$this->assertSame( $this->object, $this->object->deleteItems( [-1] ) );
+		$this->assertSame( $this->object, $this->object->delete( [-1] ) );
 	}
 
 

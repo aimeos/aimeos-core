@@ -121,7 +121,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testDeleteItems()
 	{
-		$this->assertEquals( $this->object, $this->object->deleteItems( [-1] ) );
+		$this->assertEquals( $this->object, $this->object->delete( [-1] ) );
 	}
 
 
