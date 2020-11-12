@@ -921,13 +921,15 @@ class Standard extends Base
 
 		foreach( $map as $id => $row )
 		{
-			$price = $priceManager->create();
-			$price->setCurrencyId( $row['order.base.currencyid'] );
-			$price->setValue( $row['order.base.price'] );
-			$price->setCosts( $row['order.base.costs'] );
-			$price->setRebate( $row['order.base.rebate'] );
-			$price->setTaxValue( $row['order.base.taxvalue'] );
-			$price->setTaxFlag( $row['order.base.taxflag'] );
+			// don't use fromArray() or set*() methods to avoid recalculation of tax value
+			$price = $priceManager->create( [
+				'price.currencyid' => $row['order.base.currencyid'],
+				'price.value' => $row['order.base.price'],
+				'price.costs' => $row['order.base.costs'],
+				'price.rebate' => $row['order.base.rebate'],
+				'price.taxflag' => $row['order.base.taxflag'],
+				'price.taxvalue' => $row['order.base.taxvalue'],
+			] );
 
 			// you may need the site object! take care!
 			$localeItem = $localeManager->create();
