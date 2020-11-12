@@ -150,10 +150,10 @@ class Standard
 	/**
 	 * Removes multiple items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @param \Aimeos\Map|array|string $items List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		/** mshop/index/manager/catalog/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -184,7 +184,7 @@ class Standard
 		 * @see mshop/index/manager/catalog/standard/insert/ansi
 		 * @see mshop/index/manager/catalog/standard/search/ansi
 		 */
-		return $this->deleteItemsBase( $itemIds, 'mshop/index/manager/catalog/standard/delete' );
+		return $this->deleteItemsBase( $items, 'mshop/index/manager/catalog/standard/delete' );
 	}
 
 

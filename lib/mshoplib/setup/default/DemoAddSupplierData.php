@@ -71,7 +71,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for supplier domain', $path ) );
 			}
 
-			$this->save( $data );
+			$this->saveItems( $data );
 
 			$this->status( 'added' );
 		}

@@ -26,7 +26,7 @@ class Changelog
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $items Item object whose data should be saved
 	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\Map|\Aimeos\MShop\Common\Item\Ifacetem Updated item including the generated ID
+	 * @return \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface Updated item including the generated ID
 	 */
 	public function save( $items, bool $fetch = true )
 	{
