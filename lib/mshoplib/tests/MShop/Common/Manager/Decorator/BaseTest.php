@@ -196,28 +196,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveItem()
-	{
-		$item = \Aimeos\MShop::create( $this->context, 'product' )->create();
-
-		$this->stub->expects( $this->once() )->method( 'saveItem' )
-			->will( $this->returnValue( $item ) );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->saveItem( $item ) );
-	}
-
-
-	public function testSaveItems()
-	{
-		$item = \Aimeos\MShop::create( $this->context, 'product' )->create();
-
-		$this->stub->expects( $this->once() )->method( 'saveItems' )
-			->will( $this->returnValue( [$item] ) );
-
-		$this->assertEquals( [$item], $this->object->saveItems( [$item] ) );
-	}
-
-
 	public function testSearch()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'product' );

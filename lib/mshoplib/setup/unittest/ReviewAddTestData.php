@@ -76,7 +76,7 @@ class ReviewAddTestData extends \Aimeos\MW\Setup\Task\Base
 					->setDomain( $domain )->setOrderProductId( $ordProdItem->getId() )
 					->setCustomerId( $custId )->setRefId( $refId );
 
-				$manager->saveItem( $item, false );
+				$manager->save( $item, false );
 			}
 		}
 

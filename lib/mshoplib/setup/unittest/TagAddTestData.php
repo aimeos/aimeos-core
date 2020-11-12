@@ -62,11 +62,11 @@ class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$tagManager->begin();
 
 		foreach( $testdata['tag/type'] as $dataset ) {
-			$tagTypeManager->saveItem( $tagTypeManager->create()->fromArray( $dataset ), false );
+			$tagTypeManager->save( $tagTypeManager->create()->fromArray( $dataset ), false );
 		}
 
 		foreach( $testdata['tag'] as $dataset ) {
-			$tagManager->saveItem( $tagManager->create()->fromArray( $dataset ), false );
+			$tagManager->save( $tagManager->create()->fromArray( $dataset ), false );
 		}
 
 		$tagManager->commit();

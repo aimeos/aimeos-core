@@ -438,7 +438,7 @@ abstract class Base implements Iface
 	 */
 	protected function saveOrder( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return \Aimeos\MShop::create( $this->context, 'order' )->saveItem( $item );
+		return \Aimeos\MShop::create( $this->context, 'order' )->save( $item );
 	}
 
 
@@ -530,7 +530,7 @@ abstract class Base implements Iface
 			}
 
 			$listItem->setConfig( array_merge( $listItem->getConfig(), [$type => $data] ) );
-			$manager->saveItem( $item->addListItem( 'service', $listItem ) );
+			$manager->save( $item->addListItem( 'service', $listItem ) );
 		}
 
 		return $this;

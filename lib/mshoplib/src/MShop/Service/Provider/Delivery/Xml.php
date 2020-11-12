@@ -308,7 +308,7 @@ class Xml
 			}
 		}
 
-		$manager->saveItems( $items->toArray() );
+		$manager->save( $items->toArray() );
 		return $this;
 	}
 }

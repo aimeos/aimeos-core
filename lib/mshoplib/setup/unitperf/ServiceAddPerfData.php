@@ -153,7 +153,7 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 					$text->setLabel( $entry['name'] )->setContent( $entry['short'] );
 					$item->addListItem( 'text', clone $tListItem, $text );
 
-					$manager->saveItem( $item );
+					$manager->save( $item );
 				}
 			}
 		}

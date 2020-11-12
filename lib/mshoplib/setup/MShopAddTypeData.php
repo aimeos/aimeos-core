@@ -79,7 +79,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 				$type->setStatus( $dataset['status'] );
 
 				try {
-					$domainManager->saveItem( $type );
+					$domainManager->save( $type );
 					$num++;
 				} catch( \Exception $e ) { ; } // if type was already available
 			}

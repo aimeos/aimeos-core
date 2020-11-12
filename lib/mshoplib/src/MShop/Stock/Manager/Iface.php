@@ -37,13 +37,4 @@ interface Iface
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
 	public function increase( array $pairs, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface;
-
-	/**
-	 * Inserts the new stock item
-	 *
-	 * @param \Aimeos\MShop\Stock\Item\Iface $item Stock item which should be saved
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Stock\Item\Iface Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Stock\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Stock\Item\Iface;
 }

@@ -67,12 +67,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null );
 		$item->setProductId( '-1' );
-		$resultSaved = $this->object->saveItem( $item );
+		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setStockLevel( 50 );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->delete( $itemSaved->getId() );
@@ -183,7 +183,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$stockItem->setProductId( '-1' );
 		$stockItem->setStockLevel( 0 );
 
-		$this->object->saveItem( $stockItem );
+		$this->object->save( $stockItem );
 
 		$this->object->decrease( ['-1' => 5], 'unit_type1' );
 		$actual = $this->object->get( $stockItem->getId() );
@@ -201,7 +201,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$stockItem->setProductId( '-1' );
 		$stockItem->setStockLevel( 0 );
 
-		$this->object->saveItem( $stockItem );
+		$this->object->save( $stockItem );
 
 		$this->object->increase( ['-1' => 5], 'unit_type1' );
 		$actual = $this->object->get( $stockItem->getId() );

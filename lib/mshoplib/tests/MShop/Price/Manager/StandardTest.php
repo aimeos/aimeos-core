@@ -97,7 +97,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = reset( $items );
 
 		$item->setId( null )->setLabel( 'core:property-test' );
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 
 		$search->setConditions( $search->compare( '==', 'price.label', 'core:property-test' ) );
 		$items = $this->object->search( $search, ['price/property'] )->toArray();
@@ -122,12 +122,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null );
 		$item->setLabel( 'price label' );
-		$resultSaved = $this->object->saveItem( $item );
+		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setDomain( 'unittest' );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->delete( $itemSaved->getId() );

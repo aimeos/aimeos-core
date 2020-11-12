@@ -111,7 +111,7 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			$addr->setWebsite( $entry['website'] );
 			$addr->setBirthday( $entry['birthday'] );
 
-			$manager->saveItem( $item );
+			$manager->save( $item );
 
 			if( isset( $entry['delivery'] ) ) {
 				$this->saveAddressItems( $entry['delivery'], $item->getId() );
@@ -154,7 +154,7 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			$addr->setWebsite( $entry['website'] );
 			$addr->setBirthday( $entry['birthday'] );
 
-			$manager->saveItem( $addr );
+			$manager->save( $addr );
 		}
 	}
 }

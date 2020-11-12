@@ -149,14 +149,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setType( 'size' );
 		$item->setPosition( 0 );
 		$item->setStatus( 7 );
-		$resultSaved = $this->object->saveItem( $item );
+		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setDomain( 'tmpDomain' );
 		$itemExp->setCode( '106' );
 		$itemExp->setLabel( '106' );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->delete( $item->getId() );
@@ -205,7 +205,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->find( 'black', ['attribute/property'], 'product', 'color' );
 
 		$item->setId( null )->setCode( 'xyz' );
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 
 		$item2 = $this->object->find( 'xyz', ['attribute/property'], 'product', 'color' );
 

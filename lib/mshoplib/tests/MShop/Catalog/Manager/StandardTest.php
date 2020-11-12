@@ -295,7 +295,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setStatus( true );
-		$resultSaved = $this->object->saveItem( $itemExp );
+		$resultSaved = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->delete( $itemSaved->getId() );

@@ -21,12 +21,4 @@ namespace Aimeos\MShop\Order\Manager\Base\Address;
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface
 {
-	/**
-	 * Inserts the new order base address items
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $item order address item which should be saved
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Order\Item\Base\Address\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Address\Iface;
 }

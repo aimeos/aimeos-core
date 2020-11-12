@@ -75,7 +75,7 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$item->setPeriod( $dataset['period'] );
 			$item->setStatus( $dataset['status'] );
 
-			$subscriptionManager->saveItem( $item );
+			$subscriptionManager->save( $item );
 		}
 
 		$subscriptionManager->commit();

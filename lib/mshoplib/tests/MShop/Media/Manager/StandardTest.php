@@ -186,12 +186,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setUrl( 'test.jpg' );
 		$item->setPreview( 'xxxtest-preview.jpg' );
 
-		$resultSaved = $this->object->saveItem( $item );
+		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setPreview( 'test-preview.jpg' );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->delete( $item->getId() );
@@ -243,7 +243,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->search( $search, ['media/property'] )->first();
 
 		$item->setId( null )->setLabel( 'path/to/folder/example1-1.jpg' );
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 
 		$search->setConditions( $search->compare( '==', 'media.label', 'path/to/folder/example1-1.jpg' ) );
 		$item2 = $this->object->search( $search, ['media/property'] )->first();

@@ -47,7 +47,7 @@ class NolimitTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$item = $this->object->get( -1 );
-		$item = $this->object->saveItem( $item );
+		$item = $this->object->save( $item );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->delete( $item->getId() ) );
 	}

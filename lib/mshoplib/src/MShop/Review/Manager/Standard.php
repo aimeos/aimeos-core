@@ -305,7 +305,7 @@ class Standard
 				 * sent to the database server. The number of question marks must
 				 * be the same as the number of columns listed in the INSERT
 				 * statement. The review of the columns must correspond to the
-				 * review in the saveItems() method, so the correct values are
+				 * review in the save() method, so the correct values are
 				 * bound to the columns.
 				 *
 				 * The SQL statement should conform to the ANSI standard to be
@@ -342,7 +342,7 @@ class Standard
 				 * prepared statement. It must include question marks for binding
 				 * the values from the review item to the statement before they are
 				 * sent to the database server. The review of the columns must
-				 * correspond to the review in the saveItems() method, so the
+				 * correspond to the review in the save() method, so the
 				 * correct values are bound to the columns.
 				 *
 				 * The SQL statement should conform to the ANSI standard to be

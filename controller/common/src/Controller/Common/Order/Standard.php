@@ -145,7 +145,7 @@ class Standard
 		$item->setType( $type );
 		$item->setValue( $value );
 
-		$manager->saveItem( $item, false );
+		$manager->save( $item, false );
 
 		return $this;
 	}
@@ -419,7 +419,7 @@ class Standard
 			if( isset( $stock[$item->getProductId()] ) )
 			{
 				$item->setStockLevel( $stock[$item->getProductId()] );
-				$stockManager->saveItem( $item );
+				$stockManager->save( $item );
 			}
 		}
 
@@ -472,7 +472,7 @@ class Standard
 		}
 
 		$selStockItem->setStockLevel( $sum );
-		$stockManager->saveItem( $selStockItem, false );
+		$stockManager->save( $selStockItem, false );
 
 		return $this;
 	}

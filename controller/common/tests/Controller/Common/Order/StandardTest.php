@@ -99,10 +99,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$statusStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Status\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'saveItem' ) )
+			->setMethods( array( 'save' ) )
 			->getMock();
 
-		$statusStub->expects( $this->once() )->method( 'saveItem' );
+		$statusStub->expects( $this->once() )->method( 'save' );
 
 		\Aimeos\MShop::inject( 'order/status', $statusStub );
 
@@ -518,10 +518,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'saveItem' ) )
+			->setMethods( array( 'save' ) )
 			->getMock();
 
-		$stockStub->expects( $this->once() )->method( 'saveItem' )->with( $this->callback( function( $item ) {
+		$stockStub->expects( $this->once() )->method( 'save' )->with( $this->callback( function( $item ) {
 			return $item->getStockLevel() === 10;
 		} ) );
 
@@ -573,10 +573,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'saveItem' ) )
+			->setMethods( array( 'save' ) )
 			->getMock();
 
-		$stockStub->expects( $this->once() )->method( 'saveItem' )->with( $this->callback( function( $item ) {
+		$stockStub->expects( $this->once() )->method( 'save' )->with( $this->callback( function( $item ) {
 			return $item->getStockLevel() === 300;
 		} ) );
 

@@ -57,7 +57,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$product = $productManager->find( 'CNC', ['price'] );
 
 		$this->object->delete( $product->getId() );
-		$this->object->saveItem( $product );
+		$this->object->save( $product );
 
 		$search = $this->object->filter();
 

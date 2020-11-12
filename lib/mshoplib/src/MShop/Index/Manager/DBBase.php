@@ -167,42 +167,26 @@ abstract class DBBase
 		}
 
 		return $this;
-	 }
-
-
-	/**
-	 * Stores a new item into the index
-	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
-	 * @param bool $fetch True if the new ID should be set in the item
-	 * @return \Aimeos\MShop\Product\Item\Iface Saved item
-	 */
-	public function saveItem( \Aimeos\MShop\Product\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Product\Item\Iface
-	{
-		$item = $this->manager->saveItem( $item, true );
-		$this->rebuild( [$item->getId() => $item] );
-
-		return $item;
 	}
 
 
 	/**
-	 * Adds or updates a list of items
+	 * Adds or updates an item object or a list of them.
 	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface[] $items List of items whose data should be saved
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
 	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Product\Item\Iface[] Saved items
+	 * @return \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface Saved item or items
 	 */
-	public function saveItems( array $items, bool $fetch = true ) : array
+	public function save( $items, bool $fetch = true )
 	{
 		$list = [];
 
-		foreach( $this->manager->saveItems( $items, true ) as $item ) {
+		foreach( map( $this->manager->save( $items, true ) ) as $item ) {
 			$list[$item->getId()] = $item;
 		}
 
 		$this->rebuild( $list );
-		return $list;
+		return $items;
 	}
 
 

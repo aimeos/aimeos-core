@@ -260,12 +260,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setId( null );
 		$item->setLanguageId( 'es' );
 		$item->setCurrencyId( 'USD' );
-		$resultSaved = $this->object->saveItem( $item );
+		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setLanguageId( 'it' );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->delete( $item->getId() );

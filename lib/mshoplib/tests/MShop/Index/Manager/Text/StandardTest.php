@@ -140,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$product = $productManager->find( 'CNC', ['text'] );
 
 		$this->object->delete( $product->getId() );
-		$this->object->saveItem( $product );
+		$this->object->save( $product );
 
 		$search = $this->object->filter();
 
@@ -157,7 +157,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$product = $productManager->find( 'IJKL', ['text'] );
 
 		$this->object->delete( $product->getId() );
-		$this->object->saveItem( $product );
+		$this->object->save( $product );
 
 		$search = $this->object->filter();
 

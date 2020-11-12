@@ -100,7 +100,7 @@ trait Traits
 			}
 
 			$addrItem = $addrItem->setParentId( $item->getId() )->setPosition( $pos++ );
-			$addrItem = $manager->saveItem( $addrItem, $fetch );
+			$addrItem = $manager->save( $addrItem, $fetch );
 			$item = $item->addAddressItem( $addrItem, $idx );
 		}
 

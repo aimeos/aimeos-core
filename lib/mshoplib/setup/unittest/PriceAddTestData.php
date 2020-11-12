@@ -72,7 +72,7 @@ class PriceAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ptype->setLabel( $dataset['label'] );
 			$ptype->setStatus( $dataset['status'] );
 
-			$priceTypeManager->saveItem( $ptype );
+			$priceTypeManager->save( $ptype );
 		}
 
 		$propTypeItem = $propTypeManager->create();
@@ -84,7 +84,7 @@ class PriceAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$propTypeItem->setLabel( $dataset['label'] );
 			$propTypeItem->setStatus( $dataset['status'] );
 
-			$propTypeManager->saveItem( $propTypeItem );
+			$propTypeManager->save( $propTypeItem );
 		}
 
 		$price = $priceManager->create();
@@ -102,7 +102,7 @@ class PriceAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$price->setTaxRate( $dataset['taxrate'] );
 			$price->setStatus( $dataset['status'] );
 
-			$priceManager->saveItem( $price, false );
+			$priceManager->save( $price, false );
 		}
 
 		$priceManager->commit();

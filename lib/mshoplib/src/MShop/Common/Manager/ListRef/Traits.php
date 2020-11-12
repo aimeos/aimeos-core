@@ -286,7 +286,7 @@ trait Traits
 						$refManager[$refDomain]->begin();
 					}
 
-					$refItem = $refManager[$refDomain]->saveItem( $refItem );
+					$refItem = $refManager[$refDomain]->save( $refItem );
 					$listItem->setRefId( $refItem->getId() );
 				}
 
@@ -294,7 +294,7 @@ trait Traits
 					$listItem->setId( null ); // create new list item if copied
 				}
 
-				$listManager->saveItem( $listItem->setParentId( $item->getId() ), $fetch );
+				$listManager->save( $listItem->setParentId( $item->getId() ), $fetch );
 				// @todo update list item in $item
 			}
 

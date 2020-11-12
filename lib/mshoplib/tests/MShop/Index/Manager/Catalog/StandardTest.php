@@ -86,10 +86,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 
-		$product = $productManager->saveItem( $product->setId( null )->setCode( 'ModifiedCNC' ) );
-		$catListItem = $listManager->saveItem( $catListItem->setId( null )->setRefId( $product->getId() ) );
+		$product = $productManager->save( $product->setId( null )->setCode( 'ModifiedCNC' ) );
+		$catListItem = $listManager->save( $catListItem->setId( null )->setRefId( $product->getId() ) );
 
-		$this->object->saveItem( $product );
+		$this->object->save( $product );
 
 
 		$search = $this->object->filter();

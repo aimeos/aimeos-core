@@ -281,14 +281,14 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			if( $i % $slice === 0 )
 			{
-				$productManager->saveItems( $items );
+				$productManager->save( $items );
 				$this->addCatalogProducts( $catItems, $items, $num++ );
 				$this->addStock( $items );
 				$items = [];
 			}
 		}
 
-		$productManager->saveItems( $items );
+		$productManager->save( $items );
 		$this->addCatalogProducts( $catItems, $items, $num++ );
 		$this->addStock( $items );
 
@@ -506,7 +506,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$stockManager->begin();
-		$stockManager->saveItems( $list, false );
+		$stockManager->save( $list, false );
 		$stockManager->commit();
 	}
 
@@ -529,7 +529,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$manager = \Aimeos\MShop::create( $this->additional, $domain );
 
 		$manager->begin();
-		$item = $manager->saveItem( $item );
+		$item = $manager->save( $item );
 		$manager->commit();
 
 		return $item;

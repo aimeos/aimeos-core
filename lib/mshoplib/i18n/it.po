@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # alessandro massarelli <alessandro@botteega.com>, 2017
 msgid ""
@@ -355,7 +355,7 @@ msgstr ""
 
 #, php-format
 msgid ""
-"Item could not be saved using method saveItem(). Item ID not available."
+"Item could not be saved using method save(). Item ID not available."
 msgstr ""
 
 #, php-format
@@ -452,7 +452,7 @@ msgstr ""
 
 #, php-format
 msgid ""
-"Newly created site can not be saved using method \"saveItem()\". Try using "
+"Newly created site can not be saved using method \"save()\". Try using "
 "method \"insertItem()\" instead."
 msgstr ""
 

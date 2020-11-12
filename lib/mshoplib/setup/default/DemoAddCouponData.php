@@ -70,7 +70,7 @@ class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 				$item->setConfig( $entry['config'] );
 				$item->setStatus( $entry['status'] );
 
-				$manager->saveItem( $item );
+				$manager->save( $item );
 
 				$this->addCodes( $item->getId(), $entry['codes'] );
 			}
@@ -103,7 +103,7 @@ class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			$item->setDateStart( $entry['datestart'] );
 			$item->setDateEnd( $entry['dateend'] );
 
-			$manager->saveItem( $item );
+			$manager->save( $item );
 		}
 	}
 }

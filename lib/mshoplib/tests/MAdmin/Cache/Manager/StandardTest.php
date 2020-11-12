@@ -72,7 +72,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$this->object->saveItem( $this->object->create()->setId( 'unittest' )->setValue( 'test' ) );
+		$this->object->save( $this->object->create()->setId( 'unittest' )->setValue( 'test' ) );
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'cache.id', 'unittest' ) );
@@ -93,7 +93,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$this->object->saveItem( $this->object->create()->setId( 'unittest' )->setValue( 'test' ) );
+		$this->object->save( $this->object->create()->setId( 'unittest' )->setValue( 'test' ) );
 
 		$item = $this->object->get( 'unittest' );
 
@@ -109,12 +109,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->create();
 		$item->setId( 'unittest2' );
 		$item->setValue( 'test2' );
-		$resultSaved = $this->object->saveItem( $item );
+		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setValue( 'test3' );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $item->getId() );
 
 		$this->object->delete( $item->getId() );

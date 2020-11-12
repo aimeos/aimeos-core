@@ -90,14 +90,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$item->setId( null );
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 		$resultSaved = $itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 
 		$itemExp->setCity( 'Berlin' );
 		$itemExp->setState( 'Berlin' );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->delete( $itemSaved->getId() );

@@ -25,7 +25,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 		$manager = \Aimeos\MShop::create( $this->context, 'product' );
 		$newProduct = $manager->find( 'CNE' )->setId( null )->setLabel( 'Bad Product' )->setCode( 'WTF' );
-		$this->product = $manager->saveItem( $newProduct );
+		$this->product = $manager->save( $newProduct );
 
 		$manager = \Aimeos\MShop::create( $this->context, 'order/base' );
 		$search = $manager->filter()->setSlice( 0, 1 );
@@ -87,7 +87,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 			->create()->copyFrom( $this->product );
 
 		$this->product->setDateEnd( '1999-12-31 23:59:59' );
-		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->saveItem( $this->product );
+		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->save( $this->product );
 
 		$this->order->addProduct( $badItem );
 		$type = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
@@ -103,7 +103,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 			->create()->copyFrom( $this->product );
 
 		$this->product->setDateStart( '2100-12-31 23:59:59' );
-		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->saveItem( $this->product );
+		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->save( $this->product );
 
 		$this->order->addProduct( $badItem );
 		$type = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
@@ -118,7 +118,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		$badItem = \Aimeos\MShop::create( $this->context, 'order/base/product' )
 			->create()->copyFrom( $this->product );
 
-		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->saveItem( $this->product->setStatus( 0 ) );
+		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->save( $this->product->setStatus( 0 ) );
 
 		$this->order->addProduct( $badItem );
 		$badItemPosition = $this->order->getProducts()->firstKey();

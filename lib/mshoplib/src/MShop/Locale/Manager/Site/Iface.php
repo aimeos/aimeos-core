@@ -63,13 +63,4 @@ interface Iface
 	 */
 	public function moveItem( string $id, string $oldParentId = null, string $newParentId = null,
 		string $refId = null ) : \Aimeos\MShop\Locale\Manager\Site\Iface;
-
-	/**
-	 * Adds a new site to the storage or updates an existing one.
-	 *
-	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item New site item for saving to the storage
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Locale\Item\Site\Iface;
 }

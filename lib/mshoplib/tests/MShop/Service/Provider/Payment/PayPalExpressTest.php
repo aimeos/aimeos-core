@@ -56,10 +56,10 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$this->orderMock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
-			->setMethods( array( 'saveItem' ) )
+			->setMethods( array( 'save' ) )
 			->getMock();
 
-		$this->orderMock->expects( $this->any() )->method( 'saveItem' )->will( $this->returnArgument( 0 ) );
+		$this->orderMock->expects( $this->any() )->method( 'save' )->will( $this->returnArgument( 0 ) );
 
 		$this->context->getConfig()->set( 'mshop/order/manager/name', 'MockPayPal' );
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\MockPayPal', $this->orderMock );
@@ -216,7 +216,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			return $subject->getPaymentStatus() === \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED;
 		};
 
-		$this->orderMock->expects( $this->once() )->method( 'saveItem' )->with( $this->callback( $cmpFcn ) );
+		$this->orderMock->expects( $this->once() )->method( 'save' )->with( $this->callback( $cmpFcn ) );
 		$this->object->expects( $this->once() )->method( 'send' )->will( $this->returnValue( 'VERIFIED' ) );
 
 		$result = $this->object->updatePush( $request, $response );

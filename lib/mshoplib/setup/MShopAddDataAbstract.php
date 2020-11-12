@@ -87,7 +87,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 				$item->setPosition( $entry['position'] );
 				$item->setStatus( $entry['status'] );
 
-				$attrManager->saveItem( $item );
+				$attrManager->save( $item );
 				$id = $item->getId();
 			}
 			else
@@ -104,7 +104,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$listItem->setStatus( $entry['list-status'] );
 			$listItem->setRefId( $id );
 
-			$listManager->saveItem( $listItem, false );
+			$listManager->save( $listItem, false );
 
 
 			if( isset( $entry['attribute'] ) ) {
@@ -159,7 +159,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$item->setLabel( $entry['label'] );
 			$item->setStatus( $entry['status'] );
 
-			$mediaManager->saveItem( $item );
+			$mediaManager->save( $item );
 
 			$listItem->setId( null );
 			$listItem->setType( $entry['list-type'] );
@@ -170,7 +170,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$listItem->setStatus( $entry['list-status'] );
 			$listItem->setRefId( $item->getId() );
 
-			$listManager->saveItem( $listItem, false );
+			$listManager->save( $listItem, false );
 
 
 			if( isset( $entry['attribute'] ) ) {
@@ -227,7 +227,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$item->setTaxRate( $entry['taxrate'] );
 			$item->setStatus( $entry['status'] );
 
-			$mediaManager->saveItem( $item );
+			$mediaManager->save( $item );
 
 			$listItem->setId( null );
 			$listItem->setType( $entry['list-type'] );
@@ -238,7 +238,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$listItem->setStatus( $entry['list-status'] );
 			$listItem->setRefId( $item->getId() );
 
-			$listManager->saveItem( $listItem, false );
+			$listManager->save( $listItem, false );
 
 
 			if( isset( $entry['attribute'] ) ) {
@@ -291,7 +291,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$item->setLabel( $entry['label'] );
 			$item->setStatus( $entry['status'] );
 
-			$textManager->saveItem( $item );
+			$textManager->save( $item );
 
 			$listItem->setId( null );
 			$listItem->setType( $entry['list-type'] );
@@ -302,7 +302,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$listItem->setStatus( $entry['list-status'] );
 			$listItem->setRefId( $item->getId() );
 
-			$listManager->saveItem( $listItem, false );
+			$listManager->save( $listItem, false );
 
 
 			if( isset( $entry['attribute'] ) ) {
@@ -373,7 +373,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$listItem->setStatus( $entry['list-status'] );
 			$listItem->setRefId( $codes[$entry['code']] );
 
-			$listManager->saveItem( $listItem, false );
+			$listManager->save( $listItem, false );
 		}
 	}
 
@@ -405,7 +405,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$item->setStockLevel( $entry['stocklevel'] );
 			$item->setType( $entry['type'] );
 
-			$manager->saveItem( $item, false );
+			$manager->save( $item, false );
 		}
 	}
 

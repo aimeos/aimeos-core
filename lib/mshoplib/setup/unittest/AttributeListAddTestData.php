@@ -204,7 +204,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$listItem->setPosition( $dataset['pos'] );
 			$listItem->setStatus( $dataset['status'] );
 
-			$attributeListManager->saveItem( $listItem, false );
+			$attributeListManager->save( $listItem, false );
 		}
 
 		$attributeManager->commit();
@@ -259,7 +259,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$listItemType->setLabel( $dataset['label'] );
 			$listItemType->setStatus( $dataset['status'] );
 
-			$listTypeManager->saveItem( $listItemType );
+			$listTypeManager->save( $listItemType );
 		}
 	}
 

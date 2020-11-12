@@ -415,7 +415,7 @@ msgstr ""
 # error domain: catalog
 # error type: value, parameter, object etc. not available
 #, php-format
-msgid "Item could not be saved using method saveItem(). Item ID not available."
+msgid "Item could not be saved using method save(). Item ID not available."
 msgstr ""
 
 # error domain: search
@@ -545,7 +545,7 @@ msgstr ""
 # error domain: site
 # error type: action failed
 #, php-format
-msgid "Newly created site can not be saved using method \"saveItem()\". Try using method \"insertItem()\" instead."
+msgid "Newly created site can not be saved using method \"save()\". Try using method \"insertItem()\" instead."
 msgstr ""
 
 #, php-format

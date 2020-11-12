@@ -191,32 +191,6 @@ abstract class Base
 
 
 	/**
-	 * Adds or updates an item object.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object whose data should be saved
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		return $this->manager->saveItem( $item, $fetch );
-	}
-
-
-	/**
-	 * Adds or updates a list of item objects.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $items List of item object whose data should be saved
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface[] Saved item objects
-	 */
-	public function saveItems( array $items, bool $fetch = true ) : array
-	{
-		return $this->manager->saveItems( $items, $fetch );
-	}
-
-
-	/**
 	 * Searches for all items matching the given critera.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $filter Criteria object with conditions, sortations, etc.

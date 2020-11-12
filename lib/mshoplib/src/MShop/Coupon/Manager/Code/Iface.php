@@ -38,13 +38,4 @@ interface Iface
 	 * @return \Aimeos\MShop\Coupon\Manager\Code\Iface Manager object for chaining method calls
 	 */
 	public function increase( string $couponCode, int $amount ) : \Aimeos\MShop\Coupon\Manager\Code\Iface;
-
-	/**
-	 * Saves a modified code object to the storage.
-	 *
-	 * @param \Aimeos\MShop\Coupon\Item\Code\Iface $item Coupon code object
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Coupon\Item\Code\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Coupon\Item\Code\Iface;
 }

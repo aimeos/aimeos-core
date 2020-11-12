@@ -345,7 +345,7 @@ msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr ""
 
 #, php-format
-msgid "Item could not be saved using method saveItem(). Item ID not available."
+msgid "Item could not be saved using method save(). Item ID not available."
 msgstr ""
 
 #, php-format
@@ -441,7 +441,7 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr ""
 
 #, php-format
-msgid "Newly created site can not be saved using method \"saveItem()\". Try using method \"insertItem()\" instead."
+msgid "Newly created site can not be saved using method \"save()\". Try using method \"insertItem()\" instead."
 msgstr ""
 
 #, php-format

@@ -609,7 +609,7 @@ class Standard extends Base
 				 * sent to the database server. The number of question marks must
 				 * be the same as the number of columns listed in the INSERT
 				 * statement. The order of the columns must correspond to the
-				 * order in the saveItems() method, so the correct values are
+				 * order in the save() method, so the correct values are
 				 * bound to the columns.
 				 *
 				 * The SQL statement should conform to the ANSI standard to be
@@ -646,7 +646,7 @@ class Standard extends Base
 				 * prepared statement. It must include question marks for binding
 				 * the values from the order item to the statement before they are
 				 * sent to the database server. The order of the columns must
-				 * correspond to the order in the saveItems() method, so the
+				 * correspond to the order in the save() method, so the
 				 * correct values are bound to the columns.
 				 *
 				 * The SQL statement should conform to the ANSI standard to be
@@ -1035,7 +1035,7 @@ class Standard extends Base
 	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket,
 		int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		$basket = $this->getObject()->saveItem( $basket );
+		$basket = $this->getObject()->save( $basket );
 
 		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT
 			|| $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON

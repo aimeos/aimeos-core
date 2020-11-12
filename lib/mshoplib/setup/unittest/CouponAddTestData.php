@@ -70,7 +70,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$coupon->setConfig( $dataset['config'] );
 			$coupon->setStatus( $dataset['status'] );
 
-			$couponManager->saveItem( $coupon );
+			$couponManager->save( $coupon );
 			$couponIds[$key] = $coupon->getId();
 		}
 
@@ -89,7 +89,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ccode->setDateEnd( $dataset['end'] );
 			$ccode->setCode( $dataset['code'] );
 
-			$couponCodeManager->saveItem( $ccode, false );
+			$couponCodeManager->save( $ccode, false );
 		}
 	}
 
@@ -161,7 +161,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$orderCoupon->setProductId( $ordProdIds[$dataset['ordprodid']] );
 			$orderCoupon->setCode( $dataset['code'] );
 
-			$orderBaseCoupon->saveItem( $orderCoupon, false );
+			$orderBaseCoupon->save( $orderCoupon, false );
 		}
 	}
 }

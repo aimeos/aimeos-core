@@ -71,7 +71,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for supplier domain', $path ) );
 			}
 
-			$this->saveItems( $data );
+			$this->save( $data );
 
 			$this->status( 'added' );
 		}
@@ -98,7 +98,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			$item->setLabel( $entry['label'] );
 			$item->setStatus( $entry['status'] );
 
-			$manager->saveItem( $item );
+			$manager->save( $item );
 
 			if( isset( $entry['delivery'] ) ) {
 				$this->saveAddressItems( $entry['delivery'], $item->getId() );
@@ -144,7 +144,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			$addr->setTelefax( $entry['telefax'] );
 			$addr->setWebsite( $entry['website'] );
 
-			$manager->saveItem( $addr );
+			$manager->save( $addr );
 		}
 	}
 }

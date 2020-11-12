@@ -91,7 +91,7 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 				$media->setPreviews( (array) $dataset['preview'] );
 			}
 
-			$mediaManager->saveItem( $media, false );
+			$mediaManager->save( $media, false );
 		}
 
 		$mediaManager->commit();

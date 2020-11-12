@@ -66,13 +66,4 @@ interface Iface
 	 */
 	public function moveItem( string $id, string $oldParentId = null, string $newParentId = null,
 		string $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface;
-
-	/**
-	 * Updates an item object.
-	 *
-	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Item object whose data should be saved
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Catalog\Item\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Catalog\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Catalog\Item\Iface;
 }

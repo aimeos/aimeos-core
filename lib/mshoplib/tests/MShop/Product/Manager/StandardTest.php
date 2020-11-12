@@ -168,17 +168,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveItems()
+	public function testSave()
 	{
 		$search = $this->object->filter();
 		$conditions = array(
-				$search->compare( '==', 'product.code', 'CNC' ),
-				$search->compare( '==', 'product.editor', $this->editor )
+			$search->compare( '==', 'product.code', 'CNC' ),
+			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$items = $this->object->search( $search )->toArray();
 
-		$this->assertIsArray( $this->object->saveItems( $items ) );
+		$this->assertTrue( is_map( $this->object->save( $items ) ) );
 	}
 
 
@@ -201,12 +201,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null );
 		$item->setCode( 'CNC unit test' );
-		$resultSaved = $this->object->saveItem( $item );
+		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unit save test' )->addListItem( 'text', $listItem, $refItem );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId(), ['text'] );
 
 		$this->object->delete( $itemUpd->deleteListItems( $itemUpd->getListItems( 'text' )->toArray(), true ) );
@@ -264,7 +264,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->find( 'CNE', ['product/property'] );
 
 		$item->setId( null )->setCode( 'xyz' );
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 
 		$item2 = $this->object->find( 'CNE', ['product/property'] );
 
@@ -298,12 +298,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->addListItem( 'text', $listItem, $textItem );
 
-		$item = $manager->saveItem( $item );
+		$item = $manager->save( $item );
 		$item2 = $manager->get( $item->getId(), ['text'] );
 
 		$item->deleteListItem( 'text', $listItem, $textItem );
 
-		$item = $manager->saveItem( $item );
+		$item = $manager->save( $item );
 		$item3 = $manager->get( $item->getId(), ['text'] );
 
 		$manager->delete( $item->getId() );
@@ -331,7 +331,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setId( null );
 		$item->setCode( 'unittest' );
 
-		$manager->saveItem( $item );
+		$manager->save( $item );
 		$manager->get( $item->getId() );
 		$manager->delete( $item->getId() );
 

@@ -59,7 +59,7 @@ class StockAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 			foreach( $testdata[$domain] as $key => $entry )
 			{
 				$item = $manager->create()->fromArray( $entry );
-				$manager->saveItem( $item );
+				$manager->save( $item );
 			}
 		}
 	}
@@ -88,7 +88,7 @@ class StockAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 		}
 
 		$manager->begin();
-		$manager->saveItems( $items );
+		$manager->save( $items );
 		$manager->commit();
 	}
 

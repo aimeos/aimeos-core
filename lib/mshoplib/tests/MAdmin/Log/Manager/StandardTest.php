@@ -113,13 +113,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->create();
 		$item->setMessage( 'unit test message' );
 		$item->setRequest( 'unit test rqst' );
-		$resultSaved = $this->object->saveItem( $item );
+		$resultSaved = $this->object->save( $item );
 
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setRequest( 'unit test request' );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $item->getId() );
 
 		$this->object->delete( $item->getId() );
@@ -152,10 +152,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$mock = $this->getMockBuilder( \Aimeos\MAdmin\Log\Manager\Standard::class )
 			->setConstructorArgs( array( \TestHelperMShop::getContext() ) )
-			->setMethods( array( 'saveItem' ) )
+			->setMethods( array( 'save' ) )
 			->getMock();
 
-		$mock->expects( $this->once() )->method( 'saveItem' );
+		$mock->expects( $this->once() )->method( 'save' );
 
 		$mock->log( 'test' );
 	}

@@ -325,7 +325,7 @@ class Standard
 		 * sent to the database server. The number of question marks must
 		 * be the same as the number of columns listed in the INSERT
 		 * statement. The order of the columns must correspond to the
-		 * order in the saveItems() method, so the correct values are
+		 * order in the save() method, so the correct values are
 		 * bound to the columns.
 		 *
 		 * The SQL statement should conform to the ANSI standard to be
@@ -358,7 +358,7 @@ class Standard
 		 * prepared statement. It must include question marks for binding
 		 * the values from the media list type item to the statement before they are
 		 * sent to the database server. The order of the columns must
-		 * correspond to the order in the saveItems() method, so the
+		 * correspond to the order in the save() method, so the
 		 * correct values are bound to the columns.
 		 *
 		 * The SQL statement should conform to the ANSI standard to be

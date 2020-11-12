@@ -151,14 +151,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setCode( 'unitTest' );
 		$item->setLabel( 'unitTest' );
 		$item->setGroups( array( 1, 2, 3 ) );
-		$item = $this->object->saveItem( $item );
+		$item = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId(), array( 'customer/group' ) );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unitTest2' );
 		$itemExp->setLabel( 'unitTest2' );
 		$itemExp->setGroups( array( 2, 4 ) );
-		$itemExp = $this->object->saveItem( $itemExp );
+		$itemExp = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId(), array( 'customer/group' ) );
 
 		$this->object->delete( $item->getId() );
@@ -207,7 +207,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setId( null )->setCode( 'xyz' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
 		$item->addAddressItem( new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.' ) );
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 
 		$item2 = $this->object->find( 'xyz', ['customer/address'] );
 
@@ -224,7 +224,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null )->setCode( 'xyz' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 
 		$item2 = $this->object->find( 'xyz', ['customer/property'] );
 

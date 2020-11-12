@@ -71,15 +71,6 @@ interface Iface
 		bool $default = false ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
-	 * Adds or updates an order base item in the storage.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $item Order base object (sub-items are not saved)
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Order\Item\Base\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Iface;
-
-	/**
 	 * Saves the complete basket to the storage including the items attached.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object containing all information

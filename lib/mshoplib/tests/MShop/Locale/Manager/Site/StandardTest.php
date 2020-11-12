@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveIdException()
 	{
 		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
-		$this->object->saveItem( $this->object->create() );
+		$this->object->save( $this->object->create() );
 	}
 
 
@@ -65,7 +65,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setLabel( 'new new name' );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->delete( $item->getId() );

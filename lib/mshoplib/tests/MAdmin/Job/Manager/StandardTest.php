@@ -116,13 +116,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->create();
 		$item->setLabel( 'unit test' );
 		$item->setMethod( 'crtl.method' );
-		$resultSaved = $this->object->saveItem( $item );
+		$resultSaved = $this->object->save( $item );
 
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setMethod( 'controll.method' );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $item->getId() );
 
 		$this->object->delete( $item->getId() );

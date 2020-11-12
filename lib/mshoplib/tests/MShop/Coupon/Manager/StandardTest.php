@@ -121,13 +121,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setProvider( 'Unit' );
 		$item->setConfig( array( 'key'=>'value' ) );
 		$item->setStatus( '1' );
-		$resultSaved = $this->object->saveItem( $item );
+		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 
 		$itemExp->setStatus( '0' );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->delete( $item->getId() );

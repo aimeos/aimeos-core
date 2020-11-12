@@ -104,14 +104,18 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Adds or updates an item object or a list of them.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface $items Item or list of items whose data should be saved
 	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface[]|\Aimeos\MShop\Common\Item\Iface Saved item or items
+	 * @return \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface Saved item or items
 	 */
 	public function save( $items, bool $fetch = true )
 	{
-		if( is_array( $items ) ) {
-			return $this->getObject()->saveItems( $items, $fetch );
+		if( is_iterable( $items ) )
+		{
+			foreach( $items as $id => $item ) {
+				$items[$id] = $this->getObject()->saveItem( $item, $fetch );
+			}
+			return map( $items );
 		}
 
 		return $this->getObject()->saveItem( $items, $fetch );
@@ -173,23 +177,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	public function getSaveAttributes() : array
 	{
 		return [];
-	}
-
-
-	/**
-	 * Adds or updates a list of item objects.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $items List of item object whose data should be saved
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface[] Saved item objects
-	 */
-	public function saveItems( array $items, bool $fetch = true ) : array
-	{
-		foreach( $items as $id => $item ) {
-			$items[$id] = $this->getObject()->saveItem( $item, $fetch );
-		}
-
-		return $items;
 	}
 
 

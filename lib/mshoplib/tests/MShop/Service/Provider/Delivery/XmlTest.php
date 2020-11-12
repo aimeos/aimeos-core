@@ -123,14 +123,14 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$itemMock->expects( $this->once() )->method( 'setDatePayment' )->will( $this->returnSelf() );
 
 		$mock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
-			->setMethods( ['saveItems', 'search'] )
+			->setMethods( ['save', 'search'] )
 			->setConstructorArgs( [$this->context] )
 			->getMock();
 
 		$mock->expects( $this->once() )->method( 'search' )
 			->will( $this->returnValue( map( ['123' => $itemMock] ) ) );
 
-		$mock->expects( $this->once() )->method( 'saveItems' );
+		$mock->expects( $this->once() )->method( 'save' );
 
 		\Aimeos\MShop::inject( 'order', $mock );
 

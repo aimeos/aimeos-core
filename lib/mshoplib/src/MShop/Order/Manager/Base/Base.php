@@ -572,13 +572,13 @@ abstract class Base
 				$position = ++$pos;
 			}
 
-			$item = $manager->saveItem( $item );
+			$item = $manager->save( $item );
 			$productId = $item->getId();
 
 			foreach( $item->getAttributeItems() as $attribute )
 			{
 				$attribute->setParentId( $productId );
-				$attrManager->saveItem( $attribute );
+				$attrManager->save( $attribute );
 			}
 
 			// if the item is a bundle, it probably contains sub-products
@@ -593,13 +593,13 @@ abstract class Base
 					$position = ++$pos;
 				}
 
-				$subProduct = $manager->saveItem( $subProduct );
+				$subProduct = $manager->save( $subProduct );
 				$subProductId = $subProduct->getId();
 
 				foreach( $subProduct->getAttributeItems() as $attribute )
 				{
 					$attribute->setParentId( $subProductId );
-					$attrManager->saveItem( $attribute );
+					$attrManager->save( $attribute );
 				}
 			}
 		}
@@ -629,7 +629,7 @@ abstract class Base
 					$position = ++$pos;
 				}
 
-				$manager->saveItem( $item->setBaseId( $basket->getId() ) );
+				$manager->save( $item->setBaseId( $basket->getId() ) );
 			}
 		}
 
@@ -657,7 +657,7 @@ abstract class Base
 			if( empty( $products ) )
 			{
 				$item->setId( null );
-				$manager->saveItem( $item );
+				$manager->save( $item );
 				continue;
 			}
 
@@ -665,7 +665,7 @@ abstract class Base
 			{
 				$item->setId( null );
 				$item->setProductId( $product->getId() );
-				$manager->saveItem( $item );
+				$manager->save( $item );
 			}
 		}
 
@@ -696,14 +696,14 @@ abstract class Base
 				}
 
 				$item = $item->setBaseId( $basket->getId() )->setType( $type );
-				$item = $manager->saveItem( $item );
+				$item = $manager->save( $item );
 
 				foreach( $item->getAttributeItems() as $attribute )
 				{
 					if( $attribute->getType() !== 'session' )
 					{
 						$attribute->setParentId( $item->getId() );
-						$attrManager->saveItem( $attribute );
+						$attrManager->save( $attribute );
 					}
 				}
 			}

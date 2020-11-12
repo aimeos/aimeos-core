@@ -71,7 +71,7 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$supplier->setLabel( $dataset['label'] );
 			$supplier->setStatus( $dataset['status'] );
 
-			$supplierManager->saveItem( $supplier );
+			$supplierManager->save( $supplier );
 			$supIds[$key] = $supplier->getId();
 		}
 
@@ -107,7 +107,7 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$supAdr->setBirthday( $dataset['birthday'] ?? null );
 			$supAdr->setParentId( $supIds[$dataset['parentid']] );
 
-			$supplierAddressManager->saveItem( $supAdr, false );
+			$supplierAddressManager->save( $supAdr, false );
 		}
 
 		$supplierManager->commit();

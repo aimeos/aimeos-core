@@ -21,12 +21,4 @@ namespace Aimeos\MShop\Order\Manager\Base\Product;
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface
 {
-	/**
-	 * Adds or updates a order base product item to the storage.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item New or existing product item that should be saved to the storage
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 }

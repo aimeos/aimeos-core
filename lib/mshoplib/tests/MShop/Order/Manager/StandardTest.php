@@ -167,12 +167,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order item found' ) );
 
 		$item->setId( null );
-		$resultSaved = $this->object->saveItem( $item );
+		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setType( \Aimeos\MShop\Order\Item\Base::TYPE_WEB );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
 		$this->object->delete( $itemSaved->getId() );
@@ -232,7 +232,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$item->setId( null );
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 
 
 		$search = $statusManager->filter();
@@ -246,7 +246,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null );
 		$item->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 
 		$search = $statusManager->filter();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );
@@ -281,7 +281,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$item->setId( null );
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 
 
 		$search = $statusManager->filter();
@@ -295,7 +295,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null );
 		$item->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_LOST );
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 
 		$search = $statusManager->filter();
 		$search->setConditions( $search->compare( '==', 'order.status.parentid', $item->getId() ) );

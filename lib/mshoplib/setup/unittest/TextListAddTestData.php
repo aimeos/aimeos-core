@@ -134,7 +134,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$tListType->setLabel( $dataset['label'] );
 			$tListType->setStatus( $dataset['status'] );
 
-			$textListTypeManager->saveItem( $tListType );
+			$textListTypeManager->save( $tListType );
 		}
 
 		$tList = $textListManager->create();
@@ -159,7 +159,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$tList->setPosition( $dataset['pos'] );
 			$tList->setStatus( $dataset['status'] );
 
-			$textListManager->saveItem( $tList, false );
+			$textListManager->save( $tList, false );
 		}
 
 		$textManager->commit();

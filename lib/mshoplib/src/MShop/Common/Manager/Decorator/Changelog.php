@@ -24,19 +24,16 @@ class Changelog
 	/**
 	 * Adds or updates an item object.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object whose data should be saved
+	 * @param \Aimeos\MShop\Common\Item\Iface $items Item object whose data should be saved
 	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\Map|\Aimeos\MShop\Common\Item\Ifacetem Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
+	public function save( $items, bool $fetch = true )
 	{
-		$manager = $this->getManager();
+		$items = $this->getManager()->save( $items, true );
 
-		$item = $manager->saveItem( $item, $fetch );
-		$new = $manager->get( $item->getId() );
+		$this->getContext()->getLogger()->log( map( $items )->toJson(), \Aimeos\MW\Logger\Base::NOTICE, 'changelog' );
 
-		$this->getContext()->getLogger()->log( json_encode( $new->toArray() ), \Aimeos\MW\Logger\Base::NOTICE, 'changelog' );
-
-		return $item;
+		return $items;
 	}
 }

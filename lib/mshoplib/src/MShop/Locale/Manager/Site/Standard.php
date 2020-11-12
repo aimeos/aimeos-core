@@ -215,7 +215,7 @@ class Standard
 	public function saveItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
 		if( $item->getId() === null ) {
-			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Newly created site can not be saved using method "saveItem()". Try using method "insertItem()" instead.' ) );
+			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Newly created site can not be saved using method "save()". Try using method "insertItem()" instead.' ) );
 		}
 
 		if( !$item->isModified() ) {
@@ -246,7 +246,7 @@ class Standard
 			 * prepared statement. It must include question marks for binding
 			 * the values from the site item to the statement before they are
 			 * sent to the database server. The order of the columns must
-			 * correspond to the order in the saveItems() method, so the
+			 * correspond to the order in the save() method, so the
 			 * correct values are bound to the columns.
 			 *
 			 * The SQL statement should conform to the ANSI standard to be
@@ -807,7 +807,7 @@ class Standard
 			 * sent to the database server. The number of question marks must
 			 * be the same as the number of columns listed in the INSERT
 			 * statement. The order of the columns must correspond to the
-			 * order in the saveItems() method, so the correct values are
+			 * order in the save() method, so the correct values are
 			 * bound to the columns.
 			 *
 			 * The SQL statement should conform to the ANSI standard to be
@@ -886,7 +886,7 @@ class Standard
 			$dbm->release( $conn, $dbname );
 
 			// Add unique site identifier
-			$item = $this->getObject()->saveItem( $item->setSiteId( $item->getId() . '.' ) );
+			$item = $this->getObject()->save( $item->setSiteId( $item->getId() . '.' ) );
 		}
 		catch( \Exception $e )
 		{

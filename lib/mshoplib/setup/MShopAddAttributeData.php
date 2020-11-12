@@ -52,7 +52,7 @@ class MShopAddAttributeData extends MShopAddDataAbstract
 			{
 				$total++;
 				$item = $item->setId( null )->fromArray( $dataset );
-				$manager->saveItem( $item );
+				$manager->save( $item );
 				$num++;
 			}
 			catch( \Exception $e ) { ; } // if attribute was already available

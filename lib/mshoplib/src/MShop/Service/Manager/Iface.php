@@ -30,13 +30,4 @@ interface Iface
 	 * @throws \Aimeos\MShop\Service\Exception If provider couldn't be found
 	 */
 	public function getProvider( \Aimeos\MShop\Service\Item\Iface $item, string $type ) : \Aimeos\MShop\Service\Provider\Iface;
-
-	/**
-	 * Adds a new or updates an existing service item in the storage.
-	 *
-	 * @param \Aimeos\MShop\Service\Item\Iface $item New or existing service item that should be saved to the storage
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Service\Item\Iface Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Service\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Service\Item\Iface;
 }

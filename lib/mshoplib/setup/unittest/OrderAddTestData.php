@@ -63,7 +63,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		//update order bases (getPrice)
 		foreach( $bases['items'] as $baseItem ) {
-			$orderBaseManager->saveItem( $baseItem, false );
+			$orderBaseManager->save( $baseItem, false );
 		}
 
 		$this->additional->setLocale( $this->additional->getLocale()->setCurrencyId( null ) );
@@ -106,7 +106,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$locale->setCurrencyId( $dataset['currencyid'] );
 			$bases['items'][$key]->setLocale( $locale );
 
-			$orderBaseManager->saveItem( $bases['items'][$key] );
+			$orderBaseManager->save( $bases['items'][$key] );
 			$bases['ids'][$key] = $bases['items'][$key]->getId();
 		}
 
@@ -161,7 +161,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$orderAddr->setLongitude( $dataset['longitude'] );
 			$orderAddr->setBirthday( $dataset['birthday'] ?? null );
 
-			$manager->saveItem( $orderAddr, false );
+			$manager->save( $orderAddr, false );
 		}
 	}
 
@@ -216,7 +216,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$priceItem->setTaxRates( $dataset['taxrates'] );
 			$ordServ->setPrice( $priceItem );
 
-			$orderBaseServiceManager->saveItem( $ordServ );
+			$orderBaseServiceManager->save( $ordServ );
 
 			$ordServices[$key] = $ordServ->getId();
 			$bases['items'][$dataset['baseid']]->addService( $ordServ, $dataset['type'] ); //adds Services to orderbase
@@ -300,7 +300,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ordProdItem->setPrice( $priceItem );
 
 			$bases['items'][$dataset['baseid']]->addProduct( $ordProdItem, $dataset['pos'] ); //adds Products to orderbase
-			$ordProds[$key] = $orderBaseProductManager->saveItem( $ordProdItem )->getId();
+			$ordProds[$key] = $orderBaseProductManager->save( $ordProdItem )->getId();
 		}
 
 		$this->addOrderBaseProductAttributeData( $orderBaseProductAttrManager, $testdata, $ordProds, $products );
@@ -360,7 +360,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 				$ordProdAttr->setType( $dataset['type'] );
 			}
 
-			$manager->saveItem( $ordProdAttr, false );
+			$manager->save( $ordProdAttr, false );
 		}
 	}
 
@@ -396,7 +396,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 				$ordServAttr->setAttributeId( $dataset['attrid'] );
 			}
 
-			$manager->saveItem( $ordServAttr, false );
+			$manager->save( $ordServAttr, false );
 		}
 	}
 
@@ -433,7 +433,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ordItem->setDatePayment( $dataset['datepayment'] );
 			$ordItem->setRelatedId( $dataset['relatedid'] );
 
-			$orderManager->saveItem( $ordItem );
+			$orderManager->save( $ordItem );
 			$ords[$key] = $ordItem->getId();
 		}
 
@@ -449,7 +449,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ordStat->setType( $dataset['type'] );
 			$ordStat->setValue( $dataset['value'] );
 
-			$orderStatusManager->saveItem( $ordStat, false );
+			$orderStatusManager->save( $ordStat, false );
 		}
 
 		$orderManager->commit();

@@ -124,13 +124,4 @@ interface Iface
 	 * @see \Aimeos\MW\Criteria\Iface
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key, string $value = null, string $type = null ) : \Aimeos\Map;
-
-	/**
-	 * Updates or adds a common list item object.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $item List item object which should be saved
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Lists\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Lists\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Lists\Iface;
 }

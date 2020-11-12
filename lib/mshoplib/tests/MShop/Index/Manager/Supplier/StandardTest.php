@@ -95,14 +95,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		//new product item
 		$product->setId( null );
 		$product->setCode( 'SupplierCNC' );
-		$productManager->saveItem( $product );
+		$productManager->save( $product );
 
 		//new supplier list item
 		$supListItem->setId( null );
 		$supListItem->setRefId( $product->getId() );
-		$listManager->saveItem( $supListItem );
+		$listManager->save( $supListItem );
 
-		$this->object->saveItem( $product );
+		$this->object->save( $product );
 
 
 		$search = $this->object->filter();

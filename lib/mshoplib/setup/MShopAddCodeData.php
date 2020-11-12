@@ -67,7 +67,7 @@ class MShopAddCodeData extends \Aimeos\MW\Setup\Task\Base
 					$num++;
 				}
 
-				$domainManager->saveItem( $item );
+				$domainManager->save( $item );
 			}
 
 			$this->status( $num > 0 ? $num . '/' . $total : 'OK' );

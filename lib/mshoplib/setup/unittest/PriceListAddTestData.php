@@ -145,7 +145,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$listItem->setPosition( $dataset['pos'] );
 			$listItem->setStatus( $dataset['status'] );
 
-			$priceListManager->saveItem( $listItem, false );
+			$priceListManager->save( $listItem, false );
 		}
 
 		$priceManager->commit();
@@ -204,7 +204,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 				$listItemType->setLabel( $dataset['label'] );
 				$listItemType->setStatus( $dataset['status'] );
 
-				$listTypeManager->saveItem( $listItemType );
+				$listTypeManager->save( $listItemType );
 			}
 			catch( \Exception $e ) {} // Duplicate entry
 		}

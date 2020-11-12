@@ -21,12 +21,4 @@ namespace Aimeos\MShop\Order\Manager\Base\Coupon;
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface
 {
-	/**
-	 * Adds a new item to the storage or updates an existing one.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Coupon\Iface $item Item that should be saved to the storage
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Order\Item\Base\Coupon\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Coupon\Iface;
 }

@@ -79,7 +79,7 @@ class DemoAddServiceData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 				$item->setConfig( $entry['config'] );
 				$item->setStatus( $entry['status'] );
 
-				$manager->saveItem( $item );
+				$manager->save( $item );
 
 				if( isset( $entry['media'] ) ) {
 					$this->addMedia( $item->getId(), $entry['media'], 'service' );

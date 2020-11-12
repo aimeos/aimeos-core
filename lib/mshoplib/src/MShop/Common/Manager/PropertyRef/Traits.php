@@ -107,7 +107,7 @@ trait Traits
 			}
 
 			$propItem->setParentId( $item->getId() );
-			$propManager->saveItem( $propItem, $fetch );
+			$propManager->save( $propItem, $fetch );
 		}
 
 		return $item;

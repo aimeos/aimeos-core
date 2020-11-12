@@ -72,7 +72,7 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ttype->setLabel( $dataset['label'] );
 			$ttype->setStatus( $dataset['status'] );
 
-			$textTypeManager->saveItem( $ttype );
+			$textTypeManager->save( $ttype );
 		}
 
 		$text = $textManager->create();
@@ -86,7 +86,7 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$text->setContent( $dataset['content'] );
 			$text->setStatus( $dataset['status'] );
 
-			$textManager->saveItem( $text, false );
+			$textManager->save( $text, false );
 		}
 
 		$textManager->commit();

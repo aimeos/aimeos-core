@@ -66,13 +66,4 @@ interface Iface
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
 	public function remove( $ids ) : \Aimeos\MShop\Index\Manager\Iface;
-
-	/**
-	 * Stores a new item into the index
-	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
-	 * @param bool $fetch True if the new ID should be set in the item
-	 * @return \Aimeos\MShop\Product\Item\Iface Saved item
-	 */
-	public function saveItem( \Aimeos\MShop\Product\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Product\Item\Iface;
 }

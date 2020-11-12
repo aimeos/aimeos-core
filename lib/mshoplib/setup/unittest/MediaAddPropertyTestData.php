@@ -73,7 +73,7 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 			$type->setLabel( $dataset['label'] );
 			$type->setStatus( $dataset['status'] );
 
-			$mediaPropertyTypeManager->saveItem( $type );
+			$mediaPropertyTypeManager->save( $type );
 		}
 
 		$prodProperty = $mediaPropertyManager->create();
@@ -85,7 +85,7 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 			$prodProperty->setValue( $dataset['value'] );
 			$prodProperty->setType( $dataset['type'] );
 
-			$mediaPropertyManager->saveItem( $prodProperty, false );
+			$mediaPropertyManager->save( $prodProperty, false );
 		}
 
 		$mediaManager->commit();

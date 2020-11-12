@@ -98,7 +98,7 @@ class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			try {
-				$pluginManager->saveItem( $item );
+				$pluginManager->save( $item );
 				$num++;
 			} catch( \Exception $e ) {; } // if plugin configuration was already available
 		}

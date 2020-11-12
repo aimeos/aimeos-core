@@ -202,7 +202,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$listItemType->setLabel( $dataset['label'] );
 			$listItemType->setStatus( $dataset['status'] );
 
-			$supplierListTypeManager->saveItem( $listItemType );
+			$supplierListTypeManager->save( $listItemType );
 		}
 
 		$listItem = $supplierListManager->create();
@@ -227,7 +227,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$listItem->setPosition( $dataset['pos'] );
 			$listItem->setStatus( $dataset['status'] );
 
-			$supplierListManager->saveItem( $listItem, false );
+			$supplierListManager->save( $listItem, false );
 		}
 
 		$supplierManager->commit();

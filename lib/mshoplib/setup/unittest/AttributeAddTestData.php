@@ -72,7 +72,7 @@ class AttributeAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$atype->setLabel( $dataset['label'] );
 			$atype->setStatus( $dataset['status'] );
 
-			$attributeTypeManager->saveItem( $atype );
+			$attributeTypeManager->save( $atype );
 		}
 
 		$attribute = $attributeManager->create();
@@ -86,7 +86,7 @@ class AttributeAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$attribute->setStatus( $dataset['status'] );
 			$attribute->setPosition( $dataset['pos'] );
 
-			$attributeManager->saveItem( $attribute, false );
+			$attributeManager->save( $attribute, false );
 		}
 
 		$attributeManager->commit();

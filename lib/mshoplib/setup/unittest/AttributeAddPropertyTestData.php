@@ -85,7 +85,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 			$type->setPosition( $dataset['position'] );
 			$type->setStatus( $dataset['status'] );
 
-			$attributePropertyTypeManager->saveItem( $type );
+			$attributePropertyTypeManager->save( $type );
 		}
 
 		$prodProperty = $attributePropertyManager->create();
@@ -97,7 +97,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 			$prodProperty->setValue( $dataset['value'] );
 			$prodProperty->setType( $dataset['type'] );
 
-			$attributePropertyManager->saveItem( $prodProperty, false );
+			$attributePropertyManager->save( $prodProperty, false );
 		}
 
 		$attributeManager->commit();

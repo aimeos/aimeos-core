@@ -75,7 +75,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 			$items[] = $this->addListData( $listManager, $item, $entry );
 		}
 
-		$manager->saveItems( $items );
+		$manager->save( $items );
 		$manager->commit();
 	}
 
@@ -143,7 +143,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 			foreach( $data['customer/group'] as $entry )
 			{
 				try {
-					$groupManager->saveItem( $groupManager->create()->fromArray( $entry ), false );
+					$groupManager->save( $groupManager->create()->fromArray( $entry ), false );
 				} catch( \Exception $e ) { echo $e->getMessage(); } // ignore duplicates
 			}
 		}

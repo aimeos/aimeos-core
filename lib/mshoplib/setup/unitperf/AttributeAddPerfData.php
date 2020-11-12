@@ -92,7 +92,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 					->setLabel( $value )
 					->setCode( $value );
 
-				$attrManager->saveItem( $item );
+				$attrManager->save( $item );
 			}
 		}
 	}
@@ -159,7 +159,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			$item->addListItem( 'media', clone $listItem, $refItem );
 
-			$attrManager->saveItem( $item );
+			$attrManager->save( $item );
 		}
 	}
 
@@ -196,7 +196,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			$item->addListItem( 'price', clone $listItem, $refItem );
 
-			$attrManager->saveItem( $item );
+			$attrManager->save( $item );
 		}
 	}
 
@@ -230,7 +230,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 					->setLabel( $value )
 					->setCode( $value );
 
-				$attrManager->saveItem( $item );
+				$attrManager->save( $item );
 			}
 		}
 	}

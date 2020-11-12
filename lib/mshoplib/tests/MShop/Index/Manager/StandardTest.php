@@ -40,7 +40,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		foreach( $result as $item )
 		{
 			self::$products[$item->getCode()] = $item;
-			$manager->saveItem( $item );
+			$manager->save( $item );
 		}
 	}
 
@@ -171,7 +171,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveItem()
+	public function testSave()
 	{
 		$item = self::$products['CNE'];
 
@@ -184,7 +184,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$sqlPrice = 'SELECT COUNT(*) as count FROM "mshop_index_price" WHERE "siteid" = ? AND "prodid" = ?';
 		$sqlText = 'SELECT COUNT(*) as count FROM "mshop_index_text" WHERE "siteid" = ? AND "prodid" = ?';
 
-		$this->object->saveItem( $item );
+		$this->object->save( $item );
 
 		$cntAttribute = $this->getValue( $dbm, $sqlAttribute, 'count', $siteId, $item->getId() );
 		$cntCatalog = $this->getValue( $dbm, $sqlCatalog, 'count', $siteId, $item->getId() );
@@ -198,12 +198,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSaveItems()
+	public function testSaveMultiple()
 	{
-		$result = $this->object->saveItems( self::$products );
+		$result = $this->object->save( self::$products );
 		$expected = [
-			self::$products['CNC']->getId() => self::$products['CNC'],
-			self::$products['CNE']->getId() => self::$products['CNE']
+			'CNC' => self::$products['CNC'],
+			'CNE' => self::$products['CNE']
 		];
 		$this->assertEquals( $expected, $result );
 	}

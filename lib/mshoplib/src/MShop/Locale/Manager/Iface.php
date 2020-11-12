@@ -36,13 +36,4 @@ interface Iface
 	 */
 	public function bootstrap( string $site, string $lang = '', string $currency = '', bool $active = true,
 		int $level = null, bool $bare = false ) : \Aimeos\MShop\Locale\Item\Iface;
-
-	/**
-	 * Adds or updates an item object.
-	 *
-	 * @param \Aimeos\MShop\Locale\Item\Iface $item Item object whose data should be saved
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Locale\Item\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Locale\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Locale\Item\Iface;
 }

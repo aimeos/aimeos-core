@@ -44,11 +44,11 @@ abstract class Base
 	 * Tests if a list of objects are an instance of the given class, extends the class or implements the interface.
 	 *
 	 * @param string $name Name of the class or interface
-	 * @param array $list List of objects to test
-	 * @return array Tested list of class instances
+	 * @param iterable $list List of objects to test
+	 * @return iterable Tested list of class instances
 	 * @throws \Aimeos\MW\Common\Exception if an object of the list doesn't match the type
 	 */
-	public static function checkClassList( string $name, array $list ) : array
+	public static function checkClassList( string $name, iterable $list ) : iterable
 	{
 		foreach( $list as $object )
 		{

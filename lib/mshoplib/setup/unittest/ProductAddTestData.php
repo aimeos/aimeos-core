@@ -95,7 +95,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 			$item = $this->addListData( $listManager, $item, $entry );
 			$item = $this->addPropertyData( $propManager, $item, $entry );
 
-			$manager->saveItem( $item );
+			$manager->save( $item );
 		}
 	}
 }

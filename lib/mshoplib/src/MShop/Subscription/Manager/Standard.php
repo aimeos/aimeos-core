@@ -315,7 +315,7 @@ class Standard
 				 * sent to the database server. The number of question marks must
 				 * be the same as the number of columns listed in the INSERT
 				 * statement. The subscription of the columns must correspond to the
-				 * subscription in the saveItems() method, so the correct values are
+				 * subscription in the save() method, so the correct values are
 				 * bound to the columns.
 				 *
 				 * The SQL statement should conform to the ANSI standard to be
@@ -352,7 +352,7 @@ class Standard
 				 * prepared statement. It must include question marks for binding
 				 * the values from the subscription item to the statement before they are
 				 * sent to the database server. The subscription of the columns must
-				 * correspond to the subscription in the saveItems() method, so the
+				 * correspond to the subscription in the save() method, so the
 				 * correct values are bound to the columns.
 				 *
 				 * The SQL statement should conform to the ANSI standard to be

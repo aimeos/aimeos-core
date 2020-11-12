@@ -113,7 +113,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			$this->addRefItems( $item, $entry );
 			$this->addPropertyItems( $item, $entry );
 
-			$manager->saveItem( $item );
+			$manager->save( $item );
 
 			if( isset( $entry['stock'] ) ) {
 				$this->addStockItems( $item->getCode(), $entry['stock'] );
@@ -242,7 +242,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		foreach( $data as $entry )
 		{
 			$item = $manager->create()->fromArray( $entry )->setProductCode( $productcode );
-			$manager->saveItem( $item, false );
+			$manager->save( $item, false );
 		}
 	}
 

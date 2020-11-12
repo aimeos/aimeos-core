@@ -21,12 +21,4 @@ namespace Aimeos\MAdmin\Log\Manager;
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MW\Logger\Iface
 {
-	/**
-	 * Adds a new log to the storage.
-	 *
-	 * @param \Aimeos\MAdmin\Log\Item\Iface $item Log item that should be saved to the storage
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MAdmin\Log\Item\Iface Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MAdmin\Log\Item\Iface $item, bool $fetch = true ) : \Aimeos\MAdmin\Log\Item\Iface;
 }

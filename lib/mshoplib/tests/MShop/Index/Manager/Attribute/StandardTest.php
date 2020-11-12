@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$product = $productManager->find( 'CNC', ['attribute'] );
 		$attrItem = $product->getRefItems( 'attribute' )->first();
 
-		$product = $this->object->saveItem( $product->setId( null )->setCode( 'ModifiedCNC' ) );
+		$product = $this->object->save( $product->setId( null )->setCode( 'ModifiedCNC' ) );
 
 
 		$search = $this->object->filter();

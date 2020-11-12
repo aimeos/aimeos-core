@@ -78,7 +78,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 			$localeItem->setCurrencyId( 'EUR' );
 			$localeItem->setStatus( 1 );
 
-			$localeManager->saveItem( $localeItem, false );
+			$localeManager->save( $localeItem, false );
 		}
 		catch( \Aimeos\MW\DB\Exception $e ) // already in the database
 		{
@@ -169,7 +169,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 				$items[$dataset['id']] = $currencyItem;
 			}
 
-			$currencyManager->saveItem( $items[$dataset['id']] );
+			$currencyManager->save( $items[$dataset['id']] );
 			$num++;
 		}
 
@@ -206,7 +206,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 				$items[$dataset['id']] = $languageItem;
 			}
 
-			$languageManager->saveItem( $items[$dataset['id']] );
+			$languageManager->save( $items[$dataset['id']] );
 			$num++;
 		}
 
@@ -240,7 +240,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 			$localeItem->setStatus( $dataset['status'] );
 
 			try {
-				$localeItemManager->saveItem( $localeItem );
+				$localeItemManager->save( $localeItem );
 			} catch( \Aimeos\MW\DB\Exception $e ) {; } // if locale combination was already available
 		}
 

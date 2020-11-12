@@ -137,10 +137,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null );
 		$item->setComment( 'Unittest1' );
-		$resultSaved = $this->object->saveItem( $item );
+		$resultSaved = $this->object->save( $item );
 
 		$product = $item->getProducts()->first()->setBaseId( $item->getId() )->setId( null );
-		$orderProductManager->saveItem( $product );
+		$orderProductManager->save( $product );
 
 		$itemSaved = $this->object->get( $item->getId() );
 		$itemPrice = $item->getPrice();
@@ -150,7 +150,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$itemExp = clone $itemSaved;
 		$itemExp->setComment( 'Unittest2' );
 		$itemExp->setCustomerId( 'unittest2' );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 		$itemExpPrice = $itemExp->getPrice();
 		$itemUpdPrice = $itemUpd->getPrice();

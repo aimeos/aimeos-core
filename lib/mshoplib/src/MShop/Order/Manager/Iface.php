@@ -21,12 +21,4 @@ namespace Aimeos\MShop\Order\Manager;
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface
 {
-	/**
-	 * Creates a one-time order in the storage from the given invoice object.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $item Order item with necessary values
-	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Order\Item\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Order\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Iface;
 }
