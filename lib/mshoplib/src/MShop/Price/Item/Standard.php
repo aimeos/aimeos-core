@@ -37,8 +37,8 @@ class Standard extends Base
 	{
 		parent::__construct( 'price.', $values, $listItems, $refItems, $propItems );
 
-		$this->currencyid = ( isset( $values['.currencyid'] ) ? $values['.currencyid'] : null );
-		$this->precision = ( isset( $values['.precision'] ) ? $values['.precision'] : 2 );
+		$this->currencyid = $this->get( '.currencyid' );
+		$this->precision = $this->get( '.precision', 2 );
 		$this->tax = $this->get( 'price.taxvalue' );
 	}
 
@@ -319,16 +319,15 @@ class Standard extends Base
 			$taxrate = array_sum( $this->getTaxRates() );
 
 			if( $this->getTaxFlag() !== false ) {
-				$tax = ( $this->getValue() + $this->getCosts() ) / ( 100 + $taxrate ) * $taxrate;
+				$this->tax = ( $this->getValue() + $this->getCosts() ) / ( 100 + $taxrate ) * $taxrate;
 			} else {
-				$tax = ( $this->getValue() + $this->getCosts() ) * $taxrate / 100;
+				$this->tax = ( $this->getValue() + $this->getCosts() ) * $taxrate / 100;
 			}
 
-			$this->tax = $this->formatNumber( $tax, $this->precision + 2 );
 			parent::setModified();
 		}
 
-		return $this->tax;
+		return $this->formatNumber( $this->tax, $this->precision + 2 );
 	}
 
 
