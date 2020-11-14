@@ -106,7 +106,7 @@ class Nolimit
 	 * @param string $type Unique code of the stock type
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function decrease( array $pairs, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
+	public function decrease( iterable $pairs, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
 	{
 		return $this;
 	}
@@ -119,7 +119,7 @@ class Nolimit
 	 * @param string $type Unique code of the type
 	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
 	 */
-	public function increase( array $pairs, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
+	public function increase( iterable $pairs, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
 	{
 		return $this;
 	}
