@@ -34,7 +34,7 @@ interface Iface
 	 * @param string[] $siteids List of IDs for sites Whose entries should be deleted
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface;
+	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface;
 
 	/**
 	 * Creates a new empty item instance

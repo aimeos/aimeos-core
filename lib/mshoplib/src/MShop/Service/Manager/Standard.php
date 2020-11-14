@@ -188,7 +188,7 @@ class Standard
 	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Service\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/service/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, ['lists', 'type'] ) as $domain ) {

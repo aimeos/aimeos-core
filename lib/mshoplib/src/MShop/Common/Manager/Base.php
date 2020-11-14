@@ -59,10 +59,10 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this;
 	}
@@ -322,11 +322,11 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
 	 * @param string $cfgpath Configuration key to the cleanup statement
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	protected function clearBase( array $siteids, string $cfgpath ) : \Aimeos\MShop\Common\Manager\Iface
+	protected function clearBase( iterable $siteids, string $cfgpath ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( empty( $siteids ) ) {
 			return $this;
