@@ -67,7 +67,7 @@ abstract class Base
 	/**
 	 * Removes old entries from the storage
 	 *
-	 * @param string[] $siteids List of IDs for sites Whose entries should be deleted
+	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
