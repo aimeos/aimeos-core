@@ -145,10 +145,10 @@ abstract class Base
 	/**
 	 * Assigns multiple key/value pairs to the item
 	 *
-	 * @param array $pairs Associative list of key/value pairs
+	 * @param iterable $pairs Associative list of key/value pairs
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for method chaining
 	 */
-	public function assign( array $pairs ) : \Aimeos\MShop\Common\Item\Iface
+	public function assign( iterable $pairs ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		foreach( $pairs as $key => $value ) {
 			$this->set( $key, $value );

@@ -53,6 +53,14 @@ interface Iface
 	public function __toString() : ?string;
 
 	/**
+	 * Assigns multiple key/value pairs to the item
+	 *
+	 * @param iterable $pairs Associative list of key/value pairs
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for method chaining
+	 */
+	public function assign( iterable $pairs ) : \Aimeos\MShop\Common\Item\Iface;
+
+	/**
 	 * Returns the item property for the given name
 	 *
 	 * @param string $name Name of the property

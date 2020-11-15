@@ -183,6 +183,22 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 
 
 	/**
+	 * Assigns multiple key/value pairs to the item
+	 *
+	 * @param iterable $pairs Associative list of key/value pairs
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for method chaining
+	 */
+	public function assign( iterable $pairs ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		foreach( $pairs as $key => $value ) {
+			$this->set( $key, $value );
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the item property for the given name
 	 *
 	 * @param string $name Name of the property
