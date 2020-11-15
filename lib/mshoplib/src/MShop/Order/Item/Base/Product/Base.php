@@ -240,11 +240,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of product items
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setProducts( array $products ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setProducts( iterable $products ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $products );
 
-		$this->products = $products;
+		$this->products = is_map( $products ) ? $products->toArray() : $products;
 		$this->setModified();
 
 		return $this;

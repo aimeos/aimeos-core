@@ -156,7 +156,7 @@ interface Iface
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of product items
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setProducts( array $products ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setProducts( iterable $products ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the code of the stock type the product should be retrieved from.
