@@ -111,7 +111,7 @@ class Xml
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orders List of order invoice objects
 	 * @return \Aimeos\MShop\Order\Item\Iface[] Updated order items
 	 */
-	public function processBatch( array $orders ) : array
+	public function processBatch( iterable $orders ) : \Aimeos\Map
 	{
 		$baseItems = $this->getOrderBaseItems( $orders );
 		$this->createFile( $this->createXml( $orders, $baseItems ) );
@@ -120,7 +120,7 @@ class Xml
 			$orders[$key] = $order->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
 		}
 
-		return $orders;
+		return map( $orders );
 	}
 
 
@@ -201,7 +201,7 @@ class Xml
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface[] $baseItems Associative list of order base items to export
 	 * @return string Generated XML
 	 */
-	protected function createXml( array $orderItems, array $baseItems ) : string
+	protected function createXml( iterable $orderItems, iterable $baseItems ) : string
 	{
 		$view = $this->getContext()->getView();
 		$template = $this->getConfigValue( 'xml.template', 'service/provider/delivery/xml-body-standard' );
@@ -214,18 +214,18 @@ class Xml
 	 * Returns the order base items for the given orders
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orderItems List of order items
-	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Base\Iface with IDs as keys
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Order\Item\Base\Iface with IDs as keys
 	 */
-	protected function getOrderBaseItems( array $orderItems ) : array
+	protected function getOrderBaseItems( iterable $orderItems ) : \Aimeos\Map
 	{
-		$ids = map( $orderItems )->getBaseId()->toArray();
+		$ids = map( $orderItems )->getBaseId();
 		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
 
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base' );
-		$search = $manager->filter()->setSlice( 0, count( $ids ) );
-		$search->setConditions( $search->compare( '==', 'order.base.id', $ids ) );
+		$search = $manager->filter()->setSlice( 0, $ids->count() );
+		$search->setConditions( $search->compare( '==', 'order.base.id', $ids->toArray() ) );
 
-		return $manager->search( $search, $ref )->toArray();
+		return $manager->search( $search, $ref );
 	}
 
 
