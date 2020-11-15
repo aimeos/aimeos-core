@@ -123,7 +123,7 @@ trait Traits
 	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
 	 * @throws \Aimeos\MShop\Exception If an item isn't a list item or isn't found
 	 */
-	public function deleteListItems( array $items, bool $all = false ) : \Aimeos\MShop\Common\Item\ListRef\Iface
+	public function deleteListItems( iterable $items, bool $all = false ) : \Aimeos\MShop\Common\Item\ListRef\Iface
 	{
 		foreach( $items as $item )
 		{

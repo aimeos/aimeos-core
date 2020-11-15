@@ -47,7 +47,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param bool $all True to delete referenced items as well, false for list items only
 	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
 	 */
-	public function deleteListItems( array $items, bool $all = false ) : \Aimeos\MShop\Common\Item\ListRef\Iface;
+	public function deleteListItems( iterable $items, bool $all = false ) : \Aimeos\MShop\Common\Item\ListRef\Iface;
 
 	/**
 	 * Returns the domains for which items are available
