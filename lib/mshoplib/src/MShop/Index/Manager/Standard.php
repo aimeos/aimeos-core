@@ -226,7 +226,7 @@ class Standard
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function rebuild( array $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
+	public function rebuild( iterable $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();

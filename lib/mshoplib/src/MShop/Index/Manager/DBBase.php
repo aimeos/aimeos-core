@@ -144,7 +144,7 @@ abstract class DBBase
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs and items values
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function rebuild( array $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
+	public function rebuild( iterable $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuild( $items );

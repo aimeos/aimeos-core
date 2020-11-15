@@ -57,7 +57,7 @@ interface Iface
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
 	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
 	 */
-	public function rebuild( array $items = [] ) : \Aimeos\MShop\Index\Manager\Iface;
+	public function rebuild( iterable $items = [] ) : \Aimeos\MShop\Index\Manager\Iface;
 
 	/**
 	 * Removes the products from the product index.
