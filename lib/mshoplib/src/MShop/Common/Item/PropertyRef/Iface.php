@@ -28,6 +28,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function addPropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface;
 
 	/**
+	 * Adds new property items or overwrite existing ones
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Property\Iface $item New or existing property item
+	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Self object for method chaining
+	 */
+	public function addPropertyItems( iterable $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface;
+
+	/**
 	 * Removes an existing property item
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item Existing property item
@@ -38,10 +46,10 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Removes a list of existing property items
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items Existing property items
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Property\Iface[] $items Existing property items
 	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Self object for method chaining
 	 */
-	public function deletePropertyItems( array $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface;
+	public function deletePropertyItems( iterable $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface;
 
 	/**
 	 * Returns the deleted property items
@@ -81,8 +89,8 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Adds a new property item or overwrite an existing one
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items New list of property items
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Property\Iface[] $items New list of property items
 	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Self object for method chaining
 	 */
-	public function setPropertyItems( array $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface;
+	public function setPropertyItems( iterable $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface;
 }

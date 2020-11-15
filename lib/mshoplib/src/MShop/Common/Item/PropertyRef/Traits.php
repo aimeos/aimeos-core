@@ -61,10 +61,10 @@ trait Traits
 	/**
 	 * Adds new property items or overwrite existing ones
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item New or existing property item
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Property\Iface $item New or existing property item
 	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Self object for method chaining
 	 */
-	public function addPropertyItems( array $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
+	public function addPropertyItems( iterable $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
 	{
 		foreach( $items as $item ) {
 			$this->addPropertyItem( $item );
@@ -106,11 +106,11 @@ trait Traits
 	/**
 	 * Removes a list of existing property items
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items Existing property items
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Property\Iface[] $items Existing property items
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 * @throws \Aimeos\MShop\Exception If an item isn't a property item or isn't found
 	 */
-	public function deletePropertyItems( array $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
+	public function deletePropertyItems( iterable $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
 	{
 		foreach( $items as $item ) {
 			$this->deletePropertyItem( $item );
@@ -200,10 +200,10 @@ trait Traits
 	/**
 	 * Adds a new property item or overwrite an existing one
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items New list of property items
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Property\Iface[] $items New list of property items
 	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Self object for method chaining
 	 */
-	public function setPropertyItems( array $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
+	public function setPropertyItems( iterable $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
 	{
 		$list = [];
 
