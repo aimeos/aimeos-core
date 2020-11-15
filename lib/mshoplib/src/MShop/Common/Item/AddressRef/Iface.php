@@ -39,10 +39,10 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Removes a list of existing address items
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $items Existing address items
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Address\Iface[] $items Existing address items
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 */
-	public function deleteAddressItems( array $items ) : \Aimeos\MShop\Common\Item\Iface;
+	public function deleteAddressItems( iterable $items ) : \Aimeos\MShop\Common\Item\Iface;
 
 	/**
 	 * Returns the deleted address items
