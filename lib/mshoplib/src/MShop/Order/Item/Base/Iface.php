@@ -170,10 +170,10 @@ interface Iface
 	/**
 	 * Replaces all addresses in the current basket with the new ones
 	 *
-	 * @param array $map Associative list of order addresses as returned by getAddresses()
+	 * @param \Aimeos\Map|array $map Associative list of order addresses as returned by getAddresses()
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setAddresses( array $map ) : \Aimeos\MShop\Order\Item\Base\Iface;
+	public function setAddresses( iterable $map ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
 	 * Adds a coupon code entered by the customer and the given product item to the basket.
@@ -205,15 +205,15 @@ interface Iface
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of coupon products
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setCoupon( string $code, array $products = [] ) : \Aimeos\MShop\Order\Item\Base\Iface;
+	public function setCoupon( string $code, iterable $products = [] ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
 	 * Replaces all coupons in the current basket with the new ones
 	 *
-	 * @param array $map Associative list of order coupons as returned by getCoupons()
+	 * @param iterable $map Associative list of order coupons as returned by getCoupons()
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setCoupons( array $map ) : \Aimeos\MShop\Order\Item\Base\Iface;
+	public function setCoupons( iterable $map ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
 	 * Adds an order product item to the (future) order.
@@ -250,10 +250,10 @@ interface Iface
 	/**
 	 * Replaces all products in the current basket with the new ones
 	 *
-	 * @param array $map Associative list of ordered products as returned by getProducts()
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $map Associative list of ordered products as returned by getProducts()
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setProducts( array $map ) : \Aimeos\MShop\Order\Item\Base\Iface;
+	public function setProducts( iterable $map ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
 	 * Adds an order service item as delivery or payment service to the basket
@@ -295,8 +295,8 @@ interface Iface
 	/**
 	 * Replaces all services in the current basket with the new ones
 	 *
-	 * @param array $map Associative list of order services as returned by getServices()
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface[] $map Associative list of order services as returned by getServices()
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setServices( array $map ) : \Aimeos\MShop\Order\Item\Base\Iface;
+	public function setServices( iterable $map ) : \Aimeos\MShop\Order\Item\Base\Iface;
 }

@@ -181,14 +181,14 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	/**
 	 * Sets the new list of attribute items for the service.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface[] $attributes List of order service attribute items
+	 * @param \Aimeos\Map|\Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface[] $attributes List of order service attribute items
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function setAttributeItems( array $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
+	public function setAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, $attributes );
 
-		$this->attributes = $attributes;
+		$this->attributes = is_map( $attributes ) ? $attributes->toArray() : $attributes;
 		$this->attributesMap = null;
 		$this->setModified();
 

@@ -347,10 +347,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	/**
 	 * Replaces all addresses in the current basket with the new ones
 	 *
-	 * @param array $map Associative list of order addresses as returned by getAddresses()
+	 * @param \Aimeos\Map|array $map Associative list of order addresses as returned by getAddresses()
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setAddresses( array $map ) : \Aimeos\MShop\Order\Item\Base\Iface
+	public function setAddresses( iterable $map ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$map = $this->notify( 'setAddresses.before', $map );
 
@@ -359,7 +359,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 		}
 
 		$old = $this->addresses;
-		$this->addresses = $map;
+		$this->addresses = is_map( $map ) ? $map->toArray() : $map;
 		$this->setModified();
 
 		$this->notify( 'setAddresses.after', $old );
@@ -439,12 +439,11 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of coupon products
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setCoupon( string $code, array $products = [] ) : \Aimeos\MShop\Order\Item\Base\Iface
+	public function setCoupon( string $code, iterable $products = [] ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$new = $this->notify( 'setCoupon.before', [$code => $products] );
 
-		$products = $this->checkProducts( current( $new ) );
-		$code = key( $new );
+		$products = $this->checkProducts( map( $new )->first() );
 
 		if( isset( $this->coupons[$code] ) )
 		{
@@ -461,7 +460,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 		}
 
 		$old = isset( $this->coupons[$code] ) ? [$code => $this->coupons[$code]] : [];
-		$this->coupons[$code] = $products;
+		$this->coupons[$code] = is_map( $products ) ? $products->toArray() : $products;
 		$this->setModified();
 
 		$this->notify( 'setCoupon.after', $old );
@@ -473,10 +472,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	/**
 	 * Replaces all coupons in the current basket with the new ones
 	 *
-	 * @param array $map Associative list of order coupons as returned by getCoupons()
+	 * @param iterable $map Associative list of order coupons as returned by getCoupons()
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setCoupons( array $map ) : \Aimeos\MShop\Order\Item\Base\Iface
+	public function setCoupons( iterable $map ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$map = $this->notify( 'setCoupons.before', $map );
 
@@ -502,7 +501,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 		}
 
 		$old = $this->coupons;
-		$this->coupons = $map;
+		$this->coupons = is_map( $map ) ? $map->toArray() : $map;
 		$this->setModified();
 
 		$this->notify( 'setCoupons.after', $old );
@@ -595,17 +594,17 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	/**
 	 * Replaces all products in the current basket with the new ones
 	 *
-	 * @param array $map Associative list of ordered products as returned by getProducts()
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $map Associative list of ordered products as returned by getProducts()
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setProducts( array $map ) : \Aimeos\MShop\Order\Item\Base\Iface
+	public function setProducts( iterable $map ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$map = $this->notify( 'setProducts.before', $map );
 
 		$this->checkProducts( $map );
 
 		$old = $this->products;
-		$this->products = $map;
+		$this->products = is_map( $map ) ? $map->toArray() : $map;
 		$this->setModified();
 
 		$this->notify( 'setProducts.after', $old );
@@ -713,10 +712,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	/**
 	 * Replaces all services in the current basket with the new ones
 	 *
-	 * @param array $map Associative list of order services as returned by getServices()
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface[] $map Associative list of order services as returned by getServices()
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
-	public function setServices( array $map ) : \Aimeos\MShop\Order\Item\Base\Iface
+	public function setServices( iterable $map ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$map = $this->notify( 'setServices.before', $map );
 
@@ -725,7 +724,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 		}
 
 		$old = $this->services;
-		$this->services = $map;
+		$this->services = is_map( $map ) ? $map->toArray() : $map;
 		$this->setModified();
 
 		$this->notify( 'setServices.after', $old );
@@ -751,7 +750,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface[] List of checked items
 	 * @throws \Aimeos\MShop\Exception If one of the order addresses is invalid
 	 */
-	protected function checkAddresses( array $items, string $type ) : array
+	protected function checkAddresses( iterable $items, string $type ) : iterable
 	{
 		foreach( $items as $key => $item )
 		{
@@ -770,7 +769,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of checked items
 	 * @throws \Aimeos\MShop\Exception If one of the order products is invalid
 	 */
-	protected function checkProducts( array $items ) : array
+	protected function checkProducts( iterable $items ) : iterable
 	{
 		foreach( $items as $key => $item )
 		{
@@ -795,7 +794,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface[] List of checked items
 	 * @throws \Aimeos\MShop\Exception If one of the order services is invalid
 	 */
-	protected function checkServices( array $items, string $type ) : array
+	protected function checkServices( iterable $items, string $type ) : iterable
 	{
 		foreach( $items as $key => $item )
 		{
@@ -815,11 +814,11 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * the existing product can be updated.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item
-	 * @param array $products List of order product items to check against
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of order product items to check against
 	 * @return int|null Positon of the same product in the product list of false if product is unique
 	 * @throws \Aimeos\MShop\Order\Exception If no similar item was found
 	 */
-	protected function getSameProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, array $products ) : ?int
+	protected function getSameProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, iterable $products ) : ?int
 	{
 		$map = [];
 		$count = 0;

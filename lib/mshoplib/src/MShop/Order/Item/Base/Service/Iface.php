@@ -178,10 +178,10 @@ interface Iface
 	/**
 	 * Sets the new list of attribute items for the service.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface[] $attributes List of order service attribute items
+	 * @param \Aimeos\Map|\Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface[] $attributes List of order service attribute items
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
-	public function setAttributeItems( array $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface;
+	public function setAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface;
 
 	/**
 	 * Copys all data from a given service item.
