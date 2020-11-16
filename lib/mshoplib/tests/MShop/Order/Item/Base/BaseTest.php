@@ -61,7 +61,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->products = [$prod1, $prod2];
-		$this->coupons = map(['OPQR' => [$prod1]]);
+		$this->coupons = map( ['OPQR' => [$prod1]] );
 
 		$this->addresses = array(
 			'payment' => [0 => $orderAddressManager->create()->setType( 'payment' )->setId( null )],
@@ -463,7 +463,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->setCoupon( 'OPQR', $this->coupons['OPQR'] );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
-		$this->assertEquals( map(['OPQR' => $this->coupons['OPQR']]), $this->object->getCoupons() );
+		$this->assertEquals( map( ['OPQR' => $this->coupons['OPQR']] ), $this->object->getCoupons() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
