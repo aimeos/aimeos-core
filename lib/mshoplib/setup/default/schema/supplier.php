@@ -124,6 +124,7 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_mssupli_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_mssupli_pid_sid_dm_ty_rid' );
 			$table->addIndex( array( 'parentid', 'siteid', 'domain', 'pos', 'refid' ), 'idx_mssupli_pid_sid_dm_pos_rid' );
+			$table->addIndex( array( 'siteid', 'refid', 'domain', 'type' ), 'idx_mssupli_sid_rid_dom_ty' );
 			$table->addIndex( array( 'siteid', 'key' ), 'idx_mssupli_sid_key' );
 			$table->addIndex( array( 'parentid' ), 'fk_mssupli_pid' );
 
