@@ -459,7 +459,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$new = $this->notify( 'setCoupon.before', [$code => $products] );
 
-		$products = $this->checkProducts( map( $new )->first() );
+		$products = $this->checkProducts( map( $new )->first( [] ) );
 
 		if( isset( $this->coupons[$code] ) )
 		{
@@ -785,7 +785,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] List of checked items
 	 * @throws \Aimeos\MShop\Exception If one of the order products is invalid
 	 */
-	protected function checkProducts( iterable $items ) : iterable
+	protected function checkProducts( iterable $items ) : \Aimeos\Map
 	{
 		foreach( $items as $key => $item )
 		{
@@ -798,7 +798,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 			$this->checkPrice( $item->getPrice() );
 		}
 
-		return $items;
+		return map( $items );
 	}
 
 

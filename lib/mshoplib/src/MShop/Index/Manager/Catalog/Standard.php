@@ -462,7 +462,7 @@ class Standard
 
 			foreach( $items as $id => $item )
 			{
-				if( !array_key_exists( $id, $listItems ) ) { continue; }
+				if( !$listItems->has( $id ) ) { continue; }
 
 				foreach( (array) $listItems[$id] as $listItem )
 				{
@@ -634,26 +634,23 @@ class Standard
 	 * Returns the list items referencing the given products
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items List of product items
-	 * @return array Associative list of product IDs as keys and lists of list items as values
+	 * @return \Aimeos\Map Associative list of product IDs as keys and lists of list items as values
 	 */
-	protected function getListItems( array $items ) : array
+	protected function getListItems( iterable $items ) : \Aimeos\Map
 	{
 		$listItems = [];
 		$listManager = \Aimeos\MShop::create( $this->getContext(), 'catalog/lists' );
 
-		$search = $listManager->filter( true )->setSlice( 0, 0x7fffffff );
-		$expr = array(
-			$search->compare( '==', 'catalog.lists.refid', array_keys( $items ) ),
-			$search->compare( '==', 'catalog.lists.domain', 'product' ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search = $listManager->filter( true )->slice( 0, 0x7fffffff )->add( [
+			'catalog.lists.refid' => map( $items )->keys()->toArray(),
+			'catalog.lists.domain' => 'product'
+		] );
 
 		foreach( $listManager->search( $search ) as $listItem ) {
 			$listItems[$listItem->getRefId()][] = $listItem;
 		}
 
-		return $listItems;
+		return map( $listItems );
 	}
 
 
