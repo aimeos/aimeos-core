@@ -73,8 +73,8 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		}
 
 		$manager->delete( $products->toArray() );
+		$this->removeStockItems( $products->keys() );
 		$this->removeAttributeItems();
-		$this->removeStockItems();
 
 
 		if( $value === '1' )
@@ -225,23 +225,16 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	/**
 	 * Adds stock levels to the given product in the database.
 	 *
-	 * @param string $productcode Code of the product item where the stock levels should be associated to
+	 * @param string $productId ID of the product item where the stock levels should be associated to
 	 * @param array $data Two dimensional associative list of product stock data
 	 */
-	protected function addStockItems( $productcode, array $data )
+	protected function addStockItems( $productId, array $data )
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock/type' );
-
-		$types = [];
-		foreach( $manager->search( $manager->filter() ) as $id => $item ) {
-			$types[$item->getCode()] = $id;
-		}
-
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
 
 		foreach( $data as $entry )
 		{
-			$item = $manager->create()->fromArray( $entry )->setProductCode( $productcode );
+			$item = $manager->create()->fromArray( $entry )->setProductId( $productId );
 			$manager->save( $item, false );
 		}
 	}
@@ -257,20 +250,19 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'attribute.label', 'Demo:' ) );
 
-		$manager->delete( $manager->search( $search )->toArray() );
+		$manager->delete( $manager->search( $search ) );
 	}
 
 
 	/**
 	 * Deletes the demo stock items
 	 */
-	protected function removeStockItems()
+	protected function removeStockItems( \Aimeos\Map $prodIds )
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
 
-		$search = $manager->filter();
-		$search->setConditions( $search->compare( '=~', 'stock.productcode', 'demo-' ) );
+		$filter = $manager->filter()->add( ['stock.productid' => $prodIds] )->slice( 0, $prodIds->count() );
 
-		$manager->delete( $manager->search( $search )->toArray() );
+		$manager->delete( $manager->search( $filter ) );
 	}
 }

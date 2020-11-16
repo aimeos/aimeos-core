@@ -491,7 +491,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			foreach( $item->getRefItems( 'product', 'default', 'default' ) as $refItem )
 			{
 				$sitem = clone $stockItem;
-				$sitem->setProductCode( $refItem->getCode() );
+				$sitem->setProductId( $refItem->getId() );
 				$sitem->setStockLevel( current( $stocklevels ) );
 
 				if( next( $stocklevels ) === false ) {
@@ -502,7 +502,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$sitem = clone $stockItem;
-			$list[] = $sitem->setProductCode( $item->getCode() );
+			$list[] = $sitem->setProductId( $item->getId() );
 		}
 
 		$stockManager->begin();
