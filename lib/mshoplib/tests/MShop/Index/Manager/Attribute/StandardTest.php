@@ -174,21 +174,39 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
 
-		$attrIds = [
-			$manager->find( '30', [], 'product', 'length' )->getId(),
-			$manager->find( '30', [], 'product', 'width' )->getId()
-		];
+		$length = $manager->find( '30', [], 'product', 'length' )->getId();
+		$width = $manager->find( '29', [], 'product', 'width' )->getId();
 
 		$search = $this->object->filter();
+		$search->add( [
+			$search->make( 'index.attribute:oneof', [$length] ) => null,
+			$search->make( 'index.attribute:oneof', [$width] ) => null
+		], '!=' );
 
-		$func = $search->createFunction( 'index.attribute:oneof', [$attrIds] );
-		$search->setConditions( $search->compare( '!=', $func, null ) );
-		$search->setSortations( array( $search->sort( '+', 'product.code' ) ) );
+		$result = $this->object->search( $search );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 'CNE', $result->first()->getCode() );
+	}
+
+
+	public function testSearchItemsOneofArticle()
+	{
+		$manager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context );
+
+		$color = $manager->find( 'white', [], 'product', 'color' )->getId();
+		$size = $manager->find( 'm', [], 'product', 'size' )->getId();
+
+		$search = $this->object->filter();
+		$search->add( [
+			$search->make( 'index.attribute:oneof', [$color] ) => null,
+			$search->make( 'index.attribute:oneof', [$size] ) => null
+		], '!=' );
 
 		$result = $this->object->search( $search, [] );
 
-		$this->assertEquals( 2, count( $result ) );
-		$this->assertEquals( 'CNE', $result->first()->getCode() );
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 'U:TEST', $result->first()->getCode() );
 	}
 
 
