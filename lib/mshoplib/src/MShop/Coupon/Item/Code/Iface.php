@@ -69,8 +69,8 @@ interface Iface
 	 * Sets the new reference for the coupon code
 	 * This can be an arbitrary value used by the coupon provider
 	 *
-	 * @param string $ref Arbitrary value depending on the coupon provider
+	 * @param string|null $ref Arbitrary value depending on the coupon provider
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
-	public function setRef( string $ref ) : \Aimeos\MShop\Coupon\Item\Code\Iface;
+	public function setRef( ?string $ref ) : \Aimeos\MShop\Coupon\Item\Code\Iface;
 }
