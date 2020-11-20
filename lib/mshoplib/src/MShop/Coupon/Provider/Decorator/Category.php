@@ -65,19 +65,20 @@ class Category
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
 			$listManager = \Aimeos\MShop::create( $this->getContext(), 'catalog/lists' );
 
+			$codes = explode( ',', $this->getConfigValue( 'category.code' ) );
 			$price = \Aimeos\MShop::create( $this->getContext(), 'price' )->create();
-			$catItem = $manager->find( $this->getConfigValue( 'category.code' ) );
 
-			$search = $listManager->filter( true )->setSlice( 0, count( $prodIds ) );
-			$search->setConditions( $search->combine( '&&', [
-				$search->compare( '==', 'catalog.lists.parentid', $catItem->getId() ),
-				$search->compare( '==', 'catalog.lists.refid', array_keys( $prodIds ) ),
-				$search->compare( '==', 'catalog.lists.type', ['default', 'promotion'] ),
-				$search->compare( '==', 'catalog.lists.domain', 'product' ),
-				$search->getConditions()
-			] ) );
+			$filter = $manager->filter( true )->add( ['catalog.code' => $codes] )->slice( 0, count( $codes ) );
+			$catIds = $manager->search( $filter )->keys()->toArray();
 
-			foreach( $listManager->search( $search ) as $listItem )
+			$filter = $listManager->filter( true )->slice( 0, count( $prodIds ) )->add( [
+				'catalog.lists.parentid' => $catIds,
+				'catalog.lists.refid' => array_keys( $prodIds ),
+				'catalog.lists.type' => ['default', 'promotion'],
+				'catalog.lists.domain' => 'product',
+			] );
+
+			foreach( $listManager->search( $filter ) as $listItem )
 			{
 				if( isset( $prodIds[$listItem->getRefId()] ) )
 				{
@@ -130,22 +131,16 @@ class Category
 		if( ( $value = $this->getConfigValue( 'category.code' ) ) !== null )
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
-			$search = $manager->filter( true )->setSlice( 0, 1 );
+			$filter = $manager->filter( true )->add( ['catalog.code' => explode( ',', $value )] )->slice( 0, 1 );
 			$expr = [];
 
 			foreach( $base->getProducts() as $product )
 			{
-				$func = $search->createFunction( 'catalog:has', ['product', 'default', $product->getProductId()] );
-				$expr[] = $search->compare( '!=', $func, null );
+				$func = $filter->make( 'catalog:has', ['product', 'default', $product->getProductId()] );
+				$expr[] = $filter->is( $func, '!=', null );
 			}
 
-			$search->setConditions( $search->combine( '&&', [
-				$search->compare( '==', 'catalog.code', explode( ',', $value ) ),
-				$search->combine( '||', $expr ),
-				$search->getConditions(),
-			] ) );
-
-			if( $manager->search( $search )->isEmpty() ) {
+			if( $manager->search( $filter->add( $filter->or( $expr ) ) )->isEmpty() ) {
 				return false;
 			}
 		}

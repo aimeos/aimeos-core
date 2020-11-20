@@ -102,4 +102,12 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertFalse( $this->object->isAvailable( $this->orderBase ) );
 	}
+
+
+	public function testIsAvailableMultiple()
+	{
+		$this->couponItem->setConfig( array( 'category.code' => 'cafe,tea' ) );
+
+		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
+	}
 }
