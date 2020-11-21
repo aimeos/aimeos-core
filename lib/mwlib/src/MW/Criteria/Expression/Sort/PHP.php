@@ -92,9 +92,13 @@ class PHP extends Base
 
 		switch( $type )
 		{
-			case '(float)':
+			case 'null':
+				return null;
+			case 'bool':
+				return (bool) $value;
+			case 'float':
 				return (double) $value;
-			case '(int)':
+			case 'int':
 				return (int) $value;
 			default:
 				return addcslashes( $value, '\'"' );
@@ -105,29 +109,22 @@ class PHP extends Base
 	/**
 	 * Returns the internal parameter type for the given string
 	 *
-	 * @param string|null &$item Reference to parameter value (will be updated if necessary)
+	 * @param mixed &$item Reference to parameter value (will be updated if necessary)
 	 * @return string Internal parameter type like string, float or int
 	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
-	protected function getParamType( ?string &$item ) : string
+	protected function getParamType( &$item ) : string
 	{
-		if( strlen( $item ) && $item[0] == '"' )
-		{
-			if( ( $item = substr( $item, 1, strlen( $item ) - 2 ) ) === false ) {
-				throw new \Aimeos\MW\Common\Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );
-			}
-
-			return '(string)';
-		}
-		else if( strpos( $item, '.' ) !== false )
-		{
-			return '(float)';
-		}
-		else if( ctype_digit( $item ) !== false )
-		{
-			return '(int)';
+		if( is_null( $item ) ) {
+			return 'null';
+		} elseif( is_bool( $item ) ) {
+			return 'bool';
+		} elseif( is_float( $item ) ) {
+			return 'float';
+		} elseif( is_int( $item ) ) {
+			return 'int';
 		}
 
-		return '(string)';
+		return 'string';
 	}
 }

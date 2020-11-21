@@ -170,6 +170,8 @@ class PHP extends Base
 
 		switch( $type )
 		{
+			case 'null':
+				$value = null; break;
 			case 'bool':
 				$value = (bool) $value; break;
 			case 'int':
@@ -187,25 +189,16 @@ class PHP extends Base
 	/**
 	 * Returns the parameter type.
 	 *
-	 * @param string|null &$item Parameter string to evaluate (double quotes will be removed if necessary)
+	 * @param mixed &$item Parameter string to evaluate (double quotes will be removed if necessary)
 	 * @return string Data type (string, float, int)
 	 */
-	protected function getParamType( ?string &$item ) : string
+	protected function getParamType( &$item ) : string
 	{
-		if( strlen( $item ) > 0 && $item[0] == '"' )
-		{
-			if( ( $item = substr( $item, 1, strlen( $item ) - 2 ) ) === false ) {
-				throw new \Aimeos\MW\Common\Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );
-			}
-
-			return 'string';
-		}
-		else if( strpos( $item, '.' ) !== false )
-		{
+		if( is_null( $item ) ) {
+			return 'null';
+		} elseif( is_float( $item ) ) {
 			return 'float';
-		}
-		else if( ctype_digit( $item ) !== false )
-		{
+		} elseif( is_int( $item ) ) {
 			return 'int';
 		}
 

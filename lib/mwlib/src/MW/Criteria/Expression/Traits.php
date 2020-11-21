@@ -203,9 +203,9 @@ trait Traits
 	/**
 	 * @param string &$item Reference to parameter value (will be updated if necessary)
 	 *
-	 * @param string|null $item Parameter value
+	 * @param mixed $item Parameter value
 	 * @return string Internal parameter type
 	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
-	abstract protected function getParamType( ?string &$item );
+	abstract protected function getParamType( &$item );
 }
