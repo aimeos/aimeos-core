@@ -134,7 +134,7 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 */
 	public function make( string $name, array $params ) : string
 	{
-		return \Aimeos\MW\Criteria\Expression\Base::createFunction( $name, $params );
+		return $name . '(' . substr( json_encode( $params ), 1, -1 ) . ')';
 	}
 
 
@@ -301,7 +301,7 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 */
 	public function createFunction( string $name, array $params ) : string
 	{
-		return \Aimeos\MW\Criteria\Expression\Base::createFunction( $name, $params );
+		return $name . '(' . substr( json_encode( $params ), 1, -1 ) . ')';
 	}
 
 

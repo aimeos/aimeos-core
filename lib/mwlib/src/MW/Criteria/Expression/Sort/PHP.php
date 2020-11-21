@@ -105,13 +105,13 @@ class PHP extends Base
 	/**
 	 * Returns the internal parameter type for the given string
 	 *
-	 * @param string &$item Reference to parameter value (will be updated if necessary)
+	 * @param string|null &$item Reference to parameter value (will be updated if necessary)
 	 * @return string Internal parameter type like string, float or int
 	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
-	protected function getParamType( string &$item ) : string
+	protected function getParamType( ?string &$item ) : string
 	{
-		if( $item[0] == '"' )
+		if( strlen( $item ) && $item[0] == '"' )
 		{
 			if( ( $item = substr( $item, 1, strlen( $item ) - 2 ) ) === false ) {
 				throw new \Aimeos\MW\Common\Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );

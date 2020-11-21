@@ -34,13 +34,6 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateFunction()
-	{
-		$func = \Aimeos\MW\Criteria\Expression\Compare\Base::createFunction( 'test', array( true, 1, 0.1, 'string', array( 2, 3 ) ) );
-		$this->assertEquals( 'test(1,1,0.1,"string",[2,3])', $func );
-	}
-
-
 	public function testGetOperators()
 	{
 		$expected = ['=~', '~=', '==', '!=', '>', '>=', '<', '<=', '-'];

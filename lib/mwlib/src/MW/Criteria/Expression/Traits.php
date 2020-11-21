@@ -31,19 +31,6 @@ trait Traits
 
 
 	/**
-	 * Creates a function signature for compare expressions.
-	 *
-	 * @param string $name Function name
-	 * @param array $params Single- or multi-dimensional list of parameters of type boolean, integer, etc.
-	 * @return string Function signature
-	 */
-	public static function createFunction( string $name, array $params ) : string
-	{
-		return $name . '(' . self::createSignature( $params ) . ')';
-	}
-
-
-	/**
 	 * Translates the sort key into the name required by the storage
 	 *
 	 * @param array $translations Associative list of variable or column names that should be translated
@@ -54,40 +41,6 @@ trait Traits
 	{
 		$name = $this->getName();
 		return $this->translateName( $name, $translations, $funcs );
-	}
-
-
-	/**
-	 * Creates a parameter signature for compare expressions.
-	 *
-	 * @param array $params Single- or multi-dimensional list of parameters of type boolean, integer, etc.
-	 * @return string Parameter signature
-	 */
-	protected static function createSignature( array $params ) : string
-	{
-		$list = [];
-
-		foreach( $params as $param )
-		{
-			if( $param === null ) {
-				$list[] = 'null'; continue;
-			}
-
-			switch( gettype( $param ) )
-			{
-				case 'boolean':
-				case 'integer':
-					$list[] = (int) $param; break;
-				case 'double':
-					$list[] = (double) $param; break;
-				case 'array':
-					$list[] = '[' . self::createSignature( $param ) . ']'; break;
-				default:
-					$list[] = '"' . str_replace( ['"', '[', ']'], ' ', $param ) . '"';
-			}
-		}
-
-		return implode( ',', $list );
 	}
 
 
@@ -119,18 +72,9 @@ trait Traits
 			throw new \Aimeos\MW\Common\Exception( 'Unable to extract function name' );
 		}
 
-		$matches = [];
-		$pattern = '/(\[[^\]]*\]|"[^"]*"|[0-9]+\.[0-9]+|[0-9]+|null),?/';
-
-		if( preg_match_all( $pattern, $paramstr, $matches ) === false ) {
-			throw new \Aimeos\MW\Common\Exception( 'Unable to extract function parameters' );
-		}
-
-		if( isset( $matches[1] ) ) {
-			$params = $this->extractParams( $matches[1] );
-		}
-
+		$params = json_decode( str_replace( ['(', ')'], ['[', ']'], $paramstr ) );
 		$name = $namestr . '()';
+
 		return true;
 	}
 
@@ -187,7 +131,19 @@ trait Traits
 			for( $i = 0; $i < $count; $i++ )
 			{
 				$find[$i] = '$' . ( $i + 1 );
-				$params[$i] = is_array( $params[$i] ) ? join( ',', $params[$i] ) : $params[$i];
+
+				if( is_array( $params[$i] ) )
+				{
+					$list = [];
+					foreach( $params[$i] as $key => $item ) {
+						$list[] = $this->escape( '==', $this->getParamType( $item ), $item );
+					}
+					$params[$i] = join( ',', $list );
+				}
+				else
+				{
+					$params[$i] = $this->escape( '==', $this->getParamType( $params[$i] ), $params[$i] );
+				}
 			}
 
 			if( is_array( $source ) ) {
@@ -247,51 +203,9 @@ trait Traits
 	/**
 	 * @param string &$item Reference to parameter value (will be updated if necessary)
 	 *
-	 * @param string $item Parameter value
+	 * @param string|null $item Parameter value
 	 * @return string Internal parameter type
 	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
-	abstract protected function getParamType( string &$item );
-
-
-	/**
-	 * Extracts the function parameters from the parameter strings.
-	 *
-	 * @param string[] $strings List of matched strings
-	 * @return array List of found parameters
-	 */
-	protected function extractParams( array $strings ) : array
-	{
-		$params = [];
-
-		foreach( $strings as $string )
-		{
-			if( isset( $string[0] ) && $string[0] == '[' )
-			{
-				$items = [];
-				$pattern = '/("[^"]*"|[0-9]+\.[0-9]+|[0-9]+|null),?/';
-
-				if( preg_match_all( $pattern, $string, $items ) === false ) {
-					throw new \Aimeos\MW\Common\Exception( 'Unable to extract function parameters' );
-				}
-
-				if( isset( $items[1] ) )
-				{
-					$list = [];
-
-					foreach( $items[1] as $item ) {
-						$list[] = $this->escape( '==', $this->getParamType( $item ), $item );
-					}
-
-					$params[] = $list;
-				}
-			}
-			else
-			{
-				$params[] = $this->escape( '==', $this->getParamType( $string ), $string );
-			}
-		}
-
-		return $params;
-	}
+	abstract protected function getParamType( ?string &$item );
 }

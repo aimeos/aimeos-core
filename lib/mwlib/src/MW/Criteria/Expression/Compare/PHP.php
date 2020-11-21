@@ -187,12 +187,12 @@ class PHP extends Base
 	/**
 	 * Returns the parameter type.
 	 *
-	 * @param string &$item Parameter string to evaluate (double quotes will be removed if necessary)
+	 * @param string|null &$item Parameter string to evaluate (double quotes will be removed if necessary)
 	 * @return string Data type (string, float, int)
 	 */
-	protected function getParamType( string &$item ) : string
+	protected function getParamType( ?string &$item ) : string
 	{
-		if( $item[0] == '"' )
+		if( strlen( $item ) > 0 && $item[0] == '"' )
 		{
 			if( ( $item = substr( $item, 1, strlen( $item ) - 2 ) ) === false ) {
 				throw new \Aimeos\MW\Common\Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );

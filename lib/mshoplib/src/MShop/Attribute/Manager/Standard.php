@@ -156,22 +156,16 @@ class Standard
 
 		$this->searchConfig['attribute:has']['function'] = function( &$source, array $params ) use ( $level ) {
 
-			array_walk_recursive( $params, function( &$v ) {
-				$v = trim( $v, '\'' );
-			} );
-
 			$keys = [];
-			$params[1] = isset( $params[1] ) ? $params[1] : '';
-			$params[2] = isset( $params[2] ) ? $params[2] : '';
 
-			foreach( (array) $params[1] as $type ) {
-				foreach( (array) $params[2] as $id ) {
+			foreach( (array) ( $params[1] ?? '' ) as $type ) {
+				foreach( (array) ( $params[2] ?? '' ) as $id ) {
 					$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
 				}
 			}
 
 			$sitestr = $this->getSiteString( 'mattli."siteid"', $level );
-			$keystr = $this->toExpression( 'mattli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$keystr = $this->toExpression( 'mattli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
@@ -180,22 +174,17 @@ class Standard
 
 		$this->searchConfig['attribute:prop']['function'] = function( &$source, array $params ) use ( $level ) {
 
-			array_walk_recursive( $params, function( &$v ) {
-				$v = trim( $v, '\'' );
-			} );
-
 			$keys = [];
-			$params[1] = array_key_exists( 1, $params ) ? $params[1] : '';
-			$params[2] = isset( $params[2] ) ? $params[2] : '';
+			$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
 
-			foreach( (array) $params[1] as $lang ) {
-				foreach( (array) $params[2] as $id ) {
-					$keys[] = $params[0] . '|' . ( $lang ? $lang . '|' : '' ) . ( $id !== '' ?  md5( $id ) : '' );
+			foreach( (array) $langs as $lang ) {
+				foreach( (array) ( $params[2] ?? '' ) as $id ) {
+					$keys[] = $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . ( $id != '' ? md5( $id ) : '' );
 				}
 			}
 
 			$sitestr = $this->getSiteString( 'mattpr."siteid"', $level );
-			$keystr = $this->toExpression( 'mattpr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$keystr = $this->toExpression( 'mattpr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;

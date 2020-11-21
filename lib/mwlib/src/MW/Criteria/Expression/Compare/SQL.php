@@ -204,13 +204,17 @@ class SQL extends Base
 	/**
 	 * Returns the internal type of the function parameter.
 	 *
-	 * @param string &$item Reference to parameter value (will be updated if necessary)
+	 * @param string|null &$item Reference to parameter value (will be updated if necessary)
 	 * @return string Internal parameter type
 	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
-	protected function getParamType( string &$item ) : string
+	protected function getParamType( ?string &$item ) : string
 	{
-		if( $item[0] == '"' )
+		if( $item === null || $item === 'null' )
+		{
+			return \Aimeos\MW\DB\Statement\Base::PARAM_NULL;
+		}
+		elseif( strlen( $item ) > 0 && $item[0] == '"' )
 		{
 			if( ( $item = substr( $item, 1, strlen( $item ) - 2 ) ) === false ) {
 				throw new \Aimeos\MW\Common\Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );
@@ -225,10 +229,6 @@ class SQL extends Base
 		elseif( ctype_digit( $item ) !== false )
 		{
 			return \Aimeos\MW\DB\Statement\Base::PARAM_INT;
-		}
-		elseif( $item === 'null' )
-		{
-			return \Aimeos\MW\DB\Statement\Base::PARAM_NULL;
 		}
 
 		return \Aimeos\MW\DB\Statement\Base::PARAM_STR;

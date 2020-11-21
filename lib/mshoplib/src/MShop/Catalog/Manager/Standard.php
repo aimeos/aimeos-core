@@ -165,22 +165,16 @@ class Standard extends Base
 
 		$this->searchConfig['catalog:has']['function'] = function( &$source, array $params ) use ( $level ) {
 
-			array_walk_recursive( $params, function( &$v ) {
-				$v = trim( $v, '\'' );
-			} );
-
 			$keys = [];
-			$params[1] = isset( $params[1] ) ? $params[1] : '';
-			$params[2] = isset( $params[2] ) ? $params[2] : '';
 
-			foreach( (array) $params[1] as $type ) {
-				foreach( (array) $params[2] as $id ) {
+			foreach( (array) ( $params[1] ?? '' ) as $type ) {
+				foreach( (array) ( $params[2] ?? '' ) as $id ) {
 					$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
 				}
 			}
 
 			$sitestr = $this->getSiteString( 'mcatli."siteid"', $level );
-			$keystr = $this->toExpression( 'mcatli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$keystr = $this->toExpression( 'mcatli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
