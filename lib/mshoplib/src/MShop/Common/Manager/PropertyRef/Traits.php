@@ -66,7 +66,7 @@ trait Traits
 		{
 			$manager = $this->getObject()->getSubManager( 'property' );
 
-			$search = $manager->filter()->setSlice( 0, 0x7fffffff );
+			$search = $manager->filter()->slice( 0, 0x7fffffff );
 			$search->setConditions( $search->compare( '==', $domain . '.property.parentid', $parentIds ) );
 
 			if( $types !== null )

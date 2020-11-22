@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'coupon.code.code', 'OPQR' ) );
 		$results = $this->object->search( $search )->toArray();
 
@@ -194,7 +194,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		//search with base criteria
 		$search = $this->object->filter( true );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'coupon.code.editor', 'core:lib/mshoplib' ),

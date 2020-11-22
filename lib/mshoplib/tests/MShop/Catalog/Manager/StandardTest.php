@@ -113,7 +113,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 
 		$items = $this->object->search( $search, [], $total )->toArray();
 
@@ -152,7 +152,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'catalog.label', 'Root' ),
 			$search->compare( '==', 'catalog.editor', $this->editor )

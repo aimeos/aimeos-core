@@ -535,7 +535,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 
 			$count = count( $result );
 			$start += $count;
-			$search->setSlice( $start );
+			$search->slice( $start );
 		}
 		while( $count == $search->getSliceSize() );
 

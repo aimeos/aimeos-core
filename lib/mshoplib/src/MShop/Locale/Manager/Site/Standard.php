@@ -758,7 +758,7 @@ class Standard
 			return $this->cache[$id];
 		}
 
-		$criteria = $this->getObject()->filter()->setSlice( 0, 1 );
+		$criteria = $this->getObject()->filter()->slice( 0, 1 );
 		$criteria->setConditions( $criteria->compare( '==', 'locale.site.code', 'default' ) );
 
 		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) === null ) {

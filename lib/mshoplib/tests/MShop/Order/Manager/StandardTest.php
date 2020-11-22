@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$status = \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED;
 
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.statuspayment', $status ),
 			$search->compare( '==', 'order.editor', $this->editor )
@@ -482,7 +482,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsTotal()
 	{
 		$total = 0;
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED ),
 			$search->compare( '==', 'order.editor', $this->editor )
@@ -502,7 +502,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsRef()
 	{
 		$total = 0;
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ),
 			$search->compare( '==', 'order.editor', $this->editor )

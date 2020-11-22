@@ -72,7 +72,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'text.lists.editor', $this->editor ) );
 		$results = $this->object->search( $search )->toArray();
 
@@ -188,7 +188,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice( 0, 5 );
+		$search->slice( 0, 5 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 5, count( $results ) );
 		$this->assertEquals( 10, $total );

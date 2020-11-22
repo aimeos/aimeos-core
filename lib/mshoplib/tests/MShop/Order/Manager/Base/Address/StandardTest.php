@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY;
 
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.base.address.type', $type ),
 			$search->compare( '==', 'order.base.address.editor', $this->editor )
@@ -261,7 +261,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.address.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 		$items = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $items ) );

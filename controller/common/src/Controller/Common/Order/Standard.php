@@ -169,7 +169,7 @@ class Standard
 			$search->compare( '!=', $func, null ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 0x7fffffff );
+		$search->slice( 0, 0x7fffffff );
 
 		$bundleItems = $productManager->search( $search, array( 'product' ) );
 
@@ -215,7 +215,7 @@ class Standard
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '-', 'order.status.ctime' ) ) );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 
 		return $manager->search( $search )->first();
 	}
@@ -238,7 +238,7 @@ class Standard
 			$search->compare( '==', 'stock.type', $stockType ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, count( $prodIds ) );
+		$search->slice( 0, count( $prodIds ) );
 
 		return $stockManager->search( $search );
 	}
@@ -276,7 +276,7 @@ class Standard
 
 				$count = count( $items );
 				$start += $count;
-				$search->setSlice( $start );
+				$search->slice( $start );
 			}
 			while( $count >= $search->getSliceSize() );
 
@@ -359,7 +359,7 @@ class Standard
 
 				$count = count( $items );
 				$start += $count;
-				$search->setSlice( $start );
+				$search->slice( $start );
 			}
 			while( $count >= $search->getSliceSize() );
 

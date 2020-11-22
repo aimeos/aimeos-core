@@ -436,7 +436,7 @@ abstract class DBBase
 		$manager = \Aimeos\MShop::create( $context, 'product' );
 		$prodSearch = $manager->filter();
 		$prodSearch->setConditions( $prodSearch->compare( '==', 'product.id', $ids ) );
-		$prodSearch->setSlice( 0, $search->getSliceSize() );
+		$prodSearch->slice( 0, $search->getSliceSize() );
 		$items = $manager->search( $prodSearch, $ref );
 
 		foreach( $ids as $id )

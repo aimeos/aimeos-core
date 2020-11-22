@@ -104,7 +104,7 @@ class OrderCheck
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSlice( 0, $config['ordercheck.total-number-min'] );
+			$search->slice( 0, $config['ordercheck.total-number-min'] );
 
 			if( $manager->search( $search )->count() < (int) $config['ordercheck.total-number-min'] ) {
 				return false;
@@ -123,7 +123,7 @@ class OrderCheck
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSlice( 0, 1 );
+			$search->slice( 0, 1 );
 
 			if( !$manager->search( $search )->isEmpty() ) {
 				return false;

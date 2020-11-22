@@ -301,7 +301,7 @@ class Standard
 
 		do
 		{
-			$catalogSearch->setSlice( $start, $size );
+			$catalogSearch->slice( $start, $size );
 			$result = $catalogListManager->aggregate( $catalogSearch, 'catalog.lists.refid' );
 
 			$expr = array(
@@ -458,7 +458,7 @@ class Standard
 
 		do
 		{
-			$search->setSlice( $start, $size );
+			$search->slice( $start, $size );
 			$products = $manager->search( $search, $domains );
 
 			try

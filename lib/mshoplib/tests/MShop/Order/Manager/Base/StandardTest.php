@@ -102,7 +102,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
 		$results = $this->object->search( $search )->toArray();
 
@@ -366,7 +366,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsRef()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 
 		$search->setConditions( $search->compare( '!=', 'order.base.customerid', '' ) );
 		$result = $this->object->search( $search, ['customer'] );
@@ -384,7 +384,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 		$total = 0;
 		$items = $this->object->search( $search, [], $total );
 		$this->assertEquals( 1, count( $items ) );

@@ -30,7 +30,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->filter( true );
-		$search->setSlice( 0, 10 );
+		$search->slice( 0, 10 );
 
 		$total = 0;
 		$indexManager->search( $search, array( 'text', 'price', 'media' ), $total );
@@ -46,7 +46,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->filter( true );
-		$search->setSlice( 0, $this->slizeSize );
+		$search->slice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -58,7 +58,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 			$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', array( 'default', $catId ) ) ),
 		);
 		$search->setSortations( $sort );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 
 		$total = 0;
 		$result = $indexManager->search( $search, array( 'text', 'price', 'media', 'attribute' ), $total );
@@ -77,7 +77,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->filter( true );
-		$search->setSlice( 0, $this->slizeSize );
+		$search->slice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -108,7 +108,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->filter( true );
-		$search->setSlice( 0, $this->slizeSize );
+		$search->slice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -140,7 +140,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->filter( true );
-		$search->setSlice( 0, $this->slizeSize );
+		$search->slice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->compare( '==', 'index.catalog.id', (int) $this->catItem->getId() ),
@@ -167,7 +167,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->filter( true );
-		$search->setSlice( 0, $this->slizeSize );
+		$search->slice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -195,7 +195,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->filter( true );
-		$search->setSlice( 0, $this->slizeSize );
+		$search->slice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -222,7 +222,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->filter( true );
-		$search->setSlice( 0, $this->slizeSize );
+		$search->slice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -252,7 +252,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->filter( true );
-		$search->setSlice( 0, $this->slizeSize );
+		$search->slice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),
@@ -283,7 +283,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 
 		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context );
 		$search = $indexManager->filter( true );
-		$search->setSlice( 0, $this->slizeSize );
+		$search->slice( 0, $this->slizeSize );
 
 		$expr = array(
 			$search->getConditions(),

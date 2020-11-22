@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( [$search->sort( '-', 'media.type.position' )] );
-		$search->setSlice( 0, 5 );
+		$search->slice( 0, 5 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 5, count( $results ) );
 		$this->assertEquals( 8, $total );
@@ -103,7 +103,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'media.type.code', 'prod_266x221' ),
 			$search->compare( '==', 'media.type.editor', $this->editor )

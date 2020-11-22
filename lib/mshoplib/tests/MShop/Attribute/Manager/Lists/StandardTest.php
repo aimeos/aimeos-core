@@ -76,7 +76,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -200,7 +200,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsTotal()
 	{
 		$total = 0;
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'attribute.lists.domain', 'text' ),
 			$search->compare( '==', 'attribute.lists.editor', $this->editor ),

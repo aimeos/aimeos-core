@@ -222,7 +222,7 @@ class Xml
 		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
 
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base' );
-		$search = $manager->filter()->setSlice( 0, $ids->count() );
+		$search = $manager->filter()->slice( 0, $ids->count() );
 		$search->setConditions( $search->compare( '==', 'order.base.id', $ids->toArray() ) );
 
 		return $manager->search( $search, $ref );
@@ -289,7 +289,7 @@ class Xml
 	protected function importNodes( array $nodes ) : \Aimeos\MShop\Service\Provider\Delivery\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
-		$search = $manager->filter()->setSlice( 0, count( $nodes ) );
+		$search = $manager->filter()->slice( 0, count( $nodes ) );
 		$search->setConditions( $search->compare( '==', 'order.id', array_keys( $nodes ) ) );
 		$items = $manager->search( $search );
 

@@ -55,7 +55,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'price.lists.type.editor', $this->editor ) );
 		$results = $this->object->search( $search )->toArray();
 
@@ -146,7 +146,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$total = 0;
 
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'price.lists.type.editor', $this->editor ) );
 		$search->setSortations( [$search->sort( '-', 'price.lists.type.position' )] );
 

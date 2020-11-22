@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'subscription.status', 1 ),
 			$search->compare( '==', 'subscription.editor', $this->editor )
@@ -214,7 +214,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsTotal()
 	{
 		$total = 0;
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'subscription.editor', $this->editor ) );
 		$items = $this->object->search( $search, [], $total )->toArray();
 
@@ -230,7 +230,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsRef()
 	{
 		$total = 0;
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'subscription.dateend', '2010-01-01' ) );
 		$item = $this->object->search( $search, ['order/base', 'order/base/product'], $total )->first();
 

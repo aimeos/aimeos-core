@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->filter();
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 		$items = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -168,7 +168,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.lists.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 2 );
+		$search->slice( 0, 2 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );

@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'customer.group.label', 'Unitgroup' ) );
 
 		$items = $this->object->search( $search )->toArray();
@@ -143,7 +143,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.group.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 
 		$total = 0;
 		$results = $this->object->search( $search, [], $total )->toArray();

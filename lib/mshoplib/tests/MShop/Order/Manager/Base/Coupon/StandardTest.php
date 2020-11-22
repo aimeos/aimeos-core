@@ -107,7 +107,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', array( 'OPQR', '5678' ) ) );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 
 		$total = 0;
 		$results = $this->object->search( $search, [], $total )->toArray();
@@ -120,7 +120,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$obj = $this->object;
-		$search = $obj->filter()->setSlice( 0, 1 );
+		$search = $obj->filter()->slice( 0, 1 );
 
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', 'OPQR' ) );
 		$results = $obj->search( $search )->toArray();

@@ -914,7 +914,7 @@ class Standard extends Base
 			&& !( $ids = map( $map )->col( 'order.base.customerid' )->filter() )->empty()
 		) {
 			$manager = \Aimeos\MShop::create( $context, 'customer' );
-			$search = $manager->filter()->setSlice( 0, count( $ids ) );
+			$search = $manager->filter()->slice( 0, count( $ids ) );
 			$search->setConditions( $search->compare( '==', 'customer.id', $ids ) );
 			$custItems = $manager->search( $search, $ref );
 		}

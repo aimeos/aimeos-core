@@ -109,7 +109,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'stock.type.code', 'unit_type1' ),
 			$search->compare( '==', 'stock.type.editor', $this->editor )
@@ -173,7 +173,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'stock.type.position' )] );
-		$search->setSlice( 0, 2 );
+		$search->slice( 0, 2 );
 
 		$total = 0;
 		$results = $this->object->search( $search, [], $total )->toArray();

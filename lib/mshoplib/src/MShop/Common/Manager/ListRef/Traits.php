@@ -163,7 +163,7 @@ trait Traits
 	protected function getListItems( array $ids, array $domains = null, string $prefix ) : \Aimeos\Map
 	{
 		$manager = $this->getObject()->getSubManager( 'lists' );
-		$search = $manager->filter()->setSlice( 0, 0x7fffffff );
+		$search = $manager->filter()->slice( 0, 0x7fffffff );
 
 		if( is_array( $domains ) )
 		{
@@ -220,7 +220,7 @@ trait Traits
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), $domain );
 
-			$search = $manager->filter()->setSlice( 0, count( $list ) );
+			$search = $manager->filter()->slice( 0, count( $list ) );
 			$search->setConditions( $search->compare( '==', str_replace( '/', '.', $domain ) . '.id', array_keys( $list ) ) );
 
 			foreach( $manager->search( $search, $domains ) as $id => $item )

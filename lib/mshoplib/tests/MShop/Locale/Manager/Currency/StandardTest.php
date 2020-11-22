@@ -135,7 +135,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		// search without base criteria, slice & total
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '~=', 'locale.currency.label', 'CFA' ) );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );

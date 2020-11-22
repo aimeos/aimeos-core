@@ -76,7 +76,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '~=', 'supplier.label', 'unitSupplier' ),
 			$search->compare( '==', 'supplier.editor', $this->editor ),
@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'supplier.editor', $this->editor ) );
-		$search->setSlice( 0, 2 );
+		$search->slice( 0, 2 );
 
 		$total = 0;
 		$results = $this->object->search( $search, [], $total )->toArray();

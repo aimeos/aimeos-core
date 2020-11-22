@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$criteria = $this->object->filter()->setSlice( 0, 1 );
+		$criteria = $this->object->filter()->slice( 0, 1 );
 		$criteria->setConditions( $criteria->compare( '==', 'log.priority', 1 ) );
 		$result = $this->object->search( $criteria )->toArray();
 

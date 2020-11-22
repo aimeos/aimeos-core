@@ -35,7 +35,7 @@ class Once
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
 
-			$search = $manager->filter()->setSlice( 0, 1 );
+			$search = $manager->filter()->slice( 0, 1 );
 			$expr = [
 				$search->compare( '==', 'order.base.address.email', $address->getEmail() ),
 				$search->compare( '==', 'order.base.coupon.code', $this->getCode() ),

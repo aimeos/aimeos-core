@@ -89,7 +89,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( [$search->sort( '-', 'text.type.position' )] );
-		$search->setSlice( 0, 2 );
+		$search->slice( 0, 2 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 4, $total );
@@ -102,7 +102,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'text.type.code', 'name' ),
 			$search->compare( '==', 'text.type.editor', $this->editor ),

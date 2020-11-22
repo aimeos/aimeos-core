@@ -191,7 +191,7 @@ class Voucher
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop::create( $context, 'order/base/coupon' );
 
-		$search = $manager->filter()->setSlice( 0, 0x7fffffff );
+		$search = $manager->filter()->slice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.code', $code ) );
 
 		$baseIds = $prodIds = [];

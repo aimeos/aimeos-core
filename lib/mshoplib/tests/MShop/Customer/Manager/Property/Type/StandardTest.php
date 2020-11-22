@@ -57,7 +57,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'customer.property.type.code', 'newsletter' ),
 			$search->compare( '==', 'customer.property.type.editor', $this->editor )
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'customer.property.type.position' )] );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 		$items = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $items ) );

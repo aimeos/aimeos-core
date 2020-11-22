@@ -189,7 +189,7 @@ class Autofill
 			$search = $orderManager->filter();
 			$search->setConditions( $search->compare( '==', 'order.base.customerid', $userid ) );
 			$search->setSortations( array( $search->sort( '-', 'order.ctime' ) ) );
-			$search->setSlice( 0, 1 );
+			$search->slice( 0, 1 );
 
 			if( ( $item = $orderManager->search( $search )->first() ) !== null )
 			{

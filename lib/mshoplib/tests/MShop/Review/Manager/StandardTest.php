@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'review.status', 1 ),
 			$search->compare( '==', 'review.editor', $this->editor )
@@ -225,7 +225,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsTotal()
 	{
 		$total = 0;
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'review.editor', $this->editor ) );
 		$items = $this->object->search( $search, [], $total )->toArray();
 

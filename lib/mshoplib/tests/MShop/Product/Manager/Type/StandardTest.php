@@ -98,7 +98,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'product.type.code', 'default' ),
 			$search->compare( '==', 'product.type.editor', $this->editor )
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'product.type.position' )] );
-		$search->setSlice( 0, 2 );
+		$search->slice( 0, 2 );
 		$items = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 2, count( $items ) );

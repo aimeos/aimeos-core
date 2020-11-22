@@ -286,7 +286,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 5 );
+		$search->slice( 0, 5 );
 
 		$total = 0;
 		$results = $this->object->search( $search, [], $total )->toArray();
@@ -309,7 +309,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'attribute.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 
 		$total = 0;
 		$items = $this->object->search( $search, [], $total )->toArray();

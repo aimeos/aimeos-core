@@ -183,7 +183,7 @@ class ProductPrice
 
 		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
 
-		$search = $attrManager->filter( true )->setSlice( 0, count( $list ) );
+		$search = $attrManager->filter( true )->slice( 0, count( $list ) );
 		$search->setConditions( $search->combine( '&&', [
 			$search->compare( '==', 'attribute.id', $list ),
 			$search->getConditions()
@@ -207,7 +207,7 @@ class ProductPrice
 
 		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 
-		$search = $productManager->filter( true )->setSlice( 0, count( $prodCodes ) );
+		$search = $productManager->filter( true )->slice( 0, count( $prodCodes ) );
 		$search->setConditions( $search->combine( '&&', [
 			$search->compare( '==', 'product.code', $prodCodes ),
 			$search->getConditions(),

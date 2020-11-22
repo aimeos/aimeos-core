@@ -515,7 +515,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$manager = \Aimeos\MShop::create( $this->additional, 'attribute' );
 
-		$search = $manager->filter()->setSlice( 0, 0x7fffffff );
+		$search = $manager->filter()->slice( 0, 0x7fffffff );
 		$search->setSortations( [$search->sort( '+', 'attribute.position' )] );
 
 		foreach( $manager->search( $search ) as $id => $item ) {

@@ -82,7 +82,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '~=', 'plugin.provider', 'Shipping' ),
 			$search->compare( '==', 'plugin.editor', $this->editor )
@@ -215,7 +215,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsBase()
 	{
-		$search = $this->object->filter( true )->setSlice( 0, 2 );
+		$search = $this->object->filter( true )->slice( 0, 2 );
 		$results = $this->object->search( $search, [] );
 		$this->assertEquals( 2, count( $results ) );
 

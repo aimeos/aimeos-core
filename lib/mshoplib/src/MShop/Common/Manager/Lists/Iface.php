@@ -68,15 +68,15 @@ interface Iface
 	 * $start = 0;
 	 * $search = $listManager->filter();
 	 *
-	 * $search->setSlice( $start, 2 );
+	 * $search->slice( $start, 2 );
 	 * $result = $listManager->aggregate( $search, 'catalog.lists.domain' );
 	 *
 	 * $start += count( $result );
-	 * $search->setSlice( $start, 2 );
+	 * $search->slice( $start, 2 );
 	 * $result = $listManager->aggregate( $search, 'catalog.lists.domain' );
 	 *
 	 * $start += count( $result );
-	 * $search->setSlice( $start, 2 );
+	 * $search->slice( $start, 2 );
 	 * $result = $listManager->aggregate( $search, 'catalog.lists.domain' );
 	 * </code>
 	 *
@@ -102,10 +102,10 @@ interface Iface
 	 *
 	 * $search = $listManager->filter();
 	 *
-	 * $search->setSlice( 0, 2 );
+	 * $search->slice( 0, 2 );
 	 * $listManager->aggregate( $search, 'catalog.lists.domain' );
 	 *
-	 * $search->setSlice( 2, 2 );
+	 * $search->slice( 2, 2 );
 	 * $listManager->aggregate( $search, 'catalog.lists.domain' );
 	 * </code>
 	 *

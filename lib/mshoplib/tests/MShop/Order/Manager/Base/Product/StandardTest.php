@@ -173,7 +173,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemRef()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'order.base.product.prodcode', 'CNE' ) );
 		$result = $this->object->search( $search, ['product'] );
 
@@ -192,7 +192,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice( 0, 2 );
+		$search->slice( 0, 2 );
 
 		$results = $this->object->search( $search, [], $total )->toArray();
 
@@ -207,7 +207,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 			$search->compare( '==', 'order.base.product.prodcode', 'CNE' ),
 			$search->compare( '==', 'order.base.product.editor', $this->editor )

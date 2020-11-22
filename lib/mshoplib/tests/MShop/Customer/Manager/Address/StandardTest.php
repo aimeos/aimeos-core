@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Example company' ) );
 
 		$items = $this->object->search( $search )->toArray();
@@ -253,7 +253,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice( 0, 2 );
+		$search->slice( 0, 2 );
 
 		$results = $this->object->search( $search, [], $total )->toArray();
 

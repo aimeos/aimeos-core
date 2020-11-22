@@ -151,7 +151,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding data for MShop locale currencies', 1 );
 
 		$currencyManager = $localeManager->getSubManager( 'currency', 'Standard' );
-		$items = $currencyManager->search( $currencyManager->filter()->setSlice( 0, 0x7fffffff ) );
+		$items = $currencyManager->search( $currencyManager->filter()->slice( 0, 0x7fffffff ) );
 
 		$num = $total = 0;
 
@@ -188,7 +188,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding data for MShop locale languages', 1 );
 
 		$languageManager = $localeManager->getSubManager( 'language', 'Standard' );
-		$items = $languageManager->search( $languageManager->filter()->setSlice( 0, 0x7fffffff ) );
+		$items = $languageManager->search( $languageManager->filter()->slice( 0, 0x7fffffff ) );
 
 		$num = $total = 0;
 

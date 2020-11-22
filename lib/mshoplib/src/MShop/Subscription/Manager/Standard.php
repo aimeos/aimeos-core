@@ -757,7 +757,7 @@ class Standard
 			}
 
 			$manager = $this->getObject()->getSubManager( 'base' );
-			$search = $manager->filter()->setSlice( 0, count( $ids ) );
+			$search = $manager->filter()->slice( 0, count( $ids ) );
 			$search->setConditions( $search->compare( '==', 'order.base.id', $ids ) );
 			$baseItems = $manager->search( $search, $ref );
 		}

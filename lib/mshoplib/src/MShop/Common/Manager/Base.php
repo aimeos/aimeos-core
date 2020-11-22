@@ -511,7 +511,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	protected function findBase( array $pairs, array $ref, bool $default ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$expr = [];
-		$criteria = $this->getObject()->filter( $default )->setSlice( 0, 1 );
+		$criteria = $this->getObject()->filter( $default )->slice( 0, 1 );
 
 		foreach( $pairs as $key => $value )
 		{
@@ -571,7 +571,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 */
 	protected function getItemBase( string $key, string $id, array $ref, bool $default ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$criteria = $this->getObject()->filter( $default )->setSlice( 0, 1 );
+		$criteria = $this->getObject()->filter( $default )->slice( 0, 1 );
 		$expr = [
 			$criteria->compare( '==', $key, $id ),
 			$criteria->getConditions()

@@ -22,7 +22,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
 		$search = $productManager->filter();
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 		$result = $productManager->search( $search, array( 'text', 'media', 'price', 'product', 'attribute' ) );
 
 		if( ( $this->item = $result->first() ) === null ) {

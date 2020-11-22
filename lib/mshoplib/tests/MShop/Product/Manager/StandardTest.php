@@ -135,7 +135,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$domains = ['text', 'product', 'price', 'media' => ['unittype10'], 'attribute', 'product/property' => ['package-weight']];
 
-		$search = $this->object->filter()->setSlice( 0, 1 );
+		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
 				$search->compare( '==', 'product.code', 'CNC' ),
 				$search->compare( '==', 'product.editor', $this->editor )
@@ -321,7 +321,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 		$products = $manager->search( $search )->toArray();
 
 		if( ( $item = reset( $products ) ) === false ) {
@@ -386,7 +386,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
@@ -403,7 +403,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
-		$search->setSlice( 0, 10 );
+		$search->slice( 0, 10 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 10, count( $results ) );
 		$this->assertEquals( 28, $total );
@@ -456,7 +456,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'product.editor', 'core:lib/mshoplib' ) );
-		$search->setSlice( $start, 5 );
+		$search->slice( $start, 5 );
 
 		do
 		{
@@ -468,7 +468,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 			$count = count( $result );
 			$start += $count;
-			$search->setSlice( $start, 5 );
+			$search->slice( $start, 5 );
 		}
 		while( $count > 0 );
 

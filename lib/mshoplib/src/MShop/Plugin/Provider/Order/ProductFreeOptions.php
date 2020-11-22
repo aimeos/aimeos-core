@@ -117,7 +117,7 @@ class ProductFreeOptions
 		$attrMap = [];
 		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
 
-		$search = $attrManager->filter()->setSlice( 0, count( $ids ) );
+		$search = $attrManager->filter()->slice( 0, count( $ids ) );
 		$search->setConditions( $search->compare( '==', 'attribute.id', $ids ) );
 
 		foreach( $attrManager->search( $search, ['price'] ) as $attrId => $attrItem ) {

@@ -213,7 +213,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$total = 0;
 		$search = $this->object->filter();
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 
 		$expr = array(
 			$search->compare( '!=', 'index.catalog.id', null ),
@@ -251,7 +251,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$total = 0;
 		$search = $this->object->filter();
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 
 		$expr = array(
 			$search->compare( '!=', 'index.attribute.id', null ),

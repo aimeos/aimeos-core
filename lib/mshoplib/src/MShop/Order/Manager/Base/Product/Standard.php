@@ -1044,7 +1044,7 @@ class Standard
 			}
 
 			$manager = \Aimeos\MShop::create( $context, 'product' );
-			$search = $manager->filter()->setSlice( 0, count( $ids ) );
+			$search = $manager->filter()->slice( 0, count( $ids ) );
 			$search->setConditions( $search->compare( '==', 'product.id', array_filter( $ids ) ) );
 			$prodItems = $manager->search( $search, $ref );
 		}
@@ -1091,7 +1091,7 @@ class Standard
 	protected function getAttributeItems( array $ids ) : array
 	{
 		$manager = $this->getSubmanager( 'attribute' );
-		$search = $manager->filter()->setSlice( 0, 0x7fffffff );
+		$search = $manager->filter()->slice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.parentid', $ids ) );
 
 		$result = [];
