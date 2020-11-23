@@ -50,13 +50,18 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 *   $f->add( $f->or( [$f->is( 'product.code', '==', 'abc' ), $f->is( 'product.label', '=~', 'abc' )] );
 	 *   $f->add( $f->not( $f->is( 'product.code', '=~', 'abc' ) );
 	 *
-	 * @param \Aimeos\MW\Criteria\Expression\Combine\Iface|\Aimeos\MW\Criteria\Expression\Compare\Iface|array|string Expression, list of name/value pairs or name
+	 * @param \Aimeos\MW\Criteria\Expression\Combine\Iface|\Aimeos\MW\Criteria\Expression\Compare\Iface|array|string|null Expression, list of name/value pairs or name
 	 * @param string $operator Operator to compare name and value with
 	 * @param mixed $value Value to compare the name with
+	 * @return \Aimeos\MW\Criteria\Iface Same object for fluent interface
 	 */
 	public function add( $expr, string $operator = '==', $value = null ) : \Aimeos\MW\Criteria\Iface
 	{
 		$cond = [];
+
+		if( is_null( $expr ) ) {
+			return $this;
+		}
 
 		if( is_string( $expr ) ) {
 			$cond[] = $this->compare( $operator, $expr, $value );
@@ -302,45 +307,6 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	public function createFunction( string $name, array $params ) : string
 	{
 		return $name . '(' . substr( json_encode( $params ), 1, -1 ) . ')';
-	}
-
-
-	/**
-	 * Creates condition expressions from a multi-dimensional associative array.
-	 *
-	 * @param array $array Multi-dimensional associative array containing the expression arrays
-	 * @return \Aimeos\MW\Criteria\Expression\Iface|null Condition expressions (maybe nested) or null for none
-	 * @throws \Aimeos\MW\Exception If given array is invalid
-	 * @deprecated 2021.01
-	 */
-	public function toConditions( array $array ) : ?\Aimeos\MW\Criteria\Expression\Iface
-	{
-		return $this->parse( $array );
-	}
-
-
-	/**
-	 * Creates sortation expressions from an associative array.
-	 *
-	 * The array must be a single-dimensional array of name and operator pairs like
-	 * 	$array = array(
-	 * 		'name' => '+',
-	 * 		'name2' => '-',
-	 * 	);
-	 *
-	 * @param string[] $array Single-dimensional array of name and operator pairs
-	 * @return \Aimeos\MW\Criteria\Expression\Sort\Iface[] List of sort expressions
-	 * @deprecated 2021.01
-	 */
-	public function toSortations( array $array ) : array
-	{
-		$results = [];
-
-		foreach( $array as $name => $op ) {
-			$results[] = $this->sort( $op, $name );
-		}
-
-		return $results;
 	}
 
 

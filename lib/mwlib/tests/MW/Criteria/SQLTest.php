@@ -345,36 +345,30 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testToConditionsEmptyArray()
-	{
-		$this->assertNull( $this->object->toConditions( [] ) );
-	}
-
-
-	public function testToConditionsInvalid()
+	public function testParseInvalid()
 	{
 		$this->expectException( \Aimeos\MW\Common\Exception::class );
-		$this->object->toConditions( ['=][attribute.id]=15'] );
+		$this->object->parse( ['=][attribute.id]=15'] );
 	}
 
 
-	public function testToConditionsInvalidOperator()
+	public function testParseInvalidOperator()
 	{
 		$this->expectException( \Aimeos\MW\Common\Exception::class );
-		$this->object->toConditions( ['><' => ['name', 'value']] );
+		$this->object->parse( ['><' => ['name', 'value']] );
 	}
 
 
-	public function testToConditionsInvalidStructure()
+	public function testParseInvalidStructure()
 	{
 		$this->expectException( \Aimeos\MW\Common\Exception::class );
-		$this->object->toConditions( ['&&' => ['name', 'value']] );
+		$this->object->parse( ['&&' => ['name', 'value']] );
 	}
 
 
-	public function testToConditionsCompare()
+	public function testParseCompare()
 	{
-		$condition = $this->object->toConditions( ['==' => ['name' => 'value']] );
+		$condition = $this->object->parse( ['==' => ['name' => 'value']] );
 
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\Iface::class, $condition );
 		$this->assertEquals( '==', $condition->getOperator() );
@@ -383,7 +377,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testToConditionsCombine()
+	public function testParseCombine()
 	{
 		$array = array(
 			'&&' => array(
@@ -396,7 +390,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 			),
 		);
 
-		$condition = $this->object->toConditions( $array );
+		$condition = $this->object->parse( $array );
 		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $condition );
 		$this->assertEquals( '&&', $condition->getOperator() );
 		$this->assertEquals( 2, count( $condition->getExpressions() ) );
@@ -408,27 +402,6 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 			$this->assertEquals( 'name', $expr->getName() );
 			$this->assertEquals( 'value', $expr->getValue() );
 		}
-	}
-
-
-	public function testToSortations()
-	{
-		$array = array(
-			'name1' => '+',
-			'name2' => '-',
-		);
-
-		$sortations = $this->object->toSortations( $array );
-		$this->assertEquals( 2, count( $sortations ) );
-
-		foreach( $sortations as $sort ) {
-			$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Sort\Iface::class, $sort );
-		}
-
-		$this->assertEquals( '+', $sortations[0]->getOperator() );
-		$this->assertEquals( 'name1', $sortations[0]->getName() );
-		$this->assertEquals( '-', $sortations[1]->getOperator() );
-		$this->assertEquals( 'name2', $sortations[1]->getName() );
 	}
 
 
