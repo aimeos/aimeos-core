@@ -770,8 +770,8 @@ class Standard
 				$search->getConditionSource( $types, $translations ),
 				$search->getSortationSource( $types, $translations ),
 				implode( ', ', $search->translate( $search->getSortations(), $translations ) ) . ', ',
-				$search->getSliceStart(),
-				$search->getSliceSize(),
+				$search->getOffset(),
+				$search->getLimit(),
 			);
 
 			/** mshop/locale/manager/standard/search/mysql

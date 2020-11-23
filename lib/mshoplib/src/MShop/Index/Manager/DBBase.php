@@ -296,8 +296,8 @@ abstract class DBBase
 			$colstring,
 			implode( "\n", array_unique( $joins ) ),
 			$search->getConditionSource( $types, $translations, $plugins, $funcs ),
-			$search->getSliceStart(),
-			$search->getSliceSize(),
+			$search->getOffset(),
+			$search->getLimit(),
 		);
 
 		if( empty( $search->getSortations() ) && ( $attribute = reset( $attributes ) ) !== false )
@@ -436,7 +436,7 @@ abstract class DBBase
 		$manager = \Aimeos\MShop::create( $context, 'product' );
 		$prodSearch = $manager->filter();
 		$prodSearch->setConditions( $prodSearch->compare( '==', 'product.id', $ids ) );
-		$prodSearch->slice( 0, $search->getSliceSize() );
+		$prodSearch->slice( 0, $search->getLimit() );
 		$items = $manager->search( $prodSearch, $ref );
 
 		foreach( $ids as $id )

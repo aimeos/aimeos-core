@@ -530,8 +530,8 @@ class Standard
 				$colstring . ( $sortcols ? join( ', ', $sortcols ) . ', ' : '' ),
 				$search->getConditionSource( $types, $translations ),
 				$search->getSortationSource( $types, $translations ),
-				$search->getSliceStart(),
-				$search->getSliceSize(),
+				$search->getOffset(),
+				$search->getLimit(),
 			);
 
 			/** mshop/locale/manager/language/standard/search/mysql

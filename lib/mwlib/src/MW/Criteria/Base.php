@@ -199,41 +199,6 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 
 
 	/**
-	 * Sets the offset and the size of the requested data slice.
-	 *
-	 * @param int $start Start number of the items
-	 * @param int $size Number of items
-	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
-	 */
-	public function slice( int $offset, int $limit = 100 ) : \Aimeos\MW\Criteria\Iface
-	{
-		return $this->setSlice( $offset, $limit );
-	}
-
-
-	/**
-	 * Returns the number of requested items.
-	 *
-	 * @return int Number of items
-	 */
-	public function getLimit() : int
-	{
-		return $this->getSliceSize();
-	}
-
-
-	/**
-	 * Returns the start number of requested items.
-	 *
-	 * @return int Start number of the items
-	 */
-	public function getOffset() : int
-	{
-		return $this->getSliceStart();
-	}
-
-
-	/**
 	 * Creates condition expressions from a multi-dimensional associative array.
 	 *
 	 * The simplest form of a valid associative array is a single comparison:

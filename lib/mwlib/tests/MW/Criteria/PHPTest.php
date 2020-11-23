@@ -213,13 +213,13 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 	public function testSlice()
 	{
-		$this->assertEquals( 0, $this->object->getSliceStart() );
-		$this->assertEquals( 100, $this->object->getSliceSize() );
+		$this->assertEquals( 0, $this->object->getOffset() );
+		$this->assertEquals( 100, $this->object->getLimit() );
 
-		$this->object->setSlice( 10, 20 );
+		$this->object->slice( 10, 20 );
 
-		$this->assertEquals( 10, $this->object->getSliceStart() );
-		$this->assertEquals( 20, $this->object->getSliceSize() );
+		$this->assertEquals( 10, $this->object->getOffset() );
+		$this->assertEquals( 20, $this->object->getLimit() );
 	}
 
 

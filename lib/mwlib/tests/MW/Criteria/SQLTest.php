@@ -85,13 +85,6 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateFunction()
-	{
-		$func = $this->object->createFunction( 'test', [1, null, 2] );
-		$this->assertEquals( 'test(1,null,2)', $func );
-	}
-
-
 	public function testGetOperators()
 	{
 		$expected = array(
@@ -324,18 +317,6 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 10, $this->object->getOffset() );
 		$this->assertEquals( 20, $this->object->getLimit() );
-	}
-
-
-	public function testSliceMethods()
-	{
-		$this->assertEquals( 0, $this->object->getSliceStart() );
-		$this->assertEquals( 100, $this->object->getSliceSize() );
-
-		$this->object->setSlice( 10, 20 );
-
-		$this->assertEquals( 10, $this->object->getSliceStart() );
-		$this->assertEquals( 20, $this->object->getSliceSize() );
 	}
 
 

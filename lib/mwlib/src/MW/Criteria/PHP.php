@@ -225,7 +225,7 @@ class PHP extends \Aimeos\MW\Criteria\Base
 	 *
 	 * @return int Number of items
 	 */
-	public function getSliceSize() : int
+	public function getLimit() : int
 	{
 		return $this->sliceSize;
 	}
@@ -236,7 +236,7 @@ class PHP extends \Aimeos\MW\Criteria\Base
 	 *
 	 * @return int Start number of the items
 	 */
-	public function getSliceStart() : int
+	public function getOffset() : int
 	{
 		return $this->sliceStart;
 	}
@@ -249,10 +249,10 @@ class PHP extends \Aimeos\MW\Criteria\Base
 	 * @param int $size Number of items
 	 * @return \Aimeos\MW\Criteria\PHP Object instance for fluent interface
 	 */
-	public function setSlice( int $start, int $size = 100 )
+	public function slice( int $offset, int $limit = 100 ) : \Aimeos\MW\Criteria\Iface
 	{
-		$this->sliceStart = (int) $start;
-		$this->sliceSize = (int) $size;
+		$this->sliceStart = $offset;
+		$this->sliceSize = $limit;
 
 		return $this;
 	}

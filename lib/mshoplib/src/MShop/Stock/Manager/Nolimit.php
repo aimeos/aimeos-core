@@ -95,7 +95,7 @@ class Nolimit
 			$total = count( $items );
 		}
 
-		return map( array_splice( $items, 0, $search->getSliceSize() ) );
+		return map( array_splice( $items, 0, $search->getLimit() ) );
 	}
 
 

@@ -810,8 +810,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$colstring,
 			implode( "\n", array_unique( $joins ) ),
 			$search->getConditionSource( $types, $translations, $plugins, $funcs ),
-			$search->getSliceStart(),
-			$search->getSliceSize(),
+			$search->getOffset(),
+			$search->getLimit(),
 		);
 
 		if( empty( $search->getSortations() ) && ( $attribute = reset( $attributes ) ) !== false ) {
