@@ -76,9 +76,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'job.id', null );
 		$expr[] = $search->compare( '!=', 'job.siteid', null );
 		$expr[] = $search->compare( '==', 'job.label', 'unittest job' );
-		$expr[] = $search->compare( '==', 'job.method', 'controller.method' );
-		$expr[] = $search->compare( '==', 'job.parameter', '{"items":"testfile.ext"}' );
-		$expr[] = $search->compare( '==', 'job.result', '{"items":"testfile.ext"}' );
+		$expr[] = $search->compare( '==', 'job.path', 'testfile.ext' );
 		$expr[] = $search->compare( '==', 'job.status', 0 );
 		$expr[] = $search->compare( '>=', 'job.ctime', '2000-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'job.mtime', '2010-01-01 00:00:00' );
@@ -100,7 +98,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$criteria = $this->object->filter()->slice( 0, 1 );
-		$criteria->setConditions( $criteria->compare( '==', 'job.method', 'controller.method' ) );
+		$criteria->setConditions( $criteria->compare( '==', 'job.path', 'testfile.ext' ) );
 		$result = $this->object->search( $criteria )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
@@ -115,13 +113,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->create();
 		$item->setLabel( 'unit test' );
-		$item->setMethod( 'crtl.method' );
+		$item->setPath( 'testfile2.ext' );
 		$resultSaved = $this->object->save( $item );
 
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setMethod( 'controll.method' );
+		$itemExp->setPath( 'testfile3.ext' );
 		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $item->getId() );
 
@@ -133,8 +131,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteid(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
-		$this->assertEquals( $item->getResult(), $itemSaved->getResult() );
-		$this->assertEquals( $item->getMethod(), $itemSaved->getMethod() );
+		$this->assertEquals( $item->getPath(), $itemSaved->getPath() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
 		$this->assertEquals( $context->getEditor(), $itemSaved->getEditor() );
@@ -144,8 +141,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getId(), $itemSaved->getId() );
 		$this->assertEquals( $itemExp->getSiteid(), $itemSaved->getSiteId() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
-		$this->assertEquals( $itemExp->getResult(), $itemUpd->getResult() );
-		$this->assertEquals( $itemExp->getMethod(), $itemUpd->getMethod() );
+		$this->assertEquals( $itemExp->getPath(), $itemUpd->getPath() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
 		$this->assertEquals( $context->getEditor(), $itemUpd->getEditor() );

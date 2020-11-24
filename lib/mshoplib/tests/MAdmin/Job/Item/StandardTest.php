@@ -22,9 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'job.id' => 1,
 			'job.siteid' => 2,
 			'job.label' => 'unittest job',
-			'job.method' => 'Product_Import_Text.importFile',
-			'job.parameter' => array( 'items' => 'testfile.ext' ),
-			'job.result' => array( 'items' => 'testfile2.ext' ),
+			'job.path' => 'testfile2.ext',
 			'job.status' => 1,
 			'job.editor' => 'unittest',
 			'job.mtime' => '2010-01-01 00:00:00',
@@ -76,44 +74,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetMethod()
+	public function testGetPath()
 	{
-		$this->assertEquals( 'Product_Import_Text.importFile', $this->object->getMethod() );
-	}
-
-
-	public function testSetMethod()
-	{
-		$this->object->setMethod( 'Controller.method' );
-		$this->assertEquals( 'Controller.method', $this->object->getMethod() );
-		$this->assertTrue( $this->object->isModified() );
-	}
-
-
-	public function testGetParameter()
-	{
-		$this->assertEquals( array( 'items' => 'testfile.ext' ), $this->object->getParameter() );
-	}
-
-
-	public function testSetParameter()
-	{
-		$this->object->setParameter( array( 'items' => 'newfile.ext' ) );
-		$this->assertEquals( array( 'items' => 'newfile.ext' ), $this->object->getParameter() );
-		$this->assertTrue( $this->object->isModified() );
-	}
-
-
-	public function testGetResult()
-	{
-		$this->assertEquals( array( 'items' => 'testfile2.ext' ), $this->object->getResult() );
+		$this->assertEquals( 'testfile2.ext', $this->object->getPath() );
 	}
 
 
 	public function testSetResult()
 	{
-		$this->object->setResult( array( 'items' => 'newfile.ext' ) );
-		$this->assertEquals( array( 'items' => 'newfile.ext' ), $this->object->getResult() );
+		$this->object->setPath( 'newfile.ext' );
+		$this->assertEquals( 'newfile.ext', $this->object->getPath() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -163,9 +133,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$list = $entries = array(
 			'job.id' => 1,
 			'job.label' => 'unittest job',
-			'job.method' => 'Product_Import_Text.importFile',
-			'job.parameter' => array( 'items' => 'testfile.ext' ),
-			'job.result' => array( 'items' => 'testfile2.ext' ),
+			'job.path' => 'testfile2.ext',
 			'job.status' => 1,
 		);
 
@@ -175,9 +143,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['job.id'], $item->getId() );
 		$this->assertEquals( $list['job.label'], $item->getLabel() );
-		$this->assertEquals( $list['job.method'], $item->getMethod() );
-		$this->assertEquals( $list['job.parameter'], $item->getParameter() );
-		$this->assertEquals( $list['job.result'], $item->getResult() );
+		$this->assertEquals( $list['job.path'], $item->getPath() );
 		$this->assertEquals( $list['job.status'], $item->getStatus() );
 	}
 
@@ -191,9 +157,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, $list['job.id'] );
 		$this->assertEquals( 2, $list['job.siteid'] );
 		$this->assertEquals( 'unittest job', $list['job.label'] );
-		$this->assertEquals( 'Product_Import_Text.importFile', $list['job.method'] );
-		$this->assertEquals( array( 'items' => 'testfile.ext' ), $list['job.parameter'] );
-		$this->assertEquals( array( 'items' => 'testfile2.ext' ), $list['job.result'] );
+		$this->assertEquals( 'testfile2.ext', $list['job.path'] );
 		$this->assertEquals( 1, $list['job.status'] );
 		$this->assertEquals( 'unittest', $list['job.editor'] );
 		$this->assertEquals( '2010-01-01 00:00:00', $list['job.mtime'] );

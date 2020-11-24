@@ -30,54 +30,23 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	/**
 	 * Sets the new label of the attribute item.
 	 *
-	 * @param string $label Type label of the attribute item
+	 * @param string|null $label Type label of the attribute item
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
 	public function setLabel( ?string $label ) : \Aimeos\MAdmin\Job\Item\Iface;
 
-
 	/**
-	 * Returns the name of the job item.
+	 * Returns the generated file path of the job.
 	 *
-	 * @return string Label of the job item
+	 * @return string Relative filesystem path to the generated file
 	 */
-	public function getMethod() : string;
+	public function getPath() : string;
 
 	/**
-	 * Sets the new method for the job.
+	 * Sets the new generated file path of the job.
 	 *
-	 * @param string $method Method (object/methodname) to call
+	 * @param string|null $path Relative filesystem path to the generated file
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function setMethod( string $method ) : \Aimeos\MAdmin\Job\Item\Iface;
-
-	/**
-	 * Returns the parameter for the job.
-	 *
-	 * @return array Parameter of the job
-	 */
-	public function getParameter() : array;
-
-	/**
-	 * Sets the new parameter for the job.
-	 *
-	 * @param array $param Parameter for the job
-	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
-	 */
-	public function setParameter( array $param ) : \Aimeos\MAdmin\Job\Item\Iface;
-
-	/**
-	 * Returns the result of the job.
-	 *
-	 * @return array Associative list of result key/value pairs or list thereof
-	 */
-	public function getResult() : array;
-
-	/**
-	 * Sets the new result of the job.
-	 *
-	 * @param array $result Associative list of result key/value pairs or list thereof
-	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
-	 */
-	public function setResult( array $result ) : \Aimeos\MAdmin\Job\Item\Iface;
+	public function setPath( ?string $path ) : \Aimeos\MAdmin\Job\Item\Iface;
 }

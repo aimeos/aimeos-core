@@ -16,9 +16,7 @@ return array(
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'method', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'parameter', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'result', 'text', array( 'length' => 0xffff ) );
+			$table->addColumn( 'path', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );

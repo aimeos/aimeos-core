@@ -52,24 +52,10 @@ class Standard
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'job.method' => array(
-			'code' => 'job.method',
-			'internalcode' => 'majob."method"',
-			'label' => 'Method',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'job.parameter' => array(
-			'code' => 'job.parameter',
-			'internalcode' => 'majob."parameter"',
-			'label' => 'Parameter',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'job.result' => array(
-			'code' => 'job.result',
-			'internalcode' => 'majob."result"',
-			'label' => 'Result',
+		'job.path' => array(
+			'code' => 'job.path',
+			'internalcode' => 'majob."path"',
+			'label' => 'Generated file path',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -267,9 +253,7 @@ class Standard
 			}
 
 			$stmt->bind( $idx++, $item->getLabel() );
-			$stmt->bind( $idx++, $item->getMethod() );
-			$stmt->bind( $idx++, json_encode( $item->getParameter() ) );
-			$stmt->bind( $idx++, json_encode( $item->getResult() ) );
+			$stmt->bind( $idx++, $item->getPath() );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $context->getEditor() );
 			$stmt->bind( $idx++, $date );
@@ -547,20 +531,6 @@ class Standard
 
 			while( ( $row = $results->fetch() ) !== null )
 			{
-				$config = $row['job.parameter'];
-				if( ( $row['job.parameter'] = json_decode( $row['job.parameter'], true ) ) === null )
-				{
-					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'madmin_job.parameter', $row['id'], $config );
-					$logger->log( $msg, \Aimeos\MW\Logger\Base::WARN );
-				}
-
-				$config = $row['job.result'];
-				if( ( $row['job.result'] = json_decode( $row['job.result'], true ) ) === null )
-				{
-					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'madmin_job.result', $row['id'], $config );
-					$logger->log( $msg, \Aimeos\MW\Logger\Base::WARN );
-				}
-
 				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
 					$items[$row['job.id']] = $item;
 				}

@@ -9,9 +9,7 @@
 return [
 	'job' => [
 		'job/unittest job' => [
-			'job.label' => 'unittest job', 'job.method' => 'controller.method',
-			'job.parameter' => ['items' => 'testfile.ext'], 'job.result' => ['items' => 'testfile.ext'],
-			'job.status' => 0
+			'job.label' => 'unittest job', 'job.path' => 'testfile.ext', 'job.status' => 0
 		],
 	]
 ];

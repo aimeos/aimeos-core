@@ -19,10 +19,9 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "madmin_job" ( :names
-						"label", "method", "parameter", "result", "status",
-						"editor", "mtime", "siteid", "ctime"
+						"label", "path", "status", "editor", "mtime", "siteid", "ctime"
 					) VALUES ( :values
-						?, ?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?
 					)
 				',
 			),
@@ -30,8 +29,7 @@ return array(
 				'ansi' => '
 					UPDATE "madmin_job"
 					SET :names
-						"label" = ?, "method" = ?, "parameter" = ?,
-						"result" = ?, "status" = ?, "editor" = ?, "mtime" = ?
+						"label" = ?, "path" = ?, "status" = ?, "editor" = ?, "mtime" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				',
 			),
@@ -39,8 +37,7 @@ return array(
 				'ansi' => '
 					SELECT :columns
 						majob."id" AS "job.id", majob."siteid" AS "job.siteid",
-						majob."label" AS "job.label", majob."method" AS "job.method",
-						majob."parameter" AS "job.parameter", majob."result" AS "job.result",
+						majob."label" AS "job.label", majob."path" AS "job.path",
 						majob."status" AS "job.status", majob."editor" AS "job.editor",
 						majob."mtime" AS "job.mtime", majob."ctime" AS "job.ctime"
 					FROM "madmin_job" AS majob
@@ -52,8 +49,7 @@ return array(
 				'mysql' => '
 					SELECT :columns
 						majob."id" AS "job.id", majob."siteid" AS "job.siteid",
-						majob."label" AS "job.label", majob."method" AS "job.method",
-						majob."parameter" AS "job.parameter", majob."result" AS "job.result",
+						majob."label" AS "job.label", majob."path" AS "job.path",
 						majob."status" AS "job.status", majob."editor" AS "job.editor",
 						majob."mtime" AS "job.mtime", majob."ctime" AS "job.ctime"
 					FROM "madmin_job" AS majob

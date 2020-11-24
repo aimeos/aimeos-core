@@ -47,7 +47,7 @@ class Standard
 	/**
 	 * Sets the new label of the job item.
 	 *
-	 * @param string $label Type label of the job item
+	 * @param string|null $label Type label of the job item
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
 	public function setLabel( ?string $label ) : \Aimeos\MAdmin\Job\Item\Iface
@@ -57,71 +57,25 @@ class Standard
 
 
 	/**
-	 * Returns the name of the job item.
+	 * Returns the generated file path of the job.
 	 *
-	 * @return string Label of the job item
+	 * @return string Relative filesystem path to the generated file
 	 */
-	public function getMethod() : string
+	public function getPath() : string
 	{
-		return $this->get( 'job.method', '' );
+		return $this->get( 'job.path', '' );
 	}
 
 
 	/**
-	 * Sets the new method for the job.
+	 * Sets the new generated file path of the job.
 	 *
-	 * @param string $method Method (object/methodname) to call
+	 * @param string|null $path Relative filesystem path to the generated file
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
-	public function setMethod( string $method ) : \Aimeos\MAdmin\Job\Item\Iface
+	public function setPath( ?string $path ) : \Aimeos\MAdmin\Job\Item\Iface
 	{
-		return $this->set( 'job.method', $method );
-	}
-
-
-	/**
-	 * Returns the parameter for the job.
-	 *
-	 * @return array Parameter of the job
-	 */
-	public function getParameter() : array
-	{
-		return $this->get( 'job.parameter', [] );
-	}
-
-
-	/**
-	 * Sets the new parameter for the job.
-	 *
-	 * @param array $param Parameter for the job
-	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
-	 */
-	public function setParameter( array $param ) : \Aimeos\MAdmin\Job\Item\Iface
-	{
-		return $this->set( 'job.parameter', $param );
-	}
-
-
-	/**
-	 * Returns the result of the job.
-	 *
-	 * @return array Associative list of result key/value pairs or list thereof
-	 */
-	public function getResult() : array
-	{
-		return $this->get( 'job.result', [] );
-	}
-
-
-	/**
-	 * Sets the new result of the job.
-	 *
-	 * @param array $result Associative list of result key/value pairs or list thereof
-	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
-	 */
-	public function setResult( array $result ) : \Aimeos\MAdmin\Job\Item\Iface
-	{
-		return $this->set( 'job.result', $result );
+		return $this->set( 'job.path', (string) $path );
 	}
 
 
@@ -174,10 +128,8 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'job.label': $item = $item->setLabel( $value ); break;
-				case 'job.method': $item = $item->setMethod( $value ); break;
-				case 'job.parameter': $item = $item->setParameter( (array) $value ); break;
-				case 'job.result': $item = $item->setResult( (array) $value ); break;
+				case 'job.path': $item = $item->setPath( (string) $value ); break;
+				case 'job.label': $item = $item->setLabel( (string) $value ); break;
 				case 'job.status': $item = $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
@@ -199,10 +151,8 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
+		$list['job.path'] = $this->getPath();
 		$list['job.label'] = $this->getLabel();
-		$list['job.method'] = $this->getMethod();
-		$list['job.parameter'] = $this->getParameter();
-		$list['job.result'] = $this->getResult();
 		$list['job.status'] = $this->getStatus();
 
 		return $list;
