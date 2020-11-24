@@ -46,10 +46,10 @@ class Standard
 	/**
 	 * Sets the new comment for the reviewed item
 	 *
-	 * @param string $value New comment for the reviewed item
+	 * @param string|null $value New comment for the reviewed item
 	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
 	 */
-	public function setComment( string $value ) : \Aimeos\MShop\Review\Item\Iface
+	public function setComment( ?string $value ) : \Aimeos\MShop\Review\Item\Iface
 	{
 		return $this->set( 'review.comment', strip_tags( $value ) );
 	}
@@ -207,10 +207,10 @@ class Standard
 	/**
 	 * Sets the new response to the review
 	 *
-	 * @param string $value New response to the review
+	 * @param string|null $value New response to the review
 	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
 	 */
-	public function setResponse( string $value ) : \Aimeos\MShop\Review\Item\Iface
+	public function setResponse( ?string $value ) : \Aimeos\MShop\Review\Item\Iface
 	{
 		return $this->set( 'review.response', strip_tags( $value ) );
 	}
