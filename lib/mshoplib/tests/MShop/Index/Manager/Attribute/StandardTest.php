@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->filter();
 
-		$func = $search->createFunction( 'index.attribute:allof', [$attrIds] );
+		$func = $search->make( 'index.attribute:allof', [$attrIds] );
 		$search->setConditions( $search->compare( '!=', $func, null ) );
 
 		$result = $this->object->search( $search, [] );
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->filter();
 
-		$func = $search->createFunction( 'index.attribute:allof', [$attrIds] );
+		$func = $search->make( 'index.attribute:allof', [$attrIds] );
 		$search->setConditions( $search->compare( '!=', $func, null ) );
 
 		$result = $this->object->search( $search, [] );

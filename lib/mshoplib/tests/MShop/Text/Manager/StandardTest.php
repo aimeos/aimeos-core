@@ -98,13 +98,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'text.editor', $this->editor );
 
 		$param = ['media', 'align-top', $listItem->getRefId()];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'text:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'text:has', $param ), null );
 
 		$param = ['media', 'align-top'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'text:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'text:has', $param ), null );
 
 		$param = ['media'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'text:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'text:has', $param ), null );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();

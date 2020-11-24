@@ -105,22 +105,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'media.editor', $this->editor );
 
 		$param = ['attribute', 'option', $listItem->getRefId()];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'media:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'media:has', $param ), null );
 
 		$param = ['attribute', 'option'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'media:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'media:has', $param ), null );
 
 		$param = ['attribute'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'media:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'media:has', $param ), null );
 
 		$param = ['copyright', 'de', 'ich, 2019'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'media:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'media:prop', $param ), null );
 
 		$param = ['copyright', 'de'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'media:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'media:prop', $param ), null );
 
 		$param = ['copyright'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'media:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'media:prop', $param ), null );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );

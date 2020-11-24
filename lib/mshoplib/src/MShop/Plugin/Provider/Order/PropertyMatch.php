@@ -154,7 +154,7 @@ class PropertyMatch
 
 		foreach( $map as $type => $value )
 		{
-			$func = $search->createFunction( 'product:prop', [$type, [$langId, null], (string) $value] );
+			$func = $search->make( 'product:prop', [$type, [$langId, null], (string) $value] );
 			$expr[] = $search->compare( '!=', $func, null );
 		}
 

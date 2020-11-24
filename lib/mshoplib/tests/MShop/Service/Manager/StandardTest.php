@@ -184,13 +184,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'service.editor', $this->editor );
 
 		$param = ['text', 'unittype1', $listItem->getRefId()];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'service:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'service:has', $param ), null );
 
 		$param = ['text', 'unittype1'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'service:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'service:has', $param ), null );
 
 		$param = ['text'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'service:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'service:has', $param ), null );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();

@@ -217,13 +217,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'price.editor', $this->editor );
 
 		$param = ['customer', 'test', $listItem->getRefId()];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'price:has', $param ), null );
 
 		$param = ['customer', 'test'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'price:has', $param ), null );
 
 		$param = ['customer'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'price:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'price:has', $param ), null );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
@@ -255,13 +255,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'price.editor', $this->editor );
 
 		$param = ['zone', null, 'NY'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'price:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'price:prop', $param ), null );
 
 		$param = ['zone', null];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'price:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'price:prop', $param ), null );
 
 		$param = ['zone'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'price:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'price:prop', $param ), null );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();

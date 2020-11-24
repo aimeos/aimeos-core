@@ -61,7 +61,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->filter();
 
-		$func = $search->createFunction( 'index.price:value', ['EUR'] );
+		$func = $search->make( 'index.price:value', ['EUR'] );
 		$search->setConditions( $search->compare( '==', $func, '18.00' ) );
 
 		$this->assertEquals( 3, count( $this->object->search( $search )->toArray() ) );
@@ -85,10 +85,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 
-		$func = $search->createFunction( 'index.price:value', ['EUR'] );
+		$func = $search->make( 'index.price:value', ['EUR'] );
 		$search->setConditions( $search->compare( '>=', $func, '18.00' ) );
 
-		$sortfunc = $search->createFunction( 'sort:index.price:value', ['EUR'] );
+		$sortfunc = $search->make( 'sort:index.price:value', ['EUR'] );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->search( $search, [] );

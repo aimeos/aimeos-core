@@ -80,8 +80,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 't-disc'] ), 0 ) );
-		$search->setSortations( [$search->sort( '-', $search->createFunction( 'sort:index.text:relevance', ['de', 't-disc'] ) )] );
+		$search->setConditions( $search->compare( '>', $search->make( 'index.text:relevance', ['de', 't-disc'] ), 0 ) );
+		$search->setSortations( [$search->sort( '-', $search->make( 'sort:index.text:relevance', ['de', 't-disc'] ) )] );
 
 		$result = $this->object->search( $search, [] );
 
@@ -99,8 +99,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 'T-DISC'] ), 0 ) );
-		$search->setSortations( [$search->sort( '-', $search->createFunction( 'sort:index.text:relevance', ['de', 'T-DISC'] ) )] );
+		$search->setConditions( $search->compare( '>', $search->make( 'index.text:relevance', ['de', 'T-DISC'] ), 0 ) );
+		$search->setSortations( [$search->sort( '-', $search->make( 'sort:index.text:relevance', ['de', 'T-DISC'] ) )] );
 
 		$result = $this->object->search( $search, [] );
 
@@ -112,10 +112,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 
-		$func = $search->createFunction( 'index.text:name', ['de'] );
+		$func = $search->make( 'index.text:name', ['de'] );
 		$search->setConditions( $search->compare( '=~', $func, 'Cafe' ) );
 
-		$sortfunc = $search->createFunction( 'sort:index.text:name', ['de'] );
+		$sortfunc = $search->make( 'sort:index.text:name', ['de'] );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->search( $search, [] );
@@ -144,7 +144,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->filter();
 
-		$func = $search->createFunction( 'index.text:name', ['de'] );
+		$func = $search->make( 'index.text:name', ['de'] );
 		$search->setConditions( $search->compare( '==', $func, 'Cafe Noire Expresso' ) );
 
 		$this->assertEquals( 1, count( $this->object->search( $search )->toArray() ) );
@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->filter();
 
-		$func = $search->createFunction( 'index.text:name', ['de'] );
+		$func = $search->make( 'index.text:name', ['de'] );
 		$search->setConditions( $search->compare( '==', $func, 'Unterproduct 3' ) );
 
 		$this->assertEquals( 1, count( $this->object->search( $search )->toArray() ) );

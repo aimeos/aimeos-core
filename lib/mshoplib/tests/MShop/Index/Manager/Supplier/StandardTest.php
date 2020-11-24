@@ -161,8 +161,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$id = $supplierManager->find( 'unitCode001' )->getId();
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.supplier:position', ['default', $id] ), 0 ) );
-		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.supplier:position', ['default', $id] ) )] );
+		$search->setConditions( $search->compare( '>=', $search->make( 'index.supplier:position', ['default', $id] ), 0 ) );
+		$search->setSortations( [$search->sort( '+', $search->make( 'sort:index.supplier:position', ['default', $id] ) )] );
 
 		$result = $this->object->search( $search, [] );
 
@@ -176,8 +176,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$id = $supplierManager->find( 'unitCode001' )->getId();
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.supplier:position', ['default', [$id]] ), 0 ) );
-		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.supplier:position', ['default', [$id]] ) )] );
+		$search->setConditions( $search->compare( '>=', $search->make( 'index.supplier:position', ['default', [$id]] ), 0 ) );
+		$search->setSortations( [$search->sort( '+', $search->make( 'sort:index.supplier:position', ['default', [$id]] ) )] );
 
 		$result = $this->object->search( $search, [] );
 

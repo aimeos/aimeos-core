@@ -284,22 +284,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.birthday', '1999-01-01' );
 
 		$param = ['text', 'default', $listItem->getRefId()];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'customer:has', $param ), null );
 
 		$param = ['text', 'default'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'customer:has', $param ), null );
 
 		$param = ['text'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'customer:has', $param ), null );
 
 		$param = ['newsletter', null, '1'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'customer:prop', $param ), null );
 
 		$param = ['newsletter', null];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'customer:prop', $param ), null );
 
 		$param = ['newsletter'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'customer:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'customer:prop', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
 		$expr[] = $search->compare( '!=', 'customer.address.parentid', null );

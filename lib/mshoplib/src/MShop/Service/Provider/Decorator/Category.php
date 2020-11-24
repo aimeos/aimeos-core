@@ -194,7 +194,7 @@ class Category
 
 		foreach( $productIds as $id )
 		{
-			$func = $search->createFunction( 'catalog:has', ['product', 'default', $id] );
+			$func = $search->make( 'catalog:has', ['product', 'default', $id] );
 			$expr[] = $search->compare( '!=', $func, null );
 		}
 

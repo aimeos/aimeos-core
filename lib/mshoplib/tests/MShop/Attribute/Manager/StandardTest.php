@@ -248,22 +248,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'attribute.editor', $this->editor );
 
 		$param = array( 'text', 'default', $listItem->getRefId() );
-		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'attribute:has', $param ), null );
 
 		$param = array( 'text', 'default' );
-		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'attribute:has', $param ), null );
 
 		$param = array( 'text' );
-		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'attribute:has', $param ), null );
 
 		$param = array( 'htmlcolor', 'de', '#000000' );
-		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'attribute:prop', $param ), null );
 
 		$param = array( 'htmlcolor', 'de' );
-		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'attribute:prop', $param ), null );
 
 		$param = array( 'htmlcolor' );
-		$expr[] = $search->compare( '!=', $search->createFunction( 'attribute:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'attribute:prop', $param ), null );
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );

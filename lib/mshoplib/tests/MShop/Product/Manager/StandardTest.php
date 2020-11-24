@@ -367,22 +367,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'product.target', '' );
 
 		$param = ['product', ['suggestion', 'invalid'], [$suggestItem->getId()]];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'product:has', $param ), null );
 
 		$param = ['product', 'suggestion'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'product:has', $param ), null );
 
 		$param = ['product'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'product:has', $param ), null );
 
 		$param = ['package-weight', null, ['1']];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'product:prop', $param ), null );
 
 		$param = ['package-weight', null];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'product:prop', $param ), null );
 
 		$param = ['package-weight'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'product:prop', $param ), null );
 
 
 		$search->setConditions( $search->combine( '&&', $expr ) );

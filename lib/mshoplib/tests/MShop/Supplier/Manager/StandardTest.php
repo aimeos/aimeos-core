@@ -175,13 +175,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'supplier.editor', $this->editor );
 
 		$param = ['text', 'default', $listItem->getRefId()];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'supplier:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'supplier:has', $param ), null );
 
 		$param = ['text', 'default'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'supplier:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'supplier:has', $param ), null );
 
 		$param = ['text'];
-		$expr[] = $search->compare( '!=', $search->createFunction( 'supplier:has', $param ), null );
+		$expr[] = $search->compare( '!=', $search->make( 'supplier:has', $param ), null );
 
 		$expr[] = $search->compare( '!=', 'supplier.address.id', null );
 		$expr[] = $search->compare( '!=', 'supplier.address.siteid', null );

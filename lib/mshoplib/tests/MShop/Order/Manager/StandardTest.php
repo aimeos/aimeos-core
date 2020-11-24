@@ -339,7 +339,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$total = 0;
 		$search = $this->object->filter();
-		$funcStatus = $search->createFunction( 'order:status', ['typestatus', 'shipped'] );
+		$funcStatus = $search->make( 'order:status', ['typestatus', 'shipped'] );
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'order.id', null );

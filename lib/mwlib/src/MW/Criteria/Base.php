@@ -261,18 +261,6 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 
 		return $list;
 	}
-	/**
-	 * Creates a function signature for expressions.
-	 *
-	 * @param string $name Function name
-	 * @param array $params Single- or multi-dimensional list of parameters of type boolean, integer, float and string
-	 * @return string Function signature
-	 * @deprecated 2021.01
-	 */
-	public function createFunction( string $name, array $params ) : string
-	{
-		return $name . '(' . substr( json_encode( $params ), 1, -1 ) . ')';
-	}
 
 
 	/**

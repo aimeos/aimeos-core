@@ -48,8 +48,8 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsRelevance()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 'T-DISC'] ), 0 ) );
-		$search->setSortations( [$search->sort( '-', $search->createFunction( 'sort:index.text:relevance', ['de', 'T-DISC'] ) )] );
+		$search->setConditions( $search->compare( '>', $search->make( 'index.text:relevance', ['de', 'T-DISC'] ), 0 ) );
+		$search->setSortations( [$search->sort( '-', $search->make( 'sort:index.text:relevance', ['de', 'T-DISC'] ) )] );
 
 		$result = $this->object->search( $search, [] );
 
@@ -60,8 +60,8 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsRelevanceCase()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '>', $search->createFunction( 'index.text:relevance', ['de', 't-disc'] ), 0 ) );
-		$search->setSortations( [$search->sort( '-', $search->createFunction( 'sort:index.text:relevance', ['de', 't-disc'] ) )] );
+		$search->setConditions( $search->compare( '>', $search->make( 'index.text:relevance', ['de', 't-disc'] ), 0 ) );
+		$search->setSortations( [$search->sort( '-', $search->make( 'sort:index.text:relevance', ['de', 't-disc'] ) )] );
 
 		$result = $this->object->search( $search, [] );
 

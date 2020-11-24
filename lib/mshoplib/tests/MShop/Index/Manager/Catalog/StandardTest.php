@@ -148,8 +148,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$id = $catalogManager->find( 'cafe' )->getId();
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', $id] ), 0 ) );
-		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion', $id] ) )] );
+		$search->setConditions( $search->compare( '>=', $search->make( 'index.catalog:position', ['promotion', $id] ), 0 ) );
+		$search->setSortations( [$search->sort( '+', $search->make( 'sort:index.catalog:position', ['promotion', $id] ) )] );
 
 		$result = $this->object->search( $search, [] );
 
@@ -163,8 +163,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$id = $catalogManager->find( 'cafe' )->getId();
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion', [$id]] ), 0 ) );
-		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion', [$id]] ) )] );
+		$search->setConditions( $search->compare( '>=', $search->make( 'index.catalog:position', ['promotion', [$id]] ), 0 ) );
+		$search->setSortations( [$search->sort( '+', $search->make( 'sort:index.catalog:position', ['promotion', [$id]] ) )] );
 
 		$result = $this->object->search( $search, [] );
 
@@ -178,8 +178,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$id = $catalogManager->find( 'cafe' )->getId();
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', ['promotion'] ), 0 ) );
-		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', ['promotion'] ) )] );
+		$search->setConditions( $search->compare( '>=', $search->make( 'index.catalog:position', ['promotion'] ), 0 ) );
+		$search->setSortations( [$search->sort( '+', $search->make( 'sort:index.catalog:position', ['promotion'] ) )] );
 		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 3, count( $result ) );
@@ -192,8 +192,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$id = $catalogManager->find( 'cafe' )->getId();
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '>=', $search->createFunction( 'index.catalog:position', [] ), 0 ) );
-		$search->setSortations( [$search->sort( '+', $search->createFunction( 'sort:index.catalog:position', [] ) )] );
+		$search->setConditions( $search->compare( '>=', $search->make( 'index.catalog:position', [] ), 0 ) );
+		$search->setSortations( [$search->sort( '+', $search->make( 'sort:index.catalog:position', [] ) )] );
 		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 9, count( $result ) );

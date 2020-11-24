@@ -257,8 +257,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '!=', 'index.attribute.id', null ),
 			$search->compare( '!=', 'index.catalog.id', null ),
 			$search->compare( '!=', 'index.supplier.id', null ),
-			$search->compare( '>=', $search->createFunction( 'index.price:value', ['EUR'] ), 0 ),
-			$search->compare( '>=', $search->createFunction( 'index.text:name', ['de'] ), '' ),
+			$search->compare( '>=', $search->make( 'index.price:value', ['EUR'] ), 0 ),
+			$search->compare( '>=', $search->make( 'index.text:name', ['de'] ), '' ),
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 
