@@ -166,7 +166,7 @@ class Standard
 		$this->setResourceName( 'db-price' );
 		$this->currencyId = $context->getLocale()->getCurrencyId();
 
-		/** mshop/price/taxflag
+		/** mshop/price/manager/taxflag
 		 * Configuration setting if prices are inclusive or exclusive tax
 		 *
 		 * In Aimeos, prices can be entered either completely with or without tax. The
@@ -178,9 +178,9 @@ class Standard
 		 * @category User
 		 * @since 2016.02
 		 */
-		$this->taxflag = $context->getConfig()->get( 'mshop/price/taxflag', true );
+		$this->taxflag = $context->getConfig()->get( 'mshop/price/manager/taxflag', true );
 
-		/** mshop/price/precision
+		/** mshop/price/manager/precision
 		 * Number of decimal digits prices contain
 		 *
 		 * Sets the number of decimal digits price values will contain. Internally,
@@ -191,7 +191,7 @@ class Standard
 		 * @category Developer
 		 * @since 2019.04
 		 */
-		$this->precision = $context->getConfig()->get( 'mshop/price/precision', 2 );
+		$this->precision = $context->getConfig()->get( 'mshop/price/manager/precision', 2 );
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/price/manager/sitemode', $level );
