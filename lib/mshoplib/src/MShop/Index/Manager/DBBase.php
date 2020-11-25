@@ -403,7 +403,7 @@ abstract class DBBase
 			 * * 3 = inherit and aggregate items at the same time
 			 *
 			 * You also need to set the mode in the locale manager
-			 * (mshop/locale/manager/standard/sitelevel) to one of the constants.
+			 * (mshop/locale/manager/sitelevel) to one of the constants.
 			 * If you set it to the same value, it will work as described but you
 			 * can also use different modes. For example, if inheritance and
 			 * aggregation is configured the locale manager but only inheritance
@@ -414,7 +414,7 @@ abstract class DBBase
 			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 			 * @category Developer
 			 * @since 2018.01
-			 * @see mshop/locale/manager/standard/sitelevel
+			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );

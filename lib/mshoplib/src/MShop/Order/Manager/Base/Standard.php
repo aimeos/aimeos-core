@@ -167,13 +167,13 @@ class Standard extends Base
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
-		/** mshop/order/manager/base/standard/aggregate/mysql
+		/** mshop/order/manager/base/aggregate/mysql
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
-		 * @see mshop/order/manager/base/standard/aggregate/ansi
+		 * @see mshop/order/manager/base/aggregate/ansi
 		 */
 
-		/** mshop/order/manager/base/standard/aggregate/ansi
+		/** mshop/order/manager/base/aggregate/ansi
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
 		 * Groups all records by the values in the key column and counts their
@@ -209,53 +209,53 @@ class Standard extends Base
 		 * @param string SQL statement for aggregating order items
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/order/manager/base/standard/insert/ansi
-		 * @see mshop/order/manager/base/standard/update/ansi
-		 * @see mshop/order/manager/base/standard/newid/ansi
-		 * @see mshop/order/manager/base/standard/delete/ansi
-		 * @see mshop/order/manager/base/standard/search/ansi
-		 * @see mshop/order/manager/base/standard/count/ansi
+		 * @see mshop/order/manager/base/insert/ansi
+		 * @see mshop/order/manager/base/update/ansi
+		 * @see mshop/order/manager/base/newid/ansi
+		 * @see mshop/order/manager/base/delete/ansi
+		 * @see mshop/order/manager/base/search/ansi
+		 * @see mshop/order/manager/base/count/ansi
 		 */
 
-		/** mshop/order/manager/base/standard/aggregateavg/mysql
+		/** mshop/order/manager/base/aggregateavg/mysql
 		 * Computes the average of all values grouped by the key column and matched by the given criteria
 		 *
 		 * @param string SQL statement for aggregating the order base items and computing the average value
 		 * @since 2017.10
 		 * @category Developer
-		 * @see mshop/order/manager/base/standard/aggregateavg/ansi
-		 * @see mshop/order/manager/base/standard/aggregate/mysql
+		 * @see mshop/order/manager/base/aggregateavg/ansi
+		 * @see mshop/order/manager/base/aggregate/mysql
 		 */
 
-		/** mshop/order/manager/base/standard/aggregateavg/ansi
+		/** mshop/order/manager/base/aggregateavg/ansi
 		 * Computes the average of all values grouped by the key column and matched by the given criteria
 		 *
 		 * @param string SQL statement for aggregating the order base items and computing the average value
 		 * @since 2017.10
 		 * @category Developer
-		 * @see mshop/order/manager/base/standard/aggregate/ansi
+		 * @see mshop/order/manager/base/aggregate/ansi
 		 */
 
-		/** mshop/order/manager/base/standard/aggregatesum/mysql
+		/** mshop/order/manager/base/aggregatesum/mysql
 		 * Computes the sum of all values grouped by the key column and matched by the given criteria
 		 *
 		 * @param string SQL statement for aggregating the order base items and computing the sum
 		 * @since 2017.10
 		 * @category Developer
-		 * @see mshop/order/manager/base/standard/aggregatesum/ansi
-		 * @see mshop/order/manager/base/standard/aggregate/mysql
+		 * @see mshop/order/manager/base/aggregatesum/ansi
+		 * @see mshop/order/manager/base/aggregate/mysql
 		 */
 
-		/** mshop/order/manager/base/standard/aggregatesum/ansi
+		/** mshop/order/manager/base/aggregatesum/ansi
 		 * Computes the sum of all values grouped by the key column and matched by the given criteria
 		 *
 		 * @param string SQL statement for aggregating the order base items and computing the sum
 		 * @since 2017.10
 		 * @category Developer
-		 * @see mshop/order/manager/base/standard/aggregate/ansi
+		 * @see mshop/order/manager/base/aggregate/ansi
 		 */
 
-		$cfgkey = 'mshop/order/manager/base/standard/aggregate' . $type;
+		$cfgkey = 'mshop/order/manager/base/aggregate' . $type;
 		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base' ), $value );
 	}
 
@@ -275,7 +275,7 @@ class Standard extends Base
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->clearBase( $siteids, 'mshop/order/manager/base/standard/delete' );
+		return $this->clearBase( $siteids, 'mshop/order/manager/base/delete' );
 	}
 
 
@@ -342,13 +342,13 @@ class Standard extends Base
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		/** mshop/order/manager/base/standard/delete/mysql
+		/** mshop/order/manager/base/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * @see mshop/order/manager/base/standard/delete/ansi
+		 * @see mshop/order/manager/base/delete/ansi
 		 */
 
-		/** mshop/order/manager/base/standard/delete/ansi
+		/** mshop/order/manager/base/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the order database.
@@ -366,13 +366,13 @@ class Standard extends Base
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/order/manager/base/standard/insert/ansi
-		 * @see mshop/order/manager/base/standard/update/ansi
-		 * @see mshop/order/manager/base/standard/newid/ansi
-		 * @see mshop/order/manager/base/standard/search/ansi
-		 * @see mshop/order/manager/base/standard/count/ansi
+		 * @see mshop/order/manager/base/insert/ansi
+		 * @see mshop/order/manager/base/update/ansi
+		 * @see mshop/order/manager/base/newid/ansi
+		 * @see mshop/order/manager/base/search/ansi
+		 * @see mshop/order/manager/base/count/ansi
 		 */
-		$path = 'mshop/order/manager/base/standard/delete';
+		$path = 'mshop/order/manager/base/delete';
 
 		return $this->deleteItemsBase( $itemIds, $path );
 	}
@@ -590,13 +590,13 @@ class Standard extends Base
 
 			if( $id === null )
 			{
-				/** mshop/order/manager/base/standard/insert/mysql
+				/** mshop/order/manager/base/insert/mysql
 				 * Inserts a new order record into the database table
 				 *
-				 * @see mshop/order/manager/base/standard/insert/ansi
+				 * @see mshop/order/manager/base/insert/ansi
 				 */
 
-				/** mshop/order/manager/base/standard/insert/ansi
+				/** mshop/order/manager/base/insert/ansi
 				 * Inserts a new order record into the database table
 				 *
 				 * Items with no ID yet (i.e. the ID is NULL) will be created in
@@ -619,24 +619,24 @@ class Standard extends Base
 				 * @param string SQL statement for inserting records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/order/manager/base/standard/update/ansi
-				 * @see mshop/order/manager/base/standard/newid/ansi
-				 * @see mshop/order/manager/base/standard/delete/ansi
-				 * @see mshop/order/manager/base/standard/search/ansi
-				 * @see mshop/order/manager/base/standard/count/ansi
+				 * @see mshop/order/manager/base/update/ansi
+				 * @see mshop/order/manager/base/newid/ansi
+				 * @see mshop/order/manager/base/delete/ansi
+				 * @see mshop/order/manager/base/search/ansi
+				 * @see mshop/order/manager/base/count/ansi
 				 */
-				$path = 'mshop/order/manager/base/standard/insert';
+				$path = 'mshop/order/manager/base/insert';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
-				/** mshop/order/manager/base/standard/update/mysql
+				/** mshop/order/manager/base/update/mysql
 				 * Updates an existing order record in the database
 				 *
-				 * @see mshop/order/manager/base/standard/update/ansi
+				 * @see mshop/order/manager/base/update/ansi
 				 */
 
-				/** mshop/order/manager/base/standard/update/ansi
+				/** mshop/order/manager/base/update/ansi
 				 * Updates an existing order record in the database
 				 *
 				 * Items which already have an ID (i.e. the ID is not NULL) will
@@ -656,13 +656,13 @@ class Standard extends Base
 				 * @param string SQL statement for updating records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/order/manager/base/standard/insert/ansi
-				 * @see mshop/order/manager/base/standard/newid/ansi
-				 * @see mshop/order/manager/base/standard/delete/ansi
-				 * @see mshop/order/manager/base/standard/search/ansi
-				 * @see mshop/order/manager/base/standard/count/ansi
+				 * @see mshop/order/manager/base/insert/ansi
+				 * @see mshop/order/manager/base/newid/ansi
+				 * @see mshop/order/manager/base/delete/ansi
+				 * @see mshop/order/manager/base/search/ansi
+				 * @see mshop/order/manager/base/count/ansi
 				 */
-				$path = 'mshop/order/manager/base/standard/update';
+				$path = 'mshop/order/manager/base/update';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
@@ -701,13 +701,13 @@ class Standard extends Base
 
 			if( $id === null && $fetch === true )
 			{
-				/** mshop/order/manager/base/standard/newid/mysql
+				/** mshop/order/manager/base/newid/mysql
 				 * Retrieves the ID generated by the database when inserting a new record
 				 *
-				 * @see mshop/order/manager/base/standard/newid/ansi
+				 * @see mshop/order/manager/base/newid/ansi
 				 */
 
-				/** mshop/order/manager/base/standard/newid/ansi
+				/** mshop/order/manager/base/newid/ansi
 				 * Retrieves the ID generated by the database when inserting a new record
 				 *
 				 * As soon as a new record is inserted into the database table,
@@ -731,13 +731,13 @@ class Standard extends Base
 				 * @param string SQL statement for retrieving the last inserted record ID
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/order/manager/base/standard/insert/ansi
-				 * @see mshop/order/manager/base/standard/update/ansi
-				 * @see mshop/order/manager/base/standard/delete/ansi
-				 * @see mshop/order/manager/base/standard/search/ansi
-				 * @see mshop/order/manager/base/standard/count/ansi
+				 * @see mshop/order/manager/base/insert/ansi
+				 * @see mshop/order/manager/base/update/ansi
+				 * @see mshop/order/manager/base/delete/ansi
+				 * @see mshop/order/manager/base/search/ansi
+				 * @see mshop/order/manager/base/count/ansi
 				 */
-				$path = 'mshop/order/manager/base/standard/newid';
+				$path = 'mshop/order/manager/base/newid';
 				$id = $this->newId( $conn, $path );
 			}
 
@@ -783,13 +783,13 @@ class Standard extends Base
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$level = $context->getConfig()->get( 'mshop/order/manager/sitemode', $level );
 
-			/** mshop/order/manager/base/standard/search/mysql
+			/** mshop/order/manager/base/search/mysql
 			 * Retrieves the records matched by the given criteria in the database
 			 *
-			 * @see mshop/order/manager/base/standard/search/ansi
+			 * @see mshop/order/manager/base/search/ansi
 			 */
 
-			/** mshop/order/manager/base/standard/search/ansi
+			/** mshop/order/manager/base/search/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the order
@@ -834,21 +834,21 @@ class Standard extends Base
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/order/manager/base/standard/insert/ansi
-			 * @see mshop/order/manager/base/standard/update/ansi
-			 * @see mshop/order/manager/base/standard/newid/ansi
-			 * @see mshop/order/manager/base/standard/delete/ansi
-			 * @see mshop/order/manager/base/standard/count/ansi
+			 * @see mshop/order/manager/base/insert/ansi
+			 * @see mshop/order/manager/base/update/ansi
+			 * @see mshop/order/manager/base/newid/ansi
+			 * @see mshop/order/manager/base/delete/ansi
+			 * @see mshop/order/manager/base/count/ansi
 			 */
-			$cfgPathSearch = 'mshop/order/manager/base/standard/search';
+			$cfgPathSearch = 'mshop/order/manager/base/search';
 
-			/** mshop/order/manager/base/standard/count/mysql
+			/** mshop/order/manager/base/count/mysql
 			 * Counts the number of records matched by the given criteria in the database
 			 *
-			 * @see mshop/order/manager/base/standard/count/ansi
+			 * @see mshop/order/manager/base/count/ansi
 			 */
 
-			/** mshop/order/manager/base/standard/count/ansi
+			/** mshop/order/manager/base/count/ansi
 			 * Counts the number of records matched by the given criteria in the database
 			 *
 			 * Counts all records matched by the given criteria from the order
@@ -887,13 +887,13 @@ class Standard extends Base
 			 * @param string SQL statement for counting items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/order/manager/base/standard/insert/ansi
-			 * @see mshop/order/manager/base/standard/update/ansi
-			 * @see mshop/order/manager/base/standard/newid/ansi
-			 * @see mshop/order/manager/base/standard/delete/ansi
-			 * @see mshop/order/manager/base/standard/search/ansi
+			 * @see mshop/order/manager/base/insert/ansi
+			 * @see mshop/order/manager/base/update/ansi
+			 * @see mshop/order/manager/base/newid/ansi
+			 * @see mshop/order/manager/base/delete/ansi
+			 * @see mshop/order/manager/base/search/ansi
 			 */
-			$cfgPathCount = 'mshop/order/manager/base/standard/count';
+			$cfgPathCount = 'mshop/order/manager/base/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $level );
@@ -975,8 +975,8 @@ class Standard extends Base
 			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$sitelevel = $context->getConfig()->get( 'mshop/order/manager/sitemode', $sitelevel );
 
-			$cfgPathSearch = 'mshop/order/manager/base/standard/search';
-			$cfgPathCount = 'mshop/order/manager/base/standard/count';
+			$cfgPathSearch = 'mshop/order/manager/base/search';
+			$cfgPathCount = 'mshop/order/manager/base/count';
 			$required = array( 'order.base' );
 			$total = null;
 

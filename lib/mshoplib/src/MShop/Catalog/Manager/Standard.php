@@ -204,13 +204,13 @@ class Standard extends Base
 
 		try
 		{
-			/** mshop/catalog/manager/standard/cleanup/mysql
+			/** mshop/catalog/manager/cleanup/mysql
 			 * Deletes the categories for the given site from the database
 			 *
-			 * @see mshop/catalog/manager/standard/cleanup/ansi
+			 * @see mshop/catalog/manager/cleanup/ansi
 			 */
 
-			/** mshop/catalog/manager/standard/cleanup/ansi
+			/** mshop/catalog/manager/cleanup/ansi
 			 * Deletes the categories for the given site from the database
 			 *
 			 * Removes the records matched by the given site ID from the catalog
@@ -226,14 +226,14 @@ class Standard extends Base
 			 * @param string SQL statement for removing the records
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/catalog/manager/standard/delete/ansi
-			 * @see mshop/catalog/manager/standard/insert/ansi
-			 * @see mshop/catalog/manager/standard/update/ansi
-			 * @see mshop/catalog/manager/standard/newid/ansi
-			 * @see mshop/catalog/manager/standard/search/ansi
-			 * @see mshop/catalog/manager/standard/count/ansi
+			 * @see mshop/catalog/manager/delete/ansi
+			 * @see mshop/catalog/manager/insert/ansi
+			 * @see mshop/catalog/manager/update/ansi
+			 * @see mshop/catalog/manager/newid/ansi
+			 * @see mshop/catalog/manager/search/ansi
+			 * @see mshop/catalog/manager/count/ansi
 			 */
-			$path = 'mshop/catalog/manager/standard/cleanup';
+			$path = 'mshop/catalog/manager/cleanup';
 			$sql = $this->getSqlConfig( $path );
 
 			$types = array( 'siteid' => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
@@ -537,7 +537,7 @@ class Standard extends Base
 			 * * 3 = inherit and aggregate items at the same time
 			 *
 			 * You also need to set the mode in the locale manager
-			 * (mshop/locale/manager/standard/sitelevel) to one of the constants.
+			 * (mshop/locale/manager/sitelevel) to one of the constants.
 			 * If you set it to the same value, it will work as described but you
 			 * can also use different modes. For example, if inheritance and
 			 * aggregation is configured the locale manager but only inheritance
@@ -548,18 +548,18 @@ class Standard extends Base
 			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 			 * @category Developer
 			 * @since 2018.01
-			 * @see mshop/locale/manager/standard/sitelevel
+			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
 			$level = $context->getConfig()->get( 'mshop/catalog/manager/sitemode', $level );
 
-			/** mshop/catalog/manager/standard/search-item/mysql
+			/** mshop/catalog/manager/search-item/mysql
 			 * Retrieves the records matched by the given criteria in the database
 			 *
-			 * @see mshop/catalog/manager/standard/search-item/ansi
+			 * @see mshop/catalog/manager/search-item/ansi
 			 */
 
-			/** mshop/catalog/manager/standard/search-item/ansi
+			/** mshop/catalog/manager/search-item/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the catalog
@@ -604,26 +604,26 @@ class Standard extends Base
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/catalog/manager/standard/delete/ansi
-			 * @see mshop/catalog/manager/standard/get/ansi
-			 * @see mshop/catalog/manager/standard/insert/ansi
-			 * @see mshop/catalog/manager/standard/update/ansi
-			 * @see mshop/catalog/manager/standard/newid/ansi
-			 * @see mshop/catalog/manager/standard/search/ansi
-			 * @see mshop/catalog/manager/standard/count/ansi
-			 * @see mshop/catalog/manager/standard/move-left/ansi
-			 * @see mshop/catalog/manager/standard/move-right/ansi
-			 * @see mshop/catalog/manager/standard/update-parentid/ansi
+			 * @see mshop/catalog/manager/delete/ansi
+			 * @see mshop/catalog/manager/get/ansi
+			 * @see mshop/catalog/manager/insert/ansi
+			 * @see mshop/catalog/manager/update/ansi
+			 * @see mshop/catalog/manager/newid/ansi
+			 * @see mshop/catalog/manager/search/ansi
+			 * @see mshop/catalog/manager/count/ansi
+			 * @see mshop/catalog/manager/move-left/ansi
+			 * @see mshop/catalog/manager/move-right/ansi
+			 * @see mshop/catalog/manager/update-parentid/ansi
 			 */
-			$cfgPathSearch = 'mshop/catalog/manager/standard/search-item';
+			$cfgPathSearch = 'mshop/catalog/manager/search-item';
 
-			/** mshop/catalog/manager/standard/count/mysql
+			/** mshop/catalog/manager/count/mysql
 			 * Counts the number of records matched by the given criteria in the database
 			 *
-			 * @see mshop/catalog/manager/standard/count/ansi
+			 * @see mshop/catalog/manager/count/ansi
 			 */
 
-			/** mshop/catalog/manager/standard/count/ansi
+			/** mshop/catalog/manager/count/ansi
 			 * Counts the number of records matched by the given criteria in the database
 			 *
 			 * Counts all records matched by the given criteria from the catalog
@@ -662,18 +662,18 @@ class Standard extends Base
 			 * @param string SQL statement for counting items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/catalog/manager/standard/delete/ansi
-			 * @see mshop/catalog/manager/standard/get/ansi
-			 * @see mshop/catalog/manager/standard/insert/ansi
-			 * @see mshop/catalog/manager/standard/update/ansi
-			 * @see mshop/catalog/manager/standard/newid/ansi
-			 * @see mshop/catalog/manager/standard/search/ansi
-			 * @see mshop/catalog/manager/standard/search-item/ansi
-			 * @see mshop/catalog/manager/standard/move-left/ansi
-			 * @see mshop/catalog/manager/standard/move-right/ansi
-			 * @see mshop/catalog/manager/standard/update-parentid/ansi
+			 * @see mshop/catalog/manager/delete/ansi
+			 * @see mshop/catalog/manager/get/ansi
+			 * @see mshop/catalog/manager/insert/ansi
+			 * @see mshop/catalog/manager/update/ansi
+			 * @see mshop/catalog/manager/newid/ansi
+			 * @see mshop/catalog/manager/search/ansi
+			 * @see mshop/catalog/manager/search-item/ansi
+			 * @see mshop/catalog/manager/move-left/ansi
+			 * @see mshop/catalog/manager/move-right/ansi
+			 * @see mshop/catalog/manager/update-parentid/ansi
 			 */
-			$cfgPathCount = 'mshop/catalog/manager/standard/count';
+			$cfgPathCount = 'mshop/catalog/manager/count';
 
 			if( $search->getSortations() === [] ) {
 				$search->setSortations( [$search->sort( '+', 'catalog.left' )] );
@@ -860,13 +860,13 @@ class Standard extends Base
 	 */
 	protected function lock() : \Aimeos\MShop\Catalog\Manager\Iface
 	{
-		/** mshop/catalog/manager/standard/lock/mysql
+		/** mshop/catalog/manager/lock/mysql
 		 * SQL statement for locking the catalog table
 		 *
-		 * @see mshop/catalog/manager/standard/lock/ansi
+		 * @see mshop/catalog/manager/lock/ansi
 		 */
 
-		/** mshop/catalog/manager/standard/lock/ansi
+		/** mshop/catalog/manager/lock/ansi
 		 * SQL statement for locking the catalog table
 		 *
 		 * Updating the nested set of categories in the catalog table requires locking
@@ -877,7 +877,7 @@ class Standard extends Base
 		 * @since 2019.04
 		 * @category Developer
 		 */
-		$path = 'mshop/catalog/manager/standard/lock';
+		$path = 'mshop/catalog/manager/lock';
 
 		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
 		{
@@ -900,13 +900,13 @@ class Standard extends Base
 	 */
 	protected function unlock() : \Aimeos\MShop\Catalog\Manager\Iface
 	{
-		/** mshop/catalog/manager/standard/unlock/mysql
+		/** mshop/catalog/manager/unlock/mysql
 		 * SQL statement for unlocking the catalog table
 		 *
-		 * @see mshop/catalog/manager/standard/unlock/ansi
+		 * @see mshop/catalog/manager/unlock/ansi
 		 */
 
-		/** mshop/catalog/manager/standard/unlock/ansi
+		/** mshop/catalog/manager/unlock/ansi
 		 * SQL statement for unlocking the catalog table
 		 *
 		 * Updating the nested set of categories in the catalog table requires locking
@@ -918,7 +918,7 @@ class Standard extends Base
 		 * @since 2019.04
 		 * @category Developer
 		 */
-		 $path = 'mshop/catalog/manager/standard/unlock';
+		 $path = 'mshop/catalog/manager/unlock';
 
 		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
 		{
@@ -959,13 +959,13 @@ class Standard extends Base
 
 			if( $case !== true )
 			{
-				/** mshop/catalog/manager/standard/update-usage/mysql
+				/** mshop/catalog/manager/update-usage/mysql
 				 * Updates the config, editor and mtime value of an updated record
 				 *
-				 * @see mshop/catalog/manager/standard/update-usage/ansi
+				 * @see mshop/catalog/manager/update-usage/ansi
 				 */
 
-				/** mshop/catalog/manager/standard/update-usage/ansi
+				/** mshop/catalog/manager/update-usage/ansi
 				 * Updates the config, editor and mtime value of an updated record
 				 *
 				 * Each record contains some usage information like when it was
@@ -988,30 +988,30 @@ class Standard extends Base
 				 * @param string SQL statement for updating records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/catalog/manager/standard/delete/ansi
-				 * @see mshop/catalog/manager/standard/get/ansi
-				 * @see mshop/catalog/manager/standard/insert/ansi
-				 * @see mshop/catalog/manager/standard/newid/ansi
-				 * @see mshop/catalog/manager/standard/search/ansi
-				 * @see mshop/catalog/manager/standard/search-item/ansi
-				 * @see mshop/catalog/manager/standard/count/ansi
-				 * @see mshop/catalog/manager/standard/move-left/ansi
-				 * @see mshop/catalog/manager/standard/move-right/ansi
-				 * @see mshop/catalog/manager/standard/update-parentid/ansi
-				 * @see mshop/catalog/manager/standard/insert-usage/ansi
+				 * @see mshop/catalog/manager/delete/ansi
+				 * @see mshop/catalog/manager/get/ansi
+				 * @see mshop/catalog/manager/insert/ansi
+				 * @see mshop/catalog/manager/newid/ansi
+				 * @see mshop/catalog/manager/search/ansi
+				 * @see mshop/catalog/manager/search-item/ansi
+				 * @see mshop/catalog/manager/count/ansi
+				 * @see mshop/catalog/manager/move-left/ansi
+				 * @see mshop/catalog/manager/move-right/ansi
+				 * @see mshop/catalog/manager/update-parentid/ansi
+				 * @see mshop/catalog/manager/insert-usage/ansi
 				 */
-				$path = 'mshop/catalog/manager/standard/update-usage';
+				$path = 'mshop/catalog/manager/update-usage';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 			else
 			{
-				/** mshop/catalog/manager/standard/insert-usage/mysql
+				/** mshop/catalog/manager/insert-usage/mysql
 				 * Updates the config, editor, ctime and mtime value of an inserted record
 				 *
-				 * @see mshop/catalog/manager/standard/insert-usage/ansi
+				 * @see mshop/catalog/manager/insert-usage/ansi
 				 */
 
-				/** mshop/catalog/manager/standard/insert-usage/ansi
+				/** mshop/catalog/manager/insert-usage/ansi
 				 * Updates the config, editor, ctime and mtime value of an inserted record
 				 *
 				 * Each record contains some usage information like when it was
@@ -1034,19 +1034,19 @@ class Standard extends Base
 				 * @param string SQL statement for updating records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/catalog/manager/standard/delete/ansi
-				 * @see mshop/catalog/manager/standard/get/ansi
-				 * @see mshop/catalog/manager/standard/insert/ansi
-				 * @see mshop/catalog/manager/standard/newid/ansi
-				 * @see mshop/catalog/manager/standard/search/ansi
-				 * @see mshop/catalog/manager/standard/search-item/ansi
-				 * @see mshop/catalog/manager/standard/count/ansi
-				 * @see mshop/catalog/manager/standard/move-left/ansi
-				 * @see mshop/catalog/manager/standard/move-right/ansi
-				 * @see mshop/catalog/manager/standard/update-parentid/ansi
-				 * @see mshop/catalog/manager/standard/update-usage/ansi
+				 * @see mshop/catalog/manager/delete/ansi
+				 * @see mshop/catalog/manager/get/ansi
+				 * @see mshop/catalog/manager/insert/ansi
+				 * @see mshop/catalog/manager/newid/ansi
+				 * @see mshop/catalog/manager/search/ansi
+				 * @see mshop/catalog/manager/search-item/ansi
+				 * @see mshop/catalog/manager/count/ansi
+				 * @see mshop/catalog/manager/move-left/ansi
+				 * @see mshop/catalog/manager/move-right/ansi
+				 * @see mshop/catalog/manager/update-parentid/ansi
+				 * @see mshop/catalog/manager/update-usage/ansi
 				 */
-				$path = 'mshop/catalog/manager/standard/insert-usage';
+				$path = 'mshop/catalog/manager/insert-usage';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 

@@ -36,13 +36,13 @@ class Standard
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
-		/** mshop/index/manager/standard/aggregate/mysql
+		/** mshop/index/manager/aggregate/mysql
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
-		 * @see mshop/index/manager/standard/aggregate/ansi
+		 * @see mshop/index/manager/aggregate/ansi
 		 */
 
-		/** mshop/index/manager/standard/aggregate/ansi
+		/** mshop/index/manager/aggregate/ansi
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
 		 * Groups all records by the values in the key column and counts their
@@ -78,11 +78,11 @@ class Standard
 		 * @param string SQL statement for aggregating order items
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/index/manager/standard/count/ansi
-		 * @see mshop/index/manager/standard/optimize/ansi
-		 * @see mshop/index/manager/standard/search/ansi
+		 * @see mshop/index/manager/count/ansi
+		 * @see mshop/index/manager/optimize/ansi
+		 * @see mshop/index/manager/search/ansi
 		 */
-		return $this->aggregateBase( $search, $key, 'mshop/index/manager/standard/aggregate' . $type, ['product'], $value );
+		return $this->aggregateBase( $search, $key, 'mshop/index/manager/aggregate' . $type, ['product'], $value );
 	}
 
 
@@ -108,10 +108,10 @@ class Standard
 	{
 		$list = parent::getSearchAttributes( $withsub );
 
-		/** mshop/index/manager/standard/submanagers
+		/** mshop/index/manager/submanagers
 		 * Replaced by mshop/index/manager/submanagers since 2016.01
 		 *
-		 * @see mshop/index/manager/standard/submanagers
+		 * @see mshop/index/manager/submanagers
 		 */
 		$path = 'mshop/index/manager/submanagers';
 
@@ -141,13 +141,13 @@ class Standard
 	 */
 	public function optimize() : \Aimeos\MShop\Index\Manager\Iface
 	{
-		/** mshop/index/manager/standard/optimize/mysql
+		/** mshop/index/manager/optimize/mysql
 		 * Optimizes the stored product data for retrieving the records faster
 		 *
-		 * @see mshop/index/manager/standard/optimize/ansi
+		 * @see mshop/index/manager/optimize/ansi
 		 */
 
-		/** mshop/index/manager/standard/optimize/ansi
+		/** mshop/index/manager/optimize/ansi
 		 * Optimizes the stored product data for retrieving the records faster
 		 *
 		 * The SQL statement should reorganize the data in the DBMS storage to
@@ -162,11 +162,11 @@ class Standard
 		 * @param string SQL statement for optimizing the stored product data
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/index/manager/standard/count/ansi
-		 * @see mshop/index/manager/standard/search/ansi
-		 * @see mshop/index/manager/standard/aggregate/ansi
+		 * @see mshop/index/manager/count/ansi
+		 * @see mshop/index/manager/search/ansi
+		 * @see mshop/index/manager/aggregate/ansi
 		 */
-		return $this->optimizeBase( 'mshop/index/manager/standard/optimize' );
+		return $this->optimizeBase( 'mshop/index/manager/optimize' );
 	}
 
 
@@ -231,7 +231,7 @@ class Standard
 		$context = $this->getContext();
 		$config = $context->getConfig();
 
-		/** mshop/index/manager/standard/chunksize
+		/** mshop/index/manager/chunksize
 		 * Number of products that should be indexed at once
 		 *
 		 * When rebuilding the product index, several products are updated at
@@ -247,14 +247,14 @@ class Standard
 		 * @since 2014.09
 		 * @category User
 		 * @category Developer
-		 * @see mshop/index/manager/standard/domains
-		 * @see mshop/index/manager/standard/index
-		 * @see mshop/index/manager/standard/subdomains
+		 * @see mshop/index/manager/domains
+		 * @see mshop/index/manager/index
+		 * @see mshop/index/manager/subdomains
 		 * @see mshop/index/manager/submanagers
 		 */
-		$size = $config->get( 'mshop/index/manager/standard/chunksize', 1000 );
+		$size = $config->get( 'mshop/index/manager/chunksize', 1000 );
 
-		/** mshop/index/manager/standard/domains
+		/** mshop/index/manager/domains
 		 * A list of domain names whose items should be retrieved together with the product
 		 *
 		 * To speed up the indexing process, items like texts, prices, media,
@@ -270,12 +270,12 @@ class Standard
 		 * @param string List of MShop domain names
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/index/manager/standard/chunksize
-		 * @see mshop/index/manager/standard/index
-		 * @see mshop/index/manager/standard/subdomains
+		 * @see mshop/index/manager/chunksize
+		 * @see mshop/index/manager/index
+		 * @see mshop/index/manager/subdomains
 		 * @see mshop/index/manager/submanagers
 		 */
-		$domains = $config->get( 'mshop/index/manager/standard/domains', [] );
+		$domains = $config->get( 'mshop/index/manager/domains', [] );
 
 		$manager = \Aimeos\MShop::create( $context, 'product' );
 		$search = $manager->filter();
@@ -330,13 +330,13 @@ class Standard
 	 */
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		/** mshop/index/manager/standard/search/mysql
+		/** mshop/index/manager/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
 		 *
-		 * @see mshop/index/manager/standard/search/ansi
+		 * @see mshop/index/manager/search/ansi
 		 */
 
-		/** mshop/index/manager/standard/search/ansi
+		/** mshop/index/manager/search/ansi
 		 * Retrieves the records matched by the given criteria in the database
 		 *
 		 * Fetches the records matched by the given criteria from the order
@@ -381,19 +381,19 @@ class Standard
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/standard/count/ansi
-		 * @see mshop/index/manager/standard/optimize/ansi
-		 * @see mshop/index/manager/standard/aggregate/ansi
+		 * @see mshop/index/manager/count/ansi
+		 * @see mshop/index/manager/optimize/ansi
+		 * @see mshop/index/manager/aggregate/ansi
 		 */
-		$cfgPathSearch = 'mshop/index/manager/standard/search';
+		$cfgPathSearch = 'mshop/index/manager/search';
 
-		/** mshop/index/manager/standard/count/mysql
+		/** mshop/index/manager/count/mysql
 		 * Counts the number of records matched by the given criteria in the database
 		 *
-		 * @see mshop/index/manager/standard/count/ansi
+		 * @see mshop/index/manager/count/ansi
 		 */
 
-		/** mshop/index/manager/standard/count/ansi
+		/** mshop/index/manager/count/ansi
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * Counts all records matched by the given criteria from the order
@@ -432,11 +432,11 @@ class Standard
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/standard/search/ansi
-		 * @see mshop/index/manager/standard/optimize/ansi
-		 * @see mshop/index/manager/standard/aggregate/ansi
+		 * @see mshop/index/manager/search/ansi
+		 * @see mshop/index/manager/optimize/ansi
+		 * @see mshop/index/manager/aggregate/ansi
 		 */
-		$cfgPathCount = 'mshop/index/manager/standard/count';
+		$cfgPathCount = 'mshop/index/manager/count';
 
 		return $this->searchItemsIndexBase( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
@@ -519,10 +519,10 @@ class Standard
 			 * @since 2016.02
 			 * @category User
 			 * @category Developer
-			 * @see mshop/index/manager/standard/chunksize
-			 * @see mshop/index/manager/standard/domains
-			 * @see mshop/index/manager/standard/index
-			 * @see mshop/index/manager/standard/subdomains
+			 * @see mshop/index/manager/chunksize
+			 * @see mshop/index/manager/domains
+			 * @see mshop/index/manager/index
+			 * @see mshop/index/manager/subdomains
 			 */
 			foreach( $config->get( 'mshop/index/manager/submanagers', [] ) as $domain )
 			{

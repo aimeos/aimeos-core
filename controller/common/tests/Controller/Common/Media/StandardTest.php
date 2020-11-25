@@ -140,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testDeleteMimeicon()
 	{
-		$this->context->getConfig()->set( 'controller/common/media/standard/mimeicon/directory', 'path/to/mimeicons' );
+		$this->context->getConfig()->set( 'controller/common/media/mimeicon/directory', 'path/to/mimeicons' );
 
 		$fsm = $this->getMockBuilder( \Aimeos\MW\Filesystem\Manager\Standard::class )
 			->setMethods( array( 'get' ) )
@@ -171,7 +171,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testScale()
 	{
-		$this->context->getConfig()->set( 'controller/common/media/standard/files/scale', true );
+		$this->context->getConfig()->set( 'controller/common/media/files/scale', true );
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
 			->setMethods( array( 'getFileContent', 'store' ) )
@@ -355,7 +355,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		file_exists( 'tmp/image' ) ?: mkdir( 'tmp/image' );
 		touch( 'tmp/image/jpeg.png' );
 
-		$this->context->getConfig()->set( 'controller/common/media/standard/mimeicon/directory', 'tmp' );
+		$this->context->getConfig()->set( 'controller/common/media/mimeicon/directory', 'tmp' );
 		$result = $this->access( 'getMimeIcon' )->invokeArgs( $this->object, array( 'image/jpeg' ) );
 		$this->assertStringContainsString( 'tmp/image/jpeg.png', $result );
 	}
@@ -363,7 +363,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetMimeIconNoConfig()
 	{
-		$this->context->getConfig()->set( 'controller/common/media/standard/mimeicon/directory', '' );
+		$this->context->getConfig()->set( 'controller/common/media/mimeicon/directory', '' );
 		$result = $this->access( 'getMimeIcon' )->invokeArgs( $this->object, array( 'image/jpeg' ) );
 		$this->assertEquals( '', $result );
 	}
@@ -381,7 +381,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetMimeTypeNotAllowed()
 	{
 		$file = \Aimeos\MW\Media\Factory::get( __DIR__ . '/testfiles/test.gif' );
-		$this->context->getConfig()->set( 'controller/common/media/standard/files/allowedtypes', array( 'image/jpeg' ) );
+		$this->context->getConfig()->set( 'controller/common/media/files/allowedtypes', array( 'image/jpeg' ) );
 
 		$result = $this->access( 'getMimeType' )->invokeArgs( $this->object, array( $file, 'files' ) );
 		$this->assertEquals( 'image/jpeg', $result );
@@ -391,7 +391,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetMimeTypeNoTypes()
 	{
 		$file = \Aimeos\MW\Media\Factory::get( __DIR__ . '/testfiles/test.gif' );
-		$this->context->getConfig()->set( 'controller/common/media/standard/files/allowedtypes', [] );
+		$this->context->getConfig()->set( 'controller/common/media/files/allowedtypes', [] );
 
 		$this->expectException( \Aimeos\Controller\Common\Exception::class );
 		$this->access( 'getMimeType' )->invokeArgs( $this->object, array( $file, 'files' ) );

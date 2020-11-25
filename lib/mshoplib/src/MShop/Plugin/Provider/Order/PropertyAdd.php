@@ -22,7 +22,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * order product attributes with key/value pairs like code: "package-length", value: "10".
  *
  * To trace the execution and interaction of the plugins, set the log level to DEBUG:
- *	madmin/log/manager/standard/loglevel = 7
+ *	madmin/log/manager/loglevel = 7
  *
  * @package MShop
  * @subpackage Plugin

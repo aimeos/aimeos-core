@@ -233,13 +233,13 @@ class Standard
 			$id = $item->getId();
 			$columns = $this->getObject()->getSaveAttributes();
 
-			/** mshop/locale/manager/site/standard/update/mysql
+			/** mshop/locale/manager/site/update/mysql
 			 * Updates an existing site record in the database
 			 *
-			 * @see mshop/locale/manager/site/standard/update/ansi
+			 * @see mshop/locale/manager/site/update/ansi
 			 */
 
-			/** mshop/locale/manager/site/standard/update/ansi
+			/** mshop/locale/manager/site/update/ansi
 			 * Updates an existing site record in the database
 			 *
 			 * The SQL statement must be a string suitable for being used as
@@ -256,13 +256,13 @@ class Standard
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/site/standard/insert/ansi
-			 * @see mshop/locale/manager/site/standard/delete/ansi
-			 * @see mshop/locale/manager/site/standard/search/ansi
-			 * @see mshop/locale/manager/site/standard/count/ansi
-			 * @see mshop/locale/manager/site/standard/newid/ansi
+			 * @see mshop/locale/manager/site/insert/ansi
+			 * @see mshop/locale/manager/site/delete/ansi
+			 * @see mshop/locale/manager/site/search/ansi
+			 * @see mshop/locale/manager/site/count/ansi
+			 * @see mshop/locale/manager/site/newid/ansi
 			 */
-			$path = 'mshop/locale/manager/site/standard/update';
+			$path = 'mshop/locale/manager/site/update';
 			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 
 			$idx = 1;
@@ -317,13 +317,13 @@ class Standard
 		$this->getObject()->clear( $siteIds );
 
 
-		/** mshop/locale/manager/site/standard/delete/mysql
+		/** mshop/locale/manager/site/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * @see mshop/locale/manager/site/standard/delete/ansi
+		 * @see mshop/locale/manager/site/delete/ansi
 		 */
 
-		/** mshop/locale/manager/site/standard/delete/ansi
+		/** mshop/locale/manager/site/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the site records specified by the given IDs from the
@@ -341,13 +341,13 @@ class Standard
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/locale/manager/site/standard/insert/ansi
-		 * @see mshop/locale/manager/site/standard/update/ansi
-		 * @see mshop/locale/manager/site/standard/search/ansi
-		 * @see mshop/locale/manager/site/standard/count/ansi
-		 * @see mshop/locale/manager/site/standard/newid/ansi
+		 * @see mshop/locale/manager/site/insert/ansi
+		 * @see mshop/locale/manager/site/update/ansi
+		 * @see mshop/locale/manager/site/search/ansi
+		 * @see mshop/locale/manager/site/count/ansi
+		 * @see mshop/locale/manager/site/newid/ansi
 		 */
-		$path = 'mshop/locale/manager/site/standard/delete';
+		$path = 'mshop/locale/manager/site/delete';
 
 		return $this->deleteItemsBase( $items, $path, false );
 	}
@@ -594,13 +594,13 @@ class Standard
 				$search->getLimit(),
 			);
 
-			/** mshop/locale/manager/site/standard/search/mysql
+			/** mshop/locale/manager/site/search/mysql
 			 * Retrieves the records matched by the given criteria in the database
 			 *
-			 * @see mshop/locale/manager/site/standard/search/ansi
+			 * @see mshop/locale/manager/site/search/ansi
 			 */
 
-			/** mshop/locale/manager/site/standard/search/ansi
+			/** mshop/locale/manager/site/search/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the attribute
@@ -645,13 +645,13 @@ class Standard
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/site/standard/insert/ansi
-			 * @see mshop/locale/manager/site/standard/update/ansi
-			 * @see mshop/locale/manager/site/standard/delete/ansi
-			 * @see mshop/locale/manager/site/standard/count/ansi
-			 * @see mshop/locale/manager/site/standard/newid/ansi
+			 * @see mshop/locale/manager/site/insert/ansi
+			 * @see mshop/locale/manager/site/update/ansi
+			 * @see mshop/locale/manager/site/delete/ansi
+			 * @see mshop/locale/manager/site/count/ansi
+			 * @see mshop/locale/manager/site/newid/ansi
 			 */
-			$path = 'mshop/locale/manager/site/standard/search';
+			$path = 'mshop/locale/manager/site/search';
 
 			$sql = $this->getSqlConfig( $path );
 			$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
@@ -792,13 +792,13 @@ class Standard
 			$date = date( 'Y-m-d H:i:s' );
 			$columns = $this->getObject()->getSaveAttributes();
 
-			/** mshop/locale/manager/site/standard/insert/mysql
+			/** mshop/locale/manager/site/insert/mysql
 			 * Inserts a new currency record into the database table
 			 *
-			 * @see mshop/locale/manager/site/standard/insert/ansi
+			 * @see mshop/locale/manager/site/insert/ansi
 			 */
 
-			/** mshop/locale/manager/site/standard/insert/ansi
+			/** mshop/locale/manager/site/insert/ansi
 			 * Inserts a new currency record into the database table
 			 *
 			 * The SQL statement must be a string suitable for being used as
@@ -817,13 +817,13 @@ class Standard
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/site/standard/update/ansi
-			 * @see mshop/locale/manager/site/standard/delete/ansi
-			 * @see mshop/locale/manager/site/standard/search/ansi
-			 * @see mshop/locale/manager/site/standard/count/ansi
-			 * @see mshop/locale/manager/site/standard/newid/ansi
+			 * @see mshop/locale/manager/site/update/ansi
+			 * @see mshop/locale/manager/site/delete/ansi
+			 * @see mshop/locale/manager/site/search/ansi
+			 * @see mshop/locale/manager/site/count/ansi
+			 * @see mshop/locale/manager/site/newid/ansi
 			 */
-			$path = 'mshop/locale/manager/site/standard/insert';
+			$path = 'mshop/locale/manager/site/insert';
 			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 
 			$idx = 1;
@@ -844,13 +844,13 @@ class Standard
 
 			$stmt->execute()->finish();
 
-			/** mshop/locale/manager/site/standard/newid/mysql
+			/** mshop/locale/manager/site/newid/mysql
 			 * Retrieves the ID generated by the database when inserting a new record
 			 *
-			 * @see mshop/locale/manager/site/standard/newid/ansi
+			 * @see mshop/locale/manager/site/newid/ansi
 			 */
 
-			/** mshop/locale/manager/site/standard/newid/ansi
+			/** mshop/locale/manager/site/newid/ansi
 			 * Retrieves the ID generated by the database when inserting a new record
 			 *
 			 * As soon as a new record is inserted into the database table,
@@ -874,13 +874,13 @@ class Standard
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/site/standard/insert/ansi
-			 * @see mshop/locale/manager/site/standard/update/ansi
-			 * @see mshop/locale/manager/site/standard/delete/ansi
-			 * @see mshop/locale/manager/site/standard/search/ansi
-			 * @see mshop/locale/manager/site/standard/count/ansi
+			 * @see mshop/locale/manager/site/insert/ansi
+			 * @see mshop/locale/manager/site/update/ansi
+			 * @see mshop/locale/manager/site/delete/ansi
+			 * @see mshop/locale/manager/site/search/ansi
+			 * @see mshop/locale/manager/site/count/ansi
 			 */
-			$path = 'mshop/locale/manager/standard/newid';
+			$path = 'mshop/locale/manager/newid';
 			$item->setId( $this->newId( $conn, $this->getSqlConfig( $path ) ) );
 
 			$dbm->release( $conn, $dbname );
@@ -986,13 +986,13 @@ class Standard
 	 */
 	protected function getTotal( \Aimeos\MW\DB\Connection\Iface $conn, array $find, array $replace ) : int
 	{
-		/** mshop/locale/manager/site/standard/count/mysql
+		/** mshop/locale/manager/site/count/mysql
 		 * Counts the number of records matched by the given criteria in the database
 		 *
-		 * @see mshop/locale/manager/site/standard/count/ansi
+		 * @see mshop/locale/manager/site/count/ansi
 		 */
 
-		/** mshop/locale/manager/site/standard/count/ansi
+		/** mshop/locale/manager/site/count/ansi
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * Counts all records matched by the given criteria from the attribute
@@ -1031,13 +1031,13 @@ class Standard
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/locale/manager/site/standard/insert/ansi
-		 * @see mshop/locale/manager/site/standard/update/ansi
-		 * @see mshop/locale/manager/site/standard/delete/ansi
-		 * @see mshop/locale/manager/site/standard/search/ansi
-		 * @see mshop/locale/manager/site/standard/newid/ansi
+		 * @see mshop/locale/manager/site/insert/ansi
+		 * @see mshop/locale/manager/site/update/ansi
+		 * @see mshop/locale/manager/site/delete/ansi
+		 * @see mshop/locale/manager/site/search/ansi
+		 * @see mshop/locale/manager/site/newid/ansi
 		 */
-		$path = 'mshop/locale/manager/site/standard/count';
+		$path = 'mshop/locale/manager/site/count';
 
 		$sql = $this->getSqlConfig( $path );
 		$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );

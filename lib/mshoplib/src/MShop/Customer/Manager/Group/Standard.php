@@ -104,7 +104,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->clearBase( $siteids, 'mshop/customer/manager/group/standard/delete' );
+		return $this->clearBase( $siteids, 'mshop/customer/manager/group/delete' );
 	}
 
 
@@ -173,13 +173,13 @@ class Standard
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		/** mshop/customer/manager/group/standard/delete/mysql
+		/** mshop/customer/manager/group/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * @see mshop/customer/manager/group/standard/delete/ansi
+		 * @see mshop/customer/manager/group/delete/ansi
 		 */
 
-		/** mshop/customer/manager/group/standard/delete/ansi
+		/** mshop/customer/manager/group/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the customer group
@@ -197,13 +197,13 @@ class Standard
 		 * @param string SQL statement for deleting items
 		 * @since 2015.08
 		 * @category Developer
-		 * @see mshop/customer/manager/group/standard/insert/ansi
-		 * @see mshop/customer/manager/group/standard/update/ansi
-		 * @see mshop/customer/manager/group/standard/newid/ansi
-		 * @see mshop/customer/manager/group/standard/search/ansi
-		 * @see mshop/customer/manager/group/standard/count/ansi
+		 * @see mshop/customer/manager/group/insert/ansi
+		 * @see mshop/customer/manager/group/update/ansi
+		 * @see mshop/customer/manager/group/newid/ansi
+		 * @see mshop/customer/manager/group/search/ansi
+		 * @see mshop/customer/manager/group/count/ansi
 		 */
-		$path = 'mshop/customer/manager/group/standard/delete';
+		$path = 'mshop/customer/manager/group/delete';
 
 		return $this->deleteItemsBase( $itemIds, $path );
 	}
@@ -268,13 +268,13 @@ class Standard
 
 			if( $id === null )
 			{
-				/** mshop/customer/manager/group/standard/insert/mysql
+				/** mshop/customer/manager/group/insert/mysql
 				 * Inserts a new customer group record into the database table
 				 *
-				 * @see mshop/customer/manager/group/standard/insert/ansi
+				 * @see mshop/customer/manager/group/insert/ansi
 				 */
 
-				/** mshop/customer/manager/group/standard/insert/ansi
+				/** mshop/customer/manager/group/insert/ansi
 				 * Inserts a new customer group record into the database table
 				 *
 				 * Items with no ID yet (i.e. the ID is NULL) will be created in
@@ -297,24 +297,24 @@ class Standard
 				 * @param string SQL statement for inserting records
 				 * @since 2015.08
 				 * @category Developer
-				 * @see mshop/customer/manager/group/standard/update/ansi
-				 * @see mshop/customer/manager/group/standard/newid/ansi
-				 * @see mshop/customer/manager/group/standard/delete/ansi
-				 * @see mshop/customer/manager/group/standard/search/ansi
-				 * @see mshop/customer/manager/group/standard/count/ansi
+				 * @see mshop/customer/manager/group/update/ansi
+				 * @see mshop/customer/manager/group/newid/ansi
+				 * @see mshop/customer/manager/group/delete/ansi
+				 * @see mshop/customer/manager/group/search/ansi
+				 * @see mshop/customer/manager/group/count/ansi
 				 */
-				$path = 'mshop/customer/manager/group/standard/insert';
+				$path = 'mshop/customer/manager/group/insert';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
-				/** mshop/customer/manager/group/standard/update/mysql
+				/** mshop/customer/manager/group/update/mysql
 				 * Updates an existing customer group record in the database
 				 *
-				 * @see mshop/customer/manager/group/standard/update/ansi
+				 * @see mshop/customer/manager/group/update/ansi
 				 */
 
-				/** mshop/customer/manager/group/standard/update/ansi
+				/** mshop/customer/manager/group/update/ansi
 				 * Updates an existing customer group record in the database
 				 *
 				 * Items which already have an ID (i.e. the ID is not NULL) will
@@ -334,13 +334,13 @@ class Standard
 				 * @param string SQL statement for updating records
 				 * @since 2015.08
 				 * @category Developer
-				 * @see mshop/customer/manager/group/standard/insert/ansi
-				 * @see mshop/customer/manager/group/standard/newid/ansi
-				 * @see mshop/customer/manager/group/standard/delete/ansi
-				 * @see mshop/customer/manager/group/standard/search/ansi
-				 * @see mshop/customer/manager/group/standard/count/ansi
+				 * @see mshop/customer/manager/group/insert/ansi
+				 * @see mshop/customer/manager/group/newid/ansi
+				 * @see mshop/customer/manager/group/delete/ansi
+				 * @see mshop/customer/manager/group/search/ansi
+				 * @see mshop/customer/manager/group/count/ansi
 				 */
-				$path = 'mshop/customer/manager/group/standard/update';
+				$path = 'mshop/customer/manager/group/update';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
@@ -367,13 +367,13 @@ class Standard
 
 			if( $id === null && $fetch === true )
 			{
-				/** mshop/customer/manager/group/standard/newid/mysql
+				/** mshop/customer/manager/group/newid/mysql
 				 * Retrieves the ID generated by the database when inserting a new record
 				 *
-				 * @see mshop/customer/manager/group/standard/newid/ansi
+				 * @see mshop/customer/manager/group/newid/ansi
 				 */
 
-				/** mshop/customer/manager/group/standard/newid/ansi
+				/** mshop/customer/manager/group/newid/ansi
 				 * Retrieves the ID generated by the database when inserting a new record
 				 *
 				 * As soon as a new record is inserted into the database table,
@@ -397,13 +397,13 @@ class Standard
 				 * @param string SQL statement for retrieving the last inserted record ID
 				 * @since 2015.08
 				 * @category Developer
-				 * @see mshop/customer/manager/group/standard/insert/ansi
-				 * @see mshop/customer/manager/group/standard/update/ansi
-				 * @see mshop/customer/manager/group/standard/delete/ansi
-				 * @see mshop/customer/manager/group/standard/search/ansi
-				 * @see mshop/customer/manager/group/standard/count/ansi
+				 * @see mshop/customer/manager/group/insert/ansi
+				 * @see mshop/customer/manager/group/update/ansi
+				 * @see mshop/customer/manager/group/delete/ansi
+				 * @see mshop/customer/manager/group/search/ansi
+				 * @see mshop/customer/manager/group/count/ansi
 				 */
-				$path = 'mshop/customer/manager/group/standard/newid';
+				$path = 'mshop/customer/manager/group/newid';
 				$id = $this->newId( $conn, $path );
 			}
 
@@ -443,13 +443,13 @@ class Standard
 			$required = array( 'customer.group' );
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 
-			/** mshop/customer/manager/group/standard/search/mysql
+			/** mshop/customer/manager/group/search/mysql
 			 * Retrieves the records matched by the given criteria in the database
 			 *
-			 * @see mshop/customer/manager/group/standard/search/ansi
+			 * @see mshop/customer/manager/group/search/ansi
 			 */
 
-			/** mshop/customer/manager/group/standard/search/ansi
+			/** mshop/customer/manager/group/search/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the customer
@@ -494,21 +494,21 @@ class Standard
 			 * @param string SQL statement for searching items
 			 * @since 2015.08
 			 * @category Developer
-			 * @see mshop/customer/manager/group/standard/insert/ansi
-			 * @see mshop/customer/manager/group/standard/update/ansi
-			 * @see mshop/customer/manager/group/standard/newid/ansi
-			 * @see mshop/customer/manager/group/standard/delete/ansi
-			 * @see mshop/customer/manager/group/standard/count/ansi
+			 * @see mshop/customer/manager/group/insert/ansi
+			 * @see mshop/customer/manager/group/update/ansi
+			 * @see mshop/customer/manager/group/newid/ansi
+			 * @see mshop/customer/manager/group/delete/ansi
+			 * @see mshop/customer/manager/group/count/ansi
 			 */
-			$cfgPathSearch = 'mshop/customer/manager/group/standard/search';
+			$cfgPathSearch = 'mshop/customer/manager/group/search';
 
-			/** mshop/customer/manager/group/standard/count/mysql
+			/** mshop/customer/manager/group/count/mysql
 			 * Counts the number of records matched by the given criteria in the database
 			 *
-			 * @see mshop/customer/manager/group/standard/count/ansi
+			 * @see mshop/customer/manager/group/count/ansi
 			 */
 
-			/** mshop/customer/manager/group/standard/count/ansi
+			/** mshop/customer/manager/group/count/ansi
 			 * Counts the number of records matched by the given criteria in the database
 			 *
 			 * Counts all records matched by the given criteria from the customer
@@ -547,13 +547,13 @@ class Standard
 			 * @param string SQL statement for counting items
 			 * @since 2015.08
 			 * @category Developer
-			 * @see mshop/customer/manager/group/standard/insert/ansi
-			 * @see mshop/customer/manager/group/standard/update/ansi
-			 * @see mshop/customer/manager/group/standard/newid/ansi
-			 * @see mshop/customer/manager/group/standard/delete/ansi
-			 * @see mshop/customer/manager/group/standard/search/ansi
+			 * @see mshop/customer/manager/group/insert/ansi
+			 * @see mshop/customer/manager/group/update/ansi
+			 * @see mshop/customer/manager/group/newid/ansi
+			 * @see mshop/customer/manager/group/delete/ansi
+			 * @see mshop/customer/manager/group/search/ansi
 			 */
-			$cfgPathCount = 'mshop/customer/manager/group/standard/count';
+			$cfgPathCount = 'mshop/customer/manager/group/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 

@@ -152,13 +152,13 @@ class Standard
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
-		/** mshop/subscription/manager/standard/aggregate/mysql
+		/** mshop/subscription/manager/aggregate/mysql
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
-		 * @see mshop/subscription/manager/standard/aggregate/ansi
+		 * @see mshop/subscription/manager/aggregate/ansi
 		 */
 
-		/** mshop/subscription/manager/standard/aggregate/ansi
+		/** mshop/subscription/manager/aggregate/ansi
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
 		 * Groups all records by the values in the key column and counts their
@@ -194,15 +194,15 @@ class Standard
 		 * @param string SQL statement for aggregating subscription items
 		 * @since 2018.04
 		 * @category Developer
-		 * @see mshop/subscription/manager/standard/insert/ansi
-		 * @see mshop/subscription/manager/standard/update/ansi
-		 * @see mshop/subscription/manager/standard/newid/ansi
-		 * @see mshop/subscription/manager/standard/delete/ansi
-		 * @see mshop/subscription/manager/standard/search/ansi
-		 * @see mshop/subscription/manager/standard/count/ansi
+		 * @see mshop/subscription/manager/insert/ansi
+		 * @see mshop/subscription/manager/update/ansi
+		 * @see mshop/subscription/manager/newid/ansi
+		 * @see mshop/subscription/manager/delete/ansi
+		 * @see mshop/subscription/manager/search/ansi
+		 * @see mshop/subscription/manager/count/ansi
 		 */
 
-		$cfgkey = 'mshop/subscription/manager/standard/aggregate' . $type;
+		$cfgkey = 'mshop/subscription/manager/aggregate' . $type;
 		return $this->aggregateBase( $search, $key, $cfgkey, array( 'subscription' ), $value );
 	}
 
@@ -220,7 +220,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->clearBase( $siteids, 'mshop/subscription/manager/standard/delete' );
+		return $this->clearBase( $siteids, 'mshop/subscription/manager/delete' );
 	}
 
 
@@ -296,13 +296,13 @@ class Standard
 
 			if( $id === null )
 			{
-				/** mshop/subscription/manager/standard/insert/mysql
+				/** mshop/subscription/manager/insert/mysql
 				 * Inserts a new subscription record into the database table
 				 *
-				 * @see mshop/subscription/manager/standard/insert/ansi
+				 * @see mshop/subscription/manager/insert/ansi
 				 */
 
-				/** mshop/subscription/manager/standard/insert/ansi
+				/** mshop/subscription/manager/insert/ansi
 				 * Inserts a new subscription record into the database table
 				 *
 				 * Items with no ID yet (i.e. the ID is NULL) will be created in
@@ -325,24 +325,24 @@ class Standard
 				 * @param string SQL statement for inserting records
 				 * @since 2018.04
 				 * @category Developer
-				 * @see mshop/subscription/manager/standard/update/ansi
-				 * @see mshop/subscription/manager/standard/newid/ansi
-				 * @see mshop/subscription/manager/standard/delete/ansi
-				 * @see mshop/subscription/manager/standard/search/ansi
-				 * @see mshop/subscription/manager/standard/count/ansi
+				 * @see mshop/subscription/manager/update/ansi
+				 * @see mshop/subscription/manager/newid/ansi
+				 * @see mshop/subscription/manager/delete/ansi
+				 * @see mshop/subscription/manager/search/ansi
+				 * @see mshop/subscription/manager/count/ansi
 				 */
-				$path = 'mshop/subscription/manager/standard/insert';
+				$path = 'mshop/subscription/manager/insert';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
-				/** mshop/subscription/manager/standard/update/mysql
+				/** mshop/subscription/manager/update/mysql
 				 * Updates an existing subscription record in the database
 				 *
-				 * @see mshop/subscription/manager/standard/update/ansi
+				 * @see mshop/subscription/manager/update/ansi
 				 */
 
-				/** mshop/subscription/manager/standard/update/ansi
+				/** mshop/subscription/manager/update/ansi
 				 * Updates an existing subscription record in the database
 				 *
 				 * Items which already have an ID (i.e. the ID is not NULL) will
@@ -362,13 +362,13 @@ class Standard
 				 * @param string SQL statement for updating records
 				 * @since 2018.04
 				 * @category Developer
-				 * @see mshop/subscription/manager/standard/insert/ansi
-				 * @see mshop/subscription/manager/standard/newid/ansi
-				 * @see mshop/subscription/manager/standard/delete/ansi
-				 * @see mshop/subscription/manager/standard/search/ansi
-				 * @see mshop/subscription/manager/standard/count/ansi
+				 * @see mshop/subscription/manager/insert/ansi
+				 * @see mshop/subscription/manager/newid/ansi
+				 * @see mshop/subscription/manager/delete/ansi
+				 * @see mshop/subscription/manager/search/ansi
+				 * @see mshop/subscription/manager/count/ansi
 				 */
-				$path = 'mshop/subscription/manager/standard/update';
+				$path = 'mshop/subscription/manager/update';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
@@ -402,13 +402,13 @@ class Standard
 
 			if( $id === null && $fetch === true )
 			{
-				/** mshop/subscription/manager/standard/newid/mysql
+				/** mshop/subscription/manager/newid/mysql
 				 * Retrieves the ID generated by the database when inserting a new record
 				 *
-				 * @see mshop/subscription/manager/standard/newid/ansi
+				 * @see mshop/subscription/manager/newid/ansi
 				 */
 
-				/** mshop/subscription/manager/standard/newid/ansi
+				/** mshop/subscription/manager/newid/ansi
 				 * Retrieves the ID generated by the database when inserting a new record
 				 *
 				 * As soon as a new record is inserted into the database table,
@@ -432,13 +432,13 @@ class Standard
 				 * @param string SQL statement for retrieving the last inserted record ID
 				 * @since 2018.04
 				 * @category Developer
-				 * @see mshop/subscription/manager/standard/insert/ansi
-				 * @see mshop/subscription/manager/standard/update/ansi
-				 * @see mshop/subscription/manager/standard/delete/ansi
-				 * @see mshop/subscription/manager/standard/search/ansi
-				 * @see mshop/subscription/manager/standard/count/ansi
+				 * @see mshop/subscription/manager/insert/ansi
+				 * @see mshop/subscription/manager/update/ansi
+				 * @see mshop/subscription/manager/delete/ansi
+				 * @see mshop/subscription/manager/search/ansi
+				 * @see mshop/subscription/manager/count/ansi
 				 */
-				$path = 'mshop/subscription/manager/standard/newid';
+				$path = 'mshop/subscription/manager/newid';
 				$id = $this->newId( $conn, $path );
 			}
 
@@ -479,13 +479,13 @@ class Standard
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		/** mshop/subscription/manager/standard/delete/mysql
+		/** mshop/subscription/manager/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * @see mshop/subscription/manager/standard/delete/ansi
+		 * @see mshop/subscription/manager/delete/ansi
 		 */
 
-		/** mshop/subscription/manager/standard/delete/ansi
+		/** mshop/subscription/manager/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the subscription database.
@@ -503,13 +503,13 @@ class Standard
 		 * @param string SQL statement for deleting items
 		 * @since 2018.04
 		 * @category Developer
-		 * @see mshop/subscription/manager/standard/insert/ansi
-		 * @see mshop/subscription/manager/standard/update/ansi
-		 * @see mshop/subscription/manager/standard/newid/ansi
-		 * @see mshop/subscription/manager/standard/search/ansi
-		 * @see mshop/subscription/manager/standard/count/ansi
+		 * @see mshop/subscription/manager/insert/ansi
+		 * @see mshop/subscription/manager/update/ansi
+		 * @see mshop/subscription/manager/newid/ansi
+		 * @see mshop/subscription/manager/search/ansi
+		 * @see mshop/subscription/manager/count/ansi
 		 */
-		$path = 'mshop/subscription/manager/standard/delete';
+		$path = 'mshop/subscription/manager/delete';
 
 		return $this->deleteItemsBase( $itemIds, $path );
 	}
@@ -597,7 +597,7 @@ class Standard
 			 * * 3 = inherit and aggregate items at the same time
 			 *
 			 * You also need to set the mode in the locale manager
-			 * (mshop/locale/manager/standard/sitelevel) to one of the constants.
+			 * (mshop/locale/manager/sitelevel) to one of the constants.
 			 * If you set it to the same value, it will work as described but you
 			 * can also use different modes. For example, if inheritance and
 			 * aggregation is configured the locale manager but only inheritance
@@ -608,18 +608,18 @@ class Standard
 			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 			 * @category Developer
 			 * @since 2018.04
-			 * @see mshop/locale/manager/standard/sitelevel
+			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 			$level = $context->getConfig()->get( 'mshop/subscription/manager/sitemode', $level );
 
-			/** mshop/subscription/manager/standard/search/mysql
+			/** mshop/subscription/manager/search/mysql
 			 * Retrieves the records matched by the given criteria in the database
 			 *
-			 * @see mshop/subscription/manager/standard/search/ansi
+			 * @see mshop/subscription/manager/search/ansi
 			 */
 
-			/** mshop/subscription/manager/standard/search/ansi
+			/** mshop/subscription/manager/search/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the subscription
@@ -664,21 +664,21 @@ class Standard
 			 * @param string SQL statement for searching items
 			 * @since 2018.04
 			 * @category Developer
-			 * @see mshop/subscription/manager/standard/insert/ansi
-			 * @see mshop/subscription/manager/standard/update/ansi
-			 * @see mshop/subscription/manager/standard/newid/ansi
-			 * @see mshop/subscription/manager/standard/delete/ansi
-			 * @see mshop/subscription/manager/standard/count/ansi
+			 * @see mshop/subscription/manager/insert/ansi
+			 * @see mshop/subscription/manager/update/ansi
+			 * @see mshop/subscription/manager/newid/ansi
+			 * @see mshop/subscription/manager/delete/ansi
+			 * @see mshop/subscription/manager/count/ansi
 			 */
-			$cfgPathSearch = 'mshop/subscription/manager/standard/search';
+			$cfgPathSearch = 'mshop/subscription/manager/search';
 
-			/** mshop/subscription/manager/standard/count/mysql
+			/** mshop/subscription/manager/count/mysql
 			 * Counts the number of records matched by the given criteria in the database
 			 *
-			 * @see mshop/subscription/manager/standard/count/ansi
+			 * @see mshop/subscription/manager/count/ansi
 			 */
 
-			/** mshop/subscription/manager/standard/count/ansi
+			/** mshop/subscription/manager/count/ansi
 			 * Counts the number of records matched by the given criteria in the database
 			 *
 			 * Counts all records matched by the given criteria from the subscription
@@ -717,13 +717,13 @@ class Standard
 			 * @param string SQL statement for counting items
 			 * @since 2018.04
 			 * @category Developer
-			 * @see mshop/subscription/manager/standard/insert/ansi
-			 * @see mshop/subscription/manager/standard/update/ansi
-			 * @see mshop/subscription/manager/standard/newid/ansi
-			 * @see mshop/subscription/manager/standard/delete/ansi
-			 * @see mshop/subscription/manager/standard/search/ansi
+			 * @see mshop/subscription/manager/insert/ansi
+			 * @see mshop/subscription/manager/update/ansi
+			 * @see mshop/subscription/manager/newid/ansi
+			 * @see mshop/subscription/manager/delete/ansi
+			 * @see mshop/subscription/manager/search/ansi
 			 */
-			$cfgPathCount = 'mshop/subscription/manager/standard/count';
+			$cfgPathCount = 'mshop/subscription/manager/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
 				$required, $total, $level );

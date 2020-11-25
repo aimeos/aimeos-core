@@ -253,7 +253,7 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->clearBase( $siteids, 'mshop/product/manager/standard/delete' );
+		return $this->clearBase( $siteids, 'mshop/product/manager/delete' );
 	}
 
 
@@ -297,7 +297,7 @@ class Standard
 				$object->compare( '>=', 'product.dateend', $this->date ),
 			);
 
-			/** mshop/product/manager/standard/strict-events
+			/** mshop/product/manager/strict-events
 			 * Hide events automatically if they are over
 			 *
 			 * Events are hidden by default if they are finished, removed from the
@@ -313,7 +313,7 @@ class Standard
 			 * @category User
 			 * @since 2019.10
 			 */
-			if( !$this->getContext()->getConfig()->get( 'mshop/product/manager/standard/strict-events', true ) ) {
+			if( !$this->getContext()->getConfig()->get( 'mshop/product/manager/strict-events', true ) ) {
 				$temp[] = $object->compare( '==', 'product.type', 'event' );
 			}
 
@@ -336,13 +336,13 @@ class Standard
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		/** mshop/product/manager/standard/delete/mysql
+		/** mshop/product/manager/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * @see mshop/product/manager/standard/delete/ansi
+		 * @see mshop/product/manager/delete/ansi
 		 */
 
-		/** mshop/product/manager/standard/delete/ansi
+		/** mshop/product/manager/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the product database.
@@ -360,13 +360,13 @@ class Standard
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/product/manager/standard/insert/ansi
-		 * @see mshop/product/manager/standard/update/ansi
-		 * @see mshop/product/manager/standard/newid/ansi
-		 * @see mshop/product/manager/standard/search/ansi
-		 * @see mshop/product/manager/standard/count/ansi
+		 * @see mshop/product/manager/insert/ansi
+		 * @see mshop/product/manager/update/ansi
+		 * @see mshop/product/manager/newid/ansi
+		 * @see mshop/product/manager/search/ansi
+		 * @see mshop/product/manager/count/ansi
 		 */
-		$path = 'mshop/product/manager/standard/delete';
+		$path = 'mshop/product/manager/delete';
 
 		return $this->deleteItemsBase( $itemIds, $path )->deleteRefItems( $itemIds );
 	}
@@ -479,13 +479,13 @@ class Standard
 
 		try
 		{
-			/** mshop/product/manager/standard/rate/mysql
+			/** mshop/product/manager/rate/mysql
 			 * Updates the rating of the product in the database
 			 *
-			 * @see mshop/product/manager/standard/rate/ansi
+			 * @see mshop/product/manager/rate/ansi
 			 */
 
-			/** mshop/product/manager/standard/rate/ansi
+			/** mshop/product/manager/rate/ansi
 			 * Updates the rating of the product in the database
 			 *
 			 * The SQL statement must be a string suitable for being used as
@@ -502,14 +502,14 @@ class Standard
 			 * @param string SQL statement for update ratings
 			 * @since 2020.10
 			 * @category Developer
-			 * @see mshop/product/manager/standard/insert/ansi
-			 * @see mshop/product/manager/standard/update/ansi
-			 * @see mshop/product/manager/standard/newid/ansi
-			 * @see mshop/product/manager/standard/delete/ansi
-			 * @see mshop/product/manager/standard/search/ansi
-			 * @see mshop/product/manager/standard/count/ansi
+			 * @see mshop/product/manager/insert/ansi
+			 * @see mshop/product/manager/update/ansi
+			 * @see mshop/product/manager/newid/ansi
+			 * @see mshop/product/manager/delete/ansi
+			 * @see mshop/product/manager/search/ansi
+			 * @see mshop/product/manager/count/ansi
 			 */
-			$path = 'mshop/product/manager/standard/rate';
+			$path = 'mshop/product/manager/rate';
 
 			$stmt = $this->getCachedStatement( $conn, $path, $this->getSqlConfig( $path ) );
 
@@ -561,13 +561,13 @@ class Standard
 
 			if( $id === null )
 			{
-				/** mshop/product/manager/standard/insert/mysql
+				/** mshop/product/manager/insert/mysql
 				 * Inserts a new product record into the database table
 				 *
-				 * @see mshop/product/manager/standard/insert/ansi
+				 * @see mshop/product/manager/insert/ansi
 				 */
 
-				/** mshop/product/manager/standard/insert/ansi
+				/** mshop/product/manager/insert/ansi
 				 * Inserts a new product record into the database table
 				 *
 				 * Items with no ID yet (i.e. the ID is NULL) will be created in
@@ -590,24 +590,24 @@ class Standard
 				 * @param string SQL statement for inserting records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/product/manager/standard/update/ansi
-				 * @see mshop/product/manager/standard/newid/ansi
-				 * @see mshop/product/manager/standard/delete/ansi
-				 * @see mshop/product/manager/standard/search/ansi
-				 * @see mshop/product/manager/standard/count/ansi
+				 * @see mshop/product/manager/update/ansi
+				 * @see mshop/product/manager/newid/ansi
+				 * @see mshop/product/manager/delete/ansi
+				 * @see mshop/product/manager/search/ansi
+				 * @see mshop/product/manager/count/ansi
 				 */
-				$path = 'mshop/product/manager/standard/insert';
+				$path = 'mshop/product/manager/insert';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
-				/** mshop/product/manager/standard/update/mysql
+				/** mshop/product/manager/update/mysql
 				 * Updates an existing product record in the database
 				 *
-				 * @see mshop/product/manager/standard/update/ansi
+				 * @see mshop/product/manager/update/ansi
 				 */
 
-				/** mshop/product/manager/standard/update/ansi
+				/** mshop/product/manager/update/ansi
 				 * Updates an existing product record in the database
 				 *
 				 * Items which already have an ID (i.e. the ID is not NULL) will
@@ -627,13 +627,13 @@ class Standard
 				 * @param string SQL statement for updating records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/product/manager/standard/insert/ansi
-				 * @see mshop/product/manager/standard/newid/ansi
-				 * @see mshop/product/manager/standard/delete/ansi
-				 * @see mshop/product/manager/standard/search/ansi
-				 * @see mshop/product/manager/standard/count/ansi
+				 * @see mshop/product/manager/insert/ansi
+				 * @see mshop/product/manager/newid/ansi
+				 * @see mshop/product/manager/delete/ansi
+				 * @see mshop/product/manager/search/ansi
+				 * @see mshop/product/manager/count/ansi
 				 */
-				$path = 'mshop/product/manager/standard/update';
+				$path = 'mshop/product/manager/update';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
@@ -668,13 +668,13 @@ class Standard
 
 			if( $id === null )
 			{
-				/** mshop/product/manager/standard/newid/mysql
+				/** mshop/product/manager/newid/mysql
 				 * Retrieves the ID generated by the database when inserting a new record
 				 *
-				 * @see mshop/product/manager/standard/newid/ansi
+				 * @see mshop/product/manager/newid/ansi
 				 */
 
-				/** mshop/product/manager/standard/newid/ansi
+				/** mshop/product/manager/newid/ansi
 				 * Retrieves the ID generated by the database when inserting a new record
 				 *
 				 * As soon as a new record is inserted into the database table,
@@ -698,13 +698,13 @@ class Standard
 				 * @param string SQL statement for retrieving the last inserted record ID
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/product/manager/standard/insert/ansi
-				 * @see mshop/product/manager/standard/update/ansi
-				 * @see mshop/product/manager/standard/delete/ansi
-				 * @see mshop/product/manager/standard/search/ansi
-				 * @see mshop/product/manager/standard/count/ansi
+				 * @see mshop/product/manager/insert/ansi
+				 * @see mshop/product/manager/update/ansi
+				 * @see mshop/product/manager/delete/ansi
+				 * @see mshop/product/manager/search/ansi
+				 * @see mshop/product/manager/count/ansi
 				 */
-				$path = 'mshop/product/manager/standard/newid';
+				$path = 'mshop/product/manager/newid';
 				$id = $this->newId( $conn, $path );
 			}
 
@@ -760,7 +760,7 @@ class Standard
 			 * * 3 = inherit and aggregate items at the same time
 			 *
 			 * You also need to set the mode in the locale manager
-			 * (mshop/locale/manager/standard/sitelevel) to one of the constants.
+			 * (mshop/locale/manager/sitelevel) to one of the constants.
 			 * If you set it to the same value, it will work as described but you
 			 * can also use different modes. For example, if inheritance and
 			 * aggregation is configured the locale manager but only inheritance
@@ -771,18 +771,18 @@ class Standard
 			 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
 			 * @category Developer
 			 * @since 2018.01
-			 * @see mshop/locale/manager/standard/sitelevel
+			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$level = $context->getConfig()->get( 'mshop/product/manager/sitemode', $level );
 
-			/** mshop/product/manager/standard/search/mysql
+			/** mshop/product/manager/search/mysql
 			 * Retrieves the records matched by the given criteria in the database
 			 *
-			 * @see mshop/product/manager/standard/search/ansi
+			 * @see mshop/product/manager/search/ansi
 			 */
 
-			/** mshop/product/manager/standard/search/ansi
+			/** mshop/product/manager/search/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the product
@@ -827,21 +827,21 @@ class Standard
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/product/manager/standard/insert/ansi
-			 * @see mshop/product/manager/standard/update/ansi
-			 * @see mshop/product/manager/standard/newid/ansi
-			 * @see mshop/product/manager/standard/delete/ansi
-			 * @see mshop/product/manager/standard/count/ansi
+			 * @see mshop/product/manager/insert/ansi
+			 * @see mshop/product/manager/update/ansi
+			 * @see mshop/product/manager/newid/ansi
+			 * @see mshop/product/manager/delete/ansi
+			 * @see mshop/product/manager/count/ansi
 			 */
-			$cfgPathSearch = 'mshop/product/manager/standard/search';
+			$cfgPathSearch = 'mshop/product/manager/search';
 
-			/** mshop/product/manager/standard/count/mysql
+			/** mshop/product/manager/count/mysql
 			 * Counts the number of records matched by the given criteria in the database
 			 *
-			 * @see mshop/product/manager/standard/count/ansi
+			 * @see mshop/product/manager/count/ansi
 			 */
 
-			/** mshop/product/manager/standard/count/ansi
+			/** mshop/product/manager/count/ansi
 			 * Counts the number of records matched by the given criteria in the database
 			 *
 			 * Counts all records matched by the given criteria from the product
@@ -880,13 +880,13 @@ class Standard
 			 * @param string SQL statement for counting items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/product/manager/standard/insert/ansi
-			 * @see mshop/product/manager/standard/update/ansi
-			 * @see mshop/product/manager/standard/newid/ansi
-			 * @see mshop/product/manager/standard/delete/ansi
-			 * @see mshop/product/manager/standard/search/ansi
+			 * @see mshop/product/manager/insert/ansi
+			 * @see mshop/product/manager/update/ansi
+			 * @see mshop/product/manager/newid/ansi
+			 * @see mshop/product/manager/delete/ansi
+			 * @see mshop/product/manager/search/ansi
 			 */
-			$cfgPathCount = 'mshop/product/manager/standard/count';
+			$cfgPathCount = 'mshop/product/manager/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 

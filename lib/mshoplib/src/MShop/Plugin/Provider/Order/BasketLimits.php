@@ -25,7 +25,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * - max-products: 100 (Maximum number of articles in the basket i.e. basket product * quantity)
  *
  * To trace the execution and interaction of the plugins, set the log level to DEBUG:
- *	madmin/log/manager/standard/loglevel = 7
+ *	madmin/log/manager/loglevel = 7
  *
  * @package MShop
  * @subpackage Plugin

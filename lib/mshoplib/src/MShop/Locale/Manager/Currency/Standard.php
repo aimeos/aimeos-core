@@ -149,13 +149,13 @@ class Standard
 
 			if( $id === null )
 			{
-				/** mshop/locale/manager/currency/standard/insert/mysql
+				/** mshop/locale/manager/currency/insert/mysql
 				 * Inserts a new currency record into the database table
 				 *
-				 * @see mshop/locale/manager/currency/standard/insert/ansi
+				 * @see mshop/locale/manager/currency/insert/ansi
 				 */
 
-				/** mshop/locale/manager/currency/standard/insert/ansi
+				/** mshop/locale/manager/currency/insert/ansi
 				 * Inserts a new currency record into the database table
 				 *
 				 * The SQL statement must be a string suitable for being used as
@@ -174,23 +174,23 @@ class Standard
 				 * @param string SQL statement for inserting records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/locale/manager/currency/standard/update/ansi
-				 * @see mshop/locale/manager/currency/standard/delete/ansi
-				 * @see mshop/locale/manager/currency/standard/search/ansi
-				 * @see mshop/locale/manager/currency/standard/count/ansi
+				 * @see mshop/locale/manager/currency/update/ansi
+				 * @see mshop/locale/manager/currency/delete/ansi
+				 * @see mshop/locale/manager/currency/search/ansi
+				 * @see mshop/locale/manager/currency/count/ansi
 				 */
-				$path = 'mshop/locale/manager/currency/standard/insert';
+				$path = 'mshop/locale/manager/currency/insert';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 			}
 			else
 			{
-				/** mshop/locale/manager/currency/standard/update/mysql
+				/** mshop/locale/manager/currency/update/mysql
 				 * Updates an existing currency record in the database
 				 *
-				 * @see mshop/locale/manager/currency/standard/update/ansi
+				 * @see mshop/locale/manager/currency/update/ansi
 				 */
 
-				/** mshop/locale/manager/currency/standard/update/ansi
+				/** mshop/locale/manager/currency/update/ansi
 				 * Updates an existing currency record in the database
 				 *
 				 * The SQL statement must be a string suitable for being used as
@@ -207,12 +207,12 @@ class Standard
 				 * @param string SQL statement for updating records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/locale/manager/currency/standard/insert/ansi
-				 * @see mshop/locale/manager/currency/standard/delete/ansi
-				 * @see mshop/locale/manager/currency/standard/search/ansi
-				 * @see mshop/locale/manager/currency/standard/count/ansi
+				 * @see mshop/locale/manager/currency/insert/ansi
+				 * @see mshop/locale/manager/currency/delete/ansi
+				 * @see mshop/locale/manager/currency/search/ansi
+				 * @see mshop/locale/manager/currency/count/ansi
 				 */
-				$path = 'mshop/locale/manager/currency/standard/update';
+				$path = 'mshop/locale/manager/currency/update';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
@@ -259,13 +259,13 @@ class Standard
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		/** mshop/locale/manager/currency/standard/delete/mysql
+		/** mshop/locale/manager/currency/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * @see mshop/locale/manager/currency/standard/delete/ansi
+		 * @see mshop/locale/manager/currency/delete/ansi
 		 */
 
-		/** mshop/locale/manager/currency/standard/delete/ansi
+		/** mshop/locale/manager/currency/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the language records specified by the given IDs from the
@@ -283,12 +283,12 @@ class Standard
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/locale/manager/currency/standard/insert/ansi
-		 * @see mshop/locale/manager/currency/standard/update/ansi
-		 * @see mshop/locale/manager/currency/standard/search/ansi
-		 * @see mshop/locale/manager/currency/standard/count/ansi
+		 * @see mshop/locale/manager/currency/insert/ansi
+		 * @see mshop/locale/manager/currency/update/ansi
+		 * @see mshop/locale/manager/currency/search/ansi
+		 * @see mshop/locale/manager/currency/count/ansi
 		 */
-		$path = 'mshop/locale/manager/currency/standard/delete';
+		$path = 'mshop/locale/manager/currency/delete';
 
 		return $this->deleteItemsBase( $itemIds, $path, false );
 	}
@@ -393,13 +393,13 @@ class Standard
 				$search->getLimit(),
 			);
 
-			/** mshop/locale/manager/currency/standard/search/mysql
+			/** mshop/locale/manager/currency/search/mysql
 			 * Retrieves the records matched by the given criteria in the database
 			 *
-			 * @see mshop/locale/manager/currency/standard/search/ansi
+			 * @see mshop/locale/manager/currency/search/ansi
 			 */
 
-			/** mshop/locale/manager/currency/standard/search/ansi
+			/** mshop/locale/manager/currency/search/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the attribute
@@ -444,12 +444,12 @@ class Standard
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/currency/standard/insert/ansi
-			 * @see mshop/locale/manager/currency/standard/update/ansi
-			 * @see mshop/locale/manager/currency/standard/delete/ansi
-			 * @see mshop/locale/manager/currency/standard/count/ansi
+			 * @see mshop/locale/manager/currency/insert/ansi
+			 * @see mshop/locale/manager/currency/update/ansi
+			 * @see mshop/locale/manager/currency/delete/ansi
+			 * @see mshop/locale/manager/currency/count/ansi
 			 */
-			$path = 'mshop/locale/manager/currency/standard/search';
+			$path = 'mshop/locale/manager/currency/search';
 
 			$sql = $this->getSqlConfig( $path );
 			$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
@@ -691,13 +691,13 @@ class Standard
 	 */
 	protected function getTotal( \Aimeos\MW\DB\Connection\Iface $conn, array $find, array $replace ) : int
 	{
-		/** mshop/locale/manager/currency/standard/count/mysql
+		/** mshop/locale/manager/currency/count/mysql
 		 * Counts the number of records matched by the given criteria in the database
 		 *
-		 * @see mshop/locale/manager/currency/standard/count/ansi
+		 * @see mshop/locale/manager/currency/count/ansi
 		 */
 
-		/** mshop/locale/manager/currency/standard/count/ansi
+		/** mshop/locale/manager/currency/count/ansi
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * Counts all records matched by the given criteria from the attribute
@@ -736,12 +736,12 @@ class Standard
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/locale/manager/currency/standard/insert/ansi
-		 * @see mshop/locale/manager/currency/standard/update/ansi
-		 * @see mshop/locale/manager/currency/standard/delete/ansi
-		 * @see mshop/locale/manager/currency/standard/search/ansi
+		 * @see mshop/locale/manager/currency/insert/ansi
+		 * @see mshop/locale/manager/currency/update/ansi
+		 * @see mshop/locale/manager/currency/delete/ansi
+		 * @see mshop/locale/manager/currency/search/ansi
 		 */
-		$path = 'mshop/locale/manager/currency/standard/count';
+		$path = 'mshop/locale/manager/currency/count';
 
 		$sql = $this->getSqlConfig( $path );
 		$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );

@@ -77,13 +77,13 @@ class Standard
 	{
 		if( !isset( $this->object ) )
 		{
-			/** madmin/cache/manager/standard/deletebytag/mysql
+			/** madmin/cache/manager/deletebytag/mysql
 			 * Deletes the items from the database matched by the given tags
 			 *
-			 * @see madmin/cache/manager/standard/deletebytag/ansi
+			 * @see madmin/cache/manager/deletebytag/ansi
 			 */
 
-			/** madmin/cache/manager/standard/deletebytag/ansi
+			/** madmin/cache/manager/deletebytag/ansi
 			 * Deletes the items from the database matched by the given tags
 			 *
 			 * Removes the records specified by the given tags from the cache database.
@@ -100,21 +100,21 @@ class Standard
 			 * @param string SQL statement for deleting items by tags
 			 * @since 2014.03
 			 * @category Developer
-			 * @see madmin/cache/manager/standard/delete/ansi
-			 * @see madmin/cache/manager/standard/get/ansi
-			 * @see madmin/cache/manager/standard/set/ansi
-			 * @see madmin/cache/manager/standard/settag/ansi
-			 * @see madmin/cache/manager/standard/search/ansi
-			 * @see madmin/cache/manager/standard/count/ansi
+			 * @see madmin/cache/manager/delete/ansi
+			 * @see madmin/cache/manager/get/ansi
+			 * @see madmin/cache/manager/set/ansi
+			 * @see madmin/cache/manager/settag/ansi
+			 * @see madmin/cache/manager/search/ansi
+			 * @see madmin/cache/manager/count/ansi
 			 */
 
-			/** madmin/cache/manager/standard/get/mysql
+			/** madmin/cache/manager/get/mysql
 			 * Retrieves the records matched by the given criteria in the database
 			 *
-			 * @see madmin/cache/manager/standard/get/ansi
+			 * @see madmin/cache/manager/get/ansi
 			 */
 
-			/** madmin/cache/manager/standard/get/ansi
+			/** madmin/cache/manager/get/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the cache
@@ -135,12 +135,12 @@ class Standard
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see madmin/cache/manager/standard/delete/ansi
-			 * @see madmin/cache/manager/standard/deletebytag/ansi
-			 * @see madmin/cache/manager/standard/set/ansi
-			 * @see madmin/cache/manager/standard/settag/ansi
-			 * @see madmin/cache/manager/standard/search/ansi
-			 * @see madmin/cache/manager/standard/count/ansi
+			 * @see madmin/cache/manager/delete/ansi
+			 * @see madmin/cache/manager/deletebytag/ansi
+			 * @see madmin/cache/manager/set/ansi
+			 * @see madmin/cache/manager/settag/ansi
+			 * @see madmin/cache/manager/search/ansi
+			 * @see madmin/cache/manager/count/ansi
 			 */
 
 			$context = $this->getContext();
@@ -167,11 +167,11 @@ class Standard
 				'dbname' => $this->getResourceName(),
 				'siteid' => $context->getLocale()->getSiteId(),
 				'sql' => array(
-					'delete' => $this->getSqlConfig( 'madmin/cache/manager/standard/delete' ),
-					'deletebytag' => $this->getSqlConfig( 'madmin/cache/manager/standard/deletebytag' ),
-					'get' => $this->getSqlConfig( 'madmin/cache/manager/standard/get' ),
-					'set' => $this->getSqlConfig( 'madmin/cache/manager/standard/set' ),
-					'settag' => $this->getSqlConfig( 'madmin/cache/manager/standard/settag' ),
+					'delete' => $this->getSqlConfig( 'madmin/cache/manager/delete' ),
+					'deletebytag' => $this->getSqlConfig( 'madmin/cache/manager/deletebytag' ),
+					'get' => $this->getSqlConfig( 'madmin/cache/manager/get' ),
+					'set' => $this->getSqlConfig( 'madmin/cache/manager/set' ),
+					'settag' => $this->getSqlConfig( 'madmin/cache/manager/settag' ),
 				),
 			);
 			$dbm = $context->getDatabaseManager();
@@ -197,13 +197,13 @@ class Standard
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		/** madmin/cache/manager/standard/delete/mysql
+		/** madmin/cache/manager/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * @see madmin/cache/manager/standard/delete/ansi
+		 * @see madmin/cache/manager/delete/ansi
 		 */
 
-		/** madmin/cache/manager/standard/delete/ansi
+		/** madmin/cache/manager/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the cache database.
@@ -221,12 +221,12 @@ class Standard
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see madmin/cache/manager/standard/deletebytag/ansi
-		 * @see madmin/cache/manager/standard/get/ansi
-		 * @see madmin/cache/manager/standard/set/ansi
-		 * @see madmin/cache/manager/standard/settag/ansi
-		 * @see madmin/cache/manager/standard/search/ansi
-		 * @see madmin/cache/manager/standard/count/ansi
+		 * @see madmin/cache/manager/deletebytag/ansi
+		 * @see madmin/cache/manager/get/ansi
+		 * @see madmin/cache/manager/set/ansi
+		 * @see madmin/cache/manager/settag/ansi
+		 * @see madmin/cache/manager/search/ansi
+		 * @see madmin/cache/manager/count/ansi
 		 */
 
 		$dbm = $context->getDatabaseManager();
@@ -235,7 +235,7 @@ class Standard
 
 		try
 		{
-			$sql = str_replace( ':cond', '1=1', $this->getSqlConfig( 'madmin/cache/manager/standard/delete' ) );
+			$sql = str_replace( ':cond', '1=1', $this->getSqlConfig( 'madmin/cache/manager/delete' ) );
 			$stmt = $conn->create( $sql )->execute()->finish();
 
 			$dbm->release( $conn, $dbname );
@@ -285,13 +285,13 @@ class Standard
 			return $item;
 		}
 
-		/** madmin/cache/manager/standard/set/mysql
+		/** madmin/cache/manager/set/mysql
 		 * Inserts the cache entry into the database
 		 *
-		 * @see madmin/cache/manager/standard/set/ansi
+		 * @see madmin/cache/manager/set/ansi
 		 */
 
-		/** madmin/cache/manager/standard/set/ansi
+		/** madmin/cache/manager/set/ansi
 		 * Inserts the cache entry into the database
 		 *
 		 * The ID, value and expiration timestamp are inserted as new record
@@ -314,21 +314,21 @@ class Standard
 		 * @param string SQL statement for inserting a new cache entry
 		 * @since 2014.03
 		 * @category Developer
-		 * @see madmin/cache/manager/standard/delete/ansi
-		 * @see madmin/cache/manager/standard/deletebytag/ansi
-		 * @see madmin/cache/manager/standard/get/ansi
-		 * @see madmin/cache/manager/standard/settag/ansi
-		 * @see madmin/cache/manager/standard/search/ansi
-		 * @see madmin/cache/manager/standard/count/ansi
+		 * @see madmin/cache/manager/delete/ansi
+		 * @see madmin/cache/manager/deletebytag/ansi
+		 * @see madmin/cache/manager/get/ansi
+		 * @see madmin/cache/manager/settag/ansi
+		 * @see madmin/cache/manager/search/ansi
+		 * @see madmin/cache/manager/count/ansi
 		 */
 
-		/** madmin/cache/manager/standard/settag/mysql
+		/** madmin/cache/manager/settag/mysql
 		 * Inserts a new tag to an existing cache entry
 		 *
-		 * @see madmin/cache/manager/standard/settag/ansi
+		 * @see madmin/cache/manager/settag/ansi
 		 */
 
-		/** madmin/cache/manager/standard/settag/ansi
+		/** madmin/cache/manager/settag/ansi
 		 * Inserts a new tag to an existing cache entry
 		 *
 		 * The ID of the cache entry and the tag name are inserted as a new
@@ -351,12 +351,12 @@ class Standard
 		 * @param string SQL statement for inserting a new tag to an existing cache entry
 		 * @since 2014.03
 		 * @category Developer
-		 * @see madmin/cache/manager/standard/delete/ansi
-		 * @see madmin/cache/manager/standard/deletebytag/ansi
-		 * @see madmin/cache/manager/standard/get/ansi
-		 * @see madmin/cache/manager/standard/set/ansi
-		 * @see madmin/cache/manager/standard/search/ansi
-		 * @see madmin/cache/manager/standard/count/ansi
+		 * @see madmin/cache/manager/delete/ansi
+		 * @see madmin/cache/manager/deletebytag/ansi
+		 * @see madmin/cache/manager/get/ansi
+		 * @see madmin/cache/manager/set/ansi
+		 * @see madmin/cache/manager/search/ansi
+		 * @see madmin/cache/manager/count/ansi
 		 */
 
 		$id = $item->getId();
@@ -427,13 +427,13 @@ class Standard
 			$required = array( 'cache' );
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ONE;
 
-			/** madmin/cache/manager/standard/search/mysql
+			/** madmin/cache/manager/search/mysql
 			 * Retrieves the records matched by the given criteria in the database
 			 *
-			 * @see madmin/cache/manager/standard/search/ansi
+			 * @see madmin/cache/manager/search/ansi
 			 */
 
-			/** madmin/cache/manager/standard/search/ansi
+			/** madmin/cache/manager/search/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the cache
@@ -460,22 +460,22 @@ class Standard
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see madmin/cache/manager/standard/get/ansi
-			 * @see madmin/cache/manager/standard/delete/ansi
-			 * @see madmin/cache/manager/standard/deletebytag/ansi
-			 * @see madmin/cache/manager/standard/set/ansi
-			 * @see madmin/cache/manager/standard/settag/ansi
-			 * @see madmin/cache/manager/standard/count/ansi
+			 * @see madmin/cache/manager/get/ansi
+			 * @see madmin/cache/manager/delete/ansi
+			 * @see madmin/cache/manager/deletebytag/ansi
+			 * @see madmin/cache/manager/set/ansi
+			 * @see madmin/cache/manager/settag/ansi
+			 * @see madmin/cache/manager/count/ansi
 			 */
-			$cfgPathSearch = 'madmin/cache/manager/standard/search';
+			$cfgPathSearch = 'madmin/cache/manager/search';
 
-			/** madmin/cache/manager/standard/count/mysql
+			/** madmin/cache/manager/count/mysql
 			 * Retrieves the records matched by the given criteria in the database
 			 *
-			 * @see madmin/cache/manager/standard/count/ansi
+			 * @see madmin/cache/manager/count/ansi
 			 */
 
-			/** madmin/cache/manager/standard/count/ansi
+			/** madmin/cache/manager/count/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the cache
@@ -501,14 +501,14 @@ class Standard
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see madmin/cache/manager/standard/get/ansi
-			 * @see madmin/cache/manager/standard/delete/ansi
-			 * @see madmin/cache/manager/standard/deletebytag/ansi
-			 * @see madmin/cache/manager/standard/set/ansi
-			 * @see madmin/cache/manager/standard/settag/ansi
-			 * @see madmin/cache/manager/standard/search/ansi
+			 * @see madmin/cache/manager/get/ansi
+			 * @see madmin/cache/manager/delete/ansi
+			 * @see madmin/cache/manager/deletebytag/ansi
+			 * @see madmin/cache/manager/set/ansi
+			 * @see madmin/cache/manager/settag/ansi
+			 * @see madmin/cache/manager/search/ansi
 			 */
-			$cfgPathCount = 'madmin/cache/manager/standard/count';
+			$cfgPathCount = 'madmin/cache/manager/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 

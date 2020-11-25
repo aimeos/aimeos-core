@@ -23,7 +23,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * The plugin is executed for the basket and the checkout summary page.
  *
  * To trace the execution and interaction of the plugins, set the log level to DEBUG:
- *	madmin/log/manager/standard/loglevel = 7
+ *	madmin/log/manager/loglevel = 7
  *
  * @package MShop
  * @subpackage Plugin

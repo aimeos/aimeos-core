@@ -125,7 +125,7 @@ class Standard
 	{
 		parent::clear( $siteids );
 
-		return $this->clearBase( $siteids, 'mshop/index/manager/text/standard/delete' );
+		return $this->clearBase( $siteids, 'mshop/index/manager/text/delete' );
 	}
 
 
@@ -138,13 +138,13 @@ class Standard
 	 */
 	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface
 	{
-		/** mshop/index/manager/text/standard/cleanup/mysql
+		/** mshop/index/manager/text/cleanup/mysql
 		 * Deletes the index text records that haven't been touched
 		 *
-		 * @see mshop/index/manager/text/standard/cleanup/ansi
+		 * @see mshop/index/manager/text/cleanup/ansi
 		 */
 
-		/** mshop/index/manager/text/standard/cleanup/ansi
+		/** mshop/index/manager/text/cleanup/ansi
 		 * Deletes the index text records that haven't been touched
 		 *
 		 * During the rebuild process of the product index, the entries of all
@@ -163,13 +163,13 @@ class Standard
 		 * @param string SQL statement for deleting the outdated text index records
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/text/standard/count/ansi
-		 * @see mshop/index/manager/text/standard/delete/ansi
-		 * @see mshop/index/manager/text/standard/insert/ansi
-		 * @see mshop/index/manager/text/standard/search/ansi
-		 * @see mshop/index/manager/text/standard/text/ansi
+		 * @see mshop/index/manager/text/count/ansi
+		 * @see mshop/index/manager/text/delete/ansi
+		 * @see mshop/index/manager/text/insert/ansi
+		 * @see mshop/index/manager/text/search/ansi
+		 * @see mshop/index/manager/text/text/ansi
 		 */
-		return $this->cleanupBase( $timestamp, 'mshop/index/manager/text/standard/cleanup' );
+		return $this->cleanupBase( $timestamp, 'mshop/index/manager/text/cleanup' );
 	}
 
 
@@ -181,13 +181,13 @@ class Standard
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		/** mshop/index/manager/text/standard/delete/mysql
+		/** mshop/index/manager/text/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * @see mshop/index/manager/text/standard/delete/ansi
+		 * @see mshop/index/manager/text/delete/ansi
 		 */
 
-		/** mshop/index/manager/text/standard/delete/ansi
+		/** mshop/index/manager/text/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the index database.
@@ -205,13 +205,13 @@ class Standard
 		 * @param string SQL statement for deleting index text records
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/text/standard/count/ansi
-		 * @see mshop/index/manager/text/standard/cleanup/ansi
-		 * @see mshop/index/manager/text/standard/insert/ansi
-		 * @see mshop/index/manager/text/standard/search/ansi
-		 * @see mshop/index/manager/text/standard/text/ansi
+		 * @see mshop/index/manager/text/count/ansi
+		 * @see mshop/index/manager/text/cleanup/ansi
+		 * @see mshop/index/manager/text/insert/ansi
+		 * @see mshop/index/manager/text/search/ansi
+		 * @see mshop/index/manager/text/text/ansi
 		 */
-		return $this->deleteItemsBase( $itemIds, 'mshop/index/manager/text/standard/delete', true, 'prodid' );
+		return $this->deleteItemsBase( $itemIds, 'mshop/index/manager/text/delete', true, 'prodid' );
 	}
 
 
@@ -395,13 +395,13 @@ class Standard
 	 */
 	public function optimize() : \Aimeos\MShop\Index\Manager\Iface
 	{
-		/** mshop/index/manager/text/standard/optimize/mysql
+		/** mshop/index/manager/text/optimize/mysql
 		 * Optimizes the stored text data for retrieving the records faster
 		 *
-		 * @see mshop/index/manager/text/standard/optimize/ansi
+		 * @see mshop/index/manager/text/optimize/ansi
 		 */
 
-		/** mshop/index/manager/text/standard/optimize/ansi
+		/** mshop/index/manager/text/optimize/ansi
 		 * Optimizes the stored text data for retrieving the records faster
 		 *
 		 * The SQL statement should reorganize the data in the DBMS storage to
@@ -416,14 +416,14 @@ class Standard
 		 * @param string SQL statement for optimizing the stored text data
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/index/manager/text/standard/aggregate/ansi
-		 * @see mshop/index/manager/text/standard/cleanup/ansi
-		 * @see mshop/index/manager/text/standard/count/ansi
-		 * @see mshop/index/manager/text/standard/insert/ansi
-		 * @see mshop/index/manager/text/standard/search/ansi
-		 * @see mshop/index/manager/text/standard/text/ansi
+		 * @see mshop/index/manager/text/aggregate/ansi
+		 * @see mshop/index/manager/text/cleanup/ansi
+		 * @see mshop/index/manager/text/count/ansi
+		 * @see mshop/index/manager/text/insert/ansi
+		 * @see mshop/index/manager/text/search/ansi
+		 * @see mshop/index/manager/text/text/ansi
 		 */
-		return $this->optimizeBase( 'mshop/index/manager/text/standard/optimize' );
+		return $this->optimizeBase( 'mshop/index/manager/text/optimize' );
 	}
 
 
@@ -447,13 +447,13 @@ class Standard
 
 		try
 		{
-			/** mshop/index/manager/text/standard/insert/mysql
+			/** mshop/index/manager/text/insert/mysql
 			 * Inserts a new text record into the product index database
 			 *
-			 * @see mshop/index/manager/text/standard/insert/ansi
+			 * @see mshop/index/manager/text/insert/ansi
 			 */
 
-			/** mshop/index/manager/text/standard/insert/ansi
+			/** mshop/index/manager/text/insert/ansi
 			 * Inserts a new text record into the product index database
 			 *
 			 * During the product index rebuild, texts related to a product
@@ -476,14 +476,14 @@ class Standard
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/index/manager/text/standard/cleanup/ansi
-			 * @see mshop/index/manager/text/standard/count/ansi
-			 * @see mshop/index/manager/text/standard/delete/ansi
-			 * @see mshop/index/manager/text/standard/insert/ansi
-			 * @see mshop/index/manager/text/standard/search/ansi
-			 * @see mshop/index/manager/text/standard/text/ansi
+			 * @see mshop/index/manager/text/cleanup/ansi
+			 * @see mshop/index/manager/text/count/ansi
+			 * @see mshop/index/manager/text/delete/ansi
+			 * @see mshop/index/manager/text/insert/ansi
+			 * @see mshop/index/manager/text/search/ansi
+			 * @see mshop/index/manager/text/text/ansi
 			 */
-			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/text/standard/insert' );
+			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/text/insert' );
 
 			foreach( $items as $item ) {
 				$this->saveTexts( $stmt, $item );
@@ -528,13 +528,13 @@ class Standard
 	 */
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		/** mshop/index/manager/text/standard/search/mysql
+		/** mshop/index/manager/text/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
 		 *
-		 * @see mshop/index/manager/text/standard/search/ansi
+		 * @see mshop/index/manager/text/search/ansi
 		 */
 
-		/** mshop/index/manager/text/standard/search/ansi
+		/** mshop/index/manager/text/search/ansi
 		 * Retrieves the records matched by the given criteria in the database
 		 *
 		 * Fetches the records matched by the given criteria from the product index
@@ -579,22 +579,22 @@ class Standard
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/text/standard/aggregate/ansi
-		 * @see mshop/index/manager/text/standard/cleanup/ansi
-		 * @see mshop/index/manager/text/standard/count/ansi
-		 * @see mshop/index/manager/text/standard/insert/ansi
-		 * @see mshop/index/manager/text/standard/optimize/ansi
-		 * @see mshop/index/manager/text/standard/text/ansi
+		 * @see mshop/index/manager/text/aggregate/ansi
+		 * @see mshop/index/manager/text/cleanup/ansi
+		 * @see mshop/index/manager/text/count/ansi
+		 * @see mshop/index/manager/text/insert/ansi
+		 * @see mshop/index/manager/text/optimize/ansi
+		 * @see mshop/index/manager/text/text/ansi
 		 */
-		$cfgPathSearch = 'mshop/index/manager/text/standard/search';
+		$cfgPathSearch = 'mshop/index/manager/text/search';
 
-		/** mshop/index/manager/text/standard/count/mysql
+		/** mshop/index/manager/text/count/mysql
 		 * Counts the number of records matched by the given criteria in the database
 		 *
-		 * @see mshop/index/manager/text/standard/count/ansi
+		 * @see mshop/index/manager/text/count/ansi
 		 */
 
-		/** mshop/index/manager/text/standard/count/ansi
+		/** mshop/index/manager/text/count/ansi
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * Counts all records matched by the given criteria from the product index
@@ -633,14 +633,14 @@ class Standard
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/text/standard/aggregate/ansi
-		 * @see mshop/index/manager/text/standard/cleanup/ansi
-		 * @see mshop/index/manager/text/standard/insert/ansi
-		 * @see mshop/index/manager/text/standard/optimize/ansi
-		 * @see mshop/index/manager/text/standard/search/ansi
-		 * @see mshop/index/manager/text/standard/text/ansi
+		 * @see mshop/index/manager/text/aggregate/ansi
+		 * @see mshop/index/manager/text/cleanup/ansi
+		 * @see mshop/index/manager/text/insert/ansi
+		 * @see mshop/index/manager/text/optimize/ansi
+		 * @see mshop/index/manager/text/search/ansi
+		 * @see mshop/index/manager/text/text/ansi
 		 */
-		$cfgPathCount = 'mshop/index/manager/text/standard/count';
+		$cfgPathCount = 'mshop/index/manager/text/count';
 
 		return $this->searchItemsIndexBase( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
@@ -843,7 +843,7 @@ class Standard
 			 * @since 2014.09
 			 * @category User
 			 * @category Developer
-			 * @see mshop/index/manager/standard/submanagers
+			 * @see mshop/index/manager/submanagers
 			 */
 			foreach( $config->get( 'mshop/index/manager/text/submanagers', [] ) as $domain )
 			{

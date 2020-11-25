@@ -103,7 +103,7 @@ class Standard
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
-		return $this->aggregateBase( $search, $key, 'mshop/index/manager/standard/aggregate' . $type, [], $value );
+		return $this->aggregateBase( $search, $key, 'mshop/index/manager/aggregate' . $type, [], $value );
 	}
 
 
@@ -117,7 +117,7 @@ class Standard
 	{
 		parent::clear( $siteids );
 
-		return $this->clearBase( $siteids, 'mshop/index/manager/attribute/standard/delete' );
+		return $this->clearBase( $siteids, 'mshop/index/manager/attribute/delete' );
 	}
 
 
@@ -130,13 +130,13 @@ class Standard
 	 */
 	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface
 	{
-		/** mshop/index/manager/attribute/standard/cleanup/mysql
+		/** mshop/index/manager/attribute/cleanup/mysql
 		 * Deletes the index attribute records that haven't been touched
 		 *
-		 * @see mshop/index/manager/attribute/standard/cleanup/ansi
+		 * @see mshop/index/manager/attribute/cleanup/ansi
 		 */
 
-		/** mshop/index/manager/attribute/standard/cleanup/ansi
+		/** mshop/index/manager/attribute/cleanup/ansi
 		 * Deletes the index attribute records that haven't been touched
 		 *
 		 * During the rebuild process of the product index, the entries of all
@@ -155,12 +155,12 @@ class Standard
 		 * @param string SQL statement for deleting the outdated attribute index records
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/attribute/standard/count/ansi
-		 * @see mshop/index/manager/attribute/standard/delete/ansi
-		 * @see mshop/index/manager/attribute/standard/insert/ansi
-		 * @see mshop/index/manager/attribute/standard/search/ansi
+		 * @see mshop/index/manager/attribute/count/ansi
+		 * @see mshop/index/manager/attribute/delete/ansi
+		 * @see mshop/index/manager/attribute/insert/ansi
+		 * @see mshop/index/manager/attribute/search/ansi
 		 */
-		return $this->cleanupBase( $timestamp, 'mshop/index/manager/attribute/standard/cleanup' );
+		return $this->cleanupBase( $timestamp, 'mshop/index/manager/attribute/cleanup' );
 	}
 
 
@@ -172,13 +172,13 @@ class Standard
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		/** mshop/index/manager/attribute/standard/delete/mysql
+		/** mshop/index/manager/attribute/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * @see mshop/index/manager/attribute/standard/delete/ansi
+		 * @see mshop/index/manager/attribute/delete/ansi
 		 */
 
-		/** mshop/index/manager/attribute/standard/delete/ansi
+		/** mshop/index/manager/attribute/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the index database.
@@ -196,12 +196,12 @@ class Standard
 		 * @param string SQL statement for deleting index attribute records
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/attribute/standard/count/ansi
-		 * @see mshop/index/manager/attribute/standard/cleanup/ansi
-		 * @see mshop/index/manager/attribute/standard/insert/ansi
-		 * @see mshop/index/manager/attribute/standard/search/ansi
+		 * @see mshop/index/manager/attribute/count/ansi
+		 * @see mshop/index/manager/attribute/cleanup/ansi
+		 * @see mshop/index/manager/attribute/insert/ansi
+		 * @see mshop/index/manager/attribute/search/ansi
 		 */
-		return $this->deleteItemsBase( $itemIds, 'mshop/index/manager/attribute/standard/delete' );
+		return $this->deleteItemsBase( $itemIds, 'mshop/index/manager/attribute/delete' );
 	}
 
 
@@ -386,13 +386,13 @@ class Standard
 	 */
 	public function optimize() : \Aimeos\MShop\Index\Manager\Iface
 	{
-		/** mshop/index/manager/attribute/standard/optimize/mysql
+		/** mshop/index/manager/attribute/optimize/mysql
 		 * Optimizes the stored attribute data for retrieving the records faster
 		 *
-		 * @see mshop/index/manager/attribute/standard/optimize/ansi
+		 * @see mshop/index/manager/attribute/optimize/ansi
 		 */
 
-		/** mshop/index/manager/attribute/standard/optimize/ansi
+		/** mshop/index/manager/attribute/optimize/ansi
 		 * Optimizes the stored attribute data for retrieving the records faster
 		 *
 		 * The SQL statement should reorganize the data in the DBMS storage to
@@ -407,11 +407,11 @@ class Standard
 		 * @param string SQL statement for optimizing the stored attribute data
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/index/manager/attribute/standard/count/ansi
-		 * @see mshop/index/manager/attribute/standard/search/ansi
-		 * @see mshop/index/manager/attribute/standard/aggregate/ansi
+		 * @see mshop/index/manager/attribute/count/ansi
+		 * @see mshop/index/manager/attribute/search/ansi
+		 * @see mshop/index/manager/attribute/aggregate/ansi
 		 */
-		return $this->optimizeBase( 'mshop/index/manager/attribute/standard/optimize' );
+		return $this->optimizeBase( 'mshop/index/manager/attribute/optimize' );
 	}
 
 
@@ -435,13 +435,13 @@ class Standard
 
 		try
 		{
-			/** mshop/index/manager/attribute/standard/insert/mysql
+			/** mshop/index/manager/attribute/insert/mysql
 			 * Inserts a new attribute record into the product index database
 			 *
-			 * @see mshop/index/manager/attribute/standard/insert/ansi
+			 * @see mshop/index/manager/attribute/insert/ansi
 			 */
 
-			/** mshop/index/manager/attribute/standard/insert/ansi
+			/** mshop/index/manager/attribute/insert/ansi
 			 * Inserts a new attribute record into the product index database
 			 *
 			 * During the product index rebuild, attributes related to a product
@@ -464,12 +464,12 @@ class Standard
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/index/manager/attribute/standard/cleanup/ansi
-			 * @see mshop/index/manager/attribute/standard/delete/ansi
-			 * @see mshop/index/manager/attribute/standard/search/ansi
-			 * @see mshop/index/manager/attribute/standard/count/ansi
+			 * @see mshop/index/manager/attribute/cleanup/ansi
+			 * @see mshop/index/manager/attribute/delete/ansi
+			 * @see mshop/index/manager/attribute/search/ansi
+			 * @see mshop/index/manager/attribute/count/ansi
 			 */
-			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/attribute/standard/insert' );
+			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/attribute/insert' );
 
 			foreach( $items as $item ) {
 				$this->saveAttributes( $stmt, $item );
@@ -514,13 +514,13 @@ class Standard
 	 */
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		/** mshop/index/manager/attribute/standard/search/mysql
+		/** mshop/index/manager/attribute/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
 		 *
-		 * @see mshop/index/manager/attribute/standard/search/ansi
+		 * @see mshop/index/manager/attribute/search/ansi
 		 */
 
-		/** mshop/index/manager/attribute/standard/search/ansi
+		/** mshop/index/manager/attribute/search/ansi
 		 * Retrieves the records matched by the given criteria in the database
 		 *
 		 * Fetches the records matched by the given criteria from the product index
@@ -565,19 +565,19 @@ class Standard
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/attribute/standard/count/ansi
-		 * @see mshop/index/manager/attribute/standard/optimize/ansi
-		 * @see mshop/index/manager/attribute/standard/aggregate/ansi
+		 * @see mshop/index/manager/attribute/count/ansi
+		 * @see mshop/index/manager/attribute/optimize/ansi
+		 * @see mshop/index/manager/attribute/aggregate/ansi
 		 */
-		$cfgPathSearch = 'mshop/index/manager/attribute/standard/search';
+		$cfgPathSearch = 'mshop/index/manager/attribute/search';
 
-		/** mshop/index/manager/attribute/standard/count/mysql
+		/** mshop/index/manager/attribute/count/mysql
 		 * Counts the number of records matched by the given criteria in the database
 		 *
-		 * @see mshop/index/manager/attribute/standard/count/ansi
+		 * @see mshop/index/manager/attribute/count/ansi
 		 */
 
-		/** mshop/index/manager/attribute/standard/count/ansi
+		/** mshop/index/manager/attribute/count/ansi
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * Counts all records matched by the given criteria from the product index
@@ -616,11 +616,11 @@ class Standard
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/attribute/standard/search/ansi
-		 * @see mshop/index/manager/attribute/standard/optimize/ansi
-		 * @see mshop/index/manager/attribute/standard/aggregate/ansi
+		 * @see mshop/index/manager/attribute/search/ansi
+		 * @see mshop/index/manager/attribute/optimize/ansi
+		 * @see mshop/index/manager/attribute/aggregate/ansi
 		 */
-		$cfgPathCount = 'mshop/index/manager/attribute/standard/count';
+		$cfgPathCount = 'mshop/index/manager/attribute/count';
 
 		return $this->searchItemsIndexBase( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
@@ -654,7 +654,7 @@ class Standard
 			 * @since 2014.09
 			 * @category User
 			 * @category Developer
-			 * @see mshop/index/manager/standard/submanagers
+			 * @see mshop/index/manager/submanagers
 			 */
 			foreach( $config->get( 'mshop/index/manager/attribute/submanagers', [] ) as $domain )
 			{

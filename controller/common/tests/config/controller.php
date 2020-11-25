@@ -9,17 +9,15 @@
 return array(
 	'common' => array(
 		'media' => array(
-			'standard' => array(
-				'mimeicon' => array(
-					'directory' => dirname( __DIR__ ) . '/tmp/media/mimeicons',
+			'mimeicon' => array(
+				'directory' => dirname( __DIR__ ) . '/tmp/media/mimeicons',
+			),
+			'previews' => array(
+				0 => array(
+					'maxwidth' => 32
 				),
-				'previews' => array(
-					0 => array(
-						'maxwidth' => 32
-					),
-					1 => array(
-						'maxwidth' => 50
-					),
+				1 => array(
+					'maxwidth' => 50
 				),
 			),
 		),

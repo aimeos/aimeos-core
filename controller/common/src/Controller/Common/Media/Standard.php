@@ -146,9 +146,9 @@ class Standard
 	 * Rescales the files (original and preview) referenced by the media item
 	 *
 	 * The height/width configuration for scaling and which one should be scaled is used from
-	 * - controller/common/media/standard/<files|preview>/maxheight
-	 * - controller/common/media/standard/<files|preview>/maxwidth
-	 * - controller/common/media/standard/<files|preview>/scale
+	 * - controller/common/media/<files|preview>/maxheight
+	 * - controller/common/media/<files|preview>/maxwidth
+	 * - controller/common/media/<files|preview>/scale
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be scaled
 	 * @param string $fsname Name of the file system to rescale the files from
@@ -242,7 +242,7 @@ class Standard
 		$list = [];
 		$config = $this->context->getConfig();
 
-		/** controller/common/media/standard/previews
+		/** controller/common/media/previews
 		 * Scaling options for preview images
 		 *
 		 * For responsive images, several preview images of different sizes are
@@ -282,7 +282,7 @@ class Standard
 		 * @category User
 		 * @since 2019.07
 		 */
-		foreach( $config->get( 'controller/common/media/standard/previews', [] ) as $entry )
+		foreach( $config->get( 'controller/common/media/previews', [] ) as $entry )
 		{
 			$maxwidth = ( isset( $entry['maxwidth'] ) ? (int) $entry['maxwidth'] : null );
 			$maxheight = ( isset( $entry['maxheight'] ) ? (int) $entry['maxheight'] : null );
@@ -298,9 +298,9 @@ class Standard
 		if( empty( $list ) )
 		{
 			/** @todo 2021.x Remove old config */
-			$maxwidth = $config->get( 'controller/common/media/standard/preview/maxwidth', null );
-			$maxheight = $config->get( 'controller/common/media/standard/preview/maxheight', null );
-			$fit = (bool) $config->get( 'controller/common/media/standard/preview/force-size', false );
+			$maxwidth = $config->get( 'controller/common/media/preview/maxwidth', null );
+			$maxheight = $config->get( 'controller/common/media/preview/maxheight', null );
+			$fit = (bool) $config->get( 'controller/common/media/preview/force-size', false );
 
 			$image = $media->scale( $maxwidth, $maxheight, !$fit );
 			$list[$image->getWidth()] = $image;
@@ -319,7 +319,7 @@ class Standard
 	 */
 	protected function deletePreviews( \Aimeos\MShop\Media\Item\Iface $item, string $fsname )
 	{
-		$mimedir = (string) $this->context->getConfig()->get( 'controller/common/media/standard/mimeicon/directory' );
+		$mimedir = (string) $this->context->getConfig()->get( 'controller/common/media/mimeicon/directory' );
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
 		$mimelen = strlen( $mimedir );
 
@@ -393,7 +393,7 @@ class Standard
 	 */
 	protected function getFilePath( string $filename, string $type, string $mimeext ) : string
 	{
-		/** controller/common/media/standard/extensions
+		/** controller/common/media/extensions
 		 * Available files extensions for mime types of uploaded files
 		 *
 		 * Uploaded files should have the right file extension (e.g. ".jpg" for
@@ -407,7 +407,7 @@ class Standard
 		 * @since 2018.04
 		 * @category Developer
 		 */
-		$list = $this->context->getConfig()->get( 'controller/common/media/standard/extensions', [] );
+		$list = $this->context->getConfig()->get( 'controller/common/media/extensions', [] );
 
 		$filename = trim( preg_replace( '/[^A-Za-z0-9]+/', '_', $filename ), '_' );
 		$filename = substr( md5( $filename . getmypid() . microtime( true ) ), -8 ) . '_' . $filename;
@@ -425,7 +425,7 @@ class Standard
 	 */
 	protected function getMediaFile( string $file ) : \Aimeos\MW\Media\Iface
 	{
-		/** controller/common/media/standard/options
+		/** controller/common/media/options
 		 * Options used for processing the uploaded media files
 		 *
 		 * When uploading a file, a preview image for that file is generated if
@@ -445,7 +445,7 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$options = $this->context->getConfig()->get( 'controller/common/media/standard/options', [] );
+		$options = $this->context->getConfig()->get( 'controller/common/media/options', [] );
 
 		return \Aimeos\MW\Media\Factory::get( $file, $options );
 	}
@@ -461,7 +461,7 @@ class Standard
 	{
 		$config = $this->context->getConfig();
 
-		/** controller/common/media/standard/mimeicon/directory
+		/** controller/common/media/mimeicon/directory
 		 * Directory that contains the icons for the different mime types
 		 *
 		 * If no preview image can be generated from an uploaded file, an icon
@@ -476,11 +476,11 @@ class Standard
 		 * @since 2016.01
 		 * @category Developer
 		 */
-		if( ( $mimedir = $config->get( 'controller/common/media/standard/mimeicon/directory' ) ) == null ) {
+		if( ( $mimedir = $config->get( 'controller/common/media/mimeicon/directory' ) ) == null ) {
 			return '';
 		}
 
-		/** controller/common/media/standard/mimeicon/extension
+		/** controller/common/media/mimeicon/extension
 		 * File extension of the mime icon images
 		 *
 		 * If you would like to use different mime icons that are available in
@@ -493,7 +493,7 @@ class Standard
 		 * @since 2016.01
 		 * @category Developer
 		 */
-		$ext = $config->get( 'controller/common/media/standard/mimeicon/extension', '.png' );
+		$ext = $config->get( 'controller/common/media/mimeicon/extension', '.png' );
 
 		if( file_exists( $icon = $mimedir . DIRECTORY_SEPARATOR . $mimetype . $ext ) ) {
 			return $icon;
@@ -516,7 +516,7 @@ class Standard
 		$mimetype = $media->getMimetype();
 		$config = $this->context->getConfig();
 
-		/** controller/common/media/standard/files/allowedtypes
+		/** controller/common/media/files/allowedtypes
 		 * A list of image mime types that are allowed for uploaded image files
 		 *
 		 * The list of allowed image types must be explicitly configured for the
@@ -529,7 +529,7 @@ class Standard
 		 * @category User
 		 */
 
-		/** controller/common/media/standard/preview/allowedtypes
+		/** controller/common/media/preview/allowedtypes
 		 * A list of image mime types that are allowed for preview image files
 		 *
 		 * The list of allowed image types must be explicitly configured for the
@@ -543,7 +543,7 @@ class Standard
 		 * @category User
 		 */
 		$default = array( 'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml' );
-		$allowed = $config->get( 'controller/common/media/standard/' . $type . '/allowedtypes', $default );
+		$allowed = $config->get( 'controller/common/media/' . $type . '/allowedtypes', $default );
 
 		if( in_array( $mimetype, $allowed ) === false )
 		{
