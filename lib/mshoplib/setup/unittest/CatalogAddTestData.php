@@ -71,7 +71,7 @@ class CatalogAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$catalog->setStatus( $dataset['status'] );
 			$catalog->setUrl( $dataset['url'] ?? null );
 
-			$catalogManager->insertItem( $catalog, $parentIds[$dataset['parent']] );
+			$catalogManager->insert( $catalog, $parentIds[$dataset['parent']] );
 			$parentIds[$key] = $catalog->getId();
 		}
 	}

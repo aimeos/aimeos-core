@@ -410,7 +410,7 @@ class Standard extends Base
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Item\Iface $item Updated item including the generated ID
 	 */
-	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, string $parentId = null,
+	public function insert( \Aimeos\MShop\Catalog\Item\Iface $item, string $parentId = null,
 		string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
 		$this->begin();
@@ -845,7 +845,7 @@ class Standard extends Base
 			}
 			else
 			{
-				$this->insertItem( $child, $item->getId() );
+				$this->insert( $child, $item->getId() );
 			}
 		}
 

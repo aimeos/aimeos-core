@@ -51,7 +51,7 @@ interface Iface
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Inserted catalog item
 	 */
-	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, string $parentId = null,
+	public function insert( \Aimeos\MShop\Catalog\Item\Iface $item, string $parentId = null,
 		string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface;
 
 

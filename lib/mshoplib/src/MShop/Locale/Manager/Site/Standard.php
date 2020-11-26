@@ -215,7 +215,7 @@ class Standard
 	public function saveItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
 		if( $item->getId() === null ) {
-			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Newly created site can not be saved using method "save()". Try using method "insertItem()" instead.' ) );
+			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Newly created site can not be saved using method "save()". Try using method "insert()" instead.' ) );
 		}
 
 		if( !$item->isModified() ) {
@@ -779,7 +779,7 @@ class Standard
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface $item Updated item including the generated ID
 	 */
-	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, string $parentId = null, string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface
+	public function insert( \Aimeos\MShop\Locale\Item\Site\Iface $item, string $parentId = null, string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
 		$context = $this->getContext();
 

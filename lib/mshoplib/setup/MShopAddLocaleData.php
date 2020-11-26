@@ -63,7 +63,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 			$siteItem->setCode( $code );
 			$siteItem->setStatus( 1 );
 
-			$siteManager->insertItem( $siteItem );
+			$siteManager->insert( $siteItem );
 		}
 		catch( \Aimeos\MW\DB\Exception $e ) // already in the database
 		{
@@ -117,7 +117,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 				$siteItem->setConfig( $dataset['config'] );
 				$siteItem->setStatus( $dataset['status'] );
 
-				$localeSiteManager->insertItem( $siteItem, $parentId );
+				$localeSiteManager->insert( $siteItem, $parentId );
 				$siteIds[$key] = $siteItem->getSiteId();
 			}
 			catch( \Aimeos\MW\DB\Exception $e )

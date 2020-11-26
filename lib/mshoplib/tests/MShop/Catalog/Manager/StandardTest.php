@@ -227,7 +227,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$caffein->setCode( 'caffein' );
 		$caffein->setLabel( 'Caffein' );
 
-		$this->object->insertItem( $caffein, $cafecat->getId() );
+		$this->object->insert( $caffein, $cafecat->getId() );
 		$this->object->delete( $caffein->getId() );
 
 		$this->assertEquals( 0, $tree->getNode()->parentid );
@@ -289,7 +289,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setId( null );
 		$item->setLabel( 'Root child' );
 		$item->setCode( 'new Root child' );
-		$resultInsert = $this->object->insertItem( $item, $parentId );
+		$resultInsert = $this->object->insert( $item, $parentId );
 		$this->object->moveItem( $item->getId(), $parentId, $parentId );
 		$itemSaved = $this->object->get( $item->getId() );
 
@@ -338,7 +338,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->find( 'cafe', ['product'] )->setCode( 'ccafe' )->setId( null );
 		$child = $this->object->find( 'misc', ['product'] )->setCode( 'cmisc' )->setId( null );
 
-		$item = $this->object->insertItem( $item->addChild( $child ) );
+		$item = $this->object->insert( $item->addChild( $child ) );
 		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 1, count( $item->getChildren() ) );

@@ -49,7 +49,7 @@ interface Iface
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface $item Updated item including the generated ID
 	 */
-	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, string $parentId = null,
+	public function insert( \Aimeos\MShop\Locale\Item\Site\Iface $item, string $parentId = null,
 		string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface;
 
 	/**

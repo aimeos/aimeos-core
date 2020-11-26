@@ -140,7 +140,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		while( true )
 		{
 			try {
-				return $catalogManager->insertItem( $item, $parentId );
+				return $catalogManager->insert( $item, $parentId );
 			} catch( \Aimeos\MW\DB\Exception $e ) {
 				if( $e->getCode() !== 40001 ) { throw $e; } // transaction deadlock
 			}
