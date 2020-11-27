@@ -287,6 +287,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testMoveItem()
 	{
 		$this->expectException( \Aimeos\MShop\Locale\Exception::class );
-		$this->object->moveItem( '', '', '' );
+		$this->object->move( '', '', '' );
 	}
 }

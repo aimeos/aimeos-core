@@ -447,7 +447,7 @@ class Standard extends Base
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function moveItem( string $id, string $oldParentId = null, string $newParentId = null,
+	public function move( string $id, string $oldParentId = null, string $newParentId = null,
 		string $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface
 	{
 		$this->begin();
@@ -840,7 +840,7 @@ class Standard extends Base
 				$this->save( $child );
 
 				if( $child->getParentId() !== $item->getParentId() ) {
-					$this->moveItem( $child->getId(), $item->getParentId(), $child->getParentId() );
+					$this->move( $child->getId(), $item->getParentId(), $child->getParentId() );
 				}
 			}
 			else

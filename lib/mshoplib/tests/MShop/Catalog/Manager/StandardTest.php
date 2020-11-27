@@ -290,7 +290,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setLabel( 'Root child' );
 		$item->setCode( 'new Root child' );
 		$resultInsert = $this->object->insert( $item, $parentId );
-		$this->object->moveItem( $item->getId(), $parentId, $parentId );
+		$this->object->move( $item->getId(), $parentId, $parentId );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
