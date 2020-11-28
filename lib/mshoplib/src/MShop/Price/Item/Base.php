@@ -21,12 +21,8 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Price\Item\Iface
 {
-	use \Aimeos\MShop\Common\Item\ListRef\Traits {
-		__clone as __cloneList;
-	}
-	use \Aimeos\MShop\Common\Item\PropertyRef\Traits {
-		__clone as __cloneProperty;
-	}
+	use \Aimeos\MShop\Common\Item\ListRef\Traits;
+	use \Aimeos\MShop\Common\Item\PropertyRef\Traits;
 
 
 	private $precision;
@@ -57,9 +53,9 @@ abstract class Base
 	 public function __clone()
 	 {
 		 parent::__clone();
-		 $this->__cloneList();
-		 $this->__cloneProperty();
-	 }
+		 \Aimeos\MShop\Common\Item\ListRef\Traits::__clone();
+		 \Aimeos\MShop\Common\Item\PropertyRef\Traits::__clone();
+	  }
 
 
 	/**

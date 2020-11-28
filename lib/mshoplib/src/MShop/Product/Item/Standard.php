@@ -23,12 +23,8 @@ class Standard
 	implements \Aimeos\MShop\Product\Item\Iface
 {
 	use \Aimeos\MShop\Common\Item\Config\Traits;
-	use \Aimeos\MShop\Common\Item\ListRef\Traits {
-		__clone as __cloneList;
-	}
-	use \Aimeos\MShop\Common\Item\PropertyRef\Traits {
-		__clone as __cloneProperty;
-	}
+	use \Aimeos\MShop\Common\Item\ListRef\Traits;
+	use \Aimeos\MShop\Common\Item\PropertyRef\Traits;
 
 
 	private $date;
@@ -59,8 +55,8 @@ class Standard
 	public function __clone()
 	{
 		parent::__clone();
-		$this->__cloneList();
-		$this->__cloneProperty();
+		\Aimeos\MShop\Common\Item\ListRef\Traits::__clone();
+		\Aimeos\MShop\Common\Item\PropertyRef\Traits::__clone();
 	}
 
 

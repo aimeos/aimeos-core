@@ -22,13 +22,8 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Media\Item\Iface
 {
-	use \Aimeos\MShop\Common\Item\ListRef\Traits {
-		__clone as __cloneList;
-		getName as getNameList;
-	}
-	use \Aimeos\MShop\Common\Item\PropertyRef\Traits {
-		__clone as __cloneProperty;
-	}
+	use \Aimeos\MShop\Common\Item\ListRef\Traits;
+	use \Aimeos\MShop\Common\Item\PropertyRef\Traits;
 
 
 	private $langid;
@@ -59,8 +54,8 @@ class Standard
 	public function __clone()
 	{
 		parent::__clone();
-		$this->__cloneList();
-		$this->__cloneProperty();
+		\Aimeos\MShop\Common\Item\ListRef\Traits::__clone();
+		\Aimeos\MShop\Common\Item\PropertyRef\Traits::__clone();
 	}
 
 
@@ -292,7 +287,7 @@ class Standard
 			return $item->getValue();
 		}
 
-		return $this->getNameList( $type );
+		return \Aimeos\MShop\Common\Item\ListRef\Traits::getName( $type );
 	}
 
 
