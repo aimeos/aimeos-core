@@ -174,11 +174,11 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	/**
 	 * Returns the ID of the items
 	 *
-	 * @return string|null ID of the item or null
+	 * @return string ID of the item or null
 	 */
-	public function __toString() : ?string
+	public function __toString() : string
 	{
-		return $this->getId();
+		return (string) $this->getId();
 	}
 
 
