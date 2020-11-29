@@ -134,11 +134,11 @@ abstract class Base
 	/**
 	 * Returns the ID of the items
 	 *
-	 * @return string ID of the item or null
+	 * @return string|null ID of the item or null
 	 */
-	public function __toString() : string
+	public function __toString() : ?string
 	{
-		return (string) $this->getId();
+		return $this->getId();
 	}
 
 

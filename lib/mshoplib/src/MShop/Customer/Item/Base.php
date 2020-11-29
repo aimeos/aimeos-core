@@ -22,9 +22,15 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Customer\Item\Iface
 {
-	use \Aimeos\MShop\Common\Item\ListRef\Traits;
-	use \Aimeos\MShop\Common\Item\AddressRef\Traits;
-	use \Aimeos\MShop\Common\Item\PropertyRef\Traits;
+	use \Aimeos\MShop\Common\Item\ListRef\Traits {
+		__clone as __cloneList;
+	}
+	use \Aimeos\MShop\Common\Item\PropertyRef\Traits {
+		__clone as __cloneProperty;
+	}
+	use \Aimeos\MShop\Common\Item\AddressRef\Traits {
+		__clone as __cloneAddress;
+	}
 
 
 	private $billingaddress;
@@ -66,9 +72,9 @@ abstract class Base
 		$this->billingaddress = clone $this->billingaddress;
 
 		parent::__clone();
-		\Aimeos\MShop\Common\Item\ListRef\Traits::__clone();
-		\Aimeos\MShop\Common\Item\AddressRef\Traits::__clone();
-		\Aimeos\MShop\Common\Item\PropertyRef\Traits::__clone();
+		$this->__cloneList();
+		$this->__cloneAddress();
+		$this->__cloneProperty();
 	}
 
 

@@ -22,8 +22,12 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Supplier\Item\Iface
 {
-	use \Aimeos\MShop\Common\Item\ListRef\Traits;
-	use \Aimeos\MShop\Common\Item\AddressRef\Traits;
+	use \Aimeos\MShop\Common\Item\ListRef\Traits {
+		__clone as __cloneList;
+	}
+	use \Aimeos\MShop\Common\Item\AddressRef\Traits {
+		__clone as __cloneAddress;
+	}
 
 
 	/**
@@ -48,8 +52,8 @@ class Standard
 	public function __clone()
 	{
 		parent::__clone();
-		\Aimeos\MShop\Common\Item\ListRef\Traits::__clone();
-		\Aimeos\MShop\Common\Item\AddressRef\Traits::__clone();
+		$this->__cloneList();
+		$this->__cloneAddress();
 	}
 
 
