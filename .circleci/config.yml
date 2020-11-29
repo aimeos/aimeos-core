@@ -58,7 +58,7 @@ jobs:
           POSTGRES_USER: aimeos
           POSTGRES_DB: aimeos
     steps:
-      - run: sudo apt-get update && sudo apt-get install -y postgresql-client php7.4-gd php7.4-intl php7.4-pgsql php7.4-xdebug
+      - run: sudo apt-get update && sudo apt-get install -y postgresql-client php7.3-gd php7.3-intl php7.3-pgsql php7.3-xdebug
       - checkout
       - restore_cache:
           keys:
