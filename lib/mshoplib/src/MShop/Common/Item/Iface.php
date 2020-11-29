@@ -48,9 +48,9 @@ interface Iface
 	/**
 	 * Returns the ID of the items
 	 *
-	 * @return string|null ID of the item or null
+	 * @return string ID of the item or null
 	 */
-	public function __toString() : ?string;
+	public function __toString() : string;
 
 	/**
 	 * Returns the item property for the given name
