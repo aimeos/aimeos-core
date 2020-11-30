@@ -5,7 +5,7 @@
 # Aimeos core - high performance e-commerce
 
 [![Total Downloads](https://poser.pugx.org/aimeos/aimeos-core/d/total.svg)](https://packagist.org/packages/aimeos/aimeos-core)
-[![Build Status](https://travis-ci.org/aimeos/aimeos-core.png?branch=master)](https://travis-ci.org/aimeos/aimeos-core)
+[![Build Status](https://circleci.com/gh/aimeos/aimeos-core.svg?style=shield)](https://circleci.com/gh/aimeos/aimeos-core)
 [![Coverage Status](https://coveralls.io/repos/aimeos/aimeos-core/badge.svg?branch=master)](https://coveralls.io/r/aimeos/aimeos-core?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/aimeos-core/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/aimeos-core/?branch=master)
 [![License](https://poser.pugx.org/aimeos/aimeos-core/license.svg)](https://packagist.org/packages/aimeos/aimeos-core)
