@@ -592,6 +592,9 @@ class Standard extends Base implements Iface
 	 */
 	public function copyFrom( \Aimeos\MShop\Product\Item\Iface $product ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
+		$values = $product->toArray();
+		$this->fromArray( $values );
+
 		$this->setSiteId( $product->getSiteId() );
 		$this->setProductCode( $product->getCode() );
 		$this->setProductId( $product->getId() );

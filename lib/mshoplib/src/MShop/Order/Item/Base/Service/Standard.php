@@ -310,6 +310,9 @@ class Standard extends Base implements Iface
 	 */
 	public function copyFrom( \Aimeos\MShop\Service\Item\Iface $service ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
+		$values = $service->toArray();
+		$this->fromArray( $values );
+
 		$this->setSiteId( $service->getSiteId() );
 		$this->setCode( $service->getCode() );
 		$this->setName( $service->getName() );
