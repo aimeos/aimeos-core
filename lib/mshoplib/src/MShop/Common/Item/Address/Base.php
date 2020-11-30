@@ -588,6 +588,9 @@ abstract class Base
 	 */
 	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $item ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
+		$values = $item->toArray();
+		$this->fromArray( $values );
+
 		$this->setCompany( $item->getCompany() );
 		$this->setVatID( $item->getVatID() );
 		$this->setSalutation( $item->getSalutation() );
