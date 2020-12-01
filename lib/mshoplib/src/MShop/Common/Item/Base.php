@@ -343,7 +343,7 @@ abstract class Base
 		// Add custom columns
 		foreach( $list as $key => $value )
 		{
-			if( is_string( $value ) && strpos( $key, '.' ) === false ) {
+			if( is_scalar( $value ) && strpos( $key, '.' ) === false ) {
 				$this->bdata[$key] = $value;
 			}
 		}

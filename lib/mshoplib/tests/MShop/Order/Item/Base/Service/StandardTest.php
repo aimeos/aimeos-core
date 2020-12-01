@@ -546,21 +546,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$manager = \Aimeos\MShop\Service\Manager\Factory::create( \TestHelperMShop::getContext() );
 
-		$search = $manager->filter();
-		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
-		$services = $manager->search( $search )->toArray();
+		$filter = $manager->filter()->add( ['service.provider' => 'Standard'] );
+		$item = $manager->search( $filter )->first( new \RuntimeException( 'No service found' ) );
 
-		if( ( $service = reset( $services ) ) === false ) {
-			throw new \RuntimeException( 'No service found' );
-		}
-
-		$return = $serviceCopy->copyFrom( $service );
+		$return = $serviceCopy->copyFrom( $item->set( 'customprop', 123 ) );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $return );
 		$this->assertEquals( 'unitcode', $serviceCopy->getCode() );
 		$this->assertEquals( 'unitlabel', $serviceCopy->getName() );
 		$this->assertEquals( 'delivery', $serviceCopy->getType() );
 		$this->assertEquals( '', $serviceCopy->getMediaUrl() );
+		$this->assertEquals( '123', $serviceCopy->get( 'customprop' ) );
 
 		$this->assertTrue( $serviceCopy->isModified() );
 	}

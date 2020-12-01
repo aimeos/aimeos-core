@@ -843,7 +843,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$product = $manager->find( 'CNE', ['text'] );
 
 		$productCopy = new \Aimeos\MShop\Order\Item\Base\Product\Standard( $this->price );
-		$return = $productCopy->copyFrom( $product );
+		$return = $productCopy->copyFrom( $product->set( 'customprop', 'abc' ) );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
 		$this->assertEquals( 'default', $productCopy->getType() );
@@ -855,6 +855,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '', $productCopy->getSupplierCode() );
 		$this->assertEquals( '', $productCopy->getMediaUrl() );
 		$this->assertEquals( '', $productCopy->getTarget() );
+		$this->assertEquals( 'abc', $productCopy->get( 'customprop' ) );
 
 		$this->assertTrue( $productCopy->isModified() );
 	}
