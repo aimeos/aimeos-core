@@ -7,12 +7,9 @@ version: 2
 jobs:
   "php-7.1 / mariadb-10":
     docker:
-      - image: circleci/php:7.1
+      - image: aimeos/ci-php:7.1
       - image: circleci/mariadb:10
     steps:
-      - run: sudo apt-get update && sudo apt-get install -y default-mysql-client libjpeg62-turbo-dev libpng-dev zlib1g-dev
-      - run: sudo docker-php-ext-configure gd --with-jpeg-dir=/usr/include/
-      - run: sudo docker-php-ext-install -j$(nproc) gd zip pdo_mysql
       - checkout
       - restore_cache:
           keys:
@@ -28,7 +25,7 @@ jobs:
 
   "php-7.2 / mysql-5.7":
     docker:
-      - image: cimg/php:7.2
+      - image: aimeos/ci-php:7.2
       - image: circleci/mysql:5.7
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
@@ -36,7 +33,6 @@ jobs:
           MYSQL_USER: aimeos
           MYSQL_PASSWORD: aimeos
     steps:
-      - run: sudo apt-get update && sudo apt-get install -y mysql-client php7.2-gd php7.2-intl php7.2-mysql
       - checkout
       - restore_cache:
           keys:
@@ -47,18 +43,17 @@ jobs:
           paths: [./vendor]
       - run: for i in `seq 1 10`; do nc -z 127.0.0.1 3306 && echo OK && exit 0; echo -n .; sleep 1; done
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
-      - run: ./vendor/bin/phing setup test
+      - run: ./vendor/bin/phing setup test check
 
   "php-7.3 / pgsql-13":
     docker:
-      - image: cimg/php:7.3
+      - image: aimeos/ci-php:7.3
       - image: circleci/postgres:13
         environment:
           POSTGRES_PASSWORD: aimeos
           POSTGRES_USER: aimeos
           POSTGRES_DB: aimeos
     steps:
-      - run: sudo apt-get update && sudo apt-get install -y postgresql-client php7.3-gd php7.3-intl php7.3-pgsql php7.3-xdebug
       - checkout
       - restore_cache:
           keys:
@@ -74,7 +69,7 @@ jobs:
 
   "php-7.4 / mysql-8.0":
     docker:
-      - image: cimg/php:7.4
+      - image: aimeos/ci-php:7.4
       - image: circleci/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
@@ -82,7 +77,6 @@ jobs:
           MYSQL_USER: aimeos
           MYSQL_PASSWORD: aimeos
     steps:
-      - run: sudo apt-get update && sudo apt-get install -y mysql-client php7.4-gd php7.4-intl php7.4-mysql php7.4-xdebug
       - checkout
       - restore_cache:
           keys:
@@ -98,17 +92,12 @@ jobs:
 
   "php-7.4 / mssql-2019":
     docker:
-      - image: cimg/php:7.4
+      - image: aimeos/ci-php:7.4
       - image: mcr.microsoft.com/mssql/server:2019-latest
         environment:
           SA_PASSWORD: S3c0r3P4ss
           ACCEPT_EULA: Y
     steps:
-      - run: curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-      - run: curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee -a /etc/apt/sources.list
-      - run: sudo apt-get update && sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc unixodbc-dev odbcinst1debian2 libodbc1 php7.4-gd php7.4-intl php7.4-xdebug
-      - run: sudo pecl channel-update pecl.php.net && sudo pecl install sqlsrv && sudo pecl install pdo_sqlsrv
-      - run: echo -e "; priority=20\nextension=pdo_sqlsrv" | sudo tee /etc/php/7.4/mods-available/pdo_sqlsrv.ini && sudo phpenmod pdo_sqlsrv
       - checkout
       - restore_cache:
           keys:
@@ -123,21 +112,6 @@ jobs:
       - run: ./vendor/bin/phing setup coverage
       - run: ./vendor/bin/php-coveralls -vvv
 
-  "php-7.4 / check":
-    docker:
-      - image: cimg/php:7.4
-    steps:
-      - run: sudo apt-get update && sudo apt-get install -y php7.4-gd php7.4-intl
-      - checkout
-      - restore_cache:
-          keys:
-            - php74-{{ checksum "composer.json" }}
-      - run: composer update -n --prefer-dist
-      - save_cache:
-          key: php74-{{ checksum "composer.json" }}
-          paths: [./vendor]
-      - run: ./vendor/bin/phing check
-
 workflows:
   version: 2
   unittest:
@@ -147,5 +121,4 @@ workflows:
       - "php-7.3 / pgsql-13"
       - "php-7.4 / mssql-2019"
       - "php-7.4 / mysql-8.0"
-      - "php-7.4 / check"
 
