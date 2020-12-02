@@ -295,11 +295,17 @@ class Standard implements Iface, DirIface, MetaIface
 			throw new Exception( sprintf( 'Couldn\'t open file "%1$s"', $path ) );
 		}
 
-		if( @stream_copy_to_stream( $stream, $handle ) == false ) {
-			throw new Exception( sprintf( 'Couldn\'t copy stream for "%1$s"', $path ) );
+		try
+		{
+			if( !is_resource( $stream ) || stream_copy_to_stream( $stream, $handle ) == false ) {
+				throw new Exception( sprintf( 'Couldn\'t copy stream for "%1$s"', $path ) );
+			}
+		}
+		finally
+		{
+			fclose( $handle );
 		}
 
-		fclose( $handle );
 		return $this;
 	}
 

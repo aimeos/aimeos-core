@@ -33,14 +33,28 @@ class Factory
 	 */
 	public static function get( $file, array $options = [] )
 	{
-		$content = $file;
-
-		if( @is_resource( $file ) && ( $content = stream_get_contents( $file ) ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to read from stream' ) );
+		if( is_resource( $file ) )
+		{
+			if( ( $content = stream_get_contents( $file ) ) === false ) {
+				throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to read from stream' ) );
+			}
 		}
-
-		if( @is_file( $file ) && ( $content = @file_get_contents( $file ) ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to read from file "%1$s"', $file ) );
+		elseif( is_string( $file ) )
+		{
+			if( strpos( $file, "\0" ) === false && is_file( $file ) )
+			{
+				if( ( $content = file_get_contents( $file ) ) === false ) {
+					throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to read from file "%1$s"', $file ) );
+				}
+			}
+			else
+			{
+				$content = $file;
+			}
+		}
+		else
+		{
+			throw new \Aimeos\MW\Media\Exception( 'Unsupported file parameter type' );
 		}
 
 
