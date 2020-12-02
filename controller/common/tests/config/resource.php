@@ -3,6 +3,6 @@
 return array(
 	'fs-media' => array(
 		'adapter' => 'Standard',
-		'basedir' => 'tmp/',
+		'basedir' => dirname( __DIR__ ) . '/tmp',
 	),
 );
