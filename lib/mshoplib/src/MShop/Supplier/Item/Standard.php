@@ -11,6 +11,9 @@
 
 namespace Aimeos\MShop\Supplier\Item;
 
+use \Aimeos\MShop\Common\Item\ListRef;
+use \Aimeos\MShop\Common\Item\AddressRef;
+
 
 /**
  * Interface for supplier DTO objects used by the shop.
@@ -22,11 +25,10 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Supplier\Item\Iface
 {
-	use \Aimeos\MShop\Common\Item\ListRef\Traits {
-		__clone as __cloneList;
-	}
-	use \Aimeos\MShop\Common\Item\AddressRef\Traits {
-		__clone as __cloneAddress;
+	use ListRef\Traits, AddressRef\Traits  {
+		ListRef\Traits::__clone insteadof AddressRef\Traits;
+		ListRef\Traits::__clone as __cloneList;
+		AddressRef\Traits::__clone as __cloneAddress;
 	}
 
 
