@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Goran Sabo <by.typo3@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
@@ -10,12 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2020-12-02 15:52+0100\n"
 "PO-Revision-Date: 2020-12-02 14:52+0000\n"
 "Last-Translator: Aimeos\n"
-"Language-Team: Persian (http://www.transifex.com/aimeos/aimeos-core/language/fa/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/aimeos/aimeos-core/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fa\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -35,7 +36,7 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s"
-msgstr ""
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
 #. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
@@ -97,7 +98,7 @@ msgstr ""
 
 #, php-format
 msgid "Basket empty"
-msgstr ""
+msgstr "Košarica je prazna"
 
 #, php-format
 msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
@@ -133,11 +134,11 @@ msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr "کلاس \"%1$s\" از رابط کاربری \"%2$s\" پیاده سازی نشده است"
+msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr "کلاس \"%1$s\" معتبر نمی‌باشد"
+msgstr ""
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
@@ -149,7 +150,7 @@ msgstr ""
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
-msgstr ""
+msgstr "Maksimalno število znakov je 255, upoštevajoč presledke"
 
 #, php-format
 msgid "Code must not be longer than 32 characters"
@@ -269,7 +270,7 @@ msgstr ""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr "کاراکترهای نا معتبر در کلاس \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid ""
@@ -322,7 +323,7 @@ msgstr ""
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr "کارخانه‌ی \"%1$s\" معتبر نمی‌باشد"
+msgstr ""
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
@@ -636,7 +637,7 @@ msgid "PayPal Express: Wrong receiver email \"%1$s\""
 msgstr ""
 
 msgid "Payment costs"
-msgstr "هزینه‌ی قابل پرداخت"
+msgstr ""
 
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
@@ -696,7 +697,7 @@ msgstr ""
 
 #, php-format
 msgid "Products out of stock"
-msgstr ""
+msgstr "Izdelki niso na zalogi"
 
 #, php-format
 msgid "Property item for removal not found"
@@ -840,7 +841,7 @@ msgstr ""
 
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr "صدا زدن متد \"%1$s\" غیرممکن می‌باشد"
+msgstr ""
 
 #, php-format
 msgid "Unable to create order XML file \"%1$s\""

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 09:22+0200\n"
-"PO-Revision-Date: 2020-10-05 07:29+0000\n"
+"POT-Creation-Date: 2020-12-02 15:52+0100\n"
+"PO-Revision-Date: 2020-12-02 14:53+0000\n"
 "Last-Translator: a270031086f2a0d3514bc0cb507b48f6\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -76,6 +76,9 @@ msgstr "Crée un plan de site de produit pour les moteurs de recherche"
 msgid "Creates bought together product suggestions"
 msgstr "Crée des suggestions de produits achetés ensemble"
 
+msgid "Customer group import XML"
+msgstr ""
+
 msgid "Customer import XML"
 msgstr "Import XML clients"
 
@@ -127,6 +130,14 @@ msgid "Finished catalog import from file \"%1$s\""
 msgstr "Import du catalogue à partir du fichier \"%1$s\" terminé"
 
 #, php-format
+msgid "Finished customer group import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished customer group import from file \"%1$s\""
+msgstr ""
+
+#, php-format
 msgid "Finished customer import from \"%1$s\""
 msgstr "Import des clients à partir de \"%1$s\" terminé"
 
@@ -161,6 +172,9 @@ msgstr "Importe les nouvelles catégories et met à jour les existantes à parti
 
 msgid "Imports new and updates existing coupon code from CSV files"
 msgstr "Importe le nouveau code et met à jour le code de coupon existant à partir de fichiers CSV"
+
+msgid "Imports new and updates existing customer groups from XML files"
+msgstr ""
 
 msgid "Imports new and updates existing customers from XML files"
 msgstr "Importe les nouveaux clients et met à jour les existants à partir de fichiers XML"
@@ -344,6 +358,14 @@ msgstr "Import catalogue démarré à partir du fichier \"%1$s\""
 #, php-format
 msgid "Started coupon import from \"%1$s\" (%2$s)"
 msgstr "Importation du coupon commencé à partir de \"%1$s\" (%2$s)"
+
+#, php-format
+msgid "Started customer group import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Started customer group import from file \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Started customer import from \"%1$s\""
