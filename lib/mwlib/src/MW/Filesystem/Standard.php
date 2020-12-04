@@ -297,7 +297,7 @@ class Standard implements Iface, DirIface, MetaIface
 
 		try
 		{
-			if( !is_resource( $stream ) || stream_copy_to_stream( $stream, $handle ) == false ) {
+			if( !is_resource( $stream ) || @stream_copy_to_stream( $stream, $handle ) === false ) {
 				throw new Exception( sprintf( 'Couldn\'t copy stream for "%1$s"', $path ) );
 			}
 		}
