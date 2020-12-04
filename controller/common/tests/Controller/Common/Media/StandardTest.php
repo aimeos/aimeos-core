@@ -173,6 +173,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context->getConfig()->set( 'controller/common/media/files/scale', true );
 
+		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . '/tmp/';
+		if( !is_dir( $dest ) ) { mkdir( $dest, 0755, true ); }
+		copy( __DIR__ . '/testfiles/test.gif', $dest . 'test.gif' );
+
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
 			->setMethods( array( 'getFileContent', 'store' ) )
 			->setConstructorArgs( array( $this->context ) )
@@ -185,13 +189,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
-		$item->setPreview( 'preview.jpg' )->setUrl( 'test.jpg' );
+		$item->setPreview( 'preview.gif' )->setUrl( 'test.gif' );
 
-		$result = $object->scale( $item );
+		$result = $object->scale( $item, 'fs-media', true );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
-		$this->assertEquals( 'test.jpg', $result->getUrl() );
-		$this->assertNotEquals( 'preview.jpg', $result->getPreview() );
+		$this->assertEquals( 'test.gif', $result->getUrl() );
+		$this->assertNotEquals( 'preview.gif', $result->getPreview() );
 	}
 
 

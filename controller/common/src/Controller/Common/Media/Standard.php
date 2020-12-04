@@ -152,10 +152,18 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be scaled
 	 * @param string $fsname Name of the file system to rescale the files from
+	 * @param bool $force True to enforce creating new preview images
 	 * @return \Aimeos\MShop\Media\Item\Iface Rescaled media item
 	 */
-	public function scale( \Aimeos\MShop\Media\Item\Iface $item, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface
+	public function scale( \Aimeos\MShop\Media\Item\Iface $item, string $fsname = 'fs-media', bool $force = false ) : \Aimeos\MShop\Media\Item\Iface
 	{
+		$fs = $this->context->fs( $fsname );
+		$is = ( $fs instanceof \Aimeos\MW\Filesystem\MetaIface ? true : false );
+
+		if( !$force && !( $is && date( 'Y-m-d H:i:s', $fs->time( $item->getUrl() ) ) < $item->getTimeModified() ) ) {
+			return $item;
+		}
+
 		$path = $item->getUrl();
 		$media = $this->getMediaFile( $this->getFileContent( $path, $fsname ) );
 
@@ -170,7 +178,7 @@ class Standard
 	/**
 	 * Adds original image and preview images to the media item
 	 *
-	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item which will contains the image URLs afterwards
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item which will contain the image URLs afterwards
 	 * @param \Aimeos\MW\Media\Image\Iface $media Image object to scale
 	 * @param string|null $path Path to the file or URL, empty or random for uploaded files
 	 * @param string $fsname File system name the file is located at
