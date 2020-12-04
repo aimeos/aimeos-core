@@ -116,7 +116,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			$manager->save( $item );
 
 			if( isset( $entry['stock'] ) ) {
-				$this->addStockItems( $item->getCode(), $entry['stock'] );
+				$this->addStockItems( $item->getId(), $entry['stock'] );
 			}
 		}
 	}
