@@ -444,7 +444,15 @@ class Standard
 		 */
 		$path = 'mshop/product/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
+		$list = $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
+
+		if( $withsub )
+		{
+			$manager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
+			$list = array_merge( $list, $manager->getSearchAttributes( $withsub ) );
+		}
+
+		return $list;
 	}
 
 
