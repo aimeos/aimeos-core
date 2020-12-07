@@ -476,32 +476,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsStock()
-	{
-		$total = 0;
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '>', 'stock.stocklevel', 0 ) );
-		$search->slice( 0, 1 );
-
-		$results = $this->object->search( $search, [], $total );
-		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( 13, $total );
-	}
-
-
-	public function testSearchItemsStockUnlimited()
-	{
-		$total = 0;
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'stock.stocklevel', null ) );
-		$search->slice( 0, 1 );
-
-		$results = $this->object->search( $search, [], $total );
-		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( 7, $total );
-	}
-
-
 	public function testGetSubManager()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager( 'lists' ) );
