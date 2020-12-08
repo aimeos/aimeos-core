@@ -1,8 +1,9 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# Jeroen Maas <ictpanel@gmail.com>, 2020
 # Klaas Runia <info@sennik.nl>, 2015
 # Maurice Lourens <mlourens@gmail.com>, 2015
 # Sten Pelzer <pelzersten@gmail.com>, 2015
@@ -10,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 09:22+0200\n"
-"PO-Revision-Date: 2020-07-01 19:43+0000\n"
+"POT-Creation-Date: 2020-12-02 15:52+0100\n"
+"PO-Revision-Date: 2020-12-02 14:52+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Dutch (http://www.transifex.com/aimeos/aimeos-core/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -84,7 +85,7 @@ msgstr ""
 
 #, php-format
 msgid "Address not available"
-msgstr ""
+msgstr "Adres niet beschikbaar"
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
@@ -183,7 +184,7 @@ msgid "Coupon in basket is not available any more"
 msgstr "Coupon in winkelmandje is niet langer beschikbaar"
 
 msgid "Coupon is not available any more"
-msgstr ""
+msgstr "Coupon is niet meer beschikbaar"
 
 #, php-format
 msgid "Curl could not be initialized"
@@ -321,7 +322,7 @@ msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
 msgstr ""
 
 msgid "Invalid delivery type"
-msgstr ""
+msgstr "Ongeldige aflevermethode"
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
@@ -357,7 +358,7 @@ msgstr "Item kan niet worden verwijderd. Site ID van het item verschilt van de h
 
 #, php-format
 msgid ""
-"Item could not be saved using method save(). Item ID not available."
+"Item could not be saved using method saveItem(). Item ID not available."
 msgstr ""
 
 #, php-format
@@ -454,7 +455,7 @@ msgstr "Nieuwe ID \"%1$s\" voor item verschilt van oude ID \"%2$s\""
 
 #, php-format
 msgid ""
-"Newly created site can not be saved using method \"save()\". Try using "
+"Newly created site can not be saved using method \"saveItem()\". Try using "
 "method \"insertItem()\" instead."
 msgstr ""
 

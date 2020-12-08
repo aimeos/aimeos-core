@@ -1,15 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Metal <meteoramic@yahoo.com>, 2015-2020
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 09:22+0200\n"
-"PO-Revision-Date: 2020-07-20 21:18+0000\n"
+"POT-Creation-Date: 2020-12-02 15:52+0100\n"
+"PO-Revision-Date: 2020-12-02 20:30+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -355,8 +355,8 @@ msgstr "Öğe silinemez. Ögenin site kimlik numarası mevcut sitenin kimlik num
 
 #, php-format
 msgid ""
-"Item could not be saved using method save(). Item ID not available."
-msgstr "Öğe save() metodu kullanılarak kaydedilemedi. Öğe kimlik numarası mevcut değil."
+"Item could not be saved using method saveItem(). Item ID not available."
+msgstr "Öğe saveItem() metodu kullanılarak kaydedilemedi. Öğe kimlik numarası mevcut değil."
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
@@ -452,9 +452,9 @@ msgstr "Öğe için yeni \"%1$s\" kimlik numarası, eski \"%2$s\" kimlik numaras
 
 #, php-format
 msgid ""
-"Newly created site can not be saved using method \"save()\". Try using "
+"Newly created site can not be saved using method \"saveItem()\". Try using "
 "method \"insertItem()\" instead."
-msgstr "Yeni oluşturulan site  \"save()\" metodu kullanılarak kaydedilemez. Bunun yerine \"insertItem()\" metodunu kullanmayı deneyin."
+msgstr "Yeni oluşturulan site  \"saveItem()\" metodu kullanılarak kaydedilemez. Bunun yerine \"insertItem()\" metodunu kullanmayı deneyin."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"

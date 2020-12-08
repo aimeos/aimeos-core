@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 09:22+0200\n"
-"PO-Revision-Date: 2020-10-05 07:29+0000\n"
-"Last-Translator: Aimeos\n"
+"POT-Creation-Date: 2020-12-02 15:52+0100\n"
+"PO-Revision-Date: 2020-12-07 15:35+0000\n"
+"Last-Translator: isabella carlin <isabella@vg7.it>\n"
 "Language-Team: Italian (http://www.transifex.com/aimeos/aimeos-core/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,6 +72,9 @@ msgstr ""
 msgid "Creates bought together product suggestions"
 msgstr ""
 
+msgid "Customer group import XML"
+msgstr ""
+
 msgid "Customer import XML"
 msgstr ""
 
@@ -91,7 +94,7 @@ msgstr ""
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
-msgstr ""
+msgstr "Espansione \"%1$s\" nodo fallita"
 
 msgid "Exports all available products"
 msgstr ""
@@ -104,7 +107,7 @@ msgstr ""
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
-msgstr ""
+msgstr "File o directory \"%1$s\" non esistente"
 
 #, php-format
 msgid "Finished attribute import from \"%1$s\""
@@ -120,6 +123,14 @@ msgstr ""
 
 #, php-format
 msgid "Finished catalog import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished customer group import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished customer group import from file \"%1$s\""
 msgstr ""
 
 #, php-format
@@ -156,6 +167,9 @@ msgid "Imports new and updates existing categories from XML files"
 msgstr ""
 
 msgid "Imports new and updates existing coupon code from CSV files"
+msgstr ""
+
+msgid "Imports new and updates existing customer groups from XML files"
 msgstr ""
 
 msgid "Imports new and updates existing customers from XML files"
@@ -231,7 +245,7 @@ msgstr ""
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
-msgstr ""
+msgstr "File XML \"%1$s\" non trovato"
 
 msgid "Optimizes the catalog index for searching products"
 msgstr ""
@@ -342,6 +356,14 @@ msgid "Started coupon import from \"%1$s\" (%2$s)"
 msgstr ""
 
 #, php-format
+msgid "Started customer group import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Started customer group import from file \"%1$s\""
+msgstr ""
+
+#, php-format
 msgid "Started customer import from \"%1$s\""
 msgstr ""
 
@@ -439,7 +461,7 @@ msgstr ""
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
-msgstr ""
+msgstr "Impossibile spostare il file importato \"%1$s\" in  \"%2$s\""
 
 #, php-format
 msgid "Unable to renew subscription with ID \"%1$s\": %2$s"

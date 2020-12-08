@@ -1,15 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Андрей Аксёнов <aksenovaa@bk.ru>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 09:22+0200\n"
-"PO-Revision-Date: 2020-07-01 19:43+0000\n"
+"POT-Creation-Date: 2020-12-02 15:52+0100\n"
+"PO-Revision-Date: 2020-12-02 14:52+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -355,8 +355,8 @@ msgstr "Невозможно удалить элемент. ID сайта эле
 
 #, php-format
 msgid ""
-"Item could not be saved using method save(). Item ID not available."
-msgstr "Невозможно сохранить элемент, используя метод save(). Недоступен ID элемента."
+"Item could not be saved using method saveItem(). Item ID not available."
+msgstr "Невозможно сохранить элемент, используя метод saveItem(). Недоступен ID элемента."
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
@@ -452,9 +452,9 @@ msgstr "Новый ID \"%1$s\" элемента отличается от ста
 
 #, php-format
 msgid ""
-"Newly created site can not be saved using method \"save()\". Try using "
+"Newly created site can not be saved using method \"saveItem()\". Try using "
 "method \"insertItem()\" instead."
-msgstr "Вновь созданный сайт невозможно сохранить, используя метод \"save()\". Вместо этого попробуйте использовать метод \"insertItem()\"."
+msgstr "Вновь созданный сайт невозможно сохранить, используя метод \"saveItem()\". Вместо этого попробуйте использовать метод \"insertItem()\"."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"

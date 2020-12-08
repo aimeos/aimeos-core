@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 09:22+0200\n"
-"PO-Revision-Date: 2020-10-05 07:29+0000\n"
+"POT-Creation-Date: 2020-12-02 15:52+0100\n"
+"PO-Revision-Date: 2020-12-02 14:53+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/aimeos/aimeos-core/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -72,6 +72,9 @@ msgstr ""
 msgid "Creates bought together product suggestions"
 msgstr ""
 
+msgid "Customer group import XML"
+msgstr ""
+
 msgid "Customer import XML"
 msgstr ""
 
@@ -123,6 +126,14 @@ msgid "Finished catalog import from file \"%1$s\""
 msgstr ""
 
 #, php-format
+msgid "Finished customer group import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished customer group import from file \"%1$s\""
+msgstr ""
+
+#, php-format
 msgid "Finished customer import from \"%1$s\""
 msgstr ""
 
@@ -156,6 +167,9 @@ msgid "Imports new and updates existing categories from XML files"
 msgstr ""
 
 msgid "Imports new and updates existing coupon code from CSV files"
+msgstr ""
+
+msgid "Imports new and updates existing customer groups from XML files"
 msgstr ""
 
 msgid "Imports new and updates existing customers from XML files"
@@ -339,6 +353,14 @@ msgstr ""
 
 #, php-format
 msgid "Started coupon import from \"%1$s\" (%2$s)"
+msgstr ""
+
+#, php-format
+msgid "Started customer group import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Started customer group import from file \"%1$s\""
 msgstr ""
 
 #, php-format

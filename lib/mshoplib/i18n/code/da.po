@@ -7,13 +7,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Tobias Madsen <tubbe.m@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2018-08-14 11:51+0000\n"
-"Last-Translator: Aimeos\n"
+"PO-Revision-Date: 2020-12-06 10:49+0000\n"
+"Last-Translator: Tobias Madsen <tubbe.m@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/aimeos/aimeos-core/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,19 +24,19 @@ msgstr ""
 
 #. Item status
 msgid "status:-2"
-msgstr ""
+msgstr "Arkiveret"
 
 #. Item status
 msgid "status:-1"
-msgstr ""
+msgstr "Anmeldelse"
 
 #. Item status
 msgid "status:0"
-msgstr ""
+msgstr "Deaktiveret"
 
 #. Item status
 msgid "status:1"
-msgstr ""
+msgstr "Aktiveret"
 
 #. Address salutation
 msgid "company"
@@ -43,27 +44,27 @@ msgstr "Firma"
 
 #. Address salutation
 msgid "mr"
-msgstr ""
+msgstr "Mr"
 
 #. Address salutation
 msgid "mrs"
-msgstr ""
+msgstr "Mrs"
 
 #. Address salutation
 msgid "miss"
-msgstr ""
+msgstr "Miss"
 
 #. Order type value
 msgid "order:repeat"
-msgstr ""
+msgstr "gentaget"
 
 #. Order type value
 msgid "order:web"
-msgstr ""
+msgstr "internet"
 
 #. Order type value
 msgid "order:phone"
-msgstr ""
+msgstr "telefon"
 
 #. Subscription reason code
 msgid "reason:-1"
@@ -71,87 +72,87 @@ msgstr "Betaling"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr ""
+msgstr "udløbet"
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr ""
+msgstr "annulleret"
 
 #. Payment status value
 msgid "pay:-1"
-msgstr ""
+msgstr "ikke færdig"
 
 #. Payment status value
 msgid "pay:0"
-msgstr ""
+msgstr "slettet"
 
 #. Payment status value
 msgid "pay:1"
-msgstr ""
+msgstr "annulleret"
 
 #. Payment status value
 msgid "pay:2"
-msgstr ""
+msgstr "nægtet"
 
 #. Payment status value
 msgid "pay:3"
-msgstr ""
+msgstr "refunderet"
 
 #. Payment status value
 msgid "pay:4"
-msgstr ""
+msgstr "afventer"
 
 #. Payment status value
 msgid "pay:5"
-msgstr ""
+msgstr "autoriseret"
 
 #. Payment status value
 msgid "pay:6"
-msgstr ""
+msgstr "modtaget"
 
 #. Delivery status value
 msgid "stat:-1"
-msgstr ""
+msgstr "ikke færdig"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr ""
+msgstr "slettet"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr ""
+msgstr "afventer"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr ""
+msgstr "i gang"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr ""
+msgstr "sendt"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr ""
+msgstr "leveret"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr ""
+msgstr "forsvundet"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr ""
+msgstr "nægtet"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr ""
+msgstr "returneret"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr ""
+msgstr "Faktureringsadressen mangler"
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr ""
+msgstr "Leveringsadressen mangler"
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
@@ -163,11 +164,11 @@ msgstr ""
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr ""
+msgstr "Betalingsmuligheden mangler"
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr ""
+msgstr "Leveringsmuligheden mangler"
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"

@@ -1,16 +1,18 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # alessandro massarelli <alessandro@botteega.com>, 2017
+# isabella carlin <isabella@vg7.it>, 2020
+# Matteo Breschigliaro <matteo@vg7.it>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 09:22+0200\n"
-"PO-Revision-Date: 2020-07-01 19:43+0000\n"
-"Last-Translator: Aimeos\n"
+"POT-Creation-Date: 2020-12-02 15:52+0100\n"
+"PO-Revision-Date: 2020-12-07 17:02+0000\n"
+"Last-Translator: isabella carlin <isabella@vg7.it>\n"
 "Language-Team: Italian (http://www.transifex.com/aimeos/aimeos-core/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -70,19 +72,19 @@ msgstr ""
 
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
-msgstr ""
+msgstr "Indirizzo non disponibile per il dominio \"%1$s\" "
 
 #, php-format
 msgid "Address for type \"%1$s\" not available"
-msgstr ""
+msgstr "Indirizzo non disponibile per \"%1$s\" "
 
 #, php-format
 msgid "Address item for removal not found"
-msgstr ""
+msgstr "Elemento dell'indirizzo non trovato per la rimozione"
 
 #, php-format
 msgid "Address not available"
-msgstr ""
+msgstr "Indirizzo non disponibile"
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
@@ -90,11 +92,11 @@ msgstr ""
 
 #, php-format
 msgid "Address search configuration not available"
-msgstr ""
+msgstr "Configurazione di ricerca indirizzi non disponibile"
 
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Il tipo di indirizzo \"%1$s\" non rientra nell'intervallo consentito"
 
 #, php-format
 msgid "Basket empty"
@@ -102,35 +104,35 @@ msgstr "Il carrello è vuoto"
 
 #, php-format
 msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
-msgstr ""
+msgstr "Il buono acquistato è in valuta \"%1$s\", il cestino usa \"%2$s\""
 
 #, php-format
 msgid "Cache object not available"
-msgstr ""
+msgstr "Oggetto cache non disponibile"
 
 #, php-format
 msgid "Called unknown method \"%1$s\" on class \"%2$s\""
-msgstr ""
+msgstr "Chiamato metodo sconosciuto \"%1$s\" sulla classe \"%2$s\""
 
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
-msgstr ""
+msgstr "Nodo catalogo per ID \"%1$s\" non disponibile"
 
 #, php-format
 msgid "Catalog path for ID \"%1$s\" not found"
-msgstr ""
+msgstr "Percorso catalogo ID \"%1$s\" non trovato"
 
 #, php-format
 msgid "Checks for available addresses in basket failed"
-msgstr ""
+msgstr "I controlli per gli indirizzi disponibili nel cestino non sono andati a buon fine"
 
 #, php-format
 msgid "Checks for available service items in basket failed"
-msgstr ""
+msgstr "I controlli per gli elementi del servizio disponibili nel cestino non sono andati a buon fine"
 
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
-msgstr ""
+msgstr "Nodo figlio con indice \"%1$d\""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
@@ -142,54 +144,54 @@ msgstr "Classe \"%1$s\" non disponibile"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
-msgstr ""
+msgstr "Il codice \"%1$s\" non deve essere più lungo dei caratteri %2$d "
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than 32 characters"
-msgstr ""
+msgstr "Il codice \"%1$s\" non deve essere più lungo di 32 caratteri "
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
-msgstr ""
+msgstr "Il codice non deve essere più lungo di 255 caratteri"
 
 #, php-format
 msgid "Code must not be longer than 32 characters"
-msgstr ""
+msgstr "Il codice non deve essere più lungo di 32 caratteri"
 
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
-msgstr ""
+msgstr "Manca la configurazione per \"%1$s\" "
 
 #, php-format
 msgid "Configuration invalid"
-msgstr ""
+msgstr "Configurazione invalida"
 
 #, php-format
 msgid "Configuration not available"
-msgstr ""
+msgstr "Configurazione non disponibile"
 
 #, php-format
 msgid "Configuration object not available"
-msgstr ""
+msgstr "Oggetto di configurazione non disponibile"
 
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr ""
+msgstr "Configurazione dello statement SQL necessario per \"%1$s\" non disponibile"
 
 #, php-format
 msgid "Coupon in basket is not available any more"
 msgstr "Il coupon inserito nel carrello non è più disponibile"
 
 msgid "Coupon is not available any more"
-msgstr ""
+msgstr "Il coupon non è più disponibile"
 
 #, php-format
 msgid "Curl could not be initialized"
-msgstr ""
+msgstr "Il curl non ha potuto essere inizializzato"
 
 #, php-format
 msgid "Curl error: \"%1$s\" - \"%2$s\""
-msgstr ""
+msgstr "Errore del curl: \"%1$s\" - \"%2$s\""
 
 #, php-format
 msgid "Database manager object not available"
@@ -197,11 +199,11 @@ msgstr ""
 
 #, php-format
 msgid "Date value before \"%1$s\""
-msgstr ""
+msgstr "Valore della data prima di \"%1$s\""
 
 #, php-format
 msgid "Duplicate coupon code"
-msgstr ""
+msgstr "Codice coupon duplicato"
 
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
@@ -209,11 +211,11 @@ msgstr "Codice coupon \"%1$s\" duplicato"
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
-msgstr ""
+msgstr "Espansione \"%1$s\" nodo fallita"
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
-msgstr ""
+msgstr "File o directory \"%1$s\" non esistente"
 
 #, php-format
 msgid "File system manager object not available"
@@ -229,44 +231,44 @@ msgstr ""
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Flag \"%1$s\" non compresi nel range consentito"
 
 #, php-format
 msgid "Flags not within allowed range"
-msgstr ""
+msgstr "Flag non compresi nel range consentito"
 
 #, php-format
 msgid "ID of last inserted database record not available"
-msgstr ""
+msgstr "ID dell'ultimo record di database inserito non disponibile"
 
 #. / Locale ID %1$s
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
-msgstr ""
+msgstr "Oggetto di internazionalizzazione non disponibile per \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
-msgstr ""
+msgstr "Codice paese ISO non valido \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Codice valuta ISO non valido \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
-msgstr ""
+msgstr "Codice lingua ISO non valido \"%1$s\""
 
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
-msgstr ""
+msgstr "JSO non valido come risultato della ricerca dell'ID  \"%2$s\" in \"%1$s\": %3$s"
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Caratteri non validi nel codice valuta ISO \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr ""
+msgstr "Caratteri non validi nel codice lingua ISO \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
@@ -276,15 +278,15 @@ msgstr "Carattere non valido nel nome della classe \" 1 %1$s \""
 msgid ""
 "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
 "expected."
-msgstr ""
+msgstr "Caratteri non validi nella data \"%1$s\". Previsto formato ISO \"GG-MM-AAAA oo:mm:ss\" "
 
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr ""
+msgstr "Caratteri non validi nella data \"%1$s\". Previsto formato ISO \"GG-MM-AAAA oo:mm:ss\" "
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
-msgstr ""
+msgstr "Caratteri non validi nel nome del dominio \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
@@ -304,22 +306,22 @@ msgstr "Caratteri non validi nel prezzo \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
-msgstr ""
+msgstr "Caratteri non validi nel nome del fornitore \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
-msgstr ""
+msgstr "Caratteri non validi nella data di acquisto \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in type name \"%1$s\""
-msgstr ""
+msgstr "Caratteri non validi nel nome \"%1$s\""
 
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
-msgstr ""
+msgstr "Configurazione non valida per il fornitore di coupon \"%1$s\", necessita di \"%2$s\""
 
 msgid "Invalid delivery type"
-msgstr ""
+msgstr "Tipologia di consegna non valida"
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
@@ -327,76 +329,76 @@ msgstr "Fattore \" 1 %1$s \" non valido"
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
-msgstr ""
+msgstr "Tipo di file \"%1$s\" non valido"
 
 #, php-format
 msgid "Invalid provider name \"%1$s\""
-msgstr ""
+msgstr "Nome del fornitore non valido \"%1$s\""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
-msgstr ""
+msgstr "Cestino in serie non valido. \"%1$s\" restituisce \"%2$s"
 
 #, php-format
 msgid "Invalid time interval format \"%1$s\""
-msgstr ""
+msgstr "Formato intervallo di tempo non valido \"%1$s\""
 
 #, php-format
 msgid "Invalid type \"%1$s\""
-msgstr ""
+msgstr "Tipologia \"%1$s\" non valida"
 
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
-msgstr ""
+msgstr "URL del sito web non valido \"%1$s\""
 
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
-msgstr ""
+msgstr "L'articolo non può essere cancellato. L'ID del sito dell'articolo differisce dall'attuale ID del sito."
 
 #, php-format
 msgid ""
-"Item could not be saved using method save(). Item ID not available."
-msgstr ""
+"Item could not be saved using method saveItem(). Item ID not available."
+msgstr "L'elemento non può essere salvato con il metodo saveItem(). L'ID dell'articolo non è disponibile."
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
-msgstr ""
+msgstr "Elemento di riferimento nel dominio \"%1$s\"non trovato: %2$s"
 
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Articolo con ID \"%1$s\" non trovato"
 
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Articolo con ID \"%2$s\" in \"%1$s\" non trovato"
 
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
-msgstr ""
+msgstr "ordine con ID \"%1$s\" non trovato"
 
 #, php-format
 msgid "List item for removal from domain \"%1$s\" not found"
-msgstr ""
+msgstr "Elemento della lista per la rimozione dal dominio \"%1$s\" non trovato"
 
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Elemento della lista con ID \"%2$s\" in \"%1$s\" non trovato"
 
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Tipologia di lista per l'elemento attributo con ID \"%1$s\" non disponibile"
 
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Tipo di lista per voce di prezzo con ID  \"%1$s\" non disponibile"
 
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Tipo di lista per elemento di testo con ID \"%1$s\" non disponibile"
 
 #, php-format
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
-msgstr ""
+msgstr "Caricamento della risposta XML \"%1$s\" dal provider di consegna fallito"
 
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
@@ -404,7 +406,7 @@ msgstr ""
 
 #, php-format
 msgid "Locale object not available"
-msgstr ""
+msgstr "Localizzazione dell'oggetto non disponibile"
 
 #, php-format
 msgid "Lock flag \"%1$d\" not within allowed range"
@@ -412,7 +414,7 @@ msgstr ""
 
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Voce di registro con l'ID \"%1$s\" non trovata"
 
 #, php-format
 msgid "Log manager object not available"
@@ -420,7 +422,7 @@ msgstr ""
 
 #, php-format
 msgid "Mail object not available"
-msgstr ""
+msgstr "Oggetto mail non disponibile"
 
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
@@ -440,33 +442,33 @@ msgstr ""
 
 #, php-format
 msgid "Method \"%1$s\" for provider not available"
-msgstr ""
+msgstr "Metodo \"%1$s\" non disponibile per il provider"
 
 #, php-format
 msgid "Missing configuration \"%1$s\""
-msgstr ""
+msgstr "Manca la configurazione \"%1$s\""
 
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
-msgstr ""
+msgstr "Il nuovo ID \"%1$s\" per l'articolo differisce dal vecchio ID \"%2$s\""
 
 #, php-format
 msgid ""
-"Newly created site can not be saved using method \"save()\". Try using "
+"Newly created site can not be saved using method \"saveItem()\". Try using "
 "method \"insertItem()\" instead."
-msgstr ""
+msgstr "Il sito appena creato non può essere salvato con il metodo \"saveItem()\". Prova, invece, ad usare \"insertItem()\"."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
-msgstr ""
+msgstr "File XML \"%1$s\" non trovato"
 
 #, php-format
 msgid "No bought voucher for code \"%1$s\" available"
-msgstr ""
+msgstr "Nessun buono acquistato per il codice \"%1$s\" disponibile"
 
 #, php-format
 msgid "No catalog node for ID \"%1$s\""
-msgstr ""
+msgstr "Nessun nodo catalogo per l'ID \"%1$s\""
 
 #, php-format
 msgid "No item found for conditions: %1$s"
@@ -474,119 +476,119 @@ msgstr ""
 
 #, php-format
 msgid "No item with \"%2$s\" in \"%1$s\" found"
-msgstr ""
+msgstr "Nessun elemento trovato con \"%2$s\" in \"%1$s\""
 
 #, php-format
 msgid "No more credit available for voucher \"%1$s\""
-msgstr ""
+msgstr "Non ci sono più crediti disponibili per i voucher \"%1$s\""
 
 #, php-format
 msgid "No order for ID \"%1$s\" found"
-msgstr ""
+msgstr "Nessun ordine trovato con ID  \"%1$s\""
 
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr ""
+msgstr "Nessun prezzo disponibile per l'ID \"%1$s\"  o il codice \"%2$s\" del prodotto"
 
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "Nessun prodotto trovato con il codice \"%1$s\""
 
 #, php-format
 msgid "No rebate for currency \"%1$s\" available"
-msgstr ""
+msgstr "Nessuno sconto disponibile per la valuta \"%1$s\""
 
 #, php-format
 msgid "No search keys available"
-msgstr ""
+msgstr "Nessuna chiave di ricerca disponibile"
 
 #, php-format
 msgid "No stock type for code \"%1$s\" found"
-msgstr ""
+msgstr "Nessuna tipologia di magazzino trovata con il codice \"%1$s\" "
 
 #, php-format
 msgid "No type for code \"%1$s\" found"
-msgstr ""
+msgstr "Nessuna tipologia trovata con il codice \"%1$s\""
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
-msgstr ""
+msgstr "Nessuna merce trovata con il codice \"%1$s\""
 
 #, php-format
 msgid "Not a date"
-msgstr ""
+msgstr "Nessuna data"
 
 #, php-format
 msgid "Not a date and time"
-msgstr ""
+msgstr "Nessuna data e ora"
 
 #, php-format
 msgid "Not a key/value map"
-msgstr ""
+msgstr "Nessuna chiave/mappa di valore"
 
 #, php-format
 msgid "Not a list item"
-msgstr ""
+msgstr "Nessun articolo della lista"
 
 #, php-format
 msgid "Not a listed value"
-msgstr ""
+msgstr "Nessun valore elencato"
 
 #, php-format
 msgid "Not a number"
-msgstr ""
+msgstr "Nessun numero"
 
 #, php-format
 msgid "Not a string"
-msgstr ""
+msgstr "Nessuna stringa"
 
 #, php-format
 msgid "Not a time"
-msgstr ""
+msgstr "Nessun orario"
 
 #, php-format
 msgid "Not a true/false value"
-msgstr ""
+msgstr "Nessun valore vero/falso"
 
 #, php-format
 msgid "Not an integer number"
-msgstr ""
+msgstr "Nessun numero intero"
 
 #, php-format
 msgid "Object is not of required type \"%1$s\""
-msgstr ""
+msgstr "L'oggetto non appartiene al tipo richiesto \"%1$s\""
 
 #, php-format
 msgid "Operation not supported"
-msgstr ""
+msgstr "Operazione non supportata"
 
 #, php-format
 msgid ""
 "Order ID \"%1$s\" in XML response of delivery provider differs from stored "
 "invoice ID \"%2$s\" of the order"
-msgstr ""
+msgstr "L'ID dell'ordine \"%1$s\"  nella risposta XML del provider di consegna si differenzia dall'ID memorizzato %2$sdella fattura "
 
 #, php-format
 msgid "Order address position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "La posizione dell'indirizzo dell'ordine  \"%1$s\" deve essere maggiore di 0"
 
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr ""
+msgstr "Ordine articolo base con ID \"%1$s\" non trovato"
 
 #, php-format
 msgid ""
 "Order data sent to delivery provider was rejected with code \"%1$s\" "
 "according to XML response"
-msgstr ""
+msgstr "I dati dell'ordine inviati al provider di consegna con il codice \"%1$s\" sono stati respinti secondo la risposta XML"
 
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Lo stato di consegna dell'ordine \"%1$s\" non rientra nel range consentito"
 
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Lo stato di pagamento dell'ordine \"%1$s\" non rientra all'interno del range consentito"
 
 #, php-format
 msgid "Order product position \"%1$s\" must be greater than 0"
@@ -598,15 +600,15 @@ msgstr ""
 
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Il tipo di ordine \"%1$s\" non rientra nel range consentito"
 
 #, php-format
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
-msgstr ""
+msgstr "L'ordine con l'ID \"%1$s\" con il codice \"%2$s\": %3$s è stato respinto"
 
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
-msgstr ""
+msgstr "Parametro \"%1$s\" non disponibile per la configurazione"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
@@ -618,11 +620,11 @@ msgstr ""
 
 #, php-format
 msgid "PayPal Express: Invalid request \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: richiesta non valida \"%1$s\""
 
 #, php-format
 msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr ""
+msgstr "PayPal Express: transazione di pagamento con ID dell'ordine \"%1$s\" non disponibile"
 
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
@@ -709,35 +711,35 @@ msgstr ""
 
 #, php-format
 msgid "Provider in \"%1$s\" not available"
-msgstr ""
+msgstr "Fornitore in \"%1$s\" non disponibile "
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
-msgstr ""
+msgstr "La quantità deve essere maggiore di 0 e non deve superare %1$d"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
-msgstr ""
+msgstr "Manca il parametro richiesto \"%1$s\""
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
-msgstr ""
+msgstr "Manca il valore richiesto per \"%1$s\""
 
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
-msgstr ""
+msgstr "Configurazione di ricerca per \"%1$s\" non disponibile"
 
 #, php-format
 msgid "Search configuration not available"
-msgstr ""
+msgstr "Configurazione di ricerca non disponibile"
 
 #, php-format
 msgid "Sending order failed: \"%1$s\""
-msgstr ""
+msgstr "Ordine di invio fallito: \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
-msgstr ""
+msgstr "Invio dell'ordine al fornitore della consegna fallito con lo stato HTTP \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
@@ -745,7 +747,7 @@ msgstr ""
 
 #, php-format
 msgid "Service not available"
-msgstr ""
+msgstr "Servizio non disponibile"
 
 #, php-format
 msgid "Service of type \"%1$s\" not available"
@@ -753,39 +755,39 @@ msgstr ""
 
 #, php-format
 msgid "Session object not available"
-msgstr ""
+msgstr "Oggetto della sessione non disponibile"
 
 #, php-format
 msgid ""
 "Site can not be inserted. Site ID of site differs from site ID of parent "
 "site."
-msgstr ""
+msgstr "Il sito non può essere inserito. L'ID sito del sito differisce dall'ID sito del sito genitore."
 
 #, php-format
 msgid ""
 "Site can not be moved. Site ID of site differs from present site id, site ID"
 " of existing parent site or site id of new parent site."
-msgstr ""
+msgstr "Il sito non può essere spostato. L'ID del sito è diverso dall'ID del sito attuale, dall'ID del sito genitore esistente o dall'ID del nuovo sito genitore."
 
 #, php-format
 msgid "Site for code \"%1$s\" not found"
-msgstr ""
+msgstr "Sito per il codice \"%1$s\" non trovato"
 
 #, php-format
 msgid "Started order status import from \"%1$s\""
-msgstr ""
+msgstr "Importazione dello stato dell'ordine da \"%1$s\"  iniziata"
 
 #, php-format
 msgid "Started order status import from file \"%1$s\""
-msgstr ""
+msgstr "Avvio importazione dell'ordine dal file \"%1$s\""
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"
-msgstr ""
+msgstr "L'algoritmo \"%1$s\" non è supportato"
 
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
-msgstr ""
+msgstr "È stato superato il valore massimo del cestino di%1$s"
 
 #, php-format
 msgid "The maximum product quantity is %1$d"
@@ -797,7 +799,7 @@ msgstr "La quantità massima di %1$d prodotti è stata superata"
 
 #, php-format
 msgid "The maximum product value is %1$s"
-msgstr ""
+msgstr "Il valore massimo del prodotto è %1$s"
 
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
@@ -805,7 +807,7 @@ msgstr "La quantità massima consentita di tutti i prodotti è%1$d"
 
 #, php-format
 msgid "The maximum value of all products is %1$s"
-msgstr ""
+msgstr "Il valore massimo di tutti i prodotti è %1$s"
 
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
@@ -825,11 +827,11 @@ msgstr ""
 
 #, php-format
 msgid "Time value before \"%1$s\""
-msgstr ""
+msgstr "Time value prima di \"%1$s\""
 
 #, php-format
 msgid "Total results value not found"
-msgstr ""
+msgstr "Valore totale dei risultati non trovato"
 
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
@@ -845,11 +847,11 @@ msgstr "Impossibile chiamare il metodo \" 1 %1$s \""
 
 #, php-format
 msgid "Unable to create order XML file \"%1$s\""
-msgstr ""
+msgstr "Impossibile creare un file XML dell'ordine \"%1$s\""
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
-msgstr ""
+msgstr "Impossibile spostare il file importato \"%1$s\" in  \"%2$s\""
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
@@ -867,4 +869,4 @@ msgstr ""
 
 #, php-format
 msgid "View object not available"
-msgstr ""
+msgstr "Visualizzazione dell'oggetto non disponibile"
