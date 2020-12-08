@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-02 15:52+0100\n"
-"PO-Revision-Date: 2020-12-02 14:53+0000\n"
+"PO-Revision-Date: 2020-12-02 20:36+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgid "Creates bought together product suggestions"
 msgstr "Beraber satın alınan ürün önerileri oluşturur"
 
 msgid "Customer group import XML"
-msgstr ""
+msgstr "Müşteri gruplarını XML olarak içe aktarma"
 
 msgid "Customer import XML"
 msgstr "Müşterileri XML olarak içe aktarma"
@@ -128,11 +128,11 @@ msgstr "\"%1$s\" dosyasından katalog içe aktarma tamamlandı"
 
 #, php-format
 msgid "Finished customer group import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dan müşteri grubunu içe aktarma tamamlandı"
 
 #, php-format
 msgid "Finished customer group import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dosyasından müşteri grubunu içe aktarma tamamlandı"
 
 #, php-format
 msgid "Finished customer import from \"%1$s\""
@@ -171,7 +171,7 @@ msgid "Imports new and updates existing coupon code from CSV files"
 msgstr "CSV dosyasından yeni kupon kodu içe aktarır veya mevcut kupon kodlarını günceller"
 
 msgid "Imports new and updates existing customer groups from XML files"
-msgstr ""
+msgstr "XML dosyalarından yeni müşteri gruplarını içe aktarır veya mevcut müşteri gruplarını günceller"
 
 msgid "Imports new and updates existing customers from XML files"
 msgstr "XML dosyalarından yeni müşteriler içe aktarır veya mevcut müşterileri günceller"
@@ -358,11 +358,11 @@ msgstr "\"%1$s\" dan kupon içe aktarma başladı (%2$s)"
 
 #, php-format
 msgid "Started customer group import from \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dan müşteri grubu içe aktarma başladı"
 
 #, php-format
 msgid "Started customer group import from file \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dosyasından müşteri grubu içe aktarma başladı"
 
 #, php-format
 msgid "Started customer import from \"%1$s\""

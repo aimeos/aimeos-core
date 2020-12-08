@@ -7,20 +7,19 @@
 # Translators:
 # Translators:
 # Translators:
-# isabella carlin <isabella@vg7.it>, 2020
-# R M <roberto@proprionoi.it>, 2019
+# Tobias Madsen <tubbe.m@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2020-12-07 10:58+0000\n"
-"Last-Translator: isabella carlin <isabella@vg7.it>\n"
-"Language-Team: Italian (http://www.transifex.com/aimeos/aimeos-core/language/it/)\n"
+"PO-Revision-Date: 2020-12-06 10:45+0000\n"
+"Last-Translator: Tobias Madsen <tubbe.m@gmail.com>\n"
+"Language-Team: Danish (http://www.transifex.com/aimeos/aimeos-core/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
+"Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "aa"
@@ -30,7 +29,7 @@ msgid "ab"
 msgstr "Abkhazian"
 
 msgid "ae"
-msgstr "Avestico"
+msgstr "Avestan"
 
 msgid "af"
 msgstr "Afrikaans"
@@ -39,34 +38,34 @@ msgid "ak"
 msgstr "Akan"
 
 msgid "am"
-msgstr "Amarico"
+msgstr "Amharic"
 
 msgid "an"
 msgstr "Aragonese"
 
 msgid "ar"
-msgstr "Arabo"
+msgstr "Arabisk"
 
 msgid "as"
 msgstr "Assamese"
 
 msgid "av"
-msgstr "Avaro"
+msgstr "Avar"
 
 msgid "ay"
 msgstr "Aymara"
 
 msgid "az"
-msgstr "Azerbaigiano"
+msgstr "Azerbaijani"
 
 msgid "ba"
-msgstr "Baschiro"
+msgstr "Bashkir"
 
 msgid "be"
-msgstr "Bielorusso"
+msgstr "Belarusian"
 
 msgid "bg"
-msgstr "Bulgaro"
+msgstr "Bulgarian"
 
 msgid "bh"
 msgstr "Bihari"
@@ -78,49 +77,49 @@ msgid "bm"
 msgstr "Bambara"
 
 msgid "bn"
-msgstr "Bengalese"
+msgstr "Bengali"
 
 msgid "bo"
-msgstr "Tibetano"
+msgstr "Tibetan"
 
 msgid "br"
-msgstr "Bretone"
+msgstr "Breton"
 
 msgid "bs"
-msgstr "Bosniaco"
+msgstr "Bosnian"
 
 msgid "ca"
-msgstr "Catalano"
+msgstr "Catalan"
 
 msgid "ce"
-msgstr "Ceceno"
+msgstr "Chechen"
 
 msgid "ch"
 msgstr "Chamorro"
 
 msgid "co"
-msgstr "Corsico"
+msgstr "Corsican"
 
 msgid "cr"
 msgstr "Cree"
 
 msgid "cs"
-msgstr "Ceco"
+msgstr "Czech"
 
 msgid "cu"
-msgstr "Lingua slava ecclesiastica"
+msgstr "Church Slavonic"
 
 msgid "cv"
-msgstr "Ciuvascio"
+msgstr "Chuvash"
 
 msgid "cy"
-msgstr "Gallese"
+msgstr "Welsh"
 
 msgid "da"
-msgstr "Danese"
+msgstr "Dansk"
 
 msgid "de"
-msgstr "Tedesco"
+msgstr "Tysk"
 
 msgid "dv"
 msgstr "Dhivehi"
@@ -132,52 +131,52 @@ msgid "ee"
 msgstr "Ewe"
 
 msgid "el"
-msgstr "Greco"
+msgstr "Greek"
 
 msgid "en"
-msgstr "Inglese"
+msgstr "Engelsk"
 
 msgid "eo"
 msgstr "Esperanto"
 
 msgid "es"
-msgstr "Spagnolo"
+msgstr "Spanish"
 
 msgid "et"
-msgstr "Estone"
+msgstr "Estonian"
 
 msgid "eu"
-msgstr "Basco"
+msgstr "Basque"
 
 msgid "fa"
-msgstr "Persiano"
+msgstr "Persian"
 
 msgid "ff"
-msgstr "Fulano"
+msgstr "Fula"
 
 msgid "fi"
-msgstr "Finlandese"
+msgstr "Finnish"
 
 msgid "fj"
-msgstr "Figiano"
+msgstr "Fijian"
 
 msgid "fo"
-msgstr "Faroese"
+msgstr "Faeroese"
 
 msgid "fr"
-msgstr "Francese"
+msgstr "French"
 
 msgid "fy"
-msgstr "Frisone"
+msgstr "Frisian"
 
 msgid "ga"
-msgstr "Irlandese"
+msgstr "Irish"
 
 msgid "gd"
-msgstr "Gaelico scozzese"
+msgstr "Scottish Gaelic"
 
 msgid "gl"
-msgstr "Galiziano"
+msgstr "Galician"
 
 msgid "gn"
 msgstr "Guaraní"
@@ -186,13 +185,13 @@ msgid "gu"
 msgstr "Gujarati"
 
 msgid "gv"
-msgstr "Mannese"
+msgstr "Manx"
 
 msgid "ha"
 msgstr "Hausa"
 
 msgid "he"
-msgstr "Ebraico"
+msgstr "Hebrew"
 
 msgid "hi"
 msgstr "Hindi"
@@ -201,16 +200,16 @@ msgid "ho"
 msgstr "Hiri motu"
 
 msgid "hr"
-msgstr "Croato"
+msgstr "Croatian"
 
 msgid "ht"
-msgstr "Haitiano creolo"
+msgstr "Haïtian Creole"
 
 msgid "hu"
-msgstr "Ungherese"
+msgstr "Hungarian"
 
 msgid "hy"
-msgstr "Armeno"
+msgstr "Armenian"
 
 msgid "hz"
 msgstr "Herero"
@@ -219,10 +218,10 @@ msgid "ia"
 msgstr "Interlingua"
 
 msgid "id"
-msgstr "Indonesiano"
+msgstr "Indonesian"
 
 msgid "ie"
-msgstr "Herero"
+msgstr "Interlingue"
 
 msgid "ig"
 msgstr "Igbo"
@@ -237,37 +236,37 @@ msgid "io"
 msgstr "Ido"
 
 msgid "is"
-msgstr "Islandese"
+msgstr "Icelandic"
 
 msgid "it"
-msgstr "Italiano"
+msgstr "Italian"
 
 msgid "iu"
 msgstr "Inuktitut"
 
 msgid "ja"
-msgstr "Giapponese"
+msgstr "Japanese"
 
 msgid "jv"
-msgstr "Giavanese"
+msgstr "Javanese"
 
 msgid "ka"
-msgstr "Georgiano"
+msgstr "Georgian"
 
 msgid "kg"
-msgstr "Congolese"
+msgstr "Kongo"
 
 msgid "ki"
-msgstr "Gikuyu"
+msgstr "Kikuyu"
 
 msgid "kj"
 msgstr "Kuanyama"
 
 msgid "kk"
-msgstr "Kazako"
+msgstr "Kazakh"
 
 msgid "kl"
-msgstr "Groenlandese"
+msgstr "Greenlandic"
 
 msgid "km"
 msgstr "Khmer"
@@ -276,7 +275,7 @@ msgid "kn"
 msgstr "Kannada"
 
 msgid "ko"
-msgstr "Coreano"
+msgstr "Korean"
 
 msgid "kr"
 msgstr "Kanuri"
@@ -285,46 +284,46 @@ msgid "ks"
 msgstr "Kashmiri"
 
 msgid "ku"
-msgstr "Curdo"
+msgstr "Kurdish"
 
 msgid "kv"
 msgstr "Komi"
 
 msgid "kw"
-msgstr "Cornico"
+msgstr "Cornish"
 
 msgid "ky"
-msgstr "Chirghiso"
+msgstr "Kirghiz"
 
 msgid "la"
-msgstr "Latino"
+msgstr "Latin"
 
 msgid "lb"
-msgstr "Lussemburghese"
+msgstr "Luxembourgish"
 
 msgid "lg"
 msgstr "Luganda"
 
 msgid "li"
-msgstr "Limburghese"
+msgstr "Limburgish"
 
 msgid "ln"
-msgstr "Limgala"
+msgstr "Lingala"
 
 msgid "lo"
 msgstr "Lao"
 
 msgid "lt"
-msgstr "Lituano"
+msgstr "Lithuanian"
 
 msgid "lu"
-msgstr "Kiluba"
+msgstr "Luba-Katanga"
 
 msgid "lv"
-msgstr "Lettone"
+msgstr "Latvian"
 
 msgid "mg"
-msgstr "Malgascio"
+msgstr "Malagasy"
 
 msgid "mh"
 msgstr "Marshallese"
@@ -333,76 +332,76 @@ msgid "mi"
 msgstr "Māori"
 
 msgid "mk"
-msgstr "Macedone"
+msgstr "Macedonian"
 
 msgid "ml"
 msgstr "Malayalam"
 
 msgid "mn"
-msgstr "Mongolo"
+msgstr "Mongolian"
 
 msgid "mo"
-msgstr "Moldavo"
+msgstr "Moldavian"
 
 msgid "mr"
 msgstr "Marathi"
 
 msgid "ms"
-msgstr "Malese"
+msgstr "Malay"
 
 msgid "mt"
 msgstr "Maltese"
 
 msgid "my"
-msgstr "Birmano"
+msgstr "Burmese"
 
 msgid "na"
 msgstr "Nauru"
 
 msgid "nb"
-msgstr "Norvegese Bokmål"
+msgstr "Norsk Bokmål"
 
 msgid "nd"
-msgstr "Ndebele del nord"
+msgstr "North Ndebele"
 
 msgid "ne"
-msgstr "Nepalese"
+msgstr "Nepali"
 
 msgid "ng"
 msgstr "Ndonga"
 
 msgid "nl"
-msgstr "Olandese"
+msgstr "Dutch"
 
 msgid "nn"
-msgstr "Norvegese Nynorsk"
+msgstr "Nynorsk"
 
 msgid "no"
-msgstr "Norvegese"
+msgstr "Norsk"
 
 msgid "nr"
-msgstr "Ndebele del Sud"
+msgstr "South Ndebele"
 
 msgid "nv"
 msgstr "Navajo"
 
 msgid "ny"
-msgstr "Chewa"
+msgstr "Chichewa"
 
 msgid "oc"
-msgstr "Occitano"
+msgstr "Occitan"
 
 msgid "oj"
 msgstr "Ojibwa"
 
 msgid "om"
-msgstr "Oromonico"
+msgstr "Oromo"
 
 msgid "or"
 msgstr "Oriya"
 
 msgid "os"
-msgstr "Osseto"
+msgstr "Ossetic"
 
 msgid "pa"
 msgstr "Punjabi"
@@ -411,82 +410,82 @@ msgid "pi"
 msgstr "Pali"
 
 msgid "pl"
-msgstr "Polacco"
+msgstr "Polish"
 
 msgid "ps"
-msgstr "Pashtu"
+msgstr "Pashto"
 
 msgid "pt"
-msgstr "Portoghese"
+msgstr "Portuguese"
 
 msgid "qu"
 msgstr "Quechua"
 
 msgid "rm"
-msgstr "Retoromanzo"
+msgstr "Rhaeto-Romance"
 
 msgid "rn"
 msgstr "Kirundi"
 
 msgid "ro"
-msgstr "Rumeno"
+msgstr "Romanian"
 
 msgid "ru"
-msgstr "Russo"
+msgstr "Russian"
 
 msgid "rw"
 msgstr "Kinyarwanda"
 
 msgid "sa"
-msgstr "Sanscrito"
+msgstr "Sanskrit"
 
 msgid "sc"
-msgstr "Sardo"
+msgstr "Sardinian"
 
 msgid "sd"
 msgstr "Sindhi"
 
 msgid "se"
-msgstr "Sami Settentrionale "
+msgstr "Northern Sami"
 
 msgid "sg"
 msgstr "Sango"
 
 msgid "si"
-msgstr "Singalese"
+msgstr "Sinhala"
 
 msgid "sk"
-msgstr "Slovacco"
+msgstr "Slovak"
 
 msgid "sl"
-msgstr "Sloveno"
+msgstr "Slovenian"
 
 msgid "sm"
-msgstr "Samoano"
+msgstr "Samoan"
 
 msgid "sn"
 msgstr "Shona"
 
 msgid "so"
-msgstr "Somalo"
+msgstr "Somali"
 
 msgid "sq"
-msgstr "Albanese"
+msgstr "Albanian"
 
 msgid "sr"
-msgstr "Serbo"
+msgstr "Serbian"
 
 msgid "ss"
 msgstr "Swati"
 
 msgid "st"
-msgstr "Sotho"
+msgstr "Sesotho"
 
 msgid "su"
 msgstr "Sundanese"
 
 msgid "sv"
-msgstr "Svedese"
+msgstr "Svensk"
 
 msgid "sw"
 msgstr "Swahili"
@@ -498,16 +497,16 @@ msgid "te"
 msgstr "Telugu"
 
 msgid "tg"
-msgstr "Tagico"
+msgstr "Tajik"
 
 msgid "th"
 msgstr "Thai"
 
 msgid "ti"
-msgstr "Tigrino"
+msgstr "Tigrinya"
 
 msgid "tk"
-msgstr "Turkmeno"
+msgstr "Turkmen"
 
 msgid "tl"
 msgstr "Tagalog"
@@ -516,46 +515,46 @@ msgid "tn"
 msgstr "Setswana"
 
 msgid "to"
-msgstr "Tongano"
+msgstr "Tongan"
 
 msgid "tr"
-msgstr "Turco"
+msgstr "Turkish"
 
 msgid "ts"
 msgstr "Tsonga"
 
 msgid "tt"
-msgstr "Tataro"
+msgstr "Tatar"
 
 msgid "tw"
 msgstr "Twi"
 
 msgid "ty"
-msgstr "Tahitiano"
+msgstr "Tahitian"
 
 msgid "ug"
-msgstr "Uigura"
+msgstr "Uyghur"
 
 msgid "uk"
-msgstr "Ucraino"
+msgstr "Ukrainian"
 
 msgid "ur"
 msgstr "Urdu"
 
 msgid "uz"
-msgstr "Uzbeco"
+msgstr "Uzbek"
 
 msgid "ve"
 msgstr "Venda"
 
 msgid "vi"
-msgstr "Vietnamita"
+msgstr "Vietnamese"
 
 msgid "vo"
 msgstr "Volapük"
 
 msgid "wa"
-msgstr "Vallone"
+msgstr "Walloon"
 
 msgid "wo"
 msgstr "Wolof"
@@ -573,7 +572,7 @@ msgid "za"
 msgstr "Zhuang"
 
 msgid "zh"
-msgstr "cinese"
+msgstr "Chinese"
 
 msgid "zu"
 msgstr "Zulu"
