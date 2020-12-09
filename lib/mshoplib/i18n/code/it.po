@@ -8,14 +8,15 @@
 # Translators:
 # Translators:
 # alessandro massarelli <alessandro@botteega.com>, 2017
+# isabella carlin <isabella@vg7.it>, 2020
 # R M <roberto@proprionoi.it>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2019-12-12 13:52+0000\n"
-"Last-Translator: R M <roberto@proprionoi.it>\n"
+"PO-Revision-Date: 2020-12-09 11:18+0000\n"
+"Last-Translator: isabella carlin <isabella@vg7.it>\n"
 "Language-Team: Italian (http://www.transifex.com/aimeos/aimeos-core/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -181,15 +182,15 @@ msgstr "Una delle opzioni di delivery non è consentita"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr "Ci spiace, ma almeno uno dei prodotti non è più in vendita.\nRimuovilo dal carrello e prosegui con l'acquisto."
+msgstr "Ci dispiace, ma almeno uno dei prodotti non è più in vendita. Rimuovilo dal carrello e prosegui con l'acquisto."
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr "Ci spiace, almeno uno dei prodotti non è più disponibile. Rimuovilo dal carrello e prosegui con l'acquisto."
+msgstr "Ci dispiace, almeno uno dei prodotti non è più disponibile. Rimuovilo dal carrello e prosegui con l'acquisto."
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr "Ci spiace, almeno uno dei prodotti non è più disponibile. Rimuovilo dal carrello e prosegui con l'acquisto."
+msgstr "Ci dispiace, almeno uno dei prodotti non è più disponibile. Rimuovilo dal carrello e prosegui con l'acquisto."
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
@@ -197,4 +198,4 @@ msgstr "Il prezzo di almeno uno dei prodotti è cambiato dalla tua ultima visita
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr "Ci spiace, almeno uno dei prodotti non è più disponibile. Rimuovilo dal carrello e prosegui con l'acquisto."
+msgstr "Ci dispiace, almeno uno dei prodotti non è più disponibile. Rimuovilo dal carrello e prosegui con l'acquisto."
