@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-02 15:52+0100\n"
-"PO-Revision-Date: 2020-11-19 20:23+0000\n"
+"PO-Revision-Date: 2020-12-09 14:44+0000\n"
 "Last-Translator: Goran Sabo <by.typo3@gmail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/aimeos/aimeos-core/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -20,40 +20,40 @@ msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Class \"%1$s\" does not implement interface \"%2$s\""
 
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Class \"%1$s\" not available"
 
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "Class \"%1$s\" not found"
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr "Prenos datoteke \"%1$s\" ni uspel"
+msgstr "Downloading file \"%1$s\" failed"
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr "Datoteka \"%1$s\" ne obstaja"
+msgstr "File \"%1$s\" not found"
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "Invalid characters in class name \"%1$s\""
 
 #, php-format
 msgid "No allowed image types configured for \"%1$s\""
-msgstr ""
+msgstr "No allowed image types configured for \"%1$s\""
 
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr ""
+msgstr "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 
 #, php-format
 msgid "Unable to create directory \"%1$s\""
-msgstr ""
+msgstr "Unable to create directory \"%1$s\""
 
 #, php-format
 msgid "Unable to create file in \"%1$s\""
-msgstr ""
+msgstr "Unable to create file in \"%1$s\""

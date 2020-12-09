@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# nzed <nemesreviz@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-02 15:52+0100\n"
-"PO-Revision-Date: 2017-09-23 02:49+0000\n"
-"Last-Translator: Aimeos\n"
+"PO-Revision-Date: 2020-12-09 11:15+0000\n"
+"Last-Translator: nzed <nemesreviz@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +20,7 @@ msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "A(z) \"%1$s\" osztály nem valósítja meg a(z) \"%2$s\" felület osztályt"
 
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -31,11 +32,11 @@ msgstr "A/Az \"%1$s\" osztály nem található."
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "\"%1$s\" állomány letöltése nem sikerült"
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "\"%1$s\" állomány nem található"
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
@@ -43,11 +44,11 @@ msgstr "Érvénytelen karakter a/az \"%1$s\" osztály nevében"
 
 #, php-format
 msgid "No allowed image types configured for \"%1$s\""
-msgstr ""
+msgstr "Nincs beállítva képformátum ehhez: \"%1$s\""
 
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr ""
+msgstr "\"%1$s/%2$s\" számára a \"%3$s\"-ban/ben nincs fajtatétel"
 
 #, php-format
 msgid "Unable to create directory \"%1$s\""

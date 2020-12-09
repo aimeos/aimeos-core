@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2020-11-19 20:46+0000\n"
+"PO-Revision-Date: 2020-12-09 14:41+0000\n"
 "Last-Translator: Goran Sabo <by.typo3@gmail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/aimeos/aimeos-core/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -44,19 +44,19 @@ msgstr "Podjetje"
 
 #. Address salutation
 msgid "mr"
-msgstr ""
+msgstr "Mr"
 
 #. Address salutation
 msgid "mrs"
-msgstr ""
+msgstr "Mrs"
 
 #. Address salutation
 msgid "miss"
-msgstr ""
+msgstr "Miss"
 
 #. Order type value
 msgid "order:repeat"
-msgstr ""
+msgstr "repeated"
 
 #. Order type value
 msgid "order:web"
@@ -128,7 +128,7 @@ msgstr "v postopku"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr ""
+msgstr "dispatched"
 
 #. Delivery status value
 msgid "stat:4"
@@ -164,19 +164,19 @@ msgstr "Naslov za dostavo ni dovoljen"
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr ""
+msgstr "The payment option is missing"
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr ""
+msgstr "The delivery option is missing"
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr ""
+msgstr "A payment option is not allowed"
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr ""
+msgstr "A delivery option is not allowed"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
