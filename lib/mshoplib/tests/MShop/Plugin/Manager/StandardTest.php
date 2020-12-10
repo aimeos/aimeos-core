@@ -208,7 +208,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		//search without base criteria
 		$search = $this->object->filter();
-		$search->setConditions( $search->combine( '||', $conditions ) );
+		$search->setConditions( $search->or( $conditions ) );
 		$this->assertEquals( 3, count( $this->object->search( $search )->toArray() ) );
 	}
 

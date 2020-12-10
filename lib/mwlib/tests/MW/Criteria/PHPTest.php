@@ -29,7 +29,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 	public function testCombine()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\PHP::class, $this->object->combine( '||', [] ) );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\PHP::class, $this->object->combine( '&&', [] ) );
 	}
 
 

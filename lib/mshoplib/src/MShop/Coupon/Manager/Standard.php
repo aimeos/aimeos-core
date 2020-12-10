@@ -674,12 +674,12 @@ class Standard
 			$temp = [];
 			$temp[] = $object->compare( '==', 'coupon.datestart', null );
 			$temp[] = $object->compare( '<=', 'coupon.datestart', $this->date );
-			$expr[] = $object->combine( '||', $temp );
+			$expr[] = $object->or( $temp );
 
 			$temp = [];
 			$temp[] = $object->compare( '==', 'coupon.dateend', null );
 			$temp[] = $object->compare( '>=', 'coupon.dateend', $this->date );
-			$expr[] = $object->combine( '||', $temp );
+			$expr[] = $object->or( $temp );
 
 			$object->setConditions( $object->and( $expr ) );
 

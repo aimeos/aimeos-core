@@ -198,7 +198,7 @@ class Category
 			$expr[] = $search->compare( '!=', $func, null );
 		}
 
-		$search->setConditions( $search->combine( '||', $expr ) );
+		$search->setConditions( $search->or( $expr ) );
 		return $manager->search( $search )->keys()->toArray();
 	}
 

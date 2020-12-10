@@ -735,13 +735,13 @@ class Standard
 				$object->compare( '==', 'service.datestart', null ),
 				$object->compare( '<=', 'service.datestart', $this->date ),
 			);
-			$expr[] = $object->combine( '||', $temp );
+			$expr[] = $object->or( $temp );
 
 			$temp = array(
 				$object->compare( '==', 'service.dateend', null ),
 				$object->compare( '>=', 'service.dateend', $this->date ),
 			);
-			$expr[] = $object->combine( '||', $temp );
+			$expr[] = $object->or( $temp );
 
 			$object->setConditions( $object->and( $expr ) );
 

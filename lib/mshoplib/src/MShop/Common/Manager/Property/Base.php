@@ -84,7 +84,7 @@ abstract class Base
 				$object->compare( '==', $this->prefix . 'languageid', $langid ),
 			);
 
-			$object->setConditions( $object->combine( '||', $expr ) );
+			$object->setConditions( $object->or( $expr ) );
 		}
 
 		return $object;

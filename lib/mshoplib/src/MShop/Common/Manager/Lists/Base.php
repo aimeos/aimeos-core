@@ -278,12 +278,12 @@ abstract class Base
 			$exprTwo = [];
 			$exprTwo[] = $object->compare( '<=', $prefix . '.datestart', $this->date );
 			$exprTwo[] = $object->compare( '==', $prefix . '.datestart', null );
-			$expr[] = $object->combine( '||', $exprTwo );
+			$expr[] = $object->or( $exprTwo );
 
 			$exprTwo = [];
 			$exprTwo[] = $object->compare( '>=', $prefix . '.dateend', $this->date );
 			$exprTwo[] = $object->compare( '==', $prefix . '.dateend', null );
-			$expr[] = $object->combine( '||', $exprTwo );
+			$expr[] = $object->or( $exprTwo );
 
 			$object->setConditions( $object->and( $expr ) );
 

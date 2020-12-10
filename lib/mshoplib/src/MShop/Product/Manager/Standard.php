@@ -290,7 +290,7 @@ class Standard
 				$object->compare( '==', 'product.datestart', null ),
 				$object->compare( '<=', 'product.datestart', $this->date ),
 			);
-			$expr[] = $object->combine( '||', $temp );
+			$expr[] = $object->or( $temp );
 
 			$temp = array(
 				$object->compare( '==', 'product.dateend', null ),
@@ -317,7 +317,7 @@ class Standard
 				$temp[] = $object->compare( '==', 'product.type', 'event' );
 			}
 
-			$expr[] = $object->combine( '||', $temp );
+			$expr[] = $object->or( $temp );
 
 			$object->setConditions( $object->and( $expr ) );
 

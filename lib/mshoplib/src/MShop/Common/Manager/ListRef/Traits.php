@@ -185,7 +185,7 @@ trait Traits
 				}
 			}
 
-			$expr[] = $search->combine( '||', $list );
+			$expr[] = $search->or( $list );
 			$search->setConditions( $search->and( $expr ) );
 		}
 		else

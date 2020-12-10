@@ -694,7 +694,7 @@ class Standard
 
 				$expr = array(
 					$object->getConditions(),
-					$object->combine( '||', $temp ),
+					$object->or( $temp ),
 				);
 
 				$object->setConditions( $object->and( $expr ) );

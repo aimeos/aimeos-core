@@ -875,15 +875,15 @@ class Standard
 			$object = $this->filterBase( 'coupon' );
 
 			$expr = [
-				$object->combine( '||', [
+				$object->or( [
 					$object->compare( '==', 'coupon.code.count', null ),
 					$object->compare( '>', 'coupon.code.count', 0 ),
 				] ),
-				$object->combine( '||', [
+				$object->or( [
 					$object->compare( '==', 'coupon.code.datestart', null ),
 					$object->compare( '<=', 'coupon.code.datestart', $this->date ),
 				] ),
-				$object->combine( '||', [
+				$object->or( [
 					$object->compare( '==', 'coupon.code.dateend', null ),
 					$object->compare( '>=', 'coupon.code.dateend', $this->date ),
 				] ),

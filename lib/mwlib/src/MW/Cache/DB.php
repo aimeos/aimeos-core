@@ -246,7 +246,7 @@ class DB
 			);
 			$expr = array(
 				$search->compare( '==', 'cache.id', $keys ),
-				$search->combine( '||', $expires ),
+				$search->or( $expires ),
 			);
 			$search->setConditions( $search->and( $expr ) );
 
@@ -302,7 +302,7 @@ class DB
 			);
 			$expr = array(
 				$search->compare( '==', 'cache.id', $key ),
-				$search->combine( '||', $expires ),
+				$search->or( $expires ),
 			);
 			$search->setConditions( $search->and( $expr ) );
 
