@@ -192,7 +192,7 @@ class PropertyAdd
 			$search->compare( '==', 'product.id', array_unique( $productIds ) ),
 			$search->getConditions(),
 		];
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		return $manager->search( $search, ['product/property'] );
 	}

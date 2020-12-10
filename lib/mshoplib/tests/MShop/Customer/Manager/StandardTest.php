@@ -107,7 +107,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.code', 'test@example.com' ),
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$expected = $this->object->search( $search, $domains )->first();
 
 		$actual = $this->object->get( $expected->getId(), $domains );
@@ -329,7 +329,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search )->toArray();
 		$this->assertEquals( 1, count( $result ) );
 	}
@@ -360,7 +360,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.address.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$this->assertEquals( 2, count( $this->object->search( $search )->toArray() ) );
 	}
 

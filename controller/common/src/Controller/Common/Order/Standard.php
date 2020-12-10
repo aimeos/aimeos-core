@@ -168,7 +168,7 @@ class Standard
 			$search->compare( '==', 'product.type', 'bundle' ),
 			$search->compare( '!=', $func, null ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->slice( 0, 0x7fffffff );
 
 		$bundleItems = $productManager->search( $search, array( 'product' ) );
@@ -213,7 +213,7 @@ class Standard
 			$search->compare( '==', 'order.status.type', $type ),
 			$search->compare( '==', 'order.status.value', $status ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->setSortations( array( $search->sort( '-', 'order.status.ctime' ) ) );
 		$search->slice( 0, 1 );
 
@@ -237,7 +237,7 @@ class Standard
 			$search->compare( '==', 'stock.productid', $prodIds ),
 			$search->compare( '==', 'stock.type', $stockType ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->slice( 0, count( $prodIds ) );
 
 		return $stockManager->search( $search );

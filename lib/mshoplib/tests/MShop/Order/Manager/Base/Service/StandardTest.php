@@ -148,7 +148,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'order.base.service.attribute.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
@@ -172,7 +172,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search = $this->object->filter()->slice( 0, 1 );
 
-		$search->setConditions( $search->combine( '&&', [
+		$search->setConditions( $search->and( [
 			$search->compare( '==', 'order.base.service.code', array( 'OGONE', 'not exists' ) ),
 			$search->compare( '==', 'order.base.service.editor', $this->editor )
 		] ) );
@@ -226,7 +226,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.service.code', 'OGONE' ),
 			$search->compare( '==', 'order.base.service.editor', $this->editor ),
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( !( $item = reset( $results ) ) ) {
@@ -246,7 +246,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.service.editor', $this->editor ),
 			$search->compare( '==', 'order.base.service.attribute.code', 'NAME' ),
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$orderItems = $this->object->search( $search )->toArray();
 
 		if( !( $item = reset( $orderItems ) ) ) {

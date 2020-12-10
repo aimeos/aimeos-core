@@ -220,7 +220,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'coupon.code.editor', '' );
 
 		$total = 0;
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
@@ -238,7 +238,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions(),
 			$search->compare( '==', 'coupon.code.editor', 'core:lib/mshoplib' ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );

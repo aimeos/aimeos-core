@@ -715,7 +715,7 @@ class Standard
 			$search->getConditions(),
 		);
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		return $search;
 	}

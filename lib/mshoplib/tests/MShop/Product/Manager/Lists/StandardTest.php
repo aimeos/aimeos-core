@@ -53,7 +53,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions(),
 			$search->compare( '==', 'product.lists.editor', 'core:lib/mshoplib' ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$result = $this->object->aggregate( $search, 'product.lists.domain' )->toArray();
 
@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.lists.domain', 'text' ),
 			$search->compare( '==', 'product.lists.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -107,7 +107,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.lists.siteid', $siteid ),
 			$search->compare( '==', 'product.lists.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$items = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -176,7 +176,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.lists.position', 1 ),
 			$search->compare( '==', 'product.lists.editor', $this->editor ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$result = $this->object->search( $search )->toArray();
 		if( ( $listItem = reset( $result ) ) === false ) {
@@ -203,7 +203,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'product.lists.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.lists.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 	}
@@ -220,7 +220,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.lists.editor', $this->editor ),
 			$search->getConditions(),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->slice( 0, 4 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 4, count( $results ) );

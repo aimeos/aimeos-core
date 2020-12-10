@@ -131,7 +131,7 @@ class Category
 			$search->compare( '==', 'catalog.code', $catalogCodes ),
 			$search->getConditions(),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		return $catalogManager->search( $search )->keys()->toArray();
 	}

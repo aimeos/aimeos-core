@@ -135,7 +135,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'price.lists.type.status', 1 );
 		$expr[] = $search->compare( '==', 'price.lists.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$results = $this->object->search( $search );
 		$this->assertEquals( 1, count( $results ) );

@@ -144,7 +144,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.statuspayment', $status ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
@@ -163,7 +163,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_PHONE ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order item found' ) );
 
 		$item->setId( null );
@@ -224,7 +224,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_PHONE ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -273,7 +273,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_PHONE ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -471,7 +471,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
@@ -487,7 +487,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$items = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $items ) );
@@ -507,7 +507,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$item = $this->object->search( $search, ['order/base', 'order/base/product'], $total )->first();
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $item->getBaseItem() );

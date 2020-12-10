@@ -468,7 +468,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$search->compare( '==', $refdomain . '.domain', $domain ),
 			$search->compare( '=~', $refdomain . '.label', 'Demo' ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$ids = $manager->search( $search )->keys()->toArray();
 		$manager->delete( $ids );
@@ -480,7 +480,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$search->compare( '==', $key . '.domain', $refdomain ),
 			$search->compare( '==', $key . '.refid', $ids ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$listManager->delete( $listManager->search( $search )->toArray() );
 	}
@@ -508,7 +508,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$search->compare( '==', $key . '.parentid', $parentid ),
 			$search->compare( '==', $key . '.domain', $refdomain ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		do
 		{
@@ -550,7 +550,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$search->compare( '==', $key . '.refid', $ids ),
 			$search->compare( '==', $key . '.domain', $refdomain ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$listManager->delete( $listManager->search( $search )->toArray() );
 	}

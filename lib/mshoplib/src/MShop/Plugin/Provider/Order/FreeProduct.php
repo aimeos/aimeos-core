@@ -121,7 +121,7 @@ class FreeProduct
 			$search->compare( '==', 'order.base.product.prodcode', $code ),
 			$search->compare( '>=', 'order.statuspayment', $status ),
 		];
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$result = $manager->aggregate( $search, 'order.base.address.email', 'order.base.product.quantity', 'sum' );
 

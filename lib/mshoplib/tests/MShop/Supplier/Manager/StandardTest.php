@@ -81,7 +81,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '~=', 'supplier.label', 'unitSupplier' ),
 			$search->compare( '==', 'supplier.editor', $this->editor ),
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$items = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -99,7 +99,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'supplier.label', 'unitSupplier001' ),
 			$search->compare( '==', 'supplier.editor', $this->editor ),
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$items = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -208,7 +208,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'supplier.address.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'supplier.address.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search )->toArray();
 		$this->assertEquals( 1, count( $result ) );
 	}
@@ -235,7 +235,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'supplier.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		$this->assertEquals( 2, count( $results ) );

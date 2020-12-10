@@ -39,7 +39,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions(),
 			$search->compare( '==', 'attribute.lists.editor', 'core:lib/mshoplib' ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$result = $this->object->aggregate( $search, 'attribute.lists.domain' )->toArray();
 
@@ -170,7 +170,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'attribute.lists.editor', $this->editor );
 
 		$total = 0;
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'attribute.lists.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		$this->assertEquals( 27, count( $results ) );
@@ -205,7 +205,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'attribute.lists.domain', 'text' ),
 			$search->compare( '==', 'attribute.lists.editor', $this->editor ),
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$items = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $items ) );

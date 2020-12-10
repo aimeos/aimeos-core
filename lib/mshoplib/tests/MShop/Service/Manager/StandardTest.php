@@ -61,7 +61,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'service.code', 'unitcode' ),
 			$search->compare( '==', 'service.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 
 		$results = $this->object->search( $search )->toArray();
 
@@ -144,7 +144,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'service.code', 'unitcode' ),
 			$search->compare( '==', 'service.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$result = $this->object->search( $search, array( 'text' ) )->toArray();
 
 		if( ( $item = reset( $result ) ) === false ) {
@@ -192,7 +192,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = ['text'];
 		$expr[] = $search->compare( '!=', $search->make( 'service:has', $param ), null );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -211,7 +211,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'service.editor', $this->editor ),
 			$search->getConditions(),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$this->assertEquals( 0, count( $this->object->search( $search )->toArray() ) );
 	}
 
@@ -223,7 +223,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'service.type', 'delivery' ),
 			$search->compare( '==', 'service.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 1 );
 		$result = $this->object->search( $search )->toArray();
 

@@ -99,7 +99,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 			$serviceSearch->compare( '==', 'order.base.service.type', 'delivery' ),
 			$serviceSearch->compare( '==', 'order.base.service.costs', '5.00' )
 		);
-		$serviceSearch->setConditions( $serviceSearch->combine( '&&', $exp ) );
+		$serviceSearch->setConditions( $serviceSearch->and( $exp ) );
 		$delivery = $orderBaseServiceManager->search( $serviceSearch )->first();
 
 		$order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners

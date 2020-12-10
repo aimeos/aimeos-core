@@ -406,7 +406,7 @@ abstract class Base implements Iface
 			$search->compare( '==', 'order.id', $id ),
 			$search->compare( '==', 'order.base.service.code', $this->serviceItem->getCode() ),
 		];
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		if( ( $item = $manager->search( $search )->first() ) === null ) {
 			throw new \Aimeos\MShop\Service\Exception( sprintf( 'No order for ID "%1$s" found', $id ) );

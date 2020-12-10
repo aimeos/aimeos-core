@@ -889,7 +889,7 @@ class Standard
 				] ),
 			];
 
-			$object->setConditions( $object->combine( '&&', $expr ) );
+			$object->setConditions( $object->and( $expr ) );
 
 			return $object;
 		}

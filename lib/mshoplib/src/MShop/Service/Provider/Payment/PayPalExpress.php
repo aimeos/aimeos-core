@@ -576,7 +576,7 @@ class PayPalExpress
 			$search->compare( '==', 'order.base.service.attribute.value', $params['payment_status'] ),
 		);
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		if( !$attrManager->search( $search )->isEmpty() )
 		{

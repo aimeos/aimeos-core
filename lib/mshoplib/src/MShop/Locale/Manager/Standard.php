@@ -217,7 +217,7 @@ class Standard
 			$this->getSiteCondition( $search, 'locale.siteid', $level ),
 			$search->getConditions(),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		foreach( $this->searchEntries( $search, $ref, $total ) as $row )
 		{
@@ -594,7 +594,7 @@ class Standard
 			$expr[] = $search->compare( '>', 'locale.site.status', 0 );
 		}
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'locale.position' ) ) );
 		$result = $this->searchEntries( $search );
 
@@ -648,7 +648,7 @@ class Standard
 			$expr[] = $search->compare( '>', 'locale.site.status', 0 );
 		}
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'locale.position' ) ) );
 		$result = $this->searchEntries( $search );
 

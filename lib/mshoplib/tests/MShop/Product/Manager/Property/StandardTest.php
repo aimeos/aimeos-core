@@ -105,7 +105,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '~=', 'product.property.value', '25.0' ),
 			$search->compare( '==', 'product.property.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
@@ -147,7 +147,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.property.value', '25.00' );
 		$expr[] = $search->compare( '==', 'product.property.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 	}

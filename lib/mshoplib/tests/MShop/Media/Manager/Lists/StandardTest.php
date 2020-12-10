@@ -53,7 +53,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions(),
 			$search->compare( '==', 'media.lists.editor', 'core:lib/mshoplib' ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$result = $this->object->aggregate( $search, 'media.lists.domain' )->toArray();
 
@@ -165,7 +165,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'media.lists.editor', $this->editor );
 
 		$total = 0;
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 4, $total );
@@ -180,7 +180,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'media.lists.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 5 );
 
 		$total = 0;

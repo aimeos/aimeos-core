@@ -697,7 +697,7 @@ class Standard
 					$object->combine( '||', $temp ),
 				);
 
-				$object->setConditions( $object->combine( '&&', $expr ) );
+				$object->setConditions( $object->and( $expr ) );
 			}
 
 			return $object;

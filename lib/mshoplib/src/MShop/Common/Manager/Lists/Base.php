@@ -195,7 +195,7 @@ abstract class Base
 			$criteria->compare( '==', $conf['code'], $id ),
 			$criteria->getConditions()
 		];
-		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
+		$criteria->setConditions( $criteria->and( $expr ) );
 
 		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
 			return $item;
@@ -285,7 +285,7 @@ abstract class Base
 			$exprTwo[] = $object->compare( '==', $prefix . '.dateend', null );
 			$expr[] = $object->combine( '||', $exprTwo );
 
-			$object->setConditions( $object->combine( '&&', $expr ) );
+			$object->setConditions( $object->and( $expr ) );
 
 			return $object;
 		}

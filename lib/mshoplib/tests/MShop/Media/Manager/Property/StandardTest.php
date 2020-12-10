@@ -105,7 +105,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '~=', 'media.property.value', '1024' ),
 			$search->compare( '==', 'media.property.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
@@ -147,7 +147,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'media.property.value', '1024' );
 		$expr[] = $search->compare( '==', 'media.property.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 	}

@@ -118,7 +118,7 @@ class Voucher
 			$search->compare( '==', 'order.base.product.id', $orderProductId ),
 			$search->compare( '==', 'order.statuspayment', $status ),
 		];
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		if( $manager->search( $search )->isEmpty() )
 		{
@@ -143,7 +143,7 @@ class Voucher
 			$search->compare( '==', 'order.baseid', $baseIds ),
 			$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
 		];
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$list = [];
 		foreach( $manager->search( $search ) as $orderItem ) {
@@ -211,7 +211,7 @@ class Voucher
 			$search->compare( '==', 'order.base.product.id', $prodIds ),
 			$search->compare( '==', 'order.base.product.baseid', $baseIds ),
 		];
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$rebate = 0;
 		foreach( $manager->search( $search ) as $orderProductItem ) {

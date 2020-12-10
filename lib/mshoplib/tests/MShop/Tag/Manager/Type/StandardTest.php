@@ -65,7 +65,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'tag.type.code', 'sort' ),
 			$search->compare( '==', 'tag.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 
 		$results = $this->object->search( $search )->toArray();
 
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'tag.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'tag.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 
@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '~=', 'tag.type.code', 't' ),
 			$search->compare( '==', 'tag.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'tag.type.position' )] );
 		$search->slice( 0, 1 );
 		$items = $this->object->search( $search, [], $total )->toArray();

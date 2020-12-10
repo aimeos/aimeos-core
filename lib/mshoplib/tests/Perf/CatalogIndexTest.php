@@ -52,7 +52,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions(),
 			$search->compare( '>=', $search->make( 'index.catalog:position', array( 'default', $catId ) ), 0 ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$sort = array(
 			$search->sort( '+', $search->make( 'sort:index.catalog:position', array( 'default', $catId ) ) ),
@@ -84,7 +84,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'index.catalog.id', $catId ),
 			$search->compare( '!=', $search->make( 'index.text:name', array( 'en', '' ) ), null ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$sort = array(
 			$search->sort( '+', $search->make( 'sort:index.text:name', array( 'en', '' ) ) ),
@@ -115,7 +115,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'index.catalog.id', $catId ),
 			$search->compare( '>=', $search->make( 'index.price:value', array( 'EUR' ) ), 0 ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$sort = array(
 			$search->sort( '+', $search->make( 'sort:index.price:value', array( 'EUR' ) ) ),
@@ -146,7 +146,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'index.catalog.id', (int) $this->catItem->getId() ),
 			$search->getConditions(),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$sort = array(
 			$search->sort( '+', $search->make( 'sort:index.catalog:position', array( 'default', $catIds ) ) ),
@@ -174,7 +174,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '>=', $search->make( 'index.price:value', array( 'EUR' ) ), 0 ),
 			$search->compare( '<=', $search->make( 'index.price:value', array( 'EUR' ) ), 1000 ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$sort = array(
 			$search->sort( '+', $search->make( 'sort:index.price:value', array( 'EUR' ) ) ),
@@ -201,7 +201,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions(),
 			$search->compare( '!=', $search->make( 'index.text:relevance', array( 'en', 'pink' ) ), null ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$sort = array(
 			$search->sort( '-', $search->make( 'sort:index.text:relevance', array( 'en', 'pink' ) ) ),
@@ -228,7 +228,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions(),
 			$search->compare( '!=', $search->make( 'index.text:relevance', array( 'en', 'blue' ) ), null ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$sort = array(
 			$search->sort( '-', $search->make( 'sort:index.text:name', array( 'en' ) ) ),
@@ -260,7 +260,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '!=', $search->make( 'index.text:relevance', array( 'en', 'plain' ) ), null ),
 			$search->compare( '>=', $search->make( 'index.price:value', array( 'EUR' ) ), 0 ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$sort = array(
 			$search->sort( '-', $search->make( 'sort:index.text:relevance', array( 'en', 'plain' ) ) ),
@@ -291,7 +291,7 @@ class CatalogIndexTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '!=', $search->make( 'index.text:relevance', array( 'en', 'plain' ) ), null ),
 			$search->compare( '>=', $search->make( 'index.price:value', array( 'EUR' ) ), 0 ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$sort = array(
 			$search->sort( '-', $search->make( 'sort:index.text:relevance', array( 'en', 'plain' ) ) ),

@@ -41,7 +41,7 @@ class Once
 				$search->compare( '==', 'order.base.coupon.code', $this->getCode() ),
 				$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
 			];
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setConditions( $search->and( $expr ) );
 
 			if( !$manager->search( $search )->isEmpty() ) {
 				return false;

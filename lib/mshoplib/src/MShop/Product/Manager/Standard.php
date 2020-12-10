@@ -319,7 +319,7 @@ class Standard
 
 			$expr[] = $object->combine( '||', $temp );
 
-			$object->setConditions( $object->combine( '&&', $expr ) );
+			$object->setConditions( $object->and( $expr ) );
 
 			return $object;
 		}
@@ -988,7 +988,7 @@ class Standard
 		$manager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
 		$search = $manager->filter( true )->slice( 0, 0x7fffffff );
-		$search->setConditions( $search->combine( '&&', [
+		$search->setConditions( $search->and( [
 			$search->compare( '==', $domain . '.lists.key', $keys ),
 			$search->getConditions(),
 		] ) );
@@ -1000,7 +1000,7 @@ class Standard
 		$manager = \Aimeos\MShop::create( $context, $domain );
 
 		$search = $manager->filter( true )->slice( 0, 0x7fffffff );
-		$search->setConditions( $search->combine( '&&', [
+		$search->setConditions( $search->and( [
 			$search->compare( '==', $domain . '.id', array_keys( $map ) ),
 			$search->getConditions(),
 		] ) );
@@ -1043,7 +1043,7 @@ class Standard
 			$expr[] = $search->compare( '==', 'stock.type', $ref['stock'] );
 		}
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		return $manager->search( $search );
 	}

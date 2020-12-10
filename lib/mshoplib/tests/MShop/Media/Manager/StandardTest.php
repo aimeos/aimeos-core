@@ -123,7 +123,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', $search->make( 'media:prop', $param ), null );
 
 		$total = 0;
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'media.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 4 );
 
 		$total = 0;
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'media.label', 'path/to/folder/example1.jpg' ),
 			$search->compare( '==', 'media.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$item = $this->object->search( $search, ['media/property'] )->first();
 
 		$this->assertEquals( $item, $this->object->get( $item->getId(), ['media/property'] ) );
@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '~=', 'media.label', 'example' ),
 			$search->compare( '==', 'media.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$item = $this->object->search( $search )->first();
 
 		$item->setId( null );

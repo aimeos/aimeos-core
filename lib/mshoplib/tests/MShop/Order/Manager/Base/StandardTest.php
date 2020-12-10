@@ -129,7 +129,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.costs', '1.50' ),
 			$search->compare( '==', 'order.base.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 
 		$item = $this->object->search( $search, ['order/base/product'] )
 			->first( new \RuntimeException( 'No order base item found' ) );
@@ -348,7 +348,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'order.base.service.attribute.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
 		$result = $this->object->search( $search, $ref, $total );
 
@@ -383,7 +383,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '>=', 'order.base.customerid', '' ),
 			$search->compare( '==', 'order.base.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 1 );
 		$total = 0;
 		$items = $this->object->search( $search, [], $total );
@@ -728,7 +728,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
 		$expr[] = $search->compare( '==', 'order.base.price', 4800.00 );
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) == false ) {
@@ -883,7 +883,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
 		$expr[] = $search->compare( '==', 'order.base.price', 53.50 );
 		$expr[] = $search->compare( '==', 'order.base.editor', $this->editor );
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {

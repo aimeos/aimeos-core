@@ -87,7 +87,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '~=', 'plugin.provider', 'Shipping' ),
 			$search->compare( '==', 'plugin.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$result = $this->object->search( $search )->toArray();
 		if( ( $expected = reset( $result ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No plugin item including "%1$s" found', 'Shipping' ) );
@@ -106,7 +106,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '~=', 'plugin.provider', 'Shipping' ),
 			$search->compare( '==', 'plugin.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 
 		$a = $this->object->search( $search )->toArray();
 		if( ( $item = reset( $a ) ) === false ) {
@@ -183,7 +183,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'plugin.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'plugin.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 	}
@@ -196,15 +196,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = $conditions = [];
 		$expr[] = $search->compare( '~=', 'plugin.provider', 'Shipping,Example' );
 		$expr[] = $search->compare( '==', 'plugin.editor', $this->editor );
-		$conditions[] = $search->combine( '&&', $expr );
+		$conditions[] = $search->and( $expr );
 		$expr = [];
 		$expr[] = $search->compare( '~=', 'plugin.provider', 'ProductLimit,Example' );
 		$expr[] = $search->compare( '==', 'plugin.editor', $this->editor );
-		$conditions[] = $search->combine( '&&', $expr );
+		$conditions[] = $search->and( $expr );
 		$expr = [];
 		$expr[] = $search->compare( '~=', 'plugin.provider', 'BasketLimits,Example' );
 		$expr[] = $search->compare( '==', 'plugin.editor', $this->editor );
-		$conditions[] = $search->combine( '&&', $expr );
+		$conditions[] = $search->and( $expr );
 
 		//search without base criteria
 		$search = $this->object->filter();

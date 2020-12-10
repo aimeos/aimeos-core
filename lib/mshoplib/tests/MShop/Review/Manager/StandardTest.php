@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregate()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->combine( '&&', [
+		$search->setConditions( $search->and( [
 			$search->compare( '==', 'review.domain', 'product' ),
 			$search->compare( '==', 'review.editor', 'core:lib/mshoplib' )
 		] ) );
@@ -51,7 +51,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateRating()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->combine( '&&', [
+		$search->setConditions( $search->and( [
 			$search->compare( '==', 'review.domain', 'product' ),
 			$search->compare( '==', 'review.editor', 'core:lib/mshoplib' )
 		] ) );
@@ -100,7 +100,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'review.status', 1 ),
 			$search->compare( '==', 'review.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
@@ -119,7 +119,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'review.status', 1 ),
 			$search->compare( '==', 'review.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -214,7 +214,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'review.editor', $this->editor );
 
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );

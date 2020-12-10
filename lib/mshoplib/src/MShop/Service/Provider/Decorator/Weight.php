@@ -151,7 +151,7 @@ class Weight
 			$search->compare( '==', 'product.code', array_keys( $prodMap ) ),
 			$search->getConditions(),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		foreach( $manager->search( $search, ['product/property'] ) as $product )
 		{

@@ -382,7 +382,7 @@ class Standard
 			$criteria->compare( '==', 'job.id', $id ),
 			$criteria->getConditions()
 		];
-		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
+		$criteria->setConditions( $criteria->and( $expr ) );
 
 		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
 			return $item;

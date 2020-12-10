@@ -112,7 +112,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$total = 0;
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->slice( 0, 1 );
 
 		$items = $this->object->search( $search, [], $total )->toArray();
@@ -135,7 +135,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.label', 'Misc' ),
 			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$item = $this->object->search( $search, array( 'text' ) )->first();
 
 		$this->assertEquals( 'Sonstiges', $item->getName() );
@@ -157,7 +157,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.label', 'Root' ),
 			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$item = $this->object->search( $search, array( 'text' ) )->first();
 
 		$testItem = $this->object->get( $item->getId() );
@@ -178,7 +178,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.code', 'root' ),
 			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$item = $this->object->search( $search )->first();
 
 		$rootItem = $this->object->getTree( $item->getId(), array( 'text' ), \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
@@ -198,7 +198,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.code', array( 'root', 'categories' ) ),
 			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$items = $this->object->search( $search )->toArray();
 		$parentIds = [];
 
@@ -266,7 +266,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.label', 'Kaffee' ),
 			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$item = $this->object->search( $search, array( 'text' ) )->first();
 
 		$items = $this->object->getPath( $item->getId() );

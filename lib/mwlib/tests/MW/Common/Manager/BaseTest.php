@@ -129,7 +129,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			$criteria->compare( '==', 'product.id', 1 ),
 			$criteria->compare( '==', 'product.type', 'test' ),
 		);
-		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
+		$criteria->setConditions( $criteria->and( $expr ) );
 		$criteria->setSortations( array( $criteria->sort( '+', 'sort:list(\'key\')' ) ) );
 
 

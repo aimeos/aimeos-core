@@ -227,7 +227,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$search->compare( '==', 'attribute.code', $codes ),
 			$search->compare( '==', 'attribute.type', $typeCodes ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$parentIds = [];
 		foreach( $manager->search( $search ) as $item ) {
@@ -280,7 +280,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$search->compare( '==', 'price.value', $value ),
 			$search->compare( '==', 'price.costs', $ship ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$parentIds = [];
 		foreach( $manager->search( $search ) as $item ) {

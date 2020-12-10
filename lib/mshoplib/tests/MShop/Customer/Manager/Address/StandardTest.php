@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.label', 'unitCustomer001' ),
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$result = $customer->search( $search )->toArray();
 
 		if( ( $customerItem = reset( $result ) ) === false ) {
@@ -237,7 +237,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' ),
 			$search->compare( '==', 'customer.address.editor', $this->editor ),
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$this->assertEquals( 1, count( $this->object->search( $search )->toArray() ) );
 	}
 
@@ -252,7 +252,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.address.editor', $this->editor )
 		);
 
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 2 );
 
 		$results = $this->object->search( $search, [], $total )->toArray();

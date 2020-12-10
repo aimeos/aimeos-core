@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'price.value', 12.00 ),
 			$search->compare( '==', 'price.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -225,7 +225,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = ['customer'];
 		$expr[] = $search->compare( '!=', $search->make( 'price:has', $param ), null );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
@@ -263,7 +263,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = ['zone'];
 		$expr[] = $search->compare( '!=', $search->make( 'price:prop', $param ), null );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
@@ -289,7 +289,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'price.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 		$this->assertEquals( 27, count( $results ) );
 

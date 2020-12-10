@@ -248,7 +248,7 @@ class DB
 				$search->compare( '==', 'cache.id', $keys ),
 				$search->combine( '||', $expires ),
 			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setConditions( $search->and( $expr ) );
 
 			$types = $this->getSearchTypes( $this->searchConfig );
 			$translations = $this->getSearchTranslations( $this->searchConfig );
@@ -304,7 +304,7 @@ class DB
 				$search->compare( '==', 'cache.id', $key ),
 				$search->combine( '||', $expires ),
 			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setConditions( $search->and( $expr ) );
 
 			$types = $this->getSearchTypes( $this->searchConfig );
 			$translations = $this->getSearchTranslations( $this->searchConfig );

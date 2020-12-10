@@ -46,7 +46,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_WEB ),
 			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED )
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$orderItems = $orderManager->search( $search )->toArray();
 
 		if( ( $this->order = reset( $orderItems ) ) === false ) {

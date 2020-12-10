@@ -266,7 +266,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 				$search->compare( '!=', $key, null ),
 				$search->compare( '!=', $value, null ),
 			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setConditions( $search->and( $expr ) );
 
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$total = null;
@@ -521,7 +521,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$expr[] = $criteria->compare( '==', $key, $value );
 		}
 
-		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
+		$criteria->setConditions( $criteria->and( $expr ) );
 
 		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
 			return $item;
@@ -576,7 +576,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$criteria->compare( '==', $key, $id ),
 			$criteria->getConditions()
 		];
-		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
+		$criteria->setConditions( $criteria->and( $expr ) );
 
 		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
 			return $item;
@@ -869,7 +869,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		}
 
 		$search = clone $search;
-		$search->setConditions( $search->combine( '&&', $cond ) );
+		$search->setConditions( $search->and( $cond ) );
 
 		list( $find, $replace ) = $this->getSQLReplacements( $search, $attributes, $plugins, $joins, $columns );
 

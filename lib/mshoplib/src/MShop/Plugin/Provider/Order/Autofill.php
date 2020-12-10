@@ -230,7 +230,7 @@ class Autofill
 		$expr[] = $search->compare( '==', 'service.type', $type );
 		$expr[] = $search->getConditions();
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
 
 		foreach( $serviceManager->search( $search, array( 'media', 'price', 'text' ) ) as $item )

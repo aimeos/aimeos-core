@@ -106,7 +106,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = ['media'];
 		$expr[] = $search->compare( '!=', $search->make( 'text:has', $param ), null );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -129,7 +129,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'text.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 5 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 5, count( $results ) );
@@ -148,7 +148,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '~=', 'text.content', 'Monetary' ),
 			$search->compare( '==', 'text.editor', $this->editor ),
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 
 		$result = $this->object->search( $search )->toArray();
 
@@ -169,7 +169,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'text.content', 'Cafe Noire Expresso' ),
 			$search->compare( '==', 'text.editor', $this->editor ),
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 
 		$a = $this->object->search( $search )->toArray();
 

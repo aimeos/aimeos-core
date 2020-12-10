@@ -75,7 +75,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'plugin.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'plugin.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->slice( 0, 1 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 
@@ -88,7 +88,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'plugin.type.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'plugin.type.position' )] );
 		$results = $this->object->search( $search )->toArray();
 		$this->assertEquals( 1, count( $results ) );
@@ -106,7 +106,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'plugin.type.editor', $this->editor ),
 			$search->compare( '==', 'plugin.type.code', 'order' )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {

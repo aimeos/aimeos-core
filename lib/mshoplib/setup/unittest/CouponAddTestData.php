@@ -139,7 +139,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$search->compare( '==', 'order.base.product.quantity', $quantity ),
 			$search->compare( '==', 'order.base.product.position', $pos ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		foreach( $orderBaseProd->search( $search ) as $ordProd ) {
 			$ordProdIds[$ordProd->getProductCode() . '/' . $ordProd->getQuantity() . '/' . $ordProd->getPosition()] = $ordProd->getId();

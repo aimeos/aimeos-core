@@ -103,7 +103,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.type.code', 'default' ),
 			$search->compare( '==', 'product.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$result = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $result ) ) === false ) {
@@ -148,7 +148,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'product.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 
@@ -158,7 +158,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '~=', 'product.type.code', '' ),
 			$search->compare( '==', 'product.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'product.type.position' )] );
 		$search->slice( 0, 2 );
 		$items = $this->object->search( $search, [], $total )->toArray();

@@ -103,7 +103,7 @@ class OrderCheck
 				$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED ),
 				$search->getConditions(),
 			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setConditions( $search->and( $expr ) );
 			$search->slice( 0, $config['ordercheck.total-number-min'] );
 
 			if( $manager->search( $search )->count() < (int) $config['ordercheck.total-number-min'] ) {
@@ -122,7 +122,7 @@ class OrderCheck
 				$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
 				$search->getConditions(),
 			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setConditions( $search->and( $expr ) );
 			$search->slice( 0, 1 );
 
 			if( !$manager->search( $search )->isEmpty() ) {

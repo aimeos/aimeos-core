@@ -170,7 +170,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$search->compare( '==', 'price.costs', $ship ),
 			$search->compare( '==', 'price.type', $codes )
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$parentIds = [];
 		foreach( $manager->search( $search ) as $item ) {

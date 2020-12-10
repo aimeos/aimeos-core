@@ -174,7 +174,7 @@ trait Traits
 			{
 				if( is_array( $domain ) )
 				{
-					$list[] = $search->combine( '&&', [
+					$list[] = $search->and( [
 						$search->compare( '==', $prefix . '.lists.domain', $key ),
 						$search->compare( '==', $prefix . '.lists.type', $domain ),
 					] );
@@ -186,7 +186,7 @@ trait Traits
 			}
 
 			$expr[] = $search->combine( '||', $list );
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setConditions( $search->and( $expr ) );
 		}
 		else
 		{

@@ -64,7 +64,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'media.property.type.code', 'size' ),
 			$search->compare( '==', 'media.property.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 
 		$results = $this->object->search( $search )->toArray();
 
@@ -150,7 +150,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'media.property.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'media.property.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '=~', 'media.property.type.code', '' ),
 			$search->compare( '==', 'media.property.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'media.property.type.position' )] );
 		$search->slice( 0, 1 );
 		$items = $this->object->search( $search, [], $total )->toArray();

@@ -226,7 +226,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 				$search->getConditions(),
 				$condition->getConditions()
 			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setConditions( $search->and( $expr ) );
 		}
 
 		$types = $this->getSearchTypes( $this->searchConfig );
@@ -628,7 +628,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			$search->compare( '>=', $this->searchConfig['right']['code'], $node->right ),
 		);
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->setSortations( array( $search->sort( '+', $this->searchConfig['left']['code'] ) ) );
 
 		$results = $this->searchNodes( $search );

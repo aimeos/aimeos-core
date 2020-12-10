@@ -266,7 +266,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', $search->make( 'attribute:prop', $param ), null );
 
 		$total = 0;
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, ['attribute/property'], $total );
 
 		$this->assertEquals( 1, $total );
@@ -285,7 +285,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'attribute.editor', $this->editor ),
 			$search->getConditions(),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->slice( 0, 5 );
 
 		$total = 0;
@@ -308,7 +308,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'attribute.domain', 'product' ),
 			$search->compare( '==', 'attribute.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 1 );
 
 		$total = 0;

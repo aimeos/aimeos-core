@@ -784,7 +784,7 @@ class Standard
 					$object->getConditions(),
 				);
 
-				$object->setConditions( $object->combine( '&&', $expr ) );
+				$object->setConditions( $object->and( $expr ) );
 			}
 
 			return $object;

@@ -63,7 +63,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( ["\$strval"], $this->object->translate( array( $this->object->sort( '+', 'str_value' ) ), $translations ) );
 		$this->assertEquals( ["\$strval"], $this->object->translate( array( $this->object->compare( '==', 'str_value', 1 ) ), $translations ) );
-		$this->assertEquals( [], $this->object->translate( array( $this->object->combine( '&&', [] ) ), $translations ) );
+		$this->assertEquals( [], $this->object->translate( array( $this->object->and( [] ) ), $translations ) );
 	}
 
 
@@ -81,38 +81,38 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( true, eval( 'return ' . $result . ';' ) );
 
 		$expr = array( $this->object->compare( '==', 'int_value', 'a' ), $this->object->compare( '==', 'str_value', 'test' ) );
-		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->object->setConditions( $this->object->and( $expr ) );
 		$result = $this->object->getConditionSource( $types, $translations, $plugins );
 		$this->assertEquals( "( \$intval == 10 && \$strval == 'test' )", $result );
 		$this->assertEquals( false, eval( 'return ' . $result . ';' ) );
 
 		$expr = array( $this->object->compare( '==', 'int_value', array( 1, 2, 4, 8 ) ), $this->object->compare( '==', 'str_value', 'test' ) );
-		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->object->setConditions( $this->object->and( $expr ) );
 		$result = $this->object->getConditionSource( $types, $translations );
 		$this->assertEquals( "( ( \$intval == 1 || \$intval == 2 || \$intval == 4 || \$intval == 8 ) && \$strval == 'test' )", $result );
 		$this->assertEquals( true, eval( 'return ' . $result . ';' ) );
 
 		$expr = array( $this->object->compare( '==', 'int_value', 1 ), $this->object->compare( '!=', 'int_value', 2 ) );
-		$this->object->setConditions( $this->object->combine( '!', array( $this->object->combine( '&&', $expr ) ) ) );
+		$this->object->setConditions( $this->object->combine( '!', array( $this->object->and( $expr ) ) ) );
 		$result = $this->object->getConditionSource( $types, $translations );
 		$this->assertEquals( " ! ( \$intval == 1 && \$intval != 2 )", $result );
 		$this->assertEquals( false, eval( 'return ' . $result . ';' ) );
 
 		$expr = array( $this->object->compare( '==', 'int_value', null ), $this->object->compare( '!=', 'str_value', null ) );
-		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->object->setConditions( $this->object->and( $expr ) );
 		$result = $this->object->getConditionSource( $types, $translations );
 		$this->assertEquals( "( \$intval === null && \$strval !== null )", $result );
 		$this->assertEquals( false, eval( 'return ' . $result . ';' ) );
 
 		$expr = array( $this->object->compare( '==', 'int_value', 1 ) );
-		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->object->setConditions( $this->object->and( $expr ) );
 		$result = $this->object->getConditionSource( $types, $translations );
 		$this->assertEquals( "( \$intval == 1 )", $result );
 		$this->assertEquals( true, eval( 'return ' . $result . ';' ) );
 
 		$expr = array( $this->object->compare( '==', 'str_value', 'test' ) );
-		$expr = array( $this->object->compare( '==', 'int_value', 1 ), $this->object->combine( '&&', $expr ) );
-		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$expr = array( $this->object->compare( '==', 'int_value', 1 ), $this->object->and( $expr ) );
+		$this->object->setConditions( $this->object->and( $expr ) );
 		$result = $this->object->getConditionSource( $types, $translations );
 		$this->assertEquals( "( \$intval == 1 && ( \$strval == 'test' ) )", $result );
 		$this->assertEquals( true, eval( 'return ' . $result . ';' ) );

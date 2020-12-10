@@ -51,7 +51,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions(),
 			$search->compare( '==', 'customer.lists.editor', 'core:lib/mshoplib' ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$result = $this->object->aggregate( $search, 'customer.lists.domain' )->toArray();
 
@@ -167,7 +167,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'customer.lists.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.lists.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->slice( 0, 2 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 2, count( $results ) );
@@ -197,7 +197,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.lists.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$this->assertEquals( 7, count( $this->object->search( $search )->toArray() ) );
 	}
 

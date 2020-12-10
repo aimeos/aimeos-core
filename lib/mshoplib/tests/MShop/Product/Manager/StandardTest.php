@@ -140,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 				$search->compare( '==', 'product.code', 'CNC' ),
 				$search->compare( '==', 'product.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$products = $this->object->search( $search, $domains )->toArray();
 
 		if( ( $product = reset( $products ) ) === false ) {
@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.code', 'CNC' ),
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$items = $this->object->search( $search )->toArray();
 
 		$this->assertTrue( is_map( $this->object->save( $items ) ) );
@@ -192,7 +192,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 				$search->compare( '==', 'product.code', 'CNC' ),
 				$search->compare( '==', 'product.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$items = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $items ) ) === false ) {
@@ -385,7 +385,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', $search->make( 'product:prop', $param ), null );
 
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->slice( 0, 1 );
 
 		$results = $this->object->search( $search, [], $total )->toArray();
@@ -418,7 +418,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.editor', $this->editor ),
 			$search->getConditions(),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, array( 'media' ) );
 
 		$this->assertEquals( 2, count( $result ) );

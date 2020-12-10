@@ -71,7 +71,7 @@ trait Traits
 
 			if( $types !== null )
 			{
-				$search->setConditions( $search->combine( '&&', [
+				$search->setConditions( $search->and( [
 					$search->compare( '==', $domain . '.property.type', $types ),
 					$search->getConditions()
 				] ) );

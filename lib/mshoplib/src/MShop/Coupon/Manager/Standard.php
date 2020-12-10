@@ -681,7 +681,7 @@ class Standard
 			$temp[] = $object->compare( '>=', 'coupon.dateend', $this->date );
 			$expr[] = $object->combine( '||', $temp );
 
-			$object->setConditions( $object->combine( '&&', $expr ) );
+			$object->setConditions( $object->and( $expr ) );
 
 			return $object;
 		}

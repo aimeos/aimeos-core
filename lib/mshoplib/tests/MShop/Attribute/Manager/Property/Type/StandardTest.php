@@ -62,7 +62,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'attribute.property.type.code', 'size' ),
 			$search->compare( '==', 'attribute.property.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 
 		$results = $this->object->search( $search )->toArray();
 
@@ -147,7 +147,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'attribute.property.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'attribute.property.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 	}
@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '=~', 'attribute.property.type.code', '' ),
 			$search->compare( '==', 'attribute.property.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'attribute.property.type.position' )] );
 		$search->slice( 0, 2 );
 		$items = $this->object->search( $search, [], $total )->toArray();

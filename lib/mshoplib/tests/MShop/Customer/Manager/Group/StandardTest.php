@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '~=', 'customer.group.code', 'unitgroup' ),
 			$search->compare( '==', 'customer.group.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 1 );
 
 		$total = 0;

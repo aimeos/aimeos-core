@@ -89,7 +89,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.status.value', 'shipped' ),
 			$search->compare( '==', 'order.status.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
@@ -172,7 +172,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '>=', 'order.status.value', 'waiting' ),
 			$search->compare( '==', 'order.status.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 1 );
 		$total = 0;
 		$items = $this->object->search( $search, [], $total )->toArray();

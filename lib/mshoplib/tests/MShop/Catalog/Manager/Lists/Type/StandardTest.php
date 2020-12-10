@@ -134,7 +134,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'catalog.lists.type.editor', $this->editor );
 
 		$total = 0;
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.lists.type.editor', $this->editor ),
 			$search->getConditions(),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
@@ -164,7 +164,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '~=', 'catalog.lists.type.code', 'unit' ),
 			$search->compare( '~=', 'catalog.lists.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'catalog.lists.type.position' )] );
 		$search->slice( 0, 1 );
 		$items = $this->object->search( $search, [], $total )->toArray();

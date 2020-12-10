@@ -67,7 +67,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '~=', 'supplier.address.company', 'Example company' ),
 			$search->compare( '==', 'supplier.address.editor', $this->editor ),
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 
 		$items = $this->object->search( $search )->toArray();
 
@@ -212,7 +212,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$conditions[] = $search->compare( '>=', 'supplier.address.ctime', '1970-01-01 00:00:00' );
 		$conditions[] = $search->compare( '==', 'supplier.address.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 1 );
 		$result = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $result ) );

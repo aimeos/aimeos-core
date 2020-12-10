@@ -146,7 +146,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( ["str_col"], $this->object->translate( array( $this->object->sort( '+', 'str_column' ) ), $translations ) );
 		$this->assertEquals( ["str_col"], $this->object->translate( array( $this->object->compare( '==', 'str_column', 1 ) ), $translations ) );
-		$this->assertEquals( [], $this->object->translate( array( $this->object->combine( '&&', [] ) ), $translations ) );
+		$this->assertEquals( [], $this->object->translate( array( $this->object->and( [] ) ), $translations ) );
 	}
 
 
@@ -159,32 +159,32 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( "1 = 1", $this->object->getConditionSource( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', 'a' ), $this->object->compare( '==', 'str_column', 'test' ) );
-		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->object->setConditions( $this->object->and( $expr ) );
 		$this->assertEquals( "( int_col = 10 AND str_col = 'test' )", $this->object->getConditionSource( $types, $translations, $plugins ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', array( 1, 2, 4, 8 ) ), $this->object->compare( '==', 'str_column', 'test' ) );
-		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->object->setConditions( $this->object->and( $expr ) );
 		$this->assertEquals( "( int_col IN (1,2,4,8) AND str_col = 'test' )", $this->object->getConditionSource( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', 1 ), $this->object->compare( '~=', 'str_column', array( 't1', 't2', 't3' ) ) );
-		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->object->setConditions( $this->object->and( $expr ) );
 		$this->assertEquals( "( int_col = 1 AND (str_col LIKE '%t1%' ESCAPE '#' OR str_col LIKE '%t2%' ESCAPE '#' OR str_col LIKE '%t3%' ESCAPE '#') )", $this->object->getConditionSource( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', 1 ), $this->object->compare( '!=', 'int_column', 2 ) );
-		$this->object->setConditions( $this->object->combine( '!', array( $this->object->combine( '&&', $expr ) ) ) );
+		$this->object->setConditions( $this->object->combine( '!', array( $this->object->and( $expr ) ) ) );
 		$this->assertEquals( " NOT ( ( int_col = 1 AND int_col <> 2 ) )", $this->object->getConditionSource( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', null ), $this->object->compare( '!=', 'str_column', null ) );
-		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->object->setConditions( $this->object->and( $expr ) );
 		$this->assertEquals( "( int_col IS NULL AND str_col IS NOT NULL )", $this->object->getConditionSource( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', 1 ) );
-		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$this->object->setConditions( $this->object->and( $expr ) );
 		$this->assertEquals( "( int_col = 1 )", $this->object->getConditionSource( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'str_column', 'test' ) );
-		$expr = array( $this->object->compare( '==', 'int_column', 1 ), $this->object->combine( '&&', $expr ) );
-		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
+		$expr = array( $this->object->compare( '==', 'int_column', 1 ), $this->object->and( $expr ) );
+		$this->object->setConditions( $this->object->and( $expr ) );
 		$this->assertEquals( "( int_col = 1 AND ( str_col = 'test' ) )", $this->object->getConditionSource( $types, $translations ) );
 
 		$types = array( 'column' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );

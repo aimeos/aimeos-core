@@ -294,7 +294,7 @@ class Standard
 			$expr[] = $catalogSearch->compare( '==', 'catalog.lists.refid', $prodIds->toArray() );
 		}
 
-		$catalogSearch->setConditions( $catalogSearch->combine( '&&', $expr ) );
+		$catalogSearch->setConditions( $catalogSearch->and( $expr ) );
 		$catalogSearch->setSortations( array( $catalogSearch->sort( '+', 'catalog.lists.refid' ) ) );
 
 		$start = 0;
@@ -308,7 +308,7 @@ class Standard
 				$search->compare( '==', 'product.id', $result->keys()->toArray() ),
 				$defaultConditions,
 			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setConditions( $search->and( $expr ) );
 
 			$this->writeIndex( $search, $domains, $size );
 

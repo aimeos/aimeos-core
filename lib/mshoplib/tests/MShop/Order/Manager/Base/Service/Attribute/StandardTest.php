@@ -36,7 +36,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.service.attribute.type', 'payment' ),
 			$search->compare( '==', 'order.base.service.attribute.editor', 'core:lib/mshoplib' ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$result = $this->object->aggregate( $search, 'order.base.service.attribute.code' )->toArray();
 
@@ -110,7 +110,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'order.base.service.attribute.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $result ) );
 
@@ -118,7 +118,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.service.attribute.code', array( 'REFID', 'NAME' ) ),
 			$search->compare( '==', 'order.base.service.attribute.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 1 );
 		$total = 0;
 		$results = $this->object->search( $search, [], $total )->toArray();
@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.service.attribute.code', 'REFID' ),
 			$search->compare( '==', 'order.base.service.attribute.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( !( $item = reset( $results ) ) ) {
@@ -159,7 +159,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'order.base.service.attribute.code', 'REFID' ),
 			$search->compare( '==', 'order.base.service.attribute.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$orderItems = $this->object->search( $search )->toArray();
 
 		if( !( $item = reset( $orderItems ) ) ) {

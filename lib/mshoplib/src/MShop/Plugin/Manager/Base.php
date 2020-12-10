@@ -109,7 +109,7 @@ abstract class Base
 				$search->getConditions(),
 			);
 
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setConditions( $search->and( $expr ) );
 			$search->setSortations( array( $search->sort( '+', 'plugin.position' ) ) );
 
 			$this->plugins[$type] = [];

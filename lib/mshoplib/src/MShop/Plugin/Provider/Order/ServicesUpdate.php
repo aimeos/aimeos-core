@@ -141,7 +141,7 @@ class ServicesUpdate
 
 			$search = $serviceManager->filter( true );
 			$expr = [$search->compare( '==', 'service.id', $list ), $search->getConditions()];
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setConditions( $search->and( $expr ) );
 
 			$list = $serviceManager->search( $search, ['media', 'price', 'text'] );
 		}

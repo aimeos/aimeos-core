@@ -82,7 +82,7 @@ class Coupon
 				$codeManager->filter( true )->getConditions(),
 				$search->getConditions(),
 			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setConditions( $search->and( $expr ) );
 
 			if( ( $item = $manager->search( $search )->first() ) !== null ) {
 				$manager->getProvider( $item, $code )->update( $order );

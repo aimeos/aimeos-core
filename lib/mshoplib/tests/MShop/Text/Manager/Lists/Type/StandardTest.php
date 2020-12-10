@@ -136,7 +136,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'text.lists.type.status', 1 );
 		$expr[] = $search->compare( '==', 'text.lists.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
@@ -147,7 +147,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '~=', 'text.lists.type.code', 'o' ),
 			$search->compare( '==', 'text.lists.type.editor', $this->editor ),
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'text.lists.type.position' )] );
 		$search->slice( 0, 1 );
 		$results = $this->object->search( $search, [], $total )->toArray();

@@ -138,7 +138,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'service.lists.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'service.lists.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
 
@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'service.lists.type.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'service.lists.type.position' )] );
 		$search->slice( 0, 3 );
 		$results = $this->object->search( $search, [], $total )->toArray();

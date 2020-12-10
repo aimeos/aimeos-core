@@ -315,7 +315,7 @@ class Standard extends Base
 
 		if( $default === true )
 		{
-			$search->setConditions( $search->combine( '&&', [
+			$search->setConditions( $search->and( [
 				$search->compare( '==', 'order.base.customerid', $context->getUserId() ),
 				$search->getConditions(),
 			] ) );
@@ -324,7 +324,7 @@ class Standard extends Base
 		if( $site === true )
 		{
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$search->setConditions( $search->combine( '&&', [
+			$search->setConditions( $search->and( [
 				$this->getSiteCondition( $search, 'order.base.product.siteid', $level ),
 				$search->getConditions()
 			] ) );
@@ -963,7 +963,7 @@ class Standard extends Base
 			$search->compare( '==', 'order.base.id', $id ),
 			$search->getConditions(),
 		];
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$context = $this->getContext();
 		$dbm = $context->getDatabaseManager();

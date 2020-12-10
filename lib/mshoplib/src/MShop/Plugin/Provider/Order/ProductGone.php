@@ -67,7 +67,7 @@ class ProductGone
 		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 
 		$search = $productManager->filter( true );
-		$search->setConditions( $search->combine( '&&', [
+		$search->setConditions( $search->and( [
 			$search->compare( '==', 'product.id', $productIds ),
 			$search->getConditions()
 		] ) );

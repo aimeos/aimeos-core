@@ -78,7 +78,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'subscription.status', 1 ),
 			$search->compare( '==', 'subscription.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $expected = reset( $results ) ) === false ) {
@@ -97,7 +97,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'subscription.status', 1 ),
 			$search->compare( '==', 'subscription.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
 		if( ( $item = reset( $results ) ) === false ) {
@@ -203,7 +203,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.address.type', 'payment' );
 
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );

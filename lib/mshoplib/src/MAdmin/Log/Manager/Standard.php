@@ -410,7 +410,7 @@ class Standard
 			$criteria->compare( '==', 'log.id', $id ),
 			$criteria->getConditions()
 		];
-		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
+		$criteria->setConditions( $criteria->and( $expr ) );
 
 		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
 			return $item;

@@ -30,7 +30,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ),
 			$search->compare( '==', 'product.editor', $context->getEditor() ),
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$result = $productManager->search( $search, array( 'attribute', 'price', 'text', 'product' ) );
 
 		if( count( $result ) !== 2 ) {
@@ -81,7 +81,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'attribute.domain', 'product' ),
 			$search->compare( '==', 'attribute.type', 'color' ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$items = $manager->search( $search )->toArray();
 
@@ -220,7 +220,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '=~', 'product.label', 'Cafe Noire' ),
 			$search->compare( '==', 'product.editor', $this->editor ),
 		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		$result = $this->object->search( $search, [], $total )->toArray();
 
@@ -237,7 +237,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.editor', $this->editor ),
 			$search->getConditions()
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$products = $this->object->search( $search )->toArray();
 		$this->assertEquals( 8, count( $products ) );
 
@@ -262,7 +262,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
@@ -387,7 +387,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 
 		return $subIndex->search( $search )->toArray();
 	}

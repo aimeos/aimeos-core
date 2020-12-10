@@ -134,7 +134,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'supplier.lists.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'supplier.lists.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$search->setSortations( [$search->sort( '-', 'supplier.lists.type.position' )] );
 		$search->slice( 0, 1 );
 		$results = $this->object->search( $search, [], $total )->toArray();

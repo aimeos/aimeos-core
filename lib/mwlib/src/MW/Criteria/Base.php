@@ -75,7 +75,7 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 				$list[] = $this->compare( $operator, $name, $value );
 			}
 
-			$cond[] = $this->combine( '&&', $list );
+			$cond[] = $this->and( $list );
 		}
 
 		if( $expr instanceof \Aimeos\MW\Criteria\Expression\Combine\Iface
@@ -87,7 +87,7 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 		if( !empty( $cond ) )
 		{
 			$cond[] = $this->getConditions();
-			return $this->setConditions( $this->combine( '&&', $cond ) );
+			return $this->setConditions( $this->and( $cond ) );
 		}
 
 		$msg = 'Use a column name, an array of name/value pairs or the result from and(), or(), not() or is() as first argument for add()';
