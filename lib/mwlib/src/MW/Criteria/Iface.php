@@ -190,6 +190,14 @@ interface Iface
 	public function getConditions() : ?\Aimeos\MW\Criteria\Expression\Iface;
 
 	/**
+	 * Sets the expression objects.
+	 *
+	 * @param \Aimeos\MW\Criteria\Expression\Iface $conditions Expression object
+	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
+	 */
+	public function setConditions( \Aimeos\MW\Criteria\Expression\Iface $conditions ) : Iface;
+
+	/**
 	 * Returns the string for sorting the result
 	 *
 	 * @param array $types Associative list of variable or column names as keys and their corresponding types
@@ -205,6 +213,14 @@ interface Iface
 	 * @return array Original sortation array
 	 */
 	public function getSortations() : array;
+
+	/**
+	 * Stores the sortation objects for sorting the result.
+	 *
+	 * @param \Aimeos\MW\Criteria\Expression\Sort\SQL[] $sortations List of objects implementing \Aimeos\MW\Criteria\Expression\Sort\Iface
+	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
+	 */
+	public function setSortations( array $sortations ) : Iface;
 
 	/**
 	 * Returns the list of translated colums
