@@ -60,6 +60,96 @@ interface Iface
 	public function and( array $list ) : \Aimeos\MW\Criteria\Expression\Combine\Iface;
 
 	/**
+	 * Creates a new combine expression.
+	 *
+	 * Available composition operators are:
+	 * "&&": term1 AND term2
+	 * "||": term1 OR term2
+	 * "!": NOT term
+	 *
+	 * @param string $operator One of the known operators
+	 * @param \Aimeos\MW\Criteria\Expression\Compare\Iface[] $list List of expression objects
+	 * @return \Aimeos\MW\Criteria\Expression\Combine\Iface Combine expression object
+	 */
+	public function combine( string $operator, array $list ) : \Aimeos\MW\Criteria\Expression\Combine\Iface;
+
+	/**
+	 * Creates a new compare expression.
+	 *
+	 * Available comparision operators are:
+	 * "==": item EQUAL value
+	 * "!=": item NOT EQUAL value
+	 * "~=": item LIKE value
+	 * "=~": item STARTS WITH value
+	 * ">=": item GREATER OR EQUAL value
+	 * "<=": item SMALLER OR EQUAL value
+	 * ">": item GREATER value
+	 * "<": item SMALLER value
+	 *
+	 * @param string $operator One of the known operators
+	 * @param string $name Name of the variable or column that should be used for comparison
+	 * @param mixed $value Value the variable or column should be compared to
+	 * @return \Aimeos\MW\Criteria\Expression\Compare\Iface Compare expression object
+	 */
+	public function compare( string $operator, string $name, $value ) : \Aimeos\MW\Criteria\Expression\Compare\Iface;
+
+	/**
+	 * Returns the number of requested items.
+	 *
+	 * @return int Number of items
+	 */
+	public function getLimit() : int;
+
+	/**
+	 * Returns the start number of requested items.
+	 *
+	 * @return int Start number of the items
+	 */
+	public function getOffset() : int;
+
+	/**
+	 * Returns the available compare, combine and sort operators.
+	 *
+	 * @return array Associative list of lists (compare, combine, sort) containing the available operators
+	 */
+	public function getOperators() : array;
+
+	/**
+	 * Returns the expression string.
+	 *
+	 * @param array $types Associative list of item names and their types
+	 * @param array $translations Associative list of item names that should be translated
+	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of item names as keys and plugin objects as values
+	 * @param array $funcs Associative list of item names and functions modifying the conditions
+	 * @return mixed Data for searching
+	 */
+	public function getConditionSource( array $types, array $translations = [], array $plugins = [], array $funcs = [] );
+
+	/**
+	 * Returns the original condition expression objects.
+	 *
+	 * @return \Aimeos\MW\Criteria\Expression\Iface|null Original expression objects
+	 */
+	public function getConditions() : ?\Aimeos\MW\Criteria\Expression\Iface;
+
+	/**
+	 * Returns the string for sorting the result
+	 *
+	 * @param array $types Associative list of variable or column names as keys and their corresponding types
+	 * @param array $translations Associative list of item names that should be translated
+	 * @param array $funcs Associative list of item names and functions modifying the conditions
+	 * @return mixed Data for sorting the items
+	 */
+	public function getSortationSource( array $types, array $translations = [], array $funcs = [] );
+
+	/**
+	 * Returns the original sorting array for ordering the results.
+	 *
+	 * @return array Original sortation array
+	 */
+	public function getSortations() : array;
+
+	/**
 	 * Creates a new compare expression.
 	 *
 	 * Available comparision operators are:
@@ -142,6 +232,22 @@ interface Iface
 	public function parse( array $array ) : ?\Aimeos\MW\Criteria\Expression\Iface;
 
 	/**
+	 * Sets the expression objects.
+	 *
+	 * @param \Aimeos\MW\Criteria\Expression\Iface $conditions Expression object
+	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
+	 */
+	public function setConditions( \Aimeos\MW\Criteria\Expression\Iface $conditions ) : Iface;
+
+	/**
+	 * Stores the sortation objects for sorting the result.
+	 *
+	 * @param \Aimeos\MW\Criteria\Expression\Sort\SQL[] $sortations List of objects implementing \Aimeos\MW\Criteria\Expression\Sort\Iface
+	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
+	 */
+	public function setSortations( array $sortations ) : Iface;
+
+	/**
 	 * Sets the offset and the size of the requested data slice.
 	 *
 	 * @param int $start Start number of the items
@@ -151,76 +257,17 @@ interface Iface
 	public function slice( int $offset, int $limit ) : \Aimeos\MW\Criteria\Iface;
 
 	/**
-	 * Returns the number of requested items.
+	 * Creates a new sort expression.
 	 *
-	 * @return int Number of items
-	 */
-	public function getLimit() : int;
-
-	/**
-	 * Returns the start number of requested items.
+	 * Available sorting operators are:
+	 * "+": sort ascending
+	 * "-": sort descending
 	 *
-	 * @return int Start number of the items
+	 * @param string $operator One of the known operators
+	 * @param string $name Name of the variable or column that should be used for sorting
+	 * @return \Aimeos\MW\Criteria\Expression\Sort\Iface Sort expression object
 	 */
-	public function getOffset() : int;
-
-	/**
-	 * Returns the available compare, combine and sort operators.
-	 *
-	 * @return array Associative list of lists (compare, combine, sort) containing the available operators
-	 */
-	public function getOperators() : array;
-
-	/**
-	 * Returns the expression string.
-	 *
-	 * @param array $types Associative list of item names and their types
-	 * @param array $translations Associative list of item names that should be translated
-	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of item names as keys and plugin objects as values
-	 * @param array $funcs Associative list of item names and functions modifying the conditions
-	 * @return mixed Data for searching
-	 */
-	public function getConditionSource( array $types, array $translations = [], array $plugins = [], array $funcs = [] );
-
-	/**
-	 * Returns the original condition expression objects.
-	 *
-	 * @return \Aimeos\MW\Criteria\Expression\Iface|null Original expression objects
-	 */
-	public function getConditions() : ?\Aimeos\MW\Criteria\Expression\Iface;
-
-	/**
-	 * Sets the expression objects.
-	 *
-	 * @param \Aimeos\MW\Criteria\Expression\Iface $conditions Expression object
-	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
-	 */
-	public function setConditions( \Aimeos\MW\Criteria\Expression\Iface $conditions ) : Iface;
-
-	/**
-	 * Returns the string for sorting the result
-	 *
-	 * @param array $types Associative list of variable or column names as keys and their corresponding types
-	 * @param array $translations Associative list of item names that should be translated
-	 * @param array $funcs Associative list of item names and functions modifying the conditions
-	 * @return mixed Data for sorting the items
-	 */
-	public function getSortationSource( array $types, array $translations = [], array $funcs = [] );
-
-	/**
-	 * Returns the original sorting array for ordering the results.
-	 *
-	 * @return array Original sortation array
-	 */
-	public function getSortations() : array;
-
-	/**
-	 * Stores the sortation objects for sorting the result.
-	 *
-	 * @param \Aimeos\MW\Criteria\Expression\Sort\SQL[] $sortations List of objects implementing \Aimeos\MW\Criteria\Expression\Sort\Iface
-	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
-	 */
-	public function setSortations( array $sortations ) : Iface;
+	public function sort( string $operator, string $name ) : \Aimeos\MW\Criteria\Expression\Sort\Iface;
 
 	/**
 	 * Returns the list of translated colums
