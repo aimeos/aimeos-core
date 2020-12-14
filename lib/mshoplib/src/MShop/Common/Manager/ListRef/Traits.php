@@ -83,30 +83,26 @@ trait Traits
 	 */
 	protected function buildItems( array $map, array $domains, string $prefix, array $local = [], array $local2 = [] ) : \Aimeos\Map
 	{
-		$items = $listItemMap = $refItemMap = $refIdMap = [];
+		$items = $listItemMap = $refItemMap = [];
 
-		if( $domains === null || !empty( $domains ) )
+		foreach( $this->getListItems( array_keys( $map ), $domains, $prefix ) as $id => $listItem )
 		{
-			$listItems = $this->getListItems( array_keys( $map ), $domains, $prefix );
+			$domain = $listItem->getDomain();
+			$parentid = $listItem->getParentId();
 
-			foreach( $listItems as $listItem )
-			{
-				$domain = $listItem->getDomain();
-				$parentid = $listItem->getParentId();
+			$listItemMap[$parentid][$domain][$id] = $listItem;
 
-				$listItemMap[$parentid][$domain][$listItem->getId()] = $listItem;
-				$refIdMap[$domain][$listItem->getRefId()][] = $parentid;
+			if( $refItem = $listItem->getRefItem() ) {
+				$refItemMap[$parentid][$domain][$listItem->getRefId()] = $refItem;
 			}
-
-			$refItemMap = $this->getRefItems( $refIdMap, $domains );
 		}
 
 		foreach( $map as $id => $values )
 		{
-			$listItems = ( isset( $listItemMap[$id] ) ? $listItemMap[$id] : [] );
-			$refItems = ( isset( $refItemMap[$id] ) ? $refItemMap[$id] : [] );
-			$localItems = ( isset( $local[$id] ) ? $local[$id] : [] );
-			$localItems2 = ( isset( $local2[$id] ) ? $local2[$id] : [] );
+			$localItems = $local[$id] ?? [];
+			$localItems2 = $local2[$id] ?? [];
+			$refItems = $refItemMap[$id] ?? [];
+			$listItems = $listItemMap[$id] ?? [];
 
 			if( $item = $this->applyFilter( $this->createItemBase( $values, $listItems, $refItems, $localItems, $localItems2 ) ) ) {
 				$items[$id] = $item;
@@ -193,7 +189,7 @@ trait Traits
 			$search->setConditions( $search->compare( '==', $prefix . '.lists.parentid', $ids ) );
 		}
 
-		return $manager->search( $search );
+		return $manager->search( $search, $domains );
 	}
 
 

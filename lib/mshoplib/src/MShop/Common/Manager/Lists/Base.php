@@ -84,6 +84,92 @@ abstract class Base
 
 
 	/**
+	 * Removes multiple items.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @return \Aimeos\MShop\Common\Manager\Lists\Iface Manager object for chaining method calls
+	 */
+	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		return $this->deleteItemsBase( $itemIds, $this->getConfigPath() . 'delete' );
+	}
+
+
+	/**
+	 * Creates a filter object.
+	 *
+	 * @param bool $default Add default criteria
+	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
+	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
+	 */
+	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	{
+		if( $default === true )
+		{
+			$prefix = rtrim( $this->getPrefix(), '.' );
+			$object = $this->filterBase( $prefix );
+
+			$expr = [$object->getConditions()];
+
+			$exprTwo = [];
+			$exprTwo[] = $object->compare( '<=', $prefix . '.datestart', $this->date );
+			$exprTwo[] = $object->compare( '==', $prefix . '.datestart', null );
+			$expr[] = $object->or( $exprTwo );
+
+			$exprTwo = [];
+			$exprTwo[] = $object->compare( '>=', $prefix . '.dateend', $this->date );
+			$exprTwo[] = $object->compare( '==', $prefix . '.dateend', null );
+			$expr[] = $object->or( $exprTwo );
+
+			$object->setConditions( $object->and( $expr ) );
+
+			return $object;
+		}
+
+		return parent::filter();
+	}
+
+
+	/**
+	 * Creates common list item object for the given common list item id.
+	 *
+	 * @param string $id Id of common list item object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param bool $default Add default criteria
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Returns common list item object of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
+	 */
+	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		if( ( $conf = reset( $this->searchConfig ) ) === false || !isset( $conf['code'] ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration not available' ) );
+		}
+
+		$criteria = $this->getObject()->filter( $default )->add( [$conf['code'] => $id] );
+
+		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
+			return $item;
+		}
+
+		$msg = sprintf( 'List item with ID "%2$s" in "%1$s" not found', $conf['code'], $id );
+		throw new \Aimeos\MShop\Exception( $msg );
+	}
+
+
+	/**
+	 * Creates a new manager for list extensions.
+	 *
+	 * @param string $manager Name of the sub manager type in lower case
+	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g type, etc.
+	 */
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		return $this->getSubManagerBase( 'common', 'lists/' . $manager, $name );
+	}
+
+
+	/**
 	 * Updates or adds a common list item object.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $item List item object which should be saved
@@ -164,49 +250,6 @@ abstract class Base
 
 
 	/**
-	 * Removes multiple items.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Common\Manager\Lists\Iface Manager object for chaining method calls
-	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->deleteItemsBase( $itemIds, $this->getConfigPath() . 'delete' );
-	}
-
-
-	/**
-	 * Creates common list item object for the given common list item id.
-	 *
-	 * @param string $id Id of common list item object
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool $default Add default criteria
-	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Returns common list item object of the given id
-	 * @throws \Aimeos\MShop\Exception If item couldn't be found
-	 */
-	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
-	{
-		if( ( $conf = reset( $this->searchConfig ) ) === false || !isset( $conf['code'] ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration not available' ) );
-		}
-
-		$criteria = $this->getObject()->filter( $default );
-		$expr = [
-			$criteria->compare( '==', $conf['code'], $id ),
-			$criteria->getConditions()
-		];
-		$criteria->setConditions( $criteria->and( $expr ) );
-
-		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
-			return $item;
-		}
-
-		$msg = sprintf( 'List item with ID "%2$s" in "%1$s" not found', $conf['code'], $id );
-		throw new \Aimeos\MShop\Exception( $msg );
-	}
-
-
-	/**
 	 * Search for all list items based on the given critera.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
@@ -255,72 +298,39 @@ abstract class Base
 			throw $e;
 		}
 
-		return map( $items );
+		return $this->buildItems( $items, $ref );
 	}
 
 
 	/**
-	 * Creates a filter object.
+	 * Creates the items with address item, list items and referenced items.
 	 *
-	 * @param bool $default Add default criteria
-	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
-	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
+	 * @param array $map Associative list of IDs as keys and the associative array of values
+	 * @param string[] $domains List of domains to fetch list items and referenced items for
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface with IDs as keys
 	 */
-	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	protected function buildItems( array $map, array $domains ) : \Aimeos\Map
 	{
-		if( $default === true )
+		$items = $refItemMap = $refIdMap = [];
+
+		if( $domains === null || !empty( $domains ) )
 		{
-			$prefix = rtrim( $this->getPrefix(), '.' );
-			$object = $this->filterBase( $prefix );
+			foreach( $map as $listItem ) {
+				$refIdMap[$listItem->getDomain()][] = $listItem->getRefId();
+			}
 
-			$expr = [$object->getConditions()];
-
-			$exprTwo = [];
-			$exprTwo[] = $object->compare( '<=', $prefix . '.datestart', $this->date );
-			$exprTwo[] = $object->compare( '==', $prefix . '.datestart', null );
-			$expr[] = $object->or( $exprTwo );
-
-			$exprTwo = [];
-			$exprTwo[] = $object->compare( '>=', $prefix . '.dateend', $this->date );
-			$exprTwo[] = $object->compare( '==', $prefix . '.dateend', null );
-			$expr[] = $object->or( $exprTwo );
-
-			$object->setConditions( $object->and( $expr ) );
-
-			return $object;
+			$refItemMap = $this->getRefItems( $refIdMap, $domains );
 		}
 
-		return parent::filter();
+		foreach( $map as $id => $listItem )
+		{
+			if( isset( $refItemMap[$listItem->getDomain()][$listItem->getRefId()] ) ) {
+				$listItem->setRefItem( $refItemMap[$listItem->getDomain()][$listItem->getRefId()] );
+			}
+		}
+
+		return map( $map );
 	}
-
-
-	/**
-	 * Creates a new manager for list extensions.
-	 *
-	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g type, etc.
-	 */
-	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
-	{
-		return $this->getSubManagerBase( 'common', 'lists/' . $manager, $name );
-	}
-
-
-	/**
-	 * Returns the config path for retrieving the configuration values.
-	 *
-	 * @return string Configuration path
-	 */
-	abstract protected function getConfigPath() : string;
-
-
-	/**
-	 * Returns the search configuration for searching items.
-	 *
-	 * @return array Associative list of search keys and search definitions
-	 */
-	abstract protected function getSearchConfig() : array;
 
 
 	/**
@@ -347,4 +357,48 @@ abstract class Base
 	{
 		return $this->prefix;
 	}
+
+
+	/**
+	 * Returns the referenced items for the given IDs.
+	 *
+	 * @param array $refIdMap Associative list of domain/ref-ID key/value pairs
+	 * @param string[] $domains List of domain names whose referenced items should be attached
+	 * @return array Associative list of parent-item-ID/domain/items key/value pairs
+	 */
+	protected function getRefItems( array $refIdMap, array $domains ) : array
+	{
+		$items = [];
+
+		foreach( $refIdMap as $domain => $list )
+		{
+			$manager = \Aimeos\MShop::create( $this->getContext(), $domain );
+
+			$search = $manager->filter()->slice( 0, count( $list ) )->add( [
+				str_replace( '/', '.', $domain ) . '.id' => $list
+			]);
+
+			foreach( $manager->search( $search, $domains ) as $id => $item ) {
+					$items[$domain][$id] = $item;
+			}
+		}
+
+		return $items;
+	}
+
+
+	/**
+	 * Returns the config path for retrieving the configuration values.
+	 *
+	 * @return string Configuration path
+	 */
+	abstract protected function getConfigPath() : string;
+
+
+	/**
+	 * Returns the search configuration for searching items.
+	 *
+	 * @return array Associative list of search keys and search definitions
+	 */
+	abstract protected function getSearchConfig() : array;
 }

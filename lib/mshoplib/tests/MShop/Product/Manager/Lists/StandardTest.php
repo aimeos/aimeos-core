@@ -230,4 +230,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$this->assertEquals( $itemId, $item->getId() );
 		}
 	}
+
+
+	public function testSearchItemsRef()
+	{
+		$search = $this->object->filter( true )->slice( 0, 1 )->add( [
+			'product.lists.domain' => 'text',
+			'product.lists.position' => 5,
+			'product.lists.editor' => $this->editor,
+		] );
+		$results = $this->object->search( $search, ['text'] );
+		$refItem = $results->first( new \Exception( 'No list item found' ) )->getRefItem();
+
+		$this->assertNotNull( $refItem );
+		$this->assertEquals( 'Cafe Noire Cappuccino online kaufen', $refItem->getContent() );
+	}
 }
