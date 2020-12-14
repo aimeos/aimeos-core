@@ -152,12 +152,16 @@ trait Traits
 	 * Returns the list items that belong to the given IDs.
 	 *
 	 * @param string[] $ids List of IDs
-	 * @param string[]|null $domains List of domain names whose referenced items should be attached or null for all
+	 * @param string[] $domains List of domain names whose referenced items should be attached
 	 * @param string $prefix Domain prefix
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface with IDs as keys
 	 */
-	protected function getListItems( array $ids, array $domains = null, string $prefix ) : \Aimeos\Map
+	protected function getListItems( array $ids, array $domains, string $prefix ) : \Aimeos\Map
 	{
+		if( empty( $domains ) ) {
+			return map();
+		}
+
 		$manager = $this->getObject()->getSubManager( 'lists' );
 		$search = $manager->filter()->slice( 0, 0x7fffffff );
 
