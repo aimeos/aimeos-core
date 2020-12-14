@@ -376,7 +376,7 @@ abstract class Base
 
 			$search = $manager->filter()->slice( 0, count( $list ) )->add( [
 				str_replace( '/', '.', $domain ) . '.id' => $list
-			]);
+			] );
 
 			foreach( $manager->search( $search, $domains ) as $id => $item ) {
 					$items[$domain][$id] = $item;

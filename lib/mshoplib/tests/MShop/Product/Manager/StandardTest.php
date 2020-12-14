@@ -209,7 +209,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId(), ['text'] );
 
-		$this->object->delete( $itemUpd->deleteListItems( $itemUpd->getListItems( 'text' )->toArray(), true ) );
+		$listItem = $itemUpd->getListItem( 'text', 'default', $listItem->getRefId(), false );
+		$this->object->delete( $itemUpd->deleteListItem( 'text', $listItem, $listItem->getRefItem() ) );
 
 
 		$this->assertTrue( $item->getId() !== null );
