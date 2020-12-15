@@ -311,7 +311,7 @@ abstract class Base
 	 */
 	protected function buildItems( array $map, array $domains ) : \Aimeos\Map
 	{
-		$items = $refItemMap = $refIdMap = [];
+		$refItemMap = $refIdMap = [];
 
 		if( $domains === null || !empty( $domains ) )
 		{

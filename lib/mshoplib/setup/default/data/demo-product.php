@@ -10,8 +10,8 @@ return array(
 
 	// Single article
 	array(
-		'product.code' => 'demo-article', 'product.type' => 'default',
-		'product.label' => 'Demo article', 'product.status' => 1,
+		'product.code' => 'demo-article', 'product.type' => 'default', 'product.label' => 'Demo article',
+		'product.status' => 1, 'product.rating' => '5.00', 'product.ratings' => 1,
 		'text' => array(
 			array(
 				'text.label' => 'Demo name/de: Demoartikel', 'text.content' => 'Demoartikel',
@@ -323,6 +323,7 @@ return array(
 	array(
 		'product.code' => 'demo-selection-article-1', 'product.type' => 'default',
 		'product.label' => 'Demo variant article 1', 'product.status' => 1,
+		'product.rating' => '4.00', 'product.ratings' => 1,
 		'attribute' => array(
 			array(
 				'attribute.code' => 'demo-blue', 'attribute.label' => 'Demo: Blue',
@@ -430,6 +431,7 @@ return array(
 	array(
 		'product.code' => 'demo-selection-article-2', 'product.type' => 'default',
 		'product.label' => 'Demo variant article 2', 'product.status' => 1,
+		'product.rating' => '4.00', 'product.ratings' => 1,
 		'attribute' => array(
 			array(
 				'attribute.code' => 'demo-beige', 'attribute.label' => 'Demo: Beige',
@@ -519,6 +521,7 @@ return array(
 	array(
 		'product.code' => 'demo-selection-article', 'product.type' => 'select',
 		'product.label' => 'Demo selection article', 'product.status' => 1,
+		'product.rating' => '4.00', 'product.ratings' => 1,
 		'text' => array(
 			array(
 				'text.label' => 'Demo name/de: Demoartikel mit Auswahl',
@@ -626,7 +629,7 @@ return array(
 				'media.previews' => [
 					240 => 'https://demo.aimeos.org/media/2.jpg',
 					720 => 'https://demo.aimeos.org/media/2-med.jpg',
-					1200 => 'https://demo.aimeos.org/media/3-big.jpg',
+					1200 => 'https://demo.aimeos.org/media/2-big.jpg',
 				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0,
@@ -681,6 +684,7 @@ return array(
 	array(
 		'product.code' => 'demo-bundle-article', 'product.type' => 'bundle',
 		'product.label' => 'Demo bundle article', 'product.status' => 1,
+		'product.rating' => '4.00', 'product.ratings' => 1,
 		'text' => array(
 			array(
 				'text.label' => 'Demo name/de: Demoartikel mit Bundle',
@@ -924,6 +928,7 @@ return array(
 	array(
 		'product.code' => 'demo-voucher', 'product.type' => 'voucher',
 		'product.label' => 'Demo voucher', 'product.status' => 1,
+		'product.rating' => '5.00', 'product.ratings' => 1,
 		'text' => array(
 			array(
 				'text.label' => 'Demo name/de: Gutschein',
