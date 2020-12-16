@@ -626,7 +626,7 @@ return array(
 				'media.previews' => [
 					240 => 'https://demo.aimeos.org/media/2.jpg',
 					720 => 'https://demo.aimeos.org/media/2-med.jpg',
-					1200 => 'https://demo.aimeos.org/media/3-big.jpg',
+					1200 => 'https://demo.aimeos.org/media/2-big.jpg',
 				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0,
