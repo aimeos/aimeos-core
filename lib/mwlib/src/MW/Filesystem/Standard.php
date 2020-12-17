@@ -142,11 +142,17 @@ class Standard implements Iface, DirIface, MetaIface
 	 */
 	public function time( string $path ) : int
 	{
-		if( ( $time = @filemtime( $this->resolve( $path ) ) ) === false ) {
-			throw new Exception( sprintf( 'Couldn\'t get file time for "%1$s"', $path ) );
+		$path = $this->resolve( $path );
+
+		if( ( $mtime = @filemtime( $path ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t get file mtime for "%1$s"', $path ) );
 		}
 
-		return $time;
+		if( ( $ctime = @filectime( $path ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t get file ctime for "%1$s"', $path ) );
+		}
+
+		return max( $mtime, $ctime );
 	}
 
 
