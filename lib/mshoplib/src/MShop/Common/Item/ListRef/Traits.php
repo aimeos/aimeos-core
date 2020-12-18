@@ -52,6 +52,8 @@ trait Traits
 		foreach( $this->listRmItems as $key => $item ) {
 			$this->listRmItems[$key] = clone $item;
 		}
+
+		$this->listPrepared = false;
 	}
 
 
