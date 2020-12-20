@@ -16,7 +16,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 255, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
