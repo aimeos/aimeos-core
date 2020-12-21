@@ -52,7 +52,6 @@ return array(
 		'media/path/to/folder/example3.jpg' => array( 'langid' => 'de', 'type' => 'prod_123x103', 'domain' => 'catalog', 'label' => 'path/to/folder/example3.jpg', 'link' => 'path/to/folder/example3.jpg', 'preview' => [1 => 'path/to/folder/example3.jpg'], 'status' => 0, 'mimetype' => 'image/jpeg' ),
 		'media/path/to/folder/example4.jpg' => array( 'langid' => 'de', 'type' => 'icon', 'domain' => 'catalog', 'label' => 'path/to/folder/example4.jpg', 'link' => 'path/to/folder/example4.jpg', 'preview' => [1 => 'path/to/folder/example4.jpg'], 'status' => 1, 'mimetype' => 'image/jpeg' ),
 		'media/path/to/folder/cafe/stage.jpg' => array( 'langid' => 'de', 'type' => 'stage', 'domain' => 'catalog', 'label' => 'path/to/folder/cafe/stage.jpg', 'link' => 'path/to/folder/cafe/stage.jpg', 'preview' => [1 => 'path/to/folder/cafe/stage.jpg'], 'status' => 1, 'mimetype' => 'image/jpeg' ),
-		'media/path/to/supplier.jpg' => array( 'langid' => null, 'type' => 'default', 'domain' => 'supplier', 'label' => 'path/to/supplier.jpg', 'link' => 'path/to/supplier.jpg', 'preview' => [1 => 'path/to/supplier.jpg'], 'status' => 1, 'mimetype' => 'image/jpeg' ),
 	),
 
 

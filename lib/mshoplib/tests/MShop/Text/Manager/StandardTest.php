@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'text.editor', $this->editor ) );
-		$this->assertEquals( 93, count( $this->object->search( $search )->toArray() ) );
+		$this->assertEquals( 95, count( $this->object->search( $search )->toArray() ) );
 	}
 
 
@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->slice( 0, 5 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 5, count( $results ) );
-		$this->assertEquals( 91, $total );
+		$this->assertEquals( 93, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

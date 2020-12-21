@@ -49,9 +49,6 @@ return array(
 	),
 
 	'text' => array(
-
-//supplier
-		'text/supplier/description' => array( 'langid' => null, 'type' => 'description', 'domain' => 'supplier', 'label' => 'supplier/description', 'content' => 'Supplier description', 'status' => 1 ),
 //ATTR
 //size
 		'text/size/XS' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'size/XS', 'content' => 'XS', 'status' => 1 ),

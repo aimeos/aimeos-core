@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2020
  */
 
@@ -13,7 +12,7 @@ namespace Aimeos\MW\Setup\Task;
 /**
  * Adds supplier test data and all items from other domains.
  */
-class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
+class SupplierAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -22,7 +21,7 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies() : array
 	{
-		return ['MShopSetLocale'];
+		return ['MShopSetLocale', 'ProductAddTestData'];
 	}
 
 
@@ -34,82 +33,69 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
 		$this->msg( 'Adding supplier test data', 0 );
-		$this->additional->setEditor( 'core:lib/mshoplib' );
 
-		$this->addSupplierData();
+		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->process( $this->getData() );
 
 		$this->status( 'done' );
 	}
 
 
 	/**
-	 * Adds the supplier test data.
+	 * Returns the test data array
 	 *
-	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
+	 * @return array Multi-dimensional array of test data
 	 */
-	private function addSupplierData()
+	protected function getData()
 	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->additional, 'Standard' );
-		$supplierAddressManager = $supplierManager->getSubManager( 'address', 'Standard' );
-
-		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'supplier.php';
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'supplier.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for supplier domain', $path ) );
 		}
 
-		$supIds = [];
-		$supplier = $supplierManager->create();
+		return $testdata;
+	}
 
-		$supplierManager->begin();
 
-		foreach( $testdata['supplier'] as $key => $dataset )
-		{
-			$supplier->setId( null );
-			$supplier->setCode( $dataset['code'] );
-			$supplier->setLabel( $dataset['label'] );
-			$supplier->setStatus( $dataset['status'] );
-
-			$supplierManager->save( $supplier );
-			$supIds[$key] = $supplier->getId();
+	/**
+	 * Returns the manager for the current setup task
+	 *
+	 * @param string $domain Domain name of the manager
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
+	 */
+	protected function getManager( $domain )
+	{
+		if( $domain === 'supplier' ) {
+			return \Aimeos\MShop\Supplier\Manager\Factory::create( $this->additional, 'Standard' );
 		}
 
-		$supAdr = $supplierAddressManager->create();
-		foreach( $testdata['supplier/address'] as $dataset )
+		return parent::getManager( $domain );
+	}
+
+
+	/**
+	 * Adds the supplier data from the given array
+	 *
+	 * @param array Multi-dimensional array of test data
+	 */
+	protected function process( array $testdata )
+	{
+		$manager = $this->getManager( 'supplier' );
+		$listManager = $manager->getSubManager( 'lists' );
+		$addrManager = $manager->getSubManager( 'address' );
+
+		$manager->begin();
+		$this->storeTypes( $testdata, ['supplier/lists/type'] );
+		$manager->commit();
+
+		foreach( $testdata['supplier'] ?? [] as $entry )
 		{
-			if( !isset( $supIds[$dataset['parentid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No supplier ID found for "%1$s"', $dataset['refid'] ) );
-			}
+			$item = $manager->create()->fromArray( $entry );
+			$item = $this->addListData( $listManager, $item, $entry );
+			$item = $this->addAddressData( $addrManager, $item, $entry );
 
-			$supAdr->setId( null );
-			$supAdr->setCompany( $dataset['company'] );
-			$supAdr->setVatID( ( isset( $dataset['vatid'] ) ? $dataset['vatid'] : '' ) );
-			$supAdr->setVatID( $dataset['vatid'] );
-			$supAdr->setSalutation( $dataset['salutation'] );
-			$supAdr->setTitle( $dataset['title'] );
-			$supAdr->setFirstname( $dataset['firstname'] );
-			$supAdr->setLastname( $dataset['lastname'] );
-			$supAdr->setAddress1( $dataset['address1'] );
-			$supAdr->setAddress2( $dataset['address2'] );
-			$supAdr->setAddress3( $dataset['address3'] );
-			$supAdr->setPostal( $dataset['postal'] );
-			$supAdr->setCity( $dataset['city'] );
-			$supAdr->setState( $dataset['state'] );
-			$supAdr->setCountryId( $dataset['countryid'] );
-			$supAdr->setTelephone( $dataset['telephone'] );
-			$supAdr->setEmail( $dataset['email'] );
-			$supAdr->setTelefax( $dataset['telefax'] );
-			$supAdr->setWebsite( $dataset['website'] );
-			$supAdr->setLanguageId( $dataset['langid'] );
-			$supAdr->setLatitude( $dataset['latitude'] );
-			$supAdr->setLongitude( $dataset['longitude'] );
-			$supAdr->setBirthday( $dataset['birthday'] ?? null );
-			$supAdr->setParentId( $supIds[$dataset['parentid']] );
-
-			$supplierAddressManager->save( $supAdr, false );
+			$manager->save( $item );
 		}
-
-		$supplierManager->commit();
 	}
 }
