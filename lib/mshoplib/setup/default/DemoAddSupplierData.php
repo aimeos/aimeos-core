@@ -93,58 +93,97 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		foreach( $data as $entry )
 		{
-			$item = $manager->create();
-			$item->setCode( $entry['code'] );
-			$item->setLabel( $entry['label'] );
-			$item->setStatus( $entry['status'] );
+			$item = $manager->create()->fromArray( $entry, true );
+
+			$item = $this->addRefItems( $item, $entry );
+			$item = $this->addProductRefs( $item, $entry );
+			$item = $this->addAddressItems( $item, $entry );
 
 			$manager->save( $item );
-
-			if( isset( $entry['delivery'] ) ) {
-				$this->saveAddressItems( $entry['delivery'], $item->getId() );
-			}
-
-			if( isset( $entry['product'] ) ) {
-				$this->addProducts( $item->getId(), $entry['product'], 'supplier' );
-			}
 		}
 	}
 
 
 	/**
-	 * Stores the supplier items
+	 * Adds the referenced product items from the given entry data.
 	 *
-	 * @param array $data List of arrays containing the supplier properties
-	 * @param string $id Unique ID of the supplier item
+	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item with list items
+	 * @param array $entry Associative list of data with product section
+	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface $item Updated item
 	 */
-	protected function saveAddressItems( array $data, $id )
+	protected function addAddressItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $entry )
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'supplier/address' );
 
-		foreach( $data as $entry )
-		{
-			$addr = $manager->create();
-			$addr->setParentId( $id );
-			$addr->setTitle( $entry['title'] );
-			$addr->setSalutation( $entry['salutation'] );
-			$addr->setCompany( $entry['company'] );
-			$addr->setVatID( $entry['vatid'] );
-			$addr->setFirstname( $entry['firstname'] );
-			$addr->setLastname( $entry['lastname'] );
-			$addr->setAddress1( $entry['address1'] );
-			$addr->setAddress2( $entry['address2'] );
-			$addr->setAddress3( $entry['address3'] );
-			$addr->setPostal( $entry['postal'] );
-			$addr->setCity( $entry['city'] );
-			$addr->setState( $entry['state'] );
-			$addr->setLanguageId( $entry['langid'] );
-			$addr->setCountryId( $entry['countryid'] );
-			$addr->setTelephone( $entry['telephone'] );
-			$addr->setEmail( $entry['email'] );
-			$addr->setTelefax( $entry['telefax'] );
-			$addr->setWebsite( $entry['website'] );
-
-			$manager->save( $addr );
+		foreach( $entry['address'] ?? [] as $addr ) {
+			$item->addAddressItem( $manager->create()->fromArray( $addr, true ) );
 		}
+
+		return $item;
+	}
+
+
+	/**
+	 * Adds the referenced product items from the given entry data.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item with list items
+	 * @param array $entry Associative list of data with product section
+	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface $item Updated item
+	 */
+	protected function addProductRefs( \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $entry )
+	{
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
+
+		foreach( $entry['product'] ?? [] as $data )
+		{
+			$listItem = $manager->createListItem()->fromArray( $data );
+			$listItem->setRefId( $manager->find( $data['product.code'] )->getId() );
+
+			$item->addListItem( 'product', $listItem );
+		}
+
+		return $item;
+	}
+
+
+	/**
+	 * Adds the referenced items from the given entry data.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item with list items
+	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
+	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface $item Updated item
+	 */
+	protected function addRefItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $entry )
+	{
+		$context = $this->getContext();
+		$domain = $item->getResourceType();
+		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
+
+		foreach( ['media', 'price', 'text'] as $refDomain )
+		{
+			if( isset( $entry[$refDomain] ) )
+			{
+				$manager = \Aimeos\MShop::create( $context, $refDomain );
+
+				foreach( $entry[$refDomain] as $data )
+				{
+					$listItem = $listManager->create()->fromArray( $data );
+					$refItem = $manager->create()->fromArray( $data );
+
+					if( isset( $data['property'] ) )
+					{
+						foreach( (array) $data['property'] as $property )
+						{
+							$propItem = $manager->createPropertyItem()->fromArray( $property );
+							$refItem->addPropertyItem( $propItem );
+						}
+					}
+
+					$item->addListItem( $refDomain, $listItem, $refItem );
+				}
+			}
+		}
+
+		return $item;
 	}
 }
