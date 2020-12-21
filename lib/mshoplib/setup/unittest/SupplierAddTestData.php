@@ -77,7 +77,7 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	/**
 	 * Adds the supplier data from the given array
 	 *
-	 * @param array Multi-dimensional array of test data
+	 * @param array $testdata Multi-dimensional array of test data
 	 */
 	protected function process( array $testdata )
 	{

@@ -107,11 +107,11 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	/**
 	 * Adds the referenced product items from the given entry data.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item with list items
+	 * @param \Aimeos\MShop\Common\Item\AddressRef\Iface $item Item with list items
 	 * @param array $entry Associative list of data with product section
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface $item Updated item
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item
 	 */
-	protected function addAddressItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $entry )
+	protected function addAddressItems( \Aimeos\MShop\Common\Item\AddressRef\Iface $item, array $entry )
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'supplier/address' );
 
@@ -128,7 +128,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 *
 	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item with list items
 	 * @param array $entry Associative list of data with product section
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface $item Updated item
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item
 	 */
 	protected function addProductRefs( \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $entry )
 	{
@@ -151,7 +151,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 *
 	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item with list items
 	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface $item Updated item
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item
 	 */
 	protected function addRefItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $entry )
 	{

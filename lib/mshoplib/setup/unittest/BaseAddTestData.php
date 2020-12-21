@@ -39,7 +39,7 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 * @param \Aimeos\MShop\Common\Manager\Iface $addrManager Address manager object
 	 * @param \Aimeos\MShop\Common\Item\AddressRef\Iface $item Item object
 	 * @param array $data Associative list of key/list pairs
-	 * @return \Aimeos\MShop\Common\Item\AddressRef\Iface Modified item object
+	 * @return \Aimeos\MShop\Common\Item\Iface Modified item object
 	 */
 	protected function addAddressData( \Aimeos\MShop\Common\Manager\Iface $addrManager, \Aimeos\MShop\Common\Item\AddressRef\Iface $item, array $data )
 	{
@@ -60,7 +60,7 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 * @param \Aimeos\MShop\Common\Manager\Iface $listManager List manager object
 	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item object
 	 * @param array $data List of key/list pairs lists
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Modified item object
+	 * @return \Aimeos\MShop\Common\Item\Iface Modified item object
 	 */
 	protected function addListData( \Aimeos\MShop\Common\Manager\Iface $listManager, \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $data )
 	{
@@ -104,7 +104,7 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 * @param \Aimeos\MShop\Common\Manager\Iface $propManager Property manager object
 	 * @param \Aimeos\MShop\Common\Item\PropertyRef\Iface $item Item object
 	 * @param array $data List of key/list pairs lists
-	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Modified item object
+	 * @return \Aimeos\MShop\Common\Item\Iface Modified item object
 	 */
 	protected function addPropertyData( \Aimeos\MShop\Common\Manager\Iface $propManager, \Aimeos\MShop\Common\Item\PropertyRef\Iface $item, array $data )
 	{
