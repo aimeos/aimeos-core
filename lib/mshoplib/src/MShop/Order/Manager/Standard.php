@@ -341,7 +341,7 @@ class Standard
 
 		if( $site === true )
 		{
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 			$search->setConditions( $search->and( [
 				$this->getSiteCondition( $search, 'order.base.product.siteid', $level ),
 				$search->getConditions()
