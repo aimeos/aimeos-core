@@ -479,7 +479,7 @@ return array(
 					FROM (
 						SELECT :key AS "key", mindpr."value" AS "val"
 						FROM "mshop_product" AS mpro
-						JOIN "mshop_index_price" mindpr ON mpro."id" = mindpr."prodid"
+						:joins
 						WHERE :cond
 						GROUP BY :key, mindpr.value, mpro."id"
 						ORDER BY :order
@@ -492,7 +492,7 @@ return array(
 					FROM (
 						SELECT :key AS "key", mindpr."value" AS "val"
 						FROM "mshop_product" AS mpro
-						JOIN "mshop_index_price" mindpr ON mpro."id" = mindpr."prodid"
+						:joins
 						WHERE :cond
 						GROUP BY :key, mindpr.value, mpro."id"
 						ORDER BY :order
@@ -507,7 +507,7 @@ return array(
 					FROM (
 						SELECT :key AS "key", mindpr."value" AS "val"
 						FROM "mshop_product" AS mpro
-						JOIN "mshop_index_price" mindpr ON mpro."id" = mindpr."prodid"
+						:joins
 						WHERE :cond
 						GROUP BY :key, mindpr.value, mpro."id"
 						ORDER BY :order
@@ -520,7 +520,7 @@ return array(
 					FROM (
 						SELECT :key AS "key", mindpr."value" AS "val"
 						FROM "mshop_product" AS mpro
-						JOIN "mshop_index_price" mindpr ON mpro."id" = mindpr."prodid"
+						:joins
 						WHERE :cond
 						GROUP BY :key, mindpr.value, mpro."id"
 						ORDER BY :order
