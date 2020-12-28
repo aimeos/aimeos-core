@@ -13,7 +13,7 @@ namespace Aimeos\MW\Setup\Task;
 /**
  * Adds price test data.
  */
-class PriceAddTestData extends \Aimeos\MW\Setup\Task\Base
+class PriceAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -34,77 +34,59 @@ class PriceAddTestData extends \Aimeos\MW\Setup\Task\Base
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
 		$this->msg( 'Adding price test data', 0 );
+
 		$this->additional->setEditor( 'core:lib/mshoplib' );
-
-		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'price.php';
-
-		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for price domain', $path ) );
-		}
-
-		$this->addPriceData( $testdata );
+		$this->process( $this->getData() );
 
 		$this->status( 'done' );
 	}
 
 
 	/**
-	 * Adds the price test data.
+	 * Returns the test data array
 	 *
-	 * @param array $testdata Associative list of key/list pairs
-	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
+	 * @return array Multi-dimensional array of test data
 	 */
-	private function addPriceData( array $testdata )
+	protected function getData()
 	{
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
-		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
-		$propTypeManager = $priceManager->getSubManager( 'property', 'Standard' )->getSubManager( 'type', 'Standard' );
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'price.php';
 
-		$priceManager->begin();
-
-		$ptype = $priceTypeManager->create();
-		foreach( $testdata['price/type'] as $key => $dataset )
-		{
-			$ptype->setId( null );
-			$ptype->setCode( $dataset['code'] );
-			$ptype->setDomain( $dataset['domain'] );
-			$ptype->setLabel( $dataset['label'] );
-			$ptype->setStatus( $dataset['status'] );
-
-			$priceTypeManager->save( $ptype );
+		if( ( $testdata = include( $path ) ) == false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for price domain', $path ) );
 		}
 
-		$propTypeItem = $propTypeManager->create();
-		foreach( $testdata['price/property/type'] as $key => $dataset )
-		{
-			$propTypeItem->setId( null );
-			$propTypeItem->setCode( $dataset['code'] );
-			$propTypeItem->setDomain( $dataset['domain'] );
-			$propTypeItem->setLabel( $dataset['label'] );
-			$propTypeItem->setStatus( $dataset['status'] );
+		return $testdata;
+	}
 
-			$propTypeManager->save( $propTypeItem );
+
+	/**
+	 * Returns the manager for the current setup task
+	 *
+	 * @param string $domain Domain name of the manager
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
+	 */
+	protected function getManager( $domain )
+	{
+		if( $domain === 'price' ) {
+			return \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
 		}
 
-		$price = $priceManager->create();
-		foreach( $testdata['price'] as $key => $dataset )
-		{
-			$price->setId( null );
-			$price->setCurrencyId( $dataset['currencyid'] );
-			$price->setType( $dataset['type'] );
-			$price->setDomain( $dataset['domain'] );
-			$price->setLabel( $dataset['label'] );
-			$price->setQuantity( $dataset['quantity'] );
-			$price->setValue( $dataset['value'] );
-			$price->setCosts( $dataset['shipping'] );
-			$price->setRebate( $dataset['rebate'] );
-			$price->setTaxRate( $dataset['taxrate'] );
-			$price->setStatus( $dataset['status'] );
+		return parent::getManager( $domain );
+	}
 
-			$priceManager->save( $price, false );
-		}
 
-		$priceManager->commit();
+	/**
+	 * Adds the price data from the given array
+	 *
+	 * @param array Multi-dimensional array of test data
+	 */
+	protected function process( array $testdata )
+	{
+		$manager = $this->getManager( 'price' );
+		$manager->begin();
+
+		$this->storeTypes( $testdata, ['price/type', 'price/lists/type', 'price/property/type'] );
+
+		$manager->commit();
 	}
 }

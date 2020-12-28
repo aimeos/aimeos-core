@@ -74,12 +74,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItems()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'text.label', 'misc_long_desc' ) );
-		$item = $this->object->search( $search, ['media'] )->first();
+		$search->setConditions( $search->compare( '==', 'text.label', 'service_text3.1' ) );
 
-		if( $item && ( $listItem = $item->getListItems( 'media', 'align-top' )->first() ) === null ) {
-			throw new \RuntimeException( 'No list item found' );
-		}
+		$item = $this->object->search( $search, ['customer'] )->first( new \RuntimeException( 'No item found' ) );
+		$listItem = $item->getListItems( 'customer', 'test' )->first( new \RuntimeException( 'No list item found' ) );
 
 		$total = 0;
 		$search = $this->object->filter();
@@ -88,22 +86,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'text.id', null );
 		$expr[] = $search->compare( '!=', 'text.siteid', null );
 		$expr[] = $search->compare( '==', 'text.languageid', 'de' );
-		$expr[] = $search->compare( '==', 'text.type', 'long' );
-		$expr[] = $search->compare( '>=', 'text.label', '' );
-		$expr[] = $search->compare( '==', 'text.domain', 'catalog' );
-		$expr[] = $search->compare( '~=', 'text.content', 'Lange Beschreibung' );
-		$expr[] = $search->compare( '==', 'text.status', 1 );
+		$expr[] = $search->compare( '==', 'text.type', 'serviceinformation' );
+		$expr[] = $search->compare( '==', 'text.label', 'service_text3.1' );
+		$expr[] = $search->compare( '==', 'text.domain', 'service' );
+		$expr[] = $search->compare( '=~', 'text.content', 'Unittest' );
+		$expr[] = $search->compare( '==', 'text.status', 0 );
 		$expr[] = $search->compare( '>=', 'text.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'text.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'text.editor', $this->editor );
 
-		$param = ['media', 'align-top', $listItem->getRefId()];
+		$param = ['customer', 'test', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->make( 'text:has', $param ), null );
 
-		$param = ['media', 'align-top'];
+		$param = ['customer', 'test'];
 		$expr[] = $search->compare( '!=', $search->make( 'text:has', $param ), null );
 
-		$param = ['media'];
+		$param = ['customer'];
 		$expr[] = $search->compare( '!=', $search->make( 'text:has', $param ), null );
 
 		$search->setConditions( $search->and( $expr ) );
@@ -117,7 +115,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'text.editor', $this->editor ) );
-		$this->assertEquals( 95, count( $this->object->search( $search )->toArray() ) );
+		$this->assertEquals( 93, count( $this->object->search( $search )->toArray() ) );
 	}
 
 
@@ -133,7 +131,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->slice( 0, 5 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 5, count( $results ) );
-		$this->assertEquals( 93, $total );
+		$this->assertEquals( 90, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

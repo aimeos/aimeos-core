@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2020
  */
 
@@ -13,7 +12,7 @@ namespace Aimeos\MW\Setup\Task;
 /**
  * Adds attribute test data and all items from other domains.
  */
-class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
+class TextAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -27,68 +26,66 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
-	 * Adds attribute test data.
+	 * Adds text test data.
 	 */
 	public function migrate()
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
 		$this->msg( 'Adding text test data', 0 );
+
 		$this->additional->setEditor( 'core:lib/mshoplib' );
-
-		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'text.php';
-
-		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for text domain', $path ) );
-		}
-
-		$this->addTextData( $testdata );
+		$this->process( $this->getData() );
 
 		$this->status( 'done' );
 	}
 
 
 	/**
-	 * Adds the required text test data for text.
+	 * Returns the test data array
 	 *
-	 * @param array $testdata Associative list of key/list pairs
-	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
+	 * @return array Multi-dimensional array of test data
 	 */
-	private function addTextData( array $testdata )
+	protected function getData()
 	{
-		$textManager = \Aimeos\MShop\Text\Manager\Factory::create( $this->additional, 'Standard' );
-		$textTypeManager = $textManager->getSubManager( 'type', 'Standard' );
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'text.php';
 
-		$ttype = $textTypeManager->create();
-
-		$textManager->begin();
-
-		foreach( $testdata['text/type'] as $key => $dataset )
-		{
-			$ttype->setId( null );
-			$ttype->setCode( $dataset['code'] );
-			$ttype->setDomain( $dataset['domain'] );
-			$ttype->setLabel( $dataset['label'] );
-			$ttype->setStatus( $dataset['status'] );
-
-			$textTypeManager->save( $ttype );
+		if( ( $testdata = include( $path ) ) == false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for text domain', $path ) );
 		}
 
-		$text = $textManager->create();
-		foreach( $testdata['text'] as $key => $dataset )
-		{
-			$text->setId( null );
-			$text->setLanguageId( $dataset['langid'] );
-			$text->setType( $dataset['type'] );
-			$text->setDomain( $dataset['domain'] );
-			$text->setLabel( $dataset['label'] );
-			$text->setContent( $dataset['content'] );
-			$text->setStatus( $dataset['status'] );
+		return $testdata;
+	}
 
-			$textManager->save( $text, false );
+
+	/**
+	 * Returns the manager for the current setup task
+	 *
+	 * @param string $domain Domain name of the manager
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
+	 */
+	protected function getManager( $domain )
+	{
+		if( $domain === 'text' ) {
+			return \Aimeos\MShop\Text\Manager\Factory::create( $this->additional, 'Standard' );
 		}
 
-		$textManager->commit();
+		return parent::getManager( $domain );
+	}
+
+
+	/**
+	 * Adds the text data from the given array
+	 *
+	 * @param array Multi-dimensional array of test data
+	 */
+	protected function process( array $testdata )
+	{
+		$manager = $this->getManager( 'text' );
+		$manager->begin();
+
+		$this->storeTypes( $testdata, ['text/type', 'text/lists/type'] );
+
+		$manager->commit();
 	}
 }

@@ -2,11 +2,10 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2020
  */
 
-return array(
+return [
 	'media/type' => [
 		['media.type.domain' => 'catalog', 'media.type.code' => 'prod_123x103', 'media.type.label' => 'Product 123x103'],
 		['media.type.domain' => 'product', 'media.type.code' => 'prod_266x221', 'media.type.label' => 'Product 266x221'],
@@ -43,7 +42,9 @@ return array(
 		['media.lists.type.domain' => 'attribute', 'media.lists.type.code' => 'back', 'media.lists.type.label' => 'Backside'],
 	],
 
-	'media' => array(
-		'media/prod_242x416/197_CafeNoire_Colombia_242x416.jpg' => array( 'langid' => 'de', 'type' => 'prod_242x416', 'domain' => 'attribute', 'label' => 'prod_242x416/197_CafeNoire_Colombia_242x416.jpg', 'link' => 'prod_242x416/197_CafeNoire_Colombia_242x416.jpg', 'preview' => [1 => 'prod_242x416/197_CafeNoire_Colombia_242x416.jpg'], 'status' => 1, 'mimetype' => 'image/jpeg' ),
-	),
-);
+	'media/property/type' => [
+		['media.property.type.domain' => 'media', 'media.property.type.code' => 'size', 'media.property.type.label' => 'Size'],
+		['media.property.type.domain' => 'media', 'media.property.type.code' => 'mtime', 'media.property.type.label' => 'Modification time'],
+		['media.property.type.domain' => 'media', 'media.property.type.code' => 'copyright', 'media.property.type.label' => 'HTML color code'],
+	],
+];

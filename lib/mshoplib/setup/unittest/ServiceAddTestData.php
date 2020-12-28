@@ -22,7 +22,7 @@ class ServiceAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	 */
 	public function getPreDependencies() : array
 	{
-		return ['MShopSetLocale'];
+		return ['MShopSetLocale', 'CustomerAddTestData'];
 	}
 
 

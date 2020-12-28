@@ -1,23 +1,23 @@
 <?php
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
- * @copyright Aimeos (aimeos.org), 2015-2020
+ * @copyright Aimeos (aimeos.org], 2015-2020
  */
 
-return array(
-	'price/type' => array(
-		'attribute/default' => array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
-		'product/default' => array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
-		'product/purchase' => array( 'domain' => 'product', 'code' => 'purchase', 'label' => 'Purchase', 'status' => 1 ),
-		'service/default' => array( 'domain' => 'service', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
-	),
+return [
+	'price/type' => [
+		'attribute/default' => ['price.type.domain' => 'attribute', 'price.type.code' => 'default', 'price.type.label' => 'Standard'],
+		'product/default' => ['price.type.domain' => 'product', 'price.type.code' => 'default', 'price.type.label' => 'Standard'],
+		'product/purchase' => ['price.type.domain' => 'product', 'price.type.code' => 'purchase', 'price.type.label' => 'Purchase'],
+		'service/default' => ['price.type.domain' => 'service', 'price.type.code' => 'default', 'price.type.label' => 'Standard'],
+	],
 
-	'price/property/type' => array(
-		'price/zone' => array( 'domain' => 'price', 'code' => 'zone', 'label' => 'Tax zone', 'status' => 1 ),
-	),
+	'price/lists/type' => [
+		'customer/test' => ['price.lists.type.domain' => 'customer', 'price.lists.type.code' => 'test', 'price.lists.type.label' => 'Standard'],
+		'product/default' => ['price.lists.type.domain' => 'product', 'price.lists.type.code' => 'default', 'price.lists.type.label' => 'Standard'],
+	],
 
-	'price' => array(
-		'price/attribute/default/99.99/9.99' => array( 'type' => 'default', 'currencyid' => 'EUR', 'domain' => 'attribute', 'label'=>'attribute/default/99.99/9.99', 'quantity' => 1, 'value' => '99.99', 'shipping' => '9.99', 'rebate' => '0.00', 'taxrate' => '19.00', 'status' => 1 ),
-	),
-);
+	'price/property/type' => [
+		'price/zone' => ['price.property.type.domain' => 'price', 'price.property.type.code' => 'zone', 'price.property.type.label' => 'Tax zone'],
+	],
+];

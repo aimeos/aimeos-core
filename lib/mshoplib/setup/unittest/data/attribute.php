@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2020
  */
 
@@ -121,6 +120,12 @@ return [
 			'attribute.domain' => 'product', 'attribute.type' => 'size', 'attribute.code' => 'xxl',
 			'attribute.label' => 'product/size/xxl', 'attribute.position' => 5,
 			'lists' => [
+				'price' => [[
+					'attribute.lists.type' => 'default', 'attribute.lists.domain' => 'price',
+					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'attribute',
+					'price.label'=>'attribute/default/99.99/9.99', 'price.quantity' => 1, 'price.value' => '99.99',
+					'price.costs' => '9.99', 'price.rebate' => '0.00', 'price.taxrate' => '19.00',
+				]],
 				'text' => [[
 					'attribute.lists.type' => 'default', 'attribute.lists.domain' => 'text',
 					'text.languageid' => null, 'text.type' => 'name', 'text.domain' => 'attribute',

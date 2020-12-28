@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertArrayHasKey( 'text', $result );
-		$this->assertEquals( 7, $result['text'] );
+		$this->assertEquals( 8, $result['text'] );
 	}
 
 
@@ -195,7 +195,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->slice( 0, 3 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 3, count( $results ) );
-		$this->assertEquals( 12, $total );
+		$this->assertEquals( 13, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

@@ -189,7 +189,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
 
-		$this->assertEquals( 27, count( $results ) );
+		$this->assertEquals( 28, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

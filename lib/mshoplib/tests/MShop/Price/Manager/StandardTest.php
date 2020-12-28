@@ -188,13 +188,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'price.value', '99.99' ) );
-		$item = $this->object->search( $search, ['customer'] )->first();
+		$search = $this->object->filter()->add( ['price.value' => '2.95', 'price.costs' => '1.00'] );
 
-		if( $item && ( $listItem = $item->getListItems( 'customer', 'test' )->first() ) === null ) {
-			throw new \RuntimeException( 'No list item found' );
-		}
+		$item = $this->object->search( $search, ['customer'] )->first( new \RuntimeException( 'No item found' ) );
+		$listItem = $item->getListItems( 'customer', 'test' )->first( new \RuntimeException( 'No list item found' ) );
 
 		$total = 0;
 		$search = $this->object->filter();
@@ -203,12 +200,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'price.id', null );
 		$expr[] = $search->compare( '!=', 'price.siteid', null );
 		$expr[] = $search->compare( '==', 'price.type', 'default' );
-		$expr[] = $search->compare( '==', 'price.domain', 'attribute' );
+		$expr[] = $search->compare( '==', 'price.domain', 'service' );
 		$expr[] = $search->compare( '>=', 'price.label', '' );
 		$expr[] = $search->compare( '==', 'price.currencyid', 'EUR' );
-		$expr[] = $search->compare( '==', 'price.quantity', 1 );
-		$expr[] = $search->compare( '==', 'price.value', '99.99' );
-		$expr[] = $search->compare( '==', 'price.costs', '9.99' );
+		$expr[] = $search->compare( '==', 'price.quantity', 2 );
+		$expr[] = $search->compare( '==', 'price.value', '2.95' );
+		$expr[] = $search->compare( '==', 'price.costs', '1.00' );
 		$expr[] = $search->compare( '==', 'price.rebate', '0.00' );
 		$expr[] = $search->compare( '=~', 'price.taxrate', '{' );
 		$expr[] = $search->compare( '==', 'price.status', 1 );

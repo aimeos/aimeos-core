@@ -1,7 +1,6 @@
 <?php
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2020
  */
 
@@ -34,12 +33,12 @@ return [
 				'price' => [[
 					'service.lists.type' => 'default', 'service.lists.position' => 0,
 					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'service',
-					'price.label'=>'product/default/12.95/1.99', 'price.quantity' => 1, 'price.value' => '12.95',
+					'price.label'=>'service/default/12.95/1.99', 'price.quantity' => 1, 'price.value' => '12.95',
 					'price.costs' => '1.99', 'price.rebate' => '1.05', 'price.taxrate' => '19.00'
 				], [
 					'service.lists.type' => 'default', 'service.lists.position' => 0,
 					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'service',
-					'price.label'=>'product/default/2.95/0.00', 'price.quantity' => 2, 'price.value' => '2.95',
+					'price.label'=>'service/default/2.95/0.00', 'price.quantity' => 2, 'price.value' => '2.95',
 					'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00'
 				]],
 				'media' => [[
@@ -86,13 +85,26 @@ return [
 				'price' => [[
 					'service.lists.type' => 'default', 'service.lists.position' => 0,
 					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'service',
-					'price.label'=>'product/default/12.95/1.99', 'price.quantity' => 1, 'price.value' => '12.95',
+					'price.label'=>'service/default/12.95/1.99', 'price.quantity' => 1, 'price.value' => '12.95',
 					'price.costs' => '1.99', 'price.rebate' => '1.05', 'price.taxrate' => '19.00'
 				], [
 					'service.lists.type' => 'default', 'service.lists.position' => 0,
 					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'service',
-					'price.label'=>'product/default/2.95/0.00', 'price.quantity' => 2, 'price.value' => '2.95',
-					'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00'
+					'price.label'=>'service/default/2.95/0.00', 'price.quantity' => 2, 'price.value' => '2.95',
+					'price.costs' => '1.00', 'price.rebate' => '0.00', 'price.taxrate' => '19.00',
+					'lists' => [
+						'customer' => [[
+							'price.lists.type' => 'test', 'price.lists.domain' => 'customer', 'price.lists.position' => 1,
+							'ref' => 'unitCustomer001',
+						], [
+							'price.lists.type' => 'test', 'price.lists.domain' => 'customer', 'price.lists.position' => 2,
+							'ref' => 'unitCustomer002',
+						], [
+							'price.lists.type' => 'test', 'price.lists.domain' => 'customer', 'price.lists.position' => 3,
+							'price.lists.datestart' => '2002-01-01 00:00:00', 'price.lists.dateend' => '2006-12-31 23:59:59',
+							'ref' => 'unitCustomer003',
+						]]
+					]
 				]],
 				'text' => [[
 					'service.lists.type' => 'unittype1', 'service.lists.position' => 0,
@@ -107,6 +119,23 @@ return [
 					'service.lists.datestart' => '2008-02-17 12:34:58', 'service.lists.dateend' => '2010-01-01 23:59:59',
 					'text.languageid' => 'de', 'text.type' => 'serviceinformation', 'text.domain' => 'service',
 					'text.label' => 'service_text3', 'text.content' => 'Unittest: Service text 3 de', 'text.status' => 0
+				], [
+					'service.lists.type' => 'unittype1', 'service.lists.position' => 2,
+					'text.languageid' => 'de', 'text.type' => 'serviceinformation', 'text.domain' => 'service',
+					'text.label' => 'service_text3.1', 'text.content' => 'Unittest: Service text 3.1 de', 'text.status' => 0,
+					'lists' => [
+						'customer' => [[
+							'text.lists.type' => 'test', 'text.lists.domain' => 'customer', 'text.lists.position' => 1,
+							'ref' => 'unitCustomer001',
+						], [
+							'text.lists.type' => 'test', 'text.lists.domain' => 'customer', 'text.lists.position' => 2,
+							'ref' => 'unitCustomer002',
+						], [
+							'text.lists.type' => 'test', 'text.lists.domain' => 'customer', 'text.lists.position' => 3,
+							'text.lists.datestart' => '2002-01-01 00:00:00', 'text.lists.dateend' => '2006-12-31 23:59:59',
+							'ref' => 'unitCustomer003',
+						]]
+					]
 				]],
 			],
 		],

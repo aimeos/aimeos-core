@@ -58,8 +58,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->aggregate( $search, 'text.lists.domain' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertArrayHasKey( 'media', $result );
-		$this->assertEquals( 10, $result['media'] );
+		$this->assertArrayHasKey( 'customer', $result );
+		$this->assertEquals( 2, $result['customer'] );
 	}
 
 
@@ -155,13 +155,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'text.lists.id', null );
 		$expr[] = $search->compare( '!=', 'text.lists.siteid', null );
 		$expr[] = $search->compare( '!=', 'text.lists.parentid', null );
-		$expr[] = $search->compare( '==', 'text.lists.domain', 'media' );
-		$expr[] = $search->compare( '==', 'text.lists.type', 'align-top' );
+		$expr[] = $search->compare( '==', 'text.lists.domain', 'customer' );
+		$expr[] = $search->compare( '==', 'text.lists.type', 'test' );
 		$expr[] = $search->compare( '>', 'text.lists.refid', 0 );
-		$expr[] = $search->compare( '==', 'text.lists.datestart', '2010-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'text.lists.dateend', '2098-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'text.lists.datestart', '2002-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'text.lists.dateend', '2006-12-31 23:59:59' );
 		$expr[] = $search->compare( '!=', 'text.lists.config', null );
-		$expr[] = $search->compare( '==', 'text.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'text.lists.position', 3 );
 		$expr[] = $search->compare( '==', 'text.lists.status', 1 );
 		$expr[] = $search->compare( '==', 'text.lists.editor', $this->editor );
 
@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'text.lists.editor', $this->editor ) );
-		$this->assertEquals( 12, count( $this->object->search( $search )->toArray() ) );
+		$this->assertEquals( 3, count( $this->object->search( $search )->toArray() ) );
 	}
 
 
@@ -188,10 +188,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->and( $conditions ) );
-		$search->slice( 0, 5 );
+		$search->slice( 0, 1 );
 		$results = $this->object->search( $search, [], $total )->toArray();
-		$this->assertEquals( 5, count( $results ) );
-		$this->assertEquals( 10, $total );
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 2, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
