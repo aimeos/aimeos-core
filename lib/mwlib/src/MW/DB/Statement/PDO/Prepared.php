@@ -75,7 +75,7 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 		try {
 			$stmt = $this->exec();
 		} catch( \PDOException $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage() . ': ' . $this->sql, $e->getCode(), $e->errorInfo );
+			throw new \Aimeos\MW\DB\Exception( $e->getMessage() . ': ' . $this->sql . map( $this->binds )->col( 0 )->toJson(), $e->getCode(), $e->errorInfo );
 		}
 
 		return new \Aimeos\MW\DB\Result\PDO( $stmt );
