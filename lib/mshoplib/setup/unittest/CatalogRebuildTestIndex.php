@@ -22,7 +22,7 @@ class CatalogRebuildTestIndex extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies() : array
 	{
-		return ['AttributeListAddTestData', 'ProductAddTestData', 'CatalogListAddTestData', 'SupplierListAddTestData'];
+		return ['AttributeListAddTestData', 'ProductAddTestData', 'CatalogListAddTestData', 'SupplierAddTestData'];
 	}
 
 
