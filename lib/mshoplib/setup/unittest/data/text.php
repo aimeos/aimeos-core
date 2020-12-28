@@ -49,37 +49,6 @@ return array(
 	),
 
 	'text' => array(
-//ATTR
-//size
-		'text/size/XS' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'size/XS', 'content' => 'XS', 'status' => 1 ),
-		'text/size/S' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'size/S', 'content' => 'S', 'status' => 1 ),
-		'text/size/M' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'size/M', 'content' => 'M', 'status' => 1 ),
-		'text/size/L' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'size/L', 'content' => 'L', 'status' => 1 ),
-		'text/size/XL' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'size/XL', 'content' => 'XL', 'status' => 1 ),
-		'text/size/XXL' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'size/XXL', 'content' => 'XXL', 'status' => 1 ),
-//length
-		'text/lenth/30' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'lenth/30', 'content' => '30', 'status' => 1 ),
-		'text/lenth/32' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'lenth/32', 'content' => '32', 'status' => 1 ),
-		'text/lenth/34' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'lenth/34', 'content' => '34', 'status' => 1 ),
-		'text/lenth/36' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'lenth/36', 'content' => '36', 'status' => 1 ),
-		'text/lenth/38' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'lenth/38', 'content' => '38', 'status' => 1 ),
-//width
-		'text/width/29' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'width/29', 'content' => '29', 'status' => 1 ),
-		'text/width/30' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'width/30', 'content' => '30', 'status' => 1 ),
-		'text/width/32' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'width/32', 'content' => '32', 'status' => 1 ),
-		'text/width/33' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'width/33', 'content' => '33', 'status' => 1 ),
-		'text/width/34' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'width/34', 'content' => '34', 'status' => 1 ),
-		'text/width/36' => array( 'langid' => null, 'type' => 'name', 'domain' => 'attribute', 'label' => 'width/36', 'content' => '36', 'status' => 1 ),
-//color
-		'text/color/white' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'attribute', 'label' => 'color/white', 'content' => 'weiß', 'status' => 1 ),
-		'text/color/gray' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'attribute', 'label' => 'color/gray', 'content' => 'grau', 'status' => 1 ),
-		'text/color/olive' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'attribute', 'label' => 'color/olive', 'content' => 'oliv', 'status' => 1 ),
-		'text/color/blue' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'attribute', 'label' => 'color/blue', 'content' => 'blau', 'status' => 1 ),
-		'text/color/red' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'attribute', 'label' => 'color/red', 'content' => 'rot', 'status' => 1 ),
-		'text/color/black' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'attribute', 'label' => 'color/black', 'content' => 'schwarz', 'status' => 1 ),
-// attribute texts for list tests
-		'text/small_items' => array( 'langid' => 'de', 'type' => 'long', 'domain' => 'attribute', 'label' => 'small_items', 'content' => 'Artikel in dieser Größe fallen unter Umständen sehr klein aus.', 'status' => 1 ),
-		'text/small_size' => array( 'langid' => 'de', 'type' => 'short', 'domain' => 'attribute', 'label' => 'small_size', 'content' => 'kleine Größe', 'status' => 1 ),
 //CATALOG
 //Cafe
 		'text/cafe' => array( 'langid' => 'de', 'type' => 'name', 'domain' => 'catalog', 'label' => 'cafe', 'content' => 'Kaffee', 'status' => 1 ),

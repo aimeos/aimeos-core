@@ -13,7 +13,7 @@ namespace Aimeos\MW\Setup\Task;
 /**
  * Adds attribute test data and all items from other domains.
  */
-class AttributeAddTestData extends \Aimeos\MW\Setup\Task\Base
+class AttributeAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -34,61 +34,55 @@ class AttributeAddTestData extends \Aimeos\MW\Setup\Task\Base
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
 		$this->msg( 'Adding attribute test data', 0 );
+
 		$this->additional->setEditor( 'core:lib/mshoplib' );
-
-		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'attribute.php';
-
-		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for attribute domain', $path ) );
-		}
-
-		$this->addAttributeData( $testdata );
+		$this->process( $this->getData() );
 
 		$this->status( 'done' );
 	}
 
 
 	/**
-	 * Adds the attribute test data.
+	 * Returns the test data array
 	 *
-	 * @param array $testdata Associative list of key/list pairs
-	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
+	 * @return array Multi-dimensional array of test data
 	 */
-	private function addAttributeData( array $testdata )
+	protected function getData()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->additional, 'Standard' );
-		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'attribute.php';
 
-		$atype = $attributeTypeManager->create();
-
-		$attributeManager->begin();
-
-		foreach( $testdata['attribute/type'] as $key => $dataset )
-		{
-			$atype->setId( null );
-			$atype->setCode( $dataset['code'] );
-			$atype->setDomain( $dataset['domain'] );
-			$atype->setLabel( $dataset['label'] );
-			$atype->setStatus( $dataset['status'] );
-
-			$attributeTypeManager->save( $atype );
+		if( ( $testdata = include( $path ) ) == false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for attribute domain', $path ) );
 		}
 
-		$attribute = $attributeManager->create();
-		foreach( $testdata['attribute'] as $key => $dataset )
-		{
-			$attribute->setId( null );
-			$attribute->setDomain( $dataset['domain'] );
-			$attribute->setType( $dataset['type'] );
-			$attribute->setCode( $dataset['code'] );
-			$attribute->setLabel( $dataset['label'] );
-			$attribute->setStatus( $dataset['status'] );
-			$attribute->setPosition( $dataset['pos'] );
+		return $testdata;
+	}
 
-			$attributeManager->save( $attribute, false );
+
+	/**
+	 * Adds the product data from the given array
+	 *
+	 * @param array Multi-dimensional array of test data
+	 */
+	protected function process( array $testdata )
+	{
+		$manager = $this->getManager( 'attribute' );
+		$listManager = $manager->getSubManager( 'lists' );
+		$propManager = $manager->getSubManager( 'property' );
+
+		$manager->begin();
+
+		$this->storeTypes( $testdata, ['attribute/type', 'attribute/lists/type', 'attribute/property/type'] );
+
+		foreach( $testdata['attribute'] as $entry )
+		{
+			$item = $manager->create()->fromArray( $entry );
+			$item = $this->addListData( $listManager, $item, $entry );
+			$item = $this->addPropertyData( $propManager, $item, $entry );
+
+			$manager->save( $item );
 		}
 
-		$attributeManager->commit();
+		$manager->commit();
 	}
 }

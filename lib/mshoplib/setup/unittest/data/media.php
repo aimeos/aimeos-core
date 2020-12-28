@@ -44,7 +44,6 @@ return array(
 	],
 
 	'media' => array(
-		'media/prod_97x93/199_prod_97x93.jpg' => array( 'langid' => 'de', 'type' => 'prod_97x93', 'domain' => 'attribute', 'label' => 'prod_97x93/199_prod_97x93.jpg', 'link' => 'prod_97x93/199_prod_97x93.jpg', 'preview' => [1 => 'prod_97x93/199_prod_97x93.jpg'], 'status' => 1, 'mimetype' => 'image/jpeg' ),
 		'media/prod_123x103/195_prod_123x103.jpg' => array( 'langid' => 'de', 'type' => 'prod_123x103', 'domain' => 'catalog', 'label' => 'prod_123x103/195_prod_123x103.jpg', 'link' => 'prod_123x103/195_prod_123x103.jpg', 'preview' => [1 => 'prod_123x103/195_prod_123x103.jpg'], 'status' => 1, 'mimetype' => 'image/jpeg' ),
 		'media/prod_242x416/197_CafeNoire_Colombia_242x416.jpg' => array( 'langid' => 'de', 'type' => 'prod_242x416', 'domain' => 'attribute', 'label' => 'prod_242x416/197_CafeNoire_Colombia_242x416.jpg', 'link' => 'prod_242x416/197_CafeNoire_Colombia_242x416.jpg', 'preview' => [1 => 'prod_242x416/197_CafeNoire_Colombia_242x416.jpg'], 'status' => 1, 'mimetype' => 'image/jpeg' ),
 		'media/path/to/folder/example1.jpg' => array( 'langid' => 'de', 'type' => 'default', 'domain' => 'catalog', 'label' => 'path/to/folder/example1.jpg', 'link' => 'path/to/folder/example1.jpg', 'preview' => [1 => 'path/to/folder/example1.jpg'], 'status' => 1, 'mimetype' => 'image/jpeg' ),

@@ -73,12 +73,12 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 				foreach( $entries as $entry )
 				{
-					$listItem = $listManager->create()->fromArray( $entry );
+					$listItem = $listManager->create()->fromArray( $entry, true );
 
 					if( isset( $entry['ref'] ) && isset( $refItems[$entry['ref']] ) ) {
 						$refItem = $refItems[$entry['ref']];
 					} else {
-						$refItem = $manager->create()->fromArray( $entry );
+						$refItem = $manager->create()->fromArray( $entry, true );
 					}
 
 					if( $refItem instanceof \Aimeos\MShop\Common\Item\ListRef\Iface ) {
