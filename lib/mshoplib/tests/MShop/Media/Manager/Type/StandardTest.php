@@ -67,7 +67,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'media.type.id', null );
 		$expr[] = $search->compare( '!=', 'media.type.siteid', null );
 		$expr[] = $search->compare( '==', 'media.type.domain', 'product' );
-		$expr[] = $search->compare( '==', 'media.type.code', 'prod_266x221' );
+		$expr[] = $search->compare( '==', 'media.type.code', 'slideshow' );
 		$expr[] = $search->compare( '>', 'media.type.label', '' );
 		$expr[] = $search->compare( '>=', 'media.type.position', 0 );
 		$expr[] = $search->compare( '==', 'media.type.status', 1 );
@@ -105,7 +105,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
-			$search->compare( '==', 'media.type.code', 'prod_266x221' ),
+			$search->compare( '==', 'media.type.code', 'slideshow' ),
 			$search->compare( '==', 'media.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );

@@ -76,7 +76,7 @@ return [
 					'media' => [[
 						'catalog.lists.type' => 'default', 'catalog.lists.domain' => 'media', 'catalog.lists.position' => 0,
 						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'media.languageid' => 'de', 'media.type' => 'prod_123x103', 'media.domain' => 'catalog',
+						'media.languageid' => 'de', 'media.type' => 'default', 'media.domain' => 'catalog',
 						'media.label' => 'prod_123x103/195_prod_123x103.jpg', 'media.url' => 'prod_123x103/195_prod_123x103.jpg',
 						'media.previews' => [1 => 'prod_123x103/195_prod_123x103.jpg'], 'media.mimetype' => 'image/jpeg',
 					], [

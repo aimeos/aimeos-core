@@ -93,7 +93,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'media.id', null );
 		$expr[] = $search->compare( '!=', 'media.siteid', null );
 		$expr[] = $search->compare( '==', 'media.languageid', 'de' );
-		$expr[] = $search->compare( '==', 'media.type', 'prod_266x221' );
+		$expr[] = $search->compare( '==', 'media.type', 'slideshow' );
 		$expr[] = $search->compare( '==', 'media.domain', 'product' );
 		$expr[] = $search->compare( '==', 'media.label', 'prod_266x221/198_prod_266x221.jpg' );
 		$expr[] = $search->compare( '==', 'media.url', 'prod_266x221/198_prod_266x221.jpg' );
