@@ -11,7 +11,6 @@ return [
 		['media.type.domain' => 'product', 'media.type.code' => 'prod_266x221', 'media.type.label' => 'Product 266x221'],
 		['media.type.domain' => 'product', 'media.type.code' => 'prod_114x95', 'media.type.label' => 'Product 114x95'],
 		['media.type.domain' => 'product', 'media.type.code' => 'prod_179x178', 'media.type.label' => 'Product 179x178'],
-		['media.type.domain' => 'attribute', 'media.type.code' => 'prod_242x416', 'media.type.label' => 'Product 242x416'],
 		['media.type.domain' => 'attribute', 'media.type.code' => 'prod_97x93', 'media.type.label' => 'Product 97x93'],
 		['media.type.domain' => 'product', 'media.type.code' => 'download', 'media.type.label' => 'Download'],
 		['media.type.domain' => 'catalog', 'media.type.code' => 'stage', 'media.type.label' => 'Stage'],

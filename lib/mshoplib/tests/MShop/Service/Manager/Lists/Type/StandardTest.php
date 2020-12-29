@@ -141,8 +141,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
+	}
 
 
+	public function testSearchItemsBase()
+	{
+		$total = 0;
 		$search = $this->object->filter( true );
 		$conditions = array(
 			$search->compare( '==', 'service.lists.type.domain', 'text' ),
@@ -151,10 +155,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->and( $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'service.lists.type.position' )] );
-		$search->slice( 0, 3 );
+		$search->slice( 0, 1 );
 		$results = $this->object->search( $search, [], $total )->toArray();
-		$this->assertEquals( 3, count( $results ) );
-		$this->assertEquals( 5, $total );
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 2, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

@@ -129,7 +129,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'text.lists.type.id', null );
 		$expr[] = $search->compare( '!=', 'text.lists.type.siteid', null );
-		$expr[] = $search->compare( '==', 'text.lists.type.code', 'align-top' );
+		$expr[] = $search->compare( '==', 'text.lists.type.code', 'default' );
 		$expr[] = $search->compare( '==', 'text.lists.type.domain', 'media' );
 		$expr[] = $search->compare( '>', 'text.lists.type.label', '' );
 		$expr[] = $search->compare( '>=', 'text.lists.type.position', 0 );
@@ -140,11 +140,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
+	}
 
 
+	public function testSearchItemsSlice()
+	{
+		$total = 0;
 		$search = $this->object->filter();
 		$conditions = array(
-			$search->compare( '~=', 'text.lists.type.code', 'o' ),
+			$search->compare( '==', 'text.lists.type.code', 'default' ),
 			$search->compare( '==', 'text.lists.type.editor', $this->editor ),
 		);
 		$search->setConditions( $search->and( $conditions ) );
@@ -152,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->slice( 0, 1 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 7, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

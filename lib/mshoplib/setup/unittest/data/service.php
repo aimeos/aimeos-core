@@ -19,9 +19,6 @@ return [
 		['service.lists.type.domain' => 'service', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
 		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'default', 'service.lists.type.label' => 'Standard', 'service.lists.type.status' => 1],
 		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype1', 'service.lists.type.label' => 'Unit type 1', 'service.lists.type.status' => 1],
-		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype2', 'service.lists.type.label' => 'Unit type 2', 'service.lists.type.status' => 1],
-		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype3', 'service.lists.type.label' => 'Unit type 3', 'service.lists.type.status' => 1],
-		['service.lists.type.domain' => 'text', 'service.lists.type.code' => 'unittype4', 'service.lists.type.label' => 'Unit type 4', 'service.lists.type.status' => 1],
 	],
 
 	'service' => [

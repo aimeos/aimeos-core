@@ -55,9 +55,5 @@ return [
 		'price/default' => ['text.lists.type.domain' => 'price', 'text.lists.type.code' => 'default', 'text.lists.type.label' => 'Standard'],
 		'service/default' => ['text.lists.type.domain' => 'service', 'text.lists.type.code' => 'default', 'text.lists.type.label' => 'Standard'],
 		'text/default' => ['text.lists.type.domain' => 'text', 'text.lists.type.code' => 'default', 'text.lists.type.label' => 'Standard'],
-		'media/align-left' => ['text.lists.type.domain' => 'media', 'text.lists.type.code' => 'align-left', 'text.lists.type.label' => 'Align left'],
-		'media/align-right' => ['text.lists.type.domain' => 'media', 'text.lists.type.code' => 'align-right', 'text.lists.type.label' => 'Align right'],
-		'media/align-top' => ['text.lists.type.domain' => 'media', 'text.lists.type.code' => 'align-top', 'text.lists.type.label' => 'Align top'],
-		'media/align-bottom' => ['text.lists.type.domain' => 'media', 'text.lists.type.code' => 'align-bottom', 'text.lists.type.label' => 'Align bottom'],
 	],
 ];
