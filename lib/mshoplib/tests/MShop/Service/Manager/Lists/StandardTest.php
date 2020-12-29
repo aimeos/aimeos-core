@@ -110,7 +110,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setDomain( 'unittest2' );
+		$itemExp->setDomain( 'unittest1' );
 		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 

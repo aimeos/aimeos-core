@@ -139,9 +139,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
+	}
 
 
-		// search with base criteria
+	public function testSearchItemsBase()
+	{
 		$search = $this->object->filter( true );
 		$expr = array(
 			$search->compare( '==', 'catalog.lists.type.domain', 'text' ),
@@ -157,19 +159,25 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+	}
 
-		// search without base criteria, slice & total
+
+	public function testSearchItemsTotal()
+	{
+		$total = 0;
 		$search = $this->object->filter();
 		$conditions = array(
-			$search->compare( '~=', 'catalog.lists.type.code', 'unit' ),
+			$search->compare( '~=', 'catalog.lists.type.code', 'default' ),
 			$search->compare( '~=', 'catalog.lists.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'catalog.lists.type.position' )] );
 		$search->slice( 0, 1 );
+
 		$items = $this->object->search( $search, [], $total )->toArray();
+
 		$this->assertEquals( 1, count( $items ) );
-		$this->assertEquals( 27, $total );
+		$this->assertEquals( 7, $total );
 	}
 
 

@@ -107,7 +107,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$item = $this->object->create();
-		$item->setId( 'unittest2' );
+		$item->setId( 'unittest1' );
 		$item->setValue( 'test2' );
 		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
@@ -119,7 +119,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $item->getId() );
 
-		$this->assertEquals( 'unittest2', $item->getId() );
+		$this->assertEquals( 'unittest1', $item->getId() );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getTimeExpire(), $itemSaved->getTimeExpire() );
 		$this->assertEquals( $item->getValue(), $itemSaved->getValue() );

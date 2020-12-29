@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setComment( 'Unittest2' );
-		$itemExp->setCustomerId( 'unittest2' );
+		$itemExp->setCustomerId( 'unittest1' );
 		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 		$itemExpPrice = $itemExp->getPrice();

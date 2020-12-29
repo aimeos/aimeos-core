@@ -45,7 +45,7 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	/**
 	 * Returns the test data array
 	 *
-	 * @return array Multi-dimensional array of test data
+	 * @return array $testdata Multi-dimensional array of test data
 	 */
 	protected function getData()
 	{

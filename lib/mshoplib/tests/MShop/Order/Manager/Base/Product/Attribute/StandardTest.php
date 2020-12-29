@@ -169,7 +169,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setCode( 'unittest2' );
+		$itemExp->setCode( 'unittest1' );
 		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 

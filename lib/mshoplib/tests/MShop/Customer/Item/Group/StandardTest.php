@@ -81,10 +81,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLabel()
 	{
-		$return = $this->object->setLabel( 'unittest2' );
+		$return = $this->object->setLabel( 'unittest1' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Group\Iface::class, $return );
-		$this->assertEquals( 'unittest2', $this->object->getLabel() );
+		$this->assertEquals( 'unittest1', $this->object->getLabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
