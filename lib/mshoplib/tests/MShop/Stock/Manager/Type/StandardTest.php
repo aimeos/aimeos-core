@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 		$conditions = array(
-			$search->compare( '==', 'stock.type.code', 'unit_type1' ),
+			$search->compare( '==', 'stock.type.code', 'unitstock' ),
 			$search->compare( '==', 'stock.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
@@ -101,9 +101,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->find( 'unit_type1', [], 'product' );
+		$item = $this->object->find( 'unitstock', [], 'product' );
 
-		$this->assertEquals( 'unit_type1', $item->getCode() );
+		$this->assertEquals( 'unitstock', $item->getCode() );
 	}
 
 
@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
-			$search->compare( '==', 'stock.type.code', 'unit_type1' ),
+			$search->compare( '==', 'stock.type.code', 'unitstock' ),
 			$search->compare( '==', 'stock.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'stock.type.id', null );
 		$expr[] = $search->compare( '!=', 'stock.type.siteid', null );
 		$expr[] = $search->compare( '==', 'stock.type.domain', 'product' );
-		$expr[] = $search->compare( '==', 'stock.type.code', 'unit_type1' );
+		$expr[] = $search->compare( '==', 'stock.type.code', 'unitstock' );
 		$expr[] = $search->compare( '>=', 'stock.type.position', 0 );
 		$expr[] = $search->compare( '>=', 'stock.type.status', 0 );
 		$expr[] = $search->compare( '>=', 'stock.type.mtime', '1970-01-01 00:00:00' );
@@ -168,18 +168,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 		$conditions = array(
-			$search->compare( '~=', 'stock.type.code', 'unit_type' ),
 			$search->compare( '==', 'stock.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
 		$search->setSortations( [$search->sort( '-', 'stock.type.position' )] );
-		$search->slice( 0, 2 );
+		$search->slice( 0, 1 );
 
 		$total = 0;
 		$results = $this->object->search( $search, [], $total )->toArray();
 
-		$this->assertEquals( 2, count( $results ) );
-		$this->assertEquals( 5, $total );
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 2, $total );
 	}
 
 

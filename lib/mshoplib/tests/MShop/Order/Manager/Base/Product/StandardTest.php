@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.base.product.stocktype' )->toArray();
 
-		$this->assertEquals( 3, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'default', $result );
 		$this->assertEquals( 5, $result['default'] );
 	}

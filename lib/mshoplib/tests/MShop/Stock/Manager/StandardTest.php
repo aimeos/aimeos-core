@@ -179,13 +179,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testDecrease()
 	{
 		$stockItem = $this->object->create();
-		$stockItem->setType( 'unit_type1' );
+		$stockItem->setType( 'unitstock' );
 		$stockItem->setProductId( '-1' );
 		$stockItem->setStockLevel( 0 );
 
 		$this->object->save( $stockItem );
 
-		$this->object->decrease( ['-1' => 5], 'unit_type1' );
+		$this->object->decrease( ['-1' => 5], 'unitstock' );
 		$actual = $this->object->get( $stockItem->getId() );
 
 		$this->object->delete( $stockItem->getId() );
@@ -197,13 +197,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testIncrease()
 	{
 		$stockItem = $this->object->create();
-		$stockItem->setType( 'unit_type1' );
+		$stockItem->setType( 'unitstock' );
 		$stockItem->setProductId( '-1' );
 		$stockItem->setStockLevel( 0 );
 
 		$this->object->save( $stockItem );
 
-		$this->object->increase( ['-1' => 5], 'unit_type1' );
+		$this->object->increase( ['-1' => 5], 'unitstock' );
 		$actual = $this->object->get( $stockItem->getId() );
 
 		$this->object->delete( $stockItem->getId() );

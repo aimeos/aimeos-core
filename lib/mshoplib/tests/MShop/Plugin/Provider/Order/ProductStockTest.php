@@ -94,7 +94,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateStockUnlimited()
 	{
 		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
-		$this->order->addProduct( $this->getOrderProduct( 'MNOP' )->setStockType( 'unit_type4' ) );
+		$this->order->addProduct( $this->getOrderProduct( 'MNOP' )->setStockType( 'unitstock' ) );
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 	}
