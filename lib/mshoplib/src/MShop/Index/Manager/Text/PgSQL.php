@@ -55,7 +55,7 @@ class PgSQL
 		$name = 'index.text:relevance';
 		$expr = $this->getSiteString( 'mindte."siteid"', $level );
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
-		$this->searchConfig[$name]['function'] = $this->getFunctionRelevance();
+		$this->searchConfig[$name]['function'] = $this->searchConfig['sort:' . $name]['function'] = $this->getFunctionRelevance();
 	}
 
 
@@ -99,7 +99,7 @@ class PgSQL
 					}
 				}
 
-				$params[1] = join( ' | ', $strings ) . ' "' . join( ' <-> ', explode( ' ', $search ) ) . '"';
+				$params[1] = join( ' | ', $strings ) . ' | "' . join( ' <-> ', explode( ' ', $search ) ) . '"';
 			}
 
 			return $params;
