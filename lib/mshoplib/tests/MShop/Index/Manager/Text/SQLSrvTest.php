@@ -78,6 +78,6 @@ class SQLSrvTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->search( $search, [] );
 
-		$this->assertGreaterThanOrEqual( 2, count( $result ) );
+		$this->assertGreaterThanOrEqual( 1, count( $result ) );
 	}
 }
