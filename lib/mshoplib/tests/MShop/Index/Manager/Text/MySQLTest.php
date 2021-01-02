@@ -67,4 +67,16 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertGreaterThanOrEqual( 1, count( $result ) );
 	}
+
+
+	public function testSearchItemsRelevanceTerms()
+	{
+		$search = $this->object->filter();
+		$search->setConditions( $search->compare( '>', $search->make( 'index.text:relevance', ['de', 'cafe noire expresso'] ), 0 ) );
+		$search->setSortations( [$search->sort( '-', $search->make( 'sort:index.text:relevance', ['de', 'cafe noire expresso'] ) )] );
+
+		$result = $this->object->search( $search, [] );
+
+		$this->assertGreaterThanOrEqual( 2, count( $result ) );
+	}
 }
