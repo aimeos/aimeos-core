@@ -99,7 +99,7 @@ class PgSQL
 					}
 				}
 
-				$params[1] = join( ' | ', $strings ) . ' | "' . join( ' <-> ', explode( ' ', $search ) ) . '"';
+				$params[1] = '\'' . join( ' | ', $strings ) . ' | "' . join( ' <-> ', explode( ' ', $search ) ) . '"\'';
 			}
 
 			return $params;
