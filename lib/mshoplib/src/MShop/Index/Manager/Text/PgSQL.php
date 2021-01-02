@@ -23,7 +23,7 @@ class PgSQL
 	private $searchConfig = array(
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => ':site AND mindte."langid" = $1 AND CAST( to_tsvector(\'english\', mindte."content") @@ to_tsquery( $2 ) AS integer )',
+			'internalcode' => ':site AND mindte."langid" = $1 AND CAST( to_tsvector(mindte."content") @@ to_tsquery( $2 ) AS integer )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -31,7 +31,7 @@ class PgSQL
 		),
 		'sort:index.text:relevance' => array(
 			'code' => 'sort:index.text:relevance()',
-			'internalcode' => 'ts_rank(to_tsvector(\'english\', mindte."content"), to_tsquery( $2 ))',
+			'internalcode' => 'ts_rank(to_tsvector(mindte."content"), to_tsquery( $2 ))',
 			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -55,7 +55,7 @@ class PgSQL
 		$name = 'index.text:relevance';
 		$expr = $this->getSiteString( 'mindte."siteid"', $level );
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
-		$this->searchConfig[$name]['function'] = $this->getFunctionRelevance();
+		$this->searchConfig[$name]['function'] = $this->searchConfig['sort:' . $name]['function'] = $this->getFunctionRelevance();
 	}
 
 
@@ -99,7 +99,7 @@ class PgSQL
 					}
 				}
 
-				$params[1] = '\'' . join( ' & ', $strings ) . '\'';
+				$params[1] = join( ' | ', $strings ) . ' | "' . join( ' <-> ', explode( ' ', $search ) ) . '"';
 			}
 
 			return $params;
