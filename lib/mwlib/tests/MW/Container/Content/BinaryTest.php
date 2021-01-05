@@ -5,7 +5,7 @@ namespace Aimeos\MW\Container\Content;
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015-2020
+ * @copyright Aimeos (aimeos.org), 2015-2021
  */
 class BinaryTest extends \PHPUnit\Framework\TestCase
 {

@@ -1,9 +1,9 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
-# Metal <meteoramic@yahoo.com>, 2015-2020
+# Metal <meteoramic@yahoo.com>, 2015-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
