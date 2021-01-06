@@ -68,6 +68,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$this->additional->setLocale( $this->additional->getLocale()->setCurrencyId( null ) );
 
+		$this->addOrderBaseCouponData( $testdata );
 		$this->addOrderData( $orderManager, $bases['ids'], $testdata );
 
 		$this->status( 'done' );
@@ -162,6 +163,78 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$orderAddr->setBirthday( $dataset['birthday'] ?? null );
 
 			$manager->save( $orderAddr, false );
+		}
+	}
+
+
+	/**
+	 * Adds the order coupon test data.
+	 *
+	 * @param array $testdata Associative list of key/list pairs
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
+	 */
+	private function addOrderBaseCouponData( array $testdata )
+	{
+		$order = \Aimeos\MShop\Order\Manager\Factory::create( $this->additional, 'Standard' );
+		$orderBase = $order->getSubManager( 'base', 'Standard' );
+		$orderBaseProd = $orderBase->getSubManager( 'product', 'Standard' );
+		$orderBaseCoupon = $orderBase->getSubManager( 'coupon', 'Standard' );
+
+		$orderBaseIds = [];
+		$orderBasePrices = [];
+		$ordProdIds = [];
+		$prodcode = $quantity = $pos = [];
+		foreach( $testdata['order/base/coupon'] as $key => $dataset ) {
+			$exp = explode( '/', $dataset['ordprodid'] );
+
+			if( count( $exp ) != 3 ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ordprod are set wrong "%1$s"', $dataset ) );
+			}
+
+			$prodcode[$exp[0]] = $exp[0];
+			$quantity[$exp[1]] = $exp[1];
+			$pos[$exp[2]] = $exp[2];
+
+			$orderBasePrices[$dataset['baseid']] = $dataset['baseid'];
+		}
+
+		$search = $orderBase->filter();
+		$search->setConditions( $search->compare( '==', 'order.base.price', $orderBasePrices ) );
+
+		foreach( $orderBase->search( $search ) as $orderBaseItem ) {
+			$orderBaseIds[$orderBaseItem->getPrice()->getValue()] = $orderBaseItem->getId();
+		}
+
+
+		$search = $orderBaseProd->filter();
+		$expr = array(
+			$search->compare( '==', 'order.base.product.prodcode', $prodcode ),
+			$search->compare( '==', 'order.base.product.quantity', $quantity ),
+			$search->compare( '==', 'order.base.product.position', $pos ),
+		);
+		$search->setConditions( $search->and( $expr ) );
+
+		foreach( $orderBaseProd->search( $search ) as $ordProd ) {
+			$ordProdIds[$ordProd->getProductCode() . '/' . $ordProd->getQuantity() . '/' . $ordProd->getPosition()] = $ordProd->getId();
+		}
+
+		$orderCoupon = $orderBaseCoupon->create();
+		foreach( $testdata['order/base/coupon'] as $key => $dataset )
+		{
+			if( !isset( $orderBaseIds[$dataset['baseid']] ) ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No oder base ID found for "%1$s"', $dataset['baseid'] ) );
+			}
+
+			if( !isset( $ordProdIds[$dataset['ordprodid']] ) ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No order base product ID found for "%1$s"', $dataset['ordprodid'] ) );
+			}
+
+			$orderCoupon->setId( null );
+			$orderCoupon->setBaseId( $orderBaseIds[$dataset['baseid']] );
+			$orderCoupon->setProductId( $ordProdIds[$dataset['ordprodid']] );
+			$orderCoupon->setCode( $dataset['code'] );
+
+			$orderBaseCoupon->save( $orderCoupon, false );
 		}
 	}
 

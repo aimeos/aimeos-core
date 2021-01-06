@@ -81,6 +81,14 @@ return array(
 		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'ogone alias value', 'code' => 'Ogone-alias-value', 'value' => 'aliasValue', 'quantity' => 1 ),
 	),
 
+	//ordprodid => prodcode/quantity/pos
+	'order/base/coupon' => [
+		['baseid' => '53.50', 'ordprodid' => 'U:MD/1/3', 'code' => '5678'],
+		['baseid' => '53.50', 'ordprodid' => 'ABCD/1/4', 'code' => 'OPQR'],
+		['baseid' => '672.00', 'ordprodid' => 'CNE/2/1', 'code' => '5678'],
+		['baseid' => '672.00', 'ordprodid' => 'CNC/1/2', 'code' => 'OPQR'],
+	],
+
 	'order' => array(
 		'2008-02-15 12:34:56' => array( 'baseid' => '19.95', 'type' => 'web', 'datepayment' => '2008-02-15 12:34:56', 'datedelivery' => null, 'statuspayment' => 6, 'statusdelivery' => 4, 'relatedid' => null ),
 		'2009-09-17 16:14:32' => array( 'baseid' => '636.00', 'type' => 'phone', 'datepayment' => '2009-09-17 16:14:32', 'datedelivery' => null, 'statuspayment' => 6, 'statusdelivery' => 4, 'relatedid' => null ),
