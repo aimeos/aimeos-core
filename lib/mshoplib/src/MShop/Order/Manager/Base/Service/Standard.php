@@ -943,8 +943,7 @@ class Standard
 			}
 
 			$manager = \Aimeos\MShop::create( $context, 'service' );
-			$search = $manager->filter()->slice( 0, count( $ids ) );
-			$search->setConditions( $search->compare( '==', 'service.id', array_filter( $ids ) ) );
+			$search = $manager->filter()->slice( 0, count( $ids ) )->add( ['service.id' => array_filter( $ids )] );
 			$servItems = $manager->search( $search, $ref );
 		}
 

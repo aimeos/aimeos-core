@@ -19,9 +19,6 @@ namespace Aimeos\MShop\Order\Item\Base\Product;
  */
 class Standard extends Base implements Iface
 {
-	private $productItem;
-
-
 	/**
 	 * Initializes the order product instance.
 	 *
@@ -29,14 +26,10 @@ class Standard extends Base implements Iface
 	 * @param array $values Associative list of order product values
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] $attributes List of order product attribute items
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of ordered subproduct items
-	 * @param \Aimeos\MShop\Product\Item\Iface|null $productItem Product item
 	 */
-	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [],
-		array $products = [], ?\Aimeos\MShop\Product\Item\Iface $productItem = null )
+	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [], array $products = [] )
 	{
 		parent::__construct( $price, $values, $attributes, $products );
-
-		$this->productItem = $productItem;
 	}
 
 
@@ -47,7 +40,18 @@ class Standard extends Base implements Iface
 	 */
 	public function getProductItem() : ?\Aimeos\MShop\Product\Item\Iface
 	{
-		return $this->productItem;
+		return $this->get( '.product' );
+	}
+
+
+	/**
+	 * Returns the associated supplier item
+	 *
+	 * @return \Aimeos\MShop\Supplier\Item\Iface|null Supplier item
+	 */
+	public function getSupplierItem() : ?\Aimeos\MShop\Supplier\Item\Iface
+	{
+		return $this->get( '.supplier' );
 	}
 
 

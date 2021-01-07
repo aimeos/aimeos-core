@@ -1044,17 +1044,29 @@ class Standard
 			}
 
 			$manager = \Aimeos\MShop::create( $context, 'product' );
-			$search = $manager->filter()->slice( 0, count( $ids ) );
-			$search->setConditions( $search->compare( '==', 'product.id', array_filter( $ids ) ) );
+			$search = $manager->filter()->slice( 0, count( $ids ) )->add( ['product.id' => array_filter( $ids )] );
 			$prodItems = $manager->search( $search, $ref );
+		}
+
+		if( isset( $ref['supplier'] ) || in_array( 'supplier', $ref ) )
+		{
+			$codes = [];
+			foreach( $map as $list ) {
+				$codes[] = $list['item']['order.base.product.suppliercode'] ?? null;
+			}
+
+			$manager = \Aimeos\MShop::create( $context, 'supplier' );
+			$search = $manager->filter()->slice( 0, count( $ids ) )->add( ['supplier.code' => array_filter( $codes )] );
+			$supItems = $manager->search( $search, $ref );
 		}
 
 		$attributes = $this->getAttributeItems( array_keys( $map ) );
 
 		foreach( $map as $id => $list )
 		{
-			$prodItem = $prodItems[$list['item']['order.base.product.productid'] ?? null] ?? null;
-			$item = $this->createItemBase( $list['price'], $list['item'], $attributes[$id] ?? [], $prodItem );
+			$list['item']['.product'] = $prodItems[$list['item']['order.base.product.productid'] ?? null] ?? null;
+			$list['item']['.supplier'] = $supItems[$list['item']['order.base.product.suppliercode'] ?? null] ?? null;
+			$item = $this->createItemBase( $list['price'], $list['item'], $attributes[$id] ?? [] );
 
 			if( $item = $this->applyFilter( $item ) ) {
 				$items[$id] = $item;
@@ -1072,12 +1084,11 @@ class Standard
 	 * @param array $values Associative list of order product properties
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] $attributes List of order product attributes
 	 * @param \Aimeos\MShop\Product\Item\Iface|null $prodItem Original product item
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item
 	 */
-	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [],
-		?\Aimeos\MShop\Product\Item\Iface $prodItem = null ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, array $values = [],
+		array $attributes = [] ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return new \Aimeos\MShop\Order\Item\Base\Product\Standard( $price, $values, $attributes, [], $prodItem );
+		return new \Aimeos\MShop\Order\Item\Base\Product\Standard( $price, $values, $attributes, [] );
 	}
 
 

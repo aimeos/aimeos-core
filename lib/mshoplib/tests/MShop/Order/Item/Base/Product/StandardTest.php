@@ -60,6 +60,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.mtime' => '2000-12-31 23:59:59',
 			'order.base.product.ctime' => '2011-01-01 00:00:01',
 			'order.base.product.editor' => 'unitTestUser',
+			'.product' => \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'product' )->create(),
+			'.supplier' => \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'supplier' )->create(),
 		);
 
 		$this->subProducts = array(
@@ -67,10 +69,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			new \Aimeos\MShop\Order\Item\Base\Product\Standard( clone $this->price )
 		);
 
-		$productItem = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'product' )->create();
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Product\Standard(
-			$this->price, $this->values, $this->attribute,
-			$this->subProducts, $productItem
+			$this->price, $this->values, $this->attribute, $this->subProducts
 		);
 	}
 
@@ -85,6 +85,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->getProductItem() );
 		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Base\Product\Standard( $this->price ) )->getProductItem() );
+	}
+
+
+	public function testGetSupplierItem()
+	{
+		$this->assertInstanceOf( \Aimeos\MShop\Supplier\Item\Iface::class, $this->object->getSupplierItem() );
+		$this->assertNull( ( new \Aimeos\MShop\Order\Item\Base\Product\Standard( $this->price ) )->getSupplierItem() );
 	}
 
 

@@ -29,6 +29,13 @@ interface Iface
 	public function getProductItem() : ?\Aimeos\MShop\Product\Item\Iface;
 
 	/**
+	 * Returns the associated supplier item
+	 *
+	 * @return \Aimeos\MShop\Supplier\Item\Iface|null Supplier item
+	 */
+	public function getSupplierItem() : ?\Aimeos\MShop\Supplier\Item\Iface;
+
+	/**
 	 * Sets the site ID of the item.
 	 *
 	 * @param string $value Unique site ID of the item
