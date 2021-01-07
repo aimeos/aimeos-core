@@ -914,8 +914,7 @@ class Standard extends Base
 			&& !( $ids = map( $map )->col( 'order.base.customerid' )->filter() )->empty()
 		) {
 			$manager = \Aimeos\MShop::create( $context, 'customer' );
-			$search = $manager->filter()->slice( 0, count( $ids ) );
-			$search->setConditions( $search->compare( '==', 'customer.id', $ids ) );
+			$search = $manager->filter()->slice( 0, count( $ids ) )->add( ['customer.id' => $ids] );
 			$custItems = $manager->search( $search, $ref );
 		}
 
@@ -932,10 +931,11 @@ class Standard extends Base
 			] );
 
 			// you may need the site object! take care!
-			$localeItem = $localeManager->create();
-			$localeItem->setLanguageId( $row['order.base.languageid'] );
-			$localeItem->setCurrencyId( $row['order.base.currencyid'] );
-			$localeItem->setSiteId( $row['order.base.siteid'] );
+			$localeItem = $localeManager->create( [
+				'locale.currencyid' => $row['order.base.currencyid'],
+				'locale.languageid' => $row['order.base.languageid'],
+				'locale.siteid' => $row['order.base.siteid'],
+			] );
 
 			$map[$id] = [$price, $localeItem, $row, $custItems[$row['order.base.customerid'] ?? null] ?? null];
 		}
