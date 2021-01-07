@@ -1038,6 +1038,8 @@ class Standard
 
 		if( isset( $ref['product'] ) || in_array( 'product', $ref ) )
 		{
+			$domains = isset( $ref['product'] ) && is_array( $ref['product'] ) ? $ref['product'] : [];
+
 			$ids = [];
 			foreach( $map as $list ) {
 				$ids[] = $list['item']['order.base.product.productid'] ?? null;
@@ -1045,11 +1047,13 @@ class Standard
 
 			$manager = \Aimeos\MShop::create( $context, 'product' );
 			$search = $manager->filter()->slice( 0, count( $ids ) )->add( ['product.id' => array_filter( $ids )] );
-			$prodItems = $manager->search( $search, $ref );
+			$prodItems = $manager->search( $search, $domains );
 		}
 
 		if( isset( $ref['supplier'] ) || in_array( 'supplier', $ref ) )
 		{
+			$domains = isset( $ref['supplier'] ) && is_array( $ref['supplier'] ) ? $ref['supplier'] : [];
+
 			$codes = [];
 			foreach( $map as $list ) {
 				$codes[] = $list['item']['order.base.product.suppliercode'] ?? null;
@@ -1057,7 +1061,7 @@ class Standard
 
 			$manager = \Aimeos\MShop::create( $context, 'supplier' );
 			$search = $manager->filter()->slice( 0, count( $ids ) )->add( ['supplier.code' => array_filter( $codes )] );
-			$supItems = $manager->search( $search, $ref );
+			$supItems = $manager->search( $search, $domains );
 		}
 
 		$attributes = $this->getAttributeItems( array_keys( $map ) );
