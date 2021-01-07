@@ -21,6 +21,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 	public function migrate()
 	{
 		$this->msg( 'Adding coupon test data', 0 );
+		$this->additional->setEditor( 'core:lib/mshoplib' );
 
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'coupon.php';
 
