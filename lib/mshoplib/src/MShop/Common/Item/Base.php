@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Common\Item;
  */
 abstract class Base
 	extends \Aimeos\MW\Common\Item\Base
-	implements \Aimeos\MShop\Common\Item\Iface
+	implements \Aimeos\MShop\Common\Item\Iface, \ArrayAccess
 {
 	private $prefix;
 	private $available = true;
@@ -111,11 +111,7 @@ abstract class Base
 	 */
 	public function __isset( string $name ) : bool
 	{
-		if( array_key_exists( $name, $this->bdata ) ) {
-			return true;
-		}
-
-		return false;
+		return array_key_exists( $name, $this->bdata );
 	}
 
 
@@ -128,6 +124,55 @@ abstract class Base
 	public function __set( string $name, $value )
 	{
 		$this->set( $name, $value );
+	}
+
+
+	/**
+	 * Tests if the item property for the given name is available
+	 *
+	 * @param string $name Name of the property
+	 * @return bool True if the property exists, false if not
+	 */
+	public function offsetExists( $name )
+	{
+		return array_key_exists( $name, $this->bdata );
+	}
+
+
+	/**
+	 * Returns the item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @return mixed|null Property value or null if property is unknown
+	 */
+	public function offsetGet( $name )
+	{
+		return $this->get( $name );
+	}
+
+
+	/**
+	 * Sets the new item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @param mixed $value New property value
+	 */
+	public function offsetSet( $name, $value )
+	{
+		$this->set( $name, $value );
+	}
+
+
+	/**
+	 * Removes an item property
+	 * This is not supported by items
+	 *
+	 * @param string $name Name of the property
+	 * @throws \LogicException Always thrown because this method isn't supported
+	 */
+	public function offsetUnset( $name )
+	{
+		throw new \LogicException( 'Not implemented' );
 	}
 
 

@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Order\Item\Base;
  * @package MShop
  * @subpackage Order
  */
-abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
+abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \ArrayAccess
 {
 	use \Aimeos\MW\Observer\Publisher\Traits;
 
@@ -116,9 +116,11 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 */
 	public function __get( string $name )
 	{
-		if( isset( $this->bdata[$name] ) ) {
+		if( array_key_exists( $name, $this->bdata ) ) {
 			return $this->bdata[$name];
 		}
+
+		return null;
 	}
 
 
@@ -130,11 +132,7 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 	 */
 	public function __isset( string $name ) : bool
 	{
-		if( array_key_exists( $name, $this->bdata ) ) {
-			return true;
-		}
-
-		return false;
+		return array_key_exists( $name, $this->bdata );
 	}
 
 
@@ -151,6 +149,63 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface
 		}
 
 		$this->bdata[$name] = $value;
+	}
+
+
+	/**
+	 * Tests if the item property for the given name is available
+	 *
+	 * @param string $name Name of the property
+	 * @return bool True if the property exists, false if not
+	 */
+	public function offsetExists( $name )
+	{
+		return array_key_exists( $name, $this->bdata );
+	}
+
+
+	/**
+	 * Returns the item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @return mixed|null Property value or null if property is unknown
+	 */
+	public function offsetGet( $name )
+	{
+		if( array_key_exists( $name, $this->bdata ) ) {
+			return $this->bdata[$name];
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Sets the new item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @param mixed $value New property value
+	 */
+	public function offsetSet( $name, $value )
+	{
+		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] !== $value ) {
+			$this->setModified();
+		}
+
+		$this->bdata[$name] = $value;
+	}
+
+
+	/**
+	 * Removes an item property
+	 * This is not supported by items
+	 *
+	 * @param string $name Name of the property
+	 * @throws \LogicException Always thrown because this method isn't supported
+	 */
+	public function offsetUnset( $name )
+	{
+		throw new \LogicException( 'Not implemented' );
 	}
 
 

@@ -81,6 +81,21 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testArrayMethods()
+	{
+		$this->assertFalse( isset( $this->object['test'] ) );
+		$this->assertEquals( null, $this->object['test'] );
+
+		$this->object['test'] = 'value';
+
+		$this->assertTrue( isset( $this->object['test'] ) );
+		$this->assertEquals( 'value', $this->object['test'] );
+
+		$this->expectException( \LogicException::class );
+		unset( $this->object['test'] );
+	}
+
+
 	public function testMagicMethods()
 	{
 		$this->assertFalse( isset( $this->object->test ) );
