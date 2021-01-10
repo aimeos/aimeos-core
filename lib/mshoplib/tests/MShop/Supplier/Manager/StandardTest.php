@@ -68,25 +68,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->find( 'unitCode001' );
+		$item = $this->object->find( 'unitSupplier001' );
 
-		$this->assertEquals( 'unitCode001', $item->getCode() );
+		$this->assertEquals( 'unitSupplier001', $item->getCode() );
 	}
 
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter()->slice( 0, 1 );
-		$conditions = array(
-			$search->compare( '~=', 'supplier.label', 'unitSupplier' ),
-			$search->compare( '==', 'supplier.editor', $this->editor ),
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$items = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No supplier item with label "unitSupplier" found' );
-		}
+		$item = $this->object->find( 'unitSupplier001' );
 
 		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
@@ -94,17 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '==', 'supplier.label', 'unitSupplier001' ),
-			$search->compare( '==', 'supplier.editor', $this->editor ),
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$items = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No supplier item found' );
-		}
+		$item = $this->object->find( 'unitSupplier001' );
 
 		$item->setId( null );
 		$item->setCode( 'unitTest01' );
@@ -156,19 +136,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItem()
 	{
-		$item = $this->object->find( 'unitCode001', ['text'] );
-
-		if( ( $listItem = $item->getListItems( 'text', 'default' )->first() ) === null ) {
-			throw new \RuntimeException( 'No list item found' );
-		}
+		$item = $this->object->find( 'unitSupplier001', ['text'] );
+		$listItem = $item->getListItems( 'text', 'default' )->first( new \RuntimeException( 'No list item found' ) );
 
 		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'supplier.id', null );
 		$expr[] = $search->compare( '!=', 'supplier.siteid', null );
-		$expr[] = $search->compare( '==', 'supplier.label', 'unitSupplier001' );
-		$expr[] = $search->compare( '==', 'supplier.code', 'unitCode001' );
+		$expr[] = $search->compare( '==', 'supplier.label', 'Unit Supplier 001' );
+		$expr[] = $search->compare( '==', 'supplier.code', 'unitSupplier001' );
 		$expr[] = $search->compare( '==', 'supplier.status', 1 );
 		$expr[] = $search->compare( '>=', 'supplier.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'supplier.ctime', '1970-01-01 00:00:00' );
@@ -249,7 +226,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsRef()
 	{
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'supplier.code', 'unitCode001' ) );
+		$search->setConditions( $search->compare( '==', 'supplier.code', 'unitSupplier001' ) );
 
 		$item = $this->object->search( $search, ['supplier/address', 'text'] )->first();
 

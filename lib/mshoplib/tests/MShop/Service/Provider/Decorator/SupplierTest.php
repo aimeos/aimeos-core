@@ -78,7 +78,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 			->method( 'checkConfigFE' )
 			->will( $this->returnValue( [] ) );
 
-		$attributes = array( 'supplier.code' => 'unitCode001' );
+		$attributes = array( 'supplier.code' => 'unitSupplier001' );
 		$expected = array( 'supplier.code' => null );
 
 		$result = $this->object->checkConfigFE( $attributes );
