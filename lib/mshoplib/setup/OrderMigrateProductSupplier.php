@@ -56,8 +56,8 @@ class OrderMigrateProductSupplier extends \Aimeos\MW\Setup\Task\Base
 				$stmt->execute()->finish();
 			}
 
-			$this->release( $conn, 'db-supplier'  );
-			$this->release( $conn, 'db-order'  );
+			$this->release( $conn, 'db-supplier' );
+			$this->release( $conn, 'db-order' );
 
 			return $this->status( 'done' );
 		}
