@@ -173,25 +173,48 @@ class Standard extends Base implements Iface
 
 
 	/**
-	 * Returns the supplier code.
+	 * Returns the supplier ID.
 	 *
-	 * @return string the code of supplier
+	 * @return string The ID of the supplier
 	 */
-	public function getSupplierCode() : string
+	public function getSupplierId() : string
 	{
-		return $this->get( 'order.base.product.suppliercode', '' );
+		return $this->get( 'order.base.product.supplierid', '' );
 	}
 
 
 	/**
-	 * Sets the supplier code.
+	 * Sets the supplier ID.
 	 *
-	 * @param string $suppliercode Code of supplier
+	 * @param string|null $value ID of the supplier
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setSupplierCode( string $suppliercode ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setSupplierId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.suppliercode', $this->checkCode( $suppliercode ) );
+		return $this->set( 'order.base.product.supplierid', (string) $value );
+	}
+
+
+	/**
+	 * Returns the supplier name.
+	 *
+	 * @return string Supplier name
+	 */
+	public function getSupplierName() : string
+	{
+		return $this->get( 'order.base.product.suppliername', '' );
+	}
+
+
+	/**
+	 * Sets the supplier name.
+	 *
+	 * @param string|null $value Supplier name
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setSupplierName( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	{
+		return $this->set( 'order.base.product.suppliername', (string) $value );
 	}
 
 
@@ -212,9 +235,9 @@ class Standard extends Base implements Iface
 	 * @param string $id Product Code ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setProductId( string $id ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setProductId( ?string $id ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.productid', $id );
+		return $this->set( 'order.base.product.productid', (string) $id );
 	}
 
 
@@ -508,9 +531,10 @@ class Standard extends Base implements Iface
 				case 'order.base.product.flags': !$private ?: $item = $item->setFlags( (int) $value ); break;
 				case 'order.base.product.type': $item = $item->setType( $value ); break;
 				case 'order.base.product.stocktype': $item = $item->setStockType( $value ); break;
-				case 'order.base.product.suppliercode': $item = $item->setSupplierCode( $value ); break;
 				case 'order.base.product.productid': $item = $item->setProductId( $value ); break;
 				case 'order.base.product.prodcode': $item = $item->setProductCode( $value ); break;
+				case 'order.base.product.supplierid': $item = $item->setSupplierId( $value ); break;
+				case 'order.base.product.suppliername': $item = $item->setSupplierName( $value ); break;
 				case 'order.base.product.name': $item = $item->setName( $value ); break;
 				case 'order.base.product.description': $item = $item->setDescription( $value ); break;
 				case 'order.base.product.mediaurl': $item = $item->setMediaUrl( $value ); break;
@@ -541,9 +565,10 @@ class Standard extends Base implements Iface
 
 		$list['order.base.product.type'] = $this->getType();
 		$list['order.base.product.stocktype'] = $this->getStockType();
-		$list['order.base.product.suppliercode'] = $this->getSupplierCode();
 		$list['order.base.product.prodcode'] = $this->getProductCode();
 		$list['order.base.product.productid'] = $this->getProductId();
+		$list['order.base.product.supplierid'] = $this->getSupplierId();
+		$list['order.base.product.suppliername'] = $this->getSupplierName();
 		$list['order.base.product.quantity'] = $this->getQuantity();
 		$list['order.base.product.name'] = $this->getName();
 		$list['order.base.product.description'] = $this->getDescription();
@@ -577,8 +602,8 @@ class Standard extends Base implements Iface
 			&& $this->getName() === $item->getName()
 			&& $this->getSiteId() === $item->getSiteId()
 			&& $this->getStockType() === $item->getStockType()
+			&& $this->getSupplierId() === $item->getSupplierId()
 			&& $this->getProductCode() === $item->getProductCode()
-			&& $this->getSupplierCode() === $item->getSupplierCode()
 			&& $this->getOrderAddressId() === $item->getOrderAddressId()
 		) {
 			return true;

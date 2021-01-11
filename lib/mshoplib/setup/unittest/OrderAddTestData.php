@@ -338,7 +338,8 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ordProdItem->setId( null );
 			$ordProdItem->setBaseId( $bases['ids'][$dataset['baseid']] );
 			$ordProdItem->setType( $dataset['type'] );
-			$ordProdItem->setSupplierCode( $dataset['suppliercode'] );
+			$ordProdItem->setSupplierId( $dataset['supplierid'] );
+			$ordProdItem->setSupplierName( $dataset['suppliername'] );
 			$ordProdItem->setProductCode( $dataset['prodcode'] );
 			$ordProdItem->setName( $dataset['name'] );
 			$ordProdItem->setMediaUrl( $dataset['mediaurl'] );

@@ -69,7 +69,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '5.00', $product->getPrice()->getRebate() );
 		$this->assertEquals( 'U:SD', $product->getProductCode() );
 		$this->assertNotEquals( '', $product->getProductId() );
-		$this->assertEquals( '', $product->getSupplierCode() );
+		$this->assertEquals( '', $product->getSupplierName() );
 		$this->assertEquals( '', $product->getMediaUrl() );
 		$this->assertEquals( 'Versandkosten Nachlass', $product->getName() );
 	}

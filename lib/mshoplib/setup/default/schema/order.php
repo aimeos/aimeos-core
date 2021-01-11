@@ -111,8 +111,9 @@ return array(
 			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'prodid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'prodcode', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'suppliercode', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'stocktype', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
+			$table->addColumn( 'supplierid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary', 'default' => ''] ) );
+			$table->addColumn( 'suppliername', 'string', array( 'length' => 255, 'default' => '' ) );
 			$table->addColumn( 'name', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'description', 'text', array( 'length' => 0xffff, 'default' => '' ) );
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255, 'default' => '' ) );

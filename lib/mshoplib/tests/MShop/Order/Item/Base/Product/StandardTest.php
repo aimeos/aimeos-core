@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$attrValues = array(
 			'order.base.product.attribute.id' => 4,
-			'order.base.product.attribute.siteid' => 99,
+			'order.base.product.attribute.siteid' => '99',
 			'order.base.product.attribute.parentid' => 11,
 			'order.base.product.attribute.type' => 'default',
 			'order.base.product.attribute.code' => 'size',
@@ -39,13 +39,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->values = array(
 			'order.base.product.id' => 1,
-			'order.base.product.siteid' => 99,
+			'order.base.product.baseid' => 42,
+			'order.base.product.siteid' => '99',
 			'order.base.product.orderproductid' => 10,
 			'order.base.product.orderaddressid' => 11,
 			'order.base.product.type' => 'bundle',
-			'order.base.product.productid' => 100,
-			'order.base.product.baseid' => 42,
-			'order.base.product.suppliercode' => 'UnitSupplier',
+			'order.base.product.productid' => '100',
+			'order.base.product.supplierid' => '123',
+			'order.base.product.suppliername' => 'UnitSupplier',
 			'order.base.product.prodcode' => 'UnitProd',
 			'order.base.product.stocktype' => 'unittype',
 			'order.base.product.timeframe' => '1-2w',
@@ -207,18 +208,34 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetSupplierCode()
+	public function testGetSupplierId()
 	{
-		$this->assertEquals( 'UnitSupplier', $this->object->getSupplierCode() );
+		$this->assertEquals( '123', $this->object->getSupplierId() );
 	}
 
 
-	public function testSetSupplierCode()
+	public function testSetSupplierId()
 	{
-		$return = $this->object->setSupplierCode( 'testId' );
+		$return = $this->object->setSupplierId( '345' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
-		$this->assertEquals( 'testId', $this->object->getSupplierCode() );
+		$this->assertEquals( '345', $this->object->getSupplierId() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetSupplierName()
+	{
+		$this->assertEquals( 'UnitSupplier', $this->object->getSupplierName() );
+	}
+
+
+	public function testSetSupplierName()
+	{
+		$return = $this->object->setSupplierName( 'test supplier' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( 'test supplier', $this->object->getSupplierName() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -761,7 +778,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.name' => 'test item',
 			'order.base.product.description' => 'test description',
 			'order.base.product.stocktype' => 'stocktype',
-			'order.base.product.suppliercode' => 'testsup',
+			'order.base.product.supplierid' => '456',
+			'order.base.product.suppliername' => 'testsup',
 			'order.base.product.prodcode' => 'test',
 			'order.base.product.mediaurl' => '/path/to/image.jpg',
 			'order.base.product.target' => 'ttarget',
@@ -789,7 +807,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.product.name'], $item->getName() );
 		$this->assertEquals( $list['order.base.product.description'], $item->getDescription() );
 		$this->assertEquals( $list['order.base.product.stocktype'], $item->getStockType() );
-		$this->assertEquals( $list['order.base.product.suppliercode'], $item->getSupplierCode() );
+		$this->assertEquals( $list['order.base.product.supplierid'], $item->getSupplierId() );
+		$this->assertEquals( $list['order.base.product.suppliername'], $item->getSupplierName() );
 		$this->assertEquals( $list['order.base.product.prodcode'], $item->getProductCode() );
 		$this->assertEquals( $list['order.base.product.mediaurl'], $item->getMediaUrl() );
 		$this->assertEquals( $list['order.base.product.timeframe'], $item->getTimeFrame() );
@@ -815,7 +834,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getOrderProductId(), $arrayObject['order.base.product.orderproductid'] );
 		$this->assertEquals( $this->object->getOrderAddressId(), $arrayObject['order.base.product.orderaddressid'] );
 		$this->assertEquals( $this->object->getStockType(), $arrayObject['order.base.product.stocktype'] );
-		$this->assertEquals( $this->object->getSupplierCode(), $arrayObject['order.base.product.suppliercode'] );
+		$this->assertEquals( $this->object->getSupplierName(), $arrayObject['order.base.product.suppliername'] );
+		$this->assertEquals( $this->object->getSupplierId(), $arrayObject['order.base.product.supplierid'] );
 		$this->assertEquals( $this->object->getProductId(), $arrayObject['order.base.product.productid'] );
 		$this->assertEquals( $this->object->getProductCode(), $arrayObject['order.base.product.prodcode'] );
 		$this->assertEquals( $this->object->getName(), $arrayObject['order.base.product.name'] );
@@ -859,7 +879,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'Cafe Noire Expresso for basket', $productCopy->getDescription() );
 		$this->assertEquals( $product->getId(), $productCopy->getProductId() );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED, $productCopy->getStatus() );
-		$this->assertEquals( '', $productCopy->getSupplierCode() );
+		$this->assertEquals( '', $productCopy->getSupplierName() );
 		$this->assertEquals( '', $productCopy->getMediaUrl() );
 		$this->assertEquals( '', $productCopy->getTarget() );
 		$this->assertEquals( 'abc', $productCopy->get( 'customprop' ) );

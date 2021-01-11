@@ -73,7 +73,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '74.00', $product->getPrice()->getRebate() );
 		$this->assertEquals( 'U:MD', $product->getProductCode() );
 		$this->assertNotEquals( '', $product->getProductId() );
-		$this->assertEquals( '', $product->getSupplierCode() );
+		$this->assertEquals( '', $product->getSupplierName() );
 		$this->assertEquals( '', $product->getMediaUrl() );
 		$this->assertEquals( 'Geldwerter Nachlass', $product->getName() );
 		$this->assertEquals( '6.00', $product->getAttribute( 'coupon-remain', 'coupon' ) );

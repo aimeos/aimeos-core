@@ -100,10 +100,17 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'order.base.product.suppliercode' => array(
-			'code' => 'order.base.product.suppliercode',
-			'internalcode' => 'mordbapr."suppliercode"',
-			'label' => 'Product supplier code',
+		'order.base.product.supplierid' => array(
+			'code' => 'order.base.product.supplierid',
+			'internalcode' => 'mordbapr."supplierid"',
+			'label' => 'Product supplier ID',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'order.base.product.suppliername' => array(
+			'code' => 'order.base.product.suppliername',
+			'internalcode' => 'mordbapr."suppliername"',
+			'label' => 'Product supplier name',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -771,7 +778,8 @@ class Standard
 			$stmt->bind( $idx++, $item->getType() );
 			$stmt->bind( $idx++, $item->getProductId() );
 			$stmt->bind( $idx++, $item->getProductCode() );
-			$stmt->bind( $idx++, $item->getSupplierCode() );
+			$stmt->bind( $idx++, $item->getSupplierId() );
+			$stmt->bind( $idx++, $item->getSupplierName() );
 			$stmt->bind( $idx++, $item->getStockType() );
 			$stmt->bind( $idx++, $item->getName() );
 			$stmt->bind( $idx++, $item->getDescription() );
@@ -1046,7 +1054,7 @@ class Standard
 			}
 
 			$manager = \Aimeos\MShop::create( $context, 'product' );
-			$search = $manager->filter()->slice( 0, count( $ids ) )->add( ['product.id' => array_filter( $ids )] );
+			$search = $manager->filter()->slice( 0, count( $ids ) )->add( ['product.id' => array_unique( array_filter( $ids ) )] );
 			$prodItems = $manager->search( $search, $domains );
 		}
 
@@ -1054,13 +1062,13 @@ class Standard
 		{
 			$domains = isset( $ref['supplier'] ) && is_array( $ref['supplier'] ) ? $ref['supplier'] : [];
 
-			$codes = [];
+			$ids = [];
 			foreach( $map as $list ) {
-				$codes[] = $list['item']['order.base.product.suppliercode'] ?? null;
+				$ids[] = $list['item']['order.base.product.supplierid'] ?? null;
 			}
 
 			$manager = \Aimeos\MShop::create( $context, 'supplier' );
-			$search = $manager->filter()->slice( 0, count( $ids ) )->add( ['supplier.code' => array_filter( $codes )] );
+			$search = $manager->filter()->slice( 0, count( $ids ) )->add( ['supplier.id' => array_unique( array_filter( $ids ) )] );
 			$supItems = $manager->search( $search, $domains );
 		}
 
@@ -1069,7 +1077,7 @@ class Standard
 		foreach( $map as $id => $list )
 		{
 			$list['item']['.product'] = $prodItems[$list['item']['order.base.product.productid'] ?? null] ?? null;
-			$list['item']['.supplier'] = $supItems[$list['item']['order.base.product.suppliercode'] ?? null] ?? null;
+			$list['item']['.supplier'] = $supItems[$list['item']['order.base.product.supplierid'] ?? null] ?? null;
 			$item = $this->createItemBase( $list['price'], $list['item'], $attributes[$id] ?? [] );
 
 			if( $item = $this->applyFilter( $item ) ) {

@@ -415,12 +415,12 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_order_base_product" ( :names
-							"baseid", "ordprodid", "ordaddrid", "type", "prodid", "prodcode", "suppliercode",
-							"stocktype", "name", "description", "mediaurl", "timeframe", "quantity",
-							"currencyid", "price", "costs", "rebate", "tax", "taxrate", "taxflag",
+							"baseid", "ordprodid", "ordaddrid", "type", "prodid", "prodcode", "supplierid",
+							"suppliername", "stocktype", "name", "description", "mediaurl", "timeframe",
+							"quantity", "currencyid", "price", "costs", "rebate", "tax", "taxrate", "taxflag",
 							"flags", "status", "pos", "mtime", "editor", "target", "siteid", "ctime"
 						) VALUES ( :values
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
@@ -428,8 +428,8 @@ return array(
 					'ansi' => '
 						UPDATE "mshop_order_base_product"
 						SET :names
-							"baseid" = ?, "ordprodid" = ?, "ordaddrid" = ?, "type" = ?,
-							"prodid" = ?, "prodcode" = ?, "suppliercode" = ?, "stocktype" = ?,
+							"baseid" = ?, "ordprodid" = ?, "ordaddrid" = ?, "type" = ?, "prodid" = ?,
+							"prodcode" = ?, "supplierid" = ?, "suppliername" = ?, "stocktype" = ?,
 							"name" = ?, "description" = ?, "mediaurl" = ?, "timeframe" = ?,
 							"quantity" = ?, "currencyid" = ?, "price" = ?, "costs" = ?,
 							"rebate" = ?, "tax" = ?, "taxrate" = ?, "taxflag" = ?, "flags" = ?,
@@ -443,7 +443,7 @@ return array(
 							mordbapr."id" AS "order.base.product.id", mordbapr."baseid" AS "order.base.product.baseid",
 							mordbapr."siteid" AS "order.base.product.siteid", mordbapr."ordprodid" AS "order.base.product.orderproductid",
 							mordbapr."prodid" AS "order.base.product.productid", mordbapr."prodcode" AS "order.base.product.prodcode",
-							mordbapr."suppliercode" AS "order.base.product.suppliercode", mordbapr."stocktype" AS "order.base.product.stocktype",
+							mordbapr."description" AS "order.base.product.description", mordbapr."stocktype" AS "order.base.product.stocktype",
 							mordbapr."type" AS "order.base.product.type", mordbapr."name" AS "order.base.product.name",
 							mordbapr."mediaurl" AS "order.base.product.mediaurl", mordbapr."timeframe" AS "order.base.product.timeframe",
 							mordbapr."quantity" AS "order.base.product.quantity", mordbapr."currencyid" AS "order.base.product.currencyid",
@@ -454,18 +454,18 @@ return array(
 							mordbapr."pos" AS "order.base.product.position", mordbapr."mtime" AS "order.base.product.mtime",
 							mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime",
 							mordbapr."target" AS "order.base.product.target", mordbapr."ordaddrid" AS "order.base.product.orderaddressid",
-							mordbapr."description" AS "order.base.product.description"
+							mordbapr."supplierid" AS "order.base.product.supplierid", mordbapr."suppliername" AS "order.base.product.suppliername"
 						FROM "mshop_order_base_product" AS mordbapr
 						:joins
 						WHERE :cond
 						GROUP BY :columns :group
 							mordbapr."id", mordbapr."baseid", mordbapr."siteid", mordbapr."ordprodid", mordbapr."prodid",
-							mordbapr."prodcode", mordbapr."suppliercode", mordbapr."stocktype", mordbapr."type",
+							mordbapr."prodcode", mordbapr."description", mordbapr."stocktype", mordbapr."type",
 							mordbapr."name", mordbapr."mediaurl", mordbapr."timeframe", mordbapr."quantity",
 							mordbapr."currencyid", mordbapr."price", mordbapr."costs", mordbapr."rebate", mordbapr."tax",
 							mordbapr."taxrate", mordbapr."taxflag", mordbapr."flags", mordbapr."status", mordbapr."pos",
 							mordbapr."mtime", mordbapr."editor", mordbapr."ctime", mordbapr."target", mordbapr."ordaddrid",
-							mordbapr."description"
+							mordbapr."supplierid", mordbapr."suppliername"
 						ORDER BY :order
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
@@ -474,7 +474,7 @@ return array(
 							mordbapr."id" AS "order.base.product.id", mordbapr."baseid" AS "order.base.product.baseid",
 							mordbapr."siteid" AS "order.base.product.siteid", mordbapr."ordprodid" AS "order.base.product.orderproductid",
 							mordbapr."prodid" AS "order.base.product.productid", mordbapr."prodcode" AS "order.base.product.prodcode",
-							mordbapr."suppliercode" AS "order.base.product.suppliercode", mordbapr."stocktype" AS "order.base.product.stocktype",
+							mordbapr."description" AS "order.base.product.description", mordbapr."stocktype" AS "order.base.product.stocktype",
 							mordbapr."type" AS "order.base.product.type", mordbapr."name" AS "order.base.product.name",
 							mordbapr."mediaurl" AS "order.base.product.mediaurl", mordbapr."timeframe" AS "order.base.product.timeframe",
 							mordbapr."quantity" AS "order.base.product.quantity", mordbapr."currencyid" AS "order.base.product.currencyid",
@@ -485,7 +485,7 @@ return array(
 							mordbapr."pos" AS "order.base.product.position", mordbapr."mtime" AS "order.base.product.mtime",
 							mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime",
 							mordbapr."target" AS "order.base.product.target", mordbapr."ordaddrid" AS "order.base.product.orderaddressid",
-							mordbapr."description" AS "order.base.product.description"
+							mordbapr."supplierid" AS "order.base.product.supplierid", mordbapr."suppliername" AS "order.base.product.suppliername"
 						FROM "mshop_order_base_product" AS mordbapr
 						:joins
 						WHERE :cond
