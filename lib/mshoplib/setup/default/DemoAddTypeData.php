@@ -30,7 +30,7 @@ class DemoAddTypeData extends \Aimeos\MW\Setup\Task\MShopAddTypeData
 	 */
 	public function migrate()
 	{
-		if( $this->getContext()->getConfig()->get( 'setup/default/demo', '' ) === '' ) {
+		if( $this->additional->getConfig()->get( 'setup/default/demo', '' ) === '' ) {
 			return;
 		}
 
