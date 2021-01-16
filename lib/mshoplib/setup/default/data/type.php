@@ -8,12 +8,6 @@
 
 return array(
 	'attribute/type' => array(
-		array( 'domain' => 'product', 'code' => 'color', 'label' => 'Color', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'size', 'label' => 'Size', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'width', 'label' => 'Width', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'length', 'label' => 'Length', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'print', 'label' => 'Print', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'sticker', 'label' => 'Sticker', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'price', 'label' => 'Price', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'text', 'label' => 'Text', 'status' => 1 ),
