@@ -41,14 +41,9 @@ class Factory
 		}
 		elseif( is_string( $file ) )
 		{
-			if( strpos( $file, "\0" ) === false && is_file( $file ) )
-			{
-				if( ( $content = file_get_contents( $file ) ) === false ) {
-					throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to read from file "%1$s"', $file ) );
-				}
-			}
-			else
-			{
+			if( is_file( $file ) && ( $content = file_get_contents( $file ) ) === false ) {
+				throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to read from file "%1$s"', $file ) );
+			} else {
 				$content = $file;
 			}
 		}
