@@ -107,7 +107,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result2 = $this->object->search( $search )->toArray();
 
 
-		$this->assertContains( $product->getId(), array_keys( $result ) );
+		$this->assertTrue( in_array( $product->getId(), array_keys( $result ) ) );
 		$this->assertFalse( in_array( $product->getId(), array_keys( $result2 ) ) );
 	}
 
