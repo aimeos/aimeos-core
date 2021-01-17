@@ -36,12 +36,7 @@ abstract class Base
 	/**
 	 * Saluation for a female customer.
 	 */
-	const SALUTATION_MRS = 'mrs';
-
-	/**
-	 * Saluation for a female customer (not maried, usually not used any more).
-	 */
-	const SALUTATION_MISS = 'miss';
+	const SALUTATION_MS = 'mrs';
 
 	/**
 	 * Saluation for a male customer.
@@ -710,16 +705,10 @@ abstract class Base
 	 */
 	protected function checkSalutation( string $value )
 	{
-		switch( $value )
-		{
-			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_UNKNOWN:
-			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_COMPANY:
-			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS:
-			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MISS:
-			case \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR:
-				return $value;
+		if( strlen( $value ) > 8 ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Address salutation "%1$s" not within allowed range', $value ) );
 		}
 
-		throw new \Aimeos\MShop\Exception( sprintf( 'Address salutation "%1$s" not within allowed range', $value ) );
+		return $value;
 	}
 }

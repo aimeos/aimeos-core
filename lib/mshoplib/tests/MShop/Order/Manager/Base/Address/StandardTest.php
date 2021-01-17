@@ -40,8 +40,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->aggregate( $search, 'order.base.address.salutation' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertArrayHasKey( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS, $result );
-		$this->assertEquals( 4, $result[\Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS] );
+		$this->assertArrayHasKey( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MS, $result );
+		$this->assertEquals( 4, $result[\Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MS] );
 	}
 
 
