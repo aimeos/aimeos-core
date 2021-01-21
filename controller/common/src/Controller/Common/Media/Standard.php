@@ -550,7 +550,7 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$default = array( 'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml' );
+		$default = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'application/pdf', 'application/zip'];
 		$allowed = $config->get( 'controller/common/media/' . $type . '/allowedtypes', $default );
 
 		if( in_array( $mimetype, $allowed ) === false )
