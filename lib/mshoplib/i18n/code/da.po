@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2020-12-11 09:14+0000\n"
+"PO-Revision-Date: 2020-12-18 13:03+0000\n"
 "Last-Translator: Tobias Madsen <tubbe.m@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/aimeos/aimeos-core/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr "Arkiveret"
 
 #. Item status
 msgid "status:-1"
-msgstr "Anmeldelse"
+msgstr "Afventer gennemgang"
 
 #. Item status
 msgid "status:0"
