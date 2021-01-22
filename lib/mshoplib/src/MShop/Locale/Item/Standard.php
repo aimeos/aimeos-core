@@ -100,11 +100,11 @@ class Standard
 	/**
 	 * Returns the Site ID of the item.
 	 *
-	 * @return string|null Site ID (or null for global site)
+	 * @return string Site ID (or null for global site)
 	 */
-	public function getSiteId() : ?string
+	public function getSiteId() : string
 	{
-		return $this->get( 'locale.siteid' );
+		return $this->get( 'locale.siteid', '' );
 	}
 
 
