@@ -195,7 +195,7 @@ class Standard
 		$previews = [];
 		$mime = $this->getMimeType( $media, 'preview' );
 
-		foreach( $this->createPreviews( $media ) as $type => $mediaFile )
+		foreach( $this->createPreviews( $media, $item->getDomain(), $item->getType() ) as $type => $mediaFile )
 		{
 			$filepath = $this->getFilePath( rand(), 'preview', $media->getMimeType() );
 			$this->store( $filepath, $mediaFile->save( null, $mime ), $fsname );
@@ -243,9 +243,11 @@ class Standard
 	 * Creates scaled images according to the configuration settings
 	 *
 	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
+	 * @param string $domain Domain the item is from, e.g. product, catalog, etc.
+	 * @param string $type Type of the item within the given domain, e.g. default, stage, etc.
 	 * @return \Aimeos\MW\Media\Image\Iface[] Associative list of image width as keys and scaled media object as values
 	 */
-	protected function createPreviews( \Aimeos\MW\Media\Image\Iface $media ) : array
+	protected function createPreviews( \Aimeos\MW\Media\Image\Iface $media, string $domain, string $type ) : array
 	{
 		$list = [];
 		$config = $this->context->getConfig();
@@ -285,12 +287,51 @@ class Standard
 		 * one value is set, the image will be scaled exactly to the given width
 		 * or height and the other side is scaled proportionally.
 		 *
+		 * You can also define different preview sizes for different domains (e.g.
+		 * for catalog images) and for different types (e.g. catalog stage images).
+		 * Use configuration settings like
+		 *
+		 *  controller/common/media/<domain>/previews
+		 *  controller/common/media/<domain>/<type>/previews
+		 *
+		 * for example:
+		 *
+		 *  controller/common/media/catalog/previews => [
+		 *    ['maxwidth' => 240, 'maxheight' => 320, 'force-size' => true],
+		 *  ]
+		 *  controller/common/media/catalog/previews => [
+		 *    ['maxwidth' => 400, 'maxheight' => 300, 'force-size' => false]
+		 *  ]
+		 *  controller/common/media/catalog/stage/previews => [
+		 *    ['maxwidth' => 360, 'maxheight' => 320, 'force-size' => true],
+		 *    ['maxwidth' => 720, 'maxheight' => 480, 'force-size' => true]
+		 *  ]
+		 *
+		 * These settings will create two preview images for catalog stage images,
+		 * one with a different size for all other catalog images and all images
+		 * from other domains will be sized to 240x320px. The available domains
+		 * which can have images are:
+		 *
+		 * * attribute
+		 * * catalog
+		 * * product
+		 * * service
+		 * * supplier
+		 *
+		 * There are a few image types included per domain ("default" is always
+		 * available). You can also add your own types in the admin backend and
+		 * extend the frontend to display them where you need them.
+		 *
 		 * @param array List of image size definitions
 		 * @category Developer
 		 * @category User
 		 * @since 2019.07
 		 */
-		foreach( $config->get( 'controller/common/media/previews', [] ) as $entry )
+		$previews = $config->get( 'controller/common/media/previews', [] );
+		$previews = $config->get( 'controller/common/media/' . $domain . '/previews', $previews );
+		$previews = $config->get( 'controller/common/media/' . $domain . '/' . $type . '/previews', $previews );
+
+		foreach( $previews as $entry )
 		{
 			$maxwidth = ( isset( $entry['maxwidth'] ) ? (int) $entry['maxwidth'] : null );
 			$maxheight = ( isset( $entry['maxheight'] ) ? (int) $entry['maxheight'] : null );
