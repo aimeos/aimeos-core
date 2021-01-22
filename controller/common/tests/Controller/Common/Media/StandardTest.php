@@ -184,8 +184,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->exactly( 3 ) )->method( 'store' );
 
 
-		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
-		$item->setPreview( 'preview.gif' )->setUrl( 'test.gif' )->setDomain( 'product' );
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->createItem();
+		$item->setPreview( 'preview.jpg' )->setUrl( 'test.jpg' )->setDomain( 'product' );
 
 		$result = $object->scale( $item );
 

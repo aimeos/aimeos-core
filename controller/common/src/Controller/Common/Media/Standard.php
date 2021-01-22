@@ -319,9 +319,9 @@ class Standard
 		 * @category User
 		 * @since 2019.07
 		 */
-		$previews = $config->get( 'controller/common/media/previews', [] );
-		$previews = $config->get( 'controller/common/media/' . $domain . '/previews', $previews );
-		$previews = $config->get( 'controller/common/media/' . $domain . '/' . $type . '/previews', $previews );
+		$previews = $config->get( 'controller/common/media/standard/previews', [] );
+		$previews = $config->get( 'controller/common/media/standard/' . $domain . '/previews', $previews );
+		$previews = $config->get( 'controller/common/media/standard/' . $domain . '/' . $type . '/previews', $previews );
 
 		foreach( $previews as $entry )
 		{
