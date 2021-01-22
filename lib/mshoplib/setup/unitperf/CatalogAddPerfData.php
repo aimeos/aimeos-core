@@ -46,7 +46,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies() : array
 	{
-		return ['MShopAddCodeDataUnitperf', 'AttributeAddPerfData', 'LocaleAddPerfData', 'MShopSetLocale'];
+		return ['MShopAddCodeDataUnitperf', 'AttributeAddPerfData', 'MShopSetLocale'];
 	}
 
 
