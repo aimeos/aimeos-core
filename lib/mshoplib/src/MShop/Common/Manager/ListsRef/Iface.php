@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MShop\Common\Manager\ListRef;
+namespace Aimeos\MShop\Common\Manager\ListsRef;
 
 
 /**
@@ -16,7 +16,6 @@ namespace Aimeos\MShop\Common\Manager\ListRef;
  *
  * @package MShop
  * @subpackage Common
- * @todo 2020.01 Rename to "ListsRef"
  */
 interface Iface
 {

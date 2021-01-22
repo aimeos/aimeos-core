@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Text\Item\Iface
 {
-	use \Aimeos\MShop\Common\Item\ListRef\Traits;
+	use \Aimeos\MShop\Common\Item\ListsRef\Traits;
 
 
 	private $langid;

@@ -11,7 +11,7 @@
 
 namespace Aimeos\MShop\Supplier\Item;
 
-use \Aimeos\MShop\Common\Item\ListRef;
+use \Aimeos\MShop\Common\Item\ListsRef;
 use \Aimeos\MShop\Common\Item\AddressRef;
 
 
@@ -25,9 +25,9 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Supplier\Item\Iface
 {
-	use ListRef\Traits, AddressRef\Traits  {
-		ListRef\Traits::__clone insteadof AddressRef\Traits;
-		ListRef\Traits::__clone as __cloneList;
+	use ListsRef\Traits, AddressRef\Traits  {
+		ListsRef\Traits::__clone insteadof AddressRef\Traits;
+		ListsRef\Traits::__clone as __cloneList;
 		AddressRef\Traits::__clone as __cloneAddress;
 	}
 

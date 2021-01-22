@@ -11,7 +11,7 @@
 
 namespace Aimeos\MShop\Customer\Item;
 
-use \Aimeos\MShop\Common\Item\ListRef;
+use \Aimeos\MShop\Common\Item\ListsRef;
 use \Aimeos\MShop\Common\Item\AddressRef;
 use \Aimeos\MShop\Common\Item\PropertyRef;
 
@@ -26,10 +26,10 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Customer\Item\Iface
 {
-	use ListRef\Traits, PropertyRef\Traits, AddressRef\Traits  {
-		ListRef\Traits::__clone insteadof PropertyRef\Traits;
-		ListRef\Traits::__clone insteadof AddressRef\Traits;
-		ListRef\Traits::__clone as __cloneList;
+	use ListsRef\Traits, PropertyRef\Traits, AddressRef\Traits  {
+		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
+		ListsRef\Traits::__clone insteadof AddressRef\Traits;
+		ListsRef\Traits::__clone as __cloneList;
 		AddressRef\Traits::__clone as __cloneAddress;
 		PropertyRef\Traits::__clone as __cloneProperty;
 	}

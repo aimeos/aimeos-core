@@ -149,11 +149,11 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	/**
 	 * Adds the referenced items from the given entry data.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item with list items
+	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item with list items
 	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface $item Updated item
+	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface $item Updated item
 	 */
-	protected function addRefItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $entry )
+	protected function addRefItems( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entry )
 	{
 		$context = $this->getContext();
 		$domain = $item->getResourceType();

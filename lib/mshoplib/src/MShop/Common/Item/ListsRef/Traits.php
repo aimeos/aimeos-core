@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\ListRef;
+namespace Aimeos\MShop\Common\Item\ListsRef;
 
 
 /**
@@ -63,9 +63,9 @@ trait Traits
 	 * @param string $domain Name of the domain (e.g. media, text, etc.)
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the new domain item
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem New item added to the given domain or null if no item should be referenced
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
+	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface Self object for method chaining
 	 */
-	public function addListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListRef\Iface
+	public function addListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		if( $refItem !== null )
 		{
@@ -100,9 +100,9 @@ trait Traits
 	 * @param string $domain Name of the domain (e.g. media, text, etc.)
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the domain item
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Existing item removed from the given domain or null if item shouldn't be removed
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
+	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface Self object for method chaining
 	 */
-	public function deleteListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListRef\Iface
+	public function deleteListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		if( isset( $this->listItems[$domain] )
 			&& ( $key = array_search( $listItem, $this->listItems[$domain], true ) ) !== false
@@ -122,10 +122,10 @@ trait Traits
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $items Existing list items
 	 * @param bool $all True to delete referenced items as well, false for list items only
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
+	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface Self object for method chaining
 	 * @throws \Aimeos\MShop\Exception If an item isn't a list item or isn't found
 	 */
-	public function deleteListItems( iterable $items, bool $all = false ) : \Aimeos\MShop\Common\Item\ListRef\Iface
+	public function deleteListItems( iterable $items, bool $all = false ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		foreach( $items as $item )
 		{

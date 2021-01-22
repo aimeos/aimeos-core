@@ -21,10 +21,10 @@ namespace Aimeos\MShop\Product\Manager;
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Product\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface,
-		\Aimeos\MShop\Common\Manager\ListRef\Iface, \Aimeos\MShop\Common\Manager\PropertyRef\Iface,
+		\Aimeos\MShop\Common\Manager\ListsRef\Iface, \Aimeos\MShop\Common\Manager\PropertyRef\Iface,
 		\Aimeos\MShop\Common\Manager\Rating\Iface
 {
-	use \Aimeos\MShop\Common\Manager\ListRef\Traits;
+	use \Aimeos\MShop\Common\Manager\ListsRef\Traits;
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 
 

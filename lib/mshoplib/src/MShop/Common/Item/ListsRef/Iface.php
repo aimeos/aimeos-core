@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\ListRef;
+namespace Aimeos\MShop\Common\Item\ListsRef;
 
 
 /**
@@ -26,9 +26,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string $domain Name of the domain (e.g. media, text, etc.)
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the new domain item
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem New item added to the given domain or null if no item should be referenced
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
+	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface Self object for method chaining
 	 */
-	public function addListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListRef\Iface;
+	public function addListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface;
 
 	/**
 	 * Removes a list item which references the given domain item (removed as well if it exists)
@@ -36,18 +36,18 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param string $domain Name of the domain (e.g. media, text, etc.)
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the domain item
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Existing item removed from the given domain or null if item shouldn't be removed
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
+	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface Self object for method chaining
 	 */
-	public function deleteListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListRef\Iface;
+	public function deleteListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface;
 
 	/**
 	 * Removes a list of list items which references their domain items (removed as well if it exists)
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $items Existing list items
 	 * @param bool $all True to delete referenced items as well, false for list items only
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
+	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface Self object for method chaining
 	 */
-	public function deleteListItems( iterable $items, bool $all = false ) : \Aimeos\MShop\Common\Item\ListRef\Iface;
+	public function deleteListItems( iterable $items, bool $all = false ) : \Aimeos\MShop\Common\Item\ListsRef\Iface;
 
 	/**
 	 * Returns the domains for which items are available

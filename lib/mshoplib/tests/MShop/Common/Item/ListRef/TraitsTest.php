@@ -7,12 +7,12 @@
  */
 
 
-namespace Aimeos\MShop\Common\Item\ListRef;
+namespace Aimeos\MShop\Common\Item\ListsRef;
 
 
 class Test extends \Aimeos\MShop\Common\Item\Base implements Iface
 {
-	use \Aimeos\MShop\Common\Item\ListRef\Traits;
+	use \Aimeos\MShop\Common\Item\ListsRef\Traits;
 
 	public function __construct( array $listItems, array $refItems )
 	{
@@ -87,7 +87,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 			$this->textItem2->getId() => $this->textItem2,
 		) );
 
-		$this->object = new \Aimeos\MShop\Common\Item\ListRef\Test( $listItems, $refItems );
+		$this->object = new \Aimeos\MShop\Common\Item\ListsRef\Test( $listItems, $refItems );
 	}
 
 
@@ -269,7 +269,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetName()
 	{
-		$object = new \Aimeos\MShop\Common\Item\ListRef\Test( [], [] );
+		$object = new \Aimeos\MShop\Common\Item\ListsRef\Test( [], [] );
 
 		$this->assertEquals( 'test label', $object->getName() );
 		$this->assertEquals( 'test name', $this->object->getName() );

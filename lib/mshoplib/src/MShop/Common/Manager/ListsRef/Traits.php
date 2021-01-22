@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MShop\Common\Manager\ListRef;
+namespace Aimeos\MShop\Common\Manager\ListsRef;
 
 
 /**
@@ -16,7 +16,6 @@ namespace Aimeos\MShop\Common\Manager\ListRef;
  *
  * @package MShop
  * @subpackage Common
- * @todo 2020.01 Rename to "ListsRef"
  */
 trait Traits
 {
@@ -116,10 +115,10 @@ trait Traits
 	/**
 	 * Removes the items referenced by the given list items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface[]|\Aimeos\Map|array $items List of items with deleted list items
-	 * @return \Aimeos\MShop\Common\Manager\ListRef\Iface Manager object for method chaining
+	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface[]|\Aimeos\Map|array $items List of items with deleted list items
+	 * @return \Aimeos\MShop\Common\Manager\ListsRef\Iface Manager object for method chaining
 	 */
-	protected function deleteRefItems( $items ) : \Aimeos\MShop\Common\Manager\ListRef\Iface
+	protected function deleteRefItems( $items ) : \Aimeos\MShop\Common\Manager\ListsRef\Iface
 	{
 		if( is_map( $items ) ) { $items = $items->toArray(); }
 		if( !is_array( $items ) ) { $items = [$items]; }
@@ -129,7 +128,7 @@ trait Traits
 
 		foreach( $items as $item )
 		{
-			if( $item instanceof \Aimeos\MShop\Common\Item\ListRef\Iface )
+			if( $item instanceof \Aimeos\MShop\Common\Item\ListsRef\Iface )
 			{
 				foreach( $item->getListItemsDeleted() as $listItem )
 				{
@@ -238,13 +237,13 @@ trait Traits
 	/**
 	 * Adds new, updates existing and deletes removed list items and referenced items if available
 	 *
-	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item with referenced items
+	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item with referenced items
 	 * @param string $domain Domain of the calling manager
 	 * @param bool $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface $item with updated referenced items
+	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface $item with updated referenced items
 	 */
-	protected function saveListItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, string $domain,
-		bool $fetch = true ) : \Aimeos\MShop\Common\Item\ListRef\Iface
+	protected function saveListItems( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, string $domain,
+		bool $fetch = true ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
 		$context = $this->getContext();
 		$rmListIds = $rmIds = $refManager = [];

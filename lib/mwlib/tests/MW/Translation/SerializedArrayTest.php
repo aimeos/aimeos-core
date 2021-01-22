@@ -137,9 +137,6 @@ class SerializedArrayTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * @todo Use input files with same content as for Zend to get the same results
-	 */
 	public function testGetAll()
 	{
 		$result = $this->object->getAll( 'testDomain' );

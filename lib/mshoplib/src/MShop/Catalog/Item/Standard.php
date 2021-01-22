@@ -23,7 +23,7 @@ class Standard
 	implements \Aimeos\MShop\Catalog\Item\Iface
 {
 	use \Aimeos\MShop\Common\Item\Config\Traits;
-	use \Aimeos\MShop\Common\Item\ListRef\Traits;
+	use \Aimeos\MShop\Common\Item\ListsRef\Traits;
 
 
 	private $node;

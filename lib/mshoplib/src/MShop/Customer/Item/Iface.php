@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Customer\Item;
  */
 interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\AddressRef\Iface,
-		\Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\PropertyRef\Iface,
+		\Aimeos\MShop\Common\Item\ListsRef\Iface, \Aimeos\MShop\Common\Item\PropertyRef\Iface,
 		\Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**

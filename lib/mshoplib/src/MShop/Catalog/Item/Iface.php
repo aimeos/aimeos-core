@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Catalog\Item;
  */
 interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Config\Iface,
-		\Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Tree\Iface
+		\Aimeos\MShop\Common\Item\ListsRef\Iface, \Aimeos\MShop\Common\Item\Tree\Iface
 {
 	/**
 	 * Returns the URL segment for the catalog item.

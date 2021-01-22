@@ -58,11 +58,11 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 * Adds the list test data
 	 *
 	 * @param \Aimeos\MShop\Common\Manager\Iface $listManager List manager object
-	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item object
+	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item object
 	 * @param array $data List of key/list pairs lists
 	 * @return \Aimeos\MShop\Common\Item\Iface Modified item object
 	 */
-	protected function addListData( \Aimeos\MShop\Common\Manager\Iface $listManager, \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $data )
+	protected function addListData( \Aimeos\MShop\Common\Manager\Iface $listManager, \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $data )
 	{
 		if( isset( $data['lists'] ) )
 		{
@@ -81,7 +81,7 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 						$refItem = $manager->create()->fromArray( $entry, true );
 					}
 
-					if( $refItem instanceof \Aimeos\MShop\Common\Item\ListRef\Iface ) {
+					if( $refItem instanceof \Aimeos\MShop\Common\Item\ListsRef\Iface ) {
 						$refItem = $this->addListData( $manager->getSubManager( 'lists' ), $refItem, $entry );
 					}
 

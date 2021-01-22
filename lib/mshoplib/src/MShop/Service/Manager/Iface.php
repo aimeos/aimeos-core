@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Service\Manager;
  * @subpackage Service
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface, \Aimeos\MShop\Common\Manager\ListRef\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface, \Aimeos\MShop\Common\Manager\ListsRef\Iface
 {
 	/**
 	 * Returns the service provider which is responsible for the service item.

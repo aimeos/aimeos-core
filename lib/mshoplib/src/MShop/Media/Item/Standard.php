@@ -11,7 +11,7 @@
 
 namespace Aimeos\MShop\Media\Item;
 
-use \Aimeos\MShop\Common\Item\ListRef;
+use \Aimeos\MShop\Common\Item\ListsRef;
 use \Aimeos\MShop\Common\Item\PropertyRef;
 
 
@@ -25,10 +25,10 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Media\Item\Iface
 {
-	use ListRef\Traits, PropertyRef\Traits {
-		ListRef\Traits::__clone insteadof PropertyRef\Traits;
-		ListRef\Traits::getName as getNameList;
-		ListRef\Traits::__clone as __cloneList;
+	use ListsRef\Traits, PropertyRef\Traits {
+		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
+		ListsRef\Traits::getName as getNameList;
+		ListsRef\Traits::__clone as __cloneList;
 		PropertyRef\Traits::__clone as __cloneProperty;
 	}
 

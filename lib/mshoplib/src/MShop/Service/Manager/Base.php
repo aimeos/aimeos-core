@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Service\Manager;
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
-	use \Aimeos\MShop\Common\Manager\ListRef\Traits;
+	use \Aimeos\MShop\Common\Manager\ListsRef\Traits;
 
 
 	/**

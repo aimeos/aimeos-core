@@ -245,7 +245,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetTreeWithFilter()
 	{
 		$index = 1;
-		$this->object->addFilter( \Aimeos\MShop\Common\Item\ListRef\Iface::class, function( $item ) use ( &$index ) {
+		$this->object->addFilter( \Aimeos\MShop\Common\Item\ListsRef\Iface::class, function( $item ) use ( &$index ) {
 			return $index++ % 2 ? $item : null;
 		} );
 

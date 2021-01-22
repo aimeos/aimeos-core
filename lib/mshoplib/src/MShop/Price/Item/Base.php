@@ -10,7 +10,7 @@
 
 namespace Aimeos\MShop\Price\Item;
 
-use \Aimeos\MShop\Common\Item\ListRef;
+use \Aimeos\MShop\Common\Item\ListsRef;
 use \Aimeos\MShop\Common\Item\PropertyRef;
 
 
@@ -24,9 +24,9 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Price\Item\Iface
 {
-	use ListRef\Traits, PropertyRef\Traits {
-		ListRef\Traits::__clone insteadof PropertyRef\Traits;
-		ListRef\Traits::__clone as __cloneList;
+	use ListsRef\Traits, PropertyRef\Traits {
+		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
+		ListsRef\Traits::__clone as __cloneList;
 		PropertyRef\Traits::__clone as __cloneProperty;
 	}
 
