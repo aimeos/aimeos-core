@@ -344,17 +344,6 @@ class Standard
 			}
 		}
 
-		if( empty( $list ) )
-		{
-			/** @todo 2021.x Remove old config */
-			$maxwidth = $config->get( 'controller/common/media/preview/maxwidth', null );
-			$maxheight = $config->get( 'controller/common/media/preview/maxheight', null );
-			$fit = (bool) $config->get( 'controller/common/media/preview/force-size', false );
-
-			$image = $media->scale( $maxwidth, $maxheight, !$fit );
-			$list[$image->getWidth()] = $image;
-		}
-
 		return $list;
 	}
 
