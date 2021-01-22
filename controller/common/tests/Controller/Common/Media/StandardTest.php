@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.gif' ) ) );
 
 
-		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->create()->setDomain( 'product' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $object->add( $item, $file ) );
 	}
@@ -189,7 +189,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
-		$item->setPreview( 'preview.gif' )->setUrl( 'test.gif' );
+		$item->setPreview( 'preview.gif' )->setUrl( 'test.gif' )->setDomain( 'product' );
 
 		$result = $object->scale( $item, 'fs-media', true );
 
