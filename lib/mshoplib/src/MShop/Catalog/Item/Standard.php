@@ -116,11 +116,11 @@ class Standard
 	/**
 	 * Returns the site ID of the item.
 	 *
-	 * @return string|null Site ID of the item
+	 * @return string Site ID of the item
 	 */
-	public function getSiteId() : ?string
+	public function getSiteId() : string
 	{
-		return ( $this->node->__isset( 'siteid' ) ? (string) $this->node->__get( 'siteid' ) : null );
+		return ( $this->node->__isset( 'siteid' ) ? (string) $this->node->__get( 'siteid' ) : '' );
 	}
 
 
