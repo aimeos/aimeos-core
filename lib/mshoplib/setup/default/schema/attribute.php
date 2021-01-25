@@ -115,7 +115,7 @@ return array(
 			$table->addIndex( array( 'parentid' ), 'fk_msattli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_attribute', array( 'parentid' ), array( 'id' ),
-					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msattli_pid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msattli_pid' );
 
 			return $schema;
 		},
