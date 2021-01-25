@@ -76,10 +76,11 @@ class TestHelperJqadm
 		$helper = new \Aimeos\MW\View\Helper\Session\Standard( $view, new \Aimeos\MW\Session\None() );
 		$view->addHelper( 'session', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $view, new \Zend\Diactoros\ServerRequest() );
+		$psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
+		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $view, $psr17Factory->createServerRequest( 'GET', 'https://aimeos.org' ) );
 		$view->addHelper( 'request', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Response\Standard( $view, new \Zend\Diactoros\Response() );
+		$helper = new \Aimeos\MW\View\Helper\Response\Standard( $view, $psr17Factory->createResponse() );
 		$view->addHelper( 'response', $helper );
 
 		$helper = new \Aimeos\MW\View\Helper\Csrf\Standard( $view, '_csrf_token', '_csrf_value' );
