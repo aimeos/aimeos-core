@@ -71,12 +71,12 @@ class Standard
 	/**
 	 * Sets the original attribute ID of the product attribute item.
 	 *
-	 * @param string $id Attribute ID of the product attribute item
+	 * @param string|null $id Attribute ID of the product attribute item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setAttributeId( string $id ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
+	public function setAttributeId( ?string $id ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	{
-		return $this->set( 'order.base.product.attribute.attributeid', $id );
+		return $this->set( 'order.base.product.attribute.attributeid', (string) $id );
 	}
 
 

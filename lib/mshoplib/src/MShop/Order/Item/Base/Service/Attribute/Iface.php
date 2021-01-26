@@ -39,10 +39,10 @@ interface Iface
 	/**
 	 * Sets the original attribute ID of the ordered service attribute.
 	 *
-	 * @param string $id Attribute ID of the ordered service attribute
+	 * @param string|null $id Attribute ID of the ordered service attribute
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
-	public function setAttributeId( string $id ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface;
+	public function setAttributeId( ?string $id ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface;
 
 	/**
 	 * Returns the code of the service attribute item.
