@@ -174,6 +174,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $return );
 		$this->assertEquals( 'medium', $this->object->getName() );
 		$this->assertTrue( $this->object->isModified() );
+
+		$this->assertEquals( '', $this->object->setName( null )->getName() );
 	}
 
 

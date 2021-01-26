@@ -69,10 +69,10 @@ interface Iface
 	/**
 	 * Sets the localized name of the product attribute.
 	 *
-	 * @param string $name Localized name of the product attribute
+	 * @param string|null $name Localized name of the product attribute
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setName( string $name ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface;
+	public function setName( ?string $name ) : \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface;
 
 	/**
 	 * Returns the value of the product attribute.

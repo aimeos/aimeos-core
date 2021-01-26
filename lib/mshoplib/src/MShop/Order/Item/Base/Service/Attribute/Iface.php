@@ -69,10 +69,10 @@ interface Iface
 	/**
 	 * Sets a new name for the service attribute item.
 	 *
-	 * @param string $name Name as defined by the service provider
+	 * @param string|null $name Name as defined by the service provider
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
-	public function setName( string $name ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface;
+	public function setName( ?string $name ) : \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface;
 
 	/**
 	 * Returns the value of the service attribute item.
