@@ -388,7 +388,7 @@ abstract class Base
 		foreach( $list as $key => $value )
 		{
 			if( is_scalar( $value ) && strpos( $key, '.' ) === false ) {
-				$this->set($key, $value);
+				$this->set( $key, $value );
 			}
 		}
 
