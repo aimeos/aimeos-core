@@ -32,6 +32,9 @@ class Bootstrap
 	 */
 	public function __construct( array $extdirs = array(), $defaultdir = true, $basedir = null )
 	{
+		// Always use "/" as delimiter for maps in Aimeos
+		\Aimeos\Map::delimiter( '/' );
+
 		if( $basedir === null ) {
 			$basedir = __DIR__;
 		}

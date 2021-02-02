@@ -32,7 +32,7 @@ class Standard
 	public function transform( string $cfgkey, array $params = [], array $fragments = [] ) : string
 	{
 		$view = $this->getView();
-		$list = \Aimeos\Map::split( $cfgkey, '/' )->skip( 2 );
+		$list = \Aimeos\Map::explode( '/', $cfgkey )->skip( 2 );
 
 		$target = $view->config( $cfgkey . '/target' );
 		$cntl = $view->config( $cfgkey . '/controller', ucfirst( $list->shift() ) );
