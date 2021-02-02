@@ -226,14 +226,14 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * Counts the number products that are available for the values of the given key.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
-	 * @param string $key Search key for aggregating the key column
+	 * @param array|string $key Search key or list of keys for aggregation
 	 * @param string $cfgPath Configuration key for the SQL statement
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
 	 * @param string|null $value Search key for aggregating the value column
 	 * @return \Aimeos\Map List of ID values as key and the number of counted products as value
 	 * @todo 2018.01 Reorder Parameter list
 	 */
-	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, string $key, string $cfgPath,
+	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, $key, string $cfgPath,
 		array $required = [], string $value = null ) : \Aimeos\Map
 	{
 		$list = [];
@@ -245,34 +245,39 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 		try
 		{
+			$total = null;
+			$cols = $keys =[];
 			$search = clone $search;
+
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$attrList = $this->getObject()->getSearchAttributes();
 
 			if( $value === null && ( $value = key( $attrList ) ) === null ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'No search keys available' ) );
 			}
 
-			if( !isset( $attrList[$key] ) ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Unknown search key "%1$s"', $key ) );
-			}
-
 			if( $value !== null && !isset( $attrList[$value] ) ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Unknown search key "%1$s"', $value ) );
 			}
 
-			/** @todo Required to get the joins, but there should be a better way */
-			$expr = array(
-				$search->getConditions(),
-				$search->compare( '!=', $key, null ),
-				$search->compare( '!=', $value, null ),
-			);
-			$search->setConditions( $search->and( $expr ) );
+			foreach( (array) $key as $string )
+			{
+				if( !isset( $attrList[$string] ) ) {
+					throw new \Aimeos\MShop\Exception( sprintf( 'Unknown search key "%1$s"', $string ) );
+				}
 
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$total = null;
+				$cols[] = $attrList[$string]->getInternalCode();
+				$acols[] = $attrList[$string]->getInternalCode() . ' AS "' . $string . '"';
+
+				/** @todo Required to get the joins, but there should be a better way */
+				$search->add( [$string => null], '!=' );
+			}
+			$search->add( [$value => null], '!=' );
 
 			$sql = $this->getSqlConfig( $cfgPath );
-			$sql = str_replace( ':key', $attrList[$key]->getInternalCode(), $sql );
+			$sql = str_replace( ':cols', join( ', ', $cols ), $sql );
+			$sql = str_replace( ':acols', join( ', ', $acols ), $sql );
+			$sql = str_replace( ':keys', '"' . join( '", "', (array) $key ) . '"', $sql );
 			$sql = str_replace( ':val', $attrList[$value]->getInternalCode(), $sql );
 
 			$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
@@ -280,9 +285,9 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			while( ( $row = $results->fetch() ) !== null )
 			{
 				if( count( $row ) === 2 ) {
-					$list[$row['key']] = $row['count'];
+					$list[current( $row )] = end( $row );
 				} else {
-					$list[$row['key']] = $row;
+					$list[] = $row;
 				}
 			}
 

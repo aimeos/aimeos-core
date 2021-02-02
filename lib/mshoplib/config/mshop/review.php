@@ -10,54 +10,54 @@ return array(
 	'manager' => array(
 		'aggregate' => array(
 			'ansi' => '
-				SELECT "key", COUNT("val") AS "count"
+				SELECT :keys, COUNT("val") AS "count"
 				FROM (
-					SELECT :key AS "key", :val AS "val"
+					SELECT :acols, :val AS "val"
 					FROM "mshop_review" AS mrev
 					:joins
 					WHERE :cond
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				) AS list
-				GROUP BY "key"
+				GROUP BY :keys
 			',
 			'mysql' => '
-				SELECT "key", COUNT("val") AS "count"
+				SELECT :keys, COUNT("val") AS "count"
 				FROM (
-					SELECT :key AS "key", :val AS "val"
+					SELECT :acols, :val AS "val"
 					FROM "mshop_review" AS mrev
 					:joins
 					WHERE :cond
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				) AS list
-				GROUP BY "key"
+				GROUP BY :keys
 			'
 		),
 		'aggregaterate' => array(
 			'ansi' => '
-				SELECT "key", SUM("val") AS "sum", COUNT(*) AS "count"
+				SELECT :keys, SUM("val") AS "sum", COUNT(*) AS "count"
 				FROM (
-					SELECT :key AS "key", mrev.rating AS "val"
+					SELECT :acols, mrev.rating AS "val"
 					FROM "mshop_review" AS mrev
 					:joins
 					WHERE :cond
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				) AS list
-				GROUP BY "key"
+				GROUP BY :keys
 			',
 			'mysql' => '
-				SELECT "key", SUM("val") AS "sum", COUNT(*) AS "count"
+				SELECT :keys, SUM("val") AS "sum", COUNT(*) AS "count"
 				FROM (
-					SELECT :key AS "key", mrev.rating AS "val"
+					SELECT :acols, mrev.rating AS "val"
 					FROM "mshop_review" AS mrev
 					:joins
 					WHERE :cond
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				) AS list
-				GROUP BY "key"
+				GROUP BY :keys
 			'
 		),
 		'insert' => array(

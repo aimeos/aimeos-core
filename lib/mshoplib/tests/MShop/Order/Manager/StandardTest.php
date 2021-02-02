@@ -33,42 +33,80 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.type' )->toArray();
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
+		$result = $this->object->aggregate( $search, 'order.type' );
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'web', $result );
-		$this->assertEquals( 3, $result['web'] );
+		$this->assertEquals( 3, $result->get( 'web' ) );
+	}
+
+
+	public function testAggregateMultiple()
+	{
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
+		$result = $this->object->aggregate( $search, ['order.type', 'order.statuspayment'] );
+
+		$expected = [
+			['order.type' => 'phone', 'order.statuspayment' => 6, 'count' => 1],
+			['order.type' => 'web', 'order.statuspayment' => 5, 'count' => 1],
+			['order.type' => 'web', 'order.statuspayment' => 6, 'count' => 2],
+		];
+
+		$this->assertEquals( 3, count( $result ) );
+		$this->assertEquals( $expected, $result->toArray() );
 	}
 
 
 	public function testAggregateAvg()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'avg' )->toArray();
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
+		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'avg' );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( '1384.75', round( reset( $result ), 2 ) );
+		$this->assertEquals( '1384.75', round( $result->first(), 2 ) );
+	}
+
+
+	public function testAggregateAvgMultiple()
+	{
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
+		$result = $this->object->aggregate( $search, ['order.cmonth', 'order.statuspayment'], 'order.base.price', 'avg' );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 5, $result[0]['order.statuspayment'] );
+		$this->assertEquals( '13.50', round( $result[0]['count'], 2 ) );
+		$this->assertEquals( 6, $result[1]['order.statuspayment'] );
+		$this->assertEquals( '1841.83', round( $result[1]['count'], 2 ) );
 	}
 
 
 	public function testAggregateSum()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
-		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'sum' )->toArray();
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
+		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'sum' );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( '5539.00', reset( $result ) );
+		$this->assertEquals( '5539.00', $result->first() );
+	}
+
+
+	public function testAggregateSumMultiple()
+	{
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
+		$result = $this->object->aggregate( $search, ['order.cmonth', 'order.statuspayment'], 'order.base.price', 'sum' );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 5, $result[0]['order.statuspayment'] );
+		$this->assertEquals( '13.50', round( $result[0]['count'], 2 ) );
+		$this->assertEquals( 6, $result[1]['order.statuspayment'] );
+		$this->assertEquals( '5525.50', round( $result[1]['count'], 2 ) );
 	}
 
 
 	public function testAggregateTimes()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
 		$search->setSortations( array( $search->sort( '-', 'order.cdate' ) ) );
 		$result = $this->object->aggregate( $search, 'order.cmonth' )->toArray();
 
@@ -79,8 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateAddress()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
 		$result = $this->object->aggregate( $search, 'order.base.address.countryid' )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
@@ -89,10 +126,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAggregateAddressMultiple()
+	{
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
+		$result = $this->object->aggregate( $search, ['order.base.address.countryid', 'order.statuspayment'] )->toArray();
+
+		$expected = [
+			['order.base.address.countryid' => 'DE', 'order.statuspayment' => 5, 'count' => 2],
+			['order.base.address.countryid' => 'DE', 'order.statuspayment' => 6, 'count' => 5],
+		];
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( $expected, $result );
+	}
+
+
 	public function testAggregateMonth()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.editor', 'core:lib/mshoplib' ) );
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
 		$result = $this->object->aggregate( $search, 'order.type' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );

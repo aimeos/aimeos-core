@@ -10,28 +10,28 @@ return array(
 	'manager' => array(
 		'aggregate' => array(
 			'ansi' => '
-				SELECT "key", COUNT("val") AS "count"
+				SELECT :keys, COUNT("val") AS "count"
 				FROM (
-					SELECT :key AS "key", :val AS "val"
+					SELECT :acols, :val AS "val"
 					FROM "mshop_subscription" AS mord
 					:joins
 					WHERE :cond
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				) AS list
-				GROUP BY "key"
+				GROUP BY :keys
 			',
 			'mysql' => '
-				SELECT "key", COUNT("val") AS "count"
+				SELECT :keys, COUNT("val") AS "count"
 				FROM (
-					SELECT :key AS "key", :val AS "val"
+					SELECT :acols, :val AS "val"
 					FROM "mshop_subscription" AS mord
 					:joins
 					WHERE :cond
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				) AS list
-				GROUP BY "key"
+				GROUP BY :keys
 			'
 		),
 		'insert' => array(

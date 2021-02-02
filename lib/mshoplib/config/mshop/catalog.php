@@ -99,30 +99,30 @@ return array(
 			),
 			'aggregate' => array(
 				'ansi' => '
-					SELECT "key", COUNT("id") AS "count"
+					SELECT :keys, COUNT("id") AS "count"
 					FROM (
-						SELECT :key AS "key", mcatli."id" AS "id"
+						SELECT :acols, mcatli."id" AS "id"
 						FROM "mshop_catalog_list" AS mcatli
 						:joins
 						WHERE :cond
-						GROUP BY :key, mcatli."id"
+						GROUP BY :cols, mcatli."id"
 						ORDER BY :order
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					) AS list
-					GROUP BY "key"
+					GROUP BY :keys
 				',
 				'mysql' => '
-					SELECT "key", COUNT("id") AS "count"
+					SELECT :keys, COUNT("id") AS "count"
 					FROM (
-						SELECT :key AS "key", mcatli."id" AS "id"
+						SELECT :acols, mcatli."id" AS "id"
 						FROM "mshop_catalog_list" AS mcatli
 						:joins
 						WHERE :cond
-						GROUP BY :key, mcatli."id"
+						GROUP BY :cols, mcatli."id"
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					) AS list
-					GROUP BY "key"
+					GROUP BY :keys
 				'
 			),
 			'delete' => array(

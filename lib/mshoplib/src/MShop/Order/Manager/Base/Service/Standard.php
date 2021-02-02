@@ -185,12 +185,12 @@ class Standard
 	 * Counts the number items that are available for the values of the given key.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
-	 * @param string $key Search key to aggregate items for
+	 * @param array|string $key Search key or list of keys to aggregate items for
 	 * @param string|null $value Search key for aggregating the value column
 	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
 	 * @return \Aimeos\Map List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, string $key, string $value = null, string $type = null ) : \Aimeos\Map
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
 		/** mshop/order/manager/base/service/aggregate/mysql
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
