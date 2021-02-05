@@ -44,8 +44,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateMultiple()
 	{
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
-		$result = $this->object->aggregate( $search, ['order.type', 'order.statuspayment'] );
+		$cols = ['order.type', 'order.statuspayment'];
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
+		$result = $this->object->aggregate( $search, $cols );
 
 		$expected = [
 			['order.type' => 'phone', 'order.statuspayment' => 6, 'count' => 1],
@@ -70,8 +71,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateAvgMultiple()
 	{
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
-		$result = $this->object->aggregate( $search, ['order.cmonth', 'order.statuspayment'], 'order.base.price', 'avg' );
+		$cols = ['order.cmonth', 'order.statuspayment'];
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
+		$result = $this->object->aggregate( $search, $cols, 'order.base.price', 'avg' );
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( 5, $result[0]['order.statuspayment'] );
@@ -93,8 +95,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateSumMultiple()
 	{
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
-		$result = $this->object->aggregate( $search, ['order.cmonth', 'order.statuspayment'], 'order.base.price', 'sum' );
+		$cols = ['order.cmonth', 'order.statuspayment'];
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
+		$result = $this->object->aggregate( $search, $cols, 'order.base.price', 'sum' );
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( 5, $result[0]['order.statuspayment'] );
@@ -128,8 +131,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateAddressMultiple()
 	{
-		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
-		$result = $this->object->aggregate( $search, ['order.base.address.countryid', 'order.statuspayment'] )->toArray();
+		$cols = ['order.base.address.countryid', 'order.statuspayment'];
+		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
+		$result = $this->object->aggregate( $search, $cols )->toArray();
 
 		$expected = [
 			['order.base.address.countryid' => 'DE', 'order.statuspayment' => 5, 'count' => 2],
