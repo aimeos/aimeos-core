@@ -226,27 +226,30 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * Counts the number products that are available for the values of the given key.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
-	 * @param array|string $key Search key or list of keys for aggregation
+	 * @param array|string $keys Search key or list of keys for aggregation
 	 * @param string $cfgPath Configuration key for the SQL statement
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
 	 * @param string|null $value Search key for aggregating the value column
 	 * @return \Aimeos\Map List of ID values as key and the number of counted products as value
 	 * @todo 2018.01 Reorder Parameter list
 	 */
-	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, $key, string $cfgPath,
+	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, $keys, string $cfgPath,
 		array $required = [], string $value = null ) : \Aimeos\Map
 	{
-		$list = [];
-		$context = $this->getContext();
+		$keys = (array) $keys;
+
+		if( !count( $keys ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'At least one key it required for aggregation' ) );
+		}
 
 		$dbname = $this->getResourceName();
-		$dbm = $context->getDatabaseManager();
+		$dbm = $this->getContext()->getDatabaseManager();
 		$conn = $dbm->acquire( $dbname );
 
 		try
 		{
 			$total = null;
-			$cols = $keys =[];
+			$cols = $list = [];
 			$search = clone $search;
 
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
@@ -260,7 +263,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 				throw new \Aimeos\MShop\Exception( sprintf( 'Unknown search key "%1$s"', $value ) );
 			}
 
-			foreach( (array) $key as $string )
+			foreach( $keys as $string )
 			{
 				if( !isset( $attrList[$string] ) ) {
 					throw new \Aimeos\MShop\Exception( sprintf( 'Unknown search key "%1$s"', $string ) );
@@ -277,7 +280,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$sql = $this->getSqlConfig( $cfgPath );
 			$sql = str_replace( ':cols', join( ', ', $cols ), $sql );
 			$sql = str_replace( ':acols', join( ', ', $acols ), $sql );
-			$sql = str_replace( ':keys', '"' . join( '", "', (array) $key ) . '"', $sql );
+			$sql = str_replace( ':keys', '"' . join( '", "', $keys ) . '"', $sql );
 			$sql = str_replace( ':val', $attrList[$value]->getInternalCode(), $sql );
 
 			$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
