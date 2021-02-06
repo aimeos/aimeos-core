@@ -249,7 +249,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		try
 		{
 			$total = null;
-			$cols = $list = [];
+			$cols = $map = [];
 			$search = clone $search;
 
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
@@ -287,11 +287,14 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 			while( ( $row = $results->fetch() ) !== null )
 			{
-				if( count( $row ) === 2 ) {
-					$list[current( $row )] = end( $row );
-				} else {
-					$list[] = $row;
+				$temp = &$map;
+				$last = array_pop( $row );
+
+				foreach( $row as $val ) {
+					$temp[$val] = $temp[$val] ?? [];
+					$temp = &$temp[$val];
 				}
+				$temp = $last;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -302,7 +305,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			throw $e;
 		}
 
-		return map( $list );
+		return map( $map );
 	}
 
 

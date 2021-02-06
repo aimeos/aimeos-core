@@ -48,14 +48,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
 		$result = $this->object->aggregate( $search, $cols );
 
-		$expected = [
-			['order.type' => 'phone', 'order.statuspayment' => 6, 'count' => 1],
-			['order.type' => 'web', 'order.statuspayment' => 5, 'count' => 1],
-			['order.type' => 'web', 'order.statuspayment' => 6, 'count' => 2],
-		];
-
-		$this->assertEquals( 3, count( $result ) );
-		$this->assertEquals( $expected, $result->toArray() );
+		$this->assertEquals( ['phone' => [6 => 1],  'web' => [5 => 1, 6 => 2]], $result->toArray() );
 	}
 
 
@@ -75,11 +68,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
 		$result = $this->object->aggregate( $search, $cols, 'order.base.price', 'avg' );
 
-		$this->assertEquals( 2, count( $result ) );
-		$this->assertEquals( 5, $result[0]['order.statuspayment'] );
-		$this->assertEquals( '13.50', round( $result[0]['count'], 2 ) );
-		$this->assertEquals( 6, $result[1]['order.statuspayment'] );
-		$this->assertEquals( '1841.83', round( $result[1]['count'], 2 ) );
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( [5, 6], array_keys( $result->first() ) );
+		$this->assertEquals( '13.50', round( $result->first()[5], 2 ) );
+		$this->assertEquals( '1841.83', round( $result->first()[6], 2 ) );
 	}
 
 
@@ -99,11 +91,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
 		$result = $this->object->aggregate( $search, $cols, 'order.base.price', 'sum' );
 
-		$this->assertEquals( 2, count( $result ) );
-		$this->assertEquals( 5, $result[0]['order.statuspayment'] );
-		$this->assertEquals( '13.50', round( $result[0]['count'], 2 ) );
-		$this->assertEquals( 6, $result[1]['order.statuspayment'] );
-		$this->assertEquals( '5525.50', round( $result[1]['count'], 2 ) );
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( [5, 6], array_keys( $result->first() ) );
+		$this->assertEquals( '13.50', round( $result->first()[5], 2 ) );
+		$this->assertEquals( '5525.50', round( $result->first()[6], 2 ) );
 	}
 
 
@@ -135,13 +126,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
 		$result = $this->object->aggregate( $search, $cols )->toArray();
 
-		$expected = [
-			['order.base.address.countryid' => 'DE', 'order.statuspayment' => 5, 'count' => 2],
-			['order.base.address.countryid' => 'DE', 'order.statuspayment' => 6, 'count' => 5],
-		];
-
-		$this->assertEquals( 2, count( $result ) );
-		$this->assertEquals( $expected, $result );
+		$this->assertEquals( ['DE' => [5 => 2, 6 => 5]], $result );
 	}
 
 
