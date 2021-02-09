@@ -139,7 +139,7 @@ class SerializedArrayTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAll()
 	{
-		$result = $this->object->getAll( 'testDomain' );
+		$result = $this->object->all( 'testDomain' );
 
 		$this->assertArrayHasKey( 'File', $result );
 		$this->assertEquals( 'singular translation', $result['File'][0] );

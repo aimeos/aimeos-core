@@ -64,7 +64,7 @@ class None
 	 * 	as value or an associative list with index => translation as value if
 	 * 	plural forms are available
 	 */
-	public function getAll( string $domain ) : array
+	public function all( string $domain ) : array
 	{
 		return [];
 	}
