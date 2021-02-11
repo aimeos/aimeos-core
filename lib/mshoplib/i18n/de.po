@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Aimeos, 2015-2020
+# Aimeos, 2015-2021
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 # nsendetzky, 2013
 msgid ""
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-02 15:52+0100\n"
-"PO-Revision-Date: 2020-12-02 14:52+0000\n"
+"PO-Revision-Date: 2021-01-29 11:42+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -679,7 +679,7 @@ msgstr "Das Produkt enthält nicht alle geforderten Parameter. Produkt-Code für
 
 #, php-format
 msgid "Product does not contain the SKU code"
-msgstr "Produkt enthält keinen Artikelcode"
+msgstr "Produkt enthält keine Artikelnummer"
 
 #, php-format
 msgid "Product matching given properties not found"
