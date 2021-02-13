@@ -236,9 +236,10 @@ abstract class Base
 	/**
 	 * Returns the site ID of the item.
 	 *
-	 * @return string Site ID or null if no site id is available
+	 * @return string|null Site ID or null if no site id is available
+	 * @todo 2021.01 Don't allow NULL for returned value
 	 */
-	public function getSiteId() : string
+	public function getSiteId() : ?string
 	{
 		return $this->get( $this->prefix . 'siteid', $this->get( 'siteid', '' ) );
 	}

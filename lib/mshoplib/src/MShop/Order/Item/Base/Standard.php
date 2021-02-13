@@ -131,11 +131,11 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	/**
 	 * Returns the ID of the site the item is stored.
 	 *
-	 * @return string Site ID (or null if not available)
+	 * @return string|null Site ID (or null if not available)
 	 */
-	public function getSiteId() : string
+	public function getSiteId() : ?string
 	{
-		return $this->get( 'order.base.siteid', '' );
+		return $this->get( 'order.base.siteid' );
 	}
 
 
