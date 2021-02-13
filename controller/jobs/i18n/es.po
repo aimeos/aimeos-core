@@ -5,13 +5,14 @@
 # Translators:
 # Aldemar Hernández <napalm-beach@lycos.com>, 2016
 # Daniel Vega <danielvega131990@gmail.com>, 2015
+# S 0l, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-02 15:52+0100\n"
-"PO-Revision-Date: 2020-12-04 15:36+0000\n"
-"Last-Translator: Lara Merlotto <lara@vg7.it>\n"
+"PO-Revision-Date: 2021-02-10 23:56+0000\n"
+"Last-Translator: S 0l\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,10 +21,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "All XML import"
-msgstr ""
+msgstr "Toda la importación XML"
 
 msgid "Attribute import XML"
-msgstr ""
+msgstr "XML de importación de atributos"
 
 msgid ""
 "Authorized payments of orders will be captured after dispatching or after a "
@@ -40,10 +41,10 @@ msgid "Capture authorized payments"
 msgstr "Obtener pagos autorizados"
 
 msgid "Catalog import CSV"
-msgstr ""
+msgstr "CSV de importación de catálogo"
 
 msgid "Catalog import XML"
-msgstr ""
+msgstr "XML de importación de catálogo"
 
 msgid "Catalog index optimization"
 msgstr "Optimizar índice del catálogo"
@@ -52,7 +53,7 @@ msgid "Catalog index rebuild"
 msgstr "Reconstruir índice del catálogo"
 
 msgid "Catalog site map"
-msgstr ""
+msgstr "Mapa del sitio del catálogo"
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
@@ -63,10 +64,10 @@ msgid "Class \"%1$s\" not found"
 msgstr "Clase \"%1$s\" no encontrada"
 
 msgid "Coupon code import CSV"
-msgstr ""
+msgstr "CSV de importe de código de cupón "
 
 msgid "Creates a catalog site map for search engines"
-msgstr ""
+msgstr "Crea un mapa del sitio de catálogo para motores de búsqueda"
 
 msgid "Creates a product site map for search engines"
 msgstr "Crea un mapa de producto para los motores de búsqueda"
@@ -75,10 +76,10 @@ msgid "Creates bought together product suggestions"
 msgstr "Crea sugerencias de productos comprados juntos"
 
 msgid "Customer group import XML"
-msgstr ""
+msgstr "XML de importe de grupos de clientes"
 
 msgid "Customer import XML"
-msgstr ""
+msgstr "XML de importe de clientes"
 
 msgid ""
 "Deletes unfinished orders an makes their products and coupon codes available"
