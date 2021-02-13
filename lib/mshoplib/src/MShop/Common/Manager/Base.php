@@ -399,10 +399,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 */
 	protected function filterBase( string $domain ) : \Aimeos\MW\Criteria\Iface
 	{
-		$object = $this->filter();
-		$object->setConditions( $object->compare( '==', $domain . '.status', 1 ) );
-
-		return $object;
+		return $this->filter()->add( [$domain . '.status' => 1] );
 	}
 
 

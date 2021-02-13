@@ -280,7 +280,6 @@ class Standard
 		$manager = \Aimeos\MShop::create( $context, 'product' );
 		$search = $manager->filter();
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
-		$defaultConditions = $search->getConditions();
 
 		$catalogListManager = \Aimeos\MShop::create( $context, 'catalog/lists' );
 		$catalogSearch = $catalogListManager->filter( true );
@@ -304,12 +303,7 @@ class Standard
 			$catalogSearch->slice( $start, $size );
 			$result = $catalogListManager->aggregate( $catalogSearch, 'catalog.lists.refid' );
 
-			$expr = array(
-				$search->compare( '==', 'product.id', $result->keys()->toArray() ),
-				$defaultConditions,
-			);
-			$search->setConditions( $search->and( $expr ) );
-
+			$search->setConditions( $search->compare( '==', 'product.id', $result->keys()->toArray() ) );
 			$this->writeIndex( $search, $domains, $size );
 
 			$start += $size;
