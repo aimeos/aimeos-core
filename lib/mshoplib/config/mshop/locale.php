@@ -163,6 +163,36 @@ return array(
 			),
 		),
 		'site' => array(
+			'cleanup' => [
+				'shop' => [
+					'domains' => [
+						'attribute' => 'attribute',
+						'catalog' => 'catalog',
+						'coupon' => 'coupon',
+						'customer' => 'customer',
+						'index' => 'index',
+						'media' => 'media',
+						'order' => 'order',
+						'plugin' => 'plugin',
+						'price' => 'price',
+						'product' => 'product',
+						'review' => 'review',
+						'tag' => 'tag',
+						'service' => 'service',
+						'stock' => 'stock',
+						'subscription' => 'subscription',
+						'supplier' => 'supplier',
+						'text' => 'text'
+					]
+				],
+				'admin' => [
+					'domains' => [
+						'job' => 'job',
+						'log' => 'log',
+						'cache' => 'cache'
+					]
+				]
+			],
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "mshop_locale_site"

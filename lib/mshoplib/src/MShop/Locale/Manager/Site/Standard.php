@@ -153,13 +153,8 @@ class Standard
 		 * @see mshop/locale/manager/site/cleanup/admin/domains
 		 */
 		$path = 'mshop/locale/manager/site/cleanup/shop/domains';
-		$default = array(
-			'attribute', 'catalog', 'coupon', 'customer', 'index',
-			'media', 'order', 'plugin', 'price', 'product', 'review',
-			'tag', 'service', 'stock', 'subscription', 'supplier', 'text'
-		);
 
-		foreach( $config->get( $path, $default ) as $domain ) {
+		foreach( $config->get( $path, [] ) as $domain ) {
 			\Aimeos\MShop::create( $context, $domain )->clear( $siteids );
 		}
 
@@ -183,9 +178,8 @@ class Standard
 		 * @see mshop/locale/manager/site/cleanup/shop/domains
 		 */
 		$path = 'mshop/locale/manager/site/cleanup/admin/domains';
-		$default = array( 'job', 'log', 'cache' );
 
-		foreach( $config->get( $path, $default ) as $domain ) {
+		foreach( $config->get( $path, [] ) as $domain ) {
 			\Aimeos\MAdmin::create( $context, $domain )->clear( $siteids );
 		}
 
