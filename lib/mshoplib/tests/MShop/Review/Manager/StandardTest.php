@@ -177,7 +177,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCreateSearchDefault()
 	{
 		$result = $this->object->filter( true );
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\Iface::class, $result->getConditions() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $result->getConditions() );
 	}
 
 
