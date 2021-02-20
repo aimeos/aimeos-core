@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Aimeos\Client\Jsonapi;
+namespace Aimeos\Client\JsonApi;
 
 
 class DemoTest extends \PHPUnit\Framework\TestCase
@@ -17,7 +17,7 @@ class DemoTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperJapi::getContext();
 		$paths = \TestHelperJapi::getTemplatePaths();
 
-		// $this->object = new \Aimeos\Client\Jsonapi\..._Standard( $this->context, $paths );
+		// $this->object = new \Aimeos\Client\JsonApi\..._Standard( $this->context, $paths );
 		// $this->object->setView( \TestHelperJapi::getView() );
 	}
 

@@ -35,13 +35,14 @@ class TestHelperJapi
 	{
 		if( !isset( self::$context[$site] ) ) {
 			self::$context[$site] = self::createContext( $site );
+			self::$context[$site]->setView( self::getView( self::$context[$site]->getConfig() ) );
 		}
 
 		return clone self::$context[$site];
 	}
 
 
-	public static function getView()
+	public static function getView( \Aimeos\MW\Config\Iface $config )
 	{
 		$view = new \Aimeos\MW\View\Standard( self::getTemplatePaths() );
 
@@ -58,8 +59,15 @@ class TestHelperJapi
 		$helper = new \Aimeos\MW\View\Helper\Date\Standard( $view, 'Y-m-d' );
 		$view->addHelper( 'date', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, self::getContext()->getConfig() );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
+
+		$psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
+		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $view, $psr17Factory->createServerRequest( 'GET', 'https://aimeos.org' ) );
+		$view->addHelper( 'request', $helper );
+
+		$helper = new \Aimeos\MW\View\Helper\Response\Standard( $view, $psr17Factory->createResponse() );
+		$view->addHelper( 'response', $helper );
 
 		return $view;
 	}
