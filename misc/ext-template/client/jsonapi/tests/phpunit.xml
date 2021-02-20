@@ -6,12 +6,4 @@
 			<directory>Client/</directory>
 		</testsuite>
 	</testsuites>
-	<filter>
-		<whitelist>
-			<directory suffix=".php">../src</directory>
-		</whitelist>
-	</filter>
-	<logging>
-		<log type="junit" target="<extname>_client-jsonapi_test.junit.xml" />
-	</logging>
 </phpunit>

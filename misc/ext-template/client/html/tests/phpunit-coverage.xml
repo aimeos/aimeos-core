@@ -6,12 +6,7 @@
 			<directory>Client/</directory>
 		</testsuite>
 	</testsuites>
-	<filter>
-		<whitelist>
-			<directory suffix=".php">../src</directory>
-		</whitelist>
-	</filter>
 	<logging>
-		<log type="coverage-html" target="coverage" charset="UTF-8"/>
+		<log type="coverage-clover" target="coverage.xml"/>
 	</logging>
 </phpunit>

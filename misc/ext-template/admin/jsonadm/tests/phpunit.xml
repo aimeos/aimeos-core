@@ -2,11 +2,8 @@
 
 <phpunit bootstrap="bootstrap.php">
 	<testsuites>
-		<testsuite name="Admin suite">
+		<testsuite name="Admin JsonAdm suite">
 			<directory>Admin/</directory>
 		</testsuite>
 	</testsuites>
-	<logging>
-		<log type="junit" target="<extname>_admin-jsonadm_test.junit.xml" />
-	</logging>
 </phpunit>

@@ -9,7 +9,4 @@
 			<directory>MW/</directory>
 		</testsuite>
 	</testsuites>
-	<logging>
-		<log type="junit" target="<extname>_lib-custom_test.junit.xml" />
-	</logging>
 </phpunit>
