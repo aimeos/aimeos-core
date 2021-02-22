@@ -735,9 +735,11 @@ class Standard
 	 * @param string|null $id Retrieve nodes starting from the given ID
 	 * @param string[] $ref List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item, maybe with subnodes
+	 * @param \Aimeos\MW\Criteria\Iface|null $criteria Optional criteria object with conditions
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site node, maybe with subnodes
 	 */
-	public function getTree( string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE ) : \Aimeos\MShop\Locale\Item\Site\Iface
+	public function getTree( string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
+		\Aimeos\MW\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
 		if( $id !== null )
 		{
@@ -752,8 +754,8 @@ class Standard
 			return $this->cache[$id];
 		}
 
-		$criteria = $this->getObject()->filter()->slice( 0, 1 );
-		$criteria->setConditions( $criteria->compare( '==', 'locale.site.code', 'default' ) );
+		$criteria = $criteria ? clone $criteria : $this->getObject()->filter();
+		$criteria->add( ['locale.site.code' => 'default'] )->slice( 0, 1 );
 
 		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) === null ) {
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Tree root with code "%1$s" in "%2$s" not found', 'default', 'locale.site.code' ) );
