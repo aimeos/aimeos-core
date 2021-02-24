@@ -571,8 +571,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$sortations = $search->getSortationSource( $types, $translations );
 
 		$sql = str_replace(
-			array( ':cond', ':order' ),
-			array( $conditions, $sortations ),
+			[':cond', ':order', ':size', ':start'],
+			[$conditions, $sortations, $search->getLimit(), $search->getOffset()],
 			$this->config['search']
 		);
 
