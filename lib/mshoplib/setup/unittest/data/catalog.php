@@ -244,7 +244,7 @@ return [
 					]],
 				],
 			], [
-				'catalog.code' => 'internet','catalog.label' => 'Internet',
+				'catalog.code' => 'internet', 'catalog.label' => 'Internet',
 				'lists' => [
 					'product' => [[
 						'catalog.lists.type' => 'internet', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 0,

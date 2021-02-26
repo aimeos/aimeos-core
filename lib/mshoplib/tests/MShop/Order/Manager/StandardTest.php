@@ -48,7 +48,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
 		$result = $this->object->aggregate( $search, $cols );
 
-		$this->assertEquals( ['phone' => [6 => 1],  'web' => [5 => 1, 6 => 2]], $result->toArray() );
+		$this->assertEquals( ['phone' => [6 => 1], 'web' => [5 => 1, 6 => 2]], $result->toArray() );
 	}
 
 
