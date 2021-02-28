@@ -37,6 +37,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAggregate()
+	{
+		$search = $this->object->filter();
+		$result = $this->object->aggregate( $search, 'customer.salutation' );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertArrayHasKey( 'mr', $result );
+		$this->assertEquals( 1, $result->get( 'mr' ) );
+	}
+
+
+	public function testAggregateMultiple()
+	{
+		$cols = ['customer.salutation', 'customer.title'];
+		$search = $this->object->filter()->order( $cols );
+		$result = $this->object->aggregate( $search, $cols );
+
+		$this->assertEquals( ['mr' => ['Dr' => 1], '' => ['' => 2]], $result->toArray() );
+	}
+
+
 	public function testClear()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->clear( [-1] ) );

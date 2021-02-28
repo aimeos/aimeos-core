@@ -589,6 +589,32 @@ return array(
 				'sqlanywhere' => 'SELECT @@IDENTITY',
 			),
 		),
+		'aggregate' => array(
+			'ansi' => '
+				SELECT :keys, COUNT("val") AS "count"
+				FROM (
+					SELECT :acols, :val AS "val"
+					FROM "mshop_customer" AS mcus
+					:joins
+					WHERE :cond
+					ORDER BY :order
+					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
+				) AS list
+				GROUP BY :keys
+			',
+			'mysql' => '
+				SELECT :keys, COUNT("val") AS "count"
+				FROM (
+					SELECT :acols, :val AS "val"
+					FROM "mshop_customer" AS mcus
+					:joins
+					WHERE :cond
+					ORDER BY :order
+					LIMIT :size OFFSET :start
+				) AS list
+				GROUP BY :keys
+			'
+		),
 		'delete' => array(
 			'ansi' => '
 				DELETE FROM "mshop_customer"
