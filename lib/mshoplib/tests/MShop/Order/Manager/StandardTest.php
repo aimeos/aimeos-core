@@ -116,7 +116,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 'DE', $result );
-		$this->assertEquals( 7, reset( $result ) );
+		$this->assertEquals( 4, reset( $result ) );
 	}
 
 
@@ -126,7 +126,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
 		$result = $this->object->aggregate( $search, $cols )->toArray();
 
-		$this->assertEquals( ['DE' => [5 => 2, 6 => 5]], $result );
+		$this->assertEquals( ['DE' => [5 => 1, 6 => 3]], $result );
 	}
 
 
