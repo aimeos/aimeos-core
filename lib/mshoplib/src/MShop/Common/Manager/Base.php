@@ -239,7 +239,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$keys = (array) $keys;
 
 		if( !count( $keys ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'At least one key it required for aggregation' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'At least one key is required for aggregation' ) );
 		}
 
 		$dbname = $this->getResourceName();
@@ -287,6 +287,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 			while( ( $row = $results->fetch() ) !== null )
 			{
+				$row = $this->transform( $row );
+
 				$temp = &$map;
 				$last = array_pop( $row );
 
@@ -1003,5 +1005,17 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$dbm->release( $conn, $dbname );
 
 		return $this;
+	}
+
+
+	/**
+	 * Transforms the application specific values to Aimeos standard values.
+	 *
+	 * @param array $values Associative list of key/value pairs from the storage
+	 * @return array Associative list of key/value pairs with standard Aimeos values
+	 */
+	protected function transform( array $values ) : array
+	{
+		return $values;
 	}
 }
