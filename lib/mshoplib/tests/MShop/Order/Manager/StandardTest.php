@@ -69,7 +69,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->aggregate( $search, $cols, 'order.base.price', 'avg' );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( [5, 6], array_keys( $result->first() ) );
+		$this->assertArrayHasKey( 5, $result->first() );
+		$this->assertArrayHasKey( 6, $result->first() );
 		$this->assertEquals( '13.50', round( $result->first()[5], 2 ) );
 		$this->assertEquals( '1841.83', round( $result->first()[6], 2 ) );
 	}
@@ -92,7 +93,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->aggregate( $search, $cols, 'order.base.price', 'sum' );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( [5, 6], array_keys( $result->first() ) );
+		$this->assertArrayHasKey( 5, $result->first() );
+		$this->assertArrayHasKey( 6, $result->first() );
 		$this->assertEquals( '13.50', round( $result->first()[5], 2 ) );
 		$this->assertEquals( '5525.50', round( $result->first()[6], 2 ) );
 	}
