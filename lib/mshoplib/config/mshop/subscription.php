@@ -16,7 +16,8 @@ return array(
 					FROM "mshop_subscription" AS mord
 					:joins
 					WHERE :cond
-					ORDER BY :order
+					GROUP BY mord.id, :cols, :val
+					ORDER BY mord.id DESC
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				) AS list
 				GROUP BY :keys
@@ -28,7 +29,8 @@ return array(
 					FROM "mshop_subscription" AS mord
 					:joins
 					WHERE :cond
-					ORDER BY :order
+					GROUP BY mord.id, :cols, :val
+					ORDER BY mord.id DESC
 					LIMIT :size OFFSET :start
 				) AS list
 				GROUP BY :keys

@@ -16,7 +16,7 @@ return array(
 					FROM "mshop_review" AS mrev
 					:joins
 					WHERE :cond
-					ORDER BY :order
+					ORDER BY mrev.id DESC
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				) AS list
 				GROUP BY :keys

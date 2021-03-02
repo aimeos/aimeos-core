@@ -597,7 +597,8 @@ return array(
 					FROM "mshop_customer" AS mcus
 					:joins
 					WHERE :cond
-					ORDER BY :order
+					GROUP BY mcus.id, :cols, :val
+					ORDER BY mcus.id DESC
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				) AS list
 				GROUP BY :keys
@@ -609,7 +610,8 @@ return array(
 					FROM "mshop_customer" AS mcus
 					:joins
 					WHERE :cond
-					ORDER BY :order
+					GROUP BY mcus.id, :cols, :val
+					ORDER BY mcus.id DESC
 					LIMIT :size OFFSET :start
 				) AS list
 				GROUP BY :keys
