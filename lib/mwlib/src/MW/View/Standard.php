@@ -211,6 +211,31 @@ class Standard implements \Aimeos\MW\View\Iface
 
 
 	/**
+	 * Assigns the value to the given key in the view.
+	 *
+	 * @param string $key Name of the key that should be set
+	 * @param mixed $value Value that should be assigned to the key
+	 * @return \Aimeos\MW\View\Iface View object for method chaining
+	 */
+	public function set( string $key, $value )
+	{
+		$values = &$this->values;
+
+		foreach( explode( '/', ltrim( $key, '/' ) ) as $part )
+		{
+			if( !is_array( $values ) || !isset( $values[$part] ) ) {
+				$values[$part] = [];
+			}
+
+			$values = &$values[$part];
+		}
+
+		$values = $value;
+		return $this;
+	}
+
+
+	/**
 	 * Renders the output based on the given template file name and the key/value pairs.
 	 *
 	 * @param array|string $filenames File name or list of file names for the view templates

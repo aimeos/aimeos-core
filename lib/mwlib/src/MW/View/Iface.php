@@ -104,10 +104,19 @@ interface Iface
 	 * Returns the value associated to the given key or the default value if the key is not available.
 	 *
 	 * @param string $key Name of the value that should be returned
-	 * @param mixed $default Default value returned if ths key is not available
+	 * @param mixed $default Default value returned if this key is not available
 	 * @return mixed Value associated to the given key or the default value
 	 */
 	public function get( string $key, $default = null );
+
+	/**
+	 * Assigns the value to the given key in the view.
+	 *
+	 * @param string $key Name of the key that should be set
+	 * @param mixed $value Value that should be assigned to the key
+	 * @return \Aimeos\MW\View\Iface View object for method chaining
+	 */
+	public function set( string $key, $value );
 
 	/**
 	 * Renders the output based on the given template file name and the key/value pairs.

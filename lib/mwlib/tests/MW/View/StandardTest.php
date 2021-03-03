@@ -49,17 +49,45 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
+		$this->object->test = 'val';
+		$this->assertEquals( 'val', $this->object->get( 'test' ) );
+	}
+
+
+	public function testGetDefault()
+	{
 		$this->assertEquals( null, $this->object->get( 'test' ) );
 		$this->assertEquals( 1, $this->object->get( 'test', 1 ) );
+	}
 
-		$this->object->test = 10;
-		$this->assertEquals( 10, $this->object->get( 'test' ) );
 
+	public function testGetPath()
+	{
 		$this->object->test = array( 'key' => 'val' );
 		$this->assertEquals( 'val', $this->object->get( 'test/key' ) );
+	}
 
+
+	public function testGetObjectKey()
+	{
 		$this->object->test = new \stdClass();
 		$this->assertEquals( null, $this->object->get( 'test/key' ) );
+	}
+
+
+	public function testSet()
+	{
+		$result = $this->object->set( 'test', 'value' );
+		$this->assertEquals( 'value', $this->object->get( 'test' ) );
+		$this->assertInstanceOf( \Aimeos\MW\View\Iface::class, $result );
+	}
+
+
+	public function testSetPath()
+	{
+		$result = $this->object->set( 'test/key', 'value' );
+		$this->assertEquals( 'value', $this->object->get( 'test/key' ) );
+		$this->assertInstanceOf( \Aimeos\MW\View\Iface::class, $result );
 	}
 
 
