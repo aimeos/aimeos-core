@@ -240,7 +240,7 @@ class Standard
 	public function getPreview() : string
 	{
 		if( ( $list = (array) $this->get( 'media.previews', [] ) ) !== [] ) {
-			return (string) current( $list );
+			return (string) end( $list ); // use largest one to avoid blurred images
 		}
 
 		return '';
