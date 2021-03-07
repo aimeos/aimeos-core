@@ -235,12 +235,13 @@ class Standard
 	/**
 	 * Returns the preview url of the media item.
 	 *
+	 * @param bool $large Return the largest image instead of the smallest
 	 * @return string Preview URL of the media file
 	 */
-	public function getPreview() : string
+	public function getPreview( $large = false ) : string
 	{
 		if( ( $list = (array) $this->get( 'media.previews', [] ) ) !== [] ) {
-			return (string) end( $list ); // use largest one to avoid blurred images
+			return (string) ( $large ? end( $list ) : current( $list ) );
 		}
 
 		return '';
