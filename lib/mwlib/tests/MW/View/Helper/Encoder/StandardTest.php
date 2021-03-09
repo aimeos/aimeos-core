@@ -55,7 +55,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$enc = $this->object->transform();
 
-		$this->assertEquals( '<a>&quot;attribute\u0027</a>', $enc->attr( '<a>"attribute\'</a>' ) );
+		$this->assertEquals( '<a>&quot;attribute&apos;</a>', $enc->attr( '<a>"attribute\'</a>' ) );
 	}
 
 
