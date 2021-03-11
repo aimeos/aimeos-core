@@ -47,6 +47,10 @@ msgid "mr"
 msgstr "Mr"
 
 #. Address salutation
+msgid "ms"
+msgstr "Ms"
+
+#. Address salutation
 msgid "mrs"
 msgstr "Mrs"
 
