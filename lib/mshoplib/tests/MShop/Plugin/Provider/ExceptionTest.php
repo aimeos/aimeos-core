@@ -1,28 +1,25 @@
 <?php
 
-namespace Aimeos\MShop\Plugin\Provider;
-
-
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2021
  */
+
+
+namespace Aimeos\MShop\Plugin\Provider;
+
+
 class ExceptionTest extends \PHPUnit\Framework\TestCase
 {
 	private $codes;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp() : void
 	{
 		$this->codes = array( 'something' => array( 'went', 'terribly', 'wrong' ) );
 	}
+
 
 	public function test()
 	{

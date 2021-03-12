@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Plugin\Provider;
 
 
 /**
- * Order plugin interface for dealing with run-time loadable extenstions.
+ * Plugin provider interface for dealing with run-time loadable extensions.
  *
  * @package MShop
  * @subpackage Plugin
