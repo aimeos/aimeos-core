@@ -47,7 +47,6 @@ class Category
 	{
 		parent::__construct( $context, $item, $provider );
 		$this->codes = array_filter( explode( ',', str_replace( ' ', '', $this->getConfigValue( 'category.code', '' ) ) ) );
-
 	}
 
 
