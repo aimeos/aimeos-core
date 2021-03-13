@@ -31,7 +31,7 @@ class CgroupTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->stub,  $this->item, $this->context );
+		unset( $this->stub, $this->item, $this->context );
 	}
 
 

@@ -27,7 +27,7 @@ class PercentTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->object,  $this->item, $this->context );
+		unset( $this->object, $this->item, $this->context );
 	}
 
 

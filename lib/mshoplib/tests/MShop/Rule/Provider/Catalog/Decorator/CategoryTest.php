@@ -34,7 +34,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->object,  $this->stub,  $this->item, $this->context );
+		unset( $this->object, $this->stub, $this->item, $this->context );
 	}
 
 
