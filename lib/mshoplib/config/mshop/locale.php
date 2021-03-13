@@ -177,6 +177,7 @@ return array(
 						'price' => 'price',
 						'product' => 'product',
 						'review' => 'review',
+						'rule' => 'rule',
 						'tag' => 'tag',
 						'service' => 'service',
 						'stock' => 'stock',

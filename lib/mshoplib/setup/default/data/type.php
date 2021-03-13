@@ -95,6 +95,10 @@ return array(
 		array( 'domain' => 'product', 'code' => 'package-weight', 'label' => 'Package weight', 'status' => 1 ),
 	),
 
+	'rule/type' => array(
+		array( 'domain' => 'rule', 'code' => 'catalog', 'label' => 'Catalog', 'status' => 1 )
+	),
+
 	'stock/type' => array(
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
