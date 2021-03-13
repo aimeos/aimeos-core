@@ -76,7 +76,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->add( ['rule.provider' => 'Percent,Category', 'rule.editor' => $this->editor] );
 
 		$expected = $this->object->search( $search )
-			->first( new \RuntimeException( sprintf( 'No rule item including "%1$s" found', 'Percent,Category' ) ));
+			->first( new \RuntimeException( sprintf( 'No rule item including "%1$s" found', 'Percent,Category' ) ) );
 
 		$actual = $this->object->get( $expected->getId() );
 
@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->add( ['rule.provider' => 'Percent,Category', 'rule.editor' => $this->editor] );
 
 		$item = $this->object->search( $search )
-			->first( new \RuntimeException( sprintf( 'No rule item including "%1$s" found', 'Percent,Category' ) ));
+			->first( new \RuntimeException( sprintf( 'No rule item including "%1$s" found', 'Percent,Category' ) ) );
 
 		$item->setId( null );
 		$item->setProvider( 'Example1' );
