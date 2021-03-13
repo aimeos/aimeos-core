@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Plugin\Provider\Decorator;
 
 
 /**
- * Plugin decorator interface for dealing with run-time loadable extenstions.
+ * Plugin decorator interface for dealing with run-time loadable extensions.
  *
  * @package MShop
  * @subpackage Plugin

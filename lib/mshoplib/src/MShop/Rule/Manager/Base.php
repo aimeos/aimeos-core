@@ -52,7 +52,6 @@ abstract class Base
 		}
 
 		$context = $this->getContext();
-		$config = $context->getConfig();
 		$provider = new $classname( $context, $item );
 
 		self::checkClass( \Aimeos\MShop\Rule\Provider\Factory\Iface::class, $provider );
