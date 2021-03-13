@@ -12,7 +12,7 @@ namespace Aimeos\MShop\Rule\Provider\Catalog;
 
 
 /**
- * Rule interface for dealing with run-time loadable extenstions.
+ * Rule interface for dealing with run-time loadable extensions.
  *
  * @package MShop
  * @subpackage Rule

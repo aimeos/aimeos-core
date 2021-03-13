@@ -31,6 +31,28 @@ class PercentTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCheckConfigBE()
+	{
+		$result = $this->object->checkConfigBE( ['percent' => '10'] );
+
+		$this->assertGreaterThanOrEqual( 1, count( $result ) );
+		$this->assertEquals( null, $result['percent'] );
+	}
+
+
+	public function testGetConfigBE()
+	{
+		$list = $this->object->getConfigBE();
+
+		$this->assertGreaterThanOrEqual( 1, count( $list ) );
+		$this->assertArrayHasKey( 'percent', $list );
+
+		foreach( $list as $entry ) {
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
+		}
+	}
+
+
 	public function testApply()
 	{
 		$this->item->setConfig( ['percent' => '10'] );

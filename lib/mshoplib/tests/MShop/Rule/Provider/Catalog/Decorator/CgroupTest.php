@@ -20,7 +20,6 @@ class CgroupTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelperMShop::getContext();
 		$this->item = \Aimeos\MShop\Rule\Manager\Factory::create( $this->context )->create();
-		$provider = new \Aimeos\MShop\Rule\Provider\Catalog\Percent( $this->context, $this->item );
 
 		$this->stub = $this->getMockBuilder( \Aimeos\MShop\Rule\Provider\Catalog\Percent::class )
 			->setConstructorArgs( [$this->context, $this->item] )
@@ -32,6 +31,30 @@ class CgroupTest extends \PHPUnit\Framework\TestCase
 	protected function tearDown() : void
 	{
 		unset( $this->stub, $this->item, $this->context );
+	}
+
+
+	public function testCheckConfigBE()
+	{
+		$object = new \Aimeos\MShop\Rule\Provider\Catalog\Decorator\Cgroup( $this->context, $this->item, $this->stub );
+		$result = $object->checkConfigBE( ['cgroup.map' => ['123' => 'unittest group']] );
+
+		$this->assertGreaterThanOrEqual( 1, count( $result ) );
+		$this->assertEquals( null, $result['cgroup.map'] );
+	}
+
+
+	public function testGetConfigBE()
+	{
+		$object = new \Aimeos\MShop\Rule\Provider\Catalog\Decorator\Cgroup( $this->context, $this->item, $this->stub );
+		$list = $object->getConfigBE();
+
+		$this->assertGreaterThanOrEqual( 1, count( $list ) );
+		$this->assertArrayHasKey( 'cgroup.map', $list );
+
+		foreach( $list as $entry ) {
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
+		}
 	}
 
 

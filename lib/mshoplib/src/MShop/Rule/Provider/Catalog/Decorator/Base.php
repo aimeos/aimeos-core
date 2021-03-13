@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Rule\Provider\Catalog\Decorator;
  */
 abstract class Base
 	extends \Aimeos\MShop\Rule\Provider\Base
-	implements \Aimeos\MShop\Rule\Provider\Catalog\Iface
+	implements Iface
 {
 	private $provider;
 
