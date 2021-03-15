@@ -32,10 +32,10 @@ class Reduction
 			'default' => '',
 			'required' => true,
 		),
-		'reduction.product-costs' => array(
-			'code' => 'reduction.product-costs',
-			'internalcode' => 'reduction.product-costs',
-			'label' => 'Include product costs in reduction calculation',
+		'reduction.include-costs' => array(
+			'code' => 'reduction.include-costs',
+			'internalcode' => 'reduction.include-costs',
+			'label' => 'Include delivery/payments costs in reduction calculation',
 			'type' => 'boolean',
 			'internaltype' => 'boolean',
 			'default' => '0',
@@ -92,8 +92,6 @@ class Reduction
 
 	/**
 	 * Returns the price when using the provider.
-	 * Usually, this is the lowest price that is available in the service item but can also be a calculated based on
-	 * the basket content, e.g. 2% of the value as transaction cost.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item containing the price, shipping, rebate
@@ -101,10 +99,11 @@ class Reduction
 	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Price\Item\Iface
 	{
 		$price = $this->getProvider()->calcPrice( $basket );
-		$total = $basket->getPrice()->getValue() + $basket->getPrice()->getRebate();
-		$currency = $price->getCurrencyId();
+
 		$item = $this->getServiceItem();
-		$costs = 0;
+		$currency = $price->getCurrencyId();
+		$value = $basket->getPrice()->getValue();
+		$total = $value + $basket->getPrice()->getRebate();
 
 		if( ( $val = $item->getConfigValue( 'reduction.basket-value-min/' . $currency ) ) !== null && $val > $total ) {
 			return $price;
@@ -114,19 +113,14 @@ class Reduction
 			return $price;
 		}
 
-		if( $item->getConfigValue( 'reduction.product-costs' ) )
+		if( $item->getConfigValue( 'reduction.include-costs' ) )
 		{
-			foreach( $basket->getProducts() as $orderProduct )
-			{
-				$costs += $orderProduct->getPrice()->getCosts() * $orderProduct->getQuantity();
-
-				foreach( $orderProduct->getProducts() as $subProduct ) {
-					$costs += $subProduct->getPrice()->getCosts() * $subProduct->getQuantity();
-				}
-			}
+echo 'costs'.PHP_EOL;
+			$sub = $price->getCosts() * $item->getConfigValue( 'reduction.percent' ) / 100;
+			$price->setCosts( $price->getCosts() - $sub )->setRebate( $price->getRebate() + $sub );
 		}
 
-		$sub = ( $price->getCosts() + $costs ) * $item->getConfigValue( 'reduction.percent' ) / 100;
-		return $price->setRebate( $price->getRebate() + $sub )->setCosts( $price->getCosts() - $sub );
+		$sub = $value * $item->getConfigValue( 'reduction.percent' ) / 100;
+		return $price->setValue( $price->getValue() - $sub )->setRebate( $price->getRebate() + $sub );
 	}
 }
