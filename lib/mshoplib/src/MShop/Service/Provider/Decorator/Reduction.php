@@ -59,15 +59,6 @@ class Reduction
 			'default' => [],
 			'required' => false,
 		),
-		'reduction.product-costs' => array(
-			'code' => 'reduction.product-costs',
-			'internalcode' => 'reduction.product-costs',
-			'label' => 'Include product shipping costs in reduction',
-			'type' => 'boolean',
-			'internaltype' => 'boolean',
-			'default' => 0,
-			'required' => false,
-		),
 	);
 
 
