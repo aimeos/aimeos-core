@@ -115,7 +115,6 @@ class Reduction
 
 		if( $item->getConfigValue( 'reduction.include-costs' ) )
 		{
-echo 'costs'.PHP_EOL;
 			$sub = $price->getCosts() * $item->getConfigValue( 'reduction.percent' ) / 100;
 			$price->setCosts( $price->getCosts() - $sub )->setRebate( $price->getRebate() + $sub );
 		}
