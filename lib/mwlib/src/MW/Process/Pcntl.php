@@ -42,8 +42,11 @@ class Pcntl implements Iface
 
 				foreach( $this->list as $pid => $entry )
 				{
+					if( function_exists( 'posix_kill' ) ) {
+						posix_kill( $pid, $signo );
+					}
+
 					$status = 0;
-					posix_kill( $pid, $signo );
 					pcntl_waitpid( $pid, $status );
 				}
 
@@ -76,7 +79,7 @@ class Pcntl implements Iface
 		if( php_sapi_name() === 'cli' && $this->max > 0
 			&& function_exists( 'pcntl_fork' ) && function_exists( 'pcntl_wait' )
 			&& function_exists( 'pcntl_signal' ) && function_exists( 'pcntl_waitpid' )
-			&& function_exists( 'pcntl_setpriority' ) && function_exists( 'posix_kill' )
+			&& function_exists( 'pcntl_setpriority' )
 		) {
 			return true;
 		}
