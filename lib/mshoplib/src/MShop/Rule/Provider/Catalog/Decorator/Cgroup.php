@@ -47,7 +47,7 @@ class Cgroup
 	{
 		parent::__construct( $context, $item, $provider );
 
-		$ids = array_keys( $this->getConfigValue( 'cgroup.id', [] ) );
+		$ids = array_keys( $this->getConfigValue( 'cgroup.map', [] ) );
 		$this->result = array_intersect( $ids, $context->getGroupIds() ) !== [];
 	}
 

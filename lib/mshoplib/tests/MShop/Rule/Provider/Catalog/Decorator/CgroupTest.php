@@ -61,7 +61,7 @@ class CgroupTest extends \PHPUnit\Framework\TestCase
 	public function testApply()
 	{
 		$this->context->setGroupIds( ['456', '789'] );
-		$this->item->setConfig( ['cgroup.id' => ['123' => 'a', '456' => 'b']] );
+		$this->item->setConfig( ['cgroup.map' => ['123' => 'a', '456' => 'b']] );
 
 		$object = new \Aimeos\MShop\Rule\Provider\Catalog\Decorator\Cgroup( $this->context, $this->item, $this->stub );
 		$product = \Aimeos\MShop::create( $this->context, 'product' )->create();
@@ -85,7 +85,7 @@ class CgroupTest extends \PHPUnit\Framework\TestCase
 	public function testApplyLast()
 	{
 		$this->context->setGroupIds( ['456', '789'] );
-		$this->item->setConfig( ['cgroup.id' => ['123' => 'a', '456' => 'b'], 'last-rule' => true] );
+		$this->item->setConfig( ['cgroup.map' => ['123' => 'a', '456' => 'b'], 'last-rule' => true] );
 
 		$object = new \Aimeos\MShop\Rule\Provider\Catalog\Decorator\Cgroup( $this->context, $this->item, $this->stub );
 		$product = \Aimeos\MShop::create( $this->context, 'product' )->create();
