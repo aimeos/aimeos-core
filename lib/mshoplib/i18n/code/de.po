@@ -8,14 +8,14 @@
 # Translators:
 # Translators:
 # Aimeos, 2018
-# Aimeos, 2018
+# Aimeos, 2018,2021
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2018-08-14 12:16+0000\n"
+"PO-Revision-Date: 2021-03-10 14:24+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -94,7 +94,7 @@ msgstr "Abgebrochen"
 
 #. Payment status value
 msgid "pay:2"
-msgstr "Annahme verweigert"
+msgstr "Abgelehnt"
 
 #. Payment status value
 msgid "pay:3"
@@ -142,7 +142,7 @@ msgstr "Verloren"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr "Annahme verweigert"
+msgstr "Verweigert"
 
 #. Delivery status value
 msgid "stat:7"

@@ -5,6 +5,7 @@
 # Translators:
 # a270031086f2a0d3514bc0cb507b48f6, 2019
 # Guillaume STEIN <guillaume.stein@gmail.com>, 2016
+# Laurent Georget <laurent@lgeorget.eu>, 2021
 # Medzo Zeng <medzozeng@hotmail.fr>, 2019
 # Six byNine <wwinx@hotmail.com>, 2018
 msgid ""
@@ -12,8 +13,8 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-02 15:52+0100\n"
-"PO-Revision-Date: 2020-12-02 14:53+0000\n"
-"Last-Translator: a270031086f2a0d3514bc0cb507b48f6\n"
+"PO-Revision-Date: 2021-03-08 15:33+0000\n"
+"Last-Translator: Laurent Georget <laurent@lgeorget.eu>\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "All XML import"
-msgstr ""
+msgstr "Tous les imports XML"
 
 msgid "Attribute import XML"
 msgstr "Import XML attributs"
@@ -77,7 +78,7 @@ msgid "Creates bought together product suggestions"
 msgstr "Crée des suggestions de produits achetés ensemble"
 
 msgid "Customer group import XML"
-msgstr ""
+msgstr "Import XML groupes de clients"
 
 msgid "Customer import XML"
 msgstr "Import XML clients"
@@ -91,7 +92,7 @@ msgid "Deletes unpaid orders to keep the database clean"
 msgstr "Supprime les commandes impayées pour maintenir la base de données propre"
 
 msgid "Executes all XML importers and rebuild the index"
-msgstr ""
+msgstr "Effectue tous les imports XML et reconstruit les index"
 
 msgid "Executes payment or delivery service providers that uses batch updates"
 msgstr "Exécute les fournisseurs de services de paiement ou de livraison utilisant des mises à jour par lot"
@@ -131,11 +132,11 @@ msgstr "Import du catalogue à partir du fichier \"%1$s\" terminé"
 
 #, php-format
 msgid "Finished customer group import from \"%1$s\""
-msgstr ""
+msgstr "Import des groupes de clients à partir de \"%1$s\" terminé"
 
 #, php-format
 msgid "Finished customer group import from file \"%1$s\""
-msgstr ""
+msgstr "Import des groupes de clients à partir du fichier \"%1$s\" terminé"
 
 #, php-format
 msgid "Finished customer import from \"%1$s\""
@@ -174,7 +175,7 @@ msgid "Imports new and updates existing coupon code from CSV files"
 msgstr "Importe le nouveau code et met à jour le code de coupon existant à partir de fichiers CSV"
 
 msgid "Imports new and updates existing customer groups from XML files"
-msgstr ""
+msgstr "Import les nouveaux groupes de client et met à jour ceux existant à partir de fichiers XML"
 
 msgid "Imports new and updates existing customers from XML files"
 msgstr "Importe les nouveaux clients et met à jour les existants à partir de fichiers XML"
@@ -189,7 +190,7 @@ msgid "Imports new and updates existing stocks from CSV files"
 msgstr "Importe les nouveaux stocks et met à jour les existants à partir de fichiers CSV"
 
 msgid "Imports new and updates existing suppliers from CSV files"
-msgstr ""
+msgstr "Importe les nouveaux fournisseur et met à jour ceux existant à partir de fichiers CSV"
 
 msgid "Imports new and updates existing suppliers from XML files"
 msgstr "Importe les nouveaux fournisseurs et met à jour les existants à partir de fichiers XML"
@@ -226,7 +227,7 @@ msgstr "Type de produit invalide \"%1$s\""
 
 #, php-format
 msgid "Invalid supplier lines in \"%1$s\": %2$d/%3$d"
-msgstr ""
+msgstr "Lignes de fournisseurs invalides dans \"%1$s\" : %2$d/%3$d"
 
 msgid "Log cleanup"
 msgstr "Nettoyage du journal"
@@ -245,7 +246,7 @@ msgstr "Aucune colonne \"product.code\" dans le mappage CSV n'a été trouvée"
 
 #, php-format
 msgid "No \"supplier.code\" column in CSV mapping found"
-msgstr ""
+msgstr "Aucune colonne \"supplier.code\" dans le mappage CSV trouvée"
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
@@ -361,11 +362,11 @@ msgstr "Importation du coupon commencé à partir de \"%1$s\" (%2$s)"
 
 #, php-format
 msgid "Started customer group import from \"%1$s\""
-msgstr ""
+msgstr "Import des groupes de clients démarré à partir de \"%1$s\""
 
 #, php-format
 msgid "Started customer group import from file \"%1$s\""
-msgstr ""
+msgstr "Import des groupes de clients démarré à partir du fichier \"%1$s\""
 
 #, php-format
 msgid "Started customer import from \"%1$s\""
@@ -419,7 +420,7 @@ msgid "Subscription process start"
 msgstr "Début du processus d'abonnement"
 
 msgid "Supplier import CSV"
-msgstr ""
+msgstr "Import CSV fournisseurs"
 
 msgid "Supplier import XML"
 msgstr "Import XML fournisseurs"
@@ -429,15 +430,15 @@ msgstr "Termine les abonnements expirés"
 
 #, php-format
 msgid "Unable to add current address for customer with ID \"%1$s\""
-msgstr ""
+msgstr "Impossible d'ajouter l'adresse en cours pour le client ayant l'ID \"%1$s\""
 
 #, php-format
 msgid "Unable to begin subscription with ID \"%1$s\": %2$s"
-msgstr ""
+msgstr "Impossible de démarrer l'abonnement d'ID \"%1$s\" : %2$s"
 
 #, php-format
 msgid "Unable to end subscription with ID \"%1$s\": %2$s"
-msgstr ""
+msgstr "Impossible de mettre fin à l'abonnement d'ID \"%1$s\" : %2$s"
 
 #, php-format
 msgid "Unable to import catalog with code \"%1$s\": %2$s"
@@ -457,7 +458,7 @@ msgstr "Impossible d'importer le produit avec le code \"%1$s\":%2$s"
 
 #, php-format
 msgid "Unable to import supplier with code \"%1$s\": %2$s"
-msgstr ""
+msgstr "Impossible d'importer le fournisseur avec le code \"%1$s\" : %2$s"
 
 #, php-format
 msgid "Unable to move imported file"
@@ -469,7 +470,7 @@ msgstr "Impossible de déplacer le fichier importé \"%1$s\" vers \"%2$s\""
 
 #, php-format
 msgid "Unable to renew subscription with ID \"%1$s\": %2$s"
-msgstr ""
+msgstr "Impossible de renouveler l'abonnement avec l'ID \"%1$s\"  : %2$s"
 
 msgid "Updates order status from CSV files"
 msgstr "Mise à jour des statuts de commandes à partir de fichiers CSV"
