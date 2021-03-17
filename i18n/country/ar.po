@@ -1,0 +1,770 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Aimeos, 2021
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2021-03-10 14:27+0000\n"
+"Last-Translator: Aimeos\n"
+"Language-Team: Arabic (http://www.transifex.com/aimeos/aimeos-core/language/ar/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "AD"
+msgstr "أندورا"
+
+msgid "AE"
+msgstr "الإمارات العربية المتحدة"
+
+msgid "AF"
+msgstr "أفغانستان"
+
+msgid "AG"
+msgstr "انتيغا وباربودا"
+
+msgid "AI"
+msgstr "أنجيلا"
+
+msgid "AL"
+msgstr "ألبانيا"
+
+msgid "AM"
+msgstr "أرمينيا"
+
+msgid "AO"
+msgstr "أنغولا"
+
+msgid "AQ"
+msgstr "أنتاركتيكا"
+
+msgid "AR"
+msgstr "الأرجنتين"
+
+msgid "AS"
+msgstr "ساموا الأمريكية"
+
+msgid "AT"
+msgstr "النمسا"
+
+msgid "AU"
+msgstr "أستراليا"
+
+msgid "AW"
+msgstr "أروبا"
+
+msgid "AX"
+msgstr "جزر ألاند"
+
+msgid "AZ"
+msgstr "أذربيجان"
+
+msgid "BA"
+msgstr "البوسنة والهرسك"
+
+msgid "BB"
+msgstr "باربادوس"
+
+msgid "BD"
+msgstr "بنغلاديش"
+
+msgid "BE"
+msgstr "بلجيكا"
+
+msgid "BF"
+msgstr "بوركينا فاسو"
+
+msgid "BG"
+msgstr "بلغاريا"
+
+msgid "BH"
+msgstr "البحرين"
+
+msgid "BI"
+msgstr "بوروندي"
+
+msgid "BJ"
+msgstr "بينين"
+
+msgid "BL"
+msgstr "سانت بارتيليمي"
+
+msgid "BM"
+msgstr "برمودا"
+
+msgid "BN"
+msgstr "بروناي دار السلام"
+
+msgid "BO"
+msgstr "بوليفيا"
+
+msgid "BQ"
+msgstr "بونير"
+
+msgid "BR"
+msgstr "البرازيل"
+
+msgid "BS"
+msgstr "الباهاما"
+
+msgid "BT"
+msgstr "بوتان"
+
+msgid "BV"
+msgstr "جزيرة بوفيت"
+
+msgid "BW"
+msgstr "بوتسوانا"
+
+msgid "BY"
+msgstr "روسيا البيضاء"
+
+msgid "BZ"
+msgstr "البيليز"
+
+msgid "CA"
+msgstr "كندا"
+
+msgid "CC"
+msgstr "جزر كوكوس"
+
+msgid "CD"
+msgstr "جمهورية الكونغو الديموقراطية"
+
+msgid "CF"
+msgstr "جمهورية أفريقا الوسطى"
+
+msgid "CG"
+msgstr "الكونغو"
+
+msgid "CH"
+msgstr "سويسرا"
+
+msgid "CI"
+msgstr "ساحل العاج"
+
+msgid "CK"
+msgstr "جزر كوك"
+
+msgid "CL"
+msgstr "تشيلي"
+
+msgid "CM"
+msgstr "الكاميرون"
+
+msgid "CN"
+msgstr "الصين"
+
+msgid "CO"
+msgstr "كولومبيا"
+
+msgid "CR"
+msgstr "كوستا ريكا"
+
+msgid "CU"
+msgstr "كوبا"
+
+msgid "CV"
+msgstr "جمهورية الرأس الأخضر"
+
+msgid "CW"
+msgstr "كوراساو"
+
+msgid "CX"
+msgstr "جزيرة الكريسماس"
+
+msgid "CY"
+msgstr "قبرص"
+
+msgid "CZ"
+msgstr "جمهورية التشيك"
+
+msgid "DE"
+msgstr "ألمانيا"
+
+msgid "DJ"
+msgstr "جيبوتي"
+
+msgid "DK"
+msgstr "الدنمارك"
+
+msgid "DM"
+msgstr "دومينيكا"
+
+msgid "DO"
+msgstr "جمهورية الدومينيكان"
+
+msgid "DZ"
+msgstr "الجزائر"
+
+msgid "EC"
+msgstr "الإيكوادور"
+
+msgid "EE"
+msgstr "إستونيا"
+
+msgid "EG"
+msgstr "مصر"
+
+msgid "EH"
+msgstr "الصحراء الغربية"
+
+msgid "ER"
+msgstr "إرتيريا"
+
+msgid "ES"
+msgstr "إسبانيا"
+
+msgid "ET"
+msgstr "إثيوبيا"
+
+msgid "FI"
+msgstr "فنلندا"
+
+msgid "FJ"
+msgstr "فيجي"
+
+msgid "FK"
+msgstr "جزر فوكلاند"
+
+msgid "FM"
+msgstr "ميكرونيسيا"
+
+msgid "FO"
+msgstr "جزر فارو"
+
+msgid "FR"
+msgstr "فرنسا"
+
+msgid "GA"
+msgstr "الغابون"
+
+msgid "GB"
+msgstr "المملكة المتحدة"
+
+msgid "GD"
+msgstr "غرينادا"
+
+msgid "GE"
+msgstr "جورجيا"
+
+msgid "GF"
+msgstr "غويانا الفرنسية"
+
+msgid "GG"
+msgstr "جيرينسي"
+
+msgid "GH"
+msgstr "غانا"
+
+msgid "GI"
+msgstr "جبل طارق"
+
+msgid "GL"
+msgstr "جرينلاند"
+
+msgid "GM"
+msgstr "غامبيا"
+
+msgid "GN"
+msgstr "غينيا"
+
+msgid "GP"
+msgstr "جزر غوادلوب"
+
+msgid "GQ"
+msgstr "غينيا الإستوائية"
+
+msgid "GR"
+msgstr "اليونان"
+
+msgid "GS"
+msgstr "جورجيا الجنوبية وجزر ساندويتش الجنوبية"
+
+msgid "GT"
+msgstr "جواتيمالا"
+
+msgid "GU"
+msgstr "جوام"
+
+msgid "GW"
+msgstr "غينيا بيساو"
+
+msgid "GY"
+msgstr "غويانا"
+
+msgid "HK"
+msgstr "هونغ كونغ"
+
+msgid "HM"
+msgstr "جزيرة هيرد وجزر ماكدونالد"
+
+msgid "HN"
+msgstr "الهوندوراس"
+
+msgid "HR"
+msgstr "كرواتيا"
+
+msgid "HT"
+msgstr "هاييتي"
+
+msgid "HU"
+msgstr "المجر"
+
+msgid "ID"
+msgstr "إندونيسيا"
+
+msgid "IE"
+msgstr "أيرلندا"
+
+msgid "IL"
+msgstr "إسرائيل"
+
+msgid "IM"
+msgstr "جزيرة مان"
+
+msgid "IN"
+msgstr "الهند"
+
+msgid "IO"
+msgstr "إقليم المحيط الهندي البريطاني"
+
+msgid "IQ"
+msgstr "العراق"
+
+msgid "IR"
+msgstr "إيران"
+
+msgid "IS"
+msgstr "آيسلندا"
+
+msgid "IT"
+msgstr "إيطاليا"
+
+msgid "JE"
+msgstr "جزيرة جيرسي"
+
+msgid "JM"
+msgstr "جامايكا"
+
+msgid "JO"
+msgstr "الأردن"
+
+msgid "JP"
+msgstr "اليابان"
+
+msgid "KE"
+msgstr "كينيا"
+
+msgid "KG"
+msgstr "قرغيزستان"
+
+msgid "KH"
+msgstr "كمبوديا"
+
+msgid "KI"
+msgstr "كيريباتي"
+
+msgid "KM"
+msgstr "جزر القمر"
+
+msgid "KN"
+msgstr "سانت كيتس ونيفيس"
+
+msgid "KP"
+msgstr "كوريا الشمالية"
+
+msgid "KR"
+msgstr "كوريا الجنوبية"
+
+msgid "KW"
+msgstr "جزر القمر"
+
+msgid "KY"
+msgstr "جراند كايمان"
+
+msgid "KZ"
+msgstr "كازاخستان"
+
+msgid "LA"
+msgstr "جمهورية لاوس الديموقراطية الشعبية"
+
+msgid "LB"
+msgstr "لبنان"
+
+msgid "LC"
+msgstr "سانت لوسيا"
+
+msgid "LI"
+msgstr "ليختنشتاين"
+
+msgid "LK"
+msgstr "سري لانكا"
+
+msgid "LR"
+msgstr "ليبيريا"
+
+msgid "LS"
+msgstr "ليسوتو"
+
+msgid "LT"
+msgstr "ليتوانيا"
+
+msgid "LU"
+msgstr "لوكسمبورغ"
+
+msgid "LV"
+msgstr "لاتفيا"
+
+msgid "LY"
+msgstr "ليبيا"
+
+msgid "MA"
+msgstr "المغرب"
+
+msgid "MC"
+msgstr "موناكو"
+
+msgid "MD"
+msgstr "مولدوفا"
+
+msgid "ME"
+msgstr "دولة الجبل الأسود"
+
+msgid "MF"
+msgstr "سانت مارتن"
+
+msgid "MG"
+msgstr "مدغشقر"
+
+msgid "MH"
+msgstr "جزر مارشال"
+
+msgid "MK"
+msgstr "جمهورية مقدونيا"
+
+msgid "ML"
+msgstr "مالي"
+
+msgid "MM"
+msgstr "ميانمار"
+
+msgid "MN"
+msgstr "منغوليا"
+
+msgid "MO"
+msgstr "ماكاو"
+
+msgid "MP"
+msgstr "جزر ماريانا الشمالية"
+
+msgid "MQ"
+msgstr "مارتينيك"
+
+msgid "MR"
+msgstr "موريتانيا"
+
+msgid "MS"
+msgstr "مونتسيرات"
+
+msgid "MT"
+msgstr "مالطا"
+
+msgid "MU"
+msgstr "جمهورية موريشيوس"
+
+msgid "MV"
+msgstr "جزر المالديف"
+
+msgid "MW"
+msgstr "مالاوي"
+
+msgid "MX"
+msgstr "المكسيك"
+
+msgid "MY"
+msgstr "ماليزيا"
+
+msgid "MZ"
+msgstr "موزمبيق"
+
+msgid "NA"
+msgstr "ناميبيا"
+
+msgid "NC"
+msgstr "كاليدونيا الجديدة"
+
+msgid "NE"
+msgstr "النيجر"
+
+msgid "NF"
+msgstr "جزيرة نورفولك"
+
+msgid "NG"
+msgstr "نيجيريا"
+
+msgid "NI"
+msgstr "نيكاراجوا"
+
+msgid "NL"
+msgstr "هولندا"
+
+msgid "NO"
+msgstr "النرويج"
+
+msgid "NP"
+msgstr "النيبال"
+
+msgid "NR"
+msgstr "ناورو"
+
+msgid "NU"
+msgstr "نييوي"
+
+msgid "NZ"
+msgstr "نيوزيلاندا"
+
+msgid "OM"
+msgstr "عمان"
+
+msgid "PA"
+msgstr "بنما"
+
+msgid "PE"
+msgstr "البيرو"
+
+msgid "PF"
+msgstr "بولينزيا الفرنسية"
+
+msgid "PG"
+msgstr "بابوا غينيا الجديدة"
+
+msgid "PH"
+msgstr "الفيليبين"
+
+msgid "PK"
+msgstr "باكستان"
+
+msgid "PL"
+msgstr "بولندا"
+
+msgid "PM"
+msgstr "سان بيار وميكلون"
+
+msgid "PN"
+msgstr "جزر بيتكيرن"
+
+msgid "PR"
+msgstr "بوريتو ريكو"
+
+msgid "PS"
+msgstr "فلسطين"
+
+msgid "PT"
+msgstr "البرتغال"
+
+msgid "PW"
+msgstr "بالاو"
+
+msgid "PY"
+msgstr "باراغواي"
+
+msgid "QA"
+msgstr "قطر"
+
+msgid "RE"
+msgstr "ريونيون"
+
+msgid "RO"
+msgstr "رومانيا"
+
+msgid "RS"
+msgstr "صربيا"
+
+msgid "RU"
+msgstr "روسيا الاتحادية"
+
+msgid "RW"
+msgstr "رواندا"
+
+msgid "SA"
+msgstr "المملكة العربية السعودية"
+
+msgid "SB"
+msgstr "جزر السولومون"
+
+msgid "SC"
+msgstr "سيشيل"
+
+msgid "SD"
+msgstr "السودان"
+
+msgid "SE"
+msgstr "السويد"
+
+msgid "SG"
+msgstr "سنغافورة"
+
+msgid "SH"
+msgstr "سانت هيلينا"
+
+msgid "SI"
+msgstr "سولفينيا"
+
+msgid "SJ"
+msgstr "سفالبارد ويان ماين"
+
+msgid "SK"
+msgstr "سولفاكيا"
+
+msgid "SL"
+msgstr "سيراليون"
+
+msgid "SM"
+msgstr "سان مارينو"
+
+msgid "SN"
+msgstr "السنغال"
+
+msgid "SO"
+msgstr "الصومال"
+
+msgid "SR"
+msgstr "سورينام"
+
+msgid "SS"
+msgstr "جنوب السودان"
+
+msgid "ST"
+msgstr "ساو تومي وبرينسيبي"
+
+msgid "SV"
+msgstr "إل سلفادور"
+
+msgid "SX"
+msgstr "سينت مارتن"
+
+msgid "SY"
+msgstr "الجمهورية العربية السورية"
+
+msgid "SZ"
+msgstr "إسواتيني"
+
+msgid "TC"
+msgstr "جزر توركس وكايكوس "
+
+msgid "TD"
+msgstr "التشاد"
+
+msgid "TF"
+msgstr "الأقاليم الفرنسية الجنوبية"
+
+msgid "TG"
+msgstr "توغو"
+
+msgid "TH"
+msgstr "تايلاند"
+
+msgid "TJ"
+msgstr "طاجيكستان"
+
+msgid "TK"
+msgstr "توكيلاو"
+
+msgid "TL"
+msgstr "تيمور ليست"
+
+msgid "TM"
+msgstr "تركمانستان"
+
+msgid "TN"
+msgstr "تونس"
+
+msgid "TO"
+msgstr "تونغو"
+
+msgid "TR"
+msgstr "تركيا"
+
+msgid "TT"
+msgstr "ترينيداد وتوباغو"
+
+msgid "TV"
+msgstr "توفالو"
+
+msgid "TW"
+msgstr "تايوان"
+
+msgid "TZ"
+msgstr "تنزانيا"
+
+msgid "UA"
+msgstr "أوكرانيا"
+
+msgid "UG"
+msgstr "أوغندا"
+
+msgid "UM"
+msgstr "جزر الولايات المتحدة النائية"
+
+msgid "US"
+msgstr "الولايات المتحدة الأمريكية"
+
+msgid "UY"
+msgstr "أوروغواي"
+
+msgid "UZ"
+msgstr "أوزباكستان"
+
+msgid "VA"
+msgstr "دولة الفاتيكان"
+
+msgid "VC"
+msgstr "سانت فنسنت والجرينادينز"
+
+msgid "VE"
+msgstr "فنزويلا"
+
+msgid "VG"
+msgstr "جزر العذراء البريطانية"
+
+msgid "VI"
+msgstr "الجزر العذراء، الولايات المتحدة"
+
+msgid "VN"
+msgstr "فييتنام"
+
+msgid "VU"
+msgstr "فانواتو"
+
+msgid "WF"
+msgstr "واليس وفوتونا"
+
+msgid "WS"
+msgstr "ساموا"
+
+msgid "YE"
+msgstr "اليمن"
+
+msgid "YT"
+msgstr "جزيرة مايوت"
+
+msgid "ZA"
+msgstr "جنوب أفريقيا"
+
+msgid "ZM"
+msgstr "زامبيا"
+
+msgid "ZW"
+msgstr "زيمبابوي"

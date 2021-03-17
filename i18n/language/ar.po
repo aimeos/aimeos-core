@@ -1,0 +1,578 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Aimeos, 2021
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2021-03-10 14:27+0000\n"
+"Last-Translator: Aimeos\n"
+"Language-Team: Arabic (http://www.transifex.com/aimeos/aimeos-core/language/ar/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "aa"
+msgstr "لغة عفارية"
+
+msgid "ab"
+msgstr "لغة أبخازية"
+
+msgid "ae"
+msgstr "أفستية"
+
+msgid "af"
+msgstr "لغة أفريقانية"
+
+msgid "ak"
+msgstr "لغة أكانية"
+
+msgid "am"
+msgstr "لغة أمهرية"
+
+msgid "an"
+msgstr "لغة أرغوانية"
+
+msgid "ar"
+msgstr "اللغة العربية"
+
+msgid "as"
+msgstr "لغة آسامية"
+
+msgid "av"
+msgstr "لغة أوارية"
+
+msgid "ay"
+msgstr "لغة أيمارا"
+
+msgid "az"
+msgstr "أذرية"
+
+msgid "ba"
+msgstr "لغة باشقير"
+
+msgid "be"
+msgstr "لغة بيلاروسية"
+
+msgid "bg"
+msgstr "لغة بلغارية"
+
+msgid "bh"
+msgstr "قائمة اللغات البهرية"
+
+msgid "bi"
+msgstr "لغة بسلاما"
+
+msgid "bm"
+msgstr "لغة بمبرية"
+
+msgid "bn"
+msgstr "لغة بنغالية"
+
+msgid "bo"
+msgstr "تبتية"
+
+msgid "br"
+msgstr "لغة بريتانية"
+
+msgid "bs"
+msgstr "لغة بوسنوية"
+
+msgid "ca"
+msgstr "لغة كتالانية"
+
+msgid "ce"
+msgstr "لغة شيشانية"
+
+msgid "ch"
+msgstr "لغة تشاموروية"
+
+msgid "co"
+msgstr "لغة كورسية"
+
+msgid "cr"
+msgstr "كريي"
+
+msgid "cs"
+msgstr "لغة تشيكية"
+
+msgid "cu"
+msgstr "سلافونية كنسية"
+
+msgid "cv"
+msgstr "لغة تشوفاش"
+
+msgid "cy"
+msgstr "لغة ويلزية"
+
+msgid "da"
+msgstr "اللغة الدنماركية"
+
+msgid "de"
+msgstr "اللغة الألمانية"
+
+msgid "dv"
+msgstr "ديفهي"
+
+msgid "dz"
+msgstr "لغة دزونكا"
+
+msgid "ee"
+msgstr "إيوي"
+
+msgid "el"
+msgstr "اليونانية الحديثة"
+
+msgid "en"
+msgstr "اللغة الإنجليزية"
+
+msgid "eo"
+msgstr "إسبرانتو"
+
+msgid "es"
+msgstr "لغة إسبانية"
+
+msgid "et"
+msgstr "لغة إستونية"
+
+msgid "eu"
+msgstr "لغة بشكنشية"
+
+msgid "fa"
+msgstr "لغة فارسية"
+
+msgid "ff"
+msgstr "لغة فولانية"
+
+msgid "fi"
+msgstr "لغة فنلندية"
+
+msgid "fj"
+msgstr "لغة فيجية"
+
+msgid "fo"
+msgstr "لغة فاروية"
+
+msgid "fr"
+msgstr "لغة فرنسية"
+
+msgid "fy"
+msgstr "اللغة الفريزية الغربية"
+
+msgid "ga"
+msgstr "لغة أيرلندية"
+
+msgid "gd"
+msgstr "لغة غيلية اسكتلندية"
+
+msgid "gl"
+msgstr "لغة غاليسية"
+
+msgid "gn"
+msgstr "غوارانية"
+
+msgid "gu"
+msgstr "لغة غوجاراتية"
+
+msgid "gv"
+msgstr "لغة منكية"
+
+msgid "ha"
+msgstr "لغة هوسية"
+
+msgid "he"
+msgstr "لغة عبرية"
+
+msgid "hi"
+msgstr "لغة هندية"
+
+msgid "ho"
+msgstr "هيري موتو"
+
+msgid "hr"
+msgstr "لغة كرواتية"
+
+msgid "ht"
+msgstr "لغة كريولية هايتية"
+
+msgid "hu"
+msgstr "لغة مجرية"
+
+msgid "hy"
+msgstr "لغة أرمنية"
+
+msgid "hz"
+msgstr "لغة هيريو"
+
+msgid "ia"
+msgstr "إنترلينغوا"
+
+msgid "id"
+msgstr "لغة إندونيسية"
+
+msgid "ie"
+msgstr "إنترلينغ"
+
+msgid "ig"
+msgstr "لغة الإيجيبو"
+
+msgid "ii"
+msgstr "سيشوان يي"
+
+msgid "ik"
+msgstr "إنوبياق"
+
+msgid "io"
+msgstr "لغة إيدو"
+
+msgid "is"
+msgstr "لغة آيسلندية"
+
+msgid "it"
+msgstr "لغة إيطالية"
+
+msgid "iu"
+msgstr "لغة إنكتيتوتية"
+
+msgid "ja"
+msgstr "لغة يابانية"
+
+msgid "jv"
+msgstr "لغة جاوية"
+
+msgid "ka"
+msgstr "لغة جورجية"
+
+msgid "kg"
+msgstr "لغة كونغو"
+
+msgid "ki"
+msgstr "لغة كيكويو"
+
+msgid "kj"
+msgstr "كوانياما"
+
+msgid "kk"
+msgstr "لغة قازاقية"
+
+msgid "kl"
+msgstr "لغة غرينلاندية"
+
+msgid "km"
+msgstr "لغة خميرية"
+
+msgid "kn"
+msgstr "لغة كنادية"
+
+msgid "ko"
+msgstr "لغة كورية"
+
+msgid "kr"
+msgstr "لغة كانورية"
+
+msgid "ks"
+msgstr "لغة كشمرية"
+
+msgid "ku"
+msgstr "لغة كردية"
+
+msgid "kv"
+msgstr "لغة كومية"
+
+msgid "kw"
+msgstr "لغة كورنية"
+
+msgid "ky"
+msgstr "لغة قيرغيزية"
+
+msgid "la"
+msgstr "لغة لاتينية"
+
+msgid "lb"
+msgstr "لغة لوكسميورغية"
+
+msgid "lg"
+msgstr "غاندا"
+
+msgid "li"
+msgstr "لغة ليمبورغية"
+
+msgid "ln"
+msgstr "لينغالا"
+
+msgid "lo"
+msgstr "لاو"
+
+msgid "lt"
+msgstr "لغة ليتوانية"
+
+msgid "lu"
+msgstr "لوبا كاتانغا"
+
+msgid "lv"
+msgstr "لغة لاتفية"
+
+msgid "mg"
+msgstr "لغة ملغاشية"
+
+msgid "mh"
+msgstr "لغة مارشالية"
+
+msgid "mi"
+msgstr "لغة ماورية"
+
+msgid "mk"
+msgstr "لغة مقدونية"
+
+msgid "ml"
+msgstr "لغة ماليالامية"
+
+msgid "mn"
+msgstr "لغة منغولية"
+
+msgid "mo"
+msgstr "مولدوفا"
+
+msgid "mr"
+msgstr "لغة مراثية"
+
+msgid "ms"
+msgstr "لغة ملايو"
+
+msgid "mt"
+msgstr "لغة مالطية"
+
+msgid "my"
+msgstr "لغة بورمية"
+
+msgid "na"
+msgstr "لغة ناورونية"
+
+msgid "nb"
+msgstr "بوكمول"
+
+msgid "nd"
+msgstr "نيديبيلي الشمالية"
+
+msgid "ne"
+msgstr "لغة نيبالية"
+
+msgid "ng"
+msgstr "ندونغا"
+
+msgid "nl"
+msgstr "لغة هولندية"
+
+msgid "nn"
+msgstr "نينوشيك"
+
+msgid "no"
+msgstr "لغة نرويجية"
+
+msgid "nr"
+msgstr "لغة نديبلي"
+
+msgid "nv"
+msgstr "نافاهو"
+
+msgid "ny"
+msgstr "لغة الشيشيوا"
+
+msgid "oc"
+msgstr "لغة قسطانية"
+
+msgid "oj"
+msgstr "لغة الأوجيبوا"
+
+msgid "om"
+msgstr "لغة الأورومو"
+
+msgid "or"
+msgstr "لغة الأوريا"
+
+msgid "os"
+msgstr "لغة أوسيتية"
+
+msgid "pa"
+msgstr "لغة بنجابية"
+
+msgid "pi"
+msgstr "بالي"
+
+msgid "pl"
+msgstr "لغة بولندية"
+
+msgid "ps"
+msgstr "لغة بشتوية"
+
+msgid "pt"
+msgstr "لغة البرتغالية"
+
+msgid "qu"
+msgstr "كتشوا"
+
+msgid "rm"
+msgstr "لغة رومانشية"
+
+msgid "rn"
+msgstr "اللغة الكيروندية"
+
+msgid "ro"
+msgstr "اللغة الرومانية"
+
+msgid "ru"
+msgstr "لغة روسية"
+
+msgid "rw"
+msgstr "كينيارواندا"
+
+msgid "sa"
+msgstr "لغة سنسكريتية"
+
+msgid "sc"
+msgstr "لغة سردينية"
+
+msgid "sd"
+msgstr "لغة سندية"
+
+msgid "se"
+msgstr "لغة سامي الشمالية"
+
+msgid "sg"
+msgstr "السانغورية"
+
+msgid "si"
+msgstr "لغة سنهالية"
+
+msgid "sk"
+msgstr "لغة سلوفاكية"
+
+msgid "sl"
+msgstr "لغة سلوفينية"
+
+msgid "sm"
+msgstr "لغة ساموية"
+
+msgid "sn"
+msgstr "لغة الشونا"
+
+msgid "so"
+msgstr "لغة صومالية"
+
+msgid "sq"
+msgstr "لغة ألبانية"
+
+msgid "sr"
+msgstr "لغة صربية"
+
+msgid "ss"
+msgstr "لغة سوازي"
+
+msgid "st"
+msgstr "لغة سوتية"
+
+msgid "su"
+msgstr "اللغات السوندية"
+
+msgid "sv"
+msgstr "لغة سويدية"
+
+msgid "sw"
+msgstr "لغة سواحلية"
+
+msgid "ta"
+msgstr "لغة تاميلية"
+
+msgid "te"
+msgstr "لغة تيلوغوية"
+
+msgid "tg"
+msgstr "لغة طاجيكية"
+
+msgid "th"
+msgstr "لغة تايلندية"
+
+msgid "ti"
+msgstr "لغة تغرينية"
+
+msgid "tk"
+msgstr "لغة تركمانية"
+
+msgid "tl"
+msgstr "لغة تالوغية"
+
+msgid "tn"
+msgstr "لغة تسوانية"
+
+msgid "to"
+msgstr "التونغية"
+
+msgid "tr"
+msgstr "لغة تركية"
+
+msgid "ts"
+msgstr "لغة تسونجا"
+
+msgid "tt"
+msgstr "لغة تترية"
+
+msgid "tw"
+msgstr "توي"
+
+msgid "ty"
+msgstr "لغة تاهيتية"
+
+msgid "ug"
+msgstr "لغة أويغورية"
+
+msgid "uk"
+msgstr "لغة أوكرانية"
+
+msgid "ur"
+msgstr "لغة اردوية"
+
+msgid "uz"
+msgstr "لغة أوزبكية"
+
+msgid "ve"
+msgstr "لغة فيندية"
+
+msgid "vi"
+msgstr "لغة فيتنامية"
+
+msgid "vo"
+msgstr "فولابوك"
+
+msgid "wa"
+msgstr "لغة والون"
+
+msgid "wo"
+msgstr "لغو ولوفية"
+
+msgid "xh"
+msgstr "اللغة الخوسية"
+
+msgid "yi"
+msgstr "لغة يديشية"
+
+msgid "yo"
+msgstr "لغة يوريا"
+
+msgid "za"
+msgstr "لغة زوانغ"
+
+msgid "zh"
+msgstr "لغة صينية"
+
+msgid "zu"
+msgstr "لغة زولوية"
