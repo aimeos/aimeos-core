@@ -102,20 +102,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateMax()
 	{
 		$search = $this->object->filter( true );
-		$result = $this->object->aggregate( $search, 'index.price.currencyid', null, 'max' )->toArray();
+		$search->add( $search->is( $search->make( 'index.price:value', ['EUR'] ), '!=', null ) );
 
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 600, $result['EUR'] );
+		$result = $this->object->aggregate( $search, 'product.status', null, 'max' )->max();
+
+		$this->assertEquals( 600, $result );
 	}
 
 
 	public function testAggregateMin()
 	{
 		$search = $this->object->filter( true );
-		$result = $this->object->aggregate( $search, 'index.price.currencyid', null, 'min' )->toArray();
+		$search->add( $search->is( $search->make( 'index.price:value', ['EUR'] ), '!=', null ) );
 
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 12, $result['EUR'] );
+		$result = $this->object->aggregate( $search, 'product.status', null, 'min' )->min();
+
+		$this->assertEquals( 12, $result );
 	}
 
 
