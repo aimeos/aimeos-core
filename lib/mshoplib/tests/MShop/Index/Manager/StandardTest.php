@@ -73,29 +73,29 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'attribute' );
+		$id = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'attribute' )
+			->find( 'white', [], 'product', 'color' )->getId();
 
-		$search = $manager->filter();
-		$expr = array(
-			$search->compare( '==', 'attribute.code', 'white' ),
-			$search->compare( '==', 'attribute.domain', 'product' ),
-			$search->compare( '==', 'attribute.type', 'color' ),
-		);
-		$search->setConditions( $search->and( $expr ) );
-
-		$items = $manager->search( $search )->toArray();
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No attribute found' );
-		}
-
-
-		$search = $this->object->filter( true );
+		$search = $this->object->filter( true )->add( ['index.catalog.id' => null], '!=' );
 		$result = $this->object->aggregate( $search, 'index.attribute.id' )->toArray();
 
 		$this->assertEquals( 14, count( $result ) );
-		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 3, $result[$item->getId()] );
+		$this->assertArrayHasKey( $id, $result );
+		$this->assertEquals( 3, $result[$id] );
+	}
+
+
+	public function testAggregateMultiple()
+	{
+		$id = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'attribute' )
+			->find( 'white', [], 'product', 'color' )->getId();
+
+		$search = $this->object->filter( true )->add( ['index.catalog.id' => null], '!=' );
+		$result = $this->object->aggregate( $search, ['product.status', 'index.attribute.id'] )->toArray();
+
+		$this->assertEquals( 14, count( $result[1] ) );
+		$this->assertArrayHasKey( $id, $result[1] );
+		$this->assertEquals( 3, $result[1][$id] );
 	}
 
 
