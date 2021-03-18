@@ -296,9 +296,9 @@ return array(
 			),
 			'aggregate' => array(
 				'ansi' => '
-					SELECT :keys, COUNT("id") AS "count"
+					SELECT :keys, COUNT("val") AS "value"
 					FROM (
-						SELECT :acols, mcusli."id" AS "id"
+						SELECT :acols, :val AS "val"
 						FROM "mshop_customer_list" AS mcusli
 						:joins
 						WHERE :cond
@@ -309,9 +309,9 @@ return array(
 					GROUP BY :keys
 				',
 				'mysql' => '
-					SELECT :keys, COUNT("id") AS "count"
+					SELECT :keys, COUNT("val") AS "value"
 					FROM (
-						SELECT :acols, mcusli."id" AS "id"
+						SELECT :acols, :val AS "val"
 						FROM "mshop_customer_list" AS mcusli
 						:joins
 						WHERE :cond
@@ -591,7 +591,7 @@ return array(
 		),
 		'aggregate' => array(
 			'ansi' => '
-				SELECT :keys, COUNT("val") AS "count"
+				SELECT :keys, COUNT("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val"
 					FROM "mshop_customer" AS mcus
@@ -604,7 +604,7 @@ return array(
 				GROUP BY :keys
 			',
 			'mysql' => '
-				SELECT :keys, COUNT("val") AS "count"
+				SELECT :keys, COUNT("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val"
 					FROM "mshop_customer" AS mcus

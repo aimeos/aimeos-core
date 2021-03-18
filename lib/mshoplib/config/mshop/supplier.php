@@ -212,9 +212,9 @@ return array(
 			),
 			'aggregate' => array(
 				'ansi' => '
-					SELECT :keys, COUNT("id") AS "count"
+					SELECT :keys, COUNT("val") AS "value"
 					FROM (
-						SELECT :acols, msupli."id" AS "id"
+						SELECT :acols, :val AS "val"
 						FROM "mshop_supplier_list" AS msupli
 						:joins
 						WHERE :cond
@@ -225,9 +225,9 @@ return array(
 					GROUP BY :keys
 				',
 				'mysql' => '
-					SELECT :keys, COUNT("id") AS "count"
+					SELECT :keys, COUNT("val") AS "value"
 					FROM (
-						SELECT :acols, msupli."id" AS "id"
+						SELECT :acols, :val AS "val"
 						FROM "mshop_supplier_list" AS msupli
 						:joins
 						WHERE :cond

@@ -438,11 +438,11 @@ return array(
 			'ansi' => '
 				SELECT :keys, COUNT("id") AS "count"
 				FROM (
-					SELECT :acols, mpro."id" AS "id" :mincols
+					SELECT :acols, :val AS "val" :mincols
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
-					GROUP BY :cols, mpro."id"
+					GROUP BY :cols, :val, mpro."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				) AS list
@@ -451,11 +451,11 @@ return array(
 			'mysql' => '
 				SELECT :keys, COUNT("id") AS "count"
 				FROM (
-					SELECT :acols, mpro."id" AS "id" :mincols
+					SELECT :acols, :val AS "val" :mincols
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
-					GROUP BY :cols, mpro."id"
+					GROUP BY :cols, :val, mpro."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				) AS list
