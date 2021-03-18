@@ -202,8 +202,8 @@ class Standard
 		 * @see mshop/subscription/manager/count/ansi
 		 */
 
-		$cfgkey = 'mshop/subscription/manager/aggregate' . $type;
-		return $this->aggregateBase( $search, $key, $cfgkey, array( 'subscription' ), $value );
+		$cfgkey = 'mshop/subscription/manager/aggregate';
+		return $this->aggregateBase( $search, $key, $cfgkey, ['subscription'], $value, $type );
 	}
 
 

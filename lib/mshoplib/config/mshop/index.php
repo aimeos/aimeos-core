@@ -436,7 +436,7 @@ return array(
 		),
 		'aggregate' => array(
 			'ansi' => '
-				SELECT :keys, COUNT("id") AS "count"
+				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val" :mincols
 					FROM "mshop_product" AS mpro
@@ -449,69 +449,13 @@ return array(
 				GROUP BY :keys
 			',
 			'mysql' => '
-				SELECT :keys, COUNT("id") AS "count"
+				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val" :mincols
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
 					GROUP BY :cols, :val, mpro."id"
-					ORDER BY :order
-					LIMIT :size OFFSET :start
-				) AS list
-				GROUP BY :keys
-			'
-		),
-		'aggregatemax' => array(
-			'ansi' => '
-				SELECT :keys, MAX("val") AS "count"
-				FROM (
-					SELECT :acols, mindpr."value" AS "val"
-					FROM "mshop_product" AS mpro
-					:joins
-					WHERE :cond
-					GROUP BY :cols, mindpr.value, mpro."id"
-					ORDER BY :order
-					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-				) AS list
-				GROUP BY :keys
-			',
-			'mysql' => '
-				SELECT :keys, MAX("val") AS "count"
-				FROM (
-					SELECT :acols, mindpr."value" AS "val"
-					FROM "mshop_product" AS mpro
-					:joins
-					WHERE :cond
-					GROUP BY :cols, mindpr.value, mpro."id"
-					ORDER BY :order
-					LIMIT :size OFFSET :start
-				) AS list
-				GROUP BY :keys
-			'
-		),
-		'aggregatemin' => array(
-			'ansi' => '
-				SELECT :keys, MIN("val") AS "count"
-				FROM (
-					SELECT :acols, mindpr."value" AS "val"
-					FROM "mshop_product" AS mpro
-					:joins
-					WHERE :cond
-					GROUP BY :cols, mindpr.value, mpro."id"
-					ORDER BY :order
-					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-				) AS list
-				GROUP BY :keys
-			',
-			'mysql' => '
-				SELECT :keys, MIN("val") AS "count"
-				FROM (
-					SELECT :acols, mindpr."value" AS "val"
-					FROM "mshop_product" AS mpro
-					:joins
-					WHERE :cond
-					GROUP BY :cols, mindpr.value, mpro."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				) AS list

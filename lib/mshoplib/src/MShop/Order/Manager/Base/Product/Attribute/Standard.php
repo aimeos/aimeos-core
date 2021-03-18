@@ -190,8 +190,8 @@ class Standard
 		 * @see mshop/order/manager/base/product/attribute/search/ansi
 		 * @see mshop/order/manager/base/product/attribute/count/ansi
 		 */
-		$cfgkey = 'mshop/order/manager/base/product/attribute/aggregate' . $type;
-		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base.product.attribute' ), $value );
+		$cfgkey = 'mshop/order/manager/base/product/attribute/aggregate';
+		return $this->aggregateBase( $search, $key, $cfgkey, ['order.base.product.attribute'], $value, $type );
 	}
 
 

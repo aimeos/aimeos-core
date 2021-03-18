@@ -86,7 +86,7 @@ class Standard
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
-		return $this->aggregateBase( $search, $key, 'mshop/index/manager/aggregate' . $type, [], $value );
+		return $this->aggregateBase( $search, $key, 'mshop/index/manager/aggregate', [], $value, $type );
 	}
 
 

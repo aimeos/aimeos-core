@@ -255,8 +255,8 @@ class Standard extends Base
 		 * @see mshop/order/manager/base/aggregate/ansi
 		 */
 
-		$cfgkey = 'mshop/order/manager/base/aggregate' . $type;
-		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base' ), $value );
+		$cfgkey = 'mshop/order/manager/base/aggregate';
+		return $this->aggregateBase( $search, $key, $cfgkey, ['order.base'], $value, $type );
 	}
 
 

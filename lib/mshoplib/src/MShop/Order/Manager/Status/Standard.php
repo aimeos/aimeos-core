@@ -159,8 +159,8 @@ class Standard
 		 * @see mshop/order/manager/status/search/ansi
 		 * @see mshop/order/manager/status/count/ansi
 		 */
-		$cfgkey = 'mshop/order/manager/status/aggregate' . $type;
-		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.status' ), $value );
+		$cfgkey = 'mshop/order/manager/status/aggregate';
+		return $this->aggregateBase( $search, $key, $cfgkey, ['order.status'], $value, $type );
 	}
 
 

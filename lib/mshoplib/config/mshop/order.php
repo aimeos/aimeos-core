@@ -12,7 +12,7 @@ return array(
 			'address' => array(
 				'aggregate' => array(
 					'ansi' => '
-						SELECT :keys, COUNT("val") AS "value"
+						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
 							FROM "mshop_order_base_address" AS mordbaad
@@ -25,7 +25,7 @@ return array(
 						GROUP BY :keys
 					',
 					'mysql' => '
-						SELECT :keys, COUNT("val") AS "value"
+						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
 							FROM "mshop_order_base_address" AS mordbaad
@@ -138,7 +138,7 @@ return array(
 			'coupon' => array(
 				'aggregate' => array(
 					'ansi' => '
-						SELECT :keys, COUNT("val") AS "value"
+						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
 							FROM "mshop_order_base_coupon" AS mordbaco
@@ -151,7 +151,7 @@ return array(
 						GROUP BY :keys
 					',
 					'mysql' => '
-						SELECT :keys, COUNT("val") AS "value"
+						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
 							FROM "mshop_order_base_coupon" AS mordbaco
@@ -235,7 +235,7 @@ return array(
 				'attribute' => array(
 					'aggregate' => array(
 						'ansi' => '
-							SELECT :keys, COUNT("val") AS "value"
+							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :val AS "val"
 								FROM "mshop_order_base_product_attr" AS mordbaprat
@@ -248,7 +248,7 @@ return array(
 							GROUP BY :keys
 						',
 						'mysql' => '
-							SELECT :keys, COUNT("val") AS "value"
+							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :val AS "val"
 								FROM "mshop_order_base_product_attr" AS mordbaprat
@@ -336,7 +336,7 @@ return array(
 				),
 				'aggregate' => array(
 					'ansi' => '
-						SELECT :keys, COUNT("val") AS "value"
+						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
 							FROM "mshop_order_base_product" AS mordbapr
@@ -349,63 +349,7 @@ return array(
 						GROUP BY :keys
 					',
 					'mysql' => '
-						SELECT :keys, COUNT("val") AS "value"
-						FROM (
-							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_product" AS mordbapr
-							:joins
-							WHERE :cond
-							GROUP BY mordbapr.id, :cols, :val
-							ORDER BY mordbapr.id DESC
-							LIMIT :size OFFSET :start
-						) AS list
-						GROUP BY :keys
-					'
-				),
-				'aggregateavg' => array(
-					'ansi' => '
-						SELECT :keys, AVG("val") AS "value"
-						FROM (
-							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_product" AS mordbapr
-							:joins
-							WHERE :cond
-							GROUP BY mordbapr.id, :cols, :val
-							ORDER BY mordbapr.id DESC
-							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-						) AS list
-						GROUP BY :keys
-					',
-					'mysql' => '
-						SELECT :keys, AVG("val") AS "value"
-						FROM (
-							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_product" AS mordbapr
-							:joins
-							WHERE :cond
-							GROUP BY mordbapr.id, :cols, :val
-							ORDER BY mordbapr.id DESC
-							LIMIT :size OFFSET :start
-						) AS list
-						GROUP BY :keys
-					'
-				),
-				'aggregatesum' => array(
-					'ansi' => '
-						SELECT :keys, SUM("val") AS "value"
-						FROM (
-							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_product" AS mordbapr
-							:joins
-							WHERE :cond
-							GROUP BY mordbapr.id, :cols, :val
-							ORDER BY mordbapr.id DESC
-							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-						) AS list
-						GROUP BY :keys
-					',
-					'mysql' => '
-						SELECT :keys, SUM("val") AS "value"
+						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
 							FROM "mshop_order_base_product" AS mordbapr
@@ -528,7 +472,7 @@ return array(
 				'attribute' => array(
 					'aggregate' => array(
 						'ansi' => '
-							SELECT :keys, COUNT("val") AS "value"
+							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :val AS "val"
 								FROM "mshop_order_base_service_attr" AS mordbaseat
@@ -541,7 +485,7 @@ return array(
 							GROUP BY :keys
 						',
 						'mysql' => '
-							SELECT :keys, COUNT("val") AS "value"
+							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :val AS "val"
 								FROM "mshop_order_base_service_attr" AS mordbaseat
@@ -629,7 +573,7 @@ return array(
 				),
 				'aggregate' => array(
 					'ansi' => '
-						SELECT :keys, COUNT("val") AS "value"
+						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
 							FROM "mshop_order_base_service" AS mordbase
@@ -642,63 +586,7 @@ return array(
 						GROUP BY :keys
 					',
 					'mysql' => '
-						SELECT :keys, COUNT("val") AS "value"
-						FROM (
-							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_service" AS mordbase
-							:joins
-							WHERE :cond
-							GROUP BY mordbase.id, :cols, :val
-							ORDER BY mordbase.id DESC
-							LIMIT :size OFFSET :start
-						) AS list
-						GROUP BY :keys
-					'
-				),
-				'aggregateavg' => array(
-					'ansi' => '
-						SELECT :keys, AVG("val") AS "value"
-						FROM (
-							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_service" AS mordbase
-							:joins
-							WHERE :cond
-							GROUP BY mordbase.id, :cols, :val
-							ORDER BY mordbase.id DESC
-							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-						) AS list
-						GROUP BY :keys
-					',
-					'mysql' => '
-						SELECT :keys, AVG("val") AS "value"
-						FROM (
-							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_service" AS mordbase
-							:joins
-							WHERE :cond
-							GROUP BY mordbase.id, :cols, :val
-							ORDER BY mordbase.id DESC
-							LIMIT :size OFFSET :start
-						) AS list
-						GROUP BY :keys
-					'
-				),
-				'aggregatesum' => array(
-					'ansi' => '
-						SELECT :keys, SUM("val") AS "value"
-						FROM (
-							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_service" AS mordbase
-							:joins
-							WHERE :cond
-							GROUP BY mordbase.id, :cols, :val
-							ORDER BY mordbase.id DESC
-							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-						) AS list
-						GROUP BY :keys
-					',
-					'mysql' => '
-						SELECT :keys, SUM("val") AS "value"
+						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
 							FROM "mshop_order_base_service" AS mordbase
@@ -803,7 +691,7 @@ return array(
 			),
 			'aggregate' => array(
 				'ansi' => '
-					SELECT :keys, COUNT("val") AS "value"
+					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
 						FROM "mshop_order_base" AS mordba
@@ -816,63 +704,7 @@ return array(
 					GROUP BY :keys
 				',
 				'mysql' => '
-					SELECT :keys, COUNT("val") AS "value"
-					FROM (
-						SELECT :acols, :val AS "val"
-						FROM "mshop_order_base" AS mordba
-						:joins
-						WHERE :cond
-						GROUP BY mordba.id, :cols, :val
-						ORDER BY mordba.id DESC
-						LIMIT :size OFFSET :start
-					) AS list
-					GROUP BY :keys
-				'
-			),
-			'aggregateavg' => array(
-				'ansi' => '
-					SELECT :keys, AVG("val") AS "value"
-					FROM (
-						SELECT :acols, :val AS "val"
-						FROM "mshop_order_base" AS mordba
-						:joins
-						WHERE :cond
-						GROUP BY mordba.id, :cols, :val
-						ORDER BY mordba.id DESC
-						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-					) AS list
-					GROUP BY :keys
-				',
-				'mysql' => '
-					SELECT :keys, AVG("val") AS "value"
-					FROM (
-						SELECT :acols, :val AS "val"
-						FROM "mshop_order_base" AS mordba
-						:joins
-						WHERE :cond
-						GROUP BY mordba.id, :cols, :val
-						ORDER BY mordba.id DESC
-						LIMIT :size OFFSET :start
-					) AS list
-					GROUP BY :keys
-				'
-			),
-			'aggregatesum' => array(
-				'ansi' => '
-					SELECT :keys, SUM("val") AS "value"
-					FROM (
-						SELECT :acols, :val AS "val"
-						FROM "mshop_order_base" AS mordba
-						:joins
-						WHERE :cond
-						GROUP BY mordba.id, :cols, :val
-						ORDER BY mordba.id DESC
-						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-					) AS list
-					GROUP BY :keys
-				',
-				'mysql' => '
-					SELECT :keys, SUM("val") AS "value"
+					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
 						FROM "mshop_order_base" AS mordba
@@ -973,7 +805,7 @@ return array(
 		'status' => array(
 			'aggregate' => array(
 				'ansi' => '
-					SELECT :keys, COUNT("val") AS "value"
+					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
 						FROM "mshop_order_status" AS mordst
@@ -986,7 +818,7 @@ return array(
 					GROUP BY :keys
 				',
 				'mysql' => '
-					SELECT :keys, COUNT("val") AS "value"
+					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
 						FROM "mshop_order_status" AS mordst
@@ -1068,7 +900,7 @@ return array(
 		),
 		'aggregate' => array(
 			'ansi' => '
-				SELECT :keys, COUNT("val") AS "value"
+				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val"
 					FROM "mshop_order" AS mord
@@ -1081,63 +913,7 @@ return array(
 				GROUP BY :keys
 			',
 			'mysql' => '
-				SELECT :keys, COUNT("val") AS "value"
-				FROM (
-					SELECT :acols, :val AS "val"
-					FROM "mshop_order" AS mord
-					:joins
-					WHERE :cond
-					GROUP BY mord.id, :cols, :val
-					ORDER BY mord.id DESC
-					LIMIT :size OFFSET :start
-				) AS list
-				GROUP BY :keys
-			'
-		),
-		'aggregateavg' => array(
-			'ansi' => '
-				SELECT :keys, AVG("val") AS "value"
-				FROM (
-					SELECT :acols, :val AS "val"
-					FROM "mshop_order" AS mord
-					:joins
-					WHERE :cond
-					GROUP BY mord.id, :cols, :val
-					ORDER BY mord.id DESC
-					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-				) AS list
-				GROUP BY :keys
-			',
-			'mysql' => '
-				SELECT :keys, AVG("val") AS "value"
-				FROM (
-					SELECT :acols, :val AS "val"
-					FROM "mshop_order" AS mord
-					:joins
-					WHERE :cond
-					GROUP BY mord.id, :cols, :val
-					ORDER BY mord.id DESC
-					LIMIT :size OFFSET :start
-				) AS list
-				GROUP BY :keys
-			'
-		),
-		'aggregatesum' => array(
-			'ansi' => '
-				SELECT :keys, SUM("val") AS "value"
-				FROM (
-					SELECT :acols, :val AS "val"
-					FROM "mshop_order" AS mord
-					:joins
-					WHERE :cond
-					GROUP BY mord.id, :cols, :val
-					ORDER BY mord.id DESC
-					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
-				) AS list
-				GROUP BY :keys
-			',
-			'mysql' => '
-				SELECT :keys, SUM("val") AS "value"
+				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val"
 					FROM "mshop_order" AS mord

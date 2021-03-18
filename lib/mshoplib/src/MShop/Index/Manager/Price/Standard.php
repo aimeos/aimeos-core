@@ -40,6 +40,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'agg:index.price:value' => array(
+			'code' => 'agg:index.price:value()',
+			'internalcode' => 'mindpr."value"',
+			'label' => 'Aggregate product price value, parameter(<currency ID>)',
+			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'sort:index.price:value' => array(
 			'code' => 'sort:index.price:value()',
 			'internalcode' => 'mindpr."value"',
@@ -82,7 +90,7 @@ class Standard
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
-		return $this->aggregateBase( $search, $key, 'mshop/index/manager/aggregate' . $type, [], $value );
+		return $this->aggregateBase( $search, $key, 'mshop/index/manager/aggregate', [], $value, $type );
 	}
 
 

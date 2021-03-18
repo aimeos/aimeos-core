@@ -369,8 +369,8 @@ class Standard
 		 * @see mshop/order/manager/base/product/aggregate/ansi
 		 */
 
-		$cfgkey = 'mshop/order/manager/base/product/aggregate' . $type;
-		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base.product' ), $value );
+		$cfgkey = 'mshop/order/manager/base/product/aggregate';
+		return $this->aggregateBase( $search, $key, $cfgkey, ['order.base.product'], $value, $type );
 	}
 
 

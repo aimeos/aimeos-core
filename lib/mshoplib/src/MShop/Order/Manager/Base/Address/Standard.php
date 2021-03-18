@@ -320,8 +320,8 @@ class Standard
 		 * @see mshop/order/manager/base/address/search/ansi
 		 * @see mshop/order/manager/base/address/count/ansi
 		 */
-		$cfgkey = 'mshop/order/manager/base/address/aggregate' . $type;
-		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base.address' ), $value );
+		$cfgkey = 'mshop/order/manager/base/address/aggregate';
+		return $this->aggregateBase( $search, $key, $cfgkey, ['order.base.address'], $value, $type );
 	}
 
 

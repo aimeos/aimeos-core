@@ -162,8 +162,8 @@ class Standard
 		 * @see mshop/order/manager/base/coupon/search/ansi
 		 * @see mshop/order/manager/base/coupon/count/ansi
 		 */
-		$cfgkey = 'mshop/order/manager/base/coupon/aggregate' . $type;
-		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base.coupon' ), $value );
+		$cfgkey = 'mshop/order/manager/base/coupon/aggregate';
+		return $this->aggregateBase( $search, $key, $cfgkey, ['order.base.coupon'], $value, $type );
 	}
 
 

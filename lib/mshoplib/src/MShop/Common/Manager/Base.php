@@ -230,11 +230,12 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $cfgPath Configuration key for the SQL statement
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
 	 * @param string|null $value Search key for aggregating the value column
+	 * @param string|null $type Type of aggregation, e.g.  "sum", "min", "max" or NULL for "count"
 	 * @return \Aimeos\Map List of ID values as key and the number of counted products as value
 	 * @todo 2018.01 Reorder Parameter list
 	 */
 	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, $keys, string $cfgPath,
-		array $required = [], string $value = null ) : \Aimeos\Map
+		array $required = [], string $value = null, string $type = null ) : \Aimeos\Map
 	{
 		$keys = (array) $keys;
 
@@ -259,7 +260,11 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 				throw new \Aimeos\MShop\Exception( sprintf( 'No search keys available' ) );
 			}
 
-			if( $value !== null && !isset( $attrList[$value] ) ) {
+			if( ( $pos = strpos( $valkey = $value, '(' ) ) !== false ) {
+				$value = substr( $value, 0, $pos  );
+			}
+
+			if( !isset( $attrList[$value] ) ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Unknown search key "%1$s"', $value ) );
 			}
 
@@ -275,13 +280,14 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 				/** @todo Required to get the joins, but there should be a better way */
 				$search->add( [$string => null], '!=' );
 			}
-			$search->add( [$value => null], '!=' );
+			$search->add( [$valkey => null], '!=' );
 
 			$sql = $this->getSqlConfig( $cfgPath );
 			$sql = str_replace( ':cols', join( ', ', $cols ), $sql );
 			$sql = str_replace( ':acols', join( ', ', $acols ), $sql );
 			$sql = str_replace( ':keys', '"' . join( '", "', $keys ) . '"', $sql );
 			$sql = str_replace( ':val', $attrList[$value]->getInternalCode(), $sql );
+			$sql = str_replace( ':type', $type ?: 'count', $sql );
 
 			$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
 

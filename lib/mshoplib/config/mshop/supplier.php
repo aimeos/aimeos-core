@@ -212,7 +212,7 @@ return array(
 			),
 			'aggregate' => array(
 				'ansi' => '
-					SELECT :keys, COUNT("val") AS "value"
+					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
 						FROM "mshop_supplier_list" AS msupli
@@ -225,7 +225,7 @@ return array(
 					GROUP BY :keys
 				',
 				'mysql' => '
-					SELECT :keys, COUNT("val") AS "value"
+					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
 						FROM "mshop_supplier_list" AS msupli

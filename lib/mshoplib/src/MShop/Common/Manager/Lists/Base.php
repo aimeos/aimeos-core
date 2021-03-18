@@ -65,8 +65,8 @@ abstract class Base
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
-		$required = array( trim( $this->prefix, '.' ) );
-		return $this->aggregateBase( $search, $key, $this->getConfigPath() . 'aggregate' . $type, $required, $value );
+		$required = [trim( $this->prefix, '.' )];
+		return $this->aggregateBase( $search, $key, $this->getConfigPath() . 'aggregate', $required, $value, $type );
 	}
 
 

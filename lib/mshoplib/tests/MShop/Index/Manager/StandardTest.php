@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter( true );
 		$search->add( $search->is( $search->make( 'index.price:value', ['EUR'] ), '!=', null ) );
 
-		$result = $this->object->aggregate( $search, 'product.status', null, 'max' )->max();
+		$result = $this->object->aggregate( $search, 'product.status', 'agg:index.price:value("EUR")', 'max' )->max();
 
 		$this->assertEquals( 600, $result );
 	}
@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter( true );
 		$search->add( $search->is( $search->make( 'index.price:value', ['EUR'] ), '!=', null ) );
 
-		$result = $this->object->aggregate( $search, 'product.status', null, 'min' )->min();
+		$result = $this->object->aggregate( $search, 'product.status', 'agg:index.price:value("EUR")', 'min' )->min();
 
 		$this->assertEquals( 12, $result );
 	}

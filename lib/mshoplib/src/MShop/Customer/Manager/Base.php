@@ -120,8 +120,8 @@ abstract class Base
 		 * @see mshop/customer/manager/count/ansi
 		 */
 
-		$cfgkey = 'mshop/customer/manager/aggregate' . $type;
-		return $this->aggregateBase( $search, $key, $cfgkey, ['customer'], $value );
+		$cfgkey = 'mshop/customer/manager/aggregate';
+		return $this->aggregateBase( $search, $key, $cfgkey, ['customer'], $value, $type );
 	}
 
 

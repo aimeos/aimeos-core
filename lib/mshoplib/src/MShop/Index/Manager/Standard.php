@@ -82,7 +82,7 @@ class Standard
 		 * @see mshop/index/manager/optimize/ansi
 		 * @see mshop/index/manager/search/ansi
 		 */
-		return $this->aggregateBase( $search, $key, 'mshop/index/manager/aggregate' . $type, ['product'], $value );
+		return $this->aggregateBase( $search, $key, 'mshop/index/manager/aggregate', ['product'], $value, $type );
 	}
 
 
