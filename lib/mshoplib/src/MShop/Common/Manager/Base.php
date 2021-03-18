@@ -261,7 +261,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			}
 
 			if( ( $pos = strpos( $valkey = $value, '(' ) ) !== false ) {
-				$value = substr( $value, 0, $pos  );
+				$value = substr( $value, 0, $pos );
 			}
 
 			if( !isset( $attrList[$value] ) ) {
