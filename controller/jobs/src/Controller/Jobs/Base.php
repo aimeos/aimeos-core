@@ -132,7 +132,7 @@ abstract class Base
 		 * @see controller/jobs/to-email
 		 */
 		if( $from = $config->get( 'controller/jobs/from-email' ) ) {
-			$message->setSender( $from );
+			$message->setSender( $from )->addFrom( $from );
 		}
 
 		$message->setSubject( $subject )->setBody( $body )->send();
