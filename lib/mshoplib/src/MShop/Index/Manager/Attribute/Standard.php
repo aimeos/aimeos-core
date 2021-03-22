@@ -31,6 +31,15 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'index.attribute.type' => array(
+			'code' => 'index.attribute.type',
+			'internalcode' => 'mindat."type"',
+			'internaldeps' => array( 'LEFT JOIN "mshop_index_attribute" AS mindat ON mindat."prodid" = mpro."id"' ),
+			'label' => 'Product index attribute type',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'index.attribute:allof' => array(
 			'code' => 'index.attribute:allof()',
 			'internalcode' => '( SELECT mpro_allof."id" FROM mshop_product AS mpro_allof
