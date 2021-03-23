@@ -53,7 +53,6 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msrul_id' );
-			$table->addUniqueIndex( array( 'siteid', 'type', 'provider' ), 'unq_msrul_sid_ty_prov' );
 			$table->addIndex( array( 'siteid', 'provider' ), 'idx_msrul_sid_prov' );
 			$table->addIndex( array( 'siteid', 'status' ), 'idx_msrul_sid_status' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_msrul_sid_label' );
