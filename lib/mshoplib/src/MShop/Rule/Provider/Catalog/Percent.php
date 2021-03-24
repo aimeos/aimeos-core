@@ -56,7 +56,7 @@ class Percent
 	 */
 	public function getConfigBE() : array
 	{
-		return $this->getConfigItems( $this->beConfig );
+		return array_merge( parent::getConfigBE(), $this->getConfigItems( $this->beConfig ) );
 	}
 
 

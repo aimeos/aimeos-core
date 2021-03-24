@@ -35,7 +35,8 @@ class PercentTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->object->checkConfigBE( ['percent' => '10'] );
 
-		$this->assertGreaterThanOrEqual( 1, count( $result ) );
+		$this->assertGreaterThanOrEqual( 2, count( $result ) );
+		$this->assertEquals( null, $result['last-rule'] );
 		$this->assertEquals( null, $result['percent'] );
 	}
 
@@ -44,7 +45,8 @@ class PercentTest extends \PHPUnit\Framework\TestCase
 	{
 		$list = $this->object->getConfigBE();
 
-		$this->assertGreaterThanOrEqual( 1, count( $list ) );
+		$this->assertGreaterThanOrEqual( 2, count( $list ) );
+		$this->assertArrayHasKey( 'last-rule', $list );
 		$this->assertArrayHasKey( 'percent', $list );
 
 		foreach( $list as $entry ) {
