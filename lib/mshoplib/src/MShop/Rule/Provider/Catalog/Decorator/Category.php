@@ -72,7 +72,7 @@ class Category
 	 */
 	public function getConfigBE() : array
 	{
-		return array_merge( parent::getConfigBE(), $this->getConfigItems( $this->beConfig ) );
+		return $this->getConfigItems( $this->beConfig );
 	}
 
 
