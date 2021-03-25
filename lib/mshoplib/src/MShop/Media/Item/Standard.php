@@ -47,6 +47,10 @@ class Standard
 	public function __construct( array $values = [], array $listItems = [],
 		array $refItems = [], array $propItems = [] )
 	{
+		if( isset( $values['media.preview'] ) && !isset( $values['media.previews'] ) ) {
+			$values['media.previews'] = [1 => $values['media.preview']];
+		}
+
 		parent::__construct( 'media.', $values );
 
 		$this->langid = ( isset( $values['.languageid'] ) ? $values['.languageid'] : null );
