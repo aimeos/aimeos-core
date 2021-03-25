@@ -71,6 +71,7 @@ return array(
 			$table->addUniqueIndex( array( 'siteid' ), 'unq_mslocsi_siteid' );
 			$table->addIndex( array( 'nleft', 'nright', 'level', 'parentid' ), 'idx_mslocsi_nlt_nrt_lvl_pid' );
 			$table->addIndex( array( 'level', 'status' ), 'idx_mslocsi_level_status' );
+			$table->addIndex( array( 'label' ), 'idx_mslocsi_label' );
 
 			return $schema;
 		},
