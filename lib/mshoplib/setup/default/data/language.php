@@ -43,7 +43,7 @@ return array(
 		'de' => array( 'id' => 'de', 'label' => 'German', 'status' => 1 ),
 		'dv' => array( 'id' => 'dv', 'label' => 'Dhivehi', 'status' => 0 ),
 		'dz' => array( 'id' => 'dz', 'label' => 'Dzongkha', 'status' => 0 ),
-		'ee' => array( 'id' => 'ee', 'label' => 'Estonian', 'status' => 0 ),
+		'ee' => array( 'id' => 'ee', 'label' => 'Ewe', 'status' => 0 ),
 		'el' => array( 'id' => 'el', 'label' => 'Greek', 'status' => 0 ),
 		'en' => array( 'id' => 'en', 'label' => 'English', 'status' => 1 ),
 		'eo' => array( 'id' => 'eo', 'label' => 'Esperanto', 'status' => 0 ),
