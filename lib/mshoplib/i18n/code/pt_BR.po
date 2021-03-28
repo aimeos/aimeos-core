@@ -7,14 +7,15 @@
 # Translators:
 # Translators:
 # Translators:
+# Italo Thales <italo.thales@urca.br>, 2021
 # b5fdd37cec45d8078af7e530465bb050, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2018-08-14 11:51+0000\n"
-"Last-Translator: Bruno Rodrigues <brunojti@gmail.com>\n"
+"PO-Revision-Date: 2021-03-19 17:22+0000\n"
+"Last-Translator: Italo Thales <italo.thales@urca.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/aimeos/aimeos-core/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,7 +73,7 @@ msgstr "pagamento"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr ""
+msgstr "expirado"
 
 #. Subscription reason code
 msgid "reason:1"

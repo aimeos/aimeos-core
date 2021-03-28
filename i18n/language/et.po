@@ -8,13 +8,14 @@
 # Translators:
 # Translators:
 # Alex Kay <alex110504@gmail.com>, 2017
+# Ranko Murumets <ranko@murumets.eu>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2017-09-23 13:28+0000\n"
-"Last-Translator: Alex Kay <alex110504@gmail.com>\n"
+"PO-Revision-Date: 2021-03-27 11:11+0000\n"
+"Last-Translator: Ranko Murumets <ranko@murumets.eu>\n"
 "Language-Team: Estonian (http://www.transifex.com/aimeos/aimeos-core/language/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -119,7 +120,7 @@ msgid "da"
 msgstr ""
 
 msgid "de"
-msgstr ""
+msgstr "Saksa"
 
 msgid "dv"
 msgstr ""
@@ -140,10 +141,10 @@ msgid "eo"
 msgstr ""
 
 msgid "es"
-msgstr ""
+msgstr "Hispaania"
 
 msgid "et"
-msgstr ""
+msgstr "Eesti"
 
 msgid "eu"
 msgstr ""
@@ -155,7 +156,7 @@ msgid "ff"
 msgstr ""
 
 msgid "fi"
-msgstr ""
+msgstr "Soome"
 
 msgid "fj"
 msgstr ""
@@ -164,13 +165,13 @@ msgid "fo"
 msgstr ""
 
 msgid "fr"
-msgstr ""
+msgstr "Prantsuse"
 
 msgid "fy"
 msgstr ""
 
 msgid "ga"
-msgstr ""
+msgstr "Iiri"
 
 msgid "gd"
 msgstr ""
@@ -314,7 +315,7 @@ msgid "lo"
 msgstr ""
 
 msgid "lt"
-msgstr ""
+msgstr "Leedu"
 
 msgid "lu"
 msgstr ""
@@ -431,7 +432,7 @@ msgid "ro"
 msgstr ""
 
 msgid "ru"
-msgstr ""
+msgstr "Vene"
 
 msgid "rw"
 msgstr ""
