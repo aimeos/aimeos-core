@@ -60,7 +60,7 @@ return [
 		]
 	], [
 		'type' => 'order', 'label' => 'Country and state tax rates',
-		'provider' => 'Taxrate', 'position' => 90, 'status' => 0,
+		'provider' => 'Taxrates', 'position' => 90, 'status' => 0,
 		'config' => [
 			'country-taxrates' => ['US' => '5.00', 'AT' => '20.00'],
 			'state-taxrates' => ['CA' =>'6.25']
