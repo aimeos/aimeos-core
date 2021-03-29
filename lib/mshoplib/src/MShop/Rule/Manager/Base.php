@@ -20,6 +20,44 @@ namespace Aimeos\MShop\Rule\Manager;
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
+	private $rules = [];
+
+
+	/**
+	 * Applies the rules for modifying items dynamically
+	 *
+	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface $items Item or list of items
+	 * @param string $type Type of rules to apply to the items (e.g. "basket" or "catalog")
+	 * @return \Aimeos\Map|\Aimeos\MShop\Common\Item\Iface Modified item or list of items
+	 */
+	public function apply( $items, string $type = 'catalog' )
+	{
+		if( !isset( $this->rules[$type] ) )
+		{
+			$manager = $this->getObject();
+
+			$filter = $manager->filter( true )->add( ['rule.type' => $type] )
+				->order( 'rule.position' )->slice( 0, 10000 );
+
+			foreach( $manager->search( $filter ) as $id => $ruleItem ) {
+				$this->rules[$type][$id] = $manager->getProvider( $ruleItem, $type );
+			}
+		}
+
+		foreach( $this->rules[$type] as $rule )
+		{
+			foreach( map( $items ) as $item )
+			{
+				if( $rule->apply( $item ) ) {
+					return $items;
+				}
+			}
+		}
+
+		return $items;
+	}
+
+
 	/**
 	 * Returns the rule provider which is responsible for the rule item.
 	 *
