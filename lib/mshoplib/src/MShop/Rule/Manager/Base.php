@@ -34,6 +34,7 @@ abstract class Base
 	{
 		if( !isset( $this->rules[$type] ) )
 		{
+			$this->rules[$type] = [];
 			$manager = $this->getObject();
 
 			$filter = $manager->filter( true )->add( ['rule.type' => $type] )
