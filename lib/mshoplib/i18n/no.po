@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-02 15:52+0100\n"
-"PO-Revision-Date: 2020-12-02 14:52+0000\n"
+"POT-Creation-Date: 2020-10-05 09:22+0200\n"
+"PO-Revision-Date: 2021-04-01 16:10+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Norwegian (http://www.transifex.com/aimeos/aimeos-core/language/no/)\n"
 "MIME-Version: 1.0\n"
@@ -353,8 +353,7 @@ msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr ""
 
 #, php-format
-msgid ""
-"Item could not be saved using method saveItem(). Item ID not available."
+msgid "Item could not be saved using method save(). Item ID not available."
 msgstr ""
 
 #, php-format
@@ -451,7 +450,7 @@ msgstr ""
 
 #, php-format
 msgid ""
-"Newly created site can not be saved using method \"saveItem()\". Try using "
+"Newly created site can not be saved using method \"save()\". Try using "
 "method \"insertItem()\" instead."
 msgstr ""
 

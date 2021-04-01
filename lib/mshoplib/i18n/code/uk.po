@@ -7,12 +7,13 @@
 # Translators:
 # Translators:
 # Translators:
+# Oleksandr Kropyvko <akropivko@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2019-04-02 13:24+0000\n"
+"PO-Revision-Date: 2021-04-01 16:11+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Ukrainian (http://www.transifex.com/aimeos/aimeos-core/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -23,176 +24,180 @@ msgstr ""
 
 #. Item status
 msgid "status:-2"
-msgstr "Archived"
+msgstr "статус: архів"
 
 #. Item status
 msgid "status:-1"
-msgstr "Review"
+msgstr "статус: розгляд"
 
 #. Item status
 msgid "status:0"
-msgstr "Disabled"
+msgstr "статус: вимкнено"
 
 #. Item status
 msgid "status:1"
-msgstr "Enabled"
+msgstr "статус: увімкнено"
 
 #. Address salutation
 msgid "company"
-msgstr "Company"
+msgstr "Компанія"
 
 #. Address salutation
 msgid "mr"
-msgstr "Mr"
+msgstr "Шановний"
+
+#. Address salutation
+msgid "ms"
+msgstr ""
 
 #. Address salutation
 msgid "mrs"
-msgstr "Mrs"
+msgstr "Шановна"
 
 #. Address salutation
 msgid "miss"
-msgstr "Miss"
+msgstr "Шановна"
 
 #. Order type value
 msgid "order:repeat"
-msgstr "repeated"
+msgstr "замовлення:повторне"
 
 #. Order type value
 msgid "order:web"
-msgstr "internet"
+msgstr "замовлення:інтернет"
 
 #. Order type value
 msgid "order:phone"
-msgstr "telephone"
+msgstr "замовлення:телефон"
 
 #. Subscription reason code
 msgid "reason:-1"
-msgstr "payment"
+msgstr "оплата"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr "expired"
+msgstr "закінчився термін дії"
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr "cancelled"
+msgstr "скасовано"
 
 #. Payment status value
 msgid "pay:-1"
-msgstr "unfinished"
+msgstr "незавершений"
 
 #. Payment status value
 msgid "pay:0"
-msgstr "deleted"
+msgstr "видалений"
 
 #. Payment status value
 msgid "pay:1"
-msgstr "canceled"
+msgstr "скасований"
 
 #. Payment status value
 msgid "pay:2"
-msgstr "refused"
+msgstr "відхилений"
 
 #. Payment status value
 msgid "pay:3"
-msgstr "refunded"
+msgstr "відшкодований"
 
 #. Payment status value
 msgid "pay:4"
-msgstr "pending"
+msgstr "в очікуванні"
 
 #. Payment status value
 msgid "pay:5"
-msgstr "authorized"
+msgstr "авторизований"
 
 #. Payment status value
 msgid "pay:6"
-msgstr "received"
+msgstr "отриманий"
 
 #. Delivery status value
 msgid "stat:-1"
-msgstr "unfinished"
+msgstr "не завершений"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr "deleted"
+msgstr "видалений"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr "pending"
+msgstr "в очікуванні"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr "in progress"
+msgstr "в обробці"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr "dispatched"
+msgstr "відправлений"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr "delivered"
+msgstr "доставлений"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr "lost"
+msgstr "втрачений"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr "refused"
+msgstr "відхилений"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr "returned"
+msgstr "повернений"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr ""
+msgstr "Адреса для оплати недоступна"
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr ""
+msgstr "Адреса доставки недоступна"
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr ""
+msgstr "Платіжна адреса не дозволена"
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr ""
+msgstr "Адреса доставки не дозволена"
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr ""
+msgstr "Платіжний сервіс недоступний"
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr ""
+msgstr "Сервіс доставки недоступний"
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr ""
+msgstr "Платіжний сервіс не дозволяється"
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr ""
+msgstr "Сервіс доставки не дозволяється"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr ""
+msgstr "Товар не існує"
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr ""
+msgstr "Статус продукту вимкнено"
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr ""
+msgstr "Продукт поза термінами"
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr ""
+msgstr "Ціна товару змінилася"
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr ""
+msgstr "Товар відсутній на складі"

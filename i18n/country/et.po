@@ -8,14 +8,14 @@
 # Translators:
 # Translators:
 # Alex Kay <alex110504@gmail.com>, 2017
-# Ranko Murumets <ranko@murumets.eu>, 2021
+# ranx2k <ranko@murumets.eu>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2021-03-27 11:09+0000\n"
-"Last-Translator: Ranko Murumets <ranko@murumets.eu>\n"
+"Last-Translator: ranx2k <ranko@murumets.eu>\n"
 "Language-Team: Estonian (http://www.transifex.com/aimeos/aimeos-core/language/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
