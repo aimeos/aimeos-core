@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 09:22+0200\n"
+"POT-Creation-Date: 2021-04-01 18:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,6 +88,10 @@ msgstr "Address search configuration not available"
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr "Address type \"%1$s\" not within allowed range"
+
+#, php-format
+msgid "At least one key is required for aggregation"
+msgstr ""
 
 #, php-format
 msgid "Basket empty"
@@ -439,6 +443,10 @@ msgstr "Missing configuration \"%1$s\""
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "New ID \"%1$s\" for item differs from old ID \"%2$s\""
+
+#, php-format
+msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
+msgstr ""
 
 #, php-format
 msgid "Newly created site can not be saved using method \"save()\". Try using method \"insertItem()\" instead."

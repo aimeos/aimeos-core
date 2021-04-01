@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-01 17:23+0200\n"
+"POT-Creation-Date: 2021-04-01 18:35+0200\n"
 "PO-Revision-Date: 2018-09-27 06:33+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Vietnamese (https://www.transifex.com/aimeos/aimeos-core/language/vi/)\n"
@@ -87,6 +87,10 @@ msgstr ""
 
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
+msgstr ""
+
+#, php-format
+msgid "At least one key is required for aggregation"
 msgstr ""
 
 #, php-format
@@ -438,6 +442,10 @@ msgstr ""
 
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
 msgstr ""
 
 #, php-format

@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
-# 
+#
+#
 # Translators:
 # Translators:
 # Translators:
@@ -16,31 +16,35 @@ msgstr ""
 "PO-Revision-Date: 2018-08-14 11:51+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/aimeos/aimeos-core/language/zh_CN/)\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#. Item status
-msgid "status:-2"
-msgstr ""
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "无送货地址"
 
-#. Item status
-msgid "status:-1"
-msgstr ""
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "插件错误。送货地址有误"
 
-#. Item status
-msgid "status:0"
-msgstr ""
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr "无帐单地址"
 
-#. Item status
-msgid "status:1"
-msgstr ""
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr "插件错误。账单地址有误"
 
 #. Address salutation
 msgid "company"
 msgstr "公司"
+
+#. Address salutation
+msgid "miss"
+msgstr "女士"
 
 #. Address salutation
 msgid "mr"
@@ -51,8 +55,13 @@ msgid "mrs"
 msgstr "女士"
 
 #. Address salutation
-msgid "miss"
+#, fuzzy
+msgid "ms"
 msgstr "女士"
+
+#. Order type value
+msgid "order:phone"
+msgstr "通过电话"
 
 #. Order type value
 msgid "order:repeat"
@@ -61,22 +70,6 @@ msgstr "反复"
 #. Order type value
 msgid "order:web"
 msgstr "通过因特网"
-
-#. Order type value
-msgid "order:phone"
-msgstr "通过电话"
-
-#. Subscription reason code
-msgid "reason:-1"
-msgstr "付款"
-
-#. Subscription reason code
-msgid "reason:0"
-msgstr ""
-
-#. Subscription reason code
-msgid "reason:1"
-msgstr "取消"
 
 #. Payment status value
 msgid "pay:-1"
@@ -109,6 +102,54 @@ msgstr "已授权"
 #. Payment status value
 msgid "pay:6"
 msgstr "已收到"
+
+#. ProductGone plugin error: Product doesn't exists
+msgid "product.gone.notexist"
+msgstr "对不起，部分产品不存在了。请从购物车中删除，继续"
+
+#. ProductGone plugin error: Product status disabled
+msgid "product.gone.status"
+msgstr "对不起，部分产品被禁用。请从购物车中删除，继续"
+
+#. ProductGone plugin error: Product out of timeframe
+msgid "product.gone.timeframe"
+msgstr "对不起，部分产品暂时无法选择。请从购物车中删除，继续"
+
+#. ProductPrice plugin error: Product price changed
+msgid "product.price.changed"
+msgstr "部分产品价格自动被更新"
+
+#. ProductStock plugin error: Product out of stock
+msgid "product.stock.notenough"
+msgstr "对不起，部分产品暂时缺货。请从购物车中删除，继续"
+
+#. Subscription reason code
+msgid "reason:-1"
+msgstr "付款"
+
+#. Subscription reason code
+msgid "reason:0"
+msgstr ""
+
+#. Subscription reason code
+msgid "reason:1"
+msgstr "取消"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "送货服务不可用"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "送货选项不可用"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "支付服务不可用"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "服务选项不可用"
 
 #. Delivery status value
 msgid "stat:-1"
@@ -146,54 +187,18 @@ msgstr "被拒收"
 msgid "stat:7"
 msgstr "被退货"
 
-#. Address plugin error: Payment address not available
-msgid "address.payment.available.none"
-msgstr "无帐单地址"
+#. Item status
+msgid "status:-1"
+msgstr ""
 
-#. Address plugin error: Delivery address not available
-msgid "address.delivery.available.none"
-msgstr "无送货地址"
+#. Item status
+msgid "status:-2"
+msgstr ""
 
-#. Address plugin error: Payment address not allowed
-msgid "address.payment.available.notallowed"
-msgstr "插件错误。账单地址有误"
+#. Item status
+msgid "status:0"
+msgstr ""
 
-#. Address plugin error: Delivery address not allowed
-msgid "address.delivery.available.notallowed"
-msgstr "插件错误。送货地址有误"
-
-#. Service plugin error: Payment service not available
-msgid "service.payment.available.none"
-msgstr "支付服务不可用"
-
-#. Service plugin error: Delivery service not available
-msgid "service.delivery.available.none"
-msgstr "送货服务不可用"
-
-#. Service plugin error: Payment service not allowed
-msgid "service.payment.available.notallowed"
-msgstr "服务选项不可用"
-
-#. Service plugin error: Delivery service not allowed
-msgid "service.delivery.available.notallowed"
-msgstr "送货选项不可用"
-
-#. ProductGone plugin error: Product doesn't exists
-msgid "product.gone.notexist"
-msgstr "对不起，部分产品不存在了。请从购物车中删除，继续"
-
-#. ProductGone plugin error: Product status disabled
-msgid "product.gone.status"
-msgstr "对不起，部分产品被禁用。请从购物车中删除，继续"
-
-#. ProductGone plugin error: Product out of timeframe
-msgid "product.gone.timeframe"
-msgstr "对不起，部分产品暂时无法选择。请从购物车中删除，继续"
-
-#. ProductPrice plugin error: Product price changed
-msgid "product.price.changed"
-msgstr "部分产品价格自动被更新"
-
-#. ProductStock plugin error: Product out of stock
-msgid "product.stock.notenough"
-msgstr "对不起，部分产品暂时缺货。请从购物车中删除，继续"
+#. Item status
+msgid "status:1"
+msgstr ""
