@@ -126,10 +126,10 @@ interface Iface
 	/**
 	 * Injects the outer object into the decorator stack
 	 *
-	 * @param \Aimeos\MShop\Plugin\Provider\Iface $object First object of the decorator stack
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for chaining method calls
+	 * @param \Aimeos\MShop\Service\Provider\Iface $object First object of the decorator stack
+	 * @return \Aimeos\MShop\Service\Provider\Iface Service object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object ) : \Aimeos\MShop\Plugin\Provider\Iface;
+	public function setObject( \Aimeos\MShop\Service\Provider\Iface $object ) : \Aimeos\MShop\Service\Provider\Iface;
 
 	/**
 	 * Looks for new update files and updates the orders for which status updates were received.

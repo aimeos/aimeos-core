@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Service\Provider\Decorator;
 abstract class Base
 	extends \Aimeos\MShop\Service\Provider\Base
 {
-	private $object;
+	private $provider;
 
 
 	/**
@@ -36,7 +36,7 @@ abstract class Base
 	{
 		parent::__construct( $context, $serviceItem );
 
-		$this->object = $provider;
+		$this->provider = $provider;
 	}
 
 
@@ -50,7 +50,7 @@ abstract class Base
 	 */
 	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		return $this->object->calcPrice( $basket );
+		return $this->provider->calcPrice( $basket );
 	}
 
 
@@ -63,7 +63,7 @@ abstract class Base
 	 */
 	public function checkConfigBE( array $attributes ) : array
 	{
-		return $this->object->checkConfigBE( $attributes );
+		return $this->provider->checkConfigBE( $attributes );
 	}
 
 
@@ -76,7 +76,7 @@ abstract class Base
 	 */
 	public function checkConfigFE( array $attributes ) : array
 	{
-		return $this->object->checkConfigFE( $attributes );
+		return $this->provider->checkConfigFE( $attributes );
 	}
 
 
@@ -88,7 +88,7 @@ abstract class Base
 	 */
 	public function getConfigBE() : array
 	{
-		return $this->object->getConfigBE();
+		return $this->provider->getConfigBE();
 	}
 
 
@@ -101,7 +101,7 @@ abstract class Base
 	 */
 	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : array
 	{
-		return $this->object->getConfigFE( $basket );
+		return $this->provider->getConfigFE( $basket );
 	}
 
 
@@ -123,7 +123,7 @@ abstract class Base
 	{
 		parent::injectGlobalConfigBE( $config );
 
-		$this->object->injectGlobalConfigBE( $config );
+		$this->provider->injectGlobalConfigBE( $config );
 		return $this;
 	}
 
@@ -137,7 +137,7 @@ abstract class Base
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
-		return $this->object->isAvailable( $basket );
+		return $this->provider->isAvailable( $basket );
 	}
 
 
@@ -149,7 +149,7 @@ abstract class Base
 	 */
 	public function isImplemented( int $what ) : bool
 	{
-		return $this->object->isImplemented( $what );
+		return $this->provider->isImplemented( $what );
 	}
 
 
@@ -161,7 +161,7 @@ abstract class Base
 	 */
 	public function cancel( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return $this->object->cancel( $order );
+		return $this->provider->cancel( $order );
 	}
 
 
@@ -173,7 +173,7 @@ abstract class Base
 	 */
 	public function capture( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return $this->object->capture( $order );
+		return $this->provider->capture( $order );
 	}
 
 
@@ -186,7 +186,7 @@ abstract class Base
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] ) : ?\Aimeos\MShop\Common\Helper\Form\Iface
 	{
-		return $this->object->process( $order, $params );
+		return $this->provider->process( $order, $params );
 	}
 
 
@@ -198,7 +198,7 @@ abstract class Base
 	 */
 	public function processBatch( iterable $orders ) : \Aimeos\Map
 	{
-		return $this->object->processBatch( $orders );
+		return $this->provider->processBatch( $orders );
 	}
 
 
@@ -210,7 +210,7 @@ abstract class Base
 	 */
 	public function refund( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return $this->object->refund( $order );
+		return $this->provider->refund( $order );
 	}
 
 
@@ -224,7 +224,7 @@ abstract class Base
 	 */
 	public function repay( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return $this->object->repay( $order );
+		return $this->provider->repay( $order );
 	}
 
 
@@ -236,7 +236,7 @@ abstract class Base
 	 */
 	public function query( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return $this->object->query( $order );
+		return $this->provider->query( $order );
 	}
 
 
@@ -250,7 +250,7 @@ abstract class Base
 	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem,
 		array $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
-		return $this->object->setConfigFE( $orderServiceItem, $attributes );
+		return $this->provider->setConfigFE( $orderServiceItem, $attributes );
 	}
 
 
@@ -263,7 +263,7 @@ abstract class Base
 	 */
 	public function updateAsync() : bool
 	{
-		return $this->object->updateAsync();
+		return $this->provider->updateAsync();
 	}
 
 
@@ -277,7 +277,7 @@ abstract class Base
 	public function updatePush( \Psr\Http\Message\ServerRequestInterface $request,
 		\Psr\Http\Message\ResponseInterface $response ) : \Psr\Http\Message\ResponseInterface
 	{
-		return $this->object->updatePush( $request, $response );
+		return $this->provider->updatePush( $request, $response );
 	}
 
 
@@ -292,7 +292,7 @@ abstract class Base
 	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request,
 		\Aimeos\MShop\Order\Item\Iface $orderItem ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return $this->object->updateSync( $request, $orderItem );
+		return $this->provider->updateSync( $request, $orderItem );
 	}
 
 
@@ -303,7 +303,7 @@ abstract class Base
 	 */
 	protected function getProvider() : \Aimeos\MShop\Service\Provider\Iface
 	{
-		return $this->object;
+		return $this->provider;
 	}
 
 
@@ -317,6 +317,6 @@ abstract class Base
 	 */
 	public function __call( string $name, array $param )
 	{
-		return @call_user_func_array( array( $this->object, $name ), $param );
+		return @call_user_func_array( array( $this->provider, $name ), $param );
 	}
 }
