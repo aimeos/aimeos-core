@@ -41,24 +41,6 @@ class Reduction
 			'default' => '0',
 			'required' => false,
 		),
-		'reduction.basket-value-min' => array(
-			'code' => 'reduction.basket-value-min',
-			'internalcode' => 'reduction.basket-value-min',
-			'label' => 'Apply decorator over this basket value',
-			'type' => 'map',
-			'internaltype' => 'array',
-			'default' => [],
-			'required' => false,
-		),
-		'reduction.basket-value-max' => array(
-			'code' => 'reduction.basket-value-max',
-			'internalcode' => 'reduction.basket-value-max',
-			'label' => 'Apply decorator up to this basket value',
-			'type' => 'map',
-			'internaltype' => 'array',
-			'default' => [],
-			'required' => false,
-		),
 	);
 
 
@@ -100,26 +82,13 @@ class Reduction
 	{
 		$price = $this->getProvider()->calcPrice( $basket );
 
-		$item = $this->getServiceItem();
-		$currency = $price->getCurrencyId();
-		$value = $basket->getPrice()->getValue();
-		$total = $value + $basket->getPrice()->getRebate();
-
-		if( ( $val = $item->getConfigValue( 'reduction.basket-value-min/' . $currency ) ) !== null && $val > $total ) {
-			return $price;
-		}
-
-		if( ( $val = $item->getConfigValue( 'reduction.basket-value-max/' . $currency ) ) !== null && $val < $total ) {
-			return $price;
-		}
-
-		if( $item->getConfigValue( 'reduction.include-costs' ) )
+		if( $this->getConfigValue( 'reduction.include-costs' ) )
 		{
-			$sub = $price->getCosts() * $item->getConfigValue( 'reduction.percent' ) / 100;
+			$sub = $price->getCosts() * $this->getConfigValue( 'reduction.percent' ) / 100;
 			$price->setCosts( $price->getCosts() - $sub )->setRebate( $price->getRebate() + $sub );
 		}
 
-		$sub = $value * $item->getConfigValue( 'reduction.percent' ) / 100;
+		$sub = $basket->getPrice()->getValue() * $this->getConfigValue( 'reduction.percent' ) / 100;
 		return $price->setValue( $price->getValue() - $sub )->setRebate( $price->getRebate() + $sub );
 	}
 }

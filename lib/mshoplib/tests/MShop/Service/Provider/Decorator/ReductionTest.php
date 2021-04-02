@@ -22,9 +22,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-
-		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
-		$this->servItem = $servManager->create()->setId( -1 );
+		$this->servItem = \Aimeos\MShop::create( $this->context, 'service' )->create()->setId( -1 );
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Reduction::class )
 			->disableOriginalConstructor()->getMock();
@@ -48,11 +46,9 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->getConfigBE();
 
-		$this->assertEquals( 4, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'reduction.percent', $result );
 		$this->assertArrayHasKey( 'reduction.include-costs', $result );
-		$this->assertArrayHasKey( 'reduction.basket-value-min', $result );
-		$this->assertArrayHasKey( 'reduction.basket-value-max', $result );
 	}
 
 
@@ -65,16 +61,12 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$attributes = array(
 			'reduction.percent' => '1.5',
 			'reduction.include-costs' => '1',
-			'reduction.basket-value-min' => array( 'EUR' => '10.00' ),
-			'reduction.basket-value-max' => array( 'EUR' => '100.00' ),
 		);
 		$result = $this->object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 4, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertNull( $result['reduction.percent'] );
 		$this->assertNull( $result['reduction.include-costs'] );
-		$this->assertNull( $result['reduction.basket-value-min'] );
-		$this->assertNull( $result['reduction.basket-value-max'] );
 	}
 
 
@@ -86,37 +78,9 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->checkConfigBE( [] );
 
-		$this->assertEquals( 4, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertIsString( $result['reduction.percent'] );
 		$this->assertNull( $result['reduction.include-costs'] );
-		$this->assertNull( $result['reduction.basket-value-min'] );
-		$this->assertNull( $result['reduction.basket-value-max'] );
-	}
-
-
-	public function testCheckConfigBEFailureBasketValueMin()
-	{
-		$this->mockProvider->expects( $this->once() )
-			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
-
-		$result = $this->object->checkConfigBE( array( 'reduction.basket-value-min' => '10.00' ) );
-
-		$this->assertEquals( 4, count( $result ) );
-		$this->assertIsString( $result['reduction.basket-value-min'] );
-	}
-
-
-	public function testCheckConfigBEFailureBasketValueMax()
-	{
-		$this->mockProvider->expects( $this->once() )
-			->method( 'checkConfigBE' )
-			->will( $this->returnValue( [] ) );
-
-		$result = $this->object->checkConfigBE( array( 'reduction.basket-value-max' => '100.00' ) );
-
-		$this->assertEquals( 4, count( $result ) );
-		$this->assertIsString( $result['reduction.basket-value-max'] );
 	}
 
 
@@ -133,70 +97,6 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( '18.00', $price->getValue() );
 		$this->assertEquals( '2.00', $price->getRebate() );
-	}
-
-
-	public function testCalcPriceMin()
-	{
-		$this->basket->addProduct( $this->getOrderProduct() );
-		$this->servItem->setConfig( ['reduction.percent' => 10, 'reduction.basket-value-min' => ['EUR' => '20.00']] );
-		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->create()->setValue( '20.00' );
-
-		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )
-			->will( $this->returnValue( $priceItem ) );
-
-		$price = $this->object->calcPrice( $this->basket );
-
-		$this->assertEquals( '18.00', $price->getValue() );
-		$this->assertEquals( '2.00', $price->getRebate() );
-	}
-
-
-	public function testCalcPriceMinNotReached()
-	{
-		$this->basket->addProduct( $this->getOrderProduct() );
-		$this->servItem->setConfig( ['reduction.percent' => 10, 'reduction.basket-value-min' => ['EUR' => '20.01']] );
-		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->create()->setValue( '20.00' );
-
-		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )
-			->will( $this->returnValue( $priceItem ) );
-
-		$price = $this->object->calcPrice( $this->basket );
-
-		$this->assertEquals( '20.00', $price->getValue() );
-		$this->assertEquals( '0.00', $price->getRebate() );
-	}
-
-
-	public function testCalcPriceMax()
-	{
-		$this->basket->addProduct( $this->getOrderProduct() );
-		$this->servItem->setConfig( ['reduction.percent' => 10, 'reduction.basket-value-max' => ['EUR' => '20.00']] );
-		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->create()->setValue( '20.00' );
-
-		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )
-			->will( $this->returnValue( $priceItem ) );
-
-		$price = $this->object->calcPrice( $this->basket );
-
-		$this->assertEquals( '18.00', $price->getValue() );
-		$this->assertEquals( '2.00', $price->getRebate() );
-	}
-
-
-	public function testCalcPriceMaxExceeded()
-	{
-		$this->basket->addProduct( $this->getOrderProduct() );
-		$this->servItem->setConfig( ['reduction.percent' => 10, 'reduction.basket-value-max' => ['EUR' => '19.99']] );
-		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->create()->setValue( '20.00' );
-
-		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )
-			->will( $this->returnValue( $priceItem ) );
-
-		$price = $this->object->calcPrice( $this->basket );
-
-		$this->assertEquals( '20.00', $price->getValue() );
-		$this->assertEquals( '0.00', $price->getRebate() );
 	}
 
 
