@@ -254,7 +254,6 @@ class Standard
 
 		$list['locale.site.code'] = $this->getCode();
 		$list['locale.site.label'] = $this->getLabel();
-		$list['locale.site.config'] = $this->getConfig();
 		$list['locale.site.status'] = $this->getStatus();
 		$list['locale.site.hasChildren'] = $this->hasChildren();
 
@@ -262,6 +261,7 @@ class Standard
 		{
 			$list['locale.site.level'] = $this->getLevel();
 			$list['locale.site.parentid'] = $this->getParentId();
+			$list['locale.site.config'] = $this->getConfig();
 		}
 
 		return $list;
