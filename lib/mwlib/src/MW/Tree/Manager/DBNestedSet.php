@@ -218,7 +218,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$id = $node->getId();
 
 		$numlevel = $this->getLevelFromConstant( $level );
-		$search = $condition ?? $this->createSearch();
+		$search = $condition ?: $this->createSearch();
 
 		$types = $this->getSearchTypes( $this->searchConfig );
 		$translations = $this->getSearchTranslations( $this->searchConfig );
