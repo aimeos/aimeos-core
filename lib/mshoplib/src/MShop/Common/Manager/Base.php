@@ -733,25 +733,21 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		int $sitelevel ) : \Aimeos\MW\Criteria\Expression\Iface
 	{
 		$sites = $this->context->getLocale()->getSites();
+		$cond = [$search->compare( '==', $name, '' )];
+
+		if( isset( $sites[Locale::SITE_ONE] ) ) {
+			$cond[] = $search->compare( '==', $name, $sites[Locale::SITE_ONE] );
+		}
 
 		if( isset( $sites[Locale::SITE_PATH] ) && $sitelevel & Locale::SITE_PATH ) {
-			$cond = $search->compare( '==', $name, $sites[Locale::SITE_PATH] );
-		} elseif( isset( $sites[Locale::SITE_ONE] ) ) {
-			$cond = $search->compare( '==', $name, $sites[Locale::SITE_ONE] );
-		} else {
-			$cond = $search->compare( '==', $name, '' );
+			$cond[] = $search->compare( '==', $name, $sites[Locale::SITE_PATH] );
 		}
 
-		if( isset( $sites[Locale::SITE_SUBTREE] ) )
-		{
-			if( $sitelevel & Locale::SITE_SUBTREE || $sitelevel & Locale::SITE_PATH ) {
-				$cond = $search->or( [$cond, $search->compare( '=~', $name, $sites[Locale::SITE_SUBTREE] )] );
-			} else {
-				$cond = $search->compare( '=~', $name, $sites[Locale::SITE_SUBTREE] );
-			}
+		if( isset( $sites[Locale::SITE_SUBTREE] ) && $sitelevel & Locale::SITE_SUBTREE ) {
+			$cond[] = $search->compare( '=~', $name, $sites[Locale::SITE_SUBTREE] );
 		}
 
-		return $search->or( [$cond, $search->compare( '==', $name, '' )] );
+		return $search->or( $cond );
 	}
 
 
