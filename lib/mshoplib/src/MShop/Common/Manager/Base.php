@@ -735,12 +735,10 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$sites = $this->context->getLocale()->getSites();
 		$cond = [$search->compare( '==', $name, '' )];
 
-		if( isset( $sites[Locale::SITE_ONE] ) ) {
-			$cond[] = $search->compare( '==', $name, $sites[Locale::SITE_ONE] );
-		}
-
 		if( isset( $sites[Locale::SITE_PATH] ) && $sitelevel & Locale::SITE_PATH ) {
 			$cond[] = $search->compare( '==', $name, $sites[Locale::SITE_PATH] );
+		} elseif( isset( $sites[Locale::SITE_ONE] ) ) {
+			$cond[] = $search->compare( '==', $name, $sites[Locale::SITE_ONE] );
 		}
 
 		if( isset( $sites[Locale::SITE_SUBTREE] ) && $sitelevel & Locale::SITE_SUBTREE ) {
