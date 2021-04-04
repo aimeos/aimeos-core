@@ -97,6 +97,9 @@ abstract class Base
 	{
 		$config = $this->context->getConfig();
 
+		$name = $config->get( 'resource/email/name' );
+		$email = $config->get( 'resource/email/address' );
+
 		/** controller/jobs/to-email
 		 * Recipient e-mail address used when sending job e-mails
 		 *
@@ -109,14 +112,14 @@ abstract class Base
 		 * @category User
 		 * @see controller/jobs/from-email
 		 */
-		if( ( $to = $config->get( 'controller/jobs/to-email' ) ) === null ) {
+		if( ( $to = $config->get( 'controller/jobs/to-email', $email ) ) == null ) {
 			return $this;
 		}
 
 		$message = $this->context->getMail()->createMessage();
 
-		foreach( (array) $to as $email ) {
-			$message->addTo( $email );
+		foreach( (array) $to as $addr ) {
+			$message->addTo( $addr, $name );
 		}
 
 		/** controller/jobs/from-email
@@ -131,8 +134,8 @@ abstract class Base
 		 * @category User
 		 * @see controller/jobs/to-email
 		 */
-		if( $from = $config->get( 'controller/jobs/from-email' ) ) {
-			$message->setSender( $from )->addFrom( $from );
+		if( $from = $config->get( 'controller/jobs/from-email', $email ) ) {
+			$message->addFrom( $from, $name );
 		}
 
 		$message->setSubject( $subject )->setBody( $body )->send();
