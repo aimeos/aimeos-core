@@ -310,7 +310,7 @@ class Standard extends Base
 	 * Returns the tax for the price item
 	 *
 	 * @return string Tax value with four digits precision
-	 * @see mshop/price/manager/taxflag
+	 * @see mshop/price/taxflag
 	 */
 	public function getTaxValue() : string
 	{

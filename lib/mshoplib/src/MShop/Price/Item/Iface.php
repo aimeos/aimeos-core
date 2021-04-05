@@ -196,7 +196,7 @@ interface Iface
 	 * costs per item, the tax rate and the tax flag.
 	 *
 	 * @return string Tax value with four digits precision
-	 * @see mshop/price/manager/taxflag
+	 * @see mshop/price/taxflag
 	 */
 	public function getTaxValue() : string;
 
