@@ -97,8 +97,25 @@ abstract class Base
 	{
 		$config = $this->context->getConfig();
 
-		$name = $config->get( 'resource/email/name' );
-		$email = $config->get( 'resource/email/address' );
+		/** resource/email/from-name
+		 * Name of the e-mail sender
+		 *
+		 * Should be the company or web site name
+		 *
+		 * @param string Sender name
+		 * @see resource/email/from-email
+		 */
+		$name = $config->get( 'resource/email/from-name' );
+
+		/** resource/email/from-email
+		 * E-Mail address of the sender
+		 *
+		 * Should be the e-mail address of the company or web site
+		 *
+		 * @param string E-Mail address
+		 * @see resource/email/from-name
+		 */
+		$email = $config->get( 'resource/email/from-email' );
 
 		/** controller/jobs/to-email
 		 * Recipient e-mail address used when sending job e-mails
