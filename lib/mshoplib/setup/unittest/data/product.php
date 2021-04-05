@@ -617,6 +617,9 @@ return [
 							'media.lists.type' => 'default', 'media.lists.position' => 0, 'ref' => 'media/color/white'
 						]],
 					],
+					'property' => [[
+						'media.property.type' => 'title', 'media.property.languageid' => 'de', 'media.property.value' => 'Example image',
+					]],
 				]],
 				'price' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
