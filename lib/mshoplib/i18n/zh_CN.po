@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-01 18:35+0200\n"
+"POT-Creation-Date: 2021-04-06 09:37+0200\n"
 "PO-Revision-Date: 2020-12-02 14:52+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/aimeos/aimeos-core/language/zh_CN/)\n"
@@ -450,10 +450,6 @@ msgid "Newly created site can not be saved using method \"save()\". Try using me
 msgstr ""
 
 #, php-format
-msgid "Newly created site can not be saved using method \"save()\". Try using method \"insertItem()\" instead."
-msgstr "Newly created site can not be saved using method \"save()\". Try using method \"insertItem()\" instead."
-
-#, php-format
 msgid "No XML file \"%1$s\" found"
 msgstr ""
 
@@ -851,3 +847,6 @@ msgstr ""
 #, php-format
 msgid "View object not available"
 msgstr ""
+
+#~ msgid "Newly created site can not be saved using method \"save()\". Try using method \"insertItem()\" instead."
+#~ msgstr "Newly created site can not be saved using method \"save()\". Try using method \"insertItem()\" instead."

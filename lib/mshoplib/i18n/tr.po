@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Metal <meteoramic@yahoo.com>, 2015-2020
+# Metal <meteoramic@yahoo.com>, 2015-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 09:22+0200\n"
-"PO-Revision-Date: 2021-04-01 16:10+0000\n"
-"Last-Translator: Aimeos\n"
+"POT-Creation-Date: 2021-04-06 09:37+0200\n"
+"PO-Revision-Date: 2021-04-03 01:17+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,6 +95,10 @@ msgstr "Adres arama yapılandırması mevcut değil"
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
 msgstr "Adres türü \"%1$s\" izin verilen aralıkta değil"
+
+#, php-format
+msgid "At least one key is required for aggregation"
+msgstr "Toplama için en az bir anahtar gereklidir"
 
 #, php-format
 msgid "Basket empty"
@@ -355,7 +359,7 @@ msgstr "Öğe silinemez. Ögenin site kimlik numarası mevcut sitenin kimlik num
 
 #, php-format
 msgid "Item could not be saved using method save(). Item ID not available."
-msgstr ""
+msgstr "Öğe, save() metodu kullanılarak kaydedilemedi. Öğe kimlik numarası mevcut değil."
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
@@ -452,8 +456,8 @@ msgstr "Öğe için yeni \"%1$s\" kimlik numarası, eski \"%2$s\" kimlik numaras
 #, php-format
 msgid ""
 "Newly created site can not be saved using method \"save()\". Try using "
-"method \"insertItem()\" instead."
-msgstr ""
+"method \"insert()\" instead."
+msgstr "Yeni oluşturulan site \"save()\" metodu kullanılarak kaydedilemez. Bunun yerine \"insert()\" metodunu kullanmayı deneyin."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aimeos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-01 18:35+0200\n"
+"POT-Creation-Date: 2021-04-06 09:37+0200\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (https://www.transifex.com/projects/p/aimeos/language/en/)\n"
@@ -548,12 +548,6 @@ msgstr ""
 
 #, php-format
 msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
-msgstr ""
-
-# error domain: site
-# error type: action failed
-#, php-format
-msgid "Newly created site can not be saved using method \"save()\". Try using method \"insertItem()\" instead."
 msgstr ""
 
 #, php-format
