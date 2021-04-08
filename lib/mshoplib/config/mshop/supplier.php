@@ -289,6 +289,7 @@ return array(
 						msupli."status" AS "supplier.lists.status", msupli."mtime" AS "supplier.lists.mtime",
 						msupli."editor" AS "supplier.lists.editor", msupli."ctime" AS "supplier.lists.ctime"
 					FROM "mshop_supplier_list" AS msupli
+					USE INDEX (unq_mssupli_pid_sid_dm_ty_rid, idx_mssupli_pid_dm_sid_pos_rid, idx_mssupli_rid_dom_sid_ty, idx_mssupli_key_sid)
 					:joins
 					WHERE :cond
 					ORDER BY :order

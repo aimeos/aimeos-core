@@ -116,8 +116,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msproli_id' );
-			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_msproli_pid_sid_dm_ty_rid' );
-			$table->addIndex( array( 'siteid', 'key' ), 'idx_msproli_sid_key' );
+			$table->addUniqueIndex( array( 'parentid', 'domain', 'siteid', 'type', 'refid' ), 'unq_msproli_pid_dm_sid_ty_rid' );
+			$table->addIndex( array( 'key', 'siteid' ), 'idx_msproli_key_sid' );
 			$table->addIndex( array( 'parentid' ), 'fk_msproli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product', array( 'parentid' ), array( 'id' ),
@@ -169,7 +169,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mspropr_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_mspropr_sid_ty_lid_value' );
-			$table->addIndex( array( 'siteid', 'key' ), 'fk_mspropr_sid_key' );
+			$table->addIndex( array( 'key', 'siteid' ), 'fk_mspropr_key_sid' );
 			$table->addIndex( array( 'parentid' ), 'fk_mspropr_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product', array( 'parentid' ), array( 'id' ),

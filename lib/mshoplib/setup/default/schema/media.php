@@ -108,8 +108,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msmedli_id' );
-			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_msmedli_pid_sid_dm_ty_rid' );
-			$table->addIndex( array( 'siteid', 'key' ), 'idx_msmedli_sid_key' );
+			$table->addUniqueIndex( array( 'parentid', 'domain', 'siteid', 'type', 'refid' ), 'unq_msmedli_pid_dm_sid_ty_rid' );
+			$table->addIndex( array( 'key', 'siteid' ), 'idx_msmedli_key_sid' );
 			$table->addIndex( array( 'parentid' ), 'fk_msmedli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_media', array( 'parentid' ), array( 'id' ),
@@ -161,7 +161,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msmedpr_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_msmedpr_sid_ty_lid_value' );
-			$table->addIndex( array( 'siteid', 'key' ), 'fk_msmedpr_sid_key' );
+			$table->addIndex( array( 'key', 'siteid' ), 'fk_msmedpr_key_sid' );
 			$table->addIndex( array( 'parentid' ), 'fk_msmedpr_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_media', array( 'parentid' ), array( 'id' ),

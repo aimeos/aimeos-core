@@ -111,8 +111,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msserli_id' );
-			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_msserli_pid_sid_dm_ty_rid' );
-			$table->addIndex( array( 'siteid', 'key' ), 'idx_msserli_sid_key' );
+			$table->addUniqueIndex( array( 'parentid', 'domain', 'siteid', 'type', 'refid' ), 'unq_msserli_pid_dm_sid_ty_rid' );
+			$table->addIndex( array( 'key', 'siteid' ), 'idx_msserli_key_sid' );
 			$table->addIndex( array( 'parentid' ), 'fk_msserli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_service', array( 'parentid' ), array( 'id' ),

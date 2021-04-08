@@ -52,13 +52,13 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msatt_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'type', 'code' ), 'unq_msatt_sid_dom_type_code' );
-			$table->addIndex( array( 'siteid', 'domain', 'status', 'type', 'pos' ), 'idx_msatt_sid_dom_stat_typ_pos' );
+			$table->addUniqueIndex( array( 'domain', 'siteid', 'type', 'code' ), 'unq_msatt_dom_sid_type_code' );
+			$table->addIndex( array( 'domain', 'siteid', 'status', 'type', 'pos' ), 'idx_msatt_dom_sid_stat_typ_pos' );
 			$table->addIndex( array( 'siteid', 'status' ), 'idx_msatt_sid_status' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_msatt_sid_label' );
 			$table->addIndex( array( 'siteid', 'code' ), 'idx_msatt_sid_code' );
 			$table->addIndex( array( 'siteid', 'type' ), 'idx_msatt_sid_type' );
-			$table->addIndex( array( 'siteid', 'key' ), 'idx_msatt_sid_key' );
+			$table->addIndex( array( 'key', 'siteid' ), 'idx_msatt_key_sid' );
 
 			return $schema;
 		},
@@ -110,8 +110,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msattli_id' );
-			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_msattli_pid_sid_dm_ty_rid' );
-			$table->addIndex( array( 'siteid', 'key' ), 'idx_msattli_sid_key' );
+			$table->addUniqueIndex( array( 'parentid', 'domain', 'siteid', 'type', 'refid' ), 'unq_msattli_pid_dm_sid_ty_rid' );
+			$table->addIndex( array( 'key', 'siteid' ), 'idx_msattli_key_sid' );
 			$table->addIndex( array( 'parentid' ), 'fk_msattli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_attribute', array( 'parentid' ), array( 'id' ),
@@ -163,7 +163,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msattpr_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_msattpr_sid_ty_lid_value' );
-			$table->addIndex( array( 'siteid', 'key' ), 'fk_msattpr_sid_key' );
+			$table->addIndex( array( 'key', 'siteid' ), 'fk_msattpr_key_sid' );
 			$table->addIndex( array( 'parentid' ), 'fk_msattpr_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_attribute', array( 'parentid' ), array( 'id' ),
