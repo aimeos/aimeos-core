@@ -92,7 +92,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 		foreach( $objects as $object )
 		{
-			if( method_exists( $object, '__sleep' ) ) {
+			if( is_object( $object ) && method_exists( $object, '__sleep' ) ) {
 				$object->__sleep();
 			}
 		}
