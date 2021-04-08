@@ -254,7 +254,7 @@ interface Iface
 	 * @param int $size Number of items
 	 * @return \Aimeos\MW\Criteria\Iface Object instance for fluent interface
 	 */
-	public function slice( int $offset, int $limit ) : \Aimeos\MW\Criteria\Iface;
+	public function slice( int $offset, int $limit = 100 ) : \Aimeos\MW\Criteria\Iface;
 
 	/**
 	 * Creates a new sort expression.
