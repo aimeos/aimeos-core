@@ -146,26 +146,9 @@ class Standard
 			$context = $this->getContext();
 			$config = $context->getConfig();
 
-			$name = $config->get( 'resource/db/adapter' );
-			$name = $config->get( 'resource/db-cache/adapter', $name );
-
-			/** madmin/cache/name
-			 * Specifies the name of the cache class implementation
-			 *
-			 * There are several implementations available for integrating caches
-			 * or providing optimized implementations for certain environments.
-			 * This configuration option allows to change the cache implementation
-			 * by setting the name of the \Aimeos\MW\Cache\* class.
-			 *
-			 * @param string Name of the cache class
-			 * @since 2014.09
-			 * @category Developer
-			 */
-			$name = $config->get( 'madmin/cache/name', $name );
-			$config = array(
+			$cfg = array(
 				'search' => $this->searchConfig,
 				'dbname' => $this->getResourceName(),
-				'siteid' => $context->getLocale()->getSiteId(),
 				'sql' => array(
 					'delete' => $this->getSqlConfig( 'madmin/cache/manager/delete' ),
 					'deletebytag' => $this->getSqlConfig( 'madmin/cache/manager/deletebytag' ),
@@ -175,7 +158,7 @@ class Standard
 				),
 			);
 			$dbm = $context->getDatabaseManager();
-			$this->object = \Aimeos\MW\Cache\Factory::create( 'DB', $config, $dbm );
+			$this->object = \Aimeos\MW\Cache\Factory::create( 'DB', $cfg, $dbm );
 		}
 
 		return $this->object;
@@ -258,12 +241,6 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		try {
-			$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
-		} catch( \Exception $e ) {
-			$values['siteid'] = null;
-		}
-
 		return $this->createItemBase( $values );
 	}
 
@@ -596,7 +573,6 @@ class Standard
 	 */
 	protected function createItemBase( array $values = [] ) : \Aimeos\MAdmin\Cache\Item\Iface
 	{
-		$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
 		return new \Aimeos\MAdmin\Cache\Item\Standard( $values );
 	}
 }
