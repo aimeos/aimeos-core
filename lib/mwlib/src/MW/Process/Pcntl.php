@@ -110,7 +110,9 @@ class Pcntl implements Iface
 			throw new Exception( 'Unable to fork new process: ' . pcntl_strerror( pcntl_get_last_error() ) );
 		}
 
-		if( $pid === 0 ) {  // child process
+		if( $pid === 0 ) // child process
+		{
+			$this->list = []; // use own child process list
 			exit( $this->exec( $fcn, $data ) );
 		}
 
