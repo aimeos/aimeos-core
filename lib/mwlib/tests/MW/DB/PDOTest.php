@@ -278,6 +278,25 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testResultFetchAll()
+	{
+		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
+		$sqlselect = 'SELECT * FROM "mw_unit_test"';
+
+		$stmt = $this->conn->create( $sqlinsert );
+		$stmt->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, 'test' );
+		$stmt->execute()->finish();
+
+		$stmt = $this->conn->create( $sqlselect );
+		$result = $stmt->execute();
+		$rows = $result->all();
+		$result->finish();
+
+		$this->assertEquals( [['id' => 1, 'name' => 'test']], $rows );
+	}
+
+
 	public function testMultipleResults()
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';

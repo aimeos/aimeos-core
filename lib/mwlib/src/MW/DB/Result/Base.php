@@ -29,4 +29,22 @@ abstract class Base
 	 * Fetch mode returning associative indexed record arrays
 	 */
 	const FETCH_ASSOC = 1;
+
+
+	/**
+	 * Retrieves all row from database result set.
+	 *
+	 * @param int $style The data can be returned as associative or numerical array
+	 * @return array Numeric or associative array of columns returned by the database
+	 */
+	public function all( int $style = \Aimeos\MW\DB\Result\Base::FETCH_ASSOC ) : array
+	{
+		$list = [];
+
+		while( $row = $this->fetch( $style ) ) {
+			$list[] = $row;
+		}
+
+		return $list;
+	}
 }
