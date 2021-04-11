@@ -18,7 +18,7 @@ namespace Aimeos\MW\DB\Result;
  * @package MW
  * @subpackage DB
  */
-abstract class Base
+abstract class Base implements Iface
 {
 	/**
 	 * Fetch mode returning numerically indexed record arrays
