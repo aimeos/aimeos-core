@@ -26,7 +26,7 @@ abstract class Base
 		'last-rule' => [
 			'code' => 'last-rule',
 			'internalcode' => 'last-rule',
-			'label' => 'Percentage to add or subtract',
+			'label' => 'Don\'t execute subsequent rules',
 			'type' => 'boolean',
 			'internaltype' => 'boolean',
 			'default' => 0,
