@@ -1,5 +1,5 @@
 {
-	"name": "aimeos/<extname>",
+	"name": "example/<extname>",
 	"description": "Aimeos <extname> extension",
 	"keywords": ["aimeos", "extension"],
 	"type": "aimeos-extension",
