@@ -81,8 +81,13 @@ trait Traits
 	{
 		if( ( $current = array_shift( $parts ) ) !== null && isset( $config[$current] ) )
 		{
-			if( count( $parts ) > 0 ) {
-				return $this->getArrayValue( $config[$current], $parts, $default );
+			if( count( $parts ) > 0 )
+			{
+				if( is_array( $config[$current] ) ) {
+					return $this->getArrayValue( $config[$current], $parts, $default );
+				}
+
+				return $default;
 			}
 
 			return $config[$current];
