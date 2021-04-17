@@ -15,7 +15,7 @@
 		"isDebug": true,
 		"fileIncludes": [{
 			"text": "custom.js",
-			"path": "themes/"
+			"path": "js/"
 		}]
 	}],
 	"resources" : []
