@@ -134,14 +134,6 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'supplier.lists.key' => array(
-			'code' => 'supplier.lists.key',
-			'internalcode' => 'msupli."key"',
-			'label' => 'List key',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
-		),
 	);
 
 
