@@ -273,7 +273,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 'test label', $object->getName() );
 		$this->assertEquals( 'test name', $this->object->getName() );
-		$this->assertEquals( 'test label', $this->object->getName( 'name', 'en') );
+		$this->assertEquals( 'test label', $this->object->getName( 'name', 'en' ) );
 	}
 
 
