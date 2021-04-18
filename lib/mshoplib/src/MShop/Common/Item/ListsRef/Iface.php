@@ -107,7 +107,8 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Returns the localized text type of the item or the internal label if no name is available.
 	 *
 	 * @param string $type Text type to be returned
+	 * @param string|null $langId Two letter ISO Language code of the text
 	 * @return string Specified text type or label of the item
 	 */
-	public function getName( string $type = 'name' ) : string;
+	public function getName( string $type = 'name', string $langId = null ) : string;
 }

@@ -50,7 +50,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$values = ['.languageid' => null, 'text.status' => 1];
 
-		$this->textItem1 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'name' ) + $values );
+		$this->textItem1 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'name' ) + ['.langaugeid' => 'de'] + $values );
 		$this->textItem1->setContent( 'test name' );
 		$this->textItem1->setStatus( 1 );
 		$this->textItem1->setId( 1 );
@@ -273,6 +273,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 'test label', $object->getName() );
 		$this->assertEquals( 'test name', $this->object->getName() );
+		$this->assertEquals( 'test label', $this->object->getName( 'name', 'en') );
 	}
 
 

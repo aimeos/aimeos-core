@@ -26,10 +26,10 @@ class Standard
 	implements \Aimeos\MShop\Media\Item\Iface
 {
 	use ListsRef\Traits, PropertyRef\Traits {
-		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
-		ListsRef\Traits::getName as getNameList;
-		ListsRef\Traits::__clone as __cloneList;
 		PropertyRef\Traits::__clone as __cloneProperty;
+		ListsRef\Traits::__clone insteadof PropertyRef\Traits;
+		ListsRef\Traits::__clone as __cloneList;
+		ListsRef\Traits::getName as getNameList;
 	}
 
 
@@ -291,12 +291,16 @@ class Standard
 	 * Returns the localized text type of the item or the internal label if no name is available.
 	 *
 	 * @param string $type Text type to be returned
+	 * @param string|null $langId Two letter ISO Language code of the text
 	 * @return string Specified text type or label of the item
 	 */
-	public function getName( string $type = 'name' ) : string
+	public function getName( string $type = 'name', string $langId = null ) : string
 	{
-		if( ( $item = $this->getPropertyItems( $type )->first() ) !== null ) {
-			return $item->getValue();
+		foreach( $this->getPropertyItems( $type ) as $propItem )
+		{
+			if( $propItem->getLanguageId() === $langId || $langId === null ) {
+				return $propItem->getValue();
+			}
 		}
 
 		return $this->getNameList( $type );

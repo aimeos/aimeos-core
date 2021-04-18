@@ -11,6 +11,9 @@
 
 namespace Aimeos\MShop\Catalog\Item;
 
+use \Aimeos\MShop\Common\Item\Config;
+use \Aimeos\MShop\Common\Item\ListsRef;
+
 
 /**
  * Generic interface for catalog items.
@@ -22,8 +25,10 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Catalog\Item\Iface
 {
-	use \Aimeos\MShop\Common\Item\Config\Traits;
-	use \Aimeos\MShop\Common\Item\ListsRef\Traits;
+	use Config\Traits, ListsRef\Traits {
+		ListsRef\Traits::__clone as __cloneList;
+		ListsRef\Traits::getName as getNameList;
+	}
 
 
 	private $node;
@@ -57,6 +62,8 @@ class Standard
 	 */
 	public function __clone()
 	{
+		parent::__clone();
+		$this->__cloneList();
 		$this->node = clone $this->node;
 	}
 
@@ -152,15 +159,12 @@ class Standard
 	 * Returns the localized text type of the item or the internal label if no name is available.
 	 *
 	 * @param string $type Text type to be returned
+	 * @param string|null $langId Two letter ISO Language code of the text
 	 * @return string Specified text type or label of the item
 	 */
-	public function getName( string $type = 'name' ) : string
+	public function getName( string $type = 'name', string $langId = null ) : string
 	{
-		if( ( $item = $this->getRefItems( 'text', $type )->first() ) !== null ) {
-			return $item->getContent();
-		}
-
-		return $type === 'url' ? $this->getUrl() : $this->getLabel();
+		return $type === 'url' ? $this->getUrl() : $this->getNameList( $type, $langId );
 	}
 
 

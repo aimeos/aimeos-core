@@ -312,12 +312,16 @@ trait Traits
 	 * Returns the localized text type of the item or the internal label if no name is available.
 	 *
 	 * @param string $type Text type to be returned
+	 * @param string|null $langId Two letter ISO Language code of the text
 	 * @return string Specified text type or label of the item
 	 */
-	public function getName( string $type = 'name' ) : string
+	public function getName( string $type = 'name', string $langId = null ) : string
 	{
-		if( ( $item = $this->getRefItems( 'text', $type )->first() ) !== null ) {
-			return $item->getContent();
+		foreach( $this->getRefItems( 'text', $type ) as $textItem )
+		{
+			if( $textItem->getLanguageId() === $langId || $langId === null ) {
+				return $textItem->getContent();
+			}
 		}
 
 		return $this->getLabel();
