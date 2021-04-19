@@ -63,7 +63,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$enc = $this->object->transform();
 
-		$this->assertEquals( '[&quot;\u0026quot;&quot;]', $enc->attr( ['&quot;'] ) );
+		$this->assertEquals( '[&quot;\\u0026quot;&quot;]', $enc->attr( ['&quot;'] ) );
 	}
 
 
@@ -71,7 +71,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$enc = $this->object->transform();
 
-		$this->assertEquals( '{&quot;key&quot;:&quot;\u0026quot;&quot;}', $enc->attr( (object) ['key' => '&quot;'] ) );
+		$this->assertEquals( '{&quot;key&quot;:&quot;\\u0026quot;&quot;}', $enc->attr( (object) ['key' => '&quot;'] ) );
+	}
+
+
+	public function testTransformAttrNewline()
+	{
+		$enc = $this->object->transform();
+
+		$this->assertEquals( '{&quot;key&quot;:&quot;\\\\n&quot;}', $enc->attr( (object) ['key' => '\n'] ) );
 	}
 
 
