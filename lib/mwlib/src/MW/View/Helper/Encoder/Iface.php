@@ -51,6 +51,15 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	public function html( $value, int $trust = self::TAINT ) : string;
 
 	/**
+	 * Escapes strings for JS strings.
+	 * All strings values must be surrounded by ' (single quote)
+	 *
+	 * @param mixed $value Unescaped string
+	 * @return string Escaped string for JS
+	 */
+	public function js( $value ) : string;
+
+	/**
 	 * Escapes strings for XML.
 	 * All node values must be surrounded by <![CDATA[...]]>
 	 *

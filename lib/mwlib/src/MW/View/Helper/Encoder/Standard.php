@@ -82,6 +82,23 @@ class Standard
 
 
 	/**
+	 * Escapes strings for JS strings.
+	 * All strings values must be surrounded by ' (single quote)
+	 *
+	 * @param mixed $value Unescaped string
+	 * @return string Escaped string for JS
+	 */
+	public function js( $value ) : string
+	{
+		if( $value !== null && !is_scalar( $value ) ) {
+			$value = json_encode( $value, JSON_HEX_AMP );
+		}
+
+		return str_replace( ['\'', '"', '`'], ['\\\'', '\\"', '\\`'], (string) $value );
+	}
+
+
+	/**
 	 * Escapes strings for XML.
 	 * All node values must be surrounded by <![CDATA[...]]>
 	 *

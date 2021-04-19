@@ -123,6 +123,38 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testTransformJsApostroph()
+	{
+		$enc = $this->object->transform();
+
+		$this->assertEquals( '\\\'', $enc->js( '\'' ) );
+	}
+
+
+	public function testTransformJsBacktick()
+	{
+		$enc = $this->object->transform();
+
+		$this->assertEquals( '\\`', $enc->js( '`' ) );
+	}
+
+
+	public function testTransformJsQuote()
+	{
+		$enc = $this->object->transform();
+
+		$this->assertEquals( '\\"', $enc->js( '"' ) );
+	}
+
+
+	public function testTransformJsNewline()
+	{
+		$enc = $this->object->transform();
+
+		$this->assertEquals( '\\n', $enc->js( '\n' ) );
+	}
+
+
 	public function testTransformXmlTrusted()
 	{
 		$enc = $this->object->transform();
