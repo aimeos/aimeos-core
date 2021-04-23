@@ -81,8 +81,13 @@ class OrderMigrateProductSupplier extends \Aimeos\MW\Setup\Task\Base
 		$table = $dbalManager->listTableDetails( 'mshop_order_base_product' );
 		$schema = new \Doctrine\DBAL\Schema\Schema( [clone $table], [], $config );
 
-		$table->addColumn( 'supplierid', 'string', ['length' => 36, 'customSchemaOptions' => ['charset' => 'binary', 'default' => '']] );
-		$table->addColumn( 'suppliername', 'string', ['length' => 255, 'default' => ''] );
+		if( !$table->hasColumn( 'supplierid' ) ) {
+			$table->addColumn( 'supplierid', 'string', ['length' => 36, 'customSchemaOptions' => ['charset' => 'binary', 'default' => '']] );
+		}
+
+		if( !$table->hasColumn( 'suppliername' ) ) {
+			$table->addColumn( 'suppliername', 'string', ['length' => 255, 'default' => ''] );
+		}
 
 		$newSchema = new \Doctrine\DBAL\Schema\Schema( [$table], [], $config );
 		$stmts = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $schema, $newSchema )->toSaveSql( $platform );
