@@ -206,6 +206,10 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 			$dbalManager = $dbal->getSchemaManager();
 			$config = $dbalManager->createSchemaConfig();
 
+			if( $schema->tableExists( 'mshop_locale_site' ) ) { // PostgreSQL workaround
+				$dbalManager->tryMethod( 'dropForeignKey', 'mshop_locale_site_siteid_key', 'mshop_locale_site' );
+			}
+
 			foreach( $tables as $table )
 			{
 				$this->msg( sprintf( 'Checking table %1$s', $table ), 1 );
