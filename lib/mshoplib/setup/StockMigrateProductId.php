@@ -14,14 +14,11 @@ namespace Aimeos\MW\Setup\Task;
  */
 class StockMigrateProductId extends \Aimeos\MW\Setup\Task\Base
 {
-	private $indexes = array(
-		'unq_mssto_sid_pcode_ty' => 'DROP INDEX "unq_mssto_sid_pcode_ty" ON "mshop_stock"',
-	);
 	private $updates = array(
-		'ALTER TABLE "mshop_stock" ADD COLUMN "prodid" VARCHAR(36) NOT NULL',
+		'ALTER TABLE "mshop_stock" ADD COLUMN "prodid" VARCHAR(36)',
 		'UPDATE "mshop_stock" SET "prodid" = (
-			SELECT "id" FROM "mshop_product" AS p WHERE p."code" = "productcode" AND p."siteid" = "siteid"
-		)',
+			SELECT "id" FROM "mshop_product" AS p WHERE p."code" = "productcode" AND p."siteid" = "siteid" LIMIT 1
+		)'
 	);
 	private $column = 'ALTER TABLE "mshop_stock" DROP COLUMN "productcode"';
 
@@ -63,27 +60,23 @@ class StockMigrateProductId extends \Aimeos\MW\Setup\Task\Base
 	public function migrate()
 	{
 		$this->msg( 'Migrate product code in stock table', 0 ); $this->status( '' );
-		$schema = $this->getSchema( 'db-product' );
+
+		$rname = 'db-product';
+		$table = 'mshop_stock';
+
+		$schema = $this->getSchema( $rname );
+		$conn = $this->acquire( $rname );
+		$dbal = $conn->getRawObject();
+
+		if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
+			throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
+		}
+
+		$dbalManager = $dbal->getSchemaManager();
 
 		if( $schema->tableExists( 'mshop_stock' ) )
 		{
-			foreach( $this->indexes as $name => $stmt )
-			{
-				$this->msg( sprintf( 'Remove index "%1$s"', $name ), 1 );
-
-				if( $schema->indexExists( 'mshop_stock', $name ) === true )
-				{
-					$this->execute( $stmt );
-					$this->status( 'done' );
-				}
-				else
-				{
-					$this->status( 'OK' );
-				}
-			}
-
-
-			$this->msg( 'Migrate to column "prodid"', 1 );
+			$dbalManager->tryMethod( 'dropIndex', 'unq_mssto_sid_pcode_ty', 'mshop_stock' );
 
 			if( $schema->columnExists( 'mshop_stock', 'prodid' ) === false )
 			{
@@ -94,6 +87,8 @@ class StockMigrateProductId extends \Aimeos\MW\Setup\Task\Base
 			{
 				$this->status( 'OK' );
 			}
+
+			$this->execute( 'DELETE FROM "mshop_stock" WHERE "prodid" IS NULL' );
 
 			$this->msg( 'Remove column "productcode"', 1 );
 
@@ -107,5 +102,7 @@ class StockMigrateProductId extends \Aimeos\MW\Setup\Task\Base
 				$this->status( 'OK' );
 			}
 		}
+
+		$this->release( $conn, $rname );
 	}
 }
