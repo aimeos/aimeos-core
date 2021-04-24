@@ -513,7 +513,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.address.languageid' => 'de',
 			'customer.address.telephone' => '01234',
 			'customer.address.telefax' => '02345',
-			'customer.address.email' => 'a@b',
+			'customer.address.email' => 'a@b.com',
 			'customer.address.website' => 'example.com',
 			'customer.address.birthday' => '1990-01-01',
 			'customer.address.longitude' => '10.0',

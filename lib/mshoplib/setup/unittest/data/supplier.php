@@ -79,7 +79,7 @@ return [
 			'supplier.address.address3' => 'unitaddress3', 'supplier.address.postal' => 'unitpostal',
 			'supplier.address.city' => 'unitcity', 'supplier.address.state' => 'unitstate',
 			'supplier.address.countryid' => 'de', 'supplier.address.languageid' => 'de',
-			'supplier.address.telephone' => '1234567890', 'supplier.address.email' => 'unit@email',
+			'supplier.address.telephone' => '1234567890', 'supplier.address.email' => 'test2@example.com',
 			'supplier.address.telefax' => '1234567891', 'supplier.address.website' => 'unit.web.site',
 			'supplier.address.longitude' => '11.0', 'supplier.address.latitude' => '52.0',
 			'supplier.address.position' => '2',

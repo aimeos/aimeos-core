@@ -499,7 +499,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.address.languageid' => 'de',
 			'common.address.telephone' => '01234',
 			'common.address.telefax' => '02345',
-			'common.address.email' => 'a@b',
+			'common.address.email' => 'a@b.com',
 			'common.address.website' => 'example.com',
 			'common.address.longitude' => '10.0',
 			'common.address.latitude' => '53.5',

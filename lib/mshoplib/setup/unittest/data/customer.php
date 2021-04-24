@@ -110,7 +110,7 @@ return [
 				'customer.address.address3' => 'unitaddress3', 'customer.address.postal' => 'unitpostal',
 				'customer.address.city' => 'unitcity', 'customer.address.state' => 'unitstate',
 				'customer.address.countryid' => 'DE', 'customer.address.languageid' => 'de',
-				'customer.address.telephone' => '1234567890', 'customer.address.email' => 'unit@email',
+				'customer.address.telephone' => '1234567890', 'customer.address.email' => 'test3@example.com',
 				'customer.address.telefax' => '1234567891', 'customer.address.website' => 'unit.web.site',
 				'customer.address.longitude' => '10.0', 'customer.address.latitude' => '53.5',
 				'customer.address.position' => '2'

@@ -496,7 +496,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'supplier.address.languageid' => 'de',
 			'supplier.address.telephone' => '01234',
 			'supplier.address.telefax' => '02345',
-			'supplier.address.email' => 'a@b',
+			'supplier.address.email' => 'a@b.com',
 			'supplier.address.website' => 'example.com',
 			'supplier.address.longitude' => '10.0',
 			'supplier.address.latitude' => '53.5',
