@@ -68,7 +68,7 @@ class Category
 			$codes = explode( ',', $this->getConfigValue( 'category.code' ) );
 			$price = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
 
-			$filter = $manager->createSearch( true )->slice( 0, count( $codes ) );
+			$filter = $manager->createSearch( true )->setSlice( 0, count( $codes ) );
 			$filter->setConditions( $filter->combine( '&&', [
 				$filter->compare( '==', 'catalog.code', $codes ),
 				$filter->getConditions()
