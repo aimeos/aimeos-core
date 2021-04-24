@@ -65,12 +65,19 @@ class Category
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
 			$listManager = \Aimeos\MShop::create( $this->getContext(), 'catalog/lists' );
 
-			$price = \Aimeos\MShop::create( $this->getContext(), 'price' )->createItem();
-			$catItem = $manager->findItem( $this->getConfigValue( 'category.code' ) );
+			$codes = explode( ',', $this->getConfigValue( 'category.code' ) );
+			$price = \Aimeos\MShop::create( $this->getContext(), 'price' )->create();
+
+			$filter = $manager->createSearch( true )->slice( 0, count( $codes ) );
+			$filter->setConditions( $filter->combine( '&&', [
+				$filter->compare( '==', 'catalog.code', $codes ),
+				$filter->getConditions()
+			] ) );
+			$catIds = array_keys( $manager->searchItems( $filter ) );
 
 			$search = $listManager->createSearch( true )->setSlice( 0, count( $prodIds ) );
 			$search->setConditions( $search->combine( '&&', [
-				$search->compare( '==', 'catalog.lists.parentid', $catItem->getId() ),
+				$search->compare( '==', 'catalog.lists.parentid', $catIds ),
 				$search->compare( '==', 'catalog.lists.refid', array_keys( $prodIds ) ),
 				$search->compare( '==', 'catalog.lists.type', ['default', 'promotion'] ),
 				$search->compare( '==', 'catalog.lists.domain', 'product' ),
