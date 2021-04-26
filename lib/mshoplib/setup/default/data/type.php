@@ -69,6 +69,7 @@ return array(
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Article', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'bundle', 'label' => 'Bundle', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'event', 'label' => 'Event', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'group', 'label' => 'Group', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'select', 'label' => 'Selection', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'voucher', 'label' => 'Voucher', 'status' => 1 ),
 	),
