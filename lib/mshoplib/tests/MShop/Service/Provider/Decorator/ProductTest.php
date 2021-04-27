@@ -94,7 +94,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 
 		$attributes = array(
 			'product.include' => [],
-			'product.exclude' => 1,
+			'product.exclude' => [],
 		);
 		$result = $this->object->checkConfigBE( $attributes );
 

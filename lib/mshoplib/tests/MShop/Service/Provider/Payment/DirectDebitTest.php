@@ -104,8 +104,8 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 	public function testCheckConfigFEwrongType()
 	{
 		$config = array(
-			'directdebit.accountowner' => 123,
-			'directdebit.accountno' => 0.1,
+			'directdebit.accountowner' => [],
+			'directdebit.accountno' => [],
 			'directdebit.bankcode' => '1000000',
 			'directdebit.bankname' => 'Federal reserve',
 		);
@@ -115,10 +115,10 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 'directdebit.accountowner', $result );
 		$this->assertArrayHasKey( 'directdebit.accountno', $result );
 
-		$this->assertFalse( $result['directdebit.accountowner'] === null );
-		$this->assertFalse( $result['directdebit.accountno'] === null );
-		$this->assertTrue( $result['directdebit.bankcode'] === null );
-		$this->assertTrue( $result['directdebit.bankname'] === null );
+		$this->assertIsString( $result['directdebit.accountowner'] );
+		$this->assertIsString( $result['directdebit.accountno'] );
+		$this->assertNull( $result['directdebit.bankcode'] );
+		$this->assertNull( $result['directdebit.bankname'] );
 	}
 
 

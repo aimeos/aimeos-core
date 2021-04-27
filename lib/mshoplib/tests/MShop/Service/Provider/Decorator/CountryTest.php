@@ -106,9 +106,9 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 		$attributes = array(
 			'country.billing-include' => [],
-			'country.billing-exclude' => 1.5,
+			'country.billing-exclude' => [],
 			'country.delivery-include' => [],
-			'country.delivery-exclude' => 1.5,
+			'country.delivery-exclude' => [],
 		);
 		$result = $this->object->checkConfigBE( $attributes );
 
