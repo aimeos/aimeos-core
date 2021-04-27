@@ -94,7 +94,7 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
 
 		$attributes = array(
 			'currency.include' => [],
-			'currency.exclude' => 1,
+			'currency.exclude' => [],
 		);
 		$result = $this->object->checkConfigBE( $attributes );
 

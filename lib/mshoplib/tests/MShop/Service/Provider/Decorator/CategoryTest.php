@@ -94,7 +94,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 		$attributes = array(
 			'category.include' => [],
-			'category.exclude' => 1,
+			'category.exclude' => [],
 		);
 		$result = $this->object->checkConfigBE( $attributes );
 

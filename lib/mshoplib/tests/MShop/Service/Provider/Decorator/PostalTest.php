@@ -105,9 +105,9 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$attributes = array(
 			'postal.billing-include' => [],
-			'postal.billing-exclude' => 1.5,
+			'postal.billing-exclude' => [],
 			'postal.delivery-include' => [],
-			'postal.delivery-exclude' => 1.5,
+			'postal.delivery-exclude' => [],
 		);
 		$result = $this->object->checkConfigBE( $attributes );
 

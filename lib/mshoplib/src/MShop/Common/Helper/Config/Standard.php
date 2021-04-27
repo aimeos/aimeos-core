@@ -63,7 +63,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 						break;
 					case 'string':
 					case 'text':
-						if( !is_string( $config[$key] ) ) {
+						if( !is_string( $config[$key] ) && !is_numeric( $config[$key] ) ) {
 							$errors[$key] = sprintf( 'Not a string' ); continue 2;
 						}
 						break;
