@@ -103,6 +103,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'parentid' => array(
+			'code' => 'locale.site.parentid',
+			'internalcode' => 'mlocsi."parentid"',
+			'label' => 'Parent site ID',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 	);
 
 
