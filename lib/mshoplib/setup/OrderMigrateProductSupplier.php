@@ -37,7 +37,7 @@ class OrderMigrateProductSupplier extends \Aimeos\MW\Setup\Task\Base
 		if( $schema->tableExists( 'mshop_order_base_product' )
 			&& $schema->columnExists( 'mshop_order_base_product', 'suppliercode' )
 		) {
-			$this->addColumns( $conn, 'db-order' );
+			$this->addColumns();
 
 			$conn = $this->acquire( 'db-order' );
 			$sconn = $this->acquire( 'db-supplier' );
@@ -66,9 +66,11 @@ class OrderMigrateProductSupplier extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addColumns( \Aimeos\MW\DB\Connection\Iface $conn, string $rname )
+	protected function addColumns()
 	{
+		$conn = $this->acquire( 'db-order' );
 		$dbal = $conn->getRawObject();
+		$this->release( $conn, 'db-order' );
 
 		if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
 			throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
