@@ -94,6 +94,6 @@ class OrderMigrateProductSupplier extends \Aimeos\MW\Setup\Task\Base
 		$newSchema = new \Doctrine\DBAL\Schema\Schema( [$table], [], $config );
 		$stmts = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $schema, $newSchema )->toSaveSql( $platform );
 
-		$this->executeList( $stmts, $rname );
+		$this->executeList( $stmts, 'db-order' );
 	}
 }
