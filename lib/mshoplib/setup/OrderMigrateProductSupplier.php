@@ -37,10 +37,10 @@ class OrderMigrateProductSupplier extends \Aimeos\MW\Setup\Task\Base
 		if( $schema->tableExists( 'mshop_order_base_product' )
 			&& $schema->columnExists( 'mshop_order_base_product', 'suppliercode' )
 		) {
+			$this->addColumns( $conn, 'db-order' );
+
 			$conn = $this->acquire( 'db-order' );
 			$sconn = $this->acquire( 'db-supplier' );
-
-			$this->addColumns( $conn, 'db-order' );
 
 			$stmt = $conn->create(
 				'UPDATE "mshop_order_base_product" SET "supplierid" = ?, "suppliername" = ? WHERE "suppliercode" = ?'
@@ -56,7 +56,7 @@ class OrderMigrateProductSupplier extends \Aimeos\MW\Setup\Task\Base
 				$stmt->execute()->finish();
 			}
 
-			$this->release( $conn, 'db-supplier' );
+			$this->release( $sconn, 'db-supplier' );
 			$this->release( $conn, 'db-order' );
 
 			return $this->status( 'done' );
