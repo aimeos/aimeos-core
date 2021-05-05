@@ -76,8 +76,6 @@ class StockMigrateProductId extends \Aimeos\MW\Setup\Task\Base
 
 		if( $schema->tableExists( 'mshop_stock' ) )
 		{
-			$dbalManager->tryMethod( 'dropIndex', 'unq_mssto_sid_pcode_ty', 'mshop_stock' );
-
 			if( $schema->columnExists( 'mshop_stock', 'prodid' ) === false )
 			{
 				$this->executeList( $this->updates );
@@ -89,6 +87,7 @@ class StockMigrateProductId extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$this->execute( 'DELETE FROM "mshop_stock" WHERE "prodid" IS NULL' );
+			$dbalManager->tryMethod( 'dropIndex', 'unq_mssto_sid_pcode_ty', 'mshop_stock' );
 
 			$this->msg( 'Remove column "productcode"', 1 );
 
