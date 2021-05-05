@@ -798,14 +798,17 @@ class Standard
 			{
 				while( ( $row = $results->fetch() ) !== null )
 				{
-					if( ( $row['order.base.service.attribute.value'] = json_decode( $config = $row['order.base.service.attribute.value'], true ) ) === null )
+					$id = $row['order.base.service.attribute.id'];
+					$config = $row['order.base.service.attribute.value'];
+
+					if( ( $row['order.base.service.attribute.value'] = json_decode( $config, true ) ) === null && $config !== 'null' )
 					{
-						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_base_service_attribute.value', $row['order.base.service.attribute.id'], $config );
+						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_base_service_attribute.value', $id, $config );
 						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
 
 					if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
-						$items[$row['order.base.service.attribute.id']] = $item;
+						$items[$id] = $item;
 					}
 				}
 			}
