@@ -105,7 +105,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( "t.bool = 1", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '-', 'int', '10 - 20' );
-		$this->assertEquals( "t.int >= 10 AND t.int < 20", $expr->toSource( $types, $translations ) );
+		$this->assertEquals( "t.int >= 10 AND t.int <= 20", $expr->toSource( $types, $translations ) );
 	}
 
 
