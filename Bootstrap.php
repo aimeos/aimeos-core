@@ -371,6 +371,8 @@ class Bootstrap
 				$this->dependencies[$manifest['name']][$name] = $name;
 			}
 		}
+
+		ksort( $this->dependencies );
 	}
 
 
