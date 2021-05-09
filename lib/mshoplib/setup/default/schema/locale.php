@@ -55,9 +55,11 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', ['notnull' => false] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => '', 'customSchemaOptions' => ['unique' => true]] );
-			$table->addColumn( 'code', 'string', array( 'length' => 255, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'config', 'text', array( 'default' => '', 'length' => 0xffff ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 255, 'default' => '', 'customSchemaOptions' => ['charset' => 'binary'] ) );
+			$table->addColumn( 'label', 'string', array( 'length' => 255, 'default' => '' ) );
+			$table->addColumn( 'logo', 'string', array( 'length' => 255, 'default' => '{}' ) );
+			$table->addColumn( 'config', 'text', array( 'length' => 0xffff, 'default' => '{}' ) );
+			$table->addColumn( 'supplierid', 'string', array( 'length' => 36, 'default' => '', 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'level', 'smallint', [] );
 			$table->addColumn( 'nleft', 'integer', [] );
 			$table->addColumn( 'nright', 'integer', [] );

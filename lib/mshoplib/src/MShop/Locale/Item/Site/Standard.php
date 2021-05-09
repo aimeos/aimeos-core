@@ -158,6 +158,57 @@ class Standard
 
 
 	/**
+	 * Returns the logo path of the site.
+	 *
+	 * @param bool $large Return the largest image instead of the smallest
+	 * @return string Returns the logo of the site
+	 */
+	public function getLogo( bool $large = false ) : string
+	{
+		if( ( $list = (array) $this->get( 'locale.site.logo', [] ) ) !== [] ) {
+			return (string) ( $large ? end( $list ) : current( $list ) );
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Returns the logo path of the site.
+	 *
+	 * @return string Returns the logo of the site
+	 */
+	public function getLogos() : array
+	{
+		return (array) $this->get( 'locale.site.logo', [] );
+	}
+
+
+	/**
+	 * Sets the logo path of the site.
+	 *
+	 * @param string $value The logo of the site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setLogo( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	{
+		return $this->set( 'locale.site.logo', [1 => $value] );
+	}
+
+
+	/**
+	 * Sets the logo path of the site.
+	 *
+	 * @param array $url List of logo URLs with widths of the media file in pixels as keys
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setLogos( array $value ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	{
+		return $this->set( 'locale.site.logo', $value );
+	}
+
+
+	/**
 	 * Returns the ID of the parent site
 	 *
 	 * @return string Unique ID of the parent site
@@ -188,6 +239,29 @@ class Standard
 	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->set( 'locale.site.status', $status );
+	}
+
+
+	/**
+	 * Returns the supplier ID related to the site.
+	 *
+	 * @return string Returns the supplier ID related to the site
+	 */
+	public function getSupplierId() : string
+	{
+		return $this->get( 'locale.site.supplierid', '' );
+	}
+
+
+	/**
+	 * Sets the supplier ID related to the site.
+	 *
+	 * @param string $value The supplier ID related to the site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setSupplierId( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	{
+		return $this->set( 'locale.site.supplierid', $value );
 	}
 
 
@@ -232,6 +306,8 @@ class Standard
 				case 'locale.site.label': $item = $item->setLabel( $value ); break;
 				case 'locale.site.status': $item = $item->setStatus( (int) $value ); break;
 				case 'locale.site.config': $item = $item->setConfig( (array) $value ); break;
+				case 'locale.site.supplierid': $item = $item->setSupplierId( $value ); break;
+				case 'locale.site.logo': $item = $item->setLogos( (array) $value ); break;
 				default: continue 2;
 			}
 
@@ -253,8 +329,10 @@ class Standard
 		$list = parent::toArray( $private );
 
 		$list['locale.site.code'] = $this->getCode();
+		$list['locale.site.logo'] = $this->getLogos();
 		$list['locale.site.label'] = $this->getLabel();
 		$list['locale.site.status'] = $this->getStatus();
+		$list['locale.site.supplierid'] = $this->getSupplierId();
 		$list['locale.site.hasChildren'] = $this->hasChildren();
 
 		if( $private === true )

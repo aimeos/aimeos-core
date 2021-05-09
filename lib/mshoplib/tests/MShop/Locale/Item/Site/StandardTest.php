@@ -23,6 +23,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'locale.site.code' => 'ExtID',
 			'locale.site.label' => 'My Site',
 			'locale.site.config' => array( 'timezone' => 'Europe/Berlin' ),
+			'locale.site.logo' => [1 => 'path/to/site-logo.png'],
+			'locale.site.supplierid' => '1234',
 			'locale.site.status' => 1,
 			'locale.site.mtime' => '2011-01-01 00:00:02',
 			'locale.site.ctime' => '2011-01-01 00:00:01',
@@ -104,6 +106,38 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetLogo()
+	{
+		$this->assertEquals( 'path/to/site-logo.png', $this->object->getLogo() );
+	}
+
+
+	public function testGetLogos()
+	{
+		$this->assertEquals( [1 => 'path/to/site-logo.png'], $this->object->getLogos() );
+	}
+
+
+	public function testSetLogo()
+	{
+		$return = $this->object->setLogo( '/path/site-logo2.png' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $return );
+		$this->assertEquals( '/path/site-logo2.png', $this->object->getLogo() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetLogos()
+	{
+		$return = $this->object->setLogos( [1 => '/path/site-logo2.png'] );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $return );
+		$this->assertEquals( [1 => '/path/site-logo2.png'], $this->object->getLogos() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetConfig()
 	{
 		$this->assertEquals( array( 'timezone' => 'Europe/Berlin' ), $this->object->getConfig() );
@@ -140,6 +174,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
+
+
+	public function testGetSupplierId()
+	{
+		$this->assertEquals( '1234', $this->object->getSupplierId() );
+	}
+
+
+	public function testSetSupplierId()
+	{
+		$return = $this->object->setSupplierId( '5678' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $return );
+		$this->assertEquals( '5678', $this->object->getSupplierId() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
 
 	public function testGetTimeModified()
 	{
@@ -193,6 +244,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'locale.site.label' => 'test item',
 			'locale.site.status' => 1,
 			'locale.site.config' => array( 'test' ),
+			'locale.site.supplierid' => '9876',
+			'locale.site.logo' => [1 => 'site-logo.jpg'],
 		);
 
 		$item = $item->fromArray( $entries, true );
@@ -203,6 +256,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['locale.site.label'], $item->getLabel() );
 		$this->assertEquals( $list['locale.site.status'], $item->getStatus() );
 		$this->assertEquals( $list['locale.site.config'], $item->getConfig() );
+		$this->assertEquals( $list['locale.site.supplierid'], $item->getSupplierId() );
+		$this->assertEquals( $list['locale.site.logo'], $item->getLogos() );
 	}
 
 
@@ -218,6 +273,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['locale.site.label'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['locale.site.status'] );
 		$this->assertEquals( $this->object->getConfig(), $arrayObject['locale.site.config'] );
+		$this->assertEquals( $this->object->getLogos(), $arrayObject['locale.site.logo'] );
+		$this->assertEquals( $this->object->getSupplierId(), $arrayObject['locale.site.supplierid'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['locale.site.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['locale.site.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['locale.site.editor'] );

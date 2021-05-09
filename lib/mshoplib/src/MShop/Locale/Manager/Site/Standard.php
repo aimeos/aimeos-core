@@ -79,6 +79,22 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'locale.site.logo' => array(
+			'code' => 'locale.site.logo',
+			'internalcode' => 'mlocsi."logo"',
+			'label' => 'Site logo',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'locale.site.supplierid' => array(
+			'code' => 'locale.site.supplierid',
+			'internalcode' => 'mlocsi."supplierid"',
+			'label' => 'Site-related supplier ID',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'locale.site.ctime' => array(
 			'code' => 'locale.site.ctime',
 			'internalcode' => 'mlocsi."ctime"',
@@ -277,8 +293,10 @@ class Standard
 			$stmt->bind( $idx++, $item->getSiteId() );
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $item->getLabel() );
-			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+			$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, json_encode( $item->getLogos(), JSON_FORCE_OBJECT ) );
+			$stmt->bind( $idx++, $item->getSupplierId() );
 			$stmt->bind( $idx++, $context->getEditor() );
 			$stmt->bind( $idx++, date( 'Y-m-d H:i:s' ) ); // mtime
 			$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -662,11 +680,19 @@ class Standard
 			{
 				while( ( $row = $results->fetch() ) !== null )
 				{
+					$id = $row['locale.site.id'];
+					$logos = $row['locale.site.logo'];
 					$config = $row['locale.site.config'];
 
-					if( ( $row['locale.site.config'] = json_decode( $config = $row['locale.site.config'], true ) ) === null )
+					if( ( $row['locale.site.logo'] = json_decode( $logos, true ) ) === null )
 					{
-						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale_site.config', $row['locale.site.id'], $config );
+						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale_site.logo', $id, $logos );
+						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
+					}
+
+					if( ( $row['locale.site.config'] = json_decode( $config, true ) ) === null )
+					{
+						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale_site.config', $id, $config );
 						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
 
@@ -840,8 +866,10 @@ class Standard
 			$stmt->bind( $idx++, '' ); // site ID
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $item->getLabel() );
-			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
+			$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, json_encode( $item->getLogos(), JSON_FORCE_OBJECT ) );
+			$stmt->bind( $idx++, $item->getSupplierId() );
 			$stmt->bind( $idx++, $context->getEditor() );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $date ); // ctime
