@@ -242,7 +242,7 @@ class Standard
 	 * @param bool $large Return the largest image instead of the smallest
 	 * @return string Preview URL of the media file
 	 */
-	public function getPreview( $large = false ) : string
+	public function getPreview( bool $large = false ) : string
 	{
 		if( ( $list = (array) $this->get( 'media.previews', [] ) ) !== [] ) {
 			return (string) ( $large ? end( $list ) : current( $list ) );
@@ -253,7 +253,7 @@ class Standard
 
 
 	/**
-	 * Returns all preview urls of the media item
+	 * Returns all preview urls for images of different sizes.
 	 *
 	 * @return array Associative list of widths in pixels as keys and urls as values
 	 */
@@ -271,14 +271,14 @@ class Standard
 	 */
 	public function setPreview( string $url ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		return $this->setPreviews( ['1' => $url] );
+		return $this->set( 'media.previews', [1 => $url] );
 	}
 
 
 	/**
-	 * Sets the new preview url of the media item.
+	 * Sets the new preview urls for images of different sizes.
 	 *
-	 * @param array $url Preview URL or list of URLs with widths of the media file in pixels as keys
+	 * @param array $url List of preview URLs with widths of the media file in pixels as keys
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setPreviews( array $urls ) : \Aimeos\MShop\Media\Item\Iface
