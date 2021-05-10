@@ -199,7 +199,7 @@ class Standard
 	/**
 	 * Sets the logo path of the site.
 	 *
-	 * @param array $url List of logo URLs with widths of the media file in pixels as keys
+	 * @param array $value List of logo URLs with widths of the media file in pixels as keys
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
 	public function setLogos( array $value ) : \Aimeos\MShop\Common\Item\Tree\Iface

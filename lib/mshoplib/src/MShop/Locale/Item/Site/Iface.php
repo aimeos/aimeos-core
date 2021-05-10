@@ -29,4 +29,35 @@ interface Iface
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
 	public function setSiteId( string $value ) : \Aimeos\MShop\Locale\Item\Site\Iface;
+
+	/**
+	 * Returns the logo path of the site.
+	 *
+	 * @param bool $large Return the largest image instead of the smallest
+	 * @return string Returns the logo of the site
+	 */
+	public function getLogo( bool $large = false ) : string;
+
+	/**
+	 * Returns the logo path of the site.
+	 *
+	 * @return string Returns the logo of the site
+	 */
+	public function getLogos() : array;
+
+	/**
+	 * Sets the logo path of the site.
+	 *
+	 * @param string $value The logo of the site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setLogo( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+
+	/**
+	 * Sets the logo path of the site.
+	 *
+	 * @param array $value List of logo URLs with widths of the media file in pixels as keys
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setLogos( array $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
 }
