@@ -39,6 +39,10 @@ class Factory
 				throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to read from stream' ) );
 			}
 		}
+		elseif( $file instanceof \Psr\Http\Message\StreamInterface )
+		{
+			$content = $file->getContents();
+		}
 		elseif( is_string( $file ) )
 		{
 			if( strpos( $file, "\0" ) === false && is_file( $file ) )
