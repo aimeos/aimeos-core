@@ -224,6 +224,10 @@ class Standard
 	 */
 	protected function resize( int $scaleWidth, int $scaleHeight, int $width = null, int $height = null, bool $fit = true ) : Iface
 	{
+		if( !( $width || $height ) ) {
+			return $this;
+		}
+
 		if( ( $result = imagescale( $this->image, $scaleWidth, $scaleHeight, IMG_BICUBIC ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Unable to scale image' );
 		}

@@ -170,6 +170,10 @@ class Imagick
 
 			$newMedia = clone $this;
 
+			if( !( $width || $height ) ) {
+				return $this->watermark( $newMedia );
+			}
+
 			if( $fit === false && $width && $height )
 			{
 				$newMedia->image->cropThumbnailImage( (int) $width, (int) $height );
