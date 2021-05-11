@@ -109,6 +109,18 @@ class StrTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testMethod()
+	{
+		$this->assertNull( \Aimeos\MW\Str::method( 'upper' ) );
+
+		\Aimeos\MW\Str::method( 'upper', function( $str ) {
+			return strtoupper( $str );
+		} );
+
+		$this->assertEquals( 'ABC', Str::upper( 'abc' ) );
+	}
+
+
 	public function testSlug()
 	{
 		$this->assertEquals( 'a_b_c', Str::slug( 'a/b&c', 'en', '_' ) );
@@ -117,6 +129,21 @@ class StrTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'a-b-c', Str::slug( 'a/b&c' ) );
 		$this->assertEquals( '123', Str::slug( 123 ) );
 		$this->assertEquals( '', Str::slug( null ) );
+	}
+
+
+	public function testSlugCustom()
+	{
+		\Aimeos\MW\Str::method( 'slug', function( $str, $lang, $sep ) {
+			return strtolower( $str );
+		} );
+
+		$this->assertEquals( 'abc', Str::slug( 'ABC' ) );
+
+		\Aimeos\MW\Str::method( 'slug', function( $str, $lang, $sep ) {
+			$str = \voku\helper\ASCII::to_ascii( (string) $str, $lang );
+			return trim( preg_replace( '/[^A-Za-z0-9]+/', $sep, $str ), $sep );
+		} );
 	}
 
 
