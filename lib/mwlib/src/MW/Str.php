@@ -17,8 +17,26 @@ namespace Aimeos\MW;
  */
 class Str
 {
+	private static $methods = [];
 	private static $node;
 	private static $seq = 0;
+
+
+	/**
+	 * Calls custom methods
+	 *
+	 * @param string $method Name of the method
+	 * @param array $args Method parameters
+	 * @return mixed Return value of the called method
+	 */
+	public static function __callStatic( string $method, array $args )
+	{
+		if( $fcn = static::method( $method ) ) {
+			return $fcn( ...$args );
+		}
+
+		throw new \InvalidArgumentException( sprintf( 'Unknown method "%1$s" in "%2$s"', $method, __CLASS__ ) );
+	}
 
 
 	/**
@@ -135,6 +153,23 @@ class Str
 
 
 	/**
+	 * Registers a custom method
+	 *
+	 * @param string $method Name of the method
+	 * @param \Closure|null $fcn Anonymous function which receives the same parameters as the original method
+	 * @return \Closure|null Registered anonymous function or NULL if none has been registered
+	 */
+	public static function method( string $method, \Closure $fcn = null ) : ?\Closure
+	{
+		if( $fcn ) {
+			self::$methods[$method] = $fcn;
+		}
+
+		return self::$methods[$method] ?? null;
+	}
+
+
+	/**
 	 * Transforms the string into a suitable URL segment.
 	 *
 	 * @param mixed $str Stringable value
@@ -144,6 +179,10 @@ class Str
 	 */
 	public static function slug( $str, string $lang = 'en', string $sep = '-' ) : string
 	{
+		if( $fcn = static::method( 'slug' ) ) {
+			return $fcn( $str, $lang, $sep );
+		}
+
 		$str = \voku\helper\ASCII::to_ascii( (string) $str, $lang );
 		return trim( preg_replace( '/[^A-Za-z0-9]+/', $sep, $str ), $sep );
 	}
