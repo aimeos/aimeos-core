@@ -27,7 +27,7 @@ class Factory
 	 * - image: Associative list of image related options
 	 * - application: Associative list of application related options
 	 *
-	 * @param resource|string $file File resource, path to the file or file content
+	 * @param \Psr\Http\Message\StreamInterface|resource|string $file File resource, path to the file or file content
 	 * @param array $options Associative list of options for configuring the media class
 	 * @return \Aimeos\MW\Media\Iface Media object
 	 */
