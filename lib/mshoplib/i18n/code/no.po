@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2019-04-02 13:24+0000\n"
+"PO-Revision-Date: 2021-04-01 16:11+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Norwegian (http://www.transifex.com/aimeos/aimeos-core/language/no/)\n"
 "MIME-Version: 1.0\n"
@@ -44,6 +44,10 @@ msgstr "Company"
 #. Address salutation
 msgid "mr"
 msgstr "Mr"
+
+#. Address salutation
+msgid "ms"
+msgstr ""
 
 #. Address salutation
 msgid "mrs"

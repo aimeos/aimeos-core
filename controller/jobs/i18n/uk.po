@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-02 15:52+0100\n"
-"PO-Revision-Date: 2021-03-13 11:06+0000\n"
-"Last-Translator: Alex k <akropivko@gmail.com>\n"
+"POT-Creation-Date: 2021-04-21 11:32+0200\n"
+"PO-Revision-Date: 2021-04-21 09:35+0000\n"
+"Last-Translator: Oleksandr Kropyvko <akropivko@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/aimeos/aimeos-core/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -94,7 +94,7 @@ msgstr ""
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
-msgstr ""
+msgstr "Помилка розгортання вузла \"%1$s\""
 
 msgid "Exports all available products"
 msgstr ""
@@ -107,7 +107,7 @@ msgstr ""
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
-msgstr ""
+msgstr "Файл або каталог \"%1$s\" не існує"
 
 #, php-format
 msgid "Finished attribute import from \"%1$s\""
@@ -245,7 +245,7 @@ msgstr ""
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
-msgstr ""
+msgstr "Не знайдено XML файл \"%1$s\""
 
 msgid "Optimizes the catalog index for searching products"
 msgstr ""
@@ -461,7 +461,7 @@ msgstr ""
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
-msgstr ""
+msgstr "Не вдалося перемістити імпортований файл \"%1$s\" у \"%2$s\""
 
 #, php-format
 msgid "Unable to renew subscription with ID \"%1$s\": %2$s"
