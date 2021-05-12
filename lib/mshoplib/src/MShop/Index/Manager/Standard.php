@@ -306,7 +306,7 @@ class Standard
 			$search->setConditions( $search->compare( '==', 'product.id', $result->keys()->toArray() ) );
 			$this->writeIndex( $search, $domains, $size );
 
-			$start += $size;
+			$start += count( $result );
 		}
 		while( !$result->isEmpty() );
 
