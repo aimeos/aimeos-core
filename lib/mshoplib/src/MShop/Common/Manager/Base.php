@@ -239,19 +239,19 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	{
 		/** mshop/common/manager/aggregate/limit
 		 * Limits the number of records that are used when aggregating items
-		*
-		* As counting huge amount of records (several 10 000 records) takes a long time,
-		* the limit can cut down response times so the counts are available more quickly
-		* in the front-end and the server load is reduced.
-		*
-		* Using a low limit can lead to incorrect numbers if the amount of found items
-		* is very high. Approximate item counts are normally not a problem but it can
-		* lead to the situation that visitors see that no items are available despite
-		* the fact that there would be at least one.
-		*
-		* @param integer Number of records
-		* @since 2021.04
-		*/
+		 *
+		 * As counting huge amount of records (several 10 000 records) takes a long time,
+		 * the limit can cut down response times so the counts are available more quickly
+		 * in the front-end and the server load is reduced.
+		 *
+		 * Using a low limit can lead to incorrect numbers if the amount of found items
+		 * is very high. Approximate item counts are normally not a problem but it can
+		 * lead to the situation that visitors see that no items are available despite
+		 * the fact that there would be at least one.
+		 *
+		 * @param integer Number of records
+		 * @since 2021.04
+		 */
 		$limit = $this->context->getConfig()->get( 'mshop/common/manager/aggregate/limit', 10000 );
 		$keys = (array) $keys;
 
