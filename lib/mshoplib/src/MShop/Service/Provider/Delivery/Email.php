@@ -136,7 +136,6 @@ class Email
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orderItems List of order items to export
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface[] $baseItems Associative list of order base items to export
-	 * @param string E-Mail body content
 	 */
 	protected function getEmailContent( iterable $orderItems, iterable $baseItems )
 	{
@@ -153,7 +152,6 @@ class Email
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orderItems List of order items to export
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface[] $baseItems Associative list of order base items to export
-	 * @param string E-Mail order content
 	 */
 	protected function getOrderContent( iterable $orderItems, iterable $baseItems )
 	{
@@ -193,9 +191,9 @@ class Email
 	protected function send( iterable $orderItems, iterable $baseItems )
 	{
 		$this->getContext()->mail()->createMessage()
-			->addFrom( $this->getConfigValue( 'email.from' ) )
-			->addTo( $this->getConfigValue( 'email.to' ) )
-			->setSubject( $this->getConfigValue( 'email.subject', 'New orders' ) )
+			->addFrom( (string) $this->getConfigValue( 'email.from' ) )
+			->addTo( (string) $this->getConfigValue( 'email.to' ) )
+			->setSubject( (string) $this->getConfigValue( 'email.subject', 'New orders' ) )
 			->addAttachment( $this->getOrderContent( $orderItems, $baseItems ), 'text/plain', 'orders.csv' )
 			->setBody( $this->getEmailContent( $orderItems, $baseItems ) )
 			->send();
