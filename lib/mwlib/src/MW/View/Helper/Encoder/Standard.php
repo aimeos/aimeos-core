@@ -56,7 +56,7 @@ class Standard
 			return (string) $value;
 		}
 
-		return str_replace( ['"', '\''], ['&quot;', '&apos;'], (string) $value );
+		return str_replace( ['"', '\'', '`'], ['&quot;', '&apos;', '``'], (string) $value );
 	}
 
 
