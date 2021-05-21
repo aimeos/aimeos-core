@@ -388,7 +388,7 @@ abstract class Base
 		// Add custom columns
 		foreach( $list as $key => $value )
 		{
-			if( is_scalar( $value ) && strpos( $key, '.' ) === false ) {
+			if( ( $value === null || is_scalar( $value ) ) && strpos( $key, '.' ) === false ) {
 				$this->set( $key, $value );
 			}
 		}
