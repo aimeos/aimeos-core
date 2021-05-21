@@ -79,6 +79,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'locale.site.icon' => array(
+			'code' => 'locale.site.icon',
+			'internalcode' => 'mlocsi."icon"',
+			'label' => 'Site icon',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'locale.site.logo' => array(
 			'code' => 'locale.site.logo',
 			'internalcode' => 'mlocsi."logo"',
@@ -91,6 +99,14 @@ class Standard
 			'code' => 'locale.site.supplierid',
 			'internalcode' => 'mlocsi."supplierid"',
 			'label' => 'Site-related supplier ID',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'locale.site.theme' => array(
+			'code' => 'locale.site.theme',
+			'internalcode' => 'mlocsi."theme"',
+			'label' => 'Site theme',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
@@ -295,8 +311,10 @@ class Standard
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getIcon() );
 			$stmt->bind( $idx++, json_encode( $item->getLogos(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $item->getSupplierId() );
+			$stmt->bind( $idx++, $item->getTheme() );
 			$stmt->bind( $idx++, $context->getEditor() );
 			$stmt->bind( $idx++, date( 'Y-m-d H:i:s' ) ); // mtime
 			$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -868,8 +886,10 @@ class Standard
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getIcon() );
 			$stmt->bind( $idx++, json_encode( $item->getLogos(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $item->getSupplierId() );
+			$stmt->bind( $idx++, $item->getTheme() );
 			$stmt->bind( $idx++, $context->getEditor() );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $date ); // ctime

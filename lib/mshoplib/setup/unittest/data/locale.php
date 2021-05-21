@@ -9,8 +9,8 @@
 return [
 	'locale/site' => [
 		'unittest' => [
-			'code' => 'unittest', 'label' => 'Unit test site', 'status' => 1,
-			'logo' => [1 => 'path/to/site-logo.png'], 'supplierid' => '1234',
+			'code' => 'unittest', 'label' => 'Unit test site', 'status' => 1, 'theme' => 'shop',
+			'icon' => 'path/to/site-icon.png', 'logo' => [1 => 'path/to/site-logo.png'], 'supplierid' => '1234',
 			'config' => ["timezone" => "Europe/Berlin", "emailfrom" => "no-reply@example.com", "emailreply" => "test@example.com"]
 		]
 	],

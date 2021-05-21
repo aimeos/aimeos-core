@@ -203,13 +203,13 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_locale_site" ( :names
-						"siteid", "code", "label", "config", "status", "logo",
-						"supplierid", "editor", "mtime", "ctime", "parentid", "level",
+						"siteid", "code", "label", "config", "status", "icon", "logo",
+						"supplierid", "theme", "editor", "mtime", "ctime", "parentid", "level",
 						"nleft", "nright"
 
 					)
 					SELECT :values
-						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0,
+						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0,
 						COALESCE( MAX("nright"), 0 ) + 1, COALESCE( MAX("nright"), 0 ) + 2
 					FROM "mshop_locale_site"
 				'
@@ -219,7 +219,7 @@ return array(
 					UPDATE "mshop_locale_site"
 					SET :names
 						"siteid" = ?, "code" = ?, "label" = ?, "config" = ?, "status" = ?,
-						"logo" = ?, "supplierid" = ?, "editor" = ?, "mtime" = ?
+						"icon" = ?, "logo" = ?, "supplierid" = ?, "theme" = ?, "editor" = ?, "mtime" = ?
 					WHERE id = ?
 				'
 			),
@@ -229,7 +229,8 @@ return array(
 						mlocsi."id" AS "locale.site.id", mlocsi."siteid" AS "locale.site.siteid",
 						mlocsi."code" AS "locale.site.code", mlocsi."label" AS "locale.site.label",
 						mlocsi."config" AS "locale.site.config", mlocsi."status" AS "locale.site.status",
-						mlocsi."logo" AS "locale.site.logo", mlocsi."supplierid" AS "locale.site.supplierid",
+						mlocsi."icon" AS "locale.site.icon", mlocsi."logo" AS "locale.site.logo",
+						mlocsi."supplierid" AS "locale.site.supplierid", mlocsi."theme" AS "locale.site.theme",
 						mlocsi."editor" AS "locale.site.editor", mlocsi."mtime" AS "locale.site.mtime",
 						mlocsi."ctime" AS "locale.site.ctime"
 					FROM "mshop_locale_site" AS mlocsi
@@ -242,7 +243,8 @@ return array(
 						mlocsi."id" AS "locale.site.id", mlocsi."siteid" AS "locale.site.siteid",
 						mlocsi."code" AS "locale.site.code", mlocsi."label" AS "locale.site.label",
 						mlocsi."config" AS "locale.site.config", mlocsi."status" AS "locale.site.status",
-						mlocsi."logo" AS "locale.site.logo", mlocsi."supplierid" AS "locale.site.supplierid",
+						mlocsi."icon" AS "locale.site.icon", mlocsi."logo" AS "locale.site.logo",
+						mlocsi."supplierid" AS "locale.site.supplierid", mlocsi."theme" AS "locale.site.theme",
 						mlocsi."editor" AS "locale.site.editor", mlocsi."mtime" AS "locale.site.mtime",
 						mlocsi."ctime" AS "locale.site.ctime"
 					FROM "mshop_locale_site" AS mlocsi

@@ -185,6 +185,29 @@ class Standard
 
 
 	/**
+	 * Returns the icon path of the site.
+	 *
+	 * @return string Returns the icon of the site
+	 */
+	public function getIcon() : string
+	{
+		return $this->get( 'locale.site.icon', '' );
+	}
+
+
+	/**
+	 * Sets the icon path of the site.
+	 *
+	 * @param string $value The icon of the site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setIcon( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	{
+		return $this->set( 'locale.site.icon', $value );
+	}
+
+
+	/**
 	 * Sets the logo path of the site.
 	 *
 	 * @param string $value The logo of the site
@@ -264,6 +287,28 @@ class Standard
 		return $this->set( 'locale.site.supplierid', $value );
 	}
 
+	/**
+	 * Returns the theme name for the site.
+	 *
+	 * @return string Returns the theme name for the site or emtpy for default theme
+	 */
+	public function getTheme() : string
+	{
+		return $this->get( 'locale.site.theme', '' );
+	}
+
+
+	/**
+	 * Sets the theme name for the site.
+	 *
+	 * @param string $value The theme name for the site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setTheme( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	{
+		return $this->set( 'locale.site.theme', $value );
+	}
+
 
 	/**
 	 * Returns the item type
@@ -308,6 +353,8 @@ class Standard
 				case 'locale.site.config': $item = $item->setConfig( (array) $value ); break;
 				case 'locale.site.supplierid': $item = $item->setSupplierId( $value ); break;
 				case 'locale.site.logo': $item = $item->setLogos( (array) $value ); break;
+				case 'locale.site.theme': $item = $item->setTheme( $value ); break;
+				case 'locale.site.icon': $item = $item->setIcon( $value ); break;
 				default: continue 2;
 			}
 
@@ -329,7 +376,9 @@ class Standard
 		$list = parent::toArray( $private );
 
 		$list['locale.site.code'] = $this->getCode();
+		$list['locale.site.icon'] = $this->getIcon();
 		$list['locale.site.logo'] = $this->getLogos();
+		$list['locale.site.theme'] = $this->getTheme();
 		$list['locale.site.label'] = $this->getLabel();
 		$list['locale.site.status'] = $this->getStatus();
 		$list['locale.site.supplierid'] = $this->getSupplierId();

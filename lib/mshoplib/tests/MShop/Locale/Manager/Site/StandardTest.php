@@ -81,8 +81,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getConfig(), $itemSaved->getConfig() );
 		$this->assertEquals( $item->getChildren(), $itemSaved->getChildren() );
 		$this->assertEquals( $item->getSupplierId(), $itemSaved->getSupplierId() );
+		$this->assertEquals( $item->getTheme(), $itemSaved->getTheme() );
 		$this->assertEquals( $item->getLogos(), $itemSaved->getLogos() );
 		$this->assertEquals( $item->getLogo(), $itemSaved->getLogo() );
+		$this->assertEquals( $item->getIcon(), $itemSaved->getIcon() );
 
 		$this->assertEquals( $context->getEditor(), $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -96,8 +98,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getConfig(), $itemUpd->getConfig() );
 		$this->assertEquals( $itemExp->getChildren(), $itemUpd->getChildren() );
 		$this->assertEquals( $itemExp->getSupplierId(), $itemUpd->getSupplierId() );
+		$this->assertEquals( $itemExp->getTheme(), $itemUpd->getTheme() );
 		$this->assertEquals( $itemExp->getLogos(), $itemUpd->getLogos() );
 		$this->assertEquals( $itemExp->getLogo(), $itemUpd->getLogo() );
+		$this->assertEquals( $itemExp->getIcon(), $itemUpd->getIcon() );
 
 		$this->assertEquals( $context->getEditor(), $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
@@ -148,8 +152,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'locale.site.code', 'unittest' );
 		$expr[] = $search->compare( '==', 'locale.site.label', 'Unit test site' );
 		$expr[] = $search->compare( '=~', 'locale.site.config', '{' );
+		$expr[] = $search->compare( '==', 'locale.site.icon', 'path/to/site-icon.png' );
 		$expr[] = $search->compare( '=~', 'locale.site.logo', '{' );
 		$expr[] = $search->compare( '==', 'locale.site.supplierid', '1234' );
+		$expr[] = $search->compare( '==', 'locale.site.theme', 'shop' );
 		$expr[] = $search->compare( '==', 'locale.site.status', 1 );
 		$expr[] = $search->compare( '>=', 'locale.site.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'locale.site.ctime', '1970-01-01 00:00:00' );

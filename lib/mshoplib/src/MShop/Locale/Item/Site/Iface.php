@@ -31,6 +31,21 @@ interface Iface
 	public function setSiteId( string $value ) : \Aimeos\MShop\Locale\Item\Site\Iface;
 
 	/**
+	 * Returns the icon path of the site.
+	 *
+	 * @return string Returns the icon of the site
+	 */
+	public function getIcon() : string;
+
+	/**
+	 * Sets the icon path of the site.
+	 *
+	 * @param string $value The icon of the site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setIcon( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+
+	/**
 	 * Returns the logo path of the site.
 	 *
 	 * @param bool $large Return the largest image instead of the smallest
@@ -60,4 +75,34 @@ interface Iface
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
 	public function setLogos( array $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+
+	/**
+	 * Returns the supplier ID related to the site.
+	 *
+	 * @return string Returns the supplier ID related to the site
+	 */
+	public function getSupplierId() : string;
+
+	/**
+	 * Sets the supplier ID related to the site.
+	 *
+	 * @param string $value The supplier ID related to the site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setSupplierId( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+
+	/**
+	 * Returns the theme name for the site.
+	 *
+	 * @return string Returns the theme name for the site or empty for default theme
+	 */
+	public function getTheme() : string;
+
+	/**
+	 * Sets the theme name for the site.
+	 *
+	 * @param string $value The theme name for the site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setTheme( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
 }

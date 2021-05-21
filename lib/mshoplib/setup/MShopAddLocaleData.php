@@ -117,7 +117,9 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 				$siteItem->setConfig( $dataset['config'] );
 				$siteItem->setStatus( $dataset['status'] );
 				$siteItem->setSupplierId( $dataset['supplierid'] ?? '' );
+				$siteItem->setTheme( $dataset['theme'] ?? '' );
 				$siteItem->setLogos( $dataset['logo'] ?? [] );
+				$siteItem->setIcon( $dataset['icon'] ?? '' );
 
 				$localeSiteManager->insert( $siteItem, $parentId );
 				$siteIds[$key] = $siteItem->getSiteId();
