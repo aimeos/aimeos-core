@@ -265,10 +265,10 @@ class Standard implements \Aimeos\MW\View\Iface
 
 			return str_replace( ["\t", '    '], '', ob_get_clean() );
 		}
-		catch( \Exception $e )
+		catch( \Throwable $t )
 		{
 			ob_end_clean();
-			throw $e;
+			throw $t;
 		}
 	}
 
