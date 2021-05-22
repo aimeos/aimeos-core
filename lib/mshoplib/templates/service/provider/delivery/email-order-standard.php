@@ -3,10 +3,10 @@
 $csv = function( string $type, string $id, array $data ) {
 
 	foreach( $data as $pos => $entry ) {
-		$data[$pos] = '"' . str_replace( '"', '""', $entry ) . '"' . PHP_EOL;
+		$data[$pos] = '"' . str_replace( '"', '', json_encode( $entry ) ) . '"';
 	}
 
-	return '"' . $type . '";"' . $id . '";' . join( ';', $data );
+	return '"' . $type . '";"' . $id . '";' . join( ';', $data ) . PHP_EOL;
 };
 
 
@@ -18,22 +18,18 @@ foreach( $this->get( 'orderItems', [] ) as $orderItem )
 		continue;
 	}
 
-	$addresses = $baseItem->getAddresses();
-	$products = $baseItem->getProducts();
-	$services = $baseItem->getServices();
-
 	$data = array_merge( $orderItem->toArray(), $baseItem->toArray() );
 
 	echo $csv( 'invoice', $orderItem->getId(), $data );
 
-	foreach( $addresses as $type => $addresses )
+	foreach( $baseItem->getAddresses()->krsort() as $type => $addresses )
 	{
 		foreach( $addresses as $address ) {
 			echo $csv( 'address', $orderItem->getId(), $address->toArray() );
 		}
 	}
 
-	foreach( $products->getProducts() as $product )
+	foreach( $baseItem->getProducts() as $product )
 	{
 		$list = $product->toArray();
 
@@ -52,20 +48,13 @@ foreach( $this->get( 'orderItems', [] ) as $orderItem )
 		echo $csv( 'product', $orderItem->getId(), $list );
 	}
 
-	foreach( $baseItem->getAddresses()->krsort() as $type => $addresses )
-	{
-		foreach( $addresses as $address ) {
-			echo $csv( 'address', $orderItem->getId(), $address->toArray() );
-		}
-	}
-
 	foreach( $baseItem->getServices()->krsort() as $type => $services )
 	{
 		foreach( $services as $service )
 		{
-			$list = $product->toArray();
+			$list = $service->toArray();
 
-			foreach( $product->getAttributeItems() as $attrItem )
+			foreach( $service->getAttributeItems() as $attrItem )
 			{
 				foreach( $attrItem->toArray( true ) as $key => $value )
 				{
@@ -81,7 +70,7 @@ foreach( $this->get( 'orderItems', [] ) as $orderItem )
 		}
 	}
 
-	echo PHP_EOL . PHP_EOL;
+	echo PHP_EOL;
 }
 
 ?>

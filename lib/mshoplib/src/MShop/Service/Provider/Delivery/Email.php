@@ -155,7 +155,7 @@ class Email
 	 */
 	protected function getOrderContent( iterable $orderItems, iterable $baseItems )
 	{
-		$template = $this->getConfigValue( 'email.template', 'service/provider/delivery/email-order-standard' );
+		$template = $this->getConfigValue( 'email.order-template', 'service/provider/delivery/email-order-standard' );
 
 		return $this->getContext()->getView()
 			->assign( ['orderItems' => $orderItems, 'baseItems' => $baseItems] )
