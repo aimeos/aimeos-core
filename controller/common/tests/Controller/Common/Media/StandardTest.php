@@ -308,7 +308,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetFilePathOctet()
 	{
 		$result = $this->access( 'getFilePath' )->invokeArgs( $this->object, array( '', 'files', 'application/octet-stream' ) );
-		$this->assertFalse( strpos( $result, '.' ) );
+		$this->assertNotEquals( '.', substr( $result, -4, 1 ) );
 	}
 
 
