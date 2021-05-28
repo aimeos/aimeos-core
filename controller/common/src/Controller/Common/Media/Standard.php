@@ -50,20 +50,24 @@ class Standard
 
 		$media = $this->getMediaFile( $file->getStream() );
 		$mimetype = $this->getMimeType( $media, 'files' );
+		$filepath = $this->getFilePath( $file->getClientFilename() ?: rand(), 'files', $mimetype );
 
-		if( $media instanceof \Aimeos\MW\Media\Image\Iface )
-		{
-			$item = $this->addImages( $item, $media, null, $fsname );
-		}
-		else
-		{
-			$filepath = $this->getFilePath( $file->getClientFilename() ?: rand(), 'files', $mimetype );
+		$fs = $this->context->getFilesystemManager()->get( $fsname );
+		$path = $item->getUrl();
 
-			$this->store( $filepath, $media->save(), $fsname );
-			$item->setUrl( $filepath )->setPreviews( [1 => $this->getMimeIcon( $mimetype )] )->setMimeType( $mimetype );
+		if( $path && $fs->has( $path ) ) {
+			$fs->rm( $path );
 		}
 
-		return $item->setLabel( $item->getLabel() ?: basename( $file->getClientFilename() ) );
+		$this->store( $filepath, $media->save(), $fsname );
+
+		if( $media instanceof \Aimeos\MW\Media\Image\Iface ) {
+			$item = $this->addImages( $item, $media, basename( $filepath ), $fsname );
+		} else {
+			$item->setPreviews( [1 => $this->getMimeIcon( $mimetype )] )->setMimeType( $mimetype );
+		}
+
+		return $item->setUrl( $filepath )->setLabel( $item->getLabel() ?: basename( $file->getClientFilename() ) );
 	}
 
 
@@ -164,14 +168,14 @@ class Standard
 			return $item;
 		}
 
-		$path = $item->getUrl();
-		$media = $this->getMediaFile( $this->getFileContent( $path, $fsname ) );
+		$name = basename( $item->getUrl() );
+		$media = $this->getMediaFile( $this->getFileContent( $item->getUrl(), $fsname ) );
 
 		if( !( $media instanceof \Aimeos\MW\Media\Image\Iface ) ) {
 			return $item;
 		}
 
-		return $this->addImages( $this->deletePreviews( $item, $fsname ), $media, $path, $fsname );
+		return $this->addImages( $this->deletePreviews( $item, $fsname ), $media, $name, $fsname );
 	}
 
 
@@ -180,30 +184,25 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item which will contain the image URLs afterwards
 	 * @param \Aimeos\MW\Media\Image\Iface $media Image object to scale
-	 * @param string|null $path Path to the file or URL, empty or random for uploaded files
+	 * @param string|null $name Name of the file, NULL for random name
 	 * @param string $fsname File system name the file is located at
 	 * @return \Aimeos\MShop\Media\Item\Iface Updated media item with URLs
 	 */
-	protected function addImages( \Aimeos\MShop\Media\Item\Iface $item, \Aimeos\MW\Media\Image\Iface $media, ?string $path, string $fsname ) : \Aimeos\MShop\Media\Item\Iface
+	protected function addImages( \Aimeos\MShop\Media\Item\Iface $item, \Aimeos\MW\Media\Image\Iface $media, ?string $name, string $fsname ) : \Aimeos\MShop\Media\Item\Iface
 	{
-		if( $path === null )
-		{
-			$path = $this->getFilePath( rand(), 'files', $media->getMimeType() );
-			$this->store( $path, $media->save(), $fsname );
-		}
-
 		$previews = [];
 		$mime = $this->getMimeType( $media, 'preview' );
+		$item = $this->deletePreviews( $item, $fsname );
 
 		foreach( $this->createPreviews( $media, $item->getDomain(), $item->getType() ) as $type => $mediaFile )
 		{
-			$filepath = $this->getFilePath( rand(), 'preview', $media->getMimeType() );
+			$filepath = $this->getFilePath( $name ?: rand(), 'preview', $media->getMimeType() );
 			$this->store( $filepath, $mediaFile->save( null, $mime ), $fsname );
 			$previews[$mediaFile->getWidth()] = $filepath;
 			unset( $mediaFile );
 		}
 
-		return $item->setUrl( $path )->setPreviews( $previews )->setMimeType( $media->getMimeType() );
+		return $item->setPreviews( $previews )->setMimeType( $media->getMimeType() );
 	}
 
 
@@ -361,7 +360,8 @@ class Standard
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
 		$mimelen = strlen( $mimedir );
 
-		foreach( $item->getPreviews() as $preview )
+		// don't delete first (smallest) image because it's referenced in past orders
+		foreach( array_slice( $item->getPreviews(), 1 ) as $preview )
 		{
 			try
 			{
@@ -447,10 +447,11 @@ class Standard
 		 */
 		$list = $this->context->getConfig()->get( 'controller/common/media/extensions', [] );
 
-		$siteId = $this->context->getLocale()->getSiteId();
-		$filename = trim( preg_replace( '/[^A-Za-z0-9]+/', '_', $filename ), '_' );
+		$filename = \Aimeos\MW\Str::slug( substr( $filename, 0, strrpos( $filename, '.' ) ?: null ) );
 		$filename = substr( md5( $filename . getmypid() . microtime( true ) ), -8 ) . '_' . $filename;
+
 		$ext = isset( $list[$mimeext] ) ? '.' . $list[$mimeext] : ( ctype_alpha( $mimeext ) ? '.' . $mimeext : '' );
+		$siteId = $this->context->getLocale()->getSiteId();
 
 		return "${siteId}/${type}/${filename[0]}/${filename[1]}/${filename}${ext}";
 	}
@@ -476,6 +477,7 @@ class Standard
 		 *  	'image' => array(
 		 *  		'name' => 'Imagick',
 		 *  		'quality' => 75,
+		 * 			'background' => '#f8f8f8' // only if "force-size" is true
 		 *  	)
 		 *  )
 		 *
