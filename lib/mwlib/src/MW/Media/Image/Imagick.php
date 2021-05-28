@@ -157,32 +157,22 @@ class Imagick
 	{
 		try
 		{
-			if( $fit === true )
-			{
-				$w = $this->image->getImageWidth();
-				$h = $this->image->getImageHeight();
-				list( $width, $height ) = $this->getSizeFitted( $w, $h, $width, $height );
+			$w = $this->image->getImageWidth();
+			$h = $this->image->getImageHeight();
 
-				if( $w <= $width && $h <= $height ) {
-					return $this->watermark( clone $this );
-				}
-			}
-
+			list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
 			$newMedia = clone $this;
 
-			if( !( $width || $height ) ) {
-				return $this->watermark( $newMedia );
+			if( $w > $newWidth || $h > $newHeight ) {
+				$newMedia->image->resizeImage( $newWidth, $newHeight, \Imagick::FILTER_CUBIC, 0.8 );
 			}
 
-			if( $fit === false && $width && $height )
+			if( !$fit && $width && $height )
 			{
-				$newMedia->image->cropThumbnailImage( (int) $width, (int) $height );
-				// see https://www.php.net/manual/en/imagick.cropthumbnailimage.php#106710
-				$newMedia->image->setImagePage( 0, 0, 0, 0 );
-			}
-			else
-			{
-				$newMedia->image->resizeImage( $width, $height, \Imagick::FILTER_CUBIC, 0.8 );
+				$w = ( $width - $newMedia->image->getImageWidth() ) / 2;
+				$h = ( $height - $newMedia->image->getImageHeight() ) / 2;
+
+				$newMedia->image->extentImage( $width, $height, (int) -$w, (int) -$h );
 			}
 
 			return $this->watermark( $newMedia );

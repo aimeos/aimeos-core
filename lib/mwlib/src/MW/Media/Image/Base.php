@@ -32,19 +32,16 @@ class Base
 	 */
 	protected function getSizeFitted( int $srcWidth, int $srcHeight, int $destWidth = null, int $destHeight = null )
 	{
-		if( !empty( $srcWidth ) && !empty( $srcHeight ) )
-		{
-			$destWidth = ( $destWidth === null ? $srcWidth : $destWidth );
-			$destHeight = ( $destHeight === null ? $srcHeight : $destHeight );
+		$destWidth = $destWidth ?: $srcWidth;
+		$destHeight = $destHeight ?: $srcHeight;
 
-			$wRatio = $srcWidth / $destWidth;
-			$hRatio = $srcHeight / $destHeight;
+		$wRatio = $srcWidth / $destWidth;
+		$hRatio = $srcHeight / $destHeight;
 
-			if( $wRatio > $hRatio ) {
-				$destHeight = (int) round( $srcHeight / $wRatio );
-			} else {
-				$destWidth = (int) round( $srcWidth / $hRatio );
-			}
+		if( $wRatio > $hRatio ) {
+			$destHeight = (int) round( $srcHeight / $wRatio );
+		} else {
+			$destWidth = (int) round( $srcWidth / $hRatio );
 		}
 
 		return [$destWidth, $destHeight];
