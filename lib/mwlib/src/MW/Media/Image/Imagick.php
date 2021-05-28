@@ -43,8 +43,15 @@ class Imagick
 
 		try
 		{
+			if( in_array( $mimetype, ['image/gif', 'image/png'] ) ) {
+				$bg = $options['image']['background'] ?? 'transparent';
+			} else {
+				$bg = $options['image']['background'] ?? '#ffffff';
+			}
+
 			$this->image = new \Imagick();
 			$this->image->readImageBlob( $content );
+			$this->image->setImageBackgroundColor( $bg );
 
 			if( isset( $options['image']['watermark'] ) && self::$wmpath !== $options['image']['watermark'] )
 			{
