@@ -250,7 +250,7 @@ class Standard
 
 		if( $width === false ) {
 			return (string) reset( $list );
-		} elseif ( $width === true ) {
+		} elseif( $width === true ) {
 			return (string) end( $list );
 		} elseif( isset( $list[$width] ) ) {
 			return (string) $list[$width];
