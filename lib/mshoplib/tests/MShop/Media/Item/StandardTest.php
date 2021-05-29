@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'media.label' => 'testPicture',
 			'media.mimetype' => 'image/jpeg',
 			'media.url' => 'http://www.url.com/test.jpg',
-			'media.previews' => [1 => '/directory/test.jpg', 2 => '/directory/test2.jpg'],
+			'media.previews' => [100 => '/directory/test.jpg', 200 => '/directory/test2.jpg'],
 			'media.status' => 6,
 			'media.languageid' => 'de',
 			'media.mtime' => '2011-01-01 00:00:02',
@@ -181,13 +181,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetPreview()
 	{
 		$this->assertEquals( '/directory/test.jpg', $this->object->getPreview() );
+		$this->assertEquals( '/directory/test.jpg', $this->object->getPreview( 100 ) );
 		$this->assertEquals( '/directory/test2.jpg', $this->object->getPreview( true ) );
+		$this->assertEquals( '/directory/test2.jpg', $this->object->getPreview( 150 ) );
+		$this->assertEquals( '/directory/test2.jpg', $this->object->getPreview( 250 ) );
 	}
 
 
 	public function testGetPreviews()
 	{
-		$this->assertEquals( [1 => '/directory/test.jpg', 2 => '/directory/test2.jpg'], $this->object->getPreviews() );
+		$this->assertEquals( [100 => '/directory/test.jpg', 200 => '/directory/test2.jpg'], $this->object->getPreviews() );
 	}
 
 

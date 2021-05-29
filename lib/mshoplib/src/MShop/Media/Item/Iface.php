@@ -71,10 +71,10 @@ interface Iface
 	/**
 	 * Returns the preview url of the media item.
 	 *
-	 * @param bool $large Return the largest image instead of the smallest
+	 * @param bool|int $size TRUE for the largest image, FALSE for the smallest or a concrete image width
 	 * @return string Preview URL of the media file
 	 */
-	public function getPreview( bool $large = false ) : string;
+	public function getPreview( $width = false ) : string;
 
 	/**
 	 * Returns all preview urls of the media item

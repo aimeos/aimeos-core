@@ -239,13 +239,38 @@ class Standard
 	/**
 	 * Returns the preview url of the media item.
 	 *
-	 * @param bool $large Return the largest image instead of the smallest
+	 * @param bool|int $size TRUE for the largest image, FALSE for the smallest or a concrete image width
 	 * @return string Preview URL of the media file
 	 */
-	public function getPreview( bool $large = false ) : string
+	public function getPreview( $width = false ) : string
 	{
-		if( ( $list = (array) $this->get( 'media.previews', [] ) ) !== [] ) {
-			return (string) ( $large ? end( $list ) : current( $list ) );
+		if( ( $list = (array) $this->get( 'media.previews', [] ) ) === [] ) {
+			return '';
+		}
+
+		if( $width === false ) {
+			return (string) reset( $list );
+		} elseif ( $width === true ) {
+			return (string) end( $list );
+		} elseif( isset( $list[$width] ) ) {
+			return (string) $list[$width];
+		}
+
+		$before = $after = [];
+
+		foreach( $list as $idx => $path )
+		{
+			if( $idx < $width ) {
+				$before[$idx] = $path;
+			} else {
+				$after[$idx] = $path;
+			}
+		}
+
+		if( ( $path = array_shift( $after ) ) !== null ) {
+			return (string) $path;
+		} elseif( ( $path = array_pop( $before ) ) !== null ) {
+			return (string) $path;
 		}
 
 		return '';
