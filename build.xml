@@ -106,6 +106,15 @@
 			<fileset dir="${coredir}/lib/mshoplib/src/MShop" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
+			<fileset dir="${extdir}/ai-fosuser/lib/custom/src/MShop" expandsymboliclinks="true" >
+				<include name="**/*.php" />
+			</fileset>
+			<fileset dir="${extdir}/ai-laravel/lib/custom/src/MShop" expandsymboliclinks="true" >
+				<include name="**/*.php" />
+			</fileset>
+			<fileset dir="${extdir}/ai-typo3/lib/custom/src/MShop" expandsymboliclinks="true" >
+				<include name="**/*.php" />
+			</fileset>
 		</confdoc>
 		<confdoc prefix="controller/common" keyparts="1"
 			optfile="${coredir}/controller/common/tests/confdoc.ser"
