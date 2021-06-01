@@ -44,6 +44,19 @@ abstract class Base implements \Aimeos\MW\Config\Decorator\Iface
 
 
 	/**
+	 * Adds the given configuration and overwrite already existing keys.
+	 *
+	 * @param array $config Associative list of (multi-dimensional) configuration settings
+	 * @return \Aimeos\MW\Config\Iface Config instance for method chaining
+	 */
+	public function apply( array $config ) : \Aimeos\MW\Config\Iface
+	{
+		$this->object->apply( $config );
+		return $this;
+	}
+
+
+	/**
 	 * Returns the value of the requested config key.
 	 *
 	 * @param string $path Path to the requested value like tree/node/classname
@@ -64,7 +77,8 @@ abstract class Base implements \Aimeos\MW\Config\Decorator\Iface
 	 */
 	public function set( string $path, $value ) : \Aimeos\MW\Config\Iface
 	{
-		return $this->object->set( $path, $value );
+		$this->object->set( $path, $value );
+		return $this;
 	}
 
 

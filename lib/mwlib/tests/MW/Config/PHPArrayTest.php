@@ -25,6 +25,20 @@ class PHPArrayTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testApply()
+	{
+		$this->object->apply( ['resource' => ['db' => ['database' => 'testdb']]] );
+		$this->assertEquals( 'testdb', $this->object->get( 'resource/db/database' ) );
+
+		$this->object->apply( ['resource' => ['foo' => 'testdb']] );
+		$this->object->set( 'resource/foo', 'testdb' );
+		$this->assertEquals( 'testdb', $this->object->get( 'resource/foo' ) );
+
+		$this->object->apply( ['resource' => ['bar' => ['db' => 'testdb']]] );
+		$this->assertEquals( 'testdb', $this->object->get( 'resource/bar/db' ) );
+	}
+
+
 	public function testGet()
 	{
 		$this->assertEquals( '127.0.0.1', $this->object->get( 'resource/db/host' ) );
