@@ -191,8 +191,8 @@ class Email
 	protected function send( iterable $orderItems, iterable $baseItems )
 	{
 		$this->getContext()->mail()->createMessage()
-			->addFrom( (string) $this->getConfigValue( 'email.from' ) )
 			->addTo( (string) $this->getConfigValue( 'email.to' ) )
+			->addFrom( (string) $this->getConfigValue( 'email.from' ) )
 			->setSubject( (string) $this->getConfigValue( 'email.subject', 'New orders' ) )
 			->addAttachment( $this->getOrderContent( $orderItems, $baseItems ), 'text/plain', 'orders.csv' )
 			->setBody( $this->getEmailContent( $orderItems, $baseItems ) )
