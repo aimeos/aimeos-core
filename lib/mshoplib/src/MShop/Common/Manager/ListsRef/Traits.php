@@ -162,7 +162,13 @@ trait Traits
 		}
 
 		$manager = $this->getObject()->getSubManager( 'lists' );
-		$search = $manager->filter()->slice( 0, 0x7fffffff );
+		$search = $manager->filter()->slice( 0, 0x7fffffff )->order( [
+			$prefix . '.lists.parentid',
+			$prefix . '.lists.domain',
+			$prefix . '.lists.siteid',
+			$prefix . '.lists.type',
+			$prefix . '.lists.refid'
+		] );
 
 		if( is_array( $domains ) )
 		{
