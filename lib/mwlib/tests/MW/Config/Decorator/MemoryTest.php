@@ -52,7 +52,7 @@ class MemoryTest extends \PHPUnit\Framework\TestCase
 	public function testGetLocal()
 	{
 		$conf = new \Aimeos\MW\Config\PHPArray( [] );
-		$local = ['resource' => ['db' => ['host' => '127.0.0.1' ] ] ];
+		$local = ['resource' => ['db' => ['host' => '127.0.0.1']]];
 		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf, $local );
 
 		$this->assertEquals( '127.0.0.1', $this->object->get( 'resource/db/host', '127.0.0.2' ) );
