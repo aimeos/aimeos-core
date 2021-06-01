@@ -42,6 +42,19 @@ class Memory
 
 
 	/**
+	 * Adds the given configuration and overwrite already existing keys.
+	 *
+	 * @param array $config Associative list of (multi-dimensional) configuration settings
+	 * @return \Aimeos\MW\Config\Iface Config instance for method chaining
+	 */
+	public function apply( array $config ) : \Aimeos\MW\Config\Iface
+	{
+		$this->config = array_replace_recursive( $this->config, $config );
+		return $this;
+	}
+
+
+	/**
 	 * Returns the value of the requested config key.
 	 *
 	 * @param string $name Path to the requested value like tree/node/classname
@@ -89,10 +102,7 @@ class Memory
 		if( $value !== null )
 		{
 			$this->cache[$name] = $value;
-
-			if( isset( $this->negCache[$name] ) ) {
-				unset( $this->negCache[$name] );
-			}
+			unset( $this->negCache[$name] );
 		}
 		else
 		{

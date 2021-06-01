@@ -27,6 +27,21 @@ class MemoryTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testApply()
+	{
+		$cfg = ['resource' => ['db' => ['database' => 'test']]];
+		$conf = new \Aimeos\MW\Config\PHPArray( $cfg );
+
+		$local = ['resource' => ['db' => ['host' => '127.0.0.1']]];
+		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf, $local );
+		$this->object->apply( ['resource' => ['db' => ['host' => '127.0.0.2', 'database' => 'testdb']]] );
+
+		$result = $this->object->get( 'resource/db', [] );
+		$this->assertEquals( 'testdb', $result['database'] );
+		$this->assertEquals( '127.0.0.2', $result['host'] );
+	}
+
+
 	public function testGetSet()
 	{
 		$this->object->set( 'resource/db/host', '127.0.0.1' );
@@ -37,7 +52,7 @@ class MemoryTest extends \PHPUnit\Framework\TestCase
 	public function testGetLocal()
 	{
 		$conf = new \Aimeos\MW\Config\PHPArray( [] );
-		$local = array( 'resource' => array( 'db' => array( 'host' => '127.0.0.1' ) ) );
+		$local = ['resource' => ['db' => ['host' => '127.0.0.1' ] ] ];
 		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf, $local );
 
 		$this->assertEquals( '127.0.0.1', $this->object->get( 'resource/db/host', '127.0.0.2' ) );
@@ -52,10 +67,10 @@ class MemoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetOverwrite()
 	{
-		$cfg = array( 'resource' => array( 'db' => array( 'database' => 'test' ) ) );
+		$cfg = ['resource' => ['db' => ['database' => 'test']]];
 		$conf = new \Aimeos\MW\Config\PHPArray( $cfg );
 
-		$local = array( 'resource' => array( 'db' => array( 'host' => '127.0.0.1' ) ) );
+		$local = ['resource' => ['db' => ['host' => '127.0.0.1']]];
 		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf, $local );
 
 		$result = $this->object->get( 'resource/db', [] );
