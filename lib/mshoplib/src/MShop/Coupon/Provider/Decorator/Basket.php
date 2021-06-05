@@ -13,12 +13,12 @@ namespace Aimeos\MShop\Coupon\Provider\Decorator;
 
 
 /**
- * BasketValues decorator for coupon provider.
+ * Basket decorator for coupon provider.
  *
  * @package MShop
  * @subpackage Coupon
  */
-class BasketValues
+class Basket
 	extends \Aimeos\MShop\Coupon\Provider\Decorator\Base
 	implements \Aimeos\MShop\Coupon\Provider\Decorator\Iface
 {

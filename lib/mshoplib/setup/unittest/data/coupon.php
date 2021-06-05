@@ -7,34 +7,34 @@
 
 return [
 	'coupon' => [[
-		'coupon.label' => 'Unit test fixed rebate', 'coupon.provider' => 'FixedRebate,BasketValues',
-		'coupon.config' => ['fixedrebate.productcode' => 'U:MD', 'basketvalues.total-value-min' => ['EUR' => '9.00'], 'fixedrebate.rebate' => '2.50'],
+		'coupon.label' => 'Unit test fixed rebate', 'coupon.provider' => 'FixedRebate,Basket',
+		'coupon.config' => ['fixedrebate.productcode' => 'U:MD', 'basket.total-value-min' => ['EUR' => '9.00'], 'fixedrebate.rebate' => '2.50'],
 		'coupon.datestart' => '2002-01-01 00:00:00', 'coupon.dateend' => '2100-12-31 00:00:00',
 		'codes' => [[
 			'coupon.code.code' => '5678', 'coupon.code.count' => 2000000,
 			'coupon.code.datestart' => '2000-01-01 00:00:00', 'coupon.code.dateend' => '2004-12-21 23:59:59'
 		]]
 	], [
-		'coupon.label' => 'Unit test percent rebate', 'coupon.provider' => 'PercentRebate,BasketValues',
-		'coupon.config' => ['basketvalues.total-value-min' => ['EUR' => '9.00'], 'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '10'],
+		'coupon.label' => 'Unit test percent rebate', 'coupon.provider' => 'PercentRebate,Basket',
+		'coupon.config' => ['basket.total-value-min' => ['EUR' => '9.00'], 'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '10'],
 		'codes' => [[
 			'coupon.code.code' => '90AB', 'coupon.code.count' => 2000000
 		]]
 	], [
-		'coupon.label' => 'Unit test free shipping', 'coupon.provider' => 'FreeShipping,BasketValues',
-		'coupon.config' => ['basketvalues.total-value-min' => ['EUR' => '9.00'], 'freeshipping.productcode' => 'U:SD'],
+		'coupon.label' => 'Unit test free shipping', 'coupon.provider' => 'FreeShipping,Basket',
+		'coupon.config' => ['basket.total-value-min' => ['EUR' => '9.00'], 'freeshipping.productcode' => 'U:SD'],
 		'codes' => [[
 			'coupon.code.code' => 'CDEF', 'coupon.code.count' => 2000000
 		]]
 	], [
-		'coupon.label' => 'Unit test present', 'coupon.provider' => 'Present,BasketValues',
-		'coupon.config' => ['basketvalues.total-value-min' => ['EUR' => '9.00'], 'present.productcode' => 'U:PD', 'present.quantity' => 2],
+		'coupon.label' => 'Unit test present', 'coupon.provider' => 'Present,Basket',
+		'coupon.config' => ['basket.total-value-min' => ['EUR' => '9.00'], 'present.productcode' => 'U:PD', 'present.quantity' => 2],
 		'codes' => [[
 			'coupon.code.code' => 'GHIJ', 'coupon.code.count' => 2000000
 		]]
 	], [
-		'coupon.label' => 'Unit test example', 'coupon.provider' => 'Example,BasketValues',
-		'coupon.config' => ['basketvalues.total-value-min' => ['EUR' => '9.00']],
+		'coupon.label' => 'Unit test example', 'coupon.provider' => 'Example,Basket',
+		'coupon.config' => ['basket.total-value-min' => ['EUR' => '9.00']],
 		'codes' => [[
 			'coupon.code.code' => 'OPQR', 'coupon.code.count' => 2000000
 		]]

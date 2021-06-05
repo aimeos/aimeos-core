@@ -10,7 +10,7 @@
 namespace Aimeos\MShop\Coupon\Provider\Decorator;
 
 
-class BasketValuesTest extends \PHPUnit\Framework\TestCase
+class BasketTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $orderBase;
@@ -26,7 +26,7 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 		$this->couponItem = $couponManager->create();
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $context, $this->couponItem, 'abcd' );
-		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\BasketValues( $provider, $context, $this->couponItem, 'abcd' );
+		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Basket( $provider, $context, $this->couponItem, 'abcd' );
 		$this->object->setObject( $this->object );
 
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $context );
