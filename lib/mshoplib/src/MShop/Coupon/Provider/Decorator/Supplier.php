@@ -25,13 +25,74 @@ class Supplier
 		'supplier.code' => array(
 			'code' => 'supplier.code',
 			'internalcode' => 'supplier.code',
-			'label' => 'Required code of the supplier',
+			'label' => 'Comma separated supplier codes',
 			'type' => 'string',
 			'internaltype' => 'string',
 			'default' => '',
 			'required' => true,
 		),
+		'supplier.only' => array(
+			'code' => 'supplier.only',
+			'internalcode' => 'supplier.only',
+			'label' => 'Rebate is applied only to products of that supplier',
+			'type' => 'boolean',
+			'internaltype' => 'boolean',
+			'default' => false,
+			'required' => false,
+		),
 	);
+
+
+	/**
+	 * Returns the price the discount should be applied to
+	 *
+	 * The result depends on the configured restrictions and it must be less or
+	 * equal to the passed price.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @return \Aimeos\MShop\Price\Item\Iface New price that should be used
+	 */
+	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Price\Item\Iface
+	{
+		if( $this->getConfigValue( 'supplier.only' ) == true )
+		{
+			$prodIds = [];
+
+			foreach( $base->getProducts() as $product ) {
+				$prodIds[$product->getProductId()][] = $product;
+			}
+
+			$manager = \Aimeos\MShop::create( $this->getContext(), 'supplier' );
+			$listManager = \Aimeos\MShop::create( $this->getContext(), 'supplier/lists' );
+
+			$codes = explode( ',', $this->getConfigValue( 'supplier.code' ) );
+			$price = \Aimeos\MShop::create( $this->getContext(), 'price' )->create();
+
+			$filter = $manager->filter( true )->add( ['supplier.code' => $codes] )->slice( 0, count( $codes ) );
+			$supIds = $manager->search( $filter )->keys()->toArray();
+
+			$filter = $listManager->filter( true )->slice( 0, count( $prodIds ) )->add( [
+				'supplier.lists.parentid' => $supIds,
+				'supplier.lists.refid' => array_keys( $prodIds ),
+				'supplier.lists.type' => 'default',
+				'supplier.lists.domain' => 'product',
+			] );
+
+			foreach( $listManager->search( $filter ) as $listItem )
+			{
+				if( isset( $prodIds[$listItem->getRefId()] ) )
+				{
+					foreach( $prodIds[$listItem->getRefId()] as $product ) {
+						$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
+					}
+				}
+			}
+
+			return $price;
+		}
+
+		return $this->getProvider()->calcPrice( $base );
+	}
 
 
 	/**
@@ -67,19 +128,23 @@ class Supplier
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base ) : bool
 	{
-		$services = $base->getServices();
-		$supplier = $this->getConfigValue( 'supplier.code' );
-
-		if( isset( $services[\Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY] ) )
+		if( ( $value = $this->getConfigValue( 'supplier.code' ) ) !== null )
 		{
-			foreach( $services[\Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY] as $service )
+			$manager = \Aimeos\MShop::create( $this->getContext(), 'supplier' );
+			$filter = $manager->filter( true )->add( ['supplier.code' => explode( ',', $value )] )->slice( 0, 1 );
+			$expr = [];
+
+			foreach( $base->getProducts() as $product )
 			{
-				if( $service->getAttribute( 'supplier.code', 'delivery' ) === $supplier ) {
-					return parent::isAvailable( $base );
-				}
+				$func = $filter->make( 'supplier:has', ['product', 'default', $product->getProductId()] );
+				$expr[] = $filter->is( $func, '!=', null );
+			}
+
+			if( $manager->search( $filter->add( $filter->or( $expr ) ) )->isEmpty() ) {
+				return false;
 			}
 		}
 
-		return false;
+		return parent::isAvailable( $base );
 	}
 }

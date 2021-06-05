@@ -20,29 +20,21 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::getContext();
-		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )->create();
+		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )
+			->create()->setConfig( ['supplier.code' => 'unitSupplier001', 'supplier.only' => '1'] );
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $this->context, $this->couponItem, 'abcd' );
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Supplier( $provider, $this->context, $this->couponItem, 'abcd' );
 		$this->object->setObject( $this->object );
 
 		$priceManager = \Aimeos\MShop::create( $this->context, 'price' );
-		$serviceManager = \Aimeos\MShop::create( $this->context, 'service' );
-		$service = $serviceManager->find( 'unitcode' );
-
-		$orderServiceAttrManager = \Aimeos\MShop::create( $this->context, 'order/base/service/attribute' );
-		$orderServiceAttr = $orderServiceAttrManager->create();
-		$orderServiceAttr->setCode( 'supplier.code' );
-		$orderServiceAttr->setType( 'delivery' );
-		$orderServiceAttr->setValue( 'berlin' );
-
-		$orderServiceManager = \Aimeos\MShop::create( $this->context, 'order/base/service' );
-		$orderService = $orderServiceManager->create();
-		$orderService->copyFrom( $service );
-		$orderService->setAttributeItems( [$orderServiceAttr] );
+		$product = \Aimeos\MShop::create( $this->context, 'product' )->find( 'CNE' );
+		$orderProduct = \Aimeos\MShop::create( $this->context, 'order/base/product' )->create()->setQuantity( 2 );
+		$orderPrice = $orderProduct->copyFrom( $product )->getPrice();
+		$orderPrice->setValue( '18.00' )->setCosts( '1.50' );
 
 		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $this->context->getLocale() );
-		$this->orderBase->addService( $orderService, \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY );
+		$this->orderBase->addProduct( $orderProduct );
 	}
 
 
@@ -51,6 +43,13 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 		unset( $this->object );
 		unset( $this->orderBase );
 		unset( $this->couponItem );
+	}
+
+
+	public function testCalcPrice()
+	{
+		$price = $this->object->calcPrice( $this->orderBase );
+		$this->assertEquals( 39.0, $price->getValue() + $price->getCosts() );
 	}
 
 
@@ -67,8 +66,9 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 		$attributes = ['supplier.code' => 'test'];
 		$result = $this->object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertNull( $result['supplier.code'] );
+		$this->assertNull( $result['supplier.only'] );
 	}
 
 
@@ -76,29 +76,38 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->object->checkConfigBE( [] );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertIsString( $result['supplier.code'] );
+		$this->assertNull( $result['supplier.only'] );
 	}
 
 
 	public function testIsAvailable()
 	{
-		$this->couponItem->setConfig( array( 'supplier.code' => 'berlin' ) );
+		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
+	}
+
+
+	public function testIsAvailableWithProduct()
+	{
+		$this->couponItem->setConfig( array( 'supplier.code' => 'unitSupplier001' ) );
 
 		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
 	}
 
 
-	public function testIsAvailableWrongSupplier()
+	public function testIsAvailableWithoutProduct()
 	{
-		$this->couponItem->setConfig( array( 'supplier.code' => 'hamburg' ) );
+		$this->couponItem->setConfig( array( 'supplier.code' => 'unitSupplier002' ) );
 
 		$this->assertFalse( $this->object->isAvailable( $this->orderBase ) );
 	}
 
 
-	public function testIsAvailableNoSupplier()
+	public function testIsAvailableMultiple()
 	{
-		$this->assertFalse( $this->object->isAvailable( $this->orderBase ) );
+		$this->couponItem->setConfig( array( 'supplier.code' => 'unitSupplier001,unitSupplier002' ) );
+
+		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
 	}
 }
