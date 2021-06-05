@@ -59,7 +59,7 @@ class StockMigrateProductId extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$this->msg( 'Migrate product code in stock table', 0 ); $this->status( '' );
+		$this->msg( 'Migrate product code in stock table', 0, '' );
 
 		$rname = 'db-product';
 		$table = 'mshop_stock';
@@ -76,6 +76,8 @@ class StockMigrateProductId extends \Aimeos\MW\Setup\Task\Base
 
 		if( $schema->tableExists( 'mshop_stock' ) )
 		{
+			$this->msg( 'Migrate "productcode" to "prodid"', 1 );
+
 			if( $schema->columnExists( 'mshop_stock', 'prodid' ) === false )
 			{
 				$this->executeList( $this->updates );
