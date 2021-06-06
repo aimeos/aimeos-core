@@ -68,40 +68,40 @@ class BasketTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->object->getConfigBE();
 
-		$this->assertArrayHasKey( 'basketvalues.total-value-min', $result );
-		$this->assertArrayHasKey( 'basketvalues.total-value-max', $result );
+		$this->assertArrayHasKey( 'basket.total-value-min', $result );
+		$this->assertArrayHasKey( 'basket.total-value-max', $result );
 	}
 
 
 	public function testCheckConfigBE()
 	{
 		$attributes = [
-			'basketvalues.total-value-min' => ['EUR' => '10.5'],
-			'basketvalues.total-value-max' => ['EUR' => '100'],
+			'basket.total-value-min' => ['EUR' => '10.5'],
+			'basket.total-value-max' => ['EUR' => '100'],
 		];
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertNull( $result['basketvalues.total-value-min'] );
-		$this->assertNull( $result['basketvalues.total-value-max'] );
+		$this->assertNull( $result['basket.total-value-min'] );
+		$this->assertNull( $result['basket.total-value-max'] );
 	}
 
 
 	public function testCheckConfigBEFailure()
 	{
-		$result = $this->object->checkConfigBE( ['basketvalues.total-value-min' => '10.5'] );
+		$result = $this->object->checkConfigBE( ['basket.total-value-min' => '10.5'] );
 
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertIsString( $result['basketvalues.total-value-min'] );
-		$this->assertNull( $result['basketvalues.total-value-max'] );
+		$this->assertIsString( $result['basket.total-value-min'] );
+		$this->assertNull( $result['basket.total-value-max'] );
 	}
 
 
 	public function testIsAvailable()
 	{
 		$config = array(
-			'basketvalues.total-value-min' => array( 'EUR' =>  320 ),
-			'basketvalues.total-value-max' => array( 'EUR' => 1000 ),
+			'basket.total-value-min' => array( 'EUR' =>  320 ),
+			'basket.total-value-max' => array( 'EUR' => 1000 ),
 		);
 
 		$this->couponItem->setConfig( $config );
@@ -114,8 +114,8 @@ class BasketTest extends \PHPUnit\Framework\TestCase
 	public function testIsAvailableTestMinValue()
 	{
 		$config = array(
-			'basketvalues.total-value-min' => array( 'EUR' =>  700 ),
-			'basketvalues.total-value-max' => array( 'EUR' => 1000 ),
+			'basket.total-value-min' => array( 'EUR' =>  700 ),
+			'basket.total-value-max' => array( 'EUR' => 1000 ),
 		);
 
 		$this->couponItem->setConfig( $config );
@@ -128,8 +128,8 @@ class BasketTest extends \PHPUnit\Framework\TestCase
 	public function testIsAvailableTestMaxValue()
 	{
 		$config = array(
-			'basketvalues.total-value-min' => array( 'EUR' =>  50 ),
-			'basketvalues.total-value-max' => array( 'EUR' => 320 ),
+			'basket.total-value-min' => array( 'EUR' =>  50 ),
+			'basket.total-value-max' => array( 'EUR' => 320 ),
 		);
 
 		$this->couponItem->setConfig( $config );

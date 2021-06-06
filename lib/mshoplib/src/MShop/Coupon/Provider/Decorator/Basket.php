@@ -23,18 +23,18 @@ class Basket
 	implements \Aimeos\MShop\Coupon\Provider\Decorator\Iface
 {
 	private $beConfig = array(
-		'basketvalues.total-value-min' => array(
-			'code' => 'basketvalues.total-value-min',
-			'internalcode' => 'basketvalues.total-value-min',
+		'basket.total-value-min' => array(
+			'code' => 'basket.total-value-min',
+			'internalcode' => 'basket.total-value-min',
 			'label' => 'Minimum total value of the basket',
 			'type' => 'map',
 			'internaltype' => 'array',
 			'default' => [],
 			'required' => false,
 		),
-		'basketvalues.total-value-max' => array(
-			'code' => 'basketvalues.total-value-max',
-			'internalcode' => 'basketvalues.total-value-max',
+		'basket.total-value-max' => array(
+			'code' => 'basket.total-value-max',
+			'internalcode' => 'basket.total-value-max',
 			'label' => 'Maximum total value of the basket',
 			'type' => 'map',
 			'internaltype' => 'array',
@@ -81,13 +81,13 @@ class Basket
 		$currency = $price->getCurrencyId();
 		$value = $price->getValue() + $price->getRebate();
 
-		$minvalue = $this->getConfigValue( 'basketvalues.total-value-min', [] );
+		$minvalue = $this->getConfigValue( 'basket.total-value-min', [] );
 
 		if( isset( $minvalue[$currency] ) && $minvalue[$currency] > $value ) {
 			return false;
 		}
 
-		$maxvalue = $this->getConfigValue( 'basketvalues.total-value-max', [] );
+		$maxvalue = $this->getConfigValue( 'basket.total-value-max', [] );
 
 		if( isset( $maxvalue[$currency] ) && $maxvalue[$currency] < $value ) {
 			return false;
