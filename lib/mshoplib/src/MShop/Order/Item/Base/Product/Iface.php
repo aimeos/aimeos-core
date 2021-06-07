@@ -286,6 +286,21 @@ interface Iface
 	public function setQuantity( float $quantitiy ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
+	 * Returns the number of packages not yet delivered to the customer.
+	 *
+	 * @return float Amount of product packages
+	 */
+	public function getQuantityOpen() : float;
+
+	/**
+	 * Sets the number of product packages not yet delivered to the customer.
+	 *
+	 * @param float $quantitiy Amount of product packages
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setQuantityOpen( float $quantitiy ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+
+	/**
 	 * Returns the stored price item for the selected product and package.
 	 *
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, additional costs and rebate
@@ -314,6 +329,21 @@ interface Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setFlags( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+
+	/**
+	 * Returns the notes for the ordered product.
+	 *
+	 * @return string Notes for the ordered product
+	 */
+	public function getNotes() : string;
+
+	/**
+	 * Sets the notes for the ordered product.
+	 *
+	 * @param string $value Notes for the ordered product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setNotes( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the value of the attribute item for the ordered product with the given code.

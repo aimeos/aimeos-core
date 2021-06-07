@@ -55,9 +55,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.mediaurl' => 'testurl',
 			'order.base.product.target' => 'testtarget',
 			'order.base.product.quantity' => 11,
+			'order.base.product.qtyopen' => 5,
 			'order.base.product.flags' => \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE,
 			'order.base.product.status' => \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS,
 			'order.base.product.position' => 1,
+			'order.base.product.notes' => 'test note',
 			'order.base.product.mtime' => '2000-12-31 23:59:59',
 			'order.base.product.ctime' => '2011-01-01 00:00:01',
 			'order.base.product.editor' => 'unitTestUser',
@@ -412,6 +414,72 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->expectException( \Aimeos\MShop\Order\Exception::class );
 		$this->object->setQuantity( 2147483648 );
+	}
+
+
+	public function testGetQuantityOpen()
+	{
+		$this->assertEquals( 5, $this->object->getQuantityOpen() );
+	}
+
+
+	public function testSetQuantityOpen()
+	{
+		$return = $this->object->setQuantityOpen( 3 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( 3, $this->object->getQuantityOpen() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetQuantityOpenDecimal()
+	{
+		$return = $this->object->setQuantityOpen( 1.5 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( 1.5, $this->object->getQuantityOpen() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetQuantityOpenNegative()
+	{
+		$this->expectException( \Aimeos\MShop\Order\Exception::class );
+		$this->object->setQuantityOpen( -5 );
+	}
+
+
+	public function testSetQuantityOpenZero()
+	{
+		$return = $this->object->setQuantityOpen( 0 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( 0, $this->object->getQuantityOpen() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetQuantityOpenOverflow()
+	{
+		$this->expectException( \Aimeos\MShop\Order\Exception::class );
+		$this->object->setQuantityOpen( 12 );
+	}
+
+
+	public function testGetNotes()
+	{
+		$this->assertEquals( 'test note', $this->object->getNotes() );
+	}
+
+
+	public function testSetNotes()
+	{
+		$return = $this->object->setNotes( 'some notes' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( 'some notes', $this->object->getNotes() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -786,8 +854,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.timeframe' => '1-2d',
 			'order.base.product.position' => 4,
 			'order.base.product.quantity' => 5,
+			'order.base.product.qtyopen' => 3,
 			'order.base.product.status' => 0,
 			'order.base.product.flags' => 1,
+			'order.base.product.notes' => 'note',
 			'order.base.product.price' => '10.00',
 			'order.base.product.costs' => '5.00',
 			'order.base.product.rebate' => '2.00',
@@ -815,8 +885,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.product.target'], $item->getTarget() );
 		$this->assertEquals( $list['order.base.product.position'], $item->getPosition() );
 		$this->assertEquals( $list['order.base.product.quantity'], $item->getQuantity() );
+		$this->assertEquals( $list['order.base.product.qtyopen'], $item->getQuantityOpen() );
 		$this->assertEquals( $list['order.base.product.status'], $item->getStatus() );
 		$this->assertEquals( $list['order.base.product.flags'], $item->getFlags() );
+		$this->assertEquals( $list['order.base.product.notes'], $item->getNotes() );
 		$this->assertEquals( $list['order.base.product.price'], $item->getPrice()->getValue() );
 		$this->assertEquals( $list['order.base.product.costs'], $item->getPrice()->getCosts() );
 		$this->assertEquals( $list['order.base.product.rebate'], $item->getPrice()->getRebate() );
@@ -848,9 +920,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getPrice()->getCosts(), $arrayObject['order.base.product.costs'] );
 		$this->assertEquals( $this->object->getPrice()->getRebate(), $arrayObject['order.base.product.rebate'] );
 		$this->assertEquals( $this->object->getPrice()->getTaxRate(), $arrayObject['order.base.product.taxrate'] );
+		$this->assertEquals( $this->object->getQuantityOpen(), $arrayObject['order.base.product.qtyopen'] );
 		$this->assertEquals( $this->object->getQuantity(), $arrayObject['order.base.product.quantity'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['order.base.product.status'] );
 		$this->assertEquals( $this->object->getFlags(), $arrayObject['order.base.product.flags'] );
+		$this->assertEquals( $this->object->getNotes(), $arrayObject['order.base.product.notes'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['order.base.product.mtime'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['order.base.product.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['order.base.product.mtime'] );

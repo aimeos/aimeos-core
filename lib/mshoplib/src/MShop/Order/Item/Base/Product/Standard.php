@@ -430,6 +430,33 @@ class Standard extends Base implements Iface
 
 
 	/**
+	 * Returns the number of packages not yet delivered to the customer.
+	 *
+	 * @return float Amount of product packages
+	 */
+	public function getQuantityOpen() : float
+	{
+		return (float) $this->get( 'order.base.product.qtyopen', 0 );
+	}
+
+
+	/**
+	 * Sets the number of product packages not yet delivered to the customer.
+	 *
+	 * @param float $quantity Amount of product packages
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setQuantityOpen( float $quantity ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	{
+		if( $quantity < 0 || $quantity > $this->getQuantity() ) {
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Quantity must be 0 or greater and must not exceed %1$d', $this->getQuantity() ) );
+		}
+
+		return $this->set( 'order.base.product.qtyopen', $quantity );
+	}
+
+
+	/**
 	 * 	Returns the flags for the product item.
 	 *
 	 * @return int Flags, e.g. for immutable products
@@ -508,6 +535,28 @@ class Standard extends Base implements Iface
 		return $this->set( 'order.base.product.status', $value );
 	}
 
+	/**
+	 * Returns the notes for the ordered product.
+	 *
+	 * @return string Notes for the ordered product
+	 */
+	public function getNotes() : string
+	{
+		return $this->get( 'order.base.product.notes', '' );
+	}
+
+
+	/**
+	 * Sets the notes for the ordered product.
+	 *
+	 * @param string $value Notes for the ordered product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setNotes( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	{
+		return $this->set( 'order.base.product.notes', $value );
+	}
+
 
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
@@ -542,6 +591,8 @@ class Standard extends Base implements Iface
 				case 'order.base.product.target': !$private ?: $item = $item->setTarget( $value ); break;
 				case 'order.base.product.position': !$private ?: $item = $item->setPosition( (int) $value ); break;
 				case 'order.base.product.quantity': $item = $item->setQuantity( (float) $value ); break;
+				case 'order.base.product.qtyopen': $item = $item->setQuantityOpen( (float) $value ); break;
+				case 'order.base.product.notes': $item = $item->setNotes( (string) $value ); break;
 				case 'order.base.product.status': $item = $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
@@ -569,6 +620,7 @@ class Standard extends Base implements Iface
 		$list['order.base.product.productid'] = $this->getProductId();
 		$list['order.base.product.supplierid'] = $this->getSupplierId();
 		$list['order.base.product.suppliername'] = $this->getSupplierName();
+		$list['order.base.product.qtyopen'] = $this->getQuantityOpen();
 		$list['order.base.product.quantity'] = $this->getQuantity();
 		$list['order.base.product.name'] = $this->getName();
 		$list['order.base.product.description'] = $this->getDescription();
@@ -576,6 +628,7 @@ class Standard extends Base implements Iface
 		$list['order.base.product.timeframe'] = $this->getTimeFrame();
 		$list['order.base.product.position'] = $this->getPosition();
 		$list['order.base.product.status'] = $this->getStatus();
+		$list['order.base.product.notes'] = $this->getNotes();
 
 		if( $private === true )
 		{

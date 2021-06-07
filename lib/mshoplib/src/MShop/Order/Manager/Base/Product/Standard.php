@@ -135,6 +135,13 @@ class Standard
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 		),
+		'order.base.product.qtyopen' => array(
+			'code' => 'order.base.product.qtyopen',
+			'internalcode' => 'mordbapr."qtyopen"',
+			'label' => 'Product quantity not yet delivered',
+			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+		),
 		'order.base.product.currencyid' => array(
 			'code' => 'order.base.product.currencyid',
 			'internalcode' => 'mordbapr."currencyid"',
@@ -210,6 +217,14 @@ class Standard
 			'code' => 'order.base.product.target',
 			'internalcode' => 'mordbapr."target"',
 			'label' => 'Product url target',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'order.base.product.notes' => array(
+			'code' => 'order.base.product.notes',
+			'internalcode' => 'mordbapr."notes"',
+			'label' => 'Product notes',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
@@ -799,6 +814,8 @@ class Standard
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->getEditor() );
 			$stmt->bind( $idx++, $item->getTarget() );
+			$stmt->bind( $idx++, $item->getQuantityOpen() );
+			$stmt->bind( $idx++, $item->getNotes() );
 			$stmt->bind( $idx++, $item->getSiteId() );
 
 			if( $id !== null ) {

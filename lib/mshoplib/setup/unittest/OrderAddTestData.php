@@ -347,14 +347,10 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ordProdItem->setFlags( $dataset['flags'] );
 			$ordProdItem->setStatus( $dataset['status'] );
 			$ordProdItem->setPosition( $dataset['pos'] );
-
-			if( isset( $dataset['stocktype'] ) ) {
-				$ordProdItem->setStockType( $dataset['stocktype'] );
-			}
-
-			if( isset( $dataset['timeframe'] ) ) {
-				$ordProdItem->setTimeFrame( $dataset['timeframe'] );
-			}
+			$ordProdItem->setQuantityOpen( $dataset['qtyopen'] ?? 0 );
+			$ordProdItem->setNotes( $dataset['notes'] ?? '' );
+			$ordProdItem->setStockType( $dataset['stocktype'] ?? '' );
+			$ordProdItem->setTimeFrame( $dataset['timeframe'] ?? '' );
 
 			if( isset( $dataset['prodid'] ) ) {
 				$ordProdItem->setProductId( $products[$dataset['prodid']]->getId() );

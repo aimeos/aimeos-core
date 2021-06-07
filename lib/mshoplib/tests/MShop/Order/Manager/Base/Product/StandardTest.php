@@ -140,6 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'order.base.product.timeframe', '4-5d' );
 		$expr[] = $search->compare( '>=', 'order.base.product.target', '' );
 		$expr[] = $search->compare( '==', 'order.base.product.quantity', 9 );
+		$expr[] = $search->compare( '==', 'order.base.product.qtyopen', 6 );
 		$expr[] = $search->compare( '==', 'order.base.product.price', '4.50' );
 		$expr[] = $search->compare( '==', 'order.base.product.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.rebate', '0.00' );
@@ -149,6 +150,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.product.flags', 0 );
 		$expr[] = $search->compare( '==', 'order.base.product.position', 1 );
 		$expr[] = $search->compare( '==', 'order.base.product.status', 1 );
+		$expr[] = $search->compare( '==', 'order.base.product.notes', 'test note' );
 		$expr[] = $search->compare( '!=', 'order.base.product.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'order.base.product.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.product.editor', $this->editor );
@@ -275,8 +277,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getPrice()->getTaxValue(), $itemSaved->getPrice()->getTaxValue() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 		$this->assertEquals( $item->getQuantity(), $itemSaved->getQuantity() );
+		$this->assertEquals( $item->getQuantityOpen(), $itemSaved->getQuantityOpen() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 		$this->assertEquals( $item->getFlags(), $itemSaved->getFlags() );
+		$this->assertEquals( $item->getNotes(), $itemSaved->getNotes() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -305,8 +309,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getPrice()->getTaxValue(), $itemUpd->getPrice()->getTaxValue() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 		$this->assertEquals( $itemExp->getQuantity(), $itemUpd->getQuantity() );
+		$this->assertEquals( $itemExp->getQuantityOpen(), $itemUpd->getQuantityOpen() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 		$this->assertEquals( $itemExp->getFlags(), $itemUpd->getFlags() );
+		$this->assertEquals( $itemExp->getNotes(), $itemUpd->getNotes() );
 		$this->assertEquals( [], $itemUpd->getAttributeItems()->toArray() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
