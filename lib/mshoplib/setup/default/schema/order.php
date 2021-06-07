@@ -120,7 +120,7 @@ return array(
 			$table->addColumn( 'target', 'string', array( 'length' => 255, 'default' => '' ) );
 			$table->addColumn( 'timeframe', 'string', array( 'length' => 16, 'default' => '' ) );
 			$table->addColumn( 'quantity', 'float', [] );
-			$table->addColumn( 'qtyopen', 'float', [] );
+			$table->addColumn( 'qtyopen', 'float', ['default' => 0] );
 			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
@@ -131,7 +131,7 @@ return array(
 			$table->addColumn( 'flags', 'integer', [] );
 			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'status', 'smallint', array( 'default' => -1 ) );
-			$table->addColumn( 'notes', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'notes', 'string', array( 'length' => 255, 'default' => '' ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
