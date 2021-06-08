@@ -70,12 +70,12 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Returns the property item for the given type, language and value
 	 *
 	 * @param string $type Name of the property type
-	 * @param string $langId ISO language code (e.g. "en" or "en_US") or null if not language specific
+	 * @param string|null $langId ISO language code (e.g. "en" or "en_US") or null if not language specific
 	 * @param string $value Value of the property
 	 * @param bool $active True to return only active items, false to return all
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface|null Matching property item or null if none
 	 */
-	public function getPropertyItem( string $type, string $langId, string $value, bool $active = true ) : ?\Aimeos\MShop\Common\Item\Property\Iface;
+	public function getPropertyItem( string $type, ?string $langId, string $value, bool $active = true ) : ?\Aimeos\MShop\Common\Item\Property\Iface;
 
 	/**
 	 * Returns the property items of the product

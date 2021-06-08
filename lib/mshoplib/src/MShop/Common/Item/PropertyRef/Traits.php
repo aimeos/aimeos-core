@@ -158,7 +158,7 @@ trait Traits
 	 * @param bool $active True to return only active items, false to return all
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface|null Matching property item or null if none
 	 */
-	public function getPropertyItem( string $type, string $langId = null, string $value, bool $active = true ) : ?\Aimeos\MShop\Common\Item\Property\Iface
+	public function getPropertyItem( string $type, ?string $langId, string $value, bool $active = true ) : ?\Aimeos\MShop\Common\Item\Property\Iface
 	{
 		foreach( $this->propItems as $propItem )
 		{
