@@ -1,8 +1,11 @@
 <?php
 
-return array(
+return [
 	'name' => '<extname>',
-	'depends' => array(
+	'config' => [
+		'config',
+	],
+	'depends' => [
 		'aimeos-core',
 		'ai-admin-jqadm',
 		'ai-admin-jsonadm',
@@ -10,8 +13,8 @@ return array(
 		'ai-client-jsonapi',
 		'ai-controller-jobs',
 		'ai-controller-frontend',
-	),
-	'include' => array(
+	],
+	'include' => [
 		'lib/custom/src',
 		'client/html/src',
 		'client/jsonapi/src',
@@ -20,8 +23,8 @@ return array(
 		'controller/jobs/src',
 		'admin/jsonadm/src',
 		'admin/jqadm/src',
-	),
-	'i18n' => array(
+	],
+	'i18n' => [
 		'admin' => 'admin/i18n',
 		'admin/jsonadm' => 'admin/jsonadm/i18n',
 		'client' => 'client/i18n',
@@ -30,35 +33,34 @@ return array(
 		'controller/frontend' => 'controller/frontend/i18n',
 		'controller/jobs' => 'controller/jobs/i18n',
 		'mshop' => 'lib/custom/i18n',
-	),
-	'config' => array(
-		'config',
-	),
-	'custom' => array(
-		'admin/jqadm' => array(
-			'admin/jqadm/manifest.jsb2',
-		),
-		'admin/jqadm/templates' => array(
+	],
+	'setup' => [
+		'lib/custom/setup',
+	],
+	'template' => [
+		'admin/jqadm/templates' => [
 			'admin/jqadm/templates',
-		),
-		'admin/jsonadm/templates' => array(
+		],
+		'admin/jsonadm/templates' => [
 			'admin/jsonadm/templates',
-		),
-		'client/html/templates' => array(
+		],
+		'client/html/templates' => [
 			'client/html/templates',
-		),
-		'client/jsonapi/templates' => array(
+		],
+		'client/jsonapi/templates' => [
 			'client/jsonapi/templates',
-		),
-		'controller/jobs' => array(
-			'controller/jobs/src',
-		),
-		'controller/jobs/templates' => array(
+		],
+		'controller/jobs/templates' => [
 			'controller/jobs/templates',
 			'client/html/templates',
-		),
-	),
-	'setup' => array(
-		'lib/custom/setup',
-	),
-);
+		],
+	],
+	'custom' => [
+		'admin/jqadm' => [
+			'admin/jqadm/manifest.jsb2',
+		],
+		'controller/jobs' => [
+			'controller/jobs/src',
+		],
+	],
+];

@@ -49,7 +49,7 @@ class TestHelperJobs
 
 	public static function getTemplatePaths()
 	{
-		return self::getAimeos()->getCustomPaths( 'controller/jobs/templates' );
+		return self::getAimeos()->getTemplatePaths( 'controller/jobs/templates' );
 	}
 
 

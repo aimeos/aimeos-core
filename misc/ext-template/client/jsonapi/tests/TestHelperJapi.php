@@ -75,7 +75,7 @@ class TestHelperJapi
 
 	public static function getTemplatePaths()
 	{
-		return self::getAimeos()->getCustomPaths( 'client/jsonapi/templates' );
+		return self::getAimeos()->getTemplatePaths( 'client/jsonapi/templates' );
 	}
 
 
