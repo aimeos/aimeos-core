@@ -123,6 +123,11 @@ class Bootstrap
 			if( isset( $manifest['custom'][$section] ) ) {
 				$paths[$path] = $manifest['custom'][$section];
 			}
+
+			// @todo 2022.x Remove template test
+			if( isset( $manifest['template'][$section] ) ) {
+				$paths[$path] = $manifest['template'][$section];
+			}
 		}
 
 		return $paths;
@@ -259,6 +264,37 @@ class Bootstrap
 		}
 
 		return $setupPaths;
+	}
+
+
+	/**
+	 * Returns the template paths stored in the manifest file for the given section and theme.
+	 *
+	 * @param string $section Name of the section like in the manifest file
+	 * @param string|null $theme Name of the theme to get specific template paths for
+	 * @return array List of paths
+	 */
+	public function getTemplatePaths( string $section, string $theme = null ) : array
+	{
+		$paths = [];
+
+		foreach( $this->manifests as $path => $manifest )
+		{
+			// @todo 2022.x Remove custom test
+			if( isset( $manifest['custom'][$section] ) ) {
+				$paths[$path] = $manifest['custom'][$section];
+			}
+
+			if( isset( $manifest['template'][$section] ) ) {
+				$paths[$path] = $manifest['template'][$section];
+			}
+
+			if( $theme && isset( $manifest['template'][$theme][$section] ) ) {
+				$paths[$path] = $manifest['template'][$theme][$section];
+			}
+		}
+
+		return $paths;
 	}
 
 
