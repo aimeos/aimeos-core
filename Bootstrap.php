@@ -30,16 +30,11 @@ class Bootstrap
 	 * @param boolean $defaultdir If default extension directory should be included automatically
 	 * @param string|null $basedir Aimeos core path (optional, __DIR__ if null)
 	 */
-	public function __construct( array $extdirs = array(), $defaultdir = true, $basedir = null )
+	public function __construct( array $extdirs = array(), bool $defaultdir = true, string $basedir = null )
 	{
-		// Always use "/" as delimiter for maps in Aimeos
-		\Aimeos\Map::delimiter( '/' );
+		$basedir = $basedir ?: __DIR__;
 
-		if( $basedir === null ) {
-			$basedir = __DIR__;
-		}
-
-		if( $defaultdir === true && is_dir( $basedir . DIRECTORY_SEPARATOR . 'ext' ) === true ) {
+		if( $defaultdir && is_dir( $basedir . DIRECTORY_SEPARATOR . 'ext' ) ) {
 			$extdirs[] = realpath( $basedir . DIRECTORY_SEPARATOR . 'ext' );
 		}
 
