@@ -311,8 +311,17 @@ class Bootstrap
 	{
 		$manifestFile = $dir . DIRECTORY_SEPARATOR . 'manifest.php';
 
-		if( file_exists( $manifestFile ) ) {
-			return include $manifestFile;
+		if( file_exists( $manifestFile ) )
+		{
+			try
+			{
+				return include $manifestFile;
+			}
+			catch( \Throwable $t )
+			{
+				echo $manifestFile . ':' . PHP_EOL . $t->getMessage() . PHP_EOL  . PHP_EOL .  $t->getTraceAsString() . PHP_EOL;
+				exit( 1 );
+			}
 		}
 
 		return false;
