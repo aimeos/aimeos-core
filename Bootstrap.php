@@ -33,9 +33,21 @@ class Bootstrap
 	public function __construct( array $extdirs = [], bool $defaultdir = true, string $basedir = null )
 	{
 		$basedir = $basedir ?: __DIR__;
+		$class = '\Composer\InstalledVersions';
 
 		if( $defaultdir && is_dir( $basedir . DIRECTORY_SEPARATOR . 'ext' ) ) {
 			$extdirs[] = realpath( $basedir . DIRECTORY_SEPARATOR . 'ext' );
+		}
+
+		if( class_exists( $class ) && method_exists( $class, 'getInstalledPackagesByType' ) )
+		{
+			$packages = \Composer\InstalledVersions::getInstalledPackagesByType( 'aimeos-extension' );
+
+			foreach( $packages as $package )
+			{
+				$path = realpath( \Composer\InstalledVersions::getInstallPath( $package ) );
+				$this->manifests[$path] = $this->getManifestFile( $path );
+			}
 		}
 
 		$this->manifests[$basedir] = $this->getManifestFile( $basedir );
