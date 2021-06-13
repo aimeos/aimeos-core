@@ -15,11 +15,11 @@ namespace Aimeos;
  */
 class Bootstrap
 {
-	private $manifests = array();
-	private $extensions = array();
-	private $extensionsDone = array();
-	private $dependencies = array();
-	private static $includePaths = array();
+	private $manifests = [];
+	private $extensions = [];
+	private $extensionsDone = [];
+	private $dependencies = [];
+	private static $includePaths = [];
 	private static $autoloader = false;
 
 
@@ -30,7 +30,7 @@ class Bootstrap
 	 * @param boolean $defaultdir If default extension directory should be included automatically
 	 * @param string|null $basedir Aimeos core path (optional, __DIR__ if null)
 	 */
-	public function __construct( array $extdirs = array(), bool $defaultdir = true, string $basedir = null )
+	public function __construct( array $extdirs = [], bool $defaultdir = true, string $basedir = null )
 	{
 		$basedir = $basedir ?: __DIR__;
 
@@ -52,9 +52,9 @@ class Bootstrap
 	 * Loads the class files for a given class name.
 	 *
 	 * @param string $className Name of the class
-	 * @return boolean True if file was found, false if not
+	 * @return bool True if file was found, false if not
 	 */
-	public static function autoload( $className )
+	public static function autoload( string $className ) : bool
 	{
 		$fileName = strtr( ltrim( $className, '\\' ), '\\_', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR ) . '.php';
 
@@ -85,61 +85,13 @@ class Bootstrap
 
 
 	/**
-	 * Returns the list of paths for each domain where the translation files are located.
-	 *
-	 * @return array Associative list of i18n domains and lists of absolute paths to the translation directories
-	 */
-	public function getI18nPaths()
-	{
-		$paths = array();
-
-		foreach( $this->manifests as $basePath => $manifest )
-		{
-			if( !isset( $manifest['i18n'] ) ) {
-				continue;
-			}
-
-			foreach( $manifest['i18n'] as $domain => $location ) {
-				$paths[$domain][] = $basePath . DIRECTORY_SEPARATOR . $location;
-			}
-		}
-
-		return $paths;
-	}
-
-
-	/**
-	 * Returns the include paths containing the required class files.
-	 *
-	 * @return array List of include paths
-	 */
-	public function getIncludePaths()
-	{
-		$includes = array();
-
-		foreach( $this->manifests as $path => $manifest )
-		{
-			if( !isset( $manifest['include'] ) ) {
-				continue;
-			}
-
-			foreach( $manifest['include'] as $paths ) {
-				$includes[] = $path . DIRECTORY_SEPARATOR . $paths;
-			}
-		}
-
-		return $includes;
-	}
-
-
-	/**
 	 * Returns the paths containing the required configuration files.
 	 *
 	 * @return string[] List of configuration paths
 	 */
-	public function getConfigPaths()
+	public function getConfigPaths() : array
 	{
-		$confpaths = array();
+		$confpaths = [];
 
 		foreach( $this->manifests as $path => $manifest )
 		{
@@ -162,9 +114,9 @@ class Bootstrap
 	 * @param string $section Name of the section like in the manifest file
 	 * @return array List of paths
 	 */
-	public function getCustomPaths( $section )
+	public function getCustomPaths( string $section ) : array
 	{
-		$paths = array();
+		$paths = [];
 
 		foreach( $this->manifests as $path => $manifest )
 		{
@@ -182,7 +134,7 @@ class Bootstrap
 	 *
 	 * @return array List of available extension names
 	 */
-	public function getExtensions()
+	public function getExtensions() : array
 	{
 		$list = [];
 
@@ -200,14 +152,93 @@ class Bootstrap
 
 
 	/**
+	 * Returns the language IDs for the available translations
+	 *
+	 * @param string $section Section name in the i18n paths
+	 * @return array List of ISO language codes
+	 */
+	public function getI18nList( string $section ) : array
+	{
+		$list = [];
+		$paths = $this->getI18nPaths();
+		$paths = ( isset( $paths[$section] ) ? (array) $paths[$section] : [] );
+
+		foreach( $paths as $path )
+		{
+			$iter = new \DirectoryIterator( $path );
+
+			foreach( $iter as $file )
+			{
+				$name = $file->getFilename();
+
+				if( $file->isFile() && preg_match( '/^[a-z]{2,3}(_[A-Z]{2})?$/', $name ) ) {
+					$list[$name] = null;
+				}
+			}
+		}
+
+		ksort( $list );
+		return array_keys( $list );
+	}
+
+
+	/**
+	 * Returns the list of paths for each domain where the translation files are located.
+	 *
+	 * @return array Associative list of i18n domains and lists of absolute paths to the translation directories
+	 */
+	public function getI18nPaths() : array
+	{
+		$paths = [];
+
+		foreach( $this->manifests as $basePath => $manifest )
+		{
+			if( !isset( $manifest['i18n'] ) ) {
+				continue;
+			}
+
+			foreach( $manifest['i18n'] as $domain => $location ) {
+				$paths[$domain][] = $basePath . DIRECTORY_SEPARATOR . $location;
+			}
+		}
+
+		return $paths;
+	}
+
+
+	/**
+	 * Returns the include paths containing the required class files.
+	 *
+	 * @return array List of include paths
+	 */
+	public function getIncludePaths() : array
+	{
+		$includes = [];
+
+		foreach( $this->manifests as $path => $manifest )
+		{
+			if( !isset( $manifest['include'] ) ) {
+				continue;
+			}
+
+			foreach( $manifest['include'] as $paths ) {
+				$includes[] = $path . DIRECTORY_SEPARATOR . $paths;
+			}
+		}
+
+		return $includes;
+	}
+
+
+	/**
 	 * Returns the list of paths where setup tasks are stored.
 	 *
 	 * @param string $site Name of the site like "default", "unitperf" and "unittest"
 	 * @return array List of setup paths
 	 */
-	public function getSetupPaths( $site )
+	public function getSetupPaths( string $site ) : array
 	{
-		$setupPaths = array();
+		$setupPaths = [];
 
 		foreach( $this->manifests as $path => $manifest )
 		{
@@ -232,45 +263,14 @@ class Bootstrap
 
 
 	/**
-	 * Returns the language IDs for the available translations
-	 *
-	 * @param string $section Section name in the i18n paths
-	 * @return array List of ISO language codes
-	 */
-	public function getI18nList( $section )
-	{
-		$list = array();
-		$paths = $this->getI18nPaths();
-		$paths = ( isset( $paths[$section] ) ? (array) $paths[$section] : array() );
-
-		foreach( $paths as $path )
-		{
-			$iter = new \DirectoryIterator( $path );
-
-			foreach( $iter as $file )
-			{
-				$name = $file->getFilename();
-
-				if( $file->isFile() && preg_match( '/^[a-z]{2,3}(_[A-Z]{2})?$/', $name ) ) {
-					$list[$name] = null;
-				}
-			}
-		}
-
-		ksort( $list );
-		return array_keys( $list );
-	}
-
-
-	/**
 	 * Returns the configurations of the manifest files in the given directories.
 	 *
 	 * @param array $directories List of directories where the manifest files are stored
 	 * @return array Associative list of directory / configuration array pairs
 	 */
-	protected function getManifests( array $directories )
+	protected function getManifests( array $directories ) : array
 	{
-		$manifests = array();
+		$manifests = [];
 
 		foreach( $directories as $directory )
 		{
@@ -307,7 +307,7 @@ class Bootstrap
 	 * @param string $dir Directory that includes the manifest file
 	 * @return array|false Associative list of configurations or false if the file doesn't exist
 	 */
-	protected function getManifestFile( $dir )
+	protected function getManifestFile( string $dir )
 	{
 		$manifestFile = $dir . DIRECTORY_SEPARATOR . 'manifest.php';
 
@@ -376,9 +376,8 @@ class Bootstrap
 	 *
 	 * @param array $deps List of dependencies
 	 * @param array $stack List of task names that are scheduled after this task
-	 * @todo version checks
 	 */
-	private function addManifests( array $deps, array $stack = array( ) )
+	private function addManifests( array $deps, array $stack = [] )
 	{
 		foreach( $deps as $extName => $name )
 		{
