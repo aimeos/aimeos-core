@@ -355,7 +355,7 @@ class Bootstrap
 			}
 			catch( \Throwable $t )
 			{
-				echo $manifestFile . ':' . PHP_EOL . $t->getMessage() . PHP_EOL  . PHP_EOL .  $t->getTraceAsString() . PHP_EOL;
+				echo $manifestFile . ':' . PHP_EOL . $t->getMessage() . PHP_EOL . PHP_EOL . $t->getTraceAsString() . PHP_EOL;
 				exit( 1 );
 			}
 		}
