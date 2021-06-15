@@ -987,7 +987,7 @@ class Standard
 
 		$manager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
-		$search = $manager->filter( true )->slice( 0, 0x7fffffff );
+		$search = $manager->filter( true )->order( $domain . '.lists.position' )->slice( 0, 0x7fffffff );
 		$search->setConditions( $search->and( [
 			$search->compare( '==', $domain . '.lists.key', $keys ),
 			$search->getConditions(),
