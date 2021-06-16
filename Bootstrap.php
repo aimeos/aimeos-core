@@ -330,18 +330,21 @@ class Bootstrap
 				continue;
 			}
 
-			$dir = new \DirectoryIterator( $directory );
-
-			foreach( $dir as $dirinfo )
+			if( file_exists( $directory ) )
 			{
-				if( $dirinfo->isDir() === false || $dirinfo->isDot() !== false
-					|| substr( $dirinfo->getFilename(), 0, 1 ) === '.'
-					|| ( $manifest = $this->getManifestFile( $dirinfo->getPathName() ) ) === false
-				) {
-					continue;
-				}
+				$dir = new \DirectoryIterator( $directory );
 
-				$manifests[$dirinfo->getPathName()] = $manifest;
+				foreach( $dir as $dirinfo )
+				{
+					if( $dirinfo->isDir() === false || $dirinfo->isDot() !== false
+						|| substr( $dirinfo->getFilename(), 0, 1 ) === '.'
+						|| ( $manifest = $this->getManifestFile( $dirinfo->getPathName() ) ) === false
+					) {
+						continue;
+					}
+
+					$manifests[$dirinfo->getPathName()] = $manifest;
+				}
 			}
 		}
 
