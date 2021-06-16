@@ -148,6 +148,6 @@ abstract class Base
 	 */
 	protected function formatNumber( $number, int $precision = null ) : string
 	{
-		return number_format( $number, $precision ?: $this->precision, '.', '' );
+		return (string) number_format( $number, $precision ?: $this->precision, '.', '' );
 	}
 }
