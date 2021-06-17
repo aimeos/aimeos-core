@@ -57,7 +57,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 				switch( $attr->getType() )
 				{
 					case 'boolean':
-						if( !is_scalar( $config[$key] ) || $config[$key] != '0' && $config[$key] != '1' ) {
+						if( $config[$key] != null && !is_scalar( $config[$key] ) || $config[$key] != '0' && $config[$key] != '1' ) {
 							$errors[$key] = sprintf( 'Not a true/false value' ); continue 2;
 						}
 						break;
