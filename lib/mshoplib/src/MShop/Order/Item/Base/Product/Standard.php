@@ -278,12 +278,12 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the code of the stock type the product should be retrieved from.
 	 *
-	 * @param string $code Stock type
+	 * @param string|null $code Stock type
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setStockType( string $code ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setStockType( ?string $code ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.stocktype', $this->checkCode( $code ) );
+		return $this->set( 'order.base.product.stocktype', $this->checkCode( (string) $code ) );
 	}
 
 
@@ -301,12 +301,12 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the localized name of the product.
 	 *
-	 * @param string $value Localized name of the product
+	 * @param string|null $value Localized name of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setName( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setName( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.name', $value );
+		return $this->set( 'order.base.product.name', (string) $value );
 	}
 
 
@@ -324,12 +324,12 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the localized description of the product.
 	 *
-	 * @param string $value Localized description of the product
+	 * @param string|null $value Localized description of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setDescription( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setDescription( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.description', $value );
+		return $this->set( 'order.base.product.description', (string) $value );
 	}
 
 
@@ -347,12 +347,12 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the media url of the product the customer has added.
 	 *
-	 * @param string $value Location of the media/picture
+	 * @param string|null $value Location of the media/picture
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setMediaUrl( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setMediaUrl( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.mediaurl', $value );
+		return $this->set( 'order.base.product.mediaurl', (string) $value );
 	}
 
 
@@ -370,12 +370,12 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the URL target specific for that product
 	 *
-	 * @param string $value New URL target specific for that product
+	 * @param string|null $value New URL target specific for that product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setTarget( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setTarget( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.target', $value );
+		return $this->set( 'order.base.product.target', (string) $value );
 	}
 
 
@@ -393,12 +393,12 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the expected delivery time frame
 	 *
-	 * @param string $timeframe Expected delivery time frame
+	 * @param string|null $timeframe Expected delivery time frame
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setTimeframe( string $timeframe ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setTimeframe( ?string $timeframe ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.timeframe', $timeframe );
+		return $this->set( 'order.base.product.timeframe', (string) $timeframe );
 	}
 
 
@@ -549,12 +549,12 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the notes for the ordered product.
 	 *
-	 * @param string $value Notes for the ordered product
+	 * @param string|null $value Notes for the ordered product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setNotes( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setNotes( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.notes', $value );
+		return $this->set( 'order.base.product.notes', (string) $value );
 	}
 
 

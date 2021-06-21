@@ -197,18 +197,18 @@ interface Iface
 	/**
 	 * Sets the expected delivery time frame
 	 *
-	 * @param string $timeframe Expected delivery time frame
+	 * @param string|null $timeframe Expected delivery time frame
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setTimeframe( string $timeframe ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setTimeframe( ?string $timeframe ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Sets the code of the stock type the product should be retrieved from.
 	 *
-	 * @param string $code Stock type
+	 * @param string|null $code Stock type
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setStockType( string $code ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setStockType( ?string $code ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the localized name of the product
@@ -220,10 +220,10 @@ interface Iface
 	/**
 	 * Sets the localized name of the product.
 	 *
-	 * @param string $value Value of the localized name of the product
+	 * @param string|null $value Value of the localized name of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setName( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setName( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the localized description of the product
@@ -235,10 +235,10 @@ interface Iface
 	/**
 	 * Sets the localized description of the product.
 	 *
-	 * @param string $value Value of the localized description of the product
+	 * @param string|null $value Value of the localized description of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setDescription( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setDescription( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the location of the media.
@@ -250,10 +250,10 @@ interface Iface
 	/**
 	 * Sets the media url of the product the customer has added.
 	 *
-	 * @param string $value Location of the media/picture
+	 * @param string|null $value Location of the media/picture
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setMediaUrl( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setMediaUrl( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the URL target specific for that product
@@ -265,10 +265,10 @@ interface Iface
 	/**
 	 * Sets the URL target specific for that product
 	 *
-	 * @param string $value New URL target specific for that product
+	 * @param string|null $value New URL target specific for that product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setTarget( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setTarget( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the number of packages the customer has added.
@@ -340,10 +340,10 @@ interface Iface
 	/**
 	 * Sets the notes for the ordered product.
 	 *
-	 * @param string $value Notes for the ordered product
+	 * @param string|null $value Notes for the ordered product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setNotes( string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setNotes( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the value of the attribute item for the ordered product with the given code.
