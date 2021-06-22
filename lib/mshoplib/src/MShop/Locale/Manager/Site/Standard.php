@@ -699,8 +699,8 @@ class Standard
 				while( ( $row = $results->fetch() ) !== null )
 				{
 					$id = $row['locale.site.id'];
-					$logos = $row['locale.site.logo'];
-					$config = $row['locale.site.config'];
+					$logos = $row['locale.site.logo'] ?? '{}';
+					$config = $row['locale.site.config'] ?? '{}';
 
 					if( ( $row['locale.site.logo'] = json_decode( $logos, true ) ) === null )
 					{
