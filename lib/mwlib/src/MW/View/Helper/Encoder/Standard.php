@@ -47,7 +47,7 @@ class Standard
 	public function attr( $value, int $trust = self::TAINT, string $replace = '' ) : string
 	{
 		if( $value !== null && !is_scalar( $value ) ) {
-			$value = json_encode( $value, JSON_HEX_AMP );
+			$value = json_encode( $value, JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG );
 		} elseif( $replace != '' ) {
 			$value = str_replace( [" ", "\v", "\t", "\r", "\n", "\f"], $replace, $value );
 		}
@@ -56,7 +56,7 @@ class Standard
 			return (string) $value;
 		}
 
-		return str_replace( ['"', '\'', '`'], ['&quot;', '&apos;', '``'], (string) $value );
+		return str_replace( ['"', '\'', '`'], ['&quot;', '&apos;', '&#96;'], (string) $value );
 	}
 
 
@@ -91,7 +91,7 @@ class Standard
 	public function js( $value ) : string
 	{
 		if( $value !== null && !is_scalar( $value ) ) {
-			$value = json_encode( $value, JSON_HEX_AMP );
+			$value = json_encode( $value, JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG );
 		}
 
 		return str_replace( ['\'', '"', '`'], ['\\\'', '&quot;', '&#96;'], (string) $value );
