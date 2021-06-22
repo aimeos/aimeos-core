@@ -71,11 +71,7 @@ return array(
 	),
 	array(
 		'code' => 'demo-dhl', 'type' => 'delivery', 'label' => 'DHL',
-		'provider' => 'Standard,Reduction', 'position' => 1, 'status' => 1,
-		'config' => array(
-			'reduction.basket-value-min' => array( 'EUR' => '200.00' ),
-			'reduction.percent' => 100,
-		),
+		'provider' => 'Standard', 'config' => [], 'position' => 1, 'status' => 1,
 		'text' => array(
 			array(
 				'label' => 'Demo short/de: Lieferung innerhalb von drei Tagen',
@@ -135,7 +131,11 @@ return array(
 	),
 	array(
 		'code' => 'demo-dhlexpress', 'type' => 'delivery', 'label' => 'DHL Express',
-		'provider' => 'Standard', 'config' => [], 'position' => 2, 'status' => 1,
+		'provider' => 'Standard,Reduction', 'config' => [], 'position' => 2, 'status' => 1,
+		'config' => array(
+			'reduction.basket-value-min' => array( 'EUR' => '200.00' ),
+			'reduction.percent' => 3,
+		),
 		'text' => array(
 			array(
 				'label' => 'Demo short/de: Lieferung am nächsten Tag',
