@@ -131,11 +131,7 @@ return array(
 	),
 	array(
 		'code' => 'demo-dhlexpress', 'type' => 'delivery', 'label' => 'DHL Express',
-		'provider' => 'Standard,Reduction', 'config' => [], 'position' => 2, 'status' => 1,
-		'config' => array(
-			'reduction.basket-value-min' => array( 'EUR' => '200.00' ),
-			'reduction.percent' => 3,
-		),
+		'provider' => 'Standard', 'config' => [], 'position' => 2, 'status' => 1,
 		'text' => array(
 			array(
 				'label' => 'Demo short/de: Lieferung am nächsten Tag',
@@ -584,7 +580,11 @@ return array(
 	),
 	array(
 		'code' => 'demo-prepay', 'type' => 'payment', 'label' => 'Prepayment',
-		'provider' => 'PrePay', 'config' => [], 'position' => 4, 'status' => 1,
+		'provider' => 'PrePay,Reduction', 'position' => 4, 'status' => 1,
+		'config' => array(
+			'reduction.basket-value-min' => array( 'EUR' => '200.00' ),
+			'reduction.percent' => 3,
+		),
 		'text' => array(
 			array(
 				'label' => 'Demo name/de: Vorauskasse', 'content' => 'Vorauskasse',
@@ -594,7 +594,7 @@ return array(
 			),
 			array(
 				'label' => 'Demo short/de: Versand der Ware nach Zahlungseingang',
-				'content' => 'Versand der Ware nach Zahlungseingang.',
+				'content' => '3% Rabatt, Versand der Ware nach Zahlungseingang.',
 				'type' => 'short', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -608,7 +608,7 @@ return array(
 			),
 			array(
 				'label' => 'Demo short/en: The parcel will be shipped after the payment has been received',
-				'content' => 'The parcel will be shipped after the payment has been received',
+				'content' => '3% discount, the parcel will be shipped after the payment has been received',
 				'type' => 'short', 'languageid' => 'en', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
