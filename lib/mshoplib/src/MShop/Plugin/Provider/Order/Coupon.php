@@ -50,6 +50,7 @@ class Coupon
 		$p->attach( $plugin, 'setServices.after' );
 		$p->attach( $plugin, 'addCoupon.after' );
 		$p->attach( $plugin, 'deleteCoupon.after' );
+		$p->attach( $plugin, 'setOrder.before' );
 
 		return $this;
 	}
