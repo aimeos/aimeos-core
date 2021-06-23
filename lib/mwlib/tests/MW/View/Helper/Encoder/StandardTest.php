@@ -55,7 +55,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$enc = $this->object->transform();
 
-		$this->assertEquals( '<a>&quot;attri``bute&apos;</a>', $enc->attr( '<a>"attri`bute\'</a>' ) );
+		$this->assertEquals( '<a>&quot;attri&#96;bute&apos;</a>', $enc->attr( '<a>"attri`bute\'</a>' ) );
 	}
 
 
