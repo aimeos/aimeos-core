@@ -56,7 +56,7 @@ class Standard
 			return (string) $value;
 		}
 
-		return str_replace( ['"', '\'', '`'], ['&quot;', '&apos;', '``'], (string) $value );
+		return str_replace( ['"', '\'', '`'], ['&quot;', '&apos;', '&#96;'], (string) $value );
 	}
 
 
@@ -77,7 +77,8 @@ class Standard
 			return (string) $value;
 		}
 
-		return Str::html( (string) $value, ENT_QUOTES );
+		// Avoid client side template injection
+		return str_replace( ['{', '}'], '', Str::html( (string) $value, ENT_QUOTES ) );
 	}
 
 
