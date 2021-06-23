@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$enc = $this->object->transform();
 
-		$this->assertEquals( '&#123;&quot;key&quot;:&quot;\\u0026quot;&quot;&#125;', $enc->attr( (object) ['key' => '&quot;'] ) );
+		$this->assertEquals( '{&quot;key&quot;:&quot;\\u0026quot;&quot;}', $enc->attr( (object) ['key' => '&quot;'] ) );
 	}
 
 
@@ -79,7 +79,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$enc = $this->object->transform();
 
-		$this->assertEquals( '&#123;&quot;key&quot;:&quot;\\\\n&quot;&#125;', $enc->attr( (object) ['key' => '\n'] ) );
+		$this->assertEquals( '{&quot;key&quot;:&quot;\\\\n&quot;}', $enc->attr( (object) ['key' => '\n'] ) );
 	}
 
 
@@ -119,7 +119,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$enc = $this->object->transform();
 
-		$this->assertEquals( '&#123;&quot;key&quot;:&quot;\u0026quot;&quot;&#125;', $enc->html( (object) ['key' => '&quot;'] ) );
+		$this->assertEquals( '&quot;key&quot;:&quot;\u0026quot;&quot;', $enc->html( (object) ['key' => '&quot;'] ) );
 	}
 
 
@@ -183,7 +183,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$enc = $this->object->transform();
 
-		$this->assertEquals( '[&quot;\u0026quot;&quot;]', $enc->html( ['&quot;'] ) );
+		$this->assertEquals( '["\u0026quot;"]', $enc->xml( ['&quot;'] ) );
 	}
 
 
@@ -191,7 +191,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$enc = $this->object->transform();
 
-		$this->assertEquals( '&#123;&quot;key&quot;:&quot;\u0026quot;&quot;&#125;', $enc->html( (object) ['key' => '&quot;'] ) );
+		$this->assertEquals( '{"key":"\u0026quot;"}', $enc->xml( (object) ['key' => '&quot;'] ) );
 	}
 
 
