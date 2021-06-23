@@ -28,7 +28,7 @@ class Standard extends \Aimeos\MW\View\Helper\Base implements Iface
 	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param \Closure|array $groups Group codes assigned to the current user or closure function that returns the list
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, $groups )
+	public function __construct( \Aimeos\MW\View\Iface $view, $groups = [] )
 	{
 		parent::__construct( $view );
 		$this->groups = $groups;
