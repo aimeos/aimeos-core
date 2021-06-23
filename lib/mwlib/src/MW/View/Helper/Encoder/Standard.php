@@ -56,7 +56,7 @@ class Standard
 			return (string) $value;
 		}
 
-		return str_replace( ['"', '\'', '`'], ['&quot;', '&apos;', '``'], (string) $value );
+		return str_replace( ['"', '\'', '`'], ['&quot;', '&apos;', '&#96;'], (string) $value );
 	}
 
 
@@ -77,7 +77,8 @@ class Standard
 			return (string) $value;
 		}
 
-		return Str::html( (string) $value, ENT_QUOTES );
+		// Avoid client side template injection
+		return str_replace( ['{', '}'], '', Str::html( (string) $value, ENT_QUOTES ) );
 	}
 
 
@@ -94,7 +95,7 @@ class Standard
 			$value = json_encode( $value, JSON_HEX_AMP );
 		}
 
-		return str_replace( ['\'', '"', '`'], ['\\\'', '&quot;', '&#96;'], (string) $value );
+		return str_replace( ['"', '\'', '`'], ['&quot;', '&apos;', '&#96;'], (string) $value );
 	}
 
 
