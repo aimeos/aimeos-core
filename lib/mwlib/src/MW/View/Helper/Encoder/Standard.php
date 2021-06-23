@@ -56,7 +56,7 @@ class Standard
 			return $value;
 		}
 
-		return str_replace( ['"', '\'', '`'], ['&quot;', '&apos;', '``'], (string) $value );
+		return str_replace( ['"', '\'', '`'], ['&quot;', '&apos;', '&#96;'], (string) $value );
 	}
 
 
@@ -73,7 +73,8 @@ class Standard
 			return $value;
 		}
 
-		return htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
+		// Avoid client side template injection
+		return str_replace( ['{', '}'], '', htmlspecialchars( (string) $value, ENT_QUOTES, 'UTF-8' ) );
 	}
 
 
