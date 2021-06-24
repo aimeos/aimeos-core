@@ -107,7 +107,7 @@ class CSV
 
 		foreach( $data as $pos => $entry )
 		{
-			$entry = str_replace( $this->lineend, $this->endsubst, $entry );
+			$entry = str_replace( $this->lineend, $this->endsubst, ltrim( $entry, '@=+-' ) ); // ltrim to invalidate Excel macros
 			$list[$pos] = $enclosure . str_replace( $enclosure, $this->escape . $enclosure, $entry ) . $enclosure;
 		}
 
