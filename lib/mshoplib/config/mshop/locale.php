@@ -234,7 +234,7 @@ return array(
 						mlocsi."editor" AS "locale.site.editor", mlocsi."mtime" AS "locale.site.mtime",
 						mlocsi."ctime" AS "locale.site.ctime"
 					FROM "mshop_locale_site" AS mlocsi
-					WHERE mlocsi."level" = 0 AND :cond
+					WHERE :cond
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
@@ -248,7 +248,7 @@ return array(
 						mlocsi."editor" AS "locale.site.editor", mlocsi."mtime" AS "locale.site.mtime",
 						mlocsi."ctime" AS "locale.site.ctime"
 					FROM "mshop_locale_site" AS mlocsi
-					WHERE mlocsi."level" = 0 AND :cond
+					WHERE :cond
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				'
