@@ -89,8 +89,8 @@ class CSV
 			$list = array_fill( 0, $max, '' );
 		}
 
-		foreach( $data as $pos => $entry ) {
-			$list[$pos] = $enclosure . str_replace( $enclosure, $this->escape . $enclosure, $entry ) . $enclosure;
+		foreach( $data as $pos => $entry ) { // ltrim to invalidate Excel macros
+			$list[$pos] = $enclosure . str_replace( $enclosure, $this->escape . $enclosure, ltrim( $entry, '@=+-' ) ) . $enclosure;
 		}
 
 		if( fwrite( $this->fh, implode( $this->separator, $list ) . $this->lineend ) === false ) {
