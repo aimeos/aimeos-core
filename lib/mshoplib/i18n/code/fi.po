@@ -7,199 +7,196 @@
 # Translators:
 # Translators:
 # Translators:
-# Aimeos, 2018
-# Aimeos, 2018,2021
-# Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2021-05-26 14:58+0000\n"
+"PO-Revision-Date: 2021-05-26 07:26+0000\n"
 "Last-Translator: Aimeos\n"
-"Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
+"Language-Team: Finnish (http://www.transifex.com/aimeos/aimeos-core/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
+"Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Item status
 msgid "status:-2"
-msgstr "Archiviert"
+msgstr ""
 
 #. Item status
 msgid "status:-1"
-msgstr "Zur Prüfung"
+msgstr ""
 
 #. Item status
 msgid "status:0"
-msgstr "Deaktiviert"
+msgstr ""
 
 #. Item status
 msgid "status:1"
-msgstr "Verfügbar"
+msgstr ""
 
 #. Address salutation
 msgid "company"
-msgstr " "
+msgstr "Yritys"
 
 #. Address salutation
 msgid "mr"
-msgstr "Herr"
+msgstr ""
 
 #. Address salutation
 msgid "ms"
-msgstr "Frau"
+msgstr ""
 
 #. Address salutation
 msgid "mrs"
-msgstr "Frau"
+msgstr ""
 
 #. Address salutation
 msgid "miss"
-msgstr "Fräulein"
+msgstr ""
 
 #. Order type value
 msgid "order:repeat"
-msgstr "wiederholt"
+msgstr ""
 
 #. Order type value
 msgid "order:web"
-msgstr "Internet"
+msgstr ""
 
 #. Order type value
 msgid "order:phone"
-msgstr "Telefon"
+msgstr ""
 
 #. Subscription reason code
 msgid "reason:-1"
-msgstr "Zahlung"
+msgstr "maksu"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr "Abgelaufen"
+msgstr ""
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr "Abgebrochen"
+msgstr ""
 
 #. Payment status value
 msgid "pay:-1"
-msgstr "Offen"
+msgstr ""
 
 #. Payment status value
 msgid "pay:0"
-msgstr "Gelöscht"
+msgstr ""
 
 #. Payment status value
 msgid "pay:1"
-msgstr "Abgebrochen"
+msgstr ""
 
 #. Payment status value
 msgid "pay:2"
-msgstr "Abgelehnt"
+msgstr ""
 
 #. Payment status value
 msgid "pay:3"
-msgstr "Erstattet"
+msgstr ""
 
 #. Payment status value
 msgid "pay:4"
-msgstr "Wartend"
+msgstr ""
 
 #. Payment status value
 msgid "pay:5"
-msgstr "Autorisiert"
+msgstr ""
 
 #. Payment status value
 msgid "pay:6"
-msgstr "Erhalten"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:-1"
-msgstr "Offen"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:0"
-msgstr "Gelöscht"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:1"
-msgstr "Wartend"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:2"
-msgstr "In Bearbeitung"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:3"
-msgstr "Versandt"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:4"
-msgstr "Ausgeliefert"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:5"
-msgstr "Verloren"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:6"
-msgstr "Verweigert"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:7"
-msgstr "Zurück gesendet"
+msgstr ""
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr "Die Rechnungsadresse fehlt"
+msgstr ""
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr "Die Lieferadresse fehlt"
+msgstr ""
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr "Eine Rechnungsadresse ist nicht erlaubt"
+msgstr ""
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr "Eine Lieferadresse ist nicht erlaubt"
+msgstr ""
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr "Die Bezahloption fehlt"
+msgstr ""
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr "Die Lieferoption fehlt"
+msgstr ""
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr "Eine Bezahloption ist nicht erlaubt"
+msgstr ""
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr "Eine Lieferoption ist nicht erlaubt"
+msgstr ""
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr "Es tut uns sehr leid, mindestens ein Produkt existiert nicht mehr. Bitte entfernen Sie es aus Ihrem Warenkorb, um die Bestellung fortzusetzen."
+msgstr ""
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr "Es tut uns sehr leid, mindestens ein Produkt wurde deaktiviert. Bitte entfernen Sie es aus Ihrem Warenkorb, um die Bestellung fortzusetzen."
+msgstr ""
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr "Es tut uns sehr leid, mindestens ein Produkt ist nicht mehr verfügbar. Bitte entfernen Sie es aus Ihrem Warenkorb, um die Bestellung fortzusetzen."
+msgstr ""
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr "Der Preis von mindestens einem Produkt im Warenkorb hat sich in der Zwischenzeit geändert und wurde aktualisiert"
+msgstr ""
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr "Es tut uns sehr leid, mindestens ein Produkt ist nicht mehr auf Lager. Bitte entfernen Sie es aus Ihrem Warenkorb, um die Bestellung fortzusetzen."
+msgstr ""
