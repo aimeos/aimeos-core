@@ -2,8 +2,8 @@
 
 $csv = function( string $type, string $id, array $data ) {
 
-	foreach( $data as $pos => $entry ) {
-		$data[$pos] = '"' . str_replace( '"', '', json_encode( $entry ) ) . '"';
+	foreach( $data as $pos => $entry ) { // ltrim to invalidate Excel macros
+		$data[$pos] = '"' . str_replace( '"', '""', ltrim( json_encode( $entry ), '@=+-' ) ) . '"';
 	}
 
 	return '"' . $type . '";"' . $id . '";' . join( ';', $data ) . PHP_EOL;
