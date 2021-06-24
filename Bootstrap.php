@@ -116,7 +116,7 @@ class Bootstrap
 			}
 		}
 
-		return $confpaths;
+		return array_reverse( $confpaths );
 	}
 
 
