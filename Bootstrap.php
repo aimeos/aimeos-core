@@ -43,10 +43,8 @@ class Bootstrap
 		{
 			$packages = \Composer\InstalledVersions::getInstalledPackagesByType( 'aimeos-extension' );
 
-			foreach( $packages as $package )
-			{
-				$path = realpath( \Composer\InstalledVersions::getInstallPath( $package ) );
-				$this->manifests[$path] = $this->getManifestFile( $path );
+			foreach( $packages as $package ) {
+				$extdirs[] = realpath( \Composer\InstalledVersions::getInstallPath( $package ) );
 			}
 		}
 
@@ -116,7 +114,7 @@ class Bootstrap
 			}
 		}
 
-		return array_reverse( $confpaths );
+		return $confpaths;
 	}
 
 
