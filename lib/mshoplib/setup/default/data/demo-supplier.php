@@ -67,11 +67,11 @@ return array(
 		'media' => array(
 			array(
 				'media.label' => 'Demo: Article 1.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://demo.aimeos.org/media/1-big.jpg',
+				'media.url' => 'https://aimeos.org/media/1-big.jpg',
 				'media.previews' => [
-					240 => 'https://demo.aimeos.org/media/1.jpg',
-					720 => 'https://demo.aimeos.org/media/1-med.jpg',
-					1200 => 'https://demo.aimeos.org/media/1-big.jpg',
+					240 => 'https://aimeos.org/media/1.jpg',
+					720 => 'https://aimeos.org/media/1-med.jpg',
+					1200 => 'https://aimeos.org/media/1-big.jpg',
 				],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'supplier.lists.type' => 'default', 'supplier.lists.position' => 0, 'supplier.lists.config' => [],
@@ -152,11 +152,11 @@ return array(
 		'media' => array(
 			array(
 				'media.label' => 'Demo: Article 1.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://demo.aimeos.org/media/2-big.jpg',
+				'media.url' => 'https://aimeos.org/media/2-big.jpg',
 				'media.previews' => [
-					240 => 'https://demo.aimeos.org/media/2.jpg',
-					720 => 'https://demo.aimeos.org/media/2-med.jpg',
-					1200 => 'https://demo.aimeos.org/media/2-big.jpg',
+					240 => 'https://aimeos.org/media/2.jpg',
+					720 => 'https://aimeos.org/media/2-med.jpg',
+					1200 => 'https://aimeos.org/media/2-big.jpg',
 				],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'supplier.lists.type' => 'default', 'supplier.lists.position' => 0, 'supplier.lists.config' => [],

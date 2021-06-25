@@ -61,8 +61,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: pickup.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.aimeos.org/media/service/pickup.png',
-				'preview' => [1 => 'https://demo.aimeos.org/media/service/pickup.png'],
+				'url' => 'https://aimeos.org/media/service/pickup.png',
+				'preview' => [1 => 'https://aimeos.org/media/service/pickup.png'],
 				'type' => 'icon', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -121,8 +121,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: dhl.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.aimeos.org/media/service/dhl.png',
-				'preview' => 'https://demo.aimeos.org/media/service/dhl.png',
+				'url' => 'https://aimeos.org/media/service/dhl.png',
+				'preview' => 'https://aimeos.org/media/service/dhl.png',
 				'type' => 'icon', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -181,8 +181,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: dhl-express.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.aimeos.org/media/service/dhl-express.png',
-				'preview' => 'https://demo.aimeos.org/media/service/dhl-express.png',
+				'url' => 'https://aimeos.org/media/service/dhl-express.png',
+				'preview' => 'https://aimeos.org/media/service/dhl-express.png',
 				'type' => 'icon', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -241,8 +241,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: fedex.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.aimeos.org/media/service/fedex.png',
-				'preview' => 'https://demo.aimeos.org/media/service/fedex.png',
+				'url' => 'https://aimeos.org/media/service/fedex.png',
+				'preview' => 'https://aimeos.org/media/service/fedex.png',
 				'type' => 'icon', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -301,8 +301,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: tnt.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.aimeos.org/media/service/tnt.png',
-				'preview' => 'https://demo.aimeos.org/media/service/tnt.png',
+				'url' => 'https://aimeos.org/media/service/tnt.png',
+				'preview' => 'https://aimeos.org/media/service/tnt.png',
 				'type' => 'icon', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -369,8 +369,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: payment-in-advance.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.aimeos.org/media/service/payment-in-advance.png',
-				'preview' => 'https://demo.aimeos.org/media/service/payment-in-advance.png',
+				'url' => 'https://aimeos.org/media/service/payment-in-advance.png',
+				'preview' => 'https://aimeos.org/media/service/payment-in-advance.png',
 				'type' => 'icon', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -435,16 +435,16 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: sepa.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.aimeos.org/media/service/sepa.png',
-				'preview' => 'https://demo.aimeos.org/media/service/sepa.png',
+				'url' => 'https://aimeos.org/media/service/sepa.png',
+				'preview' => 'https://aimeos.org/media/service/sepa.png',
 				'type' => 'icon', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: direct-debit.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.aimeos.org/media/service/direct-debit.png',
-				'preview' => 'https://demo.aimeos.org/media/service/direct-debit.png',
+				'url' => 'https://aimeos.org/media/service/direct-debit.png',
+				'preview' => 'https://aimeos.org/media/service/direct-debit.png',
 				'type' => 'icon', 'languageid' => 'en', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -511,8 +511,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: paypal.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.aimeos.org/media/service/paypal.png',
-				'preview' => 'https://demo.aimeos.org/media/service/paypal.png',
+				'url' => 'https://aimeos.org/media/service/paypal.png',
+				'preview' => 'https://aimeos.org/media/service/paypal.png',
 				'type' => 'icon', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -570,8 +570,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: dhl-cod.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.aimeos.org/media/service/dhl-cod.png',
-				'preview' => 'https://demo.aimeos.org/media/service/dhl-cod.png',
+				'url' => 'https://aimeos.org/media/service/dhl-cod.png',
+				'preview' => 'https://aimeos.org/media/service/dhl-cod.png',
 				'type' => 'icon', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -640,8 +640,8 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: payment-in-advance-alternative.png', 'mimetype' => 'image/png',
-				'url' => 'https://demo.aimeos.org/media/service/payment-in-advance-alternative.png',
-				'preview' => 'https://demo.aimeos.org/media/service/payment-in-advance-alternative.png',
+				'url' => 'https://aimeos.org/media/service/payment-in-advance-alternative.png',
+				'preview' => 'https://aimeos.org/media/service/payment-in-advance-alternative.png',
 				'type' => 'icon', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1

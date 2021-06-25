@@ -60,11 +60,11 @@ return array(
 	'media' => array(
 		array(
 			'label' => 'Demo: Home stage image', 'mimetype' => 'image/png',
-			'url' => 'https://demo.aimeos.org/media/stage-big.jpg',
+			'url' => 'https://aimeos.org/media/stage-big.jpg',
 			'preview' => [
-				360 => 'https://demo.aimeos.org/media/stage.jpg',
-				720 => 'https://demo.aimeos.org/media/stage-med.jpg',
-				1200 => 'https://demo.aimeos.org/media/stage-big.jpg',
+				360 => 'https://aimeos.org/media/stage.jpg',
+				720 => 'https://aimeos.org/media/stage-med.jpg',
+				1200 => 'https://aimeos.org/media/stage-big.jpg',
 			],
 			'type' => 'stage', 'languageid' => null, 'status' => 1,
 			'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
