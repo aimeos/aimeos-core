@@ -119,7 +119,7 @@ class Standard
 	 */
 	public function getType() : ?string
 	{
-		return $this->get( 'product.type' );
+		return $this->get( 'product.type', 'default' );
 	}
 
 
