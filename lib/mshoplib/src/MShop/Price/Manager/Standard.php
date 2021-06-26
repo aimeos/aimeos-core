@@ -263,7 +263,7 @@ class Standard
 		$locale = $this->getContext()->getLocale();
 		$values['price.siteid'] = $locale->getSiteId();
 
-		if( $locale->getCurrencyId() !== null ) {
+		if( !isset( $values['price.currencyid'] ) && $locale->getCurrencyId() !== null ) {
 			$values['price.currencyid'] = $locale->getCurrencyId();
 		}
 
