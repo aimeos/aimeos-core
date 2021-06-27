@@ -752,6 +752,9 @@ msgstr "Wallis and Futuna"
 msgid "WS"
 msgstr "Samoa"
 
+msgid "XK"
+msgstr "Kosovo"
+
 msgid "YE"
 msgstr "Yemen"
 
