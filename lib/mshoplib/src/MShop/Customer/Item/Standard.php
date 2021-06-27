@@ -130,6 +130,10 @@ class Standard extends Base implements Iface
 	 */
 	public function setCode( string $value ) : \Aimeos\MShop\Customer\Item\Iface
 	{
+		if( $value !== $this->get( 'customer.code' ) ) {
+			$this->setDateVerified( null );
+		}
+
 		return $this->set( 'customer.code', $this->checkCode( $value, 255 ) );
 	}
 
@@ -254,7 +258,7 @@ class Standard extends Base implements Iface
 			switch( $key )
 			{
 				case 'customer.label': $item = $item->setLabel( $value ); break;
-				case 'customer.code': $item = $item->setCode( $value ); break;
+				case 'customer.code': !$private ?: $item = $item->setCode( $value ); break;
 				case 'customer.status': !$private ?: $item = $item->setStatus( (int) $value ); break;
 				case 'customer.groups': !$private ?: $item = $item->setGroups( (array) $value ); break;
 				case 'customer.password': !$private ?: $item = $item->setPassword( $value ); break;
