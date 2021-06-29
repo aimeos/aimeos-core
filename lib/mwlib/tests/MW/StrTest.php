@@ -32,6 +32,10 @@ class StrTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( '池', Str::after( '他弛池', '弛' ) );
 		$this->assertEquals( '池', Str::after( '他弛池', '他弛' ) );
+
+		$this->assertEquals( 'c', Str::after( 'abc', ['b', 'c'] ) );
+		$this->assertEquals( '', Str::after( 'abc', ['c', 'b'] ) );
+		$this->assertNull( Str::after( 'abc', ['x'] ) );
 	}
 
 
@@ -54,6 +58,10 @@ class StrTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( '他', Str::before( '他弛池', '弛' ) );
 		$this->assertEquals( '他', Str::before( '他弛池', '弛池' ) );
+
+		$this->assertEquals( 'a', Str::before( 'abc', ['b', 'c'] ) );
+		$this->assertEquals( 'ab', Str::before( 'abc', ['c', 'b'] ) );
+		$this->assertNull( Str::before( 'abc', ['x'] ) );
 	}
 
 

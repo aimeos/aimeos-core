@@ -43,18 +43,22 @@ class Str
 	 * Returns the sub-string after the given needle.
 	 *
 	 * @param mixed $str Stringable value
-	 * @param mixed $needle String or character to search for
+	 * @param mixed $needles String or strings to search for
 	 * @return string|null Sub-string after the needle or NULL if needle is not part of the string
 	 */
-	public static function after( $str, $needle ) : ?string
+	public static function after( $str, $needles ) : ?string
 	{
 		$str = (string) $str;
-		$needle = (string) $needle;
 
-		if( ( $len = strlen( $needle ) ) > 0 && ( $pos = strpos( $str, $needle ) ) !== false
-			&& ( $result = substr( $str, $pos + $len ) ) !== false
-		) {
-			return $result;
+		foreach( (array) $needles as $needle )
+		{
+			$needle = (string) $needle;
+
+			if( ( $len = strlen( $needle ) ) > 0 && ( $pos = strpos( $str, $needle ) ) !== false
+				&& ( $result = substr( $str, $pos + $len ) ) !== false
+			) {
+				return $result;
+			}
 		}
 
 		return null;
@@ -65,18 +69,22 @@ class Str
 	 * Returns the sub-string before the given needle.
 	 *
 	 * @param mixed $str Stringable value
-	 * @param mixed $needle String or character to search for
+	 * @param mixed $needles String or strings to search for
 	 * @return string|null Sub-string before the needle or NULL if needle is not part of the string
 	 */
-	public static function before( $str, $needle ) : ?string
+	public static function before( $str, $needles ) : ?string
 	{
 		$str = (string) $str;
-		$needle = (string) $needle;
 
-		if( $needle !== '' && ( $pos = strpos( $str, $needle ) ) !== false
-			&& ( $result = substr( $str, 0, $pos ) ) !== false
-		) {
-			return $result;
+		foreach( (array) $needles as $needle )
+		{
+			$needle = (string) $needle;
+
+			if( $needle !== '' && ( $pos = strpos( $str, $needle ) ) !== false
+				&& ( $result = substr( $str, 0, $pos ) ) !== false
+			) {
+				return $result;
+			}
 		}
 
 		return null;
