@@ -593,7 +593,7 @@ return array(
 					1350 => 'https://aimeos.org/media/default/product_04_A-big.jpg',
 				],
 				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3,
+				'product.lists.type' => 'default', 'product.lists.position' => 0,
 			),
 			array(
 				'media.label' => 'Demo: Selection article 2.jpg', 'media.mimetype' => 'image/jpeg',
@@ -604,7 +604,7 @@ return array(
 					1350 => 'https://aimeos.org/media/default/product_04_B-big.jpg',
 				],
 				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0,
+				'product.lists.type' => 'default', 'product.lists.position' => 1,
 			),
 		),
 		'product' => array(
@@ -732,18 +732,18 @@ return array(
 					1350 => 'https://aimeos.org/media/default/product_03_A-big.jpg',
 				],
 				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2,
+				'product.lists.type' => 'default', 'product.lists.position' => 0,
 			),
 			array(
 				'media.label' => 'Demo: Bundle article 2.jpg', 'media.mimetype' => 'image/jpeg',
 				'media.url' => 'https://aimeos.org/media/default/product_03_B-big.jpg',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/product_03_B-low.jpg',
-					720 => 'https://aimeos.org/media/product_03_B-med.jpg',
-					1350 => 'https://aimeos.org/media/product_03_B-big.jpg',
+					240 => 'https://aimeos.org/media/default/product_03_B-low.jpg',
+					720 => 'https://aimeos.org/media/default/product_03_B-med.jpg',
+					1350 => 'https://aimeos.org/media/default/product_03_B-big.jpg',
 				],
 				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3,
+				'product.lists.type' => 'default', 'product.lists.position' => 1,
 			),
 		),
 		'attribute' => array(
