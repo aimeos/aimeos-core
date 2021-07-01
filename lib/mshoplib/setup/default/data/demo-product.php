@@ -72,11 +72,11 @@ return array(
 		'media' => array(
 			array(
 				'media.label' => 'Demo: Article 1.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/1-big.jpg',
+				'media.url' => 'https://aimeos.org/media/default/product_01_A-big.jpg',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/1.jpg',
-					720 => 'https://aimeos.org/media/1-med.jpg',
-					1200 => 'https://aimeos.org/media/1-big.jpg',
+					240 => 'https://aimeos.org/media/default/product_01_A-low.jpg',
+					720 => 'https://aimeos.org/media/default/product_01_A-med.jpg',
+					1350 => 'https://aimeos.org/media/default/product_01_A-big.jpg',
 				],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
@@ -84,38 +84,14 @@ return array(
 			),
 			array(
 				'media.label' => 'Demo: Article 2.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/2-big.jpg',
+				'media.url' => 'https://aimeos.org/media/default/product_01_B-big.jpg',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/2.jpg',
-					720 => 'https://aimeos.org/media/2-med.jpg',
-					1200 => 'https://aimeos.org/media/2-big.jpg',
+					240 => 'https://aimeos.org/media/default/product_01_B-low.jpg',
+					720 => 'https://aimeos.org/media/default/product_01_B-med.jpg',
+					1350 => 'https://aimeos.org/media/default/product_01_B-big.jpg',
 				],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			),
-			array(
-				'media.label' => 'Demo: Article 3.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/3-big.jpg',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/3.jpg',
-					720 => 'https://aimeos.org/media/3-med.jpg',
-					1200 => 'https://aimeos.org/media/3-big.jpg',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			),
-			array(
-				'media.label' => 'Demo: Article 4.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/4-big.jpg',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/4.jpg',
-					720 => 'https://aimeos.org/media/4-med.jpg',
-					1200 => 'https://aimeos.org/media/4-big.jpg',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3, 'product.lists.config' => [],
 				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
 			),
 		),
@@ -610,48 +586,25 @@ return array(
 		'media' => array(
 			array(
 				'media.label' => 'Demo: Selection article 1.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/1-big.jpg',
+				'media.url' => 'https://aimeos.org/media/default/product_04_A-big.jpg',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/4.jpg',
-					720 => 'https://aimeos.org/media/4-med.jpg',
-					1200 => 'https://aimeos.org/media/4-big.jpg',
+					240 => 'https://aimeos.org/media/default/product_04_A-low.jpg',
+					720 => 'https://aimeos.org/media/default/product_04_A-med.jpg',
+					1350 => 'https://aimeos.org/media/default/product_04_A-big.jpg',
 				],
-				'media.previews' => [1 => 'https://aimeos.org/media/1.jpg', 250 => 'https://aimeos.org/media/1-big.jpg'],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3,
 			),
 			array(
 				'media.label' => 'Demo: Selection article 2.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/2-big.jpg',
+				'media.url' => 'https://aimeos.org/media/default/product_04_B-big.jpg',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/2.jpg',
-					720 => 'https://aimeos.org/media/2-med.jpg',
-					1200 => 'https://aimeos.org/media/2-big.jpg',
+					240 => 'https://aimeos.org/media/default/product_04_B-low.jpg',
+					720 => 'https://aimeos.org/media/default/product_04_B-med.jpg',
+					1350 => 'https://aimeos.org/media/default/product_04_B-big.jpg',
 				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0,
-			),
-			array(
-				'media.label' => 'Demo: Selection article 3.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/3-big.jpg',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/3.jpg',
-					720 => 'https://aimeos.org/media/3-med.jpg',
-					1200 => 'https://aimeos.org/media/3-big.jpg',
-				],
-				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1,
-			),
-			array(
-				'media.label' => 'Demo: Selection article 4.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/4-big.jpg',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/4.jpg',
-					720 => 'https://aimeos.org/media/4-med.jpg',
-					1200 => 'https://aimeos.org/media/4-big.jpg',
-				],
-				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2,
 			),
 		),
 		'product' => array(
@@ -772,47 +725,25 @@ return array(
 		'media' => array(
 			array(
 				'media.label' => 'Demo: Bundle article 1.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/1-big.jpg',
+				'media.url' => 'https://aimeos.org/media/default/product_03_A-big.jpg',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/1.jpg',
-					720 => 'https://aimeos.org/media/1-med.jpg',
-					1200 => 'https://aimeos.org/media/1-big.jpg',
+					240 => 'https://aimeos.org/media/default/product_03_A-low.jpg',
+					720 => 'https://aimeos.org/media/default/product_03_A-med.jpg',
+					1350 => 'https://aimeos.org/media/default/product_03_A-big.jpg',
 				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2,
 			),
 			array(
 				'media.label' => 'Demo: Bundle article 2.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/2-big.jpg',
+				'media.url' => 'https://aimeos.org/media/default/product_03_B-big.jpg',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/2.jpg',
-					720 => 'https://aimeos.org/media/2-med.jpg',
-					1200 => 'https://aimeos.org/media/2-big.jpg',
+					240 => 'https://aimeos.org/media/product_03_B-low.jpg',
+					720 => 'https://aimeos.org/media/product_03_B-med.jpg',
+					1350 => 'https://aimeos.org/media/product_03_B-big.jpg',
 				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3,
-			),
-			array(
-				'media.label' => 'Demo: Bundle article 3.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/3-big.jpg',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/3.jpg',
-					720 => 'https://aimeos.org/media/3-med.jpg',
-					1200 => 'https://aimeos.org/media/3-big.jpg',
-				],
-				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0,
-			),
-			array(
-				'media.label' => 'Demo: Bundle article 4.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/4-big.jpg',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/4.jpg',
-					720 => 'https://aimeos.org/media/4-med.jpg',
-					1200 => 'https://aimeos.org/media/4-big.jpg',
-				],
-				'media.type' => 'default', 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1,
 			),
 		),
 		'attribute' => array(
@@ -1025,11 +956,11 @@ return array(
 		'media' => array(
 			array(
 				'media.label' => 'Demo: Voucher 0.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/0-voucher-big.jpg',
+				'media.url' => 'https://aimeos.org/media/default/voucher-big.jpg',
 				'media.previews' => [
-					240 => 'https://aimeos.org/media/0-voucher.jpg',
-					720 => 'https://aimeos.org/media/0-voucher-med.jpg',
-					1200 => 'https://aimeos.org/media/0-voucher-big.jpg',
+					240 => 'https://aimeos.org/media/default/voucher-low.jpg',
+					720 => 'https://aimeos.org/media/default/voucher-med.jpg',
+					1350 => 'https://aimeos.org/media/default/voucher-big.jpg',
 				],
 				'media.type' => 'default', 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0,
