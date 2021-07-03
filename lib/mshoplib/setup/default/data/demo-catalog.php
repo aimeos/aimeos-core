@@ -203,7 +203,7 @@ return [
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 		],
-	],[
+	], [
 		'catalog.code' => 'demo-new', 'catalog.label' => 'New arrivals',
 		'text' => [
 			[
@@ -277,7 +277,7 @@ return [
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 		],
-	],[
+	], [
 		'catalog.code' => 'demo-deals', 'catalog.label' => 'Hot deals',
 		'text' => [
 			[
