@@ -285,13 +285,13 @@ return [
 			],
 		],
 		'property' => [
-			[ 'product.property.type' => 'package-length', 'product.property.value' => '20.00' ],
-			[ 'product.property.type' => 'package-width', 'product.property.value' => '10.00' ],
-			[ 'product.property.type' => 'package-height', 'product.property.value' => '5.00' ],
-			[ 'product.property.type' => 'package-weight', 'product.property.value' => '2.5' ],
+			['product.property.type' => 'package-length', 'product.property.value' => '20.00'],
+			['product.property.type' => 'package-width', 'product.property.value' => '10.00'],
+			['product.property.type' => 'package-height', 'product.property.value' => '5.00'],
+			['product.property.type' => 'package-weight', 'product.property.value' => '2.5'],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null ],
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 
@@ -400,7 +400,7 @@ return [
 			],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => 5, 'stock.type' => 'default', 'stock.dateback' => null ],
+			['stock.stocklevel' => 5, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 	[
@@ -489,7 +489,7 @@ return [
 			],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => 0, 'stock.type' => 'default', 'stock.dateback' => '2015-01-01 12:00:00' ],
+			['stock.stocklevel' => 0, 'stock.type' => 'default', 'stock.dateback' => '2015-01-01 12:00:00'],
 		],
 	],
 	[
@@ -626,7 +626,7 @@ return [
 			],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => 5, 'stock.type' => 'default', 'stock.dateback' => null ],
+			['stock.stocklevel' => 5, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 
@@ -849,7 +849,7 @@ return [
 			],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => 10, 'stock.type' => 'default', 'stock.dateback' => null ],
+			['stock.stocklevel' => 10, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 	[
@@ -967,7 +967,7 @@ return [
 			],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null ],
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 	[
@@ -982,7 +982,7 @@ return [
 			],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null ],
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 
@@ -1074,7 +1074,7 @@ return [
 			],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null ],
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 
@@ -1165,7 +1165,7 @@ return [
 			],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null ],
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 
@@ -1256,7 +1256,7 @@ return [
 			],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null ],
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 
@@ -1347,7 +1347,7 @@ return [
 			],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null ],
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 
@@ -1438,7 +1438,7 @@ return [
 			],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null ],
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 
@@ -1529,7 +1529,7 @@ return [
 			],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null ],
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 
@@ -1620,7 +1620,7 @@ return [
 			],
 		],
 		'stock' => [
-			[ 'stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null ],
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
 ];
