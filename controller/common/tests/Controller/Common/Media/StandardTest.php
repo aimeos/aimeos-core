@@ -39,7 +39,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'checkFileUpload' );
-		$object->expects( $this->exactly( 4 ) )->method( 'store' );
+		$object->expects( $this->exactly( 2 ) )->method( 'store' );
 
 		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 
@@ -185,7 +185,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'getFileContent' )
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.png' ) ) );
 
-		$object->expects( $this->exactly( 3 ) )->method( 'store' );
+		$object->expects( $this->exactly( 1 ) )->method( 'store' );
 
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
