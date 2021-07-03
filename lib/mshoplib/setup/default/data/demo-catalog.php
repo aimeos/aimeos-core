@@ -147,8 +147,8 @@ return [
 				'label' => 'Demo: Best seller stage', 'mimetype' => 'image/jpeg',
 				'url' => 'https://aimeos.org/media/default/main-banner-1-big.jpg',
 				'preview' => [
-					480 => 'https://aimeos.org/media/default/main-banner-1-big.jpg',
-					960 => 'https://aimeos.org/media/default/main-banner-1-big.jpg',
+					480 => 'https://aimeos.org/media/default/main-banner-1-low.jpg',
+					960 => 'https://aimeos.org/media/default/main-banner-1-med.jpg',
 					1920 => 'https://aimeos.org/media/default/main-banner-1-big.jpg',
 				],
 				'type' => 'stage', 'languageid' => null, 'status' => 1,
@@ -226,8 +226,8 @@ return [
 				'label' => 'Demo: New arrivals stage', 'mimetype' => 'image/jpeg',
 				'url' => 'https://aimeos.org/media/default/main-banner-2-big.jpg',
 				'preview' => [
-					480 => 'https://aimeos.org/media/default/main-banner-2-big.jpg',
-					960 => 'https://aimeos.org/media/default/main-banner-2-big.jpg',
+					480 => 'https://aimeos.org/media/default/main-banner-2-low.jpg',
+					960 => 'https://aimeos.org/media/default/main-banner-2-med.jpg',
 					1920 => 'https://aimeos.org/media/default/main-banner-2-big.jpg',
 				],
 				'type' => 'stage', 'languageid' => null, 'status' => 1,
@@ -300,8 +300,8 @@ return [
 				'label' => 'Demo: Hot deals stage', 'mimetype' => 'image/jpeg',
 				'url' => 'https://aimeos.org/media/default/main-banner-3-big.jpg',
 				'preview' => [
-					480 => 'https://aimeos.org/media/default/main-banner-3-big.jpg',
-					960 => 'https://aimeos.org/media/default/main-banner-3-big.jpg',
+					480 => 'https://aimeos.org/media/default/main-banner-3-low.jpg',
+					960 => 'https://aimeos.org/media/default/main-banner-3-med.jpg',
 					1920 => 'https://aimeos.org/media/default/main-banner-3-big.jpg',
 				],
 				'type' => 'stage', 'languageid' => null, 'status' => 1,
