@@ -28,18 +28,41 @@ return [
 				'text/csv' => 'csv',
 			],
 			'previews' => [[
-				'maxwidth' => 240,
-				'maxheight' => 320,
+				'maxwidth' => 480,
 				'force-size' => false,
 			], [
-				'maxwidth' => 720,
-				'maxheight' => 960,
+				'maxwidth' => 960,
 				'force-size' => false,
 			], [
-				'maxwidth' => 2160,
-				'maxheight' => 2880,
+				'maxwidth' => 1920,
 				'force-size' => false,
 			]],
+			'catalog' => [
+				'stage' => [
+					'previews' => [[
+						'maxwidth' => 960,
+						'force-size' => false,
+					], [
+						'maxwidth' => 1920,
+						'force-size' => false,
+					]],
+				]
+			],
+			'product' => [
+				'previews' => [[
+					'maxwidth' => 240,
+					'maxheight' => 320,
+					'force-size' => false,
+				], [
+					'maxwidth' => 720,
+					'maxheight' => 960,
+					'force-size' => false,
+				], [
+					'maxwidth' => 2160,
+					'maxheight' => 2880,
+					'force-size' => false,
+				]],
+			],
 		],
 	],
 ];
