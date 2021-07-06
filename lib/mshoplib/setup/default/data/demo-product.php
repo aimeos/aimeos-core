@@ -875,8 +875,7 @@ return [
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article',
-				'text.content' => 'Demo voucher',
+				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo voucher',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
@@ -1009,8 +1008,7 @@ return [
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article',
-				'text.content' => 'Demo article',
+				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 2',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
@@ -1100,8 +1098,7 @@ return [
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article',
-				'text.content' => 'Demo article',
+				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 3',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
@@ -1191,8 +1188,7 @@ return [
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article',
-				'text.content' => 'Demo article',
+				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 4',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
@@ -1282,8 +1278,7 @@ return [
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article',
-				'text.content' => 'Demo article',
+				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 5',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
@@ -1373,8 +1368,7 @@ return [
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article',
-				'text.content' => 'Demo article',
+				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 6',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
@@ -1464,8 +1458,7 @@ return [
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article',
-				'text.content' => 'Demo article',
+				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 7',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],
@@ -1555,8 +1548,7 @@ return [
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			],
 			[
-				'text.label' => 'Demo name/en: Demo article',
-				'text.content' => 'Demo article',
+				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 8',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			],

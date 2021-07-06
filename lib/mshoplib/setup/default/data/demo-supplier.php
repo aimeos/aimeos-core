@@ -23,13 +23,13 @@ return array(
 		),
 		'text' => array(
 			array(
-				'text.label' => 'Demo name/de: Demo Händler', 'text.content' => 'Demoartikel',
+				'text.label' => 'Demo name/de: Demo Händler', 'text.content' => 'Demo-Händler',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'supplier.lists.type' => 'default', 'supplier.lists.position' => 0
 			),
 			array(
 				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
+				'text.content' => 'Dies ist die Kurzbeschreibung des Demo-Händlers',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'supplier.lists.type' => 'default', 'supplier.lists.position' => 1
 			),
@@ -40,20 +40,19 @@ return array(
 				'supplier.lists.type' => 'default', 'supplier.lists.position' => 2
 			),
 			array(
-				'text.label' => 'Demo name/en: Demo supplier',
-				'text.content' => 'Demo article',
+				'text.label' => 'Demo name/en: Demo supplier', 'text.content' => 'Demo supplier',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'supplier.lists.type' => 'default', 'supplier.lists.position' => 3
 			),
 			array(
 				'text.label' => 'Demo short/en: This is the short description',
-				'text.content' => 'This is the short description of the demo article.',
+				'text.content' => 'This is the short description of the demo supplier.',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'supplier.lists.type' => 'default', 'supplier.lists.position' => 4
 			),
 			array(
 				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the demo article that may be a little bit longer.',
+				'text.content' => 'Add a detailed description of the demo supplier that may be a little bit longer.',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'supplier.lists.type' => 'default', 'supplier.lists.position' => 5
 			),
@@ -108,13 +107,13 @@ return array(
 		),
 		'text' => array(
 			array(
-				'text.label' => 'Demo name/de: Demo Händler 2', 'text.content' => 'Demoartikel',
+				'text.label' => 'Demo name/de: Demo Händler 2', 'text.content' => 'Demo-Händler 2',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'supplier.lists.type' => 'default', 'supplier.lists.position' => 0
 			),
 			array(
 				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
+				'text.content' => 'Dies ist die Kurzbeschreibung des Demo-Händlers 2',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'supplier.lists.type' => 'default', 'supplier.lists.position' => 1
 			),
@@ -125,8 +124,7 @@ return array(
 				'supplier.lists.type' => 'default', 'supplier.lists.position' => 2
 			),
 			array(
-				'text.label' => 'Demo name/en: Demo supplier 2',
-				'text.content' => 'Demo article',
+				'text.label' => 'Demo name/en: Demo supplier 2', 'text.content' => 'Demo supplier 2',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'supplier.lists.type' => 'default', 'supplier.lists.position' => 3
 			),

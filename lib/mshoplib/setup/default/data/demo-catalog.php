@@ -141,6 +141,13 @@ return [
 				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
+			[
+				'label' => 'Demo meta-description',
+				'content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'type' => 'meta-description', 'languageid' => null, 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			],
 		],
 		'media' => [
 			[
@@ -220,6 +227,13 @@ return [
 				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
+			[
+				'label' => 'Demo meta-description',
+				'content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'type' => 'meta-description', 'languageid' => null, 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			],
 		],
 		'media' => [
 			[
@@ -292,6 +306,13 @@ return [
 				'content' => '<p>Up to <strong>30%</strong> discount<br />on selected items</p>',
 				'type' => 'short', 'languageid' => 'en', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			],
+			[
+				'label' => 'Demo meta-description',
+				'content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'type' => 'meta-description', 'languageid' => null, 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 		],
