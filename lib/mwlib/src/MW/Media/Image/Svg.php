@@ -10,6 +10,8 @@
 
 namespace Aimeos\MW\Media\Image;
 
+use enshrined\svgSanitize\Sanitizer;
+
 
 /**
  * Image class for SVG files
@@ -38,6 +40,13 @@ class Svg
 
 		if( ( $string = @gzdecode( $content ) ) !== false ) {
 			$content = $string;
+		}
+
+		$sanitizer = new Sanitizer();
+		$sanitizer->removeRemoteReferences( true );
+
+		if( ( $content = $sanitizer->sanitize( $content ) ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( 'Invalid SVG file: ' . print_r( $sanitizer->getXmlIssues(), true ) );
 		}
 
 		if( ( $this->svg = @simplexml_load_string( $content ) ) === false ) {
