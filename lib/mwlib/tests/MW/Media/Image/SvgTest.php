@@ -70,7 +70,7 @@ class SvgTest extends \PHPUnit\Framework\TestCase
 		$media = new \Aimeos\MW\Media\Image\Svg( $this->content, 'image/svg+xml', [] );
 		$result = $media->save();
 
-		$this->assertStringStartsWith( '<?xml version="1.0" standalone="yes"?>', $result );
+		$this->assertStringStartsWith( '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>', $result );
 	}
 
 
