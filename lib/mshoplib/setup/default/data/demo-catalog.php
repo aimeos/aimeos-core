@@ -251,22 +251,22 @@ return [
 		],
 		'product' => [
 			[
-				'code' => 'demo-article-8',
+				'code' => 'demo-article-6',
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 			[
-				'code' => 'demo-article-6',
+				'code' => 'demo-article-5',
 				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 			[
-				'code' => 'demo-article-5',
+				'code' => 'demo-article-3',
 				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 			[
-				'code' => 'demo-article-3',
+				'code' => 'demo-article-8',
 				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
@@ -332,32 +332,32 @@ return [
 		],
 		'product' => [
 			[
-				'code' => 'demo-article-8',
+				'code' => 'demo-article',
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 			[
-				'code' => 'demo-article-2',
+				'code' => 'demo-article-8',
 				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 			[
-				'code' => 'demo-article',
+				'code' => 'demo-article-2',
 				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 			[
-				'code' => 'demo-article-5',
+				'code' => 'demo-article-7',
 				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 			[
-				'code' => 'demo-article-3',
+				'code' => 'demo-article-5',
 				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 			[
-				'code' => 'demo-article-7',
+				'code' => 'demo-article-3',
 				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
