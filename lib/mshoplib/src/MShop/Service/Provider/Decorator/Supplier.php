@@ -179,7 +179,7 @@ class Supplier
 		if( ( $code = $attributes['supplier.code'] ) != '' )
 		{
 			// add short address as attribute for summary page / customer email
-			$attributes['supplier.address'] = $this->feConfig['supplier.code']['short'][$code];
+			$attributes['supplier.address'] = $this->feConfig['supplier.code']['default'][$code];
 
 			// remove code attribute for summary page / customer email
 			$this->setAttributes( $orderServiceItem, ['supplier.code' => $attributes['supplier.code']], 'hidden' );
