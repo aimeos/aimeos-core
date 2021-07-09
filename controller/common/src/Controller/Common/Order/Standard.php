@@ -353,7 +353,7 @@ class Standard
 						case 'default':
 							$this->updateStockBundle( $item->getProductId(), $item->getStockType() ); break;
 						case 'select':
-							$this->updateStockSelection( $item->getProductId(), $item->getStockType() ); break;
+							$this->updateStockSelection( $item->getProductCode(), $item->getStockType() ); break;
 					}
 				}
 
@@ -434,12 +434,18 @@ class Standard
 	 * @param string $stocktype Unique stock type
 	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
 	 */
-	protected function updateStockSelection( string $prodId, string $stocktype )
+	protected function updateStockSelection( string $prodCode, string $stocktype )
 	{
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$stockManager = \Aimeos\MShop::create( $this->context, 'stock' );
 
-		$productItem = $productManager->get( $prodId, array( 'product' ) );
+		$search = $productManager->filter();
+        $expr = array(
+            $search->compare( '==', 'product.code', $prodCode ),
+        );
+        $search->setConditions( $search->and( $expr ) );
+
+        $productItem = $productManager->search( $search, array( 'product' ) )->first();
 		$prodIds = [$productItem->getId()];
 		$sum = 0; $selStockItem = null;
 
