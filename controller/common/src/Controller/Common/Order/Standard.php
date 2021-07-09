@@ -330,6 +330,7 @@ class Standard
 	{
 		$context = $this->getContext();
 		$stockManager = \Aimeos\MShop::create( $context, 'stock' );
+		$productManager = \Aimeos\MShop::create( $context, 'product' );
 		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
 
 		$search = $manager->filter();
@@ -347,7 +348,19 @@ class Standard
 
 				foreach( $items as $item )
 				{
-					$stockManager->decrease( [$item->getProductId() => $how * -1 * $item->getQuantity()], $item->getStockType() );
+					if( $item->getType()==='select' ) {
+						$productItem = $productManager->get( $item->getProductId(), array( 'product' ) );
+						$id = null;
+						foreach( $productItem->getRefItems( 'product', 'default', 'default' ) as $product )
+						{
+							if( $product->getCode() === $item->getProductCode() ) {
+								$stockManager->decrease( [$product->getId() => $how * -1 * $item->getQuantity()], $item->getStockType() );
+								continue;
+							}
+						}
+					} else {
+						$stockManager->decrease( [$item->getProductId() => $how * -1 * $item->getQuantity()], $item->getStockType() );
+					}
 
 					switch( $item->getType() ) {
 						case 'default':
