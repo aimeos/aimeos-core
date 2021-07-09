@@ -350,12 +350,12 @@ class Standard
 				{
 					if( $item->getType()==='select' ) {
 						$productItem = $productManager->get( $item->getProductId(), array( 'product' ) );
-						$id = null;
+
 						foreach( $productItem->getRefItems( 'product', 'default', 'default' ) as $product )
 						{
 							if( $product->getCode() === $item->getProductCode() ) {
 								$stockManager->decrease( [$product->getId() => $how * -1 * $item->getQuantity()], $item->getStockType() );
-								continue;
+								break;
 							}
 						}
 					} else {
