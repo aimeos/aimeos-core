@@ -347,7 +347,11 @@ class Standard
 
 				foreach( $items as $item )
 				{
-					$stockManager->decrease( [$item->getProductId() => $how * -1 * $item->getQuantity()], $item->getStockType() );
+					if( $item->getType() === 'select' ) {
+						$stockManager->decrease( [$item->getProductId() => $how * -1 * $item->getQuantity()], $item->getStockType() );
+					} else {
+						$stockManager->decrease( [$item->getProductId() => $how * -1 * $item->getQuantity()], $item->getStockType() );
+					}
 
 					switch( $item->getType() ) {
 						case 'default':
