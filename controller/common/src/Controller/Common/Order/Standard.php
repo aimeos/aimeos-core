@@ -440,12 +440,12 @@ class Standard
 		$stockManager = \Aimeos\MShop::create( $this->context, 'stock' );
 
 		$search = $productManager->filter();
-        $expr = array(
-            $search->compare( '==', 'product.code', $prodCode ),
-        );
-        $search->setConditions( $search->and( $expr ) );
+		$expr = array(
+			$search->compare( '==', 'product.code', $prodCode ),
+		);
+		$search->setConditions( $search->and( $expr ) );
 
-        $productItem = $productManager->search( $search, array( 'product' ) )->first();
+		$productItem = $productManager->search( $search, array( 'product' ) )->first();
 		$prodIds = [$productItem->getId()];
 		$sum = 0; $selStockItem = null;
 
