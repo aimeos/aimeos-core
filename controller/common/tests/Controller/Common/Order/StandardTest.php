@@ -568,7 +568,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateStockSelection()
 	{
 		$context = \TestHelperCntl::getContext();
-		$prodId = \Aimeos\MShop::create( $context, 'product' )->find( 'U:TEST' )->getCode();
+		$prod = \Aimeos\MShop::create( $context, 'product' )->find( 'U:TEST' );
 
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
@@ -588,7 +588,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$method->setAccessible( true );
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
-		$method->invokeArgs( $object, array( $prodId, 'default' ) );
+		$method->invokeArgs( $object, array( $prod, 'default' ) );
 	}
 
 
