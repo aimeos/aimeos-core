@@ -433,7 +433,7 @@ class Standard
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Standard $item
 	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
 	 */
-	protected function updateStockSelection( $item )
+	protected function updateStockSelection( \Aimeos\MShop\Order\Item\Base\Product\Standard $item )
 	{
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$stockManager = \Aimeos\MShop::create( $this->context, 'stock' );
