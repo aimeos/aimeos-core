@@ -353,7 +353,7 @@ class Standard
 						case 'default':
 							$this->updateStockBundle( $item->getProductId(), $item->getStockType() ); break;
 						case 'select':
-							$this->updateStockSelection( $item->getProductCode(), $item->getStockType() ); break;
+							$this->updateStockSelection( $item ); break;
 					}
 				}
 
@@ -430,22 +430,15 @@ class Standard
 	/**
 	 * Updates the stock levels of selection products for a specific type
 	 *
-	 * @param string $prodId Unique product ID
-	 * @param string $stocktype Unique stock type
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Standard $item
 	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
 	 */
-	protected function updateStockSelection( string $prodCode, string $stocktype )
+	protected function updateStockSelection( $item )
 	{
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 		$stockManager = \Aimeos\MShop::create( $this->context, 'stock' );
 
-		$search = $productManager->filter();
-		$expr = array(
-			$search->compare( '==', 'product.code', $prodCode ),
-		);
-		$search->setConditions( $search->and( $expr ) );
-
-		$productItem = $productManager->search( $search, array( 'product' ) )->first();
+		$productItem = $productManager->get( $item->getProductId(), array( 'product' ) );
 		$prodIds = [$productItem->getId()];
 		$sum = 0; $selStockItem = null;
 
@@ -453,20 +446,29 @@ class Standard
 			$prodIds[] = $product->getId();
 		}
 
-		foreach( $this->getStockItems( $prodIds, $stocktype ) as $stockItem )
+		foreach( $this->getStockItems( $prodIds, $item->getStockType() ) as $stockItem )
 		{
-			if( $stockItem->getProductId() === $productItem->getId() )
-			{
-				$selStockItem = $stockItem;
-				continue;
-			}
+			if( $productItem->getCode() !== $item->getProductCode() ){
+				$found = $productItem->getListItem('product','default',$stockItem->getProductId());
 
-			if( ( $stock = $stockItem->getStockLevel() ) === null ) {
-				$sum = null;
-			}
+				if( $found && $found->getRefItem()->getCode() === $item->getProductCode() ) {
+					$selStockItem = $stockItem;
+					continue;
+				}
+			} else {
+				if( $stockItem->getProductId() === $productItem->getId() )
+				{
+					$selStockItem = $stockItem;
+					continue;
+				}
 
-			if( $sum !== null ) {
-				$sum += $stock;
+				if( ( $stock = $stockItem->getStockLevel() ) === null ) {
+					$sum = null;
+				}
+
+				if( $sum !== null ) {
+					$sum += $stock;
+				}
 			}
 		}
 
@@ -474,7 +476,7 @@ class Standard
 		{
 			$selStockItem = $stockManager->create();
 			$selStockItem->setProductId( $productItem->getId() );
-			$selStockItem->setType( $stocktype );
+			$selStockItem->setType( $item->getStockType() );
 		}
 
 		$selStockItem->setStockLevel( $sum );
