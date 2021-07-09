@@ -21,6 +21,18 @@ class Supplier
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
+	private $beConfig = array(
+		'supplier.addressformat' => array(
+			'code' => 'supplier.addressformat',
+			'internalcode' => 'supplier.addressformat',
+			'label' => 'Change how supplier address display. default / short',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => 'short',
+			'required' => false,
+		),
+	);
+
 	private $feConfig = array(
 		'supplier.code' => array(
 			'code' => 'supplier.code',
@@ -179,7 +191,7 @@ class Supplier
 		if( ( $code = $attributes['supplier.code'] ) != '' )
 		{
 			// add short address as attribute for summary page / customer email
-			$attributes['supplier.address'] = $this->feConfig['supplier.code']['short'][$code];
+			$attributes['supplier.address'] = $this->feConfig['supplier.code'][$this->getConfigValue('supplier.addressformat')][$code];
 
 			// remove code attribute for summary page / customer email
 			$this->setAttributes( $orderServiceItem, ['supplier.code' => $attributes['supplier.code']], 'hidden' );
