@@ -348,13 +348,16 @@ class Standard
 
 				foreach( $items as $item )
 				{
+					$prodId = $item->getProductId();
+
 					if( $item->getType() === 'select' ) {
-						$productItem = $productManager->get( $item->getProductId(), array( 'product' ) );
-						$productRefItem = $productItem->getRefItems( 'product', 'default', 'default' )->where('product.code','=',$item->getProductCode())->first();
-						$stockManager->decrease( [$productRefItem->getId() => $how * -1 * $item->getQuantity()], $item->getStockType() );
-					} else {
-						$stockManager->decrease( [$item->getProductId() => $how * -1 * $item->getQuantity()], $item->getStockType() );
+						$prodId = $productManager->get( $item->getProductId(), ['product' => ['default']] )
+							->getRefItems( 'product', null, 'default' )
+							->where( 'product.code', '==', $item->getProductCode() )
+							->getId()->first();
 					}
+
+					$stockManager->decrease( [$prodId => $how * -1 * $item->getQuantity()], $item->getStockType() );
 
 					switch( $item->getType() ) {
 						case 'default':
