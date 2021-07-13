@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-06 09:37+0200\n"
-"PO-Revision-Date: 2021-04-02 12:33+0000\n"
+"POT-Creation-Date: 2021-07-06 09:42+0200\n"
+"PO-Revision-Date: 2021-07-06 07:50+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -715,6 +715,10 @@ msgstr "Eigenschaftsname \"%1$s\" liegt nicht innerhalb des vorgegebenen Wertebe
 #, php-format
 msgid "Provider in \"%1$s\" not available"
 msgstr "Provider in \"%1$s\" nicht verfügbar"
+
+#, php-format
+msgid "Quantity must be 0 or greater and must not exceed %1$d"
+msgstr "Produktanzahl muss 0 oder größer und kleiner als %1$d sein"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"

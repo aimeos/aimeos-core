@@ -8,7 +8,7 @@
 # Translators:
 # Translators:
 # Aimeos, 2016
-# Aimeos, 2016
+# Aimeos, 2016,2021
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 # nsendetzky, 2013
 msgid ""
@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2021-06-27 08:44+0000\n"
+"PO-Revision-Date: 2021-06-29 06:51+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -758,7 +758,7 @@ msgid "WS"
 msgstr "Samoa"
 
 msgid "XK"
-msgstr ""
+msgstr "Kosovo"
 
 msgid "YE"
 msgstr "Jemen"
