@@ -436,7 +436,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getQuantityOpen() : float
 	{
-		return (float) $this->get( 'order.base.product.qtyopen', 0 );
+		return (float) $this->get( 'order.base.product.qtyopen', $this->getQuantity() );
 	}
 
 
