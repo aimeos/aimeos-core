@@ -95,7 +95,7 @@ class Standard
 			$value = json_encode( $value, JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG );
 		}
 
-		return str_replace( ['"', '\'', '`'], ['&quot;', '&apos;', '&#96;'], (string) $value );
+		return str_replace( ['"', '\'', '`'], ['&quot;', '&apos;', '\&#96;'], (string) $value );
 	}
 
 

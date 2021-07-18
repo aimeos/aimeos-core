@@ -135,7 +135,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$enc = $this->object->transform();
 
-		$this->assertEquals( '&#96;', $enc->js( '`' ) );
+		$this->assertEquals( '\&#96;', $enc->js( '`' ) );
 	}
 
 
