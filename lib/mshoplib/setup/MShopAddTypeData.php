@@ -38,7 +38,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds locale data.
 	 */
-	protected function process()
+	protected function process( string $filename = null )
 	{
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
@@ -46,9 +46,11 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 0 );
 		$this->status( '' );
 
-
-		$ds = DIRECTORY_SEPARATOR;
-		$filename = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'type.php';
+		if( !$filename )
+		{
+			$ds = DIRECTORY_SEPARATOR;
+			$filename = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'type.php';
+		}
 
 		if( ( $testdata = include( $filename ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No type file found in "%1$s"', $filename ) );
