@@ -35,7 +35,7 @@ class DemoAddTypeData extends \Aimeos\MW\Setup\Task\MShopAddTypeData
 		}
 
 		$ds = DIRECTORY_SEPARATOR;
-		$filename = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'demo-type.php';
+		$filename = __DIR__ . $ds . 'data' . $ds . 'demo-type.php';
 
 		$this->process( $filename );
 	}
