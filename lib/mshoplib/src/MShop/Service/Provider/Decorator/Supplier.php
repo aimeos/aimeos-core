@@ -26,8 +26,8 @@ class Supplier
 			'code' => 'supplier.addressformat',
 			'internalcode' => 'supplier.addressformat',
 			'label' => 'Change supplier address format.',
-			'type' => 'string',
-			'internaltype' => 'string',
+			'type' => 'text',
+			'internaltype' => 'text',
 			'default' => '%1$s
 %2$s
 %3$s %4$s
