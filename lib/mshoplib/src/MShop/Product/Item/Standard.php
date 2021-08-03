@@ -383,9 +383,9 @@ class Standard
 	/**
 	 * Returns the create date of the item
 	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
-	public function getTimeCreated() : string
+	public function getTimeCreated() : ?string
 	{
 		return $this->get( 'product.ctime', date( 'Y-m-d H:i:s' ) );
 	}
