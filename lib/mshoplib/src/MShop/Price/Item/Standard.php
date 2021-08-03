@@ -162,18 +162,18 @@ class Standard extends Base
 	/**
 	 * Returns the amount of money.
 	 *
-	 * @return string Price value
+	 * @return string|null Price value or NULL for on request
 	 */
-	public function getValue() : string
+	public function getValue() : ?string
 	{
-		return $this->formatNumber( $this->get( 'price.value', '0.00' ) );
+		return $this->formatNumber( $this->get( 'price.value' ) );
 	}
 
 
 	/**
 	 * Sets the new amount of money.
 	 *
-	 * @param string|integer|double $price Amount with two digits precision
+	 * @param string|integer|double|null $price Amount with configured precision or NULL for on request
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setValue( $price ) : \Aimeos\MShop\Price\Item\Iface
@@ -201,7 +201,7 @@ class Standard extends Base
 	 */
 	public function setCosts( $price ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		return $this->set( 'price.costs', $this->checkPrice( $price ) );
+		return $this->set( 'price.costs', $this->checkPrice( (string) $price ) );
 	}
 
 
@@ -224,7 +224,7 @@ class Standard extends Base
 	 */
 	public function setRebate( $price ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		return $this->set( 'price.rebate', $this->checkPrice( $price ) );
+		return $this->set( 'price.rebate', $this->checkPrice( (string) $price ) );
 	}
 
 
@@ -335,10 +335,11 @@ class Standard extends Base
 	 * Sets the tax amount
 	 *
 	 * @param string|integer|double $value Tax value with up to four digits precision
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setTaxValue( $value ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		$this->tax = $this->checkPrice( $value, $this->precision + 2 );
+		$this->tax = $this->checkPrice( (string) $value, $this->precision + 2 );
 		parent::setModified();
 		return $this;
 	}

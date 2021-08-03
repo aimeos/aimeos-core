@@ -32,7 +32,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.editor' => 'unitTestUser'
 		);
 
-		$price = \Aimeos\MShop\Price\Manager\Factory::create( $context )->create();
+		$price = \Aimeos\MShop\Price\Manager\Factory::create( $context )->create()->setValue( 0 );
 		$this->locale = \Aimeos\MShop\Locale\Manager\Factory::create( $context )->create();
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Standard( $price, $this->locale, $this->values );
 	}

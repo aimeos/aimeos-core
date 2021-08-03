@@ -125,11 +125,11 @@ abstract class Base
 	/**
 	 * Tests if the price is within the requirements.
 	 *
-	 * @param string|int|float $value Monetary value
+	 * @param string|int|float|null $value Monetary value
 	 * @param int|null $precision Number of decimal digits, null for default value
-	 * @return string Sanitized monetary value
+	 * @return string|null Sanitized monetary value
 	 */
-	protected function checkPrice( $value, int $precision = null ) : string
+	protected function checkPrice( $value, int $precision = null ) : ?string
 	{
 		if( $value != '' && !is_numeric( $value ) ) {
 			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Invalid characters in price "%1$s"', $value ) );
@@ -142,12 +142,12 @@ abstract class Base
 	/**
 	 * Formats the money value.
 	 *
-	 * @param string|int|float $number Money value
+	 * @param string|int|float|null $number Money value
 	 * @param int|null $precision Number of decimal digits, null for default value
-	 * @return string Formatted money value
+	 * @return string|null Formatted money value
 	 */
-	protected function formatNumber( $number, int $precision = null ) : string
+	protected function formatNumber( $number, int $precision = null ) : ?string
 	{
-		return (string) number_format( $number, $precision ?: $this->precision, '.', '' );
+		return $number !== null ? number_format( $number, $precision ?: $this->precision, '.', '' ) : null;
 	}
 }

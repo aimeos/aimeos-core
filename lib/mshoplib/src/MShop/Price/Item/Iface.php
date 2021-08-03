@@ -100,14 +100,14 @@ interface Iface
 	/**
 	 * Returns the amount of money.
 	 *
-	 * @return string Price
+	 * @return string|null Price value or NULL if price is on request
 	 */
-	public function getValue() : string;
+	public function getValue() : ?string;
 
 	/**
 	 * Sets the new amount of money.
 	 *
-	 * @param string|int|double $price Amount with two digits precision
+	 * @param string|int|double|null $price Amount with configured precision or NULL if price is on request
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setValue( $price ) : \Aimeos\MShop\Price\Item\Iface;
@@ -122,7 +122,7 @@ interface Iface
 	/**
 	 * Sets the new costs.
 	 *
-	 * @param string|int|double $price Amount with two digits precision
+	 * @param string|int|double $price Amount with configured precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setCosts( $price ) : \Aimeos\MShop\Price\Item\Iface;

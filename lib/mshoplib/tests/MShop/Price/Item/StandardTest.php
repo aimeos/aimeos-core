@@ -232,13 +232,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetPrice()
+	public function testGetValue()
 	{
 		$this->assertEquals( '195.50', $this->object->getValue() );
 	}
 
 
-	public function testSetPrice()
+	public function testSetValue()
 	{
 		$return = $this->object->setValue( 199.00 );
 
@@ -248,6 +248,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->expectException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->setValue( '190,90' );
+	}
+
+
+	public function testSetValueNull()
+	{
+		$return = $this->object->setValue( null );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
+		$this->assertNull( $this->object->getValue() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 

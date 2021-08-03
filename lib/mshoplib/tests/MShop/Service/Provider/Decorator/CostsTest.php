@@ -90,7 +90,7 @@ class CostsTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'calcPrice' )
-			->will( $this->returnValue( $priceItem ) );
+			->will( $this->returnValue( $priceItem->setValue( 0 ) ) );
 
 		$price = $this->object->calcPrice( $this->basket );
 		$this->assertEquals( '0.00', $price->getValue() );

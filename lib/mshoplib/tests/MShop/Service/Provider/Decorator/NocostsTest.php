@@ -46,7 +46,8 @@ class NocostsTest extends \PHPUnit\Framework\TestCase
 		$this->basket->addProduct( $this->getOrderProduct() );
 		$priceItem = \Aimeos\MShop::create( $this->context, 'price' )->create();
 
-		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )->will( $this->returnValue( $priceItem ) );
+		$this->mockProvider->expects( $this->once() )->method( 'calcPrice' )
+			->will( $this->returnValue( $priceItem->setValue( 0 ) ) );
 
 		$price = $this->object->calcPrice( $this->basket );
 		$this->assertEquals( '0.00', $price->getValue() );
