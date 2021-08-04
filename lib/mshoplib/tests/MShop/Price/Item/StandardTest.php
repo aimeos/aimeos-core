@@ -251,6 +251,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetValueEmpty()
+	{
+		$return = $this->object->setValue( '' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
+		$this->assertNull( $this->object->getValue() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testSetValueNull()
 	{
 		$return = $this->object->setValue( null );

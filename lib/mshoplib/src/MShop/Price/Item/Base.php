@@ -135,7 +135,7 @@ abstract class Base
 			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Invalid characters in price "%1$s"', $value ) );
 		}
 
-		return $this->formatNumber( $value, $precision );
+		return $this->formatNumber( $value !== '' ? $value : null, $precision );
 	}
 
 
