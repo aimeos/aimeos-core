@@ -273,7 +273,7 @@ abstract class Base
 		if( ctype_alnum( $name ) === false )
 		{
 			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Invalid characters in class name "%1$s"' );
-			throw new \Aimeos\MShop\Exception( sprintf( $msg, $classname ) );
+			throw new \Aimeos\MShop\Exception( sprintf( $msg, $name ) );
 		}
 
 		$classname = '\Aimeos\MShop\Common\Helper\Password\\' . $name;
