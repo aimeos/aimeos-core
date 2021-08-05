@@ -37,22 +37,30 @@ abstract class Base
 		$type = ucwords( $type );
 		$names = explode( ',', $item->getProvider() );
 
-		if( ctype_alnum( $type ) === false ) {
-			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid characters in type name "%1$s"', $type ) );
+		if( ctype_alnum( $type ) === false )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Invalid characters in type name "%1$s"' );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $type ) );
 		}
 
-		if( ( $provider = array_shift( $names ) ) === null ) {
-			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
+		if( ( $provider = array_shift( $names ) ) === null )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Provider in "%1$s" not available' );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $item->getProvider() ) );
 		}
 
-		if( ctype_alnum( $provider ) === false ) {
-			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
+		if( ctype_alnum( $provider ) === false )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Invalid characters in provider name "%1$s"' );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $provider ) );
 		}
 
 		$classname = '\Aimeos\MShop\Service\Provider\\' . $type . '\\' . $provider;
 
-		if( class_exists( $classname ) === false ) {
-			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+		if( class_exists( $classname ) === false )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Class "%1$s" not available' );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $classname ) );
 		}
 
 		$context = $this->getContext();
@@ -128,14 +136,18 @@ abstract class Base
 
 		foreach( $names as $name )
 		{
-			if( ctype_alnum( $name ) === false ) {
-				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
+			if( ctype_alnum( $name ) === false )
+			{
+				$msg = $this->getContext()->i18n()->dt( 'mshop', 'Invalid characters in class name "%1$s"' );
+				throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $name ) );
 			}
 
 			$classname = $classprefix . $name;
 
-			if( class_exists( $classname ) === false ) {
-				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+			if( class_exists( $classname ) === false )
+			{
+				$msg = $this->getContext()->i18n()->dt( 'mshop', 'Class "%1$s" not available' );
+				throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $classname ) );
 			}
 
 			$provider = new $classname( $provider, $this->getContext(), $serviceItem );

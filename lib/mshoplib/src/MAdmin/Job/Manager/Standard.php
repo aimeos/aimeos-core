@@ -388,7 +388,8 @@ class Standard
 			return $item;
 		}
 
-		throw new \Aimeos\MAdmin\Job\Exception( sprintf( 'Job with ID "%1$s" not found', $id ) );
+		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Job with ID "%1$s" not found' );
+		throw new \Aimeos\MAdmin\Job\Exception( sprintf( $msg, $id ) );
 	}
 
 

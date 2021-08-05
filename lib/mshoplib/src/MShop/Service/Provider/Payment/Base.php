@@ -79,7 +79,8 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	 */
 	public function cancel( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', 'cancel' ) );
+		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Method "%1$s" for provider not available' );
+		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'cancel' ) );
 	}
 
 
@@ -91,7 +92,8 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	 */
 	public function capture( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', 'capture' ) );
+		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Method "%1$s" for provider not available' );
+		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'capture' ) );
 	}
 
 
@@ -119,7 +121,8 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	 */
 	public function refund( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', 'refund' ) );
+		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Method "%1$s" for provider not available' );
+		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'refund' ) );
 	}
 
 
@@ -132,7 +135,8 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	 */
 	public function repay( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', 'repay' ) );
+		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Method "%1$s" for provider not available' );
+		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'repay' ) );
 	}
 
 

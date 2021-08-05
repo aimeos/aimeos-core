@@ -75,8 +75,10 @@ class Costs
 	{
 		$config = $this->getServiceItem()->getConfig();
 
-		if( !isset( $config['costs.percent'] ) ) {
-			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Missing configuration "%1$s"', 'costs.percent' ) );
+		if( !isset( $config['costs.percent'] ) )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Missing configuration "%1$s"' );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'costs.percent' ) );
 		}
 
 		$value = $basket->getPrice()->getValue() * $config['costs.percent'] / 100;

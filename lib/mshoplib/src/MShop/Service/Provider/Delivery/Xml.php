@@ -241,8 +241,10 @@ class Xml
 		$xml = new \XMLReader();
 		$logger = $this->getContext()->getLogger();
 
-		if( $xml->open( $filename, LIBXML_COMPACT | LIBXML_PARSEHUGE ) === false ) {
-			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'No XML file "%1$s" found', $filename ) );
+		if( $xml->open( $filename, LIBXML_COMPACT | LIBXML_PARSEHUGE ) === false )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'No XML file "%1$s" found' );
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( $msg, $filename ) );
 		}
 
 		$logger->log( sprintf( 'Started order status import from file "%1$s"', $filename ), \Aimeos\MW\Logger\Base::INFO );

@@ -244,8 +244,8 @@ class ProductPrice
 			$pid = $orderProduct->getProductId();
 			$pcode = $orderProduct->getProductCode();
 			$codes = array( 'product' => array( $pos => 'product.price' ) );
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'No price for product ID "%1$s" or product code "%2$s" available' );
 
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'No price for product ID "%1$s" or product code "%2$s" available' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $pid, $pcode ), -1, null, $codes );
 		}
 

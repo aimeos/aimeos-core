@@ -547,7 +547,8 @@ class Standard
 			return $this->createItemBase( ['locale.siteid' => $siteId], $siteItem, $sites );
 		}
 
-		throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Locale item for site "%1$s" not found', $site ) );
+		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Locale item for site "%1$s" not found' );
+		throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, $site ) );
 	}
 
 
@@ -893,8 +894,10 @@ class Standard
 				$row = $results->fetch();
 				$results->finish();
 
-				if( $row === null ) {
-					throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Total results value not found' ) );
+				if( $row === null )
+				{
+					$msg = $this->getContext()->i18n()->dt( 'mshop', 'Total results value not found' );
+					throw new \Aimeos\MShop\Locale\Exception( $msg );
 				}
 
 				$total = $row['count'];

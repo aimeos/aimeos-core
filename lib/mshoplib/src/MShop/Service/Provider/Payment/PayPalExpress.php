@@ -836,12 +836,16 @@ class PayPalExpress
 
 			curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, true );
 
-			if( ( $response = curl_exec( $curl ) ) === false ) {
-				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Sending order failed: "%1$s"', curl_error( $curl ) ) );
+			if( ( $response = curl_exec( $curl ) ) === false )
+			{
+				$msg = $this->getContext()->i18n()->dt( 'mshop', 'Sending order failed: "%1$s"' );
+				throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, curl_error( $curl ) ) );
 			}
 
-			if( curl_errno( $curl ) ) {
-				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Curl error: "%1$s" - "%2$s"', curl_errno( $curl ), curl_error( $curl ) ) );
+			if( curl_errno( $curl ) )
+			{
+				$msg = $this->getContext()->i18n()->dt( 'mshop', 'Curl error: "%1$s" - "%2$s"' );
+				throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, curl_errno( $curl ), curl_error( $curl ) ) );
 			}
 
 			curl_close( $curl );

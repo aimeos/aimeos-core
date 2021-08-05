@@ -272,14 +272,16 @@ abstract class Base
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? '\Aimeos\MShop\Common\Helper\Password\\' . $name : '<not a string>';
-			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Invalid characters in class name "%1$s"' );
+			throw new \Aimeos\MShop\Exception( sprintf( $msg, $classname ) );
 		}
 
 		$classname = '\Aimeos\MShop\Common\Helper\Password\\' . $name;
 
-		if( class_exists( $classname ) === false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+		if( class_exists( $classname ) === false )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Class "%1$s" not available' );
+			throw new \Aimeos\MShop\Exception( sprintf( $msg, $classname ) );
 		}
 
 		$helper = new $classname( $options );

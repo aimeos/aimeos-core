@@ -72,8 +72,10 @@ class Factory
 		$iface = \Aimeos\MShop\Locale\Manager\Iface::class;
 		$classname = '\Aimeos\MShop\Locale\Manager\\' . $name;
 
-		if( ctype_alnum( $name ) === false ) {
-			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+		if( ctype_alnum( $name ) === false )
+		{
+			$msg = $context->i18n()->dt( 'mshop', 'Invalid characters in class name "%1$s"' );
+			throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, $classname ) );
 		}
 
 		$manager = self::createManager( $context, $classname, $iface );
