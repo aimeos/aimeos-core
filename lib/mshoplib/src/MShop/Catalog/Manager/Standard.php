@@ -739,7 +739,8 @@ class Standard extends Base
 			}
 		}
 
-		throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'Catalog path for ID "%1$s" not found', $id ) );
+		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Catalog path for ID "%1$s" not found' );
+		throw new \Aimeos\MShop\Catalog\Exception( sprintf( $msg, $id ) );
 	}
 
 
@@ -801,7 +802,8 @@ class Standard extends Base
 			}
 		}
 
-		throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'No catalog node for ID "%1$s"', $id ) );
+		$msg = $this->getContext()->i18n()->dt( 'mshop', 'No catalog node for ID "%1$s"' );
+		throw new \Aimeos\MShop\Catalog\Exception( sprintf( $msg, $id ) );
 	}
 
 

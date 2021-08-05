@@ -33,8 +33,10 @@ class Hash implements \Aimeos\MShop\Common\Helper\Password\Iface
 			throw new \Aimeos\MShop\Exception( 'The PHP "hash" extension is not available. Please install it before you can use the hash() function' );
 		}
 
-		if( !isset( $options['algorithm'] ) || !in_array( $options['algorithm'], hash_algos(), true ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'The algorithm "%1$s" is not supported', $options['algorithm'] ) );
+		if( !isset( $options['algorithm'] ) || !in_array( $options['algorithm'], hash_algos(), true ) )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'The algorithm "%1$s" is not supported' );
+			throw new \Aimeos\MShop\Exception( sprintf( $msg, $options['algorithm'] ) );
 		}
 
 		$this->options = $options;

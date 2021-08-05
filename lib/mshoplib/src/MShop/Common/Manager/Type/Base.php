@@ -38,16 +38,22 @@ abstract class Base
 
 		$this->searchConfig = $this->getSearchConfig();
 
-		if( ( $entry = reset( $this->searchConfig ) ) === false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration not available' ) );
+		if( ( $entry = reset( $this->searchConfig ) ) === false )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Search configuration not available' );
+			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
-		if( ( $pos = strrpos( $entry['code'], '.' ) ) === false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
+		if( ( $pos = strrpos( $entry['code'], '.' ) ) === false )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Search configuration for "%1$s" not available' );
+			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );
 		}
 
-		if( ( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration for "%1$s" not available', $entry['code'] ) );
+		if( ( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Search configuration for "%1$s" not available' );
+			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );
 		}
 	}
 

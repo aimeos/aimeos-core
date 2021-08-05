@@ -70,8 +70,8 @@ class Factory
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? '\Aimeos\MAdmin\Log\Manager\\' . $name : '<not a string>';
-			throw new \Aimeos\MAdmin\Log\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$msg = $context->i18n()->dt( 'mshop', 'Invalid characters in class name "%1$s"' );
+			throw new \Aimeos\MAdmin\Log\Exception( sprintf( $msg, $name ) );
 		}
 
 		$iface = \Aimeos\MAdmin\Log\Manager\Iface::class;

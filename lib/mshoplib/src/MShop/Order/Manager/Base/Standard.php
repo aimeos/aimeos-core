@@ -982,8 +982,10 @@ class Standard extends Base
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $sitelevel );
 
-			if( ( $row = $results->fetch() ) === null ) {
-				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order base item with order ID "%1$s" not found', $id ) );
+			if( ( $row = $results->fetch() ) === null )
+			{
+				$msg = $this->getContext()->i18n()->dt( 'mshop', 'Order base item with order ID "%1$s" not found' );
+				throw new \Aimeos\MShop\Order\Exception( sprintf( $msg, $id ) );
 			}
 			$results->finish();
 

@@ -93,7 +93,8 @@ class None
 	 */
 	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		throw new \Aimeos\MAdmin\Cache\Exception( sprintf( 'Operation not supported' ) );
+		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Operation not supported' );
+		throw new \Aimeos\MAdmin\Cache\Exception( $msg );
 	}
 
 

@@ -416,7 +416,8 @@ class Standard
 			return $item;
 		}
 
-		throw new \Aimeos\MAdmin\Log\Exception( sprintf( 'Log entry with ID "%1$s" not found', $id ) );
+		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Log entry with ID "%1$s" not found' );
+		throw new \Aimeos\MAdmin\Log\Exception( sprintf( $msg, $id ) );
 	}
 
 

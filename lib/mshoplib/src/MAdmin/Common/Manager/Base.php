@@ -95,16 +95,20 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$config = $this->getContext()->getConfig();
 
 
-		if( empty( $domain ) || ctype_alnum( $domain ) === false ) {
-			throw new \Aimeos\MAdmin\Exception( sprintf( 'Invalid characters in domain name "%1$s"', $domain ) );
+		if( empty( $domain ) || ctype_alnum( $domain ) === false )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Invalid characters in domain name "%1$s"' );
+			throw new \Aimeos\MAdmin\Exception( sprintf( $msg, $domain ) );
 		}
 
 		if( $name === null ) {
 			$name = $config->get( 'mshop/' . $domain . '/manager/' . $manager . '/name', 'Standard' );
 		}
 
-		if( empty( $name ) || ctype_alnum( $name ) === false ) {
-			throw new \Aimeos\MAdmin\Exception( sprintf( 'Invalid characters in manager name "%1$s"', $name ) );
+		if( empty( $name ) || ctype_alnum( $name ) === false )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Invalid characters in manager name "%1$s"' );
+			throw new \Aimeos\MAdmin\Exception( sprintf( $msg, $name ) );
 		}
 
 		$domainname = ucfirst( $domain );
@@ -113,8 +117,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$classname = '\Aimeos\MAdmin\\' . $domainname . '\Manager\\' . $subnames . '\\' . $name;
 		$interface = '\Aimeos\MAdmin\\' . $domainname . '\Manager\\' . $subnames . '\Iface';
 
-		if( class_exists( $classname ) === false ) {
-			throw new \Aimeos\MAdmin\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+		if( class_exists( $classname ) === false )
+		{
+			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Class "%1$s" not available' );
+			throw new \Aimeos\MAdmin\Exception( sprintf( $msg, $classname ) );
 		}
 
 		return self::checkClass( $interface, new $classname( $this->getContext() ) );

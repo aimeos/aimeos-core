@@ -187,7 +187,8 @@ abstract class Base
 				return $this;
 		}
 
-		throw new \Aimeos\MShop\Order\Exception( sprintf( 'Lock flag "%1$d" not within allowed range', $value ) );
+		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Lock flag "%1$d" not within allowed range' );
+		throw new \Aimeos\MShop\Order\Exception( sprintf( $msg, $value ) );
 	}
 
 
