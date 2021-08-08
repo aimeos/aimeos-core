@@ -80,10 +80,13 @@ return array(
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'supid', 'string', ['length' => 36, 'customSchemaOptions' => ['charset' => 'binary']] );
 			$table->addColumn( 'listtype', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
+			$table->addColumn( 'latitude', 'float', ['notnull' => false] );
+			$table->addColumn( 'longitude', 'float', ['notnull' => false] );
 			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 
 			$table->addUniqueIndex( array( 'prodid', 'siteid', 'supid', 'listtype', 'pos' ), 'unq_msindsup_p_sid_supid_lt_po' );
+			$table->addIndex( array( 'prodid', 'latitude', 'longitude', 'siteid' ), 'idx_msindsup_p_lat_lon_sid' );
 			$table->addIndex( array( 'siteid', 'supid', 'listtype', 'pos' ), 'idx_msindsup_sid_supid_lt_po' );
 
 			return $schema;

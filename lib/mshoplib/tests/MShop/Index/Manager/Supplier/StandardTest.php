@@ -183,4 +183,28 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 2, count( $result ) );
 	}
+
+
+	public function testSearchItemsRadiusInside()
+	{
+		$search = $this->object->filter();
+		$search->setConditions( $search->compare( '!=', $search->make( 'index.supplier:radius', [51.5, 10, 200] ), null ) );
+		$search->setSortations( [$search->sort( '+', 'index.supplier.id' )] );
+
+		$result = $this->object->search( $search, [] );
+
+		$this->assertEquals( 2, count( $result ) );
+	}
+
+
+	public function testSearchItemsRadiusOutside()
+	{
+		$search = $this->object->filter();
+		$search->setConditions( $search->compare( '!=', $search->make( 'index.supplier:radius', [51.5, 10, 25] ), null ) );
+		$search->setSortations( [$search->sort( '+', 'index.supplier.id' )] );
+
+		$result = $this->object->search( $search, [] );
+
+		$this->assertEquals( 0, count( $result ) );
+	}
 }

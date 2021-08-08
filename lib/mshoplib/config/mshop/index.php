@@ -275,17 +275,17 @@ return array(
 				'ansi' => '
 					INSERT INTO "mshop_index_supplier" (
 						"prodid", "supid", "listtype", "pos",
-						"mtime", "siteid"
+						"latitude", "longitude", "mtime", "siteid"
 					) VALUES (
-						?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?
 					)
 				',
 				'pgsql' => '
 					INSERT INTO "mshop_index_supplier" (
 						"prodid", "supid", "listtype", "pos",
-						"mtime", "siteid"
+						"latitude", "longitude", "mtime", "siteid"
 					) VALUES (
-						?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?
 					)
 					ON CONFLICT DO NOTHING
 				'

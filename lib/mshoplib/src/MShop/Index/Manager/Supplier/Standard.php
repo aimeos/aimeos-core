@@ -30,6 +30,24 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'index.supplier:radius' => array(
+			'code' => 'index.supplier:radius()',
+			'internalcode' => ':site AND
+				mindsu."latitude" > $1 - $3 / 111.19493 AND
+				mindsu."latitude" < $1 + $3 / 111.19493 AND
+				mindsu."longitude" > $2 - $3 / 111.19493 / COS( RADIANS( $2 ) ) AND
+				mindsu."longitude" < $2 + $3 / 111.19493 / COS( RADIANS( $2 ) ) AND
+				ACOS(
+					SIN( RADIANS( $1 ) ) * SIN( RADIANS( mindsu."latitude" ) ) +
+					COS( RADIANS( $1 ) ) * COS( RADIANS( mindsu."latitude" ) ) *
+					COS( RADIANS( mindsu."longitude" ) - RADIANS( $2 ) )
+				) * 6371
+			',
+			'label' => 'Within distance to given coordinates, parameter(<latitude>,<longitude>,<distance in km>)',
+			'type' => 'boolean',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL,
+			'public' => false,
+		),
 		'index.supplier:position' => array(
 			'code' => 'index.supplier:position()',
 			'internalcode' => ':site AND mindsu."supid" IN ( $2 ) AND mindsu."listtype" = $1 AND mindsu."pos"',
@@ -63,8 +81,12 @@ class Standard
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
 
-		$name = 'index.supplier:position';
 		$expr = $this->getSiteString( 'mindsu."siteid"', $level );
+
+		$name = 'index.supplier:position';
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
+
+		$name = 'index.supplier:radius';
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 	}
 
@@ -408,7 +430,7 @@ class Standard
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
-		$listItems = $this->getListItems( $items );
+		$supItems = $this->getSuppliers( $items );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -452,22 +474,33 @@ class Standard
 			 */
 			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/supplier/insert' );
 
-			foreach( $items as $id => $item )
+			foreach( $supItems as $id => $supItem )
 			{
-				if( !$listItems->has( $id ) ) { continue; }
+				$pairs = $supItem->getAddressItems()->map( function( $addr ) {
+					return ['lat' => $addr->getLatitude(), 'lon' => $addr->getLongitude()];
+				} );
 
-				foreach( (array) $listItems[$id] as $listItem )
+				if( $pairs->isEmpty() ) {
+					$pairs = [['lat' => null, 'lon' => null]];
+				}
+
+				foreach( $pairs as $pair )
 				{
-					$stmt->bind( 1, $listItem->getRefId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-					$stmt->bind( 2, $listItem->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-					$stmt->bind( 3, $listItem->getType() );
-					$stmt->bind( 4, $listItem->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-					$stmt->bind( 5, $date ); //mtime
-					$stmt->bind( 6, $siteid );
+					foreach( $supItem->getListItems( 'product' ) as $listItem )
+					{
+						$stmt->bind( 1, $listItem->getRefId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+						$stmt->bind( 2, $listItem->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+						$stmt->bind( 3, $listItem->getType() );
+						$stmt->bind( 4, $listItem->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+						$stmt->bind( 5, $pair['lat'] ?? null, \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+						$stmt->bind( 6, $pair['lon'] ?? null, \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+						$stmt->bind( 7, $date ); //mtime
+						$stmt->bind( 8, $siteid );
 
-					try {
-						$stmt->execute()->finish();
-					} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
+						try {
+							$stmt->execute()->finish();
+						} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
+					}
 				}
 			}
 
@@ -627,6 +660,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items List of product items
 	 * @return \Aimeos\Map Associative list of product IDs as keys and lists of list items as values
+	 * @deprecated 2022.01 Removed in favor of getSuppliers()
 	 */
 	protected function getListItems( iterable $items ) : \Aimeos\Map
 	{
@@ -686,5 +720,38 @@ class Standard
 		}
 
 		return $this->subManagers;
+	}
+
+
+	/**
+	 * Returns the supplier items referencing the given products
+	 *
+	 * @param \Aimeos\MShop\Product\Item\Iface[] $items List of product items
+	 * @return \Aimeos\Map Associative list of supplier IDs as keys and supplier items with list items as values
+	 */
+	protected function getSuppliers( iterable $items ) : \Aimeos\Map
+	{
+		$prodIds = map( $items )->keys()->toArray();
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'supplier' );
+		$listManager = \Aimeos\MShop::create( $this->getContext(), 'supplier/lists' );
+
+		$filter = $manager->filter( true )->slice( 0, 0x7fffffff );
+		$filter->add( $filter->make( 'supplier:has', ['product', ['default', 'promotion'], $prodIds] ), '!=', null );
+		$supItems = $manager->search( $filter, ['supplier/address'] );
+
+		$filter = $listManager->filter( true )->slice( 0, 0x7fffffff )->add( [
+			'supplier.lists.parentid' => $supItems->keys()->toArray(),
+			'supplier.lists.domain' => 'product',
+			'supplier.lists.refid' => $prodIds
+		] );
+
+		foreach( $listManager->search( $filter ) as $listItem )
+		{
+			if( $supplier = $supItems->get( $listItem->getParentId() ) ) {
+				$supplier->addListItem( 'product', $listItem );
+			}
+		}
+
+		return $supItems;
 	}
 }
