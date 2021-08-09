@@ -26,6 +26,8 @@ return [
 				'image/svg+xml' => 'svg',
 				'image/tiff' => 'tif',
 				'text/csv' => 'csv',
+				'video/mp4' => 'mp4',
+				'video/webm' => 'webm',
 			],
 			'previews' => [[
 				'maxwidth' => 480,
