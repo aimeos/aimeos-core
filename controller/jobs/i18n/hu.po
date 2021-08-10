@@ -4,13 +4,14 @@
 # 
 # Translators:
 # nzed <nemesreviz@gmail.com>, 2020
+# Patrik Szakos <szakos0208@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-06 09:42+0200\n"
-"PO-Revision-Date: 2021-07-06 07:45+0000\n"
-"Last-Translator: nzed <nemesreviz@gmail.com>\n"
+"PO-Revision-Date: 2021-08-09 20:49+0000\n"
+"Last-Translator: Patrik Szakos <szakos0208@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,46 +63,46 @@ msgid "Class \"%1$s\" not found"
 msgstr "A következő osztály nem található: \"%1$s\""
 
 msgid "Coupon code import CSV"
-msgstr ""
+msgstr "Kuponkódot importáló CSV"
 
 msgid "Creates a catalog site map for search engines"
-msgstr ""
+msgstr "Katalógus weblapot hoz létre a keresőmotoroknak"
 
 msgid "Creates a product site map for search engines"
-msgstr ""
+msgstr "Termék alapú weblapot készít a keresőmotorok számára"
 
 msgid "Creates bought together product suggestions"
-msgstr ""
+msgstr "Egyben javasolt megvásárolandó termékek"
 
 msgid "Customer group import XML"
-msgstr ""
+msgstr "Ügyfélcsoportot importáló XML"
 
 msgid "Customer import XML"
-msgstr ""
+msgstr "Vevőket importáló XML"
 
 msgid ""
 "Deletes unfinished orders an makes their products and coupon codes available"
 " again"
-msgstr ""
+msgstr "Törli a befejezetlen megrendeléseket, és újra elérhetővé teszi termékeket és a kuponkódokat"
 
 msgid "Deletes unpaid orders to keep the database clean"
-msgstr ""
+msgstr "Törli a kifizetetlen rendeléseket, hogy tisztán tartsa az adatbázist"
 
 msgid "Executes all XML importers and rebuild the index"
-msgstr ""
+msgstr "Végrehajtja az összes XML importőrt, és újjáépíti az indexet"
 
 msgid "Executes payment or delivery service providers that uses batch updates"
-msgstr ""
+msgstr "Fizetési vagy kézbesítési szolgáltatókat hajt végre, amelyek kötegelt frissítéseket használnak"
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
 msgstr ""
 
 msgid "Exports all available products"
-msgstr ""
+msgstr "Exportálja az összes elérhető terméket"
 
 msgid "Exports orders to CSV file"
-msgstr ""
+msgstr "Exportálja a rendeléseket CSV fáljba"
 
 msgid "Exports subscriptions to CSV file"
 msgstr ""

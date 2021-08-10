@@ -7,13 +7,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Patrik Szakos <szakos0208@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2018-04-05 12:32+0000\n"
-"Last-Translator: Bence Gazder <bencegazder@gmail.com>\n"
+"PO-Revision-Date: 2021-08-08 16:27+0000\n"
+"Last-Translator: Patrik Szakos <szakos0208@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,556 +23,556 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "aa"
-msgstr ""
+msgstr "Afar"
 
 msgid "ab"
-msgstr ""
+msgstr "Abház"
 
 msgid "ae"
-msgstr ""
+msgstr "Avesztai"
 
 msgid "af"
-msgstr ""
+msgstr "Afrikaans"
 
 msgid "ak"
-msgstr ""
+msgstr "Akan"
 
 msgid "am"
-msgstr ""
+msgstr "Amhara"
 
 msgid "an"
-msgstr ""
+msgstr "Aragóniai"
 
 msgid "ar"
-msgstr ""
+msgstr "Arab"
 
 msgid "as"
-msgstr ""
+msgstr "Asszámi"
 
 msgid "av"
-msgstr ""
+msgstr "Avar"
 
 msgid "ay"
-msgstr ""
+msgstr "Aymara"
 
 msgid "az"
-msgstr ""
+msgstr "Azerbajdzsáni"
 
 msgid "ba"
-msgstr ""
+msgstr "Baskír"
 
 msgid "be"
-msgstr ""
+msgstr "Fehérorosz"
 
 msgid "bg"
-msgstr ""
+msgstr "Bulgár"
 
 msgid "bh"
-msgstr ""
+msgstr "Bihár"
 
 msgid "bi"
-msgstr ""
+msgstr "Biszlama"
 
 msgid "bm"
-msgstr ""
+msgstr "Bambara"
 
 msgid "bn"
-msgstr ""
+msgstr "Bengáli"
 
 msgid "bo"
-msgstr ""
+msgstr "Tibeti"
 
 msgid "br"
-msgstr ""
+msgstr "Breton"
 
 msgid "bs"
-msgstr ""
+msgstr "Boszniai"
 
 msgid "ca"
-msgstr ""
+msgstr "Katalán"
 
 msgid "ce"
-msgstr ""
+msgstr "Csecsen"
 
 msgid "ch"
-msgstr ""
+msgstr "Ausztronéz"
 
 msgid "co"
-msgstr ""
+msgstr "Korzikai"
 
 msgid "cr"
-msgstr ""
+msgstr "Inuktitut"
 
 msgid "cs"
-msgstr ""
+msgstr "Cseh"
 
 msgid "cu"
-msgstr ""
+msgstr "Óegyházi szláv"
 
 msgid "cv"
-msgstr ""
+msgstr "Csuvas"
 
 msgid "cy"
-msgstr ""
+msgstr "Walesi"
 
 msgid "da"
-msgstr ""
+msgstr "Dán"
 
 msgid "de"
-msgstr ""
+msgstr "Német"
 
 msgid "dv"
-msgstr ""
+msgstr "Maldív"
 
 msgid "dz"
-msgstr ""
+msgstr "Dzongkha"
 
 msgid "ee"
-msgstr ""
+msgstr "Ewe"
 
 msgid "el"
-msgstr ""
+msgstr "Görög"
 
 msgid "en"
-msgstr ""
+msgstr "Angol"
 
 msgid "eo"
-msgstr ""
+msgstr "Eszperente"
 
 msgid "es"
-msgstr ""
+msgstr "Spanyol"
 
 msgid "et"
-msgstr ""
+msgstr "Észt"
 
 msgid "eu"
-msgstr ""
+msgstr "Baszk"
 
 msgid "fa"
-msgstr ""
+msgstr "Perzsiai"
 
 msgid "ff"
-msgstr ""
+msgstr "Fula"
 
 msgid "fi"
-msgstr ""
+msgstr "Finn"
 
 msgid "fj"
-msgstr ""
+msgstr "Fidzsi"
 
 msgid "fo"
-msgstr ""
+msgstr "Feröeri"
 
 msgid "fr"
-msgstr ""
+msgstr "Francia"
 
 msgid "fy"
-msgstr ""
+msgstr "Fríz"
 
 msgid "ga"
-msgstr ""
+msgstr "Ír"
 
 msgid "gd"
-msgstr ""
+msgstr "Skót-gall"
 
 msgid "gl"
-msgstr ""
+msgstr "Galíciai"
 
 msgid "gn"
-msgstr ""
+msgstr "Guarani"
 
 msgid "gu"
-msgstr ""
+msgstr "Gudzsaráti"
 
 msgid "gv"
-msgstr ""
+msgstr "Manx"
 
 msgid "ha"
-msgstr ""
+msgstr "Hauszák"
 
 msgid "he"
-msgstr ""
+msgstr "héber"
 
 msgid "hi"
-msgstr ""
+msgstr "Hindi"
 
 msgid "ho"
-msgstr ""
+msgstr "Hiri motu"
 
 msgid "hr"
-msgstr ""
+msgstr "Horvát"
 
 msgid "ht"
-msgstr ""
+msgstr "Haiti"
 
 msgid "hu"
-msgstr ""
+msgstr "Magyar"
 
 msgid "hy"
-msgstr ""
+msgstr "Arméniai"
 
 msgid "hz"
-msgstr ""
+msgstr "Herero"
 
 msgid "ia"
-msgstr ""
+msgstr "Interlingva"
 
 msgid "id"
-msgstr ""
+msgstr "Indonéz"
 
 msgid "ie"
-msgstr ""
+msgstr "Interlingva"
 
 msgid "ig"
-msgstr ""
+msgstr "Igbók"
 
 msgid "ii"
-msgstr ""
+msgstr "Yi"
 
 msgid "ik"
-msgstr ""
+msgstr "Inupiatok"
 
 msgid "io"
-msgstr ""
+msgstr "Ido"
 
 msgid "is"
-msgstr ""
+msgstr "Izlandi"
 
 msgid "it"
-msgstr ""
+msgstr "Olasz"
 
 msgid "iu"
-msgstr ""
+msgstr "Inuktitut "
 
 msgid "ja"
-msgstr ""
+msgstr "Japán"
 
 msgid "jv"
-msgstr ""
+msgstr "Javanese"
 
 msgid "ka"
-msgstr ""
+msgstr "Grúz"
 
 msgid "kg"
-msgstr ""
+msgstr "Kongói"
 
 msgid "ki"
-msgstr ""
+msgstr "Kikujuk"
 
 msgid "kj"
-msgstr ""
+msgstr "Kuanyama"
 
 msgid "kk"
-msgstr ""
+msgstr "Kazah"
 
 msgid "kl"
-msgstr ""
+msgstr "Grönlandi"
 
 msgid "km"
-msgstr ""
+msgstr "Khmer"
 
 msgid "kn"
-msgstr ""
+msgstr "Kannada"
 
 msgid "ko"
-msgstr ""
+msgstr "Koreai"
 
 msgid "kr"
-msgstr ""
+msgstr "Kanuri"
 
 msgid "ks"
-msgstr ""
+msgstr "Kasmíri"
 
 msgid "ku"
-msgstr ""
+msgstr "Kurd"
 
 msgid "kv"
-msgstr ""
+msgstr "Komi"
 
 msgid "kw"
-msgstr ""
+msgstr "Korni"
 
 msgid "ky"
-msgstr ""
+msgstr "Kirgiz"
 
 msgid "la"
-msgstr ""
+msgstr "Latin"
 
 msgid "lb"
-msgstr ""
+msgstr "Luxemburgi"
 
 msgid "lg"
-msgstr ""
+msgstr "Luganda"
 
 msgid "li"
-msgstr ""
+msgstr "Limburgi"
 
 msgid "ln"
-msgstr ""
+msgstr "Lingala"
 
 msgid "lo"
-msgstr ""
+msgstr "Lao"
 
 msgid "lt"
-msgstr ""
+msgstr "Litván"
 
 msgid "lu"
-msgstr ""
+msgstr "Luba"
 
 msgid "lv"
-msgstr ""
+msgstr "Lett"
 
 msgid "mg"
-msgstr ""
+msgstr "Madagaszkári"
 
 msgid "mh"
-msgstr ""
+msgstr "Marsall"
 
 msgid "mi"
-msgstr ""
+msgstr "Maori"
 
 msgid "mk"
-msgstr ""
+msgstr "Macedón"
 
 msgid "ml"
-msgstr ""
+msgstr "Maláj"
 
 msgid "mn"
-msgstr ""
+msgstr "Mongol"
 
 msgid "mo"
-msgstr ""
+msgstr "Moldáv"
 
 msgid "mr"
-msgstr ""
+msgstr "Maráthi"
 
 msgid "ms"
-msgstr ""
+msgstr "Malay"
 
 msgid "mt"
-msgstr ""
+msgstr "Máltai"
 
 msgid "my"
-msgstr ""
+msgstr "Burmai"
 
 msgid "na"
 msgstr "Nauru"
 
 msgid "nb"
-msgstr ""
+msgstr "Norvég"
 
 msgid "nd"
-msgstr ""
+msgstr "Északi ndebele"
 
 msgid "ne"
-msgstr ""
+msgstr "Nepáli"
 
 msgid "ng"
-msgstr ""
+msgstr "Ndonga"
 
 msgid "nl"
-msgstr ""
+msgstr "Holland"
 
 msgid "nn"
-msgstr ""
+msgstr "Norvég"
 
 msgid "no"
-msgstr ""
+msgstr "Norvég"
 
 msgid "nr"
-msgstr ""
+msgstr "Dél Ndebele"
 
 msgid "nv"
-msgstr ""
+msgstr "Navahók"
 
 msgid "ny"
-msgstr ""
+msgstr "Bantu"
 
 msgid "oc"
-msgstr ""
+msgstr "Okcitán"
 
 msgid "oj"
-msgstr ""
+msgstr "Ojibwe"
 
 msgid "om"
-msgstr ""
+msgstr "Oromók"
 
 msgid "or"
-msgstr ""
+msgstr "Orija"
 
 msgid "os"
-msgstr ""
+msgstr "Oszét"
 
 msgid "pa"
-msgstr ""
+msgstr "Pandzsábi"
 
 msgid "pi"
-msgstr ""
+msgstr "Páli"
 
 msgid "pl"
-msgstr ""
+msgstr "Lengyel"
 
 msgid "ps"
-msgstr ""
+msgstr "Pastu"
 
 msgid "pt"
-msgstr ""
+msgstr "Portugál"
 
 msgid "qu"
-msgstr ""
+msgstr "Kecsua"
 
 msgid "rm"
-msgstr ""
+msgstr "Rétoromán"
 
 msgid "rn"
-msgstr ""
+msgstr "Kirundi"
 
 msgid "ro"
-msgstr ""
+msgstr "román"
 
 msgid "ru"
-msgstr ""
+msgstr "Orosz"
 
 msgid "rw"
-msgstr ""
+msgstr "Ruandai"
 
 msgid "sa"
-msgstr ""
+msgstr "Szanszkrit"
 
 msgid "sc"
-msgstr ""
+msgstr "Szardíniai"
 
 msgid "sd"
-msgstr ""
+msgstr "Szindhi"
 
 msgid "se"
-msgstr ""
+msgstr "Északi Sami"
 
 msgid "sg"
-msgstr ""
+msgstr "Sango"
 
 msgid "si"
-msgstr ""
+msgstr "Szingaléz"
 
 msgid "sk"
-msgstr ""
+msgstr "szlovák"
 
 msgid "sl"
-msgstr ""
+msgstr "Szlovén"
 
 msgid "sm"
-msgstr ""
+msgstr "Szamoai"
 
 msgid "sn"
-msgstr ""
+msgstr "Sona"
 
 msgid "so"
-msgstr ""
+msgstr "Szomáliai"
 
 msgid "sq"
-msgstr ""
+msgstr "Albán"
 
 msgid "sr"
-msgstr ""
+msgstr "szerb"
 
 msgid "ss"
-msgstr ""
+msgstr "Szvázi"
 
 msgid "st"
-msgstr ""
+msgstr "Szothó"
 
 msgid "su"
-msgstr ""
+msgstr "Szundanéz"
 
 msgid "sv"
-msgstr ""
+msgstr "Svéd"
 
 msgid "sw"
-msgstr ""
+msgstr "Szuahéli"
 
 msgid "ta"
-msgstr ""
+msgstr "Tamil"
 
 msgid "te"
-msgstr ""
+msgstr "Telugu"
 
 msgid "tg"
-msgstr ""
+msgstr "Tajuk"
 
 msgid "th"
-msgstr ""
+msgstr "Táj"
 
 msgid "ti"
-msgstr ""
+msgstr "Tigrinya"
 
 msgid "tk"
-msgstr ""
+msgstr "Türkmén"
 
 msgid "tl"
-msgstr ""
+msgstr "Tagalog"
 
 msgid "tn"
-msgstr ""
+msgstr "Bantu"
 
 msgid "to"
-msgstr ""
+msgstr "Tongai"
 
 msgid "tr"
-msgstr ""
+msgstr "Török"
 
 msgid "ts"
-msgstr ""
+msgstr "Bantu"
 
 msgid "tt"
-msgstr ""
+msgstr "Tatár"
 
 msgid "tw"
-msgstr ""
+msgstr "Ghánai"
 
 msgid "ty"
-msgstr ""
+msgstr "Tahiti"
 
 msgid "ug"
-msgstr ""
+msgstr "Ujgur"
 
 msgid "uk"
-msgstr ""
+msgstr "Ukrán"
 
 msgid "ur"
-msgstr ""
+msgstr "Urdu"
 
 msgid "uz"
-msgstr ""
+msgstr "Üzbég"
 
 msgid "ve"
-msgstr ""
+msgstr "Venda"
 
 msgid "vi"
-msgstr ""
+msgstr "Vietnámi"
 
 msgid "vo"
-msgstr ""
+msgstr "Volapük"
 
 msgid "wa"
-msgstr ""
+msgstr "Vallóniai"
 
 msgid "wo"
-msgstr ""
+msgstr "Volof"
 
 msgid "xh"
-msgstr ""
+msgstr "Xhosza"
 
 msgid "yi"
-msgstr ""
+msgstr "Jiddis"
 
 msgid "yo"
-msgstr ""
+msgstr "Jorubák"
 
 msgid "za"
-msgstr ""
+msgstr "Zhuang"
 
 msgid "zh"
-msgstr ""
+msgstr "Kínai"
 
 msgid "zu"
-msgstr ""
+msgstr "Zulu"
