@@ -242,6 +242,17 @@ class Standard extends Base implements Iface
 	}
 
 
+	/**
+	 * Tests if the user is a super user
+	 *
+	 * @return bool TRUE if user is a super user, FALSE if not
+	 */
+	public function isSuper() : bool
+	{
+		return (bool) $this->get( '.super', false );
+	}
+
+
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *

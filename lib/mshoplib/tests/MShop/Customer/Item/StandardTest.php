@@ -439,6 +439,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIsSuper()
+	{
+		$this->assertFalse( $this->object->isSuper() );
+
+		$this->object->set( '.super', 1 );
+		$this->assertTrue( $this->object->isSuper() );
+	}
+
+
 	public function testIsModified()
 	{
 		$this->assertFalse( $this->object->isModified() );

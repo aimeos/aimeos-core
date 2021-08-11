@@ -113,4 +113,11 @@ interface Iface
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setGroups( array $ids ) : \Aimeos\MShop\Customer\Item\Iface;
+
+	/**
+	 * Tests if the user is a super user
+	 *
+	 * @return bool TRUE if user is a super user, FALSE if not
+	 */
+	public function isSuper() : bool;
 }
