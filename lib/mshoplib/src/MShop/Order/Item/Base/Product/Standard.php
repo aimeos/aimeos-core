@@ -510,8 +510,7 @@ class Standard extends Base implements Iface
 	/**
 	 * Returns the current delivery status of the order product item.
 	 *
-	 * The returned status values are the STAT_* constants from the
-	 * \Aimeos\MShop\Order\Item\Base class
+	 * The returned status values are the STAT_* constants from the \Aimeos\MShop\Order\Item\Base class
 	 *
 	 * @return int Delivery status of the product
 	 */
@@ -524,8 +523,7 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the new delivery status of the order product item.
 	 *
-	 * Possible status values are the STAT_* constants from the
-	 * \Aimeos\MShop\Order\Item\Base class
+	 * Possible status values are the STAT_* constants from the \Aimeos\MShop\Order\Item\Base class
 	 *
 	 * @param int $value New delivery status of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
@@ -534,6 +532,34 @@ class Standard extends Base implements Iface
 	{
 		return $this->set( 'order.base.product.status', $value );
 	}
+
+
+	/**
+	 * Returns the current payment status of the order product item.
+	 *
+	 * The returned status values are the PAY_* constants from the \Aimeos\MShop\Order\Item\Base class
+	 *
+	 * @return int Payment status of the product
+	 */
+	public function getStatusPayment() : int
+	{
+		return $this->get( 'order.base.product.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
+	}
+
+
+	/**
+	 * Sets the new payment status of the order product item.
+	 *
+	 * Possible status values are the PAY_* constants from the \Aimeos\MShop\Order\Item\Base class
+	 *
+	 * @param int $value New payment status of the product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setStatusPayment( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	{
+		return $this->set( 'order.base.product.statuspayment', $value );
+	}
+
 
 	/**
 	 * Returns the notes for the ordered product.
@@ -593,6 +619,7 @@ class Standard extends Base implements Iface
 				case 'order.base.product.quantity': $item = $item->setQuantity( (float) $value ); break;
 				case 'order.base.product.qtyopen': $item = $item->setQuantityOpen( (float) $value ); break;
 				case 'order.base.product.notes': $item = $item->setNotes( (string) $value ); break;
+				case 'order.base.product.statuspayment': $item = $item->setStatusPayment( (int) $value ); break;
 				case 'order.base.product.status': $item = $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
@@ -627,6 +654,7 @@ class Standard extends Base implements Iface
 		$list['order.base.product.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.product.timeframe'] = $this->getTimeFrame();
 		$list['order.base.product.position'] = $this->getPosition();
+		$list['order.base.product.statuspayment'] = $this->getStatusPayment();
 		$list['order.base.product.status'] = $this->getStatus();
 		$list['order.base.product.notes'] = $this->getNotes();
 

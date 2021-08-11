@@ -345,6 +345,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ordProdItem->setMediaUrl( $dataset['mediaurl'] );
 			$ordProdItem->setQuantity( $dataset['amount'] );
 			$ordProdItem->setFlags( $dataset['flags'] );
+			$ordProdItem->setStatusPayment( $dataset['statuspayment'] ?? -1 );
 			$ordProdItem->setStatus( $dataset['status'] );
 			$ordProdItem->setPosition( $dataset['pos'] );
 			$ordProdItem->setQuantityOpen( $dataset['qtyopen'] ?? 0 );

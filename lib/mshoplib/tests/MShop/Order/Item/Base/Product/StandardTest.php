@@ -57,6 +57,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.quantity' => 11,
 			'order.base.product.qtyopen' => 5,
 			'order.base.product.flags' => \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE,
+			'order.base.product.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED,
 			'order.base.product.status' => \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS,
 			'order.base.product.position' => 1,
 			'order.base.product.notes' => 'test note',
@@ -565,6 +566,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetStatusPayment()
+	{
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->object->getStatusPayment() );
+	}
+
+
+	public function testSetStatusPayment()
+	{
+		$return = $this->object->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_PENDING, $this->object->getStatusPayment() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetBaseId()
 	{
 		$this->assertEquals( 42, $this->object->getBaseId() );
@@ -855,6 +872,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.position' => 4,
 			'order.base.product.quantity' => 5,
 			'order.base.product.qtyopen' => 3,
+			'order.base.product.statuspayment' => 6,
 			'order.base.product.status' => 0,
 			'order.base.product.flags' => 1,
 			'order.base.product.notes' => 'note',
@@ -886,6 +904,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.product.position'], $item->getPosition() );
 		$this->assertEquals( $list['order.base.product.quantity'], $item->getQuantity() );
 		$this->assertEquals( $list['order.base.product.qtyopen'], $item->getQuantityOpen() );
+		$this->assertEquals( $list['order.base.product.statuspayment'], $item->getStatusPayment() );
 		$this->assertEquals( $list['order.base.product.status'], $item->getStatus() );
 		$this->assertEquals( $list['order.base.product.flags'], $item->getFlags() );
 		$this->assertEquals( $list['order.base.product.notes'], $item->getNotes() );
@@ -922,6 +941,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getPrice()->getTaxRate(), $arrayObject['order.base.product.taxrate'] );
 		$this->assertEquals( $this->object->getQuantityOpen(), $arrayObject['order.base.product.qtyopen'] );
 		$this->assertEquals( $this->object->getQuantity(), $arrayObject['order.base.product.quantity'] );
+		$this->assertEquals( $this->object->getStatusPayment(), $arrayObject['order.base.product.statuspayment'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['order.base.product.status'] );
 		$this->assertEquals( $this->object->getFlags(), $arrayObject['order.base.product.flags'] );
 		$this->assertEquals( $this->object->getNotes(), $arrayObject['order.base.product.notes'] );

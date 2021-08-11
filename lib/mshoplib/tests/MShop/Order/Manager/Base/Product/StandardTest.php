@@ -149,6 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.product.taxvalue', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.flags', 0 );
 		$expr[] = $search->compare( '==', 'order.base.product.position', 1 );
+		$expr[] = $search->compare( '==', 'order.base.product.statuspayment', 5 );
 		$expr[] = $search->compare( '==', 'order.base.product.status', 1 );
 		$expr[] = $search->compare( '==', 'order.base.product.notes', 'test note' );
 		$expr[] = $search->compare( '!=', 'order.base.product.mtime', '1970-01-01 00:00:00' );
@@ -278,6 +279,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 		$this->assertEquals( $item->getQuantity(), $itemSaved->getQuantity() );
 		$this->assertEquals( $item->getQuantityOpen(), $itemSaved->getQuantityOpen() );
+		$this->assertEquals( $item->getStatusPayment(), $itemSaved->getStatusPayment() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 		$this->assertEquals( $item->getFlags(), $itemSaved->getFlags() );
 		$this->assertEquals( $item->getNotes(), $itemSaved->getNotes() );
@@ -310,6 +312,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 		$this->assertEquals( $itemExp->getQuantity(), $itemUpd->getQuantity() );
 		$this->assertEquals( $itemExp->getQuantityOpen(), $itemUpd->getQuantityOpen() );
+		$this->assertEquals( $itemExp->getStatusPayment(), $itemUpd->getStatusPayment() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 		$this->assertEquals( $itemExp->getFlags(), $itemUpd->getFlags() );
 		$this->assertEquals( $itemExp->getNotes(), $itemUpd->getNotes() );

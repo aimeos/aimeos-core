@@ -198,6 +198,13 @@ class Standard
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
+		'order.base.product.statuspayment' => array(
+			'code' => 'order.base.product.statuspayment',
+			'internalcode' => 'mordbapr."statuspayment"',
+			'label' => 'Product payment status',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'order.base.product.status' => array(
 			'code' => 'order.base.product.status',
 			'internalcode' => 'mordbapr."status"',
@@ -809,6 +816,7 @@ class Standard
 			$stmt->bind( $idx++, json_encode( $price->getTaxRates(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatusPayment(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
