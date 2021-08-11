@@ -84,7 +84,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 *
 	 * @return int Status code constant from \Aimeos\MShop\Order\Item\Base
 	 */
-	public function getDeliveryStatus() : int;
+	public function getStatusDelivery() : int;
 
 	/**
 	 * Sets the delivery status of the invoice.
@@ -92,14 +92,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @param int $status Status code constant from \Aimeos\MShop\Order\Item\Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setDeliveryStatus( int $status ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setStatusDelivery( int $status ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Returns the payment status of the invoice.
 	 *
 	 * @return int Payment constant from \Aimeos\MShop\Order\Item\Base
 	 */
-	public function getPaymentStatus() : int;
+	public function getStatusPayment() : int;
 
 	/**
 	 * Sets the payment status of the invoice.
@@ -107,7 +107,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @param int $status Payment constant from \Aimeos\MShop\Order\Item\Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setPaymentStatus( int $status ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setStatusPayment( int $status ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Returns the related invoice ID.

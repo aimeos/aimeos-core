@@ -163,9 +163,18 @@ class Standard
 	 *
 	 * @return int Status code constant from \Aimeos\MShop\Order\Item\Base
 	 */
-	public function getDeliveryStatus() : int
+	public function getStatusDelivery() : int
 	{
 		return $this->get( 'order.statusdelivery', \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
+	}
+
+
+	/**
+	 * @deprecated 2022.01
+	 */
+	public function getDeliveryStatus() : int
+	{
+		return $this->getStatusDelivery();
 	}
 
 
@@ -175,10 +184,19 @@ class Standard
 	 * @param int $status Status code constant from \Aimeos\MShop\Order\Item\Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setDeliveryStatus( int $status ) : \Aimeos\MShop\Order\Item\Iface
+	public function setStatusDelivery( int $status ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$this->set( '.statusdelivery', $this->get( 'order.statusdelivery' ) );
 		return $this->set( 'order.statusdelivery', $status );
+	}
+
+
+	/**
+	 * @deprecated 2022.01
+	 */
+	public function setDeliveryStatus( int $status ) : \Aimeos\MShop\Order\Item\Iface
+	{
+		return $this->setStatusDelivery( $status );
 	}
 
 
@@ -187,9 +205,18 @@ class Standard
 	 *
 	 * @return int Payment constant from \Aimeos\MShop\Order\Item\Base
 	 */
-	public function getPaymentStatus() : int
+	public function getStatusPayment() : int
 	{
 		return $this->get( 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
+	}
+
+
+	/**
+	 * @deprecated 2022.01
+	 */
+	public function getPaymentStatus() : int
+	{
+		return $this->getStatusPayment();
 	}
 
 
@@ -199,14 +226,23 @@ class Standard
 	 * @param int $status Payment constant from \Aimeos\MShop\Order\Item\Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setPaymentStatus( int $status ) : \Aimeos\MShop\Order\Item\Iface
+	public function setStatusPayment( int $status ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		if( $status !== $this->getPaymentStatus() ) {
+		if( $status !== $this->getStatusPayment() ) {
 			$this->set( 'order.datepayment', date( 'Y-m-d H:i:s' ) );
 		}
 
 		$this->set( '.statuspayment', $this->get( 'order.statuspayment' ) );
 		return $this->set( 'order.statuspayment', $status );
+	}
+
+
+	/**
+	 * @deprecated 2022.01
+	 */
+	public function setPaymentStatus( int $status ) : \Aimeos\MShop\Order\Item\Iface
+	{
+		return $this->setStatusPayment( $status );
 	}
 
 

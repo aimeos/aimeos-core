@@ -514,9 +514,18 @@ class Standard extends Base implements Iface
 	 *
 	 * @return int Delivery status of the product
 	 */
-	public function getStatus() : int
+	public function getStatusDelivery() : int
 	{
 		return $this->get( 'order.base.product.status', \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
+	}
+
+
+	/**
+	 * @deprecated 2022.01
+	 */
+	public function getStatus() : int
+	{
+		return $this->getStatusDelivery();
 	}
 
 
@@ -528,9 +537,18 @@ class Standard extends Base implements Iface
 	 * @param int $value New delivery status of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setStatus( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setStatusDelivery( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		return $this->set( 'order.base.product.status', $value );
+	}
+
+
+	/**
+	 * @deprecated 2022.01
+	 */
+	public function setStatus( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	{
+		return $this->setStatusDelivery( $value );
 	}
 
 

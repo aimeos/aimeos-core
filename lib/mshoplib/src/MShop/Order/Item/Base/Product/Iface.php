@@ -352,7 +352,7 @@ interface Iface
 	 *
 	 * @return int Delivery status of the product
 	 */
-	public function getStatus() : int;
+	public function getStatusDelivery() : int;
 
 	/**
 	 * Sets the new delivery status of the order product item.
@@ -362,7 +362,7 @@ interface Iface
 	 * @param int $value New delivery status of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setStatus( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setStatusDelivery( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the current payment status of the order product item.
