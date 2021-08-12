@@ -29,6 +29,6 @@ class Standard
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return $order->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_PENDING );
+		return $order->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PENDING );
 	}
 }

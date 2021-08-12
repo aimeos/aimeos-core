@@ -470,8 +470,8 @@ class Standard
 			$stmt->bind( $idx++, $item->getType() );
 			$stmt->bind( $idx++, $item->getDatePayment() );
 			$stmt->bind( $idx++, $item->getDateDelivery() );
-			$stmt->bind( $idx++, $item->getDeliveryStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getPaymentStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatusDelivery(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatusPayment(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getRelatedId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->getEditor() );
@@ -894,17 +894,17 @@ class Standard
 		$statusItem = $statusManager->create();
 		$statusItem->setParentId( $item->getId() );
 
-		if( ( $status = $item->get( '.statuspayment' ) ) !== null && $status != $item->getPaymentStatus() )
+		if( ( $status = $item->get( '.statuspayment' ) ) !== null && $status != $item->getStatusPayment() )
 		{
-			$statusItem->setId( null )->setValue( $item->getPaymentStatus() )
+			$statusItem->setId( null )->setValue( $item->getStatusPayment() )
 				->setType( \Aimeos\MShop\Order\Item\Status\Base::STATUS_PAYMENT );
 
 			$statusManager->save( $statusItem, false );
 		}
 
-		if( ( $status = $item->get( '.statusdelivery' ) ) !== null && $status != $item->getDeliveryStatus() )
+		if( ( $status = $item->get( '.statusdelivery' ) ) !== null && $status != $item->getStatusDelivery() )
 		{
-			$statusItem->setId( null )->setValue( $item->getDeliveryStatus() )
+			$statusItem->setId( null )->setValue( $item->getStatusDelivery() )
 				->setType( \Aimeos\MShop\Order\Item\Status\Base::STATUS_DELIVERY );
 
 			$statusManager->save( $statusItem, false );

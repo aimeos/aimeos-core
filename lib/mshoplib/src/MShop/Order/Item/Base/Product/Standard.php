@@ -638,7 +638,9 @@ class Standard extends Base implements Iface
 				case 'order.base.product.qtyopen': $item = $item->setQuantityOpen( (float) $value ); break;
 				case 'order.base.product.notes': $item = $item->setNotes( (string) $value ); break;
 				case 'order.base.product.statuspayment': $item = $item->setStatusPayment( (int) $value ); break;
-				case 'order.base.product.status': $item = $item->setStatus( (int) $value ); break;
+				case 'order.base.product.statusdelivery': $item = $item->setStatusDelivery( (int) $value ); break;
+				// @deprecated 2022.01
+				case 'order.base.product.status': $item = $item->setStatusDelivery( (int) $value ); break;
 				default: continue 2;
 			}
 
@@ -672,9 +674,11 @@ class Standard extends Base implements Iface
 		$list['order.base.product.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.product.timeframe'] = $this->getTimeFrame();
 		$list['order.base.product.position'] = $this->getPosition();
-		$list['order.base.product.statuspayment'] = $this->getStatusPayment();
-		$list['order.base.product.status'] = $this->getStatus();
 		$list['order.base.product.notes'] = $this->getNotes();
+		$list['order.base.product.statuspayment'] = $this->getStatusPayment();
+		$list['order.base.product.statusdelivery'] = $this->getStatusDelivery();
+		// @deprecated 2022.01
+		$list['order.base.product.status'] = $this->getStatus();
 
 		if( $private === true )
 		{

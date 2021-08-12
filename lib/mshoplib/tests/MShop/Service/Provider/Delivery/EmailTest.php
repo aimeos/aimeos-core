@@ -73,7 +73,7 @@ class EmailTest extends \PHPUnit\Framework\TestCase
 	{
 		$order = $this->object->process( $this->getOrderItem() );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getDeliveryStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getStatusDelivery() );
 	}
 
 
@@ -81,7 +81,7 @@ class EmailTest extends \PHPUnit\Framework\TestCase
 	{
 		$orders = $this->object->processBatch( [$this->getOrderItem()] );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $orders->getDeliveryStatus()->first() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $orders->getStatusDelivery()->first() );
 	}
 
 

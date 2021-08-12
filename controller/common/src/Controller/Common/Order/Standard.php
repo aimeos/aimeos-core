@@ -108,7 +108,7 @@ class Standard
 	 */
 	public function update( \Aimeos\MShop\Order\Item\Iface $orderItem ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		switch( $orderItem->getPaymentStatus() )
+		switch( $orderItem->getStatusPayment() )
 		{
 			case \Aimeos\MShop\Order\Item\Base::PAY_DELETED:
 			case \Aimeos\MShop\Order\Item\Base::PAY_CANCELED:

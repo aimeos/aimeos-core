@@ -227,8 +227,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getDatePayment(), $itemSaved->getDatePayment() );
 		$this->assertEquals( $item->getDateDelivery(), $itemSaved->getDateDelivery() );
-		$this->assertEquals( $item->getPaymentStatus(), $itemSaved->getPaymentStatus() );
-		$this->assertEquals( $item->getDeliveryStatus(), $itemSaved->getDeliveryStatus() );
+		$this->assertEquals( $item->getStatusPayment(), $itemSaved->getStatusPayment() );
+		$this->assertEquals( $item->getStatusDelivery(), $itemSaved->getStatusDelivery() );
 		$this->assertEquals( $item->getRelatedId(), $itemSaved->getRelatedId() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
@@ -241,8 +241,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getDatePayment(), $itemUpd->getDatePayment() );
 		$this->assertEquals( $itemExp->getDateDelivery(), $itemUpd->getDateDelivery() );
-		$this->assertEquals( $itemExp->getPaymentStatus(), $itemUpd->getPaymentStatus() );
-		$this->assertEquals( $itemExp->getDeliveryStatus(), $itemUpd->getDeliveryStatus() );
+		$this->assertEquals( $itemExp->getStatusPayment(), $itemUpd->getStatusPayment() );
+		$this->assertEquals( $itemExp->getStatusDelivery(), $itemUpd->getStatusDelivery() );
 		$this->assertEquals( $itemExp->getRelatedId(), $itemUpd->getRelatedId() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
@@ -287,7 +287,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$item->setId( null );
-		$item->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
+		$item->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
 		$this->object->save( $item );
 
 		$search = $statusManager->filter();
@@ -336,7 +336,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$item->setId( null );
-		$item->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_LOST );
+		$item->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_LOST );
 		$this->object->save( $item );
 
 		$search = $statusManager->filter();

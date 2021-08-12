@@ -30,7 +30,7 @@ class PrePay
 	 */
 	public function cancel( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
+		$order->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
 		return $this->saveOrder( $order );
 	}
 
@@ -44,7 +44,7 @@ class PrePay
 	 */
 	public function repay( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
+		$order->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
 		return $this->saveOrder( $order );
 	}
 
@@ -60,9 +60,9 @@ class PrePay
 	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request,
 		\Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		if( $order->getPaymentStatus() === \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED )
+		if( $order->getStatusPayment() === \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED )
 		{
-			$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
+			$order->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
 			$order = $this->saveOrder( $order );
 		}
 

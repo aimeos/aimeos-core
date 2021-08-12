@@ -62,7 +62,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperCntl::getContext();
 
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
-		$orderItem->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
+		$orderItem->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
@@ -80,7 +80,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperCntl::getContext();
 
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
-		$orderItem->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_DELETED );
+		$orderItem->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_DELETED );
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )

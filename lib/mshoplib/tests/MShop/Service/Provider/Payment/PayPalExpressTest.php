@@ -175,7 +175,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->updateSync( $request, $this->order );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $result->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $result->getStatusPayment() );
 	}
 
 
@@ -213,7 +213,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			->with( $this->equalTo( 200 ) );
 
 		$cmpFcn = function( $subject ) {
-			return $subject->getPaymentStatus() === \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED;
+			return $subject->getStatusPayment() === \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED;
 		};
 
 		$this->orderMock->expects( $this->once() )->method( 'save' )->with( $this->callback( $cmpFcn ) );
@@ -271,7 +271,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
 		}
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_REFUND, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_REFUND, $this->order->getStatusPayment() );
 	}
 
 
@@ -283,7 +283,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->capture( $this->order );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $this->order->getStatusPayment() );
 	}
 
 
@@ -295,7 +295,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->query( $this->order );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $this->order->getStatusPayment() );
 	}
 
 
@@ -307,7 +307,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->query( $this->order );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_REFUSED, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_REFUSED, $this->order->getStatusPayment() );
 	}
 
 
@@ -319,7 +319,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->cancel( $this->order );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED, $this->order->getStatusPayment() );
 	}
 
 
@@ -331,7 +331,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->query( $this->order );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->order->getStatusPayment() );
 	}
 
 
@@ -349,59 +349,59 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	public function testSetPaymentStatusNone()
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
-		$method = $class->getMethod( 'setPaymentStatus' );
+		$method = $class->getMethod( 'setStatusPayment' );
 		$method->setAccessible( true );
 
 		$method->invokeArgs( $this->object, array( $this->order, [] ) );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->order->getStatusPayment() );
 	}
 
 
 	public function testSetPaymentPending()
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
-		$method = $class->getMethod( 'setPaymentStatus' );
+		$method = $class->getMethod( 'setStatusPayment' );
 		$method->setAccessible( true );
 
 		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Pending', 'PENDINGREASON' => 'error' ) ) );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_PENDING, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_PENDING, $this->order->getStatusPayment() );
 	}
 
 
 	public function testSetPaymentRefunded()
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
-		$method = $class->getMethod( 'setPaymentStatus' );
+		$method = $class->getMethod( 'setStatusPayment' );
 		$method->setAccessible( true );
 
 		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Refunded' ) ) );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_REFUND, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_REFUND, $this->order->getStatusPayment() );
 	}
 
 
 	public function testSetPaymentCanceled()
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
-		$method = $class->getMethod( 'setPaymentStatus' );
+		$method = $class->getMethod( 'setStatusPayment' );
 		$method->setAccessible( true );
 
 		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Voided' ) ) );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED, $this->order->getStatusPayment() );
 	}
 
 
 	public function testSetPaymentInvalid()
 	{
 		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
-		$method = $class->getMethod( 'setPaymentStatus' );
+		$method = $class->getMethod( 'setStatusPayment' );
 		$method->setAccessible( true );
 
 		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Invalid' ) ) );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->order->getStatusPayment() );
 	}
 }

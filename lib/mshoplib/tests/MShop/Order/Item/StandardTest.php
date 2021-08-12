@@ -161,34 +161,34 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetDeliveryStatus()
+	public function testGetStatusDelivery()
 	{
-		$this->assertEquals( $this->values['order.statusdelivery'], $this->object->getDeliveryStatus() );
+		$this->assertEquals( $this->values['order.statusdelivery'], $this->object->getStatusDelivery() );
 	}
 
 
-	public function testSetDeliveryStatus()
+	public function testSetStatusDelivery()
 	{
-		$return = $this->object->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
+		$return = $this->object->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $return );
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $this->object->getDeliveryStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $this->object->getStatusDelivery() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
 
-	public function testGetPaymentStatus()
+	public function testGetStatusPayment()
 	{
-		$this->assertEquals( $this->values['order.statuspayment'], $this->object->getPaymentStatus() );
+		$this->assertEquals( $this->values['order.statuspayment'], $this->object->getStatusPayment() );
 	}
 
 
-	public function testSetPaymentStatus()
+	public function testSetStatusPayment()
 	{
-		$return = $this->object->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_DELETED );
+		$return = $this->object->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_DELETED );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $return );
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_DELETED, $this->object->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_DELETED, $this->object->getStatusPayment() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -256,8 +256,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.type'], $item->getType() );
 		$this->assertEquals( $list['order.baseid'], $item->getBaseId() );
 		$this->assertEquals( $list['order.relatedid'], $item->getRelatedId() );
-		$this->assertEquals( $list['order.statusdelivery'], $item->getDeliveryStatus() );
-		$this->assertEquals( $list['order.statuspayment'], $item->getPaymentStatus() );
+		$this->assertEquals( $list['order.statusdelivery'], $item->getStatusDelivery() );
+		$this->assertEquals( $list['order.statuspayment'], $item->getStatusPayment() );
 		$this->assertEquals( $list['order.datepayment'], $item->getDatePayment() );
 		$this->assertEquals( $list['order.datedelivery'], $item->getDateDelivery() );
 	}
@@ -271,8 +271,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getId(), $list['order.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $list['order.siteid'] );
 		$this->assertEquals( $this->object->getType(), $list['order.type'] );
-		$this->assertEquals( $this->object->getDeliveryStatus(), $list['order.statusdelivery'] );
-		$this->assertEquals( $this->object->getPaymentStatus(), $list['order.statuspayment'] );
+		$this->assertEquals( $this->object->getStatusDelivery(), $list['order.statusdelivery'] );
+		$this->assertEquals( $this->object->getStatusPayment(), $list['order.statuspayment'] );
 		$this->assertEquals( $this->object->getDatePayment(), $list['order.datepayment'] );
 		$this->assertEquals( $this->object->getDateDelivery(), $list['order.datedelivery'] );
 		$this->assertEquals( $this->object->getBaseId(), $list['order.baseid'] );

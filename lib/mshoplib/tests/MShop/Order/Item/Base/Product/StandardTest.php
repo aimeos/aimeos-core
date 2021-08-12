@@ -873,7 +873,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.quantity' => 5,
 			'order.base.product.qtyopen' => 3,
 			'order.base.product.statuspayment' => 6,
-			'order.base.product.status' => 0,
+			'order.base.product.statusdelivery' => 0,
 			'order.base.product.flags' => 1,
 			'order.base.product.notes' => 'note',
 			'order.base.product.price' => '10.00',
@@ -905,7 +905,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.product.quantity'], $item->getQuantity() );
 		$this->assertEquals( $list['order.base.product.qtyopen'], $item->getQuantityOpen() );
 		$this->assertEquals( $list['order.base.product.statuspayment'], $item->getStatusPayment() );
-		$this->assertEquals( $list['order.base.product.status'], $item->getStatus() );
+		$this->assertEquals( $list['order.base.product.statusdelivery'], $item->getStatusDelivery() );
 		$this->assertEquals( $list['order.base.product.flags'], $item->getFlags() );
 		$this->assertEquals( $list['order.base.product.notes'], $item->getNotes() );
 		$this->assertEquals( $list['order.base.product.price'], $item->getPrice()->getValue() );
@@ -942,7 +942,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getQuantityOpen(), $arrayObject['order.base.product.qtyopen'] );
 		$this->assertEquals( $this->object->getQuantity(), $arrayObject['order.base.product.quantity'] );
 		$this->assertEquals( $this->object->getStatusPayment(), $arrayObject['order.base.product.statuspayment'] );
-		$this->assertEquals( $this->object->getStatus(), $arrayObject['order.base.product.status'] );
+		$this->assertEquals( $this->object->getStatusDelivery(), $arrayObject['order.base.product.statusdelivery'] );
 		$this->assertEquals( $this->object->getFlags(), $arrayObject['order.base.product.flags'] );
 		$this->assertEquals( $this->object->getNotes(), $arrayObject['order.base.product.notes'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['order.base.product.mtime'] );

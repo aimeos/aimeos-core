@@ -101,7 +101,7 @@ class Xml
 		$baseItem = $this->getOrderBase( $order->getBaseId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
 		$this->createFile( $this->createXml( [$order], [$baseItem->getId() => $baseItem] ) );
 
-		return $order->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
+		return $order->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
 	}
 
 
@@ -117,7 +117,7 @@ class Xml
 		$this->createFile( $this->createXml( $orders, $baseItems ) );
 
 		foreach( $orders as $key => $order ) {
-			$orders[$key] = $order->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
+			$orders[$key] = $order->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
 		}
 
 		return map( $orders );

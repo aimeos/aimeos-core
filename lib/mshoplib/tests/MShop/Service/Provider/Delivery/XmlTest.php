@@ -74,7 +74,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$xml = simplexml_load_file( 'tmp/order-export_0.xml' );
 		unlink( 'tmp/order-export_0.xml' );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getDeliveryStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getStatusDelivery() );
 		$this->assertEquals( '2008-02-15 12:34:56', (string) $xml->orderitem[0]->{'order.datepayment'} );
 		$this->assertEquals( 'unittest', (string) $xml->orderitem[0]->{'order.base.sitecode'} );
 		$this->assertEquals( 'payment', (string) $xml->orderitem[0]->address->addressitem[0]['type'] );
@@ -95,7 +95,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		unlink( 'tmp/order-export_0.xml' );
 
 		$this->assertEquals( 1, count( $orders ) );
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $orders->getDeliveryStatus()->first() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $orders->getStatusDelivery()->first() );
 		$this->assertEquals( '2008-02-15 12:34:56', (string) $xml->orderitem[0]->{'order.datepayment'} );
 		$this->assertEquals( 'unittest', (string) $xml->orderitem[0]->{'order.base.sitecode'} );
 		$this->assertEquals( 'payment', (string) $xml->orderitem[0]->address->addressitem[0]['type'] );
@@ -114,11 +114,11 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop::cache( true );
 
 		$itemMock = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
-			->setMethods( ['setDeliveryStatus', 'setPaymentStatus', 'setDateDelivery', 'setDatePayment'] )
+			->setMethods( ['setStatusDelivery', 'setStatusPayment', 'setDateDelivery', 'setDatePayment'] )
 			->getMock();
 
-		$itemMock->expects( $this->once() )->method( 'setDeliveryStatus' )->will( $this->returnSelf() );
-		$itemMock->expects( $this->once() )->method( 'setPaymentStatus' )->will( $this->returnSelf() );
+		$itemMock->expects( $this->once() )->method( 'setStatusDelivery' )->will( $this->returnSelf() );
+		$itemMock->expects( $this->once() )->method( 'setStatusPayment' )->will( $this->returnSelf() );
 		$itemMock->expects( $this->once() )->method( 'setDateDelivery' )->will( $this->returnSelf() );
 		$itemMock->expects( $this->once() )->method( 'setDatePayment' )->will( $this->returnSelf() );
 

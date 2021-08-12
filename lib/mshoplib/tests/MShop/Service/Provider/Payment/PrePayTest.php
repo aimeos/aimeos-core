@@ -60,7 +60,7 @@ class PrePayTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->updateSync( $request, $orderItem );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_PENDING, $result->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_PENDING, $result->getStatusPayment() );
 	}
 
 
@@ -77,7 +77,7 @@ class PrePayTest extends \PHPUnit\Framework\TestCase
 		$orderItem = $manager->create();
 		$this->object->cancel( $orderItem );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED, $orderItem->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED, $orderItem->getStatusPayment() );
 	}
 
 

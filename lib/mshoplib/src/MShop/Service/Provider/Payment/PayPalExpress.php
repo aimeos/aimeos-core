@@ -265,7 +265,7 @@ class PayPalExpress
 		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->checkResponse( $order->getId(), $response, __METHOD__ );
 
-		$this->setPaymentStatus( $order, $rvals );
+		$this->setStatusPayment( $order, $rvals );
 		return $this->saveOrder( $order );
 	}
 
@@ -302,7 +302,7 @@ class PayPalExpress
 		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->checkResponse( $order->getId(), $response, __METHOD__ );
 
-		$this->setPaymentStatus( $order, $rvals );
+		$this->setStatusPayment( $order, $rvals );
 
 		$attributes = [];
 		if( isset( $rvals['PARENTTRANSACTIONID'] ) ) {
@@ -351,7 +351,7 @@ class PayPalExpress
 		$this->setAttributes( $serviceItem, $attributes, 'payment/paypal' );
 		$this->saveOrderBase( $baseItem );
 
-		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_REFUND );
+		$order->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_REFUND );
 		return $this->saveOrder( $order );
 	}
 
@@ -378,7 +378,7 @@ class PayPalExpress
 		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
 		$this->checkResponse( $order->getId(), $response, __METHOD__ );
 
-		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
+		$order->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
 		return $this->saveOrder( $order );
 	}
 
@@ -426,7 +426,7 @@ class PayPalExpress
 		$this->setAttributes( $serviceItem, array( 'TRANSACTIONID' => $params['txn_id'] ), 'payment/paypal' );
 		$this->saveOrderBase( $baseItem );
 
-		$this->setPaymentStatus( $order, $status );
+		$this->setStatusPayment( $order, $status );
 		$this->saveOrder( $order );
 
 		return $response->withStatus( 200 );
@@ -487,7 +487,7 @@ class PayPalExpress
 		$this->setAttributes( $serviceItem, $attributes, 'payment/paypal' );
 		$this->saveOrderBase( $baseItem );
 
-		$this->setPaymentStatus( $orderItem, $rvals );
+		$this->setStatusPayment( $orderItem, $rvals );
 		return $this->saveOrder( $orderItem );
 	}
 
@@ -595,7 +595,7 @@ class PayPalExpress
 	 * @param array $response Associative list of key/value pairs containing the PayPal response
 	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
 	 */
-	protected function setPaymentStatus( \Aimeos\MShop\Order\Item\Iface $invoice, array $response ) : \Aimeos\MShop\Order\Item\Iface
+	protected function setStatusPayment( \Aimeos\MShop\Order\Item\Iface $invoice, array $response ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		if( !isset( $response['PAYMENTSTATUS'] ) ) {
 			return $invoice;
@@ -608,7 +608,7 @@ class PayPalExpress
 				{
 					if( $response['PENDINGREASON'] === 'authorization' )
 					{
-						$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED );
+						$invoice->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED );
 						break;
 					}
 
@@ -616,33 +616,33 @@ class PayPalExpress
 					$this->getContext()->getLogger()->log( $str, \Aimeos\MW\Logger\Base::INFO, 'core/service/payment' );
 				}
 
-				$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
+				$invoice->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
 				break;
 
 			case 'In-Progress':
-				$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
+				$invoice->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
 				break;
 
 			case 'Completed':
 			case 'Processed':
-				$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
+				$invoice->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
 				break;
 
 			case 'Failed':
 			case 'Denied':
 			case 'Expired':
-				$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_REFUSED );
+				$invoice->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_REFUSED );
 				break;
 
 			case 'Refunded':
 			case 'Partially-Refunded':
 			case 'Reversed':
-				$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_REFUND );
+				$invoice->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_REFUND );
 				break;
 
 			case 'Canceled-Reversal':
 			case 'Voided':
-				$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
+				$invoice->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
 				break;
 
 			default:

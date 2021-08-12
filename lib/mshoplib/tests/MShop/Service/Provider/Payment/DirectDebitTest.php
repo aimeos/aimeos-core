@@ -146,7 +146,7 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->updateSync( $request, $orderItem );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $result->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $result->getStatusPayment() );
 	}
 
 
