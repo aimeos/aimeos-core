@@ -453,7 +453,8 @@ class Standard
 		$ext = isset( $list[$mimeext] ) ? '.' . $list[$mimeext] : ( ctype_alpha( $mimeext ) ? '.' . $mimeext : '' );
 		$siteId = $this->context->getLocale()->getSiteId();
 
-		return "${siteId}/${type}/${filename[0]}/${filename[1]}/${filename}${ext}";
+		// the "d" after {siteid} is the required extension for Windows (no dots at the and allowed)
+		return "${siteId}d/${type}/${filename[0]}/${filename[1]}/${filename}${ext}";
 	}
 
 
