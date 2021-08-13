@@ -22,13 +22,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 {
 	private $cache;
 	private $config;
-	private $date;
-	private $dbm;
-	private $fsm;
+	private $datetime;
+	private $db;
+	private $fs;
 	private $locale;
 	private $logger;
 	private $mail;
-	private $mqueue;
+	private $queue;
 	private $process;
 	private $session;
 	private $view;
@@ -45,12 +45,12 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->cache = null;
 		$this->config = null;
-		$this->dbm = null;
-		$this->fsm = null;
+		$this->db = null;
+		$this->fs = null;
 		$this->locale = null;
 		$this->logger = null;
 		$this->mail = null;
-		$this->mqueue = null;
+		$this->queue = null;
 		$this->process = null;
 		$this->session = null;
 		$this->view = null;
@@ -65,11 +65,11 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->cache = ( isset( $this->cache ) ? clone $this->cache : null );
 		$this->config = ( isset( $this->config ) ? clone $this->config : null );
-		$this->fsm = ( isset( $this->fsm ) ? clone $this->fsm : null );
+		$this->fs = ( isset( $this->fs ) ? clone $this->fs : null );
 		$this->locale = ( isset( $this->locale ) ? clone $this->locale : null );
 		$this->logger = ( isset( $this->logger ) ? clone $this->logger : null );
 		$this->mail = ( isset( $this->mail ) ? clone $this->mail : null );
-		$this->mqueue = ( isset( $this->mqueue ) ? clone $this->mqueue : null );
+		$this->queue = ( isset( $this->queue ) ? clone $this->queue : null );
 		$this->process = ( isset( $this->process ) ? clone $this->process : null );
 		$this->session = ( isset( $this->session ) ? clone $this->session : null );
 		// view is always cloned
@@ -86,8 +86,8 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	public function __sleep() : array
 	{
 		$objects = array(
-			$this->cache, $this->config, $this->dbm, $this->fsm, $this->locale, $this->logger,
-			$this->mail, $this->mqueue, $this->process, $this->session, $this->view
+			$this->cache, $this->config, $this->db, $this->fs, $this->locale, $this->logger,
+			$this->mail, $this->queue, $this->process, $this->session, $this->view
 		);
 
 		foreach( $objects as $object )
@@ -109,8 +109,8 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	public function __toString() : string
 	{
 		$objects = array(
-			$this, $this->cache, $this->config, $this->dbm, $this->fsm, $this->locale,
-			$this->logger, $this->mail, $this->mqueue, $this->process, $this->session, $this->view
+			$this, $this->cache, $this->config, $this->db, $this->fs, $this->locale,
+			$this->logger, $this->mail, $this->queue, $this->process, $this->session, $this->view
 		);
 
 		return md5( $this->hash( $objects ) );
@@ -205,7 +205,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $manager ) : \Aimeos\MShop\Context\Item\Iface
 	{
-		$this->dbm = $manager;
+		$this->db = $manager;
 
 		return $this;
 	}
@@ -218,11 +218,11 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function getDatabaseManager() : \Aimeos\MW\DB\Manager\Iface
 	{
-		if( !isset( $this->dbm ) ) {
+		if( !isset( $this->db ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Database manager object not available' ) );
 		}
 
-		return $this->dbm;
+		return $this->db;
 	}
 
 
@@ -250,7 +250,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $datetime ) );
 		}
 
-		$this->date = $datetime;
+		$this->datetime = $datetime;
 
 		return $this;
 	}
@@ -265,11 +265,11 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function getDateTime() : string
 	{
-		if( $this->date === null ) {
-			$this->date = date( 'Y-m-d H:i:00' );
+		if( $this->datetime === null ) {
+			$this->datetime = date( 'Y-m-d H:i:00' );
 		}
 
-		return $this->date;
+		return $this->datetime;
 	}
 
 
@@ -294,7 +294,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function setFilesystemManager( \Aimeos\MW\Filesystem\Manager\Iface $manager ) : \Aimeos\MShop\Context\Item\Iface
 	{
-		$this->fsm = $manager;
+		$this->fs = $manager;
 
 		return $this;
 	}
@@ -307,11 +307,11 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function getFilesystemManager() : \Aimeos\MW\Filesystem\Manager\Iface
 	{
-		if( !isset( $this->fsm ) ) {
+		if( !isset( $this->fs ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'File system manager object not available' ) );
 		}
 
-		return $this->fsm;
+		return $this->fs;
 	}
 
 
@@ -323,11 +323,11 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function getFilesystem( string $resource ) : \Aimeos\MW\Filesystem\Iface
 	{
-		if( !isset( $this->fsm ) ) {
+		if( !isset( $this->fs ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'File system manager object not available' ) );
 		}
 
-		return $this->fsm->get( $resource );
+		return $this->fs->get( $resource );
 	}
 
 
@@ -366,11 +366,11 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function getI18n( string $locale = null ) : \Aimeos\MW\Translation\Iface
 	{
-		if( $locale === null ) {
+		if( isset( $this->locale ) && $locale === null ) {
 			$locale = $this->getLocale()->getLanguageId();
 		}
 
-		if( $locale === null && reset( $this->i18n ) !== false ) {
+		if( isset( $this->locale ) && $locale === null && reset( $this->i18n ) !== false ) {
 			$locale = key( $this->i18n );
 		}
 
@@ -396,6 +396,30 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	public function i18n( string $locale = null ) : \Aimeos\MW\Translation\Iface
 	{
 		return $this->getI18n( $locale );
+	}
+
+
+	/**
+	 * Translates a string if possible
+	 *
+	 * @param string $name Name of the translation domain
+	 * @param string $singular Singular string to translate
+	 * @param string $plural Plural string to translate if count is not one
+	 * @param int $number Number for plural translations
+	 * @param string|null Locale (e.g. en, en_US, de, etc.) or NULL for current locale
+	 * @return string Translated string if possible
+	 */
+	public function translate( string $domain, string $singular, string $plural = null, int $number = 1, string $locale = null ) : string
+	{
+		if( empty( $this->i18n ) ) {
+			return $number === 1 ? $singular : $plural;
+		}
+
+		if( $plural ) {
+			return $this->i18n( $locale )->dn( $domain, $singular, $plural, $number );
+		}
+
+		return $this->i18n( $locale )->dt( $domain, $singular );
 	}
 
 
@@ -527,7 +551,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function setMessageQueueManager( \Aimeos\MW\MQueue\Manager\Iface $mqManager ) : \Aimeos\MShop\Context\Item\Iface
 	{
-		$this->mqueue = $mqManager;
+		$this->queue = $mqManager;
 
 		return $this;
 	}
@@ -540,11 +564,11 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function getMessageQueueManager() : \Aimeos\MW\MQueue\Manager\Iface
 	{
-		if( !isset( $this->mqueue ) ) {
+		if( !isset( $this->queue ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Message queue object not available' ) );
 		}
 
-		return $this->mqueue;
+		return $this->queue;
 	}
 
 
@@ -557,11 +581,11 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function getMessageQueue( string $resource, string $queue ) : \Aimeos\MW\MQueue\Queue\Iface
 	{
-		if( !isset( $this->mqueue ) ) {
+		if( !isset( $this->queue ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Message queue object not available' ) );
 		}
 
-		return $this->mqueue->get( $resource )->getQueue( $queue );
+		return $this->queue->get( $resource )->getQueue( $queue );
 	}
 
 

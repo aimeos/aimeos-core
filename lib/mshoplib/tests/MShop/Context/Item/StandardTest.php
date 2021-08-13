@@ -146,13 +146,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 
 		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
-		$locale->setLanguageId( 'en' );
-		$this->object->setLocale( $locale );
+		$this->object->setLocale( $locale->setLanguageId( 'en' ) );
 
-		$return = $this->object->setI18n( array( 'en' => $context->getI18n() ) );
+		$return = $this->object->setI18n( ['en' => $context->getI18n()] );
 
 		$this->assertSame( $context->getI18n(), $this->object->i18n() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
+	}
+
+	public function testTranslate()
+	{
+		$context = \TestHelperMShop::getContext();
+
+		$this->assertEquals( 'mr', $context->translate( 'mshop/code', 'mr' ) );
+		$this->assertEquals( 'two apples', $context->translate( 'mshop', 'one apple', 'two apples', 2 ) );
 	}
 
 	public function testSetLocale()
