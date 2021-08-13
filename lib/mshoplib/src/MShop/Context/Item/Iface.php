@@ -167,6 +167,18 @@ interface Iface
 	public function setI18n( array $translations ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
+	 * Translates a string if possible
+	 *
+	 * @param string $name Name of the translation domain
+	 * @param string $singular Singular string to translate
+	 * @param string $plural Plural string to translate if count is not one
+	 * @param int $number Number for plural translations
+	 * @param string|null Locale (e.g. en, en_US, de, etc.) or NULL for current locale
+	 * @return string Translated string if possible
+	 */
+	public function translate( string $domain, string $singular, string $plural = null, int $number = 1, string $locale = null ) : string;
+
+	/**
 	 * Returns the localization object.
 	 *
 	 * @return \Aimeos\MShop\Locale\Item\Iface Localization object
