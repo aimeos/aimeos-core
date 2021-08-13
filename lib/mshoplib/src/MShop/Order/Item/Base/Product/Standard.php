@@ -512,20 +512,11 @@ class Standard extends Base implements Iface
 	 *
 	 * The returned status values are the STAT_* constants from the \Aimeos\MShop\Order\Item\Base class
 	 *
-	 * @return int Delivery status of the product
+	 * @return int|null Delivery status of the product
 	 */
-	public function getStatusDelivery() : int
+	public function getStatusDelivery() : ?int
 	{
-		return $this->get( 'order.base.product.status', \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
-	}
-
-
-	/**
-	 * @deprecated 2022.01
-	 */
-	public function getStatus() : int
-	{
-		return $this->getStatusDelivery();
+		return $this->get( 'order.base.product.statusdelivery' );
 	}
 
 
@@ -534,12 +525,21 @@ class Standard extends Base implements Iface
 	 *
 	 * Possible status values are the STAT_* constants from the \Aimeos\MShop\Order\Item\Base class
 	 *
-	 * @param int $value New delivery status of the product
+	 * @param int|null $value New delivery status of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setStatusDelivery( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setStatusDelivery( ?int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.status', $value );
+		return $this->set( 'order.base.product.statusdelivery', $value );
+	}
+
+
+	/**
+	 * @deprecated 2022.01
+	 */
+	public function getStatus() : int
+	{
+		return $this->get( 'order.base.product.statusdelivery', \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
 	}
 
 
@@ -557,11 +557,11 @@ class Standard extends Base implements Iface
 	 *
 	 * The returned status values are the PAY_* constants from the \Aimeos\MShop\Order\Item\Base class
 	 *
-	 * @return int Payment status of the product
+	 * @return int|null Payment status of the product
 	 */
-	public function getStatusPayment() : int
+	public function getStatusPayment() : ?int
 	{
-		return $this->get( 'order.base.product.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
+		return $this->get( 'order.base.product.statuspayment' );
 	}
 
 
@@ -570,10 +570,10 @@ class Standard extends Base implements Iface
 	 *
 	 * Possible status values are the PAY_* constants from the \Aimeos\MShop\Order\Item\Base class
 	 *
-	 * @param int $value New payment status of the product
+	 * @param int|null $value New payment status of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setStatusPayment( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setStatusPayment( ?int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		return $this->set( 'order.base.product.statuspayment', $value );
 	}

@@ -130,8 +130,8 @@ return array(
 			$table->addColumn( 'taxflag', 'smallint', [] );
 			$table->addColumn( 'flags', 'integer', [] );
 			$table->addColumn( 'pos', 'integer', [] );
-			$table->addColumn( 'statuspayment', 'smallint', array( 'default' => -1 ) );
-			$table->addColumn( 'status', 'smallint', array( 'default' => -1 ) );
+			$table->addColumn( 'statuspayment', 'smallint', array( 'notnull' => false ) );
+			$table->addColumn( 'status', 'smallint', array( 'notnull' => false ) );
 			$table->addColumn( 'notes', 'string', array( 'length' => 255, 'default' => '' ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );

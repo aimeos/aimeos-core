@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.qtyopen' => 5,
 			'order.base.product.flags' => \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE,
 			'order.base.product.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED,
-			'order.base.product.status' => \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS,
+			'order.base.product.statusdelivery' => \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS,
 			'order.base.product.position' => 1,
 			'order.base.product.notes' => 'test note',
 			'order.base.product.mtime' => '2000-12-31 23:59:59',
@@ -550,18 +550,28 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetStatus()
+	public function testGetStatusDelivery()
 	{
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $this->object->getStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $this->object->getStatusDelivery() );
 	}
 
 
-	public function testSetStatus()
+	public function testSetStatusDelivery()
 	{
-		$return = $this->object->setStatus( \Aimeos\MShop\Order\Item\Base::STAT_LOST );
+		$return = $this->object->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_LOST );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_LOST, $this->object->getStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_LOST, $this->object->getStatusDelivery() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetStatusDeliveryNull()
+	{
+		$return = $this->object->setStatusDelivery( null );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( null, $this->object->getStatusDelivery() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -578,6 +588,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_PENDING, $this->object->getStatusPayment() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetStatusPaymentNull()
+	{
+		$return = $this->object->setStatusPayment( null );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( null, $this->object->getStatusPayment() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
