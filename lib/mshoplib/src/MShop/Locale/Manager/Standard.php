@@ -547,7 +547,7 @@ class Standard
 			return $this->createItemBase( ['locale.siteid' => $siteId], $siteItem, $sites );
 		}
 
-		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Locale item for site "%1$s" not found' );
+		$msg = $this->getContext()->translate( 'mshop', 'Locale item for site "%1$s" not found' );
 		throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, $site ) );
 	}
 
@@ -896,7 +896,7 @@ class Standard
 
 				if( $row === null )
 				{
-					$msg = $this->getContext()->i18n()->dt( 'mshop', 'Total results value not found' );
+					$msg = $this->getContext()->translate( 'mshop', 'Total results value not found' );
 					throw new \Aimeos\MShop\Locale\Exception( $msg );
 				}
 

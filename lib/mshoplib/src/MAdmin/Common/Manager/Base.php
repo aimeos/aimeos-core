@@ -97,7 +97,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 		if( empty( $domain ) || ctype_alnum( $domain ) === false )
 		{
-			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Invalid characters in domain name "%1$s"' );
+			$msg = $this->getContext()->translate( 'mshop', 'Invalid characters in domain name "%1$s"' );
 			throw new \Aimeos\MAdmin\Exception( sprintf( $msg, $domain ) );
 		}
 
@@ -107,7 +107,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 		if( empty( $name ) || ctype_alnum( $name ) === false )
 		{
-			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Invalid characters in manager name "%1$s"' );
+			$msg = $this->getContext()->translate( 'mshop', 'Invalid characters in manager name "%1$s"' );
 			throw new \Aimeos\MAdmin\Exception( sprintf( $msg, $name ) );
 		}
 
@@ -119,7 +119,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 		if( class_exists( $classname ) === false )
 		{
-			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Class "%1$s" not available' );
+			$msg = $this->getContext()->translate( 'mshop', 'Class "%1$s" not available' );
 			throw new \Aimeos\MAdmin\Exception( sprintf( $msg, $classname ) );
 		}
 

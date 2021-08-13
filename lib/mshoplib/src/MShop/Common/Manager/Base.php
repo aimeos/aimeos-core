@@ -52,7 +52,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 */
 	public function __call( string $name, array $param )
 	{
-		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Unable to call method "%1$s"' );
+		$msg = $this->getContext()->translate( 'mshop', 'Unable to call method "%1$s"' );
 		throw new \Aimeos\MShop\Exception( sprintf( $msg, $name ) );
 	}
 
@@ -258,7 +258,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 		if( !count( $keys ) )
 		{
-			$msg = $this->getContext()->i18n()->dt( 'mshop', 'At least one key is required for aggregation' );
+			$msg = $this->getContext()->translate( 'mshop', 'At least one key is required for aggregation' );
 			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
@@ -278,7 +278,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 			if( $value === null && ( $value = key( $attrList ) ) === null )
 			{
-				$msg = $this->getContext()->i18n()->dt( 'mshop', 'No search keys available' );
+				$msg = $this->getContext()->translate( 'mshop', 'No search keys available' );
 				throw new \Aimeos\MShop\Exception( $msg );
 			}
 
@@ -288,7 +288,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 			if( !isset( $attrList[$value] ) )
 			{
-				$msg = $this->getContext()->i18n()->dt( 'mshop', 'Unknown search key "%1$s"' );
+				$msg = $this->getContext()->translate( 'mshop', 'Unknown search key "%1$s"' );
 				throw new \Aimeos\MShop\Exception( $msg );
 			}
 
@@ -296,7 +296,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			{
 				if( !isset( $attrList[$string] ) )
 				{
-					$msg = $this->getContext()->i18n()->dt( 'mshop', 'Unknown search key "%1$s"' );
+					$msg = $this->getContext()->translate( 'mshop', 'Unknown search key "%1$s"' );
 					throw new \Aimeos\MShop\Exception( $msg );
 				}
 
@@ -357,7 +357,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 		if( ( $row = $result->fetch( \Aimeos\MW\DB\Result\Base::FETCH_NUM ) ) === false )
 		{
-			$msg = $this->getContext()->i18n()->dt( 'mshop', 'ID of last inserted database record not available' );
+			$msg = $this->getContext()->translate( 'mshop', 'ID of last inserted database record not available' );
 			throw new \Aimeos\MShop\Exception( $msg );
 		}
 		$result->finish();
@@ -561,7 +561,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		{
 			if( $value === null )
 			{
-				$msg = $this->getContext()->i18n()->dt( 'mshop', 'Required value for "%1$s" is missing' );
+				$msg = $this->getContext()->translate( 'mshop', 'Required value for "%1$s" is missing' );
 				throw new \Aimeos\MShop\Exception( $msg );
 			}
 			$expr[] = $criteria->compare( '==', $key, $value );
@@ -573,7 +573,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			return $item;
 		}
 
-		$msg = $this->getContext()->i18n()->dt( 'mshop', 'No item found for conditions: %1$s' );
+		$msg = $this->getContext()->translate( 'mshop', 'No item found for conditions: %1$s' );
 		throw new \Aimeos\MShop\Exception( sprintf( $msg, print_r( $pairs, true ) ) );
 	}
 
@@ -629,7 +629,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			return $item;
 		}
 
-		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Item with ID "%2$s" in "%1$s" not found' );
+		$msg = $this->getContext()->translate( 'mshop', 'Item with ID "%2$s" in "%1$s" not found' );
 		throw new \Aimeos\MShop\Exception( sprintf( $msg, $key, $id ) );
 	}
 
@@ -924,7 +924,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 			if( $row === null )
 			{
-				$msg = $this->getContext()->i18n()->dt( 'mshop', 'Total results value not found' );
+				$msg = $this->getContext()->translate( 'mshop', 'Total results value not found' );
 				throw new \Aimeos\MShop\Exception( $msg );
 			}
 

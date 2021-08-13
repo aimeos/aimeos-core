@@ -838,13 +838,13 @@ class PayPalExpress
 
 			if( ( $response = curl_exec( $curl ) ) === false )
 			{
-				$msg = $this->getContext()->i18n()->dt( 'mshop', 'Sending order failed: "%1$s"' );
+				$msg = $this->getContext()->translate( 'mshop', 'Sending order failed: "%1$s"' );
 				throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, curl_error( $curl ) ) );
 			}
 
 			if( curl_errno( $curl ) )
 			{
-				$msg = $this->getContext()->i18n()->dt( 'mshop', 'Curl error: "%1$s" - "%2$s"' );
+				$msg = $this->getContext()->translate( 'mshop', 'Curl error: "%1$s" - "%2$s"' );
 				throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, curl_errno( $curl ), curl_error( $curl ) ) );
 			}
 

@@ -250,7 +250,7 @@ class Standard
 	{
 		if( $item->getId() === null )
 		{
-			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Newly created item can not be saved using method "save()", use "insert()" instead' );
+			$msg = $this->getContext()->translate( 'mshop', 'Newly created item can not be saved using method "save()", use "insert()" instead' );
 			throw new \Aimeos\MShop\Locale\Exception( $msg );
 		}
 
@@ -813,7 +813,7 @@ class Standard
 
 		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) === null )
 		{
-			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Tree root with code "%1$s" in "%2$s" not found' );
+			$msg = $this->getContext()->translate( 'mshop', 'Tree root with code "%1$s" in "%2$s" not found' );
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, 'default', 'locale.site.code' ) );
 		}
 
@@ -966,7 +966,7 @@ class Standard
 	public function move( string $id, string $oldParentId = null, string $newParentId = null,
 		string $refId = null ) : \Aimeos\MShop\Locale\Manager\Site\Iface
 	{
-		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Method "%1$s" for locale site manager not available' );
+		$msg = $this->getContext()->translate( 'mshop', 'Method "%1$s" for locale site manager not available' );
 		throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, 'move()' ) );
 	}
 

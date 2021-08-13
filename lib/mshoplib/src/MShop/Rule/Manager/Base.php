@@ -74,19 +74,19 @@ abstract class Base
 
 		if( ctype_alnum( $type ) === false )
 		{
-			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Invalid characters in type name "%1$s"' );
+			$msg = $this->getContext()->translate( 'mshop', 'Invalid characters in type name "%1$s"' );
 			throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $type ) );
 		}
 
 		if( ( $provider = array_shift( $names ) ) === null )
 		{
-			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Provider in "%1$s" not available' );
+			$msg = $this->getContext()->translate( 'mshop', 'Provider in "%1$s" not available' );
 			throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $item->getProvider() ) );
 		}
 
 		if( ctype_alnum( $provider ) === false )
 		{
-			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Invalid characters in provider name "%1$s"' );
+			$msg = $this->getContext()->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
 			throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $provider ) );
 		}
 
@@ -94,7 +94,7 @@ abstract class Base
 
 		if( class_exists( $classname ) === false )
 		{
-			$msg = $this->getContext()->i18n()->dt( 'mshop', 'Class "%1$s" not available' );
+			$msg = $this->getContext()->translate( 'mshop', 'Class "%1$s" not available' );
 			throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $classname ) );
 		}
 
@@ -125,7 +125,7 @@ abstract class Base
 		{
 			if( ctype_alnum( $name ) === false )
 			{
-				$msg = $this->getContext()->i18n()->dt( 'mshop', 'Invalid characters in class name "%1$s"' );
+				$msg = $this->getContext()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
 				throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $name ) );
 			}
 
@@ -133,7 +133,7 @@ abstract class Base
 
 			if( class_exists( $classname ) === false )
 			{
-				$msg = $this->getContext()->i18n()->dt( 'mshop', 'Class "%1$s" not available' );
+				$msg = $this->getContext()->translate( 'mshop', 'Class "%1$s" not available' );
 				throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $classname ) );
 			}
 

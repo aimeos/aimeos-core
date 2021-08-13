@@ -48,7 +48,7 @@ abstract class Base implements Iface
 	 */
 	public function __call( string $name, array $param )
 	{
-		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Unable to call method "%1$s"' );
+		$msg = $this->getContext()->translate( 'mshop', 'Unable to call method "%1$s"' );
 		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $name ) );
 	}
 
@@ -187,7 +187,7 @@ abstract class Base implements Iface
 	 */
 	public function query( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Method "%1$s" for provider not available' );
+		$msg = $this->getContext()->translate( 'mshop', 'Method "%1$s" for provider not available' );
 		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'query' ) );
 	}
 
@@ -374,7 +374,7 @@ abstract class Base implements Iface
 			}
 		}
 
-		$msg = $this->getContext()->i18n()->dt( 'mshop', 'Service not available' );
+		$msg = $this->getContext()->translate( 'mshop', 'Service not available' );
 		throw new \Aimeos\MShop\Service\Exception( $msg );
 	}
 
@@ -413,7 +413,7 @@ abstract class Base implements Iface
 
 		if( ( $item = $manager->search( $search )->first() ) === null )
 		{
-			$msg = $this->getContext()->i18n()->dt( 'mshop', 'No order for ID "%1$s" found' );
+			$msg = $this->getContext()->translate( 'mshop', 'No order for ID "%1$s" found' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $id ) );
 		}
 

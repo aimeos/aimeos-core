@@ -984,7 +984,7 @@ class Standard extends Base
 
 			if( ( $row = $results->fetch() ) === null )
 			{
-				$msg = $this->getContext()->i18n()->dt( 'mshop', 'Order base item with order ID "%1$s" not found' );
+				$msg = $this->getContext()->translate( 'mshop', 'Order base item with order ID "%1$s" not found' );
 				throw new \Aimeos\MShop\Order\Exception( sprintf( $msg, $id ) );
 			}
 			$results->finish();

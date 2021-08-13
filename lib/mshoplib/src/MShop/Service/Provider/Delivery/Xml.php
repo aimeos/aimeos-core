@@ -243,7 +243,7 @@ class Xml
 
 		if( $xml->open( $filename, LIBXML_COMPACT | LIBXML_PARSEHUGE ) === false )
 		{
-			$msg = $this->getContext()->i18n()->dt( 'mshop', 'No XML file "%1$s" found' );
+			$msg = $this->getContext()->translate( 'mshop', 'No XML file "%1$s" found' );
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( $msg, $filename ) );
 		}
 
