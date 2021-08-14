@@ -406,7 +406,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param string $singular Singular string to translate
 	 * @param string $plural Plural string to translate if count is not one
 	 * @param int $number Number for plural translations
-	 * @param string|null Locale (e.g. en, en_US, de, etc.) or NULL for current locale
+	 * @param string|null $locale Locale (e.g. en, en_US, de, etc.) or NULL for current locale
 	 * @return string Translated string if possible
 	 */
 	public function translate( string $domain, string $singular, string $plural = null, int $number = 1, string $locale = null ) : string
