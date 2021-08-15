@@ -22,7 +22,7 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 */
 	public function getPreDependencies() : array
 	{
-		return ['DemoAddProductData'];
+		return ['MShopAddCatalogDataDefault', 'DemoAddProductData'];
 	}
 
 
@@ -82,12 +82,9 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for catalog domain', $path ) );
 			}
 
-			if( $item === null )
-			{
-				$item = $manager->create()->fromArray( $data );
-				$item = $manager->insert( $item );
+			if( $item === null ) {
+				$item = $manager->insert( $manager->create()->fromArray( $data ) );
 			}
-
 
 			if( isset( $data['media'] ) ) {
 				$this->addMedia( $item->getId(), $data['media'], 'catalog' );

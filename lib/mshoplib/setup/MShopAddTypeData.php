@@ -43,8 +43,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
 		$sitecode = $this->additional->getLocale()->getSiteItem()->getCode();
-		$this->msg( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 0 );
-		$this->status( '' );
+		$this->msg( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 0, '' );
 
 		if( !$filename )
 		{
