@@ -539,7 +539,8 @@ class Standard extends Base implements Iface
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'order.base.product.statusdelivery', \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
+		$result = $this->get( 'order.base.product.statusdelivery' );
+		return $result !== null ? $result : \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED;
 	}
 
 

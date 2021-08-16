@@ -550,6 +550,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetStatus()
+	{
+		$this->object->setStatusDelivery( null );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED, $this->object->getStatus() );
+	}
+
+
 	public function testGetStatusDelivery()
 	{
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $this->object->getStatusDelivery() );
