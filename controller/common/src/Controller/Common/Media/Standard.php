@@ -277,8 +277,9 @@ class Standard
 		 * box.
 		 *
 		 * If "force-size" is true, scaled images that doesn't fit into the
-		 * given maximum width/height are centered and then cropped. By default,
-		 * images aren't cropped.
+		 * given maximum width/height are resized and then centered in a new image
+		 * with the maximum width/height. By default, images aren't extended if
+		 * the width/height is smaller than the maximum one.
 		 *
 		 * The values for "maxwidth" and "maxheight" can also be null or not
 		 * used. In that case, the width or height or both is unbound. If none
