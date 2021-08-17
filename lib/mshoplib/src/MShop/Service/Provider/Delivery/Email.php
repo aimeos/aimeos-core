@@ -120,14 +120,8 @@ class Email
 	 */
 	public function processBatch( iterable $orders ) : \Aimeos\Map
 	{
-		$baseItems = $this->getOrderBaseItems( $orders );
-		$this->send( $orders, $baseItems );
-
-		foreach( $orders as $key => $order ) {
-			$orders[$key] = $order->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
-		}
-
-		return map( $orders );
+		$this->send( $orders, $this->getOrderBaseItems( $orders ) );
+		return map( $orders )->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
 	}
 
 
