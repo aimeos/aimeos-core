@@ -278,6 +278,21 @@ interface Iface
 	public function setMessageQueueManager( \Aimeos\MW\MQueue\Manager\Iface $mqManager ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
+	 * Returns the nonce value for inline Javascript
+	 *
+	 * @return string|null Nonce value
+	 */
+	public function nonce() : ?string;
+
+	/**
+	 * Sets the nonce value for inline Javascript
+	 *
+	 * @param string|null $value Nonce value
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
+	 */
+	public function setNonce( ?string $value ) : \Aimeos\MShop\Context\Item\Iface;
+
+	/**
 	 * Returns the process object.
 	 *
 	 * @return \Aimeos\MW\Process\Iface Process object
