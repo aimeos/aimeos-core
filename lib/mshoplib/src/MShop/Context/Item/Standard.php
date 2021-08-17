@@ -29,6 +29,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	private $logger;
 	private $mail;
 	private $mqueue;
+	private $nonce;
 	private $process;
 	private $session;
 	private $view;
@@ -575,6 +576,30 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	public function queue( string $resource, string $queue ) : \Aimeos\MW\MQueue\Queue\Iface
 	{
 		return $this->getMessageQueue( $resource, $queue );
+	}
+
+
+	/**
+	 * Returns the nonce value for inline Javascript
+	 *
+	 * @return string|null Nonce value
+	 */
+	public function nonce() : ?string
+	{
+		return $this->nonce;
+	}
+
+
+	/**
+	 * Sets the nonce value for inline Javascript
+	 *
+	 * @param string $value Nonce value
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
+	 */
+	public function setNonce( ?string $value ) : \Aimeos\MShop\Context\Item\Iface
+	{
+		$this->nonce = $value;
+		return $this;
 	}
 
 
