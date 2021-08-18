@@ -452,10 +452,8 @@ abstract class Base
 
 		if( $date != null )
 		{
-			if( preg_match( $regex, (string) $date ) !== 1 )
-			{
-				$msg = sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date );
-				throw new \Aimeos\MShop\Exception( $msg );
+			if( preg_match( $regex, (string) $date ) !== 1 ) {
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date, ISO format "YYYY-MM-DD hh:mm:ss" expected' ) );
 			}
 
 			if( strlen( $date ) === 16 ) {
@@ -479,7 +477,7 @@ abstract class Base
 		if( $date !== null && $date !== '' )
 		{
 			if( preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/', (string) $date ) !== 1 ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD" expected.', $date ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date, ISO format "YYYY-MM-DD" expected' ) );
 			}
 
 			return (string) $date;
@@ -499,10 +497,8 @@ abstract class Base
 	 */
 	protected function checkCode( string $code, int $length = 64 ) : string
 	{
-		if( strlen( $code ) > $length )
-		{
-			$msg = sprintf( 'Code "%1$s" must not be longer than %2$d characters', $code, $length );
-			throw new \Aimeos\MShop\Exception( $msg );
+		if( strlen( $code ) > $length ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Code is too long' ) );
 		}
 
 		return (string) $code;
@@ -520,13 +516,13 @@ abstract class Base
 	protected function checkCountryId( ?string $countryid, bool $null = true ) : ?string
 	{
 		if( $null === false && $countryid == null ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO country code "%1$s"', '<null>' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO country code' ) );
 		}
 
 		if( $countryid != null )
 		{
 			if( preg_match( '/^[A-Za-z]{2}$/', $countryid ) !== 1 ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO country code "%1$s"', $countryid ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO country code' ) );
 			}
 
 			return strtoupper( $countryid );
@@ -547,13 +543,13 @@ abstract class Base
 	protected function checkCurrencyId( ?string $currencyid, bool $null = true ) : ?string
 	{
 		if( $null === false && $currencyid == null ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code "%1$s"', '<null>' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code' ) );
 		}
 
 		if( $currencyid != null )
 		{
 			if( preg_match( '/^[A-Z]{3}$/', $currencyid ) !== 1 ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code "%1$s"', $currencyid ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code' ) );
 			}
 
 			return strtoupper( $currencyid );
@@ -574,13 +570,13 @@ abstract class Base
 	protected function checkLanguageId( ?string $langid, bool $null = true ) : ?string
 	{
 		if( $null === false && $langid == null ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO language code "%1$s"', '<null>' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO language code' ) );
 		}
 
 		if( $langid != null )
 		{
 			if( preg_match( '/^[a-zA-Z]{2}(_[a-zA-Z]{2})?$/', $langid ) !== 1 ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO language code "%1$s"', $langid ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO language code' ) );
 			}
 
 			$parts = explode( '_', $langid );
