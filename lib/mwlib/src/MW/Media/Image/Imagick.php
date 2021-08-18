@@ -157,10 +157,10 @@ class Imagick
 	 *
 	 * @param int|null $width New width of the image or null for automatic calculation
 	 * @param int|null $height New height of the image or null for automatic calculation
-	 * @param int|null $fit 0 keeps image ratio, 1 enforces target size with scaling, 2 with cropping
+	 * @param int $fit 0 keeps image ratio, 1 enforces target size with scaling, 2 with cropping
 	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
 	 */
-	public function scale( int $width = null, int $height = null, int $fit = null ) : \Aimeos\MW\Media\Image\Iface
+	public function scale( int $width = null, int $height = null, int $fit = 0 ) : \Aimeos\MW\Media\Image\Iface
 	{
 		try
 		{
