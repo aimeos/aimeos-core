@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-06 09:42+0200\n"
-"PO-Revision-Date: 2021-07-12 21:18+0000\n"
-"Last-Translator: Metal <meteoramic@yahoo.com>\n"
+"POT-Creation-Date: 2021-08-18 13:26+0200\n"
+"PO-Revision-Date: 2021-08-18 11:33+0000\n"
+"Last-Translator: Aimeos\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -153,6 +153,10 @@ msgid "Code \"%1$s\" must not be longer than 32 characters"
 msgstr "Kod \"%1$s\" 32 karakterden daha uzun olmamalı"
 
 #, php-format
+msgid "Code is too long"
+msgstr ""
+
+#, php-format
 msgid "Code must not be longer than 255 characters"
 msgstr "Kod 255 karakterden daha uzun olmamalıdır"
 
@@ -249,12 +253,24 @@ msgid "Internationalization object not available for \"%1$s\""
 msgstr "\"%1$s\" için uluslararasılaştırma nesnesi mevcut değil"
 
 #, php-format
+msgid "Invalid ISO country code"
+msgstr ""
+
+#, php-format
 msgid "Invalid ISO country code \"%1$s\""
 msgstr "Geçersiz ISO ülke kodu \"%1$s\""
 
 #, php-format
+msgid "Invalid ISO currency code"
+msgstr ""
+
+#, php-format
 msgid "Invalid ISO currency code \"%1$s\""
 msgstr "Geçersiz ISO para birimi kodu \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO language code"
+msgstr ""
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
@@ -285,6 +301,14 @@ msgstr "\"%1$s\" tarihinde geçersiz karakterler mevcut. ISO formatı \"YYYY-MM-
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 msgstr "\"%1$s\" tarihinde geçersiz karakterler. ISO formatı \"YYYY-MM-DD\" gerekli."
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
@@ -719,8 +743,16 @@ msgid "Quantity must be 0 or greater and must not exceed %1$d"
 msgstr "Miktar 0 veya daha büyük olmalı ve %1$d adeti geçmemelidir"
 
 #, php-format
+msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
+msgstr ""
+
+#, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
 msgstr "Miktar 0'dan büyük olmalıdır ve %1$d sayısını geçmemelidir"
+
+#, php-format
+msgid "Quantity must be greater than 0 and must not exceed 2147483647"
+msgstr ""
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"

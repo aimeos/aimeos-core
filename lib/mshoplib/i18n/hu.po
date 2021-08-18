@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Nóra Antal <nora1984antal@gmail.com>, 2016
+# Patrik Szakos <szakos0208@gmail.com>, 2021
 # Péter Kozma <kopegrafika@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-06 09:42+0200\n"
-"PO-Revision-Date: 2021-07-06 07:44+0000\n"
+"POT-Creation-Date: 2021-08-18 13:26+0200\n"
+"PO-Revision-Date: 2021-08-18 11:33+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -79,11 +80,11 @@ msgstr ""
 
 #, php-format
 msgid "Address item for removal not found"
-msgstr ""
+msgstr "Az eltávolítandó címelem nem található"
 
 #, php-format
 msgid "Address not available"
-msgstr ""
+msgstr "Nem elérhető a cím"
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
@@ -111,7 +112,7 @@ msgstr ""
 
 #, php-format
 msgid "Cache object not available"
-msgstr ""
+msgstr "A gyorsítótár objektum nem érhető el"
 
 #, php-format
 msgid "Called unknown method \"%1$s\" on class \"%2$s\""
@@ -127,11 +128,11 @@ msgstr ""
 
 #, php-format
 msgid "Checks for available addresses in basket failed"
-msgstr ""
+msgstr "A kosárban elérhető címek ellenőrzése sikertelen"
 
 #, php-format
 msgid "Checks for available service items in basket failed"
-msgstr ""
+msgstr "A kosárban elérhető szolgáltatási cikkek ellenőrzése sikertelen"
 
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
@@ -151,6 +152,10 @@ msgstr ""
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than 32 characters"
+msgstr ""
+
+#, php-format
+msgid "Code is too long"
 msgstr ""
 
 #, php-format
@@ -175,7 +180,7 @@ msgstr "Beállítás nem elérhető"
 
 #, php-format
 msgid "Configuration object not available"
-msgstr ""
+msgstr "A konfigurációs objektum nem érhető el"
 
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
@@ -186,11 +191,11 @@ msgid "Coupon in basket is not available any more"
 msgstr "A kosárban lévő kupon többé nem elérhető"
 
 msgid "Coupon is not available any more"
-msgstr ""
+msgstr "Ez a kupon már nem elérhető"
 
 #, php-format
 msgid "Curl could not be initialized"
-msgstr ""
+msgstr "Sikertelen curl inicializálás"
 
 #, php-format
 msgid "Curl error: \"%1$s\" - \"%2$s\""
@@ -198,7 +203,7 @@ msgstr ""
 
 #, php-format
 msgid "Database manager object not available"
-msgstr ""
+msgstr "Az adatbázis kezelő objektum nem érhető el"
 
 #, php-format
 msgid "Date value before \"%1$s\""
@@ -206,7 +211,7 @@ msgstr ""
 
 #, php-format
 msgid "Duplicate coupon code"
-msgstr ""
+msgstr "Ismétlődő kuponkód"
 
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
@@ -222,7 +227,7 @@ msgstr ""
 
 #, php-format
 msgid "File system manager object not available"
-msgstr ""
+msgstr "A fájlrendszer kezelő objektum nem érhető el"
 
 #, php-format
 msgid "Finished order status import from \"%1$s\""
@@ -238,11 +243,11 @@ msgstr ""
 
 #, php-format
 msgid "Flags not within allowed range"
-msgstr ""
+msgstr "A jelzések nem megengedett területen vannak"
 
 #, php-format
 msgid "ID of last inserted database record not available"
-msgstr ""
+msgstr "Az utoljára beszúrt adatbázis rekord azonosítója nem érhető el"
 
 #. / Locale ID %1$s
 #, php-format
@@ -250,12 +255,24 @@ msgid "Internationalization object not available for \"%1$s\""
 msgstr ""
 
 #, php-format
+msgid "Invalid ISO country code"
+msgstr ""
+
+#, php-format
 msgid "Invalid ISO country code \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid ISO currency code"
 msgstr ""
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
 msgstr "Érvénytelen ISO valutanem jelzés:  \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO language code"
+msgstr ""
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
@@ -285,6 +302,14 @@ msgstr ""
 
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
 msgstr ""
 
 #, php-format
@@ -324,7 +349,7 @@ msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
 msgstr ""
 
 msgid "Invalid delivery type"
-msgstr ""
+msgstr "Érvénytelen szállítási típus"
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
@@ -356,11 +381,11 @@ msgstr "Érvénytelen honlap URL: \"%1$s\""
 
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
-msgstr ""
+msgstr "Az elem nem törölhető. Az elem webhelyazonosítója eltér a jelenlegi webhelyazonosítótól."
 
 #, php-format
 msgid "Item could not be saved using method save(). Item ID not available."
-msgstr ""
+msgstr "Az elem nem menthető a save () metódussal. Az elem azonosítója nem áll rendelkezésre."
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
@@ -408,7 +433,7 @@ msgstr ""
 
 #, php-format
 msgid "Locale object not available"
-msgstr ""
+msgstr "A területi beállítási objektum nem érhető el"
 
 #, php-format
 msgid "Lock flag \"%1$d\" not within allowed range"
@@ -420,11 +445,11 @@ msgstr ""
 
 #, php-format
 msgid "Log manager object not available"
-msgstr ""
+msgstr "A naplókezelő objektum nem érhető el"
 
 #, php-format
 msgid "Mail object not available"
-msgstr ""
+msgstr "A levelezési objektum nem érhető el"
 
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
@@ -432,11 +457,11 @@ msgstr ""
 
 #, php-format
 msgid "Manager path is empty"
-msgstr ""
+msgstr "A kezelői útvonal üres"
 
 #, php-format
 msgid "Message queue object not available"
-msgstr ""
+msgstr "Az üzenetsor objektum nem érhető el"
 
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
@@ -502,7 +527,7 @@ msgstr ""
 
 #, php-format
 msgid "No search keys available"
-msgstr ""
+msgstr "Nincsenek keresési kulcsok"
 
 #, php-format
 msgid "No stock type for code \"%1$s\" found"
@@ -522,15 +547,15 @@ msgstr "Nem dátum"
 
 #, php-format
 msgid "Not a date and time"
-msgstr ""
+msgstr "Nincs megadva dátum és idő"
 
 #, php-format
 msgid "Not a key/value map"
-msgstr ""
+msgstr "Nem kulcs/érték elérés"
 
 #, php-format
 msgid "Not a list item"
-msgstr ""
+msgstr "Nem listaelem"
 
 #, php-format
 msgid "Not a listed value"
@@ -546,7 +571,7 @@ msgstr "Nem karakterlánc"
 
 #, php-format
 msgid "Not a time"
-msgstr ""
+msgstr "Nem időpont"
 
 #, php-format
 msgid "Not a true/false value"
@@ -562,7 +587,7 @@ msgstr ""
 
 #, php-format
 msgid "Operation not supported"
-msgstr ""
+msgstr "Nem támogatott művelet"
 
 #, php-format
 msgid ""
@@ -663,15 +688,15 @@ msgstr ""
 
 #, php-format
 msgid "Price item not available"
-msgstr ""
+msgstr "Az ár nem elérhető"
 
 #, php-format
 msgid "Process object not available"
-msgstr ""
+msgstr "A folyamatobjektum nem érhető el"
 
 #, php-format
 msgid "Product  not available"
-msgstr ""
+msgstr "A termék nem áll rendelkezésre"
 
 #, php-format
 msgid ""
@@ -689,7 +714,7 @@ msgstr ""
 
 #, php-format
 msgid "Product not available"
-msgstr ""
+msgstr "A termék nem áll rendelkezésre"
 
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
@@ -697,7 +722,7 @@ msgstr ""
 
 #, php-format
 msgid "Products in basket not available"
-msgstr ""
+msgstr "A kosárban lévő termékek nem állnak rendelkezésre"
 
 #, php-format
 msgid "Products out of stock"
@@ -705,7 +730,7 @@ msgstr "A termékek elfogytak"
 
 #, php-format
 msgid "Property item for removal not found"
-msgstr ""
+msgstr "Az eltávolítandó elem nem található"
 
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"
@@ -720,7 +745,15 @@ msgid "Quantity must be 0 or greater and must not exceed %1$d"
 msgstr ""
 
 #, php-format
+msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
+msgstr ""
+
+#, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
+msgstr ""
+
+#, php-format
+msgid "Quantity must be greater than 0 and must not exceed 2147483647"
 msgstr ""
 
 #, php-format
@@ -753,7 +786,7 @@ msgstr ""
 
 #, php-format
 msgid "Service not available"
-msgstr ""
+msgstr "A szolgáltatás nem elérhető"
 
 #, php-format
 msgid "Service of type \"%1$s\" not available"
@@ -761,7 +794,7 @@ msgstr ""
 
 #, php-format
 msgid "Session object not available"
-msgstr ""
+msgstr "A munkamenet objektum nem elérhető"
 
 #, php-format
 msgid ""
@@ -875,4 +908,4 @@ msgstr ""
 
 #, php-format
 msgid "View object not available"
-msgstr ""
+msgstr "Az objektum megtekintése nem elérhető"

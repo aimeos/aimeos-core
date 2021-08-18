@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-06 09:37+0200\n"
+"POT-Creation-Date: 2021-08-18 13:26+0200\n"
 "PO-Revision-Date: 2020-12-02 14:52+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/aimeos/aimeos-core/language/zh_CN/)\n"
@@ -147,6 +147,10 @@ msgid "Code \"%1$s\" must not be longer than 32 characters"
 msgstr ""
 
 #, php-format
+msgid "Code is too long"
+msgstr ""
+
+#, php-format
 msgid "Code must not be longer than 255 characters"
 msgstr ""
 
@@ -242,13 +246,25 @@ msgstr ""
 msgid "Internationalization object not available for \"%1$s\""
 msgstr ""
 
+#, fuzzy, php-format
+msgid "Invalid ISO country code"
+msgstr "无效的ISO货币编码 \"%1$s\""
+
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
 msgstr ""
 
+#, fuzzy, php-format
+msgid "Invalid ISO currency code"
+msgstr "无效的ISO货币编码 \"%1$s\""
+
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
 msgstr "无效的ISO货币编码 \"%1$s\""
+
+#, fuzzy, php-format
+msgid "Invalid ISO language code"
+msgstr "无效的ISO语言编码 \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
@@ -276,6 +292,14 @@ msgstr ""
 
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
 msgstr ""
 
 #, php-format
@@ -697,7 +721,19 @@ msgid "Provider in \"%1$s\" not available"
 msgstr ""
 
 #, php-format
+msgid "Quantity must be 0 or greater and must not exceed %1$d"
+msgstr ""
+
+#, php-format
+msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
+msgstr ""
+
+#, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
+msgstr ""
+
+#, php-format
+msgid "Quantity must be greater than 0 and must not exceed 2147483647"
 msgstr ""
 
 #, php-format
