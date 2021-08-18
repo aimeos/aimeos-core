@@ -181,19 +181,19 @@ class Standard
 	 *
 	 * @param int|null $width New width of the image or null for automatic calculation
 	 * @param int|null $height New height of the image or null for automatic calculation
-	 * @param bool $fit True to keep the width/height ratio of the image
-	 * @return \Aimeos\MW\Media\Iface Self object for method chaining
+	 * @param int|null $fit 0 keeps image ratio, 1 enforces target size with scaling
+	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
 	 */
-	public function scale( int $width = null, int $height = null, bool $fit = true ) : Iface
+	public function scale( int $width = null, int $height = null, int $fit = null ) : Iface
 	{
 		$w = imagesx( $this->image );
 		$h = imagesy( $this->image );
-		$fit = (bool) $fit;
+		$fit = (int) $fit;
 
 		$newWidth = $width;
 		$newHeight = $height;
 
-		if( $fit === true )
+		if( !$fit )
 		{
 			list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
 
@@ -208,7 +208,7 @@ class Standard
 			$newWidth = (int) $w * $ratio;
 		}
 
-		return $this->resize( $newWidth, $newHeight, $width, $height, $fit );
+		return $this->resize( $newWidth, $newHeight, $width, $height, (bool) $fit );
 	}
 
 
