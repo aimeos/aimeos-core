@@ -208,7 +208,7 @@ class Standard
 			$newWidth = (int) $w * $ratio;
 		}
 
-		return $this->resize( $newWidth, $newHeight, $width, $height, (bool) $fit );
+		return $this->resize( $newWidth, $newHeight, $width, $height, (bool) !$fit );
 	}
 
 

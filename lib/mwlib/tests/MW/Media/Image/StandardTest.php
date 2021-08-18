@@ -219,7 +219,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png' );
 
 		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/png', [] );
-		$info = getimagesizefromstring( $media->scale( 100, 100, true )->save( null, 'image/png' ) );
+		$info = getimagesizefromstring( $media->scale( 100, 100, 1 )->save( null, 'image/png' ) );
 
 		$this->assertEquals( 100, $info[0] );
 		$this->assertEquals( 100, $info[1] );
