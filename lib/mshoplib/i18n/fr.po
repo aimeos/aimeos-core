@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-06 09:42+0200\n"
-"PO-Revision-Date: 2021-07-06 07:44+0000\n"
+"POT-Creation-Date: 2021-08-18 13:26+0200\n"
+"PO-Revision-Date: 2021-08-18 11:33+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -157,6 +157,10 @@ msgid "Code \"%1$s\" must not be longer than 32 characters"
 msgstr "Le code \"%1$s\" ne doit pas dépasser 32 caractères"
 
 #, php-format
+msgid "Code is too long"
+msgstr ""
+
+#, php-format
 msgid "Code must not be longer than 255 characters"
 msgstr "Le code ne doit pas dépasser 255 caractères"
 
@@ -253,12 +257,24 @@ msgid "Internationalization object not available for \"%1$s\""
 msgstr "Objet d'internationalisation indisponible pour \"%1$s\""
 
 #, php-format
+msgid "Invalid ISO country code"
+msgstr ""
+
+#, php-format
 msgid "Invalid ISO country code \"%1$s\""
 msgstr "Code \"1%1$s\" de devise ISO invalide"
 
 #, php-format
+msgid "Invalid ISO currency code"
+msgstr ""
+
+#, php-format
 msgid "Invalid ISO currency code \"%1$s\""
 msgstr "Caractères invalides dans le code de devise ISO \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO language code"
+msgstr ""
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
@@ -289,6 +305,14 @@ msgstr "Caractères invalides dans la date \"%1$s\". Le format ISO \"AAAA-MM-JJ 
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 msgstr "Caractères invalides dans la date \"%1$s\". Format ISO \"AAAA-MM-JJ\" attendu."
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
@@ -723,8 +747,16 @@ msgid "Quantity must be 0 or greater and must not exceed %1$d"
 msgstr ""
 
 #, php-format
+msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
+msgstr ""
+
+#, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
 msgstr "La quantité doit être supérieure à 0 et ne doit pas dépasser %1$d"
+
+#, php-format
+msgid "Quantity must be greater than 0 and must not exceed 2147483647"
+msgstr ""
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
