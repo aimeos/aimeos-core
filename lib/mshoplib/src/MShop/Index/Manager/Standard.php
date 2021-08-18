@@ -278,38 +278,13 @@ class Standard
 		$domains = $config->get( 'mshop/index/manager/domains', [] );
 
 		$manager = \Aimeos\MShop::create( $context, 'product' );
-		$search = $manager->filter();
-		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
-
-		$catalogListManager = \Aimeos\MShop::create( $context, 'catalog/lists' );
-		$catalogSearch = $catalogListManager->filter( true );
-
-		$expr = array(
-			$catalogSearch->compare( '==', 'catalog.lists.domain', 'product' ),
-			$catalogSearch->getConditions(),
-		);
+		$search = $manager->filter()->order( 'product.id' );
 
 		if( !( $prodIds = map( $items )->getId() )->isEmpty() ) { // don't rely on array keys
-			$expr[] = $catalogSearch->compare( '==', 'catalog.lists.refid', $prodIds->toArray() );
+			$search->add( 'product.id', '==', $prodIds->toArray() );
 		}
 
-		$catalogSearch->setConditions( $catalogSearch->and( $expr ) );
-		$catalogSearch->setSortations( array( $catalogSearch->sort( '+', 'catalog.lists.refid' ) ) );
-
-		$start = 0;
-
-		do
-		{
-			$catalogSearch->slice( $start, $size );
-			$result = $catalogListManager->aggregate( $catalogSearch, 'catalog.lists.refid' );
-
-			$search->setConditions( $search->compare( '==', 'product.id', $result->keys()->toArray() ) );
-			$this->writeIndex( $search, $domains, $size );
-
-			$start += count( $result );
-		}
-		while( !$result->isEmpty() );
-
+		$this->writeIndex( $search, $domains, $size );
 		return $this;
 	}
 

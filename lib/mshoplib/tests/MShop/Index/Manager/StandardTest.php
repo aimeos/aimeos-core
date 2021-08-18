@@ -310,7 +310,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
-		$this->assertEquals( 7, count( $afterInsertAttr ) );
+		$this->assertEquals( 13, count( $afterInsertAttr ) );
 		$this->assertEquals( 9, count( $afterInsertCat ) );
 	}
 

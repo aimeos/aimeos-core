@@ -42,9 +42,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter( true );
 		$result = $this->object->aggregate( $search, 'index.attribute.id' )->toArray();
 
-		$this->assertEquals( 14, count( $result ) );
+		$this->assertEquals( 15, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 3, $result[$item->getId()] );
+		$this->assertEquals( 4, $result[$item->getId()] );
 	}
 
 
@@ -113,7 +113,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $id ) );
 		$result = $this->object->search( $search, [] );
 
-		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 3, count( $result ) );
 	}
 
 
@@ -160,11 +160,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter();
 
 		$func = $search->make( 'index.attribute:allof', [$attrIds] );
-		$search->setConditions( $search->compare( '!=', $func, null ) );
+		$search->add( $func, '!=', null )->order( 'product.code' );
 
 		$result = $this->object->search( $search, [] );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( 'U:TEST', $result->first()->getCode() );
 	}
 
@@ -200,11 +200,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->add( [
 			$search->make( 'index.attribute:oneof', [$color] ) => null,
 			$search->make( 'index.attribute:oneof', [$size] ) => null
-		], '!=' );
+		], '!=' )->order( 'product.code' );
 
 		$result = $this->object->search( $search, [] );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( 'U:TEST', $result->first()->getCode() );
 	}
 
