@@ -25,7 +25,7 @@ return [
 			'supplier.address.countryid' => 'de', 'supplier.address.languageid' => 'de',
 			'supplier.address.telephone' => '055544332211', 'supplier.address.email' => 'test@example.com',
 			'supplier.address.telefax' => '055544332212', 'supplier.address.website' => 'www.example.com',
-			'supplier.address.latitude' => '50.0', 'supplier.address.longitude' => '10.0',
+			'supplier.address.longitude' => '10.0', 'supplier.address.latitude' => '53.5',
 			'supplier.address.position' => '0',
 		]],
 		'lists' => [
@@ -66,7 +66,7 @@ return [
 			'supplier.address.countryid' => 'de', 'supplier.address.languageid' => 'de',
 			'supplier.address.telephone' => '055544332211', 'supplier.address.email' => 'test@example.com',
 			'supplier.address.telefax' => '055544332212', 'supplier.address.website' => 'www.example.com',
-			'supplier.address.latitude' => '51.0', 'supplier.address.longitude' => '10.5',
+			'supplier.address.longitude' => '13.0', 'supplier.address.latitude' => '52.5',
 			'supplier.address.position' => '1', 'supplier.address.birthday' => '2001-01-01',
 		]],
 	], [
@@ -81,7 +81,7 @@ return [
 			'supplier.address.countryid' => 'de', 'supplier.address.languageid' => 'de',
 			'supplier.address.telephone' => '1234567890', 'supplier.address.email' => 'test2@example.com',
 			'supplier.address.telefax' => '1234567891', 'supplier.address.website' => 'unit.web.site',
-			'supplier.address.longitude' => '11.0', 'supplier.address.latitude' => '52.0',
+			'supplier.address.longitude' => '10.0', 'supplier.address.latitude' => '52.5',
 			'supplier.address.position' => '2',
 		]],
 	]],

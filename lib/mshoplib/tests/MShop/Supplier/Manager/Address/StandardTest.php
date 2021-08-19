@@ -205,8 +205,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$conditions[] = $search->compare( '==', 'supplier.address.email', 'test@example.com' );
 		$conditions[] = $search->compare( '==', 'supplier.address.telefax', '055544332212' );
 		$conditions[] = $search->compare( '==', 'supplier.address.website', 'www.example.com' );
-		$conditions[] = $search->compare( '==', 'supplier.address.longitude', '10.5' );
-		$conditions[] = $search->compare( '==', 'supplier.address.latitude', '51.0' );
+		$conditions[] = $search->compare( '==', 'supplier.address.longitude', '13.0' );
+		$conditions[] = $search->compare( '==', 'supplier.address.latitude', '52.5' );
 		$conditions[] = $search->compare( '==', 'supplier.address.birthday', '2001-01-01' );
 		$conditions[] = $search->compare( '>=', 'supplier.address.mtime', '1970-01-01 00:00:00' );
 		$conditions[] = $search->compare( '>=', 'supplier.address.ctime', '1970-01-01 00:00:00' );
