@@ -190,8 +190,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->order( 'index.supplier.id' );
 		$search->add( $search->make( 'index.supplier:radius', [52.5, 10, 115] ), '!=', null );
 
-		$result = $this->object->search( $search, [] );
-
 		$this->assertEquals( 2, $this->object->search( $search, [] )->count() );
 	}
 
@@ -200,8 +198,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter()->order( 'index.supplier.id' );
 		$search->add( $search->make( 'index.supplier:radius', [52.5, 10, 110] ), '!=', null );
-
-		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 0, $this->object->search( $search, [] )->count() );
 	}
