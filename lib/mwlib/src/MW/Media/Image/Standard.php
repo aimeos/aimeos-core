@@ -26,6 +26,7 @@ class Standard
 
 	private $options;
 	private $image;
+	private $mimetype;
 
 
 	/**
@@ -64,6 +65,7 @@ class Standard
 		}
 
 		$this->options = $options;
+		$this->mimetype = $mimetype;
 	}
 
 
@@ -230,16 +232,25 @@ class Standard
 		$width = ( $width ?: $scaleWidth );
 		$height = ( $height ?: $scaleHeight );
 
-		$x0 = (int) ( $scaleWidth / 2 - $width / 2 );
-		$y0 = (int) ( $scaleHeight / 2 - $height / 2 );
-
+		$x0 = (int) ( $width / 2 - $scaleWidth / 2 );
+		$y0 = (int) ( $height / 2 - $scaleHeight / 2 );
+		
 		if( $fit === false && ( $x0 || $y0 ) )
 		{
 			if( ( $newImage = imagecreatetruecolor( $width, $height ) ) === false ) {
 				throw new \Aimeos\MW\Media\Exception( 'Unable to create new image' );
 			}
 
-			if( imagecopy( $newImage, $result, 0, 0, $x0, $y0, $width, $height ) === false ) {
+			if( in_array( $this->mimetype, ['image/gif', 'image/png'] ) ) {
+				imagesavealpha($newImage, true);
+				$trans = imagecolorallocatealpha($newImage, 0, 0, 0, 127);
+				imagefill($newImage, 0, 0, $trans);
+			} else {
+				$white = imagecolorallocate($newImage, 255, 255, 255);
+				imagefill($newImage, 0, 0, $white);
+			}
+
+			if( imagecopy( $newImage, $result, $x0, $y0, 0, 0, $scaleWidth, $scaleHeight ) === false ) {
 				throw new \Aimeos\MW\Media\Exception( 'Unable to crop image' );
 			}
 
