@@ -189,22 +189,16 @@ class Standard
 		$w = imagesx( $this->image );
 		$h = imagesy( $this->image );
 
-		$newWidth = $width;
-		$newHeight = $height;
-
-		if( !$fit )
-		{
-			list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
-
-			if( $w <= $newWidth && $h <= $newHeight ) {
-				return $this;
-			}
-		}
-		elseif( $width && $height )
-		{
+		if( $fit === 2 && $width && $height ) {
 			$ratio = ( $w < $h ? $width / $w : $height / $h );
 			$newHeight = (int) $h * $ratio;
 			$newWidth = (int) $w * $ratio;
+		} else {
+			list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
+			
+			if( !$fit && $w <= $newWidth && $h <= $newHeight ) {
+				return $this;
+			}
 		}
 
 		return $this->resize( $newWidth, $newHeight, $width, $height, (bool) !$fit );
