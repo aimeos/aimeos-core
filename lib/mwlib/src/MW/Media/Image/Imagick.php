@@ -157,7 +157,7 @@ class Imagick
 	 *
 	 * @param int|null $width New width of the image or null for automatic calculation
 	 * @param int|null $height New height of the image or null for automatic calculation
-	 * @param int $fit 0 keeps image ratio, 1 enforces target size with scaling, 2 with cropping
+	 * @param int $fit "0" keeps image ratio, "1" adds padding while "2" crops image to enforce image size
 	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
 	 */
 	public function scale( int $width = null, int $height = null, int $fit = 0 ) : \Aimeos\MW\Media\Image\Iface
@@ -165,28 +165,29 @@ class Imagick
 		try
 		{
 			$newMedia = clone $this;
-			
-			if( $fit === 2 && $width && $height ) {
+
+			if( $fit === 2 && $width && $height )
+			{
 				$newMedia->image->cropThumbnailImage( (int) $width, (int) $height );
 				// see https://www.php.net/manual/en/imagick.cropthumbnailimage.php#106710
 				$newMedia->image->setImagePage( 0, 0, 0, 0 );
-			} else {
+			}
+			elseif( $fit === 1 && $width && $height )
+			{
+				$w = ( $width - $newMedia->image->getImageWidth() ) / 2;
+				$h = ( $height - $newMedia->image->getImageHeight() ) / 2;
+
+				$newMedia->image->extentImage( $width, $height, (int) -$w, (int) -$h );
+			}
+			else
+			{
 				$w = $this->image->getImageWidth();
 				$h = $this->image->getImageHeight();
 
 				list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
-				$newMedia = clone $this;
 
 				if( $w > $newWidth || $h > $newHeight ) {
 					$newMedia->image->resizeImage( $newWidth, $newHeight, \Imagick::FILTER_CUBIC, 0.8 );
-				}
-
-				if( $fit === 1 && $width && $height )
-				{
-					$w = ( $width - $newMedia->image->getImageWidth() ) / 2;
-					$h = ( $height - $newMedia->image->getImageHeight() ) / 2;
-
-					$newMedia->image->extentImage( $width, $height, (int) -$w, (int) -$h );
 				}
 			}
 

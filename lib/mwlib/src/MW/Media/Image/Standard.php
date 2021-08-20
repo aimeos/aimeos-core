@@ -183,7 +183,7 @@ class Standard
 	 *
 	 * @param int|null $width New width of the image or null for automatic calculation
 	 * @param int|null $height New height of the image or null for automatic calculation
-	 * @param int $fit 0 keeps image ratio, 1 enforces target size with scaling
+	 * @param int $fit "0" keeps image ratio, "1" adds padding while "2" crops image to enforce image size
 	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
 	 */
 	public function scale( int $width = null, int $height = null, int $fit = 0 ) : Iface
@@ -191,19 +191,22 @@ class Standard
 		$w = imagesx( $this->image );
 		$h = imagesy( $this->image );
 
-		if( $fit === 2 && $width && $height ) {
+		if( $fit === 2 && $width && $height )
+		{
 			$ratio = ( $w < $h ? $width / $w : $height / $h );
 			$newHeight = (int) $h * $ratio;
 			$newWidth = (int) $w * $ratio;
-		} else {
+		}
+		else
+		{
 			list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
-			
+
 			if( !$fit && $w <= $newWidth && $h <= $newHeight ) {
 				return $this;
 			}
 		}
 
-		return $this->resize( $newWidth, $newHeight, $width, $height, (bool) !$fit );
+		return $this->resize( $newWidth, $newHeight, $width, $height, !$fit );
 	}
 
 
@@ -234,20 +237,22 @@ class Standard
 
 		$x0 = (int) ( $width / 2 - $scaleWidth / 2 );
 		$y0 = (int) ( $height / 2 - $scaleHeight / 2 );
-		
+
 		if( $fit === false && ( $x0 || $y0 ) )
 		{
 			if( ( $newImage = imagecreatetruecolor( $width, $height ) ) === false ) {
 				throw new \Aimeos\MW\Media\Exception( 'Unable to create new image' );
 			}
 
-			if( in_array( $this->mimetype, ['image/gif', 'image/png'] ) ) {
-				imagesavealpha($newImage, true);
-				$trans = imagecolorallocatealpha($newImage, 0, 0, 0, 127);
-				imagefill($newImage, 0, 0, $trans);
-			} else {
-				$white = imagecolorallocate($newImage, 255, 255, 255);
-				imagefill($newImage, 0, 0, $white);
+			imagesavealpha( $newImage, true );
+			$alpha = in_array( $this->mimetype, ['image/gif', 'image/png'] ) ? 127 : 0;
+
+			if( ( $bg = imagecolorallocatealpha( $newImage, 255, 255, 255, $alpha ) ) === false ) {
+				throw new \Aimeos\MW\Media\Exception( 'Unable to allocate color' );
+			}
+
+			if( imagefill( $newImage, 0, 0, $bg ) === false ) {
+				throw new \Aimeos\MW\Media\Exception( 'Unable to fill background' );
 			}
 
 			if( imagecopy( $newImage, $result, $x0, $y0, 0, 0, $scaleWidth, $scaleHeight ) === false ) {

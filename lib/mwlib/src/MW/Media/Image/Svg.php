@@ -117,7 +117,7 @@ class Svg
 	 *
 	 * @param int|null $width New width of the image or null for automatic calculation
 	 * @param int|null $height New height of the image or null for automatic calculation
-	 * @param int $fit 0 keeps image ratio, 1 enforces target size with scaling
+	 * @param int $fit "0" keeps image ratio, "1" adds padding while "2" crops image to enforce image size
 	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
 	 */
 	public function scale( int $width = null, int $height = null, int $fit = 0 ) : Iface
@@ -128,18 +128,6 @@ class Svg
 
 		$w = $this->getWidth();
 		$h = $this->getHeight();
-
-		if( !$fit )
-		{
-			list( $width, $height ) = $this->getSizeFitted( $w, $h, $width, $height );
-
-			if( $w <= $width && $h <= $height ) {
-				return $this;
-			}
-		}
-
-		$newWidth = $width;
-		$newHeight = $height;
 		$newMedia = clone $this;
 
 		if( $fit )
@@ -156,6 +144,14 @@ class Svg
 
 			$newMedia->svg['preserveAspectRatio'] = 'xMinYMin slice';
 			$newMedia->svg['viewBox'] = $x . ' ' . $y . ' ' . $w . ' ' . $h;
+		}
+		else
+		{
+			list( $width, $height ) = $this->getSizeFitted( $w, $h, $width, $height );
+
+			if( $w <= $width && $h <= $height ) {
+				return $this;
+			}
 		}
 
 		$newMedia->svg['width'] = $width . 'px';
