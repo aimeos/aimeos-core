@@ -26,6 +26,7 @@ class Standard
 
 	private $options;
 	private $image;
+	private $mimetype;
 
 
 	/**
@@ -64,6 +65,7 @@ class Standard
 		}
 
 		$this->options = $options;
+		$this->mimetype = $mimetype;
 	}
 
 
@@ -181,34 +183,27 @@ class Standard
 	 *
 	 * @param int|null $width New width of the image or null for automatic calculation
 	 * @param int|null $height New height of the image or null for automatic calculation
-	 * @param bool $fit True to keep the width/height ratio of the image
-	 * @return \Aimeos\MW\Media\Iface Self object for method chaining
+	 * @param int $fit 0 keeps image ratio, 1 enforces target size with scaling
+	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
 	 */
-	public function scale( int $width = null, int $height = null, bool $fit = true ) : Iface
+	public function scale( int $width = null, int $height = null, int $fit = 0 ) : Iface
 	{
 		$w = imagesx( $this->image );
 		$h = imagesy( $this->image );
-		$fit = (bool) $fit;
 
-		$newWidth = $width;
-		$newHeight = $height;
-
-		if( $fit === true )
-		{
-			list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
-
-			if( $w <= $newWidth && $h <= $newHeight ) {
-				return $this;
-			}
-		}
-		elseif( $width && $height )
-		{
+		if( $fit === 2 && $width && $height ) {
 			$ratio = ( $w < $h ? $width / $w : $height / $h );
 			$newHeight = (int) $h * $ratio;
 			$newWidth = (int) $w * $ratio;
+		} else {
+			list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
+			
+			if( !$fit && $w <= $newWidth && $h <= $newHeight ) {
+				return $this;
+			}
 		}
 
-		return $this->resize( $newWidth, $newHeight, $width, $height, $fit );
+		return $this->resize( $newWidth, $newHeight, $width, $height, (bool) !$fit );
 	}
 
 
@@ -237,16 +232,25 @@ class Standard
 		$width = ( $width ?: $scaleWidth );
 		$height = ( $height ?: $scaleHeight );
 
-		$x0 = (int) ( $scaleWidth / 2 - $width / 2 );
-		$y0 = (int) ( $scaleHeight / 2 - $height / 2 );
-
+		$x0 = (int) ( $width / 2 - $scaleWidth / 2 );
+		$y0 = (int) ( $height / 2 - $scaleHeight / 2 );
+		
 		if( $fit === false && ( $x0 || $y0 ) )
 		{
 			if( ( $newImage = imagecreatetruecolor( $width, $height ) ) === false ) {
 				throw new \Aimeos\MW\Media\Exception( 'Unable to create new image' );
 			}
 
-			if( imagecopy( $newImage, $result, 0, 0, $x0, $y0, $width, $height ) === false ) {
+			if( in_array( $this->mimetype, ['image/gif', 'image/png'] ) ) {
+				imagesavealpha($newImage, true);
+				$trans = imagecolorallocatealpha($newImage, 0, 0, 0, 127);
+				imagefill($newImage, 0, 0, $trans);
+			} else {
+				$white = imagecolorallocate($newImage, 255, 255, 255);
+				imagefill($newImage, 0, 0, $white);
+			}
+
+			if( imagecopy( $newImage, $result, $x0, $y0, 0, 0, $scaleWidth, $scaleHeight ) === false ) {
 				throw new \Aimeos\MW\Media\Exception( 'Unable to crop image' );
 			}
 

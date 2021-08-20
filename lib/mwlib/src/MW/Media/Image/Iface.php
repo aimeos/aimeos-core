@@ -40,8 +40,8 @@ interface Iface
 	 *
 	 * @param int|null $width New width of the image or null for automatic calculation
 	 * @param int|null $height New height of the image or null for automatic calculation
-	 * @param bool $fit True to keep the width/height ratio of the image
+	 * @param int $fit 0 keeps image ratio, 1 enforces target size with scaling
 	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
 	 */
-	public function scale( int $width = null, int $height = null, bool $fit = true ) : Iface;
+	public function scale( int $width = null, int $height = null, int $fit = 0 ) : Iface;
 }

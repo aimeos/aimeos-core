@@ -157,29 +157,37 @@ class Imagick
 	 *
 	 * @param int|null $width New width of the image or null for automatic calculation
 	 * @param int|null $height New height of the image or null for automatic calculation
-	 * @param bool $fit True to keep the width/height ratio of the image
+	 * @param int $fit 0 keeps image ratio, 1 enforces target size with scaling, 2 with cropping
 	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
 	 */
-	public function scale( int $width = null, int $height = null, bool $fit = true ) : \Aimeos\MW\Media\Image\Iface
+	public function scale( int $width = null, int $height = null, int $fit = 0 ) : \Aimeos\MW\Media\Image\Iface
 	{
 		try
 		{
-			$w = $this->image->getImageWidth();
-			$h = $this->image->getImageHeight();
-
-			list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
 			$newMedia = clone $this;
+			
+			if( $fit === 2 && $width && $height ) {
+				$newMedia->image->cropThumbnailImage( (int) $width, (int) $height );
+				// see https://www.php.net/manual/en/imagick.cropthumbnailimage.php#106710
+				$newMedia->image->setImagePage( 0, 0, 0, 0 );
+			} else {
+				$w = $this->image->getImageWidth();
+				$h = $this->image->getImageHeight();
 
-			if( $w > $newWidth || $h > $newHeight ) {
-				$newMedia->image->resizeImage( $newWidth, $newHeight, \Imagick::FILTER_CUBIC, 0.8 );
-			}
+				list( $newWidth, $newHeight ) = $this->getSizeFitted( $w, $h, $width, $height );
+				$newMedia = clone $this;
 
-			if( !$fit && $width && $height )
-			{
-				$w = ( $width - $newMedia->image->getImageWidth() ) / 2;
-				$h = ( $height - $newMedia->image->getImageHeight() ) / 2;
+				if( $w > $newWidth || $h > $newHeight ) {
+					$newMedia->image->resizeImage( $newWidth, $newHeight, \Imagick::FILTER_CUBIC, 0.8 );
+				}
 
-				$newMedia->image->extentImage( $width, $height, (int) -$w, (int) -$h );
+				if( $fit === 1 && $width && $height )
+				{
+					$w = ( $width - $newMedia->image->getImageWidth() ) / 2;
+					$h = ( $height - $newMedia->image->getImageHeight() ) / 2;
+
+					$newMedia->image->extentImage( $width, $height, (int) -$w, (int) -$h );
+				}
 			}
 
 			return $this->watermark( $newMedia );

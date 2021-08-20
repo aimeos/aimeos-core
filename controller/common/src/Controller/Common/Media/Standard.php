@@ -361,11 +361,11 @@ class Standard
 		{
 			$maxwidth = ( isset( $entry['maxwidth'] ) ? (int) $entry['maxwidth'] : null );
 			$maxheight = ( isset( $entry['maxheight'] ) ? (int) $entry['maxheight'] : null );
-			$fit = ( isset( $entry['force-size'] ) ? (bool) $entry['force-size'] : false );
+			$fit = ( isset( $entry['force-size'] ) ? (int) $entry['force-size'] : 0 );
 
 			if( $maxheight || $maxwidth )
 			{
-				$image = $media->scale( $maxwidth, $maxheight, !$fit );
+				$image = $media->scale( $maxwidth, $maxheight, $fit );
 				$list[$image->getWidth()] = $image;
 			}
 		}

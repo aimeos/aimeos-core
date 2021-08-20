@@ -213,20 +213,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testScale()
+	public function testScaleFit()
 	{
 		$ds = DIRECTORY_SEPARATOR;
 		$content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png' );
 
 		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/png', [] );
-		$info = getimagesizefromstring( $media->scale( 100, 100, false )->save( null, 'image/png' ) );
+		$info = getimagesizefromstring( $media->scale( 100, 100, 1 )->save( null, 'image/png' ) );
 
 		$this->assertEquals( 100, $info[0] );
 		$this->assertEquals( 100, $info[1] );
 	}
 
 
-	public function testScaleFit()
+	public function testScaleDown()
 	{
 		$ds = DIRECTORY_SEPARATOR;
 		$content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png' );
@@ -239,7 +239,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testScaleFitInside()
+	public function testScaleInside()
 	{
 		$ds = DIRECTORY_SEPARATOR;
 		$content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png' );
@@ -249,5 +249,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 10, $info[0] );
 		$this->assertEquals( 10, $info[1] );
+	}
+	
+	
+	public function testScaleFitCrop()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.png' );
+
+		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/png', [] );
+		$info = getimagesizefromstring( $media->scale( 100, 50, 2 )->save( null, 'image/png' ) );
+
+		$this->assertEquals( 100, $info[0] );
+		$this->assertEquals( 50, $info[1] );
 	}
 }

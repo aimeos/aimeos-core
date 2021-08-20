@@ -74,20 +74,20 @@ class SvgTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testScale()
+	public function testScaleFit()
 	{
 		$media = new \Aimeos\MW\Media\Image\Svg( $this->content, 'image/svg+xml', [] );
-		$media = $media->scale( 100, 100, false );
+		$media = $media->scale( 100, 100, 1 );
 
 		$this->assertEquals( 100, $media->getHeight() );
 		$this->assertEquals( 100, $media->getWidth() );
 	}
 
 
-	public function testScaleFit()
+	public function testScale()
 	{
 		$media = new \Aimeos\MW\Media\Image\Svg( $this->content, 'image/svg+xml', [] );
-		$media = $media->scale( 150, 100, true );
+		$media = $media->scale( 150, 100, 0 );
 
 		$this->assertEquals( 100, $media->getHeight() );
 		$this->assertEquals( 67, $media->getWidth() );

@@ -215,6 +215,36 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
 		$item->setPreview( 'preview.gif' )->setUrl( 'test.gif' )->setDomain( 'product' );
 
+		$result = $object->scale( $item, 'fs-media', 1 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
+		$this->assertEquals( 'test.gif', $result->getUrl() );
+		$this->assertNotEquals( 'preview.gif', $result->getPreview() );
+	}
+
+
+	public function testScaleLegacy()
+	{
+		$this->context->getConfig()->set( 'controller/common/media/files/scale', true );
+
+		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . '/tmp/';
+		if( !is_dir( $dest ) ) { mkdir( $dest, 0755, true ); }
+		copy( __DIR__ . '/testfiles/test.gif', $dest . 'test.gif' );
+
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
+			->setMethods( array( 'getFileContent', 'store' ) )
+			->setConstructorArgs( array( $this->context ) )
+			->getMock();
+
+		$object->expects( $this->once() )->method( 'getFileContent' )
+			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.png' ) ) );
+
+		$object->expects( $this->exactly( 1 ) )->method( 'store' );
+
+
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
+		$item->setPreview( 'preview.gif' )->setUrl( 'test.gif' )->setDomain( 'product' );
+
 		$result = $object->scale( $item, 'fs-media', true );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $result );
