@@ -67,7 +67,34 @@ class Standard
 			$item->setPreviews( [1 => $this->getMimeIcon( $mimetype )] )->setMimeType( $mimetype );
 		}
 
-		return $item->setUrl( $filepath )->setLabel( $item->getLabel() ?: basename( $file->getClientFilename() ) );
+		return $item->setUrl( $filepath )->setMimeType( $media->getMimeType() )
+			->setLabel( $item->getLabel() ?: basename( $file->getClientFilename() ) );
+	}
+
+
+	/**
+	 * Stores the uploaded preview and adds the references to the media item
+	 *
+	 * {inheritDoc}
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item to add the file references to
+	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file
+	 * @param string $fsname Name of the file system to store the files at
+	 * @return \Aimeos\MShop\Media\Item\Iface Added media item
+	 */
+	public function addPreview( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface
+	{
+		$this->checkFileUpload( $file );
+
+		$media = $this->getMediaFile( $file->getStream() );
+		$mimetype = $this->getMimeType( $media, 'preview' );
+		$filepath = $this->getFilePath( $file->getClientFilename() ?: rand(), 'preview', $mimetype );
+
+		if( $media instanceof \Aimeos\MW\Media\Image\Iface ) {
+			$item = $this->addImages( $item, $media, basename( $filepath ), $fsname );
+		}
+
+		return $item;
 	}
 
 
@@ -202,7 +229,7 @@ class Standard
 			unset( $mediaFile );
 		}
 
-		return $item->setPreviews( $previews )->setMimeType( $media->getMimeType() );
+		return $item->setPreviews( $previews );
 	}
 
 
@@ -277,9 +304,8 @@ class Standard
 		 * box.
 		 *
 		 * If "force-size" is true, scaled images that doesn't fit into the
-		 * given maximum width/height are resized and then centered in a new image
-		 * with the maximum width/height. By default, images aren't extended if
-		 * the width/height is smaller than the maximum one.
+		 * given maximum width/height are centered and then cropped. By default,
+		 * images aren't cropped.
 		 *
 		 * The values for "maxwidth" and "maxheight" can also be null or not
 		 * used. In that case, the width or height or both is unbound. If none

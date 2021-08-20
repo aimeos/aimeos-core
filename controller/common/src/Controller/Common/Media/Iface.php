@@ -43,6 +43,22 @@ interface Iface
 	public function add( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface;
 
 	/**
+	 * Stores the uploaded preview and adds the references to the media item
+	 *
+	 * This method allows uploading a different image for preview than the one
+	 * that will be created automatically by add() method. It's especially
+	 * useful for files where no preview image can be created automatically
+	 * like videos. Depending on the configuration, several preview files in
+	 * different sizes are created.
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item to add the file references to
+	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file
+	 * @param string $fsname Name of the file system to store the files at
+	 * @return \Aimeos\MShop\Media\Item\Iface Added media item
+	 */
+	public function addPreview( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface;
+
+	/**
 	 * Copies the media item and the referenced files
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be copied

@@ -56,6 +56,30 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAddPreview()
+	{
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
+			->setConstructorArgs( [$this->context] )
+			->setMethods( ['checkFileUpload'] )
+			->getMock();
+
+		$object->expects( $this->once() )->method( 'checkFileUpload' );
+
+		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
+
+		$file->expects( $this->exactly( 2 ) )->method( 'getClientFilename' )
+			->will( $this->returnValue( 'test.gif' ) );
+
+		$file->expects( $this->once() )->method( 'getStream' )
+			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.gif' ) ) );
+
+
+		$item = \Aimeos\MShop::create( $this->context, 'media' )->create()->setDomain( 'product' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $object->add( $item, $file ) );
+	}
+
+
 	public function testAddBinary()
 	{
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
