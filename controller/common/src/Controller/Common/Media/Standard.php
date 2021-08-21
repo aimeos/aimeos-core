@@ -87,7 +87,6 @@ class Standard
 		$this->checkFileUpload( $file );
 
 		$media = $this->getMediaFile( $file->getStream() );
-		$mimetype = $this->getMimeType( $media, 'preview' );
 
 		if( $media instanceof \Aimeos\MW\Media\Image\Iface ) {
 			$item = $this->addImages( $item, $media, $file->getClientFilename(), $fsname );
