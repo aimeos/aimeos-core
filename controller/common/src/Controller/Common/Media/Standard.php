@@ -62,13 +62,13 @@ class Standard
 		$this->store( $filepath, $media->save(), $fsname );
 
 		if( $media instanceof \Aimeos\MW\Media\Image\Iface ) {
-			$item = $this->addImages( $item, $media, basename( $filepath ), $fsname );
+			$item = $this->addImages( $item, $media, $file->getClientFilename(), $fsname );
 		} else {
 			$item->setPreviews( [1 => $this->getMimeIcon( $mimetype )] )->setMimeType( $mimetype );
 		}
 
 		return $item->setUrl( $filepath )->setMimeType( $media->getMimeType() )
-			->setLabel( $item->getLabel() ?: basename( $file->getClientFilename() ) );
+			->setLabel( $item->getLabel() ?: $file->getClientFilename() );
 	}
 
 
@@ -88,10 +88,9 @@ class Standard
 
 		$media = $this->getMediaFile( $file->getStream() );
 		$mimetype = $this->getMimeType( $media, 'preview' );
-		$filepath = $this->getFilePath( $file->getClientFilename() ?: rand(), 'preview', $mimetype );
 
 		if( $media instanceof \Aimeos\MW\Media\Image\Iface ) {
-			$item = $this->addImages( $item, $media, basename( $filepath ), $fsname );
+			$item = $this->addImages( $item, $media, $file->getClientFilename(), $fsname );
 		}
 
 		return $item;

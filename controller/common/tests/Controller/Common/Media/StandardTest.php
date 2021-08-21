@@ -43,7 +43,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 
-		$file->expects( $this->exactly( 2 ) )->method( 'getClientFilename' )
+		$file->expects( $this->exactly( 3 ) )->method( 'getClientFilename' )
 			->will( $this->returnValue( 'test.gif' ) );
 
 		$file->expects( $this->once() )->method( 'getStream' )
@@ -67,7 +67,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 
-		$file->expects( $this->exactly( 2 ) )->method( 'getClientFilename' )
+		$file->expects( $this->exactly( 3 ) )->method( 'getClientFilename' )
 			->will( $this->returnValue( 'test.gif' ) );
 
 		$file->expects( $this->once() )->method( 'getStream' )
