@@ -130,33 +130,42 @@ class Svg
 		$h = $this->getHeight();
 		$newMedia = clone $this;
 
-		if( $fit )
-		{
-			$ratio = ( $w < $h ? $width / $w : $height / $h );
-			$newHeight = (int) $h * $ratio;
-			$newWidth = (int) $w * $ratio;
-
-			$width = ( $width ?: $newWidth );
-			$height = ( $height ?: $newHeight );
-
-			$x = (int) ( $newWidth / 2 - $width / 2 );
-			$y = (int) ( $newHeight / 2 - $height / 2 );
-
-			$newMedia->svg['preserveAspectRatio'] = 'xMinYMin slice';
-			$newMedia->svg['viewBox'] = $x . ' ' . $y . ' ' . $w . ' ' . $h;
-		}
-		else
-		{
-			list( $width, $height ) = $this->getSizeFitted( $w, $h, $width, $height );
-
-			if( $w <= $width && $h <= $height ) {
-				return $this;
-			}
+		if( $fit === 2 ) {
+			$newMedia->svg['viewBox'] = $this->box( $w, $h, $width / $height, $height / $width );
+		} else {
+			$newMedia->svg['viewBox'] = $this->box( $w, $h, $w / $h, $h / $w );
 		}
 
-		$newMedia->svg['width'] = $width . 'px';
-		$newMedia->svg['height'] = $height . 'px';
+		$newMedia->svg['width'] = $width;
+		$newMedia->svg['height'] = $height;
 
 		return $newMedia;
+	}
+
+
+	/**
+	 * Returns the fitted width and height.
+	 *
+	 * @param int $srcWidth Width of the image
+	 * @param int $srcHeight Height of the image
+	 * @param int|null $destWidth New width of the image
+	 * @param int|null $destHeight New height of the image
+	 * @return array Array containing the new width at position 0 and the new height as position 1
+	 */
+	protected function box( int $srcWidth, int $srcHeight, float $wRatio, float $hRatio ) : string
+	{
+		$newWidth = $srcWidth;
+		$newHeight = $srcHeight;
+
+		if( $wRatio > $hRatio ) {
+			$newHeight = (int) round( $srcHeight / $wRatio );
+		} else {
+			$newWidth = (int) round( $srcWidth / $hRatio );
+		}
+
+		$x = round( ( $srcWidth - $newWidth ) / 2 );
+		$y = round( ( $srcHeight - $newHeight ) / 2 );
+
+		return $x . ' ' . $y . ' ' . $newWidth . ' ' . $newHeight;
 	}
 }

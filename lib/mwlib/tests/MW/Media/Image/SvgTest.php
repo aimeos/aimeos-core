@@ -17,7 +17,7 @@ class SvgTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$this->content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.svgz' );
+		$this->content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.svg' );
 	}
 
 
@@ -38,6 +38,9 @@ class SvgTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetHeight()
 	{
+		$ds = DIRECTORY_SEPARATOR;
+		$this->content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.svgz' );
+
 		$media = new \Aimeos\MW\Media\Image\Svg( $this->content, 'image/svg+xml', [] );
 
 		$this->assertEquals( 300, $media->getHeight() );
@@ -46,6 +49,9 @@ class SvgTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetWidth()
 	{
+		$ds = DIRECTORY_SEPARATOR;
+		$this->content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.svgz' );
+
 		$media = new \Aimeos\MW\Media\Image\Svg( $this->content, 'image/svg+xml', [] );
 
 		$this->assertEquals( 200, $media->getWidth() );
@@ -74,22 +80,35 @@ class SvgTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testScaleFit()
-	{
-		$media = new \Aimeos\MW\Media\Image\Svg( $this->content, 'image/svg+xml', [] );
-		$media = $media->scale( 100, 100, 1 );
-
-		$this->assertEquals( 100, $media->getHeight() );
-		$this->assertEquals( 100, $media->getWidth() );
-	}
-
-
 	public function testScale()
 	{
 		$media = new \Aimeos\MW\Media\Image\Svg( $this->content, 'image/svg+xml', [] );
 		$media = $media->scale( 150, 100, 0 );
 
+		$this->assertEquals( 150, $media->getWidth() );
 		$this->assertEquals( 100, $media->getHeight() );
-		$this->assertEquals( 67, $media->getWidth() );
+		$this->assertStringContainsString( 'viewBox="34 0 133 300"', $media->save() );
+	}
+
+
+	public function testScaleFit()
+	{
+		$media = new \Aimeos\MW\Media\Image\Svg( $this->content, 'image/svg+xml', [] );
+		$media = $media->scale( 100, 100, 1 );
+
+		$this->assertEquals( 100, $media->getWidth() );
+		$this->assertEquals( 100, $media->getHeight() );
+		$this->assertStringContainsString( 'viewBox="34 0 133 300"', $media->save() );
+	}
+
+
+	public function testScaleCrop()
+	{
+		$media = new \Aimeos\MW\Media\Image\Svg( $this->content, 'image/svg+xml', [] );
+		$media = $media->scale( 200, 150, 2 );
+
+		$this->assertEquals( 200, $media->getWidth() );
+		$this->assertEquals( 150, $media->getHeight() );
+		$this->assertStringContainsString( 'viewBox="0 38 200 225"', $media->save() );
 	}
 }
