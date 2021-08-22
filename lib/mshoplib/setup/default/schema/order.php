@@ -275,12 +275,12 @@ return array(
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
+			$table->addColumn( 'relatedid', 'string', array( 'length' => 64, 'notnull' => false, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'datepayment', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'datedelivery', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'statuspayment', 'smallint', array( 'default' => -1 ) );
 			$table->addColumn( 'statusdelivery', 'smallint', array( 'default' => -1 ) );
-			$table->addColumn( 'relatedid', 'bigint', array( 'notnull' => false ) );
 			$table->addColumn( 'cdate', 'string', array( 'length' => 10 ) );
 			$table->addColumn( 'cmonth', 'string', array( 'length' => 7 ) );
 			$table->addColumn( 'cweek', 'string', array( 'length' => 7 ) );

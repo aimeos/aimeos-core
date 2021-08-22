@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED,
 			'order.datepayment' => '2004-12-01 12:34:56',
 			'order.datedelivery' => '2004-01-03 12:34:56',
-			'order.relatedid' => 1,
+			'order.relatedid' => '123',
 			'order.baseid' => 4,
 			'order.mtime' => '2011-01-01 00:00:02',
 			'order.ctime' => '2011-01-01 00:00:01',
@@ -204,7 +204,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setRelatedId( 22 );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $return );
-		$this->assertEquals( 22, $this->object->getRelatedId() );
+		$this->assertEquals( '22', $this->object->getRelatedId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -241,7 +241,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.id' => 1,
 			'order.type' => \Aimeos\MShop\Order\Item\Base::TYPE_WEB,
 			'order.baseid' => 2,
-			'order.relatedid' => 3,
+			'order.relatedid' => '3',
 			'order.statusdelivery' => 4,
 			'order.statuspayment' => 5,
 			'order.datepayment' => '2000-01-01 00:00:00',
