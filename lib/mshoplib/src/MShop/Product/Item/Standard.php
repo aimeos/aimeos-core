@@ -259,7 +259,7 @@ class Standard
 	 */
 	public function setUrl( ?string $url ) : \Aimeos\MShop\Product\Item\Iface
 	{
-		return $this->set( 'product.url', $url );
+		return $this->set( 'product.url', \Aimeos\MW\Str::slug( $url) );
 	}
 
 
