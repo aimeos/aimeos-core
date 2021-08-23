@@ -43,6 +43,7 @@ return array(
 		array( 'domain' => 'attribute', 'code' => 'icon', 'label' => 'Icon', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'stage', 'label' => 'Stage', 'status' => 1 ),
+		array( 'domain' => 'catalog', 'code' => 'menu', 'label' => 'Menu', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'icon', 'label' => 'Icon', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
