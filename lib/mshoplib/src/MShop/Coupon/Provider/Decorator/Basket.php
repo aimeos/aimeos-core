@@ -83,13 +83,13 @@ class Basket
 
 		$minvalue = $this->getConfigValue( 'basket.total-value-min', [] );
 
-		if( isset( $minvalue[$currency] ) && $minvalue[$currency] > $value ) {
+		if( isset( $minvalue[$currency] ) && $minvalue[$currency] >= $value ) {
 			return false;
 		}
 
 		$maxvalue = $this->getConfigValue( 'basket.total-value-max', [] );
 
-		if( isset( $maxvalue[$currency] ) && $maxvalue[$currency] < $value ) {
+		if( isset( $maxvalue[$currency] ) && $maxvalue[$currency] <= $value ) {
 			return false;
 		}
 
