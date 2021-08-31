@@ -174,11 +174,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 				$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $tableSchema, $dbalschema );
 				$stmts = $this->remove( $this->exclude( $schemaDiff, $relpath ), $clean )->toSaveSql( $platform );
 
-				try {
-                    $this->executeList($stmts, $rname);
-                } catch(\Exception $ex) {
-				    $this->msg('ERROR: ' . $ex->getMessage(), 2);
-                }
+				$this->executeList( $stmts, $rname );
 				$this->status( !empty( $stmts ) ? 'done' : 'OK' );
 			}
 

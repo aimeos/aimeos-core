@@ -84,12 +84,6 @@ interface Iface
 	 */
 	public function setPassword( string $value ) : \Aimeos\MShop\Customer\Item\Iface;
 
-    /**
-     * @param string $value
-     * @return bool
-     */
-	public function verifyPassword( string $value ) : bool;
-
 	/**
 	 * Returns the last verification date of the customer.
 	 *

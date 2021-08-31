@@ -12,8 +12,6 @@
 namespace Aimeos\MShop\Customer\Item;
 
 
-use Illuminate\Support\Facades\Log;
-
 /**
  * Interface for customer DTO objects used by the shop.
  *
@@ -165,17 +163,6 @@ class Standard extends Base implements Iface
 
 		return $this->set( 'customer.password', $value );
 	}
-
-    /**
-     * Verifies a given password to the current one
-     *
-     * @param string $value
-     * @return bool
-     */
-	public function verifyPassword( string $value ) : bool
-    {
-        return password_verify( $value, $this->getPassword());
-    }
 
 
 	/**
