@@ -12,8 +12,6 @@
 namespace Aimeos\MShop\Customer\Item;
 
 
-use Illuminate\Support\Facades\Log;
-
 /**
  * Interface for customer DTO objects used by the shop.
  *
