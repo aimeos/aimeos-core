@@ -97,6 +97,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetPassword()
+	{
+		$this->expectException( \Aimeos\MShop\Exception::class );
+		$this->object->password();
+	}
+
+
 	public function testGetProcess()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
@@ -232,6 +239,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 'abcdef', $this->object->nonce() );
 		$this->assertNull( $this->object->setNonce( null )->nonce() );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
+	}
+
+
+	public function testSetPassword()
+	{
+		$password = new \Aimeos\MW\Password\Standard();
+		$return = $this->object->setPassword( $password );
+
+		$this->assertSame( $password, $this->object->password() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
