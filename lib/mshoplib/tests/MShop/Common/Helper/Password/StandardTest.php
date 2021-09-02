@@ -16,7 +16,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->object = new \Aimeos\MShop\Common\Helper\Password\Standard( array( 'format' => '{%2$s}%1$s' ) );
+		$this->object = new \Aimeos\MShop\Common\Helper\Password\Standard( [] );
 	}
 
 
@@ -28,6 +28,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testEncode()
 	{
-		$this->assertEquals( '14f40cc1311a52a6021b93a155ed719aac2bdb70', $this->object->encode( 'unittest', 'salt' ) );
+		$this->assertStringStartsWith( '$2y$10$', $this->object->encode( 'unittest' ) );
 	}
 }

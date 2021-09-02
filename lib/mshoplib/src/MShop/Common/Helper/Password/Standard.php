@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Common\Helper\Password;
  */
 class Standard implements \Aimeos\MShop\Common\Helper\Password\Iface
 {
-	private $options = [];
+	private $password;
 
 
 	/**
@@ -29,7 +29,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Password\Iface
 	 */
 	public function __construct( array $options )
 	{
-		$this->options = $options;
+		$this->password = new \Aimeos\MW\Password\Standard();
 	}
 
 
@@ -42,8 +42,6 @@ class Standard implements \Aimeos\MShop\Common\Helper\Password\Iface
 	 */
 	public function encode( string $password, string $salt = null ) : string
 	{
-		$format = ( isset( $this->options['format'] ) ? $this->options['format'] : '%1$s%2$s' );
-
-		return sha1( sprintf( $format, $password, $salt ) );
+		return $this->password->hash( $password );
 	}
 }
