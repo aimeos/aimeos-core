@@ -48,7 +48,7 @@ abstract class Base implements Iface
 	 */
 	public function __call( string $name, array $param )
 	{
-		$msg = $this->getContext()->translate( 'mshop', 'Unable to call method "%1$s"' );
+		$msg = $this->context->translate( 'mshop', 'Unable to call method "%1$s"' );
 		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $name ) );
 	}
 
@@ -187,7 +187,7 @@ abstract class Base implements Iface
 	 */
 	public function query( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$msg = $this->getContext()->translate( 'mshop', 'Method "%1$s" for provider not available' );
+		$msg = $this->context->translate( 'mshop', 'Method "%1$s" for provider not available' );
 		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'query' ) );
 	}
 
@@ -374,7 +374,7 @@ abstract class Base implements Iface
 			}
 		}
 
-		$msg = $this->getContext()->translate( 'mshop', 'Service not available' );
+		$msg = $this->context->translate( 'mshop', 'Service not available' );
 		throw new \Aimeos\MShop\Service\Exception( $msg );
 	}
 
@@ -413,7 +413,7 @@ abstract class Base implements Iface
 
 		if( ( $item = $manager->search( $search )->first() ) === null )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'No order for ID "%1$s" found' );
+			$msg = $this->context->translate( 'mshop', 'No order for ID "%1$s" found' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $id ) );
 		}
 
@@ -432,6 +432,29 @@ abstract class Base implements Iface
 		int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		return \Aimeos\MShop::create( $this->context, 'order/base' )->load( $baseId, $parts );
+	}
+
+
+	/**
+	 * Logs the given message with the passed log level
+	 *
+	 * @param mixed $msg Message or object
+	 * @param int $level Log level (default: ERR)
+	 * @return self Same object for fluid method calls
+	 */
+	protected function log( $msg, int $level = \Aimeos\MW\Logger\Base::ERR ) : self
+	{
+		$facility = basename( str_replace( '\\', '/', get_class( $this ) ) );
+		$trace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 2 );
+		$trace = array_pop( $trace ) ?: [];
+		$name = ( $trace['class'] ?? '' ) . '::' . ( $trace['function'] ?? '' );
+
+		if( !is_scalar( $msg ) ) {
+			$msg = print_r( $msg, true );
+		}
+
+		$this->context->logger()->log( $name . ': ' . $msg, $level, $facility );
+		return $this;
 	}
 
 
@@ -458,7 +481,7 @@ abstract class Base implements Iface
 	{
 		if( $customerId != null )
 		{
-			$manager = \Aimeos\MShop::create( $this->getContext(), 'customer' );
+			$manager = \Aimeos\MShop::create( $this->context, 'customer' );
 			$item = $manager->get( $customerId, ['service'] );
 			$serviceId = $this->getServiceItem()->getId();
 
@@ -524,13 +547,13 @@ abstract class Base implements Iface
 	{
 		if( $customerId != null )
 		{
-			$manager = \Aimeos\MShop::create( $this->getContext(), 'customer' );
+			$manager = \Aimeos\MShop::create( $this->context, 'customer' );
 			$item = $manager->get( $customerId, ['service'] );
 			$serviceId = $this->getServiceItem()->getId();
 
 			if( ( $listItem = $item->getListItem( 'service', 'default', $serviceId, false ) ) === null )
 			{
-				$listManager = \Aimeos\MShop::create( $this->getContext(), 'customer/lists' );
+				$listManager = \Aimeos\MShop::create( $this->context, 'customer/lists' );
 				$listItem = $listManager->create()->setType( 'default' )->setRefId( $serviceId );
 			}
 
@@ -539,5 +562,22 @@ abstract class Base implements Iface
 		}
 
 		return $this;
+	}
+
+
+	/**
+	 * Throws an exception with the given message
+	 *
+	 * @param string $msg Message
+	 * @param string|null Translation domain
+	 * @param int $code Custom error code
+	 */
+	protected function throw( string $msg, string $domain = null, int $code = 0 ) : self
+	{
+		if( $domain ) {
+			$msg = $this->context->translate( $domain, $msg );
+		}
+
+		throw new \Aimeos\MShop\Service\Exception( $msg, $code );
 	}
 }
