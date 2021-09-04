@@ -569,10 +569,10 @@ abstract class Base implements Iface
 	 * Throws an exception with the given message
 	 *
 	 * @param string $msg Message
-	 * @param string|null Translation domain
+	 * @param string|null $domain Translation domain
 	 * @param int $code Custom error code
 	 */
-	protected function throw( string $msg, string $domain = null, int $code = 0 ) : self
+	protected function throw( string $msg, string $domain = null, int $code = 0 )
 	{
 		if( $domain ) {
 			$msg = $this->context->translate( $domain, $msg );
