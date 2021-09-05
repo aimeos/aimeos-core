@@ -91,6 +91,26 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetOrderNumber()
+	{
+		$this->assertEquals( $this->values['order.id'], $this->object->getOrderNumber() );
+	}
+
+
+	public function testGetOrderNumberCustom()
+	{
+		\Aimeos\MShop\Order\Item\Base::method( 'ordernumber', function( \Aimeos\MShop\Order\Item\Iface $item ) {
+			return 'order-' . $item->getId() . 'Z';
+		} );
+
+		$this->assertEquals( 'order-' . $this->values['order.id'] . 'Z', $this->object->getOrderNumber() );
+
+		\Aimeos\MShop\Order\Item\Base::method( 'ordernumber', function( \Aimeos\MShop\Order\Item\Iface $item ) {
+			return $item->getId();
+		} );
+	}
+
+
 	public function testGetBaseId()
 	{
 		$this->assertEquals( $this->values['order.baseid'], $this->object->getBaseId() );

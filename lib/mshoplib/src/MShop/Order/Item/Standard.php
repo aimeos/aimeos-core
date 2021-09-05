@@ -42,6 +42,21 @@ class Standard
 
 
 	/**
+	 * Returns the order number
+	 *
+	 * @return string Order number
+	 */
+	public function getOrderNumber() : string
+	{
+		if( $fcn = self::method( 'ordernumber' ) ) {
+			return (string) $fcn( $this );
+		}
+
+		return (string) $this->getId();
+	}
+
+
+	/**
 	 * Returns the associated order base item
 	 *
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface|null Order base item
