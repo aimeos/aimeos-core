@@ -73,6 +73,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			return $this->bdata[$name];
 		} );
 
+		$this->assertInstanceOf( '\Closure', \Aimeos\MShop\Product\Item\Standard::method( 'test' ) );
+
 		$object = new \Aimeos\MShop\Product\Item\Standard( $this->values );
 		$this->assertEquals( 'TEST', $object->test( 'product.code' ) );
 

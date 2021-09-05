@@ -26,6 +26,7 @@ abstract class Base
 	private $available = true;
 	private $modified = false;
 
+	/** @todo 2022.01 Make private */
 	protected static $methods = [];
 	protected $bdata;
 
@@ -76,10 +77,15 @@ abstract class Base
 	 *
 	 * @param string $name Method name
 	 * @param \Closure $function Anonymous method
+	 * @return \Closure|null Registered method
 	 */
-	public static function method( string $name, \Closure $function )
+	public static function method( string $name, \Closure $function = null ) : ?\Closure
 	{
-		static::$methods[$name] = $function;
+		if( $function ) {
+			static::$methods[$name] = $function;
+		}
+
+		return static::$methods[$name] ?? null;
 	}
 
 
