@@ -18,7 +18,7 @@ foreach( $this->get( 'orderItems', [] ) as $orderItem )
 		continue;
 	}
 
-	$data = array_merge( $orderItem->toArray(), $baseItem->toArray() );
+	$data = ['order.ordernumber' => $orderItem->getOrderNumber()] + $orderItem->toArray() + $baseItem->toArray();
 
 	echo $csv( 'invoice', $orderItem->getId(), $data );
 
