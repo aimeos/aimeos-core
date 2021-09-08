@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-06 09:42+0200\n"
-"PO-Revision-Date: 2021-07-06 07:50+0000\n"
+"POT-Creation-Date: 2021-08-18 13:26+0200\n"
+"PO-Revision-Date: 2021-08-18 11:40+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -155,6 +155,10 @@ msgid "Code \"%1$s\" must not be longer than 32 characters"
 msgstr "Der Code \"%1$s\" darf nicht länger als 32 Zeichen sein"
 
 #, php-format
+msgid "Code is too long"
+msgstr "Schlüsselwert is zu lang"
+
+#, php-format
 msgid "Code must not be longer than 255 characters"
 msgstr "Der eindeutige Code darf nicht länger als 255 Zeichen sein"
 
@@ -251,12 +255,24 @@ msgid "Internationalization object not available for \"%1$s\""
 msgstr "Internationalisierungs-Objekt für \"%1$s\" nicht verfügbar"
 
 #, php-format
+msgid "Invalid ISO country code"
+msgstr "Ungültiger ISO-Ländercode"
+
+#, php-format
 msgid "Invalid ISO country code \"%1$s\""
 msgstr "Ungültiger ISO-Ländercode \"%1$s\""
 
 #, php-format
+msgid "Invalid ISO currency code"
+msgstr "Ungültiger ISO-Währungscode"
+
+#, php-format
 msgid "Invalid ISO currency code \"%1$s\""
 msgstr "Ungültiger ISO-Währungscode \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO language code"
+msgstr "Ungültiger ISO-Sprachcode"
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
@@ -287,6 +303,14 @@ msgstr "Datum  \"%1$s\" enthält unerlaubte Zeichen. ISO Format \"YYYY-MM-DD hh:
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
 msgstr "Datum  \"%1$s\" enthält unerlaubte Zeichen. ISO Format \"YYYY-MM-DD\" erwartet."
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
+msgstr "Datum enthält unerlaubte Zeichen, ISO Format \"YYYY-MM-DD hh:mm:ss\" erwartet."
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
+msgstr "Datum enthält unerlaubte Zeichen, ISO Format \"YYYY-MM-DD\" erwartet."
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
@@ -721,8 +745,16 @@ msgid "Quantity must be 0 or greater and must not exceed %1$d"
 msgstr "Produktanzahl muss 0 oder größer und kleiner als %1$d sein"
 
 #, php-format
+msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
+msgstr "Produktanzahl muss 0 oder größer sein und die bestellte Menge nicht überschreiten"
+
+#, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
 msgstr "Produktanzahl muss größer als 0 und kleiner als %1$d sein"
+
+#, php-format
+msgid "Quantity must be greater than 0 and must not exceed 2147483647"
+msgstr "Produktanzahl muss größer als 0 sein und darf 2147483647 nicht überschreiten"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
