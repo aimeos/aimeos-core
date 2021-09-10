@@ -178,9 +178,9 @@ class Standard
 	 *
 	 * @return int Status code constant from \Aimeos\MShop\Order\Item\Base
 	 */
-	public function getStatusDelivery() : int
+	public function getStatusDelivery() : ?int
 	{
-		return $this->get( 'order.statusdelivery', \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
+		return $this->get( 'order.statusdelivery' );
 	}
 
 
@@ -196,10 +196,10 @@ class Standard
 	/**
 	 * Sets the delivery status of the invoice.
 	 *
-	 * @param int $status Status code constant from \Aimeos\MShop\Order\Item\Base
+	 * @param int|null $status Status code constant from \Aimeos\MShop\Order\Item\Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setStatusDelivery( int $status ) : \Aimeos\MShop\Order\Item\Iface
+	public function setStatusDelivery( ?int $status ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		$this->set( '.statusdelivery', $this->get( 'order.statusdelivery' ) );
 		return $this->set( 'order.statusdelivery', $status );
@@ -220,9 +220,9 @@ class Standard
 	 *
 	 * @return int Payment constant from \Aimeos\MShop\Order\Item\Base
 	 */
-	public function getStatusPayment() : int
+	public function getStatusPayment() : ?int
 	{
-		return $this->get( 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED );
+		return $this->get( 'order.statuspayment' );
 	}
 
 
@@ -238,10 +238,10 @@ class Standard
 	/**
 	 * Sets the payment status of the invoice.
 	 *
-	 * @param int $status Payment constant from \Aimeos\MShop\Order\Item\Base
+	 * @param int|null $status Payment constant from \Aimeos\MShop\Order\Item\Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setStatusPayment( int $status ) : \Aimeos\MShop\Order\Item\Iface
+	public function setStatusPayment( ?int $status ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		if( $status !== $this->getStatusPayment() ) {
 			$this->set( 'order.datepayment', date( 'Y-m-d H:i:s' ) );
