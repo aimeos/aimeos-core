@@ -187,7 +187,7 @@ class Standard
 	/**
 	 * @deprecated 2022.01
 	 */
-	public function getDeliveryStatus() : int
+	public function getDeliveryStatus() : ?int
 	{
 		return $this->getStatusDelivery();
 	}
@@ -201,7 +201,10 @@ class Standard
 	 */
 	public function setStatusDelivery( ?int $status ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$this->set( '.statusdelivery', $this->get( 'order.statusdelivery' ) );
+		if( $status !== null ) {
+			$this->set( '.statusdelivery', $this->get( 'order.statusdelivery' ) );
+		}
+
 		return $this->set( 'order.statusdelivery', $status );
 	}
 
@@ -209,7 +212,7 @@ class Standard
 	/**
 	 * @deprecated 2022.01
 	 */
-	public function setDeliveryStatus( int $status ) : \Aimeos\MShop\Order\Item\Iface
+	public function setDeliveryStatus( ?int $status ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		return $this->setStatusDelivery( $status );
 	}
@@ -229,7 +232,7 @@ class Standard
 	/**
 	 * @deprecated 2022.01
 	 */
-	public function getPaymentStatus() : int
+	public function getPaymentStatus() : ?int
 	{
 		return $this->getStatusPayment();
 	}
@@ -247,7 +250,10 @@ class Standard
 			$this->set( 'order.datepayment', date( 'Y-m-d H:i:s' ) );
 		}
 
-		$this->set( '.statuspayment', $this->get( 'order.statuspayment' ) );
+		if( $status !== null ) {
+			$this->set( '.statuspayment', $this->get( 'order.statuspayment' ) );
+		}
+
 		return $this->set( 'order.statuspayment', $status );
 	}
 
@@ -255,7 +261,7 @@ class Standard
 	/**
 	 * @deprecated 2022.01
 	 */
-	public function setPaymentStatus( int $status ) : \Aimeos\MShop\Order\Item\Iface
+	public function setPaymentStatus( ?int $status ) : \Aimeos\MShop\Order\Item\Iface
 	{
 		return $this->setStatusPayment( $status );
 	}
@@ -302,10 +308,10 @@ class Standard
 			{
 				case 'order.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
 				case 'order.type': $item = $item->setType( $value ); break;
-				case 'order.statusdelivery': $item = $item->setDeliveryStatus( $value ); break;
-				case 'order.statuspayment': $item = $item->setPaymentStatus( $value ); break;
-				case 'order.datepayment': $item = $item->setDatePayment( $value ); break;
+				case 'order.statusdelivery': $item = $item->setStatusDelivery( $value ); break;
+				case 'order.statuspayment': $item = $item->setStatusPayment( $value ); break;
 				case 'order.datedelivery': $item = $item->setDateDelivery( $value ); break;
+				case 'order.datepayment': $item = $item->setDatePayment( $value ); break;
 				case 'order.relatedid': $item = $item->setRelatedId( $value ); break;
 				default: continue 2;
 			}
@@ -328,10 +334,10 @@ class Standard
 		$list = parent::toArray( $private );
 
 		$list['order.type'] = $this->getType();
-		$list['order.statusdelivery'] = $this->getDeliveryStatus();
-		$list['order.statuspayment'] = $this->getPaymentStatus();
-		$list['order.datepayment'] = $this->getDatePayment();
+		$list['order.statusdelivery'] = $this->getStatusDelivery();
+		$list['order.statuspayment'] = $this->getStatusPayment();
 		$list['order.datedelivery'] = $this->getDateDelivery();
+		$list['order.datepayment'] = $this->getDatePayment();
 		$list['order.relatedid'] = $this->getRelatedId();
 
 		if( $private === true ) {
