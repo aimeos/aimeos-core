@@ -21,6 +21,13 @@ namespace Aimeos\MShop\Order\Item;
 interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
+	 * Returns the order number
+	 *
+	 * @return string Order number
+	 */
+	public function getOrderNumber() : string;
+
+	/**
 	 * Returns the associated order base item
 	 *
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface|null Order base item
@@ -82,32 +89,32 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	/**
 	 * Returns the delivery status of the invoice.
 	 *
-	 * @return int Status code constant from \Aimeos\MShop\Order\Item\Base
+	 * @return int|null Status code constant from \Aimeos\MShop\Order\Item\Base
 	 */
-	public function getStatusDelivery() : int;
+	public function getStatusDelivery() : ?int;
 
 	/**
 	 * Sets the delivery status of the invoice.
 	 *
-	 * @param int $status Status code constant from \Aimeos\MShop\Order\Item\Base
+	 * @param int|null $status Status code constant from \Aimeos\MShop\Order\Item\Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setStatusDelivery( int $status ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setStatusDelivery( ?int $status ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Returns the payment status of the invoice.
 	 *
-	 * @return int Payment constant from \Aimeos\MShop\Order\Item\Base
+	 * @return int|null Payment constant from \Aimeos\MShop\Order\Item\Base
 	 */
-	public function getStatusPayment() : int;
+	public function getStatusPayment() : ?int;
 
 	/**
 	 * Sets the payment status of the invoice.
 	 *
-	 * @param int $status Payment constant from \Aimeos\MShop\Order\Item\Base
+	 * @param int|null $status Payment constant from \Aimeos\MShop\Order\Item\Base
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setStatusPayment( int $status ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setStatusPayment( ?int $status ) : \Aimeos\MShop\Order\Item\Iface;
 
 	/**
 	 * Returns the related invoice ID.

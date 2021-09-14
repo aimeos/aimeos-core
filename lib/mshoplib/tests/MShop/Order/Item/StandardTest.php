@@ -91,6 +91,26 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetOrderNumber()
+	{
+		$this->assertEquals( $this->values['order.id'], $this->object->getOrderNumber() );
+	}
+
+
+	public function testGetOrderNumberCustom()
+	{
+		\Aimeos\MShop\Order\Item\Base::method( 'ordernumber', function( \Aimeos\MShop\Order\Item\Iface $item ) {
+			return 'order-' . $item->getId() . 'Z';
+		} );
+
+		$this->assertEquals( 'order-' . $this->values['order.id'] . 'Z', $this->object->getOrderNumber() );
+
+		\Aimeos\MShop\Order\Item\Base::method( 'ordernumber', function( \Aimeos\MShop\Order\Item\Iface $item ) {
+			return $item->getId();
+		} );
+	}
+
+
 	public function testGetBaseId()
 	{
 		$this->assertEquals( $this->values['order.baseid'], $this->object->getBaseId() );
@@ -177,6 +197,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetStatusDeliveryNull()
+	{
+		$return = $this->object->setStatusDelivery( null );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $return );
+		$this->assertNull( $this->object->getStatusDelivery() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetStatusPayment()
 	{
 		$this->assertEquals( $this->values['order.statuspayment'], $this->object->getStatusPayment() );
@@ -189,6 +219,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $return );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_DELETED, $this->object->getStatusPayment() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testSetStatusPaymentNull()
+	{
+		$return = $this->object->setStatusPayment( null );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $return );
+		$this->assertNull( $this->object->getStatusPayment() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 

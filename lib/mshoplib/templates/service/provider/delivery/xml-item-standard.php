@@ -17,6 +17,7 @@ $baseItems = $this->get( 'baseItems', [] );
 <?php foreach( $this->get( 'orderItems', [] ) as $id => $item ) : ?>
 
 	<orderitem ref="<?= $enc->attr( $id ) ?>">
+		<order.ordernumber><![CDATA[<?= $item->getOrderNumber() ?>]]></order.ordernumber>
 
 		<?php foreach( $item->toArray() as $key => $value ) : ?>
 			<<?= $key ?>><![CDATA[<?= !is_scalar( $value ) ? json_encode( $value ) : $value ?>]]></<?= $key ?>>

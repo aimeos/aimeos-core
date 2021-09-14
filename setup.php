@@ -127,6 +127,9 @@ function getContext( \Aimeos\MW\Config\Iface $conf )
 	$logger = new \Aimeos\MW\Logger\Errorlog( \Aimeos\MW\Logger\Base::INFO );
 	$ctx->setLogger( $logger );
 
+	$password = new \Aimeos\MW\Password\Standard();
+	$ctx->setPassword( $password );
+
 	$session = new \Aimeos\MW\Session\None();
 	$ctx->setSession( $session );
 

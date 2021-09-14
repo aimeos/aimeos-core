@@ -665,20 +665,26 @@ class PayPalExpress
 		$lastPos = 0;
 		$deliveryPrices = [];
 		$values = $this->getAuthParameter();
-		$addresses = $orderBase->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
 
-		if( $this->getConfigValue( 'paypalexpress.address', true ) && ( $address = current( $addresses ) ) !== false )
+		if( $this->getConfigValue( 'paypalexpress.address', true ) )
 		{
-			/* setting up the address details */
-			$values['NOSHIPPING'] = $this->getConfigValue( array( 'paypalexpress.NoShipping' ), 1 );
-			$values['ADDROVERRIDE'] = $this->getConfigValue( array( 'paypalexpress.AddrOverride' ), 0 );
-			$values['PAYMENTREQUEST_0_SHIPTONAME'] = $address->getFirstName() . ' ' . $address->getLastName();
-			$values['PAYMENTREQUEST_0_SHIPTOSTREET'] = $address->getAddress1() . ' ' . $address->getAddress2() . ' ' . $address->getAddress3();
-			$values['PAYMENTREQUEST_0_SHIPTOCITY'] = $address->getCity();
-			$values['PAYMENTREQUEST_0_SHIPTOSTATE'] = $address->getState();
-			$values['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'] = $address->getCountryId();
-			$values['PAYMENTREQUEST_0_SHIPTOZIP'] = $address->getPostal();
+			if( ( $addresses = $orderBase->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY ) ) === [] ) {
+				$addresses = $orderBase->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+			}
+
+			if( $address = current( $addresses ) )
+			{
+				/* setting up the address details */
+				$values['NOSHIPPING'] = $this->getConfigValue( array( 'paypalexpress.NoShipping' ), 1 );
+				$values['ADDROVERRIDE'] = $this->getConfigValue( array( 'paypalexpress.AddrOverride' ), 0 );
+				$values['PAYMENTREQUEST_0_SHIPTONAME'] = $address->getFirstName() . ' ' . $address->getLastName();
+				$values['PAYMENTREQUEST_0_SHIPTOSTREET'] = $address->getAddress1() . ' ' . $address->getAddress2() . ' ' . $address->getAddress3();
+				$values['PAYMENTREQUEST_0_SHIPTOCITY'] = $address->getCity();
+				$values['PAYMENTREQUEST_0_SHIPTOSTATE'] = $address->getState();
+				$values['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'] = $address->getCountryId();
+				$values['PAYMENTREQUEST_0_SHIPTOZIP'] = $address->getPostal();
+			}
 		}
 
 

@@ -53,6 +53,13 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testLog()
+	{
+		$result = $this->access( 'log' )->invokeArgs( $this->object, [['data' => 'test'], 500] );
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Provider\Iface::class, $result );
+	}
+
+
 	public function testQuery()
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
@@ -125,6 +132,13 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$customerId = $manager->find( 'test@example.com' )->getId();
 
 		$this->access( 'setCustomerData' )->invokeArgs( $this->object, [$customerId, 'token', 'abcd'] );
+	}
+
+
+	public function testThrow()
+	{
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
+		$this->access( 'throw' )->invokeArgs( $this->object, ['Test message', 'mshop'] );
 	}
 
 

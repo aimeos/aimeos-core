@@ -75,6 +75,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		unlink( 'tmp/order-export_0.xml' );
 
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getStatusDelivery() );
+		$this->assertGreaterThan( 0, (string) $xml->orderitem[0]->{'order.ordernumber'} );
 		$this->assertEquals( '2008-02-15 12:34:56', (string) $xml->orderitem[0]->{'order.datepayment'} );
 		$this->assertEquals( 'unittest', (string) $xml->orderitem[0]->{'order.base.sitecode'} );
 		$this->assertEquals( 'payment', (string) $xml->orderitem[0]->address->addressitem[0]['type'] );

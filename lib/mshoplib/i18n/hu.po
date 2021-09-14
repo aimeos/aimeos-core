@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-18 13:26+0200\n"
-"PO-Revision-Date: 2021-08-18 11:33+0000\n"
-"Last-Translator: Aimeos\n"
+"PO-Revision-Date: 2021-08-25 20:23+0000\n"
+"Last-Translator: Patrik Szakos <szakos0208@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -92,7 +92,7 @@ msgstr ""
 
 #, php-format
 msgid "Address search configuration not available"
-msgstr ""
+msgstr "A címkeresés konfigurációja nem érhető el"
 
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
@@ -100,7 +100,7 @@ msgstr ""
 
 #, php-format
 msgid "At least one key is required for aggregation"
-msgstr ""
+msgstr "Az összesítéshez legalább egy kulcs szükséges"
 
 #, php-format
 msgid "Basket empty"
@@ -156,7 +156,7 @@ msgstr ""
 
 #, php-format
 msgid "Code is too long"
-msgstr ""
+msgstr "A kód túl hosszú"
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
@@ -483,7 +483,7 @@ msgstr ""
 msgid ""
 "Newly created site can not be saved using method \"save()\". Try using "
 "method \"insert()\" instead."
-msgstr ""
+msgstr "Az újonnan létrehozott webhely nem menthető a \"save ()\" módszerrel. Próbálja helyette az \"insert ()\" módszert használni."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
@@ -670,7 +670,7 @@ msgstr "Fizetési költségek"
 
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
-msgstr ""
+msgstr "Kérjük, tekintse meg a kosárban lévő termékek árait"
 
 #, php-format
 msgid ""
@@ -702,7 +702,7 @@ msgstr "A termék nem áll rendelkezésre"
 msgid ""
 "Product does not contain all required values. Product code for item not "
 "available."
-msgstr ""
+msgstr "A termék nem tartalmazza az összes szükséges értéket. A termék termékkódja nem áll rendelkezésre."
 
 #, php-format
 msgid "Product does not contain the SKU code"
@@ -710,7 +710,7 @@ msgstr ""
 
 #, php-format
 msgid "Product matching given properties not found"
-msgstr ""
+msgstr "A megadott tulajdonságoknak megfelelő termék nem található"
 
 #, php-format
 msgid "Product not available"
@@ -746,7 +746,7 @@ msgstr ""
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
-msgstr ""
+msgstr "A mennyiségnek 0 -nak vagy nagyobbnak kell lennie, és nem haladhatja meg a megrendelt mennyiséget"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
@@ -754,7 +754,7 @@ msgstr ""
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
-msgstr ""
+msgstr "A mennyiségnek nagyobbnak kell lennie, mint 0, és nem haladhatja meg a 2147483647 értéket"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
@@ -800,13 +800,13 @@ msgstr "A munkamenet objektum nem elérhető"
 msgid ""
 "Site can not be inserted. Site ID of site differs from site ID of parent "
 "site."
-msgstr ""
+msgstr "A webhely nem illeszthető be. A webhely webhelyazonosítója eltér a szülő webhely azonosítójától."
 
 #, php-format
 msgid ""
 "Site can not be moved. Site ID of site differs from present site id, site ID"
 " of existing parent site or site id of new parent site."
-msgstr ""
+msgstr "A webhely nem helyezhető át. A webhely webhelyazonosítója eltér a jelenlegi webhelyazonosítótól, a meglévő szülő webhely webhelyazonosítójától vagy az új szülő webhely azonosítójától."
 
 #, php-format
 msgid "Site for code \"%1$s\" not found"
@@ -870,7 +870,7 @@ msgstr ""
 
 #, php-format
 msgid "Total results value not found"
-msgstr ""
+msgstr "A teljes találati érték nem található"
 
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"

@@ -30,6 +30,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	private $mail;
 	private $nonce;
 	private $queue;
+	private $password;
 	private $process;
 	private $session;
 	private $view;
@@ -52,6 +53,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		$this->logger = null;
 		$this->mail = null;
 		$this->queue = null;
+		$this->password = null;
 		$this->process = null;
 		$this->session = null;
 		$this->view = null;
@@ -71,6 +73,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		$this->logger = ( isset( $this->logger ) ? clone $this->logger : null );
 		$this->mail = ( isset( $this->mail ) ? clone $this->mail : null );
 		$this->queue = ( isset( $this->queue ) ? clone $this->queue : null );
+		$this->password = ( isset( $this->password ) ? clone $this->password : null );
 		$this->process = ( isset( $this->process ) ? clone $this->process : null );
 		$this->session = ( isset( $this->session ) ? clone $this->session : null );
 		// view is always cloned
@@ -88,7 +91,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	{
 		$objects = array(
 			$this->cache, $this->config, $this->db, $this->fs, $this->locale, $this->logger,
-			$this->mail, $this->queue, $this->process, $this->session, $this->view
+			$this->mail, $this->queue, $this->password, $this->process, $this->session, $this->view
 		);
 
 		foreach( $objects as $object )
@@ -111,7 +114,8 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	{
 		$objects = array(
 			$this, $this->cache, $this->config, $this->db, $this->fs, $this->locale,
-			$this->logger, $this->mail, $this->queue, $this->process, $this->session, $this->view
+			$this->logger, $this->mail, $this->queue, $this->password, $this->process,
+			$this->session, $this->view
 		);
 
 		return md5( $this->hash( $objects ) );
@@ -623,6 +627,34 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	public function setNonce( ?string $value ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->nonce = $value;
+		return $this;
+	}
+
+
+	/**
+	 * Returns the password adapter object.
+	 *
+	 * @return \Aimeos\MW\Password\Iface Password adapter
+	 */
+	public function password() : \Aimeos\MW\Password\Iface
+	{
+		if( !isset( $this->password ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Password object not available' ) );
+		}
+
+		return $this->password;
+	}
+
+
+	/**
+	 * Sets the password adapter object.
+	 *
+	 * @param \Aimeos\MW\Password\Iface $password Password adapter
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
+	 */
+	public function setPassword( \Aimeos\MW\Password\Iface $password ) : \Aimeos\MShop\Context\Item\Iface
+	{
+		$this->password = $password;
 		return $this;
 	}
 
