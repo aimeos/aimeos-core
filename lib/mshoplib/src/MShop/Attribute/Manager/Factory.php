@@ -75,7 +75,7 @@ class Factory
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$msg = $context->i18n()->dt( 'mshop', 'Invalid characters in class name "%1$s"' );
+			$msg = $context->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
 			throw new \Aimeos\MShop\Attribute\Exception( sprintf( $msg, $classname ) );
 		}
 

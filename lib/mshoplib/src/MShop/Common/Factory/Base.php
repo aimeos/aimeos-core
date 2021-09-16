@@ -53,7 +53,7 @@ abstract class Base
 		{
 			if( ctype_alnum( $name ) === false )
 			{
-				$msg = $context->i18n()->dt( 'mshop', 'Invalid characters in class name "%1$s"' );
+				$msg = $context->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
 				throw new \Aimeos\MShop\Exception( sprintf( $msg, $name ) );
 			}
 
@@ -61,7 +61,7 @@ abstract class Base
 
 			if( class_exists( $classname ) === false )
 			{
-				$msg = $context->i18n()->dt( 'mshop', 'Class "%1$s" not available' );
+				$msg = $context->translate( 'mshop', 'Class "%1$s" not available' );
 				throw new \Aimeos\MShop\Exception( sprintf( $msg, $classname ) );
 			}
 
@@ -150,7 +150,7 @@ abstract class Base
 
 		if( class_exists( $classname ) === false )
 		{
-			$msg = $context->i18n()->dt( 'mshop', 'Class "%1$s" not available' );
+			$msg = $context->translate( 'mshop', 'Class "%1$s" not available' );
 			throw new \Aimeos\MShop\Exception( sprintf( $msg, $classname ) );
 		}
 
