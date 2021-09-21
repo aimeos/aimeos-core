@@ -168,6 +168,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testStock()
+	{
+		$item = $this->object->find( 'CNC' );
+		$result = $this->object->stock( $item->getId(), 0 );
+		$item2 = $this->object->find( 'CNC' );
+
+		$this->object->stock( $item->getId(), $item->inStock() );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $result );
+		$this->assertEquals( 0, $item2->inStock() );
+	}
+
+
 	public function testSave()
 	{
 		$search = $this->object->filter();

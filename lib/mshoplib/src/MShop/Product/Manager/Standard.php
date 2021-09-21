@@ -372,6 +372,8 @@ class Standard
 		 * @see mshop/product/manager/newid/ansi
 		 * @see mshop/product/manager/search/ansi
 		 * @see mshop/product/manager/count/ansi
+		 * @see mshop/product/manager/rate/ansi
+		 * @see mshop/product/manager/stock/ansi
 		 */
 		$path = 'mshop/product/manager/delete';
 
@@ -515,6 +517,7 @@ class Standard
 			 * @see mshop/product/manager/delete/ansi
 			 * @see mshop/product/manager/search/ansi
 			 * @see mshop/product/manager/count/ansi
+			 * @see mshop/product/manager/stock/ansi
 			 */
 			$path = 'mshop/product/manager/rate';
 
@@ -524,6 +527,76 @@ class Standard
 			$stmt->bind( 2, $ratings, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 3, $context->getLocale()->getSiteId() );
 			$stmt->bind( 4, (int) $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+
+			$stmt->execute()->finish();
+
+			$dbm->release( $conn, $dbname );
+		}
+		catch( \Exception $e )
+		{
+			$dbm->release( $conn, $dbname );
+			throw $e;
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Updates if the product is in stock
+	 *
+	 * @param string $id ID of the procuct item
+	 * @param int $value "0" or "1" if product is in stock or not
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function stock( string $id, int $value ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		$context = $this->getContext();
+
+		$dbm = $context->getDatabaseManager();
+		$dbname = $this->getResourceName();
+		$conn = $dbm->acquire( $dbname );
+
+		try
+		{
+			/** mshop/product/manager/stock/mysql
+			 * Updates the rating of the product in the database
+			 *
+			 * @see mshop/product/manager/stock/ansi
+			 */
+
+			/** mshop/product/manager/stock/ansi
+			 * Updates the rating of the product in the database
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values for the rating to the statement before they are
+			 * sent to the database server. The order of the columns must
+			 * correspond to the order in the stock() method, so the
+			 * correct values are bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for update ratings
+			 * @since 2021.10
+			 * @category Developer
+			 * @see mshop/product/manager/insert/ansi
+			 * @see mshop/product/manager/update/ansi
+			 * @see mshop/product/manager/newid/ansi
+			 * @see mshop/product/manager/delete/ansi
+			 * @see mshop/product/manager/search/ansi
+			 * @see mshop/product/manager/count/ansi
+			 * @see mshop/product/manager/rate/ansi
+			 */
+			$path = 'mshop/product/manager/stock';
+
+			$stmt = $this->getCachedStatement( $conn, $path, $this->getSqlConfig( $path ) );
+
+			$stmt->bind( 1, $value, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $context->getLocale()->getSiteId() );
+			$stmt->bind( 3, (int) $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 
@@ -602,6 +675,8 @@ class Standard
 				 * @see mshop/product/manager/delete/ansi
 				 * @see mshop/product/manager/search/ansi
 				 * @see mshop/product/manager/count/ansi
+				 * @see mshop/product/manager/rate/ansi
+				 * @see mshop/product/manager/stock/ansi
 				 */
 				$path = 'mshop/product/manager/insert';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
@@ -639,6 +714,8 @@ class Standard
 				 * @see mshop/product/manager/delete/ansi
 				 * @see mshop/product/manager/search/ansi
 				 * @see mshop/product/manager/count/ansi
+				 * @see mshop/product/manager/rate/ansi
+				 * @see mshop/product/manager/stock/ansi
 				 */
 				$path = 'mshop/product/manager/update';
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
@@ -711,6 +788,8 @@ class Standard
 				 * @see mshop/product/manager/delete/ansi
 				 * @see mshop/product/manager/search/ansi
 				 * @see mshop/product/manager/count/ansi
+				 * @see mshop/product/manager/rate/ansi
+				 * @see mshop/product/manager/stock/ansi
 				 */
 				$path = 'mshop/product/manager/newid';
 				$id = $this->newId( $conn, $path );
@@ -840,6 +919,8 @@ class Standard
 			 * @see mshop/product/manager/newid/ansi
 			 * @see mshop/product/manager/delete/ansi
 			 * @see mshop/product/manager/count/ansi
+			 * @see mshop/product/manager/rate/ansi
+			 * @see mshop/product/manager/stock/ansi
 			 */
 			$cfgPathSearch = 'mshop/product/manager/search';
 
@@ -893,6 +974,8 @@ class Standard
 			 * @see mshop/product/manager/newid/ansi
 			 * @see mshop/product/manager/delete/ansi
 			 * @see mshop/product/manager/search/ansi
+			 * @see mshop/product/manager/rate/ansi
+			 * @see mshop/product/manager/stock/ansi
 			 */
 			$cfgPathCount = 'mshop/product/manager/count';
 

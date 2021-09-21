@@ -513,6 +513,13 @@ return array(
 				WHERE "siteid" = ? AND "id" = ?
 			'
 		),
+		'stock' => array(
+			'ansi' => '
+				UPDATE "mshop_product"
+				SET "instock" = ?
+				WHERE "siteid" = ? AND "id" = ?
+			'
+		),
 		'search' => array(
 			'ansi' => '
 				SELECT :columns

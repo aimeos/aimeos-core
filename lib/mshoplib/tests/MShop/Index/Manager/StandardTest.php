@@ -327,6 +327,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testStock()
+	{
+		$this->assertEquals( $this->object, $this->object->stock( -1, 0 ) );
+	}
+
+
 	/**
 	 * Returns value of a catalog_index column.
 	 *

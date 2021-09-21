@@ -206,6 +206,20 @@ abstract class DBBase
 
 
 	/**
+	 * Updates if the product is in stock
+	 *
+	 * @param string $id ID of the procuct item
+	 * @param int $value "0" or "1" if product is in stock or not
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function stock( string $id, int $value ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		$this->manager->stock( $id, $value );
+		return $this;
+	}
+
+
+	/**
 	 * Removes all entries not touched after the given timestamp
 	 *
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
