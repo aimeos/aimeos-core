@@ -139,7 +139,7 @@ interface Iface
 	/**
 	 * Returns or sets a flag if stock is available for that product.
 	 *
-	 * @param int|null 0/1 to set value, null to return value
+	 * @param int|null $value 0/1 to set value, null to return value
 	 * @return int "0" if product is out of stock, "1" if product is in stock
 	 */
 	public function inStock( int $value = null ) : int;
