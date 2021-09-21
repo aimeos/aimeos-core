@@ -51,6 +51,7 @@ return array(
 			$table->addColumn( 'scale', 'float', ['default' => 1] );
 			$table->addColumn( 'rating', 'decimal', ['precision' => 4, 'scale' => 2, 'default' => 0] );
 			$table->addColumn( 'ratings', 'integer', ['default' => 0] );
+			$table->addColumn( 'instock', 'smallint', [] );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );

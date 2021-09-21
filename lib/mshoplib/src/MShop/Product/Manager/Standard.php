@@ -93,6 +93,13 @@ class Standard
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'product.instock' => array(
+			'code' => 'product.instock',
+			'internalcode' => 'mpro."instock"',
+			'label' => 'Product in stock',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'product.status' => array(
 			'code' => 'product.status',
 			'internalcode' => 'mpro."status"',
@@ -649,6 +656,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getDataset() );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, $item->getUrl() );
+			$stmt->bind( $idx++, $item->inStock(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getScale(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( $idx++, $item->getDateStart() );

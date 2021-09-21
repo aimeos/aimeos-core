@@ -74,7 +74,7 @@ return [
 
 	'product' => [
 		'product/ABCD' => [
-			'product.type' => 'default', 'product.code' => 'ABCD', 'product.label' => 'ABCD/16 discs',
+			'product.type' => 'default', 'product.code' => 'ABCD', 'product.label' => 'ABCD/16 discs', 'product.instock' => 1,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/xl',
@@ -98,7 +98,7 @@ return [
 			],
 		],
 		'product/EFGH' => [
-			'product.type' => 'default', 'product.code' => 'EFGH', 'product.label' => 'EFGH/16 discs',
+			'product.type' => 'default', 'product.code' => 'EFGH', 'product.label' => 'EFGH/16 discs', 'product.instock' => 0,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/xxl'
@@ -122,7 +122,7 @@ return [
 			],
 		],
 		'product/IJKL' => [
-			'product.type' => 'default', 'product.code' => 'IJKL', 'product.label' => 'IJKL/16 discs',
+			'product.type' => 'default', 'product.code' => 'IJKL', 'product.label' => 'IJKL/16 discs', 'product.instock' => 1,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/xl',
@@ -141,7 +141,7 @@ return [
 			],
 		],
 		'product/MNOP' => [
-			'product.type' => 'default', 'product.code' => 'MNOP', 'product.label' => 'MNOP/16 discs',
+			'product.type' => 'default', 'product.code' => 'MNOP', 'product.label' => 'MNOP/16 discs', 'product.instock' => 1,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/m'
@@ -149,7 +149,8 @@ return [
 			],
 		],
 		'product/QRST' => [
-			'product.type' => 'default', 'product.code' => 'QRST', 'product.label' => 'QRST/16 discs', 'product.status' => 0,
+			'product.type' => 'default', 'product.code' => 'QRST', 'product.label' => 'QRST/16 discs',
+			'product.status' => 0, 'product.instock' => 1,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/xl'
@@ -163,7 +164,8 @@ return [
 			],
 		],
 		'product/U:MD' => [
-			'product.type' => 'default', 'product.code' => 'U:MD', 'product.label' => 'Unittest: Monetary rebate', 'product.status' => 0,
+			'product.type' => 'default', 'product.code' => 'U:MD', 'product.label' => 'Unittest: Monetary rebate',
+			'product.status' => 0, 'product.instock' => 1,
 			'lists' => [
 				'price' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
@@ -185,7 +187,8 @@ return [
 			],
 		],
 		'product/U:SD' => [
-			'product.type' => 'default', 'product.code' => 'U:SD', 'product.label' => 'Unittest: Shipping rebate', 'product.status' => 0,
+			'product.type' => 'default', 'product.code' => 'U:SD', 'product.label' => 'Unittest: Shipping rebate',
+			'product.status' => 0, 'product.instock' => 1,
 			'lists' => [
 				'price' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
@@ -210,7 +213,8 @@ return [
 			],
 		],
 		'product/U:PD' => [
-			'product.type' => 'voucher', 'product.code' => 'U:PD', 'product.label' => 'Unittest: Present rebate', 'product.status' => 0,
+			'product.type' => 'voucher', 'product.code' => 'U:PD', 'product.label' => 'Unittest: Present rebate',
+			'product.status' => 0, 'product.instock' => 1,
 			'lists' => [
 				'price' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
@@ -235,10 +239,12 @@ return [
 			],
 		],
 		'product/U:WH' => [
-			'product.type' => 'default', 'product.code' => 'U:WH', 'product.label' => 'Unittest: Present rebate', 'product.status' => 0,
+			'product.type' => 'default', 'product.code' => 'U:WH', 'product.label' => 'Unittest: Present rebate',
+			'product.status' => 0, 'product.instock' => 1,
 		],
 		'product/U:CF' => [
-			'product.type' => 'default', 'product.code' => 'U:CF', 'product.label' => 'Unittest: Cheapest free rebate', 'product.status' => 0,
+			'product.type' => 'default', 'product.code' => 'U:CF', 'product.label' => 'Unittest: Cheapest free rebate',
+			'product.status' => 0, 'product.instock' => 1,
 			'lists' => [
 				'price' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
@@ -255,6 +261,7 @@ return [
 		],
 		'product/U:TESTSUB01' => [
 			'product.type' => 'default', 'product.code' => 'U:TESTSUB01', 'product.label' => 'Unittest: Test Sub 1',
+			'product.instock' => 1,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/color/white',
@@ -265,6 +272,7 @@ return [
 		],
 		'product/U:TESTSUB02' => [
 			'product.type' => 'default', 'product.code' => 'U:TESTSUB02', 'product.label' => 'Unittest: Test Sub 2',
+			'product.instock' => 1,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'variant', 'product.lists.position' => 0, 'ref' => 'product/length/30',
@@ -275,6 +283,7 @@ return [
 		],
 		'product/U:TESTSUB03' => [
 			'product.type' => 'default', 'product.code' => 'U:TESTSUB03', 'product.label' => 'Unittest: Test Sub 3',
+			'product.instock' => 1,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/color/blue',
@@ -285,6 +294,7 @@ return [
 		],
 		'product/U:TESTSUB04' => [
 			'product.type' => 'default', 'product.code' => 'U:TESTSUB04', 'product.label' => 'Unittest: Test Sub 4',
+			'product.instock' => 1,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'variant', 'product.lists.position' => 0, 'ref' => 'product/length/32',
@@ -301,6 +311,7 @@ return [
 		],
 		'product/U:TESTSUB05' => [
 			'product.type' => 'default', 'product.code' => 'U:TESTSUB05', 'product.label' => 'Unittest: Test Sub 5',
+			'product.instock' => 1,
 			'lists' => [
 				'price' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
@@ -317,6 +328,7 @@ return [
 		],
 		'product/U:TEST' => [
 			'product.type' => 'select', 'product.code' => 'U:TEST', 'product.label' => 'Unittest: Test Selection',
+			'product.instock' => 1,
 			'lists' => [
 				'media' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
@@ -360,6 +372,7 @@ return [
 		],
 		'product/U:noSel' => [
 			'product.type' => 'select', 'product.code' => 'U:noSel', 'product.label' => 'Unittest: Empty Selection',
+			'product.instock' => 1,
 			'lists' => [
 				'price' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
@@ -376,9 +389,11 @@ return [
 		],
 		'product/U:TESTPSUB01' => [
 			'product.type' => 'default', 'product.code' => 'U:TESTPSUB01', 'product.label' => 'Unittest: Test priced Sub 1',
+			'product.instock' => 1,
 		],
 		'product/U:TESTP' => [
 			'product.type' => 'select', 'product.code' => 'U:TESTP', 'product.label' => 'Unittest: Test priced Selection',
+			'product.instock' => 1,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'config', 'product.lists.position' => 0, 'ref' => 'product/color/white',
@@ -404,26 +419,32 @@ return [
 		],
 		'product/bdl:zyx' => [
 			'product.type' => 'bundle', 'product.code' => 'bdl:zyx', 'product.label' => 'Unittest: Bundle bdl:zyx',
+			'product.instock' => 1,
 		],
 		'product/bdl:EFG' => [
 			'product.type' => 'bundle', 'product.code' => 'bdl:EFG', 'product.label' => 'Unittest: Bundle bdl:EFG',
+			'product.instock' => 1,
 		],
 		'product/bdl:HIJ' => [
 			'product.type' => 'bundle', 'product.code' => 'bdl:HIJ', 'product.label' => 'Unittest: Bundle bdl:HIJ',
+			'product.instock' => 1,
 		],
 		'product/bdl:hal' => [
 			'product.type' => 'bundle', 'product.code' => 'bdl:hal', 'product.label' => 'Unittest: Bundle bdl:hal',
+			'product.instock' => 1,
 		],
 		'product/bdl:EFX' => [
 			'product.type' => 'bundle', 'product.code' => 'bdl:EFX', 'product.label' => 'Unittest: Bundle bdl:EFX',
+			'product.instock' => 1,
 		],
 		'product/bdl:HKL' => [
 			'product.type' => 'bundle', 'product.code' => 'bdl:HKL', 'product.label' => 'Unittest: Bundle bdl:HKL',
+			'product.instock' => 1,
 		],
 		'product/CNC' => [
 			'product.type' => 'default', 'product.code' => 'CNC', 'product.label' => 'Cafe Noire Cappuccino',
 			'product.url' => 'cafe_noire_cappuccino', 'product.config' => ['css-class' => 'sale'],
-			'product.dataset' => 'Coffee', 'product.scale' => 0.1,
+			'product.dataset' => 'Coffee', 'product.scale' => 0.1, 'product.instock' => 1,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/xs',
@@ -549,6 +570,7 @@ return [
 			'product.type' => 'default', 'product.code' => 'CNE', 'product.label' => 'Cafe Noire Expresso',
 			'product.url' => 'cafe_noire_expresso', 'product.config' => ['css-class' => 'top', 'size' => 1],
 			'product.dataset' => 'Coffee', 'product.scale' => 0.1, 'product.rating' => 4, 'product.ratings' => 1,
+			'product.instock' => 1,
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/xs',
@@ -706,6 +728,7 @@ return [
 		],
 		'product/U:BUNDLE' => [
 			'product.type' => 'bundle', 'product.code' => 'U:BUNDLE', 'product.label' => 'Unittest: Bundle',
+			'product.instock' => 1,
 			'lists' => [
 				'product' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'Cafe Noire Cappuccino',

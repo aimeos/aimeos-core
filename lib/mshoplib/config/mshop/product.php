@@ -489,10 +489,10 @@ return array(
 		'insert' => array(
 			'ansi' => '
 				INSERT INTO "mshop_product" ( :names
-					"type", "code", "dataset", "label", "url", "status", "scale", "start", "end",
-					"config", "target", "editor", "mtime", "ctime", "siteid"
+					"type", "code", "dataset", "label", "url", "instock", "status", "scale",
+					"start", "end", "config", "target", "editor", "mtime", "ctime", "siteid"
 				) VALUES ( :values
-					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 				)
 			'
 		),
@@ -500,8 +500,9 @@ return array(
 			'ansi' => '
 				UPDATE "mshop_product"
 				SET :names
-					"type" = ?, "code" = ?, "dataset" = ?, "label" = ?, "url" = ?, "status" = ?, "scale" = ?,
-					"start" = ?, "end" = ?, "config" = ?, "target" = ?, "editor" = ?, "mtime" = ?, "ctime" = ?
+					"type" = ?, "code" = ?, "dataset" = ?, "label" = ?, "url" = ?, "instock" = ?,
+					"status" = ?, "scale" = ?, "start" = ?, "end" = ?, "config" = ?, "target" = ?,
+					"editor" = ?, "mtime" = ?, "ctime" = ?
 				WHERE "siteid" = ? AND "id" = ?
 			'
 		),
@@ -523,14 +524,16 @@ return array(
 					mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor",
 					mpro."target" AS "product.target", mpro."dataset" AS "product.dataset",
 					mpro."scale" AS "product.scale", mpro."config" AS "product.config",
-					mpro."rating" AS "product.rating", mpro."ratings" AS "product.ratings"
+					mpro."rating" AS "product.rating", mpro."ratings" AS "product.ratings",
+					mpro."instock" AS "product.instock"
 				FROM "mshop_product" AS mpro
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
 					mpro."id", mpro."siteid", mpro."type", mpro."code", mpro."label", mpro."url",
 					mpro."target", mpro."dataset", mpro."scale", mpro."config", mpro."start", mpro."end",
-					mpro."status", mpro."ctime", mpro."mtime", mpro."editor", mpro."rating", mpro."ratings"
+					mpro."status", mpro."ctime", mpro."mtime", mpro."editor", mpro."rating", mpro."ratings",
+					mpro."instock"
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 			',
@@ -544,7 +547,8 @@ return array(
 					mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor",
 					mpro."target" AS "product.target", mpro."dataset" AS "product.dataset",
 					mpro."scale" AS "product.scale", mpro."config" AS "product.config",
-					mpro."rating" AS "product.rating", mpro."ratings" AS "product.ratings"
+					mpro."rating" AS "product.rating", mpro."ratings" AS "product.ratings",
+					mpro."instock" AS "product.instock"
 				FROM "mshop_product" AS mpro
 				:joins
 				WHERE :cond

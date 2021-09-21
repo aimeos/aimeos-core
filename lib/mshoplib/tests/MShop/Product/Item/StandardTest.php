@@ -37,6 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.target' => 'testtarget',
 			'product.rating' => '4.80',
 			'product.ratings' => 5,
+			'product.instock' => 1,
 			'additional' => 'value',
 		);
 
@@ -420,6 +421,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testInStock()
+	{
+		$this->assertEquals( 1, $this->object->inStock() );
+		$this->assertEquals( 0, $this->object->inStock( 0 ) );
+		$this->assertEquals( 0, $this->object->inStock() );
+	}
+
+
 	public function testIsAvailable()
 	{
 		$this->assertTrue( $this->object->isAvailable() );
@@ -570,6 +579,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.status' => 0,
 			'product.scale' => '0.5',
 			'product.target' => 'ttarget',
+			'product.instock' => 1,
 			'additional' => 'value',
 		);
 
@@ -588,6 +598,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['product.status'], $item->getStatus() );
 		$this->assertEquals( $list['product.target'], $item->getTarget() );
 		$this->assertEquals( $list['product.scale'], $item->getScale() );
+		$this->assertEquals( $list['product.instock'], $item->inStock() );
 		$this->assertEquals( $list['additional'], $item->additional );
 		$this->assertEquals( '', $item->getSiteId() );
 	}
@@ -616,5 +627,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getScale(), $arrayObject['product.scale'] );
 		$this->assertEquals( $this->object->getRating(), $arrayObject['product.rating'] );
 		$this->assertEquals( $this->object->getRatings(), $arrayObject['product.ratings'] );
+		$this->assertEquals( $this->object->inStock(), $arrayObject['product.instock'] );
 	}
 }

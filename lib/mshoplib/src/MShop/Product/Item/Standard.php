@@ -449,6 +449,23 @@ class Standard
 	}
 
 
+	/**
+	 * Returns or sets a flag if stock is available for that product.
+	 *
+	 * @param int|null 0/1 to set value, null to return value
+	 * @return int "0" if product is out of stock, "1" if product is in stock
+	 */
+	public function inStock( int $value = null ) : int
+	{
+		if( $value !== null ) {
+			$this->set( 'product.instock', $value );
+		}
+
+		return (int) $this->get( 'product.instock', 0 );
+
+	}
+
+
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
@@ -476,6 +493,7 @@ class Standard
 				case 'product.config': $item = $item->setConfig( $value ); break;
 				case 'product.target': $item = $item->setTarget( $value ); break;
 				case 'product.ctime': $item = $item->setTimeCreated( $value ); break;
+				case 'product.instock': $item->inStock( $value ); break;
 				default: continue 2;
 			}
 
@@ -508,8 +526,9 @@ class Standard
 		$list['product.scale'] = $this->getScale();
 		$list['product.target'] = $this->getTarget();
 		$list['product.ctime'] = $this->getTimeCreated();
-		$list['product.rating'] = $this->getRating();
 		$list['product.ratings'] = $this->getRatings();
+		$list['product.rating'] = $this->getRating();
+		$list['product.instock'] = $this->inStock();
 
 		return $list;
 	}
