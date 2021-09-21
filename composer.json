@@ -13,7 +13,7 @@
 	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"require": {
-		"php": "~7.1||^8.0.1",
+		"php": "~7.1||^8.0.10",
 		"ext-curl": "*",
 		"ext-dom": "*",
 		"ext-fileinfo": "*",
@@ -24,7 +24,7 @@
 		"ext-pcre": "*",
 		"ext-PDO": "*",
 		"ext-zip": "*",
-		"aimeos/map": "^2.0",
+		"aimeos/map": "^2.1",
 		"nyholm/psr7": "^1.2",
 		"doctrine/dbal": "~2.0",
 		"psr/http-message": "~1.0",
