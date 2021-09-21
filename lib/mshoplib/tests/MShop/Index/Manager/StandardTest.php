@@ -284,6 +284,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testRate()
+	{
+		$this->assertEquals( $this->object, $this->object->rate( -1, 0, 0 ) );
+	}
+
+
 	public function testRebuildWithList()
 	{
 		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );

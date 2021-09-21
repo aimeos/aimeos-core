@@ -139,6 +139,21 @@ abstract class DBBase
 
 
 	/**
+	 * Updates the rating of the item
+	 *
+	 * @param string $id ID of the item
+	 * @param string $rating Decimal value of the rating
+	 * @param int $ratings Total number of ratings for the item
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function rate( string $id, string $rating, int $ratings ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		$this->manager->rate( $id, $rating, $ratings );
+		return $this;
+	}
+
+
+	/**
 	 * Rebuilds the customer index
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs and items values
