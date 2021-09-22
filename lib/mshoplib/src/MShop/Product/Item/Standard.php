@@ -462,7 +462,6 @@ class Standard
 		}
 
 		return (int) $this->get( 'product.instock', 0 );
-
 	}
 
 
