@@ -14,6 +14,6 @@ return [[
 	'attribute.domain' => 'product', 'attribute.type' => 'text', 'attribute.code' => 'custom',
 	'attribute.label' => 'Custom text', 'attribute.position' => 0, 'attribute.status' => 1
 ], [
-    'attribute.domain' => 'product', 'attribute.type' => 'upload', 'attribute.code' => 'custom',
-    'attribute.label' => 'Custom upload', 'attribute.position' => 0, 'attribute.status' => 1
+	'attribute.domain' => 'product', 'attribute.type' => 'upload', 'attribute.code' => 'custom',
+	'attribute.label' => 'Custom upload', 'attribute.position' => 0, 'attribute.status' => 1
 ]];
