@@ -121,18 +121,19 @@ class PropertyAdd
 		if( !is_array( $value ) )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
-			return $this->addAttributes( $value, $this->getProductItems( [$value->getProductCode()] ), $types );
+			return $this->addAttributes( $value, $this->getProductItems( [$value->getProductId()], [$value->getProductCode()]), $types );
 		}
 
 		$list = [];
 
 		foreach( $value as $orderProduct )
 		{
-			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $orderProduct );
-			$list[] = $orderProduct->getProductCode();
-		}
+			\Aimeos\MW\Common\Base::checkClass(\Aimeos\MShop\Order\Item\Base\Product\Iface::class, $orderProduct);
+			$list['code'][] = $orderProduct->getProductCode();
+			$list['id'][] = $orderProduct->getProductId();
+        	}
 
-		$products = $this->getProductItems( $list );
+		$products = $this->getProductItems( $list['id'], $list['code'] );
 
 		foreach( $value as $key => $orderProduct ) {
 			$value[$key] = $this->addAttributes( $orderProduct, $products, $types );
@@ -153,20 +154,25 @@ class PropertyAdd
 	protected function addAttributes( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct,
 	\Aimeos\Map $products, array $types ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		$product = $products->filter(
-			function ( \Aimeos\MShop\Product\Item\Iface $item ) use ( $orderProduct ) : bool {
-				return $item->getCode() === $orderProduct->getProductCode();
-			}
-		)->first();
-
-
-		if( $product === null ) {
+		if( ( $product = $products->get( $orderProduct->getProductId() ) ) === null ) {
 			return $orderProduct;
+		}
+
+		if($products->count() > 1) {
+			$variant = $products->find(
+				function ( \Aimeos\MShop\Product\Item\Iface $item ) use ( $orderProduct ) : bool {
+					return $item->getCode() === $orderProduct->getProductCode();
+				}
+			);
 		}
 
 		foreach( $types as $type )
 		{
 			$list = $product->getProperties( $type );
+			
+			if( $variant ?? false) {
+				$list->union( $variant->getProperties( $type ) );
+			}
 
 			if( !$list->isEmpty() )
 			{
