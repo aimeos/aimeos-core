@@ -121,7 +121,7 @@ class PropertyAdd
 		if( !is_array( $value ) )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
-			return $this->addAttributes( $value, $this->getProductItems( [$value->getProductId()] ), $types );
+			return $this->addAttributes( $value, $this->getProductItems( [$value->getProductCode()] ), $types );
 		}
 
 		$list = [];
@@ -129,7 +129,7 @@ class PropertyAdd
 		foreach( $value as $orderProduct )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $orderProduct );
-			$list[] = $orderProduct->getProductId();
+			$list[] = $orderProduct->getProductCode();
 		}
 
 		$products = $this->getProductItems( $list );
@@ -153,8 +153,15 @@ class PropertyAdd
 	protected function addAttributes( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct,
 	\Aimeos\Map $products, array $types ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		if( ( $product = $products->get( $orderProduct->getProductId() ) ) === null ) {
-			return $orderProduct;
+		$product = $products->filter(
+		    function ( \Aimeos\MShop\Product\Item\Iface $item ) use ( $orderProduct ) : bool {
+			return $item->getCode() === $orderProduct->getProductCode();
+		    }
+		)->first();
+
+
+		if( $product === null ) {
+		    return $orderProduct;
 		}
 
 		foreach( $types as $type )
@@ -181,15 +188,15 @@ class PropertyAdd
 	/**
 	 * Returns the product items for the given product IDs limited by the map of properties
 	 *
-	 * @param string[] $productIds List of product IDs
+	 * @param string[] $productCodes List of product codes
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys
 	 */
-	protected function getProductItems( array $productIds ) : \Aimeos\Map
+	protected function getProductItems( array $productCodes ) : \Aimeos\Map
 	{
 		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
 		$search = $manager->filter( true );
 		$expr = [
-			$search->compare( '==', 'product.id', array_unique( $productIds ) ),
+			$search->compare( '==', 'product.code', array_unique( $productCodes ) ),
 			$search->getConditions(),
 		];
 		$search->setConditions( $search->and( $expr ) );
