@@ -154,14 +154,14 @@ class PropertyAdd
 	\Aimeos\Map $products, array $types ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		$product = $products->filter(
-		    function ( \Aimeos\MShop\Product\Item\Iface $item ) use ( $orderProduct ) : bool {
-			return $item->getCode() === $orderProduct->getProductCode();
-		    }
+			function ( \Aimeos\MShop\Product\Item\Iface $item ) use ( $orderProduct ) : bool {
+				return $item->getCode() === $orderProduct->getProductCode();
+			}
 		)->first();
 
 
 		if( $product === null ) {
-		    return $orderProduct;
+			return $orderProduct;
 		}
 
 		foreach( $types as $type )
