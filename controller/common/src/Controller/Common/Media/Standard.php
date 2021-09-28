@@ -385,8 +385,13 @@ class Standard
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
 		$mimelen = strlen( $mimedir );
 
+		$previews = $item->getPreviews();
 		// don't delete first (smallest) image because it's referenced in past orders
-		foreach( array_slice( $item->getPreviews(), 1 ) as $preview )
+		if ( 'product' === $item->getDomain() ) {
+			$previews = array_slice( $previews, 1 );
+		}
+
+		foreach( $previews as $preview )
 		{
 			try
 			{
