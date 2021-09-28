@@ -124,8 +124,8 @@ class PropertyAdd
 			return $this->addAttributes( $value, $this->getProductItems( [$value->getProductId()], [$value->getProductCode()]), $types );
 		}
 
-		$ids = map( $value )->getProductId();
-		$codes = map( $value )->getProductCode();
+		$ids = map( $value )->getProductId()->toArray();
+		$codes = map( $value )->getProductCode()->toArray();
 
 		$products = $this->getProductItems( $ids, $codes );
 
@@ -192,13 +192,13 @@ class PropertyAdd
 	protected function getProductItems( array $productIds, array $productCodes ) : \Aimeos\Map
 	{
 		$manager = \Aimeos\MShop::create($this->getContext(), 'product');
-		$search = $manager->createSearch(true);
+		$search = $manager->filter( true );
 
 		$search->add( $search->or( [
 			$search->is( 'product.id', '==', array_unique( $productIds ) ),
 			$search->is( 'product.code', '==', array_unique( $productCodes ) ),
 		] ) );
 
-		return $manager->search( $search );
+		return $manager->search( $search, ['product/property'] );
 	}
 }
