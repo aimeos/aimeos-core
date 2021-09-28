@@ -124,16 +124,10 @@ class PropertyAdd
 			return $this->addAttributes( $value, $this->getProductItems( [$value->getProductId()], [$value->getProductCode()]), $types );
 		}
 
-		$list = [];
+		$ids = map( $value )->getProductId();
+		$codes = map( $value )->getProductCode();
 
-		foreach( $value as $orderProduct )
-		{
-			\Aimeos\MW\Common\Base::checkClass(\Aimeos\MShop\Order\Item\Base\Product\Iface::class, $orderProduct);
-			$list['code'][] = $orderProduct->getProductCode();
-			$list['id'][] = $orderProduct->getProductId();
-        	}
-
-		$products = $this->getProductItems( $list['id'], $list['code'] );
+		$products = $this->getProductItems( $ids, $codes );
 
 		foreach( $value as $key => $orderProduct ) {
 			$value[$key] = $this->addAttributes( $orderProduct, $products, $types );
@@ -159,17 +153,14 @@ class PropertyAdd
 		}
 
 		if($products->count() > 1) {
-			$variant = $products->find(
-				function ( \Aimeos\MShop\Product\Item\Iface $item ) use ( $orderProduct ) : bool {
-					return $item->getCode() === $orderProduct->getProductCode();
-				}
-			);
+			$variant = $products->col( null, 'product.code' )
+				->get( $orderProduct->getProductCode() );
 		}
 
 		foreach( $types as $type )
 		{
 			$list = $product->getProperties( $type );
-			
+
 			if( $variant ?? false) {
 				$list->union( $variant->getProperties( $type ) );
 			}
@@ -194,19 +185,20 @@ class PropertyAdd
 	/**
 	 * Returns the product items for the given product IDs limited by the map of properties
 	 *
+	 * @param string[] $productsIds List of product IDs
 	 * @param string[] $productCodes List of product codes
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys
 	 */
-	protected function getProductItems( array $productCodes ) : \Aimeos\Map
+	protected function getProductItems( array $productIds, array $productCodes ) : \Aimeos\Map
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
-		$search = $manager->filter( true );
-		$expr = [
-			$search->compare( '==', 'product.code', array_unique( $productCodes ) ),
-			$search->getConditions(),
-		];
-		$search->setConditions( $search->and( $expr ) );
+		$manager = \Aimeos\MShop::create($this->getContext(), 'product');
+		$search = $manager->createSearch(true);
 
-		return $manager->search( $search, ['product/property'] );
+		$search->add( $search->or( [
+			$search->is( 'product.id', '==', array_unique( $productIds ) ),
+			$search->is( 'product.code', '==', array_unique( $productCodes ) ),
+		] ) );
+
+		return $manager->search( $search );
 	}
 }
