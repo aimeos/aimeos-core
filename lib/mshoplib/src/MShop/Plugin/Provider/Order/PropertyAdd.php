@@ -152,7 +152,7 @@ class PropertyAdd
 			return $orderProduct;
 		}
 
-		if($products->count() > 1) {
+		if( $products->count() > 1 ) {
 			$variant = $products->col( null, 'product.code' )
 				->get( $orderProduct->getProductCode() );
 		}
@@ -161,7 +161,7 @@ class PropertyAdd
 		{
 			$list = $product->getProperties( $type );
 
-			if( $variant ?? false) {
+			if( $variant ?? false ) {
 				$list->union( $variant->getProperties( $type ) );
 			}
 
