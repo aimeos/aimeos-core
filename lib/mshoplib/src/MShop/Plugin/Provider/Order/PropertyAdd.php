@@ -121,13 +121,13 @@ class PropertyAdd
 		if( !is_array( $value ) )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
-			return $this->addAttributes( $value, $this->getProductItems( [$value->getProductId()], [$value->getProductCode()]), $types );
+			return $this->addAttributes( $value, $this->getProperties( [$value->getProductId()], [$value->getProductCode()], $types ) );
 		}
 
 		$ids = map( $value )->getProductId()->unique();
 		$codes = map( $value )->getProductCode()->unique();
 
-		$products = $this->getProductItems( $ids, $codes );
+		$products = $this->getProperties( $ids, $codes, $types );
 
 		foreach( $value as $key => $orderProduct ) {
 			$value[$key] = $this->addAttributes( $orderProduct, $products, $types );
@@ -141,55 +141,35 @@ class PropertyAdd
 	 * Adds the product properties as attribute items to the order product item
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct Order product containing attributes
-	 * @param \Aimeos\Map $products List of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys and properties
-	 * @param string[] $types List of property types to add
+	 * @param \Aimeos\Map $products list of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys and properties
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Modified order product item
 	 */
 	protected function addAttributes( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct,
-	\Aimeos\Map $products, array $types ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	\Aimeos\Map $properties ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		if( ( $product = $products->get( $orderProduct->getProductId() ) ) === null ) {
-			return $orderProduct;
-		}
+		$properties->each(function ( $attributes, $type ) use ( &$orderProduct ) {
 
-		if( $products->count() > 1 ) {
-			$variant = $products->col( null, 'product.code' )
-				->get( $orderProduct->getProductCode() );
-		}
-
-		foreach( $types as $type )
-		{
-			$list = $product->getProperties( $type );
-
-			if( $variant ?? false ) {
-				$list->union( $variant->getProperties( $type ) );
+			if ( ($attrItem = $orderProduct->getAttributeItem($type, 'product/property')) === null ) {
+				$attrItem = $this->orderAttrManager->create();
 			}
 
-			if( !$list->isEmpty() )
-			{
-				if( ( $attrItem = $orderProduct->getAttributeItem( $type, 'product/property' ) ) === null ) {
-					$attrItem = $this->orderAttrManager->create();
-				}
+			$attrItem = $attrItem->setType('product/property')->setCode($type)
+				->setValue(count($attributes) > 1 ? $attributes->toArray() : $attributes->first());
 
-				$attrItem = $attrItem->setType( 'product/property' )->setCode( $type )
-					->setValue( count( $list ) > 1 ? $list->toArray() : $list->first() );
-
-				$orderProduct = $orderProduct->setAttributeItem( $attrItem );
-			}
-		}
+			$orderProduct = $orderProduct->setAttributeItem($attrItem);
+		});
 
 		return $orderProduct;
 	}
 
 
 	/**
-	 * Returns the product items for the given product IDs limited by the map of properties
+	 * Returns the product properties for the given product IDs and codes limited by the map of properties
 	 *
-	 * @param string[] $productsIds List of product IDs
-	 * @param string[] $productCodes List of product codes
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys
+	 * @param string[] $filters Key/value pairs of product IDs and codes
+	 * @return \Aimeos\Map list of product properties
 	 */
-	protected function getProductItems( iterable $productIds, iterable $productCodes ) : \Aimeos\Map
+	protected function getProperties( iterable $productIds, iterable $productCodes, array $types ) : \Aimeos\Map
 	{
 		$manager = \Aimeos\MShop::create($this->getContext(), 'product');
 		$search = $manager->filter( true );
@@ -199,6 +179,12 @@ class PropertyAdd
 			$search->is( 'product.code', '==', $productCodes ),
 		] ) );
 
-		return $manager->search( $search, ['product/property'] );
+		$items = $manager->search( $search, ['product/property'] );
+
+		return map( $types )->map( function ( $type ) use ( $items ) {
+			if( !( $properties = $items->getProperties($type)->collapse() )->empty() ) {
+				return [ $type => $properties ];
+			}
+		} )->filter()->collapse(1);
 	}
 }
