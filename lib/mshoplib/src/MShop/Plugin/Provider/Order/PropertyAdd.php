@@ -121,7 +121,7 @@ class PropertyAdd
 		if( !is_array( $value ) )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
-			return $this->addAttributes( $value, $this->getProperties( [$value->getProductId()], [$value->getProductCode()], $types ) );
+			return $this->addAttributes( $value, $this->getProperties( [$value->getProductId()], [$value->getProductCode()], $types ), $types );
 		}
 
 		$ids = map( $value )->getProductId()->unique();
@@ -145,19 +145,25 @@ class PropertyAdd
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Modified order product item
 	 */
 	protected function addAttributes( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct,
-	\Aimeos\Map $properties ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	\Aimeos\Map $properties, array $types ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		$properties->each(function ( $attributes, $type ) use ( &$orderProduct ) {
+		if( ( $properties = $properties->get( $orderProduct->getProductCode() ) ) === null ) {
+			return $orderProduct;
+		}
 
-			if ( ($attrItem = $orderProduct->getAttributeItem($type, 'product/property')) === null ) {
-				$attrItem = $this->orderAttrManager->create();
+		foreach( $types as $type )
+		{
+			if( !$properties->isEmpty() )
+			{
+				$attrItem = $orderProduct->getAttributeItem( $type, 'product/property' )
+					?: $this->orderAttrManager->create();
+
+				$attrItem = $attrItem->setType( 'product/property' )->setCode( $type )
+					->setValue( count( $properties ) > 1 ? $properties->toArray() : $properties->first() );
+
+				$orderProduct = $orderProduct->setAttributeItem( $attrItem );
 			}
-
-			$attrItem = $attrItem->setType('product/property')->setCode($type)
-				->setValue(count($attributes) > 1 ? $attributes->toArray() : $attributes->first());
-
-			$orderProduct = $orderProduct->setAttributeItem($attrItem);
-		});
+		}
 
 		return $orderProduct;
 	}
@@ -179,12 +185,8 @@ class PropertyAdd
 			$search->is( 'product.code', '==', $productCodes ),
 		] ) );
 
-		$items = $manager->search( $search, ['product/property'] );
-
-		return map( $types )->map( function ( $type ) use ( $items ) {
-			if( !( $properties = $items->getProperties($type)->collapse() )->empty() ) {
-				return [ $type => $properties ];
-			}
-		} )->filter()->collapse(1);
+		return $manager->search( $search, ['product/property'] )
+			->col( null, 'product.code' )
+			->getProperties( implode( ',', $types ) );
 	}
 }
