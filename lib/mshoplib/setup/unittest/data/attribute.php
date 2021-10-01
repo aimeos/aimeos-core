@@ -360,9 +360,9 @@ return [
 			'attribute.label' => 'media/color/pink', 'attribute.status' => 0, 'attribute.position' => 6,
 		],
 
-		'attribute/product/interval/P1Y' => [
-			'attribute.domain' => 'product', 'attribute.type' => 'interval', 'attribute.code' => 'P1Y',
-			'attribute.label' => 'product/interval/P1Y', 'attribute.position' => 0,
+		'attribute/product/interval/P1Y0M0W0D' => [
+			'attribute.domain' => 'product', 'attribute.type' => 'interval', 'attribute.code' => 'P1Y0M0W0D',
+			'attribute.label' => 'product/interval/P1Y0M0W0D', 'attribute.position' => 0,
 		],
 		'attribute/product/date/custom' => [
 			'attribute.domain' => 'product', 'attribute.type' => 'date', 'attribute.code' => 'custom',
