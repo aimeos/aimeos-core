@@ -581,7 +581,7 @@ return [
 				], [
 					'product.lists.type' => 'config', 'product.lists.position' => 3, 'ref' => 'product/color/white',
 				], [
-					'product.lists.type' => 'config', 'product.lists.position' => 4, 'ref' => 'product/interval/P1Y0M0W0D',
+					'product.lists.type' => 'config', 'product.lists.position' => 4, 'ref' => 'product/interval/P1Y',
 				], [
 					'product.lists.type' => 'hidden', 'product.lists.position' => 5, 'ref' => 'product/download/testurl',
 				]],
