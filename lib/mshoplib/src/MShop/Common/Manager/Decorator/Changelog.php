@@ -32,7 +32,7 @@ class Changelog
 	{
 		$items = $this->getManager()->save( $items, true );
 
-		$this->getContext()->getLogger()->log( map( $items )->toJson(), \Aimeos\MW\Logger\Base::NOTICE, 'changelog' );
+		$this->getContext()->getLogger()->log( map( $items )->toJson(), \Aimeos\MW\Logger\Base::NOTICE, 'core/changelog' );
 
 		return $items;
 	}

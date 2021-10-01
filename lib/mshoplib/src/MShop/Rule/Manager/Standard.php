@@ -672,7 +672,7 @@ class Standard
 				if( ( $row['rule.config'] = json_decode( $config = $row['rule.config'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'rule.config', $row['rule.id'], $config );
-					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
+					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/rule' );
 				}
 
 				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {

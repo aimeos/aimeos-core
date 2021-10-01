@@ -985,7 +985,7 @@ class Standard
 				if( ( $row['product.config'] = json_decode( $config = $row['product.config'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_product.config', $row['product.id'], $config );
-					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
+					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/product' );
 				}
 
 				$map[$row['product.id']] = $row;

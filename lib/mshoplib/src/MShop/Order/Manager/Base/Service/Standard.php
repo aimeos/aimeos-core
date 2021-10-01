@@ -904,7 +904,7 @@ class Standard
 					if( ( $row['order.base.service.taxrates'] = json_decode( $config = $row['order.base.service.taxrates'], true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_base_service.taxrates', $row['order.base.service.id'], $config );
-						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
+						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/order' );
 					}
 
 					$price = $priceManager->create( [

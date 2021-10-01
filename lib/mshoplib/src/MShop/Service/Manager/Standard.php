@@ -685,7 +685,7 @@ class Standard
 				if( ( $row['service.config'] = json_decode( $config = $row['service.config'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_service.config', $row['service.id'], $config );
-					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
+					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/service' );
 				}
 
 				$map[$row['service.id']] = $row;

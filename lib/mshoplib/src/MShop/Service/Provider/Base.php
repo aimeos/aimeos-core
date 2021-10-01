@@ -453,7 +453,7 @@ abstract class Base implements Iface
 			$msg = print_r( $msg, true );
 		}
 
-		$this->context->logger()->log( $name . ': ' . $msg, $level, $facility );
+		$this->context->logger()->log( $name . ': ' . $msg, $level, 'core/service/' . $facility );
 		return $this;
 	}
 
