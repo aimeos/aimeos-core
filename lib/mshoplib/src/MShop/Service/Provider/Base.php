@@ -24,6 +24,7 @@ abstract class Base implements Iface
 	private $context;
 	private $serviceItem;
 	private $beGlobalConfig;
+	private static $methods = [];
 
 
 	/**
@@ -40,16 +41,42 @@ abstract class Base implements Iface
 
 
 	/**
-	 * Catch unknown methods
+	 * Registers a custom method that has access to the class properties if called non-static.
 	 *
-	 * @param string $name Name of the method
-	 * @param array $param List of method parameter
-	 * @throws \Aimeos\MShop\Service\Exception If method call failed
+	 * Examples:
+	 *  Provider::method( 'test', function( $name ) {
+	 *      return $this->getConfigValue( $name ) ? true : false;
+	 *  } );
+	 *
+	 * @param string $name Method name
+	 * @param \Closure $function Anonymous method
+	 * @return \Closure|null Registered method
 	 */
-	public function __call( string $name, array $param )
+	public static function method( string $name, \Closure $function = null ) : ?\Closure
 	{
+		if( $function ) {
+			static::$methods[$name] = $function;
+		}
+
+		return static::$methods[$name] ?? null;
+	}
+
+
+	/**
+	 * Passes unknown method calls to the custom methods
+	 *
+	 * @param string $method Method name
+	 * @param array $args Method arguments
+	 * @return mixed Result or method call
+	 */
+	public function __call( string $method, array $args )
+	{
+		if( $fcn = self::method( $method ) ) {
+			return call_user_func_array( $fcn->bindTo( $this, static::class ), $args );
+		}
+
 		$msg = $this->context->translate( 'mshop', 'Unable to call method "%1$s"' );
-		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $name ) );
+		throw new \BadMethodCallException( sprintf( $msg, $method ) );
 	}
 
 

@@ -53,6 +53,16 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCall()
+	{
+		$this->object::method( 'hasSomething', function( $name ) {
+			return $this->getConfigValue( $name ) ? true : false;
+		} );
+
+		$this->assertFalse( $this->object->hasSomething( 'test' ) );
+	}
+
+
 	public function testLog()
 	{
 		$result = $this->access( 'log' )->invokeArgs( $this->object, [['data' => 'test'], 500] );
