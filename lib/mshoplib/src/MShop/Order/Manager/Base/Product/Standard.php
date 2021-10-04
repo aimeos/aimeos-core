@@ -1057,6 +1057,7 @@ class Standard
 						'price.rebate' => $row['order.base.product.rebate'],
 						'price.taxflag' => $row['order.base.product.taxflag'],
 						'price.taxvalue' => $row['order.base.product.taxvalue'],
+						'price.siteid' => $row['order.base.product.siteid'],
 					] );
 
 					$map[$row['order.base.product.id']] = ['price' => $price, 'item' => $row];
