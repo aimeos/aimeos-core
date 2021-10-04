@@ -55,10 +55,10 @@ abstract class Base implements Iface
 	public static function method( string $name, \Closure $function = null ) : ?\Closure
 	{
 		if( $function ) {
-			static::$methods[$name] = $function;
+			self::$methods[$name] = $function;
 		}
 
-		return static::$methods[$name] ?? null;
+		return self::$methods[$name] ?? null;
 	}
 
 
