@@ -33,7 +33,7 @@ return [
 			'coupon.code.code' => 'GHIJ', 'coupon.code.count' => 2000000
 		]]
 	], [
-		'coupon.label' => 'Unit test example', 'coupon.provider' => 'Example,Basket',
+		'coupon.label' => 'Unit test example', 'coupon.provider' => 'None,Basket',
 		'coupon.config' => ['basket.total-value-min' => ['EUR' => '9.00']],
 		'codes' => [[
 			'coupon.code.code' => 'OPQR', 'coupon.code.count' => 2000000

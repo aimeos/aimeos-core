@@ -24,7 +24,7 @@ class NotTest extends \PHPUnit\Framework\TestCase
 		$this->orderBase = \Aimeos\MShop\Order\Manager\Factory::create( $context )
 			->getSubmanager( 'base' )->create()->off();
 
-		$this->provider = $this->getMockBuilder( \Aimeos\MShop\Coupon\Provider\Example::class )
+		$this->provider = $this->getMockBuilder( \Aimeos\MShop\Coupon\Provider\None::class )
 			->setConstructorArgs( [$context, $item, 'abcd'] )
 			->setMethods( ['isAvailable'] )
 			->getMock();

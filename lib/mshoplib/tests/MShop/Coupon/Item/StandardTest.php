@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->values = array(
 			'coupon.siteid' => 123,
 			'coupon.label' => 'test coupon',
-			'coupon.provider' => 'Example',
+			'coupon.provider' => 'None',
 			'coupon.config' => array( 'key'=>'test' ),
 			'coupon.start' => null,
 			'coupon.end' => null,
@@ -118,7 +118,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetProvider()
 	{
-		$this->assertEquals( 'Example', $this->object->getProvider() );
+		$this->assertEquals( 'None', $this->object->getProvider() );
 	}
 
 

@@ -11,7 +11,6 @@ return array(
 	'coupon' => array(
 		'provider' => array(
 			'decorators' => array(
-				'Example',
 			),
 		),
 	),
