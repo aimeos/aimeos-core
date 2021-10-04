@@ -47,9 +47,8 @@ msgid "mrs"
 msgstr "Mrs"
 
 #. Address salutation
-#, fuzzy
 msgid "ms"
-msgstr "Mrs"
+msgstr "Ms"
 
 #. Order type value
 msgid "order:phone"

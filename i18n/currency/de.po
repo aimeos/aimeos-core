@@ -3,6 +3,7 @@
 # Translators:
 # Translators:
 # Aimeos, 2020
+# Aimeos, 2020
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 msgid ""
 msgstr ""

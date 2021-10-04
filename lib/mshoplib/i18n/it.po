@@ -4,14 +4,15 @@
 # 
 # Translators:
 # alessandro massarelli <alessandro@botteega.com>, 2017
+# Fabio Barbon <fabio.barbon@gmail.com>, 2021
 # isabella carlin <isabella@vg7.it>, 2020
 # Matteo Breschigliaro <matteo@vg7.it>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-18 13:26+0200\n"
-"PO-Revision-Date: 2021-08-18 11:33+0000\n"
+"POT-Creation-Date: 2021-10-04 18:31+0200\n"
+"PO-Revision-Date: 2021-10-04 16:33+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Italian (http://www.transifex.com/aimeos/aimeos-core/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -638,6 +639,10 @@ msgid "Parameter \"%1$s\" for configuration not available"
 msgstr "Parametro \"%1$s\" non disponibile per la configurazione"
 
 #, php-format
+msgid "Password object not available"
+msgstr ""
+
+#, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
 msgstr "PayPal Express: transazione duplicata con l'ID \"%1$s\" e lo stato \"%2$s\""
 
@@ -742,11 +747,11 @@ msgstr "Fornitore in \"%1$s\" non disponibile "
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed %1$d"
-msgstr ""
+msgstr "La quantità dev'essere maggiore o uguale a 0 e non dev'essere superiore di %1$d"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
-msgstr ""
+msgstr "La quantità dev'essere maggiore o uguale a 0 e non deve superare la quantità ordinata"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"

@@ -8,6 +8,7 @@
 # Translators:
 # Translators:
 # Aimeos, 2021
+# Aimeos, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"

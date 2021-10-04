@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2017-09-22 11:36+0000\n"
+"PO-Revision-Date: 2021-10-04 16:51+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/aimeos/aimeos-core/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -753,6 +753,9 @@ msgstr "瓦利斯和富图纳群岛"
 
 msgid "WS"
 msgstr "萨摩亚"
+
+msgid "XK"
+msgstr ""
 
 msgid "YE"
 msgstr "也门"
