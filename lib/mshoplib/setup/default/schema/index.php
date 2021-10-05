@@ -62,7 +62,7 @@ return array(
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
-			$table->addColumn( 'value', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
+			$table->addColumn( 'value', 'decimal', array( 'precision' => 12, 'scale' => 2, 'notnull' => false ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 
 			$table->addUniqueIndex( array( 'prodid', 'siteid', 'currencyid' ), 'unq_msindpr_pid_sid_cid' );
