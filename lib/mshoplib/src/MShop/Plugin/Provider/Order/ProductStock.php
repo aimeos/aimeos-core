@@ -59,7 +59,9 @@ class ProductStock
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		if( ( is_int( $value ) && ( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) ) === 0 ) {
+		if( ( is_int( $value ) && ( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) ) === 0
+			|| $order->getProducts() === []
+		) {
 			return $value;
 		}
 
