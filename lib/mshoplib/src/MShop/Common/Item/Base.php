@@ -297,6 +297,25 @@ abstract class Base
 
 
 	/**
+	 * Returns the list site IDs up to the root site item.
+	 *
+	 * @return array List of site IDs
+	 */
+	public function getSitePath() : array
+	{
+		$pos = 0;
+		$list = [];
+		$siteId = $this->getSiteId();
+
+		while( ( $pos = strpos( $siteId, '.', $pos ) ) !== false ) {
+			$list[] = substr( $siteId, 0, ++$pos );
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Returns modify date/time of the order coupon.
 	 *
 	 * @return string|null Modification time (YYYY-MM-DD HH:mm:ss)

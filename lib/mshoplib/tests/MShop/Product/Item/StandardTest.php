@@ -20,7 +20,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->values = array(
 			'product.id' => 1,
-			'product.siteid' => 99,
+			'product.siteid' => '1.33.99.',
 			'product.type' => 'test',
 			'product.status' => 1,
 			'product.code' => 'TEST',
@@ -159,7 +159,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 99, $this->object->getSiteId() );
+		$this->assertEquals( '1.33.99.', $this->object->getSiteId() );
+	}
+
+
+	public function testGetSitePath()
+	{
+		$this->assertEquals( ['1.', '1.33.', '1.33.99.'], $this->object->getSitePath() );
 	}
 
 
