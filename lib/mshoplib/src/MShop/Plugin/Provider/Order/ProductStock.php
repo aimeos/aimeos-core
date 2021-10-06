@@ -84,8 +84,10 @@ class ProductStock
 	 */
 	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order ) : array
 	{
-		$context = $this->getContext();
 		$stockExpr = $stockMap = [];
+
+		$stockManager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
+		$filter = $stockManager->filter();
 
 		foreach( $order->getProducts() as $orderProduct )
 		{
@@ -96,8 +98,6 @@ class ProductStock
 			] );
 		}
 
-		$stockManager = \Aimeos\MShop::create( $context, 'stock' );
-		$filter = $stockManager->filter();
 		$filter->add( $filter->or( $stockExpr ) )->slice( 0, count( $stockExpr ) );
 
 		foreach( $stockManager->search( $filter ) as $stockItem ) {
