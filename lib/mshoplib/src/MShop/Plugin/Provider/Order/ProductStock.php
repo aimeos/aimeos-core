@@ -101,7 +101,7 @@ class ProductStock
 		$filter->add( $filter->or( $stockExpr ) )->slice( 0, count( $stockExpr ) );
 
 		foreach( $stockManager->search( $filter ) as $stockItem ) {
-			$stockMap[$stockItem->getSiteId()][$stockItem->getProductCode()()][$stockItem->getType()] = $stockItem;
+			$stockMap[$stockItem->getSiteId()][$stockItem->getProductCode()][$stockItem->getType()] = $stockItem;
 		}
 
 		return $this->checkStockLevels( $order, $stockMap );
