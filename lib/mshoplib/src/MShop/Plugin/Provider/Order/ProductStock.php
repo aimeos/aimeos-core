@@ -85,44 +85,23 @@ class ProductStock
 	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order ) : array
 	{
 		$context = $this->getContext();
-		$expr = $stockExpr = $stockMap = [];
-
-		$manager = \Aimeos\MShop::create( $context, 'product' );
-		$filter = $manager->filter();
+		$stockExpr = $stockMap = [];
 
 		foreach( $order->getProducts() as $orderProduct )
 		{
-			$expr[] = $filter->and( [
-				$filter->is( 'product.code', '==', $orderProduct->getProductCode() ),
-				$filter->is( 'product.siteid', '==', $orderProduct->getSitePath() )
+			$stockExpr[] = $filter->and( [
+				$filter->is( 'stock.productcode', '==', $orderProduct->getProductCode() ),
+				$filter->is( 'stock.siteid', '==', $orderProduct->getSiteId() ),
+				$filter->is( 'stock.type', '==', $orderProduct->getStockType() )
 			] );
-		}
-
-		$filter->add( $filter->or( $expr ) )->slice( 0, count( $expr ) );
-
-		$products = $manager->search( $filter )->col( 'product.id', 'product.code' );
-
-		foreach( $order->getProducts() as $orderProduct )
-		{
-			if( isset( $products[$orderProduct->getProductCode()] ) )
-			{
-				$stockExpr[] = $filter->and( [
-					$filter->is( 'stock.productid', '==', $products[$orderProduct->getProductCode()] ),
-					$filter->is( 'stock.siteid', '==', $orderProduct->getSiteId() ),
-					$filter->is( 'stock.type', '==', $orderProduct->getStockType() )
-				] );
-			}
 		}
 
 		$stockManager = \Aimeos\MShop::create( $context, 'stock' );
 		$filter = $stockManager->filter();
 		$filter->add( $filter->or( $stockExpr ) )->slice( 0, count( $stockExpr ) );
-		$products = $products->flip();
 
-		foreach( $stockManager->search( $filter ) as $stockItem )
-		{
-			$code = $products[$stockItem->getProductId()] ?? null;
-			$stockMap[$stockItem->getSiteId()][$code][$stockItem->getType()] = $stockItem;
+		foreach( $stockManager->search( $filter ) as $stockItem ) {
+			$stockMap[$stockItem->getSiteId()][$stockItem->getProductCode()()][$stockItem->getType()] = $stockItem;
 		}
 
 		return $this->checkStockLevels( $order, $stockMap );
@@ -178,27 +157,5 @@ class ProductStock
 		}
 
 		return $outOfStock;
-	}
-
-
-	/**
-	 * Returns the stock items for the given product codes and stock types
-	 *
-	 * @param array|string $codes Unique product code or list of product codes
-	 * @param array|string $types Unique stock types to limit the stock items
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Stock\Item\Iface with IDs as keys
-	 */
-	protected function getStockItems( $codes, $types ) : \Aimeos\Map
-	{
-		$stockManager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
-
-		$search = $stockManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'stock.productcode', $codes ),
-			$search->compare( '==', 'stock.type', $types ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		return $stockManager->searchItems( $search );
 	}
 }
