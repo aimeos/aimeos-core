@@ -80,19 +80,49 @@ class ProductStock
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket object
 	 * @return array Associative list of basket product positions as keys and the error codes as values
+	 * @todo 2022.01 Store product ID and article ID separately in order product
 	 */
 	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order ) : array
 	{
-		$productCodes = $stockTypes = $stockMap = [];
+		$context = $this->getContext();
+		$expr = $stockExpr = $stockMap = [];
+
+		$manager = \Aimeos\MShop::create( $context, 'product' );
+		$filter = $manager->filter();
 
 		foreach( $order->getProducts() as $orderProduct )
 		{
-			$productCodes[] = $orderProduct->getProductCode();
-			$stockTypes[] = $orderProduct->getStockType();
+			$expr[] = $filter->and( [
+				$filter->is( 'product.code', '==', $orderProduct->getProductCode() ),
+				$filter->is( 'product.siteid', '==', $orderProduct->getSitePath() )
+			] );
 		}
 
-		foreach( $this->getStockItems( $productCodes, $stockTypes ) as $stockItem ) {
-			$stockMap[$stockItem->getProductCode()][$stockItem->getType()] = $stockItem;
+		$filter->add( $filter->or( $expr ) )->slice( 0, count( $expr ) );
+
+		$products = $manager->search( $filter )->col( 'product.id', 'product.code' );
+
+		foreach( $order->getProducts() as $orderProduct )
+		{
+			if( isset( $products[$orderProduct->getProductCode()] ) )
+			{
+				$stockExpr[] = $filter->and( [
+					$filter->is( 'stock.productid', '==', $products[$orderProduct->getProductCode()] ),
+					$filter->is( 'stock.siteid', '==', $orderProduct->getSiteId() ),
+					$filter->is( 'stock.type', '==', $orderProduct->getStockType() )
+				] );
+			}
+		}
+
+		$stockManager = \Aimeos\MShop::create( $context, 'stock' );
+		$filter = $stockManager->filter();
+		$filter->add( $filter->or( $stockExpr ) )->slice( 0, count( $stockExpr ) );
+		$products = $products->flip();
+
+		foreach( $stockManager->search( $filter ) as $stockItem )
+		{
+			$code = $products[$stockItem->getProductId()] ?? null;
+			$stockMap[$stockItem->getSiteId()][$code][$stockItem->getType()] = $stockItem;
 		}
 
 		return $this->checkStockLevels( $order, $stockMap );
@@ -117,21 +147,23 @@ class ProductStock
 		foreach( $products as $pos => $orderProduct )
 		{
 			$stocklevel = 0;
+			$siteid = $orderProduct->getSiteId();
 			$type = $orderProduct->getStockType();
 			$code = $orderProduct->getProductCode();
 
-			if( isset( $stockMap[$code] ) && array_key_exists( $type, $stockMap[$code] ) )
+			if( isset( $stockMap[$siteid][$code][$type] ) )
 			{
-				$orderProduct->setTimeFrame( $stockMap[$code][$type]->getTimeFrame() );
+				$stockItem = $stockMap[$siteid][$code][$type];
+				$orderProduct->setTimeFrame( $stockItem->getTimeFrame() );
 
-				if( ( $stocklevel = $stockMap[$code][$type]->getStockLevel() ) === null ) {
+				if( ( $stocklevel = $stockItem->getStockLevel() ) === null ) {
 					continue;
 				}
 
 				if( $stocklevel >= $orderProduct->getQuantity() )
 				{
-					$stock = $stockMap[$code][$type]->getStockLevel() - $orderProduct->getQuantity();
-					$stockMap[$code][$type]->setStockLevel( $stock );
+					$stock = $stockItem->getStockLevel() - $orderProduct->getQuantity();
+					$stockItem->setStockLevel( $stock );
 					continue;
 				}
 			}
