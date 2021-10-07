@@ -40,30 +40,29 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 *
 	 * The config['sql] array must contain these statement:
 	 *	[delete] =>
-	 *		DELETE FROM treetable WHERE type = <type> AND left >= ? AND right <= ?
+	 *		DELETE FROM treetable WHERE left >= ? AND right <= ?
 	 *	[get] =>
 	 *		SELECT node.*
 	 *		FROM treetable AS parent, treetable AS node
 	 *		WHERE node.left >= parent.left AND node.left <= parent.right
-	 *		AND parent.id = ? AND node.level <= parent.level + ?
-	 *		AND type = <type> AND :cond
+	 *		AND parent.id = ? AND node.level <= parent.level + ? AND :cond
 	 *		ORDER BY node.left
 	 *	[insert] =>
-	 *		INSERT INTO treetable ( type, label, code, level, left, right ) VALUES ( <type>, ?, ?, ?, ?, ? )
+	 *		INSERT INTO treetable ( label, code, status, parentid, level, left, right ) VALUES ( ?, ?, ?, ?, ? )
 	 *	[move-left] =>
 	 *		UPDATE treetable
 	 *		SET left = left + ?, level = level + ?
-	 *		WHERE type = <type> AND left >= ? AND left <= ?
+	 *		WHERE left >= ? AND left <= ?
 	 *	[move-right] =>
 	 *		UPDATE treetable
 	 *		SET right = right + ?
-	 *		WHERE type = <type> AND right >= ? AND right <= ?
+	 *		WHERE right >= ? AND right <= ?
 	 *	[search] =>
 	 *		SELECT * FROM treetable
-	 *		WHERE type = <type> AND left >= ? AND right <= ? AND :cond
+	 *		WHERE left >= ? AND right <= ? AND :cond
 	 *		ORDER BY :order
 	 *	[update] =>
-	 *		UPDATE treetable SET label = ?, code = ? WHERE type = <type> AND id = ?
+	 *		UPDATE treetable SET label = ?, code = ?, status = ? WHERE id = ?
 	 *	[update-parentid] =>
 	 *		UPDATE treetable SET parentid = ? WHERE id = ?
 	 *	[newid] =>
