@@ -164,7 +164,13 @@ class Standard
 	 */
 	public function getName( string $type = 'name', string $langId = null ) : string
 	{
-		return $type === 'url' ? $this->getUrl() : $this->getNameList( $type, $langId );
+		$name = $this->getNameList( $type, $langId );
+
+		if( $type === 'url' && $name === $this->getLabel() ) {
+			return $this->getUrl();
+		}
+
+		return $name;
 	}
 
 
@@ -175,7 +181,7 @@ class Standard
 	 */
 	public function getUrl() : string
 	{
-		return $this->node->__get( 'url' ) ?: \Aimeos\MW\Str::slug( $this->getLabel() );
+		return (string) $this->node->__get( 'url' ) ?: \Aimeos\MW\Str::slug( $this->getLabel() );
 	}
 
 
