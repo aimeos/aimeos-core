@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2021-04-01 16:11+0000\n"
+"PO-Revision-Date: 2021-10-12 11:03+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Vietnamese (http://www.transifex.com/aimeos/aimeos-core/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -82,6 +82,10 @@ msgid "reason:1"
 msgstr ""
 
 #. Payment status value
+msgid "pay:"
+msgstr ""
+
+#. Payment status value
 msgid "pay:-1"
 msgstr ""
 
@@ -111,6 +115,10 @@ msgstr ""
 
 #. Payment status value
 msgid "pay:6"
+msgstr ""
+
+#. Delivery status value
+msgid "stat:"
 msgstr ""
 
 #. Delivery status value

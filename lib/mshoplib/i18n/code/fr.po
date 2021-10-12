@@ -8,13 +8,14 @@
 # Translators:
 # Translators:
 # a270031086f2a0d3514bc0cb507b48f6, 2019
+# a270031086f2a0d3514bc0cb507b48f6, 2019
 # Laurent Georget <laurent@lgeorget.eu>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2021-04-01 16:11+0000\n"
+"PO-Revision-Date: 2021-10-12 11:04+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -84,6 +85,10 @@ msgid "reason:1"
 msgstr "annulé"
 
 #. Payment status value
+msgid "pay:"
+msgstr "en cours"
+
+#. Payment status value
 msgid "pay:-1"
 msgstr "en cours"
 
@@ -114,6 +119,10 @@ msgstr "autorisé"
 #. Payment status value
 msgid "pay:6"
 msgstr "reçu"
+
+#. Delivery status value
+msgid "stat:"
+msgstr "en cours"
 
 #. Delivery status value
 msgid "stat:-1"

@@ -86,6 +86,10 @@ msgstr "canceled"
 
 
 #. Payment status value
+msgid "pay:"
+msgstr "unfinished"
+
+#. Payment status value
 msgid "pay:-1"
 msgstr "unfinished"
 
@@ -117,6 +121,10 @@ msgstr "authorized"
 msgid "pay:6"
 msgstr "received"
 
+
+#. Delivery status value
+msgid "stat:"
+msgstr "unfinished"
 
 #. Delivery status value
 msgid "stat:-1"

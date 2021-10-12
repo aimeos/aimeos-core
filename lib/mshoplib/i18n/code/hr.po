@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2021-04-01 16:11+0000\n"
-"Last-Translator: Aimeos\n"
+"PO-Revision-Date: 2021-10-12 11:04+0000\n"
+"Last-Translator: Miro Sertić <miro.sertic0606@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/aimeos/aimeos-core/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,6 +83,10 @@ msgid "reason:1"
 msgstr "otkazano"
 
 #. Payment status value
+msgid "pay:"
+msgstr "nedovršeno"
+
+#. Payment status value
 msgid "pay:-1"
 msgstr "nedovršeno"
 
@@ -113,6 +117,10 @@ msgstr "odobreno"
 #. Payment status value
 msgid "pay:6"
 msgstr "primljeno"
+
+#. Delivery status value
+msgid "stat:"
+msgstr "nedovršeno"
 
 #. Delivery status value
 msgid "stat:-1"
