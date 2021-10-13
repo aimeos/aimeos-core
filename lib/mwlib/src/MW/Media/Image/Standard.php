@@ -283,7 +283,7 @@ class Standard
 		$newHeight = (int) ( $wh * $ratio );
 		$newWidth = (int) ( $ww * $ratio );
 
-		if( ( $wimage = imagescale( self::$watermark, $newWidth, $newHeight, IMG_BICUBIC ) ) === false ) {
+		if( ( $wimage = imagescale( self::$watermark, $newWidth, $newHeight ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Unable to scale image' );
 		}
 
