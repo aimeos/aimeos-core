@@ -152,6 +152,12 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	const PAY_RECEIVED = 6;
 
+	/**
+	 * Payment is transferred.
+	 * The vendor received the money from the platform.
+	 */
+	const PAY_TRANSFERRED = 7;
+
 
 	/**
 	 * Returns the item type

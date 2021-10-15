@@ -121,6 +121,10 @@ msgstr "authorized"
 msgid "pay:6"
 msgstr "received"
 
+#. Payment status value
+msgid "pay:7"
+msgstr "transferred"
+
 
 #. Delivery status value
 msgid "stat:"
