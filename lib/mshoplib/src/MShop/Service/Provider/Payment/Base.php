@@ -45,6 +45,11 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	 */
 	const FEAT_REPAY = 5;
 
+	/**
+	 * Feature constant if payment transfer is supported.
+	 */
+	const FEAT_TRANSFER = 6;
+
 
 	/**
 	 * Checks the backend configuration attributes for validity.
@@ -151,5 +156,18 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 		array $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
 		return $this->setAttributes( $orderServiceItem, $attributes, 'payment' );
+	}
+
+
+	/**
+	 * Transfers the money to the vendors.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item object
+	 */
+	public function transfer( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
+	{
+		$msg = $this->getContext()->translate( 'mshop', 'Method "%1$s" for provider not available' );
+		throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'transfer' ) );
 	}
 }

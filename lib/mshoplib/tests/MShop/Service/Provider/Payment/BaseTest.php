@@ -107,6 +107,15 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $this->object->setConfigFE( $item, [] ) );
 	}
+
+
+	public function testTransfer()
+	{
+		$item = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )->create();
+
+		$this->expectException( \Aimeos\MShop\Service\Exception::class );
+		$this->object->transfer( $item );
+	}
 }
 
 
