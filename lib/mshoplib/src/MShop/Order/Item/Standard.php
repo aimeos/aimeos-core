@@ -308,8 +308,8 @@ class Standard
 			{
 				case 'order.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
 				case 'order.type': $item = $item->setType( $value ); break;
-				case 'order.statusdelivery': $item = $item->setStatusDelivery( $value ); break;
-				case 'order.statuspayment': $item = $item->setStatusPayment( $value ); break;
+				case 'order.statusdelivery': $item = $item->setStatusDelivery(  $value !== null ? (int) $value : null  ); break;
+				case 'order.statuspayment': $item = $item->setStatusPayment(  $value !== null ? (int) $value : null  ); break;
 				case 'order.datedelivery': $item = $item->setDateDelivery( $value ); break;
 				case 'order.datepayment': $item = $item->setDatePayment( $value ); break;
 				case 'order.relatedid': $item = $item->setRelatedId( $value ); break;
