@@ -232,12 +232,35 @@ class Standard extends Base implements Iface
 	/**
 	 * Sets the ID of a product the customer has selected.
 	 *
-	 * @param string $id Product Code ID
+	 * @param string|null $id Product Code ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setProductId( ?string $id ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		return $this->set( 'order.base.product.productid', (string) $id );
+	}
+
+
+	/**
+	 * Returns the product ID of the parent product.
+	 *
+	 * @return string Product ID of the parent product
+	 */
+	public function getParentProductId() : string
+	{
+		return $this->get( 'order.base.product.parentproductid', '' );
+	}
+
+
+	/**
+	 * Sets the ID of the parent product the customer has selected.
+	 *
+	 * @param string|null $id Product ID of the parent product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setParentProductId( ?string $id ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	{
+		return $this->set( 'order.base.product.parentproductid', (string) $id );
 	}
 
 
@@ -625,12 +648,13 @@ class Standard extends Base implements Iface
 				case 'order.base.product.position': !$private ?: $item = $item->setPosition( (int) $value ); break;
 				case 'order.base.product.flags': !$private ?: $item = $item->setFlags( (int) $value ); break;
 				case 'order.base.product.target': !$private ?: $item = $item->setTarget( $value ); break;
-				case 'order.base.product.type': $item = $item->setType( $value ); break;
-				case 'order.base.product.stocktype': $item = $item->setStockType( $value ); break;
+				case 'order.base.product.parentproductid': $item = $item->setParentProductId( $value ); break;
 				case 'order.base.product.productid': $item = $item->setProductId( $value ); break;
 				case 'order.base.product.prodcode': $item = $item->setProductCode( $value ); break;
 				case 'order.base.product.supplierid': $item = $item->setSupplierId( $value ); break;
 				case 'order.base.product.suppliername': $item = $item->setSupplierName( $value ); break;
+				case 'order.base.product.stocktype': $item = $item->setStockType( $value ); break;
+				case 'order.base.product.type': $item = $item->setType( $value ); break;
 				case 'order.base.product.name': $item = $item->setName( $value ); break;
 				case 'order.base.product.description': $item = $item->setDescription( $value ); break;
 				case 'order.base.product.mediaurl': $item = $item->setMediaUrl( $value ); break;
@@ -666,6 +690,7 @@ class Standard extends Base implements Iface
 		$list['order.base.product.stocktype'] = $this->getStockType();
 		$list['order.base.product.prodcode'] = $this->getProductCode();
 		$list['order.base.product.productid'] = $this->getProductId();
+		$list['order.base.product.parentproductid'] = $this->getParentProductId();
 		$list['order.base.product.supplierid'] = $this->getSupplierId();
 		$list['order.base.product.suppliername'] = $this->getSupplierName();
 		$list['order.base.product.qtyopen'] = $this->getQuantityOpen();

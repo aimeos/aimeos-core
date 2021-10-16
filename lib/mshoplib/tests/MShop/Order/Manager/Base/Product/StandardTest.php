@@ -130,6 +130,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.product.orderaddressid', null );
 		$expr[] = $search->compare( '>=', 'order.base.product.type', '' );
 		$expr[] = $search->compare( '!=', 'order.base.product.productid', null );
+		$expr[] = $search->compare( '==', 'order.base.product.parentproductid', '' );
 		$expr[] = $search->compare( '==', 'order.base.product.prodcode', 'CNE' );
 		$expr[] = $search->compare( '==', 'order.base.product.supplierid', 'unitSupplier001' );
 		$expr[] = $search->compare( '==', 'order.base.product.suppliername', 'Test supplier' );

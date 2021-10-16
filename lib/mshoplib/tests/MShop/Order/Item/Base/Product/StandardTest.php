@@ -45,6 +45,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.orderaddressid' => 11,
 			'order.base.product.type' => 'bundle',
 			'order.base.product.productid' => '100',
+			'order.base.product.parentproductid' => '99',
 			'order.base.product.supplierid' => '123',
 			'order.base.product.suppliername' => 'UnitSupplier',
 			'order.base.product.prodcode' => 'UnitProd',
@@ -255,6 +256,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
 		$this->assertEquals( 'testProdId', $this->object->getProductId() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetParentProductId()
+	{
+		$this->assertEquals( 99, $this->object->getParentProductId() );
+	}
+
+
+	public function testSetParentProductId()
+	{
+		$return = $this->object->setParentProductId( 'testParentProdId' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $return );
+		$this->assertEquals( 'testParentProdId', $this->object->getParentProductId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -885,7 +902,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.siteid' => 123,
 			'order.base.product.orderproductid' => 10,
 			'order.base.product.orderaddressid' => 11,
-			'order.base.product.productid' => 3,
+			'order.base.product.parentproductid' => 3,
+			'order.base.product.productid' => 4,
 			'order.base.product.prodcode' => 'test',
 			'order.base.product.name' => 'test item',
 			'order.base.product.description' => 'test description',
@@ -917,6 +935,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.product.siteid'], $item->getSiteId() );
 		$this->assertEquals( $list['order.base.product.orderproductid'], $item->getOrderProductId() );
 		$this->assertEquals( $list['order.base.product.orderaddressid'], $item->getOrderAddressId() );
+		$this->assertEquals( $list['order.base.product.parentproductid'], $item->getParentProductId() );
 		$this->assertEquals( $list['order.base.product.productid'], $item->getProductId() );
 		$this->assertEquals( $list['order.base.product.prodcode'], $item->getProductCode() );
 		$this->assertEquals( $list['order.base.product.name'], $item->getName() );
@@ -954,6 +973,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getStockType(), $arrayObject['order.base.product.stocktype'] );
 		$this->assertEquals( $this->object->getSupplierName(), $arrayObject['order.base.product.suppliername'] );
 		$this->assertEquals( $this->object->getSupplierId(), $arrayObject['order.base.product.supplierid'] );
+		$this->assertEquals( $this->object->getParentProductId(), $arrayObject['order.base.product.parentproductid'] );
 		$this->assertEquals( $this->object->getProductId(), $arrayObject['order.base.product.productid'] );
 		$this->assertEquals( $this->object->getProductCode(), $arrayObject['order.base.product.prodcode'] );
 		$this->assertEquals( $this->object->getName(), $arrayObject['order.base.product.name'] );

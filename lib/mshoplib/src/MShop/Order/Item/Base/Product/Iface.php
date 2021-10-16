@@ -145,10 +145,25 @@ interface Iface
 	/**
 	 * Sets the ID of a product the customer has selected.
 	 *
-	 * @param string $id Original product ID
+	 * @param string|null $id Original product ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setProductId( string $id ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setProductId( ?string $id ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+
+	/**
+	 * Returns the product ID of the parent product.
+	 *
+	 * @return string Product ID of the parent product
+	 */
+	public function getParentProductId() : string;
+
+	/**
+	 * Sets the ID of the parent product the customer has selected.
+	 *
+	 * @param string|null $id Product ID of the parent product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setParentProductId( ?string $id ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the product code the customer has selected.

@@ -64,11 +64,19 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'order.base.product.parentproductid' => array(
+			'code' => 'order.base.product.parentproductid',
+			'internalcode' => 'mordbapr."parentprodid"',
+			'label' => 'Parent product ID',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'order.base.product.productid' => array(
 			'code' => 'order.base.product.productid',
 			'internalcode' => 'mordbapr."prodid"',
 			'label' => 'Product original ID',
-			'type' => 'integer',
+			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
@@ -806,6 +814,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getOrderProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getOrderAddressId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getType() );
+			$stmt->bind( $idx++, $item->getParentProductId() );
 			$stmt->bind( $idx++, $item->getProductId() );
 			$stmt->bind( $idx++, $item->getProductCode() );
 			$stmt->bind( $idx++, $item->getSupplierId() );
