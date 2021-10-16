@@ -638,8 +638,8 @@ class Standard extends Base implements Iface
 				case 'order.base.product.quantity': $item = $item->setQuantity( (float) $value ); break;
 				case 'order.base.product.qtyopen': $item = $item->setQuantityOpen( (float) $value ); break;
 				case 'order.base.product.notes': $item = $item->setNotes( (string) $value ); break;
-				case 'order.base.product.statuspayment': $item = $item->setStatusPayment( $value !== null ? (int) $value : null ); break;
-				case 'order.base.product.statusdelivery': $item = $item->setStatusDelivery( $value !== null ? (int) $value : null ); break;
+				case 'order.base.product.statusdelivery': $item = $item->setStatusDelivery( is_numeric( $value ) ? (int) $value : null ); break;
+				case 'order.base.product.statuspayment': $item = $item->setStatusPayment( is_numeric( $value ) ? (int) $value : null ); break;
 				// @deprecated 2022.01
 				case 'order.base.product.status': $item = $item->setStatusDelivery( (int) $value ); break;
 				default: continue 2;
