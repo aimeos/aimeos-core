@@ -622,7 +622,9 @@ class Standard extends Base implements Iface
 				case 'order.base.product.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
 				case 'order.base.product.orderproductid': !$private ?: $item = $item->setOrderProductId( $value ); break;
 				case 'order.base.product.orderaddressid': !$private ?: $item = $item->setOrderAddressId( $value ); break;
+				case 'order.base.product.position': !$private ?: $item = $item->setPosition( (int) $value ); break;
 				case 'order.base.product.flags': !$private ?: $item = $item->setFlags( (int) $value ); break;
+				case 'order.base.product.target': !$private ?: $item = $item->setTarget( $value ); break;
 				case 'order.base.product.type': $item = $item->setType( $value ); break;
 				case 'order.base.product.stocktype': $item = $item->setStockType( $value ); break;
 				case 'order.base.product.productid': $item = $item->setProductId( $value ); break;
@@ -633,13 +635,11 @@ class Standard extends Base implements Iface
 				case 'order.base.product.description': $item = $item->setDescription( $value ); break;
 				case 'order.base.product.mediaurl': $item = $item->setMediaUrl( $value ); break;
 				case 'order.base.product.timeframe': $item = $item->setTimeFrame( $value ); break;
-				case 'order.base.product.target': !$private ?: $item = $item->setTarget( $value ); break;
-				case 'order.base.product.position': !$private ?: $item = $item->setPosition( (int) $value ); break;
 				case 'order.base.product.quantity': $item = $item->setQuantity( (float) $value ); break;
 				case 'order.base.product.qtyopen': $item = $item->setQuantityOpen( (float) $value ); break;
 				case 'order.base.product.notes': $item = $item->setNotes( (string) $value ); break;
-				case 'order.base.product.statuspayment': $item = $item->setStatusPayment( $value ); break;
-				case 'order.base.product.statusdelivery': $item = $item->setStatusDelivery( $value ); break;
+				case 'order.base.product.statuspayment': $item = $item->setStatusPayment( $value !== null ? (int) $value : null ); break;
+				case 'order.base.product.statusdelivery': $item = $item->setStatusDelivery( $value !== null ? (int) $value : null ); break;
 				// @deprecated 2022.01
 				case 'order.base.product.status': $item = $item->setStatusDelivery( (int) $value ); break;
 				default: continue 2;
