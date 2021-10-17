@@ -55,6 +55,12 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCall()
 	{
+		$this->assertFalse( $this->object->call( 'updateAsync', [] ) );
+	}
+
+
+	public function testCallFallback()
+	{
 		$this->object::method( 'hasSomething', function( $name ) {
 			return $this->getConfigValue( $name ) ? true : false;
 		} );
