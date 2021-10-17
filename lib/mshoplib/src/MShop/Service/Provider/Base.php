@@ -81,6 +81,23 @@ abstract class Base implements Iface
 
 
 	/**
+	 * Passes unknown method calls to the custom methods
+	 *
+	 * @param string $method Method name
+	 * @param array $args Method arguments
+	 * @return mixed Result or method call
+	 */
+	public function call( string $method, array $args )
+	{
+		if( $fcn = self::method( $method ) ) {
+			return call_user_func_array( $fcn->bindTo( $this, static::class ), $args );
+		}
+
+		return call_user_func_array( [$this, $method], $args );
+	}
+
+
+	/**
 	 * Returns the price when using the provider.
 	 * Usually, this is the lowest price that is available in the service item but can also be a calculated based on
 	 * the basket content, e.g. 2% of the value as transaction cost.
