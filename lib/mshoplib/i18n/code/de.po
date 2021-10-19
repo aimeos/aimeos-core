@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2021-10-15 08:34+0000\n"
+"PO-Revision-Date: 2021-10-19 08:02+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -39,6 +39,10 @@ msgstr "Deaktiviert"
 #. Item status
 msgid "status:1"
 msgstr "Verfügbar"
+
+#. Item status
+msgid "status:2"
+msgstr "Versteckt"
 
 #. Address salutation
 msgid "company"
@@ -122,7 +126,7 @@ msgstr "Erhalten"
 
 #. Payment status value
 msgid "pay:7"
-msgstr ""
+msgstr "Überwiesen"
 
 #. Delivery status value
 msgid "stat:"

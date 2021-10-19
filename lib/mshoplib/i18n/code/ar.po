@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2021-10-15 08:34+0000\n"
+"PO-Revision-Date: 2021-10-19 07:56+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Arabic (http://www.transifex.com/aimeos/aimeos-core/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -36,6 +36,10 @@ msgstr "معطل"
 #. Item status
 msgid "status:1"
 msgstr "مفعل"
+
+#. Item status
+msgid "status:2"
+msgstr ""
 
 #. Address salutation
 msgid "company"

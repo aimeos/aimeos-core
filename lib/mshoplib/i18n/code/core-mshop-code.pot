@@ -37,6 +37,10 @@ msgstr "Disabled"
 msgid "status:1"
 msgstr "Enabled"
 
+#. Item status
+msgid "status:2"
+msgstr "Hidden"
+
 
 #. Address salutation
 msgid "company"
