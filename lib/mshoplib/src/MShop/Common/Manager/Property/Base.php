@@ -73,15 +73,15 @@ abstract class Base
 	/**
 	 * Creates a filter object.
 	 *
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
 	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		$object = parent::filter();
 
-		if( $default === true )
+		if( $default !== false )
 		{
 			$langid = $this->getContext()->getLocale()->getLanguageId();
 
@@ -187,11 +187,11 @@ abstract class Base
 	 *
 	 * @param string $id Id of the product property item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface Returns the product property item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( $this->prefix . 'id', $id, $ref, $default );
 	}

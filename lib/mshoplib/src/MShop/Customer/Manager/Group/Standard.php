@@ -216,11 +216,11 @@ class Standard
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param bool $default True to add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
 	public function find( string $code, array $ref = [], string $domain = null, string $type = null,
-		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->findBase( array( 'customer.group.code' => $code ), $ref, $default );
 	}
@@ -231,11 +231,11 @@ class Standard
 	 *
 	 * @param string $id Unique customer ID referencing an existing customer group
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Customer\Item\Group\Iface Returns the customer group item for the given ID
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'customer.group.id', $id, $ref, $default );
 	}

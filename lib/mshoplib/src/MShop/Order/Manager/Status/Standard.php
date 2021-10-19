@@ -380,11 +380,11 @@ class Standard
 	 *
 	 * @param string $id Unique ID of the order status item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface Returns order status item of the given id
 	 * @throws \Aimeos\MShop\Order\Exception If item couldn't be found
 	 */
-	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'order.status.id', $id, $ref, $default );
 	}

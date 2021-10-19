@@ -69,11 +69,11 @@ abstract class DBBase
 	/**
 	 * Creates a filter object.
 	 *
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
 	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		return $this->manager->filter( $default );
 	}
@@ -102,11 +102,11 @@ abstract class DBBase
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param bool $default True to add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
 	public function find( string $code, array $ref = [], string $domain = 'product', string $type = null,
-		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->manager->find( $code, $ref, $domain, $type, $default );
 	}
@@ -117,10 +117,10 @@ abstract class DBBase
 	 *
 	 * @param string $id Id of item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item object
 	 */
-	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->manager->get( $id, $ref, $default );
 	}

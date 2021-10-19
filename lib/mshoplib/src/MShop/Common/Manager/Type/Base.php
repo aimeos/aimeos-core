@@ -74,17 +74,13 @@ abstract class Base
 	/**
 	 * Creates a filter object.
 	 *
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
 	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
-		if( $default === true ) {
-			return $this->filterBase( substr( $this->prefix, 0, strlen( $this->prefix ) - 1 ) );
-		}
-
-		return parent::filter();
+		return $this->filterBase( substr( $this->prefix, 0, strlen( $this->prefix ) - 1 ), $default );
 	}
 
 
@@ -180,11 +176,11 @@ abstract class Base
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param bool $default True to add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
 	public function find( string $code, array $ref = [], string $domain = 'product', string $type = null,
-		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$find = array(
 			$this->prefix . 'code' => $code,
@@ -199,10 +195,11 @@ abstract class Base
 	 *
 	 * @param string $id ID of type item object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Returns the type item of the given ID
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( $this->prefix . 'id', $id, $ref, $default );
 	}

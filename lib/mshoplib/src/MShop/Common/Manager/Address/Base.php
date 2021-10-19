@@ -88,11 +88,11 @@ abstract class Base
 	 *
 	 * @param string $id Unique common address ID referencing an existing address
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Returns the address item of the given id
 	 * @throws \Aimeos\MShop\Exception If address search configuration isn't available
 	 */
-	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		if( ( $conf = reset( $this->searchConfig ) ) === false )
 		{

@@ -72,11 +72,11 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	/**
 	 * Creates a search critera object
 	 *
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		$db = $this->getResourceName();
 		$config = $this->context->getConfig();
@@ -431,11 +431,18 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * (setConditions overwrites the base criteria)
 	 *
 	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
+	 * @param bool|null $default TRUE for status=1, NULL for status>0, FALSE for no restriction
 	 * @return \Aimeos\MW\Criteria\Iface Search critery object
 	 */
-	protected function filterBase( string $domain ) : \Aimeos\MW\Criteria\Iface
+	protected function filterBase( string $domain, ?bool $default = true ) : \Aimeos\MW\Criteria\Iface
 	{
-		return $this->filter()->add( [$domain . '.status' => 1] );
+		$filter = self::filter();
+
+		if( $default !== false ) {
+			$filter->add( [$domain . '.status' => 1], $default ? '==' : '>=' );
+		}
+
+		return $filter;
 	}
 
 
@@ -548,11 +555,11 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 *
 	 * @param array $pairs Search key/value pairs for the item
 	 * @param string[] $ref List of domains whose items should be fetched too
-	 * @param bool $default True to add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
 	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	protected function findBase( array $pairs, array $ref, bool $default ) : \Aimeos\MShop\Common\Item\Iface
+	protected function findBase( array $pairs, array $ref, ?bool $default ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$expr = [];
 		$criteria = $this->getObject()->filter( $default )->slice( 0, 1 );
@@ -612,11 +619,11 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 * @param string $key Search key for the requested ID
 	 * @param string $id Unique ID to search for
 	 * @param string[] $ref List of domains whose items should be fetched too
-	 * @param bool $default True to add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
 	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	protected function getItemBase( string $key, string $id, array $ref, bool $default ) : \Aimeos\MShop\Common\Item\Iface
+	protected function getItemBase( string $key, string $id, array $ref, ?bool $default ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$criteria = $this->getObject()->filter( $default )->slice( 0, 1 );
 		$expr = [

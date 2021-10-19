@@ -304,16 +304,16 @@ class Standard extends Base
 	/**
 	 * Creates a search critera object
 	 *
-	 * @param bool $default Add default criteria (optional)
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE to add site criteria to show orders with available products only
 	 * @return \Aimeos\MW\Criteria\Iface New search criteria object
 	 */
-	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		$search = parent::filter( $default );
 		$context = $this->getContext();
 
-		if( $default === true )
+		if( $default !== false )
 		{
 			$search->setConditions( $search->and( [
 				$search->compare( '==', 'order.base.customerid', $context->getUserId() ),
@@ -383,11 +383,11 @@ class Standard extends Base
 	 *
 	 * @param string $id Unique id of the order base
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Returns Order base item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'order.base.id', $id, $ref, $default );
 	}

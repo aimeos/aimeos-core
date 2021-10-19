@@ -128,17 +128,13 @@ abstract class Base
 	/**
 	 * Creates a filter object.
 	 *
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
 	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
-		if( $default === true ) {
-			return $this->filterBase( 'customer' );
-		}
-
-		return parent::filter();
+		return $this->filterBase( 'customer', $default );
 	}
 
 
@@ -149,11 +145,11 @@ abstract class Base
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param bool $default True to add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Customer\Item\Iface Item object
 	 */
 	public function find( string $code, array $ref = [], string $domain = null, string $type = null,
-		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->findBase( array( 'customer.code' => $code ), $ref, $default );
 	}
@@ -164,11 +160,11 @@ abstract class Base
 	 *
 	 * @param string $id Unique customer ID referencing an existing customer
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Customer\Item\Iface Returns the customer item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'customer.id', $id, $ref, $default );
 	}

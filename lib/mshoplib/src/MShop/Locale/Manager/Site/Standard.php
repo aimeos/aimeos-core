@@ -400,11 +400,11 @@ class Standard
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
-	 * @param bool $default True to add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
 	public function find( string $code, array $ref = [], string $domain = null, string $type = null,
-		bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->findBase( array( 'locale.site.code' => $code ), $ref, $default );
 	}
@@ -415,11 +415,11 @@ class Standard
 	 *
 	 * @param string $id Unique ID of the site data in the storage
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Returns the site item of the given id
 	 * @throws \Aimeos\MShop\Exception If the item couldn't be found
 	 */
-	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'locale.site.id', $id, $ref, $default );
 	}
@@ -746,17 +746,13 @@ class Standard
 	/**
 	 * Creates a filter object.
 	 *
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
 	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
-		if( $default === true ) {
-			$search = $this->filterBase( 'locale.site' );
-		} else {
-			$search = parent::filter( $default );
-		}
+		$search = $this->filterBase( 'locale.site', $default );
 
 		$expr = array(
 			$search->compare( '==', 'locale.site.level', 0 ),

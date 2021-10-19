@@ -205,11 +205,11 @@ class Standard
 	 *
 	 * @param string $id Unique ID of the coupon item in the storage
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Returns the coupon item of the given ID
 	 * @throws \Aimeos\MShop\Exception If coupon couldn't be found
 	 */
-	public function get( string $id, array $ref = [], bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		return $this->getItemBase( 'coupon.id', $id, $ref, $default );
 	}
@@ -658,15 +658,15 @@ class Standard
 	/**
 	 * Creates a filter object.
 	 *
-	 * @param bool $default Add default criteria
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
 	 * @param bool $site TRUE for adding site criteria to limit items by the site of related items
 	 * @return \Aimeos\MW\Criteria\Iface Returns the filter object
 	 */
-	public function filter( bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
+	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
-		if( $default === true )
+		if( $default !== false )
 		{
-			$object = $this->filterBase( 'coupon' );
+			$object = $this->filterBase( 'coupon', $default );
 
 			$expr = [];
 			$expr[] = $object->getConditions();
