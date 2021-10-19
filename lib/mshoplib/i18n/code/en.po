@@ -94,6 +94,10 @@ msgstr "authorized"
 msgid "pay:6"
 msgstr "received"
 
+#. Payment status value
+msgid "pay:7"
+msgstr "transferred"
+
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
 msgstr "Sorry, at least one product doesn't exist any more. Please remove it from your basket to continue"
@@ -193,3 +197,7 @@ msgstr "Disabled"
 #. Item status
 msgid "status:1"
 msgstr "Enabled"
+
+#. Item status
+msgid "status:2"
+msgstr "Hidden"
