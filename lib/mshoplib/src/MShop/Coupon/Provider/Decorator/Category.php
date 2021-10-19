@@ -131,7 +131,7 @@ class Category
 		if( ( $value = $this->getConfigValue( 'category.code' ) ) !== null )
 		{
 			$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
-			$filter = $manager->filter( true )->add( ['catalog.code' => explode( ',', $value )] )->slice( 0, 1 );
+			$filter = $manager->filter( null )->add( ['catalog.code' => explode( ',', $value )] )->slice( 0, 1 );
 			$expr = [];
 
 			foreach( $base->getProducts() as $product )
