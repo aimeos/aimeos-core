@@ -8,6 +8,7 @@
 # Lara Merlotto <lara@vg7.it>, 2020
 # nsendetzky, 2014
 # S 0l, 2021
+# S 0l, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"

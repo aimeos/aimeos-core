@@ -4,6 +4,8 @@
 # 
 # Translators:
 # Aimeos, 2021
+# Aimeos, 2021
+# Oleksandr Kropyvko <akropivko@gmail.com>, 2021
 # Oleksandr Kropyvko <akropivko@gmail.com>, 2021
 msgid ""
 msgstr ""

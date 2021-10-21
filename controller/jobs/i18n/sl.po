@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Goran Sabo <info@noaset.pro>, 2020
+# Goran Sabo <info@noaset.pro>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-04 18:31+0200\n"
-"PO-Revision-Date: 2021-10-04 16:35+0000\n"
+"PO-Revision-Date: 2021-10-15 08:34+0000\n"
 "Last-Translator: Goran Sabo <info@noaset.pro>\n"
 "Language-Team: Slovenian (http://www.transifex.com/aimeos/aimeos-core/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -18,467 +19,42 @@ msgstr ""
 "Language: sl\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
-msgid "All XML import"
-msgstr "All XML import"
-
-msgid "Attribute import XML"
-msgstr "Attribute import XML"
-
-msgid ""
-"Authorized payments of orders will be captured after dispatching or after a "
-"configurable amount of time"
-msgstr "Authorized payments of orders will be captured after dispatching or after a configurable amount of time"
-
-msgid "Batch update of payment/delivery status"
-msgstr "Batch update of payment/delivery status"
-
-msgid "Cache cleanup"
-msgstr "Cache cleanup"
-
-msgid "Capture authorized payments"
-msgstr "Capture authorized payments"
-
-msgid "Catalog import CSV"
-msgstr "Catalog import CSV"
-
-msgid "Catalog import XML"
-msgstr "Catalog import XML"
-
-msgid "Catalog index optimization"
-msgstr "Catalog index optimization"
-
-msgid "Catalog index rebuild"
-msgstr "Catalog index rebuild"
-
-msgid "Catalog site map"
-msgstr "Catalog site map"
-
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Class \"%1$s\" does not implement interface \"%2$s\""
 
 #, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "Class \"%1$s\" not available"
+
+#, php-format
 msgid "Class \"%1$s\" not found"
 msgstr "Class \"%1$s\" not found"
 
-msgid "Coupon code import CSV"
-msgstr "Coupon code import CSV"
-
-msgid "Creates a catalog site map for search engines"
-msgstr "Creates a catalog site map for search engines"
-
-msgid "Creates a product site map for search engines"
-msgstr "Creates a product site map for search engines"
-
-msgid "Creates bought together product suggestions"
-msgstr "Creates bought together product suggestions"
-
-msgid "Customer group import XML"
-msgstr "Customer group import XML"
-
-msgid "Customer import XML"
-msgstr "Customer import XML"
-
-msgid ""
-"Deletes unfinished orders an makes their products and coupon codes available"
-" again"
-msgstr "Deletes unfinished orders an makes their products and coupon codes available again"
-
-msgid "Deletes unpaid orders to keep the database clean"
-msgstr "Deletes unpaid orders to keep the database clean"
-
-msgid "Executes all XML importers and rebuild the index"
-msgstr "Executes all XML importers and rebuild the index"
-
-msgid "Executes payment or delivery service providers that uses batch updates"
-msgstr "Executes payment or delivery service providers that uses batch updates"
-
 #, php-format
-msgid "Expanding \"%1$s\" node failed"
-msgstr "Expanding \"%1$s\" node failed"
-
-msgid "Exports all available products"
-msgstr "Exports all available products"
-
-msgid "Exports orders to CSV file"
-msgstr "Exports orders to CSV file"
-
-msgid "Exports subscriptions to CSV file"
-msgstr "Exports subscriptions to CSV file"
-
-#, php-format
-msgid "File or directory \"%1$s\" doesn't exist"
-msgstr "File or directory \"%1$s\" doesn't exist"
-
-#, php-format
-msgid "Finished attribute import from \"%1$s\""
-msgstr "Finished attribute import from \"%1$s\""
-
-#, php-format
-msgid "Finished attribute import from file \"%1$s\""
-msgstr "Finished attribute import from file \"%1$s\""
-
-#, php-format
-msgid "Finished catalog import from \"%1$s\""
-msgstr "Finished catalog import from \"%1$s\""
-
-#, php-format
-msgid "Finished catalog import from file \"%1$s\""
-msgstr "Finished catalog import from file \"%1$s\""
-
-#, php-format
-msgid "Finished customer group import from \"%1$s\""
-msgstr "Finished customer group import from \"%1$s\""
-
-#, php-format
-msgid "Finished customer group import from file \"%1$s\""
-msgstr "Finished customer group import from file \"%1$s\""
-
-#, php-format
-msgid "Finished customer import from \"%1$s\""
-msgstr "Finished customer import from \"%1$s\""
-
-#, php-format
-msgid "Finished customer import from file \"%1$s\""
-msgstr "Finished customer import from file \"%1$s\""
-
-#, php-format
-msgid "Finished product import from \"%1$s\""
-msgstr "Finished product import from \"%1$s\""
-
-#, php-format
-msgid "Finished product import from file \"%1$s\""
-msgstr "Finished product import from file \"%1$s\""
-
-#, php-format
-msgid "Finished stock import from \"%1$s\""
-msgstr "Finished stock import from \"%1$s\""
-
-#, php-format
-msgid "Finished stock import from file \"%1$s\""
-msgstr "Finished stock import from file \"%1$s\""
-
-msgid "Imports new and updates existing attributes from XML files"
-msgstr "Imports new and updates existing attributes from XML files"
-
-msgid "Imports new and updates existing categories from CSV files"
-msgstr "Imports new and updates existing categories from CSV files"
-
-msgid "Imports new and updates existing categories from XML files"
-msgstr "Imports new and updates existing categories from XML files"
-
-msgid "Imports new and updates existing coupon code from CSV files"
-msgstr "Imports new and updates existing coupon code from CSV files"
-
-msgid "Imports new and updates existing customer groups from XML files"
-msgstr "Imports new and updates existing customer groups from XML files"
-
-msgid "Imports new and updates existing customers from XML files"
-msgstr "Imports new and updates existing customers from XML files"
-
-msgid "Imports new and updates existing products from CSV files"
-msgstr "Imports new and updates existing products from CSV files"
-
-msgid "Imports new and updates existing products from XML files"
-msgstr "Imports new and updates existing products from XML files"
-
-msgid "Imports new and updates existing stocks from CSV files"
-msgstr "Imports new and updates existing stocks from CSV files"
-
-msgid "Imports new and updates existing suppliers from CSV files"
-msgstr "Imports new and updates existing suppliers from CSV files"
-
-msgid "Imports new and updates existing suppliers from XML files"
-msgstr "Imports new and updates existing suppliers from XML files"
-
-msgid "Index optimization"
-msgstr "Index optimization"
-
-msgid "Index rebuild"
-msgstr "Index rebuild"
-
-#, php-format
-msgid "Invalid catalog lines in \"%1$s\": %2$d/%3$d"
-msgstr "Invalid catalog lines in \"%1$s\": %2$d/%3$d"
+msgid "Controller path is empty"
+msgstr "Controller path is empty"
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Invalid characters in class name \"%1$s\""
 
 #, php-format
-msgid "Invalid message: %1$s"
-msgstr "Invalid message: %1$s"
+msgid "Invalid controller \"%1$s\" in \"%2$s\""
+msgstr "Invalid controller \"%1$s\" in \"%2$s\""
 
 #, php-format
-msgid "Invalid order type \"%1$s\""
-msgstr "Invalid order type \"%1$s\""
+msgid "Invalid domain \"%1$s\""
+msgstr "Invalid domain \"%1$s\""
 
 #, php-format
-msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
-msgstr "Invalid product lines in \"%1$s\": %2$d/%3$d"
+msgid "Invalid factory \"%1$s\""
+msgstr "Invalid factory \"%1$s\""
 
 #, php-format
-msgid "Invalid product type \"%1$s\""
-msgstr "Invalid product type \"%1$s\""
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 
 #, php-format
-msgid "Invalid supplier lines in \"%1$s\": %2$d/%3$d"
-msgstr "Invalid supplier lines in \"%1$s\": %2$d/%3$d"
-
-msgid "Log cleanup"
-msgstr "Log cleanup"
-
-#, php-format
-msgid "No \"catalog.code\" column in CSV mapping found"
-msgstr "No \"catalog.code\" column in CSV mapping found"
-
-#, php-format
-msgid "No \"coupon.code.code\" column in CSV mapping found"
-msgstr "No \"coupon.code.code\" column in CSV mapping found"
-
-#, php-format
-msgid "No \"product.code\" column in CSV mapping found"
-msgstr "No \"product.code\" column in CSV mapping found"
-
-#, php-format
-msgid "No \"supplier.code\" column in CSV mapping found"
-msgstr "No \"supplier.code\" column in CSV mapping found"
-
-#, php-format
-msgid "No XML file \"%1$s\" found"
-msgstr "No XML file \"%1$s\" found"
-
-msgid "Optimizes the catalog index for searching products"
-msgstr "Optimizes the catalog index for searching products"
-
-msgid "Optimizes the index for searching products faster"
-msgstr "Optimizes the index for searching products faster"
-
-msgid "Order export CSV"
-msgstr "Order export CSV"
-
-msgid "Order status import CSV"
-msgstr "Order status import CSV"
-
-#, php-format
-msgid "Parent node for code \"%1$s\" not found"
-msgstr "Parent node for code \"%1$s\" not found"
-
-msgid "Process order delivery services"
-msgstr "Process order delivery services"
-
-msgid "Process subscriptions initially"
-msgstr "Process subscriptions initially"
-
-msgid "Product export"
-msgstr "Product export"
-
-msgid "Product import CSV"
-msgstr "Product import CSV"
-
-msgid "Product import XML"
-msgstr "Product import XML"
-
-msgid "Product site map"
-msgstr "Product site map"
-
-msgid "Products bought together"
-msgstr "Products bought together"
-
-msgid "Rebuilds the catalog index for searching products"
-msgstr "Rebuilds the catalog index for searching products"
-
-msgid "Rebuilds the index for searching products"
-msgstr "Rebuilds the index for searching products"
-
-msgid "Removes the expired entries from the cache"
-msgstr "Removes the expired entries from the cache"
-
-msgid ""
-"Removes the old log entries from the database and archives them (optional)"
-msgstr "Removes the old log entries from the database and archives them (optional)"
-
-msgid "Removes unfinished orders"
-msgstr "Removes unfinished orders"
-
-msgid "Removes unpaid orders"
-msgstr "Removes unpaid orders"
-
-msgid "Renews subscriptions at next date"
-msgstr "Renews subscriptions at next date"
-
-#, php-format
-msgid "Required column \"%1$s\" not found for code \"%2$s\""
-msgstr "Required column \"%1$s\" not found for code \"%2$s\""
-
-#, php-format
-msgid "Required configuration for \"%1$s\" is missing"
-msgstr "Required configuration for \"%1$s\" is missing"
-
-#, php-format
-msgid "Required mapping key \"%1$s\" is missing or contains no array"
-msgstr "Required mapping key \"%1$s\" is missing or contains no array"
-
-msgid "Rescale product images"
-msgstr "Rescale product images"
-
-msgid "Rescales product images to the new sizes"
-msgstr "Rescales product images to the new sizes"
-
-#, php-format
-msgid "Scaling media item \"%1$s\" failed: %2$s"
-msgstr "Scaling media item \"%1$s\" failed: %2$s"
-
-msgid "Sends paid orders to the ERP system or logistic partner"
-msgstr "Sends paid orders to the ERP system or logistic partner"
-
-#, php-format
-msgid "Started attribute import from \"%1$s\""
-msgstr "Started attribute import from \"%1$s\""
-
-#, php-format
-msgid "Started attribute import from file \"%1$s\""
-msgstr "Started attribute import from file \"%1$s\""
-
-#, php-format
-msgid "Started catalog import from \"%1$s\""
-msgstr "Started catalog import from \"%1$s\""
-
-#, php-format
-msgid "Started catalog import from \"%1$s\" (%2$s)"
-msgstr "Started catalog import from \"%1$s\" (%2$s)"
-
-#, php-format
-msgid "Started catalog import from file \"%1$s\""
-msgstr "Started catalog import from file \"%1$s\""
-
-#, php-format
-msgid "Started coupon import from \"%1$s\" (%2$s)"
-msgstr "Started coupon import from \"%1$s\" (%2$s)"
-
-#, php-format
-msgid "Started customer group import from \"%1$s\""
-msgstr "Started customer group import from \"%1$s\""
-
-#, php-format
-msgid "Started customer group import from file \"%1$s\""
-msgstr "Started customer group import from file \"%1$s\""
-
-#, php-format
-msgid "Started customer import from \"%1$s\""
-msgstr "Started customer import from \"%1$s\""
-
-#, php-format
-msgid "Started customer import from file \"%1$s\""
-msgstr "Started customer import from file \"%1$s\""
-
-#, php-format
-msgid "Started order status import from \"%1$s\" (%2$s)"
-msgstr "Started order status import from \"%1$s\" (%2$s)"
-
-#, php-format
-msgid "Started product import from \"%1$s\""
-msgstr "Started product import from \"%1$s\""
-
-#, php-format
-msgid "Started product import from \"%1$s\" (%2$s)"
-msgstr "Started product import from \"%1$s\" (%2$s)"
-
-#, php-format
-msgid "Started product import from file \"%1$s\""
-msgstr "Started product import from file \"%1$s\""
-
-#, php-format
-msgid "Started stock import from \"%1$s\""
-msgstr "Started stock import from \"%1$s\""
-
-#, php-format
-msgid "Started stock import from file \"%1$s\""
-msgstr "Started stock import from file \"%1$s\""
-
-#, php-format
-msgid "Started supplier import from \"%1$s\" (%2$s)"
-msgstr "Started supplier import from \"%1$s\" (%2$s)"
-
-msgid "Stock import CSV"
-msgstr "Stock import CSV"
-
-msgid "Subscription export CSV"
-msgstr "Subscription export CSV"
-
-msgid "Subscription process end"
-msgstr "Subscription process end"
-
-msgid "Subscription process renew"
-msgstr "Subscription process renew"
-
-msgid "Subscription process start"
-msgstr "Subscription process start"
-
-msgid "Supplier import CSV"
-msgstr "Supplier import CSV"
-
-msgid "Supplier import XML"
-msgstr "Supplier import XML"
-
-msgid "Terminates expired subscriptions"
-msgstr "Terminates expired subscriptions"
-
-#, php-format
-msgid "Unable to add current address for customer with ID \"%1$s\""
-msgstr "Unable to add current address for customer with ID \"%1$s\""
-
-#, php-format
-msgid "Unable to begin subscription with ID \"%1$s\": %2$s"
-msgstr "Unable to begin subscription with ID \"%1$s\": %2$s"
-
-#, php-format
-msgid "Unable to end subscription with ID \"%1$s\": %2$s"
-msgstr "Unable to end subscription with ID \"%1$s\": %2$s"
-
-#, php-format
-msgid "Unable to import catalog with code \"%1$s\": %2$s"
-msgstr "Unable to import catalog with code \"%1$s\": %2$s"
-
-#, php-format
-msgid "Unable to import coupon with code \"%1$s\": %2$s"
-msgstr "Unable to import coupon with code \"%1$s\": %2$s"
-
-#, php-format
-msgid "Unable to import order with code \"%1$s\": %2$s"
-msgstr "Unable to import order with code \"%1$s\": %2$s"
-
-#, php-format
-msgid "Unable to import product with code \"%1$s\": %2$s"
-msgstr "Unable to import product with code \"%1$s\": %2$s"
-
-#, php-format
-msgid "Unable to import supplier with code \"%1$s\": %2$s"
-msgstr "Unable to import supplier with code \"%1$s\": %2$s"
-
-#, php-format
-msgid "Unable to move imported file"
-msgstr "Unable to move imported file"
-
-#, php-format
-msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
-msgstr "Unable to move imported file \"%1$s\" to \"%2$s\""
-
-#, php-format
-msgid "Unable to renew subscription with ID \"%1$s\": %2$s"
-msgstr "Unable to renew subscription with ID \"%1$s\": %2$s"
-
-msgid "Updates order status from CSV files"
-msgstr "Updates order status from CSV files"
-
-#, php-format
-msgid "aimeos-catalog-sitemap-%d.xml"
-msgstr "aimeos-catalog-sitemap-%d.xml"
-
-#, php-format
-msgid "aimeos-products-%d.xml"
-msgstr "aimeos-products-%d.xml"
-
-#, php-format
-msgid "aimeos-sitemap-%d.xml"
-msgstr "aimeos-sitemap-%d.xml"
+msgid "Unable to call method \"%1$s\""
+msgstr "Unable to call method \"%1$s\""
