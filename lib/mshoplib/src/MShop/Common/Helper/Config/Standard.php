@@ -97,10 +97,8 @@ class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 						break;
 					case 'list':
 					case 'select':
-						$default = $attr->getDefault();
-						if( !is_array( $default ) || !isset( $default[$config[$key]] )
-							&& !in_array( $config[$key], $default )
-						) {
+						$default = (array) $attr->getDefault();
+						if( !empty( $default ) && !isset( $default[$config[$key]] ) && !in_array( $config[$key], $default ) ) {
 							$errors[$key] = sprintf( 'Not a listed value' ); continue 2;
 						}
 						break;
