@@ -298,7 +298,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function addProductMedia( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx )
 	{
-		$prefix = 'https://demo.aimeos.org/media/';
+		$prefix = 'https://aimeos.org/media/';
 
 		$mediaManager = \Aimeos\MShop::create( $this->additional, 'media' );
 		$productListManager = \Aimeos\MShop::create( $this->additional, 'product/lists' );
