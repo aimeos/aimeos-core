@@ -69,6 +69,22 @@ class Standard
 
 
 	/**
+	 * Tests if the item property for the given name is available
+	 *
+	 * @param string $name Name of the property
+	 * @return bool True if the property exists, false if not
+	 */
+	public function __isset( string $name ) : bool
+	{
+		if( ( $value = parent::__isset( $name ) ) !== false ) {
+			return $value;
+		}
+
+		return isset( $this->node->$name );
+	}
+
+
+	/**
 	 * Returns the item property for the given name
 	 *
 	 * @param string $name Name of the property
