@@ -156,7 +156,7 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 
 	protected function getSites()
 	{
-		$map = []; $site = '';
+		$map = [];
 
 		$dbm = $this->additional->getDatabaseManager();
 		$conn = $dbm->acquire( 'db-locale' );
@@ -172,8 +172,8 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 
 			while( $row = $result->fetch() )
 			{
-				$map[$root['id']] = $root['id'] . '.';
-				$this->map( $result, $root, $map, $root['id'] . '.' );
+				$map[$row['id']] = $row['id'] . '.';
+				$this->map( $result, $row, $map, $row['id'] . '.' );
 			}
 		}
 
