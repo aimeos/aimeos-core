@@ -156,29 +156,57 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 
 	protected function getSites()
 	{
-		$map = [];
-		$manager = \Aimeos\MShop::create( $this->additional, 'locale/site' );
+		$map = []; $site = '';
 
-		$search = $manager->filter()->slice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'locale.site.level', 0 ) );
+		$dbm = $this->additional->getDatabaseManager();
+		$conn = $dbm->acquire( 'db-locale' );
+		$tconn = $dbm->acquire( 'db-locale' );
 
-		foreach( $manager->search( $search ) as $siteid => $siteItem ) {
-			$this->map( $manager->getTree( $siteid ), $map, '' );
+		$type = \Aimeos\MW\DB\Statement\Base::PARAM_INT;
+		$roots = $conn->create( 'SELECT id, nleft, nright FROM mshop_locale_site WHERE level = 0' )->execute();
+
+		while( $root = $roots->fetch() )
+		{
+			$sql = 'SELECT id, nleft, nright FROM mshop_locale_site WHERE nleft >= ? and nright <= ? ORDER BY nleft';
+			$result = $tconn->create( $sql )->bind( 1, $root['nleft'], $type )->bind( 2, $root['nright'], $type )->execute();
+
+			while( $row = $result->fetch() )
+			{
+				$map[$root['id']] = $root['id'] . '.';
+				$this->map( $result, $root, $map, $root['id'] . '.' );
+			}
 		}
+
+		$dbm->release( $tconn, 'db-locale' );
+		$dbm->release( $conn, 'db-locale' );
 
 		return $map;
 	}
 
 
-	protected function map( \Aimeos\MShop\Locale\Item\Site\Iface $item, &$map, $site )
+	protected function isChild( array $row, array $parent )
 	{
-		$site .= $item->getId() . '.';
+		return $row['nleft'] > $parent['nleft'] && $row['nright'] < $parent['nright'];
+	}
 
-		foreach( $item->getChildren() as $child ) {
-			$this->map( $child, $map, $site );
+
+	protected function map( \Aimeos\MW\DB\Result\Iface $result, array $parent, array &$map, string $site )
+	{
+		while( $row = $result->fetch() )
+		{
+			while( $this->isChild( $row, $parent ) )
+			{
+				$map[$row['id']] = $site . $row['id'] . '.';
+
+				if( ( $row = $this->map( $result, $row, $map, $site . $row['id'] . '.' ) ) === null ) {
+					return null;
+				}
+			}
+
+			return $row;
 		}
 
-		$map[$item->getId()] = $site;
+		return null;
 	}
 
 
