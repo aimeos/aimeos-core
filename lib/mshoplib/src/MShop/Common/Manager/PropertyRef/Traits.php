@@ -100,16 +100,18 @@ trait Traits
 		$propManager = $this->getObject()->getSubManager( 'property' );
 		$propManager->delete( $item->getPropertyItemsDeleted()->keys()->toArray() );
 
-		foreach( $item->getPropertyItems( null, false ) as $propItem )
+		$propItems = $item->getPropertyItems( null, false );
+
+		foreach( $propItems as $propItem )
 		{
 			if( $propItem->getParentId() != $item->getId() ) {
 				$propItem->setId( null ); // create new property item if copied
 			}
 
 			$propItem->setParentId( $item->getId() );
-			$propManager->save( $propItem, $fetch );
 		}
 
+		$propManager->save( $propItems, $fetch );
 		return $item;
 	}
 }
