@@ -58,6 +58,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 */
 	public function __clone()
 	{
+		foreach( $this->attributes as $key => $item ) {
+			$this->attributes[$key] = clone $item;
+		}
+
 		$this->price = clone $this->price;
 	}
 

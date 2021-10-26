@@ -67,6 +67,14 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function __clone()
 	{
+		foreach( $this->attributes as $key => $item ) {
+			$this->attributes[$key] = clone $item;
+		}
+
+		foreach( $this->products as $key => $item ) {
+			$this->products[$key] = clone $item;
+		}
+
 		$this->price = clone $this->price;
 	}
 
