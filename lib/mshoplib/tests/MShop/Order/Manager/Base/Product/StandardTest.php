@@ -256,7 +256,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->assertTrue( $item->getId() !== null );
-		$this->assertNotEquals( [], $item->getAttributeItems() );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getBaseId(), $itemSaved->getBaseId() );
@@ -284,6 +283,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 		$this->assertEquals( $item->getFlags(), $itemSaved->getFlags() );
 		$this->assertEquals( $item->getNotes(), $itemSaved->getNotes() );
+		$this->assertNotEquals( [], $item->getAttributeItems()->toArray() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -317,7 +317,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 		$this->assertEquals( $itemExp->getFlags(), $itemUpd->getFlags() );
 		$this->assertEquals( $itemExp->getNotes(), $itemUpd->getNotes() );
-		$this->assertEquals( [], $itemUpd->getAttributeItems()->toArray() );
+		$this->assertNotEquals( [], $itemUpd->getAttributeItems()->toArray() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );

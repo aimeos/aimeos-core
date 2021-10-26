@@ -709,7 +709,7 @@ class Standard
 	public function saveItem( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
 		if( !$item->isModified() ) {
-			return $item;
+			return $this->saveAttributeItems( $item, $fetch );
 		}
 
 		$context = $this->getContext();
@@ -903,7 +903,7 @@ class Standard
 			throw $e;
 		}
 
-		return $item;
+		return $this->saveAttributeItems( $item, $fetch );
 	}
 
 
@@ -1166,5 +1166,30 @@ class Standard
 		}
 
 		return $result;
+	}
+
+
+	/**
+	 * Saves the attribute items included in the order service item
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order service item with attribute items
+	 * @param bool $fetch True if the new ID should be set in the attribute item
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Object with saved attribute items and IDs
+	 */
+	protected function saveAttributeItems( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, bool $fetch ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	{
+		$attrItems = $item->getAttributeItems();
+
+		foreach( $attrItems as $attrItem )
+		{
+			if( $attrItem->getParentId() != $item->getId() ) {
+				$attrItem->setId( null ); // create new property item if copied
+			}
+
+			$attrItem->setParentId( $item->getId() );
+		}
+
+		$this->getObject()->getSubManager( 'attribute' )->save( $attrItems, $fetch );
+		return $item;
 	}
 }
