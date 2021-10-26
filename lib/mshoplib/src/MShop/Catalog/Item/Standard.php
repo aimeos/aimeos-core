@@ -76,11 +76,7 @@ class Standard
 	 */
 	public function __isset( string $name ) : bool
 	{
-		if( ( $value = parent::__isset( $name ) ) !== false ) {
-			return $value;
-		}
-
-		return isset( $this->node->$name );
+		return parent::__isset( $name ) ?: isset( $this->node->$name );
 	}
 
 
