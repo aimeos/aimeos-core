@@ -54,11 +54,20 @@ abstract class Base implements Iface
 	 */
 	public static function method( string $name, \Closure $function = null ) : ?\Closure
 	{
+		$self = get_called_class();
+
 		if( $function ) {
-			self::$methods[$name] = $function;
+			self::$methods[$self][$name] = $function;
 		}
 
-		return self::$methods[$name] ?? null;
+		foreach( array_merge( [$self], class_parents( static::class ) ) as $class )
+		{
+			if( isset( self::$methods[$class][$name] ) ) {
+				return self::$methods[$class][$name];
+			}
+		}
+
+		return null;
 	}
 
 
@@ -71,12 +80,12 @@ abstract class Base implements Iface
 	 */
 	public function __call( string $method, array $args )
 	{
-		if( $fcn = self::method( $method ) ) {
+		if( $fcn = static::method( $method ) ) {
 			return call_user_func_array( $fcn->bindTo( $this, static::class ), $args );
 		}
 
-		$msg = $this->context->translate( 'mshop', 'Unable to call method "%1$s"' );
-		throw new \BadMethodCallException( sprintf( $msg, $method ) );
+		$msg = 'Called unknown method "%1$s" on class "%2$s"';
+		throw new \BadMethodCallException( sprintf( $msg, $method, get_class( $this ) ) );
 	}
 
 
@@ -87,13 +96,13 @@ abstract class Base implements Iface
 	 * @param array $args Method arguments
 	 * @return mixed Result or method call
 	 */
-	public function call( string $method, array $args )
+	public function call( string $method, ...$args )
 	{
-		if( $fcn = self::method( $method ) ) {
+		if( $fcn = static::method( $method ) ) {
 			return call_user_func_array( $fcn->bindTo( $this, static::class ), $args );
 		}
 
-		return call_user_func_array( [$this, $method], $args );
+		return $this->$method( ...$args );
 	}
 
 
