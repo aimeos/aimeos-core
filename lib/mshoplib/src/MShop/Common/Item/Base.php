@@ -22,12 +22,13 @@ abstract class Base
 	extends \Aimeos\MW\Common\Item\Base
 	implements \Aimeos\MShop\Common\Item\Iface, \ArrayAccess
 {
-	private $prefix;
+	private static $methods = [];
+
 	private $available = true;
 	private $modified = false;
+	private $prefix;
 
-	/** @todo 2022.01 Make private */
-	protected static $methods = [];
+	// protected due to PHP serialization
 	protected $bdata;
 
 
