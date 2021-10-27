@@ -84,6 +84,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testDynamicBaseMethods()
+	{
+		\Aimeos\MShop\Common\Item\Base::method( 'tests', function( $name ) {
+			return $this->bdata[$name];
+		} );
+
+		$this->assertInstanceOf( '\Closure', \Aimeos\MShop\Product\Item\Standard::method( 'tests' ) );
+
+		$object = new \Aimeos\MShop\Product\Item\Standard( $this->values );
+		$this->assertEquals( 'TEST', $object->tests( 'product.code' ) );
+
+		$this->expectException( \BadMethodCallException::class );
+		$object->invalid();
+	}
+
+
 	public function testArrayMethods()
 	{
 		$this->assertFalse( isset( $this->object['test'] ) );
