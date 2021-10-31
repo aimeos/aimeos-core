@@ -7,28 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Rebuilds the index.
  */
-class DemoRebuildIndex extends \Aimeos\MW\Setup\Task\Base
+class DemoRebuildIndex extends Base
 {
-	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
-	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $additional );
-
-		parent::__construct( $schema, $conn, $additional );
-	}
-
-
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -37,19 +29,15 @@ class DemoRebuildIndex extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Rebuilds the index.
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Rebuilding index for demo data', 0 );
+		$this->info( 'Rebuilding index for demo data', 'v' );
 
-		if( $this->additional->getConfig()->get( 'setup/default/demo', '' ) === '' )
-		{
-			$this->status( 'OK' );
+		if( $this->context()->getConfig()->get( 'setup/default/demo', '' ) === '' ) {
 			return;
 		}
 
 		$timestamp = date( 'Y-m-d H:i:s' );
-		\Aimeos\MShop::create( $this->additional, 'index' )->rebuild()->cleanup( $timestamp );
-
-		$this->status( 'done' );
+		\Aimeos\MShop::create( $this->context(), 'index' )->rebuild()->cleanup( $timestamp );
 	}
 }

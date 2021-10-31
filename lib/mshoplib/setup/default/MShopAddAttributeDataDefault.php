@@ -6,20 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds code records to the tables
  */
-class MShopAddAttributeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddAttributeData
+class MShopAddAttributeDataDefault extends MShopAddAttributeData
 {
 	/**
 	 * Returns the list of task names which this task depends on
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale', 'MShopAddTypeDataDefault'];
 	}

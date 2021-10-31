@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds default records to plugin table.
  */
-class MShopAddPluginDataDefault extends \Aimeos\MW\Setup\Task\MShopAddPluginData
+class MShopAddPluginDataDefault extends MShopAddPluginData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopAddTypeDataDefault'];
 	}
@@ -29,7 +29,7 @@ class MShopAddPluginDataDefault extends \Aimeos\MW\Setup\Task\MShopAddPluginData
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	public function migrate()
+	public function up()
 	{
 		$this->process();
 	}

@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds demo records to coupon tables.
  */
-class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
+class DemoAddCouponData extends MShopAddDataAbstract
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopAddLocaleDataDefault'];
 	}
@@ -29,16 +29,14 @@ class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	/**
 	 * Insert service data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Processing coupon demo data', 0 );
+		$this->info( 'Processing coupon demo data', 'v' );
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$value = $context->getConfig()->get( 'setup/default/demo', '' );
 
-		if( $value === '' )
-		{
-			$this->status( 'OK' );
+		if( $value === '' ) {
 			return;
 		}
 
@@ -74,12 +72,6 @@ class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 				$this->addCodes( $item->getId(), $entry['codes'] );
 			}
-
-			$this->status( 'added' );
-		}
-		else
-		{
-			$this->status( 'removed' );
 		}
 	}
 

@@ -6,20 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds code records to the tables
  */
-class MShopAddCodeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddCodeData
+class MShopAddCodeDataDefault extends MShopAddCodeData
 {
 	/**
 	 * Returns the list of task names which this task depends on
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale', 'MShopAddCodeData'];
 	}
@@ -28,12 +28,10 @@ class MShopAddCodeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddCodeData
 	/**
 	 * Executes the task for MySQL databases
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
-
-		$site = $this->additional->getLocale()->getSiteItem()->getCode();
-		$this->msg( sprintf( 'Adding default code data for site "%1$s"', $site ), 0 ); $this->status( '' );
+		$site = $this->context()->getLocale()->getSiteItem()->getCode();
+		$this->info( sprintf( 'Adding default code data for site "%1$s"', $site ), 'v' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'code.php';

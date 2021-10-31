@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds demo records to product tables.
  */
-class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
+class DemoAddProductData extends MShopAddDataAbstract
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopAddTypeDataDefault', 'MShopAddCodeDataDefault', 'DemoAddTypeData'];
 	}
@@ -31,7 +31,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
 		return ['DemoRebuildIndex'];
 	}
@@ -40,16 +40,14 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	/**
 	 * Insert product data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Processing product demo data', 0 );
+		$this->info( 'Processing product demo data', 'v' );
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$value = $context->getConfig()->get( 'setup/default/demo', '' );
 
-		if( $value === '' )
-		{
-			$this->status( 'OK' );
+		if( $value === '' ) {
 			return;
 		}
 
@@ -77,14 +75,8 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$this->removeAttributeItems();
 
 
-		if( $value === '1' )
-		{
+		if( $value === '1' ) {
 			$this->addDemoData();
-			$this->status( 'added' );
-		}
-		else
-		{
-			$this->status( 'removed' );
 		}
 	}
 

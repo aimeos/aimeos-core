@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds demo records to service tables.
  */
-class DemoAddServiceData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
+class DemoAddServiceData extends MShopAddDataAbstract
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopAddTypeDataDefault'];
 	}
@@ -29,16 +29,14 @@ class DemoAddServiceData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	/**
 	 * Insert service data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Processing service demo data', 0 );
+		$this->info( 'Processing service demo data', 'v' );
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$value = $context->getConfig()->get( 'setup/default/demo', '' );
 
-		if( $value === '' )
-		{
-			$this->status( 'OK' );
+		if( $value === '' ) {
 			return;
 		}
 
@@ -93,12 +91,6 @@ class DemoAddServiceData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 					$this->addTexts( $item->getId(), $entry['text'], 'service' );
 				}
 			}
-
-			$this->status( 'added' );
-		}
-		else
-		{
-			$this->status( 'removed' );
 		}
 	}
 }

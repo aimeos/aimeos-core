@@ -6,20 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds demo records to catalog tables.
  */
-class MShopAddCatalogDataDefault extends \Aimeos\MW\Setup\Task\Base
+class MShopAddCatalogDataDefault extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -28,12 +28,10 @@ class MShopAddCatalogDataDefault extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Insert catalog nodes and relations.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
-
-		$sitecode = $this->additional->getLocale()->getSiteItem()->getCode();
-		$this->msg( sprintf( 'Adding MShop catalog data for site "%1$s"', $sitecode ), 0, '' );
+		$sitecode = $this->context()->getLocale()->getSiteItem()->getCode();
+		$this->info( sprintf( 'Adding MShop catalog data for site "%1$s"', $sitecode ), 'v' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$filename = __DIR__ . $ds . 'data' . $ds . 'catalog.php';
@@ -42,7 +40,7 @@ class MShopAddCatalogDataDefault extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No type file found in "%1$s"', $filename ) );
 		}
 
-		$manager = \Aimeos\MShop::create( $this->additional, 'catalog' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
 
 		foreach( $data as $entry )
 		{

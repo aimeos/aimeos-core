@@ -6,20 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds demo type records to tables.
  */
-class DemoAddTypeData extends \Aimeos\MW\Setup\Task\MShopAddTypeData
+class DemoAddTypeData extends MShopAddTypeData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale', 'MShopAddTypeData'];
 	}
@@ -28,9 +28,9 @@ class DemoAddTypeData extends \Aimeos\MW\Setup\Task\MShopAddTypeData
 	/**
 	 * Executes the task.
 	 */
-	public function migrate()
+	public function up()
 	{
-		if( $this->additional->getConfig()->get( 'setup/default/demo', '' ) === '' ) {
+		if( $this->context()->getConfig()->get( 'setup/default/demo', '' ) === '' ) {
 			return;
 		}
 

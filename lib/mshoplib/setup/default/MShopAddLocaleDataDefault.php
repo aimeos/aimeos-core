@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds locale records to tables.
  */
-class MShopAddLocaleDataDefault extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
+class MShopAddLocaleDataDefault extends MShopAddLocaleData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopAddLocaleLangCurData'];
 	}
@@ -31,7 +31,7 @@ class MShopAddLocaleDataDefault extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
 		return ['MShopAddLocaleData'];
 	}
@@ -40,19 +40,16 @@ class MShopAddLocaleDataDefault extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 	/**
 	 * Adds locale data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
-
-		$this->msg( 'Adding data for MShop locale domain', 0 );
-		$this->status( '' );
-
+		$this->info( 'Adding data for MShop locale domain', 'v' );
 
 		// Set editor for further tasks
-		$this->additional->setEditor( 'core:setup' );
+		$context = $this->context();
+		$context->setEditor( 'core:setup' );
 
 
-		if( $this->additional->getConfig()->get( 'setup/site', 'default' ) === 'default' )
+		if( $context->getConfig()->get( 'setup/site', 'default' ) === 'default' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
 			$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';
@@ -62,9 +59,9 @@ class MShopAddLocaleDataDefault extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 			}
 
 			$siteIds = [];
-			$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->additional, 'Standard' );
+			$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $context, 'Standard' );
 
-			$dbm = $this->additional->db();
+			$dbm = $context->db();
 			$conn = $dbm->acquire( 'db-locale' );
 			$result = $conn->create( 'SELECT COUNT(*) FROM mshop_locale' )->execute();
 			$dbm->release( $conn, 'db-locale' );
