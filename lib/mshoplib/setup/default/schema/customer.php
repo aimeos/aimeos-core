@@ -8,231 +8,185 @@
 
 return array(
 	'table' => array(
-		'mshop_customer' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_customer' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
-			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
-			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
-			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'title', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'firstname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'lastname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'address1', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'address2', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'address3', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'postal', 'string', array( 'length' => 16 ) );
-			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false ) );
-			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'telefax', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'longitude', 'float', array( 'notnull' => false ) );
-			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
-			$table->addColumn( 'birthday', 'date', array( 'notnull' => false ) );
-			$table->addColumn( 'vdate', 'date', array( 'notnull' => false ) );
-			$table->addColumn( 'password', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_mscus_id' );
+			$table->string( 'siteid' );
+			$table->string( 'code' );
+			$table->string( 'label' );
+			$table->string( 'salutation', 8 );
+			$table->string( 'company', 100 );
+			$table->string( 'vatid', 32 );
+			$table->string( 'title', 64 );
+			$table->string( 'firstname', 64 );
+			$table->string( 'lastname', 64 );
+			$table->string( 'address1', 200 );
+			$table->string( 'address2', 200 );
+			$table->string( 'address3', 200 );
+			$table->string( 'postal', 16 );
+			$table->string( 'city', 200 );
+			$table->string( 'state', 200 );
+			$table->string( 'langid', 5 )->null( true );
+			$table->string( 'countryid', 2 )->null( true );
+			$table->string( 'telephone', 32 );
+			$table->string( 'telefax', 32 );
+			$table->string( 'email' );
+			$table->string( 'website' );
+			$table->float( 'longitude' )->null( true );
+			$table->float( 'latitude' )->null( true );
+			$table->date( 'birthday' )->null( true );
+			$table->date( 'vdate' )->null( true );
+			$table->string( 'password' );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mscus_id' );
-			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_mscus_sid_code' );
-			$table->addIndex( array( 'siteid', 'langid' ), 'idx_mscus_sid_langid' );
-			$table->addIndex( array( 'siteid', 'lastname', 'firstname' ), 'idx_mscus_sid_last_first' );
-			$table->addIndex( array( 'siteid', 'postal', 'address1' ), 'idx_mscus_sid_post_addr1' );
-			$table->addIndex( array( 'siteid', 'postal', 'city' ), 'idx_mscus_sid_post_city' );
-			$table->addIndex( array( 'siteid', 'city' ), 'idx_mscus_sid_city' );
-			$table->addIndex( array( 'siteid', 'email' ), 'idx_mscus_sid_email' );
-
-			return $schema;
+			$table->unique( ['siteid', 'code'], 'unq_mscus_sid_code' );
+			$table->index( ['siteid', 'langid'], 'idx_mscus_sid_langid' );
+			$table->index( ['siteid', 'lastname', 'firstname'], 'idx_mscus_sid_last_first' );
+			$table->index( ['siteid', 'postal', 'address1'], 'idx_mscus_sid_post_addr1' );
+			$table->index( ['siteid', 'postal', 'city'], 'idx_mscus_sid_post_city' );
+			$table->index( ['siteid', 'city'], 'idx_mscus_sid_city' );
+			$table->index( ['siteid', 'email'], 'idx_mscus_sid_email' );
 		},
 
-		'mshop_customer_address' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer_address' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_customer_address' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
-			$table->addColumn( 'parentid', 'integer', [] );
-			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
-			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
-			$table->addColumn( 'title', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'firstname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'lastname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'address1', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'address2', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'address3', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'postal', 'string', array( 'length' => 16 ) );
-			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false ) );
-			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'telefax', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'longitude', 'float', array( 'notnull' => false ) );
-			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
-			$table->addColumn( 'birthday', 'date', array( 'notnull' => false ) );
-			$table->addColumn( 'pos', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_mscusad_id' );
+			$table->string( 'siteid' );
+			$table->int( 'parentid' );
+			$table->string( 'company', 100 );
+			$table->string( 'vatid', 32 );
+			$table->string( 'salutation', 8 );
+			$table->string( 'title', 64 );
+			$table->string( 'firstname', 64 );
+			$table->string( 'lastname', 64 );
+			$table->string( 'address1', 200 );
+			$table->string( 'address2', 200 );
+			$table->string( 'address3', 200 );
+			$table->string( 'postal', 16 );
+			$table->string( 'city', 200 );
+			$table->string( 'state', 200 );
+			$table->string( 'langid', 5 )->null( true );
+			$table->string( 'countryid', 2 )->null( true );
+			$table->string( 'telephone', 32 );
+			$table->string( 'telefax', 32 );
+			$table->string( 'email' );
+			$table->string( 'website' );
+			$table->float( 'longitude' )->null( true );
+			$table->float( 'latitude' )->null( true );
+			$table->date( 'birthday' )->null( true );
+			$table->smallint( 'pos' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mscusad_id' );
-			$table->addIndex( array( 'parentid' ), 'fk_mscusad_pid' );
-			$table->addIndex( array( 'langid' ), 'idx_mscusad_langid' );
-			$table->addIndex( array( 'siteid', 'lastname', 'firstname' ), 'idx_mscusad_sid_last_first' );
-			$table->addIndex( array( 'siteid', 'postal', 'address1' ), 'idx_mscusad_sid_post_addr1' );
-			$table->addIndex( array( 'siteid', 'postal', 'city' ), 'idx_mscusad_sid_post_ci' );
-			$table->addIndex( array( 'siteid', 'city' ), 'idx_mscusad_sid_city' );
-			$table->addIndex( array( 'siteid', 'email' ), 'idx_mscusad_sid_email' );
+			$table->index( ['parentid'], 'fk_mscusad_pid' );
+			$table->index( ['langid'], 'idx_mscusad_langid' );
+			$table->index( ['siteid', 'lastname', 'firstname'], 'idx_mscusad_sid_last_first' );
+			$table->index( ['siteid', 'postal', 'address1'], 'idx_mscusad_sid_post_addr1' );
+			$table->index( ['siteid', 'postal', 'city'], 'idx_mscusad_sid_post_ci' );
+			$table->index( ['siteid', 'city'], 'idx_mscusad_sid_city' );
+			$table->index( ['siteid', 'email'], 'idx_mscusad_sid_email' );
 
-			$table->addForeignKeyConstraint( 'mshop_customer', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscusad_pid' );
-
-			return $schema;
+			$table->foreign( 'parentid', 'mshop_customer', 'id', 'fk_mscusad_pid' );
 		},
 
-		'mshop_customer_group' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer_group' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_customer_group' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
-			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_mscusgr_id' );
+			$table->string( 'siteid' );
+			$table->code();
+			$table->string( 'label' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mscusgr_id' );
-			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_mscusgr_sid_code' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mscusgr_sid_label' );
-
-			return $schema;
+			$table->unique( ['siteid', 'code'], 'unq_mscusgr_sid_code' );
+			$table->index( ['siteid', 'label'], 'idx_mscusgr_sid_label' );
 		},
 
-		'mshop_customer_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer_list_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_customer_list_type' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'pos', 'integer', ['default' => 0] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_mscuslity_id' );
+			$table->string( 'siteid' );
+			$table->string( 'domain', 32 );
+			$table->code();
+			$table->string( 'label' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mscuslity_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_mscuslity_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_mscuslity_sid_status_pos' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mscuslity_sid_label' );
-			$table->addIndex( array( 'siteid', 'code' ), 'idx_mscuslity_sid_code' );
-
-			return $schema;
+			$table->unique( ['siteid', 'domain', 'code'], 'unq_mscuslity_sid_dom_code' );
+			$table->index( ['siteid', 'status', 'pos'], 'idx_mscuslity_sid_status_pos' );
+			$table->index( ['siteid', 'label'], 'idx_mscuslity_sid_label' );
+			$table->index( ['siteid', 'code'], 'idx_mscuslity_sid_code' );
 		},
 
-		'mshop_customer_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_customer_list' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'parentid', 'integer', [] );
-			$table->addColumn( 'key', 'string', array( 'length' => 134, 'default' => '', 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'refid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'pos', 'integer', [] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_mscusli_id' );
+			$table->string( 'siteid' );
+			$table->int( 'parentid' );
+			$table->string( 'key', 134 )->default( '' );
+			$table->type( 'type' );
+			$table->string( 'domain', 32 );
+			$table->refid();
+			$table->startend();
+			$table->text( 'config' );
+			$table->int( 'pos' );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mscusli_id' );
-			$table->addUniqueIndex( array( 'parentid', 'domain', 'siteid', 'type', 'refid' ), 'unq_mscusli_pid_dm_sid_ty_rid' );
-			$table->addIndex( array( 'key', 'siteid' ), 'idx_mscusli_key_sid' );
-			$table->addIndex( array( 'parentid' ), 'fk_mscusli_pid' );
+			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_mscusli_pid_dm_sid_ty_rid' );
+			$table->index( ['key', 'siteid'], 'idx_mscusli_key_sid' );
+			$table->index( ['parentid'], 'fk_mscusli_pid' );
 
-			$table->addForeignKeyConstraint( 'mshop_customer', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscusli_pid' );
-
-			return $schema;
+			$table->foreign( 'parentid', 'mshop_customer', 'id', 'fk_mscusli_pid' );
 		},
 
-		'mshop_customer_property_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer_property_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_customer_property_type' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'pos', 'integer', ['default' => 0] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_mcusprty_id' );
+			$table->string( 'siteid' );
+			$table->string( 'domain', 32 );
+			$table->code();
+			$table->string( 'label' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mcusprty_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_mcusprty_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_mcusprty_sid_status_pos' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mcusprty_sid_label' );
-			$table->addIndex( array( 'siteid', 'code' ), 'idx_mcusprty_sid_code' );
-
-			return $schema;
+			$table->unique( ['siteid', 'domain', 'code'], 'unq_mcusprty_sid_dom_code' );
+			$table->index( ['siteid', 'status', 'pos'], 'idx_mcusprty_sid_status_pos' );
+			$table->index( ['siteid', 'label'], 'idx_mcusprty_sid_label' );
+			$table->index( ['siteid', 'code'], 'idx_mcusprty_sid_code' );
 		},
 
-		'mshop_customer_property' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_customer_property' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_customer_property' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', [] );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'key', 'string', array( 'length' => 103, 'default' => '', 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'value', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_mcuspr_id' );
+			$table->string( 'siteid' );
+			$table->int( 'parentid' );
+			$table->string( 'key', 103 )->default( '' );
+			$table->type();
+			$table->string( 'langid', 5 )->null( true );
+			$table->string( 'value' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mcuspr_id' );
-			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_mcuspr_sid_ty_lid_value' );
-			$table->addIndex( array( 'key', 'siteid' ), 'fk_mscuspr_key_sid' );
-			$table->addIndex( array( 'parentid' ), 'fk_mcuspr_pid' );
+			$table->unique( ['parentid', 'siteid', 'type', 'langid', 'value'], 'unq_mcuspr_sid_ty_lid_value' );
+			$table->index( ['key', 'siteid'], 'fk_mscuspr_key_sid' );
+			$table->index( ['parentid'], 'fk_mcuspr_pid' );
 
-			$table->addForeignKeyConstraint( 'mshop_customer', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mcuspr_pid' );
-
-			return $schema;
+			$table->foreign( 'parentid', 'mshop_customer', 'id', 'fk_mcuspr_pid' );
 		},
 	),
 );

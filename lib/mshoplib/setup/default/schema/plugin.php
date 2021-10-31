@@ -8,56 +8,44 @@
 
 return array(
 	'table' => array(
-		'mshop_plugin_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_plugin_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_plugin_type' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'pos', 'integer', ['default' => 0] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_mspluty_id' );
+			$table->string( 'siteid' );
+			$table->string( 'domain', 32 );
+			$table->code();
+			$table->string( 'label' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mspluty_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_mspluty_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_mspluty_sid_status_pos' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mspluty_sid_label' );
-			$table->addIndex( array( 'siteid', 'code' ), 'idx_mspluty_sid_code' );
-
-			return $schema;
+			$table->unique( ['siteid', 'domain', 'code'], 'unq_mspluty_sid_dom_code' );
+			$table->index( ['siteid', 'status', 'pos'], 'idx_mspluty_sid_status_pos' );
+			$table->index( ['siteid', 'label'], 'idx_mspluty_sid_label' );
+			$table->index( ['siteid', 'code'], 'idx_mspluty_sid_code' );
 		},
 
-		'mshop_plugin' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_plugin' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_plugin' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'provider', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'pos', 'integer', [] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_msplu_id' );
+			$table->string( 'siteid' );
+			$table->type();
+			$table->string( 'label' );
+			$table->string( 'provider' );
+			$table->text( 'config' );
+			$table->int( 'pos' );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_msplu_id' );
-			$table->addUniqueIndex( array( 'siteid', 'type', 'provider' ), 'unq_msplu_sid_ty_prov' );
-			$table->addIndex( array( 'siteid', 'provider' ), 'idx_msplu_sid_prov' );
-			$table->addIndex( array( 'siteid', 'status' ), 'idx_msplu_sid_status' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_msplu_sid_label' );
-			$table->addIndex( array( 'siteid', 'pos' ), 'idx_msplu_sid_pos' );
-
-			return $schema;
+			$table->unique( ['siteid', 'type', 'provider'], 'unq_msplu_sid_ty_prov' );
+			$table->index( ['siteid', 'provider'], 'idx_msplu_sid_prov' );
+			$table->index( ['siteid', 'status'], 'idx_msplu_sid_status' );
+			$table->index( ['siteid', 'label'], 'idx_msplu_sid_label' );
+			$table->index( ['siteid', 'pos'], 'idx_msplu_sid_pos' );
 		},
 	),
 );

@@ -8,53 +8,41 @@
 
 return array(
 	'table' => array(
-		'mshop_stock_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_stock_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_stock_type' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'pos', 'integer', ['default' => 0] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_msstoty_id' );
+			$table->string( 'siteid' );
+			$table->string( 'domain', 32 );
+			$table->code();
+			$table->string( 'label' );
+			$table->int( 'pos', 'integer', ['default' => 0] );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_msstoty_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_msstoty_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_msstoty_sid_status_pos' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_msstoty_sid_label' );
-			$table->addIndex( array( 'siteid', 'code' ), 'idx_msstoty_sid_code' );
-
-			return $schema;
+			$table->unique( ['siteid', 'domain', 'code'], 'unq_msstoty_sid_dom_code' );
+			$table->index( ['siteid', 'status', 'pos'], 'idx_msstoty_sid_status_pos' );
+			$table->index( ['siteid', 'label'], 'idx_msstoty_sid_label' );
+			$table->index( ['siteid', 'code'], 'idx_msstoty_sid_code' );
 		},
 
-		'mshop_stock' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_stock' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_stock' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'prodid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'stocklevel', 'integer', array( 'notnull' => false ) );
-			$table->addColumn( 'backdate', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'timeframe', 'string', array( 'length' => 16, 'default' => '' ) );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_mssto_id' );
+			$table->string( 'siteid' );
+			$table->refid( 'prodid' );
+			$table->type();
+			$table->int( 'stocklevel' )->null( true );
+			$table->datetime( 'backdate' )->null( true );
+			$table->string( 'timeframe', 16 )->default( '' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mssto_id' );
-			$table->addUniqueIndex( array( 'siteid', 'prodid', 'type' ), 'unq_mssto_sid_pid_ty' );
-			$table->addIndex( array( 'siteid', 'stocklevel' ), 'idx_mssto_sid_stocklevel' );
-			$table->addIndex( array( 'siteid', 'backdate' ), 'idx_mssto_sid_backdate' );
-
-			return $schema;
+			$table->unique( ['siteid', 'prodid', 'type'], 'unq_mssto_sid_pid_ty' );
+			$table->index( ['siteid', 'stocklevel'], 'idx_mssto_sid_stocklevel' );
+			$table->index( ['siteid', 'backdate'], 'idx_mssto_sid_backdate' );
 		},
 	),
 );

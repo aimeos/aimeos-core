@@ -8,25 +8,19 @@
 
 return array(
 	'table' => array(
-		'madmin_job' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'madmin_job' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'madmin_job' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'path', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->bigid()->primary( 'pk_majob_id' );
+			$table->string( 'siteid' );
+			$table->string( 'label' );
+			$table->string( 'path' );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_majob_id' );
-			$table->addIndex( array( 'siteid', 'ctime' ), 'idx_majob_sid_ctime' );
-			$table->addIndex( array( 'siteid', 'status' ), 'idx_majob_sid_status' );
-
-			return $schema;
+			$table->index( ['siteid', 'ctime'], 'idx_majob_sid_ctime' );
+			$table->index( ['siteid', 'status'], 'idx_majob_sid_status' );
 		},
 	),
 );

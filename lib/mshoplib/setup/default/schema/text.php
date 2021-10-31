@@ -14,111 +14,85 @@ return array(
 
 
 	'table' => array(
-		'mshop_text_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_text_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_text_type' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'pos', 'integer', ['default' => 0] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_mstexty_id' );
+			$table->string( 'siteid' );
+			$table->string( 'domain', 32 );
+			$table->code();
+			$table->string( 'label' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mstexty_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_mstexty_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_mstexty_sid_status_pos' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mstexty_sid_label' );
-			$table->addIndex( array( 'siteid', 'code' ), 'idx_mstexty_sid_code' );
-
-			return $schema;
+			$table->unique( ['siteid', 'domain', 'code'], 'unq_mstexty_sid_dom_code' );
+			$table->index( ['siteid', 'status', 'pos'], 'idx_mstexty_sid_status_pos' );
+			$table->index( ['siteid', 'label'], 'idx_mstexty_sid_label' );
+			$table->index( ['siteid', 'code'], 'idx_mstexty_sid_code' );
 		},
 
-		'mshop_text' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_text' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_text' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'content', 'text', array( 'length' => 0xffffff ) );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_mstex_id' );
+			$table->string( 'siteid' );
+			$table->type();
+			$table->string( 'langid', 5 )->null( true );
+			$table->string( 'domain', 32 );
+			$table->string( 'label' );
+			$table->text( 'content', 0xffffff );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mstex_id' );
-			$table->addIndex( array( 'siteid', 'domain', 'status' ), 'idx_mstex_sid_domain_status' );
-			$table->addIndex( array( 'siteid', 'domain', 'langid' ), 'idx_mstex_sid_domain_langid' );
-			$table->addIndex( array( 'siteid', 'domain', 'label' ), 'idx_mstex_sid_dom_label' );
-
-			return $schema;
+			$table->index( ['siteid', 'domain', 'status'], 'idx_mstex_sid_domain_status' );
+			$table->index( ['siteid', 'domain', 'langid'], 'idx_mstex_sid_domain_langid' );
+			$table->index( ['siteid', 'domain', 'label'], 'idx_mstex_sid_dom_label' );
 		},
 
-		'mshop_text_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_text_list_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_text_list_type' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'pos', 'integer', ['default' => 0] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_mstexlity_id' );
+			$table->string( 'siteid' );
+			$table->string( 'domain', 32 );
+			$table->code();
+			$table->string( 'label' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mstexlity_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_mstexlity_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_mstexlity_sid_status_pos' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mstexlity_sid_label' );
-			$table->addIndex( array( 'siteid', 'code' ), 'idx_mstexlity_sid_code' );
-
-			return $schema;
+			$table->unique( ['siteid', 'domain', 'code'], 'unq_mstexlity_sid_dom_code' );
+			$table->index( ['siteid', 'status', 'pos'], 'idx_mstexlity_sid_status_pos' );
+			$table->index( ['siteid', 'label'], 'idx_mstexlity_sid_label' );
+			$table->index( ['siteid', 'code'], 'idx_mstexlity_sid_code' );
 		},
 
-		'mshop_text_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'mshop_text_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'mshop_text_list' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', [] );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'key', 'string', array( 'length' => 134, 'default' => '', 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'refid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'pos', 'integer', [] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_mstexli_id' );
+			$table->string( 'siteid' );
+			$table->int( 'parentid' );
+			$table->string( 'key', 134 )->default( '' );
+			$table->type();
+			$table->string( 'domain', 32 );
+			$table->refid();
+			$table->startend();
+			$table->text( 'config' );
+			$table->int( 'pos' );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mstexli_id' );
-			$table->addUniqueIndex( array( 'parentid', 'domain', 'siteid', 'type', 'refid' ), 'unq_mstexli_pid_dm_sid_ty_rid' );
-			$table->addIndex( array( 'key', 'siteid' ), 'idx_mstexli_key_sid' );
-			$table->addIndex( array( 'parentid' ), 'fk_mstexli_pid' );
+			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_mstexli_pid_dm_sid_ty_rid' );
+			$table->index( ['key', 'siteid'], 'idx_mstexli_key_sid' );
+			$table->index( ['parentid'], 'fk_mstexli_pid' );
 
-			$table->addForeignKeyConstraint( 'mshop_text', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mstexli_pid' );
-
-			return $schema;
+			$table->foreign( 'parentid', 'mshop_text', 'id', 'fk_mstexli_pid' );
 		},
 	),
 );
