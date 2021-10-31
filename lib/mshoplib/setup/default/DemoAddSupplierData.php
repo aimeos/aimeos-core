@@ -81,7 +81,7 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 	 */
 	protected function saveItems( array $data )
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'supplier' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'supplier' );
 
 		foreach( $data as $entry )
 		{
@@ -105,7 +105,7 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 	 */
 	protected function addAddressItems( \Aimeos\MShop\Common\Item\AddressRef\Iface $item, array $entry )
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'supplier/address' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'supplier/address' );
 
 		foreach( $entry['address'] ?? [] as $addr ) {
 			$item->addAddressItem( $manager->create()->fromArray( $addr, true ) );
@@ -124,7 +124,7 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 	 */
 	protected function addProductRefs( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entry )
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
 
 		foreach( $entry['product'] ?? [] as $data )
 		{
@@ -147,7 +147,7 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 	 */
 	protected function addRefItems( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entry )
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$domain = $item->getResourceType();
 		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 

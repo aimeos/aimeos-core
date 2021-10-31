@@ -95,7 +95,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$manager = \Aimeos\MShop::create( $context, 'product' );
 
 		foreach( $data as $entry )
@@ -125,7 +125,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 	{
 		if( isset( $entry['property'] ) )
 		{
-			$manager = \Aimeos\MShop::create( $this->getContext(), 'product/property' );
+			$manager = \Aimeos\MShop::create( $this->context(), 'product/property' );
 
 			foreach( (array) $entry['property'] as $values )
 			{
@@ -147,7 +147,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 	 */
 	protected function addRefItems( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $entry )
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$domain = $item->getResourceType();
 		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
@@ -222,7 +222,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 	 */
 	protected function addStockItems( $productId, array $data )
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
 
 		foreach( $data as $entry )
 		{
@@ -237,7 +237,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 	 */
 	protected function removeAttributeItems()
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'attribute' );
 
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'attribute.label', 'Demo:' ) );
@@ -251,7 +251,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 	 */
 	protected function removeStockItems( \Aimeos\Map $prodIds )
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
 
 		$filter = $manager->filter()->add( ['stock.productid' => $prodIds] )->slice( 0, $prodIds->count() );
 

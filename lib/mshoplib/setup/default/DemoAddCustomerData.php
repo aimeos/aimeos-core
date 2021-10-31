@@ -71,7 +71,7 @@ class DemoAddCustomerData extends MShopAddDataAbstract
 	 */
 	protected function saveCustomerItems( array $data )
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'customer' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'customer' );
 
 		foreach( $data as $entry )
 		{
@@ -120,7 +120,7 @@ class DemoAddCustomerData extends MShopAddDataAbstract
 	 */
 	protected function saveAddressItems( array $data, $id )
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'customer/address' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'customer/address' );
 
 		foreach( $data as $entry )
 		{

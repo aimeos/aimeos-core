@@ -84,7 +84,7 @@ class DemoAddCouponData extends MShopAddDataAbstract
 	 */
 	protected function addCodes( $couponId, array $data )
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'coupon/code' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'coupon/code' );
 
 		foreach( $data as $entry )
 		{
