@@ -6,68 +6,43 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Creates the full text index on mshop_index_text.content for SQL Server
- */
-class IndexCreateSQLSrvFulltext extends \Aimeos\MW\Setup\Task\Base
+class IndexCreateSQLSrvFulltext extends Base
 {
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Index'];
 	}
 
 
-	/**
-	 * Executes the task
-	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Creating full text index on "mshop_index_text.content" for SQL Server', 0 );
+		$db = $this->db( 'db-product' );
 
-		$schema = $this->getSchema( 'db-product' );
-
-		if( $schema->getName() === 'sqlsrv' && $schema->tableExists( 'mshop_index_text' ) )
-		{
-			if( !$this->getValue( 'SELECT SERVERPROPERTY(\'IsFullTextInstalled\') as prop', 'prop', 'db-product' ) ) {
-				return $this->status( 'no' );
-			}
-
-			try
-			{
-				$sql = sprintf( '
-					SELECT object_id FROM sys.fulltext_indexes
-					WHERE object_id = OBJECT_ID(\'%1$s.dbo.mshop_index_text\')
-				', $schema->getDBName() );
-
-				$this->getValue( $sql, 'object_id', 'db-product' );
-				return $this->status( 'OK' );
-			}
-			catch( \Aimeos\MW\Setup\Exception $e )
-			{
-				$sql = sprintf( '
-					SELECT name FROM sys.indexes
-					WHERE object_id = OBJECT_ID(\'%1$s.dbo.mshop_index_text\') AND is_primary_key = 1
-				', $schema->getDBName() );
-				$name = $this->getValue( $sql, 'name', 'db-product' );
-
-				$this->execute( 'CREATE FULLTEXT CATALOG "aimeos"', 'db-product' );
-				$this->execute( '
-					CREATE FULLTEXT INDEX ON "mshop_index_text" ("content")
-					KEY INDEX ' . $name . ' ON "aimeos"
-				', 'db-product' );
-
-				return $this->status( 'done' );
-			}
+		if( $db->type() !== 'mssql' || !$db->hasTable( 'mshop_index_text' )
+			|| !$db->stmt()->select( 'SERVERPROPERTY(\'IsFullTextInstalled\')' )->setMaxResults( 1 )->execute()->fetchOne()
+		) {
+			return;
 		}
 
-		$this->status( 'OK' );
+		$this->info( 'Creating full text index on "mshop_index_text.content" for SQL Server', 'v' );
+
+		$result = $db->stmt()->select( 'object_id' )
+			->from( 'sys.fulltext_indexes' )
+			->where( sprintf( 'object_id = OBJECT_ID(\'%1$s.dbo.mshop_index_text\')', $db->name() ) )
+			->setMaxResults( 1 )->execute()->fetchOne();
+
+		if( !$result )
+		{
+			$name = $db->stmt()->select( 'name' )
+				->from( 'sys.indexes' )
+				->where( sprintf( 'object_id = OBJECT_ID(\'%1$s.dbo.mshop_index_text\') AND is_primary_key = 1', $db->name() ) )
+				->setMaxResults( 1 )->execute()->fetchOne();
+
+			$db->for( 'mysql', 'CREATE FULLTEXT CATALOG "aimeos"' );
+			$db->for( 'mysql', 'CREATE FULLTEXT INDEX ON "mshop_index_text" ("content") KEY INDEX ' . $name . ' ON "aimeos"' );
+		}
 	}
 }

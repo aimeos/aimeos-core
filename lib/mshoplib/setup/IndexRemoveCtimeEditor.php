@@ -6,13 +6,10 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Remove ctime and editor columns from index tables
- */
-class IndexRemoveCtimeEditor extends \Aimeos\MW\Setup\Task\Base
+class IndexRemoveCtimeEditor extends Base
 {
 	private $sql = [
 		'mshop_index_attribute' => [
@@ -38,51 +35,30 @@ class IndexRemoveCtimeEditor extends \Aimeos\MW\Setup\Task\Base
 	];
 
 
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Index'];
 	}
 
 
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
 		return ['MShopSetLocale'];
 	}
 
 
-	/**
-	 * Executes the task
-	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Remove ctime/editor from index tables', 0 ); $this->status( '' );
-		$schema = $this->getSchema( 'db-product' );
+		$this->info( 'Remove ctime/editor from index tables', 'v' );
 
-		foreach( $this->sql as $table => $stmtList )
+		$tables = ['mshop_index_attribute', 'mshop_index_catalog', 'mshop_index_price', 'mshop_index_supplier', 'mshop_index_text'];
+		$db = $this->db( 'db-product' );
+
+		foreach( $tables as $table )
 		{
-			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
+			$this->info( sprintf( 'Checking table "%1$s": ', $table ), 'vv', 1 );
 
-			if( $schema->tableExists( $table ) === true
-				&& $schema->columnExists( $table, 'ctime' ) === true
-				&& $schema->columnExists( $table, 'editor' ) === true )
-			{
-				$this->executeList( $stmtList );
-				$this->status( 'done' );
-			}
-			else
-			{
-				$this->status( 'OK' );
-			}
+			$db->dropColumn( $table, 'ctime' )->dropColumn( $table, 'editor' );
 		}
 	}
 }

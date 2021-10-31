@@ -6,53 +6,28 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Updates product code in subscriptions
- */
-class SubscriptionMigrateProductId extends \Aimeos\MW\Setup\Task\Base
+class SubscriptionMigrateProductId extends Base
 {
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Subscription'];
 	}
 
 
-	/**
-	 * Migrate database schema
-	 */
-	public function migrate()
+	public function up()
 	{
-		$dbdomain = 'db-order';
-		$this->msg( 'Updating product ID in subscriptions', 0 );
+		$this->info( 'Updating product ID in subscriptions', 'v' );
 
-		if( $this->getSchema( $dbdomain )->tableExists( 'mshop_subscription' ) === false )
-		{
-			$this->status( 'OK' );
-			return;
-		}
-
-		$start = 0;
-		$conn = $this->acquire( $dbdomain );
-		$update = '
-			UPDATE "mshop_subscription"
-			SET "productid" = (
-				SELECT obp."prodid"
-				FROM "mshop_order_base_product" AS obp
-				WHERE "mshop_subscription"."ordprodid" = obp."id"
-			) WHERE "productid" = \'\'
-		';
-
-		$conn->create( $update )->execute()->finish();
-		$this->release( $conn, $dbdomain );
-
-		$this->status( 'done' );
+		$this->db( 'db-order' )->exec( '
+			UPDATE mshop_subscription
+			SET productid = (
+				SELECT obp.prodid
+				FROM mshop_order_base_product AS obp
+				WHERE mshop_subscription.ordprodid = obp.id
+			) WHERE productid = \'\'
+		' );
 	}
 }

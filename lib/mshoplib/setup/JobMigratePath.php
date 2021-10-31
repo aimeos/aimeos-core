@@ -6,43 +6,30 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Migrates the path in job table
- */
-class JobMigratePath extends \Aimeos\MW\Setup\Task\Base
+class JobMigratePath extends Base
 {
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Job'];
 	}
 
 
-	/**
-	 * Migrate database schema
-	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Migrating path in job table', 0 );
+		$db = $this->db( 'db-job' );
 
-		$dbdomain = 'db-job';
-		$schema = $this->getSchema( $dbdomain );
-
-		if( $schema->tableExists( 'madmin_job' ) === false
-			|| $schema->columnExists( 'madmin_job', 'result' ) === false
-		) {
-			$this->status( 'OK' );
+		if( !$db->hasColumn( 'madmin_job', 'result' ) ) {
 			return;
 		}
 
-		$conn = $this->acquire( $dbdomain );
+		$this->info( 'Migrating path in job table', 'v' );
+
+		$dbm = $this->context()->getDatabaseManager();
+		$conn = $this->acquire( 'db-job' );
+
 		$select = 'SELECT "id", "result" FROM "madmin_job" WHERE "result" LIKE \'{%\'';
 		$update = 'UPDATE "madmin_job" SET "path" = ? WHERE "id" = ?';
 
@@ -57,8 +44,6 @@ class JobMigratePath extends \Aimeos\MW\Setup\Task\Base
 			$stmt->execute()->finish();
 		}
 
-		$this->release( $conn, $dbdomain );
-
-		$this->status( 'done' );
+		$dbm->release( $conn, 'db-job' );
 	}
 }

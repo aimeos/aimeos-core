@@ -6,42 +6,27 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Drop the mshop_index_text table if it contains no ID column
- */
-class IndexDropTextWithoutId extends \Aimeos\MW\Setup\Task\Base
+class IndexDropTextWithoutId extends Base
 {
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Index'];
 	}
 
 
-	/**
-	 * Executes the task
-	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Drop the mshop_index_text table without ID column', 0 );
-		$schema = $this->getSchema( 'db-product' );
+		$db = $this->db( 'db-product' );
 
-		if( $schema->tableExists( 'mshop_index_text' ) === true
-			&& $schema->columnExists( 'mshop_index_text', 'id' ) === false
-		) {
-			$this->execute( 'DROP TABLE "mshop_index_text"' );
-			$this->status( 'done' );
+		if( $db->hasColumn( 'mshop_index_text', 'id' ) ) {
+			return;
 		}
-		else
-		{
-			$this->status( 'OK' );
-		}
+
+		$this->info( 'Droping mshop_index_text table without ID column', 'v' );
+
+		$db->dropTable( 'mshop_index_text' );
 	}
 }

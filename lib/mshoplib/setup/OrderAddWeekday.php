@@ -6,40 +6,29 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Adds the weekday values in order tables
- */
-class OrderAddWeekday extends \Aimeos\MW\Setup\Task\Base
+class OrderAddWeekday extends Base
 {
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Order'];
 	}
 
 
-	/**
-	 * Migrate database schema
-	 */
-	public function migrate()
+	public function up()
 	{
-		$dbdomain = 'db-order';
-		$this->msg( 'Populate weekday column in order table', 0 );
+		$db = $this->db( 'db-order' );
 
-		if( $this->getSchema( $dbdomain )->tableExists( 'mshop_order' ) === false )
-		{
-			$this->status( 'OK' );
+		if( !$db->hasTable( 'mshop_order' ) ) {
 			return;
 		}
 
-		$conn = $this->acquire( $dbdomain );
+		$this->info( 'Populate weekday column in order table', 'v' );
+
+		$dbm = $this->context()->db();
+		$conn = $dbm->acquire( 'db-order' );
 		$select = 'SELECT "id", "ctime" FROM "mshop_order" WHERE "cwday" = \'\'';
 		$update = 'UPDATE "mshop_order" SET "cwday" = ? WHERE "id" = ?';
 
@@ -56,8 +45,6 @@ class OrderAddWeekday extends \Aimeos\MW\Setup\Task\Base
 			$stmt->execute()->finish();
 		}
 
-		$this->release( $conn, $dbdomain );
-
-		$this->status( 'done' );
+		$dbm->release( $conn, 'db-order' );
 	}
 }

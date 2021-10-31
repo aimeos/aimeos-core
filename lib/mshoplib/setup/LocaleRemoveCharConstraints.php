@@ -6,59 +6,41 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Removes char constraints from locale table before migrating to varchar
- */
-class LocaleRemoveCharConstraints extends \Aimeos\MW\Setup\Task\Base
+class LocaleRemoveCharConstraints extends Base
 {
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return array List of task names
-	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
 		return ['TablesCreateMShop'];
 	}
 
 
-	/**
-	 * Executes the task
-	 */
-	public function migrate()
+	public function up()
 	{
-		$schema = $this->getSchema( 'db-locale' );
+		$db = $this->db( 'db-locale' );
 
-		$this->msg( sprintf( 'Remove mshop_locale char constraints' ), 0 );
-		$this->status( '' );
+		if( !$db->hasTable( 'mshop_locale' ) ) {
+			return;
+		}
 
-		$this->msg( 'Checking constraint for "langid"', 1 );
+		$this->info( 'Remove mshop_locale char constraints' , 'v' );
 
-		if( $schema->constraintExists( 'mshop_locale', 'fk_msloc_langid' )
-			&& $schema->getColumnDetails( 'mshop_locale', 'langid' )->getDataType() === 'char'
+		if( $db->hasForeign( 'mshop_locale', 'fk_msloc_langid' )
+			&& $db->hasColumn( 'mshop_locale', 'langid' )
+			&& $db->table( 'mshop_locale' )->col( 'langid', 'string' )->fixed()
 		) {
-			$this->execute( 'ALTER TABLE "mshop_locale" DROP FOREIGN KEY "fk_msloc_langid"', 'db-locale' );
-			$this->status( 'done' );
-		}
-		else
-		{
-			$this->status( 'OK' );
+			$this->info( 'Checking constraint for "langid"', 'v', 1 );
+			$db->dropForeign( 'mshop_locale', 'fk_msloc_langid' );
 		}
 
-		$this->msg( 'Checking constraint for "currencyid"', 1 );
-
-		if( $schema->constraintExists( 'mshop_locale', 'fk_msloc_currid' )
-			&& $schema->getColumnDetails( 'mshop_locale', 'currencyid' )->getDataType() === 'char'
+		if( $db->hasForeign( 'mshop_locale', 'fk_msloc_currid' )
+			&& $db->hasColumn( 'mshop_locale', 'currencyid' )
+			&& $db->table( 'mshop_locale' )->col( 'currencyid', 'string' )->fixed()
 		) {
-			$this->execute( 'ALTER TABLE "mshop_locale" DROP FOREIGN KEY "fk_msloc_currid"', 'db-locale' );
-			$this->status( 'done' );
-		}
-		else
-		{
-			$this->status( 'OK' );
+			$this->info( 'Checking constraint for "currencyid"', 'v', 1 );
+			$db->dropForeign( 'mshop_locale', 'fk_msloc_currid' );
 		}
 	}
 }

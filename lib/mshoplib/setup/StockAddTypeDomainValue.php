@@ -6,53 +6,27 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Adds the domain value
- */
-class StockAddTypeDomainValue extends \Aimeos\MW\Setup\Task\Base
+class StockAddTypeDomainValue extends Base
 {
-	private $sql = 'UPDATE "mshop_stock_type" SET "domain"=\'product\' WHERE "domain"=\'\'';
-
-
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return array List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Stock'];
 	}
 
 
-	/**
-	 * Cleans up the tables
-	 */
-	public function clean()
+	public function up()
 	{
-		$this->migrate();
-	}
+		$db = $this->db( 'db-product' );
 
-
-	/**
-	 * Migrate the tables
-	 */
-	public function migrate()
-	{
-		$this->msg( 'Add stock type domain values', 0 );
-		$schema = $this->getSchema( 'db-product' );
-
-		if( $schema->tableExists( 'mshop_stock_type' ) )
-		{
-			$this->execute( $this->sql );
-			$this->status( 'done' );
+		if( !$db->hasTable( 'mshop_stock_type' ) ) {
+			return;
 		}
-		else
-		{
-			$this->status( 'OK' );
-		}
+
+		$this->info( 'Add stock type domain values', 'v' );
+
+		$db->exec( 'UPDATE mshop_stock_type SET domain=\'product\' WHERE domain=\'\'' );
 	}
 }

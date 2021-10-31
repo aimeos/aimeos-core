@@ -7,22 +7,22 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds locale records to tables.
  */
-class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
+class MShopAddLocaleData extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['MShopAddLocaleLangCurData', 'TablesCreateMAdmin'];
+		return ['MShopAddLocaleLangCurData', 'Log'];
 	}
 
 
@@ -31,7 +31,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return array List of task names
 	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -40,20 +40,16 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Creates new locale data if necessary
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
-
-		$this->msg( 'Adding locale data if not yet present', 0 );
-
+		$this->info( 'Adding locale data if not yet present', 'v' );
 
 		// Set editor for further tasks
-		$this->additional->setEditor( 'core:setup' );
+		$this->context()->setEditor( 'core:setup' );
 
+		$code = $this->context()->getConfig()->get( 'setup/site', 'default' );
 
-		$code = $this->additional->getConfig()->get( 'setup/site', 'default' );
-
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->additional, 'Standard' );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context(), 'Standard' );
 		$siteManager = $localeManager->getSubManager( 'site' );
 
 		try
@@ -80,13 +76,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 
 			$localeManager->save( $localeItem, false );
 		}
-		catch( \Aimeos\MW\DB\Exception $e ) // already in the database
-		{
-			$this->status( 'OK' );
-			return;
-		}
-
-		$this->status( 'done' );
+		catch( \Aimeos\MW\DB\Exception $e ) {} // already in the database
 	}
 
 
@@ -101,7 +91,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addLocaleSiteData( \Aimeos\MShop\Common\Manager\Iface $localeManager, array $data, $manager = 'Standard', $parentId = null )
 	{
-		$this->msg( 'Adding data for MShop locale sites', 1 );
+		$this->info( 'Adding data for MShop locale sites', 'v', 1 );
 
 		$localeSiteManager = $localeManager->getSubManager( 'site', $manager );
 		$siteItem = $localeSiteManager->create();
@@ -138,8 +128,6 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 			}
 		}
 
-		$this->status( 'done' );
-
 		return $siteIds;
 	}
 
@@ -152,17 +140,13 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addLocaleCurrencyData( \Aimeos\MShop\Common\Manager\Iface $localeManager, array $data )
 	{
-		$this->msg( 'Adding data for MShop locale currencies', 1 );
+		$this->info( 'Adding data for MShop locale currencies', 'v', 1 );
 
 		$currencyManager = $localeManager->getSubManager( 'currency', 'Standard' );
 		$items = $currencyManager->search( $currencyManager->filter()->slice( 0, 0x7fffffff ) );
 
-		$num = $total = 0;
-
 		foreach( $data as $key => $dataset )
 		{
-			$total++;
-
 			if( !isset( $items[$dataset['id']] ) )
 			{
 				$currencyItem = $currencyManager->create();
@@ -174,10 +158,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$currencyManager->save( $items[$dataset['id']] );
-			$num++;
 		}
-
-		$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
 	}
 
 
@@ -189,17 +170,13 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addLocaleLanguageData( \Aimeos\MShop\Common\Manager\Iface $localeManager, array $data )
 	{
-		$this->msg( 'Adding data for MShop locale languages', 1 );
+		$this->info( 'Adding data for MShop locale languages', 'v', 1 );
 
 		$languageManager = $localeManager->getSubManager( 'language', 'Standard' );
 		$items = $languageManager->search( $languageManager->filter()->slice( 0, 0x7fffffff ) );
 
-		$num = $total = 0;
-
 		foreach( $data as $dataset )
 		{
-			$total++;
-
 			if( !isset( $items[$dataset['id']] ) )
 			{
 				$languageItem = $languageManager->create();
@@ -211,10 +188,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$languageManager->save( $items[$dataset['id']] );
-			$num++;
 		}
-
-		$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
 	}
 
 
@@ -226,7 +200,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addLocaleData( \Aimeos\MShop\Common\Manager\Iface $localeItemManager, array $data, array $siteIds )
 	{
-		$this->msg( 'Adding data for MShop locales', 1 );
+		$this->info( 'Adding data for MShop locales', 'v', 1 );
 
 		$localeItem = $localeItemManager->create();
 
@@ -247,7 +221,5 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 				$localeItemManager->save( $localeItem );
 			} catch( \Aimeos\MW\DB\Exception $e ) {; } // if locale combination was already available
 		}
-
-		$this->status( 'done' );
 	}
 }

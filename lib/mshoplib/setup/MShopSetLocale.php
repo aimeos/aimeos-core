@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Sets locale in context.
  */
-class MShopSetLocale extends \Aimeos\MW\Setup\Task\Base
+class MShopSetLocale extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopAddLocaleData'];
 	}
@@ -29,20 +29,16 @@ class MShopSetLocale extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds locale data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		$context = $this->context();
+		$site = $context->getConfig()->get( 'setup/site', 'default' );
 
-		$site = $this->additional->getConfig()->get( 'setup/site', 'default' );
-
-
-		$this->msg( sprintf( 'Setting locale to "%1$s"', $site ), 0 );
+		$this->info( sprintf( 'Setting locale to "%1$s"', $site ), 'v' );
 
 		// Set locale for further tasks
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->additional, 'Standard' );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $context, 'Standard' );
 		$locale = $localeManager->bootstrap( $site, '', '', false )->setLanguageId( null )->setCurrencyId( null );
-		$this->additional->setLocale( $locale );
-
-		$this->status( 'OK' );
+		$context->setLocale( $locale );
 	}
 }

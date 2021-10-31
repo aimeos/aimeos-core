@@ -6,44 +6,31 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Adds currency ID values to order base product tables.
- */
-class OrderAddBaseProductCurrencyid extends \Aimeos\MW\Setup\Task\Base
+class OrderAddBaseProductCurrencyid extends Base
 {
-	private $sql = '
-		UPDATE "mshop_order_base_product" SET "currencyid" = (
-			SELECT ob."currencyid" FROM "mshop_order_base" ob WHERE ob."id" = "baseid"
-		) WHERE "currencyid" = \'\'  OR "currencyid" = \'   \'
-	';
-
-
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Order'];
 	}
 
 
-	/**
-	 * Executes the migration task
-	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Adding currency ID to order base product table', 0 );
-		$schema = $this->getSchema( 'db-order' );
+		$db = $this->db( 'db-order' );
 
-		if( $schema->tableExists( 'mshop_order_base' ) && $schema->tableExists( 'mshop_order_base_product' ) ) {
-			$this->execute( $this->sql, 'db-order' );
+		if( !$db->hasTable( ['mshop_order_base', 'mshop_order_base_product'] ) ) {
+			return;
 		}
 
-		$this->status( 'done' );
+		$this->info( 'Adding currency ID to order base product table', 'v' );
+
+		$db->exec( '
+			UPDATE mshop_order_base_product SET currencyid = (
+				SELECT ob.currencyid FROM mshop_order_base ob WHERE ob.id = baseid
+			) WHERE currencyid = \'\'  OR currencyid = \'   \'
+		' );
 	}
 }

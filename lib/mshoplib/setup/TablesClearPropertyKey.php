@@ -6,13 +6,10 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Clear key columns
- */
-class TablesClearPropertyKey extends \Aimeos\MW\Setup\Task\Base
+class TablesClearPropertyKey extends Base
 {
 	private $tables = [
 		'db-attribute' => 'mshop_attribute_property',
@@ -23,45 +20,24 @@ class TablesClearPropertyKey extends \Aimeos\MW\Setup\Task\Base
 	];
 
 
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Attribute', 'Customer', 'Media', 'Price', 'Product'];
 	}
 
 
-	/**
-	 * Executes the task
-	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Clear property "key" columns', 0, '' );
+		$this->info( 'Clear property "key" columns', 'v' );
 
 		foreach( $this->tables as $rname => $table )
 		{
-			$schema = $this->getSchema( $rname );
+			$this->info( sprintf( 'Checking table %1$s', $table ), 'vv', 1 );
 
-			$this->msg( sprintf( 'Checking table %1$s', $table ), 1 );
+			$db = $this->db( $rname );
 
-			if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'key' )
-				&& ( $column = $schema->getColumnDetails( $table, 'key' ) ) && $column->getMaxLength() !== 103
-			) {
-				$dbm = $this->additional->getDatabaseManager();
-				$conn = $dbm->acquire( $rname );
-
-				$conn->create( sprintf( 'UPDATE "%1$s" SET "key" = \'\'', $table ) )->execute()->finish();
-
-				$dbm->release( $conn, $rname );
-
-				$this->status( 'done' );
-			}
-			else
-			{
-				$this->status( 'OK' );
+			if( $db->hasColumn( $table, 'key' ) && $db->table( $table )->col( 'key' )->length() !== 103 ) {
+				$db->exec( sprintf( 'UPDATE %1$s SET key = \'\'', $table ) );
 			}
 		}
 	}

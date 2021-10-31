@@ -7,31 +7,27 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds default records to tables.
  */
-class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
+class MShopAddTypeData extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
 
 
-	/**
-	 * Executes the task for MySQL databases.
-	 */
-	public function migrate()
+	public function up()
 	{
-		// executed by tasks in sub-directories for specific sites
 	}
 
 
@@ -40,10 +36,10 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function process( string $filename = null )
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		$context = $this->context();
+		$sitecode = $context->getLocale()->getSiteItem()->getCode();
 
-		$sitecode = $this->additional->getLocale()->getSiteItem()->getCode();
-		$this->msg( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 0, '' );
+		$this->info( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 'v' );
 
 		if( !$filename )
 		{
@@ -63,7 +59,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	{
 		foreach( $testdata as $domain => $datasets )
 		{
-			$this->msg( sprintf( 'Checking "%1$s" type data', $domain ), 1 );
+			$this->info( sprintf( 'Checking "%1$s" type data', $domain ), 'v' );
 
 			$domainManager = $this->getDomainManager( $domain );
 			$type = $domainManager->create();
@@ -84,8 +80,6 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 					$num++;
 				} catch( \Exception $e ) { ; } // if type was already available
 			}
-
-			$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
 		}
 	}
 
@@ -99,7 +93,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getDomainManager( $domain )
 	{
-		return \Aimeos\MShop::create( $this->additional, $domain );
+		return \Aimeos\MShop::create( $this->context(), $domain );
 	}
 
 
@@ -108,7 +102,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function txBegin()
 	{
-		$dbm = $this->additional->getDatabaseManager();
+		$dbm = $this->context()->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->begin();
@@ -121,7 +115,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function txCommit()
 	{
-		$dbm = $this->additional->getDatabaseManager();
+		$dbm = $this->context()->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->commit();

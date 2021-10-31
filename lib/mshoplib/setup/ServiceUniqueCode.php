@@ -6,13 +6,10 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Ensures service codes are unique
- */
-class ServiceUniqueCode extends \Aimeos\MW\Setup\Task\Base
+class ServiceUniqueCode extends Base
 {
 	private $select = '
 		SELECT "code" FROM "mshop_service" GROUP BY "code" HAVING COUNT("code") > 1
@@ -23,52 +20,40 @@ class ServiceUniqueCode extends \Aimeos\MW\Setup\Task\Base
 	';
 
 
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Service'];
 	}
 
 
-	/**
-	 * Renames all order tables if they exist.
-	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Ensure unique codes in mshop_service', 0 );
-		$schema = $this->getSchema( 'db-service' );
-		$table = 'mshop_service';
+		$db = $this->db( 'db-service' );
 
-		if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'code' ) )
-		{
-			$list = [];
-			$conn = $this->acquire( 'db-service' );
-			$result = $conn->create( $this->select )->execute();
-
-			while( ( $row = $result->fetch() ) !== null ) {
-				$list[] = $row['code'];
-			}
-			$result->finish();
-
-			$stmt = $conn->create( $this->update );
-			foreach( $list as $code )
-			{
-				$stmt->bind( 1, $code );
-				$stmt->bind( 2, $code . '2' );
-				$stmt->execute()->finish();
-			}
-
-			$this->release( $conn );
-
-			$this->status( 'done' );
+		if( !$db->hasColumn( 'mshop_service', 'code' ) ) {
+			return;
 		}
-		else
-		{
-			$this->status( 'OK' );
+
+		$this->info( 'Ensure unique codes in mshop_service', 'v' );
+
+		$list = [];
+		$dbm = $this->context()->db();
+		$conn = $dbm->acquire( 'db-service' );
+		$result = $conn->create( $this->select )->execute();
+
+		while( ( $row = $result->fetch() ) !== null ) {
+			$list[] = $row['code'];
 		}
+		$result->finish();
+
+		$stmt = $conn->create( $this->update );
+		foreach( $list as $code )
+		{
+			$stmt->bind( 1, $code );
+			$stmt->bind( 2, $code . '2' );
+			$stmt->execute()->finish();
+		}
+
+		$dbm->release( $conn, 'db-service' );
 	}
 }

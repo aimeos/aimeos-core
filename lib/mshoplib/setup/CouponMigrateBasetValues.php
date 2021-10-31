@@ -6,50 +6,31 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Migrates the BasketValues decorator in coupon table
- */
-class CouponMigrateBasetValues extends \Aimeos\MW\Setup\Task\Base
+class CouponMigrateBasetValues extends Base
 {
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Coupon'];
 	}
 
 
-	/**
-	 * Migrate database schema
-	 */
-	public function migrate()
+	public function up()
 	{
-		$dbdomain = 'db-coupon';
-		$this->msg( 'Migrating basketvalues configuration in coupon table', 0 );
+		$db = $this->db( 'db-coupon' );
 
-		if( $this->getSchema( $dbdomain )->tableExists( 'mshop_coupon' ) === false )
-		{
-			$this->status( 'OK' );
+		if( !$db->hasTable( 'mshop_coupon' ) ) {
 			return;
 		}
 
-		$update = '
-			UPDATE "mshop_coupon"
-			SET "provider" = REPLACE("provider", \'BasketValues\', \'Basket\'),
-				"config" = REPLACE("config", \'basketvalues\', \'basket\')
-			WHERE "provider" LIKE \'%BasketValues%\' OR "config" LIKE \'%basketvalues%\'
-		';
+		$this->info( 'Migrating basketvalues configuration in coupon table', 'v' );
 
-		$conn = $this->acquire( $dbdomain );
-		$conn->create( $update )->execute();
-		$this->release( $conn, $dbdomain );
-
-		$this->status( 'done' );
+		$db->stmt()->update( 'mshop_coupon' )
+			->set( 'provider', 'REPLACE("provider", \'BasketValues\', \'Basket\')' )
+			->set( 'config', 'REPLACE("config", \'basketvalues\', \'basket\')' )
+			->where( 'provider LIKE ?' )->orWhere( 'config LIKE ?' )
+			->setParameters( ['%BasketValues%', '%basketvalues%'] );
 	}
 }

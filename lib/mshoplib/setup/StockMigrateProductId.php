@@ -6,104 +6,38 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Migrates product code to ID
- */
-class StockMigrateProductId extends \Aimeos\MW\Setup\Task\Base
+class StockMigrateProductId extends Base
 {
-	private $updates = array(
-		'ALTER TABLE "mshop_stock" ADD COLUMN "prodid" VARCHAR(36)',
-		'UPDATE "mshop_stock" SET "prodid" = (
-			SELECT "id" FROM "mshop_product" AS p WHERE p."code" = "productcode" AND p."siteid" = "siteid" LIMIT 1
-		)'
-	);
-	private $column = 'ALTER TABLE "mshop_stock" DROP COLUMN "productcode"';
-
-
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return array List of task names
-	 */
-	public function getPreDependencies() : array
+	public function before() : array
 	{
-		return ['StockMigrateProductcode'];
+		return ['Stock'];
 	}
 
 
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies() : array
+	public function up()
 	{
-		return ['TablesCreateMShop'];
-	}
+		$db = $this->db( 'db-stock' );
 
-
-	/**
-	 * Cleans up the tables
-	 */
-	public function clean()
-	{
-		$this->migrate();
-	}
-
-
-	/**
-	 * Creates the MShop tables
-	 */
-	public function migrate()
-	{
-		$this->msg( 'Migrate product code in stock table', 0, '' );
-
-		$rname = 'db-product';
-		$table = 'mshop_stock';
-
-		$schema = $this->getSchema( $rname );
-		$conn = $this->acquire( $rname );
-		$dbal = $conn->getRawObject();
-
-		if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
-			throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
+		if( !$db->hasTable( 'mshop_stock' ) ) {
+			return;
 		}
 
-		$dbalManager = $dbal->getSchemaManager();
+		$this->info( 'Migrate product code to product ID in stock table', 'v' );
 
-		if( $schema->tableExists( 'mshop_stock' ) )
+		if( !$db->hasColumn( 'mshop_stock', 'prodid' ) )
 		{
-			$this->msg( 'Migrate "productcode" to "prodid"', 1 );
-
-			if( $schema->columnExists( 'mshop_stock', 'prodid' ) === false )
-			{
-				$this->executeList( $this->updates );
-				$this->status( 'done' );
-			}
-			else
-			{
-				$this->status( 'OK' );
-			}
-
-			$this->execute( 'DELETE FROM "mshop_stock" WHERE "prodid" IS NULL' );
-			$dbalManager->tryMethod( 'dropIndex', 'unq_mssto_sid_pcode_ty', 'mshop_stock' );
-
-			$this->msg( 'Remove column "productcode"', 1 );
-
-			if( $schema->columnExists( 'mshop_stock', 'productcode' ) === true )
-			{
-				$this->execute( $this->column );
-				$this->status( 'done' );
-			}
-			else
-			{
-				$this->status( 'OK' );
-			}
+			$db->table( 'mshop_stock' )->refid( 'prodid' )->up();
+			$db->exec( 'UPDATE mshop_stock SET prodid = (
+				SELECT id FROM mshop_product AS p WHERE p.code = productcode AND p.siteid = siteid LIMIT 1
+			)' );
 		}
 
-		$this->release( $conn, $rname );
+		$db->exec( 'DELETE FROM mshop_stock WHERE prodid IS NULL' );
+
+		$db->dropIndex( 'mshop_stock', 'unq_mssto_sid_pcode_ty' );
+		$db->dropColumn( 'mshop_stock', 'productcode' );
 	}
 }

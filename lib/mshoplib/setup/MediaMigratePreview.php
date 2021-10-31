@@ -6,40 +6,30 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Migrates the preview URLs in media table
- */
-class MediaMigratePreview extends \Aimeos\MW\Setup\Task\Base
+class MediaMigratePreview extends Base
 {
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Media'];
 	}
 
 
-	/**
-	 * Migrate database schema
-	 */
-	public function migrate()
+	public function up()
 	{
-		$dbdomain = 'db-media';
-		$this->msg( 'Migrating preview column in media table', 0 );
+		$db = $this->db( 'db-media' );
 
-		if( $this->getSchema( $dbdomain )->tableExists( 'mshop_media' ) === false )
-		{
-			$this->status( 'OK' );
+		if( !$db->hasTable( 'mshop_media' ) ) {
 			return;
 		}
 
-		$conn = $this->acquire( $dbdomain );
+		$this->info( 'Migrating preview column in media table', 'v' );
+
+		$dbm = $this->context()->db();
+		$conn = $dbm->acquire( 'db-media' );
+
 		$select = 'SELECT "id", "preview" FROM "mshop_media" WHERE "preview" NOT LIKE \'{%\'';
 		$update = 'UPDATE "mshop_media" SET "preview" = ? WHERE "id" = ?';
 
@@ -54,8 +44,6 @@ class MediaMigratePreview extends \Aimeos\MW\Setup\Task\Base
 			$stmt->execute()->finish();
 		}
 
-		$this->release( $conn, $dbdomain );
-
-		$this->status( 'done' );
+		$dbm->release( $conn, 'db-media' );
 	}
 }

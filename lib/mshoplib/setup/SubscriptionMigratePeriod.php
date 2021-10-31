@@ -6,49 +6,36 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Updates period count in subscriptions
- */
-class SubscriptionMigratePeriod extends \Aimeos\MW\Setup\Task\Base
+class SubscriptionMigratePeriod extends Base
 {
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Subscription'];
 	}
 
 
-	/**
-	 * Migrate database schema
-	 */
-	public function migrate()
+	public function up()
 	{
 		$dbdomain = 'db-order';
-		$this->msg( 'Updating period count in subscriptions', 0 );
+		$db = $this->db( $dbdomain );
 
-		if( $this->getSchema( $dbdomain )->tableExists( 'mshop_subscription' ) === false )
-		{
-			$this->status( 'OK' );
-			return;
-		}
+		$this->info( 'Updating period count in subscriptions', 'v' );
+
+		$dbm = $this->context()->db();
 
 		$select = 'SELECT "id", "interval", "end", "ctime" FROM "mshop_subscription" WHERE "period" = 0';
 		$update = 'UPDATE "mshop_subscription" SET "period" = ? WHERE "id" = ?';
 
-		$cselect = $this->acquire( $dbdomain );
-		$cupdate = $this->acquire( $dbdomain );
+		$cselect = $dbm->acquire( $dbdomain );
+		$cupdate = $dbm->acquire( $dbdomain );
 
 		$stmt = $cupdate->create( $update );
 		$result = $cselect->create( $select )->execute();
 
-		while( ( $row = $result->fetch() ) !== null )
+		while( $row = $result->fetch() )
 		{
 			$period = 0;
 			$end = $row['end'] ?: date( 'Y-m-d' );
@@ -66,9 +53,7 @@ class SubscriptionMigratePeriod extends \Aimeos\MW\Setup\Task\Base
 			$stmt->execute()->finish();
 		}
 
-		$this->release( $cupdate, $dbdomain );
-		$this->release( $cselect, $dbdomain );
-
-		$this->status( 'done' );
+		$dbm->release( $cupdate, $dbdomain );
+		$dbm->release( $cselect, $dbdomain );
 	}
 }

@@ -6,13 +6,10 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Updates key columns
- */
-class TablesMigrateListsKey extends \Aimeos\MW\Setup\Task\Base
+class TablesMigrateListsKey extends Base
 {
 	private $tables = [
 		'db-attribute' => 'mshop_attribute_list',
@@ -27,59 +24,40 @@ class TablesMigrateListsKey extends \Aimeos\MW\Setup\Task\Base
 	];
 
 
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TypesMigrateColumns', 'TablesCreateMShop'];
+		return ['TypesMigrateColumns', 'Attribute', 'Catalog', 'Customer', 'Media', 'Price', 'Product', 'Service', 'Supplier', 'Text'];
 	}
 
 
-	/**
-	 * Executes the task
-	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Update lists "key" columns', 0 ); $this->status( '' );
+		$this->info( 'Update lists "key" columns', 'v' );
 
 		$this->process( $this->tables );
 	}
 
 
-	protected function process( array $tables )
+	protected function process( $tables )
 	{
 		foreach( $tables as $rname => $table )
 		{
-			$count = 0;
-			$schema = $this->getSchema( $rname );
+			$this->info( sprintf( 'Checking table %1$s', $table ), 'vv', 1 );
 
-			$this->msg( sprintf( 'Checking table %1$s', $table ), 1 );
+			$db = $this->db( $rname );
+			$db2 = $this->db( $rname, true );
 
-			$dbm = $this->additional->getDatabaseManager();
-			$cselect = $dbm->acquire( $rname );
-			$cupdate = $dbm->acquire( $rname );
+			$update = $db->stmt()->update( $table )->set( $db->qi( 'key' ), '?' )->where( 'id', '?' );
 
-			$select = sprintf( 'SELECT "id", "domain", "type", "refid" FROM "%1$s" WHERE "key"=\'\'', $table );
-			$update = sprintf( 'UPDATE "%1$s" SET "key" = ? WHERE "id" = ?', $table );
+			$q = $db->stmt();
+			$result = $q->select( 'id', 'domain', 'type', 'refid' )->from( $table )
+				->where( $db->qi( 'key' ) . ' = \'\'' )->execute();
 
-			$stmt = $cupdate->create( $update );
-			$result = $cselect->create( $select )->execute();
-
-			while( ( $row = $result->fetch() ) !== null )
-			{
-				$stmt->bind( 1, $row['domain'] . '|' . $row['type'] . '|' . $row['refid'] );
-				$stmt->bind( 2, $row['id'] );
-				$stmt->execute()->finish();
-				$count++;
+			while( $row = $result->fetch() ) {
+				$update->setParameters( [$row['domain'] . '|' . $row['type'] . '|' . $row['refid'], $row['id']] )->execute();
 			}
 
-			$dbm->release( $cupdate, $rname );
-			$dbm->release( $cselect, $rname );
-
-			$this->status( $count > 0 ? 'done' : 'OK' );
+			$db2->close();
 		}
 	}
 }

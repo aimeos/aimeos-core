@@ -6,38 +6,29 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Migrates the tax rate in order tables
- */
-class OrderMigrateTaxrate extends \Aimeos\MW\Setup\Task\Base
+class OrderMigrateTaxrate extends Base
 {
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Order'];
 	}
 
 
-	/**
-	 * Migrate database schema
-	 */
-	public function migrate()
+	public function up()
 	{
+		$db = $this->db();
+		$dbm = $this->context()->db();
 		$dbdomain = 'db-order';
-		$this->msg( 'Migrating taxrate column in order tables', 0, '' );
 
-		$this->msg( 'Migrating taxrate column in order base product table', 1 );
+		$this->info( 'Migrating taxrate columns in order tables', 'v' );
+		$this->info( 'Migrating taxrate column in order base product table', 'vv', 1 );
 
-		if( $this->getSchema( $dbdomain )->tableExists( 'mshop_order_base_product' ) === true )
+		if( $db->hasTable( 'mshop_order_base_product' ) )
 		{
-			$conn = $this->acquire( $dbdomain );
+			$conn = $dbm->acquire( $dbdomain );
 			$select = 'SELECT "id", "taxrate" FROM "mshop_order_base_product" WHERE "taxrate" NOT LIKE \'{%\'';
 			$update = 'UPDATE "mshop_order_base_product" SET "taxrate" = ? WHERE "id" = ?';
 
@@ -52,21 +43,15 @@ class OrderMigrateTaxrate extends \Aimeos\MW\Setup\Task\Base
 				$stmt->execute()->finish();
 			}
 
-			$this->release( $conn, $dbdomain );
-
-			$this->status( 'done' );
-		}
-		else
-		{
-			$this->status( 'OK' );
+			$dbm->release( $conn, $dbdomain );
 		}
 
 
-		$this->msg( 'Migrating taxrate column in order base service table', 1 );
+		$this->info( 'Migrating taxrate column in order base service table', 'vv', 1 );
 
-		if( $this->getSchema( $dbdomain )->tableExists( 'mshop_order_base_service' ) === true )
+		if( $db->hasTable( 'mshop_order_base_service' ) )
 		{
-			$conn = $this->acquire( $dbdomain );
+			$conn = $dbm->acquire( $dbdomain );
 			$select = 'SELECT "id", "taxrate" FROM "mshop_order_base_service" WHERE "taxrate" NOT LIKE \'{%\'';
 			$update = 'UPDATE "mshop_order_base_service" SET "taxrate" = ? WHERE "id" = ?';
 
@@ -82,13 +67,7 @@ class OrderMigrateTaxrate extends \Aimeos\MW\Setup\Task\Base
 					$stmt->execute()->finish();
 				}
 
-			$this->release( $conn, $dbdomain );
-
-			$this->status( 'done' );
-		}
-		else
-		{
-			$this->status( 'OK' );
+			$dbm->release( $conn, $dbdomain );
 		}
 	}
 }

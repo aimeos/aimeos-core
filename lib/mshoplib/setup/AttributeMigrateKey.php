@@ -6,57 +6,36 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Updates key columns
- */
-class AttributeMigrateKey extends \Aimeos\MW\Setup\Task\Base
+class AttributeMigrateKey extends Base
 {
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function before() : array
+	{
+		return ['Attribute'];
+	}
+
+
+	public function after() : array
 	{
 		return ['TypesMigrateColumns'];
 	}
 
 
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return array List of task names
-	 */
-	public function getPostDependencies() : array
+	public function up()
 	{
-		return ['TablesCreateMShop'];
-	}
+		$this->info( 'Update attribute "key" columns', 'v' );
 
+		$db = $this->db( 'db-attribute' );
 
-	/**
-	 * Executes the task
-	 */
-	public function migrate()
-	{
-		$this->msg( 'Update attribute "key" columns', 0 ); $this->status( '' );
-
-		$rname = 'db-attribute';
-		$table = 'mshop_attribute';
-		$schema = $this->getSchema( $rname );
-
-		$this->msg( 'Checking table mshop_attribute', 1 );
-
-		if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'key' ) )
+		if( $db->hasColumn( 'mshop_attribute', 'key' ) )
 		{
-			$dbm = $this->additional->getDatabaseManager();
-			$conn = $dbm->acquire( $rname );
-			$count = 0;
+			$dbm = $this->context()->getDatabaseManager();
+			$conn = $dbm->acquire( 'db-attribute' );
 
-			$select = sprintf( 'SELECT "id", "domain", "type", "code" FROM "%1$s" WHERE "key" = \'\'', $table );
-			$update = sprintf( 'UPDATE "%1$s" SET "key" = ? WHERE "id" = ?', $table );
+			$select = 'SELECT "id", "domain", "type", "code" FROM "mshop_attribute" WHERE "key" = \'\'';
+			$update = 'UPDATE "mshop_attribute" SET "key" = ? WHERE "id" = ?';
 
 			$stmt = $conn->create( $update );
 			$result = $conn->create( $select )->execute();
@@ -66,16 +45,9 @@ class AttributeMigrateKey extends \Aimeos\MW\Setup\Task\Base
 				$stmt->bind( 1, md5( $row['domain'] . '|' . $row['type'] . '|' . $row['code'] ) );
 				$stmt->bind( 2, $row['id'] );
 				$stmt->execute()->finish();
-				$count++;
 			}
 
-			$dbm->release( $conn, $rname );
-
-			$this->status( $count > 0 ? 'done' : 'OK' );
-		}
-		else
-		{
-			$this->status( 'OK' );
+			$dbm->release( $conn, 'db-attribute' );
 		}
 	}
 }

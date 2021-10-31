@@ -6,94 +6,51 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Migrate supplier code to ID and name in order product table
- */
-class OrderMigrateProductSupplier extends \Aimeos\MW\Setup\Task\Base
+class OrderMigrateProductSupplier extends Base
 {
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Order'];
 	}
 
 
-	/**
-	 * Migrate database schema
-	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Migrate supplier code to ID and name in order product table', 0 );
+		$db = $this->db( 'db-order' );
 
-		$schema = $this->getSchema( 'db-order' );
-
-		if( $schema->tableExists( 'mshop_order_base_product' )
-			&& $schema->columnExists( 'mshop_order_base_product', 'suppliercode' )
-		) {
-			$this->addColumns();
-
-			$conn = $this->acquire( 'db-order' );
-			$sconn = $this->acquire( 'db-supplier' );
-
-			$stmt = $conn->create(
-				'UPDATE "mshop_order_base_product" SET "supplierid" = ?, "suppliername" = ? WHERE "suppliercode" = ?'
-			);
-			$result = $sconn->create( 'SELECT "id", "code", "label" FROM "mshop_supplier"' )->execute();
-
-			while( $row = $result->fetch() )
-			{
-				$stmt->bind( 1, $row['id'] );
-				$stmt->bind( 2, $row['label'] );
-				$stmt->bind( 3, $row['code'] );
-
-				$stmt->execute()->finish();
-			}
-
-			$this->release( $sconn, 'db-supplier' );
-			$this->release( $conn, 'db-order' );
-
-			return $this->status( 'done' );
+		if( !$db->hasColumn( 'mshop_order_base_product', 'suppliercode' ) ) {
+			return;
 		}
 
-		$this->status( 'OK' );
-	}
+		$this->info( 'Migrate supplier code to ID and name in order product table', 'v' );
 
+		$this->db()->table( 'mshop_order_base_product', function( $table ) {
+			$table->refid( 'supplierid' )->default( '' );
+			$table->string( 'suppliername' )->default( '' );
+		} )->up();
 
-	protected function addColumns()
-	{
-		$conn = $this->acquire( 'db-order' );
-		$dbal = $conn->getRawObject();
-		$this->release( $conn, 'db-order' );
+		$dbm = $this->context()->db();
+		$conn = $dbm->acquire( 'db-order' );
+		$sconn = $dbm->acquire( 'db-supplier' );
 
-		if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
-			throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
+		$stmt = $conn->create(
+			'UPDATE "mshop_order_base_product" SET "supplierid" = ?, "suppliername" = ? WHERE "suppliercode" = ?'
+		);
+		$result = $sconn->create( 'SELECT "id", "code", "label" FROM "mshop_supplier"' )->execute();
+
+		while( $row = $result->fetch() )
+		{
+			$stmt->bind( 1, $row['id'] );
+			$stmt->bind( 2, $row['label'] );
+			$stmt->bind( 3, $row['code'] );
+
+			$stmt->execute()->finish();
 		}
 
-		$dbalManager = $dbal->getSchemaManager();
-		$config = $dbalManager->createSchemaConfig();
-		$platform = $dbal->getDatabasePlatform();
-
-		$table = $dbalManager->listTableDetails( 'mshop_order_base_product' );
-		$schema = new \Doctrine\DBAL\Schema\Schema( [clone $table], [], $config );
-
-		if( !$table->hasColumn( 'supplierid' ) ) {
-			$table->addColumn( 'supplierid', 'string', ['length' => 36, 'customSchemaOptions' => ['charset' => 'binary', 'default' => '']] );
-		}
-
-		if( !$table->hasColumn( 'suppliername' ) ) {
-			$table->addColumn( 'suppliername', 'string', ['length' => 255, 'default' => ''] );
-		}
-
-		$newSchema = new \Doctrine\DBAL\Schema\Schema( [$table], [], $config );
-		$stmts = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $schema, $newSchema )->toSaveSql( $platform );
-
-		$this->executeList( $stmts, 'db-order' );
+		$dbm->release( $sconn, 'db-supplier' );
+		$dbm->release( $conn, 'db-order' );
 	}
 }

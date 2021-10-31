@@ -6,42 +6,27 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Prepares the mshop_index_text table for simplification
- */
-class IndexPrepareSimpleText extends \Aimeos\MW\Setup\Task\Base
+class IndexPrepareSimpleText extends Base
 {
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Index'];
 	}
 
 
-	/**
-	 * Executes the task
-	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Prepare mshop_index_text table for simplification', 0 );
-		$schema = $this->getSchema( 'db-product' );
+		$db = $this->db( 'db-product' );
 
-		if( $schema->tableExists( 'mshop_index_text' ) === true
-			&& $schema->constraintExists( 'mshop_index_text', 'unq_msindte_p_s_tid_lt' ) === true
-		) {
-			$this->execute( 'DELETE FROM "mshop_index_text"' );
-			$this->status( 'done' );
+		if( !$db->hasIndex( 'mshop_index_text', 'unq_msindte_p_s_tid_lt' ) ) {
+			return;
 		}
-		else
-		{
-			$this->status( 'OK' );
-		}
+
+		$this->info( 'Prepare mshop_index_text table for simplification', 'v' );
+
+		$this->dropTable( 'mshop_index_text' );
 	}
 }

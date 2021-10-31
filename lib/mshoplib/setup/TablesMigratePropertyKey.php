@@ -6,13 +6,10 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Updates key columns
- */
-class TablesMigratePropertyKey extends \Aimeos\MW\Setup\Task\Base
+class TablesMigratePropertyKey extends Base
 {
 	private $tables = [
 		'db-attribute' => 'mshop_attribute_property',
@@ -23,51 +20,34 @@ class TablesMigratePropertyKey extends \Aimeos\MW\Setup\Task\Base
 	];
 
 
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TypesMigrateColumns', 'TablesClearPropertyKey', 'TablesCreateMShop'];
+		return ['TypesMigrateColumns', 'TablesClearPropertyKey', 'Attribute', 'Customer', 'Media', 'Price', 'Product'];
 	}
 
 
-	/**
-	 * Executes the task
-	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Update property "key" columns', 0 ); $this->status( '' );
+		$this->info( 'Update property "key" columns', 'v' );
 
 		foreach( $this->tables as $rname => $table )
 		{
-			$schema = $this->getSchema( $rname );
+			$this->info( sprintf( 'Checking table %1$s', $table ), 'vv', 1 );
 
-			$this->msg( sprintf( 'Checking table %1$s', $table ), 1 );
+			$db = $this->db( $rname );
+			$db2 = $this->db( $rname, true );
 
-			$dbm = $this->additional->getDatabaseManager();
-			$cselect = $dbm->acquire( $rname );
-			$cupdate = $dbm->acquire( $rname );
+			$update = $db->stmt()->update( $table )->set( $db->qi( 'key' ), '?' )->where( 'id', '?' );
 
-			$select = sprintf( 'SELECT "id", "type", "langid", "value" FROM "%1$s" WHERE "key"=\'\'', $table );
-			$update = sprintf( 'UPDATE "%1$s" SET "key" = ? WHERE "id" = ?', $table );
+			$q = $db->stmt();
+			$result = $q->select( 'id', 'type', 'langid', 'value' )->from( $table )
+				->where( $db->qi( 'key' ) . ' = \'\'' )->execute();
 
-			$stmt = $cupdate->create( $update );
-			$result = $cselect->create( $select )->execute();
-
-			while( ( $row = $result->fetch() ) !== null )
-			{
-				$stmt->bind( 1, $row['type'] . '|' . ( $row['langid'] ?: 'null' ) . '|' . md5( $row['value'] ) );
-				$stmt->bind( 2, $row['id'] );
-				$stmt->execute()->finish();
+			while( $row = $result->fetch() ) {
+				$update->setParameters( [$row['type'] . '|' . ( $row['langid'] ?: 'null' ) . '|' . md5( $row['value'] ), $row['id']] )->execute();
 			}
 
-			$dbm->release( $cupdate, $rname );
-			$dbm->release( $cselect, $rname );
-
-			$this->status( 'done' );
+			$db2->close();
 		}
 	}
 }

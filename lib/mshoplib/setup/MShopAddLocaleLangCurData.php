@@ -6,38 +6,34 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds locale language and currency records to tables.
  */
-class MShopAddLocaleLangCurData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
+class MShopAddLocaleLangCurData extends MShopAddLocaleData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Locale'];
 	}
 
 
 	/**
 	 * Creates new locale data if necessary
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
-
-		$this->msg( 'Add locale data for languages and currencies', 0 );
-		$this->status( '' );
-
+		$this->info( 'Add locale data for languages and currencies', 'v' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->additional, 'Standard' );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context(), 'Standard' );
 
 
 		$filename = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'language.php';

@@ -7,31 +7,27 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds default records plugin to table.
  */
-class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
+class MShopAddPluginData extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Plugin'];
 	}
 
 
-	/**
-	 * Executes the task for MySQL databases.
-	 */
-	public function migrate()
+	public function up()
 	{
-		// executed by tasks in sub-directories for specific sites
 	}
 
 
@@ -40,15 +36,10 @@ class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function process()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
-
-		$this->msg( 'Adding default plugin data', 0 );
-		$this->status( '' );
-
+		$this->info( 'Adding default plugin data', 'v' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $this->additional, 'Standard' );
-
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $this->context(), 'Standard' );
 
 		$filename = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'plugin.php';
 
@@ -70,7 +61,7 @@ class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addPluginData( \Aimeos\MShop\Common\Manager\Iface $pluginManager, array $data )
 	{
-		$this->msg( 'Adding data for MShop plugins', 1 );
+		$this->info( 'Adding data for MShop plugins', 'v' );
 
 		$types = [];
 		$manager = $pluginManager->getSubManager( 'type' );
@@ -79,13 +70,10 @@ class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
 			$types['plugin/' . $item->getCode()] = $item;
 		}
 
-		$num = $total = 0;
 		$item = $pluginManager->create();
 
 		foreach( $data as $key => $dataset )
 		{
-			$total++;
-
 			$item->setId( null );
 			$item->setType( $dataset['type'] );
 			$item->setProvider( $dataset['provider'] );
@@ -99,10 +87,7 @@ class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
 
 			try {
 				$pluginManager->save( $item );
-				$num++;
 			} catch( \Exception $e ) {; } // if plugin configuration was already available
 		}
-
-		$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
 	}
 }

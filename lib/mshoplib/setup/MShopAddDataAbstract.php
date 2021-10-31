@@ -7,31 +7,15 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds records to tables.
  */
-class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
+class MShopAddDataAbstract extends Base
 {
 	private $attributes;
-
-
-	/**
-	 * Initializes the object
-	 *
-	 * @param \Aimeos\MW\Setup\DBSchema\Iface $schema
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn
-	 * @param \Aimeos\MShop\Context\Item\Iface|null $additional
-	 * @throws \Aimeos\MW\Setup\Exception
-	 */
-	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
-	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $additional );
-
-		parent::__construct( $schema, $conn, $additional );
-	}
 
 
 	/**
@@ -39,18 +23,14 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['...'];
 	}
 
 
-	/**
-	 * Executes the task for MySQL databases.
-	 */
-	public function migrate()
+	public function up()
 	{
-		// executed by tasks in sub-directories for specific sites
 	}
 
 
@@ -63,7 +43,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addAttributes( $parentid, array $data, $domain )
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$attrManager = \Aimeos\MShop::create( $context, 'attribute' );
 		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
@@ -135,7 +115,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addMedia( $parentid, array $data, $domain )
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$mediaManager = \Aimeos\MShop::create( $context, 'media' );
 		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
@@ -201,7 +181,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addPrices( $parentid, array $data, $domain )
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$mediaManager = \Aimeos\MShop::create( $context, 'price' );
 		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
@@ -269,7 +249,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addTexts( $parentid, array $data, $domain )
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$textManager = \Aimeos\MShop::create( $context, 'text' );
 		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
@@ -333,7 +313,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addProducts( $parentid, array $data, $domain )
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$productManager = \Aimeos\MShop::create( $context, 'product' );
 		$listManager = \Aimeos\MShop::create( $context, $domain . '/lists' );
 
@@ -386,14 +366,14 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addProductStock( string $productId, array $data )
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock/type' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'stock/type' );
 
 		$types = [];
 		foreach( $manager->search( $manager->filter() ) as $id => $item ) {
 			$types[$item->getCode()] = $id;
 		}
 
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
 
 		$item = $manager->create();
 		$item->setProductId( $productId );
@@ -422,7 +402,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	{
 		if( $this->attributes === null )
 		{
-			$manager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
+			$manager = \Aimeos\MShop::create( $this->context(), 'attribute' );
 
 			foreach( $manager->search( $manager->filter() ) as $item ) {
 				$this->attributes[$item->getDomain()][$item->getType()][$item->getCode()] = $item;
@@ -436,17 +416,6 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
-	 * Returns the context.
-	 *
-	 * @return \Aimeos\MShop\Context\Item\Iface Context item
-	 */
-	protected function getContext()
-	{
-		return $this->additional;
-	}
-
-
-	/**
 	 * Deletes the demo items from the given parent ID in the database.
 	 *
 	 * @param string $parentid ID of the parent item where the associated items should be removed from
@@ -456,7 +425,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function removeItems( $parentid, $name, $domain, $refdomain )
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$key = str_replace( '/', '.', $name );
 
 		$manager = \Aimeos\MShop::create( $context, $refdomain );
@@ -496,7 +465,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	protected function removeListItems( $parentid, $name, $refdomain )
 	{
 		$start = 0;
-		$context = $this->getContext();
+		$context = $this->context();
 		$key = str_replace( '/', '.', $name );
 
 		$manager = \Aimeos\MShop::create( $context, $refdomain );
@@ -561,7 +530,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function txBegin()
 	{
-		$dbm = $this->additional->getDatabaseManager();
+		$dbm = $this->context()->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->begin();
@@ -574,7 +543,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function txCommit()
 	{
-		$dbm = $this->additional->getDatabaseManager();
+		$dbm = $this->context()->getDatabaseManager();
 
 		$conn = $dbm->acquire();
 		$conn->commit();

@@ -6,40 +6,30 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Migrates the tax rate in price table
- */
-class PriceMigrateTaxrate extends \Aimeos\MW\Setup\Task\Base
+class PriceMigrateTaxrate extends Base
 {
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Price'];
 	}
 
 
-	/**
-	 * Migrate database schema
-	 */
-	public function migrate()
+	public function up()
 	{
-		$dbdomain = 'db-price';
-		$this->msg( 'Migrating taxrate column in price table', 0 );
+		$db = $this->db( 'db-price' );
 
-		if( $this->getSchema( $dbdomain )->tableExists( 'mshop_price' ) === false )
-		{
-			$this->status( 'OK' );
+		if( !$db->hasTable( 'mshop_price' ) ) {
 			return;
 		}
 
-		$conn = $this->acquire( $dbdomain );
+		$this->info( 'Migrating taxrate column in price table', 'v' );
+
+		$dbm = $this->context()->db();
+		$conn = $dbm->acquire( 'db-price' );
+
 		$select = 'SELECT "id", "taxrate" FROM "mshop_price" WHERE "taxrate" NOT LIKE \'{%\'';
 		$update = 'UPDATE "mshop_price" SET "taxrate" = ? WHERE "id" = ?';
 
@@ -54,8 +44,6 @@ class PriceMigrateTaxrate extends \Aimeos\MW\Setup\Task\Base
 			$stmt->execute()->finish();
 		}
 
-		$this->release( $conn, $dbdomain );
-
-		$this->status( 'done' );
+		$dbm->release( $conn, 'db-price' );
 	}
 }

@@ -6,31 +6,27 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds default codes to tables
  */
-class MShopAddCodeData extends \Aimeos\MW\Setup\Task\Base
+class MShopAddCodeData extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopAddLocaleData'];
 	}
 
 
-	/**
-	 * Executes the task for MySQL databases.
-	 */
-	public function migrate()
+	public function up()
 	{
-		// executed by tasks in sub-directories for specific sites
 	}
 
 
@@ -41,15 +37,12 @@ class MShopAddCodeData extends \Aimeos\MW\Setup\Task\Base
 	{
 		foreach( $data as $domain => $datasets )
 		{
-			$this->msg( sprintf( 'Checking "%1$s" codes', $domain ), 1 );
+			$this->info( sprintf( 'Checking "%1$s" codes', $domain ), 'vv', 1 );
 
-			$domainManager = \Aimeos\MShop::create( $this->additional, $domain );
-			$num = $total = 0;
+			$domainManager = \Aimeos\MShop::create( $this->context(), $domain );
 
 			foreach( $datasets as $dataset )
 			{
-				$total++;
-
 				try
 				{
 					$item = $domainManager->find( $dataset['code'] );
@@ -63,14 +56,10 @@ class MShopAddCodeData extends \Aimeos\MW\Setup\Task\Base
 					if( isset( $dataset['status'] ) ) {
 						$item->setStatus( $dataset['status'] );
 					}
-
-					$num++;
 				}
 
 				$domainManager->save( $item );
 			}
-
-			$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
 		}
 	}
 }

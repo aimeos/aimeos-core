@@ -6,13 +6,10 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
-/**
- * Updates site ID columns
- */
-class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
+class TablesMigrateSiteid extends Base
 {
 	private $resources = [
 		'db-attribute' => [
@@ -82,74 +79,71 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 	];
 
 
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
+	public function before() : array
 	{
-		return ['IndexMigrateTextInnodb'];
+		return [
+			'Attribute', 'Cache', 'Catalog', 'Coupon', 'Customer', 'Job', 'Locale', 'Log', 'Media', 'Order',
+			'Plugin', 'Price', 'Product', 'Service', 'Stock', 'Subscription', 'Supplier', 'Tag', 'Text'
+		];
 	}
 
 
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPostDependencies() : array
+	public function up()
 	{
-		return ['TablesCreateMShop'];
-	}
+		$db = $this->db( 'db-locale' );
 
+		if( $db->hasColumn( 'mshop_locale_site', 'siteid' ) ) {
+			return;
+		}
 
-	/**
-	 * Executes the task
-	 */
-	public function migrate()
-	{
-		$this->msg( 'Update "siteid" columns', 0, '' );
+		$this->info( 'Update "siteid" columns', 'v' );
+
+		$db->table( 'mshop_locale_site' )->int( 'siteid' )->default( 0 )->up();
+
+		$db->dropForeign( 'mshop_locale', ['fk_msloc_siteid', 'fk_msloccu_siteid', 'fk_mslocla_siteid'] );
+		$db->dropForeign( 'mshop_locale_site', 'mshop_locale_site_siteid_key' ); // PostgreSQL workaround
+
+		$db->exec( 'UPDATE mshop_locale_site SET siteid = id' );
 
 		$this->process( $this->resources );
 	}
 
 
-	protected function addLocaleSiteColumn()
+	protected function process( array $resources )
 	{
-		$rname = 'db-locale';
-		$table = 'mshop_locale_site';
-		$schema = $this->getSchema( $rname );
+		$db = $this->db( 'db-locale' );
+		$sites = $this->getSites();
 
-		if( $schema->columnExists( $table, 'siteid' ) === false )
+		foreach( $resources as $rname => $tables )
 		{
-			$this->msg( 'Adding "siteid" column to "mshop_locale_site" table', 1 );
+			$db = $this->db( $rname );
 
-			$dbm = $this->additional->getDatabaseManager();
-			$conn = $dbm->acquire( $rname );
+			foreach( $tables as $table )
+			{
+				$this->info( sprintf( 'Checking table %1$s', $table ), 'vv', 1 );
+				$colname = null;
 
-			$dbal = $conn->getRawObject();
+				if( $db->hasColumn( $table, 'siteid' ) && $db->table( $table )->col( 'siteid' )->type() === 'integer' ) {
+					$colname = 'siteid';
+				}
 
-			if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
-				throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
+				if( $db->hasColumn( $table, 'tsiteid' ) && $db->table( $table )->col( 'tsiteid' )->type() === 'integer' ) {
+					$colname = 'tsiteid';
+				}
+
+				if( $colname )
+				{
+					$db->table( $table )->string( $colname )->up();
+
+					foreach( $sites as $siteid => $site )
+					{
+						$db->stmt()->update( $table )->set( $colname . ' = ?' )
+							->where( $colname . ' = ?' )->orWhere( $colname . " = ''" )
+							->setParameters( [$site, $siteid ] )
+							->execute();
+					}
+				}
 			}
-
-			$dbalManager = $dbal->getSchemaManager();
-			$config = $dbalManager->createSchemaConfig();
-
-			$tabledef = $dbalManager->listTableDetails( $table );
-			$newdef = clone $tabledef;
-			$newdef->addColumn( 'siteid', 'integer', ['default' => 0] );
-
-			$src = new \Doctrine\DBAL\Schema\Schema( [$tabledef], [], $config );
-			$dest = new \Doctrine\DBAL\Schema\Schema( [$newdef], [], $config );
-
-			$this->update( $src, $dest, $rname );
-			$this->execute( 'UPDATE "mshop_locale_site" SET "siteid"="id"' );
-
-			$dbm->release( $conn, $rname );
-
-			$this->status( 'done' );
 		}
 	}
 
@@ -158,7 +152,7 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 	{
 		$map = [];
 
-		$dbm = $this->additional->getDatabaseManager();
+		$dbm = $this->context()->getDatabaseManager();
 		$conn = $dbm->acquire( 'db-locale' );
 		$tconn = $dbm->acquire( 'db-locale' );
 
@@ -207,89 +201,5 @@ class TablesMigrateSiteid extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		return null;
-	}
-
-
-	protected function process( array $resources )
-	{
-		if( $this->getSchema( 'db-locale' )->tableExists( 'mshop_locale_site' ) === false ) {
-			return;
-		}
-
-		$this->addLocaleSiteColumn();
-
-		foreach( $resources as $rname => $tables )
-		{
-			$schema = $this->getSchema( $rname );
-
-			$dbm = $this->additional->getDatabaseManager();
-			$conn = $dbm->acquire( $rname );
-
-			$dbal = $conn->getRawObject();
-
-			if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
-				throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
-			}
-
-			$dbalManager = $dbal->getSchemaManager();
-			$config = $dbalManager->createSchemaConfig();
-
-			if( $schema->tableExists( 'mshop_locale_site' ) ) { // PostgreSQL workaround
-				$dbalManager->tryMethod( 'dropForeignKey', 'mshop_locale_site_siteid_key', 'mshop_locale_site' );
-			}
-
-			foreach( $tables as $table )
-			{
-				$this->msg( sprintf( 'Checking table %1$s', $table ), 1 );
-				$colname = null;
-
-				if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'siteid' )
-					&& $schema->getColumnDetails( $table, 'siteid' )->getDataType() === 'integer'
-				) {
-					$colname = 'siteid';
-				}
-
-				if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'tsiteid' )
-					&& $schema->getColumnDetails( $table, 'tsiteid' )->getDataType() === 'integer'
-				) {
-					$colname = 'tsiteid';
-				}
-
-				if( $colname )
-				{
-					$tabledef = $dbalManager->listTableDetails( $table );
-					$newdef = clone $tabledef;
-
-					foreach( ['fk_macac_tid_tsid', 'fk_mslocla_siteid', 'fk_msloccu_siteid', 'fk_msloc_siteid'] as $foreignkey )
-					{
-						if( $newdef->hasForeignKey( $foreignkey ) ) {
-							$newdef->removeForeignKey( $foreignkey );
-						}
-					}
-
-					$type = new \Doctrine\DBAL\Types\StringType();
-					$newdef->changeColumn( $colname, ['type' => $type, 'length' => 255] );
-
-					$src = new \Doctrine\DBAL\Schema\Schema( [$tabledef], [], $config );
-					$dest = new \Doctrine\DBAL\Schema\Schema( [$newdef], [], $config );
-
-					$this->update( $src, $dest, $rname );
-
-					foreach( $this->getSites() as $siteid => $site )
-					{
-						$stmt = $conn->create( sprintf( 'UPDATE "%1$s" SET "%2$s" = ? WHERE "%2$s" = ? OR "%2$s" = \'\'', $table, $colname ) );
-						$result = $stmt->bind( 1, $site )->bind( 2, $siteid )->execute();
-					}
-
-					$this->status( 'done' );
-				}
-				else
-				{
-					$this->status( 'OK' );
-				}
-			}
-
-			$dbm->release( $conn, $rname );
-		}
 	}
 }
