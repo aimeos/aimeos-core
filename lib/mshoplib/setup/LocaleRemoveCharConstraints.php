@@ -25,7 +25,7 @@ class LocaleRemoveCharConstraints extends Base
 			return;
 		}
 
-		$this->info( 'Remove mshop_locale char constraints' , 'v' );
+		$this->info( 'Remove mshop_locale char constraints', 'v' );
 
 		if( $db->hasForeign( 'mshop_locale', 'fk_msloc_langid' )
 			&& $db->hasColumn( 'mshop_locale', 'langid' )

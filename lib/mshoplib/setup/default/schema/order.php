@@ -158,7 +158,7 @@ return array(
 			$table->string( 'name' );
 			$table->string( 'mediaurl' );
 			$table->string( 'currencyid', 3 );
-			$table->string( 'price', 12)->null( true );
+			$table->string( 'price', 12 )->null( true );
 			$table->string( 'costs', 12 );
 			$table->string( 'rebate', 12 );
 			$table->string( 'tax', 14, 4 );
