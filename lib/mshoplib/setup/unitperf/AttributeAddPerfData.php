@@ -6,28 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds attribute performance records
  */
-class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
+class AttributeAddPerfData extends Base
 {
-	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
-	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $additional );
-
-		parent::__construct( $schema, $conn, $additional );
-	}
-
-
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopAddTypeDataUnitperf', 'LocaleAddPerfData', 'MShopSetLocale'];
 	}
@@ -36,12 +28,11 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Insert product data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Adding attribute performance data', 0 );
+		$this->info( 'Adding attribute performance data', 'v' );
 
-
-		$manager = \Aimeos\MShop::create( $this->additional, 'attribute' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'attribute' );
 		$manager->begin();
 
 		$this->addCharacteristics();
@@ -50,9 +41,6 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->addVariants();
 
 		$manager->commit();
-
-
-		$this->status( 'done' );
 	}
 
 
@@ -76,7 +64,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		];
 
 
-		$attrManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
+		$attrManager = \Aimeos\MShop::create( $this->context(), 'attribute' );
 
 		foreach( $characteristics as $type => $list )
 		{
@@ -128,9 +116,9 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		);
 
 
-		$mediaManager = \Aimeos\MShop::create( $this->additional, 'media' );
-		$attrManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
-		$listManager = \Aimeos\MShop::create( $this->additional, 'attribute/lists' );
+		$mediaManager = \Aimeos\MShop::create( $this->context(), 'media' );
+		$attrManager = \Aimeos\MShop::create( $this->context(), 'attribute' );
+		$listManager = \Aimeos\MShop::create( $this->context(), 'attribute/lists' );
 
 		$attrItem = $attrManager->create()
 			->setDomain( 'product' )
@@ -166,9 +154,9 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function addOptions()
 	{
-		$priceManager = \Aimeos\MShop::create( $this->additional, 'price' );
-		$attrManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
-		$listManager = \Aimeos\MShop::create( $this->additional, 'attribute/lists' );
+		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
+		$attrManager = \Aimeos\MShop::create( $this->context(), 'attribute' );
+		$listManager = \Aimeos\MShop::create( $this->context(), 'attribute/lists' );
 
 		$priceItem = $priceManager->create()
 			->setCurrencyId( 'EUR' )
@@ -214,7 +202,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		];
 
 
-		$attrManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
+		$attrManager = \Aimeos\MShop::create( $this->context(), 'attribute' );
 
 		foreach( $sizes as $type => $list )
 		{

@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds default records to tables.
  */
-class MShopAddTypeDataUnitperf extends \Aimeos\MW\Setup\Task\MShopAddTypeData
+class MShopAddTypeDataUnitperf extends MShopAddTypeData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -31,7 +31,7 @@ class MShopAddTypeDataUnitperf extends \Aimeos\MW\Setup\Task\MShopAddTypeData
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
 		return ['MShopAddTypeData', 'ProductAddBasePerfData'];
 	}
@@ -40,7 +40,7 @@ class MShopAddTypeDataUnitperf extends \Aimeos\MW\Setup\Task\MShopAddTypeData
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	public function migrate()
+	public function up()
 	{
 		$this->process();
 	}

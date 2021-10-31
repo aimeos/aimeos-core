@@ -6,28 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds performance records to customer table.
  */
-class CustomerAddPerfData extends \Aimeos\MW\Setup\Task\Base
+class CustomerAddPerfData extends Base
 {
-	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
-	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $additional );
-
-		parent::__construct( $schema, $conn, $additional );
-	}
-
-
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopAddTypeDataUnitperf', 'LocaleAddPerfData', 'MShopSetLocale'];
 	}
@@ -36,11 +28,11 @@ class CustomerAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Inserts customer items.
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Adding customer performance data', 0 );
+		$this->info( 'Adding customer performance data', 'v' );
 
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context() );
 
 		$customerItem = $customerManager->create();
 		$customerItem->setCode( 'unitperf@example.com' );
@@ -63,7 +55,5 @@ class CustomerAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$addrItem->setEmail( 'unitperf@example.com' );
 
 		$customerManager->save( $customerItem );
-
-		$this->status( 'done' );
 	}
 }

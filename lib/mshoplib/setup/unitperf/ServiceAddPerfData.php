@@ -6,28 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds service performance records
  */
-class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
+class ServiceAddPerfData extends Base
 {
-	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
-	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $additional );
-
-		parent::__construct( $schema, $conn, $additional );
-	}
-
-
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopAddTypeDataUnitperf', 'LocaleAddPerfData', 'MShopSetLocale'];
 	}
@@ -36,9 +28,9 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Insert product data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Adding service performance data', 0 );
+		$this->info( 'Adding service performance data', 'v' );
 
 
 		$services = [
@@ -104,13 +96,13 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			],
 		];
 
-		$numServices = $this->additional->getConfig()->get( 'setup/unitperf/max-services', 100 );
+		$numServices = $this->context()->getConfig()->get( 'setup/unitperf/max-services', 100 );
 
-		$manager = \Aimeos\MShop::create( $this->additional, 'service' );
-		$listManager = \Aimeos\MShop::create( $this->additional, 'service/lists' );
-		$mediaManager = \Aimeos\MShop::create( $this->additional, 'media' );
-		$priceManager = \Aimeos\MShop::create( $this->additional, 'price' );
-		$textManager = \Aimeos\MShop::create( $this->additional, 'text' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'service' );
+		$listManager = \Aimeos\MShop::create( $this->context(), 'service/lists' );
+		$mediaManager = \Aimeos\MShop::create( $this->context(), 'media' );
+		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
+		$textManager = \Aimeos\MShop::create( $this->context(), 'text' );
 
 		$mListItem = $listManager->create()->setType( 'default' );
 		$pListItem = $listManager->create()->setType( 'default' );
@@ -159,8 +151,5 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$manager->commit();
-
-
-		$this->status( 'done' );
 	}
 }
