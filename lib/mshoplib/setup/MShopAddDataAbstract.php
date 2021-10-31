@@ -25,7 +25,7 @@ class MShopAddDataAbstract extends Base
 	 */
 	public function after() : array
 	{
-		return ['...'];
+		return ['Attribute', 'Media', 'Price', 'Product', 'Text'];
 	}
 
 
