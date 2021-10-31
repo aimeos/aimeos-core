@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds media test data and all items from other domains.
  */
-class MediaAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
+class MediaAddTestData extends BaseAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -29,16 +29,14 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	/**
 	 * Adds media test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->context() );
 
-		$this->msg( 'Adding media test data', 0 );
+		$this->info( 'Adding media test data', 'v' );
 
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 		$this->process( $this->getData() );
-
-		$this->status( 'done' );
 	}
 
 
@@ -68,7 +66,7 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	protected function getManager( $domain )
 	{
 		if( $domain === 'media' ) {
-			return \Aimeos\MShop\Media\Manager\Factory::create( $this->additional, 'Standard' );
+			return \Aimeos\MShop\Media\Manager\Factory::create( $this->context(), 'Standard' );
 		}
 
 		return parent::getManager( $domain );

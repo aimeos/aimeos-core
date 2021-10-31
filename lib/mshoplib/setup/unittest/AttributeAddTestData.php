@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds attribute test data and all items from other domains.
  */
-class AttributeAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
+class AttributeAddTestData extends BaseAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -29,16 +29,12 @@ class AttributeAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	/**
 	 * Adds attribute test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		$this->info( 'Adding attribute test data', 'v' );
 
-		$this->msg( 'Adding attribute test data', 0 );
-
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 		$this->process( $this->getData() );
-
-		$this->status( 'done' );
 	}
 
 

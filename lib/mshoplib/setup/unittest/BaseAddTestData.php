@@ -6,20 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Provides basic methods
  */
-class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
+class BaseAddTestData extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -28,7 +28,7 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds product test data
 	 */
-	public function migrate()
+	public function up()
 	{
 	}
 
@@ -127,7 +127,7 @@ class BaseAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getManager( $domain )
 	{
-		return \Aimeos\MShop::create( $this->additional, $domain );
+		return \Aimeos\MShop::create( $this->context(), $domain );
 	}
 
 

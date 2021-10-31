@@ -7,21 +7,21 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds the coupon test data.
  */
-class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
+class CouponAddTestData extends Base
 {
 	/**
 	 * Adds coupon test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Adding coupon test data', 0 );
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->info( 'Adding coupon test data', 'v' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'coupon.php';
 
@@ -30,8 +30,6 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$this->addCouponData( $testdata );
-
-		$this->status( 'done' );
 	}
 
 
@@ -43,7 +41,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addCouponData( array $testdata )
 	{
-		$manager = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->additional, 'Standard' );
+		$manager = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context(), 'Standard' );
 		$codeManager = $manager->getSubmanager( 'code' );
 
 		foreach( $testdata['coupon'] ?? [] as $entry )

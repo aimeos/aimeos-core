@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds customer test data.
  */
-class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
+class CustomerAddTestData extends BaseAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['ProductAddTestData'];
 	}
@@ -29,16 +29,14 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	/**
 	 * Adds customer test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->context() );
 
-		$this->msg( 'Adding customer test data', 0 );
+		$this->info( 'Adding customer test data', 'v' );
 
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
-
-		$this->status( 'done' );
 	}
 
 
@@ -89,10 +87,10 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	protected function getManager( $domain )
 	{
 		if( $domain === 'customer' ) {
-			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Standard' );
+			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->context(), 'Standard' );
 		}
 
-		return \Aimeos\MShop::create( $this->additional, $domain );
+		return \Aimeos\MShop::create( $this->context(), $domain );
 	}
 
 

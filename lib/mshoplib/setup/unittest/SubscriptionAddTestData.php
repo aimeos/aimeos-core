@@ -6,20 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds subscription test data
  */
-class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
+class SubscriptionAddTestData extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['OrderAddTestData', 'SubscriptionMigratePeriod', 'SubscriptionMigrateProdcode'];
 	}
@@ -28,12 +28,10 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds subscription test data
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
-
-		$this->msg( 'Adding subscription test data', 0 );
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->info( 'Adding subscription test data', 'v' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'subscription.php';
@@ -43,8 +41,6 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$this->addData( $testdata );
-
-		$this->status( 'done' );
 	}
 
 
@@ -56,7 +52,7 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addData( array $testdata )
 	{
-		$subscriptionManager = \Aimeos\MShop\Subscription\Manager\Factory::create( $this->additional, 'Standard' );
+		$subscriptionManager = \Aimeos\MShop\Subscription\Manager\Factory::create( $this->context(), 'Standard' );
 
 		$subscriptionManager->begin();
 
@@ -90,7 +86,7 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getOrderProductItem( $key )
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->additional, 'Standard' )
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context(), 'Standard' )
 			->getSubManager( 'base', 'Standard' )->getSubManager( 'product', 'Standard' );
 
 		$parts = explode( '/', $key );

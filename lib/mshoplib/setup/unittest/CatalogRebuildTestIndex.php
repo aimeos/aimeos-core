@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Rebuilds the index.
  */
-class CatalogRebuildTestIndex extends \Aimeos\MW\Setup\Task\Base
+class CatalogRebuildTestIndex extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['AttributeAddTestData', 'ProductAddTestData', 'CatalogAddTestData', 'SupplierAddTestData'];
 	}
@@ -29,17 +29,15 @@ class CatalogRebuildTestIndex extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Rebuilds the index.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->context() );
 
-		$this->msg( 'Rebuilding index for test data', 0 );
+		$this->info( 'Rebuilding index for test data', 'v' );
 
-		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->additional );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context() );
 
 		$indexManager->rebuild();
 		$indexManager->optimize();
-
-		$this->status( 'done' );
 	}
 }

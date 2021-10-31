@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds price test data.
  */
-class PriceAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
+class PriceAddTestData extends BaseAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -29,16 +29,12 @@ class PriceAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	/**
 	 * Adds price test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		$this->info( 'Adding price test data', 'v' );
 
-		$this->msg( 'Adding price test data', 0 );
-
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 		$this->process( $this->getData() );
-
-		$this->status( 'done' );
 	}
 
 
@@ -68,7 +64,7 @@ class PriceAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	protected function getManager( $domain )
 	{
 		if( $domain === 'price' ) {
-			return \Aimeos\MShop\Price\Manager\Factory::create( $this->additional, 'Standard' );
+			return \Aimeos\MShop\Price\Manager\Factory::create( $this->context(), 'Standard' );
 		}
 
 		return parent::getManager( $domain );

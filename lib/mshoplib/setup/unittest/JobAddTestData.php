@@ -7,13 +7,13 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds admin job test data.
  */
-class JobAddTestData extends \Aimeos\MW\Setup\Task\Base
+class JobAddTestData extends Base
 {
 
 	/**
@@ -21,7 +21,7 @@ class JobAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -30,16 +30,14 @@ class JobAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds admin job test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->context() );
 
-		$this->msg( 'Adding admin test data', 0 );
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->info( 'Adding admin test data', 'v' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$this->addJobTestData();
-
-		$this->status( 'done' );
 	}
 
 
@@ -50,7 +48,7 @@ class JobAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addJobTestData()
 	{
-		$manager = \Aimeos\MAdmin\Job\Manager\Factory::create( $this->additional, 'Standard' );
+		$manager = \Aimeos\MAdmin\Job\Manager\Factory::create( $this->context(), 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'job.php';

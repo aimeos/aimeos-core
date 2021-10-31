@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds order test data.
  */
-class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
+class OrderAddTestData extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['CustomerAddTestData', 'ProductAddTestData', 'PluginAddTestData', 'ServiceAddTestData', 'StockAddTestData'];
 	}
@@ -29,15 +29,13 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds order test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		$this->info( 'Adding order test data', 'v' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 
-		$this->msg( 'Adding order test data', 0 );
-		$this->additional->setEditor( 'core:lib/mshoplib' );
-
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->additional, 'Standard' );
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->additional, 'Standard' );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context(), 'Standard' );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context(), 'Standard' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$search = $orderBaseManager->filter();
@@ -55,7 +53,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for order domain', $path ) );
 		}
 
-		$this->additional->setLocale( $this->additional->getLocale()->setCurrencyId( 'EUR' ) );
+		$this->context()->setLocale( $this->context()->getLocale()->setCurrencyId( 'EUR' ) );
 
 		$bases = $this->addOrderBaseData( $localeManager, $orderBaseManager, $testdata );
 		$bases['items'] = $this->addOrderBaseProductData( $orderBaseManager, $bases, $testdata );
@@ -66,12 +64,10 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$orderBaseManager->save( $baseItem, false );
 		}
 
-		$this->additional->setLocale( $this->additional->getLocale()->setCurrencyId( null ) );
+		$this->context()->setLocale( $this->context()->getLocale()->setCurrencyId( null ) );
 
 		$this->addOrderBaseCouponData( $testdata );
 		$this->addOrderData( $orderManager, $bases['ids'], $testdata );
-
-		$this->status( 'done' );
 	}
 
 
@@ -102,7 +98,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$bases['items'][$key]->setCustomerId( $customerIds[$dataset['customerid']] );
 
 			$locale->setId( null );
-			$locale->setSiteId( $this->additional->getLocale()->getSiteId() );
+			$locale->setSiteId( $this->context()->getLocale()->getSiteId() );
 			$locale->setLanguageId( $dataset['langid'] );
 			$locale->setCurrencyId( $dataset['currencyid'] );
 			$bases['items'][$key]->setLocale( $locale );
@@ -175,7 +171,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addOrderBaseCouponData( array $testdata )
 	{
-		$order = \Aimeos\MShop\Order\Manager\Factory::create( $this->additional, 'Standard' );
+		$order = \Aimeos\MShop\Order\Manager\Factory::create( $this->context(), 'Standard' );
 		$orderBase = $order->getSubManager( 'base', 'Standard' );
 		$orderBaseProd = $orderBase->getSubManager( 'product', 'Standard' );
 		$orderBaseCoupon = $orderBase->getSubManager( 'coupon', 'Standard' );
@@ -255,7 +251,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$servIds = $this->getServiceIds( $testdata );
 		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service', 'Standard' );
 		$orderBaseServiceAttrManager = $orderBaseServiceManager->getSubManager( 'attribute', 'Standard' );
-		$priceManager = \Aimeos\MShop::create( $this->additional, 'price' );
+		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
 		$ordServ = $orderBaseServiceManager->create();
 
 		$orderBaseManager->begin();
@@ -319,7 +315,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$products = $this->getProductItems( $testdata );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product', 'Standard' );
 		$orderBaseProductAttrManager = $orderBaseProductManager->getSubManager( 'attribute', 'Standard' );
-		$priceManager = \Aimeos\MShop::create( $this->additional, 'price' );
+		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
 
 		$orderBaseManager->begin();
 
@@ -395,7 +391,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		array $testdata, array $ordProds, array $products )
 	{
 		$attrCodes = [];
-		$attributeManager = \Aimeos\MShop::create( $this->additional, 'attribute' );
+		$attributeManager = \Aimeos\MShop::create( $this->context(), 'attribute' );
 		$attributes = $attributeManager->search( $attributeManager->filter() );
 
 		foreach( $attributes as $attrItem ) {
@@ -541,7 +537,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$customercodes[] = $dataset['customerid'];
 		}
 
-		$customerManager = \Aimeos\MShop::create( $this->additional, 'customer' );
+		$customerManager = \Aimeos\MShop::create( $this->context(), 'customer' );
 		$search = $customerManager->filter();
 		$search->setConditions( $search->compare( '==', 'customer.code', $customercodes ) );
 
@@ -562,7 +558,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function getProductItems( array $testdata )
 	{
 		$codes = $items = [];
-		$productManager = \Aimeos\MShop::create( $this->additional, 'product' );
+		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
 
 		foreach( $testdata['order/base/product'] as $key => $dataset )
 		{
@@ -592,7 +588,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function getServiceIds( array $testdata )
 	{
 		$services = $servIds = [];
-		$serviceManager = \Aimeos\MShop::create( $this->additional, 'service' );
+		$serviceManager = \Aimeos\MShop::create( $this->context(), 'service' );
 
 		foreach( $testdata['order/base/service'] as $key => $dataset )
 		{

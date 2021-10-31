@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds admin log test data.
  */
-class LogAddTestData extends \Aimeos\MW\Setup\Task\Base
+class LogAddTestData extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -29,16 +29,14 @@ class LogAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds admin log test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->context() );
 
-		$this->msg( 'Adding admin log test data', 0 );
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->info( 'Adding admin log test data', 'v' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$this->addLogTestData();
-
-		$this->status( 'done' );
 	}
 
 
@@ -49,7 +47,7 @@ class LogAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addLogTestData()
 	{
-		$manager = \Aimeos\MAdmin\Log\Manager\Factory::create( $this->additional, 'Standard' );
+		$manager = \Aimeos\MAdmin\Log\Manager\Factory::create( $this->context(), 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'log.php';

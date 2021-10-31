@@ -6,20 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds attribute test data and all items from other domains.
  */
-class TextAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
+class TextAddTestData extends BaseAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -28,16 +28,12 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	/**
 	 * Adds text test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		$this->info( 'Adding text test data', 'v' );
 
-		$this->msg( 'Adding text test data', 0 );
-
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 		$this->process( $this->getData() );
-
-		$this->status( 'done' );
 	}
 
 
@@ -67,7 +63,7 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	protected function getManager( $domain )
 	{
 		if( $domain === 'text' ) {
-			return \Aimeos\MShop\Text\Manager\Factory::create( $this->additional, 'Standard' );
+			return \Aimeos\MShop\Text\Manager\Factory::create( $this->context(), 'Standard' );
 		}
 
 		return parent::getManager( $domain );

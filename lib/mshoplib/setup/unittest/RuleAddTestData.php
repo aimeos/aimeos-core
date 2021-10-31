@@ -6,20 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds rule test data and all items from other domains.
  */
-class RuleAddTestData extends \Aimeos\MW\Setup\Task\Base
+class RuleAddTestData extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -28,16 +28,12 @@ class RuleAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds rule test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
-
-		$this->msg( 'Adding rule test data', 0 );
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->info( 'Adding rule test data', 'v' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$this->addRuleData();
-
-		$this->status( 'done' );
 	}
 
 
@@ -48,7 +44,7 @@ class RuleAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addRuleData()
 	{
-		$ruleManager = \Aimeos\MShop\Rule\Manager\Factory::create( $this->additional, 'Standard' );
+		$ruleManager = \Aimeos\MShop\Rule\Manager\Factory::create( $this->context(), 'Standard' );
 		$ruleTypeManager = $ruleManager->getSubManager( 'type', 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;

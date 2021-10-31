@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds locale test data.
  */
-class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
+class LocaleAddTestData extends MShopAddLocaleData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopAddLocaleLangCurData'];
 	}
@@ -31,7 +31,7 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
 		return ['MShopAddLocaleData'];
 	}
@@ -40,19 +40,17 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 	/**
 	 * Adds locale test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->context() );
 
-		$this->msg( 'Adding test data for MShop locale domain', 0 );
-		$this->status( '' );
-
+		$this->info( 'Adding test data for MShop locale domain', 'v' );
 
 		// Set editor for further tasks
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 
-		if( $this->additional->getConfig()->get( 'setup/site' ) === 'unittest' )
+		if( $this->context()->getConfig()->get( 'setup/site' ) === 'unittest' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
 			$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';
@@ -61,7 +59,7 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No data file "%1$s" found', $filename ) );
 			}
 
-			$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->additional );
+			$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context() );
 
 			$this->cleanupSites( $localeManager );
 
@@ -126,7 +124,7 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 
 		foreach( array_reverse( $sites ) as $site )
 		{
-			$this->additional->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
+			$this->context()->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
 			$localeSiteManager->delete( $site->getId() );
 		}
 	}

@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds tag test data
  */
-class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
+class TagAddTestData extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -29,12 +29,10 @@ class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds product test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
-
-		$this->msg( 'Adding tag test data', 0 );
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->info( 'Adding tag test data', 'v' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'tag.php';
@@ -44,8 +42,6 @@ class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$this->addTagData( $testdata );
-
-		$this->status( 'done' );
 	}
 
 	/**
@@ -56,7 +52,7 @@ class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addTagData( array $testdata )
 	{
-		$tagManager = \Aimeos\MShop\Tag\Manager\Factory::create( $this->additional, 'Standard' );
+		$tagManager = \Aimeos\MShop\Tag\Manager\Factory::create( $this->context(), 'Standard' );
 		$tagTypeManager = $tagManager->getSubManager( 'type', 'Standard' );
 
 		$tagManager->begin();

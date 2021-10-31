@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds plugin test data and all items from other domains.
  */
-class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
+class PluginAddTestData extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -29,16 +29,12 @@ class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds plugin test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
-
-		$this->msg( 'Adding plugin test data', 0 );
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->info( 'Adding plugin test data', 'v' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$this->addPluginData();
-
-		$this->status( 'done' );
 	}
 
 
@@ -49,7 +45,7 @@ class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addPluginData()
 	{
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $this->additional, 'Standard' );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $this->context(), 'Standard' );
 		$pluginTypeManager = $pluginManager->getSubManager( 'type', 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;

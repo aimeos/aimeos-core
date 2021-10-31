@@ -6,20 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds supplier test data and all items from other domains.
  */
-class SupplierAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
+class SupplierAddTestData extends BaseAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale', 'ProductAddTestData'];
 	}
@@ -28,16 +28,12 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	/**
 	 * Adds supplier test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		$this->info( 'Adding supplier test data', 'v' );
 
-		$this->msg( 'Adding supplier test data', 0 );
-
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 		$this->process( $this->getData() );
-
-		$this->status( 'done' );
 	}
 
 
@@ -67,7 +63,7 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	protected function getManager( $domain )
 	{
 		if( $domain === 'supplier' ) {
-			return \Aimeos\MShop\Supplier\Manager\Factory::create( $this->additional, 'Standard' );
+			return \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context(), 'Standard' );
 		}
 
 		return parent::getManager( $domain );

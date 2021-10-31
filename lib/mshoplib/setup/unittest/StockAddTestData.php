@@ -7,20 +7,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds stock test data.
  */
-class StockAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
+class StockAddTestData extends BaseAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['MShopSetLocale', 'ProductAddTestData'];
 	}
@@ -29,18 +29,14 @@ class StockAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	/**
 	 * Adds product stock test data.
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
-
-		$this->msg( 'Adding stock test data', 0 );
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->info( 'Adding stock test data', 'v' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$testdata = $this->getData();
 		$this->addTypeItems( $testdata, ['stock/type'] );
 		$this->createData( $testdata );
-
-		$this->status( 'done' );
 	}
 
 
@@ -54,7 +50,7 @@ class StockAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	{
 		foreach( $domains as $domain )
 		{
-			$manager = \Aimeos\MShop::create( $this->additional, $domain );
+			$manager = \Aimeos\MShop::create( $this->context(), $domain );
 
 			foreach( $testdata[$domain] as $key => $entry )
 			{
@@ -119,11 +115,11 @@ class StockAddTestData extends \Aimeos\MW\Setup\Task\BaseAddTestData
 	protected function getManager( $domain )
 	{
 		if( $domain === 'product' ) {
-			return \Aimeos\MShop\Product\Manager\Factory::create( $this->additional, 'Standard' );
+			return \Aimeos\MShop\Product\Manager\Factory::create( $this->context(), 'Standard' );
 		}
 
 		if( $domain === 'stock' ) {
-			return \Aimeos\MShop\Stock\Manager\Factory::create( $this->additional, 'Standard' );
+			return \Aimeos\MShop\Stock\Manager\Factory::create( $this->context(), 'Standard' );
 		}
 
 		return parent::getManager( $domain );

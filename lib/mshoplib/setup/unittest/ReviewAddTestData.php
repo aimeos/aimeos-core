@@ -6,20 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds review test data
  */
-class ReviewAddTestData extends \Aimeos\MW\Setup\Task\Base
+class ReviewAddTestData extends Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['CustomerAddTestData', 'ProductAddTestData', 'OrderAddTestData'];
 	}
@@ -28,12 +28,10 @@ class ReviewAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds review test data
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
-
-		$this->msg( 'Adding review test data', 0 );
-		$this->additional->setEditor( 'core:lib/mshoplib' );
+		$this->info( 'Adding review test data', 'v' );
+		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'review.php';
@@ -43,8 +41,6 @@ class ReviewAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$this->addData( $testdata );
-
-		$this->status( 'done' );
 	}
 
 
@@ -56,14 +52,14 @@ class ReviewAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addData( array $testdata )
 	{
-		$manager = \Aimeos\MShop\Review\Manager\Factory::create( $this->additional, 'Standard' );
-		$custManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Standard' );
+		$manager = \Aimeos\MShop\Review\Manager\Factory::create( $this->context(), 'Standard' );
+		$custManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context(), 'Standard' );
 
 		$manager->begin();
 
 		foreach( $testdata['review'] as $domain => $list )
 		{
-			$domainManager = \Aimeos\MShop::create( $this->additional, $domain );
+			$domainManager = \Aimeos\MShop::create( $this->context(), $domain );
 
 			foreach( $list as $dataset )
 			{
@@ -92,7 +88,7 @@ class ReviewAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getOrderProductItem( $key )
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->additional, 'Standard' )
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context(), 'Standard' )
 			->getSubManager( 'base', 'Standard' )->getSubManager( 'product', 'Standard' );
 
 		$parts = explode( '/', $key );
