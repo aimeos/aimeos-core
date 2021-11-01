@@ -23,7 +23,7 @@ class JobAddTestData extends Base
 	 */
 	public function after() : array
 	{
-		return ['MShopSetLocale'];
+		return ['Job', 'MShopSetLocale'];
 	}
 
 

@@ -16,6 +16,17 @@ namespace Aimeos\Upscheme\Task;
 class CouponAddTestData extends Base
 {
 	/**
+	 * Returns the list of task names which this task depends on.
+	 *
+	 * @return string[] List of task names
+	 */
+	public function after() : array
+	{
+		return ['Coupon', 'Media', 'MShopSetLocale', 'ProductAddTestData'];
+	}
+
+
+	/**
 	 * Adds coupon test data.
 	 */
 	public function up()

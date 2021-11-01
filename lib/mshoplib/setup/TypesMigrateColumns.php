@@ -129,7 +129,9 @@ class TypesMigrateColumns extends Base
 		{
 			$this->info( sprintf( 'Checking table "%1$s": ', $name ), 'vv', 2 );
 
-			$db->table( $name )->type()->default( '' )->up();
+			if( $db->hasTable( $name ) ) {
+				$db->table( $name )->type()->default( '' )->up();
+			}
 		}
 	}
 

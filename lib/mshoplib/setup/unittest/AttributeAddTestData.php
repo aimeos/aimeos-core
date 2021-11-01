@@ -22,7 +22,7 @@ class AttributeAddTestData extends BaseAddTestData
 	 */
 	public function after() : array
 	{
-		return ['MShopSetLocale'];
+		return ['Attribute', 'Media', 'Price', 'Text', 'MShopSetLocale'];
 	}
 
 

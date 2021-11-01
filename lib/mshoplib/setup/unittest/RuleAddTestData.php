@@ -21,7 +21,7 @@ class RuleAddTestData extends Base
 	 */
 	public function after() : array
 	{
-		return ['MShopSetLocale'];
+		return ['Rule', 'MShopSetLocale'];
 	}
 
 

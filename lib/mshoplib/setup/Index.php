@@ -11,6 +11,12 @@ namespace Aimeos\Upscheme\Task;
 
 class Index extends Base
 {
+	public function after() : array
+	{
+		return ['Product'];
+	}
+
+
 	public function up()
 	{
 		$this->info( 'Creating index schema', 'v' );

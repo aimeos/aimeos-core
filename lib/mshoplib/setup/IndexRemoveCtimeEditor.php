@@ -11,15 +11,9 @@ namespace Aimeos\Upscheme\Task;
 
 class IndexRemoveCtimeEditor extends Base
 {
-	public function after() : array
-	{
-		return ['Index'];
-	}
-
-
 	public function before() : array
 	{
-		return ['MShopSetLocale'];
+		return ['Index'];
 	}
 
 

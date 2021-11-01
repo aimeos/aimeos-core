@@ -22,7 +22,11 @@ class LocaleAddTestData extends MShopAddLocaleData
 	 */
 	public function after() : array
 	{
-		return ['MShopAddLocaleLangCurData'];
+		return [
+			'Attribute', 'Cache', 'Catalog', 'Coupon', 'Customer', 'Index', 'Job', 'Locale', 'Log', 'Media', 'Order',
+			'Plugin', 'Price', 'Product', 'Review', 'Rule', 'Service', 'Stock', 'Subscription', 'Supplier', 'Tag', 'Text',
+			'MShopAddLocaleLangCurData'
+		];
 	}
 
 
@@ -33,7 +37,7 @@ class LocaleAddTestData extends MShopAddLocaleData
 	 */
 	public function before() : array
 	{
-		return ['MShopAddLocaleData'];
+		return ['MShopAddLocaleData', 'MShopSetLocale'];
 	}
 
 

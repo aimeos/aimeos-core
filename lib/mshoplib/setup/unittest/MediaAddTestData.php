@@ -22,7 +22,7 @@ class MediaAddTestData extends BaseAddTestData
 	 */
 	public function after() : array
 	{
-		return ['MShopSetLocale'];
+		return ['Media', 'MShopSetLocale'];
 	}
 
 

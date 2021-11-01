@@ -21,7 +21,7 @@ class TextAddTestData extends BaseAddTestData
 	 */
 	public function after() : array
 	{
-		return ['MShopSetLocale'];
+		return ['Text', 'MShopSetLocale'];
 	}
 
 

@@ -22,7 +22,7 @@ class CatalogAddTestData extends BaseAddTestData
 	 */
 	public function after() : array
 	{
-		return ['MShopSetLocale', 'ProductAddTestData'];
+		return ['Catalog', 'Media', 'Text', 'MShopSetLocale', 'ProductAddTestData'];
 	}
 
 

@@ -22,7 +22,7 @@ class StockAddTestData extends BaseAddTestData
 	 */
 	public function after() : array
 	{
-		return ['MShopSetLocale', 'ProductAddTestData'];
+		return ['Stock', 'MShopSetLocale', 'ProductAddTestData'];
 	}
 
 

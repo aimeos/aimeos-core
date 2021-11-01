@@ -22,7 +22,7 @@ class ServiceAddTestData extends BaseAddTestData
 	 */
 	public function after() : array
 	{
-		return ['MShopSetLocale', 'CustomerAddTestData'];
+		return ['Service', 'Media', 'Price', 'Text', 'MShopSetLocale', 'CustomerAddTestData'];
 	}
 
 

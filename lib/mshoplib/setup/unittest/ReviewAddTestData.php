@@ -21,7 +21,7 @@ class ReviewAddTestData extends Base
 	 */
 	public function after() : array
 	{
-		return ['CustomerAddTestData', 'ProductAddTestData', 'OrderAddTestData'];
+		return ['Review', 'CustomerAddTestData', 'ProductAddTestData', 'OrderAddTestData'];
 	}
 
 

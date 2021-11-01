@@ -22,7 +22,7 @@ class PluginAddTestData extends Base
 	 */
 	public function after() : array
 	{
-		return ['MShopSetLocale'];
+		return ['Plugin', 'MShopSetLocale'];
 	}
 
 

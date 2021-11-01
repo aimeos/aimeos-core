@@ -22,7 +22,7 @@ class PriceAddTestData extends BaseAddTestData
 	 */
 	public function after() : array
 	{
-		return ['MShopSetLocale'];
+		return ['Price', 'MShopSetLocale'];
 	}
 
 

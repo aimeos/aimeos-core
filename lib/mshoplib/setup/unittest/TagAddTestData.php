@@ -22,7 +22,7 @@ class TagAddTestData extends Base
 	 */
 	public function after() : array
 	{
-		return ['MShopSetLocale'];
+		return ['Tag', 'MShopSetLocale'];
 	}
 
 

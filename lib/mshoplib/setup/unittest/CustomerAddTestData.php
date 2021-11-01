@@ -22,7 +22,7 @@ class CustomerAddTestData extends BaseAddTestData
 	 */
 	public function after() : array
 	{
-		return ['ProductAddTestData'];
+		return ['Customer', 'Text', 'ProductAddTestData'];
 	}
 
 

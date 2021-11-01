@@ -22,7 +22,7 @@ class OrderAddTestData extends Base
 	 */
 	public function after() : array
 	{
-		return ['CustomerAddTestData', 'ProductAddTestData', 'PluginAddTestData', 'ServiceAddTestData', 'StockAddTestData'];
+		return ['Order', 'CustomerAddTestData', 'ProductAddTestData', 'PluginAddTestData', 'ServiceAddTestData', 'StockAddTestData'];
 	}
 
 
