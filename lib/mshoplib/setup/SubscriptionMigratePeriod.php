@@ -19,11 +19,9 @@ class SubscriptionMigratePeriod extends Base
 
 	public function up()
 	{
-		$dbdomain = 'db-order';
-		$db = $this->db( $dbdomain );
-
 		$this->info( 'Updating period count in subscriptions', 'v' );
 
+		$dbdomain = 'db-order';
 		$dbm = $this->context()->db();
 
 		$select = 'SELECT "id", "interval", "end", "ctime" FROM "mshop_subscription" WHERE "period" = 0';

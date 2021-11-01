@@ -45,14 +45,14 @@ return array(
 			$table->string( 'city', 200 );
 			$table->string( 'state', 200 );
 			$table->string( 'langid', 5 )->null( true );
-			$table->string( 'countryid', 2 )->null( true );;
+			$table->string( 'countryid', 2 )->null( true );
 			$table->string( 'telephone', 32 );
 			$table->string( 'telefax', 32 );
 			$table->string( 'email' );
 			$table->string( 'website' );
-			$table->float( 'longitude' )->null( true );;
-			$table->float( 'latitude' )->null( true );;
-			$table->date( 'birthday' )->null( true );;
+			$table->float( 'longitude' )->null( true );
+			$table->float( 'latitude' )->null( true );
+			$table->date( 'birthday' )->null( true );
 			$table->smallint( 'pos' );
 			$table->meta();
 

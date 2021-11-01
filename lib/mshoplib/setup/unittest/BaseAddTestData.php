@@ -125,7 +125,7 @@ class BaseAddTestData extends Base
 	 * @param string $domain Domain name of the manager
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager( $domain )
+	protected function getManager( string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return \Aimeos\MShop::create( $this->context(), $domain );
 	}
@@ -134,10 +134,10 @@ class BaseAddTestData extends Base
 	/**
 	 * Returns the items from the given domains
 	 *
-	 * @param array $domain Domain names
+	 * @param string $domain Domain name
 	 * @return array Associative list of label/item pairs
 	 */
-	protected function getRefItems( $domain )
+	protected function getRefItems( string $domain ) : array
 	{
 		$list = [];
 

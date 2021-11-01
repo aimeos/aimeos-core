@@ -92,7 +92,7 @@ class TablesMigrateSiteid extends Base
 	{
 		$db = $this->db( 'db-locale' );
 
-		if( $db->hasColumn( 'mshop_locale_site', 'siteid' ) ) {
+		if( !$db->hasTable( 'mshop_locale_site' ) || $db->hasColumn( 'mshop_locale_site', 'siteid' ) ) {
 			return;
 		}
 
@@ -111,7 +111,6 @@ class TablesMigrateSiteid extends Base
 
 	protected function process( array $resources )
 	{
-		$db = $this->db( 'db-locale' );
 		$sites = $this->getSites();
 
 		foreach( $resources as $rname => $tables )
@@ -137,7 +136,7 @@ class TablesMigrateSiteid extends Base
 
 					foreach( $sites as $siteid => $site )
 					{
-						$db->stmt()->update( $table )->set( $colname . ' = ?' )
+						$db->stmt()->update( $table )->set( $colname, '?' )
 							->where( $colname . ' = ?' )->orWhere( $colname . " = ''" )
 							->setParameters( [$site, $siteid ] )
 							->execute();

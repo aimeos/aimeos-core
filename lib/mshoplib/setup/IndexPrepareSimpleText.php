@@ -27,6 +27,6 @@ class IndexPrepareSimpleText extends Base
 
 		$this->info( 'Prepare mshop_index_text table for simplification', 'v' );
 
-		$this->dropTable( 'mshop_index_text' );
+		$db->dropTable( 'mshop_index_text' );
 	}
 }

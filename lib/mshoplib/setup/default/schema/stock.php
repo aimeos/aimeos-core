@@ -17,7 +17,7 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->code();
 			$table->string( 'label' );
-			$table->int( 'pos', 'integer', ['default' => 0] );
+			$table->int( 'pos' )->default( 0 );
 			$table->smallint( 'status' );
 			$table->meta();
 

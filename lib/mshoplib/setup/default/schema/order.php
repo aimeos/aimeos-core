@@ -106,7 +106,7 @@ return array(
 			$table->decimal( 'rebate', 12 );
 			$table->decimal( 'tax', 14, 4 );
 			$table->string( 'taxrate' );
-			$table->smallint( 'taxflag', 'smallint', [] );
+			$table->smallint( 'taxflag' );
 			$table->int( 'flags' );
 			$table->int( 'pos' );
 			$table->smallint( 'statuspayment' )->null( true );
@@ -136,7 +136,7 @@ return array(
 			$table->code()->length( 255 );
 			$table->string( 'name' );
 			$table->text( 'value' );
-			$table->float( 'quantity', 'float', [] );
+			$table->float( 'quantity' );
 			$table->meta();
 
 			$table->unique( ['ordprodid', 'attrid', 'type', 'code'], 'unq_msordbaprat_oid_aid_ty_cd' );
@@ -158,10 +158,10 @@ return array(
 			$table->string( 'name' );
 			$table->string( 'mediaurl' );
 			$table->string( 'currencyid', 3 );
-			$table->string( 'price', 12)->null( true );
-			$table->string( 'costs', 12 );
-			$table->string( 'rebate', 12 );
-			$table->string( 'tax', 14, 4 );
+			$table->decimal( 'price', 12)->null( true );
+			$table->decimal( 'costs', 12 );
+			$table->decimal( 'rebate', 12 );
+			$table->decimal( 'tax', 14, 4 );
 			$table->string( 'taxrate' );
 			$table->smallint( 'taxflag' )->default( 1 );
 			$table->int( 'pos' )->default( 0 );

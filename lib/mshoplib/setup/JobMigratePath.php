@@ -28,7 +28,7 @@ class JobMigratePath extends Base
 		$this->info( 'Migrating path in job table', 'v' );
 
 		$dbm = $this->context()->getDatabaseManager();
-		$conn = $this->acquire( 'db-job' );
+		$conn = $dbm->acquire( 'db-job' );
 
 		$select = 'SELECT "id", "result" FROM "madmin_job" WHERE "result" LIKE \'{%\'';
 		$update = 'UPDATE "madmin_job" SET "path" = ? WHERE "id" = ?';
