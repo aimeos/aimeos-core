@@ -63,7 +63,7 @@ class CatalogAddTestData extends BaseAddTestData
 	 * @param string $domain Domain name of the manager
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager( $domain )
+	protected function getManager( string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( $domain === 'catalog' ) {
 			return \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context(), 'Standard' );

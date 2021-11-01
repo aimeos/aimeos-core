@@ -60,7 +60,7 @@ class SupplierAddTestData extends BaseAddTestData
 	 * @param string $domain Domain name of the manager
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager( $domain )
+	protected function getManager( string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( $domain === 'supplier' ) {
 			return \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context(), 'Standard' );
