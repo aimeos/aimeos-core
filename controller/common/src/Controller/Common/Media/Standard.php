@@ -387,7 +387,7 @@ class Standard
 
 		$previews = $item->getPreviews();
 		// don't delete first (smallest) image because it's referenced in past orders
-		if ( 'product' === $item->getDomain() ) {
+		if( 'product' === $item->getDomain() ) {
 			$previews = array_slice( $previews, 1 );
 		}
 
