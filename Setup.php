@@ -199,7 +199,12 @@ class Setup
 	{
 		\Aimeos\Upscheme\Up::macro( 'connect', function( array $cfg ) {
 
-			$cfg['driver'] = $cfg['adapter'] !== 'mysql' ? $cfg['adapter'] : 'pdo_mysql';
+			switch( $cfg['adapter'] )
+			{
+				case 'mysql': $cfg['driver'] = 'pdo_mysql'; break;
+				case 'pgsql': $cfg['driver'] = 'pdo_pgsql'; break;
+				default: $cfg['driver'] = $cfg['adapter'];
+			}
 
 			if( isset( $cfg['database'] ) ) {
 				$cfg['dbname'] = $cfg['database'];
@@ -208,6 +213,8 @@ class Setup
 			if( isset( $cfg['username'] ) ) {
 				$cfg['user'] = $cfg['username'];
 			}
+
+			unset( $cfg['adapter'], $cfg['database'], $cfg['username'] );
 
 			return \Doctrine\DBAL\DriverManager::getConnection( $cfg );
 		} );
