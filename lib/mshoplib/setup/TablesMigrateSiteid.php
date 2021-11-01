@@ -138,7 +138,7 @@ class TablesMigrateSiteid extends Base
 					{
 						$db->stmt()->update( $table )->set( $colname, '?' )
 							->where( $colname . ' = ?' )->orWhere( $colname . " = ''" )
-							->setParameters( [$site, $siteid ] )
+							->setParameters( [$site, $siteid] )
 							->execute();
 					}
 				}
