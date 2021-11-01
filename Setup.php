@@ -203,6 +203,7 @@ class Setup
 			{
 				case 'mysql': $cfg['driver'] = 'pdo_mysql'; break;
 				case 'pgsql': $cfg['driver'] = 'pdo_pgsql'; break;
+				case 'sqlsrv': $cfg['driver'] = 'pdo_sqlsrv'; break;
 				default: $cfg['driver'] = $cfg['adapter'];
 			}
 
