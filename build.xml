@@ -9,7 +9,7 @@
 
 	<target name="setup" description="Sets up database incl. unit test data">
 		<echo msg="Setting up test database" />
-		<exec command="php ${coredir}/up.php unittest unittest" checkreturn="true" logoutput="true" passthru="true" />
+		<exec command="php ${coredir}/up.php -vvv unittest unittest" checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="setupperf" description="Sets up database incl. performance test data">

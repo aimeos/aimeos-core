@@ -63,6 +63,7 @@ function getOptions( array &$params )
 		elseif( $option[0] === '-' )
 		{
 			$options[$option[1]] = substr( $option, 1 );
+			unset( $params[$key] );
 		}
 	}
 
