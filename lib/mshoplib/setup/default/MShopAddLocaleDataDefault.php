@@ -55,7 +55,7 @@ class MShopAddLocaleDataDefault extends MShopAddLocaleData
 			$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';
 
 			if( ( $data = include( $filename ) ) == false ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No data file "%1$s" found', $filename ) );
+				throw new \RuntimeException( sprintf( 'No data file "%1$s" found', $filename ) );
 			}
 
 			$siteIds = [];

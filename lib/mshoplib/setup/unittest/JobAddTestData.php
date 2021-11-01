@@ -44,7 +44,7 @@ class JobAddTestData extends Base
 	/**
 	 * Adds the job test data.
 	 *
-	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
+	 * @throws \RuntimeException If a required ID is not available
 	 */
 	private function addJobTestData()
 	{
@@ -54,7 +54,7 @@ class JobAddTestData extends Base
 		$path = __DIR__ . $ds . 'data' . $ds . 'job.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for job domain', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for job domain', $path ) );
 		}
 
 		foreach( $testdata['job'] as $dataset ) {

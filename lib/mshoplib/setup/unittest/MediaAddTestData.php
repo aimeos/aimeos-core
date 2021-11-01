@@ -50,7 +50,7 @@ class MediaAddTestData extends BaseAddTestData
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'media.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for media domain', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for media domain', $path ) );
 		}
 
 		return $testdata;

@@ -39,7 +39,7 @@ class MShopAddLocaleLangCurData extends MShopAddLocaleData
 		$filename = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'language.php';
 
 		if( ( $data = include( $filename ) ) == false ) {
-			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No data file "%1$s" found', $filename ) );
+			throw new \RuntimeException( sprintf( 'No data file "%1$s" found', $filename ) );
 		}
 
 		if( isset( $data['locale/language'] ) ) {
@@ -50,7 +50,7 @@ class MShopAddLocaleLangCurData extends MShopAddLocaleData
 		$filename = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'currency.php';
 
 		if( ( $data = include( $filename ) ) == false ) {
-			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No data file "%1$s" found', $filename ) );
+			throw new \RuntimeException( sprintf( 'No data file "%1$s" found', $filename ) );
 		}
 
 		if( isset( $data['locale/currency'] ) ) {

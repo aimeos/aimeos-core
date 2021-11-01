@@ -48,7 +48,7 @@ class PriceAddTestData extends BaseAddTestData
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'price.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for price domain', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for price domain', $path ) );
 		}
 
 		return $testdata;

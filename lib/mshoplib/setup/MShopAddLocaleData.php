@@ -207,7 +207,7 @@ class MShopAddLocaleData extends Base
 		foreach( $data as $key => $dataset )
 		{
 			if( !isset( $siteIds[$dataset['siteid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No ID for site for key "%1$s" found', $dataset['siteid'] ) );
+				throw new \RuntimeException( sprintf( 'No ID for site for key "%1$s" found', $dataset['siteid'] ) );
 			}
 
 			$localeItem->setId( null );

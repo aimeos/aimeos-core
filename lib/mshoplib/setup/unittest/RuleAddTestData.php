@@ -40,7 +40,7 @@ class RuleAddTestData extends Base
 	/**
 	 * Adds the rule test data.
 	 *
-	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
+	 * @throws \RuntimeException If no type ID is found
 	 */
 	private function addRuleData()
 	{
@@ -51,7 +51,7 @@ class RuleAddTestData extends Base
 		$path = __DIR__ . $ds . 'data' . $ds . 'rule.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for rule domain', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for rule domain', $path ) );
 		}
 
 		$ruleManager->begin();

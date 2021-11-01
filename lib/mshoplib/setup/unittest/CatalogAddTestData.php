@@ -50,7 +50,7 @@ class CatalogAddTestData extends BaseAddTestData
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'catalog.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for catalog domain', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for catalog domain', $path ) );
 		}
 
 		return $testdata;
@@ -78,7 +78,6 @@ class CatalogAddTestData extends BaseAddTestData
 	 *
 	 * @param array $testdata Associative list of key/list pairs
 	 * @param string|null $parentId ID of parent category or null for root category
-	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	protected function process( array $testdata, $parentId = null )
 	{

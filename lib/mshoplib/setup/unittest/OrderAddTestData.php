@@ -50,7 +50,7 @@ class OrderAddTestData extends Base
 		$path = __DIR__ . $ds . 'data' . $ds . 'order.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for order domain', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for order domain', $path ) );
 		}
 
 		$this->context()->setLocale( $this->context()->getLocale()->setCurrencyId( 'EUR' ) );
@@ -77,7 +77,6 @@ class OrderAddTestData extends Base
 	 * @param \Aimeos\MShop\Common\Manager\Iface $localeManager Locale manager
 	 * @param \Aimeos\MShop\Common\Manager\Iface $orderBaseManager Order base manager
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
 	protected function addOrderBaseData( \Aimeos\MShop\Common\Manager\Iface $localeManager,
 		\Aimeos\MShop\Common\Manager\Iface $orderBaseManager, array $testdata )
@@ -129,7 +128,7 @@ class OrderAddTestData extends Base
 		foreach( $testdata['order/base/address'] as $dataset )
 		{
 			if( !isset( $bases['ids'][$dataset['baseid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base ID found for "%1$s"', $dataset['baseid'] ) );
+				throw new \RuntimeException( sprintf( 'No base ID found for "%1$s"', $dataset['baseid'] ) );
 			}
 
 			$orderAddr->setId( null );
@@ -167,7 +166,7 @@ class OrderAddTestData extends Base
 	 * Adds the order coupon test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
+	 * @throws \RuntimeException If a required ID is not available
 	 */
 	private function addOrderBaseCouponData( array $testdata )
 	{
@@ -184,7 +183,7 @@ class OrderAddTestData extends Base
 			$exp = explode( '/', $dataset['ordprodid'] );
 
 			if( count( $exp ) != 3 ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ordprod are set wrong "%1$s"', $dataset ) );
+				throw new \RuntimeException( sprintf( 'Some keys for ordprod are set wrong "%1$s"', $dataset ) );
 			}
 
 			$prodcode[$exp[0]] = $exp[0];
@@ -218,11 +217,11 @@ class OrderAddTestData extends Base
 		foreach( $testdata['order/base/coupon'] as $key => $dataset )
 		{
 			if( !isset( $orderBaseIds[$dataset['baseid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No oder base ID found for "%1$s"', $dataset['baseid'] ) );
+				throw new \RuntimeException( sprintf( 'No oder base ID found for "%1$s"', $dataset['baseid'] ) );
 			}
 
 			if( !isset( $ordProdIds[$dataset['ordprodid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No order base product ID found for "%1$s"', $dataset['ordprodid'] ) );
+				throw new \RuntimeException( sprintf( 'No order base product ID found for "%1$s"', $dataset['ordprodid'] ) );
 			}
 
 			$orderCoupon->setId( null );
@@ -242,7 +241,7 @@ class OrderAddTestData extends Base
 	 * @param array $bases Associative list of key/list pairs
 	 * @param array $testdata Associative list of key/list pairs
 	 * @return array Associative list of enhanced order base items
-	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
+	 * @throws \RuntimeException If no type ID is found
 	 */
 	protected function addOrderBaseServiceData( \Aimeos\MShop\Common\Manager\Iface $orderBaseManager,
 		array $bases, array $testdata )
@@ -259,11 +258,11 @@ class OrderAddTestData extends Base
 		foreach( $testdata['order/base/service'] as $key => $dataset )
 		{
 			if( !isset( $bases['ids'][$dataset['baseid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base ID found for "%1$s" in order base serive data', $dataset['baseid'] ) );
+				throw new \RuntimeException( sprintf( 'No base ID found for "%1$s" in order base serive data', $dataset['baseid'] ) );
 			}
 
 			if( !isset( $bases['items'][$dataset['baseid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base Item found for "%1$s" in order base service data', $dataset['baseid'] ) );
+				throw new \RuntimeException( sprintf( 'No base Item found for "%1$s" in order base service data', $dataset['baseid'] ) );
 			}
 
 			$ordServ->setId( null );
@@ -306,7 +305,7 @@ class OrderAddTestData extends Base
 	 * @param array $bases Associative list of key/list pairs
 	 * @param array $testdata Associative list of key/list pairs
 	 * @return array Enhanced list of order base items
-	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
+	 * @throws \RuntimeException If no type ID is found
 	 */
 	protected function addOrderBaseProductData( \Aimeos\MShop\Common\Manager\Iface $orderBaseManager,
 		array $bases, array $testdata )
@@ -322,11 +321,11 @@ class OrderAddTestData extends Base
 		foreach( $testdata['order/base/product'] as $key => $dataset )
 		{
 			if( !isset( $bases['ids'][$dataset['baseid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base ID found for "%1$s" in order base product data', $dataset['baseid'] ) );
+				throw new \RuntimeException( sprintf( 'No base ID found for "%1$s" in order base product data', $dataset['baseid'] ) );
 			}
 
 			if( !isset( $bases['items'][$dataset['baseid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base Item found for "%1$s" in order base product data', $dataset['baseid'] ) );
+				throw new \RuntimeException( sprintf( 'No base Item found for "%1$s" in order base product data', $dataset['baseid'] ) );
 			}
 
 			$ordProdItem = $orderBaseProductManager->create();
@@ -385,7 +384,7 @@ class OrderAddTestData extends Base
 	 * @param array $testdata
 	 * @param array $ordProds
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $products
-	 * @throws \Aimeos\MW\Setup\Exception
+	 * @throws \RuntimeException
 	 */
 	protected function addOrderBaseProductAttributeData( \Aimeos\MShop\Common\Manager\Iface $manager,
 		array $testdata, array $ordProds, array $products )
@@ -403,7 +402,7 @@ class OrderAddTestData extends Base
 		foreach( $testdata['order/base/product/attr'] as $dataset )
 		{
 			if( !isset( $ordProds[$dataset['ordprodid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No order product ID found for "%1$s"', $dataset['ordprodid'] ) );
+				throw new \RuntimeException( sprintf( 'No order product ID found for "%1$s"', $dataset['ordprodid'] ) );
 			}
 
 			$ordProdAttr->setId( null );
@@ -438,7 +437,7 @@ class OrderAddTestData extends Base
 	 * @param \Aimeos\MShop\Common\Manager\Iface $manager
 	 * @param array $testdata
 	 * @param array $ordServices
-	 * @throws \Aimeos\MW\Setup\Exception
+	 * @throws \RuntimeException
 	 */
 	protected function addOrderBaseServiceAttributeData( \Aimeos\MShop\Common\Manager\Iface $manager,
 		array $testdata, array $ordServices )
@@ -448,7 +447,7 @@ class OrderAddTestData extends Base
 		foreach( $testdata['order/base/service/attr'] as $dataset )
 		{
 			if( !isset( $ordServices[$dataset['ordservid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No order service ID found for "%1$s"', $dataset['ordservid'] ) );
+				throw new \RuntimeException( sprintf( 'No order service ID found for "%1$s"', $dataset['ordservid'] ) );
 			}
 
 			$ordServAttr->setId( null );
@@ -474,7 +473,7 @@ class OrderAddTestData extends Base
 	 * @param \Aimeos\MShop\Common\Manager\Iface $orderManager Order manager
 	 * @param array $baseIds List of ids
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
+	 * @throws \RuntimeException If no type ID is found
 	 */
 	protected function addOrderData( \Aimeos\MShop\Common\Manager\Iface $orderManager, array $baseIds, array $testdata )
 	{
@@ -488,7 +487,7 @@ class OrderAddTestData extends Base
 		foreach( $testdata['order'] as $key => $dataset )
 		{
 			if( !isset( $baseIds[$dataset['baseid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base ID found for "%1$s"', $dataset['baseid'] ) );
+				throw new \RuntimeException( sprintf( 'No base ID found for "%1$s"', $dataset['baseid'] ) );
 			}
 
 			$ordItem->setId( null );
@@ -508,7 +507,7 @@ class OrderAddTestData extends Base
 		foreach( $testdata['order/status'] as $dataset )
 		{
 			if( !isset( $ords[$dataset['parentid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No order ID found for "%1$s"', $dataset['parentid'] ) );
+				throw new \RuntimeException( sprintf( 'No order ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
 			$ordStat->setId( null );

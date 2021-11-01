@@ -84,7 +84,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 	/**
 	 * Adds the demo data to the database.
 	 *
-	 * @throws \Aimeos\MShop\Exception If the file isn't found
+	 * @throws \RuntimeException If the file isn't found
 	 */
 	protected function addDemoData()
 	{
@@ -92,7 +92,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 		$path = __DIR__ . $ds . 'data' . $ds . 'demo-product.php';
 
 		if( ( $data = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for product domain', $path ) );
 		}
 
 		$context = $this->context();
@@ -165,7 +165,7 @@ class DemoAddProductData extends MShopAddDataAbstract
 					$manager = \Aimeos\MShop::create( $context, 'attribute' );
 					$refItem = $manager->find( $refItem->getCode(), [], $domain, $refItem->getType() );
 				}
-				catch( \Aimeos\MShop\Exception $e ) { ; } // attribute doesn't exist yet
+				catch( \RuntimeException $e ) { ; } // attribute doesn't exist yet
 
 				$refItem = $this->addRefItems( $refItem, $data );
 				$item->addListItem( 'attribute', $listItem, $refItem );

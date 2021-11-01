@@ -47,7 +47,7 @@ class ProductAddTestData extends BaseAddTestData
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'product.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for product domain', $path ) );
 		}
 
 		return $testdata;

@@ -55,7 +55,7 @@ class DemoAddCouponData extends MShopAddDataAbstract
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-coupon.php';
 
 			if( ( $data = include( $path ) ) == false ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for coupon domain', $path ) );
+				throw new \RuntimeException( sprintf( 'No file "%1$s" found for coupon domain', $path ) );
 			}
 
 			foreach( $data as $entry )

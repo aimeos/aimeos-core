@@ -26,7 +26,7 @@ class CouponAddTestData extends Base
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'coupon.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for coupon test data', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for coupon test data', $path ) );
 		}
 
 		$this->addCouponData( $testdata );
@@ -37,7 +37,6 @@ class CouponAddTestData extends Base
 	 * Adds the coupon test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	private function addCouponData( array $testdata )
 	{

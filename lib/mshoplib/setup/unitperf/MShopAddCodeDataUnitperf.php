@@ -37,7 +37,7 @@ class MShopAddCodeDataUnitperf extends MShopAddCodeData
 		$path = __DIR__ . $ds . '..' . $ds . 'default' . $ds . 'data' . $ds . 'code.php';
 
 		if( ( $data = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for default codes', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for default codes', $path ) );
 		}
 
 		$this->process( $data );

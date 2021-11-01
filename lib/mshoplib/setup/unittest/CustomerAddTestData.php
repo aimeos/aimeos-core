@@ -44,12 +44,12 @@ class CustomerAddTestData extends BaseAddTestData
 	 * Adds the customer data
 	 *
 	 * @param string $path Path to data file
-	 * @throws \Aimeos\MShop\Exception
+	 * @throws \RuntimeException
 	 */
 	protected function process( $path )
 	{
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 		}
 
 		$manager = $this->getManager( 'customer' );
@@ -132,7 +132,6 @@ class CustomerAddTestData extends BaseAddTestData
 	 *
 	 * @param \Aimeos\MShop\Common\Manager\Iface $groupManager Customer group manager
 	 * @param array $data Associative list of key/list pairs
-	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	protected function addGroupItems( \Aimeos\MShop\Common\Manager\Iface $groupManager, array $data )
 	{

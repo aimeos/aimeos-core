@@ -47,7 +47,7 @@ class TextAddTestData extends BaseAddTestData
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'text.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for text domain', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for text domain', $path ) );
 		}
 
 		return $testdata;

@@ -63,7 +63,7 @@ class DemoAddServiceData extends MShopAddDataAbstract
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-service.php';
 
 			if( ( $data = include( $path ) ) == false ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for service domain', $path ) );
+				throw new \RuntimeException( sprintf( 'No file "%1$s" found for service domain', $path ) );
 			}
 
 			foreach( $data as $entry )

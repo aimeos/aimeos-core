@@ -48,7 +48,7 @@ class MShopAddTypeData extends Base
 		}
 
 		if( ( $testdata = include( $filename ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No type file found in "%1$s"', $filename ) );
+			throw new \RuntimeException( sprintf( 'No type file found in "%1$s"', $filename ) );
 		}
 
 		$this->processFile( $testdata );
@@ -89,7 +89,7 @@ class MShopAddTypeData extends Base
 	 *
 	 * @param string $domain String of domain and sub-domains, e.g. "product" or "order/base/service"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Domain manager
-	 * @throws \Aimeos\MShop\Exception If domain string is invalid or no manager can be instantiated
+	 * @throws \RuntimeException If domain string is invalid or no manager can be instantiated
 	 */
 	protected function getDomainManager( $domain )
 	{

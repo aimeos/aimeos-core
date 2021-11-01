@@ -65,7 +65,6 @@ class StockAddTestData extends BaseAddTestData
 	 * Creates the test data
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
 	protected function createData( array $testdata )
 	{
@@ -79,7 +78,7 @@ class StockAddTestData extends BaseAddTestData
 
 		foreach( $testdata['stock'] as $entry )
 		{
-			$prodid = $map->get( $entry['prodcode'] ?? null, new \Exception( 'No "prodcode" in ' . print_r( $entry, true ) ) );
+			$prodid = $map->get( $entry['prodcode'] ?? null, new \RuntimeException( 'No "prodcode" in ' . print_r( $entry, true ) ) );
 			$items[] = $manager->create( $entry )->setProductId( $prodid );
 		}
 
@@ -99,7 +98,7 @@ class StockAddTestData extends BaseAddTestData
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'stock.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for stock domain', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for stock domain', $path ) );
 		}
 
 		return $testdata;

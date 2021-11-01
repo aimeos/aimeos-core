@@ -37,7 +37,7 @@ class MShopAddCatalogDataDefault extends Base
 		$filename = __DIR__ . $ds . 'data' . $ds . 'catalog.php';
 
 		if( ( $data = include( $filename ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No type file found in "%1$s"', $filename ) );
+			throw new \RuntimeException( sprintf( 'No type file found in "%1$s"', $filename ) );
 		}
 
 		$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );

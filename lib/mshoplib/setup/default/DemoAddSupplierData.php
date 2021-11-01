@@ -66,7 +66,7 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-supplier.php';
 
 			if( ( $data = include( $path ) ) == false ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for supplier domain', $path ) );
+				throw new \RuntimeException( sprintf( 'No file "%1$s" found for supplier domain', $path ) );
 			}
 
 			$this->saveItems( $data );

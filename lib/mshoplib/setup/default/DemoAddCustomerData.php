@@ -56,7 +56,7 @@ class DemoAddCustomerData extends MShopAddDataAbstract
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-customer.php';
 
 			if( ( $data = include( $path ) ) == false ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
+				throw new \RuntimeException( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 			}
 
 			$this->saveCustomerItems( $data );

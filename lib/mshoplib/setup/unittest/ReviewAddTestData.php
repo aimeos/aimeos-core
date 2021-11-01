@@ -37,7 +37,7 @@ class ReviewAddTestData extends Base
 		$path = __DIR__ . $ds . 'data' . $ds . 'review.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for review domain', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for review domain', $path ) );
 		}
 
 		$this->addData( $testdata );
@@ -48,7 +48,6 @@ class ReviewAddTestData extends Base
 	 * Adds the required review base data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
 	protected function addData( array $testdata )
 	{
@@ -94,7 +93,7 @@ class ReviewAddTestData extends Base
 		$parts = explode( '/', $key );
 
 		if( count( $parts ) !== 2 ) {
-			throw new \Exception( sprintf( 'Invalid order product key "%1$s"', $key ) );
+			throw new \RuntimeException( sprintf( 'Invalid order product key "%1$s"', $key ) );
 		}
 
 		$search = $manager->filter();
@@ -109,6 +108,6 @@ class ReviewAddTestData extends Base
 			return $item;
 		}
 
-		throw new \Exception( sprintf( 'No order product item found for key "%1$s"', $key ) );
+		throw new \RuntimeException( sprintf( 'No order product item found for key "%1$s"', $key ) );
 	}
 }

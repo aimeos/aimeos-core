@@ -42,8 +42,6 @@ class LogAddTestData extends Base
 
 	/**
 	 * Adds the log test data.
-	 *
-	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	private function addLogTestData()
 	{
@@ -53,7 +51,7 @@ class LogAddTestData extends Base
 		$path = __DIR__ . $ds . 'data' . $ds . 'log.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for log domain', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for log domain', $path ) );
 		}
 
 		foreach( $testdata['log'] as $dataset ) {

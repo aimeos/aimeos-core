@@ -37,7 +37,7 @@ class MShopAddAttributeData extends MShopAddDataAbstract
 		$path = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'attribute.php';
 
 		if( ( $data = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for default codes', $path ) );
+			throw new \RuntimeException( sprintf( 'No file "%1$s" found for default codes', $path ) );
 		}
 
 		$manager = \Aimeos\MShop::create( $this->context(), 'attribute' );
