@@ -17,7 +17,7 @@ return array(
 			$table->string( 'facility', 32 );
 			$table->datetime( 'timestamp' );
 			$table->smallint( 'priority' );
-			$table->text( 'message',  0x1ffff );
+			$table->text( 'message', 0x1ffff );
 			$table->string( 'request', 32 );
 
 			$table->index( ['siteid', 'timestamp', 'facility', 'priority'], 'idx_malog_sid_time_facility_prio' );

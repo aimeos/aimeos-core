@@ -14,7 +14,7 @@ return array(
 
 			$table->id()->primary( 'pk_msmedty_id' );
 			$table->string( 'siteid' );
-			$table->string( 'domain',  32 );
+			$table->string( 'domain', 32 );
 			$table->code();
 			$table->string( 'label' );
 			$table->int( 'pos' );
