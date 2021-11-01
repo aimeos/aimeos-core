@@ -53,7 +53,8 @@
 			"lib/mshoplib/setup",
 			"controller/common/src",
 			"controller/jobs/src",
-			"Bootstrap.php"
+			"Bootstrap.php",
+			"Setup.php"
 		]
 	},
 	"autoload-dev": {
