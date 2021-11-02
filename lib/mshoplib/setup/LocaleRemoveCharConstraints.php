@@ -32,7 +32,9 @@ class LocaleRemoveCharConstraints extends Base
 			&& $db->table( 'mshop_locale' )->col( 'langid', 'string' )->fixed()
 		) {
 			$this->info( 'Checking constraint for "langid"', 'v', 1 );
+
 			$db->dropForeign( 'mshop_locale', 'fk_msloc_langid' );
+			$db->dropIndex( 'mshop_locale', 'fk_msloc_langid' );
 		}
 
 		if( $db->hasForeign( 'mshop_locale', 'fk_msloc_currid' )
@@ -40,7 +42,9 @@ class LocaleRemoveCharConstraints extends Base
 			&& $db->table( 'mshop_locale' )->col( 'currencyid', 'string' )->fixed()
 		) {
 			$this->info( 'Checking constraint for "currencyid"', 'v', 1 );
+
 			$db->dropForeign( 'mshop_locale', 'fk_msloc_currid' );
+			$db->dropIndex( 'mshop_locale', 'fk_msloc_currid' );
 		}
 	}
 }
