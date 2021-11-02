@@ -24,6 +24,7 @@ class Locale extends Base
 
 			foreach( $list['table'] ?? [] as $name => $fcn ) {
 				$db->table( $name, $fcn );
+				$db->up();
 			}
 		}
 	}

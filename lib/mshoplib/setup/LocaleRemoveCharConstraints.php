@@ -13,7 +13,7 @@ class LocaleRemoveCharConstraints extends Base
 {
 	public function before() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Locale'];
 	}
 
 
