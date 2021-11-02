@@ -31,23 +31,22 @@ class CustomerAddTestData extends BaseAddTestData
 	 */
 	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->context() );
-
 		$this->info( 'Adding customer test data', 'v' );
 
 		$this->context()->setEditor( 'core:lib/mshoplib' );
-		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
+		$this->process();
 	}
 
 
 	/**
 	 * Adds the customer data
 	 *
-	 * @param string $path Path to data file
 	 * @throws \RuntimeException
 	 */
-	protected function process( $path )
+	protected function process()
 	{
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php';
+
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \RuntimeException( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 		}
@@ -140,8 +139,10 @@ class CustomerAddTestData extends BaseAddTestData
 			foreach( $data['customer/group'] as $entry )
 			{
 				try {
+					$groupManager->save( $groupManager->find( $entry['customer.group.code'] )->fromArray( $entry ) );
+				} catch( \Exception $e ) {
 					$groupManager->save( $groupManager->create()->fromArray( $entry ), false );
-				} catch( \Exception $e ) { echo $e->getMessage(); } // ignore duplicates
+				}
 			}
 		}
 	}
