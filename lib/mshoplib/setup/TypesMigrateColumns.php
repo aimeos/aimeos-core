@@ -90,6 +90,21 @@ class TypesMigrateColumns extends Base
 		],
 	];
 
+	private $drops = [
+		'db-attribute' => ['mshop_attribute' => 'fk_msatt_typeid', 'mshop_attribute_list' => 'fk_msattli_typeid', 'mshop_attribute_property' => 'fk_msattpr_typeid'],
+		'db-catalog' => ['mshop_catalog_list' => 'fk_mscatli_typeid'],
+		'db-customer' => ['mshop_customer_list' => 'fk_mscusli_typeid', 'mshop_customer_property' => 'fk_mscuspr_typeid'],
+		'db-media' => ['mshop_media' => 'fk_msmed_typeid', 'mshop_media_list' => 'fk_msmedli_typeid', 'mshop_media_property' => 'fk_msmedpr_typeid'],
+		'db-plugin' => ['mshop_plugin' => 'fk_msplu_typeid'],
+		'db-price' => ['mshop_price' => 'fk_mspri_typeid', 'mshop_price_list' => 'fk_msprili_typeid'],
+		'db-product' => ['mshop_product' => 'fk_mspro_typeid', 'mshop_product_list' => 'fk_msproli_typeid', 'mshop_product_property' => 'fk_mspropr_typeid'],
+		'db-service' => ['mshop_service' => 'fk_msser_typeid', 'mshop_service_list' => 'fk_msserli_typeid'],
+		'db-stock' => ['mshop_stock' => 'fk_mssto_typeid'],
+		'db-supplier' => ['mshop_supplier_list' => 'fk_mssupli_typeid'],
+		'db-tag' => ['mshop_tag' => 'fk_mstag_typeid'],
+		'db-text' => ['mshop_text' => 'fk_mstex_typeid', 'mshop_text_list' => 'fk_mstexli_typeid'],
+	];
+
 
 	public function before() : array
 	{
@@ -117,6 +132,12 @@ class TypesMigrateColumns extends Base
 
 		foreach( $this->migrations as $rname => $list ) {
 			$this->migrateData( $rname, $list );
+		}
+
+		$this->info( 'Drop typeid columns', 'vv', 1 );
+
+		foreach( $this->drops as $rname => $list ) {
+			$this->dropColumn( $rname, $list );
 		}
 	}
 
@@ -157,9 +178,26 @@ class TypesMigrateColumns extends Base
 		{
 			$this->info( sprintf( 'Checking table "%1$s": ', $table ), 'vv', 2 );
 
-			if( $db->hasColumn( $table, 'typeid' ) )
-			{
+			if( $db->hasColumn( $table, 'typeid' ) ) {
 				$db->exec( $stmt );
+			}
+		}
+	}
+
+
+	protected function dropColumn( $rname, $stmts )
+	{
+		$db = $this->db( $rname );
+
+		foreach( $stmts as $table => $fkname )
+		{
+			$this->info( sprintf( 'Checking table "%1$s": ', $table ), 'vv', 2 );
+
+			if( $db->hasForeign( $table, $fkname ) ) {
+				$db->dropForeign( $table, $fkname );
+			}
+
+			if( $db->hasColumn( $table, 'typeid' ) ) {
 				$db->dropColumn( $table, 'typeid' );
 			}
 		}
