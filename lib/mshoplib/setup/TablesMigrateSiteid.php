@@ -126,7 +126,9 @@ class TablesMigrateSiteid extends Base
 					$colname = 'siteid';
 				}
 
-				if( $db->hasColumn( $table, 'tsiteid' ) && $db->table( $table )->col( 'tsiteid' )->type() === 'integer' ) {
+				if( $db->hasColumn( $table, 'tsiteid' ) && $db->table( $table )->col( 'tsiteid' )->type() === 'integer' )
+				{
+					$db->dropForeign( 'madmin_cache_tag', ['fk_macac_tid_tsid'] );
 					$colname = 'tsiteid';
 				}
 
