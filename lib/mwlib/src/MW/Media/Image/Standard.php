@@ -291,7 +291,7 @@ class Standard
 		$dy = (int) ( $this->getHeight() - $newHeight ) / 2;
 
 		if( imagecopy( $this->image, $wimage, $dx, $dy, 0, 0, $newWidth, $newHeight ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'Failed to apply watermark immage to file "%1$s"', $filename ) );
+			throw new \Aimeos\MW\Media\Exception( 'Failed to apply watermark immage' );
 		}
 
 		imagedestroy( $wimage );

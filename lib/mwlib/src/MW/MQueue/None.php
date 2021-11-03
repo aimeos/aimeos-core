@@ -20,16 +20,6 @@ namespace Aimeos\MW\MQueue;
 class None extends Base implements Iface
 {
 	/**
-	 * Initializes the message queue object
-	 *
-	 * @param array $config Associative list of configuration key/value pairs
-	 */
-	public function __construct( array $config )
-	{
-	}
-
-
-	/**
 	 * Returns the queue for the given name
 	 *
 	 * @param string $name Queue name

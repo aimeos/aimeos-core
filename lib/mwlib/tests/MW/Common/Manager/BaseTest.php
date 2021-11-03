@@ -210,7 +210,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$method = $class->getMethod( 'getSearchTranslations' );
 		$method->setAccessible( true );
 
-		$this->expectException( \Aimeos\Mw\Exception::class );
+		$this->expectException( \Aimeos\MW\Exception::class );
 		$method->invokeArgs( $this->object, array( array( [] ) ) );
 	}
 
@@ -260,7 +260,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$method = $class->getMethod( 'getSearchTypes' );
 		$method->setAccessible( true );
 
-		$this->expectException( \Aimeos\Mw\Exception::class );
+		$this->expectException( \Aimeos\MW\Exception::class );
 		$method->invokeArgs( $this->object, array( array( [] ) ) );
 	}
 

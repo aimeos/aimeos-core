@@ -43,7 +43,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 				'label' => 'Language',
 				'default' => 'de',
 			) ),
-			'language' => new \Aimeos\MW\Criteria\Attribute\Standard( array(
+			'domain' => new \Aimeos\MW\Criteria\Attribute\Standard( array(
 				'code' => 'domain',
 				'internalcode' => 'domain',
 				'type' => 'string',

@@ -31,10 +31,9 @@ class Svg
 	 *
 	 * @param string $content File content
 	 * @param string $mimetype Mime type of the media data
-	 * @param array $options Associative list of configuration options
 	 * @throws \Aimeos\MW\Media\Exception If image couldn't be retrieved from the given file name
 	 */
-	public function __construct( string $content, string $mimetype, array $options )
+	public function __construct( string $content, string $mimetype )
 	{
 		parent::__construct( $mimetype );
 

@@ -27,7 +27,7 @@ class Standard
 	/**
 	 * Returns the encoder.
 	 *
-	 * @return \Aimeos\MW\View\Helper\Iface Encoder object
+	 * @return \Aimeos\MW\View\Helper\Encoder\Iface Encoder object
 	 */
 	public function transform() : Iface
 	{

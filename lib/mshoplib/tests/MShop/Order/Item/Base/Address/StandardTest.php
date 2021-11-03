@@ -175,16 +175,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSalutation()
 	{
-		$this->assertEquals( \Aimeos\MShop\Order\item\Base\Address\Base::SALUTATION_MR, $this->object->getSalutation() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base\Address\Base::SALUTATION_MR, $this->object->getSalutation() );
 	}
 
 
 	public function testSetSalutation()
 	{
-		$return = $this->object->setSalutation( \Aimeos\MShop\Order\item\Base\Address\Base::SALUTATION_COMPANY );
+		$return = $this->object->setSalutation( \Aimeos\MShop\Order\Item\Base\Address\Base::SALUTATION_COMPANY );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
-		$this->assertEquals( \Aimeos\MShop\Order\item\Base\Address\Base::SALUTATION_COMPANY, $this->object->getSalutation() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base\Address\Base::SALUTATION_COMPANY, $this->object->getSalutation() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 

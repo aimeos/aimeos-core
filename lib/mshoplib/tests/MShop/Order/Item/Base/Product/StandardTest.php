@@ -910,7 +910,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.stocktype' => 'stocktype',
 			'order.base.product.supplierid' => '456',
 			'order.base.product.suppliername' => 'testsup',
-			'order.base.product.prodcode' => 'test',
 			'order.base.product.mediaurl' => '/path/to/image.jpg',
 			'order.base.product.target' => 'ttarget',
 			'order.base.product.timeframe' => '1-2d',

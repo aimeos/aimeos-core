@@ -22,7 +22,7 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	/**
 	 * Returns the block helper
 	 *
-	 * @return \Aimeos\MW\View\Helper\Iface Block object
+	 * @return \Aimeos\MW\View\Helper\Block\Iface Block object
 	 */
 	public function transform() : Iface;
 
@@ -39,7 +39,7 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 *
 	 * @param string $name Name of the block
 	 * @param string $content Block content
-	 * @return \Aimeos\MW\View\Helper\Iface Block object for fluent interface
+	 * @return \Aimeos\MW\View\Helper\Block\Iface Block object for fluent interface
 	 */
 	public function set( string $name, string $content ) : Iface;
 
@@ -47,14 +47,14 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * Starts a new content block
 	 *
 	 * @param string $name Name of the block
-	 * @return \Aimeos\MW\View\Helper\Iface Block object for fluent interface
+	 * @return \Aimeos\MW\View\Helper\Block\Iface Block object for fluent interface
 	 */
 	public function start( string $name ) : Iface;
 
 	/**
 	 * Stores the current content block
 	 *
-	 * @return \Aimeos\MW\View\Helper\Iface Block object for fluent interface
+	 * @return \Aimeos\MW\View\Helper\Block\Iface Block object for fluent interface
 	 */
 	public function stop() : Iface;
 }

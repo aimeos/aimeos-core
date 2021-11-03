@@ -49,7 +49,7 @@ class Standard
 	/**
 	 * Returns the CSRF partial object.
 	 *
-	 * @return \Aimeos\MW\View\Helper\Iface CSRF partial object
+	 * @return \Aimeos\MW\View\Helper\Csrf\Iface CSRF partial object
 	 */
 	public function transform() : Iface
 	{

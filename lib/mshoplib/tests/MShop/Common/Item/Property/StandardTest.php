@@ -162,7 +162,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = $entries = array(
 			'common.property.parentid' => 1,
-			'common.property.type' => 'default',
 			'common.property.type' => 'test',
 			'common.property.languageid' => 'de',
 			'common.property.value' => 'value',

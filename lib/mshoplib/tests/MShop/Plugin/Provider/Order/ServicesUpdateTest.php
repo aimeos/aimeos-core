@@ -13,6 +13,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
+	private $object;
 	private $order;
 	private $plugin;
 

@@ -341,6 +341,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	public function setAvailable( bool $value ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$this->available = $value;
+		return $this;
 	}
 
 

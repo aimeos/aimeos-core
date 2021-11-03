@@ -204,7 +204,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'attribute.code' => 'test',
 			'attribute.domain' => 'product',
 			'attribute.status' => '0',
-			'attribute.type' => 'unittest',
 			'attribute.type' => 'testtype',
 			'attribute.label' => 'test attribute',
 			'attribute.position' => 10,
