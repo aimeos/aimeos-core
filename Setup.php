@@ -15,8 +15,8 @@ namespace Aimeos;
 class Setup
 {
 	private $bootstrap;
-	private $config;
 	private $context;
+	private $options;
 	private $verbose;
 
 
@@ -28,8 +28,8 @@ class Setup
 	 */
 	public function __construct( Bootstrap $bootstrap, array $options = [] )
 	{
-		$this->config = $this->createConfig( $bootstrap->getConfigPaths(), $options );
 		$this->bootstrap = $bootstrap;
+		$this->options = $options;
 
 		$this->macros();
 	}
@@ -69,15 +69,16 @@ class Setup
 	 */
 	public function up( string $site = 'default', string $template = 'default' )
 	{
-		$ctx = $this->context ?? $this->createContext( $this->config );
+		$ctx = $this->context ?? $this->createContext();
 
 		\Aimeos\Upscheme\Task\Base::macro( 'context', function() use ( $ctx ) {
 			return $ctx;
 		} );
 
 
-		$this->config->set( 'setup/site', $site );
-		$dbconf = $this->getDBConfig( $this->config );
+		$config = $ctx->config();
+		$config->set( 'setup/site', $site );
+		$dbconf = $this->getDBConfig( $config );
 		$taskPaths = $this->bootstrap->getSetupPaths( $template );
 
 		\Aimeos\Upscheme\Up::use( $dbconf, $taskPaths )->verbose( $this->verbose )->up();
@@ -138,11 +139,12 @@ class Setup
 	/**
 	 * Returns a new context object
 	 *
-	 * @param \Aimeos\MW\Config\Iface $conf Configuration object
 	 * @return \Aimeos\MShop\Context\Item\Iface New context object
 	 */
-	protected function createContext( \Aimeos\MW\Config\Iface $conf ) : \Aimeos\MShop\Context\Item\Iface
+	protected function createContext() : \Aimeos\MShop\Context\Item\Iface
 	{
+		$conf = $this->createConfig( $this->bootstrap->getConfigPaths(), $this->options );
+
 		$ctx = new \Aimeos\MShop\Context\Item\Standard();
 		$ctx->setConfig( $conf );
 
