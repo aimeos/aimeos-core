@@ -21,7 +21,7 @@ class IndexMigrateTextInnodb extends Base
 	{
 		$db = $this->db( 'db-product' );
 
-		if( !$db->hasTable( 'mshop_index_text' ) ) {
+		if( !$db->hasTable( 'mshop_index_text' ) || $db->table( 'mshop_index_text' )->opt( 'engine' ) === 'InnoDB' ) {
 			return;
 		}
 
