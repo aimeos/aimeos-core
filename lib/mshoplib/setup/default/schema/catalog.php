@@ -15,7 +15,7 @@ return array(
 
 			$table->id()->primary( 'pk_mscat_id' );
 			$table->string( 'siteid' );
-			$table->int( 'parentid' );
+			$table->int( 'parentid' )->null( true );
 			$table->smallint( 'level' );
 			$table->code( 'code' );
 			$table->string( 'label' );
