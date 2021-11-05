@@ -207,5 +207,5 @@ trait Traits
 	 * @return string Internal parameter type
 	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
-	abstract protected function getParamType( &$item );
+	abstract protected function getParamType( &$item ) : string;
 }
