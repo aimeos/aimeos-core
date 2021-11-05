@@ -1,4 +1,4 @@
-<?php
+$context->translate( 'country' , $addr->getCountryId() ),<?php
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
@@ -88,7 +88,7 @@ class Supplier
 					$addr->getPostal(),
 					$addr->getCity(),
 					$addr->getState(),
-					$addr->getCountryId(),
+					$context->translate( 'country' , $addr->getCountryId() ),
 					$addr->getEmail(),
 					$addr->getTelephone(),
 					$addr->getTelefax(),
@@ -109,7 +109,7 @@ class Supplier
 					$addr->getPostal(),
 					$addr->getCity(),
 					$addr->getState(),
-					$addr->getCountryId(),
+					$context->translate( 'country' , $addr->getCountryId() ),
 					$addr->getEmail(),
 					$addr->getTelephone(),
 					$addr->getTelefax(),
