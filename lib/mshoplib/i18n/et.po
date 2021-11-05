@@ -4,6 +4,7 @@
 # 
 # Translators:
 # ranx2k <ranko@murumets.eu>, 2021
+# ranx2k <ranko@murumets.eu>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"

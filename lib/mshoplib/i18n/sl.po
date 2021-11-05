@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Goran Sabo <info@noaset.pro>, 2020
+# Goran Sabo <info@noaset.pro>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
