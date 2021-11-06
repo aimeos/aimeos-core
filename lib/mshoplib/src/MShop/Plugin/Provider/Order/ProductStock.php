@@ -84,45 +84,23 @@ class ProductStock
 	 */
 	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order ) : array
 	{
-		$context = $this->getContext();
-		$expr = $stockExpr = $stockMap = [];
-
-		$manager = \Aimeos\MShop::create( $context, 'product' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
 		$filter = $manager->filter();
+		$expr = $stockMap = [];
 
 		foreach( $order->getProducts() as $orderProduct )
 		{
 			$expr[] = $filter->and( [
-				$filter->is( 'product.code', '==', $orderProduct->getProductCode() ),
-				$filter->is( 'product.siteid', '==', $orderProduct->getSitePath() )
+				$filter->is( 'stock.productid', '==', $orderProduct->getProductId() ),
+				$filter->is( 'stock.siteid', '==', $orderProduct->getSiteId() ),
+				$filter->is( 'stock.type', '==', $orderProduct->getStockType() )
 			] );
 		}
 
 		$filter->add( $filter->or( $expr ) )->slice( 0, count( $expr ) );
 
-		$products = $manager->search( $filter )->col( 'product.id', 'product.code' );
-
-		foreach( $order->getProducts() as $orderProduct )
-		{
-			if( isset( $products[$orderProduct->getProductCode()] ) )
-			{
-				$stockExpr[] = $filter->and( [
-					$filter->is( 'stock.productid', '==', $products[$orderProduct->getProductCode()] ),
-					$filter->is( 'stock.siteid', '==', $orderProduct->getSiteId() ),
-					$filter->is( 'stock.type', '==', $orderProduct->getStockType() )
-				] );
-			}
-		}
-
-		$stockManager = \Aimeos\MShop::create( $context, 'stock' );
-		$filter = $stockManager->filter();
-		$filter->add( $filter->or( $stockExpr ) )->slice( 0, count( $stockExpr ) );
-		$products = $products->flip();
-
-		foreach( $stockManager->search( $filter ) as $stockItem )
-		{
-			$code = $products[$stockItem->getProductId()] ?? null;
-			$stockMap[$stockItem->getSiteId()][$code][$stockItem->getType()] = $stockItem;
+		foreach( $manager->search( $filter ) as $item ) {
+			$stockMap[$item->getSiteId()][$item->getProductId()][$item->getType()] = $item;
 		}
 
 		return $this->checkStockLevels( $order, $stockMap );
@@ -149,11 +127,11 @@ class ProductStock
 			$stocklevel = 0;
 			$siteid = $orderProduct->getSiteId();
 			$type = $orderProduct->getStockType();
-			$code = $orderProduct->getProductCode();
+			$prodid = $orderProduct->getProductId();
 
-			if( isset( $stockMap[$siteid][$code][$type] ) )
+			if( isset( $stockMap[$siteid][$prodid][$type] ) )
 			{
-				$stockItem = $stockMap[$siteid][$code][$type];
+				$stockItem = $stockMap[$siteid][$prodid][$type];
 				$orderProduct->setTimeFrame( $stockItem->getTimeFrame() );
 
 				if( ( $stocklevel = $stockItem->getStockLevel() ) === null ) {
