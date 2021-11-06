@@ -66,7 +66,7 @@ class OrderAddProductParentid extends Base
 		{
 			$filter = $pmanager->filter()->add( ['product.code' => $list] )->slice( 0, $size );
 
-			foreach( $pmanager->search( $filter) as $product )
+			foreach( $pmanager->search( $filter ) as $product )
 			{
 				$db->stmt()->update( 'mshop_order_base_product' )
 					->set( 'prodid', '?' )
