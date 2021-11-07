@@ -14,8 +14,8 @@ return array(
 			$table->engine = 'InnoDB';
 
 			$table->string( 'id', 3 )->primary( 'pk_msloccu_id' );
-			$table->string( 'label' );
-			$table->smallint( 'status' );
+			$table->string( 'label' )->default( '' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->index( ['status'], 'idx_msloccu_status' );
@@ -27,8 +27,8 @@ return array(
 			$table->engine = 'InnoDB';
 
 			$table->string( 'id', 5 )->primary( 'pk_mslocla_id' );
-			$table->string( 'label' );
-			$table->smallint( 'status' );
+			$table->string( 'label' )->default( '' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->index( ['status'], 'idx_mslocla_status' );
@@ -43,16 +43,16 @@ return array(
 			$table->string( 'siteid' )->default( '' )->opt( 'unique', true, 'mssql' );
 			$table->int( 'parentid' )->null( true );
 			$table->code()->length( 255 )->default( '' );
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->string( 'icon' )->default( '' );
 			$table->string( 'logo' )->default( '{}' );
 			$table->text( 'config' )->default( '{}' );
 			$table->refid( 'supplierid' )->default( '' );
 			$table->string( 'theme', 32 )->default( '' );
-			$table->smallint( 'level' );
+			$table->smallint( 'level' )->default( 0 );
 			$table->int( 'nleft' );
 			$table->int( 'nright' );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['code'], 'unq_mslocsi_code' );
@@ -70,8 +70,8 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'langid', 5 );
 			$table->string( 'currencyid', 3 );
-			$table->int( 'pos' );
-			$table->smallint( 'status' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'langid', 'currencyid'], 'unq_msloc_sid_lang_curr' );

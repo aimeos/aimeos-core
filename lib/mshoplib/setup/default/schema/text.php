@@ -22,9 +22,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_mstexty_sid_dom_code' );
@@ -42,9 +42,9 @@ return array(
 			$table->type();
 			$table->string( 'langid', 5 )->null( true );
 			$table->string( 'domain', 32 );
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->text( 'content', 0xffffff );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->index( ['siteid', 'domain', 'status'], 'idx_mstex_sid_domain_status' );
@@ -60,9 +60,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_mstexlity_sid_dom_code' );
@@ -83,9 +83,9 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->refid();
 			$table->startend();
-			$table->text( 'config' );
-			$table->int( 'pos' );
-			$table->smallint( 'status' );
+			$table->text( 'config' )->default( '{}' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_mstexli_pid_dm_sid_ty_rid' );

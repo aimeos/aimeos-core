@@ -15,11 +15,11 @@ return array(
 
 			$table->id()->primary( 'pk_mscou_id' );
 			$table->string( 'siteid' );
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->string( 'provider' );
-			$table->text( 'config' );
+			$table->text( 'config' )->default( '{}' );
 			$table->startend();
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->index( ['siteid', 'status', 'start', 'end'], 'idx_mscou_sid_stat_start_end' );
@@ -39,7 +39,7 @@ return array(
 			$table->code();
 			$table->int( 'count' )->null( true )->default( 0 );
 			$table->startend();
-			$table->refid( 'ref' );
+			$table->refid( 'ref' )->default( '' );
 			$table->meta();
 
 			$table->unique( ['siteid', 'code'], 'unq_mscouco_sid_code' );

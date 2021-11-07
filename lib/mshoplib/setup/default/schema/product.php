@@ -16,9 +16,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_msproty_sid_dom_code' );
@@ -38,14 +38,14 @@ return array(
 			$table->code( 'code' );
 			$table->string( 'label' )->default( '' );
 			$table->string( 'url' )->default( '' );
-			$table->text( 'config' );
+			$table->text( 'config' )->default( '' );
 			$table->startend();
 			$table->float( 'scale' )->default( 0 );
 			$table->decimal( 'rating', 4 )->default( 0 );
 			$table->int( 'ratings' )->default( 0 );
-			$table->smallint( 'instock' );
-			$table->string( 'target' );
-			$table->smallint( 'status' );
+			$table->smallint( 'instock' )->default( 0 );
+			$table->string( 'target' )->default( '' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'code'], 'unq_mspro_siteid_code' );
@@ -65,9 +65,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_msprolity_sid_dom_code' );
@@ -88,9 +88,9 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->refid();
 			$table->startend();
-			$table->text( 'config' );
+			$table->text( 'config' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_msproli_pid_dm_sid_ty_rid' );
@@ -108,9 +108,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_msproprty_sid_dom_code' );

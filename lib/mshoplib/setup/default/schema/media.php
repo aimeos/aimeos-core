@@ -16,9 +16,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
-			$table->int( 'pos' );
-			$table->smallint( 'status' );
+			$table->string( 'label' )->default( '' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_msmedty_sid_dom_code' );
@@ -36,11 +36,11 @@ return array(
 			$table->type();
 			$table->string( 'langid', 5 )->null( true );
 			$table->string( 'domain', 32 );
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->string( 'link' );
-			$table->text( 'preview' );
-			$table->string( 'mimetype', 64 );
-			$table->smallint( 'status' );
+			$table->text( 'preview' )->default( '{}' );
+			$table->string( 'mimetype', 64 )->default( '' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->index( ['siteid', 'domain', 'langid'], 'idx_msmed_sid_dom_langid' );
@@ -57,9 +57,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code( 'code' );
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_msmedlity_sid_dom_code' );
@@ -80,9 +80,9 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->refid();
 			$table->startend();
-			$table->text( 'config' );
-			$table->int( 'pos' );
-			$table->smallint( 'status' );
+			$table->text( 'config' )->default( '{}' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_msmedli_pid_dm_sid_ty_rid' );
@@ -100,9 +100,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code( 'code' );
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_msmedprty_sid_dom_code' );

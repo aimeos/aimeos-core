@@ -14,9 +14,9 @@ return array(
 
 			$table->bigid()->primary( 'pk_majob_id' );
 			$table->string( 'siteid' );
-			$table->string( 'label' );
 			$table->string( 'path' );
-			$table->smallint( 'status' );
+			$table->string( 'label' )->default( '' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->index( ['siteid', 'ctime'], 'idx_majob_sid_ctime' );

@@ -14,11 +14,11 @@ return array(
 
 			$table->bigid()->primary( 'pk_mslog_id' );
 			$table->string( 'siteid' )->default( '' );
-			$table->string( 'facility', 32 );
 			$table->datetime( 'timestamp' );
-			$table->smallint( 'priority' );
+			$table->smallint( 'priority' )->default( 3 );
+			$table->string( 'facility', 32 )->default( '' );
+			$table->string( 'request', 32 )->default( '' );
 			$table->text( 'message', 0x1ffff );
-			$table->string( 'request', 32 );
 
 			$table->index( ['siteid', 'timestamp', 'facility', 'priority'], 'idx_malog_sid_time_facility_prio' );
 		},

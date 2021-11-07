@@ -16,8 +16,8 @@ return array(
 			$table->id()->primary( 'pk_mssup_id' );
 			$table->string( 'siteid' );
 			$table->code();
-			$table->string( 'label' );
-			$table->smallint( 'status' );
+			$table->string( 'label' )->default( '' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'code'], 'unq_mssup_sid_code' );
@@ -32,28 +32,28 @@ return array(
 			$table->id()->primary( 'pk_mssupad_id' );
 			$table->string( 'siteid' );
 			$table->int( 'parentid' );
-			$table->string( 'company', 100 );
-			$table->string( 'vatid', 32 );
-			$table->string( 'salutation', 8 );
-			$table->string( 'title', 64 );
-			$table->string( 'firstname', 64 );
-			$table->string( 'lastname', 64 );
-			$table->string( 'address1', 200 );
-			$table->string( 'address2', 200 );
-			$table->string( 'address3', 200 );
-			$table->string( 'postal', 16 );
-			$table->string( 'city', 200 );
-			$table->string( 'state', 200 );
+			$table->string( 'company', 100 )->default( '' );
+			$table->string( 'vatid', 32 )->default( '' );
+			$table->string( 'salutation', 8 )->default( '' );
+			$table->string( 'title', 64 )->default( '' );
+			$table->string( 'firstname', 64 )->default( '' );
+			$table->string( 'lastname', 64 )->default( '' );
+			$table->string( 'address1', 200 )->default( '' );
+			$table->string( 'address2', 200 )->default( '' );
+			$table->string( 'address3', 200 )->default( '' );
+			$table->string( 'postal', 16 )->default( '' );
+			$table->string( 'city', 200 )->default( '' );
+			$table->string( 'state', 200 )->default( '' );
 			$table->string( 'langid', 5 )->null( true );
 			$table->string( 'countryid', 2 )->null( true );
-			$table->string( 'telephone', 32 );
-			$table->string( 'telefax', 32 );
-			$table->string( 'email' );
-			$table->string( 'website' );
+			$table->string( 'telephone', 32 )->default( '' );
+			$table->string( 'telefax', 32 )->default( '' );
+			$table->string( 'email' )->default( '' );
+			$table->string( 'website' )->default( '' );
 			$table->float( 'longitude' )->null( true );
 			$table->float( 'latitude' )->null( true );
 			$table->date( 'birthday' )->null( true );
-			$table->smallint( 'pos' );
+			$table->smallint( 'pos' )->default( 0 );
 			$table->meta();
 
 			$table->index( ['siteid', 'parentid'], 'idx_mssupad_sid_rid' );
@@ -70,9 +70,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_mssuplity_sid_dom_code' );
@@ -93,9 +93,9 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->refid();
 			$table->startend();
-			$table->text( 'config' );
-			$table->int( 'pos' );
-			$table->smallint( 'status' );
+			$table->text( 'config' )->default( '{}' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_mssupli_pid_dm_sid_ty_rid' );

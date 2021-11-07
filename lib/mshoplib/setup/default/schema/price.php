@@ -16,9 +16,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_msprity_sid_dom_code' );
@@ -35,14 +35,14 @@ return array(
 			$table->string( 'siteid' );
 			$table->type();
 			$table->string( 'domain', 32 );
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->string( 'currencyid', 3 );
-			$table->float( 'quantity' );
+			$table->float( 'quantity' )->default( 1 );
 			$table->decimal( 'value', 12 )->null( true );
-			$table->decimal( 'costs', 12 );
-			$table->decimal( 'rebate', 12 );
-			$table->string( 'taxrate' );
-			$table->smallint( 'status' );
+			$table->decimal( 'costs', 12 )->default( '0.00' );
+			$table->decimal( 'rebate', 12 )->default( '0.00' );
+			$table->string( 'taxrate' )->default( '{}' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->index( ['siteid', 'domain', 'currencyid'], 'idx_mspri_sid_dom_currid' );
@@ -60,9 +60,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_msprility_sid_dom_code' );
@@ -83,9 +83,9 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->refid();
 			$table->startend();
-			$table->text( 'config' );
+			$table->text( 'config' )->default( '{}' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_msprili_pid_dm_sid_ty_rid' );
@@ -103,9 +103,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_mspriprty_sid_dom_code' );

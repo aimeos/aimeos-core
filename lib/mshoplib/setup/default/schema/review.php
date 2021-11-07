@@ -16,13 +16,13 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->refid();
-			$table->string( 'customerid', 36 );
-			$table->string( 'ordprodid', 36 );
-			$table->string( 'name', 32 );
-			$table->smallint( 'status' );
+			$table->string( 'customerid', 36 )->default( '' );
+			$table->string( 'ordprodid', 36 )->default( '' );
+			$table->string( 'name', 32 )->default( '' );
+			$table->smallint( 'status' )->default( -1 );
 			$table->smallint( 'rating' );
-			$table->text( 'comment' );
-			$table->text( 'response' );
+			$table->text( 'comment' )->default( '' );
+			$table->text( 'response' )->default( '' );
 			$table->meta();
 
 			$table->unique( ['siteid', 'customerid', 'domain', 'refid'], 'unq_msrev_sid_cid_dom_rid' );

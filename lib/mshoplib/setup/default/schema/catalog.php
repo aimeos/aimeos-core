@@ -16,15 +16,15 @@ return array(
 			$table->id()->primary( 'pk_mscat_id' );
 			$table->string( 'siteid' );
 			$table->int( 'parentid' )->null( true );
-			$table->smallint( 'level' );
+			$table->smallint( 'level' )->default( 0 );
 			$table->code( 'code' );
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->string( 'url' )->default( '' );
-			$table->text( 'config' )->default( '' );
+			$table->text( 'config' )->default( '{}' );
 			$table->int( 'nleft' );
 			$table->int( 'nright' );
-			$table->string( 'target' );
-			$table->smallint( 'status' );
+			$table->string( 'target' )->default( '' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'code'], 'unq_mscat_sid_code' );
@@ -40,9 +40,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_mscatlity_sid_dom_code' );
@@ -63,9 +63,9 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->refid();
 			$table->startend();
-			$table->text( 'config' );
-			$table->int( 'pos' );
-			$table->smallint( 'status' );
+			$table->text( 'config' )->default( '{}' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_mscatli_pid_dm_sid_ty_rid' );

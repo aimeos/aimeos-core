@@ -16,9 +16,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_msrulty_sid_dom_code' );
@@ -34,12 +34,12 @@ return array(
 			$table->id()->primary( 'pk_msrul_id' );
 			$table->string( 'siteid' );
 			$table->type();
-			$table->string( 'label' );
 			$table->string( 'provider' );
-			$table->text( 'config' );
+			$table->string( 'label' )->default( '' );
+			$table->text( 'config' )->default( '{}' );
 			$table->startend();
-			$table->int( 'pos' );
-			$table->smallint( 'status' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->index( ['siteid', 'provider'], 'idx_msrul_sid_prov' );

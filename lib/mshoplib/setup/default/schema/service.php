@@ -16,9 +16,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_msserty_sid_dom_code' );
@@ -35,12 +35,12 @@ return array(
 			$table->string( 'siteid' );
 			$table->type();
 			$table->code();
-			$table->string( 'label' );
 			$table->string( 'provider' );
+			$table->string( 'label' )->default( '' );
 			$table->startend();
-			$table->text( 'config' );
+			$table->text( 'config' )->default( '{}' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'code'], 'unq_msser_siteid_code' );
@@ -59,9 +59,9 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->code();
-			$table->string( 'label' );
+			$table->string( 'label' )->default( '' );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'status' );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['siteid', 'domain', 'code'], 'unq_msserlity_sid_dom_code' );
@@ -82,9 +82,9 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->refid();
 			$table->startend();
-			$table->string( 'config' );
-			$table->int( 'pos' );
-			$table->smallint( 'status' );
+			$table->string( 'config' )->default( '{}' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
 			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_msserli_pid_dm_sid_ty_rid' );
