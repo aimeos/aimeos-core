@@ -493,6 +493,54 @@ return [
 		],
 	],
 	[
+		'product.code' => 'demo-selection-article-3', 'product.type' => 'default',
+		'product.label' => 'Demo variant article 3', 'product.status' => 1,
+		'attribute' => [
+			[
+				'attribute.code' => 'demo-beige', 'attribute.label' => 'Demo: Beige',
+				'attribute.type' => 'color', 'attribute.position' => 2, 'attribute.status' => 1,
+				'product.lists.type' => 'variant', 'product.lists.position' => 0,
+			],
+			[
+				'attribute.code' => 'demo-width-32', 'attribute.label' => 'Demo: Width 32',
+				'attribute.type' => 'width', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'variant', 'product.lists.position' => 1,
+			],
+			[
+				'attribute.code' => 'demo-length-34', 'attribute.label' => 'Demo: Length 36',
+				'attribute.type' => 'length', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'variant', 'product.lists.position' => 2,
+			],
+		],
+		'stock' => [
+			['stock.stocklevel' => 10, 'stock.type' => 'default', 'stock.dateback' => null],
+		],
+	],
+	[
+		'product.code' => 'demo-selection-article-4', 'product.type' => 'default',
+		'product.label' => 'Demo variant article 4', 'product.status' => 1,
+		'attribute' => [
+			[
+				'attribute.code' => 'demo-beige', 'attribute.label' => 'Demo: Beige',
+				'attribute.type' => 'color', 'attribute.position' => 2, 'attribute.status' => 1,
+				'product.lists.type' => 'variant', 'product.lists.position' => 0,
+			],
+			[
+				'attribute.code' => 'demo-width-33', 'attribute.label' => 'Demo: Width 33',
+				'attribute.type' => 'width', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'variant', 'product.lists.position' => 1,
+			],
+			[
+				'attribute.code' => 'demo-length-34', 'attribute.label' => 'Demo: Length 34',
+				'attribute.type' => 'length', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'variant', 'product.lists.position' => 2,
+			],
+		],
+		'stock' => [
+			['stock.stocklevel' => 3, 'stock.type' => 'default', 'stock.dateback' => null],
+		],
+	],
+	[
 		'product.code' => 'demo-selection-article', 'product.type' => 'select',
 		'product.label' => 'Demo selection article', 'product.status' => 1,
 		'text' => [
