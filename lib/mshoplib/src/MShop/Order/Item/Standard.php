@@ -270,11 +270,11 @@ class Standard
 	/**
 	 * Returns the related invoice ID.
 	 *
-	 * @return string|null Related invoice ID
+	 * @return string Related invoice ID
 	 */
-	public function getRelatedId() : ?string
+	public function getRelatedId() : string
 	{
-		return $this->get( 'order.relatedid' );
+		return $this->get( 'order.relatedid', '' );
 	}
 
 
@@ -287,7 +287,7 @@ class Standard
 	 */
 	public function setRelatedId( ?string $id ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return $this->set( 'order.relatedid', $id );
+		return $this->set( 'order.relatedid', (string) $id );
 	}
 
 
