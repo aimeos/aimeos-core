@@ -25,8 +25,7 @@ class Standard
 	/**
 	 * Initializes the order product attribute instance.
 	 *
-	 * @param array $values Associative array of order product attribute values. Possible
-	 * keys: 'id', 'ordprodid', 'value', 'code', 'mtime'
+	 * @param array $values Associative array of order product attribute values
 	 */
 	public function __construct( array $values = [] )
 	{

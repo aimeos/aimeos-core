@@ -130,7 +130,7 @@ return array(
 
 			$table->bigid()->primary( 'pk_msordbaprat_id' );
 			$table->string( 'siteid' );
-			$table->bigint( 'ordprodid' );
+			$table->bigint( 'parentid' );
 			$table->refid( 'attrid' );
 			$table->type();
 			$table->code()->length( 255 );
@@ -139,10 +139,10 @@ return array(
 			$table->float( 'quantity' );
 			$table->meta();
 
-			$table->unique( ['ordprodid', 'attrid', 'type', 'code'], 'unq_msordbaprat_oid_aid_ty_cd' );
-			$table->index( ['ordprodid'], 'fk_msordbaprat_ordprodid' );
+			$table->unique( ['parentid', 'attrid', 'type', 'code'], 'unq_msordbaprat_oid_aid_ty_cd' );
+			$table->index( ['parentid'], 'fk_msordbaprat_parentid' );
 
-			$table->foreign( 'ordprodid', 'mshop_order_base_product', 'id', 'fk_msordbaprat_ordprodid' );
+			$table->foreign( 'parentid', 'mshop_order_base_product', 'id', 'fk_msordbaprat_parentid' );
 		},
 
 		'mshop_order_base_service' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -180,7 +180,7 @@ return array(
 
 			$table->bigid()->primary( 'pk_msordbaseat_id' );
 			$table->string( 'siteid' );
-			$table->bigint( 'ordservid' );
+			$table->bigint( 'parentid' );
 			$table->refid( 'attrid' );
 			$table->type();
 			$table->code()->length( 255 );
@@ -189,10 +189,10 @@ return array(
 			$table->float( 'quantity' );
 			$table->meta();
 
-			$table->unique( ['ordservid', 'attrid', 'type', 'code'], 'unq_msordbaseat_oid_aid_ty_cd' );
-			$table->index( ['ordservid'], 'fk_msordbaseat_ordservid' );
+			$table->unique( ['parentid', 'attrid', 'type', 'code'], 'unq_msordbaseat_oid_aid_ty_cd' );
+			$table->index( ['parentid'], 'fk_msordbaseat_parentid' );
 
-			$table->foreign( 'ordservid', 'mshop_order_base_service', 'id', 'fk_msordbaseat_ordservid' );
+			$table->foreign( 'parentid', 'mshop_order_base_service', 'id', 'fk_msordbaseat_parentid' );
 		},
 
 		'mshop_order_base_coupon' => function( \Aimeos\Upscheme\Schema\Table $table ) {

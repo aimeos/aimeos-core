@@ -26,7 +26,7 @@ class Standard
 		'order.base.product.attribute.id' => array(
 			'code' => 'order.base.product.attribute.id',
 			'internalcode' => 'mordbaprat."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_product_attr" AS mordbaprat ON ( mordbapr."id" = mordbaprat."ordprodid" )' ),
+			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_product_attr" AS mordbaprat ON ( mordbapr."id" = mordbaprat."parentid" )' ),
 			'label' => 'Product attribute ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -50,7 +50,7 @@ class Standard
 		),
 		'order.base.product.attribute.parentid' => array(
 			'code' => 'order.base.product.attribute.parentid',
-			'internalcode' => 'mordbaprat."ordprodid"',
+			'internalcode' => 'mordbaprat."parentid"',
 			'label' => 'Product ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

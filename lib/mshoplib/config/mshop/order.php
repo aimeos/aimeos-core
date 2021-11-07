@@ -270,7 +270,7 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_order_base_product_attr" ( :names
-								"attrid", "ordprodid", "type", "code", "value",
+								"attrid", "parentid", "type", "code", "value",
 								"quantity", "name", "mtime", "editor", "siteid", "ctime"
 							) VALUES ( :values
 								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -281,7 +281,7 @@ return array(
 						'ansi' => '
 							UPDATE "mshop_order_base_product_attr"
 							SET :names
-								"attrid" = ?, "ordprodid" = ?, "type" = ?, "code" = ?,
+								"attrid" = ?, "parentid" = ?, "type" = ?, "code" = ?,
 								"value" = ?, "quantity" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -290,7 +290,7 @@ return array(
 						'ansi' => '
 							SELECT :columns
 								mordbaprat."id" AS "order.base.product.attribute.id", mordbaprat."siteid" AS "order.base.product.attribute.siteid",
-								mordbaprat."attrid" AS "order.base.product.attribute.attributeid", mordbaprat."ordprodid" AS "order.base.product.attribute.parentid",
+								mordbaprat."attrid" AS "order.base.product.attribute.attributeid", mordbaprat."parentid" AS "order.base.product.attribute.parentid",
 								mordbaprat."type" AS "order.base.product.attribute.type", mordbaprat."code" AS "order.base.product.attribute.code",
 								mordbaprat."value" AS "order.base.product.attribute.value", mordbaprat."quantity" AS "order.base.product.attribute.quantity",
 								mordbaprat."name" AS "order.base.product.attribute.name", mordbaprat."mtime" AS "order.base.product.attribute.mtime",
@@ -304,7 +304,7 @@ return array(
 						'mysql' => '
 							SELECT :columns
 								mordbaprat."id" AS "order.base.product.attribute.id", mordbaprat."siteid" AS "order.base.product.attribute.siteid",
-								mordbaprat."attrid" AS "order.base.product.attribute.attributeid", mordbaprat."ordprodid" AS "order.base.product.attribute.parentid",
+								mordbaprat."attrid" AS "order.base.product.attribute.attributeid", mordbaprat."parentid" AS "order.base.product.attribute.parentid",
 								mordbaprat."type" AS "order.base.product.attribute.type", mordbaprat."code" AS "order.base.product.attribute.code",
 								mordbaprat."value" AS "order.base.product.attribute.value", mordbaprat."quantity" AS "order.base.product.attribute.quantity",
 								mordbaprat."name" AS "order.base.product.attribute.name", mordbaprat."mtime" AS "order.base.product.attribute.mtime",
@@ -513,7 +513,7 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_order_base_service_attr" ( :names
-								"attrid", "ordservid", "type", "code", "value",
+								"attrid", "parentid", "type", "code", "value",
 								"quantity", "name", "mtime", "editor", "siteid", "ctime"
 							) VALUES ( :values
 								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -524,7 +524,7 @@ return array(
 						'ansi' => '
 							UPDATE "mshop_order_base_service_attr"
 							SET :names
-								"attrid" = ?, "ordservid" = ?, "type" = ?, "code" = ?,
+								"attrid" = ?, "parentid" = ?, "type" = ?, "code" = ?,
 								"value" = ?, "quantity" = ?, "name" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -533,7 +533,7 @@ return array(
 						'ansi' => '
 							SELECT :columns
 								mordbaseat."id" AS "order.base.service.attribute.id", mordbaseat."siteid" AS "order.base.service.attribute.siteid",
-								mordbaseat."attrid" AS "order.base.service.attribute.attributeid", mordbaseat."ordservid" AS "order.base.service.attribute.parentid",
+								mordbaseat."attrid" AS "order.base.service.attribute.attributeid", mordbaseat."parentid" AS "order.base.service.attribute.parentid",
 								mordbaseat."type" AS "order.base.service.attribute.type", mordbaseat."code" AS "order.base.service.attribute.code",
 								mordbaseat."value" AS "order.base.service.attribute.value", mordbaseat."quantity" AS "order.base.service.attribute.quantity",
 								mordbaseat."name" AS "order.base.service.attribute.name", mordbaseat."mtime" AS "order.base.service.attribute.mtime",
@@ -547,7 +547,7 @@ return array(
 						'mysql' => '
 							SELECT :columns
 								mordbaseat."id" AS "order.base.service.attribute.id", mordbaseat."siteid" AS "order.base.service.attribute.siteid",
-								mordbaseat."attrid" AS "order.base.service.attribute.attributeid", mordbaseat."ordservid" AS "order.base.service.attribute.parentid",
+								mordbaseat."attrid" AS "order.base.service.attribute.attributeid", mordbaseat."parentid" AS "order.base.service.attribute.parentid",
 								mordbaseat."type" AS "order.base.service.attribute.type", mordbaseat."code" AS "order.base.service.attribute.code",
 								mordbaseat."value" AS "order.base.service.attribute.value", mordbaseat."quantity" AS "order.base.service.attribute.quantity",
 								mordbaseat."name" AS "order.base.service.attribute.name", mordbaseat."mtime" AS "order.base.service.attribute.mtime",

@@ -26,7 +26,7 @@ class Standard
 		'order.base.service.attribute.id' => array(
 			'code' => 'order.base.service.attribute.id',
 			'internalcode' => 'mordbaseat."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_service_attr" AS mordbaseat ON ( mordbase."id" = mordbaseat."ordservid" )' ),
+			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_service_attr" AS mordbaseat ON ( mordbase."id" = mordbaseat."parentid" )' ),
 			'label' => 'Service attribute ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -50,7 +50,7 @@ class Standard
 		),
 		'order.base.service.attribute.parentid' => array(
 			'code' => 'order.base.service.attribute.parentid',
-			'internalcode' => 'mordbaseat."ordservid"',
+			'internalcode' => 'mordbaseat."parentid"',
 			'label' => 'Service ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
