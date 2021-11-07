@@ -374,7 +374,7 @@ return array(
 							"baseid", "ordprodid", "ordaddrid", "type", "parentprodid", "prodid", "prodcode", "supplierid",
 							"suppliername", "stocktype", "name", "description", "mediaurl", "timeframe",
 							"quantity", "currencyid", "price", "costs", "rebate", "tax", "taxrate", "taxflag",
-							"flags", "statuspayment", "status", "pos", "mtime", "editor", "target", "qtyopen", "notes",
+							"flags", "statuspayment", "statusdelivery", "pos", "mtime", "editor", "target", "qtyopen", "notes",
 							"siteid", "ctime"
 						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -389,7 +389,7 @@ return array(
 							"prodid" = ?, "prodcode" = ?, "supplierid" = ?, "suppliername" = ?, "stocktype" = ?,
 							"name" = ?, "description" = ?, "mediaurl" = ?, "timeframe" = ?, "quantity" = ?,
 							"currencyid" = ?, "price" = ?, "costs" = ?, "rebate" = ?, "tax" = ?, "taxrate" = ?,
-							"taxflag" = ?, "flags" = ?, "statuspayment" = ?, "status" = ?, "pos" = ?,
+							"taxflag" = ?, "flags" = ?, "statuspayment" = ?, "statusdelivery" = ?, "pos" = ?,
 							"mtime" = ?, "editor" = ?, "target" = ?, "qtyopen" = ?, "notes" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -407,7 +407,7 @@ return array(
 							mordbapr."price" AS "order.base.product.price", mordbapr."costs" AS "order.base.product.costs",
 							mordbapr."rebate" AS "order.base.product.rebate", mordbapr."tax" AS "order.base.product.taxvalue",
 							mordbapr."taxrate" AS "order.base.product.taxrates", mordbapr."taxflag" AS "order.base.product.taxflag",
-							mordbapr."flags" AS "order.base.product.flags", mordbapr."status" AS "order.base.product.statusdelivery",
+							mordbapr."flags" AS "order.base.product.flags", mordbapr."statusdelivery" AS "order.base.product.statusdelivery",
 							mordbapr."pos" AS "order.base.product.position", mordbapr."mtime" AS "order.base.product.mtime",
 							mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime",
 							mordbapr."target" AS "order.base.product.target", mordbapr."ordaddrid" AS "order.base.product.orderaddressid",
@@ -422,7 +422,7 @@ return array(
 							mordbapr."prodcode", mordbapr."description", mordbapr."stocktype", mordbapr."type",
 							mordbapr."name", mordbapr."mediaurl", mordbapr."timeframe", mordbapr."quantity",
 							mordbapr."currencyid", mordbapr."price", mordbapr."costs", mordbapr."rebate", mordbapr."tax",
-							mordbapr."taxrate", mordbapr."taxflag", mordbapr."flags", mordbapr."status", mordbapr."pos",
+							mordbapr."taxrate", mordbapr."taxflag", mordbapr."flags", mordbapr."statusdelivery", mordbapr."pos",
 							mordbapr."mtime", mordbapr."editor", mordbapr."ctime", mordbapr."target", mordbapr."ordaddrid",
 							mordbapr."supplierid", mordbapr."suppliername", mordbapr."qtyopen", mordbapr."notes",
 							mordbapr."statuspayment", mordbapr."parentprodid"
@@ -441,7 +441,7 @@ return array(
 							mordbapr."price" AS "order.base.product.price", mordbapr."costs" AS "order.base.product.costs",
 							mordbapr."rebate" AS "order.base.product.rebate", mordbapr."tax" AS "order.base.product.taxvalue",
 							mordbapr."taxrate" AS "order.base.product.taxrates", mordbapr."taxflag" AS "order.base.product.taxflag",
-							mordbapr."flags" AS "order.base.product.flags", mordbapr."status" AS "order.base.product.statusdelivery",
+							mordbapr."flags" AS "order.base.product.flags", mordbapr."statusdelivery" AS "order.base.product.statusdelivery",
 							mordbapr."pos" AS "order.base.product.position", mordbapr."mtime" AS "order.base.product.mtime",
 							mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime",
 							mordbapr."target" AS "order.base.product.target", mordbapr."ordaddrid" AS "order.base.product.orderaddressid",

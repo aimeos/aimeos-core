@@ -472,7 +472,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '=~', 'order.base.product.taxrates', '{' );
 		$expr[] = $search->compare( '==', 'order.base.product.flags', 0 );
 		$expr[] = $search->compare( '==', 'order.base.product.position', 1 );
-		$expr[] = $search->compare( '==', 'order.base.product.status', 1 );
+		$expr[] = $search->compare( '==', 'order.base.product.statuspayment', 5 );
+		$expr[] = $search->compare( '==', 'order.base.product.statusdelivery', 1 );
 		$expr[] = $search->compare( '>=', 'order.base.product.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.base.product.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.product.editor', $this->editor );

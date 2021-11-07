@@ -110,7 +110,7 @@ return array(
 			$table->int( 'flags' )->default( 0 );
 			$table->int( 'pos' )->default( 0 );
 			$table->smallint( 'statuspayment' )->null( true );
-			$table->smallint( 'status' )->null( true );
+			$table->smallint( 'statusdelivery' )->null( true );
 			$table->string( 'notes' )->default( '' );
 			$table->meta();
 

@@ -215,16 +215,8 @@ class Standard
 		),
 		'order.base.product.statusdelivery' => array(
 			'code' => 'order.base.product.statusdelivery',
-			'internalcode' => 'mordbapr."status"',
+			'internalcode' => 'mordbapr."statusdelivery"',
 			'label' => 'Product delivery status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-		),
-		// @deprecated 2022.01
-		'order.base.product.status' => array(
-			'code' => 'order.base.product.status',
-			'internalcode' => 'mordbapr."status"',
-			'label' => 'Product status',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
