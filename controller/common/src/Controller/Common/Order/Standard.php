@@ -434,7 +434,6 @@ class Standard
 		$stockManager = \Aimeos\MShop::create( $this->context, 'stock' );
 		$productManager = \Aimeos\MShop::create( $this->context, 'product' );
 
-		$sum = 0; $selStockItem = null;
 		$productItem = $productManager->get( $prodId, ['product'] );
 		$prodIds = $productItem->getRefItems( 'product', 'default', 'default' )->getId()->push( $productItem->getId() );
 
