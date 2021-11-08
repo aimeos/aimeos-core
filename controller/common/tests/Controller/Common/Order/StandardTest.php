@@ -360,7 +360,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$orderProductStub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$orderProductStub->create()] ) ) );
+			->will( $this->returnValue( map( [$orderProductStub->create()->setProductCode( 'CNC' )] ) ) );
 
 		\Aimeos\MShop::inject( 'order/base/product', $orderProductStub );
 
@@ -402,7 +402,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->setMethods( ['search'] )
 			->getMock();
 
-		$orderProductItem = $orderProductStub->create();
+		$orderProductItem = $orderProductStub->create()->setProductCode( 'CNC' );
 		$orderProductItem->setType( 'default' );
 
 		$orderProductStub->expects( $this->once() )->method( 'search' )
@@ -448,7 +448,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->setMethods( ['search'] )
 			->getMock();
 
-		$orderProductItem = $orderProductStub->create();
+		$orderProductItem = $orderProductStub->create()->setProductCode( 'CNC' );
 		$orderProductItem->setType( 'select' );
 
 		$orderProductStub->expects( $this->once() )->method( 'search' )
