@@ -20,9 +20,9 @@ namespace Aimeos\MShop\Common\Item;
  */
 abstract class Base
 	extends \Aimeos\MW\Common\Item\Base
-	implements \Aimeos\MShop\Common\Item\Iface, \ArrayAccess
+	implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\MW\Macro\Iface, \ArrayAccess
 {
-	private static $methods = [];
+	use \Aimeos\MW\Macro\Traits;
 
 	private $available = true;
 	private $modified = false;
@@ -42,77 +42,6 @@ abstract class Base
 	{
 		$this->prefix = (string) $prefix;
 		$this->bdata = $values;
-	}
-
-
-	/**
-	 * Registers a custom method that has access to the class properties if called non-static.
-	 *
-	 * Examples:
-	 *  Item::method( 'test', function( $arg1, $arg2 ) {
-	 *      return  $arg1 + $arg2;
-	 *  } );
-	 *
-	 * @param string $name Method name
-	 * @param \Closure $function Anonymous method
-	 * @return \Closure|null Registered method
-	 */
-	public static function method( string $name, \Closure $function = null ) : ?\Closure
-	{
-		$self = get_called_class();
-
-		if( $function ) {
-			self::$methods[$self][$name] = $function;
-		}
-
-		foreach( array_merge( [$self], class_parents( static::class ) ) as $class )
-		{
-			if( isset( self::$methods[$class][$name] ) ) {
-				return self::$methods[$class][$name];
-			}
-		}
-
-		return null;
-	}
-
-
-	/**
-	 * Handles dynamic calls to custom methods for the class.
-	 *
-	 * Calls a custom method added by Item::method(). The called method has
-	 * access to the internal $this->bdata property and all other proteced
-	 * properties.
-	 *
-	 * @param string $method Method name
-	 * @param array $args List of parameters
-	 * @return mixed Result from called function
-	 * @throws \BadMethodCallException If the method hasn't been registered
-	 */
-	public function __call( string $method, array $args )
-	{
-		if( $fcn = static::method( $method ) ) {
-			return call_user_func_array( $fcn->bindTo( $this, static::class ), $args );
-		}
-
-		$msg = 'Called unknown method "%1$s" on class "%2$s"';
-		throw new \BadMethodCallException( sprintf( $msg, $method, get_class( $this ) ) );
-	}
-
-
-	/**
-	 * Passes unknown method calls to the custom methods
-	 *
-	 * @param string $method Method name
-	 * @param array $args Method arguments
-	 * @return mixed Result or method call
-	 */
-	public function call( string $method, ...$args )
-	{
-		if( $fcn = static::method( $method ) ) {
-			return call_user_func_array( $fcn->bindTo( $this, static::class ), $args );
-		}
-
-		return $this->$method( ...$args );
 	}
 
 

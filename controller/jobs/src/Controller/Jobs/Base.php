@@ -19,7 +19,11 @@ namespace Aimeos\Controller\Jobs;
  * @subpackage Jobs
  */
 abstract class Base
+	implements \Aimeos\MW\Macro\Iface
 {
+	use \Aimeos\MW\Macro\Traits;
+
+
 	private $aimeos;
 	private $context;
 

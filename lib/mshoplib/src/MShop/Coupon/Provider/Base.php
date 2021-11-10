@@ -18,8 +18,11 @@ namespace Aimeos\MShop\Coupon\Provider;
  * @package MShop
  * @subpackage Coupon
  */
-abstract class Base implements Iface
+abstract class Base
+	implements Iface, \Aimeos\MW\Macro\Iface
 {
+	use \Aimeos\MW\Macro\Traits;
+
 	private $context;
 	private $object;
 	private $item;

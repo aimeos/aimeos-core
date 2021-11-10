@@ -99,13 +99,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetOrderNumberCustom()
 	{
-		\Aimeos\MShop\Order\Item\Base::method( 'ordernumber', function( \Aimeos\MShop\Order\Item\Iface $item ) {
+		\Aimeos\MShop\Order\Item\Base::macro( 'ordernumber', function( \Aimeos\MShop\Order\Item\Iface $item ) {
 			return 'order-' . $item->getId() . 'Z';
 		} );
 
 		$this->assertEquals( 'order-' . $this->values['order.id'] . 'Z', $this->object->getOrderNumber() );
 
-		\Aimeos\MShop\Order\Item\Base::method( 'ordernumber', function( \Aimeos\MShop\Order\Item\Iface $item ) {
+		\Aimeos\MShop\Order\Item\Base::macro( 'ordernumber', function( \Aimeos\MShop\Order\Item\Iface $item ) {
 			return $item->getId();
 		} );
 	}

@@ -48,7 +48,7 @@ class Standard
 	 */
 	public function getOrderNumber() : string
 	{
-		if( $fcn = self::method( 'ordernumber' ) ) {
+		if( $fcn = self::macro( 'ordernumber' ) ) {
 			return (string) $fcn( $this );
 		}
 

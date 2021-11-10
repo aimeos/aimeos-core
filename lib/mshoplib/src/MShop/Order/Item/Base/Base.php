@@ -18,9 +18,10 @@ namespace Aimeos\MShop\Order\Item\Base;
  * @package MShop
  * @subpackage Order
  */
-abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \ArrayAccess
+abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\MW\Macro\Iface, \ArrayAccess
 {
 	use \Aimeos\MW\Observer\Publisher\Traits;
+	use \Aimeos\MW\Macro\Traits;
 
 
 	/**

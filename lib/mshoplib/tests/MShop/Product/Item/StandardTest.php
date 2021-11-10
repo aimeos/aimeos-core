@@ -70,11 +70,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testDynamicMethods()
 	{
-		\Aimeos\MShop\Product\Item\Standard::method( 'test', function( $name ) {
+		\Aimeos\MShop\Product\Item\Standard::macro( 'test', function( $name ) {
 			return $this->bdata[$name];
 		} );
 
-		$this->assertInstanceOf( '\Closure', \Aimeos\MShop\Product\Item\Standard::method( 'test' ) );
+		$this->assertInstanceOf( '\Closure', \Aimeos\MShop\Product\Item\Standard::macro( 'test' ) );
 
 		$object = new \Aimeos\MShop\Product\Item\Standard( $this->values );
 		$this->assertEquals( 'TEST', $object->test( 'product.code' ) );
@@ -86,11 +86,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testDynamicBaseMethods()
 	{
-		\Aimeos\MShop\Common\Item\Base::method( 'tests', function( $name ) {
+		\Aimeos\MShop\Common\Item\Base::macro( 'tests', function( $name ) {
 			return $this->bdata[$name];
 		} );
 
-		$this->assertInstanceOf( '\Closure', \Aimeos\MShop\Product\Item\Standard::method( 'tests' ) );
+		$this->assertInstanceOf( '\Closure', \Aimeos\MShop\Product\Item\Standard::macro( 'tests' ) );
 
 		$object = new \Aimeos\MShop\Product\Item\Standard( $this->values );
 		$this->assertEquals( 'TEST', $object->tests( 'product.code' ) );

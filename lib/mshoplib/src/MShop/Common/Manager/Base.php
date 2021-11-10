@@ -20,9 +20,12 @@ use \Aimeos\MShop\Locale\Manager\Base as Locale;
  * @package MShop
  * @subpackage Common
  */
-abstract class Base extends \Aimeos\MW\Common\Manager\Base
+abstract class Base
+	extends \Aimeos\MW\Common\Manager\Base
+	implements \Aimeos\MW\Macro\Iface
 {
 	use \Aimeos\MShop\Common\Manager\Sub\Traits;
+	use \Aimeos\MW\Macro\Traits;
 
 
 	private $context;
@@ -40,20 +43,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		$this->context = $context;
-	}
-
-
-	/**
-	 * Catch unknown methods
-	 *
-	 * @param string $name Name of the method
-	 * @param array $param List of method parameter
-	 * @throws \Aimeos\MShop\Exception If method call failed
-	 */
-	public function __call( string $name, array $param )
-	{
-		$msg = $this->getContext()->translate( 'mshop', 'Unable to call method "%1$s"' );
-		throw new \Aimeos\MShop\Exception( sprintf( $msg, $name ) );
 	}
 
 
