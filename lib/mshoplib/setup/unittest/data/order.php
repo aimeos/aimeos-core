@@ -11,7 +11,7 @@ return [[
 		'order.status.type' => 'typestatus', 'order.status.value' => 'shipped'
 	]],
 	'base' => [
-		'order.base.customerid' => 'test@example.com', 'order.base.sitecode' => 'unittest',
+		'order.base.sitecode' => 'unittest',
 		'order.base.customerref' => 'ABC-1234', 'order.base.languageid' => 'de',
 		'order.base.comment' => 'This is a comment if an order. It can be added by the user.',
 		'address' => [[
@@ -175,7 +175,7 @@ return [[
 		'order.status.type' => 'typestatus', 'order.status.value' => 'waiting'
 	]],
 	'base' => [
-		'order.base.customerid' => 'test@example.com', 'order.base.sitecode' => 'unittest',
+		'order.base.sitecode' => 'unittest',
 		'order.base.languageid' => 'de', 'order.base.customerref' => 'ABC-9876',
 		'order.base.comment' => 'This is another comment.',
 		'address' => [[
@@ -237,7 +237,7 @@ return [[
 ], [
 	'order.type' => 'web', 'order.statuspayment' => 6, 'order.statusdelivery' => 4, 'order.datepayment' => '2009-03-18 16:14:32',
 	'base' => [
-		'order.base.customerid' => 'test@example.com', 'order.base.sitecode' => 'unittest',
+		'order.base.sitecode' => 'unittest',
 		'order.base.languageid' => 'de', 'order.base.customerref' => 'XYZ-1234',
 		'order.base.comment' => 'This is a bundle basket.',
 		'address' => [[
@@ -315,7 +315,7 @@ return [[
 		'order.status.type' => 'status', 'order.status.value' => 'waiting'
 	]],
 	'base' => [
-		'order.base.customerid' => 'test@example.com', 'order.base.sitecode' => 'unittest',
+		'order.base.sitecode' => 'unittest',
 		'order.base.languageid' => 'de', 'order.base.customerref' => 'XYZ-9876',
 		'order.base.comment' => 'This is a comment if an order. It can be added by the user.',
 		'address' => [[

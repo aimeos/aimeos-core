@@ -37,9 +37,9 @@ class OrderAddTestData extends Base
 		$context->setEditor( 'core:lib/mshoplib' );
 		$context->getLocale()->setCurrencyId( 'EUR' );
 
-		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::create( $context, 'Standard' )->getSubManager( 'base' );
-		$filter = $orderBaseManager->filter()->add( ['order.base.sitecode' => ['unittest', 'unit']] );
-		$orderBaseManager->delete( $orderBaseManager->search( $filter ) );
+		$manager = $this->getOrderManager( 'base' );
+		$filter = $manager->filter()->add( ['order.base.sitecode' => 'unittest'] );
+		$manager->delete( $manager->search( $filter ) );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'order.php';
@@ -48,20 +48,19 @@ class OrderAddTestData extends Base
 			throw new \RuntimeException( sprintf( 'No file "%1$s" found for order domain', $path ) );
 		}
 
-		$this->import( $testdata );
+		$this->import( $testdata, $this->getCustomer()->getId() );
 
 		$context->getLocale()->setCurrencyId( null );
 	}
 
 
-	protected function import( array $data )
+	protected function import( array $data, string $customerId )
 	{
 		$orderManager = $this->getOrderManager();
 		$orderBaseManager = $this->getOrderManager( 'base' );
 		$orderStatusManager = $this->getOrderManager( 'status' );
 		$orderCouponManager = $this->getOrderManager( 'base/coupon' );
 
-		$customerId = $this->getCustomer()->getId();
 		$attributes = $this->getAttributes();
 		$products = $this->getProducts();
 		$services = $this->getServices();
