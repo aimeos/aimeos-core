@@ -118,7 +118,7 @@ class Standard
 	 */
 	public function getType() : string
 	{
-		return $this->get( 'order.base.address.type', \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+		return $this->get( 'order.base.address.type', \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 	}
 
 
