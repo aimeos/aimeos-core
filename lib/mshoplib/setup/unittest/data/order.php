@@ -210,7 +210,7 @@ return [[
 			'order.base.product.mediaurl' => 'somewhere/thump5.jpg', 'order.base.product.quantity' => 2, 'order.base.product.qtyopen' => 0,
 			'order.base.product.flags' => '0', 'order.base.product.position' => 1, 'order.base.product.statusdelivery' => 1
 		], [
-			'price.value' => '600.00', 'price.costs' => '30.00','price.rebate' => '0.00', 'price.taxrates' => ['' => '19.00'],
+			'price.value' => '600.00', 'price.costs' => '30.00', 'price.rebate' => '0.00', 'price.taxrates' => ['' => '19.00'],
 			'order.base.product.type' => 'default', 'order.base.product.prodcode' => 'CNC',
 			'order.base.product.suppliername' => 'Test supplier', 'order.base.product.supplierid' => 'unitSupplier001',
 			'order.base.product.stocktype' => 'default', 'order.base.product.name' => 'Cafe Noire Cappuccino',
@@ -276,7 +276,7 @@ return [[
 			]],
 		], [
 			'price.value' => '1200.00', 'price.costs' => '30.00', 'price.rebate' => '0.00', 'price.taxrates' => ['' => '17.00'],
-			'order.base.product.type' => 'bundle',  'order.base.product.prodcode' => 'bdl:hal',
+			'order.base.product.type' => 'bundle', 'order.base.product.prodcode' => 'bdl:hal',
 			'order.base.product.suppliername' => 'Test supplier', 'order.base.product.supplierid' => 'unitSupplier001',
 			'order.base.product.stocktype' => 'unitstock', 'order.base.product.name' => 'Bundle Unittest2',
 			'order.base.product.mediaurl' => 'somewhere/thump6.jpg', 'order.base.product.quantity' => 1, 'order.base.product.qtyopen' => 0,
