@@ -263,9 +263,9 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.base.service.attribute.siteid': !$private ?: $item = $item->setSiteId( $value ); break;
-				case 'order.base.service.attribute.attrid': !$private ?: $item = $item->setAttributeId( $value ); break;
+				case 'order.base.service.attribute.attributeid': !$private ?: $item = $item->setAttributeId( $value ); break;
 				case 'order.base.service.attribute.parentid': !$private ?: $item = $item->setParentId( $value ); break;
+				case 'order.base.service.attribute.siteid': !$private ?: $item = $item->setSiteId( $value ); break;
 				case 'order.base.service.attribute.type': $item = $item->setType( $value ); break;
 				case 'order.base.service.attribute.name': $item = $item->setName( $value ); break;
 				case 'order.base.service.attribute.code': $item = $item->setCode( $value ); break;
@@ -300,7 +300,7 @@ class Standard
 		if( $private === true )
 		{
 			$list['order.base.service.attribute.parentid'] = $this->getParentId();
-			$list['order.base.service.attribute.attrid'] = $this->getAttributeId();
+			$list['order.base.service.attribute.attributeid'] = $this->getAttributeId();
 		}
 
 		return $list;

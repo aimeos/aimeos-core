@@ -242,7 +242,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = $entries = array(
 			'order.base.service.attribute.id' => 1,
-			'order.base.service.attribute.attrid' => 2,
+			'order.base.service.attribute.attributeid' => 2,
 			'order.base.service.attribute.parentid' => 3,
 			'order.base.service.attribute.type' => 'delivery',
 			'order.base.service.attribute.code' => 'test',
@@ -256,7 +256,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['order.base.service.attribute.id'], $item->getId() );
-		$this->assertEquals( $list['order.base.service.attribute.attrid'], $item->getAttributeId() );
+		$this->assertEquals( $list['order.base.service.attribute.attributeid'], $item->getAttributeId() );
 		$this->assertEquals( $list['order.base.service.attribute.parentid'], $item->getParentId() );
 		$this->assertEquals( $list['order.base.service.attribute.type'], $item->getType() );
 		$this->assertEquals( $list['order.base.service.attribute.code'], $item->getCode() );
@@ -274,7 +274,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $this->object->getId(), $list['order.base.service.attribute.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $list['order.base.service.attribute.siteid'] );
-		$this->assertEquals( $this->object->getAttributeId(), $list['order.base.service.attribute.attrid'] );
+		$this->assertEquals( $this->object->getAttributeId(), $list['order.base.service.attribute.attributeid'] );
 		$this->assertEquals( $this->object->getParentId(), $list['order.base.service.attribute.parentid'] );
 		$this->assertEquals( $this->object->getType(), $list['order.base.service.attribute.type'] );
 		$this->assertEquals( $this->object->getCode(), $list['order.base.service.attribute.code'] );
