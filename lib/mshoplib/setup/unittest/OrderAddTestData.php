@@ -37,23 +37,7 @@ class OrderAddTestData extends Base
 		$context->setEditor( 'core:lib/mshoplib' );
 		$context->getLocale()->setCurrencyId( 'EUR' );
 
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $context, 'Standard' );
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $context, 'Standard' );
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $context, 'Standard' );
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $context, 'Standard' );
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $context, 'Standard' );
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $context, 'Standard' );
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context, 'Standard' );
-
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
-		$orderStatusManager = $orderManager->getSubManager( 'status' );
-		$orderCouponManager = $orderBaseManager->getSubManager( 'coupon' );
-		$orderAddressManager = $orderBaseManager->getSubManager( 'address' );
-		$orderProductManager = $orderBaseManager->getSubManager( 'product' );
-		$orderServiceManager = $orderBaseManager->getSubManager( 'service' );
-		$orderProductAttrManager = $orderProductManager->getSubManager( 'attribute' );
-		$orderServiceAttrManager = $orderServiceManager->getSubManager( 'attribute' );
-
+		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::create( $context, 'Standard' )->getSubManager( 'base' );
 		$filter = $orderBaseManager->filter()->add( ['order.base.sitecode' => ['unittest', 'unit']] );
 		$orderBaseManager->delete( $orderBaseManager->search( $filter ) );
 
@@ -64,650 +48,185 @@ class OrderAddTestData extends Base
 			throw new \RuntimeException( sprintf( 'No file "%1$s" found for order domain', $path ) );
 		}
 
-		$customerId = $customerManager->find( 'test@example.com' )->getId();
-		$products = $productManager->search( $productManager->filter() )->col( 'product.id', 'product.code' );
-		$services = $serviceManager->search( $serviceManager->filter() )->col( 'service.id', 'service.code' );
-		$attributes = $attributeManager->search( $attributeManager->filter() )
-			->groupBy( 'attribute.type' )->map( function( $list ) {
-				return map( $list )->col( 'attribute.id', 'attribute.code' );
-			} );
-
-		foreach( $testdata as $data )
-		{
-			if( !isset( $data['base'] ) ) {
-				throw new \RuntimeException( 'No base data found for ' . print_r( $data, true ) );
-			}
-
-			$basket = $orderBaseManager->create()->off()
-				->fromArray( $data['base'], true )->setCustomerId( $customerId );
-
-
-			foreach( $data['base']['address'] ?? [] as $entry )
-			{
-				$type = $entry['order.base.address.type'] ?? 'payment';
-				$basket->addAddress( $orderAddressManager->create()->fromArray( $entry, true ), $type );
-			}
-
-
-			foreach( $data['base']['product'] ?? [] as $entry )
-			{
-				$list = [];
-				foreach( $entry['product'] ?? [] as $subentry )
-				{
-					$attrs = [];
-					foreach( $subentry['attribute'] ?? [] as $attr )
-					{
-						$key = $attr['order.base.product.attribute.code'] . '/' . $attr['order.base.product.attribute.value'];
-						$attrs[] = $orderProductAttrManager->create()->fromArray( $attr, true )
-							->setAttributeId( $attributes->get( $key ) );
-					}
-
-					$code = $subentry['order.base.product.prodcode'] ?? null;
-					$price = $priceManager->create()->fromArray( $subentry, true );
-
-					$list[] = $orderProductManager->create()->fromArray( $subentry, true )
-						->setAttributeItems( $attrs )->setPrice( $price )
-						->setProductId( $products->get( $code ) );
-				}
-
-				$attrs = [];
-				foreach( $entry['attribute'] ?? [] as $attr )
-				{
-					$key = $attr['order.base.product.attribute.code'] . '/' . $attr['order.base.product.attribute.value'];
-					$attrs[] = $orderProductAttrManager->create()->fromArray( $attr, true )
-						->setAttributeId( $attributes->get( $key ) );
-				}
-
-				$code = $entry['order.base.product.prodcode'] ?? null;
-				$price = $priceManager->create()->fromArray( $entry, true );
-
-				$product = $orderProductManager->create()->fromArray( $entry, true )
-					->setProducts( $list )->setAttributeItems( $attrs )->setPrice( $price )
-					->setProductId( $products->get( $code ) );
-
-				$basket->addProduct( $product );
-			}
-
-
-			foreach( $data['base']['coupon'] ?? [] as $entry )
-			{
-				$list = [];
-
-				if( ( $pos = $entry['ordprodpos'] ?? null ) !== null )
-				{
-					$list = [$basket->getProduct( $pos )];
-					$basket->deleteProduct( $pos );
-				}
-
-				$basket->setCoupon( $entry['code'], $list );
-			}
-
-
-			foreach( $data['base']['service'] ?? [] as $entry )
-			{
-				$attrs = [];
-				foreach( $entry['attribute'] ?? [] as $attr ) {
-					$attrs[] = $orderServiceAttrManager->create()->fromArray( $attr, true );
-				}
-
-				$code = $entry['order.base.service.code'] ?? null;
-				$type = $entry['order.base.service.type'] ?? 'payment';
-				$price = $priceManager->create()->fromArray( $entry, true );
-
-				$service = $orderServiceManager->create()->fromArray( $entry, true )
-					->setAttributeItems( $attrs )->setPrice( $price )
-					->setServiceId( $services->get( $code ) ?: '' );
-
-				$basket->addService( $service, $type );
-			}
-
-			$item = $orderManager->create()->fromArray( $data, true );
-
-			$orderBaseManager->store( $basket );
-			$orderManager->save( $item->setBaseId( $basket->getId() ) );
-
-			foreach( $data['status'] ?? [] as $entry ) {
-				$orderStatusManager->save( $orderStatusManager->create()->fromArray( $entry )->setParentId( $item->getId() ) );
-			}
-		}
+		$this->import( $testdata );
 
 		$context->getLocale()->setCurrencyId( null );
 	}
 
 
-	/**
-	 * Adds the required order base data.
-	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $localeManager Locale manager
-	 * @param \Aimeos\MShop\Common\Manager\Iface $orderBaseManager Order base manager
-	 * @param array $testdata Associative list of key/list pairs
-	 */
-	protected function addOrderBaseData( \Aimeos\MShop\Common\Manager\Iface $localeManager,
-		\Aimeos\MShop\Common\Manager\Iface $orderBaseManager, array $testdata )
+	protected function import( array $data )
 	{
-		$bases = [];
-		$locale = $localeManager->create();
-		$customerIds = $this->getCustomerIds( $testdata );
-		$orderBaseAddressManager = $orderBaseManager->getSubManager( 'address', 'Standard' );
+		$orderManager = $this->getOrderManager();
+		$orderBaseManager = $this->getOrderManager( 'base' );
+		$orderStatusManager = $this->getOrderManager( 'status' );
+		$orderCouponManager = $this->getOrderManager( 'base/coupon' );
 
-		$orderBaseManager->begin();
+		$customerId = $this->getCustomer()->getId();
+		$attributes = $this->getAttributes();
+		$products = $this->getProducts();
+		$services = $this->getServices();
 
-		foreach( $testdata['order/base'] as $key => $dataset )
+		foreach( $data as $entry )
 		{
-			$bases['items'][$key] = $orderBaseManager->create();
-			$bases['items'][$key]->setId( null );
-			$bases['items'][$key]->setComment( $dataset['comment'] );
-			$bases['items'][$key]->setCustomerReference( $dataset['customerref'] );
-			$bases['items'][$key]->setCustomerId( $customerIds[$dataset['customerid']] );
-
-			$locale->setId( null );
-			$locale->setSiteId( $this->context()->getLocale()->getSiteId() );
-			$locale->setLanguageId( $dataset['langid'] );
-			$locale->setCurrencyId( $dataset['currencyid'] );
-			$bases['items'][$key]->setLocale( $locale );
-
-			$orderBaseManager->save( $bases['items'][$key] );
-			$bases['ids'][$key] = $bases['items'][$key]->getId();
-		}
-
-		$this->addOrderBaseAddressData( $orderBaseAddressManager, $bases, $testdata );
-
-		$orderBaseManager->commit();
-
-		return $bases;
-	}
-
-
-	/**
-	 * Adds the order address data.
-	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $manager
-	 * @param array $testdata
-	 */
-	protected function addOrderBaseAddressData( \Aimeos\MShop\Common\Manager\Iface $manager,
-		array $bases, array $testdata )
-	{
-		$orderAddr = $manager->create();
-
-		foreach( $testdata['order/base/address'] as $dataset )
-		{
-			if( !isset( $bases['ids'][$dataset['baseid']] ) ) {
-				throw new \RuntimeException( sprintf( 'No base ID found for "%1$s"', $dataset['baseid'] ) );
+			if( !isset( $entry['base'] ) ) {
+				throw new \RuntimeException( 'No base data found for ' . print_r( $entry, true ) );
 			}
 
-			$orderAddr->setId( null );
-			$orderAddr->setBaseId( $bases['ids'][$dataset['baseid']] );
-			$orderAddr->setAddressId( ( $dataset['addrid'] ?? '' ) );
-			$orderAddr->setType( $dataset['type'] );
-			$orderAddr->setCompany( $dataset['company'] ?? '' );
-			$orderAddr->setVatID( ( $dataset['vatid'] ?? '' ) );
-			$orderAddr->setSalutation( $dataset['salutation'] );
-			$orderAddr->setTitle( $dataset['title'] );
-			$orderAddr->setFirstname( $dataset['firstname'] );
-			$orderAddr->setLastname( $dataset['lastname'] );
-			$orderAddr->setAddress1( $dataset['address1'] );
-			$orderAddr->setAddress2( $dataset['address2'] );
-			$orderAddr->setAddress3( $dataset['address3'] );
-			$orderAddr->setPostal( $dataset['postal'] );
-			$orderAddr->setCity( $dataset['city'] );
-			$orderAddr->setState( $dataset['state'] );
-			$orderAddr->setCountryId( $dataset['countryid'] );
-			$orderAddr->setTelephone( $dataset['telephone'] );
-			$orderAddr->setEmail( $dataset['email'] );
-			$orderAddr->setTelefax( $dataset['telefax'] );
-			$orderAddr->setWebsite( $dataset['website'] );
-			$orderAddr->setLanguageId( $dataset['langid'] );
-			$orderAddr->setLatitude( $dataset['latitude'] );
-			$orderAddr->setLongitude( $dataset['longitude'] );
-			$orderAddr->setBirthday( $dataset['birthday'] ?? null );
+			$basket = $orderBaseManager->create()->off()
+				->fromArray( $entry['base'], true )->setCustomerId( $customerId );
 
-			$manager->save( $orderAddr, false );
-		}
-	}
+			$basket->setAddresses( $this->createAddresses( $entry['base']['address'] ?? [] ) );
+			$basket->setProducts( $this->createProducts( $entry['base']['product'] ?? [], $products, $attributes ) );
+			$basket->setServices( $this->createServices( $entry['base']['service'] ?? [], $services ) );
 
-
-	/**
-	 * Adds the order coupon test data.
-	 *
-	 * @param array $testdata Associative list of key/list pairs
-	 * @throws \RuntimeException If a required ID is not available
-	 */
-	private function addOrderBaseCouponData( array $testdata )
-	{
-		$order = \Aimeos\MShop\Order\Manager\Factory::create( $this->context(), 'Standard' );
-		$orderBase = $order->getSubManager( 'base', 'Standard' );
-		$orderBaseProd = $orderBase->getSubManager( 'product', 'Standard' );
-		$orderBaseCoupon = $orderBase->getSubManager( 'coupon', 'Standard' );
-
-		$orderBaseIds = [];
-		$orderBasePrices = [];
-		$ordProdIds = [];
-		$prodcode = $quantity = $pos = [];
-		foreach( $testdata['order/base/coupon'] as $key => $dataset ) {
-			$exp = explode( '/', $dataset['ordprodid'] );
-
-			if( count( $exp ) != 3 ) {
-				throw new \RuntimeException( sprintf( 'Some keys for ordprod are set wrong "%1$s"', $dataset ) );
-			}
-
-			$prodcode[$exp[0]] = $exp[0];
-			$quantity[$exp[1]] = $exp[1];
-			$pos[$exp[2]] = $exp[2];
-
-			$orderBasePrices[$dataset['baseid']] = $dataset['baseid'];
-		}
-
-		$search = $orderBase->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.price', $orderBasePrices ) );
-
-		foreach( $orderBase->search( $search ) as $orderBaseItem ) {
-			$orderBaseIds[$orderBaseItem->getPrice()->getValue()] = $orderBaseItem->getId();
-		}
-
-
-		$search = $orderBaseProd->filter();
-		$expr = array(
-			$search->compare( '==', 'order.base.product.prodcode', $prodcode ),
-			$search->compare( '==', 'order.base.product.quantity', $quantity ),
-			$search->compare( '==', 'order.base.product.position', $pos ),
-		);
-		$search->setConditions( $search->and( $expr ) );
-
-		foreach( $orderBaseProd->search( $search ) as $ordProd ) {
-			$ordProdIds[$ordProd->getProductCode() . '/' . $ordProd->getQuantity() . '/' . $ordProd->getPosition()] = $ordProd->getId();
-		}
-
-		$orderCoupon = $orderBaseCoupon->create();
-		foreach( $testdata['order/base/coupon'] as $key => $dataset )
-		{
-			if( !isset( $orderBaseIds[$dataset['baseid']] ) ) {
-				throw new \RuntimeException( sprintf( 'No oder base ID found for "%1$s"', $dataset['baseid'] ) );
-			}
-
-			if( !isset( $ordProdIds[$dataset['ordprodid']] ) ) {
-				throw new \RuntimeException( sprintf( 'No order base product ID found for "%1$s"', $dataset['ordprodid'] ) );
-			}
-
-			$orderCoupon->setId( null );
-			$orderCoupon->setBaseId( $orderBaseIds[$dataset['baseid']] );
-			$orderCoupon->setProductId( $ordProdIds[$dataset['ordprodid']] );
-			$orderCoupon->setCode( $dataset['code'] );
-
-			$orderBaseCoupon->save( $orderCoupon, false );
-		}
-	}
-
-
-	/**
-	 * Adds the required order base service data.
-	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $orderBaseManager Order base manager
-	 * @param array $bases Associative list of key/list pairs
-	 * @param array $testdata Associative list of key/list pairs
-	 * @return array Associative list of enhanced order base items
-	 * @throws \RuntimeException If no type ID is found
-	 */
-	protected function addOrderBaseServiceData( \Aimeos\MShop\Common\Manager\Iface $orderBaseManager,
-		array $bases, array $testdata )
-	{
-		$ordServices = [];
-		$servIds = $this->getServiceIds( $testdata );
-		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service', 'Standard' );
-		$orderBaseServiceAttrManager = $orderBaseServiceManager->getSubManager( 'attribute', 'Standard' );
-		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
-		$ordServ = $orderBaseServiceManager->create();
-
-		$orderBaseManager->begin();
-
-		foreach( $testdata['order/base/service'] as $key => $dataset )
-		{
-			if( !isset( $bases['ids'][$dataset['baseid']] ) ) {
-				throw new \RuntimeException( sprintf( 'No base ID found for "%1$s" in order base serive data', $dataset['baseid'] ) );
-			}
-
-			if( !isset( $bases['items'][$dataset['baseid']] ) ) {
-				throw new \RuntimeException( sprintf( 'No base Item found for "%1$s" in order base service data', $dataset['baseid'] ) );
-			}
-
-			$ordServ->setId( null );
-			$ordServ->setBaseId( $bases['ids'][$dataset['baseid']] );
-			$ordServ->setType( $dataset['type'] );
-			$ordServ->setCode( $dataset['code'] );
-			$ordServ->setName( $dataset['name'] );
-			$ordServ->setMediaUrl( $dataset['mediaurl'] );
-
-			if( isset( $dataset['servid'] ) ) {
-				$ordServ->setServiceId( $servIds[$dataset['servid']] );
-			}
-
-			$priceItem = $priceManager->create();
-			$priceItem->setCurrencyId( $dataset['currencyid'] );
-			$priceItem->setValue( $dataset['price'] );
-			$priceItem->setCosts( $dataset['shipping'] );
-			$priceItem->setRebate( $dataset['rebate'] );
-			$priceItem->setTaxRates( $dataset['taxrates'] );
-			$ordServ->setPrice( $priceItem );
-
-			$orderBaseServiceManager->save( $ordServ );
-
-			$ordServices[$key] = $ordServ->getId();
-			$bases['items'][$dataset['baseid']]->addService( $ordServ, $dataset['type'] ); //adds Services to orderbase
-		}
-
-		$this->addOrderBaseServiceAttributeData( $orderBaseServiceAttrManager, $testdata, $ordServices );
-
-		$orderBaseManager->commit();
-
-		return $bases['items'];
-	}
-
-
-	/**
-	 * Adds the required order base product data.
-	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $orderBaseManager Order Base Manager
-	 * @param array $bases Associative list of key/list pairs
-	 * @param array $testdata Associative list of key/list pairs
-	 * @return array Enhanced list of order base items
-	 * @throws \RuntimeException If no type ID is found
-	 */
-	protected function addOrderBaseProductData( \Aimeos\MShop\Common\Manager\Iface $orderBaseManager,
-		array $bases, array $testdata )
-	{
-		$ordProds = [];
-		$products = $this->getProductItems( $testdata );
-		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product', 'Standard' );
-		$orderBaseProductAttrManager = $orderBaseProductManager->getSubManager( 'attribute', 'Standard' );
-		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
-
-		$orderBaseManager->begin();
-
-		foreach( $testdata['order/base/product'] as $key => $dataset )
-		{
-			if( !isset( $bases['ids'][$dataset['baseid']] ) ) {
-				throw new \RuntimeException( sprintf( 'No base ID found for "%1$s" in order base product data', $dataset['baseid'] ) );
-			}
-
-			if( !isset( $bases['items'][$dataset['baseid']] ) ) {
-				throw new \RuntimeException( sprintf( 'No base Item found for "%1$s" in order base product data', $dataset['baseid'] ) );
-			}
-
-			$ordProdItem = $orderBaseProductManager->create();
-
-			$ordProdItem->setId( null );
-			$ordProdItem->setBaseId( $bases['ids'][$dataset['baseid']] );
-			$ordProdItem->setType( $dataset['type'] );
-			$ordProdItem->setSupplierId( $dataset['supplierid'] );
-			$ordProdItem->setSupplierName( $dataset['suppliername'] );
-			$ordProdItem->setProductCode( $dataset['prodcode'] );
-			$ordProdItem->setName( $dataset['name'] );
-			$ordProdItem->setMediaUrl( $dataset['mediaurl'] );
-			$ordProdItem->setQuantity( $dataset['amount'] );
-			$ordProdItem->setFlags( $dataset['flags'] );
-			$ordProdItem->setStatusPayment( $dataset['statuspayment'] ?? null );
-			$ordProdItem->setStatus( $dataset['status'] ?? null );
-			$ordProdItem->setPosition( $dataset['pos'] );
-			$ordProdItem->setQuantityOpen( $dataset['qtyopen'] ?? 0 );
-			$ordProdItem->setNotes( $dataset['notes'] ?? '' );
-			$ordProdItem->setStockType( $dataset['stocktype'] ?? '' );
-			$ordProdItem->setTimeFrame( $dataset['timeframe'] ?? '' );
-
-			if( isset( $dataset['prodid'] ) ) {
-				$ordProdItem->setProductId( $products[$dataset['prodid']]->getId() );
-			}
-
-			// product bundle related fields
-			if( isset( $dataset['ordprodid'] ) ) {
-				$ordProdItem->setOrderProductId( $ordProds[$dataset['ordprodid']] );
-			}
-
-			$priceItem = $priceManager->create();
-			$priceItem->setCurrencyId( $dataset['currencyid'] );
-			$priceItem->setValue( $dataset['price'] );
-			$priceItem->setCosts( $dataset['shipping'] );
-			$priceItem->setRebate( $dataset['rebate'] );
-			$priceItem->setTaxRates( $dataset['taxrates'] );
-			$ordProdItem->setPrice( $priceItem );
-
-			$bases['items'][$dataset['baseid']]->addProduct( $ordProdItem, $dataset['pos'] ); //adds Products to orderbase
-			$ordProds[$key] = $orderBaseProductManager->save( $ordProdItem )->getId();
-		}
-
-		$this->addOrderBaseProductAttributeData( $orderBaseProductAttrManager, $testdata, $ordProds, $products );
-
-		$orderBaseManager->commit();
-
-		return $bases['items'];
-	}
-
-
-	/**
-	 * Adds the order product attribute test data.
-	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $manager
-	 * @param array $testdata
-	 * @param array $ordProds
-	 * @param \Aimeos\MShop\Product\Item\Iface[] $products
-	 * @throws \RuntimeException
-	 */
-	protected function addOrderBaseProductAttributeData( \Aimeos\MShop\Common\Manager\Iface $manager,
-		array $testdata, array $ordProds, array $products )
-	{
-		$attrCodes = [];
-		$attributeManager = \Aimeos\MShop::create( $this->context(), 'attribute' );
-		$attributes = $attributeManager->search( $attributeManager->filter() );
-
-		foreach( $attributes as $attrItem ) {
-			$attrCodes[$attrItem->getType()][] = $attrItem;
-		}
-
-		$ordProdAttr = $manager->create();
-
-		foreach( $testdata['order/base/product/attr'] as $dataset )
-		{
-			if( !isset( $ordProds[$dataset['ordprodid']] ) ) {
-				throw new \RuntimeException( sprintf( 'No order product ID found for "%1$s"', $dataset['ordprodid'] ) );
-			}
-
-			$ordProdAttr->setId( null );
-			$ordProdAttr->setParentId( $ordProds[$dataset['ordprodid']] );
-			$ordProdAttr->setCode( $dataset['code'] );
-			$ordProdAttr->setValue( $dataset['value'] );
-			$ordProdAttr->setName( $dataset['name'] );
-			$ordProdAttr->setQuantity( $dataset['quantity'] );
-
-			if( isset( $attrCodes[$dataset['code']] ) )
+			foreach( $entry['base']['coupon'] ?? [] as $map )
 			{
-				foreach( (array) $attrCodes[$dataset['code']] as $attrItem )
+				$list = [];
+
+				if( ( $pos = $map['ordprodpos'] ?? null ) !== null )
 				{
-					if( $attrItem->getCode() == $dataset['value'] ) {
-						$ordProdAttr->setAttributeId( $attrItem->getId() );
-					}
+					$list = [$basket->getProduct( $pos )];
+					$basket->deleteProduct( $pos );
 				}
+
+				$basket->setCoupon( $map['code'], $list );
 			}
 
-			if( isset( $dataset['type'] ) ) {
-				$ordProdAttr->setType( $dataset['type'] );
-			}
+			$orderBaseManager->store( $basket );
 
-			$manager->save( $ordProdAttr, false );
+			$item = $orderManager->create()->fromArray( $entry, true );
+			$orderManager->save( $item->setBaseId( $basket->getId() ) );
+
+			foreach( $entry['status'] ?? [] as $map ) {
+				$orderStatusManager->save( $orderStatusManager->create()->fromArray( $map )->setParentId( $item->getId() ) );
+			}
 		}
 	}
 
 
-	/**
-	 * Adds the order service attributes.
-	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $manager
-	 * @param array $testdata
-	 * @param array $ordServices
-	 * @throws \RuntimeException
-	 */
-	protected function addOrderBaseServiceAttributeData( \Aimeos\MShop\Common\Manager\Iface $manager,
-		array $testdata, array $ordServices )
+	protected function createAddresses( array $data ) : array
 	{
-		$ordServAttr = $manager->create();
+		$list = [];
+		$manager = $this->getOrderManager( 'base/address' );
 
-		foreach( $testdata['order/base/service/attr'] as $dataset )
+		foreach( $data as $entry )
 		{
-			if( !isset( $ordServices[$dataset['ordservid']] ) ) {
-				throw new \RuntimeException( sprintf( 'No order service ID found for "%1$s"', $dataset['ordservid'] ) );
-			}
-
-			$ordServAttr->setId( null );
-			$ordServAttr->setParentId( $ordServices[$dataset['ordservid']] );
-			$ordServAttr->setCode( $dataset['code'] );
-			$ordServAttr->setValue( $dataset['value'] );
-			$ordServAttr->setName( $dataset['name'] );
-			$ordServAttr->setType( $dataset['type'] );
-			$ordServAttr->setQuantity( $dataset['quantity'] );
-
-			if( isset( $dataset['attrid'] ) ) {
-				$ordServAttr->setAttributeId( $dataset['attrid'] );
-			}
-
-			$manager->save( $ordServAttr, false );
+			$item = $manager->create()->fromArray( $entry, true );
+			$list[$item->getType()][] = $item;
 		}
+
+		return $list;
 	}
 
 
-	/**
-	 * Adds the order test data.
-	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $orderManager Order manager
-	 * @param array $baseIds List of ids
-	 * @param array $testdata Associative list of key/list pairs
-	 * @throws \RuntimeException If no type ID is found
-	 */
-	protected function addOrderData( \Aimeos\MShop\Common\Manager\Iface $orderManager, array $baseIds, array $testdata )
+	protected function createProducts( array $data, \Aimeos\Map $products, \Aimeos\Map $attributes ) : array
 	{
-		$orderStatusManager = $orderManager->getSubManager( 'status', 'Standard' );
+		$list = [];
+		$priceManager = $this->getPriceManager();
+		$manager = $this->getOrderManager( 'base/product' );
+		$attrManager = $this->getOrderManager( 'base/product/attribute' );
 
-		$ords = [];
-		$ordItem = $orderManager->create();
-
-		$orderManager->begin();
-
-		foreach( $testdata['order'] as $key => $dataset )
+		foreach( $data as $entry )
 		{
-			if( !isset( $baseIds[$dataset['baseid']] ) ) {
-				throw new \RuntimeException( sprintf( 'No base ID found for "%1$s"', $dataset['baseid'] ) );
+			$attrs = [];
+			foreach( $entry['attribute'] ?? [] as $attr )
+			{
+				$key = $attr['order.base.product.attribute.code'] . '/' . $attr['order.base.product.attribute.value'];
+				$attrs[] = $attrManager->create()->fromArray( $attr, true )
+					->setAttributeId( $attributes->get( $key ) );
 			}
 
-			$ordItem->setId( null );
-			$ordItem->setType( $dataset['type'] );
-			$ordItem->setBaseId( $baseIds[$dataset['baseid']] );
-			$ordItem->setStatusDelivery( $dataset['statusdelivery'] );
-			$ordItem->setStatusPayment( $dataset['statuspayment'] );
-			$ordItem->setDateDelivery( $dataset['datedelivery'] );
-			$ordItem->setDatePayment( $dataset['datepayment'] );
-			$ordItem->setRelatedId( $dataset['relatedid'] );
+			$code = $entry['order.base.product.prodcode'] ?? null;
+			$price = $priceManager->create()->fromArray( $entry, true );
 
-			$orderManager->save( $ordItem );
-			$ords[$key] = $ordItem->getId();
+			$list[] = $manager->create()->fromArray( $entry, true )
+				->setProducts( $this->createProducts( $entry['product'] ?? [], $products, $attributes ) )
+				->setAttributeItems( $attrs )->setPrice( $price )
+				->setProductId( $products->get( $code ) );
 		}
 
-		$ordStat = $orderStatusManager->create();
-		foreach( $testdata['order/status'] as $dataset )
-		{
-			if( !isset( $ords[$dataset['parentid']] ) ) {
-				throw new \RuntimeException( sprintf( 'No order ID found for "%1$s"', $dataset['parentid'] ) );
-			}
-
-			$ordStat->setId( null );
-			$ordStat->setParentId( $ords[$dataset['parentid']] );
-			$ordStat->setType( $dataset['type'] );
-			$ordStat->setValue( $dataset['value'] );
-
-			$orderStatusManager->save( $ordStat, false );
-		}
-
-		$orderManager->commit();
+		return $list;
 	}
 
 
-	/**
-	 * Returns the customer IDs for the given test data.
-	 *
-	 * @param array $testdata Test data
-	 * @return array Customer Ids
-	 */
-	protected function getCustomerIds( array $testdata )
+	protected function createServices( array $data, \Aimeos\Map $services ) : array
 	{
-		$customercodes = $customerIds = [];
+		$list = [];
+		$priceManager = $this->getPriceManager();
+		$manager = $this->getOrderManager( 'base/service' );
+		$attrManager = $this->getOrderManager( 'base/service/attribute' );
 
-		foreach( $testdata['order/base'] as $key => $dataset ) {
-			$customercodes[] = $dataset['customerid'];
+		foreach( $data as $entry )
+		{
+			$attrs = [];
+			foreach( $entry['attribute'] ?? [] as $attr ) {
+				$attrs[] = $attrManager->create()->fromArray( $attr, true );
+			}
+
+			$code = $entry['order.base.service.code'] ?? null;
+			$type = $entry['order.base.service.type'] ?? 'payment';
+			$price = $priceManager->create()->fromArray( $entry, true );
+
+			$item = $manager->create()->fromArray( $entry, true )
+				->setAttributeItems( $attrs )->setPrice( $price )
+				->setServiceId( $services->get( $code ) ?: '' );
+
+			$list[$item->getType()][] = $item;
 		}
 
-		$customerManager = \Aimeos\MShop::create( $this->context(), 'customer' );
-		$search = $customerManager->filter();
-		$search->setConditions( $search->compare( '==', 'customer.code', $customercodes ) );
-
-		foreach( $customerManager->search( $search ) as $id => $customerItem ) {
-			$customerIds[$customerItem->getCode()] = $id;
-		}
-
-		return $customerIds;
+		return $list;
 	}
 
 
-	/**
-	 * Returns the product items for the given test data.
-	 *
-	 * @param array $testdata Test data
-	 * @return \Aimeos\MShop\Product\Item\Iface[] Product Items
-	 */
-	protected function getProductItems( array $testdata )
+	protected function getAttributes() : \Aimeos\Map
 	{
-		$codes = $items = [];
-		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $this->context(), 'Standard' );
 
-		foreach( $testdata['order/base/product'] as $key => $dataset )
-		{
-			if( isset( $dataset['prodid'] ) ) {
-				$codes[$key] = $dataset['prodid'];
-			}
-		}
-
-		$search = $productManager->filter();
-		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
-		$result = $productManager->search( $search );
-
-		foreach( $result as $item ) {
-			$items[$item->getCode()] = $item;
-		}
-
-		return $items;
+		return $attributeManager->search( $attributeManager->filter() )
+			->groupBy( 'attribute.type' )->map( function( $list ) {
+				return map( $list )->col( 'attribute.id', 'attribute.code' );
+			} );
 	}
 
 
-	/**
-	 * Returns the service item IDs for the given test data.
-	 *
-	 * @param array $testdata Test data
-	 * @return array List of service IDs
-	 */
-	protected function getServiceIds( array $testdata )
+	protected function getCustomer() : \Aimeos\MShop\Customer\Item\Iface
 	{
-		$services = $servIds = [];
-		$serviceManager = \Aimeos\MShop::create( $this->context(), 'service' );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context(), 'Standard' );
+		return $customerManager->find( 'test@example.com' );
+	}
 
-		foreach( $testdata['order/base/service'] as $key => $dataset )
+
+	protected function getProducts() : \Aimeos\Map
+	{
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context(), 'Standard' );
+		return $productManager->search( $productManager->filter() )->col( 'product.id', 'product.code' );
+	}
+
+
+	protected function getServices() : \Aimeos\Map
+	{
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context(), 'Standard' );
+		return $serviceManager->search( $serviceManager->filter() )->col( 'service.id', 'service.code' );
+	}
+
+
+	protected function getOrderManager( $path = null ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context(), 'Standard' );
+
+		if( $path )
 		{
-			if( isset( $dataset['servid'] ) ) {
-				$services[$key] = $dataset['servid'];
+			foreach( explode( '/', $path ) as $part ) {
+				$manager = $manager->getSubManager( $part );
 			}
 		}
 
-		$search = $serviceManager->filter();
-		$search->setConditions( $search->compare( '==', 'service.code', $services ) );
-		$servicesResult = $serviceManager->search( $search );
+		return $manager;
+	}
 
-		foreach( $servicesResult as $id => $service ) {
-			$servIds[$service->getCode()] = $id;
-		}
 
-		return $servIds;
+	protected function getPriceManager() : \Aimeos\MShop\Common\Manager\Iface
+	{
+		return \Aimeos\MShop\Price\Manager\Factory::create( $this->context(), 'Standard' );
 	}
 }
