@@ -22,8 +22,8 @@ return [
 	],
 
 	'service' => [
-		'service/delivery/unitcode' => [
-			'service.type' => 'delivery', 'service.code' => 'unitcode', 'service.label' => 'unitlabel',
+		'service/delivery/unitdeliverycode' => [
+			'service.type' => 'delivery', 'service.code' => 'unitdeliverycode', 'service.label' => 'unitlabel',
 			'service.provider' => 'Standard', 'service.position' => 0, 'service.status' => 1,
 			'service.config' => [],
 			'lists' => [
@@ -72,7 +72,7 @@ return [
 				]],
 			],
 		],
-		'service/payment/unitcode' => [
+		'service/payment/unitpaymentcode' => [
 			'service.type' => 'payment', 'service.code' => 'unitpaymentcode', 'service.label' => 'unitpaymentlabel',
 			'service.provider' => 'PrePay', 'service.position' => 0, 'service.status' => 1,
 			'service.config' => [

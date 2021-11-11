@@ -552,7 +552,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $serviceCopy->copyFrom( $item->set( 'customprop', 123 ) );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $return );
-		$this->assertEquals( 'unitcode', $serviceCopy->getCode() );
+		$this->assertEquals( 'unitdeliverycode', $serviceCopy->getCode() );
 		$this->assertEquals( 'unitlabel', $serviceCopy->getName() );
 		$this->assertEquals( 'delivery', $serviceCopy->getType() );
 		$this->assertEquals( '', $serviceCopy->getMediaUrl() );

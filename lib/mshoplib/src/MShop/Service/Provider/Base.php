@@ -27,7 +27,6 @@ abstract class Base
 	private $context;
 	private $serviceItem;
 	private $beGlobalConfig;
-	private static $methods = [];
 
 
 	/**
@@ -357,15 +356,11 @@ abstract class Base
 	protected function getBasketService( \Aimeos\MShop\Order\Item\Base\Iface $basket, string $type,
 		string $code ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
-		foreach( $basket->getService( $type ) as $service )
-		{
-			if( $service->getCode() === $code ) {
-				return $service;
-			}
-		}
-
 		$msg = $this->context->translate( 'mshop', 'Service not available' );
-		throw new \Aimeos\MShop\Service\Exception( $msg );
+
+		return map( $basket->getService( $type ) )->find( function( $service ) use ( $code ) {
+				return $service->getCode() === $code;
+		}, new \Aimeos\MShop\Service\Exception( $msg ) );
 	}
 
 
@@ -376,11 +371,7 @@ abstract class Base
 	 */
 	protected function getObject() : \Aimeos\MShop\Service\Provider\Iface
 	{
-		if( $this->object !== null ) {
-			return $this->object;
-		}
-
-		return $this;
+		return $this->object ?? $this;
 	}
 
 

@@ -94,10 +94,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'order.base.product.attribute.id', null );
-		$expr[] = $search->compare( '==', 'order.base.product.attribute.siteid', $siteid );
-		$expr[] = $search->compare( '!=', 'order.base.product.attribute.attributeid', null );
 		$expr[] = $search->compare( '!=', 'order.base.product.attribute.parentid', null );
-		$expr[] = $search->compare( '!=', 'order.base.product.attribute.type', '' );
+		$expr[] = $search->compare( '!=', 'order.base.product.attribute.attributeid', null );
+		$expr[] = $search->compare( '==', 'order.base.product.attribute.siteid', $siteid );
+		$expr[] = $search->compare( '==', 'order.base.product.attribute.type', 'default' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.code', 'width' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.value', '33' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.name', '33' );
@@ -107,7 +107,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.editor', $this->editor );
 
 		$search->setConditions( $search->and( $expr ) );
-		$result = $this->object->search( $search, [], $total )->toArray();
+		$result = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -118,7 +118,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 1 );
-		$results = $this->object->search( $search, [], $total )->toArray();
+		$results = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 8, $total );

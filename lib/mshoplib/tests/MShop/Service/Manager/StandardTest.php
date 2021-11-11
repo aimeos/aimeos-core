@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 		$conditions = array(
-			$search->compare( '==', 'service.code', 'unitcode' ),
+			$search->compare( '==', 'service.code', 'unitdeliverycode' ),
 			$search->compare( '==', 'service.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
@@ -131,9 +131,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->find( 'unitcode' );
+		$item = $this->object->find( 'unitdeliverycode' );
 
-		$this->assertEquals( 'unitcode', $item->getCode() );
+		$this->assertEquals( 'unitdeliverycode', $item->getCode() );
 	}
 
 
@@ -141,7 +141,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
-			$search->compare( '==', 'service.code', 'unitcode' ),
+			$search->compare( '==', 'service.code', 'unitdeliverycode' ),
 			$search->compare( '==', 'service.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
@@ -158,7 +158,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItem()
 	{
-		$item = $this->object->find( 'unitcode', ['text'] );
+		$item = $this->object->find( 'unitdeliverycode', ['text'] );
 
 		if( ( $listItem = $item->getListItems( 'text', 'unittype1' )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );
@@ -172,7 +172,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'service.siteid', null );
 		$expr[] = $search->compare( '==', 'service.type', 'delivery' );
 		$expr[] = $search->compare( '>=', 'service.position', 0 );
-		$expr[] = $search->compare( '==', 'service.code', 'unitcode' );
+		$expr[] = $search->compare( '==', 'service.code', 'unitdeliverycode' );
 		$expr[] = $search->compare( '==', 'service.label', 'unitlabel' );
 		$expr[] = $search->compare( '==', 'service.provider', 'Standard' );
 		$expr[] = $search->compare( '==', 'service.datestart', null );

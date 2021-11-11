@@ -22,13 +22,8 @@ class OnceTest extends \PHPUnit\Framework\TestCase
 		$this->couponItem = \Aimeos\MShop::create( $this->context, 'coupon' )->create();
 
 		$orderBaseManager = \Aimeos\MShop::create( $this->context, 'order/base' );
-		$search = $orderBaseManager->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.price', '4800.00' ) );
-		$basket = $orderBaseManager->search( $search )->first();
-
-		if( $basket === null ) {
-			throw new \RuntimeException( 'No order base with price "4800.00" found' );
-		}
+		$search = $orderBaseManager->filter()->add( ['order.base.price' => '2400.00'] );
+		$basket = $orderBaseManager->search( $search )->first( new \RuntimeException( 'No order base item found' ) );
 
 		$this->orderBase = $orderBaseManager->load( $basket->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
 	}

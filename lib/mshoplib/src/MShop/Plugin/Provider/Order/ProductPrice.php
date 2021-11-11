@@ -161,7 +161,7 @@ class ProductPrice
 		if( $this->getConfigValue( 'warn', false ) == true && count( $changedProducts ) > 0 )
 		{
 			$code = ['product' => $changedProducts];
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Please have a look at the prices of the products in your basket' );
+			$msg = $this->getContext()->translate( 'mshop', 'Please have a look at the prices of the products in your basket' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 
@@ -245,7 +245,7 @@ class ProductPrice
 			$pcode = $orderProduct->getProductCode();
 			$codes = array( 'product' => array( $pos => 'product.price' ) );
 
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'No price for product ID "%1$s" or product code "%2$s" available' );
+			$msg = $this->getContext()->translate( 'mshop', 'No price for product ID "%1$s" or product code "%2$s" available' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $pid, $pcode ), -1, null, $codes );
 		}
 

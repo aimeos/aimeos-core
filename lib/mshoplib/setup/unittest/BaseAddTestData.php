@@ -46,7 +46,7 @@ class BaseAddTestData extends Base
 		if( isset( $data['address'] ) )
 		{
 			foreach( $data['address'] as $entry ) {
-				$item->addAddressItem( $addrManager->create( $entry )->fromArray( $entry ) );
+				$item->addAddressItem( $addrManager->create()->fromArray( $entry ) );
 			}
 		}
 

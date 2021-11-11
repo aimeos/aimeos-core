@@ -32,19 +32,30 @@ class OrderAddTestData extends Base
 	public function up()
 	{
 		$this->info( 'Adding order test data', 'v' );
-		$this->context()->setEditor( 'core:lib/mshoplib' );
 
-		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context(), 'Standard' );
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context(), 'Standard' );
+		$context = $this->context();
+		$context->setEditor( 'core:lib/mshoplib' );
+		$context->getLocale()->setCurrencyId( 'EUR' );
+
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::create( $context, 'Standard' );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $context, 'Standard' );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $context, 'Standard' );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $context, 'Standard' );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $context, 'Standard' );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $context, 'Standard' );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context, 'Standard' );
+
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$orderStatusManager = $orderManager->getSubManager( 'status' );
+		$orderCouponManager = $orderBaseManager->getSubManager( 'coupon' );
+		$orderAddressManager = $orderBaseManager->getSubManager( 'address' );
+		$orderProductManager = $orderBaseManager->getSubManager( 'product' );
+		$orderServiceManager = $orderBaseManager->getSubManager( 'service' );
+		$orderProductAttrManager = $orderProductManager->getSubManager( 'attribute' );
+		$orderServiceAttrManager = $orderServiceManager->getSubManager( 'attribute' );
 
-		$search = $orderBaseManager->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.sitecode', array( 'unittest', 'unit' ) ) );
-
-		foreach( $orderBaseManager->search( $search ) as $order ) {
-			$orderBaseManager->delete( $order->getId() );
-		}
-
+		$filter = $orderBaseManager->filter()->add( ['order.base.sitecode' => ['unittest', 'unit']] );
+		$orderBaseManager->delete( $orderBaseManager->search( $filter ) );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'order.php';
@@ -53,21 +64,114 @@ class OrderAddTestData extends Base
 			throw new \RuntimeException( sprintf( 'No file "%1$s" found for order domain', $path ) );
 		}
 
-		$this->context()->setLocale( $this->context()->getLocale()->setCurrencyId( 'EUR' ) );
+		$customerId = $customerManager->find( 'test@example.com' )->getId();
+		$products = $productManager->search( $productManager->filter() )->col( 'product.id', 'product.code' );
+		$services = $serviceManager->search( $serviceManager->filter() )->col( 'service.id', 'service.code' );
+		$attributes = $attributeManager->search( $attributeManager->filter() )
+			->groupBy( 'attribute.type' )->map( function( $list ) {
+				return map( $list )->col( 'attribute.id', 'attribute.code' );
+			} );
 
-		$bases = $this->addOrderBaseData( $localeManager, $orderBaseManager, $testdata );
-		$bases['items'] = $this->addOrderBaseProductData( $orderBaseManager, $bases, $testdata );
-		$bases['items'] = $this->addOrderBaseServiceData( $orderBaseManager, $bases, $testdata );
+		foreach( $testdata as $data )
+		{
+			if( !isset( $data['base'] ) ) {
+				throw new \RuntimeException( 'No base data found for ' . print_r( $data, true ) );
+			}
 
-		//update order bases (getPrice)
-		foreach( $bases['items'] as $baseItem ) {
-			$orderBaseManager->save( $baseItem, false );
+			$basket = $orderBaseManager->create()->off()
+				->fromArray( $data['base'], true )->setCustomerId( $customerId );
+
+
+			foreach( $data['base']['address'] ?? [] as $entry )
+			{
+				$type = $entry['order.base.address.type'] ?? 'payment';
+				$basket->addAddress( $orderAddressManager->create()->fromArray( $entry, true ), $type );
+			}
+
+
+			foreach( $data['base']['product'] ?? [] as $entry )
+			{
+				$list = [];
+				foreach( $entry['product'] ?? [] as $subentry )
+				{
+					$attrs = [];
+					foreach( $subentry['attribute'] ?? [] as $attr )
+					{
+						$key = $attr['order.base.product.attribute.code'] . '/' . $attr['order.base.product.attribute.value'];
+						$attrs[] = $orderProductAttrManager->create()->fromArray( $attr, true )
+							->setAttributeId( $attributes->get( $key ) );
+					}
+
+					$code = $subentry['order.base.product.prodcode'] ?? null;
+					$price = $priceManager->create()->fromArray( $subentry, true );
+
+					$list[] = $orderProductManager->create()->fromArray( $subentry, true )
+						->setAttributeItems( $attrs )->setPrice( $price )
+						->setProductId( $products->get( $code ) );
+				}
+
+				$attrs = [];
+				foreach( $entry['attribute'] ?? [] as $attr )
+				{
+					$key = $attr['order.base.product.attribute.code'] . '/' . $attr['order.base.product.attribute.value'];
+					$attrs[] = $orderProductAttrManager->create()->fromArray( $attr, true )
+						->setAttributeId( $attributes->get( $key ) );
+				}
+
+				$code = $entry['order.base.product.prodcode'] ?? null;
+				$price = $priceManager->create()->fromArray( $entry, true );
+
+				$product = $orderProductManager->create()->fromArray( $entry, true )
+					->setProducts( $list )->setAttributeItems( $attrs )->setPrice( $price )
+					->setProductId( $products->get( $code ) );
+
+				$basket->addProduct( $product );
+			}
+
+
+			foreach( $data['base']['coupon'] ?? [] as $entry )
+			{
+				$list = [];
+
+				if( ( $pos = $entry['ordprodpos'] ?? null ) !== null )
+				{
+					$list = [$basket->getProduct( $pos )];
+					$basket->deleteProduct( $pos );
+				}
+
+				$basket->setCoupon( $entry['code'], $list );
+			}
+
+
+			foreach( $data['base']['service'] ?? [] as $entry )
+			{
+				$attrs = [];
+				foreach( $entry['attribute'] ?? [] as $attr ) {
+					$attrs[] = $orderServiceAttrManager->create()->fromArray( $attr, true );
+				}
+
+				$code = $entry['order.base.service.code'] ?? null;
+				$type = $entry['order.base.service.type'] ?? 'payment';
+				$price = $priceManager->create()->fromArray( $entry, true );
+
+				$service = $orderServiceManager->create()->fromArray( $entry, true )
+					->setAttributeItems( $attrs )->setPrice( $price )
+					->setServiceId( $services->get( $code ) ?: '' );
+
+				$basket->addService( $service, $type );
+			}
+
+			$item = $orderManager->create()->fromArray( $data, true );
+
+			$orderBaseManager->store( $basket );
+			$orderManager->save( $item->setBaseId( $basket->getId() ) );
+
+			foreach( $data['status'] ?? [] as $entry ) {
+				$orderStatusManager->save( $orderStatusManager->create()->fromArray( $entry )->setParentId( $item->getId() ) );
+			}
 		}
 
-		$this->context()->setLocale( $this->context()->getLocale()->setCurrencyId( null ) );
-
-		$this->addOrderBaseCouponData( $testdata );
-		$this->addOrderData( $orderManager, $bases['ids'], $testdata );
+		$context->getLocale()->setCurrencyId( null );
 	}
 
 

@@ -38,8 +38,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->aggregate( $search, 'order.base.service.code' )->toArray();
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertArrayHasKey( 'OGONE', $result );
-		$this->assertEquals( 2, $result['OGONE'] );
+		$this->assertArrayHasKey( 'unitpaymentcode', $result );
+		$this->assertEquals( 2, $result['unitpaymentcode'] );
 	}
 
 
@@ -51,7 +51,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'delivery', $result );
-		$this->assertEquals( '5.00', round( $result['delivery'], 2 ) );
+		$this->assertEquals( '2.50', round( $result['delivery'], 2 ) );
 	}
 
 
@@ -63,7 +63,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'delivery', $result );
-		$this->assertEquals( '20.00', $result['delivery'] );
+		$this->assertEquals( '10.00', $result['delivery'] );
 	}
 
 
@@ -124,8 +124,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'order.base.service.baseid', null );
 		$expr[] = $search->compare( '!=', 'order.base.service.serviceid', null );
 		$expr[] = $search->compare( '==', 'order.base.service.type', 'payment' );
-		$expr[] = $search->compare( '==', 'order.base.service.code', 'OGONE' );
-		$expr[] = $search->compare( '==', 'order.base.service.name', 'ogone' );
+		$expr[] = $search->compare( '==', 'order.base.service.code', 'unitpaymentcode' );
+		$expr[] = $search->compare( '==', 'order.base.service.name', 'unitpaymentcode' );
 		$expr[] = $search->compare( '==', 'order.base.service.mediaurl', 'somewhere/thump1.jpg' );
 		$expr[] = $search->compare( '==', 'order.base.service.price', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.costs', '0.00' );
@@ -159,7 +159,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemRef()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
-		$search->setConditions( $search->compare( '==', 'order.base.service.code', 'OGONE' ) );
+		$search->setConditions( $search->compare( '==', 'order.base.service.code', 'unitpaymentcode' ) );
 		$result = $this->object->search( $search, ['service'] );
 
 		$this->assertEquals( 1, count( $result ) );
@@ -173,7 +173,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->slice( 0, 1 );
 
 		$search->setConditions( $search->and( [
-			$search->compare( '==', 'order.base.service.code', array( 'OGONE', 'not exists' ) ),
+			$search->compare( '==', 'order.base.service.code', array( 'unitpaymentcode', 'not exists' ) ),
 			$search->compare( '==', 'order.base.service.editor', $this->editor )
 		] ) );
 
@@ -223,7 +223,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
 		$conditions = array(
-			$search->compare( '==', 'order.base.service.code', 'OGONE' ),
+			$search->compare( '==', 'order.base.service.code', 'unitpaymentcode' ),
 			$search->compare( '==', 'order.base.service.editor', $this->editor ),
 		);
 		$search->setConditions( $search->and( $conditions ) );
@@ -242,7 +242,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 		$conditions = array(
-			$search->compare( '==', 'order.base.service.code', 'OGONE' ),
+			$search->compare( '==', 'order.base.service.code', 'unitpaymentcode' ),
 			$search->compare( '==', 'order.base.service.editor', $this->editor ),
 			$search->compare( '==', 'order.base.service.attribute.code', 'NAME' ),
 		);

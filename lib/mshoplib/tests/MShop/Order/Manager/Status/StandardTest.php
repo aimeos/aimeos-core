@@ -36,7 +36,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'order.status.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.status.value' )->toArray();
 
-		$this->assertEquals( 6, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'waiting', $result );
 		$this->assertEquals( 2, $result['waiting'] );
 	}

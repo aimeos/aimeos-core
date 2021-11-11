@@ -92,11 +92,11 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\MW\M
 		$this->products = $products;
 
 		foreach( $addresses as $address ) {
-			$this->addresses[$address->getType()][$address->getPosition()] = $address;
+			$this->addresses[$address->getType()][] = $address;
 		}
 
 		foreach( $services as $service ) {
-			$this->services[$service->getType()][$service->getPosition()] = $service;
+			$this->services[$service->getType()][] = $service;
 		}
 	}
 

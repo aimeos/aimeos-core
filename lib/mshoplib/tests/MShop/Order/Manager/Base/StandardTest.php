@@ -38,9 +38,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'order.base.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.base.rebate' )->toArray();
 
-		$this->assertEquals( 3, count( $result ) );
+		$this->assertEquals( 4, count( $result ) );
 		$this->assertArrayHasKey( '5.00', $result );
-		$this->assertEquals( 2, $result['5.00'] );
+		$this->assertEquals( 1, $result['5.00'] );
 	}
 
 
@@ -52,7 +52,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 'test@example.com', $result );
-		$this->assertEquals( '1384.75', round( $result['test@example.com'], 2 ) );
+		$this->assertEquals( '784.75', round( $result['test@example.com'], 2 ) );
 	}
 
 
@@ -64,7 +64,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 'test@example.com', $result );
-		$this->assertEquals( '5539.00', $result['test@example.com'] );
+		$this->assertEquals( '3139.00', $result['test@example.com'] );
 	}
 
 
@@ -124,13 +124,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderProductManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context )
 			->getSubManager( 'base' )->getSubManager( 'product' );
 
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '==', 'order.base.costs', '1.50' ),
-			$search->compare( '==', 'order.base.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-
+		$search = $this->object->filter()->add( ['order.base.costs' => '1.50', 'order.base.editor' => $this->editor] );
 		$item = $this->object->search( $search, ['order/base/product'] )
 			->first( new \RuntimeException( 'No order base item found' ) );
 
@@ -329,8 +323,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'order.base.service.baseid', null );
 		$expr[] = $search->compare( '==', 'order.base.service.type', 'payment' );
 		$expr[] = $search->compare( '!=', 'order.base.service.serviceid', null );
-		$expr[] = $search->compare( '==', 'order.base.service.code', 'OGONE' );
-		$expr[] = $search->compare( '==', 'order.base.service.name', 'ogone' );
+		$expr[] = $search->compare( '==', 'order.base.service.code', 'unitpaymentcode' );
+		$expr[] = $search->compare( '==', 'order.base.service.name', 'unitpaymentcode' );
 		$expr[] = $search->compare( '==', 'order.base.service.price', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.rebate', '0.00' );
@@ -651,7 +645,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getCustomerId(), $basket->getCustomerId() );
 		$this->assertEquals( $basket->getLocale()->getSiteId(), $basket->getSiteId() );
 
-		$this->assertEquals( 6.50, $basket->getPrice()->getCosts() );
+		$this->assertEquals( 1.50, $basket->getPrice()->getCosts() );
 
 		$pos = 0;
 		$products = $basket->getProducts();
@@ -676,8 +670,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			}
 		}
 
-		$this->assertEquals( 9, count( $attributes['OGONE'] ) );
-		$this->assertEquals( 0, count( $attributes['73'] ) );
+		$this->assertEquals( 9, count( $attributes['unitpaymentcode'] ) );
+		$this->assertEquals( 0, count( $attributes['unitdeliverycode'] ) );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->get( $newBasketId );
@@ -697,12 +691,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->delete( $newBasketId );
 
 
-		$newAddresses = $newBasket->getAddresses();
-
 		foreach( $basket->getAddresses() as $key => $list )
 		{
 			foreach( $list as $pos => $address ) {
-				$this->assertEquals( $address->getId(), $newAddresses[$key][$pos]->getId() );
+				$this->assertEquals( $address->getId(), $newBasket->getAddress( $key, $pos )->getId() );
 			}
 		}
 
@@ -725,17 +717,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testStoreBundles()
 	{
-		$search = $this->object->filter();
-
-		$expr = [];
-		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
-		$expr[] = $search->compare( '==', 'order.base.price', 4800.00 );
-		$search->setConditions( $search->and( $expr ) );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) == false ) {
-			throw new \RuntimeException( 'No order found' );
-		}
+		$search = $this->object->filter()->add( ['order.base.sitecode' => 'unittest', 'order.base.price' => 2400.00] );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order found' ) );
 
 		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
 		$this->object->store( $basket );
@@ -838,19 +821,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testLoadStoreCoupons()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'order.base.price', '53.50' ) );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No order found' );
-		}
+		$search = $this->object->filter()->add( ['order.base.price' => '53.50'] );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order found' ) );
 
 		$parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL ^ \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON;
 		$basket = $this->object->load( $item->getId(), $parts, true );
 
 		$this->assertEquals( '58.50', $basket->getPrice()->getValue() );
-		$this->assertEquals( '6.50', $basket->getPrice()->getCosts() );
+		$this->assertEquals( '1.50', $basket->getPrice()->getCosts() );
 		$this->assertEquals( 0, count( $basket->getCoupons() ) );
 
 		$productBasket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
@@ -878,20 +856,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function getOrderItem()
 	{
-		$search = $this->object->filter();
+		$search = $this->object->filter()->add( [
+			'order.base.sitecode' => 'unittest',
+			'order.base.price' => 53.50,
+			'order.base.rebate' => 14.50,
+			'order.base.editor' => $this->editor
+		] );
 
-		$expr = [];
-		$expr[] = $search->compare( '==', 'order.base.rebate', 14.50 );
-		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
-		$expr[] = $search->compare( '==', 'order.base.price', 53.50 );
-		$expr[] = $search->compare( '==', 'order.base.editor', $this->editor );
-		$search->setConditions( $search->and( $expr ) );
-		$results = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No order found' );
-		}
-
-		return $item;
+		return $this->object->search( $search )->first( new \RuntimeException( 'No order found' ) );
 	}
 }

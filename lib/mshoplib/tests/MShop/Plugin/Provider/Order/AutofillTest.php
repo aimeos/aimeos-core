@@ -177,7 +177,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		$orderBaseServiceStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Service\Standard::class )
 			->setConstructorArgs( [$this->context] )->setMethods( ['search'] )->getMock();
 
-		$item1 = $orderBaseServiceStub->create()->setCode( 'unitcode' )
+		$item1 = $orderBaseServiceStub->create()->setCode( 'unitdeliverycode' )
 			->setType( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY );
 		$item2 = $orderBaseServiceStub->create()->setCode( 'unitpaymentcode' )
 			->setType( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT )
@@ -246,7 +246,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateDeliveryCode()
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
-		$this->plugin->setConfig( ['delivery' => '1', 'deliverycode' => 'unitcode'] );
+		$this->plugin->setConfig( ['delivery' => '1', 'deliverycode' => 'unitdeliverycode'] );
 
 		$this->assertEquals( null, $this->object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( [], $this->order->getAddresses()->toArray() );
@@ -255,7 +255,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 		foreach( $this->order->getService( $type ) as $item )
 		{
 			$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
-			$this->assertEquals( 'unitcode', $item->getCode() );
+			$this->assertEquals( 'unitdeliverycode', $item->getCode() );
 			$this->assertNull( $item->getId() );
 		}
 	}

@@ -55,18 +55,13 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 	{
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
-		$search = $orderManager->filter();
-		$expr = array(
-			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_WEB ),
-			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED )
-		);
-		$search->setConditions( $search->and( $expr ) );
-		$orderItems = $orderManager->search( $search )->toArray();
 
-		if( ( $order = reset( $orderItems ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::TYPE_WEB ) );
-		}
+		$search = $orderManager->filter()->add( [
+			'order.type' => \Aimeos\MShop\Order\Item\Base::TYPE_WEB,
+			'order.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED
+		] );
 
+		$order = $orderManager->search( $search )->first( new \RuntimeException( 'No order found' ) );
 		$basket = $orderBaseManager->load( $order->getBaseId() );
 
 		$config = $this->object->getConfigFE( $basket );

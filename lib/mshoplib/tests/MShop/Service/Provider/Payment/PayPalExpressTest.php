@@ -24,14 +24,8 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
 
-		$search = $serviceManager->filter();
-		$search->setConditions( $search->compare( '==', 'service.code', 'paypalexpress' ) );
-
-		$serviceItems = $serviceManager->search( $search )->toArray();
-
-		if( ( $this->serviceItem = reset( $serviceItems ) ) === false ) {
-			throw new \RuntimeException( 'No paypalexpress service item available' );
-		}
+		$search = $serviceManager->filter()->add( ['service.code' => 'paypalexpress'] );
+		$this->serviceItem = $serviceManager->search( $search )->first( new \RuntimeException( 'No service item available' ) );
 
 		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class )
 			->setConstructorArgs( [$this->context, $this->serviceItem] )
@@ -41,17 +35,11 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
 
-		$search = $orderManager->filter();
-		$expr = array(
-			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_WEB ),
-			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED )
-		);
-		$search->setConditions( $search->and( $expr ) );
-		$orderItems = $orderManager->search( $search )->toArray();
-
-		if( ( $this->order = reset( $orderItems ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::TYPE_WEB ) );
-		}
+		$search = $orderManager->filter()->add( [
+			'order.type' => \Aimeos\MShop\Order\Item\Base::TYPE_WEB,
+			'order.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED
+		] );
+		$this->order = $orderManager->search( $search )->first( new \RuntimeException( 'No order found' ) );
 
 
 		$this->orderMock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
@@ -68,9 +56,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
-		unset( $this->serviceItem );
-		unset( $this->order );
+		unset( $this->object, $this->serviceItem, $this->order );
 	}
 
 
@@ -130,7 +116,6 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId() );
-
 		$attributes = $refOrderBase->getService( 'payment', 0 )->getAttributeItems();
 
 		$attributeList = [];

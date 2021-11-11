@@ -125,7 +125,7 @@ class PropertyMatch
 		if( $this->getProductItems( array_unique( $list ), $map )->count() !== count( $list ) )
 		{
 			$code = array( 'product' => $map );
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Product matching given properties not found' );
+			$msg = $this->getContext()->translate( 'mshop', 'Product matching given properties not found' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 

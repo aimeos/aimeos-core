@@ -23,7 +23,7 @@ class DeliveryTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 
 		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
-		$this->servItem = $servManager->create()->setCode( '73' )->setConfig( ['delivery.partial' => 1] );
+		$this->servItem = $servManager->create()->setCode( 'unitdeliverycode' )->setConfig( ['delivery.partial' => 1] );
 
 		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Date::class )
 			->disableOriginalConstructor()->getMock();

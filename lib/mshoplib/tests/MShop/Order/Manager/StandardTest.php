@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'avg' );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( '1384.75', round( $result->first(), 2 ) );
+		$this->assertEquals( '784.75', round( $result->first(), 2 ) );
 	}
 
 
@@ -72,7 +72,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 5, $result->first() );
 		$this->assertArrayHasKey( 6, $result->first() );
 		$this->assertEquals( '13.50', round( $result->first()[5], 2 ) );
-		$this->assertEquals( '1841.83', round( $result->first()[6], 2 ) );
+		$this->assertEquals( '1041.83', round( $result->first()[6], 2 ) );
 	}
 
 
@@ -82,7 +82,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'sum' );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( '5539.00', $result->first() );
+		$this->assertEquals( '3139.00', $result->first() );
 	}
 
 
@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 5, $result->first() );
 		$this->assertArrayHasKey( 6, $result->first() );
 		$this->assertEquals( '13.50', round( $result->first()[5], 2 ) );
-		$this->assertEquals( '5525.50', round( $result->first()[6], 2 ) );
+		$this->assertEquals( '3125.5', round( $result->first()[6], 2 ) );
 	}
 
 
@@ -493,8 +493,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.service.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.service.baseid', null );
 		$expr[] = $search->compare( '==', 'order.base.service.type', 'payment' );
-		$expr[] = $search->compare( '==', 'order.base.service.code', 'OGONE' );
-		$expr[] = $search->compare( '==', 'order.base.service.name', 'ogone' );
+		$expr[] = $search->compare( '==', 'order.base.service.code', 'unitpaymentcode' );
+		$expr[] = $search->compare( '==', 'order.base.service.name', 'unitpaymentcode' );
 		$expr[] = $search->compare( '==', 'order.base.service.price', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.service.rebate', '0.00' );

@@ -664,8 +664,6 @@ class Standard extends Base implements Iface
 				case 'order.base.product.notes': $item = $item->setNotes( (string) $value ); break;
 				case 'order.base.product.statusdelivery': $item = $item->setStatusDelivery( is_numeric( $value ) ? (int) $value : null ); break;
 				case 'order.base.product.statuspayment': $item = $item->setStatusPayment( is_numeric( $value ) ? (int) $value : null ); break;
-				// @deprecated 2022.01
-				case 'order.base.product.status': $item = $item->setStatusDelivery( (int) $value ); break;
 				default: continue 2;
 			}
 
@@ -703,8 +701,6 @@ class Standard extends Base implements Iface
 		$list['order.base.product.notes'] = $this->getNotes();
 		$list['order.base.product.statuspayment'] = $this->getStatusPayment();
 		$list['order.base.product.statusdelivery'] = $this->getStatusDelivery();
-		// @deprecated 2022.01
-		$list['order.base.product.status'] = $this->getStatus();
 
 		if( $private === true )
 		{

@@ -73,7 +73,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param bool $active True to return only active items, false to return all
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface|null Matching list item or null if none
 	 */
-	public function getListItem( string $domain, ?string $listtype, ?string $refId, bool $active = true ) : ?\Aimeos\MShop\Common\Item\Lists\Iface;
+	public function getListItem( string $domain, string $listtype, string $refId, bool $active = true ) : ?\Aimeos\MShop\Common\Item\Lists\Iface;
 
 	/**
 	 * Returns the list items attached, optionally filtered by domain and list type.
