@@ -180,9 +180,9 @@ class Standard
 	/**
 	 * Returns the type of the list item.
 	 *
-	 * @return string|null Type of the list item
+	 * @return string Type of the list item
 	 */
-	public function getType() : ?string
+	public function getType() : string
 	{
 		return $this->get( $this->prefix . 'type', 'default' );
 	}
