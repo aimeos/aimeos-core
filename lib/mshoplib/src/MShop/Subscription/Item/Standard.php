@@ -294,8 +294,8 @@ class Standard
 				case 'subscription.dateend': $item = $item->setDateEnd( $value ); break;
 				case 'subscription.interval': $item = $item->setInterval( $value ); break;
 				case 'subscription.period': $item = $item->setPeriod( (int) $value ); break;
-				case 'subscription.reason': $item = $item->setReason( (int) $value ); break;
 				case 'subscription.status': $item = $item->setStatus( (int) $value ); break;
+				case 'subscription.reason': $item = $item->setReason( $value ); break;
 				default: continue 2;
 			}
 
@@ -323,8 +323,8 @@ class Standard
 		$list['subscription.dateend'] = $this->getDateEnd();
 		$list['subscription.interval'] = $this->getInterval();
 		$list['subscription.period'] = $this->getPeriod();
-		$list['subscription.reason'] = $this->getReason();
 		$list['subscription.status'] = $this->getStatus();
+		$list['subscription.reason'] = $this->getReason();
 
 		return $list;
 	}
