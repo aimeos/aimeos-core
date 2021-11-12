@@ -40,40 +40,33 @@ class SubscriptionAddTestData extends Base
 			throw new \RuntimeException( sprintf( 'No file "%1$s" found for subscription domain', $path ) );
 		}
 
-		$this->addData( $testdata );
+		$this->import( $testdata );
 	}
 
 
 	/**
 	 * Adds the required subscription base data.
 	 *
-	 * @param array $testdata Associative list of key/list pairs
+	 * @param array $data List of arrays
 	 */
-	protected function addData( array $testdata )
+	protected function import( array $data )
 	{
-		$subscriptionManager = \Aimeos\MShop\Subscription\Manager\Factory::create( $this->context(), 'Standard' );
+		$list = [];
+		$manager = \Aimeos\MShop\Subscription\Manager\Factory::create( $this->context(), 'Standard' );
 
-		$subscriptionManager->begin();
-
-		foreach( $testdata['subscription'] as $key => $dataset )
+		foreach( $data as $entry )
 		{
-			$ordProdItem = $this->getOrderProductItem( $dataset['ordprodid'] );
+			$ordProdItem = $this->getOrderProductItem( $entry['ordprodid'] );
 
-			$item = $subscriptionManager->create();
-			$item->setOrderBaseId( $ordProdItem->getBaseId() );
-			$item->setOrderProductId( $ordProdItem->getId() );
-			$item->setProductId( $ordProdItem->getProductId() );
-			$item->setDateNext( $dataset['datenext'] );
-			$item->setDateEnd( $dataset['dateend'] );
-			$item->setInterval( $dataset['interval'] );
-			$item->setReason( $dataset['reason'] );
-			$item->setPeriod( $dataset['period'] );
-			$item->setStatus( $dataset['status'] );
-
-			$subscriptionManager->save( $item );
+			$list[] = $manager->create()->fromArray( $entry, true )
+				->setOrderBaseId( $ordProdItem->getBaseId() )
+				->setOrderProductId( $ordProdItem->getId() )
+				->setProductId( $ordProdItem->getProductId() );
 		}
 
-		$subscriptionManager->commit();
+		$manager->begin();
+		$manager->save( $list );
+		$manager->commit();
 	}
 
 
@@ -86,7 +79,7 @@ class SubscriptionAddTestData extends Base
 	protected function getOrderProductItem( $key )
 	{
 		$manager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context(), 'Standard' )
-			->getSubManager( 'base', 'Standard' )->getSubManager( 'product', 'Standard' );
+			->getSubManager( 'base' )->getSubManager( 'product' );
 
 		$parts = explode( '/', $key );
 
@@ -94,18 +87,11 @@ class SubscriptionAddTestData extends Base
 			throw new \RuntimeException( sprintf( 'Invalid order product key "%1$s"', $key ) );
 		}
 
-		$search = $manager->filter();
-		$expr = [
-			$search->compare( '==', 'order.base.product.prodcode', $parts[0] ),
-			$search->compare( '==', 'order.base.product.price', $parts[1] ),
-		];
-		$search->setConditions( $search->and( $expr ) );
-		$result = $manager->search( $search );
+		$search = $manager->filter()->add( [
+			'order.base.product.prodcode' => $parts[0],
+			'order.base.product.price' => $parts[1],
+		] );
 
-		if( ( $item = $result->first() ) !== null ) {
-			return $item;
-		}
-
-		throw new \RuntimeException( sprintf( 'No order product item found for key "%1$s"', $key ) );
+		return $manager->search( $search )->first( new \RuntimeException( 'No order product item found for ' . $key ) );
 	}
 }

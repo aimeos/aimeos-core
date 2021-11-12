@@ -59,7 +59,6 @@ class OrderAddTestData extends Base
 		$orderManager = $this->getOrderManager();
 		$orderBaseManager = $this->getOrderManager( 'base' );
 		$orderStatusManager = $this->getOrderManager( 'status' );
-		$orderCouponManager = $this->getOrderManager( 'base/coupon' );
 
 		$attributes = $this->getAttributes();
 		$products = $this->getProducts();
@@ -163,7 +162,6 @@ class OrderAddTestData extends Base
 			}
 
 			$code = $entry['order.base.service.code'] ?? null;
-			$type = $entry['order.base.service.type'] ?? 'payment';
 			$price = $priceManager->create()->fromArray( $entry, true );
 
 			$item = $manager->create()->fromArray( $entry, true )
