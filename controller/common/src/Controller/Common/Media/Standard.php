@@ -196,11 +196,12 @@ class Standard
 		$name = basename( $item->getUrl() );
 		$media = $this->getMediaFile( $this->getFileContent( $item->getUrl(), $fsname ) );
 
-		if( !( $media instanceof \Aimeos\MW\Media\Image\Iface ) ) {
-			return $item;
+		if( $media instanceof \Aimeos\MW\Media\Image\Iface ) {
+			return $this->addImages( $this->deletePreviews( $item, $fsname ), $media, $name, $fsname );
+		} else {
+			$mimetype = $this->getMimeType( $media, 'files' );
+			return $item->setPreviews( [1 => $this->getMimeIcon( $mimetype )] )->setMimeType( $mimetype );
 		}
-
-		return $this->addImages( $this->deletePreviews( $item, $fsname ), $media, $name, $fsname );
 	}
 
 
