@@ -200,7 +200,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Outmost decorator object
 	 */
-	protected function getObject() : \Aimeos\MShop\Coupon\Provider\Iface
+	protected function object() : \Aimeos\MShop\Coupon\Provider\Iface
 	{
 		if( $this->object !== null ) {
 			return $this->object;

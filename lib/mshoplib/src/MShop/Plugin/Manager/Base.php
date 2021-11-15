@@ -110,7 +110,7 @@ abstract class Base
 	{
 		if( !isset( $this->plugins[$type] ) )
 		{
-			$search = $this->getObject()->filter( true );
+			$search = $this->object()->filter( true );
 
 			$expr = array(
 				$search->compare( '==', 'plugin.type', $type ),
@@ -122,7 +122,7 @@ abstract class Base
 
 			$this->plugins[$type] = [];
 
-			foreach( $this->getObject()->search( $search ) as $item ) {
+			foreach( $this->object()->search( $search ) as $item ) {
 				$this->plugins[$type][$item->getId()] = $this->getProvider( $item, $type );
 			}
 		}

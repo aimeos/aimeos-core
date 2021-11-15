@@ -153,9 +153,9 @@ abstract class Base
 			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
-		$criteria = $this->getObject()->filter( $default )->add( [$conf['code'] => $id] );
+		$criteria = $this->object()->filter( $default )->add( [$conf['code'] => $id] );
 
-		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
+		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
 			return $item;
 		}
 
@@ -201,7 +201,7 @@ abstract class Base
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
 			$path = $this->getConfigPath();
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null ) {
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );

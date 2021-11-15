@@ -35,7 +35,7 @@ abstract class Base
 		if( !isset( $this->rules[$type] ) )
 		{
 			$this->rules[$type] = [];
-			$manager = $this->getObject();
+			$manager = $this->object();
 
 			$filter = $manager->filter( true )->add( ['rule.type' => $type] )
 				->order( 'rule.position' )->slice( 0, 10000 );

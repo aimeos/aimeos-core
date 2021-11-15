@@ -204,7 +204,7 @@ class Standard
 		$default = ['lists', 'property', 'type'];
 
 		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'mshop/attribute/manager/delete' );
@@ -332,7 +332,7 @@ class Standard
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null )
 			{

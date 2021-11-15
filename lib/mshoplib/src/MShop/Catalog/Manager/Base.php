@@ -175,7 +175,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 
 			$colstring = '';
-			foreach( $this->getObject()->getSaveAttributes() as $name => $entry ) {
+			foreach( $this->object()->getSaveAttributes() as $name => $entry ) {
 				$colstring .= $entry->getInternalCode() . ', ';
 			}
 

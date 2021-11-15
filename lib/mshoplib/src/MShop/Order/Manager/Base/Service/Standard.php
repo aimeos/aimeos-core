@@ -295,7 +295,7 @@ class Standard
 	{
 		$path = 'mshop/order/manager/base/service/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'attribute' ) ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'mshop/order/manager/base/service/delete' );
@@ -587,7 +587,7 @@ class Standard
 			$id = $item->getId();
 			$price = $item->getPrice();
 			$date = date( 'Y-m-d H:i:s' );
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -988,7 +988,7 @@ class Standard
 	 */
 	protected function getAttributeItems( array $ids ) : array
 	{
-		$manager = $this->getObject()->getSubManager( 'attribute' );
+		$manager = $this->object()->getSubManager( 'attribute' );
 		$search = $manager->filter()->slice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.service.attribute.parentid', $ids ) );
 
@@ -1027,7 +1027,7 @@ class Standard
 			$attrItem->setParentId( $item->getId() );
 		}
 
-		$this->getObject()->getSubManager( 'attribute' )->save( $attrItems, $fetch );
+		$this->object()->getSubManager( 'attribute' )->save( $attrItems, $fetch );
 		return $item;
 	}
 }

@@ -192,10 +192,10 @@ class Standard extends Base
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
-		$search = $this->getObject()->filter();
+		$search = $this->object()->filter();
 
 		foreach( $config->get( 'mshop/catalog/manager/submanagers', ['lists'] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		$dbm = $context->getDatabaseManager();
@@ -451,7 +451,7 @@ class Standard extends Base
 
 		try
 		{
-			$item = $this->getObject()->get( $id );
+			$item = $this->object()->get( $id );
 			$siteid = $this->getContext()->getLocale()->getSiteId();
 
 			$this->createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
@@ -953,7 +953,7 @@ class Standard extends Base
 		try
 		{
 			$siteid = $context->getLocale()->getSiteId();
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $case !== true )
 			{

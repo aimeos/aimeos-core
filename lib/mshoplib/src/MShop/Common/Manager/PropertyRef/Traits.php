@@ -27,7 +27,7 @@ trait Traits
 	 */
 	public function createPropertyItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Property\Iface
 	{
-		return $this->getObject()->getSubManager( 'property' )->create( $values );
+		return $this->object()->getSubManager( 'property' )->create( $values );
 	}
 
 
@@ -36,7 +36,7 @@ trait Traits
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
 	 */
-	abstract protected function getObject() : \Aimeos\MShop\Common\Manager\Iface;
+	abstract protected function object() : \Aimeos\MShop\Common\Manager\Iface;
 
 
 	/**
@@ -64,7 +64,7 @@ trait Traits
 
 		if( !empty( $parentIds ) )
 		{
-			$manager = $this->getObject()->getSubManager( 'property' );
+			$manager = $this->object()->getSubManager( 'property' );
 
 			$search = $manager->filter()->slice( 0, 0x7fffffff );
 			$search->setConditions( $search->compare( '==', $domain . '.property.parentid', $parentIds ) );
@@ -97,7 +97,7 @@ trait Traits
 	protected function savePropertyItems( \Aimeos\MShop\Common\Item\PropertyRef\Iface $item, string $domain,
 		bool $fetch = true ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
 	{
-		$propManager = $this->getObject()->getSubManager( 'property' );
+		$propManager = $this->object()->getSubManager( 'property' );
 		$propManager->delete( $item->getPropertyItemsDeleted()->keys()->toArray() );
 
 		$propItems = $item->getPropertyItems( null, false );

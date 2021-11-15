@@ -108,7 +108,7 @@ class ProductLimit
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
-		$plugin = $this->getObject();
+		$plugin = $this->object();
 
 		$p->attach( $plugin, 'addProduct.after' );
 		$p->attach( $plugin, 'setProducts.after' );

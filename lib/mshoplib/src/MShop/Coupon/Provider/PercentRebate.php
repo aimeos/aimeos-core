@@ -105,7 +105,7 @@ class PercentRebate
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
-		$price = $this->getObject()->calcPrice( $base->setCoupon( $this->getCode(), [] ) );
+		$price = $this->object()->calcPrice( $base->setCoupon( $this->getCode(), [] ) );
 		$rebate = $this->round( ( $price->getValue() + $price->getCosts() + $price->getRebate() ) * $percent / 100 );
 		$base->setCoupon( $this->getCode(), $this->createRebateProducts( $base, $prodcode, $rebate ) );
 

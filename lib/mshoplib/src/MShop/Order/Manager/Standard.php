@@ -299,7 +299,7 @@ class Standard
 	{
 		$path = 'mshop/order/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'status', 'base' ) ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'mshop/order/manager/delete' );
@@ -379,7 +379,7 @@ class Standard
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -850,7 +850,7 @@ class Standard
 				$ids[] = $row['order.baseid'];
 			}
 
-			$manager = $this->getObject()->getSubManager( 'base' );
+			$manager = $this->object()->getSubManager( 'base' );
 			$search = $manager->filter()->slice( 0, count( $ids ) );
 			$search->setConditions( $search->compare( '==', 'order.base.id', $ids ) );
 			$baseItems = $manager->search( $search, $ref );

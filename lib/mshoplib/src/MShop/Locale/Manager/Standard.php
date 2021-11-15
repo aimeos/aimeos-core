@@ -122,7 +122,7 @@ class Standard
 	public function bootstrap( string $site, string $lang = '', string $currency = '', bool $active = true, int $level = null,
 		bool $bare = false ) : \Aimeos\MShop\Locale\Item\Iface
 	{
-		$siteItem = $this->getObject()->getSubManager( 'site' )->find( $site );
+		$siteItem = $this->object()->getSubManager( 'site' )->find( $site );
 
 		if( $active && $siteItem->getStatus() < 1 ) {
 			throw new \Aimeos\MShop\Locale\Exception( 'Site not found' );
@@ -293,7 +293,7 @@ class Standard
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -567,7 +567,7 @@ class Standard
 		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sites ) : ?\Aimeos\MShop\Locale\Item\Iface
 	{
 		// Try to find exact match
-		$search = $this->getObject()->filter( $active );
+		$search = $this->object()->filter( $active );
 
 		$expr = array( $search->compare( '==', 'locale.siteid', $sites[Base::SITE_PATH] ?? $sites[Base::SITE_ONE] ) );
 
@@ -631,7 +631,7 @@ class Standard
 		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sites ) : ?\Aimeos\MShop\Locale\Item\Iface
 	{
 		// Try to find the best matching locale
-		$search = $this->getObject()->filter( $active );
+		$search = $this->object()->filter( $active );
 
 		$expr = array(
 			$search->compare( '==', 'locale.siteid', $sites[Base::SITE_PATH] ?? $sites[Base::SITE_ONE] ),
@@ -746,10 +746,10 @@ class Standard
 
 		try
 		{
-			$attributes = $this->getObject()->getSearchAttributes();
+			$attributes = $this->object()->getSearchAttributes();
 			$translations = $this->getSearchTranslations( $attributes );
 			$types = $this->getSearchTypes( $attributes );
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 			$sortcols = $search->translate( $search->getSortations(), $translations );
 
 			if( empty( $search->getSortations() ) && ( $attribute = reset( $attributes ) ) !== false ) {

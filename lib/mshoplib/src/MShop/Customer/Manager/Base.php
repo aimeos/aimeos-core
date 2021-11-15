@@ -181,7 +181,7 @@ abstract class Base
 		$pos = 0;
 		$groupIds = [];
 
-		$manager = $this->getObject()->getSubManager( 'lists' );
+		$manager = $this->object()->getSubManager( 'lists' );
 		$listItems = $item->getListItems( 'customer/group', 'default', null, false );
 
 		foreach( $item->getGroups() as $refId )

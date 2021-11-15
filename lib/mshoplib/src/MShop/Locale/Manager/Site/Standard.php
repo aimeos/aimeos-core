@@ -267,7 +267,7 @@ class Standard
 		try
 		{
 			$id = $item->getId();
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			/** mshop/locale/manager/site/update/mysql
 			 * Updates an existing site record in the database
@@ -349,12 +349,12 @@ class Standard
 		if( empty( $items ) ) { return $this; }
 
 
-		$filter = $this->getObject()->filter()
+		$filter = $this->object()->filter()
 			->add( ['locale.site.id' => $items] )
 			->slice( 0, count( $items ) );
 
-		$siteIds = $this->getObject()->search( $filter )->getSiteId()->toArray();
-		$this->getObject()->clear( $siteIds );
+		$siteIds = $this->object()->search( $filter )->getSiteId()->toArray();
+		$this->object()->clear( $siteIds );
 
 
 		/** mshop/locale/manager/site/delete/mysql
@@ -614,10 +614,10 @@ class Standard
 
 		try
 		{
-			$attributes = $this->getObject()->getSearchAttributes();
+			$attributes = $this->object()->getSearchAttributes();
 			$translations = $this->getSearchTranslations( $attributes );
 			$types = $this->getSearchTypes( $attributes );
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 			$sortcols = $search->translate( $search->getSortations(), $translations );
 
 			$colstring = '';
@@ -794,20 +794,20 @@ class Standard
 		if( $id !== null )
 		{
 			if( count( $ref ) > 0 ) {
-				return $this->getObject()->get( $id, $ref );
+				return $this->object()->get( $id, $ref );
 			}
 
 			if( !isset( $this->cache[$id] ) ) {
-				$this->cache[$id] = $this->getObject()->get( $id, $ref );
+				$this->cache[$id] = $this->object()->get( $id, $ref );
 			}
 
 			return $this->cache[$id];
 		}
 
-		$criteria = $criteria ? clone $criteria : $this->getObject()->filter();
+		$criteria = $criteria ? clone $criteria : $this->object()->filter();
 		$criteria->add( ['locale.site.code' => 'default'] )->slice( 0, 1 );
 
-		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) === null )
+		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) === null )
 		{
 			$msg = $this->getContext()->translate( 'mshop', 'Tree root with code "%1$s" in "%2$s" not found' );
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, 'default', 'locale.site.code' ) );
@@ -838,7 +838,7 @@ class Standard
 		try
 		{
 			$date = date( 'Y-m-d H:i:s' );
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			/** mshop/locale/manager/site/insert/mysql
 			 * Inserts a new currency record into the database table
@@ -938,7 +938,7 @@ class Standard
 			$dbm->release( $conn, $dbname );
 
 			// Add unique site identifier
-			$item = $this->getObject()->save( $item->setSiteId( $item->getId() . '.' ) );
+			$item = $this->object()->save( $item->setSiteId( $item->getId() . '.' ) );
 		}
 		catch( \Exception $e )
 		{

@@ -27,7 +27,7 @@ trait Traits
 	 */
 	public function createListItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Lists\Iface
 	{
-		return $this->getObject()->getSubManager( 'lists' )->create( $values );
+		return $this->object()->getSubManager( 'lists' )->create( $values );
 	}
 
 
@@ -161,7 +161,7 @@ trait Traits
 			return map();
 		}
 
-		$manager = $this->getObject()->getSubManager( 'lists' );
+		$manager = $this->object()->getSubManager( 'lists' );
 		$search = $manager->filter()->slice( 0, 0x7fffffff )->order( [
 			$prefix . '.lists.parentid',
 			$prefix . '.lists.domain',
@@ -207,7 +207,7 @@ trait Traits
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
 	 */
-	abstract protected function getObject() : \Aimeos\MShop\Common\Manager\Iface;
+	abstract protected function object() : \Aimeos\MShop\Common\Manager\Iface;
 
 
 	/**
@@ -253,7 +253,7 @@ trait Traits
 	{
 		$context = $this->getContext();
 		$rmListIds = $rmIds = $refManager = [];
-		$listManager = $this->getObject()->getSubManager( 'lists' );
+		$listManager = $this->object()->getSubManager( 'lists' );
 
 
 		foreach( $item->getListItemsDeleted() as $listItem )

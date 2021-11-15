@@ -103,12 +103,12 @@ abstract class Base
 		if( is_iterable( $items ) )
 		{
 			foreach( $items as $id => $item ) {
-				$items[$id] = $this->getObject()->saveItem( $item, $fetch );
+				$items[$id] = $this->object()->saveItem( $item, $fetch );
 			}
 			return map( $items );
 		}
 
-		return $this->getObject()->saveItem( $items, $fetch );
+		return $this->object()->saveItem( $items, $fetch );
 	}
 
 
@@ -122,7 +122,7 @@ abstract class Base
 	 */
 	public function search( \Aimeos\MW\Criteria\Iface $filter, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		return $this->getObject()->search( $filter, $ref, $total );
+		return $this->object()->search( $filter, $ref, $total );
 	}
 
 
@@ -263,7 +263,7 @@ abstract class Base
 			$search->slice( $search->getOffset(), min( $search->getLimit(), $limit ) );
 
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$attrList = $this->getObject()->getSearchAttributes();
+			$attrList = $this->object()->getSearchAttributes();
 
 			if( $value === null && ( $value = key( $attrList ) ) === null )
 			{
@@ -451,7 +451,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
 	 */
-	protected function getObject() : \Aimeos\MShop\Common\Manager\Iface
+	protected function object() : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( $this->object !== null ) {
 			return $this->object;
@@ -480,7 +480,7 @@ abstract class Base
 			$domains = $this->context->getConfig()->get( $path, $default );
 
 			foreach( $domains as $domain ) {
-				$attr += $this->getObject()->getSubManager( $domain )->getSearchAttributes( true );
+				$attr += $this->object()->getSubManager( $domain )->getSearchAttributes( true );
 			}
 		}
 
@@ -551,7 +551,7 @@ abstract class Base
 	protected function findBase( array $pairs, array $ref, ?bool $default ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$expr = [];
-		$criteria = $this->getObject()->filter( $default )->slice( 0, 1 );
+		$criteria = $this->object()->filter( $default )->slice( 0, 1 );
 
 		foreach( $pairs as $key => $value )
 		{
@@ -565,7 +565,7 @@ abstract class Base
 
 		$criteria->setConditions( $criteria->and( $expr ) );
 
-		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
+		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
 			return $item;
 		}
 
@@ -614,14 +614,14 @@ abstract class Base
 	 */
 	protected function getItemBase( string $key, string $id, array $ref, ?bool $default ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$criteria = $this->getObject()->filter( $default )->slice( 0, 1 );
+		$criteria = $this->object()->filter( $default )->slice( 0, 1 );
 		$expr = [
 			$criteria->compare( '==', $key, $id ),
 			$criteria->getConditions()
 		];
 		$criteria->setConditions( $criteria->and( $expr ) );
 
-		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
+		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
 			return $item;
 		}
 
@@ -671,7 +671,7 @@ abstract class Base
 		$list = array( $type );
 
 		foreach( $this->context->getConfig()->get( $path, $default ) as $domain ) {
-			$list = array_merge( $list, $this->getObject()->getSubManager( $domain )->getResourceType( $withsub ) );
+			$list = array_merge( $list, $this->object()->getSubManager( $domain )->getResourceType( $withsub ) );
 		}
 
 		return $list;
@@ -886,8 +886,8 @@ abstract class Base
 	{
 		$joins = [];
 		$conditions = $search->getConditions();
-		$columns = $this->getObject()->getSaveAttributes();
-		$attributes = $this->getObject()->getSearchAttributes();
+		$columns = $this->object()->getSaveAttributes();
+		$attributes = $this->object()->getSearchAttributes();
 		$keys = $this->getCriteriaKeyList( $search, $required );
 
 		$basekey = array_shift( $required );
@@ -950,7 +950,7 @@ abstract class Base
 		$context = $this->getContext();
 		$dbname = $this->getResourceName();
 
-		$search = $this->getObject()->filter();
+		$search = $this->object()->filter();
 		$search->setConditions( $search->compare( '==', $name, $items ) );
 
 		$types = array( $name => \Aimeos\MW\DB\Statement\Base::PARAM_STR );

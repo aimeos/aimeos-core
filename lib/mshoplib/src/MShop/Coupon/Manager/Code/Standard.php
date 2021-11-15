@@ -136,7 +136,7 @@ class Standard
 	{
 		$path = 'mshop/coupon/manager/code/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'mshop/coupon/manager/code/delete' );
@@ -379,7 +379,7 @@ class Standard
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -777,7 +777,7 @@ class Standard
 		$context = $this->getContext();
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
 
-		$search = $this->getObject()->filter();
+		$search = $this->object()->filter();
 		$search->setConditions( $search->compare( '==', 'coupon.code.siteid', $context->getLocale()->getSites( $level ) ) );
 
 		$types = array( 'coupon.code.siteid' => $this->searchConfig['coupon.code.siteid']['internaltype'] );

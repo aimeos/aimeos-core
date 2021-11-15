@@ -145,7 +145,7 @@ class Standard
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -514,10 +514,10 @@ class Standard
 
 		try
 		{
-			$attributes = $this->getObject()->getSearchAttributes();
+			$attributes = $this->object()->getSearchAttributes();
 			$translations = $this->getSearchTranslations( $attributes );
 			$types = $this->getSearchTypes( $attributes );
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 			$sortcols = $search->translate( $search->getSortations(), $translations );
 
 			$colstring = '';

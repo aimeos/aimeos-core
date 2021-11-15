@@ -123,7 +123,7 @@ class Standard
 	{
 		$path = 'mshop/stock/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'mshop/stock/manager/delete' );
@@ -166,7 +166,7 @@ class Standard
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -759,7 +759,7 @@ class Standard
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/stock/manager/sitemode', $level );
 
-		$search = $this->getObject()->filter();
+		$search = $this->object()->filter();
 		$search->setConditions( $this->getSiteCondition( $search, 'stock.siteid', $level ) );
 		$conditions = $search->getConditionSource( $types, $translations );
 
@@ -843,7 +843,7 @@ class Standard
 			$pairs[$prodid] = -$qty;
 		}
 
-		return $this->getObject()->decrease( $pairs, $type );
+		return $this->object()->decrease( $pairs, $type );
 	}
 
 

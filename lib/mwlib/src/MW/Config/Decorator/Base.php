@@ -87,7 +87,7 @@ abstract class Base implements \Aimeos\MW\Config\Decorator\Iface
 	 *
 	 * @return \Aimeos\MW\Config\Iface Config object
 	 */
-	protected function getObject() : \Aimeos\MW\Config\Iface
+	protected function object() : \Aimeos\MW\Config\Iface
 	{
 		return $this->object;
 	}

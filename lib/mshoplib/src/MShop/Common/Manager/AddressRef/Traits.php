@@ -27,7 +27,7 @@ trait Traits
 	 */
 	public function createAddressItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
-		return $this->getObject()->getSubManager( 'address' )->create( $values );
+		return $this->object()->getSubManager( 'address' )->create( $values );
 	}
 
 
@@ -45,7 +45,7 @@ trait Traits
 
 		if( !empty( $parentIds ) )
 		{
-			$manager = $this->getObject()->getSubManager( 'address' );
+			$manager = $this->object()->getSubManager( 'address' );
 
 			$search = $manager->filter()->slice( 0, 0x7fffffff );
 			$search->setConditions( $search->compare( '==', $domain . '.address.parentid', $parentIds ) );
@@ -65,7 +65,7 @@ trait Traits
 	 *
 	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
 	 */
-	abstract protected function getObject() : \Aimeos\MShop\Common\Manager\Iface;
+	abstract protected function object() : \Aimeos\MShop\Common\Manager\Iface;
 
 
 	/**
@@ -90,7 +90,7 @@ trait Traits
 		bool $fetch = true ) : \Aimeos\MShop\Common\Item\AddressRef\Iface
 	{
 		$pos = 0;
-		$manager = $this->getObject()->getSubManager( 'address' );
+		$manager = $this->object()->getSubManager( 'address' );
 		$manager->delete( $item->getAddressItemsDeleted()->keys()->toArray() );
 
 		foreach( $item->getAddressItems() as $idx => $addrItem )

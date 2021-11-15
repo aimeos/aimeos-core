@@ -369,7 +369,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Service\Provider\Iface First object of the decorator stack
 	 */
-	protected function getObject() : \Aimeos\MShop\Service\Provider\Iface
+	protected function object() : \Aimeos\MShop\Service\Provider\Iface
 	{
 		return $this->object ?? $this;
 	}

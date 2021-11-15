@@ -174,7 +174,7 @@ class Standard
 		$config = $context->getConfig();
 
 		foreach( $config->get( 'madmin/cache/manager/submanagers', [] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		/** madmin/cache/manager/delete/mysql

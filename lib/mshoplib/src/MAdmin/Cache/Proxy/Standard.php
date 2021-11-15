@@ -45,7 +45,7 @@ class Standard
 	 */
 	public function cleanup() : bool
 	{
-		return $this->getObject()->cleanup();
+		return $this->object()->cleanup();
 	}
 
 
@@ -58,7 +58,7 @@ class Standard
 	 */
 	public function clear() : bool
 	{
-		return $this->getObject()->clear();
+		return $this->object()->clear();
 	}
 
 
@@ -73,7 +73,7 @@ class Standard
 	 */
 	public function delete( string $key ) : bool
 	{
-		return $this->getObject()->delete( $key );
+		return $this->object()->delete( $key );
 	}
 
 
@@ -88,7 +88,7 @@ class Standard
 	 */
 	public function deleteMultiple( iterable $keys ) : bool
 	{
-		return $this->getObject()->deleteMultiple( $keys );
+		return $this->object()->deleteMultiple( $keys );
 	}
 
 
@@ -104,7 +104,7 @@ class Standard
 	 */
 	public function deleteByTags( iterable $tags ) : bool
 	{
-		return $this->getObject()->deleteByTags( $tags );
+		return $this->object()->deleteByTags( $tags );
 	}
 
 
@@ -121,7 +121,7 @@ class Standard
 	 */
 	public function get( string $key, $default = null )
 	{
-		return $this->getObject()->get( $key, $default );
+		return $this->object()->get( $key, $default );
 	}
 
 
@@ -137,7 +137,7 @@ class Standard
 	 */
 	public function getMultiple( iterable $keys, $default = null ) : iterable
 	{
-		return $this->getObject()->getMultiple( $keys, $default );
+		return $this->object()->getMultiple( $keys, $default );
 	}
 
 
@@ -152,7 +152,7 @@ class Standard
 	 */
 	public function has( string $key ) : bool
 	{
-		return $this->getObject()->has( $key );
+		return $this->object()->has( $key );
 	}
 
 
@@ -172,7 +172,7 @@ class Standard
 	 */
 	public function set( string $key, $value, $expires = null, iterable $tags = [] ) : bool
 	{
-		return $this->getObject()->set( $key, $value, $expires, $tags );
+		return $this->object()->set( $key, $value, $expires, $tags );
 	}
 
 
@@ -192,7 +192,7 @@ class Standard
 	 */
 	public function setMultiple( iterable $pairs, $expires = null, iterable $tags = [] ) : bool
 	{
-		return $this->getObject()->setMultiple( $pairs, $expires, $tags );
+		return $this->object()->setMultiple( $pairs, $expires, $tags );
 	}
 
 
@@ -201,7 +201,7 @@ class Standard
 	 *
 	 * @return \Aimeos\MW\Cache\Iface Cache object
 	 */
-	protected function getObject()
+	protected function object()
 	{
 		if( !isset( $this->object ) ) {
 			$this->object = \Aimeos\MAdmin::create( $this->context, 'cache' )->getCache();

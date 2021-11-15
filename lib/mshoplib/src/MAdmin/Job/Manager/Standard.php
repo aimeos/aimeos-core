@@ -105,7 +105,7 @@ class Standard
 	{
 		$path = 'madmin/job/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'madmin/job/manager/delete' );
@@ -161,7 +161,7 @@ class Standard
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -373,14 +373,14 @@ class Standard
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$criteria = $this->getObject()->filter( $default );
+		$criteria = $this->object()->filter( $default );
 		$expr = [
 			$criteria->compare( '==', 'job.id', $id ),
 			$criteria->getConditions()
 		];
 		$criteria->setConditions( $criteria->and( $expr ) );
 
-		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
+		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
 			return $item;
 		}
 

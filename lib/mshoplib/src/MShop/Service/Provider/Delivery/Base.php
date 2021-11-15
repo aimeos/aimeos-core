@@ -36,7 +36,7 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	public function processBatch( iterable $orders ) : \Aimeos\Map
 	{
 		foreach( $orders as $key => $order ) {
-			$orders[$key] = $this->getObject()->process( $order );
+			$orders[$key] = $this->object()->process( $order );
 		}
 
 		return map( $orders );

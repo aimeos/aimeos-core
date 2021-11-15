@@ -105,7 +105,7 @@ class Tip
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
-		$price = $this->getObject()->calcPrice( $base->setCoupon( $this->getCode(), [] ) );
+		$price = $this->object()->calcPrice( $base->setCoupon( $this->getCode(), [] ) );
 		$tip = $this->round( $price->getValue() * $percent / 100 );
 
 		$orderProduct = $this->createProduct( $prodcode, 1, 'default' );

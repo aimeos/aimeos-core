@@ -52,7 +52,7 @@ class MySQL
 			foreach( $config->get( 'mshop/index/manager/submanagers', [] ) as $domain )
 			{
 				$name = $config->get( 'mshop/index/manager/' . $domain . '/name' );
-				$this->subManagers[$domain] = $this->getObject()->getSubManager( $domain, $name ?: 'MySQL' );
+				$this->subManagers[$domain] = $this->object()->getSubManager( $domain, $name ?: 'MySQL' );
 			}
 
 			return $this->subManagers;

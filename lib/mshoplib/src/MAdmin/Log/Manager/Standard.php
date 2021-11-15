@@ -141,7 +141,7 @@ class Standard
 	{
 		$path = 'madmin/log/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'madmin/log/manager/delete' );
@@ -194,7 +194,7 @@ class Standard
 		try
 		{
 			$id = $item->getId();
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -405,14 +405,14 @@ class Standard
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$criteria = $this->getObject()->filter( $default );
+		$criteria = $this->object()->filter( $default );
 		$expr = [
 			$criteria->compare( '==', 'log.id', $id ),
 			$criteria->getConditions()
 		];
 		$criteria->setConditions( $criteria->and( $expr ) );
 
-		if( ( $item = $this->getObject()->search( $criteria, $ref )->first() ) ) {
+		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
 			return $item;
 		}
 
@@ -661,14 +661,14 @@ class Standard
 				$message = json_encode( $message );
 			}
 
-			$item = $this->getObject()->create();
+			$item = $this->object()->create();
 
 			$item->setFacility( $facility );
 			$item->setPriority( $priority );
 			$item->setMessage( $message );
 			$item->setRequest( $this->requestid );
 
-			$this->getObject()->save( $item );
+			$this->object()->save( $item );
 		}
 
 		return $this;

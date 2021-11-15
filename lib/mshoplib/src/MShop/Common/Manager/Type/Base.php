@@ -107,7 +107,7 @@ abstract class Base
 			$id = $item->getId();
 			$time = date( 'Y-m-d H:i:s' );
 			$path = $this->getConfigPath();
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null ) {
 				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path .= 'insert' ) );

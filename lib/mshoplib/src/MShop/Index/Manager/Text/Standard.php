@@ -848,7 +848,7 @@ class Standard
 			foreach( $config->get( 'mshop/index/manager/text/submanagers', [] ) as $domain )
 			{
 				$name = $config->get( 'mshop/index/manager/text/' . $domain . '/name' );
-				$this->subManagers[$domain] = $this->getObject()->getSubManager( $domain, $name );
+				$this->subManagers[$domain] = $this->object()->getSubManager( $domain, $name );
 			}
 
 			return $this->subManagers;

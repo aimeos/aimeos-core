@@ -94,7 +94,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MW\Translation\Iface Translation object
 	 */
-	protected function getObject() : \Aimeos\MW\Translation\Iface
+	protected function object() : \Aimeos\MW\Translation\Iface
 	{
 		return $this->object;
 	}

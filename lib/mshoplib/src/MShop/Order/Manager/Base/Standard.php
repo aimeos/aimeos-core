@@ -272,7 +272,7 @@ class Standard extends Base
 		$default = array( 'address', 'coupon', 'product', 'service' );
 
 		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'mshop/order/manager/base/delete' );
@@ -586,7 +586,7 @@ class Standard extends Base
 		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
-			$columns = $this->getObject()->getSaveAttributes();
+			$columns = $this->object()->getSaveAttributes();
 
 			if( $id === null )
 			{
@@ -958,7 +958,7 @@ class Standard extends Base
 	public function load( string $id, int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, bool $fresh = false,
 		bool $default = false ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		$search = $this->getObject()->filter( $default );
+		$search = $this->object()->filter( $default );
 		$expr = [
 			$search->compare( '==', 'order.base.id', $id ),
 			$search->getConditions(),
@@ -1039,7 +1039,7 @@ class Standard extends Base
 	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket,
 		int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		$basket = $this->getObject()->save( $basket );
+		$basket = $this->object()->save( $basket );
 
 		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT
 			|| $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON

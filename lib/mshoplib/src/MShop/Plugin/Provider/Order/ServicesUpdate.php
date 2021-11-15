@@ -39,7 +39,7 @@ class ServicesUpdate
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p ) : \Aimeos\MW\Observer\Listener\Iface
 	{
-		$plugin = $this->getObject();
+		$plugin = $this->object();
 
 		$p->attach( $plugin, 'addAddress.after' );
 		$p->attach( $plugin, 'deleteAddress.after' );

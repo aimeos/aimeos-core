@@ -126,7 +126,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Rule\Provider\Iface First object of the decorator stack
 	 */
-	protected function getObject() : \Aimeos\MShop\Rule\Provider\Iface
+	protected function object() : \Aimeos\MShop\Rule\Provider\Iface
 	{
 		if( $this->object !== null ) {
 			return $this->object;
