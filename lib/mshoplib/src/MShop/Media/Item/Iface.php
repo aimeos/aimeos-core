@@ -24,6 +24,21 @@ interface Iface
 		\Aimeos\MShop\Common\Item\Status\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
+	 * Returns the name of the file system the referenced file is stored.
+	 *
+	 * @return string Name of the file system
+	 */
+	public function getFileSystem() : string;
+
+	/**
+	 * Sets the name of the file system the referenced file is stored.
+	 *
+	 * @param string $value Name of the file system
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 */
+	public function setFileSystem( string $value ) : \Aimeos\MShop\Media\Item\Iface;
+
+	/**
 	 * Returns the ISO language code.
 	 *
 	 * @return string|null ISO language code (e.g. de or de_DE)
@@ -48,7 +63,7 @@ interface Iface
 	/**
 	 * Sets the new label of the media item.
 	 *
-	 * @param string $label Type label of the media item
+	 * @param string|null $label Type label of the media item
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setLabel( ?string $label ) : \Aimeos\MShop\Media\Item\Iface;
@@ -102,7 +117,7 @@ interface Iface
 	/**
 	 * Returns the url of the media item.
 	 *
-	 * @return string URL of the media file
+	 * @return string|null URL of the media file
 	 */
 	public function getUrl() : string;
 

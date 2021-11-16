@@ -489,10 +489,10 @@ return array(
 		'insert' => array(
 			'ansi' => '
 				INSERT INTO "mshop_media" ( :names
-					"langid", "type", "label", "mimetype", "link", "status",
+					"langid", "type", "label", "mimetype", "link", "status", "fsname",
 					"domain", "preview", "mtime", "editor", "siteid", "ctime"
 				) VALUES ( :values
-					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 				)
 			'
 		),
@@ -500,8 +500,8 @@ return array(
 			'ansi' => '
 				UPDATE "mshop_media"
 				SET :names
-					"langid" = ?, "type" = ?, "label" = ?, "mimetype" = ?, "link" = ?,
-					"status" = ?, "domain" = ?, "preview" = ?, "mtime" = ?, "editor" = ?
+					"langid" = ?, "type" = ?, "label" = ?, "mimetype" = ?, "link" = ?, "status" = ?,
+					"fsname" = ?, "domain" = ?, "preview" = ?, "mtime" = ?, "editor" = ?
 				WHERE "siteid" = ? AND "id" = ?
 			'
 		),
@@ -513,8 +513,8 @@ return array(
 					mmed."link" AS "media.url", mmed."label" AS "media.label",
 					mmed."status" AS "media.status", mmed."mimetype" AS "media.mimetype",
 					mmed."domain" AS "media.domain", mmed."preview" AS "media.previews",
-					mmed."mtime" AS "media.mtime", mmed."editor" AS "media.editor",
-					mmed."ctime" AS "media.ctime"
+					mmed."fsname" AS "media.filesystem", mmed."mtime" AS "media.mtime",
+					mmed."ctime" AS "media.ctime", mmed."editor" AS "media.editor"
 				FROM "mshop_media" AS mmed
 				:joins
 				WHERE :cond
@@ -532,8 +532,8 @@ return array(
 					mmed."link" AS "media.url", mmed."label" AS "media.label",
 					mmed."status" AS "media.status", mmed."mimetype" AS "media.mimetype",
 					mmed."domain" AS "media.domain", mmed."preview" AS "media.previews",
-					mmed."mtime" AS "media.mtime", mmed."editor" AS "media.editor",
-					mmed."ctime" AS "media.ctime"
+					mmed."fsname" AS "media.filesystem", mmed."mtime" AS "media.mtime",
+					mmed."ctime" AS "media.ctime", mmed."editor" AS "media.editor"
 				FROM "mshop_media" AS mmed
 				:joins
 				WHERE :cond

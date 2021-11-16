@@ -25,6 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'media.domain' => 'test_dom',
 			'media.label' => 'testPicture',
 			'media.mimetype' => 'image/jpeg',
+			'media.filesystem' => 'fs-mimeicon',
 			'media.url' => 'http://www.url.com/test.jpg',
 			'media.previews' => [100 => '/directory/test.jpg', 200 => '/directory/test2.jpg'],
 			'media.status' => 6,
@@ -89,6 +90,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
 		$this->assertEquals( 'size', $this->object->getType() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetFileSystem()
+	{
+		$this->assertEquals( 'fs-mimeicon', $this->object->getFileSystem() );
+	}
+
+
+	public function testSetFileSystem()
+	{
+		$return = $this->object->setFileSystem( 'fs-test' );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
+		$this->assertEquals( 'fs-test', $this->object->getFileSystem() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -281,6 +298,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'media.label' => 'test item',
 			'media.languageid' => 'de',
 			'media.type' => 'test',
+			'media.filesystem' => 'fs-test',
 			'media.mimetype' => 'image/jpeg',
 			'media.previews' => [1 => 'preview.jpg'],
 			'media.preview' => 'preview.jpg',
@@ -294,6 +312,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['media.id'], $item->getId() );
 		$this->assertEquals( $list['media.domain'], $item->getDomain() );
 		$this->assertEquals( $list['media.label'], $item->getLabel() );
+		$this->assertEquals( $list['media.filesystem'], $item->getFileSystem() );
 		$this->assertEquals( $list['media.languageid'], $item->getLanguageId() );
 		$this->assertEquals( $list['media.type'], $item->getType() );
 		$this->assertEquals( $list['media.mimetype'], $item->getMimetype() );
@@ -315,6 +334,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['media.siteid'] );
 		$this->assertEquals( $this->object->getDomain(), $arrayObject['media.domain'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['media.label'] );
+		$this->assertEquals( $this->object->getFileSystem(), $arrayObject['media.filesystem'] );
 		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['media.languageid'] );
 		$this->assertEquals( $this->object->getMimeType(), $arrayObject['media.mimetype'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['media.type'] );

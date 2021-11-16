@@ -95,6 +95,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'media.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'media.type', 'slideshow' );
 		$expr[] = $search->compare( '==', 'media.domain', 'product' );
+		$expr[] = $search->compare( '==', 'media.filesystem', 'fs-media' );
 		$expr[] = $search->compare( '==', 'media.label', 'prod_266x221/198_prod_266x221.jpg' );
 		$expr[] = $search->compare( '==', 'media.url', 'prod_266x221/198_prod_266x221.jpg' );
 		$expr[] = $search->compare( '=~', 'media.preview', '{' );
@@ -202,6 +203,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getLanguageId(), $itemSaved->getLanguageId() );
+		$this->assertEquals( $item->getFileSystem(), $itemSaved->getFileSystem() );
 		$this->assertEquals( $item->getDomain(), $itemSaved->getDomain() );
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getMimeType(), $itemSaved->getMimeType() );
@@ -217,6 +219,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getLanguageId(), $itemUpd->getLanguageId() );
+		$this->assertEquals( $itemExp->getFileSystem(), $itemUpd->getFileSystem() );
 		$this->assertEquals( $itemExp->getDomain(), $itemUpd->getDomain() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getMimeType(), $itemUpd->getMimeType() );

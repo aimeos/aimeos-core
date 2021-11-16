@@ -34,6 +34,7 @@ return array(
 			$table->id()->primary( 'pk_msmed_id' );
 			$table->string( 'siteid' );
 			$table->type();
+			$table->string( 'fsname', 32 )->default( '' );
 			$table->string( 'langid', 5 )->null( true );
 			$table->string( 'domain', 32 );
 			$table->string( 'label' )->default( '' );

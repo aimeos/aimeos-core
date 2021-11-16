@@ -21,10 +21,6 @@ class MediaMigratePreview extends Base
 	{
 		$db = $this->db( 'db-media' );
 
-		if( !$db->hasTable( 'mshop_media' ) ) {
-			return;
-		}
-
 		$this->info( 'Migrating preview column in media table', 'v' );
 
 		$dbm = $this->context()->db();

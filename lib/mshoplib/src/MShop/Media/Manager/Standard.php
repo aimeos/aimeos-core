@@ -91,6 +91,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'media.filesystem' => array(
+			'label' => 'File sytem name',
+			'code' => 'media.filesystem',
+			'internalcode' => 'mmed."fsname"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'media.status' => array(
 			'label' => 'Status',
 			'code' => 'media.status',
@@ -454,6 +461,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getMimeType() );
 			$stmt->bind( $idx++, $item->getUrl() );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getFileSystem() );
 			$stmt->bind( $idx++, $item->getDomain() );
 			$stmt->bind( $idx++, json_encode( $item->getPreviews(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $date ); // mtime

@@ -71,6 +71,29 @@ class Standard
 
 
 	/**
+	 * Returns the name of the file system the referenced file is stored.
+	 *
+	 * @return string Name of the file system
+	 */
+	public function getFileSystem() : string
+	{
+		return $this->get( 'media.filesystem', 'fs-media' );
+	}
+
+
+	/**
+	 * Sets the name of the file system the referenced file is stored.
+	 *
+	 * @param string $value Name of the file system
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 */
+	public function setFileSystem( string $value ) : \Aimeos\MShop\Media\Item\Iface
+	{
+		return $this->set( 'media.filesystem', $value );
+	}
+
+
+	/**
 	 * Returns the ISO language code.
 	 *
 	 * @return string|null ISO language code (e.g. de or de_DE)
@@ -371,6 +394,7 @@ class Standard
 		{
 			switch( $key )
 			{
+				case 'media.filesystem': $item = $item->setFileSystem( $value ); break;
 				case 'media.domain': $item = $item->setDomain( $value ); break;
 				case 'media.label': $item = $item->setLabel( $value ); break;
 				case 'media.languageid': $item = $item->setLanguageId( $value ); break;
@@ -400,6 +424,7 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
+		$list['media.filesystem'] = $this->getFileSystem();
 		$list['media.domain'] = $this->getDomain();
 		$list['media.label'] = $this->getLabel();
 		$list['media.languageid'] = $this->getLanguageId();
