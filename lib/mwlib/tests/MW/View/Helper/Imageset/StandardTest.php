@@ -16,7 +16,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$conf = new \Aimeos\MW\Config\PHPArray( ['resource' => ['fs-media' => ['baseurl' => '/path/to']]] );
+		$conf = new \Aimeos\MW\Config\PHPArray( ['resource' => ['fs-test' => ['baseurl' => '/path/to']]] );
 		$view = new \Aimeos\MW\View\Standard();
 
 		$view->addHelper( 'config', new \Aimeos\MW\View\Helper\Config\Standard( $view, $conf ) );
@@ -37,6 +37,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expected = '/path/to/image-1.jpg 100w, /path/to/image-2.jpg 200w';
 		$images = ['100' => 'image-1.jpg', '200' => 'image-2.jpg'];
 
-		$this->assertEquals( $expected, $this->object->transform( $images ) );
+		$this->assertEquals( $expected, $this->object->transform( $images, 'fs-test' ) );
 	}
 }

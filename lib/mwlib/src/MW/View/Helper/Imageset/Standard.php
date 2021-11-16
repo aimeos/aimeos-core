@@ -25,15 +25,16 @@ class Standard
 	 * Returns the image srcset value for the given image list
 	 *
 	 * @param array $images List of widths as keys and URLs as values
+	 * @param string $fsname File system name the file is stored at
 	 * @return string Image srcset value
 	 */
-	public function transform( array $images ) : string
+	public function transform( array $images, $fsname = 'fs-media' ) : string
 	{
 		$srcset = [];
 		$view = $this->getView();
 
 		foreach( $images as $type => $path ) {
-			$srcset[] = $view->content( $path ) . ' ' . $type . 'w';
+			$srcset[] = $view->content( $path, $fsname ) . ' ' . $type . 'w';
 		}
 
 		return join( ', ', $srcset );
