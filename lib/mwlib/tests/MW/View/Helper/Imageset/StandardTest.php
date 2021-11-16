@@ -16,8 +16,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
+		$conf = new \Aimeos\MW\Config\PHPArray( ['resource' => ['fs-media' => ['baseurl' => '/path/to']]] );
 		$view = new \Aimeos\MW\View\Standard();
-		$view->addHelper( 'content', new \Aimeos\MW\View\Helper\Content\Standard( $view, '/path/to' ) );
+
+		$view->addHelper( 'config', new \Aimeos\MW\View\Helper\Config\Standard( $view, $conf ) );
+		$view->addHelper( 'content', new \Aimeos\MW\View\Helper\Content\Standard( $view ) );
 
 		$this->object = new \Aimeos\MW\View\Helper\Imageset\Standard( $view );
 	}

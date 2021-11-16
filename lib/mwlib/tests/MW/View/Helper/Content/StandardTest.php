@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
-		$this->object = new \Aimeos\MW\View\Helper\Content\Standard( $view, 'base/url' );
+		$this->object = new \Aimeos\MW\View\Helper\Content\Standard( $view );
 	}
 
 
@@ -40,7 +40,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testTransformRelativeUrl()
 	{
-		$output = $this->object->transform( 'path/to/resource' );
+		$view = new \Aimeos\MW\View\Standard();
+
+		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
+		$view->addHelper( 'encoder', $helper );
+
+		$config = new \Aimeos\MW\Config\PHPArray( ['resource' => ['fs-test' => ['baseurl' => 'base/url']]] );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
+		$view->addHelper( 'config', $helper );
+
+		$object = new \Aimeos\MW\View\Helper\Content\Standard( $view );
+
+		$output = $object->transform( 'path/to/resource', 'fs-test' );
 		$this->assertEquals( 'base/url/path/to/resource', $output );
 	}
 
