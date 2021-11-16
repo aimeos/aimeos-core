@@ -118,8 +118,8 @@ class ProductPrice
 
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
-		$attrIds = map();
-		$prodCodes = $changedProducts = [];
+		$changedProducts = [];
+		$attrIds = $prodIds = map();
 		$orderProducts = $order->getProducts();
 
 		foreach( $orderProducts as $pos => $item )
@@ -130,26 +130,28 @@ class ProductPrice
 				unset( $orderProducts[$pos] );
 			}
 
-			$attrIds->merge( $item->getAttributeItems()->getAttributeId()->toArray() );
-			$prodCodes[] = $item->getProductCode();
+			$attrIds->merge( $item->getAttributeItems()->getAttributeId() );
+			$prodIds->push( $item->getParentProductId() )->push( $item->getProductId() );
 		}
 
 
-		$attributes = $this->getAttributeItems( $attrIds->unique()->toArray() );
-		$prodMap = $this->getProductItems( $prodCodes );
+		$attributes = $this->getAttributeItems( $attrIds->unique() );
+		$products = $this->getProductItems( $prodIds->filter() );
 
 
 		foreach( $orderProducts as $pos => $orderProduct )
 		{
-			if( !$prodMap->has( $orderProduct->getProductCode() )
-				|| !$prodMap->get( $orderProduct->getProductCode() )->getRefItems( 'attribute', 'price', 'custom' )->isEmpty()
+			$product = $products->get( $orderProduct->getProductId() );
+			$parent = $products->get( $orderProduct->getParentProductId() );
+
+			if( !$product || !$product->getRefItems( 'attribute', 'price', 'custom' )->isEmpty()
+				|| $parent && !$parent->getRefItems( 'attribute', 'price', 'custom' )->isEmpty()
 			) {
 				continue; // Product isn't available or excluded
 			}
 
 			// fetch prices of articles/sub-products
-			$refPrices = $prodMap->get( $orderProduct->getProductCode() )->getRefItems( 'price', 'default', 'default' );
-			$price = $this->getPrice( $orderProduct, $refPrices, $attributes, $pos );
+			$price = $this->getPrice( $orderProduct, $product, $parent, $attributes, $pos );
 
 			if( $orderProduct->getPrice()->compare( $price ) === false )
 			{
@@ -172,48 +174,38 @@ class ProductPrice
 	/**
 	 * Returns the attribute items for the given IDs.
 	 *
-	 * @param array $list List of attribute IDs
+	 * @param \Aimeos\Map $list List of attribute IDs
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Attribute\Item\Iface
 	 */
-	protected function getAttributeItems( array $list ) : \Aimeos\Map
+	protected function getAttributeItems( \Aimeos\Map $list ) : \Aimeos\Map
 	{
-		if( empty( $list ) ) {
+		if( $list->isEmpty() ) {
 			return map();
 		}
 
 		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
-
-		$search = $attrManager->filter( true )->slice( 0, count( $list ) );
-		$search->setConditions( $search->and( [
-			$search->compare( '==', 'attribute.id', $list ),
-			$search->getConditions()
-		] ) );
+		$search = $attrManager->filter( true )->add( ['attribute.id' => $list] )->slice( 0, count( $list ) );
 
 		return $attrManager->search( $search, ['price'] );
 	}
 
 
 	/**
-	 * Returns the product items for the given product codes.
+	 * Returns the product items for the given product IDs.
 	 *
-	 * @param string[] $prodCodes Product codes
-	 * @return \Aimeos\Map Associative list of codes as keys and product items as values
+	 * @param \Aimeos\Map $prodIds Product IDs
+	 * @return \Aimeos\Map Associative list of IDs as keys and product items as values
 	 */
-	protected function getProductItems( array $prodCodes ) : \Aimeos\Map
+	protected function getProductItems( \Aimeos\Map $prodIds ) : \Aimeos\Map
 	{
-		if( empty( $prodCodes ) ) {
+		if( $prodIds->isEmpty() ) {
 			return map();
 		}
 
 		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
+		$search = $productManager->filter( true )->add( ['product.id' => $prodIds] )->slice( 0, count( $prodIds ) );
 
-		$search = $productManager->filter( true )->slice( 0, count( $prodCodes ) );
-		$search->setConditions( $search->and( [
-			$search->compare( '==', 'product.code', $prodCodes ),
-			$search->getConditions(),
-		] ) );
-
-		return $productManager->search( $search, ['price', 'attribute' => ['custom']] )->col( null, 'product.code' );
+		return $productManager->search( $search, ['price', 'attribute' => ['custom']] );
 	}
 
 
@@ -221,37 +213,36 @@ class ProductPrice
 	 * Returns the actual price for the given order product.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct Ordered product
-	 * @param \Aimeos\Map $refPrices Prices implementing \Aimeos\MShop\Price\Item\Iface and associated to the original product
+	 * @param \Aimeos\MShop\Product\Item\Iface $product Product with prices
+	 * @param \Aimeos\MShop\Product\Item\Iface|null $parent Parent product with prices on NULL if no parent is available
 	 * @param \Aimeos\Map $attributes Attribute items implementing \Aimeos\MShop\Attribute\Item\Iface with prices
 	 * @param int $pos Position of the product in the basket
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item including the calculated price
 	 */
-	private function getPrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct, \Aimeos\Map $refPrices,
+	private function getPrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct,
+		\Aimeos\MShop\Product\Item\Iface $product, ?\Aimeos\MShop\Product\Item\Iface $parent,
 		\Aimeos\Map $attributes, int $pos ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		$context = $this->getContext();
+		$prodPrices = $product->getRefItems( 'price', 'default', 'default' );
 
 		// fetch prices of selection/parent products
-		if( $refPrices->isEmpty() )
-		{
-			$productManager = \Aimeos\MShop::create( $context, 'product' );
-			$product = $productManager->get( $orderProduct->getProductId(), array( 'price' ) );
-			$refPrices = $product->getRefItems( 'price', 'default', 'default' );
+		if( $parent && $prodPrices->isEmpty() ) {
+			$prodPrices = $parent->getRefItems( 'price', 'default', 'default' );
 		}
 
-		if( $refPrices->isEmpty() )
+		if( $prodPrices->isEmpty() )
 		{
 			$pid = $orderProduct->getProductId();
-			$pcode = $orderProduct->getProductCode();
-			$codes = array( 'product' => array( $pos => 'product.price' ) );
+			$ppid = $orderProduct->getParentProductId();
+			$codes = ['product' => [$pos => 'product.price']];
 
-			$msg = $this->getContext()->translate( 'mshop', 'No price for product ID "%1$s" or product code "%2$s" available' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $pid, $pcode ), -1, null, $codes );
+			$msg = $this->getContext()->translate( 'mshop', 'No price for product ID "%1$s" or "%2$s" available' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $pid, $ppid ), -1, null, $codes );
 		}
 
 		$currency = $orderProduct->getPrice()->getCurrencyId();
-		$priceManager = \Aimeos\MShop::create( $context, 'price' );
-		$price = clone $priceManager->getLowestPrice( $refPrices, $orderProduct->getQuantity(), $currency );
+		$priceManager = \Aimeos\MShop::create( $this->getContext(), 'price' );
+		$price = clone $priceManager->getLowestPrice( $prodPrices, $orderProduct->getQuantity(), $currency );
 
 		// add prices of product attributes to compute the end price for comparison
 		foreach( $orderProduct->getAttributeItems() as $orderAttribute )
