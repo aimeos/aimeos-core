@@ -82,6 +82,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddBinary()
 	{
+		touch( 'tmp/unknown.png' );
+
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
 			->setMethods( array( 'checkFileUpload', 'store' ) )
 			->setConstructorArgs( array( $this->context ) )
@@ -93,7 +95,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 
 		$file->expects( $this->exactly( 2 ) )->method( 'getClientFilename' )
-			->will( $this->returnValue( 'test.gif' ) );
+			->will( $this->returnValue( 'test.pdf' ) );
 
 		$file->expects( $this->once() )->method( 'getStream' )
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.pdf' ) ) );
@@ -157,37 +159,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
 		$item->setPreview( 'test' )->setUrl( 'test' );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->delete( $item ) );
-	}
-
-
-	public function testDeleteMimeicon()
-	{
-		$this->context->getConfig()->set( 'controller/common/media/mimeicon/directory', 'path/to/mimeicons' );
-
-		$fsm = $this->getMockBuilder( \Aimeos\MW\Filesystem\Manager\Standard::class )
-			->setMethods( array( 'get' ) )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$fs = $this->getMockBuilder( \Aimeos\MW\Filesystem\Standard::class )
-			->setMethods( array( 'has', 'rm' ) )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$fsm->expects( $this->exactly( 2 ) )->method( 'get' )
-			->will( $this->returnValue( $fs ) );
-
-		$fs->expects( $this->exactly( 1 ) )->method( 'has' )
-			->will( $this->returnValue( true ) );
-
-		$fs->expects( $this->exactly( 1 ) )->method( 'rm' );
-
-		$this->context->setFilesystemManager( $fsm );
-
-		$item = \Aimeos\MShop::create( $this->context, 'media' )->create();
-		$item->setPreview( 'path/to/mimeicons/application/test.png' )->setUrl( 'test' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $this->object->delete( $item ) );
 	}
@@ -413,17 +384,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		file_exists( 'tmp/image' ) ?: mkdir( 'tmp/image' );
 		touch( 'tmp/image/jpeg.png' );
 
-		$this->context->getConfig()->set( 'controller/common/media/mimeicon/directory', 'tmp' );
-		$result = $this->access( 'getMimeIcon' )->invokeArgs( $this->object, array( 'image/jpeg' ) );
-		$this->assertStringContainsString( 'tmp/image/jpeg.png', $result );
-	}
-
-
-	public function testGetMimeIconNoConfig()
-	{
-		$this->context->getConfig()->set( 'controller/common/media/mimeicon/directory', '' );
-		$result = $this->access( 'getMimeIcon' )->invokeArgs( $this->object, array( 'image/jpeg' ) );
-		$this->assertEquals( '', $result );
+		$result = $this->access( 'getMimeIcon' )->invokeArgs( $this->object, ['image/jpeg', 'fs-media'] );
+		$this->assertStringContainsString( 'image-jpeg.png', $result );
 	}
 
 

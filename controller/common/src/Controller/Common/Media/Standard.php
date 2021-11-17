@@ -41,10 +41,9 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item to add the file references to
 	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file
-	 * @param string $fsname Name of the file system to store the files at
 	 * @return \Aimeos\MShop\Media\Item\Iface Added media item
 	 */
-	public function add( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface
+	public function add( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		$this->checkFileUpload( $file );
 
@@ -52,8 +51,9 @@ class Standard
 		$mimetype = $this->getMimeType( $media, 'files' );
 		$filepath = $this->getFilePath( $file->getClientFilename() ?: rand(), 'files', $mimetype );
 
-		$fs = $this->context->getFilesystemManager()->get( $fsname );
 		$path = $item->getUrl();
+		$fsname = $item->getFileSystem();
+		$fs = $this->context->getFilesystemManager()->get( $fsname );
 
 		if( $path && $fs->has( $path ) ) {
 			$fs->rm( $path );
@@ -64,7 +64,7 @@ class Standard
 		if( $media instanceof \Aimeos\MW\Media\Image\Iface ) {
 			$item = $this->addImages( $item, $media, $file->getClientFilename(), $fsname );
 		} else {
-			$item->setPreviews( [1 => $this->getMimeIcon( $mimetype )] )->setMimeType( $mimetype );
+			$item->setPreviews( [1 => $this->getMimeIcon( $mimetype, $fsname )] )->setMimeType( $mimetype );
 		}
 
 		return $item->setUrl( $filepath )->setMimeType( $media->getMimeType() )
@@ -79,17 +79,16 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item to add the file references to
 	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file
-	 * @param string $fsname Name of the file system to store the files at
 	 * @return \Aimeos\MShop\Media\Item\Iface Added media item
 	 */
-	public function addPreview( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface
+	public function addPreview( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		$this->checkFileUpload( $file );
 
 		$media = $this->getMediaFile( $file->getStream() );
 
 		if( $media instanceof \Aimeos\MW\Media\Image\Iface ) {
-			$item = $this->addImages( $item, $media, $file->getClientFilename(), $fsname );
+			$item = $this->addImages( $item, $media, $file->getClientFilename(), $item->getFileSystem() );
 		}
 
 		return $item;
@@ -100,10 +99,9 @@ class Standard
 	 * Copies the media item and the referenced files
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be copied
-	 * @param string $fsname Name of the file system to delete the files from
 	 * @return \Aimeos\MShop\Media\Item\Iface Copied media item with new files
 	 */
-	public function copy( \Aimeos\MShop\Media\Item\Iface $item, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface
+	public function copy( \Aimeos\MShop\Media\Item\Iface $item ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'media' );
 
@@ -111,9 +109,11 @@ class Standard
 		$search->setConditions( $search->compare( '==', 'media.url', $item->getUrl() ) );
 
 		$item = $manager->search( $search )->first( $item )->setId( null );
-		$fs = $this->context->getFilesystemManager()->get( $fsname );
-		$previews = $item->getPreviews();
+
 		$path = $item->getUrl();
+		$previews = $item->getPreviews();
+		$fsname = $item->getFileSystem();
+		$fs = $this->context->getFilesystemManager()->get( $fsname );
 
 		if( $fs->has( $path ) )
 		{
@@ -124,15 +124,11 @@ class Standard
 
 		foreach( $previews as $size => $preview )
 		{
-			if( $fs->has( $preview ) )
+			if( $fsname !== 'fs-mimeicon' && $fs->has( $preview ) )
 			{
-				try
-				{
-					$newPath = $this->getFilePath( $preview, 'preview', pathinfo( $preview, PATHINFO_EXTENSION ) );
-					$fs->copy( $preview, $newPath );
-					$previews[$size] = $newPath;
-				}
-				catch( \Aimeos\MW\Filesystem\Exception $e ) {} // mime icons can't be copied
+				$newPath = $this->getFilePath( $preview, 'preview', pathinfo( $preview, PATHINFO_EXTENSION ) );
+				$fs->copy( $preview, $newPath );
+				$previews[$size] = $newPath;
 			}
 		}
 
@@ -146,10 +142,9 @@ class Standard
 	 * {inheritDoc}
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be deleted
-	 * @param string $fsname Name of the file system to delete the files from
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item with deleted files
 	 */
-	public function delete( \Aimeos\MShop\Media\Item\Iface $item, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface
+	public function delete( \Aimeos\MShop\Media\Item\Iface $item ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'media' );
 		$search = $manager->filter()->slice( 0, 2 );
@@ -159,8 +154,9 @@ class Standard
 			return $item->setUrl( '' )->setPreview( '' );
 		}
 
-		$fs = $this->context->getFilesystemManager()->get( $fsname );
 		$path = $item->getUrl();
+		$fsname = $item->getFileSystem();
+		$fs = $this->context->getFilesystemManager()->get( $fsname );
 
 		if( $path && $fs->has( $path ) ) {
 			$fs->rm( $path );
@@ -180,12 +176,12 @@ class Standard
 	 * - controller/common/media/<files|preview>/scale
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be scaled
-	 * @param string $fsname Name of the file system to rescale the files from
 	 * @param bool $force True to enforce creating new preview images
 	 * @return \Aimeos\MShop\Media\Item\Iface Rescaled media item
 	 */
-	public function scale( \Aimeos\MShop\Media\Item\Iface $item, string $fsname = 'fs-media', bool $force = false ) : \Aimeos\MShop\Media\Item\Iface
+	public function scale( \Aimeos\MShop\Media\Item\Iface $item, bool $force = false ) : \Aimeos\MShop\Media\Item\Iface
 	{
+		$fsname = $item->getFileSystem();
 		$fs = $this->context->fs( $fsname );
 		$is = ( $fs instanceof \Aimeos\MW\Filesystem\MetaIface ? true : false );
 
@@ -196,12 +192,19 @@ class Standard
 		$name = basename( $item->getUrl() );
 		$media = $this->getMediaFile( $this->getFileContent( $item->getUrl(), $fsname ) );
 
-		if( $media instanceof \Aimeos\MW\Media\Image\Iface ) {
-			return $this->addImages( $this->deletePreviews( $item, $fsname ), $media, $name, $fsname );
-		} else {
-			$mimetype = $this->getMimeType( $media, 'files' );
-			return $item->setPreviews( [1 => $this->getMimeIcon( $mimetype )] )->setMimeType( $mimetype );
+		if( $media instanceof \Aimeos\MW\Media\Image\Iface )
+		{
+			$item = $this->deletePreviews( $item, $fsname );
+			$item = $this->addImages( $item, $media, $name, $fsname );
 		}
+		else
+		{
+			$mimetype = $this->getMimeType( $media, 'files' );
+			$item = $item->setPreviews( [1 => $this->getMimeIcon( $mimetype, $fsname )] )
+				->setMimeType( $mimetype )->setFileSystem( 'fs-mimeicon' );
+		}
+
+		return $item;
 	}
 
 
@@ -382,11 +385,9 @@ class Standard
 	 */
 	protected function deletePreviews( \Aimeos\MShop\Media\Item\Iface $item, string $fsname )
 	{
-		$mimedir = (string) $this->context->getConfig()->get( 'controller/common/media/mimeicon/directory' );
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
-		$mimelen = strlen( $mimedir );
-
 		$previews = $item->getPreviews();
+
 		// don't delete first (smallest) image because it's referenced in past orders
 		if( 'product' === $item->getDomain() ) {
 			$previews = array_slice( $previews, 1 );
@@ -394,13 +395,9 @@ class Standard
 
 		foreach( $previews as $preview )
 		{
-			try
-			{
-				if( $preview && strncmp( $preview, $mimedir, $mimelen ) !== 0 && $fs->has( $preview ) ) {
-					$fs->rm( $preview );
-				}
+			if( $fsname !== 'fs-mimeicon' && $preview && $fs->has( $preview ) ) {
+				$fs->rm( $preview );
 			}
-			catch( \Exception $e ) { ; } // continue if removing file fails
 		}
 
 		return $item->setPreviews( [] );
@@ -528,30 +525,12 @@ class Standard
 	 * Returns the relative path to the mime icon for the given mime type.
 	 *
 	 * @param string $mimetype Mime type like "image/png"
+	 * @param string File system name the icon should be stored at
 	 * @return string Relative path to the mime icon
 	 */
-	protected function getMimeIcon( string $mimetype ) : string
+	protected function getMimeIcon( string $mimetype, string $fsname ) : string
 	{
 		$config = $this->context->getConfig();
-
-		/** controller/common/media/mimeicon/directory
-		 * Directory that contains the icons for the different mime types
-		 *
-		 * If no preview image can be generated from an uploaded file, an icon
-		 * for its mime type is displayed instead. The directory for the mime
-		 * icons is structured by the general mime type (e.g. "image") as
-		 * sub-directory and the specific name of the mime type (e.g. "jpeg")
-		 * as file name.
-		 *
-		 * Avoid leading and trailing slashes for the upload directory string!
-		 *
-		 * @param string Path or URL to the base directory
-		 * @since 2016.01
-		 * @category Developer
-		 */
-		if( ( $mimedir = $config->get( 'controller/common/media/mimeicon/directory' ) ) == null ) {
-			return '';
-		}
 
 		/** controller/common/media/mimeicon/extension
 		 * File extension of the mime icon images
@@ -568,11 +547,13 @@ class Standard
 		 */
 		$ext = $config->get( 'controller/common/media/mimeicon/extension', '.png' );
 
-		if( file_exists( $icon = $mimedir . DIRECTORY_SEPARATOR . $mimetype . $ext ) ) {
-			return $icon;
-		}
+		$fsmime = $this->context->fs( 'fs-mimeicon' );
+		$filename = ( $fsmime->has( $mimetype . $ext ) ? $mimetype : 'unknown' ) . $ext;
 
-		return $mimedir . DIRECTORY_SEPARATOR . 'unknown.png';
+		$filepath = $this->getFilePath( $filename, 'preview', ltrim( $ext, '.' ) );
+		$fs = $this->context->fs( $fsname )->write( $filepath, $fsmime->read( $filename ) );
+
+		return $filepath;
 	}
 
 

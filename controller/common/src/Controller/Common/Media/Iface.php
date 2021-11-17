@@ -37,10 +37,9 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item to add the file references to
 	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file
-	 * @param string $fsname Name of the file system to store the files at
 	 * @return \Aimeos\MShop\Media\Item\Iface Added media item
 	 */
-	public function add( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface;
+	public function add( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file ) : \Aimeos\MShop\Media\Item\Iface;
 
 	/**
 	 * Stores the uploaded preview and adds the references to the media item
@@ -53,19 +52,17 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item to add the file references to
 	 * @param \Psr\Http\Message\UploadedFileInterface $file Uploaded file
-	 * @param string $fsname Name of the file system to store the files at
 	 * @return \Aimeos\MShop\Media\Item\Iface Added media item
 	 */
-	public function addPreview( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface;
+	public function addPreview( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file ) : \Aimeos\MShop\Media\Item\Iface;
 
 	/**
 	 * Copies the media item and the referenced files
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be copied
-	 * @param string $fsname Name of the file system to delete the files from
 	 * @return \Aimeos\MShop\Media\Item\Iface Copied media item with new files
 	 */
-	public function copy( \Aimeos\MShop\Media\Item\Iface $item, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface;
+	public function copy( \Aimeos\MShop\Media\Item\Iface $item ) : \Aimeos\MShop\Media\Item\Iface;
 
 	/**
 	 * Deletes the files referenced by the media item
@@ -74,17 +71,16 @@ interface Iface
 	 * storage. The media item itself is NOT deleted!
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be deleted
-	 * @param string $fsname Name of the file system to delete the files from
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item with deleted files
 	 */
-	public function delete( \Aimeos\MShop\Media\Item\Iface $item, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface;
+	public function delete( \Aimeos\MShop\Media\Item\Iface $item ) : \Aimeos\MShop\Media\Item\Iface;
 
 	/**
 	 * Rescales the files (original and preview) referenced by the media item
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be scaled
-	 * @param string $fsname Name of the file system to rescale the files from
+	 * @param bool $force True to enforce creating new preview images
 	 * @return \Aimeos\MShop\Media\Item\Iface Rescaled media item
 	 */
-	public function scale( \Aimeos\MShop\Media\Item\Iface $item, string $fsname = 'fs-media' ) : \Aimeos\MShop\Media\Item\Iface;
+	public function scale( \Aimeos\MShop\Media\Item\Iface $item, bool $force = false ) : \Aimeos\MShop\Media\Item\Iface;
 }
