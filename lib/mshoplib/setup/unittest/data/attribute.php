@@ -55,7 +55,7 @@ return [
 				'media' => [[
 					'attribute.lists.type' => 'default', 'attribute.lists.domain' => 'media',
 					'media.languageid' => 'de', 'media.type' => 'default', 'media.domain' => 'attribute',
-					'media.label' => 'prod_97x93/199_prod_97x93.jpg', 'media.link' => 'prod_97x93/199_prod_97x93.jpg',
+					'media.label' => 'prod_97x93/199_prod_97x93.jpg', 'media.url' => 'prod_97x93/199_prod_97x93.jpg',
 					'media.previews' => [1 => 'prod_97x93/199_prod_97x93.jpg'], 'media.mimetype' => 'image/jpeg',
 				]],
 				'price' => [[
