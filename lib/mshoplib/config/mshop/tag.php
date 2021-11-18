@@ -128,7 +128,7 @@ return array(
 					mtag."domain" AS "tag.domain", mtag."label" AS "tag.label",
 					mtag."mtime" AS "tag.mtime", mtag."editor" AS "tag.editor",
 					mtag."ctime" AS "tag.ctime"
-				FROM "mshop_tag" AS mtag
+				FROM "mshop_tag" mtag
 				:joins
 				WHERE :cond
 				ORDER BY :order
@@ -141,7 +141,7 @@ return array(
 					mtag."domain" AS "tag.domain", mtag."label" AS "tag.label",
 					mtag."mtime" AS "tag.mtime", mtag."editor" AS "tag.editor",
 					mtag."ctime" AS "tag.ctime"
-				FROM "mshop_tag" AS mtag
+				FROM "mshop_tag" mtag
 				:joins
 				WHERE :cond
 				ORDER BY :order
@@ -153,7 +153,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mtag."id"
-					FROM "mshop_tag" AS mtag
+					FROM "mshop_tag" mtag
 					:joins
 					WHERE :cond
 					ORDER BY mtag."id"
@@ -164,7 +164,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mtag."id"
-					FROM "mshop_tag" AS mtag
+					FROM "mshop_tag" mtag
 					:joins
 					WHERE :cond
 					ORDER BY mtag."id"

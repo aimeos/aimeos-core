@@ -43,7 +43,7 @@ return array(
 							mserlity."label" AS "service.lists.type.label", mserlity."status" AS "service.lists.type.status",
 							mserlity."mtime" AS "service.lists.type.mtime", mserlity."editor" AS "service.lists.type.editor",
 							mserlity."ctime" AS "service.lists.type.ctime", mserlity."pos" AS "service.lists.type.position"
-						FROM "mshop_service_list_type" AS mserlity
+						FROM "mshop_service_list_type" mserlity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -56,7 +56,7 @@ return array(
 							mserlity."label" AS "service.lists.type.label", mserlity."status" AS "service.lists.type.status",
 							mserlity."mtime" AS "service.lists.type.mtime", mserlity."editor" AS "service.lists.type.editor",
 							mserlity."ctime" AS "service.lists.type.ctime", mserlity."pos" AS "service.lists.type.position"
-						FROM "mshop_service_list_type" AS mserlity
+						FROM "mshop_service_list_type" mserlity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -102,7 +102,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_service_list" AS mserli
+						FROM "mshop_service_list" mserli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mserli."id"
@@ -115,7 +115,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_service_list" AS mserli
+						FROM "mshop_service_list" mserli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mserli."id"
@@ -160,7 +160,7 @@ return array(
 						mserli."config" AS "service.lists.config", mserli."pos" AS "service.lists.position",
 						mserli."status" AS "service.lists.status", mserli."mtime" AS "service.lists.mtime",
 						mserli."editor" AS "service.lists.editor", mserli."ctime" AS "service.lists.ctime"
-					FROM "mshop_service_list" AS mserli
+					FROM "mshop_service_list" mserli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -175,7 +175,7 @@ return array(
 						mserli."config" AS "service.lists.config", mserli."pos" AS "service.lists.position",
 						mserli."status" AS "service.lists.status", mserli."mtime" AS "service.lists.mtime",
 						mserli."editor" AS "service.lists.editor", mserli."ctime" AS "service.lists.ctime"
-					FROM "mshop_service_list" AS mserli
+					FROM "mshop_service_list" mserli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -187,7 +187,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mserli."id"
-						FROM "mshop_service_list" AS mserli
+						FROM "mshop_service_list" mserli
 						:joins
 						WHERE :cond
 						ORDER BY mserli."id"
@@ -198,7 +198,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mserli."id"
-						FROM "mshop_service_list" AS mserli
+						FROM "mshop_service_list" mserli
 						:joins
 						WHERE :cond
 						ORDER BY mserli."id"
@@ -250,7 +250,7 @@ return array(
 						mserty."label" AS "service.type.label", mserty."status" AS "service.type.status",
 						mserty."mtime" AS "service.type.mtime", mserty."editor" AS "service.type.editor",
 						mserty."ctime" AS "service.type.ctime", mserty."pos" AS "service.type.position"
-					FROM "mshop_service_type" AS mserty
+					FROM "mshop_service_type" mserty
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -263,7 +263,7 @@ return array(
 						mserty."label" AS "service.type.label", mserty."status" AS "service.type.status",
 						mserty."mtime" AS "service.type.mtime", mserty."editor" AS "service.type.editor",
 						mserty."ctime" AS "service.type.ctime", mserty."pos" AS "service.type.position"
-					FROM "mshop_service_type" AS mserty
+					FROM "mshop_service_type" mserty
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -275,7 +275,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mserty."id"
-						FROM "mshop_service_type" AS mserty
+						FROM "mshop_service_type" mserty
 						:joins
 						WHERE :cond
 						ORDER BY mserty."id"
@@ -286,7 +286,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mserty."id"
-						FROM "mshop_service_type" AS mserty
+						FROM "mshop_service_type" mserty
 						:joins
 						WHERE :cond
 						ORDER BY mserty."id"
@@ -339,7 +339,7 @@ return array(
 					mser."start" AS "service.datestart", mser."end" AS "service.dateend",
 					mser."status" AS "service.status", mser."mtime" AS "service.mtime",
 					mser."editor" AS "service.editor",	mser."ctime" AS "service.ctime"
-				FROM "mshop_service" AS mser
+				FROM "mshop_service" mser
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
@@ -358,7 +358,7 @@ return array(
 					mser."start" AS "service.datestart", mser."end" AS "service.dateend",
 					mser."status" AS "service.status", mser."mtime" AS "service.mtime",
 					mser."editor" AS "service.editor",	mser."ctime" AS "service.ctime"
-				FROM "mshop_service" AS mser
+				FROM "mshop_service" mser
 				:joins
 				WHERE :cond
 				GROUP BY :group mser."id"
@@ -371,7 +371,7 @@ return array(
 				SELECT count(*) as "count"
 				FROM (
 					SELECT mser."id"
-					FROM "mshop_service" AS mser
+					FROM "mshop_service" mser
 					:joins
 					WHERE :cond
 					GROUP BY mser."id"
@@ -383,7 +383,7 @@ return array(
 				SELECT count(*) as "count"
 				FROM (
 					SELECT mser."id"
-					FROM "mshop_service" AS mser
+					FROM "mshop_service" mser
 					:joins
 					WHERE :cond
 					GROUP BY mser."id"

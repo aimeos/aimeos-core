@@ -129,7 +129,7 @@ return array(
 					msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.backdate",
 					msto."timeframe" AS "stock.timeframe", msto."mtime" AS "stock.mtime",
 					msto."ctime" AS "stock.ctime", msto."editor" AS "stock.editor"
-				FROM "mshop_stock" AS msto
+				FROM "mshop_stock" msto
 				:joins
 				WHERE :cond
 				ORDER BY :order
@@ -142,7 +142,7 @@ return array(
 					msto."stocklevel" AS "stock.stocklevel", msto."backdate" AS "stock.backdate",
 					msto."timeframe" AS "stock.timeframe", msto."mtime" AS "stock.mtime",
 					msto."ctime" AS "stock.ctime", msto."editor" AS "stock.editor"
-				FROM "mshop_stock" AS msto
+				FROM "mshop_stock" msto
 				:joins
 				WHERE :cond
 				ORDER BY :order
@@ -154,7 +154,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT msto."id"
-					FROM "mshop_stock" AS msto
+					FROM "mshop_stock" msto
 					:joins
 					WHERE :cond
 					ORDER BY msto."id"
@@ -165,7 +165,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT msto."id"
-					FROM "mshop_stock" AS msto
+					FROM "mshop_stock" msto
 					:joins
 					WHERE :cond
 					ORDER BY msto."id"

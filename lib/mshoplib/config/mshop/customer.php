@@ -58,7 +58,7 @@ return array(
 						mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
 						mcusad."mtime" AS "customer.address.mtime", mcusad."editor" AS "customer.address.editor",
 						mcusad."ctime" AS "customer.address.ctime", mcusad."birthday" AS "customer.address.birthday"
-					FROM "mshop_customer_address" AS mcusad
+					FROM "mshop_customer_address" mcusad
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -80,7 +80,7 @@ return array(
 						mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
 						mcusad."mtime" AS "customer.address.mtime", mcusad."editor" AS "customer.address.editor",
 						mcusad."ctime" AS "customer.address.ctime", mcusad."birthday" AS "customer.address.birthday"
-					FROM "mshop_customer_address" AS mcusad
+					FROM "mshop_customer_address" mcusad
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -92,7 +92,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcusad."id"
-						FROM "mshop_customer_address" AS mcusad
+						FROM "mshop_customer_address" mcusad
 						:joins
 						WHERE :cond
 						ORDER BY mcusad."id"
@@ -103,7 +103,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcusad."id"
-						FROM "mshop_customer_address" AS mcusad
+						FROM "mshop_customer_address" mcusad
 						:joins
 						WHERE :cond
 						ORDER BY mcusad."id"
@@ -152,7 +152,7 @@ return array(
 						mcusgr."code" AS "customer.group.code", mcusgr."label" AS "customer.group.label",
 						mcusgr."mtime" AS "customer.group.mtime", mcusgr."editor" AS "customer.group.editor",
 						mcusgr."ctime" AS "customer.group.ctime"
-					FROM "mshop_customer_group" AS mcusgr
+					FROM "mshop_customer_group" mcusgr
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -164,7 +164,7 @@ return array(
 						mcusgr."code" AS "customer.group.code", mcusgr."label" AS "customer.group.label",
 						mcusgr."mtime" AS "customer.group.mtime", mcusgr."editor" AS "customer.group.editor",
 						mcusgr."ctime" AS "customer.group.ctime"
-					FROM "mshop_customer_group" AS mcusgr
+					FROM "mshop_customer_group" mcusgr
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -176,7 +176,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcusgr."id"
-						FROM "mshop_customer_group" AS mcusgr
+						FROM "mshop_customer_group" mcusgr
 						:joins
 						WHERE :cond
 						ORDER BY mcusgr."id"
@@ -187,7 +187,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcusgr."id"
-						FROM "mshop_customer_group" AS mcusgr
+						FROM "mshop_customer_group" mcusgr
 						:joins
 						WHERE :cond
 						ORDER BY mcusgr."id"
@@ -240,7 +240,7 @@ return array(
 							mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
 							mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
 							mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position"
-						FROM "mshop_customer_list_type" AS mcuslity
+						FROM "mshop_customer_list_type" mcuslity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -253,7 +253,7 @@ return array(
 							mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
 							mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
 							mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position"
-						FROM "mshop_customer_list_type" AS mcuslity
+						FROM "mshop_customer_list_type" mcuslity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -299,7 +299,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_customer_list" AS mcusli
+						FROM "mshop_customer_list" mcusli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mcusli."id"
@@ -312,7 +312,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_customer_list" AS mcusli
+						FROM "mshop_customer_list" mcusli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mcusli."id"
@@ -357,7 +357,7 @@ return array(
 						mcusli."config" AS "customer.lists.config", mcusli."pos" AS "customer.lists.position",
 						mcusli."status" AS "customer.lists.status", mcusli."mtime" AS "customer.lists.mtime",
 						mcusli."editor" AS "customer.lists.editor", mcusli."ctime" AS "customer.lists.ctime"
-					FROM "mshop_customer_list" AS mcusli
+					FROM "mshop_customer_list" mcusli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -372,7 +372,7 @@ return array(
 						mcusli."config" AS "customer.lists.config", mcusli."pos" AS "customer.lists.position",
 						mcusli."status" AS "customer.lists.status", mcusli."mtime" AS "customer.lists.mtime",
 						mcusli."editor" AS "customer.lists.editor", mcusli."ctime" AS "customer.lists.ctime"
-					FROM "mshop_customer_list" AS mcusli
+					FROM "mshop_customer_list" mcusli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -384,7 +384,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcusli."id"
-						FROM "mshop_customer_list" AS mcusli
+						FROM "mshop_customer_list" mcusli
 						:joins
 						WHERE :cond
 						ORDER BY mcusli."id"
@@ -395,7 +395,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcusli."id"
-						FROM "mshop_customer_list" AS mcusli
+						FROM "mshop_customer_list" mcusli
 						:joins
 						WHERE :cond
 						ORDER BY mcusli."id"
@@ -535,7 +535,7 @@ return array(
 						mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
 						mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
 						mcuspr."ctime" AS "customer.property.ctime"
-					FROM "mshop_customer_property" AS mcuspr
+					FROM "mshop_customer_property" mcuspr
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -548,7 +548,7 @@ return array(
 						mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
 						mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
 						mcuspr."ctime" AS "customer.property.ctime"
-					FROM "mshop_customer_property" AS mcuspr
+					FROM "mshop_customer_property" mcuspr
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -560,7 +560,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcuspr."id"
-						FROM "mshop_customer_property" AS mcuspr
+						FROM "mshop_customer_property" mcuspr
 						:joins
 						WHERE :cond
 						ORDER BY mcuspr."id"
@@ -571,7 +571,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcuspr."id"
-						FROM "mshop_customer_property" AS mcuspr
+						FROM "mshop_customer_property" mcuspr
 						:joins
 						WHERE :cond
 						ORDER BY mcuspr."id"
@@ -594,7 +594,7 @@ return array(
 				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val"
-					FROM "mshop_customer" AS mcus
+					FROM "mshop_customer" mcus
 					:joins
 					WHERE :cond
 					GROUP BY mcus.id, :cols, :val
@@ -607,7 +607,7 @@ return array(
 				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val"
-					FROM "mshop_customer" AS mcus
+					FROM "mshop_customer" mcus
 					:joins
 					WHERE :cond
 					GROUP BY mcus.id, :cols, :val
@@ -669,7 +669,7 @@ return array(
 					mcus."vdate" AS "customer.dateverified", mcus."password" AS "customer.password",
 					mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
 					mcus."editor" AS "customer.editor"
-				FROM "mshop_customer" AS mcus
+				FROM "mshop_customer" mcus
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
@@ -700,7 +700,7 @@ return array(
 					mcus."vdate" AS "customer.dateverified", mcus."password" AS "customer.password",
 					mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
 					mcus."editor" AS "customer.editor"
-				FROM "mshop_customer" AS mcus
+				FROM "mshop_customer" mcus
 				:joins
 				WHERE :cond
 				GROUP BY :group mcus."id"
@@ -713,7 +713,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mcus."id"
-					FROM "mshop_customer" AS mcus
+					FROM "mshop_customer" mcus
 					:joins
 					WHERE :cond
 					GROUP BY mcus."id"
@@ -725,7 +725,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mcus."id"
-					FROM "mshop_customer" AS mcus
+					FROM "mshop_customer" mcus
 					:joins
 					WHERE :cond
 					GROUP BY mcus."id"

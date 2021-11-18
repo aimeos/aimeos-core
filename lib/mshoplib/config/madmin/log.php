@@ -38,7 +38,7 @@ return array(
 					malog."facility" AS "log.facility", malog."timestamp" AS "log.timestamp",
 					malog."priority" AS "log.priority", malog."message" AS "log.message",
 					malog."request" AS "log.request"
-				FROM "madmin_log" AS malog
+				FROM "madmin_log" malog
 				:joins
 				WHERE :cond
 				ORDER BY :order
@@ -50,7 +50,7 @@ return array(
 					malog."facility" AS "log.facility", malog."timestamp" AS "log.timestamp",
 					malog."priority" AS "log.priority", malog."message" AS "log.message",
 					malog."request" AS "log.request"
-				FROM "madmin_log" AS malog
+				FROM "madmin_log" malog
 				:joins
 				WHERE :cond
 				ORDER BY :order
@@ -62,7 +62,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM(
 					SELECT malog."id"
-					FROM "madmin_log" AS malog
+					FROM "madmin_log" malog
 					:joins
 					WHERE :cond
 					ORDER BY "id"
@@ -73,7 +73,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM(
 					SELECT malog."id"
-					FROM "madmin_log" AS malog
+					FROM "madmin_log" malog
 					:joins
 					WHERE :cond
 					ORDER BY "id"

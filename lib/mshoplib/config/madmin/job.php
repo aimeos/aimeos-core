@@ -39,7 +39,7 @@ return array(
 					majob."label" AS "job.label", majob."path" AS "job.path",
 					majob."status" AS "job.status", majob."editor" AS "job.editor",
 					majob."mtime" AS "job.mtime", majob."ctime" AS "job.ctime"
-				FROM "madmin_job" AS majob
+				FROM "madmin_job" majob
 				:joins
 				WHERE :cond
 				ORDER BY :order
@@ -51,7 +51,7 @@ return array(
 					majob."label" AS "job.label", majob."path" AS "job.path",
 					majob."status" AS "job.status", majob."editor" AS "job.editor",
 					majob."mtime" AS "job.mtime", majob."ctime" AS "job.ctime"
-				FROM "madmin_job" AS majob
+				FROM "madmin_job" majob
 				:joins
 				WHERE :cond
 				ORDER BY :order
@@ -63,7 +63,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM(
 					SELECT majob."id"
-					FROM "madmin_job" AS majob
+					FROM "madmin_job" majob
 					:joins
 					WHERE :cond
 					ORDER BY "id"
@@ -74,7 +74,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM(
 					SELECT majob."id"
-					FROM "madmin_job" AS majob
+					FROM "madmin_job" majob
 					:joins
 					WHERE :cond
 					ORDER BY "id"

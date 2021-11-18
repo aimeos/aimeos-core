@@ -43,7 +43,7 @@ return array(
 							mcatlity."label" AS "catalog.lists.type.label", mcatlity."mtime" AS "catalog.lists.type.mtime",
 							mcatlity."editor" AS "catalog.lists.type.editor", mcatlity."ctime" AS "catalog.lists.type.ctime",
 							mcatlity."status" AS "catalog.lists.type.status", mcatlity."pos" AS "catalog.lists.type.position"
-						FROM "mshop_catalog_list_type" AS mcatlity
+						FROM "mshop_catalog_list_type" mcatlity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -56,7 +56,7 @@ return array(
 							mcatlity."label" AS "catalog.lists.type.label", mcatlity."mtime" AS "catalog.lists.type.mtime",
 							mcatlity."editor" AS "catalog.lists.type.editor", mcatlity."ctime" AS "catalog.lists.type.ctime",
 							mcatlity."status" AS "catalog.lists.type.status", mcatlity."pos" AS "catalog.lists.type.position"
-						FROM "mshop_catalog_list_type" AS mcatlity
+						FROM "mshop_catalog_list_type" mcatlity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -68,7 +68,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mcatlity."id"
-							FROM "mshop_catalog_list_type" AS mcatlity
+							FROM "mshop_catalog_list_type" mcatlity
 							:joins
 							WHERE :cond
 							ORDER BY mcatlity."id"
@@ -79,7 +79,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mcatlity."id"
-							FROM "mshop_catalog_list_type" AS mcatlity
+							FROM "mshop_catalog_list_type" mcatlity
 							:joins
 							WHERE :cond
 							ORDER BY mcatlity."id"
@@ -102,7 +102,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_catalog_list" AS mcatli
+						FROM "mshop_catalog_list" mcatli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mcatli."id"
@@ -115,7 +115,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_catalog_list" AS mcatli
+						FROM "mshop_catalog_list" mcatli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mcatli."id"
@@ -160,7 +160,7 @@ return array(
 						mcatli."config" AS "catalog.lists.config", mcatli."pos" AS "catalog.lists.position",
 						mcatli."status" AS "catalog.lists.status", mcatli."mtime" AS "catalog.lists.mtime",
 						mcatli."editor" AS "catalog.lists.editor", mcatli."ctime" AS "catalog.lists.ctime"
-					FROM "mshop_catalog_list" AS mcatli
+					FROM "mshop_catalog_list" mcatli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -175,7 +175,7 @@ return array(
 						mcatli."config" AS "catalog.lists.config", mcatli."pos" AS "catalog.lists.position",
 						mcatli."status" AS "catalog.lists.status", mcatli."mtime" AS "catalog.lists.mtime",
 						mcatli."editor" AS "catalog.lists.editor", mcatli."ctime" AS "catalog.lists.ctime"
-					FROM "mshop_catalog_list" AS mcatli
+					FROM "mshop_catalog_list" mcatli
 					USE INDEX (unq_mscatli_pid_dm_sid_ty_rid, idx_mscatli_pid_dm_sid_pos_rid, idx_mscatli_rid_dom_sid_ty, idx_mscatli_key_sid)
 					:joins
 					WHERE :cond
@@ -188,7 +188,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcatli."id"
-						FROM "mshop_catalog_list" AS mcatli
+						FROM "mshop_catalog_list" mcatli
 						:joins
 						WHERE :cond
 						ORDER BY mcatli."id"
@@ -199,7 +199,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcatli."id"
-						FROM "mshop_catalog_list" AS mcatli
+						FROM "mshop_catalog_list" mcatli
 						:joins
 						WHERE :cond
 						ORDER BY mcatli."id"
@@ -236,7 +236,7 @@ return array(
 					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 					mcat."nleft" AS "left", mcat."nright" AS "right",
 					mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
-				FROM "mshop_catalog" AS mcat, "mshop_catalog" AS parent
+				FROM "mshop_catalog" mcat, "mshop_catalog" AS parent
 				WHERE mcat."siteid" = :siteid AND mcat."nleft" >= parent."nleft"
 					AND mcat."nleft" <= parent."nright"
 					AND parent."siteid" = :siteid AND parent."id" = ?
@@ -308,7 +308,7 @@ return array(
 					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 					mcat."nleft" AS "left", mcat."nright" AS "right",
 					mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
-				FROM "mshop_catalog" AS mcat
+				FROM "mshop_catalog" mcat
 				WHERE mcat."siteid" = :siteid AND mcat."nleft" >= ?
 					AND mcat."nright" <= ? AND :cond
 				ORDER BY :order
@@ -321,7 +321,7 @@ return array(
 					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 					mcat."nleft" AS "left", mcat."nright" AS "right",
 					mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
-				FROM "mshop_catalog" AS mcat
+				FROM "mshop_catalog" mcat
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
@@ -338,7 +338,7 @@ return array(
 					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 					mcat."nleft" AS "left", mcat."nright" AS "right",
 					mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
-				FROM "mshop_catalog" AS mcat
+				FROM "mshop_catalog" mcat
 				:joins
 				WHERE :cond
 				GROUP BY :group mcat."id"
@@ -351,7 +351,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mcat."id"
-					FROM "mshop_catalog" AS mcat
+					FROM "mshop_catalog" mcat
 					:joins
 					WHERE :cond
 					GROUP BY mcat."id"
@@ -363,7 +363,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mcat."id"
-					FROM "mshop_catalog" AS mcat
+					FROM "mshop_catalog" mcat
 					:joins
 					WHERE :cond
 					GROUP BY mcat."id"

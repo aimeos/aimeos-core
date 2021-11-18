@@ -43,7 +43,7 @@ return array(
 							mtexlity."label" AS "text.lists.type.label", mtexlity."status" AS "text.lists.type.status",
 							mtexlity."mtime" AS "text.lists.type.mtime", mtexlity."editor" AS "text.lists.type.editor",
 							mtexlity."ctime" AS "text.lists.type.ctime", mtexlity."pos" AS "text.lists.type.position"
-						FROM "mshop_text_list_type" AS mtexlity
+						FROM "mshop_text_list_type" mtexlity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -56,7 +56,7 @@ return array(
 							mtexlity."label" AS "text.lists.type.label", mtexlity."status" AS "text.lists.type.status",
 							mtexlity."mtime" AS "text.lists.type.mtime", mtexlity."editor" AS "text.lists.type.editor",
 							mtexlity."ctime" AS "text.lists.type.ctime", mtexlity."pos" AS "text.lists.type.position"
-						FROM "mshop_text_list_type" AS mtexlity
+						FROM "mshop_text_list_type" mtexlity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -102,7 +102,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_text_list" AS mtexli
+						FROM "mshop_text_list" mtexli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mtexli."id"
@@ -115,7 +115,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_text_list" AS mtexli
+						FROM "mshop_text_list" mtexli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mtexli."id"
@@ -160,7 +160,7 @@ return array(
 						mtexli."config" AS "text.lists.config", mtexli."pos" AS "text.lists.position",
 						mtexli."status" AS "text.lists.status", mtexli."mtime" AS "text.lists.mtime",
 						mtexli."editor" AS "text.lists.editor", mtexli."ctime" AS "text.lists.ctime"
-					FROM "mshop_text_list" AS mtexli
+					FROM "mshop_text_list" mtexli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -175,7 +175,7 @@ return array(
 						mtexli."config" AS "text.lists.config", mtexli."pos" AS "text.lists.position",
 						mtexli."status" AS "text.lists.status", mtexli."mtime" AS "text.lists.mtime",
 						mtexli."editor" AS "text.lists.editor", mtexli."ctime" AS "text.lists.ctime"
-					FROM "mshop_text_list" AS mtexli
+					FROM "mshop_text_list" mtexli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -187,7 +187,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mtexli."id"
-						FROM "mshop_text_list" AS mtexli
+						FROM "mshop_text_list" mtexli
 						:joins
 						WHERE :cond
 						ORDER BY mtexli."id"
@@ -198,7 +198,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mtexli."id"
-						FROM "mshop_text_list" AS mtexli
+						FROM "mshop_text_list" mtexli
 						:joins
 						WHERE :cond
 						ORDER BY mtexli."id"
@@ -338,7 +338,7 @@ return array(
 					mtex."content" AS "text.content", mtex."status" AS "text.status",
 					mtex."mtime" AS "text.mtime", mtex."editor" AS "text.editor",
 					mtex."ctime" AS "text.ctime"
-				FROM "mshop_text" AS mtex
+				FROM "mshop_text" mtex
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
@@ -355,7 +355,7 @@ return array(
 					mtex."content" AS "text.content", mtex."status" AS "text.status",
 					mtex."mtime" AS "text.mtime", mtex."editor" AS "text.editor",
 					mtex."ctime" AS "text.ctime"
-				FROM "mshop_text" AS mtex
+				FROM "mshop_text" mtex
 				:joins
 				WHERE :cond
 				GROUP BY :group mtex."id"
@@ -368,7 +368,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mtex."id"
-					FROM "mshop_text" AS mtex
+					FROM "mshop_text" mtex
 					:joins
 					WHERE :cond
 					GROUP BY mtex."id"
@@ -380,7 +380,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mtex."id"
-					FROM "mshop_text" AS mtex
+					FROM "mshop_text" mtex
 					:joins
 					WHERE :cond
 					GROUP BY mtex."id"

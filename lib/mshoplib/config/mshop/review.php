@@ -13,7 +13,7 @@ return array(
 				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val"
-					FROM "mshop_review" AS mrev
+					FROM "mshop_review" mrev
 					:joins
 					WHERE :cond
 					ORDER BY mrev.id DESC
@@ -25,7 +25,7 @@ return array(
 				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val"
-					FROM "mshop_review" AS mrev
+					FROM "mshop_review" mrev
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -39,7 +39,7 @@ return array(
 				SELECT :keys, SUM("val") AS "sum", COUNT(*) AS "count"
 				FROM (
 					SELECT :acols, mrev.rating AS "val"
-					FROM "mshop_review" AS mrev
+					FROM "mshop_review" mrev
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -51,7 +51,7 @@ return array(
 				SELECT :keys, SUM("val") AS "sum", COUNT(*) AS "count"
 				FROM (
 					SELECT :acols, mrev.rating AS "val"
-					FROM "mshop_review" AS mrev
+					FROM "mshop_review" mrev
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -95,7 +95,7 @@ return array(
 					mrev."response" AS "review.response", mrev."rating" AS "review.rating",
 					mrev."status" AS "review.status", mrev."ctime" AS "review.ctime",
 					mrev."mtime" AS "review.mtime", mrev."editor" AS "review.editor"
-				FROM "mshop_review" AS mrev
+				FROM "mshop_review" mrev
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
@@ -114,7 +114,7 @@ return array(
 					mrev."response" AS "review.response", mrev."rating" AS "review.rating",
 					mrev."status" AS "review.status", mrev."ctime" AS "review.ctime",
 					mrev."mtime" AS "review.mtime", mrev."editor" AS "review.editor"
-				FROM "mshop_review" AS mrev
+				FROM "mshop_review" mrev
 				:joins
 				WHERE :cond
 				GROUP BY :group mrev."id"
@@ -127,7 +127,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mrev."id"
-					FROM "mshop_review" AS mrev
+					FROM "mshop_review" mrev
 					:joins
 					WHERE :cond
 					GROUP BY mrev."id"
@@ -139,7 +139,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mrev."id"
-					FROM "mshop_review" AS mrev
+					FROM "mshop_review" mrev
 					:joins
 					WHERE :cond
 					GROUP BY mrev."id"

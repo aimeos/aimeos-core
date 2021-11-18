@@ -43,7 +43,7 @@ return array(
 							mattlity."label" AS "attribute.lists.type.label", mattlity."status" AS "attribute.lists.type.status",
 							mattlity."mtime" AS "attribute.lists.type.mtime", mattlity."ctime" AS "attribute.lists.type.ctime",
 							mattlity."editor" AS "attribute.lists.type.editor", mattlity."pos" AS "attribute.lists.type.position"
-						FROM "mshop_attribute_list_type" AS mattlity
+						FROM "mshop_attribute_list_type" mattlity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -56,7 +56,7 @@ return array(
 							mattlity."label" AS "attribute.lists.type.label", mattlity."status" AS "attribute.lists.type.status",
 							mattlity."mtime" AS "attribute.lists.type.mtime", mattlity."ctime" AS "attribute.lists.type.ctime",
 							mattlity."editor" AS "attribute.lists.type.editor", mattlity."pos" AS "attribute.lists.type.position"
-						FROM "mshop_attribute_list_type" AS mattlity
+						FROM "mshop_attribute_list_type" mattlity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -68,7 +68,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mattlity."id"
-							FROM "mshop_attribute_list_type" AS mattlity
+							FROM "mshop_attribute_list_type" mattlity
 							:joins
 							WHERE :cond
 							ORDER BY mattlity."id"
@@ -79,7 +79,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mattlity."id"
-							FROM "mshop_attribute_list_type" AS mattlity
+							FROM "mshop_attribute_list_type" mattlity
 							:joins
 							WHERE :cond
 							ORDER BY mattlity."id"
@@ -102,7 +102,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_attribute_list" AS mattli
+						FROM "mshop_attribute_list" mattli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mattli."id"
@@ -115,7 +115,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_attribute_list" AS mattli
+						FROM "mshop_attribute_list" mattli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mattli."id"
@@ -160,7 +160,7 @@ return array(
 						mattli."config" AS "attribute.lists.config", mattli."pos" AS "attribute.lists.position",
 						mattli."status" AS "attribute.lists.status", mattli."mtime" AS "attribute.lists.mtime",
 						mattli."ctime" AS "attribute.lists.ctime", mattli."editor" AS "attribute.lists.editor"
-					FROM "mshop_attribute_list" AS mattli
+					FROM "mshop_attribute_list" mattli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -175,7 +175,7 @@ return array(
 						mattli."config" AS "attribute.lists.config", mattli."pos" AS "attribute.lists.position",
 						mattli."status" AS "attribute.lists.status", mattli."mtime" AS "attribute.lists.mtime",
 						mattli."ctime" AS "attribute.lists.ctime", mattli."editor" AS "attribute.lists.editor"
-					FROM "mshop_attribute_list" AS mattli
+					FROM "mshop_attribute_list" mattli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -187,7 +187,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mattli."id"
-						FROM "mshop_attribute_list" AS mattli
+						FROM "mshop_attribute_list" mattli
 						:joins
 						WHERE :cond
 						ORDER BY mattli."id"
@@ -198,7 +198,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mattli."id"
-						FROM "mshop_attribute_list" AS mattli
+						FROM "mshop_attribute_list" mattli
 						:joins
 						WHERE :cond
 						ORDER BY mattli."id"
@@ -338,7 +338,7 @@ return array(
 						mattpr."langid" AS "attribute.property.languageid", mattpr."value" AS "attribute.property.value",
 						mattpr."mtime" AS "attribute.property.mtime", mattpr."editor" AS "attribute.property.editor",
 						mattpr."ctime" AS "attribute.property.ctime"
-					FROM "mshop_attribute_property" AS mattpr
+					FROM "mshop_attribute_property" mattpr
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -351,7 +351,7 @@ return array(
 						mattpr."langid" AS "attribute.property.languageid", mattpr."value" AS "attribute.property.value",
 						mattpr."mtime" AS "attribute.property.mtime", mattpr."editor" AS "attribute.property.editor",
 						mattpr."ctime" AS "attribute.property.ctime"
-					FROM "mshop_attribute_property" AS mattpr
+					FROM "mshop_attribute_property" mattpr
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -363,7 +363,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mattpr."id"
-						FROM "mshop_attribute_property" AS mattpr
+						FROM "mshop_attribute_property" mattpr
 						:joins
 						WHERE :cond
 						ORDER BY mattpr."id"
@@ -374,7 +374,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mattpr."id"
-						FROM "mshop_attribute_property" AS mattpr
+						FROM "mshop_attribute_property" mattpr
 						:joins
 						WHERE :cond
 						ORDER BY mattpr."id"
@@ -426,7 +426,7 @@ return array(
 						mattty."label" AS "attribute.type.label", mattty."status" AS "attribute.type.status",
 						mattty."mtime" AS "attribute.type.mtime", mattty."ctime" AS "attribute.type.ctime",
 						mattty."editor" AS "attribute.type.editor", mattty."pos" AS "attribute.type.position"
-					FROM "mshop_attribute_type" AS mattty
+					FROM "mshop_attribute_type" mattty
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -439,7 +439,7 @@ return array(
 						mattty."label" AS "attribute.type.label", mattty."status" AS "attribute.type.status",
 						mattty."mtime" AS "attribute.type.mtime", mattty."ctime" AS "attribute.type.ctime",
 						mattty."editor" AS "attribute.type.editor", mattty."pos" AS "attribute.type.position"
-					FROM "mshop_attribute_type" AS mattty
+					FROM "mshop_attribute_type" mattty
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -451,7 +451,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mattty."id"
-						FROM "mshop_attribute_type" AS mattty
+						FROM "mshop_attribute_type" mattty
 						:joins
 						WHERE :cond
 						ORDER BY mattty."id"
@@ -462,7 +462,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mattty."id"
-						FROM "mshop_attribute_type" AS mattty
+						FROM "mshop_attribute_type" mattty
 						:joins
 						WHERE :cond
 						ORDER BY mattty."id"
@@ -514,7 +514,7 @@ return array(
 					matt."pos" AS "attribute.position", matt."label" AS "attribute.label",
 					matt."mtime" AS "attribute.mtime", matt."ctime" AS "attribute.ctime",
 					matt."editor" AS "attribute.editor"
-				FROM "mshop_attribute" AS matt
+				FROM "mshop_attribute" matt
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
@@ -531,7 +531,7 @@ return array(
 					matt."pos" AS "attribute.position", matt."label" AS "attribute.label",
 					matt."mtime" AS "attribute.mtime", matt."ctime" AS "attribute.ctime",
 					matt."editor" AS "attribute.editor"
-				FROM "mshop_attribute" AS matt
+				FROM "mshop_attribute" matt
 				:joins
 				WHERE :cond
 				GROUP BY :group matt."id"
@@ -544,7 +544,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT matt."id"
-					FROM "mshop_attribute" AS matt
+					FROM "mshop_attribute" matt
 					:joins
 					WHERE :cond
 					GROUP BY matt."id"
@@ -556,7 +556,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT matt."id"
-					FROM "mshop_attribute" AS matt
+					FROM "mshop_attribute" matt
 					:joins
 					WHERE :cond
 					GROUP BY matt."id"

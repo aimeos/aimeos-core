@@ -37,7 +37,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT mpro."id" :mincols
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"
@@ -46,7 +46,7 @@ return array(
 				',
 				'mysql' => '
 					SELECT mpro."id" :mincols
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"
@@ -59,7 +59,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpro."id"
-						FROM "mshop_product" AS mpro
+						FROM "mshop_product" mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
@@ -71,7 +71,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpro."id"
-						FROM "mshop_product" AS mpro
+						FROM "mshop_product" mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
@@ -123,7 +123,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT mpro."id" :mincols
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"
@@ -132,7 +132,7 @@ return array(
 				',
 				'mysql' => '
 					SELECT mpro."id" :mincols
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"
@@ -145,7 +145,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpro."id"
-						FROM "mshop_product" AS mpro
+						FROM "mshop_product" mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
@@ -157,7 +157,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpro."id"
-						FROM "mshop_product" AS mpro
+						FROM "mshop_product" mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
@@ -207,7 +207,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT mpro."id" :mincols
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"
@@ -216,7 +216,7 @@ return array(
 				',
 				'mysql' => '
 					SELECT mpro."id" :mincols
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"
@@ -229,7 +229,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpro."id"
-						FROM "mshop_product" AS mpro
+						FROM "mshop_product" mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
@@ -241,7 +241,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpro."id"
-						FROM "mshop_product" AS mpro
+						FROM "mshop_product" mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
@@ -293,7 +293,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT mpro."id" :mincols
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"
@@ -302,7 +302,7 @@ return array(
 				',
 				'mysql' => '
 					SELECT mpro."id" :mincols
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"
@@ -315,7 +315,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpro."id"
-						FROM "mshop_product" AS mpro
+						FROM "mshop_product" mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
@@ -327,7 +327,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpro."id"
-						FROM "mshop_product" AS mpro
+						FROM "mshop_product" mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
@@ -377,7 +377,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT mpro."id" :mincols
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"
@@ -386,7 +386,7 @@ return array(
 				',
 				'mysql' => '
 					SELECT mpro."id" :mincols
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"
@@ -399,7 +399,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpro."id"
-						FROM "mshop_product" AS mpro
+						FROM "mshop_product" mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
@@ -411,7 +411,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpro."id"
-						FROM "mshop_product" AS mpro
+						FROM "mshop_product" mpro
 						:joins
 						WHERE :cond
 						GROUP BY mpro."id"
@@ -439,7 +439,7 @@ return array(
 				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val" :mincols
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY :cols, :val, mpro."id"
@@ -452,7 +452,7 @@ return array(
 				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val" :mincols
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY :cols, :val, mpro."id"
@@ -465,7 +465,7 @@ return array(
 		'search' => array(
 			'ansi' => '
 				SELECT mpro."id" :mincols
-				FROM "mshop_product" AS mpro
+				FROM "mshop_product" mpro
 				:joins
 				WHERE :cond
 				GROUP BY mpro."id"
@@ -474,7 +474,7 @@ return array(
 			',
 			'mysql' => '
 				SELECT mpro."id" :mincols
-				FROM "mshop_product" AS mpro
+				FROM "mshop_product" mpro
 				:joins
 				WHERE :cond
 				GROUP BY mpro."id"
@@ -487,7 +487,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mpro."id"
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"
@@ -499,7 +499,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mpro."id"
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"

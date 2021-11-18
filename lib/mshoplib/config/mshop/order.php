@@ -15,7 +15,7 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_address" AS mordbaad
+							FROM "mshop_order_base_address" mordbaad
 							:joins
 							WHERE :cond
 							GROUP BY mordbaad.id, :cols, :val
@@ -28,7 +28,7 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_address" AS mordbaad
+							FROM "mshop_order_base_address" mordbaad
 							:joins
 							WHERE :cond
 							GROUP BY mordbaad.id, :cols, :val
@@ -87,7 +87,7 @@ return array(
 							mordbaad."latitude" AS "order.base.address.latitude", mordbaad."pos" AS "order.base.address.position",
 							mordbaad."mtime" AS "order.base.address.mtime", mordbaad."editor" AS "order.base.address.editor",
 							mordbaad."ctime" AS "order.base.address.ctime", mordbaad."birthday" AS "order.base.address.birthday"
-						FROM "mshop_order_base_address" AS mordbaad
+						FROM "mshop_order_base_address" mordbaad
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -110,7 +110,7 @@ return array(
 							mordbaad."latitude" AS "order.base.address.latitude", mordbaad."pos" AS "order.base.address.position",
 							mordbaad."mtime" AS "order.base.address.mtime", mordbaad."editor" AS "order.base.address.editor",
 							mordbaad."ctime" AS "order.base.address.ctime", mordbaad."birthday" AS "order.base.address.birthday"
-						FROM "mshop_order_base_address" AS mordbaad
+						FROM "mshop_order_base_address" mordbaad
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -120,7 +120,7 @@ return array(
 				'count' => array(
 					'ansi' => '
 						SELECT COUNT( DISTINCT mordbaad."id" ) AS "count"
-						FROM "mshop_order_base_address" AS mordbaad
+						FROM "mshop_order_base_address" mordbaad
 						:joins
 						WHERE :cond
 					'
@@ -141,7 +141,7 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_coupon" AS mordbaco
+							FROM "mshop_order_base_coupon" mordbaco
 							:joins
 							WHERE :cond
 							GROUP BY mordbaco.id, :cols, :val
@@ -154,7 +154,7 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_coupon" AS mordbaco
+							FROM "mshop_order_base_coupon" mordbaco
 							:joins
 							WHERE :cond
 							GROUP BY mordbaco.id, :cols, :val
@@ -194,7 +194,7 @@ return array(
 							mordbaco."siteid" AS "order.base.coupon.siteid", mordbaco."ordprodid" AS "order.base.coupon.ordprodid",
 							mordbaco."code" AS "order.base.coupon.code", mordbaco."mtime" AS "order.base.coupon.mtime",
 							mordbaco."editor" AS "order.base.coupon.editor", mordbaco."ctime" AS "order.base.coupon.ctime"
-						FROM "mshop_order_base_coupon" AS mordbaco
+						FROM "mshop_order_base_coupon" mordbaco
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -206,7 +206,7 @@ return array(
 							mordbaco."siteid" AS "order.base.coupon.siteid", mordbaco."ordprodid" AS "order.base.coupon.ordprodid",
 							mordbaco."code" AS "order.base.coupon.code", mordbaco."mtime" AS "order.base.coupon.mtime",
 							mordbaco."editor" AS "order.base.coupon.editor", mordbaco."ctime" AS "order.base.coupon.ctime"
-						FROM "mshop_order_base_coupon" AS mordbaco
+						FROM "mshop_order_base_coupon" mordbaco
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -216,7 +216,7 @@ return array(
 				'count' => array(
 					'ansi' => '
 						SELECT COUNT( DISTINCT mordbaco."id" ) AS "count"
-						FROM "mshop_order_base_coupon" AS mordbaco
+						FROM "mshop_order_base_coupon" mordbaco
 						:joins
 						WHERE :cond
 					'
@@ -238,7 +238,7 @@ return array(
 							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :val AS "val"
-								FROM "mshop_order_base_product_attr" AS mordbaprat
+								FROM "mshop_order_base_product_attr" mordbaprat
 								:joins
 								WHERE :cond
 								GROUP BY mordbaprat.id, :cols, :val
@@ -251,7 +251,7 @@ return array(
 							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :val AS "val"
-								FROM "mshop_order_base_product_attr" AS mordbaprat
+								FROM "mshop_order_base_product_attr" mordbaprat
 								:joins
 								WHERE :cond
 								GROUP BY mordbaprat.id, :cols, :val
@@ -295,7 +295,7 @@ return array(
 								mordbaprat."value" AS "order.base.product.attribute.value", mordbaprat."quantity" AS "order.base.product.attribute.quantity",
 								mordbaprat."name" AS "order.base.product.attribute.name", mordbaprat."mtime" AS "order.base.product.attribute.mtime",
 								mordbaprat."editor" AS "order.base.product.attribute.editor", mordbaprat."ctime" AS "order.base.product.attribute.ctime"
-							FROM "mshop_order_base_product_attr" AS mordbaprat
+							FROM "mshop_order_base_product_attr" mordbaprat
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -309,7 +309,7 @@ return array(
 								mordbaprat."value" AS "order.base.product.attribute.value", mordbaprat."quantity" AS "order.base.product.attribute.quantity",
 								mordbaprat."name" AS "order.base.product.attribute.name", mordbaprat."mtime" AS "order.base.product.attribute.mtime",
 								mordbaprat."editor" AS "order.base.product.attribute.editor", mordbaprat."ctime" AS "order.base.product.attribute.ctime"
-							FROM "mshop_order_base_product_attr" AS mordbaprat
+							FROM "mshop_order_base_product_attr" mordbaprat
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -319,7 +319,7 @@ return array(
 					'count' => array(
 						'ansi' => '
 							SELECT COUNT( DISTINCT mordbaprat."id" ) AS "count"
-							FROM "mshop_order_base_product_attr" AS mordbaprat
+							FROM "mshop_order_base_product_attr" mordbaprat
 							:joins
 							WHERE :cond
 						'
@@ -339,7 +339,7 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_product" AS mordbapr
+							FROM "mshop_order_base_product" mordbapr
 							:joins
 							WHERE :cond
 							GROUP BY mordbapr.id, :cols, :val
@@ -352,7 +352,7 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_product" AS mordbapr
+							FROM "mshop_order_base_product" mordbapr
 							:joins
 							WHERE :cond
 							GROUP BY mordbapr.id, :cols, :val
@@ -414,7 +414,7 @@ return array(
 							mordbapr."supplierid" AS "order.base.product.supplierid", mordbapr."suppliername" AS "order.base.product.suppliername",
 							mordbapr."qtyopen" AS "order.base.product.qtyopen", mordbapr."notes" AS "order.base.product.notes",
 							mordbapr."statuspayment" AS "order.base.product.statuspayment", mordbapr."parentprodid" AS "order.base.product.parentproductid"
-						FROM "mshop_order_base_product" AS mordbapr
+						FROM "mshop_order_base_product" mordbapr
 						:joins
 						WHERE :cond
 						GROUP BY :columns :group
@@ -448,7 +448,7 @@ return array(
 							mordbapr."supplierid" AS "order.base.product.supplierid", mordbapr."suppliername" AS "order.base.product.suppliername",
 							mordbapr."qtyopen" AS "order.base.product.qtyopen", mordbapr."notes" AS "order.base.product.notes",
 							mordbapr."statuspayment" AS "order.base.product.statuspayment", mordbapr."parentprodid" AS "order.base.product.parentproductid"
-						FROM "mshop_order_base_product" AS mordbapr
+						FROM "mshop_order_base_product" mordbapr
 						:joins
 						WHERE :cond
 						GROUP BY :group mordbapr."id"
@@ -459,7 +459,7 @@ return array(
 				'count' => array(
 					'ansi' => '
 						SELECT COUNT( DISTINCT mordbapr."id" ) AS "count"
-						FROM "mshop_order_base_product" AS mordbapr
+						FROM "mshop_order_base_product" mordbapr
 						:joins
 						WHERE :cond
 					'
@@ -481,7 +481,7 @@ return array(
 							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :val AS "val"
-								FROM "mshop_order_base_service_attr" AS mordbaseat
+								FROM "mshop_order_base_service_attr" mordbaseat
 								:joins
 								WHERE :cond
 								GROUP BY mordbaseat.id, :cols, :val
@@ -494,7 +494,7 @@ return array(
 							SELECT :keys, :type("val") AS "value"
 							FROM (
 								SELECT :acols, :val AS "val"
-								FROM "mshop_order_base_service_attr" AS mordbaseat
+								FROM "mshop_order_base_service_attr" mordbaseat
 								:joins
 								WHERE :cond
 								GROUP BY mordbaseat.id, :cols, :val
@@ -538,7 +538,7 @@ return array(
 								mordbaseat."value" AS "order.base.service.attribute.value", mordbaseat."quantity" AS "order.base.service.attribute.quantity",
 								mordbaseat."name" AS "order.base.service.attribute.name", mordbaseat."mtime" AS "order.base.service.attribute.mtime",
 								mordbaseat."ctime" AS "order.base.service.attribute.ctime", mordbaseat."editor" AS "order.base.service.attribute.editor"
-							FROM "mshop_order_base_service_attr" AS mordbaseat
+							FROM "mshop_order_base_service_attr" mordbaseat
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -552,7 +552,7 @@ return array(
 								mordbaseat."value" AS "order.base.service.attribute.value", mordbaseat."quantity" AS "order.base.service.attribute.quantity",
 								mordbaseat."name" AS "order.base.service.attribute.name", mordbaseat."mtime" AS "order.base.service.attribute.mtime",
 								mordbaseat."ctime" AS "order.base.service.attribute.ctime", mordbaseat."editor" AS "order.base.service.attribute.editor"
-							FROM "mshop_order_base_service_attr" AS mordbaseat
+							FROM "mshop_order_base_service_attr" mordbaseat
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -562,7 +562,7 @@ return array(
 					'count' => array(
 						'ansi' => '
 							SELECT COUNT( DISTINCT mordbaseat."id" ) AS "count"
-							FROM "mshop_order_base_service_attr" AS mordbaseat
+							FROM "mshop_order_base_service_attr" mordbaseat
 							:joins
 							WHERE :cond
 						'
@@ -582,7 +582,7 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_service" AS mordbase
+							FROM "mshop_order_base_service" mordbase
 							:joins
 							WHERE :cond
 							GROUP BY mordbase.id, :cols, :val
@@ -595,7 +595,7 @@ return array(
 						SELECT :keys, :type("val") AS "value"
 						FROM (
 							SELECT :acols, :val AS "val"
-							FROM "mshop_order_base_service" AS mordbase
+							FROM "mshop_order_base_service" mordbase
 							:joins
 							WHERE :cond
 							GROUP BY mordbase.id, :cols, :val
@@ -646,7 +646,7 @@ return array(
 							mordbase."taxflag" AS "order.base.service.taxflag", mordbase."pos" AS "order.base.service.position",
 							mordbase."mtime" AS "order.base.service.mtime", mordbase."editor" AS "order.base.service.editor",
 							mordbase."ctime" AS "order.base.service.ctime"
-						FROM "mshop_order_base_service" AS mordbase
+						FROM "mshop_order_base_service" mordbase
 						:joins
 						WHERE :cond
 						GROUP BY :columns :group
@@ -669,7 +669,7 @@ return array(
 							mordbase."taxflag" AS "order.base.service.taxflag", mordbase."pos" AS "order.base.service.position",
 							mordbase."mtime" AS "order.base.service.mtime", mordbase."editor" AS "order.base.service.editor",
 							mordbase."ctime" AS "order.base.service.ctime"
-						FROM "mshop_order_base_service" AS mordbase
+						FROM "mshop_order_base_service" mordbase
 						:joins
 						WHERE :cond
 						GROUP BY :group mordbase."id"
@@ -680,7 +680,7 @@ return array(
 				'count' => array(
 					'ansi' => '
 						SELECT COUNT( DISTINCT mordbase."id" ) AS "count"
-						FROM "mshop_order_base_service" AS mordbase
+						FROM "mshop_order_base_service" mordbase
 						:joins
 						WHERE :cond
 					'
@@ -700,7 +700,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_order_base" AS mordba
+						FROM "mshop_order_base" mordba
 						:joins
 						WHERE :cond
 						GROUP BY mordba.id, :cols, :val
@@ -713,7 +713,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_order_base" AS mordba
+						FROM "mshop_order_base" mordba
 						:joins
 						WHERE :cond
 						GROUP BY mordba.id, :cols, :val
@@ -761,7 +761,7 @@ return array(
 						mordba."taxflag" AS "order.base.taxflag", mordba."customerref" AS "order.base.customerref",
 						mordba."comment" AS "order.base.comment", mordba."mtime" AS "order.base.mtime",
 						mordba."ctime" AS "order.base.ctime", mordba."editor" AS "order.base.editor"
-					FROM "mshop_order_base" AS mordba
+					FROM "mshop_order_base" mordba
 					:joins
 					WHERE :cond
 					GROUP BY :columns :group
@@ -782,7 +782,7 @@ return array(
 						mordba."taxflag" AS "order.base.taxflag", mordba."customerref" AS "order.base.customerref",
 						mordba."comment" AS "order.base.comment", mordba."mtime" AS "order.base.mtime",
 						mordba."ctime" AS "order.base.ctime", mordba."editor" AS "order.base.editor"
-					FROM "mshop_order_base" AS mordba
+					FROM "mshop_order_base" mordba
 					:joins
 					WHERE :cond
 					GROUP BY :group mordba."id"
@@ -793,7 +793,7 @@ return array(
 			'count' => array(
 				'ansi' => '
 					SELECT COUNT( DISTINCT mordba."id" ) AS "count"
-					FROM "mshop_order_base" AS mordba
+					FROM "mshop_order_base" mordba
 					:joins
 					WHERE :cond
 				'
@@ -814,7 +814,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_order_status" AS mordst
+						FROM "mshop_order_status" mordst
 						:joins
 						WHERE :cond
 						GROUP BY mordst.id, :cols, :val
@@ -827,7 +827,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_order_status" AS mordst
+						FROM "mshop_order_status" mordst
 						:joins
 						WHERE :cond
 						GROUP BY mordst.id, :cols, :val
@@ -867,7 +867,7 @@ return array(
 						mordst."parentid" AS "order.status.parentid", mordst."type" AS "order.status.type",
 						mordst."value" AS "order.status.value", mordst."mtime" AS "order.status.mtime",
 						mordst."ctime" AS "order.status.ctime", mordst."editor" AS "order.status.editor"
-					FROM "mshop_order_status" AS mordst
+					FROM "mshop_order_status" mordst
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -879,7 +879,7 @@ return array(
 						mordst."parentid" AS "order.status.parentid", mordst."type" AS "order.status.type",
 						mordst."value" AS "order.status.value", mordst."mtime" AS "order.status.mtime",
 						mordst."ctime" AS "order.status.ctime", mordst."editor" AS "order.status.editor"
-					FROM "mshop_order_status" AS mordst
+					FROM "mshop_order_status" mordst
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -889,7 +889,7 @@ return array(
 			'count' => array(
 				'ansi' => '
 					SELECT COUNT( DISTINCT mordst."id" ) AS "count"
-					FROM "mshop_order_status" AS mordst
+					FROM "mshop_order_status" mordst
 					:joins
 					WHERE :cond
 				'
@@ -909,7 +909,7 @@ return array(
 				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val"
-					FROM "mshop_order" AS mord
+					FROM "mshop_order" mord
 					:joins
 					WHERE :cond
 					GROUP BY mord.id, :cols, :val
@@ -922,7 +922,7 @@ return array(
 				SELECT :keys, :type("val") AS "value"
 				FROM (
 					SELECT :acols, :val AS "val"
-					FROM "mshop_order" AS mord
+					FROM "mshop_order" mord
 					:joins
 					WHERE :cond
 					GROUP BY mord.id, :cols, :val
@@ -967,7 +967,7 @@ return array(
 					mord."statuspayment" AS "order.statuspayment", mord."statusdelivery" AS "order.statusdelivery",
 					mord."relatedid" AS "order.relatedid", mord."ctime" AS "order.ctime",
 					mord."mtime" AS "order.mtime", mord."editor" AS "order.editor"
-				FROM "mshop_order" AS mord
+				FROM "mshop_order" mord
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
@@ -984,7 +984,7 @@ return array(
 					mord."statuspayment" AS "order.statuspayment", mord."statusdelivery" AS "order.statusdelivery",
 					mord."relatedid" AS "order.relatedid", mord."ctime" AS "order.ctime",
 					mord."mtime" AS "order.mtime", mord."editor" AS "order.editor"
-				FROM "mshop_order" AS mord
+				FROM "mshop_order" mord
 				:joins
 				WHERE :cond
 				GROUP BY :group mord."id"
@@ -995,7 +995,7 @@ return array(
 		'count' => array(
 			'ansi' => '
 				SELECT COUNT( DISTINCT mord."id" ) AS "count"
-				FROM "mshop_order" AS mord
+				FROM "mshop_order" mord
 				:joins
 				WHERE :cond
 			'

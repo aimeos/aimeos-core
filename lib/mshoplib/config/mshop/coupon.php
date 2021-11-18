@@ -43,7 +43,7 @@ return array(
 						mcouco."count" AS "coupon.code.count", mcouco."ref" AS "coupon.code.ref",
 						mcouco."mtime" AS "coupon.code.mtime", mcouco."ctime" AS "coupon.code.ctime",
 						mcouco."editor" AS "coupon.code.editor"
-					FROM "mshop_coupon_code" AS mcouco
+					FROM "mshop_coupon_code" mcouco
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -57,7 +57,7 @@ return array(
 						mcouco."count" AS "coupon.code.count", mcouco."ref" AS "coupon.code.ref",
 						mcouco."mtime" AS "coupon.code.mtime", mcouco."ctime" AS "coupon.code.ctime",
 						mcouco."editor" AS "coupon.code.editor"
-					FROM "mshop_coupon_code" AS mcouco
+					FROM "mshop_coupon_code" mcouco
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -69,7 +69,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcouco."id"
-						FROM "mshop_coupon_code" AS mcouco
+						FROM "mshop_coupon_code" mcouco
 						:joins
 						WHERE :cond
 						ORDER BY mcouco."id"
@@ -80,7 +80,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcouco."id"
-						FROM "mshop_coupon_code" AS mcouco
+						FROM "mshop_coupon_code" mcouco
 						:joins
 						WHERE :cond
 						ORDER BY mcouco."id"
@@ -139,7 +139,7 @@ return array(
 					mcou."config" AS "coupon.config", mcou."status" AS "coupon.status",
 					mcou."mtime" AS "coupon.mtime", mcou."editor" AS "coupon.editor",
 					mcou."ctime" AS "coupon.ctime"
-				FROM "mshop_coupon" AS mcou
+				FROM "mshop_coupon" mcou
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
@@ -156,7 +156,7 @@ return array(
 					mcou."config" AS "coupon.config", mcou."status" AS "coupon.status",
 					mcou."mtime" AS "coupon.mtime", mcou."editor" AS "coupon.editor",
 					mcou."ctime" AS "coupon.ctime"
-				FROM "mshop_coupon" AS mcou
+				FROM "mshop_coupon" mcou
 				:joins
 				WHERE :cond
 				GROUP BY :group mcou."id"
@@ -169,7 +169,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mcou."id"
-					FROM "mshop_coupon" AS mcou
+					FROM "mshop_coupon" mcou
 					:joins
 					WHERE :cond
 					GROUP BY mcou."id"
@@ -181,7 +181,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mcou."id"
-					FROM "mshop_coupon" AS mcou
+					FROM "mshop_coupon" mcou
 					:joins
 					WHERE :cond
 					GROUP BY mcou."id"

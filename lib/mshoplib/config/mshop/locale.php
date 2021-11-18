@@ -37,7 +37,7 @@ return array(
 						mloccu."id" AS "locale.currency.id", mloccu."label" AS "locale.currency.label",
 						mloccu."status" AS "locale.currency.status", mloccu."mtime" AS "locale.currency.mtime",
 						mloccu."editor" AS "locale.currency.editor", mloccu."ctime" AS "locale.currency.ctime"
-					FROM "mshop_locale_currency" AS mloccu
+					FROM "mshop_locale_currency" mloccu
 					WHERE :cond
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
@@ -47,7 +47,7 @@ return array(
 						mloccu."id" AS "locale.currency.id", mloccu."label" AS "locale.currency.label",
 						mloccu."status" AS "locale.currency.status", mloccu."mtime" AS "locale.currency.mtime",
 						mloccu."editor" AS "locale.currency.editor", mloccu."ctime" AS "locale.currency.ctime"
-					FROM "mshop_locale_currency" AS mloccu
+					FROM "mshop_locale_currency" mloccu
 					WHERE :cond
 					ORDER BY :order
 					LIMIT :size OFFSET :start
@@ -58,7 +58,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mloccu."id"
-						FROM "mshop_locale_currency" AS mloccu
+						FROM "mshop_locale_currency" mloccu
 						WHERE :cond
 						ORDER BY mloccu."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -68,7 +68,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mloccu."id"
-						FROM "mshop_locale_currency" AS mloccu
+						FROM "mshop_locale_currency" mloccu
 						WHERE :cond
 						ORDER BY mloccu."id"
 						LIMIT 10000 OFFSET 0
@@ -114,7 +114,7 @@ return array(
 						mlocla."id" AS "locale.language.id", mlocla."label" AS "locale.language.label",
 						mlocla."status" AS "locale.language.status", mlocla."mtime" AS "locale.language.mtime",
 						mlocla."editor" AS "locale.language.editor", mlocla."ctime" AS "locale.language.ctime"
-					FROM "mshop_locale_language" AS mlocla
+					FROM "mshop_locale_language" mlocla
 					WHERE :cond
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
@@ -124,7 +124,7 @@ return array(
 						mlocla."id" AS "locale.language.id", mlocla."label" AS "locale.language.label",
 						mlocla."status" AS "locale.language.status", mlocla."mtime" AS "locale.language.mtime",
 						mlocla."editor" AS "locale.language.editor", mlocla."ctime" AS "locale.language.ctime"
-					FROM "mshop_locale_language" AS mlocla
+					FROM "mshop_locale_language" mlocla
 					WHERE :cond
 					ORDER BY :order
 					LIMIT :size OFFSET :start
@@ -135,7 +135,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mlocla."id"
-						FROM "mshop_locale_language" AS mlocla
+						FROM "mshop_locale_language" mlocla
 						WHERE :cond
 						ORDER BY mlocla."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -145,7 +145,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mlocla."id"
-						FROM "mshop_locale_language" AS mlocla
+						FROM "mshop_locale_language" mlocla
 						WHERE :cond
 						ORDER BY mlocla."id"
 						LIMIT 10000 OFFSET 0
@@ -233,7 +233,7 @@ return array(
 						mlocsi."supplierid" AS "locale.site.supplierid", mlocsi."theme" AS "locale.site.theme",
 						mlocsi."editor" AS "locale.site.editor", mlocsi."mtime" AS "locale.site.mtime",
 						mlocsi."ctime" AS "locale.site.ctime"
-					FROM "mshop_locale_site" AS mlocsi
+					FROM "mshop_locale_site" mlocsi
 					WHERE :cond
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
@@ -247,7 +247,7 @@ return array(
 						mlocsi."supplierid" AS "locale.site.supplierid", mlocsi."theme" AS "locale.site.theme",
 						mlocsi."editor" AS "locale.site.editor", mlocsi."mtime" AS "locale.site.mtime",
 						mlocsi."ctime" AS "locale.site.ctime"
-					FROM "mshop_locale_site" AS mlocsi
+					FROM "mshop_locale_site" mlocsi
 					WHERE :cond
 					ORDER BY :order
 					LIMIT :size OFFSET :start
@@ -258,7 +258,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mlocsi."id"
-						FROM "mshop_locale_site" AS mlocsi
+						FROM "mshop_locale_site" mlocsi
 						WHERE :cond
 						ORDER BY mlocsi."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -268,7 +268,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mlocsi."id"
-						FROM "mshop_locale_site" AS mlocsi
+						FROM "mshop_locale_site" mlocsi
 						WHERE :cond
 						ORDER BY mlocsi."id"
 						LIMIT 10000 OFFSET 0
@@ -318,10 +318,10 @@ return array(
 					mloc."pos" AS "locale.position", mloc."status" AS "locale.status",
 					mloc."mtime" AS "locale.mtime", mloc."editor" AS "locale.editor",
 					mloc."ctime" AS "locale.ctime"
-				FROM "mshop_locale" AS mloc
-				LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."siteid")
-				LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
-				LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
+				FROM "mshop_locale" mloc
+				LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."siteid" = mlocsi."siteid")
+				LEFT JOIN "mshop_locale_language" mlocla ON (mloc."langid" = mlocla."id")
+				LEFT JOIN "mshop_locale_currency" mloccu ON (mloc."currencyid" = mloccu."id")
 				WHERE :cond
 				GROUP BY :columns :group
 					mloc."id", mloc."siteid", mloc."langid", mloc."currencyid", mloc."pos",
@@ -336,10 +336,10 @@ return array(
 					mloc."pos" AS "locale.position", mloc."status" AS "locale.status",
 					mloc."mtime" AS "locale.mtime", mloc."editor" AS "locale.editor",
 					mloc."ctime" AS "locale.ctime"
-				FROM "mshop_locale" AS mloc
-				LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."siteid")
-				LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
-				LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
+				FROM "mshop_locale" mloc
+				LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."siteid" = mlocsi."siteid")
+				LEFT JOIN "mshop_locale_language" mlocla ON (mloc."langid" = mlocla."id")
+				LEFT JOIN "mshop_locale_currency" mloccu ON (mloc."currencyid" = mloccu."id")
 				WHERE :cond
 				GROUP BY :group mloc."id"
 				ORDER BY :order
@@ -351,10 +351,10 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mloc."id"
-					FROM "mshop_locale" AS mloc
-					LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."siteid")
-					LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
-					LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
+					FROM "mshop_locale" mloc
+					LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."siteid" = mlocsi."siteid")
+					LEFT JOIN "mshop_locale_language" mlocla ON (mloc."langid" = mlocla."id")
+					LEFT JOIN "mshop_locale_currency" mloccu ON (mloc."currencyid" = mloccu."id")
 					WHERE :cond
 					GROUP BY mloc."id"
 					ORDER BY mloc."id"
@@ -365,10 +365,10 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mloc."id"
-					FROM "mshop_locale" AS mloc
-					LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."siteid")
-					LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
-					LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
+					FROM "mshop_locale" mloc
+					LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."siteid" = mlocsi."siteid")
+					LEFT JOIN "mshop_locale_language" mlocla ON (mloc."langid" = mlocla."id")
+					LEFT JOIN "mshop_locale_currency" mloccu ON (mloc."currencyid" = mloccu."id")
 					WHERE :cond
 					GROUP BY mloc."id"
 					ORDER BY mloc."id"

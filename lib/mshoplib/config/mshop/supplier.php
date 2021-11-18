@@ -58,7 +58,7 @@ return array(
 						msupad."longitude" AS "supplier.address.longitude", msupad."latitude" AS "supplier.address.latitude",
 						msupad."mtime" AS "supplier.address.mtime", msupad."ctime" AS "supplier.address.ctime",
 						msupad."editor" AS "supplier.address.editor", msupad."birthday" AS "supplier.address.birthday"
-					FROM "mshop_supplier_address" AS msupad
+					FROM "mshop_supplier_address" msupad
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -80,7 +80,7 @@ return array(
 						msupad."longitude" AS "supplier.address.longitude", msupad."latitude" AS "supplier.address.latitude",
 						msupad."mtime" AS "supplier.address.mtime", msupad."ctime" AS "supplier.address.ctime",
 						msupad."editor" AS "supplier.address.editor", msupad."birthday" AS "supplier.address.birthday"
-					FROM "mshop_supplier_address" AS msupad
+					FROM "mshop_supplier_address" msupad
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -92,7 +92,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT msupad."id"
-						FROM "mshop_supplier_address" AS msupad
+						FROM "mshop_supplier_address" msupad
 						:joins
 						WHERE :cond
 						ORDER BY msupad."id"
@@ -103,7 +103,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT msupad."id"
-						FROM "mshop_supplier_address" AS msupad
+						FROM "mshop_supplier_address" msupad
 						:joins
 						WHERE :cond
 						ORDER BY msupad."id"
@@ -156,7 +156,7 @@ return array(
 							msuplity."label" AS "supplier.lists.type.label", msuplity."status" AS "supplier.lists.type.status",
 							msuplity."mtime" AS "supplier.lists.type.mtime", msuplity."editor" AS "supplier.lists.type.editor",
 							msuplity."ctime" AS "supplier.lists.type.ctime", msuplity."pos" AS "supplier.lists.type.position"
-						FROM "mshop_supplier_list_type" AS msuplity
+						FROM "mshop_supplier_list_type" msuplity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -169,7 +169,7 @@ return array(
 							msuplity."label" AS "supplier.lists.type.label", msuplity."status" AS "supplier.lists.type.status",
 							msuplity."mtime" AS "supplier.lists.type.mtime", msuplity."editor" AS "supplier.lists.type.editor",
 							msuplity."ctime" AS "supplier.lists.type.ctime", msuplity."pos" AS "supplier.lists.type.position"
-						FROM "mshop_supplier_list_type" AS msuplity
+						FROM "mshop_supplier_list_type" msuplity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -181,7 +181,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT msuplity."id"
-							FROM "mshop_supplier_list_type" AS msuplity
+							FROM "mshop_supplier_list_type" msuplity
 							:joins
 							WHERE :cond
 							ORDER BY msuplity."id"
@@ -192,7 +192,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT msuplity."id"
-							FROM "mshop_supplier_list_type" AS msuplity
+							FROM "mshop_supplier_list_type" msuplity
 							:joins
 							WHERE :cond
 							ORDER BY msuplity."id"
@@ -215,7 +215,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_supplier_list" AS msupli
+						FROM "mshop_supplier_list" msupli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, msupli."id"
@@ -228,7 +228,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_supplier_list" AS msupli
+						FROM "mshop_supplier_list" msupli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, msupli."id"
@@ -273,7 +273,7 @@ return array(
 						msupli."config" AS "supplier.lists.config", msupli."pos" AS "supplier.lists.position",
 						msupli."status" AS "supplier.lists.status", msupli."mtime" AS "supplier.lists.mtime",
 						msupli."editor" AS "supplier.lists.editor", msupli."ctime" AS "supplier.lists.ctime"
-					FROM "mshop_supplier_list" AS msupli
+					FROM "mshop_supplier_list" msupli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -288,7 +288,7 @@ return array(
 						msupli."config" AS "supplier.lists.config", msupli."pos" AS "supplier.lists.position",
 						msupli."status" AS "supplier.lists.status", msupli."mtime" AS "supplier.lists.mtime",
 						msupli."editor" AS "supplier.lists.editor", msupli."ctime" AS "supplier.lists.ctime"
-					FROM "mshop_supplier_list" AS msupli
+					FROM "mshop_supplier_list" msupli
 					USE INDEX (unq_mssupli_pid_dm_sid_ty_rid, idx_mssupli_pid_dm_sid_pos_rid, idx_mssupli_rid_dom_sid_ty, idx_mssupli_key_sid)
 					:joins
 					WHERE :cond
@@ -301,7 +301,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT msupli."id"
-						FROM "mshop_supplier_list" AS msupli
+						FROM "mshop_supplier_list" msupli
 						:joins
 						WHERE :cond
 						ORDER BY msupli."id"
@@ -312,7 +312,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT msupli."id"
-						FROM "mshop_supplier_list" AS msupli
+						FROM "mshop_supplier_list" msupli
 						:joins
 						WHERE :cond
 						ORDER BY msupli."id"
@@ -360,7 +360,7 @@ return array(
 					msup."code" AS "supplier.code", msup."label" AS "supplier.label",
 					msup."status" AS "supplier.status", msup."mtime" AS "supplier.mtime",
 					msup."editor" AS "supplier.editor", msup."ctime" AS "supplier.ctime"
-				FROM "mshop_supplier" AS msup
+				FROM "mshop_supplier" msup
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
@@ -375,7 +375,7 @@ return array(
 					msup."code" AS "supplier.code", msup."label" AS "supplier.label",
 					msup."status" AS "supplier.status", msup."mtime" AS "supplier.mtime",
 					msup."editor" AS "supplier.editor", msup."ctime" AS "supplier.ctime"
-				FROM "mshop_supplier" AS msup
+				FROM "mshop_supplier" msup
 				:joins
 				WHERE :cond
 				GROUP BY :group msup."id"
@@ -388,7 +388,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT msup."id"
-					FROM "mshop_supplier" AS msup
+					FROM "mshop_supplier" msup
 					:joins
 					WHERE :cond
 					GROUP BY msup."id"
@@ -400,7 +400,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT msup."id"
-					FROM "mshop_supplier" AS msup
+					FROM "mshop_supplier" msup
 					:joins
 					WHERE :cond
 					GROUP BY msup."id"

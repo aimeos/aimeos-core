@@ -43,7 +43,7 @@ return array(
 							mprility."label" AS "price.lists.type.label", mprility."status" AS "price.lists.type.status",
 							mprility."mtime" AS "price.lists.type.mtime", mprility."editor" AS "price.lists.type.editor",
 							mprility."ctime" AS "price.lists.type.ctime", mprility."pos" AS "price.lists.type.position"
-						FROM "mshop_price_list_type" AS mprility
+						FROM "mshop_price_list_type" mprility
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -56,7 +56,7 @@ return array(
 							mprility."label" AS "price.lists.type.label", mprility."status" AS "price.lists.type.status",
 							mprility."mtime" AS "price.lists.type.mtime", mprility."editor" AS "price.lists.type.editor",
 							mprility."ctime" AS "price.lists.type.ctime", mprility."pos" AS "price.lists.type.position"
-						FROM "mshop_price_list_type" AS mprility
+						FROM "mshop_price_list_type" mprility
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -68,7 +68,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mprility."id"
-							FROM "mshop_price_list_type" AS mprility
+							FROM "mshop_price_list_type" mprility
 							:joins
 							WHERE :cond
 							ORDER BY mprility."id"
@@ -79,7 +79,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mprility."id"
-							FROM "mshop_price_list_type" AS mprility
+							FROM "mshop_price_list_type" mprility
 							:joins
 							WHERE :cond
 							ORDER BY mprility."id"
@@ -102,7 +102,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_price_list" AS mprili
+						FROM "mshop_price_list" mprili
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mprili."id"
@@ -115,7 +115,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_price_list" AS mprili
+						FROM "mshop_price_list" mprili
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mprili."id"
@@ -160,7 +160,7 @@ return array(
 						mprili."config" AS "price.lists.config", mprili."pos" AS "price.lists.position",
 						mprili."status" AS "price.lists.status", mprili."mtime" AS "price.lists.mtime",
 						mprili."editor" AS "price.lists.editor", mprili."ctime" AS "price.lists.ctime"
-					FROM "mshop_price_list" AS mprili
+					FROM "mshop_price_list" mprili
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -175,7 +175,7 @@ return array(
 						mprili."config" AS "price.lists.config", mprili."pos" AS "price.lists.position",
 						mprili."status" AS "price.lists.status", mprili."mtime" AS "price.lists.mtime",
 						mprili."editor" AS "price.lists.editor", mprili."ctime" AS "price.lists.ctime"
-					FROM "mshop_price_list" AS mprili
+					FROM "mshop_price_list" mprili
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -187,7 +187,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mprili."id"
-						FROM "mshop_price_list" AS mprili
+						FROM "mshop_price_list" mprili
 						:joins
 						WHERE :cond
 						ORDER BY mprili."id"
@@ -198,7 +198,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mprili."id"
-						FROM "mshop_price_list" AS mprili
+						FROM "mshop_price_list" mprili
 						:joins
 						WHERE :cond
 						ORDER BY mprili."id"
@@ -338,7 +338,7 @@ return array(
 						mpripr."langid" AS "price.property.languageid", mpripr."value" AS "price.property.value",
 						mpripr."mtime" AS "price.property.mtime", mpripr."editor" AS "price.property.editor",
 						mpripr."ctime" AS "price.property.ctime"
-					FROM "mshop_price_property" AS mpripr
+					FROM "mshop_price_property" mpripr
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -351,7 +351,7 @@ return array(
 						mpripr."langid" AS "price.property.languageid", mpripr."value" AS "price.property.value",
 						mpripr."mtime" AS "price.property.mtime", mpripr."editor" AS "price.property.editor",
 						mpripr."ctime" AS "price.property.ctime"
-					FROM "mshop_price_property" AS mpripr
+					FROM "mshop_price_property" mpripr
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -363,7 +363,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpripr."id"
-						FROM "mshop_price_property" AS mpripr
+						FROM "mshop_price_property" mpripr
 						:joins
 						WHERE :cond
 						ORDER BY mpripr."id"
@@ -374,7 +374,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpripr."id"
-						FROM "mshop_price_property" AS mpripr
+						FROM "mshop_price_property" mpripr
 						:joins
 						WHERE :cond
 						ORDER BY mpripr."id"
@@ -426,7 +426,7 @@ return array(
 						mprity."label" AS "price.type.label", mprity."status" AS "price.type.status",
 						mprity."mtime" AS "price.type.mtime", mprity."editor" AS "price.type.editor",
 						mprity."ctime" AS "price.type.ctime", mprity."pos" AS "price.type.position"
-					FROM "mshop_price_type" AS mprity
+					FROM "mshop_price_type" mprity
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -439,7 +439,7 @@ return array(
 						mprity."label" AS "price.type.label", mprity."status" AS "price.type.status",
 						mprity."mtime" AS "price.type.mtime", mprity."editor" AS "price.type.editor",
 						mprity."ctime" AS "price.type.ctime", mprity."pos" AS "price.type.position"
-					FROM "mshop_price_type" AS mprity
+					FROM "mshop_price_type" mprity
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -451,7 +451,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mprity."id"
-						FROM "mshop_price_type" AS mprity
+						FROM "mshop_price_type" mprity
 						:joins
 						WHERE :cond
 						ORDER BY mprity."id"
@@ -462,7 +462,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mprity."id"
-						FROM "mshop_price_type" AS mprity
+						FROM "mshop_price_type" mprity
 						:joins
 						WHERE :cond
 						ORDER BY mprity."id"
@@ -518,7 +518,7 @@ return array(
 					mpri."taxrate" AS "price.taxrates", mpri."status" AS "price.status",
 					mpri."mtime" AS "price.mtime", mpri."editor" AS "price.editor",
 					mpri."ctime" AS "price.ctime"
-				FROM "mshop_price" AS mpri
+				FROM "mshop_price" mpri
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
@@ -538,7 +538,7 @@ return array(
 					mpri."taxrate" AS "price.taxrates", mpri."status" AS "price.status",
 					mpri."mtime" AS "price.mtime", mpri."editor" AS "price.editor",
 					mpri."ctime" AS "price.ctime"
-				FROM "mshop_price" AS mpri
+				FROM "mshop_price" mpri
 				:joins
 				WHERE :cond
 				GROUP BY :group mpri."id"
@@ -551,7 +551,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mpri."id"
-					FROM "mshop_price" AS mpri
+					FROM "mshop_price" mpri
 					:joins
 					WHERE :cond
 					GROUP BY mpri."id"
@@ -563,7 +563,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mpri."id"
-					FROM "mshop_price" AS mpri
+					FROM "mshop_price" mpri
 					:joins
 					WHERE :cond
 					GROUP BY mpri."id"

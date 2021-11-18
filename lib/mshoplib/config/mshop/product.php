@@ -43,7 +43,7 @@ return array(
 							mprolity."label" AS "product.lists.type.label", mprolity."status" AS "product.lists.type.status",
 							mprolity."mtime" AS "product.lists.type.mtime", mprolity."editor" AS "product.lists.type.editor",
 							mprolity."ctime" AS "product.lists.type.ctime", mprolity."pos" AS "product.lists.type.position"
-						FROM "mshop_product_list_type" AS mprolity
+						FROM "mshop_product_list_type" mprolity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -56,7 +56,7 @@ return array(
 							mprolity."label" AS "product.lists.type.label", mprolity."status" AS "product.lists.type.status",
 							mprolity."mtime" AS "product.lists.type.mtime", mprolity."editor" AS "product.lists.type.editor",
 							mprolity."ctime" AS "product.lists.type.ctime", mprolity."pos" AS "product.lists.type.position"
-						FROM "mshop_product_list_type" AS mprolity
+						FROM "mshop_product_list_type" mprolity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -68,7 +68,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mprolity."id"
-							FROM "mshop_product_list_type" AS mprolity
+							FROM "mshop_product_list_type" mprolity
 							:joins
 							WHERE :cond
 							ORDER BY mprolity."id"
@@ -79,7 +79,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mprolity."id"
-							FROM "mshop_product_list_type" AS mprolity
+							FROM "mshop_product_list_type" mprolity
 							:joins
 							WHERE :cond
 							ORDER BY mprolity."id"
@@ -102,7 +102,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_product_list" AS mproli
+						FROM "mshop_product_list" mproli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mproli."id"
@@ -115,7 +115,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_product_list" AS mproli
+						FROM "mshop_product_list" mproli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mproli."id"
@@ -160,7 +160,7 @@ return array(
 						mproli."config" AS "product.lists.config", mproli."pos" AS "product.lists.position",
 						mproli."status" AS "product.lists.status", mproli."mtime" AS "product.lists.mtime",
 						mproli."editor" AS "product.lists.editor", mproli."ctime" AS "product.lists.ctime"
-					FROM "mshop_product_list" AS mproli
+					FROM "mshop_product_list" mproli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -175,7 +175,7 @@ return array(
 						mproli."config" AS "product.lists.config", mproli."pos" AS "product.lists.position",
 						mproli."status" AS "product.lists.status", mproli."mtime" AS "product.lists.mtime",
 						mproli."editor" AS "product.lists.editor", mproli."ctime" AS "product.lists.ctime"
-					FROM "mshop_product_list" AS mproli
+					FROM "mshop_product_list" mproli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -187,7 +187,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mproli."id"
-						FROM "mshop_product_list" AS mproli
+						FROM "mshop_product_list" mproli
 						:joins
 						WHERE :cond
 						ORDER BY mproli."id"
@@ -198,7 +198,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mproli."id"
-						FROM "mshop_product_list" AS mproli
+						FROM "mshop_product_list" mproli
 						:joins
 						WHERE :cond
 						ORDER BY mproli."id"
@@ -338,7 +338,7 @@ return array(
 						mpropr."langid" AS "product.property.languageid", mpropr."value" AS "product.property.value",
 						mpropr."mtime" AS "product.property.mtime", mpropr."editor" AS "product.property.editor",
 						mpropr."ctime" AS "product.property.ctime"
-					FROM "mshop_product_property" AS mpropr
+					FROM "mshop_product_property" mpropr
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -351,7 +351,7 @@ return array(
 						mpropr."langid" AS "product.property.languageid", mpropr."value" AS "product.property.value",
 						mpropr."mtime" AS "product.property.mtime", mpropr."editor" AS "product.property.editor",
 						mpropr."ctime" AS "product.property.ctime"
-					FROM "mshop_product_property" AS mpropr
+					FROM "mshop_product_property" mpropr
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -363,7 +363,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpropr."id"
-						FROM "mshop_product_property" AS mpropr
+						FROM "mshop_product_property" mpropr
 						:joins
 						WHERE :cond
 						ORDER BY mpropr."id"
@@ -374,7 +374,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mpropr."id"
-						FROM "mshop_product_property" AS mpropr
+						FROM "mshop_product_property" mpropr
 						:joins
 						WHERE :cond
 						ORDER BY mpropr."id"
@@ -426,7 +426,7 @@ return array(
 						mproty."label" AS "product.type.label", mproty."status" AS "product.type.status",
 						mproty."mtime" AS "product.type.mtime", mproty."editor" AS "product.type.editor",
 						mproty."ctime" AS "product.type.ctime", mproty."pos" AS "product.type.position"
-					FROM "mshop_product_type" AS mproty
+					FROM "mshop_product_type" mproty
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -439,7 +439,7 @@ return array(
 						mproty."label" AS "product.type.label", mproty."status" AS "product.type.status",
 						mproty."mtime" AS "product.type.mtime", mproty."editor" AS "product.type.editor",
 						mproty."ctime" AS "product.type.ctime", mproty."pos" AS "product.type.position"
-					FROM "mshop_product_type" AS mproty
+					FROM "mshop_product_type" mproty
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -451,7 +451,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mproty."id"
-						FROM "mshop_product_type" AS mproty
+						FROM "mshop_product_type" mproty
 						:joins
 						WHERE :cond
 						ORDER BY mproty."id"
@@ -462,7 +462,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mproty."id"
-						FROM "mshop_product_type" AS mproty
+						FROM "mshop_product_type" mproty
 						:joins
 						WHERE :cond
 						ORDER BY mproty."id"
@@ -533,7 +533,7 @@ return array(
 					mpro."scale" AS "product.scale", mpro."config" AS "product.config",
 					mpro."rating" AS "product.rating", mpro."ratings" AS "product.ratings",
 					mpro."instock" AS "product.instock"
-				FROM "mshop_product" AS mpro
+				FROM "mshop_product" mpro
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
@@ -556,7 +556,7 @@ return array(
 					mpro."scale" AS "product.scale", mpro."config" AS "product.config",
 					mpro."rating" AS "product.rating", mpro."ratings" AS "product.ratings",
 					mpro."instock" AS "product.instock"
-				FROM "mshop_product" AS mpro
+				FROM "mshop_product" mpro
 				:joins
 				WHERE :cond
 				GROUP BY :group mpro."id"
@@ -569,7 +569,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mpro."id"
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"
@@ -581,7 +581,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mpro."id"
-					FROM "mshop_product" AS mpro
+					FROM "mshop_product" mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id"

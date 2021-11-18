@@ -43,7 +43,7 @@ return array(
 							mmedlity."label" AS "media.lists.type.label", mmedlity."status" AS "media.lists.type.status",
 							mmedlity."mtime" AS "media.lists.type.mtime", mmedlity."editor" AS "media.lists.type.editor",
 							mmedlity."ctime" AS "media.lists.type.ctime", mmedlity."pos" AS "media.lists.type.position"
-						FROM "mshop_media_list_type" AS mmedlity
+						FROM "mshop_media_list_type" mmedlity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -56,7 +56,7 @@ return array(
 							mmedlity."label" AS "media.lists.type.label", mmedlity."status" AS "media.lists.type.status",
 							mmedlity."mtime" AS "media.lists.type.mtime", mmedlity."editor" AS "media.lists.type.editor",
 							mmedlity."ctime" AS "media.lists.type.ctime", mmedlity."pos" AS "media.lists.type.position"
-						FROM "mshop_media_list_type" AS mmedlity
+						FROM "mshop_media_list_type" mmedlity
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -68,7 +68,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM(
 							SELECT mmedlity."id"
-							FROM "mshop_media_list_type" AS mmedlity
+							FROM "mshop_media_list_type" mmedlity
 							:joins
 							WHERE :cond
 							ORDER BY mmedlity."id"
@@ -79,7 +79,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM(
 							SELECT mmedlity."id"
-							FROM "mshop_media_list_type" AS mmedlity
+							FROM "mshop_media_list_type" mmedlity
 							:joins
 							WHERE :cond
 							ORDER BY mmedlity."id"
@@ -102,7 +102,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_media_list" AS mmedli
+						FROM "mshop_media_list" mmedli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mmedli."id"
@@ -115,7 +115,7 @@ return array(
 					SELECT :keys, :type("val") AS "value"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "mshop_media_list" AS mmedli
+						FROM "mshop_media_list" mmedli
 						:joins
 						WHERE :cond
 						GROUP BY :cols, mmedli."id"
@@ -160,7 +160,7 @@ return array(
 						mmedli."config" AS "media.lists.config", mmedli."pos" AS "media.lists.position",
 						mmedli."status" AS "media.lists.status", mmedli."mtime" AS "media.lists.mtime",
 						mmedli."editor" AS "media.lists.editor", mmedli."ctime" AS "media.lists.ctime"
-					FROM "mshop_media_list" AS mmedli
+					FROM "mshop_media_list" mmedli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -175,7 +175,7 @@ return array(
 						mmedli."config" AS "media.lists.config", mmedli."pos" AS "media.lists.position",
 						mmedli."status" AS "media.lists.status", mmedli."mtime" AS "media.lists.mtime",
 						mmedli."editor" AS "media.lists.editor", mmedli."ctime" AS "media.lists.ctime"
-					FROM "mshop_media_list" AS mmedli
+					FROM "mshop_media_list" mmedli
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -187,7 +187,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM(
 						SELECT mmedli."id"
-						FROM "mshop_media_list" AS mmedli
+						FROM "mshop_media_list" mmedli
 						:joins
 						WHERE :cond
 						ORDER BY mmedli."id"
@@ -198,7 +198,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM(
 						SELECT mmedli."id"
-						FROM "mshop_media_list" AS mmedli
+						FROM "mshop_media_list" mmedli
 						:joins
 						WHERE :cond
 						ORDER BY mmedli."id"
@@ -338,7 +338,7 @@ return array(
 						mmedpr."langid" AS "media.property.languageid", mmedpr."value" AS "media.property.value",
 						mmedpr."mtime" AS "media.property.mtime", mmedpr."editor" AS "media.property.editor",
 						mmedpr."ctime" AS "media.property.ctime"
-					FROM "mshop_media_property" AS mmedpr
+					FROM "mshop_media_property" mmedpr
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -351,7 +351,7 @@ return array(
 						mmedpr."langid" AS "media.property.languageid", mmedpr."value" AS "media.property.value",
 						mmedpr."mtime" AS "media.property.mtime", mmedpr."editor" AS "media.property.editor",
 						mmedpr."ctime" AS "media.property.ctime"
-					FROM "mshop_media_property" AS mmedpr
+					FROM "mshop_media_property" mmedpr
 					:joins
 					WHERE :cond
 					ORDER BY :order
@@ -363,7 +363,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mmedpr."id"
-						FROM "mshop_media_property" AS mmedpr
+						FROM "mshop_media_property" mmedpr
 						:joins
 						WHERE :cond
 						ORDER BY mmedpr."id"
@@ -374,7 +374,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mmedpr."id"
-						FROM "mshop_media_property" AS mmedpr
+						FROM "mshop_media_property" mmedpr
 						:joins
 						WHERE :cond
 						ORDER BY mmedpr."id"
@@ -515,7 +515,7 @@ return array(
 					mmed."domain" AS "media.domain", mmed."preview" AS "media.previews",
 					mmed."fsname" AS "media.filesystem", mmed."mtime" AS "media.mtime",
 					mmed."ctime" AS "media.ctime", mmed."editor" AS "media.editor"
-				FROM "mshop_media" AS mmed
+				FROM "mshop_media" mmed
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
@@ -534,7 +534,7 @@ return array(
 					mmed."domain" AS "media.domain", mmed."preview" AS "media.previews",
 					mmed."fsname" AS "media.filesystem", mmed."mtime" AS "media.mtime",
 					mmed."ctime" AS "media.ctime", mmed."editor" AS "media.editor"
-				FROM "mshop_media" AS mmed
+				FROM "mshop_media" mmed
 				:joins
 				WHERE :cond
 				GROUP BY :group mmed."id"
@@ -547,7 +547,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mmed."id"
-					FROM "mshop_media" AS mmed
+					FROM "mshop_media" mmed
 					:joins
 					WHERE :cond
 					GROUP BY mmed."id"
@@ -559,7 +559,7 @@ return array(
 				SELECT COUNT(*) AS "count"
 				FROM (
 					SELECT mmed."id"
-					FROM "mshop_media" AS mmed
+					FROM "mshop_media" mmed
 					:joins
 					WHERE :cond
 					GROUP BY mmed."id"
