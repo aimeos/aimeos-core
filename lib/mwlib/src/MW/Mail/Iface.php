@@ -26,8 +26,7 @@ interface Iface
 	 * @param string $charset Default charset of the message
 	 * @return \Aimeos\MW\Mail\Message\Iface E-mail message object
 	 */
-	public function createMessage( string $charset = 'UTF-8' ) : \Aimeos\MW\Mail\Message\Iface;
-
+	public function create( string $charset = 'UTF-8' ) : \Aimeos\MW\Mail\Message\Iface;
 
 	/**
 	 * Sends the e-mail message to the mail server.

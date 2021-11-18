@@ -21,31 +21,15 @@ namespace Aimeos\MW\Mail\Message;
 interface Iface
 {
 	/**
-	 * Adds a source e-mail address of the message.
+	 * Adds an attachment to the message.
 	 *
-	 * @param string $email Source e-mail address
-	 * @param string|null $name Name of the user sending the e-mail or null for no name
+	 * @param string $data Binary or string @author nose
+	 * @param string $mimetype Mime type of the attachment (e.g. "text/plain", "application/octet-stream", etc.)
+	 * @param string|null $filename Name of the attached file (or null if inline disposition is used)
+	 * @param string $disposition Type of the disposition ("attachment" or "inline")
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addFrom( string $email, string $name = null ) : Iface;
-
-	/**
-	 * Adds a destination e-mail address of the target user mailbox.
-	 *
-	 * @param string $email Destination address of the target mailbox
-	 * @param string|null $name Name of the user owning the target mailbox or null for no name
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
-	 */
-	public function addTo( string $email, string $name = null ) : Iface;
-
-	/**
-	 * Adds a destination e-mail address for a copy of the message.
-	 *
-	 * @param string $email Destination address for a copy
-	 * @param string|null $name Name of the user owning the target mailbox or null for no name
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
-	 */
-	public function addCc( string $email, string $name = null ) : Iface;
+	public function attach( string $data, string $mimetype, string $filename, string $disposition = 'attachment' ) : Iface;
 
 	/**
 	 * Adds a destination e-mail address for a hidden copy of the message.
@@ -54,16 +38,35 @@ interface Iface
 	 * @param string|null $name Name of the user owning the target mailbox or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addBcc( string $email, string $name = null ) : Iface;
+	public function bcc( string $email, string $name = null ) : Iface;
 
 	/**
-	 * Adds the return e-mail address for the message.
+	 * Adds a destination e-mail address for a copy of the message.
 	 *
-	 * @param string $email E-mail address which should receive all replies
-	 * @param string|null $name Name of the user which should receive all replies or null for no name
+	 * @param string $email Destination address for a copy
+	 * @param string|null $name Name of the user owning the target mailbox or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addReplyTo( string $email, string $name = null ) : Iface;
+	public function cc( string $email, string $name = null ) : Iface;
+
+	/**
+	 * Embeds an attachment into the message and returns its reference.
+	 *
+	 * @param string $data Binary or string
+	 * @param string $mimetype Mime type of the attachment (e.g. "text/plain", "application/octet-stream", etc.)
+	 * @param string|null $filename Name of the attached file
+	 * @return string Content ID for referencing the attachment in the HTML body
+	 */
+	public function embed( string $data, string $mimetype, string $filename ) : string;
+
+	/**
+	 * Adds a source e-mail address of the message.
+	 *
+	 * @param string $email Source e-mail address
+	 * @param string|null $name Name of the user sending the e-mail or null for no name
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 */
+	public function from( string $email, string $name = null ) : Iface;
 
 	/**
 	 * Adds a custom header to the message.
@@ -72,7 +75,24 @@ interface Iface
 	 * @param string $value Text content of the custom e-mail header
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function addHeader( string $name, string $value ) : Iface;
+	public function header( string $name, string $value ) : Iface;
+
+	/**
+	 * Sets the HTML body of the message.
+	 *
+	 * @param string $message HTML body of the message
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 */
+	public function html( string $message ) : Iface;
+
+	/**
+	 * Adds the return e-mail address for the message.
+	 *
+	 * @param string $email E-mail address which should receive all replies
+	 * @param string|null $name Name of the user which should receive all replies or null for no name
+	 * @return \Aimeos\MW\Mail\Message\Iface Message object
+	 */
+	public function replyTo( string $email, string $name = null ) : Iface;
 
 	/**
 	 * Sends the e-mail message to the mail server.
@@ -88,7 +108,7 @@ interface Iface
 	 * @param string|null $name Name of the user who sent the message or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function setSender( string $email, string $name = null ) : Iface;
+	public function sender( string $email, string $name = null ) : Iface;
 
 	/**
 	 * Sets the subject of the message.
@@ -96,7 +116,7 @@ interface Iface
 	 * @param string $subject Subject of the message
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function setSubject( string $subject ) : Iface;
+	public function subject( string $subject ) : Iface;
 
 	/**
 	 * Sets the text body of the message.
@@ -104,34 +124,14 @@ interface Iface
 	 * @param string $message Text body of the message
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function setBody( string $message ) : Iface;
+	public function text( string $message ) : Iface;
 
 	/**
-	 * Sets the HTML body of the message.
+	 * Adds a destination e-mail address of the target user mailbox.
 	 *
-	 * @param string $message HTML body of the message
+	 * @param string $email Destination address of the target mailbox
+	 * @param string|null $name Name of the user owning the target mailbox or null for no name
 	 * @return \Aimeos\MW\Mail\Message\Iface Message object
 	 */
-	public function setBodyHtml( string $message ) : Iface;
-
-	/**
-	 * Adds an attachment to the message.
-	 *
-	 * @param string $data Binary or string @author nose
-	 * @param string $mimetype Mime type of the attachment (e.g. "text/plain", "application/octet-stream", etc.)
-	 * @param string|null $filename Name of the attached file (or null if inline disposition is used)
-	 * @param string $disposition Type of the disposition ("attachment" or "inline")
-	 * @return \Aimeos\MW\Mail\Message\Iface Message object
-	 */
-	public function addAttachment( string $data, string $mimetype, string $filename, string $disposition = 'attachment' ) : Iface;
-
-	/**
-	 * Embeds an attachment into the message and returns its reference.
-	 *
-	 * @param string $data Binary or string
-	 * @param string $mimetype Mime type of the attachment (e.g. "text/plain", "application/octet-stream", etc.)
-	 * @param string|null $filename Name of the attached file
-	 * @return string Content ID for referencing the attachment in the HTML body
-	 */
-	public function embedAttachment( string $data, string $mimetype, string $filename ) : string;
+	public function to( string $email, string $name = null ) : Iface;
 }

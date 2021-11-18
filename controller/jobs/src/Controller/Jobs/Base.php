@@ -137,10 +137,10 @@ abstract class Base
 			return $this;
 		}
 
-		$message = $this->context->getMail()->createMessage();
+		$message = $this->context->mail()->create();
 
 		foreach( (array) $to as $addr ) {
-			$message->addTo( $addr, $name );
+			$message->to( $addr, $name );
 		}
 
 		/** controller/jobs/from-email
@@ -156,10 +156,10 @@ abstract class Base
 		 * @see controller/jobs/to-email
 		 */
 		if( $from = $config->get( 'controller/jobs/from-email', $email ) ) {
-			$message->addFrom( $from, $name );
+			$message->from( $from, $name );
 		}
 
-		$message->setSubject( $subject )->setBody( $body )->send();
+		$message->subject( $subject )->text( $body )->send();
 
 		return $this;
 	}

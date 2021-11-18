@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$view = new \Aimeos\MW\View\Standard();
 
 		$mail = new \Aimeos\MW\Mail\None();
-		$this->message = $mail->createMessage();
+		$this->message = $mail->create();
 
 		$this->object = new \Aimeos\MW\View\Helper\Mail\Standard( $view, $this->message );
 	}

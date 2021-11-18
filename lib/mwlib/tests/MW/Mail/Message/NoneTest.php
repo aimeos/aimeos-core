@@ -25,39 +25,39 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAddFrom()
+	public function testFrom()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->addFrom( 'test@example.com' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->from( 'test@example.com' ) );
 	}
 
 
-	public function testAddTo()
+	public function testTo()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->addTo( 'test@example.com' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->to( 'test@example.com' ) );
 	}
 
 
-	public function testAddCc()
+	public function testCc()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->addCc( 'test@example.com' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->cc( 'test@example.com' ) );
 	}
 
 
-	public function testAddBcc()
+	public function testBcc()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->addBcc( 'test@example.com' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->bcc( 'test@example.com' ) );
 	}
 
 
-	public function testAddReplyTo()
+	public function testReplyTo()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->addReplyTo( 'test@example.com' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->replyTo( 'test@example.com' ) );
 	}
 
 
-	public function testAddHeader()
+	public function testHeader()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->addHeader( 'X-Generator', 'Aimeos' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->header( 'X-Generator', 'Aimeos' ) );
 	}
 
 
@@ -67,38 +67,38 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSetSender()
+	public function testSender()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->setSender( 'test@example.com' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->sender( 'test@example.com' ) );
 	}
 
 
-	public function testSetSubject()
+	public function testSubject()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->setSubject( 'test' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->subject( 'test' ) );
 	}
 
 
-	public function testSetBody()
+	public function testText()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->setBody( 'test' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->text( 'test' ) );
 	}
 
 
-	public function testSetBodyHtml()
+	public function testHtml()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->setBodyHtml( 'test' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->html( 'test' ) );
 	}
 
 
-	public function testAddAttachment()
+	public function testAttach()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->addAttachment( 'test', 'mime', 'file' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->attach( 'test', 'mime', 'file' ) );
 	}
 
 
-	public function testEmbedAttachment()
+	public function testEmbed()
 	{
-		$this->assertEquals( '', $this->object->embedAttachment( 'test', 'mime', 'file' ) );
+		$this->assertEquals( '', $this->object->embed( 'test', 'mime', 'file' ) );
 	}
 }

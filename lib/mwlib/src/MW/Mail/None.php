@@ -26,7 +26,7 @@ class None implements \Aimeos\MW\Mail\Iface
 	 * @param string $charset Default charset of the message
 	 * @return \Aimeos\MW\Mail\Message\Iface E-mail message object
 	 */
-	public function createMessage( string $charset = 'UTF-8' ) : \Aimeos\MW\Mail\Message\Iface
+	public function create( string $charset = 'UTF-8' ) : \Aimeos\MW\Mail\Message\Iface
 	{
 		return new \Aimeos\MW\Mail\Message\None();
 	}
