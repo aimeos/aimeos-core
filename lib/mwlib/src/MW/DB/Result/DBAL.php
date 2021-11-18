@@ -53,7 +53,7 @@ class DBAL extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifa
 		try {
 			return $this->result->rowCount();
 		} catch( \Doctrine\DBAL\Driver\Exception $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
+			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
 		}
 	}
 
@@ -77,7 +77,7 @@ class DBAL extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifa
 		}
 		catch( \Doctrine\DBAL\Driver\Exception $e )
 		{
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
+			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
 		}
 	}
 
@@ -93,7 +93,7 @@ class DBAL extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifa
 		try {
 			$this->result->free();
 		} catch( \Doctrine\DBAL\Driver\Exception $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
+			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
 		}
 
 		return $this;
