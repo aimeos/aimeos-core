@@ -21,6 +21,27 @@ class Supplier
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
 	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
+	private $beConfig = array(
+		'supplier.addressformat' => array(
+			'code' => 'supplier.addressformat',
+			'internalcode' => 'supplier.addressformat',
+			'label' => 'Change supplier address format.',
+			'type' => 'text',
+			'internaltype' => 'text',
+			'default' => '%1$s
+%2$s
+%3$s %4$s
+%5$s
+%6$s %7$s
+%8$s %9$s
+%10$s
+%11$s
+%12$s
+%13$s',
+			'required' => false,
+		),
+	);
+
 	private $feConfig = array(
 		'supplier.code' => array(
 			'code' => 'supplier.code',
@@ -64,12 +85,11 @@ class Supplier
 			{
 				$addrId = ( count( $addresses ) > 1 ) ? $item->getCode() . '-' . $id : $item->getCode();
 
-				$this->feConfig['supplier.code']['default'][$addrId] = trim( preg_replace( "/\n+/m", "\n", sprintf(
-					/// Supplier address format with label (%1$s), company (%2$s),
-					/// address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
-					/// postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-					/// e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
-					$context->getI18n()->dt( 'mshop', '%1$s
+				/// Supplier address format with label (%1$s), company (%2$s),
+				/// address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+				/// postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+				/// e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+				$format = $this->getConfigValue( 'supplier.addressformat', '%1$s
 %2$s
 %3$s %4$s
 %5$s
@@ -79,7 +99,10 @@ class Supplier
 %11$s
 %12$s
 %13$s'
-					),
+				);
+
+				$this->feConfig['supplier.code']['default'][$addrId] = trim( preg_replace( "/\n+/m", "\n", sprintf(
+					$context->getI18n()->dt( 'mshop', $format ),
 					$item->getLabel(),
 					$addr->getCompany(),
 					$addr->getAddress1(),
@@ -95,30 +118,36 @@ class Supplier
 					$addr->getWebsite()
 				) ) );
 
-				$this->feConfig['supplier.code']['short'][$addrId] = trim( preg_replace( "/\n+/m", "\n", sprintf(
-					/// Supplier address format with label (%1$s), company (%2$s),
-					/// address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
-					/// postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-					/// e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
-					$context->getI18n()->dt( 'mshop', '%1$s, %2$s, %3$s %4$s, %6$s %7$s' ),
-					$item->getLabel(),
-					$addr->getCompany(),
-					$addr->getAddress1(),
-					$addr->getAddress2(),
-					$addr->getAddress3(),
-					$addr->getPostal(),
-					$addr->getCity(),
-					$addr->getState(),
-					$addr->getCountryId(),
-					$addr->getEmail(),
-					$addr->getTelephone(),
-					$addr->getTelefax(),
-					$addr->getWebsite()
-				) ) );
 			}
 		}
 	}
 
+	/**
+	 * Checks the backend configuration attributes for validity.
+	 *
+	 * @param array $attributes Attributes added by the shop owner in the administraton interface
+	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
+	 *  known by the provider but aren't valid
+	 */
+	public function checkConfigBE( array $attributes ) : array
+	{
+		$error = $this->getProvider()->checkConfigBE( $attributes );
+		$error += $this->checkConfig( $this->beConfig, $attributes );
+
+		return $error;
+	}
+
+
+	/**
+	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
+	 * rules for the value of each field in the administration interface.
+	 *
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
+	 */
+	public function getConfigBE() : array
+	{
+		return array_merge( $this->getProvider()->getConfigBE(), $this->getConfigItems( $this->beConfig ) );
+	}
 
 	/**
 	 * Checks the frontend configuration attributes for validity.
@@ -179,7 +208,7 @@ class Supplier
 		if( ( $code = $attributes['supplier.code'] ) != '' )
 		{
 			// add short address as attribute for summary page / customer email
-			$attributes['supplier.address'] = $this->feConfig['supplier.code']['short'][$code];
+			$attributes['supplier.address'] = $this->feConfig['supplier.code']['default'][$code];
 
 			// remove code attribute for summary page / customer email
 			$this->setAttributes( $orderServiceItem, ['supplier.code' => $attributes['supplier.code']], 'hidden' );
