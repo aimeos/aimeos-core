@@ -70,45 +70,11 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	public function execute() : \Aimeos\MW\DB\Result\Iface
 	{
 		try {
-			$result = $this->exec();
-		} catch( \PDOException $e ) {
+			$result = $this->getConnection()->getRawObject()->getWrappedConnection()->query( $this->sql );
+		} catch( \Doctrine\DBAL\Driver\Exception $e ) {
 			throw new \Aimeos\MW\DB\Exception( $e->getMessage() . ': ' . $this->sql, $e->getCode() );
 		}
 
-		return new \Aimeos\MW\DB\Result\PDO( $result );
-	}
-
-
-	/**
-	 * Binds the parameters and executes the SQL statment
-	 *
-	 * @return \PDOStatement Executed DBAL statement
-	 */
-	protected function exec() : \PDOStatement
-	{
-		$level = error_reporting(); // Workaround for PDO warnings
-		$conn = $this->getConnection();
-
-		try
-		{
-			error_reporting( $level & ~E_WARNING );
-			$result = $conn->getRawObject()->getWrappedConnection()->query( $this->sql );
-		}
-		catch( \Exception $e )
-		{
-			error_reporting( $level );
-
-			// recover from lost connection (MySQL)
-			if( !isset( $e->errorInfo[1] ) || $e->errorInfo[1] != 2006 || $conn->inTransaction() === true ) {
-				throw $e;
-			}
-
-			$conn->connect();
-			return $this->exec();
-		}
-
-		error_reporting( $level );
-
-		return $result;
+		return new \Aimeos\MW\DB\Result\DBAL( $result );
 	}
 }

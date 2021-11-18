@@ -72,44 +72,70 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 	public function execute() : \Aimeos\MW\DB\Result\Iface
 	{
 		try {
-			$stmt = $this->exec();
-		} catch( \PDOException $e ) {
+			$result = $this->exec();
+		} catch( \Doctrine\DBAL\Driver\Exception $e ) {
 			throw new \Aimeos\MW\DB\Exception( $e->getMessage() . ': ' . $this->sql . map( $this->binds )->col( 0 )->toJson(), $e->getCode() );
 		}
 
-		return new \Aimeos\MW\DB\Result\PDO( $stmt );
+		return new \Aimeos\MW\DB\Result\DBAL( $result );
 	}
 
 
 	/**
 	 * Binds the parameters and executes the SQL statment
 	 *
-	 * @return \PDOStatement Executed DBAL statement
+	 * @return \Doctrine\DBAL\Driver\Statement|\Doctrine\DBAL\Driver\Result DBAL statement or result object
 	 */
-	protected function exec() : \PDOStatement
+	protected function exec()
 	{
-		$conn = $this->getConnection();
-		$stmt = $conn->getRawObject()->getWrappedConnection()->prepare( $this->sql );
+		$stmt = $this->getConnection()->getRawObject()->getWrappedConnection()->prepare( $this->sql );
 
 		foreach( $this->binds as $position => $list ) {
-			$stmt->bindValue( $position, $list[0], $this->getPdoType( $list[1], $list[0] ) );
+			$stmt->bindValue( $position, $list[0], $this->getDbalType( $list[1], $list[0] ) );
 		}
 
-		try
-		{
-			$stmt->execute();
-		}
-		catch( \Exception $e )
-		{
-			// recover from lost connection (MySQL)
-			if( !isset( $e->errorInfo[1] ) || $e->errorInfo[1] != 2006 || $conn->inTransaction() === true ) {
-				throw $e;
-			}
+		$result = $stmt->execute();
 
-			$conn->connect();
-			return $this->exec();
+		if( $result instanceof \Doctrine\DBAL\Driver\Result ) {
+			return $result;
 		}
 
 		return $stmt;
+	}
+
+
+	/**
+	 * Returns the PDO type mapped to the Aimeos type
+	 *
+	 * @param integer $type Type of given value defined in \Aimeos\MW\DB\Statement\Base as constant
+	 * @param mixed $value Value which should be bound to the placeholder
+	 * @return integer PDO parameter type constant
+	 * @throws \Aimeos\MW\DB\Exception If the type is unknown
+	 */
+	protected function getDbalType( int $type, $value ) : int
+	{
+		switch( $type )
+		{
+			case \Aimeos\MW\DB\Statement\Base::PARAM_NULL:
+				$dbaltype = \Doctrine\DBAL\ParameterType::NULL; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
+				$dbaltype = \Doctrine\DBAL\ParameterType::BOOLEAN; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
+				$dbaltype = \Doctrine\DBAL\ParameterType::INTEGER; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
+				$dbaltype = \Doctrine\DBAL\ParameterType::STRING; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
+				$dbaltype = \Doctrine\DBAL\ParameterType::STRING; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_LOB:
+				$dbaltype = \Doctrine\DBAL\ParameterType::LARGE_OBJECT; break;
+			default:
+				throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid parameter type "%1$s"', $type ) );
+		}
+
+		if( is_null( $value ) ) {
+			$dbaltype = \Doctrine\DBAL\ParameterType::NULL;
+		}
+
+		return $dbaltype;
 	}
 }

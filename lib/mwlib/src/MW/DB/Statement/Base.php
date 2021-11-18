@@ -74,40 +74,4 @@ abstract class Base
 	{
 		return $this->conn;
 	}
-
-
-	/**
-	 * Returns the PDO type mapped to the Aimeos type
-	 *
-	 * @param integer $type Type of given value defined in \Aimeos\MW\DB\Statement\Base as constant
-	 * @param mixed $value Value which should be bound to the placeholder
-	 * @return integer PDO parameter type constant
-	 * @throws \Aimeos\MW\DB\Exception If the type is unknown
-	 */
-	protected function getPdoType( int $type, $value ) : int
-	{
-		switch( $type )
-		{
-			case \Aimeos\MW\DB\Statement\Base::PARAM_NULL:
-				$pdotype = \PDO::PARAM_NULL; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
-				$pdotype = \PDO::PARAM_BOOL; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
-				$pdotype = \PDO::PARAM_INT; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
-				$pdotype = \PDO::PARAM_STR; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
-				$pdotype = \PDO::PARAM_STR; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_LOB:
-				$pdotype = \PDO::PARAM_LOB; break;
-			default:
-				throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid parameter type "%1$s"', $type ) );
-		}
-
-		if( is_null( $value ) ) {
-			$pdotype = \PDO::PARAM_NULL;
-		}
-
-		return $pdotype;
-	}
 }
