@@ -1,4 +1,4 @@
-$context->translate( 'country' , $addr->getCountryId() ),<?php
+<?php
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
