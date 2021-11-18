@@ -16,7 +16,7 @@ return array(
 			$table->datetime( 'expire' )->null( true );
 			$table->text( 'value', 0x1ffff );
 
-			$table->index( ['expire'], 'idx_majob_expire' );
+			$table->index( ['expire'], 'idx_macac_expire' );
 		},
 
 		'madmin_cache_tag' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -27,7 +27,7 @@ return array(
 			$table->string( 'tname' );
 
 			$table->unique( ['tid', 'tname'], 'unq_macacta_tid_tname' );
-			$table->index( ['tid'], 'fk_macac_tid' );
+			$table->index( ['tid'], 'fk_macacta_tid' );
 
 			$table->foreign( 'tid', 'madmin_cache', 'id', 'fk_macacta_tid' );
 		},
