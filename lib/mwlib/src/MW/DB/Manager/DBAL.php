@@ -156,7 +156,7 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 		switch( $adapter )
 		{
 			case 'mysql': $params['driver'] = 'pdo_mysql'; break;
-			case 'oracle': $params['driver'] = 'oci8'; break;
+			case 'oracle': $params['driver'] = 'pdo_oci'; break;
 			case 'pgsql': $params['driver'] = 'pdo_pgsql'; break;
 			case 'sqlite': $params['driver'] = 'pdo_sqlite'; break;
 			case 'sqlsrv': $params['driver'] = 'pdo_sqlsrv'; break;

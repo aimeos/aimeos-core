@@ -69,7 +69,7 @@ class Setup
 	 */
 	public function up( string $site = 'default', string $template = 'default' )
 	{
-		$ctx = $this->context ?? $this->createContext();
+		$ctx = ( $this->context ?? $this->createContext() )->setEditor( 'setup' );
 
 		\Aimeos\Upscheme\Task\Base::macro( 'context', function() use ( $ctx ) {
 			return $ctx;
@@ -204,6 +204,7 @@ class Setup
 			switch( $cfg['adapter'] )
 			{
 				case 'mysql': $cfg['driver'] = 'pdo_mysql'; break;
+				case 'oracle': $cfg['driver'] = 'pdo_oci'; break;
 				case 'pgsql': $cfg['driver'] = 'pdo_pgsql'; break;
 				case 'sqlsrv': $cfg['driver'] = 'pdo_sqlsrv'; break;
 				default: $cfg['driver'] = $cfg['adapter'];
