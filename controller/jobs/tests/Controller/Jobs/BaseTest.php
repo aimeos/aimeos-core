@@ -31,9 +31,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetValue()
+	public function testVal()
 	{
-		$method = $this->access( 'getValue' );
+		$method = $this->access( 'val' );
 
 		$this->assertEquals( 'value', $method->invokeArgs( $this->object, [['key' => ' value '], 'key', 'def'] ) );
 		$this->assertEquals( 'def', $method->invokeArgs( $this->object, [['key' => ' '], 'key', 'def'] ) );
