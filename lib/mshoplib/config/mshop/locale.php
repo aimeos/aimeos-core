@@ -295,9 +295,9 @@ return array(
 			'ansi' => '
 				INSERT INTO "mshop_locale" ( :names
 					"langid", "currencyid", "pos", "status",
-					"mtime", "editor", "siteid", "ctime"
+					"mtime", "editor", "site_id", "siteid", "ctime"
 				) VALUES ( :values
-					?, ?, ?, ?, ?, ?, ?, ?
+					?, ?, ?, ?, ?, ?, ?, ?, ?
 				)
 			'
 		),
@@ -306,20 +306,20 @@ return array(
 				UPDATE "mshop_locale"
 				SET :names
 					"langid" = ?, "currencyid" = ?, "pos" = ?,
-					"status" = ?, "mtime" = ?, "editor" = ?
+					"status" = ?, "mtime" = ?, "editor" = ?, "site_id" = ?
 				WHERE "siteid" = ? AND "id" = ?
 			'
 		),
 		'search' => array(
 			'ansi' => '
 				SELECT :columns
-					mloc."id" AS "locale.id", mloc."siteid" AS "locale.siteid",
+					mloc."id" AS "locale.id", mloc."siteid" AS "locale.siteid", mloc."site_id",
 					mloc."langid" AS "locale.languageid", mloc."currencyid" AS "locale.currencyid",
 					mloc."pos" AS "locale.position", mloc."status" AS "locale.status",
 					mloc."mtime" AS "locale.mtime", mloc."editor" AS "locale.editor",
 					mloc."ctime" AS "locale.ctime"
 				FROM "mshop_locale" mloc
-				LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."siteid" = mlocsi."siteid")
+				LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."site_id" = mlocsi."id")
 				LEFT JOIN "mshop_locale_language" mlocla ON (mloc."langid" = mlocla."id")
 				LEFT JOIN "mshop_locale_currency" mloccu ON (mloc."currencyid" = mloccu."id")
 				WHERE :cond
@@ -331,13 +331,13 @@ return array(
 			',
 			'mysql' => '
 				SELECT :columns
-					mloc."id" AS "locale.id", mloc."siteid" AS "locale.siteid",
+					mloc."id" AS "locale.id", mloc."siteid" AS "locale.siteid", mloc."site_id",
 					mloc."langid" AS "locale.languageid", mloc."currencyid" AS "locale.currencyid",
 					mloc."pos" AS "locale.position", mloc."status" AS "locale.status",
 					mloc."mtime" AS "locale.mtime", mloc."editor" AS "locale.editor",
 					mloc."ctime" AS "locale.ctime"
 				FROM "mshop_locale" mloc
-				LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."siteid" = mlocsi."siteid")
+				LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."site_id" = mlocsi."id")
 				LEFT JOIN "mshop_locale_language" mlocla ON (mloc."langid" = mlocla."id")
 				LEFT JOIN "mshop_locale_currency" mloccu ON (mloc."currencyid" = mloccu."id")
 				WHERE :cond
@@ -352,7 +352,7 @@ return array(
 				FROM (
 					SELECT mloc."id"
 					FROM "mshop_locale" mloc
-					LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."siteid" = mlocsi."siteid")
+					LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."site_id" = mlocsi."id")
 					LEFT JOIN "mshop_locale_language" mlocla ON (mloc."langid" = mlocla."id")
 					LEFT JOIN "mshop_locale_currency" mloccu ON (mloc."currencyid" = mloccu."id")
 					WHERE :cond
@@ -366,7 +366,7 @@ return array(
 				FROM (
 					SELECT mloc."id"
 					FROM "mshop_locale" mloc
-					LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."siteid" = mlocsi."siteid")
+					LEFT JOIN "mshop_locale_site" mlocsi ON (mloc."site_id" = mlocsi."id")
 					LEFT JOIN "mshop_locale_language" mlocla ON (mloc."langid" = mlocla."id")
 					LEFT JOIN "mshop_locale_currency" mloccu ON (mloc."currencyid" = mloccu."id")
 					WHERE :cond

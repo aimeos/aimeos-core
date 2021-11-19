@@ -69,6 +69,7 @@ class MShopAddLocaleData extends Base
 		try
 		{
 			$localeItem = $localeManager->create();
+			$localeItem->set( 'site_id', $siteItem->getId() );
 			$localeItem->setSiteId( $siteItem->getSiteId() );
 			$localeItem->setLanguageId( 'en' );
 			$localeItem->setCurrencyId( 'EUR' );
@@ -112,7 +113,7 @@ class MShopAddLocaleData extends Base
 				$siteItem->setIcon( $dataset['icon'] ?? '' );
 
 				$localeSiteManager->insert( $siteItem, $parentId );
-				$siteIds[$key] = $siteItem->getSiteId();
+				$siteIds[$key] = ['id' => $siteItem->getId(), 'site' => $siteItem->getSiteId()];
 			}
 			catch( \Aimeos\MW\DB\Exception $e )
 			{
@@ -124,7 +125,7 @@ class MShopAddLocaleData extends Base
 					throw new \RuntimeException( sprintf( 'No site for code "%1$s" available', $dataset['code'] ) );
 				}
 
-				$siteIds[$key] = $item->getSiteId();
+				$siteIds[$key] = ['id' => $item->getId(), 'site' => $item->getSiteId()];
 			}
 		}
 
@@ -211,7 +212,8 @@ class MShopAddLocaleData extends Base
 			}
 
 			$localeItem->setId( null );
-			$localeItem->setSiteId( $siteIds[$dataset['siteid']] );
+			$localeItem->set( 'site_id', $siteIds[$dataset['siteid']]['id'] );
+			$localeItem->setSiteId( $siteIds[$dataset['siteid']]['site'] );
 			$localeItem->setLanguageId( $dataset['langid'] );
 			$localeItem->setCurrencyId( $dataset['currencyid'] );
 			$localeItem->setPosition( $dataset['pos'] );
@@ -219,7 +221,7 @@ class MShopAddLocaleData extends Base
 
 			try {
 				$localeItemManager->save( $localeItem );
-			} catch( \Aimeos\MW\DB\Exception $e ) {; } // if locale combination was already available
+			} catch( \Aimeos\MW\DB\Exception $e ) { ; } // if locale combination was already available
 		}
 	}
 }

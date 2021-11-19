@@ -40,8 +40,8 @@ return array(
 			$table->engine = 'InnoDB';
 
 			$table->id()->primary( 'pk_mslocsi_id' );
-			$table->string( 'siteid' )->default( '' )->opt( 'unique', true, 'mssql' );
 			$table->int( 'parentid' )->null( true );
+			$table->string( 'siteid' )->default( '' );
 			$table->code()->length( 255 )->default( '' );
 			$table->string( 'label' )->default( '' );
 			$table->string( 'icon' )->default( '' );
@@ -67,6 +67,7 @@ return array(
 			$table->engine = 'InnoDB';
 
 			$table->id()->primary( 'pk_msloc_id' );
+			$table->int( 'site_id' );
 			$table->string( 'siteid' );
 			$table->string( 'langid', 5 );
 			$table->string( 'currencyid', 3 );
@@ -74,15 +75,15 @@ return array(
 			$table->smallint( 'status' )->default( 1 );
 			$table->meta();
 
-			$table->unique( ['siteid', 'langid', 'currencyid'], 'unq_msloc_sid_lang_curr' );
-			$table->index( ['siteid', 'currencyid'], 'idx_msloc_sid_curid' );
-			$table->index( ['siteid', 'status'], 'idx_msloc_sid_status' );
-			$table->index( ['siteid', 'pos'], 'idx_msloc_sid_pos' );
-			$table->index( ['siteid'], 'fk_msloc_siteid' );
+			$table->unique( ['site_id', 'langid', 'currencyid'], 'unq_msloc_sid_lang_curr' );
+			$table->index( ['site_id', 'currencyid'], 'idx_msloc_sid_curid' );
+			$table->index( ['site_id', 'status'], 'idx_msloc_sid_status' );
+			$table->index( ['site_id', 'pos'], 'idx_msloc_sid_pos' );
+			$table->index( ['site_id'], 'fk_msloc_siteid' );
 			$table->index( ['langid'], 'fk_msloc_langid' );
 			$table->index( ['currencyid'], 'fk_msloc_currid' );
 
-			$table->foreign( 'siteid', 'mshop_locale_site', 'siteid', 'fk_msloc_siteid' );
+			$table->foreign( 'site_id', 'mshop_locale_site', 'id', 'fk_msloc_siteid' );
 			$table->foreign( 'langid', 'mshop_locale_language', 'id', 'fk_msloc_langid' );
 			$table->foreign( 'currencyid', 'mshop_locale_currency', 'id', 'fk_msloc_currid' );
 		},

@@ -128,7 +128,7 @@ class LocaleAddTestData extends MShopAddLocaleData
 
 		foreach( array_reverse( $sites ) as $site )
 		{
-			$this->context()->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
+			$this->context()->setLocale( $localeManager->create()->setSiteId( $site->getSiteId() ) );
 			$localeSiteManager->delete( $site->getId() );
 		}
 	}
