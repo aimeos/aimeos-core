@@ -525,7 +525,7 @@ class Standard
 	 * Returns the relative path to the mime icon for the given mime type.
 	 *
 	 * @param string $mimetype Mime type like "image/png"
-	 * @param string File system name the icon should be stored at
+	 * @param string $fsname File system name the icon should be stored at
 	 * @return string Relative path to the mime icon
 	 */
 	protected function getMimeIcon( string $mimetype, string $fsname ) : string
@@ -551,7 +551,7 @@ class Standard
 		$filename = ( $fsmime->has( $mimetype . $ext ) ? $mimetype : 'unknown' ) . $ext;
 
 		$filepath = $this->getFilePath( $filename, 'preview', ltrim( $ext, '.' ) );
-		$fs = $this->context->fs( $fsname )->write( $filepath, $fsmime->read( $filename ) );
+		$this->context->fs( $fsname )->write( $filepath, $fsmime->read( $filename ) );
 
 		return $filepath;
 	}
