@@ -71,9 +71,9 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	/**
 	 * Returns the type internally used by the manager.
 	 *
-	 * @re  turn mixed Type used by the manager
+	 * @return string Type used by the manager
 	 */
-	public function getInternalType()
+	public function getInternalType() : string
 	{
 		return array_key_exists( 'internaltype', $this->values ) ? $this->values['internaltype'] : $this->getType();
 	}
@@ -93,7 +93,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	/**
 	 * Returns the internal code for the search attribute.
 	 *
-	 * @return mixed Internal code of the search attribute
+	 * @return array|string Internal code of the search attribute
 	 */
 	public function getInternalCode()
 	{
@@ -170,17 +170,27 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	/**
 	 * Returns the attribute properties as key/value pairs.
 	 *
+	 * @param bool $private TRUE to return private attributes too, FALSE for public only
 	 * @return array Associative list of attribute key/value pairs
 	 */
-	public function toArray() : array
+	public function toArray( bool $private = false ) : array
 	{
-		return array(
+		$list = [
 			'code' => $this->getCode(),
 			'type' => $this->getType(),
 			'label' => $this->getLabel(),
 			'public' => $this->isPublic(),
 			'default' => $this->getDefault(),
 			'required' => $this->isRequired(),
-		);
+		];
+
+		if( $private )
+		{
+			$list['internalcode'] = $this->getInternalCode();
+			$list['internaldeps'] = $this->getInternalDeps();
+			$list['internaltype'] = $this->getInternalType();
+		}
+
+		return $list;
 	}
 }
