@@ -70,7 +70,7 @@ class SQL extends Base
 		$transname = $this->translateName( $name, $translations, $funcs );
 
 		if( !$transname ) {
-			return '';
+			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid sorting "%1$s"', $this->getName() ) );
 		}
 
 		if( !isset( $types[$name] ) ) {
