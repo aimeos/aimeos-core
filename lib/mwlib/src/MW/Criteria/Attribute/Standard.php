@@ -71,9 +71,9 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	/**
 	 * Returns the type internally used by the manager.
 	 *
-	 * @return string Type used by the manager
+	 * @return int|string Type used by the manager
 	 */
-	public function getInternalType() : string
+	public function getInternalType()
 	{
 		return array_key_exists( 'internaltype', $this->values ) ? $this->values['internaltype'] : $this->getType();
 	}

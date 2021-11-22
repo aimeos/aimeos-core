@@ -58,9 +58,9 @@ interface Iface
 	/**
 	 * Returns the type internally used by the manager.
 	 *
-	 * @return string Type used by the manager
+	 * @return int|string Type used by the manager
 	 */
-	public function getInternalType() : string;
+	public function getInternalType();
 
 	/**
 	 * Returns the human readable label for the search attribute.
