@@ -560,7 +560,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$funcs = $this->getSearchFunctions( $this->searchConfig );
 		$translations = $this->getSearchTranslations( $this->searchConfig );
 		$conditions = $search->getConditionSource( $types, $translations, [], $funcs );
-		$sortations = $search->getSortationSource( $types, $translations, [], $funcs );
+		$sortations = $search->getSortationSource( $types, $translations, $funcs );
 
 		$sql = str_replace(
 			[':cond', ':order', ':size', ':start'],
