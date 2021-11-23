@@ -220,8 +220,9 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$search = $condition ?: $this->createSearch();
 
 		$types = $this->getSearchTypes( $this->searchConfig );
+		$funcs = $this->getSearchFunctions( $this->searchConfig );
 		$translations = $this->getSearchTranslations( $this->searchConfig );
-		$conditions = $search->getConditionSource( $types, $translations );
+		$conditions = $search->getConditionSource( $types, $translations, [], $funcs );
 
 
 		$conn = $this->dbm->acquire( $this->dbname );
@@ -556,9 +557,10 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		}
 
 		$types = $this->getSearchTypes( $this->searchConfig );
+		$funcs = $this->getSearchFunctions( $this->searchConfig );
 		$translations = $this->getSearchTranslations( $this->searchConfig );
-		$conditions = $search->getConditionSource( $types, $translations );
-		$sortations = $search->getSortationSource( $types, $translations );
+		$conditions = $search->getConditionSource( $types, $translations, [], $funcs );
+		$sortations = $search->getSortationSource( $types, $translations, [], $funcs );
 
 		$sql = str_replace(
 			[':cond', ':order', ':size', ':start'],
