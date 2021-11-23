@@ -113,7 +113,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 			if( $item instanceof $iface ) {
 				$list[$item->getCode()] = $item->getFunction();
 			} else if( isset( $item['code'] ) ) {
-				$list[$item['code']] = $item['function'];
+				$list[$item['code']] = $item['function'] ?? null;
 			} else {
 				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
 			}
