@@ -156,9 +156,6 @@ class Standard extends Base
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
-		parent::__construct( $context, $this->searchConfig );
-		$this->setResourceName( 'db-catalog' );
-
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/catalog/manager/sitemode', $level );
 
@@ -179,6 +176,10 @@ class Standard extends Base
 
 			return $params;
 		};
+
+
+		parent::__construct( $context, $this->searchConfig );
+		$this->setResourceName( 'db-catalog' );
 	}
 
 
