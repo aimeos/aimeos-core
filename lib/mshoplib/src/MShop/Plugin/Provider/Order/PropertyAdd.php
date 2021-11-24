@@ -121,18 +121,13 @@ class PropertyAdd
 		if( !is_array( $value ) )
 		{
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
-			return $this->addAttributes( $value, $this->getProductItems( [$value->getProductId()] ), $types );
+			return $this->addAttributes( $value, $this->getProperties( [$value->getProductId()], [$value->getProductCode()], $types ), $types );
 		}
 
-		$list = [];
+		$ids = map( $value )->getProductId()->unique();
+		$codes = map( $value )->getProductCode()->unique();
 
-		foreach( $value as $orderProduct )
-		{
-			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $orderProduct );
-			$list[] = $orderProduct->getProductId();
-		}
-
-		$products = $this->getProductItems( $list );
+		$products = $this->getProperties( $ids, $codes, $types );
 
 		foreach( $value as $key => $orderProduct ) {
 			$value[$key] = $this->addAttributes( $orderProduct, $products, $types );
@@ -146,29 +141,25 @@ class PropertyAdd
 	 * Adds the product properties as attribute items to the order product item
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct Order product containing attributes
-	 * @param \Aimeos\Map $products List of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys and properties
-	 * @param string[] $types List of property types to add
+	 * @param \Aimeos\Map $products list of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys and properties
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Modified order product item
 	 */
 	protected function addAttributes( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct,
-	\Aimeos\Map $products, array $types ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	\Aimeos\Map $properties, array $types ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		if( ( $product = $products->get( $orderProduct->getProductId() ) ) === null ) {
+		if( ( $properties = $properties->get( $orderProduct->getProductCode() ) ) === null ) {
 			return $orderProduct;
 		}
 
 		foreach( $types as $type )
 		{
-			$list = $product->getProperties( $type );
-
-			if( !$list->isEmpty() )
+			if( !$properties->isEmpty() )
 			{
-				if( ( $attrItem = $orderProduct->getAttributeItem( $type, 'product/property' ) ) === null ) {
-					$attrItem = $this->orderAttrManager->create();
-				}
+				$attrItem = $orderProduct->getAttributeItem( $type, 'product/property' )
+					?: $this->orderAttrManager->create();
 
 				$attrItem = $attrItem->setType( 'product/property' )->setCode( $type )
-					->setValue( count( $list ) > 1 ? $list->toArray() : $list->first() );
+					->setValue( count( $properties ) > 1 ? $properties->toArray() : $properties->first() );
 
 				$orderProduct = $orderProduct->setAttributeItem( $attrItem );
 			}
@@ -179,21 +170,23 @@ class PropertyAdd
 
 
 	/**
-	 * Returns the product items for the given product IDs limited by the map of properties
+	 * Returns the product properties for the given product IDs and codes limited by the map of properties
 	 *
-	 * @param string[] $productIds List of product IDs
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys
+	 * @param string[] $filters Key/value pairs of product IDs and codes
+	 * @return \Aimeos\Map list of product properties
 	 */
-	protected function getProductItems( array $productIds ) : \Aimeos\Map
+	protected function getProperties( iterable $productIds, iterable $productCodes, array $types ) : \Aimeos\Map
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
+		$manager = \Aimeos\MShop::create($this->getContext(), 'product');
 		$search = $manager->filter( true );
-		$expr = [
-			$search->compare( '==', 'product.id', array_unique( $productIds ) ),
-			$search->getConditions(),
-		];
-		$search->setConditions( $search->and( $expr ) );
 
-		return $manager->search( $search, ['product/property'] );
+		$search->add( $search->or( [
+			$search->is( 'product.id', '==', $productIds ),
+			$search->is( 'product.code', '==', $productCodes ),
+		] ) );
+
+		return $manager->search( $search, ['product/property'] )
+			->col( null, 'product.code' )
+			->getProperties( implode( ',', $types ) );
 	}
 }
