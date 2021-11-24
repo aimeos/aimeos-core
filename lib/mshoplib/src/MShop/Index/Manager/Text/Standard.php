@@ -753,7 +753,7 @@ class Standard
 					$texts[$langId]['content'][] = $supItem->getName();
 				}
 
-				foreach( $product->getRefItems( 'attribute', null, $attrTypes ) as $attrItem  ) {
+				foreach( $product->getRefItems( 'attribute', null, $attrTypes ) as $attrItem ) {
 					$texts[$langId]['content'][] = $attrItem ->getName();
 				}
 			}
