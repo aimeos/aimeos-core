@@ -734,7 +734,7 @@ class Standard
 		 * @category Developer
 		 * @since 2020.10
 		 */
-		$attrTypes = $config->get( 'mshop/index/manager/text/attribute-types', [ 'variant', 'default' ] );
+		$attrTypes = $config->get( 'mshop/index/manager/text/attribute-types', ['variant', 'default'] );
 
 		$products = ( $item->getType() === 'select' ? $item->getRefItems( 'product', null, 'default' ) : [] );
 		$products[] = $item;
