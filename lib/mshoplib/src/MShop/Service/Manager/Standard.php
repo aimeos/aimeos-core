@@ -185,7 +185,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/service/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, ['lists', 'type'] ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, ['lists', 'type'] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -201,7 +201,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['service.siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['service.siteid'] = $this->context()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -339,7 +339,7 @@ class Standard
 			return $this->saveListItems( $item, 'service', $fetch );
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -524,7 +524,7 @@ class Standard
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -685,7 +685,7 @@ class Standard
 				if( ( $row['service.config'] = json_decode( $config = $row['service.config'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_service.config', $row['service.id'], $config );
-					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/service' );
+					$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/service' );
 				}
 
 				$map[$row['service.id']] = $row;

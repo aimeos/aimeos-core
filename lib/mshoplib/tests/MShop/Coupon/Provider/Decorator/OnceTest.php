@@ -18,7 +18,7 @@ class OnceTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$this->couponItem = \Aimeos\MShop::create( $this->context, 'coupon' )->create();
 
 		$orderBaseManager = \Aimeos\MShop::create( $this->context, 'order/base' );

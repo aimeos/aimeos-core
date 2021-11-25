@@ -16,7 +16,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = clone \TestHelperMShop::getContext();
+		$context = clone \TestHelperMShop::context();
 		$config = $context->getConfig();
 
 		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
@@ -25,7 +25,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( 'MySQL specific test' );
 		}
 
-		$this->object = new \Aimeos\MShop\Index\Manager\Text\MySQL( \TestHelperMShop::getContext() );
+		$this->object = new \Aimeos\MShop\Index\Manager\Text\MySQL( \TestHelperMShop::context() );
 	}
 
 

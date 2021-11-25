@@ -19,7 +19,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )
 			->create()->setConfig( ['category.code' => 'cafe', 'category.only' => '1'] );
 

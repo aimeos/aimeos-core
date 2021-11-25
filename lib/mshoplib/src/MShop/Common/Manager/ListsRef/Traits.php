@@ -57,7 +57,7 @@ trait Traits
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
-	abstract protected function getContext() : \Aimeos\MShop\Context\Item\Iface;
+	abstract protected function context() : \Aimeos\MShop\Context\Item\Iface;
 
 
 	/**
@@ -140,7 +140,7 @@ trait Traits
 		}
 
 		foreach( $map as $domain => $ids ) {
-			\Aimeos\MShop::create( $this->getContext(), $domain )->begin()->delete( $ids )->commit();
+			\Aimeos\MShop::create( $this->context(), $domain )->begin()->delete( $ids )->commit();
 		}
 
 		return $this;
@@ -223,7 +223,7 @@ trait Traits
 
 		foreach( $refIdMap as $domain => $list )
 		{
-			$manager = \Aimeos\MShop::create( $this->getContext(), $domain );
+			$manager = \Aimeos\MShop::create( $this->context(), $domain );
 
 			$search = $manager->filter()->slice( 0, count( $list ) );
 			$search->setConditions( $search->compare( '==', str_replace( '/', '.', $domain ) . '.id', array_keys( $list ) ) );
@@ -251,7 +251,7 @@ trait Traits
 	protected function saveListItems( \Aimeos\MShop\Common\Item\ListsRef\Iface $item, string $domain,
 		bool $fetch = true ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$rmListIds = $rmIds = $refManager = [];
 		$listManager = $this->object()->getSubManager( 'lists' );
 

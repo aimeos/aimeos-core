@@ -31,7 +31,7 @@ class Log
 		$level = \Aimeos\MW\Logger\Base::DEBUG;
 		$class = get_class( $this->getProvider() );
 
-		$this->getContext()->getLogger()->log( 'Plugin::register: ' . $class, $level, 'core/plugin' );
+		$this->context()->getLogger()->log( 'Plugin::register: ' . $class, $level, 'core/plugin' );
 
 		$this->getProvider()->register( $p );
 
@@ -54,12 +54,12 @@ class Log
 		$payload = ( is_object( $value ) ? get_class( $value ) : ( is_scalar( $value ) ? $value : '' ) );
 
 		$msg = 'Plugin::update:before: ' . $class . ', action: ' . $action . ', value: ' . $payload;
-		$this->getContext()->getLogger()->log( $msg, $level, 'core/plugin' );
+		$this->context()->getLogger()->log( $msg, $level, 'core/plugin' );
 
 		$value = $this->getProvider()->update( $order, $action, $value );
 
 		$msg = 'Plugin::update:after: ' . $class . ', action: ' . $action . ', value: ' . $payload;
-		$this->getContext()->getLogger()->log( $msg, $level, 'core/plugin' );
+		$this->context()->getLogger()->log( $msg, $level, 'core/plugin' );
 
 		return $value;
 	}

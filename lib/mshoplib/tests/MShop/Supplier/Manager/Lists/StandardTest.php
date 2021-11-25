@@ -18,7 +18,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$this->editor = $this->context->getEditor();
 		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context, 'Standard' );
 		$this->object = $supplierManager->getSubManager( 'lists', 'Standard' );
@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$siteid = \TestHelperMShop::getContext()->getLocale()->getSiteId();
+		$siteid = \TestHelperMShop::context()->getLocale()->getSiteId();
 
 		$search = $this->object->filter();
 		$conditions = array(

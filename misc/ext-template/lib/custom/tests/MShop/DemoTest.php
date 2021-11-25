@@ -16,7 +16,7 @@ class DemoTest extends \PHPUnit\Framework\TestCase
 	{
 		\Aimeos\MShop::cache( true );
 
-		// $this->object = new \Aimeos\MShop\Demo\Manager\Standard( \TestHelper::getContext() );
+		// $this->object = new \Aimeos\MShop\Demo\Manager\Standard( \TestHelper::context() );
 	}
 
 

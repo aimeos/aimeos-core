@@ -440,7 +440,7 @@ class Standard
 
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Product\Item\Iface::class, $items );
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
@@ -674,7 +674,7 @@ class Standard
 		if( !isset( $this->languageIds ) )
 		{
 			$list = [];
-			$manager = \Aimeos\MShop::create( $this->getContext(), 'locale' );
+			$manager = \Aimeos\MShop::create( $this->context(), 'locale' );
 			$items = $manager->search( $manager->filter()->slice( 0, 10000 ) );
 
 			foreach( $items as $item ) {
@@ -696,7 +696,7 @@ class Standard
 	 */
 	protected function saveTexts( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
 	{
-		$config = $this->getContext()->getConfig();
+		$config = $this->context()->getConfig();
 		$texts = [];
 
 		foreach( $item->getRefItems( 'text', 'url', 'default' ) as $text ) {
@@ -777,7 +777,7 @@ class Standard
 	protected function saveTextMap( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item, array $texts )
 	{
 		$date = date( 'Y-m-d H:i:s' );
-		$siteid = $this->getContext()->getLocale()->getSiteId();
+		$siteid = $this->context()->getLocale()->getSiteId();
 
 		foreach( $texts as $langId => $map )
 		{
@@ -845,7 +845,7 @@ class Standard
 		if( $this->subManagers === null )
 		{
 			$this->subManagers = [];
-			$config = $this->getContext()->getConfig();
+			$config = $this->context()->getConfig();
 
 			/** mshop/index/manager/text/submanagers
 			 * A list of sub-manager names used for indexing associated items to texts

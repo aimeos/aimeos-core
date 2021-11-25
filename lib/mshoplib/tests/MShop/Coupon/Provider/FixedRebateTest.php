@@ -18,7 +18,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
@@ -100,7 +100,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateMultipleCurrencies()
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$config = array(
 			'fixedrebate.productcode' => 'U:MD',
 			'fixedrebate.rebate' => array(
@@ -146,7 +146,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 		$this->orderBase->addProduct( $products['CNE'] );
 		$this->orderBase->addProduct( $products['CNC'] );
 
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$config = array(
 			'fixedrebate.productcode' => 'U:MD',
 			'fixedrebate.rebate' => array(
@@ -184,8 +184,8 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateInvalidConfig()
 	{
-		$context = \TestHelperMShop::getContext();
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
+		$context = \TestHelperMShop::context();
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::context() )->create();
 		$couponItem->setConfig( array( 'fixedrebate.rebate' => '2.50' ) );
 
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, '90AB' );
@@ -198,7 +198,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 	protected function getOrderProducts()
 	{
 		$products = [];
-		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base/product' );
+		$manager = \Aimeos\MShop::create( \TestHelperMShop::context(), 'order/base/product' );
 
 		$search = $manager->filter();
 		$search->setConditions( $search->and( array(

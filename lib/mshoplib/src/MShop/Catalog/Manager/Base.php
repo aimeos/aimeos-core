@@ -117,7 +117,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		if( isset( $node->config ) && ( $node->config = json_decode( $config = $node->config, true ) ) === null )
 		{
 			$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_catalog.config', $values['id'], $config );
-			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/catalog' );
+			$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/catalog' );
 		}
 
 		return new \Aimeos\MShop\Catalog\Item\Standard( $node, $children, $listItems, $refItems );
@@ -166,7 +166,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	{
 		if( !isset( $this->treeManagers[$siteid] ) )
 		{
-			$context = $this->getContext();
+			$context = $this->context();
 			$dbm = $context->getDatabaseManager();
 
 			$conn = $dbm->acquire( 'db-catalog' );

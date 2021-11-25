@@ -40,19 +40,19 @@ abstract class Base
 
 		if( ( $entry = reset( $this->searchConfig ) ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Search configuration not available' );
+			$msg = $this->context()->translate( 'mshop', 'Search configuration not available' );
 			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
 		if( ( $pos = strrpos( $entry['code'], '.' ) ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
 			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );
 		}
 
 		if( ( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
 			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );
 		}
 	}
@@ -66,7 +66,7 @@ abstract class Base
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values[$this->prefix . 'siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values[$this->prefix . 'siteid'] = $this->context()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -97,7 +97,7 @@ abstract class Base
 			return $item;
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
@@ -217,7 +217,7 @@ abstract class Base
 	{
 		$items = [];
 
-		$dbm = $this->getContext()->getDatabaseManager();
+		$dbm = $this->context()->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 

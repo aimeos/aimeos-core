@@ -125,7 +125,7 @@ class PropertyMatch
 		if( $this->getProductItems( array_unique( $list ), $map )->count() !== count( $list ) )
 		{
 			$code = array( 'product' => $map );
-			$msg = $this->getContext()->translate( 'mshop', 'Product matching given properties not found' );
+			$msg = $this->context()->translate( 'mshop', 'Product matching given properties not found' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 
@@ -142,7 +142,7 @@ class PropertyMatch
 	 */
 	protected function getProductItems( array $productIds, array $map ) : \Aimeos\Map
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$langId = $context->getLocale()->getLanguageId();
 
 		$manager = \Aimeos\MShop::create( $context, 'product' );

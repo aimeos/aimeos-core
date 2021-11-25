@@ -186,7 +186,7 @@ class PropertyAdd
 	 */
 	protected function getProductItems( array $productIds ) : \Aimeos\Map
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
 		$search = $manager->filter( true );
 		$expr = [
 			$search->compare( '==', 'product.id', array_unique( $productIds ) ),

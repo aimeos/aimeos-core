@@ -18,8 +18,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelperMShop::getContext()->getEditor();
-		$this->object = new \Aimeos\MShop\Tag\Manager\Standard( \TestHelperMShop::getContext() );
+		$this->editor = \TestHelperMShop::context()->getEditor();
+		$this->object = new \Aimeos\MShop\Tag\Manager\Standard( \TestHelperMShop::context() );
 	}
 
 
@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $itemSaved->getId() );
 
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertTrue( $itemSaved->getType() !== null );

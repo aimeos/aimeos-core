@@ -33,7 +33,7 @@ class Once
 
 		if( ( $address = reset( $addresses ) ) !== false )
 		{
-			$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
+			$manager = \Aimeos\MShop::create( $this->context(), 'order' );
 
 			$search = $manager->filter()->slice( 0, 1 );
 			$expr = [

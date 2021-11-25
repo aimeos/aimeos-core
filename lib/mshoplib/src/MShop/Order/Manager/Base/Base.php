@@ -66,7 +66,7 @@ abstract class Base
 	 */
 	public function getSession( string $type = 'default' ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$session = $context->getSession();
 		$locale = $context->getLocale();
 		$currency = $locale->getCurrencyId();
@@ -102,7 +102,7 @@ abstract class Base
 	 */
 	public function getSessionLock( string $type = 'default' ) : int
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$session = $context->getSession();
 		$locale = $context->getLocale();
 		$currency = $locale->getCurrencyId();
@@ -127,7 +127,7 @@ abstract class Base
 	 */
 	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, string $type = 'default' ) : \Aimeos\MShop\Order\Manager\Base\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$session = $context->getSession();
 		$locale = $context->getLocale();
 		$currency = $locale->getCurrencyId();
@@ -157,7 +157,7 @@ abstract class Base
 	{
 		$this->checkLock( $lock );
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$session = $context->getSession();
 		$locale = $context->getLocale();
 		$currency = $locale->getCurrencyId();
@@ -187,7 +187,7 @@ abstract class Base
 				return $this;
 		}
 
-		$msg = $this->getContext()->translate( 'mshop', 'Lock flag "%1$d" not within allowed range' );
+		$msg = $this->context()->translate( 'mshop', 'Lock flag "%1$d" not within allowed range' );
 		throw new \Aimeos\MShop\Order\Exception( sprintf( $msg, $value ) );
 	}
 

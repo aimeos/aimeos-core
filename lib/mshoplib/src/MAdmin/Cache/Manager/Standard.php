@@ -154,7 +154,7 @@ class Standard
 					'settag' => $this->getSqlConfig( 'madmin/cache/manager/settag' ),
 				),
 			);
-			$dbm = $this->getContext()->getDatabaseManager();
+			$dbm = $this->context()->getDatabaseManager();
 			$this->object = \Aimeos\MW\Cache\Factory::create( 'DB', $cfg, $dbm );
 		}
 
@@ -170,7 +170,7 @@ class Standard
 	 */
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$config = $context->getConfig();
 
 		foreach( $config->get( 'madmin/cache/manager/submanagers', [] ) as $domain ) {
@@ -390,7 +390,7 @@ class Standard
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();

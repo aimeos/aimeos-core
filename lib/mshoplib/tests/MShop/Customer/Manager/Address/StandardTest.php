@@ -19,8 +19,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelperMShop::getContext()->getEditor();
-		$customer = new \Aimeos\MShop\Customer\Manager\Standard( \TestHelperMShop::getContext() );
+		$this->editor = \TestHelperMShop::context()->getEditor();
+		$customer = new \Aimeos\MShop\Customer\Manager\Standard( \TestHelperMShop::context() );
 		$search = $customer->filter();
 		$conditions = array(
 			$search->compare( '==', 'customer.label', 'unitCustomer001' ),
@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.address.latitude' => '50.0',
 			'customer.address.position' => 1,
 			'customer.address.birthday' => '2000-01-01',
-			'customer.address.siteid' => \TestHelperMShop::getContext()->getLocale()->getSiteId(),
+			'customer.address.siteid' => \TestHelperMShop::context()->getLocale()->getSiteId(),
 		);
 
 		$this->object = $customer->getSubManager( 'address', 'Standard' );

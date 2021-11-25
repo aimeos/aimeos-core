@@ -428,7 +428,7 @@ class Standard
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Product\Item\Iface::class, $items );
 
 		$date = date( 'Y-m-d H:i:s' );
-		$context = $this->getContext();
+		$context = $this->context();
 		$siteid = $context->getLocale()->getSiteId();
 		$supItems = $this->getSuppliers( $items );
 
@@ -665,7 +665,7 @@ class Standard
 	protected function getListItems( iterable $items ) : \Aimeos\Map
 	{
 		$listItems = [];
-		$listManager = \Aimeos\MShop::create( $this->getContext(), 'supplier/lists' );
+		$listManager = \Aimeos\MShop::create( $this->context(), 'supplier/lists' );
 
 		$search = $listManager->filter( true )->slice( 0, 0x7fffffff )->add( [
 			'supplier.lists.refid' => map( $items )->keys()->toArray(),
@@ -690,7 +690,7 @@ class Standard
 		if( $this->subManagers === null )
 		{
 			$this->subManagers = [];
-			$config = $this->getContext()->getConfig();
+			$config = $this->context()->getConfig();
 
 			/** mshop/index/manager/supplier/submanagers
 			 * A list of sub-manager names used for indexing associated items to categories
@@ -732,8 +732,8 @@ class Standard
 	protected function getSuppliers( iterable $items ) : \Aimeos\Map
 	{
 		$prodIds = map( $items )->keys()->toArray();
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'supplier' );
-		$listManager = \Aimeos\MShop::create( $this->getContext(), 'supplier/lists' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'supplier' );
+		$listManager = \Aimeos\MShop::create( $this->context(), 'supplier/lists' );
 
 		$filter = $manager->filter( true )->slice( 0, 0x7fffffff );
 		$filter->add( $filter->make( 'supplier:has', ['product', ['default', 'promotion'], $prodIds] ), '!=', null );

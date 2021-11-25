@@ -166,7 +166,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/text/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -182,7 +182,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['text.siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['text.siteid'] = $this->context()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -201,7 +201,7 @@ class Standard
 			return $this->saveListItems( $item, 'text', $fetch );
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -486,7 +486,7 @@ class Standard
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -683,7 +683,7 @@ class Standard
 		if( $default !== false )
 		{
 			$object = $this->filterBase( 'text' );
-			$langid = $this->getContext()->getLocale()->getLanguageId();
+			$langid = $this->context()->getLocale()->getLanguageId();
 
 			if( $langid !== null )
 			{

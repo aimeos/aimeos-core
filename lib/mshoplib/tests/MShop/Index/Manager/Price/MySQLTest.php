@@ -16,7 +16,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->object = new \Aimeos\MShop\Index\Manager\Price\MySQL( \TestHelperMShop::getContext() );
+		$this->object = new \Aimeos\MShop\Index\Manager\Price\MySQL( \TestHelperMShop::context() );
 	}
 
 

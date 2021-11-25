@@ -142,7 +142,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/supplier/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'address' ) ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, array( 'address' ) ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -158,7 +158,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['supplier.siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['supplier.siteid'] = $this->context()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -298,7 +298,7 @@ class Standard
 			return $this->saveListItems( $item, 'supplier', $fetch );
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -478,7 +478,7 @@ class Standard
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();

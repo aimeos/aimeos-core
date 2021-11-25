@@ -20,7 +20,7 @@ class BasketTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$orderProducts = [];
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
 		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::create( $context );
 		$this->couponItem = $couponManager->create();

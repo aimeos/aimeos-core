@@ -24,7 +24,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 
 		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$this->servItem = $servManager->create();

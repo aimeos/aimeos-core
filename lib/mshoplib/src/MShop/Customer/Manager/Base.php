@@ -233,7 +233,7 @@ abstract class Base
 			return $this->helper;
 		}
 
-		$config = $this->getContext()->getConfig();
+		$config = $this->context()->getConfig();
 
 		/** mshop/customer/manager/password/name
 		 * Last part of the name for building the password helper item
@@ -268,7 +268,7 @@ abstract class Base
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
+			$msg = $this->context()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
 			throw new \Aimeos\MShop\Exception( sprintf( $msg, $name ) );
 		}
 
@@ -276,7 +276,7 @@ abstract class Base
 
 		if( class_exists( $classname ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Class "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
 			throw new \Aimeos\MShop\Exception( sprintf( $msg, $classname ) );
 		}
 

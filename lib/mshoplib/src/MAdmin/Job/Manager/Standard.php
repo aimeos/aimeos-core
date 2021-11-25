@@ -104,7 +104,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'madmin/job/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -120,7 +120,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['job.siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['job.siteid'] = $this->context()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -151,7 +151,7 @@ class Standard
 			return $item;
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -384,7 +384,7 @@ class Standard
 			return $item;
 		}
 
-		$msg = $this->getContext()->translate( 'mshop', 'Job with ID "%1$s" not found' );
+		$msg = $this->context()->translate( 'mshop', 'Job with ID "%1$s" not found' );
 		throw new \Aimeos\MAdmin\Job\Exception( sprintf( $msg, $id ) );
 	}
 
@@ -400,7 +400,7 @@ class Standard
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
-		$context = $this->getContext();
+		$context = $this->context();
 		$logger = $context->getLogger();
 
 		$dbm = $context->getDatabaseManager();

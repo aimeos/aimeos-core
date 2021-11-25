@@ -17,7 +17,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->object = new \Aimeos\MAdmin\Log\Manager\Standard( \TestHelperMShop::getContext() );
+		$this->object = new \Aimeos\MAdmin\Log\Manager\Standard( \TestHelperMShop::context() );
 	}
 
 
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testLog()
 	{
 		$mock = $this->getMockBuilder( \Aimeos\MAdmin\Log\Manager\Standard::class )
-			->setConstructorArgs( array( \TestHelperMShop::getContext() ) )
+			->setConstructorArgs( array( \TestHelperMShop::context() ) )
 			->setMethods( array( 'save' ) )
 			->getMock();
 

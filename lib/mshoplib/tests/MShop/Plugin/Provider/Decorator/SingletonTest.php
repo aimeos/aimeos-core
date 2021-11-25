@@ -18,7 +18,7 @@ class SingletonTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
 		$priceItem = \Aimeos\MShop\Price\Manager\Factory::create( $context )->create();
 		$this->order = new \Aimeos\MShop\Order\Item\Base\Standard( $priceItem, $context->getLocale() );

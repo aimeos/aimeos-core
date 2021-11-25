@@ -247,12 +247,12 @@ abstract class Base
 
 		if( !count( $keys ) )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'At least one key is required for aggregation' );
+			$msg = $this->context()->translate( 'mshop', 'At least one key is required for aggregation' );
 			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
 		$dbname = $this->getResourceName();
-		$dbm = $this->getContext()->getDatabaseManager();
+		$dbm = $this->context()->getDatabaseManager();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -267,7 +267,7 @@ abstract class Base
 
 			if( $value === null && ( $value = key( $attrList ) ) === null )
 			{
-				$msg = $this->getContext()->translate( 'mshop', 'No search keys available' );
+				$msg = $this->context()->translate( 'mshop', 'No search keys available' );
 				throw new \Aimeos\MShop\Exception( $msg );
 			}
 
@@ -277,7 +277,7 @@ abstract class Base
 
 			if( !isset( $attrList[$value] ) )
 			{
-				$msg = $this->getContext()->translate( 'mshop', 'Unknown search key "%1$s"' );
+				$msg = $this->context()->translate( 'mshop', 'Unknown search key "%1$s"' );
 				throw new \Aimeos\MShop\Exception( $msg );
 			}
 
@@ -285,7 +285,7 @@ abstract class Base
 			{
 				if( !isset( $attrList[$string] ) )
 				{
-					$msg = $this->getContext()->translate( 'mshop', 'Unknown search key "%1$s"' );
+					$msg = $this->context()->translate( 'mshop', 'Unknown search key "%1$s"' );
 					throw new \Aimeos\MShop\Exception( $msg );
 				}
 
@@ -346,7 +346,7 @@ abstract class Base
 
 		if( ( $row = $result->fetch( \Aimeos\MW\DB\Result\Base::FETCH_NUM ) ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'ID of last inserted database record not available' );
+			$msg = $this->context()->translate( 'mshop', 'ID of last inserted database record not available' );
 			throw new \Aimeos\MShop\Exception( $msg );
 		}
 		$result->finish();
@@ -440,7 +440,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
-	protected function getContext() : \Aimeos\MShop\Context\Item\Iface
+	protected function context() : \Aimeos\MShop\Context\Item\Iface
 	{
 		return $this->context;
 	}
@@ -532,7 +532,7 @@ abstract class Base
 	 */
 	protected function getSqlConfig( string $path )
 	{
-		$config = $this->getContext()->getConfig();
+		$config = $this->context()->getConfig();
 		$adapter = $config->get( 'resource/' . $this->getResourceName() . '/adapter' );
 
 		return $config->get( $path . '/' . $adapter, $config->get( $path . '/ansi', $path ) );
@@ -557,7 +557,7 @@ abstract class Base
 		{
 			if( $value === null )
 			{
-				$msg = $this->getContext()->translate( 'mshop', 'Required value for "%1$s" is missing' );
+				$msg = $this->context()->translate( 'mshop', 'Required value for "%1$s" is missing' );
 				throw new \Aimeos\MShop\Exception( $msg );
 			}
 			$expr[] = $criteria->compare( '==', $key, $value );
@@ -569,7 +569,7 @@ abstract class Base
 			return $item;
 		}
 
-		$msg = $this->getContext()->translate( 'mshop', 'No item found for conditions: %1$s' );
+		$msg = $this->context()->translate( 'mshop', 'No item found for conditions: %1$s' );
 		throw new \Aimeos\MShop\Exception( sprintf( $msg, print_r( $pairs, true ) ) );
 	}
 
@@ -625,7 +625,7 @@ abstract class Base
 			return $item;
 		}
 
-		$msg = $this->getContext()->translate( 'mshop', 'Item with ID "%2$s" in "%1$s" not found' );
+		$msg = $this->context()->translate( 'mshop', 'Item with ID "%2$s" in "%1$s" not found' );
 		throw new \Aimeos\MShop\Exception( sprintf( $msg, $key, $id ) );
 	}
 
@@ -920,7 +920,7 @@ abstract class Base
 
 			if( $row === null )
 			{
-				$msg = $this->getContext()->translate( 'mshop', 'Total results value not found' );
+				$msg = $this->context()->translate( 'mshop', 'Total results value not found' );
 				throw new \Aimeos\MShop\Exception( $msg );
 			}
 
@@ -947,7 +947,7 @@ abstract class Base
 		if( !is_array( $items ) ) { $items = [$items]; }
 		if( empty( $items ) ) { return $this; }
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$dbname = $this->getResourceName();
 
 		$search = $this->object()->filter();

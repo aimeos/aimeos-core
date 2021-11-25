@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testBlock()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
@@ -42,7 +42,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUnblock()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateBlock()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 		$orderItem->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateUnblock()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 		$orderItem->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_DELETED );
@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddStatusItem()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 
 		$statusStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Status\Standard::class )
 			->setConstructorArgs( array( $context ) )
@@ -118,7 +118,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetBundleMap()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$prodId = \Aimeos\MShop::create( $context, 'product' )->find( 'CNC' )->getId();
 
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
@@ -134,10 +134,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetContext()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
-		$method = $class->getMethod( 'getContext' );
+		$method = $class->getMethod( 'context' );
 		$method->setAccessible( true );
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
@@ -150,7 +150,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetLastStatusItem()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$orderItem = $this->getOrderItem( '2008-02-15 12:34:56' );
 
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
@@ -168,7 +168,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetLastStatusItemFalse()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'getLastStatusItem' );
@@ -183,7 +183,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetStockItems()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$prodid = \Aimeos\MShop::create( $context, 'product' )->find( 'CNE' )->getId();
 
 		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
@@ -203,7 +203,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateCoupons()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 
@@ -239,7 +239,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateCouponsException()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 
@@ -278,7 +278,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateStatus()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create()->setId( -1 );
 		$statusItem = \Aimeos\MShop::create( $context, 'order/status' )->create();
 		$statusItem->setValue( 1 );
@@ -302,7 +302,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateStatusStock()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create()->setId( -1 );
 		$statusItem = \Aimeos\MShop::create( $context, 'order/status' )->create();
 
@@ -326,7 +326,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateStatusCoupons()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create()->setId( -1 );
 		$statusItem = \Aimeos\MShop::create( $context, 'order/status' )->create();
 
@@ -350,7 +350,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateStock()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 
@@ -393,7 +393,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateStockArticle()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 
@@ -439,7 +439,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateStockSelect()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 
@@ -485,7 +485,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateStockException()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$orderItem = \Aimeos\MShop::create( $context, 'order' )->create();
 
 
@@ -513,7 +513,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateStockBundle()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 
 
 		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
@@ -567,7 +567,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateStockSelection()
 	{
-		$context = \TestHelperCntl::getContext();
+		$context = \TestHelperCntl::context();
 		$prodId = \Aimeos\MShop::create( $context, 'product' )->find( 'U:TEST' )->getId();
 
 
@@ -594,7 +594,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function getOrderItem( $datepayment ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$manager = \Aimeos\MShop::create( \TestHelperCntl::getContext(), 'order' );
+		$manager = \Aimeos\MShop::create( \TestHelperCntl::context(), 'order' );
 
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'order.datepayment', $datepayment ) );

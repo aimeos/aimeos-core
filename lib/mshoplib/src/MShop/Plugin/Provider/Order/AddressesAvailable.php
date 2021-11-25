@@ -132,7 +132,7 @@ class AddressesAvailable
 		if( count( $problems ) > 0 )
 		{
 			$code = array( 'address' => $problems );
-			$msg = $this->getContext()->translate( 'mshop', 'Checks for available addresses in basket failed' );
+			$msg = $this->context()->translate( 'mshop', 'Checks for available addresses in basket failed' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 

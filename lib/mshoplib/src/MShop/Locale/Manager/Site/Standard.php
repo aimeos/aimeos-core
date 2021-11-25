@@ -170,7 +170,7 @@ class Standard
 			return $this;
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$config = $context->getConfig();
 
 		/** mshop/locale/manager/site/cleanup/shop/domains
@@ -250,7 +250,7 @@ class Standard
 	{
 		if( $item->getId() === null )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Newly created item can not be saved using method "save()", use "insert()" instead' );
+			$msg = $this->context()->translate( 'mshop', 'Newly created item can not be saved using method "save()", use "insert()" instead' );
 			throw new \Aimeos\MShop\Locale\Exception( $msg );
 		}
 
@@ -258,7 +258,7 @@ class Standard
 			return $item;
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -606,7 +606,7 @@ class Standard
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -707,13 +707,13 @@ class Standard
 					if( ( $row['locale.site.logo'] = json_decode( $logos, true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale_site.logo', $id, $logos );
-						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/locale/site' );
+						$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/locale/site' );
 					}
 
 					if( ( $row['locale.site.config'] = json_decode( $config, true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale_site.config', $id, $config );
-						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/locale/site' );
+						$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/locale/site' );
 					}
 
 					if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
@@ -809,7 +809,7 @@ class Standard
 
 		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) === null )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Tree root with code "%1$s" in "%2$s" not found' );
+			$msg = $this->context()->translate( 'mshop', 'Tree root with code "%1$s" in "%2$s" not found' );
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, 'default', 'locale.site.code' ) );
 		}
 
@@ -829,7 +829,7 @@ class Standard
 	 */
 	public function insert( \Aimeos\MShop\Locale\Item\Site\Iface $item, string $parentId = null, string $refId = null ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -962,7 +962,7 @@ class Standard
 	public function move( string $id, string $oldParentId = null, string $newParentId = null,
 		string $refId = null ) : \Aimeos\MShop\Locale\Manager\Site\Iface
 	{
-		$msg = $this->getContext()->translate( 'mshop', 'Method "%1$s" for locale site manager not available' );
+		$msg = $this->context()->translate( 'mshop', 'Method "%1$s" for locale site manager not available' );
 		throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, 'move()' ) );
 	}
 
@@ -999,7 +999,7 @@ class Standard
 			. 'Class: ' . get_class( $this ) . "\n"
 			. str_replace( ["\t", "\n\n"], ['', "\n"], trim( (string) $stmt ) );
 
-		$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
+		$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
 
 		return $result;
 	}

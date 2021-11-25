@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->price = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
+		$this->price = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelperMShop::context() )->create();
 
 		$attrValues = array(
 			'order.base.product.attribute.id' => 4,
@@ -65,8 +65,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.mtime' => '2000-12-31 23:59:59',
 			'order.base.product.ctime' => '2011-01-01 00:00:01',
 			'order.base.product.editor' => 'unitTestUser',
-			'.product' => \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'product' )->create(),
-			'.supplier' => \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'supplier' )->create(),
+			'.product' => \Aimeos\MShop::create( \TestHelperMShop::context(), 'product' )->create(),
+			'.supplier' => \Aimeos\MShop::create( \TestHelperMShop::context(), 'supplier' )->create(),
 		);
 
 		$this->subProducts = array(
@@ -674,7 +674,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttribute()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->create();
@@ -714,7 +714,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeList()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->create();
@@ -738,7 +738,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeItem()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->create();
@@ -775,7 +775,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeItemList()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->create();
@@ -817,7 +817,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetAttributeItem()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$item = $attManager->create();
@@ -849,7 +849,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetAttributeItems()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$list = array(
@@ -1006,7 +1006,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCopyFrom()
 	{
-		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'product' );
+		$manager = \Aimeos\MShop::create( \TestHelperMShop::context(), 'product' );
 		$product = $manager->find( 'CNE', ['text'] );
 
 		$productCopy = new \Aimeos\MShop\Order\Item\Base\Product\Standard( $this->price );

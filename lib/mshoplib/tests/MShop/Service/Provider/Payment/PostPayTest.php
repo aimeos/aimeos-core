@@ -17,7 +17,7 @@ class PostPayTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $context );
 
 		$serviceItem = $serviceManager->create();
@@ -52,7 +52,7 @@ class PostPayTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSync()
 	{
-		$orderItem = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
+		$orderItem = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() )->create();
 		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
 		$this->object->expects( $this->once() )->method( 'saveOrder' )->will( $this->returnArgument( 0 ) );

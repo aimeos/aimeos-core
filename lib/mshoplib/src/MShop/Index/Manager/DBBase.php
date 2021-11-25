@@ -34,7 +34,7 @@ abstract class DBBase
 		parent::__construct( $context );
 
 		$this->setResourceName( 'db-product' );
-		$this->manager = \Aimeos\MShop::create( $this->getContext(), 'product' );
+		$this->manager = \Aimeos\MShop::create( $this->context(), 'product' );
 	}
 
 
@@ -228,7 +228,7 @@ abstract class DBBase
 	 */
 	protected function cleanupBase( string $timestamp, string $path ) : \Aimeos\MShop\Index\Manager\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$siteid = $context->getLocale()->getSiteId();
 
 
@@ -364,7 +364,7 @@ abstract class DBBase
 	 */
 	protected function optimizeBase( string $path ) : \Aimeos\MShop\Index\Manager\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -406,7 +406,7 @@ abstract class DBBase
 		array $ref, int &$total = null, string $cfgPathSearch, string $cfgPathCount ) : \Aimeos\Map
 	{
 		$list = $ids = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();

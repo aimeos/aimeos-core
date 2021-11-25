@@ -19,7 +19,7 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$orderProducts = [];
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$this->serviceItem = \Aimeos\MShop\Service\Manager\Factory::create( $context )->create();
 
 		$provider = new \Aimeos\MShop\Service\Provider\Delivery\Standard( $context, $this->serviceItem );

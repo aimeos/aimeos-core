@@ -18,7 +18,7 @@ class PercentTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$this->item = \Aimeos\MShop\Rule\Manager\Factory::create( $this->context )->create();
 
 		$this->object = new \Aimeos\MShop\Rule\Provider\Catalog\Percent( $this->context, $this->item );

@@ -40,19 +40,19 @@ abstract class Base
 
 		if( ( $entry = reset( $this->searchConfig ) ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Search configuration not available' );
+			$msg = $this->context()->translate( 'mshop', 'Search configuration not available' );
 			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
 		if( ( $pos = strrpos( $entry['code'], '.' ) ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
 			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );
 		}
 
 		if( ( $this->prefix = substr( $entry['code'], 0, $pos + 1 ) ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'Search configuration for "%1$s" not available' );
 			throw new \Aimeos\MShop\Exception( sprintf( $msg, $entry['code'] ) );
 		}
 
@@ -84,7 +84,7 @@ abstract class Base
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values[$this->prefix . 'siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values[$this->prefix . 'siteid'] = $this->context()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -149,7 +149,7 @@ abstract class Base
 	{
 		if( ( $conf = reset( $this->searchConfig ) ) === false || !isset( $conf['code'] ) )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Search configuration not available' );
+			$msg = $this->context()->translate( 'mshop', 'Search configuration not available' );
 			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
@@ -190,7 +190,7 @@ abstract class Base
 			return $item;
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -227,7 +227,7 @@ abstract class Base
 			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); //mtime
-			$stmt->bind( $idx++, $this->getContext()->getEditor() );
+			$stmt->bind( $idx++, $this->context()->getEditor() );
 			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
 
 
@@ -269,7 +269,7 @@ abstract class Base
 	{
 		$items = [];
 
-		$dbm = $this->getContext()->getDatabaseManager();
+		$dbm = $this->context()->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -290,7 +290,7 @@ abstract class Base
 				{
 					$str = 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s';
 					$msg = sprintf( $str, $this->prefix . 'config', $row[$this->prefix . 'id'], $config );
-					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core' );
+					$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core' );
 				}
 
 				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
@@ -380,7 +380,7 @@ abstract class Base
 
 		foreach( $refIdMap as $domain => $list )
 		{
-			$manager = \Aimeos\MShop::create( $this->getContext(), $domain );
+			$manager = \Aimeos\MShop::create( $this->context(), $domain );
 
 			$search = $manager->filter()->slice( 0, count( $list ) )->add( [
 				str_replace( '/', '.', $domain ) . '.id' => $list

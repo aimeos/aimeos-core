@@ -26,7 +26,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$config = $this->context->getConfig();
 
 		$config->set( 'mshop/common/manager/decorators/default', [] );

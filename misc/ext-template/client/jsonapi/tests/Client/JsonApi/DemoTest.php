@@ -14,7 +14,7 @@ class DemoTest extends \PHPUnit\Framework\TestCase
 	{
 		\Aimeos\MShop::cache( true );
 
-		$this->context = \TestHelperJapi::getContext();
+		$this->context = \TestHelperJapi::context();
 		$paths = \TestHelperJapi::getTemplatePaths();
 
 		// $this->object = new \Aimeos\Client\JsonApi\..._Standard( $this->context, $paths );

@@ -298,7 +298,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/order/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'status', 'base' ) ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, array( 'status', 'base' ) ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -314,7 +314,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['order.siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['order.siteid'] = $this->context()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -329,7 +329,7 @@ class Standard
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		$search = parent::filter();
-		$context = $this->getContext();
+		$context = $this->context();
 
 		if( $default !== false )
 		{
@@ -369,7 +369,7 @@ class Standard
 			return $item;
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -663,7 +663,7 @@ class Standard
 	 */
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -889,7 +889,7 @@ class Standard
 	 */
 	protected function addStatus( \Aimeos\MShop\Order\Item\Iface $item )
 	{
-		$statusManager = \Aimeos\MShop::create( $this->getContext(), 'order/status' );
+		$statusManager = \Aimeos\MShop::create( $this->context(), 'order/status' );
 
 		$statusItem = $statusManager->create();
 		$statusItem->setParentId( $item->getId() );

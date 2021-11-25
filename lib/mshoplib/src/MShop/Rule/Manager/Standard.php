@@ -148,7 +148,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/rule/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, ['type'] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -164,7 +164,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['rule.siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['rule.siteid'] = $this->context()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -327,7 +327,7 @@ class Standard
 			return $item;
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -511,7 +511,7 @@ class Standard
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -672,7 +672,7 @@ class Standard
 				if( ( $row['rule.config'] = json_decode( $config = $row['rule.config'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'rule.config', $row['rule.id'], $config );
-					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/rule' );
+					$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/rule' );
 				}
 
 				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {

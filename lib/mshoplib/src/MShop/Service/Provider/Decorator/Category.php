@@ -124,7 +124,7 @@ class Category
 	 */
 	protected function getCatalogIds( array $catalogCodes ) : array
 	{
-		$catalogManager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
+		$catalogManager = \Aimeos\MShop::create( $this->context(), 'catalog' );
 
 		$search = $catalogManager->filter( true );
 		$expr = array(
@@ -188,7 +188,7 @@ class Category
 			return [];
 		}
 
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
 		$search = $manager->filter();
 		$expr = [];
 
@@ -212,7 +212,7 @@ class Category
 	protected function getTreeCatalogIds( array $catalogIds ) : array
 	{
 		$ids = [];
-		$catalogManager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
+		$catalogManager = \Aimeos\MShop::create( $this->context(), 'catalog' );
 
 		foreach( $catalogIds as $catId )
 		{

@@ -19,7 +19,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\Shipping( $this->context, $this->plugin );

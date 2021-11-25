@@ -31,7 +31,7 @@ class TestHelperHtml
 	}
 
 
-	public static function getContext( $site = 'unittest' )
+	public static function context( $site = 'unittest' )
 	{
 		if( !isset( self::$context[$site] ) ) {
 			self::$context[$site] = self::createContext( $site );
@@ -58,7 +58,7 @@ class TestHelperHtml
 		$helper = new \Aimeos\MW\View\Helper\Date\Standard( $view, 'Y-m-d' );
 		$view->addHelper( 'date', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, self::getContext()->getConfig() );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, self::context()->getConfig() );
 		$view->addHelper( 'config', $helper );
 
 		return $view;

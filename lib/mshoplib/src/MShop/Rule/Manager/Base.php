@@ -74,19 +74,19 @@ abstract class Base
 
 		if( ctype_alnum( $type ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Invalid characters in type name "%1$s"' );
+			$msg = $this->context()->translate( 'mshop', 'Invalid characters in type name "%1$s"' );
 			throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $type ) );
 		}
 
 		if( ( $provider = array_shift( $names ) ) === null )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Provider in "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'Provider in "%1$s" not available' );
 			throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $item->getProvider() ) );
 		}
 
 		if( ctype_alnum( $provider ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
+			$msg = $this->context()->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
 			throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $provider ) );
 		}
 
@@ -94,11 +94,11 @@ abstract class Base
 
 		if( class_exists( $classname ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Class "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
 			throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $classname ) );
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$provider = new $classname( $context, $item );
 
 		self::checkClass( \Aimeos\MShop\Rule\Provider\Factory\Iface::class, $provider );
@@ -125,7 +125,7 @@ abstract class Base
 		{
 			if( ctype_alnum( $name ) === false )
 			{
-				$msg = $this->getContext()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
+				$msg = $this->context()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
 				throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $name ) );
 			}
 
@@ -133,11 +133,11 @@ abstract class Base
 
 			if( class_exists( $classname ) === false )
 			{
-				$msg = $this->getContext()->translate( 'mshop', 'Class "%1$s" not available' );
+				$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
 				throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $classname ) );
 			}
 
-			$provider = new $classname( $this->getContext(), $ruleItem, $provider );
+			$provider = new $classname( $this->context(), $ruleItem, $provider );
 
 			self::checkClass( $classprefix . 'Iface', $provider );
 		}

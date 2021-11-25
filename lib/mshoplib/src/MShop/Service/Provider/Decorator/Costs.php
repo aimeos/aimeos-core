@@ -77,7 +77,7 @@ class Costs
 
 		if( !isset( $config['costs.percent'] ) )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Missing configuration "%1$s"' );
+			$msg = $this->context()->translate( 'mshop', 'Missing configuration "%1$s"' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'costs.percent' ) );
 		}
 

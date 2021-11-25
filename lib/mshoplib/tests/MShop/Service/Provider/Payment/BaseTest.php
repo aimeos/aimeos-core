@@ -17,7 +17,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 
 		$servManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
 		$search = $servManager->filter();

@@ -13,7 +13,7 @@ class DemoTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop::cache( true );
 
 		$aimeos = \TestHelperJobs::getAimeos();
-		$context = \TestHelperJobs::getContext();
+		$context = \TestHelperJobs::context();
 
 		// $this->object = new \Aimeos\Controller\Jobs\Demo\Standard( $context, $aimeos );
 	}

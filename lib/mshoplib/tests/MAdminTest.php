@@ -13,7 +13,7 @@ class MAdminTest extends \PHPUnit\Framework\TestCase
 {
 	public function testCreate()
 	{
-		$manager = \Aimeos\MAdmin::create( \TestHelperMShop::getContext(), 'job' );
+		$manager = \Aimeos\MAdmin::create( \TestHelperMShop::context(), 'job' );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $manager );
 	}
 
@@ -21,21 +21,21 @@ class MAdminTest extends \PHPUnit\Framework\TestCase
 	public function testCreateEmpty()
 	{
 		$this->expectException( \Aimeos\MAdmin\Exception::class );
-		\Aimeos\MAdmin::create( \TestHelperMShop::getContext(), "\n" );
+		\Aimeos\MAdmin::create( \TestHelperMShop::context(), "\n" );
 	}
 
 
 	public function testCreateInvalidName()
 	{
 		$this->expectException( \Aimeos\MAdmin\Exception::class );
-		\Aimeos\MAdmin::create( \TestHelperMShop::getContext(), '%^' );
+		\Aimeos\MAdmin::create( \TestHelperMShop::context(), '%^' );
 	}
 
 
 	public function testCreateNotExisting()
 	{
 		$this->expectException( \Aimeos\MAdmin\Exception::class );
-		\Aimeos\MAdmin::create( \TestHelperMShop::getContext(), 'unknown' );
+		\Aimeos\MAdmin::create( \TestHelperMShop::context(), 'unknown' );
 	}
 
 
@@ -43,7 +43,7 @@ class MAdminTest extends \PHPUnit\Framework\TestCase
 	{
 		\Aimeos\MAdmin::cache( true );
 
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
 		$obj1 = \Aimeos\MAdmin::create( $context, 'log' );
 		$obj2 = \Aimeos\MAdmin::create( $context, 'log' );

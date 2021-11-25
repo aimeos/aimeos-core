@@ -113,7 +113,7 @@ class Standard
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		try {
-			$values['locale.currency.siteid'] = $this->getContext()->getLocale()->getSiteId();
+			$values['locale.currency.siteid'] = $this->context()->getLocale()->getSiteId();
 		} catch( \Exception $e ) {
 			$values['locale.currency.siteid'] = null;
 		}
@@ -135,7 +135,7 @@ class Standard
 			return $item;
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -363,7 +363,7 @@ class Standard
 	 */
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -658,7 +658,7 @@ class Standard
 			. 'Class: ' . get_class( $this ) . "\n"
 			. str_replace( ["\t", "\n\n"], ['', "\n"], trim( (string) $stmt ) );
 
-		$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
+		$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
 
 		return $result;
 	}

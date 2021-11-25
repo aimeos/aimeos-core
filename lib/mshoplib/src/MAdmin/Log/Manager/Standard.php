@@ -140,7 +140,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'madmin/log/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -157,7 +157,7 @@ class Standard
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		try {
-			$values['log.siteid'] = $this->getContext()->getLocale()->getSiteId();
+			$values['log.siteid'] = $this->context()->getLocale()->getSiteId();
 		} catch( \Exception $e ) {
 			$values['log.siteid'] = null;
 		}
@@ -179,7 +179,7 @@ class Standard
 			return $item;
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		try {
 			$siteid = $context->getLocale()->getSiteId();
@@ -416,7 +416,7 @@ class Standard
 			return $item;
 		}
 
-		$msg = $this->getContext()->translate( 'mshop', 'Log entry with ID "%1$s" not found' );
+		$msg = $this->context()->translate( 'mshop', 'Log entry with ID "%1$s" not found' );
 		throw new \Aimeos\MAdmin\Log\Exception( sprintf( $msg, $id ) );
 	}
 
@@ -432,7 +432,7 @@ class Standard
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$items = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();

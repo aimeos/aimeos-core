@@ -127,7 +127,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetConfig()
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$return = $this->object->setConfig( $context->getConfig() );
 
 		$this->assertSame( $context->getConfig(), $this->object->config() );
@@ -137,7 +137,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetDatabaseManager()
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$return = $this->object->setDatabaseManager( $context->getDatabaseManager() );
 
 		$this->assertSame( $context->getDatabaseManager(), $this->object->db() );
@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetFilesystemManager()
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$return = $this->object->setFilesystemManager( $context->getFilesystemManager() );
 
 		$this->assertSame( $context->getFilesystemManager(), $this->object->getFilesystemManager() );
@@ -169,9 +169,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetI18n()
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
-		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
+		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelperMShop::context() )->create();
 		$this->object->setLocale( $locale->setLanguageId( 'en' ) );
 
 		$return = $this->object->setI18n( ['en' => $context->getI18n()] );
@@ -183,7 +183,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testTranslate()
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
 		$this->assertEquals( 'mr', $context->translate( 'mshop/code', 'mr' ) );
 		$this->assertEquals( 'two apples', $context->translate( 'mshop', 'one apple', 'two apples', 2 ) );
@@ -192,7 +192,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLocale()
 	{
-		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
+		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelperMShop::context() )->create();
 		$return = $this->object->setLocale( $locale );
 
 		$this->assertSame( $locale, $this->object->locale() );
@@ -202,7 +202,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLogger()
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$return = $this->object->setLogger( $context->getLogger() );
 
 		$this->assertSame( $context->getLogger(), $this->object->logger() );
@@ -222,7 +222,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetMessageQueueManager()
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$return = $this->object->setMessageQueueManager( $context->getMessageQueueManager() );
 
 		$this->assertSame( $context->getMessageQueueManager(), $this->object->getMessageQueueManager() );
@@ -265,7 +265,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetSession()
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$return = $this->object->setSession( $context->getSession() );
 
 		$this->assertSame( $context->getSession(), $this->object->session() );

@@ -17,7 +17,7 @@ class LogTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::create( $context );
 		$item = $pluginManager->create();

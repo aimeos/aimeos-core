@@ -52,7 +52,7 @@ class None
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['siteid'] = $this->context()->getLocale()->getSiteId();
 		return new \Aimeos\MAdmin\Cache\Item\Standard( $values );
 	}
 
@@ -93,7 +93,7 @@ class None
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$msg = $this->getContext()->translate( 'mshop', 'Operation not supported' );
+		$msg = $this->context()->translate( 'mshop', 'Operation not supported' );
 		throw new \Aimeos\MAdmin\Cache\Exception( $msg );
 	}
 

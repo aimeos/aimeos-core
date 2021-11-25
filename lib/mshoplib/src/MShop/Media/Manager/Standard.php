@@ -217,7 +217,7 @@ class Standard
 		$path = 'mshop/media/manager/submanagers';
 		$default = ['lists', 'property', 'type'];
 
-		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, $default ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -233,7 +233,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['media.siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['media.siteid'] = $this->context()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -358,7 +358,7 @@ class Standard
 			return $this->saveListItems( $item, 'media', $fetch );
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -544,7 +544,7 @@ class Standard
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -705,7 +705,7 @@ class Standard
 				if( ( $row['media.previews'] = json_decode( $config = $row['media.previews'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_media.previews', $row['media.id'], $config );
-					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/media' );
+					$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/media' );
 				}
 				$map[$row['media.id']] = $row;
 			}
@@ -741,7 +741,7 @@ class Standard
 		if( $default !== false )
 		{
 			$object = $this->filterBase( 'media', $default );
-			$langid = $this->getContext()->getLocale()->getLanguageId();
+			$langid = $this->context()->getLocale()->getLanguageId();
 
 			if( $langid !== null )
 			{

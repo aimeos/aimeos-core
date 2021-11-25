@@ -70,7 +70,7 @@ class Coupon
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
 		$notAvailable = false;
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$manager = \Aimeos\MShop::create( $context, 'coupon' );
 		$codeManager = \Aimeos\MShop::create( $context, 'coupon/code' );
@@ -95,7 +95,7 @@ class Coupon
 
 		if( $notAvailable )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Coupon is not available any more' );
+			$msg = $this->context()->translate( 'mshop', 'Coupon is not available any more' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
 		}
 

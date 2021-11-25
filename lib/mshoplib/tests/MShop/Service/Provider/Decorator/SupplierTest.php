@@ -20,7 +20,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 
 		$servManager = \Aimeos\MShop::create( $this->context, 'service' );
 		$this->servItem = $servManager->create();
@@ -43,7 +43,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigFE()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$search = $orderManager->filter();
 		$expr = array(

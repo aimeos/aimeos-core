@@ -14,7 +14,7 @@ class DemoTest extends \PHPUnit\Framework\TestCase
 	{
 		\Aimeos\MShop::cache( true );
 
-		$this->context = \TestHelperJqadm::getContext();
+		$this->context = \TestHelperJqadm::context();
 		$paths = \TestHelperJqadm::getTemplatePaths();
 
 		// $this->object = new \Aimeos\Admin\JQAdm\...\Standard( $this->context, $paths );

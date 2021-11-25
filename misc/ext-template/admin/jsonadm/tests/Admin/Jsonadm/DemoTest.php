@@ -16,7 +16,7 @@ class DemoTest extends \PHPUnit\Framework\TestCase
 	{
 		\Aimeos\MShop::cache( true );
 
-		// $this->object = new \Aimeos\Admin\Jsonadm\Demo\Standard( \TestHelperJsonadm::getContext() );
+		// $this->object = new \Aimeos\Admin\Jsonadm\Demo\Standard( \TestHelperJsonadm::context() );
 	}
 
 

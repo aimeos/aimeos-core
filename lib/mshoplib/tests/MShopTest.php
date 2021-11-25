@@ -13,14 +13,14 @@ class MShopTest extends \PHPUnit\Framework\TestCase
 {
 	public function testCreate()
 	{
-		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'attribute' );
+		$manager = \Aimeos\MShop::create( \TestHelperMShop::context(), 'attribute' );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $manager );
 	}
 
 
 	public function testCreateSubManager()
 	{
-		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'attribute/lists/type' );
+		$manager = \Aimeos\MShop::create( \TestHelperMShop::context(), 'attribute/lists/type' );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $manager );
 	}
 
@@ -28,28 +28,28 @@ class MShopTest extends \PHPUnit\Framework\TestCase
 	public function testCreateManagerEmpty()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		\Aimeos\MShop::create( \TestHelperMShop::getContext(), "\n" );
+		\Aimeos\MShop::create( \TestHelperMShop::context(), "\n" );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		\Aimeos\MShop::create( \TestHelperMShop::getContext(), '%^' );
+		\Aimeos\MShop::create( \TestHelperMShop::context(), '%^' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		\Aimeos\MShop::create( \TestHelperMShop::getContext(), 'unknown' );
+		\Aimeos\MShop::create( \TestHelperMShop::context(), 'unknown' );
 	}
 
 
 	public function testCreateSubManagerNotExisting()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		\Aimeos\MShop::create( \TestHelperMShop::getContext(), 'attribute/unknown' );
+		\Aimeos\MShop::create( \TestHelperMShop::context(), 'attribute/unknown' );
 	}
 
 
@@ -57,7 +57,7 @@ class MShopTest extends \PHPUnit\Framework\TestCase
 	{
 		\Aimeos\MShop::cache( true );
 
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
 		$obj1 = \Aimeos\MShop::create( $context, 'attribute' );
 		$obj2 = \Aimeos\MShop::create( $context, 'attribute' );

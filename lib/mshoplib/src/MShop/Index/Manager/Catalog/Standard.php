@@ -414,7 +414,7 @@ class Standard
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Product\Item\Iface::class, $items );
 
 		$date = date( 'Y-m-d H:i:s' );
-		$context = $this->getContext();
+		$context = $this->context();
 		$siteid = $context->getLocale()->getSiteId();
 		$listItems = $this->getListItems( $items );
 
@@ -639,7 +639,7 @@ class Standard
 	protected function getListItems( iterable $items ) : \Aimeos\Map
 	{
 		$listItems = [];
-		$listManager = \Aimeos\MShop::create( $this->getContext(), 'catalog/lists' );
+		$listManager = \Aimeos\MShop::create( $this->context(), 'catalog/lists' );
 
 		$search = $listManager->filter( true )->slice( 0, 0x7fffffff )->add( [
 			'catalog.lists.refid' => map( $items )->keys()->toArray(),
@@ -664,7 +664,7 @@ class Standard
 		if( $this->subManagers === null )
 		{
 			$this->subManagers = [];
-			$config = $this->getContext()->getConfig();
+			$config = $this->context()->getConfig();
 
 			/** mshop/index/manager/catalog/submanagers
 			 * A list of sub-manager names used for indexing associated items to categories

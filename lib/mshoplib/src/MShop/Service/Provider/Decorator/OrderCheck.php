@@ -86,7 +86,7 @@ class OrderCheck
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$config = $this->getServiceItem()->getConfig();
 
 		if( ( $customerId = $context->getUserId() ) === null ) {

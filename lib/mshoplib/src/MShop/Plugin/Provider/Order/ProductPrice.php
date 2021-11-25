@@ -163,7 +163,7 @@ class ProductPrice
 		if( $this->getConfigValue( 'warn', false ) == true && count( $changedProducts ) > 0 )
 		{
 			$code = ['product' => $changedProducts];
-			$msg = $this->getContext()->translate( 'mshop', 'Please have a look at the prices of the products in your basket' );
+			$msg = $this->context()->translate( 'mshop', 'Please have a look at the prices of the products in your basket' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 
@@ -183,7 +183,7 @@ class ProductPrice
 			return map();
 		}
 
-		$attrManager = \Aimeos\MShop::create( $this->getContext(), 'attribute' );
+		$attrManager = \Aimeos\MShop::create( $this->context(), 'attribute' );
 		$search = $attrManager->filter( true )->add( ['attribute.id' => $list] )->slice( 0, count( $list ) );
 
 		return $attrManager->search( $search, ['price'] );
@@ -202,7 +202,7 @@ class ProductPrice
 			return map();
 		}
 
-		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
+		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
 		$search = $productManager->filter( true )->add( ['product.id' => $prodIds] )->slice( 0, count( $prodIds ) );
 
 		return $productManager->search( $search, ['price', 'attribute' => ['custom']] );
@@ -236,12 +236,12 @@ class ProductPrice
 			$ppid = $orderProduct->getParentProductId();
 			$codes = ['product' => [$pos => 'product.price']];
 
-			$msg = $this->getContext()->translate( 'mshop', 'No price for product ID "%1$s" or "%2$s" available' );
+			$msg = $this->context()->translate( 'mshop', 'No price for product ID "%1$s" or "%2$s" available' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $pid, $ppid ), -1, null, $codes );
 		}
 
 		$currency = $orderProduct->getPrice()->getCurrencyId();
-		$priceManager = \Aimeos\MShop::create( $this->getContext(), 'price' );
+		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
 		$price = clone $priceManager->getLowestPrice( $prodPrices, $orderProduct->getQuantity(), $currency );
 
 		// add prices of product attributes to compute the end price for comparison

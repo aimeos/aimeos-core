@@ -40,13 +40,13 @@ abstract class Base
 
 		if( ( $price = $priceList->first() ) === null )
 		{
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Price item not available' );
+			$msg = $this->context()->getI18n()->dt( 'mshop', 'Price item not available' );
 			throw new \Aimeos\MShop\Price\Exception( $msg );
 		}
 
 		if( $price->getQuantity() > $quantity )
 		{
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Price for the given quantity "%1$s" not available' );
+			$msg = $this->context()->getI18n()->dt( 'mshop', 'Price for the given quantity "%1$s" not available' );
 			throw new \Aimeos\MShop\Price\Exception( sprintf( $msg, $quantity ) );
 		}
 

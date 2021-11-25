@@ -30,7 +30,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 */
 	protected function addManagerDecorators( \Aimeos\MShop\Common\Manager\Iface $manager, string $managerpath, string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$config = $context->getConfig();
 
 		/** madmin/common/manager/decorators/default
@@ -92,12 +92,12 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	{
 		$domain = strtolower( $domain );
 		$manager = strtolower( $manager );
-		$config = $this->getContext()->getConfig();
+		$config = $this->context()->getConfig();
 
 
 		if( empty( $domain ) || ctype_alnum( $domain ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Invalid characters in domain name "%1$s"' );
+			$msg = $this->context()->translate( 'mshop', 'Invalid characters in domain name "%1$s"' );
 			throw new \Aimeos\MAdmin\Exception( sprintf( $msg, $domain ) );
 		}
 
@@ -107,7 +107,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 		if( empty( $name ) || ctype_alnum( $name ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Invalid characters in manager name "%1$s"' );
+			$msg = $this->context()->translate( 'mshop', 'Invalid characters in manager name "%1$s"' );
 			throw new \Aimeos\MAdmin\Exception( sprintf( $msg, $name ) );
 		}
 
@@ -119,10 +119,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 		if( class_exists( $classname ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Class "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
 			throw new \Aimeos\MAdmin\Exception( sprintf( $msg, $classname ) );
 		}
 
-		return self::checkClass( $interface, new $classname( $this->getContext() ) );
+		return self::checkClass( $interface, new $classname( $this->context() ) );
 	}
 }

@@ -35,7 +35,7 @@ class TestHelperJsonadm
 	}
 
 
-	public static function getContext( $site = 'unittest' )
+	public static function context( $site = 'unittest' )
 	{
 		if( !isset( self::$context[$site] ) ) {
 			self::$context[$site] = self::createContext( $site );

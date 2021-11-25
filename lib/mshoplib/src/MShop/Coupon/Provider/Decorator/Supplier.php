@@ -62,11 +62,11 @@ class Supplier
 				$prodIds[$product->getProductId()][] = $product;
 			}
 
-			$manager = \Aimeos\MShop::create( $this->getContext(), 'supplier' );
-			$listManager = \Aimeos\MShop::create( $this->getContext(), 'supplier/lists' );
+			$manager = \Aimeos\MShop::create( $this->context(), 'supplier' );
+			$listManager = \Aimeos\MShop::create( $this->context(), 'supplier/lists' );
 
 			$codes = explode( ',', $this->getConfigValue( 'supplier.code' ) );
-			$price = \Aimeos\MShop::create( $this->getContext(), 'price' )->create();
+			$price = \Aimeos\MShop::create( $this->context(), 'price' )->create();
 
 			$filter = $manager->filter( true )->add( ['supplier.code' => $codes] )->slice( 0, count( $codes ) );
 			$supIds = $manager->search( $filter )->keys()->toArray();
@@ -130,7 +130,7 @@ class Supplier
 	{
 		if( ( $value = $this->getConfigValue( 'supplier.code' ) ) !== null )
 		{
-			$manager = \Aimeos\MShop::create( $this->getContext(), 'supplier' );
+			$manager = \Aimeos\MShop::create( $this->context(), 'supplier' );
 			$filter = $manager->filter( true )->add( ['supplier.code' => explode( ',', $value )] )->slice( 0, 1 );
 			$expr = [];
 

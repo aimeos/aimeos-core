@@ -21,7 +21,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
 		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( $context )->create();
@@ -544,11 +544,11 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function createProduct( $code )
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$orderProductManager = $orderManager->getSubManager( 'base' )->getSubManager( 'product' );
 		$product = $orderProductManager->create();
 
-		$price = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
+		$price = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelperMShop::context() )->create();
 		$price->setValue( '2.99' );
 
 		$product->setPrice( $price );

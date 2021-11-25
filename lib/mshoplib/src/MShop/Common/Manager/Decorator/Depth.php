@@ -53,7 +53,7 @@ class Depth
 			 * @since 2019.04
 			 * @category Developer
 			 */
-			$max = $this->getContext()->getConfig()->get( 'mshop/common/manager/maxdepth', 2 );
+			$max = $this->context()->getConfig()->get( 'mshop/common/manager/maxdepth', 2 );
 
 			if( $this->level++ < $max ) {
 				$items = $this->getManager()->search( $search, $ref, $total );

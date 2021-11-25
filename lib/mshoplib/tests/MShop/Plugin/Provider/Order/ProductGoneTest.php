@@ -20,7 +20,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
 
 		$manager = \Aimeos\MShop::create( $this->context, 'product' );

@@ -22,7 +22,7 @@ class TaxratesTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 
 		$this->address = \Aimeos\MShop::create( $this->context, 'order/base/address' )->create()->setCountryId( 'US' );
 		$this->basket = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off();

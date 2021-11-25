@@ -178,7 +178,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
-	protected function getContext() : \Aimeos\MShop\Context\Item\Iface
+	protected function context() : \Aimeos\MShop\Context\Item\Iface
 	{
 		return $this->context;
 	}
@@ -255,7 +255,7 @@ abstract class Base
 		$orderProducts = [];
 
 		if( ( $prices = $this->getPriceByTaxRate( $base ) )->isEmpty() ) {
-			$prices = ['0.00' => \Aimeos\MShop::create( $this->getContext(), 'price' )->create()];
+			$prices = ['0.00' => \Aimeos\MShop::create( $this->context(), 'price' )->create()];
 		}
 
 		foreach( $prices as $taxrate => $price )
@@ -296,7 +296,7 @@ abstract class Base
 	protected function getPriceByTaxRate( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\Map
 	{
 		$prices = map();
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'price' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'price' );
 
 		$map = $basket->getCoupons();
 		$products = $map[$this->getCode()] ?? [];

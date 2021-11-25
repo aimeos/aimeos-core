@@ -33,7 +33,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.editor' => 'unitTestUser'
 		);
 
-		$baseItem = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base' )->create();
+		$baseItem = \Aimeos\MShop::create( \TestHelperMShop::context(), 'order/base' )->create();
 		$this->object = new \Aimeos\MShop\Order\Item\Standard( $this->values, $baseItem );
 	}
 
@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSetBaseItem()
 	{
 		$item = new \Aimeos\MShop\Order\Item\Standard( $this->values );
-		$baseItem = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base' )->create();
+		$baseItem = \Aimeos\MShop::create( \TestHelperMShop::context(), 'order/base' )->create();
 
 		$result = $this->object->setBaseItem( $baseItem );
 

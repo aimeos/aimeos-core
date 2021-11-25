@@ -17,7 +17,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
 		$item = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
 

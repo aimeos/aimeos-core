@@ -20,7 +20,7 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->create();
 		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->create()->off(); // remove event listeners
 

@@ -19,7 +19,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$this->editor = $this->context->getEditor();
 
 		$this->object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
@@ -291,7 +291,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveItemRefItems()
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
 		$manager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
 
@@ -331,7 +331,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveItemSitecheck()
 	{
-		$manager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::context() );
 
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );

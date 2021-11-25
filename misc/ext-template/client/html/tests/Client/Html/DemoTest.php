@@ -17,7 +17,7 @@ class DemoTest extends \PHPUnit\Framework\TestCase
 	{
 		\Aimeos\MShop::cache( true );
 
-		$this->context = \TestHelperHtml::getContext();
+		$this->context = \TestHelperHtml::context();
 		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 
 		// $this->object = new \Aimeos\Client\Html\..._Standard( $this->context, $paths );

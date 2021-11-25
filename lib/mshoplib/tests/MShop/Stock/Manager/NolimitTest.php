@@ -16,7 +16,7 @@ class NolimitTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->object = new \Aimeos\MShop\Stock\Manager\Nolimit( \TestHelperMShop::getContext() );
+		$this->object = new \Aimeos\MShop\Stock\Manager\Nolimit( \TestHelperMShop::context() );
 	}
 
 

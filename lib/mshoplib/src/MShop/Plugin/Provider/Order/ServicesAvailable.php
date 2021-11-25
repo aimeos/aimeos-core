@@ -134,7 +134,7 @@ class ServicesAvailable
 		if( count( $problems ) > 0 )
 		{
 			$code = array( 'service' => $problems );
-			$msg = $this->getContext()->translate( 'mshop', 'Checks for available service items in basket failed' );
+			$msg = $this->context()->translate( 'mshop', 'Checks for available service items in basket failed' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 

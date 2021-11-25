@@ -19,7 +19,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )
 			->create()->setConfig( ['supplier.code' => 'unitSupplier001', 'supplier.only' => '1'] );
 

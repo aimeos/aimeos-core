@@ -18,7 +18,7 @@ class TipTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $context );
 		$this->coupon = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
@@ -114,8 +114,8 @@ class TipTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateInvalidConfig()
 	{
-		$context = \TestHelperMShop::getContext();
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
+		$context = \TestHelperMShop::context();
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::context() )->create();
 
 		$object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $couponItem, '90AB' );
 
@@ -174,7 +174,7 @@ class TipTest extends \PHPUnit\Framework\TestCase
 	protected function getOrderProducts()
 	{
 		$products = [];
-		$manager = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'order/base/product' );
+		$manager = \Aimeos\MShop::create( \TestHelperMShop::context(), 'order/base/product' );
 
 		$search = $manager->filter();
 		$search->setConditions( $search->and( array(

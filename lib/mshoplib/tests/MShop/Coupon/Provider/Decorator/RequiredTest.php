@@ -20,7 +20,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$orderProducts = [];
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\None( $context, $this->couponItem, 'abcd' );

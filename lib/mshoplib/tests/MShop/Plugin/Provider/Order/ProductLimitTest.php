@@ -21,14 +21,14 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create()->setConfig( ['single-number-max' => 10] );
 		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
 
 		$this->products = [];
 		$orderBaseProductManager = \Aimeos\MShop::create( $this->context, 'order/base/product' );
 
-		$manager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::context() );
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 

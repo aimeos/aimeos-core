@@ -244,7 +244,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/price/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, ['type', 'property', 'lists'] ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, ['type', 'property', 'lists'] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -260,7 +260,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$locale = $this->getContext()->getLocale();
+		$locale = $this->context()->getLocale();
 		$values['price.siteid'] = $locale->getSiteId();
 
 		if( !isset( $values['price.currencyid'] ) && $locale->getCurrencyId() !== null ) {
@@ -391,7 +391,7 @@ class Standard
 			return $this->saveListItems( $item, 'price', $fetch );
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -578,7 +578,7 @@ class Standard
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -739,7 +739,7 @@ class Standard
 				if( ( $row['price.taxrates'] = json_decode( $config = $row['price.taxrates'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_price.taxrates', $row['price.id'], $config );
-					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/price' );
+					$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/price' );
 				}
 				$map[$row['price.id']] = $row;
 			}
@@ -776,7 +776,7 @@ class Standard
 		{
 			$object = $this->filterBase( 'price', $default );
 
-			if( $currencyid = $this->getContext()->getLocale()->getCurrencyId() ) {
+			if( $currencyid = $this->context()->getLocale()->getCurrencyId() ) {
 				$object->add( ['price.currencyid' => $currencyid] );
 			}
 

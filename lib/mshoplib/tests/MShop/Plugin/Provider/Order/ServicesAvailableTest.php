@@ -20,7 +20,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->create();
 		$this->service = \Aimeos\MShop::create( $context, 'order/base/service' )->create();
 		$this->order = \Aimeos\MShop::create( $context, 'order/base' )->create()->off(); // remove event listeners

@@ -18,7 +18,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
 
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
@@ -77,9 +77,9 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateInvalidConfig()
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( \TestHelperMShop::context() )->create();
 		$object = new \Aimeos\MShop\Coupon\Provider\FreeShipping( $context, $couponItem, '90AB' );
 
 		$this->expectException( \Aimeos\MShop\Coupon\Exception::class );

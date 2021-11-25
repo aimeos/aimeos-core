@@ -14,7 +14,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 	public function testGetSubManager()
 	{
 		$class = \Aimeos\MShop\Common\Manager\Iface::class;
-		$object = new \Aimeos\MShop\Index\Manager\PgSQL( \TestHelperMShop::getContext() );
+		$object = new \Aimeos\MShop\Index\Manager\PgSQL( \TestHelperMShop::context() );
 
 		$this->assertInstanceOf( $class, $object->getSubManager( 'attribute' ) );
 		$this->assertInstanceOf( $class, $object->getSubManager( 'catalog' ) );

@@ -255,7 +255,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/product/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, ['lists', 'property', 'type'] ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, ['lists', 'property', 'type'] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -271,7 +271,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['product.siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['product.siteid'] = $this->context()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -319,7 +319,7 @@ class Standard
 			 * @category User
 			 * @since 2019.10
 			 */
-			if( !$this->getContext()->getConfig()->get( 'mshop/product/manager/strict-events', true ) ) {
+			if( !$this->context()->getConfig()->get( 'mshop/product/manager/strict-events', true ) ) {
 				$temp[] = $object->compare( '==', 'product.type', 'event' );
 			}
 
@@ -479,7 +479,7 @@ class Standard
 	 */
 	public function rate( string $id, string $rating, int $ratings ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -550,7 +550,7 @@ class Standard
 	 */
 	public function stock( string $id, int $value ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -626,7 +626,7 @@ class Standard
 			return $this->saveListItems( $item, 'product', $fetch );
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -820,7 +820,7 @@ class Standard
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$map = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -985,7 +985,7 @@ class Standard
 				if( ( $row['product.config'] = json_decode( $config = $row['product.config'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_product.config', $row['product.id'], $config );
-					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/product' );
+					$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/product' );
 				}
 
 				$map[$row['product.id']] = $row;
@@ -1068,7 +1068,7 @@ class Standard
 	protected function getDomainRefItems( array $ids, string $domain, array $ref ) : array
 	{
 		$keys = $map = $result = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		foreach( $ids as $id ) {
 			$keys[] = 'product|default|' . $id;
@@ -1121,7 +1121,7 @@ class Standard
 	 */
 	protected function getStockItems( array $ids, array $ref ) : \Aimeos\Map
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
 
 		$search = $manager->filter( true )->slice( 0, 0x7fffffff );
 		$expr = [

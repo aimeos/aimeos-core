@@ -100,7 +100,7 @@ class PercentRebate
 
 		if( $percent == 0 || $prodcode === null )
 		{
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
+			$msg = $this->context()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
 			$msg = sprintf( $msg, $this->getItem()->getProvider(), 'percentrebate.productcode, percentrebate.rebate' );
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}

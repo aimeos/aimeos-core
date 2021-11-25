@@ -17,7 +17,7 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create();
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductFreeOptions( $this->context, $plugin );

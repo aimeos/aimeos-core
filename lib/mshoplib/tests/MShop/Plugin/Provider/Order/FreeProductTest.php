@@ -18,7 +18,7 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$this->plugin = \Aimeos\MShop::create( $context, 'plugin' )->create();
 		$address = \Aimeos\MShop::create( $context, 'order/base/address' )->create()->setEmail( 'test@example.com' );
 

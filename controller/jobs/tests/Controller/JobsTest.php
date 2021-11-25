@@ -13,7 +13,7 @@ class JobsTest extends \PHPUnit\Framework\TestCase
 {
 	public function testCreateEmpty()
 	{
-		$context = \TestHelperJobs::getContext();
+		$context = \TestHelperJobs::context();
 		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->expectException( \Aimeos\Controller\Jobs\Exception::class );
@@ -23,7 +23,7 @@ class JobsTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateInvalidName()
 	{
-		$context = \TestHelperJobs::getContext();
+		$context = \TestHelperJobs::context();
 		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->expectException( \Aimeos\Controller\Jobs\Exception::class );
@@ -33,7 +33,7 @@ class JobsTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateNotExisting()
 	{
-		$context = \TestHelperJobs::getContext();
+		$context = \TestHelperJobs::context();
 		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->expectException( \Aimeos\Controller\Jobs\Exception::class );
@@ -43,7 +43,7 @@ class JobsTest extends \PHPUnit\Framework\TestCase
 
 	public function testGet()
 	{
-		$context = \TestHelperJobs::getContext();
+		$context = \TestHelperJobs::context();
 		$aimeos = \TestHelperJobs::getAimeos();
 
 		$list = \Aimeos\Controller\Jobs::get( $context, $aimeos, \TestHelperJobs::getControllerPaths() );

@@ -64,7 +64,7 @@ class ProductGone
 
 		$notAvailable = [];
 		$productIds = $order->getProducts()->getProductId()->toArray();
-		$productManager = \Aimeos\MShop::create( $this->getContext(), 'product' );
+		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
 
 		$search = $productManager->filter( true );
 		$search->setConditions( $search->and( [
@@ -85,7 +85,7 @@ class ProductGone
 		if( count( $notAvailable ) > 0 )
 		{
 			$code = array( 'product' => $notAvailable );
-			$msg = $this->getContext()->translate( 'mshop', 'Products in basket not available' );
+			$msg = $this->context()->translate( 'mshop', 'Products in basket not available' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 

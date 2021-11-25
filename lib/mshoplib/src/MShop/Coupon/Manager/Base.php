@@ -34,13 +34,13 @@ abstract class Base
 
 		if( ( $providername = array_shift( $names ) ) === null )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Provider in "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'Provider in "%1$s" not available' );
 			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $item->getProvider() ) );
 		}
 
 		if( ctype_alnum( $providername ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
+			$msg = $this->context()->translate( 'mshop', 'Invalid characters in provider name "%1$s"' );
 			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $providername ) );
 		}
 
@@ -48,11 +48,11 @@ abstract class Base
 
 		if( class_exists( $classname ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Class "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
 			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $classname ) );
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$provider = new $classname( $context, $item, $code );
 
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Coupon\Provider\Factory\Iface::class, $provider );
@@ -109,7 +109,7 @@ abstract class Base
 		{
 			if( ctype_alnum( $name ) === false )
 			{
-				$msg = $this->getContext()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
+				$msg = $this->context()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
 				throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $name ) );
 			}
 
@@ -117,11 +117,11 @@ abstract class Base
 
 			if( class_exists( $classname ) === false )
 			{
-				$msg = $this->getContext()->translate( 'mshop', 'Class "%1$s" not available' );
+				$msg = $this->context()->translate( 'mshop', 'Class "%1$s" not available' );
 				throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $classname ) );
 			}
 
-			$provider = new $classname( $provider, $this->getContext(), $item, $code );
+			$provider = new $classname( $provider, $this->context(), $item, $code );
 
 			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Coupon\Provider\Decorator\Iface::class, $provider );
 		}

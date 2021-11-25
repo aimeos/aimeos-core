@@ -16,7 +16,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperJobs::getContext();
+		$context = \TestHelperJobs::context();
 		$aimeos = \TestHelperJobs::getAimeos();
 
 		$context->getConfig()->set( 'controller/jobs/to-email', 'me@localhost' );

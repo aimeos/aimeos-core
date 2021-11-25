@@ -24,7 +24,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$manager = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelperMShop::context() );
 		$this->siteItem = $manager->getSubManager( 'site' )->create();
 
 		$this->values = array(

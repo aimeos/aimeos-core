@@ -67,7 +67,7 @@ class ProductStock
 
 		if( !$order->getProducts()->isEmpty() && ( $outOfStock = $this->checkStock( $order ) ) !== [] )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'Products out of stock' );
+			$msg = $this->context()->translate( 'mshop', 'Products out of stock' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, array( 'product' => $outOfStock ) );
 		}
 
@@ -84,7 +84,7 @@ class ProductStock
 	 */
 	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order ) : array
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'stock' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
 		$filter = $manager->filter();
 		$expr = $stockMap = [];
 

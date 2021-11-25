@@ -191,7 +191,7 @@ class Standard extends Base
 	 */
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$config = $context->getConfig();
 		$search = $this->object()->filter();
 
@@ -268,7 +268,7 @@ class Standard extends Base
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
+		$values['siteid'] = $this->context()->getLocale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -303,7 +303,7 @@ class Standard extends Base
 
 		try
 		{
-			$siteid = $this->getContext()->getLocale()->getSiteId();
+			$siteid = $this->context()->getLocale()->getSiteId();
 
 			foreach( $items as $item ) {
 				$this->createTreeManager( $siteid )->deleteNode( (string) $item );
@@ -416,7 +416,7 @@ class Standard extends Base
 		try
 		{
 			$node = $item->getNode();
-			$siteid = $this->getContext()->getLocale()->getSiteId();
+			$siteid = $this->context()->getLocale()->getSiteId();
 
 			$this->createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
 			$this->updateUsage( $node->getId(), $item, true );
@@ -453,7 +453,7 @@ class Standard extends Base
 		try
 		{
 			$item = $this->object()->get( $id );
-			$siteid = $this->getContext()->getLocale()->getSiteId();
+			$siteid = $this->context()->getLocale()->getSiteId();
 
 			$this->createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
 			$this->updateUsage( $id, $item );
@@ -487,7 +487,7 @@ class Standard extends Base
 		}
 
 		$node = $item->getNode();
-		$siteid = $this->getContext()->getLocale()->getSiteId();
+		$siteid = $this->context()->getLocale()->getSiteId();
 
 		$this->createTreeManager( $siteid )->saveNode( $node );
 		$this->updateUsage( $node->getId(), $item );
@@ -508,7 +508,7 @@ class Standard extends Base
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$nodeMap = $siteMap = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbname = $this->getResourceName();
 		$dbm = $context->getDatabaseManager();
@@ -682,7 +682,7 @@ class Standard extends Base
 				$siteMap[(string) $row['siteid']][(string) $row['id']] = new \Aimeos\MW\Tree\Node\Standard( $row );
 			}
 
-			$sitePath = array_reverse( (array) $this->getContext()->getLocale()->getSitePath() );
+			$sitePath = array_reverse( (array) $this->context()->getLocale()->getSitePath() );
 
 			foreach( $sitePath as $siteId )
 			{
@@ -714,7 +714,7 @@ class Standard extends Base
 	 */
 	public function getPath( string $id, array $ref = [] ) : \Aimeos\Map
 	{
-		$sitePath = array_reverse( (array) $this->getContext()->getLocale()->getSitePath() );
+		$sitePath = array_reverse( (array) $this->context()->getLocale()->getSitePath() );
 
 		foreach( $sitePath as $siteId )
 		{
@@ -736,7 +736,7 @@ class Standard extends Base
 			}
 		}
 
-		$msg = $this->getContext()->translate( 'mshop', 'Catalog path for ID "%1$s" not found' );
+		$msg = $this->context()->translate( 'mshop', 'Catalog path for ID "%1$s" not found' );
 		throw new \Aimeos\MShop\Catalog\Exception( sprintf( $msg, $id ) );
 	}
 
@@ -753,7 +753,7 @@ class Standard extends Base
 	public function getTree( string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
 		\Aimeos\MW\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
-		$sitePath = array_reverse( (array) $this->getContext()->getLocale()->getSitePath() );
+		$sitePath = array_reverse( (array) $this->context()->getLocale()->getSitePath() );
 
 		foreach( $sitePath as $siteId )
 		{
@@ -799,7 +799,7 @@ class Standard extends Base
 			}
 		}
 
-		$msg = $this->getContext()->translate( 'mshop', 'No catalog node for ID "%1$s"' );
+		$msg = $this->context()->translate( 'mshop', 'No catalog node for ID "%1$s"' );
 		throw new \Aimeos\MShop\Catalog\Exception( sprintf( $msg, $id ) );
 	}
 
@@ -881,7 +881,7 @@ class Standard extends Base
 		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
 		{
 			$dbname = $this->getResourceName();
-			$dbm = $this->getContext()->getDatabaseManager();
+			$dbm = $this->context()->getDatabaseManager();
 
 			$conn = $dbm->acquire( $dbname );
 			$conn->create( $sql )->execute()->finish();
@@ -922,7 +922,7 @@ class Standard extends Base
 		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
 		{
 			$dbname = $this->getResourceName();
-			$dbm = $this->getContext()->getDatabaseManager();
+			$dbm = $this->context()->getDatabaseManager();
 
 			$conn = $dbm->acquire( $dbname );
 			$conn->create( $sql )->execute()->finish();
@@ -945,7 +945,7 @@ class Standard extends Base
 		bool $case = false ) : \Aimeos\MShop\Catalog\Manager\Iface
 	{
 		$date = date( 'Y-m-d H:i:s' );
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();

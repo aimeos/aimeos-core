@@ -138,7 +138,7 @@ class Standard
 	 */
 	protected function addStatusItem( string $parentid, string $type, string $value ) : Iface
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/status' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'order/status' );
 
 		$item = $manager->create();
 		$item->setParentId( $parentid );
@@ -189,7 +189,7 @@ class Standard
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item object
 	 */
-	protected function getContext() : \Aimeos\MShop\Context\Item\Iface
+	protected function context() : \Aimeos\MShop\Context\Item\Iface
 	{
 		return $this->context;
 	}
@@ -205,7 +205,7 @@ class Standard
 	 */
 	protected function getLastStatusItem( string $parentid, string $type, string $status ) : ?\Aimeos\MShop\Order\Item\Status\Iface
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/status' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'order/status' );
 
 		$search = $manager->filter();
 		$expr = array(
@@ -248,7 +248,7 @@ class Standard
 	 */
 	protected function updateCoupons( \Aimeos\MShop\Order\Item\Iface $orderItem, int $how = +1 )
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$manager = \Aimeos\MShop::create( $context, 'order/base/coupon' );
 		$couponCodeManager = \Aimeos\MShop::create( $context, 'coupon/code' );
 
@@ -323,7 +323,7 @@ class Standard
 	 */
 	protected function updateStock( \Aimeos\MShop\Order\Item\Iface $orderItem, int $how = +1 )
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$stockManager = \Aimeos\MShop::create( $context, 'stock' );
 		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
 

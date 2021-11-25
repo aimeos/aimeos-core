@@ -271,7 +271,7 @@ class Standard extends Base
 		$path = 'mshop/order/manager/base/submanagers';
 		$default = array( 'address', 'coupon', 'product', 'service' );
 
-		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, $default ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -287,7 +287,7 @@ class Standard extends Base
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$locale = $context->getLocale();
 
 		$values['order.base.siteid'] = $locale->getSiteId();
@@ -311,7 +311,7 @@ class Standard extends Base
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		$search = parent::filter( $default );
-		$context = $this->getContext();
+		$context = $this->context();
 
 		if( $default !== false )
 		{
@@ -576,7 +576,7 @@ class Standard extends Base
 			return $item;
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -766,7 +766,7 @@ class Standard extends Base
 	 */
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 		$localeManager = \Aimeos\MShop::create( $context, 'locale' );
 
@@ -965,7 +965,7 @@ class Standard extends Base
 		];
 		$search->setConditions( $search->and( $expr ) );
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
@@ -984,7 +984,7 @@ class Standard extends Base
 
 			if( ( $row = $results->fetch() ) === null )
 			{
-				$msg = $this->getContext()->translate( 'mshop', 'Order base item with order ID "%1$s" not found' );
+				$msg = $this->context()->translate( 'mshop', 'Order base item with order ID "%1$s" not found' );
 				throw new \Aimeos\MShop\Order\Exception( sprintf( $msg, $id ) );
 			}
 			$results->finish();
@@ -1022,7 +1022,7 @@ class Standard extends Base
 			$basket = $this->loadFresh( $id, $price, $localeItem, $row, $parts );
 		}
 
-		$pluginManager = \Aimeos\MShop::create( $this->getContext(), 'plugin' );
+		$pluginManager = \Aimeos\MShop::create( $this->context(), 'plugin' );
 		$pluginManager->register( $basket, 'order' );
 
 		return $basket;

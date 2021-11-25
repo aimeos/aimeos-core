@@ -62,11 +62,11 @@ class Category
 				$prodIds[$product->getProductId()][] = $product;
 			}
 
-			$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
-			$listManager = \Aimeos\MShop::create( $this->getContext(), 'catalog/lists' );
+			$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
+			$listManager = \Aimeos\MShop::create( $this->context(), 'catalog/lists' );
 
 			$codes = explode( ',', $this->getConfigValue( 'category.code' ) );
-			$price = \Aimeos\MShop::create( $this->getContext(), 'price' )->create();
+			$price = \Aimeos\MShop::create( $this->context(), 'price' )->create();
 
 			$filter = $manager->filter( true )->add( ['catalog.code' => $codes] )->slice( 0, count( $codes ) );
 			$catIds = $manager->search( $filter )->keys()->toArray();
@@ -130,7 +130,7 @@ class Category
 	{
 		if( ( $value = $this->getConfigValue( 'category.code' ) ) !== null )
 		{
-			$manager = \Aimeos\MShop::create( $this->getContext(), 'catalog' );
+			$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
 			$filter = $manager->filter( null )->add( ['catalog.code' => explode( ',', $value )] )->slice( 0, 1 );
 			$expr = [];
 

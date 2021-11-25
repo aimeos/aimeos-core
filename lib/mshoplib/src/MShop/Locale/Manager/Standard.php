@@ -157,7 +157,7 @@ class Standard
 	{
 		try
 		{
-			$values['locale.siteid'] = $this->getContext()->getLocale()->getSiteId();
+			$values['locale.siteid'] = $this->context()->getLocale()->getSiteId();
 			return $this->createItemBase( $values );
 		}
 		catch( \Exception $e )
@@ -283,7 +283,7 @@ class Standard
 			return $item;
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -544,7 +544,7 @@ class Standard
 			return $this->createItemBase( ['locale.siteid' => $siteId], $siteItem, $sites );
 		}
 
-		$msg = $this->getContext()->translate( 'mshop', 'Locale item for site "%1$s" not found' );
+		$msg = $this->context()->translate( 'mshop', 'Locale item for site "%1$s" not found' );
 		throw new \Aimeos\MShop\Locale\Exception( sprintf( $msg, $site ) );
 	}
 
@@ -722,7 +722,7 @@ class Standard
 			. 'Class: ' . get_class( $this ) . "\n"
 			. str_replace( ["\t", "\n\n"], ['', "\n"], trim( (string) $stmt ) );
 
-		$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
+		$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
 
 		return $result;
 	}
@@ -739,7 +739,7 @@ class Standard
 	protected function searchEntries( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
 	{
 		$map = [];
-		$context = $this->getContext();
+		$context = $this->context();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -893,7 +893,7 @@ class Standard
 
 				if( $row === null )
 				{
-					$msg = $this->getContext()->translate( 'mshop', 'Total results value not found' );
+					$msg = $this->context()->translate( 'mshop', 'Total results value not found' );
 					throw new \Aimeos\MShop\Locale\Exception( $msg );
 				}
 

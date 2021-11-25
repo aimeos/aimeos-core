@@ -20,7 +20,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$this->plugin = \Aimeos\MShop::create( $this->context, 'plugin' )->create()->setConfig( ['warn' => true] );
 		$this->order = \Aimeos\MShop::create( $this->context, 'order/base' )->create()->off(); // remove event listeners
 

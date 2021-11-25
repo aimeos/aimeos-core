@@ -150,7 +150,7 @@ class Delivery
 		if( isset( $attributes['delivery.type'] )
 			&& !isset( $this->feConfig['delivery.type']['default'][$attributes['delivery.type']] )
 		) {
-			$result['delivery.type'] = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid delivery type' );
+			$result['delivery.type'] = $this->context()->getI18n()->dt( 'mshop', 'Invalid delivery type' );
 		}
 
 		return $result;

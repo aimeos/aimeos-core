@@ -17,7 +17,7 @@ class DepthTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$manager = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
 
 		$this->object = new \Aimeos\MShop\Common\Manager\Decorator\Depth( $manager, $this->context );

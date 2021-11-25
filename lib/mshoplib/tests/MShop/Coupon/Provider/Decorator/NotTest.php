@@ -18,7 +18,7 @@ class NotTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 		$item = \Aimeos\MShop\Coupon\Manager\Factory::create( $context )->create();
 
 		$this->orderBase = \Aimeos\MShop\Order\Manager\Factory::create( $context )

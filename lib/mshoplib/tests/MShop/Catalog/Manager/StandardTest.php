@@ -18,8 +18,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelperMShop::getContext()->getEditor();
-		$this->object = new \Aimeos\MShop\Catalog\Manager\Standard( \TestHelperMShop::getContext() );
+		$this->editor = \TestHelperMShop::context()->getEditor();
+		$this->object = new \Aimeos\MShop\Catalog\Manager\Standard( \TestHelperMShop::context() );
 	}
 
 
@@ -40,7 +40,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->create();
 
 		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $item );
-		$this->assertEquals( \TestHelperMShop::getContext()->getLocale()->getSiteId(), $item->getNode()->siteid );
+		$this->assertEquals( \TestHelperMShop::context()->getLocale()->getSiteId(), $item->getNode()->siteid );
 	}
 
 
@@ -162,7 +162,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$testItem = $this->object->get( $item->getId() );
 
-		$this->assertEquals( \TestHelperMShop::getContext()->getLocale()->getSiteId(), $testItem->getSiteId() );
+		$this->assertEquals( \TestHelperMShop::context()->getLocale()->getSiteId(), $testItem->getSiteId() );
 		$this->assertEquals( $item->getId(), $testItem->getId() );
 		$this->assertEquals( 'Root', $testItem->getLabel() );
 		$this->assertEquals( 'Root', $testItem->getName() );
@@ -185,7 +185,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$categoryItem = $rootItem->getChild( 0 );
 		$miscItem = $categoryItem->getChild( 2 );
 
-		$this->assertEquals( \TestHelperMShop::getContext()->getLocale()->getSiteId(), $miscItem->getSiteId() );
+		$this->assertEquals( \TestHelperMShop::context()->getLocale()->getSiteId(), $miscItem->getSiteId() );
 		$this->assertEquals( 'Misc', $miscItem->getLabel() );
 		$this->assertEquals( 'Sonstiges', $miscItem->getName() );
 	}
@@ -300,7 +300,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $itemSaved->getId() );
 
-		$context = \TestHelperMShop::getContext();
+		$context = \TestHelperMShop::context();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );

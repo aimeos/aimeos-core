@@ -67,7 +67,7 @@ class Voucher
 	 */
 	public function update( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Coupon\Provider\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 
 		if( ( $prodcode = $this->getConfigValue( 'voucher.productcode' ) ) === null )
 		{
@@ -76,7 +76,7 @@ class Voucher
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'coupon/code' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'coupon/code' );
 		$orderProductId = $manager->find( $this->getCode() )->getRef();
 
 		$status = [\Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED];
@@ -110,7 +110,7 @@ class Voucher
 	 */
 	protected function checkVoucher( string $orderProductId, array $status )
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$manager = \Aimeos\MShop::create( $context, 'order' );
 
 		$search = $manager->filter();
@@ -136,7 +136,7 @@ class Voucher
 	 */
 	protected function filterOrderBaseIds( array $baseIds ) : array
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'order' );
 
 		$search = $manager->filter();
 		$expr = [
@@ -164,7 +164,7 @@ class Voucher
 	 */
 	protected function getOrderProductItem( string $orderProductId, string $currencyId ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$manager = \Aimeos\MShop::create( $context, 'order/base/product' );
 
 		$orderProduct = $manager->get( $orderProductId );
@@ -188,7 +188,7 @@ class Voucher
 	 */
 	protected function getUsedRebate( string $code ) : float
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$manager = \Aimeos\MShop::create( $context, 'order/base/coupon' );
 
 		$search = $manager->filter()->slice( 0, 0x7fffffff );
@@ -231,7 +231,7 @@ class Voucher
 	 */
 	protected function setOrderAttributeRebate( array $orderProducts, float $remaining ) : array
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base/product/attribute' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'order/base/product/attribute' );
 
 		$orderAttrItem = $manager->create();
 		$orderAttrItem->setValue( number_format( $remaining, 2, '.', '' ) );

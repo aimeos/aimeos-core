@@ -18,7 +18,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelperJobs::getContext();
+		$context = \TestHelperJobs::context();
 		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->stub = $this->getMockBuilder( \Aimeos\Controller\Jobs\Iface::class )->getMock();
@@ -57,7 +57,7 @@ class TestBase
 {
 	public function getContextPublic()
 	{
-		return $this->getContext();
+		return $this->context();
 	}
 
 	public function getAimeosPublic()

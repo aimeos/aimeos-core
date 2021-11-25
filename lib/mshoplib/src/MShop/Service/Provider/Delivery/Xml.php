@@ -133,7 +133,7 @@ class Xml
 	 */
 	public function updateAsync() : bool
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$logger = $context->getLogger();
 		$location = $this->getConfigValue( 'xml.updatedir' );
 
@@ -205,7 +205,7 @@ class Xml
 	 */
 	protected function createXml( iterable $orderItems, iterable $baseItems ) : string
 	{
-		$view = $this->getContext()->getView();
+		$view = $this->context()->getView();
 		$template = $this->getConfigValue( 'xml.template', 'service/provider/delivery/xml-body-standard' );
 
 		return $view->assign( ['orderItems' => $orderItems, 'baseItems' => $baseItems] )->render( $template );
@@ -223,7 +223,7 @@ class Xml
 		$ids = map( $orderItems )->getBaseId();
 		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
 
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'order/base' );
 		$search = $manager->filter()->slice( 0, $ids->count() );
 		$search->setConditions( $search->compare( '==', 'order.base.id', $ids->toArray() ) );
 
@@ -241,11 +241,11 @@ class Xml
 	{
 		$nodes = [];
 		$xml = new \XMLReader();
-		$logger = $this->getContext()->getLogger();
+		$logger = $this->context()->getLogger();
 
 		if( $xml->open( $filename, LIBXML_COMPACT | LIBXML_PARSEHUGE ) === false )
 		{
-			$msg = $this->getContext()->translate( 'mshop', 'No XML file "%1$s" found' );
+			$msg = $this->context()->translate( 'mshop', 'No XML file "%1$s" found' );
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( $msg, $filename ) );
 		}
 
@@ -294,7 +294,7 @@ class Xml
 	 */
 	protected function importNodes( array $nodes ) : \Aimeos\MShop\Service\Provider\Delivery\Iface
 	{
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'order' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'order' );
 		$search = $manager->filter()->slice( 0, count( $nodes ) );
 		$search->setConditions( $search->compare( '==', 'order.id', array_keys( $nodes ) ) );
 		$items = $manager->search( $search );

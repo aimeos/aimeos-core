@@ -428,7 +428,7 @@ class Standard
 
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Product\Item\Iface::class, $items );
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
@@ -636,7 +636,7 @@ class Standard
 		if( $this->subManagers === null )
 		{
 			$this->subManagers = [];
-			$config = $this->getContext()->getConfig();
+			$config = $this->context()->getConfig();
 
 			/** mshop/index/manager/attribute/submanagers
 			 * A list of sub-manager names used for indexing associated items to attributes
@@ -678,7 +678,7 @@ class Standard
 	protected function saveAttributes( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
 	{
 		$date = date( 'Y-m-d H:i:s' );
-		$context = $this->getContext();
+		$context = $this->context();
 		$siteid = $context->getLocale()->getSiteId();
 
 		$products = ( in_array( $item->getType(), ['group', 'select'] ) ? $item->getRefItems( 'product', null, 'default' ) : [] );

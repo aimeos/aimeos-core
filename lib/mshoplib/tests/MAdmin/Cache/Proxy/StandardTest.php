@@ -20,7 +20,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		\Aimeos\MAdmin::cache( true );
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 
 		$this->mock = $this->getMockBuilder( \Aimeos\MW\Cache\DB::class )
 			->disableOriginalConstructor()->getMock();

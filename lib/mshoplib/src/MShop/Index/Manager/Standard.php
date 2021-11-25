@@ -214,7 +214,7 @@ class Standard
 		$this->getManager()->delete( $itemIds );
 		parent::delete( $itemIds );
 
-		$this->getContext()->cache()->deleteByTags( map( $itemIds ) ->prefix( 'product-' )->toArray() );
+		$this->context()->cache()->deleteByTags( map( $itemIds ) ->prefix( 'product-' )->toArray() );
 		return $this;
 	}
 
@@ -228,7 +228,7 @@ class Standard
 	 */
 	public function rebuild( iterable $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$config = $context->getConfig();
 
 		/** mshop/index/manager/chunksize
@@ -420,7 +420,7 @@ class Standard
 	 */
 	protected function writeIndex( \Aimeos\MW\Criteria\Iface $search, array $domains, int $size )
 	{
-		$context = $this->getContext();
+		$context = $this->context();
 		$manager = \Aimeos\MShop::create( $context, 'product' );
 		$submanagers = $this->getSubManagers();
 		$start = 0;
@@ -467,7 +467,7 @@ class Standard
 		if( $this->subManagers === null )
 		{
 			$this->subManagers = [];
-			$config = $this->getContext()->getConfig();
+			$config = $this->context()->getConfig();
 
 			/** mshop/index/manager/submanagers
 			 * A list of sub-manager names used for indexing associated items

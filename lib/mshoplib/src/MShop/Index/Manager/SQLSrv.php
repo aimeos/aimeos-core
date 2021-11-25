@@ -47,7 +47,7 @@ class SQLSrv
 		if( $this->subManagers === null )
 		{
 			$this->subManagers = [];
-			$config = $this->getContext()->getConfig();
+			$config = $this->context()->getConfig();
 
 			foreach( $config->get( 'mshop/index/manager/submanagers', [] ) as $domain )
 			{

@@ -130,7 +130,7 @@ class BasketLimits
 		}
 
 		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
-		$context = $this->getContext();
+		$context = $this->context();
 
 		/** mshop/plugin/provider/order/complete/disable
 		 * Disables the basket limits check
@@ -196,14 +196,14 @@ class BasketLimits
 		if( ( isset( $config['min-value'][$currencyId] ) ) && is_numeric( $config['min-value'][$currencyId] )
 			&& ( $sum->getValue() + $sum->getRebate() < $config['min-value'][$currencyId] )
 		) {
-			$msg = $this->getContext()->translate( 'mshop', 'The minimum basket value of %1$s isn\'t reached' );
+			$msg = $this->context()->translate( 'mshop', 'The minimum basket value of %1$s isn\'t reached' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['min-value'][$currencyId] ) );
 		}
 
 		if( ( isset( $config['max-value'][$currencyId] ) ) && is_numeric( $config['max-value'][$currencyId] )
 			&& ( $sum->getValue() + $sum->getRebate() > $config['max-value'][$currencyId] )
 		) {
-			$msg = $this->getContext()->translate( 'mshop', 'The maximum basket value of %1$s is exceeded' );
+			$msg = $this->context()->translate( 'mshop', 'The maximum basket value of %1$s is exceeded' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['max-value'][$currencyId] ) );
 		}
 	}
@@ -221,14 +221,14 @@ class BasketLimits
 		if( ( isset( $config['min-products'] ) ) && is_numeric( $config['min-products'] )
 			&& ( $count < $config['min-products'] )
 		) {
-			$msg = $this->getContext()->translate( 'mshop', 'The minimum product quantity of %1$d isn\'t reached' );
+			$msg = $this->context()->translate( 'mshop', 'The minimum product quantity of %1$d isn\'t reached' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['min-products'] ) );
 		}
 
 		if( ( isset( $config['max-products'] ) ) && is_numeric( $config['max-products'] )
 			&& ( $count > $config['max-products'] )
 		) {
-			$msg = $this->getContext()->translate( 'mshop', 'The maximum product quantity of %1$d is exceeded' );
+			$msg = $this->context()->translate( 'mshop', 'The maximum product quantity of %1$d is exceeded' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['max-products'] ) );
 		}
 	}

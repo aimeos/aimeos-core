@@ -135,7 +135,7 @@ class Email
 	{
 		$template = $this->getConfigValue( 'email.template', 'service/provider/delivery/email-body-standard' );
 
-		return $this->getContext()->getView()
+		return $this->context()->getView()
 			->assign( ['orderItems' => $orderItems, 'baseItems' => $baseItems] )
 			->render( $template );
 	}
@@ -151,7 +151,7 @@ class Email
 	{
 		$template = $this->getConfigValue( 'email.order-template', 'service/provider/delivery/email-order-standard' );
 
-		return $this->getContext()->getView()
+		return $this->context()->getView()
 			->assign( ['orderItems' => $orderItems, 'baseItems' => $baseItems] )
 			->render( $template );
 	}
@@ -168,7 +168,7 @@ class Email
 		$ids = map( $orderItems )->getBaseId();
 		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
 
-		$manager = \Aimeos\MShop::create( $this->getContext(), 'order/base' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'order/base' );
 		$search = $manager->filter()->slice( 0, $ids->count() );
 		$search->setConditions( $search->compare( '==', 'order.base.id', $ids->toArray() ) );
 
@@ -184,7 +184,7 @@ class Email
 	 */
 	protected function send( iterable $orderItems, iterable $baseItems )
 	{
-		$this->getContext()->mail()->create()
+		$this->context()->mail()->create()
 			->to( (string) $this->getConfigValue( 'email.to' ) )
 			->from( (string) $this->getConfigValue( 'email.from' ) )
 			->subject( (string) $this->getConfigValue( 'email.subject', 'New orders' ) )

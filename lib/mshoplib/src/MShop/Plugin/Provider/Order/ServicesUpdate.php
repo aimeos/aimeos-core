@@ -70,7 +70,7 @@ class ServicesUpdate
 
 		if( $order->getProducts()->isEmpty() )
 		{
-			$priceManager = \Aimeos\MShop::create( $this->getContext(), 'price' );
+			$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
 
 			foreach( $services as $type => $list )
 			{
@@ -88,7 +88,7 @@ class ServicesUpdate
 		}
 
 		$serviceItems = $this->getServiceItems( $services );
-		$serviceManager = \Aimeos\MShop::create( $this->getContext(), 'service' );
+		$serviceManager = \Aimeos\MShop::create( $this->context(), 'service' );
 
 		foreach( $services as $type => $list )
 		{
@@ -137,7 +137,7 @@ class ServicesUpdate
 
 		if( $list !== [] )
 		{
-			$serviceManager = \Aimeos\MShop::create( $this->getContext(), 'service' );
+			$serviceManager = \Aimeos\MShop::create( $this->context(), 'service' );
 
 			$search = $serviceManager->filter( true );
 			$expr = [$search->compare( '==', 'service.id', $list ), $search->getConditions()];

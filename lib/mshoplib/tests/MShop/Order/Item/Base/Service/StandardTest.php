@@ -20,7 +20,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->price = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelperMShop::getContext() )->create();
+		$this->price = \Aimeos\MShop\Price\Manager\Factory::create( \TestHelperMShop::context() )->create();
 
 		$attrValues = array(
 			'order.base.service.attribute.id' => 3,
@@ -52,7 +52,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.service.editor' => 'unitTestUser'
 		);
 
-		$servItem = \Aimeos\MShop::create( \TestHelperMShop::getContext(), 'service' )->create();
+		$servItem = \Aimeos\MShop::create( \TestHelperMShop::context(), 'service' )->create();
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Service\Standard(
 			$this->price, $this->values, $this->attribute, $servItem
 		);
@@ -266,7 +266,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttribute()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'service' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->create();
@@ -306,7 +306,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeList()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'service' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->create();
@@ -330,7 +330,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeItem()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'service' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->create();
@@ -367,7 +367,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAttributeItemList()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'service' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->create();
@@ -409,7 +409,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetAttributeItem()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'service' )->getSubManager( 'attribute' );
 
 		$item = $attManager->create();
@@ -440,7 +440,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetAttributeItems()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::create( \TestHelperMShop::context() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'service' )->getSubManager( 'attribute' );
 
 		$list = array(
@@ -544,7 +544,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$serviceCopy = new \Aimeos\MShop\Order\Item\Base\Service\Standard( $this->price );
 
-		$manager = \Aimeos\MShop\Service\Manager\Factory::create( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Service\Manager\Factory::create( \TestHelperMShop::context() );
 
 		$filter = $manager->filter()->add( ['service.provider' => 'Standard'] );
 		$item = $manager->search( $filter )->first( new \RuntimeException( 'No service found' ) );

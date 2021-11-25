@@ -19,7 +19,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::context();
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::create( $this->context );
 
 		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::create( $this->context )->create();
