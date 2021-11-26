@@ -29,7 +29,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'price.costs' => '19.95',
 			'price.rebate' => '10.00',
 			'price.taxvalue' => '34.3995',
-			'price.taxrates' => ['' => '19.00', 'local' => '5.00'],
+			'price.taxrates' => ['tax' => '19.00', 'local' => '5.00'],
 			'price.taxflag' => true,
 			'price.status' => true,
 			'price.mtime' => '2011-01-01 00:00:02',
@@ -317,7 +317,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetTaxRates()
 	{
-		$this->assertEquals( ['' => '19.00', 'local' => '5.00'], $this->object->getTaxRates() );
+		$this->assertEquals( ['tax' => '19.00', 'local' => '5.00'], $this->object->getTaxRates() );
 	}
 
 
@@ -333,11 +333,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetTaxRates()
 	{
-		$value = ['' => '22.00', 'local' => '10.00'];
+		$value = ['tax' => '22.00', 'local' => '10.00'];
 		$return = $this->object->setTaxRates( $value );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
-		$this->assertEquals( ['' => '22.00', 'local' => '10.00'], $this->object->getTaxRates() );
+		$this->assertEquals( ['tax' => '22.00', 'local' => '10.00'], $this->object->getTaxRates() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -449,7 +449,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'price.costs' => '5.00',
 			'price.rebate' => '2.00',
 			'price.taxvalue' => '3.0000',
-			'price.taxrates' => ['' => '20.00'],
+			'price.taxrates' => ['tax' => '20.00'],
 			'price.taxrate' => '20.00',
 			'price.taxflag' => false,
 			'price.status' => 0,

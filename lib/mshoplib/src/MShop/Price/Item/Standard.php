@@ -236,7 +236,7 @@ class Standard extends Base
 	public function getTaxRate() : string
 	{
 		$list = (array) $this->get( 'price.taxrates', [] );
-		return $this->formatNumber( isset( $list[''] ) ? $list[''] : '0.00' );
+		return $this->formatNumber( $list['tax'] ?? '0.00' );
 	}
 
 
@@ -259,7 +259,7 @@ class Standard extends Base
 	 */
 	public function setTaxRate( $taxrate ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		return $this->setTaxRates( ['' => $taxrate] );
+		return $this->setTaxRates( ['tax' => $taxrate] );
 	}
 
 
@@ -274,7 +274,7 @@ class Standard extends Base
 		foreach( $taxrates as $name => $taxrate )
 		{
 			unset( $taxrates[$name] ); // change index 0 to ''
-			$taxrates[$name ?: ''] = $this->checkPrice( $taxrate );
+			$taxrates[$name ?: 'tax'] = $this->checkPrice( $taxrate );
 		}
 
 		return $this->set( 'price.taxrates', $taxrates );
