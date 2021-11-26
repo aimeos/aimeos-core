@@ -11,7 +11,7 @@ namespace Aimeos\Upscheme\Task;
 
 class PriceMigrateTaxrate extends Base
 {
-	public function after() : array
+	public function before() : array
 	{
 		return ['Price'];
 	}
