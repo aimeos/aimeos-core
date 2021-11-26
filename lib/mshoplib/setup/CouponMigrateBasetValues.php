@@ -11,7 +11,7 @@ namespace Aimeos\Upscheme\Task;
 
 class CouponMigrateBasetValues extends Base
 {
-	public function after() : array
+	public function before() : array
 	{
 		return ['Coupon'];
 	}
@@ -28,9 +28,10 @@ class CouponMigrateBasetValues extends Base
 		$this->info( 'Migrating basketvalues configuration in coupon table', 'v' );
 
 		$db->stmt()->update( 'mshop_coupon' )
-			->set( 'provider', 'REPLACE("provider", \'BasketValues\', \'Basket\')' )
-			->set( 'config', 'REPLACE("config", \'basketvalues\', \'basket\')' )
-			->where( 'provider LIKE ?' )->orWhere( 'config LIKE ?' )
-			->setParameters( ['%BasketValues%', '%basketvalues%'] );
+			->set( 'provider', 'REPLACE(' . $db->qi( 'provider' ) . ', \'BasketValues\', \'Basket\')' )
+			->set( 'config', 'REPLACE(' . $db->qi( 'config' ) . ', \'basketvalues\', \'basket\')' )
+			->where( $db->qi( 'provider' ) . ' LIKE \'%BasketValues%\'' )
+			->orWhere( $db->qi( 'config' ) . ' LIKE \'%basketvalues%\'' )
+			->execute();
 	}
 }
