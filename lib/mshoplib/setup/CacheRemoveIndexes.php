@@ -19,10 +19,14 @@ class CacheRemoveIndexes extends Base
 
 	public function up()
 	{
+		$db = $this->db( 'db-cache' );
+
+		if( !$db->hasTable( 'madmin_cache' ) ) {
+			return;
+		}
+
 		$this->info( 'Remove wrong "idx_majob_expire" and "fk_macac_tid" cache indexes', 'v' );
 
-		$this->db( 'db-cache' )
-			->dropIndex( 'madmin_cache', 'idx_majob_expire' )
-			->dropIndex( 'madmin_cache_tag', 'fk_macac_tid' );
+		$db->dropIndex( 'madmin_cache', 'idx_majob_expire' )->dropIndex( 'madmin_cache_tag', 'fk_macac_tid' );
 	}
 }

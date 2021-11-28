@@ -32,11 +32,11 @@ class TablesClearPropertyKey extends Base
 
 		foreach( $this->tables as $rname => $table )
 		{
-			$this->info( sprintf( 'Checking table %1$s', $table ), 'vv', 1 );
-
 			$db = $this->db( $rname );
 
-			if( $db->hasColumn( $table, 'key' ) && $db->table( $table )->col( 'key' )->length() !== 103 ) {
+			if( $db->hasColumn( $table, 'key' ) && $db->table( $table )->col( 'key' )->length() !== 103 )
+			{
+				$this->info( sprintf( 'Updateing table %1$s', $table ), 'vv', 1 );
 				$db->exec( sprintf( 'UPDATE %1$s SET key = \'\'', $table ) );
 			}
 		}

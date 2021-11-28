@@ -19,10 +19,18 @@ class IndexRemoveCtimeEditor extends Base
 
 	public function up()
 	{
+		$db = $this->db( 'db-product' );
+
+		if( !$db->hasTable( 'mshop_index_attribute' ) ) {
+			return;
+		}
+
 		$this->info( 'Remove ctime/editor from index tables', 'v' );
 
-		$tables = ['mshop_index_attribute', 'mshop_index_catalog', 'mshop_index_price', 'mshop_index_supplier', 'mshop_index_text'];
-		$db = $this->db( 'db-product' );
+		$tables = [
+			'mshop_index_attribute', 'mshop_index_catalog', 'mshop_index_price',
+			'mshop_index_supplier', 'mshop_index_text'
+		];
 
 		foreach( $tables as $table )
 		{

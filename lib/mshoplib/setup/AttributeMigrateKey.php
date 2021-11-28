@@ -25,29 +25,30 @@ class AttributeMigrateKey extends Base
 
 	public function up()
 	{
-		$this->info( 'Update attribute "key" columns', 'v' );
-
 		$db = $this->db( 'db-attribute' );
 
-		if( $db->hasColumn( 'mshop_attribute', 'key' ) )
-		{
-			$dbm = $this->context()->getDatabaseManager();
-			$conn = $dbm->acquire( 'db-attribute' );
-
-			$select = 'SELECT "id", "domain", "type", "code" FROM "mshop_attribute" WHERE "key" = \'\'';
-			$update = 'UPDATE "mshop_attribute" SET "key" = ? WHERE "id" = ?';
-
-			$stmt = $conn->create( $update );
-			$result = $conn->create( $select )->execute();
-
-			while( ( $row = $result->fetch() ) !== null )
-			{
-				$stmt->bind( 1, md5( $row['domain'] . '|' . $row['type'] . '|' . $row['code'] ) );
-				$stmt->bind( 2, $row['id'] );
-				$stmt->execute()->finish();
-			}
-
-			$dbm->release( $conn, 'db-attribute' );
+		if( !$db->hasColumn( 'mshop_attribute', 'key' ) ) {
+			return;
 		}
+
+		$this->info( 'Update attribute "key" columns', 'v' );
+
+		$dbm = $this->context()->getDatabaseManager();
+		$conn = $dbm->acquire( 'db-attribute' );
+
+		$select = 'SELECT "id", "domain", "type", "code" FROM "mshop_attribute" WHERE "key" = \'\'';
+		$update = 'UPDATE "mshop_attribute" SET "key" = ? WHERE "id" = ?';
+
+		$stmt = $conn->create( $update );
+		$result = $conn->create( $select )->execute();
+
+		while( ( $row = $result->fetch() ) !== null )
+		{
+			$stmt->bind( 1, md5( $row['domain'] . '|' . $row['type'] . '|' . $row['code'] ) );
+			$stmt->bind( 2, $row['id'] );
+			$stmt->execute()->finish();
+		}
+
+		$dbm->release( $conn, 'db-attribute' );
 	}
 }

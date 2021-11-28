@@ -19,9 +19,9 @@ class OrderMigrateTaxrate extends Base
 
 	public function up()
 	{
-		$db = $this->db();
-		$dbm = $this->context()->db();
 		$dbdomain = 'db-order';
+		$db = $this->db( $dbdomain );
+		$dbm = $this->context()->db();
 
 		$this->info( 'Migrating taxrate columns in order tables', 'v' );
 		$this->info( 'Migrating taxrate column in order base product table', 'vv', 1 );

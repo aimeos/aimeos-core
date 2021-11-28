@@ -19,8 +19,14 @@ class CacheRemoveForeignkey extends Base
 
 	public function up()
 	{
+		$db = $this->db( 'db-cache' );
+
+		if( !$db->hasTable( 'madmin_cache' ) ) {
+			return;
+		}
+
 		$this->info( 'Remove foreign key "fk_macac_tid_tsid" from "madmin_cache_tag"', 'v' );
 
-		$this->db( 'db-cache' )->dropForeign( 'madmin_cache_tag', 'fk_macac_tid_tsid' );
+		$db->dropForeign( 'madmin_cache_tag', 'fk_macac_tid_tsid' );
 	}
 }

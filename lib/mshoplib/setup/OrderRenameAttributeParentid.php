@@ -21,6 +21,9 @@ class OrderRenameAttributeParentid extends Base
 	{
 		$db = $this->db( 'db-order' );
 
+		if( !$db->hasTable( 'mshop_order_base_product_attr' ) && !$db->hasTable( 'mshop_order_base_service_attr' ) ) {
+			return;
+		}
 
 		if( $db->hasTable( 'mshop_order_base_product_attr' )
 			&& !$db->hasColumn( 'mshop_order_base_product_attr', 'parentid' )
