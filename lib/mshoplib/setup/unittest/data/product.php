@@ -547,8 +547,8 @@ return [
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 4,
 					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
-					'text.languageid' => 'de', 'text.type' => 'meta-keyword', 'text.domain' => 'product',
-					'text.label' => 'cnc_metakey', 'text.content' => 'Cappuccino'
+					'text.languageid' => null, 'text.type' => 'meta-keyword', 'text.domain' => 'product',
+					'text.label' => 'cnc_metakey', 'text.content' => 'Cappuccino keywords without language ID'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 5,
 					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
@@ -707,8 +707,8 @@ return [
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 4,
 					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',
-					'text.languageid' => 'de', 'text.type' => 'meta-keyword', 'text.domain' => 'product',
-					'text.label' => 'cne_metakey', 'text.content' => 'Kaffee'
+					'text.languageid' => null, 'text.type' => 'meta-keyword', 'text.domain' => 'product',
+					'text.label' => 'cne_metakey', 'text.content' => 'Kaffee keywords without language ID'
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 5,
 					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2098-01-01 00:00:00',

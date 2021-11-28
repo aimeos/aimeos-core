@@ -108,6 +108,25 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSearchItemsNoLanguage()
+	{
+		$config = $this->context->getConfig();
+		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
+
+		if( $dbadapter === 'sqlsrv' ) {
+			$this->markTestSkipped( 'Not supported by SQL Server' );
+		}
+
+		$search = $this->object->filter();
+		$search->setConditions( $search->compare( '>', $search->make( 'index.text:relevance', ['de', 'language'] ), 0 ) );
+		$search->setSortations( [$search->sort( '-', $search->make( 'sort:index.text:relevance', ['de', 'language'] ) )] );
+
+		$result = $this->object->search( $search, [] );
+
+		$this->assertEquals( 2, count( $result ) );
+	}
+
+
 	public function testSearchItemsName()
 	{
 		$search = $this->object->filter();
