@@ -82,8 +82,7 @@ class FreeShipping
 		{
 			$price = $price->setRebate( $price->getRebate() + $service->getPrice()->getCosts() )
 				->setCosts( $price->getCosts() - $service->getPrice()->getCosts() )
-				->setTaxRates( $service->getPrice()->getTaxRates() )
-				->setModified();
+				->setTaxRates( $service->getPrice()->getTaxRates() );
 		}
 
 		$base->setCoupon( $this->getCode(), [$orderProduct->setPrice( $price )] );
