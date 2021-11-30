@@ -81,7 +81,8 @@ class FreeShipping
 		foreach( $base->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY ) as $service )
 		{
 			$price = $price->setRebate( $price->getRebate() + $service->getPrice()->getCosts() )
-				->setCosts( $price->getCosts() - $service->getPrice()->getCosts() );
+				->setCosts( $price->getCosts() - $service->getPrice()->getCosts() )
+				->setTaxRates( $service->getPrice()->getTaxRates() );
 		}
 
 		$base->setCoupon( $this->getCode(), [$orderProduct->setPrice( $price )] );
