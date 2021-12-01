@@ -129,7 +129,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function getLabel() : string
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		return (string) ( $this->values['label'] ?? '' );
 	}
 
 
@@ -158,7 +158,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function getCode() : string
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		return (string) ( $this->values['code'] ?? '' );
 	}
 
 
@@ -186,7 +186,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function getStatus() : int
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 1 );
+		return (int) ( $this->values['status'] ?? 1 );
 	}
 
 
@@ -269,6 +269,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	{
 		return array(
 			'id' => $this->getId(),
+			'code' => $this->getCode(),
 			'label' => $this->getLabel(),
 			'status' => $this->getStatus(),
 		);
