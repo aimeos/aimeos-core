@@ -31,8 +31,6 @@ class DemoAddCouponData extends MShopAddDataAbstract
 	 */
 	public function up()
 	{
-		$this->info( 'Processing coupon demo data', 'v' );
-
 		$context = $this->context();
 		$value = $context->getConfig()->get( 'setup/default/demo', '' );
 
@@ -40,6 +38,8 @@ class DemoAddCouponData extends MShopAddDataAbstract
 			return;
 		}
 
+
+		$this->info( 'Processing coupon demo data', 'v' );
 
 		$manager = \Aimeos\MShop::create( $context, 'coupon' );
 		$search = $manager->filter();

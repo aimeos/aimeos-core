@@ -41,8 +41,6 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 	 */
 	public function up()
 	{
-		$this->info( 'Processing supplier demo data', 'v' );
-
 		$context = $this->context();
 		$value = $context->getConfig()->get( 'setup/default/demo', '' );
 
@@ -50,6 +48,8 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 			return;
 		}
 
+
+		$this->info( 'Processing supplier demo data', 'v' );
 
 		$manager = \Aimeos\MShop::create( $context, 'supplier' );
 

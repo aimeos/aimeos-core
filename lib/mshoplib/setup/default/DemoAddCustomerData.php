@@ -31,8 +31,6 @@ class DemoAddCustomerData extends MShopAddDataAbstract
 	 */
 	public function up()
 	{
-		$this->info( 'Processing customer demo data', 'v' );
-
 		$context = $this->context();
 		$value = $context->getConfig()->get( 'setup/default/demo', '' );
 
@@ -40,6 +38,8 @@ class DemoAddCustomerData extends MShopAddDataAbstract
 			return;
 		}
 
+
+		$this->info( 'Processing customer demo data', 'v' );
 
 		$manager = \Aimeos\MShop::create( $context, 'customer' );
 

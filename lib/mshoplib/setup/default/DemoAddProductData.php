@@ -42,8 +42,6 @@ class DemoAddProductData extends MShopAddDataAbstract
 	 */
 	public function up()
 	{
-		$this->info( 'Processing product demo data', 'v' );
-
 		$context = $this->context();
 		$value = $context->getConfig()->get( 'setup/default/demo', '' );
 
@@ -51,6 +49,8 @@ class DemoAddProductData extends MShopAddDataAbstract
 			return;
 		}
 
+
+		$this->info( 'Processing product demo data', 'v' );
 
 		$domains = ['media', 'price', 'text'];
 		$manager = \Aimeos\MShop::create( $context, 'product' );
