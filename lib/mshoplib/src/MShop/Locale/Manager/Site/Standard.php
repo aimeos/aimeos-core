@@ -1008,12 +1008,12 @@ class Standard
 	/**
 	 * Create new item object initialized with given parameters.
 	 *
-	 * @param array $data Associative list of item key/value pairs
+	 * @param array $values Associative list of item key/value pairs
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item object
 	 */
-	protected function createItemBase( array $data = [] ) : \Aimeos\MShop\Locale\Item\Site\Iface
+	protected function createItemBase( array $values = [] ) : \Aimeos\MShop\Locale\Item\Site\Iface
 	{
-		return new \Aimeos\MShop\Locale\Item\Site\Standard( $data );
+		return new \Aimeos\MShop\Locale\Item\Site\Standard( $values );
 	}
 
 

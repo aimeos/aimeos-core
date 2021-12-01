@@ -40,14 +40,15 @@ class Standard
 	 * Initializes the catalog item.
 	 *
 	 * @param \Aimeos\MW\Tree\Node\Iface $node Tree node
+	 * @param array $values Assoicative list of key/value pairs
 	 * @param \Aimeos\MShop\Catalog\Item\Iface[] $children List of children of the item
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
-	public function __construct( \Aimeos\MW\Tree\Node\Iface $node, array $children = [],
+	public function __construct( \Aimeos\MW\Tree\Node\Iface $node, array $values = [], array $children = [],
 		array $listItems = [], array $refItems = [] )
 	{
-		parent::__construct( '', [] );
+		parent::__construct( '', $values );
 
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Catalog\Item\Iface::class, $children );
 
@@ -139,7 +140,7 @@ class Standard
 	 */
 	public function getSiteId() : string
 	{
-		return ( $this->node->__isset( 'siteid' ) ? (string) $this->node->__get( 'siteid' ) : '' );
+		return (string) $this->node->siteid;
 	}
 
 
@@ -193,7 +194,7 @@ class Standard
 	 */
 	public function getUrl() : string
 	{
-		return (string) $this->node->__get( 'url' ) ?: \Aimeos\MW\Str::slug( $this->getLabel() );
+		return (string) ( $this->node->url ?: \Aimeos\MW\Str::slug( $this->getLabel() ) );
 	}
 
 
@@ -217,7 +218,7 @@ class Standard
 	 */
 	public function getConfig() : array
 	{
-		return ( $this->node->__isset( 'config' ) ? (array) $this->node->__get( 'config' ) : [] );
+		return (array) parent::get( 'config', [] );
 	}
 
 
@@ -229,7 +230,7 @@ class Standard
 	 */
 	public function setConfig( array $options ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$this->node->config = $options;
+		parent::set( 'config', $options );
 		return $this;
 	}
 
@@ -289,7 +290,7 @@ class Standard
 	 */
 	public function getTarget() : string
 	{
-		return ( $this->node->__isset( 'target' ) ? $this->node->__get( 'target' ) : '' );
+		return (string) $this->node->target;
 	}
 
 
@@ -313,7 +314,7 @@ class Standard
 	 */
 	public function getTimeModified() : ?string
 	{
-		return ( $this->node->__isset( 'mtime' ) ? $this->node->__get( 'mtime' ) : null );
+		return $this->node->mtime;
 	}
 
 
@@ -324,7 +325,7 @@ class Standard
 	 */
 	public function getTimeCreated() : ?string
 	{
-		return ( $this->node->__isset( 'ctime' ) ? $this->node->__get( 'ctime' ) : null );
+		return $this->node->ctime;
 	}
 
 
@@ -335,7 +336,7 @@ class Standard
 	 */
 	public function getEditor() : string
 	{
-		return ( $this->node->__isset( 'editor' ) ? $this->node->__get( 'editor' ) : '' );
+		return (string) $this->node->editor;
 	}
 
 
@@ -450,7 +451,7 @@ class Standard
 	 */
 	public function getLevel() : int
 	{
-		return ( $this->node->__isset( 'level' ) ? $this->node->__get( 'level' ) : 0 );
+		return $this->node->level ?: 0;
 	}
 
 
@@ -463,7 +464,7 @@ class Standard
 	 */
 	public function getParentId() : ?string
 	{
-		return ( $this->node->__isset( 'parentid' ) ? $this->node->__get( 'parentid' ) : null );
+		return $this->node->parentid;
 	}
 
 
@@ -485,7 +486,7 @@ class Standard
 	 */
 	public function isModified() : bool
 	{
-		return $this->node->isModified();
+		return parent::isModified() || $this->node->isModified();
 	}
 
 

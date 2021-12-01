@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$listValues = ['id' => 1, 'type' => 'default', 'domain' => 'text'];
 		$this->listItems = ['text' => [1 => new \Aimeos\MShop\Common\Item\Lists\Standard( 'catalog.lists.', $listValues )]];
 
-		$this->values = array(
+		$this->values = [
 			'id' => 2,
 			'parentid' => 3,
 			'level' => 1,
@@ -37,13 +37,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'editor' => 'unitTestUser',
 			'target' => 'testtarget',
 			'hasChildren' => true
-		);
+		];
 
 		$this->node = new \Aimeos\MW\Tree\Node\Standard( $this->values );
 		$childnode = new \Aimeos\MW\Tree\Node\Standard( array_merge( $this->values, ['id' => 3] ) );
 
 		$child = new \Aimeos\MShop\Catalog\Item\Standard( $childnode );
-		$this->object = new \Aimeos\MShop\Catalog\Item\Standard( $this->node, array( $child ), $this->listItems );
+		$this->object = new \Aimeos\MShop\Catalog\Item\Standard( $this->node, $this->values, [$child], $this->listItems );
 	}
 
 
