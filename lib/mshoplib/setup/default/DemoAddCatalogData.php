@@ -45,11 +45,8 @@ class DemoAddCatalogData extends MShopAddDataAbstract
 		$this->info( 'Processing catalog demo data' );
 
 		$context = $this->context();
-		$value = $context->config()->get( 'setup/default/demo', '' );
 
-		if( $value === '' )
-		{
-			$this->status( 'OK' );
+		if( ( $value = $context->config()->get( 'setup/default/demo', '' ) ) === '' ) {
 			return;
 		}
 
@@ -66,7 +63,7 @@ class DemoAddCatalogData extends MShopAddDataAbstract
 			$this->removeItems( $item->getId(), 'catalog/lists', 'catalog', 'text' );
 			$this->removeListItems( $item->getId(), 'catalog/lists', 'product' );
 		}
-		catch( \Exception $e ) {; } // If no root node was already inserted into the database
+		catch( \Exception $e ) { ; } // If no root node was already inserted into the database
 
 		$search = $manager->filter();
 		$search->setConditions( $search->compare( '=~', 'catalog.code', 'demo-' ) );
