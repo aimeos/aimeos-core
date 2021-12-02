@@ -687,7 +687,7 @@ class PayPalExpress
 			}
 		}
 
-
+		$itemDeliveryCosts = 0;
 		if( $this->getConfigValue( 'paypalexpress.product', true ) )
 		{
 			foreach( $orderBase->getProducts() as $product )
@@ -702,6 +702,10 @@ class PayPalExpress
 				$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $product->getName();
 				$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = $product->getQuantity();
 				$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $this->getAmount( $price, false );
+			}
+			
+			foreach( $deliveryPrices as $priceItem ) {
+				$itemDeliveryCosts += $this->getAmount( $priceItem, true, true, 2 );
 			}
 		}
 
@@ -728,7 +732,7 @@ class PayPalExpress
 				{
 					$deliveryPrices = $this->addPrice( $deliveryPrices, $service->getPrice() );
 
-					$values['L_SHIPPINGOPTIONAMOUNT' . $lastPos] = number_format( $service->getPrice()->getCosts(), 2, '.', '' );
+					$values['L_SHIPPINGOPTIONAMOUNT' . $lastPos] = number_format( $service->getPrice()->getCosts() + $itemDeliveryCosts, 2, '.', '' );
 					$values['L_SHIPPINGOPTIONLABEL' . $lastPos] = $service->getCode();
 					$values['L_SHIPPINGOPTIONNAME' . $lastPos] = $service->getName();
 					$values['L_SHIPPINGOPTIONISDEFAULT' . $lastPos] = 'true';
