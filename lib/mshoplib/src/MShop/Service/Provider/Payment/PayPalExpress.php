@@ -731,7 +731,7 @@ class PayPalExpress
 				foreach( $orderBase->getService( 'delivery' ) as $service )
 				{
 					$deliveryPrices = $this->addPrice( $deliveryPrices, $service->getPrice() );
-					
+
 					$values['L_SHIPPINGOPTIONAMOUNT' . $lastPos] = number_format( $service->getPrice()->getCosts() + $itemDeliveryCosts, 2, '.', '' );
 					$values['L_SHIPPINGOPTIONLABEL' . $lastPos] = $service->getCode();
 					$values['L_SHIPPINGOPTIONNAME' . $lastPos] = $service->getName();
