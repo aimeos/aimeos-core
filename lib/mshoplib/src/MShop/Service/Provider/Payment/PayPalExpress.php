@@ -160,6 +160,15 @@ class PayPalExpress
 			'default' => 'https://www.paypal.com/webscr&cmd=_notify-validate',
 			'required' => false,
 		),
+		'paypalexpress.LocaleCode' => array(
+			'code' => 'paypalexpress.LocaleCode',
+			'internalcode' => 'paypalexpress.LocaleCode',
+			'label' => 'Locale code',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => false,
+		),
 	);
 
 
@@ -761,6 +770,10 @@ class PayPalExpress
 		$values['PAYMENTREQUEST_0_SHIPDISCAMT'] = '0.00';
 		$values['PAYMENTREQUEST_0_CURRENCYCODE'] = $orderBase->getPrice()->getCurrencyId();
 		$values['PAYMENTREQUEST_0_PAYMENTACTION'] = $this->getConfigValue( array( 'paypalexpress.PaymentAction' ), 'sale' );
+
+		if( $localecode = $this->getConfigValue( 'paypalexpress.LocaleCode', null ) ) {
+			$values['LOCALECODE'] = $localecode;
+		}
 
 		return $values;
 	}
