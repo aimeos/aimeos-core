@@ -761,13 +761,15 @@ abstract class Base
 		int $sitelevel ) : \Aimeos\MW\Criteria\Expression\Iface
 	{
 		$sites = $this->context->getLocale()->getSites();
-		$cond = [$search->compare( '==', $name, '' )];
+		$values = [''];
 
 		if( isset( $sites[Locale::SITE_PATH] ) && $sitelevel & Locale::SITE_PATH ) {
-			$cond[] = $search->compare( '==', $name, $sites[Locale::SITE_PATH] );
+			$values = array_merge( $values, $sites[Locale::SITE_PATH] );
 		} elseif( isset( $sites[Locale::SITE_ONE] ) ) {
-			$cond[] = $search->compare( '==', $name, $sites[Locale::SITE_ONE] );
+			$values[] = $sites[Locale::SITE_ONE];
 		}
+
+		$cond = [$search->compare( '==', $name, $values)];
 
 		if( isset( $sites[Locale::SITE_SUBTREE] ) && $sitelevel & Locale::SITE_SUBTREE ) {
 			$cond[] = $search->compare( '=~', $name, $sites[Locale::SITE_SUBTREE] );
