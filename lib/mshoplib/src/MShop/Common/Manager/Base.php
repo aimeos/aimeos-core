@@ -769,7 +769,7 @@ abstract class Base
 			$values[] = $sites[Locale::SITE_ONE];
 		}
 
-		$cond = [$search->compare( '==', $name, $values)];
+		$cond = [$search->compare( '==', $name, $values )];
 
 		if( isset( $sites[Locale::SITE_SUBTREE] ) && $sitelevel & Locale::SITE_SUBTREE ) {
 			$cond[] = $search->compare( '=~', $name, $sites[Locale::SITE_SUBTREE] );
