@@ -25,7 +25,7 @@ date_default_timezone_set( 'UTC' );
 /**
  * Returns the configuration based on the given arguments
  *
- * @param array List of key/value string separated by colon (e.g. "key:value")
+ * @param array $options List of key/value string separated by colon (e.g. "key:value")
  * @return array Associative list of key value pairs
  */
 function config( array $options ) : array
@@ -94,8 +94,8 @@ function options( array &$params )
 /**
  * Returns the verbosity level based on the given arguments
  *
- * @param array Associative list of key value pairs
- * @param string Verbosity level ("v", "vv", "vvv" or empty string)
+ * @param array $options Associative list of key value pairs
+ * @return string Verbosity level ("v", "vv", "vvv" or empty string)
  */
 function verbose( array $options ) : string
 {
@@ -139,7 +139,7 @@ try
 	}
 
 	$boostrap = new \Aimeos\Bootstrap( (array) ( $options['extdir'] ?? [] ) );
-	\Aimeos\Setup::use( $boostrap, config( (array) $options['option'] ?? [] ) )
+	\Aimeos\Setup::use( $boostrap, config( (array) ( $options['option'] ?? [] ) ) )
 		->verbose( verbose( $options ) )
 		->up( $site, $tplsite );
 }
