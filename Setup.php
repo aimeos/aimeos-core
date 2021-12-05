@@ -16,7 +16,7 @@ class Setup
 {
 	private $bootstrap;
 	private $context;
-	private $options;
+	private $config;
 	private $verbose;
 
 
@@ -24,12 +24,12 @@ class Setup
 	 * Initializes the Aimeos setup object
 	 *
 	 * @param Bootstrap $bootstrap Aimeos bootstrap object
-	 * @param array $options Associative list of config keys and values
+	 * @param array $config Associative list of config keys and values
 	 */
-	public function __construct( Bootstrap $bootstrap, array $options = [] )
+	public function __construct( Bootstrap $bootstrap, array $config = [] )
 	{
 		$this->bootstrap = $bootstrap;
-		$this->options = $options;
+		$this->config = $config;
 
 		$this->macros();
 	}
@@ -39,12 +39,12 @@ class Setup
 	 * Creates a new initialized setup object
 	 *
 	 * @param Bootstrap $bootstrap Aimeos bootstrap object
-	 * @param array $options Associative list of config keys and values
+	 * @param array $config Associative list of config keys and values
 	 * @return self Aimeos setup object
 	 */
-	public static function use( Bootstrap $bootstrap, array $options = [] ) : self
+	public static function use( Bootstrap $bootstrap, array $config = [] ) : self
 	{
-		return new static( $bootstrap, $options );
+		return new static( $bootstrap, $config );
 	}
 
 
@@ -99,53 +99,16 @@ class Setup
 
 
 	/**
-	 * Returns a new configuration object
-	 *
-	 * @param array $confPaths List of configuration paths from the bootstrap object
-	 * @param array $options Associative list of configuration options as key/value pairs
-	 * @return \Aimeos\MW\Config\Iface Configuration object
-	 */
-	protected function createConfig( array $confPaths, array $options ) : \Aimeos\MW\Config\Iface
-	{
-		$config = [];
-
-		foreach( (array) ( $options['config'] ?? [] ) as $path )
-		{
-			if( is_file( $path ) ) {
-				$config = array_replace_recursive( $config, require $path );
-			} else {
-				$confPaths[] = $path;
-			}
-		}
-
-		$conf = new \Aimeos\MW\Config\PHPArray( $config, $confPaths );
-		$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
-
-		foreach( (array) ( $options['option'] ?? [] ) as $option )
-		{
-			$parts = explode( ':', $option );
-
-			if( count( $parts ) !== 2 ) {
-				throw new \RuntimeException( "Invalid config option \"%1\$s\"\n", $option );
-			}
-
-			$conf->set( str_replace( '\\', '/', $parts[0] ), $parts[1] );
-		}
-
-		return $conf;
-	}
-
-
-	/**
 	 * Returns a new context object
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface New context object
 	 */
 	protected function createContext() : \Aimeos\MShop\Context\Item\Iface
 	{
-		$conf = $this->createConfig( $this->bootstrap->getConfigPaths(), $this->options );
-
 		$ctx = new \Aimeos\MShop\Context\Item\Standard();
+
+		$conf = new \Aimeos\MW\Config\PHPArray( $this->config, $this->bootstrap->getConfigPaths() );
+		$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
 		$ctx->setConfig( $conf );
 
 		$dbm = new \Aimeos\MW\DB\Manager\DBAL( $conf );
@@ -181,12 +144,10 @@ class Setup
 	{
 		$dbconfig = $conf->get( 'resource', [] );
 
-		foreach( $dbconfig as $rname => $dbconf )
+		foreach( $dbconfig as $rname => $entry )
 		{
 			if( strncmp( $rname, 'db', 2 ) !== 0 ) {
 				unset( $dbconfig[$rname] );
-			} else {
-				$conf->set( 'resource/' . $rname . '/limit', 5 );
 			}
 		}
 

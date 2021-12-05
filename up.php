@@ -23,14 +23,34 @@ date_default_timezone_set( 'UTC' );
 
 
 /**
+ * Returns the configuration based on the given arguments
+ *
+ * @param array List of key/value string separated by colon (e.g. "key:value")
+ * @return array Associative list of key value pairs
+ */
+function config( array $options ) : array
+{
+	$config = [];
+
+	foreach( $options as $option )
+	{
+		list( $key, $val ) = explode( ':', $option );
+		$config[$key] = $val;
+	}
+
+	return $config;
+}
+
+
+/**
  * Returns the command options given by the user
  *
  * @param array &$params List of parameters
  * @return array Associative list of option name and value(s)
  */
-function getOptions( array &$params )
+function options( array &$params )
 {
-	$options = array();
+	$options = [];
 
 	foreach( $params as $key => $option )
 	{
@@ -72,6 +92,18 @@ function getOptions( array &$params )
 
 
 /**
+ * Returns the verbosity level based on the given arguments
+ *
+ * @param array Associative list of key value pairs
+ * @param string Verbosity level ("v", "vv", "vvv" or empty string)
+ */
+function verbose( array $options ) : string
+{
+	return isset( $options['q'] ) ? '' : ( $options['v'] ?? 'vv' );
+}
+
+
+/**
  * Prints the command usage and options, exits the program after printing
  */
 function usage()
@@ -96,7 +128,7 @@ try
 	$params = $_SERVER['argv'];
 	array_shift( $params );
 
-	$options = getOptions( $params );
+	$options = options( $params );
 
 	if( ( $site = array_shift( $params ) ) === null ) {
 		$site = 'default';
@@ -107,8 +139,8 @@ try
 	}
 
 	$boostrap = new \Aimeos\Bootstrap( (array) ( $options['extdir'] ?? [] ) );
-	\Aimeos\Setup::use( $boostrap, $options )
-		->verbose( isset( $options['q'] ) ? '' : ( $options['v'] ?? 'vv' ) )
+	\Aimeos\Setup::use( $boostrap, config( (array) $options['option'] ?? [] ) )
+		->verbose( verbose( $options ) )
 		->up( $site, $tplsite );
 }
 catch( Throwable $t )
@@ -134,4 +166,6 @@ catch( \Exception $e )
 
 $exectimeStop = microtime( true );
 
-printf( "Setup process took %1\$f sec\n\n", ( $exectimeStop - $exectimeStart ) );
+if( verbose( $options ) ) {
+	printf( "Setup process took %1\$f sec\n\n", ( $exectimeStop - $exectimeStart ) );
+}
