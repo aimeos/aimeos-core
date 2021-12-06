@@ -205,7 +205,7 @@ class Standard
 		$this->date = $context->getDateTime();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/product/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/product/manager/sitemode', $level );
 
 
 		$this->searchConfig['product:has']['function'] = function( &$source, array $params ) use ( $level ) {
@@ -255,7 +255,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/product/manager/submanagers';
-		foreach( $this->context()->getConfig()->get( $path, ['lists', 'property', 'type'] ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, ['lists', 'property', 'type'] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -319,7 +319,7 @@ class Standard
 			 * @category User
 			 * @since 2019.10
 			 */
-			if( !$this->context()->getConfig()->get( 'mshop/product/manager/strict-events', true ) ) {
+			if( !$this->context()->config()->get( 'mshop/product/manager/strict-events', true ) ) {
 				$temp[] = $object->compare( '==', 'product.type', 'event' );
 			}
 
@@ -860,7 +860,7 @@ class Standard
 			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$level = $context->getConfig()->get( 'mshop/product/manager/sitemode', $level );
+			$level = $context->config()->get( 'mshop/product/manager/sitemode', $level );
 
 			/** mshop/product/manager/search/mysql
 			 * Retrieves the records matched by the given criteria in the database

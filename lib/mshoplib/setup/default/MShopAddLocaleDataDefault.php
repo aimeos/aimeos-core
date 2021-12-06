@@ -49,7 +49,7 @@ class MShopAddLocaleDataDefault extends MShopAddLocaleData
 		$context->setEditor( 'core:setup' );
 
 
-		if( $context->getConfig()->get( 'setup/site', 'default' ) === 'default' )
+		if( $context->config()->get( 'setup/site', 'default' ) === 'default' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
 			$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';

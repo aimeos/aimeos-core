@@ -92,7 +92,7 @@ abstract class Base
 		}
 
 		$localClass = str_replace( '/', '\\', ucwords( $domain, '/' ) );
-		$config = $context->getConfig();
+		$config = $context->config();
 
 		/** controller/jobs/common/decorators/default
 		 * Configures the list of decorators applied to all job controllers

@@ -76,7 +76,7 @@ class Standard
 		parent::__construct( $context );
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
 		$this->searchConfig['index.attribute:allof']['function'] = function( $source, array $params ) {
 			return [$params[0], count( $params[0] )];
@@ -636,7 +636,7 @@ class Standard
 		if( $this->subManagers === null )
 		{
 			$this->subManagers = [];
-			$config = $this->context()->getConfig();
+			$config = $this->context()->config();
 
 			/** mshop/index/manager/attribute/submanagers
 			 * A list of sub-manager names used for indexing associated items to attributes

@@ -178,7 +178,7 @@ class Standard
 		 * @category User
 		 * @since 2016.02
 		 */
-		$this->taxflag = $context->getConfig()->get( 'mshop/price/taxflag', true );
+		$this->taxflag = $context->config()->get( 'mshop/price/taxflag', true );
 
 		/** mshop/price/precision
 		 * Number of decimal digits prices contain
@@ -191,10 +191,10 @@ class Standard
 		 * @category Developer
 		 * @since 2019.04
 		 */
-		$this->precision = $context->getConfig()->get( 'mshop/price/precision', 2 );
+		$this->precision = $context->config()->get( 'mshop/price/precision', 2 );
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/price/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/price/manager/sitemode', $level );
 
 
 		$this->searchConfig['price:has']['function'] = function( &$source, array $params ) use ( $level ) {
@@ -244,7 +244,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/price/manager/submanagers';
-		foreach( $this->context()->getConfig()->get( $path, ['type', 'property', 'lists'] ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, ['type', 'property', 'lists'] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -618,7 +618,7 @@ class Standard
 			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$level = $context->getConfig()->get( 'mshop/price/manager/sitemode', $level );
+			$level = $context->config()->get( 'mshop/price/manager/sitemode', $level );
 
 			/** mshop/price/manager/search/mysql
 			 * Retrieves the records matched by the given criteria in the database

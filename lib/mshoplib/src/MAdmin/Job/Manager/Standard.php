@@ -104,7 +104,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'madmin/job/manager/submanagers';
-		foreach( $this->context()->getConfig()->get( $path, [] ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, [] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 

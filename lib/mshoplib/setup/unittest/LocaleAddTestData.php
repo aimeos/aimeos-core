@@ -54,7 +54,7 @@ class LocaleAddTestData extends MShopAddLocaleData
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 
 
-		if( $this->context()->getConfig()->get( 'setup/site' ) === 'unittest' )
+		if( $this->context()->config()->get( 'setup/site' ) === 'unittest' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
 			$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';

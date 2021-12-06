@@ -171,7 +171,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$context = $this->context();
-		$config = $context->getConfig();
+		$config = $context->config();
 
 		foreach( $config->get( 'madmin/cache/manager/submanagers', [] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );

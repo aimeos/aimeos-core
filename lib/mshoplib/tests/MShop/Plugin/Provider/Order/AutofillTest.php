@@ -147,7 +147,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 			->will( $this->returnValue( map( [$item1, $item2] ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\PluginAutofill', $orderStub );
-		$this->context->getConfig()->set( 'mshop/order/manager/name', 'PluginAutofill' );
+		$this->context->config()->set( 'mshop/order/manager/name', 'PluginAutofill' );
 
 
 		$this->plugin->setConfig( array(
@@ -189,7 +189,7 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 			->will( $this->returnValue( map( [$item1, $item2] ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\PluginAutofill', $orderStub );
-		$this->context->getConfig()->set( 'mshop/order/manager/name', 'PluginAutofill' );
+		$this->context->config()->set( 'mshop/order/manager/name', 'PluginAutofill' );
 
 
 		$this->plugin->setConfig( array(

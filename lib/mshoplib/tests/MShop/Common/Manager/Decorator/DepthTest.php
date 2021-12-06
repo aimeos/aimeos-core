@@ -37,7 +37,7 @@ class DepthTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchLimitOne()
 	{
-		$this->context->getConfig()->set( 'mshop/common/manager/maxdepth', 0 );
+		$this->context->config()->set( 'mshop/common/manager/maxdepth', 0 );
 
 		$item = $this->object->find( 'U:TESTP', ['product'] );
 

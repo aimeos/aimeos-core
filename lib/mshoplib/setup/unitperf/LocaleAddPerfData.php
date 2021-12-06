@@ -50,7 +50,7 @@ class LocaleAddPerfData extends MShopAddLocaleData
 		$this->context()->setEditor( 'unitperf:core' );
 
 
-		if( $this->context()->getConfig()->get( 'setup/site' ) === 'unitperf' )
+		if( $this->context()->config()->get( 'setup/site' ) === 'unitperf' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
 			$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';

@@ -65,7 +65,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'madmin/cache/manager/name', 'Standard' );
+			$name = $context->config()->get( 'madmin/cache/manager/name', 'Standard' );
 		}
 
 		$iface = \Aimeos\MAdmin\Cache\Manager\Iface::class;

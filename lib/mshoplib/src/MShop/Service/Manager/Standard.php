@@ -154,7 +154,7 @@ class Standard
 		$this->date = $context->getDateTime();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/service/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/service/manager/sitemode', $level );
 
 
 		$this->searchConfig['service:has']['function'] = function( &$source, array $params ) use ( $level ) {
@@ -185,7 +185,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/service/manager/submanagers';
-		foreach( $this->context()->getConfig()->get( $path, ['lists', 'type'] ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, ['lists', 'type'] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -564,7 +564,7 @@ class Standard
 			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
-			$level = $context->getConfig()->get( 'mshop/service/manager/sitemode', $level );
+			$level = $context->config()->get( 'mshop/service/manager/sitemode', $level );
 
 			/** mshop/service/manager/search/mysql
 			 * Retrieves the records matched by the given criteria in the database

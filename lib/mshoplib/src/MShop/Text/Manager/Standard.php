@@ -135,7 +135,7 @@ class Standard
 		$this->languageId = $context->getLocale()->getLanguageId();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/text/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/text/manager/sitemode', $level );
 
 
 		$this->searchConfig['text:has']['function'] = function( &$source, array $params ) use ( $level ) {
@@ -166,7 +166,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/text/manager/submanagers';
-		foreach( $this->context()->getConfig()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -526,7 +526,7 @@ class Standard
 			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$level = $context->getConfig()->get( 'mshop/text/manager/sitemode', $level );
+			$level = $context->config()->get( 'mshop/text/manager/sitemode', $level );
 
 			/** mshop/text/manager/search/mysql
 			 * Retrieves the records matched by the given criteria in the database

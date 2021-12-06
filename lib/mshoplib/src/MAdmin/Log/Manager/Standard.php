@@ -89,7 +89,7 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-log' );
 
-		$config = $context->getConfig();
+		$config = $context->config();
 
 		/** madmin/log/manager/loglevel
 		 * Sets the severity level for messages to be written to the log
@@ -140,7 +140,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'madmin/log/manager/submanagers';
-		foreach( $this->context()->getConfig()->get( $path, [] ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, [] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 

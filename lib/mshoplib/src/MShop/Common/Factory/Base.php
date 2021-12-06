@@ -85,7 +85,7 @@ abstract class Base
 	protected static function addManagerDecorators( \Aimeos\MShop\Context\Item\Iface $context,
 		\Aimeos\MShop\Common\Manager\Iface $manager, string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$config = $context->getConfig();
+		$config = $context->config();
 
 		/** mshop/common/manager/decorators/default
 		 * Configures the list of decorators applied to all shop managers

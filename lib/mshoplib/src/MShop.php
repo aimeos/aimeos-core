@@ -111,7 +111,7 @@ class MShop
 			foreach( $parts as $part )
 			{
 				$subpath .= $part . '/';
-				$classname = $context->getConfig()->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name' );
+				$classname = $context->config()->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name' );
 
 				if( self::$cache === false || !isset( self::$objects[$tmppath . '/' . $part] ) ) {
 					self::$objects[$tmppath . '/' . $part] = self::$objects[$tmppath]->getSubManager( $part, $classname );

@@ -49,7 +49,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$this->orderMock->expects( $this->any() )->method( 'save' )->will( $this->returnArgument( 0 ) );
 
-		$this->context->getConfig()->set( 'mshop/order/manager/name', 'MockPayPal' );
+		$this->context->config()->set( 'mshop/order/manager/name', 'MockPayPal' );
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\MockPayPal', $this->orderMock );
 	}
 

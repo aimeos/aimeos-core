@@ -82,7 +82,7 @@ class CatalogAddPerfData extends Base
 
 		$this->init();
 
-		$config = $this->context()->getConfig();
+		$config = $this->context()->config();
 		$treeidx = $config->get( 'setup/unitperf/treeindex' );
 		$this->maxBatch = $config->get( 'setup/unitperf/max-batch', 10000 );
 		$this->numCatLevels = $config->get( 'setup/unitperf/num-catlevels', 1 );

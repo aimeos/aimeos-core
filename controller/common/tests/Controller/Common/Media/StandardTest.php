@@ -166,7 +166,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testScale()
 	{
-		$this->context->getConfig()->set( 'controller/common/media/files/scale', true );
+		$this->context->config()->set( 'controller/common/media/files/scale', true );
 
 		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . '/tmp/';
 		if( !is_dir( $dest ) ) { mkdir( $dest, 0755, true ); }
@@ -196,7 +196,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testScaleLegacy()
 	{
-		$this->context->getConfig()->set( 'controller/common/media/files/scale', true );
+		$this->context->config()->set( 'controller/common/media/files/scale', true );
 
 		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . '/tmp/';
 		if( !is_dir( $dest ) ) { mkdir( $dest, 0755, true ); }
@@ -401,7 +401,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetMimeTypeNotAllowed()
 	{
 		$file = \Aimeos\MW\Media\Factory::get( __DIR__ . '/testfiles/test.gif' );
-		$this->context->getConfig()->set( 'controller/common/media/files/allowedtypes', array( 'image/jpeg' ) );
+		$this->context->config()->set( 'controller/common/media/files/allowedtypes', array( 'image/jpeg' ) );
 
 		$result = $this->access( 'getMimeType' )->invokeArgs( $this->object, array( $file, 'files' ) );
 		$this->assertEquals( 'image/jpeg', $result );
@@ -411,7 +411,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetMimeTypeNoTypes()
 	{
 		$file = \Aimeos\MW\Media\Factory::get( __DIR__ . '/testfiles/test.gif' );
-		$this->context->getConfig()->set( 'controller/common/media/files/allowedtypes', [] );
+		$this->context->config()->set( 'controller/common/media/files/allowedtypes', [] );
 
 		$this->expectException( \Aimeos\Controller\Common\Exception::class );
 		$this->access( 'getMimeType' )->invokeArgs( $this->object, array( $file, 'files' ) );

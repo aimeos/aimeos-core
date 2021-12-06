@@ -50,7 +50,7 @@ class PgSQL
 		parent::__construct( $context );
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
 		$name = 'index.text:relevance';
 		$expr = $this->getSiteString( 'mindte."siteid"', $level );

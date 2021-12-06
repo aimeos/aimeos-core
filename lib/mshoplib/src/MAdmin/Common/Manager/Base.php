@@ -31,7 +31,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	protected function addManagerDecorators( \Aimeos\MShop\Common\Manager\Iface $manager, string $managerpath, string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$context = $this->context();
-		$config = $context->getConfig();
+		$config = $context->config();
 
 		/** madmin/common/manager/decorators/default
 		 * Configures the list of decorators applied to all admin managers
@@ -92,7 +92,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	{
 		$domain = strtolower( $domain );
 		$manager = strtolower( $manager );
-		$config = $this->context()->getConfig();
+		$config = $this->context()->config();
 
 
 		if( empty( $domain ) || ctype_alnum( $domain ) === false )

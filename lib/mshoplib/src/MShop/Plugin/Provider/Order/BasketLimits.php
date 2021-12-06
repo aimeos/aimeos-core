@@ -148,7 +148,7 @@ class BasketLimits
 		 * @category User
 		 * @since 2014.03
 		 */
-		if( $context->getConfig()->get( 'mshop/plugin/provider/order/complete/disable', false ) != true )
+		if( $context->config()->get( 'mshop/plugin/provider/order/complete/disable', false ) != true )
 		{
 			$count = 0;
 			$sum = \Aimeos\MShop::create( $context, 'price' )->create();

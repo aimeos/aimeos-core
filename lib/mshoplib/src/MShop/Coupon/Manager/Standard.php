@@ -134,7 +134,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/coupon/manager/submanagers';
-		foreach( $this->context()->getConfig()->get( $path, array( 'code' ) ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, array( 'code' ) ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -493,7 +493,7 @@ class Standard
 			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
-			$level = $context->getConfig()->get( 'mshop/coupon/manager/sitemode', $level );
+			$level = $context->config()->get( 'mshop/coupon/manager/sitemode', $level );
 
 			/** mshop/coupon/manager/search/mysql
 			 * Retrieves the records matched by the given criteria in the database

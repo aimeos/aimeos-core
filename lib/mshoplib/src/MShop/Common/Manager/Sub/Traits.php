@@ -78,7 +78,7 @@ trait Traits
 	protected function addManagerDecorators( \Aimeos\MShop\Common\Manager\Iface $manager, string $managerpath,
 		string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$config = $this->context()->getConfig();
+		$config = $this->context()->config();
 
 		$decorators = $config->get( 'mshop/common/manager/decorators/default', [] );
 		$excludes = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/excludes', [] );
@@ -160,7 +160,7 @@ trait Traits
 
 			if( $name === null ) {
 				$path = 'mshop/' . $domain . '/manager/' . $manager . '/name';
-				$name = $this->context()->getConfig()->get( $path, 'Standard' );
+				$name = $this->context()->config()->get( $path, 'Standard' );
 			}
 
 			if( empty( $name ) || ctype_alnum( $name ) === false )

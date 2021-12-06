@@ -55,7 +55,7 @@ abstract class Base
 		 * @see mshop/customer/manager/password/name
 		 * @sse mshop/customer/manager/password/options
 		 */
-		$this->salt = $context->getConfig()->get( 'mshop/customer/manager/salt', 'mshop' );
+		$this->salt = $context->config()->get( 'mshop/customer/manager/salt', 'mshop' );
 	}
 
 
@@ -233,7 +233,7 @@ abstract class Base
 			return $this->helper;
 		}
 
-		$config = $this->context()->getConfig();
+		$config = $this->context()->config();
 
 		/** mshop/customer/manager/password/name
 		 * Last part of the name for building the password helper item

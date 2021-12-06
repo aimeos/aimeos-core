@@ -32,7 +32,7 @@ class MShopSetLocale extends Base
 	public function up()
 	{
 		$context = $this->context();
-		$site = $context->getConfig()->get( 'setup/site', 'default' );
+		$site = $context->config()->get( 'setup/site', 'default' );
 
 		$this->info( sprintf( 'Setting locale to "%1$s"', $site ), 'v' );
 

@@ -67,7 +67,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'mshop/media/manager/name', 'Standard' );
+			$name = $context->config()->get( 'mshop/media/manager/name', 'Standard' );
 		}
 
 		$iface = \Aimeos\MShop\Media\Manager\Iface::class;

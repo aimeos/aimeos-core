@@ -67,7 +67,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'controller/common/order/name', 'Standard' );
+			$name = $context->config()->get( 'controller/common/order/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

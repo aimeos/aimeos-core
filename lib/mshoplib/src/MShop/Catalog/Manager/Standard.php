@@ -157,7 +157,7 @@ class Standard extends Base
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/catalog/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/catalog/manager/sitemode', $level );
 
 
 		$this->searchConfig['catalog:has']['function'] = function( &$source, array $params ) use ( $level ) {
@@ -192,7 +192,7 @@ class Standard extends Base
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$context = $this->context();
-		$config = $context->getConfig();
+		$config = $context->config();
 		$search = $this->object()->filter();
 
 		foreach( $config->get( 'mshop/catalog/manager/submanagers', ['lists'] ) as $domain ) {
@@ -548,7 +548,7 @@ class Standard extends Base
 			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
-			$level = $context->getConfig()->get( 'mshop/catalog/manager/sitemode', $level );
+			$level = $context->config()->get( 'mshop/catalog/manager/sitemode', $level );
 
 			/** mshop/catalog/manager/search-item/mysql
 			 * Retrieves the records matched by the given criteria in the database

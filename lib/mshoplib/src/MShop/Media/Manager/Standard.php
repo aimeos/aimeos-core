@@ -165,7 +165,7 @@ class Standard
 		$this->languageId = $context->getLocale()->getLanguageId();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/media/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/media/manager/sitemode', $level );
 
 
 		$this->searchConfig['media:has']['function'] = function( &$source, array $params ) use ( $level ) {
@@ -217,7 +217,7 @@ class Standard
 		$path = 'mshop/media/manager/submanagers';
 		$default = ['lists', 'property', 'type'];
 
-		foreach( $this->context()->getConfig()->get( $path, $default ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, $default ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -584,7 +584,7 @@ class Standard
 			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$level = $context->getConfig()->get( 'mshop/media/manager/sitemode', $level );
+			$level = $context->config()->get( 'mshop/media/manager/sitemode', $level );
 
 			/** mshop/media/manager/search/mysql
 			 * Retrieves the records matched by the given criteria in the database

@@ -63,7 +63,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 			->setConstructorArgs( [$this->context] )->setMethods( ['search', 'getProvider'] )->getMock();
 
 		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\Aimeos\MShop\Service\Manager\PluginServicesUpdate', $serviceStub );
-		$this->context->getConfig()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
+		$this->context->config()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
 
 
 		$orderStub->addService( $serviceDelivery, 'delivery' );
@@ -119,7 +119,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 			->setConstructorArgs( [$this->context] )->setMethods( ['search', 'getProvider'] )->getMock();
 
 		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\Aimeos\MShop\Service\Manager\PluginServicesUpdate', $serviceStub );
-		$this->context->getConfig()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
+		$this->context->config()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
 
 
 		$orderStub->addService( $serviceDelivery, 'delivery' );

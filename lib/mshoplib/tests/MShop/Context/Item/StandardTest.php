@@ -128,9 +128,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSetConfig()
 	{
 		$context = \TestHelperMShop::context();
-		$return = $this->object->setConfig( $context->getConfig() );
+		$return = $this->object->setConfig( $context->config() );
 
-		$this->assertSame( $context->getConfig(), $this->object->config() );
+		$this->assertSame( $context->config(), $this->object->config() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 

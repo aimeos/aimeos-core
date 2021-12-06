@@ -18,7 +18,7 @@ class SQLSrvTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = clone \TestHelperMShop::context();
-		$config = $this->context->getConfig();
+		$config = $this->context->config();
 
 		$dbadapter = $config->get( 'resource/db-index/adapter', $config->get( 'resource/db/adapter' ) );
 

@@ -47,7 +47,7 @@ class MShopAddLocaleData extends Base
 		// Set editor for further tasks
 		$this->context()->setEditor( 'core:setup' );
 
-		$code = $this->context()->getConfig()->get( 'setup/site', 'default' );
+		$code = $this->context()->config()->get( 'setup/site', 'default' );
 
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context(), 'Standard' );
 		$siteManager = $localeManager->getSubManager( 'site' );

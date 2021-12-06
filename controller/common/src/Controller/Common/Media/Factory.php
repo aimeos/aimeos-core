@@ -66,7 +66,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'controller/common/media/name', 'Standard' );
+			$name = $context->config()->get( 'controller/common/media/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

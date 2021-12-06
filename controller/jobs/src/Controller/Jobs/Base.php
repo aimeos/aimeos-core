@@ -99,7 +99,7 @@ abstract class Base
 	 */
 	protected function mail( string $subject, string $body ) : self
 	{
-		$config = $this->context->getConfig();
+		$config = $this->context->config();
 
 		/** resource/email/from-name
 		 * Name of the e-mail sender

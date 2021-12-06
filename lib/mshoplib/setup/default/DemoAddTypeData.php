@@ -30,7 +30,7 @@ class DemoAddTypeData extends MShopAddTypeData
 	 */
 	public function up()
 	{
-		if( $this->context()->getConfig()->get( 'setup/default/demo', '' ) === '' ) {
+		if( $this->context()->config()->get( 'setup/default/demo', '' ) === '' ) {
 			return;
 		}
 

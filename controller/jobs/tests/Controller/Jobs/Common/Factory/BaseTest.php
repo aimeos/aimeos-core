@@ -20,7 +20,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->aimeos = \TestHelperJobs::getAimeos();
 		$this->context = \TestHelperJobs::context();
-		$config = $this->context->getConfig();
+		$config = $this->context->config();
 
 		$config->set( 'controller/jobs/common/decorators/default', [] );
 		$config->set( 'controller/jobs/admin/decorators/global', [] );

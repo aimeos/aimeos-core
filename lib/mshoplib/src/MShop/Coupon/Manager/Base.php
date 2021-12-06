@@ -81,7 +81,7 @@ abstract class Base
 		 * @see client/html/account/favorite/decorators/excludes
 		 * @see client/html/account/favorite/decorators/local
 		 */
-		$decorators = $context->getConfig()->get( 'mshop/coupon/provider/decorators', [] );
+		$decorators = $context->config()->get( 'mshop/coupon/provider/decorators', [] );
 
 		$object = $this->addCouponDecorators( $item, $code, $provider, $names );
 		$object = $this->addCouponDecorators( $item, $code, $object, $decorators );

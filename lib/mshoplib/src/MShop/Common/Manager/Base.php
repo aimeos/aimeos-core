@@ -68,7 +68,7 @@ abstract class Base
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
 		$db = $this->getResourceName();
-		$config = $this->context->getConfig();
+		$config = $this->context->config();
 		$dbm = $this->context->getDatabaseManager();
 
 		if( ( $adapter = $config->get( 'resource/' . $db . '/adapter' ) ) === null ) {
@@ -242,7 +242,7 @@ abstract class Base
 		 * @param integer Number of records
 		 * @since 2021.04
 		 */
-		$limit = $this->context->getConfig()->get( 'mshop/common/manager/aggregate/limit', 10000 );
+		$limit = $this->context->config()->get( 'mshop/common/manager/aggregate/limit', 10000 );
 		$keys = (array) $keys;
 
 		if( !count( $keys ) )
@@ -477,7 +477,7 @@ abstract class Base
 
 		if( $withsub === true )
 		{
-			$domains = $this->context->getConfig()->get( $path, $default );
+			$domains = $this->context->config()->get( $path, $default );
 
 			foreach( $domains as $domain ) {
 				$attr += $this->object()->getSubManager( $domain )->getSearchAttributes( true );
@@ -532,7 +532,7 @@ abstract class Base
 	 */
 	protected function getSqlConfig( string $path )
 	{
-		$config = $this->context()->getConfig();
+		$config = $this->context()->config();
 		$adapter = $config->get( 'resource/' . $this->getResourceName() . '/adapter' );
 
 		return $config->get( $path . '/' . $adapter, $config->get( $path . '/ansi', $path ) );
@@ -670,7 +670,7 @@ abstract class Base
 	{
 		$list = array( $type );
 
-		foreach( $this->context->getConfig()->get( $path, $default ) as $domain ) {
+		foreach( $this->context->config()->get( $path, $default ) as $domain ) {
 			$list = array_merge( $list, $this->object()->getSubManager( $domain )->getResourceType( $withsub ) );
 		}
 
@@ -686,7 +686,7 @@ abstract class Base
 	protected function getResourceName() : string
 	{
 		if( $this->resourceName === null ) {
-			$this->resourceName = $this->context->getConfig()->get( 'resource/default', 'db' );
+			$this->resourceName = $this->context->config()->get( 'resource/default', 'db' );
 		}
 
 		return $this->resourceName;
@@ -701,7 +701,7 @@ abstract class Base
 	 */
 	protected function setResourceName( string $name ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$config = $this->context->getConfig();
+		$config = $this->context->config();
 
 		if( $config->get( 'resource/' . $name ) === null ) {
 			$this->resourceName = $config->get( 'resource/default', 'db' );

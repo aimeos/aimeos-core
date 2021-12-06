@@ -32,7 +32,7 @@ class DemoAddServiceData extends MShopAddDataAbstract
 	public function up()
 	{
 		$context = $this->context();
-		$value = $context->getConfig()->get( 'setup/default/demo', '' );
+		$value = $context->config()->get( 'setup/default/demo', '' );
 
 		if( $value === '' ) {
 			return;

@@ -222,7 +222,7 @@ class Standard
 	{
 		$path = 'mshop/review/manager/submanagers';
 
-		foreach( $this->context()->getConfig()->get( $path, [] ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, [] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -598,7 +598,7 @@ class Standard
 			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
-			$level = $context->getConfig()->get( 'mshop/review/manager/sitemode', $level );
+			$level = $context->config()->get( 'mshop/review/manager/sitemode', $level );
 
 			/** mshop/review/manager/search/mysql
 			 * Retrieves the records matched by the given criteria in the database

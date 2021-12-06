@@ -111,7 +111,7 @@ class Standard
 		$this->setResourceName( 'db-supplier' );
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/supplier/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/supplier/manager/sitemode', $level );
 
 
 		$this->searchConfig['supplier:has']['function'] = function( &$source, array $params ) use ( $level ) {
@@ -142,7 +142,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/supplier/manager/submanagers';
-		foreach( $this->context()->getConfig()->get( $path, array( 'address' ) ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, array( 'address' ) ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -518,7 +518,7 @@ class Standard
 			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$level = $context->getConfig()->get( 'mshop/supplier/manager/sitemode', $level );
+			$level = $context->config()->get( 'mshop/supplier/manager/sitemode', $level );
 
 			/** mshop/supplier/manager/search/mysql
 			 * Retrieves the records matched by the given criteria in the database

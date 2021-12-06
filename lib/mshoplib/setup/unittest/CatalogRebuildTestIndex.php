@@ -31,13 +31,8 @@ class CatalogRebuildTestIndex extends Base
 	 */
 	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->context() );
-
 		$this->info( 'Rebuilding index for test data', 'v' );
 
-		$indexManager = \Aimeos\MShop\Index\Manager\Factory::create( $this->context() );
-
-		$indexManager->rebuild();
-		$indexManager->optimize();
+		\Aimeos\MShop\Index\Manager\Factory::create( $this->context() )->rebuild();
 	}
 }

@@ -48,9 +48,9 @@ class SQLSrv
 		parent::__construct( $context );
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
-		if( $context->getConfig()->get( 'mshop/index/manager/text/sqlsrv/fulltext', false ) )
+		if( $context->config()->get( 'mshop/index/manager/text/sqlsrv/fulltext', false ) )
 		{
 			$search = ':site AND mindte."langid" = $1 AND (
 				SELECT mindte_ft.RANK

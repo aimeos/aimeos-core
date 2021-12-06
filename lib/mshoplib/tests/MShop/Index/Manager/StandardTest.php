@@ -346,7 +346,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	 */
 	protected function getValue( \Aimeos\MW\DB\Manager\Iface $dbm, $sql, $column, $siteId, $productId )
 	{
-		$config = $this->context->getConfig();
+		$config = $this->context->config();
 
 		if( $config->get( 'resource/db-product' ) === null ) {
 			$dbname = $config->get( 'resource/default', 'db' );

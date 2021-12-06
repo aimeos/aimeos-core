@@ -229,7 +229,7 @@ class Standard
 	public function rebuild( iterable $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
 	{
 		$context = $this->context();
-		$config = $context->getConfig();
+		$config = $context->config();
 
 		/** mshop/index/manager/chunksize
 		 * Number of products that should be indexed at once
@@ -467,7 +467,7 @@ class Standard
 		if( $this->subManagers === null )
 		{
 			$this->subManagers = [];
-			$config = $this->context()->getConfig();
+			$config = $this->context()->config();
 
 			/** mshop/index/manager/submanagers
 			 * A list of sub-manager names used for indexing associated items

@@ -66,7 +66,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'mshop/catalog/manager/name', 'Standard' );
+			$name = $context->config()->get( 'mshop/catalog/manager/name', 'Standard' );
 		}
 
 		$iface = \Aimeos\MShop\Catalog\Manager\Iface::class;

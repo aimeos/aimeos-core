@@ -65,7 +65,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'madmin/log/manager/name', 'Standard' );
+			$name = $context->config()->get( 'madmin/log/manager/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

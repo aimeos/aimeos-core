@@ -278,7 +278,7 @@ class Standard
 	protected function createPreviews( \Aimeos\MW\Media\Image\Iface $media, string $domain, string $type ) : array
 	{
 		$list = [];
-		$config = $this->context->getConfig();
+		$config = $this->context->config();
 
 		/** controller/common/media/previews
 		 * Scaling options for preview images
@@ -473,7 +473,7 @@ class Standard
 		 * @since 2018.04
 		 * @category Developer
 		 */
-		$list = $this->context->getConfig()->get( 'controller/common/media/extensions', [] );
+		$list = $this->context->config()->get( 'controller/common/media/extensions', [] );
 
 		$filename = \Aimeos\MW\Str::slug( substr( $filename, 0, strrpos( $filename, '.' ) ?: null ) );
 		$filename = substr( md5( $filename . getmypid() . microtime( true ) ), -8 ) . '_' . $filename;
@@ -515,7 +515,7 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$options = $this->context->getConfig()->get( 'controller/common/media/options', [] );
+		$options = $this->context->config()->get( 'controller/common/media/options', [] );
 
 		return \Aimeos\MW\Media\Factory::get( $file, $options );
 	}
@@ -530,7 +530,7 @@ class Standard
 	 */
 	protected function getMimeIcon( string $mimetype, string $fsname ) : string
 	{
-		$config = $this->context->getConfig();
+		$config = $this->context->config();
 
 		/** controller/common/media/mimeicon/extension
 		 * File extension of the mime icon images
@@ -568,7 +568,7 @@ class Standard
 	protected function getMimeType( \Aimeos\MW\Media\Iface $media, string $type ) : string
 	{
 		$mimetype = $media->getMimetype();
-		$config = $this->context->getConfig();
+		$config = $this->context->config();
 
 		/** controller/common/media/files/allowedtypes
 		 * A list of image mime types that are allowed for uploaded image files

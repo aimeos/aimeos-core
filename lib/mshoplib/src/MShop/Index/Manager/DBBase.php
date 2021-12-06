@@ -446,7 +446,7 @@ abstract class DBBase
 			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
+			$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 

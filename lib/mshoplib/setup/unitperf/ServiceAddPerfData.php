@@ -96,7 +96,7 @@ class ServiceAddPerfData extends Base
 			],
 		];
 
-		$numServices = $this->context()->getConfig()->get( 'setup/unitperf/max-services', 100 );
+		$numServices = $this->context()->config()->get( 'setup/unitperf/max-services', 100 );
 
 		$manager = \Aimeos\MShop::create( $this->context(), 'service' );
 		$listManager = \Aimeos\MShop::create( $this->context(), 'service/lists' );

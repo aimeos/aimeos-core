@@ -216,7 +216,7 @@ class Standard
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/subscription/manager/submanagers';
-		foreach( $this->context()->getConfig()->get( $path, [] ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, [] ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -607,7 +607,7 @@ class Standard
 			 * @see mshop/locale/manager/sitelevel
 			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
-			$level = $context->getConfig()->get( 'mshop/subscription/manager/sitemode', $level );
+			$level = $context->config()->get( 'mshop/subscription/manager/sitemode', $level );
 
 			/** mshop/subscription/manager/search/mysql
 			 * Retrieves the records matched by the given criteria in the database

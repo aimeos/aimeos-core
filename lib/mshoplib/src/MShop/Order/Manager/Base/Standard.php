@@ -271,7 +271,7 @@ class Standard extends Base
 		$path = 'mshop/order/manager/base/submanagers';
 		$default = array( 'address', 'coupon', 'product', 'service' );
 
-		foreach( $this->context()->getConfig()->get( $path, $default ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, $default ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -781,7 +781,7 @@ class Standard extends Base
 			$required = array( 'order.base' );
 
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$level = $context->getConfig()->get( 'mshop/order/manager/sitemode', $level );
+			$level = $context->config()->get( 'mshop/order/manager/sitemode', $level );
 
 			/** mshop/order/manager/base/search/mysql
 			 * Retrieves the records matched by the given criteria in the database
@@ -973,7 +973,7 @@ class Standard extends Base
 		try
 		{
 			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$sitelevel = $context->getConfig()->get( 'mshop/order/manager/sitemode', $sitelevel );
+			$sitelevel = $context->config()->get( 'mshop/order/manager/sitemode', $sitelevel );
 
 			$cfgPathSearch = 'mshop/order/manager/base/search';
 			$cfgPathCount = 'mshop/order/manager/base/count';

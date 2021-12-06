@@ -17,7 +17,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$context = clone \TestHelperMShop::context();
-		$config = $context->getConfig();
+		$config = $context->config();
 
 		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
 

@@ -51,7 +51,7 @@ class MySQL
 		parent::__construct( $context );
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
 		$func = $this->getFunctionRelevance();
 		$expr = $this->getSiteString( 'mindte."siteid"', $level );

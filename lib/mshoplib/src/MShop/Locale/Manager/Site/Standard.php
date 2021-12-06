@@ -171,7 +171,7 @@ class Standard
 		}
 
 		$context = $this->context();
-		$config = $context->getConfig();
+		$config = $context->config();
 
 		/** mshop/locale/manager/site/cleanup/shop/domains
 		 * List of madmin domains names whose items referring to the same site should be deleted as well
