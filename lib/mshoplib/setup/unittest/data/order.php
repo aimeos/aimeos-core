@@ -180,7 +180,7 @@ return [[
 		'order.base.comment' => 'This is another comment.',
 		'address' => [[
 			'order.base.address.type' => 'payment', 'order.base.address.addressid' => '104',
-			'order.base.address.salutation' => 'mrs',
+			'order.base.address.salutation' => 'ms',
 			'order.base.address.firstname' => 'Adelheid', 'order.base.address.lastname' => 'Mustertest',
 			'order.base.address.address1' => 'Königallee', 'order.base.address.address2' => '1',
 			'order.base.address.address3' => '', 'order.base.address.postal' => '20146',
@@ -192,7 +192,7 @@ return [[
 		], [
 			'order.base.address.type' => 'delivery', 'order.base.address.addressid' => '102',
 			'order.base.address.company' => 'Example company', 'order.base.address.vatid' => 'DE999999999',
-			'order.base.address.salutation' => 'mrs', 'order.base.address.title' => 'Dr.',
+			'order.base.address.salutation' => 'ms', 'order.base.address.title' => 'Dr.',
 			'order.base.address.firstname' => 'Maria', 'order.base.address.lastname' => 'Mustertest',
 			'order.base.address.address1' => 'Pickhuben', 'order.base.address.address2' => '2',
 			'order.base.address.address3' => '', 'order.base.address.postal' => '20457',
@@ -242,7 +242,7 @@ return [[
 		'order.base.comment' => 'This is a bundle basket.',
 		'address' => [[
 			'order.base.address.type' => 'payment', 'order.base.address.addressid' => '107',
-			'order.base.address.salutation' => 'mrs', 'order.base.address.title' => '',
+			'order.base.address.salutation' => 'ms', 'order.base.address.title' => '',
 			'order.base.address.firstname' => 'Adelheid', 'order.base.address.lastname' => 'Mustertest',
 			'order.base.address.address1' => 'Königallee', 'order.base.address.address2' => '1',
 			'order.base.address.address3' => '', 'order.base.address.postal' => '20146',
@@ -332,7 +332,7 @@ return [[
 		], [
 			'order.base.address.type' => 'delivery', 'order.base.address.addressid' => '105',
 			'order.base.address.company' => 'Example company', 'order.base.address.vatid' => 'DE999999999',
-			'order.base.address.salutation' => 'mrs', 'order.base.address.title' => 'Dr.',
+			'order.base.address.salutation' => 'ms', 'order.base.address.title' => 'Dr.',
 			'order.base.address.firstname' => 'Our', 'order.base.address.lastname' => 'Unittest',
 			'order.base.address.address1' => 'Pickhuben', 'order.base.address.address2' => '2-4',
 			'order.base.address.address3' => '', 'order.base.address.postal' => '20457',

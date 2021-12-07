@@ -17,7 +17,7 @@ return [
 		'supplier.label' => 'Unit Supplier 001', 'supplier.code' => 'unitSupplier001', 'supplier.status' => 1,
 		'address' => [[
 			'supplier.address.company' => 'Example company', 'supplier.address.vatid' => 'DE999999999',
-			'supplier.address.salutation' => 'mrs', 'supplier.address.title' => '',
+			'supplier.address.salutation' => 'ms', 'supplier.address.title' => '',
 			'supplier.address.firstname' => 'Our', 'supplier.address.lastname' => 'Unittest',
 			'supplier.address.address1' => 'Pickhuben', 'supplier.address.address2' => '2',
 			'supplier.address.address3' => '', 'supplier.address.postal' => '20457',
@@ -51,7 +51,7 @@ return [
 		'supplier.label' => 'Unit Supplier 002', 'supplier.code' => 'unitSupplier002', 'supplier.status' => 1,
 		'address' => [[
 			'supplier.address.company' => 'Example company LLC', 'supplier.address.vatid' => 'DE999999999',
-			'supplier.address.salutation' => 'mrs', 'supplier.address.title' => '',
+			'supplier.address.salutation' => 'ms', 'supplier.address.title' => '',
 			'supplier.address.firstname' => 'Good', 'supplier.address.lastname' => 'Unittest',
 			'supplier.address.address1' => 'Pickhuben', 'supplier.address.address2' => '2',
 			'supplier.address.address3' => '', 'supplier.address.postal' => '20457',

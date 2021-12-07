@@ -16,7 +16,7 @@ return array(
 		'birthday' => '2000-01-01', 'password' => 'test', 'vtime' => null, 'status' => 1,
 		'delivery' => array(
 			array(
-				'salutation' => 'mrs', 'company' => 'Demo company', 'vatid' => 'DE999999999',
+				'salutation' => 'ms', 'company' => 'Demo company', 'vatid' => 'DE999999999',
 				'title' => '', 'firstname' => 'Test', 'lastname' => 'User',
 				'address1' => 'Demo street', 'address2' => '100', 'address3' => '', 'postal' => '12345',
 				'city' => 'Demo city', 'state' => 'NY', 'langid' => 'en', 'countryid' => 'US',

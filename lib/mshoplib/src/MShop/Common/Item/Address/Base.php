@@ -36,7 +36,7 @@ abstract class Base
 	/**
 	 * Saluation for a female customer.
 	 */
-	const SALUTATION_MS = 'mrs';
+	const SALUTATION_MS = 'ms';
 
 	/**
 	 * Saluation for a male customer.
