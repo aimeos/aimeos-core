@@ -14,11 +14,11 @@ return [
 		'product.label' => 'Demo article', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 0
-		],[
+		], [
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 1
-		],[
+		], [
 			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 5
-		],[
+		], [
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 0
 		]],
 		'supplier' => [[
@@ -562,9 +562,9 @@ return [
 		'product.label' => 'Demo selection article', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 1
-		],[
+		], [
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 2
-		],[
+		], [
 			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 6
 		]],
 		'text' => [
@@ -708,9 +708,9 @@ return [
 		'product.label' => 'Demo bundle article', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 2
-		],[
+		], [
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 3
-		],[
+		], [
 			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 7
 		]],
 		'supplier' => [[
@@ -939,7 +939,7 @@ return [
 		'product.label' => 'Demo voucher', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 3
-		],[
+		], [
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 0
 		]],
 		'text' => [
@@ -1078,11 +1078,11 @@ return [
 		'product.label' => 'Demo article 2', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 1
-		],[
+		], [
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 4
-		],[
+		], [
 			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 4
-		],[
+		], [
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 2
 		]],
 		'text' => [
@@ -1177,9 +1177,9 @@ return [
 		'product.label' => 'Demo article 3', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 5
-		],[
+		], [
 			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 2
-		],[
+		], [
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 5
 		]],
 		'text' => [
@@ -1367,11 +1367,11 @@ return [
 		'product.label' => 'Demo article 5', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 5
-		],[
+		], [
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 6
-		],[
+		], [
 			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 1
-		],[
+		], [
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 4
 		]],
 		'text' => [
@@ -1467,9 +1467,9 @@ return [
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 2,
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 6
-		],[
+		], [
 			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 0
-		],[
+		], [
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 7
 		]],
 		'text' => [
@@ -1564,9 +1564,9 @@ return [
 		'product.label' => 'Demo article 7', 'product.status' => 1,
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 7
-		],[
+		], [
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 8
-		],[
+		], [
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 3
 		]],
 		'text' => [
@@ -1662,11 +1662,11 @@ return [
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 3,
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 8
-		],[
+		], [
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 7
-		],[
+		], [
 			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 3
-		],[
+		], [
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 1
 		]],
 		'text' => [
