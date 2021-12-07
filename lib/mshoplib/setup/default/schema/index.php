@@ -68,7 +68,7 @@ return array(
 			$table->int( 'pos' );
 			$table->datetime( 'mtime' );
 
-			$table->unique( ['prodid', 'siteid', 'supid', 'listtype', 'pos'], 'unq_msindsup_p_sid_supid_lt_po' );
+			$table->unique( ['prodid', 'supid', 'listtype', 'siteid', 'pos', 'latitude', 'longitude'], 'unq_msindsu_p_s_lt_si_po_la_lo' );
 			$table->index( ['prodid', 'latitude', 'longitude', 'siteid'], 'idx_msindsup_p_lat_lon_sid' );
 			$table->index( ['siteid', 'supid', 'listtype', 'pos'], 'idx_msindsup_sid_supid_lt_po' );
 		},

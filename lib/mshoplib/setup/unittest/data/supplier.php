@@ -46,13 +46,6 @@ return [
 				'media.label' => 'path/to/supplier.jpg', 'media.url' => 'path/to/supplier.jpg',
 				'media.previews' => [1 => 'path/to/supplier.jpg'], 'media.status' => 1, 'media.mimetype' => 'image/jpeg',
 			]],
-			'product' => [[
-				'supplier.lists.datestart' => '2010-01-01 00:00:00', 'supplier.lists.dateend' => '2100-01-01 00:00:00',
-				'supplier.lists.position' => 1, 'ref' => 'Cafe Noire Cappuccino',
-			], [
-				'supplier.lists.datestart' => '2010-01-01 00:00:00',
-				'supplier.lists.position' => 2, 'ref' => 'Cafe Noire Expresso',
-			]],
 		],
 	], [
 		'supplier.label' => 'Unit Supplier 002', 'supplier.code' => 'unitSupplier002', 'supplier.status' => 1,

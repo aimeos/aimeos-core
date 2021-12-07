@@ -21,7 +21,7 @@ class SupplierAddTestData extends BaseAddTestData
 	 */
 	public function after() : array
 	{
-		return ['Media', 'Supplier', 'Text', 'MShopSetLocale', 'ProductAddTestData'];
+		return ['Media', 'Supplier', 'Text', 'MShopSetLocale'];
 	}
 
 

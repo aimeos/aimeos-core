@@ -126,7 +126,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->find( 'CNE', ['catalog', 'supplier', 'stock'] );
 
 		$this->assertEquals( 3, count( $item->getRefItems( 'catalog' ) ) );
-		$this->assertEquals( 1, count( $item->getSupplierItems() ) );
+		$this->assertEquals( 1, count( $item->getRefItems( 'supplier' ) ) );
 		$this->assertEquals( 1, count( $item->getStockItems() ) );
 	}
 

@@ -521,6 +521,8 @@ return array(
 			'catalog' => 'catalog',
 			'price' => ['default'],
 			'product' => ['default'],
+			'supplier' => 'supplier',
+			'supplier/address' => 'supplier/address',
 			'text' => 'text',
 		],
 		'submanagers' => [

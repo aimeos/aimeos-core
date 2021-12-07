@@ -474,22 +474,28 @@ class Standard
 			 */
 			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/supplier/insert' );
 
-			foreach( $supItems as $id => $supItem )
+			foreach( $items as $id => $item )
 			{
-				$pairs = $supItem->getAddressItems()->map( function( $addr ) {
-					return ['lat' => $addr->getLatitude(), 'lon' => $addr->getLongitude()];
-				} );
-
-				if( $pairs->isEmpty() ) {
-					$pairs = [['lat' => null, 'lon' => null]];
-				}
-
-				foreach( $pairs as $pair )
+				foreach( $item->getListItems( 'supplier' ) as $listItem )
 				{
-					foreach( $supItem->getListItems( 'product' ) as $listItem )
+					if( ( $supplier = $listItem->getRefItem() ) === null ) {
+						continue;
+					}
+
+					$pairs = $supplier->getAddressItems()->map( function( $addr ) {
+						return $addr->getLatitude() !== null && $addr->getLongitude() !== null
+							? ['lat' => $addr->getLatitude(), 'lon' => $addr->getLongitude()]
+							: null;
+					} )->filter();
+
+					if( $pairs->isEmpty() ) {
+						$pairs = [['lat' => null, 'lon' => null]];
+					}
+
+					foreach( $pairs as $pair )
 					{
-						$stmt->bind( 1, $listItem->getRefId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-						$stmt->bind( 2, $listItem->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+						$stmt->bind( 1, $listItem->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+						$stmt->bind( 2, $listItem->getRefId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 						$stmt->bind( 3, $listItem->getType() );
 						$stmt->bind( 4, $listItem->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 						$stmt->bind( 5, $pair['lat'] ?? null, \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
@@ -652,31 +658,6 @@ class Standard
 		$cfgPathCount = 'mshop/index/manager/supplier/count';
 
 		return $this->searchItemsIndexBase( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
-	}
-
-
-	/**
-	 * Returns the list items referencing the given products
-	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface[] $items List of product items
-	 * @return \Aimeos\Map Associative list of product IDs as keys and lists of list items as values
-	 * @deprecated 2022.01 Removed in favor of getSuppliers()
-	 */
-	protected function getListItems( iterable $items ) : \Aimeos\Map
-	{
-		$listItems = [];
-		$listManager = \Aimeos\MShop::create( $this->context(), 'supplier/lists' );
-
-		$search = $listManager->filter( true )->slice( 0, 0x7fffffff )->add( [
-			'supplier.lists.refid' => map( $items )->keys()->toArray(),
-			'supplier.lists.domain' => 'product'
-		] );
-
-		foreach( $listManager->search( $search ) as $listItem ) {
-			$listItems[$listItem->getRefId()][] = $listItem;
-		}
-
-		return map( $listItems );
 	}
 
 

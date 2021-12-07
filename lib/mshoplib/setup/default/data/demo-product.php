@@ -21,6 +21,9 @@ return [
 		],[
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 0
 		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-test1', 'product.lists.type' => 'default', 'product.lists.position' => 0
+		]],
 		'text' => [
 			[
 				'text.label' => 'Demo name/de: Demoartikel', 'text.content' => 'Demoartikel',
@@ -308,6 +311,11 @@ return [
 	[
 		'product.code' => 'demo-selection-article-1', 'product.type' => 'default',
 		'product.label' => 'Demo variant article 1', 'product.status' => 1,
+		'supplier' => [[
+			'supplier.code' => 'demo-test1', 'product.lists.type' => 'default', 'product.lists.position' => 0
+		], [
+			'supplier.code' => 'demo-test2', 'product.lists.type' => 'default', 'product.lists.position' => 1
+		]],
 		'attribute' => [
 			[
 				'attribute.code' => 'demo-blue', 'attribute.label' => 'Demo: Blue',
@@ -704,6 +712,9 @@ return [
 			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 3
 		],[
 			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 7
+		]],
+		'supplier' => [[
+			'supplier.code' => 'demo-test2', 'product.lists.type' => 'default', 'product.lists.position' => 0
 		]],
 		'text' => [
 			[

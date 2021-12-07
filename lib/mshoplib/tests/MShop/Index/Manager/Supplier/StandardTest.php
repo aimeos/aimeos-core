@@ -77,51 +77,34 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$product = $productManager->find( 'CNC' );
-
 		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context );
-		$listManager = $supplierManager->getSubManager( 'lists' );
+		$supItem = $supplierManager->find( 'unitSupplier001' );
 
-		$search = $listManager->filter( true );
-		$search->setConditions( $search->compare( '==', 'supplier.lists.domain', 'product' ) );
-		$supListItems = $listManager->search( $search )->toArray();
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
+		$product = $productManager->find( 'CNC' )->setId( null )->setCode( 'ModifiedCNC' )
+			->addListItem( 'supplier', $productManager->createListItem(), $supItem );
 
-		if( ( $supListItem = reset( $supListItems ) ) === false ) {
-			throw new \RuntimeException( 'No supplier list item found!' );
-		}
-
-
-		//new product item
-		$product->setId( null );
-		$product->setCode( 'SupplierCNC' );
-		$productManager->save( $product );
-
-		//new supplier list item
-		$supListItem->setId( null );
-		$supListItem->setRefId( $product->getId() );
-		$listManager->save( $supListItem );
+		$product = $productManager->save( $product );
 
 		$this->object->save( $product );
 
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'index.supplier.id', $supListItem->getParentId() ) );
-		$result = $this->object->search( $search )->toArray();
+		$search->setConditions( $search->compare( '==', 'index.supplier.id', $supItem->getId() ) );
+		$result = $this->object->search( $search );
 
 
 		$this->object->delete( $product->getId() );
-		$listManager->delete( $supListItem->getId() );
 		$productManager->delete( $product->getId() );
 
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'index.supplier.id', $supListItem->getParentId() ) );
-		$result2 = $this->object->search( $search )->toArray();
+		$search->setConditions( $search->compare( '==', 'index.supplier.id', $supItem->getId() ) );
+		$result2 = $this->object->search( $search );
 
 
-		$this->assertTrue( in_array( $product->getId(), array_keys( $result ) ) );
-		$this->assertFalse( in_array( $product->getId(), array_keys( $result2 ) ) );
+		$this->assertTrue( $result->has( $product->getId() ) );
+		$this->assertFalse( $result2->has( $product->getId() ) );
 	}
 
 
@@ -134,8 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsId()
 	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context );
-		$id = $supplierManager->find( 'unitSupplier001' )->getId();
+		$id = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context )->find( 'unitSupplier001' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'index.supplier.id', $id ) );
@@ -157,8 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsPosition()
 	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context );
-		$id = $supplierManager->find( 'unitSupplier001' )->getId();
+		$id = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context )->find( 'unitSupplier001' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->make( 'index.supplier:position', ['default', $id] ), 0 ) );
@@ -172,8 +153,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsPositionList()
 	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context );
-		$id = $supplierManager->find( 'unitSupplier001' )->getId();
+		$id = \Aimeos\MShop\Supplier\Manager\Factory::create( $this->context )->find( 'unitSupplier001' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->make( 'index.supplier:position', ['default', [$id]] ), 0 ) );

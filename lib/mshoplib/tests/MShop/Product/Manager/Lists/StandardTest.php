@@ -51,7 +51,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter( true )->add( ['product.lists.editor' => 'core:lib/mshoplib'] )->slice( 0, 10000 );
 		$result = $this->object->aggregate( $search, 'product.lists.domain' )->toArray();
 
-		$this->assertEquals( 7, count( $result ) );
+		$this->assertEquals( 8, count( $result ) );
 		$this->assertArrayHasKey( 'price', $result );
 		$this->assertEquals( 22, $result['price'] );
 	}

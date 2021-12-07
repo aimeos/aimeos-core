@@ -47,8 +47,6 @@ class Supplier
 		parent::__construct( $provider, $context, $serviceItem );
 
 		$manager = \Aimeos\MShop::create( $context, 'supplier' );
-		$addrManager = \Aimeos\MShop::create( $context, 'supplier/address' );
-
 		$search = $manager->filter( true );
 		$search->setSortations( [$search->sort( '+', 'supplier.label' )] );
 
@@ -57,7 +55,7 @@ class Supplier
 			$addresses = $item->getAddressItems();
 
 			if( empty( $addresses ) ) {
-				$addresses[] = $addrManager->create();
+				$addresses[] = $manager->createAddressItem();
 			}
 
 			foreach( $addresses as $id => $addr )

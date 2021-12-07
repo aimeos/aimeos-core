@@ -30,6 +30,7 @@ return [
 		['product.lists.type.domain' => 'product', 'product.lists.type.code' => 'bought-together', 'product.lists.type.label' => 'Bought together'],
 		['product.lists.type.domain' => 'service', 'product.lists.type.code' => 'default', 'product.lists.type.label' => 'Standard'],
 		['product.lists.type.domain' => 'supplier', 'product.lists.type.code' => 'default', 'product.lists.type.label' => 'Standard'],
+		['product.lists.type.domain' => 'supplier', 'product.lists.type.code' => 'promotion', 'product.lists.type.label' => 'Promotion'],
 		['product.lists.type.domain' => 'tag', 'product.lists.type.code' => 'default', 'product.lists.type.label' => 'Standard'],
 		['product.lists.type.domain' => 'text', 'product.lists.type.code' => 'default', 'product.lists.type.label' => 'Standard'],
 		//pictures
@@ -564,6 +565,10 @@ return [
 						'price.property.type' => 'zone', 'price.property.languageid' => null, 'price.property.value' => 'NY'
 					]],
 				]],
+				'supplier' => [[
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2100-01-01 00:00:00',
+					'ref' => 'Unit Supplier 001'
+				]],
 				'tag' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'Kaffee',
 				], [
@@ -740,6 +745,9 @@ return [
 					'product.lists.type' => 'default', 'product.lists.position' => 2, 'ref' => 'EFGH/16 discs',
 				], [
 					'product.lists.type' => 'default', 'product.lists.position' => 3, 'ref' => 'IJKL/16 discs',
+				]],
+				'supplier' => [[
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'ref' => 'Unit Supplier 001',
 				]],
 				'tag' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'Expresso'

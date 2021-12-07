@@ -749,7 +749,7 @@ class Standard
 					$texts[$langId]['content'][] = $catItem->getName();
 				}
 
-				foreach( $product->getSupplierItems() as $supItem ) {
+				foreach( $product->getRefItems( 'supplier' ) as $supItem ) {
 					$texts[$langId]['content'][] = $supItem->getName();
 				}
 

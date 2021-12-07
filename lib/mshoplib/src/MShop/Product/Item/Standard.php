@@ -68,17 +68,6 @@ class Standard
 
 
 	/**
-	 * Returns the supplier items referencing the product
-	 *
-	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Supplier\Item\Iface
-	 */
-	public function getSupplierItems() : \Aimeos\Map
-	{
-		return map( $this->get( '.supplier', [] ) );
-	}
-
-
-	/**
 	 * Returns the stock items associated to the product
 	 *
 	 * @param array|string|null $type Type or types of the stock item

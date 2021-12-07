@@ -73,18 +73,6 @@ return array(
 				'supplier.lists.start' => null, 'supplier.lists.end' => null, 'supplier.lists.status' => 1,
 			),
 		),
-		'product' => array(
-			array(
-				'product.code' => 'demo-article',
-				'supplier.lists.type' => 'default', 'supplier.lists.position' => 0, 'supplier.lists.config' => [],
-				'supplier.lists.start' => null, 'supplier.lists.end' => null, 'supplier.lists.status' => 1
-			),
-			array(
-				'product.code' => 'demo-selection-article',
-				'supplier.lists.type' => 'default', 'supplier.lists.position' => 1, 'supplier.lists.config' => [],
-				'supplier.lists.start' => null, 'supplier.lists.end' => null, 'supplier.lists.status' => 1
-			),
-		),
 	),
 	array(
 		'supplier.code' => 'demo-test2', 'supplier.label' => 'Test supplier 2', 'supplier.status' => 1,
@@ -151,18 +139,6 @@ return array(
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'supplier.lists.type' => 'default', 'supplier.lists.position' => 0, 'supplier.lists.config' => [],
 				'supplier.lists.start' => null, 'supplier.lists.end' => null, 'supplier.lists.status' => 1,
-			),
-		),
-		'product' => array(
-			array(
-				'product.code' => 'demo-selection-article',
-				'supplier.lists.type' => 'default', 'supplier.lists.position' => 0, 'supplier.lists.config' => [],
-				'supplier.lists.start' => null, 'supplier.lists.end' => null, 'supplier.lists.status' => 1
-			),
-			array(
-				'product.code' => 'demo-bundle-article',
-				'supplier.lists.type' => 'default', 'supplier.lists.position' => 1, 'supplier.lists.config' => [],
-				'supplier.lists.start' => null, 'supplier.lists.end' => null, 'supplier.lists.status' => 1
 			),
 		),
 	),

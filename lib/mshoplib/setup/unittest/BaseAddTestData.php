@@ -143,8 +143,12 @@ class BaseAddTestData extends Base
 
 		$manager = $this->getManager( $domain );
 		$search = $manager->filter()->slice( 0, 10000 );
+		$domains = [
+			'attribute', 'catalog', 'media', 'price', 'product', 'product/property',
+			'supplier', 'supplier/address', 'tag', 'text'
+		];
 
-		foreach( $manager->search( $search, ['attribute', 'catalog', 'media', 'price', 'product', 'product/property', 'tag', 'text'] ) as $item ) {
+		foreach( $manager->search( $search, $domains ) as $item ) {
 			$list[$item->getLabel()] = $item;
 		}
 
