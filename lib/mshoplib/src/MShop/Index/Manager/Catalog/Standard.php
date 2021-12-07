@@ -416,7 +416,6 @@ class Standard
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->context();
 		$siteid = $context->getLocale()->getSiteId();
-		$listItems = $this->getListItems( $items );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -462,12 +461,10 @@ class Standard
 
 			foreach( $items as $id => $item )
 			{
-				if( !$listItems->has( $id ) ) { continue; }
-
-				foreach( (array) $listItems[$id] as $listItem )
+				foreach( $item->getListItems( 'catalog' ) as $listItem )
 				{
-					$stmt->bind( 1, $listItem->getRefId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-					$stmt->bind( 2, $listItem->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+					$stmt->bind( 1, $listItem->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+					$stmt->bind( 2, $listItem->getRefId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 					$stmt->bind( 3, $listItem->getType() );
 					$stmt->bind( 4, $listItem->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 					$stmt->bind( 5, $date ); //mtime
@@ -627,30 +624,6 @@ class Standard
 		$cfgPathCount = 'mshop/index/manager/catalog/count';
 
 		return $this->searchItemsIndexBase( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
-	}
-
-
-	/**
-	 * Returns the list items referencing the given products
-	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface[] $items List of product items
-	 * @return \Aimeos\Map Associative list of product IDs as keys and lists of list items as values
-	 */
-	protected function getListItems( iterable $items ) : \Aimeos\Map
-	{
-		$listItems = [];
-		$listManager = \Aimeos\MShop::create( $this->context(), 'catalog/lists' );
-
-		$search = $listManager->filter( true )->slice( 0, 0x7fffffff )->add( [
-			'catalog.lists.refid' => map( $items )->keys()->toArray(),
-			'catalog.lists.domain' => 'product'
-		] );
-
-		foreach( $listManager->search( $search ) as $listItem ) {
-			$listItems[$listItem->getRefId()][] = $listItem;
-		}
-
-		return map( $listItems );
 	}
 
 

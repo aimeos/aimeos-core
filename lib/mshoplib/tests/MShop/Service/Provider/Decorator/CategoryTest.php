@@ -157,16 +157,6 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testIsAvailableExcludeNoPromotion()
-	{
-		$this->basket->addProduct( $this->getOrderProduct( 'CNC' ) );
-		$this->servItem->setConfig( array( 'category.exclude' => 'cafe' ) );
-
-		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
-		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
-	}
-
-
 	public function testIsAvailableExcludeTree()
 	{
 		$this->basket->addProduct( $this->getOrderProduct( 'CNC' ) );
@@ -194,16 +184,6 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
 		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
-	}
-
-
-	public function testIsAvailableIncludeNoPromotion()
-	{
-		$this->basket->addProduct( $this->getOrderProduct( 'CNC' ) );
-		$this->servItem->setConfig( array( 'category.include' => 'cafe' ) );
-
-		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
-		$this->assertFalse( $this->object->isAvailable( $this->basket ) );
 	}
 
 

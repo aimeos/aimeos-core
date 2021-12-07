@@ -131,8 +131,8 @@ class CatalogAddPerfData extends Base
 
 	protected function addCatalogProducts( array $catItems, array $items, $num )
 	{
-		$catalogListManager = \Aimeos\MShop::create( $this->context(), 'catalog/lists' );
-		$defListItem = $catalogListManager->create()->setType( 'default' );
+		$catalogManager = \Aimeos\MShop::create( $this->context(), 'catalog' );
+		$defListItem = $catalogManager->createListItem();
 		$start = 0;
 
 		foreach( $catItems as $idx => $catItem )
@@ -145,12 +145,11 @@ class CatalogAddPerfData extends Base
 				if( $item->pos % $fraction === 0 )
 				{
 					$litem = ( clone $defListItem )->setRefId( $item->getId() )->setPosition( $start + round( $item->pos / $fraction ) );
-					$catItem->addListItem( 'product', $litem );
+					$item->addListItem( 'catalog', $litem );
 				}
 			}
 
 			$start += $num * $catItem->pos * round( count( $items ) / pow( 10, $idx + 1 ) );
-			$this->save( 'catalog', $catItem );
 		}
 	}
 
@@ -262,15 +261,15 @@ class CatalogAddPerfData extends Base
 
 			if( $i % $slice === 0 )
 			{
-				$productManager->save( $items );
 				$this->addCatalogProducts( $catItems, $items, $num++ );
+				$productManager->save( $items );
 				$this->addStock( $items );
 				$items = [];
 			}
 		}
 
-		$productManager->save( $items );
 		$this->addCatalogProducts( $catItems, $items, $num++ );
+		$productManager->save( $items );
 		$this->addStock( $items );
 
 		$productManager->commit();

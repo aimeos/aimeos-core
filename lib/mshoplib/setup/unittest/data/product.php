@@ -21,6 +21,7 @@ return [
 		['product.lists.type.domain' => 'attribute', 'product.lists.type.code' => 'hidden', 'product.lists.type.label' => 'Hidden'],
 		['product.lists.type.domain' => 'attribute', 'product.lists.type.code' => 'custom', 'product.lists.type.label' => 'Custom value'],
 		['product.lists.type.domain' => 'catalog', 'product.lists.type.code' => 'default', 'product.lists.type.label' => 'Standard'],
+		['product.lists.type.domain' => 'catalog', 'product.lists.type.code' => 'promotion', 'product.lists.type.label' => 'Promotion'],
 		['product.lists.type.domain' => 'media', 'product.lists.type.code' => 'default', 'product.lists.type.label' => 'Standard'],
 		['product.lists.type.domain' => 'media', 'product.lists.type.code' => 'download', 'product.lists.type.label' => 'Download'],
 		['product.lists.type.domain' => 'price', 'product.lists.type.code' => 'default', 'product.lists.type.label' => 'Standard'],
@@ -78,6 +79,11 @@ return [
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/xl',
+				]],
+				'catalog' => [[
+					'product.lists.type' => 'default', 'product.lists.domain' => 'catalog', 'product.lists.position' => 0,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Internet',
 				]],
 				'price' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
@@ -146,6 +152,11 @@ return [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/m'
 				]],
+				'catalog' => [[
+					'product.lists.type' => 'default', 'product.lists.domain' => 'catalog', 'product.lists.position' => 1,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Internet',
+				]],
 			],
 		],
 		'product/QRST' => [
@@ -154,6 +165,11 @@ return [
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/xl'
+				]],
+				'catalog' => [[
+					'product.lists.type' => 'default', 'product.lists.domain' => 'catalog', 'product.lists.position' => 2,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Internet',
 				]],
 				'price' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
@@ -330,6 +346,10 @@ return [
 			'product.type' => 'select', 'product.code' => 'U:TEST', 'product.label' => 'Unittest: Test Selection',
 			'product.instock' => 1,
 			'lists' => [
+				'catalog' => [[
+					'product.lists.type' => 'promotion', 'product.lists.domain' => 'catalog', 'product.lists.position' => 0,
+					'ref' => 'Misc',
+				]],
 				'media' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
 					'media.languageid' => 'de', 'media.type' => 'download', 'media.domain' => 'product',
@@ -374,6 +394,10 @@ return [
 			'product.type' => 'select', 'product.code' => 'U:noSel', 'product.label' => 'Unittest: Empty Selection',
 			'product.instock' => 1,
 			'lists' => [
+				'catalog' => [[
+					'product.lists.type' => 'default', 'product.lists.domain' => 'catalog', 'product.lists.position' => 5,
+					'ref' => 'Misc',
+				]],
 				'price' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0,
 					'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.domain' => 'product',
@@ -405,6 +429,10 @@ return [
 					'product.lists.type' => 'custom', 'product.lists.position' => 0, 'ref' => 'product/date/custom',
 				], [
 					'product.lists.type' => 'custom', 'product.lists.position' => 0, 'ref' => 'product/price/custom',
+				]],
+				'catalog' => [[
+					'product.lists.type' => 'default', 'product.lists.domain' => 'catalog', 'product.lists.position' => 0,
+					'ref' => 'Misc',
 				]],
 				'product' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'Unittest: Test priced Sub 1',
@@ -448,6 +476,27 @@ return [
 			'lists' => [
 				'attribute' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'product/size/xs',
+				]],
+				'catalog' => [[
+					'product.lists.type' => 'promotion', 'product.lists.domain' => 'catalog', 'product.lists.position' => 1,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Kaffee',
+				], [
+					'product.lists.type' => 'new', 'product.lists.domain' => 'catalog', 'product.lists.position' => 0,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Neu',
+				], [
+					'product.lists.type' => 'default', 'product.lists.domain' => 'catalog', 'product.lists.position' => 1,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Neu',
+				], [
+					'product.lists.type' => 'internet', 'product.lists.domain' => 'catalog', 'product.lists.position' => 0,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Internet',
+				], [
+					'product.lists.type' => 'default', 'product.lists.domain' => 'catalog', 'product.lists.position' => 0,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Internet',
 				]],
 				'media' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 1,
@@ -584,6 +633,27 @@ return [
 					'product.lists.type' => 'config', 'product.lists.position' => 4, 'ref' => 'product/interval/P1Y0M0W0D',
 				], [
 					'product.lists.type' => 'hidden', 'product.lists.position' => 5, 'ref' => 'product/download/testurl',
+				]],
+				'catalog' => [[
+					'product.lists.type' => 'promotion', 'product.lists.domain' => 'catalog', 'product.lists.position' => 0,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Kaffee',
+				], [
+					'product.lists.type' => 'default', 'product.lists.domain' => 'catalog', 'product.lists.position' => 0,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Kaffee',
+				], [
+					'product.lists.type' => 'new', 'product.lists.domain' => 'catalog', 'product.lists.position' => 0,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Neu',
+				], [
+					'product.lists.type' => 'default', 'product.lists.domain' => 'catalog', 'product.lists.position' => 0,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Neu',
+				], [
+					'product.lists.type' => 'internet', 'product.lists.domain' => 'catalog', 'product.lists.position' => 0,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Internet',
 				]],
 				'media' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 1,
@@ -730,6 +800,11 @@ return [
 			'product.type' => 'bundle', 'product.code' => 'U:BUNDLE', 'product.label' => 'Unittest: Bundle',
 			'product.instock' => 1,
 			'lists' => [
+				'catalog' => [[
+					'product.lists.type' => 'default', 'product.lists.domain' => 'catalog', 'product.lists.position' => 2,
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2099-01-01 00:00:00',
+					'ref' => 'Neu',
+				]],
 				'product' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'Cafe Noire Cappuccino',
 				], [

@@ -521,15 +521,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetCatalogItems()
-	{
-		$object = new \Aimeos\MShop\Product\Item\Standard( ['.catalog' => []] );
-
-		$this->assertInstanceOf( \Aimeos\Map::class, $object->getCatalogItems() );
-		$this->assertEquals( [], $object->getCatalogItems()->toArray() );
-	}
-
-
 	public function testGetSupplierItems()
 	{
 		$object = new \Aimeos\MShop\Product\Item\Standard( ['.supplier' => []] );

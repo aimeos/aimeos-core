@@ -57,34 +57,35 @@ class Category
 		if( $this->getConfigValue( 'category.only' ) == true )
 		{
 			$prodIds = [];
+			$context = $this->context();
+			$types = ['default', 'promotion'];
 
-			foreach( $base->getProducts() as $product ) {
+			$catManager = \Aimeos\MShop::create( $context, 'catalog' );
+			$prodManager = \Aimeos\MShop::create( $context, 'product' );
+
+			$codes = explode( ',', $this->getConfigValue( 'category.code', '' ) );
+			$filter = $catManager->filter( true )->add( ['catalog.code' => $codes] )->slice( 0, count( $codes ) );
+
+			$catIds = $catManager->search( $filter )->keys()->all();
+			$price = \Aimeos\MShop::create( $context, 'price' )->create();
+
+			foreach( $base->getProducts() as $product )
+			{
 				$prodIds[$product->getProductId()][] = $product;
+
+				if( $parentid = $product->getParentProductId() ) {
+					$prodIds[$parentid][] = $product;
+				}
 			}
 
-			$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
-			$listManager = \Aimeos\MShop::create( $this->context(), 'catalog/lists' );
+			$filter = $prodManager->filter( true )->slice( 0, count( $prodIds ) );
+			$filter->add( $filter->is( $filter->make( 'product:has', ['catalog', $types, $catIds] ), '!=', null ) )
+				->add( $filter->is( 'product.id', '==', array_keys( $prodIds ) ) );
 
-			$codes = explode( ',', $this->getConfigValue( 'category.code' ) );
-			$price = \Aimeos\MShop::create( $this->context(), 'price' )->create();
-
-			$filter = $manager->filter( true )->add( ['catalog.code' => $codes] )->slice( 0, count( $codes ) );
-			$catIds = $manager->search( $filter )->keys()->toArray();
-
-			$filter = $listManager->filter( true )->slice( 0, count( $prodIds ) )->add( [
-				'catalog.lists.parentid' => $catIds,
-				'catalog.lists.refid' => array_keys( $prodIds ),
-				'catalog.lists.type' => ['default', 'promotion'],
-				'catalog.lists.domain' => 'product',
-			] );
-
-			foreach( $listManager->search( $filter ) as $listItem )
+			foreach( $prodManager->search( $filter ) as $item )
 			{
-				if( isset( $prodIds[$listItem->getRefId()] ) )
-				{
-					foreach( $prodIds[$listItem->getRefId()] as $product ) {
-						$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
-					}
+				foreach( $prodIds[$item->getId()] ?? [] as $product ) {
+					$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
 				}
 			}
 
@@ -128,19 +129,25 @@ class Category
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base ) : bool
 	{
-		if( ( $value = $this->getConfigValue( 'category.code' ) ) !== null )
+		if( ( $codes = $this->getConfigValue( 'category.code' ) ) !== null )
 		{
-			$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
-			$filter = $manager->filter( null )->add( ['catalog.code' => explode( ',', $value )] )->slice( 0, 1 );
 			$expr = [];
+			$context = $this->context();
+			$types = ['default', 'promotion'];
 
-			foreach( $base->getProducts() as $product )
-			{
-				$func = $filter->make( 'catalog:has', ['product', 'default', $product->getProductId()] );
-				$expr[] = $filter->is( $func, '!=', null );
+			$catManager = \Aimeos\MShop::create( $context, 'catalog' );
+			$prodManager = \Aimeos\MShop::create( $context, 'product' );
+
+			$filter = $catManager->filter( true )->add( ['catalog.code' => explode( ',', $codes )] );
+			$catIds = $catManager->search( $filter )->keys()->all();
+
+			$filter = $prodManager->filter( true );
+
+			foreach( $base->getProducts() as $product ) {
+				$expr[] = $filter->is( $filter->make( 'product:has', ['catalog', $types, $catIds] ), '!=', null );
 			}
 
-			if( $manager->search( $filter->add( $filter->or( $expr ) ) )->isEmpty() ) {
+			if( $prodManager->search( $filter->add( $filter->or( $expr ) ) )->isEmpty() ) {
 				return false;
 			}
 		}

@@ -57,73 +57,6 @@ return [
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		],
 	],
-	'product' => [
-		[
-			'code' => 'demo-article',
-			'list-type' => 'promotion', 'list-position' => 0, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
-		],
-		[
-			'code' => 'demo-article-2',
-			'list-type' => 'promotion', 'list-position' => 1, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
-		],
-		[
-			'code' => 'demo-article-6',
-			'list-type' => 'promotion', 'list-position' => 2, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
-		],
-		[
-			'code' => 'demo-article-8',
-			'list-type' => 'promotion', 'list-position' => 3, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
-		],
-		[
-			'code' => 'demo-article',
-			'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
-		],
-		[
-			'code' => 'demo-selection-article',
-			'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
-		],
-		[
-			'code' => 'demo-bundle-article',
-			'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
-		],
-		[
-			'code' => 'demo-voucher',
-			'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
-		],
-		[
-			'code' => 'demo-article-4',
-			'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
-		],
-		[
-			'code' => 'demo-article-5',
-			'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
-		],
-		[
-			'code' => 'demo-article-6',
-			'list-type' => 'default', 'list-position' => 6, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
-		],
-		[
-			'code' => 'demo-article-7',
-			'list-type' => 'default', 'list-position' => 7, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
-		],
-		[
-			'code' => 'demo-article-8',
-			'list-type' => 'default', 'list-position' => 8, 'list-config' => [],
-			'list-start' => null, 'list-end' => null, 'list-status' => 1
-		],
-	],
 	'catalog' => [[
 		'catalog.code' => 'demo-best', 'catalog.label' => 'Best sellers',
 		'text' => [
@@ -160,53 +93,6 @@ return [
 				],
 				'type' => 'stage', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-		],
-		'product' => [
-			[
-				'code' => 'demo-voucher',
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article',
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-selection-article',
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-bundle-article',
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-2',
-				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-3',
-				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-5',
-				'list-type' => 'default', 'list-position' => 6, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-8',
-				'list-type' => 'default', 'list-position' => 7, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-7',
-				'list-type' => 'default', 'list-position' => 8, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 		],
@@ -249,48 +135,6 @@ return [
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 		],
-		'product' => [
-			[
-				'code' => 'demo-article-6',
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-5',
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-3',
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-8',
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-2',
-				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article',
-				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-selection-article',
-				'list-type' => 'default', 'list-position' => 6, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-bundle-article',
-				'list-type' => 'default', 'list-position' => 7, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-		],
 	], [
 		'catalog.code' => 'demo-deals', 'catalog.label' => 'Hot deals',
 		'text' => [
@@ -327,48 +171,6 @@ return [
 				],
 				'type' => 'stage', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-		],
-		'product' => [
-			[
-				'code' => 'demo-article',
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-8',
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-2',
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-7',
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-5',
-				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-3',
-				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-4',
-				'list-type' => 'default', 'list-position' => 6, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			],
-			[
-				'code' => 'demo-article-6',
-				'list-type' => 'default', 'list-position' => 7, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
 		],

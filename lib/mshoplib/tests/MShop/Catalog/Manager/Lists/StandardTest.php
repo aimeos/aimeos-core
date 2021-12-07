@@ -49,7 +49,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->aggregate( $search, 'catalog.lists.domain' )->toArray();
 
-		$this->assertEquals( 3, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'media', $result );
 		$this->assertEquals( 6, $result['media'] );
 	}
@@ -161,25 +161,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'catalog.lists.id', null );
 		$expr[] = $search->compare( '!=', 'catalog.lists.siteid', null );
 		$expr[] = $search->compare( '!=', 'catalog.lists.parentid', null );
-		$expr[] = $search->compare( '==', 'catalog.lists.domain', 'product' );
-		$expr[] = $search->compare( '==', 'catalog.lists.type', 'new' );
+		$expr[] = $search->compare( '==', 'catalog.lists.domain', 'text' );
+		$expr[] = $search->compare( '==', 'catalog.lists.type', 'unittype1' );
 		$expr[] = $search->compare( '>', 'catalog.lists.refid', 0 );
-		$expr[] = $search->compare( '==', 'catalog.lists.datestart', '2010-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.lists.dateend', '2099-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'catalog.lists.datestart', '2008-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'catalog.lists.dateend', '2010-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'catalog.lists.config', null );
-		$expr[] = $search->compare( '==', 'catalog.lists.position', 0 );
+		$expr[] = $search->compare( '>', 'catalog.lists.position', 0 );
 		$expr[] = $search->compare( '==', 'catalog.lists.status', 1 );
 		$expr[] = $search->compare( '>=', 'catalog.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'catalog.lists.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'catalog.lists.editor', $this->editor );
 
 		$total = 0;
-		$search->setConditions( $search->and( $expr ) );
-		$search->slice( 0, 1 );
+		$search->setConditions( $search->and( $expr ) )->slice( 0, 1 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 5, $total );
 	}
 
 
@@ -192,7 +191,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->and( $conditions ) );
 		$results = $this->object->search( $search )->toArray();
-		$this->assertEquals( 44, count( $results ) );
+		$this->assertEquals( 27, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

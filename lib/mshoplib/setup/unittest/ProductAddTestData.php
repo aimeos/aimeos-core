@@ -21,7 +21,7 @@ class ProductAddTestData extends BaseAddTestData
 	 */
 	public function after() : array
 	{
-		return ['Attribute', 'Media', 'Price', 'Product', 'Text', 'AttributeAddTestData', 'TagAddTestData'];
+		return ['Media', 'Price', 'Product', 'Text', 'AttributeAddTestData', 'CatalogAddTestData', 'TagAddTestData'];
 	}
 
 

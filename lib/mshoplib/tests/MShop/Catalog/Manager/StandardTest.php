@@ -77,9 +77,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$item = $this->object->find( 'cafe', ['product'] );
+		$item = $this->object->find( 'cafe', ['media'] );
 
-		if( ( $listItem = $item->getListItems( 'product', 'promotion' )->first() ) === null ) {
+		if( ( $listItem = $item->getListItems( 'media', 'default' )->first() ) === null ) {
 			throw new \RuntimeException( 'No list item found' );
 		}
 
@@ -101,13 +101,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'catalog.editor', $this->editor );
 		$expr[] = $search->compare( '>=', 'catalog.target', '' );
 
-		$param = ['product', 'promotion', $listItem->getRefId()];
+		$param = ['media', 'default', $listItem->getRefId()];
 		$expr[] = $search->compare( '!=', $search->make( 'catalog:has', $param ), null );
 
-		$param = ['product', 'promotion'];
+		$param = ['media', 'default'];
 		$expr[] = $search->compare( '!=', $search->make( 'catalog:has', $param ), null );
 
-		$param = ['product'];
+		$param = ['media'];
 		$expr[] = $search->compare( '!=', $search->make( 'catalog:has', $param ), null );
 
 
@@ -136,7 +136,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
-		$item = $this->object->search( $search, array( 'text' ) )->first();
+
+		$item = $this->object->search( $search, array( 'text' ) )
+			->first( new \RuntimeException( 'Catalog item not found' ) );
 
 		$this->assertEquals( 'Sonstiges', $item->getName() );
 	}
@@ -267,7 +269,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'catalog.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
-		$item = $this->object->search( $search, array( 'text' ) )->first();
+
+		$item = $this->object->search( $search, array( 'text' ) )
+			->first( new \RuntimeException( 'Catalog item not found' ) );
 
 		$items = $this->object->getPath( $item->getId() );
 		$expected = array( 'Root', 'Categories', 'Kaffee' );
@@ -335,15 +339,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveChildren()
 	{
-		$item = $this->object->find( 'cafe', ['product'] )->setCode( 'ccafe' )->setId( null );
-		$child = $this->object->find( 'misc', ['product'] )->setCode( 'cmisc' )->setId( null );
+		$item = $this->object->find( 'cafe', ['text'] )->setCode( 'ccafe' )->setId( null );
+		$child = $this->object->find( 'misc', ['text'] )->setCode( 'cmisc' )->setId( null );
 
 		$item = $this->object->insert( $item->addChild( $child ) );
 		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( 1, count( $item->getChildren() ) );
-		$this->assertEquals( 3, count( $item->getListItems() ) );
-		$this->assertEquals( 3, count( $item->getChild( 0 )->getListItems() ) );
+		$this->assertEquals( 1, count( $item->getListItems() ) );
+		$this->assertEquals( 5, count( $item->getChild( 0 )->getListItems() ) );
 
 		$this->expectException( \Aimeos\MShop\Exception::class );
 		$this->object->find( 'ccafe' );

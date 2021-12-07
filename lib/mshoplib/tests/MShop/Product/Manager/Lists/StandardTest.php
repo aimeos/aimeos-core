@@ -48,16 +48,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$search = $this->object->filter( true );
-		$expr = array(
-			$search->getConditions(),
-			$search->compare( '==', 'product.lists.editor', 'core:lib/mshoplib' ),
-		);
-		$search->setConditions( $search->and( $expr ) );
-
+		$search = $this->object->filter( true )->add( ['product.lists.editor' => 'core:lib/mshoplib'] )->slice( 0, 10000 );
 		$result = $this->object->aggregate( $search, 'product.lists.domain' )->toArray();
 
-		$this->assertEquals( 6, count( $result ) );
+		$this->assertEquals( 7, count( $result ) );
 		$this->assertArrayHasKey( 'price', $result );
 		$this->assertEquals( 22, $result['price'] );
 	}

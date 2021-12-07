@@ -68,17 +68,6 @@ class Standard
 
 
 	/**
-	 * Returns the catalog items referencing the product
-	 *
-	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Catalog\Item\Iface
-	 */
-	public function getCatalogItems() : \Aimeos\Map
-	{
-		return map( $this->get( '.catalog', [] ) );
-	}
-
-
-	/**
 	 * Returns the supplier items referencing the product
 	 *
 	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Supplier\Item\Iface

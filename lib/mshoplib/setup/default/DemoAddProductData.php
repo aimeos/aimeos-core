@@ -210,6 +210,19 @@ class DemoAddProductData extends MShopAddDataAbstract
 			}
 		}
 
+		if( isset( $entry['catalog'] ) )
+		{
+			$manager = \Aimeos\MShop::create( $context, 'catalog' );
+
+			foreach( $entry['catalog'] as $data )
+			{
+				$listItem = $listManager->create()->fromArray( $data );
+				$listItem->setRefId( $manager->find( $data['catalog.code'] )->getId() );
+
+				$item->addListItem( 'catalog', $listItem );
+			}
+		}
+
 		return $item;
 	}
 

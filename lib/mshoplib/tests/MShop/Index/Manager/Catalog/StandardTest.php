@@ -72,43 +72,34 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
-		$product = $productManager->find( 'CNC' );
-
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-		$listManager = $catalogManager->getSubManager( 'lists' );
-		$search = $listManager->filter( true );
-		$search->setConditions( $search->compare( '==', 'catalog.lists.domain', 'product' ) );
-		$catListItems = $listManager->search( $search )->toArray();
+		$catItem = $catalogManager->find( 'cafe' );
 
-		if( ( $catListItem = reset( $catListItems ) ) === false ) {
-			throw new \RuntimeException( 'No catalog list item found!' );
-		}
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $this->context );
+		$product = $productManager->find( 'CNC' )->setId( null )->setCode( 'ModifiedCNC' )
+			->addListItem( 'catalog', $productManager->createListItem(), $catItem );
 
-
-		$product = $productManager->save( $product->setId( null )->setCode( 'ModifiedCNC' ) );
-		$catListItem = $listManager->save( $catListItem->setId( null )->setRefId( $product->getId() ) );
+		$product = $productManager->save( $product );
 
 		$this->object->save( $product );
 
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catListItem->getParentId() ) );
-		$result = $this->object->search( $search )->toArray();
+		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catItem->getId() ) );
+		$result = $this->object->search( $search );
 
 
 		$this->object->delete( $product->getId() );
-		$productManager->delete( $product->getId() );
-		$listManager->delete( $catListItem->getId() );
+		$productManager->delete( $product );
 
 
 		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catListItem->getParentId() ) );
-		$result2 = $this->object->search( $search )->toArray();
+		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catItem->getId() ) );
+		$result2 = $this->object->search( $search );
 
 
-		$this->assertTrue( in_array( $product->getId(), array_keys( $result ) ) );
-		$this->assertFalse( in_array( $product->getId(), array_keys( $result2 ) ) );
+		$this->assertTrue( $result->has( $product->getId() ) );
+		$this->assertFalse( $result2->has( $product->getId() ) );
 	}
 
 
@@ -121,11 +112,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsId()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-		$id = $catalogManager->find( 'cafe' )->getId();
+		$id = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context )->find( 'cafe' )->getId();
 
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'index.catalog.id', $id ) );
+		$search = $this->object->filter()->add( ['index.catalog.id' => $id] );
 		$result = $this->object->search( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
@@ -144,8 +133,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsPosition()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-		$id = $catalogManager->find( 'cafe' )->getId();
+		$id = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context )->find( 'cafe' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->make( 'index.catalog:position', ['promotion', $id] ), 0 ) );
@@ -159,8 +147,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsPositionList()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context );
-		$id = $catalogManager->find( 'cafe' )->getId();
+		$id = \Aimeos\MShop\Catalog\Manager\Factory::create( $this->context )->find( 'cafe' )->getId();
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '>=', $search->make( 'index.catalog:position', ['promotion', [$id]] ), 0 ) );

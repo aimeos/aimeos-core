@@ -77,17 +77,17 @@ class Category
 
 
 	/**
-	 * Checks if the products are withing the allowed code is allowed for the service provider.
+	 * Checks if ordered products are in the configured categories to display the service provider.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return bool True if payment provider can be used, false if not
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
-		$catalogIds = $this->getRefCatalogIds( $this->getProductIds( $basket ) );
+		$prodIds = $this->getProductIds( $basket );
 
-		if( $this->checkCategories( $catalogIds, 'category.include' ) === false
-			|| $this->checkCategories( $catalogIds, 'category.exclude' ) === true
+		if( $this->checkCategories( $prodIds, 'category.include' ) === false
+			|| $this->checkCategories( $prodIds, 'category.exclude' ) === true
 		) {
 			return false;
 		}
@@ -97,43 +97,44 @@ class Category
 
 
 	/**
-	 * Checks if at least one of the given categories is configured
+	 * Checks if at least one of the product is in the configured categories
 	 *
-	 * @param array $catalogIds List of category IDs
+	 * @param array $prodIds List of product IDs
 	 * @param string $key Configuration key (category.include or category.exclude)
 	 * @return bool|null True if one catalog code is part of the config, false if not, null for no configuration
 	 */
-	protected function checkCategories( array $catalogIds, string $key ) : ?bool
+	protected function checkCategories( array $prodIds, string $key ) : ?bool
 	{
-		if( ( $codes = $this->getConfigValue( array( $key ) ) ) == null ) {
+		if( ( $codes = $this->getConfigValue( $key ) ) == null ) {
 			return null;
 		}
 
 		$configCatalogIds = $this->getCatalogIds( explode( ',', $codes ) );
 		$treeCatalogIds = $this->getTreeCatalogIds( $configCatalogIds );
 
-		return ( array_intersect( $catalogIds, $treeCatalogIds ) !== [] );
+		$types = ['default', 'promotion'];
+		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
+
+		$filter = $manager->filter( true )->slice( 0, 1 );
+		$filter->add( 'product.id', '==', $prodIds )
+			->add( $filter->make( 'product:has', ['catalog', $types, $treeCatalogIds] ), '!=', null );
+
+		return !$manager->search( $filter )->isEmpty();
 	}
 
 
 	/**
 	 * Returns the catalog IDs for the given catalog codes
 	 *
-	 * @param array $catalogCodes List of catalog codes
+	 * @param array $codes List of catalog codes
 	 * @return array List of catalog IDs
 	 */
-	protected function getCatalogIds( array $catalogCodes ) : array
+	protected function getCatalogIds( array $codes ) : array
 	{
-		$catalogManager = \Aimeos\MShop::create( $this->context(), 'catalog' );
+		$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
+		$filter = $manager->filter( true )->add( ['catalog.code' => $codes] )->slice( 0, count( $codes ) );
 
-		$search = $catalogManager->filter( true );
-		$expr = array(
-			$search->compare( '==', 'catalog.code', $catalogCodes ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->and( $expr ) );
-
-		return $catalogManager->search( $search )->keys()->toArray();
+		return $manager->search( $filter )->keys()->all();
 	}
 
 
@@ -145,7 +146,7 @@ class Category
 	 */
 	protected function getNodeCatalogIds( \Aimeos\MShop\Catalog\Item\Iface $catalogItem ) : array
 	{
-		$catalogIds = array( $catalogItem->getId() );
+		$catalogIds = [$catalogItem->getId()];
 
 		foreach( $catalogItem->getChildren() as $childNode )
 		{
@@ -168,38 +169,16 @@ class Category
 	{
 		$productIds = [];
 
-		foreach( $basket->getProducts() as $product ) {
+		foreach( $basket->getProducts() as $product )
+		{
 			$productIds[] = $product->getProductId();
+
+			if( $parentid = $product->getParentProductId() ) {
+				$productIds[] = $parentid;
+			}
 		}
 
 		return $productIds;
-	}
-
-
-	/**
-	 * Returns the catalog IDs which references the given product IDs
-	 *
-	 * @param array $productIds List of product IDs
-	 * @return array List of catalog IDs
-	 */
-	protected function getRefCatalogIds( array $productIds ) : array
-	{
-		if( empty( $productIds ) ) {
-			return [];
-		}
-
-		$manager = \Aimeos\MShop::create( $this->context(), 'catalog' );
-		$search = $manager->filter();
-		$expr = [];
-
-		foreach( $productIds as $id )
-		{
-			$func = $search->make( 'catalog:has', ['product', 'default', $id] );
-			$expr[] = $search->compare( '!=', $func, null );
-		}
-
-		$search->setConditions( $search->or( $expr ) );
-		return $manager->search( $search )->keys()->toArray();
 	}
 
 

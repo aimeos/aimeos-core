@@ -25,13 +25,6 @@ interface Iface
 		\Aimeos\MShop\Common\Item\Time\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
-	 * Returns the catalog items referencing the product
-	 *
-	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Catalog\Item\Iface
-	 */
-	public function getCatalogItems() : \Aimeos\Map;
-
-	/**
 	 * Returns the supplier items referencing the product
 	 *
 	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Supplier\Item\Iface

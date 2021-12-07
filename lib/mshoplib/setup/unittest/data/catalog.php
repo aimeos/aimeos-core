@@ -29,19 +29,6 @@ return [
 			'catalog' => [[
 				'catalog.code' => 'cafe', 'catalog.label' => 'Kaffee', 'catalog.url' => 'kaffee', 'catalog.config' => ['css-class' => 'coffee'],
 				'lists' => [
-					'product' => [[
-						'catalog.lists.type' => 'promotion', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 0,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'Cafe Noire Expresso',
-					], [
-						'catalog.lists.type' => 'promotion', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 1,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'Cafe Noire Cappuccino',
-					], [
-						'catalog.lists.type' => 'default', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 0,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'Cafe Noire Expresso',
-					]],
 					'text' => [[
 						'catalog.lists.type' => 'unittype1', 'catalog.lists.domain' => 'text', 'catalog.lists.position' => 1,
 						'catalog.lists.datestart' => '2008-01-01 00:00:00', 'catalog.lists.dateend' => '2010-01-01 00:00:00',
@@ -120,16 +107,6 @@ return [
 			], [
 				'catalog.code' => 'misc', 'catalog.label' => 'Misc',
 				'lists' => [
-					'product' => [[
-						'catalog.lists.type' => 'promotion', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 0,
-						'ref' => 'Unittest: Test Selection',
-					], [
-						'catalog.lists.type' => 'default', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 0,
-						'ref' => 'Unittest: Test priced Selection',
-					], [
-						'catalog.lists.type' => 'default', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 5,
-						'ref' => 'Unittest: Empty Selection',
-					]],
 					'text' => [[
 						'catalog.lists.type' => 'unittype1', 'catalog.lists.domain' => 'text', 'catalog.lists.position' => 0,
 						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
@@ -184,27 +161,6 @@ return [
 			'catalog' => [[
 				'catalog.code' => 'new', 'catalog.label' => 'Neu',
 				'lists' => [
-					'product' => [[
-						'catalog.lists.type' => 'new', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 0,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'Cafe Noire Expresso',
-					], [
-						'catalog.lists.type' => 'new', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 0,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'Cafe Noire Cappuccino',
-					], [
-						'catalog.lists.type' => 'default', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 0,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'Cafe Noire Expresso',
-					], [
-						'catalog.lists.type' => 'default', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 1,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'Cafe Noire Cappuccino',
-					], [
-						'catalog.lists.type' => 'default', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 2,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'Unittest: Bundle',
-					]],
 					'text' => [[
 						'catalog.lists.type' => 'unittype1', 'catalog.lists.domain' => 'text', 'catalog.lists.position' => 0,
 						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
@@ -246,31 +202,6 @@ return [
 			], [
 				'catalog.code' => 'internet', 'catalog.label' => 'Internet',
 				'lists' => [
-					'product' => [[
-						'catalog.lists.type' => 'internet', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 0,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'Cafe Noire Expresso',
-					], [
-						'catalog.lists.type' => 'internet', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 0,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'Cafe Noire Cappuccino',
-					], [
-						'catalog.lists.type' => 'default', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 0,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'Cafe Noire Cappuccino',
-					], [
-						'catalog.lists.type' => 'default', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 0,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'ABCD/16 discs',
-					], [
-						'catalog.lists.type' => 'default', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 1,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'MNOP/16 discs',
-					], [
-						'catalog.lists.type' => 'default', 'catalog.lists.domain' => 'product', 'catalog.lists.position' => 2,
-						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',
-						'ref' => 'QRST/16 discs',
-					]],
 					'text' => [[
 						'catalog.lists.type' => 'unittype1', 'catalog.lists.domain' => 'text', 'catalog.lists.position' => 0,
 						'catalog.lists.datestart' => '2010-01-01 00:00:00', 'catalog.lists.dateend' => '2099-01-01 00:00:00',

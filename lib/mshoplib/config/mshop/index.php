@@ -518,8 +518,9 @@ return array(
 		),
 		'domains' => [
 			'attribute' => 'attribute',
-			'product' => ['default'],
+			'catalog' => 'catalog',
 			'price' => ['default'],
+			'product' => ['default'],
 			'text' => 'text',
 		],
 		'submanagers' => [

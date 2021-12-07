@@ -84,7 +84,7 @@ class Category
 	 */
 	public function apply( \Aimeos\MShop\Product\Item\Iface $product ) : bool
 	{
-		foreach( $product->getCatalogItems() as $catItem )
+		foreach( $product->getRefItems( 'catalog' ) as $catItem )
 		{
 			if( in_array( $catItem->getCode(), $this->codes ) ) {
 				return $this->getProvider()->apply( $product );

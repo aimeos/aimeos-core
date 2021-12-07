@@ -745,7 +745,7 @@ class Standard
 			{
 				$texts[$langId]['content'][] = $product->getCode();
 
-				foreach( $product->getCatalogItems() as $catItem ) {
+				foreach( $product->getRefItems( 'catalog' ) as $catItem ) {
 					$texts[$langId]['content'][] = $catItem->getName();
 				}
 
