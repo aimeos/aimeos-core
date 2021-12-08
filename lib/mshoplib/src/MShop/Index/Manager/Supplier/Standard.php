@@ -430,7 +430,6 @@ class Standard
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->context();
 		$siteid = $context->getLocale()->getSiteId();
-		$supItems = $this->getSuppliers( $items );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -701,38 +700,5 @@ class Standard
 		}
 
 		return $this->subManagers;
-	}
-
-
-	/**
-	 * Returns the supplier items referencing the given products
-	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface[] $items List of product items
-	 * @return \Aimeos\Map Associative list of supplier IDs as keys and supplier items with list items as values
-	 */
-	protected function getSuppliers( iterable $items ) : \Aimeos\Map
-	{
-		$prodIds = map( $items )->keys()->toArray();
-		$manager = \Aimeos\MShop::create( $this->context(), 'supplier' );
-		$listManager = \Aimeos\MShop::create( $this->context(), 'supplier/lists' );
-
-		$filter = $manager->filter( true )->slice( 0, 0x7fffffff );
-		$filter->add( $filter->make( 'supplier:has', ['product', ['default', 'promotion'], $prodIds] ), '!=', null );
-		$supItems = $manager->search( $filter, ['supplier/address'] );
-
-		$filter = $listManager->filter( true )->slice( 0, 0x7fffffff )->add( [
-			'supplier.lists.parentid' => $supItems->keys()->toArray(),
-			'supplier.lists.domain' => 'product',
-			'supplier.lists.refid' => $prodIds
-		] );
-
-		foreach( $listManager->search( $filter ) as $listItem )
-		{
-			if( $supplier = $supItems->get( $listItem->getParentId() ) ) {
-				$supplier->addListItem( 'product', $listItem );
-			}
-		}
-
-		return $supItems;
 	}
 }
