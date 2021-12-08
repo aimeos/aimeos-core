@@ -237,10 +237,13 @@ return array(
 					mcat."nleft" AS "left", mcat."nright" AS "right",
 					mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
 				FROM "mshop_catalog" mcat, "mshop_catalog" AS parent
-				WHERE mcat."siteid" = :siteid AND mcat."nleft" >= parent."nleft"
+				WHERE parent."id" = ?
+					AND mcat."siteid" = :siteid
+					AND parent."siteid" = :siteid
+					AND mcat."nleft" >= parent."nleft"
 					AND mcat."nleft" <= parent."nright"
-					AND parent."siteid" = :siteid AND parent."id" = ?
-					AND mcat."level" <= parent."level" + ? AND :cond
+					AND mcat."level" <= parent."level" + ?
+					AND :cond
 				GROUP BY :columns
 					mcat."id", mcat."code", mcat."url", mcat."label", mcat."config",
 					mcat."status", mcat."level", mcat."parentid", mcat."siteid",
