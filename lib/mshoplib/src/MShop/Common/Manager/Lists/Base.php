@@ -35,7 +35,7 @@ abstract class Base
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
-		$this->date = $context->getDateTime();
+		$this->date = $context->datetime();
 		$this->searchConfig = $this->getSearchConfig();
 
 		if( ( $entry = reset( $this->searchConfig ) ) === false )

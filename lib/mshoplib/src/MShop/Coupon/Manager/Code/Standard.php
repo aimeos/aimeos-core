@@ -122,7 +122,7 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-coupon' );
 
-		$this->date = $context->getDateTime();
+		$this->date = $context->datetime();
 	}
 
 

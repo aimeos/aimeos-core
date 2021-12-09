@@ -202,7 +202,7 @@ class Standard
 		parent::__construct( $context );
 
 		$this->setResourceName( 'db-product' );
-		$this->date = $context->getDateTime();
+		$this->date = $context->datetime();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->config()->get( 'mshop/product/manager/sitemode', $level );
