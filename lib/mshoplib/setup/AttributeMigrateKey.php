@@ -33,7 +33,7 @@ class AttributeMigrateKey extends Base
 
 		$this->info( 'Update attribute "key" columns', 'v' );
 
-		$dbm = $this->context()->getDatabaseManager();
+		$dbm = $this->context()->db();
 		$conn = $dbm->acquire( 'db-attribute' );
 
 		$select = 'SELECT "id", "domain", "type", "code" FROM "mshop_attribute" WHERE "key" = \'\'';

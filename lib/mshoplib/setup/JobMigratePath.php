@@ -27,7 +27,7 @@ class JobMigratePath extends Base
 
 		$this->info( 'Migrating path in job table', 'v' );
 
-		$dbm = $this->context()->getDatabaseManager();
+		$dbm = $this->context()->db();
 		$conn = $dbm->acquire( 'db-job' );
 
 		$select = 'SELECT "id", "result" FROM "madmin_job" WHERE "result" LIKE \'{%\'';

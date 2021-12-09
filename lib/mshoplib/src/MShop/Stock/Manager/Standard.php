@@ -158,7 +158,7 @@ class Standard
 
 		$context = $this->context();
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -446,7 +446,7 @@ class Standard
 		$items = [];
 		$context = $this->context();
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -763,7 +763,7 @@ class Standard
 		$search->setConditions( $this->getSiteCondition( $search, 'stock.siteid', $level ) );
 		$conditions = $search->getConditionSource( $types, $translations );
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 

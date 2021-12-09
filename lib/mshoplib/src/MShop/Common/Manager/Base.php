@@ -69,7 +69,7 @@ abstract class Base
 	{
 		$db = $this->getResourceName();
 		$config = $this->context->config();
-		$dbm = $this->context->getDatabaseManager();
+		$dbm = $this->context->db();
 
 		if( ( $adapter = $config->get( 'resource/' . $db . '/adapter' ) ) === null ) {
 			$adapter = $config->get( 'resource/db/adapter' );
@@ -252,7 +252,7 @@ abstract class Base
 		}
 
 		$dbname = $this->getResourceName();
-		$dbm = $this->context()->getDatabaseManager();
+		$dbm = $this->context()->db();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -368,7 +368,7 @@ abstract class Base
 			return $this;
 		}
 
-		$dbm = $this->context->getDatabaseManager();
+		$dbm = $this->context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -961,7 +961,7 @@ abstract class Base
 		$cond = $search->getConditionSource( $types, $translations );
 		$sql = str_replace( ':cond', $cond, $this->getSqlConfig( $cfgpath ) );
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -994,7 +994,7 @@ abstract class Base
 	 */
 	protected function beginTransation( string $dbname = 'db' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$dbm = $this->context->getDatabaseManager();
+		$dbm = $this->context->db();
 
 		$conn = $dbm->acquire( $dbname );
 		$conn->begin();
@@ -1012,7 +1012,7 @@ abstract class Base
 	 */
 	protected function commitTransaction( string $dbname = 'db' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$dbm = $this->context->getDatabaseManager();
+		$dbm = $this->context->db();
 
 		$conn = $dbm->acquire( $dbname );
 		$conn->commit();
@@ -1030,7 +1030,7 @@ abstract class Base
 	 */
 	protected function rollbackTransaction( string $dbname = 'db' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$dbm = $this->context->getDatabaseManager();
+		$dbm = $this->context->db();
 
 		$conn = $dbm->acquire( $dbname );
 		$conn->rollback();

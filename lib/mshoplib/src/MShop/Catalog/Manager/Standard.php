@@ -199,7 +199,7 @@ class Standard extends Base
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -511,7 +511,7 @@ class Standard extends Base
 		$context = $this->context();
 
 		$dbname = $this->getResourceName();
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -881,7 +881,7 @@ class Standard extends Base
 		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
 		{
 			$dbname = $this->getResourceName();
-			$dbm = $this->context()->getDatabaseManager();
+			$dbm = $this->context()->db();
 
 			$conn = $dbm->acquire( $dbname );
 			$conn->create( $sql )->execute()->finish();
@@ -922,7 +922,7 @@ class Standard extends Base
 		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
 		{
 			$dbname = $this->getResourceName();
-			$dbm = $this->context()->getDatabaseManager();
+			$dbm = $this->context()->db();
 
 			$conn = $dbm->acquire( $dbname );
 			$conn->create( $sql )->execute()->finish();
@@ -947,7 +947,7 @@ class Standard extends Base
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->context();
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 

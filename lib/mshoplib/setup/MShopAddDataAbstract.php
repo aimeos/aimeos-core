@@ -530,7 +530,7 @@ class MShopAddDataAbstract extends Base
 	 */
 	protected function txBegin()
 	{
-		$dbm = $this->context()->getDatabaseManager();
+		$dbm = $this->context()->db();
 
 		$conn = $dbm->acquire();
 		$conn->begin();
@@ -543,7 +543,7 @@ class MShopAddDataAbstract extends Base
 	 */
 	protected function txCommit()
 	{
-		$dbm = $this->context()->getDatabaseManager();
+		$dbm = $this->context()->db();
 
 		$conn = $dbm->acquire();
 		$conn->commit();

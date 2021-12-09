@@ -31,7 +31,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetDatabaseManager()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getDatabaseManager();
+		$this->object->db();
 	}
 
 
@@ -138,9 +138,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSetDatabaseManager()
 	{
 		$context = \TestHelperMShop::context();
-		$return = $this->object->setDatabaseManager( $context->getDatabaseManager() );
+		$return = $this->object->setDatabaseManager( $context->db() );
 
-		$this->assertSame( $context->getDatabaseManager(), $this->object->db() );
+		$this->assertSame( $context->db(), $this->object->db() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 

@@ -429,7 +429,7 @@ class Standard
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Product\Item\Iface::class, $items );
 
 		$context = $this->context();
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 

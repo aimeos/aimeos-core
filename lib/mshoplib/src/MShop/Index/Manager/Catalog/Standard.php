@@ -417,7 +417,7 @@ class Standard
 		$context = $this->context();
 		$siteid = $context->getLocale()->getSiteId();
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 

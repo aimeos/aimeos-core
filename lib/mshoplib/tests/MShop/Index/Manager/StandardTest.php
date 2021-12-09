@@ -178,7 +178,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = self::$products['CNE'];
 
 		$context = $this->context;
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$siteId = $context->getLocale()->getSiteId();
 
 		$sqlAttribute = 'SELECT COUNT(*) as count FROM "mshop_index_attribute" WHERE "siteid" = ? AND "prodid" = ?';

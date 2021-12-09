@@ -111,7 +111,7 @@ abstract class Base
 		}
 
 		$context = $this->context();
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -210,7 +210,7 @@ abstract class Base
 		$items = [];
 		$context = $this->context();
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 

@@ -578,7 +578,7 @@ class Standard
 
 		$context = $this->context();
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -769,7 +769,7 @@ class Standard
 		$context = $this->context();
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 

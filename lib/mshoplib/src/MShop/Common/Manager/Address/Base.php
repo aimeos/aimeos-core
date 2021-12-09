@@ -119,7 +119,7 @@ abstract class Base
 
 		$context = $this->context();
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -206,7 +206,7 @@ abstract class Base
 	 */
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$dbm = $this->context()->getDatabaseManager();
+		$dbm = $this->context()->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$items = [];

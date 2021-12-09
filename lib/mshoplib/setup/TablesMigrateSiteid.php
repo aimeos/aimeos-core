@@ -153,7 +153,7 @@ class TablesMigrateSiteid extends Base
 	{
 		$map = [];
 
-		$dbm = $this->context()->getDatabaseManager();
+		$dbm = $this->context()->db();
 		$conn = $dbm->acquire( 'db-locale' );
 		$tconn = $dbm->acquire( 'db-locale' );
 

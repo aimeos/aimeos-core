@@ -371,7 +371,7 @@ class Standard
 
 		$context = $this->context();
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -598,7 +598,7 @@ class Standard
 	 */
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$dbm = $this->context()->getDatabaseManager();
+		$dbm = $this->context()->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$items = [];
@@ -784,7 +784,7 @@ class Standard
 		$translations = array( 'coupon.code.siteid' => 'siteid' );
 		$conditions = $search->getConditionSource( $types, $translations );
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 

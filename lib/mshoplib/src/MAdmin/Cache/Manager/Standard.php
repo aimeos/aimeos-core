@@ -154,7 +154,7 @@ class Standard
 					'settag' => $this->getSqlConfig( 'madmin/cache/manager/settag' ),
 				),
 			);
-			$dbm = $this->context()->getDatabaseManager();
+			$dbm = $this->context()->db();
 			$this->object = \Aimeos\MW\Cache\Factory::create( 'DB', $cfg, $dbm );
 		}
 
@@ -209,7 +209,7 @@ class Standard
 		 * @see madmin/cache/manager/count/ansi
 		 */
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -392,7 +392,7 @@ class Standard
 		$items = [];
 		$context = $this->context();
 
-		$dbm = $context->getDatabaseManager();
+		$dbm = $context->db();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
