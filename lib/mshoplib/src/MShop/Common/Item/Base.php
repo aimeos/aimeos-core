@@ -20,9 +20,9 @@ namespace Aimeos\MShop\Common\Item;
  */
 abstract class Base
 	extends \Aimeos\MW\Common\Item\Base
-	implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\MW\Macro\Iface, \ArrayAccess
+	implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \ArrayAccess
 {
-	use \Aimeos\MW\Macro\Traits;
+	use \Aimeos\Macro\Macroable;
 
 	private $available = true;
 	private $modified = false;

@@ -22,10 +22,10 @@ use \Aimeos\MShop\Locale\Manager\Base as Locale;
  */
 abstract class Base
 	extends \Aimeos\MW\Common\Manager\Base
-	implements \Aimeos\MW\Macro\Iface
+	implements \Aimeos\Macro\Iface
 {
 	use \Aimeos\MShop\Common\Manager\Sub\Traits;
-	use \Aimeos\MW\Macro\Traits;
+	use \Aimeos\Macro\Macroable;
 
 
 	private $context;

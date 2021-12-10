@@ -18,9 +18,9 @@ namespace Aimeos\MShop\Rule\Provider;
  * @subpackage Rule
  */
 abstract class Base
-	implements \Aimeos\MW\Macro\Iface
+	implements \Aimeos\Macro\Iface
 {
-	use \Aimeos\MW\Macro\Traits;
+	use \Aimeos\Macro\Macroable;
 
 	private $item;
 	private $context;
