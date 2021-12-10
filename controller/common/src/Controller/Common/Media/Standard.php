@@ -53,7 +53,7 @@ class Standard
 
 		$path = $item->getUrl();
 		$fsname = $item->getFileSystem();
-		$fs = $this->context->getFilesystemManager()->get( $fsname );
+		$fs = $this->context->fs( $fsname );
 
 		if( $path && $fs->has( $path ) ) {
 			$fs->rm( $path );
@@ -113,7 +113,7 @@ class Standard
 		$path = $item->getUrl();
 		$previews = $item->getPreviews();
 		$fsname = $item->getFileSystem();
-		$fs = $this->context->getFilesystemManager()->get( $fsname );
+		$fs = $this->context->fs( $fsname );
 
 		if( $fs->has( $path ) )
 		{
@@ -156,7 +156,7 @@ class Standard
 
 		$path = $item->getUrl();
 		$fsname = $item->getFileSystem();
-		$fs = $this->context->getFilesystemManager()->get( $fsname );
+		$fs = $this->context->fs( $fsname );
 
 		if( $path && $fs->has( $path ) ) {
 			$fs->rm( $path );
@@ -385,7 +385,7 @@ class Standard
 	 */
 	protected function deletePreviews( \Aimeos\MShop\Media\Item\Iface $item, string $fsname )
 	{
-		$fs = $this->context->getFilesystemManager()->get( $fsname );
+		$fs = $this->context->fs( $fsname );
 		$previews = $item->getPreviews();
 
 		// don't delete first (smallest) image because it's referenced in past orders
@@ -438,7 +438,7 @@ class Standard
 				return $content;
 			}
 
-			$fs = $this->context->getFilesystemManager()->get( $fsname );
+			$fs = $this->context->fs( $fsname );
 
 			if( $fs->has( $path ) !== false ) {
 				return $fs->read( $path );
@@ -626,7 +626,7 @@ class Standard
 	 */
 	protected function store( string $filepath, string $content, string $fsname ) : Iface
 	{
-		$this->context->getFilesystemManager()->get( $fsname )->write( $filepath, $content );
+		$this->context->fs( $fsname )->write( $filepath, $content );
 		return $this;
 	}
 }
