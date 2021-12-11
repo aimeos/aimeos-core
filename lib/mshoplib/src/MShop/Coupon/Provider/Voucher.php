@@ -71,7 +71,7 @@ class Voucher
 
 		if( ( $prodcode = $this->getConfigValue( 'voucher.productcode' ) ) === null )
 		{
-			$msg = $context->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
+			$msg = $context->translate( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
 			$msg = sprintf( $msg, $this->getItem()->getProvider(), 'voucher.productcode' );
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
@@ -89,7 +89,7 @@ class Voucher
 
 		if( $rebate <= 0 )
 		{
-			$msg = $context->getI18n()->dt( 'mshop', 'No more credit available for voucher "%1$s"' );
+			$msg = $context->translate( 'mshop', 'No more credit available for voucher "%1$s"' );
 			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $this->getCode() ) );
 		}
 
@@ -122,7 +122,7 @@ class Voucher
 
 		if( $manager->search( $search )->isEmpty() )
 		{
-			$msg = $context->getI18n()->dt( 'mshop', 'No bought voucher for code "%1$s" available' );
+			$msg = $context->translate( 'mshop', 'No bought voucher for code "%1$s" available' );
 			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $this->getCode() ) );
 		}
 	}
@@ -172,7 +172,7 @@ class Voucher
 
 		if( $currencyId !== $currency )
 		{
-			$msg = $context->getI18n()->dt( 'mshop', 'Bought voucher is in currency "%1$s", basket uses "%2$s"' );
+			$msg = $context->translate( 'mshop', 'Bought voucher is in currency "%1$s", basket uses "%2$s"' );
 			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $currency, $currencyId ) );
 		}
 

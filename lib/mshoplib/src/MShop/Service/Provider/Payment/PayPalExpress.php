@@ -262,7 +262,7 @@ class PayPalExpress
 	{
 		if( ( $tid = $this->getOrderServiceItem( $order->getBaseId() )->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
-			$msg = $this->context()->getI18n()->dt( 'mshop', 'PayPal Express: Payment transaction ID for order ID "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Payment transaction ID for order ID "%1$s" not available' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $order->getId() ) );
 		}
 
@@ -293,7 +293,7 @@ class PayPalExpress
 
 		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
-			$msg = $this->context()->getI18n()->dt( 'mshop', 'PayPal Express: Payment transaction ID for order ID "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Payment transaction ID for order ID "%1$s" not available' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $order->getId() ) );
 		}
 
@@ -341,7 +341,7 @@ class PayPalExpress
 
 		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
-			$msg = $this->context()->getI18n()->dt( 'mshop', 'PayPal Express: Payment transaction ID for order ID "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Payment transaction ID for order ID "%1$s" not available' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $order->getId() ) );
 		}
 
@@ -375,7 +375,7 @@ class PayPalExpress
 	{
 		if( ( $tid = $this->getOrderServiceItem( $order->getBaseId() )->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
-			$msg = $this->context()->getI18n()->dt( 'mshop', 'PayPal Express: Payment transaction ID for order ID "%1$s" not available' );
+			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Payment transaction ID for order ID "%1$s" not available' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $order->getId() ) );
 		}
 
@@ -457,13 +457,13 @@ class PayPalExpress
 
 		if( !isset( $params['token'] ) )
 		{
-			$msg = sprintf( $this->context()->getI18n()->dt( 'mshop', 'Required parameter "%1$s" is missing' ), 'token' );
+			$msg = sprintf( $this->context()->translate( 'mshop', 'Required parameter "%1$s" is missing' ), 'token' );
 			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
 		if( !isset( $params['PayerID'] ) )
 		{
-			$msg = sprintf( $this->context()->getI18n()->dt( 'mshop', 'Required parameter "%1$s" is missing' ), 'PayerID' );
+			$msg = sprintf( $this->context()->translate( 'mshop', 'Required parameter "%1$s" is missing' ), 'PayerID' );
 			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
@@ -544,7 +544,7 @@ class PayPalExpress
 			if( $rvals['ACK'] !== 'SuccessWithWarning' )
 			{
 				$short = ( isset( $rvals['L_SHORTMESSAGE0'] ) ? $rvals['L_SHORTMESSAGE0'] : '<none>' );
-				$msg = $this->context()->getI18n()->dt( 'mshop', 'PayPal Express: Request for order ID "%1$s" failed with "%2$s"' );
+				$msg = $this->context()->translate( 'mshop', 'PayPal Express: Request for order ID "%1$s" failed with "%2$s"' );
 				throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $orderid, $short ) );
 			}
 		}
@@ -567,7 +567,7 @@ class PayPalExpress
 
 		if( $this->getConfigValue( array( 'paypalexpress.AccountEmail' ) ) !== $params['receiver_email'] )
 		{
-			$msg = $this->context()->getI18n()->dt( 'mshop', 'PayPal Express: Wrong receiver email "%1$s"' );
+			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Wrong receiver email "%1$s"' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $params['receiver_email'] ) );
 		}
 
@@ -575,7 +575,7 @@ class PayPalExpress
 
 		if( $this->getAmount( $price ) != $params['payment_amount'] )
 		{
-			$msg = $this->context()->getI18n()->dt( 'mshop', 'PayPal Express: Wrong payment amount "%1$s" for order ID "%2$s"' );
+			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Wrong payment amount "%1$s" for order ID "%2$s"' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $params['payment_amount'], $params['invoice'] ) );
 		}
 
@@ -589,7 +589,7 @@ class PayPalExpress
 
 		if( !$attrManager->search( $search )->isEmpty() )
 		{
-			$msg = $this->context()->getI18n()->dt( 'mshop', 'PayPal Express: Duplicate transaction with ID "%1$s" and status "%2$s"' );
+			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Duplicate transaction with ID "%1$s" and status "%2$s"' );
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $params['txn_id'], $params['txn_status'] ) );
 		}
 
@@ -712,7 +712,7 @@ class PayPalExpress
 				$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = $product->getQuantity();
 				$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $this->getAmount( $price, false );
 			}
-			
+
 			foreach( $deliveryPrices as $priceItem ) {
 				$itemDeliveryCosts += $this->getAmount( $priceItem, true, true, 2 );
 			}
@@ -728,7 +728,7 @@ class PayPalExpress
 				if( ( $paymentCosts = $this->getAmount( $price ) ) > '0.00' )
 				{
 					$lastPos++;
-					$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $this->context()->getI18n()->dt( 'mshop', 'Payment costs' );
+					$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $this->context()->translate( 'mshop', 'Payment costs' );
 					$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = '1';
 					$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $paymentCosts;
 				}

@@ -83,7 +83,7 @@ class FixedRebate
 
 		if( $rebate == 0 || $prodcode === null || !is_array( $rebate ) )
 		{
-			$msg = $this->context()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
+			$msg = $this->context()->translate( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
 			$msg = sprintf( $msg, $this->getItem()->getProvider(), 'fixedrebate.productcode, fixedrebate.rebate' );
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}

@@ -67,7 +67,7 @@ class Supplier
 					/// address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 					/// postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
 					/// e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
-					$context->getI18n()->dt( 'mshop', '%1$s
+					$context->translate( 'mshop', '%1$s
 %2$s
 %3$s %4$s
 %5$s
@@ -98,7 +98,7 @@ class Supplier
 					/// address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 					/// postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
 					/// e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
-					$context->getI18n()->dt( 'mshop', '%1$s, %2$s, %3$s %4$s, %6$s %7$s' ),
+					$context->translate( 'mshop', '%1$s, %2$s, %3$s %4$s, %6$s %7$s' ),
 					$item->getLabel(),
 					$addr->getCompany(),
 					$addr->getAddress1(),
