@@ -268,7 +268,7 @@ class Standard extends Base
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['siteid'] = $this->context()->getLocale()->getSiteId();
+		$values['siteid'] = $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -303,7 +303,7 @@ class Standard extends Base
 
 		try
 		{
-			$siteid = $this->context()->getLocale()->getSiteId();
+			$siteid = $this->context()->locale()->getSiteId();
 
 			foreach( $items as $item ) {
 				$this->createTreeManager( $siteid )->deleteNode( (string) $item );
@@ -416,7 +416,7 @@ class Standard extends Base
 		try
 		{
 			$node = $item->getNode();
-			$siteid = $this->context()->getLocale()->getSiteId();
+			$siteid = $this->context()->locale()->getSiteId();
 
 			$this->createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
 			$this->updateUsage( $node->getId(), $item, true );
@@ -453,7 +453,7 @@ class Standard extends Base
 		try
 		{
 			$item = $this->object()->get( $id );
-			$siteid = $this->context()->getLocale()->getSiteId();
+			$siteid = $this->context()->locale()->getSiteId();
 
 			$this->createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
 			$this->updateUsage( $id, $item );
@@ -487,7 +487,7 @@ class Standard extends Base
 		}
 
 		$node = $item->getNode();
-		$siteid = $this->context()->getLocale()->getSiteId();
+		$siteid = $this->context()->locale()->getSiteId();
 
 		$this->createTreeManager( $siteid )->saveNode( $node );
 		$this->updateUsage( $node->getId(), $item );
@@ -682,7 +682,7 @@ class Standard extends Base
 				$siteMap[(string) $row['siteid']][(string) $row['id']] = new \Aimeos\MW\Tree\Node\Standard( $row );
 			}
 
-			$sitePath = array_reverse( (array) $this->context()->getLocale()->getSitePath() );
+			$sitePath = array_reverse( (array) $this->context()->locale()->getSitePath() );
 
 			foreach( $sitePath as $siteId )
 			{
@@ -714,7 +714,7 @@ class Standard extends Base
 	 */
 	public function getPath( string $id, array $ref = [] ) : \Aimeos\Map
 	{
-		$sitePath = array_reverse( (array) $this->context()->getLocale()->getSitePath() );
+		$sitePath = array_reverse( (array) $this->context()->locale()->getSitePath() );
 
 		foreach( $sitePath as $siteId )
 		{
@@ -753,7 +753,7 @@ class Standard extends Base
 	public function getTree( string $id = null, array $ref = [], int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
 		\Aimeos\MW\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
-		$sitePath = array_reverse( (array) $this->context()->getLocale()->getSitePath() );
+		$sitePath = array_reverse( (array) $this->context()->locale()->getSitePath() );
 
 		foreach( $sitePath as $siteId )
 		{
@@ -953,7 +953,7 @@ class Standard extends Base
 
 		try
 		{
-			$siteid = $context->getLocale()->getSiteId();
+			$siteid = $context->locale()->getSiteId();
 			$columns = $this->object()->getSaveAttributes();
 
 			if( $case !== true )

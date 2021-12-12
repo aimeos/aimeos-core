@@ -68,7 +68,7 @@ abstract class Base
 	{
 		$context = $this->context();
 		$session = $context->getSession();
-		$locale = $context->getLocale();
+		$locale = $context->locale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
 		$sitecode = $locale->getSiteItem()->getCode();
@@ -104,7 +104,7 @@ abstract class Base
 	{
 		$context = $this->context();
 		$session = $context->getSession();
-		$locale = $context->getLocale();
+		$locale = $context->locale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
 		$sitecode = $locale->getSiteItem()->getCode();
@@ -129,7 +129,7 @@ abstract class Base
 	{
 		$context = $this->context();
 		$session = $context->getSession();
-		$locale = $context->getLocale();
+		$locale = $context->locale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
 		$sitecode = $locale->getSiteItem()->getCode();
@@ -159,7 +159,7 @@ abstract class Base
 
 		$context = $this->context();
 		$session = $context->getSession();
-		$locale = $context->getLocale();
+		$locale = $context->locale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
 		$sitecode = $locale->getSiteItem()->getCode();

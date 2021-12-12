@@ -432,7 +432,7 @@ class Standard
 		$context = $this->context();
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
 
-		$values['order.base.product.siteid'] = $context->getLocale()->getSiteId();
+		$values['order.base.product.siteid'] = $context->locale()->getSiteId();
 
 		return $this->createItemBase( $priceManager->create(), $values );
 	}

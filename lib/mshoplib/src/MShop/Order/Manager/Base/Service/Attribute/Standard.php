@@ -220,7 +220,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['order.base.service.attribute.siteid'] = $this->context()->getLocale()->getSiteId();
+		$values['order.base.service.attribute.siteid'] = $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 

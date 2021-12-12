@@ -415,7 +415,7 @@ class Standard
 
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->context();
-		$siteid = $context->getLocale()->getSiteId();
+		$siteid = $context->locale()->getSiteId();
 
 		$dbm = $context->db();
 		$dbname = $this->getResourceName();

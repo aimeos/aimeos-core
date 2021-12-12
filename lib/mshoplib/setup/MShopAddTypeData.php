@@ -37,7 +37,7 @@ class MShopAddTypeData extends Base
 	protected function process( string $filename = null )
 	{
 		$context = $this->context();
-		$sitecode = $context->getLocale()->getSiteItem()->getCode();
+		$sitecode = $context->locale()->getSiteItem()->getCode();
 
 		$this->info( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 'v' );
 

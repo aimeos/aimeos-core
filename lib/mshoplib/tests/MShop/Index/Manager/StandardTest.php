@@ -179,7 +179,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$context = $this->context;
 		$dbm = $context->db();
-		$siteId = $context->getLocale()->getSiteId();
+		$siteId = $context->locale()->getSiteId();
 
 		$sqlAttribute = 'SELECT COUNT(*) as count FROM "mshop_index_attribute" WHERE "siteid" = ? AND "prodid" = ?';
 		$sqlCatalog = 'SELECT COUNT(*) as count FROM "mshop_index_catalog" WHERE "siteid" = ? AND "prodid" = ?';

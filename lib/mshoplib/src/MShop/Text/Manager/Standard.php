@@ -132,7 +132,7 @@ class Standard
 		parent::__construct( $context );
 
 		$this->setResourceName( 'db-text' );
-		$this->languageId = $context->getLocale()->getLanguageId();
+		$this->languageId = $context->locale()->getLanguageId();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->config()->get( 'mshop/text/manager/sitemode', $level );
@@ -182,7 +182,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['text.siteid'] = $this->context()->getLocale()->getSiteId();
+		$values['text.siteid'] = $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -306,7 +306,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->getEditor() );
-			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
+			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -683,7 +683,7 @@ class Standard
 		if( $default !== false )
 		{
 			$object = $this->filterBase( 'text' );
-			$langid = $this->context()->getLocale()->getLanguageId();
+			$langid = $this->context()->locale()->getLanguageId();
 
 			if( $langid !== null )
 			{

@@ -265,7 +265,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * @return \Aimeos\MShop\Locale\Item\Iface Object containing information
 	 *  about site, language, country and currency
 	 */
-	public function getLocale() : \Aimeos\MShop\Locale\Item\Iface
+	public function locale() : \Aimeos\MShop\Locale\Item\Iface
 	{
 		return $this->locale;
 	}
@@ -367,7 +367,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$item = $this;
-		$locale = $item->getLocale();
+		$locale = $item->locale();
 
 		unset( $list['order.base.siteid'] );
 		unset( $list['order.base.ctime'] );
@@ -402,7 +402,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	public function toArray( bool $private = false ) : array
 	{
 		$price = $this->getPrice();
-		$locale = $this->getLocale();
+		$locale = $this->locale();
 
 		$list = array(
 			'order.base.id' => $this->getId(),

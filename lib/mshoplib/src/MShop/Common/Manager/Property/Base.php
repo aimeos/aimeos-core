@@ -34,7 +34,7 @@ abstract class Base
 	{
 		parent::__construct( $context );
 
-		$this->languageId = $context->getLocale()->getLanguageId();
+		$this->languageId = $context->locale()->getLanguageId();
 		$this->searchConfig = $this->getSearchConfig();
 
 		if( ( $entry = reset( $this->searchConfig ) ) === false )
@@ -65,7 +65,7 @@ abstract class Base
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values[$this->prefix . 'siteid'] = $this->context()->getLocale()->getSiteId();
+		$values[$this->prefix . 'siteid'] = $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -83,7 +83,7 @@ abstract class Base
 
 		if( $default !== false )
 		{
-			$langid = $this->context()->getLocale()->getLanguageId();
+			$langid = $this->context()->locale()->getLanguageId();
 
 			$expr = array(
 				$object->compare( '==', $this->prefix . 'languageid', null ),
@@ -142,7 +142,7 @@ abstract class Base
 			$stmt->bind( $idx++, $item->getValue() );
 			$stmt->bind( $idx++, $date ); //mtime
 			$stmt->bind( $idx++, $context->getEditor() );
-			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
+			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetLocale()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getLocale();
+		$this->object->locale();
 	}
 
 

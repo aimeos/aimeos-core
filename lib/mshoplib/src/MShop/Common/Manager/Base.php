@@ -760,7 +760,7 @@ abstract class Base
 	protected function getSiteCondition( \Aimeos\MW\Criteria\Iface $search, string $name,
 		int $sitelevel ) : \Aimeos\MW\Criteria\Expression\Iface
 	{
-		$sites = $this->context->getLocale()->getSites();
+		$sites = $this->context->locale()->getSites();
 		$values = [''];
 
 		if( isset( $sites[Locale::SITE_PATH] ) && $sitelevel & Locale::SITE_PATH ) {
@@ -969,7 +969,7 @@ abstract class Base
 			$stmt = $conn->create( $sql );
 
 			if( $siteid ) {
-				$stmt->bind( 1, $context->getLocale()->getSiteId() );
+				$stmt->bind( 1, $context->locale()->getSiteId() );
 			}
 
 			$stmt->execute()->finish();

@@ -40,7 +40,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->create();
 
 		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $item );
-		$this->assertEquals( \TestHelperMShop::context()->getLocale()->getSiteId(), $item->getNode()->siteid );
+		$this->assertEquals( \TestHelperMShop::context()->locale()->getSiteId(), $item->getNode()->siteid );
 	}
 
 
@@ -164,7 +164,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$testItem = $this->object->get( $item->getId() );
 
-		$this->assertEquals( \TestHelperMShop::context()->getLocale()->getSiteId(), $testItem->getSiteId() );
+		$this->assertEquals( \TestHelperMShop::context()->locale()->getSiteId(), $testItem->getSiteId() );
 		$this->assertEquals( $item->getId(), $testItem->getId() );
 		$this->assertEquals( 'Root', $testItem->getLabel() );
 		$this->assertEquals( 'Root', $testItem->getName() );
@@ -187,7 +187,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$categoryItem = $rootItem->getChild( 0 );
 		$miscItem = $categoryItem->getChild( 2 );
 
-		$this->assertEquals( \TestHelperMShop::context()->getLocale()->getSiteId(), $miscItem->getSiteId() );
+		$this->assertEquals( \TestHelperMShop::context()->locale()->getSiteId(), $miscItem->getSiteId() );
 		$this->assertEquals( 'Misc', $miscItem->getLabel() );
 		$this->assertEquals( 'Sonstiges', $miscItem->getName() );
 	}

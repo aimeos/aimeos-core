@@ -667,7 +667,7 @@ class Standard
 		$prices = [];
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->context();
-		$siteid = $context->getLocale()->getSiteId();
+		$siteid = $context->locale()->getSiteId();
 
 		/** mshop/index/manager/price/types
 		 * Use different product prices types for indexing

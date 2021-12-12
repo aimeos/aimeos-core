@@ -25,7 +25,7 @@ class LogTest extends \PHPUnit\Framework\TestCase
 		$provider = new \Aimeos\MShop\Plugin\Provider\Order\Example( $context, $item );
 
 		$priceItem = \Aimeos\MShop\Price\Manager\Factory::create( $context )->create();
-		$this->order = new \Aimeos\MShop\Order\Item\Base\Standard( $priceItem, $context->getLocale() );
+		$this->order = new \Aimeos\MShop\Order\Item\Base\Standard( $priceItem, $context->locale() );
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Decorator\Log( $context, $item, $provider );
 	}

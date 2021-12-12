@@ -100,7 +100,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$siteid = \TestHelperMShop::context()->getLocale()->getSiteId();
+		$siteid = \TestHelperMShop::context()->locale()->getSiteId();
 
 		$search = $this->object->filter();
 		$conditions = array(

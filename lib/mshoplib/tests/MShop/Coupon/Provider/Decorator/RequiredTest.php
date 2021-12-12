@@ -46,7 +46,7 @@ class RequiredTest extends \PHPUnit\Framework\TestCase
 		$orderProducts['CNC']->setPrice( clone $price->setValue( 321 ) );
 		$orderProducts['CNE']->setPrice( clone $price->setValue( 123 ) );
 
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->getLocale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $context->locale() );
 		$this->orderBase->addProduct( $orderProducts['CNC'] );
 		$this->orderBase->addProduct( $orderProducts['CNE'] );
 	}

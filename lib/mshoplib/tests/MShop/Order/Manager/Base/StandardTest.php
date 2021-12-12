@@ -157,7 +157,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getCustomerId(), $itemSaved->getCustomerId() );
-		$this->assertEquals( $item->getLocale()->getLanguageId(), $itemSaved->getLocale()->getLanguageId() );
+		$this->assertEquals( $item->locale()->getLanguageId(), $itemSaved->locale()->getLanguageId() );
 		$this->assertEquals( $item->getCustomerReference(), $itemSaved->getCustomerReference() );
 		$this->assertEquals( $item->getComment(), $itemSaved->getComment() );
 		$this->assertEquals( $item->getSiteCode(), $itemSaved->getSiteCode() );
@@ -174,7 +174,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getCustomerId(), $itemUpd->getCustomerId() );
-		$this->assertEquals( $itemExp->getLocale()->getLanguageId(), $itemUpd->getLocale()->getLanguageId() );
+		$this->assertEquals( $itemExp->locale()->getLanguageId(), $itemUpd->locale()->getLanguageId() );
 		$this->assertEquals( $itemExp->getCustomerReference(), $itemUpd->getCustomerReference() );
 		$this->assertEquals( $itemExp->getComment(), $itemUpd->getComment() );
 		$this->assertEquals( $itemExp->getSiteCode(), $itemUpd->getSiteCode() );
@@ -225,7 +225,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$siteid = $this->context->getLocale()->getSiteId();
+		$siteid = $this->context->locale()->getSiteId();
 
 		$total = 0;
 		$search = $this->object->filter();
@@ -643,7 +643,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->assertEquals( $item->getCustomerId(), $basket->getCustomerId() );
-		$this->assertEquals( $basket->getLocale()->getSiteId(), $basket->getSiteId() );
+		$this->assertEquals( $basket->locale()->getSiteId(), $basket->getSiteId() );
 
 		$this->assertEquals( 1.50, $basket->getPrice()->getCosts() );
 
@@ -729,7 +729,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->delete( $newBasketId );
 
 		$this->assertEquals( $item->getCustomerId(), $basket->getCustomerId() );
-		$this->assertEquals( $basket->getLocale()->getSiteId(), $basket->getSiteId() );
+		$this->assertEquals( $basket->locale()->getSiteId(), $basket->getSiteId() );
 
 		$pos = 0;
 		$products = $basket->getProducts();

@@ -35,7 +35,7 @@ class OrderAddTestData extends Base
 
 		$context = $this->context();
 		$context->setEditor( 'core:lib/mshoplib' );
-		$context->getLocale()->setCurrencyId( 'EUR' );
+		$context->locale()->setCurrencyId( 'EUR' );
 
 		$manager = $this->getOrderManager( 'base' );
 		$filter = $manager->filter()->add( ['order.base.sitecode' => 'unittest'] );
@@ -50,7 +50,7 @@ class OrderAddTestData extends Base
 
 		$this->import( $testdata, $this->getCustomer()->getId() );
 
-		$context->getLocale()->setCurrencyId( null );
+		$context->locale()->setCurrencyId( null );
 	}
 
 

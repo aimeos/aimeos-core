@@ -33,7 +33,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 		$orderPrice = $orderProduct->copyFrom( $product )->getPrice();
 		$orderPrice->setValue( '18.00' )->setCosts( '1.50' );
 
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $this->context->getLocale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $this->context->locale() );
 		$this->orderBase->addProduct( $orderProduct );
 	}
 

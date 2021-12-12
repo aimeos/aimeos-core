@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.address.latitude' => '50.0',
 			'customer.address.position' => 1,
 			'customer.address.birthday' => '2000-01-01',
-			'customer.address.siteid' => \TestHelperMShop::context()->getLocale()->getSiteId(),
+			'customer.address.siteid' => \TestHelperMShop::context()->locale()->getSiteId(),
 		);
 
 		$this->object = $customer->getSubManager( 'address', 'Standard' );

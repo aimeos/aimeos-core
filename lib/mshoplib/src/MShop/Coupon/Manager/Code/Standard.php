@@ -151,7 +151,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['coupon.code.siteid'] = $this->context()->getLocale()->getSiteId();
+		$values['coupon.code.siteid'] = $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -476,7 +476,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getRef() );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->getEditor() );
-			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
+			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -778,7 +778,7 @@ class Standard
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
 
 		$search = $this->object()->filter();
-		$search->setConditions( $search->compare( '==', 'coupon.code.siteid', $context->getLocale()->getSites( $level ) ) );
+		$search->setConditions( $search->compare( '==', 'coupon.code.siteid', $context->locale()->getSites( $level ) ) );
 
 		$types = array( 'coupon.code.siteid' => $this->searchConfig['coupon.code.siteid']['internaltype'] );
 		$translations = array( 'coupon.code.siteid' => 'siteid' );

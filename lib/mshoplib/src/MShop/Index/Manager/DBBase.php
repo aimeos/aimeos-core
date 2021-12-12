@@ -229,7 +229,7 @@ abstract class DBBase
 	protected function cleanupBase( string $timestamp, string $path ) : \Aimeos\MShop\Index\Manager\Iface
 	{
 		$context = $this->context();
-		$siteid = $context->getLocale()->getSiteId();
+		$siteid = $context->locale()->getSiteId();
 
 
 		$this->begin();

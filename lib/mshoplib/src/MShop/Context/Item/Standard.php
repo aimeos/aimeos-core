@@ -372,7 +372,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	public function getI18n( string $locale = null ) : \Aimeos\MW\Translation\Iface
 	{
 		if( isset( $this->locale ) && $locale === null ) {
-			$locale = $this->getLocale()->getLanguageId();
+			$locale = $this->locale()->getLanguageId();
 		}
 
 		if( isset( $this->locale ) && $locale === null && reset( $this->i18n ) !== false ) {

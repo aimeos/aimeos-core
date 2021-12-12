@@ -162,7 +162,7 @@ class Standard
 		parent::__construct( $context );
 
 		$this->setResourceName( 'db-media' );
-		$this->languageId = $context->getLocale()->getLanguageId();
+		$this->languageId = $context->locale()->getLanguageId();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->config()->get( 'mshop/media/manager/sitemode', $level );
@@ -233,7 +233,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['media.siteid'] = $this->context()->getLocale()->getSiteId();
+		$values['media.siteid'] = $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -466,7 +466,7 @@ class Standard
 			$stmt->bind( $idx++, json_encode( $item->getPreviews(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->getEditor() );
-			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
+			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -741,7 +741,7 @@ class Standard
 		if( $default !== false )
 		{
 			$object = $this->filterBase( 'media', $default );
-			$langid = $this->context()->getLocale()->getLanguageId();
+			$langid = $this->context()->locale()->getLanguageId();
 
 			if( $langid !== null )
 			{

@@ -185,7 +185,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$total = 0;
 		$search = $this->object->filter();
-		$siteid = $this->context->getLocale()->getSiteId();
+		$siteid = $this->context->locale()->getSiteId();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'review.id', null );

@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItem()
 	{
-		$siteid = $this->context->getLocale()->getSiteId();
+		$siteid = $this->context->locale()->getSiteId();
 
 		$total = 0;
 		$search = $this->object->filter();

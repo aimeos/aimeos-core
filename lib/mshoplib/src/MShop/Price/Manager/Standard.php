@@ -164,7 +164,7 @@ class Standard
 		parent::__construct( $context );
 
 		$this->setResourceName( 'db-price' );
-		$this->currencyId = $context->getLocale()->getCurrencyId();
+		$this->currencyId = $context->locale()->getCurrencyId();
 
 		/** mshop/price/taxflag
 		 * Configuration setting if prices are inclusive or exclusive tax
@@ -260,7 +260,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$locale = $this->context()->getLocale();
+		$locale = $this->context()->locale();
 		$values['price.siteid'] = $locale->getSiteId();
 
 		if( !isset( $values['price.currencyid'] ) && $locale->getCurrencyId() !== null ) {
@@ -500,7 +500,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); //mtime
 			$stmt->bind( $idx++, $context->getEditor() );
-			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
+			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -776,7 +776,7 @@ class Standard
 		{
 			$object = $this->filterBase( 'price', $default );
 
-			if( $currencyid = $this->context()->getLocale()->getCurrencyId() ) {
+			if( $currencyid = $this->context()->locale()->getCurrencyId() ) {
 				$object->add( ['price.currencyid' => $currencyid] );
 			}
 

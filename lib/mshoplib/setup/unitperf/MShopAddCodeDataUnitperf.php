@@ -30,7 +30,7 @@ class MShopAddCodeDataUnitperf extends MShopAddCodeData
 	 */
 	public function up()
 	{
-		$site = $this->context()->getLocale()->getSiteItem()->getCode();
+		$site = $this->context()->locale()->getSiteItem()->getCode();
 		$this->info( sprintf( 'Adding default code data for site "%1$s"', $site ), 'v' );
 
 		$ds = DIRECTORY_SEPARATOR;

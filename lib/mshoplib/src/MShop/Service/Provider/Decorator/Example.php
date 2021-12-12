@@ -78,7 +78,7 @@ class Example
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : bool
 	{
-		if( $basket->getLocale()->getLanguageId() === 'en' ) {
+		if( $basket->locale()->getLanguageId() === 'en' ) {
 			return $this->getProvider()->isAvailable( $basket );
 		}
 		return false;

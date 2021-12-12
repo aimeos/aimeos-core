@@ -157,7 +157,7 @@ class Standard
 	{
 		try
 		{
-			$values['locale.siteid'] = $this->context()->getLocale()->getSiteId();
+			$values['locale.siteid'] = $this->context()->locale()->getSiteId();
 			return $this->createItemBase( $values );
 		}
 		catch( \Exception $e )

@@ -143,7 +143,7 @@ class PropertyMatch
 	protected function getProductItems( array $productIds, array $map ) : \Aimeos\Map
 	{
 		$context = $this->context();
-		$langId = $context->getLocale()->getLanguageId();
+		$langId = $context->locale()->getLanguageId();
 
 		$manager = \Aimeos\MShop::create( $context, 'product' );
 		$search = $manager->filter( true );

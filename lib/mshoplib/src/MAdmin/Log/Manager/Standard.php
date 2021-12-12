@@ -157,7 +157,7 @@ class Standard
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		try {
-			$values['log.siteid'] = $this->context()->getLocale()->getSiteId();
+			$values['log.siteid'] = $this->context()->locale()->getSiteId();
 		} catch( \Exception $e ) {
 			$values['log.siteid'] = null;
 		}
@@ -182,7 +182,7 @@ class Standard
 		$context = $this->context();
 
 		try {
-			$siteid = $context->getLocale()->getSiteId();
+			$siteid = $context->locale()->getSiteId();
 		} catch( \Exception $e ) {
 			$siteid = '';
 		}

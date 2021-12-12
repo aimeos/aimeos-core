@@ -271,7 +271,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['product.siteid'] = $this->context()->getLocale()->getSiteId();
+		$values['product.siteid'] = $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -524,7 +524,7 @@ class Standard
 
 			$stmt->bind( 1, $rating );
 			$stmt->bind( 2, $ratings, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $context->getLocale()->getSiteId() );
+			$stmt->bind( 3, $context->locale()->getSiteId() );
 			$stmt->bind( 4, (int) $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
@@ -594,7 +594,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path, $this->getSqlConfig( $path ) );
 
 			$stmt->bind( 1, $value, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId() );
+			$stmt->bind( 2, $context->locale()->getSiteId() );
 			$stmt->bind( 3, (int) $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
@@ -742,7 +742,7 @@ class Standard
 			$stmt->bind( $idx++, $context->getEditor() );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $item->getTimeCreated() ?: $date );
-			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
+			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

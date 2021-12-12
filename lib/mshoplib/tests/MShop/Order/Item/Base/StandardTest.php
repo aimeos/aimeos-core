@@ -106,7 +106,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetLocale()
 	{
-		$this->assertEquals( $this->locale, $this->object->getLocale() );
+		$this->assertEquals( $this->locale, $this->object->locale() );
 	}
 
 
@@ -116,7 +116,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setLocale( $locale );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $return );
-		$this->assertEquals( $locale, $this->object->getLocale() );
+		$this->assertEquals( $locale, $this->object->locale() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -185,7 +185,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['order.base.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.customerid'], $item->getCustomerId() );
-		$this->assertEquals( $list['order.base.languageid'], $item->getLocale()->getLanguageId() );
+		$this->assertEquals( $list['order.base.languageid'], $item->locale()->getLanguageId() );
 		$this->assertEquals( $list['order.base.customerref'], $item->getCustomerReference() );
 		$this->assertEquals( $list['order.base.comment'], $item->getComment() );
 	}
@@ -199,7 +199,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getId(), $list['order.base.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $list['order.base.siteid'] );
 		$this->assertEquals( $this->object->getCustomerId(), $list['order.base.customerid'] );
-		$this->assertEquals( $this->object->getLocale()->getLanguageId(), $list['order.base.languageid'] );
+		$this->assertEquals( $this->object->locale()->getLanguageId(), $list['order.base.languageid'] );
 		$this->assertEquals( $this->object->getCustomerReference(), $list['order.base.customerref'] );
 		$this->assertEquals( $this->object->getComment(), $list['order.base.comment'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $list['order.base.ctime'] );

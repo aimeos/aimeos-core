@@ -93,7 +93,7 @@ interface Iface
 	 *
 	 * @return \Aimeos\MShop\Locale\Item\Iface Object containing information about site, language, country and currency
 	 */
-	public function getLocale() : \Aimeos\MShop\Locale\Item\Iface;
+	public function locale() : \Aimeos\MShop\Locale\Item\Iface;
 
 	/**
 	 * Sets the locales for the basic order item.

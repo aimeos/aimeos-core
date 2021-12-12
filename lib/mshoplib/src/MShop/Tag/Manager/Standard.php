@@ -105,7 +105,7 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-tag' );
 
-		$this->languageId = $context->getLocale()->getLanguageId();
+		$this->languageId = $context->locale()->getLanguageId();
 	}
 
 
@@ -134,7 +134,7 @@ class Standard
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		$values['tag.siteid'] = $this->context()->getLocale()->getSiteId();
+		$values['tag.siteid'] = $this->context()->locale()->getSiteId();
 		return $this->createItemBase( $values );
 	}
 
@@ -255,7 +255,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, $date ); //mtime
 			$stmt->bind( $idx++, $context->getEditor() );
-			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
+			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

@@ -679,7 +679,7 @@ class Standard
 	{
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->context();
-		$siteid = $context->getLocale()->getSiteId();
+		$siteid = $context->locale()->getSiteId();
 
 		$products = ( in_array( $item->getType(), ['group', 'select'] ) ? $item->getRefItems( 'product', null, 'default' ) : [] );
 		$products[] = $item;

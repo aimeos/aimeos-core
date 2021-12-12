@@ -26,7 +26,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 		$this->couponItem->setConfig( array( 'voucher.productcode' => 'U:MD' ) );
 
 		// Don't create order base item by create() as this would already register the plugins
-		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $this->context->getLocale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->create(), $this->context->locale() );
 
 		$this->object = new \Aimeos\MShop\Coupon\Provider\Voucher( $this->context, $this->couponItem, '90AB' );
 	}

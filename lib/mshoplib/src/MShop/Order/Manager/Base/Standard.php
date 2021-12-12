@@ -288,7 +288,7 @@ class Standard extends Base
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$context = $this->context();
-		$locale = $context->getLocale();
+		$locale = $context->locale();
 
 		$values['order.base.siteid'] = $locale->getSiteId();
 		$priceManager = \Aimeos\MShop::create( $context, 'price' );
@@ -572,7 +572,7 @@ class Standard extends Base
 	 */
 	public function saveItem( \Aimeos\MShop\Order\Item\Base\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		if( !$item->isModified() && !$item->getLocale()->isModified() ) {
+		if( !$item->isModified() && !$item->locale()->isModified() ) {
 			return $item;
 		}
 
@@ -667,7 +667,7 @@ class Standard extends Base
 			}
 
 			$priceItem = $item->getPrice();
-			$localeItem = $context->getLocale();
+			$localeItem = $context->locale();
 
 			$idx = 1;
 			$stmt = $this->getCachedStatement( $conn, $path, $sql );
@@ -678,7 +678,7 @@ class Standard extends Base
 
 			$stmt->bind( $idx++, $item->getCustomerId() );
 			$stmt->bind( $idx++, $localeItem->getSiteItem()->getCode() );
-			$stmt->bind( $idx++, $item->getLocale()->getLanguageId() );
+			$stmt->bind( $idx++, $item->locale()->getLanguageId() );
 			$stmt->bind( $idx++, $priceItem->getCurrencyId() );
 			$stmt->bind( $idx++, $priceItem->getValue() );
 			$stmt->bind( $idx++, $priceItem->getCosts() );
