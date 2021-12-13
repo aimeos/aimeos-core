@@ -134,7 +134,7 @@ class Xml
 	public function updateAsync() : bool
 	{
 		$context = $this->context();
-		$logger = $context->getLogger();
+		$logger = $context->logger();
 		$location = $this->getConfigValue( 'xml.updatedir' );
 
 		if( $location === '' || !file_exists( $location ) )
@@ -241,7 +241,7 @@ class Xml
 	{
 		$nodes = [];
 		$xml = new \XMLReader();
-		$logger = $this->context()->getLogger();
+		$logger = $this->context()->logger();
 
 		if( $xml->open( $filename, LIBXML_COMPACT | LIBXML_PARSEHUGE ) === false )
 		{

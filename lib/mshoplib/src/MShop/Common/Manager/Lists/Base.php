@@ -290,7 +290,7 @@ abstract class Base
 				{
 					$str = 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s';
 					$msg = sprintf( $str, $this->prefix . 'config', $row[$this->prefix . 'id'], $config );
-					$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core' );
+					$this->context()->logger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core' );
 				}
 
 				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {

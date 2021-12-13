@@ -479,7 +479,7 @@ class Standard
 		$filename = substr( md5( $filename . getmypid() . microtime( true ) ), -8 ) . '_' . $filename;
 
 		$ext = isset( $list[$mimeext] ) ? '.' . $list[$mimeext] : ( ctype_alpha( $mimeext ) ? '.' . $mimeext : '' );
-		$siteId = $this->context->getLocale()->getSiteId();
+		$siteId = $this->context->locale()->getSiteId();
 
 		// the "d" after {siteid} is the required extension for Windows (no dots at the and allowed)
 		return "${siteId}d/${type}/${filename[0]}/${filename[1]}/${filename}${ext}";

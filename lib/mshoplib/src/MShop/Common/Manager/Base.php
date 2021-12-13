@@ -514,7 +514,7 @@ abstract class Base
 			$msg .= "\n" . ( new \Exception() )->getTraceAsString();
 		}
 
-		$this->context->getLogger()->log( $msg, $level, 'core/sql' );
+		$this->context->logger()->log( $msg, $level, 'core/sql' );
 
 		return $result;
 	}

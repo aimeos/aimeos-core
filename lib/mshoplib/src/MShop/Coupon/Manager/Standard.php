@@ -616,7 +616,7 @@ class Standard
 					if( ( $row['coupon.config'] = json_decode( $config = $row['coupon.config'], true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_coupon.config', $row['id'], $config );
-						$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/coupon' );
+						$context->logger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/coupon' );
 					}
 
 					if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {

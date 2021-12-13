@@ -83,7 +83,7 @@ abstract class Base
 		if( ( $order = unserialize( $serorder ) ) === false || !( $order instanceof $iface ) )
 		{
 			$msg = sprintf( 'Invalid serialized basket. "%1$s" returns "%2$s".', __METHOD__, $serorder );
-			$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/order' );
+			$context->logger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/order' );
 
 			return $this->object()->create();
 		}

@@ -637,7 +637,7 @@ class Standard
 				if( ( $row['plugin.config'] = json_decode( $config = $row['plugin.config'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'plugin.config', $row['plugin.id'], $config );
-					$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/plugin' );
+					$this->context()->logger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/plugin' );
 				}
 
 				if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {

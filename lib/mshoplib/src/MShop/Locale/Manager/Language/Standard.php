@@ -657,7 +657,7 @@ class Standard
 			. 'Class: ' . get_class( $this ) . "\n"
 			. str_replace( ["\t", "\n\n"], ['', "\n"], trim( (string) $stmt ) );
 
-		$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
+		$this->context()->logger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
 
 		return $result;
 	}

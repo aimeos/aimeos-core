@@ -401,7 +401,7 @@ class Standard
 	{
 		$items = [];
 		$context = $this->context();
-		$logger = $context->getLogger();
+		$logger = $context->logger();
 
 		$dbm = $context->db();
 		$dbname = $this->getResourceName();

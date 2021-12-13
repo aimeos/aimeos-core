@@ -804,7 +804,7 @@ class Standard
 					if( ( $row['order.base.product.attribute.value'] = json_decode( $config, true ) ) === null && $config !== 'null' )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_order_base_product_attribute.value', $id, $config );
-						$this->context()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/order' );
+						$this->context()->logger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/order' );
 					}
 
 					if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
