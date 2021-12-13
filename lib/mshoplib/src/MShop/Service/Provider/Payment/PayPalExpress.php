@@ -758,7 +758,7 @@ class PayPalExpress
 		$amount = $this->getAmount( $price );
 
 		foreach( $deliveryPrices as $priceItem ) {
-			$deliveryCosts += $this->getAmount( $priceItem, true, true, $price->getPrecision() + 2 );
+			$deliveryCosts += $this->getAmount( $priceItem, true, true, $price->getPrecision() );
 		}
 
 		$values['MAXAMT'] = $amount + 1 / pow( 10, $price->getPrecision() ); // possible rounding error
