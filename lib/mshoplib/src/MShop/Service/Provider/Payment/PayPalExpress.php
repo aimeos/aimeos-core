@@ -674,6 +674,7 @@ class PayPalExpress
 		$lastPos = 0;
 		$deliveryPrices = [];
 		$values = $this->getAuthParameter();
+		$precision = $orderBase->getPrice()->getPrecision();
 
 
 		if( $this->getConfigValue( 'paypalexpress.address', true ) )
@@ -714,7 +715,7 @@ class PayPalExpress
 			}
 
 			foreach( $deliveryPrices as $priceItem ) {
-				$itemDeliveryCosts += $this->getAmount( $priceItem, true, true, 2 );
+				$itemDeliveryCosts += $this->getAmount( $priceItem, true, true, $precision );
 			}
 		}
 
@@ -741,7 +742,7 @@ class PayPalExpress
 				{
 					$deliveryPrices = $this->addPrice( $deliveryPrices, $service->getPrice() );
 
-					$values['L_SHIPPINGOPTIONAMOUNT' . $lastPos] = number_format( $service->getPrice()->getCosts() + $itemDeliveryCosts, 2, '.', '' );
+					$values['L_SHIPPINGOPTIONAMOUNT' . $lastPos] = number_format( $service->getPrice()->getCosts() + $itemDeliveryCosts, $precision, '.', '' );
 					$values['L_SHIPPINGOPTIONLABEL' . $lastPos] = $service->getCode();
 					$values['L_SHIPPINGOPTIONNAME' . $lastPos] = $service->getName();
 					$values['L_SHIPPINGOPTIONISDEFAULT' . $lastPos] = 'true';
@@ -758,13 +759,13 @@ class PayPalExpress
 		$amount = $this->getAmount( $price );
 
 		foreach( $deliveryPrices as $priceItem ) {
-			$deliveryCosts += $this->getAmount( $priceItem, true, true, $price->getPrecision() );
+			$deliveryCosts += $this->getAmount( $priceItem, true, true, $precision );
 		}
 
-		$values['MAXAMT'] = $amount + 1 / pow( 10, $price->getPrecision() ); // possible rounding error
+		$values['MAXAMT'] = $amount + 1 / pow( 10, $precision ); // possible rounding error
 		$values['PAYMENTREQUEST_0_AMT'] = $amount;
-		$values['PAYMENTREQUEST_0_ITEMAMT'] = number_format( $amount - $deliveryCosts, $price->getPrecision(), '.', '' );
-		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format( $deliveryCosts, $price->getPrecision(), '.', '' );
+		$values['PAYMENTREQUEST_0_ITEMAMT'] = number_format( $amount - $deliveryCosts, $precision, '.', '' );
+		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format( $deliveryCosts, $precision, '.', '' );
 		$values['PAYMENTREQUEST_0_INSURANCEAMT'] = '0.00';
 		$values['PAYMENTREQUEST_0_INSURANCEOPTIONOFFERED'] = 'false';
 		$values['PAYMENTREQUEST_0_SHIPDISCAMT'] = '0.00';
