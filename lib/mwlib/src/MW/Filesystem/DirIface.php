@@ -29,7 +29,7 @@ interface DirIface
 	public function isdir( string $path ) : bool;
 
 	/**
-	 * Creates a new directory for the given path
+	 * Creates a new directory at the given path
 	 *
 	 * @param string $path Path to the directory
 	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface
@@ -38,7 +38,7 @@ interface DirIface
 	public function mkdir( string $path ) : DirIface;
 
 	/**
-	 * Deletes the directory for the given path
+	 * Deletes the directory at the given path
 	 *
 	 * @param string $path Path to the directory
 	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface

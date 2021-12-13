@@ -20,29 +20,14 @@ namespace Aimeos\MW\Filesystem;
 interface Iface
 {
 	/**
-	 * Returns the entries in the given path
+	 * Copies a file to another location
 	 *
-	 * This method returns an iterator or array!
-	 * To get the file name, you have to convert the entry to a string value:
-	 *
-	 *  foreach( $fs->scan() as $entry ) {
-	 *      echo (string) $entry . "\n";
-	 *  }
-	 *
-	 * @param string|null $path Path to the filesystem or directory
-	 * @return iterable Iterator over the entries or array with entries
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
-	 */
-	public function scan( string $path = null ) : iterable;
-
-	/**
-	 * Deletes the file for the given path
-	 *
-	 * @param string $path Path to the file
+	 * @param string $from Path to the original file
+	 * @param string $to Path to the new file
 	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function rm( string $path ) : Iface;
+	public function copy( string $from, string $to ) : Iface;
 
 	/**
 	 * Tests if a file exists at the given path
@@ -51,6 +36,16 @@ interface Iface
 	 * @return bool True if it exists, false if not
 	 */
 	public function has( string $path ) : bool;
+
+	/**
+	 * Renames a file, moves it to a new location or both at once
+	 *
+	 * @param string $from Path to the original file
+	 * @param string $to Path to the new file
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
+	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 */
+	public function move( string $from, string $to ) : Iface;
 
 	/**
 	 * Returns the content of the remote file
@@ -75,7 +70,7 @@ interface Iface
 	public function readf( string $path ) : string;
 
 	/**
-	 * Returns the stream descriptor for the remote file
+	 * Returns the stream descriptor of the remote file
 	 *
 	 * Reading from a file stream is the better alternative for files bigger
 	 * than a few kilobyte. To read from a file in stream mode and write it to
@@ -110,6 +105,31 @@ interface Iface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function reads( string $path );
+
+	/**
+	 * Deletes the file at the given path
+	 *
+	 * @param string $path Path to the file
+	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
+	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 */
+	public function rm( string $path ) : Iface;
+
+	/**
+	 * Returns the entries in the given path
+	 *
+	 * This method returns an iterator or array!
+	 * To get the file name, you have to convert the entry to a string value:
+	 *
+	 *  foreach( $fs->scan() as $entry ) {
+	 *      echo (string) $entry . "\n";
+	 *  }
+	 *
+	 * @param string|null $path Path to the filesystem or directory
+	 * @return iterable Iterator over the entries or array with entries
+	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 */
+	public function scan( string $path = null ) : iterable;
 
 	/**
 	 * Writes the given content to the file
@@ -163,24 +183,4 @@ interface Iface
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function writes( string $path, $stream ) : Iface;
-
-	/**
-	 * Renames a file, moves it to a new location or both at once
-	 *
-	 * @param string $from Path to the original file
-	 * @param string $to Path to the new file
-	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
-	 */
-	public function move( string $from, string $to ) : Iface;
-
-	/**
-	 * Copies a file to a new location
-	 *
-	 * @param string $from Path to the original file
-	 * @param string $to Path to the new file
-	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
-	 */
-	public function copy( string $from, string $to ) : Iface;
 }

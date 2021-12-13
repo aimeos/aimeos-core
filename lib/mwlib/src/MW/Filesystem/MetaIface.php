@@ -29,7 +29,7 @@ interface MetaIface
 	public function size( string $path ) : int;
 
 	/**
-	 * Returns the Unix time stamp for the file
+	 * Returns the Unix modification time stamp of the file
 	 *
 	 * @param string $path Path to the file
 	 * @return int Unix time stamp in seconds
