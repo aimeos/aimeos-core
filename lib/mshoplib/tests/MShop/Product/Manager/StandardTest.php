@@ -14,20 +14,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
 	private $object;
-	private $editor = '';
 
 
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::context();
-		$this->editor = $this->context->getEditor();
-
 		$this->object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
 	}
 
 	protected function tearDown() : void
 	{
-		$this->object = null;
+		unset( $this->object, $this->context );
 	}
 
 
@@ -134,18 +131,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$domains = ['text', 'product', 'price', 'media' => ['unittype10'], 'attribute', 'product/property' => ['package-weight']];
-
-		$search = $this->object->filter()->slice( 0, 1 );
-		$conditions = array(
-				$search->compare( '==', 'product.code', 'CNC' ),
-				$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$products = $this->object->search( $search, $domains )->toArray();
-
-		if( ( $product = reset( $products ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'Found no Productitem with text "%1$s"', 'Cafe Noire Cappuccino' ) );
-		}
+		$product = $this->object->find( 'CNC', $domains );
 
 		$this->assertEquals( $product, $this->object->get( $product->getId(), $domains ) );
 		$this->assertEquals( 6, count( $product->getRefItems( 'text', null, null, false ) ) );
@@ -186,7 +172,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter();
 		$conditions = array(
 			$search->compare( '==', 'product.code', 'CNC' ),
-			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
 		$items = $this->object->search( $search )->toArray();
@@ -197,20 +182,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
+		$item = $this->object->find( 'CNC' );
 		$listItem = $this->object->createListItem();
 		$refItem = \Aimeos\MShop\Text\Manager\Factory::create( $this->context )->create()->setType( 'name' );
-
-		$search = $this->object->filter();
-		$conditions = array(
-				$search->compare( '==', 'product.code', 'CNC' ),
-				$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$items = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No product item found' );
-		}
 
 		$item->setId( null );
 		$item->setCode( 'CNC unit test' );
@@ -224,7 +198,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$listItem = $itemUpd->getListItem( 'text', 'default', $listItem->getRefId(), false );
 		$this->object->delete( $itemUpd->deleteListItem( 'text', $listItem, $listItem->getRefItem() ) );
-
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertTrue( $itemSaved->getType() !== null );
@@ -242,7 +215,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getTarget(), $itemSaved->getTarget() );
 		$this->assertEquals( $item->getScale(), $itemSaved->getScale() );
 
-		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->context->getEditor(), $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -261,7 +234,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getTarget(), $itemUpd->getTarget() );
 		$this->assertEquals( $itemExp->getScale(), $itemUpd->getScale() );
 
-		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->context->getEditor(), $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -333,9 +306,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$manager = \Aimeos\MShop\Product\Manager\Factory::create( \TestHelperMShop::context() );
 
-		$search = $manager->filter();
-		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
-		$search->slice( 0, 1 );
+		$search = $manager->filter()->slice( 0, 1 );
 		$products = $manager->search( $search )->toArray();
 
 		if( ( $item = reset( $products ) ) === false ) {
@@ -377,7 +348,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.ratings', 0 );
 		$expr[] = $search->compare( '>=', 'product.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '-', 'product.mtime', '1970-01-01 00:00 - 2100-01-01 00:00' );
-		$expr[] = $search->compare( '==', 'product.editor', $this->editor );
+		$expr[] = $search->compare( '>=', 'product.editor', '' );
 		$expr[] = $search->compare( '>=', 'product.target', '' );
 
 		$param = ['product', ['suggestion', 'invalid'], [$suggestItem->getId()]];
@@ -415,9 +386,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsAll()
 	{
 		$total = 0;
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
-		$search->slice( 0, 10 );
+		$search = $this->object->filter()->slice( 0, 10 );
 		$results = $this->object->search( $search, [], $total )->toArray();
 		$this->assertEquals( 10, count( $results ) );
 		$this->assertEquals( 28, $total );
@@ -429,7 +398,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter( true );
 		$expr = array(
 			$search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ),
-			$search->compare( '==', 'product.editor', $this->editor ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->and( $expr ) );
@@ -468,9 +436,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$start = 0;
 		$numproducts = 0;
 
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'product.editor', 'core:lib/mshoplib' ) );
-		$search->slice( $start, 5 );
+		$search = $this->object->filter()->slice( $start, 5 );
 
 		do
 		{

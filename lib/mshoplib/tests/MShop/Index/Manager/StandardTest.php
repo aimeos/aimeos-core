@@ -15,7 +15,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private static $products;
 	private $context;
 	private $object;
-	private $editor = '';
 
 
 	public static function setUpBeforeClass() : void
@@ -25,13 +24,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$manager = new \Aimeos\MShop\Index\Manager\Standard( $context );
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::create( $context );
 
-		$search = $productManager->filter();
-		$conditions = array(
-			$search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ),
-			$search->compare( '==', 'product.editor', $context->getEditor() ),
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$result = $productManager->search( $search, array( 'attribute', 'price', 'text', 'product' ) );
+		$search = $productManager->filter()->add( ['product.code' => ['CNC', 'CNE']] );
+		$result = $productManager->search( $search, ['attribute', 'price', 'text', 'product'] );
 
 		if( count( $result ) !== 2 ) {
 			throw new \RuntimeException( 'Products not available' );
@@ -48,14 +42,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelperMShop::context();
-		$this->editor = $this->context->getEditor();
 		$this->object = new \Aimeos\MShop\Index\Manager\Standard( $this->context );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
+		unset( $this->object, $this->context );
 	}
 
 
@@ -220,7 +213,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = array(
 			$search->compare( '!=', 'index.catalog.id', null ),
 			$search->compare( '=~', 'product.label', 'Cafe Noire' ),
-			$search->compare( '==', 'product.editor', $this->editor ),
 		);
 		$search->setConditions( $search->and( $expr ) );
 
@@ -236,7 +228,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter( true );
 		$conditions = array(
 			$search->compare( '!=', 'index.catalog.id', null ),
-			$search->compare( '==', 'product.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->and( $conditions ) );
@@ -261,7 +252,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '!=', 'index.supplier.id', null ),
 			$search->compare( '>=', $search->make( 'index.price:value', ['EUR'] ), 0 ),
 			$search->compare( '>=', $search->make( 'index.text:name', ['de'] ), '' ),
-			$search->compare( '==', 'product.editor', $this->editor )
 		);
 
 		$search->setConditions( $search->and( $expr ) );
@@ -398,7 +388,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$expr = array(
 			$search->compare( '!=', $key, null ),
-			$search->compare( '==', 'product.editor', $this->editor )
 		);
 
 		$search->setConditions( $search->and( $expr ) );
