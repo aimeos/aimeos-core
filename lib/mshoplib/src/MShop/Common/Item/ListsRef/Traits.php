@@ -159,7 +159,7 @@ trait Traits
 	public function getListItemsDeleted( string $domain = null ) : \Aimeos\Map
 	{
 		if( $domain !== null ) {
-			return map( $this->listRmMap[$domain] ?: [] );
+			return map( $this->listRmMap[$domain] ?? [] );
 		}
 
 		return map( $this->listRmItems );
