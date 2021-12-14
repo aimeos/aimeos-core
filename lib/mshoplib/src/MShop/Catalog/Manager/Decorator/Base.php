@@ -20,6 +20,7 @@ namespace Aimeos\MShop\Catalog\Manager\Decorator;
  */
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Decorator\Base
+	implements \Aimeos\MShop\Catalog\Manager\Iface
 {
 	/**
 	 * Creates a new lists item object
@@ -30,6 +31,23 @@ abstract class Base
 	public function createListItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Lists\Iface
 	{
 		return $this->getManager()->createListItem( $values );
+	}
+
+
+	/**
+	 * Returns the item specified by its code and domain/type if necessary
+	 *
+	 * @param string $code Code of the item
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
+	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
+	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item object
+	 */
+	public function find( string $code, array $ref = [], string $domain = null, string $type = null,
+		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
+	{
+		return $this->getManager()->find( $code, $ref, $domain, $type, $default );
 	}
 
 
@@ -70,7 +88,8 @@ abstract class Base
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Item\Iface $item Updated item including the generated ID
 	 */
-	public function insert( \Aimeos\MShop\Catalog\Item\Iface $item, string $parentId = null, string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface
+	public function insert( \Aimeos\MShop\Catalog\Item\Iface $item, string $parentId = null,
+		string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
 		return $this->getManager()->insert( $item, $parentId, $refId );
 	}
@@ -85,7 +104,8 @@ abstract class Base
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
 	 */
-	public function move( string $id, string $oldParentId, string $newParentId, string $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface
+	public function move( string $id, string $oldParentId = null, string $newParentId = null,
+		string $refId = null ) : \Aimeos\MShop\Catalog\Manager\Iface
 	{
 		$this->getManager()->move( $id, $oldParentId, $newParentId, $refId );
 		return $this;
