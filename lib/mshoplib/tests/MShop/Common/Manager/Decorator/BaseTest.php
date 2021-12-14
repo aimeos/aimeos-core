@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\Controller\Frontend\Attribute\Decorator;
+namespace Aimeos\MShop\Common\Manager\Decorator;
 
 
 class BaseTest extends \PHPUnit\Framework\TestCase
@@ -76,28 +76,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateItem()
-	{
-		$item = \Aimeos\MShop::create( $this->context, 'product' )->create();
-
-		$this->stub->expects( $this->once() )->method( 'create' )
-			->will( $this->returnValue( $item ) );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->create( [] ) );
-	}
-
-
-	public function testCreateSearch()
-	{
-		$filter = \Aimeos\MShop::create( $this->context, 'product' )->filter();
-
-		$this->stub->expects( $this->once() )->method( 'filter' )
-			->will( $this->returnValue( $filter ) );
-
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->filter() );
-	}
-
-
 	public function testFilter()
 	{
 		$filter = \Aimeos\MShop::create( $this->context, 'product' )->filter();
@@ -115,30 +93,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testDeleteItem()
-	{
-		$this->assertSame( $this->object, $this->object->delete( -1 ) );
-	}
-
-
-	public function testDeleteItems()
-	{
-		$this->assertSame( $this->object, $this->object->delete( [-1] ) );
-	}
-
-
 	public function testGet()
-	{
-		$item = \Aimeos\MShop::create( $this->context, 'product' )->create();
-
-		$this->stub->expects( $this->once() )->method( 'get' )
-			->will( $this->returnValue( $item ) );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->get( -1 ) );
-	}
-
-
-	public function testGetItem()
 	{
 		$item = \Aimeos\MShop::create( $this->context, 'product' )->create();
 
@@ -197,19 +152,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 
 	public function testSearch()
-	{
-		$manager = \Aimeos\MShop::create( $this->context, 'product' );
-		$item = $manager->create();
-		$total = 0;
-
-		$this->stub->expects( $this->once() )->method( 'search' )
-			->will( $this->returnValue( map( [$item] ) ) );
-
-		$this->assertEquals( [$item], $this->object->search( $manager->filter(), [], $total )->toArray() );
-	}
-
-
-	public function testSearchItems()
 	{
 		$manager = \Aimeos\MShop::create( $this->context, 'product' );
 		$item = $manager->create();
