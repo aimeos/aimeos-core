@@ -1046,7 +1046,7 @@ class Standard extends Base
 				 * @see mshop/catalog/manager/update-usage/ansi
 				 */
 				$path = 'mshop/catalog/manager/insert-usage';
-				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+				$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 			}
 
 			$idx = 1;

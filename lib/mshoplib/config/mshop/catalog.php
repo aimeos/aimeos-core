@@ -286,7 +286,7 @@ return array(
 		'update-usage' => array(
 			'ansi' => '
 				UPDATE "mshop_catalog"
-				SET "url" = ?, "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?
+				SET :names "url" = ?, "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?
 				WHERE "siteid" = ? AND "id" = ?
 			'
 		),
