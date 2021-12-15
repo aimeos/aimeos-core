@@ -17,7 +17,7 @@ class ErrorlogTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->object = new \Aimeos\MW\Logger\Errorlog( \Aimeos\MW\Logger\Base::DEBUG );
+		$this->object = new \Aimeos\MW\Logger\Errorlog( \Aimeos\MW\Logger\Iface::DEBUG );
 	}
 
 
@@ -34,10 +34,10 @@ class ErrorlogTest extends \PHPUnit\Framework\TestCase
 		ini_set( "error_log", "error.log" );
 
 		$this->object->log( 'error test' );
-		$this->object->log( 'warning test', \Aimeos\MW\Logger\Base::WARN );
-		$this->object->log( 'notice test', \Aimeos\MW\Logger\Base::NOTICE );
-		$this->object->log( 'info test', \Aimeos\MW\Logger\Base::INFO );
-		$this->object->log( 'debug test', \Aimeos\MW\Logger\Base::DEBUG );
+		$this->object->log( 'warning test', \Aimeos\MW\Logger\Iface::WARN );
+		$this->object->log( 'notice test', \Aimeos\MW\Logger\Iface::NOTICE );
+		$this->object->log( 'info test', \Aimeos\MW\Logger\Iface::INFO );
+		$this->object->log( 'debug test', \Aimeos\MW\Logger\Iface::DEBUG );
 		$this->object->log( array( 'scalar', 'test' ) );
 
 		ini_restore( "error_log" );
@@ -54,8 +54,8 @@ class ErrorlogTest extends \PHPUnit\Framework\TestCase
 	{
 		ini_set( "error_log", "error.log" );
 
-		$this->object = new \Aimeos\MW\Logger\Errorlog( \Aimeos\MW\Logger\Base::DEBUG, array( 'test' ) );
-		$this->object->log( 'info test', \Aimeos\MW\Logger\Base::INFO, 'info' );
+		$this->object = new \Aimeos\MW\Logger\Errorlog( \Aimeos\MW\Logger\Iface::DEBUG, array( 'test' ) );
+		$this->object->log( 'info test', \Aimeos\MW\Logger\Iface::INFO, 'info' );
 
 		ini_restore( "error_log" );
 

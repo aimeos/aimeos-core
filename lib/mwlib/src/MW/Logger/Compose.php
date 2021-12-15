@@ -17,8 +17,11 @@ namespace Aimeos\MW\Logger;
  * @package MW
  * @subpackage Logger
  */
-class Compose extends Base implements Iface
+class Compose implements Iface
 {
+	use Traits;
+
+
 	private $loggers;
 
 
@@ -43,7 +46,7 @@ class Compose extends Base implements Iface
 	 * @throws \Aimeos\MW\Logger\Exception If the priority is invalid
 	 * @see \Aimeos\MW\Logger\Base for available log level constants
 	 */
-	public function log( $message, int $prio = Base::ERR, string $facility = 'message' ) : Iface
+	public function log( $message, int $prio = Iface::ERR, string $facility = 'message' ) : Iface
 	{
 		foreach( $this->loggers as $logger ) {
 			$logger->log( $message, $prio, $facility );

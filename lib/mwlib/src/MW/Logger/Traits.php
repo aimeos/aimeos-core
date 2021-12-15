@@ -13,52 +13,140 @@ namespace Aimeos\MW\Logger;
 
 
 /**
- * Generic minimal interface for logging messages
+ * Base logger class defining required error level constants
  *
  * @package MW
  * @subpackage Logger
  */
-interface Iface
+trait Traits
 {
 	/**
-	 * Emergency (0): system is unusable
+	 * Write as message of severity "emergency" to the log.
+	 *
+	 * @param string|array|object $message Message text that should be written to the log facility
+	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
+	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 */
-	const EMERG = 0;
+	public function emergency( $message, string $facility = 'message' ) : Iface
+	{
+		return $this->log( $message, Iface::EMERG, $facility );
+	}
+
 
 	/**
-	 * Alert (1): action must be taken immediately
+	 * Write as message of severity "critical" to the log.
+	 *
+	 * @param string|array|object $message Message text that should be written to the log facility
+	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
+	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 */
-	const ALERT = 1;
+	public function critical( $message, string $facility = 'message' ) : Iface
+	{
+		return $this->log( $message, Iface::CRIT, $facility );
+	}
+
 
 	/**
-	 * Critical (2): critical conditions
+	 * Write as message of severity "alert" to the log.
+	 *
+	 * @param string|array|object $message Message text that should be written to the log facility
+	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
+	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 */
-	const CRIT = 2;
+	public function alert( $message, string $facility = 'message' ) : Iface
+	{
+		return $this->log( $message, Iface::ALERT, $facility );
+	}
+
 
 	/**
-	 * Error (3): error conditions
+	 * Write as message of severity "error" to the log.
+	 *
+	 * @param string|array|object $message Message text that should be written to the log facility
+	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
+	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 */
-	const ERR = 3;
+	public function error( $message, string $facility = 'message' ) : Iface
+	{
+		return $this->log( $message, Iface::ERR, $facility );
+	}
+
 
 	/**
-	 * Warning (4): warning conditions
+	 * Write as message of severity "warning" to the log.
+	 *
+	 * @param string|array|object $message Message text that should be written to the log facility
+	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
+	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 */
-	const WARN = 4;
+	public function warning( $message, string $facility = 'message' ) : Iface
+	{
+		return $this->log( $message, Iface::WARN, $facility );
+	}
+
 
 	/**
-	 * Notice (5): normal but significant condition
+	 * Write as message of severity "notice" to the log.
+	 *
+	 * @param string|array|object $message Message text that should be written to the log facility
+	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
+	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 */
-	const NOTICE = 5;
+	public function notice( $message, string $facility = 'message' ) : Iface
+	{
+		return $this->log( $message, Iface::NOTICE, $facility );
+	}
+
 
 	/**
-	 * Informational (6): informational messages
+	 * Write as message of severity "info" to the log.
+	 *
+	 * @param string|array|object $message Message text that should be written to the log facility
+	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
+	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 */
-	const INFO = 6;
+	public function info( $message, string $facility = 'message' ) : Iface
+	{
+		return $this->log( $message, Iface::INFO, $facility );
+	}
+
 
 	/**
-	 * Debug (7): debug messages
+	 * Write as message of severity "debug" to the log.
+	 *
+	 * @param string|array|object $message Message text that should be written to the log facility
+	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
+	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 */
-	const DEBUG = 7;
+	public function debug( $message, string $facility = 'message' ) : Iface
+	{
+		return $this->log( $message, Iface::DEBUG, $facility );
+	}
+
+
+	/**
+	 * Checks if the given log constant is valid
+	 *
+	 * @param int $level Log constant
+	 * @return mixed Log level
+	 * @throws \Aimeos\MW\Logger\Exception If log constant is unknown
+	 */
+	protected function getLogLevel( int $level )
+	{
+		switch( $level )
+		{
+			case Iface::EMERG: return 'emergency';
+			case Iface::ALERT: return 'alert';
+			case Iface::CRIT: return 'critical';
+			case Iface::ERR: return 'error';
+			case Iface::WARN: return 'warning';
+			case Iface::NOTICE: return 'notice';
+			case Iface::INFO: return 'info';
+			case Iface::DEBUG: return 'debug';
+		}
+
+		throw new \Aimeos\MW\Logger\Exception( sprintf( 'Invalid log level constant "%1$d"', $level ) );
+	}
 
 
 	/**
@@ -69,77 +157,5 @@ interface Iface
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
 	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
 	 */
-	public function log( $message, int $prio = Iface::ERR, string $facility = 'message' ) : Iface;
-
-	/**
-	 * Write as message of severity "emergency" to the log.
-	 *
-	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
-	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
-	 */
-	public function emergency( $message, string $facility = 'message' ) : Iface;
-
-	/**
-	 * Write as message of severity "critical" to the log.
-	 *
-	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
-	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
-	 */
-	public function critical( $message, string $facility = 'message' ) : Iface;
-
-	/**
-	 * Write as message of severity "alert" to the log.
-	 *
-	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
-	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
-	 */
-	public function alert( $message, string $facility = 'message' ) : Iface;
-
-	/**
-	 * Write as message of severity "error" to the log.
-	 *
-	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
-	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
-	 */
-	public function error( $message, string $facility = 'message' ) : Iface;
-
-	/**
-	 * Write as message of severity "warning" to the log.
-	 *
-	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
-	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
-	 */
-	public function warning( $message, string $facility = 'message' ) : Iface;
-
-	/**
-	 * Write as message of severity "notice" to the log.
-	 *
-	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
-	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
-	 */
-	public function notice( $message, string $facility = 'message' ) : Iface;
-
-	/**
-	 * Write as message of severity "info" to the log.
-	 *
-	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
-	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
-	 */
-	public function info( $message, string $facility = 'message' ) : Iface;
-
-	/**
-	 * Write as message of severity "debug" to the log.
-	 *
-	 * @param string|array|object $message Message text that should be written to the log facility
-	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
-	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
-	 */
-	public function debug( $message, string $facility = 'message' ) : Iface;
+	abstract public function log( $message, int $prio = Iface::ERR, string $facility = 'message' ) : Iface;
 }

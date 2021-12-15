@@ -144,7 +144,7 @@ class Xml
 		}
 
 		$msg = sprintf( 'Started order status import from "%1$s"', $location );
-		$logger->log( $msg, \Aimeos\MW\Logger\Base::INFO, 'core/service' );
+		$logger->info( $msg, 'core/service' );
 
 		$files = [];
 
@@ -169,7 +169,7 @@ class Xml
 		}
 
 		$msg = sprintf( 'Finished order status import from "%1$s"', $location );
-		$logger->log( $msg, \Aimeos\MW\Logger\Base::INFO, 'core/service' );
+		$logger->info( $msg, 'core/service' );
 
 		return true;
 	}
@@ -250,7 +250,7 @@ class Xml
 		}
 
 		$msg = sprintf( 'Started order status import from file "%1$s"', $filename );
-		$logger->log( $msg, \Aimeos\MW\Logger\Base::INFO, 'core/service' );
+		$logger->info( $msg, 'core/service' );
 
 		while( $xml->read() === true )
 		{
@@ -272,7 +272,7 @@ class Xml
 		unset( $nodes );
 
 		$msg = sprintf( 'Finished order status import from file "%1$s"', $filename );
-		$logger->log( $msg, \Aimeos\MW\Logger\Base::INFO, 'core/service' );
+		$logger->info( $msg, 'core/service' );
 
 		$backup = $this->getConfigValue( 'xml.backupdir' );
 

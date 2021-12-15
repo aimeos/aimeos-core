@@ -85,7 +85,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
 
 	public function testLogCrit()
 	{
-		$this->object->log( 'critical', \Aimeos\MW\Logger\Base::CRIT );
+		$this->object->log( 'critical', \Aimeos\MW\Logger\Iface::CRIT );
 
 		if( !file_exists( $this->filename ) ) {
 			throw new \RuntimeException( 'No test file found' );
@@ -109,7 +109,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
 
 	public function testLogWarn()
 	{
-		$this->object->log( 'debug', \Aimeos\MW\Logger\Base::WARN );
+		$this->object->log( 'debug', \Aimeos\MW\Logger\Iface::WARN );
 
 		$this->assertFalse( file_exists( $this->filename ) );
 	}
@@ -117,7 +117,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
 
 	public function testFacility()
 	{
-		$this->object->log( 'user auth', \Aimeos\MW\Logger\Base::ERR, 'auth' );
+		$this->object->log( 'user auth', \Aimeos\MW\Logger\Iface::ERR, 'auth' );
 
 		if( !file_exists( $this->filename ) ) {
 			throw new \RuntimeException( 'No test file found' );
@@ -136,8 +136,8 @@ class FileTest extends \PHPUnit\Framework\TestCase
 
 	public function testFacilityLimited()
 	{
-		$this->object = new \Aimeos\MW\Logger\File( $this->filename, \Aimeos\MW\Logger\Base::ERR, array( 'test' ) );
-		$this->object->log( 'user auth', \Aimeos\MW\Logger\Base::ERR, 'auth' );
+		$this->object = new \Aimeos\MW\Logger\File( $this->filename, \Aimeos\MW\Logger\Iface::ERR, array( 'test' ) );
+		$this->object->log( 'user auth', \Aimeos\MW\Logger\Iface::ERR, 'auth' );
 
 		$this->assertFalse( file_exists( $this->filename ) );
 	}

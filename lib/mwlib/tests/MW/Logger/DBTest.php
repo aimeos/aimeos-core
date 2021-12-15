@@ -96,7 +96,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'message', $row['facility'] );
 		$this->assertEquals( 32, strlen( $row['request'] ) );
 		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/', $row['tstamp'] ) );
-		$this->assertEquals( \Aimeos\MW\Logger\Base::ERR, $row['priority'] );
+		$this->assertEquals( \Aimeos\MW\Logger\Iface::ERR, $row['priority'] );
 		$this->assertEquals( 'error', $row['message'] );
 
 
@@ -125,14 +125,14 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'message', $row['facility'] );
 		$this->assertEquals( 32, strlen( $row['request'] ) );
 		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/', $row['tstamp'] ) );
-		$this->assertEquals( \Aimeos\MW\Logger\Base::ERR, $row['priority'] );
+		$this->assertEquals( \Aimeos\MW\Logger\Iface::ERR, $row['priority'] );
 		$this->assertEquals( '["scalar","errortest"]', $row['message'] );
 	}
 
 
 	public function testLogCrit()
 	{
-		$this->object->log( 'critical', \Aimeos\MW\Logger\Base::CRIT );
+		$this->object->log( 'critical', \Aimeos\MW\Logger\Iface::CRIT );
 
 		$conn = self::$dbm->acquire();
 
@@ -147,14 +147,14 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 32, strlen( $row['request'] ) );
 		$this->assertEquals( 1, preg_match( '/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/', $row['tstamp'] ) );
-		$this->assertEquals( \Aimeos\MW\Logger\Base::CRIT, $row['priority'] );
+		$this->assertEquals( \Aimeos\MW\Logger\Iface::CRIT, $row['priority'] );
 		$this->assertEquals( 'critical', $row['message'] );
 	}
 
 
 	public function testLogWarn()
 	{
-		$this->object->log( 'debug', \Aimeos\MW\Logger\Base::WARN );
+		$this->object->log( 'debug', \Aimeos\MW\Logger\Iface::WARN );
 
 		$conn = self::$dbm->acquire();
 
@@ -169,7 +169,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	public function testFacility()
 	{
-		$this->object->log( 'user auth', \Aimeos\MW\Logger\Base::ERR, 'auth' );
+		$this->object->log( 'user auth', \Aimeos\MW\Logger\Iface::ERR, 'auth' );
 
 		$conn = self::$dbm->acquire();
 

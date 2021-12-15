@@ -18,8 +18,11 @@ namespace Aimeos\MW\Logger;
  * @package MW
  * @subpackage Logger
  */
-class File extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
+class File implements \Aimeos\MW\Logger\Iface
 {
+	use Traits;
+
+
 	private $loglevel;
 	private $filename;
 	private $facilities;
@@ -34,7 +37,7 @@ class File extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 	 * @param string[]|null $facilities Facilities for which messages should be logged
 	 * @param string|null $requestid Unique identifier to identify multiple log entries for the same request faster
 	 */
-	public function __construct( string $filename, int $priority = Base::ERR, array $facilities = null, string $requestid = null )
+	public function __construct( string $filename, int $priority = Iface::ERR, array $facilities = null, string $requestid = null )
 	{
 		$this->filename = $filename;
 		$this->loglevel = $priority;
@@ -57,7 +60,7 @@ class File extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 	 * @throws \Aimeos\MW\Logger\Exception If an error occurs in Zend_Log
 	 * @see \Aimeos\MW\Logger\Base for available log level constants
 	 */
-	public function log( $message, int $prio = Base::ERR, string $facility = 'message' ) : Iface
+	public function log( $message, int $prio = Iface::ERR, string $facility = 'message' ) : Iface
 	{
 		if( $prio <= $this->loglevel && ( $this->facilities === null || in_array( $facility, $this->facilities ) ) )
 		{

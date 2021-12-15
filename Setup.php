@@ -114,7 +114,7 @@ class Setup
 		$dbm = new \Aimeos\MW\DB\Manager\DBAL( $conf );
 		$ctx->setDatabaseManager( $dbm );
 
-		$logger = new \Aimeos\MW\Logger\Errorlog( \Aimeos\MW\Logger\Base::INFO );
+		$logger = new \Aimeos\MW\Logger\Errorlog( \Aimeos\MW\Logger\Iface::INFO );
 		$ctx->setLogger( $logger );
 
 		$password = new \Aimeos\MW\Password\Standard();

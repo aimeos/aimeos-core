@@ -539,7 +539,7 @@ class PayPalExpress
 		if( $rvals['ACK'] !== 'Success' )
 		{
 			$msg = 'PayPal Express: method = ' . $method . ', order ID = ' . $orderid . ', response = ' . print_r( $rvals, true );
-			$this->context()->logger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/service/paypalexpress' );
+			$this->context()->logger()->warning( $msg, 'core/service/paypalexpress' );
 
 			if( $rvals['ACK'] !== 'SuccessWithWarning' )
 			{
@@ -622,7 +622,7 @@ class PayPalExpress
 					}
 
 					$str = 'PayPal Express: order ID = ' . $invoice->getId() . ', PENDINGREASON = ' . $response['PENDINGREASON'];
-					$this->context()->logger()->log( $str, \Aimeos\MW\Logger\Base::INFO, 'core/service/paypalexpress' );
+					$this->context()->logger()->info( $str, 'core/service/paypalexpress' );
 				}
 
 				$invoice->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
@@ -656,7 +656,7 @@ class PayPalExpress
 
 			default:
 				$str = 'PayPal Express: order ID = ' . $invoice->getId() . ', response = ' . print_r( $response, true );
-				$this->context()->logger()->log( $str, \Aimeos\MW\Logger\Base::INFO, 'core/service/paypalexpress' );
+				$this->context()->logger()->info( $str, 'core/service/paypalexpress' );
 		}
 
 		return $invoice;

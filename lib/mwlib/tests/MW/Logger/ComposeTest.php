@@ -15,9 +15,9 @@ class ComposeTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$loggers = array(
-			new \Aimeos\MW\Logger\File( 'tmp/error1.log', \Aimeos\MW\Logger\Base::ERR ),
-			new \Aimeos\MW\Logger\File( 'tmp/error2.log', \Aimeos\MW\Logger\Base::INFO, array( 'test' ) ),
-			new \Aimeos\MW\Logger\File( 'tmp/error3.log', \Aimeos\MW\Logger\Base::DEBUG ),
+			new \Aimeos\MW\Logger\File( 'tmp/error1.log', \Aimeos\MW\Logger\Iface::ERR ),
+			new \Aimeos\MW\Logger\File( 'tmp/error2.log', \Aimeos\MW\Logger\Iface::INFO, array( 'test' ) ),
+			new \Aimeos\MW\Logger\File( 'tmp/error3.log', \Aimeos\MW\Logger\Iface::DEBUG ),
 		);
 
 		$this->object = new \Aimeos\MW\Logger\Compose( $loggers );
@@ -36,7 +36,7 @@ class ComposeTest extends \PHPUnit\Framework\TestCase
 
 	public function testLog()
 	{
-		$this->object->log( 'warning test', \Aimeos\MW\Logger\Base::WARN );
+		$this->object->log( 'warning test', \Aimeos\MW\Logger\Iface::WARN );
 
 		$this->assertNotEquals( '', file_get_contents( 'tmp/error3.log' ) );
 	}
@@ -44,7 +44,7 @@ class ComposeTest extends \PHPUnit\Framework\TestCase
 
 	public function testLogFacility()
 	{
-		$this->object->log( 'warning test', \Aimeos\MW\Logger\Base::WARN, 'test' );
+		$this->object->log( 'warning test', \Aimeos\MW\Logger\Iface::WARN, 'test' );
 
 		$this->assertNotEquals( '', file_get_contents( 'tmp/error2.log' ) );
 		$this->assertNotEquals( '', file_get_contents( 'tmp/error3.log' ) );

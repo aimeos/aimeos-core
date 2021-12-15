@@ -707,13 +707,13 @@ class Standard
 					if( ( $row['locale.site.logo'] = json_decode( $logos, true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale_site.logo', $id, $logos );
-						$this->context()->logger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/locale/site' );
+						$this->context()->logger()->warning( $msg, 'core/locale/site' );
 					}
 
 					if( ( $row['locale.site.config'] = json_decode( $config, true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale_site.config', $id, $config );
-						$this->context()->logger()->log( $msg, \Aimeos\MW\Logger\Base::WARN, 'core/locale/site' );
+						$this->context()->logger()->warning( $msg, 'core/locale/site' );
 					}
 
 					if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
@@ -999,7 +999,7 @@ class Standard
 			. 'Class: ' . get_class( $this ) . "\n"
 			. str_replace( ["\t", "\n\n"], ['', "\n"], trim( (string) $stmt ) );
 
-		$this->context()->logger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
+		$this->context()->logger()->debug( $msg, 'core/sql' );
 
 		return $result;
 	}

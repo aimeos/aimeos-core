@@ -18,8 +18,11 @@ namespace Aimeos\MW\Logger;
  * @package MW
  * @subpackage Logger
  */
-class DB extends Base implements Iface
+class DB implements Iface
 {
+	use Traits;
+
+
 	private $stmt;
 	private $loglevel;
 	private $requestid;
@@ -37,7 +40,7 @@ class DB extends Base implements Iface
 	 * @param string[]|null $facilities Facilities for which messages should be logged
 	 * @param string|null $requestid Unique identifier to identify multiple log entries for the same request faster
 	 */
-	public function __construct( \Aimeos\MW\DB\Statement\Iface $stmt, int $loglevel = Base::ERR,
+	public function __construct( \Aimeos\MW\DB\Statement\Iface $stmt, int $loglevel = Iface::ERR,
 		array $facilities = null, string $requestid = null )
 	{
 		$this->stmt = $stmt;
@@ -62,7 +65,7 @@ class DB extends Base implements Iface
 	 * @throws \Aimeos\MW\DB\Exception If an error occurs while adding log message
 	 * @see \Aimeos\MW\Logger\Base for available log level constants
 	 */
-	public function log( $message, int $prio = Base::ERR, string $facility = 'message' ) : Iface
+	public function log( $message, int $prio = Iface::ERR, string $facility = 'message' ) : Iface
 	{
 		if( $prio <= $this->loglevel && ( $this->facilities === null || in_array( $facility, $this->facilities ) ) )
 		{
