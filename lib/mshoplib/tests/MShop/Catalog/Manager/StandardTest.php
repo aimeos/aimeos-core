@@ -98,7 +98,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '~=', 'catalog.config', '{' );
 		$expr[] = $search->compare( '>=', 'catalog.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'catalog.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'catalog.editor', $this->editor );
+		$expr[] = $search->compare( '>=', 'catalog.editor', '' );
 		$expr[] = $search->compare( '>=', 'catalog.target', '' );
 
 		$param = ['media', 'default', $listItem->getRefId()];
@@ -263,18 +263,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetPath()
 	{
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '==', 'catalog.label', 'Kaffee' ),
-			$search->compare( '==', 'catalog.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-
-		$item = $this->object->search( $search, array( 'text' ) )
-			->first( new \RuntimeException( 'Catalog item not found' ) );
-
+		$item = $this->object->find( 'cafe', ['text'] );
 		$items = $this->object->getPath( $item->getId() );
-		$expected = array( 'Root', 'Categories', 'Kaffee' );
+		$expected = ['Root', 'Categories', 'Kaffee'];
 
 		foreach( $items as $item ) {
 			$this->assertEquals( array_shift( $expected ), $item->getLabel() );
