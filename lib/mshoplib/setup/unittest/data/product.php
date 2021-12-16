@@ -567,7 +567,7 @@ return [
 				]],
 				'supplier' => [[
 					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.dateend' => '2100-01-01 00:00:00',
-					'ref' => 'Unit Supplier 001'
+					'product.lists.position' => 0, 'ref' => 'Unit Supplier 001'
 				]],
 				'tag' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'Kaffee',
@@ -747,7 +747,8 @@ return [
 					'product.lists.type' => 'default', 'product.lists.position' => 3, 'ref' => 'IJKL/16 discs',
 				]],
 				'supplier' => [[
-					'product.lists.datestart' => '2010-01-01 00:00:00', 'ref' => 'Unit Supplier 001',
+					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.position' => 1,
+					'ref' => 'Unit Supplier 001',
 				]],
 				'tag' => [[
 					'product.lists.type' => 'default', 'product.lists.position' => 0, 'ref' => 'Expresso'
