@@ -28,13 +28,6 @@ interface Iface
 	public function cache() : \Aimeos\MW\Cache\Iface;
 
 	/**
-	 * Returns the cache object.
-	 *
-	 * @return \Aimeos\MW\Cache\Iface Cache object
-	 */
-	public function getCache() : \Aimeos\MW\Cache\Iface;
-
-	/**
 	 * Sets the cache object.
 	 *
 	 * @param \Aimeos\MW\Cache\Iface $cache Cache object
@@ -50,13 +43,6 @@ interface Iface
 	public function config() : \Aimeos\MW\Config\Iface;
 
 	/**
-	 * Returns the configuration object.
-	 *
-	 * @return \Aimeos\MW\Config\Iface Configuration object
-	 */
-	public function getConfig() : \Aimeos\MW\Config\Iface;
-
-	/**
 	 * Sets the configuration object.
 	 *
 	 * @param \Aimeos\MW\Config\Iface $config Configuration object
@@ -70,13 +56,6 @@ interface Iface
 	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
 	 */
 	public function db() : \Aimeos\MW\DB\Manager\Iface;
-
-	/**
-	 * Returns the database manager object.
-	 *
-	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
-	 */
-	public function getDatabaseManager() : \Aimeos\MW\DB\Manager\Iface;
 
 	/**
 	 * Sets the database connection manager object.
@@ -96,15 +75,6 @@ interface Iface
 	public function datetime() : string;
 
 	/**
-	 * Returns the current date and time
-	 * This is especially useful to share the same request time or if applications
-	 * allow to travel in time.
-	 *
-	 * @return string Current date and time as ISO string (YYYY-MM-DD HH:mm:ss)
-	 */
-	public function getDateTime() : string;
-
-	/**
 	 * Sets the current date and time
 	 *
 	 * @param string $datetime Date and time as ISO string (YYYY-MM-DD HH:mm:ss)
@@ -118,21 +88,6 @@ interface Iface
 	 * @return \Aimeos\MW\Filesystem\Iface File system object
 	 */
 	public function fs( string $resource ) : \Aimeos\MW\Filesystem\Iface;
-
-	/**
-	 * Returns the file system object for the given resource name.
-	 *
-	 * @param string $resource Resource name, e.g. "fs-admin"
-	 * @return \Aimeos\MW\Filesystem\Iface File system object
-	 */
-	public function getFilesystem( string $resource ) : \Aimeos\MW\Filesystem\Iface;
-
-	/**
-	 * Returns the file system manager object.
-	 *
-	 * @return \Aimeos\MW\Filesystem\Manager\Iface File system manager object
-	 */
-	public function getFilesystemManager() : \Aimeos\MW\Filesystem\Manager\Iface;
 
 	/**
 	 * Sets the file system manager object.
@@ -149,14 +104,6 @@ interface Iface
 	 * @return \Aimeos\MW\Translation\Iface Internationalization object
 	 */
 	public function i18n( string $locale = null ) : \Aimeos\MW\Translation\Iface;
-
-	/**
-	 * Returns the translation/internationalization object for the given locale (null for default one).
-	 *
-	 * @param string|null $locale Two letter language ISO code for specific language instead of default one
-	 * @return \Aimeos\MW\Translation\Iface Internationalization object
-	 */
-	public function getI18n( string $locale = null ) : \Aimeos\MW\Translation\Iface;
 
 	/**
 	 * Sets the translation/internationalization objects.
@@ -186,13 +133,6 @@ interface Iface
 	public function locale() : \Aimeos\MShop\Locale\Item\Iface;
 
 	/**
-	 * Returns the localization object.
-	 *
-	 * @return \Aimeos\MShop\Locale\Item\Iface Localization object
-	 */
-	public function getLocale() : \Aimeos\MShop\Locale\Item\Iface;
-
-	/**
 	 * Sets the localization object.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Localization object
@@ -208,13 +148,6 @@ interface Iface
 	public function logger() : \Aimeos\MW\Logger\Iface;
 
 	/**
-	 * Returns the logger object.
-	 *
-	 * @return \Aimeos\MW\Logger\Iface Logger object
-	 */
-	public function getLogger() : \Aimeos\MW\Logger\Iface;
-
-	/**
 	 * Sets the logger object.
 	 *
 	 * @param \Aimeos\MW\Logger\Iface $logger Logger object
@@ -228,13 +161,6 @@ interface Iface
 	 * @return \Aimeos\MW\Mail\Iface Mail object
 	 */
 	public function mail() : \Aimeos\MW\Mail\Iface;
-
-	/**
-	 * Returns the mail object.
-	 *
-	 * @return \Aimeos\MW\Mail\Iface Mail object
-	 */
-	public function getMail() : \Aimeos\MW\Mail\Iface;
 
 	/**
 	 * Sets the mail object.
@@ -267,22 +193,6 @@ interface Iface
 	 * @return \Aimeos\MW\MQueue\Queue\Iface Message queue object
 	 */
 	public function queue( string $resource, string $queue ) : \Aimeos\MW\MQueue\Queue\Iface;
-
-	/**
-	 * Returns the message queue object.
-	 *
-	 * @param string $resource Resource name, e.g. "mq-email"
-	 * @param string $queue Message queue name, e.g. "order/email/payment"
-	 * @return \Aimeos\MW\MQueue\Queue\Iface Message queue object
-	 */
-	public function getMessageQueue( string $resource, string $queue ) : \Aimeos\MW\MQueue\Queue\Iface;
-
-	/**
-	 * Returns the message queue manager object.
-	 *
-	 * @return \Aimeos\MW\MQueue\Manager\Iface Message queue manager object
-	 */
-	public function getMessageQueueManager() : \Aimeos\MW\MQueue\Manager\Iface;
 
 	/**
 	 * Sets the message queue manager object.

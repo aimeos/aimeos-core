@@ -74,7 +74,7 @@ class CatalogAddPerfData extends Base
 					}
 				};
 
-//				$this->context()->getProcess()->start( $fcn, [$parents, $catLabel] );
+//				$this->context()->process()->start( $fcn, [$parents, $catLabel] );
 				$fcn( $parents, $catLabel );
 			}
 		};
