@@ -677,12 +677,10 @@ class Standard
 	 */
 	protected function saveAttributes( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
 	{
-		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->context();
 		$siteid = $context->locale()->getSiteId();
-
-		$products = ( in_array( $item->getType(), ['group', 'select'] ) ? $item->getRefItems( 'product', null, 'default' ) : [] );
-		$products[] = $item;
+		$products = $item->getRefItems( 'product', null, 'default' )->push( $item );
+		$date = date( 'Y-m-d H:i:s' );
 
 		foreach( $products as $product )
 		{

@@ -44,7 +44,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 15, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 4, $result[$item->getId()] );
+		$this->assertEquals( 5, $result[$item->getId()] );
 	}
 
 
@@ -113,7 +113,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $id ) );
 		$result = $this->object->search( $search, [] );
 
-		$this->assertEquals( 3, count( $result ) );
+		$this->assertEquals( 4, count( $result ) );
 	}
 
 
@@ -136,14 +136,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$manager->find( '29', [], 'product', 'width' )->getId()
 		];
 
-		$search = $this->object->filter();
+		$search = $this->object->filter()->order( 'product.code' );
 
 		$func = $search->make( 'index.attribute:allof', [$attrIds] );
 		$search->setConditions( $search->compare( '!=', $func, null ) );
 
 		$result = $this->object->search( $search, [] );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertEquals( 'CNE', $result->first()->getCode() );
 	}
 
@@ -157,10 +157,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$manager->find( '30', [], 'product', 'width' )->getId()
 		];
 
-		$search = $this->object->filter();
+		$search = $this->object->filter()->order( 'product.code' );
 
 		$func = $search->make( 'index.attribute:allof', [$attrIds] );
-		$search->add( $func, '!=', null )->order( 'product.code' );
+		$search->add( $func, '!=', null );
 
 		$result = $this->object->search( $search, [] );
 
@@ -176,15 +176,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$length = $manager->find( '30', [], 'product', 'length' )->getId();
 		$width = $manager->find( '29', [], 'product', 'width' )->getId();
 
-		$search = $this->object->filter();
-		$search->add( [
-			$search->make( 'index.attribute:oneof', [$length] ) => null,
-			$search->make( 'index.attribute:oneof', [$width] ) => null
-		], '!=' );
+		$search = $this->object->filter()->order( 'product.code' );
+		$search->add( [$search->make( 'index.attribute:oneof', [$length, $width] ) => null], '!=' );
 
 		$result = $this->object->search( $search );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 4, count( $result ) );
 		$this->assertEquals( 'CNE', $result->first()->getCode() );
 	}
 
@@ -196,11 +193,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$color = $manager->find( 'white', [], 'product', 'color' )->getId();
 		$size = $manager->find( 'm', [], 'product', 'size' )->getId();
 
-		$search = $this->object->filter();
+		$search = $this->object->filter()->order( 'product.code' );
 		$search->add( [
 			$search->make( 'index.attribute:oneof', [$color] ) => null,
 			$search->make( 'index.attribute:oneof', [$size] ) => null
-		], '!=' )->order( 'product.code' );
+		], '!=' );
 
 		$result = $this->object->search( $search, [] );
 
