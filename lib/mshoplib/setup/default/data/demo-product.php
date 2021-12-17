@@ -934,6 +934,8 @@ return [
 			['stock.stocklevel' => 10, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
+
+	// Voucher product
 	[
 		'product.code' => 'demo-voucher', 'product.type' => 'voucher',
 		'product.label' => 'Demo voucher', 'product.status' => 1,
@@ -1056,6 +1058,220 @@ return [
 			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
 		],
 	],
+
+	// event article
+	[
+		'product.code' => 'demo-event-article', 'product.type' => 'event',
+		'product.label' => 'Demo event article', 'product.status' => 1,
+		'product.datestart' => '2100-01-01 08:00:00', 'product.dateend' => '2100-01-01 16:00:00',
+		'catalog' => [[
+			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 4
+		], [
+			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 7
+		], [
+			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 3
+		]],
+		'text' => [
+			[
+				'text.label' => 'Demo name/de: Demoevent article',
+				'text.content' => 'Demoevent article',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo url/de: Demoevent article',
+				'text.content' => 'Demoevent article',
+				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
+				'text.content' => 'Dies ist die Kurzbeschreibung des Demoevents',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
+				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Demoevents, die gerne etwas länger sein darf.',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+			[
+				'text.label' => 'Demo name/en: Demoevent article',
+				'text.content' => 'Demo event article',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'text.label' => 'Demo short/en: This is the short description',
+				'text.content' => 'This is the short description of the event demo article.',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
+			],
+			[
+				'text.label' => 'Demo long/en: Add a detailed description',
+				'text.content' => 'Add a detailed description of the event demo article that may be a little bit longer.',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
+			],
+			[
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			],
+		],
+		'price' => [
+			[
+				'price.label' => 'Demo: Event article from 1',
+				'price.value' => '49.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'price.label' => 'Demo: Event article from 1',
+				'price.value' => '59.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+		],
+		'media' => [
+			[
+				'media.label' => 'Demo: Bundle article 1.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://aimeos.org/media/default/event-big.jpg',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/event-low.jpg',
+					720 => 'https://aimeos.org/media/default/event-med.jpg',
+					1350 => 'https://aimeos.org/media/default/event-big.jpg',
+				],
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0,
+			],
+		],
+		'stock' => [
+			['stock.stocklevel' => 100, 'stock.type' => 'default', 'stock.dateback' => null],
+		],
+	],
+
+	// group article
+	[
+		'product.code' => 'demo-group-article', 'product.type' => 'group',
+		'product.label' => 'Demo group article', 'product.status' => 1,
+		'catalog' => [[
+			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 5
+		], [
+			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 5
+		], [
+			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 7
+		]],
+		'text' => [
+			[
+				'text.label' => 'Demo name/de: Demo-Gruppenartikel',
+				'text.content' => 'Demo-Gruppenartikel',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo url/de: Demo-Gruppenartikel',
+				'text.content' => 'Demo-Gruppenartikel',
+				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
+				'text.content' => 'Dies ist die Kurzbeschreibung des Demo-Gruppenartikels',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
+				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Gruppenartikels, die gerne etwas länger sein darf.',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			],
+			[
+				'text.label' => 'Demo name/en: Demo group article',
+				'text.content' => 'Demo group article',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			],
+			[
+				'text.label' => 'Demo short/en: This is the short description',
+				'text.content' => 'This is the short description of the group demo article.',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
+			],
+			[
+				'text.label' => 'Demo long/en: Add a detailed description',
+				'text.content' => 'Add a detailed description of the group demo article that may be a little bit longer.',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
+			],
+			[
+				'text.label' => 'Demo meta-description',
+				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
+				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 6
+			],
+		],
+		'price' => [
+			[
+				'price.label' => 'Demo: Event article from 1',
+				'price.value' => '49.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'price.label' => 'Demo: Event article from 1',
+				'price.value' => '59.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+		],
+		'media' => [
+			[
+				'media.label' => 'Demo: Bundle article 1.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://aimeos.org/media/default/product_10_A-big.jpg',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_10_A-low.jpg',
+					720 => 'https://aimeos.org/media/default/product_10_A-med.jpg',
+					1350 => 'https://aimeos.org/media/default/product_10_A-big.jpg',
+				],
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0,
+			],
+			[
+				'media.label' => 'Demo: Bundle article 2.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://aimeos.org/media/default/product_10_B-big.jpg',
+				'media.previews' => [
+					240 => 'https://aimeos.org/media/default/product_10_B-low.jpg',
+					720 => 'https://aimeos.org/media/default/product_10_B-med.jpg',
+					1350 => 'https://aimeos.org/media/default/product_10_B-big.jpg',
+				],
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1,
+			],
+		],
+		'product' => [
+			[
+				'product.code' => 'demo-article',
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+			[
+				'product.code' => 'demo-event-article',
+				'product.lists.type' => 'default', 'product.lists.position' => 1
+			],
+			[
+				'product.code' => 'demo-bundle-article',
+				'product.lists.type' => 'default', 'product.lists.position' => 0
+			],
+		],
+		'stock' => [
+			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
+		],
+	],
+
+	// Rebate product
 	[
 		'product.code' => 'demo-rebate', 'product.type' => 'default',
 		'product.label' => 'Demo rebate', 'product.status' => 1,
@@ -1079,7 +1295,7 @@ return [
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 1
 		], [
-			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 4
+			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 6
 		], [
 			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 4
 		], [
@@ -1176,7 +1392,7 @@ return [
 		'product.code' => 'demo-article-3', 'product.type' => 'default',
 		'product.label' => 'Demo article 3', 'product.status' => 1,
 		'catalog' => [[
-			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 5
+			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 7
 		], [
 			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 2
 		], [
@@ -1368,7 +1584,7 @@ return [
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 5
 		], [
-			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 6
+			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 8
 		], [
 			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 1
 		], [
@@ -1565,7 +1781,7 @@ return [
 		'catalog' => [[
 			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 7
 		], [
-			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 8
+			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 9
 		], [
 			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 3
 		]],
@@ -1645,106 +1861,6 @@ return [
 					240 => 'https://aimeos.org/media/default/product_09_B-low.jpg',
 					720 => 'https://aimeos.org/media/default/product_09_B-med.jpg',
 					1350 => 'https://aimeos.org/media/default/product_09_B-big.jpg',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-		],
-		'stock' => [
-			['stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null],
-		],
-	],
-
-	[
-		'product.code' => 'demo-article-8', 'product.type' => 'default',
-		'product.label' => 'Demo article 8', 'product.status' => 1,
-		'catalog' => [[
-			'catalog.code' => 'home', 'product.lists.type' => 'promotion', 'product.lists.position' => 3,
-			'catalog.code' => 'home', 'product.lists.type' => 'default', 'product.lists.position' => 8
-		], [
-			'catalog.code' => 'demo-best', 'product.lists.type' => 'default', 'product.lists.position' => 7
-		], [
-			'catalog.code' => 'demo-new', 'product.lists.type' => 'default', 'product.lists.position' => 3
-		], [
-			'catalog.code' => 'demo-deals', 'product.lists.type' => 'default', 'product.lists.position' => 1
-		]],
-		'text' => [
-			[
-				'text.label' => 'Demo name/de: Demoartikel', 'text.content' => 'Demoartikel 8',
-				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
-				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 1
-			],
-			[
-				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels, die gerne etwas länger sein darf.',
-				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 2
-			],
-			[
-				'text.label' => 'Demo name/en: Demo article', 'text.content' => 'Demo article 8',
-				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-			[
-				'text.label' => 'Demo short/en: This is the short description',
-				'text.content' => 'This is the short description of the demo article.',
-				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 4
-			],
-			[
-				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.content' => 'Add a detailed description of the demo article that may be a little bit longer.',
-				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 5
-			],
-			[
-				'text.label' => 'Demo meta-description',
-				'text.content' => 'Meta descriptions are important because they are shown in the search engine result page',
-				'text.type' => 'meta-description', 'text.languageid' => null, 'text.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 6
-			],
-		],
-		'price' => [
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '39.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0
-			],
-			[
-				'price.label' => 'Demo: Article from 1',
-				'price.value' => '49.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
-				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 3
-			],
-		],
-		'media' => [
-			[
-				'media.label' => 'Demo: Article 1.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/default/product_10_A-big.jpg',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_10_A-low.jpg',
-					720 => 'https://aimeos.org/media/default/product_10_A-med.jpg',
-					1350 => 'https://aimeos.org/media/default/product_10_A-big.jpg',
-				],
-				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
-				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
-				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1,
-			],
-			[
-				'media.label' => 'Demo: Article 2.jpg', 'media.mimetype' => 'image/jpeg',
-				'media.url' => 'https://aimeos.org/media/default/product_10_B-big.jpg',
-				'media.previews' => [
-					240 => 'https://aimeos.org/media/default/product_10_B-low.jpg',
-					720 => 'https://aimeos.org/media/default/product_10_B-med.jpg',
-					1350 => 'https://aimeos.org/media/default/product_10_B-big.jpg',
 				],
 				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
