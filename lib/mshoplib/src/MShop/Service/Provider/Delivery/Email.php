@@ -135,7 +135,7 @@ class Email
 	{
 		$template = $this->getConfigValue( 'email.template', 'service/provider/delivery/email-body-standard' );
 
-		return $this->context()->getView()
+		return $this->context()->view()
 			->assign( ['orderItems' => $orderItems, 'baseItems' => $baseItems] )
 			->render( $template );
 	}
@@ -151,7 +151,7 @@ class Email
 	{
 		$template = $this->getConfigValue( 'email.order-template', 'service/provider/delivery/email-order-standard' );
 
-		return $this->context()->getView()
+		return $this->context()->view()
 			->assign( ['orderItems' => $orderItems, 'baseItems' => $baseItems] )
 			->render( $template );
 	}
