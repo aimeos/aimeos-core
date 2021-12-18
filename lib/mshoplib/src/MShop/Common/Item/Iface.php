@@ -119,7 +119,7 @@ interface Iface
 	 *
 	 * @return string|null User code of user who created/modified the item at last
 	 */
-	public function getEditor() : string;
+	public function editor() : string;
 
 	/**
 	 * Returns the item type

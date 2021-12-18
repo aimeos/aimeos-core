@@ -586,7 +586,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getDateVerified() );
 			$stmt->bind( $idx++, $item->getPassword() );
 			$stmt->bind( $idx++, $date ); // Modification time
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {

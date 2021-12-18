@@ -737,7 +737,7 @@ class Standard
 			$stmt->bind( $idx++, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getBirthday() );
 			$stmt->bind( $idx++, $date );
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {

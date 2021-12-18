@@ -227,7 +227,7 @@ abstract class Base
 			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); //mtime
-			$stmt->bind( $idx++, $this->context()->getEditor() );
+			$stmt->bind( $idx++, $this->context()->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 

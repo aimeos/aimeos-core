@@ -285,7 +285,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSetEditor()
 	{
-		$this->assertEquals( '', $this->object->getEditor() );
+		$this->assertEquals( '', $this->object->editor() );
 
 		$return = $this->object->setEditor( 'testuser' );
 

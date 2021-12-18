@@ -226,7 +226,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			// code and ID are identical after saving and ID is the flag to detect updates or inserts
 			$stmt->bind( $idx++, $item->getCode() );
 

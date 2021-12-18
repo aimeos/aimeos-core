@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unittest', $this->object->getEditor() );
+		$this->assertEquals( 'unittest', $this->object->editor() );
 	}
 
 

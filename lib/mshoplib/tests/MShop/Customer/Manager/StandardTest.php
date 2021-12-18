@@ -19,7 +19,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelperMShop::context()->getEditor();
+		$this->editor = \TestHelperMShop::context()->editor();
 		$this->object = new \Aimeos\MShop\Customer\Manager\Standard( \TestHelperMShop::context() );
 
 		$this->fixture = array(
@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '10.0', $payAddr->getLongitude() );
 		$this->assertEquals( '50.0', $payAddr->getLatitude() );
 		$this->assertEquals( 1, $actual->getStatus() );
-		$this->assertEquals( 'core:lib/mshoplib', $actual->getEditor() );
+		$this->assertEquals( 'core:lib/mshoplib', $actual->editor() );
 
 		$this->assertEquals( $expected, $actual );
 		$this->assertEquals( 1, count( $actual->getListItems( 'text', null, null, false ) ) );
@@ -198,7 +198,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getGroups(), $itemSaved->getGroups() );
 		$this->assertEquals( $itemSaved->getPaymentAddress()->getId(), $itemSaved->getId() );
 
-		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -211,7 +211,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getGroups(), $itemUpd->getGroups() );
 		$this->assertEquals( $itemUpd->getPaymentAddress()->getId(), $itemUpd->getId() );
 
-		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 

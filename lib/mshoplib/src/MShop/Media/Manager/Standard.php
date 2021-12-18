@@ -465,7 +465,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getDomain() );
 			$stmt->bind( $idx++, json_encode( $item->getPreviews(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $date ); // mtime
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {

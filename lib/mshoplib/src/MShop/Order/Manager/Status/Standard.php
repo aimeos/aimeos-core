@@ -308,7 +308,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getType() );
 			$stmt->bind( $idx++, $item->getValue() );
 			$stmt->bind( $idx++, $date ); //mtime
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {

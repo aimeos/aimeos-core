@@ -169,7 +169,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->editor() );
 	}
 
 
@@ -220,7 +220,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getDateBack(), $arrayObject['stock.dateback'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['stock.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['stock.mtime'] );
-		$this->assertEquals( $this->object->getEditor(), $arrayObject['stock.editor'] );
+		$this->assertEquals( $this->object->editor(), $arrayObject['stock.editor'] );
 	}
 
 

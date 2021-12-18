@@ -334,7 +334,7 @@ class Standard
 	 *
 	 * @return string Editor who created/modified the item at last
 	 */
-	public function getEditor() : string
+	public function editor() : string
 	{
 		return (string) $this->node->editor;
 	}
@@ -548,7 +548,7 @@ class Standard
 			$list['catalog.parentid'] = $this->getParentId();
 			$list['catalog.ctime'] = $this->getTimeCreated();
 			$list['catalog.mtime'] = $this->getTimeModified();
-			$list['catalog.editor'] = $this->getEditor();
+			$list['catalog.editor'] = $this->editor();
 		}
 
 		return $list;

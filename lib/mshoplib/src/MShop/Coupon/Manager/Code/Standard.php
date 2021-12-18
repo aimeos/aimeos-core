@@ -475,7 +475,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getCount(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getRef() );
 			$stmt->bind( $idx++, $date ); // mtime
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
@@ -830,7 +830,7 @@ class Standard
 
 			$stmt->bind( 1, $amount, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); // mtime
-			$stmt->bind( 3, $context->getEditor() );
+			$stmt->bind( 3, $context->editor() );
 			$stmt->bind( 4, $code );
 
 			$stmt->execute()->finish();

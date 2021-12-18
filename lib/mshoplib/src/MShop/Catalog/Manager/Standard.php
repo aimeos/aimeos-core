@@ -1059,7 +1059,7 @@ class Standard extends Base
 			$stmt->bind( $idx++, $item->getUrl() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
 			$stmt->bind( $idx++, $date ); // mtime
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $item->getTarget() );
 
 			if( $case !== true )

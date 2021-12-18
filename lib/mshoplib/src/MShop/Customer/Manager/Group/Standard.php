@@ -354,7 +354,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, $date ); // mtime
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {

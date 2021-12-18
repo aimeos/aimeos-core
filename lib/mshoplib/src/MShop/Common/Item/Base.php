@@ -298,7 +298,7 @@ abstract class Base
 	 *
 	 * @return string Name of editor who created/modified the item at last
 	 */
-	public function getEditor() : string
+	public function editor() : string
 	{
 		return $this->get( $this->prefix . 'editor', $this->get( 'editor', '' ) );
 	}
@@ -393,7 +393,7 @@ abstract class Base
 			$list[$this->prefix . 'siteid'] = $this->getSiteId();
 			$list[$this->prefix . 'ctime'] = $this->getTimeCreated();
 			$list[$this->prefix . 'mtime'] = $this->getTimeModified();
-			$list[$this->prefix . 'editor'] = $this->getEditor();
+			$list[$this->prefix . 'editor'] = $this->editor();
 		}
 
 		foreach( $this->bdata as $key => $value )

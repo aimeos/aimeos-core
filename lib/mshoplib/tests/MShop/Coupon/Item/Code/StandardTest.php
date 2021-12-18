@@ -192,7 +192,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->editor() );
 	}
 
 
@@ -238,7 +238,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getParentId(), $arrayObject['coupon.code.parentid'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['coupon.code.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['coupon.code.mtime'] );
-		$this->assertEquals( $this->object->getEditor(), $arrayObject['coupon.code.editor'] );
+		$this->assertEquals( $this->object->editor(), $arrayObject['coupon.code.editor'] );
 		$this->assertEquals( $this->object->getRef(), $arrayObject['coupon.code.ref'] );
 	}
 

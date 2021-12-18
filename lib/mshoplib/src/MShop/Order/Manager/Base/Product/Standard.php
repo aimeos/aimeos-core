@@ -829,7 +829,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getStatusDelivery(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $item->getTarget() );
 			$stmt->bind( $idx++, $item->getQuantityOpen() );
 			$stmt->bind( $idx++, $item->getNotes() );

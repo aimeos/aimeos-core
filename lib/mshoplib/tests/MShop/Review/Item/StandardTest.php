@@ -126,7 +126,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->editor() );
 	}
 
 
@@ -337,7 +337,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getStatus(), $list['review.status'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $list['review.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $list['review.mtime'] );
-		$this->assertEquals( $this->object->getEditor(), $list['review.editor'] );
+		$this->assertEquals( $this->object->editor(), $list['review.editor'] );
 
 		$list = $this->object->toArray();
 		$this->assertEquals( $this->object->getTimeCreated(), $list['review.ctime'] );

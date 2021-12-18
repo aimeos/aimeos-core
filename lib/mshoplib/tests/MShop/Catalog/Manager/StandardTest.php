@@ -18,7 +18,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelperMShop::context()->getEditor();
+		$this->editor = \TestHelperMShop::context()->editor();
 		$this->object = new \Aimeos\MShop\Catalog\Manager\Standard( \TestHelperMShop::context() );
 	}
 
@@ -305,7 +305,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 		$this->assertEquals( $item->getTarget(), $itemSaved->getTarget() );
 
-		$this->assertEquals( $context->getEditor(), $itemSaved->getEditor() );
+		$this->assertEquals( $context->editor(), $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -316,7 +316,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 		$this->assertEquals( $itemExp->getTarget(), $itemUpd->getTarget() );
 
-		$this->assertEquals( $context->getEditor(), $itemUpd->getEditor() );
+		$this->assertEquals( $context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 

@@ -200,7 +200,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetEditor()
 	{
-		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
+		$this->assertEquals( 'unitTestUser', $this->object->editor() );
 	}
 
 
@@ -248,7 +248,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['locale.status'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['locale.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['locale.mtime'] );
-		$this->assertEquals( $this->object->getEditor(), $arrayObject['locale.editor'] );
+		$this->assertEquals( $this->object->editor(), $arrayObject['locale.editor'] );
 	}
 
 

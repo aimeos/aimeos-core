@@ -317,7 +317,7 @@ class Standard
 			$stmt->bind( $idx++, json_encode( $item->getLogos(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $item->getSupplierId() );
 			$stmt->bind( $idx++, $item->getTheme() );
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, date( 'Y-m-d H:i:s' ) ); // mtime
 			$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
@@ -890,7 +890,7 @@ class Standard
 			$stmt->bind( $idx++, json_encode( $item->getLogos(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $item->getSupplierId() );
 			$stmt->bind( $idx++, $item->getTheme() );
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $date ); // ctime
 

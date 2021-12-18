@@ -688,7 +688,7 @@ class Standard extends Base
 			$stmt->bind( $idx++, $item->getCustomerReference() );
 			$stmt->bind( $idx++, $item->getComment() );
 			$stmt->bind( $idx++, $date ); // mtime
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $localeItem->getSiteId() );
 
 			if( $id !== null ) {

@@ -739,7 +739,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getDateEnd() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
 			$stmt->bind( $idx++, $item->getTarget() );
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $item->getTimeCreated() ?: $date );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );

@@ -141,7 +141,7 @@ abstract class Base
 			$stmt->bind( $idx++, $item->getLanguageId() );
 			$stmt->bind( $idx++, $item->getValue() );
 			$stmt->bind( $idx++, $date ); //mtime
-			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {

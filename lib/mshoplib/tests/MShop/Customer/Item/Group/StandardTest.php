@@ -133,6 +133,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getLabel(), $list['customer.group.label'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $list['customer.group.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $list['customer.group.mtime'] );
-		$this->assertEquals( $this->object->getEditor(), $list['customer.group.editor'] );
+		$this->assertEquals( $this->object->editor(), $list['customer.group.editor'] );
 	}
 }

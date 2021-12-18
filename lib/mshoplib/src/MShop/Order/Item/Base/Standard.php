@@ -200,7 +200,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @return string Editorcode of editor who created/modified the item at last
 	 */
-	public function getEditor() : string
+	public function editor() : string
 	{
 		return $this->get( 'order.base.editor', '' );
 	}
@@ -424,7 +424,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 			$list['order.base.siteid'] = $this->getSiteId();
 			$list['order.base.mtime'] = $this->getTimeModified();
 			$list['order.base.ctime'] = $this->getTimeCreated();
-			$list['order.base.editor'] = $this->getEditor();
+			$list['order.base.editor'] = $this->editor();
 		}
 
 		return $list;
