@@ -67,7 +67,7 @@ abstract class Base
 	public function getSession( string $type = 'default' ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$context = $this->context();
-		$session = $context->getSession();
+		$session = $context->session();
 		$locale = $context->locale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
@@ -103,7 +103,7 @@ abstract class Base
 	public function getSessionLock( string $type = 'default' ) : int
 	{
 		$context = $this->context();
-		$session = $context->getSession();
+		$session = $context->session();
 		$locale = $context->locale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
@@ -128,7 +128,7 @@ abstract class Base
 	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, string $type = 'default' ) : \Aimeos\MShop\Order\Manager\Base\Iface
 	{
 		$context = $this->context();
-		$session = $context->getSession();
+		$session = $context->session();
 		$locale = $context->locale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
@@ -158,7 +158,7 @@ abstract class Base
 		$this->checkLock( $lock );
 
 		$context = $this->context();
-		$session = $context->getSession();
+		$session = $context->session();
 		$locale = $context->locale();
 		$currency = $locale->getCurrencyId();
 		$language = $locale->getLanguageId();
