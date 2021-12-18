@@ -30,7 +30,7 @@ class Standard
 	 */
 	public function transform( string $file, array $params = [] ) : string
 	{
-		$view = clone $this->getView();
+		$view = clone $this->view();
 		$view->assign( $params );
 
 		return $view->render( $file );

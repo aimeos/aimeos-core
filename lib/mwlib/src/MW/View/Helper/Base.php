@@ -78,7 +78,7 @@ abstract class Base
 	 *
 	 * @return \Aimeos\MW\View\Iface View object
 	 */
-	protected function getView() : \Aimeos\MW\View\Iface
+	protected function view() : \Aimeos\MW\View\Iface
 	{
 		return $this->view;
 	}

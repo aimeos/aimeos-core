@@ -64,7 +64,7 @@ class Standard
 	protected function baseurl( string $fsname ) : string
 	{
 		if( !isset( $this->baseurls[$fsname] ) ) {
-			$this->baseurls[$fsname] = rtrim( $this->getView()->config( 'resource/' . $fsname . '/baseurl' ), '/' );
+			$this->baseurls[$fsname] = rtrim( $this->view()->config( 'resource/' . $fsname . '/baseurl' ), '/' );
 		}
 
 		return $this->baseurls[$fsname];

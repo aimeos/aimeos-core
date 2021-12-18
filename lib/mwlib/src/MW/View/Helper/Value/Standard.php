@@ -31,7 +31,7 @@ class Standard
 	 */
 	public function transform( $values, $key, $default = null )
 	{
-		$values = (array) ( is_string( $values ) ? $this->getView()->get( $values, [] ) : $values );
+		$values = (array) ( is_string( $values ) ? $this->view()->get( $values, [] ) : $values );
 
 		foreach( explode( '/', trim( $key, '/' ) ) as $part )
 		{

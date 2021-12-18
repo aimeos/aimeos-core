@@ -31,7 +31,7 @@ class Standard
 	public function transform( array $images, $fsname = 'fs-media' ) : string
 	{
 		$srcset = [];
-		$view = $this->getView();
+		$view = $this->view();
 
 		foreach( $images as $type => $path ) {
 			$srcset[] = $view->content( $path, $fsname ) . ' ' . $type . 'w';

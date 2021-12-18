@@ -31,7 +31,7 @@ class Standard
 	 */
 	public function transform( string $cfgkey, array $params = [], array $fragments = [] ) : string
 	{
-		$view = $this->getView();
+		$view = $this->view();
 		$list = \Aimeos\Map::explode( '/', $cfgkey )->skip( 2 );
 
 		$target = $view->config( $cfgkey . '/target' );
