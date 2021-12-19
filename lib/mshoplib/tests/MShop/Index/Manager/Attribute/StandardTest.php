@@ -40,11 +40,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop::create( $this->context, 'attribute' )->find( 'white', [], 'product', 'color' );
 
 		$search = $this->object->filter( true );
-		$result = $this->object->aggregate( $search, 'index.attribute.id' )->toArray();
+		$result = $this->object->aggregate( $search, 'index.attribute.id' );
 
-		$this->assertEquals( 15, count( $result ) );
-		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 5, $result[$item->getId()] );
+		$this->assertEquals( 15, $result->count() );
+		$this->assertEquals( 5, $result->get( $item->getId() ) );
+	}
+
+
+	public function testAggregateMultiple()
+	{
+		$item = \Aimeos\MShop::create( $this->context, 'attribute' )->find( 'white', [], 'product', 'color' );
+
+		$search = $this->object->filter( true );
+		$result = $this->object->aggregate( $search, ['product.status', 'index.attribute.id'] );
+
+		$this->assertEquals( 15, count( $result[1] ) );
+		$this->assertEquals( 5, $result[1][$item->getId()] );
 	}
 
 
