@@ -63,8 +63,6 @@ class AttributeAddTestData extends BaseAddTestData
 	protected function process( array $testdata )
 	{
 		$manager = $this->getManager( 'attribute' );
-		$listManager = $manager->getSubManager( 'lists' );
-		$propManager = $manager->getSubManager( 'property' );
 
 		$manager->begin();
 
@@ -73,8 +71,8 @@ class AttributeAddTestData extends BaseAddTestData
 		foreach( $testdata['attribute'] as $entry )
 		{
 			$item = $manager->create()->fromArray( $entry );
-			$item = $this->addListData( $listManager, $item, $entry );
-			$item = $this->addPropertyData( $propManager, $item, $entry );
+			$item = $this->addListData( $manager, $item, $entry );
+			$item = $this->addPropertyData( $manager, $item, $entry );
 
 			$manager->save( $item );
 		}

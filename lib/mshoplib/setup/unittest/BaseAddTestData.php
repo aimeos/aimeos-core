@@ -36,17 +36,17 @@ class BaseAddTestData extends Base
 	/**
 	 * Adds the property test data
 	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $addrManager Address manager object
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @param \Aimeos\MShop\Common\Item\AddressRef\Iface $item Item object
 	 * @param array $data Associative list of key/list pairs
 	 * @return \Aimeos\MShop\Common\Item\Iface Modified item object
 	 */
-	protected function addAddressData( \Aimeos\MShop\Common\Manager\Iface $addrManager, \Aimeos\MShop\Common\Item\AddressRef\Iface $item, array $data )
+	protected function addAddressData( \Aimeos\MShop\Common\Manager\Iface $manager, \Aimeos\MShop\Common\Item\AddressRef\Iface $item, array $data )
 	{
 		if( isset( $data['address'] ) )
 		{
 			foreach( $data['address'] as $entry ) {
-				$item->addAddressItem( $addrManager->create()->fromArray( $entry ) );
+				$item->addAddressItem( $manager->createAddressItem()->fromArray( $entry ) );
 			}
 		}
 
@@ -57,36 +57,36 @@ class BaseAddTestData extends Base
 	/**
 	 * Adds the list test data
 	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $listManager List manager object
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface $item Item object
 	 * @param array $data List of key/list pairs lists
 	 * @return \Aimeos\MShop\Common\Item\Iface Modified item object
 	 */
-	protected function addListData( \Aimeos\MShop\Common\Manager\Iface $listManager, \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $data )
+	protected function addListData( \Aimeos\MShop\Common\Manager\Iface $manager, \Aimeos\MShop\Common\Item\ListsRef\Iface $item, array $data )
 	{
 		if( isset( $data['lists'] ) )
 		{
 			foreach( $data['lists'] as $domain => $entries )
 			{
-				$manager = $this->getManager( $domain );
+				$refManager = $this->getManager( $domain );
 				$refItems = $this->getRefItems( $domain );
 
 				foreach( $entries as $entry )
 				{
-					$listItem = $listManager->create()->fromArray( $entry, true );
+					$listItem = $manager->createListItem()->fromArray( $entry, true );
 
 					if( isset( $entry['ref'] ) && isset( $refItems[$entry['ref']] ) ) {
 						$refItem = $refItems[$entry['ref']];
 					} else {
-						$refItem = $manager->create()->fromArray( $entry, true );
+						$refItem = $refManager->create()->fromArray( $entry, true );
 					}
 
 					if( $refItem instanceof \Aimeos\MShop\Common\Item\ListsRef\Iface ) {
-						$refItem = $this->addListData( $manager->getSubManager( 'lists' ), $refItem, $entry );
+						$refItem = $this->addListData( $refManager, $refItem, $entry );
 					}
 
 					if( $refItem instanceof \Aimeos\MShop\Common\Item\PropertyRef\Iface ) {
-						$refItem = $this->addPropertyData( $manager->getSubManager( 'property' ), $refItem, $entry );
+						$refItem = $this->addPropertyData( $refManager, $refItem, $entry );
 					}
 
 					$item->addListItem( $domain, $listItem, $refItem );
@@ -101,17 +101,17 @@ class BaseAddTestData extends Base
 	/**
 	 * Adds the property test data
 	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $propManager Property manager object
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @param \Aimeos\MShop\Common\Item\PropertyRef\Iface $item Item object
 	 * @param array $data List of key/list pairs lists
 	 * @return \Aimeos\MShop\Common\Item\Iface Modified item object
 	 */
-	protected function addPropertyData( \Aimeos\MShop\Common\Manager\Iface $propManager, \Aimeos\MShop\Common\Item\PropertyRef\Iface $item, array $data )
+	protected function addPropertyData( \Aimeos\MShop\Common\Manager\Iface $manager, \Aimeos\MShop\Common\Item\PropertyRef\Iface $item, array $data )
 	{
 		if( isset( $data['property'] ) )
 		{
 			foreach( $data['property'] as $entry ) {
-				$item->addPropertyItem( $propManager->create()->fromArray( $entry ) );
+				$item->addPropertyItem( $manager->createPropertyItem()->fromArray( $entry ) );
 			}
 		}
 

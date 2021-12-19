@@ -52,10 +52,7 @@ class CustomerAddTestData extends BaseAddTestData
 		}
 
 		$manager = $this->getManager( 'customer' );
-		$listManager = $manager->getSubManager( 'lists' );
 		$groupManager = $manager->getSubManager( 'group' );
-		$addrManager = $manager->getSubManager( 'address' );
-		$propManager = $manager->getSubManager( 'property' );
 
 		$manager->begin();
 
@@ -67,9 +64,9 @@ class CustomerAddTestData extends BaseAddTestData
 		{
 			$item = $manager->create()->fromArray( $entry, true );
 			$item = $this->addGroupData( $groupManager, $item, $entry );
-			$item = $this->addPropertyData( $propManager, $item, $entry );
-			$item = $this->addAddressData( $addrManager, $item, $entry );
-			$items[] = $this->addListData( $listManager, $item, $entry );
+			$item = $this->addPropertyData( $manager, $item, $entry );
+			$item = $this->addAddressData( $manager, $item, $entry );
+			$items[] = $this->addListData( $manager, $item, $entry );
 		}
 
 		$manager->save( $items );

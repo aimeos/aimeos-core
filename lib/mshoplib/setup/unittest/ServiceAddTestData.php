@@ -63,7 +63,6 @@ class ServiceAddTestData extends BaseAddTestData
 	protected function process( array $testdata )
 	{
 		$manager = $this->getManager( 'service' );
-		$listManager = $manager->getSubManager( 'lists' );
 
 		$manager->begin();
 
@@ -72,7 +71,7 @@ class ServiceAddTestData extends BaseAddTestData
 		foreach( $testdata['service'] as $entry )
 		{
 			$item = $manager->create()->fromArray( $entry );
-			$item = $this->addListData( $listManager, $item, $entry );
+			$item = $this->addListData( $manager, $item, $entry );
 
 			$manager->save( $item );
 		}

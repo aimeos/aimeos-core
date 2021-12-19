@@ -78,8 +78,6 @@ class SupplierAddTestData extends BaseAddTestData
 	protected function process( array $testdata )
 	{
 		$manager = $this->getManager( 'supplier' );
-		$listManager = $manager->getSubManager( 'lists' );
-		$addrManager = $manager->getSubManager( 'address' );
 
 		$manager->begin();
 		$this->storeTypes( $testdata, ['supplier/lists/type'] );
@@ -88,8 +86,8 @@ class SupplierAddTestData extends BaseAddTestData
 		foreach( $testdata['supplier'] ?? [] as $entry )
 		{
 			$item = $manager->create()->fromArray( $entry );
-			$item = $this->addListData( $listManager, $item, $entry );
-			$item = $this->addAddressData( $addrManager, $item, $entry );
+			$item = $this->addListData( $manager, $item, $entry );
+			$item = $this->addAddressData( $manager, $item, $entry );
 
 			$manager->save( $item );
 		}

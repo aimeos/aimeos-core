@@ -82,7 +82,6 @@ class CatalogAddTestData extends BaseAddTestData
 	protected function process( array $testdata, $parentId = null )
 	{
 		$manager = $this->getManager( 'catalog' );
-		$listManager = $manager->getSubManager( 'lists' );
 
 		$manager->begin();
 		$this->storeTypes( $testdata, ['catalog/type', 'catalog/lists/type'] );
@@ -91,7 +90,7 @@ class CatalogAddTestData extends BaseAddTestData
 		foreach( $testdata['catalog'] as $entry )
 		{
 			$item = $manager->create()->fromArray( $entry );
-			$item = $this->addListData( $listManager, $item, $entry );
+			$item = $this->addListData( $manager, $item, $entry );
 
 			$id = $manager->insert( $item, $parentId )->getId();
 

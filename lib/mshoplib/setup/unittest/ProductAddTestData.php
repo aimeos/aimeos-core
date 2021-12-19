@@ -78,8 +78,6 @@ class ProductAddTestData extends BaseAddTestData
 	protected function process( array $testdata )
 	{
 		$manager = $this->getManager( 'product' );
-		$listManager = $manager->getSubManager( 'lists' );
-		$propManager = $manager->getSubManager( 'property' );
 
 		$manager->begin();
 		$this->storeTypes( $testdata, ['product/type', 'product/lists/type', 'product/property/type'] );
@@ -88,8 +86,8 @@ class ProductAddTestData extends BaseAddTestData
 		foreach( $testdata['product'] as $entry )
 		{
 			$item = $manager->create()->fromArray( $entry );
-			$item = $this->addListData( $listManager, $item, $entry );
-			$item = $this->addPropertyData( $propManager, $item, $entry );
+			$item = $this->addListData( $manager, $item, $entry );
+			$item = $this->addPropertyData( $manager, $item, $entry );
 
 			$manager->save( $item );
 		}
