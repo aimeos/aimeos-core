@@ -696,16 +696,8 @@ class Standard
 	 */
 	protected function saveTexts( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
 	{
-		$config = $this->context()->config();
 		$texts = [];
-
-		foreach( $item->getRefItems( 'text', 'url', 'default' ) as $text ) {
-			$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Str::slug( $text->getContent() );
-		}
-
-		foreach( $item->getRefItems( 'text', 'name', 'default' ) as $text ) {
-			$texts[$text->getLanguageId()]['name'] = $text->getContent();
-		}
+		$config = $this->context()->config();
 
 		/** mshop/index/manager/text/types
 		 * List of text types that should be added to the product index
@@ -736,8 +728,15 @@ class Standard
 		 */
 		$attrTypes = $config->get( 'mshop/index/manager/text/attribute-types', ['variant', 'default'] );
 
-		$products = ( $item->getType() === 'select' ? $item->getRefItems( 'product', null, 'default' ) : [] );
-		$products[] = $item;
+		foreach( $item->getRefItems( 'text', 'url', 'default' ) as $text ) {
+			$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Str::slug( $text->getContent() );
+		}
+
+		foreach( $item->getRefItems( 'text', 'name', 'default' ) as $text ) {
+			$texts[$text->getLanguageId()]['name'] = $text->getContent();
+		}
+
+		$products = $item->getRefItems( 'product', null, 'default' )->push( $item );
 
 		foreach( $products as $product )
 		{
