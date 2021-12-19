@@ -739,12 +739,6 @@ return [
 					'product.lists.type' => 'bought-together', 'product.lists.position' => 0, 'ref' => 'Cafe Noire Cappuccino',
 				], [
 					'product.lists.type' => 'suggestion', 'product.lists.position' => 0, 'ref' => 'Cafe Noire Cappuccino',
-				], [
-					'product.lists.type' => 'default', 'product.lists.position' => 1, 'ref' => 'ABCD/16 discs',
-				], [
-					'product.lists.type' => 'default', 'product.lists.position' => 2, 'ref' => 'EFGH/16 discs',
-				], [
-					'product.lists.type' => 'default', 'product.lists.position' => 3, 'ref' => 'IJKL/16 discs',
 				]],
 				'supplier' => [[
 					'product.lists.datestart' => '2010-01-01 00:00:00', 'product.lists.position' => 1,

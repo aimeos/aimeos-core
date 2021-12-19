@@ -101,11 +101,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItemDeep()
 	{
-		$item = $this->object->find( 'CNE', ['attribute', 'product'] );
+		$item = $this->object->find( 'U:BUNDLE', ['attribute', 'product'] );
 		$products = $item->getRefItems( 'product' );
 		$product = $products->first();
 
-		$this->assertEquals( 4, count( $products ) );
+		$this->assertEquals( 2, count( $products ) );
 		$this->assertEquals( 'CNC', $product->getCode() );
 		$this->assertEquals( 1, count( $product->getRefItems( 'attribute' ) ) );
 	}
@@ -113,8 +113,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testFindItemDomainFilter()
 	{
-		$item = $this->object->find( 'CNE', ['product' => ['default']] );
-		$this->assertEquals( 3, count( $item->getListItems( 'product' ) ) );
+		$item = $this->object->find( 'U:BUNDLE', ['product' => ['default']] );
+		$this->assertEquals( 2, count( $item->getListItems( 'product' ) ) );
 	}
 
 

@@ -72,7 +72,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter( true )->add( ['index.catalog.id' => null], '!=' );
 		$result = $this->object->aggregate( $search, 'index.attribute.id' )->toArray();
 
-		$this->assertEquals( 15, count( $result ) );
+		$this->assertEquals( 14, count( $result ) );
 		$this->assertArrayHasKey( $id, $result );
 		$this->assertEquals( 4, $result[$id] );
 	}
@@ -86,7 +86,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter( true )->add( ['index.catalog.id' => null], '!=' );
 		$result = $this->object->aggregate( $search, ['product.status', 'index.attribute.id'] )->toArray();
 
-		$this->assertEquals( 15, count( $result[1] ) );
+		$this->assertEquals( 14, count( $result[1] ) );
 		$this->assertArrayHasKey( $id, $result[1] );
 		$this->assertEquals( 4, $result[1][$id] );
 	}
@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$cntPrice = $this->getValue( $dbm, $sqlPrice, 'count', $siteId, $item->getId() );
 		$cntText = $this->getValue( $dbm, $sqlText, 'count', $siteId, $item->getId() );
 
-		$this->assertEquals( 8, $cntAttribute );
+		$this->assertEquals( 6, $cntAttribute );
 		$this->assertEquals( 5, $cntCatalog );
 		$this->assertEquals( 1, $cntPrice );
 		$this->assertEquals( 2, $cntText );
