@@ -89,7 +89,7 @@ class OrderCheck
 		$context = $this->context();
 		$config = $this->getServiceItem()->getConfig();
 
-		if( ( $customerId = $context->getUserId() ) === null ) {
+		if( ( $customerId = $context->user() ) === null ) {
 			return false;
 		}
 

@@ -334,7 +334,7 @@ class Standard
 		if( $default !== false )
 		{
 			$search->setConditions( $search->and( [
-				$search->compare( '==', 'order.base.customerid', $context->getUserId() ),
+				$search->compare( '==', 'order.base.customerid', $context->user() ),
 				$search->getConditions()
 			] ) );
 		}

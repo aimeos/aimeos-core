@@ -180,7 +180,7 @@ class Autofill
 		$services = $order->getServices();
 		$addresses = $order->getAddresses();
 
-		if( ( $userid = $context->getUserId() ) !== null
+		if( ( $userid = $context->user() ) !== null
 			&& (bool) $this->getConfigValue( 'useorder', false ) === true
 			&& ( $addresses->isEmpty() || $services->isEmpty() )
 		) {
@@ -321,11 +321,11 @@ class Autofill
 		$addresses = $order->getAddresses();
 		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
 
-		if( $context->getUserId() !== null && !isset( $addresses[$type] )
+		if( $context->user() !== null && !isset( $addresses[$type] )
 			&& (bool) $this->getConfigValue( 'address', false ) === true
 		) {
 			$address = \Aimeos\MShop::create( $context, 'customer' )
-				->get( $context->getUserId() )->getPaymentAddress();
+				->get( $context->user() )->getPaymentAddress();
 
 			$addrItem = \Aimeos\MShop::create( $context, 'order/base/address' )
 				->create()->copyFrom( $address );
