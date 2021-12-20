@@ -114,6 +114,7 @@ class Directory
 	 *
 	 * @return \Aimeos\MW\Container\Content\Iface Current content object
 	 */
+	#[\ReturnTypeWillChange]
 	public function current()
 	{
 		return new $this->classname( $this->resource->getPathname(), $this->resource->getFilename(), $this->getOptions() );
@@ -125,6 +126,7 @@ class Directory
 	 *
 	 * @return string Position within the directory
 	 */
+	#[\ReturnTypeWillChange]
 	public function key()
 	{
 		return $this->resource->key();
@@ -134,7 +136,7 @@ class Directory
 	/**
 	 * Moves forward to next element.
 	 */
-	public function next()
+	public function next() : void
 	{
 		do {
 			$this->resource->next();
@@ -148,7 +150,7 @@ class Directory
 	/**
 	 * Rewinds the file pointer to the beginning.
 	 */
-	public function rewind()
+	public function rewind() : void
 	{
 		$this->resource->rewind();
 	}
@@ -157,9 +159,9 @@ class Directory
 	/**
 	 * Checks if the current position is valid.
 	 *
-	 * @return boolean True on success or false on failure
+	 * @return bool True on success or false on failure
 	 */
-	public function valid()
+	public function valid() : bool
 	{
 		while( $this->resource->isDot() ) {
 			$this->next();

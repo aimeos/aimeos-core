@@ -111,6 +111,7 @@ class File
 	 *
 	 * @return \Aimeos\MW\Container\Content\Iface Current content object
 	 */
+	#[\ReturnTypeWillChange]
 	public function current()
 	{
 		if( $this->content == null ) {
@@ -126,6 +127,7 @@ class File
 	 *
 	 * @return string Position within the directory
 	 */
+	#[\ReturnTypeWillChange]
 	public function key()
 	{
 		return $this->getName();
@@ -135,7 +137,7 @@ class File
 	/**
 	 * Moves forward to next element.
 	 */
-	public function next()
+	public function next() : void
 	{
 		$this->pointer = false;
 	}
@@ -144,7 +146,7 @@ class File
 	/**
 	 * Rewinds the file pointer to the beginning.
 	 */
-	public function rewind()
+	public function rewind() : void
 	{
 		$this->pointer = true;
 	}
@@ -153,9 +155,9 @@ class File
 	/**
 	 * Checks if the current position is valid.
 	 *
-	 * @return boolean True on success or false on failure
+	 * @return bool True on success or false on failure
 	 */
-	public function valid()
+	public function valid() : bool
 	{
 		return $this->pointer;
 	}

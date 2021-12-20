@@ -97,6 +97,7 @@ class Gzip
 	 *
 	 * @return string|null Content line ending with
 	 */
+	#[\ReturnTypeWillChange]
 	public function current()
 	{
 		return $this->data;
@@ -108,6 +109,7 @@ class Gzip
 	 *
 	 * @return integer|null Position within the text file or null if end of file is reached
 	 */
+	#[\ReturnTypeWillChange]
 	public function key()
 	{
 		if( $this->data !== null ) {
@@ -121,7 +123,7 @@ class Gzip
 	/**
 	 * Moves forward to next element.
 	 */
-	public function next()
+	public function next() : void
 	{
 		$this->position++;
 		$this->data = $this->getData();
@@ -131,7 +133,7 @@ class Gzip
 	/**
 	 * Rewinds the file pointer to the beginning.
 	 */
-	public function rewind()
+	public function rewind() : void
 	{
 		if( gzrewind( $this->fh ) === false ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to rewind file "%1$s"', $this->getResource() ) );
@@ -145,9 +147,9 @@ class Gzip
 	/**
 	 * Checks if the current position is valid.
 	 *
-	 * @return boolean True on success or false on failure
+	 * @return bool True on success or false on failure
 	 */
-	public function valid()
+	public function valid() : bool
 	{
 		return ( $this->data === null ? !gzeof( $this->fh ) : true );
 	}

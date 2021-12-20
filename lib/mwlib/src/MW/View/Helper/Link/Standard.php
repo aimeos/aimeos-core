@@ -33,9 +33,10 @@ class Standard
 	{
 		$view = $this->view();
 		$list = \Aimeos\Map::explode( '/', $cfgkey )->skip( 2 );
+		$cntl = $list->shift();
 
 		$target = $view->config( $cfgkey . '/target' );
-		$cntl = $view->config( $cfgkey . '/controller', ucfirst( $list->shift() ) );
+		$cntl = $view->config( $cfgkey . '/controller', $cntl ? ucfirst( $cntl ) : null );
 		$action = $view->config( $cfgkey . '/action', $list->shift() );
 		$config = $view->config( $cfgkey . '/config', [] );
 		$filter = $view->config( $cfgkey . '/filter', [] );
