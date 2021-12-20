@@ -46,8 +46,6 @@ class CSV
 	 */
 	public function __construct( string $resource, string $name, array $options = [] )
 	{
-		ini_set( 'auto_detect_line_endings', true );
-
 		if( !is_file( $resource ) && substr( $resource, -4 ) !== '.csv' ) {
 			$resource .= '.csv';
 		}
@@ -126,6 +124,7 @@ class CSV
 	 *
 	 * @return array|null List of values
 	 */
+	#[\ReturnTypeWillChange]
 	public function current()
 	{
 		return $this->data;
@@ -137,6 +136,7 @@ class CSV
 	 *
 	 * @return integer|null Position within the CSV file or null if end of file is reached
 	 */
+	#[\ReturnTypeWillChange]
 	public function key()
 	{
 		if( $this->data !== null ) {
@@ -150,7 +150,7 @@ class CSV
 	/**
 	 * Moves forward to next element.
 	 */
-	public function next()
+	public function next() : void
 	{
 		$this->position++;
 		$this->data = $this->getData();
@@ -160,7 +160,7 @@ class CSV
 	/**
 	 * Rewinds the file pointer to the beginning.
 	 */
-	public function rewind()
+	public function rewind() : void
 	{
 		$filename = $this->getResource();
 
@@ -180,9 +180,9 @@ class CSV
 	/**
 	 * Checks if the current position is valid.
 	 *
-	 * @return boolean True on success or false on failure
+	 * @return bool True on success or false on failure
 	 */
-	public function valid()
+	public function valid() : bool
 	{
 		return ( $this->data === null ? !feof( $this->fh ) : true );
 	}

@@ -109,7 +109,7 @@ class Standard implements Iface, DirIface, MetaIface
 	public function scan( string $path = null ) : iterable
 	{
 		try {
-			return new \DirectoryIterator( $this->resolve( $path ) );
+			return new \DirectoryIterator( $this->resolve( (string) $path ) );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
@@ -367,7 +367,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @return string Absolute path
 	 * @throws Exception If relative path is invalid
 	 */
-	protected function resolve( string $path = null ) : string
+	protected function resolve( string $path = '' ) : string
 	{
 		$path = trim( $path, '/' );
 

@@ -104,6 +104,7 @@ class Text
 	 *
 	 * @return string|null Content line ending with
 	 */
+	#[\ReturnTypeWillChange]
 	public function current()
 	{
 		return $this->data;
@@ -115,6 +116,7 @@ class Text
 	 *
 	 * @return integer|null Position within the text file or null if end of file is reached
 	 */
+	#[\ReturnTypeWillChange]
 	public function key()
 	{
 		if( $this->data !== null ) {
@@ -128,7 +130,7 @@ class Text
 	/**
 	 * Moves forward to next element.
 	 */
-	public function next()
+	public function next() : void
 	{
 		$this->position++;
 		$this->data = $this->getData();
@@ -138,7 +140,7 @@ class Text
 	/**
 	 * Rewinds the file pointer to the beginning.
 	 */
-	public function rewind()
+	public function rewind() : void
 	{
 		if( rewind( $this->fh ) === 0 ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Rewind file handle for %1$s failed', $this->getResource() ) );
@@ -154,7 +156,7 @@ class Text
 	 *
 	 * @return boolean True on success or false on failure
 	 */
-	public function valid()
+	public function valid() : bool
 	{
 		return ( $this->data === null ? !feof( $this->fh ) : true );
 	}
