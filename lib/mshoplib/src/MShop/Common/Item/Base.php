@@ -165,7 +165,7 @@ abstract class Base
 	 * @param string $name Name of the property
 	 * @return bool True if the property exists, false if not
 	 */
-	public function offsetExists( $name )
+	public function offsetExists( $name ) : bool
 	{
 		return array_key_exists( $name, $this->bdata );
 	}
@@ -177,6 +177,7 @@ abstract class Base
 	 * @param string $name Name of the property
 	 * @return mixed|null Property value or null if property is unknown
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetGet( $name )
 	{
 		return $this->get( $name );
@@ -189,7 +190,7 @@ abstract class Base
 	 * @param string $name Name of the property
 	 * @param mixed $value New property value
 	 */
-	public function offsetSet( $name, $value )
+	public function offsetSet( $name, $value ) : void
 	{
 		$this->set( $name, $value );
 	}
@@ -202,7 +203,7 @@ abstract class Base
 	 * @param string $name Name of the property
 	 * @throws \LogicException Always thrown because this method isn't supported
 	 */
-	public function offsetUnset( $name )
+	public function offsetUnset( $name ) : void
 	{
 		throw new \LogicException( 'Not implemented' );
 	}
