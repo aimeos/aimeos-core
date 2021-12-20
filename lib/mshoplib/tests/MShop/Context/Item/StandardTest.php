@@ -24,7 +24,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetConfig()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getConfig();
+		$this->object->config();
 	}
 
 
@@ -41,17 +41,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetFilesystemManager()
-	{
-		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getFilesystemManager();
-	}
-
-
 	public function testGetFilesystem()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getFilesystem( 'fs' );
+		$this->object->fs( 'fs' );
 	}
 
 
@@ -65,35 +58,28 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetI18n()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getI18n();
+		$this->object->i18n();
 	}
 
 
 	public function testGetLogger()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getLogger();
+		$this->object->logger();
 	}
 
 
 	public function testGetMail()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getMail();
+		$this->object->mail();
 	}
 
 
-	public function testGetMessageQueueManager()
+	public function testGetQueue()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getMessageQueueManager();
-	}
-
-
-	public function testGetMessageQueue()
-	{
-		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getMessageQueue( 'email', 'test' );
+		$this->object->queue( 'email', 'test' );
 	}
 
 
@@ -107,21 +93,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetProcess()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getProcess();
+		$this->object->process();
 	}
 
 
 	public function testGetSession()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getSession();
+		$this->object->session();
 	}
 
 
 	public function testGetView()
 	{
 		$this->expectException( \Aimeos\MShop\Exception::class );
-		$this->object->getView();
+		$this->object->view();
 	}
 
 
@@ -157,12 +143,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSetFilesystemManager()
 	{
 		$context = \TestHelperMShop::context();
-		$return = $this->object->setFilesystemManager( $context->getFilesystemManager() );
+		$r = $this->object->setFilesystemManager( new \Aimeos\MW\Filesystem\Manager\Standard( $context->config() ) );
 
-		$this->assertSame( $context->getFilesystemManager(), $this->object->getFilesystemManager() );
-		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $r );
 
-		$this->object->getFilesystem( 'fs-admin' );
 		$this->object->fs( 'fs-admin' );
 	}
 
@@ -174,9 +158,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$locale = \Aimeos\MShop\Locale\Manager\Factory::create( \TestHelperMShop::context() )->create();
 		$this->object->setLocale( $locale->setLanguageId( 'en' ) );
 
-		$return = $this->object->setI18n( ['en' => $context->getI18n()] );
+		$return = $this->object->setI18n( ['en' => $context->i18n()] );
 
-		$this->assertSame( $context->getI18n(), $this->object->i18n() );
+		$this->assertSame( $context->i18n(), $this->object->i18n() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -203,9 +187,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSetLogger()
 	{
 		$context = \TestHelperMShop::context();
-		$return = $this->object->setLogger( $context->getLogger() );
+		$return = $this->object->setLogger( $context->logger() );
 
-		$this->assertSame( $context->getLogger(), $this->object->logger() );
+		$this->assertSame( $context->logger(), $this->object->logger() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -215,7 +199,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$mail = new \Aimeos\MW\Mail\None();
 		$return = $this->object->setMail( $mail );
 
-		$this->assertInstanceOf( \Aimeos\MW\Mail\Iface::class, $this->object->mail() );
+		$this->assertSame( $mail, $this->object->mail() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -223,12 +207,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSetMessageQueueManager()
 	{
 		$context = \TestHelperMShop::context();
-		$return = $this->object->setMessageQueueManager( $context->getMessageQueueManager() );
+		$mq = new \Aimeos\MW\MQueue\Manager\Standard( $context->config() );
+		$return = $this->object->setMessageQueueManager( $mq );
 
-		$this->assertSame( $context->getMessageQueueManager(), $this->object->getMessageQueueManager() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 
-		$this->object->getMessageQueue( 'mq-test', 'test' );
 		$this->object->queue( 'mq-test', 'test' );
 	}
 
@@ -266,9 +249,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSetSession()
 	{
 		$context = \TestHelperMShop::context();
-		$return = $this->object->setSession( $context->getSession() );
+		$return = $this->object->setSession( $context->session() );
 
-		$this->assertSame( $context->getSession(), $this->object->session() );
+		$this->assertSame( $context->session(), $this->object->session() );
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
@@ -296,7 +279,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSetUserId()
 	{
-		$this->assertEquals( null, $this->object->getUserId() );
+		$this->assertEquals( null, $this->object->user() );
 
 		$return = $this->object->setUserId( 123 );
 		$this->assertEquals( '123', $this->object->user() );
@@ -310,7 +293,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSetGroupIds()
 	{
-		$this->assertEquals( [], $this->object->getGroupIds() );
+		$this->assertEquals( [], $this->object->groups() );
 
 		$return = $this->object->setGroupIds( array( 123 ) );
 		$this->assertEquals( array( '123' ), $this->object->groups() );

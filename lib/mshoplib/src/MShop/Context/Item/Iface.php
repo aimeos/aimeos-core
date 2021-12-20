@@ -225,13 +225,6 @@ interface Iface
 	public function process() : \Aimeos\MW\Process\Iface;
 
 	/**
-	 * Returns the process object.
-	 *
-	 * @return \Aimeos\MW\Process\Iface Process object
-	 */
-	public function getProcess() : \Aimeos\MW\Process\Iface;
-
-	/**
 	 * Sets the process object.
 	 *
 	 * @param \Aimeos\MW\Process\Iface $process Process object
@@ -245,13 +238,6 @@ interface Iface
 	 * @return \Aimeos\MW\Session\Iface Session object
 	 */
 	public function session() : \Aimeos\MW\Session\Iface;
-
-	/**
-	 * Returns the session object.
-	 *
-	 * @return \Aimeos\MW\Session\Iface Session object
-	 */
-	public function getSession() : \Aimeos\MW\Session\Iface;
 
 	/**
 	 * Sets the session object.
@@ -269,13 +255,6 @@ interface Iface
 	public function view() : \Aimeos\MW\View\Iface;
 
 	/**
-	 * Returns the view object.
-	 *
-	 * @return \Aimeos\MW\View\Iface View object
-	 */
-	public function getView() : \Aimeos\MW\View\Iface;
-
-	/**
 	 * Sets the view object.
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View object
@@ -289,13 +268,6 @@ interface Iface
 	 * @return string Account name of the user/editor
 	 */
 	public function editor() : string;
-
-	/**
-	 * Returns the account name of the user/editor.
-	 *
-	 * @return string Account name or IP address of the user/editor
-	 */
-	public function getEditor() : string;
 
 	/**
 	 * Sets the account name of the user/editor.
@@ -313,13 +285,6 @@ interface Iface
 	public function user() : ?string;
 
 	/**
-	 * Returns the user ID of the logged in user.
-	 *
-	 * @return string|null User ID of the logged in user
-	 */
-	public function getUserId() : ?string;
-
-	/**
 	 * Sets the user ID of the logged in user.
 	 *
 	 * @param \Closure|string|null $user User ID of the logged in user or closure to retrieve them
@@ -333,13 +298,6 @@ interface Iface
 	 * @return array Group IDs of the logged in user
 	 */
 	public function groups() : array;
-
-	/**
-	 * Returns the group IDs of the logged in user.
-	 *
-	 * @return array Group IDs of the logged in user
-	 */
-	public function getGroupIds() : array;
 
 	/**
 	 * Sets the group IDs of the logged in user.

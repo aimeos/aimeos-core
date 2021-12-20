@@ -141,24 +141,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\Cache\Iface Cache object
 	 */
-	public function getCache() : \Aimeos\MW\Cache\Iface
+	public function cache() : \Aimeos\MW\Cache\Iface
 	{
 		if( !isset( $this->cache ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Cache object not available' ) );
 		}
 
 		return $this->cache;
-	}
-
-
-	/**
-	 * Returns the cache object.
-	 *
-	 * @return \Aimeos\MW\Cache\Iface Cache object
-	 */
-	public function cache() : \Aimeos\MW\Cache\Iface
-	{
-		return $this->getCache();
 	}
 
 
@@ -181,24 +170,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\Config\Iface Configuration object
 	 */
-	public function getConfig() : \Aimeos\MW\Config\Iface
+	public function config() : \Aimeos\MW\Config\Iface
 	{
 		if( !isset( $this->config ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Configuration object not available' ) );
 		}
 
 		return $this->config;
-	}
-
-
-	/**
-	 * Returns the configuration object.
-	 *
-	 * @return \Aimeos\MW\Config\Iface Configuration object
-	 */
-	public function config() : \Aimeos\MW\Config\Iface
-	{
-		return $this->getConfig();
 	}
 
 
@@ -221,24 +199,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
 	 */
-	public function getDatabaseManager() : \Aimeos\MW\DB\Manager\Iface
+	public function db() : \Aimeos\MW\DB\Manager\Iface
 	{
 		if( !isset( $this->db ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Database manager object not available' ) );
 		}
 
 		return $this->db;
-	}
-
-
-	/**
-	 * Returns the database manager object.
-	 *
-	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
-	 */
-	public function db() : \Aimeos\MW\DB\Manager\Iface
-	{
-		return $this->getDatabaseManager();
 	}
 
 
@@ -268,26 +235,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return string Current date and time as ISO string (YYYY-MM-DD HH:mm:ss)
 	 */
-	public function getDateTime() : string
+	public function datetime() : string
 	{
 		if( $this->datetime === null ) {
 			$this->datetime = date( 'Y-m-d H:i:00' );
 		}
 
 		return $this->datetime;
-	}
-
-
-	/**
-	 * Returns the current date and time
-	 * This is especially useful to share the same request time or if applications
-	 * allow to travel in time.
-	 *
-	 * @return string Current date and time as ISO string (YYYY-MM-DD HH:mm:ss)
-	 */
-	public function datetime() : string
-	{
-		return $this->getDateTime();
 	}
 
 
@@ -300,39 +254,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	public function setFilesystemManager( \Aimeos\MW\Filesystem\Manager\Iface $manager ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->fs = $manager;
-
 		return $this;
-	}
-
-
-	/**
-	 * Returns the file system manager object.
-	 *
-	 * @return \Aimeos\MW\Filesystem\Manager\Iface File system manager object
-	 */
-	public function getFilesystemManager() : \Aimeos\MW\Filesystem\Manager\Iface
-	{
-		if( !isset( $this->fs ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'File system manager object not available' ) );
-		}
-
-		return $this->fs;
-	}
-
-
-	/**
-	 * Returns the file system object for the given resource name.
-	 *
-	 * @param string $resource Resource name, e.g. "fs-admin"
-	 * @return \Aimeos\MW\Filesystem\Iface File system object
-	 */
-	public function getFilesystem( string $resource ) : \Aimeos\MW\Filesystem\Iface
-	{
-		if( !isset( $this->fs ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'File system manager object not available' ) );
-		}
-
-		return $this->fs->get( $resource );
 	}
 
 
@@ -344,7 +266,11 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function fs( string $resource ) : \Aimeos\MW\Filesystem\Iface
 	{
-		return $this->getFilesystem( $resource );
+		if( !isset( $this->fs ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'File system manager object not available' ) );
+		}
+
+		return $this->fs->get( $resource );
 	}
 
 
@@ -369,7 +295,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param string|null $locale Two letter language ISO code for specific language instead of default one
 	 * @return \Aimeos\MW\Translation\Iface Internationalization object
 	 */
-	public function getI18n( string $locale = null ) : \Aimeos\MW\Translation\Iface
+	public function i18n( string $locale = null ) : \Aimeos\MW\Translation\Iface
 	{
 		if( isset( $this->locale ) && $locale === null ) {
 			$locale = $this->locale()->getLanguageId();
@@ -389,18 +315,6 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 		/// Locale ID %1$s
 		throw new \Aimeos\MShop\Exception( sprintf( 'Internationalization object not available for "%1$s"', $locale ) );
-	}
-
-
-	/**
-	 * Returns the translation/internationalization object for the given locale (null for default one).
-	 *
-	 * @param string|null $locale Two letter language ISO code for specific language instead of default one
-	 * @return \Aimeos\MW\Translation\Iface Internationalization object
-	 */
-	public function i18n( string $locale = null ) : \Aimeos\MW\Translation\Iface
-	{
-		return $this->getI18n( $locale );
 	}
 
 
@@ -447,24 +361,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MShop\Locale\Item\Iface Localization object
 	 */
-	public function getLocale() : \Aimeos\MShop\Locale\Item\Iface
+	public function locale() : \Aimeos\MShop\Locale\Item\Iface
 	{
 		if( !isset( $this->locale ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Locale object not available' ) );
 		}
 
 		return $this->locale;
-	}
-
-
-	/**
-	 * Returns the localization object.
-	 *
-	 * @return \Aimeos\MShop\Locale\Item\Iface Localization object
-	 */
-	public function locale() : \Aimeos\MShop\Locale\Item\Iface
-	{
-		return $this->getLocale();
 	}
 
 
@@ -487,24 +390,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\Logger\Iface Logger object
 	 */
-	public function getLogger() : \Aimeos\MW\Logger\Iface
+	public function logger() : \Aimeos\MW\Logger\Iface
 	{
 		if( !isset( $this->logger ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Log manager object not available' ) );
 		}
 
 		return $this->logger;
-	}
-
-
-	/**
-	 * Returns the logger object.
-	 *
-	 * @return \Aimeos\MW\Logger\Iface Logger object
-	 */
-	public function logger() : \Aimeos\MW\Logger\Iface
-	{
-		return $this->getLogger();
 	}
 
 
@@ -527,24 +419,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\Mail\Iface Mail object
 	 */
-	public function getMail() : \Aimeos\MW\Mail\Iface
+	public function mail() : \Aimeos\MW\Mail\Iface
 	{
 		if( !isset( $this->mail ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Mail object not available' ) );
 		}
 
 		return $this->mail;
-	}
-
-
-	/**
-	 * Returns the mail object.
-	 *
-	 * @return \Aimeos\MW\Mail\Iface Mail object
-	 */
-	public function mail() : \Aimeos\MW\Mail\Iface
-	{
-		return $this->getMail();
 	}
 
 
@@ -563,38 +444,6 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
-	 * Returns the message queue manager object.
-	 *
-	 * @return \Aimeos\MW\MQueue\Manager\Iface Message queue manager object
-	 */
-	public function getMessageQueueManager() : \Aimeos\MW\MQueue\Manager\Iface
-	{
-		if( !isset( $this->queue ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Message queue object not available' ) );
-		}
-
-		return $this->queue;
-	}
-
-
-	/**
-	 * Returns the message queue object.
-	 *
-	 * @param string $resource Resource name, e.g. "mq-email"
-	 * @param string $queue Message queue name, e.g. "order/email/payment"
-	 * @return \Aimeos\MW\MQueue\Queue\Iface Message queue object
-	 */
-	public function getMessageQueue( string $resource, string $queue ) : \Aimeos\MW\MQueue\Queue\Iface
-	{
-		if( !isset( $this->queue ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Message queue object not available' ) );
-		}
-
-		return $this->queue->get( $resource )->getQueue( $queue );
-	}
-
-
-	/**
 	 * Returns the message queue object.
 	 *
 	 * @param string $resource Resource name, e.g. "mq-email"
@@ -603,7 +452,11 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function queue( string $resource, string $queue ) : \Aimeos\MW\MQueue\Queue\Iface
 	{
-		return $this->getMessageQueue( $resource, $queue );
+		if( !isset( $this->queue ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Message queue object not available' ) );
+		}
+
+		return $this->queue->get( $resource )->getQueue( $queue );
 	}
 
 
@@ -678,24 +531,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\Process\Iface Process object
 	 */
-	public function getProcess() : \Aimeos\MW\Process\Iface
+	public function process() : \Aimeos\MW\Process\Iface
 	{
 		if( !isset( $this->process ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Process object not available' ) );
 		}
 
 		return $this->process;
-	}
-
-
-	/**
-	 * Returns the process object.
-	 *
-	 * @return \Aimeos\MW\Process\Iface Process object
-	 */
-	public function process() : \Aimeos\MW\Process\Iface
-	{
-		return $this->getProcess();
 	}
 
 
@@ -718,24 +560,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\Session\Iface Session object
 	 */
-	public function getSession() : \Aimeos\MW\Session\Iface
+	public function session() : \Aimeos\MW\Session\Iface
 	{
 		if( !isset( $this->session ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Session object not available' ) );
 		}
 
 		return $this->session;
-	}
-
-
-	/**
-	 * Returns the session object.
-	 *
-	 * @return \Aimeos\MW\Session\Iface Session object
-	 */
-	public function session() : \Aimeos\MW\Session\Iface
-	{
-		return $this->getSession();
 	}
 
 
@@ -758,24 +589,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return \Aimeos\MW\View\Iface View object
 	 */
-	public function getView() : \Aimeos\MW\View\Iface
+	public function view() : \Aimeos\MW\View\Iface
 	{
 		if( !isset( $this->view ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'View object not available' ) );
 		}
 
 		return clone $this->view;
-	}
-
-
-	/**
-	 * Returns the view object.
-	 *
-	 * @return \Aimeos\MW\View\Iface View object
-	 */
-	public function view() : \Aimeos\MW\View\Iface
-	{
-		return $this->getView();
 	}
 
 
@@ -790,17 +610,6 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		$this->editor = $name;
 
 		return $this;
-	}
-
-
-	/**
-	 * Returns the account name of the user/editor.
-	 *
-	 * @return string Account name of the user/editor
-	 */
-	public function getEditor() : string
-	{
-		return $this->editor;
 	}
 
 
@@ -834,7 +643,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return string|null User ID of the logged in user
 	 */
-	public function getUserId() : ?string
+	public function user() : ?string
 	{
 		if( $this->user instanceof \Closure )
 		{
@@ -843,17 +652,6 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		}
 
 		return $this->user;
-	}
-
-
-	/**
-	 * Returns the user ID of the logged in user.
-	 *
-	 * @return string|null User ID of the logged in user
-	 */
-	public function user() : ?string
-	{
-		return $this->getUserId();
 	}
 
 
@@ -876,7 +674,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 *
 	 * @return array Group IDs of the logged in user
 	 */
-	public function getGroupIds() : array
+	public function groups() : array
 	{
 		if( $this->groups instanceof \Closure )
 		{
@@ -885,17 +683,6 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		}
 
 		return (array) $this->groups;
-	}
-
-
-	/**
-	 * Returns the group IDs of the logged in user.
-	 *
-	 * @return array Group IDs of the logged in user
-	 */
-	public function groups() : array
-	{
-		return $this->getGroupIds();
 	}
 
 
