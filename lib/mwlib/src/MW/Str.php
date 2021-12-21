@@ -218,6 +218,18 @@ class Str
 
 
 	/**
+	 * Returns a date formatted according to the given format string.
+	 *
+	 * @param string $format DateTime format string but with format characters preceded by "%"
+	 * @return string String with date/time according to the format string
+	 */
+	public static function strtime( string $format ) : string
+	{
+		return trim( date_create()->format( str_replace( '\\%\\', '', '\\' . join( '\\', str_split( $format ) ) ) ) );
+	}
+
+
+	/**
 	 * Generates a unique ID string suitable as global identifier
 	 *
 	 * The ID is similar to an UUID and is as unique as an UUID but it's human

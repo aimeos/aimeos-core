@@ -188,6 +188,12 @@ class StrTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testStrtime()
+	{
+		$this->assertEquals( './order_' . date( 'Y-m-d_H:i:s' ) . '.xml', Str::strtime( './order_%Y-%m-%d_%H:%i:%s.xml' ) );
+	}
+
+
 	public function testUid()
 	{
 		$r = Str::uid();
