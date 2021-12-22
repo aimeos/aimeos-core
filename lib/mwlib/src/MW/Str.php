@@ -20,7 +20,6 @@ class Str
 	use \Aimeos\Macro\Macroable;
 
 
-	private static $methods = [];
 	private static $node;
 	private static $seq = 0;
 
@@ -253,9 +252,9 @@ class Str
 			}
 		}
 
-		$t = gettimeofday();
-		$sec = $t['sec'];
-		$usec = $t['usec'];
+		$time = microtime(true);
+		$sec = (int) $time;
+		$usec = (int) (fmod( $time, 1 ) * 1000000);
 
 		self::$seq = self::$seq + 1 & 0xfff; // 20 bits for sequence (1 to 4,095), wraps around
 
