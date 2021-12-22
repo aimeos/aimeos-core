@@ -252,9 +252,9 @@ class Str
 			}
 		}
 
-		$time = microtime(true);
+		$time = microtime( true );
 		$sec = (int) $time;
-		$usec = (int) (fmod( $time, 1 ) * 1000000);
+		$usec = (int) ( fmod( $time, 1 ) * 1000000 );
 
 		self::$seq = self::$seq + 1 & 0xfff; // 20 bits for sequence (1 to 4,095), wraps around
 
