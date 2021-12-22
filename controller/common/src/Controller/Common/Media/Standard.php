@@ -547,11 +547,14 @@ class Standard
 		 */
 		$ext = $config->get( 'controller/common/media/mimeicon/extension', '.png' );
 
+		$filepath = '';
 		$fsmime = $this->context->fs( 'fs-mimeicon' );
-		$filename = ( $fsmime->has( $mimetype . $ext ) ? $mimetype : 'unknown' ) . $ext;
 
-		$filepath = $this->getFilePath( $filename, 'preview', ltrim( $ext, '.' ) );
-		$this->context->fs( $fsname )->write( $filepath, $fsmime->read( $filename ) );
+		if( $fsmime->has( $filename = $mimetype . $ext ) || $fsmime->has( $filename = 'unknown' . $ext ) )
+		{
+			$filepath = $this->getFilePath( $filename, 'preview', ltrim( $ext, '.' ) );
+			$this->context->fs( $fsname )->write( $filepath, $fsmime->read( $filename ) );
+		}
 
 		return $filepath;
 	}
