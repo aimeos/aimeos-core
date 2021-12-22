@@ -22,7 +22,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::context();
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::create( $this->context );
 		$serviceItem = $serviceManager->create()->setConfig( [
-			'xml.exportpath' => 'tmp/order-export_%%d.xml',
+			'xml.exportpath' => 'tmp/order-export_%d.xml',
 			'xml.updatedir' => __DIR__ . '/_tests',
 		] );
 
@@ -53,7 +53,7 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 	{
 		$attributes = [
 			'xml.backupdir' => '/backup',
-			'xml.exportpath' => 'order-%T.xml',
+			'xml.exportpath' => 'order-%H:%i:%s.xml',
 			'xml.template' => 'body.xml',
 			'xml.updatedir' => '/',
 		];
@@ -71,8 +71,9 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 	public function testProcess()
 	{
 		$order = $this->object->process( $this->getOrderItem() );
-		$xml = simplexml_load_file( 'tmp/order-export_0.xml' );
-		unlink( 'tmp/order-export_0.xml' );
+		$file = 'tmp/order-export_' . date( 'd' ) . '.xml';
+		$xml = simplexml_load_file( $file );
+		unlink( $file );
 
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getStatusDelivery() );
 		$this->assertGreaterThan( 0, (string) $xml->orderitem[0]->{'order.ordernumber'} );
@@ -92,8 +93,9 @@ class XmlTest extends \PHPUnit\Framework\TestCase
 	public function testProcessBatch()
 	{
 		$orders = $this->object->processBatch( [$this->getOrderItem()] );
-		$xml = simplexml_load_file( 'tmp/order-export_0.xml' );
-		unlink( 'tmp/order-export_0.xml' );
+		$file = 'tmp/order-export_' . date( 'd' ) . '.xml';
+		$xml = simplexml_load_file( $file );
+		unlink( $file );
 
 		$this->assertEquals( 1, count( $orders ) );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $orders->getStatusDelivery()->first() );

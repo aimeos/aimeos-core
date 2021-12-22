@@ -27,7 +27,7 @@ class Xml
 		'xml.backupdir' => [
 			'code' => 'xml.backupdir',
 			'internalcode' => 'xml.backupdir',
-			'label' => 'Relative or absolute path of the backup directory (with strftime() placeholders)',
+			'label' => 'Relative or absolute path of the backup directory (with date() placeholders)',
 			'type' => 'string',
 			'internaltype' => 'string',
 			'default' => '',
@@ -36,10 +36,10 @@ class Xml
 		'xml.exportpath' => [
 			'code' => 'xml.exportpath',
 			'internalcode' => 'xml.exportpath',
-			'label' => 'Relative or absolute path and name of the XML files (with strftime() placeholders)',
+			'label' => 'Relative or absolute path and name of the XML files (with date() placeholders)',
 			'type' => 'string',
 			'internaltype' => 'string',
-			'default' => './order_%Y-%m-%d_%T_%%d.xml',
+			'default' => './order_%Y-%m-%d_%H:%i:%s_%v.xml',
 			'required' => true,
 		],
 		'xml.template' => [
@@ -183,8 +183,8 @@ class Xml
 	 */
 	protected function createFile( string $content ) : \Aimeos\MShop\Service\Provider\Delivery\Iface
 	{
-		$filepath = $this->getConfigValue( 'xml.exportpath', './order_%Y-%m-%d_%T_%%d.xml' );
-		$filepath = sprintf( strftime( $filepath ), $this->num++ );
+		$filepath = $this->getConfigValue( 'xml.exportpath', './order_%Y-%m-%d_%H:%i:%s_%v.xml' );
+		$filepath = sprintf( \Aimeos\MW\Str::strtime( $filepath ), $this->num++ );
 
 		if( file_put_contents( $filepath, $content ) === false )
 		{
@@ -274,11 +274,11 @@ class Xml
 		$msg = sprintf( 'Finished order status import from file "%1$s"', $filename );
 		$logger->info( $msg, 'core/service' );
 
-		$backup = $this->getConfigValue( 'xml.backupdir' );
+		$backup = \Aimeos\MW\Str::strtime( $this->getConfigValue( 'xml.backupdir', '' ) );
 
-		if( !empty( $backup ) && @rename( $filename, strftime( $backup ) ) === false )
+		if( !empty( $backup ) && @rename( $filename, $backup ) === false )
 		{
-			$msg = sprintf( 'Unable to move imported file "%1$s" to "%2$s"', $filename, strftime( $backup ) );
+			$msg = sprintf( 'Unable to move imported file "%1$s" to "%2$s"', $filename, $backup );
 			throw new \Aimeos\Controller\Jobs\Exception( $msg );
 		}
 

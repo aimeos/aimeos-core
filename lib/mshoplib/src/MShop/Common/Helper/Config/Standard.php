@@ -68,7 +68,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 						}
 						break;
 					case 'integer':
-						if( !is_integer( $config[$key] ) && !is_numeric( $config[$key] ) && !ctype_digit( $config[$key] ) ) {
+						if( !is_integer( $config[$key] ) && !( is_string( $config[$key] ) && ctype_digit( $config[$key] ) ) ) {
 							$errors[$key] = sprintf( 'Not an integer number' ); continue 2;
 						}
 						break;
