@@ -102,7 +102,7 @@ class CatalogAddPerfData extends Base
 			$treeFcn( [$catRootItem], $catRootItem->getId(), $numCatPerLevel, $this->numCatLevels - 1, $i + 1, $i );
 		}
 
-		$this->context()->getProcess()->wait();
+		$this->context()->process()->wait();
 	}
 
 
