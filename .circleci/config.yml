@@ -2,10 +2,10 @@
 #
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
-version: 2
+version: 2.1
 
 jobs:
-  "php-7.1 / mariadb-10":
+  "php71-mariadb10":
     docker:
       - image: aimeos/ci-php:7.1
       - image: circleci/mariadb:10
@@ -27,7 +27,7 @@ jobs:
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: ./vendor/bin/phing setup test
 
-  "php-7.2 / mysql-5.7":
+  "php72-mysql57":
     docker:
       - image: aimeos/ci-php:7.2
       - image: circleci/mysql:5.7
@@ -49,7 +49,7 @@ jobs:
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: ./vendor/bin/phing setup test check
 
-  "php-7.3 / pgsql-13":
+  "php73-pgsql13":
     docker:
       - image: aimeos/ci-php:7.3
       - image: circleci/postgres:13
@@ -71,7 +71,7 @@ jobs:
       - run: ./vendor/bin/phing setup coverage
       - run: ./vendor/bin/php-coveralls -vvv
 
-  "php-7.4 / mssql-2019":
+  "php74-mssql2019":
     docker:
       - image: aimeos/ci-php:7.4
       - image: mcr.microsoft.com/mssql/server:2019-latest
@@ -92,7 +92,7 @@ jobs:
       - run: ./vendor/bin/phing setup coverage
       - run: ./vendor/bin/php-coveralls -vvv
 
-  "php-8.0 / mysql-8.0":
+  "php80-mysql80":
     docker:
       - image: aimeos/ci-php:8.0
       - image: circleci/mysql:8.0
@@ -114,7 +114,7 @@ jobs:
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: ./vendor/bin/phing setup test
 
-  "php-8.1 / mysql-8.0":
+  "php81-mysql80":
     docker:
       - image: aimeos/ci-php:8.1
       - image: circleci/mysql:8.0
@@ -141,9 +141,9 @@ workflows:
   version: 2
   unittest:
     jobs:
-      - "php-7.1 / mariadb-10"
-      - "php-7.2 / mysql-5.7"
-      - "php-7.3 / pgsql-13"
-      - "php-7.4 / mssql-2019"
-      - "php-8.0 / mysql-8.0"
-      - "php-8.1 / mysql-8.0"
+      - "php71-mariadb10"
+      - "php72-mysql57"
+      - "php73-pgsql13"
+      - "php74-mssql2019"
+      - "php80-mysql80"
+      - "php81-mysql80"
