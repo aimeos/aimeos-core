@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->values = array(
 			'order.id' => 15,
 			'order.siteid' => 99,
-			'order.type' => \Aimeos\MShop\Order\Item\Base::TYPE_WEB,
+			'order.channel' => 'web',
 			'order.statusdelivery' => \Aimeos\MShop\Order\Item\Base::STAT_PENDING,
 			'order.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED,
 			'order.datepayment' => '2004-12-01 12:34:56',
@@ -127,18 +127,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetType()
+	public function testGetChannel()
 	{
-		$this->assertEquals( $this->values['order.type'], $this->object->getType() );
+		$this->assertEquals( $this->values['order.channel'], $this->object->getChannel() );
 	}
 
 
-	public function testSetType()
+	public function testSetChannel()
 	{
-		$return = $this->object->setType( \Aimeos\MShop\Order\Item\Base::TYPE_PHONE );
+		$return = $this->object->setChannel( 'phone' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $return );
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::TYPE_PHONE, $this->object->getType() );
+		$this->assertEquals( 'phone', $this->object->getChannel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -279,7 +279,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = $entries = array(
 			'order.id' => 1,
-			'order.type' => \Aimeos\MShop\Order\Item\Base::TYPE_WEB,
+			'order.channel' => 'web',
 			'order.baseid' => 2,
 			'order.relatedid' => '3',
 			'order.statusdelivery' => 4,
@@ -293,7 +293,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $entries );
 		$this->assertEquals( '', $item->getSiteId() );
 		$this->assertEquals( $list['order.id'], $item->getId() );
-		$this->assertEquals( $list['order.type'], $item->getType() );
+		$this->assertEquals( $list['order.channel'], $item->getChannel() );
 		$this->assertEquals( $list['order.baseid'], $item->getBaseId() );
 		$this->assertEquals( $list['order.relatedid'], $item->getRelatedId() );
 		$this->assertEquals( $list['order.statusdelivery'], $item->getStatusDelivery() );
@@ -310,7 +310,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $this->object->getId(), $list['order.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $list['order.siteid'] );
-		$this->assertEquals( $this->object->getType(), $list['order.type'] );
+		$this->assertEquals( $this->object->getChannel(), $list['order.channel'] );
 		$this->assertEquals( $this->object->getStatusDelivery(), $list['order.statusdelivery'] );
 		$this->assertEquals( $this->object->getStatusPayment(), $list['order.statuspayment'] );
 		$this->assertEquals( $this->object->getDatePayment(), $list['order.datepayment'] );

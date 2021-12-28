@@ -53,10 +53,10 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'order.type' => array(
-			'code' => 'order.type',
-			'internalcode' => 'mord."type"',
-			'label' => 'Invoice type',
+		'order.channel' => array(
+			'code' => 'order.channel',
+			'internalcode' => 'mord."channel"',
+			'label' => 'Order channel',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -467,7 +467,7 @@ class Standard
 			}
 
 			$stmt->bind( $idx++, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getType() );
+			$stmt->bind( $idx++, $item->getChannel() );
 			$stmt->bind( $idx++, $item->getDatePayment() );
 			$stmt->bind( $idx++, $item->getDateDelivery() );
 			$stmt->bind( $idx++, $item->getStatusDelivery(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );

@@ -103,25 +103,25 @@ class Standard
 
 
 	/**
-	 * Returns the type of the invoice (repeating, web, phone, etc).
+	 * Returns the channel of the invoice (repeating, web, phone, etc).
 	 *
-	 * @return string Invoice type
+	 * @return string Invoice channel
 	 */
-	public function getType() : string
+	public function getChannel() : string
 	{
-		return $this->get( 'order.type', '' );
+		return $this->get( 'order.channel', '' );
 	}
 
 
 	/**
-	 * Sets the type of the invoice.
+	 * Sets the channel of the invoice.
 	 *
-	 * @param string $type Invoice type
+	 * @param string $channel Invoice channel
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
+	public function setChannel( string $channel ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->set( 'order.type', $this->checkCode( $type ) );
+		return $this->set( 'order.channel', $this->checkCode( $channel ) );
 	}
 
 
@@ -306,8 +306,8 @@ class Standard
 		{
 			switch( $key )
 			{
+				case 'order.channel': $item = $item->setChannel( $value ); break;
 				case 'order.baseid': !$private ?: $item = $item->setBaseId( $value ); break;
-				case 'order.type': $item = $item->setType( $value ); break;
 				case 'order.statusdelivery': $item = $item->setStatusDelivery( is_numeric( $value ) ? (int) $value : null ); break;
 				case 'order.statuspayment': $item = $item->setStatusPayment( is_numeric( $value ) ? (int) $value : null ); break;
 				case 'order.datedelivery': $item = $item->setDateDelivery( $value ); break;
@@ -333,7 +333,7 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['order.type'] = $this->getType();
+		$list['order.channel'] = $this->getChannel();
 		$list['order.statusdelivery'] = $this->getStatusDelivery();
 		$list['order.statuspayment'] = $this->getStatusPayment();
 		$list['order.datedelivery'] = $this->getDateDelivery();

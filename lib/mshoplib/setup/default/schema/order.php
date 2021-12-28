@@ -220,7 +220,7 @@ return array(
 			$table->string( 'siteid' );
 			$table->bigint( 'baseid' );
 			$table->refid( 'relatedid' )->default( '' );
-			$table->type();
+			$table->string( 'channel', 16 )->default( '' );
 			$table->datetime( 'datepayment' )->null( true );
 			$table->datetime( 'datedelivery' )->null( true );
 			$table->smallint( 'statuspayment' )->null( true );
@@ -232,7 +232,7 @@ return array(
 			$table->string( 'chour', 2 )->default( '' );
 			$table->meta();
 
-			$table->index( ['siteid', 'type'], 'idx_msord_sid_type' );
+			$table->index( ['siteid', 'channel'], 'idx_msord_sid_channel' );
 			$table->index( ['siteid', 'ctime', 'statuspayment'], 'idx_msord_sid_ctime_pstat' );
 			$table->index( ['siteid', 'mtime', 'statuspayment'], 'idx_msord_sid_mtime_pstat' );
 			$table->index( ['siteid', 'mtime', 'statusdelivery'], 'idx_msord_sid_mtime_dstat' );

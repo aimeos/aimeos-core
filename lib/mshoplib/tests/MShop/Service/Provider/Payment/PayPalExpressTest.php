@@ -36,7 +36,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::create( $this->context );
 
 		$search = $orderManager->filter()->add( [
-			'order.type' => \Aimeos\MShop\Order\Item\Base::TYPE_WEB,
+			'order.channel' => 'web',
 			'order.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED
 		] );
 		$this->order = $orderManager->search( $search )->first( new \RuntimeException( 'No order found' ) );

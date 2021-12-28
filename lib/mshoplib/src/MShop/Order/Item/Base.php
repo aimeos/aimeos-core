@@ -21,27 +21,6 @@ namespace Aimeos\MShop\Order\Item;
 abstract class Base extends \Aimeos\MShop\Common\Item\Base
 {
 	/**
-	 * Repeated order.
-	 * The order is created automatically based on an existing order of the
-	 * customer.
-	 */
-	const TYPE_REPEAT = 'repeat';
-
-	/**
-	 * Web/internet order.
-	 * The order is created manually by the customer using the web shop.
-	 */
-	const TYPE_WEB = 'web';
-
-	/**
-	 * Phone order.
-	 * The order is created manually by an operator talking to the customer
-	 * over the phone.
-	 */
-	const TYPE_PHONE = 'phone';
-
-
-	/**
 	 * Unfinished delivery.
 	 * This is the default status after creating an order and this status
 	 * should be also used as long as technical errors occurs.

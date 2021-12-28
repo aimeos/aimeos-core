@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Order\Item;
  * @package MShop
  * @subpackage Order
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
 	 * Returns the order number
@@ -55,6 +55,21 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setBaseId( string $id ) : \Aimeos\MShop\Order\Item\Iface;
+
+	/**
+	 * Returns the channel of the invoice (repeating, web, phone, etc).
+	 *
+	 * @return string Invoice channel
+	 */
+	public function getChannel() : string;
+
+	/**
+	 * Sets the channel of the invoice.
+	 *
+	 * @param string $channel Invoice channel
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
+	 */
+	public function setChannel( string $channel ) : \Aimeos\MShop\Common\Item\Iface;
 
 	/**
 	 * Returns the delivery date of the invoice.

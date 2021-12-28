@@ -6,7 +6,8 @@
  */
 
 return [[
-	'order.type' => 'web', 'order.statuspayment' => 6, 'order.statusdelivery' => 4, 'order.datepayment' => '2008-02-15 12:34:56',
+	'order.channel' => 'web', 'order.statuspayment' => 6,
+	'order.statusdelivery' => 4, 'order.datepayment' => '2008-02-15 12:34:56',
 	'status' => [[
 		'order.status.type' => 'typestatus', 'order.status.value' => 'shipped'
 	]],
@@ -170,7 +171,7 @@ return [[
 		]]
 	]
 ], [
-	'order.type' => 'phone', 'order.statuspayment' => 6, 'order.statusdelivery' => 4, 'order.datepayment' => '2009-09-17 16:14:32',
+	'order.channel' => 'phone', 'order.statuspayment' => 6, 'order.statusdelivery' => 4, 'order.datepayment' => '2009-09-17 16:14:32',
 	'status' => [[
 		'order.status.type' => 'typestatus', 'order.status.value' => 'waiting'
 	]],
@@ -235,7 +236,7 @@ return [[
 		]]
 	],
 ], [
-	'order.type' => 'web', 'order.statuspayment' => 6, 'order.statusdelivery' => 4, 'order.datepayment' => '2009-03-18 16:14:32',
+	'order.channel' => 'web', 'order.statuspayment' => 6, 'order.statusdelivery' => 4, 'order.datepayment' => '2009-03-18 16:14:32',
 	'base' => [
 		'order.base.sitecode' => 'unittest',
 		'order.base.languageid' => 'de', 'order.base.customerref' => 'XYZ-1234',
@@ -310,7 +311,7 @@ return [[
 		]]
 	]
 ], [
-	'order.type' => 'web', 'order.statuspayment' => 5, 'order.statusdelivery' => 3, 'order.datepayment' => '2011-09-17 16:14:32',
+	'order.channel' => 'web', 'order.statuspayment' => 5, 'order.statusdelivery' => 3, 'order.datepayment' => '2011-09-17 16:14:32',
 	'status' => [[
 		'order.status.type' => 'status', 'order.status.value' => 'waiting'
 	]],

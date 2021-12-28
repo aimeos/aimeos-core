@@ -116,14 +116,14 @@ class TimeTest extends \PHPUnit\Framework\TestCase
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$search = $orderManager->filter();
 		$expr = array(
-			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_WEB ),
+			$search->compare( '==', 'order.channel', 'web' ),
 			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED )
 		);
 		$search->setConditions( $search->and( $expr ) );
 		$orderItems = $orderManager->search( $search )->toArray();
 
 		if( ( $order = reset( $orderItems ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::TYPE_WEB ) );
+			throw new \RuntimeException( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, 'web' ) );
 		}
 
 

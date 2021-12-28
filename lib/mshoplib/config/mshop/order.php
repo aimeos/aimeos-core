@@ -935,7 +935,7 @@ return array(
 		'insert' => array(
 			'ansi' => '
 				INSERT INTO "mshop_order" ( :names
-					"baseid", "type", "datepayment", "datedelivery",
+					"baseid", "channel", "datepayment", "datedelivery",
 					"statusdelivery", "statuspayment", "relatedid", "mtime",
 					"editor", "siteid", "ctime", "cdate", "cmonth", "cweek", "cwday", "chour"
 				) VALUES ( :values
@@ -947,7 +947,7 @@ return array(
 			'ansi' => '
 				UPDATE "mshop_order"
 				SET :names
-					"baseid" = ?, "type" = ?, "datepayment" = ?, "datedelivery" = ?, "statusdelivery" = ?,
+					"baseid" = ?, "channel" = ?, "datepayment" = ?, "datedelivery" = ?, "statusdelivery" = ?,
 					"statuspayment" = ?, "relatedid" = ?, "mtime" = ?, "editor" = ?
 				WHERE "siteid" = ? AND "id" = ?
 			'
@@ -962,7 +962,7 @@ return array(
 			'ansi' => '
 				SELECT :columns
 					mord."id" AS "order.id", mord."baseid" AS "order.baseid",
-					mord."siteid" AS "order.siteid", mord."type" AS "order.type",
+					mord."siteid" AS "order.siteid", mord."channel" AS "order.channel",
 					mord."datepayment" AS "order.datepayment", mord."datedelivery" AS "order.datedelivery",
 					mord."statuspayment" AS "order.statuspayment", mord."statusdelivery" AS "order.statusdelivery",
 					mord."relatedid" AS "order.relatedid", mord."ctime" AS "order.ctime",
@@ -971,7 +971,7 @@ return array(
 				:joins
 				WHERE :cond
 				GROUP BY :columns :group
-					mord."id", mord."baseid", mord."siteid", mord."type", mord."datepayment", mord."datedelivery",
+					mord."id", mord."baseid", mord."siteid", mord."channel", mord."datepayment", mord."datedelivery",
 					mord."statuspayment", mord."statusdelivery", mord."relatedid", mord."ctime", mord."mtime", mord."editor"
 				ORDER BY :order
 				OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
@@ -979,7 +979,7 @@ return array(
 			'mysql' => '
 				SELECT :columns
 					mord."id" AS "order.id", mord."baseid" AS "order.baseid",
-					mord."siteid" AS "order.siteid", mord."type" AS "order.type",
+					mord."siteid" AS "order.siteid", mord."channel" AS "order.channel",
 					mord."datepayment" AS "order.datepayment", mord."datedelivery" AS "order.datedelivery",
 					mord."statuspayment" AS "order.statuspayment", mord."statusdelivery" AS "order.statusdelivery",
 					mord."relatedid" AS "order.relatedid", mord."ctime" AS "order.ctime",

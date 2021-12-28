@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregate()
 	{
 		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
-		$result = $this->object->aggregate( $search, 'order.type' );
+		$result = $this->object->aggregate( $search, 'order.channel' );
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'web', $result );
@@ -44,7 +44,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregateMultiple()
 	{
-		$cols = ['order.type', 'order.statuspayment'];
+		$cols = ['order.channel', 'order.statuspayment'];
 		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] )->order( $cols );
 		$result = $this->object->aggregate( $search, $cols );
 
@@ -135,7 +135,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAggregateMonth()
 	{
 		$search = $this->object->filter()->add( ['order.editor' => 'core:lib/mshoplib'] );
-		$result = $this->object->aggregate( $search, 'order.type' )->toArray();
+		$result = $this->object->aggregate( $search, 'order.channel' )->toArray();
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'web', $result );
@@ -202,7 +202,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->filter();
 		$conditions = array(
-			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_PHONE ),
+			$search->compare( '==', 'order.channel', 'phone' ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
@@ -213,7 +213,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setType( \Aimeos\MShop\Order\Item\Base::TYPE_WEB );
+		$itemExp->setChannel( 'web' );
 		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 
@@ -224,7 +224,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getBaseId(), $itemSaved->getBaseId() );
-		$this->assertEquals( $item->getType(), $itemSaved->getType() );
+		$this->assertEquals( $item->getChannel(), $itemSaved->getChannel() );
 		$this->assertEquals( $item->getDatePayment(), $itemSaved->getDatePayment() );
 		$this->assertEquals( $item->getDateDelivery(), $itemSaved->getDateDelivery() );
 		$this->assertEquals( $item->getStatusPayment(), $itemSaved->getStatusPayment() );
@@ -238,7 +238,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getBaseId(), $itemUpd->getBaseId() );
-		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
+		$this->assertEquals( $itemExp->getChannel(), $itemUpd->getChannel() );
 		$this->assertEquals( $itemExp->getDatePayment(), $itemUpd->getDatePayment() );
 		$this->assertEquals( $itemExp->getDateDelivery(), $itemUpd->getDateDelivery() );
 		$this->assertEquals( $itemExp->getStatusPayment(), $itemUpd->getStatusPayment() );
@@ -263,7 +263,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->filter();
 		$conditions = array(
-			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_PHONE ),
+			$search->compare( '==', 'order.channel', 'phone' ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
@@ -312,7 +312,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->filter();
 		$conditions = array(
-			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_PHONE ),
+			$search->compare( '==', 'order.channel', 'phone' ),
 			$search->compare( '==', 'order.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
@@ -387,7 +387,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'order.id', null );
 		$expr[] = $search->compare( '==', 'order.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.baseid', null );
-		$expr[] = $search->compare( '==', 'order.type', 'web' );
+		$expr[] = $search->compare( '==', 'order.channel', 'web' );
 		$expr[] = $search->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' );
 		$expr[] = $search->compare( '==', 'order.datedelivery', null );
 		$expr[] = $search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
