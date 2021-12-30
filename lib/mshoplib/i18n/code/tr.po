@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2021-10-20 21:22+0000\n"
+"PO-Revision-Date: 2021-10-25 22:54+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -116,7 +116,7 @@ msgstr "Beklemede"
 
 #. Payment status value
 msgid "pay:5"
-msgstr "Onaylanmış"
+msgstr "Onaylandı"
 
 #. Payment status value
 msgid "pay:6"

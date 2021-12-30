@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Yolo San, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-04 18:31+0200\n"
-"PO-Revision-Date: 2021-10-04 16:33+0000\n"
-"Last-Translator: Aimeos\n"
+"POT-Creation-Date: 2021-12-30 16:30+0100\n"
+"PO-Revision-Date: 2021-12-07 15:12+0000\n"
+"Last-Translator: Yolo San\n"
 "Language-Team: Romanian (http://www.transifex.com/aimeos/aimeos-core/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -137,11 +138,11 @@ msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Clasa \"%1$s\" nu implementează interfața \"%2$s\""
 
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr "Clasa \"%1$s\" nu este disponibila"
+msgstr "Clasa \"%1$s\" nu este disponibilă"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
@@ -289,7 +290,7 @@ msgstr ""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr "Caracter invalid in numele clasei \"%1$s\""
+msgstr "Caracter incorect în numele clasei \"%1$s\""
 
 #, php-format
 msgid ""
@@ -350,7 +351,7 @@ msgstr ""
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "Factory incorect \"%1$s\""
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
@@ -667,7 +668,7 @@ msgid "PayPal Express: Wrong receiver email \"%1$s\""
 msgstr ""
 
 msgid "Payment costs"
-msgstr "Cost plata"
+msgstr "Costuri de plată"
 
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
@@ -759,7 +760,7 @@ msgstr ""
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
-msgstr "Parametrul necesar \"%1$s\" lipseste"
+msgstr "Parametrul obligatoriu \"%1$s\" lipsește"
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
