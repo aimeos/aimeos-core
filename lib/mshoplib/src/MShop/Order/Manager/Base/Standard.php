@@ -1033,31 +1033,16 @@ class Standard extends Base
 	 * Saves the complete basket to the storage including the items attached.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object containing all information
-	 * @param int $parts Bitmap of the basket parts that should be stored
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Stored order basket
 	 */
-	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket,
-		int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL ) : \Aimeos\MShop\Order\Item\Base\Iface
+	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$basket = $this->object()->save( $basket );
 
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT
-			|| $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON
-		) {
-			$this->storeProducts( $basket );
-		}
-
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON ) {
-			$this->storeCoupons( $basket );
-		}
-
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) {
-			$this->storeAddresses( $basket );
-		}
-
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) {
-			$this->storeServices( $basket );
-		}
+		$this->storeProducts( $basket );
+		$this->storeCoupons( $basket );
+		$this->storeAddresses( $basket );
+		$this->storeServices( $basket );
 
 		return $basket;
 	}

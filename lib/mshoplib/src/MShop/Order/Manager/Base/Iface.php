@@ -74,9 +74,7 @@ interface Iface
 	 * Saves the complete basket to the storage including the items attached.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object containing all information
-	 * @param int $parts Bitmap of the basket parts that should be stored
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Stored order basket
 	 */
-	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket,
-		int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL ) : \Aimeos\MShop\Order\Item\Base\Iface;
+	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Order\Item\Base\Iface;
 }
