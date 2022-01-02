@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2014
- * @copyright Aimeos (aimeos.org), 2015-2021
+ * @copyright Aimeos (aimeos.org), 2015-2022
  */
 
 
@@ -250,8 +250,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 10, $info[0] );
 		$this->assertEquals( 10, $info[1] );
 	}
-	
-	
+
+
 	public function testScaleFitCrop()
 	{
 		$ds = DIRECTORY_SEPARATOR;

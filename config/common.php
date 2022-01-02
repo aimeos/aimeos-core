@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2021-2022
+ */
+
 return [
 	'countries' => [
 		'AF', 'AX', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AQ', 'AG', 'AR', 'AM', 'AW', 'AU', 'AT', 'AZ', 'BS', 'BH',
