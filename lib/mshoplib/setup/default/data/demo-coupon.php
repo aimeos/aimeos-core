@@ -16,12 +16,12 @@ return array(
 		'codes' => [],
 	),
 	array(
-		'label' => 'demo-fixed', 'provider' => 'FixedRebate,BasketValues', 'status' => 1,
+		'label' => 'demo-fixed', 'provider' => 'FixedRebate,Basket', 'status' => 1,
 		'datestart' => null, 'dateend' => null,
 		'config' => array(
 			'fixedrebate.productcode' => 'demo-rebate',
 			'fixedrebate.rebate' => array( 'EUR' => 125.00, 'USD' => 150.00 ),
-			'basketvalues.total-value-min' => array( 'EUR' => 125.00, 'USD' => 150.00 ),
+			'basket.total-value-min' => array( 'EUR' => 125.00, 'USD' => 150.00 ),
 		),
 		'codes' => array(
 			array(
