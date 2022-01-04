@@ -34,7 +34,7 @@ class Standard
 		$view = $this->view();
 
 		foreach( $images as $type => $path ) {
-			$srcset[] = $view->content( $path, $fsname ) . ' ' . $type . 'w';
+			$srcset[] = $view->content( $path, $fsname ) . ' ' . max( 1, $type ) . 'w';
 		}
 
 		return join( ', ', $srcset );
