@@ -124,7 +124,7 @@ class DeliveryTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( [] ) );
 
-		$basket = $orderBaseManager->load( $order->getBaseId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
+		$basket = $orderBaseManager->load( $order->getBaseId(), ['order/base/service'] );
 		$config = $this->object->getConfigFE( $basket );
 
 		$this->assertIsArray( $config['delivery.type']->getDefault() );

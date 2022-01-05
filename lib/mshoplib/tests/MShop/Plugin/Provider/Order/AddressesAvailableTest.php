@@ -75,7 +75,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testEmptyConfig()
 	{
-		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS;
+		$value = ['order/base/address'];
 
 		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 
@@ -88,12 +88,11 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateAddressesNotAvailable()
 	{
-		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS;
-
 		$this->plugin->setConfig( array(
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => false,
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => false
 		) );
+		$value = ['order/base/address'];
 
 		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 
@@ -116,8 +115,6 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateAddressesAvailable()
 	{
-		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS;
-
 		$this->order->addAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->order->addAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 
@@ -125,6 +122,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => null,
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => null
 		) );
+		$value = ['order/base/address'];
 
 		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 

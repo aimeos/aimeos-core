@@ -24,10 +24,10 @@ interface Iface
 	/**
 	 * Tests if all necessary items are available to create the order.
 	 *
-	 * @param int $what Test for the specifice type of completeness
+	 * @param array $what Type of data
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
-	public function check( int $what = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL ) : \Aimeos\MShop\Order\Item\Base\Iface;
+	public function check( array $what = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'] ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
 	 * Notifies listeners before the basket becomes an order.

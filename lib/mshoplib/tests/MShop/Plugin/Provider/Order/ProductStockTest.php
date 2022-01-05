@@ -48,7 +48,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateOk()
 	{
-		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
+		$part = ['order/base/product'];
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 	}
 
@@ -59,9 +59,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 
 		try
 		{
-			$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
-			$this->object->update( $this->order, 'check.after', $part );
-
+			$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 			throw new \RuntimeException( 'Expected exception not thrown' );
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
@@ -78,9 +76,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 
 		try
 		{
-			$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
-			$this->object->update( $this->order, 'check.after', $part );
-
+			$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 			throw new \RuntimeException( 'Expected exception not thrown' );
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
@@ -93,7 +89,7 @@ class ProductStockTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateStockUnlimited()
 	{
-		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
+		$part = ['order/base/product'];
 		$this->order->addProduct( $this->getOrderProduct( 'MNOP' )->setStockType( 'unitstock' ) );
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );

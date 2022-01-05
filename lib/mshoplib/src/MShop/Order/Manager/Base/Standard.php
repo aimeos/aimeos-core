@@ -950,13 +950,13 @@ class Standard extends Base
 	 * modified so an additional order is stored when the basket is saved.
 	 *
 	 * @param string $id Base ID of the order to load
-	 * @param int $parts Bitmap of the basket parts that should be loaded
+	 * @param array $ref Basket parts that should be loaded too
 	 * @param bool $fresh Create a new basket by copying the existing one and remove IDs
 	 * @param bool $default True to use default criteria, false for no limitation
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket including all items
 	 */
-	public function load( string $id, int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, bool $fresh = false,
-		bool $default = false ) : \Aimeos\MShop\Order\Item\Base\Iface
+	public function load( string $id, array $ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'],
+		bool $fresh = false, bool $default = false ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
 		$search = $this->object()->filter( $default );
 		$expr = [
@@ -1017,9 +1017,9 @@ class Standard extends Base
 		] );
 
 		if( $fresh === false ) {
-			$basket = $this->loadItems( $id, $price, $localeItem, $row, $parts );
+			$basket = $this->loadItems( $id, $price, $localeItem, $row, $ref );
 		} else {
-			$basket = $this->loadFresh( $id, $price, $localeItem, $row, $parts );
+			$basket = $this->loadFresh( $id, $price, $localeItem, $row, $ref );
 		}
 
 		$pluginManager = \Aimeos\MShop::create( $this->context(), 'plugin' );

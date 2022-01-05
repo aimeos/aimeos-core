@@ -101,9 +101,9 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdate()
 	{
+		$value = ['order/base/product'];
 		$this->products['CNE']->setQuantity( 4 );
 		$this->order->addProduct( $this->products['CNE'] );
-		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->assertEquals( $value, $this->object->update( $this->order, 'check.after', $value ) );
 	}
@@ -112,10 +112,9 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateMinProductsFails()
 	{
 		$this->order->addProduct( $this->products['CNC'] );
-		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', $value );
+		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 	}
 
 
@@ -123,20 +122,18 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->products['CNE']->setQuantity( 6 );
 		$this->order->addProduct( $this->products['CNE'] );
-		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', $value );
+		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 	}
 
 
 	public function testUpdateMinValueFails()
 	{
 		$this->order->addProduct( $this->products['CNE'] );
-		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', $value );
+		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 	}
 
 
@@ -144,9 +141,8 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->products['CNC']->setQuantity( 2 );
 		$this->order->addProduct( $this->products['CNC'] );
-		$value = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', $value );
+		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 	}
 }

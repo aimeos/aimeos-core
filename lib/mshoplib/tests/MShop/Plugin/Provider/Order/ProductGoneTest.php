@@ -63,7 +63,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateOk()
 	{
-		$type = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
+		$type = ['order/base/product'];
 		$this->assertEquals( $type, $this->object->update( $this->order, 'check.after', $type ) );
 	}
 
@@ -74,10 +74,9 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 			->setProductId( -13 )->setProductCode( 'NONE' );
 
 		$this->order->addProduct( $badItem );
-		$type = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', $type );
+		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 	}
 
 
@@ -90,10 +89,9 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->save( $this->product );
 
 		$this->order->addProduct( $badItem );
-		$type = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', $type );
+		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 	}
 
 
@@ -106,10 +104,9 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Product\Manager\Factory::create( $this->context )->save( $this->product );
 
 		$this->order->addProduct( $badItem );
-		$type = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', $type );
+		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 	}
 
 
@@ -122,9 +119,8 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 		$this->order->addProduct( $badItem );
 		$badItemPosition = $this->order->getProducts()->firstKey();
-		$type = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 
 		$this->expectException( \Aimeos\MShop\Plugin\Provider\Exception::class );
-		$this->object->update( $this->order, 'check.after', $type );
+		$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 	}
 }

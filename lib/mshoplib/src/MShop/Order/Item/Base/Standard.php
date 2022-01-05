@@ -67,17 +67,15 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	/**
 	 * Tests if all necessary items are available to create the order.
 	 *
-	 * @param int $what Test for the specific type of completeness
+	 * @param array $what Type of data
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 * @throws \Aimeos\MShop\Order\Exception if there are no products in the basket
 	 */
-	public function check( int $what = self::PARTS_ALL ) : \Aimeos\MShop\Order\Item\Base\Iface
+	public function check( array $what = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'] ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		$this->checkParts( $what );
-
 		$this->notify( 'check.before', $what );
 
-		if( ( $what & self::PARTS_PRODUCT ) && ( count( $this->getProducts() ) < 1 ) ) {
+		if( in_array( 'order/base/product', $what ) && ( count( $this->getProducts() ) < 1 ) ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Basket empty' ) );
 		}
 
@@ -440,20 +438,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	{
 		$this->notify( 'setOrder.before' );
 		return $this;
-	}
-
-
-	/**
-	 * Checks the constants for the different parts of the basket.
-	 *
-	 * @param int $value Part constant
-	 * @throws \Aimeos\MShop\Order\Exception If parts constant is invalid
-	 */
-	protected function checkParts( int $value )
-	{
-		if( $value < self::PARTS_NONE || $value > self::PARTS_ALL ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Flags not within allowed range' ) );
-		}
 	}
 
 

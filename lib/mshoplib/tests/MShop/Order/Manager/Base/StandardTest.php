@@ -477,7 +477,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testLoadNone()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_NONE );
+		$order = $this->object->load( $item->getId(), [] );
 
 		$this->assertEquals( [], $order->getProducts()->toArray() );
 		$this->assertEquals( [], $order->getCoupons()->toArray() );
@@ -489,7 +489,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testLoadAddress()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
+		$order = $this->object->load( $item->getId(), ['order/base/address'] );
 
 		$this->assertGreaterThan( 0, count( $order->getAddresses() ) );
 		$this->assertEquals( [], $order->getCoupons()->toArray() );
@@ -501,7 +501,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testLoadProduct()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
+		$order = $this->object->load( $item->getId(), ['order/base/product'] );
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
 		$this->assertEquals( [], $order->getCoupons()->toArray() );
@@ -513,7 +513,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testLoadCoupon()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON );
+		$order = $this->object->load( $item->getId(), ['order/base/coupon'] );
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
 		$this->assertGreaterThan( 0, count( $order->getCoupons() ) );
@@ -525,7 +525,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testLoadService()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
+		$order = $this->object->load( $item->getId(), ['order/base/service'] );
 
 		$this->assertGreaterThan( 0, count( $order->getServices() ) );
 		$this->assertEquals( [], $order->getCoupons()->toArray() );
@@ -537,7 +537,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testLoadFresh()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
+		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
+		$order = $this->object->load( $item->getId(), $ref, true );
 
 
 		$this->assertEquals( 2, count( $order->getCoupons() ) );
@@ -572,7 +573,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testLoadFreshNone()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_NONE, true );
+		$order = $this->object->load( $item->getId(), [], true );
 
 		$this->assertEquals( [], $order->getAddresses()->toArray() );
 		$this->assertEquals( [], $order->getCoupons()->toArray() );
@@ -584,7 +585,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testLoadFreshAddress()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS, true );
+		$order = $this->object->load( $item->getId(), ['order/base/address'], true );
 
 		$this->assertGreaterThan( 0, count( $order->getAddresses() ) );
 		$this->assertEquals( [], $order->getCoupons()->toArray() );
@@ -596,7 +597,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testLoadFreshProduct()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT, true );
+		$order = $this->object->load( $item->getId(), ['order/base/product'], true );
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
 		$this->assertEquals( [], $order->getCoupons()->toArray() );
@@ -608,7 +609,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testLoadFreshCoupon()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON, true );
+		$order = $this->object->load( $item->getId(), ['order/base/coupon'], true );
 
 		$this->assertEquals( [], $order->getAddresses()->toArray() );
 		$this->assertEquals( 2, count( $order->getCoupons() ) );
@@ -620,7 +621,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testLoadFreshService()
 	{
 		$item = $this->getOrderItem();
-		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE, true );
+		$order = $this->object->load( $item->getId(), ['order/base/service'], true );
 
 		$this->assertGreaterThan( 0, count( $order->getServices() ) );
 		$this->assertEquals( [], $order->getCoupons()->toArray() );
@@ -632,8 +633,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testStore()
 	{
 		$item = $this->getOrderItem();
+		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
 
-		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
+		$basket = $this->object->load( $item->getId(), $ref, true );
 		$this->object->store( $basket );
 
 		$newBasketId = $basket->getId();
@@ -681,8 +683,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testStoreExisting()
 	{
 		$item = $this->getOrderItem();
+		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
 
-		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
+		$basket = $this->object->load( $item->getId(), $ref, true );
 		$this->object->store( $basket );
 		$newBasketId = $basket->getId();
 		$this->object->store( $basket );
@@ -720,7 +723,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->add( ['order.base.sitecode' => 'unittest', 'order.base.price' => 2400.00] );
 		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order found' ) );
 
-		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
+		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
+		$basket = $this->object->load( $item->getId(), $ref, true );
 		$this->object->store( $basket );
 
 		$newBasketId = $basket->getId();
@@ -751,12 +755,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS, true );
+		$basket = $this->object->load( $item->getId(), ['order/base/address'], true );
 		$this->object->store( $basket );
 
 		$newBasketId = $basket->getId();
 
-		$basket = $this->object->load( $newBasketId, \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
+		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
+		$basket = $this->object->load( $newBasketId, $ref );
 		$this->object->delete( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getAddresses() ) );
@@ -770,12 +775,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT, true );
+		$basket = $this->object->load( $item->getId(), ['order/base/product'], true );
 		$this->object->store( $basket );
 
 		$newBasketId = $basket->getId();
 
-		$basket = $this->object->load( $newBasketId, \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
+		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
+		$basket = $this->object->load( $newBasketId, $ref );
 		$this->object->delete( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getProducts() ) );
@@ -789,12 +795,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->getOrderItem();
 
-		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE, true );
+		$basket = $this->object->load( $item->getId(), ['order/base/service'], true );
 		$this->object->store( $basket );
 
 		$newBasketId = $basket->getId();
 
-		$basket = $this->object->load( $newBasketId, \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
+		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
+		$basket = $this->object->load( $newBasketId, $ref );
 		$this->object->delete( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getServices() ) );
@@ -809,14 +816,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->add( ['order.base.price' => '53.50'] );
 		$item = $this->object->search( $search )->first( new \RuntimeException( 'No order found' ) );
 
-		$parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
-		$basket = $this->object->load( $item->getId(), $parts, true );
+		$basket = $this->object->load( $item->getId(), ['order/base/product'], true );
 
 		$this->assertEquals( '58.50', $basket->getPrice()->getValue() );
 		$this->assertEquals( '1.50', $basket->getPrice()->getCosts() );
 		$this->assertEquals( 0, count( $basket->getCoupons() ) );
 
-		$productBasket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
+		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
+		$productBasket = $this->object->load( $item->getId(), $ref, true );
 
 		$basket->addCoupon( 'CDEF' );
 		$basket->addCoupon( '90AB' );

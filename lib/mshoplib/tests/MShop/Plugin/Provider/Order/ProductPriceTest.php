@@ -85,8 +85,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateArticlePriceCorrect()
 	{
-		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
-
+		$part = ['order/base/product'];
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 	}
 
@@ -106,7 +105,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 		$this->order->addProduct( $orderProduct, 0 );
 		$this->plugin->setConfig( array( 'update' => true ) );
-		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
+		$part = ['order/base/product'];
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 	}
@@ -120,9 +119,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 		try
 		{
-			$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
-			$this->object->update( $this->order, 'check.after', $part );
-
+			$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 			$this->fail( 'Price changes not recognized' );
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $mppe )
@@ -145,9 +142,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 		try
 		{
-			$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
-			$this->object->update( $this->order, 'check.after', $part );
-
+			$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 			$this->fail( 'Price changes not recognized' );
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $mppe )
@@ -171,9 +166,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 		try
 		{
-			$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
-			$this->object->update( $this->order, 'check.after', $part );
-
+			$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 			$this->fail( 'Price changes not recognized' );
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $mppe )
@@ -195,9 +188,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 
 		try
 		{
-			$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
-			$this->object->update( $this->order, 'check.after', $part );
-
+			$this->object->update( $this->order, 'check.after', ['order/base/product'] );
 			$this->fail( 'Price changes not recognized' );
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $mppe )
@@ -216,7 +207,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		$orderProduct = $orderProduct->setPrice( $orderProduct->getPrice()->setValue( 13.13 ) )
 			->setFlags( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE );
 
-		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
+		$part = ['order/base/product'];
 		$oldPrice = clone $this->order->getProduct( 0 )->getPrice();
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
@@ -231,7 +222,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		$orderProduct = $this->order->getProduct( 0 );
 		$orderProduct->setPrice( $orderProduct->getPrice()->setValue( 13.13 ) );
 
-		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
+		$part = ['order/base/product'];
 		$oldPrice = clone $this->order->getProduct( 0 )->getPrice();
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );

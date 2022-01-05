@@ -25,7 +25,7 @@ class OnceTest extends \PHPUnit\Framework\TestCase
 		$search = $orderBaseManager->filter()->add( ['order.base.price' => '2400.00'] );
 		$basket = $orderBaseManager->search( $search )->first( new \RuntimeException( 'No order base item found' ) );
 
-		$this->orderBase = $orderBaseManager->load( $basket->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
+		$this->orderBase = $orderBaseManager->load( $basket->getId(), ['order/base/address'] );
 	}
 
 

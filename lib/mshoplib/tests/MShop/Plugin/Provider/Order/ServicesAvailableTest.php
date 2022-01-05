@@ -78,7 +78,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateEmptyConfig()
 	{
-		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE;
+		$part = ['order/base/service'];
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 
@@ -91,12 +91,11 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateNoServices()
 	{
-		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE;
-
 		$this->plugin->setConfig( array(
 				'delivery' => false,
 				'payment' => false
 		) );
+		$part = ['order/base/service'];
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 
@@ -119,8 +118,6 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateEmptyServices()
 	{
-		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE;
-
 		$this->order->addService( $this->service, 'payment' );
 		$this->order->addService( $this->service, 'delivery' );
 
@@ -131,6 +128,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 			'delivery' => false,
 			'payment' => false
 		) );
+		$part = ['order/base/service'];
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 
@@ -153,8 +151,6 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateWithServices()
 	{
-		$part = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE;
-
 		$this->order->addService( $this->service, 'payment' );
 		$this->order->addService( $this->service, 'delivery' );
 
@@ -162,6 +158,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 				'delivery' => null,
 				'payment' => null
 		) );
+		$part = ['order/base/service'];
 
 		$this->assertEquals( $part, $this->object->update( $this->order, 'check.after', $part ) );
 

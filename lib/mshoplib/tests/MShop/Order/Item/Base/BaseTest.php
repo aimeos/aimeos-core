@@ -513,29 +513,22 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			}
 		}
 
-		$result = $this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
+		$result = $this->object->check( ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'] );
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $result );
-	}
-
-
-	public function testCheckInvalid()
-	{
-		$this->expectException( \Aimeos\MShop\Order\Exception::class );
-		$this->object->check( -1 );
 	}
 
 
 	public function testCheckAllFailure()
 	{
 		$this->expectException( \Aimeos\MShop\Order\Exception::class );
-		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
+		$this->object->check( ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'] );
 	}
 
 
 	public function testCheckProductsFailure()
 	{
 		$this->expectException( \Aimeos\MShop\Order\Exception::class );
-		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
+		$this->object->check( ['order/base/product'] );
 	}
 
 

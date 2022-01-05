@@ -385,29 +385,27 @@ abstract class Base
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object with total order value
 	 * @param \Aimeos\MShop\Locale\Item\Iface $localeItem Locale object of the order
 	 * @param array $row Array of values with all relevant order information
-	 * @param int $parts Bitmap of the basket parts that should be loaded
+	 * @param array $ref Basket parts that should be loaded too
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface The loaded order item for the given ID
 	 */
 	protected function loadItems( string $id, \Aimeos\MShop\Price\Item\Iface $price,
-		\Aimeos\MShop\Locale\Item\Iface $localeItem, array $row, int $parts )
+		\Aimeos\MShop\Locale\Item\Iface $localeItem, array $row, array $ref )
 	{
 		$products = $coupons = $addresses = $services = [];
 
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT
-			|| $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON
-		) {
+		if( in_array( 'order/base/product', $ref ) || in_array( 'order/base/coupon', $ref ) ) {
 			$products = $this->loadProducts( $id, false );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON ) {
+		if( in_array( 'order/base/coupon', $ref ) ) {
 			$coupons = $this->loadCoupons( $id, false, $products );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) {
+		if( in_array( 'order/base/address', $ref ) ) {
 			$addresses = $this->loadAddresses( $id, false );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) {
+		if( in_array( 'order/base/service', $ref ) ) {
 			$services = $this->loadServices( $id, false );
 		}
 
@@ -424,30 +422,30 @@ abstract class Base
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object with total order value
 	 * @param \Aimeos\MShop\Locale\Item\Iface $localeItem Locale object of the order
 	 * @param array $row Array of values with all relevant order information
-	 * @param int $parts Bitmap of the basket parts that should be loaded
+	 * @param array $ref Basket parts that should be loaded
 	 * @return \Aimeos\MShop\Order\Item\Base\Standard The loaded order item for the given ID
 	 */
 	protected function loadFresh( string $id, \Aimeos\MShop\Price\Item\Iface $price,
-		\Aimeos\MShop\Locale\Item\Iface $localeItem, array $row, int $parts )
+		\Aimeos\MShop\Locale\Item\Iface $localeItem, array $row, array $ref )
 	{
 		$products = $coupons = $addresses = $services = [];
 
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) {
+		if( in_array( 'order/base/product', $ref ) ) {
 			$products = $this->loadProducts( $id, true );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON ) {
+		if( in_array( 'order/base/coupon', $ref ) ) {
 			// load coupons with product array containing product ids for coupon/product matching
 			// not very efficient, a better solution might be considered for 2020.01 release
 			// see https://github.com/aimeos/aimeos-core/pull/175 for discussion
 			$coupons = $this->loadCoupons( $id, true, $this->loadProducts( $id, false ) );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) {
+		if( in_array( 'order/base/address', $ref ) ) {
 			$addresses = $this->loadAddresses( $id, true );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) {
+		if( in_array( 'order/base/service', $ref ) ) {
 			$services = $this->loadServices( $id, true );
 		}
 

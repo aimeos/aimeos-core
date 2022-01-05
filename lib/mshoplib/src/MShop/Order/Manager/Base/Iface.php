@@ -62,13 +62,13 @@ interface Iface
 	 * modified so an additional order is stored when the basket is saved.
 	 *
 	 * @param string $baseId Base ID of the order to load
-	 * @param int $parts Bitmap of the basket parts that should be loaded
+	 * @param array $ref Basket parts that should be loaded
 	 * @param bool $fresh Create a new basket by copying the existing one and remove IDs
 	 * @param bool $default True to use default criteria, false for no limitation
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket including all items
 	 */
-	public function load( string $baseId, int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, bool $fresh = false,
-		bool $default = false ) : \Aimeos\MShop\Order\Item\Base\Iface;
+	public function load( string $baseId, array $ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'],
+		bool $fresh = false, bool $default = false ) : \Aimeos\MShop\Order\Item\Base\Iface;
 
 	/**
 	 * Saves the complete basket to the storage including the items attached.

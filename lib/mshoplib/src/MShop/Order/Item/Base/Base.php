@@ -24,37 +24,6 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macr
 	use \Aimeos\Macro\Macroable;
 
 
-	/**
-	 * Check and load/store only basic basket content
-	 */
-	const PARTS_NONE = 0;
-
-	/**
-	 * Check and load/store basket with addresses
-	 */
-	const PARTS_ADDRESS = 1;
-
-	/**
-	 * Load/store basket with coupons
-	 */
-	const PARTS_COUPON = 2;
-
-	/**
-	 * Check and load/store basket with products
-	 */
-	const PARTS_PRODUCT = 4;
-
-	/**
-	 * Check and load/store basket with delivery/payment
-	 */
-	const PARTS_SERVICE = 8;
-
-	/**
-	 * Check and load/store basket with all parts.
-	 */
-	const PARTS_ALL = 15;
-
-
 	// protected is a workaround for serialize problem
 	protected $bdata;
 	protected $coupons;

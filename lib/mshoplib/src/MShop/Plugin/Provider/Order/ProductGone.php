@@ -56,7 +56,7 @@ class ProductGone
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		if( ( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) === 0 ) {
+		if( !in_array( 'order/base/product', (array) $value ) ) {
 			return $value;
 		}
 

@@ -117,7 +117,7 @@ class DateTest extends \PHPUnit\Framework\TestCase
 
 		$this->mockProvider->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( [] ) );
 
-		$basket = $orderBaseManager->load( $order->getBaseId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
+		$basket = $orderBaseManager->load( $order->getBaseId(), ['order/base/service'] );
 		$config = $this->object->getConfigFE( $basket );
 
 		$this->assertRegExp( '/[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]/', $config['date.value']->getDefault() );

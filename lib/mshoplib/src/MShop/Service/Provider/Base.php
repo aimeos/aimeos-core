@@ -406,13 +406,12 @@ abstract class Base
 	 * Returns the base order which is equivalent to the basket.
 	 *
 	 * @param string $baseId Order base ID stored in the order item
-	 * @param int $parts Bitmap of the basket parts that should be loaded
+	 * @param array $ref Basket parts that should be loaded too
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket, optional with addresses, products, services and coupons
 	 */
-	protected function getOrderBase( string $baseId,
-		int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) : \Aimeos\MShop\Order\Item\Base\Iface
+	protected function getOrderBase( string $baseId, array $ref = ['order/base/service'] ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		return \Aimeos\MShop::create( $this->context, 'order/base' )->load( $baseId, $parts );
+		return \Aimeos\MShop::create( $this->context, 'order/base' )->load( $baseId, $ref );
 	}
 
 
@@ -479,13 +478,11 @@ abstract class Base
 	 * Saves the base order which is equivalent to the basket and its dependent objects.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object with associated items
-	 * @param int $parts Bitmap of the basket parts that should be stored
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Stored order base item
 	 */
-	protected function saveOrderBase( \Aimeos\MShop\Order\Item\Base\Iface $base,
-		int $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) : \Aimeos\MShop\Order\Item\Base\Iface
+	protected function saveOrderBase( \Aimeos\MShop\Order\Item\Base\Iface $base ) : \Aimeos\MShop\Order\Item\Base\Iface
 	{
-		return \Aimeos\MShop::create( $this->context, 'order/base' )->store( $base, $parts );
+		return \Aimeos\MShop::create( $this->context, 'order/base' )->store( $base );
 	}
 
 

@@ -98,7 +98,9 @@ class Xml
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$baseItem = $this->getOrderBase( $order->getBaseId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
+		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
+		$baseItem = $this->getOrderBase( $order->getBaseId(), $ref );
+
 		$this->createFile( $this->createXml( [$order], [$baseItem->getId() => $baseItem] ) );
 
 		return $order->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
