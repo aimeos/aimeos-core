@@ -280,7 +280,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getQuantity(), $itemSaved->getQuantity() );
 		$this->assertEquals( $item->getQuantityOpen(), $itemSaved->getQuantityOpen() );
 		$this->assertEquals( $item->getStatusPayment(), $itemSaved->getStatusPayment() );
-		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
+		$this->assertEquals( $item->getStatusDelivery(), $itemSaved->getStatusDelivery() );
 		$this->assertEquals( $item->getFlags(), $itemSaved->getFlags() );
 		$this->assertEquals( $item->getNotes(), $itemSaved->getNotes() );
 		$this->assertNotEquals( [], $item->getAttributeItems()->toArray() );
@@ -314,7 +314,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getQuantity(), $itemUpd->getQuantity() );
 		$this->assertEquals( $itemExp->getQuantityOpen(), $itemUpd->getQuantityOpen() );
 		$this->assertEquals( $itemExp->getStatusPayment(), $itemUpd->getStatusPayment() );
-		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
+		$this->assertEquals( $itemExp->getStatusDelivery(), $itemUpd->getStatusDelivery() );
 		$this->assertEquals( $itemExp->getFlags(), $itemUpd->getFlags() );
 		$this->assertEquals( $itemExp->getNotes(), $itemUpd->getNotes() );
 		$this->assertNotEquals( [], $itemUpd->getAttributeItems()->toArray() );

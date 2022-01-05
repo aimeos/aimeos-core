@@ -558,25 +558,6 @@ class Standard extends Base implements Iface
 
 
 	/**
-	 * @deprecated 2022.01
-	 */
-	public function getStatus() : int
-	{
-		$result = $this->get( 'order.base.product.statusdelivery' );
-		return $result !== null ? $result : \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED;
-	}
-
-
-	/**
-	 * @deprecated 2022.01
-	 */
-	public function setStatus( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
-	{
-		return $this->setStatusDelivery( $value );
-	}
-
-
-	/**
 	 * Returns the current payment status of the order product item.
 	 *
 	 * The returned status values are the PAY_* constants from the \Aimeos\MShop\Order\Item\Base class

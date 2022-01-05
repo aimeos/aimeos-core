@@ -185,15 +185,6 @@ class Standard
 
 
 	/**
-	 * @deprecated 2022.01
-	 */
-	public function getDeliveryStatus() : ?int
-	{
-		return $this->getStatusDelivery();
-	}
-
-
-	/**
 	 * Sets the delivery status of the invoice.
 	 *
 	 * @param int|null $status Status code constant from \Aimeos\MShop\Order\Item\Base
@@ -210,15 +201,6 @@ class Standard
 
 
 	/**
-	 * @deprecated 2022.01
-	 */
-	public function setDeliveryStatus( ?int $status ) : \Aimeos\MShop\Order\Item\Iface
-	{
-		return $this->setStatusDelivery( $status );
-	}
-
-
-	/**
 	 * Returns the payment status of the invoice.
 	 *
 	 * @return int Payment constant from \Aimeos\MShop\Order\Item\Base
@@ -226,15 +208,6 @@ class Standard
 	public function getStatusPayment() : ?int
 	{
 		return $this->get( 'order.statuspayment' );
-	}
-
-
-	/**
-	 * @deprecated 2022.01
-	 */
-	public function getPaymentStatus() : ?int
-	{
-		return $this->getStatusPayment();
 	}
 
 
@@ -255,15 +228,6 @@ class Standard
 		}
 
 		return $this->set( 'order.statuspayment', $status );
-	}
-
-
-	/**
-	 * @deprecated 2022.01
-	 */
-	public function setPaymentStatus( ?int $status ) : \Aimeos\MShop\Order\Item\Iface
-	{
-		return $this->setStatusPayment( $status );
 	}
 
 

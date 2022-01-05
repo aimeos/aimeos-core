@@ -567,13 +567,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetStatus()
-	{
-		$this->object->setStatusDelivery( null );
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED, $this->object->getStatus() );
-	}
-
-
 	public function testGetStatusDelivery()
 	{
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $this->object->getStatusDelivery() );
@@ -1018,7 +1011,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'Cafe Noire Expresso', $productCopy->getName() );
 		$this->assertEquals( 'Cafe Noire Expresso for basket', $productCopy->getDescription() );
 		$this->assertEquals( $product->getId(), $productCopy->getProductId() );
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED, $productCopy->getStatus() );
+		$this->assertEquals( null, $productCopy->getStatusDelivery() );
 		$this->assertEquals( '', $productCopy->getSupplierName() );
 		$this->assertEquals( '', $productCopy->getMediaUrl() );
 		$this->assertEquals( '', $productCopy->getTarget() );
