@@ -413,6 +413,8 @@ abstract class Base
 
 		$basket = $this->createItemBase( $price, $localeItem, $row, $products, $addresses, $services, $coupons );
 
+		\Aimeos\MShop::create( $this->getContext(), 'plugin' )->register( $basket, 'order' );
+
 		return $basket;
 	}
 
@@ -453,6 +455,8 @@ abstract class Base
 
 		$basket = $this->createItemBase( $price, $localeItem, $row );
 		$basket->setId( null );
+
+		\Aimeos\MShop::create( $this->getContext(), 'plugin' )->register( $basket, 'order' );
 
 		foreach( $products as $item )
 		{
