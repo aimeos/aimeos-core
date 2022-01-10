@@ -227,7 +227,7 @@ class Standard
 	public static function supports( $mimetypes = [] ) : array
 	{
 		$types = [
-			IMG_BMP => 'image/bmp', IMG_GIF => 'image/gif', IMG_JPG => 'image/jpeg', IMG_PNG => 'image/png',
+			IMG_GIF => 'image/gif', IMG_JPG => 'image/jpeg', IMG_PNG => 'image/png',
 			IMG_WBMP => 'image/wbmp', IMG_XPM => 'image/xpm', IMG_WEBP => 'image/webp'
 		];
 		$list = [];
