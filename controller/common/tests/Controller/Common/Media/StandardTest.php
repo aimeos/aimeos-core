@@ -400,11 +400,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetMimeTypeNotAllowed()
 	{
-		$file = \Aimeos\MW\Media\Factory::get( __DIR__ . '/testfiles/test.gif' );
+		$file = \Aimeos\MW\Media\Factory::get( __DIR__ . '/testfiles/test.png' );
 		$this->context->config()->set( 'controller/common/media/files/allowedtypes', array( 'image/jpeg' ) );
 
-		$result = $this->access( 'getMimeType' )->invokeArgs( $this->object, array( $file, 'files' ) );
-		$this->assertEquals( 'image/jpeg', $result );
+		$this->expectException( '\Aimeos\Controller\Common\Exception' );
+		$this->access( 'getMimeType' )->invokeArgs( $this->object, array( $file, 'files' ) );
 	}
 
 

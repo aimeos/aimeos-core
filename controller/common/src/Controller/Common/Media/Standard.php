@@ -600,19 +600,20 @@ class Standard
 		 * @category User
 		 */
 		$default = [
-			'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml',
+			'image/webp', 'image/jpeg', 'image/png', 'image/gif', 'image/svg+xml',
 			'application/pdf', 'application/zip',
 			'video/mp4', 'video/webm'
 		];
 		$allowed = $config->get( 'controller/common/media/' . $type . '/allowedtypes', $default );
 
-		if( in_array( $mimetype, $allowed ) === false )
-		{
-			if( ( $defaulttype = reset( $allowed ) ) === false ) {
-				throw new \Aimeos\Controller\Common\Exception( sprintf( 'No allowed image types configured for "%1$s"', $type ) );
-			}
+		if( $type === 'preview' && in_array( $mimetype, ['image/jpeg', 'image/png'] )
+			&& !empty( $supported = $media::supports( $allowed ) ) && ( $imgtype = reset( $supported ) ) !== false
+		) {
+			return $imgtype;
+		}
 
-			return $defaulttype;
+		if( in_array( $mimetype, $allowed ) === false ) {
+			throw new \Aimeos\Controller\Common\Exception( sprintf( 'File type "%1$s" is not allowed', $mimetype ) );
 		}
 
 		return $mimetype;
