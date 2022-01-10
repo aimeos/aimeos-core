@@ -220,13 +220,14 @@ class Standard
 	protected function addImages( \Aimeos\MShop\Media\Item\Iface $item, \Aimeos\MW\Media\Image\Iface $media, ?string $name, string $fsname ) : \Aimeos\MShop\Media\Item\Iface
 	{
 		$previews = [];
-		$mime = $this->getMimeType( $media, 'preview' );
 		$item = $this->deletePreviews( $item, $fsname );
 
 		foreach( $this->createPreviews( $media, $item->getDomain(), $item->getType() ) as $type => $mediaFile )
 		{
-			$filepath = $this->getFilePath( $name ?: rand(), 'preview', $media->getMimeType() );
+			$mime = $this->getMimeType( $mediaFile, 'preview' );
+			$filepath = $this->getFilePath( $name ?: rand(), 'preview', $mime );
 			$this->store( $filepath, $mediaFile->save( null, $mime ), $fsname );
+
 			$previews[$mediaFile->getWidth()] = $filepath;
 			unset( $mediaFile );
 		}
