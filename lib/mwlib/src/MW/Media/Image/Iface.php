@@ -36,7 +36,7 @@ interface Iface
 	public function getWidth() : int;
 
 	/**
-	 * Scales the image to the given width and height.
+	 * Scales the image to the given width and height
 	 *
 	 * @param int|null $width New width of the image or null for automatic calculation
 	 * @param int|null $height New height of the image or null for automatic calculation
@@ -44,4 +44,12 @@ interface Iface
 	 * @return \Aimeos\MW\Media\Image\Iface Self object for method chaining
 	 */
 	public function scale( int $width = null, int $height = null, int $fit = 0 ) : Iface;
+
+	/**
+	 * Returns the supported image mime types
+	 *
+	 * @param array|string $mimetypes Mime type or list of mime types to check against
+	 * @return array List of supported mime types
+	 */
+	public static function supports( $mimetypes = [] ) : array;
 }

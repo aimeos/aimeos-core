@@ -43,15 +43,18 @@ class Imagick
 
 		try
 		{
-			if( in_array( $mimetype, ['image/gif', 'image/png'] ) ) {
-				$bg = $options['image']['background'] ?? 'transparent';
-			} else {
-				$bg = $options['image']['background'] ?? '#ffffff';
-			}
-
 			$this->image = new \Imagick();
 			$this->image->readImageBlob( $content );
-			$this->image->setImageBackgroundColor( $bg );
+
+			if( in_array( $mimetype, ['image/gif', 'image/png', 'image/webp'] ) )
+			{
+				$this->image->setImageAlphaChannel( \Imagick::ALPHACHANNEL_ACTIVATE );
+				$this->image->setImageBackgroundColor( $options['image']['background'] ?? 'transparent' );
+			}
+			else
+			{
+				$this->image->setImageBackgroundColor( $options['image']['background'] ?? '#ffffff' );
+			}
 
 			if( isset( $options['image']['watermark'] ) && self::$wmpath !== $options['image']['watermark'] )
 			{
@@ -121,7 +124,7 @@ class Imagick
 	 */
 	public function save( string $filename = null, string $mimetype = null ) : ?string
 	{
-		if( $mimetype === null ) {
+		if( empty( $mimetype ) ) {
 			$mimetype = $this->getMimeType();
 		}
 
@@ -134,7 +137,7 @@ class Imagick
 
 		try
 		{
-			$this->image->setImageFormat( $mime[1] );
+			$this->image->setImageFormat( $mime[1] ?? 'jpeg' );
 			$this->image->setImageCompressionQuality( $quality );
 
 			if( $filename === null ) {
@@ -197,6 +200,32 @@ class Imagick
 		{
 			throw new \Aimeos\MW\Media\Exception( $e->getMessage() );
 		}
+	}
+
+
+	/**
+	 * Returns the supported image mime types
+	 *
+	 * @param array|string $mimetypes Mime type or list of mime types to check against
+	 * @return array List of supported mime types
+	 */
+	public static function supports( $mimetypes = [] ) : array
+	{
+		$types = [
+			'BMP' => 'image/bmp', 'GIF' => 'image/gif', 'JPEG' => 'image/jpeg',
+			'PNG' => 'image/png', 'TIFF' => 'image/tiff', 'WEBP' => 'image/webp'
+		];
+		$list = [];
+		$supported = \Imagick::queryFormats();
+
+		foreach( $types as $key => $type )
+		{
+			if( in_array( $key, $supported ) ) {
+				$list[] = $type;
+			}
+		}
+
+		return empty( $mimetypes ) ? $list : array_intersect( $list, (array) $mimetypes );
 	}
 
 

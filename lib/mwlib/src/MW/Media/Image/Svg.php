@@ -143,6 +143,18 @@ class Svg
 
 
 	/**
+	 * Returns the supported image mime types
+	 *
+	 * @param array|string $mimetypes Mime type or list of mime types to check against
+	 * @return array List of supported mime types
+	 */
+	public static function supports( $mimetypes = [] ) : array
+	{
+		return empty( $mimetypes ) ? ['image/svg+xml'] : array_intersect( ['image/svg+xml'], (array) $mimetypes );
+	}
+
+
+	/**
 	 * Returns the fitted width and height.
 	 *
 	 * @param int $srcWidth Width of the image

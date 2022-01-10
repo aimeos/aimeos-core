@@ -45,6 +45,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testConstructWebp()
+	{
+		if( \Aimeos\MW\Media\Image\Standard::supports( 'image/webp' ) ) {
+			$this->markTestSkipped( 'WEBP image format not supported' );
+		}
+
+		$ds = DIRECTORY_SEPARATOR;
+		$content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.webp' );
+
+		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/webp', [] );
+
+		$this->assertEquals( 'image/webp', $media->getMimetype() );
+	}
+
+
 	public function testConstructImageException()
 	{
 		$ds = DIRECTORY_SEPARATOR;
@@ -170,6 +185,37 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSaveWebp()
+	{
+		if( \Aimeos\MW\Media\Image\Standard::supports( 'image/webp' ) ) {
+			$this->markTestSkipped( 'WEBP image format not supported' );
+		}
+
+		$ds = DIRECTORY_SEPARATOR;
+		$content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.gif' );
+		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . $ds . 'tmp' . $ds . 'media.webp';
+
+		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/gif', [] );
+		$media->save( $dest, 'image/webp' );
+
+		$this->assertEquals( true, file_exists( $dest ) );
+		unlink( $dest );
+	}
+
+
+	public function testSaveWebpInvalidDest()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'image.gif' );
+		$dest = __DIR__ . $ds . 'notexisting' . $ds . 'media.webp';
+
+		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/gif', [] );
+
+		$this->expectException( \Aimeos\MW\Media\Exception::class );
+		$media->save( $dest, 'image/webp' );
+	}
+
+
 	public function testSaveWatermarkNotfound()
 	{
 		$ds = DIRECTORY_SEPARATOR;
@@ -262,5 +308,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 100, $info[0] );
 		$this->assertEquals( 50, $info[1] );
+	}
+
+
+	public function testSupports()
+	{
+		$this->assertGreaterThan( 0, count( \Aimeos\MW\Media\Image\Standard::supports() ) );
+		$this->assertEquals( 1, count( \Aimeos\MW\Media\Image\Standard::supports( 'image/jpeg' ) ) );
 	}
 }

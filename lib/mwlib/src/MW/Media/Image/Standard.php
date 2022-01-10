@@ -151,6 +151,14 @@ class Standard
 
 					break;
 
+				case 'image/webp':
+
+					if( @imagewebp( $this->image, $filename, $quality ) === false ) {
+						throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
+					}
+
+					break;
+
 				case 'image/png':
 
 					if( imagesavealpha( $this->image, true ) === false ) {
@@ -207,6 +215,32 @@ class Standard
 		}
 
 		return $this->resize( $newWidth, $newHeight, $width, $height, !$fit );
+	}
+
+
+	/**
+	 * Returns the supported image mime types
+	 *
+	 * @param array|string $mimetypes Mime type or list of mime types to check against
+	 * @return array List of supported mime types
+	 */
+	public static function supports( $mimetypes = [] ) : array
+	{
+		$types = [
+			IMG_BMP => 'image/bmp', IMG_GIF => 'image/gif', IMG_JPG => 'image/jpeg', IMG_PNG => 'image/png',
+			IMG_WBMP => 'image/wbmp', IMG_XPM => 'image/xpm', IMG_WEBP => 'image/webp'
+		];
+		$list = [];
+		$supported = imagetypes();
+
+		foreach( $types as $key => $type )
+		{
+			if( $key & $supported ) {
+				$list[] = $type;
+			}
+		}
+
+		return empty( $mimetypes ) ? $list : array_intersect( $list, (array) $mimetypes );
 	}
 
 

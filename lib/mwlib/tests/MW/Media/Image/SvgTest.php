@@ -111,4 +111,11 @@ class SvgTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 150, $media->getHeight() );
 		$this->assertStringContainsString( 'viewBox="0 38 200 225"', $media->save() );
 	}
+
+
+	public function testSupports()
+	{
+		$this->assertGreaterThan( 0, count( \Aimeos\MW\Media\Image\Svg::supports() ) );
+		$this->assertEquals( 1, count( \Aimeos\MW\Media\Image\Svg::supports( 'image/svg+xml' ) ) );
+	}
 }
