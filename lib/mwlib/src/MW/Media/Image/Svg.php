@@ -145,6 +145,8 @@ class Svg
 	/**
 	 * Returns the supported image mime types
 	 *
+	 * The result list uses the order of the passed mime types.
+	 *
 	 * @param array|string $mimetypes Mime type or list of mime types to check against
 	 * @return array List of supported mime types
 	 */

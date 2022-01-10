@@ -221,14 +221,16 @@ class Standard
 	/**
 	 * Returns the supported image mime types
 	 *
+	 * The result list uses the order of the passed mime types.
+	 *
 	 * @param array|string $mimetypes Mime type or list of mime types to check against
 	 * @return array List of supported mime types
 	 */
 	public static function supports( $mimetypes = [] ) : array
 	{
 		$types = [
-			IMG_GIF => 'image/gif', IMG_JPG => 'image/jpeg', IMG_PNG => 'image/png',
-			IMG_WBMP => 'image/wbmp', IMG_XPM => 'image/xpm', IMG_WEBP => 'image/webp'
+			IMG_WEBP => 'image/webp', IMG_JPG => 'image/jpeg', IMG_PNG => 'image/png',
+			IMG_GIF => 'image/gif', IMG_WBMP => 'image/wbmp', IMG_XPM => 'image/xpm'
 		];
 		$list = [];
 		$supported = imagetypes();
@@ -240,7 +242,7 @@ class Standard
 			}
 		}
 
-		return empty( $mimetypes ) ? $list : array_intersect( $list, (array) $mimetypes );
+		return empty( $mimetypes ) ? $list : array_intersect( (array) $mimetypes, $list );
 	}
 
 

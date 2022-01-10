@@ -206,14 +206,16 @@ class Imagick
 	/**
 	 * Returns the supported image mime types
 	 *
+	 * The result list uses the order of the passed mime types.
+	 *
 	 * @param array|string $mimetypes Mime type or list of mime types to check against
 	 * @return array List of supported mime types
 	 */
 	public static function supports( $mimetypes = [] ) : array
 	{
 		$types = [
-			'BMP' => 'image/bmp', 'GIF' => 'image/gif', 'JPEG' => 'image/jpeg',
-			'PNG' => 'image/png', 'TIFF' => 'image/tiff', 'WEBP' => 'image/webp'
+			'WEBP' => 'image/webp', 'JPEG' => 'image/jpeg', 'PNG' => 'image/png',
+			'GIF' => 'image/gif', 'TIFF' => 'image/tiff', 'BMP' => 'image/bmp'
 		];
 		$list = [];
 		$supported = \Imagick::queryFormats();
@@ -225,7 +227,7 @@ class Imagick
 			}
 		}
 
-		return empty( $mimetypes ) ? $list : array_intersect( $list, (array) $mimetypes );
+		return empty( $mimetypes ) ? $list : array_intersect( (array) $mimetypes, $list );
 	}
 
 

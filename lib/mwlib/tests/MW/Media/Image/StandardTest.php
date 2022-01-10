@@ -315,5 +315,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertGreaterThan( 0, count( \Aimeos\MW\Media\Image\Standard::supports() ) );
 		$this->assertEquals( 1, count( \Aimeos\MW\Media\Image\Standard::supports( 'image/jpeg' ) ) );
+
+		$result = \Aimeos\MW\Media\Image\Standard::supports( ['image/gif', 'image/png', 'image/jpeg'] );
+		$this->assertEquals( ['image/gif', 'image/png', 'image/jpeg'], $result );
 	}
 }
