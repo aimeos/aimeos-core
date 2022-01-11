@@ -465,16 +465,16 @@ abstract class Base
 			}
 		}
 
-		foreach( $coupons as $code => $items ) {
-			$basket->addCoupon( $code );
-		}
-
 		foreach( $addresses as $item ) {
 			$basket->addAddress( $item, $item->getType() );
 		}
 
 		foreach( $services as $item ) {
 			$basket->addService( $item, $item->getType() );
+		}
+
+		foreach( $coupons as $code => $items ) {
+			$basket->addCoupon( $code );
 		}
 
 		return $basket;

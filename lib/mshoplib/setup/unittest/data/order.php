@@ -83,9 +83,11 @@ return array(
 
 	//ordprodid => prodcode/quantity/pos
 	'order/base/coupon' => [
-		['baseid' => '53.50', 'ordprodid' => 'U:MD/1/3', 'code' => '5678'],
+		['baseid' => '53.50', 'ordprodid' => 'U:MD/1/3', 'code' => '1234'],
+		//['baseid' => '53.50', 'ordprodid' => 'U:MD/1/3', 'code' => '5678'], 
 		['baseid' => '53.50', 'ordprodid' => 'ABCD/1/4', 'code' => 'OPQR'],
 		['baseid' => '672.00', 'ordprodid' => 'CNE/2/1', 'code' => '5678'],
+		//['baseid' => '672.00', 'ordprodid' => 'CNE/2/1', 'code' => '90AB'],
 		['baseid' => '672.00', 'ordprodid' => 'CNC/1/2', 'code' => 'OPQR'],
 	],
 

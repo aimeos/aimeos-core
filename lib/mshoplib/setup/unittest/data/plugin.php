@@ -13,7 +13,7 @@ return [
 
 	'plugin' => [[
 		'plugin.type' => 'order', 'plugin.label' => 'Shipping-Plugin', 'plugin.provider' => 'Shipping,Example',
-		'plugin.config' => ["threshold" => ["EUR" =>"34.00"]], 'plugin.status' => 1
+		'plugin.config' => ["threshold" => ["EUR" =>"500.00"]], 'plugin.status' => 1
 	], [
 		'plugin.type' => 'order', 'plugin.label' => 'ProductLimit-Plugin', 'plugin.provider' => 'ProductLimit,Example',
 		'plugin.config' => ["single-number-max" => "10"], 'plugin.status' => 1

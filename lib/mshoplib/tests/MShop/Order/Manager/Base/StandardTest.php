@@ -39,8 +39,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->aggregate( $search, 'order.base.rebate' )->toArray();
 
 		$this->assertEquals( 3, count( $result ) );
-		$this->assertArrayHasKey( '5.00', $result );
-		$this->assertEquals( 2, $result['5.00'] );
+		$this->assertArrayHasKey( '4.50', $result );
+		$this->assertEquals( 1, $result['4.50'] );
 	}
 
 
@@ -126,7 +126,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->filter();
 		$conditions = array(
-			$search->compare( '==', 'order.base.costs', '1.50' ),
+			$search->compare( '==', 'order.base.costs', '6.50' ),
 			$search->compare( '==', 'order.base.editor', $this->editor )
 		);
 		$search->setConditions( $search->and( $conditions ) );
@@ -244,8 +244,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'order.base.currencyid', 'EUR' );
 		$expr[] = $search->compare( '==', 'order.base.price', '53.50' );
-		$expr[] = $search->compare( '==', 'order.base.costs', '1.50' );
-		$expr[] = $search->compare( '==', 'order.base.rebate', '14.50' );
+		$expr[] = $search->compare( '==', 'order.base.costs', '6.50' );
+		$expr[] = $search->compare( '==', 'order.base.rebate', '9.50' );
 		$expr[] = $search->compare( '==', 'order.base.taxvalue', '0.0000' );
 		$expr[] = $search->compare( '~=', 'order.base.customerref', 'ABC-1234' );
 		$expr[] = $search->compare( '~=', 'order.base.comment', 'This is a comment' );
@@ -688,13 +688,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->getOrderItem();
 
 		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
+
 		$this->object->store( $basket );
 		$newBasketId = $basket->getId();
 		$this->object->store( $basket );
 		$newBasket = $this->object->load( $newBasketId );
 
 		$this->object->delete( $newBasketId );
-
 
 		$newAddresses = $newBasket->getAddresses();
 
@@ -706,7 +706,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$newProducts = $newBasket->getProducts();
-
 		foreach( $basket->getProducts() as $key => $product ) {
 			$this->assertEquals( $product->getId(), $newProducts[$key]->getId() );
 		}
@@ -880,7 +879,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter();
 
 		$expr = [];
-		$expr[] = $search->compare( '==', 'order.base.rebate', 14.50 );
+		$expr[] = $search->compare( '==', 'order.base.rebate', 9.50 );
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
 		$expr[] = $search->compare( '==', 'order.base.price', 53.50 );
 		$expr[] = $search->compare( '==', 'order.base.editor', $this->editor );
