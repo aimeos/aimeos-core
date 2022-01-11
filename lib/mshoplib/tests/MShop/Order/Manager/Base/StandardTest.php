@@ -654,10 +654,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$pos = 0;
 		$products = $basket->getProducts();
-		$this->assertEquals( 2, count( $products ) );
+		$this->assertEquals( 3, count( $products ) );
 
 		foreach( $products as $product )
 		{
+			if( $product->getProductCode() == 'U:MD' ) {
+				continue;
+			}
 			$this->assertGreaterThanOrEqual( 2, count( $product->getAttributeItems() ) );
 			$this->assertEquals( $pos++, $product->getPosition() );
 		}
@@ -863,7 +866,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( '52.50', $newBasket->getPrice()->getValue() );
 		$this->assertEquals( '1.50', $newBasket->getPrice()->getCosts() );
-		$this->assertEquals( '6.00', $newBasket->getPrice()->getRebate() );
+		$this->assertEquals( '11.00', $newBasket->getPrice()->getRebate() );
 		$this->assertEquals( 2, count( $newBasket->getCoupons() ) );
 	}
 

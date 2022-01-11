@@ -414,8 +414,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'order.base.currencyid', 'EUR' );
 		$expr[] = $search->compare( '==', 'order.base.price', '53.50' );
-		$expr[] = $search->compare( '==', 'order.base.costs', '1.50' );
-		$expr[] = $search->compare( '==', 'order.base.rebate', '14.50' );
+		$expr[] = $search->compare( '==', 'order.base.costs', '6.50' );
+		$expr[] = $search->compare( '==', 'order.base.rebate', '9.50' );
 		$expr[] = $search->compare( '~=', 'order.base.comment', 'This is a comment' );
 		$expr[] = $search->compare( '>=', 'order.base.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.base.ctime', '1970-01-01 00:00:00' );
