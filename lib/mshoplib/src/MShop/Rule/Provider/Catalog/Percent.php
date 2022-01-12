@@ -68,8 +68,19 @@ class Percent
 	 */
 	public function apply( \Aimeos\MShop\Product\Item\Iface $product ) : bool
 	{
-		$percent = $this->getConfigValue( 'percent' );
+		$this->update( $product, (float) $this->getConfigValue( 'percent' ) );
+		return $this->isLast();
+	}
 
+
+	/**
+	 * Updates the prices of the given product and sub-products
+	 *
+	 * @param \Aimeos\MShop\Product\Item\Iface $product Product the rule should be applied to
+	 * @param float $percent Price change in percent
+	 */
+	protected function update( \Aimeos\MShop\Product\Item\Iface $product, float $percent )
+	{
 		foreach( $product->getRefItems( 'price' ) as $price )
 		{
 			$value = $price->getValue();
@@ -77,6 +88,8 @@ class Percent
 			$price->setValue( $value + $diff )->setRebate( $diff < 0 ? $diff : 0 );
 		}
 
-		return $this->isLast();
+		foreach( $product->getRefItems( 'product' ) as $subproduct ) {
+			$this->update( $subproduct, $percent );
+		}
 	}
 }
