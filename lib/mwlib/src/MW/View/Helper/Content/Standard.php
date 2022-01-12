@@ -23,6 +23,7 @@ class Standard
 	implements \Aimeos\MW\View\Helper\Content\Iface
 {
 	private $baseurls = [];
+	private $version;
 	private $enc;
 
 
@@ -34,7 +35,9 @@ class Standard
 	public function __construct( \Aimeos\MW\View\Iface $view )
 	{
 		parent::__construct( $view );
+
 		$this->enc = $view->encoder();
+		$this->version = $view->config( 'version', 1 );
 	}
 
 
@@ -43,12 +46,13 @@ class Standard
 	 *
 	 * @param string|null $url Absolute, relative or data: URL
 	 * @param string $fsname File system name the file is stored at
+	 * @param bool $version TRUE to add file version, FALSE for not
 	 * @return string Complete encoded content URL
 	 */
-	public function transform( ?string $url, $fsname = 'fs-media' ) : string
+	public function transform( ?string $url, $fsname = 'fs-media', bool $version = false ) : string
 	{
 		if( $url && !\Aimeos\MW\Str::starts( $url, ['http', 'data:', '/'] ) ) {
-			$url = $this->baseurl( $fsname ) . '/' . $url;
+			$url = $this->baseurl( $fsname ) . '/' . $url . ( $version ? '?v=' . $this->version : '' );
 		}
 
 		return $this->enc->attr( $url );
