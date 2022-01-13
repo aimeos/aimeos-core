@@ -7,7 +7,7 @@
  */
 
 return [
-	'catalog.code' => 'home', 'catalog.label' => 'Home', 'catalog.config' => [], 'catalog.status' => 1,
+	'catalog.code' => 'home', 'catalog.label' => 'Home', 'catalog.config' => ['css-class' => 'megamenu'],
 	'text' => [
 		[
 			'label' => 'Demo name/de: Start', 'content' => 'Start',
@@ -84,7 +84,7 @@ return [
 		],
 		'media' => [
 			[
-				'label' => 'Demo: Best seller stage', 'mimetype' => 'image/jpeg',
+				'label' => 'Demo: Best seller stage', 'mimetype' => 'image/webp',
 				'url' => 'https://aimeos.org/media/default/main-banner-1-big.webp',
 				'preview' => [
 					480 => 'https://aimeos.org/media/default/main-banner-1-low.webp',
@@ -95,7 +95,43 @@ return [
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			],
+			[
+				'label' => 'Demo: Best seller menu', 'mimetype' => 'image/webp',
+				'url' => 'https://aimeos.org/media/default/product_01_A-low.webp',
+				'preview' => [
+					240 => 'https://aimeos.org/media/default/product_01_A-low.webp',
+					720 => 'https://aimeos.org/media/default/product_01_A-med.webp',
+					1350 => 'https://aimeos.org/media/default/product_01_A-big.webp',
+				],
+				'type' => 'menu', 'languageid' => null, 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			],
 		],
+		'catalog' => [[
+			'catalog.code' => 'demo-best-women', 'catalog.label' => 'Women',
+			'catalog' => [[
+				'catalog.code' => 'demo-best-women-shirt', 'catalog.label' => 'Shirts'
+			], [
+				'catalog.code' => 'demo-best-women-dress', 'catalog.label' => 'Dresses'
+			], [
+				'catalog.code' => 'demo-best-women-top', 'catalog.label' => 'Tops'
+			]]
+		], [
+			'catalog.code' => 'demo-best-men', 'catalog.label' => 'Men',
+			'catalog' => [[
+				'catalog.code' => 'demo-best-men-tshirt', 'catalog.label' => 'T-Shirts'
+			], [
+				'catalog.code' => 'demo-best-men-muscle', 'catalog.label' => 'Muscle shirts'
+			]]
+		], [
+			'catalog.code' => 'demo-best-misc', 'catalog.label' => 'Misc',
+			'catalog' => [[
+				'catalog.code' => 'demo-best-misc-event', 'catalog.label' => 'Events'
+			], [
+				'catalog.code' => 'demo-best-misc-voucher', 'catalog.label' => 'Vouchers'
+			]]
+		]]
 	], [
 		'catalog.code' => 'demo-new', 'catalog.label' => 'New arrivals',
 		'text' => [
@@ -123,7 +159,7 @@ return [
 		],
 		'media' => [
 			[
-				'label' => 'Demo: New arrivals stage', 'mimetype' => 'image/jpeg',
+				'label' => 'Demo: New arrivals stage', 'mimetype' => 'image/webp',
 				'url' => 'https://aimeos.org/media/default/main-banner-2-big.webp',
 				'preview' => [
 					480 => 'https://aimeos.org/media/default/main-banner-2-low.webp',
@@ -162,7 +198,7 @@ return [
 		],
 		'media' => [
 			[
-				'label' => 'Demo: Hot deals stage', 'mimetype' => 'image/jpeg',
+				'label' => 'Demo: Hot deals stage', 'mimetype' => 'image/webp',
 				'url' => 'https://aimeos.org/media/default/main-banner-3-big.webp',
 				'preview' => [
 					480 => 'https://aimeos.org/media/default/main-banner-3-low.webp',

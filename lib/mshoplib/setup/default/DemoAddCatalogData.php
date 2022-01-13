@@ -130,8 +130,8 @@ class DemoAddCatalogData extends MShopAddDataAbstract
 				$this->addTexts( $item->getId(), $entry['text'], $domain );
 			}
 
-			if( isset( $data['catalog'] ) ) {
-				$this->addCatalog( $item->getId(), $data['catalog'], $domain );
+			if( isset( $entry['catalog'] ) ) {
+				$this->addCatalog( $item->getId(), $entry['catalog'], $domain );
 			}
 		}
 	}
