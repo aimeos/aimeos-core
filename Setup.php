@@ -107,7 +107,12 @@ class Setup
 	{
 		$ctx = new \Aimeos\MShop\Context\Item\Standard();
 
-		$conf = new \Aimeos\MW\Config\PHPArray( $this->config, $this->bootstrap->getConfigPaths() );
+		$conf = new \Aimeos\MW\Config\PHPArray( [], $this->bootstrap->getConfigPaths() );
+
+		foreach( $this->config as $key => $value ) {
+			$conf->set( $key, $value );
+		}
+
 		$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
 		$ctx->setConfig( $conf );
 

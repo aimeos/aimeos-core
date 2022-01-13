@@ -108,7 +108,7 @@ function verbose( array $options ) : string
  */
 function usage()
 {
-	printf( "Usage: php setup.php [OPTION]* [sitecode] [tplsite]\n" );
+	printf( "Usage: php up.php [OPTION]* [sitecode] [tplsite]\n" );
 	printf( "  -q                       Quiet\n" );
 	printf( "  -v                       Important messages\n" );
 	printf( "  -vv                      Important and informational messages\n" );
