@@ -165,7 +165,7 @@ return [[
 			'order.base.service.mediaurl' => 'somewhere/thump1.jpg'
 		]],
 		'coupon' => [[
-			'ordprodpos' => 2, 'code' => '5678'
+			'ordprodpos' => 2, 'code' => '1234'
 		], [
 			'ordprodpos' => 3, 'code' => 'OPQR'
 		]]

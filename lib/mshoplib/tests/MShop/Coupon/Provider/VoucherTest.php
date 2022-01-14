@@ -122,7 +122,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetUsedRebate()
 	{
-		$rebate = $this->access( 'getUsedRebate' )->invokeArgs( $this->object, ['5678'] );
+		$rebate = $this->access( 'getUsedRebate' )->invokeArgs( $this->object, ['1234'] );
 
 		$this->assertEquals( 5.0, $rebate );
 	}

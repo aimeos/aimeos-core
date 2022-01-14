@@ -8,7 +8,14 @@
 return [
 	'coupon' => [[
 		'coupon.label' => 'Unit test fixed rebate', 'coupon.provider' => 'FixedRebate,Basket',
-		'coupon.config' => ['fixedrebate.productcode' => 'U:MD', 'basket.total-value-min' => ['EUR' => '9.00'], 'fixedrebate.rebate' => '2.50'],
+		'coupon.config' => ['fixedrebate.productcode' => 'U:MD', 'basket.total-value-min' => ['EUR' => '9.00'], 'fixedrebate.rebate' => ['EUR' => '2.50']],
+		'coupon.datestart' => '2002-01-01 00:00:00', 'coupon.dateend' => '2100-12-31 00:00:00',
+		'codes' => [[
+			'coupon.code.code' => '1234', 'coupon.code.count' => 2000000
+		]]
+	], [
+		'coupon.label' => 'Unit test fixed rebate (unavailable)', 'coupon.provider' => 'FixedRebate,Basket',
+		'coupon.config' => ['fixedrebate.productcode' => 'U:MD', 'basket.total-value-min' => ['EUR' => '9.00'], 'fixedrebate.rebate' => ['EUR' => '2.50']],
 		'coupon.datestart' => '2002-01-01 00:00:00', 'coupon.dateend' => '2100-12-31 00:00:00',
 		'codes' => [[
 			'coupon.code.code' => '5678', 'coupon.code.count' => 2000000,

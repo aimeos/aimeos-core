@@ -35,9 +35,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.editor', 'core:lib/mshoplib' ) );
 		$result = $this->object->aggregate( $search, 'order.base.coupon.code' )->toArray();
 
-		$this->assertEquals( 2, count( $result ) );
-		$this->assertArrayHasKey( '5678', $result );
-		$this->assertEquals( 2, $result['5678'] );
+		$this->assertEquals( 3, count( $result ) );
+		$this->assertArrayHasKey( 'OPQR', $result );
+		$this->assertEquals( 2, $result['OPQR'] );
 	}
 
 
@@ -113,7 +113,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$results = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $results ) );
-		$this->assertGreaterThanOrEqual( 4, $total );
+		$this->assertGreaterThanOrEqual( 3, $total );
 	}
 
 

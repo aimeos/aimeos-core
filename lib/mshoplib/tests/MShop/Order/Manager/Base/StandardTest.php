@@ -39,8 +39,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->aggregate( $search, 'order.base.rebate' )->toArray();
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertArrayHasKey( '5.00', $result );
-		$this->assertEquals( 1, $result['5.00'] );
+		$this->assertArrayHasKey( '4.50', $result );
+		$this->assertEquals( 1, $result['4.50'] );
 	}
 
 
@@ -651,10 +651,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$pos = 0;
 		$products = $basket->getProducts();
-		$this->assertEquals( 2, count( $products ) );
+		$this->assertEquals( 3, count( $products ) );
 
 		foreach( $products as $product )
 		{
+			if( $product->getProductCode() == 'U:MD' ) {
+				continue;
+			}
 			$this->assertGreaterThanOrEqual( 2, count( $product->getAttributeItems() ) );
 			$this->assertEquals( $pos++, $product->getPosition() );
 		}
@@ -693,27 +696,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $newBasketId );
 
-
-		foreach( $basket->getAddresses() as $key => $list )
+		foreach( $basket->getAddresses() as $type => $list )
 		{
-			foreach( $list as $pos => $address ) {
-				$this->assertEquals( $address->getId(), $newBasket->getAddress( $key, $pos )->getId() );
-			}
+			$this->assertTrue( map( $list )->getId()->equals( map( $newBasket->getAddress( $type ) )->getId() ) );
 		}
 
-		$newProducts = $newBasket->getProducts();
+		$this->assertTrue( $basket->getProducts()->getId()->equals( $newBasket->getProducts()->getId() ) );
 
-		foreach( $basket->getProducts() as $key => $product ) {
-			$this->assertEquals( $product->getId(), $newProducts[$key]->getId() );
-		}
-
-		$newServices = $newBasket->getServices();
-
-		foreach( $basket->getServices() as $key => $list )
+		foreach( $basket->getServices() as $type => $list )
 		{
-			foreach( $list as $pos => $service ) {
-				$this->assertEquals( $service->getId(), $newServices[$key][$pos]->getId() );
-			}
+			$this->assertTrue( map( $list )->getId()->equals( map( $newBasket->getService( $type ) )->getId() ) );
 		}
 	}
 

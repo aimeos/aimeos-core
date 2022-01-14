@@ -1022,9 +1022,6 @@ class Standard extends Base
 			$basket = $this->loadFresh( $id, $price, $localeItem, $row, $ref );
 		}
 
-		$pluginManager = \Aimeos\MShop::create( $this->context(), 'plugin' );
-		$pluginManager->register( $basket, 'order' );
-
 		return $basket;
 	}
 
