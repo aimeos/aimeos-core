@@ -709,7 +709,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		{
 			$this->assertTrue( map( $list )->getId()->equals( map( $newBasket->getService( $type ) )->getId() ) );
 		}
-
 	}
 
 
