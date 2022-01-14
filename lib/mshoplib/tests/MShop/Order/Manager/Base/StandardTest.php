@@ -698,32 +698,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $newBasketId );
 
-
-		$newAddresses = $newBasket->getAddresses();
-
-		foreach( $basket->getAddresses() as $key => $list )
+		foreach( $basket->getAddresses() as $type => $list )
 		{
-			foreach( $list as $pos => $address ) {
-				$this->assertEquals( $address->getId(), $newAddresses[$key][$pos]->getId() );
-			}
+			$this->assertTrue( map( $list )->getId()->equals( map( $newBasket->getAddress( $type ) )->getId() ) );
 		}
 
-		// streamline keys in fresh loaded order, see https://github.com/aimeos/aimeos-core/pull/280
-		$products = $basket->getProducts();
-		$productsKeys = $products->keys();
+		$this->assertTrue( $basket->getProducts()->getId()->equals( $newBasket->getProducts()->getId() ) );
 
-		foreach( $newBasket->getProducts() as $key => $product ) {
-			$this->assertEquals( $product->getId(), $products[$productsKeys[$key]]->getId() );
-		}
-
-		$newServices = $newBasket->getServices();
-
-		foreach( $basket->getServices() as $key => $list )
+		foreach( $basket->getServices() as $type => $list )
 		{
-			foreach( $list as $pos => $service ) {
-				$this->assertEquals( $service->getId(), $newServices[$key][$pos]->getId() );
-			}
+			$this->assertTrue( map( $list )->getId()->equals( map( $newBasket->getService( $type ) )->getId() ) );
 		}
+
 	}
 
 
