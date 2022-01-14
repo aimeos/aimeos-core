@@ -691,13 +691,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->getOrderItem();
 
 		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, true );
-
 		$this->object->store( $basket );
 		$newBasketId = $basket->getId();
 		$this->object->store( $basket );
 		$newBasket = $this->object->load( $newBasketId );
 
 		$this->object->delete( $newBasketId );
+
 
 		$newAddresses = $newBasket->getAddresses();
 
@@ -708,9 +708,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			}
 		}
 
-		$newProducts = $newBasket->getProducts();
-		foreach( $basket->getProducts() as $key => $product ) {
-			$this->assertEquals( $product->getId(), $newProducts[$key]->getId() );
+		// streamline keys in fresh loaded order, see https://github.com/aimeos/aimeos-core/pull/280
+		$products = $basket->getProducts();
+		$productsKeys = $products->keys();
+
+		foreach( $newBasket->getProducts() as $key => $product ) {
+			$this->assertEquals( $product->getId(), $products[$productsKeys[$key]]->getId() );
 		}
 
 		$newServices = $newBasket->getServices();
