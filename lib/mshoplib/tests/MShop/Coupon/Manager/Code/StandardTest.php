@@ -203,7 +203,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 5, $total );
+		$this->assertEquals( 6, $total );
 	}
 
 

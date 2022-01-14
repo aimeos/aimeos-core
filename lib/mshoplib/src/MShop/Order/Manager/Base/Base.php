@@ -413,6 +413,8 @@ abstract class Base
 
 		$basket = $this->createItemBase( $price, $localeItem, $row, $products, $addresses, $services, $coupons );
 
+		\Aimeos\MShop::create( $this->getContext(), 'plugin' )->register( $basket, 'order' );
+
 		return $basket;
 	}
 
@@ -454,15 +456,13 @@ abstract class Base
 		$basket = $this->createItemBase( $price, $localeItem, $row );
 		$basket->setId( null );
 
+		\Aimeos\MShop::create( $this->getContext(), 'plugin' )->register( $basket, 'order' );
+
 		foreach( $products as $item )
 		{
 			if( !( $item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) ) {
 				$basket->addProduct( $item );
 			}
-		}
-
-		foreach( $coupons as $code => $items ) {
-			$basket->addCoupon( $code );
 		}
 
 		foreach( $addresses as $item ) {
@@ -471,6 +471,10 @@ abstract class Base
 
 		foreach( $services as $item ) {
 			$basket->addService( $item, $item->getType() );
+		}
+
+		foreach( $coupons as $code => $items ) {
+			$basket->addCoupon( $code );
 		}
 
 		return $basket;

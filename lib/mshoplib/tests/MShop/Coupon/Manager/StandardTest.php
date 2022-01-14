@@ -197,7 +197,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'coupon.id', null );
 		$expr[] = $search->compare( '!=', 'coupon.siteid', null );
-		$expr[] = $search->compare( '==', 'coupon.label', 'Unit test fixed rebate' );
+		$expr[] = $search->compare( '==', 'coupon.label', 'Unit test fixed rebate (unavailable)' );
 		$expr[] = $search->compare( '=~', 'coupon.provider', 'FixedRebate' );
 		$expr[] = $search->compare( '~=', 'coupon.config', 'product' );
 		$expr[] = $search->compare( '==', 'coupon.datestart', '2002-01-01 00:00:00' );
@@ -241,6 +241,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->search( $search, [], $total )->toArray();
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 6, $total );
+		$this->assertEquals( 7, $total );
 	}
 }
