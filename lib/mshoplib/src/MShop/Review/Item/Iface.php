@@ -38,9 +38,9 @@ interface Iface
 	/**
 	 * Returns the ID of the reviewer
 	 *
-	 * @return string ID of the customer item
+	 * @return string|null ID of the customer item
 	 */
-	public function getCustomerId() : string;
+	public function getCustomerId() : ?string;
 
 	/**
 	 * Sets the ID of the reviewer

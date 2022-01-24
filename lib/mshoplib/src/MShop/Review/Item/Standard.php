@@ -58,11 +58,11 @@ class Standard
 	/**
 	 * Returns the ID of the reviewer
 	 *
-	 * @return string ID of the customer item
+	 * @return string|null ID of the customer item
 	 */
-	public function getCustomerId() : string
+	public function getCustomerId() : ?string
 	{
-		return (string) $this->get( 'review.customerid', '' );
+		return (string) $this->get( 'review.customerid' );
 	}
 
 

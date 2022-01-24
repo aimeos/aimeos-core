@@ -16,7 +16,7 @@ return array(
 			$table->string( 'siteid' );
 			$table->string( 'domain', 32 );
 			$table->refid();
-			$table->string( 'customerid', 36 )->default( '' );
+			$table->string( 'customerid', 36 )->null( true );
 			$table->string( 'ordprodid', 36 )->default( '' );
 			$table->string( 'name', 32 )->default( '' );
 			$table->smallint( 'status' )->default( -1 );
