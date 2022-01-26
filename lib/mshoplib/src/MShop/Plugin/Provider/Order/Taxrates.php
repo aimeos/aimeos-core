@@ -92,8 +92,8 @@ class Taxrates
 		$p->attach( $plugin, 'addAddress.after' );
 		$p->attach( $plugin, 'setAddresses.after' );
 		$p->attach( $plugin, 'addProduct.after' );
-        $p->attach( $plugin, 'addService.after' );
-        $p->attach( $plugin, 'setServices.after' );
+		$p->attach( $plugin, 'addService.after' );
+		$p->attach( $plugin, 'setServices.after' );
 
 		return $this;
 	}
@@ -142,11 +142,11 @@ class Taxrates
 			$orderProduct->getPrice()->setTaxrate( $taxrate );
 		}
 
-        foreach ( $order->getServices() as $orderServiceGroup ) {
-            foreach ( $orderServiceGroup as $orderService ) {
-                $orderService->getPrice()->setTaxrate($taxrate);
-            }
-        }
+		foreach ( $order->getServices() as $orderServiceGroup ) {
+			foreach ( $orderServiceGroup as $orderService ) {
+				$orderService->getPrice()->setTaxrate($taxrate);
+			}
+		}
 
 		return $value;
 	}
