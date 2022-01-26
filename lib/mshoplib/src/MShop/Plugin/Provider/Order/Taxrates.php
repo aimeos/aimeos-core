@@ -142,9 +142,9 @@ class Taxrates
 			$orderProduct->getPrice()->setTaxrate( $taxrate );
 		}
 
-		foreach ( $order->getServices() as $orderServiceGroup ) {
-			foreach ( $orderServiceGroup as $orderService ) {
-				$orderService->getPrice()->setTaxrate($taxrate);
+		foreach( $order->getServices() as $orderServiceGroup ) {
+			foreach( $orderServiceGroup as $orderService ) {
+				$orderService->getPrice()->setTaxrate( $taxrate );
 			}
 		}
 
