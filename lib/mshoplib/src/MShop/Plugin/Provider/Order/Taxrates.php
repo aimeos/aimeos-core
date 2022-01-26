@@ -12,7 +12,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
 /**
- * Sets the tax rate of products depending on the country
+ * Sets the tax rate of products and services depending on the country
  *
  * Shops selling into several countries with different tax rates can use this
  * plugin to set a different tax rate in all price items for that countries.
@@ -92,6 +92,8 @@ class Taxrates
 		$p->attach( $plugin, 'addAddress.after' );
 		$p->attach( $plugin, 'setAddresses.after' );
 		$p->attach( $plugin, 'addProduct.after' );
+		$p->attach( $plugin, 'addService.after' );
+		$p->attach( $plugin, 'setServices.after' );
 
 		return $this;
 	}
@@ -138,6 +140,12 @@ class Taxrates
 			}
 
 			$orderProduct->getPrice()->setTaxrate( $taxrate );
+		}
+
+		foreach ( $order->getServices() as $orderServiceGroup ) {
+			foreach ( $orderServiceGroup as $orderService ) {
+				$orderService->getPrice()->setTaxrate($taxrate);
+			}
 		}
 
 		return $value;
