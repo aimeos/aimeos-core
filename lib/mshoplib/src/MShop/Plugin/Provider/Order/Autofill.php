@@ -186,10 +186,8 @@ class Autofill
 		) {
 			$orderManager = \Aimeos\MShop::create( $context, 'order' );
 
-			$search = $orderManager->filter();
-			$search->setConditions( $search->compare( '==', 'order.base.customerid', $userid ) );
-			$search->setSortations( array( $search->sort( '-', 'order.ctime' ) ) );
-			$search->slice( 0, 1 );
+			$search = $orderManager->filter()->add( ['order.base.customerid' => $userid] )
+				->order( '-order.ctime' )->slice( 0, 1 );
 
 			if( ( $item = $orderManager->search( $search )->first() ) !== null )
 			{
@@ -219,21 +217,13 @@ class Autofill
 		$context = $this->context();
 		$serviceManager = \Aimeos\MShop::create( $context, 'service' );
 
-		$search = $serviceManager->filter( true );
-
-		$expr = [];
+		$filter = $serviceManager->filter( true )->add( ['service.type' => $type] )->order( 'service.position' );
 
 		if( $code !== null ) {
-			$expr[] = $search->compare( '==', 'service.code', $code );
+			$filter->add( 'service.code', '==', $code );
 		}
 
-		$expr[] = $search->compare( '==', 'service.type', $type );
-		$expr[] = $search->getConditions();
-
-		$search->setConditions( $search->and( $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'service.position' ) ) );
-
-		foreach( $serviceManager->search( $search, array( 'media', 'price', 'text' ) ) as $item )
+		foreach( $serviceManager->search( $filter, ['media', 'price', 'text'] ) as $item )
 		{
 			$provider = $serviceManager->getProvider( $item, $item->getType() );
 
@@ -347,6 +337,13 @@ class Autofill
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
 
+		foreach( $order->getService( $type ) as $pos => $service )
+		{
+			if( $this->getServiceItem( $order, $type, $service->getCode() ) === null ) {
+				$order->deleteService( $pos );
+			}
+		}
+
 		if( $order->getService( $type ) === [] && (bool) $this->getConfigValue( 'delivery', false ) === true
 			&& ( ( $item = $this->getServiceItem( $order, $type, $this->getConfigValue( 'deliverycode' ) ) ) !== null
 			|| ( $item = $this->getServiceItem( $order, $type ) ) !== null )
@@ -356,6 +353,13 @@ class Autofill
 
 
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
+
+		foreach( $order->getService( $type ) as $pos => $service )
+		{
+			if( $this->getServiceItem( $order, $type, $service->getCode() ) === null ) {
+				$order->deleteService( $pos );
+			}
+		}
 
 		if( $order->getService( $type ) === [] && (bool) $this->getConfigValue( 'payment', false ) === true
 			&& ( ( $item = $this->getServiceItem( $order, $type, $this->getConfigValue( 'paymentcode' ) ) ) !== null
