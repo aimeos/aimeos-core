@@ -48,7 +48,7 @@ class Xml
 			'label' => 'Relative path of the template file name',
 			'type' => 'string',
 			'internaltype' => 'string',
-			'default' => 'service/provider/delivery/xml-body-standard',
+			'default' => 'service/provider/delivery/xml-body',
 			'required' => false,
 		],
 		'xml.updatedir' => [
@@ -208,7 +208,7 @@ class Xml
 	protected function createXml( iterable $orderItems, iterable $baseItems ) : string
 	{
 		$view = $this->context()->view();
-		$template = $this->getConfigValue( 'xml.template', 'service/provider/delivery/xml-body-standard' );
+		$template = $this->getConfigValue( 'xml.template', 'service/provider/delivery/xml-body' );
 
 		return $view->assign( ['orderItems' => $orderItems, 'baseItems' => $baseItems] )->render( $template );
 	}

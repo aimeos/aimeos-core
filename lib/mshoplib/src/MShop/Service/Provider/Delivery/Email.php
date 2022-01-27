@@ -55,7 +55,7 @@ class Email
 			'label' => 'E-mail template',
 			'type' => 'string',
 			'internaltype' => 'string',
-			'default' => 'service/provider/delivery/email-body-standard',
+			'default' => 'service/provider/delivery/email-body',
 			'required' => true,
 		],
 		'email.order-template' => [
@@ -64,7 +64,7 @@ class Email
 			'label' => 'Order template',
 			'type' => 'string',
 			'internaltype' => 'string',
-			'default' => 'service/provider/delivery/email-order-standard',
+			'default' => 'service/provider/delivery/email-order',
 			'required' => true,
 		],
 	];
@@ -135,7 +135,7 @@ class Email
 	 */
 	protected function getEmailContent( iterable $orderItems, iterable $baseItems )
 	{
-		$template = $this->getConfigValue( 'email.template', 'service/provider/delivery/email-body-standard' );
+		$template = $this->getConfigValue( 'email.template', 'service/provider/delivery/email-body' );
 
 		return $this->context()->view()
 			->assign( ['orderItems' => $orderItems, 'baseItems' => $baseItems] )
@@ -151,7 +151,7 @@ class Email
 	 */
 	protected function getOrderContent( iterable $orderItems, iterable $baseItems )
 	{
-		$template = $this->getConfigValue( 'email.order-template', 'service/provider/delivery/email-order-standard' );
+		$template = $this->getConfigValue( 'email.order-template', 'service/provider/delivery/email-order' );
 
 		return $this->context()->view()
 			->assign( ['orderItems' => $orderItems, 'baseItems' => $baseItems] )

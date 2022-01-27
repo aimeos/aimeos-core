@@ -14,6 +14,6 @@
 
 
 <orders>
-<?= $this->partial( 'service/provider/delivery/xml-item-standard', ['orderItems' => $this->orderItems, 'baseItems' => $this->baseItems] ) ?>
+<?= $this->partial( 'service/provider/delivery/xml-item', ['orderItems' => $this->orderItems, 'baseItems' => $this->baseItems] ) ?>
 
 </orders>
