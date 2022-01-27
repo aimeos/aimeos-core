@@ -7,13 +7,14 @@
 # Translators:
 # Translators:
 # Translators:
+# محمد مسعودزاده, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2021-10-19 07:56+0000\n"
-"Last-Translator: Aimeos\n"
+"PO-Revision-Date: 2021-12-09 17:35+0000\n"
+"Last-Translator: محمد مسعودزاده\n"
 "Language-Team: Persian (http://www.transifex.com/aimeos/aimeos-core/language/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,23 +24,23 @@ msgstr ""
 
 #. Item status
 msgid "status:-2"
-msgstr ""
+msgstr "بایگانی شد"
 
 #. Item status
 msgid "status:-1"
-msgstr ""
+msgstr "مرور"
 
 #. Item status
 msgid "status:0"
-msgstr ""
+msgstr "غیر فعال شده"
 
 #. Item status
 msgid "status:1"
-msgstr ""
+msgstr "فعال شد"
 
 #. Item status
 msgid "status:2"
-msgstr ""
+msgstr "پنهان شده است"
 
 #. Address salutation
 msgid "company"
@@ -47,7 +48,7 @@ msgstr "شرکت"
 
 #. Address salutation
 msgid "mr"
-msgstr ""
+msgstr "آقای"
 
 #. Address salutation
 msgid "ms"
@@ -55,23 +56,23 @@ msgstr ""
 
 #. Address salutation
 msgid "mrs"
-msgstr ""
+msgstr "خانم"
 
 #. Address salutation
 msgid "miss"
-msgstr ""
+msgstr "از دست دادن"
 
 #. Order type value
 msgid "order:repeat"
-msgstr ""
+msgstr "تکرار شده"
 
 #. Order type value
 msgid "order:web"
-msgstr ""
+msgstr "اینترنت"
 
 #. Order type value
 msgid "order:phone"
-msgstr ""
+msgstr "تلفن"
 
 #. Subscription reason code
 msgid "reason:-1"
@@ -79,140 +80,140 @@ msgstr "پرداخت"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr ""
+msgstr "منقضی شده"
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr ""
+msgstr "لغو شد"
 
 #. Payment status value
 msgid "pay:"
-msgstr ""
+msgstr "ناتمام"
 
 #. Payment status value
 msgid "pay:-1"
-msgstr ""
+msgstr "ناتمام"
 
 #. Payment status value
 msgid "pay:0"
-msgstr ""
+msgstr "حذف شده"
 
 #. Payment status value
 msgid "pay:1"
-msgstr ""
+msgstr "لغو شد"
 
 #. Payment status value
 msgid "pay:2"
-msgstr ""
+msgstr "رد"
 
 #. Payment status value
 msgid "pay:3"
-msgstr ""
+msgstr "بازپرداخت شد"
 
 #. Payment status value
 msgid "pay:4"
-msgstr ""
+msgstr "انتظار"
 
 #. Payment status value
 msgid "pay:5"
-msgstr ""
+msgstr "مجاز است"
 
 #. Payment status value
 msgid "pay:6"
-msgstr ""
+msgstr "اخذ شده"
 
 #. Payment status value
 msgid "pay:7"
-msgstr ""
+msgstr "منتقل شده"
 
 #. Delivery status value
 msgid "stat:"
-msgstr ""
+msgstr "ناتمام"
 
 #. Delivery status value
 msgid "stat:-1"
-msgstr ""
+msgstr "ناتمام"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr ""
+msgstr "حذف شده"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr ""
+msgstr "انتظار"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr ""
+msgstr "n پیشرفت"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr ""
+msgstr "اعزام شد"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr ""
+msgstr "تحویل داده شده"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr ""
+msgstr "کم شده"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr ""
+msgstr "رد"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr ""
+msgstr "بازگشت"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr ""
+msgstr "آدرس صورت‌حساب وجود ندارد"
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr ""
+msgstr "آدرس تحویل موجود نیست"
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr ""
+msgstr "آدرس صورتحساب مجاز نیست"
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr ""
+msgstr "آدرس تحویل مجاز نیست"
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr ""
+msgstr "گزینه پرداخت وجود ندارد"
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr ""
+msgstr "گزینه تحویل وجود ندارد"
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr ""
+msgstr "گزینه پرداخت مجاز نیست"
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr ""
+msgstr "گزینه تحویل مجاز نیست"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr ""
+msgstr "متأسفیم، حداقل یک محصول دیگر وجود ندارد. لطفاً برای ادامه آن را از سبد خود بردارید"
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr ""
+msgstr "با عرض پوزش، حداقل یک محصول غیرفعال شده است. لطفاً برای ادامه آن را از سبد خود بردارید"
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr ""
+msgstr "با عرض پوزش، حداقل یک محصول دیگر در دسترس نیست. لطفاً برای ادامه آن را از سبد خود بردارید"
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr ""
+msgstr "قیمت حداقل یک محصول در این مدت تغییر کرده و به صورت خودکار آپدیت شده است"
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr ""
+msgstr "با عرض پوزش، حداقل یک محصول موجود نیست. لطفاً برای ادامه آن را از سبد خود بردارید"
