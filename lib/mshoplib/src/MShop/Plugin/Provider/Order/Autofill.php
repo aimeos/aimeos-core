@@ -340,7 +340,7 @@ class Autofill
 		foreach( $order->getService( $type ) as $pos => $service )
 		{
 			if( $this->getServiceItem( $order, $type, $service->getCode() ) === null ) {
-				$order->deleteService( $pos );
+				$order->deleteService( $type, $pos );
 			}
 		}
 
@@ -357,7 +357,7 @@ class Autofill
 		foreach( $order->getService( $type ) as $pos => $service )
 		{
 			if( $this->getServiceItem( $order, $type, $service->getCode() ) === null ) {
-				$order->deleteService( $pos );
+				$order->deleteService( $type, $pos );
 			}
 		}
 
