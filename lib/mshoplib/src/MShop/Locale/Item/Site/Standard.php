@@ -290,11 +290,11 @@ class Standard
 	/**
 	 * Returns the theme name for the site.
 	 *
-	 * @return string Returns the theme name for the site or emtpy for default theme
+	 * @return string|null Returns the theme name for the site or emtpy for default theme
 	 */
-	public function getTheme() : string
+	public function getTheme() : ?string
 	{
-		return $this->get( 'locale.site.theme', '' );
+		return $this->get( 'locale.site.theme' );
 	}
 
 

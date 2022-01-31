@@ -94,9 +94,9 @@ interface Iface
 	/**
 	 * Returns the theme name for the site.
 	 *
-	 * @return string Returns the theme name for the site or empty for default theme
+	 * @return string|null Returns the theme name for the site or empty for default theme
 	 */
-	public function getTheme() : string;
+	public function getTheme() : ?string;
 
 	/**
 	 * Sets the theme name for the site.
