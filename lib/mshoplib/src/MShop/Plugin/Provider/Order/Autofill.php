@@ -156,6 +156,9 @@ class Autofill
 	{
 		$plugin = $this->object();
 
+		$p->attach( $plugin, 'addAddress.after' );
+		$p->attach( $plugin, 'setAddresses.after' );
+		$p->attach( $plugin, 'addProduct.after' );
 		$p->attach( $plugin, 'addProduct.after' );
 		$p->attach( $plugin, 'deleteService.after' );
 
