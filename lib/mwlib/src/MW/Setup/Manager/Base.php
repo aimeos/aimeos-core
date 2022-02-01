@@ -141,6 +141,8 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 			}
 		}
 
+		ksort( $tasks );
+
 		return $tasks;
 	}
 }
