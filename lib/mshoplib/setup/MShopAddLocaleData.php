@@ -94,7 +94,7 @@ class MShopAddLocaleData extends Base
 			try {
 				$item = $manager->insert( $manager->create()->fromArray( $dataset ), $parentId );
 			} catch( \Aimeos\MW\DB\Exception $e ) {
-				$item = $manager->find( $dataset['locale.site.code'] );
+				$item = $manager->find( $key );
 			}
 
 			$siteIds[$key] = ['id' => $item->getId(), 'site' => $item->getSiteId()];
@@ -118,7 +118,7 @@ class MShopAddLocaleData extends Base
 		$items = $manager->search( $manager->filter()->slice( 0, 0x7fffffff ) );
 
 		foreach( $data as $key => $dataset ) {
-			$items[$key] = $items[$key] ?? $manager->save( $manager->create()->fromArray( $dataset, true ) );
+			$items->has( $key ) ?: $manager->save( $manager->create()->fromArray( $dataset, true ) );
 		}
 	}
 
@@ -137,7 +137,7 @@ class MShopAddLocaleData extends Base
 		$items = $manager->search( $manager->filter()->slice( 0, 0x7fffffff ) );
 
 		foreach( $data as $key => $dataset ) {
-			$items[$key] = $items[$key] ?? $manager->save( $manager->create()->fromArray( $dataset, true ) );
+			$items->has( $key ) ?: $manager->save( $manager->create()->fromArray( $dataset, true ) );
 		}
 	}
 
