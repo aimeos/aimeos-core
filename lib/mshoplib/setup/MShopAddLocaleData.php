@@ -52,17 +52,9 @@ class MShopAddLocaleData extends Base
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context(), 'Standard' );
 		$siteManager = $localeManager->getSubManager( 'site' );
 
-		try
-		{
-			$siteItem = $siteManager->create();
-			$siteItem->setLabel( $code );
-			$siteItem->setCode( $code );
-			$siteItem->setStatus( 1 );
-
-			$siteManager->insert( $siteItem );
-		}
-		catch( \Aimeos\MW\DB\Exception $e ) // already in the database
-		{
+		try {
+			$siteItem = $siteManager->insert( $siteManager->create()->setLabel( $code )->setCode( $code ) );
+		} catch( \Aimeos\MW\DB\Exception $e ) {
 			$siteItem = $siteManager->find( $code );
 		}
 
@@ -94,39 +86,18 @@ class MShopAddLocaleData extends Base
 	{
 		$this->info( 'Adding data for MShop locale sites', 'v', 1 );
 
-		$localeSiteManager = $localeManager->getSubManager( 'site', $manager );
-		$siteItem = $localeSiteManager->create();
 		$siteIds = [];
+		$manager = $localeManager->getSubManager( 'site', $manager );
 
 		foreach( $data as $key => $dataset )
 		{
-			try
-			{
-				$siteItem->setId( null );
-				$siteItem->setCode( $dataset['code'] );
-				$siteItem->setLabel( $dataset['label'] );
-				$siteItem->setConfig( $dataset['config'] );
-				$siteItem->setStatus( $dataset['status'] );
-				$siteItem->setSupplierId( $dataset['supplierid'] ?? '' );
-				$siteItem->setTheme( $dataset['theme'] ?? '' );
-				$siteItem->setLogos( $dataset['logo'] ?? [] );
-				$siteItem->setIcon( $dataset['icon'] ?? '' );
-
-				$localeSiteManager->insert( $siteItem, $parentId );
-				$siteIds[$key] = ['id' => $siteItem->getId(), 'site' => $siteItem->getSiteId()];
+			try {
+				$item = $manager->insert( $manager->create()->fromArray( $dataset ), $parentId );
+			} catch( \Aimeos\MW\DB\Exception $e ) {
+				$item = $manager->find( $dataset['locale.site.code'] );
 			}
-			catch( \Aimeos\MW\DB\Exception $e )
-			{
-				$search = $localeSiteManager->filter();
-				$search->setConditions( $search->compare( '==', 'locale.site.code', $dataset['code'] ) );
-				$result = $localeSiteManager->search( $search );
 
-				if( ( $item = $result->first() ) === null ) {
-					throw new \RuntimeException( sprintf( 'No site for code "%1$s" available', $dataset['code'] ) );
-				}
-
-				$siteIds[$key] = ['id' => $item->getId(), 'site' => $item->getSiteId()];
-			}
+			$siteIds[$key] = ['id' => $item->getId(), 'site' => $item->getSiteId()];
 		}
 
 		return $siteIds;
@@ -143,22 +114,13 @@ class MShopAddLocaleData extends Base
 	{
 		$this->info( 'Adding data for MShop locale currencies', 'v', 1 );
 
-		$currencyManager = $localeManager->getSubManager( 'currency', 'Standard' );
-		$items = $currencyManager->search( $currencyManager->filter()->slice( 0, 0x7fffffff ) );
+		$manager = $localeManager->getSubManager( 'currency', 'Standard' );
+		$items = $manager->search( $manager->filter()->slice( 0, 0x7fffffff ) );
 
 		foreach( $data as $key => $dataset )
 		{
-			if( !isset( $items[$dataset['id']] ) )
-			{
-				$currencyItem = $currencyManager->create();
-				$currencyItem->setCode( $dataset['id'] );
-				$currencyItem->setLabel( $dataset['label'] );
-				$currencyItem->setStatus( $dataset['status'] );
-
-				$items[$dataset['id']] = $currencyItem;
-			}
-
-			$currencyManager->save( $items[$dataset['id']] );
+			$item = $items[$key] ?? $manager->create();
+			$items[$key] = $manager->save( $item->fromArray( $dataset, true ) );
 		}
 	}
 
@@ -173,22 +135,13 @@ class MShopAddLocaleData extends Base
 	{
 		$this->info( 'Adding data for MShop locale languages', 'v', 1 );
 
-		$languageManager = $localeManager->getSubManager( 'language', 'Standard' );
-		$items = $languageManager->search( $languageManager->filter()->slice( 0, 0x7fffffff ) );
+		$manager = $localeManager->getSubManager( 'language', 'Standard' );
+		$items = $manager->search( $manager->filter()->slice( 0, 0x7fffffff ) );
 
-		foreach( $data as $dataset )
+		foreach( $data as $key => $dataset )
 		{
-			if( !isset( $items[$dataset['id']] ) )
-			{
-				$languageItem = $languageManager->create();
-				$languageItem->setCode( $dataset['id'] );
-				$languageItem->setLabel( $dataset['label'] );
-				$languageItem->setStatus( $dataset['status'] );
-
-				$items[$dataset['id']] = $languageItem;
-			}
-
-			$languageManager->save( $items[$dataset['id']] );
+			$item = $items[$key] ?? $manager->create();
+			$items[$key] = $manager->save( $item->fromArray( $dataset, true ) );
 		}
 	}
 
@@ -196,31 +149,26 @@ class MShopAddLocaleData extends Base
 	/**
 	 * Adds locale data.
 	 *
-	 * @param \Aimeos\MShop\Common\Manager\Iface $localeItemManager Locale manager
+	 * @param \Aimeos\MShop\Common\Manager\Iface $localeManager Locale manager
 	 * @param array $data Associative list of locale data
 	 */
-	protected function addLocaleData( \Aimeos\MShop\Common\Manager\Iface $localeItemManager, array $data, array $siteIds )
+	protected function addLocaleData( \Aimeos\MShop\Common\Manager\Iface $localeManager, array $data, array $siteIds )
 	{
 		$this->info( 'Adding data for MShop locales', 'v', 1 );
+print_r( $data );
 
-		$localeItem = $localeItemManager->create();
-
-		foreach( $data as $key => $dataset )
+		foreach( $data as $dataset )
 		{
-			if( !isset( $siteIds[$dataset['siteid']] ) ) {
-				throw new \RuntimeException( sprintf( 'No ID for site for key "%1$s" found', $dataset['siteid'] ) );
+			if( !isset( $siteIds[$dataset['site']] ) ) {
+				throw new \RuntimeException( sprintf( 'No ID for site for key "%1$s" found', $dataset['site'] ) );
 			}
 
-			$localeItem->setId( null );
-			$localeItem->set( 'site_id', $siteIds[$dataset['siteid']]['id'] );
-			$localeItem->setSiteId( $siteIds[$dataset['siteid']]['site'] );
-			$localeItem->setLanguageId( $dataset['langid'] );
-			$localeItem->setCurrencyId( $dataset['currencyid'] );
-			$localeItem->setPosition( $dataset['pos'] );
-			$localeItem->setStatus( $dataset['status'] );
+			$item = $localeManager->create()->fromArray( $dataset, true )
+				->set( 'site_id', $siteIds[$dataset['site']]['id'] )
+				->setSiteId( $siteIds[$dataset['site']]['site'] );
 
 			try {
-				$localeItemManager->save( $localeItem );
+				$localeManager->save( $item );
 			} catch( \Aimeos\MW\DB\Exception $e ) { ; } // if locale combination was already available
 		}
 	}

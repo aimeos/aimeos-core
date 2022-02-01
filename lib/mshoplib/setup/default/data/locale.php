@@ -6,16 +6,15 @@
  * @copyright Aimeos (aimeos.org), 2015-2022
  */
 
-return array(
+return [
 
-	'locale/site' => array(
-		'default' => array( 'code' => 'default', 'label' => 'Default', 'config' => [], 'status' => 1 ),
-	),
+	'locale/site' => [
+		'default' => ['locale.site.code' => 'default', 'locale.site.label' => 'Default'],
+	],
 
-	'locale' => array(
-		array( 'siteid' => 'default', 'langid' => 'en', 'currencyid' => 'EUR', 'pos' => 0, 'status' => 1 ),
-		array( 'siteid' => 'default', 'langid' => 'en', 'currencyid' => 'USD', 'pos' => 1, 'status' => 1 ),
-		array( 'siteid' => 'default', 'langid' => 'de', 'currencyid' => 'EUR', 'pos' => 2, 'status' => 1 ),
-	),
-
-);
+	'locale' => [
+		['site' => 'default', 'locale.languageid' => 'en', 'locale.currencyid' => 'EUR', 'locale.position' => 0],
+		['site' => 'default', 'locale.languageid' => 'en', 'locale.currencyid' => 'USD', 'locale.position' => 1],
+		['site' => 'default', 'locale.languageid' => 'de', 'locale.currencyid' => 'EUR', 'locale.position' => 2],
+	],
+];

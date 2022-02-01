@@ -5,15 +5,13 @@
  * @copyright Aimeos (aimeos.org), 2015-2022
  */
 
-return array(
+return [
+	'locale/site' => [
+		'unitperf' => ['locale.site.code' => 'unitperf', 'locale.site.label' => 'Performance test site', 'locale.site.status' => 0]
+	],
 
-	'locale/site' => array(
-		'unitperf' => array( 'code' => 'unitperf', 'label' => 'Performance test site', 'config' => [], 'status' => 0 )
-	),
-
-	'locale' => array(
-		array( 'siteid' => 'unitperf', 'langid' => 'en', 'currencyid' => 'USD', 'pos' => 0, 'status' => 1 ),
-		array( 'siteid' => 'unitperf', 'langid' => 'de', 'currencyid' => 'EUR', 'pos' => 1, 'status' => 1 ),
-	)
-
-);
+	'locale' => [
+		['site' => 'unitperf', 'locale.languageid' => 'en', 'locale.currencyid' => 'USD', 'locale.position' => 0],
+		['site' => 'unitperf', 'locale.languageid' => 'de', 'locale.currencyid' => 'EUR', 'locale.position' => 1],
+	]
+];

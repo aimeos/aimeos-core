@@ -53,36 +53,37 @@ class LocaleAddTestData extends MShopAddLocaleData
 		// Set editor for further tasks
 		$this->context()->setEditor( 'core:lib/mshoplib' );
 
+		if( $this->context()->config()->get( 'setup/site' ) !== 'unittest' ) {
+			return;
+		}
 
-		if( $this->context()->config()->get( 'setup/site' ) === 'unittest' )
-		{
-			$ds = DIRECTORY_SEPARATOR;
-			$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';
 
-			if( ( $testdata = include( $filename ) ) == false ) {
-				throw new \RuntimeException( sprintf( 'No data file "%1$s" found', $filename ) );
-			}
+		$ds = DIRECTORY_SEPARATOR;
+		$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';
 
-			$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context() );
+		if( ( $testdata = include( $filename ) ) == false ) {
+			throw new \RuntimeException( sprintf( 'No data file "%1$s" found', $filename ) );
+		}
 
-			$this->cleanupSites( $localeManager );
 
-			$siteIds = [];
-			if( isset( $testdata['locale/site'] ) ) {
-				$siteIds = $this->addLocaleSiteData( $localeManager, $testdata['locale/site'] );
-			}
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context() );
+		$this->cleanupSites( $localeManager );
 
-			if( isset( $testdata['locale/currency'] ) ) {
-				$this->addLocaleCurrencyData( $localeManager, $testdata['locale/currency'] );
-			}
+		$siteIds = [];
+		if( isset( $testdata['locale/site'] ) ) {
+			$siteIds = $this->addLocaleSiteData( $localeManager, $testdata['locale/site'] );
+		}
 
-			if( isset( $testdata['locale/language'] ) ) {
-				$this->addLocaleLanguageData( $localeManager, $testdata['locale/language'] );
-			}
+		if( isset( $testdata['locale/currency'] ) ) {
+			$this->addLocaleCurrencyData( $localeManager, $testdata['locale/currency'] );
+		}
 
-			if( isset( $testdata['locale'] ) ) {
-				$this->addLocaleData( $localeManager, $testdata['locale'], $siteIds );
-			}
+		if( isset( $testdata['locale/language'] ) ) {
+			$this->addLocaleLanguageData( $localeManager, $testdata['locale/language'] );
+		}
+
+		if( isset( $testdata['locale'] ) ) {
+			$this->addLocaleData( $localeManager, $testdata['locale'], $siteIds );
 		}
 	}
 
@@ -113,12 +114,9 @@ class LocaleAddTestData extends MShopAddLocaleData
 	 */
 	protected function cleanupSites( $localeManager )
 	{
-		$localeSiteManager = $localeManager->getSubManager( 'site' );
-
-		$search = $localeSiteManager->filter();
-		$search->setConditions( $search->compare( '==', 'locale.site.code', array( 'unittest' ) ) );
-
 		$sites = [];
+		$localeSiteManager = $localeManager->getSubManager( 'site' );
+		$search = $localeSiteManager->filter()->add( ['locale.site.code' => 'unittest'] );
 
 		foreach( $localeSiteManager->search( $search ) as $site )
 		{

@@ -9,29 +9,34 @@
 return [
 	'locale/site' => [
 		'unittest' => [
-			'code' => 'unittest', 'label' => 'Unit test site', 'status' => 1, 'theme' => 'shop',
-			'icon' => 'path/to/site-icon.png', 'logo' => [1 => 'path/to/site-logo.png'], 'supplierid' => '1234',
-			'config' => ["timezone" => "Europe/Berlin", "emailfrom" => "no-reply@example.com", "emailreply" => "test@example.com"]
+			'locale.site.code' => 'unittest', 'locale.site.label' => 'Unit test site', 'locale.site.theme' => 'shop',
+			'locale.site.icon' => 'path/to/site-icon.png', 'locale.site.logo' => [1 => 'path/to/site-logo.png'],
+			'locale.site.supplierid' => '1234',
+			'locale.site.config' => [
+				"timezone" => "Europe/Berlin",
+				"emailfrom" => "no-reply@example.com",
+				"emailreply" => "test@example.com"
+			]
 		]
 	],
 
 	'locale/currency' => [
-		'EUR' => ['id' => 'EUR', 'label' => 'Euro', 'status' => 1],
-		'CHF' => ['id' => 'CHF', 'label' => 'Swiss franc', 'status' => 0],
-		'USD' => ['id' => 'USD', 'label' => 'US dollar', 'status' => 1],
-		'XAF' => ['id' => 'XAF', 'label' => 'CFA Franc BEAC', 'status' => 0],
-		'XOF' => ['id' => 'XOF', 'label' => 'CFA Franc BCEAO', 'status' => 0],
+		'EUR' => ['locale.currency.id' => 'EUR', 'locale.currency.label' => 'Euro', 'locale.currency.status' => 1],
+		'CHF' => ['locale.currency.id' => 'CHF', 'locale.currency.label' => 'Swiss franc', 'locale.currency.status' => 0],
+		'USD' => ['locale.currency.id' => 'USD', 'locale.currency.label' => 'US dollar', 'locale.currency.status' => 1],
+		'XAF' => ['locale.currency.id' => 'XAF', 'locale.currency.label' => 'CFA Franc BEAC', 'locale.currency.status' => 0],
+		'XOF' => ['locale.currency.id' => 'XOF', 'locale.currency.label' => 'CFA Franc BCEAO', 'locale.currency.status' => 0],
 	],
 
 	'locale/language' => [
-		'de' => ['id' => 'de', 'label' => 'German', 'status' => 1],
-		'en' => ['id' => 'en', 'label' => 'English', 'status' => 1],
-		'es' => ['id' => 'es', 'label' => 'Spanish', 'status' => 1],
-		'it' => ['id' => 'it', 'label' => 'Italian', 'status' => 0],
+		'de' => ['locale.language.id' => 'de', 'locale.language.label' => 'German', 'locale.language.status' => 1],
+		'en' => ['locale.language.id' => 'en', 'locale.language.label' => 'English', 'locale.language.status' => 1],
+		'es' => ['locale.language.id' => 'es', 'locale.language.label' => 'Spanish', 'locale.language.status' => 1],
+		'it' => ['locale.language.id' => 'it', 'locale.language.label' => 'Italian', 'locale.language.status' => 0],
 	],
 
 	'locale' => [
-		['siteid' => 'unittest', 'langid' => 'de', 'currencyid' => 'EUR', 'pos' => 0, 'status' => 0],
-		['siteid' => 'unittest', 'langid' => 'en', 'currencyid' => 'EUR', 'pos' => 1, 'status' => 1],
+		['site' => 'unittest', 'locale.languageid' => 'de', 'locale.currencyid' => 'EUR', 'locale.position' => 0, 'locale.status' => 0],
+		['site' => 'unittest', 'locale.languageid' => 'en', 'locale.currencyid' => 'EUR', 'locale.position' => 1, 'locale.status' => 1],
 	],
 ];

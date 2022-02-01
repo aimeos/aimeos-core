@@ -45,40 +45,38 @@ class LocaleAddPerfData extends MShopAddLocaleData
 	{
 		$this->info( 'Adding performance data for MShop locale domain', 'v' );
 
-
 		// Set editor for further tasks
 		$this->context()->setEditor( 'unitperf:core' );
 
+		if( $this->context()->config()->get( 'setup/site' ) !== 'unitperf' ) {
+			return;
+		}
 
-		if( $this->context()->config()->get( 'setup/site' ) === 'unitperf' )
+		$ds = DIRECTORY_SEPARATOR;
+		$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';
+
+		if( ( $testdata = include( $filename ) ) == false ) {
+			throw new \RuntimeException( sprintf( 'No data file "%1$s" found', $filename ) );
+		}
+
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context() );
+		$localeSiteManager = $localeManager->getSubManager( 'site' );
+
+		$siteIds = [];
+		$search = $localeSiteManager->filter()->add( ['locale.site.code' => 'unitperf'] );
+
+		foreach( $localeSiteManager->search( $search ) as $site )
 		{
-			$ds = DIRECTORY_SEPARATOR;
-			$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';
+			$this->context()->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
+			$localeSiteManager->delete( $site->getId() );
+		}
 
-			if( ( $testdata = include( $filename ) ) == false ) {
-				throw new \RuntimeException( sprintf( 'No data file "%1$s" found', $filename ) );
-			}
+		if( isset( $testdata['locale/site'] ) ) {
+			$siteIds = $this->addLocaleSiteData( $localeManager, $testdata['locale/site'] );
+		}
 
-			$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $this->context() );
-			$localeSiteManager = $localeManager->getSubManager( 'site' );
-			$siteIds = [];
-
-			$search = $localeSiteManager->filter();
-			$search->setConditions( $search->compare( '==', 'locale.site.code', 'unitperf' ) );
-
-			foreach( $localeSiteManager->search( $search ) as $site )
-			{
-				$this->context()->setLocale( $localeManager->bootstrap( $site->getCode(), '', '', false ) );
-				$localeSiteManager->delete( $site->getId() );
-			}
-
-			if( isset( $testdata['locale/site'] ) ) {
-				$siteIds = $this->addLocaleSiteData( $localeManager, $testdata['locale/site'] );
-			}
-
-			if( isset( $testdata['locale'] ) ) {
-				$this->addLocaleData( $localeManager, $testdata['locale'], $siteIds );
-			}
+		if( isset( $testdata['locale'] ) ) {
+			$this->addLocaleData( $localeManager, $testdata['locale'], $siteIds );
 		}
 	}
 }

@@ -45,35 +45,32 @@ class MShopAddLocaleDataDefault extends MShopAddLocaleData
 		$this->info( 'Adding data for MShop locale domain', 'v' );
 
 		// Set editor for further tasks
-		$context = $this->context();
-		$context->setEditor( 'core:setup' );
+		$context = $this->context()->setEditor( 'core:setup' );
 
+		$db = $this->db( 'db-locale' );
 
-		if( $context->config()->get( 'setup/site', 'default' ) === 'default' )
-		{
-			$ds = DIRECTORY_SEPARATOR;
-			$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';
+		if( $context->config()->get( 'setup/site', 'default' ) !== 'default'
+			|| !empty( $db->query( 'SELECT * FROM ' . $db->qi( 'mshop_locale' ) )->fetchAllKeyValue() )
+		) {
+			return;
+		}
 
-			if( ( $data = include( $filename ) ) == false ) {
-				throw new \RuntimeException( sprintf( 'No data file "%1$s" found', $filename ) );
-			}
+		$ds = DIRECTORY_SEPARATOR;
+		$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';
 
-			$siteIds = [];
-			$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $context, 'Standard' );
+		if( ( $data = include( $filename ) ) == false ) {
+			throw new \RuntimeException( sprintf( 'No data file "%1$s" found', $filename ) );
+		}
 
-			if( isset( $data['locale/site'] ) ) {
-				$siteIds = $this->addLocaleSiteData( $localeManager, $data['locale/site'] );
-			}
+		$siteIds = [];
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::create( $context, 'Standard' );
 
-			$db = $this->db( 'db-locale' );
+		if( isset( $data['locale/site'] ) ) {
+			$siteIds = $this->addLocaleSiteData( $localeManager, $data['locale/site'] );
+		}
 
-			if( !empty( $db->query( 'SELECT * FROM ' . $db->qi( 'mshop_locale' ) )->fetchAllKeyValue() ) ) {
-				return;
-			}
-
-			if( isset( $data['locale'] ) ) {
-				$this->addLocaleData( $localeManager, $data['locale'], $siteIds );
-			}
+		if( isset( $data['locale'] ) ) {
+			$this->addLocaleData( $localeManager, $data['locale'], $siteIds );
 		}
 	}
 }
