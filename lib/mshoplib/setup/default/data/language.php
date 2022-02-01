@@ -73,7 +73,7 @@ return [
 		'hy' => ['locale.language.id' => 'hy', 'locale.language.label' => 'Armenian', 'locale.language.status' => 0],
 		'hz' => ['locale.language.id' => 'hz', 'locale.language.label' => 'Herero', 'locale.language.status' => 0],
 		'ia' => ['locale.language.id' => 'ia', 'locale.language.label' => 'Interlingua', 'locale.language.status' => 0],
-		'locale.language.id' => ['locale.language.id' => 'locale.language.id', 'locale.language.label' => 'Indonesian', 'locale.language.status' => 0],
+		'id' => ['locale.language.id' => 'id', 'locale.language.label' => 'Indonesian', 'locale.language.status' => 0],
 		'ie' => ['locale.language.id' => 'ie', 'locale.language.label' => 'Interlingue', 'locale.language.status' => 0],
 		'ig' => ['locale.language.id' => 'ig', 'locale.language.label' => 'Igbo', 'locale.language.status' => 0],
 		'ii' => ['locale.language.id' => 'ii', 'locale.language.label' => 'Yi', 'locale.language.status' => 0],
