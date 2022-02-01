@@ -117,10 +117,8 @@ class MShopAddLocaleData extends Base
 		$manager = $localeManager->getSubManager( 'currency', 'Standard' );
 		$items = $manager->search( $manager->filter()->slice( 0, 0x7fffffff ) );
 
-		foreach( $data as $key => $dataset )
-		{
-			$item = $items[$key] ?? $manager->create();
-			$items[$key] = $manager->save( $item->fromArray( $dataset, true ) );
+		foreach( $data as $key => $dataset ) {
+			$items[$key] = $items[$key] ?? $manager->save( $manager->create()->fromArray( $dataset, true ) );
 		}
 	}
 
@@ -138,10 +136,8 @@ class MShopAddLocaleData extends Base
 		$manager = $localeManager->getSubManager( 'language', 'Standard' );
 		$items = $manager->search( $manager->filter()->slice( 0, 0x7fffffff ) );
 
-		foreach( $data as $key => $dataset )
-		{
-			$item = $items[$key] ?? $manager->create();
-			$items[$key] = $manager->save( $item->fromArray( $dataset, true ) );
+		foreach( $data as $key => $dataset ) {
+			$items[$key] = $items[$key] ?? $manager->save( $manager->create()->fromArray( $dataset, true ) );
 		}
 	}
 
@@ -155,7 +151,6 @@ class MShopAddLocaleData extends Base
 	protected function addLocaleData( \Aimeos\MShop\Common\Manager\Iface $localeManager, array $data, array $siteIds )
 	{
 		$this->info( 'Adding data for MShop locales', 'v', 1 );
-print_r( $data );
 
 		foreach( $data as $dataset )
 		{
