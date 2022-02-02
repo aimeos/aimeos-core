@@ -283,7 +283,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$parentId = $item->getId();
 		$item->setId( null );
 		$item->setLabel( 'Root child' );
-		$item->setCode( 'new Root child' );
+		$item->setCode( 'new-root' );
 		$resultInsert = $this->object->insert( $item, $parentId );
 		$this->object->move( $item->getId(), $parentId, $parentId );
 		$itemSaved = $this->object->get( $item->getId() );

@@ -43,25 +43,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '==', 'stock.type.code', 'unitstock' ),
-			$search->compare( '==', 'stock.type.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$items = $this->object->search( $search )->toArray();
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No item found' );
-		}
+		$search = $this->object->filter()->add( ['stock.type.code' => 'unitstock'] );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No item found' ) );
 
 		$item->setId( null );
-		$item->setCode( 'unit test type' );
+		$item->setCode( 'unit-test-type' );
 		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setCode( 'unit test type 2' );
+		$itemExp->setCode( 'unit-test-type-2' );
 		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId() );
 

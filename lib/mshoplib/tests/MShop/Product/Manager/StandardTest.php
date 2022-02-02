@@ -187,12 +187,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$refItem = \Aimeos\MShop\Text\Manager\Factory::create( $this->context )->create()->setType( 'name' );
 
 		$item->setId( null );
-		$item->setCode( 'CNC unit test' );
+		$item->setCode( 'CNC-test' );
 		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setCode( 'unit save test' )->addListItem( 'text', $listItem, $refItem );
+		$itemExp->setCode( 'unit-test' )->addListItem( 'text', $listItem, $refItem );
 		$resultUpd = $this->object->save( $itemExp );
 		$itemUpd = $this->object->get( $itemExp->getId(), ['text'] );
 

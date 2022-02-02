@@ -483,6 +483,10 @@ abstract class Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'Code is too long' ) );
 		}
 
+		if( preg_match( '/[ \x{0000}\x{0009}\x{000A}\x{000C}\x{000D}\x{0085}]+/u', $code ) === 1 ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Code contains invalid characters: "%1$s"', $code ) );
+		}
+
 		return (string) $code;
 	}
 

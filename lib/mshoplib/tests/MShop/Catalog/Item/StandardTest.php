@@ -89,10 +89,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetCode()
 	{
-		$return = $this->object->setCode( 'unit test' );
+		$return = $this->object->setCode( '_unittest_' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
-		$this->assertEquals( 'unit test', $this->object->getCode() );
+		$this->assertEquals( '_unittest_', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
