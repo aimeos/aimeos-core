@@ -887,6 +887,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.orderaddressid' => 11,
 			'order.base.product.productid' => 3,
 			'order.base.product.prodcode' => 'test',
+			'order.base.product.currencyid' => 'EUR',
+			'order.base.product.price' => '10.00',
+			'order.base.product.costs' => '5.00',
+			'order.base.product.rebate' => '2.00',
+			'order.base.product.taxrates' => ['tax' => '20.00'],
+			'order.base.product.taxvalue' => '2.5000',
+			'order.base.product.taxflag' => 1,
 			'order.base.product.name' => 'test item',
 			'order.base.product.description' => 'test description',
 			'order.base.product.stocktype' => 'stocktype',
@@ -903,10 +910,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.statusdelivery' => 0,
 			'order.base.product.flags' => 1,
 			'order.base.product.notes' => 'note',
-			'order.base.product.price' => '10.00',
-			'order.base.product.costs' => '5.00',
-			'order.base.product.rebate' => '2.00',
-			'order.base.product.taxrate' => '20.00',
 		);
 
 		$item = $item->fromArray( $entries, true );
@@ -938,7 +941,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.product.price'], $item->getPrice()->getValue() );
 		$this->assertEquals( $list['order.base.product.costs'], $item->getPrice()->getCosts() );
 		$this->assertEquals( $list['order.base.product.rebate'], $item->getPrice()->getRebate() );
-		$this->assertEquals( $list['order.base.product.taxrate'], $item->getPrice()->getTaxRate() );
+		$this->assertEquals( $list['order.base.product.taxrates'], $item->getPrice()->getTaxRates() );
+		$this->assertEquals( $list['order.base.product.taxvalue'], $item->getPrice()->getTaxValue() );
+		$this->assertEquals( $list['order.base.product.taxflag'], $item->getPrice()->getTaxFlag() );
 	}
 
 
@@ -966,6 +971,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getPrice()->getCosts(), $arrayObject['order.base.product.costs'] );
 		$this->assertEquals( $this->object->getPrice()->getRebate(), $arrayObject['order.base.product.rebate'] );
 		$this->assertEquals( $this->object->getPrice()->getTaxRate(), $arrayObject['order.base.product.taxrate'] );
+		$this->assertEquals( $this->object->getPrice()->getTaxRates(), $arrayObject['order.base.product.taxrates'] );
+		$this->assertEquals( $this->object->getPrice()->getTaxValue(), $arrayObject['order.base.product.taxvalue'] );
+		$this->assertEquals( $this->object->getPrice()->getTaxFlag(), $arrayObject['order.base.product.taxflag'] );
 		$this->assertEquals( $this->object->getQuantityOpen(), $arrayObject['order.base.product.qtyopen'] );
 		$this->assertEquals( $this->object->getQuantity(), $arrayObject['order.base.product.quantity'] );
 		$this->assertEquals( $this->object->getStatusPayment(), $arrayObject['order.base.product.statuspayment'] );
