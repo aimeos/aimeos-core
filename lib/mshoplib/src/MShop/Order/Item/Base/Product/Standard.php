@@ -616,6 +616,7 @@ class Standard extends Base implements Iface
 	 */
 	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
+		$price = $this->getPrice();
 		$item = parent::fromArray( $list, $private );
 
 		foreach( $list as $key => $value )
@@ -636,6 +637,13 @@ class Standard extends Base implements Iface
 				case 'order.base.product.suppliername': $item = $item->setSupplierName( $value ); break;
 				case 'order.base.product.stocktype': $item = $item->setStockType( $value ); break;
 				case 'order.base.product.type': $item = $item->setType( $value ); break;
+				case 'order.base.product.currencyid': $price = $price->setCurrencyId( $value ); break;
+				case 'order.base.product.price': $price = $price->setValue( $value ); break;
+				case 'order.base.product.costs': $price = $price->setCosts( $value ); break;
+				case 'order.base.product.rebate': $price = $price->setRebate( $value ); break;
+				case 'order.base.product.taxrates': $price = $price->setTaxRates( $value ); break;
+				case 'order.base.product.taxvalue': $price = $price->setTaxValue( $value ); break;
+				case 'order.base.product.taxflag': $price = $price->setTaxFlag( $value ); break;
 				case 'order.base.product.name': $item = $item->setName( $value ); break;
 				case 'order.base.product.description': $item = $item->setDescription( $value ); break;
 				case 'order.base.product.mediaurl': $item = $item->setMediaUrl( $value ); break;
@@ -663,6 +671,7 @@ class Standard extends Base implements Iface
 	 */
 	public function toArray( bool $private = false ) : array
 	{
+		$price = $this->getPrice();
 		$list = parent::toArray( $private );
 
 		$list['order.base.product.type'] = $this->getType();
@@ -674,6 +683,13 @@ class Standard extends Base implements Iface
 		$list['order.base.product.suppliername'] = $this->getSupplierName();
 		$list['order.base.product.qtyopen'] = $this->getQuantityOpen();
 		$list['order.base.product.quantity'] = $this->getQuantity();
+		$list['order.base.product.currencyid'] = $price->getCurrencyId();
+		$list['order.base.product.price'] = $price->getValue();
+		$list['order.base.product.costs'] = $price->getCosts();
+		$list['order.base.product.rebate'] = $price->getRebate();
+		$list['order.base.product.taxrates'] = $price->getTaxRates();
+		$list['order.base.product.taxvalue'] = $price->getTaxValue();
+		$list['order.base.product.taxflag'] = $price->getTaxFlag();
 		$list['order.base.product.name'] = $this->getName();
 		$list['order.base.product.description'] = $this->getDescription();
 		$list['order.base.product.mediaurl'] = $this->getMediaUrl();
