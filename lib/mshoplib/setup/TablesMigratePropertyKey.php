@@ -40,7 +40,7 @@ class TablesMigratePropertyKey extends Base
 			$db = $this->db( $rname );
 			$db2 = $this->db( $rname, true );
 
-			$update = $db->stmt()->update( $table )->set( $db->qi( 'key' ), '?' )->where( 'id', '?' );
+			$update = $db2->stmt()->update( $table )->set( $db2->qi( 'key' ), '?' )->where( $db2->qi( 'id' ) . '= ?' );
 
 			$q = $db->stmt();
 			$result = $q->select( 'id', 'type', 'langid', 'value' )->from( $table )
