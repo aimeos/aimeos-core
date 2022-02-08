@@ -253,6 +253,7 @@ class Standard extends Base implements Iface
 	 */
 	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
+		$price = $this->getPrice();
 		$item = parent::fromArray( $list, $private );
 
 		foreach( $list as $key => $value )
@@ -265,6 +266,13 @@ class Standard extends Base implements Iface
 				case 'order.base.service.type': $item = $item->setType( $value ); break;
 				case 'order.base.service.code': $item = $item->setCode( $value ); break;
 				case 'order.base.service.name': $item = $item->setName( $value ); break;
+				case 'order.base.service.currencyid': $price = $price->setCurrencyId( $value ); break;
+				case 'order.base.service.price': $price = $price->setValue( $value ); break;
+				case 'order.base.service.costs': $price = $price->setCosts( $value ); break;
+				case 'order.base.service.rebate': $price = $price->setRebate( $value ); break;
+				case 'order.base.service.taxrates': $price = $price->setTaxRates( $value ); break;
+				case 'order.base.service.taxvalue': $price = $price->setTaxValue( $value ); break;
+				case 'order.base.service.taxflag': $price = $price->setTaxFlag( $value ); break;
 				case 'order.base.service.position': $item = $item->setPosition( $value ); break;
 				case 'order.base.service.mediaurl': $item = $item->setMediaUrl( $value ); break;
 				default: continue 2;
@@ -285,11 +293,19 @@ class Standard extends Base implements Iface
 	 */
 	public function toArray( bool $private = false ) : array
 	{
+		$price = $this->getPrice();
 		$list = parent::toArray( $private );
 
 		$list['order.base.service.type'] = $this->getType();
 		$list['order.base.service.code'] = $this->getCode();
 		$list['order.base.service.name'] = $this->getName();
+		$list['order.base.service.currencyid'] = $price->getCurrencyId();
+		$list['order.base.service.price'] = $price->getValue();
+		$list['order.base.service.costs'] = $price->getCosts();
+		$list['order.base.service.rebate'] = $price->getRebate();
+		$list['order.base.service.taxrates'] = $price->getTaxRates();
+		$list['order.base.service.taxvalue'] = $price->getTaxValue();
+		$list['order.base.service.taxflag'] = $price->getTaxFlag();
 		$list['order.base.service.position'] = $this->getPosition();
 		$list['order.base.service.mediaurl'] = $this->getMediaUrl();
 		$list['order.base.service.serviceid'] = $this->getServiceId();

@@ -483,6 +483,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.service.baseid' => 2,
 			'order.base.service.serviceid' => 3,
 			'order.base.service.position' => 4,
+			'order.base.service.currencyid' => 'EUR',
+			'order.base.service.price' => '1.00',
+			'order.base.service.costs' => '0.50',
+			'order.base.service.rebate' => '0.50',
+			'order.base.service.taxrates' => ['tax' => '20.00'],
+			'order.base.service.taxvalue' => '0.2500',
+			'order.base.service.taxflag' => 1,
 			'order.base.service.code' => 'test',
 			'order.base.service.name' => 'test item',
 			'order.base.service.type' => 'delivery',
@@ -496,6 +503,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.service.baseid'], $item->getBaseId() );
 		$this->assertEquals( $list['order.base.service.serviceid'], $item->getServiceId() );
 		$this->assertEquals( $list['order.base.service.position'], $item->getPosition() );
+		$this->assertEquals( $list['order.base.service.currencyid'], $item->getPrice()->getCurrencyId() );
+		$this->assertEquals( $list['order.base.service.price'], $item->getPrice()->getValue() );
+		$this->assertEquals( $list['order.base.service.costs'], $item->getPrice()->getCosts() );
+		$this->assertEquals( $list['order.base.service.rebate'], $item->getPrice()->getRebate() );
+		$this->assertEquals( $list['order.base.service.taxrates'], $item->getPrice()->getTaxRates() );
+		$this->assertEquals( $list['order.base.service.taxvalue'], $item->getPrice()->getTaxValue() );
+		$this->assertEquals( $list['order.base.service.taxflag'], $item->getPrice()->getTaxFlag() );
 		$this->assertEquals( $list['order.base.service.code'], $item->getCode() );
 		$this->assertEquals( $list['order.base.service.name'], $item->getName() );
 		$this->assertEquals( $list['order.base.service.type'], $item->getType() );
@@ -506,7 +520,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ) + 5, count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) + 8, count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['order.base.service.id'] );
 		$this->assertEquals( $this->object->getBaseId(), $arrayObject['order.base.service.baseid'] );
@@ -515,17 +529,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getCode(), $arrayObject['order.base.service.code'] );
 		$this->assertEquals( $this->object->getName(), $arrayObject['order.base.service.name'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['order.base.service.type'] );
-		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['order.base.service.mtime'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['order.base.service.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['order.base.service.mtime'] );
 		$this->assertEquals( $this->object->editor(), $arrayObject['order.base.service.editor'] );
 
 		$price = $this->object->getPrice();
+		$this->assertEquals( $price->getCurrencyId(), $arrayObject['order.base.service.currencyid'] );
 		$this->assertEquals( $price->getValue(), $arrayObject['order.base.service.price'] );
 		$this->assertEquals( $price->getCosts(), $arrayObject['order.base.service.costs'] );
 		$this->assertEquals( $price->getRebate(), $arrayObject['order.base.service.rebate'] );
 		$this->assertEquals( $price->getTaxRate(), $arrayObject['order.base.service.taxrate'] );
 		$this->assertEquals( $price->getTaxRates(), $arrayObject['order.base.service.taxrates'] );
+		$this->assertEquals( $price->getTaxValue(), $arrayObject['order.base.service.taxvalue'] );
+		$this->assertEquals( $price->getTaxFlag(), $arrayObject['order.base.service.taxflag'] );
 	}
 
 	public function testIsModified()
