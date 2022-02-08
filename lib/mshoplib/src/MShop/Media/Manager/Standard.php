@@ -192,13 +192,13 @@ class Standard
 			$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
 
 			foreach( (array) $langs as $lang ) {
-				foreach( (array) ( $params[2] ?? '' ) as $id ) {
-					$keys[] = $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . ( $id != '' ? md5( $id ) : '' );
+				foreach( (array) ( $params[2] ?? '' ) as $val ) {
+					$keys[] = substr( $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . $val, 0, 255 );
 				}
 			}
 
 			$sitestr = $this->getSiteString( 'mmedpr."siteid"', $level );
-			$keystr = $this->toExpression( 'mmedpr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
+			$keystr = $this->toExpression( 'mmedpr."key"', $keys, '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;

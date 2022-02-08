@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2019-2022
+ * @copyright Aimeos (aimeos.org), 2022
  */
 
 
@@ -11,13 +11,16 @@ namespace Aimeos\Upscheme\Task;
 
 class TablesMigratePropertyKey extends Base
 {
-	private $tables = [
-		'db-attribute' => 'mshop_attribute_property',
-		'db-customer' => 'mshop_customer_property',
-		'db-media' => 'mshop_media_property',
-		'db-price' => 'mshop_price_property',
-		'db-product' => 'mshop_product_property',
-	];
+	protected function tables()
+	{
+		return [
+			'db-attribute' => 'mshop_attribute_property',
+			'db-customer' => 'mshop_customer_property',
+			'db-media' => 'mshop_media_property',
+			'db-price' => 'mshop_price_property',
+			'db-product' => 'mshop_product_property',
+		];
+	}
 
 
 	public function after() : array
@@ -30,7 +33,7 @@ class TablesMigratePropertyKey extends Base
 	{
 		$this->info( 'Update property "key" columns', 'v' );
 
-		foreach( $this->tables as $rname => $table )
+		foreach( $this->tables() as $rname => $table )
 		{
 			$this->info( sprintf( 'Checking table %1$s', $table ), 'vv', 1 );
 
@@ -43,8 +46,10 @@ class TablesMigratePropertyKey extends Base
 			$result = $q->select( 'id', 'type', 'langid', 'value' )->from( $table )
 				->where( $db->qi( 'key' ) . ' = \'\'' )->execute();
 
-			while( $row = $result->fetch() ) {
-				$update->setParameters( [$row['type'] . '|' . ( $row['langid'] ?: 'null' ) . '|' . md5( $row['value'] ), $row['id']] )->execute();
+			while( $row = $result->fetch() )
+			{
+				$value = substr( $row['type'] . '|' . ( $row['langid'] ?: 'null' ) . '|' . $row['value'], 0, 255 );
+				$update->setParameters( $value, $row['id'] )->execute();
 			}
 
 			$db2->close();

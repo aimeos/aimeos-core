@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetKey()
 	{
-		$this->assertEquals( 'width|en|' . md5( '30.0' ), $this->object->getKey() );
+		$this->assertEquals( 'width|en|30.0', $this->object->getKey() );
 	}
 
 

@@ -119,7 +119,7 @@ return array(
 			$table->id()->primary( 'pk_msmedpr_id' );
 			$table->string( 'siteid' );
 			$table->int( 'parentid' );
-			$table->string( 'key', 103 )->default( '' );
+			$table->string( 'key', 255 )->default( '' );
 			$table->type( 'type' );
 			$table->string( 'langid', 5 )->null( true );
 			$table->string( 'value' );
