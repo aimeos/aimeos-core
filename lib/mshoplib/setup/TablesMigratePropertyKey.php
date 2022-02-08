@@ -49,7 +49,7 @@ class TablesMigratePropertyKey extends Base
 			while( $row = $result->fetch() )
 			{
 				$value = substr( $row['type'] . '|' . ( $row['langid'] ?: 'null' ) . '|' . $row['value'], 0, 255 );
-				$update->setParameters( $value, $row['id'] )->execute();
+				$update->setParameters( [$value, $row['id']] )->execute();
 			}
 
 			$db2->close();
