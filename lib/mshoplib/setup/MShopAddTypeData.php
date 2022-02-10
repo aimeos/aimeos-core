@@ -51,7 +51,7 @@ class MShopAddTypeData extends Base
 	}
 
 
-	protected function existing( $domain ) : array
+	protected function existing( string $domain, array $entries ) : array
 	{
 		$prefix = str_replace( '/', '.', $domain ) . '.';
 		$manager = $this->manager( $domain );
@@ -89,7 +89,7 @@ class MShopAddTypeData extends Base
 			$this->info( sprintf( 'Checking "%1$s" type data', $domain ), 'v' );
 
 			$manager = $this->manager( $domain );
-			$map = $this->existing( $domain );
+			$map = $this->existing( $domain, $entries );
 
 			foreach( $entries as $entry )
 			{
