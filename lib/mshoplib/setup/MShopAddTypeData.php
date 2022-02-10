@@ -2,7 +2,6 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2022
  */
 
@@ -31,10 +30,7 @@ class MShopAddTypeData extends Base
 	}
 
 
-	/**
-	 * Adds locale data.
-	 */
-	protected function process( string $filename = null )
+	protected function add( string $filename = null )
 	{
 		$context = $this->context();
 		$sitecode = $context->locale()->getSiteItem()->getCode();
@@ -47,36 +43,53 @@ class MShopAddTypeData extends Base
 			$filename = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'type.php';
 		}
 
-		if( ( $testdata = include( $filename ) ) == false ) {
+		if( ( $data = include( $filename ) ) == false ) {
 			throw new \RuntimeException( sprintf( 'No type file found in "%1$s"', $filename ) );
 		}
 
-		$this->processFile( $testdata );
+		$this->update( $data );
 	}
 
 
-	protected function processFile( array $data )
+	protected function existing( $domain ) : array
+	{
+		$prefix = str_replace( '/', '.', $domain ) . '.';
+		$manager = $this->manager( $domain );
+		$filter = $manager->filter();
+		$expr = $map = [];
+
+		foreach( $entries as $entry )
+		{
+			$expr[] = $filter->and( [
+				$filter->is( $prefix . 'domain', '==', $entry['domain'] ),
+				$filter->is( $prefix . 'code', '==', $entry['code'] )
+			] );
+		}
+
+		$filter->add( $filter->or( $expr ) );
+
+		foreach( $manager->search( $filter ) as $id => $item ) {
+			$map[$item->getDomain()][$item->getCode()][$id] = $item;
+		}
+
+		return $map;
+	}
+
+
+	protected function manager( $domain ) : \Aimeos\MShop\Common\Manager\Iface
+	{
+		return \Aimeos\MShop::create( $this->context(), $domain );
+	}
+
+
+	protected function update( array $data )
 	{
 		foreach( $data as $domain => $entries )
 		{
 			$this->info( sprintf( 'Checking "%1$s" type data', $domain ), 'v' );
 
-			$manager = $this->getDomainManager( $domain );
-			$prefix = str_replace( '/', '.', $domain ) . '.';
-			$filter = $manager->filter();
-			$expr = $map = [];
-
-			foreach( $entries as $entry )
-			{
-				$expr[] = $filter->and( [
-					$filter->is( $prefix . 'domain', '==', $entry['domain'] ),
-					$filter->is( $prefix . 'code', '==', $entry['code'] )
-				] );
-			}
-
-			foreach( $manager->search( $filter->add( $filter->and( $expr ) ) ) as $id => $item ) {
-				$map[$item->getDomain()][$item->getCode()][$id] = $item;
-			}
+			$manager = $this->manager( $domain );
+			$map = $this->existing( $domain );
 
 			foreach( $entries as $entry )
 			{
@@ -93,44 +106,5 @@ class MShopAddTypeData extends Base
 				$manager->save( $item );
 			}
 		}
-	}
-
-
-	/**
-	 * Returns the manager for the given domain and sub-domains.
-	 *
-	 * @param string $domain String of domain and sub-domains, e.g. "product" or "order/base/service"
-	 * @return \Aimeos\MShop\Common\Manager\Iface Domain manager
-	 * @throws \RuntimeException If domain string is invalid or no manager can be instantiated
-	 */
-	protected function getDomainManager( $domain )
-	{
-		return \Aimeos\MShop::create( $this->context(), $domain );
-	}
-
-
-	/**
-	 * Starts a new transaction
-	 */
-	protected function txBegin()
-	{
-		$dbm = $this->context()->db();
-
-		$conn = $dbm->acquire();
-		$conn->begin();
-		$dbm->release( $conn );
-	}
-
-
-	/**
-	 * Commits an existing transaction
-	 */
-	protected function txCommit()
-	{
-		$dbm = $this->context()->db();
-
-		$conn = $dbm->acquire();
-		$conn->commit();
-		$dbm->release( $conn );
 	}
 }
