@@ -492,7 +492,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getCurrencyId() );
 			$stmt->bind( $idx++, $item->getDomain() );
 			$stmt->bind( $idx++, $item->getLabel() );
-			$stmt->bind( $idx++, $item->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( $idx++, $item->getValue() );
 			$stmt->bind( $idx++, $item->getCosts() );
 			$stmt->bind( $idx++, $item->getRebate() );
