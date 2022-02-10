@@ -59,30 +59,48 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function processFile( array $testdata )
+	protected function processFile( array $data )
 	{
-		foreach( $testdata as $domain => $datasets )
+		foreach( $data as $domain => $entries )
 		{
 			$this->msg( sprintf( 'Checking "%1$s" type data', $domain ), 1 );
 
-			$domainManager = $this->getDomainManager( $domain );
-			$type = $domainManager->create();
+			$manager = $this->getDomainManager( $domain );
+			$prefix = str_replace( '/', '.', $domain ) . '.';
+			$filter = $manager->filter();
+			$expr = $map = [];
 			$num = $total = 0;
 
-			foreach( $datasets as $dataset )
+			foreach( $entries as $entry )
+			{
+				$expr[] = $filter->and( [
+					$filter->is( $prefix . 'domain', '==', $entry['domain'] ),
+					$filter->is( $prefix . 'code', '==', $entry['code'] )
+				] );
+			}
+
+			$filter->add( $filter->or( $expr ) );
+
+			foreach( $manager->search( $filter ) as $id => $item ) {
+				$map[$item->getDomain()][$item->getCode()][$id] = $item;
+			}
+
+			foreach( $entries as $entry )
 			{
 				$total++;
 
-				$type->setId( null );
-				$type->setCode( $dataset['code'] );
-				$type->setDomain( $dataset['domain'] );
-				$type->setLabel( $dataset['label'] );
-				$type->setStatus( $dataset['status'] );
+				if( isset( $map[$entry['domain']][$entry['code']] ) ) {
+					continue;
+				}
 
-				try {
-					$domainManager->save( $type );
-					$num++;
-				} catch( \Exception $e ) { ; } // if type was already available
+				$item = $manager->create()
+					->setCode( $entry['code'] )
+					->setDomain( $entry['domain'] )
+					->setLabel( $entry['label'] )
+					->setStatus( $entry['status'] );
+
+				$manager->save( $item );
+				$num++;
 			}
 
 			$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
