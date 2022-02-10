@@ -42,6 +42,6 @@ class MShopAddTypeDataUnitperf extends MShopAddTypeData
 	 */
 	public function up()
 	{
-		$this->process();
+		$this->add();
 	}
 }

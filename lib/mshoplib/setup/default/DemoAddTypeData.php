@@ -34,9 +34,6 @@ class DemoAddTypeData extends MShopAddTypeData
 			return;
 		}
 
-		$ds = DIRECTORY_SEPARATOR;
-		$filename = __DIR__ . $ds . 'data' . $ds . 'demo-type.php';
-
-		$this->process( $filename );
+		$this->add( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'demo-type.php' );
 	}
 }
