@@ -24,7 +24,7 @@ trait Mailto
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
-	abstract function context() : \Aimeos\MShop\Context\Item\Iface;
+	abstract protected function context() : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
 	 * Prepares and returns a new mail message
@@ -37,7 +37,7 @@ trait Mailto
 		$context = $this->context();
 		$config = $context->config();
 
-		return $context->mail()
+		return $context->mail()->create()
 			->header( 'X-MailGenerator', 'Aimeos' )
 			->from( $config->get( 'resource/email/from-email' ), $config->get( 'resource/email/from-name' ) )
 			->to( $addr->getEMail(), $addr->getFirstName() . ' ' . $addr->getLastName() );
