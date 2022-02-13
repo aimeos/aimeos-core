@@ -69,6 +69,6 @@ class Standard
 			return $param;
 		}
 
-		return \Aimeos\MW\Str::html( (string) $param, ENT_NOQUOTES );
+		return \Aimeos\Base\Str::html( (string) $param, ENT_NOQUOTES );
 	}
 }

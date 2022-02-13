@@ -186,7 +186,7 @@ class Xml
 	protected function createFile( string $content ) : \Aimeos\MShop\Service\Provider\Delivery\Iface
 	{
 		$filepath = $this->getConfigValue( 'xml.exportpath', './order_%Y-%m-%d_%H:%i:%s_%v.xml' );
-		$filepath = sprintf( \Aimeos\MW\Str::strtime( $filepath ), $this->num++ );
+		$filepath = sprintf( \Aimeos\Base\Str::strtime( $filepath ), $this->num++ );
 
 		if( file_put_contents( $filepath, $content ) === false )
 		{
@@ -276,7 +276,7 @@ class Xml
 		$msg = sprintf( 'Finished order status import from file "%1$s"', $filename );
 		$logger->info( $msg, 'core/service' );
 
-		$backup = \Aimeos\MW\Str::strtime( $this->getConfigValue( 'xml.backupdir', '' ) );
+		$backup = \Aimeos\Base\Str::strtime( $this->getConfigValue( 'xml.backupdir', '' ) );
 
 		if( !empty( $backup ) && @rename( $filename, $backup ) === false )
 		{

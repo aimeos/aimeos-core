@@ -231,7 +231,7 @@ class Standard
 	 */
 	public function getUrl() : string
 	{
-		return (string) $this->get( 'product.url' ) ?: \Aimeos\MW\Str::slug( $this->getLabel() );
+		return (string) $this->get( 'product.url' ) ?: \Aimeos\Base\Str::slug( $this->getLabel() );
 	}
 
 
@@ -243,7 +243,7 @@ class Standard
 	 */
 	public function setUrl( ?string $url ) : \Aimeos\MShop\Product\Item\Iface
 	{
-		return $this->set( 'product.url', \Aimeos\MW\Str::slug( $url ) );
+		return $this->set( 'product.url', \Aimeos\Base\Str::slug( $url ) );
 	}
 
 

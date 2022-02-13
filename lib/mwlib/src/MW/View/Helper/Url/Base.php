@@ -33,7 +33,7 @@ abstract class Base extends \Aimeos\MW\View\Helper\Base
 			if( is_array( $value ) ) {
 				$params[$key] = $this->sanitize( $value, $names );
 			} elseif( empty( $names ) || in_array( (string) $key, $names ) ) {
-				$params[$key] = \Aimeos\MW\Str::slug( $value );
+				$params[$key] = \Aimeos\Base\Str::slug( $value );
 			}
 		}
 

@@ -71,6 +71,6 @@ abstract class Base
 	 */
 	public static function sanitize( string $string ) : string
 	{
-		return \Aimeos\MW\Str::slug( $string );
+		return \Aimeos\Base\Str::slug( $string );
 	}
 }

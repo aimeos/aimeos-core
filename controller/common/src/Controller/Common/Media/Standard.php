@@ -476,7 +476,7 @@ class Standard
 		 */
 		$list = $this->context->config()->get( 'controller/common/media/extensions', [] );
 
-		$filename = \Aimeos\MW\Str::slug( substr( $filename, 0, strrpos( $filename, '.' ) ?: null ) );
+		$filename = \Aimeos\Base\Str::slug( substr( $filename, 0, strrpos( $filename, '.' ) ?: null ) );
 		$filename = substr( md5( $filename . getmypid() . microtime( true ) ), -8 ) . '_' . $filename;
 
 		$ext = isset( $list[$mimeext] ) ? '.' . $list[$mimeext] : ( ctype_alpha( $mimeext ) ? '.' . $mimeext : '' );

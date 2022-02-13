@@ -11,7 +11,7 @@
 
 namespace Aimeos\MW\View\Helper\Encoder;
 
-use Aimeos\MW\Str;
+use Aimeos\Base\Str;
 
 
 /**

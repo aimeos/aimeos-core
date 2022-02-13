@@ -729,7 +729,7 @@ class Standard
 		$attrTypes = $config->get( 'mshop/index/manager/text/attribute-types', ['variant', 'default'] );
 
 		foreach( $item->getRefItems( 'text', 'url', 'default' ) as $text ) {
-			$texts[$text->getLanguageId()]['url'] = \Aimeos\MW\Str::slug( $text->getContent() );
+			$texts[$text->getLanguageId()]['url'] = \Aimeos\Base\Str::slug( $text->getContent() );
 		}
 
 		foreach( $item->getRefItems( 'text', 'name', 'default' ) as $text ) {

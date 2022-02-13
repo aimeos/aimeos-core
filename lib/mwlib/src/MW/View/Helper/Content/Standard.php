@@ -51,7 +51,7 @@ class Standard
 	 */
 	public function transform( ?string $url, $fsname = 'fs-media', bool $version = false ) : string
 	{
-		if( $url && !\Aimeos\MW\Str::starts( $url, ['http', 'data:', '/'] ) ) {
+		if( $url && !\Aimeos\Base\Str::starts( $url, ['http', 'data:', '/'] ) ) {
 			$url = $this->baseurl( $fsname ) . '/' . $url . ( $version ? '?v=' . $this->version : '' );
 		}
 

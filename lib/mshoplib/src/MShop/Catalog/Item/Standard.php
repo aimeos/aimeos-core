@@ -194,7 +194,7 @@ class Standard
 	 */
 	public function getUrl() : string
 	{
-		return (string) ( $this->node->url ?: \Aimeos\MW\Str::slug( $this->getLabel() ) );
+		return (string) ( $this->node->url ?: \Aimeos\Base\Str::slug( $this->getLabel() ) );
 	}
 
 
