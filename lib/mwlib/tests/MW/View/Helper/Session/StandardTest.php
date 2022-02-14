@@ -18,7 +18,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$view = new \Aimeos\MW\View\Standard();
-		$this->session = new \Aimeos\MW\Session\None();
+		$this->session = new \Aimeos\Base\Session\None();
 
 		$this->object = new \Aimeos\MW\View\Helper\Session\Standard( $view, $this->session );
 	}

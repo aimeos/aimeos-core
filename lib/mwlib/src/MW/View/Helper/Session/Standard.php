@@ -30,7 +30,7 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param \Aimeos\MW\Session\Iface $session Session object
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, \Aimeos\MW\Session\Iface $session )
+	public function __construct( \Aimeos\MW\View\Iface $view, \Aimeos\Base\Session\Iface $session )
 	{
 		parent::__construct( $view );
 

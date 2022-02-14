@@ -125,7 +125,7 @@ class Setup
 		$password = new \Aimeos\MW\Password\Standard();
 		$ctx->setPassword( $password );
 
-		$session = new \Aimeos\MW\Session\None();
+		$session = new \Aimeos\Base\Session\None();
 		$ctx->setSession( $session );
 
 		$cache = new \Aimeos\MW\Cache\None();

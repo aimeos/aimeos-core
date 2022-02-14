@@ -544,10 +544,10 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Sets the session object.
 	 *
-	 * @param \Aimeos\MW\Session\Iface $session Session object
+	 * @param \Aimeos\Base\Session\Iface $session Session object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setSession( \Aimeos\MW\Session\Iface $session ) : \Aimeos\MShop\Context\Item\Iface
+	public function setSession( \Aimeos\Base\Session\Iface $session ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->session = $session;
 
@@ -558,9 +558,9 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Returns the session object.
 	 *
-	 * @return \Aimeos\MW\Session\Iface Session object
+	 * @return \Aimeos\Base\Session\Iface Session object
 	 */
-	public function session() : \Aimeos\MW\Session\Iface
+	public function session() : \Aimeos\Base\Session\Iface
 	{
 		if( !isset( $this->session ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Session object not available' ) );
