@@ -108,12 +108,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCopy()
 	{
-		$fsm = $this->getMockBuilder( \Aimeos\MW\Filesystem\Manager\Standard::class )
+		$fsm = $this->getMockBuilder( \Aimeos\Base\Filesystem\Manager\Standard::class )
 			->setMethods( array( 'get' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$fs = $this->getMockBuilder( \Aimeos\MW\Filesystem\Standard::class )
+		$fs = $this->getMockBuilder( \Aimeos\Base\Filesystem\Standard::class )
 			->setMethods( array( 'has', 'copy' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -137,12 +137,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testDelete()
 	{
-		$fsm = $this->getMockBuilder( \Aimeos\MW\Filesystem\Manager\Standard::class )
+		$fsm = $this->getMockBuilder( \Aimeos\Base\Filesystem\Manager\Standard::class )
 			->setMethods( array( 'get' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$fs = $this->getMockBuilder( \Aimeos\MW\Filesystem\Standard::class )
+		$fs = $this->getMockBuilder( \Aimeos\Base\Filesystem\Standard::class )
 			->setMethods( array( 'has', 'rm' ) )
 			->disableOriginalConstructor()
 			->getMock();

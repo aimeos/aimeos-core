@@ -248,10 +248,10 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Sets the file system manager object.
 	 *
-	 * @param \Aimeos\MW\Filesystem\Manager\Iface $manager File system object
+	 * @param \Aimeos\Base\Filesystem\Manager\Iface $manager File system object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setFilesystemManager( \Aimeos\MW\Filesystem\Manager\Iface $manager ) : \Aimeos\MShop\Context\Item\Iface
+	public function setFilesystemManager( \Aimeos\Base\Filesystem\Manager\Iface $manager ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->fs = $manager;
 		return $this;
@@ -262,9 +262,9 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Returns the file system object for the given resource name.
 	 *
 	 * @param string $resource Resource name, e.g. "fs-admin"
-	 * @return \Aimeos\MW\Filesystem\Iface File system object
+	 * @return \Aimeos\Base\Filesystem\Iface File system object
 	 */
-	public function fs( string $resource ) : \Aimeos\MW\Filesystem\Iface
+	public function fs( string $resource ) : \Aimeos\Base\Filesystem\Iface
 	{
 		if( !isset( $this->fs ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'File system manager object not available' ) );

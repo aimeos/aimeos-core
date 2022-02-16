@@ -28,7 +28,7 @@ class Standard
 	 * Initializes the session view helper.
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
-	 * @param \Aimeos\MW\Session\Iface $session Session object
+	 * @param \Aimeos\Base\Session\Iface $session Session object
 	 */
 	public function __construct( \Aimeos\MW\View\Iface $view, \Aimeos\Base\Session\Iface $session )
 	{

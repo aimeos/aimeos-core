@@ -87,7 +87,7 @@ class TestHelperCntl
 		$ctx->setLogger( $logger );
 
 
-		$fsm = new \Aimeos\MW\Filesystem\Manager\Standard( $conf );
+		$fsm = new \Aimeos\Base\Filesystem\Manager\Standard( $conf->get( 'resource' ) );
 		$ctx->setFilesystemManager( $fsm );
 
 

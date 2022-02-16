@@ -85,17 +85,17 @@ interface Iface
 	 * Returns the file system object for the given resource name.
 	 *
 	 * @param string $resource Resource name, e.g. "fs-admin"
-	 * @return \Aimeos\MW\Filesystem\Iface File system object
+	 * @return \Aimeos\Base\Filesystem\Iface File system object
 	 */
-	public function fs( string $resource ) : \Aimeos\MW\Filesystem\Iface;
+	public function fs( string $resource ) : \Aimeos\Base\Filesystem\Iface;
 
 	/**
 	 * Sets the file system manager object.
 	 *
-	 * @param \Aimeos\MW\Filesystem\Manager\Iface $fsManager File system manager object
+	 * @param \Aimeos\Base\Filesystem\Manager\Iface $fsManager File system manager object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setFilesystemManager( \Aimeos\MW\Filesystem\Manager\Iface $fsManager ) : \Aimeos\MShop\Context\Item\Iface;
+	public function setFilesystemManager( \Aimeos\Base\Filesystem\Manager\Iface $fsManager ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
 	 * Returns the translation/internationalization object for the given locale (null for default one).

@@ -143,7 +143,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSetFilesystemManager()
 	{
 		$context = \TestHelperMShop::context();
-		$r = $this->object->setFilesystemManager( new \Aimeos\MW\Filesystem\Manager\Standard( $context->config() ) );
+		$r = $this->object->setFilesystemManager( new \Aimeos\Base\Filesystem\Manager\Standard( $context->config()->get( 'resource' ) ) );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $r );
 
