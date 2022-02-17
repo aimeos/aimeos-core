@@ -49,7 +49,7 @@ jobs:
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: ./vendor/bin/phing setup test check
 
-  "php73-pgsql13":
+  "php73-pgsql14":
     docker:
       - image: aimeos/ci-php:7.3
       - image: cimg/postgres:14.0
@@ -143,7 +143,7 @@ workflows:
     jobs:
       - "php71-mariadb10"
       - "php72-mysql57"
-      - "php73-pgsql13"
+      - "php73-pgsql14"
       - "php74-mssql2019"
       - "php80-mysql80"
       - "php81-mysql80"
