@@ -8,7 +8,7 @@ jobs:
   "php71-mariadb10":
     docker:
       - image: aimeos/ci-php:7.1
-      - image: circleci/mariadb:10
+      - image: cimg/mariadb:10.3
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: aimeos
@@ -30,7 +30,7 @@ jobs:
   "php72-mysql57":
     docker:
       - image: aimeos/ci-php:7.2
-      - image: circleci/mysql:5.7
+      - image: cimg/mysql:5.7
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: aimeos
@@ -52,7 +52,7 @@ jobs:
   "php73-pgsql13":
     docker:
       - image: aimeos/ci-php:7.3
-      - image: circleci/postgres:13
+      - image: cimg/postgres:14.0
         environment:
           POSTGRES_PASSWORD: aimeos
           POSTGRES_USER: aimeos
@@ -95,7 +95,7 @@ jobs:
   "php80-mysql80":
     docker:
       - image: aimeos/ci-php:8.0
-      - image: circleci/mysql:8.0
+      - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: aimeos
@@ -117,7 +117,7 @@ jobs:
   "php81-mysql80":
     docker:
       - image: aimeos/ci-php:8.1
-      - image: circleci/mysql:8.0
+      - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: aimeos
