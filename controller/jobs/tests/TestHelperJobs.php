@@ -106,7 +106,7 @@ class TestHelperJobs
 		$ctx->setMessageQueueManager( $mq );
 
 
-		$mail = new \Aimeos\MW\Mail\None();
+		$mail = new \Aimeos\Base\Mail\None();
 		$ctx->setMail( $mail );
 
 

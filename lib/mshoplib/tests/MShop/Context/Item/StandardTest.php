@@ -196,7 +196,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetMail()
 	{
-		$mail = new \Aimeos\MW\Mail\None();
+		$mail = new \Aimeos\Base\Mail\None();
 		$return = $this->object->setMail( $mail );
 
 		$this->assertSame( $mail, $this->object->mail() );

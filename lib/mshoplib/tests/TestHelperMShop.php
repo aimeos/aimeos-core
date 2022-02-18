@@ -107,7 +107,7 @@ class TestHelperMShop
 		$ctx->setSession( $session );
 
 
-		$mail = new \Aimeos\MW\Mail\None();
+		$mail = new \Aimeos\Base\Mail\None();
 		$ctx->setMail( $mail );
 
 

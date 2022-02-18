@@ -158,17 +158,17 @@ interface Iface
 	/**
 	 * Returns the mail object.
 	 *
-	 * @return \Aimeos\MW\Mail\Iface Mail object
+	 * @return \Aimeos\Base\Mail\Iface Mail object
 	 */
-	public function mail() : \Aimeos\MW\Mail\Iface;
+	public function mail() : \Aimeos\Base\Mail\Iface;
 
 	/**
 	 * Sets the mail object.
 	 *
-	 * @param \Aimeos\MW\Mail\Iface $mail Mail object
+	 * @param \Aimeos\Base\Mail\Iface $mail Mail object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setMail( \Aimeos\MW\Mail\Iface $mail ) : \Aimeos\MShop\Context\Item\Iface;
+	public function setMail( \Aimeos\Base\Mail\Iface $mail ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
 	 * Returns the password adapter object.

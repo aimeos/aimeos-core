@@ -29,9 +29,9 @@ class Standard
 	 * Initializes the Mail view helper.
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
-	 * @param \Aimeos\MW\Mail\Message\Iface $message E-mail message object
+	 * @param \Aimeos\Base\Mail\Message\Iface $message E-mail message object
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, \Aimeos\MW\Mail\Message\Iface $message )
+	public function __construct( \Aimeos\MW\View\Iface $view, \Aimeos\Base\Mail\Message\Iface $message )
 	{
 		parent::__construct( $view );
 
@@ -42,9 +42,9 @@ class Standard
 	/**
 	 * Returns the e-mail message object.
 	 *
-	 * @return \Aimeos\MW\Mail\Message\Iface E-mail message object
+	 * @return \Aimeos\Base\Mail\Message\Iface E-mail message object
 	 */
-	public function transform() : \Aimeos\MW\Mail\Message\Iface
+	public function transform() : \Aimeos\Base\Mail\Message\Iface
 	{
 		return $this->message;
 	}

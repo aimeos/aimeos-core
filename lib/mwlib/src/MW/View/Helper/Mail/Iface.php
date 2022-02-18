@@ -22,7 +22,7 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	/**
 	 * Returns the e-mail message object.
 	 *
-	 * @return \Aimeos\MW\Mail\Message\Iface E-mail message object
+	 * @return \Aimeos\Base\Mail\Message\Iface E-mail message object
 	 */
-	public function transform() : \Aimeos\MW\Mail\Message\Iface;
+	public function transform() : \Aimeos\Base\Mail\Message\Iface;
 }
