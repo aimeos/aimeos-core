@@ -190,7 +190,7 @@ class Email
 			->to( (string) $this->getConfigValue( 'email.to' ) )
 			->from( (string) $this->getConfigValue( 'email.from' ) )
 			->subject( (string) $this->getConfigValue( 'email.subject', 'New orders' ) )
-			->attach( $this->getOrderContent( $orderItems, $baseItems ), 'text/plain', 'orders.csv' )
+			->attach( $this->getOrderContent( $orderItems, $baseItems ), 'orders.csv', 'text/plain' )
 			->text( $this->getEmailContent( $orderItems, $baseItems ) )
 			->send();
 	}
