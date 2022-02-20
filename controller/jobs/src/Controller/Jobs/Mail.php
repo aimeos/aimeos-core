@@ -26,27 +26,19 @@ trait Mail
 	 */
 	abstract protected function context() : \Aimeos\MShop\Context\Item\Iface;
 
+
 	/**
-	 * Prepares and returns a new mail message
+	 * Returns the CSS rules for the given theme
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Address\Iface $addr Address item object
-	 * @return \Aimeos\Base\Mail\Message\Iface Prepared mail message
+	 * @param string|null $theme Theme name
+	 * @return string|null CSS rules
 	 */
-	protected function mailTo( \Aimeos\MShop\Common\Item\Address\Iface $addr ) : \Aimeos\Base\Mail\Message\Iface
+	protected function mailCss( ?string $theme ) : ?string
 	{
-		$context = $this->context();
-		$config = $context->config();
+		$theme = $theme ?: 'default';
+		$fs = $this->context()->fs( 'fs-theme' );
 
-		$message = $context->mail()->create()
-			->header( 'X-MailGenerator', 'Aimeos' )
-			->from( $config->get( 'resource/email/from-email' ), $config->get( 'resource/email/from-name' ) )
-			->to( $addr->getEMail(), $addr->getFirstName() . ' ' . $addr->getLastName() );
-
-		if( !empty( $email = $config->get( 'resource/email/bcc-email' ) ) ) {
-			$message->bcc( $email );
-		}
-
-		return $message;
+		return $fs->has( $theme . '/email.css' ) ? $fs->read( $theme . '/email.css' ) : null;
 	}
 
 
@@ -76,6 +68,38 @@ trait Mail
 
 
 	/**
+	 * Returns the logo for the given path
+	 *
+	 * @param string|null Logo path
+	 * @return string Binary logo data
+	 */
+	protected function mailLogo( ?string $path ) : string
+	{
+		$fs = $this->context()->fs( 'fs-media' );
+		return $path && $fs->has( $path ) ? $fs->read( $path ) : '';
+	}
+
+
+	/**
+	 * Prepares and returns a new mail message
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $addr Address item object
+	 * @return \Aimeos\Base\Mail\Message\Iface Prepared mail message
+	 */
+	protected function mailTo( \Aimeos\MShop\Common\Item\Address\Iface $addr ) : \Aimeos\Base\Mail\Message\Iface
+	{
+		$context = $this->context();
+		$config = $context->config();
+
+		return $context->mail()->create()
+			->header( 'X-MailGenerator', 'Aimeos' )
+			->from( $config->get( 'resource/email/from-email' ), $config->get( 'resource/email/from-name' ) )
+			->to( $addr->getEMail(), $addr->getFirstName() . ' ' . $addr->getLastName() )
+			->bcc( $config->get( 'resource/email/bcc-email' ) );
+	}
+
+
+	/**
 	 * Returns the view for generating the mail message content
 	 *
 	 * @param string|null $langId Language ID the content should be generated for
@@ -84,6 +108,9 @@ trait Mail
 	protected function mailView( string $langId = null ) : \Aimeos\MW\View\Iface
 	{
 		$view = $this->context()->view();
+
+		$helper = new \Aimeos\MW\View\Helper\Number\Locale( $view, $langId );
+		$view->addHelper( 'number', $helper );
 
 		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $this->context()->i18n( $langId ?: 'en' ) );
 		$view->addHelper( 'translate', $helper );
