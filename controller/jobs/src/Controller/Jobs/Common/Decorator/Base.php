@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2013
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2022
  * @package Controller
@@ -19,6 +18,7 @@ namespace Aimeos\Controller\Jobs\Common\Decorator;
  * @subpackage Jobs
  */
 abstract class Base
+	extends \Aimeos\Controller\Jobs\Base
 	implements \Aimeos\Controller\Jobs\Common\Decorator\Iface
 {
 	private $context;
@@ -36,8 +36,8 @@ abstract class Base
 	public function __construct( \Aimeos\Controller\Jobs\Iface $controller,
 		\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos )
 	{
-		$this->context = $context;
-		$this->aimeos = $aimeos;
+		parent::__construct( $context, $aimeos );
+
 		$this->controller = $controller;
 	}
 
@@ -90,23 +90,12 @@ abstract class Base
 
 
 	/**
-	 * Returns the context object.
+	 * Returns the job controller
 	 *
-	 * @return \Aimeos\MShop\Context\Item\Iface context object implementing \Aimeos\MShop\Context\Item\Iface
+	 * @return \Aimeos\Controller\Jobs\Iface Job controller object
 	 */
-	protected function context() : \Aimeos\MShop\Context\Item\Iface
+	protected function getController() : \Aimeos\Controller\Jobs\Iface
 	{
-		return $this->context;
-	}
-
-
-	/**
-	 * Returns the \Aimeos\Bootstrap object.
-	 *
-	 * @return \Aimeos\Bootstrap \Aimeos\Bootstrap object
-	 */
-	protected function getAimeos() : \Aimeos\Bootstrap
-	{
-		return $this->aimeos;
+		return $this->controller;
 	}
 }
