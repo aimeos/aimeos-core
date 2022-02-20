@@ -70,7 +70,7 @@ trait Mail
 	/**
 	 * Returns the logo for the given path
 	 *
-	 * @param string|null Logo path
+	 * @param string|null $path Logo path relative to fs-media file system
 	 * @return string Binary logo data
 	 */
 	protected function mailLogo( ?string $path ) : string
