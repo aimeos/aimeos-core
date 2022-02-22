@@ -285,6 +285,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'order.base.product.total' => array(
+			'code' => 'order.base.product.total()',
+			'internalcode' => 'mordbapr."quantity" * mordbapr."price"',
+			'label' => 'Product price total',
+			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'public' => false,
+		),
 	);
 
 

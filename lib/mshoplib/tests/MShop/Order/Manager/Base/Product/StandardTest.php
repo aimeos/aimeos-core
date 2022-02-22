@@ -67,6 +67,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAggregateTotal()
+	{
+		$search = $this->object->filter();
+		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:lib/mshoplib' ) );
+		$result = $this->object->aggregate( $search, 'order.base.product.type', 'order.base.product.total()', 'sum' )->toArray();
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertArrayHasKey( 'default', $result );
+		$this->assertEquals( 3139, $result['default'] );
+	}
+
+
 	public function testClear()
 	{
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->clear( [-1] ) );
