@@ -39,6 +39,11 @@ return array(
 	// If using the order domain in an other database or database server
 	// 'db-order' => array('adapter' => 'mysql', 'host' => 'localhost', ....)
 
+	// default e-mail configuration
+	'email' => [
+		'from-email' => 'root@localhost',
+	],
+
 	// default message queue configuration
 	'fs' => array(
 
