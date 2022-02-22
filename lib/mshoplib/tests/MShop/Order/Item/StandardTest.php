@@ -197,16 +197,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSetStatusDeliveryNull()
-	{
-		$return = $this->object->setStatusDelivery( null );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $return );
-		$this->assertNull( $this->object->getStatusDelivery() );
-		$this->assertTrue( $this->object->isModified() );
-	}
-
-
 	public function testGetStatusPayment()
 	{
 		$this->assertEquals( $this->values['order.statuspayment'], $this->object->getStatusPayment() );
@@ -219,16 +209,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $return );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_DELETED, $this->object->getStatusPayment() );
-		$this->assertTrue( $this->object->isModified() );
-	}
-
-
-	public function testSetStatusPaymentNull()
-	{
-		$return = $this->object->setStatusPayment( null );
-
-		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $return );
-		$this->assertNull( $this->object->getStatusPayment() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 

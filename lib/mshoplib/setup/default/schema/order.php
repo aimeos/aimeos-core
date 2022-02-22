@@ -109,8 +109,8 @@ return array(
 			$table->smallint( 'taxflag' )->default( 1 );
 			$table->int( 'flags' )->default( 0 );
 			$table->int( 'pos' )->default( 0 );
-			$table->smallint( 'statuspayment' )->null( true );
-			$table->smallint( 'statusdelivery' )->null( true );
+			$table->smallint( 'statuspayment' )->default( -1 );
+			$table->smallint( 'statusdelivery' )->default( -1 );
 			$table->string( 'notes' )->default( '' );
 			$table->meta();
 
@@ -223,8 +223,8 @@ return array(
 			$table->string( 'channel', 16 )->default( '' );
 			$table->datetime( 'datepayment' )->null( true );
 			$table->datetime( 'datedelivery' )->null( true );
-			$table->smallint( 'statuspayment' )->null( true );
-			$table->smallint( 'statusdelivery' )->null( true );
+			$table->smallint( 'statuspayment' )->default( -1 );
+			$table->smallint( 'statusdelivery' )->default( -1 );
 			$table->string( 'cdate', 10 )->default( '' );
 			$table->string( 'cmonth', 7 )->default( '' );
 			$table->string( 'cweek', 7 )->default( '' );

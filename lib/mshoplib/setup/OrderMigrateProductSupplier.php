@@ -27,7 +27,7 @@ class OrderMigrateProductSupplier extends Base
 
 		$this->info( 'Migrate supplier code to ID and name in order product table', 'v' );
 
-		$this->db()->table( 'mshop_order_base_product', function( $table ) {
+		$db->table( 'mshop_order_base_product', function( $table ) {
 			$table->refid( 'supplierid' )->default( '' );
 			$table->string( 'suppliername' )->default( '' );
 		} )->up();

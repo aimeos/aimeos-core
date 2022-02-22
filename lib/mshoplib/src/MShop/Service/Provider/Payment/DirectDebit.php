@@ -157,7 +157,7 @@ class DirectDebit
 	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request,
 		\Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		if( empty( $order->getStatusPayment() ) )
+		if( $order->getStatusPayment() < 0 )
 		{
 			$order->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED );
 			$order = $this->saveOrder( $order );

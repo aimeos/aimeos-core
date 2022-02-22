@@ -365,38 +365,38 @@ interface Iface
 	 *
 	 * The returned status values are the STAT_* constants from the \Aimeos\MShop\Order\Item\Base class
 	 *
-	 * @return int|null Delivery status of the product
+	 * @return int Delivery status of the product
 	 */
-	public function getStatusDelivery() : ?int;
+	public function getStatusDelivery() : int;
 
 	/**
 	 * Sets the new delivery status of the order product item.
 	 *
 	 * Possible status values are the STAT_* constants from the \Aimeos\MShop\Order\Item\Base class
 	 *
-	 * @param int|null $value New delivery status of the product
+	 * @param int $value New delivery status of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setStatusDelivery( ?int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setStatusDelivery( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the current payment status of the order product item.
 	 *
 	 * The returned status values are the PAY_* constants from the \Aimeos\MShop\Order\Item\Base class
 	 *
-	 * @return int|null Payment status of the product
+	 * @return int Payment status of the product
 	 */
-	public function getStatusPayment() : ?int;
+	public function getStatusPayment() : int;
 
 	/**
 	 * Sets the new payment status of the order product item.
 	 *
 	 * Possible status values are the PAY_* constants from the \Aimeos\MShop\Order\Item\Base class
 	 *
-	 * @param int|null $value New payment status of the product
+	 * @param int $value New payment status of the product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setStatusPayment( ?int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setStatusPayment( int $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the value of the attribute item for the ordered product with the given code.
