@@ -238,7 +238,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetProcess()
 	{
-		$process = new \Aimeos\MW\Process\Pcntl();
+		$process = new \Aimeos\Base\Process\Pcntl();
 		$return = $this->object->setProcess( $process );
 
 		$this->assertSame( $process, $this->object->process() );

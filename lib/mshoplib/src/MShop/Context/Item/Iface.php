@@ -220,17 +220,17 @@ interface Iface
 	/**
 	 * Returns the process object.
 	 *
-	 * @return \Aimeos\MW\Process\Iface Process object
+	 * @return \Aimeos\Base\Process\Iface Process object
 	 */
-	public function process() : \Aimeos\MW\Process\Iface;
+	public function process() : \Aimeos\Base\Process\Iface;
 
 	/**
 	 * Sets the process object.
 	 *
-	 * @param \Aimeos\MW\Process\Iface $process Process object
+	 * @param \Aimeos\Base\Process\Iface $process Process object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setProcess( \Aimeos\MW\Process\Iface $process ) : \Aimeos\MShop\Context\Item\Iface;
+	public function setProcess( \Aimeos\Base\Process\Iface $process ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
 	 * Returns the session object.
