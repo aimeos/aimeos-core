@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
-# 
+#
+#
 # Translators:
 # Translators:
 # Translators:
@@ -88,12 +88,8 @@ msgid "reason:1"
 msgstr "preklicano"
 
 #. Payment status value
-msgid "pay:"
-msgstr "unfinished"
-
-#. Payment status value
 msgid "pay:-1"
-msgstr "nedokončano"
+msgstr "---"
 
 #. Payment status value
 msgid "pay:0"
@@ -128,12 +124,8 @@ msgid "pay:7"
 msgstr ""
 
 #. Delivery status value
-msgid "stat:"
-msgstr "unfinished"
-
-#. Delivery status value
 msgid "stat:-1"
-msgstr "nedokončano"
+msgstr "---"
 
 #. Delivery status value
 msgid "stat:0"

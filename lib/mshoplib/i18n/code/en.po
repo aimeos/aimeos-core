@@ -63,12 +63,8 @@ msgid "order:web"
 msgstr "internet"
 
 #. Payment status value
-msgid "pay:"
-msgstr "unfinished"
-
-#. Payment status value
 msgid "pay:-1"
-msgstr "unfinished"
+msgstr "---"
 
 #. Payment status value
 msgid "pay:0"
@@ -151,12 +147,8 @@ msgid "service.payment.available.notallowed"
 msgstr "A payment option is not allowed"
 
 #. Delivery status value
-msgid "stat:"
-msgstr "unfinished"
-
-#. Delivery status value
 msgid "stat:-1"
-msgstr "unfinished"
+msgstr "---"
 
 #. Delivery status value
 msgid "stat:0"

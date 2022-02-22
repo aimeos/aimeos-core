@@ -90,12 +90,8 @@ msgstr "canceled"
 
 
 #. Payment status value
-msgid "pay:"
-msgstr "unfinished"
-
-#. Payment status value
 msgid "pay:-1"
-msgstr "unfinished"
+msgstr "---"
 
 #. Payment status value
 msgid "pay:0"
@@ -131,12 +127,8 @@ msgstr "transferred"
 
 
 #. Delivery status value
-msgid "stat:"
-msgstr "unfinished"
-
-#. Delivery status value
 msgid "stat:-1"
-msgstr "unfinished"
+msgstr "---"
 
 #. Delivery status value
 msgid "stat:0"

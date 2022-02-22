@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
-# 
+#
+#
 # Translators:
 # Translators:
 # Translators:
@@ -88,12 +88,8 @@ msgid "reason:1"
 msgstr "отменен"
 
 #. Payment status value
-msgid "pay:"
-msgstr "незакончен"
-
-#. Payment status value
 msgid "pay:-1"
-msgstr "незакончен"
+msgstr "---"
 
 #. Payment status value
 msgid "pay:0"
@@ -128,12 +124,8 @@ msgid "pay:7"
 msgstr ""
 
 #. Delivery status value
-msgid "stat:"
-msgstr "незакончен"
-
-#. Delivery status value
 msgid "stat:-1"
-msgstr "незакончен"
+msgstr "---"
 
 #. Delivery status value
 msgid "stat:0"
