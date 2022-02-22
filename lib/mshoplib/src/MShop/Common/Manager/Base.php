@@ -278,7 +278,7 @@ abstract class Base
 			if( !isset( $attrList[$value] ) )
 			{
 				$msg = $this->context()->translate( 'mshop', 'Unknown search key "%1$s"' );
-				throw new \Aimeos\MShop\Exception( $msg );
+				throw new \Aimeos\MShop\Exception( sprintf( $msg, $value ) );
 			}
 
 			foreach( $keys as $string )
@@ -286,7 +286,7 @@ abstract class Base
 				if( !isset( $attrList[$string] ) )
 				{
 					$msg = $this->context()->translate( 'mshop', 'Unknown search key "%1$s"' );
-					throw new \Aimeos\MShop\Exception( $msg );
+					throw new \Aimeos\MShop\Exception( sprintf( $msg, $string ) );
 				}
 
 				$cols[] = $attrList[$string]->getInternalCode();

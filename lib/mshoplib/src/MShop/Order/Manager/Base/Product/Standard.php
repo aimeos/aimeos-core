@@ -276,7 +276,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.base.product.count()' => array(
+		'order.base.product.count' => array(
 			'code' => 'order.base.product.count()',
 			'internalcode' => '( SELECT COUNT(*) FROM mshop_order_base_product AS mordbapr_count
 				WHERE mordbapr."baseid" = mordbapr_count."baseid" AND mordbapr_count."prodid" = $1 )',
