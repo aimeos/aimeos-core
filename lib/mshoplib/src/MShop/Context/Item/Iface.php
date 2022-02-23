@@ -101,14 +101,14 @@ interface Iface
 	 * Returns the translation/internationalization object for the given locale (null for default one).
 	 *
 	 * @param string|null $locale Two letter language ISO code for specific language instead of default one
-	 * @return \Aimeos\MW\Translation\Iface Internationalization object
+	 * @return \Aimeos\Base\Translation\Iface Internationalization object
 	 */
-	public function i18n( string $locale = null ) : \Aimeos\MW\Translation\Iface;
+	public function i18n( string $locale = null ) : \Aimeos\Base\Translation\Iface;
 
 	/**
 	 * Sets the translation/internationalization objects.
 	 *
-	 * @param \Aimeos\MW\Translation\Iface[] $translations Associative list locale as key as items as values
+	 * @param \Aimeos\Base\Translation\Iface[] $translations Associative list locale as key as items as values
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setI18n( array $translations ) : \Aimeos\MShop\Context\Item\Iface;

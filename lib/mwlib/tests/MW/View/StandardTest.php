@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$engines = array( '.phtml' => new \Aimeos\MW\View\Engine\TestEngine() );
 
 		$this->object = new \Aimeos\MW\View\Standard( array( __DIR__ => array( '_testfiles' ) ), $engines );
-		$this->translate = new \Aimeos\MW\View\Helper\Translate\Standard( $this->object, new \Aimeos\MW\Translation\None( 'en_GB' ) );
+		$this->translate = new \Aimeos\MW\View\Helper\Translate\Standard( $this->object, new \Aimeos\Base\Translation\None( 'en_GB' ) );
 	}
 
 

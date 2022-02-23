@@ -29,9 +29,9 @@ class Standard
 	 * Initializes the translator view helper.
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
-	 * @param \Aimeos\MW\Translation\Iface $translator Translation object
+	 * @param \Aimeos\Base\Translation\Iface $translator Translation object
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, \Aimeos\MW\Translation\Iface $translator )
+	public function __construct( \Aimeos\MW\View\Iface $view, \Aimeos\Base\Translation\Iface $translator )
 	{
 		parent::__construct( $view );
 

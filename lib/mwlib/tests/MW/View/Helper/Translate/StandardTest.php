@@ -18,7 +18,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$view = new \Aimeos\MW\View\Standard();
-		$translate = new \Aimeos\MW\Translation\None( 'en_GB' );
+		$translate = new \Aimeos\Base\Translation\None( 'en_GB' );
 		$this->object = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $translate );
 	}
 
