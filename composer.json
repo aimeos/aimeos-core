@@ -46,15 +46,13 @@
 			"Aimeos\\MW\\": "lib/mwlib/src/MW/",
 			"Aimeos\\MShop\\": "lib/mshoplib/src/MShop/",
 			"Aimeos\\MAdmin\\": "lib/mshoplib/src/MAdmin/",
-			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/",
-			"Aimeos\\Controller\\Jobs\\": "controller/common/src/Controller/Jobs/"
+			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/"
 		},
 		"classmap": [
 			"lib/mwlib/src",
 			"lib/mshoplib/src",
 			"lib/mshoplib/setup",
 			"controller/common/src",
-			"controller/jobs/src",
 			"Bootstrap.php",
 			"Setup.php"
 		]
@@ -64,14 +62,12 @@
 			"Aimeos\\MW\\": "lib/mwlib/tests/MW/",
 			"Aimeos\\MShop\\": "lib/mshoplib/tests/MShop/",
 			"Aimeos\\MAdmin\\": "lib/mshoplib/tests/MAdmin/",
-			"Aimeos\\Controller\\Common\\": "controller/common/tests/Controller/Common/",
-			"Aimeos\\Controller\\Jobs\\": "controller/common/tests/Controller/Jobs/"
+			"Aimeos\\Controller\\Common\\": "controller/common/tests/Controller/Common/"
 		},
 		"classmap": [
 			"lib/mwlib/tests",
 			"lib/mshoplib/tests",
-			"controller/common/tests",
-			"controller/jobs/tests"
+			"controller/common/tests"
 		]
 	}
 }

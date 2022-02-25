@@ -22,7 +22,6 @@
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/common" />
-		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="coverage" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<exclude name=".*/phing.xml" />
@@ -40,7 +39,6 @@
 		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/common" />
-		<phing target="test" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="test" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<exclude name=".*/phing.xml" />
@@ -74,7 +72,6 @@
 		<phing target="check" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/common" />
-		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="check" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<exclude name=".*/phing.xml" />
@@ -106,9 +103,6 @@
 			<fileset dir="${coredir}/lib/mshoplib/src/MShop" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
-			<fileset dir="${extdir}/ai-fosuser/lib/custom/src/MShop" expandsymboliclinks="true" >
-				<include name="**/*.php" />
-			</fileset>
 			<fileset dir="${extdir}/ai-laravel/lib/custom/src/MShop" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
@@ -121,13 +115,6 @@
 			outdir="${coredir}/misc/confdoc">
 			<fileset dir="${coredir}/controller/common/src" expandsymboliclinks="true" >
 				<include name="**/*.php" />
-			</fileset>
-		</confdoc>
-		<confdoc prefix="controller/jobs" keyparts="1"
-			optfile="${coredir}/controller/jobs/tests/confdoc.ser"
-			outdir="${coredir}/misc/confdoc">
-			<fileset dir="${coredir}/controller/jobs" expandsymboliclinks="true" >
-				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
 		<confdoc prefix="admin/jqadm" keyparts="1"
@@ -181,14 +168,6 @@
 			</fileset>
 		</confdoc>
 		<confdoc prefix="controller/jobs" keyparts="2"
-			optfile="${extdir}/ai-client-html/controller/jobs/tests/confdoc.ser"
-			outdir="${coredir}/misc/confdoc">
-			<fileset dir="${extdir}/ai-client-html/controller/jobs" expandsymboliclinks="true" >
-				<include name="templates/**/*.php" />
-				<include name="src/**/*.php" />
-			</fileset>
-		</confdoc>
-		<confdoc prefix="controller/jobs" keyparts="2"
 			optfile="${extdir}/ai-controller-jobs/controller/jobs/tests/confdoc.ser"
 			outdir="${coredir}/misc/confdoc">
 			<fileset dir="${extdir}/ai-controller-jobs" expandsymboliclinks="true" >
@@ -211,7 +190,7 @@
 		<delete dir="${coredir}/misc/apidoc" quiet="true" failonerror="false" />
 		<exec command="php ${coredir}/vendor/bin/apigen generate --template-theme=bootstrap
 			--title='Aimeos Core API documentation' --tree  --no-source-code -d misc/apidoc
-			-s controller/common/src/ -s controller/jobs/src/
+			-s controller/common/src/
 			-s lib/mshoplib/src/ -s lib/mwlib/src/
 			-s ext/ai-admin-jqadm/admin/jqadm/src/
 			-s ext/ai-admin-jsonadm/admin/jsonadm/src/
@@ -228,7 +207,6 @@
 		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/common" />
-		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="clean" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<exclude name=".*/phing.xml" />
@@ -241,7 +219,6 @@
 	<target name="i18n" description="Creates all translation files">
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/common" />
-		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="i18n" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<exclude name=".*/phing.xml" />
@@ -260,7 +237,6 @@
 		</foreach>
 		<phing target="build" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/common" />
-		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="build" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<exclude name=".*/phing.xml" />
