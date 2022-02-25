@@ -264,7 +264,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * @param string $resource Resource name, e.g. "fs-admin"
 	 * @return \Aimeos\Base\Filesystem\Iface File system object
 	 */
-	public function fs( string $resource ) : \Aimeos\Base\Filesystem\Iface
+	public function fs( string $resource = 'fs' ) : \Aimeos\Base\Filesystem\Iface
 	{
 		if( !isset( $this->fs ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'File system manager object not available' ) );
