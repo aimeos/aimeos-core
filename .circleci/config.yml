@@ -68,8 +68,7 @@ jobs:
           paths: [./vendor]
       - run: for i in `seq 1 10`; do nc -z 127.0.0.1 5432 && echo OK && exit 0; echo -n .; sleep 1; done
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'port' => 5432, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
-      - run: ./vendor/bin/phing setup coverage
-      - run: ./vendor/bin/php-coveralls -vvv
+      - run: ./vendor/bin/phing setup test
 
   "php74-mssql2019":
     docker:
@@ -89,8 +88,7 @@ jobs:
           paths: [./vendor]
       - run: echo "CREATE DATABASE aimeos;" > sqlserver.sql; for i in `seq 1 5`; do /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U SA -P 'S3c0r3P4ss' -i sqlserver.sql && exit 0; sleep 3; done
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'sqlsrv', 'host' => '127.0.0.1', 'port' => 1433, 'database' => 'aimeos', 'username' => 'SA', 'password' => 'S3c0r3P4ss', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
-      - run: ./vendor/bin/phing setup coverage
-      - run: ./vendor/bin/php-coveralls -vvv
+      - run: ./vendor/bin/phing setup test
 
   "php80-mysql80":
     docker:
