@@ -493,6 +493,31 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetTaxes()
+	{
+		$this->object->setProducts( $this->products );
+		$this->object->setServices( $this->services );
+
+		$result = $this->object->getTaxes();
+
+		$this->assertArrayHasKey( 'tax', $result );
+		$this->assertArrayHasKey( '0.00', $result['tax'] );
+		$this->assertArrayHasKey( '0.50', $result['tax'] );
+		$this->assertEquals( '0.0000', $result['tax']['0.00']->getTaxValue() );
+		$this->assertEquals( '0.1095', $result['tax']['0.50']->getTaxValue() );
+	}
+
+
+	public function testGetCosts()
+	{
+		$this->object->setProducts( $this->products );
+		$this->object->setServices( $this->services );
+
+		$this->assertEquals( '3.11', round( $this->object->getCosts(), 2 ) );
+		$this->assertEquals( '0.00', $this->object->getCosts( 'payment' ) );
+	}
+
+
 	public function testCheck()
 	{
 		foreach( $this->products as $product ) {

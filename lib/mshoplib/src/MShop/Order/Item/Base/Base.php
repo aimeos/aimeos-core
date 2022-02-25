@@ -776,6 +776,79 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macr
 
 
 	/**
+	 * Returns the delivery costs
+	 *
+	 * @param string $type Service type like "delivery" or "payment"
+	 * @return float Delivery costs value
+	 */
+	public function getCosts( string $type = 'delivery' ) : float
+	{
+		$costs = 0;
+
+		if( $type === 'delivery' )
+		{
+			foreach( $this->getProducts() as $product ) {
+				$costs += $product->getPrice()->getCosts() * $product->getQuantity();
+			}
+		}
+
+		foreach( $this->getService( $type ) as $service ) {
+			$costs += $service->getPrice()->getCosts();
+		}
+
+		return $costs;
+	}
+
+
+	/**
+	 * Returns a list of tax names and values
+	 *
+	 * @return array Associative list of tax names as key and price items as value
+	 */
+	public function getTaxes() : array
+	{
+		$taxes = [];
+
+		foreach( $this->getProducts() as $product )
+		{
+			$price = $product->getPrice();
+
+			foreach( $price->getTaxrates() as $name => $taxrate )
+			{
+				$price = (clone $price)->setTaxRate( $taxrate );
+
+				if( isset( $taxes[$name][$taxrate] ) ) {
+					$taxes[$name][$taxrate]->addItem( $price, $product->getQuantity() );
+				} else {
+					$taxes[$name][$taxrate] = $price->addItem( $price, $product->getQuantity() - 1 );
+				}
+			}
+		}
+
+		foreach( $this->getServices() as $services )
+		{
+			foreach( $services as $service )
+			{
+				$price = $service->getPrice();
+
+				foreach( $price->getTaxrates() as $name => $taxrate )
+				{
+					$price = (clone $price)->setTaxRate( $taxrate );
+
+					if( isset( $taxes[$name][$taxrate] ) ) {
+						$taxes[$name][$taxrate]->addItem( $price );
+					} else {
+						$taxes[$name][$taxrate] = $price;
+					}
+				}
+			}
+		}
+
+		return $taxes;
+	}
+
+
+	/**
 	 * Checks if the price uses the same currency as the price in the basket.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item
