@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MAdmin\Common\Manager\Base
 	implements \Aimeos\MAdmin\Log\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
-	use \Aimeos\MW\Logger\Traits;
+	use \Aimeos\Base\Logger\Traits;
 
 
 	private $loglevel;
@@ -129,7 +129,7 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$this->loglevel = $config->get( 'madmin/log/manager/loglevel', \Aimeos\MW\Logger\Iface::NOTICE );
+		$this->loglevel = $config->get( 'madmin/log/manager/loglevel', \Aimeos\Base\Logger\Iface::NOTICE );
 		$this->requestid = md5( php_uname( 'n' ) . getmypid() . date( 'Y-m-d H:i:s' ) );
 	}
 
@@ -654,9 +654,9 @@ class Standard
 	 * @param string|array|object $message Message text that should be written to the log facility
 	 * @param int $priority Priority of the message for filtering
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
-	 * @return \Aimeos\MW\Logger\Iface Logger object for method chaining
+	 * @return \Aimeos\Base\Logger\Iface Logger object for method chaining
 	 */
-	public function log( $message, int $priority = \Aimeos\MW\Logger\Iface::ERR, string $facility = 'message' ) : \Aimeos\MW\Logger\Iface
+	public function log( $message, int $priority = \Aimeos\Base\Logger\Iface::ERR, string $facility = 'message' ) : \Aimeos\Base\Logger\Iface
 	{
 		if( $priority <= $this->loglevel )
 		{

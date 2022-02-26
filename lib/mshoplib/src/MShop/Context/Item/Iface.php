@@ -143,17 +143,17 @@ interface Iface
 	/**
 	 * Returns the logger object.
 	 *
-	 * @return \Aimeos\MW\Logger\Iface Logger object
+	 * @return \Aimeos\Base\Logger\Iface Logger object
 	 */
-	public function logger() : \Aimeos\MW\Logger\Iface;
+	public function logger() : \Aimeos\Base\Logger\Iface;
 
 	/**
 	 * Sets the logger object.
 	 *
-	 * @param \Aimeos\MW\Logger\Iface $logger Logger object
+	 * @param \Aimeos\Base\Logger\Iface $logger Logger object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setLogger( \Aimeos\MW\Logger\Iface $logger ) : \Aimeos\MShop\Context\Item\Iface;
+	public function setLogger( \Aimeos\Base\Logger\Iface $logger ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
 	 * Returns the mail object.

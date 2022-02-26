@@ -19,6 +19,6 @@ namespace Aimeos\MAdmin\Log\Manager;
  * @subpackage Log
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MW\Logger\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\Base\Logger\Iface
 {
 }

@@ -422,7 +422,7 @@ abstract class Base
 	 * @param int $level Log level (default: ERR)
 	 * @return self Same object for fluid method calls
 	 */
-	protected function log( $msg, int $level = \Aimeos\MW\Logger\Iface::ERR ) : self
+	protected function log( $msg, int $level = \Aimeos\Base\Logger\Iface::ERR ) : self
 	{
 		$facility = basename( str_replace( '\\', '/', get_class( $this ) ) );
 		$trace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 2 );

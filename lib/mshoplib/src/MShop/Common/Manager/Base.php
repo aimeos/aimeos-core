@@ -502,7 +502,7 @@ abstract class Base
 		$stmt = $conn->create( $sql );
 		$result = $stmt->execute();
 
-		$level = \Aimeos\MW\Logger\Iface::DEBUG;
+		$level = \Aimeos\Base\Logger\Iface::DEBUG;
 		$time = ( microtime( true ) - $time ) * 1000;
 		$msg = 'Time: ' . $time . "ms\n"
 			. 'Class: ' . get_class( $this ) . "\n"
@@ -510,7 +510,7 @@ abstract class Base
 
 		if( $time > 1000.0 )
 		{
-			$level = \Aimeos\MW\Logger\Iface::NOTICE;
+			$level = \Aimeos\Base\Logger\Iface::NOTICE;
 			$msg .= "\n" . ( new \Exception() )->getTraceAsString();
 		}
 
