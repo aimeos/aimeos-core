@@ -29,7 +29,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Password\Iface
 	 */
 	public function __construct( array $options )
 	{
-		$this->password = new \Aimeos\MW\Password\Standard();
+		$this->password = new \Aimeos\Base\Password\Standard();
 	}
 
 

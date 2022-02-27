@@ -173,17 +173,17 @@ interface Iface
 	/**
 	 * Returns the password adapter object.
 	 *
-	 * @return \Aimeos\MW\Password\Iface Password adapter
+	 * @return \Aimeos\Base\Password\Iface Password adapter
 	 */
-	public function password() : \Aimeos\MW\Password\Iface;
+	public function password() : \Aimeos\Base\Password\Iface;
 
 	/**
 	 * Sets the password adapter object.
 	 *
-	 * @param \Aimeos\MW\Password\Iface $password Password adapter
+	 * @param \Aimeos\Base\Password\Iface $password Password adapter
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setPassword( \Aimeos\MW\Password\Iface $password ) : \Aimeos\MShop\Context\Item\Iface;
+	public function setPassword( \Aimeos\Base\Password\Iface $password ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
 	 * Returns the message queue object.

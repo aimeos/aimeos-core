@@ -122,7 +122,7 @@ class Setup
 		$logger = new \Aimeos\Base\Logger\Errorlog( \Aimeos\Base\Logger\Iface::INFO );
 		$ctx->setLogger( $logger );
 
-		$password = new \Aimeos\MW\Password\Standard();
+		$password = new \Aimeos\Base\Password\Standard();
 		$ctx->setPassword( $password );
 
 		$session = new \Aimeos\Base\Session\None();

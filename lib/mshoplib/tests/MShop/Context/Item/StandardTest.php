@@ -228,7 +228,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetPassword()
 	{
-		$password = new \Aimeos\MW\Password\Standard();
+		$password = new \Aimeos\Base\Password\Standard();
 		$return = $this->object->setPassword( $password );
 
 		$this->assertSame( $password, $this->object->password() );
