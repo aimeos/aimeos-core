@@ -21,7 +21,6 @@ namespace Aimeos\MShop\Price\Item;
 class Standard extends Base
 {
 	private $currencyid;
-	private $precision;
 	private $tax;
 
 
@@ -38,7 +37,6 @@ class Standard extends Base
 		parent::__construct( 'price.', $values, $listItems, $refItems, $propItems );
 
 		$this->currencyid = $this->get( '.currencyid' );
-		$this->precision = $this->get( '.precision', 2 );
 		$this->tax = $this->get( 'price.taxvalue' );
 	}
 
@@ -327,7 +325,7 @@ class Standard extends Base
 			parent::setModified();
 		}
 
-		return $this->formatNumber( $this->tax, $this->precision + 2 );
+		return $this->formatNumber( $this->tax, $this->getPrecision() + 2 );
 	}
 
 
@@ -339,7 +337,7 @@ class Standard extends Base
 	 */
 	public function setTaxValue( $value ) : \Aimeos\MShop\Price\Item\Iface
 	{
-		$this->tax = $this->checkPrice( (string) $value, $this->precision + 2 );
+		$this->tax = $this->checkPrice( (string) $value, $this->getPrecision() + 2 );
 		parent::setModified();
 		return $this;
 	}
