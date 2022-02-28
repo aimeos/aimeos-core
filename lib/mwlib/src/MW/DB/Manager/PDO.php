@@ -28,9 +28,9 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 	/**
 	 * Initializes the database manager object
 	 *
-	 * @param \Aimeos\MW\Config\Iface $config Object holding the configuration data
+	 * @param \Aimeos\Base\Config\Iface $config Object holding the configuration data
 	 */
-	public function __construct( \Aimeos\MW\Config\Iface $config )
+	public function __construct( \Aimeos\Base\Config\Iface $config )
 	{
 		$this->config = $config;
 	}

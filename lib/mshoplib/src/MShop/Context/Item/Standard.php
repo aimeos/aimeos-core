@@ -154,10 +154,10 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Sets the configuration object.
 	 *
-	 * @param \Aimeos\MW\Config\Iface $config Configuration object
+	 * @param \Aimeos\Base\Config\Iface $config Configuration object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setConfig( \Aimeos\MW\Config\Iface $config ) : \Aimeos\MShop\Context\Item\Iface
+	public function setConfig( \Aimeos\Base\Config\Iface $config ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->config = $config;
 
@@ -168,9 +168,9 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Returns the configuration object.
 	 *
-	 * @return \Aimeos\MW\Config\Iface Configuration object
+	 * @return \Aimeos\Base\Config\Iface Configuration object
 	 */
-	public function config() : \Aimeos\MW\Config\Iface
+	public function config() : \Aimeos\Base\Config\Iface
 	{
 		if( !isset( $this->config ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Configuration object not available' ) );

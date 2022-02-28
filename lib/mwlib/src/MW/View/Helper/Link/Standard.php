@@ -26,11 +26,11 @@ class Standard
 	 *
 	 * @param string $cfgkey Prefix of the configuration key for the URL settings
 	 * @param array $params Associative list of parameters that should be part of the URL
-	 * @param string[] $fragments Trailing URL fragment that are not relevant to identify the resource
 	 * @param array $config Associated list of additional configuration
+	 * @param string[] $fragments Trailing URL fragment that are not relevant to identify the resource
 	 * @return string Complete URL that can be used in the template
 	 */
-	public function transform( string $cfgkey, array $params = [], array $fragments = [], $config = [] ) : string
+	public function transform( string $cfgkey, array $params = [], $config = [], array $fragments = [] ) : string
 	{
 		$view = $this->view();
 		$list = \Aimeos\Map::explode( '/', $cfgkey )->skip( 2 );

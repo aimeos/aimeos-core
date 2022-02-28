@@ -43,7 +43,7 @@ class TestHelperMw
 	/**
 	 * Returns the configuration object
 	 *
-	 * @return \Aimeos\MW\Config\Iface Configuration object
+	 * @return \Aimeos\Base\Config\Iface Configuration object
 	 */
 	public static function getConfig()
 	{
@@ -69,15 +69,15 @@ class TestHelperMw
 	/**
 	 * Creates a new configuration object
 	 *
-	 * @return \Aimeos\MW\Config\Iface Configuration object
+	 * @return \Aimeos\Base\Config\Iface Configuration object
 	 */
 	private static function createConfig()
 	{
 		$path = dirname( dirname( dirname( __DIR__ ) ) ) . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 
-		$object = new \Aimeos\MW\Config\PHPArray( [], $path );
-		$object = new \Aimeos\MW\Config\Decorator\Documentor( $object, $file );
+		$object = new \Aimeos\Base\Config\PHPArray( [], $path );
+		$object = new \Aimeos\Base\Config\Decorator\Documentor( $object, $file );
 
 		return $object;
 	}

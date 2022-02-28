@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			),
 		);
 
-		$conf = new \Aimeos\MW\Config\PHPArray( $config );
+		$conf = new \Aimeos\Base\Config\PHPArray( $config );
 		$this->object = new \Aimeos\MW\View\Helper\Config\Standard( $view, $conf );
 	}
 

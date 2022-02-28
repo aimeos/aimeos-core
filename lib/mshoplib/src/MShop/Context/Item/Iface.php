@@ -38,17 +38,17 @@ interface Iface
 	/**
 	 * Returns the configuration object.
 	 *
-	 * @return \Aimeos\MW\Config\Iface Configuration object
+	 * @return \Aimeos\Base\Config\Iface Configuration object
 	 */
-	public function config() : \Aimeos\MW\Config\Iface;
+	public function config() : \Aimeos\Base\Config\Iface;
 
 	/**
 	 * Sets the configuration object.
 	 *
-	 * @param \Aimeos\MW\Config\Iface $config Configuration object
+	 * @param \Aimeos\Base\Config\Iface $config Configuration object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setConfig( \Aimeos\MW\Config\Iface $config ) : \Aimeos\MShop\Context\Item\Iface;
+	public function setConfig( \Aimeos\Base\Config\Iface $config ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
 	 * Returns the database manager object.

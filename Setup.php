@@ -107,13 +107,13 @@ class Setup
 	{
 		$ctx = new \Aimeos\MShop\Context\Item\Standard();
 
-		$conf = new \Aimeos\MW\Config\PHPArray( [], $this->bootstrap->getConfigPaths() );
+		$conf = new \Aimeos\Base\Config\PHPArray( [], $this->bootstrap->getConfigPaths() );
 
 		foreach( $this->config as $key => $value ) {
 			$conf->set( $key, $value );
 		}
 
-		$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
+		$conf = new \Aimeos\Base\Config\Decorator\Memory( $conf );
 		$ctx->setConfig( $conf );
 
 		$dbm = new \Aimeos\MW\DB\Manager\DBAL( $conf );
@@ -142,10 +142,10 @@ class Setup
 	/**
 	 * Returns the database configuration
 	 *
-	 * @param \Aimeos\MW\Config\Iface $conf Configuration object
+	 * @param \Aimeos\Base\Config\Iface $conf Configuration object
 	 * @return array Database configuration
 	 */
-	protected function getDBConfig( \Aimeos\MW\Config\Iface $conf ) : array
+	protected function getDBConfig( \Aimeos\Base\Config\Iface $conf ) : array
 	{
 		$dbconfig = $conf->get( 'resource', [] );
 

@@ -26,9 +26,9 @@ class Standard implements Iface
 	/**
 	 * Initializes the object
 	 *
-	 * @param \Aimeos\MW\Config\Iface $config Configuration object
+	 * @param \Aimeos\Base\Config\Iface $config Configuration object
 	 */
-	public function __construct( \Aimeos\MW\Config\Iface $config )
+	public function __construct( \Aimeos\Base\Config\Iface $config )
 	{
 		$this->config = $config;
 	}

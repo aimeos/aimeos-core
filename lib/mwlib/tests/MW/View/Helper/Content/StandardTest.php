@@ -48,7 +48,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
-		$config = new \Aimeos\MW\Config\PHPArray( ['resource' => ['fs-test' => ['baseurl' => 'base/url']]] );
+		$config = new \Aimeos\Base\Config\PHPArray( ['resource' => ['fs-test' => ['baseurl' => 'base/url']]] );
 		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
 
@@ -66,7 +66,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
-		$config = new \Aimeos\MW\Config\PHPArray( ['resource' => ['fs-test' => ['baseurl' => 'base/url']]] );
+		$config = new \Aimeos\Base\Config\PHPArray( ['resource' => ['fs-test' => ['baseurl' => 'base/url']]] );
 		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
 

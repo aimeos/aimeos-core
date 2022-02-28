@@ -73,9 +73,9 @@ class TestHelperMShop
 		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 
-		$conf = new \Aimeos\MW\Config\PHPArray( [], $paths );
-		$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
-		$conf = new \Aimeos\MW\Config\Decorator\Documentor( $conf, $file );
+		$conf = new \Aimeos\Base\Config\PHPArray( [], $paths );
+		$conf = new \Aimeos\Base\Config\Decorator\Memory( $conf );
+		$conf = new \Aimeos\Base\Config\Decorator\Documentor( $conf, $file );
 		$ctx->setConfig( $conf );
 
 
@@ -129,10 +129,10 @@ class TestHelperMShop
 	/**
 	 * Creates a new view object
 	 *
-	 * @param \Aimeos\MW\Config\Iface $config Configuration object
+	 * @param \Aimeos\Base\Config\Iface $config Configuration object
 	 * @return \Aimeos\MW\View\Iface View object
 	 */
-	protected static function createView( \Aimeos\MW\Config\Iface $config )
+	protected static function createView( \Aimeos\Base\Config\Iface $config )
 	{
 		$tmplpaths = array_merge_recursive(
 			self::getAimeos()->getCustomPaths( 'lib/custom/templates' ),
