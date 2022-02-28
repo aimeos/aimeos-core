@@ -189,7 +189,7 @@ class Standard extends Base
 	 */
 	public function getCosts() : string
 	{
-		return $this->formatNumber( $this->get( 'price.costs', '0.00' ) );
+		return $this->formatNumber( (float) $this->get( 'price.costs', '0.00' ) );
 	}
 
 
@@ -212,7 +212,7 @@ class Standard extends Base
 	 */
 	public function getRebate() : string
 	{
-		return $this->formatNumber( $this->get( 'price.rebate', '0.00' ) );
+		return $this->formatNumber( (float) $this->get( 'price.rebate', '0.00' ) );
 	}
 
 
@@ -327,7 +327,7 @@ class Standard extends Base
 			parent::setModified();
 		}
 
-		return $this->formatNumber( $this->tax, $this->precision + 2 );
+		return $this->formatNumber( (float) $this->tax, $this->precision + 2 );
 	}
 
 
