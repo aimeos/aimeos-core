@@ -181,18 +181,18 @@ class Standard extends Base
 
 
 	/**
-	 * Returns costs.
+	 * Returns costs per item.
 	 *
-	 * @return string Costs
+	 * @return string Costs per item
 	 */
 	public function getCosts() : string
 	{
-		return $this->formatNumber( $this->get( 'price.costs', '0.00' ) );
+		return $this->formatNumber( (float) $this->get( 'price.costs', '0.00' ) );
 	}
 
 
 	/**
-	 * Sets the new costs.
+	 * Sets the new costsper item.
 	 *
 	 * @param string|integer|double $price Amount with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
@@ -210,7 +210,7 @@ class Standard extends Base
 	 */
 	public function getRebate() : string
 	{
-		return $this->formatNumber( $this->get( 'price.rebate', '0.00' ) );
+		return $this->formatNumber( (float) $this->get( 'price.rebate', '0.00' ) );
 	}
 
 
@@ -325,7 +325,7 @@ class Standard extends Base
 			parent::setModified();
 		}
 
-		return $this->formatNumber( $this->tax, $this->getPrecision() + 2 );
+		return $this->formatNumber( (float) $this->tax, $this->getPrecision() + 2 );
 	}
 
 
