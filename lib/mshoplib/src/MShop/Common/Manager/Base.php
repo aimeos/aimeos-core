@@ -842,7 +842,7 @@ abstract class Base
 
 		$colstring = '';
 		foreach( $columns as $name => $entry ) {
-			$colstring .= $entry->getInternalCode() . ' AS "' . $entry->getCode() . '", ';
+			$colstring .= $entry->getInternalCode() . ', ';
 		}
 
 		$find = array( ':columns', ':joins', ':cond', ':start', ':size' );
