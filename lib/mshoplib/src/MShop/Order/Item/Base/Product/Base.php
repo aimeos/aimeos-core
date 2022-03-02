@@ -52,12 +52,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		parent::__construct( 'order.base.product.', $values );
 
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $attributes );
+		map( $attributes )->implements( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, true );
+		map( $products )->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
+
 		$this->attributes = $attributes;
-
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $products );
 		$this->products = $products;
-
 		$this->price = $price;
 	}
 
@@ -192,7 +191,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function setAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $attributes );
+		map( $attributes )->implements( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, true );
 
 		$this->attributes = is_map( $attributes ) ? $attributes->toArray() : $attributes;
 		$this->attributesMap = null;
@@ -250,7 +249,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function setProducts( iterable $products ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $products );
+		map( $products )->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
 
 		$this->products = is_map( $products ) ? $products->toArray() : $products;
 		$this->setModified();

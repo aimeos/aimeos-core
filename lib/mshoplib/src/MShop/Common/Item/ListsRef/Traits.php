@@ -127,10 +127,10 @@ trait Traits
 	 */
 	public function deleteListItems( iterable $items, bool $all = false ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
 	{
+		map( $items )->implements( \Aimeos\MShop\Common\Item\Lists\Iface::class, true );
+
 		foreach( $items as $item )
 		{
-			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Common\Item\Lists\Iface::class, $item );
-
 			$refItem = ( $all === true ? $item->getRefItem() : null );
 			$this->deleteListItem( $item->getDomain(), $item, $refItem );
 		}

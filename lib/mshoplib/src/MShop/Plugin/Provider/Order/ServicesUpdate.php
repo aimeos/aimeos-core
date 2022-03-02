@@ -64,7 +64,7 @@ class ServicesUpdate
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
+		map( $order )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
 
 		$services = $order->getServices();
 
@@ -126,26 +126,19 @@ class ServicesUpdate
 	 */
 	protected function getServiceItems( \Aimeos\Map $services ) : \Aimeos\Map
 	{
-		$list = [];
+		$list = map();
 
-		foreach( $services as $type => $items )
-		{
-			foreach( $items as $service ) {
-				$list[] = $service->getServiceId();
-			}
+		foreach( $services as $type => $items ) {
+			$list->concat( map( $items )->getServiceId() );
 		}
 
-		if( $list !== [] )
-		{
-			$serviceManager = \Aimeos\MShop::create( $this->context(), 'service' );
-
-			$search = $serviceManager->filter( true );
-			$expr = [$search->compare( '==', 'service.id', $list ), $search->getConditions()];
-			$search->setConditions( $search->and( $expr ) );
-
-			$list = $serviceManager->search( $search, ['media', 'price', 'text'] );
+		if( $list->isEmpty() ) {
+			return $list;
 		}
 
-		return map( $list );
+		$serviceManager = \Aimeos\MShop::create( $this->context(), 'service' );
+		$search = $serviceManager->filter( true )->add( ['service.id' => $list] );
+
+		return $serviceManager->search( $search, ['media', 'price', 'text'] );
 	}
 }

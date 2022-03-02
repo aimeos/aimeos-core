@@ -128,24 +128,15 @@ class ProductLimit
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
+		map( $order )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
 
-		if( is_array( $value ) )
+		$list = map( $value );
+		$list->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
+
+		foreach( $list as $entry )
 		{
-			foreach( $value as $entry )
-			{
-				\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $entry );
-
-				$this->checkWithoutCurrency( $order, $entry );
-				$this->checkWithCurrency( $order, $entry );
-			}
-		}
-		else
-		{
-			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
-
-			$this->checkWithoutCurrency( $order, $value );
-			$this->checkWithCurrency( $order, $value );
+			$this->checkWithoutCurrency( $order, $entry );
+			$this->checkWithCurrency( $order, $entry );
 		}
 
 		return $value;

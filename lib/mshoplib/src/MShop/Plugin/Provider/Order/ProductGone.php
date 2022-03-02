@@ -60,7 +60,7 @@ class ProductGone
 			return $value;
 		}
 
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
+		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
 
 		$notAvailable = [];
 		$productIds = $order->getProducts()->getProductId()->toArray();

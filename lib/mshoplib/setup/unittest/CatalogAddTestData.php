@@ -31,7 +31,7 @@ class CatalogAddTestData extends BaseAddTestData
 	 */
 	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->context() );
+		map( [$this->context()] )->implements( \Aimeos\MShop\Context\Item\Iface::class, true );
 
 		$this->info( 'Adding catalog test data', 'v' );
 

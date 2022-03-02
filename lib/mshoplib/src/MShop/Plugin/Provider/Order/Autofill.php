@@ -177,7 +177,7 @@ class Autofill
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
+		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
 
 		$context = $this->context();
 		$services = $order->getServices();

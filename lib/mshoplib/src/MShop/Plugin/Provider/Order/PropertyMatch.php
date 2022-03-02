@@ -106,23 +106,10 @@ class PropertyMatch
 			return $value;
 		}
 
-		$list = [];
+		$list = map( $value );
+		$list->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
 
-		if( is_array( $value ) )
-		{
-			foreach( $value as $orderProduct )
-			{
-				\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $orderProduct );
-				$list[] = $orderProduct->getProductId();
-			}
-		}
-		else
-		{
-			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
-			$list[] = $value->getProductId();
-		}
-
-		if( $this->getProductItems( array_unique( $list ), $map )->count() !== count( $list ) )
+		if( $this->getProductItems( $list->getProductId()->unique(), $map )->count() !== count( $list ) )
 		{
 			$code = array( 'product' => $map );
 			$msg = $this->context()->translate( 'mshop', 'Product matching given properties not found' );
@@ -136,29 +123,26 @@ class PropertyMatch
 	/**
 	 * Returns the product items for the given product IDs limited by the map of properties
 	 *
-	 * @param string[] $productIds List of product IDs
+	 * @param iterable $productIds List of product IDs
 	 * @param array $map Assoicative list of property types as keys and property values
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with IDs as keys
 	 */
-	protected function getProductItems( array $productIds, array $map ) : \Aimeos\Map
+	protected function getProductItems( iterable $productIds, array $map ) : \Aimeos\Map
 	{
 		$context = $this->context();
 		$langId = $context->locale()->getLanguageId();
 
 		$manager = \Aimeos\MShop::create( $context, 'product' );
 		$search = $manager->filter( true );
-		$expr = [
-			$search->compare( '==', 'product.id', $productIds ),
-			$search->getConditions(),
-		];
+		$expr = [$search->is( 'product.id', '==', $productIds )];
 
 		foreach( $map as $type => $value )
 		{
 			$func = $search->make( 'product:prop', [$type, [$langId, null], (string) $value] );
-			$expr[] = $search->compare( '!=', $func, null );
+			$expr[] = $search->is( $func, '!=', null );
 		}
 
-		$search->setConditions( $search->and( $expr ) );
+		$search->add( $search->and( $expr ) );
 
 		return $manager->search( $search );
 	}

@@ -63,7 +63,7 @@ class ProductStock
 			return $value;
 		}
 
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
+		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
 
 		if( !$order->getProducts()->isEmpty() && ( $outOfStock = $this->checkStock( $order ) ) !== [] )
 		{

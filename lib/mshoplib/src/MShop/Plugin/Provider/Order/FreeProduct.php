@@ -99,8 +99,8 @@ class FreeProduct
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, string $action, $value = null )
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
+		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
+		map( [$value] )->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
 
 		$code = $this->getConfigValue( 'productcode' );
 		$addresses = $order->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );

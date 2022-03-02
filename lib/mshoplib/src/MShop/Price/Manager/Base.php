@@ -72,11 +72,10 @@ abstract class Base
 	protected function getPriceList( \Aimeos\Map $priceItems, ?string $currencyId ) : \Aimeos\Map
 	{
 		$list = map();
+		$priceItems->implements( \Aimeos\MShop\Price\Item\Iface::class, true );
 
 		foreach( $priceItems as $priceItem )
 		{
-			self::checkClass( \Aimeos\MShop\Price\Item\Iface::class, $priceItem );
-
 			if( $currencyId !== null && $currencyId !== $priceItem->getCurrencyId() ) {
 				continue;
 			}

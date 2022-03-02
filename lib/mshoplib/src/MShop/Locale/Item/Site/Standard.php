@@ -36,7 +36,7 @@ class Standard
 	 */
 	public function __construct( array $values = [], array $children = [] )
 	{
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Locale\Item\Site\Iface::class, $children );
+		map( $children )->implements( \Aimeos\MShop\Locale\Item\Site\Iface::class, true );
 
 		parent::__construct( 'locale.site.', $values );
 		$this->children = $children;

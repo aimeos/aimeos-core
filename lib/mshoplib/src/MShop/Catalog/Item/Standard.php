@@ -50,7 +50,7 @@ class Standard
 	{
 		parent::__construct( '', $values );
 
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Catalog\Item\Iface::class, $children );
+		map( $children )->implements( \Aimeos\MShop\Catalog\Item\Iface::class, true );
 
 		$this->initListItems( $listItems, $refItems );
 		$this->children = $children;

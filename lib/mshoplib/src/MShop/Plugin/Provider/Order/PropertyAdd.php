@@ -118,21 +118,14 @@ class PropertyAdd
 			return $value;
 		}
 
-		if( !is_array( $value ) )
-		{
-			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $value );
-			return $this->addAttributes( $value, $this->getProductItems( [$value->getProductId()] ), $types );
+		$map = map( $value );
+		$map->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
+
+		$products = $this->getProductItems( $map->getProductId()->unique()->all() );
+
+		if( !is_array( $value ) ) {
+			return $this->addAttributes( $value, $products, $types );
 		}
-
-		$list = [];
-
-		foreach( $value as $orderProduct )
-		{
-			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $orderProduct );
-			$list[] = $orderProduct->getProductId();
-		}
-
-		$products = $this->getProductItems( $list );
 
 		foreach( $value as $key => $orderProduct ) {
 			$value[$key] = $this->addAttributes( $orderProduct, $products, $types );
@@ -187,12 +180,7 @@ class PropertyAdd
 	protected function getProductItems( array $productIds ) : \Aimeos\Map
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
-		$search = $manager->filter( true );
-		$expr = [
-			$search->compare( '==', 'product.id', array_unique( $productIds ) ),
-			$search->getConditions(),
-		];
-		$search->setConditions( $search->and( $expr ) );
+		$search = $manager->filter( true )->add( ['product.id' => $productIds] );
 
 		return $manager->search( $search, ['product/property'] );
 	}

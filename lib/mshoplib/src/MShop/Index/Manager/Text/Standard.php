@@ -436,9 +436,9 @@ class Standard
 	 */
 	public function rebuild( iterable $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
 	{
-		if( map( $items )->isEmpty() ) { return $this; }
+		if( ( $items = map( $items ) )->isEmpty() ) { return $this; }
 
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Product\Item\Iface::class, $items );
+		$items->implements( \Aimeos\MShop\Product\Item\Iface::class, true );
 
 		$context = $this->context();
 		$dbm = $context->db();

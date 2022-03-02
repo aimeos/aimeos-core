@@ -129,7 +129,7 @@ class BasketLimits
 			return $value;
 		}
 
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
+		map( [$order] )->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
 		$context = $this->context();
 
 		/** mshop/plugin/provider/order/complete/disable

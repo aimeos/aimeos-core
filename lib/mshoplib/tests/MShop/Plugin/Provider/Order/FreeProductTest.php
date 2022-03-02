@@ -76,7 +76,7 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateInvalid()
 	{
-		$this->expectException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \UnexpectedValueException::class );
 		$this->object->update( $this->order, 'addProduct.after' );
 	}
 

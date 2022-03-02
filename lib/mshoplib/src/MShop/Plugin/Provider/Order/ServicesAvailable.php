@@ -113,7 +113,7 @@ class ServicesAvailable
 			return $value;
 		}
 
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
+		map( $order ) ->implements( \Aimeos\MShop\Order\Item\Base\Iface::class, true );
 
 		$problems = [];
 		$services = $order->getServices();

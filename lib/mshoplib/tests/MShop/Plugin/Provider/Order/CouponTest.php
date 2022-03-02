@@ -47,7 +47,7 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateInvalidObject()
 	{
-		$this->expectException( \Aimeos\MW\Common\Exception::class );
+		$this->expectException( \UnexpectedValueException::class );
 		$this->object->update( new TestPublisher(), 'test' );
 	}
 }

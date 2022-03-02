@@ -48,12 +48,12 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macr
 		array $values = [], array $products = [], array $addresses = [],
 		array $services = [], array $coupons = [] )
 	{
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $addresses );
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $products );
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $services );
+		map( $addresses )->implements( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, true );
+		map( $products )->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
+		map( $services )->implements( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, true );
 
 		foreach( $coupons as $couponProducts ) {
-			\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $couponProducts );
+			map( $couponProducts )->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
 		}
 
 		$this->bdata = $values;
@@ -867,9 +867,9 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macr
 	 */
 	protected function checkAddresses( iterable $items, string $type ) : iterable
 	{
-		foreach( $items as $key => $item )
-		{
-			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $item );
+		map( $items )->implements( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, true );
+
+		foreach( $items as $key => $item ) {
 			$items[$key] = $item->setType( $type );
 		}
 
@@ -886,10 +886,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macr
 	 */
 	protected function checkProducts( iterable $items ) : \Aimeos\Map
 	{
+		map( $items )->implements( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, true );
+
 		foreach( $items as $key => $item )
 		{
-			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $item );
-
 			if( $item->getProductCode() === '' ) {
 				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Product does not contain the SKU code' ) );
 			}
@@ -911,10 +911,10 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macr
 	 */
 	protected function checkServices( iterable $items, string $type ) : iterable
 	{
+		map( $items )->implements( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, true );
+
 		foreach( $items as $key => $item )
 		{
-			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
-
 			$this->checkPrice( $item->getPrice() );
 			$items[$key] = $item->setType( $type );
 		}

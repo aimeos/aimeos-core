@@ -46,9 +46,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	{
 		parent::__construct( 'order.base.service.', $values );
 
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, $attributes );
-		$this->attributes = $attributes;
+		map( $attributes )->implements( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, true );
 
+		$this->attributes = $attributes;
 		$this->price = $price;
 	}
 
@@ -190,9 +190,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 */
 	public function setAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Base\Service\Iface
 	{
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, $attributes );
+		( $attributes = map( $attributes ) )->implements( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, true );
 
-		$this->attributes = is_map( $attributes ) ? $attributes->toArray() : $attributes;
+		$this->attributes = $attributes->all();
 		$this->attributesMap = null;
 		$this->setModified();
 
