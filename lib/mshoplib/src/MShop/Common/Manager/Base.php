@@ -945,9 +945,9 @@ abstract class Base
 	protected function deleteItemsBase( $items, string $cfgpath, bool $siteid = true,
 		string $name = 'id' ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		if( is_map( $items ) ) { $items = $items->toArray(); }
-		if( !is_array( $items ) ) { $items = [$items]; }
-		if( empty( $items ) ) { return $this; }
+		if( map( $items )->isEmpty() ) {
+			return $this;
+		}
 
 		$context = $this->context();
 		$dbname = $this->getResourceName();

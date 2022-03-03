@@ -194,13 +194,7 @@ abstract class DBBase
 	 */
 	public function save( $items, bool $fetch = true )
 	{
-		$list = [];
-
-		foreach( map( $this->manager->save( $items, true ) ) as $item ) {
-			$list[$item->getId()] = $item;
-		}
-
-		$this->rebuild( $list );
+		$this->rebuild( map( $this->manager->save( $items, true ) ) );
 		return $items;
 	}
 

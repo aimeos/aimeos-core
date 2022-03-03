@@ -120,9 +120,9 @@ trait Traits
 	 */
 	protected function deleteRefItems( $items ) : \Aimeos\MShop\Common\Manager\ListsRef\Iface
 	{
-		if( is_map( $items ) ) { $items = $items->toArray(); }
-		if( !is_array( $items ) ) { $items = [$items]; }
-		if( empty( $items ) ) { return $this; }
+		if( ( $items = map( $items ) )->isEmpty() ) {
+			return $this;
+		}
 
 		$map = [];
 
@@ -225,8 +225,8 @@ trait Traits
 		{
 			$manager = \Aimeos\MShop::create( $this->context(), $domain );
 
-			$search = $manager->filter()->slice( 0, count( $list ) );
-			$search->setConditions( $search->compare( '==', str_replace( '/', '.', $domain ) . '.id', array_keys( $list ) ) );
+			$search = $manager->filter()->slice( 0, count( $list ) )
+				->add( [str_replace( '/', '.', $domain ) . '.id' => array_keys( $list )] );
 
 			foreach( $manager->search( $search, $domains ) as $id => $item )
 			{

@@ -434,10 +434,10 @@ class Standard
 			{
 				$this->begin();
 
-				$this->remove( $products->toArray() );
+				$this->remove( $products );
 
 				foreach( $submanagers as $submanager ) {
-					$submanager->rebuild( $products->toArray() );
+					$submanager->rebuild( $products );
 				}
 
 				$this->commit();
@@ -448,7 +448,7 @@ class Standard
 				throw $e;
 			}
 
-			$context->cache()->deleteByTags( $products->keys()->prefix( 'product-' )->toArray() );
+			$context->cache()->deleteByTags( $products->keys()->prefix( 'product-' )->all() );
 
 			$count = count( $products );
 			$start += $count;
