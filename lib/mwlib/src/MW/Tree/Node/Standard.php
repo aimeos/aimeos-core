@@ -34,10 +34,10 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function __construct( array $values = [], array $children = [] )
 	{
-		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MW\Tree\Node\Iface::class, $children );
+		map( $children )->implements( \Aimeos\MW\Tree\Node\Iface::class, true );
 
-		$this->values = $values;
 		$this->children = $children;
+		$this->values = $values;
 	}
 
 

@@ -185,7 +185,8 @@ trait Traits
 	 */
 	protected function setPlugins( array $plugins )
 	{
-		$this->exprPlugins = \Aimeos\MW\Common\Base::checkClassList( \Aimeos\MW\Criteria\Plugin\Iface::class, $plugins );
+		map( $plugins )->implements( \Aimeos\MW\Criteria\Plugin\Iface::class, true );
+		$this->exprPlugins = $plugins;
 	}
 
 

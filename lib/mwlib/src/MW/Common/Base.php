@@ -38,39 +38,4 @@ abstract class Base
 
 		return $object;
 	}
-
-
-	/**
-	 * Tests if a list of objects are an instance of the given class, extends the class or implements the interface.
-	 *
-	 * @param string $name Name of the class or interface
-	 * @param iterable $list List of objects to test
-	 * @return iterable Tested list of class instances
-	 * @throws \Aimeos\MW\Common\Exception if an object of the list doesn't match the type
-	 */
-	public static function checkClassList( string $name, iterable $list ) : iterable
-	{
-		foreach( $list as $object )
-		{
-			if( ( $object instanceof $name ) === false )
-			{
-				$msg = sprintf( 'Object "%1$s" doesn\'t implement "%2$s"', $object ? get_class( $object ) : 'NULL', $name );
-				throw new \Aimeos\MW\Common\Exception( $msg );
-			}
-		}
-
-		return $list;
-	}
-
-
-	/**
-	 * Replaces dangerous characteris
-	 *
-	 * @param string $string String to sanitize
-	 * @return string Sanitized string
-	 */
-	public static function sanitize( string $string ) : string
-	{
-		return \Aimeos\Base\Str::slug( $string );
-	}
 }

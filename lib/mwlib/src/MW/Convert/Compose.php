@@ -29,7 +29,8 @@ class Compose implements \Aimeos\MW\Convert\Iface
 	 */
 	public function __construct( array $converter )
 	{
-		$this->converter = \Aimeos\MW\Common\Base::checkClassList( \Aimeos\MW\Convert\Iface::class, $converter );
+		map( $converter )->implements( \Aimeos\MW\Convert\Iface::class, true );
+		$this->converter = $converter;
 	}
 
 
