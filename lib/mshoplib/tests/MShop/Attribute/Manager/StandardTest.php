@@ -269,9 +269,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, ['attribute/property'], $total );
 
-		$this->assertEquals( 1, $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, count( $results->first()->getPropertyItems() ) );
+		$this->assertEquals( 1, $total );
 	}
 
 
