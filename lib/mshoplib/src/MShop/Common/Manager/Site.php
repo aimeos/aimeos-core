@@ -109,7 +109,7 @@ trait Site
 		}
 
 		if( ( $sitelevel & Locale::SITE_SUBTREE ) && isset( $sites[Locale::SITE_SUBTREE] )
-			&& !strncmp( $sites[Locale::SITE_SUBTREE], $siteId, strlen ( $sites[Locale::SITE_SUBTREE] ) )
+			&& !strncmp( $sites[Locale::SITE_SUBTREE], $siteId, strlen( $sites[Locale::SITE_SUBTREE] ) )
 		) {
 			return $siteId;
 		}
