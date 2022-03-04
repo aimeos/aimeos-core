@@ -869,6 +869,38 @@ abstract class Base
 
 
 	/**
+	 * Returns the site ID that should be use based on the site level
+	 *
+	 * @param string $siteId Site ID to check
+	 * @return string Site ID that should be use based on the site level
+	 */
+	protected function useSite( string $siteId, int $level ) : string
+	{
+		$sites = $this->context->locale()->getSites();
+
+		if( ( $level & Locale::SITE_ONE ) && isset( $sites[Locale::SITE_ONE] )
+			&& $siteId === $sites[Locale::SITE_ONE]
+		) {
+			return $siteId;
+		}
+
+		if( ( $level & Locale::SITE_PATH ) && isset( $sites[Locale::SITE_PATH] )
+			&& in_array( $siteId, $sites[Locale::SITE_PATH] )
+		) {
+			return $siteId;
+		}
+
+		if( ( $level & Locale::SITE_SUBTREE ) && isset( $sites[Locale::SITE_SUBTREE] )
+			&& !strncmp( $sites[Locale::SITE_SUBTREE], $siteId, strlen ( $sites[Locale::SITE_SUBTREE] ) )
+		) {
+			return $siteId;
+		}
+
+		return $this->context->locale()->getSiteId();
+	}
+
+
+	/**
 	 * Returns the search result of the statement combined with the given criteria.
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection

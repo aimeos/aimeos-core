@@ -837,7 +837,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getTarget() );
 			$stmt->bind( $idx++, $item->getQuantityOpen() );
 			$stmt->bind( $idx++, $item->getNotes() );
-			$stmt->bind( $idx++, $item->getSiteId() );
+			$stmt->bind( $idx++, $this->useSite( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
