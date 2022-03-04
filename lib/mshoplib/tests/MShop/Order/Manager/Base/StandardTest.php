@@ -211,8 +211,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = $search->getConditions()->getExpressions();
 		$this->assertArrayHasKey( 0, $list );
-		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\Iface::class, $list[0] );
-		$this->assertEquals( 'order.base.customerid', $list[0]->getName() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $list[0] );
 	}
 
 

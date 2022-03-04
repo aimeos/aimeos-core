@@ -313,21 +313,14 @@ class Standard extends Base
 		$search = parent::filter( $default );
 		$context = $this->context();
 
-		if( $default !== false )
-		{
-			$search->setConditions( $search->and( [
-				$search->compare( '==', 'order.base.customerid', $context->user() ),
-				$search->getConditions(),
-			] ) );
+		if( $default !== false ) {
+			$search->add( ['order.base.customerid' => $context->user()] );
 		}
 
 		if( $site === true )
 		{
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
-			$search->setConditions( $search->and( [
-				$this->getSiteCondition( $search, 'order.base.product.siteid', $level ),
-				$search->getConditions()
-			] ) );
+			$search->add( $this->getSiteCondition( $search, 'order.base.product.siteid', $level ) );
 		}
 
 		return $search;

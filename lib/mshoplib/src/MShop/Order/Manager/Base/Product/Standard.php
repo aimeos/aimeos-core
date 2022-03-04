@@ -455,19 +455,15 @@ class Standard
 	 */
 	public function filter( ?bool $default = false, bool $site = false ) : \Aimeos\MW\Criteria\Iface
 	{
-		$search = parent::filter( $default );
-		$search->setSortations( [$search->sort( '+', 'order.base.product.id' )] );
+		$filter = parent::filter( $default )->order( 'order.base.product.id' );
 
 		if( $site === true )
 		{
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$search->setConditions( $search->and( [
-				$this->getSiteCondition( $search, 'order.base.product.siteid', $level ),
-				$search->getConditions()
-			] ) );
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
+			$filter->add( $this->getSiteCondition( $filter, 'order.base.product.siteid', $level ) );
 		}
 
-		return $search;
+		return $filter;
 	}
 
 
