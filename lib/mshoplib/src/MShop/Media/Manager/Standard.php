@@ -178,7 +178,7 @@ class Standard
 				}
 			}
 
-			$sitestr = $this->getSiteString( 'mmedli."siteid"', $level );
+			$sitestr = $this->siteString( 'mmedli."siteid"', $level );
 			$keystr = $this->toExpression( 'mmedli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
@@ -197,7 +197,7 @@ class Standard
 				}
 			}
 
-			$sitestr = $this->getSiteString( 'mmedpr."siteid"', $level );
+			$sitestr = $this->siteString( 'mmedpr."siteid"', $level );
 			$keystr = $this->toExpression( 'mmedpr."key"', $keys, '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 

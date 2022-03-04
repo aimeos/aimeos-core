@@ -148,7 +148,7 @@ class Standard
 				}
 			}
 
-			$sitestr = $this->getSiteString( 'mtexli."siteid"', $level );
+			$sitestr = $this->siteString( 'mtexli."siteid"', $level );
 			$keystr = $this->toExpression( 'mtexli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 

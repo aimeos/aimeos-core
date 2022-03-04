@@ -460,7 +460,7 @@ class Standard
 		if( $site === true )
 		{
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
-			$filter->add( $this->getSiteCondition( $filter, 'order.base.product.siteid', $level ) );
+			$filter->add( $this->siteCondition( 'order.base.product.siteid', $level ) );
 		}
 
 		return $filter;
@@ -837,7 +837,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getTarget() );
 			$stmt->bind( $idx++, $item->getQuantityOpen() );
 			$stmt->bind( $idx++, $item->getNotes() );
-			$stmt->bind( $idx++, $this->useSite( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
+			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

@@ -53,7 +53,7 @@ class PgSQL
 		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
 		$name = 'index.text:relevance';
-		$expr = $this->getSiteString( 'mindte."siteid"', $level );
+		$expr = $this->siteString( 'mindte."siteid"', $level );
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 		$this->searchConfig[$name]['function'] = $this->searchConfig['sort:' . $name]['function'] = $this->getFunctionRelevance();
 	}

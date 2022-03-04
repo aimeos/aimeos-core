@@ -170,7 +170,7 @@ class Standard extends Base
 				}
 			}
 
-			$sitestr = $this->getSiteString( 'mcatli."siteid"', $level );
+			$sitestr = $this->siteString( 'mcatli."siteid"', $level );
 			$keystr = $this->toExpression( 'mcatli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 

@@ -94,7 +94,7 @@ class Standard
 
 		foreach( ['index.text:name', 'index.text:url', 'index.text:relevance'] as $key )
 		{
-			$expr = $this->getSiteString( 'mindte."siteid"', $level );
+			$expr = $this->siteString( 'mindte."siteid"', $level );
 			$this->searchConfig[$key]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$key]['internalcode'] );
 		}
 	}

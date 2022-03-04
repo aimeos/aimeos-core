@@ -251,10 +251,7 @@ class Standard
 		if( $site === true )
 		{
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$search->setConditions( $search->and( [
-				$this->getSiteCondition( $search, 'order.base.product.siteid', $level ),
-				$search->getConditions()
-			] ) );
+			$search->add( $this->siteCondition( 'order.base.product.siteid', $level ) );
 		}
 
 		return $search;

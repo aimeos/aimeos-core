@@ -83,11 +83,11 @@ class Standard
 		};
 
 		$name = 'index.attribute:allof';
-		$expr = $this->getSiteString( 'mindat_allof."siteid"', $level );
+		$expr = $this->siteString( 'mindat_allof."siteid"', $level );
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 
 		$name = 'index.attribute:oneof';
-		$expr = $this->getSiteString( 'mindat_oneof."siteid"', $level );
+		$expr = $this->siteString( 'mindat_oneof."siteid"', $level );
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 	}
 

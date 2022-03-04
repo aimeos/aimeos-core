@@ -26,6 +26,7 @@ abstract class Base
 {
 	use \Aimeos\MShop\Common\Manager\Sub\Traits;
 	use \Aimeos\Macro\Macroable;
+	use Site;
 
 
 	private $context;
@@ -749,37 +750,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the site expression for the given name
-	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
-	 * @param string $name Name of the site condition
-	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
-	 * @return \Aimeos\MW\Criteria\Expression\Iface Site search condition
-	 * @since 2020.01
-	 */
-	protected function getSiteCondition( \Aimeos\MW\Criteria\Iface $search, string $name,
-		int $sitelevel ) : \Aimeos\MW\Criteria\Expression\Iface
-	{
-		$sites = $this->context->locale()->getSites();
-		$values = [''];
-
-		if( isset( $sites[Locale::SITE_PATH] ) && $sitelevel & Locale::SITE_PATH ) {
-			$values = array_merge( $values, $sites[Locale::SITE_PATH] );
-		} elseif( isset( $sites[Locale::SITE_ONE] ) ) {
-			$values[] = $sites[Locale::SITE_ONE];
-		}
-
-		$cond = [$search->compare( '==', $name, $values )];
-
-		if( isset( $sites[Locale::SITE_SUBTREE] ) && $sitelevel & Locale::SITE_SUBTREE ) {
-			$cond[] = $search->compare( '=~', $name, $sites[Locale::SITE_SUBTREE] );
-		}
-
-		return $search->or( $cond );
-	}
-
-
-	/**
 	 * Returns the site coditions for the search request
 	 *
 	 * @param string[] $keys Sorted list of criteria keys
@@ -798,28 +768,11 @@ abstract class Base
 			$name = $key . $sep . 'siteid';
 
 			if( isset( $attributes[$name] ) ) {
-				$list[] = $this->getSiteCondition( $this->getSearch(), $name, $sitelevel );
+				$list[] = $this->siteCondition( $name, $sitelevel );
 			}
 		}
 
 		return $list;
-	}
-
-
-	/**
-	 * Returns the site expression for the given name
-	 *
-	 * @param string $name SQL name for the site condition
-	 * @param int $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
-	 * @return string Site search condition
-	 * @since 2020.01
-	 */
-	protected function getSiteString( string $name, int $sitelevel ) : string
-	{
-		$translation = ['marker' => $name];
-		$types = ['marker' => \Aimeos\MW\DB\Statement\Base::PARAM_STR];
-
-		return $this->getSiteCondition( $this->getSearch(), 'marker', $sitelevel )->toSource( $types, $translation );
 	}
 
 
@@ -865,38 +818,6 @@ abstract class Base
 		$replace[] = implode( ', ', $search->translate( $search->getSortations(), $translations, $funcs ) ) . ', ';
 
 		return [$find, $replace];
-	}
-
-
-	/**
-	 * Returns the site ID that should be use based on the site level
-	 *
-	 * @param string $siteId Site ID to check
-	 * @return string Site ID that should be use based on the site level
-	 */
-	protected function useSite( string $siteId, int $level ) : string
-	{
-		$sites = $this->context->locale()->getSites();
-
-		if( ( $level & Locale::SITE_ONE ) && isset( $sites[Locale::SITE_ONE] )
-			&& $siteId === $sites[Locale::SITE_ONE]
-		) {
-			return $siteId;
-		}
-
-		if( ( $level & Locale::SITE_PATH ) && isset( $sites[Locale::SITE_PATH] )
-			&& in_array( $siteId, $sites[Locale::SITE_PATH] )
-		) {
-			return $siteId;
-		}
-
-		if( ( $level & Locale::SITE_SUBTREE ) && isset( $sites[Locale::SITE_SUBTREE] )
-			&& !strncmp( $sites[Locale::SITE_SUBTREE], $siteId, strlen( $sites[Locale::SITE_SUBTREE] ) )
-		) {
-			return $siteId;
-		}
-
-		return $this->context->locale()->getSiteId();
 	}
 
 

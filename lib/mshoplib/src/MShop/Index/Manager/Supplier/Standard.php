@@ -81,7 +81,7 @@ class Standard
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
-		$expr = $this->getSiteString( 'mindsu."siteid"', $level );
+		$expr = $this->siteString( 'mindsu."siteid"', $level );
 
 		$name = 'index.supplier:position';
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );

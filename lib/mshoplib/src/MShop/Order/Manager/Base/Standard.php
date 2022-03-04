@@ -320,7 +320,7 @@ class Standard extends Base
 		if( $site === true )
 		{
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
-			$search->add( $this->getSiteCondition( $search, 'order.base.product.siteid', $level ) );
+			$search->add( $this->siteCondition( 'order.base.product.siteid', $level ) );
 		}
 
 		return $search;

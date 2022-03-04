@@ -124,7 +124,7 @@ class Standard
 				}
 			}
 
-			$sitestr = $this->getSiteString( 'msupli."siteid"', $level );
+			$sitestr = $this->siteString( 'msupli."siteid"', $level );
 			$keystr = $this->toExpression( 'msupli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 

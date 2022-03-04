@@ -54,7 +54,7 @@ class MySQL
 		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
 		$func = $this->getFunctionRelevance();
-		$expr = $this->getSiteString( 'mindte."siteid"', $level );
+		$expr = $this->siteString( 'mindte."siteid"', $level );
 		$sql = $this->searchConfig['index.text:relevance']['internalcode'];
 
 		$this->searchConfig['index.text:relevance']['internalcode'] = str_replace( ':site', $expr, $sql );

@@ -207,13 +207,7 @@ class Standard
 	{
 		$items = [];
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
-
-		$search = clone $search;
-		$expr = array(
-			$this->getSiteCondition( $search, 'locale.siteid', $level ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->and( $expr ) );
+		$search = (clone $search)->add( $this->siteCondition( 'locale.siteid', $level ) );
 
 		foreach( $this->searchEntries( $search, $ref, $total ) as $row )
 		{

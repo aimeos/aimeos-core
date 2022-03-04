@@ -74,7 +74,7 @@ class Standard
 		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
 		$name = 'index.price:value';
-		$expr = $this->getSiteString( 'mindpr."siteid"', $level );
+		$expr = $this->siteString( 'mindpr."siteid"', $level );
 		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
 	}
 

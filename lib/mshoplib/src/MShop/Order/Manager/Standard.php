@@ -180,7 +180,7 @@ class Standard
 		$level = $context->config()->get( 'mshop/order/manager/sitemode', $level );
 
 		$name = 'order:status';
-		$expr = $this->getSiteString( 'mordst_cs."siteid"', $level );
+		$expr = $this->siteString( 'mordst_cs."siteid"', $level );
 		$this->searchConfig[$name] = str_replace( ':site', $expr, $this->searchConfig[$name] );
 	}
 
@@ -338,7 +338,7 @@ class Standard
 		if( $site === true )
 		{
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
-			$search->add( $this->getSiteCondition( $search, 'order.base.product.siteid', $level ) );
+			$search->add( $this->siteCondition( 'order.base.product.siteid', $level ) );
 		}
 
 		return $search;
