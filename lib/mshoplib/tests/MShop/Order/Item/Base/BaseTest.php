@@ -513,7 +513,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->object->setProducts( $this->products );
 		$this->object->setServices( $this->services );
 
-		$this->assertEquals( '3.11', round( $this->object->getCosts(), 2 ) );
+		$this->assertEquals( '0.00', $this->object->getCosts( 'delivery' ) );
 		$this->assertEquals( '0.00', $this->object->getCosts( 'payment' ) );
 	}
 

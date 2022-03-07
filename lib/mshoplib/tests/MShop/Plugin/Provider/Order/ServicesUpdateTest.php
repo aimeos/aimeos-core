@@ -77,7 +77,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 			->setConstructorArgs( [$this->context, $serviceStub->create()] )
 			->setMethods( ['isAvailable'] )->getMock();
 
-		$orderStub->expects( $this->once() )->method( 'getProducts' )
+		$orderStub->expects( $this->any() )->method( 'getProducts' )
 			->will( $this->returnValue( map( [$orderProduct] ) ) );
 
 		$serviceStub->expects( $this->once() )->method( 'search' )
