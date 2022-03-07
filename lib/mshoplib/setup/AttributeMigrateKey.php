@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2019-2022
+ * @copyright Aimeos (aimeos.org), 2022
  */
 
 
@@ -27,28 +27,25 @@ class AttributeMigrateKey extends Base
 	{
 		$db = $this->db( 'db-attribute' );
 
-		if( !$db->hasColumn( 'mshop_attribute', 'key' ) ) {
+		if( !$db->hasColumn( 'mshop_attribute', 'key' )
+			|| $db->table( 'mshop_attribute' )->col( 'key' )->length() === 255
+		) {
 			return;
 		}
 
 		$this->info( 'Update attribute "key" columns', 'v' );
 
-		$dbm = $this->context()->db();
-		$conn = $dbm->acquire( 'db-attribute' );
+		$db->table( 'mshop_attribute' )->string( 'key', 255 )->default( '' )->up();
 
-		$select = 'SELECT "id", "domain", "type", "code" FROM "mshop_attribute" WHERE "key" = \'\'';
-		$update = 'UPDATE "mshop_attribute" SET "key" = ? WHERE "id" = ?';
+		$result = $db->stmt()->select( 'id', 'domain', 'type', 'code' )->from( 'mshop_attribute' )->execute();
+		$db2 = $this->db( 'db-attribute', true );
 
-		$stmt = $conn->create( $update );
-		$result = $conn->create( $select )->execute();
-
-		while( ( $row = $result->fetch() ) !== null )
+		while( $row = $result->fetch() )
 		{
-			$stmt->bind( 1, md5( $row['domain'] . '|' . $row['type'] . '|' . $row['code'] ) );
-			$stmt->bind( 2, $row['id'] );
-			$stmt->execute()->finish();
+			$key = substr( $row['domain'] . '|' . $row['type'] . '|' . $row['code'], 0, 255);
+			$db2->update( 'mshop_attribute', ['key' => $key], ['id' => $row['id']] );
 		}
 
-		$dbm->release( $conn, 'db-attribute' );
+		$db2->close();
 	}
 }

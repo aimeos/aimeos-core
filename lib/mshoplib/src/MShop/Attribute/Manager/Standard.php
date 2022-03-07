@@ -160,7 +160,7 @@ class Standard
 
 			foreach( (array) ( $params[1] ?? '' ) as $type ) {
 				foreach( (array) ( $params[2] ?? '' ) as $id ) {
-					$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
+					$keys[] = substr( $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id, 0, 255 );
 				}
 			}
 
@@ -704,8 +704,7 @@ class Standard
 			 */
 			$cfgPathCount = 'mshop/attribute/manager/count';
 
-			$plugins = ['attribute.key' => new \Aimeos\MW\Criteria\Plugin\Md5()];
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level, $plugins );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== null ) {
 				$map[$row['attribute.id']] = $row;

@@ -65,7 +65,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetKey()
 	{
-		$this->assertEquals( '012f8b3a33e1e75e84b5de3fcba4f42f', $this->object->getKey() );
+		$this->assertEquals( 'text|unittest|X12345', $this->object->getKey() );
 	}
 
 

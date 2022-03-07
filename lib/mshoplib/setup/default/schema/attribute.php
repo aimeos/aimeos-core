@@ -33,7 +33,7 @@ return array(
 
 			$table->id()->primary( 'pk_msatt_id' );
 			$table->string( 'siteid' );
-			$table->string( 'key', 32 )->default( '' );
+			$table->string( 'key', 255 )->default( '' );
 			$table->type();
 			$table->string( 'domain', 32 );
 			$table->code()->length( 255 );
