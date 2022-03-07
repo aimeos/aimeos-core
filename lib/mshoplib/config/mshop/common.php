@@ -10,7 +10,8 @@ return [
 	'manager' => [
 		'decorators' => [
 			'default' => [
-				'depth' => 'Depth',
+				'Depth' => 'Depth',
+				'Lazy' => 'Lazy',
 			],
 		],
 	],

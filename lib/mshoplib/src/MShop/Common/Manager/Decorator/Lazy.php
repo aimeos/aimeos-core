@@ -30,8 +30,13 @@ class Lazy
 	 */
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		return map( function() use ( $search, $ref, &$total ) {
-			return $this->getManager()->search( $search, $ref, $total )->all();
-		} );
+		if( $total === null )
+		{
+			return map( function() use ( $search, $ref, &$total ) {
+				return $this->getManager()->search( $search, $ref, $total )->all();
+			} );
+		}
+
+		return $this->getManager()->search( $search, $ref, $total );
 	}
 }
