@@ -42,7 +42,7 @@ class AttributeMigrateKey extends Base
 
 		while( $row = $result->fetch() )
 		{
-			$key = substr( $row['domain'] . '|' . $row['type'] . '|' . $row['code'], 0, 255);
+			$key = substr( $row['domain'] . '|' . $row['type'] . '|' . $row['code'], 0, 255 );
 			$db2->update( 'mshop_attribute', ['key' => $key], ['id' => $row['id']] );
 		}
 
