@@ -130,10 +130,17 @@ interface Iface
 	public function setTarget( ?string $value ) : \Aimeos\MShop\Product\Item\Iface;
 
 	/**
-	 * Returns or sets a flag if stock is available for that product.
+	 * Returns the flag if stock is available for that product.
 	 *
-	 * @param int|null $value 0/1 to set value, null to return value
-	 * @return int "0" if product is out of stock, "1" if product is in stock
+	 * @return int "1" if product is in stock, "0" if product is out of stock
 	 */
-	public function inStock( int $value = null ) : int;
+	public function inStock() : int;
+
+	/**
+	 * Sets the flag if stock is available for that product.
+	 *
+	 * @param int $value "1" if product is in stock, "0" if product is out of stock
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setInStock( int $value ) : \Aimeos\MShop\Product\Item\Iface;
 }

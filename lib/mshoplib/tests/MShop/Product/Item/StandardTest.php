@@ -446,8 +446,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testInStock()
 	{
 		$this->assertEquals( 1, $this->object->inStock() );
-		$this->assertEquals( 0, $this->object->inStock( 0 ) );
+	}
+
+
+	public function testSetInStock()
+	{
+		$return = $this->object->setInStock( 0 );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $return );
 		$this->assertEquals( 0, $this->object->inStock() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 

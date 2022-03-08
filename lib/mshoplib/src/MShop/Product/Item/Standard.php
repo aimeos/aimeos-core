@@ -445,18 +445,25 @@ class Standard
 
 
 	/**
-	 * Returns or sets a flag if stock is available for that product.
+	 * Returns the flag if stock is available for that product.
 	 *
-	 * @param int|null $value 0/1 to set value, null to return value
-	 * @return int "0" if product is out of stock, "1" if product is in stock
+	 * @return int "1" if product is in stock, "0" if product is out of stock
 	 */
-	public function inStock( int $value = null ) : int
+	public function inStock() : int
 	{
-		if( $value !== null ) {
-			$this->set( 'product.instock', $value );
-		}
-
 		return (int) $this->get( 'product.instock', 0 );
+	}
+
+
+	/**
+	 * Sets the flag if stock is available for that product.
+	 *
+	 * @param int $value "1" if product is in stock, "0" if product is out of stock
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setInStock( int $value ) : \Aimeos\MShop\Product\Item\Iface
+	{
+		return $this->set( 'product.instock', $value );
 	}
 
 
@@ -487,7 +494,7 @@ class Standard
 				case 'product.config': $item = $item->setConfig( $value ); break;
 				case 'product.target': $item = $item->setTarget( $value ); break;
 				case 'product.ctime': $item = $item->setTimeCreated( $value ); break;
-				case 'product.instock': $item->inStock( $value ); break;
+				case 'product.instock': $item->setInStock( (bool) $value ); break;
 				default: continue 2;
 			}
 
