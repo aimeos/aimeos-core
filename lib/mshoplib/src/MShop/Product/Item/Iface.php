@@ -25,6 +25,13 @@ interface Iface
 		\Aimeos\MShop\Common\Item\Time\Iface, \Aimeos\MShop\Common\Item\TypeRef\Iface
 {
 	/**
+	 * Returns the supplier items referencing the product
+	 *
+	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Supplier\Item\Iface
+	 */
+	public function getSiteItem() : ?\Aimeos\MShop\Locale\Item\Site\Iface;
+
+	/**
 	 * Returns the stock items associated to the product
 	 *
 	 * @param string|null $type Type of the stock item

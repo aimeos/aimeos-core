@@ -68,6 +68,17 @@ class Standard
 
 
 	/**
+	 * Returns the supplier items referencing the product
+	 *
+	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Supplier\Item\Iface
+	 */
+	public function getSiteItem() : ?\Aimeos\MShop\Locale\Item\Site\Iface
+	{
+		return $this->get( '.locale/site' );
+	}
+
+
+	/**
 	 * Returns the stock items associated to the product
 	 *
 	 * @param array|string|null $type Type or types of the stock item
