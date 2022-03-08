@@ -11,7 +11,7 @@ return [
 		'unittest' => [
 			'locale.site.code' => 'unittest', 'locale.site.label' => 'Unit test site', 'locale.site.theme' => 'shop',
 			'locale.site.icon' => 'path/to/site-icon.png', 'locale.site.logo' => [1 => 'path/to/site-logo.png'],
-			'locale.site.supplierid' => '1234',
+			'locale.site.refid' => '1234',
 			'locale.site.config' => [
 				"timezone" => "Europe/Berlin",
 				"emailfrom" => "no-reply@example.com",

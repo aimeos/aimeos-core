@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'locale.site.config' => array( 'timezone' => 'Europe/Berlin' ),
 			'locale.site.icon' => 'path/to/site-icon.png',
 			'locale.site.logo' => [1 => 'path/to/site-logo.png'],
-			'locale.site.supplierid' => '1234',
+			'locale.site.refid' => '1234',
 			'locale.site.theme' => 'elegance',
 			'locale.site.status' => 1,
 			'locale.site.mtime' => '2011-01-01 00:00:02',
@@ -194,18 +194,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetSupplierId()
+	public function testGetRefId()
 	{
-		$this->assertEquals( '1234', $this->object->getSupplierId() );
+		$this->assertEquals( '1234', $this->object->getRefId() );
 	}
 
 
-	public function testSetSupplierId()
+	public function testSetRefId()
 	{
-		$return = $this->object->setSupplierId( '5678' );
+		$return = $this->object->setRefId( '5678' );
 
 		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $return );
-		$this->assertEquals( '5678', $this->object->getSupplierId() );
+		$this->assertEquals( '5678', $this->object->getRefId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -280,7 +280,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'locale.site.config' => ['test'],
 			'locale.site.icon' => 'site-icon.jpg',
 			'locale.site.logo' => [1 => 'site-logo.jpg'],
-			'locale.site.supplierid' => '9876',
+			'locale.site.refid' => '9876',
 			'locale.site.theme' => 'shop',
 		);
 
@@ -292,7 +292,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['locale.site.label'], $item->getLabel() );
 		$this->assertEquals( $list['locale.site.status'], $item->getStatus() );
 		$this->assertEquals( $list['locale.site.config'], $item->getConfig() );
-		$this->assertEquals( $list['locale.site.supplierid'], $item->getSupplierId() );
+		$this->assertEquals( $list['locale.site.refid'], $item->getRefId() );
 		$this->assertEquals( $list['locale.site.theme'], $item->getTheme() );
 		$this->assertEquals( $list['locale.site.logo'], $item->getLogos() );
 		$this->assertEquals( $list['locale.site.icon'], $item->getIcon() );
@@ -314,7 +314,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getLogos(), $arrayObject['locale.site.logo'] );
 		$this->assertEquals( $this->object->getIcon(), $arrayObject['locale.site.icon'] );
 		$this->assertEquals( $this->object->getTheme(), $arrayObject['locale.site.theme'] );
-		$this->assertEquals( $this->object->getSupplierId(), $arrayObject['locale.site.supplierid'] );
+		$this->assertEquals( $this->object->getRefId(), $arrayObject['locale.site.refid'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['locale.site.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['locale.site.mtime'] );
 		$this->assertEquals( $this->object->editor(), $arrayObject['locale.site.editor'] );

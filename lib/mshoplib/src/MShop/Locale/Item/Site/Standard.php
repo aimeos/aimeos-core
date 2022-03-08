@@ -266,25 +266,25 @@ class Standard
 
 
 	/**
-	 * Returns the supplier ID related to the site.
+	 * Returns the ID of the referenced customer/supplier related to the site.
 	 *
-	 * @return string Returns the supplier ID related to the site
+	 * @return string Returns the referenced customer/supplier ID related to the site
 	 */
-	public function getSupplierId() : string
+	public function getRefId() : string
 	{
-		return $this->get( 'locale.site.supplierid', '' );
+		return $this->get( 'locale.site.refid', '' );
 	}
 
 
 	/**
-	 * Sets the supplier ID related to the site.
+	 * Sets the ID of the referenced customer/supplier related to the site.
 	 *
-	 * @param string $value The supplier ID related to the site
+	 * @param string $value The referenced customer/supplier ID related to the site
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
-	public function setSupplierId( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function setRefId( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface
 	{
-		return $this->set( 'locale.site.supplierid', $value );
+		return $this->set( 'locale.site.refid', $value );
 	}
 
 	/**
@@ -351,7 +351,7 @@ class Standard
 				case 'locale.site.label': $item = $item->setLabel( $value ); break;
 				case 'locale.site.status': $item = $item->setStatus( (int) $value ); break;
 				case 'locale.site.config': $item = $item->setConfig( (array) $value ); break;
-				case 'locale.site.supplierid': $item = $item->setSupplierId( $value ); break;
+				case 'locale.site.refid': $item = $item->setRefId( $value ); break;
 				case 'locale.site.logo': $item = $item->setLogos( (array) $value ); break;
 				case 'locale.site.theme': $item = $item->setTheme( $value ); break;
 				case 'locale.site.icon': $item = $item->setIcon( $value ); break;
@@ -381,7 +381,7 @@ class Standard
 		$list['locale.site.theme'] = $this->getTheme();
 		$list['locale.site.label'] = $this->getLabel();
 		$list['locale.site.status'] = $this->getStatus();
-		$list['locale.site.supplierid'] = $this->getSupplierId();
+		$list['locale.site.refid'] = $this->getRefId();
 		$list['locale.site.hasChildren'] = $this->hasChildren();
 
 		if( $private === true )

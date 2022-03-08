@@ -77,19 +77,19 @@ interface Iface
 	public function setLogos( array $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
 
 	/**
-	 * Returns the supplier ID related to the site.
+	 * Returns the ID of the referenced customer/supplier related to the site.
 	 *
-	 * @return string Returns the supplier ID related to the site
+	 * @return string Returns the referenced customer/supplier ID related to the site
 	 */
-	public function getSupplierId() : string;
+	public function getRefId() : string;
 
 	/**
-	 * Sets the supplier ID related to the site.
+	 * Sets the ID of the referenced customer/supplier related to the site.
 	 *
-	 * @param string $value The supplier ID related to the site
+	 * @param string $value The referenced customer/supplier ID related to the site
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
-	public function setSupplierId( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+	public function setRefId( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
 
 	/**
 	 * Returns the theme name for the site.

@@ -95,9 +95,9 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'locale.site.supplierid' => array(
-			'code' => 'locale.site.supplierid',
-			'internalcode' => 'mlocsi."supplierid"',
+		'locale.site.refid' => array(
+			'code' => 'locale.site.refid',
+			'internalcode' => 'mlocsi."refid"',
 			'label' => 'Site-related supplier ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -315,7 +315,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getIcon() );
 			$stmt->bind( $idx++, json_encode( $item->getLogos(), JSON_FORCE_OBJECT ) );
-			$stmt->bind( $idx++, $item->getSupplierId() );
+			$stmt->bind( $idx++, $item->getRefId() );
 			$stmt->bind( $idx++, $item->getTheme() );
 			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, date( 'Y-m-d H:i:s' ) ); // mtime
@@ -888,7 +888,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getIcon() );
 			$stmt->bind( $idx++, json_encode( $item->getLogos(), JSON_FORCE_OBJECT ) );
-			$stmt->bind( $idx++, $item->getSupplierId() );
+			$stmt->bind( $idx++, $item->getRefId() );
 			$stmt->bind( $idx++, $item->getTheme() );
 			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $date ); // mtime

@@ -47,7 +47,7 @@ return array(
 			$table->string( 'icon' )->default( '' );
 			$table->string( 'logo' )->default( '{}' );
 			$table->text( 'config' )->default( '{}' );
-			$table->refid( 'supplierid' )->default( '' );
+			$table->refid( 'refid' )->default( '' );
 			$table->string( 'theme', 32 )->null( true );
 			$table->smallint( 'level' )->default( 0 );
 			$table->int( 'nleft' );
