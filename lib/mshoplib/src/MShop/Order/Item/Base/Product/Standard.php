@@ -759,6 +759,10 @@ class Standard extends Base implements Iface
 			$this->setMediaUrl( $item->getPreview() );
 		}
 
+		if( $item = $product->getSiteItem() ) {
+			$this->setSupplierName( $item->getLabel() );
+		}
+
 		return $this->setModified();
 	}
 }
