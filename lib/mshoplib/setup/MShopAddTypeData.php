@@ -21,7 +21,10 @@ class MShopAddTypeData extends Base
 	 */
 	public function after() : array
 	{
-		return ['MShopSetLocale'];
+		return [
+			'Attribute', 'Catalog', 'Customer', 'Media', 'Plugin', 'Price', 'Product',
+			'Rule', 'Stock', 'Service', 'Supplier', 'Tag', 'Text', 'MShopSetLocale'
+		];
 	}
 
 

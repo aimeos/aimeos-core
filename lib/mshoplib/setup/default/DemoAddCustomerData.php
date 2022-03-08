@@ -22,7 +22,7 @@ class DemoAddCustomerData extends MShopAddDataAbstract
 	 */
 	public function after() : array
 	{
-		return ['MShopAddTypeDataDefault', 'MShopAddCodeDataDefault'];
+		return ['Customer', 'MShopSetLocale', 'MShopAddTypeDataDefault', 'MShopAddCodeDataDefault'];
 	}
 
 

@@ -22,7 +22,7 @@ class DemoAddCouponData extends MShopAddDataAbstract
 	 */
 	public function after() : array
 	{
-		return ['MShopAddLocaleDataDefault'];
+		return ['Coupon', 'MShopSetLocale'];
 	}
 
 

@@ -21,7 +21,7 @@ class DemoAddSupplierData extends MShopAddDataAbstract
 	 */
 	public function after() : array
 	{
-		return ['MShopAddTypeDataDefault', 'MShopAddCodeDataDefault'];
+		return ['Supplier', 'Media', 'Text', 'MShopAddTypeDataDefault', 'MShopAddCodeDataDefault'];
 	}
 
 

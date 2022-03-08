@@ -22,7 +22,7 @@ class DemoAddServiceData extends MShopAddDataAbstract
 	 */
 	public function after() : array
 	{
-		return ['MShopAddTypeDataDefault'];
+		return ['Service', 'Media', 'Price', 'Text', 'MShopAddTypeDataDefault'];
 	}
 
 

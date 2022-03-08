@@ -22,7 +22,7 @@ class DemoAddCatalogData extends MShopAddDataAbstract
 	 */
 	public function after() : array
 	{
-		return ['MShopAddCatalogDataDefault'];
+		return ['Catalog', 'Media', 'Product', 'Text', 'MShopSetLocale'];
 	}
 
 
