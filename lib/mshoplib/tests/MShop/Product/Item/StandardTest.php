@@ -521,6 +521,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetSiteItem()
+	{
+		$siteItem = \TestHelperMShop::getContext()->locale()->getSiteItem();
+		$object = new \Aimeos\MShop\Product\Item\Standard( ['.locale/site' => $siteItem] );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $object->getSiteItem() );
+	}
+
+
 	public function testGetCatalogItems()
 	{
 		$object = new \Aimeos\MShop\Product\Item\Standard( ['.catalog' => []] );

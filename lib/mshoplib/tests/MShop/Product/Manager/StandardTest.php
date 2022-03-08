@@ -439,6 +439,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSearchItemsRef()
+	{
+		$item = $this->object->find( 'CNC', ['catalog', 'locale/site', 'supplier', 'stock'] );
+
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item->getSiteItem() );
+		$this->assertEquals( 2, count( $item->getCatalogItems() ) );
+		$this->assertEquals( 1, count( $item->getSupplierItems() ) );
+		$this->assertEquals( 1, count( $item->getStockItems() ) );
+	}
+
+
 	public function testSearchWildcards()
 	{
 		$search = $this->object->filter();

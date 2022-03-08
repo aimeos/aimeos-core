@@ -1035,6 +1035,13 @@ class Standard
 			}
 		}
 
+		if( isset( $ref['locale/site'] ) || in_array( 'locale/site', $ref, true ) )
+		{
+			foreach( $this->getSiteItems( $map ) as $prodId => $item ) {
+				$map[$prodId]['.locale/site'] = $item;
+			}
+		}
+
 		return $this->buildItems( $map, $ref, 'product', $propItems );
 	}
 
@@ -1109,6 +1116,26 @@ class Standard
 		}
 
 		return $result;
+	}
+
+
+	/**
+	 * Returns the stock items for the given product codes
+	 *
+	 * @param array $entries List of product records
+	 * @return \Aimeos\Map List of product IDs as keys and items implementing \Aimeos\MShop\Locale\Item\Site\Iface as values
+	 */
+	protected function getSiteItems( array $entries ) : \Aimeos\Map
+	{
+		$siteIds = map( $entries )->col( 'product.siteid' );
+		$manager = \Aimeos\MShop::create( $this->getContext(), 'locale/site' );
+
+		$filter = $manager->filter( true )->add( ['locale.site.siteid' => $siteIds] )->slice( 0, 0x7fffffff );
+		$items = $manager->search( $filter )->col( null, 'locale.site.siteid' );
+
+		return map( $entries )->map( function( $entry, $prodId ) use ( $items ) {
+			return $items->get( $entry['product.siteid'] ?? null );
+		} );
 	}
 
 
