@@ -144,8 +144,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'order.base.product.productid', null );
 		$expr[] = $search->compare( '==', 'order.base.product.parentproductid', '' );
 		$expr[] = $search->compare( '==', 'order.base.product.prodcode', 'CNE' );
-		$expr[] = $search->compare( '==', 'order.base.product.supplierid', 'unitSupplier001' );
-		$expr[] = $search->compare( '==', 'order.base.product.suppliername', 'Test supplier' );
+		$expr[] = $search->compare( '==', 'order.base.product.vendor', 'Test vendor' );
 		$expr[] = $search->compare( '==', 'order.base.product.stocktype', 'default' );
 		$expr[] = $search->compare( '==', 'order.base.product.name', 'Cafe Noire Expresso' );
 		$expr[] = $search->compare( '==', 'order.base.product.description', '' );
@@ -202,16 +201,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemTotal()
 	{
 		$total = 0;
-		$search = $this->object->filter();
-
-		$conditions = array(
-			$search->compare( '==', 'order.base.product.supplierid', 'unitSupplier001' ),
-			$search->compare( '==', 'order.base.product.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$search->slice( 0, 2 );
-
-		$results = $this->object->search( $search, [], $total )->toArray();
+		$search = $this->object->filter()->slice( 0, 2 );
+		$results = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 14, $total );
@@ -276,8 +267,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getProductId(), $itemSaved->getProductId() );
 		$this->assertEquals( $item->getProductCode(), $itemSaved->getProductCode() );
-		$this->assertEquals( $item->getSupplierId(), $itemSaved->getSupplierId() );
-		$this->assertEquals( $item->getSupplierName(), $itemSaved->getSupplierName() );
+		$this->assertEquals( $item->getVendor(), $itemSaved->getVendor() );
 		$this->assertEquals( $item->getStockType(), $itemSaved->getStockType() );
 		$this->assertEquals( $item->getName(), $itemSaved->getName() );
 		$this->assertEquals( $item->getDescription(), $itemSaved->getDescription() );
@@ -310,8 +300,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getProductId(), $itemUpd->getProductId() );
 		$this->assertEquals( $itemExp->getProductCode(), $itemUpd->getProductCode() );
-		$this->assertEquals( $itemExp->getSupplierId(), $itemUpd->getSupplierId() );
-		$this->assertEquals( $itemExp->getSupplierName(), $itemUpd->getSupplierName() );
+		$this->assertEquals( $itemExp->getVendor(), $itemUpd->getVendor() );
 		$this->assertEquals( $itemExp->getStockType(), $itemUpd->getStockType() );
 		$this->assertEquals( $itemExp->getName(), $itemUpd->getName() );
 		$this->assertEquals( $itemExp->getDescription(), $itemUpd->getDescription() );

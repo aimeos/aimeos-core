@@ -108,17 +108,10 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'order.base.product.supplierid' => array(
-			'code' => 'order.base.product.supplierid',
-			'internalcode' => 'mordbapr."supplierid"',
-			'label' => 'Product supplier ID',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'order.base.product.suppliername' => array(
-			'code' => 'order.base.product.suppliername',
-			'internalcode' => 'mordbapr."suppliername"',
-			'label' => 'Product supplier name',
+		'order.base.product.vendor' => array(
+			'code' => 'order.base.product.vendor',
+			'internalcode' => 'mordbapr."vendor"',
+			'label' => 'Product vendor',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -813,8 +806,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getParentProductId() );
 			$stmt->bind( $idx++, $item->getProductId() );
 			$stmt->bind( $idx++, $item->getProductCode() );
-			$stmt->bind( $idx++, $item->getSupplierId() );
-			$stmt->bind( $idx++, $item->getSupplierName() );
+			$stmt->bind( $idx++, $item->getVendor() );
 			$stmt->bind( $idx++, $item->getStockType() );
 			$stmt->bind( $idx++, $item->getName() );
 			$stmt->bind( $idx++, $item->getDescription() );
@@ -1097,26 +1089,11 @@ class Standard
 			$prodItems = $manager->search( $search, $domains );
 		}
 
-		if( isset( $ref['supplier'] ) || in_array( 'supplier', $ref ) )
-		{
-			$domains = isset( $ref['supplier'] ) && is_array( $ref['supplier'] ) ? $ref['supplier'] : [];
-
-			$ids = [];
-			foreach( $map as $list ) {
-				$ids[] = $list['item']['order.base.product.supplierid'] ?? null;
-			}
-
-			$manager = \Aimeos\MShop::create( $context, 'supplier' );
-			$search = $manager->filter()->slice( 0, count( $ids ) )->add( ['supplier.id' => array_unique( array_filter( $ids ) )] );
-			$supItems = $manager->search( $search, $domains );
-		}
-
 		$attributes = $this->getAttributeItems( array_keys( $map ) );
 
 		foreach( $map as $id => $list )
 		{
 			$list['item']['.product'] = $prodItems[$list['item']['order.base.product.productid'] ?? null] ?? null;
-			$list['item']['.supplier'] = $supItems[$list['item']['order.base.product.supplierid'] ?? null] ?? null;
 			$item = $this->createItemBase( $list['price'], $list['item'], $attributes[$id] ?? [] );
 
 			if( $item = $this->applyFilter( $item ) ) {

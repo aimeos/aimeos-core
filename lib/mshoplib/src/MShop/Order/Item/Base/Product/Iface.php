@@ -91,34 +91,19 @@ interface Iface
 	public function setOrderProductId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
-	 * Returns the supplier ID.
-	 *
-	 * @return string Supplier ID
-	 */
-	public function getSupplierId() : string;
-
-	/**
-	 * Sets the supplier ID.
-	 *
-	 * @param string|null $value Supplier ID
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
-	 */
-	public function setSupplierId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
-
-	/**
-	 * Returns the supplier name.
+	 * Returns the vendor.
 	 *
 	 * @return string Supplier name
 	 */
-	public function getSupplierName() : string;
+	public function getVendor() : string;
 
 	/**
-	 * Sets the supplier name.
+	 * Sets the vendor.
 	 *
 	 * @param string|null $value Supplier name
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setSupplierName( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
+	public function setVendor( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface;
 
 	/**
 	 * Returns the position of the product in the order.

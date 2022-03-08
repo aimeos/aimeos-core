@@ -173,48 +173,25 @@ class Standard extends Base implements Iface
 
 
 	/**
-	 * Returns the supplier ID.
+	 * Returns the vendor.
 	 *
-	 * @return string The ID of the supplier
+	 * @return string Vendor name
 	 */
-	public function getSupplierId() : string
+	public function getVendor() : string
 	{
-		return $this->get( 'order.base.product.supplierid', '' );
+		return $this->get( 'order.base.product.vendor', '' );
 	}
 
 
 	/**
-	 * Sets the supplier ID.
+	 * Sets the vendor.
 	 *
-	 * @param string|null $value ID of the supplier
+	 * @param string|null $value Vendor name
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setSupplierId( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
+	public function setVendor( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
 	{
-		return $this->set( 'order.base.product.supplierid', (string) $value );
-	}
-
-
-	/**
-	 * Returns the supplier name.
-	 *
-	 * @return string Supplier name
-	 */
-	public function getSupplierName() : string
-	{
-		return $this->get( 'order.base.product.suppliername', '' );
-	}
-
-
-	/**
-	 * Sets the supplier name.
-	 *
-	 * @param string|null $value Supplier name
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
-	 */
-	public function setSupplierName( ?string $value ) : \Aimeos\MShop\Order\Item\Base\Product\Iface
-	{
-		return $this->set( 'order.base.product.suppliername', (string) $value );
+		return $this->set( 'order.base.product.vendor', (string) $value );
 	}
 
 
@@ -633,8 +610,7 @@ class Standard extends Base implements Iface
 				case 'order.base.product.parentproductid': $item = $item->setParentProductId( $value ); break;
 				case 'order.base.product.productid': $item = $item->setProductId( $value ); break;
 				case 'order.base.product.prodcode': $item = $item->setProductCode( $value ); break;
-				case 'order.base.product.supplierid': $item = $item->setSupplierId( $value ); break;
-				case 'order.base.product.suppliername': $item = $item->setSupplierName( $value ); break;
+				case 'order.base.product.vendor': $item = $item->setVendor( $value ); break;
 				case 'order.base.product.stocktype': $item = $item->setStockType( $value ); break;
 				case 'order.base.product.type': $item = $item->setType( $value ); break;
 				case 'order.base.product.currencyid': $price = $price->setCurrencyId( $value ); break;
@@ -679,8 +655,7 @@ class Standard extends Base implements Iface
 		$list['order.base.product.prodcode'] = $this->getProductCode();
 		$list['order.base.product.productid'] = $this->getProductId();
 		$list['order.base.product.parentproductid'] = $this->getParentProductId();
-		$list['order.base.product.supplierid'] = $this->getSupplierId();
-		$list['order.base.product.suppliername'] = $this->getSupplierName();
+		$list['order.base.product.vendor'] = $this->getVendor();
 		$list['order.base.product.qtyopen'] = $this->getQuantityOpen();
 		$list['order.base.product.quantity'] = $this->getQuantity();
 		$list['order.base.product.currencyid'] = $price->getCurrencyId();
@@ -724,7 +699,6 @@ class Standard extends Base implements Iface
 			&& $this->getName() === $item->getName()
 			&& $this->getSiteId() === $item->getSiteId()
 			&& $this->getStockType() === $item->getStockType()
-			&& $this->getSupplierId() === $item->getSupplierId()
 			&& $this->getProductCode() === $item->getProductCode()
 			&& $this->getOrderAddressId() === $item->getOrderAddressId()
 		) {
@@ -753,12 +727,16 @@ class Standard extends Base implements Iface
 		$this->setTarget( $product->getTarget() );
 		$this->setName( $product->getName() );
 
-		if( ( $item = $product->getRefItems( 'text', 'basket', 'default' )->first() ) !== null ) {
+		if( $item = $product->getRefItems( 'text', 'basket', 'default' )->first() ) {
 			$this->setDescription( $item->getContent() );
 		}
 
-		if( ( $item = $product->getRefItems( 'media', 'default', 'default' )->first() ) !== null ) {
+		if( $item = $product->getRefItems( 'media', 'default', 'default' )->first() ) {
 			$this->setMediaUrl( $item->getPreview() );
+		}
+
+		if( $item = $product->getSiteItem() ) {
+			$this->setVendor( $item->getLabel() );
 		}
 
 		return $this->setModified();

@@ -53,7 +53,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, count( $coupons['90AB'] ) );
 		$this->assertEquals( 'U:PD', $product->getProductCode() );
 		$this->assertNotEquals( '', $product->getProductId() );
-		$this->assertEquals( '', $product->getSupplierName() );
+		$this->assertEquals( '', $product->getVendor() );
 		$this->assertEquals( '', $product->getMediaUrl() );
 		$this->assertEquals( 'Geschenk Nachlass', $product->getName() );
 	}

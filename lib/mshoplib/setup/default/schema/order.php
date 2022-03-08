@@ -87,12 +87,11 @@ return array(
 			$table->bigint( 'ordprodid' )->null( true );
 			$table->bigint( 'ordaddrid' )->null( true );
 			$table->type();
-			$table->refid( 'prodid' );
+			$table->refid( 'prodid' )->default( '' );
 			$table->refid( 'parentprodid' )->default( '' );
 			$table->code( 'prodcode' );
 			$table->type( 'stocktype' )->default( 'default' );
-			$table->string( 'suppliername' )->default( '' );
-			$table->refid( 'supplierid' )->default( '' );
+			$table->string( 'vendor' )->default( '' );
 			$table->text( 'name' )->default( '' );
 			$table->text( 'description' )->default( '' );
 			$table->string( 'mediaurl' )->default( '' );
