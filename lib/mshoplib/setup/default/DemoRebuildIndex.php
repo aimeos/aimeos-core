@@ -22,7 +22,7 @@ class DemoRebuildIndex extends Base
 	 */
 	public function after() : array
 	{
-		return ['MShopSetLocale'];
+		return ['Index', 'MShopSetLocale'];
 	}
 
 
