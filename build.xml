@@ -61,6 +61,7 @@
 			checkreturn="true" logoutput="true" passthru="true" />
 		<phing target="check" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
+				<exclude name=".*/phing.xml" />
 				<include name="*/phing.xml" />
 			</fileset>
 		</phing>
@@ -213,10 +214,11 @@
 		</foreach>
 		<phing target="build" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
+				<exclude name=".*/phing.xml" />
 				<include name="*/phing.xml" />
 			</fileset>
 		</phing>
-    </target>
+	</target>
 
 
 	<target name="build-mo" description="Generates binary translation files">
@@ -235,14 +237,14 @@
 			</fileset>
 		</copy>
 		<reflexive>
-		  <fileset dir="${extdir}/${extname}">
-		  	<include name="**" />
-		  </fileset>
-		  <filterchain>
-		    <replaceregexp>
-		      <regexp pattern="&lt;extname&gt;" replace="${extname}"/>
-		    </replaceregexp>
-		  </filterchain>
+			<fileset dir="${extdir}/${extname}">
+			<include name="**" />
+			</fileset>
+			<filterchain>
+			<replaceregexp>
+				<regexp pattern="&lt;extname&gt;" replace="${extname}"/>
+			</replaceregexp>
+			</filterchain>
 		</reflexive>
 	</target>
 
