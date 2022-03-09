@@ -28,28 +28,6 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 
 
 	/**
-	 * Returns the price when using the provider.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item containing the price, shipping, rebate
-	 */
-	public function calcPrice( \Aimeos\MShop\Order\Item\Base\Iface $basket ) : \Aimeos\MShop\Price\Item\Iface
-	{
-		$costs = 0;
-		$manager = \Aimeos\MShop::create( $this->context(), 'price' );
-
-		$prices = $this->getServiceItem()->getRefItems( 'price', 'default', 'default' );
-		$price = $prices->isEmpty() ? $manager->create() : $manager->getLowestPrice( $prices, 1 );
-
-		foreach( $basket->getProducts() as $product ) {
-			$costs = $product->getPrice()->getCosts() * $product->getQuantity();
-		}
-
-		return $price->setCosts( $price->getCosts() + $costs );
-	}
-
-
-	/**
 	 * Sends the details of all orders to the ERP system for further processing
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orders List of order invoice objects

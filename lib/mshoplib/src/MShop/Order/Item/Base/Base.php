@@ -776,14 +776,21 @@ abstract class Base implements \Aimeos\MShop\Order\Item\Base\Iface, \Aimeos\Macr
 
 
 	/**
-	 * Returns the delivery costs
+	 * Returns the service costs
 	 *
 	 * @param string $type Service type like "delivery" or "payment"
-	 * @return float Delivery costs value
+	 * @return float Service costs value
 	 */
 	public function getCosts( string $type = 'delivery' ) : float
 	{
 		$costs = 0;
+
+		if( $type === 'delivery' )
+		{
+			foreach( $this->getProducts() as $product ) {
+				$costs += $product->getPrice()->getCosts() * $product->getQuantity();
+			}
+		}
 
 		foreach( $this->getService( $type ) as $service ) {
 			$costs += $service->getPrice()->getCosts();
