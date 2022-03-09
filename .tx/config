@@ -20,25 +20,19 @@ source_lang = en
 type = PO
 
 [aimeos-core.controller-common]
-file_filter = controller/common/i18n/<lang>.po
-source_file = controller/common/i18n/core-controller-common.pot
-source_lang = en
-type = PO
-
-[aimeos-core.controller-jobs]
-file_filter = controller/jobs/i18n/<lang>.po
-source_file = controller/jobs/i18n/core-controller-jobs.pot
+file_filter = i18n/controller/<lang>.po
+source_file = i18n/controller/core-controller-common.pot
 source_lang = en
 type = PO
 
 [aimeos-core.lib-mshop]
-file_filter = lib/mshoplib/i18n/<lang>.po
-source_file = lib/mshoplib/i18n/core-mshop.pot
+file_filter = i18n/mshop/<lang>.po
+source_file = i18n/mshop/core-mshop.pot
 source_lang = en
 type = PO
 
 [aimeos-core.lib-mshop-code]
-file_filter = lib/mshoplib/i18n/code/<lang>.po
-source_file = lib/mshoplib/i18n/code/core-mshop-code.pot
+file_filter = i18n/mshop/code/<lang>.po
+source_file = i18n/mshop/code/core-mshop-code.pot
 source_lang = en
 type = PO

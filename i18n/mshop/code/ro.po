@@ -1,0 +1,212 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Yolo San, 2021
+# Yolo San, 2021
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2022-02-22 10:51+0000\n"
+"Last-Translator: Aimeos\n"
+"Language-Team: Romanian (http://www.transifex.com/aimeos/aimeos-core/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. Item status
+msgid "status:-2"
+msgstr "Arhivat"
+
+#. Item status
+msgid "status:-1"
+msgstr "Revizuiește"
+
+#. Item status
+msgid "status:0"
+msgstr "Dezactivat"
+
+#. Item status
+msgid "status:1"
+msgstr "Activat"
+
+#. Item status
+msgid "status:2"
+msgstr "Ascuns"
+
+#. Address salutation
+msgid "company"
+msgstr "Companie"
+
+#. Address salutation
+msgid "mr"
+msgstr "Domnul"
+
+#. Address salutation
+msgid "ms"
+msgstr "Doamna"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Doamna"
+
+#. Address salutation
+msgid "miss"
+msgstr "Domnișoară"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "repetat"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telefon"
+
+#. Subscription reason code
+msgid "reason:-1"
+msgstr "plata"
+
+#. Subscription reason code
+msgid "reason:0"
+msgstr "expirat"
+
+#. Subscription reason code
+msgid "reason:1"
+msgstr "anulat"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "---"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "sters"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "anulat"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "refuzat"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "rambursat"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "in asteptare"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "autorizat"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "primit"
+
+#. Payment status value
+msgid "pay:7"
+msgstr "transferat"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "---"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "șters"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr " în așteptare"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "în lucru"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "expediat"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "livrat"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "pierdut"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "refuzat"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "returnat"
+
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr "Adresa de facturare lipsește"
+
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "Adresa de livrare lipsește"
+
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr "Nu este permisă o adresă de facturare"
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "Nu este permisă o adresă de livrare"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "Opțiunea de plată lipsește"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "Opțiunea de livrare lipsește"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "Nu este permisă o opțiune de plată"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "Nu este permisă o opțiune de livrare"
+
+#. ProductGone plugin error: Product doesn't exists
+msgid "product.gone.notexist"
+msgstr "Ne pare rău, cel puțin un produs nu mai există. Vă rugăm să îl eliminați din coș pentru a continua"
+
+#. ProductGone plugin error: Product status disabled
+msgid "product.gone.status"
+msgstr "Ne pare rău, cel puțin un produs a fost dezactivat. Vă rugăm să îl eliminați din coș pentru a continua"
+
+#. ProductGone plugin error: Product out of timeframe
+msgid "product.gone.timeframe"
+msgstr "Ne pare rău, cel puțin un produs nu mai este disponibil. Vă rugăm să îl eliminați din coș pentru a continua"
+
+#. ProductPrice plugin error: Product price changed
+msgid "product.price.changed"
+msgstr "Prețul a cel puțin unui produs s-a modificat între timp și a fost actualizat automat"
+
+#. ProductStock plugin error: Product out of stock
+msgid "product.stock.notenough"
+msgstr "Ne pare rău, cel puțin un produs nu mai este în stoc. Vă rugăm să îl scoateți din coș pentru a continua"

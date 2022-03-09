@@ -43,31 +43,20 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Aimeos\\MW\\": "lib/mwlib/src/MW/",
-			"Aimeos\\MShop\\": "lib/mshoplib/src/MShop/",
-			"Aimeos\\MAdmin\\": "lib/mshoplib/src/MAdmin/",
-			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/"
+			"Aimeos\\": "src"
 		},
 		"classmap": [
-			"lib/mwlib/src",
-			"lib/mshoplib/src",
-			"lib/mshoplib/setup",
-			"controller/common/src",
 			"Bootstrap.php",
-			"Setup.php"
+			"Setup.php",
+			"src"
 		]
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Aimeos\\MW\\": "lib/mwlib/tests/MW/",
-			"Aimeos\\MShop\\": "lib/mshoplib/tests/MShop/",
-			"Aimeos\\MAdmin\\": "lib/mshoplib/tests/MAdmin/",
-			"Aimeos\\Controller\\Common\\": "controller/common/tests/Controller/Common/"
+			"Aimeos\\": "tests"
 		},
 		"classmap": [
-			"lib/mwlib/tests",
-			"lib/mshoplib/tests",
-			"controller/common/tests"
+			"tests"
 		]
 	}
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="bootstrap.php">
+	<testsuites>
+		<testsuite name="MW suite">
+			<directory>MW/</directory>
+		</testsuite>
+		<testsuite name="MShop suite">
+			<directory>MShop/</directory>
+			<file>MShopTest.php</file>
+		</testsuite>
+		<testsuite name="MAdmin suite">
+			<directory>MAdmin/</directory>
+			<file>MAdminTest.php</file>
+		</testsuite>
+		<testsuite name="Controller suite">
+			<directory>Controller/</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>

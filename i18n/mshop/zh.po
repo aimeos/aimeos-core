@@ -1,0 +1,920 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Bruce Liu <zcon.bruce@gmail.com>, 2016
+# morgan chan <mrmmc8@gmail.com>, 2021
+# stevechen <steve.stevechen@gmail.com>, 2018
+# stevechen <steve.stevechen@gmail.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-09 12:34+0100\n"
+"PO-Revision-Date: 2022-03-09 11:38+0000\n"
+"Last-Translator: Aimeos\n"
+"Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
+msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
+
+#, php-format
+msgid "Address for domain \"%1$s\" not available"
+msgstr "網域的位址 \"%1$s\" 無法使用"
+
+#, php-format
+msgid "Address for type \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "Address item for removal not found"
+msgstr ""
+
+#, php-format
+msgid "Address not available"
+msgstr "無效的地址"
+
+#, php-format
+msgid "Address salutation \"%1$s\" not within allowed range"
+msgstr "地址稱呼 \"%1$s\" 不在允許的範圍之內"
+
+#, php-format
+msgid "Address search configuration not available"
+msgstr "地址搜尋配置無法使用"
+
+#, php-format
+msgid "Address type \"%1$s\" not within allowed range"
+msgstr "地址類型 \"%1$s\" 不在允許的範圍之內"
+
+#, php-format
+msgid "At least one key is required for aggregation"
+msgstr ""
+
+#, php-format
+msgid "Basket empty"
+msgstr "購物車是空的"
+
+#, php-format
+msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "Cache object not available"
+msgstr "快取元件無法使用"
+
+#, php-format
+msgid "Called unknown method \"%1$s\" on class \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "Catalog node for ID \"%1$s\" not available"
+msgstr "ID為 \"%1$s\" 型錄節點無法使用"
+
+#, php-format
+msgid "Catalog path for ID \"%1$s\" not found"
+msgstr "找不到ID為 \"%1$s\" 型錄路徑無法使用"
+
+#, php-format
+msgid "Checks for available addresses in basket failed"
+msgstr "購物車中有效位址的檢查失敗"
+
+#, php-format
+msgid "Checks for available service items in basket failed"
+msgstr "購物車中有效服務項目的檢查失敗"
+
+#, php-format
+msgid "Child node with index \"%1$d\" not available"
+msgstr "帶有索引 \"%1$d\" 的子節點無法使用"
+
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "class \"%1$s\" 沒有實裝界面 \"%2$s\""
+
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "class \"%1$s\" 無法使用"
+
+#, php-format
+msgid "Code \"%1$s\" must not be longer than %2$d characters"
+msgstr ""
+
+#, php-format
+msgid "Code \"%1$s\" must not be longer than 32 characters"
+msgstr "代碼 \"%1$s\" 不能超過 32 字元"
+
+#, php-format
+msgid "Code contains invalid characters: \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Code is too long"
+msgstr ""
+
+#, php-format
+msgid "Code must not be longer than 255 characters"
+msgstr "代碼必須少於255個字元"
+
+#, php-format
+msgid "Code must not be longer than 32 characters"
+msgstr "代碼必須超過32個字元"
+
+#, php-format
+msgid "Configuration for \"%1$s\" is missing"
+msgstr "\"%1$s\" 的配置遺漏"
+
+#, php-format
+msgid "Configuration invalid"
+msgstr "配置無效"
+
+#, php-format
+msgid "Configuration not available"
+msgstr "配置無法使用"
+
+#, php-format
+msgid "Configuration object not available"
+msgstr "配置元件無法使用"
+
+#, php-format
+msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
+msgstr "需要的SQL敘述配置 \"%1$s\" 無法使用"
+
+#, php-format
+msgid "Coupon in basket is not available any more"
+msgstr "購物車中的優惠券已無法使用"
+
+msgid "Coupon is not available any more"
+msgstr "優惠券不再可用"
+
+#, php-format
+msgid "Curl could not be initialized"
+msgstr "crul無法初始化"
+
+#, php-format
+msgid "Curl error: \"%1$s\" - \"%2$s\""
+msgstr "Curl 錯誤: \"%1$s\" - \"%2$s\""
+
+#, php-format
+msgid "Database manager object not available"
+msgstr "資料庫管理元件無法使用"
+
+#, php-format
+msgid "Date value before \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Duplicate coupon code"
+msgstr "重複的優惠券代碼"
+
+#, php-format
+msgid "Duplicate coupon code \"%1$s\""
+msgstr "重複的優惠券代碼 \"%1$s\""
+
+#, php-format
+msgid "Expanding \"%1$s\" node failed"
+msgstr ""
+
+#, php-format
+msgid "File or directory \"%1$s\" doesn't exist"
+msgstr ""
+
+#, php-format
+msgid "File system manager object not available"
+msgstr "檔案系統管理者元件無法使用"
+
+#, php-format
+msgid "Finished order status import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Finished order status import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Flags \"%1$s\" not within allowed range"
+msgstr "Flag \"%1$s\" 不在允許的範圍之內"
+
+#, php-format
+msgid "Flags not within allowed range"
+msgstr "Flag 不在允許的範圍之內"
+
+#, php-format
+msgid "ID of last inserted database record not available"
+msgstr "插入資料庫的最新一筆紀錄的ID無法使用"
+
+#. / Locale ID %1$s
+#, php-format
+msgid "Internationalization object not available for \"%1$s\""
+msgstr "國際化元件 \"%1$s\" 無效"
+
+#, php-format
+msgid "Invalid ISO country code"
+msgstr ""
+
+#, php-format
+msgid "Invalid ISO country code \"%1$s\""
+msgstr "無效的 ISO 國碼 \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO currency code"
+msgstr ""
+
+#, php-format
+msgid "Invalid ISO currency code \"%1$s\""
+msgstr "無效的ISO貨幣代碼 \"%1$s\""
+
+#, php-format
+msgid "Invalid ISO language code"
+msgstr ""
+
+#, php-format
+msgid "Invalid ISO language code \"%1$s\""
+msgstr "無效的ISO語言代碼 \"%1$s\""
+
+#, php-format
+msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
+msgstr "在 \"%1$s\": %3$s 搜尋ID %2$s 得到無效的JSON搜尋結果"
+
+#, php-format
+msgid "Invalid characters in ISO currency code \"%1$s\""
+msgstr "ISO貨幣代碼中包含無效的代碼 \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in ISO language code \"%1$s\""
+msgstr "ISO語言代碼中包含無效的代碼 \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "class名稱 \"%1$s\" 包含無效的字符"
+
+#, php-format
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
+msgstr "\"%1$s\" 日期中包含無效的字元. 預期ISO格式 \"YYYY-MM-DD hh:mm:ss\"。"
+
+#, php-format
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
+msgstr "\"%1$s\" 日期中包含無效的字元. 預期ISO格式 \"YYYY-MM-DD\"。"
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in domain name \"%1$s\""
+msgstr "網域名稱 \"%1$s\" 包含無效的字符"
+
+#, php-format
+msgid "Invalid characters in email address: \"%1$s\""
+msgstr "e-mail地址：\"%1$s\" 包含無效的字符"
+
+#, php-format
+msgid "Invalid characters in manager name \"%1$s\""
+msgstr "manager名稱 \"%1$s\" 包含無效的字符"
+
+#, php-format
+msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
+msgstr "在 \"%2$s\" 中的manager名稱包含無效的字元 \"%1$s\""
+
+#, php-format
+msgid "Invalid characters in price \"%1$s\""
+msgstr "價格 \"%1$s\" 包含無效的字符"
+
+#, php-format
+msgid "Invalid characters in provider name \"%1$s\""
+msgstr "供應者名稱 \"%1$s\" 包含無效的字元"
+
+#, php-format
+msgid "Invalid characters in purchase date \"%1$s\""
+msgstr "購買日期 \"%1$s\" 包含無效的字符"
+
+#, php-format
+msgid "Invalid characters in type name \"%1$s\""
+msgstr "類型名稱包含無效的字元 \"%1$s\""
+
+#, php-format
+msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
+msgstr "無效的優惠券供應者配置 \"%1$s\"，需要 \"%2$s\""
+
+msgid "Invalid delivery type"
+msgstr ""
+
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "無效的factory \"%1$s\""
+
+#, php-format
+msgid "Invalid mime type \"%1$s\""
+msgstr "無效的mime類型 \"%1$s\""
+
+#, php-format
+msgid "Invalid provider name \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
+msgstr "無效的序列化購物欄 \"%1$s\" 返回 \"%2$s\"。"
+
+#, php-format
+msgid "Invalid time interval format \"%1$s\""
+msgstr "無效的時間間隔格式 \"%1$s\""
+
+#, php-format
+msgid "Invalid type \"%1$s\""
+msgstr "無效的類型 \"%1$s\""
+
+#, php-format
+msgid "Invalid web site URL \"%1$s\""
+msgstr "無效的網站路徑 \"%1$s\""
+
+#, php-format
+msgid "Item can not be deleted. Site ID of item differs from present site ID."
+msgstr "項目無法被刪除. 該項目的分站ID與當前分站ID不同。"
+
+#, php-format
+msgid "Item could not be saved using method save(). Item ID not available."
+msgstr ""
+
+#, php-format
+msgid "Item referenced in domain \"%1$s\" not found: %2$s"
+msgstr "找不到網域 \"%1$s\"引用的項目：\"%2$s\""
+
+#, php-format
+msgid "Item with ID \"%1$s\" not found"
+msgstr "找不到ID為 \"%1$s\" 的項目"
+
+#, php-format
+msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
+msgstr "在 \"%1$s\" 找不到ID為 \"%2$s\" 的項目"
+
+#, php-format
+msgid "Job with ID \"%1$s\" not found"
+msgstr "找不到ID為 \"%1$s\" 的工作"
+
+#, php-format
+msgid "List item for removal from domain \"%1$s\" not found"
+msgstr "找不到要從 \"%1$s\" 移除的列表項目"
+
+#, php-format
+msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
+msgstr "在 \"%1$s\" 找不到ID為 \"%2$s\" 列表項目 "
+
+#, php-format
+msgid "List type for attribute item with ID \"%1$s\" not available"
+msgstr "ID為 \"%1$s\" 屬性項目的列表類型無法使用"
+
+#, php-format
+msgid "List type for price item with ID \"%1$s\" not available"
+msgstr "ID為 \"%1$s\" 價格項目的列表類型無法使用"
+
+#, php-format
+msgid "List type for text item with ID \"%1$s\" not available"
+msgstr "ID為 \"%1$s\" 文本項目的列表類型無法使用"
+
+#, php-format
+msgid "Loading of XML response \"%1$s\" from delivery provider failed"
+msgstr "讀取配送供應者回應的XML \"%1$s\" 失敗"
+
+#, php-format
+msgid "Locale item for site \"%1$s\" not found"
+msgstr "找不到分站 \"%1$s\" 的區域項目"
+
+#, php-format
+msgid "Locale object not available"
+msgstr "區域元件無法使用"
+
+#, php-format
+msgid "Lock flag \"%1$d\" not within allowed range"
+msgstr "Lock flag \"%1$d\" 不在允許的範圍內"
+
+#, php-format
+msgid "Log entry with ID \"%1$s\" not found"
+msgstr "找不到ID為 \"%1$s\" 的Log條目"
+
+#, php-format
+msgid "Log manager object not available"
+msgstr "Log管理元件無法使用"
+
+#, php-format
+msgid "Mail object not available"
+msgstr "郵寄元件無法使用"
+
+#, php-format
+msgid "Manager path \"%1$s\" is invalid"
+msgstr "manager 路徑 \"%1$s\" 無法使用"
+
+#, php-format
+msgid "Manager path is empty"
+msgstr "manager路徑為空"
+
+#, php-format
+msgid "Message queue object not available"
+msgstr "訊息佇列元件無法使用"
+
+#, php-format
+msgid "Method \"%1$s\" for locale site manager not available"
+msgstr "區域分站管理元方法 \"%1$s\" 無法使用"
+
+#, php-format
+msgid "Method \"%1$s\" for provider not available"
+msgstr "供應者的 \"%1$s\" method無法使用"
+
+#, php-format
+msgid "Missing configuration \"%1$s\""
+msgstr "遺失配置 \"%1$s\""
+
+#, php-format
+msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
+msgstr "項目的新ID \"%1$s\" 與舊ID \"%2$s\" 不同"
+
+#, php-format
+msgid ""
+"Newly created site can not be saved using method \"save()\". Try using "
+"method \"insert()\" instead."
+msgstr ""
+
+#, php-format
+msgid "No XML file \"%1$s\" found"
+msgstr ""
+
+#, php-format
+msgid "No bought voucher for code \"%1$s\" available"
+msgstr ""
+
+#, php-format
+msgid "No catalog node for ID \"%1$s\""
+msgstr "ID \"%1$s\" 沒有型錄節點"
+
+#, php-format
+msgid "No item found for conditions: %1$s"
+msgstr "找不到條件為 %1$s 的項目"
+
+#, php-format
+msgid "No item with \"%2$s\" in \"%1$s\" found"
+msgstr "在 \"%1$s\" 找不到項目 \"%2$s\""
+
+#, php-format
+msgid "No more credit available for voucher \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "No order for ID \"%1$s\" found"
+msgstr "沒有找到ID為\"%1$s\"的訂單"
+
+#, php-format
+msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
+msgstr "找不到商品ID為 \"%1$s\" 的價格 或 商品代碼 \"%2$s\" 無法使用"
+
+#, php-format
+msgid "No product with code \"%1$s\" found"
+msgstr "找不到代碼為 \"%1$s\" 的商品"
+
+#, php-format
+msgid "No rebate for currency \"%1$s\" available"
+msgstr ""
+
+#, php-format
+msgid "No search keys available"
+msgstr ""
+
+#, php-format
+msgid "No stock type for code \"%1$s\" found"
+msgstr ""
+
+#, php-format
+msgid "No type for code \"%1$s\" found"
+msgstr ""
+
+#, php-format
+msgid "No warehouse for code \"%1$s\" found"
+msgstr "找不到代碼為 \"%1$s\" 的倉庫"
+
+#, php-format
+msgid "Not a date"
+msgstr "不是一個日期"
+
+#, php-format
+msgid "Not a date and time"
+msgstr "不是一個日期與時間"
+
+#, php-format
+msgid "Not a key/value map"
+msgstr "不是一個 鍵/值 組合"
+
+#, php-format
+msgid "Not a list item"
+msgstr "不是一個列表項"
+
+#, php-format
+msgid "Not a listed value"
+msgstr "不是一個已表列的值"
+
+#, php-format
+msgid "Not a number"
+msgstr "不是一個數字"
+
+#, php-format
+msgid "Not a string"
+msgstr "不是一個字串"
+
+#, php-format
+msgid "Not a time"
+msgstr "不是一個時間"
+
+#, php-format
+msgid "Not a true/false value"
+msgstr "不是一個 true/false 值"
+
+#, php-format
+msgid "Not an integer number"
+msgstr "不是一個正整數"
+
+#, php-format
+msgid "Object is not of required type \"%1$s\""
+msgstr "元件 \"%1$s\" 不是需求的類型"
+
+#, php-format
+msgid "Operation not supported"
+msgstr "不支援的操作"
+
+#, php-format
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
+msgstr "XML回應之訂單ID \"%1$s\" 的配送供應者與發票中的訂單ID \"%2$s\" 不同"
+
+#, php-format
+msgid "Order address position \"%1$s\" must be greater than 0"
+msgstr ""
+
+#, php-format
+msgid "Order base item with order ID \"%1$s\" not found"
+msgstr "訂單ID \"%1$s\" 的訂單基本項目"
+
+#, php-format
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
+msgstr "傳送給配送供應者的訂單資料被拒絕, 根據XML回應, 代碼為 \"%1$s\""
+
+#, php-format
+msgid "Order delivery status \"%1$s\" not within allowed range"
+msgstr "訂單配送狀態 \"%1$s\" 不在允許的範圍之內"
+
+#, php-format
+msgid "Order payment status \"%1$s\" not within allowed range"
+msgstr "訂單支付狀態 \"%1$s\" 不在允許的範圍之內"
+
+#, php-format
+msgid "Order product position \"%1$s\" must be greater than 0"
+msgstr "訂單產品位置 \"%1$s\" 必須大於0"
+
+#, php-format
+msgid "Order service position \"%1$s\" must be greater than 0"
+msgstr ""
+
+#, php-format
+msgid "Order type \"%1$s\" not within allowed range"
+msgstr "訂單類型 \"%1$s\" 不在允許的範圍之內"
+
+#, php-format
+msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
+msgstr "ID為 \"%1$s\" 的訂單被拒絕, 代碼為 \"%2$s\": %3$s"
+
+#, php-format
+msgid "Parameter \"%1$s\" for configuration not available"
+msgstr "配置的參數 \"%1$s\" 無法使用"
+
+#, php-format
+msgid "Password object not available"
+msgstr ""
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
+msgstr "PayPal Express：重複的交易，ID： \"%1$s\"，狀態：\"%2$s\""
+
+#, php-format
+msgid "PayPal Express: Invalid request \"%1$s\""
+msgstr "PayPal Express：無效的請求 \"%1$s\""
+
+#, php-format
+msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
+msgstr "PayPal Express：支付訂單ID \"%1$s\" 的交易無法使用"
+
+#, php-format
+msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
+msgstr "PayPal Express：請求訂單ID \"%1$s\" 的 \"%2$s\" 失敗"
+
+#, php-format
+msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
+msgstr "PayPal Express：訂單 \"%2$s\" 的錯誤的支付額 \"%1$s\" "
+
+#, php-format
+msgid "PayPal Express: Wrong receiver email \"%1$s\""
+msgstr "PayPal Express：錯誤的收件人e-mail \"%1$s\""
+
+msgid "Payment costs"
+msgstr "支付手續費"
+
+#, php-format
+msgid "Please have a look at the prices of the products in your basket"
+msgstr "請查看一下您購物車中商品的價格"
+
+#, php-format
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
+msgstr "價格無法被新增。 價格項目的貨幣ID \"%1$s\" 正在使用貨幣ID \"%2$s\"。"
+
+#, php-format
+msgid "Price for the given quantity \"%1$d\" not available"
+msgstr "給定的數量 \"%1$d\" 沒有可用的價格"
+
+#, php-format
+msgid "Price for the given quantity \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "Price item not available"
+msgstr "價格項目無法使用"
+
+#, php-format
+msgid "Process object not available"
+msgstr ""
+
+#, php-format
+msgid "Product  not available"
+msgstr ""
+
+#, php-format
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
+msgstr "商品沒有包含全部所需資料。 商品代碼無法使用。"
+
+#, php-format
+msgid "Product does not contain the SKU code"
+msgstr ""
+
+#, php-format
+msgid "Product matching given properties not found"
+msgstr "給定的屬性找不到對應的商品"
+
+#, php-format
+msgid "Product not available"
+msgstr ""
+
+#, php-format
+msgid "Product with array key \"%1$d\" not available"
+msgstr "含有陣列key \"%1$d\" 的商品無法使用"
+
+#, php-format
+msgid "Products in basket not available"
+msgstr "購屋車中的商品無法使用"
+
+#, php-format
+msgid "Products out of stock"
+msgstr "商品無庫存"
+
+#, php-format
+msgid "Property item for removal not found"
+msgstr ""
+
+#, php-format
+msgid "Property name \"%1$s\" not within allowed range"
+msgstr "屬性名稱 \"%1$s\" 不再允許的範圍之內"
+
+#, php-format
+msgid "Provider in \"%1$s\" not available"
+msgstr "在 \"%1$s\" 的供應者無法使用"
+
+#, php-format
+msgid "Quantity must be 0 or greater and must not exceed %1$d"
+msgstr ""
+
+#, php-format
+msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
+msgstr ""
+
+#, php-format
+msgid "Quantity must be greater than 0 and must not exceed %1$d"
+msgstr ""
+
+#, php-format
+msgid "Quantity must be greater than 0 and must not exceed 2147483647"
+msgstr ""
+
+#, php-format
+msgid "Required parameter \"%1$s\" is missing"
+msgstr "需要的參數 \"%1$s\" 遺漏"
+
+#, php-format
+msgid "Required value for \"%1$s\" is missing"
+msgstr "需要的值 \"%1$s\" 遺漏"
+
+#, php-format
+msgid "Search configuration for \"%1$s\" not available"
+msgstr "搜索 \"%1$s\" 的配置無法使用"
+
+#, php-format
+msgid "Search configuration not available"
+msgstr "搜索配置無法使用"
+
+#, php-format
+msgid "Sending order failed: \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
+msgstr "發送訂單給配送供應者失敗, HTTP 狀態 \"%1$s\""
+
+#, php-format
+msgid "Sending order to delivery provider failed: \"%1$s\""
+msgstr "發送訂單到配送供應者失敗：\"%1$s\""
+
+#, php-format
+msgid "Service not available"
+msgstr ""
+
+#, php-format
+msgid "Service of type \"%1$s\" not available"
+msgstr "類型 \"%1$s\" 的服務無法使用"
+
+#, php-format
+msgid "Session object not available"
+msgstr "session元件無法使用"
+
+#, php-format
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
+msgstr "分站不能被寫入。 分站ID與母站的分站ID不同。"
+
+#, php-format
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
+msgstr "分站不能被移動。\n分站ID與 1.當前分站ID 2.已存在的母分站ID 3.新母站ID 其中一者不同"
+
+#, php-format
+msgid "Site for code \"%1$s\" not found"
+msgstr "找不到代碼為 \"%1$s\" 的分站"
+
+#, php-format
+msgid "Started order status import from \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Started order status import from file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "The algorithm \"%1$s\" is not supported"
+msgstr "演算法 \"%1$s\" 不被支援"
+
+#, php-format
+msgid "The maximum basket value of %1$s is exceeded"
+msgstr "超過了購物車的最大值 %1$s"
+
+#, php-format
+msgid "The maximum product quantity is %1$d"
+msgstr "商品最大數量%1$d"
+
+#, php-format
+msgid "The maximum product quantity of %1$d is exceeded"
+msgstr "超過了購物車的最大數量 %1$d"
+
+#, php-format
+msgid "The maximum product value is %1$s"
+msgstr "商品值的最大值為 %1$s"
+
+#, php-format
+msgid "The maximum quantity of all products is %1$d"
+msgstr "商品數量的最大值為 %1$d"
+
+#, php-format
+msgid "The maximum value of all products is %1$s"
+msgstr "所有商品的最大值為 %1$s"
+
+#, php-format
+msgid "The minimum basket value of %1$s isn't reached"
+msgstr "沒有達到購物欄的最小值 %1$s"
+
+#, php-format
+msgid "The minimum product quantity of %1$d isn't reached"
+msgstr "沒有達到最少的商品數量 %1$d"
+
+#, php-format
+msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
+msgstr "配置選項的key類別 \"%1$s\" 必須為 \"%2$s\""
+
+#, php-format
+msgid "Time value after \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Time value before \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Total results value not found"
+msgstr "找不到合計結果的值"
+
+#, php-format
+msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
+msgstr "在 \"%2$s\" 找不到代碼為 \"%1$s\" 的tree root"
+
+#, php-format
+msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
+msgstr "在 \"%2$s\" 找不到ID為 \"%1$s\" 的類別項目"
+
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr "無法呼叫method \"%1$s\""
+
+#, php-format
+msgid "Unable to create order XML file \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "Unable to sort public holidays: \"%1$s\""
+msgstr "無法分類國定假日：\"%1$s\""
+
+#, php-format
+msgid "Unknown search key \"%1$s\""
+msgstr "未知的搜尋key \"%1$s\""
+
+#, php-format
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
+msgstr "配送供應者的schema \"%1$s\" 之XML回傳驗證失敗"
+
+#, php-format
+msgid "View object not available"
+msgstr "view元件無法使用"

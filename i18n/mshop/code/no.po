@@ -1,0 +1,210 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2022-02-22 10:51+0000\n"
+"Last-Translator: Aimeos\n"
+"Language-Team: Norwegian (http://www.transifex.com/aimeos/aimeos-core/language/no/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: no\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Item status
+msgid "status:-2"
+msgstr "Archived"
+
+#. Item status
+msgid "status:-1"
+msgstr "Review"
+
+#. Item status
+msgid "status:0"
+msgstr "Disabled"
+
+#. Item status
+msgid "status:1"
+msgstr "Enabled"
+
+#. Item status
+msgid "status:2"
+msgstr ""
+
+#. Address salutation
+msgid "company"
+msgstr "Company"
+
+#. Address salutation
+msgid "mr"
+msgstr "Mr"
+
+#. Address salutation
+msgid "ms"
+msgstr ""
+
+#. Address salutation
+msgid "mrs"
+msgstr "Mrs"
+
+#. Address salutation
+msgid "miss"
+msgstr "Miss"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "repeated"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telephone"
+
+#. Subscription reason code
+msgid "reason:-1"
+msgstr "payment"
+
+#. Subscription reason code
+msgid "reason:0"
+msgstr "expired"
+
+#. Subscription reason code
+msgid "reason:1"
+msgstr "cancelled"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "unfinished"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "deleted"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "canceled"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "refused"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "refunded"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "pending"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "authorized"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "received"
+
+#. Payment status value
+msgid "pay:7"
+msgstr ""
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "---"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "deleted"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "pending"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "in progress"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "dispatched"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "delivered"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "lost"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "refused"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "returned"
+
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr ""
+
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr ""
+
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr ""
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr ""
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr ""
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr ""
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr ""
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr ""
+
+#. ProductGone plugin error: Product doesn't exists
+msgid "product.gone.notexist"
+msgstr ""
+
+#. ProductGone plugin error: Product status disabled
+msgid "product.gone.status"
+msgstr ""
+
+#. ProductGone plugin error: Product out of timeframe
+msgid "product.gone.timeframe"
+msgstr ""
+
+#. ProductPrice plugin error: Product price changed
+msgid "product.price.changed"
+msgstr ""
+
+#. ProductStock plugin error: Product out of stock
+msgid "product.stock.notenough"
+msgstr ""

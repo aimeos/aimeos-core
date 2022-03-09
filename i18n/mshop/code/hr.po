@@ -1,0 +1,211 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Miro Sertić <miro.sertic0606@gmail.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2022-02-22 10:51+0000\n"
+"Last-Translator: Aimeos\n"
+"Language-Team: Croatian (http://www.transifex.com/aimeos/aimeos-core/language/hr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hr\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#. Item status
+msgid "status:-2"
+msgstr "Arhivirano"
+
+#. Item status
+msgid "status:-1"
+msgstr "Pregled"
+
+#. Item status
+msgid "status:0"
+msgstr "Onemogućeno"
+
+#. Item status
+msgid "status:1"
+msgstr "Omogućeno"
+
+#. Item status
+msgid "status:2"
+msgstr ""
+
+#. Address salutation
+msgid "company"
+msgstr "Poduzeće"
+
+#. Address salutation
+msgid "mr"
+msgstr "Gosp."
+
+#. Address salutation
+msgid "ms"
+msgstr ""
+
+#. Address salutation
+msgid "mrs"
+msgstr "Gđja"
+
+#. Address salutation
+msgid "miss"
+msgstr "Gđjica"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "ponovljeno"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telefon"
+
+#. Subscription reason code
+msgid "reason:-1"
+msgstr "plaćanje"
+
+#. Subscription reason code
+msgid "reason:0"
+msgstr "isteklo"
+
+#. Subscription reason code
+msgid "reason:1"
+msgstr "otkazano"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "---"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "obrisano"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "otkazano"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "odbijeno"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "refundirano"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "na čekanju"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "odobreno"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "primljeno"
+
+#. Payment status value
+msgid "pay:7"
+msgstr ""
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "---"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "obrisano"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "na čekanju"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "u postupku"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "poslano"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "isporučeno"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "izgubljeno"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "odbijeno"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "vraćeno"
+
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr "Nedostaje adresa za račun"
+
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "Nedostaje adresa za dostavu"
+
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr "Adresa za račun nije dopuštena"
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "Adresa za dostavu nije dopuštena"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "Nedostaje način plaćanja"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "Nedostaje način isporuke"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "Način plaćanja nije dopušten"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "Način dostave nije dopušten"
+
+#. ProductGone plugin error: Product doesn't exists
+msgid "product.gone.notexist"
+msgstr "Neki od proizvoda više ne postoje. Uklonite ih iz košarice kako bi mogli nastaviti"
+
+#. ProductGone plugin error: Product status disabled
+msgid "product.gone.status"
+msgstr "Neki od proizvoda su deaktivirani. Uklonite ih iz košarice kako bi mogli nastaviti"
+
+#. ProductGone plugin error: Product out of timeframe
+msgid "product.gone.timeframe"
+msgstr "Neki od proizvoda nisu dostupni. Uklonite ih iz košarice kako bi mogli nastaviti"
+
+#. ProductPrice plugin error: Product price changed
+msgid "product.price.changed"
+msgstr "Neki od proizvoda su u međjuvremenu promijenili cijenu. Ažurirali smo cijene"
+
+#. ProductStock plugin error: Product out of stock
+msgid "product.stock.notenough"
+msgstr "Neki od proizvoda nisu dostupni. Uklonite ih iz košarice kako bi mogli nastaviti"

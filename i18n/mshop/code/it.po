@@ -1,0 +1,213 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# alessandro massarelli <alessandro@botteega.com>, 2017
+# isabella carlin <isabella@vg7.it>, 2020
+# R M <roberto@proprionoi.it>, 2019
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2022-02-22 10:51+0000\n"
+"Last-Translator: Aimeos\n"
+"Language-Team: Italian (http://www.transifex.com/aimeos/aimeos-core/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Item status
+msgid "status:-2"
+msgstr "Archiviato"
+
+#. Item status
+msgid "status:-1"
+msgstr "In revisione"
+
+#. Item status
+msgid "status:0"
+msgstr "Disabilitato"
+
+#. Item status
+msgid "status:1"
+msgstr "Abilitato"
+
+#. Item status
+msgid "status:2"
+msgstr ""
+
+#. Address salutation
+msgid "company"
+msgstr "Azienda"
+
+#. Address salutation
+msgid "mr"
+msgstr "Sig."
+
+#. Address salutation
+msgid "ms"
+msgstr ""
+
+#. Address salutation
+msgid "mrs"
+msgstr "Sig.ra"
+
+#. Address salutation
+msgid "miss"
+msgstr "Sig.ra"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "ripetuto"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "Telefono"
+
+#. Subscription reason code
+msgid "reason:-1"
+msgstr "pagamento"
+
+#. Subscription reason code
+msgid "reason:0"
+msgstr "scaduto"
+
+#. Subscription reason code
+msgid "reason:1"
+msgstr "cancellato"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "---"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "eliminato"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "cancellato"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "rifiutato"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "rimborsato"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "in sospeso"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "autorizzato"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "ricevuto"
+
+#. Payment status value
+msgid "pay:7"
+msgstr ""
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "---"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "cancellato"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "in sospeso"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "in lavorazione"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "spedito"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "consegnato"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "disperso"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "rifiutato"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "reso"
+
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr "Manca l'indirizzo di fatturazione"
+
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "Manca l'indirizzo di consegna"
+
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr "L'indirizzo di fatturazione non è consentito"
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "L'indirizzo di consegna non è consentito."
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "Manca l'opzione di pagamento"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "Manca l'opzione di consegna"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "Una delle opzioni di pagamento non è consentita"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "Una delle opzioni di delivery non è consentita"
+
+#. ProductGone plugin error: Product doesn't exists
+msgid "product.gone.notexist"
+msgstr "Ci dispiace, ma almeno uno dei prodotti non è più in vendita. Rimuovilo dal carrello e prosegui con l'acquisto."
+
+#. ProductGone plugin error: Product status disabled
+msgid "product.gone.status"
+msgstr "Ci dispiace, almeno uno dei prodotti non è più disponibile. Rimuovilo dal carrello e prosegui con l'acquisto."
+
+#. ProductGone plugin error: Product out of timeframe
+msgid "product.gone.timeframe"
+msgstr "Ci dispiace, almeno uno dei prodotti non è più disponibile. Rimuovilo dal carrello e prosegui con l'acquisto."
+
+#. ProductPrice plugin error: Product price changed
+msgid "product.price.changed"
+msgstr "Il prezzo di almeno uno dei prodotti è cambiato dalla tua ultima visita ed è stato aggiornato."
+
+#. ProductStock plugin error: Product out of stock
+msgid "product.stock.notenough"
+msgstr "Ci dispiace, almeno uno dei prodotti non è più disponibile. Rimuovilo dal carrello e prosegui con l'acquisto."
