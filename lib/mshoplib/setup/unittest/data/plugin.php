@@ -12,31 +12,31 @@ return [
 	],
 
 	'plugin' => [[
-		'plugin.type' => 'order', 'plugin.label' => 'Shipping-Plugin', 'plugin.provider' => 'Shipping,Example',
-		'plugin.config' => ["threshold" => ["EUR" =>"500.00"]], 'plugin.status' => 1
-	], [
 		'plugin.type' => 'order', 'plugin.label' => 'ProductLimit-Plugin', 'plugin.provider' => 'ProductLimit,Example',
-		'plugin.config' => ["single-number-max" => "10"], 'plugin.status' => 1
-	], [
-		'plugin.type' => 'order', 'plugin.label' => 'BasketLimits-Plugin', 'plugin.provider' => 'BasketLimits,Example',
-		'plugin.config' => ["min-value" => ["EUR" => "31.00"]], 'plugin.status' => 1
-	], [
-		'plugin.type' => 'order', 'plugin.label' => 'ServicesAvailable-Plugin', 'plugin.provider' => 'ServicesAvailable,Example',
-		'plugin.config' => ["payment" => true, "delivery" => true], 'plugin.status' => 1
-	], [
-		'plugin.type' => 'order', 'plugin.label' => 'AddressesAvailable-Plugin', 'plugin.provider' => 'AddressesAvailable,Example',
-		'plugin.config' => ["payment" => true, "delivery" => null], 'plugin.status' => 1
-	], [
-		'plugin.type' => 'order', 'plugin.label' => 'ProductPrice-Plugin', 'plugin.provider' => 'ProductPrice,Example',
-		'plugin.config' => ["update" => false], 'plugin.status' => 1
-	], [
-		'plugin.type' => 'order', 'plugin.label' => 'ProductStock-Plugin', 'plugin.provider' => 'ProductStock,Example',
-		'plugin.config' => [], 'plugin.status' => 1
+		'plugin.config' => ["single-number-max" => "10"], 'plugin.position' => 0, 'plugin.status' => 1
 	], [
 		'plugin.type' => 'order', 'plugin.label' => 'ProductGone-Plugin', 'plugin.provider' => 'ProductGone,Example',
-		'plugin.config' => [], 'plugin.status' => 1
+		'plugin.config' => [], 'plugin.position' => 1, 'plugin.status' => 1
+	], [
+		'plugin.type' => 'order', 'plugin.label' => 'ProductStock-Plugin', 'plugin.provider' => 'ProductStock,Example',
+		'plugin.config' => [], 'plugin.position' => 2, 'plugin.status' => 1
+	], [
+		'plugin.type' => 'order', 'plugin.label' => 'ProductPrice-Plugin', 'plugin.provider' => 'ProductPrice,Example',
+		'plugin.config' => ["update" => false], 'plugin.position' => 3, 'plugin.status' => 1
+	], [
+		'plugin.type' => 'order', 'plugin.label' => 'Shipping-Plugin', 'plugin.provider' => 'Shipping,Example',
+		'plugin.config' => ["threshold" => ["EUR" =>"500.00"]], 'plugin.position' => 5, 'plugin.status' => 0
+	], [
+		'plugin.type' => 'order', 'plugin.label' => 'BasketLimits-Plugin', 'plugin.provider' => 'BasketLimits,Example',
+		'plugin.config' => ["min-value" => ["EUR" => "31.00"]], 'plugin.position' => 6, 'plugin.status' => 1
 	], [
 		'plugin.type' => 'order', 'plugin.label' => 'Coupon-Plugin', 'plugin.provider' => 'Coupon,Example',
-		'plugin.config' => [], 'plugin.status' => 1
+		'plugin.config' => [], 'plugin.position' => 7, 'plugin.status' => 1
+	], [
+		'plugin.type' => 'order', 'plugin.label' => 'AddressesAvailable-Plugin', 'plugin.provider' => 'AddressesAvailable,Example',
+		'plugin.config' => ["payment" => true, "delivery" => null], 'plugin.position' => 8, 'plugin.status' => 1
+	], [
+		'plugin.type' => 'order', 'plugin.label' => 'ServicesAvailable-Plugin', 'plugin.provider' => 'ServicesAvailable,Example',
+		'plugin.config' => ["payment" => true, "delivery" => true], 'plugin.position' => 9, 'plugin.status' => 1
 	]],
 ];

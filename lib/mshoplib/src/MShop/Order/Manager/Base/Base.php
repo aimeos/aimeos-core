@@ -456,19 +456,19 @@ abstract class Base
 
 		\Aimeos\MShop::create( $this->context(), 'plugin' )->register( $basket, 'order' );
 
-		foreach( $products as $item )
-		{
-			if( !( $item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) ) {
-				$basket->addProduct( $item );
-			}
+		foreach( $services as $item ) {
+			$basket->addService( $item, $item->getType() );
 		}
 
 		foreach( $addresses as $item ) {
 			$basket->addAddress( $item, $item->getType() );
 		}
 
-		foreach( $services as $item ) {
-			$basket->addService( $item, $item->getType() );
+		foreach( $products as $item )
+		{
+			if( !( $item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) ) {
+				$basket->addProduct( $item );
+			}
 		}
 
 		foreach( $coupons as $code => $items ) {

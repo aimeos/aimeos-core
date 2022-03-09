@@ -159,7 +159,7 @@ class Autofill
 		$p->attach( $plugin, 'addAddress.after' );
 		$p->attach( $plugin, 'setAddresses.after' );
 		$p->attach( $plugin, 'addProduct.after' );
-		$p->attach( $plugin, 'addProduct.after' );
+		$p->attach( $plugin, 'setProducts.after' );
 		$p->attach( $plugin, 'deleteService.after' );
 
 		return $this;
