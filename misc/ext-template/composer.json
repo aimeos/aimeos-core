@@ -11,26 +11,18 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Aimeos\\MW\\": "lib/mwlib/src/MW/",
-			"Aimeos\\MShop\\": "lib/mshoplib/src/MShop/",
-			"Aimeos\\MAdmin\\": "lib/mshoplib/src/MAdmin/",
-			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/",
-			"Aimeos\\Controller\\Frontend\\": "controller/frontend/src/Controller/Frontend/",
-			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/",
-			"Aimeos\\Admin\\Jsonadm\\": "admin/jsonadm/src/Admin/Jsonadm/",
-			"Aimeos\\Admin\\JQAdm\\": "admin/jqadm/src/Admin/JQAdm/",
-			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
-			"Aimeos\\Client\\Jsonapi\\": "client/jsonapi/src/Client/Jsonapi/"
+			"Aimeos\\": "src"
 		},
 		"classmap": [
-			"client/html/src",
-			"client/jsonapi/src",
-			"admin/jqadm/src",
-			"admin/jsonadm/src",
-			"controller/common/src",
-			"controller/frontend/src",
-			"controller/jobs/src",
-			"lib/custom/src"
+			"src"
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Aimeos\\": "tests"
+		},
+		"classmap": [
+			"tests"
 		]
 	}
 }

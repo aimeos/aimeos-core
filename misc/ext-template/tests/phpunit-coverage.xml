@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="bootstrap.php">
+	<logging>
+		<log type="coverage-clover" target="coverage.xml"/>
+	</logging>
+</phpunit>
