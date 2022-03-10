@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\DB\Connection;
+namespace Aimeos\Base\DB\Connection;
 
 
 /**
@@ -23,7 +23,7 @@ interface Iface
 	/**
 	 * Connects (or reconnects) to the database server
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function connect() : Iface;
 
@@ -32,9 +32,9 @@ interface Iface
 	 * Creates a database statement.
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
-	 * @return \Aimeos\MW\DB\Statement\Iface
+	 * @return \Aimeos\Base\DB\Statement\Iface
 	 */
-	public function create( string $sql ) : \Aimeos\MW\DB\Statement\Iface;
+	public function create( string $sql ) : \Aimeos\Base\DB\Statement\Iface;
 
 
 	/**
@@ -68,7 +68,7 @@ interface Iface
 	 * Transactions can't be nested and a new transaction can only be started
 	 * if the previous transaction was committed or rolled back before.
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function begin() : Iface;
 
@@ -76,7 +76,7 @@ interface Iface
 	/**
 	 * Commits the changes done inside of the transaction to the storage.
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function commit() : Iface;
 
@@ -84,7 +84,7 @@ interface Iface
 	/**
 	 * Discards the changes done inside of the transaction.
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function rollback() : Iface;
 }

@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\DB\Result;
+namespace Aimeos\Base\DB\Result;
 
 
 /**
@@ -34,7 +34,7 @@ interface Iface
 	 * @param int $style The data can be returned as associative or numerical array
 	 * @return array Numeric or associative array of columns returned by the database
 	 */
-	public function all( int $style = \Aimeos\MW\DB\Result\Base::FETCH_ASSOC ) : array;
+	public function all( int $style = \Aimeos\Base\DB\Result\Base::FETCH_ASSOC ) : array;
 
 
 	/**
@@ -43,13 +43,13 @@ interface Iface
 	 * @param int $style The data can be returned as associative or numerical array
 	 * @return array|null Numeric or associative array of columns returned by the database or null if no more rows are available
 	 */
-	public function fetch( int $style = \Aimeos\MW\DB\Result\Base::FETCH_ASSOC ) : ?array;
+	public function fetch( int $style = \Aimeos\Base\DB\Result\Base::FETCH_ASSOC ) : ?array;
 
 
 	/**
 	 * Cleans up pending database result sets.
 	 *
-	 * @return \Aimeos\MW\DB\Result\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Result\Iface Connection instance for method chaining
 	 */
 	public function finish() : Iface;
 

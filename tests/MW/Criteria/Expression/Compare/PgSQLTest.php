@@ -35,12 +35,12 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 	public function testToSource()
 	{
 		$types = array(
-			'list' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'string' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'float' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
-			'int' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'undefined' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'bool' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL,
+			'list' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+			'string' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+			'float' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
+			'int' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'undefined' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'bool' => \Aimeos\Base\DB\Statement\Base::PARAM_BOOL,
 		);
 
 		$translations = array(

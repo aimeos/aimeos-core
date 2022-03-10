@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\DB\Result;
+namespace Aimeos\Base\DB\Result;
 
 
 /**
@@ -37,7 +37,7 @@ abstract class Base implements Iface
 	 * @param int $style The data can be returned as associative or numerical array
 	 * @return array Numeric or associative array of columns returned by the database
 	 */
-	public function all( int $style = \Aimeos\MW\DB\Result\Base::FETCH_ASSOC ) : array
+	public function all( int $style = \Aimeos\Base\DB\Result\Base::FETCH_ASSOC ) : array
 	{
 		$list = [];
 

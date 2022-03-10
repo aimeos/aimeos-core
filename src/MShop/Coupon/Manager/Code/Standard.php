@@ -29,7 +29,7 @@ class Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_coupon_code" AS mcouco ON (mcou."id"=mcouco."parentid")' ),
 			'label' => 'Code ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'coupon.code.siteid' => array(
@@ -37,7 +37,7 @@ class Standard
 			'internalcode' => 'mcouco."siteid"',
 			'label' => 'Code site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'coupon.code.parentid' => array(
@@ -45,7 +45,7 @@ class Standard
 			'internalcode' => 'mcouco."parentid"',
 			'label' => 'Coupon ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'coupon.code.code' => array(
@@ -53,42 +53,42 @@ class Standard
 			'internalcode' => 'mcouco."code"',
 			'label' => 'Code value',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'coupon.code.count' => array(
 			'code' => 'coupon.code.count',
 			'internalcode' => 'mcouco."count"',
 			'label' => 'Code quantity',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'coupon.code.datestart' => array(
 			'code' => 'coupon.code.datestart',
 			'internalcode' => 'mcouco."start"',
 			'label' => 'Code start date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'coupon.code.dateend' => array(
 			'code' => 'coupon.code.dateend',
 			'internalcode' => 'mcouco."end"',
 			'label' => 'Code end date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'coupon.code.ref' => array(
 			'code' => 'coupon.code.ref',
 			'internalcode' => 'mcouco."ref"',
 			'label' => 'Code reference',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'coupon.code.ctime' => array(
 			'code' => 'coupon.code.ctime',
 			'internalcode' => 'mcouco."ctime"',
 			'label' => 'Code create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'coupon.code.mtime' => array(
@@ -96,7 +96,7 @@ class Standard
 			'internalcode' => 'mcouco."mtime"',
 			'label' => 'Code modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'coupon.code.editor' => array(
@@ -104,7 +104,7 @@ class Standard
 			'internalcode' => 'mcouco."editor"',
 			'label' => 'Code editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -468,18 +468,18 @@ class Standard
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $item->getDateStart() );
 			$stmt->bind( $idx++, $item->getDateEnd() );
-			$stmt->bind( $idx++, $item->getCount(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getCount(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getRef() );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx, $date ); // ctime
 			}
@@ -828,7 +828,7 @@ class Standard
 			$path = 'mshop/coupon/manager/code/counter';
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->getSqlConfig( $path ) ) );
 
-			$stmt->bind( 1, $amount, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $amount, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); // mtime
 			$stmt->bind( 3, $context->editor() );
 			$stmt->bind( 4, $code );

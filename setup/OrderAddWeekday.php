@@ -40,7 +40,7 @@ class OrderAddWeekday extends Base
 			list( $date, $time ) = explode( ' ', $row['ctime'] );
 
 			$stmt->bind( 1, date_create_from_format( 'Y-m-d', $date )->format( 'w' ) );
-			$stmt->bind( 2, $row['id'], \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $row['id'], \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 		}

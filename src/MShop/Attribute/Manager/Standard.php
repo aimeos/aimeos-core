@@ -31,7 +31,7 @@ class Standard
 			'internalcode' => 'matt."id"',
 			'label' => 'ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.siteid' => array(
@@ -39,7 +39,7 @@ class Standard
 			'internalcode' => 'matt."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.key' => array(
@@ -47,7 +47,7 @@ class Standard
 			'internalcode' => 'matt."key"',
 			'label' => 'Unique key',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.type' => array(
@@ -55,7 +55,7 @@ class Standard
 			'internalcode' => 'matt."type"',
 			'label' => 'Type',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.label' => array(
@@ -63,28 +63,28 @@ class Standard
 			'internalcode' => 'matt."label"',
 			'label' => 'Label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.code' => array(
 			'code' => 'attribute.code',
 			'internalcode' => 'matt."code"',
 			'label' => 'Code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.domain' => array(
 			'code' => 'attribute.domain',
 			'internalcode' => 'matt."domain"',
 			'label' => 'Domain',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.position' => array(
 			'code' => 'attribute.position',
 			'internalcode' => 'matt."pos"',
 			'label' => 'Position',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'attribute.status' => array(
@@ -92,14 +92,14 @@ class Standard
 			'internalcode' => 'matt."status"',
 			'label' => 'Status',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'attribute.ctime' => array(
 			'code' => 'attribute.ctime',
 			'internalcode' => 'matt."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.mtime' => array(
@@ -107,7 +107,7 @@ class Standard
 			'internalcode' => 'matt."mtime"',
 			'label' => 'Modification date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute.editor' => array(
@@ -115,7 +115,7 @@ class Standard
 			'internalcode' => 'matt."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'attribute:has' => array(
@@ -423,15 +423,15 @@ class Standard
 			$stmt->bind( $idx++, $item->getType() );
 			$stmt->bind( $idx++, $item->getDomain() );
 			$stmt->bind( $idx++, $item->getCode() );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx++, $date ); // ctime
 			}

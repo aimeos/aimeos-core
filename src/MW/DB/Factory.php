@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\DB;
+namespace Aimeos\Base\DB;
 
 
 /**
@@ -25,15 +25,15 @@ class Factory
 	 *
 	 * @param \Aimeos\Base\Config\Iface $config Configuration class instance
 	 * @param string $type Name of the manager
-	 * @return \Aimeos\MW\DB\Manager\Iface Instance of a database manager
-	 * @throws \Aimeos\MW\DB\Exception if database manager class isn't found
+	 * @return \Aimeos\Base\DB\Manager\Iface Instance of a database manager
+	 * @throws \Aimeos\Base\DB\Exception if database manager class isn't found
 	 */
 	public static function create( \Aimeos\Base\Config\Iface $config, $type = 'PDO' )
 	{
-		$classname = '\Aimeos\MW\DB\Manager\\' . $type;
+		$classname = '\Aimeos\Base\DB\Manager\\' . $type;
 
 		if( !class_exists( $classname ) ) {
-			throw new \Aimeos\MW\DB\Exception( sprintf( 'File system "%1$s" not found', $type ) );
+			throw new \Aimeos\Base\DB\Exception( sprintf( 'File system "%1$s" not found', $type ) );
 		}
 
 		return new $classname( $config );

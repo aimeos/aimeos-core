@@ -28,7 +28,7 @@ class Standard
 			'internalcode' => 'msto."id"',
 			'label' => 'ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'stock.siteid' => array(
@@ -36,7 +36,7 @@ class Standard
 			'internalcode' => 'msto."siteid"',
 			'label' => 'site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'stock.type' => array(
@@ -44,42 +44,42 @@ class Standard
 			'internalcode' => 'msto."type"',
 			'label' => 'Type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'stock.productid' => array(
 			'code' => 'stock.productid',
 			'internalcode' => 'msto."prodid"',
 			'label' => 'Product ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'stock.stocklevel' => array(
 			'code' => 'stock.stocklevel',
 			'internalcode' => 'msto."stocklevel"',
 			'label' => 'Stock level',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'stock.dateback' => array(
 			'code' => 'stock.dateback',
 			'internalcode' => 'msto."backdate"',
 			'label' => 'Back in stock date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'stock.timeframe' => array(
 			'code' => 'stock.timeframe',
 			'internalcode' => 'msto."timeframe"',
 			'label' => 'Delivery time frame',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'stock.ctime' => array(
 			'code' => 'stock.ctime',
 			'internalcode' => 'msto."ctime"',
 			'label' => 'Creation date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'stock.mtime' => array(
@@ -87,7 +87,7 @@ class Standard
 			'internalcode' => 'msto."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'stock.editor' => array(
@@ -95,7 +95,7 @@ class Standard
 			'internalcode' => 'msto."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -257,7 +257,7 @@ class Standard
 
 			$stmt->bind( $idx++, $item->getProductId() );
 			$stmt->bind( $idx++, $item->getType() );
-			$stmt->bind( $idx++, $item->getStockLevel(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStockLevel(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getDateBack() );
 			$stmt->bind( $idx++, $item->getTimeFrame() );
 			$stmt->bind( $idx++, $date ); //mtime
@@ -265,7 +265,7 @@ class Standard
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx++, $date ); //ctime
 			}
@@ -809,7 +809,7 @@ class Standard
 			{
 				$stmt = $conn->create( str_replace( ':cond', $conditions, $this->getSqlConfig( $path ) ) );
 
-				$stmt->bind( 1, $qty, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 1, $qty, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); //mtime
 				$stmt->bind( 3, $context->editor() );
 				$stmt->bind( 4, $prodid );

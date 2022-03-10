@@ -143,7 +143,7 @@ abstract class Base
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getCompany() );
 			$stmt->bind( $idx++, $item->getVatId() );
 			$stmt->bind( $idx++, $item->getSalutation() );
@@ -162,16 +162,16 @@ abstract class Base
 			$stmt->bind( $idx++, $item->getEmail() );
 			$stmt->bind( $idx++, $item->getTelefax() );
 			$stmt->bind( $idx++, $item->getWebsite() );
-			$stmt->bind( $idx++, $item->getLongitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
-			$stmt->bind( $idx++, $item->getLatitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
-			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getLongitude(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
+			$stmt->bind( $idx++, $item->getLatitude(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
+			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getBirthday() );
 			$stmt->bind( $idx++, $date ); //mtime
 			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx++, $date ); // ctime
 			}

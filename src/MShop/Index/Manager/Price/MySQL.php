@@ -28,7 +28,7 @@ class MySQL
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_price" AS mindpr USE INDEX ("unq_msindpr_pid_sid_cid", "idx_msindpr_sid_cid_val") ON mindpr."prodid" = mpro."id"' ),
 			'label' => 'Product index price ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 	);

@@ -78,7 +78,7 @@ trait Site
 	protected function siteString( string $name, int $sitelevel ) : string
 	{
 		$translation = ['marker' => $name];
-		$types = ['marker' => \Aimeos\MW\DB\Statement\Base::PARAM_STR];
+		$types = ['marker' => \Aimeos\Base\DB\Statement\Base::PARAM_STR];
 
 		return $this->siteCondition( 'marker', $sitelevel )->toSource( $types, $translation );
 	}

@@ -69,11 +69,11 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 *		SELECT LAST_INSERT_ID()
 	 *
 	 * @param array $config Associative array holding the SQL statements
-	 * @param \Aimeos\MW\DB\Manager\Iface $resource Database manager
+	 * @param \Aimeos\Base\DB\Manager\Iface $resource Database manager
 	 */
 	public function __construct( array $config, $resource )
 	{
-		if( !( $resource instanceof \Aimeos\MW\DB\Manager\Iface ) ) {
+		if( !( $resource instanceof \Aimeos\Base\DB\Manager\Iface ) ) {
 			throw new \Aimeos\MW\Tree\Exception( 'Given resource isn\'t a database manager object' );
 		}
 
@@ -324,7 +324,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 
 			$result = $conn->create( $this->config['newid'] )->execute();
 
-			if( ( $row = $result->fetch( \Aimeos\MW\DB\Result\Base::FETCH_NUM ) ) === false ) {
+			if( ( $row = $result->fetch( \Aimeos\Base\DB\Result\Base::FETCH_NUM ) ) === false ) {
 				throw new \Aimeos\MW\Tree\Exception( sprintf( 'No new record ID available' ) );
 			}
 			$result->finish();
@@ -702,10 +702,10 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	/**
 	 * Creates a tree from the result set returned by the database.
 	 *
-	 * @param \Aimeos\MW\DB\Result\Iface $result Database result
+	 * @param \Aimeos\Base\DB\Result\Iface $result Database result
 	 * @param \Aimeos\MW\Tree\Node\Iface $node Current node to add children to
 	 */
-	protected function createTree( \Aimeos\MW\DB\Result\Iface $result, \Aimeos\MW\Tree\Node\Iface $node ) : ?\Aimeos\MW\Tree\Node\Iface
+	protected function createTree( \Aimeos\Base\DB\Result\Iface $result, \Aimeos\MW\Tree\Node\Iface $node ) : ?\Aimeos\MW\Tree\Node\Iface
 	{
 		while( ( $record = $result->fetch() ) !== null )
 		{

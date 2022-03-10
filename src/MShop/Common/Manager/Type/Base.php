@@ -122,17 +122,17 @@ abstract class Base
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, $item->getCode(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( $idx++, $item->getDomain(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( $idx++, $item->getLabel(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getCode(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( $idx++, $item->getDomain(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( $idx++, $item->getLabel(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $time ); //mtime
 			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx++, $time ); //ctime
 			}

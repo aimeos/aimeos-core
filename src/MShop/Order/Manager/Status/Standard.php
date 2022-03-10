@@ -27,7 +27,7 @@ class Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_status" AS mordst ON ( mord."id" = mordst."parentid" )' ),
 			'label' => 'Status ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.status.siteid' => array(
@@ -35,7 +35,7 @@ class Standard
 			'internalcode' => 'mordst."siteid"',
 			'label' => 'Status site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.status.parentid' => array(
@@ -43,7 +43,7 @@ class Standard
 			'internalcode' => 'mordst."parentid"',
 			'label' => 'Status parent id',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.status.type' => array(
@@ -51,21 +51,21 @@ class Standard
 			'internalcode' => 'mordst."type"',
 			'label' => 'Status type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.status.value' => array(
 			'code' => 'order.status.value',
 			'internalcode' => 'mordst."value"',
 			'label' => 'Status value',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.status.ctime' => array(
 			'code' => 'order.status.ctime',
 			'internalcode' => 'mordst."ctime"',
 			'label' => 'Status create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.status.mtime' => array(
@@ -73,7 +73,7 @@ class Standard
 			'internalcode' => 'mordst."mtime"',
 			'label' => 'Status modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.status.editor' => array(
@@ -81,7 +81,7 @@ class Standard
 			'internalcode' => 'mordst."editor"',
 			'label' => 'Status editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -304,7 +304,7 @@ class Standard
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getType() );
 			$stmt->bind( $idx++, $item->getValue() );
 			$stmt->bind( $idx++, $date ); //mtime
@@ -312,7 +312,7 @@ class Standard
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx++, $date ); //ctime
 			}

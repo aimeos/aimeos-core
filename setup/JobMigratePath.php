@@ -39,7 +39,7 @@ class JobMigratePath extends Base
 		while( ( $row = $result->fetch() ) !== null )
 		{
 			$stmt->bind( 1, $row['result']['file'] ?? '' );
-			$stmt->bind( 2, $row['id'], \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $row['id'], \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 		}

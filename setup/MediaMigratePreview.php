@@ -33,7 +33,7 @@ class MediaMigratePreview extends Base
 		while( ( $row = $result->fetch() ) !== null )
 		{
 			$stmt->bind( 1, json_encode( ['1' => $row['preview']], JSON_FORCE_OBJECT ) );
-			$stmt->bind( 2, $row['id'], \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $row['id'], \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 		}

@@ -13,7 +13,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		self::$dbm = \TestHelper::getDBManager();
 
-		if( !( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
+		if( !( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL ) ) {
 			return;
 		}
 
@@ -40,7 +40,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public static function tearDownAfterClass() : void
 	{
-		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
+		if( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL )
 		{
 			$conn = self::$dbm->acquire();
 

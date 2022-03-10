@@ -28,7 +28,7 @@ class Standard
 			'code' => 'customer.id',
 			'internalcode' => 'mcus."id"',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.siteid' => array(
@@ -36,7 +36,7 @@ class Standard
 			'internalcode' => 'mcus."siteid"',
 			'label' => 'Customer site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.code' => array(
@@ -44,147 +44,147 @@ class Standard
 			'code' => 'customer.code',
 			'internalcode' => 'mcus."code"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.label' => array(
 			'label' => 'Label',
 			'code' => 'customer.label',
 			'internalcode' => 'mcus."label"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.salutation' => array(
 			'label' => 'Salutation',
 			'code' => 'customer.salutation',
 			'internalcode' => 'mcus."salutation"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.company' => array(
 			'label' => 'Company',
 			'code' => 'customer.company',
 			'internalcode' => 'mcus."company"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.vatid' => array(
 			'label' => 'Vat ID',
 			'code' => 'customer.vatid',
 			'internalcode' => 'mcus."vatid"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.title' => array(
 			'label' => 'Title',
 			'code' => 'customer.title',
 			'internalcode' => 'mcus."title"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.firstname' => array(
 			'label' => 'Firstname',
 			'code' => 'customer.firstname',
 			'internalcode' => 'mcus."firstname"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lastname' => array(
 			'label' => 'Lastname',
 			'code' => 'customer.lastname',
 			'internalcode' => 'mcus."lastname"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address1' => array(
 			'label' => 'Address part one',
 			'code' => 'customer.address1',
 			'internalcode' => 'mcus."address1"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address2' => array(
 			'label' => 'Address part two',
 			'code' => 'customer.address2',
 			'internalcode' => 'mcus."address2"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address3' => array(
 			'label' => 'Address part three',
 			'code' => 'customer.address3',
 			'internalcode' => 'mcus."address3"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.postal' => array(
 			'label' => 'Postal',
 			'code' => 'customer.postal',
 			'internalcode' => 'mcus."postal"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.city' => array(
 			'label' => 'City',
 			'code' => 'customer.city',
 			'internalcode' => 'mcus."city"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.state' => array(
 			'label' => 'State',
 			'code' => 'customer.state',
 			'internalcode' => 'mcus."state"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.languageid' => array(
 			'label' => 'Language',
 			'code' => 'customer.languageid',
 			'internalcode' => 'mcus."langid"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.countryid' => array(
 			'label' => 'Country',
 			'code' => 'customer.countryid',
 			'internalcode' => 'mcus."countryid"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.telephone' => array(
 			'label' => 'Telephone',
 			'code' => 'customer.telephone',
 			'internalcode' => 'mcus."telephone"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.email' => array(
 			'label' => 'E-mail',
 			'code' => 'customer.email',
 			'internalcode' => 'mcus."email"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.telefax' => array(
 			'label' => 'Facsimile',
 			'code' => 'customer.telefax',
 			'internalcode' => 'mcus."telefax"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.website' => array(
 			'label' => 'Web site',
 			'code' => 'customer.website',
 			'internalcode' => 'mcus."website"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.longitude' => array(
 			'label' => 'Longitude',
 			'code' => 'customer.longitude',
 			'internalcode' => 'mcus."longitude"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.latitude' => array(
@@ -192,7 +192,7 @@ class Standard
 			'code' => 'customer.latitude',
 			'internalcode' => 'mcus."latitude"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.birthday' => array(
@@ -200,21 +200,21 @@ class Standard
 			'code' => 'customer.birthday',
 			'internalcode' => 'mcus."birthday"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.status' => array(
 			'label' => 'Status',
 			'code' => 'customer.status',
 			'internalcode' => 'mcus."status"',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'customer.dateverified' => array(
 			'label' => 'Verification date',
 			'code' => 'customer.dateverified',
 			'internalcode' => 'mcus."vdate"',
 			'type' => 'date',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.password' => array(
@@ -222,7 +222,7 @@ class Standard
 			'code' => 'customer.password',
 			'internalcode' => 'mcus."password"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.ctime' => array(
@@ -230,7 +230,7 @@ class Standard
 			'code' => 'customer.ctime',
 			'internalcode' => 'mcus."ctime"',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.mtime' => array(
@@ -238,7 +238,7 @@ class Standard
 			'code' => 'customer.mtime',
 			'internalcode' => 'mcus."mtime"',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.editor' => array(
@@ -246,7 +246,7 @@ class Standard
 			'code' => 'customer.editor',
 			'internalcode' => 'mcus."editor"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer:has' => array(
@@ -582,7 +582,7 @@ class Standard
 			$stmt->bind( $idx++, $billingAddress->getLongitude() );
 			$stmt->bind( $idx++, $billingAddress->getLatitude() );
 			$stmt->bind( $idx++, $billingAddress->getBirthday() );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getDateVerified() );
 			$stmt->bind( $idx++, $item->getPassword() );
 			$stmt->bind( $idx++, $date ); // Modification time
@@ -590,7 +590,7 @@ class Standard
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 				$billingAddress->setId( $id ); // enforce ID to be present
 			} else {
 				$stmt->bind( $idx, $date ); // Creation time

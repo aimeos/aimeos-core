@@ -27,14 +27,14 @@ class Standard
 			'internalcode' => 'mord."id"',
 			'label' => 'Subscription ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'subscription.siteid' => array(
 			'code' => 'subscription.siteid',
 			'internalcode' => 'mord."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'subscription.ordbaseid' => array(
@@ -42,7 +42,7 @@ class Standard
 			'internalcode' => 'mord."baseid"',
 			'label' => 'Order base ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'subscription.ordprodid' => array(
@@ -50,7 +50,7 @@ class Standard
 			'internalcode' => 'mord."ordprodid"',
 			'label' => 'Order product ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'subscription.datenext' => array(
@@ -58,56 +58,56 @@ class Standard
 			'internalcode' => 'mord."next"',
 			'label' => 'Next renewal date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'subscription.dateend' => array(
 			'code' => 'subscription.dateend',
 			'internalcode' => 'mord."end"',
 			'label' => 'End of subscription',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'subscription.interval' => array(
 			'code' => 'subscription.interval',
 			'internalcode' => 'mord."interval"',
 			'label' => 'Renewal interval',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'subscription.reason' => array(
 			'code' => 'subscription.reason',
 			'internalcode' => 'mord."reason"',
 			'label' => 'Subscription end reason',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'subscription.period' => array(
 			'code' => 'subscription.period',
 			'internalcode' => 'mord."period"',
 			'label' => 'Subscription period count',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'subscription.productid' => array(
 			'code' => 'subscription.productid',
 			'internalcode' => 'mord."productid"',
 			'label' => 'Subscription product ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'subscription.status' => array(
 			'code' => 'subscription.status',
 			'internalcode' => 'mord."status"',
 			'label' => 'Subscription status',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'subscription.ctime' => array(
 			'code' => 'subscription.ctime',
 			'internalcode' => 'mord."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'subscription.mtime' => array(
@@ -115,7 +115,7 @@ class Standard
 			'internalcode' => 'mord."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'subscription.editor' => array(
@@ -123,7 +123,7 @@ class Standard
 			'internalcode' => 'mord."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -372,21 +372,21 @@ class Standard
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, $item->getOrderBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getOrderProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getOrderBaseId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getOrderProductId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getDateNext() );
 			$stmt->bind( $idx++, $item->getDateEnd() );
 			$stmt->bind( $idx++, $item->getInterval() );
 			$stmt->bind( $idx++, $item->getProductId() );
-			$stmt->bind( $idx++, $item->getPeriod(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getReason(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getPeriod(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getReason(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx++, $date ); // ctime
 			}

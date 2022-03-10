@@ -34,14 +34,14 @@ class Standard
 			'internalcode' => 'malog."id"',
 			'label' => 'Log ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'log.siteid' => array(
 			'code' => 'log.siteid',
 			'internalcode' => 'malog."siteid"',
 			'label' => 'Log site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'log.message' => array(
@@ -49,35 +49,35 @@ class Standard
 			'internalcode' => 'malog."message"',
 			'label' => 'Log message',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'log.facility' => array(
 			'code' => 'log.facility',
 			'internalcode' => 'malog."facility"',
 			'label' => 'Log facility',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'log.priority' => array(
 			'code' => 'log.priority',
 			'internalcode' => 'malog."priority"',
 			'label' => 'Log priority',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'log.timestamp' => array(
 			'code' => 'log.timestamp',
 			'internalcode' => 'malog."timestamp"',
 			'label' => 'Log create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'log.request' => array(
 			'code' => 'log.request',
 			'internalcode' => 'malog."request"',
 			'label' => 'Log request',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		)
 	);
 
@@ -287,13 +287,13 @@ class Standard
 
 			$stmt->bind( $idx++, $item->getFacility() );
 			$stmt->bind( $idx++, date( 'Y-m-d H:i:s' ) );
-			$stmt->bind( $idx++, $item->getPriority(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getPriority(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getMessage() );
 			$stmt->bind( $idx++, $item->getRequest() );
 			$stmt->bind( $idx++, $siteid );
 
 			if( $item->getId() !== null ) {
-				$stmt->bind( $idx++, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $item->getId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			}
 
 			$stmt->execute()->finish();

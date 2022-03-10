@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\DB\Statement;
+namespace Aimeos\Base\DB\Statement;
 
 
 /**
@@ -25,15 +25,15 @@ interface Iface
 	 *
 	 * @param int $position Position index of the placeholder
 	 * @param mixed $value Value which should be bound to the placeholder
-	 * @param int $type Type of given value defined in \Aimeos\MW\DB\Stmt\Base as constant
-	 * @return \Aimeos\MW\DB\Statement\Iface Statement instance for method chaining
+	 * @param int $type Type of given value defined in \Aimeos\Base\DB\Stmt\Base as constant
+	 * @return \Aimeos\Base\DB\Statement\Iface Statement instance for method chaining
 	 */
-	public function bind( int $position, $value, int $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR ) : \Aimeos\MW\DB\Statement\Iface;
+	public function bind( int $position, $value, int $type = \Aimeos\Base\DB\Statement\Base::PARAM_STR ) : \Aimeos\Base\DB\Statement\Iface;
 
 	/**
 	 * Executes the statement.
 	 *
-	 * @return \Aimeos\MW\DB\Result\Iface Result object
+	 * @return \Aimeos\Base\DB\Result\Iface Result object
 	 */
-	public function execute() : \Aimeos\MW\DB\Result\Iface;
+	public function execute() : \Aimeos\Base\DB\Result\Iface;
 }

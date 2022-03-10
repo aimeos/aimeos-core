@@ -326,7 +326,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	/**
 	 * Returns value of a catalog_index column.
 	 *
-	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database Manager for connection
+	 * @param \Aimeos\Base\DB\Manager\Iface $dbm Database Manager for connection
 	 * @param string $sql Specified db query to find only one value
 	 * @param string $column Column where to search
 	 * @param string $siteId Siteid of the db entry
@@ -334,7 +334,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	 * @return string $value Value returned for specified sql statement
 	 * @throws \Exception If column not available or error during a connection to db
 	 */
-	protected function getValue( \Aimeos\MW\DB\Manager\Iface $dbm, $sql, $column, $siteId, $productId )
+	protected function getValue( \Aimeos\Base\DB\Manager\Iface $dbm, $sql, $column, $siteId, $productId )
 	{
 		$config = $this->context->config();
 
@@ -349,8 +349,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		try
 		{
 			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, $siteId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $productId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $siteId, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $productId, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$result = $stmt->execute();
 
 			if( ( $row = $result->fetch() ) === null ) {

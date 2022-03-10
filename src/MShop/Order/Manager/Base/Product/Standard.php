@@ -29,7 +29,7 @@ class Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_product" AS mordbapr ON ( mordba."id" = mordbapr."baseid" )' ),
 			'label' => 'Product ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.baseid' => array(
@@ -37,7 +37,7 @@ class Standard
 			'internalcode' => 'mordbapr."baseid"',
 			'label' => 'Product base ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.siteid' => array(
@@ -45,7 +45,7 @@ class Standard
 			'internalcode' => 'mordbapr."siteid"',
 			'label' => 'Product site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.orderaddressid' => array(
@@ -53,7 +53,7 @@ class Standard
 			'internalcode' => 'mordbapr."ordaddrid"',
 			'label' => 'Address ID for the product',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.orderproductid' => array(
@@ -61,7 +61,7 @@ class Standard
 			'internalcode' => 'mordbapr."ordprodid"',
 			'label' => 'Product parent ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.parentproductid' => array(
@@ -69,7 +69,7 @@ class Standard
 			'internalcode' => 'mordbapr."parentprodid"',
 			'label' => 'Parent product ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.productid' => array(
@@ -77,7 +77,7 @@ class Standard
 			'internalcode' => 'mordbapr."prodid"',
 			'label' => 'Product original ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.name' => array(
@@ -85,140 +85,140 @@ class Standard
 			'internalcode' => 'mordbapr."name"',
 			'label' => 'Product name',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.description' => array(
 			'code' => 'order.base.product.description',
 			'internalcode' => 'mordbapr."description"',
 			'label' => 'Product description',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.prodcode' => array(
 			'code' => 'order.base.product.prodcode',
 			'internalcode' => 'mordbapr."prodcode"',
 			'label' => 'Product code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.type' => array(
 			'code' => 'order.base.product.type',
 			'internalcode' => 'mordbapr."type"',
 			'label' => 'Product type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.vendor' => array(
 			'code' => 'order.base.product.vendor',
 			'internalcode' => 'mordbapr."vendor"',
 			'label' => 'Product vendor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.stocktype' => array(
 			'code' => 'order.base.product.stocktype',
 			'internalcode' => 'mordbapr."stocktype"',
 			'label' => 'Product stock type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.timeframe' => array(
 			'code' => 'order.base.product.timeframe',
 			'internalcode' => 'mordbapr."timeframe"',
 			'label' => 'Delivery time frame',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.quantity' => array(
 			'code' => 'order.base.product.quantity',
 			'internalcode' => 'mordbapr."quantity"',
 			'label' => 'Product quantity',
 			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'order.base.product.qtyopen' => array(
 			'code' => 'order.base.product.qtyopen',
 			'internalcode' => 'mordbapr."qtyopen"',
 			'label' => 'Product quantity not yet delivered',
 			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'order.base.product.currencyid' => array(
 			'code' => 'order.base.product.currencyid',
 			'internalcode' => 'mordbapr."currencyid"',
 			'label' => 'Product currencyid code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.price' => array(
 			'code' => 'order.base.product.price',
 			'internalcode' => 'mordbapr."price"',
 			'label' => 'Product price',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.costs' => array(
 			'code' => 'order.base.product.costs',
 			'internalcode' => 'mordbapr."costs"',
 			'label' => 'Product shipping',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.rebate' => array(
 			'code' => 'order.base.product.rebate',
 			'internalcode' => 'mordbapr."rebate"',
 			'label' => 'Product rebate',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.taxrates' => array(
 			'code' => 'order.base.product.taxrates',
 			'internalcode' => 'mordbapr."taxrate"',
 			'label' => 'Product taxrates',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.taxvalue' => array(
 			'code' => 'order.base.product.taxvalue',
 			'internalcode' => 'mordbapr."tax"',
 			'label' => 'Product tax value',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.taxflag' => array(
 			'code' => 'order.base.product.taxflag',
 			'internalcode' => 'mordbapr."taxflag"',
 			'label' => 'Product tax flag (0=net, 1=gross)',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.product.position' => array(
 			'code' => 'order.base.product.position',
 			'internalcode' => 'mordbapr."pos"',
 			'label' => 'Product position',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.product.statuspayment' => array(
 			'code' => 'order.base.product.statuspayment',
 			'internalcode' => 'mordbapr."statuspayment"',
 			'label' => 'Product payment status',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.product.statusdelivery' => array(
 			'code' => 'order.base.product.statusdelivery',
 			'internalcode' => 'mordbapr."statusdelivery"',
 			'label' => 'Product delivery status',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.product.mediaurl' => array(
 			'code' => 'order.base.product.mediaurl',
 			'internalcode' => 'mordbapr."mediaurl"',
 			'label' => 'Product media url',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.target' => array(
@@ -226,7 +226,7 @@ class Standard
 			'internalcode' => 'mordbapr."target"',
 			'label' => 'Product url target',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.notes' => array(
@@ -234,7 +234,7 @@ class Standard
 			'internalcode' => 'mordbapr."notes"',
 			'label' => 'Product notes',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.flags' => array(
@@ -242,7 +242,7 @@ class Standard
 			'internalcode' => 'mordbapr."flags"',
 			'label' => 'Product flags',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.ctime' => array(
@@ -250,7 +250,7 @@ class Standard
 			'internalcode' => 'mordbapr."ctime"',
 			'label' => 'Product create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.mtime' => array(
@@ -258,7 +258,7 @@ class Standard
 			'internalcode' => 'mordbapr."mtime"',
 			'label' => 'Order base product modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.editor' => array(
@@ -266,7 +266,7 @@ class Standard
 			'internalcode' => 'mordbapr."editor"',
 			'label' => 'Product editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.count' => array(
@@ -275,7 +275,7 @@ class Standard
 				WHERE mordbapr."baseid" = mordbapr_count."baseid" AND mordbapr_count."prodid" = $1 )',
 			'label' => 'Order base product count, parameter(<product IDs>)',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.total' => array(
@@ -283,7 +283,7 @@ class Standard
 			'internalcode' => 'mordbapr."quantity" * mordbapr."price"',
 			'label' => 'Product price total',
 			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
 	);
@@ -799,9 +799,9 @@ class Standard
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getOrderProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getOrderAddressId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getBaseId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getOrderProductId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getOrderAddressId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getType() );
 			$stmt->bind( $idx++, $item->getParentProductId() );
 			$stmt->bind( $idx++, $item->getProductId() );
@@ -819,11 +819,11 @@ class Standard
 			$stmt->bind( $idx++, $price->getRebate() );
 			$stmt->bind( $idx++, $price->getTaxValue() );
 			$stmt->bind( $idx++, json_encode( $price->getTaxRates(), JSON_FORCE_OBJECT ) );
-			$stmt->bind( $idx++, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getStatusPayment(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getStatusDelivery(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $price->getTaxFlag(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getFlags(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatusPayment(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatusDelivery(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, (int) $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $item->getTarget() );
@@ -832,7 +832,7 @@ class Standard
 			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx++, $date ); // ctime
 			}

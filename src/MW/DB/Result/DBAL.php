@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MW\DB\Result;
+namespace Aimeos\Base\DB\Result;
 
 
 /**
@@ -17,7 +17,7 @@ namespace Aimeos\MW\DB\Result;
  * @package MW
  * @subpackage DB
  */
-class DBAL extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Iface
+class DBAL extends \Aimeos\Base\DB\Result\Base implements \Aimeos\Base\DB\Result\Iface
 {
 	private $result;
 
@@ -46,14 +46,14 @@ class DBAL extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifa
 	 * Returns the number of rows affected by a INSERT, UPDATE or DELETE statement.
 	 *
 	 * @return int Number of touched records
-	 * @throws \Aimeos\MW\DB\Exception if an error occured in the unterlying driver
+	 * @throws \Aimeos\Base\DB\Exception if an error occured in the unterlying driver
 	 */
 	public function affectedRows() : int
 	{
 		try {
 			return $this->result->rowCount();
 		} catch( \Doctrine\DBAL\Driver\Exception $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
+			throw new \Aimeos\Base\DB\Exception( $e->getMessage(), $e->getCode() );
 		}
 	}
 
@@ -63,13 +63,13 @@ class DBAL extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifa
 	 *
 	 * @param int $style The data can be returned as associative or numerical array
 	 * @return array|null Numeric or associative array of columns returned by the database or null if no more rows are available
-	 * @throws \Aimeos\MW\DB\Exception if an error occured in the unterlying driver or the fetch style is unknown
+	 * @throws \Aimeos\Base\DB\Exception if an error occured in the unterlying driver or the fetch style is unknown
 	 */
-	public function fetch( int $style = \Aimeos\MW\DB\Result\Base::FETCH_ASSOC ) : ?array
+	public function fetch( int $style = \Aimeos\Base\DB\Result\Base::FETCH_ASSOC ) : ?array
 	{
 		try
 		{
-			if( $style === \Aimeos\MW\DB\Result\Base::FETCH_NUM ) {
+			if( $style === \Aimeos\Base\DB\Result\Base::FETCH_NUM ) {
 				return $this->result->fetchNumeric() ?: null;
 			} else {
 				return $this->result->fetchAssociative() ?: null;
@@ -77,7 +77,7 @@ class DBAL extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifa
 		}
 		catch( \Doctrine\DBAL\Driver\Exception $e )
 		{
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
+			throw new \Aimeos\Base\DB\Exception( $e->getMessage(), $e->getCode() );
 		}
 	}
 
@@ -85,15 +85,15 @@ class DBAL extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifa
 	/**
 	 * Cleans up pending database result sets.
 	 *
-	 * @return \Aimeos\MW\DB\Result\Iface Result instance for method chaining
-	 * @throws \Aimeos\MW\DB\Exception if an error occured in the unterlying driver
+	 * @return \Aimeos\Base\DB\Result\Iface Result instance for method chaining
+	 * @throws \Aimeos\Base\DB\Exception if an error occured in the unterlying driver
 	 */
 	public function finish() : Iface
 	{
 		try {
 			$this->result->free();
 		} catch( \Doctrine\DBAL\Driver\Exception $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
+			throw new \Aimeos\Base\DB\Exception( $e->getMessage(), $e->getCode() );
 		}
 
 		return $this;

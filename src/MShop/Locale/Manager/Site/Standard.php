@@ -31,7 +31,7 @@ class Standard
 			'internaldeps' => ['LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."siteid")'],
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'locale.site.siteid' => array(
@@ -39,7 +39,7 @@ class Standard
 			'internalcode' => 'mlocsi."siteid"',
 			'label' => 'Unique site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.label' => array(
@@ -47,28 +47,28 @@ class Standard
 			'internalcode' => 'mlocsi."label"',
 			'label' => 'Site label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.site.code' => array(
 			'code' => 'locale.site.code',
 			'internalcode' => 'mlocsi."code"',
 			'label' => 'Site code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.site.status' => array(
 			'code' => 'locale.site.status',
 			'internalcode' => 'mlocsi."status"',
 			'label' => 'Site status',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'locale.site.level' => array(
 			'code' => 'locale.site.level',
 			'internalcode' => 'mlocsi."level"',
 			'label' => 'Site tree level',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'locale.site.config' => array(
@@ -76,7 +76,7 @@ class Standard
 			'internalcode' => 'mlocsi."config"',
 			'label' => 'Site config',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.icon' => array(
@@ -84,7 +84,7 @@ class Standard
 			'internalcode' => 'mlocsi."icon"',
 			'label' => 'Site icon',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.logo' => array(
@@ -92,7 +92,7 @@ class Standard
 			'internalcode' => 'mlocsi."logo"',
 			'label' => 'Site logo',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.refid' => array(
@@ -100,7 +100,7 @@ class Standard
 			'internalcode' => 'mlocsi."refid"',
 			'label' => 'Site-related supplier ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.theme' => array(
@@ -108,7 +108,7 @@ class Standard
 			'internalcode' => 'mlocsi."theme"',
 			'label' => 'Site theme',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.ctime' => array(
@@ -116,7 +116,7 @@ class Standard
 			'internalcode' => 'mlocsi."ctime"',
 			'label' => 'Site create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.mtime' => array(
@@ -124,7 +124,7 @@ class Standard
 			'internalcode' => 'mlocsi."mtime"',
 			'label' => 'Site modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.site.editor' => array(
@@ -132,7 +132,7 @@ class Standard
 			'internalcode' => 'mlocsi."editor"',
 			'label' => 'Site editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'parentid' => array(
@@ -140,7 +140,7 @@ class Standard
 			'internalcode' => 'mlocsi."parentid"',
 			'label' => 'Parent site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -312,14 +312,14 @@ class Standard
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getIcon() );
 			$stmt->bind( $idx++, json_encode( $item->getLogos(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $item->getRefId() );
 			$stmt->bind( $idx++, $item->getTheme() );
 			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, date( 'Y-m-d H:i:s' ) ); // mtime
-			$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 			$item->setId( $id ); // set Modified false
@@ -885,7 +885,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig(), JSON_FORCE_OBJECT ) );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getIcon() );
 			$stmt->bind( $idx++, json_encode( $item->getLogos(), JSON_FORCE_OBJECT ) );
 			$stmt->bind( $idx++, $item->getRefId() );
@@ -984,11 +984,11 @@ class Standard
 	/**
 	 * Returns the search results for the given SQL statement.
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
 	 * @param string $sql SQL statement
-	 * @return \Aimeos\MW\DB\Result\Iface Search result object
+	 * @return \Aimeos\Base\DB\Result\Iface Search result object
 	 */
-	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, string $sql ) : \Aimeos\MW\DB\Result\Iface
+	protected function getSearchResults( \Aimeos\Base\DB\Connection\Iface $conn, string $sql ) : \Aimeos\Base\DB\Result\Iface
 	{
 		$time = microtime( true );
 
@@ -1031,13 +1031,13 @@ class Standard
 	/**
 	 * Returns the total number of items found for the conditions
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
 	 * @param string[] $find List of markers that should be replaced in the SQL statement
 	 * @param string[] $replace List of replacements for the markers in the SQL statement
 	 * @throws \Aimeos\MShop\Locale\Exception If no total value was found
 	 * @return int Total number of found items
 	 */
-	protected function getTotal( \Aimeos\MW\DB\Connection\Iface $conn, array $find, array $replace ) : int
+	protected function getTotal( \Aimeos\Base\DB\Connection\Iface $conn, array $find, array $replace ) : int
 	{
 		/** mshop/locale/manager/site/count/mysql
 		 * Counts the number of records matched by the given criteria in the database

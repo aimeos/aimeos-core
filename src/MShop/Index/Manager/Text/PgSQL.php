@@ -26,7 +26,7 @@ class PgSQL
 			'internalcode' => ':site AND mindte."langid" = $1 AND CAST( to_tsvector(mindte."content") @@ to_tsquery( $2 ) AS integer )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'sort:index.text:relevance' => array(
@@ -34,7 +34,7 @@ class PgSQL
 			'internalcode' => 'ts_rank(to_tsvector(mindte."content"), to_tsquery( $2 ))',
 			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 	);

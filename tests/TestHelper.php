@@ -75,11 +75,11 @@ class TestHelper
 	/**
 	 * Returns the database manager object
 	 *
-	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
+	 * @return \Aimeos\Base\DB\Manager\Iface Database manager object
 	 */
 	public static function getDBManager()
 	{
-		return \Aimeos\MW\DB\Factory::create( self::getConfig(), 'DBAL' );
+		return \Aimeos\Base\DB\Factory::create( self::getConfig(), 'DBAL' );
 	}
 
 
@@ -126,7 +126,7 @@ class TestHelper
 		$ctx->setLogger( $logger );
 
 
-		$dbm = new \Aimeos\MW\DB\Manager\PDO( $conf );
+		$dbm = new \Aimeos\Base\DB\Manager\PDO( $conf );
 		$ctx->setDatabaseManager( $dbm );
 
 

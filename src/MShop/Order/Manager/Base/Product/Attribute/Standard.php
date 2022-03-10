@@ -29,7 +29,7 @@ class Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_product_attr" AS mordbaprat ON ( mordbapr."id" = mordbaprat."parentid" )' ),
 			'label' => 'Product attribute ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.attribute.siteid' => array(
@@ -37,7 +37,7 @@ class Standard
 			'internalcode' => 'mordbaprat."siteid"',
 			'label' => 'Product attribute site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.attribute.attributeid' => array(
@@ -45,7 +45,7 @@ class Standard
 			'internalcode' => 'mordbaprat."attrid"',
 			'label' => 'Product attribute original ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.attribute.parentid' => array(
@@ -53,7 +53,7 @@ class Standard
 			'internalcode' => 'mordbaprat."parentid"',
 			'label' => 'Product ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.product.attribute.name' => array(
@@ -61,42 +61,42 @@ class Standard
 			'internalcode' => 'mordbaprat."name"',
 			'label' => 'Product attribute name',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.value' => array(
 			'code' => 'order.base.product.attribute.value',
 			'internalcode' => 'mordbaprat."value"',
 			'label' => 'Product attribute value',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.code' => array(
 			'code' => 'order.base.product.attribute.code',
 			'internalcode' => 'mordbaprat."code"',
 			'label' => 'Product attribute code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.type' => array(
 			'code' => 'order.base.product.attribute.type',
 			'internalcode' => 'mordbaprat."type"',
 			'label' => 'Product attribute type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.product.attribute.quantity' => array(
 			'code' => 'order.base.product.attribute.quantity',
 			'internalcode' => 'mordbaprat."quantity"',
 			'label' => 'Product attribute quantity',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.product.attribute.ctime' => array(
 			'code' => 'order.base.product.attribute.ctime',
 			'internalcode' => 'mordbaprat."ctime"',
 			'label' => 'Product attribute create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.attribute.mtime' => array(
@@ -104,7 +104,7 @@ class Standard
 			'internalcode' => 'mordbaprat."mtime"',
 			'label' => 'Product attribute modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.product.attribute.editor' => array(
@@ -112,7 +112,7 @@ class Standard
 			'internalcode' => 'mordbaprat."editor"',
 			'label' => 'Product attribute editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -580,18 +580,18 @@ class Standard
 			}
 
 			$stmt->bind( $idx++, $item->getAttributeId() );
-			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getType() );
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, json_encode( $item->getValue() ) );
-			$stmt->bind( $idx++, $item->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getQuantity(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getName() );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $item->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx++, $date ); // ctime
 			}

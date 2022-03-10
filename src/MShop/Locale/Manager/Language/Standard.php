@@ -29,7 +29,7 @@ class Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")' ),
 			'label' => 'Language ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.language.label' => array(
@@ -37,28 +37,28 @@ class Standard
 			'internalcode' => 'mlocla."label"',
 			'label' => 'Language label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.language.code' => array(
 			'code' => 'locale.language.code',
 			'internalcode' => 'mlocla."id"',
 			'label' => 'Language code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.language.status' => array(
 			'code' => 'locale.language.status',
 			'internalcode' => 'mlocla."status"',
 			'label' => 'Language status',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'locale.language.ctime' => array(
 			'code' => 'locale.language.ctime',
 			'internalcode' => 'mlocla."ctime"',
 			'label' => 'Language create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.language.mtime' => array(
@@ -66,7 +66,7 @@ class Standard
 			'internalcode' => 'mlocla."mtime"',
 			'label' => 'Language modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.language.editor' => array(
@@ -74,7 +74,7 @@ class Standard
 			'internalcode' => 'mlocla."editor"',
 			'label' => 'Language editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -224,7 +224,7 @@ class Standard
 			}
 
 			$stmt->bind( $idx++, $item->getLabel() );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->editor() );
 			// code and ID are identical after saving and ID is the flag to detect updates or inserts
@@ -300,7 +300,7 @@ class Standard
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Returns the language item of the given id
 	 * @param bool|null $default Add default criteria or NULL for relaxed default criteria
-	 * @throws \Aimeos\MW\DB\Exception If language object couldn't be fetched
+	 * @throws \Aimeos\Base\DB\Exception If language object couldn't be fetched
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
@@ -642,11 +642,11 @@ class Standard
 	/**
 	 * Returns the search results for the given SQL statement.
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
 	 * @param string $sql SQL statement
-	 * @return \Aimeos\MW\DB\Result\Iface Search result object
+	 * @return \Aimeos\Base\DB\Result\Iface Search result object
 	 */
-	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, string $sql ) : \Aimeos\MW\DB\Result\Iface
+	protected function getSearchResults( \Aimeos\Base\DB\Connection\Iface $conn, string $sql ) : \Aimeos\Base\DB\Result\Iface
 	{
 		$time = microtime( true );
 
@@ -678,13 +678,13 @@ class Standard
 	/**
 	 * Returns the total number of items found for the conditions
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
 	 * @param string[] $find List of markers that should be replaced in the SQL statement
 	 * @param string[] $replace List of replacements for the markers in the SQL statement
 	 * @throws \Aimeos\MShop\Locale\Exception If no total value was found
 	 * @return integer Total number of found items
 	 */
-	protected function getTotal( \Aimeos\MW\DB\Connection\Iface $conn, array $find, array $replace ) : int
+	protected function getTotal( \Aimeos\Base\DB\Connection\Iface $conn, array $find, array $replace ) : int
 	{
 		/** mshop/locale/manager/language/count/mysql
 		 * Counts the number of records matched by the given criteria in the database

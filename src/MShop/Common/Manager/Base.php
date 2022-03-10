@@ -336,16 +336,16 @@ abstract class Base
 	/**
 	 * Returns the newly created ID for the last record which was inserted.
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection used to insert the new record
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection used to insert the new record
 	 * @param string $cfgpath Configuration path to the SQL statement for retrieving the new ID of the last inserted record
 	 * @return string ID of the last record that was inserted by using the given connection
 	 * @throws \Aimeos\MShop\Exception if there's no ID of the last record available
 	 */
-	protected function newId( \Aimeos\MW\DB\Connection\Iface $conn, string $cfgpath ) : string
+	protected function newId( \Aimeos\Base\DB\Connection\Iface $conn, string $cfgpath ) : string
 	{
 		$result = $conn->create( $this->getSqlConfig( $cfgpath ) )->execute();
 
-		if( ( $row = $result->fetch( \Aimeos\MW\DB\Result\Base::FETCH_NUM ) ) === false )
+		if( ( $row = $result->fetch( \Aimeos\Base\DB\Result\Base::FETCH_NUM ) ) === false )
 		{
 			$msg = $this->context()->translate( 'mshop', 'ID of last inserted database record not available' );
 			throw new \Aimeos\MShop\Exception( $msg );
@@ -492,11 +492,11 @@ abstract class Base
 	/**
 	 * Returns the search results for the given SQL statement.
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
 	 * @param string $sql SQL statement
-	 * @return \Aimeos\MW\DB\Result\Iface Search result object
+	 * @return \Aimeos\Base\DB\Result\Iface Search result object
 	 */
-	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, string $sql ) : \Aimeos\MW\DB\Result\Iface
+	protected function getSearchResults( \Aimeos\Base\DB\Connection\Iface $conn, string $sql ) : \Aimeos\Base\DB\Result\Iface
 	{
 		$time = microtime( true );
 
@@ -579,13 +579,13 @@ abstract class Base
 	 * Returns the cached statement for the given key or creates a new prepared statement.
 	 * If no SQL string is given, the key is used to retrieve the SQL string from the configuration.
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
 	 * @param string $cfgkey Unique key for the SQL
 	 * @param string|null $sql SQL string if it shouldn't be retrieved from the configuration
-	 * @return \Aimeos\MW\DB\Statement\Iface Database statement object
+	 * @return \Aimeos\Base\DB\Statement\Iface Database statement object
 	 */
-	protected function getCachedStatement( \Aimeos\MW\DB\Connection\Iface $conn, string $cfgkey,
-		string $sql = null ) : \Aimeos\MW\DB\Statement\Iface
+	protected function getCachedStatement( \Aimeos\Base\DB\Connection\Iface $conn, string $cfgkey,
+		string $sql = null ) : \Aimeos\Base\DB\Statement\Iface
 	{
 		if( !isset( $this->stmts['stmt'][$cfgkey] )
 			|| !isset( $this->stmts['conn'][$cfgkey] )
@@ -735,11 +735,11 @@ abstract class Base
 	 * @param string $column Name (including alias) of the column
 	 * @param mixed $value Value used in the expression
 	 * @param string $op Operator used in the expression
-	 * @param int $type Type constant from \Aimeos\MW\DB\Statement\Base class
+	 * @param int $type Type constant from \Aimeos\Base\DB\Statement\Base class
 	 * @return string Created expression
 	 */
 	protected function toExpression( string $column, $value, string $op = '==',
-		int $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR ) : string
+		int $type = \Aimeos\Base\DB\Statement\Base::PARAM_STR ) : string
 	{
 		$types = ['marker' => $type];
 		$translations = ['marker' => $column];
@@ -824,7 +824,7 @@ abstract class Base
 	/**
 	 * Returns the search result of the statement combined with the given criteria.
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string $cfgPathSearch Path to SQL statement in configuration for searching
 	 * @param string $cfgPathCount Path to SQL statement in configuration for counting
@@ -832,12 +832,12 @@ abstract class Base
 	 * @param int|null $total Contains the number of all records matching the criteria if not null
 	 * @param int $sitelevel Constant from \Aimeos\MShop\Locale\Manager\Base for defining which site IDs should be used for searching
 	 * @param \Aimeos\MW\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
-	 * @return \Aimeos\MW\DB\Result\Iface SQL result object for accessing the found records
+	 * @return \Aimeos\Base\DB\Result\Iface SQL result object for accessing the found records
 	 * @throws \Aimeos\MShop\Exception if no number of all matching records is available
 	 */
-	protected function searchItemsBase( \Aimeos\MW\DB\Connection\Iface $conn, \Aimeos\MW\Criteria\Iface $search,
+	protected function searchItemsBase( \Aimeos\Base\DB\Connection\Iface $conn, \Aimeos\MW\Criteria\Iface $search,
 		string $cfgPathSearch, string $cfgPathCount, array $required, int &$total = null,
-		int $sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = [] ) : \Aimeos\MW\DB\Result\Iface
+		int $sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = [] ) : \Aimeos\Base\DB\Result\Iface
 	{
 		$joins = [];
 		$conditions = $search->getConditions();
@@ -908,7 +908,7 @@ abstract class Base
 		$search = $this->object()->filter();
 		$search->setConditions( $search->compare( '==', $name, $items ) );
 
-		$types = array( $name => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+		$types = array( $name => \Aimeos\Base\DB\Statement\Base::PARAM_STR );
 		$translations = array( $name => '"' . $name . '"' );
 
 		$cond = $search->getConditionSource( $types, $translations );

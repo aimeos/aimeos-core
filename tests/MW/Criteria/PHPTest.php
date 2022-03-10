@@ -125,7 +125,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConditionSourceInvalidName()
 	{
-		$types = array( 'int_value' => \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$types = array( 'int_value' => \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
 		$this->object->setConditions( $this->object->compare( '==', 'ival', 10 ) );
 		$this->expectException( \Aimeos\MW\Common\Exception::class );

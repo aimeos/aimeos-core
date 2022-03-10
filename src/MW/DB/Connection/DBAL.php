@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MW\DB\Connection;
+namespace Aimeos\Base\DB\Connection;
 
 
 /**
@@ -17,7 +17,7 @@ namespace Aimeos\MW\DB\Connection;
  * @package MW
  * @subpackage DB
  */
-class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connection\Iface
+class DBAL extends \Aimeos\Base\DB\Connection\Base implements \Aimeos\Base\DB\Connection\Iface
 {
 	private $connection;
 	private $txnumber = 0;
@@ -42,9 +42,9 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	/**
 	 * Connects (or reconnects) to the database server
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection instance for method chaining
 	 */
-	public function connect() : \Aimeos\MW\DB\Connection\Iface
+	public function connect() : \Aimeos\Base\DB\Connection\Iface
 	{
 		if( $this->connection && $this->connection->ping() ) {
 			return $this;
@@ -75,22 +75,22 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 * Creates a DBAL database statement
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
-	 * @return \Aimeos\MW\DB\Statement\Iface DBAL statement object
-	 * @throws \Aimeos\MW\DB\Exception if type is invalid or the DBAL object throws an exception
+	 * @return \Aimeos\Base\DB\Statement\Iface DBAL statement object
+	 * @throws \Aimeos\Base\DB\Exception if type is invalid or the DBAL object throws an exception
 	 */
-	public function create( string $sql ) : \Aimeos\MW\DB\Statement\Iface
+	public function create( string $sql ) : \Aimeos\Base\DB\Statement\Iface
 	{
 		try
 		{
 			if( strpos( $sql, '?' ) === false ) {
-				return new \Aimeos\MW\DB\Statement\DBAL\Simple( $this, $sql );
+				return new \Aimeos\Base\DB\Statement\DBAL\Simple( $this, $sql );
 			}
 
-			return new \Aimeos\MW\DB\Statement\DBAL\Prepared( $this, $sql );
+			return new \Aimeos\Base\DB\Statement\DBAL\Prepared( $this, $sql );
 		}
 		catch( \Exception $e )
 		{
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
+			throw new \Aimeos\Base\DB\Exception( $e->getMessage(), $e->getCode() );
 		}
 	}
 
@@ -123,14 +123,14 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 * Transactions can't be nested and a new transaction can only be started
 	 * if the previous transaction was committed or rolled back before.
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function begin() : Iface
 	{
 		if( $this->txnumber === 0 )
 		{
 			if( $this->connection->getWrappedConnection()->beginTransaction() === false ) {
-				throw new \Aimeos\MW\DB\Exception( 'Unable to start new transaction' );
+				throw new \Aimeos\Base\DB\Exception( 'Unable to start new transaction' );
 			}
 		}
 
@@ -142,14 +142,14 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	/**
 	 * Commits the changes done inside of the transaction to the storage.
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function commit() : Iface
 	{
 		if( $this->txnumber === 1 )
 		{
 			if( $this->connection->getWrappedConnection()->commit() === false ) {
-				throw new \Aimeos\MW\DB\Exception( 'Failed to commit transaction' );
+				throw new \Aimeos\Base\DB\Exception( 'Failed to commit transaction' );
 			}
 		}
 
@@ -161,14 +161,14 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	/**
 	 * Discards the changes done inside of the transaction.
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function rollback() : Iface
 	{
 		if( $this->txnumber === 1 )
 		{
 			if( $this->connection->getWrappedConnection()->rollBack() === false ) {
-				throw new \Aimeos\MW\DB\Exception( 'Failed to roll back transaction' );
+				throw new \Aimeos\Base\DB\Exception( 'Failed to roll back transaction' );
 			}
 		}
 

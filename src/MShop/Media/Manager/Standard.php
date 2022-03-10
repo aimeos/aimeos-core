@@ -32,14 +32,14 @@ class Standard
 			'code' => 'media.id',
 			'internalcode' => 'mmed."id"',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'media.siteid' => array(
 			'label' => 'Site ID',
 			'code' => 'media.siteid',
 			'internalcode' => 'mmed."siteid"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.type' => array(
@@ -47,70 +47,70 @@ class Standard
 			'code' => 'media.type',
 			'internalcode' => 'mmed."type"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.label' => array(
 			'label' => 'Label',
 			'code' => 'media.label',
 			'internalcode' => 'mmed."label"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.domain' => array(
 			'label' => 'Domain',
 			'code' => 'media.domain',
 			'internalcode' => 'mmed."domain"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.languageid' => array(
 			'label' => 'Language code',
 			'code' => 'media.languageid',
 			'internalcode' => 'mmed."langid"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.mimetype' => array(
 			'label' => 'Mime type',
 			'code' => 'media.mimetype',
 			'internalcode' => 'mmed."mimetype"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.url' => array(
 			'label' => 'URL',
 			'code' => 'media.url',
 			'internalcode' => 'mmed."link"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.preview' => array(
 			'label' => 'Preview URLs as JSON encoded string',
 			'code' => 'media.preview',
 			'internalcode' => 'mmed."preview"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.filesystem' => array(
 			'label' => 'File sytem name',
 			'code' => 'media.filesystem',
 			'internalcode' => 'mmed."fsname"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'media.status' => array(
 			'label' => 'Status',
 			'code' => 'media.status',
 			'internalcode' => 'mmed."status"',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'media.ctime' => array(
 			'code' => 'media.ctime',
 			'internalcode' => 'mmed."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.mtime' => array(
@@ -118,7 +118,7 @@ class Standard
 			'internalcode' => 'mmed."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media.editor' => array(
@@ -126,7 +126,7 @@ class Standard
 			'internalcode' => 'mmed."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'media:has' => array(
@@ -460,7 +460,7 @@ class Standard
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, $item->getMimeType() );
 			$stmt->bind( $idx++, $item->getUrl() );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getFileSystem() );
 			$stmt->bind( $idx++, $item->getDomain() );
 			$stmt->bind( $idx++, json_encode( $item->getPreviews(), JSON_FORCE_OBJECT ) );
@@ -469,7 +469,7 @@ class Standard
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx++, $date ); // ctime
 			}

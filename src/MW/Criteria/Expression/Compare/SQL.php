@@ -27,12 +27,12 @@ class SQL extends Base
 	/**
 	 * Initializes the object.
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection object
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection object
 	 * @param string $operator Operator used for the expression
 	 * @param string $name Name of variable or column that should be compared.
 	 * @param mixed $value Value that the variable or column should be compared to
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, string $operator, string $name, $value )
+	public function __construct( \Aimeos\Base\DB\Connection\Iface $conn, string $operator, string $name, $value )
 	{
 		if( !isset( self::$operators[$operator] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
@@ -167,15 +167,15 @@ class SQL extends Base
 
 		switch( $type )
 		{
-			case \Aimeos\MW\DB\Statement\Base::PARAM_NULL:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_NULL:
 				$value = 'null'; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_BOOL:
 				$value = (int) (bool) $value; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_INT:
 				$value = (int) (string) $value; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT:
 				$value = (double) (string) $value; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_STR:
 				if( $operator === '~=' ) {
 					$value = '\'%' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->conn->escape( (string) $value ) ) . '%\''; break;
 				}
@@ -193,9 +193,9 @@ class SQL extends Base
 	/**
 	 * Returns the connection object.
 	 *
-	 * return \Aimeos\MW\DB\Connection\Iface Connection object
+	 * return \Aimeos\Base\DB\Connection\Iface Connection object
 	 */
-	public function getConnection() : \Aimeos\MW\DB\Connection\Iface
+	public function getConnection() : \Aimeos\Base\DB\Connection\Iface
 	{
 		return $this->conn;
 	}
@@ -211,13 +211,13 @@ class SQL extends Base
 	protected function getParamType( &$item ) : string
 	{
 		if( is_null( $item ) ) {
-			return \Aimeos\MW\DB\Statement\Base::PARAM_NULL;
+			return \Aimeos\Base\DB\Statement\Base::PARAM_NULL;
 		} elseif( is_float( $item ) ) {
-			return \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT;
+			return \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT;
 		} elseif( is_int( $item ) ) {
-			return \Aimeos\MW\DB\Statement\Base::PARAM_INT;
+			return \Aimeos\Base\DB\Statement\Base::PARAM_INT;
 		}
 
-		return \Aimeos\MW\DB\Statement\Base::PARAM_STR;
+		return \Aimeos\Base\DB\Statement\Base::PARAM_STR;
 	}
 }

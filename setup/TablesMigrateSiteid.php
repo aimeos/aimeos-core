@@ -157,7 +157,7 @@ class TablesMigrateSiteid extends Base
 		$conn = $dbm->acquire( 'db-locale' );
 		$tconn = $dbm->acquire( 'db-locale' );
 
-		$type = \Aimeos\MW\DB\Statement\Base::PARAM_INT;
+		$type = \Aimeos\Base\DB\Statement\Base::PARAM_INT;
 		$roots = $conn->create( 'SELECT id, nleft, nright FROM mshop_locale_site WHERE level = 0' )->execute();
 
 		while( $root = $roots->fetch() )
@@ -185,7 +185,7 @@ class TablesMigrateSiteid extends Base
 	}
 
 
-	protected function map( \Aimeos\MW\DB\Result\Iface $result, array $parent, array &$map, string $site )
+	protected function map( \Aimeos\Base\DB\Result\Iface $result, array $parent, array &$map, string $site )
 	{
 		while( $row = $result->fetch() )
 		{

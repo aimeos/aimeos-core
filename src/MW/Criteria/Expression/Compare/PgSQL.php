@@ -33,15 +33,15 @@ class PgSQL extends SQL
 
 		switch( $type )
 		{
-			case \Aimeos\MW\DB\Statement\Base::PARAM_NULL:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_NULL:
 				$value = 'null'; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_BOOL:
 				$value = ( $value ? "'t'" : "'f'" ); break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_INT:
 				$value = (int) (string) $value; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT:
 				$value = (double) (string) $value; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_STR:
 				if( $operator === '~=' ) {
 					$value = '\'%' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->getConnection()->escape( (string) $value ) ) . '%\''; break;
 				}

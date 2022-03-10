@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\DB\Connection;
+namespace Aimeos\Base\DB\Connection;
 
 
 /**
@@ -18,7 +18,7 @@ namespace Aimeos\MW\DB\Connection;
  * @package MW
  * @subpackage DB
  */
-class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connection\Iface
+class PDO extends \Aimeos\Base\DB\Connection\Base implements \Aimeos\Base\DB\Connection\Iface
 {
 	private $connection;
 	private $txnumber = 0;
@@ -43,7 +43,7 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	/**
 	 * Connects (or reconnects) to the database server
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function connect() : Iface
 	{
@@ -73,22 +73,22 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 * Creates a \PDO database statement.
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
-	 * @return \Aimeos\MW\DB\Statement\Iface PDO statement object
-	 * @throws \Aimeos\MW\DB\Exception if type is invalid or the \PDO object throws an exception
+	 * @return \Aimeos\Base\DB\Statement\Iface PDO statement object
+	 * @throws \Aimeos\Base\DB\Exception if type is invalid or the \PDO object throws an exception
 	 */
-	public function create( string $sql ) : \Aimeos\MW\DB\Statement\Iface
+	public function create( string $sql ) : \Aimeos\Base\DB\Statement\Iface
 	{
 		try
 		{
 			if( strpos( $sql, '?' ) === false ) {
-				return new \Aimeos\MW\DB\Statement\PDO\Simple( $this, $sql );
+				return new \Aimeos\Base\DB\Statement\PDO\Simple( $this, $sql );
 			}
 
-			return new \Aimeos\MW\DB\Statement\PDO\Prepared( $this, $sql );
+			return new \Aimeos\Base\DB\Statement\PDO\Prepared( $this, $sql );
 		}
 		catch( \PDOException $e )
 		{
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
+			throw new \Aimeos\Base\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
 		}
 	}
 
@@ -121,14 +121,14 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 * Transactions can't be nested and a new transaction can only be started
 	 * if the previous transaction was committed or rolled back before.
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function begin() : Iface
 	{
 		if( $this->txnumber === 0 )
 		{
 			if( $this->connection->beginTransaction() === false ) {
-				throw new \Aimeos\MW\DB\Exception( 'Unable to start new transaction' );
+				throw new \Aimeos\Base\DB\Exception( 'Unable to start new transaction' );
 			}
 		}
 
@@ -140,14 +140,14 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	/**
 	 * Commits the changes done inside of the transaction to the storage.
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function commit() : Iface
 	{
 		if( $this->txnumber === 1 )
 		{
 			if( $this->connection->commit() === false ) {
-				throw new \Aimeos\MW\DB\Exception( 'Failed to commit transaction' );
+				throw new \Aimeos\Base\DB\Exception( 'Failed to commit transaction' );
 			}
 		}
 
@@ -159,14 +159,14 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	/**
 	 * Discards the changes done inside of the transaction.
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function rollback() : Iface
 	{
 		if( $this->txnumber === 1 )
 		{
 			if( $this->connection->rollBack() === false ) {
-				throw new \Aimeos\MW\DB\Exception( 'Failed to roll back transaction' );
+				throw new \Aimeos\Base\DB\Exception( 'Failed to roll back transaction' );
 			}
 		}
 

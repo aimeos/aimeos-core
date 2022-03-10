@@ -54,7 +54,7 @@ class MShopAddLocaleData extends Base
 
 		try {
 			$siteItem = $siteManager->insert( $siteManager->create()->setLabel( $code )->setCode( $code ) );
-		} catch( \Aimeos\MW\DB\Exception $e ) {
+		} catch( \Aimeos\Base\DB\Exception $e ) {
 			$siteItem = $siteManager->find( $code );
 		}
 
@@ -69,7 +69,7 @@ class MShopAddLocaleData extends Base
 
 			$localeManager->save( $localeItem, false );
 		}
-		catch( \Aimeos\MW\DB\Exception $e ) {} // already in the database
+		catch( \Aimeos\Base\DB\Exception $e ) {} // already in the database
 	}
 
 
@@ -93,7 +93,7 @@ class MShopAddLocaleData extends Base
 		{
 			try {
 				$item = $manager->insert( $manager->create()->fromArray( $dataset ), $parentId );
-			} catch( \Aimeos\MW\DB\Exception $e ) {
+			} catch( \Aimeos\Base\DB\Exception $e ) {
 				$item = $manager->find( $key );
 			}
 
@@ -164,7 +164,7 @@ class MShopAddLocaleData extends Base
 
 			try {
 				$localeManager->save( $item );
-			} catch( \Aimeos\MW\DB\Exception $e ) { ; } // if locale combination was already available
+			} catch( \Aimeos\Base\DB\Exception $e ) { ; } // if locale combination was already available
 		}
 	}
 }

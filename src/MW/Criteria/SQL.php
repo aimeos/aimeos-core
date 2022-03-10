@@ -30,9 +30,9 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	/**
 	 * Initializes the SQL search object
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection object
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection object
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn )
+	public function __construct( \Aimeos\Base\DB\Connection\Iface $conn )
 	{
 		$this->conn = $conn;
 		$this->conditions = $this->compare( '==', '1', '1' );
@@ -124,7 +124,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 */
 	public function getConditionSource( array $types, array $translations = [], array $plugins = [], array $funcs = [] )
 	{
-		$types['1'] = \Aimeos\MW\DB\Statement\Base::PARAM_INT;
+		$types['1'] = \Aimeos\Base\DB\Statement\Base::PARAM_INT;
 
 		if( $this->conditions && ( $string = $this->conditions->toSource( $types, $translations, $plugins, $funcs ) ) !== '' ) {
 			return $string;
@@ -264,9 +264,9 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	/**
 	 * Returns the connection object.
 	 *
-	 * return \Aimeos\MW\DB\Connection\Iface Connection object
+	 * return \Aimeos\Base\DB\Connection\Iface Connection object
 	 */
-	public function getConnection() : \Aimeos\MW\DB\Connection\Iface
+	public function getConnection() : \Aimeos\Base\DB\Connection\Iface
 	{
 		return $this->conn;
 	}

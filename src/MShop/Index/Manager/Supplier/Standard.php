@@ -27,7 +27,7 @@ class Standard
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_supplier" AS mindsu ON mindsu."prodid" = mpro."id"' ),
 			'label' => 'Product index supplier ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'index.supplier:radius' => array(
@@ -45,7 +45,7 @@ class Standard
 			',
 			'label' => 'Within distance to given coordinates, parameter(<latitude>,<longitude>,<distance in km>)',
 			'type' => 'boolean',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_BOOL,
 			'public' => false,
 		),
 		'index.supplier:position' => array(
@@ -53,7 +53,7 @@ class Standard
 			'internalcode' => ':site AND mindsu."supid" IN ( $2 ) AND mindsu."listtype" = $1 AND mindsu."pos"',
 			'label' => 'Product position in supplier list, parameter(<list type code>,<supplier IDs>)',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'sort:index.supplier:position' => array(
@@ -61,7 +61,7 @@ class Standard
 			'internalcode' => 'mindsu."pos"',
 			'label' => 'Sort product position in supplier list, parameter(<list type code>,<supplier IDs>)',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		)
 	);
@@ -493,18 +493,18 @@ class Standard
 
 					foreach( $pairs as $pair )
 					{
-						$stmt->bind( 1, $listItem->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-						$stmt->bind( 2, $listItem->getRefId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+						$stmt->bind( 1, $listItem->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+						$stmt->bind( 2, $listItem->getRefId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 						$stmt->bind( 3, $listItem->getType() );
-						$stmt->bind( 4, $listItem->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-						$stmt->bind( 5, $pair['lat'] ?? null, \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
-						$stmt->bind( 6, $pair['lon'] ?? null, \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+						$stmt->bind( 4, $listItem->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+						$stmt->bind( 5, $pair['lat'] ?? null, \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
+						$stmt->bind( 6, $pair['lon'] ?? null, \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
 						$stmt->bind( 7, $date ); //mtime
 						$stmt->bind( 8, $siteid );
 
 						try {
 							$stmt->execute()->finish();
-						} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
+						} catch( \Aimeos\Base\DB\Exception $e ) { ; } // Ignore duplicates
 					}
 				}
 			}

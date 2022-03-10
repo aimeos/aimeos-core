@@ -21,7 +21,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 	{
 		self::$dbm = \TestHelper::getDBManager();
 
-		if( !( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
+		if( !( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL ) ) {
 			return;
 		}
 
@@ -58,7 +58,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	public static function tearDownAfterClass() : void
 	{
-		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
+		if( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL )
 		{
 			$conn = self::$dbm->acquire();
 
@@ -72,7 +72,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		if( !( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
+		if( !( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL ) ) {
 			$this->markTestSkipped( 'No DBAL database manager configured' );
 		}
 
@@ -94,10 +94,10 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$this->config = [];
 
 		$this->config['search'] = array(
-			'cache.id' => array( 'label' => 'Cache ID', 'code' => 'cache.id', 'internalcode' => 'id', 'type' => 'string', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
-			'cache.value' => array( 'label' => 'Cached value', 'code' => 'cache.value', 'internalcode' => 'value', 'type' => 'string', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
-			'cache.expire' => array( 'label' => 'Cache expiration date', 'code' => 'cache.expire', 'internalcode' => 'expire', 'type' => 'datetime', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
-			'cache.tag.name' => array( 'label' => 'Cache tag name', 'code' => 'cache.tag.name', 'internalcode' => 'tname', 'type' => 'string', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
+			'cache.id' => array( 'label' => 'Cache ID', 'code' => 'cache.id', 'internalcode' => 'id', 'type' => 'string', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR ),
+			'cache.value' => array( 'label' => 'Cached value', 'code' => 'cache.value', 'internalcode' => 'value', 'type' => 'string', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR ),
+			'cache.expire' => array( 'label' => 'Cache expiration date', 'code' => 'cache.expire', 'internalcode' => 'expire', 'type' => 'datetime', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR ),
+			'cache.tag.name' => array( 'label' => 'Cache tag name', 'code' => 'cache.tag.name', 'internalcode' => 'tname', 'type' => 'string', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR ),
 		);
 
 		$this->config['sql'] = array(
@@ -131,7 +131,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	public function tearDown() : void
 	{
-		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
+		if( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL )
 		{
 			$conn = self::$dbm->acquire();
 

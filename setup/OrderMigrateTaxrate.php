@@ -38,7 +38,7 @@ class OrderMigrateTaxrate extends Base
 			while( ( $row = $result->fetch() ) !== null )
 			{
 				$stmt->bind( 1, json_encode( ['' => $row['taxrate']], JSON_FORCE_OBJECT ) );
-				$stmt->bind( 2, $row['id'], \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 2, $row['id'], \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
 				$stmt->execute()->finish();
 			}
@@ -62,7 +62,7 @@ class OrderMigrateTaxrate extends Base
 				while( ( $row = $result->fetch() ) !== null )
 				{
 					$stmt->bind( 1, json_encode( ['' => $row['taxrate']], JSON_FORCE_OBJECT ) );
-					$stmt->bind( 2, $row['id'], \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+					$stmt->bind( 2, $row['id'], \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
 					$stmt->execute()->finish();
 				}

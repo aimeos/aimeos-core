@@ -56,9 +56,9 @@ class DB
 	 *  config['dbname'] = 'db-cache'
 	 *
 	 * @param array $config Associative list with SQL statements, search attribute definitions and database name
-	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database manager
+	 * @param \Aimeos\Base\DB\Manager\Iface $dbm Database manager
 	 */
-	public function __construct( array $config, \Aimeos\MW\DB\Manager\Iface $dbm )
+	public function __construct( array $config, \Aimeos\Base\DB\Manager\Iface $dbm )
 	{
 		if( !isset( $config['search'] ) ) {
 			throw new \Aimeos\MW\Cache\Exception( 'Search config is missing' );

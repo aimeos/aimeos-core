@@ -14,7 +14,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 {
 	public function testFactory()
 	{
-		$dbm = \Aimeos\MW\DB\Factory::create( \TestHelper::getConfig() );
+		$dbm = \Aimeos\Base\DB\Factory::create( \TestHelper::getConfig() );
 
 		$this->expectException( \Aimeos\MW\Tree\Exception::class );
 		\Aimeos\MW\Tree\Factory::create( 'DBNestedSet', [], $dbm );

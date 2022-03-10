@@ -1,6 +1,6 @@
 <?php
 
-namespace Aimeos\MW\DB;
+namespace Aimeos\Base\DB;
 
 
 class PDOTest extends \PHPUnit\Framework\TestCase
@@ -13,7 +13,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->config = \TestHelper::getConfig();
-		$this->object = new \Aimeos\MW\DB\Manager\PDO( $this->config );
+		$this->object = new \Aimeos\Base\DB\Manager\PDO( $this->config );
 
 		$sql = 'CREATE TABLE "mw_unit_test" ( "id" INTEGER NOT NULL, "name" VARCHAR(20) NOT NULL )';
 
@@ -194,7 +194,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->conn->create( $sqlinsert )->execute()->finish();
 
-		$this->assertInstanceOf( \Aimeos\MW\DB\Result\Iface::class, $result );
+		$this->assertInstanceOf( \Aimeos\Base\DB\Result\Iface::class, $result );
 	}
 
 
@@ -206,7 +206,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$stmt->bind( 1, 'test' );
 		$result = $stmt->execute()->finish();
 
-		$this->assertInstanceOf( \Aimeos\MW\DB\Result\Iface::class, $result );
+		$this->assertInstanceOf( \Aimeos\Base\DB\Result\Iface::class, $result );
 	}
 
 
@@ -215,11 +215,11 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$sqlinsert2 = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
 		$stmt2 = $this->conn->create( $sqlinsert2 );
-		$stmt2->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$stmt2->bind( 1, 1, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt2->bind( 2, 0.12 );
 		$result = $stmt2->execute()->finish();
 
-		$this->assertInstanceOf( \Aimeos\MW\DB\Result\Iface::class, $result );
+		$this->assertInstanceOf( \Aimeos\Base\DB\Result\Iface::class, $result );
 	}
 
 
@@ -228,10 +228,10 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$sqlinsert3 = 'INSERT INTO "mw_unit_test" ("name", "id") VALUES (\'?te?st?\', ?)';
 
 		$stmt2 = $this->conn->create( $sqlinsert3 );
-		$stmt2->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$stmt2->bind( 1, 1, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$result = $stmt2->execute()->finish();
 
-		$this->assertInstanceOf( \Aimeos\MW\DB\Result\Iface::class, $result );
+		$this->assertInstanceOf( \Aimeos\Base\DB\Result\Iface::class, $result );
 	}
 
 
@@ -240,10 +240,10 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$sqlinsert2 = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
 		$stmt2 = $this->conn->create( $sqlinsert2 );
-		$stmt2->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$stmt2->bind( 1, 1, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt2->bind( 2, 0.15, 123 );
 
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$stmt2->execute();
 	}
 
@@ -254,7 +254,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 
 		$stmt = $this->conn->create( $sqlinsert );
 
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$stmt->execute();
 	}
 
@@ -265,7 +265,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$sqlselect = 'SELECT * FROM "mw_unit_test"';
 
 		$stmt = $this->conn->create( $sqlinsert );
-		$stmt->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 1, 1, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, 'test' );
 		$stmt->execute()->finish();
 
@@ -284,7 +284,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$sqlselect = 'SELECT * FROM "mw_unit_test"';
 
 		$stmt = $this->conn->create( $sqlinsert );
-		$stmt->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 1, 1, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, 'test' );
 		$stmt->execute()->finish();
 
@@ -303,16 +303,16 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$sqlselect = 'SELECT * FROM "mw_unit_test"';
 
 		$stmt = $this->conn->create( $sqlinsert );
-		$stmt->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 1, 1, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, 'test' );
 		$stmt->execute()->finish();
 
-		$stmt->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( 2, 1, \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );
+		$stmt->bind( 1, 1, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, 1, \Aimeos\Base\DB\Statement\Base::PARAM_BOOL );
 		$stmt->execute()->finish();
 
-		$stmt->bind( 1, 123, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( 2, 0.1, \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+		$stmt->bind( 1, 123, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, 0.1, \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
 		$stmt->execute()->finish();
 
 
@@ -333,14 +333,14 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 
 	public function testWrongFieldType()
 	{
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
 		$stmt = $this->conn->create( $sqlinsert );
-		$stmt->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 1, 1, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, 'test', 123 );
 
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$stmt->execute();
 	}
 
@@ -355,36 +355,36 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 	{
 		$sql = 'SELECT * FROM "mw_non_existing"';
 
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$this->conn->create( $sql )->execute()->finish();
 	}
 
 
 	public function testSqlError()
 	{
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$this->conn->create( 'SELECT *' )->execute()->finish();
 	}
 
 
 	public function testPDOException()
 	{
-		$mock = $this->getMockBuilder( \Aimeos\MW\DB\Connection\Iface::class )->getMock();
+		$mock = $this->getMockBuilder( \Aimeos\Base\DB\Connection\Iface::class )->getMock();
 
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$this->object->release( $mock );
 	}
 
 
 	public function testDBFactory()
 	{
-		$this->assertInstanceOf( \Aimeos\MW\DB\Manager\Iface::class, $this->object );
+		$this->assertInstanceOf( \Aimeos\Base\DB\Manager\Iface::class, $this->object );
 	}
 
 
 	public function testFactoryFail()
 	{
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
-		\Aimeos\MW\DB\Factory::create( \TestHelper::getConfig(), 'notDefined' );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
+		\Aimeos\Base\DB\Factory::create( \TestHelper::getConfig(), 'notDefined' );
 	}
 }

@@ -29,7 +29,7 @@ class Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")' ),
 			'label' => 'Currency ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.currency.label' => array(
@@ -37,28 +37,28 @@ class Standard
 			'internalcode' => 'mloccu."label"',
 			'label' => 'Currency label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.currency.code' => array(
 			'code' => 'locale.currency.code',
 			'internalcode' => 'mloccu."id"',
 			'label' => 'Currency code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.currency.status' => array(
 			'code' => 'locale.currency.status',
 			'internalcode' => 'mloccu."status"',
 			'label' => 'Currency status',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'locale.currency.ctime' => array(
 			'code' => 'locale.currency.ctime',
 			'internalcode' => 'mloccu."ctime"',
 			'label' => 'Currency create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.currency.mtime' => array(
@@ -66,7 +66,7 @@ class Standard
 			'internalcode' => 'mloccu."mtime"',
 			'label' => 'Currency modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'locale.currency.editor' => array(
@@ -74,7 +74,7 @@ class Standard
 			'internalcode' => 'mloccu."editor"',
 			'label' => 'Currency editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -224,7 +224,7 @@ class Standard
 			}
 
 			$stmt->bind( $idx++, $item->getLabel() );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->editor() );
 			// bind ID but code and id are identical after saveing the stuff
@@ -643,11 +643,11 @@ class Standard
 	/**
 	 * Returns the search results for the given SQL statement.
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
 	 * @param string $sql SQL statement
-	 * @return \Aimeos\MW\DB\Result\Iface Search result object
+	 * @return \Aimeos\Base\DB\Result\Iface Search result object
 	 */
-	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, string $sql ) : \Aimeos\MW\DB\Result\Iface
+	protected function getSearchResults( \Aimeos\Base\DB\Connection\Iface $conn, string $sql ) : \Aimeos\Base\DB\Result\Iface
 	{
 		$time = microtime( true );
 
@@ -679,13 +679,13 @@ class Standard
 	/**
 	 * Returns the total number of items found for the conditions
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
 	 * @param string[] $find List of markers that should be replaced in the SQL statement
 	 * @param string[] $replace List of replacements for the markers in the SQL statement
 	 * @throws \Aimeos\MShop\Locale\Exception If no total value was found
 	 * @return int Total number of found items
 	 */
-	protected function getTotal( \Aimeos\MW\DB\Connection\Iface $conn, array $find, array $replace ) : int
+	protected function getTotal( \Aimeos\Base\DB\Connection\Iface $conn, array $find, array $replace ) : int
 	{
 		/** mshop/locale/manager/currency/count/mysql
 		 * Counts the number of records matched by the given criteria in the database

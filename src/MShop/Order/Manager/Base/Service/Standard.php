@@ -29,7 +29,7 @@ class Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base_service" AS mordbase ON ( mordba."id" = mordbase."baseid" )' ),
 			'label' => 'Service ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.service.siteid' => array(
@@ -37,7 +37,7 @@ class Standard
 			'internalcode' => 'mordbase."siteid"',
 			'label' => 'Service site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.service.baseid' => array(
@@ -45,7 +45,7 @@ class Standard
 			'internalcode' => 'mordbase."baseid"',
 			'label' => 'Order ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.service.serviceid' => array(
@@ -53,7 +53,7 @@ class Standard
 			'internalcode' => 'mordbase."servid"',
 			'label' => 'Service original service ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.service.name' => array(
@@ -61,77 +61,77 @@ class Standard
 			'internalcode' => 'mordbase."name"',
 			'label' => 'Service name',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.code' => array(
 			'code' => 'order.base.service.code',
 			'internalcode' => 'mordbase."code"',
 			'label' => 'Service code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.type' => array(
 			'code' => 'order.base.service.type',
 			'internalcode' => 'mordbase."type"',
 			'label' => 'Service type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.currencyid' => array(
 			'code' => 'order.base.service.currencyid',
 			'internalcode' => 'mordbase."currencyid"',
 			'label' => 'Service currencyid code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.price' => array(
 			'code' => 'order.base.service.price',
 			'internalcode' => 'mordbase."price"',
 			'label' => 'Service price',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.costs' => array(
 			'code' => 'order.base.service.costs',
 			'internalcode' => 'mordbase."costs"',
 			'label' => 'Service shipping',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.rebate' => array(
 			'code' => 'order.base.service.rebate',
 			'internalcode' => 'mordbase."rebate"',
 			'label' => 'Service rebate',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.taxrates' => array(
 			'code' => 'order.base.service.taxrates',
 			'internalcode' => 'mordbase."taxrate"',
 			'label' => 'Service taxrates',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.taxvalue' => array(
 			'code' => 'order.base.service.taxvalue',
 			'internalcode' => 'mordbase."tax"',
 			'label' => 'Service tax value',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.taxflag' => array(
 			'code' => 'order.base.service.taxflag',
 			'internalcode' => 'mordbase."taxflag"',
 			'label' => 'Service tax flag (0=net, 1=gross)',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.service.mediaurl' => array(
 			'code' => 'order.base.service.mediaurl',
 			'internalcode' => 'mordbase."mediaurl"',
 			'label' => 'Service media url',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.service.position' => array(
@@ -139,7 +139,7 @@ class Standard
 			'internalcode' => 'mordbase."pos"',
 			'label' => 'Service position',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.service.ctime' => array(
@@ -147,7 +147,7 @@ class Standard
 			'internalcode' => 'mordbase."ctime"',
 			'label' => 'Service create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.service.mtime' => array(
@@ -155,7 +155,7 @@ class Standard
 			'internalcode' => 'mordbase."mtime"',
 			'label' => 'Service modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.service.editor' => array(
@@ -163,7 +163,7 @@ class Standard
 			'internalcode' => 'mordbase."editor"',
 			'label' => 'Service editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -674,7 +674,7 @@ class Standard
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getBaseId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getServiceId() );
 			$stmt->bind( $idx++, $item->getType() );
 			$stmt->bind( $idx++, $item->getCode() );
@@ -686,14 +686,14 @@ class Standard
 			$stmt->bind( $idx++, $price->getRebate() );
 			$stmt->bind( $idx++, $price->getTaxValue() );
 			$stmt->bind( $idx++, json_encode( $price->getTaxRates(), JSON_FORCE_OBJECT ) );
-			$stmt->bind( $idx++, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, (int) $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $price->getTaxFlag(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, (int) $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx++, $date ); // ctime
 			}

@@ -38,7 +38,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 	{
 		$types = array(
 			'test' => 'array',
-			'test()' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'test()' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		);
 		$translations = array(
 			'test()' => 'testfunc($1,$2)',
@@ -72,7 +72,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 	{
 		$types = array(
 			'test' => 'array',
-			'test()' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'test()' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		);
 
 		$translations = array(

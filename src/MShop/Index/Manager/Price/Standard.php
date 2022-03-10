@@ -29,7 +29,7 @@ class Standard
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_price" AS mindpr ON mindpr."prodid" = mpro."id"' ),
 			'label' => 'Product index price ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'index.price:value' => array(
@@ -37,7 +37,7 @@ class Standard
 			'internalcode' => ':site AND mindpr."currencyid" = $1 AND mindpr."value"',
 			'label' => 'Product price value, parameter(<currency ID>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'agg:index.price:value' => array(
@@ -45,7 +45,7 @@ class Standard
 			'internalcode' => 'mindpr."value"',
 			'label' => 'Aggregate product price value, parameter(<currency ID>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:index.price:value' => array(
@@ -53,7 +53,7 @@ class Standard
 			'internalcode' => 'mindpr."value"',
 			'label' => 'Sort product price value, parameter(<currency ID>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -659,10 +659,10 @@ class Standard
 	/**
 	 * Saves the text items referenced indirectly by products
 	 *
-	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
+	 * @param \Aimeos\Base\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item containing associated price items
 	 */
-	protected function savePrices( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListsRef\Iface $item )
+	protected function savePrices( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListsRef\Iface $item )
 	{
 		$prices = [];
 		$date = date( 'Y-m-d H:i:s' );
@@ -698,7 +698,7 @@ class Standard
 		{
 			ksort( $list );
 
-			$stmt->bind( 1, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $item->getId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $currencyId );
 			$stmt->bind( 3, reset( $list ) );
 			$stmt->bind( 4, $date ); // mtime
@@ -706,7 +706,7 @@ class Standard
 
 			try {
 				$stmt->execute()->finish();
-			} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
+			} catch( \Aimeos\Base\DB\Exception $e ) { ; } // Ignore duplicates
 		}
 	}
 }

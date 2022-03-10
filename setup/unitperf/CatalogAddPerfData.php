@@ -122,7 +122,7 @@ class CatalogAddPerfData extends Base
 		{
 			try {
 				return $catalogManager->insert( $item, $parentId );
-			} catch( \Aimeos\MW\DB\Exception $e ) {
+			} catch( \Aimeos\Base\DB\Exception $e ) {
 				if( $e->getCode() !== 40001 ) { throw $e; } // transaction deadlock
 			}
 		}

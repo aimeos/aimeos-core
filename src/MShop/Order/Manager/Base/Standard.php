@@ -28,7 +28,7 @@ class Standard extends Base
 			'internaldeps' => array( 'LEFT JOIN "mshop_order_base" AS mordba ON ( mord."baseid" = mordba."id" )' ),
 			'label' => 'Order ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'order.base.siteid' => array(
@@ -36,7 +36,7 @@ class Standard extends Base
 			'internalcode' => 'mordba."siteid"',
 			'label' => 'Order site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.sitecode' => array(
@@ -44,7 +44,7 @@ class Standard extends Base
 			'internalcode' => 'mordba."sitecode"',
 			'label' => 'Order site code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.customerid' => array(
@@ -52,77 +52,77 @@ class Standard extends Base
 			'internalcode' => 'mordba."customerid"',
 			'label' => 'Order customer ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.customerref' => array(
 			'code' => 'order.base.customerref',
 			'internalcode' => 'mordba."customerref"',
 			'label' => 'Order customer reference',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.languageid' => array(
 			'code' => 'order.base.languageid',
 			'internalcode' => 'mordba."langid"',
 			'label' => 'Order language code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.currencyid' => array(
 			'code' => 'order.base.currencyid',
 			'internalcode' => 'mordba."currencyid"',
 			'label' => 'Order currencyid code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.price' => array(
 			'code' => 'order.base.price',
 			'internalcode' => 'mordba."price"',
 			'label' => 'Order price amount',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.costs' => array(
 			'code' => 'order.base.costs',
 			'internalcode' => 'mordba."costs"',
 			'label' => 'Order shipping amount',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.rebate' => array(
 			'code' => 'order.base.rebate',
 			'internalcode' => 'mordba."rebate"',
 			'label' => 'Order rebate amount',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.taxvalue' => array(
 			'code' => 'order.base.taxvalue',
 			'internalcode' => 'mordba."tax"',
 			'label' => 'Order tax amount',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.taxflag' => array(
 			'code' => 'order.base.taxflag',
 			'internalcode' => 'mordba."taxflag"',
 			'label' => 'Order tax flag (0=net, 1=gross)',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.comment' => array(
 			'code' => 'order.base.comment',
 			'internalcode' => 'mordba."comment"',
 			'label' => 'Order comment',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.ctime' => array(
 			'code' => 'order.base.ctime',
 			'internalcode' => 'mordba."ctime"',
 			'label' => 'Order create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.mtime' => array(
@@ -130,7 +130,7 @@ class Standard extends Base
 			'internalcode' => 'mordba."mtime"',
 			'label' => 'Order modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'order.base.editor' => array(
@@ -138,7 +138,7 @@ class Standard extends Base
 			'internalcode' => 'mordba."editor"',
 			'label' => 'Order editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -677,7 +677,7 @@ class Standard extends Base
 			$stmt->bind( $idx++, $priceItem->getCosts() );
 			$stmt->bind( $idx++, $priceItem->getRebate() );
 			$stmt->bind( $idx++, $priceItem->getTaxValue() );
-			$stmt->bind( $idx++, $priceItem->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $priceItem->getTaxFlag(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getCustomerReference() );
 			$stmt->bind( $idx++, $item->getComment() );
 			$stmt->bind( $idx++, $date ); // mtime
@@ -685,7 +685,7 @@ class Standard extends Base
 			$stmt->bind( $idx++, $localeItem->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx++, $date ); // ctime
 			}

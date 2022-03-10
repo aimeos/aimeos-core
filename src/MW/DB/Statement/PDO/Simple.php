@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\DB\Statement\PDO;
+namespace Aimeos\Base\DB\Statement\PDO;
 
 
 /**
@@ -18,7 +18,7 @@ namespace Aimeos\MW\DB\Statement\PDO;
  * @package MW
  * @subpackage DB
  */
-class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Statement\Iface
+class Simple extends \Aimeos\Base\DB\Statement\Base implements \Aimeos\Base\DB\Statement\Iface
 {
 	private $sql;
 
@@ -26,10 +26,10 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	/**
 	 * Initializes the statement object
 	 *
-	 * @param \Aimeos\MW\DB\Connection\PDO $conn Database connection object
+	 * @param \Aimeos\Base\DB\Connection\PDO $conn Database connection object
 	 * @param string $sql SQL statement
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\PDO $conn, string $sql )
+	public function __construct( \Aimeos\Base\DB\Connection\PDO $conn, string $sql )
 	{
 		parent::__construct( $conn );
 		$this->sql = $sql;
@@ -52,31 +52,31 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	 *
 	 * @param int $position Position index of the placeholder
 	 * @param mixed $value Value which should be bound to the placeholder
-	 * @param int $type Type of given value defined in \Aimeos\MW\DB\Statement\Base as constant
-	 * @return \Aimeos\MW\DB\Statement\Iface Statement instance for method chaining
-	 * @throws \Aimeos\MW\DB\Exception If the parameter type is invalid
+	 * @param int $type Type of given value defined in \Aimeos\Base\DB\Statement\Base as constant
+	 * @return \Aimeos\Base\DB\Statement\Iface Statement instance for method chaining
+	 * @throws \Aimeos\Base\DB\Exception If the parameter type is invalid
 	 */
-	public function bind( int $position, $value, int $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR ) : \Aimeos\MW\DB\Statement\Iface
+	public function bind( int $position, $value, int $type = \Aimeos\Base\DB\Statement\Base::PARAM_STR ) : \Aimeos\Base\DB\Statement\Iface
 	{
-		throw new \Aimeos\MW\DB\Exception( 'Binding parameters is not available for simple statements: ' . $this->sql );
+		throw new \Aimeos\Base\DB\Exception( 'Binding parameters is not available for simple statements: ' . $this->sql );
 	}
 
 
 	/**
 	 * Executes the statement.
 	 *
-	 * @return \Aimeos\MW\DB\Result\Iface Result object
-	 * @throws \Aimeos\MW\DB\Exception If an error occured in the unterlying driver or if the number of binds doesn't match
+	 * @return \Aimeos\Base\DB\Result\Iface Result object
+	 * @throws \Aimeos\Base\DB\Exception If an error occured in the unterlying driver or if the number of binds doesn't match
 	 */
-	public function execute() : \Aimeos\MW\DB\Result\Iface
+	public function execute() : \Aimeos\Base\DB\Result\Iface
 	{
 		try {
 			$result = $this->exec();
 		} catch( \PDOException $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage() . ': ' . $this->sql, $e->getCode() );
+			throw new \Aimeos\Base\DB\Exception( $e->getMessage() . ': ' . $this->sql, $e->getCode() );
 		}
 
-		return new \Aimeos\MW\DB\Result\PDO( $result );
+		return new \Aimeos\Base\DB\Result\PDO( $result );
 	}
 
 

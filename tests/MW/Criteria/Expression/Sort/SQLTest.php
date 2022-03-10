@@ -59,8 +59,8 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	public function testToString()
 	{
 		$types = array(
-			'test' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'test()' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'test' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+			'test()' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		);
 
 		$translations = array(

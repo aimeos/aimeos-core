@@ -27,7 +27,7 @@ class Standard extends Base
 			'internalcode' => 'mcat."id"',
 			'label' => 'ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'catalog.siteid' => array(
@@ -35,7 +35,7 @@ class Standard extends Base
 			'internalcode' => 'mcat."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'parentid' => array(
@@ -43,7 +43,7 @@ class Standard extends Base
 			'internalcode' => 'mcat."parentid"',
 			'label' => 'Parent ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'level' => array(
@@ -51,7 +51,7 @@ class Standard extends Base
 			'internalcode' => 'mcat."level"',
 			'label' => 'Tree level',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'left' => array(
@@ -59,7 +59,7 @@ class Standard extends Base
 			'internalcode' => 'mcat."nleft"',
 			'label' => 'Left value',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'right' => array(
@@ -67,7 +67,7 @@ class Standard extends Base
 			'internalcode' => 'mcat."nright"',
 			'label' => 'Right value',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'label' => array(
@@ -75,42 +75,42 @@ class Standard extends Base
 			'internalcode' => 'mcat."label"',
 			'label' => 'Label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'code' => array(
 			'code' => 'catalog.code',
 			'internalcode' => 'mcat."code"',
 			'label' => 'Code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'status' => array(
 			'code' => 'catalog.status',
 			'internalcode' => 'mcat."status"',
 			'label' => 'Status',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'catalog.url' => array(
 			'code' => 'catalog.url',
 			'internalcode' => 'mcat."url"',
 			'label' => 'URL segment',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'catalog.target' => array(
 			'code' => 'catalog.target',
 			'internalcode' => 'mcat."target"',
 			'label' => 'URL target',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'catalog.config' => array(
 			'code' => 'catalog.config',
 			'internalcode' => 'mcat."config"',
 			'label' => 'Config',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'catalog.ctime' => array(
@@ -118,7 +118,7 @@ class Standard extends Base
 			'code' => 'catalog.ctime',
 			'internalcode' => 'mcat."ctime"',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'catalog.mtime' => array(
@@ -126,7 +126,7 @@ class Standard extends Base
 			'code' => 'catalog.mtime',
 			'internalcode' => 'mcat."mtime"',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'catalog.editor' => array(
@@ -134,7 +134,7 @@ class Standard extends Base
 			'internalcode' => 'mcat."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'catalog:has' => array(
@@ -237,15 +237,15 @@ class Standard extends Base
 			$path = 'mshop/catalog/manager/cleanup';
 			$sql = $this->getSqlConfig( $path );
 
-			$types = array( 'siteid' => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$types = array( 'siteid' => \Aimeos\Base\DB\Statement\Base::PARAM_STR );
 			$translations = array( 'siteid' => '"siteid"' );
 
 			$search->setConditions( $search->compare( '==', 'siteid', $siteids ) );
 			$sql = str_replace( ':siteid', $search->getConditionSource( $types, $translations ), $sql );
 
 			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, 0, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, 0x7FFFFFFF, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, 0, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$dbm->release( $conn, $dbname );
@@ -1065,13 +1065,13 @@ class Standard extends Base
 			if( $case !== true )
 			{
 				$stmt->bind( $idx++, $siteid );
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			}
 			else
 			{
 				$stmt->bind( $idx++, $date ); // ctime
 				$stmt->bind( $idx++, $siteid );
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			}
 
 			$stmt->execute()->finish();

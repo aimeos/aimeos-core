@@ -5,7 +5,7 @@
  * @copyright Aimeos (aimeos.org), 2016-2022
  */
 
-namespace Aimeos\MW\DB\Connection;
+namespace Aimeos\Base\DB\Connection;
 
 
 class NoneTest extends \PHPUnit\Framework\TestCase
@@ -15,7 +15,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->object = new \Aimeos\MW\DB\Connection\None();
+		$this->object = new \Aimeos\Base\DB\Connection\None();
 	}
 
 
@@ -27,42 +27,42 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testConnect()
 	{
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$this->object->connect();
 	}
 
 
 	public function testCreate()
 	{
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$this->object->create( 'SELECT' );
 	}
 
 
 	public function testGetRawObject()
 	{
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$this->object->getRawObject();
 	}
 
 
 	public function testBegin()
 	{
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$this->object->begin();
 	}
 
 
 	public function testCommit()
 	{
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$this->object->commit();
 	}
 
 
 	public function testRollback()
 	{
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$this->object->rollback();
 	}
 }

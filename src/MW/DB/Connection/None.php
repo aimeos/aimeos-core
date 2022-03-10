@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\DB\Connection;
+namespace Aimeos\Base\DB\Connection;
 
 
 /**
@@ -19,17 +19,17 @@ namespace Aimeos\MW\DB\Connection;
  * @subpackage DB
  */
 class None
-	extends \Aimeos\MW\DB\Connection\Base
-	implements \Aimeos\MW\DB\Connection\Iface
+	extends \Aimeos\Base\DB\Connection\Base
+	implements \Aimeos\Base\DB\Connection\Iface
 {
 	/**
 	 * Connects (or reconnects) to the database server
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection instance for method chaining
 	 */
 	public function connect() : Iface
 	{
-		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
+		throw new \Aimeos\Base\DB\Exception( 'This method is not implemented' );
 	}
 
 
@@ -39,11 +39,11 @@ class None
 	 * Throws an exception because there is no implementation available.
 	 *
 	 * @param string $sql SQL statement, maybe with place holders
-	 * @throws \Aimeos\MW\DB\Exception
+	 * @throws \Aimeos\Base\DB\Exception
 	 */
-	public function create( string $sql ) : \Aimeos\MW\DB\Statement\Iface
+	public function create( string $sql ) : \Aimeos\Base\DB\Statement\Iface
 	{
-		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
+		throw new \Aimeos\Base\DB\Exception( 'This method is not implemented' );
 	}
 
 
@@ -52,11 +52,11 @@ class None
 	 *
 	 * Throws an exception because there is no implementation available.
 	 *
-	 * @throws \Aimeos\MW\DB\Exception
+	 * @throws \Aimeos\Base\DB\Exception
 	 */
 	public function getRawObject()
 	{
-		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
+		throw new \Aimeos\Base\DB\Exception( 'This method is not implemented' );
 	}
 
 
@@ -65,11 +65,11 @@ class None
 	 *
 	 * Throws an exception because there is no implementation available.
 	 *
-	 * @throws \Aimeos\MW\DB\Exception
+	 * @throws \Aimeos\Base\DB\Exception
 	 */
 	public function begin() : Iface
 	{
-		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
+		throw new \Aimeos\Base\DB\Exception( 'This method is not implemented' );
 	}
 
 
@@ -78,11 +78,11 @@ class None
 	 *
 	 * Throws an exception because there is no implementation available.
 	 *
-	 * @throws \Aimeos\MW\DB\Exception
+	 * @throws \Aimeos\Base\DB\Exception
 	 */
 	public function commit() : Iface
 	{
-		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
+		throw new \Aimeos\Base\DB\Exception( 'This method is not implemented' );
 	}
 
 
@@ -91,10 +91,10 @@ class None
 	 *
 	 * Throws an exception because there is no implementation available.
 	 *
-	 * @throws \Aimeos\MW\DB\Exception
+	 * @throws \Aimeos\Base\DB\Exception
 	 */
 	public function rollback() : Iface
 	{
-		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
+		throw new \Aimeos\Base\DB\Exception( 'This method is not implemented' );
 	}
 }

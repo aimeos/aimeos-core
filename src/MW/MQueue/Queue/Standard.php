@@ -29,12 +29,12 @@ class Standard implements Iface
 	/**
 	 * Initializes the queue object
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection
 	 * @param string $queue Message queue name
 	 * @param string[] $sql Associative list of SQL statements as key/value pairs for insert/reserve/get/delete
 	 * @param int $rtime Time before the job is released again in seconds
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, string $queue, array $sql, int $rtime )
+	public function __construct( \Aimeos\Base\DB\Connection\Iface $conn, string $queue, array $sql, int $rtime )
 	{
 		$this->cname = md5( microtime( true ) . getmypid() );
 		$this->conn = $conn;
@@ -84,7 +84,7 @@ class Standard implements Iface
 		{
 			$stmt = $this->conn->create( $this->sql['delete'] );
 
-			$stmt->bind( 1, $msg->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $msg->getId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $this->queue );
 
 			$stmt->execute()->finish();

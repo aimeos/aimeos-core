@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MW\DB\Statement\DBAL;
+namespace Aimeos\Base\DB\Statement\DBAL;
 
 
 /**
@@ -17,7 +17,7 @@ namespace Aimeos\MW\DB\Statement\DBAL;
  * @package MW
  * @subpackage DB
  */
-class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Statement\Iface
+class Prepared extends \Aimeos\Base\DB\Statement\Base implements \Aimeos\Base\DB\Statement\Iface
 {
 	private $binds = [];
 	private $sql;
@@ -26,10 +26,10 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 	/**
 	 * Initializes the statement object
 	 *
-	 * @param \Aimeos\MW\DB\Connection\DBAL $conn Database connection object
+	 * @param \Aimeos\Base\DB\Connection\DBAL $conn Database connection object
 	 * @param string $sql SQL statement
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\DBAL $conn, string $sql )
+	public function __construct( \Aimeos\Base\DB\Connection\DBAL $conn, string $sql )
 	{
 		parent::__construct( $conn );
 		$this->sql = $sql;
@@ -52,11 +52,11 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 	 *
 	 * @param int $position Position index of the placeholder
 	 * @param mixed $value Value which should be bound to the placeholder
-	 * @param int $type Type of given value defined in \Aimeos\MW\DB\Statement\Base as constant
-	 * @return \Aimeos\MW\DB\Statement\Iface Statement instance for method chaining
-	 * @throws \Aimeos\MW\DB\Exception If an error occured in the unterlying driver
+	 * @param int $type Type of given value defined in \Aimeos\Base\DB\Statement\Base as constant
+	 * @return \Aimeos\Base\DB\Statement\Iface Statement instance for method chaining
+	 * @throws \Aimeos\Base\DB\Exception If an error occured in the unterlying driver
 	 */
-	public function bind( int $position, $value, int $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR ) : \Aimeos\MW\DB\Statement\Iface
+	public function bind( int $position, $value, int $type = \Aimeos\Base\DB\Statement\Base::PARAM_STR ) : \Aimeos\Base\DB\Statement\Iface
 	{
 		$this->binds[$position] = [$value, $type];
 		return $this;
@@ -66,18 +66,18 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 	/**
 	 * Executes the statement
 	 *
-	 * @return \Aimeos\MW\DB\Result\Iface Result object
-	 * @throws \Aimeos\MW\DB\Exception If an error occured in the unterlying driver
+	 * @return \Aimeos\Base\DB\Result\Iface Result object
+	 * @throws \Aimeos\Base\DB\Exception If an error occured in the unterlying driver
 	 */
-	public function execute() : \Aimeos\MW\DB\Result\Iface
+	public function execute() : \Aimeos\Base\DB\Result\Iface
 	{
 		try {
 			$result = $this->exec();
 		} catch( \Doctrine\DBAL\Driver\Exception $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage() . ': ' . $this->sql . map( $this->binds )->col( 0 )->toJson(), $e->getCode() );
+			throw new \Aimeos\Base\DB\Exception( $e->getMessage() . ': ' . $this->sql . map( $this->binds )->col( 0 )->toJson(), $e->getCode() );
 		}
 
-		return new \Aimeos\MW\DB\Result\DBAL( $result );
+		return new \Aimeos\Base\DB\Result\DBAL( $result );
 	}
 
 
@@ -107,29 +107,29 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 	/**
 	 * Returns the PDO type mapped to the Aimeos type
 	 *
-	 * @param integer $type Type of given value defined in \Aimeos\MW\DB\Statement\Base as constant
+	 * @param integer $type Type of given value defined in \Aimeos\Base\DB\Statement\Base as constant
 	 * @param mixed $value Value which should be bound to the placeholder
 	 * @return integer PDO parameter type constant
-	 * @throws \Aimeos\MW\DB\Exception If the type is unknown
+	 * @throws \Aimeos\Base\DB\Exception If the type is unknown
 	 */
 	protected function getDbalType( int $type, $value ) : int
 	{
 		switch( $type )
 		{
-			case \Aimeos\MW\DB\Statement\Base::PARAM_NULL:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_NULL:
 				$dbaltype = \Doctrine\DBAL\ParameterType::NULL; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_BOOL:
 				$dbaltype = \Doctrine\DBAL\ParameterType::BOOLEAN; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_INT:
 				$dbaltype = \Doctrine\DBAL\ParameterType::INTEGER; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT:
 				$dbaltype = \Doctrine\DBAL\ParameterType::STRING; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_STR:
 				$dbaltype = \Doctrine\DBAL\ParameterType::STRING; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_LOB:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_LOB:
 				$dbaltype = \Doctrine\DBAL\ParameterType::LARGE_OBJECT; break;
 			default:
-				throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid parameter type "%1$s"', $type ) );
+				throw new \Aimeos\Base\DB\Exception( sprintf( 'Invalid parameter type "%1$s"', $type ) );
 		}
 
 		if( is_null( $value ) ) {

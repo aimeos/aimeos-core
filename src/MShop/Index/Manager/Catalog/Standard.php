@@ -28,7 +28,7 @@ class Standard
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_catalog" AS mindca ON mindca."prodid" = mpro."id"' ),
 			'label' => 'Product index category ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'index.catalog:position' => array(
@@ -36,7 +36,7 @@ class Standard
 			'internalcode' => ':site :catid :listtype mindca."pos"',
 			'label' => 'Product position in category, parameter([<list type code>,[<category IDs>]])',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'sort:index.catalog:position' => array(
@@ -44,7 +44,7 @@ class Standard
 			'internalcode' => 'mindca."pos"',
 			'label' => 'Sort product position in category, parameter([<list type code>,[<category IDs>]])',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		)
 	);
@@ -463,16 +463,16 @@ class Standard
 			{
 				foreach( $item->getListItems( 'catalog' ) as $listItem )
 				{
-					$stmt->bind( 1, $listItem->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-					$stmt->bind( 2, $listItem->getRefId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+					$stmt->bind( 1, $listItem->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+					$stmt->bind( 2, $listItem->getRefId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 					$stmt->bind( 3, $listItem->getType() );
-					$stmt->bind( 4, $listItem->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+					$stmt->bind( 4, $listItem->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 					$stmt->bind( 5, $date ); //mtime
 					$stmt->bind( 6, $siteid );
 
 					try {
 						$stmt->execute()->finish();
-					} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
+					} catch( \Aimeos\Base\DB\Exception $e ) { ; } // Ignore duplicates
 				}
 			}
 

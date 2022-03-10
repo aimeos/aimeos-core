@@ -183,10 +183,10 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Sets the database connection manager object.
 	 *
-	 * @param \Aimeos\MW\DB\Manager\Iface $manager Database manager object
+	 * @param \Aimeos\Base\DB\Manager\Iface $manager Database manager object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $manager ) : \Aimeos\MShop\Context\Item\Iface
+	public function setDatabaseManager( \Aimeos\Base\DB\Manager\Iface $manager ) : \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->db = $manager;
 
@@ -197,9 +197,9 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Returns the database manager object.
 	 *
-	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
+	 * @return \Aimeos\Base\DB\Manager\Iface Database manager object
 	 */
-	public function db() : \Aimeos\MW\DB\Manager\Iface
+	public function db() : \Aimeos\Base\DB\Manager\Iface
 	{
 		if( !isset( $this->db ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Database manager object not available' ) );

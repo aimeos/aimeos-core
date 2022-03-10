@@ -53,17 +53,17 @@ interface Iface
 	/**
 	 * Returns the database manager object.
 	 *
-	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
+	 * @return \Aimeos\Base\DB\Manager\Iface Database manager object
 	 */
-	public function db() : \Aimeos\MW\DB\Manager\Iface;
+	public function db() : \Aimeos\Base\DB\Manager\Iface;
 
 	/**
 	 * Sets the database connection manager object.
 	 *
-	 * @param \Aimeos\MW\DB\Manager\Iface $dbManager Database manager object
+	 * @param \Aimeos\Base\DB\Manager\Iface $dbManager Database manager object
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
-	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $dbManager ) : \Aimeos\MShop\Context\Item\Iface;
+	public function setDatabaseManager( \Aimeos\Base\DB\Manager\Iface $dbManager ) : \Aimeos\MShop\Context\Item\Iface;
 
 	/**
 	 * Returns the current date and time

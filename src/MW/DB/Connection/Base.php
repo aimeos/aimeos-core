@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\DB\Connection;
+namespace Aimeos\Base\DB\Connection;
 
 
 /**

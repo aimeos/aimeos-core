@@ -33,14 +33,14 @@ class Standard
 			'internalcode' => 'mpro."id"',
 			'label' => 'ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'product.siteid' => array(
 			'code' => 'product.siteid',
 			'internalcode' => 'mpro."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.type' => array(
@@ -48,77 +48,77 @@ class Standard
 			'internalcode' => 'mpro."type"',
 			'label' => 'Type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.label' => array(
 			'code' => 'product.label',
 			'internalcode' => 'mpro."label"',
 			'label' => 'Label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.code' => array(
 			'code' => 'product.code',
 			'internalcode' => 'mpro."code"',
 			'label' => 'SKU',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.url' => array(
 			'code' => 'product.url',
 			'internalcode' => 'mpro."url"',
 			'label' => 'URL segment',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.dataset' => array(
 			'code' => 'product.dataset',
 			'internalcode' => 'mpro."dataset"',
 			'label' => 'Data set',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.datestart' => array(
 			'code' => 'product.datestart',
 			'internalcode' => 'mpro."start"',
 			'label' => 'Start date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.dateend' => array(
 			'code' => 'product.dateend',
 			'internalcode' => 'mpro."end"',
 			'label' => 'End date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'product.instock' => array(
 			'code' => 'product.instock',
 			'internalcode' => 'mpro."instock"',
 			'label' => 'Product in stock',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'product.status' => array(
 			'code' => 'product.status',
 			'internalcode' => 'mpro."status"',
 			'label' => 'Status',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'product.scale' => array(
 			'code' => 'product.scale',
 			'internalcode' => 'mpro."scale"',
 			'label' => 'Quantity scale',
 			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'product.config' => array(
 			'code' => 'product.config',
 			'internalcode' => 'mpro."config"',
 			'label' => 'Config',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.target' => array(
@@ -126,7 +126,7 @@ class Standard
 			'internalcode' => 'mpro."target"',
 			'label' => 'URL target',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.ctime' => array(
@@ -134,7 +134,7 @@ class Standard
 			'internalcode' => 'mpro."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.mtime' => array(
@@ -142,7 +142,7 @@ class Standard
 			'internalcode' => 'mpro."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.editor' => array(
@@ -150,7 +150,7 @@ class Standard
 			'internalcode' => 'mpro."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.rating' => array(
@@ -158,7 +158,7 @@ class Standard
 			'internalcode' => 'mpro."rating"',
 			'label' => 'Rating value',
 			'type' => 'decimal',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'product.ratings' => array(
@@ -166,7 +166,7 @@ class Standard
 			'internalcode' => 'mpro."ratings"',
 			'label' => 'Number of ratings',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'product:has' => array(
@@ -523,9 +523,9 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path, $this->getSqlConfig( $path ) );
 
 			$stmt->bind( 1, $rating );
-			$stmt->bind( 2, $ratings, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $ratings, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 3, $context->locale()->getSiteId() );
-			$stmt->bind( 4, (int) $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 4, (int) $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 
@@ -593,9 +593,9 @@ class Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path, $this->getSqlConfig( $path ) );
 
-			$stmt->bind( 1, $value, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $value, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $context->locale()->getSiteId() );
-			$stmt->bind( 3, (int) $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, (int) $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 
@@ -732,9 +732,9 @@ class Standard
 			$stmt->bind( $idx++, $item->getDataset() );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, $item->getUrl() );
-			$stmt->bind( $idx++, $item->inStock(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getScale(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+			$stmt->bind( $idx++, $item->inStock(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getScale(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( $idx++, $item->getDateStart() );
 			$stmt->bind( $idx++, $item->getDateEnd() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
@@ -745,7 +745,7 @@ class Standard
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			}
 
 			$stmt->execute()->finish();

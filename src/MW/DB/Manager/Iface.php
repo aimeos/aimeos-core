@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\DB\Manager;
+namespace Aimeos\Base\DB\Manager;
 
 
 /**
@@ -24,7 +24,7 @@ interface Iface
 	 * Returns a database connection.
 	 *
 	 * @param string $name Name of the resource in configuration
-	 * @return \Aimeos\MW\DB\Connection\Iface
+	 * @return \Aimeos\Base\DB\Connection\Iface
 	 */
 	public function acquire( string $name = 'db' );
 
@@ -32,9 +32,9 @@ interface Iface
 	/**
 	 * Releases the connection for reuse
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $connection Connection object
+	 * @param \Aimeos\Base\DB\Connection\Iface $connection Connection object
 	 * @param string $name Name of resource
 	 * @return void
 	 */
-	public function release( \Aimeos\MW\DB\Connection\Iface $connection, string $name = 'db' );
+	public function release( \Aimeos\Base\DB\Connection\Iface $connection, string $name = 'db' );
 }

@@ -216,7 +216,7 @@ abstract class Base
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getParentId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getKey() );
 			$stmt->bind( $idx++, $item->getType() );
 			$stmt->bind( $idx++, $item->getDomain() );
@@ -224,15 +224,15 @@ abstract class Base
 			$stmt->bind( $idx++, $item->getDateStart() );
 			$stmt->bind( $idx++, $item->getDateEnd() );
 			$stmt->bind( $idx++, json_encode( $item->getConfig() ) );
-			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getPosition(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); //mtime
 			$stmt->bind( $idx++, $this->context()->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 
 			if( $id !== null ) {
-				$stmt->bind( 14, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 14, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( 14, $date ); //ctime
 			}

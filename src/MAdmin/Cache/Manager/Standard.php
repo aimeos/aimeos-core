@@ -30,28 +30,28 @@ class Standard
 			'internalcode' => '"id"',
 			'label' => 'ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'cache.value' => array(
 			'code' => 'cache.value',
 			'internalcode' => '"value"',
 			'label' => 'Cached value',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'cache.expire' => array(
 			'code' => 'cache.expire',
 			'internalcode' => '"expire"',
 			'label' => 'Expiration date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'cache.tag.name' => array(
 			'code' => 'cache.tag.name',
 			'internalcode' => '"tname"',
 			'label' => 'Tag name',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 	);
 

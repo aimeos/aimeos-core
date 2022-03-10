@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\DB\Statement;
+namespace Aimeos\Base\DB\Statement;
 
 
 /**
@@ -57,9 +57,9 @@ abstract class Base
 	/**
 	 * Initializes the base object
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection object
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection object
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn )
+	public function __construct( \Aimeos\Base\DB\Connection\Iface $conn )
 	{
 		$this->conn = $conn;
 	}
@@ -68,9 +68,9 @@ abstract class Base
 	/**
 	 * Returns the connection object
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Connection object
+	 * @return \Aimeos\Base\DB\Connection\Iface Connection object
 	 */
-	protected function getConnection() : \Aimeos\MW\DB\Connection\Iface
+	protected function getConnection() : \Aimeos\Base\DB\Connection\Iface
 	{
 		return $this->conn;
 	}

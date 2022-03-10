@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\DB;
+namespace Aimeos\Base\DB;
 
 
 /**

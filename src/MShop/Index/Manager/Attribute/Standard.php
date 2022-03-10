@@ -28,7 +28,7 @@ class Standard
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_attribute" AS mindat ON mindat."prodid" = mpro."id"' ),
 			'label' => 'Product index attribute ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'index.attribute:allof' => array(
@@ -44,7 +44,7 @@ class Standard
 				)',
 			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
 			'type' => 'null',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_NULL,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_NULL,
 			'public' => false,
 		),
 		'index.attribute:oneof' => array(
@@ -58,7 +58,7 @@ class Standard
 				)',
 			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
 			'type' => 'null',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_NULL,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_NULL,
 			'public' => false,
 		),
 	);
@@ -672,10 +672,10 @@ class Standard
 	/**
 	 * Saves the attribute items referenced by products
 	 *
-	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
+	 * @param \Aimeos\Base\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item containing associated attribute items
 	 */
-	protected function saveAttributes( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
+	protected function saveAttributes( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
 	{
 		$context = $this->context();
 		$siteid = $context->locale()->getSiteId();
@@ -690,8 +690,8 @@ class Standard
 					continue;
 				}
 
-				$stmt->bind( 1, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 2, $product->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 1, $item->getId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 2, $product->getId(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 3, $refItem->getId() );
 				$stmt->bind( 4, $listItem->getType() );
 				$stmt->bind( 5, $refItem->getType() );
@@ -701,7 +701,7 @@ class Standard
 
 				try {
 					$stmt->execute()->finish();
-				} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
+				} catch( \Aimeos\Base\DB\Exception $e ) { ; } // Ignore duplicates
 			}
 		}
 	}

@@ -27,14 +27,14 @@ class Standard
 			'internalcode' => 'mrev."id"',
 			'label' => 'Review ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'review.siteid' => array(
 			'code' => 'review.siteid',
 			'internalcode' => 'mrev."siteid"',
 			'label' => 'Site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.customerid' => array(
@@ -42,7 +42,7 @@ class Standard
 			'internalcode' => 'mrev."customerid"',
 			'label' => 'Customer ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.orderproductid' => array(
@@ -50,7 +50,7 @@ class Standard
 			'internalcode' => 'mrev."ordprodid"',
 			'label' => 'Order product ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.domain' => array(
@@ -58,7 +58,7 @@ class Standard
 			'internalcode' => 'mrev."domain"',
 			'label' => 'Domain',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.refid' => array(
@@ -66,7 +66,7 @@ class Standard
 			'internalcode' => 'mrev."refid"',
 			'label' => 'ID from the referenced domain',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.name' => array(
@@ -74,14 +74,14 @@ class Standard
 			'internalcode' => 'mrev."name"',
 			'label' => 'Name',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'review.comment' => array(
 			'code' => 'review.comment',
 			'internalcode' => 'mrev."comment"',
 			'label' => 'Comment',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.response' => array(
@@ -89,7 +89,7 @@ class Standard
 			'internalcode' => 'mrev."response"',
 			'label' => 'Response',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.rating' => array(
@@ -97,21 +97,21 @@ class Standard
 			'internalcode' => 'mrev."rating"',
 			'label' => 'Rating',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'review.status' => array(
 			'code' => 'review.status',
 			'internalcode' => 'mrev."status"',
 			'label' => 'Review status',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 		),
 		'review.ctime' => array(
 			'code' => 'review.ctime',
 			'internalcode' => 'mrev."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.mtime' => array(
@@ -119,7 +119,7 @@ class Standard
 			'internalcode' => 'mrev."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'review.editor' => array(
@@ -127,7 +127,7 @@ class Standard
 			'internalcode' => 'mrev."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -373,14 +373,14 @@ class Standard
 			$stmt->bind( $idx++, $item->getName() );
 			$stmt->bind( $idx++, $item->getComment() );
 			$stmt->bind( $idx++, $item->getResponse() );
-			$stmt->bind( $idx++, $item->getRating(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getRating(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $item->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $date ); // mtime
 			$stmt->bind( $idx++, $context->editor() );
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx++, $date ); // ctime
 			}

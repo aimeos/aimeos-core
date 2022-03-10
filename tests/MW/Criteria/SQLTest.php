@@ -152,7 +152,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConditionSource()
 	{
-		$types = array( 'int_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT, 'str_column' => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+		$types = array( 'int_column' => \Aimeos\Base\DB\Statement\Base::PARAM_INT, 'str_column' => \Aimeos\Base\DB\Statement\Base::PARAM_STR );
 		$translations = array( 'int_column' => 'int_col', 'str_column' => 'str_col' );
 		$plugins = array( 'int_column' => new TestSQL() );
 
@@ -187,7 +187,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->object->setConditions( $this->object->and( $expr ) );
 		$this->assertEquals( "( int_col = 1 AND ( str_col = 'test' ) )", $this->object->getConditionSource( $types, $translations ) );
 
-		$types = array( 'column' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );
+		$types = array( 'column' => \Aimeos\Base\DB\Statement\Base::PARAM_BOOL );
 		$this->object->setConditions( $this->object->compare( '==', 'column', 1 ) );
 		$this->assertEquals( "column = 1", $this->object->getConditionSource( $types ) );
 	}
@@ -195,7 +195,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConditionSourceInvalidName()
 	{
-		$types = array( 'int_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$types = array( 'int_column' => \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 
 		$this->object->setConditions( $this->object->compare( '==', 'icol', 10 ) );
 		$this->expectException( \Aimeos\MW\Common\Exception::class );
@@ -222,7 +222,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSortationSource()
 	{
-		$types = array( 'asc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT, 'desc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+		$types = array( 'asc_column' => \Aimeos\Base\DB\Statement\Base::PARAM_INT, 'desc_column' => \Aimeos\Base\DB\Statement\Base::PARAM_STR );
 		$translations = array( 'asc_column' => 'asc_int_col', 'desc_column' => 'desc_str_col' );
 
 		$sortations = [];
@@ -235,7 +235,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSortationSourceInvalidName()
 	{
-		$types = array( 'asc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$types = array( 'asc_column' => \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$translations = array( 'asc_column' => 'asc_int_col' );
 
 		$this->object->setSortations( array( $this->object->sort( '+', 'asc_col' ) ) );
@@ -253,7 +253,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSortationNoSortation()
 	{
-		$types = array( 'asc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT, 'desc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+		$types = array( 'asc_column' => \Aimeos\Base\DB\Statement\Base::PARAM_INT, 'desc_column' => \Aimeos\Base\DB\Statement\Base::PARAM_STR );
 
 		$this->assertEquals( 'asc_column ASC', $this->object->getSortationSource( $types ) );
 

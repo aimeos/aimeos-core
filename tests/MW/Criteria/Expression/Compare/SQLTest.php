@@ -66,12 +66,12 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	public function testToSource()
 	{
 		$types = array(
-			'list' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'string' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'float' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
-			'int' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'undefined' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'bool' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL,
+			'list' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+			'string' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+			'float' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
+			'int' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'undefined' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'bool' => \Aimeos\Base\DB\Statement\Base::PARAM_BOOL,
 		);
 
 		$translations = array(
@@ -112,10 +112,10 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	public function testToSourceFunction()
 	{
 		$types = array(
-			'pcounter()' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'strconcat()' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'lcounter()' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'isnull()' => \Aimeos\MW\DB\Statement\Base::PARAM_NULL,
+			'pcounter()' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'strconcat()' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+			'lcounter()' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'isnull()' => \Aimeos\Base\DB\Statement\Base::PARAM_NULL,
 		);
 
 		$translations = array(

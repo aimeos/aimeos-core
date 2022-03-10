@@ -29,7 +29,7 @@ class Standard
 			'internaldeps' => array( 'LEFT JOIN "mshop_index_text" AS mindte ON mindte."prodid" = mpro."id"' ),
 			'label' => 'Product index text ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'index.text:url' => array(
@@ -37,7 +37,7 @@ class Standard
 			'internalcode' => ':site AND mindte."url"',
 			'label' => 'Product URL',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'index.text:name' => array(
@@ -45,7 +45,7 @@ class Standard
 			'internalcode' => ':site AND mindte."langid" = $1 AND mindte."name"',
 			'label' => 'Product name, parameter(<language ID>)',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:index.text:name' => array(
@@ -53,7 +53,7 @@ class Standard
 			'internalcode' => 'mindte."name"',
 			'label' => 'Sort by product name, parameter(<language ID>)',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'index.text:relevance' => array(
@@ -61,7 +61,7 @@ class Standard
 			'internalcode' => ':site AND mindte."langid" = $1 AND POSITION( $2 IN mindte."content" )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
 		'sort:index.text:relevance' => array(
@@ -69,7 +69,7 @@ class Standard
 			'internalcode' => '-POSITION( $2 IN mindte."content" )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
 	);
@@ -691,10 +691,10 @@ class Standard
 	/**
 	 * Saves the text items referenced indirectly by products
 	 *
-	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
+	 * @param \Aimeos\Base\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item containing associated text items
 	 */
-	protected function saveTexts( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
+	protected function saveTexts( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
 	{
 		$texts = [];
 		$config = $this->context()->config();
@@ -769,11 +769,11 @@ class Standard
 	/**
 	 * Saves the mapped texts for the given item
 	 *
-	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
+	 * @param \Aimeos\Base\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item containing associated text items
 	 * @param array $map Associative list of text types as keys and content as value
 	 */
-	protected function saveTextMap( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item, array $texts )
+	protected function saveTextMap( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item, array $texts )
 	{
 		$date = date( 'Y-m-d H:i:s' );
 		$siteid = $this->context()->locale()->getSiteId();
@@ -808,7 +808,7 @@ class Standard
 	/**
 	 * Saves the text record with given set of parameters.
 	 *
-	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
+	 * @param \Aimeos\Base\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param string $id ID of the product item
 	 * @param string $siteid Site ID
 	 * @param string $lang Two letter ISO language code
@@ -817,10 +817,10 @@ class Standard
 	 * @param string $content Text content to store
 	 * @param string $date Current timestamp in "YYYY-MM-DD HH:mm:ss" format
 	 */
-	protected function saveText( \Aimeos\MW\DB\Statement\Iface $stmt, string $id, string $siteid, string $lang,
+	protected function saveText( \Aimeos\Base\DB\Statement\Iface $stmt, string $id, string $siteid, string $lang,
 		string $url, string $name, string $content, string $date )
 	{
-		$stmt->bind( 1, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 1, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, $lang );
 		$stmt->bind( 3, $url );
 		$stmt->bind( 4, $name );
@@ -830,7 +830,7 @@ class Standard
 
 		try {
 			$stmt->execute()->finish();
-		} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
+		} catch( \Aimeos\Base\DB\Exception $e ) { ; } // Ignore duplicates
 	}
 
 

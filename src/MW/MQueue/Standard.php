@@ -34,7 +34,7 @@ class Standard extends Base implements Iface
 
 		try {
 			$this->conn = $this->createConnection();
-		} catch( \Aimeos\MW\DB\Exception $e ) {
+		} catch( \Aimeos\Base\DB\Exception $e ) {
 			throw new \Aimeos\MW\MQueue\Exception( $e->getMessage() );
 		}
 	}
@@ -93,9 +93,9 @@ class Standard extends Base implements Iface
 	/**
 	 * Creates a new database connection.
 	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Database connection
+	 * @return \Aimeos\Base\DB\Connection\Iface Database connection
 	 */
-	protected function createConnection() : \Aimeos\MW\DB\Connection\Iface
+	protected function createConnection() : \Aimeos\Base\DB\Connection\Iface
 	{
 		$params = $this->getConfig( 'db' );
 		$host = $this->getConfig( 'db/host' );
@@ -124,6 +124,6 @@ class Standard extends Base implements Iface
 
 		$stmts = $this->getConfig( 'db/stmt', [] );
 
-		return new \Aimeos\MW\DB\Connection\PDO( $params + ['dsn' => $dsn], $stmts );
+		return new \Aimeos\Base\DB\Connection\PDO( $params + ['dsn' => $dsn], $stmts );
 	}
 }

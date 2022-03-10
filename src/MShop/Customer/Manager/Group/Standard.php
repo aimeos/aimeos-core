@@ -27,7 +27,7 @@ class Standard
 			'internalcode' => 'mcusgr."id"',
 			'label' => 'Group ID',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'customer.group.siteid' => array(
@@ -35,7 +35,7 @@ class Standard
 			'internalcode' => 'mcusgr."siteid"',
 			'label' => 'Group site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.group.code' => array(
@@ -43,21 +43,21 @@ class Standard
 			'internalcode' => 'mcusgr."code"',
 			'label' => 'Group code',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.label' => array(
 			'code' => 'customer.group.label',
 			'internalcode' => 'mcusgr."label"',
 			'label' => 'Group label',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.group.ctime' => array(
 			'code' => 'customer.group.ctime',
 			'internalcode' => 'mcusgr."ctime"',
 			'label' => 'Group create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.group.mtime' => array(
@@ -65,7 +65,7 @@ class Standard
 			'internalcode' => 'mcusgr."mtime"',
 			'label' => 'Group modify date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.group.editor' => array(
@@ -73,7 +73,7 @@ class Standard
 			'internalcode' => 'mcusgr."editor"',
 			'label' => 'Group editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -358,7 +358,7 @@ class Standard
 			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
-				$stmt->bind( $idx++, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			} else {
 				$stmt->bind( $idx++, $date ); // ctime
 			}

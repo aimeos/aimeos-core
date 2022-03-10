@@ -13,7 +13,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	{
 		self::$dbm = \TestHelper::getDBManager();
 
-		if( !( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
+		if( !( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL ) ) {
 			return;
 		}
 
@@ -42,7 +42,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 	public static function tearDownAfterClass() : void
 	{
-		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
+		if( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL )
 		{
 			$conn = self::$dbm->acquire();
 
@@ -55,21 +55,21 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		if( !( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
+		if( !( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL ) ) {
 			$this->markTestSkipped( 'No DBAL database manager configured' );
 		}
 
 		$this->config = [];
 
 		$this->config['search'] = array(
-			'id' => array( 'label' => 'Tree node ID', 'code' => 'tree.id', 'internalcode' => 'id', 'type' => 'integer', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT ),
-			'parentid' => array( 'label' => 'Tree node parent id', 'code' => 'tree.parentid', 'internalcode' => 'parentid', 'type' => 'integer', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT ),
-			'label' => array( 'label' => 'Tree node name', 'code' => 'tree.label', 'internalcode' => 'label', 'type' => 'string', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
-			'code' => array( 'label' => 'Tree node code', 'code' => 'tree.code', 'internalcode' => 'code', 'type' => 'string', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
-			'status' => array( 'label' => 'Tree node status', 'code' => 'tree.status', 'internalcode' => 'status', 'type' => 'boolean', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT ),
-			'level' => array( 'label' => 'Tree node level', 'code' => 'tree.level', 'internalcode' => 'level', 'type' => 'integer', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT ),
-			'left' => array( 'label' => 'Tree node left number', 'code' => 'tree.left', 'internalcode' => 'nleft', 'type' => 'integer', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT ),
-			'right' => array( 'label' => 'Tree node right number', 'code' => 'tree.right', 'internalcode' => 'nright', 'type' => 'integer', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT ),
+			'id' => array( 'label' => 'Tree node ID', 'code' => 'tree.id', 'internalcode' => 'id', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
+			'parentid' => array( 'label' => 'Tree node parent id', 'code' => 'tree.parentid', 'internalcode' => 'parentid', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
+			'label' => array( 'label' => 'Tree node name', 'code' => 'tree.label', 'internalcode' => 'label', 'type' => 'string', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR ),
+			'code' => array( 'label' => 'Tree node code', 'code' => 'tree.code', 'internalcode' => 'code', 'type' => 'string', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR ),
+			'status' => array( 'label' => 'Tree node status', 'code' => 'tree.status', 'internalcode' => 'status', 'type' => 'boolean', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
+			'level' => array( 'label' => 'Tree node level', 'code' => 'tree.level', 'internalcode' => 'level', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
+			'left' => array( 'label' => 'Tree node left number', 'code' => 'tree.left', 'internalcode' => 'nleft', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
+			'right' => array( 'label' => 'Tree node right number', 'code' => 'tree.right', 'internalcode' => 'nright', 'type' => 'integer', 'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT ),
 
 		);
 
@@ -165,7 +165,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown() : void
 	{
-		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
+		if( self::$dbm instanceof \Aimeos\Base\DB\Manager\DBAL )
 		{
 			$conn = self::$dbm->acquire();
 
@@ -282,7 +282,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 			WHERE domain123 = ? AND nleft >= ? AND nright <= ? AND :cond
 		';
 
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 		$manager->searchNodes( $manager->createSearch() );
@@ -312,7 +312,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 			DELETE FROM "mw_tree_test" WHERE domain = ? AND nleft12 >= ? AND nright <= ?
 		';
 
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 		$root = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
@@ -1027,7 +1027,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$oldparentid = $root->getId();
 		$newparentid = $root->getChild( 0 )->getId();
 
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$manager->moveNode( (string) $nodeid, $oldparentid, $newparentid );
 	}
 
@@ -1067,7 +1067,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 		$root->setLabel( 'rooot' );
 
-		$this->expectException( \Aimeos\MW\DB\Exception::class );
+		$this->expectException( \Aimeos\Base\DB\Exception::class );
 		$manager->saveNode( $root );
 	}
 

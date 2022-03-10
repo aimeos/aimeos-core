@@ -27,11 +27,11 @@ class SQL extends Base
 	/**
 	 * Initializes the object.
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection object
+	 * @param \Aimeos\Base\DB\Connection\Iface $conn Database connection object
 	 * @param string $operator Sorting operator ("+": ascending, "-": descending)
 	 * @param string $name Name of the variable or column to sort
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, string $operator, string $name )
+	public function __construct( \Aimeos\Base\DB\Connection\Iface $conn, string $operator, string $name )
 	{
 		if( !isset( self::$operators[$operator] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
@@ -95,13 +95,13 @@ class SQL extends Base
 
 		switch( $type )
 		{
-			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_BOOL:
 				$value = (bool) $value; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_INT:
 				$value = (int) $value; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT:
 				$value = (float) $value; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
+			case \Aimeos\Base\DB\Statement\Base::PARAM_STR:
 				if( $operator == '~=' )
 				{
 					$value = '\'%' . $this->conn->escape( $value ) . '%\'';
@@ -125,13 +125,13 @@ class SQL extends Base
 	protected function getParamType( &$item ) : string
 	{
 		if( is_null( $item ) ) {
-			return \Aimeos\MW\DB\Statement\Base::PARAM_NULL;
+			return \Aimeos\Base\DB\Statement\Base::PARAM_NULL;
 		} elseif( is_float( $item ) ) {
-			return \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT;
+			return \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT;
 		} elseif( is_int( $item ) ) {
-			return \Aimeos\MW\DB\Statement\Base::PARAM_INT;
+			return \Aimeos\Base\DB\Statement\Base::PARAM_INT;
 		}
 
-		return \Aimeos\MW\DB\Statement\Base::PARAM_STR;
+		return \Aimeos\Base\DB\Statement\Base::PARAM_STR;
 	}
 }
